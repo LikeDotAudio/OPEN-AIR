@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d2/de2/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG LOG: 20260403_011000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1209"></a></p>
-<h1><a class="anchor" id="autotoc_md1210"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1474"></a></p>
+<h1><a class="anchor" id="autotoc_md1475"></a>
 Date: 2026-04-03</h1>
-<h1><a class="anchor" id="autotoc_md1211"></a>
+<h1><a class="anchor" id="autotoc_md1476"></a>
 Issue: Persistent Core Exited (Code -11) Segmentation Fault</h1>
-<h1><a class="anchor" id="autotoc_md1212"></a>
+<h1><a class="anchor" id="autotoc_md1477"></a>
 Root Cause: Reference counting or memory management conflicts when passing complex Python dictionaries through Rust channels via PyO3.</h1>
-<h2><a class="anchor" id="autotoc_md1213"></a>
+<h2><a class="anchor" id="autotoc_md1478"></a>
 Analysis</h2>
 <ul>
 <li><b>Segfault (Code -11)</b>: Despite previous fixes for recursion and None handling, the <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> partition continued to segfault during high-volume message ingestion.</li>
 <li><b>The Culprit</b>: <code>ProtocolRouter</code> was using <code>oacorerouter_rs</code> (a Rust extension) to pass the entire "Unified Message Schema" dictionary between the Ingest and Dispatch threads.</li>
 <li><b>The Mechanism</b>: While PyO3 is generally safe, passing large, deeply nested Python dictionaries (containing floats, strings, and other dicts) through Rust-managed <code>crossbeam-channel</code> instances can lead to edge-case reference counting errors or GIL state conflicts if the Rust side drops or clones the <code>PyObject</code> outside of Python's direct supervision.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1214"></a>
+<h2><a class="anchor" id="autotoc_md1479"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Updated <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code></b>: Bypassed the Rust-based message queue for the main traffic path. Replaced <code>self.rust_router.push_inbound/outbound</code> with standard Python <code>queue.Queue</code> instances.</li>
 <li><b>Stability First</b>: This change ensures that Python's native memory manager and GIL orchestrate all object lifecycles for complex dictionary packets, eliminating the risk of cross-language memory corruption.</li>
 <li><b>Future Proofing</b>: The Rust <code><a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#d4/dcb/structCoreRouter">CoreRouter</a></code> remains available for future high-speed numeric or primitive data paths where the overhead of Python objects is not present.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1215"></a>
+<h2><a class="anchor" id="autotoc_md1480"></a>
 Verification Evidence</h2>
 <ul>
 <li>Logic trace confirms all internal <code>ingest</code> and <code>dispatch</code> paths now utilize <code>queue.Queue</code>.</li>

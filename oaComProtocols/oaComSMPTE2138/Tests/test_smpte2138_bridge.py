@@ -72,7 +72,7 @@ class TestSMPTE2138Bridge(unittest.TestCase):
         args, kwargs = self.mock_mqtt.publish.call_args
         # Handle both positional and keyword 'topic'
         topic = kwargs.get('topic') or (args[0] if args else None)
-        self.assertEqual(topic, "OPEN-AIR/System/Status/SMPTE2138/Bridge")
+        self.assertEqual(topic, "OpenAir/System/Status/SMPTE2138/Bridge")
 
 if __name__ == "__main__":
     unittest.main()

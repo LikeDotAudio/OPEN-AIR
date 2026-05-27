@@ -144,8 +144,9 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   17</span>        self.asset_path = Path(__file__).parent / <span class="stringliteral">&quot;Assets&quot;</span> / <span class="stringliteral">&quot;Basic_CSV_venue.csv&quot;</span></div>
 <div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.asset_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a>():</div>
 <div class="line"><span class="lineno">   19</span>            <span class="comment"># Fallback to absolute path if needed</span></div>
-<div class="line"><span class="lineno">   20</span>            self.asset_path = Path(<span class="stringliteral">&quot;/home/anthony/Documents/OPEN-AIR/oaFileImportCSV/Tests/Assets/Basic_CSV_venue.csv&quot;</span>)</div>
+<div class="line"><span class="lineno">   20</span>            self.asset_path = Path(<span class="stringliteral">&quot;/home/anthony/Documents/OPEN-AIR/oaFileHandlers/oaFileImportCSV/Tests/Assets/Basic_CSV_venue.csv&quot;</span>)</div>
 <div class="line"><span class="lineno">   21</span> </div>
+<div class="line"><span class="lineno">   22</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6ba751bf71957124ec1fb2c76724448b"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a></div><div class="ttdeci">exists</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">generated.rs:2407</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -166,29 +167,29 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Test CSV parsing with the mandatory Rust backend.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00022">22</a> of file <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html">test_rust_csv_parser.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span>    <span class="keyword">def </span>test_rust_csv_parsing(self):</div>
-<div class="line"><span class="lineno">   23</span>        <span class="stringliteral">&quot;&quot;&quot;Test CSV parsing with the mandatory Rust backend.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   25</span>            <span class="keyword">from</span> oaRustCore <span class="keyword">import</span> oa_csv_parser_rs <span class="keyword">as</span> oacsvparser_rs</div>
-<div class="line"><span class="lineno">   26</span>        <span class="keywordflow">except</span> ImportError:</div>
-<div class="line"><span class="lineno">   27</span>            self.skipTest(<span class="stringliteral">&quot;Rust oacsvparser_rs not installed.&quot;</span>)</div>
-<div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>        headers, data = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))</div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>        self.assertGreater(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(data), 0)</div>
-<div class="line"><span class="lineno">   32</span>        <span class="comment"># Verify we have some standard headers (e.g., ZONE, NAME, FREQ_MHZ)</span></div>
-<div class="line"><span class="lineno">   33</span>        self.assertIn(<span class="stringliteral">&quot;ZONE&quot;</span>, headers)</div>
-<div class="line"><span class="lineno">   34</span>        self.assertIn(<span class="stringliteral">&quot;NAME&quot;</span>, headers)</div>
-<div class="line"><span class="lineno">   35</span>        self.assertIn(<span class="stringliteral">&quot;FREQ_MHZ&quot;</span>, headers)</div>
-<div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>        <span class="comment"># Verify data structure</span></div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">for</span> row <span class="keywordflow">in</span> data:</div>
-<div class="line"><span class="lineno">   39</span>            self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(row), <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(headers))</div>
-<div class="line"><span class="lineno">   40</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00023">23</a> of file <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html">test_rust_csv_parser.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>test_rust_csv_parsing(self):</div>
+<div class="line"><span class="lineno">   24</span>        <span class="stringliteral">&quot;&quot;&quot;Test CSV parsing with the mandatory Rust backend.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">   26</span>            <span class="keyword">from</span> oaRustCore <span class="keyword">import</span> oa_csv_parser_rs <span class="keyword">as</span> oacsvparser_rs</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">except</span> ImportError:</div>
+<div class="line"><span class="lineno">   28</span>            self.skipTest(<span class="stringliteral">&quot;Rust oacsvparser_rs not installed.&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span> </div>
+<div class="line"><span class="lineno">   30</span>        headers, data = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))</div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>        self.assertGreater(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(data), 0)</div>
+<div class="line"><span class="lineno">   33</span>        <span class="comment"># Verify we have some standard headers (e.g., ZONE, NAME, FREQ_MHZ)</span></div>
+<div class="line"><span class="lineno">   34</span>        self.assertIn(<span class="stringliteral">&quot;ZONE&quot;</span>, headers)</div>
+<div class="line"><span class="lineno">   35</span>        self.assertIn(<span class="stringliteral">&quot;NAME&quot;</span>, headers)</div>
+<div class="line"><span class="lineno">   36</span>        self.assertIn(<span class="stringliteral">&quot;FREQ_MHZ&quot;</span>, headers)</div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>        <span class="comment"># Verify data structure</span></div>
+<div class="line"><span class="lineno">   39</span>        <span class="keywordflow">for</span> row <span class="keywordflow">in</span> data:</div>
+<div class="line"><span class="lineno">   40</span>            self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(row), <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(headers))</div>
+<div class="line"><span class="lineno">   41</span> </div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00017">Tests.test_rust_csv_parser.TestRustCSVParser.asset_path</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00017">Tests.test_rust_csv_parser.TestRustCSVParser.asset_path</a>, and <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>
@@ -207,12 +208,12 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00017">17</a> of file <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html">test_rust_csv_parser.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00022">Tests.test_rust_csv_parser.TestRustCSVParser.test_rust_csv_parsing()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html#l00023">Tests.test_rust_csv_parser.TestRustCSVParser.test_rust_csv_parsing()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>oaFileImportCSV/Tests/<a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html">test_rust_csv_parser.py</a></li>
+<li>oaFileHandlers/oaFileImportCSV/Tests/<a class="el" href="../../d8/d6b/test__rust__csv__parser_8py_source.html">test_rust_csv_parser.py</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

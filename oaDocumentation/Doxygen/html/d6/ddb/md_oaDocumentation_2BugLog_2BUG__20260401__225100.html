@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d6/ddb/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260401_225100.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1012"></a></p>
-<h1><a class="anchor" id="autotoc_md1013"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1277"></a></p>
+<h1><a class="anchor" id="autotoc_md1278"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1014"></a>
+<h1><a class="anchor" id="autotoc_md1279"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1015"></a>
+<h1><a class="anchor" id="autotoc_md1280"></a>
 Issue: Extreme performance bottleneck in the logging matrix gate.</h1>
-<h2><a class="anchor" id="autotoc_md1016"></a>
+<h2><a class="anchor" id="autotoc_md1281"></a>
 🔍 ISSUE DESCRIPTION</h2>
 <p>High-frequency logging calls (<code>matrix_log</code>) were incurring significant Python overhead due to module-level imports and manager lookups on <em>every</em> call to <code>is_debug_allowed</code>. This created "Binary Heat" that throttled the entire application loop.</p>
-<h2><a class="anchor" id="autotoc_md1017"></a>
+<h2><a class="anchor" id="autotoc_md1282"></a>
 🛠️ ROOT CAUSE</h2>
 <p>Python's dynamic nature and GIL overhead made the <code>is_debug_allowed</code> check too slow for real-time protocol and GUI updates when TRACE or DEBUG logging was enabled (or even when disabled, due to the check overhead).</p>
-<h2><a class="anchor" id="autotoc_md1018"></a>
+<h2><a class="anchor" id="autotoc_md1283"></a>
 🚀 RESOLUTION</h2>
 <p>Migrated the core gating logic to a native Rust extension (<code>oalogginggate_rs</code>) using:</p><ul>
 <li><code>dashmap</code> for high-concurrency, GIL-free gate lookups.</li>
 <li><code>once_cell</code> for thread-safe global static initialization.</li>
 <li><code>AtomicBool</code> for the master toggle switch.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1019"></a>
+<h2><a class="anchor" id="autotoc_md1284"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
 <li><b>Benchmark Iterations</b>: 1,000,000</li>

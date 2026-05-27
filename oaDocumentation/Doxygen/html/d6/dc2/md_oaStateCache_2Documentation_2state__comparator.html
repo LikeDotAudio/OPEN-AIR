@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d6/dc2/md_oaStateCache_2Documentation_
   <div class="headertitle"><div class="title">🏷️ State Comparator</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4720"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4721"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5000"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md5001"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4722"></a>
+<h2><a class="anchor" id="autotoc_md5002"></a>
 File Level</h2>
 <p>State_Cache/state_comparator.py</p>
 <p>Compares incoming MQTT payloads with cached state to determine if an update is necessary, prioritizing timestamp and falling back to value comparison.</p>
 <p>Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
 <p>Version 20250821.200641.1</p>
-<h1><a class="anchor" id="autotoc_md4723"></a>
+<h1><a class="anchor" id="autotoc_md5003"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4724"></a>
+<h1><a class="anchor" id="autotoc_md5004"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4725"></a>
+<h2><a class="anchor" id="autotoc_md5005"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md4726"></a>
+<h3><a class="anchor" id="autotoc_md5006"></a>
 &lt;tt&gt;should_update(incoming_topic, incoming_payload, cached_state)&lt;/tt&gt;</h3>
 <p>Compare timestamps (timestamp). If incoming &gt; cached, return True. If timestamp is missing (or in cache missing), compare the entire payload for parity.</p>
 <p><b>Parameters:</b></p><ul>
@@ -124,7 +124,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4727"></a>
+<h1><a class="anchor" id="autotoc_md5007"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

@@ -99,10 +99,10 @@ $(document).ready(function(){initNavTree('df/df2/left__panel_8py_source.html','.
 </div><!--header-->
 <div class="contents">
 <a href="../../df/df2/left__panel_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../d4/d28/namespaceInterface_1_1left__panel.html">    1</a></span><span class="comment"># oaTests/Interface/left_panel.py</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">textual.containers</a> <span class="keyword">import</span> Vertical</div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">textual.widgets</a> <span class="keyword">import</span> Button, Label</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">from</span> textual.containers <span class="keyword">import</span> Vertical</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">from</span> textual.widgets <span class="keyword">import</span> Button, Label</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaTests.Managers.configIniEditor.manager</a> <span class="keyword">import</span> ConfigIniEditor</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">from</span> oaTests.Managers.configIniEditor.manager <span class="keyword">import</span> ConfigIniEditor</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="foldopen" id="foldopen00008" data-start="" data-end="">
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('df/df2/left__panel_8py_source.html','.
 <div class="foldopen" id="foldopen00009" data-start="" data-end="">
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="../../d6/d62/classInterface_1_1left__panel_1_1LeftPanel.html#ac8c1479592bb5051d08cc249896fda3e">    9</a></span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac10babd0432b88fcd432ac2cc09c1af4">compose</a>(self):</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        editor = ConfigIniEditor()</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        setup = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.get_all_debug_sections</a>()</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        setup = editor.get_all_debug_sections()</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <span class="keywordflow">yield</span> Label(<span class="stringliteral">&quot;System Identity&quot;</span>, classes=<span class="stringliteral">&quot;status-label&quot;</span>)</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">yield</span> Label(<span class="stringliteral">&quot;GUID: --&quot;</span>, classes=<span class="stringliteral">&quot;status-item&quot;</span>, id=<span class="stringliteral">&quot;guid_label&quot;</span>)</div>
@@ -136,7 +136,6 @@ $(document).ready(function(){initNavTree('df/df2/left__panel_8py_source.html','.
 </div>
 </div>
 <div class="ttc" id="aclassInterface_1_1left__panel_1_1LeftPanel_html"><div class="ttname"><a href="../../d6/d62/classInterface_1_1left__panel_1_1LeftPanel.html">Interface.left_panel.LeftPanel</a></div><div class="ttdef"><b>Definition</b> <a href="../../df/df2/left__panel_8py_source.html#l00008">left_panel.py:8</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_ac10babd0432b88fcd432ac2cc09c1af4"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac10babd0432b88fcd432ac2cc09c1af4">compose</a></div><div class="ttdeci">compose</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02354">generated.rs:2354</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('db/df0/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260315_015500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1800"></a><b>Date:</b> Sunday, March 15, 2026 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2249"></a><b>Date:</b> Sunday, March 15, 2026 <br  />
  <b>Module:</b> <code>oaGui.factory</code>, <code>oaGui</code> <br  />
  <b>Severity:</b> Priority 1 (Critical Crash)</p>
-<h1><a class="anchor" id="autotoc_md1801"></a>
+<h1><a class="anchor" id="autotoc_md2250"></a>
 Issue</h1>
-<p>The application crashed immediately during the UI build process with: &lsquo;AttributeError: type object 'WidgetRegistry&rsquo; has no attribute 'get_registry'<code>. After fixing that, the system would fail with</code>AttributeError: 'DynamicGuiBuilder' object has no attribute 'make_slider_value'` (and others).</p>
-<h1><a class="anchor" id="autotoc_md1802"></a>
+<p>The application crashed immediately during the UI build process with: &lsquo;AttributeError: type object 'RegistryWidgetStore&rsquo; has no attribute 'get_registry'<code>. After fixing that, the system would fail with</code>AttributeError: 'LoaderOrchestrator' object has no attribute 'make_slider_value'` (and others).</p>
+<h1><a class="anchor" id="autotoc_md2251"></a>
 Root Cause</h1>
-<p>A major refactor of the <code>DynamicGuiBuilder</code> and <code>GuiWidgetFactoryMixin</code> was left in an inconsistent state:</p><ol type="1">
-<li><code>WidgetRegistry</code> was introduced to replace the legacy factory, but its API was not fully implemented (<code>get_registry</code> was missing).</li>
+<p>A major refactor of the <code>LoaderOrchestrator</code> and <code>GuiWidgetFactoryMixin</code> was left in an inconsistent state:</p><ol type="1">
+<li><code>RegistryWidgetStore</code> was introduced to replace the legacy factory, but its API was not fully implemented (<code>get_registry</code> was missing).</li>
 <li><code>GuiWidgetFactoryMixin</code> was emptied out to eliminate hardcoded imports, but <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code> still referred to the old <code>self.make_...</code> instance methods which no longer existed on the builder.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1803"></a>
+<h1><a class="anchor" id="autotoc_md2252"></a>
 Resolution</h1>
 <ol type="1">
-<li><b>Registry Completion</b>: Implemented <code>get_registry()</code> class method in <code>WidgetRegistry</code> to return a copy of the internal registry.</li>
+<li><b>Registry Completion</b>: Implemented <code>get_registry()</code> class method in <code>RegistryWidgetStore</code> to return a copy of the internal registry.</li>
 <li><b>Modular Factory Mapping</b>: Refactored <code>managers/Display/factory/core/factory_mapping.py</code> to use <code>self._lazy_wrap</code> for ALL core/legacy widgets. This allows the builder to dynamically import and call widget creators on-demand without needing them as mixins.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1804"></a>
+<h1><a class="anchor" id="autotoc_md2253"></a>
 Verification</h1>
 <ul>
 <li>Created <code>reproduce_bug.py</code> which confirmed the <code>AttributeError</code>.</li>
 <li>Created <code>test_factory.py</code> which verified that the new lazy-loaded mappings resolve correctly to their creator methods.</li>
 <li>Both tests pass with the final implementation.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1805"></a>
+<h1><a class="anchor" id="autotoc_md2254"></a>
 Forensic Evidence</h1>
-<p>Log trace showed failure in <code>_construct_dynamic_gui</code> (UniversalGuiLoader) -&gt; <code>__init__</code> (DynamicGuiBuilder) -&gt; <code>_initialize_widget_factory</code> (GuiWidgetFactoryMixin). This confirmed the failure was at the very start of the widget factory initialization. </p>
+<p>Log trace showed failure in <code>_construct_dynamic_gui</code> (JsonGuiHost) -&gt; <code>__init__</code> (LoaderOrchestrator) -&gt; <code>_initialize_widget_factory</code> (GuiWidgetFactoryMixin). This confirmed the failure was at the very start of the widget factory initialization. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

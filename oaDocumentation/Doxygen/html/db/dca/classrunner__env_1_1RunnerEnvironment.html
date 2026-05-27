@@ -141,20 +141,17 @@ Ensures all OPEN-AIR infrastructure is ready before UI launch.
 <div class="line"><span class="lineno">   25</span>        initialize_paths()</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        <span class="comment"># 2. Add Project Root to sys.path to resolve absolute imports</span></div>
-<div class="line"><span class="lineno">   28</span>        project_root = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(__file__).resolve().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parent.parent.parent.parent</a></div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> str(project_root) <span class="keywordflow">not</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.path</a>:</div>
-<div class="line"><span class="lineno">   30</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.path.insert</a>(0, str(project_root))</div>
+<div class="line"><span class="lineno">   28</span>        project_root = pathlib.Path(__file__).resolve().parent.parent.parent.parent</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> str(project_root) <span class="keywordflow">not</span> <span class="keywordflow">in</span> sys.path:</div>
+<div class="line"><span class="lineno">   30</span>            sys.path.insert(0, str(project_root))</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># 3. Initialize Logging and configuration</span></div>
-<div class="line"><span class="lineno">   33</span>        config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
+<div class="line"><span class="lineno">   33</span>        config = Config.get_instance()</div>
 <div class="line"><span class="lineno">   34</span>        set_log_directory(DATA_LOGS_DIR, partition=<span class="stringliteral">&quot;WYSIWYG&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span>        initialize_logging(config, log_dir=DATA_LOGS_DIR, partition=<span class="stringliteral">&quot;WYSIWYG&quot;</span>)</div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> config</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

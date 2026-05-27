@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('d2/dbc/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Visa Proxy Fleet</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md853"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md854"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1118"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1119"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md855"></a>
+<h2><a class="anchor" id="autotoc_md1120"></a>
 File Level</h2>
 <p>managers/STATE_VISA_FLEET_Manager/visa_proxy_fleet.py</p>
 <p>Refactored VisaProxy for fleet management, handling device-specific communication via Manager callbacks.</p>
 <p>Author: Gemini Agent</p>
-<h1><a class="anchor" id="autotoc_md856"></a>
+<h1><a class="anchor" id="autotoc_md1121"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md857"></a>
+<h1><a class="anchor" id="autotoc_md1122"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md858"></a>
+<h2><a class="anchor" id="autotoc_md1123"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md859"></a>
+<h3><a class="anchor" id="autotoc_md1124"></a>
 &lt;tt&gt;_write_safe_fleet(proxy_instance, command)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -121,7 +121,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md860"></a>
+<h3><a class="anchor" id="autotoc_md1125"></a>
 &lt;tt&gt;_query_safe_fleet(proxy_instance, command, correlation_id)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -135,12 +135,12 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md861"></a>
+<h2><a class="anchor" id="autotoc_md1126"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md862"></a>
+<h3><a class="anchor" id="autotoc_md1127"></a>
 &lt;tt&gt;class VisaProxyFleet&lt;/tt&gt;</h3>
 <p>Manages a single PyVISA connection for a specific instrument in a fleet. Communicates via callbacks to the managing entity (VisaFleetManager).</p>
-<h4><a class="anchor" id="autotoc_md863"></a>
+<h4><a class="anchor" id="autotoc_md1128"></a>
 &lt;tt&gt;__init__(self, manager_ref, device_serial, resource_name, instrument_model, manufacturer)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -156,7 +156,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md864"></a>
+<h4><a class="anchor" id="autotoc_md1129"></a>
 &lt;tt&gt;shutdown(self)&lt;/tt&gt;</h4>
 <p>Shuts down the proxy, stopping the worker thread and clearing resources.</p>
 <p><b>Parameters:</b></p><ul>
@@ -168,7 +168,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md865"></a>
+<h4><a class="anchor" id="autotoc_md1130"></a>
 &lt;tt&gt;_command_processor_worker(self)&lt;/tt&gt;</h4>
 <p>Worker thread to process commands from the queue. ⚡ OPTIMIZATION: Uses pure blocking get() with a Poison Pill for shutdown (Rule #5).</p>
 <p><b>Parameters:</b></p><ul>
@@ -180,7 +180,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md866"></a>
+<h4><a class="anchor" id="autotoc_md1131"></a>
 &lt;tt&gt;enqueue_command(self, command, query, correlation_id)&lt;/tt&gt;</h4>
 <p>Public method for the manager to enqueue a command to this proxy.</p>
 <p><b>Parameters:</b></p><ul>
@@ -194,7 +194,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md867"></a>
+<h4><a class="anchor" id="autotoc_md1132"></a>
 &lt;tt&gt;set_instrument_instance(self, inst)&lt;/tt&gt;</h4>
 <p>Sets the PyVISA instrument instance and updates connection status.</p>
 <p><b>Parameters:</b></p><ul>
@@ -206,7 +206,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md868"></a>
+<h4><a class="anchor" id="autotoc_md1133"></a>
 &lt;tt&gt;_reset_device_fleet(self)&lt;/tt&gt;</h4>
 <p>Attempts to reset the connected instrument using standard SCPI commands.</p>
 <p><b>Parameters:</b></p><ul>
@@ -218,7 +218,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md869"></a>
+<h1><a class="anchor" id="autotoc_md1134"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

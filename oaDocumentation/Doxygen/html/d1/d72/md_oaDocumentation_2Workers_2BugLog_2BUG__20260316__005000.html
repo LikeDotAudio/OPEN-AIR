@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d1/d72/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: NameError in StateCacheManager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1853"></a> <b>Date:</b> 2026-03-16 00:50:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Bootstrap failure during State Cache initialization, preventing the application from starting.</p>
-<h1><a class="anchor" id="autotoc_md1854"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2302"></a> <b>Date:</b> 2026-03-16 00:50:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Bootstrap failure during State Cache initialization, preventing the application from starting.</p>
+<h1><a class="anchor" id="autotoc_md2303"></a>
 Issue</h1>
 <p>A &lsquo;NameError: name 'data_logger&rsquo; is not defined<code>occurred in</code>workers/Command_Router/State_Cache/state_cache.py` on line 49.</p>
-<h1><a class="anchor" id="autotoc_md1855"></a>
+<h1><a class="anchor" id="autotoc_md2304"></a>
 Root Cause</h1>
 <p>The <code>StateCacheManager</code> was using <code>data_logger</code> for various logging tasks, but it was not imported from <code>oaLogging.logger</code>.</p>
-<h1><a class="anchor" id="autotoc_md1856"></a>
+<h1><a class="anchor" id="autotoc_md2305"></a>
 Resolution</h1>
 <p>Modified <code>workers/Command_Router/State_Cache/state_cache.py</code> to import <code>data_logger</code> from <code>oaLogging.logger</code>. Removed the unused <code>builder_logger</code> from the same import line to keep the code clean.</p>
-<h1><a class="anchor" id="autotoc_md1857"></a>
+<h1><a class="anchor" id="autotoc_md2306"></a>
 Verification</h1>
 <p>Ran a Python reproduction script that imports <code>StateCacheManager</code> and verifies successful initialization:</p><ul>
 <li><b>Output:</b> <code>Success</code></li>

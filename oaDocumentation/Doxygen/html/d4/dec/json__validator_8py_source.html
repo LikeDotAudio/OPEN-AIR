@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('d4/dec/json__validator_8py_source.html
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../d7/d0a/namespaceMethods_1_1json__validator.html#a3a138f06a4f0cb194ce2a36bab762f76">   14</a></span>    RUST_ENABLED = <span class="keyword">True</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordflow">except</span> ImportError:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    RUST_ENABLED = <span class="keyword">False</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.warning</a>(<span class="stringliteral">&quot;⚠️ [ORCHESTRATION] oasafetycore_rs not found. Falling back to slow Python validation.&quot;</span>)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    logger.warning(<span class="stringliteral">&quot;⚠️ [ORCHESTRATION] oasafetycore_rs not found. Falling back to slow Python validation.&quot;</span>)</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="foldopen" id="foldopen00019" data-start="" data-end="">
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../d7/d0a/namespaceMethods_1_1json__validator.html#a1fbf5a934ca73b9fc3b7f2da88c62c80">   19</a></span><span class="keyword">def </span><a class="code hl_function" href="../../d7/d0a/namespaceMethods_1_1json__validator.html#a1fbf5a934ca73b9fc3b7f2da88c62c80">validate_and_sanitize_json</a>(data: dict) -&gt; dict:</div>
@@ -122,29 +122,28 @@ $(document).ready(function(){initNavTree('d4/dec/json__validator_8py_source.html
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral">    Ensures the data is a valid JSON structure before publishing.</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="stringliteral">    Uses Rust for strict validation and Python fallback for serializability check.</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, dict):</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ JSON validation error: Expected dict, got {type(data)}&quot;</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(data, dict):</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        logger.error(f<span class="stringliteral">&quot;❌ JSON validation error: Expected dict, got {type(data)}&quot;</span>)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> data</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">if</span> RUST_ENABLED:</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="comment"># Rust performs deep validation and ensures strict compliance</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oasafetycore_rs.validate_json</a>(data)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            oasafetycore_rs.validate_json(data)</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">return</span> data</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">except</span> (TypeError, ValueError) <span class="keyword">as</span> e:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ [RUST] JSON validation failed: {e}&quot;</span>)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            logger.error(f<span class="stringliteral">&quot;❌ [RUST] JSON validation failed: {e}&quot;</span>)</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">return</span> data</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment"># --- Python Fallback Logic ---</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">try</span>:</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="comment"># Fallback to orjson serialization check</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(data)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        orjson.dumps(data)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> data</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">except</span> (TypeError, ValueError) <span class="keyword">as</span> e:</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ [PYTHON] JSON validation error: {e}. Data may not be fully serializable.&quot;</span>)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        logger.error(f<span class="stringliteral">&quot;❌ [PYTHON] JSON validation error: {e}. Data may not be fully serializable.&quot;</span>)</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> data</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespaceMethods_1_1json__validator_html_a1fbf5a934ca73b9fc3b7f2da88c62c80"><div class="ttname"><a href="../../d7/d0a/namespaceMethods_1_1json__validator.html#a1fbf5a934ca73b9fc3b7f2da88c62c80">Methods.json_validator.validate_and_sanitize_json</a></div><div class="ttdeci">dict validate_and_sanitize_json(dict data)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dec/json__validator_8py_source.html#l00019">json_validator.py:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

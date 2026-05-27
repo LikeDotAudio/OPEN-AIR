@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d8/d9a/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260416_234500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1468"></a> </p>
-<h1><a class="anchor" id="autotoc_md1469"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1733"></a> </p>
+<h1><a class="anchor" id="autotoc_md1734"></a>
 Description</h1>
-<p>Accidental deletion of core <code>DynamicGuiBuilder</code> methods during horizontal scroll implementation. This caused initialization failures in the preview engine and crashes during scrolling.</p>
-<h1><a class="anchor" id="autotoc_md1470"></a>
+<p>Accidental deletion of core <code>LoaderOrchestrator</code> methods during horizontal scroll implementation. This caused initialization failures in the preview engine and crashes during scrolling.</p>
+<h1><a class="anchor" id="autotoc_md1735"></a>
 Error Clusters</h1>
 <ul>
-<li><b>Cluster A: Initialization Failure</b>: <code>DynamicGuiBuilder</code> missing <code>_setup_event_bindings</code>.</li>
-<li><b>Cluster B: Scrolling Logic Failure</b>: <code>DynamicGuiBuilder</code> missing <code>_trigger_scroll_sync</code> (and <code>_perform_scroll_sync</code>).</li>
+<li><b>Cluster A: Initialization Failure</b>: <code>LoaderOrchestrator</code> missing <code>_setup_event_bindings</code>.</li>
+<li><b>Cluster B: Scrolling Logic Failure</b>: <code>LoaderOrchestrator</code> missing <code>_trigger_scroll_sync</code> (and <code>_perform_scroll_sync</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1471"></a>
+<h1><a class="anchor" id="autotoc_md1736"></a>
 Trigger Event</h1>
 <p>Triggered by the implementation of horizontal scrolling where an overly broad <code>replace</code> call removed several adjacent methods.</p>
-<h1><a class="anchor" id="autotoc_md1472"></a>
+<h1><a class="anchor" id="autotoc_md1737"></a>
 Domain Mapping</h1>
 <ul>
-<li><code><a class="el" href="../../dd/d93/oaGui_2Workers_2builder_8py.html">oaGui/Workers/builder.py</a></code></li>
+<li><code>oaGui/Workers/builder.py</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1473"></a>
+<h1><a class="anchor" id="autotoc_md1738"></a>
 Action Taken</h1>
 <p>Restored the following missing methods:</p><ul>
 <li><code>start()</code></li>
@@ -120,9 +120,9 @@ Action Taken</h1>
 <li><code>_perform_scroll_sync()</code></li>
 <li><code>_on_canvas_configure()</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1474"></a>
+<h1><a class="anchor" id="autotoc_md1739"></a>
 Verification Results</h1>
-<p><a class="el" href="../../d3/d59/namespaceMethods.html">Methods</a> have been re-inserted into the source file. The attributes are now available on the <code>DynamicGuiBuilder</code> instance, resolving the <code>AttributeError</code>. </p>
+<p><a class="el" href="../../d3/d59/namespaceMethods.html">Methods</a> have been re-inserted into the source file. The attributes are now available on the <code>LoaderOrchestrator</code> instance, resolving the <code>AttributeError</code>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

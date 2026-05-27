@@ -114,7 +114,7 @@ Variables</h2></td></tr>
 <tr class="separator:aceae571db958d388407203af93e78d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36aea59c74d1b20fb21a30c8f3290220" id="r_a36aea59c74d1b20fb21a30c8f3290220"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d63/namespaceaes70_1_1controller_1_1remote__device.html#a36aea59c74d1b20fb21a30c8f3290220">DeviceTreeNode</a> = Union[<a class="el" href="../../d4/d4f/classaes70_1_1controller_1_1object__base_1_1ObjectBase.html">ObjectBase</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>[&quot;DeviceTreeNode&quot;]]</td></tr>
 <tr class="separator:a36aea59c74d1b20fb21a30c8f3290220"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4af9a492db6839c6a66204b1422e4e4" id="r_aa4af9a492db6839c6a66204b1422e4e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d63/namespaceaes70_1_1controller_1_1remote__device.html#aa4af9a492db6839c6a66204b1422e4e4">logger</a> = logging.getLogger(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__name__</a>)</td></tr>
+<tr class="memitem:aa4af9a492db6839c6a66204b1422e4e4" id="r_aa4af9a492db6839c6a66204b1422e4e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d63/namespaceaes70_1_1controller_1_1remote__device.html#aa4af9a492db6839c6a66204b1422e4e4">logger</a> = logging.getLogger(__name__)</td></tr>
 <tr class="separator:aa4af9a492db6839c6a66204b1422e4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af114cb75121617062d816ec5d701bd99" id="r_af114cb75121617062d816ec5d701bd99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d63/namespaceaes70_1_1controller_1_1remote__device.html#af114cb75121617062d816ec5d701bd99">modules</a> = []</td></tr>
 <tr class="separator:af114cb75121617062d816ec5d701bd99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,10 +142,9 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   32</span><span class="keyword">def </span>eventToKey(event):</div>
 <div class="line"><span class="lineno">   33</span>    ono = event[<span class="stringliteral">&quot;EmitterONo&quot;</span>]</div>
 <div class="line"><span class="lineno">   34</span>    id_val = event[<span class="stringliteral">&quot;EventID&quot;</span>]</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;,&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>([str(ono), str(id_val[<span class="stringliteral">&quot;DefLevel&quot;</span>]), str(id_val[<span class="stringliteral">&quot;EventIndex&quot;</span>])])</div>
+<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;,&quot;</span>.join([str(ono), str(id_val[<span class="stringliteral">&quot;DefLevel&quot;</span>]), str(id_val[<span class="stringliteral">&quot;EventIndex&quot;</span>])])</div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -189,7 +188,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">aes70.controller.remote_device.logger = logging.getLogger(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__name__</a>)</td>
+          <td class="memname">aes70.controller.remote_device.logger = logging.getLogger(__name__)</td>
         </tr>
       </table>
 </div><div class="memdoc">

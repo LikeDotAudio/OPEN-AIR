@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('d7/df4/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Test Discovery ImportError</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2068"></a><b>Date:</b> 2026-04-09 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2517"></a><b>Date:</b> 2026-04-09 <br  />
  <b>Status:</b> Resolved <br  />
  <b>Priority:</b> 2 (High/Spam - Blocks <a class="el" href="../../df/da7/namespaceTests.html">Tests</a>)</p>
-<h1><a class="anchor" id="autotoc_md2069"></a>
+<h1><a class="anchor" id="autotoc_md2518"></a>
 1. Issue Description</h1>
 <p>Automated test discovery was failing with <code>ImportError: Start directory is not importable</code> for several modules.</p>
-<h2><a class="anchor" id="autotoc_md2070"></a>
+<h2><a class="anchor" id="autotoc_md2519"></a>
 Evidence:</h2>
 <ul>
 <li><code>ERROR | TestRunner:run:105 - ❌ ImportError in .../oaComNmos/Core/IS12/Tests: Start directory is not importable</code></li>
 <li><code>ERROR | TestRunner:run:105 - ❌ ImportError in .../oaGui/Tests: Start directory is not importable</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2071"></a>
+<h1><a class="anchor" id="autotoc_md2520"></a>
 2. Root Cause Analysis</h1>
 <p>The Python <code>unittest</code> discovery engine requires directories containing tests to be valid Python packages. Several newly created or refactored <code><a class="el" href="../../df/da7/namespaceTests.html">Tests</a></code> directories were missing the mandatory <code>__init__.py</code> marker, preventing the runner from traversing those paths.</p>
-<h1><a class="anchor" id="autotoc_md2072"></a>
+<h1><a class="anchor" id="autotoc_md2521"></a>
 3. Resolution Strategy</h1>
 <ul>
 <li><b>Surgical Creation:</b> Manually created missing <code>__init__.py</code> files in the reported directories.</li>
 <li><b>Systemic Sweep:</b> Executed a workspace-wide shell script to identify and populate any other <code><a class="el" href="../../df/da7/namespaceTests.html">Tests</a></code> folders missing package markers.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2073"></a>
+<h1><a class="anchor" id="autotoc_md2522"></a>
 4. Verification Evidence</h1>
 <ul>
 <li><b>Discovery Check:</b> Confirmed that the test runner no longer reports <code>ImportError</code> for the affected paths.</li>
 <li><b>Package Audit:</b> Verified presence of <code>__init__.py</code> across all <code>oa*</code> module test folders.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2074"></a>
+<h1><a class="anchor" id="autotoc_md2523"></a>
 5. System Impact</h1>
 <ul>
 <li><b>Test Integrity:</b> Restored full coverage for the automated CI/CD pipeline.</li>

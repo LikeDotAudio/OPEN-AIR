@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('da/d14/md_oaConfigurationManager_2Docu
   <div class="headertitle"><div class="title">🏷️ Config Reader</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md959"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md960"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1224"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1225"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md961"></a>
+<h2><a class="anchor" id="autotoc_md1226"></a>
 File Level</h2>
 <p>managers/configini/config_reader.py</p>
 <p>This module defines the 'Config' class, which acts as a centralized, thread-safe singleton for managing application-wide settings. It handles reading from 'config.ini', environment variable overrides, and provides a unified interface for accessing configuration parameters.</p>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md962"></a>
+<h1><a class="anchor" id="autotoc_md1227"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Assumes a singleton pattern to ensure consistency across the application.</li>
@@ -109,14 +109,14 @@ File Level</h2>
 <li>Depends on 'configparser' for INI parsing and 'pathlib' for path management.</li>
 <li>Expects certain environment variables (e.g., OPEN_AIR_INSTANCE_GUID) for supervisor-led deployments.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md963"></a>
+<h1><a class="anchor" id="autotoc_md1228"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md964"></a>
+<h2><a class="anchor" id="autotoc_md1229"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md965"></a>
+<h3><a class="anchor" id="autotoc_md1230"></a>
 &lt;tt&gt;class Config&lt;/tt&gt;</h3>
 <p>Manages application configuration settings as a thread-safe singleton.</p>
-<h4><a class="anchor" id="autotoc_md966"></a>
+<h4><a class="anchor" id="autotoc_md1231"></a>
 &lt;tt&gt;__init__(self)&lt;/tt&gt;</h4>
 <p>Initializes the Config object upon its first instantiation.</p>
 <p><b>Parameters:</b></p><ul>
@@ -130,7 +130,7 @@ Classes</h2>
 <li>Sets '_initialized' flag to prevent multiple initializations.</li>
 <li>This method is intended to be called only via 'get_instance()'.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md967"></a>
+<h4><a class="anchor" id="autotoc_md1232"></a>
 &lt;tt&gt;get_instance(cls)&lt;/tt&gt;</h4>
 <p>Provides access to the singleton Config instance.</p>
 <p><b>Parameters:</b></p><ul>
@@ -143,7 +143,7 @@ Classes</h2>
 <li>Uses a class-level lock to ensure thread-safety during initialization.</li>
 <li>Guarantees that only one instance of Config exists in the process.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md968"></a>
+<h4><a class="anchor" id="autotoc_md1233"></a>
 &lt;tt&gt;global_settings(self)&lt;/tt&gt;</h4>
 <p>Retrieves a dictionary of global debug and logging settings.</p>
 <p><b>Parameters:</b></p><ul>
@@ -156,7 +156,7 @@ Classes</h2>
 <li>Caches the generated dictionary in '_cached_global_settings' to minimize overhead.</li>
 <li>This property is thread-safe for reading after initial caching.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md969"></a>
+<h4><a class="anchor" id="autotoc_md1234"></a>
 &lt;tt&gt;get_mqtt_base_topic(self)&lt;/tt&gt;</h4>
 <p>Retrieves the configured base MQTT topic.</p>
 <p><b>Parameters:</b></p><ul>
@@ -168,7 +168,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Thread-safe for read-only access.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md970"></a>
+<h4><a class="anchor" id="autotoc_md1235"></a>
 &lt;tt&gt;read_config(self)&lt;/tt&gt;</h4>
 <p>Parses 'config.ini' and updates instance attributes accordingly.</p>
 <p><b>Parameters:</b></p><ul>
@@ -182,7 +182,7 @@ Classes</h2>
 <li>May execute an external '<a class="el" href="../../d1/d88/Setup_8py.html">Setup.py</a>' subprocess if config is missing.</li>
 <li>Updates global instance state; should be called during initialization.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md971"></a>
+<h1><a class="anchor" id="autotoc_md1236"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Ensures atomic initialization in multi-threaded environments.</li>

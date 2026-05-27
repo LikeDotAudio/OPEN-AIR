@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🗺️_20documentation_20map_0',['🗺️ Documentation Map',['../dc/d8a/md_oaGuiEditorWYSIWYG_2Documentation_2wysiwyg__editor.html#autotoc_md3043',1,'']]],
-  ['🗺️_20open_20air_20documentation_20map_1',['🗺️ OPEN-AIR Documentation Map',['../d0/d4b/md_oaDocumentation_2Documentation_2Project__Map_2Documentation__Map.html',1,'']]]
+  ['🕵️_20forensic_20summary_0',['🕵️ forensic summary',['../dc/d9c/md_oaDocumentation_2BugLog_2BUG__20260505__120000.html#autotoc_md1799',1,'🕵️ Forensic Summary'],['../d1/d5e/md_oaDocumentation_2BugLog_2BUG__20260505__130000.html#autotoc_md1806',1,'🕵️ Forensic Summary']]]
 ];

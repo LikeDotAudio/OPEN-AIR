@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('df/db3/namespaceMethods_1_1widget__eve
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adfb26d80bfea0280b84dfaf097fb77f7" id="r_adfb26d80bfea0280b84dfaf097fb77f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db3/namespaceMethods_1_1widget__event__binder.html#adfb26d80bfea0280b84dfaf097fb77f7">bind_variable_trace</a> (tk.Variable <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_var</a>, callback)</td></tr>
+<tr class="memitem:adfb26d80bfea0280b84dfaf097fb77f7" id="r_adfb26d80bfea0280b84dfaf097fb77f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db3/namespaceMethods_1_1widget__event__binder.html#adfb26d80bfea0280b84dfaf097fb77f7">bind_variable_trace</a> (tk.Variable tk_var, callback)</td></tr>
 <tr class="separator:adfb26d80bfea0280b84dfaf097fb77f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -108,7 +108,7 @@ Variables</h2></td></tr>
 <tr class="separator:a5b7a3b81b8db6e2a030e55f1eb8b6e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57290eec8c6572e391b76c2298673e9b" id="r_a57290eec8c6572e391b76c2298673e9b"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db3/namespaceMethods_1_1widget__event__binder.html#a57290eec8c6572e391b76c2298673e9b">current_version</a> = &quot;20251226.000000.1&quot;</td></tr>
 <tr class="separator:a57290eec8c6572e391b76c2298673e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5e87aa918a99f771a5a1964b0680d32" id="r_af5e87aa918a99f771a5a1964b0680d32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db3/namespaceMethods_1_1widget__event__binder.html#af5e87aa918a99f771a5a1964b0680d32">LOCAL_DEBUG</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:af5e87aa918a99f771a5a1964b0680d32" id="r_af5e87aa918a99f771a5a1964b0680d32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db3/namespaceMethods_1_1widget__event__binder.html#af5e87aa918a99f771a5a1964b0680d32">LOCAL_DEBUG</a> = False</td></tr>
 <tr class="separator:af5e87aa918a99f771a5a1964b0680d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -148,16 +148,13 @@ When the variable's value changes, the callback is invoked.
 <div class="line"><span class="lineno">   33</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   35</span>        <span class="comment"># The callback will receive three arguments from the trace, which we ignore with a lambda.</span></div>
-<div class="line"><span class="lineno">   36</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_var.trace_add</a>(<span class="stringliteral">&quot;write&quot;</span>, <span class="keyword">lambda</span> *args: callback())</div>
+<div class="line"><span class="lineno">   36</span>        tk_var.trace_add(<span class="stringliteral">&quot;write&quot;</span>, <span class="keyword">lambda</span> *args: callback())</div>
 <div class="line"><span class="lineno">   37</span>        <span class="comment"># ⚡ OPTIMIZATION: Disabled logging for trace addition as it spams thousands of lines during GUI build.</span></div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment">#     logger.debug(f&quot;Trace added for variable {tk_var}&quot;)</span></div>
 <div class="line"><span class="lineno">   39</span>    <span class="keywordflow">except</span> Exception:</div>
 <div class="line"><span class="lineno">   40</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   41</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(<span class="stringliteral">&quot;❌ Error binding trace to variable {tk_var}&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   41</span>            logger.exception(<span class="stringliteral">&quot;❌ Error binding trace to variable {tk_var}&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -200,7 +197,7 @@ When the variable's value changes, the callback is invoked.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.widget_event_binder.LOCAL_DEBUG = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.widget_event_binder.LOCAL_DEBUG = False</td>
         </tr>
       </table>
 </div><div class="memdoc">

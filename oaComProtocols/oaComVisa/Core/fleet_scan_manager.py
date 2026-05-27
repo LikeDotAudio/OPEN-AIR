@@ -49,6 +49,6 @@ class ScanManager:
         """Sends scan progress information to the MQTT status topic."""
         bridge = self._orchestrator.mqtt_bridge
         if bridge and bridge.is_connected:
-            topic = f"OPEN-AIR/System/Status/Fleet/{status}"
+            topic = f"OpenAir/System/Status/Fleet/{status}"
             bridge.mqtt_manager.publish(topic, orjson.dumps(payload).decode())
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Published scan status '{status}' to '{topic}'", "DEBUG")

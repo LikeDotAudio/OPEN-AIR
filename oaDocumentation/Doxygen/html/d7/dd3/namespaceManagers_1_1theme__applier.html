@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d7/dd3/namespaceManagers_1_1theme__app
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8972cd0cbc8c65f55e1568e180e25bfa" id="r_a8972cd0cbc8c65f55e1568e180e25bfa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dd3/namespaceManagers_1_1theme__applier.html#a8972cd0cbc8c65f55e1568e180e25bfa">apply_theme</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget_or_root</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">theme_name</a>=DEFAULT_THEME)</td></tr>
+<tr class="memitem:a8972cd0cbc8c65f55e1568e180e25bfa" id="r_a8972cd0cbc8c65f55e1568e180e25bfa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dd3/namespaceManagers_1_1theme__applier.html#a8972cd0cbc8c65f55e1568e180e25bfa">apply_theme</a> (widget_or_root, theme_name=DEFAULT_THEME)</td></tr>
 <tr class="separator:a8972cd0cbc8c65f55e1568e180e25bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -131,12 +131,12 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dc/d80/theme__applier_8py_source.html#l00012">12</a> of file <a class="el" href="../../dc/d80/theme__applier_8py_source.html">theme_applier.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span><span class="keyword">def </span>apply_theme(widget_or_root, theme_name=DEFAULT_THEME):</div>
 <div class="line"><span class="lineno">   13</span>    <span class="stringliteral">&quot;&quot;&quot;Applies global TTK styles to a Tkinter instance.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   14</span>    colors = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">THEMES.get</a>(theme_name, THEMES[<span class="stringliteral">&quot;dark&quot;</span>])</div>
-<div class="line"><span class="lineno">   15</span>    style = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ttk.Style</a>(widget_or_root)</div>
-<div class="line"><span class="lineno">   16</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.theme_use</a>(<span class="stringliteral">&quot;clam&quot;</span>)</div>
+<div class="line"><span class="lineno">   14</span>    colors = THEMES.get(theme_name, THEMES[<span class="stringliteral">&quot;dark&quot;</span>])</div>
+<div class="line"><span class="lineno">   15</span>    style = ttk.Style(widget_or_root)</div>
+<div class="line"><span class="lineno">   16</span>    style.theme_use(<span class="stringliteral">&quot;clam&quot;</span>)</div>
 <div class="line"><span class="lineno">   17</span> </div>
 <div class="line"><span class="lineno">   18</span>    <span class="comment"># Global style configuration</span></div>
-<div class="line"><span class="lineno">   19</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">   19</span>    style.configure(</div>
 <div class="line"><span class="lineno">   20</span>        <span class="stringliteral">&quot;.&quot;</span>,</div>
 <div class="line"><span class="lineno">   21</span>        background=colors[<span class="stringliteral">&quot;bg&quot;</span>],</div>
 <div class="line"><span class="lineno">   22</span>        foreground=colors[<span class="stringliteral">&quot;fg&quot;</span>],</div>
@@ -146,31 +146,31 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   26</span>    )</div>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>    <span class="comment"># Frame style</span></div>
-<div class="line"><span class="lineno">   29</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;TFrame&quot;</span>, background=colors[<span class="stringliteral">&quot;bg&quot;</span>])</div>
+<div class="line"><span class="lineno">   29</span>    style.configure(<span class="stringliteral">&quot;TFrame&quot;</span>, background=colors[<span class="stringliteral">&quot;bg&quot;</span>])</div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># 2026-02-24 00:40:00 - UI Flattening Start</span></div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;Dark.TFrame&quot;</span>, background=<span class="stringliteral">&quot;#000000&quot;</span>) <span class="comment"># Fixed black for custom modules</span></div>
+<div class="line"><span class="lineno">   31</span>    style.configure(<span class="stringliteral">&quot;Dark.TFrame&quot;</span>, background=<span class="stringliteral">&quot;#000000&quot;</span>) <span class="comment"># Fixed black for custom modules</span></div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>    <span class="comment"># Label style</span></div>
-<div class="line"><span class="lineno">   34</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;Dark.TLabel&quot;</span>, background=<span class="stringliteral">&quot;#000000&quot;</span>, foreground=<span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
+<div class="line"><span class="lineno">   34</span>    style.configure(<span class="stringliteral">&quot;Dark.TLabel&quot;</span>, background=<span class="stringliteral">&quot;#000000&quot;</span>, foreground=<span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="comment"># Button styles</span></div>
-<div class="line"><span class="lineno">   37</span>    dark_grey = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">colors.get</a>(<span class="stringliteral">&quot;secondary&quot;</span>, <span class="stringliteral">&quot;#4e5254&quot;</span>)</div>
+<div class="line"><span class="lineno">   37</span>    dark_grey = colors.get(<span class="stringliteral">&quot;secondary&quot;</span>, <span class="stringliteral">&quot;#4e5254&quot;</span>)</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>    <span class="comment"># Safely get toggle style</span></div>
 <div class="line"><span class="lineno">   40</span>    toggle_style = THEMES[theme_name].get(<span class="stringliteral">&quot;button_style_toggle&quot;</span>, {})</div>
-<div class="line"><span class="lineno">   41</span>    selected_orange = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggle_style.get</a>(<span class="stringliteral">&quot;Button_Selected_Bg&quot;</span>, <span class="stringliteral">&quot;#f4902c&quot;</span>)</div>
-<div class="line"><span class="lineno">   42</span>    selected_fg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggle_style.get</a>(<span class="stringliteral">&quot;Button_Selected_Fg&quot;</span>, <span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
-<div class="line"><span class="lineno">   43</span>    hover_bg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggle_style.get</a>(<span class="stringliteral">&quot;Button_Hover_Bg&quot;</span>, <span class="stringliteral">&quot;#dcdcdc&quot;</span>)</div>
-<div class="line"><span class="lineno">   44</span>    hover_fg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggle_style.get</a>(<span class="stringliteral">&quot;Button_Hover_Fg&quot;</span>, <span class="stringliteral">&quot;#000000&quot;</span>)</div>
+<div class="line"><span class="lineno">   41</span>    selected_orange = toggle_style.get(<span class="stringliteral">&quot;Button_Selected_Bg&quot;</span>, <span class="stringliteral">&quot;#f4902c&quot;</span>)</div>
+<div class="line"><span class="lineno">   42</span>    selected_fg = toggle_style.get(<span class="stringliteral">&quot;Button_Selected_Fg&quot;</span>, <span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
+<div class="line"><span class="lineno">   43</span>    hover_bg = toggle_style.get(<span class="stringliteral">&quot;Button_Hover_Bg&quot;</span>, <span class="stringliteral">&quot;#dcdcdc&quot;</span>)</div>
+<div class="line"><span class="lineno">   44</span>    hover_fg = toggle_style.get(<span class="stringliteral">&quot;Button_Hover_Fg&quot;</span>, <span class="stringliteral">&quot;#000000&quot;</span>)</div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">   46</span>    style.configure(</div>
 <div class="line"><span class="lineno">   47</span>        <span class="stringliteral">&quot;TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   48</span>        background=dark_grey,</div>
 <div class="line"><span class="lineno">   49</span>        foreground=colors[<span class="stringliteral">&quot;text&quot;</span>],</div>
 <div class="line"><span class="lineno">   50</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>),</div>
 <div class="line"><span class="lineno">   51</span>        anchor=<span class="stringliteral">&quot;center&quot;</span>,</div>
 <div class="line"><span class="lineno">   52</span>    )</div>
-<div class="line"><span class="lineno">   53</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(</div>
+<div class="line"><span class="lineno">   53</span>    style.map(</div>
 <div class="line"><span class="lineno">   54</span>        <span class="stringliteral">&quot;TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   55</span>        background=[(<span class="stringliteral">&quot;active&quot;</span>, hover_bg), (<span class="stringliteral">&quot;!active&quot;</span>, dark_grey)],</div>
 <div class="line"><span class="lineno">   56</span>        foreground=[(<span class="stringliteral">&quot;active&quot;</span>, hover_fg), (<span class="stringliteral">&quot;!active&quot;</span>, colors[<span class="stringliteral">&quot;text&quot;</span>])],</div>
@@ -178,26 +178,26 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>    <span class="comment"># Custom Toggler style (for unselected state)</span></div>
 <div class="line"><span class="lineno">   60</span>    toggler_style = THEMES[theme_name].get(<span class="stringliteral">&quot;button_style_toggler_unselected&quot;</span>, {})</div>
-<div class="line"><span class="lineno">   61</span>    toggler_unselected_bg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggler_style.get</a>(<span class="stringliteral">&quot;background&quot;</span>, <span class="stringliteral">&quot;#4e5254&quot;</span>)</div>
-<div class="line"><span class="lineno">   62</span>    toggler_unselected_fg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggler_style.get</a>(<span class="stringliteral">&quot;foreground&quot;</span>, <span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
-<div class="line"><span class="lineno">   63</span>    toggler_hover_bg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggler_style.get</a>(<span class="stringliteral">&quot;Button_Hover_Bg&quot;</span>, <span class="stringliteral">&quot;#dcdcdc&quot;</span>)</div>
-<div class="line"><span class="lineno">   64</span>    toggler_hover_fg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">toggler_style.get</a>(<span class="stringliteral">&quot;Button_Hover_Fg&quot;</span>, <span class="stringliteral">&quot;#000000&quot;</span>)</div>
+<div class="line"><span class="lineno">   61</span>    toggler_unselected_bg = toggler_style.get(<span class="stringliteral">&quot;background&quot;</span>, <span class="stringliteral">&quot;#4e5254&quot;</span>)</div>
+<div class="line"><span class="lineno">   62</span>    toggler_unselected_fg = toggler_style.get(<span class="stringliteral">&quot;foreground&quot;</span>, <span class="stringliteral">&quot;#ffffff&quot;</span>)</div>
+<div class="line"><span class="lineno">   63</span>    toggler_hover_bg = toggler_style.get(<span class="stringliteral">&quot;Button_Hover_Bg&quot;</span>, <span class="stringliteral">&quot;#dcdcdc&quot;</span>)</div>
+<div class="line"><span class="lineno">   64</span>    toggler_hover_fg = toggler_style.get(<span class="stringliteral">&quot;Button_Hover_Fg&quot;</span>, <span class="stringliteral">&quot;#000000&quot;</span>)</div>
 <div class="line"><span class="lineno">   65</span> </div>
-<div class="line"><span class="lineno">   66</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">   66</span>    style.configure(</div>
 <div class="line"><span class="lineno">   67</span>        <span class="stringliteral">&quot;Custom.TogglerUnselected.TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   68</span>        background=toggler_unselected_bg,</div>
 <div class="line"><span class="lineno">   69</span>        foreground=toggler_unselected_fg,</div>
 <div class="line"><span class="lineno">   70</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>),</div>
 <div class="line"><span class="lineno">   71</span>        anchor=<span class="stringliteral">&quot;center&quot;</span>,</div>
 <div class="line"><span class="lineno">   72</span>    )</div>
-<div class="line"><span class="lineno">   73</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(</div>
+<div class="line"><span class="lineno">   73</span>    style.map(</div>
 <div class="line"><span class="lineno">   74</span>        <span class="stringliteral">&quot;Custom.TogglerUnselected.TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   75</span>        background=[(<span class="stringliteral">&quot;active&quot;</span>, toggler_hover_bg), (<span class="stringliteral">&quot;!active&quot;</span>, toggler_unselected_bg)],</div>
 <div class="line"><span class="lineno">   76</span>        foreground=[(<span class="stringliteral">&quot;active&quot;</span>, toggler_hover_fg), (<span class="stringliteral">&quot;!active&quot;</span>, toggler_unselected_fg)],</div>
 <div class="line"><span class="lineno">   77</span>    )</div>
 <div class="line"><span class="lineno">   78</span> </div>
 <div class="line"><span class="lineno">   79</span>    <span class="comment"># Custom Selected style</span></div>
-<div class="line"><span class="lineno">   80</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">   80</span>    style.configure(</div>
 <div class="line"><span class="lineno">   81</span>        <span class="stringliteral">&quot;Custom.Selected.TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   82</span>        background=selected_orange,</div>
 <div class="line"><span class="lineno">   83</span>        foreground=selected_fg,</div>
@@ -205,14 +205,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   85</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>),</div>
 <div class="line"><span class="lineno">   86</span>        anchor=<span class="stringliteral">&quot;center&quot;</span>,</div>
 <div class="line"><span class="lineno">   87</span>    )</div>
-<div class="line"><span class="lineno">   88</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(</div>
+<div class="line"><span class="lineno">   88</span>    style.map(</div>
 <div class="line"><span class="lineno">   89</span>        <span class="stringliteral">&quot;Custom.Selected.TButton&quot;</span>,</div>
 <div class="line"><span class="lineno">   90</span>        background=[(<span class="stringliteral">&quot;active&quot;</span>, hover_bg), (<span class="stringliteral">&quot;!active&quot;</span>, selected_orange)],</div>
 <div class="line"><span class="lineno">   91</span>        foreground=[(<span class="stringliteral">&quot;active&quot;</span>, hover_fg), (<span class="stringliteral">&quot;!active&quot;</span>, selected_fg)],</div>
 <div class="line"><span class="lineno">   92</span>    )</div>
 <div class="line"><span class="lineno">   93</span> </div>
 <div class="line"><span class="lineno">   94</span>    <span class="comment"># 1. Notebook Container Flattening (TNotebook)</span></div>
-<div class="line"><span class="lineno">   95</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">   95</span>    style.configure(</div>
 <div class="line"><span class="lineno">   96</span>        <span class="stringliteral">&quot;TNotebook&quot;</span>,</div>
 <div class="line"><span class="lineno">   97</span>        background=<span class="stringliteral">&quot;black&quot;</span>,</div>
 <div class="line"><span class="lineno">   98</span>        borderwidth=0,</div>
@@ -222,7 +222,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  102</span>    )</div>
 <div class="line"><span class="lineno">  103</span> </div>
 <div class="line"><span class="lineno">  104</span>    <span class="comment"># 2. Tab Element Styling &amp; State Mapping (TNotebook.Tab)</span></div>
-<div class="line"><span class="lineno">  105</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">  105</span>    style.configure(</div>
 <div class="line"><span class="lineno">  106</span>        <span class="stringliteral">&quot;TNotebook.Tab&quot;</span>,</div>
 <div class="line"><span class="lineno">  107</span>        background=<span class="stringliteral">&quot;black&quot;</span>,</div>
 <div class="line"><span class="lineno">  108</span>        foreground=<span class="stringliteral">&quot;white&quot;</span>,</div>
@@ -231,7 +231,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  111</span>        padding=[10, 2],</div>
 <div class="line"><span class="lineno">  112</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 13),</div>
 <div class="line"><span class="lineno">  113</span>    )</div>
-<div class="line"><span class="lineno">  114</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(</div>
+<div class="line"><span class="lineno">  114</span>    style.map(</div>
 <div class="line"><span class="lineno">  115</span>        <span class="stringliteral">&quot;TNotebook.Tab&quot;</span>,</div>
 <div class="line"><span class="lineno">  116</span>        background=[(<span class="stringliteral">&quot;selected&quot;</span>, <span class="stringliteral">&quot;#1a1a1a&quot;</span>), (<span class="stringliteral">&quot;active&quot;</span>, <span class="stringliteral">&quot;#333333&quot;</span>)],</div>
 <div class="line"><span class="lineno">  117</span>        foreground=[(<span class="stringliteral">&quot;selected&quot;</span>, <span class="stringliteral">&quot;#ff9900&quot;</span>)], <span class="comment"># Signature orange</span></div>
@@ -242,11 +242,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  122</span>    )</div>
 <div class="line"><span class="lineno">  123</span> </div>
 <div class="line"><span class="lineno">  124</span>    <span class="comment"># 3. Divider / Sash Harmonization (TPanedwindow &amp; Sash)</span></div>
-<div class="line"><span class="lineno">  125</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">  125</span>    style.configure(</div>
 <div class="line"><span class="lineno">  126</span>        <span class="stringliteral">&quot;TPanedwindow&quot;</span>,</div>
 <div class="line"><span class="lineno">  127</span>        background=<span class="stringliteral">&quot;black&quot;</span>,</div>
 <div class="line"><span class="lineno">  128</span>    )</div>
-<div class="line"><span class="lineno">  129</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">  129</span>    style.configure(</div>
 <div class="line"><span class="lineno">  130</span>        <span class="stringliteral">&quot;Sash&quot;</span>,</div>
 <div class="line"><span class="lineno">  131</span>        background=<span class="stringliteral">&quot;#111111&quot;</span>, <span class="comment"># Very dark grey divider</span></div>
 <div class="line"><span class="lineno">  132</span>        bordercolor=<span class="stringliteral">&quot;black&quot;</span>,</div>
@@ -256,7 +256,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  136</span>    )</div>
 <div class="line"><span class="lineno">  137</span> </div>
 <div class="line"><span class="lineno">  138</span>    <span class="comment"># 4. Global Treeview (Table) Styling</span></div>
-<div class="line"><span class="lineno">  139</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">  139</span>    style.configure(</div>
 <div class="line"><span class="lineno">  140</span>        <span class="stringliteral">&quot;Treeview&quot;</span>,</div>
 <div class="line"><span class="lineno">  141</span>        background=<span class="stringliteral">&quot;#000000&quot;</span>,</div>
 <div class="line"><span class="lineno">  142</span>        foreground=<span class="stringliteral">&quot;#dcdcdc&quot;</span>,</div>
@@ -265,14 +265,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  145</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 10),</div>
 <div class="line"><span class="lineno">  146</span>        rowheight=25</div>
 <div class="line"><span class="lineno">  147</span>    )</div>
-<div class="line"><span class="lineno">  148</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(</div>
+<div class="line"><span class="lineno">  148</span>    style.configure(</div>
 <div class="line"><span class="lineno">  149</span>        <span class="stringliteral">&quot;Treeview.Heading&quot;</span>,</div>
 <div class="line"><span class="lineno">  150</span>        background=<span class="stringliteral">&quot;#1a1a1a&quot;</span>,</div>
 <div class="line"><span class="lineno">  151</span>        foreground=<span class="stringliteral">&quot;#ffffff&quot;</span>,</div>
 <div class="line"><span class="lineno">  152</span>        relief=<span class="stringliteral">&quot;flat&quot;</span>,</div>
 <div class="line"><span class="lineno">  153</span>        font=(<span class="stringliteral">&quot;Helvetica&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>)</div>
 <div class="line"><span class="lineno">  154</span>    )</div>
-<div class="line"><span class="lineno">  155</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(</div>
+<div class="line"><span class="lineno">  155</span>    style.map(</div>
 <div class="line"><span class="lineno">  156</span>        <span class="stringliteral">&quot;Treeview&quot;</span>,</div>
 <div class="line"><span class="lineno">  157</span>        background=[(<span class="stringliteral">&quot;selected&quot;</span>, <span class="stringliteral">&quot;#333333&quot;</span>)],</div>
 <div class="line"><span class="lineno">  158</span>        foreground=[(<span class="stringliteral">&quot;selected&quot;</span>, <span class="stringliteral">&quot;#ff9900&quot;</span>)]</div>
@@ -281,10 +281,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  161</span>    <span class="comment"># 2026-02-24 00:40:00 - UI Flattening End</span></div>
 <div class="line"><span class="lineno">  162</span> </div>
 <div class="line"><span class="lineno">  163</span>    <span class="keywordflow">return</span> colors</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

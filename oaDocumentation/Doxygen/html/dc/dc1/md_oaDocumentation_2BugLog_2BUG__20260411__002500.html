@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('dc/dc1/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: SNMP Installer Noise &amp; Manager Scope Issues</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1355"></a> </p>
-<h1><a class="anchor" id="autotoc_md1356"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1620"></a> </p>
+<h1><a class="anchor" id="autotoc_md1621"></a>
 Issue</h1>
 <ul>
 <li><b>Symptom 1</b>: The terminal is flooded with <code>command not found</code> errors followed by telemetry values (e.g., <code>84</code>, <code>20M35</code>).</li>
 <li><b>Symptom 2</b>: The SNMP Manager crashes on startup with a &lsquo;NameError: name 'matrix_log&rsquo; is not defined<code>.</code></li>
 <li><code>**Symptom 3**: Syntax error in imports within</code><a class="el" href="../../d9/d12/snmp__manager_8py.html">snmp_manager.py</a>`.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1357"></a>
+<h1><a class="anchor" id="autotoc_md1622"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>SNMP Installer Noise</b>: The generated SNMP installer script (<code>snmp_install_tmp.sh</code>) included an automated <code>snmpwalk</code> command at the end for testing. In certain execution environments (e.g., if the script's output was captured/eval'd), this raw telemetry data was being interpreted as shell commands.</li>
 <li><b>Manager Scope</b>: The <code>matrix_log</code> function was not imported at the module level in <code><a class="el" href="../../d9/d12/snmp__manager_8py.html">snmp_manager.py</a></code>, leading to a <code>NameError</code> when called within the <code>start()</code> method.</li>
 <li><b>Syntax Error</b>: Incorrect import path syntax using slashes instead of dots.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1358"></a>
+<h1><a class="anchor" id="autotoc_md1623"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Refactored Installer</b>: Removed the <code>snmpwalk</code> test from <code><a class="el" href="../../d3/d76/snmp__installer__generator_8py.html">oaComProtocols/oaComSNMP/Methods/snmp_installer_generator.py</a></code>.</li>
 <li><b>Fixed Scoping</b>: Correctly imported <code>matrix_log</code> at the top of <code><a class="el" href="../../d9/d12/snmp__manager_8py.html">oaComProtocols/oaComSNMP/Managers/snmp_manager.py</a></code>.</li>
 <li><b>Fixed Syntax</b>: Corrected import paths to use dot notation.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1359"></a>
+<h1><a class="anchor" id="autotoc_md1624"></a>
 Verification</h1>
 <ul>
 <li><b>Import Check</b>: Verified that <code>SNMPManager</code> can be imported without errors.</li>

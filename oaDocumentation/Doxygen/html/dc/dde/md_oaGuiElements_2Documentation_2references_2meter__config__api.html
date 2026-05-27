@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('dc/dde/md_oaGuiElements_2Documentation
   <div class="headertitle"><div class="title">📚 Meter Config API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4059"></a> </p>
-<h1><a class="anchor" id="autotoc_md4060"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4339"></a> </p>
+<h1><a class="anchor" id="autotoc_md4340"></a>
 🛠️ Classes</h1>
-<h2><a class="anchor" id="autotoc_md4061"></a>
+<h2><a class="anchor" id="autotoc_md4341"></a>
 &lt;tt&gt;class MeterConfig&lt;/tt&gt;</h2>
 <p>Handles the parsing and retrieval of configuration data for meter widgets.</p>
-<h3><a class="anchor" id="autotoc_md4062"></a>
+<h3><a class="anchor" id="autotoc_md4342"></a>
 &lt;tt&gt;__init__(self, config_data)&lt;/tt&gt;</h3>
 <p>Initializes the configuration object with raw data (typically a dictionary).</p>
 <p><b>Parameters:</b></p><ul>
 <li><code>config_data</code>: Dictionary containing meter properties (colors, sizes, ranges).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4063"></a>
+<h3><a class="anchor" id="autotoc_md4343"></a>
 🎨 Visual Properties</h3>
 <ul>
 <li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a22f45a3cb4f074e609f58ebaeef0ecf9">label(self)</a></code>: Returns the primary text label for the meter.</li>
 <li><code>show_label(self)</code>: Boolean flag to toggle label visibility.</li>
 <li><code>font_size(self)</code>: Returns the font size for labels and scales.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">custom_colour(self)</a></code>: Returns the primary accent color.</li>
+<li><code>custom_colour(self)</code>: Returns the primary accent color.</li>
 <li><code>widget_label_color(self)</code>: Returns the color for the widget's label.</li>
 <li><code>intended_bg(self)</code>: Returns the desired background color.</li>
 <li><code>is_transparent(self)</code>: Boolean flag for background transparency.</li>
@@ -121,10 +121,10 @@ $(document).ready(function(){initNavTree('dc/dde/md_oaGuiElements_2Documentation
 <li><code>scale_label_color(self)</code>: Returns the color for scale numbers.</li>
 <li><code>bezel_shape(self)</code>: Returns the shape definition for the meter bezel.</li>
 <li><code>pointer_colour(self)</code>: Returns the primary needle color.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pointer_colour_2(self)</a></code>: Returns the secondary needle color.</li>
+<li><code>pointer_colour_2(self)</code>: Returns the secondary needle color.</li>
 <li><code>pivot_colour(self)</code>: Returns the color of the needle pivot point.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4064"></a>
+<h3><a class="anchor" id="autotoc_md4344"></a>
 📐 Geometry &amp; Scale</h3>
 <ul>
 <li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa3d6656320f1a7278c0c2c7fdf07617c">size(self)</a></code>: Returns a tuple of (width, height).</li>
@@ -140,45 +140,45 @@ $(document).ready(function(){initNavTree('dc/dde/md_oaGuiElements_2Documentation
 <li><code>mid_range_start(self)</code>: Returns the value where the 'middle range' begins.</li>
 <li><code>anchor_point(self)</code>: Returns the zero-anchor point for the needle.</li>
 <li><code>resting_point(self)</code>: Returns the needle's resting position.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">meter_viewable_angle(self)</a></code>: Returns the total arc angle in degrees.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">meter_center_angle(self)</a></code>: Returns the center offset angle in degrees.</li>
+<li><code>meter_viewable_angle(self)</code>: Returns the total arc angle in degrees.</li>
+<li><code>meter_center_angle(self)</code>: Returns the center offset angle in degrees.</li>
 <li><code>pivot_size(self)</code>: Returns the diameter of the needle pivot.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pivot_crop(self)</a></code>: Boolean flag to crop the pivot area.</li>
+<li><code>pivot_crop(self)</code>: Boolean flag to crop the pivot area.</li>
 <li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a5d76cc2129e79ba1941d2cc2f53b9e8e">mask(self)</a></code>: Returns the path to an image mask for the meter.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4065"></a>
+<h3><a class="anchor" id="autotoc_md4345"></a>
 📈 Ballistics &amp; Timing</h3>
 <ul>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">meter_mode(self)</a></code>: Returns the ballistic mode (e.g., VU, PPM, RMS).</li>
+<li><code>meter_mode(self)</code>: Returns the ballistic mode (e.g., VU, PPM, RMS).</li>
 <li><code>glide_time(self)</code>: Returns the time for the needle to reach a new value.</li>
 <li><code>dwell_time(self)</code>: Returns the time the needle stays at a peak.</li>
 <li><code>hold_time(self)</code>: Returns the duration of the peak hold.</li>
 <li><code>fall_time(self)</code>: Returns the decay time for the needle.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">peak_hold_ms(self)</a></code>: Returns the peak hold duration in milliseconds.</li>
+<li><code>peak_hold_ms(self)</code>: Returns the peak hold duration in milliseconds.</li>
 <li><code>peak_flag(self)</code>: Boolean flag to enable/disable peak indicators.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4066"></a>
+<h3><a class="anchor" id="autotoc_md4346"></a>
 📏 Ticks &amp; Labels</h3>
 <ul>
 <li><code>tick_step(self)</code>: Returns the interval between major ticks.</li>
 <li><code>sub_ticks(self)</code>: Returns the number of sub-ticks between major ticks.</li>
 <li><code>sub_tick_style(self)</code>: Returns the visual style for sub-ticks.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scale_numbers(self)</a></code>: Returns a list of numbers to display on the scale.</li>
+<li><code>scale_numbers(self)</code>: Returns a list of numbers to display on the scale.</li>
 <li><code>ticks_visible(self)</code>: Boolean flag to toggle all ticks.</li>
 <li><code>custom_ticks(self)</code>: Returns a list of custom tick positions.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_overrides(self)</a></code>: Returns a map of value-to-string label overrides.</li>
+<li><code>label_overrides(self)</code>: Returns a map of value-to-string label overrides.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4067"></a>
+<h3><a class="anchor" id="autotoc_md4347"></a>
 🛠️ Offsets &amp; Overrides</h3>
 <ul>
 <li><code>pivot_offset_x(self)</code>, <code>pivot_offset_y(self)</code>: Offsets for the primary pivot.</li>
 <li><code>pivot_offset_x_2(self)</code>, <code>pivot_offset_y_2(self)</code>: Offsets for the secondary pivot.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tick_length_override(self)</a></code>: Custom length for major ticks.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sub_tick_length_override(self)</a></code>: Custom length for sub-ticks.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">arc_radius_offset(self)</a></code>: Radius offset for the scale arc.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tick_radius_offset(self)</a></code>: Radius offset for ticks.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_radius_offset(self)</a></code>: Radius offset for scale labels.</li>
-<li><code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">needle_length_factor_override(self)</a></code>: Manual override for needle length. </li>
+<li><code>tick_length_override(self)</code>: Custom length for major ticks.</li>
+<li><code>sub_tick_length_override(self)</code>: Custom length for sub-ticks.</li>
+<li><code>arc_radius_offset(self)</code>: Radius offset for the scale arc.</li>
+<li><code>tick_radius_offset(self)</code>: Radius offset for ticks.</li>
+<li><code>label_radius_offset(self)</code>: Radius offset for scale labels.</li>
+<li><code>needle_length_factor_override(self)</code>: Manual override for needle length. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

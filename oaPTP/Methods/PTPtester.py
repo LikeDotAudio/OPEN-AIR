@@ -128,7 +128,7 @@ def main():
 
     MQTT_BROKER = args.broker
     MQTT_PORT = args.port
-    MQTT_TOPIC = "OPEN-AIR/System/PTP/Capture"
+    MQTT_TOPIC = "OpenAir/System/PTP/Capture"
 
     mqtt_client = None
     if MQTT_AVAILABLE:

@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('dd/d31/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:47:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1153"></a> </p>
-<h1><a class="anchor" id="autotoc_md1154"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1418"></a> </p>
+<h1><a class="anchor" id="autotoc_md1419"></a>
 Issues</h1>
 <p>This report details the resolution of a critical <code>UnboundLocalError</code> in the asynchronous grid renderer.</p>
-<h1><a class="anchor" id="autotoc_md1155"></a>
+<h1><a class="anchor" id="autotoc_md1420"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1156"></a>
-1. UnboundLocalError in AsyncGridRenderer</h2>
+<h2><a class="anchor" id="autotoc_md1421"></a>
+1. UnboundLocalError in BatchLayoutEngine</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;❌ Synchronized build error in &rsquo;': cannot access local variable 'i' where it is not associated with a value<code>in</code>oaGuiBuildShell/Workers/async_grid_renderer.py<code>.</code></li>
 <li><code> **Root Cause**: In a previous refactoring turn, the initialization of the variables</code>i<code>,</code>c<code>, and</code>r<code>was renamed to</code>field_idx<code>,</code>col_idx<code>, and</code>row_idx<code>, but their usage within the</code>while<code>loop condition and body was not updated. This caused the Python interpreter to raise an</code>UnboundLocalError<code>when attempting to access the old variable names.</code></li>
-<li><code> **Resolution**: Systematically updated all remaining references to</code>i<code>,</code>c<code>, and</code>r<code>within the</code>_process_fields<code>method of</code>AsyncGridRenderer<code>to use the new</code>field_idx<code>,</code>col_idx<code>, and</code>row_idx` names.</li>
+<li><code> **Resolution**: Systematically updated all remaining references to</code>i<code>,</code>c<code>, and</code>r<code>within the</code>_process_fields<code>method of</code>BatchLayoutEngine<code>to use the new</code>field_idx<code>,</code>col_idx<code>, and</code>row_idx` names.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1157"></a>
+<h1><a class="anchor" id="autotoc_md1422"></a>
 Affected Modules</h1>
 <ul>
-<li><code>oaGuiBuildShell</code> (AsyncGridRenderer fix)</li>
+<li><code>oaGuiBuildShell</code> (BatchLayoutEngine fix)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1158"></a>
+<h1><a class="anchor" id="autotoc_md1423"></a>
 Verification</h1>
 <p>The code changes were verified for syntactic correctness and consistency with the surrounding logic. The renaming ensures that the grid rendering loop correctly tracks its position and index without raising scope-related errors. </p>
 </div></div><!-- contents -->

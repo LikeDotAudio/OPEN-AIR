@@ -164,10 +164,9 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   37</span>            patch(<span class="stringliteral">&#39;threading.Thread&#39;</span>)</div>
 <div class="line"><span class="lineno">   38</span>        ]</div>
 <div class="line"><span class="lineno">   39</span>        <span class="keywordflow">for</span> p <span class="keywordflow">in</span> self.patchers:</div>
-<div class="line"><span class="lineno">   40</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.start</a>()</div>
-<div class="line"><span class="lineno">   41</span>            self.addCleanup(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.stop</a>)</div>
+<div class="line"><span class="lineno">   40</span>            p.start()</div>
+<div class="line"><span class="lineno">   41</span>            self.addCleanup(p.stop)</div>
 <div class="line"><span class="lineno">   42</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -218,12 +217,10 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   67</span>        start()</div>
 <div class="line"><span class="lineno">   68</span> </div>
 <div class="line"><span class="lineno">   69</span>        <span class="comment"># CHECK: registration_manager was called</span></div>
-<div class="line"><span class="lineno">   70</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComProtocols.oaComNmos.Entry</a> <span class="keyword">import</span> registration_manager</div>
-<div class="line"><span class="lineno">   71</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">registration_manager.register_all_resources.assert_called</a>()</div>
+<div class="line"><span class="lineno">   70</span>        <span class="keyword">from</span> oaComProtocols.oaComNmos.Entry <span class="keyword">import</span> registration_manager</div>
+<div class="line"><span class="lineno">   71</span>        registration_manager.register_all_resources.assert_called()</div>
 <div class="line"><span class="lineno">   72</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ae4c771a37031ca5d02cd1438b8dda7a7" name="ae4c771a37031ca5d02cd1438b8dda7a7"></a>

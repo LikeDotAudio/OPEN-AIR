@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('d4/dba/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 06:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1114"></a> </p>
-<h1><a class="anchor" id="autotoc_md1115"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1379"></a> </p>
+<h1><a class="anchor" id="autotoc_md1380"></a>
 Issues</h1>
 <p>This report details the systematic resolution of <code>ModuleNotFoundError</code> exceptions related to naming mismatches between Rust crate project names and Python import statements.</p>
-<h1><a class="anchor" id="autotoc_md1116"></a>
+<h1><a class="anchor" id="autotoc_md1381"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1117"></a>
+<h2><a class="anchor" id="autotoc_md1382"></a>
 1. Project Name Mismatch in pyproject.toml</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ModuleNotFoundError: No module named 'oaptpclock_rs&rsquo;<code>and similar errors.</code></li>
 <li><code> **Root Cause**: Several Rust extensions had</code>pyproject.toml<code>files where the</code>[project].name<code>field was either mixed-case or hyphenated (e.g.,</code>oaPTPClock_rs<code>,</code>oaptpclock-rs<code>). This caused</code>pip<code>to register the package under a name that didn't strictly match the lowercase underscored name expected by the Python importer and the project's absolute import standard.</code></li>
 <li><code> **Resolution**: Audited every Rust extension in the codebase and updated their</code>pyproject.toml<code>files to use a standardized lowercase, underscored project name (e.g.,</code>oaptpclock_rs`).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1118"></a>
+<h2><a class="anchor" id="autotoc_md1383"></a>
 2. Missing pyproject.toml Files</h2>
 <ul>
 <li><b>Issue</b>: Installation failures for certain Rust modules during bootstrap.</li>
 <li><b>Root Cause</b>: Modules such as <code>oaDiskFlusher_rs</code>, <code>oaNeedleGeometry_rs</code>, <code>oaOSCCore_rs</code>, and <code>oaVisaScanner_rs</code> were missing <code>pyproject.toml</code> files entirely, preventing <code>maturin develop</code> from correctly registering them as Python packages in the virtual environment.</li>
 <li><b>Resolution</b>: Created standardized <code>pyproject.toml</code> files for all identified missing modules.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1119"></a>
+<h1><a class="anchor" id="autotoc_md1384"></a>
 Standardized Modules</h1>
 <p>The following Rust extension configurations were updated:</p><ul>
 <li><code>oaaes70core_rs</code></li>
@@ -134,7 +134,7 @@ Standardized Modules</h1>
 <li><code>oavisascanner_rs</code></li>
 <li><code>oaptpclock_rs</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1120"></a>
+<h1><a class="anchor" id="autotoc_md1385"></a>
 Verification</h1>
 <p>The fixes ensure that all high-performance Rust components are correctly installed and indexed by the Python package manager, allowing the host application to consistently locate and import them regardless of the launch partition. </p>
 </div></div><!-- contents -->

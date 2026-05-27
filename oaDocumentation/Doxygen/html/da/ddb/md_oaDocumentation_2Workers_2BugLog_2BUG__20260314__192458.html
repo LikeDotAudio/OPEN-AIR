@@ -93,33 +93,33 @@ $(document).ready(function(){initNavTree('da/ddb/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Grid Renderer Layout Expansion Logic Flaw</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1741"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2190"></a></p><ul>
 <li><b>ID</b>: 20260314_192458</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
 <li><b>COMPONENT</b>: <code>oaGuiBuild.async_grid_renderer</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1742"></a>
+<h1><a class="anchor" id="autotoc_md2191"></a>
 Issue</h1>
 <p>Following a fix to enable vertical expansion, a regression was introduced that caused horizontal layout problems in complex, multi-column GUI grids. A naive fix had assumed all layouts were single-row, breaking the grid configuration for any layout that had widgets in multiple rows or columns, preventing them from expanding correctly.</p>
-<h1><a class="anchor" id="autotoc_md1743"></a>
+<h1><a class="anchor" id="autotoc_md2192"></a>
 Root Cause Analysis</h1>
-<p>The root cause was the previous fix itself. To solve a vertical expansion problem, the line <code>parent_frame.grid_rowconfigure(0, weight=1)</code> was added to the <code>render</code> method of the <code>AsyncGridRenderer</code>.</p>
+<p>The root cause was the previous fix itself. To solve a vertical expansion problem, the line <code>parent_frame.grid_rowconfigure(0, weight=1)</code> was added to the <code>render</code> method of the <code>BatchLayoutEngine</code>.</p>
 <p>This had two major flaws:</p><ol type="1">
 <li><b>Single-Row Assumption</b>: It only configured row 0, so any widgets placed in subsequent rows (<code>row=1</code>, <code>row=2</code>, etc.) would not expand vertically.</li>
 <li><b>Unforeseen Interaction</b>: While not immediately obvious, this simplistic approach interfered with the more complex column configuration logic, leading to the horizontal layout issues the user reported.</li>
 </ol>
 <p>The core problem was that the renderer was not holistically assessing the grid structure defined in the JSON before configuring the parent container's rows and columns.</p>
-<h1><a class="anchor" id="autotoc_md1744"></a>
+<h1><a class="anchor" id="autotoc_md2193"></a>
 Resolution</h1>
-<p>A more intelligent and robust grid configuration logic was implemented in the <code>render</code> method of <code><a class="el" href="../../df/de3/async__grid__renderer_8py.html">async_grid_renderer.py</a></code>.</p>
+<p>A more intelligent and robust grid configuration logic was implemented in the <code>render</code> method of <code>async_grid_renderer.py</code>.</p>
 <ol type="1">
 <li><b>Grid Dimension Analysis</b>: Before any configuration, the code now pre-scans the list of widgets (<code>all_fields</code>) to be rendered. It determines the maximum row and column indices that will be used, including accounting for <code>row_span</code> and <code>col_span</code>.</li>
 <li><b>Dynamic Row Configuration</b>: Using the determined maximum row number, the renderer now iterates from <code>0</code> to <code>max_row</code> and calls <code>parent_frame.grid_rowconfigure(i, weight=1)</code> for <b>each row</b>. This ensures all rows that contain content are expandable.</li>
 <li><b>Dynamic Column Configuration</b>: The existing column configuration logic was preserved but is now also based on the dynamically determined grid width, making it more robust.</li>
 </ol>
 <p>This "pre-analysis" step ensures that the parent frame's grid is fully configured to support the entire dimensions of the UI it is about to render, regardless of how many rows or columns are used. It fixes both the vertical expansion issue for multi-row layouts and the subsequent horizontal regression it caused.</p>
-<h1><a class="anchor" id="autotoc_md1745"></a>
+<h1><a class="anchor" id="autotoc_md2194"></a>
 Verification</h1>
 <p>Complex GUI layouts with widgets spanning multiple rows and columns now render correctly. All containers and widgets expand to fill their allocated space both vertically and horizontally, as dictated by the JSON layout files. The UI is now robust against complex grid definitions. </p>
 </div></div><!-- contents -->

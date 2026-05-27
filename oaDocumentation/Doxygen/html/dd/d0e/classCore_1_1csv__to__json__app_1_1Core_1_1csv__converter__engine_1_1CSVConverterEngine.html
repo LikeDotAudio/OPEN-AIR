@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('dd/d0e/classCore_1_1csv__to__json__app
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9c84f9c42a653f1684d3063bc046e05e" id="r_a9c84f9c42a653f1684d3063bc046e05e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d0e/classCore_1_1csv__to__json__app_1_1Core_1_1csv__converter__engine_1_1CSVConverterEngine.html#a9c84f9c42a653f1684d3063bc046e05e">build_hierarchy</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">df</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">header_map</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parent_key</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_headers</a>)</td></tr>
+<tr class="memitem:a9c84f9c42a653f1684d3063bc046e05e" id="r_a9c84f9c42a653f1684d3063bc046e05e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d0e/classCore_1_1csv__to__json__app_1_1Core_1_1csv__converter__engine_1_1CSVConverterEngine.html#a9c84f9c42a653f1684d3063bc046e05e">build_hierarchy</a> (df, header_map, parent_key, original_headers)</td></tr>
 <tr class="separator:a9c84f9c42a653f1684d3063bc046e05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -163,61 +163,58 @@ Supports hierarchical grouping, value-as-key mappings, and recursive nesting.
 <div class="line"><span class="lineno">   21</span>        output_list = []</div>
 <div class="line"><span class="lineno">   22</span> </div>
 <div class="line"><span class="lineno">   23</span>        <span class="comment"># Get all headers nested under the current parent_key</span></div>
-<div class="line"><span class="lineno">   24</span>        current_level_configs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sorted</a>(</div>
-<div class="line"><span class="lineno">   25</span>            [h <span class="keywordflow">for</span> h <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">header_map.values</a>() <span class="keywordflow">if</span> h[<span class="stringliteral">&quot;nested_under&quot;</span>] == parent_key <span class="keywordflow">and</span> h[<span class="stringliteral">&quot;role&quot;</span>] != <span class="stringliteral">&quot;Skip&quot;</span>],</div>
-<div class="line"><span class="lineno">   26</span>            key=<span class="keyword">lambda</span> x: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_headers.index</a>(x[<span class="stringliteral">&quot;original_header&quot;</span>])</div>
+<div class="line"><span class="lineno">   24</span>        current_level_configs = sorted(</div>
+<div class="line"><span class="lineno">   25</span>            [h <span class="keywordflow">for</span> h <span class="keywordflow">in</span> header_map.values() <span class="keywordflow">if</span> h[<span class="stringliteral">&quot;nested_under&quot;</span>] == parent_key <span class="keywordflow">and</span> h[<span class="stringliteral">&quot;role&quot;</span>] != <span class="stringliteral">&quot;Skip&quot;</span>],</div>
+<div class="line"><span class="lineno">   26</span>            key=<span class="keyword">lambda</span> x: original_headers.index(x[<span class="stringliteral">&quot;original_header&quot;</span>])</div>
 <div class="line"><span class="lineno">   27</span>        )</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>        <span class="comment"># Find the first grouping key for this level</span></div>
-<div class="line"><span class="lineno">   30</span>        first_grouping_key_config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">next</a>(</div>
+<div class="line"><span class="lineno">   30</span>        first_grouping_key_config = next(</div>
 <div class="line"><span class="lineno">   31</span>            (h <span class="keywordflow">for</span> h <span class="keywordflow">in</span> current_level_configs <span class="keywordflow">if</span> h[<span class="stringliteral">&quot;role&quot;</span>] <span class="keywordflow">in</span> [<span class="stringliteral">&quot;Hierarchical Key&quot;</span>, <span class="stringliteral">&quot;Value as Key&quot;</span>, <span class="stringliteral">&quot;Key Name and Value&quot;</span>]),</div>
 <div class="line"><span class="lineno">   32</span>            <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   33</span>        )</div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="line"><span class="lineno">   35</span>        <span class="comment"># Base case: No more grouping keys at this level</span></div>
 <div class="line"><span class="lineno">   36</span>        <span class="keywordflow">if</span> first_grouping_key_config <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">   37</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">df.empty</a>:</div>
+<div class="line"><span class="lineno">   37</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> df.empty:</div>
 <div class="line"><span class="lineno">   38</span>                simple_configs = [h <span class="keywordflow">for</span> h <span class="keywordflow">in</span> current_level_configs <span class="keywordflow">if</span> h[<span class="stringliteral">&quot;role&quot;</span>] <span class="keywordflow">in</span> [<span class="stringliteral">&quot;Simple Value&quot;</span>, <span class="stringliteral">&quot;Sub Key&quot;</span>]]</div>
-<div class="line"><span class="lineno">   39</span>                <span class="keywordflow">for</span> _, row <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">df.iterrows</a>():</div>
+<div class="line"><span class="lineno">   39</span>                <span class="keywordflow">for</span> _, row <span class="keywordflow">in</span> df.iterrows():</div>
 <div class="line"><span class="lineno">   40</span>                    node = {}</div>
 <div class="line"><span class="lineno">   41</span>                    <span class="keywordflow">for</span> h_cfg <span class="keywordflow">in</span> simple_configs:</div>
 <div class="line"><span class="lineno">   42</span>                        value = row[h_cfg[<span class="stringliteral">&quot;original_header&quot;</span>]]</div>
-<div class="line"><span class="lineno">   43</span>                        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pd.notna</a>(value) <span class="keywordflow">and</span> value != <span class="stringliteral">&quot;&quot;</span>:</div>
-<div class="line"><span class="lineno">   44</span>                            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, bool): value = str(value).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</div>
+<div class="line"><span class="lineno">   43</span>                        <span class="keywordflow">if</span> pd.notna(value) <span class="keywordflow">and</span> value != <span class="stringliteral">&quot;&quot;</span>:</div>
+<div class="line"><span class="lineno">   44</span>                            <span class="keywordflow">if</span> isinstance(value, bool): value = str(value).lower()</div>
 <div class="line"><span class="lineno">   45</span>                            node[h_cfg[<span class="stringliteral">&quot;json_key&quot;</span>]] = value</div>
-<div class="line"><span class="lineno">   46</span>                    <span class="keywordflow">if</span> node: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">output_list.append</a>(node)</div>
+<div class="line"><span class="lineno">   46</span>                    <span class="keywordflow">if</span> node: output_list.append(node)</div>
 <div class="line"><span class="lineno">   47</span>            <span class="keywordflow">return</span> output_list</div>
 <div class="line"><span class="lineno">   48</span> </div>
 <div class="line"><span class="lineno">   49</span>        first_grouping_key = first_grouping_key_config[<span class="stringliteral">&quot;original_header&quot;</span>]</div>
-<div class="line"><span class="lineno">   50</span>        grouped_df = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">df.groupby</a>(first_grouping_key, sort=<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   50</span>        grouped_df = df.groupby(first_grouping_key, sort=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>        <span class="keywordflow">for</span> key_value, group <span class="keywordflow">in</span> grouped_df:</div>
 <div class="line"><span class="lineno">   53</span>            node = {}</div>
 <div class="line"><span class="lineno">   54</span>            <span class="keywordflow">if</span> first_grouping_key_config[<span class="stringliteral">&quot;role&quot;</span>] == <span class="stringliteral">&quot;Value as Key&quot;</span>:</div>
-<div class="line"><span class="lineno">   55</span>                children = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">CSVConverterEngine.build_hierarchy</a>(group, header_map, first_grouping_key, original_headers)</div>
+<div class="line"><span class="lineno">   55</span>                children = CSVConverterEngine.build_hierarchy(group, header_map, first_grouping_key, original_headers)</div>
 <div class="line"><span class="lineno">   56</span>                merged = {}</div>
-<div class="line"><span class="lineno">   57</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(children, list):</div>
-<div class="line"><span class="lineno">   58</span>                    <span class="keywordflow">for</span> c <span class="keywordflow">in</span> children: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">merged.update</a>(c)</div>
-<div class="line"><span class="lineno">   59</span>                <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(children, dict): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">merged.update</a>(children)</div>
+<div class="line"><span class="lineno">   57</span>                <span class="keywordflow">if</span> isinstance(children, list):</div>
+<div class="line"><span class="lineno">   58</span>                    <span class="keywordflow">for</span> c <span class="keywordflow">in</span> children: merged.update(c)</div>
+<div class="line"><span class="lineno">   59</span>                <span class="keywordflow">elif</span> isinstance(children, dict): merged.update(children)</div>
 <div class="line"><span class="lineno">   60</span>                node[key_value] = merged</div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>            <span class="keywordflow">elif</span> first_grouping_key_config[<span class="stringliteral">&quot;role&quot;</span>] == <span class="stringliteral">&quot;Hierarchical Key&quot;</span>:</div>
-<div class="line"><span class="lineno">   63</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(key_value, bool): key_value = str(key_value).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</div>
+<div class="line"><span class="lineno">   63</span>                <span class="keywordflow">if</span> isinstance(key_value, bool): key_value = str(key_value).lower()</div>
 <div class="line"><span class="lineno">   64</span>                node[first_grouping_key_config[<span class="stringliteral">&quot;json_key&quot;</span>]] = key_value</div>
-<div class="line"><span class="lineno">   65</span>                node[first_grouping_key_config[<span class="stringliteral">&quot;part_name&quot;</span>]] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">CSVConverterEngine.build_hierarchy</a>(group, header_map, first_grouping_key, original_headers)</div>
+<div class="line"><span class="lineno">   65</span>                node[first_grouping_key_config[<span class="stringliteral">&quot;part_name&quot;</span>]] = CSVConverterEngine.build_hierarchy(group, header_map, first_grouping_key, original_headers)</div>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>            <span class="keywordflow">elif</span> first_grouping_key_config[<span class="stringliteral">&quot;role&quot;</span>] == <span class="stringliteral">&quot;Key Name and Value&quot;</span>:</div>
 <div class="line"><span class="lineno">   68</span>                node[first_grouping_key_config[<span class="stringliteral">&quot;json_key&quot;</span>]] = {</div>
 <div class="line"><span class="lineno">   69</span>                    first_grouping_key_config[<span class="stringliteral">&quot;part_name&quot;</span>]: key_value,</div>
-<div class="line"><span class="lineno">   70</span>                    <span class="stringliteral">&quot;parts&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">CSVConverterEngine.build_hierarchy</a>(group, header_map, first_grouping_key, original_headers)</div>
+<div class="line"><span class="lineno">   70</span>                    <span class="stringliteral">&quot;parts&quot;</span>: CSVConverterEngine.build_hierarchy(group, header_map, first_grouping_key, original_headers)</div>
 <div class="line"><span class="lineno">   71</span>                }</div>
-<div class="line"><span class="lineno">   72</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">output_list.append</a>(node)</div>
+<div class="line"><span class="lineno">   72</span>            output_list.append(node)</div>
 <div class="line"><span class="lineno">   73</span> </div>
 <div class="line"><span class="lineno">   74</span>        <span class="keywordflow">return</span> output_list</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d8/dc1/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG_20260409_144500.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1341"></a></p>
-<h1><a class="anchor" id="autotoc_md1342"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1606"></a></p>
+<h1><a class="anchor" id="autotoc_md1607"></a>
 Author: Gemini (Collaborator)</h1>
-<h1><a class="anchor" id="autotoc_md1343"></a>
+<h1><a class="anchor" id="autotoc_md1608"></a>
 Version: 1.0.0</h1>
-<h2><a class="anchor" id="autotoc_md1344"></a>
+<h2><a class="anchor" id="autotoc_md1609"></a>
 Issue</h2>
 <ol type="1">
 <li>&lsquo;uiElements: ScaleDrawer fallback to Python: No module named 'oaproceduralart_rs&rsquo;<code>. 2.</code>[WebSocketTransport] WebSocket error: [Errno 111] Connection refused`.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1345"></a>
+<h2><a class="anchor" id="autotoc_md1610"></a>
 Root Cause</h2>
 <ol type="1">
 <li><b>ScaleDrawer</b>: The <code>compiler_hook.py</code> and dependent files were attempting to import <code>oaproceduralart_rs.oaproceduralart_rs</code> instead of the top-level <code>oaproceduralart_rs</code> module specified in <code>Cargo.toml</code>.</li>
 <li><b>WebSocketTransport</b>: The <code>connect</code> method had a hardcoded <code>time.sleep(1)</code> and didn't robustly check for connection failure before returning. It also used <code>print</code> instead of the system <code>matrix_log</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1346"></a>
+<h2><a class="anchor" id="autotoc_md1611"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>ScaleDrawer Fix</b>:<ul>
 <li>Updated <code>oaGuiElements/Methods/oaProceduralArt_rs/compiler_hook.py</code> to use correct module name.</li>
-<li>Updated <code><a class="el" href="../../d1/d8f/metering_2meter__needle_2Core_2scale_8py.html">oaGuiElements/Core/metering/meter_needle/Core/scale.py</a></code> and <code><a class="el" href="../../d8/def/Core_2utils_2panel__screw_2screw__generator_8py.html">oaGuiElements/Core/utils/panel_screw/screw_generator.py</a></code> imports.</li>
+<li>Updated <code><a class="el" href="../../d1/d8f/metering_2meter__needle_2Core_2scale_8py.html">oaGuiElements/Core/metering/meter_needle/Core/scale.py</a></code> and <code>oaGuiElements/Core/utils/panel_screw/screw_generator.py</code> imports.</li>
 </ul>
 </li>
 <li><b>WebSocketTransport Fix</b>:<ul>
@@ -124,7 +124,7 @@ Resolution</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1347"></a>
+<h2><a class="anchor" id="autotoc_md1612"></a>
 Verification Evidence</h2>
 <ul>
 <li>Code reviewed for correct module naming and singleton access.</li>

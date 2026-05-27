@@ -43,7 +43,7 @@ class YakReceiverManager:
     Constraints:
         - Operates within the UI Partition.
         - Depends on 'YakTranslator' for context retrieval.
-        - Assumes 'OPEN-AIR/Proxy/Rx_Outbox' topic availability.
+        - Assumes 'OpenAir/Proxy/Rx_Outbox' topic availability.
     """
 
     def __init__(self, mqtt_connection_manager, subscriber_router,
@@ -71,7 +71,7 @@ class YakReceiverManager:
 
     def _setup_mqtt_subscriptions(self):
         """Registers the primary Proxy outbox filter for instrument responses."""
-        topic = "OPEN-AIR/Proxy/Rx_Outbox"
+        topic = "OpenAir/Proxy/Rx_Outbox"
         self.subscriber_router.subscribe_to_topic(topic, self._on_rx_outbox_message)
         matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
                    f"✅ [INIT] YakRxManager listening on '{topic}'",
@@ -129,7 +129,7 @@ class YakReceiverManager:
             response: The raw string response from the instrument.
 
         Side Effects:
-            - Publishes one or more MQTT messages to 'OPEN-AIR/yak/.../value'.
+            - Publishes one or more MQTT messages to 'OpenAir/yak/.../value'.
             - Updates the StateCache if available.
         """
         outputs = command_details.get("Outputs", {})
@@ -154,7 +154,7 @@ class YakReceiverManager:
             return
 
         # Construct the canonical YAK output topic hierarchy.
-        base_output_topic = "/".join(["OPEN-AIR", "yak"] + path_parts[:4] + ["Outputs"])
+        base_output_topic = "/".join(["OpenAir", "yak"] + path_parts[:4] + ["Outputs"])
 
         for i, key in enumerate(output_keys):
             raw_value = response_parts[i]

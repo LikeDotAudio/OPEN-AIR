@@ -1,6 +1,6 @@
 var classManagers_1_1wysiwyg__editor_1_1WysiwygEditor =
 [
-    [ "__init__", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#afd4bafdcd5c11545b767d50bd136040c", null ],
+    [ "__init__", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#af5f39d32f5e67010928c6dd441265727", null ],
     [ "_initialize_window", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a3b25eac0b610308550fcd0b84afd03d3", null ],
     [ "_is_alive", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a9ce59163fc125e7c0d20dd176d764e03", null ],
     [ "_on_changes_pending", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a0efceea50f828ed2e193ab662205c31a", null ],
@@ -13,7 +13,7 @@ var classManagers_1_1wysiwyg__editor_1_1WysiwygEditor =
     [ "abandon_changes", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#af827f842c8a871581bd7888cd4837fd5", null ],
     [ "change_language", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a2aa8aaf2096fd0dfa43574038fb06d20", null ],
     [ "close_window", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#af8f2b5c67b11d7b282ccef5f4a79a9ee", null ],
-    [ "launch", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a46131f08a1a21401c92ef56623304773", null ],
+    [ "launch", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#ac30d38336706b01b13f66dd2d4e14ba7", null ],
     [ "new_workspace", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a6d18237d8be225c5efb021c9d9816260", null ],
     [ "open_workspace", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a8b49c3b9e63ecd77ecf5426585d43dcc", null ],
     [ "save_workspace", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a1529dfe3831384e8e5b1ef0c1f20ff6d", null ],
@@ -26,5 +26,7 @@ var classManagers_1_1wysiwyg__editor_1_1WysiwygEditor =
     [ "on_save", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a31267f1290a2e0e5df88efc31f90250c", null ],
     [ "on_test", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#afd9db90c6e03a61912aa74cb8ed5afa4", null ],
     [ "parent", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#aac2a34cf4382ae2562f78195975a2de8", null ],
+    [ "state_mirror_engine", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#ae56be0c268cf0835e8e1b3a92d17ed12", null ],
+    [ "subscriber_router", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a867dcc91c2a28dc7b961910c4a8cea14", null ],
     [ "window", "df/d10/classManagers_1_1wysiwyg__editor_1_1WysiwygEditor.html#a03d7d762b267dda99dd414c1fab7b788", null ]
 ];

@@ -5,7 +5,7 @@ var class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__C
     [ "_init_ui", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a3d00b052c4aace63a2bf04afbfb7858b", null ],
     [ "_on_tab_selected", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a5aaa3b26028f0cae0b284e8d6484ca29", null ],
     [ "_construct_dynamic_gui", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a0d3e1290d24069250865d1d53391e60a", null ],
-    [ "config_data", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#ac04d50d9f73f735578f616237d0666b2", null ],
+    [ "configuration", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a88f9302e1d98d88f373def99a1fbb9e9", null ],
     [ "dynamic_gui", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#ab5c45667c67407d527b4125ec43bceb5", null ],
     [ "json_path", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a41d6e63015e0ebbaf7a982a2c7e6ccd2", null ],
     [ "state_mirror_engine", "d9/d5f/class9__Zoo_1_14__graphing_1_11__XY__Graphs_1_12__Graphing__2_1_1Graphing__Cont_1_1GenericInstrumentGui.html#a4cbbd5436778e194f99fea7301b237bc", null ],

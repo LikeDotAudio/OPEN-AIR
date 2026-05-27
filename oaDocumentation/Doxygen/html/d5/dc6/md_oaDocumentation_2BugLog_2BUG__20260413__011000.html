@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d5/dc6/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: 20260413_011000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1372"></a> </p>
-<h1><a class="anchor" id="autotoc_md1373"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1637"></a> </p>
+<h1><a class="anchor" id="autotoc_md1638"></a>
 Issue</h1>
 <p>The User <a class="el" href="../../da/d9a/namespaceInterface.html">Interface</a> and <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> services failed to start due to a &lsquo;ModuleNotFoundError: No module named 'oaRustCore.oa_fast_api_rs&rsquo;<code>. This occurred because the</code>oaComREST` module had a mandatory dependency on a missing Rust binary.</p>
-<h1><a class="anchor" id="autotoc_md1374"></a>
+<h1><a class="anchor" id="autotoc_md1639"></a>
 Root Cause</h1>
 <ul>
 <li><code><a class="el" href="../../d4/d21/rest__server_8py.html">oaComProtocols/oaComREST/Methods/rest_server.py</a></code>: Attempted an absolute import of <code>RustRestServer</code> from <code>oaRustCore</code> without a <code>try...except</code> fallback.</li>
 <li>The <code>RESTManager</code> initialization (triggered by the <code><a class="el" href="../../da/dfd/launcher_8py.html">launcher.py</a></code> worker) caused a cascading failure across the <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> and UI partitions.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1375"></a>
+<h1><a class="anchor" id="autotoc_md1640"></a>
 Resolution</h1>
 <ul>
 <li>Modified <code><a class="el" href="../../d4/d21/rest__server_8py.html">oaComProtocols/oaComREST/Methods/rest_server.py</a></code> to include a <code>HAS_RUST_REST</code> flag.</li>
 <li>Implemented a non-crashing <code><a class="el" href="../../d3/d07/oa__fast__api__rs_2mod_8rs.html#d4/d21/structRestServer">RestServer</a></code> class that logs warnings if the Rust binary is missing instead of raising a fatal exception.</li>
 <li>Ensured all methods (<code>add_route</code>, <code>start</code>) handle the missing <code>_server</code> instance gracefully.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1376"></a>
+<h1><a class="anchor" id="autotoc_md1641"></a>
 Verification</h1>
 <ul>
 <li>Reproduction script <code>.gemini/TempScripts/repro_rest_bug.py</code> confirmed that <code><a class="el" href="../../d3/d07/oa__fast__api__rs_2mod_8rs.html#d4/d21/structRestServer">RestServer</a></code> can now be imported and instantiated even when the Rust module is absent.</li>

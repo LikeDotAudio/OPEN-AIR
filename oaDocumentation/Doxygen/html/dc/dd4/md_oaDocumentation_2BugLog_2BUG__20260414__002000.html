@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('dc/dd4/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">🏷️ BUG REPORT: [GUI-NMOS] Threading Lifecycle Mismatch (RuntimeError)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1418"></a> <b>ID</b>: BUG_20260414_002000 <b>Priority</b>: 1 <b>Status</b>: RESOLVED</p>
-<h1><a class="anchor" id="autotoc_md1419"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1683"></a> <b>ID</b>: BUG_20260414_002000 <b>Priority</b>: 1 <b>Status</b>: RESOLVED</p>
+<h1><a class="anchor" id="autotoc_md1684"></a>
 📖 Description</h1>
 <p>Background monitor threads in the NMOS Connection and WebSocket GUI components were calling <code>self.after()</code> before the Tkinter main loop started or after the widget was destroyed, causing a <code>RuntimeError: main thread is not in main loop</code>.</p>
-<h1><a class="anchor" id="autotoc_md1420"></a>
+<h1><a class="anchor" id="autotoc_md1685"></a>
 🛠️ Root Cause</h1>
 <p>Race condition between background polling threads and the Tkinter event loop lifecycle.</p>
-<h1><a class="anchor" id="autotoc_md1421"></a>
+<h1><a class="anchor" id="autotoc_md1686"></a>
 🚀 Fix Action</h1>
 <ol type="1">
-<li>Added <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code> checks before scheduling UI updates.</li>
+<li>Added <code>winfo_exists()</code> checks before scheduling UI updates.</li>
 <li>Wrapped <code>self.after()</code> calls in <code>try/except</code> blocks to catch <code>RuntimeError</code> and <code>TclError</code>.</li>
 <li>Updated monitor loops to terminate gracefully if the UI is no longer available.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1422"></a>
+<h1><a class="anchor" id="autotoc_md1687"></a>
 ✅ Verification</h1>
 <p>Verified syntax and compilation. The guards prevent the reported crash during module initialization and shutdown. </p>
 </div></div><!-- contents -->

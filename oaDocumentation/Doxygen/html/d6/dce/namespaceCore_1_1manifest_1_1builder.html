@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d6/dce/namespaceCore_1_1manifest_1_1bu
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae74dfcd6eb06c1963db73af3d3fc5311" id="r_ae74dfcd6eb06c1963db73af3d3fc5311"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dce/namespaceCore_1_1manifest_1_1builder.html#ae74dfcd6eb06c1963db73af3d3fc5311">create_manifest</a> (Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, str topic, str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2090a647eea4ba8be07c28e6d52e97de">source</a>=&quot;EXTERNAL&quot;, dict <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a9cfcb724bbf4bae5f97bc17cf58cf522">metadata</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:ae74dfcd6eb06c1963db73af3d3fc5311" id="r_ae74dfcd6eb06c1963db73af3d3fc5311"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dce/namespaceCore_1_1manifest_1_1builder.html#ae74dfcd6eb06c1963db73af3d3fc5311">create_manifest</a> (Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, str topic, str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2090a647eea4ba8be07c28e6d52e97de">source</a>=&quot;EXTERNAL&quot;, dict <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a9cfcb724bbf4bae5f97bc17cf58cf522">metadata</a>=None)</td></tr>
 <tr class="separator:ae74dfcd6eb06c1963db73af3d3fc5311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -138,7 +138,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">dict &#160;</td>
-          <td class="paramname"><em>metadata</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>metadata</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -158,7 +158,7 @@ Inputs:
 Outputs:
     Dict: The formatted manifest.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html#l00024">24</a> of file <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html">builder.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/df7/builder_8py_source.html#l00024">24</a> of file <a class="el" href="../../d2/df7/builder_8py_source.html">builder.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>) -&gt; dict:</div>
 <div class="line"><span class="lineno">   30</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   31</span><span class="stringliteral">    Constructs a standardized Splinker JSON manifest.</span></div>
@@ -173,46 +173,43 @@ Outputs:
 <div class="line"><span class="lineno">   40</span><span class="stringliteral">        Dict: The formatted manifest.</span></div>
 <div class="line"><span class="lineno">   41</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   42</span>    <span class="keywordflow">if</span> HAS_RUST_MANIFEST:</div>
-<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">return</span> dict(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rust_create_manifest</a>(</div>
+<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">return</span> dict(rust_create_manifest(</div>
 <div class="line"><span class="lineno">   44</span>            value, topic, source, metadata,</div>
-<div class="line"><span class="lineno">   45</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.PARTITION_ID</a></div>
+<div class="line"><span class="lineno">   45</span>            app_constants.FULL_INSTANCE_ID, app_constants.PARTITION_ID</div>
 <div class="line"><span class="lineno">   46</span>        ))</div>
 <div class="line"><span class="lineno">   47</span> </div>
-<div class="line"><span class="lineno">   48</span>    now = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.time</a>()</div>
+<div class="line"><span class="lineno">   48</span>    now = time.time()</div>
 <div class="line"><span class="lineno">   49</span> </div>
 <div class="line"><span class="lineno">   50</span>    <span class="comment"># ⚡ MODULAR LOGIC: Resolve origin_source based on system state</span></div>
 <div class="line"><span class="lineno">   51</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;GUI&quot;</span>:</div>
-<div class="line"><span class="lineno">   52</span>        origin = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a></div>
+<div class="line"><span class="lineno">   52</span>        origin = app_constants.FULL_INSTANCE_ID</div>
 <div class="line"><span class="lineno">   53</span>    <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   54</span>        origin = source</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    payload = {</div>
 <div class="line"><span class="lineno">   57</span>        <span class="comment"># ⚡ THE IMMUTABLE MANIFEST</span></div>
 <div class="line"><span class="lineno">   58</span>        <span class="stringliteral">&quot;origin_source&quot;</span>: origin,</div>
-<div class="line"><span class="lineno">   59</span>        <span class="stringliteral">&quot;message_guid&quot;</span>: str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">uuid.uuid4</a>()),</div>
+<div class="line"><span class="lineno">   59</span>        <span class="stringliteral">&quot;message_guid&quot;</span>: str(uuid.uuid4()),</div>
 <div class="line"><span class="lineno">   60</span>        <span class="stringliteral">&quot;timestamp&quot;</span>: now,</div>
 <div class="line"><span class="lineno">   61</span>        <span class="stringliteral">&quot;target_parameter&quot;</span>: topic,</div>
-<div class="line"><span class="lineno">   62</span>        <span class="stringliteral">&quot;value&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a>(value) <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (int, float)) <span class="keywordflow">else</span> value,</div>
-<div class="line"><span class="lineno">   63</span>        <span class="stringliteral">&quot;is_locked&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">metadata.get</a>(<span class="stringliteral">&quot;LOCKED&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">if</span> metadata <span class="keywordflow">else</span> <span class="keyword">False</span>,</div>
-<div class="line"><span class="lineno">   64</span>        <span class="stringliteral">&quot;is_settled&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">metadata.get</a>(<span class="stringliteral">&quot;SETTLED&quot;</span>, <span class="keyword">True</span>) <span class="keywordflow">if</span> metadata <span class="keywordflow">else</span> <span class="keyword">True</span>,</div>
+<div class="line"><span class="lineno">   62</span>        <span class="stringliteral">&quot;value&quot;</span>: float(value) <span class="keywordflow">if</span> isinstance(value, (int, float)) <span class="keywordflow">else</span> value,</div>
+<div class="line"><span class="lineno">   63</span>        <span class="stringliteral">&quot;is_locked&quot;</span>: metadata.get(<span class="stringliteral">&quot;LOCKED&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">if</span> metadata <span class="keywordflow">else</span> <span class="keyword">False</span>,</div>
+<div class="line"><span class="lineno">   64</span>        <span class="stringliteral">&quot;is_settled&quot;</span>: metadata.get(<span class="stringliteral">&quot;SETTLED&quot;</span>, <span class="keyword">True</span>) <span class="keywordflow">if</span> metadata <span class="keywordflow">else</span> <span class="keyword">True</span>,</div>
 <div class="line"><span class="lineno">   65</span> </div>
 <div class="line"><span class="lineno">   66</span>        <span class="comment"># Backward Compatibility Layer</span></div>
 <div class="line"><span class="lineno">   67</span>        <span class="stringliteral">&quot;value&quot;</span>: value,</div>
 <div class="line"><span class="lineno">   68</span>        <span class="stringliteral">&quot;source&quot;</span>: source,</div>
 <div class="line"><span class="lineno">   69</span>        <span class="stringliteral">&quot;timestamp&quot;</span>: now,</div>
-<div class="line"><span class="lineno">   70</span>        <span class="stringliteral">&quot;GUID&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a>,</div>
-<div class="line"><span class="lineno">   71</span>        <span class="stringliteral">&quot;partition&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.PARTITION_ID</a>,</div>
-<div class="line"><span class="lineno">   72</span>        <span class="stringliteral">&quot;full_id&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a></div>
+<div class="line"><span class="lineno">   70</span>        <span class="stringliteral">&quot;GUID&quot;</span>: app_constants.FULL_INSTANCE_ID,</div>
+<div class="line"><span class="lineno">   71</span>        <span class="stringliteral">&quot;partition&quot;</span>: app_constants.PARTITION_ID,</div>
+<div class="line"><span class="lineno">   72</span>        <span class="stringliteral">&quot;full_id&quot;</span>: app_constants.FULL_INSTANCE_ID</div>
 <div class="line"><span class="lineno">   73</span>    }</div>
 <div class="line"><span class="lineno">   74</span> </div>
 <div class="line"><span class="lineno">   75</span>    <span class="keywordflow">if</span> metadata:</div>
-<div class="line"><span class="lineno">   76</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.update</a>(metadata)</div>
+<div class="line"><span class="lineno">   76</span>        payload.update(metadata)</div>
 <div class="line"><span class="lineno">   77</span> </div>
 <div class="line"><span class="lineno">   78</span>    <span class="keywordflow">return</span> payload</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -228,7 +225,7 @@ Outputs:
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html#l00014">14</a> of file <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html">builder.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/df7/builder_8py_source.html#l00014">14</a> of file <a class="el" href="../../d2/df7/builder_8py_source.html">builder.py</a>.</p>
 
 </div>
 </div>
@@ -244,7 +241,7 @@ Outputs:
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html#l00019">19</a> of file <a class="el" href="../../d5/d67/oaStateCache_2Core_2manifest_2builder_8py_source.html">builder.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/df7/builder_8py_source.html#l00019">19</a> of file <a class="el" href="../../d2/df7/builder_8py_source.html">builder.py</a>.</p>
 
 </div>
 </div>

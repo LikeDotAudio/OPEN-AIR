@@ -126,7 +126,7 @@ class Monitor:
         telemetry_message = {
             "timestamp": now,
             "source": "SYSTEM",
-            "topic": "OPEN-AIR/System/Monitor/Telemetry",
+            "topic": "OpenAir/System/Monitor/Telemetry",
             "value": self._telemetry.copy(),
             "meta": {"message_type": "TELEMETRY", "is_settled": True}
         }

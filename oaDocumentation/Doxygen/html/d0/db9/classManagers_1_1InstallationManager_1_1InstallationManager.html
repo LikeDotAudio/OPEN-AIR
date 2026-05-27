@@ -110,7 +110,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac617505475dfdb19cdb8230b780c04b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bfae7ace9ffa5f1e95708cd53e7826e" id="r_a5bfae7ace9ffa5f1e95708cd53e7826e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#a5bfae7ace9ffa5f1e95708cd53e7826e">perform_desktop_setup</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a5bfae7ace9ffa5f1e95708cd53e7826e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac69c7c49c4d82bfd16e6a133de9f519c" id="r_ac69c7c49c4d82bfd16e6a133de9f519c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#ac69c7c49c4d82bfd16e6a133de9f519c">perform_full_installation</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">log_lines_getter</a>)</td></tr>
+<tr class="memitem:ac69c7c49c4d82bfd16e6a133de9f519c" id="r_ac69c7c49c4d82bfd16e6a133de9f519c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#ac69c7c49c4d82bfd16e6a133de9f519c">perform_full_installation</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, log_lines_getter)</td></tr>
 <tr class="separator:ac69c7c49c4d82bfd16e6a133de9f519c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4002d2b6f5d3e27d0377053af797ad2" id="r_ac4002d2b6f5d3e27d0377053af797ad2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#ac4002d2b6f5d3e27d0377053af797ad2">perform_infra_setup</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:ac4002d2b6f5d3e27d0377053af797ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,7 +130,7 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a365dad4cb689163feb37677c5e5239c7" id="r_a365dad4cb689163feb37677c5e5239c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#a365dad4cb689163feb37677c5e5239c7">_run_in_thread</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task_func</a>)</td></tr>
+<tr class="memitem:a365dad4cb689163feb37677c5e5239c7" id="r_a365dad4cb689163feb37677c5e5239c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html#a365dad4cb689163feb37677c5e5239c7">_run_in_thread</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, task_func)</td></tr>
 <tr class="separator:a365dad4cb689163feb37677c5e5239c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -225,13 +225,10 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00025">25</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   25</span>    <span class="keyword">def </span>_run_in_thread(self, task_func):</div>
-<div class="line"><span class="lineno">   26</span>        thread = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread</a>(target=task_func, daemon=<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">   27</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">thread.start</a>()</div>
+<div class="line"><span class="lineno">   26</span>        thread = threading.Thread(target=task_func, daemon=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   27</span>        thread.start()</div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00053">Managers.InstallationManager.InstallationManager.perform_clean_install()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00029">Managers.InstallationManager.InstallationManager.perform_dep_check()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00085">Managers.InstallationManager.InstallationManager.perform_desktop_setup()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00105">Managers.InstallationManager.InstallationManager.perform_full_installation()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00075">Managers.InstallationManager.InstallationManager.perform_infra_setup()</a>, and <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00094">Managers.InstallationManager.InstallationManager.perform_install_validation()</a>.</p>
 
 </div>
@@ -254,7 +251,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00053">53</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   53</span>    <span class="keyword">def </span>perform_clean_install(self):</div>
-<div class="line"><span class="lineno">   54</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">   54</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">   55</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> self._clean_confirm:</div>
 <div class="line"><span class="lineno">   56</span>                self.log_callback(<span class="stringliteral">&quot;🚨 [CRITICAL] YOU HAVE REQUESTED A CLEAN INSTALLATION!&quot;</span>)</div>
 <div class="line"><span class="lineno">   57</span>                self.log_callback(<span class="stringliteral">&quot;🛑 [WARNING] This will UNINSTALL and RE-INSTALL all elite packages.&quot;</span>)</div>
@@ -300,7 +297,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00029">29</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    <span class="keyword">def </span>perform_dep_check(self):</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">   31</span>            self.log_callback(<span class="stringliteral">&quot;🕵️ [MISSION] Initiating deep scan for legendary dependencies...&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span>            success = self.setup_manager.check_dependencies(self.log_callback, auto_install=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   33</span> </div>
@@ -346,7 +343,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00085">85</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   85</span>    <span class="keyword">def </span>perform_desktop_setup(self):</div>
-<div class="line"><span class="lineno">   86</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">   87</span>            self.log_callback(<span class="stringliteral">&quot;🚀 [MISSION] Integrating with the master desktop environment...&quot;</span>)</div>
 <div class="line"><span class="lineno">   88</span>            success = self.setup_manager.setup_desktop(self.log_callback)</div>
 <div class="line"><span class="lineno">   89</span>            <span class="keywordflow">if</span> success:</div>
@@ -387,7 +384,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00105">105</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  105</span>    <span class="keyword">def </span>perform_full_installation(self, log_lines_getter):</div>
-<div class="line"><span class="lineno">  106</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">  106</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">  107</span>            self.log_callback(<span class="stringliteral">&quot;🔥 [IGNITION] Starting FULL INSTALLATION process...&quot;</span>)</div>
 <div class="line"><span class="lineno">  108</span>            success = self.setup_manager.check_dependencies(self.log_callback, auto_install=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">  109</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> success:</div>
@@ -399,9 +396,9 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  115</span>                snmp_ok = self.setup_manager.setup_snmp(self.log_callback)</div>
 <div class="line"><span class="lineno">  116</span>                <span class="keywordflow">if</span> mqtt_ok <span class="keywordflow">and</span> snmp_ok:</div>
 <div class="line"><span class="lineno">  117</span>                    <span class="keywordflow">if</span> self.setup_manager.setup_desktop(self.log_callback):</div>
-<div class="line"><span class="lineno">  118</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">run_installation_tests</a>(self.log_callback)</div>
+<div class="line"><span class="lineno">  118</span>                        run_installation_tests(self.log_callback)</div>
 <div class="line"><span class="lineno">  119</span>                        self.log_callback(<span class="stringliteral">&quot;🏆 [LEGENDARY] FULL INSTALLATION COMPLETE! The system is magnificent.&quot;</span>)</div>
-<div class="line"><span class="lineno">  120</span>                        log_content = <span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">log_lines_getter</a>())</div>
+<div class="line"><span class="lineno">  120</span>                        log_content = <span class="stringliteral">&quot;\n&quot;</span>.join(log_lines_getter())</div>
 <div class="line"><span class="lineno">  121</span>                        <span class="keywordflow">if</span> self.installation_log_writer.write_log(log_content):</div>
 <div class="line"><span class="lineno">  122</span>                            self.log_callback(f<span class="stringliteral">&quot;💾 [SECURE] Log archived at: {self.installation_log_writer.get_log_path()}&quot;</span>)</div>
 <div class="line"><span class="lineno">  123</span>                    <span class="keywordflow">else</span>:</div>
@@ -413,7 +410,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  129</span> </div>
 <div class="line"><span class="lineno">  130</span>        self._run_in_thread(task)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00025">Managers.InstallationManager.InstallationManager._run_in_thread()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00021">Managers.InstallationManager.InstallationManager.installation_log_writer</a>, <a class="el" href="../../d3/de3/runTask_8py_source.html#l00017">Workers.runTask.TaskWorker.log_callback</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00019">Managers.InstallationManager.InstallationManager.log_callback</a>, <a class="el" href="../../db/d36/MaintenanceManager_8py_source.html#l00024">Managers.MaintenanceManager.MaintenanceManager.log_callback</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00020">Managers.InstallationManager.InstallationManager.setup_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00025">Managers.InstallationManager.InstallationManager._run_in_thread()</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00021">Managers.InstallationManager.InstallationManager.installation_log_writer</a>, <a class="el" href="../../d3/de3/runTask_8py_source.html#l00017">Workers.runTask.TaskWorker.log_callback</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00019">Managers.InstallationManager.InstallationManager.log_callback</a>, <a class="el" href="../../db/d36/MaintenanceManager_8py_source.html#l00024">Managers.MaintenanceManager.MaintenanceManager.log_callback</a>, and <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00020">Managers.InstallationManager.InstallationManager.setup_manager</a>.</p>
 
 </div>
 </div>
@@ -435,7 +432,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00075">75</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   75</span>    <span class="keyword">def </span>perform_infra_setup(self):</div>
-<div class="line"><span class="lineno">   76</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">   76</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">   77</span>            self.log_callback(<span class="stringliteral">&quot;🚀 [MISSION] Provisioning world-class infrastructure...&quot;</span>)</div>
 <div class="line"><span class="lineno">   78</span>            mqtt_success = self.setup_manager.setup_mqtt(self.log_callback)</div>
 <div class="line"><span class="lineno">   79</span>            snmp_success = self.setup_manager.setup_snmp(self.log_callback)</div>
@@ -467,9 +464,9 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00094">94</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   94</span>    <span class="keyword">def </span>perform_install_validation(self):</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task</a>():</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keyword">def </span>task():</div>
 <div class="line"><span class="lineno">   96</span>            self.log_callback(<span class="stringliteral">&quot;🚀 [MISSION] Performing final high-stakes validation...&quot;</span>)</div>
-<div class="line"><span class="lineno">   97</span>            success = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">run_installation_tests</a>(self.log_callback)</div>
+<div class="line"><span class="lineno">   97</span>            success = run_installation_tests(self.log_callback)</div>
 <div class="line"><span class="lineno">   98</span>            <span class="keywordflow">if</span> success:</div>
 <div class="line"><span class="lineno">   99</span>                self.log_callback(<span class="stringliteral">&quot;🥇 [PRESTIGE] All systems have passed rigorous testing. We are GO for launch.&quot;</span>)</div>
 <div class="line"><span class="lineno">  100</span>            <span class="keywordflow">else</span>:</div>
@@ -478,7 +475,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  103</span>        self._run_in_thread(task)</div>
 <div class="line"><span class="lineno">  104</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00025">Managers.InstallationManager.InstallationManager._run_in_thread()</a>, <a class="el" href="../../d3/de3/runTask_8py_source.html#l00017">Workers.runTask.TaskWorker.log_callback</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00019">Managers.InstallationManager.InstallationManager.log_callback</a>, <a class="el" href="../../db/d36/MaintenanceManager_8py_source.html#l00024">Managers.MaintenanceManager.MaintenanceManager.log_callback</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00025">Managers.InstallationManager.InstallationManager._run_in_thread()</a>, <a class="el" href="../../d3/de3/runTask_8py_source.html#l00017">Workers.runTask.TaskWorker.log_callback</a>, <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00019">Managers.InstallationManager.InstallationManager.log_callback</a>, and <a class="el" href="../../db/d36/MaintenanceManager_8py_source.html#l00024">Managers.MaintenanceManager.MaintenanceManager.log_callback</a>.</p>
 
 </div>
 </div>
@@ -585,7 +582,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d13/InstallationManager_8py_source.html#l00018">18</a> of file <a class="el" href="../../d8/d13/InstallationManager_8py_source.html">InstallationManager.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00197">Interface.TestsUI.TestsApp.perform_doxygenizer()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00291">Interface.TestsUI.TestsApp.perform_flame_graph()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00321">Interface.TestsUI.TestsApp.perform_report_generation()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00237">Interface.TestsUI.TestsApp.perform_start_openair()</a>, <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00071">Tests.test_integrity.TestRustIntegrity.test_compiled_library_linkage()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00024">Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_malformed_data()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00036">Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_missing_file()</a>, <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00029">Tests.test_integrity.TestRustIntegrity.test_legacy_cargo_purge()</a>, and <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00050">Tests.test_integrity.TestRustIntegrity.test_legacy_target_purge()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00198">Interface.TestsUI.TestsApp.perform_doxygenizer()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00292">Interface.TestsUI.TestsApp.perform_flame_graph()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00322">Interface.TestsUI.TestsApp.perform_report_generation()</a>, <a class="el" href="../../d8/d62/TestsUI_8py_source.html#l00238">Interface.TestsUI.TestsApp.perform_start_openair()</a>, <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00071">Tests.test_integrity.TestRustIntegrity.test_compiled_library_linkage()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00024">Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_malformed_data()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00036">Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_missing_file()</a>, <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00029">Tests.test_integrity.TestRustIntegrity.test_legacy_cargo_purge()</a>, and <a class="el" href="../../dc/da3/test__integrity_8py_source.html#l00050">Tests.test_integrity.TestRustIntegrity.test_legacy_target_purge()</a>.</p>
 
 </div>
 </div>

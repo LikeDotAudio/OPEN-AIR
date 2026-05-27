@@ -135,7 +135,7 @@ class VisaProxy:
         Returns:
         - None.
         """
-        topic = "OPEN-AIR/Proxy/Tx_Inbox"
+        topic = "OpenAir/Proxy/Tx_Inbox"
         self.subscriber_router.subscribe_to_topic(topic, self._on_tx_inbox_message)
         matrix_log("comms", "visa", "_setup_mqtt_subscriptions", f"💳 ℹ️ Proxy Log: 💳Subscribed to '{topic}' for inbound proxy commands.", "DEBUG")
 

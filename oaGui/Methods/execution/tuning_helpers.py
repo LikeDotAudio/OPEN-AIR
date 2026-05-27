@@ -13,14 +13,14 @@ from oaLogging.Methods.matrix_gate import matrix_log
 HZ_TO_MHZ = 1_000_000
 
 # Topics for Center/Span Tuning
-CENTER_FREQ_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_center_span/Input/center_freq/value"
-SPAN_FREQ_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_center_span/Input/span_freq/value"
-TRIGGER_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_center_span/scpi_details/Execute Command/trigger"
+CENTER_FREQ_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_center_span/Input/center_freq/value"
+SPAN_FREQ_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_center_span/Input/span_freq/value"
+TRIGGER_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_center_span/scpi_details/Execute Command/trigger"
 
 # Topics for Start/Stop Tuning
-START_FREQ_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_start_stop/Input/start_freq/value"
-STOP_FREQ_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_start_stop/Input/stop_freq/value"
-START_STOP_TRIGGER_TOPIC = "OPEN-AIR/yak/Frequency/beg/Beg_freq_start_stop/scpi_details/Execute Command/trigger"
+START_FREQ_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_start_stop/Input/start_freq/value"
+STOP_FREQ_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_start_stop/Input/stop_freq/value"
+START_STOP_TRIGGER_TOPIC = "OpenAir/yak/Frequency/beg/Beg_freq_start_stop/scpi_details/Execute Command/trigger"
 
 def Push_Marker_to_Center_Freq(mqtt_controller, marker_data):
     """Tunes the instrument to a marker's center frequency with a default 1 MHz span."""

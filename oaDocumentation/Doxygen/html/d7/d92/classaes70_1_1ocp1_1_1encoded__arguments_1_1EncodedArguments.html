@@ -106,7 +106,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adb23d8290560f55c0c1a7cc7e574b5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae9b8b88778ab5ad8ec29fdfc76a98d7" id="r_aae9b8b88778ab5ad8ec29fdfc76a98d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d92/classaes70_1_1ocp1_1_1encoded__arguments_1_1EncodedArguments.html#aae9b8b88778ab5ad8ec29fdfc76a98d7">byte_length</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:aae9b8b88778ab5ad8ec29fdfc76a98d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb45c78bb1491d064a74090f41345703" id="r_abb45c78bb1491d064a74090f41345703"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d92/classaes70_1_1ocp1_1_1encoded__arguments_1_1EncodedArguments.html#abb45c78bb1491d064a74090f41345703">encode_to</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a> <a class="el" href="../../d7/d92/classaes70_1_1ocp1_1_1encoded__arguments_1_1EncodedArguments.html#aeaa9dc89388dc6699ceb324530269961">data</a>, pos=0)</td></tr>
+<tr class="memitem:abb45c78bb1491d064a74090f41345703" id="r_abb45c78bb1491d064a74090f41345703"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d92/classaes70_1_1ocp1_1_1encoded__arguments_1_1EncodedArguments.html#abb45c78bb1491d064a74090f41345703">encode_to</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, bytearray <a class="el" href="../../d7/d92/classaes70_1_1ocp1_1_1encoded__arguments_1_1EncodedArguments.html#aeaa9dc89388dc6699ceb324530269961">data</a>, pos=0)</td></tr>
 <tr class="separator:abb45c78bb1491d064a74090f41345703"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -191,10 +191,9 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/db9/encoded__arguments_8py_source.html#l00012">12</a> of file <a class="el" href="../../dd/db9/encoded__arguments_8py_source.html">encoded_arguments.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>    <span class="keyword">def </span>byte_length(self):</div>
 <div class="line"><span class="lineno">   13</span>        <span class="keywordflow">if</span> self._byte_length == -1:</div>
-<div class="line"><span class="lineno">   14</span>            self._byte_length = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encoder.encoded_length</a>(data) <span class="keywordflow">for</span> encoder, data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">zip</a>(self.encoders, self.data))</div>
+<div class="line"><span class="lineno">   14</span>            self._byte_length = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a>(encoder.encoded_length(data) <span class="keywordflow">for</span> encoder, data <span class="keywordflow">in</span> zip(self.encoders, self.data))</div>
 <div class="line"><span class="lineno">   15</span>        <span class="keywordflow">return</span> self._byte_length</div>
 <div class="line"><span class="lineno">   16</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_acf1c2f84aee675205f2d93e5006b0cd8"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a></div><div class="ttdeci">sum</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02726">generated.rs:2726</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../dd/db9/encoded__arguments_8py_source.html#l00009">aes70.ocp1.encoded_arguments.EncodedArguments._byte_length</a>, <a class="el" href="../../dd/db9/encoded__arguments_8py_source.html#l00008">aes70.ocp1.encoded_arguments.EncodedArguments.data</a>, <a class="el" href="../../d1/dba/schemas_8py_source.html#l00031">schemas.IS12CommandResponseMessage.data</a>, <a class="el" href="../../dd/db9/encoded__arguments_8py_source.html#l00003">aes70.ocp1.encoded_arguments.EncodedArguments.encoders</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02726">sum</a>.</p>
@@ -216,7 +215,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a>&#160;</td>
+          <td class="paramtype">bytearray&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -238,8 +237,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   18</span>        pos = pos | 0</div>
 <div class="line"><span class="lineno">   19</span>        <span class="comment">#print(&quot;data &quot;, data)</span></div>
 <div class="line"><span class="lineno">   20</span>        <span class="comment">#print(&quot;encoders &quot;, self.encoders)</span></div>
-<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">for</span> encoder, arg <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">zip</a>(self.encoders, self.data):</div>
-<div class="line"><span class="lineno">   22</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encoder.encode_to</a>(data, pos, arg)</div>
+<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">for</span> encoder, arg <span class="keywordflow">in</span> zip(self.encoders, self.data):</div>
+<div class="line"><span class="lineno">   22</span>            pos = encoder.encode_to(data, pos, arg)</div>
 <div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   24</span> </div>
 </div><!-- fragment -->

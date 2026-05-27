@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('de/df1/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260406_1950</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1300"></a> <b>Issue</b>: Unhandled KeyboardInterrupt in the UI partition led to messy tracebacks when shutting down with CTRL+C.</p>
-<p><b>Root Cause</b>: Tkinter's root.mainloop() does not catch KeyboardInterrupt, and the main() function in <a class="el" href="../../d2/ddc/open__air__ui_8py.html">open_air_ui.py</a> was not wrapping the loop in a try-except block.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1565"></a> <b>Issue</b>: Unhandled KeyboardInterrupt in the UI partition led to messy tracebacks when shutting down with CTRL+C.</p>
+<p><b>Root Cause</b>: Tkinter's root.mainloop() does not catch KeyboardInterrupt, and the main() function in <a class="el" href="../../d3/dd3/loader__main__service_8py.html">loader_main_service.py</a> was not wrapping the loop in a try-except block.</p>
 <p><b>Resolution</b>:</p><ul>
-<li>Refactored <code>ShutdownCoordinator</code> to include a synchronous <code>shutdown()</code> method for use when the GUI event loop is interrupted.</li>
-<li>Wrapped the <code>main()</code> function logic in <code><a class="el" href="../../d2/ddc/open__air__ui_8py.html">oaGui/Managers/open_air_ui.py</a></code> in a <code>try...except KeyboardInterrupt</code> block.</li>
+<li>Refactored <code>LoaderShutdownService</code> to include a synchronous <code>shutdown()</code> method for use when the GUI event loop is interrupted.</li>
+<li>Wrapped the <code>main()</code> function logic in <code>oaGui/Managers/loader_main_service.py</code> in a <code>try...except KeyboardInterrupt</code> block.</li>
 <li>Added safety checks for <code>root</code> destruction to handle early interruptions.</li>
 </ul>
 <p><b>Verification</b>: Code reviewed and structured for robust handling of both early and late interrupts. </p>

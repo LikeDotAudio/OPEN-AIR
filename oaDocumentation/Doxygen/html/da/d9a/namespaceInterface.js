@@ -1,7 +1,14 @@
 var namespaceInterface =
 [
+    [ "break_line_editor", "dc/d8e/namespaceInterface_1_1break__line__editor.html", "dc/d8e/namespaceInterface_1_1break__line__editor" ],
     [ "center_panel", "da/d39/namespaceInterface_1_1center__panel.html", "da/d39/namespaceInterface_1_1center__panel" ],
+    [ "checkbox_editor", "d8/dd7/namespaceInterface_1_1checkbox__editor.html", "d8/dd7/namespaceInterface_1_1checkbox__editor" ],
+    [ "circular_motion_displacement_potentiometer_editor", "d7/d25/namespaceInterface_1_1circular__motion__displacement__potentiometer__editor.html", "d7/d25/namespaceInterface_1_1circular__motion__displacement__potentiometer__editor" ],
+    [ "command_investigation_pane", "df/db3/namespaceInterface_1_1command__investigation__pane.html", "df/db3/namespaceInterface_1_1command__investigation__pane" ],
     [ "command_router", "dc/d06/namespaceInterface_1_1command__router.html", "dc/d06/namespaceInterface_1_1command__router" ],
+    [ "command_router_legend", "dd/dd3/namespaceInterface_1_1command__router__legend.html", "dd/dd3/namespaceInterface_1_1command__router__legend" ],
+    [ "composite_horizontal_dial_value_editor", "d7/df7/namespaceInterface_1_1composite__horizontal__dial__value__editor.html", "d7/df7/namespaceInterface_1_1composite__horizontal__dial__value__editor" ],
+    [ "composite_mdp_editor", "d8/d2c/namespaceInterface_1_1composite__mdp__editor.html", "d8/d2c/namespaceInterface_1_1composite__mdp__editor" ],
     [ "connection_api", "d8/dcc/namespaceInterface_1_1connection__api.html", "d8/dcc/namespaceInterface_1_1connection__api" ],
     [ "constraint_pb2", "d2/dfa/namespaceInterface_1_1constraint__pb2.html", [
       [ "_globals", "d2/dfa/namespaceInterface_1_1constraint__pb2.html#aae0ea661ce455f18b19d277c2d5761da", null ],
@@ -12,6 +19,7 @@ var namespaceInterface =
       [ "_sym_db", "d2/dfa/namespaceInterface_1_1constraint__pb2.html#a27091a8f384655d8dc81da3c70f9103b", null ],
       [ "DESCRIPTOR", "d2/dfa/namespaceInterface_1_1constraint__pb2.html#ab8695b7797fe3589a891a680bfe947e4", null ]
     ] ],
+    [ "Core", "d4/dad/namespaceInterface_1_1Core.html", "d4/dad/namespaceInterface_1_1Core" ],
     [ "debug_matrix_screen", "d3/d0c/namespaceInterface_1_1debug__matrix__screen.html", "d3/d0c/namespaceInterface_1_1debug__matrix__screen" ],
     [ "device_pb2", "de/d60/namespaceInterface_1_1device__pb2.html", [
       [ "_globals", "de/d60/namespaceInterface_1_1device__pb2.html#aa90fa774cd8f9d1496c50b460603cd5a", null ],
@@ -37,6 +45,9 @@ var namespaceInterface =
     [ "gui_REST", "d5/d1b/namespaceInterface_1_1gui__REST.html", "d5/d1b/namespaceInterface_1_1gui__REST" ],
     [ "gui_REST_tree", "d3/d72/namespaceInterface_1_1gui__REST__tree.html", "d3/d72/namespaceInterface_1_1gui__REST__tree" ],
     [ "Input", "d6/da7/namespaceInterface_1_1Input.html", "d6/da7/namespaceInterface_1_1Input" ],
+    [ "json_tree_editor", "d9/d05/namespaceInterface_1_1json__tree__editor.html", "d9/d05/namespaceInterface_1_1json__tree__editor" ],
+    [ "knob_editor", "d4/da2/namespaceInterface_1_1knob__editor.html", "d4/da2/namespaceInterface_1_1knob__editor" ],
+    [ "knob_rotary_selector_editor", "d1/ddf/namespaceInterface_1_1knob__rotary__selector__editor.html", "d1/ddf/namespaceInterface_1_1knob__rotary__selector__editor" ],
     [ "language_pb2", "d5/dab/namespaceInterface_1_1language__pb2.html", [
       [ "_globals", "d5/dab/namespaceInterface_1_1language__pb2.html#a92405da7299099a695ad28aa2dc6d3b8", null ],
       [ "_loaded_options", "d5/dab/namespaceInterface_1_1language__pb2.html#a29775473bbf264b92e89579e19c6ca85", null ],
@@ -48,6 +59,7 @@ var namespaceInterface =
     ] ],
     [ "layout_engine", "d9/d90/namespaceInterface_1_1layout__engine.html", "d9/d90/namespaceInterface_1_1layout__engine" ],
     [ "left_panel", "d4/d28/namespaceInterface_1_1left__panel.html", "d4/d28/namespaceInterface_1_1left__panel" ],
+    [ "listbox_editor", "de/dbf/namespaceInterface_1_1listbox__editor.html", "de/dbf/namespaceInterface_1_1listbox__editor" ],
     [ "maintenance_clear_screen", "d7/d54/namespaceInterface_1_1maintenance__clear__screen.html", "d7/d54/namespaceInterface_1_1maintenance__clear__screen" ],
     [ "menu_pb2", "d6/d63/namespaceInterface_1_1menu__pb2.html", [
       [ "_globals", "d6/d63/namespaceInterface_1_1menu__pb2.html#a709756e6c26333ba0bd0537d5d158c89", null ],
@@ -92,15 +104,18 @@ var namespaceInterface =
       [ "DESCRIPTOR", "df/d1f/namespaceInterface_1_1service__pb2.html#a2a7fcd92f6f110030fb93b6219b9a662", null ]
     ] ],
     [ "SetupUI", "de/d62/namespaceInterface_1_1SetupUI.html", "de/d62/namespaceInterface_1_1SetupUI" ],
+    [ "slider_value_editor", "d3/de1/namespaceInterface_1_1slider__value__editor.html", "d3/de1/namespaceInterface_1_1slider__value__editor" ],
     [ "smpte2138_monitor", "dd/d84/namespaceInterface_1_1smpte2138__monitor.html", "dd/d84/namespaceInterface_1_1smpte2138__monitor" ],
     [ "snmp_log_impl", "d2/de3/namespaceInterface_1_1snmp__log__impl.html", "d2/de3/namespaceInterface_1_1snmp__log__impl" ],
     [ "snmp_mib_impl", "d1/d10/namespaceInterface_1_1snmp__mib__impl.html", "d1/d10/namespaceInterface_1_1snmp__mib__impl" ],
     [ "snmp_status_impl", "de/d11/namespaceInterface_1_1snmp__status__impl.html", "de/d11/namespaceInterface_1_1snmp__status__impl" ],
     [ "snmp_verify_mib_impl", "d2/d11/namespaceInterface_1_1snmp__verify__mib__impl.html", "d2/d11/namespaceInterface_1_1snmp__verify__mib__impl" ],
     [ "snmp_verify_oid_impl", "dd/ddb/namespaceInterface_1_1snmp__verify__oid__impl.html", "dd/ddb/namespaceInterface_1_1snmp__verify__oid__impl" ],
+    [ "status_light_editor", "da/da4/namespaceInterface_1_1status__light__editor.html", "da/da4/namespaceInterface_1_1status__light__editor" ],
     [ "Tabs", "df/de9/namespaceInterface_1_1Tabs.html", "df/de9/namespaceInterface_1_1Tabs" ],
     [ "TestsUI", "d5/de5/namespaceInterface_1_1TestsUI.html", "d5/de5/namespaceInterface_1_1TestsUI" ],
     [ "Window", "d4/d44/namespaceInterface_1_1Window.html", "d4/d44/namespaceInterface_1_1Window" ],
+    [ "yak_monitor", "d1/dba/namespaceInterface_1_1yak__monitor.html", "d1/dba/namespaceInterface_1_1yak__monitor" ],
     [ "__all__", "da/d9a/namespaceInterface.html#a53cd3ba7a21eaa648b8f9fac40248590", null ],
     [ "MidiOutput", "da/d9a/namespaceInterface.html#a8650e3d5ba9822dac456c5ae46664e8d", null ]
 ];

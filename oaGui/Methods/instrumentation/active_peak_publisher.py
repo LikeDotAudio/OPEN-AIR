@@ -20,9 +20,9 @@ app_constants = Config.get_instance()
 
 # --- Constants ---
 VERSION = "20251006.223430.3"
-TOPIC_MARKER_PEAK_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
-TOPIC_MARKER_FREQ_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
-TOPIC_MEASUREMENTS_ROOT = "OPEN-AIR/measurements"
+TOPIC_MARKER_PEAK_WILDCARD = "OpenAir/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
+TOPIC_MARKER_FREQ_WILDCARD = "OpenAir/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
+TOPIC_MEASUREMENTS_ROOT = "OpenAir/measurements"
 TOPIC_DELIMITER = "/"
 
 class ActivePeakPublisher:

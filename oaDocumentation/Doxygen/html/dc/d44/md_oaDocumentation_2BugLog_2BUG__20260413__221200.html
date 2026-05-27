@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('dc/d44/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260413_221200</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1400"></a> </p>
-<h1><a class="anchor" id="autotoc_md1401"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1665"></a> </p>
+<h1><a class="anchor" id="autotoc_md1666"></a>
 1. Research, Clustering &amp; Identification</h1>
-<h2><a class="anchor" id="autotoc_md1402"></a>
+<h2><a class="anchor" id="autotoc_md1667"></a>
 Error Clusters:</h2>
 <ol type="1">
 <li><b>Cluster 1</b>: <code>[OSC] TX Error: OSC Send error: Connection refused (os error 111)</code><ul>
@@ -116,7 +116,7 @@ Error Clusters:</h2>
 </code></code></li>
 </ol>
 <p><code><code></code></code></p>
-<h2><a class="anchor" id="autotoc_md1403"></a>
+<h2><a class="anchor" id="autotoc_md1668"></a>
 Root Causes:</h2>
 <p><code><code></p><ul>
 <li><b>OSC UDP Refused</b>: The <code>SimpleUDPClient</code> relies on socket connectivity. When addressing an unreachable endpoint over UDP, the OS generates an ICMP Port Unreachable error. The python underlying socket throws <code>ConnectionRefusedError</code> (os error 111). The OSC client logged every packet failure as a massive error.</li>
@@ -126,7 +126,7 @@ Root Causes:</h2>
 <p><code><code></p><hr  />
 <p></code></code></p>
 <p><code><code></code></code></p>
-<h1><a class="anchor" id="autotoc_md1405"></a>
+<h1><a class="anchor" id="autotoc_md1670"></a>
 2. Plan of Action</h1>
 <p><code><code></code></code></p>
 <p><code><code></p><ol type="1">
@@ -137,7 +137,7 @@ Root Causes:</h2>
 <p><code><code></p><hr  />
 <p></code></code></p>
 <p><code><code></code></code></p>
-<h1><a class="anchor" id="autotoc_md1407"></a>
+<h1><a class="anchor" id="autotoc_md1672"></a>
 3. Iterative Implementation &amp; Verification</h1>
 <p><code><code></code></code></p>
 <p><code><code></p><ul>
@@ -145,7 +145,7 @@ Root Causes:</h2>
 <li>✅ Discovered a parenthesis mismatch during syntax fixing and rapidly corrected it using <code>replace</code>.</li>
 <li>✅ Tracked the UDP socket connection trace in <code><a class="el" href="../../d2/d2d/osc__tx__client_8py.html">oaComProtocols/oaComOSC/Workers/osc_tx_client.py</a></code> and implemented a time-gated throttle block for connection-refused failures.</li>
 <li>✅ Successfully ran a dry-run test simulating a translated dictionary for <code>pointer_colour</code>, ensuring it safely evaluated to a raw localized <code>str</code> format.</li>
-<li>✅ Wrote to <code><a class="el" href="../../d3/d02/CHANGELOG_8md.html">CHANGELOG.md</a></code>. </li>
+<li>✅ Wrote to <code>CHANGELOG.md</code>. </li>
 </ul>
 <p></code></code></p>
 </div></div><!-- contents -->

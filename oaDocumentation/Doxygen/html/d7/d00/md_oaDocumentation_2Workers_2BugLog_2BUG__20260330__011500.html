@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('d7/d00/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260330_011500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2050"></a> </p>
-<h1><a class="anchor" id="autotoc_md2051"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2499"></a> </p>
+<h1><a class="anchor" id="autotoc_md2500"></a>
 Issue</h1>
 <p>Developers lacked a convenient way to launch and terminate the main <code><a class="el" href="../../d9/d77/openair_8py.html">openair.py</a></code> system directly from the <code>oaTests</code> suite during maintenance or testing cycles.</p>
-<h1><a class="anchor" id="autotoc_md2052"></a>
+<h1><a class="anchor" id="autotoc_md2501"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>UI Integration</b>: Added a "Process Controls" bar to the top of the <code>CenterPanel</code> in <code><a class="el" href="../../d2/d33/center__panel_8py.html">oaTests/Interface/center_panel.py</a></code>.</li>
 <li><b>Process Management</b>: Implemented <code>perform_start_openair</code> and <code>perform_stop_openair</code> logic in <code><a class="el" href="../../d8/d62/TestsUI_8py.html">TestsUI.py</a></code> using <code>subprocess.Popen</code> and process group management (<code>os.setsid</code>).</li>
 <li><b>Visual Feedback</b>: Buttons provide immediate visual confirmation of process status via the central execution log.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2053"></a>
+<h1><a class="anchor" id="autotoc_md2502"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual UI audit confirms "START OPEN-AIR" and "STOP OPEN-AIR" buttons are correctly rendered and styled.</li>

@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('d9/da1/md_oaInstallation_2Documentatio
   <div class="headertitle"><div class="title">📦 OPEN-AIR Project Dependencies</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4514"></a> This document provides a comprehensive breakdown of every package used in the OPEN-AIR project, grouped by their core function within a spectral analysis and instrument control application.</p>
-<h1><a class="anchor" id="autotoc_md4515"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4794"></a> This document provides a comprehensive breakdown of every package used in the OPEN-AIR project, grouped by their core function within a spectral analysis and instrument control application.</p>
+<h1><a class="anchor" id="autotoc_md4795"></a>
 🔬 Data Science &amp; Mathematical Computation</h1>
 <ul>
 <li><b>numpy</b>: The foundational library for numerical computing in Python. It provides support for massive, multi-dimensional arrays and matrices, which is essential for processing high-speed spectral data and audio buffers.</li>
 <li><b>pandas</b>: A powerful data manipulation tool used for analyzing, cleaning, and organizing structured datasets, likely used for handling historical test data or large configuration tables.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4516"></a>
+<h1><a class="anchor" id="autotoc_md4796"></a>
 📊 Visualization &amp; Rendering</h1>
 <ul>
 <li><b>matplotlib</b>: A comprehensive library for creating static, animated, and interactive visualizations. In an analysis app, this is typically used for drawing spectrograms, waveforms, and data plots.</li>
 <li><b>Pillow (PIL)</b>: The Python Imaging Library. It adds image processing capabilities and is explicitly noted as being required for Matplotlib and Tkinter image support.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4517"></a>
+<h1><a class="anchor" id="autotoc_md4797"></a>
 🎛️ Instrument Control &amp; Hardware Protocols</h1>
 <p>This suite of packages forms the physical communication bridge to external hardware, oscilloscopes, and spectrum analyzers.</p>
 <ul>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('d9/da1/md_oaInstallation_2Documentatio
 <li><b>python-vxi11</b>: A pure Python implementation of the VXI-11 protocol, allowing the software to control LXI (LAN eXtensions for Instrumentation) compatible instruments over standard Ethernet networks.</li>
 <li><b>pyserial</b>: Facilitates communication through serial ports (like RS-232 or USB-to-Serial adapters), commonly used for communicating with microcontrollers or older lab equipment.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4518"></a>
+<h1><a class="anchor" id="autotoc_md4798"></a>
 🌐 Networking &amp; IoT Messaging</h1>
 <ul>
 <li><b>zeroconf</b>: Implements Multicast DNS (mDNS) service discovery. This allows the application to automatically find compatible instruments and services on the local network without needing hardcoded IP addresses.</li>
@@ -126,19 +126,19 @@ $(document).ready(function(){initNavTree('d9/da1/md_oaInstallation_2Documentatio
 <li><b>websocket-client</b>: Implements the WebSocket protocol, used for real-time bidirectional communication, particularly in NMOS IS-07 event transport.</li>
 <li><b>python-osc</b>: Implements the Open Sound Control (OSC) protocol. OSC is highly optimized for modern networking technology and is frequently used to share real-time control data between audio software and synthesizers.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4519"></a>
+<h1><a class="anchor" id="autotoc_md4799"></a>
 🎹 Audio &amp; MIDI Integration</h1>
 <ul>
 <li><b>mido</b>: A library for working with MIDI messages and ports, allowing the application to interface with musical instruments, control surfaces, or audio workstations.</li>
 <li><b>python-rtmidi</b>: A Python binding for RtMidi, providing a fast, cross-platform backend for real-time MIDI input/output. The dependency checker specifically looks for this package and flags a warning if the conflicting, bare <code>rtmidi</code> package is installed instead.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4520"></a>
+<h1><a class="anchor" id="autotoc_md4800"></a>
 📄 Document Parsing &amp; Extraction</h1>
 <ul>
 <li><b>pdfplumber</b>: Used for extracting text, tables, and data precisely from PDF files.</li>
 <li><b>beautifulsoup4 (bs4)</b>: A library for parsing HTML and XML documents. It is excellent for web scraping or extracting structured data from instrument web interfaces.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4521"></a>
+<h1><a class="anchor" id="autotoc_md4801"></a>
 🛠️ System Utilities &amp; Performance</h1>
 <ul>
 <li><b>psutil</b>: A cross-platform library for retrieving information on running processes and system utilization (CPU, memory, disks, network) to monitor application health.</li>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('d9/da1/md_oaInstallation_2Documentatio
 <li><b>flameprof</b>: A profiling tool used to generate flamegraphs. It helps developers visualize code performance bottlenecks and optimize execution time.</li>
 <li><b>loguru</b>: A highly robust logging library that simplifies formatting, routing, and exception catching (used extensively for the project's visual logging strategy).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4522"></a>
+<h1><a class="anchor" id="autotoc_md4802"></a>
 🧱 Standard Built-in Libraries</h1>
 <p>The dependency checker also explicitly verifies the availability of several standard Python libraries:</p>
 <ul>

@@ -30,7 +30,7 @@ def write_safe(proxy, command):
         error_message = f"Command rejected. Unresolved placeholders found: '{command}'."
         proxy._publish_proxy_error(message=error_message, command=command)
         proxy.mqtt_util.get_client_instance().publish(
-            topic="OPEN-AIR/Proxy/Error",
+            topic="OpenAir/Proxy/Error",
             payload=orjson.dumps(
                 {"error": error_message, "command": command, "timestamp": time.time()}
             ),

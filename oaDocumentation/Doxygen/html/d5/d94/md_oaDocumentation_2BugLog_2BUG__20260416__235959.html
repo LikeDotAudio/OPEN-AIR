@@ -93,38 +93,38 @@ $(document).ready(function(){initNavTree('d5/d94/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260416_235959</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1494"></a> </p>
-<h1><a class="anchor" id="autotoc_md1495"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1759"></a> </p>
+<h1><a class="anchor" id="autotoc_md1760"></a>
 Description</h1>
 <p>Recurring &lsquo;AttributeError: 'NoneType&rsquo; object has no attribute 'winfo_rootx'<code>during component drag-and-drop operations. This was caused by asynchronous event callbacks triggering coordinate calculations on widgets that were either not yet mapped, partially destroyed, or temporarily</code>None`.</p>
-<h1><a class="anchor" id="autotoc_md1496"></a>
+<h1><a class="anchor" id="autotoc_md1761"></a>
 Error Clusters</h1>
 <ul>
 <li><b>Cluster A: Coordinate Resolution Failure</b>: Continuous crashes during <code>COMPONENT_DRAGGING</code>.</li>
 <li><b>Cluster B: Event Bus Stability</b>: <code>COMPONENT_DROPPED</code> callback failure due to null pointer.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1497"></a>
+<h1><a class="anchor" id="autotoc_md1762"></a>
 Trigger Event</h1>
 <p>Rapid mouse movement or drop actions while the layout was rebuilding or before geometry tasks had finished.</p>
-<h1><a class="anchor" id="autotoc_md1498"></a>
+<h1><a class="anchor" id="autotoc_md1763"></a>
 Domain Mapping</h1>
 <ul>
 <li><code><a class="el" href="../../db/db7/focus_8py.html">oaGuiEditorWYSIWYG/Interface/layout_engine/focus.py</a></code></li>
 <li><code><a class="el" href="../../df/d29/interactive__layout_8py.html">oaGuiEditorWYSIWYG/Interface/Tabs/InteractiveLayout/interactive_layout.py</a></code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1499"></a>
+<h1><a class="anchor" id="autotoc_md1764"></a>
 Action Taken</h1>
 <ul>
 <li><b>FocusManager</b>:<ul>
-<li>Added exhaustive validation for <code>render_area</code> using <code>getattr</code> and <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code>.</li>
+<li>Added exhaustive validation for <code>render_area</code> using <code>getattr</code> and <code>winfo_exists()</code>.</li>
 <li>Added <code>curr.winfo_exists()</code> check for the target widget.</li>
-<li>Implemented <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_idletasks()</a></code> before coordinate calls to ensure Tkinter geometry is valid.</li>
+<li>Implemented <code>update_idletasks()</code> before coordinate calls to ensure Tkinter geometry is valid.</li>
 <li>Wrapped coordinate mapping in a <code>try...except</code> block to prevent event bus termination.</li>
 </ul>
 </li>
-<li><b>InteractiveLayout</b>: Verified existing guards for <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code>.</li>
+<li><b>InteractiveLayout</b>: Verified existing guards for <code>winfo_exists()</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1500"></a>
+<h1><a class="anchor" id="autotoc_md1765"></a>
 Verification Results</h1>
 <ul>
 <li>High-frequency drag events no longer produce <code>NoneType</code> errors.</li>

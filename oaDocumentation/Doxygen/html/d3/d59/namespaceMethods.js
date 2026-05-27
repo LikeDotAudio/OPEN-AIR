@@ -1,9 +1,8 @@
 var namespaceMethods =
 [
-    [ "active_marker_tune_and_collect", "de/dea/namespaceMethods_1_1active__marker__tune__and__collect.html", "de/dea/namespaceMethods_1_1active__marker__tune__and__collect" ],
-    [ "active_peak_publisher", "dc/dd7/namespaceMethods_1_1active__peak__publisher.html", "dc/dd7/namespaceMethods_1_1active__peak__publisher" ],
     [ "aes70_parser", "da/d94/namespaceMethods_1_1aes70__parser.html", "da/d94/namespaceMethods_1_1aes70__parser" ],
     [ "base_handler", "d5/d7c/namespaceMethods_1_1base__handler.html", "d5/d7c/namespaceMethods_1_1base__handler" ],
+    [ "builder_editor_grid", "db/d21/namespaceMethods_1_1builder__editor__grid.html", "db/d21/namespaceMethods_1_1builder__editor__grid" ],
     [ "buttons", "da/d97/namespaceMethods_1_1buttons.html", [
       [ "create_button_with_bar_graph", "da/d97/namespaceMethods_1_1buttons.html#a3f1b2c0cd849f00e7dbe2d743d6cd38a", null ],
       [ "Current_Date", "da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195", null ],
@@ -33,7 +32,6 @@ var namespaceMethods =
       [ "LOCAL_DEBUG", "da/df5/namespaceMethods_1_1console__encoder.html#a198357f006b6cb373b21c9817be5d9e3", null ]
     ] ],
     [ "csv_parser", "d8/d95/namespaceMethods_1_1csv__parser.html", "d8/d95/namespaceMethods_1_1csv__parser" ],
-    [ "csv_writer", "de/d99/namespaceMethods_1_1csv__writer.html", "de/d99/namespaceMethods_1_1csv__writer" ],
     [ "deadband_handler", "d5/da7/namespaceMethods_1_1deadband__handler.html", "d5/da7/namespaceMethods_1_1deadband__handler" ],
     [ "debounce_handler", "d2/d06/namespaceMethods_1_1debounce__handler.html", "d2/d06/namespaceMethods_1_1debounce__handler" ],
     [ "debug_cleaner", "da/dfe/namespaceMethods_1_1debug__cleaner.html", [
@@ -46,7 +44,6 @@ var namespaceMethods =
       [ "force_debug_off", "d1/d27/namespaceMethods_1_1DebugToggler.html#ae0e8256c3ca2e782c777764491fc74be", null ],
       [ "force_debug_on", "d1/d27/namespaceMethods_1_1DebugToggler.html#af51ff8e7cba6348f9ebd8e2c59431293", null ],
       [ "toggle_debug_flags", "d1/d27/namespaceMethods_1_1DebugToggler.html#ae4998e2fd315d16159ee93d68047ffe5", null ],
-      [ "ect_root_path", "d1/d27/namespaceMethods_1_1DebugToggler.html#a0eac33c62d796d503f5f049f57eef6c1", null ],
       [ "element", "d1/d27/namespaceMethods_1_1DebugToggler.html#a2f9f971dc7e40e3f890bb271f46d5fea", null ],
       [ "func_name", "d1/d27/namespaceMethods_1_1DebugToggler.html#a06947485cab7d312568d943679014224", null ],
       [ "level", "d1/d27/namespaceMethods_1_1DebugToggler.html#ac9a363062bcd3edcdf34cce8281d8548", null ],
@@ -61,6 +58,7 @@ var namespaceMethods =
       [ "create_bar_graph_image", "df/d23/namespaceMethods_1_1draw__bargraph.html#ac34a9622db0cafa9d5ec6a40424b8758", null ]
     ] ],
     [ "ember_parser", "df/d80/namespaceMethods_1_1ember__parser.html", "df/d80/namespaceMethods_1_1ember__parser" ],
+    [ "entry", "db/de5/namespaceMethods_1_1entry.html", "db/de5/namespaceMethods_1_1entry" ],
     [ "error_handling", "d2/dbe/namespaceMethods_1_1error__handling.html", [
       [ "vocal_capture", "d2/dbe/namespaceMethods_1_1error__handling.html#a67992c006576973a2568274493e810ba", null ],
       [ "vocal_failure_handler", "d2/dbe/namespaceMethods_1_1error__handling.html#ab78f09a7d28d2f99e8c735819fae128e", null ]
@@ -79,9 +77,6 @@ var namespaceMethods =
       [ "current_version_hash", "d2/db5/namespaceMethods_1_1gui__state__restorer.html#abb0d49e2172766a38ee5045e282a1457", null ]
     ] ],
     [ "html_scraper", "d7/d6b/namespaceMethods_1_1html__scraper.html", "d7/d6b/namespaceMethods_1_1html__scraper" ],
-    [ "i18n_utils", "df/de9/namespaceMethods_1_1i18n__utils.html", [
-      [ "get_text", "df/de9/namespaceMethods_1_1i18n__utils.html#a8c5d082e27d04bbffa308102dc6f3360", null ]
-    ] ],
     [ "invert_handler", "d2/dda/namespaceMethods_1_1invert__handler.html", "d2/dda/namespaceMethods_1_1invert__handler" ],
     [ "json_validator", "d7/d0a/namespaceMethods_1_1json__validator.html", [
       [ "validate_and_sanitize_json", "d7/d0a/namespaceMethods_1_1json__validator.html#a1fbf5a934ca73b9fc3b7f2da88c62c80", null ],
@@ -113,18 +108,6 @@ var namespaceMethods =
       [ "MQTT_BASE_TOPIC", "de/d01/namespaceMethods_1_1marker__csv__to__json__mqtt.html#ae5855cd6193811a4717ee20d3d96fdb9", null ]
     ] ],
     [ "marker_file_import_converter", "d3/d90/namespaceMethods_1_1marker__file__import__converter.html", null ],
-    [ "marker_logic", "d2/d2e/namespaceMethods_1_1marker__logic.html", [
-      [ "calculate_frequency_range", "d2/d2e/namespaceMethods_1_1marker__logic.html#a4115d833b1cf2e4c2f018c40e9395208", null ],
-      [ "app_constants", "d2/d2e/namespaceMethods_1_1marker__logic.html#a35f54b28ebac83bb54a1de8597634d92", null ],
-      [ "current_file", "d2/d2e/namespaceMethods_1_1marker__logic.html#a269924b141534dd8afe8b60e38aae9e9", null ],
-      [ "current_version", "d2/d2e/namespaceMethods_1_1marker__logic.html#afb95c88a0c1964c06df7334c3a3c2b06", null ],
-      [ "current_version_hash", "d2/d2e/namespaceMethods_1_1marker__logic.html#a9647a4f628ae78932c3e000362b80498", null ],
-      [ "LOCAL_DEBUG", "d2/d2e/namespaceMethods_1_1marker__logic.html#a6f5ec7718d8a156cfcdbbc5d4c552cbd", null ],
-      [ "np", "d2/d2e/namespaceMethods_1_1marker__logic.html#a5391a51f470e5d5abc1b5152f4ae6123", null ],
-      [ "NUMPY_AVAILABLE", "d2/d2e/namespaceMethods_1_1marker__logic.html#ac5bde6dfa454bb5802a00d8dc4c78ced", null ]
-    ] ],
-    [ "marker_peak_re_publisher", "de/d85/namespaceMethods_1_1marker__peak__re__publisher.html", "de/d85/namespaceMethods_1_1marker__peak__re__publisher" ],
-    [ "marker_repository_watcher", "d2/daf/namespaceMethods_1_1marker__repository__watcher.html", "d2/daf/namespaceMethods_1_1marker__repository__watcher" ],
     [ "matrix_gate", "d0/ddd/namespaceMethods_1_1matrix__gate.html", [
       [ "debug_matrix", "d0/ddd/namespaceMethods_1_1matrix__gate.html#a0971c1e3563a07dc4684fda1c8380178", null ],
       [ "is_debug_allowed", "d0/ddd/namespaceMethods_1_1matrix__gate.html#ae4ede4ca96ba8c0db5d61cb0c9be2d8e", null ],
@@ -194,18 +177,11 @@ var namespaceMethods =
       [ "reproduce_crash", "d3/d54/namespaceMethods_1_1repro__sigsegv.html#a18acaf989a2bacb855081b1f20c62094", null ]
     ] ],
     [ "rest_server", "d9/d67/namespaceMethods_1_1rest__server.html", "d9/d67/namespaceMethods_1_1rest__server" ],
-    [ "safe_after_mixin", "dc/da7/namespaceMethods_1_1safe__after__mixin.html", "dc/da7/namespaceMethods_1_1safe__after__mixin" ],
     [ "safe_file_io", "dc/d2b/namespaceMethods_1_1safe__file__io.html", [
       [ "handle_file_read_error", "dc/d2b/namespaceMethods_1_1safe__file__io.html#a8a99adb721a59fe4395335b8ece254ba", null ],
       [ "handle_file_write_error", "dc/d2b/namespaceMethods_1_1safe__file__io.html#a78415d49e601a5ff5fd9ec38495e95ce", null ]
     ] ],
     [ "scale_handler", "d6/d98/namespaceMethods_1_1scale__handler.html", "d6/d98/namespaceMethods_1_1scale__handler" ],
-    [ "schema_utils", "d0/d5c/namespaceMethods_1_1schema__utils.html", [
-      [ "calculate_sticky", "d0/d5c/namespaceMethods_1_1schema__utils.html#a1dd1650b5cf66cbddf1c894f4fe5214a", null ],
-      [ "deep_merge", "d0/d5c/namespaceMethods_1_1schema__utils.html#a8e8ac16f9041b6f22d2df3c7e4c5430f", null ],
-      [ "expand_abbreviations", "d0/d5c/namespaceMethods_1_1schema__utils.html#a1fc16a42c11ede849539c3f0d21808b5", null ],
-      [ "get_styled_val", "d0/d5c/namespaceMethods_1_1schema__utils.html#aa07fe3033f1f6cddf902089379d2b158", null ]
-    ] ],
     [ "showfile_unpacker", "d0/dd7/namespaceMethods_1_1showfile__unpacker.html", "d0/dd7/namespaceMethods_1_1showfile__unpacker" ],
     [ "snmp_agent", "da/d1c/namespaceMethods_1_1snmp__agent.html", "da/d1c/namespaceMethods_1_1snmp__agent" ],
     [ "snmp_installer_generator", "d3/dac/namespaceMethods_1_1snmp__installer__generator.html", "d3/dac/namespaceMethods_1_1snmp__installer__generator" ],
@@ -225,13 +201,6 @@ var namespaceMethods =
     [ "tune", "de/d11/namespaceMethods_1_1tune.html", [
       [ "on_tune_request_from_selection", "de/d11/namespaceMethods_1_1tune.html#aadc8991233074a15e93353b1ac5f6ddc", null ],
       [ "app_constants", "de/d11/namespaceMethods_1_1tune.html#a7246df7cedca928b2d8f6d0edb5e97b1", null ]
-    ] ],
-    [ "utils_csv_writer", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html", [
-      [ "write_scan_data_to_csv", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html#acdf4a3fe366046417c8a0d9fbcfc599b", null ],
-      [ "app_constants", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html#ad5e48ee0564caa762d1b2845ebc6eae0", null ],
-      [ "current_version", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html#a5331a1ba969a9accb4aef579ae653e0c", null ],
-      [ "current_version_hash", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html#a719b6d370673298ed469e6d44113d3e9", null ],
-      [ "LOCAL_DEBUG", "d8/d2a/namespaceMethods_1_1utils__csv__writer.html#a003d743efc75c2bcdf35c4d2d1e17a7d", null ]
     ] ],
     [ "visa_formatter", "d7/d4a/namespaceMethods_1_1visa__formatter.html", "d7/d4a/namespaceMethods_1_1visa__formatter" ],
     [ "visa_list_visa_resources", "d9/d0c/namespaceMethods_1_1visa__list__visa__resources.html", [

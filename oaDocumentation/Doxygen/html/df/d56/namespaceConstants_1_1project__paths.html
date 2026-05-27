@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('df/d56/namespaceConstants_1_1project__
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8a78156a162e8cc6883948bf218dd9db" id="r_a8a78156a162e8cc6883948bf218dd9db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a8a78156a162e8cc6883948bf218dd9db">get_absolute_path</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">relative_path</a>)</td></tr>
+<tr class="memitem:a8a78156a162e8cc6883948bf218dd9db" id="r_a8a78156a162e8cc6883948bf218dd9db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a8a78156a162e8cc6883948bf218dd9db">get_absolute_path</a> (str relative_path)</td></tr>
 <tr class="separator:a8a78156a162e8cc6883948bf218dd9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -110,7 +110,7 @@ Variables</h2></td></tr>
 <tr class="separator:ae43f8f61c64646f5690b6c3872eacfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ee435a85b704fd3ca041264e2aeac0d" id="r_a2ee435a85b704fd3ca041264e2aeac0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a2ee435a85b704fd3ca041264e2aeac0d">exist_ok</a></td></tr>
 <tr class="separator:a2ee435a85b704fd3ca041264e2aeac0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a2baf86b8b91a6c364bb3a9f260c42b" id="r_a9a2baf86b8b91a6c364bb3a9f260c42b"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a9a2baf86b8b91a6c364bb3a9f260c42b">LAYOUT_CACHE_PATH</a> = DATA_CACHE_DIR / &quot;layout_cache.json&quot;</td></tr>
+<tr class="memitem:a9a2baf86b8b91a6c364bb3a9f260c42b" id="r_a9a2baf86b8b91a6c364bb3a9f260c42b"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a9a2baf86b8b91a6c364bb3a9f260c42b">LAYOUT_CACHE_PATH</a> = DATA_CACHE_DIR / &quot;cache_layout_store.json&quot;</td></tr>
 <tr class="separator:a9a2baf86b8b91a6c364bb3a9f260c42b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a47fbf56d2db7d8d5bdaccee524e21c" id="r_a6a47fbf56d2db7d8d5bdaccee524e21c"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d56/namespaceConstants_1_1project__paths.html#a6a47fbf56d2db7d8d5bdaccee524e21c">MARKERS_CSV_PATH</a> = DATA_RUNNING_DIR / &quot;MARKERS.csv&quot;</td></tr>
 <tr class="separator:a6a47fbf56d2db7d8d5bdaccee524e21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,12 +172,9 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   63</span>        <span class="comment"># Use simple joining with the cached root</span></div>
 <div class="line"><span class="lineno">   64</span>        <span class="keywordflow">return</span> GLOBAL_PROJECT_ROOT / relative_path</div>
 <div class="line"><span class="lineno">   65</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   66</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ Error resolving path: {e}&quot;</span>)</div>
-<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(relative_path)  <span class="comment"># Return a relative path as a fallback</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   66</span>        logger.error(f<span class="stringliteral">&quot;❌ Error resolving path: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">return</span> pathlib.Path(relative_path)  <span class="comment"># Return a relative path as a fallback</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -236,7 +233,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">str Constants.project_paths.LAYOUT_CACHE_PATH = DATA_CACHE_DIR / &quot;layout_cache.json&quot;</td>
+          <td class="memname">str Constants.project_paths.LAYOUT_CACHE_PATH = DATA_CACHE_DIR / &quot;cache_layout_store.json&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -161,33 +161,32 @@ specifically focusing on distinguishing granular updates from global rebuild tri
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>        <span class="comment"># Dummy editor class simulating the behavior described in the instruction.</span></div>
 <div class="line"><span class="lineno">   30</span>        <span class="comment"># In a real scenario, this would be the actual WYSIWYGEditor class.</span></div>
-<div class="line"><span class="lineno">   31</span>        <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyEditor</a>:</div>
+<div class="line"><span class="lineno">   31</span>        <span class="keyword">class </span>DummyEditor:</div>
 <div class="line"><span class="lineno">   32</span>            <span class="keyword">def </span>__init__(self, event_bus, state_manager, global_rebuild_event_name):</div>
 <div class="line"><span class="lineno">   33</span>                self.event_bus = event_bus</div>
 <div class="line"><span class="lineno">   34</span>                self.state_manager = state_manager</div>
 <div class="line"><span class="lineno">   35</span>                self.global_rebuild_event_name = global_rebuild_event_name</div>
 <div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>            <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">modify_sub_node_color</a>(self, node_id: str, new_color: str):</div>
+<div class="line"><span class="lineno">   37</span>            <span class="keyword">def </span>modify_sub_node_color(self, node_id: str, new_color: str):</div>
 <div class="line"><span class="lineno">   38</span>                <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   39</span><span class="stringliteral">                Simulates updating a specific node&#39;s property (color).</span></div>
 <div class="line"><span class="lineno">   40</span><span class="stringliteral">                This operation should NOT trigger a global rebuild.</span></div>
 <div class="line"><span class="lineno">   41</span><span class="stringliteral">                &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   42</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Updating color for node {node_id} to {new_color}&quot;</span>) <span class="comment"># Example debug log</span></div>
-<div class="line"><span class="lineno">   43</span>                self.state_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_node_property</a>(node_id=node_id, property_name=<span class="stringliteral">&quot;color&quot;</span>, value=new_color)</div>
+<div class="line"><span class="lineno">   42</span>                print(f<span class="stringliteral">&quot;DEBUG: Updating color for node {node_id} to {new_color}&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   43</span>                self.state_manager.update_node_property(node_id=node_id, property_name=<span class="stringliteral">&quot;color&quot;</span>, value=new_color)</div>
 <div class="line"><span class="lineno">   44</span>                <span class="comment"># No explicit global event emission here.</span></div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>            <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_global_setting</a>(self, setting_name: str, value: any):</div>
+<div class="line"><span class="lineno">   46</span>            <span class="keyword">def </span>update_global_setting(self, setting_name: str, value: any):</div>
 <div class="line"><span class="lineno">   47</span>                <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   48</span><span class="stringliteral">                Simulates updating a global setting.</span></div>
 <div class="line"><span class="lineno">   49</span><span class="stringliteral">                This operation SHOULD trigger a global rebuild.</span></div>
 <div class="line"><span class="lineno">   50</span><span class="stringliteral">                &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   51</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Updating global setting {setting_name} to {value}&quot;</span>) <span class="comment"># Example debug log</span></div>
-<div class="line"><span class="lineno">   52</span>                self.state_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_global_property</a>(setting_name=setting_name, value=value)</div>
+<div class="line"><span class="lineno">   51</span>                print(f<span class="stringliteral">&quot;DEBUG: Updating global setting {setting_name} to {value}&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   52</span>                self.state_manager.update_global_property(setting_name=setting_name, value=value)</div>
 <div class="line"><span class="lineno">   53</span>                self.event_bus.emit(self.global_rebuild_event_name, {<span class="stringliteral">&quot;setting&quot;</span>: setting_name, <span class="stringliteral">&quot;value&quot;</span>: value})</div>
 <div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>        self.editor = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyEditor</a>(event_bus=self.mock_event_bus, state_manager=self.mock_state_manager, global_rebuild_event_name=self.global_rebuild_event_name)</div>
+<div class="line"><span class="lineno">   55</span>        self.editor = DummyEditor(event_bus=self.mock_event_bus, state_manager=self.mock_state_manager, global_rebuild_event_name=self.global_rebuild_event_name)</div>
 <div class="line"><span class="lineno">   56</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -218,23 +217,23 @@ This serves as a positive control test.
 <div class="line"><span class="lineno">   89</span>        setting_name = <span class="stringliteral">&quot;canvas_size&quot;</span></div>
 <div class="line"><span class="lineno">   90</span>        new_value = {<span class="stringliteral">&quot;width&quot;</span>: 1920, <span class="stringliteral">&quot;height&quot;</span>: 1080}</div>
 <div class="line"><span class="lineno">   91</span> </div>
-<div class="line"><span class="lineno">   92</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_global_setting_modification_triggers_global_rebuild&quot;</span>)</div>
-<div class="line"><span class="lineno">   93</span>        self.editor.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_global_setting</a>(setting_name=setting_name, value=new_value)</div>
+<div class="line"><span class="lineno">   92</span>        print(<span class="stringliteral">&quot;TEST: Starting test_global_setting_modification_triggers_global_rebuild&quot;</span>)</div>
+<div class="line"><span class="lineno">   93</span>        self.editor.update_global_setting(setting_name=setting_name, value=new_value)</div>
 <div class="line"><span class="lineno">   94</span> </div>
 <div class="line"><span class="lineno">   95</span>        <span class="comment"># Assert state manager update for global property</span></div>
-<div class="line"><span class="lineno">   96</span>        self.mock_state_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_global_property.assert_called_once_with</a>(</div>
+<div class="line"><span class="lineno">   96</span>        self.mock_state_manager.update_global_property.assert_called_once_with(</div>
 <div class="line"><span class="lineno">   97</span>            setting_name=setting_name,</div>
 <div class="line"><span class="lineno">   98</span>            value=new_value</div>
 <div class="line"><span class="lineno">   99</span>        )</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>        <span class="comment"># Assert that the global rebuild event was emitted exactly once</span></div>
-<div class="line"><span class="lineno">  102</span>        self.mock_event_bus.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">emit.assert_called_once_with</a>(</div>
+<div class="line"><span class="lineno">  102</span>        self.mock_event_bus.emit.assert_called_once_with(</div>
 <div class="line"><span class="lineno">  103</span>            self.global_rebuild_event_name,</div>
 <div class="line"><span class="lineno">  104</span>            {<span class="stringliteral">&quot;setting&quot;</span>: setting_name, <span class="stringliteral">&quot;value&quot;</span>: new_value}</div>
 <div class="line"><span class="lineno">  105</span>        )</div>
-<div class="line"><span class="lineno">  106</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_global_setting_modification_triggers_global_rebuild&quot;</span>)</div>
+<div class="line"><span class="lineno">  106</span>        print(<span class="stringliteral">&quot;TEST: Finished test_global_setting_modification_triggers_global_rebuild&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../db/df5/editor__toolbar_8py_source.html#l00017">Interface.Window.editor_toolbar.EditorToolbar.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00055">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.editor</a>, <a class="el" href="../../d7/d9d/test__config__editor_8py_source.html#l00027">Tests.test_config_editor.TestConfigIniEditor.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00027">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.global_rebuild_event_name</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00025">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_event_bus</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00026">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_state_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../db/df5/editor__toolbar_8py_source.html#l00017">Interface.Window.editor_toolbar.EditorToolbar.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00055">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.editor</a>, <a class="el" href="../../d7/d9d/test__config__editor_8py_source.html#l00027">Tests.test_config_editor.TestConfigIniEditor.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00027">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.global_rebuild_event_name</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00025">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_event_bus</a>, and <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00026">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_state_manager</a>.</p>
 
 </div>
 </div>
@@ -265,11 +264,11 @@ does not result in a global rebuild event being emitted.
 <div class="line"><span class="lineno">   62</span>        node_id_to_modify = <span class="stringliteral">&quot;button_123&quot;</span></div>
 <div class="line"><span class="lineno">   63</span>        new_color = <span class="stringliteral">&quot;#FF0000&quot;</span> <span class="comment"># Example new color</span></div>
 <div class="line"><span class="lineno">   64</span> </div>
-<div class="line"><span class="lineno">   65</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_sub_node_modification_does_not_trigger_global_rebuild&quot;</span>)</div>
-<div class="line"><span class="lineno">   66</span>        self.editor.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">modify_sub_node_color</a>(node_id=node_id_to_modify, new_color=new_color)</div>
+<div class="line"><span class="lineno">   65</span>        print(<span class="stringliteral">&quot;TEST: Starting test_sub_node_modification_does_not_trigger_global_rebuild&quot;</span>)</div>
+<div class="line"><span class="lineno">   66</span>        self.editor.modify_sub_node_color(node_id=node_id_to_modify, new_color=new_color)</div>
 <div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>        <span class="comment"># Assert that the state manager was called to update the specific node property</span></div>
-<div class="line"><span class="lineno">   69</span>        self.mock_state_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">update_node_property.assert_called_once_with</a>(</div>
+<div class="line"><span class="lineno">   69</span>        self.mock_state_manager.update_node_property.assert_called_once_with(</div>
 <div class="line"><span class="lineno">   70</span>            node_id=node_id_to_modify,</div>
 <div class="line"><span class="lineno">   71</span>            property_name=<span class="stringliteral">&quot;color&quot;</span>,</div>
 <div class="line"><span class="lineno">   72</span>            value=new_color</div>
@@ -278,14 +277,14 @@ does not result in a global rebuild event being emitted.
 <div class="line"><span class="lineno">   75</span>        <span class="comment"># Assert that NO global rebuild event was emitted.</span></div>
 <div class="line"><span class="lineno">   76</span>        <span class="comment"># We check if &#39;emit&#39; was called with the specific global rebuild event name.</span></div>
 <div class="line"><span class="lineno">   77</span>        <span class="comment"># This is a negative assertion.</span></div>
-<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">for</span> call_args <span class="keywordflow">in</span> self.mock_event_bus.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">emit.call_args_list</a>:</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">for</span> call_args <span class="keywordflow">in</span> self.mock_event_bus.emit.call_args_list:</div>
 <div class="line"><span class="lineno">   79</span>            self.assertNotEqual(call_args[0][0], self.global_rebuild_event_name,</div>
 <div class="line"><span class="lineno">   80</span>                                <span class="stringliteral">&quot;Global rebuild event was emitted unexpectedly.&quot;</span>)</div>
-<div class="line"><span class="lineno">   81</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_sub_node_modification_does_not_trigger_global_rebuild&quot;</span>)</div>
+<div class="line"><span class="lineno">   81</span>        print(<span class="stringliteral">&quot;TEST: Finished test_sub_node_modification_does_not_trigger_global_rebuild&quot;</span>)</div>
 <div class="line"><span class="lineno">   82</span> </div>
 <div class="line"><span class="lineno">   83</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../db/df5/editor__toolbar_8py_source.html#l00017">Interface.Window.editor_toolbar.EditorToolbar.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00055">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.editor</a>, <a class="el" href="../../d7/d9d/test__config__editor_8py_source.html#l00027">Tests.test_config_editor.TestConfigIniEditor.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00027">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.global_rebuild_event_name</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00025">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_event_bus</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00026">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_state_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../db/df5/editor__toolbar_8py_source.html#l00017">Interface.Window.editor_toolbar.EditorToolbar.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00055">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.editor</a>, <a class="el" href="../../d7/d9d/test__config__editor_8py_source.html#l00027">Tests.test_config_editor.TestConfigIniEditor.editor</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00027">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.global_rebuild_event_name</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00025">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_event_bus</a>, and <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00026">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.mock_state_manager</a>.</p>
 
 </div>
 </div>

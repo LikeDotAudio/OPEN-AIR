@@ -23,25 +23,25 @@ from oaTests.Workers.CleanupApps.ClearMQTT import MQTTSweeper
 class TestMQTTLogic(unittest.TestCase):
     def test_topic_calculator_calculate(self):
         """Validate string manipulation for dynamic MQTT topics based on UI hierarchy."""
-        calc = TopicCalculator(base_topic="OPEN-AIR")
+        calc = TopicCalculator(base_topic="OpenAir")
 
         # Test basic formatting
         topic = calc.calculate("volume", "MainTab")
-        self.assertEqual(topic, "OPEN-AIR/MainTab/volume")
+        self.assertEqual(topic, "OpenAir/MainTab/volume")
 
         # Test stripping layout/structural tokens
         topic_with_extra = calc.calculate("gui/knob1", "oaGui/Assets/Tab1")
         self.assertNotIn("display", topic_with_extra)
         self.assertNotIn("gui", topic_with_extra)
-        self.assertEqual(topic_with_extra, "OPEN-AIR/Tab1/knob1")
+        self.assertEqual(topic_with_extra, "OpenAir/Tab1/knob1")
 
     def test_mqtt_sweeper_on_message_filter(self):
         """Verify on_message correctly filters for the configured base topic."""
-        sweeper = MQTTSweeper("localhost", 1883, "OPEN-AIR")
+        sweeper = MQTTSweeper("localhost", 1883, "OpenAir")
 
         # Mock message objects
         message_in_root = MagicMock()
-        message_in_root.topic = "OPEN-AIR/some/topic"
+        message_in_root.topic = "OpenAir/some/topic"
 
         message_outside = MagicMock()
         message_outside.topic = "OTHER-PROJECT/topic"
@@ -51,7 +51,7 @@ class TestMQTTLogic(unittest.TestCase):
         sweeper.on_message(None, None, message_outside)
 
         # Check results
-        self.assertIn("OPEN-AIR/some/topic", sweeper.topics)
+        self.assertIn("OpenAir/some/topic", sweeper.topics)
         self.assertNotIn("OTHER-PROJECT/topic", sweeper.topics)
 
 if __name__ == "__main__":

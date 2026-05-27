@@ -135,9 +135,8 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/d68/oaComBroker_2Tests_2test__rust__router_8py_source.html#l00014">14</a> of file <a class="el" href="../../dd/d68/oaComBroker_2Tests_2test__rust__router_8py_source.html">test_rust_router.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   14</span>    <span class="keyword">def </span>setUp(self):</div>
 <div class="line"><span class="lineno">   15</span>        <span class="comment"># Reset singleton for testing</span></div>
-<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ProtocolRouter._instance</a> = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   16</span>        ProtocolRouter._instance = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   17</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -165,17 +164,17 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   23</span>        <span class="keywordflow">except</span> ImportError:</div>
 <div class="line"><span class="lineno">   24</span>            self.skipTest(<span class="stringliteral">&quot;Rust oacorerouter_rs not installed.&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>        router = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ProtocolRouter.get_instance</a>(force_reload=<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">   27</span>        self.assertIsNotNone(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.rust_router</a>)</div>
+<div class="line"><span class="lineno">   26</span>        router = ProtocolRouter.get_instance(force_reload=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   27</span>        self.assertIsNotNone(router.rust_router)</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>        <span class="comment"># Test ingestion</span></div>
-<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.ingest</a>(<span class="stringliteral">&quot;MQTT&quot;</span>, <span class="stringliteral">&quot;test/rs&quot;</span>, 200)</div>
+<div class="line"><span class="lineno">   30</span>        router.ingest(<span class="stringliteral">&quot;MQTT&quot;</span>, <span class="stringliteral">&quot;test/rs&quot;</span>, 200)</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># Verify it went into the rust router</span></div>
 <div class="line"><span class="lineno">   33</span>        <span class="comment"># Note: We assume oacorerouter_rs.CoreRouter has inbound_len() and pop_inbound()</span></div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment"># as suggested by the previous version of this test.</span></div>
-<div class="line"><span class="lineno">   35</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.rust_router.inbound_len</a>(), 1)</div>
-<div class="line"><span class="lineno">   36</span>        message_rs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.rust_router.pop_inbound</a>()</div>
+<div class="line"><span class="lineno">   35</span>        self.assertEqual(router.rust_router.inbound_len(), 1)</div>
+<div class="line"><span class="lineno">   36</span>        message_rs = router.rust_router.pop_inbound()</div>
 <div class="line"><span class="lineno">   37</span>        self.assertEqual(message_rs[<span class="stringliteral">&quot;topic&quot;</span>], <span class="stringliteral">&quot;test/rs&quot;</span>)</div>
 <div class="line"><span class="lineno">   38</span>        self.assertEqual(message_rs[<span class="stringliteral">&quot;value&quot;</span>], 200)</div>
 <div class="line"><span class="lineno">   39</span> </div>

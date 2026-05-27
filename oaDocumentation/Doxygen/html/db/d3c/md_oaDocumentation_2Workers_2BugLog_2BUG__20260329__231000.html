@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('db/d3c/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_231000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2015"></a> </p>
-<h1><a class="anchor" id="autotoc_md2016"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2464"></a> </p>
+<h1><a class="anchor" id="autotoc_md2465"></a>
 Issue</h1>
 <p>The main application GUI appeared empty for several modules (Console, Scan, etc.), showing only the background despite logs indicating that widgets were being created.</p>
-<h1><a class="anchor" id="autotoc_md2017"></a>
+<h1><a class="anchor" id="autotoc_md2466"></a>
 Root Cause</h1>
 <ol type="1">
-<li><b>Missing Grid Calls</b>: The <code>AsyncGridRenderer</code> was failing to call <code>.grid()</code> on several structural widget types, specifically <code>OcaArray</code> and custom structural adapters. These widgets were created but remained invisible because they were not attached to the parent's geometry manager.</li>
+<li><b>Missing Grid Calls</b>: The <code>BatchLayoutEngine</code> was failing to call <code>.grid()</code> on several structural widget types, specifically <code>OcaArray</code> and custom structural adapters. These widgets were created but remained invisible because they were not attached to the parent's geometry manager.</li>
 <li><b>Inconsistent Grid Logic</b>: Functional widgets (deferred for batch processing) were using incorrect row/column coordinates because the renderer was not respecting explicit <code>layout</code> overrides for deferred items.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2018"></a>
+<h1><a class="anchor" id="autotoc_md2467"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Structural Grid Enforcement</b>: Updated <code>oaGuiBuildShell/Workers/async_grid_renderer.py</code> to explicitly call <code>.grid()</code> on all structural widgets created during the synchronous pass.</li>
 <li><b>Explicit Layout Resolution</b>: Fixed the deferred widget logic to correctly prioritize <code>cr</code> (calculated row) and <code>cc</code> (calculated column) based on both JSON layout metadata and auto-incrementing grid flow.</li>
 <li><b>Clean Separation</b>: Centralized all grid placement within the renderer, removing experimental or redundant grid calls from individual widget creators (like <code>BuilderArrayCreator</code>).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2019"></a>
+<h1><a class="anchor" id="autotoc_md2468"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual code audit confirms that every code path in <code>_process_fields</code> that instantiates a widget now ends with a <code>.grid()</code> call.</li>

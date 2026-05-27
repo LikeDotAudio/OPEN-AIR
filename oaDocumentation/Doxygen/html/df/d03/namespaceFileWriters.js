@@ -4,7 +4,6 @@ var namespaceFileWriters =
       [ "get_latest_audit_results", "d3/d64/namespaceFileWriters_1_1audit__parser.html#af231c51e303ce574f6fbf0a517b252d3", null ],
       [ "parse_audit_log", "d3/d64/namespaceFileWriters_1_1audit__parser.html#a33523be32582c58860259dc66ae6381a", null ]
     ] ],
-    [ "file_csv_export", "de/dee/namespaceFileWriters_1_1file__csv__export.html", "de/dee/namespaceFileWriters_1_1file__csv__export" ],
     [ "file_writer", "da/daa/namespaceFileWriters_1_1file__writer.html", "da/daa/namespaceFileWriters_1_1file__writer" ],
     [ "generate_html", "d5/df1/namespaceFileWriters_1_1generate__html.html", "d5/df1/namespaceFileWriters_1_1generate__html" ],
     [ "LogWriter", "d2/dd2/namespaceFileWriters_1_1LogWriter.html", "d2/dd2/namespaceFileWriters_1_1LogWriter" ],

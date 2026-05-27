@@ -100,21 +100,21 @@ class TestMqttManager(unittest.TestCase):
 
     def test_initialization(self):
         """Verify initialization and initial subscriptions."""
-        self.mock_router.subscribe_to_topic.assert_any_call("OPEN-AIR/System/Control/Broker/Delete/#", self.manager._handle_delete_command)
-        self.mock_router.subscribe_to_topic.assert_any_call("OPEN-AIR/System/Control/Broker/Service/#", self.manager._handle_service_command)
-        self.mock_router.subscribe_to_topic.assert_any_call("OPEN-AIR/System/Status/Fleet/Complete", self.manager._on_fleet_scan_complete)
+        self.mock_router.subscribe_to_topic.assert_any_call("OpenAir/System/Control/Broker/Delete/#", self.manager._handle_delete_command)
+        self.mock_router.subscribe_to_topic.assert_any_call("OpenAir/System/Control/Broker/Service/#", self.manager._handle_service_command)
+        self.mock_router.subscribe_to_topic.assert_any_call("OpenAir/System/Status/Fleet/Complete", self.manager._on_fleet_scan_complete)
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.delete_open_air_tree')
     def test_handle_delete_command(self, mock_delete):
         """Verify _handle_delete_command calls delete_open_air_tree with correct args."""
         message_payload = orjson.dumps({"target": "all"})
-        message = MqttMessage("OPEN-AIR/System/Control/Broker/Delete/all", message_payload)
+        message = MqttMessage("OpenAir/System/Control/Broker/Delete/all", message_payload)
         self.manager._handle_delete_command(message)
         mock_delete.assert_called_once_with(self.mock_client, self.mock_cache)
 
     def test_handle_service_command_no_payload(self):
         """Test _handle_service_command with an empty payload."""
-        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/status", b"{}")
+        message = MqttMessage("OpenAir/System/Control/Broker/Service/status", b"{}")
         if hasattr(self.manager, '_update_service_status'):
             with patch.object(self.manager, '_update_service_status') as mock_update:
                 self.manager._handle_service_command(message)
@@ -125,7 +125,7 @@ class TestMqttManager(unittest.TestCase):
     def test_handle_service_command_register(self, mock_register_service, mock_re_register_all):
         """Test _handle_service_command for registration."""
         payload = {"service": "test_service", "action": "register", "data": {"ip": "192.168.1.100"}}
-        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/register", orjson.dumps(payload))
+        message = MqttMessage("OpenAir/System/Control/Broker/Service/register", orjson.dumps(payload))
         self.manager._handle_service_command(message)
         mock_register_service.assert_called_once()
 
@@ -134,13 +134,13 @@ class TestMqttManager(unittest.TestCase):
     def test_handle_service_command_reregister_all(self, mock_register_service, mock_re_register_all):
         """Test _handle_service_command for re-registering all services."""
         payload = {"action": "reregister_all"}
-        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/reregister_all", orjson.dumps(payload))
+        message = MqttMessage("OpenAir/System/Control/Broker/Service/reregister_all", orjson.dumps(payload))
         self.manager._handle_service_command(message)
         mock_re_register_all.assert_called_once_with(self.mock_client, self.mock_cache)
 
     def test_on_fleet_scan_complete_logging(self):
         """Verify scan complete logic executes without error and logs correctly."""
-        message = MqttMessage("OPEN-AIR/System/Status/Fleet/Complete", b"{}")
+        message = MqttMessage("OpenAir/System/Status/Fleet/Complete", b"{}")
         self.manager._on_fleet_scan_complete(message)
         self.mock_matrix_log.assert_called_with("comms", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")
 
@@ -158,7 +158,7 @@ class TestMqttManager(unittest.TestCase):
         self.mock_time_sleep.side_effect = sleep_side_effect
 
         self.manager._system_status_loop()
-        self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
+        self.mock_client.publish.assert_any_call("OpenAir/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
 
     def test_system_status_loop_when_disconnected(self):
         """Test _system_status_loop when client is disconnected."""
@@ -174,7 +174,7 @@ class TestMqttManager(unittest.TestCase):
         self.mock_time_sleep.side_effect = sleep_side_effect
 
         self.manager._system_status_loop()
-        self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
+        self.mock_client.publish.assert_any_call("OpenAir/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.MqttManager._attempt_reconnect')
     def test_system_status_loop_reconnect_logic(self, mock_attempt_reconnect):
@@ -223,7 +223,7 @@ class TestMqttManager(unittest.TestCase):
             self.mock_app_constants.MQTT_BROKER_PORT,
             self.mock_app_constants.MQTT_CLIENT_ID
         )
-        self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
+        self.mock_client.publish.assert_any_call("OpenAir/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
         mock_sync_state.assert_called_once()
 
     def test_attempt_reconnect_failed_connection(self):
@@ -237,7 +237,7 @@ class TestMqttManager(unittest.TestCase):
             pass
 
         self.mock_client.connect.assert_called_once()
-        self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
+        self.mock_client.publish.assert_any_call("OpenAir/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
         # Ensure no other actions like resubscribe or sync_state are called
         self.mock_router.resubscribe_all.assert_not_called()
         self.mock_cache.sync_state_from_all_sources.assert_not_called()
@@ -300,7 +300,7 @@ class TestMqttManager(unittest.TestCase):
         """Test publishing ONLINE status."""
         self.manager._publish_status("ONLINE")
         self.mock_client.publish.assert_called_once_with(
-            "OPEN-AIR/System/Status/Broker/Connection",
+            "OpenAir/System/Status/Broker/Connection",
             unittest.mock.ANY,
             qos=1
         )
@@ -309,7 +309,7 @@ class TestMqttManager(unittest.TestCase):
         """Test publishing OFFLINE status."""
         self.manager._publish_status("OFFLINE")
         self.mock_client.publish.assert_called_once_with(
-            "OPEN-AIR/System/Status/Broker/Connection",
+            "OpenAir/System/Status/Broker/Connection",
             unittest.mock.ANY,
             qos=1
         )

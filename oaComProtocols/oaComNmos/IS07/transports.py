@@ -89,7 +89,7 @@ class Is07Bridge:
                 # ⚡ DISPATCH LOGIC:
                 # If topic_or_transport starts with OPEN-AIR, it's likely an MQTT topic
                 # Otherwise, it's a transport type label (e.g., 'websocket')
-                if topic_or_transport.startswith("OPEN-AIR/"):
+                if topic_or_transport.startswith("OpenAir/"):
                     self._message_handler("mqtt", topic_or_transport, payload)
                 else:
                     self._message_handler(topic_or_transport, None, payload)

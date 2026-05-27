@@ -21,20 +21,28 @@ def get_text(data, fallback=""):
     if not isinstance(data, dict):
         return str(fallback) if data is None else str(data)
 
+    # New schema: label/description blocks look like
+    # `{text: {En, Fr, De, Es}, text_size, text_color, ...}`. The localized
+    # wording lives one level deep under `text`. Recurse into it so callers
+    # can pass either the new wrapper or a bare `{En, Fr, ...}` dict.
+    if isinstance(data.get("text"), (dict, str)):
+        return get_text(data["text"], fallback)
+
     config = Config.get_instance()
     lang = getattr(config, 'SYSTEM_LANGUAGE', 'En')
 
     # 1. Try current language
-    if lang in data and data[lang]:
+    if lang in data and data[lang] and not isinstance(data[lang], dict):
         return data[lang]
 
     # 2. Try English fallback
-    if "En" in data and data["En"]:
+    if "En" in data and data["En"] and not isinstance(data["En"], dict):
         return data["En"]
 
-    # 3. Try any available non-empty value
+    # 3. Try any available non-empty STRING value (avoid nested dicts that
+    # would just propagate the original "dict has no .upper" bug to callers).
     for value in data.values():
-        if value:
+        if value and not isinstance(value, dict):
             return value
 
     return fallback

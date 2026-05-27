@@ -62,12 +62,12 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
             if topic.startswith(prefix + "/"):
                 return topic
 
-            # If it's a prefix, we strip ALL known protocol roots and existing 'OPEN-AIR/'
+            # If it's a prefix, we strip ALL known protocol roots and existing 'OpenAir/'
             # substrings to prevent recursive bloat (e.g., OPEN-AIR/OSC/OSC/MIDI).
             suffix = topic
-            roots = ["OPEN-AIR/GUI", "OPEN-AIR/oaGui", "OPEN-AIR/MIDI", "OPEN-AIR/OSC",
-                     "OPEN-AIR/NMOS", "OPEN-AIR/AES70", "OPEN-AIR/SMPTE2138", "OPEN-AIR/EMBER",
-                     "OPEN-AIR"]
+            roots = ["OpenAir/GUI", "OpenAir/oaGui", "OpenAir/MIDI", "OpenAir/OSC",
+                     "OpenAir/NMOS", "OpenAir/AES70", "OpenAir/SMPTE2138", "OpenAir/EMBER",
+                     "OpenAir"]
 
             for root in roots:
                 # Aggressively remove redundant root prefixes
@@ -184,7 +184,7 @@ def _dispatch_mqtt(mqtt_manager, topic, message, value_representation):
 
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, value, message, value_representation):
-    osc_address = message["meta"].get("osc_address", "/" + topic.replace("OPEN-AIR/", ""))
+    osc_address = message["meta"].get("osc_address", "/" + topic.replace("OpenAir/", ""))
 
     # ⚡ RESILIENCE: Handle complex GUI-sourced payloads
     if isinstance(value, dict) and "value" in value:

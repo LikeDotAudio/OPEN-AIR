@@ -152,13 +152,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  278</span>    <span class="comment"># The close method currently just prints a message.</span></div>
 <div class="line"><span class="lineno">  279</span>    <span class="comment"># In a real scenario, it would close network connections (e.g., httpx client or websockets).</span></div>
 <div class="line"><span class="lineno">  280</span>    <span class="comment"># We can assert that the method is callable and doesn&#39;t raise errors.</span></div>
-<div class="line"><span class="lineno">  281</span>    await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.close</a>()</div>
+<div class="line"><span class="lineno">  281</span>    await manager.close()</div>
 <div class="line"><span class="lineno">  282</span>    <span class="comment"># No specific return value or state change to assert for this placeholder method.</span></div>
 <div class="line"><span class="lineno">  283</span>    <span class="keywordflow">pass</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2eceb1bced892c85e62d9da73ec7ef24" name="a2eceb1bced892c85e62d9da73ec7ef24"></a>
@@ -182,17 +179,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  264</span>    manager = IS12Manager(base_url=<span class="stringliteral">&quot;http://mock-nmos:8080&quot;</span>)</div>
 <div class="line"><span class="lineno">  265</span> </div>
 <div class="line"><span class="lineno">  266</span>    class_names = [<span class="stringliteral">&quot;Device&quot;</span>, <span class="stringliteral">&quot;Source&quot;</span>]</div>
-<div class="line"><span class="lineno">  267</span>    definitions = await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.get_class_definitions</a>(class_names)</div>
+<div class="line"><span class="lineno">  267</span>    definitions = await manager.get_class_definitions(class_names)</div>
 <div class="line"><span class="lineno">  268</span> </div>
-<div class="line"><span class="lineno">  269</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(definitions, dict)</div>
+<div class="line"><span class="lineno">  269</span>    <span class="keyword">assert</span> isinstance(definitions, dict)</div>
 <div class="line"><span class="lineno">  270</span>    <span class="keyword">assert</span> <span class="stringliteral">&quot;Device&quot;</span> <span class="keywordflow">in</span> definitions</div>
 <div class="line"><span class="lineno">  271</span>    <span class="keyword">assert</span> <span class="stringliteral">&quot;Source&quot;</span> <span class="keywordflow">in</span> definitions</div>
 <div class="line"><span class="lineno">  272</span>    <span class="keyword">assert</span> definitions[<span class="stringliteral">&quot;Device&quot;</span>] == {<span class="stringliteral">&quot;properties&quot;</span>: {<span class="stringliteral">&quot;name&quot;</span>: <span class="stringliteral">&quot;string&quot;</span>, <span class="stringliteral">&quot;state&quot;</span>: <span class="stringliteral">&quot;string&quot;</span>}}</div>
 <div class="line"><span class="lineno">  273</span> </div>
 <div class="line"><span class="lineno">  274</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ae1e88c12705148b55bc59388369bacc5" name="ae1e88c12705148b55bc59388369bacc5"></a>
@@ -217,16 +212,14 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  252</span> </div>
 <div class="line"><span class="lineno">  253</span>    <span class="comment"># The get_device_model method calls send_command and expects a success response.</span></div>
 <div class="line"><span class="lineno">  254</span>    <span class="comment"># The current mock for send_command returns a success response.</span></div>
-<div class="line"><span class="lineno">  255</span>    device_model = await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.get_device_model</a>(<span class="stringliteral">&quot;device-xyz&quot;</span>)</div>
+<div class="line"><span class="lineno">  255</span>    device_model = await manager.get_device_model(<span class="stringliteral">&quot;device-xyz&quot;</span>)</div>
 <div class="line"><span class="lineno">  256</span> </div>
 <div class="line"><span class="lineno">  257</span>    <span class="comment"># The mock response includes {&quot;status&quot;: &quot;command_accepted&quot;}, so that&#39;s what we expect here.</span></div>
-<div class="line"><span class="lineno">  258</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(device_model, dict)</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">device_model.get</a>(<span class="stringliteral">&quot;status&quot;</span>) == <span class="stringliteral">&quot;command_accepted&quot;</span></div>
+<div class="line"><span class="lineno">  258</span>    <span class="keyword">assert</span> isinstance(device_model, dict)</div>
+<div class="line"><span class="lineno">  259</span>    <span class="keyword">assert</span> device_model.get(<span class="stringliteral">&quot;status&quot;</span>) == <span class="stringliteral">&quot;command_accepted&quot;</span></div>
 <div class="line"><span class="lineno">  260</span> </div>
 <div class="line"><span class="lineno">  261</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aa22b6580e1b2542b6af93f6b7fc1d675" name="aa22b6580e1b2542b6af93f6b7fc1d675"></a>
@@ -248,18 +241,16 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  114</span><span class="keyword">async def </span>test_is12_manager_initialization():</div>
 <div class="line"><span class="lineno">  115</span>    <span class="stringliteral">&quot;&quot;&quot;Test IS12Manager initialization.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  116</span>    manager = IS12Manager(base_url=<span class="stringliteral">&quot;http://mock-nmos:8080&quot;</span>)</div>
-<div class="line"><span class="lineno">  117</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.base_url</a> == <span class="stringliteral">&quot;http://mock-nmos:8080&quot;</span></div>
+<div class="line"><span class="lineno">  117</span>    <span class="keyword">assert</span> manager.base_url == <span class="stringliteral">&quot;http://mock-nmos:8080&quot;</span></div>
 <div class="line"><span class="lineno">  118</span>    <span class="comment"># Check if placeholder methods exist (they do based on current Entry.py)</span></div>
-<div class="line"><span class="lineno">  119</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(manager, <span class="stringliteral">&#39;send_command&#39;</span>)</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(manager, <span class="stringliteral">&#39;subscribe_to_events&#39;</span>)</div>
-<div class="line"><span class="lineno">  121</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(manager, <span class="stringliteral">&#39;get_device_model&#39;</span>)</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(manager, <span class="stringliteral">&#39;get_class_definitions&#39;</span>)</div>
-<div class="line"><span class="lineno">  123</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(manager, <span class="stringliteral">&#39;close&#39;</span>)</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keyword">assert</span> hasattr(manager, <span class="stringliteral">&#39;send_command&#39;</span>)</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keyword">assert</span> hasattr(manager, <span class="stringliteral">&#39;subscribe_to_events&#39;</span>)</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keyword">assert</span> hasattr(manager, <span class="stringliteral">&#39;get_device_model&#39;</span>)</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keyword">assert</span> hasattr(manager, <span class="stringliteral">&#39;get_class_definitions&#39;</span>)</div>
+<div class="line"><span class="lineno">  123</span>    <span class="keyword">assert</span> hasattr(manager, <span class="stringliteral">&#39;close&#39;</span>)</div>
 <div class="line"><span class="lineno">  124</span> </div>
 <div class="line"><span class="lineno">  125</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="accf1a8eab0c88814c5da806208e72db8" name="accf1a8eab0c88814c5da806208e72db8"></a>
@@ -304,7 +295,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  197</span>    <span class="comment"># 3. Assert that an error message is printed.</span></div>
 <div class="line"><span class="lineno">  198</span> </div>
 <div class="line"><span class="lineno">  199</span>    <span class="comment"># As a placeholder, we will ensure the call doesn&#39;t crash.</span></div>
-<div class="line"><span class="lineno">  200</span>    response = await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.send_command</a>(<span class="stringliteral">&quot;device-456&quot;</span>, <span class="stringliteral">&quot;Get&quot;</span>, {<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;status&quot;</span>})</div>
+<div class="line"><span class="lineno">  200</span>    response = await manager.send_command(<span class="stringliteral">&quot;device-456&quot;</span>, <span class="stringliteral">&quot;Get&quot;</span>, {<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;status&quot;</span>})</div>
 <div class="line"><span class="lineno">  201</span>    <span class="comment"># With the current mock, this will return a success response.</span></div>
 <div class="line"><span class="lineno">  202</span>    <span class="comment"># If _send_message was mocked to return an error or None, the assertion would change.</span></div>
 <div class="line"><span class="lineno">  203</span>    <span class="keyword">assert</span> response <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="comment"># Check if it returned anything, even if success mock is active.</span></div>
@@ -312,8 +303,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  205</span> </div>
 <div class="line"><span class="lineno">  206</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2c98792a6e289cfc462e1bc71f7b3920" name="a2c98792a6e289cfc462e1bc71f7b3920"></a>
@@ -372,17 +361,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  163</span>    <span class="comment"># Actual message content verification relies on schema tests.</span></div>
 <div class="line"><span class="lineno">  164</span> </div>
 <div class="line"><span class="lineno">  165</span>    <span class="comment"># Simulating a call to send_command (will use the internal mock of _send_message)</span></div>
-<div class="line"><span class="lineno">  166</span>    response = await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.send_command</a>(<span class="stringliteral">&quot;device-123&quot;</span>, <span class="stringliteral">&quot;Set&quot;</span>, {<span class="stringliteral">&quot;volume&quot;</span>: 60})</div>
+<div class="line"><span class="lineno">  166</span>    response = await manager.send_command(<span class="stringliteral">&quot;device-123&quot;</span>, <span class="stringliteral">&quot;Set&quot;</span>, {<span class="stringliteral">&quot;volume&quot;</span>: 60})</div>
 <div class="line"><span class="lineno">  167</span>    <span class="comment"># The internal mock of _send_message returns a Success response</span></div>
-<div class="line"><span class="lineno">  168</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(response, IS12CommandResponseMessage)</div>
-<div class="line"><span class="lineno">  169</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response.command_result</a> == <span class="stringliteral">&quot;Success&quot;</span></div>
-<div class="line"><span class="lineno">  170</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response.data</a> == {<span class="stringliteral">&quot;status&quot;</span>: <span class="stringliteral">&quot;command_accepted&quot;</span>}</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keyword">assert</span> isinstance(response, IS12CommandResponseMessage)</div>
+<div class="line"><span class="lineno">  169</span>    <span class="keyword">assert</span> response.command_result == <span class="stringliteral">&quot;Success&quot;</span></div>
+<div class="line"><span class="lineno">  170</span>    <span class="keyword">assert</span> response.data == {<span class="stringliteral">&quot;status&quot;</span>: <span class="stringliteral">&quot;command_accepted&quot;</span>}</div>
 <div class="line"><span class="lineno">  171</span> </div>
 <div class="line"><span class="lineno">  172</span> </div>
 <div class="line"><span class="lineno">  173</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a19c560e81b04a836031d64fd88db1dd8" name="a19c560e81b04a836031d64fd88db1dd8"></a>
@@ -411,7 +398,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  214</span>    <span class="comment"># We&#39;ll assert the method is callable and returns a subscription ID on simulated success.</span></div>
 <div class="line"><span class="lineno">  215</span> </div>
 <div class="line"><span class="lineno">  216</span>    <span class="comment"># Simulating a call to subscribe_to_events</span></div>
-<div class="line"><span class="lineno">  217</span>    subscription_id = await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.subscribe_to_events</a>(</div>
+<div class="line"><span class="lineno">  217</span>    subscription_id = await manager.subscribe_to_events(</div>
 <div class="line"><span class="lineno">  218</span>        resource_ids=[<span class="stringliteral">&quot;res-1&quot;</span>, <span class="stringliteral">&quot;res-2&quot;</span>],</div>
 <div class="line"><span class="lineno">  219</span>        event_types=[<span class="stringliteral">&quot;property_changed&quot;</span>],</div>
 <div class="line"><span class="lineno">  220</span>        filter_params={<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;volume&quot;</span>}</div>
@@ -444,8 +431,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  247</span> </div>
 <div class="line"><span class="lineno">  248</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a9cdad48fd564ea39e3a7c5b8120237c0" name="a9cdad48fd564ea39e3a7c5b8120237c0"></a>
@@ -466,7 +451,7 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../de/d64/test__is12__manager_8py_source.html#l00034">34</a> of file <a class="el" href="../../de/d64/test__is12__manager_8py_source.html">test_is12_manager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   34</span><span class="keyword">def </span>test_schema_base_message_invalid():</div>
 <div class="line"><span class="lineno">   35</span>    <span class="stringliteral">&quot;&quot;&quot;Test invalid creation of IS12BaseMessage (missing fields).&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   36</span>    <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pytest.raises</a>(ValidationError):</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keyword">with</span> pytest.raises(ValidationError):</div>
 <div class="line"><span class="lineno">   37</span>        IS12BaseMessage(</div>
 <div class="line"><span class="lineno">   38</span>            message_id=<span class="stringliteral">&quot;test-id-2&quot;</span>,</div>
 <div class="line"><span class="lineno">   39</span>            <span class="comment"># timestamp is missing</span></div>
@@ -474,8 +459,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   41</span>        )</div>
 <div class="line"><span class="lineno">   42</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a122c9497b4ed01f66139ce5dfe5ad32c" name="a122c9497b4ed01f66139ce5dfe5ad32c"></a>
@@ -501,13 +484,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   27</span>        timestamp=<span class="stringliteral">&quot;2026-04-05T15:49:00Z&quot;</span>,</div>
 <div class="line"><span class="lineno">   28</span>        version=<span class="stringliteral">&quot;1.0.1&quot;</span></div>
 <div class="line"><span class="lineno">   29</span>    )</div>
-<div class="line"><span class="lineno">   30</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base_message.message_id</a> == <span class="stringliteral">&quot;test-id-1&quot;</span></div>
-<div class="line"><span class="lineno">   31</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base_message.timestamp</a> == <span class="stringliteral">&quot;2026-04-05T15:49:00Z&quot;</span></div>
-<div class="line"><span class="lineno">   32</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base_message.version</a> == <span class="stringliteral">&quot;1.0.1&quot;</span></div>
+<div class="line"><span class="lineno">   30</span>    <span class="keyword">assert</span> base_message.message_id == <span class="stringliteral">&quot;test-id-1&quot;</span></div>
+<div class="line"><span class="lineno">   31</span>    <span class="keyword">assert</span> base_message.timestamp == <span class="stringliteral">&quot;2026-04-05T15:49:00Z&quot;</span></div>
+<div class="line"><span class="lineno">   32</span>    <span class="keyword">assert</span> base_message.version == <span class="stringliteral">&quot;1.0.1&quot;</span></div>
 <div class="line"><span class="lineno">   33</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ab2adaca50094ed296b697075c7be42e9" name="ab2adaca50094ed296b697075c7be42e9"></a>
@@ -528,7 +509,7 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../de/d64/test__is12__manager_8py_source.html#l00057">57</a> of file <a class="el" href="../../de/d64/test__is12__manager_8py_source.html">test_is12_manager.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   57</span><span class="keyword">def </span>test_schema_command_message_invalid():</div>
 <div class="line"><span class="lineno">   58</span>    <span class="stringliteral">&quot;&quot;&quot;Test invalid creation of IS12CommandMessage (missing operation).&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   59</span>    <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pytest.raises</a>(ValidationError):</div>
+<div class="line"><span class="lineno">   59</span>    <span class="keyword">with</span> pytest.raises(ValidationError):</div>
 <div class="line"><span class="lineno">   60</span>        IS12CommandMessage(</div>
 <div class="line"><span class="lineno">   61</span>            message_id=<span class="stringliteral">&quot;cmd-test-2&quot;</span>,</div>
 <div class="line"><span class="lineno">   62</span>            timestamp=<span class="stringliteral">&quot;2026-04-05T15:49:02Z&quot;</span>,</div>
@@ -539,8 +520,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   67</span>        )</div>
 <div class="line"><span class="lineno">   68</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a21486bfd6f4f60c7e5d37b1af36d69b4" name="a21486bfd6f4f60c7e5d37b1af36d69b4"></a>
@@ -569,13 +548,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   50</span>        resource_id=<span class="stringliteral">&quot;device-abc&quot;</span>,</div>
 <div class="line"><span class="lineno">   51</span>        parameters={<span class="stringliteral">&quot;volume&quot;</span>: 50, <span class="stringliteral">&quot;mute&quot;</span>: <span class="keyword">False</span>}</div>
 <div class="line"><span class="lineno">   52</span>    )</div>
-<div class="line"><span class="lineno">   53</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cmd_message.operation</a> == <span class="stringliteral">&quot;Set&quot;</span></div>
-<div class="line"><span class="lineno">   54</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cmd_message.resource_id</a> == <span class="stringliteral">&quot;device-abc&quot;</span></div>
-<div class="line"><span class="lineno">   55</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cmd_message.parameters</a> == {<span class="stringliteral">&quot;volume&quot;</span>: 50, <span class="stringliteral">&quot;mute&quot;</span>: <span class="keyword">False</span>}</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keyword">assert</span> cmd_message.operation == <span class="stringliteral">&quot;Set&quot;</span></div>
+<div class="line"><span class="lineno">   54</span>    <span class="keyword">assert</span> cmd_message.resource_id == <span class="stringliteral">&quot;device-abc&quot;</span></div>
+<div class="line"><span class="lineno">   55</span>    <span class="keyword">assert</span> cmd_message.parameters == {<span class="stringliteral">&quot;volume&quot;</span>: 50, <span class="stringliteral">&quot;mute&quot;</span>: <span class="keyword">False</span>}</div>
 <div class="line"><span class="lineno">   56</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="af27d01f7d86b03880249f4f86b7a21e0" name="af27d01f7d86b03880249f4f86b7a21e0"></a>
@@ -603,13 +580,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   88</span>        command_result=<span class="stringliteral">&quot;Failure&quot;</span>,</div>
 <div class="line"><span class="lineno">   89</span>        error={<span class="stringliteral">&quot;error_code&quot;</span>: 400, <span class="stringliteral">&quot;error_message&quot;</span>: <span class="stringliteral">&quot;Invalid parameter&quot;</span>}</div>
 <div class="line"><span class="lineno">   90</span>    )</div>
-<div class="line"><span class="lineno">   91</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.command_result</a> == <span class="stringliteral">&quot;Failure&quot;</span></div>
-<div class="line"><span class="lineno">   92</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.error</a> == {<span class="stringliteral">&quot;error_code&quot;</span>: 400, <span class="stringliteral">&quot;error_message&quot;</span>: <span class="stringliteral">&quot;Invalid parameter&quot;</span>}</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.data</a> <span class="keywordflow">is</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   91</span>    <span class="keyword">assert</span> response_message.command_result == <span class="stringliteral">&quot;Failure&quot;</span></div>
+<div class="line"><span class="lineno">   92</span>    <span class="keyword">assert</span> response_message.error == {<span class="stringliteral">&quot;error_code&quot;</span>: 400, <span class="stringliteral">&quot;error_message&quot;</span>: <span class="stringliteral">&quot;Invalid parameter&quot;</span>}</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keyword">assert</span> response_message.data <span class="keywordflow">is</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   94</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a7daf0b97d7d84c7ed541c406315f1d22" name="a7daf0b97d7d84c7ed541c406315f1d22"></a>
@@ -637,13 +612,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   75</span>        command_result=<span class="stringliteral">&quot;Success&quot;</span>,</div>
 <div class="line"><span class="lineno">   76</span>        data={<span class="stringliteral">&quot;current_volume&quot;</span>: 50}</div>
 <div class="line"><span class="lineno">   77</span>    )</div>
-<div class="line"><span class="lineno">   78</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.command_result</a> == <span class="stringliteral">&quot;Success&quot;</span></div>
-<div class="line"><span class="lineno">   79</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.data</a> == {<span class="stringliteral">&quot;current_volume&quot;</span>: 50}</div>
-<div class="line"><span class="lineno">   80</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">response_message.error</a> <span class="keywordflow">is</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   78</span>    <span class="keyword">assert</span> response_message.command_result == <span class="stringliteral">&quot;Success&quot;</span></div>
+<div class="line"><span class="lineno">   79</span>    <span class="keyword">assert</span> response_message.data == {<span class="stringliteral">&quot;current_volume&quot;</span>: 50}</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keyword">assert</span> response_message.error <span class="keywordflow">is</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   81</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ae2682a9d255d8233c0bc95bd86fa1443" name="ae2682a9d255d8233c0bc95bd86fa1443"></a>
@@ -673,17 +646,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  103</span>        event_types=[<span class="stringliteral">&quot;property_changed&quot;</span>],</div>
 <div class="line"><span class="lineno">  104</span>        filter={<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;volume&quot;</span>}</div>
 <div class="line"><span class="lineno">  105</span>    )</div>
-<div class="line"><span class="lineno">  106</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sub_message.subscription_id</a> == <span class="stringliteral">&quot;sub-id-123&quot;</span></div>
-<div class="line"><span class="lineno">  107</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sub_message.resource_ids</a> == [<span class="stringliteral">&quot;device-a&quot;</span>, <span class="stringliteral">&quot;device-b&quot;</span>]</div>
-<div class="line"><span class="lineno">  108</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sub_message.event_types</a> == [<span class="stringliteral">&quot;property_changed&quot;</span>]</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sub_message.filter</a> == {<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;volume&quot;</span>}</div>
+<div class="line"><span class="lineno">  106</span>    <span class="keyword">assert</span> sub_message.subscription_id == <span class="stringliteral">&quot;sub-id-123&quot;</span></div>
+<div class="line"><span class="lineno">  107</span>    <span class="keyword">assert</span> sub_message.resource_ids == [<span class="stringliteral">&quot;device-a&quot;</span>, <span class="stringliteral">&quot;device-b&quot;</span>]</div>
+<div class="line"><span class="lineno">  108</span>    <span class="keyword">assert</span> sub_message.event_types == [<span class="stringliteral">&quot;property_changed&quot;</span>]</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keyword">assert</span> sub_message.filter == {<span class="stringliteral">&quot;parameter&quot;</span>: <span class="stringliteral">&quot;volume&quot;</span>}</div>
 <div class="line"><span class="lineno">  110</span> </div>
 <div class="line"><span class="lineno">  111</span><span class="comment"># --- IS12Manager Tests ---</span></div>
 <div class="line"><span class="lineno">  112</span> </div>
 <div class="line"><span class="lineno">  113</span><span class="preprocessor">@pytest.mark.asyncio</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

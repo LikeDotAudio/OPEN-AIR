@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('d8/d67/namespaceCore_1_1sdp__parser.ht
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8101075271fcbd841463f2bf3ebe7ff5" id="r_a8101075271fcbd841463f2bf3ebe7ff5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d67/namespaceCore_1_1sdp__parser.html#a8101075271fcbd841463f2bf3ebe7ff5">build_match_key</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parsed_sdp_data</a>)</td></tr>
+<tr class="memitem:a8101075271fcbd841463f2bf3ebe7ff5" id="r_a8101075271fcbd841463f2bf3ebe7ff5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d67/namespaceCore_1_1sdp__parser.html#a8101075271fcbd841463f2bf3ebe7ff5">build_match_key</a> (parsed_sdp_data)</td></tr>
 <tr class="separator:a8101075271fcbd841463f2bf3ebe7ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a459a71127f23cf821cbe9d9db8b8a34a" id="r_a459a71127f23cf821cbe9d9db8b8a34a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d67/namespaceCore_1_1sdp__parser.html#a459a71127f23cf821cbe9d9db8b8a34a">parse_sdp</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sdp</a>)</td></tr>
+<tr class="memitem:a459a71127f23cf821cbe9d9db8b8a34a" id="r_a459a71127f23cf821cbe9d9db8b8a34a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d67/namespaceCore_1_1sdp__parser.html#a459a71127f23cf821cbe9d9db8b8a34a">parse_sdp</a> (sdp)</td></tr>
 <tr class="separator:a459a71127f23cf821cbe9d9db8b8a34a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -140,17 +140,14 @@ Returns:
 <div class="line"><span class="lineno">   55</span><span class="stringliteral">    Returns:</span></div>
 <div class="line"><span class="lineno">   56</span><span class="stringliteral">        str: A string key in the format &quot;ip|src_ip&quot; or None if IP is missing.</span></div>
 <div class="line"><span class="lineno">   57</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   58</span>    ip = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parsed_sdp_data.get</a>(<span class="stringliteral">&quot;ip&quot;</span>)</div>
-<div class="line"><span class="lineno">   59</span>    src_ip = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parsed_sdp_data.get</a>(<span class="stringliteral">&quot;src_ip&quot;</span>)</div>
+<div class="line"><span class="lineno">   58</span>    ip = parsed_sdp_data.get(<span class="stringliteral">&quot;ip&quot;</span>)</div>
+<div class="line"><span class="lineno">   59</span>    src_ip = parsed_sdp_data.get(<span class="stringliteral">&quot;src_ip&quot;</span>)</div>
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> ip:</div>
 <div class="line"><span class="lineno">   62</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   63</span> </div>
 <div class="line"><span class="lineno">   64</span>    <span class="keywordflow">return</span> f<span class="stringliteral">&quot;{ip}|{src_ip or &#39;any&#39;}&quot;</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a459a71127f23cf821cbe9d9db8b8a34a" name="a459a71127f23cf821cbe9d9db8b8a34a"></a>
@@ -191,25 +188,25 @@ Returns:
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   16</span>    data = {}</div>
 <div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">for</span> line <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sdp.splitlines</a>():</div>
-<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.startswith</a>(<span class="stringliteral">&quot;s=&quot;</span>):</div>
-<div class="line"><span class="lineno">   20</span>            data[<span class="stringliteral">&quot;name&quot;</span>] = line[2:].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">strip</a>()</div>
-<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.startswith</a>(<span class="stringliteral">&quot;o=&quot;</span>):</div>
-<div class="line"><span class="lineno">   22</span>            parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.split</a>()</div>
+<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">for</span> line <span class="keywordflow">in</span> sdp.splitlines():</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> line.startswith(<span class="stringliteral">&quot;s=&quot;</span>):</div>
+<div class="line"><span class="lineno">   20</span>            data[<span class="stringliteral">&quot;name&quot;</span>] = line[2:].strip()</div>
+<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">elif</span> line.startswith(<span class="stringliteral">&quot;o=&quot;</span>):</div>
+<div class="line"><span class="lineno">   22</span>            parts = line.split()</div>
 <div class="line"><span class="lineno">   23</span>            <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(parts) &gt;= 6:</div>
 <div class="line"><span class="lineno">   24</span>                data[<span class="stringliteral">&quot;src_ip&quot;</span>] = parts[5]</div>
-<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.startswith</a>(<span class="stringliteral">&quot;c=IN IP4&quot;</span>):</div>
-<div class="line"><span class="lineno">   26</span>            data[<span class="stringliteral">&quot;ip&quot;</span>] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.split</a>()[2].<a class="code hl_function" href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a>(<span class="stringliteral">&quot;/&quot;</span>)[0]</div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.startswith</a>(<span class="stringliteral">&quot;m=audio&quot;</span>):</div>
+<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">elif</span> line.startswith(<span class="stringliteral">&quot;c=IN IP4&quot;</span>):</div>
+<div class="line"><span class="lineno">   26</span>            data[<span class="stringliteral">&quot;ip&quot;</span>] = line.split()[2].<a class="code hl_function" href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a>(<span class="stringliteral">&quot;/&quot;</span>)[0]</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">elif</span> line.startswith(<span class="stringliteral">&quot;m=audio&quot;</span>):</div>
 <div class="line"><span class="lineno">   28</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   29</span>                data[<span class="stringliteral">&quot;port&quot;</span>] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.split</a>()[1])</div>
+<div class="line"><span class="lineno">   29</span>                data[<span class="stringliteral">&quot;port&quot;</span>] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(line.split()[1])</div>
 <div class="line"><span class="lineno">   30</span>            <span class="keywordflow">except</span> (IndexError, ValueError):</div>
 <div class="line"><span class="lineno">   31</span>                <span class="keywordflow">pass</span> <span class="comment"># Ignore if port is not parseable</span></div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">elif</span> <span class="stringliteral">&quot;rtpmap&quot;</span> <span class="keywordflow">in</span> line <span class="keywordflow">and</span> <span class="stringliteral">&quot;L&quot;</span> <span class="keywordflow">in</span> line:</div>
 <div class="line"><span class="lineno">   33</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   34</span>                <span class="comment"># Example format: a=rtpmap:96 L24/48000/2</span></div>
 <div class="line"><span class="lineno">   35</span>                <span class="comment"># We are interested in bit depth, sample rate, and channels</span></div>
-<div class="line"><span class="lineno">   36</span>                parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.split</a>(<span class="stringliteral">&quot;L&quot;</span>)[1].<a class="code hl_function" href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a>(<span class="stringliteral">&quot;/&quot;</span>)</div>
+<div class="line"><span class="lineno">   36</span>                parts = line.split(<span class="stringliteral">&quot;L&quot;</span>)[1].<a class="code hl_function" href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a>(<span class="stringliteral">&quot;/&quot;</span>)</div>
 <div class="line"><span class="lineno">   37</span>                <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(parts) &gt;= 2:</div>
 <div class="line"><span class="lineno">   38</span>                    data[<span class="stringliteral">&quot;bit&quot;</span>] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(parts[0])</div>
 <div class="line"><span class="lineno">   39</span>                    data[<span class="stringliteral">&quot;rate&quot;</span>] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(parts[1])</div>
@@ -224,7 +221,7 @@ Returns:
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 <div class="ttc" id="aoa__trie__rs_2mod_8rs_html_a7807a445d8432cb3c0289fad22aae283"><div class="ttname"><a href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a></div><div class="ttdeci">for part in topic split('/')</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">mod.rs:33</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">split()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">split()</a>.</p>
 
 </div>
 </div>

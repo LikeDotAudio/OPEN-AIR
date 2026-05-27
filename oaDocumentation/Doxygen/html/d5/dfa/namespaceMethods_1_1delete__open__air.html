@@ -105,7 +105,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7db0e5448e78378f44a842116d950648" id="r_a7db0e5448e78378f44a842116d950648"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfa/namespaceMethods_1_1delete__open__air.html#a7db0e5448e78378f44a842116d950648">delete_open_air_tree</a> (mqtt_connection_manager, state_cache_manager=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a7db0e5448e78378f44a842116d950648" id="r_a7db0e5448e78378f44a842116d950648"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfa/namespaceMethods_1_1delete__open__air.html#a7db0e5448e78378f44a842116d950648">delete_open_air_tree</a> (mqtt_connection_manager, state_cache_manager=None)</td></tr>
 <tr class="separator:a7db0e5448e78378f44a842116d950648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -130,7 +130,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>state_cache_manager</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>state_cache_manager</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -148,27 +148,26 @@ If state_cache_manager is provided, it uses the cached topics (fastest).
 <div class="line"><span class="lineno">   81</span><span class="stringliteral">    Deletes the OPEN-AIR topic tree.</span></div>
 <div class="line"><span class="lineno">   82</span><span class="stringliteral">    If state_cache_manager is provided, it uses the cached topics (fastest).</span></div>
 <div class="line"><span class="lineno">   83</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   84</span>    client = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mqtt_connection_manager.get_client_instance</a>()</div>
+<div class="line"><span class="lineno">   84</span>    client = mqtt_connection_manager.get_client_instance()</div>
 <div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> client:</div>
-<div class="line"><span class="lineno">   86</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MQTT_LOGGER.error</a>(<span class="stringliteral">&quot;Cannot delete: No MQTT Client connected.&quot;</span>)</div>
+<div class="line"><span class="lineno">   86</span>        MQTT_LOGGER.error(<span class="stringliteral">&quot;Cannot delete: No MQTT Client connected.&quot;</span>)</div>
 <div class="line"><span class="lineno">   87</span>        <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>    topics = []</div>
 <div class="line"><span class="lineno">   90</span>    <span class="keywordflow">if</span> state_cache_manager:</div>
 <div class="line"><span class="lineno">   91</span>        <span class="comment"># Get all known topics from the cache</span></div>
-<div class="line"><span class="lineno">   92</span>        topics = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_cache_manager.rust_cache.keys</a>())</div>
-<div class="line"><span class="lineno">   93</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;mqtt&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;Sourced {len(topics)} topics from State Cache for deletion.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   92</span>        topics = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(state_cache_manager.rust_cache.keys())</div>
+<div class="line"><span class="lineno">   93</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;mqtt&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;Sourced {len(topics)} topics from State Cache for deletion.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   94</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   95</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;mqtt&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;No State Cache provided. Cannot determine topics to delete.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   95</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;mqtt&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;No State Cache provided. Cannot determine topics to delete.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   96</span>        <span class="comment"># Fallback or error? For safety, we won&#39;t blindly guess.</span></div>
 <div class="line"><span class="lineno">   97</span>        <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   98</span> </div>
 <div class="line"><span class="lineno">   99</span>    terminator = OpenAirTerminator(client)</div>
-<div class="line"><span class="lineno">  100</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">terminator.delete_topics</a>(topics)</div>
+<div class="line"><span class="lineno">  100</span>    terminator.delete_topics(topics)</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 </div>
 </div>

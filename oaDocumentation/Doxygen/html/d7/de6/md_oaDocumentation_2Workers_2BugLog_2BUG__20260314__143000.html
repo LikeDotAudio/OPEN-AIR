@@ -93,35 +93,35 @@ $(document).ready(function(){initNavTree('d7/de6/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: [MQTT] SyntaxError in MqttConnectionManager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1674"></a> </p>
-<h1><a class="anchor" id="autotoc_md1675"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2123"></a> </p>
+<h1><a class="anchor" id="autotoc_md2124"></a>
 📅 Timeline</h1>
 <ul>
 <li><b>Discovery Date:</b> 2026-03-14 14:30:00</li>
 <li><b>Resolution Date:</b> 2026-03-14 14:40:00</li>
 <li><b>Priority:</b> 1 (Critical/Crash)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1676"></a>
+<h1><a class="anchor" id="autotoc_md2125"></a>
 🔍 Issue Summary</h1>
 <p>The <code>MqttConnectionManager</code> module failed to import, causing a &lsquo;SyntaxError: expected 'except&rsquo; or 'finally' block<code>. This error originated from an unclosed</code>try<code>block in the</code>_queue_worker_task` method, effectively crashing both UI and <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> partitions upon startup.</p>
-<h1><a class="anchor" id="autotoc_md1677"></a>
+<h1><a class="anchor" id="autotoc_md2126"></a>
 🪱 Root Cause</h1>
 <p>The <code>_queue_worker_task</code> method (which manages the asynchronous publication and subscription queues) contained a <code>try</code> block that started but was never closed with an <code>except</code> or <code>finally</code> clause before the next method definition (<code>disconnect</code>). This resulted in an illegal Python syntax state.</p>
-<h1><a class="anchor" id="autotoc_md1678"></a>
+<h1><a class="anchor" id="autotoc_md2127"></a>
 🛠️ Resolution</h1>
 <ol type="1">
 <li><b>Fixed SyntaxError</b>: Completed the <code>try-except-finally</code> block for <code>_queue_worker_task</code>.</li>
 <li><b>Optimized Async Loop</b>: Added <code>if not processed_anything: await asyncio.sleep(0.01)</code> at the end of the worker loop to prevent a high-CPU "busy loop" state when the queues are empty.</li>
 <li><b>Enhanced Exception Handling</b>: Implemented proper <code>asyncio.CancelledError</code> and <code>Exception</code> handling for the worker thread, ensuring errors are logged and don't cause silent thread termination.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1679"></a>
+<h1><a class="anchor" id="autotoc_md2128"></a>
 ✅ Verification Evidence</h1>
 <ul>
 <li><b>Empirical Proof</b>: Verified successful import of <code>MqttConnectionManager</code> via CLI.</li>
 <li><b>Command</b>: &lsquo;python3 -c "from oaComBroker.mqtt.mqtt_connection import MqttConnectionManager; print('Import Successful&amp;rsquo;)"<code></code></li>
 <li><code>**Result**:</code>Import Successful`</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1680"></a>
+<h1><a class="anchor" id="autotoc_md2129"></a>
 📋 System Impact</h1>
 <ul>
 <li>System Bootstrap: Restored.</li>

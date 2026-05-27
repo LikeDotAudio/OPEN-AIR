@@ -131,7 +131,7 @@ class MidiManager:
         info = self.ports.get_available_ports()
 
         for p, n in [("Inputs", info.get("inputs", [])), ("Outputs", info.get("outputs", []))]:
-            self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
+            self.state_cache_manager.handle_external_update(f"OpenAir/System/Status/MIDI/Active{p}", n, source="MIDI")
 
     # --- INBOUND: MIDI Hardware -> System ---
 
@@ -227,7 +227,7 @@ class MidiManager:
             return
 
         # 2. Check if topic belongs to MIDI namespace
-        is_midi_topic = topic.startswith("OPEN-AIR/MIDI/")
+        is_midi_topic = topic.startswith("OpenAir/MIDI/")
 
         # 3. Handle specific MIDI topics (Reflected from MQTT or link feedback)
         if is_midi_topic:

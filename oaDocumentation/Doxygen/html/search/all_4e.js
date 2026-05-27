@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔗_20groupings_20and_20child_20arrays_0',['🔗 Groupings and Child Arrays',['../da/ddf/md_oaGui_2Documentation_2HOMOGENIZED__SCHEMA__SPEC.html#autotoc_md2659',1,'']]]
+  ['🔌_20integration_20with_20mqtt_0',['🔌 Integration with MQTT',['../d6/d95/md_oaGuiEditorWYSIWYG_2Documentation_2ARCHITECTURE.html#autotoc_md3096',1,'']]]
 ];

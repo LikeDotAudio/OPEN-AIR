@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d7/de5/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_222500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1980"></a> </p>
-<h1><a class="anchor" id="autotoc_md1981"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2429"></a> </p>
+<h1><a class="anchor" id="autotoc_md2430"></a>
 Issue</h1>
 <p>A <code>ModuleNotFoundError</code> was reported when loading the Showtime module: &lsquo;ModuleNotFoundError: No module named 'oaGuiShowtime.Core.draw_bargraph&rsquo;`</p>
-<h1><a class="anchor" id="autotoc_md1982"></a>
+<h1><a class="anchor" id="autotoc_md2431"></a>
 Root Cause</h1>
 <p>The file <code><a class="el" href="../../de/d5b/draw__bargraph_8py.html">draw_bargraph.py</a></code> was correctly located in <code>oaGuiShowtime/Methods/</code> per project standards, but <code><a class="el" href="../../d1/da2/ui__mixin_8py.html">oaGuiShowtime/Core/ui_mixin.py</a></code> was attempting a relative import from the <code><a class="el" href="../../d3/d7a/namespaceCore.html">Core</a></code> directory.</p>
-<h1><a class="anchor" id="autotoc_md1983"></a>
+<h1><a class="anchor" id="autotoc_md2432"></a>
 Resolution</h1>
 <p>Corrected the import in <code><a class="el" href="../../d1/da2/ui__mixin_8py.html">oaGuiShowtime/Core/ui_mixin.py</a></code> from <code>from .draw_bargraph import create_bar_graph_image</code> to <code>from oaGuiShowtime.Methods.draw_bargraph import create_bar_graph_image</code>.</p>
-<h1><a class="anchor" id="autotoc_md1984"></a>
+<h1><a class="anchor" id="autotoc_md2433"></a>
 Verification</h1>
 <p>Executed a python snippet to import <code>ShowtimeTab</code> from <code>oaGuiShowtime.Core.tab</code>, which confirmed that all dependent mixins (including <code>ui_mixin</code>) now load correctly. Evidence: <code>Import Success</code> output from verification command. </p>
 </div></div><!-- contents -->

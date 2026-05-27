@@ -163,7 +163,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     def splinker_mqtt_wrapper(message):
         splinker_manager.handle_mqtt_command(message.topic, message.payload)
-    subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Splinker/#", splinker_mqtt_wrapper)
+    subscriber_router.subscribe_to_topic("OpenAir/System/Control/Splinker/#", splinker_mqtt_wrapper)
 
     # --- 3. Start Phase ---
     matrix_log("core", "launcher", "launch_core_managers", "🚀⚙️🔗 [LAUNCHER] Starting all manager services...", "DEBUG")

@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d9/da9/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">🏷️ BUG REPORT: [GUI-METERING] BallisticsEngine Attribute Mismatch</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1408"></a> <b>ID</b>: BUG_20260413_223000 <b>Priority</b>: 2 <b>Status</b>: RESOLVED</p>
-<h1><a class="anchor" id="autotoc_md1409"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1673"></a> <b>ID</b>: BUG_20260413_223000 <b>Priority</b>: 2 <b>Status</b>: RESOLVED</p>
+<h1><a class="anchor" id="autotoc_md1674"></a>
 📖 Description</h1>
 <p>The unit test for <code>BallisticsEngine</code> was attempting to verify the Rust core by accessing a non-existent <code>rust_engine</code> attribute. The actual implementation uses <code>_engine</code>.</p>
-<h1><a class="anchor" id="autotoc_md1410"></a>
+<h1><a class="anchor" id="autotoc_md1675"></a>
 🛠️ Root Cause</h1>
 <p>Attribute mismatch between the test script and the core implementation.</p>
-<h1><a class="anchor" id="autotoc_md1411"></a>
+<h1><a class="anchor" id="autotoc_md1676"></a>
 🚀 Fix Action</h1>
 <p>Updated <code><a class="el" href="../../d5/d1f/test__rust__ballistics_8py.html">oaGuiElements/Tests/metering/test_rust_ballistics.py</a></code> to use the correct internal attribute <code>_engine</code>.</p>
-<h1><a class="anchor" id="autotoc_md1412"></a>
+<h1><a class="anchor" id="autotoc_md1677"></a>
 ✅ Verification</h1>
 <p>Passed <code>test_rust_ballistics_initialization</code> and <code>test_rust_ballistics_movement</code> via pytest. </p>
 </div></div><!-- contents -->

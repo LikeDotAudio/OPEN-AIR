@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('da/dc6/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Agent Mdns Zeroconf</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md584"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md585"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md849"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md850"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md586"></a>
+<h2><a class="anchor" id="autotoc_md851"></a>
 File Level</h2>
 <p>workers/discovery_agents/agent_mdns_zeroconf.py</p>
 <p>Dedicated module for mDNS/ZeroConf discovery (critical for AES70 _oca._tcp). Also includes legacy IP-based port scanning for VISA/SCPI instruments.</p>
 <p>Author: Gemini Agent</p>
-<h1><a class="anchor" id="autotoc_md587"></a>
+<h1><a class="anchor" id="autotoc_md852"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md588"></a>
+<h1><a class="anchor" id="autotoc_md853"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md589"></a>
+<h2><a class="anchor" id="autotoc_md854"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md590"></a>
+<h3><a class="anchor" id="autotoc_md855"></a>
 &lt;tt&gt;discover_aes70_devices(timeout)&lt;/tt&gt;</h3>
 <p>Scans for AES70 devices using mDNS.</p>
 <p><b>Parameters:</b></p><ul>
@@ -120,7 +120,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md591"></a>
+<h3><a class="anchor" id="autotoc_md856"></a>
 &lt;tt&gt;_get_local_ip()&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -132,7 +132,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md592"></a>
+<h3><a class="anchor" id="autotoc_md857"></a>
 &lt;tt&gt;_check_host(ip)&lt;/tt&gt;</h3>
 <p>Legacy: Checks for Port 111 (VXI-11) and Port 5025 (SCPI).</p>
 <p><b>Parameters:</b></p><ul>
@@ -144,7 +144,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md593"></a>
+<h3><a class="anchor" id="autotoc_md858"></a>
 &lt;tt&gt;discover_ip_devices()&lt;/tt&gt;</h3>
 <p>Legacy: Hunts the local network for VISA/SCPI devices. Renamed internally to avoid conflict, but exported for orchestrator.</p>
 <p><b>Parameters:</b></p><ul>
@@ -156,12 +156,12 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md594"></a>
+<h2><a class="anchor" id="autotoc_md859"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md595"></a>
+<h3><a class="anchor" id="autotoc_md860"></a>
 &lt;tt&gt;class AES70DiscoveryListener&lt;/tt&gt;</h3>
 <p>Listens for AES70 (_oca._tcp) devices on the network.</p>
-<h4><a class="anchor" id="autotoc_md596"></a>
+<h4><a class="anchor" id="autotoc_md861"></a>
 &lt;tt&gt;__init__(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -173,7 +173,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md597"></a>
+<h4><a class="anchor" id="autotoc_md862"></a>
 &lt;tt&gt;update_service(self, zc, type_, name)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -187,7 +187,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md598"></a>
+<h4><a class="anchor" id="autotoc_md863"></a>
 &lt;tt&gt;remove_service(self, zc, type_, name)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -201,7 +201,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md599"></a>
+<h4><a class="anchor" id="autotoc_md864"></a>
 &lt;tt&gt;add_service(self, zc, type_, name)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -215,7 +215,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md600"></a>
+<h1><a class="anchor" id="autotoc_md865"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

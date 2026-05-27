@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d7/dfb/namespaceCore_1_1toggle__splink
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab0f48c39c0a3e5991781c08814b25e41" id="r_ab0f48c39c0a3e5991781c08814b25e41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dfb/namespaceCore_1_1toggle__splink.html#ab0f48c39c0a3e5991781c08814b25e41">toggle_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink_id</a>)</td></tr>
+<tr class="memitem:ab0f48c39c0a3e5991781c08814b25e41" id="r_ab0f48c39c0a3e5991781c08814b25e41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dfb/namespaceCore_1_1toggle__splink.html#ab0f48c39c0a3e5991781c08814b25e41">toggle_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splink_id)</td></tr>
 <tr class="separator:ab0f48c39c0a3e5991781c08814b25e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -132,14 +132,11 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">    7</span><span class="keyword">def </span>toggle_splink(self, splink_id):</div>
 <div class="line"><span class="lineno">    8</span>    splink_instance = self.registry.get_splink_by_id(splink_id)</div>
 <div class="line"><span class="lineno">    9</span>    <span class="keywordflow">if</span> splink_instance:</div>
-<div class="line"><span class="lineno">   10</span>        splink_instance[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink_instance.get</a>(<span class="stringliteral">&quot;active&quot;</span>, <span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   10</span>        splink_instance[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keywordflow">not</span> splink_instance.get(<span class="stringliteral">&quot;active&quot;</span>, <span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   11</span>        self.registry.update_splink(splink_id, splink_instance)</div>
 <div class="line"><span class="lineno">   12</span>        self._save_splink(splink_instance)</div>
 <div class="line"><span class="lineno">   13</span>        self.publish_splinks()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

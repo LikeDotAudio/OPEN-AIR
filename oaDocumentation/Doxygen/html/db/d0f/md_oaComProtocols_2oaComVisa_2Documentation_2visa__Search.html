@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('db/d0f/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa Search</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md908"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md909"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1173"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1174"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md910"></a>
+<h2><a class="anchor" id="autotoc_md1175"></a>
 File Level</h2>
 <p>managers/STATE_VISA_FLEET_Manager/manager_visa_Search.py</p>
 <p>Dedicated module for probing VISA devices and parsing their identification.</p>
 <p>Author: Anthony Peter Kuzub (Refactored)</p>
-<h1><a class="anchor" id="autotoc_md911"></a>
+<h1><a class="anchor" id="autotoc_md1176"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md912"></a>
+<h1><a class="anchor" id="autotoc_md1177"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md913"></a>
+<h2><a class="anchor" id="autotoc_md1178"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md914"></a>
+<h3><a class="anchor" id="autotoc_md1179"></a>
 &lt;tt&gt;_clean_string_for_display(s)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -120,7 +120,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md915"></a>
+<h3><a class="anchor" id="autotoc_md1180"></a>
 &lt;tt&gt;_parse_idn(idn_str)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -132,7 +132,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md916"></a>
+<h3><a class="anchor" id="autotoc_md1181"></a>
 &lt;tt&gt;_parse_resource_details(res_str)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -144,7 +144,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md917"></a>
+<h3><a class="anchor" id="autotoc_md1182"></a>
 &lt;tt&gt;_query_device_safe(rm, resource_str, attempt)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -158,7 +158,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md918"></a>
+<h3><a class="anchor" id="autotoc_md1183"></a>
 &lt;tt&gt;probe_devices(resource_manager, potential_targets)&lt;/tt&gt;</h3>
 <p>Probes a list of potential VISA resources to gather detailed information.</p>
 <p><a class="el" href="../../dc/d16/main_8rs.html#db/da7/structArgs">Args</a>: resource_manager: The PyVISA ResourceManager instance. potential_targets (list): A list of dictionaries, each with 'Type' and 'Resource' keys. E.g., [{"Type": "DEDICATED", "Resource": "TCPIP::192.168.1.10::INSTR"}]</p>
@@ -173,7 +173,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md919"></a>
+<h1><a class="anchor" id="autotoc_md1184"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

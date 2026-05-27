@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('df/dbb/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BugLog Entry: 20260409_004400</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1319"></a> </p>
-<h1><a class="anchor" id="autotoc_md1320"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1584"></a> </p>
+<h1><a class="anchor" id="autotoc_md1585"></a>
 Issue Summary</h1>
 <p>The <code>WebSocketEventTransport</code> in <code>oaComProtocols.oaComWebsocket</code> was generating noisy <code>WARNING</code> logs when a server was unavailable (Connection Refused). During system boot, this led to log clutter as multiple modules attempted to connect before the infrastructure was ready.</p>
-<h1><a class="anchor" id="autotoc_md1321"></a>
+<h1><a class="anchor" id="autotoc_md1586"></a>
 Root Cause Analysis</h1>
 <ul>
 <li><b>Missing Reconnect Logic</b>: The transport attempted to connect only once and returned failure if the server was down.</li>
 <li><b>Log Level Inflexibility</b>: Connection failures were always logged as <code>WARNING</code>, regardless of whether they were expected retries or critical failures.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1322"></a>
+<h1><a class="anchor" id="autotoc_md1587"></a>
 Resolution</h1>
 <ul>
 <li><b>Background Reconnection</b>: Implemented an asynchronous reconnection mechanism in <code>WebSocketEventTransport</code>.</li>
@@ -111,7 +111,7 @@ Resolution</h1>
 <li><b>Improved Management</b>: Added <code>reconnect</code> and <code>reconnect_interval</code> parameters to the <code>connect</code> method.</li>
 <li><b>Dependency Fix</b>: Installed missing <code>websocket-client</code> dependency in the environment.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1323"></a>
+<h1><a class="anchor" id="autotoc_md1588"></a>
 Verification Evidence</h1>
 <ul>
 <li><b>Reproduction Script</b>: Ran <code>.gemini/TempScripts/reproduce_ws_noise.py</code>.</li>

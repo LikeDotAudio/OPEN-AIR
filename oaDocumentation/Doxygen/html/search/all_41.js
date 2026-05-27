@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📊_20visual_20lifecycle_3a_20the_20journey_20through_20the_20hub_0',['📊 Visual Lifecycle: The Journey through the Hub',['../dd/d49/md_oaComBroker_2Documentation_2Event__Playbook.html#autotoc_md15',1,'']]],
-  ['📊_20visualization_20rendering_1',['📊 visualization rendering',['../d9/d05/md_oaDocumentation_2Documentation_2Landmarks_2Installation__Guide.html#autotoc_md1523',1,'📊 Visualization &amp; Rendering'],['../d9/da1/md_oaInstallation_2Documentation_2Dependencies.html#autotoc_md4516',1,'📊 Visualization &amp; Rendering']]]
+  ['📅_20timeline_0',['📅 timeline',['../d5/df8/md_oaDocumentation_2Workers_2BugLog_2BUG__20260314__014627.html#autotoc_md2117',1,'📅 Timeline'],['../d7/de6/md_oaDocumentation_2Workers_2BugLog_2BUG__20260314__143000.html#autotoc_md2124',1,'📅 Timeline']]]
 ];

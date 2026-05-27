@@ -38,5 +38,6 @@ var searchData=
   ['use_5fprotocol_5frouter_35',['use_protocol_router',['../d9/d35/classManagers_1_1midi__manager_1_1MidiManager.html#a0ef1305798d043963cfcf7df5e60ff96',1,'Managers::midi_manager::MidiManager']]],
   ['usemap_36',['usemap',['../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a69bccf23c3a34610d4d40bb25488577a',1,'usemap:&#160;generated.rs'],['../dc/d8f/debug_2build_2markup5ever-9cbe8838477cb880_2out_2generated_8rs.html#a69bccf23c3a34610d4d40bb25488577a',1,'usemap:&#160;generated.rs'],['../d4/d1a/release_2build_2markup5ever-6c3b2addd39abd24_2out_2generated_8rs.html#a69bccf23c3a34610d4d40bb25488577a',1,'usemap:&#160;generated.rs']]],
   ['username_37',['username',['../dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#ae0d223afd16b6fed945e374c0467d667',1,'Managers::mqtt_connection::MqttConnectionManager']]],
-  ['uvicorn_5favailable_38',['UVICORN_AVAILABLE',['../d8/dfd/namespaceWorkers_1_1uvicorn__worker.html#a54d6b22393826ded1d99be784bbab775',1,'Workers::uvicorn_worker']]]
+  ['usize_38',['usize',['../d1/dcc/frontEnd_2libControl_2Panels_2wasm_2src_2lib_8rs.html#a3442816ddd98f423ef73f017ceaffb4c',1,'lib.rs']]],
+  ['uvicorn_5favailable_39',['UVICORN_AVAILABLE',['../d8/dfd/namespaceWorkers_1_1uvicorn__worker.html#a54d6b22393826ded1d99be784bbab775',1,'Workers::uvicorn_worker']]]
 ];

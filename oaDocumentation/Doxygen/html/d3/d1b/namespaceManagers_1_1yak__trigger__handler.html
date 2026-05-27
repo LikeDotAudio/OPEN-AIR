@@ -101,9 +101,9 @@ $(document).ready(function(){initNavTree('d3/d1b/namespaceManagers_1_1yak__trigg
 Functions</h2></td></tr>
 <tr class="memitem:acb260d40defbdb97e87df674198daa14" id="r_acb260d40defbdb97e87df674198daa14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#acb260d40defbdb97e87df674198daa14">handle_yak_monitor_traffic</a> (MqttMessage message)</td></tr>
 <tr class="separator:acb260d40defbdb97e87df674198daa14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a537ac82b5c5fad19be1b60daaad71cce" id="r_a537ac82b5c5fad19be1b60daaad71cce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a537ac82b5c5fad19be1b60daaad71cce">register_monitor_callback</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">callback_func</a>)</td></tr>
+<tr class="memitem:a537ac82b5c5fad19be1b60daaad71cce" id="r_a537ac82b5c5fad19be1b60daaad71cce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a537ac82b5c5fad19be1b60daaad71cce">register_monitor_callback</a> (callback_func)</td></tr>
 <tr class="separator:a537ac82b5c5fad19be1b60daaad71cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbc32ff57fdba15dbe3cfd0e6650208" id="r_a3dbc32ff57fdba15dbe3cfd0e6650208"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a3dbc32ff57fdba15dbe3cfd0e6650208">unregister_monitor_callback</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">callback_func</a>)</td></tr>
+<tr class="memitem:a3dbc32ff57fdba15dbe3cfd0e6650208" id="r_a3dbc32ff57fdba15dbe3cfd0e6650208"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a3dbc32ff57fdba15dbe3cfd0e6650208">unregister_monitor_callback</a> (callback_func)</td></tr>
 <tr class="separator:a3dbc32ff57fdba15dbe3cfd0e6650208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -158,19 +158,16 @@ Warn:
 <div class="line"><span class="lineno">   70</span><span class="stringliteral">        - Callbacks are executed sequentially; long-running callbacks will </span></div>
 <div class="line"><span class="lineno">   71</span><span class="stringliteral">          block the router thread.</span></div>
 <div class="line"><span class="lineno">   72</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   73</span>    topic = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.topic</a></div>
-<div class="line"><span class="lineno">   74</span>    payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.decode_payload</a>()</div>
+<div class="line"><span class="lineno">   73</span>    topic = message.topic</div>
+<div class="line"><span class="lineno">   74</span>    payload = message.decode_payload()</div>
 <div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span>    <span class="comment"># Notify all registered GUI dashboards.</span></div>
 <div class="line"><span class="lineno">   77</span>    <span class="keywordflow">for</span> callback <span class="keywordflow">in</span> _gui_observers:</div>
 <div class="line"><span class="lineno">   78</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   79</span>            callback(topic, payload)</div>
 <div class="line"><span class="lineno">   80</span>        <span class="keywordflow">except</span> Exception:</div>
-<div class="line"><span class="lineno">   81</span>             <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(<span class="stringliteral">&quot;❌ [UI] Error updating Yak Monitor dashboard.&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   81</span>             logger.exception(<span class="stringliteral">&quot;❌ [UI] Error updating Yak Monitor dashboard.&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a537ac82b5c5fad19be1b60daaad71cce" name="a537ac82b5c5fad19be1b60daaad71cce"></a>
@@ -210,13 +207,11 @@ Side Effects:
 <div class="line"><span class="lineno">   41</span><span class="stringliteral">        - Logs the registration event to the matrix gate.</span></div>
 <div class="line"><span class="lineno">   42</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   43</span>    <span class="keywordflow">if</span> callback_func <span class="keywordflow">not</span> <span class="keywordflow">in</span> _gui_observers:</div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_gui_observers.append</a>(callback_func)</div>
-<div class="line"><span class="lineno">   45</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>,</div>
+<div class="line"><span class="lineno">   44</span>        _gui_observers.append(callback_func)</div>
+<div class="line"><span class="lineno">   45</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, inspect.currentframe().f_code.co_name,</div>
 <div class="line"><span class="lineno">   46</span>                   <span class="stringliteral">&quot;✅ [CONFIG] Yak Monitor GUI registered.&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><span class="lineno">   47</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a3dbc32ff57fdba15dbe3cfd0e6650208" name="a3dbc32ff57fdba15dbe3cfd0e6650208"></a>
@@ -248,11 +243,9 @@ Args:
 <div class="line"><span class="lineno">   53</span><span class="stringliteral">        callback_func (callable): The previously registered callback.</span></div>
 <div class="line"><span class="lineno">   54</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> callback_func <span class="keywordflow">in</span> _gui_observers:</div>
-<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_gui_observers.remove</a>(callback_func)</div>
+<div class="line"><span class="lineno">   56</span>        _gui_observers.remove(callback_func)</div>
 <div class="line"><span class="lineno">   57</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>

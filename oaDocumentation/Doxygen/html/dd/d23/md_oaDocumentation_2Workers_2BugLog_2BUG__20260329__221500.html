@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('dd/d23/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_221500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1970"></a> </p>
-<h1><a class="anchor" id="autotoc_md1971"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2419"></a> </p>
+<h1><a class="anchor" id="autotoc_md2420"></a>
 Issue</h1>
-<p>The <code>SnmpLog</code> UI widget was emitting high-velocity <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print()</a></code> statements to the console whenever SNMP traffic was received, even when global debug modes were off.</p>
-<h1><a class="anchor" id="autotoc_md1972"></a>
+<p>The <code>SnmpLog</code> UI widget was emitting high-velocity <code>print()</code> statements to the console whenever SNMP traffic was received, even when global debug modes were off.</p>
+<h1><a class="anchor" id="autotoc_md2421"></a>
 Root Cause</h1>
-<p>The <code>on_snmp_traffic()</code> callback and the <code>_find_snmp_manager()</code> method in <code>oaGui/Assets/Assets/right_50/bottom_90/11_SNMP/00_Log/snmp_log.py</code> used direct <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print()</a></code> statements that were not gated by any debug flag.</p>
-<h1><a class="anchor" id="autotoc_md1973"></a>
+<p>The <code>on_snmp_traffic()</code> callback and the <code>_find_snmp_manager()</code> method in <code>oaGui/Assets/Assets/right_50/bottom_90/11_SNMP/00_Log/snmp_log.py</code> used direct <code>print()</code> statements that were not gated by any debug flag.</p>
+<h1><a class="anchor" id="autotoc_md2422"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Gating Logic</b>: Added <code>LOCAL_DEBUG = False</code> as a standard gate at the top of the file.</li>
-<li><b>Surgical Fix</b>: Wrapped all <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print()</a></code> statements in <code>if LOCAL_DEBUG:</code> blocks.</li>
+<li><b>Surgical Fix</b>: Wrapped all <code>print()</code> statements in <code>if LOCAL_DEBUG:</code> blocks.</li>
 <li><b>Standard Compliance</b>: Aligned the widget with the project's Zero-Cost Gates and local debug mandates.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1974"></a>
+<h1><a class="anchor" id="autotoc_md2423"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>LOCAL_DEBUG</code> is set to <code>False</code> by default.</li>

@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('db/dac/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260404_230000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2060"></a><b>Issue</b>: X Error of failed request: BadValue (integer parameter out of range for operation) - Value 0x0. <b>Root Cause</b>: Tkinter widgets were being configured or placed with 0 width/height during asynchronous build passes or transparency syncs before parent widgets were fully realized. <b>Resolution</b>: Added <code>if w &gt; 1 and h &gt; 1</code> checks before calling <code>itemconfig</code>, <code>place</code>, and <code>configure</code> in core UI management modules. <b>Verification</b>: Application successfully reached 'START_PAUSE_STOP is fully operational!' without crashing. </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2509"></a><b>Issue</b>: X Error of failed request: BadValue (integer parameter out of range for operation) - Value 0x0. <b>Root Cause</b>: Tkinter widgets were being configured or placed with 0 width/height during asynchronous build passes or transparency syncs before parent widgets were fully realized. <b>Resolution</b>: Added <code>if w &gt; 1 and h &gt; 1</code> checks before calling <code>itemconfig</code>, <code>place</code>, and <code>configure</code> in core UI management modules. <b>Verification</b>: EngineGuiDisplay successfully reached 'START_PAUSE_STOP is fully operational!' without crashing. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -12,11 +12,6 @@ var annotated_dup =
       ] ],
       [ "SMPTE2138Monitor", "d7/de7/class2138__SMPTE__2138_1_1SMPTE2138Monitor.html", "d7/de7/class2138__SMPTE__2138_1_1SMPTE2138Monitor" ]
     ] ],
-    [ "22_Yak_Monitor", "de/d13/namespace22__Yak__Monitor.html", [
-      [ "yak_monitor", "df/d1a/namespace22__Yak__Monitor_1_1yak__monitor.html", [
-        [ "YakMonitor", "d9/daf/class22__Yak__Monitor_1_1yak__monitor_1_1YakMonitor.html", "d9/daf/class22__Yak__Monitor_1_1yak__monitor_1_1YakMonitor" ]
-      ] ]
-    ] ],
     [ "44_REST", "d9/d4d/namespace44__REST.html", [
       [ "gui_REST", "d1/d14/namespace44__REST_1_1gui__REST.html", [
         [ "RestMonitor", "dd/d5e/class44__REST_1_1gui__REST_1_1RestMonitor.html", "dd/d5e/class44__REST_1_1gui__REST_1_1RestMonitor" ]
@@ -81,6 +76,12 @@ var annotated_dup =
     ] ],
     [ "abc", "d7/d5f/namespaceabc.html", [
       [ "EventTransport", "d4/d87/classabc_1_1EventTransport.html", "d4/d87/classabc_1_1EventTransport" ]
+    ] ],
+    [ "active_marker_tune_and_collect", "dd/da6/namespaceactive__marker__tune__and__collect.html", [
+      [ "MarkerGoGetterWorker", "de/d1c/classactive__marker__tune__and__collect_1_1MarkerGoGetterWorker.html", "de/d1c/classactive__marker__tune__and__collect_1_1MarkerGoGetterWorker" ]
+    ] ],
+    [ "active_peak_publisher", "d3/d0e/namespaceactive__peak__publisher.html", [
+      [ "ActivePeakPublisher", "df/dde/classactive__peak__publisher_1_1ActivePeakPublisher.html", "df/dde/classactive__peak__publisher_1_1ActivePeakPublisher" ]
     ] ],
     [ "aes70", "dc/df5/namespaceaes70.html", [
       [ "connection", "d2/d8e/namespaceaes70_1_1connection.html", [
@@ -422,14 +423,44 @@ var annotated_dup =
     [ "alignment_overlay", "dc/d83/namespacealignment__overlay.html", [
       [ "AlignmentOverlay", "d8/de2/classalignment__overlay_1_1AlignmentOverlay.html", "d8/de2/classalignment__overlay_1_1AlignmentOverlay" ]
     ] ],
+    [ "array_data_expander", "d0/d79/namespacearray__data__expander.html", [
+      [ "ArrayDataExpander", "d7/d5e/classarray__data__expander_1_1ArrayDataExpander.html", "d7/d5e/classarray__data__expander_1_1ArrayDataExpander" ]
+    ] ],
     [ "auto_scrollbar", "d6/d0f/namespaceauto__scrollbar.html", [
       [ "AutoScrollbar", "d7/d39/classauto__scrollbar_1_1AutoScrollbar.html", "d7/d39/classauto__scrollbar_1_1AutoScrollbar" ]
     ] ],
     [ "base_overlay", "d2/df7/namespacebase__overlay.html", [
       [ "BaseOverlay", "d2/d79/classbase__overlay_1_1BaseOverlay.html", "d2/d79/classbase__overlay_1_1BaseOverlay" ]
     ] ],
+    [ "blueprint_data_injector", "dd/d30/namespaceblueprint__data__injector.html", [
+      [ "BlueprintDataInjector", "d8/d37/classblueprint__data__injector_1_1BlueprintDataInjector.html", "d8/d37/classblueprint__data__injector_1_1BlueprintDataInjector" ]
+    ] ],
+    [ "blueprint_merger", "de/db0/namespaceblueprint__merger.html", [
+      [ "BlueprintMerger", "db/d47/classblueprint__merger_1_1BlueprintMerger.html", "db/d47/classblueprint__merger_1_1BlueprintMerger" ]
+    ] ],
+    [ "builder_footer", "d5/df5/namespacebuilder__footer.html", [
+      [ "BuilderFooter", "d6/dad/classbuilder__footer_1_1BuilderFooter.html", "d6/dad/classbuilder__footer_1_1BuilderFooter" ]
+    ] ],
+    [ "button_image_renderer", "de/d46/namespacebutton__image__renderer.html", [
+      [ "ButtonImageRenderer", "db/d49/classbutton__image__renderer_1_1ButtonImageRenderer.html", "db/d49/classbutton__image__renderer_1_1ButtonImageRenderer" ]
+    ] ],
+    [ "cache_blueprint_store", "da/d62/namespacecache__blueprint__store.html", [
+      [ "CacheBlueprintStore", "d1/d2e/classcache__blueprint__store_1_1CacheBlueprintStore.html", "d1/d2e/classcache__blueprint__store_1_1CacheBlueprintStore" ]
+    ] ],
+    [ "cache_layout_store", "de/d65/namespacecache__layout__store.html", [
+      [ "CacheLayoutStore", "d1/d36/classcache__layout__store_1_1CacheLayoutStore.html", "d1/d36/classcache__layout__store_1_1CacheLayoutStore" ]
+    ] ],
+    [ "Canvas_Viewport_Manager", "d4/d43/namespaceCanvas__Viewport__Manager.html", [
+      [ "CanvasViewportManager", "d3/d72/classCanvas__Viewport__Manager_1_1CanvasViewportManager.html", "d3/d72/classCanvas__Viewport__Manager_1_1CanvasViewportManager" ]
+    ] ],
     [ "command_router", "d0/d56/namespacecommand__router.html", [
-      [ "CommandRouter", "d9/d77/classcommand__router_1_1CommandRouter.html", "d9/d77/classcommand__router_1_1CommandRouter" ]
+      [ "CommandRouterProxy", "db/d3e/classcommand__router_1_1CommandRouterProxy.html", null ]
+    ] ],
+    [ "context_menu", "da/d32/namespacecontext__menu.html", [
+      [ "BuilderContextMenuMixin", "d3/def/classcontext__menu_1_1BuilderContextMenuMixin.html", "d3/def/classcontext__menu_1_1BuilderContextMenuMixin" ]
+    ] ],
+    [ "coordinate_transformer", "de/d90/namespacecoordinate__transformer.html", [
+      [ "CoordinateTransformer", "dc/de7/classcoordinate__transformer_1_1CoordinateTransformer.html", "dc/de7/classcoordinate__transformer_1_1CoordinateTransformer" ]
     ] ],
     [ "Core", "d3/d7a/namespaceCore.html", [
       [ "abc", "d8/d69/namespaceCore_1_1abc.html", [
@@ -438,38 +469,8 @@ var annotated_dup =
       [ "aes70", "d8/d23/namespaceCore_1_1aes70.html", [
         [ "AES70Manager", "d2/d19/classCore_1_1aes70_1_1AES70Manager.html", "d2/d19/classCore_1_1aes70_1_1AES70Manager" ]
       ] ],
-      [ "array", "d6/dda/namespaceCore_1_1array.html", [
-        [ "array", "d4/d2a/namespaceCore_1_1array_1_1array.html", [
-          [ "ArrayDataExpander", "d0/dc9/classCore_1_1array_1_1array_1_1ArrayDataExpander.html", "d0/dc9/classCore_1_1array_1_1array_1_1ArrayDataExpander" ],
-          [ "BlueprintDataInjector", "d2/df7/classCore_1_1array_1_1array_1_1BlueprintDataInjector.html", "d2/df7/classCore_1_1array_1_1array_1_1BlueprintDataInjector" ],
-          [ "BuilderArrayCreator", "dc/df2/classCore_1_1array_1_1array_1_1BuilderArrayCreator.html", "dc/df2/classCore_1_1array_1_1array_1_1BuilderArrayCreator" ],
-          [ "GridColumnConfigurator", "d2/dde/classCore_1_1array_1_1array_1_1GridColumnConfigurator.html", "d2/dde/classCore_1_1array_1_1array_1_1GridColumnConfigurator" ],
-          [ "ViewManager", "d8/d66/classCore_1_1array_1_1array_1_1ViewManager.html", "d8/d66/classCore_1_1array_1_1array_1_1ViewManager" ]
-        ] ],
-        [ "collapsible_block", "de/dc6/namespaceCore_1_1array_1_1collapsible__block.html", [
-          [ "collapsible_block", "dd/d28/namespaceCore_1_1array_1_1collapsible__block_1_1collapsible__block.html", [
-            [ "CollapsibleBlockCreatorMixin", "da/ddd/classCore_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin.html", "da/ddd/classCore_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin" ]
-          ] ]
-        ] ]
-      ] ],
-      [ "base_widget_creator", "da/d16/namespaceCore_1_1base__widget__creator.html", [
-        [ "BaseWidgetCreator", "d6/db6/classCore_1_1base__widget__creator_1_1BaseWidgetCreator.html", "d6/db6/classCore_1_1base__widget__creator_1_1BaseWidgetCreator" ]
-      ] ],
-      [ "batch_processing_engine", "d6/d50/namespaceCore_1_1batch__processing__engine.html", [
-        [ "BatchProcessingEngine", "d1/d84/classCore_1_1batch__processing__engine_1_1BatchProcessingEngine.html", "d1/d84/classCore_1_1batch__processing__engine_1_1BatchProcessingEngine" ]
-      ] ],
-      [ "bootstrap_sequence", "df/d21/namespaceCore_1_1bootstrap__sequence.html", [
-        [ "AsyncBootstrapEngine", "d7/dae/classCore_1_1bootstrap__sequence_1_1AsyncBootstrapEngine.html", "d7/dae/classCore_1_1bootstrap__sequence_1_1AsyncBootstrapEngine" ]
-      ] ],
-      [ "break_line", "de/dfc/namespaceCore_1_1break__line.html", [
-        [ "break_line_creator", "dd/d9d/namespaceCore_1_1break__line_1_1break__line__creator.html", [
-          [ "BreakLineCreator", "d3/d2e/classCore_1_1break__line_1_1break__line__creator_1_1BreakLineCreator.html", "d3/d2e/classCore_1_1break__line_1_1break__line__creator_1_1BreakLineCreator" ]
-        ] ]
-      ] ],
-      [ "breakoff", "d8/de0/namespaceCore_1_1breakoff.html", [
-        [ "window_breakoff_manager", "dc/d2f/namespaceCore_1_1breakoff_1_1window__breakoff__manager.html", [
-          [ "WindowBreakoffManagerMixin", "d7/d27/classCore_1_1breakoff_1_1window__breakoff__manager_1_1WindowBreakoffManagerMixin.html", "d7/d27/classCore_1_1breakoff_1_1window__breakoff__manager_1_1WindowBreakoffManagerMixin" ]
-        ] ]
+      [ "break_line_creator", "d1/d3e/namespaceCore_1_1break__line__creator.html", [
+        [ "BreakLineCreator", "d4/d51/classCore_1_1break__line__creator_1_1BreakLineCreator.html", "d4/d51/classCore_1_1break__line__creator_1_1BreakLineCreator" ]
       ] ],
       [ "cache_observer_registry", "d6/d66/namespaceCore_1_1cache__observer__registry.html", [
         [ "CacheObserverRegistry", "db/d5d/classCore_1_1cache__observer__registry_1_1CacheObserverRegistry.html", "db/d5d/classCore_1_1cache__observer__registry_1_1CacheObserverRegistry" ]
@@ -480,8 +481,46 @@ var annotated_dup =
       [ "cache_search_engine", "d2/d79/namespaceCore_1_1cache__search__engine.html", [
         [ "CacheSearchEngine", "d8/daf/classCore_1_1cache__search__engine_1_1CacheSearchEngine.html", "d8/daf/classCore_1_1cache__search__engine_1_1CacheSearchEngine" ]
       ] ],
-      [ "composition_root", "d7/d6d/namespaceCore_1_1composition__root.html", [
-        [ "UICompositionRoot", "d3/db3/classCore_1_1composition__root_1_1UICompositionRoot.html", "d3/db3/classCore_1_1composition__root_1_1UICompositionRoot" ]
+      [ "checkbox", "d7/d37/namespaceCore_1_1checkbox.html", [
+        [ "BuilderCheckboxCreator", "d7/d8d/classCore_1_1checkbox_1_1BuilderCheckboxCreator.html", "d7/d8d/classCore_1_1checkbox_1_1BuilderCheckboxCreator" ]
+      ] ],
+      [ "circular_motion_displacement_potentiometer", "d9/d82/namespaceCore_1_1circular__motion__displacement__potentiometer.html", [
+        [ "BuilderCircularMotionDisplacementPotentiometerCreator", "d8/dc0/classCore_1_1circular__motion__displacement__potentiometer_1_1BuilderCircularMotionDisplacementPotentiometerCreator.html", "d8/dc0/classCore_1_1circular__motion__displacement__potentiometer_1_1BuilderCircularMotionDisplacementPotentiometerCreator" ],
+        [ "CMDPWidget", "d1/daa/classCore_1_1circular__motion__displacement__potentiometer_1_1CMDPWidget.html", "d1/daa/classCore_1_1circular__motion__displacement__potentiometer_1_1CMDPWidget" ]
+      ] ],
+      [ "cmdp_channel_handler", "d7/deb/namespaceCore_1_1cmdp__channel__handler.html", [
+        [ "CMDP_LTPObject", "d0/da8/classCore_1_1cmdp__channel__handler_1_1CMDP__LTPObject.html", "d0/da8/classCore_1_1cmdp__channel__handler_1_1CMDP__LTPObject" ]
+      ] ],
+      [ "cmdp_file_handler", "d9/d0b/namespaceCore_1_1cmdp__file__handler.html", [
+        [ "CMDPFileHandler", "d9/d62/classCore_1_1cmdp__file__handler_1_1CMDPFileHandler.html", "d9/d62/classCore_1_1cmdp__file__handler_1_1CMDPFileHandler" ]
+      ] ],
+      [ "cmdp_group_handler", "df/d4e/namespaceCore_1_1cmdp__group__handler.html", [
+        [ "CMDPGroupHandler", "d8/dcf/classCore_1_1cmdp__group__handler_1_1CMDPGroupHandler.html", "d8/dcf/classCore_1_1cmdp__group__handler_1_1CMDPGroupHandler" ]
+      ] ],
+      [ "cmdp_group_mixin", "d4/d75/namespaceCore_1_1cmdp__group__mixin.html", [
+        [ "CMDPGroupMixin", "d4/ded/classCore_1_1cmdp__group__mixin_1_1CMDPGroupMixin.html", "d4/ded/classCore_1_1cmdp__group__mixin_1_1CMDPGroupMixin" ]
+      ] ],
+      [ "cmdp_interaction_mixin", "d0/db5/namespaceCore_1_1cmdp__interaction__mixin.html", [
+        [ "CMDPInteractionMixin", "d0/dc9/classCore_1_1cmdp__interaction__mixin_1_1CMDPInteractionMixin.html", "d0/dc9/classCore_1_1cmdp__interaction__mixin_1_1CMDPInteractionMixin" ]
+      ] ],
+      [ "cmdp_math", "d2/de1/namespaceCore_1_1cmdp__math.html", [
+        [ "CircularMath", "d3/d96/classCore_1_1cmdp__math_1_1CircularMath.html", "d3/d96/classCore_1_1cmdp__math_1_1CircularMath" ]
+      ] ],
+      [ "cmdp_renderer_mixin", "d1/db6/namespaceCore_1_1cmdp__renderer__mixin.html", [
+        [ "CMDPRendererMixin", "df/dc3/classCore_1_1cmdp__renderer__mixin_1_1CMDPRendererMixin.html", "df/dc3/classCore_1_1cmdp__renderer__mixin_1_1CMDPRendererMixin" ]
+      ] ],
+      [ "CMDP_tester", "de/d08/namespaceCore_1_1CMDP__tester.html", [
+        [ "MultiFaderApp", "d5/d0a/classCore_1_1CMDP__tester_1_1MultiFaderApp.html", "d5/d0a/classCore_1_1CMDP__tester_1_1MultiFaderApp" ]
+      ] ],
+      [ "cmdp_tree", "d4/d40/namespaceCore_1_1cmdp__tree.html", [
+        [ "CMDPTreeManager", "d8/d78/classCore_1_1cmdp__tree_1_1CMDPTreeManager.html", "d8/d78/classCore_1_1cmdp__tree_1_1CMDPTreeManager" ]
+      ] ],
+      [ "composite_horizontal_dial_value", "de/d72/namespaceCore_1_1composite__horizontal__dial__value.html", [
+        [ "BuilderCompositeHorizontalDialValueCreator", "da/d87/classCore_1_1composite__horizontal__dial__value_1_1BuilderCompositeHorizontalDialValueCreator.html", "da/d87/classCore_1_1composite__horizontal__dial__value_1_1BuilderCompositeHorizontalDialValueCreator" ]
+      ] ],
+      [ "composite_mdp", "da/d4e/namespaceCore_1_1composite__mdp.html", [
+        [ "BuilderCompositeMdpCreator", "d2/db6/classCore_1_1composite__mdp_1_1BuilderCompositeMdpCreator.html", "d2/db6/classCore_1_1composite__mdp_1_1BuilderCompositeMdpCreator" ],
+        [ "MDPFrame", "d5/d22/classCore_1_1composite__mdp_1_1MDPFrame.html", "d5/d22/classCore_1_1composite__mdp_1_1MDPFrame" ]
       ] ],
       [ "config_defaults", "de/d72/namespaceCore_1_1config__defaults.html", [
         [ "ConfigDefaults", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults" ]
@@ -490,12 +529,9 @@ var annotated_dup =
         [ "ConfigLoader", "d5/dc1/classCore_1_1config__loader_1_1ConfigLoader.html", "d5/dc1/classCore_1_1config__loader_1_1ConfigLoader" ]
       ] ],
       [ "context", "d4/df3/namespaceCore_1_1context.html", [
-        [ "widget_context", "d9/d89/namespaceCore_1_1context_1_1widget__context.html", [
-          [ "WidgetContext", "d1/d9a/classCore_1_1context_1_1widget__context_1_1WidgetContext.html", "d1/d9a/classCore_1_1context_1_1widget__context_1_1WidgetContext" ]
+        [ "cache_widget_context", "d6/df9/namespaceCore_1_1context_1_1cache__widget__context.html", [
+          [ "WidgetContext", "df/dd2/classCore_1_1context_1_1cache__widget__context_1_1WidgetContext.html", "df/dd2/classCore_1_1context_1_1cache__widget__context_1_1WidgetContext" ]
         ] ]
-      ] ],
-      [ "context_menu", "d5/d09/namespaceCore_1_1context__menu.html", [
-        [ "BuilderContextMenuMixin", "da/dcf/classCore_1_1context__menu_1_1BuilderContextMenuMixin.html", "da/dcf/classCore_1_1context__menu_1_1BuilderContextMenuMixin" ]
       ] ],
       [ "csv_to_json_app", "dd/d1d/namespaceCore_1_1csv__to__json__app.html", [
         [ "Core", "d7/d0e/namespaceCore_1_1csv__to__json__app_1_1Core.html", [
@@ -513,9 +549,6 @@ var annotated_dup =
           [ "CSVToJSONApp", "db/d40/classCore_1_1csv__to__json__app_1_1csvtojson_1_1CSVToJSONApp.html", "db/d40/classCore_1_1csv__to__json__app_1_1csvtojson_1_1CSVToJSONApp" ]
         ] ]
       ] ],
-      [ "directory", "db/d25/namespaceCore_1_1directory.html", [
-        [ "DirectoryBuilderMixin", "d8/d9a/classCore_1_1directory_1_1DirectoryBuilderMixin.html", "d8/d9a/classCore_1_1directory_1_1DirectoryBuilderMixin" ]
-      ] ],
       [ "event_bus", "d8/df8/namespaceCore_1_1event__bus.html", [
         [ "EventBus", "d7/d1d/classCore_1_1event__bus_1_1EventBus.html", "d7/d1d/classCore_1_1event__bus_1_1EventBus" ],
         [ "NmosEventBus", "d5/d25/classCore_1_1event__bus_1_1NmosEventBus.html", "d5/d25/classCore_1_1event__bus_1_1NmosEventBus" ]
@@ -532,26 +565,20 @@ var annotated_dup =
         [ "VocalError", "db/d96/classCore_1_1exceptions_1_1VocalError.html", null ]
       ] ],
       [ "factory", "d7/de0/namespaceCore_1_1factory.html", [
-        [ "asset_cache", "db/dff/namespaceCore_1_1factory_1_1asset__cache.html", [
-          [ "AssetCacheManager", "d7/d2a/classCore_1_1factory_1_1asset__cache_1_1AssetCacheManager.html", "d7/d2a/classCore_1_1factory_1_1asset__cache_1_1AssetCacheManager" ]
+        [ "base_widget_creator", "d8/d3c/namespaceCore_1_1factory_1_1base__widget__creator.html", [
+          [ "BaseWidgetCreator", "db/de8/classCore_1_1factory_1_1base__widget__creator_1_1BaseWidgetCreator.html", "db/de8/classCore_1_1factory_1_1base__widget__creator_1_1BaseWidgetCreator" ]
         ] ],
         [ "button_canvas_base", "dc/da5/namespaceCore_1_1factory_1_1button__canvas__base.html", [
           [ "CanvasButton", "de/ded/classCore_1_1factory_1_1button__canvas__base_1_1CanvasButton.html", "de/ded/classCore_1_1factory_1_1button__canvas__base_1_1CanvasButton" ]
+        ] ],
+        [ "cache_image_store", "df/d97/namespaceCore_1_1factory_1_1cache__image__store.html", [
+          [ "CacheImageStore", "d0/db9/classCore_1_1factory_1_1cache__image__store_1_1CacheImageStore.html", "d0/db9/classCore_1_1factory_1_1cache__image__store_1_1CacheImageStore" ]
         ] ],
         [ "Core", "d4/d55/namespaceCore_1_1factory_1_1Core.html", [
           [ "widget_discovery_engine", "db/d9f/namespaceCore_1_1factory_1_1Core_1_1widget__discovery__engine.html", [
             [ "WidgetDiscoveryEngine", "d7/dba/classCore_1_1factory_1_1Core_1_1widget__discovery__engine_1_1WidgetDiscoveryEngine.html", "d7/dba/classCore_1_1factory_1_1Core_1_1widget__discovery__engine_1_1WidgetDiscoveryEngine" ]
           ] ]
-        ] ],
-        [ "gui_widget_factory", "d6/dd7/namespaceCore_1_1factory_1_1gui__widget__factory.html", [
-          [ "GuiWidgetFactoryMixin", "d5/d7d/classCore_1_1factory_1_1gui__widget__factory_1_1GuiWidgetFactoryMixin.html", "d5/d7d/classCore_1_1factory_1_1gui__widget__factory_1_1GuiWidgetFactoryMixin" ]
-        ] ],
-        [ "widget_registry", "de/d17/namespaceCore_1_1factory_1_1widget__registry.html", [
-          [ "WidgetRegistry", "d8/d8b/classCore_1_1factory_1_1widget__registry_1_1WidgetRegistry.html", "d8/d8b/classCore_1_1factory_1_1widget__registry_1_1WidgetRegistry" ]
         ] ]
-      ] ],
-      [ "fast_scanner", "de/dde/namespaceCore_1_1fast__scanner.html", [
-        [ "FastScanner", "d0/d85/classCore_1_1fast__scanner_1_1FastScanner.html", "d0/d85/classCore_1_1fast__scanner_1_1FastScanner" ]
       ] ],
       [ "fleet_command_manager", "dc/db6/namespaceCore_1_1fleet__command__manager.html", [
         [ "CommandQueueManager", "d1/d9f/classCore_1_1fleet__command__manager_1_1CommandQueueManager.html", "d1/d9f/classCore_1_1fleet__command__manager_1_1CommandQueueManager" ]
@@ -562,20 +589,18 @@ var annotated_dup =
       [ "fleet_scan_manager", "da/d13/namespaceCore_1_1fleet__scan__manager.html", [
         [ "ScanManager", "d3/d8c/classCore_1_1fleet__scan__manager_1_1ScanManager.html", "d3/d8c/classCore_1_1fleet__scan__manager_1_1ScanManager" ]
       ] ],
-      [ "grid_topology_configurator", "d9/d01/namespaceCore_1_1grid__topology__configurator.html", [
-        [ "GridTopologyConfigurator", "d4/d41/classCore_1_1grid__topology__configurator_1_1GridTopologyConfigurator.html", "d4/d41/classCore_1_1grid__topology__configurator_1_1GridTopologyConfigurator" ]
+      [ "grid", "db/d9c/namespaceCore_1_1grid.html", [
+        [ "GridManager", "d6/d87/classCore_1_1grid_1_1GridManager.html", "d6/d87/classCore_1_1grid_1_1GridManager" ]
       ] ],
       [ "group_mixin", "d1/dd7/namespaceCore_1_1group__mixin.html", [
         [ "ShowtimeGroupMixin", "d1/dc5/classCore_1_1group__mixin_1_1ShowtimeGroupMixin.html", "d1/dc5/classCore_1_1group__mixin_1_1ShowtimeGroupMixin" ]
       ] ],
-      [ "gui_smart_standardizer", "db/d7c/namespaceCore_1_1gui__smart__standardizer.html", [
-        [ "SmartWidgetStandardizerMixin", "db/d9e/classCore_1_1gui__smart__standardizer_1_1SmartWidgetStandardizerMixin.html", "db/d9e/classCore_1_1gui__smart__standardizer_1_1SmartWidgetStandardizerMixin" ]
-      ] ],
       [ "gui_style", "d1/d26/namespaceCore_1_1gui__style.html", [
         [ "GuiStyleMixin", "d1/d18/classCore_1_1gui__style_1_1GuiStyleMixin.html", "d1/d18/classCore_1_1gui__style_1_1GuiStyleMixin" ]
       ] ],
-      [ "horizontal_fader_renderer_mixin", "dd/dcb/namespaceCore_1_1horizontal__fader__renderer__mixin.html", [
-        [ "HorizontalFaderRendererMixin", "d9/d6c/classCore_1_1horizontal__fader__renderer__mixin_1_1HorizontalFaderRendererMixin.html", "d9/d6c/classCore_1_1horizontal__fader__renderer__mixin_1_1HorizontalFaderRendererMixin" ]
+      [ "hidden_BreakLine", "d7/d87/namespaceCore_1_1hidden__BreakLine.html", [
+        [ "BreakLineCreatorMixin", "d5/df7/classCore_1_1hidden__BreakLine_1_1BreakLineCreatorMixin.html", "d5/df7/classCore_1_1hidden__BreakLine_1_1BreakLineCreatorMixin" ],
+        [ "BuilderBreakLineCreator", "d7/d8b/classCore_1_1hidden__BreakLine_1_1BuilderBreakLineCreator.html", "d7/d8b/classCore_1_1hidden__BreakLine_1_1BuilderBreakLineCreator" ]
       ] ],
       [ "HumanUserinterface", "d9/d51/namespaceCore_1_1HumanUserinterface.html", [
         [ "scripts", "d4/d52/namespaceCore_1_1HumanUserinterface_1_1scripts.html", [
@@ -590,9 +615,6 @@ var annotated_dup =
       [ "identity", "d3/dad/namespaceCore_1_1identity.html", [
         [ "IdentityManager", "d9/d30/classCore_1_1identity_1_1IdentityManager.html", "d9/d30/classCore_1_1identity_1_1IdentityManager" ]
       ] ],
-      [ "instrument_controller", "df/dc0/namespaceCore_1_1instrument__controller.html", [
-        [ "InstrumentController", "d2/dcc/classCore_1_1instrument__controller_1_1InstrumentController.html", "d2/dcc/classCore_1_1instrument__controller_1_1InstrumentController" ]
-      ] ],
       [ "interaction_mixin", "d4/dab/namespaceCore_1_1interaction__mixin.html", [
         [ "ShowtimeInteractionMixin", "d9/df3/classCore_1_1interaction__mixin_1_1ShowtimeInteractionMixin.html", "d9/df3/classCore_1_1interaction__mixin_1_1ShowtimeInteractionMixin" ]
       ] ],
@@ -606,21 +628,80 @@ var annotated_dup =
           [ "IS12Manager", "d6/dab/classCore_1_1IS12_1_1Entry_1_1IS12Manager.html", "d6/dab/classCore_1_1IS12_1_1Entry_1_1IS12Manager" ]
         ] ]
       ] ],
-      [ "layout_cache", "d1/de4/namespaceCore_1_1layout__cache.html", [
-        [ "LayoutCacheManager", "d4/d65/classCore_1_1layout__cache_1_1LayoutCacheManager.html", "d4/d65/classCore_1_1layout__cache_1_1LayoutCacheManager" ]
+      [ "json", "db/dea/namespaceCore_1_1json.html", [
+        [ "JsonDataManager", "dc/d46/classCore_1_1json_1_1JsonDataManager.html", "dc/d46/classCore_1_1json_1_1JsonDataManager" ]
       ] ],
-      [ "layout_parser", "d0/d73/namespaceCore_1_1layout__parser.html", [
-        [ "LayoutParser", "d9/d93/classCore_1_1layout__parser_1_1LayoutParser.html", "d9/d93/classCore_1_1layout__parser_1_1LayoutParser" ]
+      [ "json_tree", "dd/d2c/namespaceCore_1_1json__tree.html", [
+        [ "AutoScrollbar", "d3/d45/classCore_1_1json__tree_1_1AutoScrollbar.html", "d3/d45/classCore_1_1json__tree_1_1AutoScrollbar" ],
+        [ "BuilderDataJsonTreeCreator", "df/d26/classCore_1_1json__tree_1_1BuilderDataJsonTreeCreator.html", "df/d26/classCore_1_1json__tree_1_1BuilderDataJsonTreeCreator" ],
+        [ "JsonTreeWidget", "d6/d2e/classCore_1_1json__tree_1_1JsonTreeWidget.html", "d6/d2e/classCore_1_1json__tree_1_1JsonTreeWidget" ]
       ] ],
-      [ "loader", "d4/d05/namespaceCore_1_1loader.html", [
-        [ "gui_from_json", "d9/d83/namespaceCore_1_1loader_1_1gui__from__json.html", [
-          [ "UniversalGuiLoader", "d8/dd1/classCore_1_1loader_1_1gui__from__json_1_1UniversalGuiLoader.html", "d8/dd1/classCore_1_1loader_1_1gui__from__json_1_1UniversalGuiLoader" ]
-        ] ]
+      [ "json_tree_editor_mixin", "db/dd2/namespaceCore_1_1json__tree__editor__mixin.html", [
+        [ "JsonTreeEditorMixin", "d2/d9f/classCore_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "d2/d9f/classCore_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
+      ] ],
+      [ "json_tree_renderer_mixin", "df/de9/namespaceCore_1_1json__tree__renderer__mixin.html", [
+        [ "JsonTreeRendererMixin", "d8/db7/classCore_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin.html", "d8/db7/classCore_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin" ]
+      ] ],
+      [ "knob", "d2/da4/namespaceCore_1_1knob.html", [
+        [ "BuilderKnobCreator", "d3/dde/classCore_1_1knob_1_1BuilderKnobCreator.html", "d3/dde/classCore_1_1knob_1_1BuilderKnobCreator" ],
+        [ "CustomKnobFrame", "d8/d96/classCore_1_1knob_1_1CustomKnobFrame.html", "d8/d96/classCore_1_1knob_1_1CustomKnobFrame" ]
+      ] ],
+      [ "knob_interaction_mixin", "db/d55/namespaceCore_1_1knob__interaction__mixin.html", [
+        [ "KnobInteractionMixin", "d5/d0f/classCore_1_1knob__interaction__mixin_1_1KnobInteractionMixin.html", "d5/d0f/classCore_1_1knob__interaction__mixin_1_1KnobInteractionMixin" ]
+      ] ],
+      [ "knob_renderer_mixin", "d8/d48/namespaceCore_1_1knob__renderer__mixin.html", [
+        [ "KnobRendererMixin", "d2/d89/classCore_1_1knob__renderer__mixin_1_1KnobRendererMixin.html", "d2/d89/classCore_1_1knob__renderer__mixin_1_1KnobRendererMixin" ]
+      ] ],
+      [ "knob_rotary_selector", "d7/db7/namespaceCore_1_1knob__rotary__selector.html", [
+        [ "BuilderKnobRotarySelectorCreator", "d3/dfc/classCore_1_1knob__rotary__selector_1_1BuilderKnobRotarySelectorCreator.html", "d3/dfc/classCore_1_1knob__rotary__selector_1_1BuilderKnobRotarySelectorCreator" ],
+        [ "RotarySelectorSwitch", "df/dd8/classCore_1_1knob__rotary__selector_1_1RotarySelectorSwitch.html", "df/dd8/classCore_1_1knob__rotary__selector_1_1RotarySelectorSwitch" ]
+      ] ],
+      [ "layer_dust", "d7/d85/namespaceCore_1_1layer__dust.html", [
+        [ "DustLayer", "d3/dfe/classCore_1_1layer__dust_1_1DustLayer.html", "d3/dfe/classCore_1_1layer__dust_1_1DustLayer" ]
+      ] ],
+      [ "layer_metal_fold", "d5/d34/namespaceCore_1_1layer__metal__fold.html", [
+        [ "MetalFoldLayer", "de/dd5/classCore_1_1layer__metal__fold_1_1MetalFoldLayer.html", "de/dd5/classCore_1_1layer__metal__fold_1_1MetalFoldLayer" ]
+      ] ],
+      [ "layer_rust", "db/d9d/namespaceCore_1_1layer__rust.html", [
+        [ "RustLayer", "dd/d1f/classCore_1_1layer__rust_1_1RustLayer.html", "dd/d1f/classCore_1_1layer__rust_1_1RustLayer" ]
+      ] ],
+      [ "layer_scratches", "d1/d15/namespaceCore_1_1layer__scratches.html", [
+        [ "ScratchLayer", "da/da1/classCore_1_1layer__scratches_1_1ScratchLayer.html", "da/da1/classCore_1_1layer__scratches_1_1ScratchLayer" ]
+      ] ],
+      [ "layer_screws", "d2/dbe/namespaceCore_1_1layer__screws.html", [
+        [ "ScrewLayer", "d4/d3a/classCore_1_1layer__screws_1_1ScrewLayer.html", "d4/d3a/classCore_1_1layer__screws_1_1ScrewLayer" ]
+      ] ],
+      [ "layer_stains", "dc/d54/namespaceCore_1_1layer__stains.html", [
+        [ "StainsLayer", "d2/db6/classCore_1_1layer__stains_1_1StainsLayer.html", "d2/db6/classCore_1_1layer__stains_1_1StainsLayer" ]
+      ] ],
+      [ "layer_vignette", "da/df8/namespaceCore_1_1layer__vignette.html", [
+        [ "VignetteLayer", "d4/d66/classCore_1_1layer__vignette_1_1VignetteLayer.html", "d4/d66/classCore_1_1layer__vignette_1_1VignetteLayer" ]
+      ] ],
+      [ "listbox", "d0/dd3/namespaceCore_1_1listbox.html", [
+        [ "BuilderListboxCreator", "d3/d87/classCore_1_1listbox_1_1BuilderListboxCreator.html", "d3/d87/classCore_1_1listbox_1_1BuilderListboxCreator" ]
+      ] ],
+      [ "listbox_options", "db/da6/namespaceCore_1_1listbox__options.html", [
+        [ "ListboxOptionsManager", "d9/dd3/classCore_1_1listbox__options_1_1ListboxOptionsManager.html", "d9/dd3/classCore_1_1listbox__options_1_1ListboxOptionsManager" ]
+      ] ],
+      [ "listbox_sync_engine", "d0/d35/namespaceCore_1_1listbox__sync__engine.html", [
+        [ "ListboxSyncEngine", "de/d90/classCore_1_1listbox__sync__engine_1_1ListboxSyncEngine.html", "de/d90/classCore_1_1listbox__sync__engine_1_1ListboxSyncEngine" ]
+      ] ],
+      [ "ltp_fader", "d5/d87/namespaceCore_1_1ltp__fader.html", [
+        [ "LTPFader", "d1/d18/classCore_1_1ltp__fader_1_1LTPFader.html", "d1/d18/classCore_1_1ltp__fader_1_1LTPFader" ]
       ] ],
       [ "manifest", "d8/d2f/namespaceCore_1_1manifest.html", [
         [ "settle", "d5/da0/namespaceCore_1_1manifest_1_1settle.html", [
           [ "SettleManager", "d9/d17/classCore_1_1manifest_1_1settle_1_1SettleManager.html", "d9/d17/classCore_1_1manifest_1_1settle_1_1SettleManager" ]
         ] ]
+      ] ],
+      [ "mdp_interaction_mixin", "d6/dee/namespaceCore_1_1mdp__interaction__mixin.html", [
+        [ "MDPInteractionMixin", "db/ddc/classCore_1_1mdp__interaction__mixin_1_1MDPInteractionMixin.html", "db/ddc/classCore_1_1mdp__interaction__mixin_1_1MDPInteractionMixin" ]
+      ] ],
+      [ "mdp_ltp_component", "d7/db4/namespaceCore_1_1mdp__ltp__component.html", [
+        [ "MDPLTPComponent", "df/d41/classCore_1_1mdp__ltp__component_1_1MDPLTPComponent.html", "df/d41/classCore_1_1mdp__ltp__component_1_1MDPLTPComponent" ]
+      ] ],
+      [ "mdp_math", "d8/d8a/namespaceCore_1_1mdp__math.html", [
+        [ "MDPMath", "dd/d33/classCore_1_1mdp__math_1_1MDPMath.html", "dd/d33/classCore_1_1mdp__math_1_1MDPMath" ]
       ] ],
       [ "midi_hardware_lock", "dc/dc9/namespaceCore_1_1midi__hardware__lock.html", [
         [ "MIDIHardwareLock", "d6/dba/classCore_1_1midi__hardware__lock_1_1MIDIHardwareLock.html", "d6/dba/classCore_1_1midi__hardware__lock_1_1MIDIHardwareLock" ]
@@ -649,9 +730,6 @@ var annotated_dup =
       [ "native_pool", "d9/d4d/namespaceCore_1_1native__pool.html", [
         [ "NativePool", "dc/d66/classCore_1_1native__pool_1_1NativePool.html", "dc/d66/classCore_1_1native__pool_1_1NativePool" ]
       ] ],
-      [ "navigation", "d2/d8d/namespaceCore_1_1navigation.html", [
-        [ "NavigationManagerMixin", "d1/d89/classCore_1_1navigation_1_1NavigationManagerMixin.html", "d1/d89/classCore_1_1navigation_1_1NavigationManagerMixin" ]
-      ] ],
       [ "oid_map_converter", "da/d88/namespaceCore_1_1oid__map__converter.html", [
         [ "OidMapConverter", "d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html", "d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter" ]
       ] ],
@@ -662,6 +740,13 @@ var annotated_dup =
       ] ],
       [ "osc_mqtt_transport", "d7/deb/namespaceCore_1_1osc__mqtt__transport.html", [
         [ "OscMqttTransport", "de/d71/classCore_1_1osc__mqtt__transport_1_1OscMqttTransport.html", "de/d71/classCore_1_1osc__mqtt__transport_1_1OscMqttTransport" ]
+      ] ],
+      [ "panel_creator", "d7/d37/namespaceCore_1_1panel__creator.html", [
+        [ "BuilderPanelCreator", "d5/d1d/classCore_1_1panel__creator_1_1BuilderPanelCreator.html", "d5/d1d/classCore_1_1panel__creator_1_1BuilderPanelCreator" ],
+        [ "PanelWidget", "d9/d9a/classCore_1_1panel__creator_1_1PanelWidget.html", "d9/d9a/classCore_1_1panel__creator_1_1PanelWidget" ]
+      ] ],
+      [ "panel_generator", "da/d3b/namespaceCore_1_1panel__generator.html", [
+        [ "PanelGenerator", "d5/de6/classCore_1_1panel__generator_1_1PanelGenerator.html", "d5/de6/classCore_1_1panel__generator_1_1PanelGenerator" ]
       ] ],
       [ "protocol_router", "d2/d74/namespaceCore_1_1protocol__router.html", [
         [ "monitor", "d2/de0/namespaceCore_1_1protocol__router_1_1monitor.html", [
@@ -696,11 +781,8 @@ var annotated_dup =
       [ "rest_mqtt_transport", "d6/d7d/namespaceCore_1_1rest__mqtt__transport.html", [
         [ "RestMqttTransport", "dd/dcb/classCore_1_1rest__mqtt__transport_1_1RestMqttTransport.html", "dd/dcb/classCore_1_1rest__mqtt__transport_1_1RestMqttTransport" ]
       ] ],
-      [ "shutdown_coordinator", "da/d75/namespaceCore_1_1shutdown__coordinator.html", [
-        [ "ShutdownCoordinator", "dc/d99/classCore_1_1shutdown__coordinator_1_1ShutdownCoordinator.html", "dc/d99/classCore_1_1shutdown__coordinator_1_1ShutdownCoordinator" ]
-      ] ],
-      [ "slicing_registry", "df/ddc/namespaceCore_1_1slicing__registry.html", [
-        [ "BuilderSlicingRegistryMixin", "df/df9/classCore_1_1slicing__registry_1_1BuilderSlicingRegistryMixin.html", "df/df9/classCore_1_1slicing__registry_1_1BuilderSlicingRegistryMixin" ]
+      [ "slider_value", "dc/d69/namespaceCore_1_1slider__value.html", [
+        [ "BuilderSliderValueCreator", "d8/d8a/classCore_1_1slider__value_1_1BuilderSliderValueCreator.html", "d8/d8a/classCore_1_1slider__value_1_1BuilderSliderValueCreator" ]
       ] ],
       [ "snmp_log_monitor", "d3/d3b/namespaceCore_1_1snmp__log__monitor.html", [
         [ "SnmpLogMonitor", "d7/dc2/classCore_1_1snmp__log__monitor_1_1SnmpLogMonitor.html", "d7/dc2/classCore_1_1snmp__log__monitor_1_1SnmpLogMonitor" ]
@@ -720,17 +802,6 @@ var annotated_dup =
       [ "splinker", "dd/de0/namespaceCore_1_1splinker.html", [
         [ "ControlBroker", "d6/d15/classCore_1_1splinker_1_1ControlBroker.html", "d6/d15/classCore_1_1splinker_1_1ControlBroker" ]
       ] ],
-      [ "standardizers", "d5/da0/namespaceCore_1_1standardizers.html", [
-        [ "lexicon_expander", "d9/da9/namespaceCore_1_1standardizers_1_1lexicon__expander.html", [
-          [ "LexiconExpander", "d2/d94/classCore_1_1standardizers_1_1lexicon__expander_1_1LexiconExpander.html", "d2/d94/classCore_1_1standardizers_1_1lexicon__expander_1_1LexiconExpander" ]
-        ] ],
-        [ "semantic_layout_resolver", "d7/dde/namespaceCore_1_1standardizers_1_1semantic__layout__resolver.html", [
-          [ "SemanticLayoutResolver", "dc/d41/classCore_1_1standardizers_1_1semantic__layout__resolver_1_1SemanticLayoutResolver.html", "dc/d41/classCore_1_1standardizers_1_1semantic__layout__resolver_1_1SemanticLayoutResolver" ]
-        ] ],
-        [ "widget_type_resolver", "d0/d6e/namespaceCore_1_1standardizers_1_1widget__type__resolver.html", [
-          [ "WidgetTypeResolver", "dd/dba/classCore_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver.html", "dd/dba/classCore_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver" ]
-        ] ]
-      ] ],
       [ "state", "d6/dff/namespaceCore_1_1state.html", [
         [ "SMLogger", "d7/de7/classCore_1_1state_1_1SMLogger.html", "d7/de7/classCore_1_1state_1_1SMLogger" ],
         [ "StateManager", "dc/df3/classCore_1_1state_1_1StateManager.html", "dc/df3/classCore_1_1state_1_1StateManager" ]
@@ -745,8 +816,16 @@ var annotated_dup =
       [ "state_mixin", "dc/d3b/namespaceCore_1_1state__mixin.html", [
         [ "ShowtimeStateMixin", "d0/d41/classCore_1_1state__mixin_1_1ShowtimeStateMixin.html", "d0/d41/classCore_1_1state__mixin_1_1ShowtimeStateMixin" ]
       ] ],
-      [ "structural_assembler", "df/d70/namespaceCore_1_1structural__assembler.html", [
-        [ "StructuralAssembler", "d3/da3/classCore_1_1structural__assembler_1_1StructuralAssembler.html", "d3/da3/classCore_1_1structural__assembler_1_1StructuralAssembler" ]
+      [ "state_sync", "d3/d15/namespaceCore_1_1state__sync.html", [
+        [ "CompositeStateSync", "d5/d50/classCore_1_1state__sync_1_1CompositeStateSync.html", "d5/d50/classCore_1_1state__sync_1_1CompositeStateSync" ]
+      ] ],
+      [ "status_light", "d2/dc1/namespaceCore_1_1status__light.html", [
+        [ "BuilderStatusLightCreator", "d4/d51/classCore_1_1status__light_1_1BuilderStatusLightCreator.html", "d4/d51/classCore_1_1status__light_1_1BuilderStatusLightCreator" ],
+        [ "HeaderStatusLightMixin", "d4/d61/classCore_1_1status__light_1_1HeaderStatusLightMixin.html", "d4/d61/classCore_1_1status__light_1_1HeaderStatusLightMixin" ],
+        [ "StatusLightWidget", "d3/db8/classCore_1_1status__light_1_1StatusLightWidget.html", "d3/db8/classCore_1_1status__light_1_1StatusLightWidget" ]
+      ] ],
+      [ "substrate_factory", "d9/d78/namespaceCore_1_1substrate__factory.html", [
+        [ "SubstrateFactory", "d1/d93/classCore_1_1substrate__factory_1_1SubstrateFactory.html", "d1/d93/classCore_1_1substrate__factory_1_1SubstrateFactory" ]
       ] ],
       [ "sync_queue_mixin", "d6/d05/namespaceCore_1_1sync__queue__mixin.html", [
         [ "SyncQueueMixin", "d1/d28/classCore_1_1sync__queue__mixin_1_1SyncQueueMixin.html", "d1/d28/classCore_1_1sync__queue__mixin_1_1SyncQueueMixin" ]
@@ -755,8 +834,7 @@ var annotated_dup =
         [ "SystemStatsProvider", "d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html", "d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider" ]
       ] ],
       [ "tab", "dc/dae/namespaceCore_1_1tab.html", [
-        [ "ShowtimeTab", "db/d0e/classCore_1_1tab_1_1ShowtimeTab.html", "db/d0e/classCore_1_1tab_1_1ShowtimeTab" ],
-        [ "TabManagerMixin", "d2/de4/classCore_1_1tab_1_1TabManagerMixin.html", "d2/de4/classCore_1_1tab_1_1TabManagerMixin" ]
+        [ "ShowtimeTab", "db/d0e/classCore_1_1tab_1_1ShowtimeTab.html", "db/d0e/classCore_1_1tab_1_1ShowtimeTab" ]
       ] ],
       [ "task_pool", "d4/d33/namespaceCore_1_1task__pool.html", [
         [ "TaskPool", "db/d74/classCore_1_1task__pool_1_1TaskPool.html", "db/d74/classCore_1_1task__pool_1_1TaskPool" ]
@@ -767,8 +845,8 @@ var annotated_dup =
             [ "HiddenGeometryManagerMixin", "d5/d9b/classCore_1_1telemetry_1_1geometry__snitch_1_1geometry__snitch_1_1HiddenGeometryManagerMixin.html", "d5/d9b/classCore_1_1telemetry_1_1geometry__snitch_1_1geometry__snitch_1_1HiddenGeometryManagerMixin" ]
           ] ]
         ] ],
-        [ "ui_tracking_service", "d2/dd9/namespaceCore_1_1telemetry_1_1ui__tracking__service.html", [
-          [ "UITrackingService", "d1/d57/classCore_1_1telemetry_1_1ui__tracking__service_1_1UITrackingService.html", "d1/d57/classCore_1_1telemetry_1_1ui__tracking__service_1_1UITrackingService" ]
+        [ "interaction_telemetry_service", "d9/de0/namespaceCore_1_1telemetry_1_1interaction__telemetry__service.html", [
+          [ "InteractionTelemetryService", "d5/d4d/classCore_1_1telemetry_1_1interaction__telemetry__service_1_1InteractionTelemetryService.html", "d5/d4d/classCore_1_1telemetry_1_1interaction__telemetry__service_1_1InteractionTelemetryService" ]
         ] ],
         [ "visibility_snitch", "de/d91/namespaceCore_1_1telemetry_1_1visibility__snitch.html", [
           [ "visibility_snitch", "d0/dae/namespaceCore_1_1telemetry_1_1visibility__snitch_1_1visibility__snitch.html", [
@@ -776,30 +854,24 @@ var annotated_dup =
           ] ]
         ] ]
       ] ],
+      [ "tester", "d4/d97/namespaceCore_1_1tester.html", [
+        [ "LTPObject", "d0/d57/classCore_1_1tester_1_1LTPObject.html", "d0/d57/classCore_1_1tester_1_1LTPObject" ],
+        [ "MultiFaderApp", "d9/ddf/classCore_1_1tester_1_1MultiFaderApp.html", "d9/ddf/classCore_1_1tester_1_1MultiFaderApp" ]
+      ] ],
+      [ "tiled_panel_generator", "d2/db0/namespaceCore_1_1tiled__panel__generator.html", [
+        [ "TiledPanelGenerator", "d1/d87/classCore_1_1tiled__panel__generator_1_1TiledPanelGenerator.html", "d1/d87/classCore_1_1tiled__panel__generator_1_1TiledPanelGenerator" ]
+      ] ],
       [ "topic_calculator", "d2/d42/namespaceCore_1_1topic__calculator.html", [
         [ "TopicCalculator", "d3/d31/classCore_1_1topic__calculator_1_1TopicCalculator.html", "d3/d31/classCore_1_1topic__calculator_1_1TopicCalculator" ]
-      ] ],
-      [ "transparency", "d5/d2f/namespaceCore_1_1transparency.html", [
-        [ "transparency", "da/d95/namespaceCore_1_1transparency_1_1transparency.html", [
-          [ "BackgroundSlicer", "d1/d78/classCore_1_1transparency_1_1transparency_1_1BackgroundSlicer.html", "d1/d78/classCore_1_1transparency_1_1transparency_1_1BackgroundSlicer" ],
-          [ "TransparencyConfig", "da/dcc/classCore_1_1transparency_1_1transparency_1_1TransparencyConfig.html", "da/dcc/classCore_1_1transparency_1_1transparency_1_1TransparencyConfig" ],
-          [ "TransparencyManager", "de/d23/classCore_1_1transparency_1_1transparency_1_1TransparencyManager.html", "de/d23/classCore_1_1transparency_1_1transparency_1_1TransparencyManager" ]
-        ] ],
-        [ "transparency_mixin", "dd/db6/namespaceCore_1_1transparency_1_1transparency__mixin.html", [
-          [ "TransparencyMixin", "d3/d71/classCore_1_1transparency_1_1transparency__mixin_1_1TransparencyMixin.html", "d3/d71/classCore_1_1transparency_1_1transparency__mixin_1_1TransparencyMixin" ]
-        ] ]
       ] ],
       [ "tune_mixin", "d7/daf/namespaceCore_1_1tune__mixin.html", [
         [ "ShowtimeTuneMixin", "dc/d49/classCore_1_1tune__mixin_1_1ShowtimeTuneMixin.html", "dc/d49/classCore_1_1tune__mixin_1_1ShowtimeTuneMixin" ]
       ] ],
-      [ "ui_geometry_math", "de/dc2/namespaceCore_1_1ui__geometry__math.html", [
-        [ "UIGeometryMath", "d4/da3/classCore_1_1ui__geometry__math_1_1UIGeometryMath.html", "d4/da3/classCore_1_1ui__geometry__math_1_1UIGeometryMath" ]
+      [ "ui_components", "d2/d71/namespaceCore_1_1ui__components.html", [
+        [ "CompositeUIComponents", "db/dd7/classCore_1_1ui__components_1_1CompositeUIComponents.html", "db/dd7/classCore_1_1ui__components_1_1CompositeUIComponents" ]
       ] ],
       [ "ui_mixin", "dc/d7d/namespaceCore_1_1ui__mixin.html", [
         [ "ShowtimeUIMixin", "d6/dd0/classCore_1_1ui__mixin_1_1ShowtimeUIMixin.html", "d6/dd0/classCore_1_1ui__mixin_1_1ShowtimeUIMixin" ]
-      ] ],
-      [ "ui_window", "dc/de2/namespaceCore_1_1ui__window.html", [
-        [ "UIWindowManager", "db/d31/classCore_1_1ui__window_1_1UIWindowManager.html", "db/d31/classCore_1_1ui__window_1_1UIWindowManager" ]
       ] ],
       [ "value_processor", "d7/dcb/namespaceCore_1_1value__processor.html", [
         [ "ValueProcessor", "d0/d7b/classCore_1_1value__processor_1_1ValueProcessor.html", "d0/d7b/classCore_1_1value__processor_1_1ValueProcessor" ]
@@ -812,12 +884,6 @@ var annotated_dup =
       ] ],
       [ "visa_proxy_fleet", "d0/d23/namespaceCore_1_1visa__proxy__fleet.html", [
         [ "VisaProxyFleet", "dd/d2c/classCore_1_1visa__proxy__fleet_1_1VisaProxyFleet.html", "dd/d2c/classCore_1_1visa__proxy__fleet_1_1VisaProxyFleet" ]
-      ] ],
-      [ "widget_schema_normalizer", "d7/d90/namespaceCore_1_1widget__schema__normalizer.html", [
-        [ "WidgetSchemaNormalizer", "db/d5f/classCore_1_1widget__schema__normalizer_1_1WidgetSchemaNormalizer.html", "db/d5f/classCore_1_1widget__schema__normalizer_1_1WidgetSchemaNormalizer" ]
-      ] ],
-      [ "window", "de/d6d/namespaceCore_1_1window.html", [
-        [ "WindowManager", "dc/db9/classCore_1_1window_1_1WindowManager.html", "dc/db9/classCore_1_1window_1_1WindowManager" ]
       ] ],
       [ "work_stealing_pool", "da/d9c/namespaceCore_1_1work__stealing__pool.html", [
         [ "WorkStealingPool", "d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html", "d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool" ]
@@ -832,6 +898,9 @@ var annotated_dup =
     [ "dashboard_gui", "d7/da9/namespacedashboard__gui.html", [
       [ "ProtocolDashboard", "d6/d80/classdashboard__gui_1_1ProtocolDashboard.html", "d6/d80/classdashboard__gui_1_1ProtocolDashboard" ]
     ] ],
+    [ "deferred_task_handler", "d4/dce/namespacedeferred__task__handler.html", [
+      [ "DeferredTaskHandler", "d2/dd2/classdeferred__task__handler_1_1DeferredTaskHandler.html", "d2/dd2/classdeferred__task__handler_1_1DeferredTaskHandler" ]
+    ] ],
     [ "demo", "d2/d0d/namespacedemo.html", [
       [ "Main", "dc/d09/classdemo_1_1Main.html", "dc/d09/classdemo_1_1Main" ]
     ] ],
@@ -842,7 +911,17 @@ var annotated_dup =
       [ "DNSSDListener", "dd/dfb/classdnssd__listener_1_1DNSSDListener.html", "dd/dfb/classdnssd__listener_1_1DNSSDListener" ],
       [ "ServiceTypeListener", "d2/de1/classdnssd__listener_1_1ServiceTypeListener.html", "d2/de1/classdnssd__listener_1_1ServiceTypeListener" ]
     ] ],
+    [ "engine_destruction_service", "db/dda/namespaceengine__destruction__service.html", [
+      [ "GuiDestructionEngine", "d1/df7/classengine__destruction__service_1_1GuiDestructionEngine.html", "d1/df7/classengine__destruction__service_1_1GuiDestructionEngine" ]
+    ] ],
+    [ "engine_render_scheduler", "d9/dbf/namespaceengine__render__scheduler.html", [
+      [ "EngineRenderScheduler", "dc/d52/classengine__render__scheduler_1_1EngineRenderScheduler.html", "dc/d52/classengine__render__scheduler_1_1EngineRenderScheduler" ]
+    ] ],
+    [ "engine_structural_assembler", "dd/d55/namespaceengine__structural__assembler.html", [
+      [ "StructuralAssembler", "d9/dec/classengine__structural__assembler_1_1StructuralAssembler.html", "d9/dec/classengine__structural__assembler_1_1StructuralAssembler" ]
+    ] ],
     [ "Entry", "d7/d00/namespaceEntry.html", [
+      [ "APIRequestHandler", "d7/de4/classEntry_1_1APIRequestHandler.html", "d7/de4/classEntry_1_1APIRequestHandler" ],
       [ "DocumentationEntry", "df/d84/classEntry_1_1DocumentationEntry.html", "df/d84/classEntry_1_1DocumentationEntry" ],
       [ "EmberManager", "de/d79/classEntry_1_1EmberManager.html", "de/d79/classEntry_1_1EmberManager" ],
       [ "LoggingEntry", "d6/dac/classEntry_1_1LoggingEntry.html", "d6/dac/classEntry_1_1LoggingEntry" ],
@@ -854,9 +933,6 @@ var annotated_dup =
       [ "WebSocketManager", "dd/dc1/classEntry_1_1WebSocketManager.html", "dd/dc1/classEntry_1_1WebSocketManager" ]
     ] ],
     [ "FileReaders", "d5/d34/namespaceFileReaders.html", [
-      [ "blueprint_loader", "d1/d31/namespaceFileReaders_1_1blueprint__loader.html", [
-        [ "BlueprintLoader", "d0/d0f/classFileReaders_1_1blueprint__loader_1_1BlueprintLoader.html", "d0/d0f/classFileReaders_1_1blueprint__loader_1_1BlueprintLoader" ]
-      ] ],
       [ "cache_io_handler", "dd/daf/namespaceFileReaders_1_1cache__io__handler.html", [
         [ "CacheLoadError", "d2/d66/classFileReaders_1_1cache__io__handler_1_1CacheLoadError.html", null ]
       ] ],
@@ -869,17 +945,67 @@ var annotated_dup =
       [ "grab_bag_loader", "d9/d9f/namespaceFileReaders_1_1grab__bag__loader.html", [
         [ "GrabBagLoader", "d0/d21/classFileReaders_1_1grab__bag__loader_1_1GrabBagLoader.html", "d0/d21/classFileReaders_1_1grab__bag__loader_1_1GrabBagLoader" ]
       ] ],
-      [ "gui_file_loader", "d3/d73/namespaceFileReaders_1_1gui__file__loader.html", [
-        [ "GuiFileLoaderMixin", "db/d07/classFileReaders_1_1gui__file__loader_1_1GuiFileLoaderMixin.html", "db/d07/classFileReaders_1_1gui__file__loader_1_1GuiFileLoaderMixin" ]
+      [ "layout_detectors", "db/de8/namespaceFileReaders_1_1layout__detectors.html", [
+        [ "base_detector", "de/d1d/namespaceFileReaders_1_1layout__detectors_1_1base__detector.html", [
+          [ "BaseLayoutDetector", "db/d32/classFileReaders_1_1layout__detectors_1_1base__detector_1_1BaseLayoutDetector.html", "db/d32/classFileReaders_1_1layout__detectors_1_1base__detector_1_1BaseLayoutDetector" ]
+        ] ],
+        [ "equal_split_detector", "d1/df1/namespaceFileReaders_1_1layout__detectors_1_1equal__split__detector.html", [
+          [ "EqualSplitDetector", "de/d1d/classFileReaders_1_1layout__detectors_1_1equal__split__detector_1_1EqualSplitDetector.html", "de/d1d/classFileReaders_1_1layout__detectors_1_1equal__split__detector_1_1EqualSplitDetector" ]
+        ] ],
+        [ "multi_window_detector", "d8/d28/namespaceFileReaders_1_1layout__detectors_1_1multi__window__detector.html", [
+          [ "MultiWindowDetector", "da/d16/classFileReaders_1_1layout__detectors_1_1multi__window__detector_1_1MultiWindowDetector.html", "da/d16/classFileReaders_1_1layout__detectors_1_1multi__window__detector_1_1MultiWindowDetector" ]
+        ] ],
+        [ "notebook_detector", "d9/d4b/namespaceFileReaders_1_1layout__detectors_1_1notebook__detector.html", [
+          [ "NotebookDetector", "df/d11/classFileReaders_1_1layout__detectors_1_1notebook__detector_1_1NotebookDetector.html", "df/d11/classFileReaders_1_1layout__detectors_1_1notebook__detector_1_1NotebookDetector" ]
+        ] ],
+        [ "split_pane_detector", "db/d15/namespaceFileReaders_1_1layout__detectors_1_1split__pane__detector.html", [
+          [ "SplitPaneDetector", "d4/d68/classFileReaders_1_1layout__detectors_1_1split__pane__detector_1_1SplitPaneDetector.html", "d4/d68/classFileReaders_1_1layout__detectors_1_1split__pane__detector_1_1SplitPaneDetector" ]
+        ] ]
       ] ],
-      [ "module_loader", "d5/d6a/namespaceFileReaders_1_1module__loader.html", [
-        [ "ModuleLoader", "df/d19/classFileReaders_1_1module__loader_1_1ModuleLoader.html", "df/d19/classFileReaders_1_1module__loader_1_1ModuleLoader" ]
+      [ "loader", "d4/d91/namespaceFileReaders_1_1loader.html", [
+        [ "gui_file_loader", "d9/df9/namespaceFileReaders_1_1loader_1_1gui__file__loader.html", [
+          [ "GuiFileLoaderMixin", "d5/d8d/classFileReaders_1_1loader_1_1gui__file__loader_1_1GuiFileLoaderMixin.html", "d5/d8d/classFileReaders_1_1loader_1_1gui__file__loader_1_1GuiFileLoaderMixin" ]
+        ] ],
+        [ "json_blueprint_reader", "d2/d85/namespaceFileReaders_1_1loader_1_1json__blueprint__reader.html", [
+          [ "JsonBlueprintReader", "dd/df0/classFileReaders_1_1loader_1_1json__blueprint__reader_1_1JsonBlueprintReader.html", "dd/df0/classFileReaders_1_1loader_1_1json__blueprint__reader_1_1JsonBlueprintReader" ]
+        ] ],
+        [ "json_gui_host", "da/d7f/namespaceFileReaders_1_1loader_1_1json__gui__host.html", [
+          [ "JsonGuiHost", "dc/d09/classFileReaders_1_1loader_1_1json__gui__host_1_1JsonGuiHost.html", "dc/d09/classFileReaders_1_1loader_1_1json__gui__host_1_1JsonGuiHost" ]
+        ] ],
+        [ "loader_facade", "d5/d8b/namespaceFileReaders_1_1loader_1_1loader__facade.html", [
+          [ "LoaderFacade", "d6/ded/classFileReaders_1_1loader_1_1loader__facade_1_1LoaderFacade.html", "d6/ded/classFileReaders_1_1loader_1_1loader__facade_1_1LoaderFacade" ]
+        ] ]
+      ] ],
+      [ "scanner", "dd/d1d/namespaceFileReaders_1_1scanner.html", [
+        [ "folder_fast_io_utility", "d2/d48/namespaceFileReaders_1_1scanner_1_1folder__fast__io__utility.html", [
+          [ "FastScanner", "d6/d02/classFileReaders_1_1scanner_1_1folder__fast__io__utility_1_1FastScanner.html", "d6/d02/classFileReaders_1_1scanner_1_1folder__fast__io__utility_1_1FastScanner" ]
+        ] ],
+        [ "folder_layout_interpreter", "d0/ddc/namespaceFileReaders_1_1scanner_1_1folder__layout__interpreter.html", [
+          [ "FolderLayoutInterpreter", "d2/d72/classFileReaders_1_1scanner_1_1folder__layout__interpreter_1_1FolderLayoutInterpreter.html", "d2/d72/classFileReaders_1_1scanner_1_1folder__layout__interpreter_1_1FolderLayoutInterpreter" ]
+        ] ],
+        [ "folder_recursive_scanner", "d4/d42/namespaceFileReaders_1_1scanner_1_1folder__recursive__scanner.html", [
+          [ "FolderRecursiveScannerMixin", "db/dc3/classFileReaders_1_1scanner_1_1folder__recursive__scanner_1_1FolderRecursiveScannerMixin.html", "db/dc3/classFileReaders_1_1scanner_1_1folder__recursive__scanner_1_1FolderRecursiveScannerMixin" ]
+        ] ]
+      ] ],
+      [ "standardizers", "d0/d35/namespaceFileReaders_1_1standardizers.html", [
+        [ "json_schema_harmonizer", "d1/dc9/namespaceFileReaders_1_1standardizers_1_1json__schema__harmonizer.html", [
+          [ "SchemaHarmonizer", "d6/d0e/classFileReaders_1_1standardizers_1_1json__schema__harmonizer_1_1SchemaHarmonizer.html", "d6/d0e/classFileReaders_1_1standardizers_1_1json__schema__harmonizer_1_1SchemaHarmonizer" ]
+        ] ],
+        [ "json_shorthand_resolver", "dd/d00/namespaceFileReaders_1_1standardizers_1_1json__shorthand__resolver.html", [
+          [ "JsonShorthandResolver", "d7/d6b/classFileReaders_1_1standardizers_1_1json__shorthand__resolver_1_1JsonShorthandResolver.html", "d7/d6b/classFileReaders_1_1standardizers_1_1json__shorthand__resolver_1_1JsonShorthandResolver" ]
+        ] ],
+        [ "semantic_layout_resolver", "dc/d6e/namespaceFileReaders_1_1standardizers_1_1semantic__layout__resolver.html", [
+          [ "SemanticLayoutResolver", "d3/d92/classFileReaders_1_1standardizers_1_1semantic__layout__resolver_1_1SemanticLayoutResolver.html", "d3/d92/classFileReaders_1_1standardizers_1_1semantic__layout__resolver_1_1SemanticLayoutResolver" ]
+        ] ],
+        [ "widget_schema_normalizer", "d1/db2/namespaceFileReaders_1_1standardizers_1_1widget__schema__normalizer.html", [
+          [ "WidgetSchemaNormalizer", "dd/de0/classFileReaders_1_1standardizers_1_1widget__schema__normalizer_1_1WidgetSchemaNormalizer.html", "dd/de0/classFileReaders_1_1standardizers_1_1widget__schema__normalizer_1_1WidgetSchemaNormalizer" ]
+        ] ],
+        [ "widget_type_resolver", "dd/d14/namespaceFileReaders_1_1standardizers_1_1widget__type__resolver.html", [
+          [ "WidgetTypeResolver", "d9/d95/classFileReaders_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver.html", "d9/d95/classFileReaders_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver" ]
+        ] ]
       ] ]
     ] ],
     [ "FileWriters", "df/d03/namespaceFileWriters.html", [
-      [ "file_csv_export", "de/dee/namespaceFileWriters_1_1file__csv__export.html", [
-        [ "CsvExportUtility", "df/d4f/classFileWriters_1_1file__csv__export_1_1CsvExportUtility.html", "df/d4f/classFileWriters_1_1file__csv__export_1_1CsvExportUtility" ]
-      ] ],
       [ "file_writer", "da/daa/namespaceFileWriters_1_1file__writer.html", [
         [ "FileWriter", "d1/d33/classFileWriters_1_1file__writer_1_1FileWriter.html", "d1/d33/classFileWriters_1_1file__writer_1_1FileWriter" ]
       ] ],
@@ -899,18 +1025,80 @@ var annotated_dup =
     [ "flame_manager", "d6/dd7/namespaceflame__manager.html", [
       [ "FlameManager", "dd/d5e/classflame__manager_1_1FlameManager.html", "dd/d5e/classflame__manager_1_1FlameManager" ]
     ] ],
+    [ "folder_path_resolver", "da/db9/namespacefolder__path__resolver.html", [
+      [ "BuilderPathResolver", "de/d40/classfolder__path__resolver_1_1BuilderPathResolver.html", "de/d40/classfolder__path__resolver_1_1BuilderPathResolver" ]
+    ] ],
     [ "graphing_editor", "da/d22/namespacegraphing__editor.html", [
       [ "GraphingEditor", "db/d16/classgraphing__editor_1_1GraphingEditor.html", "db/d16/classgraphing__editor_1_1GraphingEditor" ]
     ] ],
+    [ "grid_column_configurator", "d8/daa/namespacegrid__column__configurator.html", [
+      [ "GridColumnConfigurator", "d7/db0/classgrid__column__configurator_1_1GridColumnConfigurator.html", "d7/db0/classgrid__column__configurator_1_1GridColumnConfigurator" ]
+    ] ],
+    [ "grid_renderer_utils", "d4/ddb/namespacegrid__renderer__utils.html", [
+      [ "GridRendererUtils", "da/d9a/classgrid__renderer__utils_1_1GridRendererUtils.html", "da/d9a/classgrid__renderer__utils_1_1GridRendererUtils" ]
+    ] ],
+    [ "gui_widget_factory", "d3/d10/namespacegui__widget__factory.html", [
+      [ "GuiWidgetFactoryMixin", "d9/dab/classgui__widget__factory_1_1GuiWidgetFactoryMixin.html", "d9/dab/classgui__widget__factory_1_1GuiWidgetFactoryMixin" ]
+    ] ],
+    [ "hidden_breakoff", "df/d92/namespacehidden__breakoff.html", [
+      [ "HiddenBreakoffManagerMixin", "df/d26/classhidden__breakoff_1_1HiddenBreakoffManagerMixin.html", "df/d26/classhidden__breakoff_1_1HiddenBreakoffManagerMixin" ]
+    ] ],
+    [ "horizontal_fader_renderer", "d8/d8d/namespacehorizontal__fader__renderer.html", [
+      [ "HorizontalFaderRendererMixin", "dd/dfb/classhorizontal__fader__renderer_1_1HorizontalFaderRendererMixin.html", "dd/dfb/classhorizontal__fader__renderer_1_1HorizontalFaderRendererMixin" ]
+    ] ],
+    [ "interaction_dispatcher", "d6/dfd/namespaceinteraction__dispatcher.html", [
+      [ "InteractionDispatcher", "d6/d4b/classinteraction__dispatcher_1_1InteractionDispatcher.html", "d6/d4b/classinteraction__dispatcher_1_1InteractionDispatcher" ]
+    ] ],
+    [ "interaction_mqtt_gateway", "d3/da4/namespaceinteraction__mqtt__gateway.html", [
+      [ "InteractionMqttGatewayMixin", "da/d09/classinteraction__mqtt__gateway_1_1InteractionMqttGatewayMixin.html", "da/d09/classinteraction__mqtt__gateway_1_1InteractionMqttGatewayMixin" ]
+    ] ],
+    [ "interaction_navigation", "dc/d4e/namespaceinteraction__navigation.html", [
+      [ "InteractionNavigationMixin", "db/da4/classinteraction__navigation_1_1InteractionNavigationMixin.html", "db/da4/classinteraction__navigation_1_1InteractionNavigationMixin" ]
+    ] ],
+    [ "interaction_view_states", "da/dd2/namespaceinteraction__view__states.html", [
+      [ "InteractionViewStates", "df/dff/classinteraction__view__states_1_1InteractionViewStates.html", "df/dff/classinteraction__view__states_1_1InteractionViewStates" ]
+    ] ],
     [ "Interface", "da/d9a/namespaceInterface.html", [
+      [ "break_line_editor", "dc/d8e/namespaceInterface_1_1break__line__editor.html", [
+        [ "BreakLineEditor", "da/d9c/classInterface_1_1break__line__editor_1_1BreakLineEditor.html", "da/d9c/classInterface_1_1break__line__editor_1_1BreakLineEditor" ]
+      ] ],
       [ "center_panel", "da/d39/namespaceInterface_1_1center__panel.html", [
         [ "CenterPanel", "db/dd3/classInterface_1_1center__panel_1_1CenterPanel.html", "db/dd3/classInterface_1_1center__panel_1_1CenterPanel" ]
+      ] ],
+      [ "checkbox_editor", "d8/dd7/namespaceInterface_1_1checkbox__editor.html", [
+        [ "CheckboxEditor", "db/dd3/classInterface_1_1checkbox__editor_1_1CheckboxEditor.html", "db/dd3/classInterface_1_1checkbox__editor_1_1CheckboxEditor" ]
+      ] ],
+      [ "circular_motion_displacement_potentiometer_editor", "d7/d25/namespaceInterface_1_1circular__motion__displacement__potentiometer__editor.html", [
+        [ "CircularMotionDisplacementPotentiometerEditor", "d2/d21/classInterface_1_1circular__motion__displacement__potentiometer__editor_1_1CircularMotionDisplacementPotentiometerEditor.html", "d2/d21/classInterface_1_1circular__motion__displacement__potentiometer__editor_1_1CircularMotionDisplacementPotentiometerEditor" ]
+      ] ],
+      [ "command_investigation_pane", "df/db3/namespaceInterface_1_1command__investigation__pane.html", [
+        [ "CommandInvestigationPane", "d0/d8e/classInterface_1_1command__investigation__pane_1_1CommandInvestigationPane.html", "d0/d8e/classInterface_1_1command__investigation__pane_1_1CommandInvestigationPane" ]
       ] ],
       [ "command_router", "dc/d06/namespaceInterface_1_1command__router.html", [
         [ "CommandRouter", "d6/d7e/classInterface_1_1command__router_1_1CommandRouter.html", "d6/d7e/classInterface_1_1command__router_1_1CommandRouter" ]
       ] ],
+      [ "command_router_legend", "dd/dd3/namespaceInterface_1_1command__router__legend.html", [
+        [ "CommandRouterLegend", "da/dee/classInterface_1_1command__router__legend_1_1CommandRouterLegend.html", "da/dee/classInterface_1_1command__router__legend_1_1CommandRouterLegend" ]
+      ] ],
+      [ "composite_horizontal_dial_value_editor", "d7/df7/namespaceInterface_1_1composite__horizontal__dial__value__editor.html", [
+        [ "CompositeHorizontalDialValueEditor", "d0/d63/classInterface_1_1composite__horizontal__dial__value__editor_1_1CompositeHorizontalDialValueEditor.html", "d0/d63/classInterface_1_1composite__horizontal__dial__value__editor_1_1CompositeHorizontalDialValueEditor" ]
+      ] ],
+      [ "composite_mdp_editor", "d8/d2c/namespaceInterface_1_1composite__mdp__editor.html", [
+        [ "CompositeMdpEditor", "d9/db4/classInterface_1_1composite__mdp__editor_1_1CompositeMdpEditor.html", "d9/db4/classInterface_1_1composite__mdp__editor_1_1CompositeMdpEditor" ]
+      ] ],
       [ "connection_api", "d8/dcc/namespaceInterface_1_1connection__api.html", [
         [ "ConnectionManager", "d8/df0/classInterface_1_1connection__api_1_1ConnectionManager.html", "d8/df0/classInterface_1_1connection__api_1_1ConnectionManager" ]
+      ] ],
+      [ "Core", "d4/dad/namespaceInterface_1_1Core.html", [
+        [ "ptp_dissector_engine", "de/d4f/namespaceInterface_1_1Core_1_1ptp__dissector__engine.html", [
+          [ "PTPDissectorEngine", "d6/dea/classInterface_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine.html", "d6/dea/classInterface_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine" ]
+        ] ],
+        [ "ptp_meter_panel", "d3/d0e/namespaceInterface_1_1Core_1_1ptp__meter__panel.html", [
+          [ "PTPMeterPanel", "d8/d4c/classInterface_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel.html", "d8/d4c/classInterface_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel" ]
+        ] ],
+        [ "ptp_processor", "d7/da8/namespaceInterface_1_1Core_1_1ptp__processor.html", [
+          [ "PTPDataProcessor", "d2/d3e/classInterface_1_1Core_1_1ptp__processor_1_1PTPDataProcessor.html", "d2/d3e/classInterface_1_1Core_1_1ptp__processor_1_1PTPDataProcessor" ]
+        ] ]
       ] ],
       [ "debug_matrix_screen", "d3/d0c/namespaceInterface_1_1debug__matrix__screen.html", [
         [ "DebugMatrixScreen", "dc/d43/classInterface_1_1debug__matrix__screen_1_1DebugMatrixScreen.html", "dc/d43/classInterface_1_1debug__matrix__screen_1_1DebugMatrixScreen" ]
@@ -920,19 +1108,19 @@ var annotated_dup =
       ] ],
       [ "gui_EMBER", "d6/d9d/namespaceInterface_1_1gui__EMBER.html", [
         [ "EmberDashboardImplementation", "d2/d06/classInterface_1_1gui__EMBER_1_1EmberDashboardImplementation.html", "d2/d06/classInterface_1_1gui__EMBER_1_1EmberDashboardImplementation" ],
-        [ "TransparencyMixin", "d5/d9f/classInterface_1_1gui__EMBER_1_1TransparencyMixin.html", "d5/d9f/classInterface_1_1gui__EMBER_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d8/dad/classInterface_1_1gui__EMBER_1_1SyncBehavior.html", "d8/dad/classInterface_1_1gui__EMBER_1_1SyncBehavior" ]
       ] ],
       [ "gui_OSC", "d1/de6/namespaceInterface_1_1gui__OSC.html", [
         [ "OscDashboardImplementation", "d0/d8b/classInterface_1_1gui__OSC_1_1OscDashboardImplementation.html", "d0/d8b/classInterface_1_1gui__OSC_1_1OscDashboardImplementation" ],
-        [ "TransparencyMixin", "d7/da9/classInterface_1_1gui__OSC_1_1TransparencyMixin.html", "d7/da9/classInterface_1_1gui__OSC_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d9/de8/classInterface_1_1gui__OSC_1_1SyncBehavior.html", "d9/de8/classInterface_1_1gui__OSC_1_1SyncBehavior" ]
       ] ],
       [ "gui_REST", "d5/d1b/namespaceInterface_1_1gui__REST.html", [
         [ "RestDashboard", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard" ],
-        [ "TransparencyMixin", "d5/d28/classInterface_1_1gui__REST_1_1TransparencyMixin.html", "d5/d28/classInterface_1_1gui__REST_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d6/d51/classInterface_1_1gui__REST_1_1SyncBehavior.html", "d6/d51/classInterface_1_1gui__REST_1_1SyncBehavior" ]
       ] ],
       [ "gui_REST_tree", "d3/d72/namespaceInterface_1_1gui__REST__tree.html", [
         [ "RestTreeImplementation", "d4/d91/classInterface_1_1gui__REST__tree_1_1RestTreeImplementation.html", "d4/d91/classInterface_1_1gui__REST__tree_1_1RestTreeImplementation" ],
-        [ "TransparencyMixin", "dd/dc0/classInterface_1_1gui__REST__tree_1_1TransparencyMixin.html", "dd/dc0/classInterface_1_1gui__REST__tree_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d6/d58/classInterface_1_1gui__REST__tree_1_1SyncBehavior.html", "d6/d58/classInterface_1_1gui__REST__tree_1_1SyncBehavior" ]
       ] ],
       [ "Input", "d6/da7/namespaceInterface_1_1Input.html", [
         [ "midi", "d5/d4c/namespaceInterface_1_1Input_1_1midi.html", [
@@ -957,6 +1145,15 @@ var annotated_dup =
           [ "MidiHardwareSearch", "d0/dfb/classInterface_1_1Input_1_1midi__hardware__search_1_1MidiHardwareSearch.html", "d0/dfb/classInterface_1_1Input_1_1midi__hardware__search_1_1MidiHardwareSearch" ]
         ] ]
       ] ],
+      [ "json_tree_editor", "d9/d05/namespaceInterface_1_1json__tree__editor.html", [
+        [ "JsonTreeEditor", "d2/d8d/classInterface_1_1json__tree__editor_1_1JsonTreeEditor.html", "d2/d8d/classInterface_1_1json__tree__editor_1_1JsonTreeEditor" ]
+      ] ],
+      [ "knob_editor", "d4/da2/namespaceInterface_1_1knob__editor.html", [
+        [ "KnobEditor", "d9/dbd/classInterface_1_1knob__editor_1_1KnobEditor.html", "d9/dbd/classInterface_1_1knob__editor_1_1KnobEditor" ]
+      ] ],
+      [ "knob_rotary_selector_editor", "d1/ddf/namespaceInterface_1_1knob__rotary__selector__editor.html", [
+        [ "KnobRotarySelectorEditor", "d7/de2/classInterface_1_1knob__rotary__selector__editor_1_1KnobRotarySelectorEditor.html", "d7/de2/classInterface_1_1knob__rotary__selector__editor_1_1KnobRotarySelectorEditor" ]
+      ] ],
       [ "layout_engine", "d9/d90/namespaceInterface_1_1layout__engine.html", [
         [ "focus", "de/d74/namespaceInterface_1_1layout__engine_1_1focus.html", [
           [ "FocusManager", "d6/d6d/classInterface_1_1layout__engine_1_1focus_1_1FocusManager.html", "d6/d6d/classInterface_1_1layout__engine_1_1focus_1_1FocusManager" ]
@@ -977,6 +1174,9 @@ var annotated_dup =
       [ "left_panel", "d4/d28/namespaceInterface_1_1left__panel.html", [
         [ "LeftPanel", "d6/d62/classInterface_1_1left__panel_1_1LeftPanel.html", "d6/d62/classInterface_1_1left__panel_1_1LeftPanel" ]
       ] ],
+      [ "listbox_editor", "de/dbf/namespaceInterface_1_1listbox__editor.html", [
+        [ "ListboxEditor", "d5/d64/classInterface_1_1listbox__editor_1_1ListboxEditor.html", "d5/d64/classInterface_1_1listbox__editor_1_1ListboxEditor" ]
+      ] ],
       [ "maintenance_clear_screen", "d7/d54/namespaceInterface_1_1maintenance__clear__screen.html", [
         [ "MaintenanceClearScreen", "d7/def/classInterface_1_1maintenance__clear__screen_1_1MaintenanceClearScreen.html", "d7/def/classInterface_1_1maintenance__clear__screen_1_1MaintenanceClearScreen" ]
       ] ],
@@ -993,19 +1193,19 @@ var annotated_dup =
       ] ],
       [ "mqtt_explorer_impl", "d0/d8d/namespaceInterface_1_1mqtt__explorer__impl.html", [
         [ "MqttExplorerImplementation", "d1/d5a/classInterface_1_1mqtt__explorer__impl_1_1MqttExplorerImplementation.html", "d1/d5a/classInterface_1_1mqtt__explorer__impl_1_1MqttExplorerImplementation" ],
-        [ "TransparencyMixin", "d8/d0b/classInterface_1_1mqtt__explorer__impl_1_1TransparencyMixin.html", "d8/d0b/classInterface_1_1mqtt__explorer__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d6/d6c/classInterface_1_1mqtt__explorer__impl_1_1SyncBehavior.html", "d6/d6c/classInterface_1_1mqtt__explorer__impl_1_1SyncBehavior" ]
       ] ],
       [ "nmos_commands_monitor_impl", "da/d04/namespaceInterface_1_1nmos__commands__monitor__impl.html", [
         [ "NmosCommandsMonitorImplementation", "de/d92/classInterface_1_1nmos__commands__monitor__impl_1_1NmosCommandsMonitorImplementation.html", "de/d92/classInterface_1_1nmos__commands__monitor__impl_1_1NmosCommandsMonitorImplementation" ],
-        [ "TransparencyMixin", "d9/d9c/classInterface_1_1nmos__commands__monitor__impl_1_1TransparencyMixin.html", "d9/d9c/classInterface_1_1nmos__commands__monitor__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d5/d38/classInterface_1_1nmos__commands__monitor__impl_1_1SyncBehavior.html", "d5/d38/classInterface_1_1nmos__commands__monitor__impl_1_1SyncBehavior" ]
       ] ],
       [ "nmos_connection_monitor_impl", "dc/d20/namespaceInterface_1_1nmos__connection__monitor__impl.html", [
         [ "NmosConnectionMonitorImplementation", "d6/dcb/classInterface_1_1nmos__connection__monitor__impl_1_1NmosConnectionMonitorImplementation.html", "d6/dcb/classInterface_1_1nmos__connection__monitor__impl_1_1NmosConnectionMonitorImplementation" ],
-        [ "TransparencyMixin", "d5/d6f/classInterface_1_1nmos__connection__monitor__impl_1_1TransparencyMixin.html", "d5/d6f/classInterface_1_1nmos__connection__monitor__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d1/dbd/classInterface_1_1nmos__connection__monitor__impl_1_1SyncBehavior.html", "d1/dbd/classInterface_1_1nmos__connection__monitor__impl_1_1SyncBehavior" ]
       ] ],
       [ "nmos_websocket_manager_impl", "da/d6b/namespaceInterface_1_1nmos__websocket__manager__impl.html", [
         [ "NmosWebsocketManagerImplementation", "d0/dc4/classInterface_1_1nmos__websocket__manager__impl_1_1NmosWebsocketManagerImplementation.html", "d0/dc4/classInterface_1_1nmos__websocket__manager__impl_1_1NmosWebsocketManagerImplementation" ],
-        [ "TransparencyMixin", "d5/d61/classInterface_1_1nmos__websocket__manager__impl_1_1TransparencyMixin.html", "d5/d61/classInterface_1_1nmos__websocket__manager__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "da/d62/classInterface_1_1nmos__websocket__manager__impl_1_1SyncBehavior.html", "da/d62/classInterface_1_1nmos__websocket__manager__impl_1_1SyncBehavior" ]
       ] ],
       [ "Output", "d4/d0b/namespaceInterface_1_1Output.html", [
         [ "midi_output_generator", "d3/d21/namespaceInterface_1_1Output_1_1midi__output__generator.html", [
@@ -1046,29 +1246,35 @@ var annotated_dup =
       [ "SetupUI", "de/d62/namespaceInterface_1_1SetupUI.html", [
         [ "SetupApp", "d2/d54/classInterface_1_1SetupUI_1_1SetupApp.html", "d2/d54/classInterface_1_1SetupUI_1_1SetupApp" ]
       ] ],
+      [ "slider_value_editor", "d3/de1/namespaceInterface_1_1slider__value__editor.html", [
+        [ "SliderValueEditor", "d3/d06/classInterface_1_1slider__value__editor_1_1SliderValueEditor.html", "d3/d06/classInterface_1_1slider__value__editor_1_1SliderValueEditor" ]
+      ] ],
       [ "smpte2138_monitor", "dd/d84/namespaceInterface_1_1smpte2138__monitor.html", [
         [ "SMPTE2138MonitorImplementation", "d7/d2b/classInterface_1_1smpte2138__monitor_1_1SMPTE2138MonitorImplementation.html", "d7/d2b/classInterface_1_1smpte2138__monitor_1_1SMPTE2138MonitorImplementation" ],
-        [ "TransparencyMixin", "da/d40/classInterface_1_1smpte2138__monitor_1_1TransparencyMixin.html", "da/d40/classInterface_1_1smpte2138__monitor_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d8/d2c/classInterface_1_1smpte2138__monitor_1_1SyncBehavior.html", "d8/d2c/classInterface_1_1smpte2138__monitor_1_1SyncBehavior" ]
       ] ],
       [ "snmp_log_impl", "d2/de3/namespaceInterface_1_1snmp__log__impl.html", [
         [ "SnmpLogImplementation", "d0/d8a/classInterface_1_1snmp__log__impl_1_1SnmpLogImplementation.html", "d0/d8a/classInterface_1_1snmp__log__impl_1_1SnmpLogImplementation" ],
-        [ "TransparencyMixin", "dd/d8e/classInterface_1_1snmp__log__impl_1_1TransparencyMixin.html", "dd/d8e/classInterface_1_1snmp__log__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d1/da5/classInterface_1_1snmp__log__impl_1_1SyncBehavior.html", "d1/da5/classInterface_1_1snmp__log__impl_1_1SyncBehavior" ]
       ] ],
       [ "snmp_mib_impl", "d1/d10/namespaceInterface_1_1snmp__mib__impl.html", [
         [ "SnmpMibImplementation", "d4/d1d/classInterface_1_1snmp__mib__impl_1_1SnmpMibImplementation.html", "d4/d1d/classInterface_1_1snmp__mib__impl_1_1SnmpMibImplementation" ],
-        [ "TransparencyMixin", "d8/d95/classInterface_1_1snmp__mib__impl_1_1TransparencyMixin.html", "d8/d95/classInterface_1_1snmp__mib__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d8/db5/classInterface_1_1snmp__mib__impl_1_1SyncBehavior.html", "d8/db5/classInterface_1_1snmp__mib__impl_1_1SyncBehavior" ]
       ] ],
       [ "snmp_status_impl", "de/d11/namespaceInterface_1_1snmp__status__impl.html", [
         [ "SnmpStatusImplementation", "de/d61/classInterface_1_1snmp__status__impl_1_1SnmpStatusImplementation.html", "de/d61/classInterface_1_1snmp__status__impl_1_1SnmpStatusImplementation" ],
-        [ "TransparencyMixin", "d6/dd0/classInterface_1_1snmp__status__impl_1_1TransparencyMixin.html", "d6/dd0/classInterface_1_1snmp__status__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "da/d06/classInterface_1_1snmp__status__impl_1_1SyncBehavior.html", "da/d06/classInterface_1_1snmp__status__impl_1_1SyncBehavior" ]
       ] ],
       [ "snmp_verify_mib_impl", "d2/d11/namespaceInterface_1_1snmp__verify__mib__impl.html", [
         [ "SnmpVerifyMibImplementation", "db/da9/classInterface_1_1snmp__verify__mib__impl_1_1SnmpVerifyMibImplementation.html", "db/da9/classInterface_1_1snmp__verify__mib__impl_1_1SnmpVerifyMibImplementation" ],
-        [ "TransparencyMixin", "db/d0d/classInterface_1_1snmp__verify__mib__impl_1_1TransparencyMixin.html", "db/d0d/classInterface_1_1snmp__verify__mib__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "df/d0c/classInterface_1_1snmp__verify__mib__impl_1_1SyncBehavior.html", "df/d0c/classInterface_1_1snmp__verify__mib__impl_1_1SyncBehavior" ]
       ] ],
       [ "snmp_verify_oid_impl", "dd/ddb/namespaceInterface_1_1snmp__verify__oid__impl.html", [
         [ "SnmpVerifyOidImplementation", "d0/d46/classInterface_1_1snmp__verify__oid__impl_1_1SnmpVerifyOidImplementation.html", "d0/d46/classInterface_1_1snmp__verify__oid__impl_1_1SnmpVerifyOidImplementation" ],
-        [ "TransparencyMixin", "de/ded/classInterface_1_1snmp__verify__oid__impl_1_1TransparencyMixin.html", "de/ded/classInterface_1_1snmp__verify__oid__impl_1_1TransparencyMixin" ]
+        [ "SyncBehavior", "d7/d1e/classInterface_1_1snmp__verify__oid__impl_1_1SyncBehavior.html", "d7/d1e/classInterface_1_1snmp__verify__oid__impl_1_1SyncBehavior" ]
+      ] ],
+      [ "status_light_editor", "da/da4/namespaceInterface_1_1status__light__editor.html", [
+        [ "StatusLightEditor", "d3/d78/classInterface_1_1status__light__editor_1_1StatusLightEditor.html", "d3/d78/classInterface_1_1status__light__editor_1_1StatusLightEditor" ]
       ] ],
       [ "Tabs", "df/de9/namespaceInterface_1_1Tabs.html", [
         [ "ElementProperties", "d8/dbd/namespaceInterface_1_1Tabs_1_1ElementProperties.html", [
@@ -1115,6 +1321,17 @@ var annotated_dup =
         ] ],
         [ "editor_toolbar", "d2/de3/namespaceInterface_1_1Window_1_1editor__toolbar.html", [
           [ "EditorToolbar", "dd/dd5/classInterface_1_1Window_1_1editor__toolbar_1_1EditorToolbar.html", "dd/dd5/classInterface_1_1Window_1_1editor__toolbar_1_1EditorToolbar" ]
+        ] ]
+      ] ],
+      [ "yak_monitor", "d1/dba/namespaceInterface_1_1yak__monitor.html", [
+        [ "yak_dissector_pane", "d5/d23/namespaceInterface_1_1yak__monitor_1_1yak__dissector__pane.html", [
+          [ "YakDissectorPane", "da/d33/classInterface_1_1yak__monitor_1_1yak__dissector__pane_1_1YakDissectorPane.html", "da/d33/classInterface_1_1yak__monitor_1_1yak__dissector__pane_1_1YakDissectorPane" ]
+        ] ],
+        [ "yak_log_pane", "d8/db6/namespaceInterface_1_1yak__monitor_1_1yak__log__pane.html", [
+          [ "YakLogPane", "d6/d06/classInterface_1_1yak__monitor_1_1yak__log__pane_1_1YakLogPane.html", "d6/d06/classInterface_1_1yak__monitor_1_1yak__log__pane_1_1YakLogPane" ]
+        ] ],
+        [ "yak_monitor", "db/d25/namespaceInterface_1_1yak__monitor_1_1yak__monitor.html", [
+          [ "YakMonitor", "d6/d66/classInterface_1_1yak__monitor_1_1yak__monitor_1_1YakMonitor.html", "d6/d66/classInterface_1_1yak__monitor_1_1yak__monitor_1_1YakMonitor" ]
         ] ]
       ] ]
     ] ],
@@ -1188,6 +1405,21 @@ var annotated_dup =
         [ "Is07Bridge", "dd/d24/classIS07_1_1transports_1_1Is07Bridge.html", "dd/d24/classIS07_1_1transports_1_1Is07Bridge" ]
       ] ]
     ] ],
+    [ "json_integrity_validator", "df/d04/namespacejson__integrity__validator.html", [
+      [ "JsonIntegrityValidator", "d4/db0/classjson__integrity__validator_1_1JsonIntegrityValidator.html", "d4/db0/classjson__integrity__validator_1_1JsonIntegrityValidator" ]
+    ] ],
+    [ "json_schema_normalizer", "db/d72/namespacejson__schema__normalizer.html", [
+      [ "JsonSchemaNormalizer", "d5/da8/classjson__schema__normalizer_1_1JsonSchemaNormalizer.html", "d5/da8/classjson__schema__normalizer_1_1JsonSchemaNormalizer" ]
+    ] ],
+    [ "loader_python_engine", "dc/d29/namespaceloader__python__engine.html", [
+      [ "LoaderPythonEngine", "d1/d6c/classloader__python__engine_1_1LoaderPythonEngine.html", "d1/d6c/classloader__python__engine_1_1LoaderPythonEngine" ]
+    ] ],
+    [ "loader_service_composer", "df/d46/namespaceloader__service__composer.html", [
+      [ "LoaderServiceComposer", "d2/d46/classloader__service__composer_1_1LoaderServiceComposer.html", "d2/d46/classloader__service__composer_1_1LoaderServiceComposer" ]
+    ] ],
+    [ "loader_signal_handler", "d3/d38/namespaceloader__signal__handler.html", [
+      [ "LoaderSignalHandler", "d0/d19/classloader__signal__handler_1_1LoaderSignalHandler.html", "d0/d19/classloader__signal__handler_1_1LoaderSignalHandler" ]
+    ] ],
     [ "main", "d2/dc1/namespacemain.html", [
       [ "Main", "df/db7/classmain_1_1Main.html", "df/db7/classmain_1_1Main" ]
     ] ],
@@ -1195,6 +1427,19 @@ var annotated_dup =
       [ "ComProtocolManager", "dd/d39/classmanager_1_1ComProtocolManager.html", "dd/d39/classmanager_1_1ComProtocolManager" ]
     ] ],
     [ "Managers", "d4/d7f/namespaceManagers.html", [
+      [ "assembler", "d1/d64/namespaceManagers_1_1assembler.html", [
+        [ "engine_widget_assembler", "d9/d15/namespaceManagers_1_1assembler_1_1engine__widget__assembler.html", [
+          [ "EngineWidgetAssemblerMixin", "d5/d4f/classManagers_1_1assembler_1_1engine__widget__assembler_1_1EngineWidgetAssemblerMixin.html", "d5/d4f/classManagers_1_1assembler_1_1engine__widget__assembler_1_1EngineWidgetAssemblerMixin" ]
+        ] ],
+        [ "engine_widget_instantiator", "d8/da2/namespaceManagers_1_1assembler_1_1engine__widget__instantiator.html", [
+          [ "WidgetInstantiator", "d6/d4b/classManagers_1_1assembler_1_1engine__widget__instantiator_1_1WidgetInstantiator.html", "d6/d4b/classManagers_1_1assembler_1_1engine__widget__instantiator_1_1WidgetInstantiator" ]
+        ] ]
+      ] ],
+      [ "bootstrap", "d7/dcc/namespaceManagers_1_1bootstrap.html", [
+        [ "loader_bootstrap_engine", "d8/d21/namespaceManagers_1_1bootstrap_1_1loader__bootstrap__engine.html", [
+          [ "LoaderBootstrapEngine", "d4/de2/classManagers_1_1bootstrap_1_1loader__bootstrap__engine_1_1LoaderBootstrapEngine.html", "d4/de2/classManagers_1_1bootstrap_1_1loader__bootstrap__engine_1_1LoaderBootstrapEngine" ]
+        ] ]
+      ] ],
       [ "configIniEditor", "dc/d23/namespaceManagers_1_1configIniEditor.html", [
         [ "manager", "d1/d07/namespaceManagers_1_1configIniEditor_1_1manager.html", [
           [ "ConfigIniEditor", "d4/d5b/classManagers_1_1configIniEditor_1_1manager_1_1ConfigIniEditor.html", "d4/d5b/classManagers_1_1configIniEditor_1_1manager_1_1ConfigIniEditor" ]
@@ -1202,6 +1447,14 @@ var annotated_dup =
       ] ],
       [ "discovery_orchestrator", "d5/d4a/namespaceManagers_1_1discovery__orchestrator.html", [
         [ "DiscoveryOrchestrator", "d9/dd0/classManagers_1_1discovery__orchestrator_1_1DiscoveryOrchestrator.html", "d9/dd0/classManagers_1_1discovery__orchestrator_1_1DiscoveryOrchestrator" ]
+      ] ],
+      [ "display", "de/db7/namespaceManagers_1_1display.html", [
+        [ "engine_gui_display", "d8/d85/namespaceManagers_1_1display_1_1engine__gui__display.html", [
+          [ "EngineGuiDisplay", "d1/d90/classManagers_1_1display_1_1engine__gui__display_1_1EngineGuiDisplay.html", "d1/d90/classManagers_1_1display_1_1engine__gui__display_1_1EngineGuiDisplay" ]
+        ] ],
+        [ "tab_window_manager", "d2/dc6/namespaceManagers_1_1display_1_1tab__window__manager.html", [
+          [ "TabWindowManager", "d0/daf/classManagers_1_1display_1_1tab__window__manager_1_1TabWindowManager.html", "d0/daf/classManagers_1_1display_1_1tab__window__manager_1_1TabWindowManager" ]
+        ] ]
       ] ],
       [ "Failover", "da/d4d/namespaceManagers_1_1Failover.html", [
         [ "Manager", "db/d5a/namespaceManagers_1_1Failover_1_1Manager.html", [
@@ -1214,23 +1467,32 @@ var annotated_dup =
       [ "fleet_status_monitor", "d8/d2b/namespaceManagers_1_1fleet__status__monitor.html", [
         [ "FleetStatusMonitor", "da/d8b/classManagers_1_1fleet__status__monitor_1_1FleetStatusMonitor.html", "da/d8b/classManagers_1_1fleet__status__monitor_1_1FleetStatusMonitor" ]
       ] ],
-      [ "gui_batch", "d3/de7/namespaceManagers_1_1gui__batch.html", [
-        [ "GuiBatchBuilderMixin", "da/d7b/classManagers_1_1gui__batch_1_1GuiBatchBuilderMixin.html", "da/d7b/classManagers_1_1gui__batch_1_1GuiBatchBuilderMixin" ]
-      ] ],
-      [ "gui_display", "d7/d4b/namespaceManagers_1_1gui__display.html", [
-        [ "Application", "d8/d9a/classManagers_1_1gui__display_1_1Application.html", "d8/d9a/classManagers_1_1gui__display_1_1Application" ]
-      ] ],
-      [ "gui_mqtt", "de/da8/namespaceManagers_1_1gui__mqtt.html", [
-        [ "GuiMqttManagerMixin", "d3/d26/classManagers_1_1gui__mqtt_1_1GuiMqttManagerMixin.html", "d3/d26/classManagers_1_1gui__mqtt_1_1GuiMqttManagerMixin" ]
-      ] ],
-      [ "gui_re", "de/da5/namespaceManagers_1_1gui__re.html", [
-        [ "GuiRebuilderMixin", "d4/de1/classManagers_1_1gui__re_1_1GuiRebuilderMixin.html", "d4/de1/classManagers_1_1gui__re_1_1GuiRebuilderMixin" ]
+      [ "grid", "dd/d0d/namespaceManagers_1_1grid.html", [
+        [ "engine_grid_layout_logic", "db/d94/namespaceManagers_1_1grid_1_1engine__grid__layout__logic.html", [
+          [ "GridTopologyConfigurator", "d2/d21/classManagers_1_1grid_1_1engine__grid__layout__logic_1_1GridTopologyConfigurator.html", "d2/d21/classManagers_1_1grid_1_1engine__grid__layout__logic_1_1GridTopologyConfigurator" ]
+        ] ]
       ] ],
       [ "heartbeat_generator", "d0/dff/namespaceManagers_1_1heartbeat__generator.html", [
         [ "HeartbeatGenerator", "d8/dbe/classManagers_1_1heartbeat__generator_1_1HeartbeatGenerator.html", "d8/dbe/classManagers_1_1heartbeat__generator_1_1HeartbeatGenerator" ]
       ] ],
       [ "InstallationManager", "dc/dd0/namespaceManagers_1_1InstallationManager.html", [
         [ "InstallationManager", "d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager.html", "d0/db9/classManagers_1_1InstallationManager_1_1InstallationManager" ]
+      ] ],
+      [ "instrument_controller", "d1/db8/namespaceManagers_1_1instrument__controller.html", [
+        [ "InstrumentController", "db/d34/classManagers_1_1instrument__controller_1_1InstrumentController.html", "db/d34/classManagers_1_1instrument__controller_1_1InstrumentController" ]
+      ] ],
+      [ "layout", "de/d8c/namespaceManagers_1_1layout.html", [
+        [ "builder_layout_manager", "d2/d37/namespaceManagers_1_1layout_1_1builder__layout__manager.html", [
+          [ "BuilderLayoutManager", "d5/d50/classManagers_1_1layout_1_1builder__layout__manager_1_1BuilderLayoutManager.html", "d5/d50/classManagers_1_1layout_1_1builder__layout__manager_1_1BuilderLayoutManager" ]
+        ] ]
+      ] ],
+      [ "lifecycle", "d9/d64/namespaceManagers_1_1lifecycle.html", [
+        [ "loader_lifecycle_service", "df/d2c/namespaceManagers_1_1lifecycle_1_1loader__lifecycle__service.html", [
+          [ "LifecycleManagerMixin", "d0/d65/classManagers_1_1lifecycle_1_1loader__lifecycle__service_1_1LifecycleManagerMixin.html", "d0/d65/classManagers_1_1lifecycle_1_1loader__lifecycle__service_1_1LifecycleManagerMixin" ]
+        ] ],
+        [ "loader_shutdown_service", "d2/df0/namespaceManagers_1_1lifecycle_1_1loader__shutdown__service.html", [
+          [ "LoaderShutdownService", "d9/d94/classManagers_1_1lifecycle_1_1loader__shutdown__service_1_1LoaderShutdownService.html", "d9/d94/classManagers_1_1lifecycle_1_1loader__shutdown__service_1_1LoaderShutdownService" ]
+        ] ]
       ] ],
       [ "log_filter_engine", "d7/dab/namespaceManagers_1_1log__filter__engine.html", [
         [ "LogFilterEngine", "df/ded/classManagers_1_1log__filter__engine_1_1LogFilterEngine.html", "df/ded/classManagers_1_1log__filter__engine_1_1LogFilterEngine" ],
@@ -1266,6 +1528,11 @@ var annotated_dup =
       [ "palette_manager", "d6/d98/namespaceManagers_1_1palette__manager.html", [
         [ "PaletteManager", "d4/d0d/classManagers_1_1palette__manager_1_1PaletteManager.html", "d4/d0d/classManagers_1_1palette__manager_1_1PaletteManager" ]
       ] ],
+      [ "refresh", "d5/def/namespaceManagers_1_1refresh.html", [
+        [ "engine_refresh_coordinator", "dd/d59/namespaceManagers_1_1refresh_1_1engine__refresh__coordinator.html", [
+          [ "RefreshCoordinatorMixin", "d9/d6b/classManagers_1_1refresh_1_1engine__refresh__coordinator_1_1RefreshCoordinatorMixin.html", "d9/d6b/classManagers_1_1refresh_1_1engine__refresh__coordinator_1_1RefreshCoordinatorMixin" ]
+        ] ]
+      ] ],
       [ "rest_manager", "d5/d81/namespaceManagers_1_1rest__manager.html", [
         [ "RESTManager", "d2/d00/classManagers_1_1rest__manager_1_1RESTManager.html", "d2/d00/classManagers_1_1rest__manager_1_1RESTManager" ]
       ] ],
@@ -1281,6 +1548,11 @@ var annotated_dup =
         [ "SNMPManager", "d0/dd2/classManagers_1_1snmp__manager_1_1SNMPManager.html", "d0/dd2/classManagers_1_1snmp__manager_1_1SNMPManager" ],
         [ "SNMPObserver", "d8/d02/classManagers_1_1snmp__manager_1_1SNMPObserver.html", "d8/d02/classManagers_1_1snmp__manager_1_1SNMPObserver" ]
       ] ],
+      [ "tabs", "d7/d5d/namespaceManagers_1_1tabs.html", [
+        [ "tab_orchestrator", "d4/d4a/namespaceManagers_1_1tabs_1_1tab__orchestrator.html", [
+          [ "TabOrchestratorMixin", "d5/d55/classManagers_1_1tabs_1_1tab__orchestrator_1_1TabOrchestratorMixin.html", "d5/d55/classManagers_1_1tabs_1_1tab__orchestrator_1_1TabOrchestratorMixin" ]
+        ] ]
+      ] ],
       [ "visa_manager", "d4/d38/namespaceManagers_1_1visa__manager.html", [
         [ "VisaManagerOrchestrator", "d9/d7c/classManagers_1_1visa__manager_1_1VisaManagerOrchestrator.html", "d9/d7c/classManagers_1_1visa__manager_1_1VisaManagerOrchestrator" ]
       ] ],
@@ -1294,6 +1566,12 @@ var annotated_dup =
         [ "YakTranslator", "d5/d7e/classManagers_1_1yak__translator_1_1YakTranslator.html", "d5/d7e/classManagers_1_1yak__translator_1_1YakTranslator" ]
       ] ]
     ] ],
+    [ "marker_peak_re_publisher", "d7/d47/namespacemarker__peak__re__publisher.html", [
+      [ "MarkerPeakPublisher", "d9/d34/classmarker__peak__re__publisher_1_1MarkerPeakPublisher.html", "d9/d34/classmarker__peak__re__publisher_1_1MarkerPeakPublisher" ]
+    ] ],
+    [ "marker_repository_watcher", "de/d39/namespacemarker__repository__watcher.html", [
+      [ "MarkerRepositoryWatcher", "d2/de0/classmarker__repository__watcher_1_1MarkerRepositoryWatcher.html", "d2/de0/classmarker__repository__watcher_1_1MarkerRepositoryWatcher" ]
+    ] ],
     [ "MDNS_GUI_Pointer", "d7/dd5/namespaceMDNS__GUI__Pointer.html", [
       [ "MDNSGUI", "d9/d86/classMDNS__GUI__Pointer_1_1MDNSGUI.html", null ]
     ] ],
@@ -1301,23 +1579,17 @@ var annotated_dup =
       [ "MDNSListener", "d9/df9/classmdns__listener_1_1MDNSListener.html", "d9/df9/classmdns__listener_1_1MDNSListener" ]
     ] ],
     [ "Methods", "d3/d59/namespaceMethods.html", [
-      [ "active_marker_tune_and_collect", "de/dea/namespaceMethods_1_1active__marker__tune__and__collect.html", [
-        [ "MarkerGoGetterWorker", "d2/d01/classMethods_1_1active__marker__tune__and__collect_1_1MarkerGoGetterWorker.html", "d2/d01/classMethods_1_1active__marker__tune__and__collect_1_1MarkerGoGetterWorker" ]
-      ] ],
-      [ "active_peak_publisher", "dc/dd7/namespaceMethods_1_1active__peak__publisher.html", [
-        [ "ActivePeakPublisher", "d9/d6d/classMethods_1_1active__peak__publisher_1_1ActivePeakPublisher.html", "d9/d6d/classMethods_1_1active__peak__publisher_1_1ActivePeakPublisher" ]
-      ] ],
       [ "aes70_parser", "da/d94/namespaceMethods_1_1aes70__parser.html", [
         [ "OcaParser", "d9/d13/classMethods_1_1aes70__parser_1_1OcaParser.html", "d9/d13/classMethods_1_1aes70__parser_1_1OcaParser" ]
       ] ],
       [ "base_handler", "d5/d7c/namespaceMethods_1_1base__handler.html", [
         [ "BaseHandler", "de/dff/classMethods_1_1base__handler_1_1BaseHandler.html", "de/dff/classMethods_1_1base__handler_1_1BaseHandler" ]
       ] ],
+      [ "builder_editor_grid", "db/d21/namespaceMethods_1_1builder__editor__grid.html", [
+        [ "BuilderEditorGrid", "da/d4a/classMethods_1_1builder__editor__grid_1_1BuilderEditorGrid.html", "da/d4a/classMethods_1_1builder__editor__grid_1_1BuilderEditorGrid" ]
+      ] ],
       [ "csv_parser", "d8/d95/namespaceMethods_1_1csv__parser.html", [
         [ "CSVParser", "d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html", "d1/d9a/classMethods_1_1csv__parser_1_1CSVParser" ]
-      ] ],
-      [ "csv_writer", "de/d99/namespaceMethods_1_1csv__writer.html", [
-        [ "CSVWriter", "de/d2e/classMethods_1_1csv__writer_1_1CSVWriter.html", "de/d2e/classMethods_1_1csv__writer_1_1CSVWriter" ]
       ] ],
       [ "deadband_handler", "d5/da7/namespaceMethods_1_1deadband__handler.html", [
         [ "DeadbandHandler", "dc/dea/classMethods_1_1deadband__handler_1_1DeadbandHandler.html", "dc/dea/classMethods_1_1deadband__handler_1_1DeadbandHandler" ]
@@ -1344,12 +1616,6 @@ var annotated_dup =
       [ "invert_handler", "d2/dda/namespaceMethods_1_1invert__handler.html", [
         [ "InvertHandler", "d9/d6a/classMethods_1_1invert__handler_1_1InvertHandler.html", "d9/d6a/classMethods_1_1invert__handler_1_1InvertHandler" ]
       ] ],
-      [ "marker_peak_re_publisher", "de/d85/namespaceMethods_1_1marker__peak__re__publisher.html", [
-        [ "MarkerPeakPublisher", "d2/de7/classMethods_1_1marker__peak__re__publisher_1_1MarkerPeakPublisher.html", "d2/de7/classMethods_1_1marker__peak__re__publisher_1_1MarkerPeakPublisher" ]
-      ] ],
-      [ "marker_repository_watcher", "d2/daf/namespaceMethods_1_1marker__repository__watcher.html", [
-        [ "MarkerRepositoryWatcher", "de/da3/classMethods_1_1marker__repository__watcher_1_1MarkerRepositoryWatcher.html", "de/da3/classMethods_1_1marker__repository__watcher_1_1MarkerRepositoryWatcher" ]
-      ] ],
       [ "midi_engine", "dc/dab/namespaceMethods_1_1midi__engine.html", [
         [ "MidiEngine", "d0/de5/classMethods_1_1midi__engine_1_1MidiEngine.html", "d0/de5/classMethods_1_1midi__engine_1_1MidiEngine" ]
       ] ],
@@ -1375,9 +1641,6 @@ var annotated_dup =
       ] ],
       [ "rest_server", "d9/d67/namespaceMethods_1_1rest__server.html", [
         [ "RestServer", "d6/da8/classMethods_1_1rest__server_1_1RestServer.html", "d6/da8/classMethods_1_1rest__server_1_1RestServer" ]
-      ] ],
-      [ "safe_after_mixin", "dc/da7/namespaceMethods_1_1safe__after__mixin.html", [
-        [ "SafeAfterMixin", "dc/dae/classMethods_1_1safe__after__mixin_1_1SafeAfterMixin.html", "dc/dae/classMethods_1_1safe__after__mixin_1_1SafeAfterMixin" ]
       ] ],
       [ "scale_handler", "d6/d98/namespaceMethods_1_1scale__handler.html", [
         [ "ScaleHandler", "d5/d5e/classMethods_1_1scale__handler_1_1ScaleHandler.html", "d5/d5e/classMethods_1_1scale__handler_1_1ScaleHandler" ]
@@ -1426,6 +1689,9 @@ var annotated_dup =
       ] ],
       [ "PtpClock", "d2/dc7/classMethods_1_1PtpClock.html", "d2/dc7/classMethods_1_1PtpClock" ]
     ] ],
+    [ "midi_keyboard", "d5/d65/namespacemidi__keyboard.html", [
+      [ "MidiKeyboard", "dd/dbb/classmidi__keyboard_1_1MidiKeyboard.html", "dd/dbb/classmidi__keyboard_1_1MidiKeyboard" ]
+    ] ],
     [ "MixerUI", "d5/d03/namespaceMixerUI.html", [
       [ "MixerApp", "dd/da0/classMixerUI_1_1MixerApp.html", "dd/da0/classMixerUI_1_1MixerApp" ],
       [ "PCMBitMonitor", "da/d1d/classMixerUI_1_1PCMBitMonitor.html", "da/d1d/classMixerUI_1_1PCMBitMonitor" ],
@@ -1433,6 +1699,9 @@ var annotated_dup =
     ] ],
     [ "mqtt_publisher", "de/d50/namespacemqtt__publisher.html", [
       [ "StandaloneMqttPublisher", "dd/d0e/classmqtt__publisher_1_1StandaloneMqttPublisher.html", "dd/d0e/classmqtt__publisher_1_1StandaloneMqttPublisher" ]
+    ] ],
+    [ "mqtt_rebuild_handler", "d9/d9b/namespacemqtt__rebuild__handler.html", [
+      [ "MqttRebuildHandler", "d6/d93/classmqtt__rebuild__handler_1_1MqttRebuildHandler.html", "d6/d93/classmqtt__rebuild__handler_1_1MqttRebuildHandler" ]
     ] ],
     [ "mqtt_tester", "d0/d3e/namespacemqtt__tester.html", [
       [ "MqttTester", "d5/de2/classmqtt__tester_1_1MqttTester.html", "d5/de2/classmqtt__tester_1_1MqttTester" ]
@@ -1457,6 +1726,16 @@ var annotated_dup =
     ] ],
     [ "oaGuiElements", "df/d9e/namespaceoaGuiElements.html", [
       [ "Core", "d0/d86/namespaceoaGuiElements_1_1Core.html", [
+        [ "array", "d7/db1/namespaceoaGuiElements_1_1Core_1_1array.html", [
+          [ "array", "da/d7e/namespaceoaGuiElements_1_1Core_1_1array_1_1array.html", [
+            [ "BuilderArrayCreator", "db/d34/classoaGuiElements_1_1Core_1_1array_1_1array_1_1BuilderArrayCreator.html", "db/d34/classoaGuiElements_1_1Core_1_1array_1_1array_1_1BuilderArrayCreator" ]
+          ] ],
+          [ "collapsible_block", "d8/d94/namespaceoaGuiElements_1_1Core_1_1array_1_1collapsible__block.html", [
+            [ "collapsible_block", "dd/d5b/namespaceoaGuiElements_1_1Core_1_1array_1_1collapsible__block_1_1collapsible__block.html", [
+              [ "CollapsibleBlockCreatorMixin", "db/d18/classoaGuiElements_1_1Core_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin.html", "db/d18/classoaGuiElements_1_1Core_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin" ]
+            ] ]
+          ] ]
+        ] ],
         [ "background", "d8/d5a/namespaceoaGuiElements_1_1Core_1_1background.html", [
           [ "BuilderBackgroundManagerMixin", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin" ]
         ] ],
@@ -1730,6 +2009,9 @@ var annotated_dup =
             [ "bar_graph_adapter", "d6/daa/namespaceoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1bar__graph__adapter.html", [
               [ "BarGraphAdapter", "dc/db7/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1bar__graph__adapter_1_1BarGraphAdapter.html", "dc/db7/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1bar__graph__adapter_1_1BarGraphAdapter" ]
             ] ],
+            [ "meter_adapter", "d0/d49/namespaceoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1meter__adapter.html", [
+              [ "MeterAdapter", "d8/dbe/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1meter__adapter_1_1MeterAdapter.html", "d8/dbe/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1meter__adapter_1_1MeterAdapter" ]
+            ] ],
             [ "plot_adapter", "d3/d2d/namespaceoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1plot__adapter.html", [
               [ "PlotAdapter", "d5/d58/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1plot__adapter_1_1PlotAdapter.html", "d5/d58/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1plot__adapter_1_1PlotAdapter" ]
             ] ]
@@ -1842,39 +2124,6 @@ var annotated_dup =
           ] ]
         ] ],
         [ "input", "d8/dd6/namespaceoaGuiElements_1_1Core_1_1input.html", [
-          [ "checkbox", "d8/d92/namespaceoaGuiElements_1_1Core_1_1input_1_1checkbox.html", [
-            [ "Core", "d7/db6/namespaceoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Core.html", [
-              [ "checkbox", "d4/d2a/namespaceoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Core_1_1checkbox.html", [
-                [ "BuilderCheckboxCreator", "d1/d44/classoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Core_1_1checkbox_1_1BuilderCheckboxCreator.html", "d1/d44/classoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Core_1_1checkbox_1_1BuilderCheckboxCreator" ]
-              ] ]
-            ] ],
-            [ "Interface", "d5/d00/namespaceoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Interface.html", [
-              [ "checkbox_editor", "d7/d11/namespaceoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Interface_1_1checkbox__editor.html", [
-                [ "CheckboxEditor", "de/d0c/classoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Interface_1_1checkbox__editor_1_1CheckboxEditor.html", "de/d0c/classoaGuiElements_1_1Core_1_1input_1_1checkbox_1_1Interface_1_1checkbox__editor_1_1CheckboxEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "composite_horizontal_dial_value", "dd/d2a/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value.html", [
-            [ "Core", "d1/d1d/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core.html", [
-              [ "composite_horizontal_dial_value", "d5/d47/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1composite__horizontal__dial__value.html", [
-                [ "BuilderCompositeHorizontalDialValueCreator", "d2/d2b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1composite__5c3f1364625d5ebc99ebe13894b3df6e.html", "d2/d2b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1composite__5c3f1364625d5ebc99ebe13894b3df6e" ]
-              ] ],
-              [ "grid", "dd/dad/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid.html", [
-                [ "GridManager", "dc/d7b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager.html", "dc/d7b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager" ]
-              ] ],
-              [ "state_sync", "dd/d31/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync.html", [
-                [ "CompositeStateSync", "d3/d12/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync_1_1CompositeStateSync.html", "d3/d12/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync_1_1CompositeStateSync" ]
-              ] ],
-              [ "ui_components", "df/dbc/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components.html", [
-                [ "CompositeUIComponents", "d8/df7/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents.html", "d8/df7/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents" ]
-              ] ]
-            ] ],
-            [ "Interface", "d6/d76/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Interface.html", [
-              [ "composite_horizontal_dial_value_editor", "d7/d48/namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Interface_1_1co772123556e49982fd9e232ec28f94900.html", [
-                [ "CompositeHorizontalDialValueEditor", "da/d2d/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Interface_1_1compos2e0be4517e821218c93531cef411fafd.html", "da/d2d/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Interface_1_1compos2e0be4517e821218c93531cef411fafd" ]
-              ] ]
-            ] ]
-          ] ],
           [ "input_directional_buttons", "d4/d80/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons.html", [
             [ "Core", "d3/d91/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core.html", [
               [ "input_directional_buttons", "d5/d58/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional__buttons.html", [
@@ -1902,93 +2151,6 @@ var annotated_dup =
           [ "input_mousewheel_mixin", "d2/dcd/namespaceoaGuiElements_1_1Core_1_1input_1_1input__mousewheel__mixin.html", [
             [ "input_mousewheel_mixin", "de/d3b/namespaceoaGuiElements_1_1Core_1_1input_1_1input__mousewheel__mixin_1_1input__mousewheel__mixin.html", [
               [ "MousewheelScrollMixin", "d9/d46/classoaGuiElements_1_1Core_1_1input_1_1input__mousewheel__mixin_1_1input__mousewheel__mixin_1_1MousewheelScrollMixin.html", "d9/d46/classoaGuiElements_1_1Core_1_1input_1_1input__mousewheel__mixin_1_1input__mousewheel__mixin_1_1MousewheelScrollMixin" ]
-            ] ]
-          ] ],
-          [ "json_tree", "d0/df4/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree.html", [
-            [ "Core", "de/d61/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core.html", [
-              [ "json", "d9/d52/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json.html", [
-                [ "JsonDataManager", "de/d7d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json_1_1JsonDataManager.html", "de/d7d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json_1_1JsonDataManager" ]
-              ] ],
-              [ "json_tree", "d9/d5c/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree.html", [
-                [ "AutoScrollbar", "d6/d12/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1AutoScrollbar.html", "d6/d12/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1AutoScrollbar" ],
-                [ "BuilderDataJsonTreeCreator", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1BuilderDataJsonTreeCreator.html", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1BuilderDataJsonTreeCreator" ],
-                [ "JsonTreeWidget", "d0/de8/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1JsonTreeWidget.html", "d0/de8/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree_1_1JsonTreeWidget" ]
-              ] ],
-              [ "json_tree_editor_mixin", "d7/d05/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__editor__mixin.html", [
-                [ "JsonTreeEditorMixin", "df/d1d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "df/d1d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
-              ] ],
-              [ "json_tree_renderer_mixin", "d4/d21/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin.html", [
-                [ "JsonTreeRendererMixin", "d7/da0/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin.html", "d7/da0/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin" ]
-              ] ]
-            ] ],
-            [ "Interface", "d3/d97/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Interface.html", [
-              [ "json_tree_editor", "d2/dfc/namespaceoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Interface_1_1json__tree__editor.html", [
-                [ "JsonTreeEditor", "d9/dba/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor.html", "d9/dba/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "listbox", "d9/d4e/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox.html", [
-            [ "Core", "d8/d63/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core.html", [
-              [ "listbox", "dd/df8/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox.html", [
-                [ "BuilderListboxCreator", "df/df7/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox_1_1BuilderListboxCreator.html", "df/df7/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox_1_1BuilderListboxCreator" ]
-              ] ],
-              [ "listbox_options", "d4/d31/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__options.html", [
-                [ "ListboxOptionsManager", "de/d11/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__options_1_1ListboxOptionsManager.html", "de/d11/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__options_1_1ListboxOptionsManager" ]
-              ] ],
-              [ "listbox_sync_engine", "da/dd4/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__sync__engine.html", [
-                [ "ListboxSyncEngine", "d0/ddc/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__sync__engine_1_1ListboxSyncEngine.html", "d0/ddc/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Core_1_1listbox__sync__engine_1_1ListboxSyncEngine" ]
-              ] ]
-            ] ],
-            [ "Interface", "db/d70/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Interface.html", [
-              [ "listbox_editor", "db/d0b/namespaceoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Interface_1_1listbox__editor.html", [
-                [ "ListboxEditor", "d5/d64/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Interface_1_1listbox__editor_1_1ListboxEditor.html", "d5/d64/classoaGuiElements_1_1Core_1_1input_1_1listbox_1_1Interface_1_1listbox__editor_1_1ListboxEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "slider_value", "d7/dfa/namespaceoaGuiElements_1_1Core_1_1input_1_1slider__value.html", [
-            [ "Core", "da/de8/namespaceoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Core.html", [
-              [ "slider_value", "d0/d9a/namespaceoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Core_1_1slider__value.html", [
-                [ "BuilderSliderValueCreator", "df/d8e/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Core_1_1slider__value_1_1BuilderSliderValueCreator.html", "df/d8e/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Core_1_1slider__value_1_1BuilderSliderValueCreator" ]
-              ] ]
-            ] ],
-            [ "Interface", "d0/de3/namespaceoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface.html", [
-              [ "slider_value_editor", "d7/d32/namespaceoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface_1_1slider__value__editor.html", [
-                [ "SliderValueEditor", "dd/d7d/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor.html", "dd/d7d/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor" ]
-              ] ]
-            ] ]
-          ] ]
-        ] ],
-        [ "Knobs", "d7/d14/namespaceoaGuiElements_1_1Core_1_1Knobs.html", [
-          [ "knob", "d5/d2a/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob.html", [
-            [ "Core", "da/d97/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core.html", [
-              [ "knob", "d0/d41/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob.html", [
-                [ "BuilderKnobCreator", "db/dd9/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob_1_1BuilderKnobCreator.html", "db/dd9/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob_1_1BuilderKnobCreator" ],
-                [ "CustomKnobFrame", "d1/d77/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob_1_1CustomKnobFrame.html", "d1/d77/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob_1_1CustomKnobFrame" ]
-              ] ],
-              [ "knob_interaction_mixin", "d8/de3/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__interaction__mixin.html", [
-                [ "KnobInteractionMixin", "d1/df1/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__interaction__mixin_1_1KnobInteractionMixin.html", "d1/df1/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__interaction__mixin_1_1KnobInteractionMixin" ]
-              ] ],
-              [ "knob_renderer_mixin", "da/d79/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__renderer__mixin.html", [
-                [ "KnobRendererMixin", "de/d4e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__renderer__mixin_1_1KnobRendererMixin.html", "de/d4e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__renderer__mixin_1_1KnobRendererMixin" ]
-              ] ]
-            ] ],
-            [ "Interface", "da/d1f/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Interface.html", [
-              [ "knob_editor", "d0/d54/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Interface_1_1knob__editor.html", [
-                [ "KnobEditor", "da/dc2/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Interface_1_1knob__editor_1_1KnobEditor.html", "da/dc2/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Interface_1_1knob__editor_1_1KnobEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "knob_rotary_selector", "dd/d68/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector.html", [
-            [ "Core", "d9/dfd/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core.html", [
-              [ "knob_rotary_selector", "d8/d7d/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector.html", [
-                [ "BuilderKnobRotarySelectorCreator", "dd/df2/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_ce0f30c93f2ca62b7f950e54e1c0b888.html", "dd/df2/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_ce0f30c93f2ca62b7f950e54e1c0b888" ],
-                [ "RotarySelectorSwitch", "d7/df1/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_1_1RotarySelectorSwitch.html", "d7/df1/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_1_1RotarySelectorSwitch" ]
-              ] ]
-            ] ],
-            [ "Interface", "dd/dcf/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface.html", [
-              [ "knob_rotary_selector_editor", "de/de6/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__selector__editor.html", [
-                [ "KnobRotarySelectorEditor", "d2/d0e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele9055cd7a6d853e6c6a964595b0aa2494.html", "d2/d0e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele9055cd7a6d853e6c6a964595b0aa2494" ]
-              ] ]
             ] ]
           ] ]
         ] ],
@@ -2129,95 +2291,6 @@ var annotated_dup =
             ] ]
           ] ]
         ] ],
-        [ "special", "d2/d31/namespaceoaGuiElements_1_1Core_1_1special.html", [
-          [ "circular_motion_displacement_potentiometer", "d8/dd8/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer.html", [
-            [ "Core", "d6/de9/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core.html", [
-              [ "circular_motion_displacement_potentiometer", "da/da4/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Cobc9fb33669575f42164ba25bafa103ec.html", [
-                [ "BuilderCircularMotionDisplacementPotentiometerCreator", "d6/d96/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1abd95af3ed2e84f3f58f87f7476b5c3b.html", "d6/d96/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1abd95af3ed2e84f3f58f87f7476b5c3b" ],
-                [ "CMDPWidget", "d9/d0d/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1f8f7f3b051a90cc31d28b7cc0017b5f8.html", "d9/d0d/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1f8f7f3b051a90cc31d28b7cc0017b5f8" ]
-              ] ],
-              [ "cmdp_channel_handler", "d3/d18/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__channel__handler.html", [
-                [ "CMDP_LTPObject", "d1/d6c/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_135e43e330844e47d28f2706138541e64.html", "d1/d6c/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_135e43e330844e47d28f2706138541e64" ]
-              ] ],
-              [ "cmdp_file_handler", "dc/d68/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__file__handler.html", [
-                [ "CMDPFileHandler", "d5/da6/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_194bd2bd7c44b47a69fdd182d4cecb8c4.html", "d5/da6/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_194bd2bd7c44b47a69fdd182d4cecb8c4" ]
-              ] ],
-              [ "cmdp_group_handler", "dd/d62/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__handler.html", [
-                [ "CMDPGroupHandler", "d1/d90/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1962cfec655f21f2b73331a9986c9fb78.html", "d1/d90/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1962cfec655f21f2b73331a9986c9fb78" ]
-              ] ],
-              [ "cmdp_group_mixin", "d0/d02/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__mixin.html", [
-                [ "CMDPGroupMixin", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1.html", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1" ]
-              ] ],
-              [ "cmdp_interaction_mixin", "d7/dcf/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__interaction__mixin.html", [
-                [ "CMDPInteractionMixin", "d6/db3/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_10516380c11765d824733f254bbfb7553.html", "d6/db3/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_10516380c11765d824733f254bbfb7553" ]
-              ] ],
-              [ "cmdp_math", "d5/d03/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math.html", [
-                [ "CircularMath", "dc/df4/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath.html", "dc/df4/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath" ]
-              ] ],
-              [ "cmdp_renderer_mixin", "d2/da0/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__renderer__mixin.html", [
-                [ "CMDPRendererMixin", "d0/d20/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1e0f04e12c87ae26f605abf293bb01ec4.html", "d0/d20/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1e0f04e12c87ae26f605abf293bb01ec4" ]
-              ] ],
-              [ "CMDP_tester", "d7/d60/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester.html", [
-                [ "MultiFaderApp", "dd/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp.html", "dd/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp" ]
-              ] ],
-              [ "cmdp_tree", "d1/d08/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree.html", [
-                [ "CMDPTreeManager", "d2/dda/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree_1_1CMDPTreeManager.html", "d2/dda/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree_1_1CMDPTreeManager" ]
-              ] ],
-              [ "ltp_fader", "dd/d2a/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader.html", [
-                [ "LTPFader", "d9/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader_1_1LTPFader.html", "d9/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader_1_1LTPFader" ]
-              ] ]
-            ] ],
-            [ "Interface", "db/d5b/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Interface.html", [
-              [ "circular_motion_displacement_potentiometer_editor", "dc/dd4/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1In2f821b00e389110072efe672c8785c5d.html", [
-                [ "CircularMotionDisplacementPotentiometerEditor", "d4/d7d/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Interfafff697eeee228341169fb5492a55a9f.html", "d4/d7d/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Interfafff697eeee228341169fb5492a55a9f" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "composite_mdp", "d7/d5f/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp.html", [
-            [ "Core", "d7/db5/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core.html", [
-              [ "composite_mdp", "d4/d20/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1composite__mdp.html", [
-                [ "BuilderCompositeMdpCreator", "dd/d3d/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1BuilderCompositeMdpCreator.html", "dd/d3d/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1BuilderCompositeMdpCreator" ],
-                [ "MDPFrame", "d9/d9a/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1MDPFrame.html", "d9/d9a/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1MDPFrame" ]
-              ] ],
-              [ "mdp_interaction_mixin", "d3/d91/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin.html", [
-                [ "MDPInteractionMixin", "da/d2c/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin_1_1MDPInteractionMixin.html", "da/d2c/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin_1_1MDPInteractionMixin" ]
-              ] ],
-              [ "mdp_ltp_component", "dd/dac/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__ltp__component.html", [
-                [ "MDPLTPComponent", "d1/db8/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__ltp__component_1_1MDPLTPComponent.html", "d1/db8/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__ltp__component_1_1MDPLTPComponent" ]
-              ] ],
-              [ "mdp_math", "da/dec/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__math.html", [
-                [ "MDPMath", "da/d28/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__math_1_1MDPMath.html", "da/d28/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1mdp__math_1_1MDPMath" ]
-              ] ],
-              [ "tester", "d0/d65/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester.html", [
-                [ "LTPObject", "d6/d31/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1LTPObject.html", "d6/d31/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1LTPObject" ],
-                [ "MultiFaderApp", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp" ]
-              ] ]
-            ] ],
-            [ "Interface", "de/d5f/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Interface.html", [
-              [ "composite_mdp_editor", "d5/dd2/namespaceoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor.html", [
-                [ "CompositeMdpEditor", "db/d77/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor_1_1CompositeMdpEditor.html", "db/d77/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor_1_1CompositeMdpEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "midi_keyboard", "db/d2a/namespaceoaGuiElements_1_1Core_1_1special_1_1midi__keyboard.html", [
-            [ "midi_keyboard", "d9/d25/namespaceoaGuiElements_1_1Core_1_1special_1_1midi__keyboard_1_1midi__keyboard.html", [
-              [ "MidiKeyboard", "d1/de2/classoaGuiElements_1_1Core_1_1special_1_1midi__keyboard_1_1midi__keyboard_1_1MidiKeyboard.html", "d1/de2/classoaGuiElements_1_1Core_1_1special_1_1midi__keyboard_1_1midi__keyboard_1_1MidiKeyboard" ]
-            ] ]
-          ] ],
-          [ "status_light", "d8/ddb/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light.html", [
-            [ "Core", "de/dad/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core.html", [
-              [ "status_light", "dd/da0/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core_1_1status__light.html", [
-                [ "HeaderStatusLightMixin", "d1/d35/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core_1_1status__light_1_1HeaderStatusLightMixin.html", "d1/d35/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core_1_1status__light_1_1HeaderStatusLightMixin" ],
-                [ "StatusLightWidget", "db/d65/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core_1_1status__light_1_1StatusLightWidget.html", "db/d65/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Core_1_1status__light_1_1StatusLightWidget" ]
-              ] ]
-            ] ],
-            [ "Interface", "d8/dad/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface.html", [
-              [ "status_light_editor", "df/dc9/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor.html", [
-                [ "StatusLightEditor", "d9/dd3/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor.html", "d9/dd3/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor" ]
-              ] ]
-            ] ]
-          ] ]
-        ] ],
         [ "text", "d9/d3a/namespaceoaGuiElements_1_1Core_1_1text.html", [
           [ "text_gui_dropdown_option", "db/de3/namespaceoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option.html", [
             [ "Core", "d7/d5a/namespaceoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Core.html", [
@@ -2334,307 +2407,6 @@ var annotated_dup =
               ] ]
             ] ]
           ] ]
-        ] ],
-        [ "utils", "d6/db4/namespaceoaGuiElements_1_1Core_1_1utils.html", [
-          [ "break_line", "d5/df4/namespaceoaGuiElements_1_1Core_1_1utils_1_1break__line.html", [
-            [ "Core", "dd/db1/namespaceoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core.html", [
-              [ "hidden_BreakLine", "df/db5/namespaceoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core_1_1hidden__BreakLine.html", [
-                [ "BreakLineCreatorMixin", "d2/d98/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core_1_1hidden__BreakLine_1_1BreakLineCreatorMixin.html", "d2/d98/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core_1_1hidden__BreakLine_1_1BreakLineCreatorMixin" ],
-                [ "BuilderBreakLineCreator", "d5/d15/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core_1_1hidden__BreakLine_1_1BuilderBreakLineCreator.html", "d5/d15/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Core_1_1hidden__BreakLine_1_1BuilderBreakLineCreator" ]
-              ] ]
-            ] ],
-            [ "Interface", "d8/de0/namespaceoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Interface.html", [
-              [ "break_line_editor", "d2/d20/namespaceoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Interface_1_1break__line__editor.html", [
-                [ "BreakLineEditor", "de/ddd/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Interface_1_1break__line__editor_1_1BreakLineEditor.html", "de/ddd/classoaGuiElements_1_1Core_1_1utils_1_1break__line_1_1Interface_1_1break__line__editor_1_1BreakLineEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "breakoff", "d7/d6d/namespaceoaGuiElements_1_1Core_1_1utils_1_1breakoff.html", [
-            [ "hidden_breakoff", "dc/dfc/namespaceoaGuiElements_1_1Core_1_1utils_1_1breakoff_1_1hidden__breakoff.html", [
-              [ "HiddenBreakoffManagerMixin", "d6/db2/classoaGuiElements_1_1Core_1_1utils_1_1breakoff_1_1hidden__breakoff_1_1HiddenBreakoffManagerMixin.html", "d6/db2/classoaGuiElements_1_1Core_1_1utils_1_1breakoff_1_1hidden__breakoff_1_1HiddenBreakoffManagerMixin" ]
-            ] ]
-          ] ],
-          [ "checkbox", "d3/d40/namespaceoaGuiElements_1_1Core_1_1utils_1_1checkbox.html", [
-            [ "Core", "dd/d5e/namespaceoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Core.html", [
-              [ "checkbox", "dd/d62/namespaceoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Core_1_1checkbox.html", [
-                [ "BuilderCheckboxCreator", "d6/da5/classoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Core_1_1checkbox_1_1BuilderCheckboxCreator.html", "d6/da5/classoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Core_1_1checkbox_1_1BuilderCheckboxCreator" ]
-              ] ]
-            ] ],
-            [ "Interface", "de/d1f/namespaceoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Interface.html", [
-              [ "checkbox_editor", "dc/dbd/namespaceoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Interface_1_1checkbox__editor.html", [
-                [ "CheckboxEditor", "d5/d82/classoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Interface_1_1checkbox__editor_1_1CheckboxEditor.html", "d5/d82/classoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Interface_1_1checkbox__editor_1_1CheckboxEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "circular_motion_displacement_potentiometer", "d2/dee/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer.html", [
-            [ "Core", "d3/d76/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core.html", [
-              [ "circular_motion_displacement_potentiometer", "d7/d5c/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core7db49d56865b686cf070b3549ce32f62.html", [
-                [ "BuilderCircularMotionDisplacementPotentiometerCreator", "d3/da1/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_12ffe8581e3de637e22cf90decc1f083d.html", "d3/da1/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_12ffe8581e3de637e22cf90decc1f083d" ],
-                [ "CMDPWidget", "d8/dc0/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1a33abd035513b4bb528e4dcdebb7e81e.html", "d8/dc0/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1a33abd035513b4bb528e4dcdebb7e81e" ]
-              ] ],
-              [ "cmdp_channel_handler", "d7/d1a/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__channel__handler.html", [
-                [ "CMDP_LTPObject", "da/dfe/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1e0c90c3fb54e28e17bdce98b31af581c.html", "da/dfe/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1e0c90c3fb54e28e17bdce98b31af581c" ]
-              ] ],
-              [ "cmdp_file_handler", "df/d73/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__file__handler.html", [
-                [ "CMDPFileHandler", "d2/da4/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1d4b0b516cd62cfa8ce7ad866739867e1.html", "d2/da4/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1d4b0b516cd62cfa8ce7ad866739867e1" ]
-              ] ],
-              [ "cmdp_group_handler", "db/d0d/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__handler.html", [
-                [ "CMDPGroupHandler", "d2/dae/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_16c321cb285333307ceb18592937d4d03.html", "d2/dae/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_16c321cb285333307ceb18592937d4d03" ]
-              ] ],
-              [ "cmdp_group_mixin", "d0/df0/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__mixin.html", [
-                [ "CMDPGroupMixin", "d4/db3/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1f894a47ae3ecab27a67649796a903728.html", "d4/db3/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1f894a47ae3ecab27a67649796a903728" ]
-              ] ],
-              [ "cmdp_interaction_mixin", "de/d99/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__interaction__mixin.html", [
-                [ "CMDPInteractionMixin", "df/df6/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_15e78e666f96dadfac744d9a3804f3933.html", "df/df6/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_15e78e666f96dadfac744d9a3804f3933" ]
-              ] ],
-              [ "cmdp_math", "dd/d94/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math.html", [
-                [ "CircularMath", "d9/de2/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath.html", "d9/de2/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath" ]
-              ] ],
-              [ "cmdp_renderer_mixin", "d4/d8c/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__renderer__mixin.html", [
-                [ "CMDPRendererMixin", "db/dd6/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_18eb78237e8fadcaafa3eee698e28dab2.html", "db/dd6/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_18eb78237e8fadcaafa3eee698e28dab2" ]
-              ] ],
-              [ "CMDP_tester", "d8/d7f/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester.html", [
-                [ "MultiFaderApp", "d4/d86/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp.html", "d4/d86/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp" ]
-              ] ],
-              [ "cmdp_tree", "da/d17/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree.html", [
-                [ "CMDPTreeManager", "d6/dc3/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree_1_1CMDPTreeManager.html", "d6/dc3/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__tree_1_1CMDPTreeManager" ]
-              ] ],
-              [ "ltp_fader", "d9/dff/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader.html", [
-                [ "LTPFader", "d7/d27/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader_1_1LTPFader.html", "d7/d27/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1ltp__fader_1_1LTPFader" ]
-              ] ]
-            ] ],
-            [ "Interface", "d4/d20/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Interface.html", [
-              [ "circular_motion_displacement_potentiometer_editor", "df/d03/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Inte99aa4b4058c2f774dede8681530611ed.html", [
-                [ "CircularMotionDisplacementPotentiometerEditor", "d1/d78/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Interfacfde949221a219c62bd83ad0a348dde89.html", "d1/d78/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Interfacfde949221a219c62bd83ad0a348dde89" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "composite_horizontal_dial_value", "d3/d56/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value.html", [
-            [ "Core", "d4/d9d/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core.html", [
-              [ "composite_horizontal_dial_value", "d9/da9/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__horizontal__dial__value.html", [
-                [ "BuilderCompositeHorizontalDialValueCreator", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9" ]
-              ] ],
-              [ "grid", "d2/d20/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1grid.html", [
-                [ "GridManager", "d0/d79/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager.html", "d0/d79/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager" ]
-              ] ],
-              [ "state_sync", "d5/d34/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync.html", [
-                [ "CompositeStateSync", "d4/d95/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync_1_1CompositeStateSync.html", "d4/d95/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1state__sync_1_1CompositeStateSync" ]
-              ] ],
-              [ "ui_components", "d4/d97/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components.html", [
-                [ "CompositeUIComponents", "de/d20/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents.html", "de/d20/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents" ]
-              ] ]
-            ] ],
-            [ "Interface", "d3/dce/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Interface.html", [
-              [ "composite_horizontal_dial_value_editor", "d3/dec/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Interface_1_1cocb353506180d5603a62ee467f4a99734.html", [
-                [ "CompositeHorizontalDialValueEditor", "db/d0a/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Interface_1_1composd2e8019a84d29208ea1f6db4dd674065.html", "db/d0a/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Interface_1_1composd2e8019a84d29208ea1f6db4dd674065" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "composite_mdp", "d9/d8a/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp.html", [
-            [ "Core", "de/d65/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core.html", [
-              [ "composite_mdp", "dc/dc4/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1composite__mdp.html", [
-                [ "BuilderCompositeMdpCreator", "dd/dba/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1BuilderCompositeMdpCreator.html", "dd/dba/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1BuilderCompositeMdpCreator" ],
-                [ "MDPFrame", "dc/dde/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1MDPFrame.html", "dc/dde/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1composite__mdp_1_1MDPFrame" ]
-              ] ],
-              [ "mdp_interaction_mixin", "d9/dbc/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin.html", [
-                [ "MDPInteractionMixin", "d0/d08/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin_1_1MDPInteractionMixin.html", "d0/d08/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__interaction__mixin_1_1MDPInteractionMixin" ]
-              ] ],
-              [ "mdp_ltp_component", "d3/d80/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__ltp__component.html", [
-                [ "MDPLTPComponent", "d5/d84/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__ltp__component_1_1MDPLTPComponent.html", "d5/d84/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__ltp__component_1_1MDPLTPComponent" ]
-              ] ],
-              [ "mdp_math", "da/d4e/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__math.html", [
-                [ "MDPMath", "dc/d40/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__math_1_1MDPMath.html", "dc/d40/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1mdp__math_1_1MDPMath" ]
-              ] ],
-              [ "tester", "d3/de4/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester.html", [
-                [ "LTPObject", "dd/d37/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester_1_1LTPObject.html", "dd/d37/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester_1_1LTPObject" ],
-                [ "MultiFaderApp", "d4/dd0/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html", "d4/dd0/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp" ]
-              ] ]
-            ] ],
-            [ "Interface", "da/d4e/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Interface.html", [
-              [ "composite_mdp_editor", "d4/d9b/namespaceoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor.html", [
-                [ "CompositeMdpEditor", "d7/d96/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor_1_1CompositeMdpEditor.html", "d7/d96/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Interface_1_1composite__mdp__editor_1_1CompositeMdpEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "json_tree", "da/d1b/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree.html", [
-            [ "Core", "dd/dab/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core.html", [
-              [ "json", "d2/d99/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json.html", [
-                [ "JsonDataManager", "d2/d1e/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json_1_1JsonDataManager.html", "d2/d1e/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json_1_1JsonDataManager" ]
-              ] ],
-              [ "json_tree", "df/dd3/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree.html", [
-                [ "AutoScrollbar", "d8/d1d/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1AutoScrollbar.html", "d8/d1d/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1AutoScrollbar" ],
-                [ "BuilderDataJsonTreeCreator", "d5/dfa/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1BuilderDataJsonTreeCreator.html", "d5/dfa/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1BuilderDataJsonTreeCreator" ],
-                [ "JsonTreeWidget", "de/d30/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1JsonTreeWidget.html", "de/d30/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree_1_1JsonTreeWidget" ]
-              ] ],
-              [ "json_tree_editor_mixin", "d8/da6/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin.html", [
-                [ "JsonTreeEditorMixin", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
-              ] ],
-              [ "json_tree_renderer_mixin", "d8/d86/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin.html", [
-                [ "JsonTreeRendererMixin", "dc/d99/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin.html", "dc/d99/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin" ]
-              ] ]
-            ] ],
-            [ "Interface", "dd/dda/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface.html", [
-              [ "json_tree_editor", "d2/d9d/namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface_1_1json__tree__editor.html", [
-                [ "JsonTreeEditor", "d1/dee/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor.html", "d1/dee/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "knob", "d7/d02/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob.html", [
-            [ "Core", "d5/d1a/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core.html", [
-              [ "knob", "de/d32/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob.html", [
-                [ "BuilderKnobCreator", "dc/d54/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob_1_1BuilderKnobCreator.html", "dc/d54/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob_1_1BuilderKnobCreator" ],
-                [ "CustomKnobFrame", "d8/d71/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob_1_1CustomKnobFrame.html", "d8/d71/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob_1_1CustomKnobFrame" ]
-              ] ],
-              [ "knob_interaction_mixin", "d4/dfc/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__interaction__mixin.html", [
-                [ "KnobInteractionMixin", "d4/d94/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__interaction__mixin_1_1KnobInteractionMixin.html", "d4/d94/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__interaction__mixin_1_1KnobInteractionMixin" ]
-              ] ],
-              [ "knob_renderer_mixin", "d5/db0/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__renderer__mixin.html", [
-                [ "KnobRendererMixin", "d0/d5f/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__renderer__mixin_1_1KnobRendererMixin.html", "d0/d5f/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Core_1_1knob__renderer__mixin_1_1KnobRendererMixin" ]
-              ] ]
-            ] ],
-            [ "Interface", "db/d0a/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Interface.html", [
-              [ "knob_editor", "db/d74/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Interface_1_1knob__editor.html", [
-                [ "KnobEditor", "db/d7f/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Interface_1_1knob__editor_1_1KnobEditor.html", "db/d7f/classoaGuiElements_1_1Core_1_1utils_1_1knob_1_1Interface_1_1knob__editor_1_1KnobEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "knob_rotary_selector", "d7/de6/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector.html", [
-            [ "Core", "dd/d04/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core.html", [
-              [ "knob_rotary_selector", "d1/da9/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector.html", [
-                [ "BuilderKnobRotarySelectorCreator", "da/d27/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_8c9fb722b4755e6cb1732cdb3777654b.html", "da/d27/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_8c9fb722b4755e6cb1732cdb3777654b" ],
-                [ "RotarySelectorSwitch", "dd/d3e/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_1_1RotarySelectorSwitch.html", "dd/d3e/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_1_1RotarySelectorSwitch" ]
-              ] ]
-            ] ],
-            [ "Interface", "df/d41/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Interface.html", [
-              [ "knob_rotary_selector_editor", "d8/d5e/namespaceoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__selector__editor.html", [
-                [ "KnobRotarySelectorEditor", "dd/de7/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele6e80b22d5f676436645abd5ce5129ddf.html", "dd/de7/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele6e80b22d5f676436645abd5ce5129ddf" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "listbox", "df/d50/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox.html", [
-            [ "Core", "d7/d53/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core.html", [
-              [ "listbox", "d8/d4a/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox.html", [
-                [ "BuilderListboxCreator", "d1/d78/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox_1_1BuilderListboxCreator.html", "d1/d78/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox_1_1BuilderListboxCreator" ]
-              ] ],
-              [ "listbox_options", "dc/db2/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__options.html", [
-                [ "ListboxOptionsManager", "de/d50/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__options_1_1ListboxOptionsManager.html", "de/d50/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__options_1_1ListboxOptionsManager" ]
-              ] ],
-              [ "listbox_sync_engine", "da/d81/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__sync__engine.html", [
-                [ "ListboxSyncEngine", "d2/d02/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__sync__engine_1_1ListboxSyncEngine.html", "d2/d02/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Core_1_1listbox__sync__engine_1_1ListboxSyncEngine" ]
-              ] ]
-            ] ],
-            [ "Interface", "d1/d89/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Interface.html", [
-              [ "listbox_editor", "d6/d25/namespaceoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Interface_1_1listbox__editor.html", [
-                [ "ListboxEditor", "d6/d2c/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Interface_1_1listbox__editor_1_1ListboxEditor.html", "d6/d2c/classoaGuiElements_1_1Core_1_1utils_1_1listbox_1_1Interface_1_1listbox__editor_1_1ListboxEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "panel_screw", "d2/dd4/namespaceoaGuiElements_1_1Core_1_1utils_1_1panel__screw.html", [
-            [ "screw_generator", "dd/dd5/namespaceoaGuiElements_1_1Core_1_1utils_1_1panel__screw_1_1screw__generator.html", [
-              [ "ScrewGenerator", "df/daa/classoaGuiElements_1_1Core_1_1utils_1_1panel__screw_1_1screw__generator_1_1ScrewGenerator.html", "df/daa/classoaGuiElements_1_1Core_1_1utils_1_1panel__screw_1_1screw__generator_1_1ScrewGenerator" ]
-            ] ]
-          ] ],
-          [ "panels", "de/dfa/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels.html", [
-            [ "Core", "da/d85/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core.html", [
-              [ "layer_dust", "d6/da1/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__dust.html", [
-                [ "DustLayer", "de/d5b/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__dust_1_1DustLayer.html", "de/d5b/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__dust_1_1DustLayer" ]
-              ] ],
-              [ "layer_metal_fold", "d1/d5b/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold.html", [
-                [ "MetalFoldLayer", "d4/d14/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer.html", "d4/d14/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer" ]
-              ] ],
-              [ "layer_rust", "d8/dc1/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__rust.html", [
-                [ "RustLayer", "d4/d4d/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__rust_1_1RustLayer.html", "d4/d4d/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__rust_1_1RustLayer" ]
-              ] ],
-              [ "layer_scratches", "d7/d84/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__scratches.html", [
-                [ "ScratchLayer", "d9/de1/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__scratches_1_1ScratchLayer.html", "d9/de1/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__scratches_1_1ScratchLayer" ]
-              ] ],
-              [ "layer_screws", "d3/d96/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__screws.html", [
-                [ "ScrewLayer", "dd/ddd/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__screws_1_1ScrewLayer.html", "dd/ddd/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__screws_1_1ScrewLayer" ]
-              ] ],
-              [ "layer_stains", "d5/dc7/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__stains.html", [
-                [ "StainsLayer", "d8/d7b/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__stains_1_1StainsLayer.html", "d8/d7b/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__stains_1_1StainsLayer" ]
-              ] ],
-              [ "layer_vignette", "df/dab/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__vignette.html", [
-                [ "VignetteLayer", "db/db0/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__vignette_1_1VignetteLayer.html", "db/db0/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__vignette_1_1VignetteLayer" ]
-              ] ],
-              [ "substrate_factory", "da/d18/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1substrate__factory.html", [
-                [ "SubstrateFactory", "db/dff/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1substrate__factory_1_1SubstrateFactory.html", "db/dff/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1substrate__factory_1_1SubstrateFactory" ]
-              ] ]
-            ] ],
-            [ "panel_generator", "df/d7b/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1panel__generator.html", [
-              [ "PanelGenerator", "df/d11/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1panel__generator_1_1PanelGenerator.html", "df/d11/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1panel__generator_1_1PanelGenerator" ]
-            ] ],
-            [ "tiled_panel_generator", "dd/da9/namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1tiled__panel__generator.html", [
-              [ "TiledPanelGenerator", "d4/dbc/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1tiled__panel__generator_1_1TiledPanelGenerator.html", "d4/dbc/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1tiled__panel__generator_1_1TiledPanelGenerator" ]
-            ] ]
-          ] ],
-          [ "slider_value", "d1/d52/namespaceoaGuiElements_1_1Core_1_1utils_1_1slider__value.html", [
-            [ "Core", "d7/d02/namespaceoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Core.html", [
-              [ "slider_value", "df/dd2/namespaceoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Core_1_1slider__value.html", [
-                [ "BuilderSliderValueCreator", "d5/d83/classoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Core_1_1slider__value_1_1BuilderSliderValueCreator.html", "d5/d83/classoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Core_1_1slider__value_1_1BuilderSliderValueCreator" ]
-              ] ]
-            ] ],
-            [ "Interface", "de/deb/namespaceoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Interface.html", [
-              [ "slider_value_editor", "d4/d04/namespaceoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Interface_1_1slider__value__editor.html", [
-                [ "SliderValueEditor", "d9/d39/classoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor.html", "d9/d39/classoaGuiElements_1_1Core_1_1utils_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor" ]
-              ] ]
-            ] ]
-          ] ],
-          [ "status_light", "d2/d1c/namespaceoaGuiElements_1_1Core_1_1utils_1_1status__light.html", [
-            [ "Core", "d6/df4/namespaceoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core.html", [
-              [ "status_light", "df/d45/namespaceoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light.html", [
-                [ "BuilderStatusLightCreator", "d1/dc5/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1BuilderStatusLightCreator.html", "d1/dc5/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1BuilderStatusLightCreator" ],
-                [ "HeaderStatusLightMixin", "da/d58/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1HeaderStatusLightMixin.html", "da/d58/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1HeaderStatusLightMixin" ],
-                [ "StatusLightWidget", "d1/d89/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1StatusLightWidget.html", "d1/d89/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1StatusLightWidget" ]
-              ] ]
-            ] ],
-            [ "Interface", "d9/d0e/namespaceoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Interface.html", [
-              [ "status_light_editor", "d6/d75/namespaceoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Interface_1_1status__light__editor.html", [
-                [ "StatusLightEditor", "d8/d38/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor.html", "d8/d38/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor" ]
-              ] ]
-            ] ]
-          ] ]
-        ] ]
-      ] ],
-      [ "Interface", "d8/dba/namespaceoaGuiElements_1_1Interface.html", [
-        [ "panel_screw", "d5/d37/namespaceoaGuiElements_1_1Interface_1_1panel__screw.html", [
-          [ "screw_generator", "d2/de9/namespaceoaGuiElements_1_1Interface_1_1panel__screw_1_1screw__generator.html", [
-            [ "ScrewGenerator", "d4/d7d/classoaGuiElements_1_1Interface_1_1panel__screw_1_1screw__generator_1_1ScrewGenerator.html", "d4/d7d/classoaGuiElements_1_1Interface_1_1panel__screw_1_1screw__generator_1_1ScrewGenerator" ]
-          ] ]
-        ] ],
-        [ "panels", "d0/d2f/namespaceoaGuiElements_1_1Interface_1_1panels.html", [
-          [ "Core", "d5/d38/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core.html", [
-            [ "layer_dust", "da/dfe/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__dust.html", [
-              [ "DustLayer", "d8/d5a/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__dust_1_1DustLayer.html", "d8/d5a/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__dust_1_1DustLayer" ]
-            ] ],
-            [ "layer_metal_fold", "d0/da1/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__metal__fold.html", [
-              [ "MetalFoldLayer", "d0/d7d/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer.html", "d0/d7d/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer" ]
-            ] ],
-            [ "layer_rust", "df/d38/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__rust.html", [
-              [ "RustLayer", "d5/db7/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__rust_1_1RustLayer.html", "d5/db7/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__rust_1_1RustLayer" ]
-            ] ],
-            [ "layer_scratches", "d5/d9a/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__scratches.html", [
-              [ "ScratchLayer", "d7/d1f/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__scratches_1_1ScratchLayer.html", "d7/d1f/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__scratches_1_1ScratchLayer" ]
-            ] ],
-            [ "layer_screws", "d3/df3/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__screws.html", [
-              [ "ScrewLayer", "d0/d3a/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__screws_1_1ScrewLayer.html", "d0/d3a/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__screws_1_1ScrewLayer" ]
-            ] ],
-            [ "layer_stains", "d6/d1b/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__stains.html", [
-              [ "StainsLayer", "d1/d64/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__stains_1_1StainsLayer.html", "d1/d64/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__stains_1_1StainsLayer" ]
-            ] ],
-            [ "layer_vignette", "da/d14/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__vignette.html", [
-              [ "VignetteLayer", "de/d5c/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__vignette_1_1VignetteLayer.html", "de/d5c/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__vignette_1_1VignetteLayer" ]
-            ] ],
-            [ "substrate_factory", "d4/d65/namespaceoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1substrate__factory.html", [
-              [ "SubstrateFactory", "db/df5/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1substrate__factory_1_1SubstrateFactory.html", "db/df5/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1substrate__factory_1_1SubstrateFactory" ]
-            ] ]
-          ] ],
-          [ "panel_generator", "d1/ddc/namespaceoaGuiElements_1_1Interface_1_1panels_1_1panel__generator.html", [
-            [ "PanelGenerator", "d1/d4e/classoaGuiElements_1_1Interface_1_1panels_1_1panel__generator_1_1PanelGenerator.html", "d1/d4e/classoaGuiElements_1_1Interface_1_1panels_1_1panel__generator_1_1PanelGenerator" ]
-          ] ],
-          [ "tiled_panel_generator", "d8/d6e/namespaceoaGuiElements_1_1Interface_1_1panels_1_1tiled__panel__generator.html", [
-            [ "TiledPanelGenerator", "d8/d24/classoaGuiElements_1_1Interface_1_1panels_1_1tiled__panel__generator_1_1TiledPanelGenerator.html", "d8/d24/classoaGuiElements_1_1Interface_1_1panels_1_1tiled__panel__generator_1_1TiledPanelGenerator" ]
-          ] ]
         ] ]
       ] ],
       [ "Methods", "d1/d42/namespaceoaGuiElements_1_1Methods.html", [
@@ -2731,6 +2503,12 @@ var annotated_dup =
           ] ],
           [ "test_graphing", "df/d13/namespaceoaGuiElements_1_1Tests_1_1graphing_1_1test__graphing.html", [
             [ "TestGraphPlotter", "d8/dc0/classoaGuiElements_1_1Tests_1_1graphing_1_1test__graphing_1_1TestGraphPlotter.html", "d8/dc0/classoaGuiElements_1_1Tests_1_1graphing_1_1test__graphing_1_1TestGraphPlotter" ]
+          ] ]
+        ] ],
+        [ "images", "d9/da0/namespaceoaGuiElements_1_1Tests_1_1images.html", [
+          [ "test_procedural_bg_engine", "dd/d93/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine.html", [
+            [ "MockBuilder", "db/d4e/classoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine_1_1MockBuilder.html", "db/d4e/classoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine_1_1MockBuilder" ],
+            [ "TestProceduralBGEngine", "da/dc0/classoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine_1_1TestProceduralBGEngine.html", "da/dc0/classoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine_1_1TestProceduralBGEngine" ]
           ] ]
         ] ],
         [ "input", "d8/dbd/namespaceoaGuiElements_1_1Tests_1_1input.html", [
@@ -2836,23 +2614,15 @@ var annotated_dup =
       [ "PropertiesUI", "da/ded/classproperties__ui_1_1PropertiesUI.html", "da/ded/classproperties__ui_1_1PropertiesUI" ]
     ] ],
     [ "protocol_matrix", "d5/d43/namespaceprotocol__matrix.html", [
-      [ "ProtocolMatrix", "d9/d6d/classprotocol__matrix_1_1ProtocolMatrix.html", "d9/d6d/classprotocol__matrix_1_1ProtocolMatrix" ]
+      [ "ProtocolMatrixProxy", "df/da0/classprotocol__matrix_1_1ProtocolMatrixProxy.html", null ]
+    ] ],
+    [ "registry_widget_store", "d4/d19/namespaceregistry__widget__store.html", [
+      [ "RegistryWidgetStore", "d3/da3/classregistry__widget__store_1_1RegistryWidgetStore.html", "d3/da3/classregistry__widget__store_1_1RegistryWidgetStore" ]
     ] ],
     [ "right_50", "df/d24/namespaceright__50.html", [
       [ "bottom_90", "d1/d52/namespaceright__50_1_1bottom__90.html", [
         [ "2_monitors", "d8/d19/namespaceright__50_1_1bottom__90_1_12__monitors.html", [
           [ "1588_PTP_Monitor", "d6/d6d/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor.html", [
-            [ "Core", "da/de4/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core.html", [
-              [ "ptp_dissector_engine", "d2/dcf/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__dissector__engine.html", [
-                [ "PTPDissectorEngine", "d5/d01/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine.html", "d5/d01/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine" ]
-              ] ],
-              [ "ptp_meter_panel", "df/dad/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel.html", [
-                [ "PTPMeterPanel", "d5/dbc/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel.html", "d5/dbc/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel" ]
-              ] ],
-              [ "ptp_processor", "d0/da1/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__processor.html", [
-                [ "PTPDataProcessor", "d3/d0a/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__processor_1_1PTPDataProcessor.html", "d3/d0a/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__processor_1_1PTPDataProcessor" ]
-              ] ]
-            ] ],
             [ "ptp_monitor", "d2/db6/namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1ptp__monitor.html", [
               [ "PtpMonitor", "d0/d59/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1ptp__monitor_1_1PtpMonitor.html", "d0/d59/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1ptp__monitor_1_1PtpMonitor" ]
             ] ],
@@ -2880,6 +2650,9 @@ var annotated_dup =
       [ "IS12SubscriptionMessage", "d8/d3a/classschemas_1_1IS12SubscriptionMessage.html", "d8/d3a/classschemas_1_1IS12SubscriptionMessage" ],
       [ "IS12SubscriptionResponseMessage", "d9/d53/classschemas_1_1IS12SubscriptionResponseMessage.html", "d9/d53/classschemas_1_1IS12SubscriptionResponseMessage" ]
     ] ],
+    [ "screw_generator", "d5/d7f/namespacescrew__generator.html", [
+      [ "ScrewGenerator", "d8/dda/classscrew__generator_1_1ScrewGenerator.html", "d8/dda/classscrew__generator_1_1ScrewGenerator" ]
+    ] ],
     [ "selection_overlay", "d1/d12/namespaceselection__overlay.html", [
       [ "SelectionOverlay", "d3/d41/classselection__overlay_1_1SelectionOverlay.html", "d3/d41/classselection__overlay_1_1SelectionOverlay" ]
     ] ],
@@ -2906,6 +2679,15 @@ var annotated_dup =
     ] ],
     [ "snmp_verify_mib", "de/ddc/namespacesnmp__verify__mib.html", [
       [ "SnmpVerifyWithMibGUI", "d1/db1/classsnmp__verify__mib_1_1SnmpVerifyWithMibGUI.html", null ]
+    ] ],
+    [ "tab_physical_window", "d4/d35/namespacetab__physical__window.html", [
+      [ "TabWindowManager", "dd/dda/classtab__physical__window_1_1TabWindowManager.html", "dd/dda/classtab__physical__window_1_1TabWindowManager" ]
+    ] ],
+    [ "telemetry_hooks", "d9/dba/namespacetelemetry__hooks.html", [
+      [ "TelemetryHooks", "d0/dcd/classtelemetry__hooks_1_1TelemetryHooks.html", "d0/dcd/classtelemetry__hooks_1_1TelemetryHooks" ]
+    ] ],
+    [ "telemetry_publisher", "da/dd8/namespacetelemetry__publisher.html", [
+      [ "TelemetryPublisher", "d4/d4c/classtelemetry__publisher_1_1TelemetryPublisher.html", "d4/d4c/classtelemetry__publisher_1_1TelemetryPublisher" ]
     ] ],
     [ "Tests", "df/da7/namespaceTests.html", [
       [ "Core", "de/d95/namespaceTests_1_1Core.html", [
@@ -2952,7 +2734,7 @@ var annotated_dup =
         [ "TestAssetCacheManager", "de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html", "de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager" ]
       ] ],
       [ "test_batch_processing", "de/d48/namespaceTests_1_1test__batch__processing.html", [
-        [ "TestBatchProcessingEngine", "d9/d38/classTests_1_1test__batch__processing_1_1TestBatchProcessingEngine.html", "d9/d38/classTests_1_1test__batch__processing_1_1TestBatchProcessingEngine" ]
+        [ "TestRenderScheduler", "dd/dfe/classTests_1_1test__batch__processing_1_1TestRenderScheduler.html", "dd/dfe/classTests_1_1test__batch__processing_1_1TestRenderScheduler" ]
       ] ],
       [ "test_bootstrap_sequence", "de/d57/namespaceTests_1_1test__bootstrap__sequence.html", [
         [ "TestAsyncBootstrapEngine", "de/d5d/classTests_1_1test__bootstrap__sequence_1_1TestAsyncBootstrapEngine.html", "de/d5d/classTests_1_1test__bootstrap__sequence_1_1TestAsyncBootstrapEngine" ]
@@ -3043,7 +2825,7 @@ var annotated_dup =
         [ "TestIs07Transports", "d0/d52/classTests_1_1test__is07__transport_1_1TestIs07Transports.html", "d0/d52/classTests_1_1test__is07__transport_1_1TestIs07Transports" ]
       ] ],
       [ "test_layout_parser", "da/dfa/namespaceTests_1_1test__layout__parser.html", [
-        [ "TestLayoutParser", "d3/d5b/classTests_1_1test__layout__parser_1_1TestLayoutParser.html", "d3/d5b/classTests_1_1test__layout__parser_1_1TestLayoutParser" ]
+        [ "TestStructuralInterpreter", "d8/dbf/classTests_1_1test__layout__parser_1_1TestStructuralInterpreter.html", "d8/dbf/classTests_1_1test__layout__parser_1_1TestStructuralInterpreter" ]
       ] ],
       [ "test_learning", "d6/da2/namespaceTests_1_1test__learning.html", [
         [ "TestLearningThirdParty", "d6/d8d/classTests_1_1test__learning_1_1TestLearningThirdParty.html", "d6/d8d/classTests_1_1test__learning_1_1TestLearningThirdParty" ]
@@ -3232,6 +3014,12 @@ var annotated_dup =
         ] ]
       ] ]
     ] ],
+    [ "top_toolbar", "da/df7/namespacetop__toolbar.html", [
+      [ "ApplicationToolbar", "d3/d86/classtop__toolbar_1_1ApplicationToolbar.html", "d3/d86/classtop__toolbar_1_1ApplicationToolbar" ]
+    ] ],
+    [ "transparency_config_parser", "db/d0f/namespacetransparency__config__parser.html", [
+      [ "TransparencyConfigParser", "de/d86/classtransparency__config__parser_1_1TransparencyConfigParser.html", "de/d86/classtransparency__config__parser_1_1TransparencyConfigParser" ]
+    ] ],
     [ "tree_drag_drop_handler", "d8/db4/namespacetree__drag__drop__handler.html", [
       [ "TreeDragDropHandler", "d4/d2e/classtree__drag__drop__handler_1_1TreeDragDropHandler.html", "d4/d2e/classtree__drag__drop__handler_1_1TreeDragDropHandler" ]
     ] ],
@@ -3241,15 +3029,27 @@ var annotated_dup =
     [ "tree_view_ui", "d7/d68/namespacetree__view__ui.html", [
       [ "TreeViewUI", "dc/d1c/classtree__view__ui_1_1TreeViewUI.html", "dc/d1c/classtree__view__ui_1_1TreeViewUI" ]
     ] ],
+    [ "ui_coordinate_utils", "dd/d76/namespaceui__coordinate__utils.html", [
+      [ "UICoordinateUtils", "d0/d1b/classui__coordinate__utils_1_1UICoordinateUtils.html", "d0/d1b/classui__coordinate__utils_1_1UICoordinateUtils" ]
+    ] ],
+    [ "ui_resource_manager", "d7/d5f/namespaceui__resource__manager.html", [
+      [ "UIResourceManager", "dd/d33/classui__resource__manager_1_1UIResourceManager.html", "dd/d33/classui__resource__manager_1_1UIResourceManager" ]
+    ] ],
+    [ "ui_window_geometry_utils", "d1/ded/namespaceui__window__geometry__utils.html", [
+      [ "UIWindowGeometryUtils", "d8/d5e/classui__window__geometry__utils_1_1UIWindowGeometryUtils.html", "d8/d5e/classui__window__geometry__utils_1_1UIWindowGeometryUtils" ]
+    ] ],
     [ "websocket_transport", "d0/d57/namespacewebsocket__transport.html", [
       [ "WebSocketEventTransport", "d8/da6/classwebsocket__transport_1_1WebSocketEventTransport.html", "d8/da6/classwebsocket__transport_1_1WebSocketEventTransport" ]
+    ] ],
+    [ "window_breakoff_manager", "d2/dbd/namespacewindow__breakoff__manager.html", [
+      [ "WindowBreakoffManagerMixin", "db/dc7/classwindow__breakoff__manager_1_1WindowBreakoffManagerMixin.html", "db/dc7/classwindow__breakoff__manager_1_1WindowBreakoffManagerMixin" ]
     ] ],
     [ "Workers", "da/d91/namespaceWorkers.html", [
       [ "agent_mdns_zeroconf", "d2/d25/namespaceWorkers_1_1agent__mdns__zeroconf.html", [
         [ "AES70DiscoveryListener", "d2/d6a/classWorkers_1_1agent__mdns__zeroconf_1_1AES70DiscoveryListener.html", "d2/d6a/classWorkers_1_1agent__mdns__zeroconf_1_1AES70DiscoveryListener" ]
       ] ],
-      [ "async_grid_renderer", "df/dbe/namespaceWorkers_1_1async__grid__renderer.html", [
-        [ "AsyncGridRenderer", "d8/dae/classWorkers_1_1async__grid__renderer_1_1AsyncGridRenderer.html", "d8/dae/classWorkers_1_1async__grid__renderer_1_1AsyncGridRenderer" ]
+      [ "batch_layout_engine", "de/d61/namespaceWorkers_1_1batch__layout__engine.html", [
+        [ "BatchLayoutEngine", "da/d8f/classWorkers_1_1batch__layout__engine_1_1BatchLayoutEngine.html", "da/d8f/classWorkers_1_1batch__layout__engine_1_1BatchLayoutEngine" ]
       ] ],
       [ "batch_sink", "d7/d1c/namespaceWorkers_1_1batch__sink.html", [
         [ "BatchLogSink", "da/d5a/classWorkers_1_1batch__sink_1_1BatchLogSink.html", "da/d5a/classWorkers_1_1batch__sink_1_1BatchLogSink" ]
@@ -3257,20 +3057,47 @@ var annotated_dup =
       [ "broker_monitor", "da/d33/namespaceWorkers_1_1broker__monitor.html", [
         [ "BrokerMonitor", "d6/d60/classWorkers_1_1broker__monitor_1_1BrokerMonitor.html", "d6/d60/classWorkers_1_1broker__monitor_1_1BrokerMonitor" ]
       ] ],
-      [ "builder", "db/d1b/namespaceWorkers_1_1builder.html", [
-        [ "AutoScrollbar", "dc/d6e/classWorkers_1_1builder_1_1AutoScrollbar.html", "dc/d6e/classWorkers_1_1builder_1_1AutoScrollbar" ],
-        [ "DynamicGuiBuilder", "d7/d4b/classWorkers_1_1builder_1_1DynamicGuiBuilder.html", "d7/d4b/classWorkers_1_1builder_1_1DynamicGuiBuilder" ]
-      ] ],
       [ "CleanupApps", "d2/d0a/namespaceWorkers_1_1CleanupApps.html", [
         [ "ClearMQTT", "d4/d56/namespaceWorkers_1_1CleanupApps_1_1ClearMQTT.html", [
           [ "MQTTSweeper", "d1/df6/classWorkers_1_1CleanupApps_1_1ClearMQTT_1_1MQTTSweeper.html", "d1/df6/classWorkers_1_1CleanupApps_1_1ClearMQTT_1_1MQTTSweeper" ]
         ] ]
       ] ],
-      [ "launcher", "df/d3c/namespaceWorkers_1_1launcher.html", [
-        [ "CriticalModuleMissingError", "d9/d2e/classWorkers_1_1launcher_1_1CriticalModuleMissingError.html", null ]
+      [ "compositing", "d7/d14/namespaceWorkers_1_1compositing.html", [
+        [ "engine_texture_mapper", "d7/d2b/namespaceWorkers_1_1compositing_1_1engine__texture__mapper.html", [
+          [ "EngineTextureMapper", "d5/dea/classWorkers_1_1compositing_1_1engine__texture__mapper_1_1EngineTextureMapper.html", "d5/dea/classWorkers_1_1compositing_1_1engine__texture__mapper_1_1EngineTextureMapper" ]
+        ] ],
+        [ "engine_visual_effects", "de/d0f/namespaceWorkers_1_1compositing_1_1engine__visual__effects.html", [
+          [ "EngineVisualEffects", "dd/d81/classWorkers_1_1compositing_1_1engine__visual__effects_1_1EngineVisualEffects.html", "dd/d81/classWorkers_1_1compositing_1_1engine__visual__effects_1_1EngineVisualEffects" ]
+        ] ],
+        [ "sync_behavior", "d4/d1f/namespaceWorkers_1_1compositing_1_1sync__behavior.html", [
+          [ "SyncBehavior", "dc/d04/classWorkers_1_1compositing_1_1sync__behavior_1_1SyncBehavior.html", "dc/d04/classWorkers_1_1compositing_1_1sync__behavior_1_1SyncBehavior" ]
+        ] ]
       ] ],
       [ "Launcher", "da/dcd/namespaceWorkers_1_1Launcher.html", [
         [ "WorkerLauncher", "d8/d93/classWorkers_1_1Launcher_1_1WorkerLauncher.html", "d8/d93/classWorkers_1_1Launcher_1_1WorkerLauncher" ]
+      ] ],
+      [ "launcher", "df/d3c/namespaceWorkers_1_1launcher.html", [
+        [ "CriticalModuleMissingError", "d9/d2e/classWorkers_1_1launcher_1_1CriticalModuleMissingError.html", null ]
+      ] ],
+      [ "layout_building", "d4/dfe/namespaceWorkers_1_1layout__building.html", [
+        [ "base_layout_builder", "d5/d21/namespaceWorkers_1_1layout__building_1_1base__layout__builder.html", [
+          [ "BaseLayoutBuilder", "d7/db7/classWorkers_1_1layout__building_1_1base__layout__builder_1_1BaseLayoutBuilder.html", "d7/db7/classWorkers_1_1layout__building_1_1base__layout__builder_1_1BaseLayoutBuilder" ]
+        ] ],
+        [ "default_layout_builder", "d4/de8/namespaceWorkers_1_1layout__building_1_1default__layout__builder.html", [
+          [ "DefaultLayoutBuilder", "d2/d52/classWorkers_1_1layout__building_1_1default__layout__builder_1_1DefaultLayoutBuilder.html", "d2/d52/classWorkers_1_1layout__building_1_1default__layout__builder_1_1DefaultLayoutBuilder" ]
+        ] ],
+        [ "multi_window_builder", "d7/d6f/namespaceWorkers_1_1layout__building_1_1multi__window__builder.html", [
+          [ "MultiWindowBuilder", "df/d26/classWorkers_1_1layout__building_1_1multi__window__builder_1_1MultiWindowBuilder.html", "df/d26/classWorkers_1_1layout__building_1_1multi__window__builder_1_1MultiWindowBuilder" ]
+        ] ],
+        [ "notebook_layout_builder", "df/dbf/namespaceWorkers_1_1layout__building_1_1notebook__layout__builder.html", [
+          [ "NotebookLayoutBuilder", "de/d72/classWorkers_1_1layout__building_1_1notebook__layout__builder_1_1NotebookLayoutBuilder.html", "de/d72/classWorkers_1_1layout__building_1_1notebook__layout__builder_1_1NotebookLayoutBuilder" ]
+        ] ],
+        [ "recursive_layout_builder", "d2/d64/namespaceWorkers_1_1layout__building_1_1recursive__layout__builder.html", [
+          [ "RecursiveLayoutBuilder", "d8/d30/classWorkers_1_1layout__building_1_1recursive__layout__builder_1_1RecursiveLayoutBuilder.html", "d8/d30/classWorkers_1_1layout__building_1_1recursive__layout__builder_1_1RecursiveLayoutBuilder" ]
+        ] ],
+        [ "split_layout_builder", "d7/d8e/namespaceWorkers_1_1layout__building_1_1split__layout__builder.html", [
+          [ "SplitLayoutBuilder", "d5/d33/classWorkers_1_1layout__building_1_1split__layout__builder_1_1SplitLayoutBuilder.html", "d5/d33/classWorkers_1_1layout__building_1_1split__layout__builder_1_1SplitLayoutBuilder" ]
+        ] ]
       ] ],
       [ "logic_connect_instrument", "d3/df9/namespaceWorkers_1_1logic__connect__instrument.html", [
         [ "VisaConnector", "d3/d2c/classWorkers_1_1logic__connect__instrument_1_1VisaConnector.html", "d3/d2c/classWorkers_1_1logic__connect__instrument_1_1VisaConnector" ]
@@ -3289,6 +3116,17 @@ var annotated_dup =
       ] ],
       [ "mqtt_async_worker", "d7/dfc/namespaceWorkers_1_1mqtt__async__worker.html", [
         [ "MqttAsyncWorker", "d4/dcd/classWorkers_1_1mqtt__async__worker_1_1MqttAsyncWorker.html", "d4/dcd/classWorkers_1_1mqtt__async__worker_1_1MqttAsyncWorker" ]
+      ] ],
+      [ "orchestration", "d2/d0f/namespaceWorkers_1_1orchestration.html", [
+        [ "builder_initializer", "d8/ded/namespaceWorkers_1_1orchestration_1_1builder__initializer.html", [
+          [ "BuilderInitializer", "d3/d8f/classWorkers_1_1orchestration_1_1builder__initializer_1_1BuilderInitializer.html", "d3/d8f/classWorkers_1_1orchestration_1_1builder__initializer_1_1BuilderInitializer" ]
+        ] ],
+        [ "loader_orchestrator", "d1/dab/namespaceWorkers_1_1orchestration_1_1loader__orchestrator.html", [
+          [ "LoaderOrchestrator", "d7/d2a/classWorkers_1_1orchestration_1_1loader__orchestrator_1_1LoaderOrchestrator.html", "d7/d2a/classWorkers_1_1orchestration_1_1loader__orchestrator_1_1LoaderOrchestrator" ]
+        ] ],
+        [ "scaffolding_builder", "d1/db0/namespaceWorkers_1_1orchestration_1_1scaffolding__builder.html", [
+          [ "ScaffoldingBuilder", "de/d8e/classWorkers_1_1orchestration_1_1scaffolding__builder_1_1ScaffoldingBuilder.html", "de/d8e/classWorkers_1_1orchestration_1_1scaffolding__builder_1_1ScaffoldingBuilder" ]
+        ] ]
       ] ],
       [ "osc_rx_server", "d8/dd9/namespaceWorkers_1_1osc__rx__server.html", [
         [ "OscRxServer", "db/dca/classWorkers_1_1osc__rx__server_1_1OscRxServer.html", "db/dca/classWorkers_1_1osc__rx__server_1_1OscRxServer" ]
@@ -3316,6 +3154,7 @@ var annotated_dup =
     [ "Args", "dc/d16/main_8rs.html#db/da7/structArgs", "dc/d16/main_8rs_db/da7/structArgs" ],
     [ "AudioApp", "da/d6a/manager_8rs.html#de/d04/structAudioApp", "da/d6a/manager_8rs_de/d04/structAudioApp" ],
     [ "AudioMixer", "d5/d30/oa__audio__mixer__rs_2mod_8rs.html#d3/d16/structAudioMixer", null ],
+    [ "Buf", "d1/dcc/frontEnd_2libControl_2Panels_2wasm_2src_2lib_8rs.html#de/d77/structBuf", "d1/dcc/frontEnd_2libControl_2Panels_2wasm_2src_2lib_8rs_de/d77/structBuf" ],
     [ "bz_stream", "d6/dc2/structbz__stream.html", "d6/dc2/structbz__stream" ],
     [ "CoreRouter", "d4/dde/oa__core__router__rs_2mod_8rs.html#d4/dcb/structCoreRouter", "d4/dde/oa__core__router__rs_2mod_8rs_d4/dcb/structCoreRouter" ],
     [ "DiskFlusher", "d3/d4d/oa__disk__flusher__rs_2mod_8rs.html#d8/d84/structDiskFlusher", "d3/d4d/oa__disk__flusher__rs_2mod_8rs_d8/d84/structDiskFlusher" ],

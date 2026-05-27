@@ -62,7 +62,7 @@ class TestVisaMqttListener(unittest.TestCase):
         """
         self.listener.found_resources = ["RES1", "RES2", "RES3"]
         # Topic format: .../options/<index>/selected. Let's pick index 2 (1-based is 2, 0-based is 1)
-        topic = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/2/selected"
+        topic = "OpenAir/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/2/selected"
         payload = orjson.dumps({"value": True})
 
         self.listener._on_device_select(topic, payload)

@@ -59,7 +59,7 @@ class LoaderServiceComposer:
         state_cache.subscriber_router = sub_router
 
         mirror_engine = StateMirrorEngine(
-            base_topic="OPEN-AIR",
+            base_topic="OpenAir",
             subscriber_router=sub_router,
             root=self.root,
             state_cache_manager=state_cache

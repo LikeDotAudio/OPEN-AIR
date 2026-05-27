@@ -4,7 +4,6 @@ var DebugToggler_8py =
     [ "force_debug_off", "db/da6/DebugToggler_8py.html#ae0e8256c3ca2e782c777764491fc74be", null ],
     [ "force_debug_on", "db/da6/DebugToggler_8py.html#af51ff8e7cba6348f9ebd8e2c59431293", null ],
     [ "toggle_debug_flags", "db/da6/DebugToggler_8py.html#ae4998e2fd315d16159ee93d68047ffe5", null ],
-    [ "ect_root_path", "db/da6/DebugToggler_8py.html#a0eac33c62d796d503f5f049f57eef6c1", null ],
     [ "element", "db/da6/DebugToggler_8py.html#a2f9f971dc7e40e3f890bb271f46d5fea", null ],
     [ "func_name", "db/da6/DebugToggler_8py.html#a06947485cab7d312568d943679014224", null ],
     [ "level", "db/da6/DebugToggler_8py.html#ac9a363062bcd3edcdf34cce8281d8548", null ],

@@ -66,7 +66,7 @@ class TestOSCManager(unittest.TestCase):
         # BUILD
         test_addr = "/test/volume"
         test_val = 0.75
-        self.manager.register_route(test_addr, "OPEN-AIR/Audio/Volume")
+        self.manager.register_route(test_addr, "OpenAir/Audio/Volume")
 
         # OPERATE
         self.manager.handle_incoming_osc(test_addr, test_val)
@@ -74,13 +74,13 @@ class TestOSCManager(unittest.TestCase):
         # CHECK: Data normalized and sent to Hub (StateCache/ProtocolRouter)
         # Note: We use assert_any_call because start() triggers a status broadcast
         self.mock_state_cache.handle_external_update.assert_any_call(
-            "OPEN-AIR/Audio/Volume", test_val, source="OSC", metadata=unittest.mock.ANY
+            "OpenAir/Audio/Volume", test_val, source="OSC", metadata=unittest.mock.ANY
         )
 
         # Verify anti-feedback tag in the specific call
         found = False
         for call in self.mock_state_cache.handle_external_update.call_args_list:
-            if call[0][0] == "OPEN-AIR/Audio/Volume":
+            if call[0][0] == "OpenAir/Audio/Volume":
                 self.assertEqual(call[1]["metadata"]["origin_source"], "OSC")
                 found = True
         self.assertTrue(found)
@@ -88,14 +88,14 @@ class TestOSCManager(unittest.TestCase):
     def test_hub_to_spoke_dispatch(self):
         """OPERATE: Simulate Hub broadcast (Hub -> Spoke)."""
         # BUILD
-        self.manager.register_route("/test/fader", "OPEN-AIR/Mixer/Fader")
+        self.manager.register_route("/test/fader", "OpenAir/Mixer/Fader")
         mock_tx_instance = self.mock_tx_class.return_value
 
         # OPERATE: Data from an external source (e.g., GUI)
         message = {
             "source": "MQTT",
             "logical_source": "GUI",
-            "topic": "OPEN-AIR/Mixer/Fader",
+            "topic": "OpenAir/Mixer/Fader",
             "value": 1.0,
             "meta": {"origin_source": "GUI"}
         }
@@ -107,14 +107,14 @@ class TestOSCManager(unittest.TestCase):
     def test_anti_feedback_echo_suppression(self):
         """CHECK: Verify messages originating from OSC are NOT echoed back to OSC."""
         # BUILD
-        self.manager.register_route("/test/fader", "OPEN-AIR/Mixer/Fader")
+        self.manager.register_route("/test/fader", "OpenAir/Mixer/Fader")
         mock_tx_instance = self.mock_tx_class.return_value
 
         # OPERATE: Data that originally came FROM OSC
         message = {
             "source": "MQTT",
             "logical_source": "OSC",
-            "topic": "OPEN-AIR/Mixer/Fader",
+            "topic": "OpenAir/Mixer/Fader",
             "value": 0.5,
             "meta": {"origin_source": "OSC"}
         }
@@ -131,12 +131,12 @@ class TestOSCManager(unittest.TestCase):
         # OPERATE
         status = self.manager.get_status()
         self.manager.state_cache_manager.handle_external_update(
-            "OPEN-AIR/System/Status/OSC/Bridge", status, source="OSC-STATUS"
+            "OpenAir/System/Status/OSC/Bridge", status, source="OSC-STATUS"
         )
 
         # CHECK
         self.mock_state_cache.handle_external_update.assert_any_call(
-            "OPEN-AIR/System/Status/OSC/Bridge", unittest.mock.ANY, source="OSC-STATUS"
+            "OpenAir/System/Status/OSC/Bridge", unittest.mock.ANY, source="OSC-STATUS"
         )
 
 if __name__ == "__main__":

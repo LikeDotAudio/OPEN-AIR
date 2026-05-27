@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('df/d3f/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Sequential Parsing Logic Causing Incomplete GUI Render</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1711"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2160"></a></p><ul>
 <li><b>ID</b>: 20260314_183722</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
 <li><b>COMPONENT</b>: <code>oaGui.parser.layout_parser</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1712"></a>
+<h1><a class="anchor" id="autotoc_md2161"></a>
 Issue</h1>
 <p>The GUI was not rendering completely. The user reported that "only half of the screen" was rendering and that sub-tabs within the "Setup" area were not being created. This was caused by a logical flaw in the layout parser where it would stop parsing a directory's layout cues after finding the first match, ignoring others.</p>
-<h1><a class="anchor" id="autotoc_md1713"></a>
+<h1><a class="anchor" id="autotoc_md2162"></a>
 Root Cause Analysis</h1>
-<p>The <code>_parse_directory_listing</code> method in <code><a class="el" href="../../d5/d28/layout__parser_8py.html">layout_parser.py</a></code> was implemented with a sequential, early-exit design. It would first check for split-pane directories (e.g., <code>left_50</code>), and if found, it would immediately return a <code>horizontal_split</code> layout type. It would never proceed to check for other layout cues in the same directory, such as numbered subdirectories for notebooks (e.g., <code>0_Setup</code>).</p>
+<p>The <code>_parse_directory_listing</code> method in <code>layout_parser.py</code> was implemented with a sequential, early-exit design. It would first check for split-pane directories (e.g., <code>left_50</code>), and if found, it would immediately return a <code>horizontal_split</code> layout type. It would never proceed to check for other layout cues in the same directory, such as numbered subdirectories for notebooks (e.g., <code>0_Setup</code>).</p>
 <p>This was problematic for directories that serve as both a panel in a split view AND contain a notebook. For example, <code>oaGui/Assets/right_50/bottom_90/</code> is a panel, but it contains <code>6_Setup</code>, which in turn contains numbered directories that should form a notebook. The parser would correctly identify <code>bottom_90</code> as part of a <code>vertical_split</code> but would then stop, never getting to parse the contents of <code>6_Setup</code> as a notebook. This resulted in a partially rendered UI.</p>
-<h1><a class="anchor" id="autotoc_md1714"></a>
+<h1><a class="anchor" id="autotoc_md2163"></a>
 Resolution</h1>
 <p>The <code>_parse_directory_listing</code> method was refactored to follow a "Chain of Responsibility" pattern, removing the early-exit flaw.</p>
 <ol type="1">
@@ -115,7 +115,7 @@ Resolution</h1>
 <li><b>Correct Fallback</b>: Only if no specific layout-defining directories are found does it fall back to a generic <code>directory_listing</code>. This ensures that if a directory like <code>oaGui/Assets/</code> contains <code>left_50</code> and <code><a class="el" href="../../df/d24/namespaceright__50.html">right_50</a></code>, it's correctly identified as a split view, and the parser is then invoked <em>again</em> on the child directories, where it can correctly identify notebook structures.</li>
 </ol>
 <p>This architectural change ensures that all layout cues within a directory are considered, allowing for the construction of complex, nested layouts combining different types (splits containing notebooks, etc.).</p>
-<h1><a class="anchor" id="autotoc_md1715"></a>
+<h1><a class="anchor" id="autotoc_md2164"></a>
 Verification</h1>
 <p>The application now renders the entire GUI correctly. The main screen is properly split, and the "Setup" area correctly displays its sub-tabs in a notebook widget. The parser logic is now robust enough to handle directories with multiple, nested layout types defined by folder-naming conventions. </p>
 </div></div><!-- contents -->

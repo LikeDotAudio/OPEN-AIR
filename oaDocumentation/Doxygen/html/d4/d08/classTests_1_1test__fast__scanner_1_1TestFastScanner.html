@@ -149,18 +149,17 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00018">18</a> of file <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html">test_fast_scanner.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>setUp(self):</div>
 <div class="line"><span class="lineno">   19</span>        <span class="stringliteral">&quot;&quot;&quot;Build a temporary directory tree for testing.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   20</span>        self.test_dir = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tempfile.mkdtemp</a>()</div>
-<div class="line"><span class="lineno">   21</span>        self.test_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(self.test_dir)</div>
+<div class="line"><span class="lineno">   20</span>        self.test_dir = tempfile.mkdtemp()</div>
+<div class="line"><span class="lineno">   21</span>        self.test_path = pathlib.Path(self.test_dir)</div>
 <div class="line"><span class="lineno">   22</span> </div>
 <div class="line"><span class="lineno">   23</span>        <span class="comment"># Create some files and directories</span></div>
-<div class="line"><span class="lineno">   24</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mkdir</a>()</div>
-<div class="line"><span class="lineno">   25</span>        (self.test_path / <span class="stringliteral">&quot;subdir2&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mkdir</a>()</div>
-<div class="line"><span class="lineno">   26</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span> / <span class="stringliteral">&quot;file1.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   27</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span> / <span class="stringliteral">&quot;file2.txt&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   28</span>        (self.test_path / <span class="stringliteral">&quot;subdir2&quot;</span> / <span class="stringliteral">&quot;file3.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   29</span>        (self.test_path / <span class="stringliteral">&quot;root_file.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
+<div class="line"><span class="lineno">   24</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span>).mkdir()</div>
+<div class="line"><span class="lineno">   25</span>        (self.test_path / <span class="stringliteral">&quot;subdir2&quot;</span>).mkdir()</div>
+<div class="line"><span class="lineno">   26</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span> / <span class="stringliteral">&quot;file1.py&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   27</span>        (self.test_path / <span class="stringliteral">&quot;subdir1&quot;</span> / <span class="stringliteral">&quot;file2.txt&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   28</span>        (self.test_path / <span class="stringliteral">&quot;subdir2&quot;</span> / <span class="stringliteral">&quot;file3.py&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   29</span>        (self.test_path / <span class="stringliteral">&quot;root_file.py&quot;</span>).touch()</div>
 <div class="line"><span class="lineno">   30</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -183,10 +182,10 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00031">31</a> of file <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html">test_fast_scanner.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   31</span>    <span class="keyword">def </span>tearDown(self):</div>
 <div class="line"><span class="lineno">   32</span>        <span class="stringliteral">&quot;&quot;&quot;Clean up the temporary directory.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   33</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shutil.rmtree</a>(self.test_dir)</div>
+<div class="line"><span class="lineno">   33</span>        shutil.rmtree(self.test_dir)</div>
 <div class="line"><span class="lineno">   34</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, and <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>.</p>
 
 </div>
 </div>
@@ -210,12 +209,12 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   54</span>    <span class="keyword">def </span>test_invalid_path(self):</div>
 <div class="line"><span class="lineno">   55</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Scan a non-existent directory. CHECK: Verify it handles errors gracefully.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   56</span>        scanner = FastScanner()</div>
-<div class="line"><span class="lineno">   57</span>        results = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scanner.scan_directory</a>(<span class="stringliteral">&quot;/tmp/this_path_should_never_exist_20260404&quot;</span>)</div>
+<div class="line"><span class="lineno">   57</span>        results = scanner.scan_directory(<span class="stringliteral">&quot;/tmp/this_path_should_never_exist_20260404&quot;</span>)</div>
 <div class="line"><span class="lineno">   58</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(results), 0)</div>
 <div class="line"><span class="lineno">   59</span> </div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>
@@ -239,13 +238,13 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>    <span class="keyword">def </span>test_scan_all_files(self):</div>
 <div class="line"><span class="lineno">   47</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Scan for all files. CHECK: Verify every file is identified.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   48</span>        scanner = FastScanner()</div>
-<div class="line"><span class="lineno">   49</span>        results = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scanner.scan_directory</a>(self.test_dir)</div>
+<div class="line"><span class="lineno">   49</span>        results = scanner.scan_directory(self.test_dir)</div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>        <span class="comment"># Should find 4 files total</span></div>
 <div class="line"><span class="lineno">   52</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(results), 4)</div>
 <div class="line"><span class="lineno">   53</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, and <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>.</p>
 
 </div>
 </div>
@@ -269,16 +268,16 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   35</span>    <span class="keyword">def </span>test_scan_python_files(self):</div>
 <div class="line"><span class="lineno">   36</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Scan for .py files. CHECK: Verify all matching files are found.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   37</span>        scanner = FastScanner()</div>
-<div class="line"><span class="lineno">   38</span>        results = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scanner.scan_directory</a>(self.test_dir, <span class="stringliteral">&quot;.py&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span>        results = scanner.scan_directory(self.test_dir, <span class="stringliteral">&quot;.py&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span> </div>
 <div class="line"><span class="lineno">   40</span>        <span class="comment"># Should find: subdir1/file1.py, subdir2/file3.py, root_file.py</span></div>
 <div class="line"><span class="lineno">   41</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(results), 3)</div>
-<div class="line"><span class="lineno">   42</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">res.endswith</a>(<span class="stringliteral">&quot;file1.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
-<div class="line"><span class="lineno">   43</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">res.endswith</a>(<span class="stringliteral">&quot;file3.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
-<div class="line"><span class="lineno">   44</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">res.endswith</a>(<span class="stringliteral">&quot;root_file.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
+<div class="line"><span class="lineno">   42</span>        self.assertTrue(any(res.endswith(<span class="stringliteral">&quot;file1.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
+<div class="line"><span class="lineno">   43</span>        self.assertTrue(any(res.endswith(<span class="stringliteral">&quot;file3.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
+<div class="line"><span class="lineno">   44</span>        self.assertTrue(any(res.endswith(<span class="stringliteral">&quot;root_file.py&quot;</span>) <span class="keywordflow">for</span> res <span class="keywordflow">in</span> results))</div>
 <div class="line"><span class="lineno">   45</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, and <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>.</p>
 
 </div>
 </div>
@@ -297,7 +296,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">20</a> of file <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html">test_fast_scanner.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00020">Tests.test_negative_paths.TestNegativePaths.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00031">Tests.test_fast_scanner.TestFastScanner.tearDown()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00034">Tests.test_ui_and_data.TestUIAndData.tearDown()</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00039">Tests.test_realign_logs.TestLogRealigner.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00046">Tests.test_fast_scanner.TestFastScanner.test_scan_all_files()</a>, and <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00035">Tests.test_fast_scanner.TestFastScanner.test_scan_python_files()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00020">Tests.test_negative_paths.TestNegativePaths.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00031">Tests.test_fast_scanner.TestFastScanner.tearDown()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00033">Tests.test_ui_and_data.TestUIAndData.tearDown()</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00039">Tests.test_realign_logs.TestLogRealigner.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00046">Tests.test_fast_scanner.TestFastScanner.test_scan_all_files()</a>, and <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00035">Tests.test_fast_scanner.TestFastScanner.test_scan_python_files()</a>.</p>
 
 </div>
 </div>
@@ -315,7 +314,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">21</a> of file <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html">test_fast_scanner.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00105">Tests.test_ui_and_data.TestUIAndData.test_file_io_load()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00123">Tests.test_ui_and_data.TestUIAndData.test_file_io_save()</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00039">Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00104">Tests.test_ui_and_data.TestUIAndData.test_file_io_load()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00122">Tests.test_ui_and_data.TestUIAndData.test_file_io_save()</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00038">Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan()</a>.</p>
 
 </div>
 </div>

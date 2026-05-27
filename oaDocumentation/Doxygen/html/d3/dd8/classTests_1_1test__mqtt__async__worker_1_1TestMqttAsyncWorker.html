@@ -163,23 +163,22 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   25</span>        self.mock_manager.subscriber_router = AsyncMock()</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        self.mock_queue_manager = MagicMock()</div>
-<div class="line"><span class="lineno">   28</span>        self.mock_queue_manager._subscribe_queue = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.Queue</a>()</div>
-<div class="line"><span class="lineno">   29</span>        self.mock_queue_manager._publish_queue = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.Queue</a>()</div>
+<div class="line"><span class="lineno">   28</span>        self.mock_queue_manager._subscribe_queue = queue.Queue()</div>
+<div class="line"><span class="lineno">   29</span>        self.mock_queue_manager._publish_queue = queue.Queue()</div>
 <div class="line"><span class="lineno">   30</span>        self.mock_queue_manager._pending_subscriptions = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a112a711f766db446c2f517b794a1c04a">set</a>()</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># MqttQueueManager methods</span></div>
-<div class="line"><span class="lineno">   33</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_subscribe_request.side_effect</a> = <span class="keyword">lambda</span>: self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_subscribe_queue.get_nowait</a>() <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_subscribe_queue.empty</a>() <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">   34</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_publish_message.side_effect</a> = <span class="keyword">lambda</span>: self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_queue.get_nowait</a>() <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_queue.empty</a>() <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   33</span>        self.mock_queue_manager.get_subscribe_request.side_effect = <span class="keyword">lambda</span>: self.mock_queue_manager._subscribe_queue.get_nowait() <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.mock_queue_manager._subscribe_queue.empty() <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   34</span>        self.mock_queue_manager.get_publish_message.side_effect = <span class="keyword">lambda</span>: self.mock_queue_manager._publish_queue.get_nowait() <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.mock_queue_manager._publish_queue.empty() <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">remove_sub</a>(topic):</div>
+<div class="line"><span class="lineno">   36</span>        <span class="keyword">def </span>remove_sub(topic):</div>
 <div class="line"><span class="lineno">   37</span>            <span class="keywordflow">if</span> topic <span class="keywordflow">in</span> self.mock_queue_manager._pending_subscriptions:</div>
-<div class="line"><span class="lineno">   38</span>                self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_pending_subscriptions.remove</a>(topic)</div>
-<div class="line"><span class="lineno">   39</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">remove_pending_subscription.side_effect</a> = remove_sub</div>
+<div class="line"><span class="lineno">   38</span>                self.mock_queue_manager._pending_subscriptions.remove(topic)</div>
+<div class="line"><span class="lineno">   39</span>        self.mock_queue_manager.remove_pending_subscription.side_effect = remove_sub</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>        self.worker = MqttAsyncWorker(self.mock_manager, self.mock_queue_manager)</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a112a711f766db446c2f517b794a1c04a"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a112a711f766db446c2f517b794a1c04a">set</a></div><div class="ttdeci">set</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02692">generated.rs:2692</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -243,24 +242,24 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  118</span>    <span class="keyword">async def </span>test_queue_task_publications(self):</div>
 <div class="line"><span class="lineno">  119</span>        <span class="stringliteral">&quot;&quot;&quot;Test _queue_task processes publications.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  120</span>        mock_client = AsyncMock()</div>
-<div class="line"><span class="lineno">  121</span>        self.worker.stop_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
-<div class="line"><span class="lineno">  122</span>        self.worker.kick_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
+<div class="line"><span class="lineno">  121</span>        self.worker.stop_event = asyncio.Event()</div>
+<div class="line"><span class="lineno">  122</span>        self.worker.kick_event = asyncio.Event()</div>
 <div class="line"><span class="lineno">  123</span> </div>
 <div class="line"><span class="lineno">  124</span>        <span class="comment"># Add a publication job</span></div>
-<div class="line"><span class="lineno">  125</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_queue.put</a>({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/pub&quot;</span>, <span class="stringliteral">&quot;payload&quot;</span>: b<span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 0, <span class="stringliteral">&quot;retain&quot;</span>: <span class="keyword">False</span>})</div>
+<div class="line"><span class="lineno">  125</span>        self.mock_queue_manager._publish_queue.put({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/pub&quot;</span>, <span class="stringliteral">&quot;payload&quot;</span>: b<span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 0, <span class="stringliteral">&quot;retain&quot;</span>: <span class="keyword">False</span>})</div>
 <div class="line"><span class="lineno">  126</span> </div>
-<div class="line"><span class="lineno">  127</span>        self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kick_event.set</a>() <span class="comment"># Kick to process</span></div>
+<div class="line"><span class="lineno">  127</span>        self.worker.kick_event.set() <span class="comment"># Kick to process</span></div>
 <div class="line"><span class="lineno">  128</span> </div>
 <div class="line"><span class="lineno">  129</span>        <span class="comment"># Run for a tiny bit</span></div>
-<div class="line"><span class="lineno">  130</span>        task = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.create_task</a>(self.worker._queue_task(mock_client))</div>
-<div class="line"><span class="lineno">  131</span>        await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.sleep</a>(0.1)</div>
-<div class="line"><span class="lineno">  132</span>        self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stop_event.set</a>()</div>
+<div class="line"><span class="lineno">  130</span>        task = asyncio.create_task(self.worker._queue_task(mock_client))</div>
+<div class="line"><span class="lineno">  131</span>        await asyncio.sleep(0.1)</div>
+<div class="line"><span class="lineno">  132</span>        self.worker.stop_event.set()</div>
 <div class="line"><span class="lineno">  133</span>        await task</div>
 <div class="line"><span class="lineno">  134</span> </div>
-<div class="line"><span class="lineno">  135</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.publish.assert_called_once_with</a>(<span class="stringliteral">&quot;test/pub&quot;</span>, payload=b<span class="stringliteral">&quot;data&quot;</span>, qos=0, retain=<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">  135</span>        mock_client.publish.assert_called_once_with(<span class="stringliteral">&quot;test/pub&quot;</span>, payload=b<span class="stringliteral">&quot;data&quot;</span>, qos=0, retain=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">  136</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
 
 </div>
 </div>
@@ -284,26 +283,26 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   97</span>    <span class="keyword">async def </span>test_queue_task_subscriptions(self):</div>
 <div class="line"><span class="lineno">   98</span>        <span class="stringliteral">&quot;&quot;&quot;Test _queue_task processes subscriptions.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   99</span>        mock_client = AsyncMock()</div>
-<div class="line"><span class="lineno">  100</span>        self.worker.stop_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
-<div class="line"><span class="lineno">  101</span>        self.worker.kick_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
+<div class="line"><span class="lineno">  100</span>        self.worker.stop_event = asyncio.Event()</div>
+<div class="line"><span class="lineno">  101</span>        self.worker.kick_event = asyncio.Event()</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span>        <span class="comment"># Add a subscription job</span></div>
-<div class="line"><span class="lineno">  104</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_subscribe_queue.put</a>({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/sub&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 1})</div>
-<div class="line"><span class="lineno">  105</span>        self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_pending_subscriptions.add</a>(<span class="stringliteral">&quot;test/sub&quot;</span>)</div>
+<div class="line"><span class="lineno">  104</span>        self.mock_queue_manager._subscribe_queue.put({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/sub&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 1})</div>
+<div class="line"><span class="lineno">  105</span>        self.mock_queue_manager._pending_subscriptions.add(<span class="stringliteral">&quot;test/sub&quot;</span>)</div>
 <div class="line"><span class="lineno">  106</span> </div>
-<div class="line"><span class="lineno">  107</span>        self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kick_event.set</a>() <span class="comment"># Kick to process</span></div>
+<div class="line"><span class="lineno">  107</span>        self.worker.kick_event.set() <span class="comment"># Kick to process</span></div>
 <div class="line"><span class="lineno">  108</span> </div>
 <div class="line"><span class="lineno">  109</span>        <span class="comment"># Run for a tiny bit</span></div>
-<div class="line"><span class="lineno">  110</span>        task = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.create_task</a>(self.worker._queue_task(mock_client))</div>
-<div class="line"><span class="lineno">  111</span>        await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.sleep</a>(0.1)</div>
-<div class="line"><span class="lineno">  112</span>        self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stop_event.set</a>()</div>
+<div class="line"><span class="lineno">  110</span>        task = asyncio.create_task(self.worker._queue_task(mock_client))</div>
+<div class="line"><span class="lineno">  111</span>        await asyncio.sleep(0.1)</div>
+<div class="line"><span class="lineno">  112</span>        self.worker.stop_event.set()</div>
 <div class="line"><span class="lineno">  113</span>        await task</div>
 <div class="line"><span class="lineno">  114</span> </div>
-<div class="line"><span class="lineno">  115</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.subscribe.assert_called_once_with</a>(<span class="stringliteral">&quot;test/sub&quot;</span>, qos=1)</div>
+<div class="line"><span class="lineno">  115</span>        mock_client.subscribe.assert_called_once_with(<span class="stringliteral">&quot;test/sub&quot;</span>, qos=1)</div>
 <div class="line"><span class="lineno">  116</span>        self.assertNotIn(<span class="stringliteral">&quot;test/sub&quot;</span>, self.mock_queue_manager._pending_subscriptions)</div>
 <div class="line"><span class="lineno">  117</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
 
 </div>
 </div>
@@ -329,31 +328,31 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   63</span>        mock_client = AsyncMock()</div>
 <div class="line"><span class="lineno">   64</span> </div>
 <div class="line"><span class="lineno">   65</span>        <span class="comment"># Create a mock message iterator</span></div>
-<div class="line"><span class="lineno">   66</span>        <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockMessageIterator</a>:</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keyword">class </span>MockMessageIterator:</div>
 <div class="line"><span class="lineno">   67</span>            <span class="keyword">def </span>__init__(self):</div>
 <div class="line"><span class="lineno">   68</span>                self.messages = [</div>
 <div class="line"><span class="lineno">   69</span>                    MagicMock(topic=<span class="stringliteral">&quot;test/topic1&quot;</span>, payload=b<span class="stringliteral">&quot;payload1&quot;</span>, qos=0, retain=<span class="keyword">False</span>),</div>
 <div class="line"><span class="lineno">   70</span>                    MagicMock(topic=<span class="stringliteral">&quot;test/topic2&quot;</span>, payload=b<span class="stringliteral">&quot;payload2&quot;</span>, qos=1, retain=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   71</span>                ]</div>
-<div class="line"><span class="lineno">   72</span>            <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__aiter__</a>(self): <span class="keywordflow">return</span> self</div>
+<div class="line"><span class="lineno">   72</span>            <span class="keyword">def </span>__aiter__(self): <span class="keywordflow">return</span> self</div>
 <div class="line"><span class="lineno">   73</span>            <span class="keyword">async</span> <span class="keyword">def</span> __anext__(self):</div>
 <div class="line"><span class="lineno">   74</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.messages:</div>
 <div class="line"><span class="lineno">   75</span>                    <span class="keywordflow">raise</span> StopAsyncIteration</div>
-<div class="line"><span class="lineno">   76</span>                <span class="keywordflow">return</span> self.messages.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pop</a>(0)</div>
+<div class="line"><span class="lineno">   76</span>                <span class="keywordflow">return</span> self.messages.pop(0)</div>
 <div class="line"><span class="lineno">   77</span> </div>
-<div class="line"><span class="lineno">   78</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.messages</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockMessageIterator</a>()</div>
+<div class="line"><span class="lineno">   78</span>        mock_client.messages = MockMessageIterator()</div>
 <div class="line"><span class="lineno">   79</span> </div>
 <div class="line"><span class="lineno">   80</span>        self.mock_manager.on_message_callback = MagicMock()</div>
 <div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>        task = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.create_task</a>(self.worker._receiver_task(mock_client))</div>
-<div class="line"><span class="lineno">   83</span>        await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.sleep</a>(0.1) <span class="comment"># Let the task run briefly</span></div>
-<div class="line"><span class="lineno">   84</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">task.cancel</a>() <span class="comment"># Cancel to avoid infinite loop (though iterator stops)</span></div>
+<div class="line"><span class="lineno">   82</span>        task = asyncio.create_task(self.worker._receiver_task(mock_client))</div>
+<div class="line"><span class="lineno">   83</span>        await asyncio.sleep(0.1) <span class="comment"># Let the task run briefly</span></div>
+<div class="line"><span class="lineno">   84</span>        task.cancel() <span class="comment"># Cancel to avoid infinite loop (though iterator stops)</span></div>
 <div class="line"><span class="lineno">   85</span> </div>
 <div class="line"><span class="lineno">   86</span>        <span class="comment"># Should have called callback twice</span></div>
-<div class="line"><span class="lineno">   87</span>        self.assertEqual(self.mock_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">on_message_callback.call_count</a>, 2)</div>
+<div class="line"><span class="lineno">   87</span>        self.assertEqual(self.mock_manager.on_message_callback.call_count, 2)</div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>        <span class="comment"># Check args of first call</span></div>
-<div class="line"><span class="lineno">   90</span>        args, _ = self.mock_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">on_message_callback.call_args_list</a>[0]</div>
+<div class="line"><span class="lineno">   90</span>        args, _ = self.mock_manager.on_message_callback.call_args_list[0]</div>
 <div class="line"><span class="lineno">   91</span>        self.assertEqual(args[0], mock_client) <span class="comment"># client</span></div>
 <div class="line"><span class="lineno">   92</span>        self.assertIsNone(args[1])             <span class="comment"># userdata (None)</span></div>
 <div class="line"><span class="lineno">   93</span>        self.assertIsInstance(args[2], MqttMessage)</div>
@@ -386,30 +385,30 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  139</span><span class="stringliteral">        Test that subscribe errors are caught and logged.</span></div>
 <div class="line"><span class="lineno">  140</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  141</span>        mock_client = AsyncMock()</div>
-<div class="line"><span class="lineno">  142</span>        self.worker.stop_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
-<div class="line"><span class="lineno">  143</span>        self.worker.kick_event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.Event</a>()</div>
+<div class="line"><span class="lineno">  142</span>        self.worker.stop_event = asyncio.Event()</div>
+<div class="line"><span class="lineno">  143</span>        self.worker.kick_event = asyncio.Event()</div>
 <div class="line"><span class="lineno">  144</span> </div>
 <div class="line"><span class="lineno">  145</span>        <span class="comment"># Configure mock_client.subscribe to raise the specific error</span></div>
-<div class="line"><span class="lineno">  146</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.subscribe.side_effect</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&quot;&#39;&lt;&#39; not supported between instances of &#39;method&#39; and &#39;int&#39;&quot;</span>)</div>
+<div class="line"><span class="lineno">  146</span>        mock_client.subscribe.side_effect = TypeError(<span class="stringliteral">&quot;&#39;&lt;&#39; not supported between instances of &#39;method&#39; and &#39;int&#39;&quot;</span>)</div>
 <div class="line"><span class="lineno">  147</span> </div>
 <div class="line"><span class="lineno">  148</span>        <span class="comment"># Mock the logger</span></div>
 <div class="line"><span class="lineno">  149</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaComProtocols.oaComMQTT.Workers.mqtt_async_worker.MQTT_LOGGER&#39;</span>) <span class="keyword">as</span> MockLogger:</div>
 <div class="line"><span class="lineno">  150</span>            <span class="comment"># Add a subscription job</span></div>
-<div class="line"><span class="lineno">  151</span>            self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_subscribe_queue.put</a>({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/sub&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 1})</div>
-<div class="line"><span class="lineno">  152</span>            self.mock_queue_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_pending_subscriptions.add</a>(<span class="stringliteral">&quot;test/sub&quot;</span>)</div>
+<div class="line"><span class="lineno">  151</span>            self.mock_queue_manager._subscribe_queue.put({<span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;test/sub&quot;</span>, <span class="stringliteral">&quot;qos&quot;</span>: 1})</div>
+<div class="line"><span class="lineno">  152</span>            self.mock_queue_manager._pending_subscriptions.add(<span class="stringliteral">&quot;test/sub&quot;</span>)</div>
 <div class="line"><span class="lineno">  153</span> </div>
-<div class="line"><span class="lineno">  154</span>            self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kick_event.set</a>() <span class="comment"># Kick to process</span></div>
+<div class="line"><span class="lineno">  154</span>            self.worker.kick_event.set() <span class="comment"># Kick to process</span></div>
 <div class="line"><span class="lineno">  155</span> </div>
 <div class="line"><span class="lineno">  156</span>            <span class="comment"># Run for a tiny bit</span></div>
-<div class="line"><span class="lineno">  157</span>            task = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.create_task</a>(self.worker._queue_task(mock_client))</div>
-<div class="line"><span class="lineno">  158</span>            await <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">asyncio.sleep</a>(0.1)</div>
-<div class="line"><span class="lineno">  159</span>            self.worker.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stop_event.set</a>()</div>
+<div class="line"><span class="lineno">  157</span>            task = asyncio.create_task(self.worker._queue_task(mock_client))</div>
+<div class="line"><span class="lineno">  158</span>            await asyncio.sleep(0.1)</div>
+<div class="line"><span class="lineno">  159</span>            self.worker.stop_event.set()</div>
 <div class="line"><span class="lineno">  160</span>            await task</div>
 <div class="line"><span class="lineno">  161</span> </div>
 <div class="line"><span class="lineno">  162</span>            <span class="comment"># Assert that the error was logged</span></div>
-<div class="line"><span class="lineno">  163</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockLogger.error.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">  163</span>            MockLogger.error.assert_called_once()</div>
 <div class="line"><span class="lineno">  164</span>            <span class="comment"># Check that the log message contains the expected error description</span></div>
-<div class="line"><span class="lineno">  165</span>            logged_message = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockLogger.error.call_args</a>[0][0]</div>
+<div class="line"><span class="lineno">  165</span>            logged_message = MockLogger.error.call_args[0][0]</div>
 <div class="line"><span class="lineno">  166</span>            self.assertIn(<span class="stringliteral">&quot;aiomqtt: Subscribe Error:&quot;</span>, logged_message)</div>
 <div class="line"><span class="lineno">  167</span>            self.assertIn(<span class="stringliteral">&quot;method&#39; and &#39;int&#39;&quot;</span>, logged_message) <span class="comment"># Check for a core part of the error message</span></div>
 <div class="line"><span class="lineno">  168</span> </div>
@@ -417,7 +416,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  170</span>            self.assertNotIn(<span class="stringliteral">&quot;test/sub&quot;</span>, self.mock_queue_manager._pending_subscriptions)</div>
 <div class="line"><span class="lineno">  171</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00027">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.mock_queue_manager</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00253">io::detail::AsynchronousReader.worker</a>, <a class="el" href="../../d9/d8f/test__mqtt__async__worker_8py_source.html#l00041">Tests.test_mqtt_async_worker.TestMqttAsyncWorker.worker</a>, and <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00057">Managers.rest_manager.RESTManager.worker</a>.</p>
 
 </div>
 </div>

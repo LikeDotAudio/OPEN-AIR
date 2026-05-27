@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d8/dce/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_223000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1985"></a> </p>
-<h1><a class="anchor" id="autotoc_md1986"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2434"></a> </p>
+<h1><a class="anchor" id="autotoc_md2435"></a>
 Issue</h1>
 <p>A <code>TypeError</code> was reported in the Command Router when attempting to create a direct splink: &lsquo;TypeError: ProtocolRouter.publish_splink() got an unexpected keyword argument 'source_val&rsquo;`</p>
-<h1><a class="anchor" id="autotoc_md1987"></a>
+<h1><a class="anchor" id="autotoc_md2436"></a>
 Root Cause</h1>
 <p>The <code>create_direct_splink</code> method in <code>oaGui/Assets/Assets/right_50/bottom_90/3_Command_Router/command_router.py</code> was calling <code>self.router.publish_splink()</code> with keyword arguments <code>source_val</code> and <code>dest_val</code>. However, the <code>ProtocolRouter.publish_splink()</code> method defined in <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code> uses <code>s_val</code> and <code>d_val</code> as its argument names.</p>
-<h1><a class="anchor" id="autotoc_md1988"></a>
+<h1><a class="anchor" id="autotoc_md2437"></a>
 Resolution</h1>
 <p>Modified <code>command_router.py</code> to use the correct keyword arguments (<code>s_val</code> and <code>d_val</code>) in the <code>publish_splink</code> call.</p>
-<h1><a class="anchor" id="autotoc_md1989"></a>
+<h1><a class="anchor" id="autotoc_md2438"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified the parameter names in <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code>.</li>

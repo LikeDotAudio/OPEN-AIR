@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('de/d1c/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260403_213000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1238"></a> </p>
-<h1><a class="anchor" id="autotoc_md1239"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1503"></a> </p>
+<h1><a class="anchor" id="autotoc_md1504"></a>
 Issue: ProtocolRouter Shutdown Race Condition</h1>
 <p><b>Date</b>: 2026-04-03 <b>Severity</b>: High (Spam in logs, potential data loss during teardown) <b>System</b>: CORE <b>Module</b>: <code>oaComBroker.Core.protocol_router.router</code></p>
-<h2><a class="anchor" id="autotoc_md1240"></a>
+<h2><a class="anchor" id="autotoc_md1505"></a>
 Symptom</h2>
 <p>During application shutdown, the following error is logged: <code>📤🚫🛑 [ERROR] Dispatch Loop Error: cannot schedule new futures after shutdown</code> This indicates that the <code>ProtocolRouter</code>'s dispatch engine is attempting to process messages after the internal <code>ThreadPoolExecutor</code> has been shut down.</p>
-<h2><a class="anchor" id="autotoc_md1241"></a>
+<h2><a class="anchor" id="autotoc_md1506"></a>
 Root Cause</h2>
 <p>In <code>ProtocolRouter.stop()</code>, <code>self._running</code> is set to <code>False</code> and <code>self._executor.shutdown(wait=False)</code> is called immediately. However, the <code>_dispatch_loop</code> thread may still be in the middle of an iteration, specifically after retrieving a message from <code>self.outbound_queue</code> but before calling <code>self._executor.submit()</code>. This small window results in a <code>RuntimeError</code>.</p>
-<h2><a class="anchor" id="autotoc_md1242"></a>
+<h2><a class="anchor" id="autotoc_md1507"></a>
 Resolution</h2>
 <p>Surgically patched <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code>:</p><ol type="1">
 <li>Added a check for <code>self._running</code> immediately before <code>self._executor.submit()</code> to catch shutdowns that occur between queue retrieval and task submission.</li>
 <li>Implemented a specific <code>RuntimeError</code> handler in the <code>_dispatch_loop</code> to ignore "after shutdown" errors gracefully, preventing them from being logged as errors during normal teardown.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1243"></a>
+<h2><a class="anchor" id="autotoc_md1508"></a>
 Verification</h2>
 <ul>
 <li><b>Reproduction Script</b>: <code>oaTests/Methods/repro_router_crash.py</code></li>
@@ -117,9 +117,9 @@ Verification</h2>
 <li><b>System Stability</b>: Verified that normal message routing remains unaffected.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1245"></a>
+<h1><a class="anchor" id="autotoc_md1510"></a>
 🚀 Addition: Rust Migration Stage 1</h1>
-<h2><a class="anchor" id="autotoc_md1246"></a>
+<h2><a class="anchor" id="autotoc_md1511"></a>
 Candidate 1: &lt;tt&gt;oaTests/Methods/DebugToggler.py&lt;/tt&gt;</h2>
 <p><b>Enhancement</b>: Migrated the core file traversal and regex replacement logic to a native Rust module <code>oaDebugToggler_rs</code> to resolve "Moderate I/O Heat". <b>Success Metric</b>: High-speed project-wide debug flag toggling verified with Python fallback. </p>
 </div></div><!-- contents -->

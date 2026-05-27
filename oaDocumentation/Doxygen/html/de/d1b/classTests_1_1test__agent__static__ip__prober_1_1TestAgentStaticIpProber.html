@@ -107,9 +107,9 @@ $(document).ready(function(){initNavTree('de/d1b/classTests_1_1test__agent__stat
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4149e4915d9074fb852a4b0f691f8be6" id="r_a4149e4915d9074fb852a4b0f691f8be6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1b/classTests_1_1test__agent__static__ip__prober_1_1TestAgentStaticIpProber.html#a4149e4915d9074fb852a4b0f691f8be6">test_discover_gateway_devices_exception</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_urlopen</a>)</td></tr>
+<tr class="memitem:a4149e4915d9074fb852a4b0f691f8be6" id="r_a4149e4915d9074fb852a4b0f691f8be6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1b/classTests_1_1test__agent__static__ip__prober_1_1TestAgentStaticIpProber.html#a4149e4915d9074fb852a4b0f691f8be6">test_discover_gateway_devices_exception</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, mock_urlopen)</td></tr>
 <tr class="separator:a4149e4915d9074fb852a4b0f691f8be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45e513a356aa73e72318038566dbda8e" id="r_a45e513a356aa73e72318038566dbda8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1b/classTests_1_1test__agent__static__ip__prober_1_1TestAgentStaticIpProber.html#a45e513a356aa73e72318038566dbda8e">test_discover_gateway_devices_success</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_urlopen</a>)</td></tr>
+<tr class="memitem:a45e513a356aa73e72318038566dbda8e" id="r_a45e513a356aa73e72318038566dbda8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1b/classTests_1_1test__agent__static__ip__prober_1_1TestAgentStaticIpProber.html#a45e513a356aa73e72318038566dbda8e">test_discover_gateway_devices_success</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, mock_urlopen)</td></tr>
 <tr class="separator:a45e513a356aa73e72318038566dbda8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -152,19 +152,18 @@ CHECK: Assert it continues and returns resources from other gateways if availabl
 <div class="line"><span class="lineno">   49</span><span class="stringliteral">        OPERATE: Call discover_gateway_devices.</span></div>
 <div class="line"><span class="lineno">   50</span><span class="stringliteral">        CHECK: Assert it continues and returns resources from other gateways if available.</span></div>
 <div class="line"><span class="lineno">   51</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   52</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_urlopen.side_effect</a> = [Exception(<span class="stringliteral">&quot;Network error&quot;</span>), MagicMock()]</div>
+<div class="line"><span class="lineno">   52</span>        mock_urlopen.side_effect = [Exception(<span class="stringliteral">&quot;Network error&quot;</span>), MagicMock()]</div>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="line"><span class="lineno">   54</span>        gateway_ips = [<span class="stringliteral">&quot;192.168.1.1&quot;</span>, <span class="stringliteral">&quot;192.168.1.2&quot;</span>]</div>
 <div class="line"><span class="lineno">   55</span>        <span class="comment"># The second call will succeed but return no matches (default MagicMock mock_response)</span></div>
 <div class="line"><span class="lineno">   56</span>        resources = discover_gateway_devices(gateway_ips)</div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(resources), 0)</div>
-<div class="line"><span class="lineno">   59</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_urlopen.call_count</a>, 2)</div>
+<div class="line"><span class="lineno">   59</span>        self.assertEqual(mock_urlopen.call_count, 2)</div>
 <div class="line"><span class="lineno">   60</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>
@@ -212,9 +211,9 @@ CHECK: Assert the correctly formatted TCPIP resource strings are returned.
 <div class="line"><span class="lineno">   27</span><span class="stringliteral">        &lt;/html&gt;</span></div>
 <div class="line"><span class="lineno">   28</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   29</span>        mock_response = MagicMock()</div>
-<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_response.read.return_value</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sample_html.encode</a>(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_response.__enter__.return_value</a> = mock_response</div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_urlopen.return_value</a> = mock_response</div>
+<div class="line"><span class="lineno">   30</span>        mock_response.read.return_value = sample_html.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
+<div class="line"><span class="lineno">   31</span>        mock_response.__enter__.return_value = mock_response</div>
+<div class="line"><span class="lineno">   32</span>        mock_urlopen.return_value = mock_response</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        gateway_ips = [<span class="stringliteral">&quot;192.168.1.1&quot;</span>, <span class="stringliteral">&quot;192.168.1.2&quot;</span>]</div>
 <div class="line"><span class="lineno">   35</span>        resources = discover_gateway_devices(gateway_ips)</div>
@@ -228,7 +227,7 @@ CHECK: Assert the correctly formatted TCPIP resource strings are returned.
 <div class="line"><span class="lineno">   43</span>        self.assertNotIn(<span class="stringliteral">&quot;TCPIP::192.168.1.1::COM1::INSTR&quot;</span>, resources)</div>
 <div class="line"><span class="lineno">   44</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>

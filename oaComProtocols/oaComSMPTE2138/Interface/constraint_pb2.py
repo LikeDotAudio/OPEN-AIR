@@ -17,6 +17,7 @@ _runtime_version.ValidateProtobufRuntimeVersion(
     '',
     'constraint.proto'
 )
+from . import language_pb2 as language__pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()

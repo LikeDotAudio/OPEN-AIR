@@ -41,7 +41,7 @@ class VisaRebootManager:
             )
 
             # --- MQTT Topic Constants ---
-            self.BASE_TOPIC = "OPEN-AIR/Device/Instrument_Connection/System_Reset"
+            self.BASE_TOPIC = "OpenAir/Device/Instrument_Connection/System_Reset"
             self.TOPIC_REBOOT = f"{self.BASE_TOPIC}/Reboot_device/trigger"
 
             self._setup_mqtt_subscriptions()

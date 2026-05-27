@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d8/d69/namespaceMethods_1_1config__val
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a94afa09b8a602cbef09eb201ce87511c" id="r_a94afa09b8a602cbef09eb201ce87511c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d69/namespaceMethods_1_1config__validator.html#a94afa09b8a602cbef09eb201ce87511c">validate_configuration</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print_func</a>)</td></tr>
+<tr class="memitem:a94afa09b8a602cbef09eb201ce87511c" id="r_a94afa09b8a602cbef09eb201ce87511c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d69/namespaceMethods_1_1config__validator.html#a94afa09b8a602cbef09eb201ce87511c">validate_configuration</a> (print_func)</td></tr>
 <tr class="separator:a94afa09b8a602cbef09eb201ce87511c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -110,7 +110,7 @@ Variables</h2></td></tr>
 <tr class="separator:a7fb4016d6ac729757a0d09386d014363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac70a9b71904320e0dd8def8e91221712" id="r_ac70a9b71904320e0dd8def8e91221712"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d69/namespaceMethods_1_1config__validator.html#ac70a9b71904320e0dd8def8e91221712">HAS_RUST</a> = True</td></tr>
 <tr class="separator:ac70a9b71904320e0dd8def8e91221712"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2dc2676c4dfd1ac1d180e6218b9531b" id="r_ae2dc2676c4dfd1ac1d180e6218b9531b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d69/namespaceMethods_1_1config__validator.html#ae2dc2676c4dfd1ac1d180e6218b9531b">LOCAL_DEBUG</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:ae2dc2676c4dfd1ac1d180e6218b9531b" id="r_ae2dc2676c4dfd1ac1d180e6218b9531b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d69/namespaceMethods_1_1config__validator.html#ae2dc2676c4dfd1ac1d180e6218b9531b">LOCAL_DEBUG</a> = False</td></tr>
 <tr class="separator:ae2dc2676c4dfd1ac1d180e6218b9531b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -137,32 +137,31 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   48</span><span class="stringliteral">    Validates the application&#39;s configuration settings.</span></div>
 <div class="line"><span class="lineno">   49</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   50</span>    <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   51</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;Commencing the configuration validation experiment.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   51</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;Commencing the configuration validation experiment.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>    <span class="keywordflow">if</span> HAS_RUST:</div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   55</span>            <span class="comment"># Prepare dictionary for Rust validation</span></div>
 <div class="line"><span class="lineno">   56</span>            config_data = {</div>
-<div class="line"><span class="lineno">   57</span>                <span class="stringliteral">&quot;partition_id&quot;</span>: str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_constants, <span class="stringliteral">&quot;PARTITION_ID&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)),</div>
-<div class="line"><span class="lineno">   58</span>                <span class="stringliteral">&quot;mqtt_port&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_constants, <span class="stringliteral">&quot;MQTT_PORT&quot;</span>, 1883)),</div>
-<div class="line"><span class="lineno">   59</span>                <span class="stringliteral">&quot;mqtt_broker&quot;</span>: str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_constants, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><span class="lineno">   57</span>                <span class="stringliteral">&quot;partition_id&quot;</span>: str(getattr(app_constants, <span class="stringliteral">&quot;PARTITION_ID&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)),</div>
+<div class="line"><span class="lineno">   58</span>                <span class="stringliteral">&quot;mqtt_port&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(getattr(app_constants, <span class="stringliteral">&quot;MQTT_PORT&quot;</span>, 1883)),</div>
+<div class="line"><span class="lineno">   59</span>                <span class="stringliteral">&quot;mqtt_broker&quot;</span>: str(getattr(app_constants, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line"><span class="lineno">   60</span>            }</div>
-<div class="line"><span class="lineno">   61</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_rust_validator.validate_config</a>(config_data)</div>
-<div class="line"><span class="lineno">   62</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print_func</a>(<span class="stringliteral">&quot;✅ [RUST] Configuration validated against strict schema.&quot;</span>)</div>
+<div class="line"><span class="lineno">   61</span>            _rust_validator.validate_config(config_data)</div>
+<div class="line"><span class="lineno">   62</span>            print_func(<span class="stringliteral">&quot;✅ [RUST] Configuration validated against strict schema.&quot;</span>)</div>
 <div class="line"><span class="lineno">   63</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   64</span>        <span class="keywordflow">except</span> ValueError <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   65</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print_func</a>(f<span class="stringliteral">&quot;❌ [RUST] Schema Validation Failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   65</span>            print_func(f<span class="stringliteral">&quot;❌ [RUST] Schema Validation Failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   66</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   67</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   68</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;Config validation error: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   68</span>            logger.error(f<span class="stringliteral">&quot;Config validation error: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   69</span> </div>
 <div class="line"><span class="lineno">   70</span>    <span class="comment"># Fallback/Legacy</span></div>
-<div class="line"><span class="lineno">   71</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print_func</a>(<span class="stringliteral">&quot;✅ Excellent! The configuration is quite, quite brilliant.&quot;</span>)</div>
+<div class="line"><span class="lineno">   71</span>    print_func(<span class="stringliteral">&quot;✅ Excellent! The configuration is quite, quite brilliant.&quot;</span>)</div>
 <div class="line"><span class="lineno">   72</span>    <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>.</p>
 
 </div>
 </div>
@@ -230,7 +229,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.config_validator.LOCAL_DEBUG = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.config_validator.LOCAL_DEBUG = False</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -93,35 +93,35 @@ $(document).ready(function(){initNavTree('dd/d4d/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Invisible XY Graphs and Graphing Instantiation Errors</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1938"></a> </p>
-<h1><a class="anchor" id="autotoc_md1939"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2387"></a> </p>
+<h1><a class="anchor" id="autotoc_md2388"></a>
 Issue</h1>
 <ol type="1">
 <li>XY Graphs (<code>GraphPlotter</code>) were not rendering axes or data, appearing empty/black.</li>
 <li>Multiple graphing aliases (<code>DynamicGraph</code>, <code>DynamicBarGraph</code>) threw "Unknown functional widget" errors.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1940"></a>
+<h1><a class="anchor" id="autotoc_md2389"></a>
 Root Cause Analysis</h1>
 <ol type="1">
-<li><b>Visibility Logic</b>: <code>GraphPatinaMixin</code> was hiding the Matplotlib figure and axis patches (<code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible(False)</a></code>) when "transparent" or "match_theme" backgrounds were used. This prevented the fast-blit engine from capturing a valid background fabric, making the plot invisible.</li>
+<li><b>Visibility Logic</b>: <code>GraphPatinaMixin</code> was hiding the Matplotlib figure and axis patches (<code>set_visible(False)</code>) when "transparent" or "match_theme" backgrounds were used. This prevented the fast-blit engine from capturing a valid background fabric, making the plot invisible.</li>
 <li><b>Missing Mappings</b>: The centralized <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code> lacked entries for <code>DynamicGraph</code> and <code>DynamicBarGraph</code>, causing the layout engine to fail during instantiation.</li>
 <li><b>Initialization Race</b>: The blit engine requires at least one full draw to capture its background buffer. If data arrived before the first draw, or if patina sync occurred after the initial build, the buffer remained uninitialized.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1941"></a>
+<h1><a class="anchor" id="autotoc_md2390"></a>
 Resolutions</h1>
 <ol type="1">
-<li><b>Graph Transparency</b>: Updated <code>GraphPatinaMixin</code> to use <code>set_alpha(0.0)</code> instead of <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible(False)</a></code>. This keeps the patches logically active for the blit engine while visually transparent.</li>
+<li><b>Graph Transparency</b>: Updated <code>GraphPatinaMixin</code> to use <code>set_alpha(0.0)</code> instead of <code>set_visible(False)</code>. This keeps the patches logically active for the blit engine while visually transparent.</li>
 <li><b>Factory Expansion</b>: Added <code>DynamicGraph</code>, <code>DynamicBarGraph</code>, and other aliases to <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">oaGui/Core/factory/Core/factory_mapping.py</a></code>.</li>
 <li><b>Forced Draw</b>: Added a forced initial redraw (<code>self._force_redraw = True</code>) during <code>GraphPlotter</code> initialization to ensure the blit cache is primed regardless of background sync timing.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1942"></a>
+<h1><a class="anchor" id="autotoc_md2391"></a>
 Files Modified</h1>
 <ul>
 <li><code>oaGuiElements/Core/graphing/graphing/Core/graph_patina_mixin.py</code></li>
 <li><code>oaGuiElements/Core/graphing/graphing/dynamic_graph.py</code></li>
 <li><code><a class="el" href="../../d0/d56/factory__mapping_8py.html">oaGui/Core/factory/Core/factory_mapping.py</a></code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1943"></a>
+<h1><a class="anchor" id="autotoc_md2392"></a>
 Verification Evidence</h1>
 <p>The combination of alpha-based transparency and blit cache priming ensures that the graph remains visible and functional under all background configurations. The factory mapping fix was verified by the absence of "Unknown functional widget" errors in the latest logs. </p>
 </div></div><!-- contents -->

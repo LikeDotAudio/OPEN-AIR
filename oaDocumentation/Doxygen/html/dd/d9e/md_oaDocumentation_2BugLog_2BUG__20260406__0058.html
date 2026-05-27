@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('dd/d9e/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0058</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1290"></a> </p>
-<h1><a class="anchor" id="autotoc_md1291"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1555"></a> </p>
+<h1><a class="anchor" id="autotoc_md1556"></a>
 Issue</h1>
 <p>Multiple unit test failures related to import paths, missing variables, and attribute errors.</p>
-<h1><a class="anchor" id="autotoc_md1292"></a>
+<h1><a class="anchor" id="autotoc_md1557"></a>
 Root Cause</h1>
 <ol type="1">
-<li><code><a class="el" href="../../d4/d3a/test__ui__and__data_8py.html">oaGui/Tests/test_ui_and_data.py</a></code>: <code>LayoutParser</code> import pointed to an outdated path (<code>oaGui.Core.parser</code>).</li>
+<li><code><a class="el" href="../../d4/d3a/test__ui__and__data_8py.html">oaGui/Tests/test_ui_and_data.py</a></code>: <code>FolderLayoutInterpreter</code> import pointed to an outdated path (<code>oaGui.Core.parser</code>).</li>
 <li><code>oaGuiElements/Core/metering/meter_bar/meter_bar.py</code> and <code>oaGuiElements/Core/graphing/radar/radar.py</code>: Used undefined variable <code>config</code> instead of the available <code>config_data</code> parameter.</li>
 <li><code>oaGuiElements/Core/input/json_tree/json_tree.py</code>: Used <code>self.get_text</code> which doesn't exist, and referenced undefined <code>config</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1293"></a>
+<h1><a class="anchor" id="autotoc_md1558"></a>
 Resolution</h1>
 <ul>
 <li>Updated <code><a class="el" href="../../d4/d3a/test__ui__and__data_8py.html">test_ui_and_data.py</a></code> import to <code>oaGui.Core.layout_parser</code>.</li>
 <li>Replaced <code>config</code> with <code>config_data</code> in <code><a class="el" href="../../d8/d6d/meter__bar_8py.html">meter_bar.py</a></code> and <code><a class="el" href="../../d6/d4c/radar_8py.html">radar.py</a></code>.</li>
-<li>Changed <code>self.get_text(config...)</code> to <code>get_text(self.config_data...)</code> in <code>json_tree.py</code>.</li>
+<li>Changed <code>self.get_text(config...)</code> to <code>get_text(self.config_data...)</code> in <code><a class="el" href="../../dd/da8/json__tree_8py.html">json_tree.py</a></code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1294"></a>
+<h1><a class="anchor" id="autotoc_md1559"></a>
 Verification</h1>
 <ul>
 <li>All identified breaking variables and imports have been syntactically corrected and point to the right scopes. </li>

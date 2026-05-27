@@ -41,7 +41,7 @@ class TestMQTTIntegration(unittest.TestCase):
     def setUp(self):
         self.host = "localhost"
         self.port = 1883
-        self.test_topic_root = "OPEN-AIR/INTEGRATION-TEST"
+        self.test_topic_root = "OpenAir/INTEGRATION-TEST"
         self.client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
         self.received_messages = []
 

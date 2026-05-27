@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('da/d33/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_213000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1955"></a> </p>
-<h1><a class="anchor" id="autotoc_md1956"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2404"></a> </p>
+<h1><a class="anchor" id="autotoc_md2405"></a>
 Issue</h1>
 <p>The SNMP bridge exhibited sporadic "flickering" behavior, appearing active and then quickly going offline. This caused inconsistent telemetry and potential resource conflicts.</p>
-<h1><a class="anchor" id="autotoc_md1957"></a>
+<h1><a class="anchor" id="autotoc_md2406"></a>
 Root Cause</h1>
 <p>The issue was caused by two primary factors:</p><ol type="1">
 <li><b>Duplicate Initialization</b>: Both the UI and <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> partitions were attempting to start an active SNMP bridge. Since they share the same configuration (binding to port 161), they competed for the same system resources and state files.</li>
 <li><b>Incomplete Cleanup</b>: The <code>SNMPManager.stop()</code> method did not properly terminate its background worker threads (<code>SnmpStatePersister</code> and <code>SnmpLogMonitor</code>) or unregister its observer from the <code>ProtocolRouter</code>. This left "ghost" bridge activities running after a requested stop or during a restart.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1958"></a>
+<h1><a class="anchor" id="autotoc_md2407"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Partition Awareness</b>: Updated <code>oaComProtocols.oaComSNMP/Entry.py</code> to use <code>OPEN_AIR_PARTITION_ID</code>. The SNMP bridge now defaults to <code>run_bridge=True</code> only in <code>CORE</code> or <code>STANDALONE</code> partitions. In the <code>UI</code> partition, it defaults to "Observer" mode, which listens to telemetry without attempting to manage the physical SNMP daemon.</li>
@@ -114,7 +114,7 @@ Resolution</h1>
 </li>
 <li><b>API Symmetery</b>: Added <code>unregister_cache_observer</code> to <code>ProtocolRouter</code> to allow transport managers to cleanly detach from the system firehose.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1959"></a>
+<h1><a class="anchor" id="autotoc_md2408"></a>
 Verification</h1>
 <ol type="1">
 <li>Unit tests in <code>oaComProtocols.oaComSNMP/Tests/test_snmp_manager.py</code> passed.</li>

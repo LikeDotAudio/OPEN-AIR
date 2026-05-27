@@ -10,6 +10,7 @@ import tkinter as tk
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.FileReaders.standardizers.schema_utils import coerce_pixel_size
 from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
@@ -61,7 +62,8 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             # 1. Container Setup
             l_cfg = config_data.get("layout", {})
-            w_req, h_req = int(float(config_data.get("width", l_cfg.get("width", 400)))), int(float(config_data.get("height", l_cfg.get("height", 100))))
+            w_req = coerce_pixel_size(config_data.get("width", l_cfg.get("width", 400)), 400)
+            h_req = coerce_pixel_size(config_data.get("height", l_cfg.get("height", 100)), 100)
 
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=w_req, height=h_req)
             sub_frame._oca_path = path
@@ -78,13 +80,32 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             safe_knob_dim, v_width_limit = GridManager.configure(sub_frame, config_data, w_req)
 
-            # 2. Config Parsing
-            min_val, max_val = float(config_data.get("min", "0")), float(config_data.get("max", "100"))
-            step_coarse, step_fine = float(config_data.get("step_coarse", "1.0")), float(config_data.get("step_fine", config_data.get("step", "0.01")))
+            # 2. Config Parsing — pillar-aware (mirrors the web schema).
+            #   domain.{min,max,step_coarse,step_fine,units} live inside the
+            #   `domain` pillar; value.default_value lives in the `value` pillar.
+            #   The JsonSchemaNormalizer's LEXICON renames `value` -> `value_default`,
+            #   so the value pillar may show up under either key. Top-level
+            #   min/max/etc. are accepted as legacy fallbacks.
+            _domain = config_data.get("domain") if isinstance(config_data.get("domain"), dict) else {}
+            _value_pillar = config_data.get("value", config_data.get("value_default"))
+
+            min_val = float(_domain.get("min", config_data.get("min", "0")))
+            max_val = float(_domain.get("max", config_data.get("max", "100")))
+            step_coarse = float(_domain.get("step_coarse", config_data.get("step_coarse", "1.0")))
+            step_fine = float(_domain.get("step_fine", config_data.get("step_fine", config_data.get("step", "0.01"))))
             numerical_step = step_fine
             fmt_str = CompositeStateSync.get_format_string(numerical_step)
 
-            init_val = float(config_data.get("default_value", config_data.get("value", "0")))
+            if isinstance(_value_pillar, dict):
+                _raw_default = _value_pillar.get("default_value", _value_pillar.get("default", config_data.get("default_value", "0")))
+            elif isinstance(_value_pillar, (int, float, str)):
+                _raw_default = _value_pillar
+            else:
+                _raw_default = config_data.get("default_value", "0")
+            try:
+                init_val = float(_raw_default)
+            except (TypeError, ValueError):
+                init_val = 0.0
             main_value_var, entry_string_var = tk.DoubleVar(value=init_val), tk.StringVar(value=fmt_str.format(init_val))
 
             v_cfg = config_data.get("value_config", {}).copy()
@@ -99,7 +120,7 @@ class BuilderCompositeHorizontalDialValueCreator(
                 'label_text': label, 'path': path, 'v_width': v_width,
                 'v_font_size': v_font_size, 'v_text_color': v_text_color,
                 'entry_string_var': entry_string_var, 'on_manual_cb': None,
-                'units_txt': config_data.get("units", "")
+                'units_txt': _domain.get("units", config_data.get("units", ""))
             }
 
             f_label, draw_f_label = CompositeUIComponents.build_label(ui_ctx)

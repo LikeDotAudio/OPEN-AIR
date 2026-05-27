@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('dd/d62/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0040</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1265"></a> </p>
-<h1><a class="anchor" id="autotoc_md1266"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1530"></a> </p>
+<h1><a class="anchor" id="autotoc_md1531"></a>
 Issue</h1>
 <p>ModuleNotFoundError: No module named 'oaGui.Core.horizontal_fader_asset_generator'</p>
-<h1><a class="anchor" id="autotoc_md1267"></a>
+<h1><a class="anchor" id="autotoc_md1532"></a>
 Root Cause</h1>
-<p>The file <code><a class="el" href="../../d1/de0/widget__schema__normalizer_8py.html">oaGui/Core/widget_schema_normalizer.py</a></code> was missing or empty, causing the import chain in <code>BlueprintLoader</code> to fail when initializing the UI.</p>
-<h1><a class="anchor" id="autotoc_md1268"></a>
+<p>The file <code>oaGui/Core/widget_schema_normalizer.py</code> was missing or empty, causing the import chain in <code>JsonBlueprintReader</code> to fail when initializing the UI.</p>
+<h1><a class="anchor" id="autotoc_md1533"></a>
 Resolution</h1>
 <ul>
-<li>Restored <code><a class="el" href="../../d1/de0/widget__schema__normalizer_8py.html">oaGui/Core/widget_schema_normalizer.py</a></code> from crawler logs.</li>
+<li>Restored <code>oaGui/Core/widget_schema_normalizer.py</code> from crawler logs.</li>
 <li>Added necessary imports and class definition.</li>
 <li>Fixed the module import within <code><a class="el" href="../../d1/de0/widget__schema__normalizer_8py.html">widget_schema_normalizer.py</a></code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1269"></a>
+<h1><a class="anchor" id="autotoc_md1534"></a>
 Verification</h1>
 <ul>
 <li>Checked the import path and ensured it matches the project structure. </li>

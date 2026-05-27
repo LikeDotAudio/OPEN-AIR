@@ -5,12 +5,7 @@ var namespaceCore =
       [ "add_monitor_callback", "d0/d7b/namespaceCore_1_1add__monitor__callback.html#af0adc71a2075df1a73c5c510a3162feb", null ]
     ] ],
     [ "aes70", "d8/d23/namespaceCore_1_1aes70.html", "d8/d23/namespaceCore_1_1aes70" ],
-    [ "array", "d6/dda/namespaceCore_1_1array.html", "d6/dda/namespaceCore_1_1array" ],
-    [ "base_widget_creator", "da/d16/namespaceCore_1_1base__widget__creator.html", "da/d16/namespaceCore_1_1base__widget__creator" ],
-    [ "batch_processing_engine", "d6/d50/namespaceCore_1_1batch__processing__engine.html", "d6/d50/namespaceCore_1_1batch__processing__engine" ],
-    [ "bootstrap_sequence", "df/d21/namespaceCore_1_1bootstrap__sequence.html", "df/d21/namespaceCore_1_1bootstrap__sequence" ],
-    [ "break_line", "de/dfc/namespaceCore_1_1break__line.html", "de/dfc/namespaceCore_1_1break__line" ],
-    [ "breakoff", "d8/de0/namespaceCore_1_1breakoff.html", "d8/de0/namespaceCore_1_1breakoff" ],
+    [ "break_line_creator", "d1/d3e/namespaceCore_1_1break__line__creator.html", "d1/d3e/namespaceCore_1_1break__line__creator" ],
     [ "broker_link", "d2/d8b/namespaceCore_1_1broker__link.html", [
       [ "broker_link", "d2/d8b/namespaceCore_1_1broker__link.html#ab3e0a725a239cea7112f8fa4cd18bd66", null ]
     ] ],
@@ -29,14 +24,25 @@ var namespaceCore =
       [ "learning_source", "d9/d2b/namespaceCore_1_1cancel__learning.html#a5e9b8b4c754aa175b6f813b26a224614", null ],
       [ "teaching_dest", "d9/d2b/namespaceCore_1_1cancel__learning.html#afefcf1a3a65a9ad61bd292da9c5f727f", null ]
     ] ],
-    [ "composition_root", "d7/d6d/namespaceCore_1_1composition__root.html", "d7/d6d/namespaceCore_1_1composition__root" ],
+    [ "checkbox", "d7/d37/namespaceCore_1_1checkbox.html", "d7/d37/namespaceCore_1_1checkbox" ],
+    [ "circular_motion_displacement_potentiometer", "d9/d82/namespaceCore_1_1circular__motion__displacement__potentiometer.html", "d9/d82/namespaceCore_1_1circular__motion__displacement__potentiometer" ],
+    [ "cmdp_channel_handler", "d7/deb/namespaceCore_1_1cmdp__channel__handler.html", "d7/deb/namespaceCore_1_1cmdp__channel__handler" ],
+    [ "cmdp_file_handler", "d9/d0b/namespaceCore_1_1cmdp__file__handler.html", "d9/d0b/namespaceCore_1_1cmdp__file__handler" ],
+    [ "cmdp_group_handler", "df/d4e/namespaceCore_1_1cmdp__group__handler.html", "df/d4e/namespaceCore_1_1cmdp__group__handler" ],
+    [ "cmdp_group_mixin", "d4/d75/namespaceCore_1_1cmdp__group__mixin.html", "d4/d75/namespaceCore_1_1cmdp__group__mixin" ],
+    [ "cmdp_interaction_mixin", "d0/db5/namespaceCore_1_1cmdp__interaction__mixin.html", "d0/db5/namespaceCore_1_1cmdp__interaction__mixin" ],
+    [ "cmdp_math", "d2/de1/namespaceCore_1_1cmdp__math.html", "d2/de1/namespaceCore_1_1cmdp__math" ],
+    [ "cmdp_renderer_mixin", "d1/db6/namespaceCore_1_1cmdp__renderer__mixin.html", "d1/db6/namespaceCore_1_1cmdp__renderer__mixin" ],
+    [ "CMDP_tester", "de/d08/namespaceCore_1_1CMDP__tester.html", "de/d08/namespaceCore_1_1CMDP__tester" ],
+    [ "cmdp_tree", "d4/d40/namespaceCore_1_1cmdp__tree.html", "d4/d40/namespaceCore_1_1cmdp__tree" ],
+    [ "composite_horizontal_dial_value", "de/d72/namespaceCore_1_1composite__horizontal__dial__value.html", "de/d72/namespaceCore_1_1composite__horizontal__dial__value" ],
+    [ "composite_mdp", "da/d4e/namespaceCore_1_1composite__mdp.html", "da/d4e/namespaceCore_1_1composite__mdp" ],
     [ "config_builder", "da/d7d/namespaceCore_1_1config__builder.html", [
       [ "create_default_config_ini", "da/d7d/namespaceCore_1_1config__builder.html#abb235ffb44ef25fc578b980027bbc7d9", null ]
     ] ],
     [ "config_defaults", "de/d72/namespaceCore_1_1config__defaults.html", "de/d72/namespaceCore_1_1config__defaults" ],
     [ "config_loader", "d0/d4c/namespaceCore_1_1config__loader.html", "d0/d4c/namespaceCore_1_1config__loader" ],
     [ "context", "d4/df3/namespaceCore_1_1context.html", "d4/df3/namespaceCore_1_1context" ],
-    [ "context_menu", "d5/d09/namespaceCore_1_1context__menu.html", "d5/d09/namespaceCore_1_1context__menu" ],
     [ "create_splink", "dc/dff/namespaceCore_1_1create__splink.html", [
       [ "create_splink", "dc/dff/namespaceCore_1_1create__splink.html#a477873863b7e5dedc37ea00f8a5e01ba", null ]
     ] ],
@@ -47,7 +53,6 @@ var namespaceCore =
     [ "delete_splink", "d9/dd9/namespaceCore_1_1delete__splink.html", [
       [ "delete_splink", "d9/dd9/namespaceCore_1_1delete__splink.html#ae097dcbeb0dab7d0b91f895389adc4b0", null ]
     ] ],
-    [ "directory", "db/d25/namespaceCore_1_1directory.html", "db/d25/namespaceCore_1_1directory" ],
     [ "Entry", "d2/dd9/namespaceCore_1_1Entry.html", [
       [ "main", "d2/dd9/namespaceCore_1_1Entry.html#a6db15e399e0ff6fcb2873270ebf3fd12", null ],
       [ "run_tests", "d2/dd9/namespaceCore_1_1Entry.html#af4e96e2b54140f2c3049d62f9fa55cdd", null ],
@@ -62,14 +67,12 @@ var namespaceCore =
     [ "event_bus", "d8/df8/namespaceCore_1_1event__bus.html", "d8/df8/namespaceCore_1_1event__bus" ],
     [ "exceptions", "d1/dac/namespaceCore_1_1exceptions.html", "d1/dac/namespaceCore_1_1exceptions" ],
     [ "factory", "d7/de0/namespaceCore_1_1factory.html", "d7/de0/namespaceCore_1_1factory" ],
-    [ "fast_scanner", "de/dde/namespaceCore_1_1fast__scanner.html", "de/dde/namespaceCore_1_1fast__scanner" ],
     [ "fleet_command_manager", "dc/db6/namespaceCore_1_1fleet__command__manager.html", "dc/db6/namespaceCore_1_1fleet__command__manager" ],
     [ "fleet_inventory_manager", "dc/df4/namespaceCore_1_1fleet__inventory__manager.html", "dc/df4/namespaceCore_1_1fleet__inventory__manager" ],
     [ "fleet_scan_manager", "da/d13/namespaceCore_1_1fleet__scan__manager.html", "da/d13/namespaceCore_1_1fleet__scan__manager" ],
     [ "fluke_meter", "d2/d8d/namespaceCore_1_1fluke__meter.html", "d2/d8d/namespaceCore_1_1fluke__meter" ],
-    [ "grid_topology_configurator", "d9/d01/namespaceCore_1_1grid__topology__configurator.html", "d9/d01/namespaceCore_1_1grid__topology__configurator" ],
+    [ "grid", "db/d9c/namespaceCore_1_1grid.html", "db/d9c/namespaceCore_1_1grid" ],
     [ "group_mixin", "d1/dd7/namespaceCore_1_1group__mixin.html", "d1/dd7/namespaceCore_1_1group__mixin" ],
-    [ "gui_smart_standardizer", "db/d7c/namespaceCore_1_1gui__smart__standardizer.html", "db/d7c/namespaceCore_1_1gui__smart__standardizer" ],
     [ "gui_style", "d1/d26/namespaceCore_1_1gui__style.html", "d1/d26/namespaceCore_1_1gui__style" ],
     [ "handle_command", "db/d23/namespaceCore_1_1handle__command.html", [
       [ "_process_direct_create", "db/d23/namespaceCore_1_1handle__command.html#aafe2845aeed79ef648ae174491337003", null ],
@@ -97,19 +100,49 @@ var namespaceCore =
       [ "handle_teach", "d9/d98/namespaceCore_1_1handle__teach.html#a53a989cb3635c0543fafc9da78664e7b", null ],
       [ "teaching_dest", "d9/d98/namespaceCore_1_1handle__teach.html#af26a586c552f5d34fbb83d3008ae64d6", null ]
     ] ],
-    [ "horizontal_fader_renderer_mixin", "dd/dcb/namespaceCore_1_1horizontal__fader__renderer__mixin.html", "dd/dcb/namespaceCore_1_1horizontal__fader__renderer__mixin" ],
+    [ "hidden_BreakLine", "d7/d87/namespaceCore_1_1hidden__BreakLine.html", "d7/d87/namespaceCore_1_1hidden__BreakLine" ],
     [ "HumanUserinterface", "d9/d51/namespaceCore_1_1HumanUserinterface.html", "d9/d51/namespaceCore_1_1HumanUserinterface" ],
     [ "identity", "d3/dad/namespaceCore_1_1identity.html", "d3/dad/namespaceCore_1_1identity" ],
-    [ "instrument_controller", "df/dc0/namespaceCore_1_1instrument__controller.html", "df/dc0/namespaceCore_1_1instrument__controller" ],
     [ "interaction_mixin", "d4/dab/namespaceCore_1_1interaction__mixin.html", "d4/dab/namespaceCore_1_1interaction__mixin" ],
     [ "is07_transport", "d5/d58/namespaceCore_1_1is07__transport.html", "d5/d58/namespaceCore_1_1is07__transport" ],
     [ "IS12", "d3/d93/namespaceCore_1_1IS12.html", "d3/d93/namespaceCore_1_1IS12" ],
-    [ "layout_cache", "d1/de4/namespaceCore_1_1layout__cache.html", "d1/de4/namespaceCore_1_1layout__cache" ],
-    [ "layout_parser", "d0/d73/namespaceCore_1_1layout__parser.html", "d0/d73/namespaceCore_1_1layout__parser" ],
+    [ "json", "db/dea/namespaceCore_1_1json.html", "db/dea/namespaceCore_1_1json" ],
+    [ "json_tree", "dd/d2c/namespaceCore_1_1json__tree.html", "dd/d2c/namespaceCore_1_1json__tree" ],
+    [ "json_tree_editor_mixin", "db/dd2/namespaceCore_1_1json__tree__editor__mixin.html", "db/dd2/namespaceCore_1_1json__tree__editor__mixin" ],
+    [ "json_tree_renderer_mixin", "df/de9/namespaceCore_1_1json__tree__renderer__mixin.html", "df/de9/namespaceCore_1_1json__tree__renderer__mixin" ],
+    [ "knob", "d2/da4/namespaceCore_1_1knob.html", "d2/da4/namespaceCore_1_1knob" ],
+    [ "knob_config", "df/dcd/namespaceCore_1_1knob__config.html", [
+      [ "_to_float", "df/dcd/namespaceCore_1_1knob__config.html#a8783d257857fe55a0123f9d975b00d02", null ],
+      [ "extract_knob_config", "df/dcd/namespaceCore_1_1knob__config.html#ad930f1c129f3fe100e3bc60dc420b065", null ]
+    ] ],
+    [ "knob_interaction_mixin", "db/d55/namespaceCore_1_1knob__interaction__mixin.html", "db/d55/namespaceCore_1_1knob__interaction__mixin" ],
+    [ "knob_renderer", "db/d9c/namespaceCore_1_1knob__renderer.html", [
+      [ "_draw_body", "db/d9c/namespaceCore_1_1knob__renderer.html#a01764af6a02e98a466485080d3b1cf80", null ],
+      [ "_draw_pointer", "db/d9c/namespaceCore_1_1knob__renderer.html#ad5798b1e3aa3d74af0b55508f86f9dea", null ],
+      [ "_draw_ticks", "db/d9c/namespaceCore_1_1knob__renderer.html#ac74271546522d7600a5c6da652665207", null ],
+      [ "_draw_track", "db/d9c/namespaceCore_1_1knob__renderer.html#a3a8fb470bea25dbafdfc4c6ee13214fa", null ],
+      [ "_get_gear_points", "db/d9c/namespaceCore_1_1knob__renderer.html#ac7b0dfcfd1b180bfa815a323bb71068f", null ],
+      [ "_get_poly_points", "db/d9c/namespaceCore_1_1knob__renderer.html#abe107765d2be94f433f47b89ee47c5ed", null ],
+      [ "draw_knob_visuals", "db/d9c/namespaceCore_1_1knob__renderer.html#ad68c8c13718b117b2942f7b6ea92e637", null ]
+    ] ],
+    [ "knob_renderer_mixin", "d8/d48/namespaceCore_1_1knob__renderer__mixin.html", "d8/d48/namespaceCore_1_1knob__renderer__mixin" ],
+    [ "knob_rotary_selector", "d7/db7/namespaceCore_1_1knob__rotary__selector.html", "d7/db7/namespaceCore_1_1knob__rotary__selector" ],
+    [ "knob_state", "d6/df5/namespaceCore_1_1knob__state.html", [
+      [ "create_knob_state", "d6/df5/namespaceCore_1_1knob__state.html#a4d2c77d9fb1d009bdec1fc0e0cd97124", null ]
+    ] ],
+    [ "layer_dust", "d7/d85/namespaceCore_1_1layer__dust.html", "d7/d85/namespaceCore_1_1layer__dust" ],
+    [ "layer_metal_fold", "d5/d34/namespaceCore_1_1layer__metal__fold.html", "d5/d34/namespaceCore_1_1layer__metal__fold" ],
+    [ "layer_rust", "db/d9d/namespaceCore_1_1layer__rust.html", "db/d9d/namespaceCore_1_1layer__rust" ],
+    [ "layer_scratches", "d1/d15/namespaceCore_1_1layer__scratches.html", "d1/d15/namespaceCore_1_1layer__scratches" ],
+    [ "layer_screws", "d2/dbe/namespaceCore_1_1layer__screws.html", "d2/dbe/namespaceCore_1_1layer__screws" ],
+    [ "layer_stains", "dc/d54/namespaceCore_1_1layer__stains.html", "dc/d54/namespaceCore_1_1layer__stains" ],
+    [ "layer_vignette", "da/df8/namespaceCore_1_1layer__vignette.html", "da/df8/namespaceCore_1_1layer__vignette" ],
+    [ "listbox", "d0/dd3/namespaceCore_1_1listbox.html", "d0/dd3/namespaceCore_1_1listbox" ],
+    [ "listbox_options", "db/da6/namespaceCore_1_1listbox__options.html", "db/da6/namespaceCore_1_1listbox__options" ],
+    [ "listbox_sync_engine", "d0/d35/namespaceCore_1_1listbox__sync__engine.html", "d0/d35/namespaceCore_1_1listbox__sync__engine" ],
     [ "load_splinks", "d6/d17/namespaceCore_1_1load__splinks.html", [
       [ "load_splinks", "d6/d17/namespaceCore_1_1load__splinks.html#ad1ea07141daf05d3dfff1cf4b8665a21", null ]
     ] ],
-    [ "loader", "d4/d05/namespaceCore_1_1loader.html", "d4/d05/namespaceCore_1_1loader" ],
     [ "logger", "db/d65/namespaceCore_1_1logger.html", [
       [ "console_log", "db/d65/namespaceCore_1_1logger.html#aad2e3f11119c6874b02308b929ee2049", null ],
       [ "debug_logger", "db/d65/namespaceCore_1_1logger.html#a8d14573b0133ed084f16625939ca001a", null ],
@@ -192,7 +225,11 @@ var namespaceCore =
       [ "YAK_LOGGER", "db/d65/namespaceCore_1_1logger.html#a551a905c2a8b3b7da34736dbd82cd61b", null ],
       [ "yak_logger", "db/d65/namespaceCore_1_1logger.html#a809e291f018e518fa335259b7fde9307", null ]
     ] ],
+    [ "ltp_fader", "d5/d87/namespaceCore_1_1ltp__fader.html", "d5/d87/namespaceCore_1_1ltp__fader" ],
     [ "manifest", "d8/d2f/namespaceCore_1_1manifest.html", "d8/d2f/namespaceCore_1_1manifest" ],
+    [ "mdp_interaction_mixin", "d6/dee/namespaceCore_1_1mdp__interaction__mixin.html", "d6/dee/namespaceCore_1_1mdp__interaction__mixin" ],
+    [ "mdp_ltp_component", "d7/db4/namespaceCore_1_1mdp__ltp__component.html", "d7/db4/namespaceCore_1_1mdp__ltp__component" ],
+    [ "mdp_math", "d8/d8a/namespaceCore_1_1mdp__math.html", "d8/d8a/namespaceCore_1_1mdp__math" ],
     [ "midi_hardware_lock", "dc/dc9/namespaceCore_1_1midi__hardware__lock.html", "dc/dc9/namespaceCore_1_1midi__hardware__lock" ],
     [ "midi_mqtt_transport", "d7/d26/namespaceCore_1_1midi__mqtt__transport.html", "d7/d26/namespaceCore_1_1midi__mqtt__transport" ],
     [ "midi_port_controller", "d9/dbf/namespaceCore_1_1midi__port__controller.html", "d9/dbf/namespaceCore_1_1midi__port__controller" ],
@@ -200,6 +237,7 @@ var namespaceCore =
     [ "mqtt_message", "dd/ddc/namespaceCore_1_1mqtt__message.html", "dd/ddc/namespaceCore_1_1mqtt__message" ],
     [ "mqtt_publisher_service", "df/d60/namespaceCore_1_1mqtt__publisher__service.html", [
       [ "is_connected", "df/d60/namespaceCore_1_1mqtt__publisher__service.html#a7266ac8dbd3a66228da455243457c973", null ],
+      [ "publish_batch", "df/d60/namespaceCore_1_1mqtt__publisher__service.html#aa615f1de2d81667f1515fcad76e5f327", null ],
       [ "publish_json_structure", "df/d60/namespaceCore_1_1mqtt__publisher__service.html#a922a5a589a4f720dad8a29592ea65e6d", null ],
       [ "publish_payload", "df/d60/namespaceCore_1_1mqtt__publisher__service.html#a3f999bfb361dbeda368e421381fee1c4", null ],
       [ "shutdown_publisher_worker", "df/d60/namespaceCore_1_1mqtt__publisher__service.html#ac57d26b46ae32729fa378484d6f20486", null ],
@@ -210,7 +248,6 @@ var namespaceCore =
     [ "mqtt_router", "d8/d7b/namespaceCore_1_1mqtt__router.html", "d8/d7b/namespaceCore_1_1mqtt__router" ],
     [ "mqtt_subscriber_mixin", "d6/dee/namespaceCore_1_1mqtt__subscriber__mixin.html", "d6/dee/namespaceCore_1_1mqtt__subscriber__mixin" ],
     [ "native_pool", "d9/d4d/namespaceCore_1_1native__pool.html", "d9/d4d/namespaceCore_1_1native__pool" ],
-    [ "navigation", "d2/d8d/namespaceCore_1_1navigation.html", "d2/d8d/namespaceCore_1_1navigation" ],
     [ "nmos_builder", "d0/df4/namespaceCore_1_1nmos__builder.html", [
       [ "build_device", "d0/df4/namespaceCore_1_1nmos__builder.html#acef6f13936dcd80688585c718efa2968", null ],
       [ "build_flow", "d0/df4/namespaceCore_1_1nmos__builder.html#a3f9b1969e42bd5eeefee41a6a62fb2f5", null ],
@@ -231,6 +268,8 @@ var namespaceCore =
     ] ],
     [ "osc_monitor", "db/dcb/namespaceCore_1_1osc__monitor.html", "db/dcb/namespaceCore_1_1osc__monitor" ],
     [ "osc_mqtt_transport", "d7/deb/namespaceCore_1_1osc__mqtt__transport.html", "d7/deb/namespaceCore_1_1osc__mqtt__transport" ],
+    [ "panel_creator", "d7/d37/namespaceCore_1_1panel__creator.html", "d7/d37/namespaceCore_1_1panel__creator" ],
+    [ "panel_generator", "da/d3b/namespaceCore_1_1panel__generator.html", "da/d3b/namespaceCore_1_1panel__generator" ],
     [ "parse_splink_path", "d9/d18/namespaceCore_1_1parse__splink__path.html", [
       [ "parse_splink_path", "d9/d18/namespaceCore_1_1parse__splink__path.html#a8e5f535eca63da071c19acf3c93bf1f7", null ]
     ] ],
@@ -242,7 +281,8 @@ var namespaceCore =
       [ "DATA_RUNNING_DIR", "d6/d74/namespaceCore_1_1path__initializer.html#ad5ed8e6987f2fb0d9faff8a4579d5425", null ],
       [ "DATA_SNMP_DIR", "d6/d74/namespaceCore_1_1path__initializer.html#af5665b5d16703325f5ed4a5ae80c9807", null ],
       [ "DATA_SPLINKS_DIR", "d6/d74/namespaceCore_1_1path__initializer.html#aceb2477c5277affa4dbf096f376967c1", null ],
-      [ "GLOBAL_PROJECT_ROOT", "d6/d74/namespaceCore_1_1path__initializer.html#a5c26de90b92af3f071aa5f0f4ccefdc8", null ]
+      [ "GLOBAL_PROJECT_ROOT", "d6/d74/namespaceCore_1_1path__initializer.html#a5c26de90b92af3f071aa5f0f4ccefdc8", null ],
+      [ "GUI_FRAMES_DIR", "d6/d74/namespaceCore_1_1path__initializer.html#aa3b1fa67d33ce22619f747a0dbee47da", null ]
     ] ],
     [ "process_router_event", "d5/dd9/namespaceCore_1_1process__router__event.html", [
       [ "process_router_event", "d5/dd9/namespaceCore_1_1process__router__event.html#a5dfffb8cb02275f1223930c2a3fe5d6c", null ]
@@ -287,20 +327,19 @@ var namespaceCore =
       [ "learning_source", "d9/d32/namespaceCore_1_1set__teach__mode.html#ad3d06f671403eabc0962e765a68940df", null ],
       [ "teaching_dest", "d9/d32/namespaceCore_1_1set__teach__mode.html#a282df1b09cc3529726a2e46c253de926", null ]
     ] ],
-    [ "shutdown_coordinator", "da/d75/namespaceCore_1_1shutdown__coordinator.html", "da/d75/namespaceCore_1_1shutdown__coordinator" ],
-    [ "slicing_registry", "df/ddc/namespaceCore_1_1slicing__registry.html", "df/ddc/namespaceCore_1_1slicing__registry" ],
+    [ "slider_value", "dc/d69/namespaceCore_1_1slider__value.html", "dc/d69/namespaceCore_1_1slider__value" ],
     [ "snmp_log_monitor", "d3/d3b/namespaceCore_1_1snmp__log__monitor.html", "d3/d3b/namespaceCore_1_1snmp__log__monitor" ],
     [ "snmp_mqtt_client", "d2/d1f/namespaceCore_1_1snmp__mqtt__client.html", "d2/d1f/namespaceCore_1_1snmp__mqtt__client" ],
     [ "snmp_state_persister", "d7/d9c/namespaceCore_1_1snmp__state__persister.html", "d7/d9c/namespaceCore_1_1snmp__state__persister" ],
     [ "snmp_tree", "df/dba/namespaceCore_1_1snmp__tree.html", "df/dba/namespaceCore_1_1snmp__tree" ],
     [ "splink_registry", "d4/db0/namespaceCore_1_1splink__registry.html", "d4/db0/namespaceCore_1_1splink__registry" ],
     [ "splinker", "dd/de0/namespaceCore_1_1splinker.html", "dd/de0/namespaceCore_1_1splinker" ],
-    [ "standardizers", "d5/da0/namespaceCore_1_1standardizers.html", "d5/da0/namespaceCore_1_1standardizers" ],
     [ "state", "d6/dff/namespaceCore_1_1state.html", "d6/dff/namespaceCore_1_1state" ],
     [ "state_cache", "d3/dab/namespaceCore_1_1state__cache.html", "d3/dab/namespaceCore_1_1state__cache" ],
     [ "state_mirror_engine", "df/d55/namespaceCore_1_1state__mirror__engine.html", "df/d55/namespaceCore_1_1state__mirror__engine" ],
     [ "state_mixin", "dc/d3b/namespaceCore_1_1state__mixin.html", "dc/d3b/namespaceCore_1_1state__mixin" ],
-    [ "structural_assembler", "df/d70/namespaceCore_1_1structural__assembler.html", "df/d70/namespaceCore_1_1structural__assembler" ],
+    [ "state_sync", "d3/d15/namespaceCore_1_1state__sync.html", "d3/d15/namespaceCore_1_1state__sync" ],
+    [ "status_light", "d2/dc1/namespaceCore_1_1status__light.html", "d2/dc1/namespaceCore_1_1status__light" ],
     [ "style", "dd/d81/namespaceCore_1_1style.html", [
       [ "current_file", "dd/d81/namespaceCore_1_1style.html#a1b635ad3f0c144ccb88ac68b3706e7ce", null ],
       [ "current_version", "dd/d81/namespaceCore_1_1style.html#a0533cd844899fa63ba4bc8a054d3a9ed", null ],
@@ -308,6 +347,7 @@ var namespaceCore =
       [ "DEFAULT_THEME", "dd/d81/namespaceCore_1_1style.html#abd53865c6c25e3b5d12365f820ab4cf8", null ],
       [ "THEMES", "dd/d81/namespaceCore_1_1style.html#aee3a37eac30775202c7b46bc38ca38b9", null ]
     ] ],
+    [ "substrate_factory", "d9/d78/namespaceCore_1_1substrate__factory.html", "d9/d78/namespaceCore_1_1substrate__factory" ],
     [ "sync_queue_mixin", "d6/d05/namespaceCore_1_1sync__queue__mixin.html", "d6/d05/namespaceCore_1_1sync__queue__mixin" ],
     [ "SystemStats", "df/d28/namespaceCore_1_1SystemStats.html", "df/d28/namespaceCore_1_1SystemStats" ],
     [ "tab", "dc/dae/namespaceCore_1_1tab.html", "dc/dae/namespaceCore_1_1tab" ],
@@ -321,26 +361,15 @@ var namespaceCore =
       [ "VERSION", "d7/d76/namespaceCore_1_1TaskBarIcon.html#ab8f14006af12eac121d5cb8b8f015537", null ]
     ] ],
     [ "telemetry", "dd/df5/namespaceCore_1_1telemetry.html", "dd/df5/namespaceCore_1_1telemetry" ],
+    [ "tester", "d4/d97/namespaceCore_1_1tester.html", "d4/d97/namespaceCore_1_1tester" ],
+    [ "tiled_panel_generator", "d2/db0/namespaceCore_1_1tiled__panel__generator.html", "d2/db0/namespaceCore_1_1tiled__panel__generator" ],
     [ "toggle_splink", "d7/dfb/namespaceCore_1_1toggle__splink.html", [
       [ "toggle_splink", "d7/dfb/namespaceCore_1_1toggle__splink.html#ab0f48c39c0a3e5991781c08814b25e41", null ]
     ] ],
     [ "topic_calculator", "d2/d42/namespaceCore_1_1topic__calculator.html", "d2/d42/namespaceCore_1_1topic__calculator" ],
-    [ "transparency", "d5/d2f/namespaceCore_1_1transparency.html", "d5/d2f/namespaceCore_1_1transparency" ],
     [ "tune_mixin", "d7/daf/namespaceCore_1_1tune__mixin.html", "d7/daf/namespaceCore_1_1tune__mixin" ],
-    [ "tuning_helpers", "d0/dc0/namespaceCore_1_1tuning__helpers.html", [
-      [ "Push_Marker_to_Center_Freq", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a621f66edd78237d57270f435d4e0a575", null ],
-      [ "Push_Marker_to_Start_Stop_Freq", "d0/dc0/namespaceCore_1_1tuning__helpers.html#acbe94d4964477698e8d6ecc64a354aa4", null ],
-      [ "CENTER_FREQ_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a8e56583ca8e968bf3262185d3146cd07", null ],
-      [ "HZ_TO_MHZ", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a5bd43e770140d1f3b5595667e3c5d814", null ],
-      [ "SPAN_FREQ_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#aabace4c912bf17d14a36cc72567814b5", null ],
-      [ "START_FREQ_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a56acba5484943dc801eeb3ba3e7dc9fc", null ],
-      [ "START_STOP_TRIGGER_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a0338fa42436e0fe37c5ee4649c9746f5", null ],
-      [ "STOP_FREQ_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#aea1a7c83e6fda082d213273faceeaed3", null ],
-      [ "TRIGGER_TOPIC", "d0/dc0/namespaceCore_1_1tuning__helpers.html#a44d9c1338ba496a1efcfe330e4fc7b40", null ]
-    ] ],
-    [ "ui_geometry_math", "de/dc2/namespaceCore_1_1ui__geometry__math.html", "de/dc2/namespaceCore_1_1ui__geometry__math" ],
+    [ "ui_components", "d2/d71/namespaceCore_1_1ui__components.html", "d2/d71/namespaceCore_1_1ui__components" ],
     [ "ui_mixin", "dc/d7d/namespaceCore_1_1ui__mixin.html", "dc/d7d/namespaceCore_1_1ui__mixin" ],
-    [ "ui_window", "dc/de2/namespaceCore_1_1ui__window.html", "dc/de2/namespaceCore_1_1ui__window" ],
     [ "update_splink", "d3/dab/namespaceCore_1_1update__splink.html", [
       [ "update_splink", "d3/dab/namespaceCore_1_1update__splink.html#afaa9b12ffdf5e77eacf4dfadefedcc22", null ],
       [ "splinks", "d3/dab/namespaceCore_1_1update__splink.html#a98dc9aadcf43dbe4a268bb79615f7cd8", null ]
@@ -366,8 +395,6 @@ var namespaceCore =
     [ "visa_timeout_handler", "d8/d80/namespaceCore_1_1visa__timeout__handler.html", [
       [ "visa_timeout_handler", "d8/d80/namespaceCore_1_1visa__timeout__handler.html#ae8c7d2b4f3e785ed059a9a1252867703", null ]
     ] ],
-    [ "widget_schema_normalizer", "d7/d90/namespaceCore_1_1widget__schema__normalizer.html", "d7/d90/namespaceCore_1_1widget__schema__normalizer" ],
-    [ "window", "de/d6d/namespaceCore_1_1window.html", "de/d6d/namespaceCore_1_1window" ],
     [ "work_stealing_pool", "da/d9c/namespaceCore_1_1work__stealing__pool.html", "da/d9c/namespaceCore_1_1work__stealing__pool" ],
     [ "Workers", "d2/dc7/namespaceCore_1_1Workers.html", "d2/dc7/namespaceCore_1_1Workers" ],
     [ "__all__", "d3/d7a/namespaceCore.html#a529902ea8577240e4b52b99fa9bda1af", null ]

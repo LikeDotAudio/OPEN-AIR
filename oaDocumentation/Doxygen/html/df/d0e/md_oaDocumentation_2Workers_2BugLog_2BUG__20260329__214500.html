@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('df/d0e/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_214500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1960"></a> </p>
-<h1><a class="anchor" id="autotoc_md1961"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2409"></a> </p>
+<h1><a class="anchor" id="autotoc_md2410"></a>
 Issue</h1>
 <p>SNMP state file was not being updated with current values from the MQTT state cache. While the bridge was "running", it only reflected the initial OID map but never synced actual data changes.</p>
-<h1><a class="anchor" id="autotoc_md1962"></a>
+<h1><a class="anchor" id="autotoc_md2411"></a>
 Root Cause</h1>
 <p>The <code>SnmpStatePersister</code> background thread was iterating over the <code>OidMapConverter.oid_map</code> but never calling <code>build_oid_map()</code> to refresh it. Furthermore, <code>build_oid_map()</code> contained a redundant internal lock that could have caused performance bottlenecks or deadlocks when called from an already-locked context.</p>
-<h1><a class="anchor" id="autotoc_md1963"></a>
+<h1><a class="anchor" id="autotoc_md2412"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Sync Trigger</b>: Modified <code>SnmpStatePersister._persistence_loop</code> to explicitly call <code>oid_map_converter.build_oid_map()</code> inside its state lock.</li>
 <li><b>Snapshot Consistency</b>: Updated the loop to take a single <code>cache_snapshot</code> and pass it to the converter, ensuring that the OID mapping and value extraction are performed against the same point-in-time data.</li>
 <li><b>Lock Optimization</b>: Refactored <code>OidMapConverter.build_oid_map()</code> to remove redundant internal lock acquisition, delegating thread safety to the orchestrator.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1964"></a>
+<h1><a class="anchor" id="autotoc_md2413"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that the <code>_persistence_loop</code> now correctly refreshes the OID map.</li>

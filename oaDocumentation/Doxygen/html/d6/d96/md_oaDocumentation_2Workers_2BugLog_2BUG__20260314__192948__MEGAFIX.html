@@ -93,35 +93,35 @@ $(document).ready(function(){initNavTree('d6/d96/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Comprehensive GUI Layout &amp; Builder System Overhaul</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1746"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2195"></a></p><ul>
 <li><b>ID</b>: 20260314_192948</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
-<li><b>COMPONENT</b>: <code>managers/Display/loader/gui_from_json</code>, <code>managers/Display/builder/async_grid_renderer</code>, <code>workers/builder/builder</code></li>
+<li><b>COMPONENT</b>: <code>managers/Display/loader/json_gui_host</code>, <code>managers/Display/builder/async_grid_renderer</code>, <code>workers/builder/builder</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1747"></a>
+<h1><a class="anchor" id="autotoc_md2196"></a>
 Issue</h1>
 <p>A series of related bugs in the GUI loading and rendering pipeline were causing a cascade of failures, including partially rendered UIs, incorrect layouts, non-expanding containers, and non-functional debug features. The user reported that top-level GUI containers (<code>OcaBin</code>) were not filling the screen, and that the debug "structure boxes" were not appearing.</p>
-<h1><a class="anchor" id="autotoc_md1748"></a>
+<h1><a class="anchor" id="autotoc_md2197"></a>
 Root Cause Analysis</h1>
 <p>The investigation revealed a chain of interacting bugs across the entire GUI builder stack:</p>
 <ol type="1">
-<li><b>Top-Level Container Sizing Failure</b>: The <code>UniversalGuiLoader</code> class, responsible for loading JSON-based GUIs, was not configured to allow its child widget (the <code>DynamicGuiBuilder</code>) to expand. It was missing the necessary <code>grid_rowconfigure</code> and <code>grid_columnconfigure</code> calls, causing its child to be placed in a fixed-size cell and resulting in the "half-rendered screen" effect.</li>
-<li><b>Inconsistent Geometry <a class="el" href="../../d4/d7f/namespaceManagers.html">Managers</a></b>: The <code>DynamicGuiBuilder</code> used <code>.pack()</code> to place its main content frame, while the <code>AsyncGridRenderer</code> used <code>.grid()</code> to place widgets inside it. This mixing of geometry managers is notoriously problematic in Tkinter and leads to unpredictable sizing behavior.</li>
-<li><b>Missing Debug Feature</b>: The <code>AsyncGridRenderer</code>'s logic for processing <code>OcaBlock</code> widgets had no implementation for drawing the visual debug outlines, even though the feature was exposed in the UI.</li>
+<li><b>Top-Level Container Sizing Failure</b>: The <code>JsonGuiHost</code> class, responsible for loading JSON-based GUIs, was not configured to allow its child widget (the <code>LoaderOrchestrator</code>) to expand. It was missing the necessary <code>grid_rowconfigure</code> and <code>grid_columnconfigure</code> calls, causing its child to be placed in a fixed-size cell and resulting in the "half-rendered screen" effect.</li>
+<li><b>Inconsistent Geometry <a class="el" href="../../d4/d7f/namespaceManagers.html">Managers</a></b>: The <code>LoaderOrchestrator</code> used <code>.pack()</code> to place its main content frame, while the <code>BatchLayoutEngine</code> used <code>.grid()</code> to place widgets inside it. This mixing of geometry managers is notoriously problematic in Tkinter and leads to unpredictable sizing behavior.</li>
+<li><b>Missing Debug Feature</b>: The <code>BatchLayoutEngine</code>'s logic for processing <code>OcaBlock</code> widgets had no implementation for drawing the visual debug outlines, even though the feature was exposed in the UI.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1749"></a>
+<h1><a class="anchor" id="autotoc_md2198"></a>
 Resolution</h1>
 <p>A comprehensive, multi-part fix was applied across the GUI stack to resolve these issues and harden the rendering pipeline.</p>
 <ol type="1">
-<li>**<code>DynamicGuiBuilder</code> Flexibility (<code>workers/builder/builder.py</code>)**:<ul>
+<li>**<code>LoaderOrchestrator</code> Flexibility (<code>workers/builder/builder.py</code>)**:<ul>
 <li>A <code>use_grid</code> parameter was added to the <code>__init__</code> method. When <code>True</code>, this prevents the builder from automatically calling <code>.pack()</code>, allowing the parent class to manage its geometry.</li>
 <li>The builder's internal layout was modified to use <code>.grid()</code> exclusively, eliminating the conflict between <code>.pack()</code> and <code>.grid()</code>.</li>
 </ul>
 </li>
-<li>**<code>UniversalGuiLoader</code> Fix (<code>managers/Display/loader/gui_from_json.py</code>)**:<ul>
+<li>**<code>JsonGuiHost</code> Fix (<code>managers/Display/loader/json_gui_host.py</code>)**:<ul>
 <li>The loader now configures its own grid with <code>self.grid_rowconfigure(0, weight=1)</code> and <code>self.grid_columnconfigure(0, weight=1)</code>.</li>
-<li>It now instantiates <code>DynamicGuiBuilder</code> with <code>use_grid=True</code> and places it correctly using <code>.grid(row=0, column=0, sticky="nsew")</code>. This ensures the top-level GUI container expands to fill its allocated pane.</li>
+<li>It now instantiates <code>LoaderOrchestrator</code> with <code>use_grid=True</code> and places it correctly using <code>.grid(row=0, column=0, sticky="nsew")</code>. This ensures the top-level GUI container expands to fill its allocated pane.</li>
 </ul>
 </li>
 <li>**Debug "Structure Box" Fix (<code>managers/Display/builder/async_grid_renderer.py</code>)**:<ul>
@@ -130,7 +130,7 @@ Resolution</h1>
 </li>
 </ol>
 <p>This series of fixes ensures that the entire chain, from loading a JSON file to rendering its deepest nested widgets, uses a consistent geometry management system and correctly propagates size requirements, while also restoring a key debug feature.</p>
-<h1><a class="anchor" id="autotoc_md1750"></a>
+<h1><a class="anchor" id="autotoc_md2199"></a>
 Verification</h1>
 <p>The application GUI now renders completely and correctly. Top-level <code>OcaBin</code> containers expand to fill their panes. Complex nested layouts with multiple rows and columns expand both vertically and horizontally. The "Show Structure" debug feature now correctly draws red outlines around <code>OcaBlock</code> containers. </p>
 </div></div><!-- contents -->

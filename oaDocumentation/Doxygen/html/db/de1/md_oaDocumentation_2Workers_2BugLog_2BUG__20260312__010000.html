@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('db/de1/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260312_010000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1651"></a> </p>
-<h1><a class="anchor" id="autotoc_md1652"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2100"></a> </p>
+<h1><a class="anchor" id="autotoc_md2101"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p><b>User Analysis</b>: "The network reflection is incredibly stubborn. The partitions are still eager to echo states back and forth because they don't have a concept of "ownership" over a parameter during an active physical or visual movement." <b>Problem</b>: Persistent infinite loops (ping-pong) between CORE and UI partitions during active user interaction and initial cache restoration.</p>
-<h1><a class="anchor" id="autotoc_md1653"></a>
+<h1><a class="anchor" id="autotoc_md2102"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Trust-based Suppresion</b>: The system relied on the network layer to suppress loops, but multiple instances independently responding to the same "external" state change created an echo chamber.</li>
 <li><b>No Interaction Context</b>: Widgets had no way to signal they were "busy" or "owning" a value, causing them to fight the network (motor fighting/visual stutter).</li>
 <li><b>Boot Race</b>: Initial state restoration flooded the network, causing both partitions to start competing settling timers.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1654"></a>
+<h1><a class="anchor" id="autotoc_md2103"></a>
 &lt;strong&gt;Resolution: Interaction Lock Protocol&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Widget Mutex</b>: Injected <code>is_locked</code> boolean into <code>Fader</code>, <code>Knob</code>, <code>Selector</code>, and <code>Toggle</code> widgets.</li>
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('db/de1/md_oaDocumentation_2Workers_2Bu
 <li><b>Broker Blockade</b>: Updated <code>ProtocolRouter</code> to track locked parameters. If a parameter is currently receiving a flood of <code>SPLICE_ACTION</code> (original movements), it rejects all <code>LINK_FEEDBACK</code> reflections for that topic until it settles.</li>
 <li><b>BOOT Tagging</b>: Labeled initial DISK loads with a <code>boot: True</code> tag, allowing silent acceptance by other partitions without starting new settling timers.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1655"></a>
+<h1><a class="anchor" id="autotoc_md2104"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Interactive Stability</b>: Verified that moving a GUI fader rapidly no longer causes visual "stutter" from network echo.</li>

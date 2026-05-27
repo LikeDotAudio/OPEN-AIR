@@ -16,7 +16,7 @@ app_constants = Config.get_instance()
 
 class HeartbeatGenerator:
     """
-    Publishes a 1Hz asynchronous pulse to 'OPEN-AIR/SYSTEM/HB'.
+    Publishes a 1Hz asynchronous pulse to 'OpenAir/SYSTEM/HB'.
     Used by protocol modules for link-state verification and watchdog safety.
     """
     _instance = None
@@ -30,7 +30,7 @@ class HeartbeatGenerator:
         self.interval = 1.0 # 1Hz
         self._running = False
         self._thread = None
-        self.topic = "OPEN-AIR/SYSTEM/HB"
+        self.topic = "OpenAir/SYSTEM/HB"
 
     @classmethod
     def get_instance(cls, mqtt_manager=None):

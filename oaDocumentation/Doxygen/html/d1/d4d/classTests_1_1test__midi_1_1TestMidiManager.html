@@ -171,12 +171,11 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   34</span>        self.midi.ports = MagicMock()</div>
 <div class="line"><span class="lineno">   35</span>        self.midi.mapper = MagicMock()</div>
 <div class="line"><span class="lineno">   36</span>        self.midi.lock_manager = MagicMock()</div>
-<div class="line"><span class="lineno">   37</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lock_manager.is_locked.return_value</a> = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">   37</span>        self.midi.lock_manager.is_locked.return_value = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>        <span class="comment"># Set running state manually for deterministic test behavior</span></div>
 <div class="line"><span class="lineno">   40</span>        self.midi._running = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   41</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -228,17 +227,17 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   80</span>        <span class="stringliteral">&quot;&quot;&quot;CHECK: Verify messages originating from MIDI are NOT echoed back to MIDI.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   81</span>        <span class="comment"># BUILD</span></div>
 <div class="line"><span class="lineno">   82</span>        mock_out = MagicMock()</div>
-<div class="line"><span class="lineno">   83</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.name</a> = <span class="stringliteral">&quot;TestOut&quot;</span></div>
-<div class="line"><span class="lineno">   84</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.outports</a> = [mock_out]</div>
+<div class="line"><span class="lineno">   83</span>        mock_out.name = <span class="stringliteral">&quot;TestOut&quot;</span></div>
+<div class="line"><span class="lineno">   84</span>        self.midi.ports.outports = [mock_out]</div>
 <div class="line"><span class="lineno">   85</span> </div>
 <div class="line"><span class="lineno">   86</span>        <span class="comment"># OPERATE: Data that originally came FROM MIDI</span></div>
 <div class="line"><span class="lineno">   87</span>        self.midi.publish(<span class="stringliteral">&quot;OPEN-AIR/MIDI/Note/60&quot;</span>, {<span class="stringliteral">&quot;value&quot;</span>: 0.5}, {<span class="stringliteral">&quot;origin_source&quot;</span>: <span class="stringliteral">&quot;MIDI&quot;</span>})</div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>        <span class="comment"># CHECK: Echo suppression</span></div>
-<div class="line"><span class="lineno">   90</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.assert_not_called</a>()</div>
+<div class="line"><span class="lineno">   90</span>        mock_out.send.assert_not_called()</div>
 <div class="line"><span class="lineno">   91</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, and <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>.</p>
 
 </div>
 </div>
@@ -263,19 +262,19 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   65</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Simulate Hub broadcast (Hub -&gt; Spoke).&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   66</span>        <span class="comment"># BUILD</span></div>
 <div class="line"><span class="lineno">   67</span>        mock_out = MagicMock()</div>
-<div class="line"><span class="lineno">   68</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.name</a> = <span class="stringliteral">&quot;TestOut&quot;</span></div>
-<div class="line"><span class="lineno">   69</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.outports</a> = [mock_out]</div>
-<div class="line"><span class="lineno">   70</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mapper.topic_to_midi.return_value</a> = MagicMock() <span class="comment"># Mocked MIDI message</span></div>
+<div class="line"><span class="lineno">   68</span>        mock_out.name = <span class="stringliteral">&quot;TestOut&quot;</span></div>
+<div class="line"><span class="lineno">   69</span>        self.midi.ports.outports = [mock_out]</div>
+<div class="line"><span class="lineno">   70</span>        self.midi.mapper.topic_to_midi.return_value = MagicMock() <span class="comment"># Mocked MIDI message</span></div>
 <div class="line"><span class="lineno">   71</span> </div>
 <div class="line"><span class="lineno">   72</span>        <span class="comment"># OPERATE: Data from an external source (e.g., GUI)</span></div>
 <div class="line"><span class="lineno">   73</span>        self.midi.publish(<span class="stringliteral">&quot;OPEN-AIR/MIDI/Note/60&quot;</span>, {<span class="stringliteral">&quot;value&quot;</span>: 1.0}, {<span class="stringliteral">&quot;origin_source&quot;</span>: <span class="stringliteral">&quot;GUI&quot;</span>})</div>
 <div class="line"><span class="lineno">   74</span> </div>
 <div class="line"><span class="lineno">   75</span>        <span class="comment"># CHECK: Transmitted to hardware Spoke</span></div>
-<div class="line"><span class="lineno">   76</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mapper.topic_to_midi.assert_called</a>()</div>
-<div class="line"><span class="lineno">   77</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.assert_called</a>()</div>
+<div class="line"><span class="lineno">   76</span>        self.midi.mapper.topic_to_midi.assert_called()</div>
+<div class="line"><span class="lineno">   77</span>        mock_out.send.assert_called()</div>
 <div class="line"><span class="lineno">   78</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, and <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>.</p>
 
 </div>
 </div>
@@ -299,22 +298,22 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="fragment"><div class="line"><span class="lineno">   47</span>    <span class="keyword">def </span>test_spoke_to_hub_ingest(self):</div>
 <div class="line"><span class="lineno">   48</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Simulate incoming MIDI data (Spoke -&gt; Hub).&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   49</span>        <span class="comment"># BUILD</span></div>
-<div class="line"><span class="lineno">   50</span>        test_port = MagicMock(); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_port.name</a> = <span class="stringliteral">&quot;TestPort&quot;</span></div>
-<div class="line"><span class="lineno">   51</span>        mock_message = MagicMock(); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_message.type</a> = <span class="stringliteral">&quot;note_on&quot;</span>; <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_message.channel</a> = 0; <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_message.note</a> = 60; <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_message.velocity</a> = 127</div>
-<div class="line"><span class="lineno">   52</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_port.iter_pending.return_value</a> = [mock_message]</div>
+<div class="line"><span class="lineno">   50</span>        test_port = MagicMock(); test_port.name = <span class="stringliteral">&quot;TestPort&quot;</span></div>
+<div class="line"><span class="lineno">   51</span>        mock_message = MagicMock(); mock_message.type = <span class="stringliteral">&quot;note_on&quot;</span>; mock_message.channel = 0; mock_message.note = 60; mock_message.velocity = 127</div>
+<div class="line"><span class="lineno">   52</span>        test_port.iter_pending.return_value = [mock_message]</div>
 <div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mapper.midi_to_topic.return_value</a> = (<span class="stringliteral">&quot;OPEN-AIR/MIDI/Note/60&quot;</span>, 127)</div>
+<div class="line"><span class="lineno">   54</span>        self.midi.mapper.midi_to_topic.return_value = (<span class="stringliteral">&quot;OPEN-AIR/MIDI/Note/60&quot;</span>, 127)</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>        <span class="comment"># OPERATE: Simulate one iteration of the listen loop</span></div>
 <div class="line"><span class="lineno">   57</span>        self.midi._midi_listen_loop(test_port, _one_shot=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>        <span class="comment"># CHECK: Hub (StateCache) was updated with origin tagging</span></div>
-<div class="line"><span class="lineno">   60</span>        self.mock_state_cache.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_external_update.assert_called</a>()</div>
-<div class="line"><span class="lineno">   61</span>        args, kwargs = self.mock_state_cache.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_external_update.call_args</a></div>
+<div class="line"><span class="lineno">   60</span>        self.mock_state_cache.handle_external_update.assert_called()</div>
+<div class="line"><span class="lineno">   61</span>        args, kwargs = self.mock_state_cache.handle_external_update.call_args</div>
 <div class="line"><span class="lineno">   62</span>        self.assertEqual(kwargs[<span class="stringliteral">&quot;metadata&quot;</span>][<span class="stringliteral">&quot;origin_source&quot;</span>], <span class="stringliteral">&quot;MIDI&quot;</span>)</div>
 <div class="line"><span class="lineno">   63</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, <a class="el" href="../../dd/ddf/test__aes70__manager_8py_source.html#l00023">Tests.test_aes70_manager.TestAES70Manager.mock_state_cache</a>, <a class="el" href="../../d0/d5b/test__ember__manager_8py_source.html#l00023">Tests.test_ember_manager.TestEmberManager.mock_state_cache</a>, <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00023">Tests.test_midi.TestMidiManager.mock_state_cache</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00023">Tests.test_osc.TestOSCManager.mock_state_cache</a>, <a class="el" href="../../db/dad/test__rest_8py_source.html#l00033">Tests.test_rest.TestRESTProtocol.mock_state_cache</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, <a class="el" href="../../dd/ddf/test__aes70__manager_8py_source.html#l00023">Tests.test_aes70_manager.TestAES70Manager.mock_state_cache</a>, <a class="el" href="../../d0/d5b/test__ember__manager_8py_source.html#l00023">Tests.test_ember_manager.TestEmberManager.mock_state_cache</a>, <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00023">Tests.test_midi.TestMidiManager.mock_state_cache</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00023">Tests.test_osc.TestOSCManager.mock_state_cache</a>, and <a class="el" href="../../db/dad/test__rest_8py_source.html#l00033">Tests.test_rest.TestRESTProtocol.mock_state_cache</a>.</p>
 
 </div>
 </div>
@@ -338,20 +337,20 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="fragment"><div class="line"><span class="lineno">   92</span>    <span class="keyword">def </span>test_telemetry_broadcast(self):</div>
 <div class="line"><span class="lineno">   93</span>        <span class="stringliteral">&quot;&quot;&quot;CHECK: Verify periodic status broadcast.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   94</span>        <span class="comment"># BUILD</span></div>
-<div class="line"><span class="lineno">   95</span>        mock_in = MagicMock(); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_in.name</a> = <span class="stringliteral">&quot;TestIn&quot;</span></div>
-<div class="line"><span class="lineno">   96</span>        mock_out = MagicMock(); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.name</a> = <span class="stringliteral">&quot;TestOut&quot;</span></div>
-<div class="line"><span class="lineno">   97</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.inports</a> = [mock_in]</div>
-<div class="line"><span class="lineno">   98</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.outports</a> = [mock_out]</div>
+<div class="line"><span class="lineno">   95</span>        mock_in = MagicMock(); mock_in.name = <span class="stringliteral">&quot;TestIn&quot;</span></div>
+<div class="line"><span class="lineno">   96</span>        mock_out = MagicMock(); mock_out.name = <span class="stringliteral">&quot;TestOut&quot;</span></div>
+<div class="line"><span class="lineno">   97</span>        self.midi.ports.inports = [mock_in]</div>
+<div class="line"><span class="lineno">   98</span>        self.midi.ports.outports = [mock_out]</div>
 <div class="line"><span class="lineno">   99</span> </div>
 <div class="line"><span class="lineno">  100</span>        <span class="comment"># OPERATE</span></div>
 <div class="line"><span class="lineno">  101</span>        self.midi._broadcast_status()</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span>        <span class="comment"># CHECK: Verify state cache notified</span></div>
-<div class="line"><span class="lineno">  104</span>        calls = self.mock_state_cache.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_external_update.call_args_list</a></div>
-<div class="line"><span class="lineno">  105</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(<span class="stringliteral">&quot;ActiveInputs&quot;</span> <span class="keywordflow">in</span> c[0][0] <span class="keywordflow">for</span> c <span class="keywordflow">in</span> calls))</div>
+<div class="line"><span class="lineno">  104</span>        calls = self.mock_state_cache.handle_external_update.call_args_list</div>
+<div class="line"><span class="lineno">  105</span>        self.assertTrue(any(<span class="stringliteral">&quot;ActiveInputs&quot;</span> <span class="keywordflow">in</span> c[0][0] <span class="keywordflow">for</span> c <span class="keywordflow">in</span> calls))</div>
 <div class="line"><span class="lineno">  106</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, <a class="el" href="../../dd/ddf/test__aes70__manager_8py_source.html#l00023">Tests.test_aes70_manager.TestAES70Manager.mock_state_cache</a>, <a class="el" href="../../d0/d5b/test__ember__manager_8py_source.html#l00023">Tests.test_ember_manager.TestEmberManager.mock_state_cache</a>, <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00023">Tests.test_midi.TestMidiManager.mock_state_cache</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00023">Tests.test_osc.TestOSCManager.mock_state_cache</a>, <a class="el" href="../../db/dad/test__rest_8py_source.html#l00033">Tests.test_rest.TestRESTProtocol.mock_state_cache</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, <a class="el" href="../../dd/ddf/test__aes70__manager_8py_source.html#l00023">Tests.test_aes70_manager.TestAES70Manager.mock_state_cache</a>, <a class="el" href="../../d0/d5b/test__ember__manager_8py_source.html#l00023">Tests.test_ember_manager.TestEmberManager.mock_state_cache</a>, <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00023">Tests.test_midi.TestMidiManager.mock_state_cache</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00023">Tests.test_osc.TestOSCManager.mock_state_cache</a>, and <a class="el" href="../../db/dad/test__rest_8py_source.html#l00033">Tests.test_rest.TestRESTProtocol.mock_state_cache</a>.</p>
 
 </div>
 </div>

@@ -93,32 +93,32 @@ $(document).ready(function(){initNavTree('da/de5/md_oaComProtocols_2oaComSMPTE21
   <div class="headertitle"><div class="title">🏷️ SMPTE2138 Bridge (ST 2138)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md514"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md515"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md779"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md780"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md516"></a>
+<h2><a class="anchor" id="autotoc_md781"></a>
 File Level</h2>
 <p>oaComProtocols.oaComSMPTE2138/Managers/smpte2138_manager.py</p>
 <p>This module implements a decoupled, standalone communication bridge that interfaces the internal OPEN-AIR MQTT action namespace with the external SMPTE ST 2138 (SMPTE2138) ecosystem.</p>
 <p>Author: Anthony Peter Kuzub Version 20260330.1400.1</p>
-<h2><a class="anchor" id="autotoc_md517"></a>
+<h2><a class="anchor" id="autotoc_md782"></a>
 Partitioned Architecture</h2>
 <p>The <code>oaComProtocols.oaComSMPTE2138</code> module operates as a <b>Destination</b> partition. It consumes internal "intent-based" actions and transforms them into standardized, binary-encoded state updates for professional media clients.</p>
-<h1><a class="anchor" id="autotoc_md518"></a>
+<h1><a class="anchor" id="autotoc_md783"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li><b>MQTT Dependency</b>: Requires an active connection to the internal broker.</li>
 <li><b>Protobuf 3.0</b>: Outbound messages are binary-encoded using ST 2138 normative schemata.</li>
 <li><b>Namespace Isolation</b>: External traffic is strictly contained within the <code>st2138/</code> root to prevent interference with internal human-readable telemetry.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md519"></a>
+<h1><a class="anchor" id="autotoc_md784"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md520"></a>
+<h2><a class="anchor" id="autotoc_md785"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md521"></a>
+<h3><a class="anchor" id="autotoc_md786"></a>
 &lt;tt&gt;class SMPTE2138Manager&lt;/tt&gt;</h3>
 <p>Manages the translation and distribution of SMPTE2138-compliant messages.</p>
-<h4><a class="anchor" id="autotoc_md522"></a>
+<h4><a class="anchor" id="autotoc_md787"></a>
 &lt;tt&gt;__init__(self, mqtt_connection, subscriber_router)&lt;/tt&gt;</h4>
 <p>Initializes the bridge and registers internal action subscriptions.</p>
 <p><b>Parameters:</b></p><ul>
@@ -132,7 +132,7 @@ Classes</h2>
 <li>Registers callbacks for <code>oa/action/#</code>.</li>
 <li>Thread-safe for multi-publisher environments.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md523"></a>
+<h4><a class="anchor" id="autotoc_md788"></a>
 &lt;tt&gt;_on_internal_action(self, msg)&lt;/tt&gt;</h4>
 <p>Processes incoming internal actions and triggers translation.</p>
 <p><b>Parameters:</b></p><ul>
@@ -141,7 +141,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>None.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md524"></a>
+<h4><a class="anchor" id="autotoc_md789"></a>
 &lt;tt&gt;_publish_parameter(self, oid, value)&lt;/tt&gt;</h4>
 <p>Encodes and publishes a FLOAT32 parameter update.</p>
 <p><b>Parameters:</b></p><ul>
@@ -151,7 +151,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>None.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md525"></a>
+<h1><a class="anchor" id="autotoc_md790"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <p>The bridge utilizes a static OID mapping to bridge the flexible internal topic structure with the rigid SMPTE2138 requirement for numeric or semantic identifiers. This allows the internal platform to evolve without breaking compliance with external media standards. </p>
 </div></div><!-- contents -->

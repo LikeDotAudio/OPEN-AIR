@@ -20,7 +20,7 @@ var searchData=
   ['2026_2004_2003_2000_3a02_3a00_17',['Bug Report - 2026-04-03 00:02:00',['../d6/dd8/md_oaDocumentation_2BugLog_2BUG__20260403__000200.html',1,'']]],
   ['2026_2004_2003_2000_3a07_3a00_18',['Bug Report - 2026-04-03 00:07:00',['../d6/d8e/md_oaDocumentation_2BugLog_2BUG__20260403__000700.html',1,'']]],
   ['2026_2004_2003_2000_3a15_3a00_19',['Bug Report - 2026-04-03 00:15:00',['../da/dc0/md_oaDocumentation_2BugLog_2BUG__20260403__001500.html',1,'']]],
-  ['2026_2004_2026_20',['[V3.3.8] - 2026-04-26',['../d7/d04/md_oaDocumentation_2Workers_2ChangeLog_2CHANGELOG.html',1,'']]],
+  ['2026_2005_2005_20',['2026 05 05',['../de/d16/md_oaDocumentation_2ChangeLog_2CHANGELOG__202604.html',1,'[V3.3.9] - 2026-05-05'],['../d1/d5e/md_oaDocumentation_2BugLog_2BUG__20260505__130000.html',1,'BUG LOG: Naming Refactor &amp; API Hardening (2026-05-05)'],['../dc/d9c/md_oaDocumentation_2BugLog_2BUG__20260505__120000.html',1,'BUG LOG: Performance &amp; Resource Optimization (2026-05-05)']]],
   ['20260403_5f002830_21',['BUG LOG: 20260403_002830',['../d0/d7f/md_oaDocumentation_2BugLog_2BUG__20260403__002830.html',1,'']]],
   ['20260403_5f003400_22',['BUG LOG: 20260403_003400',['../d2/d55/md_oaDocumentation_2BugLog_2BUG__20260403__003400.html',1,'']]],
   ['20260403_5f004000_23',['BUG LOG: 20260403_004000',['../db/dd9/md_oaDocumentation_2BugLog_2BUG__20260403__04000.html',1,'']]],
@@ -52,6 +52,5 @@ var searchData=
   ['23_3a30_3a00_49',['Bug Report - 2026-04-02 23:30:00',['../db/df6/md_oaDocumentation_2BugLog_2BUG__20260402__233000.html',1,'']]],
   ['23_3a47_3a00_50',['Bug Report - 2026-04-02 23:47:00',['../dd/d31/md_oaDocumentation_2BugLog_2BUG__20260402__234700.html',1,'']]],
   ['23_3a51_3a00_51',['Bug Report - 2026-04-02 23:51:00',['../d2/d00/md_oaDocumentation_2BugLog_2BUG__20260402__235100.html',1,'']]],
-  ['23_3a52_3a00_52',['Bug Report - 2026-04-02 23:52:00',['../d9/d6c/md_oaDocumentation_2BugLog_2BUG__20260402__235200.html',1,'']]],
-  ['26_53',['[V3.3.8] - 2026-04-26',['../d7/d04/md_oaDocumentation_2Workers_2ChangeLog_2CHANGELOG.html',1,'']]]
+  ['23_3a52_3a00_52',['Bug Report - 2026-04-02 23:52:00',['../d9/d6c/md_oaDocumentation_2BugLog_2BUG__20260402__235200.html',1,'']]]
 ];

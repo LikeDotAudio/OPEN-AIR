@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('df/dae/namespaceaes70_1_1ocp1_1_1enum.
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acaf7efc294d8ff8ebfa6ff6649f7d1b3" id="r_acaf7efc294d8ff8ebfa6ff6649f7d1b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d60/classaes70_1_1ocp1_1_1createtype_1_1Type.html">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dae/namespaceaes70_1_1ocp1_1_1enum.html#acaf7efc294d8ff8ebfa6ff6649f7d1b3">Enum</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type</a>, <a class="el" href="../../d0/d60/classaes70_1_1ocp1_1_1createtype_1_1Type.html">Type</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42221ae13c427234b08a21d229eb2ad9">base</a>)</td></tr>
+<tr class="memitem:acaf7efc294d8ff8ebfa6ff6649f7d1b3" id="r_acaf7efc294d8ff8ebfa6ff6649f7d1b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d60/classaes70_1_1ocp1_1_1createtype_1_1Type.html">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dae/namespaceaes70_1_1ocp1_1_1enum.html#acaf7efc294d8ff8ebfa6ff6649f7d1b3">Enum</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> data_type, <a class="el" href="../../d0/d60/classaes70_1_1ocp1_1_1createtype_1_1Type.html">Type</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42221ae13c427234b08a21d229eb2ad9">base</a>)</td></tr>
 <tr class="separator:acaf7efc294d8ff8ebfa6ff6649f7d1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -130,37 +130,36 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/d94/ocp1_2enum_8py_source.html#l00006">6</a> of file <a class="el" href="../../d6/d94/ocp1_2enum_8py_source.html">enum.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    6</span><span class="keyword">def </span>Enum(data_type: type, base: Type) -&gt; Type:</div>
-<div class="line"><span class="lineno">    7</span>    encode_to = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base.encode_to</a></div>
-<div class="line"><span class="lineno">    8</span>    decode_from = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base.decode_from</a></div>
+<div class="line"><span class="lineno">    7</span>    encode_to = base.encode_to</div>
+<div class="line"><span class="lineno">    8</span>    decode_from = base.decode_from</div>
 <div class="line"><span class="lineno">    9</span> </div>
-<div class="line"><span class="lineno">   10</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encode_to_wrapper</a>(data: bytearray, pos: int, value: Any) -&gt; int:</div>
-<div class="line"><span class="lineno">   11</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, data_type):</div>
-<div class="line"><span class="lineno">   12</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.value</a></div>
-<div class="line"><span class="lineno">   13</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, str):</div>
-<div class="line"><span class="lineno">   14</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type.getValue</a>(value)</div>
-<div class="line"><span class="lineno">   15</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (int, float)):</div>
-<div class="line"><span class="lineno">   16</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type.getName</a>(value)</div>
+<div class="line"><span class="lineno">   10</span>    <span class="keyword">def </span>encode_to_wrapper(data: bytearray, pos: int, value: Any) -&gt; int:</div>
+<div class="line"><span class="lineno">   11</span>        <span class="keywordflow">if</span> isinstance(value, data_type):</div>
+<div class="line"><span class="lineno">   12</span>            value = value.value</div>
+<div class="line"><span class="lineno">   13</span>        <span class="keywordflow">elif</span> isinstance(value, str):</div>
+<div class="line"><span class="lineno">   14</span>            value = data_type.getValue(value)</div>
+<div class="line"><span class="lineno">   15</span>        <span class="keywordflow">elif</span> isinstance(value, (int, float)):</div>
+<div class="line"><span class="lineno">   16</span>            data_type.getName(value)</div>
 <div class="line"><span class="lineno">   17</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   18</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Unsupported type.&#39;</span>)</div>
+<div class="line"><span class="lineno">   18</span>            <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Unsupported type.&#39;</span>)</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">return</span> encode_to(data, pos, value)</div>
 <div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decode_wrapper</a>(data: bytearray, pos: int):</div>
+<div class="line"><span class="lineno">   21</span>    <span class="keyword">def </span>decode_wrapper(data: bytearray, pos: int):</div>
 <div class="line"><span class="lineno">   22</span>        value = decode_from(data, pos)</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type</a>(value[1])</div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> data_type(value[1])</div>
 <div class="line"><span class="lineno">   24</span> </div>
 <div class="line"><span class="lineno">   25</span>    type_def = Type(</div>
 <div class="line"><span class="lineno">   26</span>        is_constant_length =<span class="keyword">True</span>,</div>
-<div class="line"><span class="lineno">   27</span>        encoded_length = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base.encoded_length</a>,</div>
+<div class="line"><span class="lineno">   27</span>        encoded_length = base.encoded_length,</div>
 <div class="line"><span class="lineno">   28</span>        encode_to = encode_to_wrapper,</div>
 <div class="line"><span class="lineno">   29</span>        decode_from = decode_wrapper,</div>
 <div class="line"><span class="lineno">   30</span>    )</div>
 <div class="line"><span class="lineno">   31</span>    type_obj = create_type(type_def)</div>
 <div class="line"><span class="lineno">   32</span> </div>
-<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">for</span> name, value <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type.values</a>().items():</div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setattr</a>(type_obj, name, value)</div>
+<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">for</span> name, value <span class="keywordflow">in</span> data_type.values().items():</div>
+<div class="line"><span class="lineno">   34</span>        setattr(type_obj, name, value)</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="keywordflow">return</span> type_obj</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

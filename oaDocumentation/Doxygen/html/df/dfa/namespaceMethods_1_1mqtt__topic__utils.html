@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('df/dfa/namespaceMethods_1_1mqtt__topic
 Functions</h2></td></tr>
 <tr class="memitem:a5624c2bda8517f048d853b8c8fb292d2" id="r_a5624c2bda8517f048d853b8c8fb292d2"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dfa/namespaceMethods_1_1mqtt__topic__utils.html#a5624c2bda8517f048d853b8c8fb292d2">generate_base_topic</a> (str module_name)</td></tr>
 <tr class="separator:a5624c2bda8517f048d853b8c8fb292d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a974968a8a2eea4cb0577e152330f37e0" id="r_a974968a8a2eea4cb0577e152330f37e0"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dfa/namespaceMethods_1_1mqtt__topic__utils.html#a974968a8a2eea4cb0577e152330f37e0">generate_topic_path_from_filepath</a> (Path <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path</a>, Path project_root)</td></tr>
+<tr class="memitem:a974968a8a2eea4cb0577e152330f37e0" id="r_a974968a8a2eea4cb0577e152330f37e0"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dfa/namespaceMethods_1_1mqtt__topic__utils.html#a974968a8a2eea4cb0577e152330f37e0">generate_topic_path_from_filepath</a> (Path file_path, Path project_root)</td></tr>
 <tr class="separator:a974968a8a2eea4cb0577e152330f37e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8a746237b2f695549e642984c762c22" id="r_ad8a746237b2f695549e642984c762c22"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dfa/namespaceMethods_1_1mqtt__topic__utils.html#ad8a746237b2f695549e642984c762c22">generate_widget_topic</a> (str base_topic, str widget_id)</td></tr>
 <tr class="separator:ad8a746237b2f695549e642984c762c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,51 +179,50 @@ Strips sorting numbers (e.g. 'left_50' -&gt; 'left', '1_Router' -&gt; 'Router').
 <div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> _topic_path_cache[cache_key]</div>
 <div class="line"><span class="lineno">   24</span> </div>
 <div class="line"><span class="lineno">   25</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   26</span>        relative_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path.relative_to</a>(project_root)</div>
-<div class="line"><span class="lineno">   27</span>        path_parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">relative_path.parts</a>)</div>
-<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path.is_file</a>():</div>
+<div class="line"><span class="lineno">   26</span>        relative_path = file_path.relative_to(project_root)</div>
+<div class="line"><span class="lineno">   27</span>        path_parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(relative_path.parts)</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">if</span> file_path.is_file():</div>
 <div class="line"><span class="lineno">   29</span>            path_parts = path_parts[:-1]</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>        filtered_parts = []</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">for</span> part <span class="keywordflow">in</span> path_parts:</div>
 <div class="line"><span class="lineno">   33</span>            <span class="comment"># ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Map &#39;oaGui&#39; to &#39;GUI&#39;</span></div>
-<div class="line"><span class="lineno">   34</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">part.lower</a>() == <span class="stringliteral">&quot;oagui&quot;</span>:</div>
+<div class="line"><span class="lineno">   34</span>            <span class="keywordflow">if</span> part.lower() == <span class="stringliteral">&quot;oagui&quot;</span>:</div>
 <div class="line"><span class="lineno">   35</span>                part = <span class="stringliteral">&quot;GUI&quot;</span></div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>            <span class="comment"># ⚡ FILTER 1: Skip known structural layout tokens</span></div>
 <div class="line"><span class="lineno">   38</span>            <span class="comment"># We now KEEP &#39;GUI&#39; as it is the primary namespace.</span></div>
-<div class="line"><span class="lineno">   39</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">part.lower</a>() <span class="keywordflow">in</span> [<span class="stringliteral">&quot;display&quot;</span>, <span class="stringliteral">&quot;left&quot;</span>, <span class="stringliteral">&quot;right&quot;</span>, <span class="stringliteral">&quot;top&quot;</span>, <span class="stringliteral">&quot;bottom&quot;</span>]:</div>
+<div class="line"><span class="lineno">   39</span>            <span class="keywordflow">if</span> part.lower() <span class="keywordflow">in</span> [<span class="stringliteral">&quot;display&quot;</span>, <span class="stringliteral">&quot;left&quot;</span>, <span class="stringliteral">&quot;right&quot;</span>, <span class="stringliteral">&quot;top&quot;</span>, <span class="stringliteral">&quot;bottom&quot;</span>]:</div>
 <div class="line"><span class="lineno">   40</span>                <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>            <span class="comment"># ⚡ FILTER 2: Skip pure digits (standalone sorting numbers like &#39;50&#39;, &#39;100&#39;, &#39;1&#39;)</span></div>
-<div class="line"><span class="lineno">   43</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">part.isdigit</a>():</div>
+<div class="line"><span class="lineno">   43</span>            <span class="keywordflow">if</span> part.isdigit():</div>
 <div class="line"><span class="lineno">   44</span>                <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>            <span class="comment"># ⚡ CLEAN: Strip numeric prefix/suffix from mixed names (e.g. &#39;1_Router&#39; -&gt; &#39;Router&#39;)</span></div>
 <div class="line"><span class="lineno">   47</span>            <span class="comment"># Handle both [-_] and just the number at the start/end</span></div>
-<div class="line"><span class="lineno">   48</span>            clean = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.sub</a>(<span class="stringliteral">r&quot;^(\d+)[_-]?&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, part)</div>
-<div class="line"><span class="lineno">   49</span>            clean = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.sub</a>(<span class="stringliteral">r&quot;[_-]?(\d+)$&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, clean)</div>
+<div class="line"><span class="lineno">   48</span>            clean = re.sub(<span class="stringliteral">r&quot;^(\d+)[_-]?&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, part)</div>
+<div class="line"><span class="lineno">   49</span>            clean = re.sub(<span class="stringliteral">r&quot;[_-]?(\d+)$&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, clean)</div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>            <span class="comment"># Clean up remaining underscores/spaces for topic uniformity</span></div>
-<div class="line"><span class="lineno">   52</span>            clean = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">clean.replace</a>(<span class="stringliteral">&quot; &quot;</span>, <span class="stringliteral">&quot;_&quot;</span>)</div>
+<div class="line"><span class="lineno">   52</span>            clean = clean.replace(<span class="stringliteral">&quot; &quot;</span>, <span class="stringliteral">&quot;_&quot;</span>)</div>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="line"><span class="lineno">   54</span>            <span class="comment"># ⚡ DOUBLE-CHECK: If stripping the number left us with a layout token or nothing, skip it</span></div>
-<div class="line"><span class="lineno">   55</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> clean <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">clean.lower</a>() <span class="keywordflow">in</span> [<span class="stringliteral">&quot;left&quot;</span>, <span class="stringliteral">&quot;right&quot;</span>, <span class="stringliteral">&quot;top&quot;</span>, <span class="stringliteral">&quot;bottom&quot;</span>]:</div>
+<div class="line"><span class="lineno">   55</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> clean <span class="keywordflow">or</span> clean.lower() <span class="keywordflow">in</span> [<span class="stringliteral">&quot;left&quot;</span>, <span class="stringliteral">&quot;right&quot;</span>, <span class="stringliteral">&quot;top&quot;</span>, <span class="stringliteral">&quot;bottom&quot;</span>]:</div>
 <div class="line"><span class="lineno">   56</span>                <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>            <span class="keywordflow">if</span> clean:</div>
-<div class="line"><span class="lineno">   59</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filtered_parts.append</a>(clean)</div>
+<div class="line"><span class="lineno">   59</span>                filtered_parts.append(clean)</div>
 <div class="line"><span class="lineno">   60</span> </div>
-<div class="line"><span class="lineno">   61</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TOPIC_DELIMITER.join</a>(filtered_parts)</div>
+<div class="line"><span class="lineno">   61</span>        result = TOPIC_DELIMITER.join(filtered_parts)</div>
 <div class="line"><span class="lineno">   62</span>        _topic_path_cache[cache_key] = result</div>
 <div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> result</div>
 <div class="line"><span class="lineno">   64</span>    <span class="keywordflow">except</span>:</div>
 <div class="line"><span class="lineno">   65</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 </div>
 </div>
@@ -280,13 +279,13 @@ Strips sorting numbers (e.g. 'left_50' -&gt; 'left', '1_Router' -&gt; 'Router').
 <div class="fragment"><div class="line"><span class="lineno">   67</span><span class="keyword">def </span>get_topic(*args) -&gt; str:</div>
 <div class="line"><span class="lineno">   68</span>    <span class="stringliteral">&quot;&quot;&quot;Joins non-empty arguments with &#39;/&#39;.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   69</span>    <span class="keyword">def </span>resolve(arg):</div>
-<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(arg, dict):</div>
-<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">return</span> str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">arg.get</a>(<span class="stringliteral">&quot;En&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">arg.values</a>())[0] <span class="keywordflow">if</span> arg <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> isinstance(arg, dict):</div>
+<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">return</span> str(arg.get(<span class="stringliteral">&quot;En&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(arg.values())[0] <span class="keywordflow">if</span> arg <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line"><span class="lineno">   72</span>        <span class="keywordflow">return</span> str(arg)</div>
-<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TOPIC_DELIMITER.join</a>(resolve(arg) <span class="keywordflow">for</span> arg <span class="keywordflow">in</span> args <span class="keywordflow">if</span> arg)</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">return</span> TOPIC_DELIMITER.join(resolve(arg) <span class="keywordflow">for</span> arg <span class="keywordflow">in</span> args <span class="keywordflow">if</span> arg)</div>
 <div class="line"><span class="lineno">   74</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 </div>
 </div>

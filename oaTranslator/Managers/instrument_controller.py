@@ -12,16 +12,16 @@ from oaLogging.Methods.matrix_gate import matrix_log
 HZ_TO_MHZ = 1_000_000
 
 # YAK Frequency Topics
-TOPIC_FREQ_START_INPUT = "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/Input/start_freq/value"
-TOPIC_FREQ_STOP_INPUT = "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/Input/stop_freq/value"
-TOPIC_FREQ_TRIGGER = "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/scpi_details/Execute Command/trigger"
+TOPIC_FREQ_START_INPUT = "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/Input/start_freq/value"
+TOPIC_FREQ_STOP_INPUT = "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/Input/stop_freq/value"
+TOPIC_FREQ_TRIGGER = "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/scpi_details/Execute Command/trigger"
 
 # YAK Marker Placement Topics
-TOPIC_MARKER_PLACE_BASE = "OPEN-AIR/yak/Markers/beg/Beg_Place_All_markers/Input"
-TOPIC_MARKER_PLACE_TRIGGER = "OPEN-AIR/yak/Markers/beg/Beg_Place_All_markers/scpi_details/Execute Command/trigger"
+TOPIC_MARKER_PLACE_BASE = "OpenAir/yak/Markers/beg/Beg_Place_All_markers/Input"
+TOPIC_MARKER_PLACE_TRIGGER = "OpenAir/yak/Markers/beg/Beg_Place_All_markers/scpi_details/Execute Command/trigger"
 
 # YAK Marker Value Retrieval (NAB) Topics
-TOPIC_MARKER_NAB_TRIGGER = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/scpi_details/Execute Command/trigger"
+TOPIC_MARKER_NAB_TRIGGER = "OpenAir/yak/Markers/nab/NAB_all_marker_settings/scpi_details/Execute Command/trigger"
 
 class InstrumentController:
     """

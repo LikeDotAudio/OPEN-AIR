@@ -93,30 +93,30 @@ $(document).ready(function(){initNavTree('db/dcc/md_oaWatchdog_2Documentation_2f
   <div class="headertitle"><div class="title">🏷️ Fleet Status Monitor</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4905"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4906"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5185"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md5186"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4907"></a>
+<h2><a class="anchor" id="autotoc_md5187"></a>
 File Level</h2>
 <p>monitoring/fleet_status_monitor.py</p>
 <p>Monitors the status of the device fleet and controls a GUI status light (Traffic Light).</p>
 <p>Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
 <p>Version 20250821.200641.1</p>
-<h1><a class="anchor" id="autotoc_md4908"></a>
+<h1><a class="anchor" id="autotoc_md5188"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4909"></a>
+<h1><a class="anchor" id="autotoc_md5189"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4910"></a>
+<h2><a class="anchor" id="autotoc_md5190"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md4911"></a>
+<h3><a class="anchor" id="autotoc_md5191"></a>
 &lt;tt&gt;class FleetStatusMonitor&lt;/tt&gt;</h3>
 <p>The 'Traffic Light' controller for the Fleet Manager.</p><ul>
 <li>Defaults to RED (Scanning/Uninitialized).</li>
 <li>Turns GREEN only when a valid Fleet JSON is published.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4912"></a>
+<h4><a class="anchor" id="autotoc_md5192"></a>
 &lt;tt&gt;__init__(self, state_mirror_engine, subscriber_router)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -129,7 +129,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4913"></a>
+<h4><a class="anchor" id="autotoc_md5193"></a>
 &lt;tt&gt;_on_scan_start(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -141,7 +141,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4914"></a>
+<h4><a class="anchor" id="autotoc_md5194"></a>
 &lt;tt&gt;_on_scan_complete(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -153,7 +153,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4915"></a>
+<h4><a class="anchor" id="autotoc_md5195"></a>
 &lt;tt&gt;_publish_color(self, color)&lt;/tt&gt;</h4>
 <p>Tells the GUI Status Light what color to be.</p>
 <p><b>Parameters:</b></p><ul>
@@ -165,7 +165,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4916"></a>
+<h1><a class="anchor" id="autotoc_md5196"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

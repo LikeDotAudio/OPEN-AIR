@@ -106,7 +106,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a392769760b57fce7466a7283f0dfaeeb" id="r_a392769760b57fce7466a7283f0dfaeeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dad/namespaceManagers_1_1application__initializer.html#a392769760b57fce7466a7283f0dfaeeb">app_constants</a> = Config.get_instance()</td></tr>
 <tr class="separator:a392769760b57fce7466a7283f0dfaeeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61e365bb6ebd8d1f2b8b7b01def073dd" id="r_a61e365bb6ebd8d1f2b8b7b01def073dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dad/namespaceManagers_1_1application__initializer.html#a61e365bb6ebd8d1f2b8b7b01def073dd">LOCAL_DEBUG</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:a61e365bb6ebd8d1f2b8b7b01def073dd" id="r_a61e365bb6ebd8d1f2b8b7b01def073dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dad/namespaceManagers_1_1application__initializer.html#a61e365bb6ebd8d1f2b8b7b01def073dd">LOCAL_DEBUG</a> = False</td></tr>
 <tr class="separator:a61e365bb6ebd8d1f2b8b7b01def073dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a221fb275ae37cea2a9148918bf476f" id="r_a1a221fb275ae37cea2a9148918bf476f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dad/namespaceManagers_1_1application__initializer.html#a1a221fb275ae37cea2a9148918bf476f">logger</a> = loguru.logger</td></tr>
 <tr class="separator:a1a221fb275ae37cea2a9148918bf476f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,27 +131,24 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   29</span><span class="keyword">def </span>initialize_app():</div>
 <div class="line"><span class="lineno">   30</span>    <span class="stringliteral">&quot;&quot;&quot;Initializes the application&#39;s components after paths and logger are set up.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(f<span class="stringliteral">&quot;🚀🏗️🔋 [BOOT] Continuing initialization sequence for version {app_constants.CURRENT_VERSION}.&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span>        logger.debug(f<span class="stringliteral">&quot;🚀🏗️🔋 [BOOT] Continuing initialization sequence for version {app_constants.CURRENT_VERSION}.&quot;</span>)</div>
 <div class="line"><span class="lineno">   33</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;initialize_app&quot;</span>,</div>
 <div class="line"><span class="lineno">   34</span>                   f<span class="stringliteral">&quot;🚀🏗️🔋 [BOOT] Continuing initialization sequence for version {app_constants.CURRENT_VERSION}.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
 <div class="line"><span class="lineno">   38</span>            <span class="comment"># The test specifically mocks logger.success to trigger an exception in test_initialize_app_exception</span></div>
-<div class="line"><span class="lineno">   39</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.success</a>(<span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] Application initialization completed.&quot;</span>)</div>
+<div class="line"><span class="lineno">   39</span>            logger.success(<span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.&quot;</span>)</div>
 <div class="line"><span class="lineno">   40</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;initialize_app&quot;</span>,</div>
-<div class="line"><span class="lineno">   41</span>                       <span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] Application initialization completed.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">   41</span>                       <span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><span class="lineno">   42</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   43</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   44</span>        <span class="comment"># matrix_log does not support exception() directly, but we use ERROR level for forensic integrity</span></div>
-<div class="line"><span class="lineno">   45</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(f<span class="stringliteral">&quot;Error during application initialization: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   45</span>        logger.exception(f<span class="stringliteral">&quot;Error during application initialization: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   46</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;initialize_app&quot;</span>,</div>
 <div class="line"><span class="lineno">   47</span>                   f<span class="stringliteral">&quot;🚀🏗️❌ [ERROR] Error during application initialization: {e}&quot;</span>, <span class="stringliteral">&quot;ERROR&quot;</span>)</div>
 <div class="line"><span class="lineno">   48</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -178,7 +175,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Managers.application_initializer.LOCAL_DEBUG = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Managers.application_initializer.LOCAL_DEBUG = False</td>
         </tr>
       </table>
 </div><div class="memdoc">

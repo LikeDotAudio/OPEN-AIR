@@ -132,16 +132,13 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   79</span><span class="keyword">def </span>test_background_rendering(style):</div>
 <div class="line"><span class="lineno">   80</span>    <span class="stringliteral">&quot;&quot;&quot;Verifies that the PanelGenerator can render each of the 6 sample styles.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   81</span>    width, height = 400, 300</div>
-<div class="line"><span class="lineno">   82</span>    img = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">PanelGenerator.generate_procedural_panel</a>(width, height, style[<span class="stringliteral">&quot;config&quot;</span>])</div>
-<div class="line"><span class="lineno">   83</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(img, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.Image</a>)</div>
-<div class="line"><span class="lineno">   84</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">img.size</a> == (width, height)</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">img.mode</a> == <span class="stringliteral">&#39;RGBA&#39;</span></div>
+<div class="line"><span class="lineno">   82</span>    img = PanelGenerator.generate_procedural_panel(width, height, style[<span class="stringliteral">&quot;config&quot;</span>])</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keyword">assert</span> isinstance(img, Image.Image)</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keyword">assert</span> img.size == (width, height)</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keyword">assert</span> img.mode == <span class="stringliteral">&#39;RGBA&#39;</span></div>
 <div class="line"><span class="lineno">   86</span> </div>
 <div class="line"><span class="lineno">   87</span><span class="preprocessor">@pytest.mark.parametrize(&quot;style&quot;, BACKGROUND_STYLES)</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a1c69348ac272ff35fccb2bcc4cbf940e" name="a1c69348ac272ff35fccb2bcc4cbf940e"></a>
@@ -166,17 +163,15 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   99</span>    width, height = 256, 256</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>    <span class="comment"># 1. Standard Render</span></div>
-<div class="line"><span class="lineno">  102</span>    img_std = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">PanelGenerator.generate_procedural_panel</a>(width, height, style[<span class="stringliteral">&quot;config&quot;</span>])</div>
+<div class="line"><span class="lineno">  102</span>    img_std = PanelGenerator.generate_procedural_panel(width, height, style[<span class="stringliteral">&quot;config&quot;</span>])</div>
 <div class="line"><span class="lineno">  103</span> </div>
 <div class="line"><span class="lineno">  104</span>    <span class="comment"># 2. Tiled Render</span></div>
-<div class="line"><span class="lineno">  105</span>    img_tiled = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TiledPanelGenerator.generate_tiled</a>(width, height, style[<span class="stringliteral">&quot;config&quot;</span>], tile_size=128)</div>
+<div class="line"><span class="lineno">  105</span>    img_tiled = TiledPanelGenerator.generate_tiled(width, height, style[<span class="stringliteral">&quot;config&quot;</span>], tile_size=128)</div>
 <div class="line"><span class="lineno">  106</span> </div>
 <div class="line"><span class="lineno">  107</span>    <span class="comment"># 3. Compare (they should be identical because Tiled currently just crops the full render)</span></div>
-<div class="line"><span class="lineno">  108</span>    diff = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageChops.difference</a>(img_std, img_tiled)</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diff.getbbox</a>() <span class="keywordflow">is</span> <span class="keywordtype">None</span>, f<span class="stringliteral">&quot;Rendering inconsistency detected in style: {style[&#39;name&#39;]}&quot;</span></div>
+<div class="line"><span class="lineno">  108</span>    diff = ImageChops.difference(img_std, img_tiled)</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keyword">assert</span> diff.getbbox() <span class="keywordflow">is</span> <span class="keywordtype">None</span>, f<span class="stringliteral">&quot;Rendering inconsistency detected in style: {style[&#39;name&#39;]}&quot;</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aed31b439938cbfac4299a2c84f6b1e70" name="aed31b439938cbfac4299a2c84f6b1e70"></a>
@@ -199,15 +194,13 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   88</span><span class="keyword">def </span>test_tiled_background_rendering(style):</div>
 <div class="line"><span class="lineno">   89</span>    <span class="stringliteral">&quot;&quot;&quot;Verifies that the TiledPanelGenerator can render each of the 6 sample styles.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   90</span>    width, height = 512, 512</div>
-<div class="line"><span class="lineno">   91</span>    img = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TiledPanelGenerator.generate_tiled</a>(width, height, style[<span class="stringliteral">&quot;config&quot;</span>], tile_size=256)</div>
-<div class="line"><span class="lineno">   92</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(img, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.Image</a>)</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">img.size</a> == (width, height)</div>
-<div class="line"><span class="lineno">   94</span>    <span class="keyword">assert</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">img.mode</a> == <span class="stringliteral">&#39;RGBA&#39;</span></div>
+<div class="line"><span class="lineno">   91</span>    img = TiledPanelGenerator.generate_tiled(width, height, style[<span class="stringliteral">&quot;config&quot;</span>], tile_size=256)</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keyword">assert</span> isinstance(img, Image.Image)</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keyword">assert</span> img.size == (width, height)</div>
+<div class="line"><span class="lineno">   94</span>    <span class="keyword">assert</span> img.mode == <span class="stringliteral">&#39;RGBA&#39;</span></div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span><span class="preprocessor">@pytest.mark.parametrize(&quot;style&quot;, BACKGROUND_STYLES)</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>

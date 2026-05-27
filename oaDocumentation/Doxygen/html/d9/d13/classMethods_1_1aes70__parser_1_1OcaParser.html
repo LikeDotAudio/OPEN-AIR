@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('d9/d13/classMethods_1_1aes70__parser_1
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a72c7f00769e2edf92189548b3673a2c3" id="r_a72c7f00769e2edf92189548b3673a2c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d13/classMethods_1_1aes70__parser_1_1OcaParser.html#a72c7f00769e2edf92189548b3673a2c3">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a72c7f00769e2edf92189548b3673a2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab841a48313fcdfdda2a56c895fe5f24d" id="r_ab841a48313fcdfdda2a56c895fe5f24d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d13/classMethods_1_1aes70__parser_1_1OcaParser.html#ab841a48313fcdfdda2a56c895fe5f24d">decode</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytes</a> <a class="el" href="../../d1/d2c/oa__editor__state__rs_2mod_8rs.html#a640275e0eed2426caacf63f5f66286b7">data</a>)</td></tr>
+<tr class="memitem:ab841a48313fcdfdda2a56c895fe5f24d" id="r_ab841a48313fcdfdda2a56c895fe5f24d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d13/classMethods_1_1aes70__parser_1_1OcaParser.html#ab841a48313fcdfdda2a56c895fe5f24d">decode</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, bytes <a class="el" href="../../d1/d2c/oa__editor__state__rs_2mod_8rs.html#a640275e0eed2426caacf63f5f66286b7">data</a>)</td></tr>
 <tr class="separator:ab841a48313fcdfdda2a56c895fe5f24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -133,12 +133,11 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../db/d4d/aes70__parser_8py_source.html#l00018">18</a> of file <a class="el" href="../../db/d4d/aes70__parser_8py_source.html">aes70_parser.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>__init__(self):</div>
-<div class="line"><span class="lineno">   19</span>        self._parser = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustOcaParser</a>() <span class="keywordflow">if</span> HAS_RUST_AES70 <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   19</span>        self._parser = RustOcaParser() <span class="keywordflow">if</span> HAS_RUST_AES70 <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   20</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   21</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📻🛠️🔗 [AES70] Using PURE RUST parser.&quot;</span>)</div>
-<div class="line"><span class="lineno">   22</span>        self._parser = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustOcaParser</a>()</div>
+<div class="line"><span class="lineno">   21</span>            print(<span class="stringliteral">&quot;📻🛠️🔗 [AES70] Using PURE RUST parser.&quot;</span>)</div>
+<div class="line"><span class="lineno">   22</span>        self._parser = RustOcaParser()</div>
 <div class="line"><span class="lineno">   23</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -158,7 +157,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytes</a>&#160;</td>
+          <td class="paramtype">bytes&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>

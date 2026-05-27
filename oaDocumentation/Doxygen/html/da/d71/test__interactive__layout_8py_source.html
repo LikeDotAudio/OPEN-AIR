@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('da/d71/test__interactive__layout_8py_s
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">#</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">#        self.root.destroy()</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">#</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">#    @patch(&#39;oaGuiEditorWYSIWYG.Tabs.interactive_layout.DynamicGuiBuilder&#39;)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">#    @patch(&#39;oaGuiEditorWYSIWYG.Tabs.interactive_layout.LoaderOrchestrator&#39;)</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">#        &quot;&quot;&quot;Test that the layout view is created and builds the initial GUI.&quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">#        mock_builder_instance = MockGuiBuilder.return_value</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">#        layout_view = InteractiveLayout(self.root, self.mock_event_bus)</span></div>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('da/d71/test__interactive__layout_8py_s
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">#        # It should build an initial empty structure</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">#        mock_builder_instance.build_gui.assert_called_once()</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">#</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">#    @patch(&#39;oaGuiEditorWYSIWYG.Tabs.interactive_layout.DynamicGuiBuilder&#39;)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">#    @patch(&#39;oaGuiEditorWYSIWYG.Tabs.interactive_layout.LoaderOrchestrator&#39;)</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">#        &quot;&quot;&quot;Test that receiving a &#39;json_updated&#39; event triggers a GUI rebuild.&quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">#        mock_builder_instance = MockGuiBuilder.return_value</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">#        layout_view = InteractiveLayout(self.root, self.mock_event_bus)</span></div>

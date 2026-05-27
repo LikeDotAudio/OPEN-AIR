@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('db/d1a/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Graphing Mapping and VISA Discovery Errors</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1873"></a> <b>Date:</b> 2026-03-16 01:10:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b></p><ol type="1">
+<div class="textblock"><p><a class="anchor" id="autotoc_md2322"></a> <b>Date:</b> 2026-03-16 01:10:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b></p><ol type="1">
 <li>UI crashed due to missing graphing components mapping during bootstrap.</li>
 <li>Background core service crashed during VISA device discovery due to a missing/misnamed module import, followed by a circular dependency error upon fixing.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1874"></a>
+<h1><a class="anchor" id="autotoc_md2323"></a>
 Issue</h1>
 <ol type="1">
 <li>A &lsquo;Batch Processing Error: Unknown functional widget: 'plot_widget&rsquo;<code>occurred because</code>plot_widget<code>(and</code>bar_graph<code>) were not defined in</code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a><code>.</code></li>
 <li><code>A</code>Batch Processing Error: Unknown functional widget: 'OcaFold'<code>occurred in spectrum layouts.</code></li>
 <li><code>A</code>NameError: name 'manager_visa_Search' is not defined<code>crashed the</code>discovery_orchestrator<code>worker thread when attempting to probe devices.</code></li>
-<li><code>An</code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImportError&lt;tt&gt;(circular dependency)</a> surfaced betweenmanagers/Visa_Fleet/__init__.py<code>and</code>workers/discovery_agents/discovery_orchestrator.py<code>during the fix for the</code>NameError<code>.</code></li>
+<li><code>An</code>ImportError&lt;tt&gt;(circular dependency) surfaced betweenmanagers/Visa_Fleet/__init__.py<code>and</code>workers/discovery_agents/discovery_orchestrator.py<code>during the fix for the</code>NameError<code>.</code></li>
 <li><code>An</code>ImportError<code>in</code><a class="el" href="../../da/d10/Showtime_8py.html">Showtime.py</a><code>(formerly</code>gui_Showtime.py<code>) due to a broken internal reference to</code>oaGuiShowtime.Core.showtime_tab`.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1875"></a>
+<h1><a class="anchor" id="autotoc_md2324"></a>
 Root Cause</h1>
 <ol type="1">
 <li>During the major UI decoupling and widget factory refactoring, the graphing widgets were not re-added to the core mapping table (<code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code>), leaving the builder unable to resolve <code>plot_widget</code> and <code>bar_graph</code>.</li>
@@ -115,7 +115,7 @@ Root Cause</h1>
 <li><code>managers/Visa_Fleet/__init__.py</code> imported <code>DiscoveryOrchestrator</code>, creating a loop since <code><a class="el" href="../../d7/de0/discovery__orchestrator_8py.html">discovery_orchestrator.py</a></code> imports heavily from <code>managers/Visa_Fleet</code>.</li>
 <li>The <code>showtime_</code> prefix removal refactor was incomplete, leaving internal imports referencing the old module names.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1876"></a>
+<h1><a class="anchor" id="autotoc_md2325"></a>
 Resolution</h1>
 <ol type="1">
 <li>Added <code>"plot_widget"</code> and <code>"bar_graph"</code> to <code>managers/Display/factory/core/factory_mapping.py</code>, wiring them to <code>PlotWidgetAdapterMixin</code> inside the <code>graphing</code> widget folder.</li>
@@ -124,7 +124,7 @@ Resolution</h1>
 <li>Removed the circular import of <code>DiscoveryOrchestrator</code> from <code>managers/Visa_Fleet/__init__.py</code>.</li>
 <li>Updated <code>oaGui/Assets/right_50/bottom_90/2_monitors/23_Showtime/Showtime.py</code> to correctly import <code>ShowtimeTab</code> from <code>oaGuiShowtime.Core.tab</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1877"></a>
+<h1><a class="anchor" id="autotoc_md2326"></a>
 Verification</h1>
 <ul>
 <li>Validated via python execution (&lsquo;python3 -c "import sys; sys.path.append(&amp;rsquo;.'); from oaComProtocols.oaComVisa.discovery_orchestrator import DiscoveryOrchestrator"<code>) that the class successfully initializes and no longer triggers a circular</code>ImportError<code>or</code>NameError`.</li>

@@ -93,31 +93,31 @@ $(document).ready(function(){initNavTree('dc/d4e/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260312_003800</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1639"></a> </p>
-<h1><a class="anchor" id="autotoc_md1640"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2088"></a> </p>
+<h1><a class="anchor" id="autotoc_md2089"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p><b>User Complaint</b>: "in this case a second instance was opened... and the changes were not ignored. there needs to be a lock applied." <b>Problem</b>: Multiple instances of OPEN-AIR running on the same machine (or sharing a session GUID) were ignoring each other's MQTT updates due to overly broad loop prevention. Conversely, without unique identification, instances could trigger feedback loops if they didn't recognize their own re-broadcasts.</p>
-<h1><a class="anchor" id="autotoc_md1641"></a>
+<h1><a class="anchor" id="autotoc_md2090"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Identity Collision</b>: <code>INSTANCE_GUID</code> was session-based (randomized per supervisor run), meaning Partition A (<a class="el" href="../../d3/d7a/namespaceCore.html">Core</a>) and Partition B (UI) shared the same ID.</li>
 <li><b>Broad Filtering</b>: <code>ProtocolRouter</code> and <code>StateMirrorEngine</code> ignored all MQTT messages where the <code>GUID</code> matched. This effectively muted all communication between instances in the same session.</li>
 <li><b>Missing PID</b>: No process-level identification existed to distinguish between Instance 1 (PID 123) and Instance 2 (PID 456) on the same machine.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1642"></a>
+<h1><a class="anchor" id="autotoc_md2091"></a>
 &lt;strong&gt;Investigation&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Log Analysis</b>: Confirmed in <code>Application_20260312_0034.log</code> that messages from the second instance were being tagged with the same GUID but were either being ignored or causing redundant processing.</li>
 <li><b>Code Review</b>: Identified that <code>_calculate_strategy</code> in <code>ProtocolRouter</code> was too aggressive in its <code>IGNORE (REFLECT)</code> logic.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1643"></a>
+<h1><a class="anchor" id="autotoc_md2092"></a>
 &lt;strong&gt;Resolution&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Fully Qualified Identity</b>: Updated <code>Config</code> to generate a <code>FULL_INSTANCE_ID</code> string formatted as <code>SESSION_ID:PARTITION_ID:PID</code>.</li>
 <li><b>Granular Loop Prevention</b>: Updated <code>ProtocolRouter</code> and <code>StateMirrorEngine</code> to use <code>FULL_INSTANCE_ID</code> for mirroring and ingestion logic.</li>
 <li><b>Silent Updates</b>: Ensured <code>StateMirrorEngine</code> correctly performs a "Silent Update" (UI change without broadcast) when receiving an external message, unless it's a self-reflection.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1644"></a>
+<h1><a class="anchor" id="autotoc_md2093"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Unit Test</b>: <code>verify_external_silence.py</code> confirmed that updates from a different GUID/Instance result in a UI change but NO new MQTT broadcast.</li>

@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('de/daf/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: ModuleNotFoundError in manager_launcher.py</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1762"></a> <b>Date:</b> 2026-03-14 22:38:00 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2211"></a> <b>Date:</b> 2026-03-14 22:38:00 <br  />
  <b>Priority:</b> 1 (Critical/Crash) <br  />
  <b>Status:</b> Resolved <br  />
  <b>Module:</b> <code>managers/launcher.py</code></p>
-<h1><a class="anchor" id="autotoc_md1763"></a>
+<h1><a class="anchor" id="autotoc_md2212"></a>
 Issue</h1>
 <p>The CORE partition failed to start with the following error: &lsquo;ModuleNotFoundError: No module named 'workers&rsquo;<code> This occurred at line 24 of</code>managers/launcher.py` during its initial imports.</p>
-<h1><a class="anchor" id="autotoc_md1764"></a>
+<h1><a class="anchor" id="autotoc_md2213"></a>
 Root Cause</h1>
 <p><code>manager_launcher.py</code> relied on the caller to set up the Python <code>sys.path</code> to include the project root. While <code><a class="el" href="../../da/d5b/open__air__core_8py.html">open_air_core.py</a></code> performs this setup, if <code>manager_launcher.py</code> is imported directly in a context where the current working directory or the root search path is not properly configured (e.g., during direct debugging or certain multi-process spawn scenarios), it fails to locate the top-level <code>workers</code> package.</p>
-<h1><a class="anchor" id="autotoc_md1765"></a>
+<h1><a class="anchor" id="autotoc_md2214"></a>
 Resolution</h1>
 <p>Added the <code>sys.path</code> boilerplate to the top of <code>managers/launcher.py</code>. This logic dynamically resolves the project root relative to the file's own location and ensures it is present in the <code>sys.path</code> before any relative or absolute package imports are executed.</p>
-<h1><a class="anchor" id="autotoc_md1766"></a>
+<h1><a class="anchor" id="autotoc_md2215"></a>
 Verification Evidence</h1>
 <ol type="1">
 <li><b>Reproduction</b>: A script <code>reproduce_path_bug.py</code> was created to simulate importing <code>manager_launcher.py</code> from within the <code>managers/</code> directory without prior path setup.</li>
 <li><b>Fix Verification</b>: The same script now reports a successful import, confirming that <code>manager_launcher.py</code> can independently resolve its dependencies.</li>
-<li><b>Consistency</b>: This fix aligns <code>manager_launcher.py</code> with the robust initialization patterns already used in <code><a class="el" href="../../da/d5b/open__air__core_8py.html">open_air_core.py</a></code> and <code><a class="el" href="../../d2/ddc/open__air__ui_8py.html">open_air_ui.py</a></code>.</li>
+<li><b>Consistency</b>: This fix aligns <code>manager_launcher.py</code> with the robust initialization patterns already used in <code><a class="el" href="../../da/d5b/open__air__core_8py.html">open_air_core.py</a></code> and <code><a class="el" href="../../d3/dd3/loader__main__service_8py.html">loader_main_service.py</a></code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1767"></a>
+<h1><a class="anchor" id="autotoc_md2216"></a>
 Impact</h1>
 <p>Improves system-wide stability and developer ergonomics by making the partition launcher scripts more resilient to different execution environments and directory contexts. </p>
 </div></div><!-- contents -->

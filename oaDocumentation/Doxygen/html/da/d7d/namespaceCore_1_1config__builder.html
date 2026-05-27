@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('da/d7d/namespaceCore_1_1config__builde
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abb235ffb44ef25fc578b980027bbc7d9" id="r_abb235ffb44ef25fc578b980027bbc7d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7d/namespaceCore_1_1config__builder.html#abb235ffb44ef25fc578b980027bbc7d9">create_default_config_ini</a> (pathlib.Path config_path, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">silent</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a>)</td></tr>
+<tr class="memitem:abb235ffb44ef25fc578b980027bbc7d9" id="r_abb235ffb44ef25fc578b980027bbc7d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7d/namespaceCore_1_1config__builder.html#abb235ffb44ef25fc578b980027bbc7d9">create_default_config_ini</a> (pathlib.Path config_path, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> silent=False)</td></tr>
 <tr class="separator:abb235ffb44ef25fc578b980027bbc7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -136,7 +136,7 @@ Assumptions and Constraints:
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> &#160;</td>
-          <td class="paramname"><em>silent</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></code>&#160;</td>
+          <td class="paramname"><em>silent</em> = <code>False</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -314,14 +314,13 @@ Parameters:
 <div class="line"><span class="lineno">  187</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  188</span> </div>
 <div class="line"><span class="lineno">  189</span>    <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(config_path, <span class="stringliteral">&quot;w&quot;</span>) <span class="keyword">as</span> configfile:</div>
-<div class="line"><span class="lineno">  190</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">configfile.write</a>(config_content)</div>
+<div class="line"><span class="lineno">  190</span>        configfile.write(config_content)</div>
 <div class="line"><span class="lineno">  191</span> </div>
 <div class="line"><span class="lineno">  192</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> silent:</div>
-<div class="line"><span class="lineno">  193</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [CONFIG] Created default config.ini at {config_path}&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">  193</span>        print(f<span class="stringliteral">&quot;📡📤📤 [CONFIG] Created default config.ini at {config_path}&quot;</span>)</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>.</p>
 
 </div>
 </div>

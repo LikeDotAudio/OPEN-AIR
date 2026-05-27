@@ -86,7 +86,7 @@ class SnmpLogMonitor:
                                 }
 
                                 if self._mqtt_client:
-                                    topic = f"OPEN-AIR/SNMP/gui_out/{oid}"
+                                    topic = f"OpenAir/SNMP/gui_out/{oid}"
                                     self._mqtt_client.publish(topic, {"value": value, "origin_source": "oaComSNMP"})
 
                                 self._notify_monitor("RX_SET", oid, value, None, meta)

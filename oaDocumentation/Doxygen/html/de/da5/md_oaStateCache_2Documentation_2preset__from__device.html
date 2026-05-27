@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('de/da5/md_oaStateCache_2Documentation_
   <div class="headertitle"><div class="title">🏷️ Preset From Device</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4675"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4676"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4955"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4956"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4677"></a>
+<h2><a class="anchor" id="autotoc_md4957"></a>
 File Level</h2>
 <p>presets/preset_from_device.py</p>
 <p>A worker module to handle the logic for querying, parsing, and presenting presets stored on the connected instrument via MQTT.</p>
 <p>Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
 <p>Version 20250821.200641.1</p>
-<h1><a class="anchor" id="autotoc_md4678"></a>
+<h1><a class="anchor" id="autotoc_md4958"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4679"></a>
+<h1><a class="anchor" id="autotoc_md4959"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4680"></a>
+<h2><a class="anchor" id="autotoc_md4960"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md4681"></a>
+<h3><a class="anchor" id="autotoc_md4961"></a>
 &lt;tt&gt;class PresetFromDeviceWorker&lt;/tt&gt;</h3>
 <p>A worker class that manages preset operations on the device via MQTT.</p>
-<h4><a class="anchor" id="autotoc_md4682"></a>
+<h4><a class="anchor" id="autotoc_md4962"></a>
 &lt;tt&gt;__init__(self, mqtt_util)&lt;/tt&gt;</h4>
 <p>Initializes the worker and subscribes to the necessary topic.</p>
 <p><b>Parameters:</b></p><ul>
@@ -125,7 +125,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4683"></a>
+<h4><a class="anchor" id="autotoc_md4963"></a>
 &lt;tt&gt;_on_mqtt_message(self, topic, payload)&lt;/tt&gt;</h4>
 <p>A private callback to capture the preset list when it arrives from the device.</p>
 <p><b>Parameters:</b></p><ul>
@@ -138,7 +138,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4684"></a>
+<h4><a class="anchor" id="autotoc_md4964"></a>
 &lt;tt&gt;get_presets_from_device(self)&lt;/tt&gt;</h4>
 <p>Triggers the device to query its presets. This function is non-blocking. The result is handled by the _on_mqtt_message callback.</p>
 <p><b>Parameters:</b></p><ul>
@@ -150,7 +150,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4685"></a>
+<h4><a class="anchor" id="autotoc_md4965"></a>
 &lt;tt&gt;parse_presets_from_device(self, raw_preset_string)&lt;/tt&gt;</h4>
 <p>Parses a raw, comma-separated string of preset data and returns a list of valid filenames ending in '.STA'.</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4686"></a>
+<h4><a class="anchor" id="autotoc_md4966"></a>
 &lt;tt&gt;publish_presets_to_repository(self, preset_list)&lt;/tt&gt;</h4>
 <p>Takes a list of preset filenames and publishes the full preset data dictionary as a single JSON payload to one topic per preset.</p>
 <p><b>Parameters:</b></p><ul>
@@ -174,7 +174,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4687"></a>
+<h4><a class="anchor" id="autotoc_md4967"></a>
 &lt;tt&gt;present_presets_from_device(self, preset_filename)&lt;/tt&gt;</h4>
 <p>Sets the specified preset filename and triggers the device to store it.</p>
 <p><b>Parameters:</b></p><ul>
@@ -186,7 +186,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4688"></a>
+<h1><a class="anchor" id="autotoc_md4968"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

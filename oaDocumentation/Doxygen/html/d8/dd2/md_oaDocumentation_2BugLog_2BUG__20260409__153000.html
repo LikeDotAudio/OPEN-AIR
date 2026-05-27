@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d8/dd2/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG_20260409_153000.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1348"></a></p>
-<h1><a class="anchor" id="autotoc_md1349"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1613"></a></p>
+<h1><a class="anchor" id="autotoc_md1614"></a>
 Author: Anthony Peter Kuzub</h1>
-<h1><a class="anchor" id="autotoc_md1350"></a>
+<h1><a class="anchor" id="autotoc_md1615"></a>
 Version: 1.0.0</h1>
-<h2><a class="anchor" id="autotoc_md1351"></a>
+<h2><a class="anchor" id="autotoc_md1616"></a>
 Issue</h2>
 <p>High frequency of <code>invalid command name</code> errors in test logs, triggered by Tkinter <code>after</code> scripts attempting to execute on destroyed widgets. This was causing test pollution and potential instability during rapid UI tearing/rebuilding.</p>
-<h2><a class="anchor" id="autotoc_md1352"></a>
+<h2><a class="anchor" id="autotoc_md1617"></a>
 Root Cause</h2>
 <p>Many GUI components (Knobs, Faders, Meters, Graphs) and the <code>InteractiveLayout</code> workspace were scheduling UI updates or debounced events using <code>self.after()</code>. When these widgets were destroyed (common during unit tests or workspace switching), the scheduled tasks remained in the Tcl interpreter's event queue. When they finally fired, they attempted to call methods on non-existent widgets or through an invalid Tcl interpreter state.</p>
-<h2><a class="anchor" id="autotoc_md1353"></a>
+<h2><a class="anchor" id="autotoc_md1618"></a>
 Resolution</h2>
 <ol type="1">
-<li><b>Created <code>SafeAfterMixin</code></b>: A new centralized mixin in <code><a class="el" href="../../d3/d67/safe__after__mixin_8py.html">oaGui/Methods/safe_after_mixin.py</a></code> that:<ul>
+<li><b>Created <code>DeferredTaskHandler</code></b>: A new centralized mixin in <code>oaGui/Methods/safe_after_mixin.py</code> that:<ul>
 <li>Tracks all <code>after</code> IDs in an internal dictionary.</li>
 <li>Provides <code>safe_after</code> and <code>safe_after_cancel</code> methods.</li>
 <li>Automatically binds to the <code>&lt;Destroy&gt;</code> event to cancel all pending tasks for that widget instance.</li>
-<li>Wraps callbacks with a <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code> check for extra safety.</li>
+<li>Wraps callbacks with a <code>winfo_exists()</code> check for extra safety.</li>
 </ul>
 </li>
-<li><b>Integrated <code>SafeAfterMixin</code></b>: Applied the mixin to:<ul>
+<li><b>Integrated <code>DeferredTaskHandler</code></b>: Applied the mixin to:<ul>
 <li><code>CustomKnobFrame</code> (<code>oaGuiElements/Core/utils/knob/knob.py</code>)</li>
 <li><code>FaderWithBarGraphFrame</code> (<code>oaGuiElements/Core/faders/fader_bar_graph/fader_bar_graph.py</code>)</li>
 <li><code>SmartMeter</code> (<code>oaGuiElements/Core/metering/meter_bar/smart_meter.py</code>)</li>
@@ -122,7 +122,7 @@ Resolution</h2>
 <li><code>GraphPlotter</code> (<code>oaGuiElements/Core/graphing/graphing/dynamic_graph.py</code>)</li>
 </ul>
 </li>
-<li><b>Added Safety Guards</b>: Implemented <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code> checks before calling <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">after()</a></code> in mixins where adding a full mixin inheritance was too complex for a surgical fix:<ul>
+<li><b>Added Safety Guards</b>: Implemented <code>winfo_exists()</code> checks before calling <code>after()</code> in mixins where adding a full mixin inheritance was too complex for a surgical fix:<ul>
 <li><code>FaderInteractionMixin</code></li>
 <li><code>ActuatorInteractionMixin</code></li>
 <li><code>MeterAnimator</code></li>
@@ -131,11 +131,11 @@ Resolution</h2>
 </li>
 <li><b>Enhanced <code>GraphThrottleMixin</code></b>: Added a explicit <code>destroy()</code> method to ensure its <code>after</code> ID is cleared.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1354"></a>
+<h2><a class="anchor" id="autotoc_md1619"></a>
 Verification Evidence</h2>
 <ul>
 <li>Systematic review of <code>after</code> usage in <code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code>.</li>
-<li>Manual verification that <code>SafeAfterMixin</code> correctly cancels tasks on widget destruction.</li>
+<li>Manual verification that <code>DeferredTaskHandler</code> correctly cancels tasks on widget destruction.</li>
 <li>Reduced noise in test logs during local execution of <code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code> tests. </li>
 </ul>
 </div></div><!-- contents -->

@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('dd/de2/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260315_232600 - Protocol Bridge &amp; Telemetry Suspension (AES70, OSC, Visibility)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1835"></a> </p>
-<h1><a class="anchor" id="autotoc_md1836"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2284"></a> </p>
+<h1><a class="anchor" id="autotoc_md2285"></a>
 Issue</h1>
 <p>The AES70 (OCA), OSC features, and Window Visibility telemetry were causing data structure issues or redundant network traffic. These were deemed not ready for the current architecture phase, specifically during the transition to a centralized MQTT state mirror.</p>
-<h1><a class="anchor" id="autotoc_md1837"></a>
+<h1><a class="anchor" id="autotoc_md2286"></a>
 Root Cause</h1>
 <ul>
 <li><b>AES70</b>: Intercepting and re-wrapping already-enveloped data.</li>
 <li><b>OSC</b>: Potential source of un-architected state traffic.</li>
 <li><b>Visibility Snitch</b>: High-frequency MQTT events triggered by UI interactions (tab switching, resizing) causing log noise and potential race conditions in the state cache.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1838"></a>
+<h1><a class="anchor" id="autotoc_md2287"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Configuration</b>: Modified <code>config.ini</code>:<ul>
@@ -125,7 +125,7 @@ Resolution</h1>
 </li>
 <li><b>UI Safety</b>: UI components for these protocols safely handle the absence of their respective managers.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1839"></a>
+<h1><a class="anchor" id="autotoc_md2288"></a>
 Verification</h1>
 <ul>
 <li><b>Verification Script</b>: Manual check and launcher verification.</li>
@@ -136,7 +136,7 @@ Verification</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1840"></a>
+<h1><a class="anchor" id="autotoc_md2289"></a>
 Status</h1>
 <p><b>CLOSED / SUSPENDED</b> (Awaiting re-architecture) </p>
 </div></div><!-- contents -->

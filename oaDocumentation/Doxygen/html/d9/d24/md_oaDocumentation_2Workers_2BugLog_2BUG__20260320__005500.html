@@ -93,45 +93,45 @@ $(document).ready(function(){initNavTree('d9/d24/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: SyntaxErrors across Multiple Modules and SmartMeter TclError</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1944"></a> </p>
-<h1><a class="anchor" id="autotoc_md1945"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2393"></a> </p>
+<h1><a class="anchor" id="autotoc_md2394"></a>
 Issue</h1>
 <ol type="1">
-<li><code>SyntaxError</code> in <code>knob_rotary_selector.py</code> preventing widget creation.</li>
+<li><code>SyntaxError</code> in <code><a class="el" href="../../d5/d57/knob__rotary__selector_8py.html">knob_rotary_selector.py</a></code> preventing widget creation.</li>
 <li><code>SyntaxError</code> in <code><a class="el" href="../../d6/d1c/preset__pusher_8py.html">preset_pusher.py</a></code>, <code><a class="el" href="../../dd/d26/preset__from__device_8py.html">preset_from_device.py</a></code>, and <code><a class="el" href="../../d8/df4/marker__peak__re__publisher_8py.html">marker_peak_re_publisher.py</a></code> causing module import failures.</li>
 <li><code>TclError: unknown option "-builder_instance"</code> when instantiating <code>SmartMeter</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1946"></a>
+<h1><a class="anchor" id="autotoc_md2395"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Knob Rotary Selector</b>:<ul>
-<li>A redundant comma was present in a <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super()</a>.__init__</code> call.</li>
+<li>A redundant comma was present in a <code>super().__init__</code> call.</li>
 <li>Positional arguments were incorrectly placed after keyword arguments in a class instantiation call.</li>
 </ul>
 </li>
 <li><b>LLM Artifacts</b>: Several files contained garbage text (e.g., "... User modified the `new_string` content to be...") or extraneous characters (e.g., a dot <code>.</code> at the EOF) likely introduced by previous automated edits.</li>
 <li><b>SmartMeter Instantiation</b>: The <code>SmartMeter</code> class (which inherits from <code>tk.Canvas</code>) was being passed non-Tkinter arguments like <code>builder_instance</code> and <code>apply_transparency_func</code> via <code>**kwargs</code>. Tkinter's <code>__init__</code> attempts to process all unknown keyword arguments as configuration options, leading to a <code>TclError</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1947"></a>
+<h1><a class="anchor" id="autotoc_md2396"></a>
 Resolutions</h1>
 <ol type="1">
 <li><b>Syntax Cleanup</b>:<ul>
-<li>Fixed the argument order and removed double commas in <code>knob_rotary_selector.py</code>.</li>
+<li>Fixed the argument order and removed double commas in <code><a class="el" href="../../d5/d57/knob__rotary__selector_8py.html">knob_rotary_selector.py</a></code>.</li>
 <li>Cleaned up header artifacts and removed trailing dots in the affected worker modules.</li>
 </ul>
 </li>
-<li><b>Robust Initialization</b>: Updated <code>SmartMeter.__init__</code> to explicitly <code>.<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pop()</a></code> non-Tkinter arguments from <code>kwargs</code> before calling <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super()</a>.__init__</code>.</li>
+<li><b>Robust Initialization</b>: Updated <code>SmartMeter.__init__</code> to explicitly <code>.pop()</code> non-Tkinter arguments from <code>kwargs</code> before calling <code>super().__init__</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1948"></a>
+<h1><a class="anchor" id="autotoc_md2397"></a>
 Files Modified</h1>
 <ul>
 <li><code>oaGuiElements/Core/utils/knob_rotary_selector/knob_rotary_selector.py</code></li>
 <li><code><a class="el" href="../../d6/d1c/preset__pusher_8py.html">oaStateCache/Methods/preset_pusher.py</a></code></li>
 <li><code><a class="el" href="../../dd/d26/preset__from__device_8py.html">oaStateCache/Methods/preset_from_device.py</a></code></li>
-<li><code><a class="el" href="../../d8/df4/marker__peak__re__publisher_8py.html">oaGui/Methods/marker_peak_re_publisher.py</a></code></li>
+<li><code>oaGui/Methods/marker_peak_re_publisher.py</code></li>
 <li><code>oaGuiElements/Core/metering/meter_bar/smart_meter.py</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1949"></a>
+<h1><a class="anchor" id="autotoc_md2398"></a>
 Verification Evidence</h1>
 <p>All Python files in the project now compile successfully (<code>python3 -m py_compile</code>). The <code>SmartMeter</code> instantiation logic no longer attempts to pass invalid configuration options to the underlying <code>tk.Canvas</code>. </p>
 </div></div><!-- contents -->

@@ -93,33 +93,33 @@ $(document).ready(function(){initNavTree('d5/dc0/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260316_230000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1893"></a> </p>
-<h1><a class="anchor" id="autotoc_md1894"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2342"></a> </p>
+<h1><a class="anchor" id="autotoc_md2343"></a>
 Issue: Background Generation Failure and Plot Widget Initialization Error</h1>
 <p><b>Date:</b> Monday, March 16, 2026 <b>Priority:</b> 1 (Critical/Crash) <b>Status:</b> Resolved</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1896"></a>
+<h2><a class="anchor" id="autotoc_md2345"></a>
 Description</h2>
 <ol type="1">
 <li><b>Background Generation</b>: The <code>BuilderBackgroundManagerMixin</code> and <code>TiledPanelGenerator</code> were attempting to call <code>PanelGenerator.generate_panel</code>, which did not exist in the modularized <code>PanelGenerator</code> class. This caused multiple <code>AttributeError</code> exceptions in background threads during UI building.</li>
 <li><b>Plot Widget Initialization</b>: The <code>GraphPlotter</code> widget in <code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> was attempting to use an undefined <code>graph_builder</code> object, resulting in a <code>NameError</code> and preventing graphs from rendering.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1898"></a>
+<h2><a class="anchor" id="autotoc_md2347"></a>
 Root Cause</h2>
 <ol type="1">
-<li><b>AttributeError</b>: Architectural refactoring of <code>PanelGenerator</code> renamed the primary generation method to <code>generate_procedural_panel</code>, but call sites in <code><a class="el" href="../../d2/d9e/background_8py.html">background.py</a></code> and <code>tiled_panel_generator.py</code> were not updated.</li>
+<li><b>AttributeError</b>: Architectural refactoring of <code>PanelGenerator</code> renamed the primary generation method to <code>generate_procedural_panel</code>, but call sites in <code><a class="el" href="../../d2/d9e/background_8py.html">background.py</a></code> and <code><a class="el" href="../../db/d38/tiled__panel__generator_8py.html">tiled_panel_generator.py</a></code> were not updated.</li>
 <li><b>NameError</b>: The <code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> module imported the <code>graph</code> module but incorrectly referenced it as <code>graph_builder</code> in the code.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1900"></a>
+<h2><a class="anchor" id="autotoc_md2349"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Fixed Background Calls</b>: Updated <code>workers/builder/core/background.py</code> and <code>workers/builder/widgets/utils/panels/tiled_panel_generator.py</code> to use the correct <code>PanelGenerator.generate_procedural_panel</code> method.</li>
 <li><b>Fixed Plot Initialization</b>: Updated <code>workers/builder/widgets/graphing/graphing/dynamic_graph.py</code> to use the correctly imported <code>graph</code> module for base plot creation.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1902"></a>
+<h2><a class="anchor" id="autotoc_md2351"></a>
 Verification Results</h2>
 <ul>
 <li><b>Empirical Fix</b>: Verified code changes alignment with existing <code>PanelGenerator</code> and <code>graph</code> module APIs.</li>

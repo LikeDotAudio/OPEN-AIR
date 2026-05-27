@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('d5/d2f/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_235900</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2030"></a> </p>
-<h1><a class="anchor" id="autotoc_md2031"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2479"></a> </p>
+<h1><a class="anchor" id="autotoc_md2480"></a>
 Issue</h1>
 <ol type="1">
 <li><b>Crash on Boot</b>: The application crashed with a <code>ValueError</code> during configuration parsing: <code>ValueError: Not a boolean: update_canvas, poll_buffer, heart_beat</code>.</li>
 <li><b>Verbose Defaults</b>: The new debug matrix was defaulting to <code>True</code> for several components, causing console clutter on first run.</li>
 <li><b>Missing Auto-Generation</b>: Missing <code>config.ini</code> files were generated without the <code>[DEBUG_MATRIX]</code> section.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2032"></a>
+<h1><a class="anchor" id="autotoc_md2481"></a>
 Root Cause</h1>
 <ol type="1">
-<li><b>Type Mismatch</b>: The <code>_parse_debug_matrix</code> method in <code><a class="el" href="../../d9/dae/config__reader_8py.html">config_reader.py</a></code> was iterating over all keys in the <code>[DEBUG_MATRIX]</code> section and applying <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getboolean()</a></code> to them. This failed for <code>mute_functions</code> and <code>force_functions</code>, which are comma-separated strings.</li>
+<li><b>Type Mismatch</b>: The <code>_parse_debug_matrix</code> method in <code><a class="el" href="../../d9/dae/config__reader_8py.html">config_reader.py</a></code> was iterating over all keys in the <code>[DEBUG_MATRIX]</code> section and applying <code>getboolean()</code> to them. This failed for <code>mute_functions</code> and <code>force_functions</code>, which are comma-separated strings.</li>
 <li><b>Default Polarity</b>: <code>ConfigDefaults</code> and <code><a class="el" href="../../d7/d16/config__builder_8py.html">config_builder.py</a></code> had some debug matrix toggles set to <code>True</code>.</li>
 <li><b>Outdated Template</b>: <code><a class="el" href="../../d7/d16/config__builder_8py.html">config_builder.py</a></code> had not been updated to include the new hierarchical logging schema.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2033"></a>
+<h1><a class="anchor" id="autotoc_md2482"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Safe Parsing</b>: Updated <code><a class="el" href="../../d9/dae/config__reader_8py.html">oaConfigurationManager/FileReaders/config_reader.py</a></code> to explicitly skip <code>mute_functions</code> and <code>force_functions</code> during boolean conversion.</li>
 <li><b>Silent Defaults</b>: Set all debug matrix toggles to <code>False</code> in <code>ConfigDefaults</code>, <code><a class="el" href="../../d7/d16/config__builder_8py.html">config_builder.py</a></code>, and the active <code>config.ini</code>.</li>
 <li><b>Generator Update</b>: Integrated the <code>[DEBUG_MATRIX]</code> section into the <code>create_default_config_ini</code> logic in <code><a class="el" href="../../d7/d16/config__builder_8py.html">oaConfigurationManager/Core/config_builder.py</a></code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2034"></a>
+<h1><a class="anchor" id="autotoc_md2483"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that the application now boots successfully without <code>ValueError</code>.</li>

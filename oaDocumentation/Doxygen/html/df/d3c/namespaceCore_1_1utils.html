@@ -126,12 +126,9 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../df/d11/oaComProtocols_2oaComNmos_2Core_2utils_8py_source.html#l00011">11</a> of file <a class="el" href="../../df/d11/oaComProtocols_2oaComNmos_2Core_2utils_8py_source.html">utils.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   11</span><span class="keyword">def </span>gen_id():</div>
 <div class="line"><span class="lineno">   12</span>    <span class="stringliteral">&quot;&quot;&quot;Generates a universally unique identifier.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">return</span> str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">uuid.uuid4</a>())</div>
+<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">return</span> str(uuid.uuid4())</div>
 <div class="line"><span class="lineno">   14</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a3fa28014517d06bb96ae188400d0fc38" name="a3fa28014517d06bb96ae188400d0fc38"></a>
@@ -160,19 +157,17 @@ the IP address used for outgoing connections.
 <div class="line"><span class="lineno">   24</span><span class="stringliteral">    the IP address used for outgoing connections.</span></div>
 <div class="line"><span class="lineno">   25</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   26</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   27</span>        s = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.socket</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.AF_INET</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.SOCK_DGRAM</a>)</div>
+<div class="line"><span class="lineno">   27</span>        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</div>
 <div class="line"><span class="lineno">   28</span>        <span class="comment"># Connect to an external server to discover the local IP</span></div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.connect</a>((<span class="stringliteral">&quot;8.8.8.8&quot;</span>, 80))</div>
-<div class="line"><span class="lineno">   30</span>        ip = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.getsockname</a>()[0]</div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.close</a>()</div>
+<div class="line"><span class="lineno">   29</span>        s.connect((<span class="stringliteral">&quot;8.8.8.8&quot;</span>, 80))</div>
+<div class="line"><span class="lineno">   30</span>        ip = s.getsockname()[0]</div>
+<div class="line"><span class="lineno">   31</span>        s.close()</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> ip</div>
 <div class="line"><span class="lineno">   33</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;[Utils] Error getting local IP: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   34</span>        print(f<span class="stringliteral">&quot;[Utils] Error getting local IP: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;127.0.0.1&quot;</span> <span class="comment"># Fallback to localhost if unable to determine IP</span></div>
 <div class="line"><span class="lineno">   36</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a9fef4f2836e9e28a95a7e763305d50d1" name="a9fef4f2836e9e28a95a7e763305d50d1"></a>
@@ -197,10 +192,8 @@ the IP address used for outgoing connections.
 <div class="line"><span class="lineno">   38</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   39</span><span class="stringliteral">    Computes the SHA-256 hash of a given string, typically used for SDP content.</span></div>
 <div class="line"><span class="lineno">   40</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hashlib.sha256</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.encode</a>()).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hexdigest</a>()</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> hashlib.sha256(s.encode()).hexdigest()</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2004042ea19489e2756c644ec04f5271" name="a2004042ea19489e2756c644ec04f5271"></a>
@@ -221,12 +214,12 @@ the IP address used for outgoing connections.
 <p class="definition">Definition at line <a class="el" href="../../df/d11/oaComProtocols_2oaComNmos_2Core_2utils_8py_source.html#l00015">15</a> of file <a class="el" href="../../df/d11/oaComProtocols_2oaComNmos_2Core_2utils_8py_source.html">utils.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span><span class="keyword">def </span>now_ts():</div>
 <div class="line"><span class="lineno">   16</span>    <span class="stringliteral">&quot;&quot;&quot;Returns the current timestamp in seconds and nanoseconds.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   17</span>    ns = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.time_ns</a>())</div>
+<div class="line"><span class="lineno">   17</span>    ns = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(time.time_ns())</div>
 <div class="line"><span class="lineno">   18</span>    <span class="keywordflow">return</span> f<span class="stringliteral">&quot;{ns // 1_000_000_000}:{ns % 1_000_000_000}&quot;</span></div>
 <div class="line"><span class="lineno">   19</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>.</p>
 
 </div>
 </div>

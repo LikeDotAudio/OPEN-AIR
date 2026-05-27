@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🏗️_20open_20air_20architectural_20guide_3a_20how_20and_20why_20it_20works_0',['🏗️ OPEN-AIR Architectural Guide: How and Why It Works',['../d0/d4a/md_oaDocumentation_2Documentation_2Architectural__Guide.html',1,'']]]
+  ['🎹_20oacomprotocols_20oacommidi_3a_20the_20tactile_20bridge_0',['🎹 oaComProtocols.oaComMidi: The Tactile Bridge',['../da/d8a/md_oaComProtocols_2oaComMidi_2Documentation_2Summary.html',1,'']]]
 ];

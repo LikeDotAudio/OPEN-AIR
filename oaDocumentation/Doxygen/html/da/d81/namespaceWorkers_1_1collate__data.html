@@ -127,7 +127,7 @@ by calling their respective builder modules.
 <div class="line"><span class="lineno">   13</span><span class="stringliteral">    by calling their respective builder modules.</span></div>
 <div class="line"><span class="lineno">   14</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   15</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   16</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaTests.FileWriters</a> <span class="keyword">import</span> (</div>
+<div class="line"><span class="lineno">   16</span>        <span class="keyword">from</span> oaTests.FileWriters <span class="keyword">import</span> (</div>
 <div class="line"><span class="lineno">   17</span>            ReportBuilder_Audits,</div>
 <div class="line"><span class="lineno">   18</span>            ReportBuilder_BugLog,</div>
 <div class="line"><span class="lineno">   19</span>            ReportBuilder_ChangeLog,</div>
@@ -137,13 +137,13 @@ by calling their respective builder modules.
 <div class="line"><span class="lineno">   23</span>            ReportBuilder_RunLog,</div>
 <div class="line"><span class="lineno">   24</span>        )</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>        audit_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_Audits.build_tab</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(project_root, <span class="stringliteral">&quot;oaDataLogs/Audits&quot;</span>))</div>
-<div class="line"><span class="lineno">   27</span>        changelog_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_ChangeLog.build_tab</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;ChangeLog&quot;</span>))</div>
-<div class="line"><span class="lineno">   28</span>        error_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_ErrorLog.build_tab</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;Errors&quot;</span>))</div>
-<div class="line"><span class="lineno">   29</span>        runlog_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_RunLog.build_tab</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;ApplicationRunLog&quot;</span>))</div>
-<div class="line"><span class="lineno">   30</span>        buglog_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_BugLog.build_tab</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;BugLog&quot;</span>))</div>
-<div class="line"><span class="lineno">   31</span>        flamegraph_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_FlameGraph.build_tab</a>(project_root)</div>
-<div class="line"><span class="lineno">   32</span>        dependencies_html = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ReportBuilder_Dependencies.build_tab</a>()</div>
+<div class="line"><span class="lineno">   26</span>        audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, <span class="stringliteral">&quot;oaDataLogs/Audits&quot;</span>))</div>
+<div class="line"><span class="lineno">   27</span>        changelog_html = ReportBuilder_ChangeLog.build_tab(os.path.join(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;ChangeLog&quot;</span>))</div>
+<div class="line"><span class="lineno">   28</span>        error_html = ReportBuilder_ErrorLog.build_tab(os.path.join(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;Errors&quot;</span>))</div>
+<div class="line"><span class="lineno">   29</span>        runlog_html = ReportBuilder_RunLog.build_tab(os.path.join(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;ApplicationRunLog&quot;</span>))</div>
+<div class="line"><span class="lineno">   30</span>        buglog_html = ReportBuilder_BugLog.build_tab(os.path.join(project_root, <span class="stringliteral">&quot;oaDataLogs&quot;</span>, <span class="stringliteral">&quot;BugLog&quot;</span>))</div>
+<div class="line"><span class="lineno">   31</span>        flamegraph_html = ReportBuilder_FlameGraph.build_tab(project_root)</div>
+<div class="line"><span class="lineno">   32</span>        dependencies_html = ReportBuilder_Dependencies.build_tab()</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> {</div>
 <div class="line"><span class="lineno">   35</span>            <span class="stringliteral">&quot;audit&quot;</span>: audit_html,</div>
@@ -155,7 +155,7 @@ by calling their respective builder modules.
 <div class="line"><span class="lineno">   41</span>            <span class="stringliteral">&quot;dependencies&quot;</span>: dependencies_html</div>
 <div class="line"><span class="lineno">   42</span>        }</div>
 <div class="line"><span class="lineno">   43</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;⚠️ Error during data collation: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   44</span>        print(f<span class="stringliteral">&quot;⚠️ Error during data collation: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   45</span>        err_message = f<span class="stringliteral">&quot;&lt;p&gt;Error loading tab: {e}&lt;/p&gt;&quot;</span></div>
 <div class="line"><span class="lineno">   46</span>        <span class="keywordflow">return</span> {</div>
 <div class="line"><span class="lineno">   47</span>            <span class="stringliteral">&quot;audit&quot;</span>: err_message,</div>
@@ -163,10 +163,7 @@ by calling their respective builder modules.
 <div class="line"><span class="lineno">   49</span>            <span class="stringliteral">&quot;error&quot;</span>: err_message,</div>
 <div class="line"><span class="lineno">   50</span>            <span class="stringliteral">&quot;runlog&quot;</span>: err_message</div>
 <div class="line"><span class="lineno">   51</span>        }</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

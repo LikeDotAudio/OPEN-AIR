@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d0/dc0/md_oaPTP_2Documentation_2ptp.ht
   <div class="headertitle"><div class="title">🏷️ Ptp Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4524"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4525"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4804"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4805"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4526"></a>
+<h2><a class="anchor" id="autotoc_md4806"></a>
 File Level</h2>
 <p><code>managers/PTP/ptp.py</code></p>
 <p>Monitors Precision Time Protocol (PTP) traffic on the network.</p>
@@ -107,7 +107,7 @@ File Level</h2>
 <li>Providing a system heartbeat based on PTP traffic activity.</li>
 </ul>
 <p>Author: Anthony Peter Kuzub Version 20260218.Optimization.1</p>
-<h1><a class="anchor" id="autotoc_md4527"></a>
+<h1><a class="anchor" id="autotoc_md4807"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li><b>Library Requirement:</b> Requires the <code>scapy</code> library for packet sniffing and parsing.</li>
@@ -115,11 +115,11 @@ File Level</h2>
 <li><b>Platform:</b> Optimized for Linux environments where <code>libpcap</code> is available for low-level packet capture.</li>
 <li><b>Performance:</b> Sniffing is isolated to a background thread to prevent UI lock contention and ensure real-time packet processing.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4528"></a>
+<h1><a class="anchor" id="autotoc_md4808"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4529"></a>
+<h2><a class="anchor" id="autotoc_md4809"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md4530"></a>
+<h3><a class="anchor" id="autotoc_md4810"></a>
 &lt;tt&gt;register_ptp_callback(callback_func)&lt;/tt&gt;</h3>
 <p>Registers a callback function to receive parsed PTP packet data.</p>
 <p><b>Parameters:</b></p><ul>
@@ -132,7 +132,7 @@ Global Functions</h2>
 <li>Modifies the global <code>_ptp_observers</code> list by appending the provided callback.</li>
 <li>Not explicitly thread-safe; it is recommended to call this during application initialization.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4531"></a>
+<h3><a class="anchor" id="autotoc_md4811"></a>
 &lt;tt&gt;unregister_ptp_callback(callback_func)&lt;/tt&gt;</h3>
 <p>Unregisters a previously registered PTP callback function.</p>
 <p><b>Parameters:</b></p><ul>
@@ -144,12 +144,12 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Modifies the global <code>_ptp_observers</code> list by removing the specified callback.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4532"></a>
+<h2><a class="anchor" id="autotoc_md4812"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md4533"></a>
+<h3><a class="anchor" id="autotoc_md4813"></a>
 &lt;tt&gt;class PtpManager&lt;/tt&gt;</h3>
 <p>Background manager that sniffs PTP traffic and distributes parsed data.</p>
-<h4><a class="anchor" id="autotoc_md4534"></a>
+<h4><a class="anchor" id="autotoc_md4814"></a>
 &lt;tt&gt;__init__(self, mqtt_connection_manager=None, subscriber_router=None)&lt;/tt&gt;</h4>
 <p>Initializes the PTP manager instance and sets up communication hooks.</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Initializes internal threading events (<code>stop_event</code>) and state variables.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4535"></a>
+<h4><a class="anchor" id="autotoc_md4815"></a>
 &lt;tt&gt;start(self)&lt;/tt&gt;</h4>
 <p>Starts the PTP sniffing worker thread and subscribes to relevant MQTT topics.</p>
 <p><b>Parameters:</b></p><ul>
@@ -175,7 +175,7 @@ Classes</h2>
 <li>Spawns a new daemon thread named <code>PTP_Sniffer_Worker</code>.</li>
 <li>Registers a subscription in the <code>subscriber_router</code> if one was provided during initialization.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4536"></a>
+<h4><a class="anchor" id="autotoc_md4816"></a>
 &lt;tt&gt;_on_external_ptp_router_data(self, msg)&lt;/tt&gt;</h4>
 <p>Processes PTP data received via MQTT instead of local network sniffing.</p>
 <p><b>Parameters:</b></p><ul>
@@ -187,7 +187,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Decodes the payload and invokes all registered callback functions in the global <code>_ptp_observers</code> list.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4537"></a>
+<h4><a class="anchor" id="autotoc_md4817"></a>
 &lt;tt&gt;stop(self)&lt;/tt&gt;</h4>
 <p>Signals the background sniffer thread to terminate and waits for its exit.</p>
 <p><b>Parameters:</b></p><ul>
@@ -200,7 +200,7 @@ Classes</h2>
 <li>Sets the internal <code>stop_event</code>, which causes the sniffing loop to terminate.</li>
 <li>Joins the sniffer thread with a 1-second timeout.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4538"></a>
+<h4><a class="anchor" id="autotoc_md4818"></a>
 &lt;tt&gt;_run_sniffer(self)&lt;/tt&gt;</h4>
 <p>Executes the continuous packet sniffing loop in a dedicated background thread.</p>
 <p><b>Parameters:</b></p><ul>
@@ -213,7 +213,7 @@ Classes</h2>
 <li>Performs continuous network I/O.</li>
 <li>Will catch and log permission errors if the process lacks the necessary rights to sniff packets.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4539"></a>
+<h4><a class="anchor" id="autotoc_md4819"></a>
 &lt;tt&gt;_process_packet(self, pkt)&lt;/tt&gt;</h4>
 <p>Analyzes a single captured packet to extract PTP-specific information.</p>
 <p><b>Parameters:</b></p><ul>
@@ -225,7 +225,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>If a PTP layer is identified, it extracts data, triggers the heartbeat handler, and notifies all registered callbacks.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4540"></a>
+<h4><a class="anchor" id="autotoc_md4820"></a>
 &lt;tt&gt;_tear_apart_ptp(self, pkt, ptp)&lt;/tt&gt;</h4>
 <p>Extracts specific PTP header fields into a simplified dictionary format.</p>
 <p><b>Parameters:</b></p><ul>
@@ -238,7 +238,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>None.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4541"></a>
+<h4><a class="anchor" id="autotoc_md4821"></a>
 &lt;tt&gt;_format_clock_id(self, raw)&lt;/tt&gt;</h4>
 <p>Converts raw 10-byte <code>sourcePortIdentity</code> into a human-readable string.</p>
 <p><b>Parameters:</b></p><ul>
@@ -250,7 +250,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>None.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4542"></a>
+<h4><a class="anchor" id="autotoc_md4822"></a>
 &lt;tt&gt;_handle_heartbeat(self, data)&lt;/tt&gt;</h4>
 <p>Publishes a status heartbeat to MQTT if a sufficient interval has passed.</p>
 <p><b>Parameters:</b></p><ul>
@@ -263,7 +263,7 @@ Classes</h2>
 <li>Performs network I/O by publishing to the <code>OPEN-AIR/System/PTP/Heartbeat</code> topic.</li>
 <li>Updates the internal <code>last_heartbeat</code> timestamp to enforce the 1Hz rate limit.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4543"></a>
+<h1><a class="anchor" id="autotoc_md4823"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li><b>Scapy Binding:</b> We explicitly bind <code>PTP</code> to UDP ports 319 and 320 to ensure <code>scapy</code> correctly identifies these packets even if they don't follow standard heuristic patterns.</li>

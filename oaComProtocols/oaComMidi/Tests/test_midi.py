@@ -51,7 +51,7 @@ class TestMidiManager(unittest.TestCase):
         mock_message = MagicMock(); mock_message.type = "note_on"; mock_message.channel = 0; mock_message.note = 60; mock_message.velocity = 127
         test_port.iter_pending.return_value = [mock_message]
 
-        self.midi.mapper.midi_to_topic.return_value = ("OPEN-AIR/MIDI/Note/60", 127)
+        self.midi.mapper.midi_to_topic.return_value = ("OpenAir/MIDI/Note/60", 127)
 
         # OPERATE: Simulate one iteration of the listen loop
         self.midi._midi_listen_loop(test_port, _one_shot=True)
@@ -70,7 +70,7 @@ class TestMidiManager(unittest.TestCase):
         self.midi.mapper.topic_to_midi.return_value = MagicMock() # Mocked MIDI message
 
         # OPERATE: Data from an external source (e.g., GUI)
-        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"value": 1.0}, {"origin_source": "GUI"})
+        self.midi.publish("OpenAir/MIDI/Note/60", {"value": 1.0}, {"origin_source": "GUI"})
 
         # CHECK: Transmitted to hardware Spoke
         self.midi.mapper.topic_to_midi.assert_called()
@@ -84,7 +84,7 @@ class TestMidiManager(unittest.TestCase):
         self.midi.ports.outports = [mock_out]
 
         # OPERATE: Data that originally came FROM MIDI
-        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"value": 0.5}, {"origin_source": "MIDI"})
+        self.midi.publish("OpenAir/MIDI/Note/60", {"value": 0.5}, {"origin_source": "MIDI"})
 
         # CHECK: Echo suppression
         mock_out.send.assert_not_called()

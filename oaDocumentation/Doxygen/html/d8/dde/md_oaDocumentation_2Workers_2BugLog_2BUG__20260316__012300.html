@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d8/dde/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: UI Window Collapsing on Display Move</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1883"></a> <b>Date:</b> 2026-03-16 01:23:00 <b>Priority:</b> 2 (High/Usability) <b>Impact:</b> The user interface becomes unusable when moving the application between screens as it collapses into a thin strip.</p>
-<h1><a class="anchor" id="autotoc_md1884"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2332"></a> <b>Date:</b> 2026-03-16 01:23:00 <b>Priority:</b> 2 (High/Usability) <b>Impact:</b> The user interface becomes unusable when moving the application between screens as it collapses into a thin strip.</p>
+<h1><a class="anchor" id="autotoc_md2333"></a>
 Issue</h1>
 <p>Moving the OPEN-AIR display from one screen to another causes the Tkinter window to spontaneously resize to a "thin strip," effectively making the GUI inaccessible.</p>
-<h1><a class="anchor" id="autotoc_md1885"></a>
+<h1><a class="anchor" id="autotoc_md2334"></a>
 Root Cause</h1>
 <p>Lack of a defined minimum size for the root Tkinter window allowed the window manager to collapse the window during screen-transition events or dpi-change handshakes.</p>
-<h1><a class="anchor" id="autotoc_md1886"></a>
+<h1><a class="anchor" id="autotoc_md2335"></a>
 Resolution</h1>
-<p>Modified <code>managers/Display/core/ui_window.py</code> to call <code>root.minsize(800, 600)</code> during the root window initialization. This ensures that the window manager can never shrink the application below these functional dimensions.</p>
-<h1><a class="anchor" id="autotoc_md1887"></a>
+<p>Modified <code>managers/Display/core/tab_physical_window.py</code> to call <code>root.minsize(800, 600)</code> during the root window initialization. This ensures that the window manager can never shrink the application below these functional dimensions.</p>
+<h1><a class="anchor" id="autotoc_md2336"></a>
 Verification</h1>
 <ul>
 <li><b>Test Script</b>: Verified via <code>root.minsize()</code> query that the dimensions are correctly registered by the Tcl interpreter.</li>

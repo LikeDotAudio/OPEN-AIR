@@ -9,19 +9,19 @@ var namespaceCore_1_1protocol__router =
       [ "SOURCE_DESCRIPTIONS", "d1/dab/namespaceCore_1_1protocol__router_1_1constants.html#aada03704a83c550316c02e66df458cc2", null ]
     ] ],
     [ "dispatch", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html", [
-      [ "_dispatch_midi", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#acdf7fc76818c4e07ec8c67cc127e258e", null ],
-      [ "_dispatch_mqtt", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#aff67016827407ecd63cf6c370bf830da", null ],
-      [ "_dispatch_nmos", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a610d04a4c15341aa38da467f4222eb07", null ],
-      [ "_dispatch_osc", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a420ecf5d6516f086299a0ea835a86159", null ],
-      [ "_dispatch_smpte2138", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a3d78f576d1eaa0967cce1440407ae06e", null ],
-      [ "_dispatch_snmp", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#ad820e624a89e7a750c7cfebabc3e6f8a", null ],
+      [ "_dispatch_midi", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a91ddbea714027cee7a473f53af923cac", null ],
+      [ "_dispatch_mqtt", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#ac5245ab7f2f66fced68608839ee0fb1f", null ],
+      [ "_dispatch_nmos", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a2d5680b532ababf9dad0f0c59869d37b", null ],
+      [ "_dispatch_osc", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a56f924c8b0958d63a9f471fdd4046da6", null ],
+      [ "_dispatch_smpte2138", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a2ade6cf2e9e567821368ee01b1e17a4f", null ],
+      [ "_dispatch_snmp", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a2123ab2b336e51cc1ecb7b8554fae8d9", null ],
       [ "dispatch_message", "d9/db0/namespaceCore_1_1protocol__router_1_1dispatch.html#a762d075c2fb0401fda8045b49be9b005", null ]
     ] ],
     [ "dpi", "db/d3d/namespaceCore_1_1protocol__router_1_1dpi.html", [
       [ "investigate_packet", "db/d3d/namespaceCore_1_1protocol__router_1_1dpi.html#a334c5af6c63e19f7cf9b01349ef6369b", null ]
     ] ],
     [ "ingest", "d4/d83/namespaceCore_1_1protocol__router_1_1ingest.html", [
-      [ "create_silent_message", "d4/d83/namespaceCore_1_1protocol__router_1_1ingest.html#ad20f39da8d56ceed0e24e631f4f6cf25", null ],
+      [ "create_silent_message", "d4/d83/namespaceCore_1_1protocol__router_1_1ingest.html#a7b9703944805a0a0384cd01c08a0f459", null ],
       [ "normalize_and_ingest", "d4/d83/namespaceCore_1_1protocol__router_1_1ingest.html#af96974d945229c79191f55a23bfe6068", null ]
     ] ],
     [ "manager", "db/dbc/namespaceCore_1_1protocol__router_1_1manager.html", [

@@ -7,5 +7,6 @@ var path__initializer_8py =
     [ "DATA_RUNNING_DIR", "d2/d90/path__initializer_8py.html#ad5ed8e6987f2fb0d9faff8a4579d5425", null ],
     [ "DATA_SNMP_DIR", "d2/d90/path__initializer_8py.html#af5665b5d16703325f5ed4a5ae80c9807", null ],
     [ "DATA_SPLINKS_DIR", "d2/d90/path__initializer_8py.html#aceb2477c5277affa4dbf096f376967c1", null ],
-    [ "GLOBAL_PROJECT_ROOT", "d2/d90/path__initializer_8py.html#a5c26de90b92af3f071aa5f0f4ccefdc8", null ]
+    [ "GLOBAL_PROJECT_ROOT", "d2/d90/path__initializer_8py.html#a5c26de90b92af3f071aa5f0f4ccefdc8", null ],
+    [ "GUI_FRAMES_DIR", "d2/d90/path__initializer_8py.html#aa3b1fa67d33ce22619f747a0dbee47da", null ]
 ];

@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('d2/dca/classaes70_1_1controller_1_1eve
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3773195899aa3eeaa08cb37e97437af1" id="r_a3773195899aa3eeaa08cb37e97437af1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dca/classaes70_1_1controller_1_1event_1_1Event.html#a3773195899aa3eeaa08cb37e97437af1">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a8d11a7e58d6e8b6570c77ba2b5250c8e">object</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a798101813052df6fb3664e23e54a13ce">id</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">argumentTypes</a>)</td></tr>
+<tr class="memitem:a3773195899aa3eeaa08cb37e97437af1" id="r_a3773195899aa3eeaa08cb37e97437af1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dca/classaes70_1_1controller_1_1event_1_1Event.html#a3773195899aa3eeaa08cb37e97437af1">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a8d11a7e58d6e8b6570c77ba2b5250c8e">object</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a798101813052df6fb3664e23e54a13ce">id</a>, argumentTypes)</td></tr>
 <tr class="separator:a3773195899aa3eeaa08cb37e97437af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a02fd849de59a7fcf4f24c65dbfb76b" id="r_a5a02fd849de59a7fcf4f24c65dbfb76b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dca/classaes70_1_1controller_1_1event_1_1Event.html#a5a02fd849de59a7fcf4f24c65dbfb76b">do_subscribe</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a5a02fd849de59a7fcf4f24c65dbfb76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,7 +191,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/df6/event_8py_source.html#l00015">15</a> of file <a class="el" href="../../d1/df6/event_8py_source.html">event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    <span class="keyword">def </span>__init__(self, object, id, argumentTypes):</div>
-<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super</a>().__init__(object, id, argumentTypes)</div>
+<div class="line"><span class="lineno">   16</span>        super().__init__(object, id, argumentTypes)</div>
 <div class="line"><span class="lineno">   17</span>        <span class="comment"># Using a closure to capture &#39;argumentTypes&#39;</span></div>
 <div class="line"><span class="lineno">   18</span>        <span class="keyword">def </span>callback(notification):</div>
 <div class="line"><span class="lineno">   19</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.handlers <span class="keywordflow">or</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(self.handlers) == 0:</div>
@@ -199,12 +199,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   21</span> </div>
 <div class="line"><span class="lineno">   22</span>            args = [<span class="keywordtype">None</span>] * <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(argumentTypes)</div>
 <div class="line"><span class="lineno">   23</span>            <span class="comment"># Events without arguments have parameters = null</span></div>
-<div class="line"><span class="lineno">   24</span>            data = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">memoryview</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">notification.parameters</a> <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">notification.parameters</a> <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">else</span> emptyBuffer)</div>
+<div class="line"><span class="lineno">   24</span>            data = memoryview(notification.parameters <span class="keywordflow">if</span> notification.parameters <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">else</span> emptyBuffer)</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>            pos = 0</div>
 <div class="line"><span class="lineno">   27</span>            <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(argumentTypes)):</div>
 <div class="line"><span class="lineno">   28</span>                <span class="comment"># Each decodeFrom returns a tuple of (new pos, tmp)</span></div>
-<div class="line"><span class="lineno">   29</span>                pos, tmp = argumentTypes[i].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeFrom</a>(data, pos)</div>
+<div class="line"><span class="lineno">   29</span>                pos, tmp = argumentTypes[i].decodeFrom(data, pos)</div>
 <div class="line"><span class="lineno">   30</span>                args[i] = tmp</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>            obj = self.object</div>
@@ -216,13 +216,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   38</span>                    <span class="comment"># If cb is an unbound function, bind it to obj</span></div>
 <div class="line"><span class="lineno">   39</span>                    <span class="comment">#bound_cb = cb.__get__(obj, type(obj))</span></div>
 <div class="line"><span class="lineno">   40</span>                    bound_cb = cb</div>
-<div class="line"><span class="lineno">   41</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bound_cb</a>(*args)</div>
+<div class="line"><span class="lineno">   41</span>                    bound_cb(*args)</div>
 <div class="line"><span class="lineno">   42</span>                <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   43</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(e)</div>
+<div class="line"><span class="lineno">   43</span>                    logger.error(e)</div>
 <div class="line"><span class="lineno">   44</span>        self.callback = callback</div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a2185332cb740507fd92af736c19f90ad"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a></div><div class="ttdeci">unicode range</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">generated.rs:1997</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
 </div>
@@ -248,7 +247,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/df6/event_8py_source.html#l00046">46</a> of file <a class="el" href="../../d1/df6/event_8py_source.html">event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>    <span class="keyword">def </span>do_subscribe(self):</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> self.object.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">device.add_subscription</a>(</div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> self.object.device.add_subscription(</div>
 <div class="line"><span class="lineno">   48</span>            self.get_oca_event(),</div>
 <div class="line"><span class="lineno">   49</span>            self.callback</div>
 <div class="line"><span class="lineno">   50</span>        )</div>
@@ -289,7 +288,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/df6/event_8py_source.html#l00053">53</a> of file <a class="el" href="../../d1/df6/event_8py_source.html">event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   53</span>    <span class="keyword">def </span>do_unsubscribe(self, callback):</div>
-<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">return</span> self.object.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">device.remove_subscription</a>(</div>
+<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">return</span> self.object.device.remove_subscription(</div>
 <div class="line"><span class="lineno">   55</span>            self.get_oca_event(),</div>
 <div class="line"><span class="lineno">   56</span>            self.callback</div>
 <div class="line"><span class="lineno">   57</span>        )</div>

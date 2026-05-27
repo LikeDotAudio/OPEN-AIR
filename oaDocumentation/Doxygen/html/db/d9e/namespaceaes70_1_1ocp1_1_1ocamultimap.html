@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('db/d9e/namespaceaes70_1_1ocp1_1_1ocamu
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adac727e3dd2bc17933c6b96066fa615b" id="r_adac727e3dd2bc17933c6b96066fa615b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9e/namespaceaes70_1_1ocp1_1_1ocamultimap.html#adac727e3dd2bc17933c6b96066fa615b">OcaMultiMap</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">KeyType</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueType</a>)</td></tr>
+<tr class="memitem:adac727e3dd2bc17933c6b96066fa615b" id="r_adac727e3dd2bc17933c6b96066fa615b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9e/namespaceaes70_1_1ocp1_1_1ocamultimap.html#adac727e3dd2bc17933c6b96066fa615b">OcaMultiMap</a> (KeyType, ValueType)</td></tr>
 <tr class="separator:adac727e3dd2bc17933c6b96066fa615b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -130,72 +130,72 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d7b/ocamultimap_8py_source.html#l00008">8</a> of file <a class="el" href="../../da/d7b/ocamultimap_8py_source.html">ocamultimap.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    8</span><span class="keyword">def </span>OcaMultiMap(KeyType, ValueType):</div>
-<div class="line"><span class="lineno">    9</span>    kencodedLength = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">KeyType.encoded_length</a></div>
-<div class="line"><span class="lineno">   10</span>    kencodeTo = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">KeyType.encode_to</a></div>
-<div class="line"><span class="lineno">   11</span>    kdecodeFrom = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">KeyType.decode_from</a></div>
-<div class="line"><span class="lineno">   12</span>    kdecodeLength = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">KeyType.decode_length</a></div>
+<div class="line"><span class="lineno">    9</span>    kencodedLength = KeyType.encoded_length</div>
+<div class="line"><span class="lineno">   10</span>    kencodeTo = KeyType.encode_to</div>
+<div class="line"><span class="lineno">   11</span>    kdecodeFrom = KeyType.decode_from</div>
+<div class="line"><span class="lineno">   12</span>    kdecodeLength = KeyType.decode_length</div>
 <div class="line"><span class="lineno">   13</span> </div>
-<div class="line"><span class="lineno">   14</span>    vencodedLength = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueType.encoded_length</a></div>
-<div class="line"><span class="lineno">   15</span>    vencodeTo = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueType.encode_to</a></div>
-<div class="line"><span class="lineno">   16</span>    vdecodeFrom = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueType.decode_from</a></div>
-<div class="line"><span class="lineno">   17</span>    vdecodeLength = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueType.decode_length</a></div>
+<div class="line"><span class="lineno">   14</span>    vencodedLength = ValueType.encoded_length</div>
+<div class="line"><span class="lineno">   15</span>    vencodeTo = ValueType.encode_to</div>
+<div class="line"><span class="lineno">   16</span>    vdecodeFrom = ValueType.decode_from</div>
+<div class="line"><span class="lineno">   17</span>    vdecodeLength = ValueType.decode_length</div>
 <div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodedLength</a>(value):</div>
+<div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span>encodedLength(value):</div>
 <div class="line"><span class="lineno">   20</span>        <span class="comment"># Check if value is a dict or a WeakKeyDictionary</span></div>
-<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (dict, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">weakref.WeakKeyDictionary</a>)):</div>
-<div class="line"><span class="lineno">   22</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Expected Map or WeakMap&#39;</span>)</div>
+<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(value, (dict, weakref.WeakKeyDictionary)):</div>
+<div class="line"><span class="lineno">   22</span>            <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Expected Map or WeakMap&#39;</span>)</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>        result = 2</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>        <span class="comment"># Iterate over each key-value pair in the map, and create an entry for each value</span></div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.items</a>():</div>
-<div class="line"><span class="lineno">   28</span>            <span class="keywordflow">for</span> vval <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">val.values</a>():</div>
-<div class="line"><span class="lineno">   29</span>                result += <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kencodedLength</a>(key)</div>
-<div class="line"><span class="lineno">   30</span>                result += <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vencodedLength</a>(vval)</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> value.items():</div>
+<div class="line"><span class="lineno">   28</span>            <span class="keywordflow">for</span> vval <span class="keywordflow">in</span> val.values():</div>
+<div class="line"><span class="lineno">   29</span>                result += kencodedLength(key)</div>
+<div class="line"><span class="lineno">   30</span>                result += vencodedLength(vval)</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> result</div>
 <div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodeTo</a>(dataView: bytearray, pos: int, value):</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keyword">def </span>encodeTo(dataView: bytearray, pos: int, value):</div>
 <div class="line"><span class="lineno">   35</span>        <span class="comment"># Write the size of the map as a 16-bit unsigned integer.</span></div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>        <span class="comment"># TODO consider if there might be a more efficient way to calculate the length</span></div>
 <div class="line"><span class="lineno">   38</span>        l = 0</div>
-<div class="line"><span class="lineno">   39</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.items</a>():</div>
+<div class="line"><span class="lineno">   39</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> value.items():</div>
 <div class="line"><span class="lineno">   40</span>            l += <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(val)</div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>        pack_into(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos, l)</div>
 <div class="line"><span class="lineno">   43</span>        pos += 2</div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="line"><span class="lineno">   45</span>        <span class="comment"># Encode each key and value, updating the position accordingly.</span></div>
-<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.items</a>():</div>
-<div class="line"><span class="lineno">   47</span>            <span class="keywordflow">for</span> vval <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">val.values</a>():</div>
-<div class="line"><span class="lineno">   48</span>                pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kencodeTo</a>(dataView, pos, key)</div>
-<div class="line"><span class="lineno">   49</span>                pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vencodeTo</a>(dataView, pos, vval)</div>
+<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">for</span> key, val <span class="keywordflow">in</span> value.items():</div>
+<div class="line"><span class="lineno">   47</span>            <span class="keywordflow">for</span> vval <span class="keywordflow">in</span> val.values():</div>
+<div class="line"><span class="lineno">   48</span>                pos = kencodeTo(dataView, pos, key)</div>
+<div class="line"><span class="lineno">   49</span>                pos = vencodeTo(dataView, pos, vval)</div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeFrom</a>(dataView: bytearray, pos: int):</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keyword">def </span>decodeFrom(dataView: bytearray, pos: int):</div>
 <div class="line"><span class="lineno">   54</span>        result = defaultdict(list)</div>
 <div class="line"><span class="lineno">   55</span>        length = unpack_from(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos)[0]</div>
 <div class="line"><span class="lineno">   56</span>        pos += 2</div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   59</span>            pos, key = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kdecodeFrom</a>(dataView, pos)</div>
-<div class="line"><span class="lineno">   60</span>            pos, val = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vdecodeFrom</a>(dataView, pos)</div>
-<div class="line"><span class="lineno">   61</span>            result[key].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">append</a>(val)</div>
+<div class="line"><span class="lineno">   59</span>            pos, key = kdecodeFrom(dataView, pos)</div>
+<div class="line"><span class="lineno">   60</span>            pos, val = vdecodeFrom(dataView, pos)</div>
+<div class="line"><span class="lineno">   61</span>            result[key].append(val)</div>
 <div class="line"><span class="lineno">   62</span> </div>
 <div class="line"><span class="lineno">   63</span>        <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(result) != length:</div>
 <div class="line"><span class="lineno">   64</span>            <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;Incorrect length provided for MultiMap&#39;</span>)</div>
 <div class="line"><span class="lineno">   65</span> </div>
 <div class="line"><span class="lineno">   66</span>        <span class="keywordflow">return</span> pos, result</div>
 <div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeLength</a>(dataView: bytearray, pos: int):</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keyword">def </span>decodeLength(dataView: bytearray, pos: int):</div>
 <div class="line"><span class="lineno">   69</span>        length = unpack_from(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos)[0]</div>
 <div class="line"><span class="lineno">   70</span>        pos += 2</div>
 <div class="line"><span class="lineno">   71</span> </div>
 <div class="line"><span class="lineno">   72</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   73</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kdecodeLength</a>(dataView, pos)</div>
-<div class="line"><span class="lineno">   74</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vdecodeLength</a>(dataView, pos)</div>
+<div class="line"><span class="lineno">   73</span>            pos = kdecodeLength(dataView, pos)</div>
+<div class="line"><span class="lineno">   74</span>            pos = vdecodeLength(dataView, pos)</div>
 <div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   77</span> </div>
@@ -208,7 +208,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   84</span>    ))</div>
 <div class="line"><span class="lineno">   85</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a2185332cb740507fd92af736c19f90ad"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a></div><div class="ttdeci">unicode range</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">generated.rs:1997</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">range</a>.</p>

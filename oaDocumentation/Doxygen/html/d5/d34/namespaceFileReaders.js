@@ -10,7 +10,6 @@ var namespaceFileReaders =
       [ "app_constants", "d4/d37/namespaceFileReaders_1_1appender.html#a6aa99c549e6f509454c39fe4f422d5d5", null ],
       [ "LOCAL_DEBUG", "d4/d37/namespaceFileReaders_1_1appender.html#a9654c8386ab996e1e2477d272528d0de", null ]
     ] ],
-    [ "blueprint_loader", "d1/d31/namespaceFileReaders_1_1blueprint__loader.html", "d1/d31/namespaceFileReaders_1_1blueprint__loader" ],
     [ "cache_io_handler", "dd/daf/namespaceFileReaders_1_1cache__io__handler.html", "dd/daf/namespaceFileReaders_1_1cache__io__handler" ],
     [ "config_reader", "d7/d4f/namespaceFileReaders_1_1config__reader.html", "d7/d4f/namespaceFileReaders_1_1config__reader" ],
     [ "editor", "d2/dbf/namespaceFileReaders_1_1editor.html", [
@@ -73,20 +72,8 @@ var namespaceFileReaders =
       [ "VERSION", "dd/d87/namespaceFileReaders_1_1from__soundbase__pdf__v2.html#a580e4cc3758cecf380581b4e99a5af11", null ]
     ] ],
     [ "grab_bag_loader", "d9/d9f/namespaceFileReaders_1_1grab__bag__loader.html", "d9/d9f/namespaceFileReaders_1_1grab__bag__loader" ],
-    [ "gui_file_loader", "d3/d73/namespaceFileReaders_1_1gui__file__loader.html", "d3/d73/namespaceFileReaders_1_1gui__file__loader" ],
-    [ "loader", "d4/d91/namespaceFileReaders_1_1loader.html", [
-      [ "_is_debug", "d4/d91/namespaceFileReaders_1_1loader.html#a2353b90d95e7b474bf20b594ad32ce1f", null ],
-      [ "load_ias_html_action", "d4/d91/namespaceFileReaders_1_1loader.html#a5b7b331d2f118fa068e37eae8f0e14be", null ],
-      [ "load_markers_file_action", "d4/d91/namespaceFileReaders_1_1loader.html#a51c0c8ba2e8f8632857a01e1f5ac4760", null ],
-      [ "load_sb_pdf_action", "d4/d91/namespaceFileReaders_1_1loader.html#ae6aeb7203bbdd3caa07d7b60f237d0cb", null ],
-      [ "load_sb_v2_pdf_action", "d4/d91/namespaceFileReaders_1_1loader.html#a39404a616cd77558296698d2f84284c7", null ],
-      [ "load_wwb_shw_action", "d4/d91/namespaceFileReaders_1_1loader.html#abdad03ee71a7cd56f76f0b83cb865cfa", null ],
-      [ "load_wwb_zip_action", "d4/d91/namespaceFileReaders_1_1loader.html#a1d19f5459472110a309229f94824c4e5", null ],
-      [ "maker_file_check_for_markers_file", "d4/d91/namespaceFileReaders_1_1loader.html#ac45d067ef25447aec2f1b26b468b20ed", null ],
-      [ "app_constants", "d4/d91/namespaceFileReaders_1_1loader.html#a9759adbee3c3b6539fb6700b2dc2e8c7", null ],
-      [ "CANONICAL_HEADERS", "d4/d91/namespaceFileReaders_1_1loader.html#a5974d90876f6f8fa24cc20fad8bd4e0a", null ]
-    ] ],
-    [ "module_loader", "d5/d6a/namespaceFileReaders_1_1module__loader.html", "d5/d6a/namespaceFileReaders_1_1module__loader" ],
+    [ "layout_detectors", "db/de8/namespaceFileReaders_1_1layout__detectors.html", "db/de8/namespaceFileReaders_1_1layout__detectors" ],
+    [ "loader", "d4/d91/namespaceFileReaders_1_1loader.html", "d4/d91/namespaceFileReaders_1_1loader" ],
     [ "read", "d9/d4e/namespaceFileReaders_1_1read.html", [
       [ "load_marker_data", "d9/d4e/namespaceFileReaders_1_1read.html#a730ac844d04558d6f2268e19fb4c59bd", null ],
       [ "app_constants", "d9/d4e/namespaceFileReaders_1_1read.html#a63d0855932d5b353026c077b1318ed8b", null ]
@@ -98,5 +85,7 @@ var namespaceFileReaders =
       [ "app_constants", "d6/d54/namespaceFileReaders_1_1saver.html#af3e7504897b91c99e3dc2f80745e8004", null ],
       [ "CANONICAL_HEADERS", "d6/d54/namespaceFileReaders_1_1saver.html#ad4ea6a93a640ce625e96acf68ab4f279", null ],
       [ "LOCAL_DEBUG", "d6/d54/namespaceFileReaders_1_1saver.html#a70accd886a7939ac707dd0a3992852bc", null ]
-    ] ]
+    ] ],
+    [ "scanner", "dd/d1d/namespaceFileReaders_1_1scanner.html", "dd/d1d/namespaceFileReaders_1_1scanner" ],
+    [ "standardizers", "d0/d35/namespaceFileReaders_1_1standardizers.html", "d0/d35/namespaceFileReaders_1_1standardizers" ]
 ];

@@ -3,7 +3,6 @@ var namespaces_dup =
     [ "11_SNMP", "d3/da1/namespace11__SNMP.html", "d3/da1/namespace11__SNMP" ],
     [ "1_Router", "dc/dcf/namespace1__Router.html", "dc/dcf/namespace1__Router" ],
     [ "2138_SMPTE_2138", "d1/da9/namespace2138__SMPTE__2138.html", "d1/da9/namespace2138__SMPTE__2138" ],
-    [ "22_Yak_Monitor", "de/d13/namespace22__Yak__Monitor.html", "de/d13/namespace22__Yak__Monitor" ],
     [ "44_REST", "d9/d4d/namespace44__REST.html", "d9/d4d/namespace44__REST" ],
     [ "4_Splinker", "d5/da8/namespace4__Splinker.html", "d5/da8/namespace4__Splinker" ],
     [ "50_MIDI", "de/df5/namespace50__MIDI.html", "de/df5/namespace50__MIDI" ],
@@ -13,24 +12,42 @@ var namespaces_dup =
     [ "99_EMBER", "da/de5/namespace99__EMBER.html", "da/de5/namespace99__EMBER" ],
     [ "9_Zoo", "df/dd7/namespace9__Zoo.html", "df/dd7/namespace9__Zoo" ],
     [ "abc", "d7/d5f/namespaceabc.html", "d7/d5f/namespaceabc" ],
+    [ "active_marker_tune_and_collect", "dd/da6/namespaceactive__marker__tune__and__collect.html", "dd/da6/namespaceactive__marker__tune__and__collect" ],
+    [ "active_peak_publisher", "d3/d0e/namespaceactive__peak__publisher.html", "d3/d0e/namespaceactive__peak__publisher" ],
     [ "aes70", "dc/df5/namespaceaes70.html", "dc/df5/namespaceaes70" ],
     [ "alignment_overlay", "dc/d83/namespacealignment__overlay.html", "dc/d83/namespacealignment__overlay" ],
+    [ "array_data_expander", "d0/d79/namespacearray__data__expander.html", "d0/d79/namespacearray__data__expander" ],
     [ "auto_scrollbar", "d6/d0f/namespaceauto__scrollbar.html", "d6/d0f/namespaceauto__scrollbar" ],
     [ "base_overlay", "d2/df7/namespacebase__overlay.html", "d2/df7/namespacebase__overlay" ],
+    [ "blueprint_data_injector", "dd/d30/namespaceblueprint__data__injector.html", "dd/d30/namespaceblueprint__data__injector" ],
+    [ "blueprint_merger", "de/db0/namespaceblueprint__merger.html", "de/db0/namespaceblueprint__merger" ],
+    [ "builder_footer", "d5/df5/namespacebuilder__footer.html", "d5/df5/namespacebuilder__footer" ],
+    [ "button_image_renderer", "de/d46/namespacebutton__image__renderer.html", "de/d46/namespacebutton__image__renderer" ],
+    [ "cache_blueprint_store", "da/d62/namespacecache__blueprint__store.html", "da/d62/namespacecache__blueprint__store" ],
+    [ "cache_layout_store", "de/d65/namespacecache__layout__store.html", "de/d65/namespacecache__layout__store" ],
+    [ "Canvas_Viewport_Manager", "d4/d43/namespaceCanvas__Viewport__Manager.html", "d4/d43/namespaceCanvas__Viewport__Manager" ],
     [ "command_router", "d0/d56/namespacecommand__router.html", "d0/d56/namespacecommand__router" ],
     [ "Constants", "d9/d7c/namespaceConstants.html", "d9/d7c/namespaceConstants" ],
+    [ "context_menu", "da/d32/namespacecontext__menu.html", "da/d32/namespacecontext__menu" ],
+    [ "coordinate_transformer", "de/d90/namespacecoordinate__transformer.html", "de/d90/namespacecoordinate__transformer" ],
     [ "Core", "d3/d7a/namespaceCore.html", "d3/d7a/namespaceCore" ],
     [ "dashboard_gui", "d7/da9/namespacedashboard__gui.html", "d7/da9/namespacedashboard__gui" ],
     [ "data_merger", "de/dd2/namespacedata__merger.html", [
       [ "deep_merge", "de/dd2/namespacedata__merger.html#a30b036ad8f4a8831d4e3cf9a0fb87386", null ]
     ] ],
+    [ "deferred_task_handler", "d4/dce/namespacedeferred__task__handler.html", "d4/dce/namespacedeferred__task__handler" ],
     [ "demo", "d2/d0d/namespacedemo.html", "d2/d0d/namespacedemo" ],
     [ "DNSSD_GUI_Pointer", "de/d10/namespaceDNSSD__GUI__Pointer.html", "de/d10/namespaceDNSSD__GUI__Pointer" ],
     [ "dnssd_listener", "d5/d28/namespacednssd__listener.html", "d5/d28/namespacednssd__listener" ],
+    [ "effects", "df/d80/namespaceeffects.html", "df/d80/namespaceeffects" ],
+    [ "engine_destruction_service", "db/dda/namespaceengine__destruction__service.html", "db/dda/namespaceengine__destruction__service" ],
+    [ "engine_render_scheduler", "d9/dbf/namespaceengine__render__scheduler.html", "d9/dbf/namespaceengine__render__scheduler" ],
+    [ "engine_structural_assembler", "dd/d55/namespaceengine__structural__assembler.html", "dd/d55/namespaceengine__structural__assembler" ],
     [ "Entry", "d7/d00/namespaceEntry.html", "d7/d00/namespaceEntry" ],
     [ "FileReaders", "d5/d34/namespaceFileReaders.html", "d5/d34/namespaceFileReaders" ],
     [ "FileWriters", "df/d03/namespaceFileWriters.html", "df/d03/namespaceFileWriters" ],
     [ "flame_manager", "d6/dd7/namespaceflame__manager.html", "d6/dd7/namespaceflame__manager" ],
+    [ "folder_path_resolver", "da/db9/namespacefolder__path__resolver.html", "da/db9/namespacefolder__path__resolver" ],
     [ "graph_updater", "d8/dd6/namespacegraph__updater.html", [
       [ "autoscale_and_redraw", "d8/dd6/namespacegraph__updater.html#a2306f1908a899c501a77ac3b1ff51f6d", null ],
       [ "autoscale_axes", "d8/dd6/namespacegraph__updater.html#a4958a742352c53c3f6e0d80880300224", null ],
@@ -44,21 +61,59 @@ var namespaces_dup =
       [ "app_constants", "d8/dd6/namespacegraph__updater.html#aa7c88345e64ee56a0ec5bb84091ea13e", null ]
     ] ],
     [ "graphing_editor", "da/d22/namespacegraphing__editor.html", "da/d22/namespacegraphing__editor" ],
+    [ "grid_column_configurator", "d8/daa/namespacegrid__column__configurator.html", "d8/daa/namespacegrid__column__configurator" ],
+    [ "grid_renderer_utils", "d4/ddb/namespacegrid__renderer__utils.html", "d4/ddb/namespacegrid__renderer__utils" ],
+    [ "gui_widget_factory", "d3/d10/namespacegui__widget__factory.html", "d3/d10/namespacegui__widget__factory" ],
+    [ "hidden_breakoff", "df/d92/namespacehidden__breakoff.html", "df/d92/namespacehidden__breakoff" ],
+    [ "Hooks", "d8/df3/namespaceHooks.html", [
+      [ "__all__", "d8/df3/namespaceHooks.html#a6950dce1078b5819ca9611f2517c8204", null ]
+    ] ],
+    [ "horizontal_fader_renderer", "d8/d8d/namespacehorizontal__fader__renderer.html", "d8/d8d/namespacehorizontal__fader__renderer" ],
+    [ "i18n_utils", "dd/dec/namespacei18n__utils.html", [
+      [ "get_text", "dd/dec/namespacei18n__utils.html#ab16dacbb03edfb9b581e06519d482bbe", null ]
+    ] ],
+    [ "interaction_dispatcher", "d6/dfd/namespaceinteraction__dispatcher.html", "d6/dfd/namespaceinteraction__dispatcher" ],
+    [ "interaction_mqtt_gateway", "d3/da4/namespaceinteraction__mqtt__gateway.html", "d3/da4/namespaceinteraction__mqtt__gateway" ],
+    [ "interaction_navigation", "dc/d4e/namespaceinteraction__navigation.html", "dc/d4e/namespaceinteraction__navigation" ],
+    [ "interaction_view_states", "da/dd2/namespaceinteraction__view__states.html", "da/dd2/namespaceinteraction__view__states" ],
     [ "interface", "d0/dc5/namespaceinterface.html", [
       [ "__all__", "d0/dc5/namespaceinterface.html#affb7bd0474b02c46e730a60e114a77b8", null ]
     ] ],
     [ "Interface", "da/d9a/namespaceInterface.html", "da/d9a/namespaceInterface" ],
     [ "io", "d1/d96/namespaceio.html", "d1/d96/namespaceio" ],
     [ "IS07", "dd/d48/namespaceIS07.html", "dd/d48/namespaceIS07" ],
+    [ "json_integrity_validator", "df/d04/namespacejson__integrity__validator.html", "df/d04/namespacejson__integrity__validator" ],
+    [ "json_schema_normalizer", "db/d72/namespacejson__schema__normalizer.html", "db/d72/namespacejson__schema__normalizer" ],
+    [ "loader_main_service", "d3/d38/namespaceloader__main__service.html", [
+      [ "main", "d3/d38/namespaceloader__main__service.html#a600305948f5f72a982cb6bfbb21b942a", null ],
+      [ "current_dir", "d3/d38/namespaceloader__main__service.html#af116ab54cb0491254558a75c0057a1af", null ],
+      [ "project_root", "d3/d38/namespaceloader__main__service.html#a709bc9835a5eecd29367bb9ecbe67f5f", null ]
+    ] ],
+    [ "loader_python_engine", "dc/d29/namespaceloader__python__engine.html", "dc/d29/namespaceloader__python__engine" ],
+    [ "loader_service_composer", "df/d46/namespaceloader__service__composer.html", "df/d46/namespaceloader__service__composer" ],
+    [ "loader_signal_handler", "d3/d38/namespaceloader__signal__handler.html", "d3/d38/namespaceloader__signal__handler" ],
     [ "main", "d2/dc1/namespacemain.html", "d2/dc1/namespacemain" ],
     [ "manager", "dd/dcb/namespacemanager.html", "dd/dcb/namespacemanager" ],
     [ "Managers", "d4/d7f/namespaceManagers.html", "d4/d7f/namespaceManagers" ],
+    [ "marker_logic", "da/dfa/namespacemarker__logic.html", [
+      [ "calculate_frequency_range", "da/dfa/namespacemarker__logic.html#ac9de5c9f935e958790c20a4abb206836", null ],
+      [ "app_constants", "da/dfa/namespacemarker__logic.html#aaee32ae2f90337ac456c48fca4f851bd", null ],
+      [ "current_file", "da/dfa/namespacemarker__logic.html#a002d2bac7bd05e9033e437b95c253af8", null ],
+      [ "current_version", "da/dfa/namespacemarker__logic.html#adf2848b9182ecd3925bc63e3190bb240", null ],
+      [ "current_version_hash", "da/dfa/namespacemarker__logic.html#a218099936a746e834e01d6b395a51115", null ],
+      [ "LOCAL_DEBUG", "da/dfa/namespacemarker__logic.html#ad7710fc1a372304b7471c6ad5e26202f", null ],
+      [ "np", "da/dfa/namespacemarker__logic.html#a7fda2d7ffce04bc1a0587c33bb3d5ed6", null ],
+      [ "NUMPY_AVAILABLE", "da/dfa/namespacemarker__logic.html#ab065ebf68778ef247f38a7ff4b17a928", null ]
+    ] ],
+    [ "marker_peak_re_publisher", "d7/d47/namespacemarker__peak__re__publisher.html", "d7/d47/namespacemarker__peak__re__publisher" ],
+    [ "marker_repository_watcher", "de/d39/namespacemarker__repository__watcher.html", "de/d39/namespacemarker__repository__watcher" ],
     [ "MDNS_GUI_Pointer", "d7/dd5/namespaceMDNS__GUI__Pointer.html", "d7/dd5/namespaceMDNS__GUI__Pointer" ],
     [ "mdns_listener", "d7/d03/namespacemdns__listener.html", "d7/d03/namespacemdns__listener" ],
     [ "Methods", "d3/d59/namespaceMethods.html", "d3/d59/namespaceMethods" ],
     [ "Midi_In", "da/d31/namespaceMidi__In.html", [
       [ "get_gui_class", "da/d31/namespaceMidi__In.html#ab97afe84581edb82e9536bb73d2c6aa1", null ]
     ] ],
+    [ "midi_keyboard", "d5/d65/namespacemidi__keyboard.html", "d5/d65/namespacemidi__keyboard" ],
     [ "midi_output", "d3/da0/namespacemidi__output.html", [
       [ "get_gui_class", "d3/da0/namespacemidi__output.html#ad4862b6c969a74d54ee549c00cf431f6", null ]
     ] ],
@@ -77,16 +132,18 @@ var namespaces_dup =
     ] ],
     [ "MixerUI", "d5/d03/namespaceMixerUI.html", "d5/d03/namespaceMixerUI" ],
     [ "mqtt_publisher", "de/d50/namespacemqtt__publisher.html", "de/d50/namespacemqtt__publisher" ],
+    [ "mqtt_rebuild_handler", "d9/d9b/namespacemqtt__rebuild__handler.html", "d9/d9b/namespacemqtt__rebuild__handler" ],
     [ "mqtt_tester", "d0/d3e/namespacemqtt__tester.html", "d0/d3e/namespacemqtt__tester" ],
     [ "nmos_commands", "db/d1a/namespacenmos__commands.html", "db/d1a/namespacenmos__commands" ],
     [ "nmos_connection", "d6/d41/namespacenmos__connection.html", "d6/d41/namespacenmos__connection" ],
     [ "nmos_websockets", "da/d23/namespacenmos__websockets.html", "da/d23/namespacenmos__websockets" ],
     [ "oaComProtocols", "d7/db2/namespaceoaComProtocols.html", "d7/db2/namespaceoaComProtocols" ],
     [ "oaGuiElements", "df/d9e/namespaceoaGuiElements.html", "df/d9e/namespaceoaGuiElements" ],
+    [ "oaSupervisor", "d8/d71/namespaceoaSupervisor.html", "d8/d71/namespaceoaSupervisor" ],
     [ "openair", "df/dbe/namespaceopenair.html", [
       [ "log", "df/dbe/namespaceopenair.html#a13652fc2d5388b3a8809841e6f72d72f", null ],
       [ "main", "df/dbe/namespaceopenair.html#a9df33df86e33852ca82cd29db191c8c8", null ],
-      [ "_DEBUG", "df/dbe/namespaceopenair.html#a7a4cf0e4ece26412cc155e0814d2c6c2", null ],
+      [ "_ANSI", "df/dbe/namespaceopenair.html#a47be63f37528a586da40786292c3159b", null ],
       [ "project_root", "df/dbe/namespaceopenair.html#a51e09ba6835348d39b3f6b9dbf52e275", null ]
     ] ],
     [ "palette_docking", "d5/d78/namespacepalette__docking.html", "d5/d78/namespacepalette__docking" ],
@@ -98,11 +155,13 @@ var namespaces_dup =
     [ "properties_ui", "d5/d75/namespaceproperties__ui.html", "d5/d75/namespaceproperties__ui" ],
     [ "protocol_matrix", "d5/d43/namespaceprotocol__matrix.html", "d5/d43/namespaceprotocol__matrix" ],
     [ "python", "de/d4a/namespacepython.html", "de/d4a/namespacepython" ],
+    [ "registry_widget_store", "d4/d19/namespaceregistry__widget__store.html", "d4/d19/namespaceregistry__widget__store" ],
     [ "right_50", "df/d24/namespaceright__50.html", "df/d24/namespaceright__50" ],
     [ "runner_env", "d1/dbc/namespacerunner__env.html", "d1/dbc/namespacerunner__env" ],
     [ "SAP_GUI_Pointer", "dd/d20/namespaceSAP__GUI__Pointer.html", "dd/d20/namespaceSAP__GUI__Pointer" ],
     [ "sap_listener", "d9/d98/namespacesap__listener.html", "d9/d98/namespacesap__listener" ],
     [ "schemas", "d7/d2a/namespaceschemas.html", "d7/d2a/namespaceschemas" ],
+    [ "screw_generator", "d5/d7f/namespacescrew__generator.html", "d5/d7f/namespacescrew__generator" ],
     [ "selection_overlay", "d1/d12/namespaceselection__overlay.html", "d1/d12/namespaceselection__overlay" ],
     [ "sizing_overlay", "d7/daa/namespacesizing__overlay.html", "d7/daa/namespacesizing__overlay" ],
     [ "smpte2138_bridge_manager", "d7/d74/namespacesmpte2138__bridge__manager.html", "d7/d74/namespacesmpte2138__bridge__manager" ],
@@ -112,7 +171,12 @@ var namespaces_dup =
     [ "snmp_status", "da/d79/namespacesnmp__status.html", "da/d79/namespacesnmp__status" ],
     [ "snmp_verify", "de/d59/namespacesnmp__verify.html", "de/d59/namespacesnmp__verify" ],
     [ "snmp_verify_mib", "de/ddc/namespacesnmp__verify__mib.html", "de/ddc/namespacesnmp__verify__mib" ],
+    [ "tab_physical_window", "d4/d35/namespacetab__physical__window.html", "d4/d35/namespacetab__physical__window" ],
+    [ "telemetry_hooks", "d9/dba/namespacetelemetry__hooks.html", "d9/dba/namespacetelemetry__hooks" ],
+    [ "telemetry_publisher", "da/dd8/namespacetelemetry__publisher.html", "da/dd8/namespacetelemetry__publisher" ],
     [ "Tests", "df/da7/namespaceTests.html", "df/da7/namespaceTests" ],
+    [ "top_toolbar", "da/df7/namespacetop__toolbar.html", "da/df7/namespacetop__toolbar" ],
+    [ "transparency_config_parser", "db/d0f/namespacetransparency__config__parser.html", "db/d0f/namespacetransparency__config__parser" ],
     [ "tree_drag_drop_handler", "d8/db4/namespacetree__drag__drop__handler.html", "d8/db4/namespacetree__drag__drop__handler" ],
     [ "tree_ops_manager", "d1/d76/namespacetree__ops__manager.html", "d1/d76/namespacetree__ops__manager" ],
     [ "tree_populator", "df/d49/namespacetree__populator.html", [
@@ -122,6 +186,24 @@ var namespaces_dup =
       [ "apply_tree_styles", "da/df8/namespacetree__styler.html#ac79ab7a4099a7315e03bd3d86eae10c4", null ]
     ] ],
     [ "tree_view_ui", "d7/d68/namespacetree__view__ui.html", "d7/d68/namespacetree__view__ui" ],
+    [ "tuning_helpers", "d9/d99/namespacetuning__helpers.html", [
+      [ "Push_Marker_to_Center_Freq", "d9/d99/namespacetuning__helpers.html#acb26a69ee9904bdc06c113e27f89d210", null ],
+      [ "Push_Marker_to_Start_Stop_Freq", "d9/d99/namespacetuning__helpers.html#a771f076a461ac27d30e7d615f7cf0a92", null ],
+      [ "CENTER_FREQ_TOPIC", "d9/d99/namespacetuning__helpers.html#a195fbf0e62faec1d0d0ee05a522ae756", null ],
+      [ "HZ_TO_MHZ", "d9/d99/namespacetuning__helpers.html#a0463a222299c6b5c3918cbe495e87a07", null ],
+      [ "SPAN_FREQ_TOPIC", "d9/d99/namespacetuning__helpers.html#aa1657e12764e8eeb3199b296d5b278b1", null ],
+      [ "START_FREQ_TOPIC", "d9/d99/namespacetuning__helpers.html#ab018dfcb85ee8f06e9ec377747730b8d", null ],
+      [ "START_STOP_TRIGGER_TOPIC", "d9/d99/namespacetuning__helpers.html#ad33d72dbd374bcfa6418f33597f0ce93", null ],
+      [ "STOP_FREQ_TOPIC", "d9/d99/namespacetuning__helpers.html#ab0d2a60a26a87a1cb6159f98627189c0", null ],
+      [ "TRIGGER_TOPIC", "d9/d99/namespacetuning__helpers.html#aabf94fb3876ce43f28b90414db4ce48e", null ]
+    ] ],
+    [ "ui_coordinate_utils", "dd/d76/namespaceui__coordinate__utils.html", "dd/d76/namespaceui__coordinate__utils" ],
+    [ "ui_resource_manager", "d7/d5f/namespaceui__resource__manager.html", "d7/d5f/namespaceui__resource__manager" ],
+    [ "ui_window_geometry_utils", "d1/ded/namespaceui__window__geometry__utils.html", "d1/ded/namespaceui__window__geometry__utils" ],
     [ "websocket_transport", "d0/d57/namespacewebsocket__transport.html", "d0/d57/namespacewebsocket__transport" ],
-    [ "Workers", "da/d91/namespaceWorkers.html", "da/d91/namespaceWorkers" ]
+    [ "window_breakoff_manager", "d2/dbd/namespacewindow__breakoff__manager.html", "d2/dbd/namespacewindow__breakoff__manager" ],
+    [ "Workers", "da/d91/namespaceWorkers.html", "da/d91/namespaceWorkers" ],
+    [ "yak_monitor", "dd/d69/namespaceyak__monitor.html", [
+      [ "get_gui_class", "dd/d69/namespaceyak__monitor.html#a814001b3501f17639553a13dfe7444a8", null ]
+    ] ]
 ];

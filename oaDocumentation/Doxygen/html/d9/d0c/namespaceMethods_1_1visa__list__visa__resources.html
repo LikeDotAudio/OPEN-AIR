@@ -106,7 +106,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a3ecacd0b20b920837c14311f897a4ab8" id="r_a3ecacd0b20b920837c14311f897a4ab8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0c/namespaceMethods_1_1visa__list__visa__resources.html#a3ecacd0b20b920837c14311f897a4ab8">app_constants</a> = Config.get_instance()</td></tr>
 <tr class="separator:a3ecacd0b20b920837c14311f897a4ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa86d11302f8b167600d33860e280424a" id="r_aa86d11302f8b167600d33860e280424a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0c/namespaceMethods_1_1visa__list__visa__resources.html#aa86d11302f8b167600d33860e280424a">LOCAL_DEBUG</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:aa86d11302f8b167600d33860e280424a" id="r_aa86d11302f8b167600d33860e280424a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0c/namespaceMethods_1_1visa__list__visa__resources.html#aa86d11302f8b167600d33860e280424a">LOCAL_DEBUG</a> = False</td></tr>
 <tr class="separator:aa86d11302f8b167600d33860e280424a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -146,14 +146,14 @@ Side effects and thread-safety:
 <div class="line"><span class="lineno">   29</span><span class="stringliteral">    - Initializes a new PyVISA ResourceManager instance.</span></div>
 <div class="line"><span class="lineno">   30</span><span class="stringliteral">    - Performs blocking I/O to scan system hardware buses and network segments.</span></div>
 <div class="line"><span class="lineno">   31</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   32</span>    current_function = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a></div>
-<div class="line"><span class="lineno">   33</span>    matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;visa&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;💳 Listing VISA resources... Let&#39;s find some devices!&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span>    current_function = inspect.currentframe().f_code.co_name</div>
+<div class="line"><span class="lineno">   33</span>    matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;visa&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;💳 Listing VISA resources... Let&#39;s find some devices!&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   35</span>        rm = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pyvisa.ResourceManager</a>()</div>
+<div class="line"><span class="lineno">   35</span>        rm = pyvisa.ResourceManager()</div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>        <span class="comment"># Explicitly search for all instrument types using the standard</span></div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment"># wildcard pattern. This captures USB, TCPIP, GPIB, and ASRL.</span></div>
-<div class="line"><span class="lineno">   39</span>        all_resources = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rm.list_resources</a>(<span class="stringliteral">&quot;?*::INSTR&quot;</span>)</div>
+<div class="line"><span class="lineno">   39</span>        all_resources = rm.list_resources(<span class="stringliteral">&quot;?*::INSTR&quot;</span>)</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>        <span class="comment"># Categorize resources to provide a predictable and user-friendly</span></div>
 <div class="line"><span class="lineno">   42</span>        <span class="comment"># order in the GUI.</span></div>
@@ -162,29 +162,28 @@ Side effects and thread-safety:
 <div class="line"><span class="lineno">   45</span>        other_resources = []</div>
 <div class="line"><span class="lineno">   46</span> </div>
 <div class="line"><span class="lineno">   47</span>        <span class="keywordflow">for</span> resource <span class="keywordflow">in</span> all_resources:</div>
-<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">resource.startswith</a>(<span class="stringliteral">&quot;USB&quot;</span>):</div>
-<div class="line"><span class="lineno">   49</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">usb_resources.append</a>(resource)</div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">resource.startswith</a>(<span class="stringliteral">&quot;TCPIP&quot;</span>):</div>
-<div class="line"><span class="lineno">   51</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tcpip_resources.append</a>(resource)</div>
+<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">if</span> resource.startswith(<span class="stringliteral">&quot;USB&quot;</span>):</div>
+<div class="line"><span class="lineno">   49</span>                usb_resources.append(resource)</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">elif</span> resource.startswith(<span class="stringliteral">&quot;TCPIP&quot;</span>):</div>
+<div class="line"><span class="lineno">   51</span>                tcpip_resources.append(resource)</div>
 <div class="line"><span class="lineno">   52</span>            <span class="keywordflow">else</span>:  <span class="comment"># Catches ASRL, GPIB, etc.</span></div>
-<div class="line"><span class="lineno">   53</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">other_resources.append</a>(resource)</div>
+<div class="line"><span class="lineno">   53</span>                other_resources.append(resource)</div>
 <div class="line"><span class="lineno">   54</span> </div>
 <div class="line"><span class="lineno">   55</span>        <span class="comment"># Prioritize list: USB -&gt; TCPIP -&gt; Other (ASRL).</span></div>
 <div class="line"><span class="lineno">   56</span>        <span class="comment"># USB is typically most stable for local use.</span></div>
 <div class="line"><span class="lineno">   57</span>        resources = usb_resources + tcpip_resources + other_resources</div>
 <div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;visa&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;💳 Found VISA resources (Reordered): {resources}.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   59</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;visa&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;💳 Found VISA resources (Reordered): {resources}.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(resources)</div>
 <div class="line"><span class="lineno">   61</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   62</span>        error_message = f<span class="stringliteral">&quot;💳 ❌ Error listing VISA resources: {e}.&quot;</span></div>
 <div class="line"><span class="lineno">   63</span> </div>
 <div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   65</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(error_message)</div>
+<div class="line"><span class="lineno">   65</span>            logger.debug(error_message)</div>
 <div class="line"><span class="lineno">   66</span>        <span class="keywordflow">return</span> []</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 </div>
 </div>
@@ -212,7 +211,7 @@ Side effects and thread-safety:
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.visa_list_visa_resources.LOCAL_DEBUG = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Methods.visa_list_visa_resources.LOCAL_DEBUG = False</td>
         </tr>
       </table>
 </div><div class="memdoc">

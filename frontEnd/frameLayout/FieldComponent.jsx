@@ -50,7 +50,11 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         node.show_label = _lab.show_label;
     }
 
-    const topic = `OpenAir/Gui${path_prefix}/${nodeName}`;
+    // path_prefix is set by LoaderOrchestrator to the full file-derived prefix
+    // (e.g. "OpenAir/Gui/Window/Spectrum/Instrument/frequency"), mirroring
+    // Python's generate_topic_path_from_filepath. nodeName is the leaf
+    // identifier; when empty (root passthrough), the prefix IS the topic.
+    const topic = nodeName ? `${path_prefix}/${nodeName}` : path_prefix;
 
     // Determine default value. The canonical value pillar is value.default_value
     // (checked first); domain.primary.value_default and flat value_default are

@@ -29,10 +29,10 @@ BUFFER_START_STOP_MHZ = 0.1
 HZ_TO_MHZ = 1_000_000
 
 # Topics
-TOPIC_START_STOP = "OPEN-AIR/configuration/Start-Stop-Pause/Buttons/options/START/selected"
-TOPIC_MARKERS_ROOT = "OPEN-AIR/repository/markers"
+TOPIC_START_STOP = "OpenAir/configuration/Start-Stop-Pause/Buttons/options/START/selected"
+TOPIC_MARKERS_ROOT = "OpenAir/repository/markers"
 TOPIC_DEVICE_FREQ_WILDCARD = f"{TOPIC_MARKERS_ROOT}/+/IDENTITY/FREQ_MHZ"
-TOPIC_MARKER_NAB_OUTPUT_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/Marker_*/value"
+TOPIC_MARKER_NAB_OUTPUT_WILDCARD = "OpenAir/yak/Markers/nab/NAB_all_marker_settings/Outputs/Marker_*/value"
 
 class MarkerGoGetterWorker:
     """

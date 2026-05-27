@@ -101,10 +101,10 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     return (
         <div style={{ border: '1px dashed #333', padding: '5px', margin: '2px' }} data-oca-path={jsonPath}>
             {node.blocks && typeof node.blocks === 'object' && Object.entries(node.blocks).map(([k, v]) => (
-                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.blocks.${k}` : undefined} />
+                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jsonPath ? `${jsonPath}.blocks.${k}` : undefined} />
             ))}
             {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
-                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
+                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
             ))}
         </div>
     );

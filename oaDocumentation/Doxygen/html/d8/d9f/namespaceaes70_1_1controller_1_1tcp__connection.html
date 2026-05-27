@@ -104,7 +104,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9abff31cd5e4c05cd88fa8977776c776" id="r_a9abff31cd5e4c05cd88fa8977776c776"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d9f/namespaceaes70_1_1controller_1_1tcp__connection.html#a9abff31cd5e4c05cd88fa8977776c776">connect</a> (**<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a9abff31cd5e4c05cd88fa8977776c776" id="r_a9abff31cd5e4c05cd88fa8977776c776"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d9f/namespaceaes70_1_1controller_1_1tcp__connection.html#a9abff31cd5e4c05cd88fa8977776c776">connect</a> (**kwargs)</td></tr>
 <tr class="separator:a9abff31cd5e4c05cd88fa8977776c776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -130,14 +130,13 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   60</span>        <span class="keywordflow">raise</span> ev</div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   63</span>        sock = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.socket</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.AF_INET</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.SOCK_STREAM</a>)</div>
-<div class="line"><span class="lineno">   64</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sock.connect</a>((kwargs[<span class="stringliteral">&#39;host&#39;</span>], kwargs[<span class="stringliteral">&#39;port&#39;</span>]))</div>
-<div class="line"><span class="lineno">   65</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sock.setblocking</a>(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   63</span>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div>
+<div class="line"><span class="lineno">   64</span>        sock.connect((kwargs[<span class="stringliteral">&#39;host&#39;</span>], kwargs[<span class="stringliteral">&#39;port&#39;</span>]))</div>
+<div class="line"><span class="lineno">   65</span>        sock.setblocking(<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   66</span>        conn = TCPConnection(sock, kwargs)</div>
 <div class="line"><span class="lineno">   67</span>        <span class="keywordflow">return</span> conn</div>
 <div class="line"><span class="lineno">   68</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   69</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ae31e17545cf0b897139e9b6d1ff0c740">onerror</a>(e)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_ae31e17545cf0b897139e9b6d1ff0c740"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ae31e17545cf0b897139e9b6d1ff0c740">onerror</a></div><div class="ttdeci">onerror</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02601">generated.rs:2601</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02601">onerror</a>.</p>

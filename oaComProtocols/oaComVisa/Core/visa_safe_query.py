@@ -31,7 +31,7 @@ def query_safe(proxy, command, correlation_id="N/A"):
         proxy._publish_proxy_error(message=error_message, command=command)
         # Assuming MQTT publish is safe or fatal
         proxy.mqtt_util.get_client_instance().publish(
-            topic="OPEN-AIR/Proxy/Error",
+            topic="OpenAir/Proxy/Error",
             payload=orjson.dumps(
                 {"error": error_message, "command": command, "timestamp": time.time()}
             ),
@@ -68,7 +68,7 @@ def query_safe(proxy, command, correlation_id="N/A"):
     resp_str = str(response)[:100] + ("..." if len(str(response)) > 100 else "")
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {resp_str}", "DEBUG")
 
-    topic = "OPEN-AIR/Proxy/Rx_Outbox"
+    topic = "OpenAir/Proxy/Rx_Outbox"
     payload = orjson.dumps(
         {
             "response": response,

@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d4/df4/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260330_004500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2045"></a> </p>
-<h1><a class="anchor" id="autotoc_md2046"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2494"></a> </p>
+<h1><a class="anchor" id="autotoc_md2495"></a>
 Issue</h1>
 <p>The "Maintenance (CLEAR)" operations in the <code>oaTests</code> right panel were taking up significant vertical space, leading to a cluttered user interface.</p>
-<h1><a class="anchor" id="autotoc_md2047"></a>
+<h1><a class="anchor" id="autotoc_md2496"></a>
 Root Cause</h1>
 <p>Legacy design placed all individual cleanup buttons (Logs, Audits, MQTT, etc.) directly in the primary side panel.</p>
-<h1><a class="anchor" id="autotoc_md2048"></a>
+<h1><a class="anchor" id="autotoc_md2497"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Maintenance Pop-up</b>: Created <code><a class="el" href="../../d7/df0/maintenance__clear__screen_8py.html">oaTests/Interface/maintenance_clear_screen.py</a></code>, a dedicated Textual <code>Screen</code> that centralizes all system cleanup operations in a modal-style dialog.</li>
 <li><b>UI Consolidation</b>: Updated <code><a class="el" href="../../d0/d7a/right__panel_8py.html">oaTests/Interface/right_panel.py</a></code> to remove the individual cleanup buttons and replace them with a single, high-contrast "CLEAR MENU" button.</li>
 <li><b>Action Delegation</b>: Implemented logic in the new screen to delegate cleanup commands back to the main <code>TestsApp</code> orchestrator, ensuring thread safety and consistent logging.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2049"></a>
+<h1><a class="anchor" id="autotoc_md2498"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual UI audit confirms the "CLEAR MENU" button is correctly positioned in the right panel.</li>

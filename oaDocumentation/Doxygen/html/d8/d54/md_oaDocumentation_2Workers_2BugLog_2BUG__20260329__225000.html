@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d8/d54/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_225000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2005"></a> </p>
-<h1><a class="anchor" id="autotoc_md2006"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2454"></a> </p>
+<h1><a class="anchor" id="autotoc_md2455"></a>
 Issue</h1>
 <p>The MIDI manager was emitting repetitive "heartbeat" debug logs every 30 seconds for each active MIDI port, even when <code>LOCAL_DEBUG</code> was disabled. Example: <code>💓 [MIDI-LISTEN] Loop active for Arturia MicroLab</code></p>
-<h1><a class="anchor" id="autotoc_md2007"></a>
+<h1><a class="anchor" id="autotoc_md2456"></a>
 Root Cause</h1>
 <p>The heartbeat log statement in <code>oaComProtocols.oaComMidi/Managers/midi_manager.py</code> was not wrapped in an <code>if LOCAL_DEBUG:</code> gate.</p>
-<h1><a class="anchor" id="autotoc_md2008"></a>
+<h1><a class="anchor" id="autotoc_md2457"></a>
 Resolution</h1>
 <p>Wrapped the <code>midi_logger.debug()</code> call within the <code>_midi_listen_loop</code> method with an <code>if LOCAL_DEBUG:</code> check.</p>
-<h1><a class="anchor" id="autotoc_md2009"></a>
+<h1><a class="anchor" id="autotoc_md2458"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>LOCAL_DEBUG</code> is set to <code>False</code> by default in the file.</li>

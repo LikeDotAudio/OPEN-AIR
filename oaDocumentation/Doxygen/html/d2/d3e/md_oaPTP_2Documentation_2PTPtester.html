@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d2/d3e/md_oaPTP_2Documentation_2PTPtes
   <div class="headertitle"><div class="title">🏷️ Ptptester</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4544"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4545"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4824"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4825"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4546"></a>
+<h2><a class="anchor" id="autotoc_md4826"></a>
 File Level</h2>
 <p><code><a class="el" href="../../d3/d06/PTPtester_8py.html">oaPTP/Methods/PTPtester.py</a></code></p>
 <p>A diagnostic utility for sniffing and reporting PTP (Precision Time Protocol) traffic to the OPEN-AIR system via MQTT.</p>
@@ -107,7 +107,7 @@ File Level</h2>
 <li>Publishes captured data to a local or remote MQTT broker for application testing.</li>
 <li>Provides a standalone CLI interface for real-time traffic monitoring.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4547"></a>
+<h1><a class="anchor" id="autotoc_md4827"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li><b>Library Dependencies:</b> Requires <code>scapy</code> for packet manipulation and <code>paho-mqtt</code> for network communication.</li>
@@ -115,11 +115,11 @@ File Level</h2>
 <li><b>Network Environment:</b> Assumes a functional MQTT broker is reachable at the specified address if reporting functionality is required.</li>
 <li><b>Platform Support:</b> Primarily designed for Linux-based systems.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4548"></a>
+<h1><a class="anchor" id="autotoc_md4828"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4549"></a>
+<h2><a class="anchor" id="autotoc_md4829"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md4550"></a>
+<h3><a class="anchor" id="autotoc_md4830"></a>
 &lt;tt&gt;packet_callback(pkt)&lt;/tt&gt;</h3>
 <p>Analyzes captured network packets and publishes extracted PTP data to the MQTT broker.</p>
 <p><b>Parameters:</b></p><ul>
@@ -133,7 +133,7 @@ Global Functions</h2>
 <li>Performs network I/O by publishing JSON-encoded data to the configured MQTT topic.</li>
 <li>Not thread-safe if multiple sniffer instances are using a shared global MQTT client.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4551"></a>
+<h1><a class="anchor" id="autotoc_md4831"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li><b>MQTT Compatibility:</b> We include a try-except block when initializing the <code>mqtt.Client</code> to maintain compatibility between older <code>paho-mqtt</code> versions and the newer v2.0+ API.</li>

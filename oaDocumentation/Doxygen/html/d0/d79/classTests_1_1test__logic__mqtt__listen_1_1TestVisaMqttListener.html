@@ -199,11 +199,10 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   37</span>        <span class="stringliteral">&quot;&quot;&quot;Verify that all topics are subscribed to during initialization.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment"># Check if subscribe_to_topic was called for each expected topic</span></div>
 <div class="line"><span class="lineno">   39</span>        <span class="comment"># (The exact topics are defined as constants in the module)</span></div>
-<div class="line"><span class="lineno">   40</span>        self.assertEqual(self.mock_router.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subscribe_to_topic.call_count</a>, 5)</div>
+<div class="line"><span class="lineno">   40</span>        self.assertEqual(self.mock_router.subscribe_to_topic.call_count, 5)</div>
 <div class="line"><span class="lineno">   41</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00024">Tests.test_midi.TestMidiManager.mock_router</a>, <a class="el" href="../../de/de5/test__broker__monitor_8py_source.html#l00018">Tests.test_broker_monitor.TestBrokerMonitor.mock_router</a>, <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00053">Tests.test_mqtt_manager.TestMqttManager.mock_router</a>, <a class="el" href="../../da/d2d/test__mqtt__subscriber__router_8py_source.html#l00018">Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.mock_router</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00025">Tests.test_osc.TestOSCManager.mock_router</a>, <a class="el" href="../../db/dad/test__rest_8py_source.html#l00034">Tests.test_rest.TestRESTProtocol.mock_router</a>, <a class="el" href="../../d6/d63/test__smpte2138__bridge_8py_source.html#l00024">Tests.test_smpte2138_bridge.TestSMPTE2138Bridge.mock_router</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00022">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_router</a>, <a class="el" href="../../d6/dd9/test__fleet__status__monitor_8py_source.html#l00021">Tests.test_fleet_status_monitor.TestFleetStatusMonitor.mock_router</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00024">Tests.test_midi.TestMidiManager.mock_router</a>, <a class="el" href="../../de/de5/test__broker__monitor_8py_source.html#l00018">Tests.test_broker_monitor.TestBrokerMonitor.mock_router</a>, <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00053">Tests.test_mqtt_manager.TestMqttManager.mock_router</a>, <a class="el" href="../../da/d2d/test__mqtt__subscriber__router_8py_source.html#l00018">Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.mock_router</a>, <a class="el" href="../../db/d0e/test__osc_8py_source.html#l00025">Tests.test_osc.TestOSCManager.mock_router</a>, <a class="el" href="../../db/dad/test__rest_8py_source.html#l00034">Tests.test_rest.TestRESTProtocol.mock_router</a>, <a class="el" href="../../d6/d63/test__smpte2138__bridge_8py_source.html#l00024">Tests.test_smpte2138_bridge.TestSMPTE2138Bridge.mock_router</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00022">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_router</a>, and <a class="el" href="../../d6/dd9/test__fleet__status__monitor_8py_source.html#l00021">Tests.test_fleet_status_monitor.TestFleetStatusMonitor.mock_router</a>.</p>
 
 </div>
 </div>
@@ -243,16 +242,16 @@ CHECK: Assert a thread is started for the specific resource.
 <div class="line"><span class="lineno">  114</span><span class="stringliteral">        OPERATE: Call _on_connect_request.</span></div>
 <div class="line"><span class="lineno">  115</span><span class="stringliteral">        CHECK: Assert a thread is started for the specific resource.</span></div>
 <div class="line"><span class="lineno">  116</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  117</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>({<span class="stringliteral">&quot;resource&quot;</span>: <span class="stringliteral">&quot;GPIB0::7::INSTR&quot;</span>})</div>
+<div class="line"><span class="lineno">  117</span>        payload = orjson.dumps({<span class="stringliteral">&quot;resource&quot;</span>: <span class="stringliteral">&quot;GPIB0::7::INSTR&quot;</span>})</div>
 <div class="line"><span class="lineno">  118</span> </div>
 <div class="line"><span class="lineno">  119</span>        self.listener._on_connect_request(<span class="stringliteral">&quot;topic&quot;</span>, payload)</div>
 <div class="line"><span class="lineno">  120</span> </div>
-<div class="line"><span class="lineno">  121</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">  122</span>        args, kwargs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.call_args</a></div>
+<div class="line"><span class="lineno">  121</span>        MockThread.assert_called_once()</div>
+<div class="line"><span class="lineno">  122</span>        args, kwargs = MockThread.call_args</div>
 <div class="line"><span class="lineno">  123</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;args&#39;</span>], (<span class="stringliteral">&quot;GPIB0::7::INSTR&quot;</span>,))</div>
 <div class="line"><span class="lineno">  124</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>.</p>
 
 </div>
 </div>
@@ -285,14 +284,14 @@ CHECK: Assert the correct resource is selected.
 <div class="line"><span class="lineno">   63</span>        self.listener.found_resources = [<span class="stringliteral">&quot;RES1&quot;</span>, <span class="stringliteral">&quot;RES2&quot;</span>, <span class="stringliteral">&quot;RES3&quot;</span>]</div>
 <div class="line"><span class="lineno">   64</span>        <span class="comment"># Topic format: .../options/&lt;index&gt;/selected. Let&#39;s pick index 2 (1-based is 2, 0-based is 1)</span></div>
 <div class="line"><span class="lineno">   65</span>        topic = <span class="stringliteral">&quot;OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/2/selected&quot;</span></div>
-<div class="line"><span class="lineno">   66</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
+<div class="line"><span class="lineno">   66</span>        payload = orjson.dumps({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
 <div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>        self.listener._on_device_select(topic, payload)</div>
 <div class="line"><span class="lineno">   69</span> </div>
 <div class="line"><span class="lineno">   70</span>        self.assertEqual(self.listener.selected_device_resource, <span class="stringliteral">&quot;RES2&quot;</span>)</div>
 <div class="line"><span class="lineno">   71</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>.</p>
 
 </div>
 </div>
@@ -333,18 +332,18 @@ CHECK: Assert a thread is started to handle the connection.
 <div class="line"><span class="lineno">   77</span><span class="stringliteral">        CHECK: Assert a thread is started to handle the connection.</span></div>
 <div class="line"><span class="lineno">   78</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   79</span>        self.listener.selected_device_resource = <span class="stringliteral">&quot;TCPIP::1.2.3.4::INSTR&quot;</span></div>
-<div class="line"><span class="lineno">   80</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
+<div class="line"><span class="lineno">   80</span>        payload = orjson.dumps({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
 <div class="line"><span class="lineno">   81</span> </div>
 <div class="line"><span class="lineno">   82</span>        self.listener._on_gui_connect_request(<span class="stringliteral">&quot;topic&quot;</span>, payload)</div>
 <div class="line"><span class="lineno">   83</span> </div>
-<div class="line"><span class="lineno">   84</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">   85</span>        args, kwargs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.call_args</a></div>
+<div class="line"><span class="lineno">   84</span>        MockThread.assert_called_once()</div>
+<div class="line"><span class="lineno">   85</span>        args, kwargs = MockThread.call_args</div>
 <div class="line"><span class="lineno">   86</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;target&#39;</span>], self.listener._connect_and_get_inst)</div>
 <div class="line"><span class="lineno">   87</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;args&#39;</span>], (<span class="stringliteral">&quot;TCPIP::1.2.3.4::INSTR&quot;</span>,))</div>
-<div class="line"><span class="lineno">   88</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.return_value.start.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">   88</span>        MockThread.return_value.start.assert_called_once()</div>
 <div class="line"><span class="lineno">   89</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>.</p>
 
 </div>
 </div>
@@ -386,19 +385,19 @@ CHECK: Assert a thread is started to handle the disconnection.
 <div class="line"><span class="lineno">   96</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   97</span>        mock_inst = MagicMock()</div>
 <div class="line"><span class="lineno">   98</span>        self.listener.inst = mock_inst</div>
-<div class="line"><span class="lineno">   99</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
+<div class="line"><span class="lineno">   99</span>        payload = orjson.dumps({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>        self.listener._on_gui_disconnect_request(<span class="stringliteral">&quot;topic&quot;</span>, payload)</div>
 <div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">  104</span>        args, kwargs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.call_args</a></div>
+<div class="line"><span class="lineno">  103</span>        MockThread.assert_called_once()</div>
+<div class="line"><span class="lineno">  104</span>        args, kwargs = MockThread.call_args</div>
 <div class="line"><span class="lineno">  105</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;target&#39;</span>], self.mock_disconnector.disconnect_instrument_logic)</div>
 <div class="line"><span class="lineno">  106</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;args&#39;</span>], (mock_inst,))</div>
-<div class="line"><span class="lineno">  107</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">MockThread.return_value.start.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">  107</span>        MockThread.return_value.start.assert_called_once()</div>
 <div class="line"><span class="lineno">  108</span>        self.assertIsNone(self.listener.inst)</div>
 <div class="line"><span class="lineno">  109</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00025">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_disconnector</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00025">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_disconnector</a>.</p>
 
 </div>
 </div>
@@ -428,17 +427,17 @@ CHECK: Assert searcher is called and GUI is updated.
 <div class="line"><span class="lineno">   45</span><span class="stringliteral">        OPERATE: Call _on_search_request with value=True.</span></div>
 <div class="line"><span class="lineno">   46</span><span class="stringliteral">        CHECK: Assert searcher is called and GUI is updated.</span></div>
 <div class="line"><span class="lineno">   47</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   48</span>        self.mock_searcher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">search_resources.return_value</a> = [<span class="stringliteral">&quot;DEV1&quot;</span>, <span class="stringliteral">&quot;DEV2&quot;</span>]</div>
-<div class="line"><span class="lineno">   49</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
+<div class="line"><span class="lineno">   48</span>        self.mock_searcher.search_resources.return_value = [<span class="stringliteral">&quot;DEV1&quot;</span>, <span class="stringliteral">&quot;DEV2&quot;</span>]</div>
+<div class="line"><span class="lineno">   49</span>        payload = orjson.dumps({<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">True</span>})</div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>        self.listener._on_search_request(MQTT_TOPIC_SEARCH_TRIGGER, payload)</div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>        self.mock_searcher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">search_resources.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">   54</span>        self.mock_publisher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_update_found_devices_gui.assert_called_with</a>([<span class="stringliteral">&quot;DEV1&quot;</span>, <span class="stringliteral">&quot;DEV2&quot;</span>])</div>
+<div class="line"><span class="lineno">   53</span>        self.mock_searcher.search_resources.assert_called_once()</div>
+<div class="line"><span class="lineno">   54</span>        self.mock_publisher._update_found_devices_gui.assert_called_with([<span class="stringliteral">&quot;DEV1&quot;</span>, <span class="stringliteral">&quot;DEV2&quot;</span>])</div>
 <div class="line"><span class="lineno">   55</span>        self.assertEqual(self.listener.found_resources, [<span class="stringliteral">&quot;DEV1&quot;</span>, <span class="stringliteral">&quot;DEV2&quot;</span>])</div>
 <div class="line"><span class="lineno">   56</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00023">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_searcher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d46/dnssd__listener_8py_source.html#l00017">dnssd_listener.ServiceTypeListener.listener</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00028">Tests.test_logic_mqtt_listen.TestVisaMqttListener.listener</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00023">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_searcher</a>.</p>
 
 </div>
 </div>

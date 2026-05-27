@@ -121,7 +121,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Standalone MQTT Topic Tree Sweeper")
     parser.add_argument("--host", type=str, default="localhost", help="MQTT Broker Host")
     parser.add_argument("--port", type=int, default=1883, help="MQTT Broker Port")
-    parser.add_argument("--topic", type=str, default="OPEN-AIR", help="Base Topic to Sweep")
+    parser.add_argument("--topic", type=str, default="OpenAir", help="Base Topic to Sweep")
 
     args = parser.parse_args()
 

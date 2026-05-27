@@ -69,7 +69,7 @@ class TestProtocolRouter(unittest.TestCase):
         ext_message = {
             "source": "MQTT",
             "logical_source": "MQTT",
-            "topic": "OPEN-AIR/GUI/test",
+            "topic": "OpenAir/GUI/test",
             "value": 1.0,
             "full_id": "different_instance_id"
         }
@@ -80,7 +80,7 @@ class TestProtocolRouter(unittest.TestCase):
         echo_message = {
             "source": "MQTT",
             "logical_source": "MQTT",
-            "topic": "OPEN-AIR/GUI/test",
+            "topic": "OpenAir/GUI/test",
             "value": 1.0,
             "full_id": app_constants.FULL_INSTANCE_ID
         }

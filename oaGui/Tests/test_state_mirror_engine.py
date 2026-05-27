@@ -21,7 +21,7 @@ class TestStateMirrorEngine(unittest.TestCase):
             # and avoid starting problematic background threads.
             self.root = None
 
-        self.base_topic = "OPEN-AIR"
+        self.base_topic = "OpenAir"
         self.subscriber_router = MagicMock()
         self.state_cache_manager = MagicMock()
         # Ensure cache is a real dict to avoid MagicMock __contains__ issues
@@ -44,7 +44,7 @@ class TestStateMirrorEngine(unittest.TestCase):
     def test_calculate_topic(self):
         """Test topic calculation logic."""
         topic = self.engine.calculate_topic("volume", "MainTab")
-        self.assertEqual(topic, "OPEN-AIR/MainTab/volume")
+        self.assertEqual(topic, "OpenAir/MainTab/volume")
 
     @unittest.skipIf(tk.Tk is None, "Tkinter not available")
     def test_register_widget(self):
@@ -54,7 +54,7 @@ class TestStateMirrorEngine(unittest.TestCase):
         config = {"dynamics": {"path": "custom/path"}}
         topic = self.engine.register_widget("widget1", var, "Tab1", config)
 
-        self.assertEqual(topic, "OPEN-AIR/Tab1/custom/path")
+        self.assertEqual(topic, "OpenAir/Tab1/custom/path")
         self.assertIn("widget1", self.engine.registered_widgets)
 
     @patch("oaComProtocols.oaComMQTT.Core.mqtt_publisher_service.publish_payload")

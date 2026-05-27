@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d2/d55/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG LOG: 20260403_003400</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1202"></a></p>
-<h1><a class="anchor" id="autotoc_md1203"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1467"></a></p>
+<h1><a class="anchor" id="autotoc_md1468"></a>
 Date: 2026-04-03</h1>
-<h1><a class="anchor" id="autotoc_md1204"></a>
+<h1><a class="anchor" id="autotoc_md1469"></a>
 Issue: MIDI Commands Kill Program and Lock Terminal</h1>
-<h1><a class="anchor" id="autotoc_md1205"></a>
+<h1><a class="anchor" id="autotoc_md1470"></a>
 Root Cause: Recursive dispatch loop in ProtocolRouter and high CPU load in MIDI listen threads.</h1>
-<h2><a class="anchor" id="autotoc_md1206"></a>
+<h2><a class="anchor" id="autotoc_md1471"></a>
 Analysis</h2>
 <ul>
 <li><b>Recursive Loop</b>: <code>MidiManager.publish</code> calls <code>ProtocolRouter.ingest</code> with <code>source="MIDI-TX"</code>. In <code>dispatch_message</code>, the loop prevention logic only blocked the <code>"MIDI"</code> source, allowing <code>"MIDI-TX"</code> messages with a MIDI strategy (<code>🎹</code>) to re-trigger <code>publish</code> indefinitely. This saturated the dispatch thread pool and locked the terminal.</li>
 <li><b>CPU Load</b>: <code>_midi_listen_loop</code> used a <code>1ms</code> sleep, which is excessively fast for typical MIDI rates and was likely contributing to the terminal-locking behavior on multi-port systems.</li>
 <li><b>Direction Detection</b>: <code>_on_protocol_event</code> was not correctly distinguishing direction when <code>"MIDI"</code> was used as a source for both IN and OUT traffic.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1207"></a>
+<h2><a class="anchor" id="autotoc_md1472"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Updated <code><a class="el" href="../../d0/d9a/dispatch_8py.html">oaComBroker/Core/protocol_router/dispatch.py</a></code></b>: Added <code>"MIDI-TX"</code>, <code>"OSC-TX"</code>, and <code>"SNMP-TX"</code> to the source exclusion list in <code>dispatch_message</code>.</li>
@@ -118,7 +118,7 @@ Resolution</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1208"></a>
+<h2><a class="anchor" id="autotoc_md1473"></a>
 Verification Evidence</h2>
 <ul>
 <li>Syntax verified for all modified Python files.</li>

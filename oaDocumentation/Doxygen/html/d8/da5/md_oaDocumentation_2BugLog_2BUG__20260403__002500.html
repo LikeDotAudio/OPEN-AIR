@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('d8/da5/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Resolution: Resource Leaks and N+1 MQTT Query</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1190"></a> <b>Date:</b> 2026-04-03 <b>Author:</b> Elite Bug-Fixing Architect</p>
-<h1><a class="anchor" id="autotoc_md1191"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1455"></a> <b>Date:</b> 2026-04-03 <b>Author:</b> Elite Bug-Fixing Architect</p>
+<h1><a class="anchor" id="autotoc_md1456"></a>
 Issue</h1>
 <ol type="1">
 <li><b>Resource Leaks:</b> Multiple socket initializations in <code>oaComProtocols.oaComVisa/Methods/network_utils.py</code>, <code>oaComProtocols.oaComVisa/Workers/agent_mdns_zeroconf.py</code>, and <code>oaComProtocols.oaComVisa/Methods/visa_utility_parser.py</code> did not guarantee socket closure via <code>finally</code> blocks or context managers, risking "Too many open files" errors.</li>
 <li><b>N+1 Query Pattern:</b> The <code>_update_found_devices_gui</code> method in <code>oaComProtocols.oaComVisa/Workers/logic_mqtt_publisher.py</code> executed up to 120 separate non-blocking MQTT publish operations sequentially to populate the GUI dropdown, causing potential network overhead and UI stutter.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1192"></a>
+<h1><a class="anchor" id="autotoc_md1457"></a>
 Root Cause</h1>
 <ul>
 <li>Sockets were initialized using <code>sock = socket.socket(...)</code> and closed sequentially, without safeguards to ensure <code>.<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a12e1f53c847d07ce9e58df470087c0fa">close()</a></code> would execute if a <code>TimeoutError</code> or connection exception occurred.</li>
 <li>The MQTT logic for updating found devices directly mirrored the GUI slots by publishing <code>options/i/active</code> individually in a <code>for</code> loop.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1193"></a>
+<h1><a class="anchor" id="autotoc_md1458"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Resource Safety:</b> Refactored <code>check_host()</code> in <code>oaComProtocols.oaComVisa/Methods/network_utils.py</code>, <code>_check_host()</code> in <code>oaComProtocols.oaComVisa/Workers/agent_mdns_zeroconf.py</code>, and <code>query_device_safe()</code> in <code>oaComProtocols.oaComVisa/Methods/visa_utility_parser.py</code> to employ <code>with socket.socket(...) as sock:</code> context managers. This automatically handles graceful shutdown of file descriptors on exit or exception.</li>
 <li><b>Bulk MQTT Updates:</b> Modified <code>_update_found_devices_gui()</code> in <code>oaComProtocols.oaComVisa/Workers/logic_mqtt_publisher.py</code> to construct a single consolidated JSON array (<code>options_array</code>) of all 40 slots, then published it as a single atomic operation to the bulk endpoint <code>options/all</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1194"></a>
+<h1><a class="anchor" id="autotoc_md1459"></a>
 Verification Evidence</h1>
 <ul>
 <li>Verified syntax correctness for context managers.</li>

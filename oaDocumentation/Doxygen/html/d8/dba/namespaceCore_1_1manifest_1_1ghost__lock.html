@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d8/dba/namespaceCore_1_1manifest_1_1gh
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4cd826784f00dcda0fbdc943ee89950a" id="r_a4cd826784f00dcda0fbdc943ee89950a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dba/namespaceCore_1_1manifest_1_1ghost__lock.html#a4cd826784f00dcda0fbdc943ee89950a">is_ghost_touch_locked</a> (dict payload, Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget_instance</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a4cd826784f00dcda0fbdc943ee89950a" id="r_a4cd826784f00dcda0fbdc943ee89950a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dba/namespaceCore_1_1manifest_1_1ghost__lock.html#a4cd826784f00dcda0fbdc943ee89950a">is_ghost_touch_locked</a> (dict payload, Any widget_instance=None)</td></tr>
 <tr class="separator:a4cd826784f00dcda0fbdc943ee89950a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Any &#160;</td>
-          <td class="paramname"><em>widget_instance</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>widget_instance</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -142,20 +142,17 @@ Checks:
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">        1. If the widget_instance.is_locked == True, the human is in control.</span></div>
 <div class="line"><span class="lineno">   16</span><span class="stringliteral">        2. If is_settled == False (the sender is in motion), it yields.</span></div>
 <div class="line"><span class="lineno">   17</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(payload, dict):</div>
+<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(payload, dict):</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   20</span> </div>
 <div class="line"><span class="lineno">   21</span>    <span class="comment"># ⚡ HUMAN PRIORITY: If a human is touching the widget, the Ghost is locked out.</span></div>
-<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span> widget_instance <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(widget_instance, <span class="stringliteral">&quot;is_locked&quot;</span>, <span class="keyword">False</span>):</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span> widget_instance <span class="keywordflow">and</span> getattr(widget_instance, <span class="stringliteral">&quot;is_locked&quot;</span>, <span class="keyword">False</span>):</div>
 <div class="line"><span class="lineno">   23</span>        <span class="comment"># ⚡ SETTLE CHECK: Only yield if the sender hasn&#39;t settled their movement.</span></div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.get</a>(<span class="stringliteral">&quot;is_settled&quot;</span>, <span class="keyword">True</span>):</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> payload.get(<span class="stringliteral">&quot;is_settled&quot;</span>, <span class="keyword">True</span>):</div>
 <div class="line"><span class="lineno">   25</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>    <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

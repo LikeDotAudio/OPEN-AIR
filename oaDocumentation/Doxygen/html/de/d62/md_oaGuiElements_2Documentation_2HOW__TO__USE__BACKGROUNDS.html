@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
   <div class="headertitle"><div class="title">How to Use: The Layered Industrial Background Engine</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md3648"></a> This directory showcases the advanced procedural background engine used in the Open Air "Next Gen" interface. This engine generates photorealistic, resolution-independent industrial surfaces on the fly, simulating physical materials, manufacturing defects, and decades of wear.</p>
-<h1><a class="anchor" id="autotoc_md3649"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md3928"></a> This directory showcases the advanced procedural background engine used in the Open Air "Next Gen" interface. This engine generates photorealistic, resolution-independent industrial surfaces on the fly, simulating physical materials, manufacturing defects, and decades of wear.</p>
+<h1><a class="anchor" id="autotoc_md3929"></a>
 1. Quick Start</h1>
 <p>To add a background to any GUI tab, add a <code>background</code> block at the root of your JSON file:</p>
 <div class="fragment"><div class="line">{</div>
@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <div class="line">  &quot;fields&quot;: { ... }</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md3651"></a>
+<h1><a class="anchor" id="autotoc_md3931"></a>
 2. The Physics Stack</h1>
 <p>The engine renders layers in a specific physical order. Understanding this stack helps you predict how effects will look:</p>
 <ol type="1">
@@ -123,9 +123,9 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><b>Global Blur</b>: A final pass to blend digital sharpness into a photographic look.</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md3653"></a>
+<h1><a class="anchor" id="autotoc_md3933"></a>
 3. Parameter Reference</h1>
-<h2><a class="anchor" id="autotoc_md3654"></a>
+<h2><a class="anchor" id="autotoc_md3934"></a>
 &lt;tt&gt;base_material&lt;/tt&gt; (The Metal)</h2>
 <ul>
 <li><code>color</code> (Hex): The color of the raw metal (e.g., <code>#444444</code> for steel, <code>#111111</code> for carbon).</li>
@@ -141,21 +141,21 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><code>grain_intensity</code> (Float 0.0-1.0): How strong the texture is.</li>
 <li><code>grain_direction</code> (String): <code>vertical</code> or <code>horizontal</code> (for brushed/crosshatch).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3655"></a>
+<h2><a class="anchor" id="autotoc_md3935"></a>
 &lt;tt&gt;paint_layer&lt;/tt&gt; (The Finish)</h2>
 <ul>
 <li><code>color</code> (Hex): The paint color.</li>
 <li><code>opacity</code> (Float 0.0-1.0): <code>1.0</code> is solid paint. <code>0.0</code> is raw metal. <code>0.2</code> is a thin wash (anodized look).</li>
 <li><code>gradient_intensity</code> (Float 0.0-1.0): Adds a top-to-bottom light falloff to simulate room lighting.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3656"></a>
+<h2><a class="anchor" id="autotoc_md3936"></a>
 &lt;tt&gt;metal_fold&lt;/tt&gt; (The Chassis)</h2>
 <p>Simulates 3D bent metal edges.</p><ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
 <li><code>width_px</code> (Int): Width of the fold in pixels (default <code>20</code>).</li>
 <li><code>creases</code> (List): Add internal seams for modular panels. <code>json "creases": [ { "position_pct": 0.33, "orientation": "vertical", "type": "valley" }, { "position_pct": 0.50, "orientation": "horizontal", "type": "ridge" } ] </code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3657"></a>
+<h2><a class="anchor" id="autotoc_md3937"></a>
 &lt;tt&gt;screws&lt;/tt&gt; (The Fasteners)</h2>
 <p>Adds Robertson (Square Drive) screws to the corners and midpoints.</p><ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><code>finish</code> (String): <code>chrome</code>, <code>black_oxide</code>, or <code>custom</code>.</li>
 <li><code>color</code> (Hex): Used if finish is <code>custom</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3658"></a>
+<h2><a class="anchor" id="autotoc_md3938"></a>
 &lt;tt&gt;edge_wear&lt;/tt&gt; (The Borders)</h2>
 <ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
@@ -174,7 +174,7 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><code>scratch_intensity</code> (Float): Amount of edge chipping.</li>
 <li><code>type</code> (String): <code>chipped</code> (hard edges) or <code>faded</code> (soft rub).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3659"></a>
+<h2><a class="anchor" id="autotoc_md3939"></a>
 &lt;tt&gt;panel_scratches&lt;/tt&gt; (Surface Damage)</h2>
 <ul>
 <li><code>count</code> (Int): Number of scratches.</li>
@@ -182,13 +182,13 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><code>intensity</code> (Float): Visibility of the scratch.</li>
 <li><code>depth_highlight</code> (Float): Strength of the white edge highlight (3D groove effect).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3660"></a>
+<h2><a class="anchor" id="autotoc_md3940"></a>
 &lt;tt&gt;rust&lt;/tt&gt; (Corrosion)</h2>
 <ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
 <li><code>intensity</code> (Float): Amount of pitting and oxidation (Orange/Brown spots).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3661"></a>
+<h2><a class="anchor" id="autotoc_md3941"></a>
 &lt;tt&gt;grime&lt;/tt&gt; (Dirt &amp; Oil)</h2>
 <ul>
 <li><code>stain_count</code> (Int): Number of oil/coffee blobs.</li>
@@ -196,25 +196,25 @@ $(document).ready(function(){initNavTree('de/d62/md_oaGuiElements_2Documentation
 <li><code>color</code> (Hex): Color of the dirt (usually black or dark brown).</li>
 <li><code>opacity</code> (Float): Transparency of stains.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3662"></a>
+<h2><a class="anchor" id="autotoc_md3942"></a>
 &lt;tt&gt;dust&lt;/tt&gt; (Particulates)</h2>
 <ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
 <li><code>intensity</code> (Float): Density of fine white/grey specks across the surface.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3663"></a>
+<h2><a class="anchor" id="autotoc_md3943"></a>
 &lt;tt&gt;studio_haze&lt;/tt&gt; (Aging)</h2>
 <ul>
 <li><code>enabled</code> (Bool): Turn on/off.</li>
 <li><code>intensity</code> (Float): Adds a warm yellow/brown multiply layer to simulate nicotine/UV aging.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3664"></a>
+<h2><a class="anchor" id="autotoc_md3944"></a>
 &lt;tt&gt;global_blur&lt;/tt&gt; (The Secret Sauce)</h2>
 <ul>
 <li><code>global_blur</code> (Float): Applies a Gaussian blur to the final image. <b>Crucial</b> for making procedural noise look like physical material. Recommended: <code>0.3</code> - <code>0.6</code>.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md3666"></a>
+<h1><a class="anchor" id="autotoc_md3946"></a>
 4. Integration with Meters</h1>
 <p>To make an instrument look like it is built <em>into</em> the panel (rather than sitting on top of it):</p>
 <ol type="1">

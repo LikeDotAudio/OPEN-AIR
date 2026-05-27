@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('d3/db8/namespaceCore_1_1handle__panic.
 Functions</h2></td></tr>
 <tr class="memitem:ad660cd4e75ac4f6ca76bd01da40df863" id="r_ad660cd4e75ac4f6ca76bd01da40df863"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/db8/namespaceCore_1_1handle__panic.html#ad660cd4e75ac4f6ca76bd01da40df863">_reset_panic</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:ad660cd4e75ac4f6ca76bd01da40df863"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99d00fc456823753853064161d222ec6" id="r_a99d00fc456823753853064161d222ec6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/db8/namespaceCore_1_1handle__panic.html#a99d00fc456823753853064161d222ec6">handle_panic</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">trigger_splink_id</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a99d00fc456823753853064161d222ec6" id="r_a99d00fc456823753853064161d222ec6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/db8/namespaceCore_1_1handle__panic.html#a99d00fc456823753853064161d222ec6">handle_panic</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, trigger_splink_id=None)</td></tr>
 <tr class="separator:a99d00fc456823753853064161d222ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -139,20 +139,17 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   45</span>    <span class="stringliteral">&quot;&quot;&quot;Clear the panic state.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   46</span>    <span class="keyword">import</span> orjson</div>
 <div class="line"><span class="lineno">   47</span>    self.panic_active = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(<span class="stringliteral">&quot;✅ SPLINKER PANIC RESET. Ready for operation.&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>    splinker_logger.info(<span class="stringliteral">&quot;✅ SPLINKER PANIC RESET. Ready for operation.&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span> </div>
 <div class="line"><span class="lineno">   50</span>    reset_payload = {<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">False</span>}</div>
 <div class="line"><span class="lineno">   51</span>    self.notify_monitor(<span class="stringliteral">&quot;panic&quot;</span>, reset_payload)</div>
 <div class="line"><span class="lineno">   52</span>    <span class="keywordflow">if</span> self.mqtt_manager:</div>
 <div class="line"><span class="lineno">   53</span>        self.mqtt_manager.publish(</div>
 <div class="line"><span class="lineno">   54</span>            <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>,</div>
-<div class="line"><span class="lineno">   55</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(reset_payload).decode(),</div>
+<div class="line"><span class="lineno">   55</span>            orjson.dumps(reset_payload).decode(),</div>
 <div class="line"><span class="lineno">   56</span>            retain=<span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   57</span>        )</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a99d00fc456823753853064161d222ec6" name="a99d00fc456823753853064161d222ec6"></a>
@@ -171,7 +168,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>trigger_splink_id</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>trigger_splink_id</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -190,13 +187,13 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   15</span>    <span class="keywordflow">if</span> trigger_splink_id:</div>
 <div class="line"><span class="lineno">   16</span>        message = f<span class="stringliteral">&quot;🆘 SPLINKER PANIC TRIGGERED by splink [{trigger_splink_id}]! High-frequency loop detected.&quot;</span></div>
 <div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.critical</a>(message)</div>
+<div class="line"><span class="lineno">   18</span>    splinker_logger.critical(message)</div>
 <div class="line"><span class="lineno">   19</span> </div>
 <div class="line"><span class="lineno">   20</span>    <span class="comment"># Deactivate all splinks</span></div>
 <div class="line"><span class="lineno">   21</span>    <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.splinks:</div>
-<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.get</a>(<span class="stringliteral">&quot;active&quot;</span>):</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> s.get(<span class="stringliteral">&quot;active&quot;</span>):</div>
 <div class="line"><span class="lineno">   23</span>            s[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   24</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.warning</a>(f<span class="stringliteral">&quot;  🛑 Deactivating splink [{s[&#39;id&#39;]}] for safety.&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>            splinker_logger.warning(f<span class="stringliteral">&quot;  🛑 Deactivating splink [{s[&#39;id&#39;]}] for safety.&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span>            <span class="comment"># Trigger persistence</span></div>
 <div class="line"><span class="lineno">   26</span>            self.save_splink(s)</div>
 <div class="line"><span class="lineno">   27</span> </div>
@@ -208,12 +205,12 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>    <span class="keywordflow">if</span> self.mqtt_manager:</div>
 <div class="line"><span class="lineno">   34</span>        self.mqtt_manager.publish(</div>
 <div class="line"><span class="lineno">   35</span>            <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>,</div>
-<div class="line"><span class="lineno">   36</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(panic_payload).decode(),</div>
+<div class="line"><span class="lineno">   36</span>            orjson.dumps(panic_payload).decode(),</div>
 <div class="line"><span class="lineno">   37</span>            retain=<span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   38</span>        )</div>
 <div class="line"><span class="lineno">   39</span> </div>
 <div class="line"><span class="lineno">   40</span>    <span class="comment"># Broadcast to ProtocolRouter for system-wide awareness</span></div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(self, <span class="stringliteral">&#39;router&#39;</span>) <span class="keywordflow">and</span> self.router:</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">if</span> hasattr(self, <span class="stringliteral">&#39;router&#39;</span>) <span class="keywordflow">and</span> self.router:</div>
 <div class="line"><span class="lineno">   42</span>        self.router.ingest(<span class="stringliteral">&quot;SPLINKER&quot;</span>, <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>, <span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   43</span> </div>
 </div><!-- fragment -->

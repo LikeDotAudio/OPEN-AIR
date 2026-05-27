@@ -1,4 +1,4 @@
 var base__widget__creator_8py =
 [
-    [ "Core.base_widget_creator.BaseWidgetCreator", "d6/db6/classCore_1_1base__widget__creator_1_1BaseWidgetCreator.html", "d6/db6/classCore_1_1base__widget__creator_1_1BaseWidgetCreator" ]
+    [ "Core.factory.base_widget_creator.BaseWidgetCreator", "db/de8/classCore_1_1factory_1_1base__widget__creator_1_1BaseWidgetCreator.html", "db/de8/classCore_1_1factory_1_1base__widget__creator_1_1BaseWidgetCreator" ]
 ];

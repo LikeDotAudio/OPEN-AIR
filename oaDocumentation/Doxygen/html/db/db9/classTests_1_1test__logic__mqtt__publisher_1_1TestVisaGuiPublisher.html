@@ -153,11 +153,10 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   18</span>        <span class="stringliteral">&quot;&quot;&quot;Set up the mock MQTT controller and the VisaGuiPublisher instance.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   19</span>        self.mock_mqtt = MagicMock()</div>
 <div class="line"><span class="lineno">   20</span>        self.mock_client = MagicMock()</div>
-<div class="line"><span class="lineno">   21</span>        self.mock_mqtt.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_client_instance.return_value</a> = self.mock_client</div>
+<div class="line"><span class="lineno">   21</span>        self.mock_mqtt.get_client_instance.return_value = self.mock_client</div>
 <div class="line"><span class="lineno">   22</span> </div>
 <div class="line"><span class="lineno">   23</span>        self.publisher = VisaGuiPublisher(mqtt_controller=self.mock_mqtt)</div>
 <div class="line"><span class="lineno">   24</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -219,16 +218,16 @@ CHECK: Assert the proxy status and timestamp are published correctly.
 <div class="line"><span class="lineno">   56</span>        self.publisher._publish_proxy_status(<span class="stringliteral">&quot;CONNECTED&quot;</span>)</div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>        expected_topic = <span class="stringliteral">&quot;OPEN-AIR/Proxy/Status&quot;</span></div>
-<div class="line"><span class="lineno">   59</span>        self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">   60</span>        args, kwargs = self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.call_args</a></div>
+<div class="line"><span class="lineno">   59</span>        self.mock_client.publish.assert_called_once()</div>
+<div class="line"><span class="lineno">   60</span>        args, kwargs = self.mock_client.publish.call_args</div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;topic&#39;</span>], expected_topic)</div>
-<div class="line"><span class="lineno">   63</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.loads</a>(kwargs[<span class="stringliteral">&#39;payload&#39;</span>])</div>
+<div class="line"><span class="lineno">   63</span>        payload = orjson.loads(kwargs[<span class="stringliteral">&#39;payload&#39;</span>])</div>
 <div class="line"><span class="lineno">   64</span>        self.assertEqual(payload[<span class="stringliteral">&quot;status&quot;</span>], <span class="stringliteral">&quot;CONNECTED&quot;</span>)</div>
 <div class="line"><span class="lineno">   65</span>        self.assertIn(<span class="stringliteral">&quot;timestamp&quot;</span>, payload)</div>
 <div class="line"><span class="lineno">   66</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, and <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>.</p>
 
 </div>
 </div>
@@ -261,18 +260,18 @@ CHECK: Assert the correct topic and payload (with GUID and origin) are published
 <div class="line"><span class="lineno">   37</span>        self.publisher._publish_status(<span class="stringliteral">&quot;connected&quot;</span>, <span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>        expected_topic = <span class="stringliteral">&quot;OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status/connected&quot;</span></div>
-<div class="line"><span class="lineno">   40</span>        self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">   41</span>        args, kwargs = self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.call_args</a></div>
+<div class="line"><span class="lineno">   40</span>        self.mock_client.publish.assert_called_once()</div>
+<div class="line"><span class="lineno">   41</span>        args, kwargs = self.mock_client.publish.call_args</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>        self.assertEqual(kwargs[<span class="stringliteral">&#39;topic&#39;</span>], expected_topic)</div>
-<div class="line"><span class="lineno">   44</span>        payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.loads</a>(kwargs[<span class="stringliteral">&#39;payload&#39;</span>])</div>
+<div class="line"><span class="lineno">   44</span>        payload = orjson.loads(kwargs[<span class="stringliteral">&#39;payload&#39;</span>])</div>
 <div class="line"><span class="lineno">   45</span>        self.assertEqual(payload[<span class="stringliteral">&quot;value&quot;</span>], <span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   46</span>        self.assertEqual(payload[<span class="stringliteral">&quot;src&quot;</span>], <span class="stringliteral">&quot;VISA&quot;</span>)</div>
 <div class="line"><span class="lineno">   47</span>        self.assertEqual(payload[<span class="stringliteral">&quot;GUID&quot;</span>], self.publisher.GUID)</div>
 <div class="line"><span class="lineno">   48</span>        self.assertTrue(kwargs[<span class="stringliteral">&#39;retain&#39;</span>])</div>
 <div class="line"><span class="lineno">   49</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, and <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>.</p>
 
 </div>
 </div>
@@ -308,26 +307,26 @@ CHECK: Assert bulk publish to options/all and first device auto-selection.
 <div class="line"><span class="lineno">   76</span>        <span class="comment"># 1. Check bulk publish call</span></div>
 <div class="line"><span class="lineno">   77</span>        <span class="comment"># 2. Check auto-selection call</span></div>
 <div class="line"><span class="lineno">   78</span>        total_expected_calls = 2</div>
-<div class="line"><span class="lineno">   79</span>        self.assertEqual(self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.call_count</a>, total_expected_calls)</div>
+<div class="line"><span class="lineno">   79</span>        self.assertEqual(self.mock_client.publish.call_count, total_expected_calls)</div>
 <div class="line"><span class="lineno">   80</span> </div>
 <div class="line"><span class="lineno">   81</span>        <span class="comment"># Check bulk population</span></div>
-<div class="line"><span class="lineno">   82</span>        self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.assert_any_call</a>(</div>
+<div class="line"><span class="lineno">   82</span>        self.mock_client.publish.assert_any_call(</div>
 <div class="line"><span class="lineno">   83</span>            topic=<span class="stringliteral">&quot;OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/all&quot;</span>,</div>
-<div class="line"><span class="lineno">   84</span>            payload=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.mock.ANY</a>,</div>
+<div class="line"><span class="lineno">   84</span>            payload=unittest.mock.ANY,</div>
 <div class="line"><span class="lineno">   85</span>            qos=0,</div>
 <div class="line"><span class="lineno">   86</span>            retain=<span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   87</span>        )</div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>        <span class="comment"># Check first device auto-selection</span></div>
-<div class="line"><span class="lineno">   90</span>        self.mock_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.assert_any_call</a>(</div>
+<div class="line"><span class="lineno">   90</span>        self.mock_client.publish.assert_any_call(</div>
 <div class="line"><span class="lineno">   91</span>            topic=<span class="stringliteral">&quot;OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/1/selected&quot;</span>,</div>
-<div class="line"><span class="lineno">   92</span>            payload=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.mock.ANY</a>,</div>
+<div class="line"><span class="lineno">   92</span>            payload=unittest.mock.ANY,</div>
 <div class="line"><span class="lineno">   93</span>            qos=0,</div>
 <div class="line"><span class="lineno">   94</span>            retain=<span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   95</span>        )</div>
 <div class="line"><span class="lineno">   96</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d9c/test__mqtt__manager_8py_source.html#l00054">Tests.test_mqtt_manager.TestMqttManager.mock_client</a>, <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00020">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.mock_client</a>, <a class="el" href="../../d7/dc2/test__visa__manager_8py_source.html#l00027">Tests.test_visa_manager.TestVisaManagerOrchestrator.mock_client</a>, and <a class="el" href="../../d7/d54/test__logic__mqtt__publisher_8py_source.html#l00023">Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.publisher</a>.</p>
 
 </div>
 </div>

@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('de/d17/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260312_003200</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1633"></a> </p>
-<h1><a class="anchor" id="autotoc_md1634"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2082"></a> </p>
+<h1><a class="anchor" id="autotoc_md2083"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p><b>User Requirement</b>: "When you decouple control (the "Splice") from state feedback (the "Link"), motorized faders, endless encoders, and bi-directional GUIs are notorious for causing infinite MIDI/OSC/MQTT echo loops." <b>Problem</b>: The system lacked a formal way to track the original source of an action, causing devices to re-broadcast state updates they themselves initiated.</p>
-<h1><a class="anchor" id="autotoc_md1635"></a>
+<h1><a class="anchor" id="autotoc_md2084"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Missing Origin Context</b>: The <code>ProtocolRouter</code> and <code>SplinkerManager</code> were generating new IDs for brokered messages, losing the link to the original physical or virtual control.</li>
 <li><b>Lack of Message Intent</b>: No distinction existed between an "Action" (Splice) and "Feedback" (Link).</li>
 <li><b>Chatty Updates</b>: High-frequency fader movements caused hundreds of updates with no "settled" state, making it difficult for motorized hardware to find a final resting position.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1636"></a>
+<h1><a class="anchor" id="autotoc_md2085"></a>
 &lt;strong&gt;Investigation&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Code Review</b>: Confirmed <code>ProtocolRouter</code> was using session-level GUIDs for loop prevention, which is effective for partition-level loops but insufficient for device-level echo suppression.</li>
 <li><b>Reproduction</b>: <code>reproduce_feedback_loop.py</code> demonstrated that reflecting a message back to its source topic would trigger a new action if the source ID was not preserved.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1637"></a>
+<h1><a class="anchor" id="autotoc_md2086"></a>
 &lt;strong&gt;Resolution: Splinker Anti-Feedback Spec&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Unified Schema</b>: Added <code>msg_guid</code>, <code>msg_type</code>, and <code>origin_source</code> to the <code>ProtocolRouter.ingest</code> pipeline.</li>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('de/d17/md_oaDocumentation_2Workers_2Bu
 <li><b>The Golden Rule</b>: Updated <code>StateMirrorEngine.sync_incoming_mqtt_to_gui</code> to perform a "Silent Update" if the <code>origin_source</code> matches the widget's ID. This updates the UI visual without re-broadcasting.</li>
 <li><b>Settling Engine</b>: Implemented a 50ms debounce timer in <code>ProtocolRouter</code> that fires a final <code>is_settled: True</code> message after a stream of <code>SPLICE_ACTION</code> messages stops.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1638"></a>
+<h1><a class="anchor" id="autotoc_md2087"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Spec Compliance</b>: <code>verify_anti_feedback.py</code> confirmed that brokered messages correctly carry the <code>origin_source</code> of the fader that started the movement.</li>

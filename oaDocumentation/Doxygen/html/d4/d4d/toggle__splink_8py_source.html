@@ -108,12 +108,11 @@ $(document).ready(function(){initNavTree('d4/d4d/toggle__splink_8py_source.html'
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="../../d7/dfb/namespaceCore_1_1toggle__splink.html#ab0f48c39c0a3e5991781c08814b25e41">    7</a></span><span class="keyword">def </span>toggle_splink(self, splink_id):</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    splink_instance = self.registry.get_splink_by_id(splink_id)</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordflow">if</span> splink_instance:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        splink_instance[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink_instance.get</a>(<span class="stringliteral">&quot;active&quot;</span>, <span class="keyword">False</span>)</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        splink_instance[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keywordflow">not</span> splink_instance.get(<span class="stringliteral">&quot;active&quot;</span>, <span class="keyword">False</span>)</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        self.registry.update_splink(splink_id, splink_instance)</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        self._save_splink(splink_instance)</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        self.publish_splinks()</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

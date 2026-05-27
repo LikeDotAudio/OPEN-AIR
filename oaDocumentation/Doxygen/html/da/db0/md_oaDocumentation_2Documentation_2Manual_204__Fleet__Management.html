@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('da/db0/md_oaDocumentation_2Documentati
   <div class="headertitle"><div class="title">OPEN-AIR User Manual</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1560"></a> </p>
-<h1><a class="anchor" id="autotoc_md1561"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2009"></a> </p>
+<h1><a class="anchor" id="autotoc_md2010"></a>
 04. Fleet Management</h1>
 <p>OPEN-AIR is built to scale from a single instrument to a global fleet.</p>
-<h2><a class="anchor" id="autotoc_md1562"></a>
+<h2><a class="anchor" id="autotoc_md2011"></a>
 Finding the Fleet</h2>
 <p>The <b>Fleet Display</b> is your central command for discovering and managing connected hardware.</p>
 <ol type="1">
@@ -106,21 +106,21 @@ Finding the Fleet</h2>
 <li><b>Discovery Process:</b> Partition A (<a class="el" href="../../d3/d7a/namespaceCore.html">Core</a>) will scan all USB, Ethernet, and Serial ports for SCPI-compatible devices.</li>
 <li><b>Automatic Provisioning:</b> As devices are found, their identity (IDN) is parsed and they are added to the fleet table.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1563"></a>
+<h2><a class="anchor" id="autotoc_md2012"></a>
 Yak Fleet Command Builder</h2>
 <p>A key feature of OPEN-AIR is the <b>YakFleetCommandBuilder</b>. Once a scan is complete:</p><ul>
 <li>The system automatically identifies the model of each connected device.</li>
 <li>It invisibly loads the specific GUI tabs for those models (e.g., <code>DS1104Z</code> or <code>N9340B</code>).</li>
 <li>This triggers the device to "publish its repertoire"—sending its specific command set to the MQTT bus so they are immediately available for use.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1564"></a>
+<h2><a class="anchor" id="autotoc_md2013"></a>
 Monitoring Yak Traffic</h2>
 <p>The <b>Yak Monitor</b> provides a live feed of all instrument traffic.</p><ul>
 <li><b>Color Coding:</b> Messages containing valid data (<code>value:</code>) are highlighted in <b>green</b>, while general messages appear in <b>orange</b>.</li>
 <li><b>Message Dissection:</b> Click on any message to see its full breakdown, including the device type, model, and the specific SCPI command being sent.</li>
 <li><b>Jump to Latest:</b> Use the "Jump to Latest 'value:'" button to quickly find and inspect the most recent data payload received from the fleet.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1565"></a>
+<h2><a class="anchor" id="autotoc_md2014"></a>
 Deleting Fleet Topics</h2>
 <p>If you need to clear the MQTT state, a **"DELETE OPEN-AIR TOPIC"** button is available in the MQTT setup panel. This will recursively remove all retained messages from the <code>OPEN-AIR</code> topic tree. </p>
 </div></div><!-- contents -->

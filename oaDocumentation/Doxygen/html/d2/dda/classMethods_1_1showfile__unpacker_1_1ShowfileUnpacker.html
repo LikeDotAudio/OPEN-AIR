@@ -99,14 +99,14 @@ $(document).ready(function(){initNavTree('d2/dda/classMethods_1_1showfile__unpac
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7225356b738ec331cba8745d15a70772" id="r_a7225356b738ec331cba8745d15a70772"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dda/classMethods_1_1showfile__unpacker_1_1ShowfileUnpacker.html#a7225356b738ec331cba8745d15a70772">unpack</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path</a>)</td></tr>
+<tr class="memitem:a7225356b738ec331cba8745d15a70772" id="r_a7225356b738ec331cba8745d15a70772"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dda/classMethods_1_1showfile__unpacker_1_1ShowfileUnpacker.html#a7225356b738ec331cba8745d15a70772">unpack</a> (str file_path)</td></tr>
 <tr class="separator:a7225356b738ec331cba8745d15a70772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">High-performance secure showfile unpacker using Rust.
 MANDATORY Rust implementation.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html#l00013">13</a> of file <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html#l00012">12</a> of file <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7225356b738ec331cba8745d15a70772" name="a7225356b738ec331cba8745d15a70772"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7225356b738ec331cba8745d15a70772">&#9670;&#160;</a></span>unpack()</h2>
@@ -132,27 +132,24 @@ MANDATORY Rust implementation.
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html#l00019">19</a> of file <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span>unpack(file_path: str):</div>
-<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   21</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📦🛠️🔗 [SHOW] Using PURE RUST unpacker.&quot;</span>)</div>
-<div class="line"><span class="lineno">   22</span>        raw_dict = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oashowfileunpacker_rs.unpack_showfile</a>(file_path)</div>
-<div class="line"><span class="lineno">   23</span>        <span class="comment"># Post-process strings into dictionaries if they are JSON</span></div>
-<div class="line"><span class="lineno">   24</span>        processed = {}</div>
-<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">for</span> name, content <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">raw_dict.items</a>():</div>
-<div class="line"><span class="lineno">   26</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   27</span>                processed[name] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.loads</a>(content)</div>
-<div class="line"><span class="lineno">   28</span>            <span class="keywordflow">except</span> Exception:</div>
-<div class="line"><span class="lineno">   29</span>                processed[name] = content</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> processed</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html#l00018">18</a> of file <a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>unpack(file_path: str):</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
+<div class="line"><span class="lineno">   20</span>            print(<span class="stringliteral">&quot;📦🛠️🔗 [SHOW] Using PURE RUST unpacker.&quot;</span>)</div>
+<div class="line"><span class="lineno">   21</span>        raw_dict = oashowfileunpacker_rs.unpack_showfile(file_path)</div>
+<div class="line"><span class="lineno">   22</span>        <span class="comment"># Post-process strings into dictionaries if they are JSON</span></div>
+<div class="line"><span class="lineno">   23</span>        processed = {}</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">for</span> name, content <span class="keywordflow">in</span> raw_dict.items():</div>
+<div class="line"><span class="lineno">   25</span>            <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">   26</span>                processed[name] = orjson.loads(content)</div>
+<div class="line"><span class="lineno">   27</span>            <span class="keywordflow">except</span> Exception:</div>
+<div class="line"><span class="lineno">   28</span>                processed[name] = content</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">return</span> processed</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>oaFileImportShow/Methods/<a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a></li>
+<li>oaFileHandlers/oaFileImportShow/Methods/<a class="el" href="../../d1/dac/showfile__unpacker_8py_source.html">showfile_unpacker.py</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

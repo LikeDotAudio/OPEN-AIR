@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('d9/d99/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 07:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1121"></a> </p>
-<h1><a class="anchor" id="autotoc_md1122"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1386"></a> </p>
+<h1><a class="anchor" id="autotoc_md1387"></a>
 Issues</h1>
 <p>This report details the implementation of a system-wide "Graceful Rust Failure" pattern to prevent <code>ModuleNotFoundError</code> and other initialization exceptions from causing total application crashes.</p>
-<h1><a class="anchor" id="autotoc_md1123"></a>
+<h1><a class="anchor" id="autotoc_md1388"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1124"></a>
+<h2><a class="anchor" id="autotoc_md1389"></a>
 1. Brittle Rust Imports</h2>
 <ul>
 <li><b>Issue</b>: The application would fail to boot if a single Rust extension was missing or failed to compile, primarily due to direct, unprotected imports at the module level.</li>
-<li><b>Root Cause</b>: Lack of <code>try-except</code> wrappers around <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ensure_compiled()</a></code> calls and Rust module imports.</li>
+<li><b>Root Cause</b>: Lack of <code>try-except</code> wrappers around <code>ensure_compiled()</code> calls and Rust module imports.</li>
 <li><b>Resolution</b>: Implemented a robust import pattern across all high-impact modules:<ul>
-<li>Wrapped <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ensure_compiled()</a></code> and <code>import</code> statements in <code>try...except (ImportError, Exception)</code> blocks.</li>
+<li>Wrapped <code>ensure_compiled()</code> and <code>import</code> statements in <code>try...except (ImportError, Exception)</code> blocks.</li>
 <li>Introduced a <code>HAS_RUST</code> boolean flag to track extension availability.</li>
 <li>Updated classes (e.g., <code>PtpClock</code>, <code><a class="el" href="../../d6/d12/oa__snmp__agent__rs_2mod_8rs.html#d6/d7b/structSnmpAgent">SnmpAgent</a></code>, <code>StateManager</code>) to check <code>HAS_RUST</code> during <code>__init__</code>.</li>
 <li>Provided safe Python fallbacks (like <code>PythonStateRegistry</code>) or graceful method-level skips (returning empty dicts/lists) when Rust is unavailable.</li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1125"></a>
+<h1><a class="anchor" id="autotoc_md1390"></a>
 Affected Modules (Hardened)</h1>
 <p>The following core modules were updated with graceful failure logic:</p><ul>
 <li><code>oaPTP</code> (Clock and Packet Parser)</li>
@@ -120,12 +120,12 @@ Affected Modules (Hardened)</h1>
 <li><code>oaComProtocols.oaComSNMP</code> (<a class="el" href="../../d6/d12/oa__snmp__agent__rs_2mod_8rs.html#d6/d7b/structSnmpAgent">SnmpAgent</a>)</li>
 <li><code>oaComProtocols.oaComEmber</code> (EmberParser)</li>
 <li><code>oaGuiEditorWYSIWYG</code> (StateManager)</li>
-<li><code>oaGui</code> (BlueprintLoader and FastScanner)</li>
+<li><code>oaGui</code> (JsonBlueprintReader and FastScanner)</li>
 <li><code>oaComProtocols.oaComVisa</code> (Visa Probing)</li>
 <li><code>oaGui</code> (Geometry Math)</li>
 <li><code>oaTranslator</code> (YakTranslator)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1126"></a>
+<h1><a class="anchor" id="autotoc_md1391"></a>
 Verification</h1>
 <p>The system was tested by simulating a missing <code>oaptpclock_rs</code> module. The application successfully bypassed the missing dependency, logged a warning, and continued the boot sequence for both the <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> and UI partitions, demonstrating significantly improved resilience. </p>
 </div></div><!-- contents -->

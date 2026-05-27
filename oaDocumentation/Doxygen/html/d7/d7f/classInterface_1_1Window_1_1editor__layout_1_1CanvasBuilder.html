@@ -133,16 +133,17 @@ Static Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00101">101</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  101</span>    <span class="keyword">def </span>build_center(editor):</div>
 <div class="line"><span class="lineno">  102</span>        <span class="stringliteral">&quot;&quot;&quot;Builds the center canvas where the layout is visually edited.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  103</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.layout_container</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Frame</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane</a>, bg=<span class="stringliteral">&quot;#1a1a1a&quot;</span>)</div>
-<div class="line"><span class="lineno">  104</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.add</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.layout_container</a>, stretch=<span class="stringliteral">&quot;always&quot;</span>)</div>
+<div class="line"><span class="lineno">  103</span>        editor.layout_container = tk.Frame(editor.main_pane, bg=<span class="stringliteral">&quot;#1a1a1a&quot;</span>)</div>
+<div class="line"><span class="lineno">  104</span>        editor.main_pane.add(editor.layout_container, stretch=<span class="stringliteral">&quot;always&quot;</span>)</div>
 <div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.layout_view</a> = InteractiveLayout(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.layout_container</a>)</div>
-<div class="line"><span class="lineno">  107</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.layout_view.pack</a>(fill=<span class="stringliteral">&quot;both&quot;</span>, expand=<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">  108</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">  106</span>        editor.layout_view = InteractiveLayout(</div>
+<div class="line"><span class="lineno">  107</span>            editor.layout_container,</div>
+<div class="line"><span class="lineno">  108</span>            subscriber_router=getattr(editor, <span class="stringliteral">&#39;subscriber_router&#39;</span>, <span class="keywordtype">None</span>),</div>
+<div class="line"><span class="lineno">  109</span>            state_mirror_engine=getattr(editor, <span class="stringliteral">&#39;state_mirror_engine&#39;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">  110</span>        )</div>
+<div class="line"><span class="lineno">  111</span>        editor.layout_view.pack(fill=<span class="stringliteral">&quot;both&quot;</span>, expand=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">  112</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

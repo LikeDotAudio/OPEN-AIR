@@ -112,9 +112,9 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a56cd455f601c701d3e25d10a6c3b32e1" id="r_a56cd455f601c701d3e25d10a6c3b32e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dcb/namespacemanager.html#a56cd455f601c701d3e25d10a6c3b32e1">__all__</a> = [&quot;ComProtocolManager&quot;, &quot;main&quot;]</td></tr>
 <tr class="separator:a56cd455f601c701d3e25d10a6c3b32e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c186782163ce84c4ab01c160e54959d" id="r_a0c186782163ce84c4ab01c160e54959d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dcb/namespacemanager.html#a0c186782163ce84c4ab01c160e54959d">current_dir</a> = pathlib.Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td></tr>
+<tr class="memitem:a0c186782163ce84c4ab01c160e54959d" id="r_a0c186782163ce84c4ab01c160e54959d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dcb/namespacemanager.html#a0c186782163ce84c4ab01c160e54959d">current_dir</a> = pathlib.Path(__file__).resolve().parent</td></tr>
 <tr class="separator:a0c186782163ce84c4ab01c160e54959d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d14a83b19fa71f42498bb35a7f6547f" id="r_a5d14a83b19fa71f42498bb35a7f6547f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dcb/namespacemanager.html#a5d14a83b19fa71f42498bb35a7f6547f">project_root</a> = current_dir.parent.parent</td></tr>
+<tr class="memitem:a5d14a83b19fa71f42498bb35a7f6547f" id="r_a5d14a83b19fa71f42498bb35a7f6547f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dcb/namespacemanager.html#a5d14a83b19fa71f42498bb35a7f6547f">project_root</a> = current_dir.parent.parent.parent</td></tr>
 <tr class="separator:a5d14a83b19fa71f42498bb35a7f6547f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -127,7 +127,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">manager.main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">void</a>&#160;</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -142,86 +142,85 @@ This demonstrates how the manager would discover, start, and stop modules.
 <div class="line"><span class="lineno">  237</span><span class="stringliteral">    Standalone entry point for the ComProtocolManager.</span></div>
 <div class="line"><span class="lineno">  238</span><span class="stringliteral">    This demonstrates how the manager would discover, start, and stop modules.</span></div>
 <div class="line"><span class="lineno">  239</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  240</span>    parser = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">argparse.ArgumentParser</a>(description=<span class="stringliteral">&quot;OPEN-AIR Communication Protocol Manager&quot;</span>)</div>
-<div class="line"><span class="lineno">  241</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.add_argument</a>(<span class="stringliteral">&quot;--start&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Start all managed protocols&quot;</span>)</div>
-<div class="line"><span class="lineno">  242</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.add_argument</a>(<span class="stringliteral">&quot;--stop&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Stop all managed protocols&quot;</span>)</div>
-<div class="line"><span class="lineno">  243</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.add_argument</a>(<span class="stringliteral">&quot;--status&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Get status of all managed protocols&quot;</span>)</div>
-<div class="line"><span class="lineno">  244</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.add_argument</a>(<span class="stringliteral">&quot;--run-demo&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Run manager in demo mode (start, wait, stop)&quot;</span>)</div>
-<div class="line"><span class="lineno">  245</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.add_argument</a>(<span class="stringliteral">&quot;--discover&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Discover and list registered protocols&quot;</span>)</div>
+<div class="line"><span class="lineno">  240</span>    parser = argparse.ArgumentParser(description=<span class="stringliteral">&quot;OPEN-AIR Communication Protocol Manager&quot;</span>)</div>
+<div class="line"><span class="lineno">  241</span>    parser.add_argument(<span class="stringliteral">&quot;--start&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Start all managed protocols&quot;</span>)</div>
+<div class="line"><span class="lineno">  242</span>    parser.add_argument(<span class="stringliteral">&quot;--stop&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Stop all managed protocols&quot;</span>)</div>
+<div class="line"><span class="lineno">  243</span>    parser.add_argument(<span class="stringliteral">&quot;--status&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Get status of all managed protocols&quot;</span>)</div>
+<div class="line"><span class="lineno">  244</span>    parser.add_argument(<span class="stringliteral">&quot;--run-demo&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Run manager in demo mode (start, wait, stop)&quot;</span>)</div>
+<div class="line"><span class="lineno">  245</span>    parser.add_argument(<span class="stringliteral">&quot;--discover&quot;</span>, action=<span class="stringliteral">&quot;store_true&quot;</span>, help=<span class="stringliteral">&quot;Discover and list registered protocols&quot;</span>)</div>
 <div class="line"><span class="lineno">  246</span> </div>
-<div class="line"><span class="lineno">  247</span>    args = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser.parse_args</a>()</div>
+<div class="line"><span class="lineno">  247</span>    args = parser.parse_args()</div>
 <div class="line"><span class="lineno">  248</span> </div>
 <div class="line"><span class="lineno">  249</span>    <span class="comment"># Initialize the singleton manager</span></div>
-<div class="line"><span class="lineno">  250</span>    manager = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ComProtocolManager.get_instance</a>()</div>
+<div class="line"><span class="lineno">  250</span>    manager = ComProtocolManager.get_instance()</div>
 <div class="line"><span class="lineno">  251</span> </div>
-<div class="line"><span class="lineno">  252</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.discover</a>:</div>
-<div class="line"><span class="lineno">  253</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.discover_and_register_protocols</a>()</div>
-<div class="line"><span class="lineno">  254</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;--- Discovered Protocol Modules ---&quot;</span>)</div>
-<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.protocol_modules</a>:</div>
-<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">for</span> name, info <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.protocol_modules.items</a>():</div>
-<div class="line"><span class="lineno">  257</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;  - {name} ({info[&#39;module_name&#39;]})&quot;</span>)</div>
+<div class="line"><span class="lineno">  252</span>    <span class="keywordflow">if</span> args.discover:</div>
+<div class="line"><span class="lineno">  253</span>        manager.discover_and_register_protocols()</div>
+<div class="line"><span class="lineno">  254</span>        print(<span class="stringliteral">&quot;--- Discovered Protocol Modules ---&quot;</span>)</div>
+<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">if</span> manager.protocol_modules:</div>
+<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">for</span> name, info <span class="keywordflow">in</span> manager.protocol_modules.items():</div>
+<div class="line"><span class="lineno">  257</span>                print(f<span class="stringliteral">&quot;  - {name} ({info[&#39;module_name&#39;]})&quot;</span>)</div>
 <div class="line"><span class="lineno">  258</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  259</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;  No protocol modules found.&quot;</span>)</div>
-<div class="line"><span class="lineno">  260</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;---------------------------------&quot;</span>)</div>
-<div class="line"><span class="lineno">  261</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(0)</div>
+<div class="line"><span class="lineno">  259</span>            print(<span class="stringliteral">&quot;  No protocol modules found.&quot;</span>)</div>
+<div class="line"><span class="lineno">  260</span>        print(<span class="stringliteral">&quot;---------------------------------&quot;</span>)</div>
+<div class="line"><span class="lineno">  261</span>        sys.exit(0)</div>
 <div class="line"><span class="lineno">  262</span> </div>
-<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.start</a> <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.run_demo</a>:</div>
+<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">if</span> args.start <span class="keywordflow">or</span> args.run_demo:</div>
 <div class="line"><span class="lineno">  264</span>        <span class="comment"># Initialize common dependencies before starting all protocols</span></div>
-<div class="line"><span class="lineno">  265</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.initialize_common_dependencies</a>():</div>
-<div class="line"><span class="lineno">  266</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;❌ Failed to initialize common dependencies. Aborting start.&quot;</span>)</div>
-<div class="line"><span class="lineno">  267</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(1)</div>
+<div class="line"><span class="lineno">  265</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> manager.initialize_common_dependencies():</div>
+<div class="line"><span class="lineno">  266</span>            print(<span class="stringliteral">&quot;❌ Failed to initialize common dependencies. Aborting start.&quot;</span>)</div>
+<div class="line"><span class="lineno">  267</span>            sys.exit(1)</div>
 <div class="line"><span class="lineno">  268</span> </div>
 <div class="line"><span class="lineno">  269</span>        <span class="comment"># Pass dependencies to start_all. This assumes start_all might use them.</span></div>
 <div class="line"><span class="lineno">  270</span>        <span class="comment"># The actual passing to individual module start functions is handled within start_all.</span></div>
 <div class="line"><span class="lineno">  271</span>        <span class="comment"># Exclude MQTT/Subscriber dependencies as they are self-contained.</span></div>
 <div class="line"><span class="lineno">  272</span>        common_deps_to_pass = {</div>
-<div class="line"><span class="lineno">  273</span>            <span class="stringliteral">&quot;protocol_router&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.protocol_router</a></div>
+<div class="line"><span class="lineno">  273</span>            <span class="stringliteral">&quot;protocol_router&quot;</span>: manager.protocol_router</div>
 <div class="line"><span class="lineno">  274</span>        }</div>
 <div class="line"><span class="lineno">  275</span>        <span class="comment"># Add other dependencies that individual modules might need (e.g., context, specific configs)</span></div>
 <div class="line"><span class="lineno">  276</span>        <span class="comment"># common_deps_to_pass[&quot;some_other_param&quot;] = manager.some_other_dependency</span></div>
 <div class="line"><span class="lineno">  277</span> </div>
-<div class="line"><span class="lineno">  278</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.start_all</a>(**common_deps_to_pass)</div>
+<div class="line"><span class="lineno">  278</span>        manager.start_all(**common_deps_to_pass)</div>
 <div class="line"><span class="lineno">  279</span> </div>
-<div class="line"><span class="lineno">  280</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.status</a> <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.run_demo</a>:</div>
-<div class="line"><span class="lineno">  281</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n--- Current Protocol Status ---&quot;</span>)</div>
-<div class="line"><span class="lineno">  282</span>        status_report = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.get_status_all</a>()</div>
+<div class="line"><span class="lineno">  280</span>    <span class="keywordflow">if</span> args.status <span class="keywordflow">or</span> args.run_demo:</div>
+<div class="line"><span class="lineno">  281</span>        print(<span class="stringliteral">&quot;\n--- Current Protocol Status ---&quot;</span>)</div>
+<div class="line"><span class="lineno">  282</span>        status_report = manager.get_status_all()</div>
 <div class="line"><span class="lineno">  283</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> status_report:</div>
-<div class="line"><span class="lineno">  284</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;  No protocols discovered or managed.&quot;</span>)</div>
+<div class="line"><span class="lineno">  284</span>            print(<span class="stringliteral">&quot;  No protocols discovered or managed.&quot;</span>)</div>
 <div class="line"><span class="lineno">  285</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  286</span>            <span class="keywordflow">for</span> name, status_data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">status_report.items</a>():</div>
-<div class="line"><span class="lineno">  287</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;  {name}: {status_data}&quot;</span>)</div>
-<div class="line"><span class="lineno">  288</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;-----------------------------&quot;</span>)</div>
-<div class="line"><span class="lineno">  289</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.run_demo</a>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n&quot;</span>)</div>
+<div class="line"><span class="lineno">  286</span>            <span class="keywordflow">for</span> name, status_data <span class="keywordflow">in</span> status_report.items():</div>
+<div class="line"><span class="lineno">  287</span>                print(f<span class="stringliteral">&quot;  {name}: {status_data}&quot;</span>)</div>
+<div class="line"><span class="lineno">  288</span>        print(<span class="stringliteral">&quot;-----------------------------&quot;</span>)</div>
+<div class="line"><span class="lineno">  289</span>        <span class="keywordflow">if</span> args.run_demo: print(<span class="stringliteral">&quot;\n&quot;</span>)</div>
 <div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.run_demo</a>:</div>
-<div class="line"><span class="lineno">  292</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;--- Running in DEMO mode for 15 seconds ---&quot;</span>)</div>
+<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">if</span> args.run_demo:</div>
+<div class="line"><span class="lineno">  292</span>        print(<span class="stringliteral">&quot;--- Running in DEMO mode for 15 seconds ---&quot;</span>)</div>
 <div class="line"><span class="lineno">  293</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  294</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.sleep</a>(15)</div>
+<div class="line"><span class="lineno">  294</span>            time.sleep(15)</div>
 <div class="line"><span class="lineno">  295</span>        <span class="keywordflow">except</span> KeyboardInterrupt:</div>
 <div class="line"><span class="lineno">  296</span>            <span class="keywordflow">pass</span></div>
 <div class="line"><span class="lineno">  297</span>        <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">  298</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.stop_all</a>()</div>
-<div class="line"><span class="lineno">  299</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;--- DEMO mode finished ---&quot;</span>)</div>
-<div class="line"><span class="lineno">  300</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(0)</div>
-<div class="line"><span class="lineno">  301</span>    <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.stop</a>:</div>
-<div class="line"><span class="lineno">  302</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.stop_all</a>()</div>
-<div class="line"><span class="lineno">  303</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(0)</div>
-<div class="line"><span class="lineno">  304</span>    <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">args.start</a>:</div>
-<div class="line"><span class="lineno">  305</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\nProtocols started. Manager running in background. Press Ctrl+C to stop.&quot;</span>)</div>
+<div class="line"><span class="lineno">  298</span>            manager.stop_all()</div>
+<div class="line"><span class="lineno">  299</span>            print(<span class="stringliteral">&quot;--- DEMO mode finished ---&quot;</span>)</div>
+<div class="line"><span class="lineno">  300</span>            sys.exit(0)</div>
+<div class="line"><span class="lineno">  301</span>    <span class="keywordflow">elif</span> args.stop:</div>
+<div class="line"><span class="lineno">  302</span>        manager.stop_all()</div>
+<div class="line"><span class="lineno">  303</span>        sys.exit(0)</div>
+<div class="line"><span class="lineno">  304</span>    <span class="keywordflow">elif</span> args.start:</div>
+<div class="line"><span class="lineno">  305</span>        print(<span class="stringliteral">&quot;\nProtocols started. Manager running in background. Press Ctrl+C to stop.&quot;</span>)</div>
 <div class="line"><span class="lineno">  306</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">  307</span>            <span class="comment"># Keep the main thread alive if protocols are in background threads</span></div>
 <div class="line"><span class="lineno">  308</span>            <span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
-<div class="line"><span class="lineno">  309</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.sleep</a>(1)</div>
+<div class="line"><span class="lineno">  309</span>                time.sleep(1)</div>
 <div class="line"><span class="lineno">  310</span>        <span class="keywordflow">except</span> KeyboardInterrupt:</div>
-<div class="line"><span class="lineno">  311</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.stop_all</a>()</div>
-<div class="line"><span class="lineno">  312</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;✅ ComProtocolManager shutdown complete.&quot;</span>)</div>
-<div class="line"><span class="lineno">  313</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(0)</div>
+<div class="line"><span class="lineno">  311</span>            manager.stop_all()</div>
+<div class="line"><span class="lineno">  312</span>            print(<span class="stringliteral">&quot;✅ ComProtocolManager shutdown complete.&quot;</span>)</div>
+<div class="line"><span class="lineno">  313</span>            sys.exit(0)</div>
 <div class="line"><span class="lineno">  314</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  315</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;❌ Unexpected error in main loop: {e}&quot;</span>)</div>
-<div class="line"><span class="lineno">  316</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.stop_all</a>()</div>
-<div class="line"><span class="lineno">  317</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(1)</div>
+<div class="line"><span class="lineno">  315</span>            print(f<span class="stringliteral">&quot;❌ Unexpected error in main loop: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  316</span>            manager.stop_all()</div>
+<div class="line"><span class="lineno">  317</span>            sys.exit(1)</div>
 <div class="line"><span class="lineno">  318</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespacemain_html"><div class="ttname"><a href="../../d2/dc1/namespacemain.html">main</a></div><div class="ttdef"><b>Definition</b> <a href="../../d1/d9c/oaComAES70_2Core_2aes70py-1_80_82_2main_8py_source.html#l00001">main.py:1</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -258,7 +257,7 @@ This demonstrates how the manager would discover, start, and stop modules.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">manager.current_dir = pathlib.Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td>
+          <td class="memname">manager.current_dir = pathlib.Path(__file__).resolve().parent</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -274,7 +273,7 @@ This demonstrates how the manager would discover, start, and stop modules.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">manager.project_root = current_dir.parent.parent</td>
+          <td class="memname">manager.project_root = current_dir.parent.parent.parent</td>
         </tr>
       </table>
 </div><div class="memdoc">

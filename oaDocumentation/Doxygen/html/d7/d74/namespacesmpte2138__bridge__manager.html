@@ -110,9 +110,9 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac0538e0098a9f7b3b48066a14e1c5f17" id="r_ac0538e0098a9f7b3b48066a14e1c5f17"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d74/namespacesmpte2138__bridge__manager.html#ac0538e0098a9f7b3b48066a14e1c5f17">interface_path</a> = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parents[1] / &quot;Interface&quot;</td></tr>
+<tr class="memitem:ac0538e0098a9f7b3b48066a14e1c5f17" id="r_ac0538e0098a9f7b3b48066a14e1c5f17"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d74/namespacesmpte2138__bridge__manager.html#ac0538e0098a9f7b3b48066a14e1c5f17">interface_path</a> = Path(__file__).resolve().parents[1] / &quot;Interface&quot;</td></tr>
 <tr class="separator:ac0538e0098a9f7b3b48066a14e1c5f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7b3d8537535aed8ab6b478a1bc0a0aa" id="r_ac7b3d8537535aed8ab6b478a1bc0a0aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d74/namespacesmpte2138__bridge__manager.html#ac7b3d8537535aed8ab6b478a1bc0a0aa">logger</a> = SMPTE2138_LOGGER.bind(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">protocol</a>=&quot;SMPTE2138&quot;)</td></tr>
+<tr class="memitem:ac7b3d8537535aed8ab6b478a1bc0a0aa" id="r_ac7b3d8537535aed8ab6b478a1bc0a0aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d74/namespacesmpte2138__bridge__manager.html#ac7b3d8537535aed8ab6b478a1bc0a0aa">logger</a> = SMPTE2138_LOGGER.bind(protocol=&quot;SMPTE2138&quot;)</td></tr>
 <tr class="separator:ac7b3d8537535aed8ab6b478a1bc0a0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -139,16 +139,13 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00047">47</a> of file <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html">smpte2138_bridge_manager.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span><span class="keyword">def </span>_is_debug():</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Methods.matrix_gate</a> <span class="keyword">import</span> is_debug_allowed</div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> is_debug_allowed(system=<span class="stringliteral">&quot;comms&quot;</span>, element=<span class="stringliteral">&quot;smpte2138&quot;</span>)</div>
-<div class="line"><span class="lineno">   50</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00045">45</a> of file <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html">smpte2138_bridge_manager.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span><span class="keyword">def </span>_is_debug():</div>
+<div class="line"><span class="lineno">   46</span>    <span class="keyword">from</span> oaLogging.Methods.matrix_gate <span class="keyword">import</span> is_debug_allowed</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> is_debug_allowed(system=<span class="stringliteral">&quot;comms&quot;</span>, element=<span class="stringliteral">&quot;smpte2138&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00133">smpte2138_bridge_manager.SMPTE2138BridgeManager.handle_router_event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00240">smpte2138_bridge_manager.SMPTE2138BridgeManager._publish_command()</a>, <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00220">smpte2138_bridge_manager.SMPTE2138BridgeManager._publish_parameter()</a>, and <a class="el" href="../../d7/dbe/smpte2138__bridge__manager_8py_source.html#l00131">smpte2138_bridge_manager.SMPTE2138BridgeManager.handle_router_event()</a>.</p>
 
 </div>
 </div>
@@ -160,7 +157,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">str smpte2138_bridge_manager.interface_path = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parents[1] / &quot;Interface&quot;</td>
+          <td class="memname">str smpte2138_bridge_manager.interface_path = Path(__file__).resolve().parents[1] / &quot;Interface&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -176,7 +173,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">smpte2138_bridge_manager.logger = SMPTE2138_LOGGER.bind(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">protocol</a>=&quot;SMPTE2138&quot;)</td>
+          <td class="memname">smpte2138_bridge_manager.logger = SMPTE2138_LOGGER.bind(protocol=&quot;SMPTE2138&quot;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

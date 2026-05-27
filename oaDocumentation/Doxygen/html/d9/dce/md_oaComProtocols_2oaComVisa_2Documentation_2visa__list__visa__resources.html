@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d9/dce/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa List Visa Resources</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md810"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md811"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1075"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1076"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md812"></a>
+<h2><a class="anchor" id="autotoc_md1077"></a>
 File Level</h2>
 <p><code>managers/VisaScipi/manager_visa_list_visa_resources.py</code></p>
 <p>This file provides a utility function for listing available VISA (Virtual Instrument Software Architecture) resources. It interfaces with the local VISA backend to discover connected hardware over USB, Ethernet (TCPIP), and Serial (ASRL) interfaces.</p>
@@ -106,17 +106,17 @@ File Level</h2>
 <li>Provide a sorted list for consistent GUI presentation.</li>
 </ul>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md813"></a>
+<h1><a class="anchor" id="autotoc_md1078"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Requires a valid VISA backend installed on the host system (e.g., NI-VISA, Keysight, or PyVISA-py).</li>
 <li>TCPIP discovery may depend on the specific backend's ability to scan VXI-11 or HiSLIP devices.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md814"></a>
+<h1><a class="anchor" id="autotoc_md1079"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md815"></a>
+<h2><a class="anchor" id="autotoc_md1080"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md816"></a>
+<h3><a class="anchor" id="autotoc_md1081"></a>
 &lt;tt&gt;list_visa_resources()&lt;/tt&gt;</h3>
 <p>Lists available VISA resources (instruments) discovered by the backend.</p>
 <p><b>Parameters:</b></p><ul>
@@ -130,7 +130,7 @@ Global Functions</h2>
 <li>Initializes a new <code>pyvisa.ResourceManager</code> instance.</li>
 <li>Performs blocking I/O to scan system hardware buses and network segments.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md817"></a>
+<h1><a class="anchor" id="autotoc_md1082"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Search for all instrument types capturing USB, TCPIP, GPIB, and ASRL.</li>

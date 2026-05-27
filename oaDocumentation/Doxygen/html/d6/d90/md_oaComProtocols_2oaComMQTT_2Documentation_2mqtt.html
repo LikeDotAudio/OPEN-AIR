@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d6/d90/md_oaComProtocols_2oaComMQTT_2D
   <div class="headertitle"><div class="title">🏷️ Mqtt Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md218"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md219"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md483"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md484"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md220"></a>
+<h2><a class="anchor" id="autotoc_md485"></a>
 File Level</h2>
 <p>managers/Mqtt_Manager/mqtt_manager.py</p>
 <p>Manages MQTT-related system operations: Broker Monitoring, Topic Management, and Service Control. Serves as the backend for the JSON-defined MQTT Dashboard and System Status.</p>
 <p>Author: Anthony Peter Kuzub Version 20260219.Performance.1</p>
-<h1><a class="anchor" id="autotoc_md221"></a>
+<h1><a class="anchor" id="autotoc_md486"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md222"></a>
+<h1><a class="anchor" id="autotoc_md487"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md223"></a>
+<h2><a class="anchor" id="autotoc_md488"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md224"></a>
+<h3><a class="anchor" id="autotoc_md489"></a>
 &lt;tt&gt;class MqttManager&lt;/tt&gt;</h3>
 <p>Back-end manager for the MQTT Dashboard and System Status. OPTIMIZED: Background publisher thread to prevent synchronous send latency.</p>
-<h4><a class="anchor" id="autotoc_md225"></a>
+<h4><a class="anchor" id="autotoc_md490"></a>
 &lt;tt&gt;__init__(self, subscriber_router, mqtt_client, state_cache_manager)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -125,7 +125,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md226"></a>
+<h4><a class="anchor" id="autotoc_md491"></a>
 &lt;tt&gt;_publish_async(self, topic, payload, retain)&lt;/tt&gt;</h4>
 <p>Queues a message for background publishing.</p>
 <p><b>Parameters:</b></p><ul>
@@ -139,7 +139,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md227"></a>
+<h4><a class="anchor" id="autotoc_md492"></a>
 &lt;tt&gt;_publish_worker(self)&lt;/tt&gt;</h4>
 <p>Background thread that performs the actual MQTT sends.</p>
 <p><b>Parameters:</b></p><ul>
@@ -151,7 +151,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md228"></a>
+<h4><a class="anchor" id="autotoc_md493"></a>
 &lt;tt&gt;_system_status_loop(self)&lt;/tt&gt;</h4>
 <p>Periodically prepares connection status and system paths. Only publishes on change.</p>
 <p><b>Parameters:</b></p><ul>
@@ -163,7 +163,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md229"></a>
+<h4><a class="anchor" id="autotoc_md494"></a>
 &lt;tt&gt;_handle_delete_command(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -175,7 +175,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md230"></a>
+<h4><a class="anchor" id="autotoc_md495"></a>
 &lt;tt&gt;_handle_service_command(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -187,7 +187,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md231"></a>
+<h4><a class="anchor" id="autotoc_md496"></a>
 &lt;tt&gt;_on_fleet_scan_complete(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -199,7 +199,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md232"></a>
+<h4><a class="anchor" id="autotoc_md497"></a>
 &lt;tt&gt;stop(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -211,7 +211,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md233"></a>
+<h1><a class="anchor" id="autotoc_md498"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

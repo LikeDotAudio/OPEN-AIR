@@ -1,6 +1,6 @@
 var classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout =
 [
-    [ "__init__", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a3fb8cd85b7185bf75fa84e64c7c8e791", null ],
+    [ "__init__", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#ac9e8e39c9fdf7c0a07c4f9c28452e284", null ],
     [ "_build_ui", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#ae81fe5dc787efd0f6708c6136a8319a5", null ],
     [ "_force_overlay_refresh", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#ac8bdc79ebfb22129c4dabfaa81a1a1a1", null ],
     [ "_initial_startup_sync", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a5c0bf20e3439e80b7341d2b4a88d1066", null ],
@@ -52,6 +52,8 @@ var classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1Intera
     [ "show_sizing", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a9667f5c7dcf56300664cd789fb6fd653", null ],
     [ "show_sticky", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#adbdf68982f2d7b02090f8da9f24b0f7b", null ],
     [ "show_structure", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a27826e84d8cb87ba4e57a30052fbcc3b", null ],
+    [ "state_mirror_engine", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a536cc37bed18038eaa20afcf0b9dec7f", null ],
+    [ "subscriber_router", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a6b6509d5100bfa99e2a01ca9109c8359", null ],
     [ "superficial_pad_var", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#a6a1aa58874fce543e4dea46fa1f22833", null ],
     [ "v_ruler", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#aaa7138abf4a19d089dfdeeec6b043e26", null ],
     [ "view_all_var", "de/d5b/classInterface_1_1Tabs_1_1InteractiveLayout_1_1interactive__layout_1_1InteractiveLayout.html#ac586812bd1256321bfc119a4cf6c2a27", null ]

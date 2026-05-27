@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('da/d54/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_225500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2010"></a> </p>
-<h1><a class="anchor" id="autotoc_md2011"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2459"></a> </p>
+<h1><a class="anchor" id="autotoc_md2460"></a>
 Issue</h1>
 <ol type="1">
 <li><b>Empty Main GUI</b>: Complex GUI definitions (like the mixing consoles) appeared empty when loaded in the main application, even though they showed content in the editor.</li>
 <li><b>Empty Editor Tree</b>: The "Structure" tree in the WYSIWYG editor was empty when loading files, even if the interactive layout showed widgets.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2012"></a>
+<h1><a class="anchor" id="autotoc_md2461"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>Visibility Failure</b>: <code>BuilderArrayCreator.make_array</code> was creating its own <code>main_container</code> (a tk.Canvas) but never calling <code>grid()</code> or <code>pack()</code> to place it in the parent. This resulted in the array and its children being instantiated but remaining invisible.</li>
 <li><b>Tree Sync Failure</b>: The <code>TreeRefactor</code> tab in the editor was subscribing to <code>STATE_UPDATED</code> events after the initial state was already loaded, missing the initial population trigger.</li>
 <li><b>Root Key Misalignment</b>: The tree population logic did not correctly handle GUI definitions that use a single named root key (e.g., <code>"Console_9-16": { ... }</code>), causing the recursive walk to stall at the top level.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2013"></a>
+<h1><a class="anchor" id="autotoc_md2462"></a>
 Resolution</h1>
 <ol type="1">
-<li><b>Mandatory Gridding</b>: Updated <code><a class="el" href="../../d6/d10/array_8py.html">oaGui/Core/array/array.py</a></code> to explicitly call <code>grid()</code> on the <code>main_container</code> using layout metadata from the JSON.</li>
+<li><b>Mandatory Gridding</b>: Updated <code>oaGui/Core/array/array.py</code> to explicitly call <code>grid()</code> on the <code>main_container</code> using layout metadata from the JSON.</li>
 <li><b>State Sync on Init</b>: Updated <code>oaGuiEditorWYSIWYG/Core/workspaces/tree_refactor.py</code> to fetch the current state from <code>StateManager</code> immediately upon creation.</li>
 <li><b>Improved Tree Logic</b>: Enhanced <code>_populate_tree</code> to detect single-key root containers and correctly descend into standard keys like <code>blocks</code>, <code>fields</code>, and <code>items</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2014"></a>
+<h1><a class="anchor" id="autotoc_md2463"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual audit of the grid logic confirms that <code>main_container</code> now participates in the Tkinter geometry management.</li>

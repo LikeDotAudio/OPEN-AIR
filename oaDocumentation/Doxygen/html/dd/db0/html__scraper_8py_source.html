@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OPEN-AIR: oaFileImportHTML/Methods/html_scraper.py Source File</title>
+<title>OPEN-AIR: oaFileHandlers/oaFileImportHTML/Methods/html_scraper.py Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -98,12 +98,12 @@ $(document).ready(function(){initNavTree('dd/db0/html__scraper_8py_source.html',
   <div class="headertitle"><div class="title">html_scraper.py</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../dd/db0/html__scraper_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../d7/d6b/namespaceMethods_1_1html__scraper.html">    1</a></span><span class="comment"># oaFileImportHTML/Methods/html_scraper.py</span></div>
+<a href="../../dd/db0/html__scraper_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../d7/d6b/namespaceMethods_1_1html__scraper.html">    1</a></span><span class="comment"># oaFileHandlers/oaFileImportHTML/Methods/html_scraper.py</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"># Author: Anthony Peter Kuzub</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"># Version: 20260331.2300.2</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"># Description: Pure Rust HTML scraper (No Python fallback).</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> .oaHTMLScraper_rs <span class="keyword">from</span> oaRustCore <span class="keyword">import</span> oa_html_scraper_rs <span class="keyword">as</span> oahtmlscraper_rs</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> oaRustCore <span class="keyword">import</span> oa_html_scraper_rs <span class="keyword">as</span> oahtmlscraper_rs</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="../../d7/d6b/namespaceMethods_1_1html__scraper.html#af9982ca7e97cc8e0035337aebabfd43f">    8</a></span>LOCAL_DEBUG = <span class="keyword">False</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
@@ -117,19 +117,18 @@ $(document).ready(function(){initNavTree('dd/db0/html__scraper_8py_source.html',
 <div class="foldopen" id="foldopen00016" data-start="" data-end="">
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="../../d9/d6a/classMethods_1_1html__scraper_1_1HTMLScraper.html#a6ba36ce31f6129e437c4521f2a09985a">   16</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d9/d6a/classMethods_1_1html__scraper_1_1HTMLScraper.html#a6ba36ce31f6129e437c4521f2a09985a">scrape_tables</a>(html_content: str):</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;🕸️🛠️🔗 [HTML] Using PURE RUST scraper.&quot;</span>)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oahtmlscraper_rs.scrape_tables</a>(html_content)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            print(<span class="stringliteral">&quot;🕸️🛠️🔗 [HTML] Using PURE RUST scraper.&quot;</span>)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span> oahtmlscraper_rs.scrape_tables(html_content)</div>
 </div>
 </div>
 <div class="ttc" id="aclassMethods_1_1html__scraper_1_1HTMLScraper_html"><div class="ttname"><a href="../../d9/d6a/classMethods_1_1html__scraper_1_1HTMLScraper.html">Methods.html_scraper.HTMLScraper</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/db0/html__scraper_8py_source.html#l00010">html_scraper.py:10</a></div></div>
 <div class="ttc" id="aclassMethods_1_1html__scraper_1_1HTMLScraper_html_a6ba36ce31f6129e437c4521f2a09985a"><div class="ttname"><a href="../../d9/d6a/classMethods_1_1html__scraper_1_1HTMLScraper.html#a6ba36ce31f6129e437c4521f2a09985a">Methods.html_scraper.HTMLScraper.scrape_tables</a></div><div class="ttdeci">scrape_tables(str html_content)</div><div class="ttdef"><b>Definition</b> <a href="../../dd/db0/html__scraper_8py_source.html#l00016">html_scraper.py:16</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_7e70ab0158e7ec5aa9455fd503747116.html">oaFileImportHTML</a></li><li class="navelem"><a class="el" href="../../dir_02ada084a61c9b5ee45434e15f3895eb.html">Methods</a></li><li class="navelem"><a class="el" href="../../dd/db0/html__scraper_8py.html">html_scraper.py</a></li>
+    <li class="navelem"><a class="el" href="../../dir_cd8eb49f916affde456fad18276f7491.html">oaFileHandlers</a></li><li class="navelem"><a class="el" href="../../dir_914d4ddb3f3d96812a170ac37c165cc2.html">oaFileImportHTML</a></li><li class="navelem"><a class="el" href="../../dir_4fd49e319a7d6fb545472561fc81df3b.html">Methods</a></li><li class="navelem"><a class="el" href="../../dd/db0/html__scraper_8py.html">html_scraper.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

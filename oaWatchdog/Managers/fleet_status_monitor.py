@@ -42,7 +42,7 @@ class FleetStatusMonitor:
     def __init__(self, state_mirror_engine, subscriber_router: MqttSubscriberRouter):
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router  # Store subscriber_router
-        self.base_topic = "OPEN-AIR/System/Status/Fleet"
+        self.base_topic = "OpenAir/System/Status/Fleet"
         self.current_state = "RED"  # Default state
 
         # 1. Listen for the signals
@@ -112,6 +112,6 @@ class FleetStatusMonitor:
     #     None.
     def _publish_color(self, color):
         """Tells the GUI Status Light what color to be."""
-        target_topic = "OPEN-AIR/GUI/Global/Header/StatusLight"
+        target_topic = "OpenAir/GUI/Global/Header/StatusLight"
         payload = {"color": color, "timestamp": time.time()}
         publish_payload(target_topic, orjson.dumps(payload).decode())

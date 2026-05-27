@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('de/d33/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Fix: ModuleNotFoundError in Interface.Core</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1440"></a></p>
-<h1><a class="anchor" id="autotoc_md1441"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1705"></a></p>
+<h1><a class="anchor" id="autotoc_md1706"></a>
 Date: 2026-04-16 22:35:00</h1>
-<h1><a class="anchor" id="autotoc_md1442"></a>
+<h1><a class="anchor" id="autotoc_md1707"></a>
 Status: RESOLVED</h1>
-<h2><a class="anchor" id="autotoc_md1443"></a>
+<h2><a class="anchor" id="autotoc_md1708"></a>
 Description</h2>
 <p>A &lsquo;ModuleNotFoundError: No module named 'oaGuiEditorWYSIWYG.Interface.Core&rsquo;<code>occurred after the</code><a class="el" href="../../da/d9a/namespaceInterface.html">Interface</a><code>directory reorganization. This was due to a lingering relative import in</code><a class="el" href="../../d8/d2e/selection_8py.html">Interface/overlays/selection.py</a><code>that pointed to the old</code><a class="el" href="../../d3/d7a/namespaceCore.html">Core</a><code>location instead of the new</code>layout_engine`.</p>
-<h2><a class="anchor" id="autotoc_md1444"></a>
+<h2><a class="anchor" id="autotoc_md1709"></a>
 Trigger</h2>
 <p>Launching the WYSIWYG editor or running tests that involve the overlay system.</p>
-<h2><a class="anchor" id="autotoc_md1445"></a>
+<h2><a class="anchor" id="autotoc_md1710"></a>
 Action Taken</h2>
 <ol type="1">
 <li>Updated <code><a class="el" href="../../d8/d2e/selection_8py.html">oaGuiEditorWYSIWYG/Interface/overlays/selection.py</a></code>:<ul>
@@ -121,7 +121,7 @@ Action Taken</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1446"></a>
+<h2><a class="anchor" id="autotoc_md1711"></a>
 Verification</h2>
 <ul>
 <li>Ran <code><a class="el" href="../../d6/de0/test__snap__logic_8py.html">oaGuiEditorWYSIWYG/Tests/Core/test_snap_logic.py</a></code> -&gt; PASSED.</li>

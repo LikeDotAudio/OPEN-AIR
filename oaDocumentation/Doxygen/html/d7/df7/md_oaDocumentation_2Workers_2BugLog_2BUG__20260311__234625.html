@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d7/df7/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260311_234625</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1621"></a> </p>
-<h1><a class="anchor" id="autotoc_md1622"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2070"></a> </p>
+<h1><a class="anchor" id="autotoc_md2071"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p>The <code>config.ini</code> file is not being created when <code>OpenAir.py</code> is run, especially after a "Fresh Start" or manual deletion.</p>
-<h1><a class="anchor" id="autotoc_md1623"></a>
+<h1><a class="anchor" id="autotoc_md2072"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <p>The <code>Config</code> singleton's <code>read_config</code> method relied on <code>GLOBAL_PROJECT_ROOT</code> from <code><a class="el" href="../../d2/d90/path__initializer_8py.html">path_initializer.py</a></code>. However, many modules import <code>Config</code> and call <code>get_instance()</code> at the global scope. If these modules are imported before <code>OpenAir.py</code> explicitly initializes paths, <code>read_config</code> might fail silently or encounter uninitialized variables. Additionally, the <code>FreshStart.toml</code> and <code>GitCommit.toml</code> commands were missing explicit instructions to purge local git objects, which the user requested.</p>
-<h1><a class="anchor" id="autotoc_md1624"></a>
+<h1><a class="anchor" id="autotoc_md2073"></a>
 &lt;strong&gt;Investigation&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Grep Search</b>: Identified all references to <code>config.ini</code> and <code>get_instance()</code>.</li>
 <li><b>Empirical Reproduction</b>: Attempted to reproduce by deleting <code>config.ini</code> and running <code>OpenAir.py</code>. While it worked in most cases, the potential for race conditions or out-of-order execution in global scope imports was identified as a significant risk.</li>
 <li><b>Code Review</b>: Noticed that <code>read_config</code> did not have explicit error handling around the creation of the default config file, leading to potential silent failures.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1625"></a>
+<h1><a class="anchor" id="autotoc_md2074"></a>
 &lt;strong&gt;Resolution&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Modified <code>managers/configini/config_reader.py</code></b>:<ul>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('d7/df7/md_oaDocumentation_2Workers_2Bu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1626"></a>
+<h1><a class="anchor" id="autotoc_md2075"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Manual Test</b>: Deleted <code>config.ini</code> and ran <code>OpenAir.py</code>. Verified that <code>config.ini</code> was recreated and <code>Installation/Setup.py</code> was triggered.</li>

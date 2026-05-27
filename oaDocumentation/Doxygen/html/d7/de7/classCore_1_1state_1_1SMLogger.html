@@ -143,12 +143,9 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dac/state_8py_source.html#l00046">46</a> of file <a class="el" href="../../d7/dac/state_8py_source.html">state.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>    <span class="keyword">def </span>error(self, message):</div>
 <div class="line"><span class="lineno">   47</span>        <span class="comment"># MANDATE: Errors are NOT gated.</span></div>
-<div class="line"><span class="lineno">   48</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Core.logger</a> <span class="keyword">import</span> WYSIWYG_LOGGER</div>
-<div class="line"><span class="lineno">   49</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">WYSIWYG_LOGGER.error</a>(f<span class="stringliteral">&quot;❌🧠🤦‍♂️ [COMPUTE] StateManager: {message}&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   48</span>        <span class="keyword">from</span> oaLogging.Core.logger <span class="keyword">import</span> WYSIWYG_LOGGER</div>
+<div class="line"><span class="lineno">   49</span>        WYSIWYG_LOGGER.error(f<span class="stringliteral">&quot;❌🧠🤦‍♂️ [COMPUTE] StateManager: {message}&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../d3/df7/connection_8py_source.html#l00126">aes70.connection.Connection._check_keepalive()</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00135">aes70.controller.client_connection.ClientConnection.incoming()</a>.</p>
 
 </div>
@@ -181,10 +178,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/dac/state_8py_source.html#l00038">38</a> of file <a class="el" href="../../d7/dac/state_8py_source.html">state.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   38</span>    <span class="keyword">def </span>info(self, message):</div>
-<div class="line"><span class="lineno">   39</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;info&#39;</span>, message=f<span class="stringliteral">&quot;🧠⚙️⚙️ [COMPUTE] {message}&quot;</span>, func_name=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>)</div>
+<div class="line"><span class="lineno">   39</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;info&#39;</span>, message=f<span class="stringliteral">&quot;🧠⚙️⚙️ [COMPUTE] {message}&quot;</span>, func_name=inspect.currentframe().f_code.co_name)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ab77733d01d9cd22823810c4a3c5588e2" name="ab77733d01d9cd22823810c4a3c5588e2"></a>
@@ -215,10 +210,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/dac/state_8py_source.html#l00040">40</a> of file <a class="el" href="../../d7/dac/state_8py_source.html">state.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   40</span>    <span class="keyword">def </span>success(self, message):</div>
-<div class="line"><span class="lineno">   41</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;success&#39;</span>, message=f<span class="stringliteral">&quot;🧠🆗✅ [COMPUTE] {message}&quot;</span>, func_name=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>)</div>
+<div class="line"><span class="lineno">   41</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;success&#39;</span>, message=f<span class="stringliteral">&quot;🧠🆗✅ [COMPUTE] {message}&quot;</span>, func_name=inspect.currentframe().f_code.co_name)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a54192a27f83df67bf245634019bdb6d4" name="a54192a27f83df67bf245634019bdb6d4"></a>
@@ -249,11 +242,9 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/dac/state_8py_source.html#l00050">50</a> of file <a class="el" href="../../d7/dac/state_8py_source.html">state.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   50</span>    <span class="keyword">def </span>trace(self, message):</div>
-<div class="line"><span class="lineno">   51</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;trace&#39;</span>, message=f<span class="stringliteral">&quot;🧠🔬🔍 [COMPUTE] {message}&quot;</span>, func_name=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>)</div>
+<div class="line"><span class="lineno">   51</span>        matrix_log(system=<span class="stringliteral">&#39;ui&#39;</span>, element=<span class="stringliteral">&#39;state_manager&#39;</span>, level=<span class="stringliteral">&#39;trace&#39;</span>, message=f<span class="stringliteral">&quot;🧠🔬🔍 [COMPUTE] {message}&quot;</span>, func_name=inspect.currentframe().f_code.co_name)</div>
 <div class="line"><span class="lineno">   52</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aad10180bfdf191d3d1a4cadbd0b5f914" name="aad10180bfdf191d3d1a4cadbd0b5f914"></a>
@@ -285,11 +276,9 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dac/state_8py_source.html#l00042">42</a> of file <a class="el" href="../../d7/dac/state_8py_source.html">state.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   42</span>    <span class="keyword">def </span>warning(self, message):</div>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># MANDATE: Warnings are NOT gated. Standard logger for warnings.</span></div>
-<div class="line"><span class="lineno">   44</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Core.logger</a> <span class="keyword">import</span> WYSIWYG_LOGGER</div>
-<div class="line"><span class="lineno">   45</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">WYSIWYG_LOGGER.warning</a>(f<span class="stringliteral">&quot;⚠️🧠🤷‍♂️ [COMPUTE] StateManager: {message}&quot;</span>)</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keyword">from</span> oaLogging.Core.logger <span class="keyword">import</span> WYSIWYG_LOGGER</div>
+<div class="line"><span class="lineno">   45</span>        WYSIWYG_LOGGER.warning(f<span class="stringliteral">&quot;⚠️🧠🤷‍♂️ [COMPUTE] StateManager: {message}&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

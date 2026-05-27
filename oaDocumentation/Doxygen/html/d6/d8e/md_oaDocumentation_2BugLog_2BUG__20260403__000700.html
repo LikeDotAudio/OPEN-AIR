@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('d6/d8e/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-03 00:07:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1178"></a> </p>
-<h1><a class="anchor" id="autotoc_md1179"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1443"></a> </p>
+<h1><a class="anchor" id="autotoc_md1444"></a>
 Issues</h1>
 <p>This report details the resolution of multiple <code>ModuleNotFoundError</code> and <code>ImportError</code> exceptions that were causing test suite failures across several Rust extension modules.</p>
-<h1><a class="anchor" id="autotoc_md1180"></a>
+<h1><a class="anchor" id="autotoc_md1445"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1181"></a>
+<h2><a class="anchor" id="autotoc_md1446"></a>
 1. Hardcoded Unprotected Imports in Tests</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ModuleNotFoundError: No module named 'oaCSVParser_rs&rsquo;<code>and</code>ModuleNotFoundError: No module named 'oaMeteringEngine_rs'<code>during test discovery.</code></li>
@@ -112,17 +112,17 @@ Root Causes &amp; Resolutions</h1>
 </code></li>
 </ul>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1182"></a>
+<h1><a class="anchor" id="autotoc_md1447"></a>
 Affected Modules</h1>
 <p><code></code></p>
 <p><code></p><ul>
-<li><code>oaFileImportCSV</code> (Rust parser tests)</li>
+<li><code>oaFileHandlers.oaFileImportCSV</code> (Rust parser tests)</li>
 <li><code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code> (Rust metering tests)</li>
 <li><code>oaStateCache</code> (Rust registry tests)</li>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1183"></a>
+<h1><a class="anchor" id="autotoc_md1448"></a>
 Verification</h1>
 <p><code></code></p>
 <p><code>The test files were verified for syntactic correctness and resilience. The test suite can now discover and execute (or gracefully skip) the tests regardless of minor structural variations in the compiled Rust binary's Python exposure, preventing test suite crashes. The reported <code>AttributeError</code> for <code>BallisticsEngine</code> was also confirmed to be a stale cache artifact that had been resolved by a previous patch. </code></p>

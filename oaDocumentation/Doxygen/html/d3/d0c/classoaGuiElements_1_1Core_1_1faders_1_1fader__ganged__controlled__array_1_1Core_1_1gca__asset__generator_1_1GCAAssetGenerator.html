@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d3/d0c/classoaGuiElements_1_1Core_1_1f
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af9f34e60cabf44a5f219b824a32d2b0e" id="r_af9f34e60cabf44a5f219b824a32d2b0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d0c/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Core_1_1gca__asset__generator_1_1GCAAssetGenerator.html#af9f34e60cabf44a5f219b824a32d2b0e">get_3d_bridge</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cls</a>, w, h, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">body_color</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">outline_color</a>)</td></tr>
+<tr class="memitem:af9f34e60cabf44a5f219b824a32d2b0e" id="r_af9f34e60cabf44a5f219b824a32d2b0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d0c/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Core_1_1gca__asset__generator_1_1GCAAssetGenerator.html#af9f34e60cabf44a5f219b824a32d2b0e">get_3d_bridge</a> (cls, w, <a class="el" href="../../d1/dcc/frontEnd_2libControl_2Panels_2wasm_2src_2lib_8rs.html#a3c527b64eb34bbbc27cdd5d2bf420e53">h</a>, body_color, outline_color)</td></tr>
 <tr class="separator:af9f34e60cabf44a5f219b824a32d2b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -156,48 +156,45 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> cache_key <span class="keywordflow">in</span> _GCA_ASSET_CACHE:</div>
 <div class="line"><span class="lineno">   24</span>            <span class="keywordflow">return</span> _GCA_ASSET_CACHE[cache_key]</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;🏗️🖼️🎨 [ASSET] Generating NEW 3D GCA bridge: {w}x{h}&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;🏗️🖼️🎨 [ASSET] Generating NEW 3D GCA bridge: {w}x{h}&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
 <div class="line"><span class="lineno">   27</span>        pad = 15</div>
 <div class="line"><span class="lineno">   28</span>        full_w, full_h = w + pad*2, h + pad*2</div>
-<div class="line"><span class="lineno">   29</span>        base = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.new</a>(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
+<div class="line"><span class="lineno">   29</span>        base = Image.new(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>        <span class="comment"># 1. Drop Shadow</span></div>
-<div class="line"><span class="lineno">   32</span>        shadow = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.new</a>(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
-<div class="line"><span class="lineno">   33</span>        s_draw = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageDraw.Draw</a>(shadow)</div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s_draw.rounded_rectangle</a>((pad+2, pad+4, pad+w+2, pad+h+4), radius=8, fill=(0,0,0,120))</div>
-<div class="line"><span class="lineno">   35</span>        shadow = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shadow.filter</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageFilter.GaussianBlur</a>(radius=6))</div>
-<div class="line"><span class="lineno">   36</span>        base = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.alpha_composite</a>(base, shadow)</div>
+<div class="line"><span class="lineno">   32</span>        shadow = Image.new(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
+<div class="line"><span class="lineno">   33</span>        s_draw = ImageDraw.Draw(shadow)</div>
+<div class="line"><span class="lineno">   34</span>        s_draw.rounded_rectangle((pad+2, pad+4, pad+w+2, pad+h+4), radius=8, fill=(0,0,0,120))</div>
+<div class="line"><span class="lineno">   35</span>        shadow = shadow.filter(ImageFilter.GaussianBlur(radius=6))</div>
+<div class="line"><span class="lineno">   36</span>        base = Image.alpha_composite(base, shadow)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment"># 2. Main Body</span></div>
-<div class="line"><span class="lineno">   39</span>        body = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.new</a>(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
-<div class="line"><span class="lineno">   40</span>        b_draw = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageDraw.Draw</a>(body)</div>
-<div class="line"><span class="lineno">   41</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.rounded_rectangle</a>((pad, pad, pad+w, pad+h), radius=8, fill=body_color, outline=outline_color, width=1)</div>
+<div class="line"><span class="lineno">   39</span>        body = Image.new(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
+<div class="line"><span class="lineno">   40</span>        b_draw = ImageDraw.Draw(body)</div>
+<div class="line"><span class="lineno">   41</span>        b_draw.rounded_rectangle((pad, pad, pad+w, pad+h), radius=8, fill=body_color, outline=outline_color, width=1)</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># Metallic Glint</span></div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.line</a>((pad+6, pad+1, pad+w-6, pad+1), fill=(255,255,255,100), width=1)</div>
-<div class="line"><span class="lineno">   45</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.line</a>((pad+1, pad+6, pad+1, pad+h-6), fill=(255,255,255,50), width=1)</div>
-<div class="line"><span class="lineno">   46</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.line</a>((pad+6, pad+h-1, pad+w-6, pad+h-1), fill=(0,0,0,80), width=1)</div>
+<div class="line"><span class="lineno">   44</span>        b_draw.line((pad+6, pad+1, pad+w-6, pad+1), fill=(255,255,255,100), width=1)</div>
+<div class="line"><span class="lineno">   45</span>        b_draw.line((pad+1, pad+6, pad+1, pad+h-6), fill=(255,255,255,50), width=1)</div>
+<div class="line"><span class="lineno">   46</span>        b_draw.line((pad+6, pad+h-1, pad+w-6, pad+h-1), fill=(0,0,0,80), width=1)</div>
 <div class="line"><span class="lineno">   47</span> </div>
 <div class="line"><span class="lineno">   48</span>        <span class="comment"># 3. Inner Screen Area</span></div>
 <div class="line"><span class="lineno">   49</span>        screen_pad = 4</div>
-<div class="line"><span class="lineno">   50</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.rounded_rectangle</a>((pad+screen_pad, pad+screen_pad, pad+w-screen_pad, pad+h-screen_pad), radius=4, fill=<span class="stringliteral">&quot;#000000&quot;</span>)</div>
-<div class="line"><span class="lineno">   51</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">b_draw.line</a>((pad+screen_pad+1, pad+screen_pad+1, pad+w-screen_pad-1, pad+screen_pad+1), fill=(40,40,40,255), width=1)</div>
+<div class="line"><span class="lineno">   50</span>        b_draw.rounded_rectangle((pad+screen_pad, pad+screen_pad, pad+w-screen_pad, pad+h-screen_pad), radius=4, fill=<span class="stringliteral">&quot;#000000&quot;</span>)</div>
+<div class="line"><span class="lineno">   51</span>        b_draw.line((pad+screen_pad+1, pad+screen_pad+1, pad+w-screen_pad-1, pad+screen_pad+1), fill=(40,40,40,255), width=1)</div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>        base = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.alpha_composite</a>(base, body)</div>
+<div class="line"><span class="lineno">   53</span>        base = Image.alpha_composite(base, body)</div>
 <div class="line"><span class="lineno">   54</span> </div>
 <div class="line"><span class="lineno">   55</span>        <span class="comment"># 4. Gloss</span></div>
-<div class="line"><span class="lineno">   56</span>        gloss = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.new</a>(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
-<div class="line"><span class="lineno">   57</span>        g_draw = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageDraw.Draw</a>(gloss)</div>
-<div class="line"><span class="lineno">   58</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">g_draw.rounded_rectangle</a>((pad+2, pad+2, pad+w-2, pad+h//2), radius=6, fill=(255,255,255,15))</div>
-<div class="line"><span class="lineno">   59</span>        base = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.alpha_composite</a>(base, gloss)</div>
+<div class="line"><span class="lineno">   56</span>        gloss = Image.new(<span class="stringliteral">&quot;RGBA&quot;</span>, (full_w, full_h), (0,0,0,0))</div>
+<div class="line"><span class="lineno">   57</span>        g_draw = ImageDraw.Draw(gloss)</div>
+<div class="line"><span class="lineno">   58</span>        g_draw.rounded_rectangle((pad+2, pad+2, pad+w-2, pad+h//2), radius=6, fill=(255,255,255,15))</div>
+<div class="line"><span class="lineno">   59</span>        base = Image.alpha_composite(base, gloss)</div>
 <div class="line"><span class="lineno">   60</span> </div>
-<div class="line"><span class="lineno">   61</span>        photo = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageTk.PhotoImage</a>(base)</div>
+<div class="line"><span class="lineno">   61</span>        photo = ImageTk.PhotoImage(base)</div>
 <div class="line"><span class="lineno">   62</span>        _GCA_ASSET_CACHE[cache_key] = photo</div>
 <div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> photo</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

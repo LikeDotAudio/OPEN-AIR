@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('d0/d63/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BugLog Entry: 20260409_003000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1309"></a> </p>
-<h1><a class="anchor" id="autotoc_md1310"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1574"></a> </p>
+<h1><a class="anchor" id="autotoc_md1575"></a>
 Issue Summary</h1>
 <p>Three test failures were identified across different modules:</p><ol type="1">
 <li><code>oaAudioMixer.Tests.test_mixer_smoke</code>: &lsquo;ModuleNotFoundError: No module named 'oaaudiomixer_rs&rsquo;<code>. 2.</code>oaComProtocols.oaComNmos.Core.IS12.Tests.test_is12_manager<code>:</code>SyntaxError: unterminated string literal<code>. 3.</code>oaComProtocols.oaComOSC.Tests.test_osc.TestOSCManager.test_echo_suppression_and_transmission<code>:</code>AssertionError: expected call not found`.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1311"></a>
+<h1><a class="anchor" id="autotoc_md1576"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>oaAudioMixer</b>: The Rust-based PyO3 extension <code>oaaudiomixer_rs</code> was not built/installed in the Python environment.</li>
-<li><b>oaComNmos</b>: Multiple stray newlines inside <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print()</a></code> statements in <code><a class="el" href="../../d1/dba/schemas_8py.html">schemas.py</a></code> caused syntax errors. Additionally, <code>pydantic</code> was not installed, and several imports were missing in <code>Entry.py</code>.</li>
+<li><b>oaComNmos</b>: Multiple stray newlines inside <code>print()</code> statements in <code><a class="el" href="../../d1/dba/schemas_8py.html">schemas.py</a></code> caused syntax errors. Additionally, <code>pydantic</code> was not installed, and several imports were missing in <code>Entry.py</code>.</li>
 <li><b>oaComOSC</b>: The <code>OSCManager</code>'s bridge logic had an overly restrictive <code>is_valid_source</code> check that only allowed OSC-originated traffic to be sent out, effectively blocking the GUI/MQTT -&gt; OSC bridge.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1312"></a>
+<h1><a class="anchor" id="autotoc_md1577"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>oaAudioMixer</b>: Built and installed the Rust module using <code>maturin develop --release</code>.</li>
 <li><b>oaComNmos</b>: Fixed syntax errors in <code><a class="el" href="../../d1/dba/schemas_8py.html">schemas.py</a></code>. Installed <code>pydantic</code>. Added missing imports for <code>typing</code> and <code>pydantic</code> in <code>Entry.py</code>.</li>
 <li><b>oaComOSC</b>: Updated <code>is_valid_source</code> in <code><a class="el" href="../../d8/d06/osc__manager_8py.html">osc_manager.py</a></code> to include <code>MQTT</code> and <code>GUI</code> sources.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1313"></a>
+<h1><a class="anchor" id="autotoc_md1578"></a>
 Verification Evidence</h1>
 <p>All tests passed successfully:</p><ul>
 <li><code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">oaAudioMixer/Tests/test_mixer_smoke.py</a></code>: PASSED</li>

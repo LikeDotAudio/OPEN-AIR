@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('dd/dd4/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_224000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1995"></a> </p>
-<h1><a class="anchor" id="autotoc_md1996"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2444"></a> </p>
+<h1><a class="anchor" id="autotoc_md2445"></a>
 Issue</h1>
 <p>An <code>AttributeError</code> was reported during GUI construction: &lsquo;AttributeError: 'BuilderArrayCreator&rsquo; object has no attribute '_create_dynamic_widgets'`</p>
-<h1><a class="anchor" id="autotoc_md1997"></a>
+<h1><a class="anchor" id="autotoc_md2446"></a>
 Root Cause</h1>
-<p>In the previous refactor of <code>BuilderArrayCreator</code>, the code was updated to use <code>self._create_dynamic_widgets</code>. However, <code>self</code> in this context refers to an instance of <code>BuilderArrayCreator</code>, which does not implement <code>_create_dynamic_widgets</code>. This method is provided by the <code>DynamicGuiBuilder</code> (the <code>builder_instance</code>).</p>
-<h1><a class="anchor" id="autotoc_md1998"></a>
+<p>In the previous refactor of <code>BuilderArrayCreator</code>, the code was updated to use <code>self._create_dynamic_widgets</code>. However, <code>self</code> in this context refers to an instance of <code>BuilderArrayCreator</code>, which does not implement <code>_create_dynamic_widgets</code>. This method is provided by the <code>LoaderOrchestrator</code> (the <code>builder_instance</code>).</p>
+<h1><a class="anchor" id="autotoc_md2447"></a>
 Resolution</h1>
-<p>Modified <code><a class="el" href="../../d6/d10/array_8py.html">oaGui/Core/array/array.py</a></code> to correctly use the <code>builder_instance</code> variable (which holds the reference to <code>DynamicGuiBuilder</code>) to call <code>_create_dynamic_widgets</code>.</p>
-<h1><a class="anchor" id="autotoc_md1999"></a>
+<p>Modified <code>oaGui/Core/array/array.py</code> to correctly use the <code>builder_instance</code> variable (which holds the reference to <code>LoaderOrchestrator</code>) to call <code>_create_dynamic_widgets</code>.</p>
+<h1><a class="anchor" id="autotoc_md2448"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>builder_instance</code> is correctly resolved from the <code>context</code> or <code>kwargs</code>.</li>

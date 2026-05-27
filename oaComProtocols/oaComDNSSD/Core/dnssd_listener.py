@@ -58,7 +58,7 @@ class DNSSDListener:
         type_path = type.strip('._').replace('._', '/').replace('.', '/')
         # name: My Device._googlecast._tcp.local. -> My_Device
         name_sanitized = name.replace(f".{type}", "").replace(" ", "_")
-        return f"OPEN-AIR/DNSSD/{action}/{type_path}/{name_sanitized}"
+        return f"OpenAir/DNSSD/{action}/{type_path}/{name_sanitized}"
 
     def remove_service(self, zeroconf, type, name):
         topic = self._create_topic("Removed", type, name)

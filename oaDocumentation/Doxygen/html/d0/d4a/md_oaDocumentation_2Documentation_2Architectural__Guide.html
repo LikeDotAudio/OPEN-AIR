@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d0/d4a/md_oaDocumentation_2Documentati
   <div class="headertitle"><div class="title">🏗️ OPEN-AIR Architectural Guide: How and Why It Works</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1508"></a> </p>
-<h1><a class="anchor" id="autotoc_md1509"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1957"></a> </p>
+<h1><a class="anchor" id="autotoc_md1958"></a>
 📖 The Core Philosophy: Partitioned Intelligence</h1>
 <p>The OPEN-AIR project is built upon a <b>Partitioned Architecture</b>, a design choice born from the need to separate high-performance hardware orchestration from responsive, aesthetically rich user interfaces.</p>
 <p>In traditional monolithic systems, UI lag can delay critical hardware commands, and heavy hardware polling can freeze the UI. OPEN-AIR solves this by splitting the world into two distinct halves: <b>The <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a></b> and <b>The UI</b>.</p>
-<h2><a class="anchor" id="autotoc_md1510"></a>
+<h2><a class="anchor" id="autotoc_md1959"></a>
 1. The Core (Hardware &amp; State Orchestration)</h2>
 <p>The "Core" lives in <code>managers/System_Core/open_air_core.py</code>. It is the silent engine.</p><ul>
 <li><b>How it works:</b> It manages the physical connections (VISA, SNMP, MQTT) and maintains the "Source of Truth" for the entire system state.</li>
 <li><b>Why it's needed:</b> By isolating hardware logic, we ensure that a slow instrument response never blocks the user's view. It allows for headless operation—the system can run and monitor hardware even if no screen is attached.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1511"></a>
+<h2><a class="anchor" id="autotoc_md1960"></a>
 2. The UI (The Visual Reflex)</h2>
-<p>The "UI" lives in <code>managers/Display/open_air_ui.py</code>. It is the reactive skin.</p><ul>
+<p>The "UI" lives in <code>managers/Display/loader_main_service.py</code>. It is the reactive skin.</p><ul>
 <li><b>How it works:</b> It uses the <b>Widget Registry</b> system to dynamically build interfaces from JSON blueprints. It doesn't "know" about hardware; it only knows about MQTT topics and visual states.</li>
 <li><b>Why it's needed:</b> This decoupling allows UI designers to iterate on meters, knobs, and graphs without ever touching a line of hardware driver code.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1513"></a>
+<h1><a class="anchor" id="autotoc_md1962"></a>
 📡 The Nervous System: MQTT Event Bus</h1>
 <p>Everything in OPEN-AIR communicates via <b>MQTT</b>. This is the glue that binds the Partitioned Architecture.</p>
 <ul>
@@ -119,9 +119,9 @@ $(document).ready(function(){initNavTree('d0/d4a/md_oaDocumentation_2Documentati
 <li><b>Why it works:</b> MQTT is asynchronous and distributed. This means components can be on the same machine, or spread across a network of Raspberry Pis. It provides a built-in "State Mirror" where any component can see what any other component is doing just by subscribing.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1515"></a>
+<h1><a class="anchor" id="autotoc_md1964"></a>
 🛠️ The Assembly Line: Dynamic Widget Registry</h1>
-<p>Instead of hard-coding every screen, OPEN-AIR uses a <b>Widget Registry</b> (<code>managers/Display/factory/widget_registry.py</code>).</p>
+<p>Instead of hard-coding every screen, OPEN-AIR uses a <b>Widget Registry</b> (<code>managers/Display/factory/registry_widget_store.py</code>).</p>
 <ul>
 <li><b>How it works:</b><ol type="1">
 <li>A <b>Blueprint Loader</b> reads a JSON file defining a layout.</li>
@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('d0/d4a/md_oaDocumentation_2Documentati
 <li><b>Why it's needed:</b> Speed of development. You can create an entirely new control surface for a complex Oscilloscope just by writing a JSON file.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1517"></a>
+<h1><a class="anchor" id="autotoc_md1966"></a>
 🏗️ Operational Flow: A Lifecycle Story</h1>
 <ol type="1">
 <li><b>Ignition:</b> <code>OpenAir.py</code> (The Supervisor) starts. It launches the <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> and the UI as separate processes or threads.</li>

@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d4/d62/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: 20260413_011100 - Architectural Audit Refactors</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1377"></a> </p>
-<h1><a class="anchor" id="autotoc_md1378"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1642"></a> </p>
+<h1><a class="anchor" id="autotoc_md1643"></a>
 Issue</h1>
 <p>An architectural audit identified several violations of clean code principles:</p><ol type="1">
 <li><b>Law of Demeter ("Train Wrecks")</b>: Long chains of method calls in <code>oaGui</code> and <code>oaGuiEditorWYSIWYG</code>.</li>
 <li><b>Excessive Multiple Inheritance</b>: Heavy use of mixins in <code>oaComVisa</code> causing high coupling.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1379"></a>
+<h1><a class="anchor" id="autotoc_md1644"></a>
 Root Cause</h1>
 <ul>
-<li><code><a class="el" href="../../d1/d6e/active__marker__tune__and__collect_8py.html">oaGui/Methods/active_marker_tune_and_collect.py</a></code>: Nested <code>try...except</code> and long string manipulation chains for MQTT payload parsing.</li>
-<li><code>oaGuiEditorWYSIWYG/Core/workspaces/layout_overlays/sizing.py</code>: Redundant <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_toplevel()</a>.<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_rootx()</a></code> calls on every mouse event.</li>
+<li><code>oaGui/Methods/active_marker_tune_and_collect.py</code>: Nested <code>try...except</code> and long string manipulation chains for MQTT payload parsing.</li>
+<li><code>oaGuiEditorWYSIWYG/Core/workspaces/layout_overlays/sizing.py</code>: Redundant <code>winfo_toplevel().winfo_rootx()</code> calls on every mouse event.</li>
 <li><code><a class="el" href="../../d1/d1e/visa__fleet_8py.html">oaComProtocols/oaComVisa/Core/visa_fleet.py</a></code>: <code>FleetOrchestrator</code> inherited from three separate mixins, making state management opaque.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1380"></a>
+<h1><a class="anchor" id="autotoc_md1645"></a>
 Resolution</h1>
 <ul>
 <li><b>Refactored <code>MarkerGoGetterWorker</code></b>: Extracted a unified <code>_is_payload_true</code> method to handle JSON and raw-string MQTT payloads safely.</li>
-<li><b>Optimized Sizing Tooltips</b>: Cached <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_toplevel()</a></code> reference and reduced redundant calculations during drag operations.</li>
+<li><b>Optimized Sizing Tooltips</b>: Cached <code>winfo_toplevel()</code> reference and reduced redundant calculations during drag operations.</li>
 <li><b>Decomposed <code>FleetOrchestrator</code></b>: Converted <code>FleetCommandQueueMixin</code>, <code>FleetInventoryMixin</code>, and <code>FleetScanMixin</code> into composed <code>CommandQueueManager</code>, <code>InventoryManager</code>, and <code>ScanManager</code> classes.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1381"></a>
+<h1><a class="anchor" id="autotoc_md1646"></a>
 Verification</h1>
 <ul>
 <li>Verified <code>_is_payload_true</code> logic with comprehensive test cases in <code>.gemini/TempScripts/test_payload_parsing.py</code>.</li>

@@ -91,7 +91,7 @@ def create_splink_with_params(self, source, dest, source_val=None, dest_val=None
 
     # ⚡ FIREHOSE: Ingest creation event for visibility
     from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-    ProtocolRouter.get_instance().ingest("SPLINKER", f"OPEN-AIR/System/Status/Splinker/{new_id}", "CREATED", {"id": new_id, "type": "Direct", "source": source, "dest": dest})
+    ProtocolRouter.get_instance().ingest("SPLINKER", f"OpenAir/System/Status/Splinker/{new_id}", "CREATED", {"id": new_id, "type": "Direct", "source": source, "dest": dest})
 
     if Splinker_debug_enabled:
         splinker_logger.info(f"🔗 Splinker: create_splink_with_params(source='{source}', dest='{dest}') CALL received.")

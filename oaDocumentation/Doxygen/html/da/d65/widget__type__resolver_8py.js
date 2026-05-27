@@ -1,4 +1,4 @@
 var widget__type__resolver_8py =
 [
-    [ "Core.standardizers.widget_type_resolver.WidgetTypeResolver", "dd/dba/classCore_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver.html", "dd/dba/classCore_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver" ]
+    [ "FileReaders.standardizers.widget_type_resolver.WidgetTypeResolver", "d9/d95/classFileReaders_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver.html", "d9/d95/classFileReaders_1_1standardizers_1_1widget__type__resolver_1_1WidgetTypeResolver" ]
 ];

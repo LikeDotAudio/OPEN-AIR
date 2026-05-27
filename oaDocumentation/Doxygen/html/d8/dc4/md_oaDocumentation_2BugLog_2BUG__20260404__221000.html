@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('d8/dc4/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260404_221000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1247"></a> </p>
-<h1><a class="anchor" id="autotoc_md1248"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1512"></a> </p>
+<h1><a class="anchor" id="autotoc_md1513"></a>
 Issue: MIDI Tests Skipped and IndentationError in FileIOHandler</h1>
 <p><b>Date</b>: 2026-04-04 <b>Severity</b>: High (Blocking test execution and build failure) <b>System</b>: TEST / GUI <b>Module</b>: <code>oaTests.Core</code>, <code>oaGuiEditorWYSIWYG.Core.file_io_handler</code></p>
-<h2><a class="anchor" id="autotoc_md1249"></a>
+<h2><a class="anchor" id="autotoc_md1514"></a>
 Symptom</h2>
 <ol type="1">
 <li>MIDI tests in <code>oaComProtocols.oaComMidi/Tests/</code> were being skipped with the message: <code>Skipping real MIDI test in safety mode</code>.</li>
 <li>A regression in <code>oaGuiEditorWYSIWYG/Core/file_io_handler.py</code> caused an <code>IndentationError</code> during test discovery: <code>IndentationError: unindent does not match any outer indentation level</code> (line 157).</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1250"></a>
+<h2><a class="anchor" id="autotoc_md1515"></a>
 Root Cause</h2>
 <ol type="1">
 <li><b>MIDI Skip</b>: The <code>OPEN_AIR_SKIP_REAL_MIDI</code> environment variable was hardcoded to <code>"1"</code> in <code><a class="el" href="../../d8/dbb/oaTests_2Core_2Entry_8py.html">oaTests/Core/Entry.py</a></code>, preventing users from enabling these tests even if they had the required hardware/drivers.</li>
 <li><b>IndentationError</b>: A previous fix for the <code>matrix_log</code> signature introduced misaligned blocks in <code>FileIOHandler.save_file</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1251"></a>
+<h2><a class="anchor" id="autotoc_md1516"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>MIDI Skip Fix</b>: Modified <code><a class="el" href="../../d8/dbb/oaTests_2Core_2Entry_8py.html">oaTests/Core/Entry.py</a></code> to only set <code>OPEN_AIR_SKIP_REAL_MIDI = "1"</code> if it is not already defined in the environment. <code>python if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") is None: os.environ["OPEN_AIR_SKIP_REAL_MIDI"] = "1" </code></li>
-<li><b>Indentation Fix</b>: Surgically corrected the indentation of the <code>matrix_log</code> calls and the <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">on_save_callback()</a></code> call in <code>oaGuiEditorWYSIWYG/Core/file_io_handler.py</code>.</li>
+<li><b>Indentation Fix</b>: Surgically corrected the indentation of the <code>matrix_log</code> calls and the <code>on_save_callback()</code> call in <code>oaGuiEditorWYSIWYG/Core/file_io_handler.py</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1252"></a>
+<h2><a class="anchor" id="autotoc_md1517"></a>
 Verification</h2>
 <ul>
 <li><b>Reproduction</b>: Ran <code>export OPEN_AIR_SKIP_REAL_MIDI=0 &amp;&amp; python3 <a class="el" href="../../d8/dbb/oaTests_2Core_2Entry_8py.html">oaTests/Core/Entry.py</a></code>.</li>
@@ -127,7 +127,7 @@ Verification</h2>
 <li><b>System Stability</b>: Confirmed that the <code>IndentationError</code> is resolved and <code>oaGui.Tests.test_ui_and_data</code> now imports correctly.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1254"></a>
+<h1><a class="anchor" id="autotoc_md1519"></a>
 🚀 Addition: Improved Test Controllability</h1>
 <p>The test runner now respects external environment variables, allowing for more flexible CI/CD and local development configurations. </p>
 </div></div><!-- contents -->

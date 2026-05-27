@@ -93,30 +93,30 @@ $(document).ready(function(){initNavTree('d8/d88/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Fix: Missing Method and Broken Imports in WYSIWYG</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1454"></a></p>
-<h1><a class="anchor" id="autotoc_md1455"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1719"></a></p>
+<h1><a class="anchor" id="autotoc_md1720"></a>
 Date: 2026-04-16 22:55:00</h1>
-<h1><a class="anchor" id="autotoc_md1456"></a>
+<h1><a class="anchor" id="autotoc_md1721"></a>
 Status: RESOLVED</h1>
-<h2><a class="anchor" id="autotoc_md1457"></a>
+<h2><a class="anchor" id="autotoc_md1722"></a>
 Description</h2>
 <p>Two issues were identified during testing:</p><ol type="1">
 <li>&lsquo;AttributeError: 'WysiwygEditor&rsquo; object has no attribute '_save_and_close'<code>- The menu was attempting to bind to a method that was missing from the refactored</code>WysiwygEditor<code>class. 2.</code>ModuleNotFoundError<code>in</code><a class="el" href="../../d7/dfd/test__core__components_8py.html">test_core_components.py</a><code>- The test was attempting to import from</code>Interface.layout_engine.overlay<code>which had been renamed to</code><a class="el" href="../../dd/df3/namespaceInterface_1_1layout__engine_1_1overlay__manager.html">Interface.layout_engine.overlay_manager</a>`.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1458"></a>
+<h2><a class="anchor" id="autotoc_md1723"></a>
 Trigger</h2>
 <ul>
 <li>Startup of the WYSIWYG editor.</li>
 <li>Running the automated test suite.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1459"></a>
+<h2><a class="anchor" id="autotoc_md1724"></a>
 Action Taken</h2>
 <ol type="1">
 <li><b>Implemented <code>_save_and_close</code></b>: Added the missing method to <code><a class="el" href="../../db/d99/wysiwyg__editor_8py.html">oaGuiEditorWYSIWYG/Managers/wysiwyg_editor.py</a></code> to allow the "Save &amp; Close" menu option to function.</li>
 <li><b>Fixed Test Imports</b>: Updated <code><a class="el" href="../../d7/dfd/test__core__components_8py.html">oaGuiEditorWYSIWYG/Tests/test_core_components.py</a></code> to correctly reference <code>overlay_manager</code> instead of <code>overlay</code>.</li>
 <li><b>Corrected Patch Targets</b>: Updated <code>unittest.mock.patch</code> calls in the test suite to point to the new module location.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1460"></a>
+<h2><a class="anchor" id="autotoc_md1725"></a>
 Verification</h2>
 <ul>
 <li>Ran <code><a class="el" href="../../db/d89/oaGuiEditorWYSIWYG_2Tests_2test__Entry_8py.html">oaGuiEditorWYSIWYG/Tests/test_Entry.py</a></code> -&gt; PASSED.</li>

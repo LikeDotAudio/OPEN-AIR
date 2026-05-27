@@ -44,14 +44,14 @@ class TestFleetStatusMonitor(unittest.TestCase):
         OPERATE: Check initialization state.
         CHECK: Assert subscriptions to Start and Complete topics and initial RED publish.
         """
-        base = "OPEN-AIR/System/Status/Fleet"
+        base = "OpenAir/System/Status/Fleet"
         self.mock_router.subscribe_to_topic.assert_any_call(f"{base}/Start", self.monitor._on_scan_start)
         self.mock_router.subscribe_to_topic.assert_any_call(f"{base}/Complete", self.monitor._on_scan_complete)
 
         # Initial publish during __init__
         self.mock_publish.assert_called_once()
         args, _ = self.mock_publish.call_args
-        self.assertEqual(args[0], "OPEN-AIR/GUI/Global/Header/StatusLight")
+        self.assertEqual(args[0], "OpenAir/GUI/Global/Header/StatusLight")
         payload = orjson.loads(args[1])
         self.assertEqual(payload["color"], "red")
 
@@ -64,7 +64,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
 
-        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Start", payload=b"{}")
+        message = MqttMessage(topic="OpenAir/System/Status/Fleet/Start", payload=b"{}")
         self.monitor._on_scan_start(message)
 
         self.assertEqual(self.monitor.current_state, "RED")
@@ -82,7 +82,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.mock_publish.reset_mock()
 
         data = {"num_devices": 5}
-        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
+        message = MqttMessage(topic="OpenAir/System/Status/Fleet/Complete", payload=orjson.dumps(data))
         self.monitor._on_scan_complete(message)
 
         self.assertEqual(self.monitor.current_state, "GREEN")
@@ -100,7 +100,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.mock_publish.reset_mock()
 
         data = {"num_devices": 0}
-        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
+        message = MqttMessage(topic="OpenAir/System/Status/Fleet/Complete", payload=orjson.dumps(data))
         self.monitor._on_scan_complete(message)
 
         self.assertEqual(self.monitor.current_state, "RED")
@@ -117,7 +117,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
 
-        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=b"invalid json")
+        message = MqttMessage(topic="OpenAir/System/Status/Fleet/Complete", payload=b"invalid json")
         self.monitor._on_scan_complete(message)
 
         self.assertEqual(self.monitor.current_state, "RED")

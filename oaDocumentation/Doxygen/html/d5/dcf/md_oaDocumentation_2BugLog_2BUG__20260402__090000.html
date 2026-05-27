@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('d5/dcf/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 09:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1135"></a> </p>
-<h1><a class="anchor" id="autotoc_md1136"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1400"></a> </p>
+<h1><a class="anchor" id="autotoc_md1401"></a>
 Issues</h1>
 <p>This report details the resolution of several naming violations and magic numbers identified during the "Bad Naming" audit. These issues hindered code readability and long-term maintainability.</p>
-<h1><a class="anchor" id="autotoc_md1137"></a>
+<h1><a class="anchor" id="autotoc_md1402"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1138"></a>
+<h2><a class="anchor" id="autotoc_md1403"></a>
 1. Magic Number in Layout Parser</h2>
 <ul>
 <li><b>Issue</b>: Hardcoded <code>50</code> used as a default panel percentage.</li>
 <li><b>Root Cause</b>: Lack of a centralized constant for default layout splitting.</li>
 <li><b>Resolution</b>: Added <code>DEFAULT_PANEL_PERCENTAGE = 50</code> to <code><a class="el" href="../../db/dee/schema__defaults_8py.html">oaGui/Constants/schema_defaults.py</a></code> and updated <code>oaGui/Core/parser/layout_parser.py</code> to use this constant.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1139"></a>
+<h2><a class="anchor" id="autotoc_md1404"></a>
 2. Opaque Variables in Grid Renderer</h2>
 <ul>
 <li><b>Issue</b>: Single-letter variables <code>i</code>, <code>c</code>, <code>r</code> used in complex rendering logic.</li>
 <li><b>Root Cause</b>: Generic loop iterator naming in a non-trivial scope.</li>
 <li><b>Resolution</b>: Refactored <code>oaGuiBuildShell/Workers/async_grid_renderer.py</code> to use <code>field_idx</code>, <code>col_idx</code>, and <code>row_idx</code>, making the coordinate mapping logic self-describing.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1140"></a>
+<h2><a class="anchor" id="autotoc_md1405"></a>
 3. Noise Words in YAK Translator</h2>
 <ul>
 <li><b>Issue</b>: Redundant suffixes in variable names like <code>payload_data</code>.</li>
 <li><b>Root Cause</b>: Over-specification of variables where the type/context is already clear.</li>
 <li><b>Resolution</b>: Cleaned up <code><a class="el" href="../../de/d01/yak__translator_8py.html">oaTranslator/Managers/yak_translator.py</a></code> by renaming <code>payload_data</code> to <code>payload_parsed</code> and <code>command_declaration</code> to <code>declaration</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1141"></a>
+<h1><a class="anchor" id="autotoc_md1406"></a>
 Verification</h1>
 <p>The code changes were verified for syntactic correctness. The application logic remains identical, but the clarity of the affected modules has been significantly improved for future architectural maintenance. </p>
 </div></div><!-- contents -->

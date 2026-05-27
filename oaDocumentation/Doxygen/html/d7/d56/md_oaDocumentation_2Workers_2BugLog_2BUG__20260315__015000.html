@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('d7/d56/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260315_015000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1794"></a><b>Date:</b> Sunday, March 15, 2026 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2243"></a><b>Date:</b> Sunday, March 15, 2026 <br  />
  <b>Module:</b> <code>oaComProtocols.oaComVisa.Visa_Fleet</code>, <code>oaPTP</code> <br  />
  <b>Severity:</b> Priority 1 (VISA) / Priority 2 (PTP)</p>
-<h1><a class="anchor" id="autotoc_md1795"></a>
+<h1><a class="anchor" id="autotoc_md2244"></a>
 Issue</h1>
 <ol type="1">
 <li><b>Silent VISA Failures</b>: <code>manager_visa_Search</code> was reporting <code>FAILED (IDN Query Error)</code> without any underlying diagnostic information. This made it impossible to determine why specific instruments were failing to respond during discovery.</li>
 <li><b>PTP Permission Spam</b>: The <code>PtpManager</code> sniffer would attempt to start and fail with a <code>PermissionError</code> on every session launch or retry, cluttering the logs with repetitive warnings when the application was not run as root.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1796"></a>
+<h1><a class="anchor" id="autotoc_md2245"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>Error Swallowing</b>: <code>VisaUtilityParser.query_device_safe</code> was catching all exceptions and returning <code>None</code> silently. The caller (<code>manager_visa_Search</code>) could only report a generic failure.</li>
 <li><b>Missing State Logic</b>: <code>PtpManager</code> lacked a mechanism to remember that a previous attempt to start the sniffer failed due to permanent permission restrictions (i.e., not running as sudo).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1797"></a>
+<h1><a class="anchor" id="autotoc_md2246"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Diagnostic Enhancement</b>:<ul>
@@ -122,15 +122,15 @@ Resolution</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1798"></a>
+<h1><a class="anchor" id="autotoc_md2247"></a>
 Verification</h1>
 <ul>
 <li><b>PTP Fix</b>: Verified by inspecting code logic. The <code>permission_error_reported</code> flag is persistent across <code>start()</code> calls within the same session.</li>
 <li><b>VISA Fix</b>: Verified by inspecting code logic. The logger will now output <code>[VISA ERROR]</code> or <code>[EXCEPTION]</code> with full details instead of just returning <code>None</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1799"></a>
+<h1><a class="anchor" id="autotoc_md2248"></a>
 Forensic Evidence</h1>
-<p>Log snippets from <code>Application_20260315_0127.log</code> showed a 13ms failure for <code>TCPIP::44.44.44.66<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">INSTR</a></code>, suggesting an immediate library-level exception that was being swallowed. </p>
+<p>Log snippets from <code>Application_20260315_0127.log</code> showed a 13ms failure for <code>TCPIP::44.44.44.66::INSTR</code>, suggesting an immediate library-level exception that was being swallowed. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -108,12 +108,12 @@ $(document).ready(function(){initNavTree('dd/d29/classoaGuiElements_1_1Core_1_1f
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a930f05d4dd32d79620517a7816130e86" id="r_a930f05d4dd32d79620517a7816130e86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__graph_1_1BuilderFaderBarGraphCreator.html#a930f05d4dd32d79620517a7816130e86">make_fader_bar_graph</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent_widget, config_data, context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a930f05d4dd32d79620517a7816130e86" id="r_a930f05d4dd32d79620517a7816130e86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__graph_1_1BuilderFaderBarGraphCreator.html#a930f05d4dd32d79620517a7816130e86">make_fader_bar_graph</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent_widget, config_data, context=None, **kwargs)</td></tr>
 <tr class="separator:a930f05d4dd32d79620517a7816130e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4038c9095ce233c91f0194d5a6a4acce" id="r_a4038c9095ce233c91f0194d5a6a4acce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__graph_1_1BuilderFaderBarGraphCreator.html#a4038c9095ce233c91f0194d5a6a4acce">make</a> (parent_widget, config_data, context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a4038c9095ce233c91f0194d5a6a4acce" id="r_a4038c9095ce233c91f0194d5a6a4acce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__graph_1_1BuilderFaderBarGraphCreator.html#a4038c9095ce233c91f0194d5a6a4acce">make</a> (parent_widget, config_data, context=None, **kwargs)</td></tr>
 <tr class="separator:a4038c9095ce233c91f0194d5a6a4acce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -145,7 +145,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -168,15 +168,12 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d43/fader__bar__graph_8py_source.html#l00084">84</a> of file <a class="el" href="../../dc/d43/fader__bar__graph_8py_source.html">fader_bar_graph.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   84</span>    <span class="keyword">def </span>make(parent_widget, config_data, context=None, **kwargs):</div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> context: s_engine, s_router, b_topic, b_inst = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.state_mirror_engine</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.subscriber_router</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.base_mqtt_topic_from_path</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.builder_instance</a></div>
-<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">else</span>: s_engine, s_router, b_topic, b_inst = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;state_mirror_engine&quot;</span>), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;subscriber_router&quot;</span>), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;base_mqtt_topic_from_path&quot;</span>), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;builder_instance&quot;</span>)</div>
+<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> context: s_engine, s_router, b_topic, b_inst = context.state_mirror_engine, context.subscriber_router, context.base_mqtt_topic_from_path, context.builder_instance</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">else</span>: s_engine, s_router, b_topic, b_inst = kwargs.get(<span class="stringliteral">&quot;state_mirror_engine&quot;</span>), kwargs.get(<span class="stringliteral">&quot;subscriber_router&quot;</span>), kwargs.get(<span class="stringliteral">&quot;base_mqtt_topic_from_path&quot;</span>), kwargs.get(<span class="stringliteral">&quot;builder_instance&quot;</span>)</div>
 <div class="line"><span class="lineno">   87</span> </div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">return</span> FaderWithBarGraphFrame(parent_widget, config_data, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_data.get</a>(<span class="stringliteral">&quot;path&quot;</span>), s_engine, s_router, b_topic, b_inst)</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">return</span> FaderWithBarGraphFrame(parent_widget, config_data, config_data.get(<span class="stringliteral">&quot;path&quot;</span>), s_engine, s_router, b_topic, b_inst)</div>
 <div class="line"><span class="lineno">   89</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a930f05d4dd32d79620517a7816130e86" name="a930f05d4dd32d79620517a7816130e86"></a>
@@ -207,7 +204,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -225,10 +222,8 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d43/fader__bar__graph_8py_source.html#l00090">90</a> of file <a class="el" href="../../dc/d43/fader__bar__graph_8py_source.html">fader_bar_graph.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   90</span>    <span class="keyword">def </span>make_fader_bar_graph(self, parent_widget, config_data, context=None, **kwargs):</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">BuilderFaderBarGraphCreator.make</a>(parent_widget, config_data, context, **kwargs)</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> BuilderFaderBarGraphCreator.make(parent_widget, config_data, context, **kwargs)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

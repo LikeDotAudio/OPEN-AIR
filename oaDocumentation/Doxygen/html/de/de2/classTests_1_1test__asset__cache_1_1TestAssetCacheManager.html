@@ -111,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab922787390f74a0a9f2f23f78bb02adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade29402b697eb6259ade3edefa0775da" id="r_ade29402b697eb6259ade3edefa0775da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html#ade29402b697eb6259ade3edefa0775da">test_get_asset_hash</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:ade29402b697eb6259ade3edefa0775da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa2be4b36acda8be2c2fdda6737466e1" id="r_aaa2be4b36acda8be2c2fdda6737466e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html#aaa2be4b36acda8be2c2fdda6737466e1">test_load_from_memory_first</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_exists</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_open</a>)</td></tr>
+<tr class="memitem:aaa2be4b36acda8be2c2fdda6737466e1" id="r_aaa2be4b36acda8be2c2fdda6737466e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html#aaa2be4b36acda8be2c2fdda6737466e1">test_load_from_memory_first</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, mock_exists, mock_open)</td></tr>
 <tr class="separator:aaa2be4b36acda8be2c2fdda6737466e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f1323d49ad3c457d8da1b1ad58de87b" id="r_a4f1323d49ad3c457d8da1b1ad58de87b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html#a4f1323d49ad3c457d8da1b1ad58de87b">test_save_to_cache</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_cache_dir</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_mkdir</a>)</td></tr>
+<tr class="memitem:a4f1323d49ad3c457d8da1b1ad58de87b" id="r_a4f1323d49ad3c457d8da1b1ad58de87b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de2/classTests_1_1test__asset__cache_1_1TestAssetCacheManager.html#a4f1323d49ad3c457d8da1b1ad58de87b">test_save_to_cache</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, mock_cache_dir, mock_mkdir)</td></tr>
 <tr class="separator:a4f1323d49ad3c457d8da1b1ad58de87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -139,12 +139,9 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html#l00019">19</a> of file <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html">test_asset_cache.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span>setUp(self):</div>
 <div class="line"><span class="lineno">   20</span>        <span class="stringliteral">&quot;&quot;&quot;Clear memory cache before each test.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   21</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.invalidate_cache</a>()</div>
+<div class="line"><span class="lineno">   21</span>        CacheImageStore.invalidate_cache()</div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ade29402b697eb6259ade3edefa0775da" name="ade29402b697eb6259ade3edefa0775da"></a>
@@ -167,13 +164,11 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>test_get_asset_hash(self):</div>
 <div class="line"><span class="lineno">   24</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Generate hash. CHECK: Verify consistent and unique hashing.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   25</span>        config = {<span class="stringliteral">&quot;color&quot;</span>: <span class="stringliteral">&quot;red&quot;</span>, <span class="stringliteral">&quot;radius&quot;</span>: 5}</div>
-<div class="line"><span class="lineno">   26</span>        hash1 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.get_asset_hash</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
-<div class="line"><span class="lineno">   27</span>        hash2 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.get_asset_hash</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
+<div class="line"><span class="lineno">   26</span>        hash1 = CacheImageStore.get_asset_hash(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
+<div class="line"><span class="lineno">   27</span>        hash2 = CacheImageStore.get_asset_hash(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
 <div class="line"><span class="lineno">   28</span>        self.assertEqual(hash1, hash2)</div>
 <div class="line"><span class="lineno">   29</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aaa2be4b36acda8be2c2fdda6737466e1" name="aaa2be4b36acda8be2c2fdda6737466e1"></a>
@@ -211,22 +206,20 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html#l00050">50</a> of file <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html">test_asset_cache.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   50</span>    <span class="keyword">def </span>test_load_from_memory_first(self, mock_exists, mock_open):</div>
 <div class="line"><span class="lineno">   51</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Load asset. CHECK: Verify it hits memory cache first, skipping disk.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   52</span>        mock_image = MagicMock(spec=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.Image</a>)</div>
+<div class="line"><span class="lineno">   52</span>        mock_image = MagicMock(spec=Image.Image)</div>
 <div class="line"><span class="lineno">   53</span>        config = {<span class="stringliteral">&quot;color&quot;</span>: <span class="stringliteral">&quot;red&quot;</span>}</div>
-<div class="line"><span class="lineno">   54</span>        asset_hash = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.get_asset_hash</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
+<div class="line"><span class="lineno">   54</span>        asset_hash = CacheImageStore.get_asset_hash(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>        <span class="comment"># Manually seed memory cache</span></div>
 <div class="line"><span class="lineno">   57</span>        _MEMORY_ASSET_CACHE[asset_hash] = mock_image</div>
 <div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>        loaded = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.load_from_cache</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
+<div class="line"><span class="lineno">   59</span>        loaded = CacheImageStore.load_from_cache(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>        <span class="comment"># Verify it came from memory</span></div>
 <div class="line"><span class="lineno">   62</span>        self.assertEqual(loaded, mock_image)</div>
-<div class="line"><span class="lineno">   63</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_open.assert_not_called</a>()</div>
+<div class="line"><span class="lineno">   63</span>        mock_open.assert_not_called()</div>
 <div class="line"><span class="lineno">   64</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a4f1323d49ad3c457d8da1b1ad58de87b" name="a4f1323d49ad3c457d8da1b1ad58de87b"></a>
@@ -264,23 +257,21 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html#l00032">32</a> of file <a class="el" href="../../dd/dda/test__asset__cache_8py_source.html">test_asset_cache.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   32</span>    <span class="keyword">def </span>test_save_to_cache(self, mock_cache_dir, mock_mkdir):</div>
 <div class="line"><span class="lineno">   33</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Save image. CHECK: Verify it&#39;s in memory and saved to disk.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_cache_dir.__truediv__.return_value</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(<span class="stringliteral">&quot;/tmp/mock_asset.png&quot;</span>)</div>
+<div class="line"><span class="lineno">   34</span>        mock_cache_dir.__truediv__.return_value = pathlib.Path(<span class="stringliteral">&quot;/tmp/mock_asset.png&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>        mock_image = MagicMock(spec=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.Image</a>)</div>
+<div class="line"><span class="lineno">   36</span>        mock_image = MagicMock(spec=Image.Image)</div>
 <div class="line"><span class="lineno">   37</span>        config = {<span class="stringliteral">&quot;color&quot;</span>: <span class="stringliteral">&quot;red&quot;</span>}</div>
 <div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.save_to_cache</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config, mock_image)</div>
+<div class="line"><span class="lineno">   39</span>        CacheImageStore.save_to_cache(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config, mock_image)</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>        <span class="comment"># Verify memory cache</span></div>
-<div class="line"><span class="lineno">   42</span>        asset_hash = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AssetCacheManager.get_asset_hash</a>(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
+<div class="line"><span class="lineno">   42</span>        asset_hash = CacheImageStore.get_asset_hash(<span class="stringliteral">&quot;btn&quot;</span>, 100, 50, config)</div>
 <div class="line"><span class="lineno">   43</span>        self.assertIn(asset_hash, _MEMORY_ASSET_CACHE)</div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="line"><span class="lineno">   45</span>        <span class="comment"># Verify disk save call on the image object itself</span></div>
-<div class="line"><span class="lineno">   46</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_image.save.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">   46</span>        mock_image.save.assert_called_once()</div>
 <div class="line"><span class="lineno">   47</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

@@ -44,7 +44,7 @@ class TestSnmpManager(unittest.TestCase):
     def test_mqtt_reflection(self):
         """OPERATE: Verify that MQTT events are reflected in local SNMP state."""
         # BUILD
-        test_topic = "OPEN-AIR/Audio/Master/Volume"
+        test_topic = "OpenAir/Audio/Master/Volume"
         test_val = 85
 
         # OPERATE
@@ -58,7 +58,7 @@ class TestSnmpManager(unittest.TestCase):
     def test_anti_feedback_echo_suppression(self):
         """CHECK: Verify messages originating from SNMP are NOT reflected back to local state."""
         # BUILD
-        test_topic = "OPEN-AIR/Audio/Fader/1"
+        test_topic = "OpenAir/Audio/Fader/1"
         payload = {
             "value": 100,
             "origin_source": "SNMP" # SELF source
@@ -84,7 +84,7 @@ class TestSnmpManager(unittest.TestCase):
             args, kwargs = call
             # Handle positional or keyword 'topic'
             topic = args[0] if len(args) > 0 else kwargs.get('topic')
-            if topic == "OPEN-AIR/System/Status/SNMP/Bridge":
+            if topic == "OpenAir/System/Status/SNMP/Bridge":
                 found = True
                 break
         self.assertTrue(found, "Status topic not found in publish calls.")

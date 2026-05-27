@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('d5/da1/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0055</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1285"></a> </p>
-<h1><a class="anchor" id="autotoc_md1286"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1550"></a> </p>
+<h1><a class="anchor" id="autotoc_md1551"></a>
 Issue</h1>
 <p>Timestamps still visible in logs despite configuration.</p>
-<h1><a class="anchor" id="autotoc_md1287"></a>
+<h1><a class="anchor" id="autotoc_md1552"></a>
 Root Cause</h1>
 <p>The log format strings in <code><a class="el" href="../../d3/d83/logger_8py.html">oaLogging/Core/logger.py</a></code> were hardcoded to include the timestamp regardless of the configuration.</p>
-<h1><a class="anchor" id="autotoc_md1288"></a>
+<h1><a class="anchor" id="autotoc_md1553"></a>
 Resolution</h1>
 <ul>
 <li>Updated log format strings to dynamically include/exclude timestamp based on the <code>timestamp_logs</code> setting.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1289"></a>
+<h1><a class="anchor" id="autotoc_md1554"></a>
 Verification</h1>
 <ul>
 <li>Analyzed generated log outputs to confirm timestamp absence. </li>

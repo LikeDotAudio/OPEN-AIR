@@ -37,7 +37,7 @@ window.TabLayout = ({ nodeName, node, path_prefix, jsonPath }) => {
           <window.WidgetFactory
             nodeName={activeTab}
             node={tabs[activeTab]}
-            path_prefix={`${path_prefix}/${nodeName}`}
+            path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix}
             jsonPath={jsonPath ? `${jsonPath}.tabs.${activeTab}` : undefined}
           />
         )}

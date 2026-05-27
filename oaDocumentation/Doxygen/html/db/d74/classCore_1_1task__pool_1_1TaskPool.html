@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('db/d74/classCore_1_1task__pool_1_1Task
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aadec9242ee050ca3667c67406091b2d9" id="r_aadec9242ee050ca3667c67406091b2d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d74/classCore_1_1task__pool_1_1TaskPool.html#aadec9242ee050ca3667c67406091b2d9">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">num_threads</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:aadec9242ee050ca3667c67406091b2d9" id="r_aadec9242ee050ca3667c67406091b2d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d74/classCore_1_1task__pool_1_1TaskPool.html#aadec9242ee050ca3667c67406091b2d9">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, num_threads=None)</td></tr>
 <tr class="separator:aadec9242ee050ca3667c67406091b2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80d0e0e0959bb1b5757d4d44b9ccfd84" id="r_a80d0e0e0959bb1b5757d4d44b9ccfd84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d74/classCore_1_1task__pool_1_1TaskPool.html#a80d0e0e0959bb1b5757d4d44b9ccfd84">par_map</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a> <a class="el" href="../../d1/d2c/oa__editor__state__rs_2mod_8rs.html#a640275e0eed2426caacf63f5f66286b7">data</a>, callback)</td></tr>
 <tr class="separator:a80d0e0e0959bb1b5757d4d44b9ccfd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,7 +133,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_threads</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>num_threads</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -146,20 +146,17 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d0/d75/task__pool_8py_source.html#l00023">23</a> of file <a class="el" href="../../d0/d75/task__pool_8py_source.html">task_pool.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>__init__(self, num_threads=None):</div>
 <div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> num_threads <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">   25</span>            num_threads = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">multiprocessing.cpu_count</a>()</div>
+<div class="line"><span class="lineno">   25</span>            num_threads = multiprocessing.cpu_count()</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> HAS_RUST:</div>
 <div class="line"><span class="lineno">   28</span>            <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   29</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;⚙️🛠️🔗 [TRANSLATOR] Using PURE RUST task pool ({num_threads} threads).&quot;</span>)</div>
-<div class="line"><span class="lineno">   30</span>            self._pool = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustTaskPool</a>(num_threads)</div>
+<div class="line"><span class="lineno">   29</span>                print(f<span class="stringliteral">&quot;⚙️🛠️🔗 [TRANSLATOR] Using PURE RUST task pool ({num_threads} threads).&quot;</span>)</div>
+<div class="line"><span class="lineno">   30</span>            self._pool = RustTaskPool(num_threads)</div>
 <div class="line"><span class="lineno">   31</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   32</span>            self._pool = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">   33</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logging.error</a>(<span class="stringliteral">&quot;oaTranslator: Missing mandatory Rust task pool.&quot;</span>)</div>
+<div class="line"><span class="lineno">   33</span>            logging.error(<span class="stringliteral">&quot;oaTranslator: Missing mandatory Rust task pool.&quot;</span>)</div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>

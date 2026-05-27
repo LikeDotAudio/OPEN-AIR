@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('df/d67/md_oaComProtocols_2oaComMidi_2D
   <div class="headertitle"><div class="title">Protocol Stateflow (Hub-and-Spoke Model)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md178"></a> </p>
-<h1><a class="anchor" id="autotoc_md179"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md443"></a> </p>
+<h1><a class="anchor" id="autotoc_md444"></a>
 Hub-and-Spoke Architecture</h1>
 <p>The system operates as a centralized Hub (MQTT Storage) with spoke protocols (this module).</p>
-<h2><a class="anchor" id="autotoc_md180"></a>
+<h2><a class="anchor" id="autotoc_md445"></a>
 Data Flow &amp; Routing Diagram</h2>
 <div class="fragment"><div class="line">graph TD</div>
 <div class="line">    subgraph Hardware_Interface</div>
@@ -124,7 +124,7 @@ Data Flow &amp; Routing Diagram</h2>
 <div class="line">    style G2 fill:#fff9c4,stroke:#fbc02d</div>
 <div class="line">    style Hardware_Interface fill:#e1f5fe,stroke:#01579b</div>
 <div class="line">    style Hub_Infrastructure fill:#fce4ec,stroke:#880e4f</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md181"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md446"></a>
 Lifecycle &amp; Logic</h1>
 <ol type="1">
 <li><b>Start</b>: The manager initializes as a Spoke, registering with the <code>ProtocolRouter</code> Hub.</li>
@@ -142,10 +142,10 @@ Lifecycle &amp; Logic</h1>
 </li>
 <li><b>Transmit</b>: Validated data is rendered to the local physical interface (Hardware Out, API Call, etc).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md182"></a>
+<h1><a class="anchor" id="autotoc_md447"></a>
 System Tree Reporting (Heartbeats &amp; Status)</h1>
 <p>All protocol managers are required to report their operational status to the central monitoring hierarchy. This ensures the Hub maintains an accurate, real-time view of system health and failover eligibility.</p>
-<h2><a class="anchor" id="autotoc_md183"></a>
+<h2><a class="anchor" id="autotoc_md448"></a>
 Reporting Flow</h2>
 <div class="fragment"><div class="line">graph TD</div>
 <div class="line">    subgraph Manager_Self_Health</div>
@@ -164,17 +164,17 @@ Reporting Flow</h2>
 <div class="line">    style S fill:#e8f5e9,stroke:#2e7d32</div>
 <div class="line">    style H fill:#fce4ec,stroke:#880e4f</div>
 <div class="line">    style B fill:#e1f5fe,stroke:#01579b</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md184"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md449"></a>
 Reporting Lifecycle</h2>
 <ol type="1">
 <li><b>Heartbeat</b>: Every manager periodically publishes its status (e.g., ) to the Hub.</li>
 <li><b>System Tree Registration</b>: The Hub (MQTT) updates the global tree.</li>
 <li><b>Observation</b>: <a class="el" href="../../d4/d7f/namespaceManagers.html">Managers</a> subscribe to their own status tree to maintain a synchronized, failover-aware state.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md185"></a>
+<h1><a class="anchor" id="autotoc_md450"></a>
 System Tree Reporting (Heartbeats &amp; Status)</h1>
 <p>All protocol managers report their operational status to the central monitoring hierarchy.</p>
-<h2><a class="anchor" id="autotoc_md186"></a>
+<h2><a class="anchor" id="autotoc_md451"></a>
 Reporting Flow</h2>
 <div class="fragment"><div class="line">graph TD</div>
 <div class="line">    subgraph Manager_Self_Health</div>
@@ -193,7 +193,7 @@ Reporting Flow</h2>
 <div class="line">    style S fill:#e8f5e9,stroke:#2e7d32</div>
 <div class="line">    style H fill:#fce4ec,stroke:#880e4f</div>
 <div class="line">    style B fill:#e1f5fe,stroke:#01579b</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md187"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md452"></a>
 Reporting Lifecycle</h2>
 <ol type="1">
 <li><b>Heartbeat</b>: Every manager periodically publishes its status (e.g., OPEN-AIR/System/Status/Protocol/Bridge) to the Hub.</li>

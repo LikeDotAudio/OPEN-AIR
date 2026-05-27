@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📄_20document_20parsing_20extraction_0',['📄 document parsing extraction',['../d9/d05/md_oaDocumentation_2Documentation_2Landmarks_2Installation__Guide.html#autotoc_md1527',1,'📄 Document Parsing &amp; Extraction'],['../d9/da1/md_oaInstallation_2Documentation_2Dependencies.html#autotoc_md4520',1,'📄 Document Parsing &amp; Extraction']]]
+  ['📁_20forensic_20documentation_0',['📁 Forensic Documentation',['../dc/d37/md_oaDocumentation_2Workers_2BugLog_2BUG__20260319__233000.html#autotoc_md2356',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['💾_205_20state_20persistence_0',['💾 5. State Persistence',['../dc/d3b/md_oaDocumentation_2Workers_2ChangeLog_2EVOLUTION__OF__TOOLS.html#autotoc_md2207',1,'']]]
+  ['💡_20key_20components_0',['💡 Key Components',['..//home/anthony/Documents/OPEN-AIR/oaComProtocols/oaComNmos/Documentation/README.md#autotoc_md698',1,'']]],
+  ['💡_20why_20open_20air_1',['💡 Why OPEN-AIR?',['..//home/anthony/Documents/OPEN-AIR/README.md#autotoc_md5212',1,'']]]
 ];

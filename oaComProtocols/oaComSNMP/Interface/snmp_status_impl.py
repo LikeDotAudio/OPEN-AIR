@@ -173,7 +173,7 @@ class SnmpStatusImplementation(tk.Frame, SyncBehavior):
     def refresh_script(self):
         """Sends a command to CORE to regenerate and publish the installer script."""
         if self.mqtt_client:
-            self.mqtt_client.publish("OPEN-AIR/System/Control/SNMP/GenerateScript", {"request": "generate"})
+            self.mqtt_client.publish("OpenAir/System/Control/SNMP/GenerateScript", {"request": "generate"})
 
     def copy_script(self):
         content = self.text_area.get("1.0", tk.END).strip()

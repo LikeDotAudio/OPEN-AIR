@@ -132,7 +132,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00026">26</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00025">25</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac1394f85c018a198647a5ab59ca244c4" name="ac1394f85c018a198647a5ab59ca244c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac1394f85c018a198647a5ab59ca244c4">&#9670;&#160;</a></span>setUp()</h2>
@@ -150,15 +150,14 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">27</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   27</span>    <span class="keyword">def </span>setUp(self):</div>
-<div class="line"><span class="lineno">   28</span>        self.test_dir = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tempfile.mkdtemp</a>()</div>
-<div class="line"><span class="lineno">   29</span>        self.test_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(self.test_dir)</div>
-<div class="line"><span class="lineno">   30</span>        <span class="comment"># Reset event bus to avoid cross-test side effects</span></div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.reset</a>()</div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.raise_exceptions</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   33</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00026">26</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>    <span class="keyword">def </span>setUp(self):</div>
+<div class="line"><span class="lineno">   27</span>        self.test_dir = tempfile.mkdtemp()</div>
+<div class="line"><span class="lineno">   28</span>        self.test_path = pathlib.Path(self.test_dir)</div>
+<div class="line"><span class="lineno">   29</span>        <span class="comment"># Reset event bus to avoid cross-test side effects</span></div>
+<div class="line"><span class="lineno">   30</span>        event_bus.reset()</div>
+<div class="line"><span class="lineno">   31</span>        event_bus.raise_exceptions = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   32</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -178,13 +177,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00034">34</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>    <span class="keyword">def </span>tearDown(self):</div>
-<div class="line"><span class="lineno">   35</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shutil.rmtree</a>(self.test_dir)</div>
-<div class="line"><span class="lineno">   36</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.raise_exceptions</a> = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   37</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00033">33</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   33</span>    <span class="keyword">def </span>tearDown(self):</div>
+<div class="line"><span class="lineno">   34</span>        shutil.rmtree(self.test_dir)</div>
+<div class="line"><span class="lineno">   35</span>        event_bus.raise_exceptions = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">   36</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00017">Tests.test_negative_paths.TestNegativePaths.test_dir</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00020">Tests.test_fast_scanner.TestFastScanner.test_dir</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">Tests.test_ui_and_data.TestUIAndData.test_dir</a>, and <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00019">Tests.test_realign_logs.TestLogRealigner.test_dir</a>.</p>
 
 </div>
 </div>
@@ -204,28 +203,28 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Load and parse JSON configuration files.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00105">105</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  105</span>    <span class="keyword">def </span>test_file_io_load(self):</div>
-<div class="line"><span class="lineno">  106</span>        <span class="stringliteral">&quot;&quot;&quot;Load and parse JSON configuration files.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  107</span>        test_json = self.test_path / <span class="stringliteral">&quot;test.json&quot;</span></div>
-<div class="line"><span class="lineno">  108</span>        data = {<span class="stringliteral">&quot;version&quot;</span>: <span class="stringliteral">&quot;1.0&quot;</span>, <span class="stringliteral">&quot;settings&quot;</span>: {<span class="stringliteral">&quot;theme&quot;</span>: <span class="stringliteral">&quot;dark&quot;</span>}}</div>
-<div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>        <span class="keyword">import</span> orjson</div>
-<div class="line"><span class="lineno">  111</span>        <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(test_json, <span class="stringliteral">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</div>
-<div class="line"><span class="lineno">  112</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.write</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(data))</div>
-<div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>        <span class="comment"># Mock StateManager since it&#39;s a singleton used inside load_file</span></div>
-<div class="line"><span class="lineno">  115</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaGuiEditorWYSIWYG.FileReaders.file_reader.state_manager&#39;</span>) <span class="keyword">as</span> mock_sm:</div>
-<div class="line"><span class="lineno">  116</span>            success = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FileReader.load_file</a>(test_json)</div>
-<div class="line"><span class="lineno">  117</span>            self.assertTrue(success)</div>
-<div class="line"><span class="lineno">  118</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_sm.initialize.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">  119</span>            <span class="comment"># Verify the data passed to initialize</span></div>
-<div class="line"><span class="lineno">  120</span>            args, kwargs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_sm.initialize.call_args</a></div>
-<div class="line"><span class="lineno">  121</span>            self.assertEqual(args[0], data)</div>
-<div class="line"><span class="lineno">  122</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00104">104</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  104</span>    <span class="keyword">def </span>test_file_io_load(self):</div>
+<div class="line"><span class="lineno">  105</span>        <span class="stringliteral">&quot;&quot;&quot;Load and parse JSON configuration files.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  106</span>        test_json = self.test_path / <span class="stringliteral">&quot;test.json&quot;</span></div>
+<div class="line"><span class="lineno">  107</span>        data = {<span class="stringliteral">&quot;version&quot;</span>: <span class="stringliteral">&quot;1.0&quot;</span>, <span class="stringliteral">&quot;settings&quot;</span>: {<span class="stringliteral">&quot;theme&quot;</span>: <span class="stringliteral">&quot;dark&quot;</span>}}</div>
+<div class="line"><span class="lineno">  108</span> </div>
+<div class="line"><span class="lineno">  109</span>        <span class="keyword">import</span> orjson</div>
+<div class="line"><span class="lineno">  110</span>        <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(test_json, <span class="stringliteral">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</div>
+<div class="line"><span class="lineno">  111</span>            f.write(orjson.dumps(data))</div>
+<div class="line"><span class="lineno">  112</span> </div>
+<div class="line"><span class="lineno">  113</span>        <span class="comment"># Mock StateManager since it&#39;s a singleton used inside load_file</span></div>
+<div class="line"><span class="lineno">  114</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaGuiEditorWYSIWYG.FileReaders.file_reader.state_manager&#39;</span>) <span class="keyword">as</span> mock_sm:</div>
+<div class="line"><span class="lineno">  115</span>            success = FileReader.load_file(test_json)</div>
+<div class="line"><span class="lineno">  116</span>            self.assertTrue(success)</div>
+<div class="line"><span class="lineno">  117</span>            mock_sm.initialize.assert_called_once()</div>
+<div class="line"><span class="lineno">  118</span>            <span class="comment"># Verify the data passed to initialize</span></div>
+<div class="line"><span class="lineno">  119</span>            args, kwargs = mock_sm.initialize.call_args</div>
+<div class="line"><span class="lineno">  120</span>            self.assertEqual(args[0], data)</div>
+<div class="line"><span class="lineno">  121</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00029">Tests.test_ui_and_data.TestUIAndData.test_path</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_path</a>.</p>
 
 </div>
 </div>
@@ -245,28 +244,28 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Ensure save logic produces files and triggers callbacks.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00123">123</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  123</span>    <span class="keyword">def </span>test_file_io_save(self):</div>
-<div class="line"><span class="lineno">  124</span>        <span class="stringliteral">&quot;&quot;&quot;Ensure save logic produces files and triggers callbacks.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  125</span>        test_json = self.test_path / <span class="stringliteral">&quot;target.json&quot;</span></div>
-<div class="line"><span class="lineno">  126</span>        data = {<span class="stringliteral">&quot;version&quot;</span>: <span class="stringliteral">&quot;2.0&quot;</span>}</div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>        callback_called = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">  129</span>        <span class="keyword">def </span>on_save():</div>
-<div class="line"><span class="lineno">  130</span>            nonlocal callback_called</div>
-<div class="line"><span class="lineno">  131</span>            callback_called = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaGuiEditorWYSIWYG.FileWriters.file_writer.state_manager&#39;</span>) <span class="keyword">as</span> mock_sm:</div>
-<div class="line"><span class="lineno">  134</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_sm.get_file_path.return_value</a> = test_json</div>
-<div class="line"><span class="lineno">  135</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_sm.get_state.return_value</a> = data</div>
-<div class="line"><span class="lineno">  136</span> </div>
-<div class="line"><span class="lineno">  137</span>            success = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FileWriter.save_file</a>(on_save_callback=on_save)</div>
-<div class="line"><span class="lineno">  138</span>            self.assertTrue(success)</div>
-<div class="line"><span class="lineno">  139</span>            self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_json.exists</a>())</div>
-<div class="line"><span class="lineno">  140</span>            self.assertTrue(callback_called)</div>
-<div class="line"><span class="lineno">  141</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00122">122</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>    <span class="keyword">def </span>test_file_io_save(self):</div>
+<div class="line"><span class="lineno">  123</span>        <span class="stringliteral">&quot;&quot;&quot;Ensure save logic produces files and triggers callbacks.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  124</span>        test_json = self.test_path / <span class="stringliteral">&quot;target.json&quot;</span></div>
+<div class="line"><span class="lineno">  125</span>        data = {<span class="stringliteral">&quot;version&quot;</span>: <span class="stringliteral">&quot;2.0&quot;</span>}</div>
+<div class="line"><span class="lineno">  126</span> </div>
+<div class="line"><span class="lineno">  127</span>        callback_called = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">  128</span>        <span class="keyword">def </span>on_save():</div>
+<div class="line"><span class="lineno">  129</span>            nonlocal callback_called</div>
+<div class="line"><span class="lineno">  130</span>            callback_called = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaGuiEditorWYSIWYG.FileWriters.file_writer.state_manager&#39;</span>) <span class="keyword">as</span> mock_sm:</div>
+<div class="line"><span class="lineno">  133</span>            mock_sm.get_file_path.return_value = test_json</div>
+<div class="line"><span class="lineno">  134</span>            mock_sm.get_state.return_value = data</div>
+<div class="line"><span class="lineno">  135</span> </div>
+<div class="line"><span class="lineno">  136</span>            success = FileWriter.save_file(on_save_callback=on_save)</div>
+<div class="line"><span class="lineno">  137</span>            self.assertTrue(success)</div>
+<div class="line"><span class="lineno">  138</span>            self.assertTrue(test_json.exists())</div>
+<div class="line"><span class="lineno">  139</span>            self.assertTrue(callback_called)</div>
+<div class="line"><span class="lineno">  140</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00029">Tests.test_ui_and_data.TestUIAndData.test_path</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_path</a>.</p>
 
 </div>
 </div>
@@ -286,35 +285,35 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Recursively find valid UI definition files.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00039">39</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   39</span>    <span class="keyword">def </span>test_layout_parser_scan(self):</div>
-<div class="line"><span class="lineno">   40</span>        <span class="stringliteral">&quot;&quot;&quot;Recursively find valid UI definition files.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   41</span>        <span class="comment"># Create a mock directory structure</span></div>
-<div class="line"><span class="lineno">   42</span>        gui_dir = self.test_path / <span class="stringliteral">&quot;gui_folder&quot;</span></div>
-<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">gui_dir.mkdir</a>()</div>
-<div class="line"><span class="lineno">   44</span>        (gui_dir / <span class="stringliteral">&quot;gui_main.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   45</span>        (gui_dir / <span class="stringliteral">&quot;sub_folder&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mkdir</a>()</div>
-<div class="line"><span class="lineno">   46</span>        (gui_dir / <span class="stringliteral">&quot;sub_folder&quot;</span> / <span class="stringliteral">&quot;widget.json&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   47</span>        (gui_dir / <span class="stringliteral">&quot;__init__.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>        parser = LayoutParser(<span class="stringliteral">&quot;1.0&quot;</span>)</div>
-<div class="line"><span class="lineno">   50</span>        <span class="comment"># Clear cache to ensure fresh scan</span></div>
-<div class="line"><span class="lineno">   51</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">LayoutParser._scan_cache</a> = {}</div>
-<div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>        <span class="comment"># Test scan</span></div>
-<div class="line"><span class="lineno">   54</span>        found = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser._scan_for_gui_files</a>(gui_dir)</div>
-<div class="line"><span class="lineno">   55</span>        self.assertTrue(found, <span class="stringliteral">&quot;Failed to find gui files&quot;</span>)</div>
-<div class="line"><span class="lineno">   56</span> </div>
-<div class="line"><span class="lineno">   57</span>        <span class="comment"># Test __init__ exclusion (if only __init__ exists)</span></div>
-<div class="line"><span class="lineno">   58</span>        empty_dir = self.test_path / <span class="stringliteral">&quot;empty&quot;</span></div>
-<div class="line"><span class="lineno">   59</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">empty_dir.mkdir</a>()</div>
-<div class="line"><span class="lineno">   60</span>        (empty_dir / <span class="stringliteral">&quot;__init__.py&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">touch</a>()</div>
-<div class="line"><span class="lineno">   61</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">LayoutParser._scan_cache</a> = {}</div>
-<div class="line"><span class="lineno">   62</span>        found_empty = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parser._scan_for_gui_files</a>(empty_dir)</div>
-<div class="line"><span class="lineno">   63</span>        self.assertFalse(found_empty, <span class="stringliteral">&quot;Should ignore __init__.py files&quot;</span>)</div>
-<div class="line"><span class="lineno">   64</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00038">38</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   38</span>    <span class="keyword">def </span>test_layout_parser_scan(self):</div>
+<div class="line"><span class="lineno">   39</span>        <span class="stringliteral">&quot;&quot;&quot;Recursively find valid UI definition files.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   40</span>        <span class="comment"># Create a mock directory structure</span></div>
+<div class="line"><span class="lineno">   41</span>        gui_dir = self.test_path / <span class="stringliteral">&quot;gui_folder&quot;</span></div>
+<div class="line"><span class="lineno">   42</span>        gui_dir.mkdir()</div>
+<div class="line"><span class="lineno">   43</span>        (gui_dir / <span class="stringliteral">&quot;gui_main.py&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   44</span>        (gui_dir / <span class="stringliteral">&quot;sub_folder&quot;</span>).mkdir()</div>
+<div class="line"><span class="lineno">   45</span>        (gui_dir / <span class="stringliteral">&quot;sub_folder&quot;</span> / <span class="stringliteral">&quot;widget.json&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   46</span>        (gui_dir / <span class="stringliteral">&quot;__init__.py&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   47</span> </div>
+<div class="line"><span class="lineno">   48</span>        parser = FolderLayoutInterpreter(<span class="stringliteral">&quot;1.0&quot;</span>)</div>
+<div class="line"><span class="lineno">   49</span>        <span class="comment"># Clear cache to ensure fresh scan</span></div>
+<div class="line"><span class="lineno">   50</span>        FolderLayoutInterpreter._scan_cache = {}</div>
+<div class="line"><span class="lineno">   51</span> </div>
+<div class="line"><span class="lineno">   52</span>        <span class="comment"># Test scan</span></div>
+<div class="line"><span class="lineno">   53</span>        found = parser._scan_for_gui_files(gui_dir)</div>
+<div class="line"><span class="lineno">   54</span>        self.assertTrue(found, <span class="stringliteral">&quot;Failed to find gui files&quot;</span>)</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>        <span class="comment"># Test __init__ exclusion (if only __init__ exists)</span></div>
+<div class="line"><span class="lineno">   57</span>        empty_dir = self.test_path / <span class="stringliteral">&quot;empty&quot;</span></div>
+<div class="line"><span class="lineno">   58</span>        empty_dir.mkdir()</div>
+<div class="line"><span class="lineno">   59</span>        (empty_dir / <span class="stringliteral">&quot;__init__.py&quot;</span>).touch()</div>
+<div class="line"><span class="lineno">   60</span>        FolderLayoutInterpreter._scan_cache = {}</div>
+<div class="line"><span class="lineno">   61</span>        found_empty = parser._scan_for_gui_files(empty_dir)</div>
+<div class="line"><span class="lineno">   62</span>        self.assertFalse(found_empty, <span class="stringliteral">&quot;Should ignore __init__.py files&quot;</span>)</div>
+<div class="line"><span class="lineno">   63</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00029">Tests.test_ui_and_data.TestUIAndData.test_path</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00021">Tests.test_fast_scanner.TestFastScanner.test_path</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">Tests.test_ui_and_data.TestUIAndData.test_path</a>.</p>
 
 </div>
 </div>
@@ -334,29 +333,29 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Transform a flat list of marker data into a nested Zone/Group dictionary.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00083">83</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>    <span class="keyword">def </span>test_marker_logic_grouping(self):</div>
-<div class="line"><span class="lineno">   84</span>        <span class="stringliteral">&quot;&quot;&quot;Transform a flat list of marker data into a nested Zone/Group dictionary.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   85</span>        raw_data = [</div>
-<div class="line"><span class="lineno">   86</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M1&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
-<div class="line"><span class="lineno">   87</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M2&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G2&quot;</span>},</div>
-<div class="line"><span class="lineno">   88</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M3&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z2&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
-<div class="line"><span class="lineno">   89</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M4&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
-<div class="line"><span class="lineno">   90</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M5&quot;</span>} <span class="comment"># Missing keys</span></div>
-<div class="line"><span class="lineno">   91</span>        ]</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>        grouped = group_markers(raw_data)</div>
-<div class="line"><span class="lineno">   94</span> </div>
-<div class="line"><span class="lineno">   95</span>        <span class="comment"># Check structure</span></div>
-<div class="line"><span class="lineno">   96</span>        self.assertIn(<span class="stringliteral">&quot;Z1&quot;</span>, grouped)</div>
-<div class="line"><span class="lineno">   97</span>        self.assertIn(<span class="stringliteral">&quot;G1&quot;</span>, grouped[<span class="stringliteral">&quot;Z1&quot;</span>])</div>
-<div class="line"><span class="lineno">   98</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(grouped[<span class="stringliteral">&quot;Z1&quot;</span>][<span class="stringliteral">&quot;G1&quot;</span>]), 2)</div>
-<div class="line"><span class="lineno">   99</span> </div>
-<div class="line"><span class="lineno">  100</span>        <span class="comment"># Check defaults for missing keys</span></div>
-<div class="line"><span class="lineno">  101</span>        self.assertIn(<span class="stringliteral">&quot;N/A&quot;</span>, grouped)</div>
-<div class="line"><span class="lineno">  102</span>        self.assertIn(<span class="stringliteral">&quot;N/A&quot;</span>, grouped[<span class="stringliteral">&quot;N/A&quot;</span>])</div>
-<div class="line"><span class="lineno">  103</span>        self.assertEqual(grouped[<span class="stringliteral">&quot;N/A&quot;</span>][<span class="stringliteral">&quot;N/A&quot;</span>][0][<span class="stringliteral">&quot;NAME&quot;</span>], <span class="stringliteral">&quot;M5&quot;</span>)</div>
-<div class="line"><span class="lineno">  104</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00082">82</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>    <span class="keyword">def </span>test_marker_logic_grouping(self):</div>
+<div class="line"><span class="lineno">   83</span>        <span class="stringliteral">&quot;&quot;&quot;Transform a flat list of marker data into a nested Zone/Group dictionary.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   84</span>        raw_data = [</div>
+<div class="line"><span class="lineno">   85</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M1&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
+<div class="line"><span class="lineno">   86</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M2&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G2&quot;</span>},</div>
+<div class="line"><span class="lineno">   87</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M3&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z2&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
+<div class="line"><span class="lineno">   88</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M4&quot;</span>, <span class="stringliteral">&quot;ZONE&quot;</span>: <span class="stringliteral">&quot;Z1&quot;</span>, <span class="stringliteral">&quot;GROUP&quot;</span>: <span class="stringliteral">&quot;G1&quot;</span>},</div>
+<div class="line"><span class="lineno">   89</span>            {<span class="stringliteral">&quot;NAME&quot;</span>: <span class="stringliteral">&quot;M5&quot;</span>} <span class="comment"># Missing keys</span></div>
+<div class="line"><span class="lineno">   90</span>        ]</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>        grouped = group_markers(raw_data)</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>        <span class="comment"># Check structure</span></div>
+<div class="line"><span class="lineno">   95</span>        self.assertIn(<span class="stringliteral">&quot;Z1&quot;</span>, grouped)</div>
+<div class="line"><span class="lineno">   96</span>        self.assertIn(<span class="stringliteral">&quot;G1&quot;</span>, grouped[<span class="stringliteral">&quot;Z1&quot;</span>])</div>
+<div class="line"><span class="lineno">   97</span>        self.assertEqual(<a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(grouped[<span class="stringliteral">&quot;Z1&quot;</span>][<span class="stringliteral">&quot;G1&quot;</span>]), 2)</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>        <span class="comment"># Check defaults for missing keys</span></div>
+<div class="line"><span class="lineno">  100</span>        self.assertIn(<span class="stringliteral">&quot;N/A&quot;</span>, grouped)</div>
+<div class="line"><span class="lineno">  101</span>        self.assertIn(<span class="stringliteral">&quot;N/A&quot;</span>, grouped[<span class="stringliteral">&quot;N/A&quot;</span>])</div>
+<div class="line"><span class="lineno">  102</span>        self.assertEqual(grouped[<span class="stringliteral">&quot;N/A&quot;</span>][<span class="stringliteral">&quot;N/A&quot;</span>][0][<span class="stringliteral">&quot;NAME&quot;</span>], <span class="stringliteral">&quot;M5&quot;</span>)</div>
+<div class="line"><span class="lineno">  103</span> </div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
@@ -379,27 +378,25 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Validate that UI changes correctly update the master data state.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00065">65</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   65</span>    <span class="keyword">def </span>test_state_manager_update(self):</div>
-<div class="line"><span class="lineno">   66</span>        <span class="stringliteral">&quot;&quot;&quot;Validate that UI changes correctly update the master data state.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   67</span>        sm = StateManager()</div>
-<div class="line"><span class="lineno">   68</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.reset</a>()</div>
-<div class="line"><span class="lineno">   69</span>        initial_data = {<span class="stringliteral">&quot;ui&quot;</span>: {<span class="stringliteral">&quot;button&quot;</span>: {<span class="stringliteral">&quot;color&quot;</span>: <span class="stringliteral">&quot;red&quot;</span>}}}</div>
-<div class="line"><span class="lineno">   70</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.initialize</a>(initial_data)</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        <span class="comment"># Update nested value</span></div>
-<div class="line"><span class="lineno">   73</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.update_state</a>(<span class="stringliteral">&quot;blue&quot;</span>, path=<span class="stringliteral">&quot;ui.button.color&quot;</span>)</div>
-<div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>        current_state = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.get_state</a>()</div>
-<div class="line"><span class="lineno">   76</span>        self.assertEqual(current_state[<span class="stringliteral">&quot;ui&quot;</span>][<span class="stringliteral">&quot;button&quot;</span>][<span class="stringliteral">&quot;color&quot;</span>], <span class="stringliteral">&quot;blue&quot;</span>)</div>
-<div class="line"><span class="lineno">   77</span> </div>
-<div class="line"><span class="lineno">   78</span>        <span class="comment"># Test non-existent path creation</span></div>
-<div class="line"><span class="lineno">   79</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.update_state</a>(100, path=<span class="stringliteral">&quot;ui.knob.value&quot;</span>)</div>
-<div class="line"><span class="lineno">   80</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sm.get_state</a>()[<span class="stringliteral">&quot;ui&quot;</span>][<span class="stringliteral">&quot;knob&quot;</span>][<span class="stringliteral">&quot;value&quot;</span>], 100)</div>
-<div class="line"><span class="lineno">   81</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00064">64</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>    <span class="keyword">def </span>test_state_manager_update(self):</div>
+<div class="line"><span class="lineno">   65</span>        <span class="stringliteral">&quot;&quot;&quot;Validate that UI changes correctly update the master data state.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   66</span>        sm = StateManager()</div>
+<div class="line"><span class="lineno">   67</span>        sm.reset()</div>
+<div class="line"><span class="lineno">   68</span>        initial_data = {<span class="stringliteral">&quot;ui&quot;</span>: {<span class="stringliteral">&quot;button&quot;</span>: {<span class="stringliteral">&quot;color&quot;</span>: <span class="stringliteral">&quot;red&quot;</span>}}}</div>
+<div class="line"><span class="lineno">   69</span>        sm.initialize(initial_data)</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>        <span class="comment"># Update nested value</span></div>
+<div class="line"><span class="lineno">   72</span>        sm.update_state(<span class="stringliteral">&quot;blue&quot;</span>, path=<span class="stringliteral">&quot;ui.button.color&quot;</span>)</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>        current_state = sm.get_state()</div>
+<div class="line"><span class="lineno">   75</span>        self.assertEqual(current_state[<span class="stringliteral">&quot;ui&quot;</span>][<span class="stringliteral">&quot;button&quot;</span>][<span class="stringliteral">&quot;color&quot;</span>], <span class="stringliteral">&quot;blue&quot;</span>)</div>
+<div class="line"><span class="lineno">   76</span> </div>
+<div class="line"><span class="lineno">   77</span>        <span class="comment"># Test non-existent path creation</span></div>
+<div class="line"><span class="lineno">   78</span>        sm.update_state(100, path=<span class="stringliteral">&quot;ui.knob.value&quot;</span>)</div>
+<div class="line"><span class="lineno">   79</span>        self.assertEqual(sm.get_state()[<span class="stringliteral">&quot;ui&quot;</span>][<span class="stringliteral">&quot;knob&quot;</span>][<span class="stringliteral">&quot;value&quot;</span>], 100)</div>
+<div class="line"><span class="lineno">   80</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -415,9 +412,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">28</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00027">27</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00020">Tests.test_negative_paths.TestNegativePaths.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00031">Tests.test_fast_scanner.TestFastScanner.tearDown()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00034">Tests.test_ui_and_data.TestUIAndData.tearDown()</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00039">Tests.test_realign_logs.TestLogRealigner.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00046">Tests.test_fast_scanner.TestFastScanner.test_scan_all_files()</a>, and <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00035">Tests.test_fast_scanner.TestFastScanner.test_scan_python_files()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/d91/test__negative__paths_8py_source.html#l00020">Tests.test_negative_paths.TestNegativePaths.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00031">Tests.test_fast_scanner.TestFastScanner.tearDown()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00033">Tests.test_ui_and_data.TestUIAndData.tearDown()</a>, <a class="el" href="../../d5/d90/test__realign__logs_8py_source.html#l00039">Tests.test_realign_logs.TestLogRealigner.tearDown()</a>, <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00046">Tests.test_fast_scanner.TestFastScanner.test_scan_all_files()</a>, and <a class="el" href="../../dc/d0e/test__fast__scanner_8py_source.html#l00035">Tests.test_fast_scanner.TestFastScanner.test_scan_python_files()</a>.</p>
 
 </div>
 </div>
@@ -433,9 +430,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00029">29</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00028">28</a> of file <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html">test_ui_and_data.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00105">Tests.test_ui_and_data.TestUIAndData.test_file_io_load()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00123">Tests.test_ui_and_data.TestUIAndData.test_file_io_save()</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00039">Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00104">Tests.test_ui_and_data.TestUIAndData.test_file_io_load()</a>, <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00122">Tests.test_ui_and_data.TestUIAndData.test_file_io_save()</a>, and <a class="el" href="../../d4/d3a/test__ui__and__data_8py_source.html#l00038">Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan()</a>.</p>
 
 </div>
 </div>

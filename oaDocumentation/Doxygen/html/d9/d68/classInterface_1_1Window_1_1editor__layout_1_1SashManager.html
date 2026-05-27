@@ -106,7 +106,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Handles the positioning of PanedWindow sashes.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00109">109</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00113">113</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a034bd75f05c37a0c65738ea5b17938de" name="a034bd75f05c37a0c65738ea5b17938de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a034bd75f05c37a0c65738ea5b17938de">&#9670;&#160;</a></span>set_initial()</h2>
@@ -132,33 +132,46 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Calculates and applies the initial sash positions using percentage-based logic.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00124">124</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>    <span class="keyword">def </span>set_initial(editor):</div>
-<div class="line"><span class="lineno">  125</span>        <span class="stringliteral">&quot;&quot;&quot;Calculates and applies the initial sash positions using percentage-based logic.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  127</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.update_idletasks</a>()</div>
-<div class="line"><span class="lineno">  128</span>            width = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.winfo_width</a>()</div>
-<div class="line"><span class="lineno">  129</span>            <span class="keywordflow">if</span> width &lt;= 1:</div>
-<div class="line"><span class="lineno">  130</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window.after</a>(200, <span class="keyword">lambda</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SashManager.set_initial</a>(editor))</div>
-<div class="line"><span class="lineno">  131</span>                <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;📐📐📐 [RENDER] Setting initial sashes for width: {width}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00128">128</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  128</span>    <span class="keyword">def </span>set_initial(editor):</div>
+<div class="line"><span class="lineno">  129</span>        <span class="stringliteral">&quot;&quot;&quot;Calculates and applies the initial sash positions using percentage-based logic.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  131</span>            editor.main_pane.update_idletasks()</div>
+<div class="line"><span class="lineno">  132</span>            width = editor.main_pane.winfo_width()</div>
+<div class="line"><span class="lineno">  133</span>            height = editor.main_pane.winfo_height()</div>
 <div class="line"><span class="lineno">  134</span> </div>
-<div class="line"><span class="lineno">  135</span>            <span class="comment"># 1. Left Sidebar: 30% of width</span></div>
-<div class="line"><span class="lineno">  136</span>            left_pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(width * 0.30)</div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>            <span class="comment"># 2. Right Sidebar: 30% of width (measured from the right)</span></div>
-<div class="line"><span class="lineno">  139</span>            right_pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(width * (1.0 - 0.30))</div>
+<div class="line"><span class="lineno">  135</span>            <span class="comment"># ⚡ RECOVERY: If dimensions are not yet calculated, defer.</span></div>
+<div class="line"><span class="lineno">  136</span>            <span class="keywordflow">if</span> width &lt;= 50 <span class="keywordflow">or</span> height &lt;= 50:</div>
+<div class="line"><span class="lineno">  137</span>                matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;⚠️📐🔳 [RENDER] Main pane too small ({width}x{height}). Deferring sash placement...&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">  138</span>                editor.window.after(200, <span class="keyword">lambda</span>: SashManager.set_initial(editor))</div>
+<div class="line"><span class="lineno">  139</span>                <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">  140</span> </div>
-<div class="line"><span class="lineno">  141</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.sash_place</a>(0, left_pos, 0)</div>
-<div class="line"><span class="lineno">  142</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.sash_place</a>(1, right_pos, 0)</div>
-<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  144</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;⚠️🎨🤦‍♂️ [RENDER] Sash placement failed: {e}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">  141</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;📐📐📐 [RENDER] Setting initial sashes for {width}x{height}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">  142</span> </div>
+<div class="line"><span class="lineno">  143</span>            <span class="comment"># 1. Left Sidebar: Target 250px or 25% of width</span></div>
+<div class="line"><span class="lineno">  144</span>            left_pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(200, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(width * 0.25))</div>
 <div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>            <span class="comment"># 2. Right Sidebar: Target 300px or 25% of width (measured from the right)</span></div>
+<div class="line"><span class="lineno">  147</span>            right_pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(width - 250, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(width * 0.75))</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span>            <span class="comment"># ⚡ HARD CONSTRAINT: Ensure center is at least 400px</span></div>
+<div class="line"><span class="lineno">  150</span>            <span class="keywordflow">if</span> (right_pos - left_pos) &lt; 400:</div>
+<div class="line"><span class="lineno">  151</span>                matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, <span class="stringliteral">&quot;⚠️📐🔳 [RENDER] Center pane too narrow. Adjusting sashes...&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">  152</span>                left_pos = 250</div>
+<div class="line"><span class="lineno">  153</span>                right_pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(left_pos + 400, width - 300)</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>            editor.main_pane.sash_place(0, left_pos, 0)</div>
+<div class="line"><span class="lineno">  156</span>            editor.main_pane.sash_place(1, right_pos, 0)</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;📐🆗✨ [RENDER] Sashes set at: {left_pos} | {right_pos}&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">  159</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  160</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, f<span class="stringliteral">&quot;⚠️🎨🤦‍♂️ [RENDER] Sash placement failed: {e}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">  161</span> </div>
+<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a4735a0c4d1b11f62ea44115d54a93087"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a></div><div class="ttdeci">repeat min</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">generated.rs:2081</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa83862769f78fffb512bc9283007ef67"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a></div><div class="ttdeci">repeat max</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">generated.rs:1711</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>.</p>
 
 </div>
 </div>
@@ -186,20 +199,18 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Sets up the initial sash positions after the window is mapped.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00113">113</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>    <span class="keyword">def </span>setup(editor):</div>
-<div class="line"><span class="lineno">  114</span>        <span class="stringliteral">&quot;&quot;&quot;Sets up the initial sash positions after the window is mapped.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  115</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_on_map</a>(e):</div>
-<div class="line"><span class="lineno">  116</span>            <span class="comment"># ⚡ [UI] Unbind after first map to prevent &quot;snapping back&quot; on minimize/restore</span></div>
-<div class="line"><span class="lineno">  117</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(editor, <span class="stringliteral">&#39;window&#39;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window.winfo_exists</a>():</div>
-<div class="line"><span class="lineno">  118</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window.unbind</a>(<span class="stringliteral">&quot;&lt;Map&gt;&quot;</span>, map_id)</div>
-<div class="line"><span class="lineno">  119</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window.after</a>(100, <span class="keyword">lambda</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SashManager.set_initial</a>(editor))</div>
-<div class="line"><span class="lineno">  120</span> </div>
-<div class="line"><span class="lineno">  121</span>        map_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window.bind</a>(<span class="stringliteral">&quot;&lt;Map&gt;&quot;</span>, _on_map, add=<span class="stringliteral">&quot;+&quot;</span>)</div>
-<div class="line"><span class="lineno">  122</span> </div>
+<p class="definition">Definition at line <a class="el" href="../../d6/da9/editor__layout_8py_source.html#l00117">117</a> of file <a class="el" href="../../d6/da9/editor__layout_8py_source.html">editor_layout.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>    <span class="keyword">def </span>setup(editor):</div>
+<div class="line"><span class="lineno">  118</span>        <span class="stringliteral">&quot;&quot;&quot;Sets up the initial sash positions after the window is mapped.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  119</span>        <span class="keyword">def </span>_on_map(e):</div>
+<div class="line"><span class="lineno">  120</span>            <span class="comment"># ⚡ [UI] Unbind after first map to prevent &quot;snapping back&quot; on minimize/restore</span></div>
+<div class="line"><span class="lineno">  121</span>            <span class="keywordflow">if</span> hasattr(editor, <span class="stringliteral">&#39;window&#39;</span>) <span class="keywordflow">and</span> editor.window.winfo_exists():</div>
+<div class="line"><span class="lineno">  122</span>                editor.window.unbind(<span class="stringliteral">&quot;&lt;Map&gt;&quot;</span>, map_id)</div>
+<div class="line"><span class="lineno">  123</span>            editor.window.after(100, <span class="keyword">lambda</span>: SashManager.set_initial(editor))</div>
+<div class="line"><span class="lineno">  124</span> </div>
+<div class="line"><span class="lineno">  125</span>        map_id = editor.window.bind(<span class="stringliteral">&quot;&lt;Map&gt;&quot;</span>, _on_map, add=<span class="stringliteral">&quot;+&quot;</span>)</div>
+<div class="line"><span class="lineno">  126</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

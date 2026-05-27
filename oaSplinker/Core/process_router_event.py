@@ -18,7 +18,7 @@ def process_router_event(self, message):
     source = message.get("origin_source", "UNKNOWN")
 
     # ⚡ COMMAND INTERCEPT: System controls
-    if "OPEN-AIR/System/Control/Splinker/" in topic:
+    if "OpenAir/System/Control/Splinker/" in topic:
         cmd_payload = {"value": value, "topic": topic, "origin_source": source}
         self._handle_command(topic, cmd_payload)
         return

@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('dd/d34/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Critical Stability &amp; Permission Hardening</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1789"></a>Date: 2026-03-15 01:45:00</p>
-<h1><a class="anchor" id="autotoc_md1790"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2238"></a>Date: 2026-03-15 01:45:00</p>
+<h1><a class="anchor" id="autotoc_md2239"></a>
 🔍 Phase 1: The Log-Hunting Strategy (Research)</h1>
 <ol type="1">
 <li><b>Hard Filtering (Signal vs. Noise)</b>:<ul>
 <li><code>PermissionError: [Errno 1] Operation not permitted</code> in <code>managers/PTP/ptp.py</code>.</li>
-<li>&lsquo;AttributeError: 'StateMirrorEngine&rsquo; object has no attribute 'start_queue_processing'<code>in</code>managers/Display/core/bootstrap_sequence.py<code>. -</code>WARNING | FAILED (IDN Query Error)<code>in</code>oaComProtocols.oaComVisa.Visa_Fleet.visa_Search`.</li>
+<li>&lsquo;AttributeError: 'StateMirrorEngine&rsquo; object has no attribute 'start_queue_processing'<code>in</code>managers/Display/core/loader_bootstrap_engine.py<code>. -</code>WARNING | FAILED (IDN Query Error)<code>in</code>oaComProtocols.oaComVisa.Visa_Fleet.visa_Search`.</li>
 </ul>
 </li>
 <li><b>The 'Last Good Action' Backtrace</b>:<ul>
 <li><b>PTP</b>: Triggered by Scapy's <code>sniff</code> method in <code>_run_sniffer</code>. This requires <code>AF_PACKET</code> raw sockets, which Linux restricts to root/sudo.</li>
-<li><b>UI</b>: Triggered at the end of the <code><a class="el" href="../../d9/dbc/bootstrap__sequence_8py.html">bootstrap_sequence.py</a></code> in the <code>_finish</code> callback. It attempted to call a non-existent public method on the <code>StateMirrorEngine</code>.</li>
+<li><b>UI</b>: Triggered at the end of the <code><a class="el" href="../../da/ddb/loader__bootstrap__engine_8py.html">loader_bootstrap_engine.py</a></code> in the <code>_finish</code> callback. It attempted to call a non-existent public method on the <code>StateMirrorEngine</code>.</li>
 </ul>
 </li>
 <li><b>Visual Domain Grepping</b>:<ul>
@@ -114,32 +114,32 @@ $(document).ready(function(){initNavTree('dd/d34/md_oaDocumentation_2Workers_2Bu
 </li>
 <li><b>Context Retention</b>:<ul>
 <li><code>managers/PTP/ptp.py</code></li>
-<li><code>managers/Display/core/bootstrap_sequence.py</code></li>
+<li><code>managers/Display/core/loader_bootstrap_engine.py</code></li>
 <li><code>workers/logic/state_mirror_engine.py</code> (Implementation of the engine)</li>
 <li><code>managers/Visa_Fleet/visa_utility_parser.py</code> (Centralized timeout)</li>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1791"></a>
+<h1><a class="anchor" id="autotoc_md2240"></a>
 📋 Phase 2: Prioritized Bug Task List</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Priority   </th><th class="markdownTableHeadLeft">Task   </th><th class="markdownTableHeadLeft">Module   </th><th class="markdownTableHeadLeft">Impact    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">1   </td><td class="markdownTableBodyLeft"><code>AttributeError</code> in Bootstrap   </td><td class="markdownTableBodyLeft"><code><a class="el" href="../../d9/dbc/bootstrap__sequence_8py.html">bootstrap_sequence.py</a></code>   </td><td class="markdownTableBodyLeft">UI fails to initialize properly, blocking application start.    </td></tr>
+<td class="markdownTableBodyLeft">1   </td><td class="markdownTableBodyLeft"><code>AttributeError</code> in Bootstrap   </td><td class="markdownTableBodyLeft"><code><a class="el" href="../../da/ddb/loader__bootstrap__engine_8py.html">loader_bootstrap_engine.py</a></code>   </td><td class="markdownTableBodyLeft">UI fails to initialize properly, blocking application start.    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft">1   </td><td class="markdownTableBodyLeft"><code>PermissionError</code> in PTP   </td><td class="markdownTableBodyLeft"><code>ptp_manager.py</code>   </td><td class="markdownTableBodyLeft">PTP monitoring fails without root privileges, causing log spam.    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft">2   </td><td class="markdownTableBodyLeft">IDN Query Warnings   </td><td class="markdownTableBodyLeft"><code><a class="el" href="../../d0/de1/visa__utility__parser_8py.html">visa_utility_parser.py</a></code>   </td><td class="markdownTableBodyLeft">Potential incomplete fleet discovery for slow devices.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1792"></a>
+<h1><a class="anchor" id="autotoc_md2241"></a>
 🛠️ Phase 3: Best Practice Solutions &amp; Strategy</h1>
 <ol type="1">
-<li><b>UI Fix</b>: Replaced the non-existent <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">start_queue_processing()</a></code> call with the correct internal <code>_schedule_queue_processing()</code> in <code><a class="el" href="../../d9/dbc/bootstrap__sequence_8py.html">bootstrap_sequence.py</a></code>.</li>
+<li><b>UI Fix</b>: Replaced the non-existent <code>start_queue_processing()</code> call with the correct internal <code>_schedule_queue_processing()</code> in <code><a class="el" href="../../da/ddb/loader__bootstrap__engine_8py.html">loader_bootstrap_engine.py</a></code>.</li>
 <li><b>PTP Fix</b>: Added a specific <code>except PermissionError</code> block to catch the <code>AF_PACKET</code> failure. Provided a clear instructional warning instead of a raw traceback.</li>
 <li><b>VISA Fix</b>: Increased <code>VISA_TIMEOUT</code> from 2500ms to 5000ms to allow more headroom for legacy or slow network-based instruments during the fleet discovery scan.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1793"></a>
+<h1><a class="anchor" id="autotoc_md2242"></a>
 🚀 Execution Lifecycle:</h1>
 <ol type="1">
 <li><b>Empirical Reproduction</b>: Verified that <code>StateMirrorEngine</code> did not have a public <code>start_queue_processing</code> method.</li>

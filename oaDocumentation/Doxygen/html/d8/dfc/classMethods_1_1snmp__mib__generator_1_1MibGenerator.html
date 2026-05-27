@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d8/dfc/classMethods_1_1snmp__mib__gene
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a72c71d7c70c2bab30ff0606d3e3940d6" id="r_a72c71d7c70c2bab30ff0606d3e3940d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dfc/classMethods_1_1snmp__mib__generator_1_1MibGenerator.html#a72c71d7c70c2bab30ff0606d3e3940d6">generate</a> (base_oid, oid_map, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">organization</a>=&quot;OPEN-<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AIR</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Project&quot;</a>)</td></tr>
+<tr class="memitem:a72c71d7c70c2bab30ff0606d3e3940d6" id="r_a72c71d7c70c2bab30ff0606d3e3940d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dfc/classMethods_1_1snmp__mib__generator_1_1MibGenerator.html#a72c71d7c70c2bab30ff0606d3e3940d6">generate</a> (base_oid, oid_map, organization=&quot;OPEN-AIR Project&quot;)</td></tr>
 <tr class="separator:a72c71d7c70c2bab30ff0606d3e3940d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -131,7 +131,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>organization</em> = <code>&quot;OPEN-<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">AIR</a>&#160;<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Project&quot;</a></code>&#160;</td>
+          <td class="paramname"><em>organization</em> = <code>&quot;OPEN-AIR&#160;Project&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -154,11 +154,11 @@ Uses OPENAIR-MIB consistently.
 <div class="line"><span class="lineno">   32</span><span class="stringliteral">        Generates a SMIv2 MIB file with unique descriptors.</span></div>
 <div class="line"><span class="lineno">   33</span><span class="stringliteral">        Uses OPENAIR-MIB consistently.</span></div>
 <div class="line"><span class="lineno">   34</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   35</span>        timestamp = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">datetime.datetime.now</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">strftime</a>(<span class="stringliteral">&quot;%Y%m%d%H%M&quot;</span>)</div>
-<div class="line"><span class="lineno">   36</span>        pen = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base_oid.split</a>(<span class="stringliteral">&#39;.&#39;</span>)[-1]</div>
+<div class="line"><span class="lineno">   35</span>        timestamp = datetime.datetime.now().strftime(<span class="stringliteral">&quot;%Y%m%d%H%M&quot;</span>)</div>
+<div class="line"><span class="lineno">   36</span>        pen = base_oid.split(<span class="stringliteral">&#39;.&#39;</span>)[-1]</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>        <span class="keywordflow">if</span> snmp_mib_generator_verbose_logging_enabled:</div>
-<div class="line"><span class="lineno">   39</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">snmp_logger.debug</a>(f<span class="stringliteral">&quot;📜 SNMP MIB: Starting generation for {len(oid_map)} OIDs...&quot;</span>)</div>
+<div class="line"><span class="lineno">   39</span>            snmp_logger.debug(f<span class="stringliteral">&quot;📜 SNMP MIB: Starting generation for {len(oid_map)} OIDs...&quot;</span>)</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>        lines = [</div>
 <div class="line"><span class="lineno">   42</span>            <span class="stringliteral">&quot;OPENAIR-MIB DEFINITIONS ::= BEGIN&quot;</span>,</div>
@@ -182,16 +182,16 @@ Uses OPENAIR-MIB consistently.
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>        <span class="comment"># Build hierarchy tree</span></div>
 <div class="line"><span class="lineno">   62</span>        tree = {}</div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">for</span> oid, data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sorted</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oid_map.items</a>()):</div>
-<div class="line"><span class="lineno">   64</span>            parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data.get</a>(<span class="stringliteral">&quot;path_parts&quot;</span>, [])</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">for</span> oid, data <span class="keywordflow">in</span> sorted(oid_map.items()):</div>
+<div class="line"><span class="lineno">   64</span>            parts = data.get(<span class="stringliteral">&quot;path_parts&quot;</span>, [])</div>
 <div class="line"><span class="lineno">   65</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> parts: <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>            curr_level = tree</div>
 <div class="line"><span class="lineno">   68</span>            curr_parent_desc = <span class="stringliteral">&quot;v1&quot;</span></div>
 <div class="line"><span class="lineno">   69</span>            path_acc_parts = []</div>
 <div class="line"><span class="lineno">   70</span> </div>
-<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">for</span> i, part <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(parts):</div>
-<div class="line"><span class="lineno">   72</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">path_acc_parts.append</a>(part)</div>
+<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">for</span> i, part <span class="keywordflow">in</span> enumerate(parts):</div>
+<div class="line"><span class="lineno">   72</span>                path_acc_parts.append(part)</div>
 <div class="line"><span class="lineno">   73</span>                node_id = get_snmp_node_id(path_acc_parts)</div>
 <div class="line"><span class="lineno">   74</span>                final_descriptor = get_snmp_descriptor(path_acc_parts)</div>
 <div class="line"><span class="lineno">   75</span> </div>
@@ -211,9 +211,9 @@ Uses OPENAIR-MIB consistently.
 <div class="line"><span class="lineno">   89</span>                curr_parent_desc = final_descriptor</div>
 <div class="line"><span class="lineno">   90</span>                curr_level = curr_level[part][<span class="stringliteral">&quot;children&quot;</span>]</div>
 <div class="line"><span class="lineno">   91</span> </div>
-<div class="line"><span class="lineno">   92</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">write_nodes</a>(level_dict):</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keyword">def </span>write_nodes(level_dict):</div>
 <div class="line"><span class="lineno">   93</span>            <span class="comment"># Sort items by node_id numerically for a clean walk</span></div>
-<div class="line"><span class="lineno">   94</span>            sorted_items = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sorted</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">level_dict.items</a>(), key=<span class="keyword">lambda</span> x: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(x[1][<span class="stringliteral">&quot;node_id&quot;</span>]))</div>
+<div class="line"><span class="lineno">   94</span>            sorted_items = sorted(level_dict.items(), key=<span class="keyword">lambda</span> x: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(x[1][<span class="stringliteral">&quot;node_id&quot;</span>]))</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>            <span class="keywordflow">for</span> part, node_data <span class="keywordflow">in</span> sorted_items:</div>
 <div class="line"><span class="lineno">   97</span>                desc = node_data[<span class="stringliteral">&quot;descriptor&quot;</span>]</div>
@@ -221,26 +221,25 @@ Uses OPENAIR-MIB consistently.
 <div class="line"><span class="lineno">   99</span>                nid = node_data[<span class="stringliteral">&quot;node_id&quot;</span>]</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>                <span class="keywordflow">if</span> node_data[<span class="stringliteral">&quot;children&quot;</span>]:</div>
-<div class="line"><span class="lineno">  102</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(f<span class="stringliteral">&quot;{desc} OBJECT IDENTIFIER ::= {{ {parent} {nid} }}&quot;</span>)</div>
-<div class="line"><span class="lineno">  103</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">write_nodes</a>(node_data[<span class="stringliteral">&quot;children&quot;</span>])</div>
+<div class="line"><span class="lineno">  102</span>                    lines.append(f<span class="stringliteral">&quot;{desc} OBJECT IDENTIFIER ::= {{ {parent} {nid} }}&quot;</span>)</div>
+<div class="line"><span class="lineno">  103</span>                    write_nodes(node_data[<span class="stringliteral">&quot;children&quot;</span>])</div>
 <div class="line"><span class="lineno">  104</span>                <span class="keywordflow">elif</span> node_data[<span class="stringliteral">&quot;topic&quot;</span>]:</div>
-<div class="line"><span class="lineno">  105</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(f<span class="stringliteral">&quot;-- MQTT: {node_data[&#39;topic&#39;]}&quot;</span>)</div>
-<div class="line"><span class="lineno">  106</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(f<span class="stringliteral">&quot;{desc} OBJECT-TYPE&quot;</span>)</div>
-<div class="line"><span class="lineno">  107</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(<span class="stringliteral">&quot;    SYNTAX      DisplayString&quot;</span>)</div>
-<div class="line"><span class="lineno">  108</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(<span class="stringliteral">&quot;    MAX-ACCESS  read-write&quot;</span>)</div>
-<div class="line"><span class="lineno">  109</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(<span class="stringliteral">&quot;    STATUS      current&quot;</span>)</div>
-<div class="line"><span class="lineno">  110</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(f<span class="stringliteral">&quot;    DESCRIPTION \&quot;Source: {node_data[&#39;topic&#39;]}\&quot;&quot;</span>)</div>
-<div class="line"><span class="lineno">  111</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(f<span class="stringliteral">&quot;    ::= {{ {parent} {nid} }}&quot;</span>)</div>
-<div class="line"><span class="lineno">  112</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(<span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">  105</span>                    lines.append(f<span class="stringliteral">&quot;-- MQTT: {node_data[&#39;topic&#39;]}&quot;</span>)</div>
+<div class="line"><span class="lineno">  106</span>                    lines.append(f<span class="stringliteral">&quot;{desc} OBJECT-TYPE&quot;</span>)</div>
+<div class="line"><span class="lineno">  107</span>                    lines.append(<span class="stringliteral">&quot;    SYNTAX      DisplayString&quot;</span>)</div>
+<div class="line"><span class="lineno">  108</span>                    lines.append(<span class="stringliteral">&quot;    MAX-ACCESS  read-write&quot;</span>)</div>
+<div class="line"><span class="lineno">  109</span>                    lines.append(<span class="stringliteral">&quot;    STATUS      current&quot;</span>)</div>
+<div class="line"><span class="lineno">  110</span>                    lines.append(f<span class="stringliteral">&quot;    DESCRIPTION \&quot;Source: {node_data[&#39;topic&#39;]}\&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">  111</span>                    lines.append(f<span class="stringliteral">&quot;    ::= {{ {parent} {nid} }}&quot;</span>)</div>
+<div class="line"><span class="lineno">  112</span>                    lines.append(<span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">write_nodes</a>(tree)</div>
-<div class="line"><span class="lineno">  115</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lines.append</a>(<span class="stringliteral">&quot;END&quot;</span>)</div>
-<div class="line"><span class="lineno">  116</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(lines)</div>
+<div class="line"><span class="lineno">  114</span>        write_nodes(tree)</div>
+<div class="line"><span class="lineno">  115</span>        lines.append(<span class="stringliteral">&quot;END&quot;</span>)</div>
+<div class="line"><span class="lineno">  116</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.join(lines)</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>

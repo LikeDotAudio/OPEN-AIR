@@ -222,11 +222,10 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   58</span>        self.transport.publish(<span class="stringliteral">&quot;test/path&quot;</span>, test_payload)</div>
 <div class="line"><span class="lineno">   59</span> </div>
 <div class="line"><span class="lineno">   60</span>        <span class="comment"># CHECK: Transmitted to WebSocket Spoke</span></div>
-<div class="line"><span class="lineno">   61</span>        self.transport.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ws_app.send.assert_called_with</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">json.dumps</a>(test_payload))</div>
+<div class="line"><span class="lineno">   61</span>        self.transport.ws_app.send.assert_called_with(json.dumps(test_payload))</div>
 <div class="line"><span class="lineno">   62</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, and <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>.</p>
 
 </div>
 </div>
@@ -255,12 +254,12 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="line"><span class="lineno">   42</span>        self.transport.connect(params)</div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span>        <span class="comment"># CHECK: WebSocketApp was initialized with correct URI</span></div>
-<div class="line"><span class="lineno">   45</span>        self.mock_ws_app_class.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called</a>()</div>
+<div class="line"><span class="lineno">   45</span>        self.mock_ws_app_class.assert_called()</div>
 <div class="line"><span class="lineno">   46</span>        args, kwargs = self.mock_ws_app_class.call_args</div>
 <div class="line"><span class="lineno">   47</span>        self.assertEqual(args[0], <span class="stringliteral">&quot;ws://mock-server:8080&quot;</span>)</div>
 <div class="line"><span class="lineno">   48</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00026">Tests.test_websocket_transport.TestWebSocketTransport.mock_ws_app_class</a>, <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00026">Tests.test_websocket_transport.TestWebSocketTransport.mock_ws_app_class</a>, <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, and <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>.</p>
 
 </div>
 </div>
@@ -284,16 +283,16 @@ Follows BUILD -&gt; OPERATE -&gt; CHECK pattern.
 <div class="fragment"><div class="line"><span class="lineno">   63</span>    <span class="keyword">def </span>test_spoke_to_hub_ingest(self):</div>
 <div class="line"><span class="lineno">   64</span>        <span class="stringliteral">&quot;&quot;&quot;OPERATE: Simulate incoming WebSocket data (Spoke -&gt; Hub).&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   65</span>        <span class="comment"># BUILD</span></div>
-<div class="line"><span class="lineno">   66</span>        test_message = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">json.dumps</a>({<span class="stringliteral">&quot;value&quot;</span>: 100, <span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;remote/fader&quot;</span>})</div>
+<div class="line"><span class="lineno">   66</span>        test_message = json.dumps({<span class="stringliteral">&quot;value&quot;</span>: 100, <span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;remote/fader&quot;</span>})</div>
 <div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>        <span class="comment"># OPERATE: Manually trigger the _on_message callback</span></div>
 <div class="line"><span class="lineno">   69</span>        self.transport._on_message(<span class="keywordtype">None</span>, test_message)</div>
 <div class="line"><span class="lineno">   70</span> </div>
 <div class="line"><span class="lineno">   71</span>        <span class="comment"># CHECK: Data passed to the system handler (Hub)</span></div>
-<div class="line"><span class="lineno">   72</span>        self.mock_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_with</a>(<span class="stringliteral">&quot;websocket&quot;</span>, {<span class="stringliteral">&quot;value&quot;</span>: 100, <span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;remote/fader&quot;</span>})</div>
+<div class="line"><span class="lineno">   72</span>        self.mock_handler.assert_called_with(<span class="stringliteral">&quot;websocket&quot;</span>, {<span class="stringliteral">&quot;value&quot;</span>: 100, <span class="stringliteral">&quot;topic&quot;</span>: <span class="stringliteral">&quot;remote/fader&quot;</span>})</div>
 <div class="line"><span class="lineno">   73</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00029">Tests.test_websocket_transport.TestWebSocketTransport.mock_handler</a>, <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00029">Tests.test_websocket_transport.TestWebSocketTransport.mock_handler</a>, <a class="el" href="../../d8/da2/midi__mqtt__worker_8py_source.html#l00028">Workers.midi_mqtt_worker.MidiMqttWorker.transport</a>, and <a class="el" href="../../d5/d8d/test__websocket__transport_8py_source.html#l00028">Tests.test_websocket_transport.TestWebSocketTransport.transport</a>.</p>
 
 </div>
 </div>

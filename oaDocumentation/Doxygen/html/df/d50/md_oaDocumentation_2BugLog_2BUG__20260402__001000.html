@@ -93,31 +93,31 @@ $(document).ready(function(){initNavTree('df/d50/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260402_001000.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1052"></a></p>
-<h1><a class="anchor" id="autotoc_md1053"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1317"></a></p>
+<h1><a class="anchor" id="autotoc_md1318"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1054"></a>
+<h1><a class="anchor" id="autotoc_md1319"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1055"></a>
-Issue: SyntaxError in module_loader.py prevents UI launch.</h1>
-<h2><a class="anchor" id="autotoc_md1056"></a>
+<h1><a class="anchor" id="autotoc_md1320"></a>
+Issue: SyntaxError in loader_facade.py prevents UI launch.</h1>
+<h2><a class="anchor" id="autotoc_md1321"></a>
 🔍 ISSUE DESCRIPTION</h2>
-<p>The application failed to launch with a &lsquo;SyntaxError: expected 'except&rsquo; or 'finally' block<code>in</code><a class="el" href="../../dd/d1a/module__loader_8py.html">oaGui/FileReaders/module_loader.py</a><code>at line 124. This was preventing the</code>ModuleLoader<code>from being imported by</code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a>`.</p>
-<h2><a class="anchor" id="autotoc_md1057"></a>
+<p>The application failed to launch with a &lsquo;SyntaxError: expected 'except&rsquo; or 'finally' block<code>in</code>oaGui/FileReaders/loader_facade.py<code>at line 124. This was preventing the</code>LoaderFacade<code>from being imported by</code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a>`.</p>
+<h2><a class="anchor" id="autotoc_md1322"></a>
 🛠️ ROOT CAUSE</h2>
 <p>A <code>try</code> block was initiated at line 116 but was never closed with an <code>except</code> or <code>finally</code> block. The subsequent <code>if</code> statement was misinterpreted as part of the malformed <code>try</code> structure.</p>
-<h2><a class="anchor" id="autotoc_md1058"></a>
+<h2><a class="anchor" id="autotoc_md1323"></a>
 🚀 RESOLUTION</h2>
 <p>Surgically corrected the <code>try</code> block by:</p><ol type="1">
 <li>Wrapping the instantiation and packing logic within the <code>try</code> scope.</li>
 <li>Adding an <code>except Exception as e:</code> block to log instantiation failures.</li>
 <li>Ensuring the method returns the <code>builder</code> instance even on failure to maintain UI stability.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1059"></a>
+<h2><a class="anchor" id="autotoc_md1324"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
-<li><b>Syntax Check</b>: <code>python3 -m py_compile <a class="el" href="../../dd/d1a/module__loader_8py.html">oaGui/FileReaders/module_loader.py</a></code> returned success (exit code 0).</li>
+<li><b>Syntax Check</b>: <code>python3 -m py_compile oaGui/FileReaders/loader_facade.py</code> returned success (exit code 0).</li>
 <li><b>Import Test</b>: Successfully validated that the module can now be imported without triggering a <code>SyntaxError</code>. </li>
 </ul>
 </div></div><!-- contents -->

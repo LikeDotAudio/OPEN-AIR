@@ -93,30 +93,30 @@ $(document).ready(function(){initNavTree('d4/d14/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: VISA Scan Timeouts &amp; Unhandled Exceptions</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1686"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2135"></a></p><ul>
 <li><b>ID</b>: 20260314_155045</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
 <li><b>COMPONENT</b>: <code>oaComProtocols.oaComVisa.Visa_Fleet.visa_Search</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1687"></a>
+<h1><a class="anchor" id="autotoc_md2136"></a>
 Issue</h1>
 <p>During a VISA fleet scan, network instruments that were slow to respond were causing <code>socket.timeout</code> errors. These timeouts were not being handled gracefully, leading to raw error messages in the log (e.g., "Error closing VISA link: socket.timeout"). More importantly, this caused the <code>manager_visa_Search</code> module to fail to identify these devices, marking them as "Unresponsive". As a result, the downstream GUI builder (<code>YakFleetCommandBuilder</code>) would not receive the device information and would fail to create the necessary command and control tabs for these instruments, making them inaccessible to the user.</p>
-<h1><a class="anchor" id="autotoc_md1688"></a>
+<h1><a class="anchor" id="autotoc_md2137"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Aggressive Timeout</b>: The <code>VISA_TIMEOUT</code> constant in <code>manager_visa_Search.py</code> was set to 1000ms. This was insufficient for some network-connected VISA devices, especially on congested networks or for devices that are slow to process initial connections.</li>
 <li><b>Unhandled Exception</b>: The main <code>probe_devices</code> loop did not have a specific exception handler for <code>socket.timeout</code>. While <code>_query_device_safe</code> handled <code>pyvisa.errors.VisaIOError</code>, a raw socket timeout could still occur and propagate, causing an ungraceful failure message.</li>
 <li><b>Missing Import</b>: The fix introduced a dependency on the <code>socket</code> module without importing it, which would have caused a <code>NameError</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1689"></a>
+<h1><a class="anchor" id="autotoc_md2138"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Increased Timeout</b>: The <code>VISA_TIMEOUT</code> in <code>manager_visa_Search.py</code> was increased from 1000ms to 2500ms to provide more tolerance for slow network devices.</li>
 <li><b>Structured Exception Handling</b>: A <code>try...except socket.timeout</code> block was wrapped around the <code>_query_device_safe</code> call within the <code>probe_devices</code> function. This now catches the specific timeout error, logs a standardized warning message (<code>💳⚠️ [TIMEOUT]</code>), and allows the loop to continue to the next device gracefully.</li>
 <li><b>Added Import</b>: An <code>import socket</code> statement was added to the file to resolve the dependency.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1690"></a>
+<h1><a class="anchor" id="autotoc_md2139"></a>
 Verification</h1>
 <p>After the fix, VISA scans now correctly identify the previously unresponsive network devices. The application successfully builds all the corresponding GUI tabs, making the instruments available for control. The unhandled <code>socket.timeout</code> error is no longer present in the logs, having been replaced by the standardized warning. </p>
 </div></div><!-- contents -->

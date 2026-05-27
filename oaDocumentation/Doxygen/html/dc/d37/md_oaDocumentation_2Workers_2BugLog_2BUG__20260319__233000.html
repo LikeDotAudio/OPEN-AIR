@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('dc/d37/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: UI Functional Failures and Log Bloat</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1903"></a><b>Date</b>: 2026-03-19 23:30:00 <b>Author</b>: Elite Bug-Fixing Architect (Gemini CLI)</p>
-<h1><a class="anchor" id="autotoc_md1904"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2352"></a><b>Date</b>: 2026-03-19 23:30:00 <b>Author</b>: Elite Bug-Fixing Architect (Gemini CLI)</p>
+<h1><a class="anchor" id="autotoc_md2353"></a>
 🔍 Issue 1: Button Toggler TypeError (Priority 1)</h1>
 <ul>
 <li><b>Symptom</b>: &lsquo;TypeError: ... missing 1 required positional argument: 'e&rsquo;<code>in</code><a class="el" href="../../d4/de0/button__canvas__base_8py.html">oaGui/Core/factory/button_canvas_base.py</a><code>.</code></li>
@@ -102,29 +102,29 @@ $(document).ready(function(){initNavTree('dc/d37/md_oaDocumentation_2Workers_2Bu
 <li><code> **Resolution**: Updated</code>_on_release<code>to use a</code>try-except TypeError<code>block, first attempting to pass the event and falling back to 0-args for compatibility.</code></li>
 <li><code> **Verification**: Ran</code>reproduce_toggler_error.py` which confirmed both 0-arg and 1-arg callbacks now work without failure.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1905"></a>
+<h1><a class="anchor" id="autotoc_md2354"></a>
 🔍 Issue 2: Missing &lt;tt&gt;make&lt;/tt&gt; Static Method (Priority 2)</h1>
 <ul>
 <li><b>Symptom</b>: Log spam (hundreds of warnings) about <code>BuilderButtonToggleCreator</code> missing a static <code>make</code> method.</li>
-<li><b>Root Cause</b>: <code>WidgetRegistry</code> requires a <code>make</code> static method for all registered widgets to follow the standardized factory pattern.</li>
+<li><b>Root Cause</b>: <code>RegistryWidgetStore</code> requires a <code>make</code> static method for all registered widgets to follow the standardized factory pattern.</li>
 <li><b>Resolution</b>: Implemented <code>BuilderButtonToggleCreator.make()</code> in <code>oaGuiElements/Core/buttons/button_toggle/button_toggle.py</code>.</li>
 <li><b>Verification</b>: Verified against other working creators (like <code>BuilderButtonActuatorCreator</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1906"></a>
+<h1><a class="anchor" id="autotoc_md2355"></a>
 🔍 Issue 3: Missing WYSIWYG Runner Path (Priority 2)</h1>
 <ul>
 <li><b>Symptom</b>: Error in context menu: <code>Standalone runner not found at /home/anthony/Documents/OPEN-AIR/wysiwyg_editor/run_builder.py</code>.</li>
-<li><b>Root Cause</b>: Incorrect relative path calculation in <code><a class="el" href="../../d6/d5d/context__menu_8py.html">oaGui/Core/context_menu.py</a></code>. The actual file resides in <code><a class="el" href="../../de/d24/run__builder_8py.html">oaGuiEditorWYSIWYG/Managers/run_builder.py</a></code>.</li>
+<li><b>Root Cause</b>: Incorrect relative path calculation in <code>oaGui/Core/context_menu.py</code>. The actual file resides in <code><a class="el" href="../../de/d24/run__builder_8py.html">oaGuiEditorWYSIWYG/Managers/run_builder.py</a></code>.</li>
 <li><b>Resolution</b>: Corrected the <code>runner_path</code> logic in <code>_show_wysiwyg_editor</code>.</li>
 <li><b>Verification</b>: Ran <code>verify_path.py</code> which confirmed the new path resolves correctly on the system.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1907"></a>
+<h1><a class="anchor" id="autotoc_md2356"></a>
 📁 Forensic Documentation</h1>
 <ul>
 <li><b>Updated Files</b>:<ul>
 <li><code><a class="el" href="../../d4/de0/button__canvas__base_8py.html">oaGui/Core/factory/button_canvas_base.py</a></code></li>
 <li><code>oaGuiElements/Core/buttons/button_toggle/button_toggle.py</code></li>
-<li><code><a class="el" href="../../d6/d5d/context__menu_8py.html">oaGui/Core/context_menu.py</a></code></li>
+<li><code>oaGui/Core/context_menu.py</code></li>
 </ul>
 </li>
 <li><b>Log <a class="el" href="../../d7/d00/namespaceEntry.html">Entry</a> Added to</b>: <code>oaDataLogs/ChangeLog/CHANGELOG.md</code> </li>

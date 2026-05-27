@@ -142,12 +142,11 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/d63/test__config_8py_source.html#l00015">15</a> of file <a class="el" href="../../dd/d63/test__config_8py_source.html">test_config.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    <span class="keyword">def </span>setUp(self):</div>
-<div class="line"><span class="lineno">   16</span>        self.test_config_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pathlib.Path</a>(<span class="stringliteral">&quot;test_config.ini&quot;</span>)</div>
+<div class="line"><span class="lineno">   16</span>        self.test_config_path = pathlib.Path(<span class="stringliteral">&quot;test_config.ini&quot;</span>)</div>
 <div class="line"><span class="lineno">   17</span>        <span class="keywordflow">if</span> self.test_config_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a>():</div>
-<div class="line"><span class="lineno">   18</span>            self.test_config_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unlink</a>()</div>
+<div class="line"><span class="lineno">   18</span>            self.test_config_path.unlink()</div>
 <div class="line"><span class="lineno">   19</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6ba751bf71957124ec1fb2c76724448b"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a></div><div class="ttdeci">exists</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">generated.rs:2407</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -170,10 +169,10 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/d63/test__config_8py_source.html#l00020">20</a> of file <a class="el" href="../../dd/d63/test__config_8py_source.html">test_config.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   20</span>    <span class="keyword">def </span>tearDown(self):</div>
 <div class="line"><span class="lineno">   21</span>        <span class="keywordflow">if</span> self.test_config_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a>():</div>
-<div class="line"><span class="lineno">   22</span>            self.test_config_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unlink</a>()</div>
+<div class="line"><span class="lineno">   22</span>            self.test_config_path.unlink()</div>
 <div class="line"><span class="lineno">   23</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>, <a class="el" href="../../dd/d63/test__config_8py_source.html#l00016">Tests.test_config.TestConfigGenerator.test_config_path</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>, and <a class="el" href="../../dd/d63/test__config_8py_source.html#l00016">Tests.test_config.TestConfigGenerator.test_config_path</a>.</p>
 
 </div>
 </div>
@@ -200,12 +199,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>        self.assertTrue(self.test_config_path.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a>(), <span class="stringliteral">&quot;config.ini was not created&quot;</span>)</div>
 <div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>        config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">configparser.ConfigParser</a>()</div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.read</a>(self.test_config_path)</div>
+<div class="line"><span class="lineno">   30</span>        config = configparser.ConfigParser()</div>
+<div class="line"><span class="lineno">   31</span>        config.read(self.test_config_path)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>        expected_sections = [<span class="stringliteral">&quot;Version&quot;</span>, <span class="stringliteral">&quot;Debug&quot;</span>, <span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;MQTT&quot;</span>, <span class="stringliteral">&quot;ScanSettings&quot;</span>, <span class="stringliteral">&quot;OSC&quot;</span>]</div>
 <div class="line"><span class="lineno">   34</span>        <span class="keywordflow">for</span> section <span class="keywordflow">in</span> expected_sections:</div>
-<div class="line"><span class="lineno">   35</span>            self.assertIn(section, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.sections</a>(), f<span class="stringliteral">&quot;Section {section} missing from config&quot;</span>)</div>
+<div class="line"><span class="lineno">   35</span>            self.assertIn(section, config.sections(), f<span class="stringliteral">&quot;Section {section} missing from config&quot;</span>)</div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>        <span class="comment"># Check some specific values</span></div>
 <div class="line"><span class="lineno">   38</span>        self.assertEqual(config[<span class="stringliteral">&quot;Version&quot;</span>][<span class="stringliteral">&quot;CURRENT_VERSION&quot;</span>], <span class="stringliteral">&quot;20260406&quot;</span>)</div>
@@ -213,7 +212,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   40</span>        self.assertEqual(config[<span class="stringliteral">&quot;ScanSettings&quot;</span>][<span class="stringliteral">&quot;scan_gateways&quot;</span>], <span class="stringliteral">&quot;True&quot;</span>)</div>
 <div class="line"><span class="lineno">   41</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>, <a class="el" href="../../dd/d63/test__config_8py_source.html#l00016">Tests.test_config.TestConfigGenerator.test_config_path</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>, and <a class="el" href="../../dd/d63/test__config_8py_source.html#l00016">Tests.test_config.TestConfigGenerator.test_config_path</a>.</p>
 
 </div>
 </div>

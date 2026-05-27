@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('d1/d9f/classCore_1_1fleet__command__ma
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abc4697509ce40014bdfa13e308991bdc" id="r_abc4697509ce40014bdfa13e308991bdc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9f/classCore_1_1fleet__command__manager_1_1CommandQueueManager.html#abc4697509ce40014bdfa13e308991bdc">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, orchestrator)</td></tr>
 <tr class="separator:abc4697509ce40014bdfa13e308991bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87d10b4c1517fa7f77556eaaeb730f14" id="r_a87d10b4c1517fa7f77556eaaeb730f14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9f/classCore_1_1fleet__command__manager_1_1CommandQueueManager.html#a87d10b4c1517fa7f77556eaaeb730f14">enqueue_command</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, serial, command, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">query</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">correlation_id</a>=&quot;N/<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">A&quot;</a>)</td></tr>
+<tr class="memitem:a87d10b4c1517fa7f77556eaaeb730f14" id="r_a87d10b4c1517fa7f77556eaaeb730f14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9f/classCore_1_1fleet__command__manager_1_1CommandQueueManager.html#a87d10b4c1517fa7f77556eaaeb730f14">enqueue_command</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, serial, command, query=False, correlation_id=&quot;N/A&quot;)</td></tr>
 <tr class="separator:a87d10b4c1517fa7f77556eaaeb730f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -176,13 +176,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>query</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></code>, </td>
+          <td class="paramname"><em>query</em> = <code>False</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>correlation_id</em> = <code>&quot;N/<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">A&quot;</a></code>&#160;</td>
+          <td class="paramname"><em>correlation_id</em> = <code>&quot;N/A&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -198,14 +198,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   15</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   16</span><span class="stringliteral">        Sends a SCPI command or query to a specific instrument by its serial number.</span></div>
 <div class="line"><span class="lineno">   17</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   18</span>        proxy = self._orchestrator.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">discovery_orchestrator.get_proxy_for_device</a>(serial)</div>
+<div class="line"><span class="lineno">   18</span>        proxy = self._orchestrator.discovery_orchestrator.get_proxy_for_device(serial)</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> proxy:</div>
-<div class="line"><span class="lineno">   20</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">proxy.enqueue_command</a>(command, query, correlation_id)</div>
+<div class="line"><span class="lineno">   20</span>            proxy.enqueue_command(command, query, correlation_id)</div>
 <div class="line"><span class="lineno">   21</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   22</span>            self._orchestrator.cb_error(serial, <span class="stringliteral">&quot;Device not found in fleet manager&quot;</span>, command)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d3c/fleet__command__manager_8py_source.html#l00012">Core.fleet_command_manager.CommandQueueManager._orchestrator</a>, <a class="el" href="../../df/d1c/fleet__inventory__manager_8py_source.html#l00012">Core.fleet_inventory_manager.InventoryManager._orchestrator</a>, <a class="el" href="../../d8/d88/fleet__scan__manager_8py_source.html#l00021">Core.fleet_scan_manager.ScanManager._orchestrator</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d3c/fleet__command__manager_8py_source.html#l00012">Core.fleet_command_manager.CommandQueueManager._orchestrator</a>, <a class="el" href="../../df/d1c/fleet__inventory__manager_8py_source.html#l00012">Core.fleet_inventory_manager.InventoryManager._orchestrator</a>, and <a class="el" href="../../d8/d88/fleet__scan__manager_8py_source.html#l00021">Core.fleet_scan_manager.ScanManager._orchestrator</a>.</p>
 
 </div>
 </div>

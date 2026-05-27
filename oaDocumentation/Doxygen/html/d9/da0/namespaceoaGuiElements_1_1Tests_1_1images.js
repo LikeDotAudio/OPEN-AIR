@@ -5,5 +5,6 @@ var namespaceoaGuiElements_1_1Tests_1_1images =
       [ "test_rendering_consistency", "d1/d30/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__background__renderings.html#a1c69348ac272ff35fccb2bcc4cbf940e", null ],
       [ "test_tiled_background_rendering", "d1/d30/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__background__renderings.html#aed31b439938cbfac4299a2c84f6b1e70", null ],
       [ "BACKGROUND_STYLES", "d1/d30/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__background__renderings.html#a6f3a54a5c4759c62e6ceab7d60e13eae", null ]
-    ] ]
+    ] ],
+    [ "test_procedural_bg_engine", "dd/d93/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine.html", "dd/d93/namespaceoaGuiElements_1_1Tests_1_1images_1_1test__procedural__bg__engine" ]
 ];

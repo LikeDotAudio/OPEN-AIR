@@ -93,39 +93,39 @@ $(document).ready(function(){initNavTree('db/dd7/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: UI Startup Crash and Protocol Dispatch AttributeError</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1774"></a> <b>Date:</b> 2026-03-14 23:45:00 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2223"></a> <b>Date:</b> 2026-03-14 23:45:00 <br  />
  <b>Priority:</b> 1 (Critical/Crash) <br  />
  <b>Status:</b> Resolved <br  />
  <b>Modules:</b> <code>managers/Display/parser/layout_parser.py</code>, <code>workers/Command_Router/MIDI/midi.py</code>, <code>workers/Command_Router/OSC/osc.py</code>, <code>workers/Command_Router/SNMP/snmp.py</code></p>
-<h1><a class="anchor" id="autotoc_md1775"></a>
+<h1><a class="anchor" id="autotoc_md2224"></a>
 Issue 1: UI Startup Crash (KeyError: 'orientation')</h1>
-<p>The application failed to launch Partition B (UI) with a &lsquo;KeyError: 'orientation&rsquo;<code>in</code>managers/Display/builder/gui_display.py`.</p>
-<h2><a class="anchor" id="autotoc_md1776"></a>
+<p>The application failed to launch Partition B (UI) with a &lsquo;KeyError: 'orientation&rsquo;<code>in</code>managers/Display/builder/engine_gui_display.py`.</p>
+<h2><a class="anchor" id="autotoc_md2225"></a>
 Root Cause</h2>
-<p>The <code>LayoutParser._parse_directory_listing</code> method (used when no <code>layout.json</code> is present) correctly identified split layouts based on directory names (e.g., <code>left_50</code>, <code>top_100</code>) but failed to inject the <code>orientation</code> key into the returned data dictionary. The UI builder expected this key to instantiate the <code>ttk.PanedWindow</code>.</p>
-<h2><a class="anchor" id="autotoc_md1777"></a>
+<p>The <code>FolderLayoutInterpreter._parse_directory_listing</code> method (used when no <code>layout.json</code> is present) correctly identified split layouts based on directory names (e.g., <code>left_50</code>, <code>top_100</code>) but failed to inject the <code>orientation</code> key into the returned data dictionary. The UI builder expected this key to instantiate the <code>ttk.PanedWindow</code>.</p>
+<h2><a class="anchor" id="autotoc_md2226"></a>
 Resolution</h2>
-<p>Updated <code>LayoutParser._parse_directory_listing</code> to include the <code>orientation</code> key (using <code>tk.HORIZONTAL</code> or <code>tk.VERTICAL</code>) in the <code>parsed_data</code> object.</p>
-<h1><a class="anchor" id="autotoc_md1778"></a>
+<p>Updated <code>FolderLayoutInterpreter._parse_directory_listing</code> to include the <code>orientation</code> key (using <code>tk.HORIZONTAL</code> or <code>tk.VERTICAL</code>) in the <code>parsed_data</code> object.</p>
+<h1><a class="anchor" id="autotoc_md2227"></a>
 Issue 2: MIDI/OSC/SNMP Dispatch Error</h1>
 <p>The CORE partition reported multiple <code>AttributeError</code> exceptions when attempting to dispatch messages via the new modularized <code>ProtocolRouter</code>. Error: &lsquo;'MidiManager&rsquo; object has no attribute 'publish'`</p>
-<h2><a class="anchor" id="autotoc_md1779"></a>
+<h2><a class="anchor" id="autotoc_md2228"></a>
 Root Cause</h2>
 <p>The modularization of <code>ProtocolRouter</code> shifted the system from a passive observer-based dispatch pattern to an explicit dispatch pattern. The new <code><a class="el" href="../../d0/d9a/dispatch_8py.html">dispatch.py</a></code> module expected transport managers to implement <code>publish</code> or <code>send</code> methods, which were missing from the legacy transport classes.</p>
-<h2><a class="anchor" id="autotoc_md1780"></a>
+<h2><a class="anchor" id="autotoc_md2229"></a>
 Resolution</h2>
 <p>Implemented the required interface methods in all transport managers:</p><ul>
 <li><b>MIDI</b>: Added <code>publish(topic, value, meta)</code> and moved outbound sync logic from the observer callback.</li>
 <li><b>OSC</b>: Added <code>send(address, value, meta)</code> and refactored outbound logic.</li>
 <li><b>SNMP</b>: Added a stub <code>publish</code> method to satisfy the router's API contract.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1781"></a>
+<h1><a class="anchor" id="autotoc_md2230"></a>
 Verification Evidence</h1>
 <ol type="1">
 <li><b>UI Fix</b>: Verified via <code>reproduce_ui_crash.py</code> that <code>parse_directory</code> now correctly includes the <code>orientation</code> key for split layouts.</li>
 <li><b>Dispatch Fix</b>: Source code audit confirms that <code><a class="el" href="../../d0/d9a/dispatch_8py.html">dispatch.py</a></code> calls now map to valid methods in all transport managers.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1782"></a>
+<h1><a class="anchor" id="autotoc_md2231"></a>
 Impact</h1>
 <p>Restores UI stability and enables bidirectional communication across all protocol bridges. </p>
 </div></div><!-- contents -->

@@ -7,6 +7,7 @@ var classaes70_1_1connection_1_1Connection =
     [ "close", "d5/da3/classaes70_1_1connection_1_1Connection.html#a3c83730cd1441a2d706bb890a16470f3", null ],
     [ "error", "d5/da3/classaes70_1_1connection_1_1Connection.html#a81e05e011d343e162bcc024c32cc6186", null ],
     [ "flush", "d5/da3/classaes70_1_1connection_1_1Connection.html#a811bd8cace818be63ca052369baf26ee", null ],
+    [ "handle_connection_closure", "d5/da3/classaes70_1_1connection_1_1Connection.html#abe00ef658ef9242dff98181c77df2a8f", null ],
     [ "incoming", "d5/da3/classaes70_1_1connection_1_1Connection.html#ac3cb2d92180a60341a1cbc80e1e6fd24", null ],
     [ "is_closed", "d5/da3/classaes70_1_1connection_1_1Connection.html#a8e9993a20ddff49f58d491c24e94480d", null ],
     [ "is_reliable", "d5/da3/classaes70_1_1connection_1_1Connection.html#a2cfa67a1cc9823120148290d5e2584c0", null ],
@@ -16,10 +17,10 @@ var classaes70_1_1connection_1_1Connection =
     [ "set_keepalive_interval", "d5/da3/classaes70_1_1connection_1_1Connection.html#a29303f96f1af1a40b3dcebe4868aa781", null ],
     [ "tx_idle_time", "d5/da3/classaes70_1_1connection_1_1Connection.html#a413a00d6e85a7b0948f04c8fcc93e388", null ],
     [ "write", "d5/da3/classaes70_1_1connection_1_1Connection.html#a4407d175ae79d4a49e5df4e9ddd6655a", null ],
-    [ "x", "d5/da3/classaes70_1_1connection_1_1Connection.html#a7519d282087ff13142f883b6fadda784", null ],
     [ "_keepalive_interval_id", "d5/da3/classaes70_1_1connection_1_1Connection.html#ac21dd7bf3c59c4a34981a9fde1271ae2", null ],
     [ "_message_generator", "d5/da3/classaes70_1_1connection_1_1Connection.html#afd1e9808660959ecf1c473a16ac82069", null ],
     [ "batchSize", "d5/da3/classaes70_1_1connection_1_1Connection.html#a822cf3578f327bc9896cb5cdaa507bbb", null ],
+    [ "handle_connection_closure", "d5/da3/classaes70_1_1connection_1_1Connection.html#ade586060432ce11c4a681ab8ae276b5e", null ],
     [ "inbuf", "d5/da3/classaes70_1_1connection_1_1Connection.html#a987aafe8bc9eef084d2c144ccfdd40a4", null ],
     [ "inpos", "d5/da3/classaes70_1_1connection_1_1Connection.html#a9fc2d9e81f9c8f3a85260ac623ed10c2", null ],
     [ "keepalive_interval", "d5/da3/classaes70_1_1connection_1_1Connection.html#a37c0abb5a4a144557d74ca99b3b9a4e9", null ],
@@ -27,6 +28,5 @@ var classaes70_1_1connection_1_1Connection =
     [ "last_tx_time", "d5/da3/classaes70_1_1connection_1_1Connection.html#a99bf415ea20f3e516e12e6ae0adfc511", null ],
     [ "options", "d5/da3/classaes70_1_1connection_1_1Connection.html#a09791803c7990903cf1a6b798bcaac5b", null ],
     [ "rx_bytes", "d5/da3/classaes70_1_1connection_1_1Connection.html#a652d65b317eb696b502f09a769fb74c1", null ],
-    [ "tx_bytes", "d5/da3/classaes70_1_1connection_1_1Connection.html#aafdfa430daa65f707c198ca61d5ade01", null ],
-    [ "x", "d5/da3/classaes70_1_1connection_1_1Connection.html#af32279efa4876fe0c15c2008f17fbf7b", null ]
+    [ "tx_bytes", "d5/da3/classaes70_1_1connection_1_1Connection.html#aafdfa430daa65f707c198ca61d5ade01", null ]
 ];

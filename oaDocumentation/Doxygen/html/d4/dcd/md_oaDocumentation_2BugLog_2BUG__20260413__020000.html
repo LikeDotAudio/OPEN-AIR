@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d4/dcd/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260413_020000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1387"></a> </p>
-<h1><a class="anchor" id="autotoc_md1388"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1652"></a> </p>
+<h1><a class="anchor" id="autotoc_md1653"></a>
 1. Research, Clustering &amp; Identification</h1>
-<h2><a class="anchor" id="autotoc_md1389"></a>
+<h2><a class="anchor" id="autotoc_md1654"></a>
 Error Clusters:</h2>
 <ol type="1">
 <li><b>Cluster 1</b>: <code>[REST] Uvicorn failed to start on 0.0.0.0:44868. Error: 1</code><ul>
@@ -105,33 +105,33 @@ Error Clusters:</h2>
 </ul>
 </li>
 <li><b>Cluster 2</b>: <code>Tkinter Exception: IndexError: tuple index out of range</code><ul>
-<li>Target: <code>oaGui.Interface.ui_window</code> &amp; <code><a class="el" href="../../db/da7/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Core_1_1knob__renderer.html">oaGuiElements.Core.Knobs.knob.Core.knob_renderer</a></code></li>
+<li>Target: <code>oaGui.Interface.viewport.tab_physical_window</code> &amp; <code>oaGuiElements.Core.Knobs.knob.Core.knob_renderer</code></li>
 <li>Trigger: Drawing knob visuals (<code>create_polygon</code>).</li>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1390"></a>
+<h2><a class="anchor" id="autotoc_md1655"></a>
 Root Causes:</h2>
 <ul>
-<li><b>REST Port Collision</b>: Uvicorn's server exits with <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SystemExit(1)</a></code> if the port is busy, bypassing the standard <code>OSError</code> catch and resulting in an ambiguous <code>Error: 1</code> string.</li>
+<li><b>REST Port Collision</b>: Uvicorn's server exits with <code>SystemExit(1)</code> if the port is busy, bypassing the standard <code>OSError</code> catch and resulting in an ambiguous <code>Error: 1</code> string.</li>
 <li><b>Tkinter Missing Geometry</b>: If the <code>oaRustCore</code> module fails to load (e.g., FFI broken or uncompiled), the fallback <code>RotaryCore</code> was returning <code>[]</code>. This caused the geometry to be missing completely, producing an <code>IndexError</code> when Tkinter <code>_flatten</code> resolved the coordinates list to <code>()</code>.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1392"></a>
+<h1><a class="anchor" id="autotoc_md1657"></a>
 2. Plan of Action</h1>
 <ol type="1">
-<li><b>Fix Rest Uvicorn Worker</b>: Update <code><a class="el" href="../../d5/ddc/uvicorn__worker_8py.html">uvicorn_worker.py</a></code> to capture <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SystemExit(1)</a></code> directly to log a <code>logger.warning</code> for Port Collisions instead of treating it as a generic crash.</li>
+<li><b>Fix Rest Uvicorn Worker</b>: Update <code><a class="el" href="../../d5/ddc/uvicorn__worker_8py.html">uvicorn_worker.py</a></code> to capture <code>SystemExit(1)</code> directly to log a <code>logger.warning</code> for Port Collisions instead of treating it as a generic crash.</li>
 <li><b>Fix Rotary <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a></b>: Edit <code><a class="el" href="../../d0/d0c/rotary__core_8py.html">oaGuiElements/Methods/rotary_core.py</a></code> to provide a Python math fallback (generating correct <code>math.sin</code> and <code>math.cos</code> points) for <code>get_poly_points</code> and <code>get_gear_points</code> when the high-performance Rust core is uncompiled or unavailable.</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1394"></a>
+<h1><a class="anchor" id="autotoc_md1659"></a>
 3. Iterative Implementation &amp; Verification</h1>
 <ul>
 <li>✅ Wrote Tkinter testing scripts (<code>tmp_runner_tkinter.py</code>) that successfully reproduced the <code>IndexError</code> on Tkinter polygon creation with empty and nested empty point sets.</li>
 <li>✅ Found the point generator (<code>RotaryCore</code> returning <code>[]</code> on Rust failure).</li>
 <li>✅ Implemented the Python fallback to emit proper <code>float</code> point arrays.</li>
-<li>✅ Updated the Uvicorn handler (<code><a class="el" href="../../d5/ddc/uvicorn__worker_8py.html">uvicorn_worker.py</a></code>) to classify <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SystemExit(1)</a></code> as a known binding issue.</li>
-<li>✅ Wrote to <code><a class="el" href="../../d3/d02/CHANGELOG_8md.html">CHANGELOG.md</a></code>.</li>
+<li>✅ Updated the Uvicorn handler (<code><a class="el" href="../../d5/ddc/uvicorn__worker_8py.html">uvicorn_worker.py</a></code>) to classify <code>SystemExit(1)</code> as a known binding issue.</li>
+<li>✅ Wrote to <code>CHANGELOG.md</code>.</li>
 </ul>
 <p>All issues identified in <code>errors_202604130148.log</code> are mitigated via graceful error handling and fallback generation. </p>
 </div></div><!-- contents -->

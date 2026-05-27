@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('d4/d2b/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0045_2</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1275"></a> </p>
-<h1><a class="anchor" id="autotoc_md1276"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1540"></a> </p>
+<h1><a class="anchor" id="autotoc_md1541"></a>
 Issue</h1>
 <p>ImportError: cannot import name 'PILLARS' from 'oaGui.Methods.schema_utils'</p>
-<h1><a class="anchor" id="autotoc_md1277"></a>
+<h1><a class="anchor" id="autotoc_md1542"></a>
 Root Cause</h1>
-<p>Invalid import attempt for constants/classes that were moved or non-existent in <code><a class="el" href="../../dd/db6/schema__utils_8py.html">oaGui/Methods/schema_utils.py</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md1278"></a>
+<p>Invalid import attempt for constants/classes that were moved or non-existent in <code>oaGui/Methods/schema_utils.py</code>.</p>
+<h1><a class="anchor" id="autotoc_md1543"></a>
 Resolution</h1>
 <ul>
-<li>Corrected imports in <code><a class="el" href="../../d1/de0/widget__schema__normalizer_8py.html">oaGui/Core/widget_schema_normalizer.py</a></code> to pull from <code>oaGui/Constants/schema_defaults</code> and <code>oaGui/Core/standardizers/widget_type_resolver</code>.</li>
+<li>Corrected imports in <code>oaGui/Core/widget_schema_normalizer.py</code> to pull from <code>oaGui/Constants/schema_defaults</code> and <code>oaGui/Core/standardizers/widget_type_resolver</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1279"></a>
+<h1><a class="anchor" id="autotoc_md1544"></a>
 Verification</h1>
 <ul>
 <li>Analyzed import paths to ensure resolution matches current architecture. </li>

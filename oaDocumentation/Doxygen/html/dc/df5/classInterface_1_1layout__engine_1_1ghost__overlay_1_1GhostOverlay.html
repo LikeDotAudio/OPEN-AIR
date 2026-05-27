@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('dc/df5/classInterface_1_1layout__engin
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aab529f497b1c80349fb90559b44e1ee9" id="r_aab529f497b1c80349fb90559b44e1ee9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/df5/classInterface_1_1layout__engine_1_1ghost__overlay_1_1GhostOverlay.html#aab529f497b1c80349fb90559b44e1ee9">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:aab529f497b1c80349fb90559b44e1ee9" id="r_aab529f497b1c80349fb90559b44e1ee9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/df5/classInterface_1_1layout__engine_1_1ghost__overlay_1_1GhostOverlay.html#aab529f497b1c80349fb90559b44e1ee9">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent, **kwargs)</td></tr>
 <tr class="separator:aab529f497b1c80349fb90559b44e1ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0af14b940252b959989ca160c5d36919" id="r_a0af14b940252b959989ca160c5d36919"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/df5/classInterface_1_1layout__engine_1_1ghost__overlay_1_1GhostOverlay.html#a0af14b940252b959989ca160c5d36919">clear</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a0af14b940252b959989ca160c5d36919"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,17 +175,14 @@ Decouples visual Designer feedback from live GUI component logic.
 <div class="line"><span class="lineno">   16</span>        <span class="comment"># ⚡ PERFORMANCE: Use borderless, highlight-free canvas</span></div>
 <div class="line"><span class="lineno">   17</span>        <span class="comment"># Attempt to inherit background for pseudo-transparency</span></div>
 <div class="line"><span class="lineno">   18</span>        bg = <span class="stringliteral">&quot;#2b2b2b&quot;</span></div>
-<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">try</span>: bg = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parent.cget</a>(<span class="stringliteral">&quot;bg&quot;</span>)</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">try</span>: bg = parent.cget(<span class="stringliteral">&quot;bg&quot;</span>)</div>
 <div class="line"><span class="lineno">   20</span>        <span class="keywordflow">except</span>: <span class="keywordflow">pass</span></div>
-<div class="line"><span class="lineno">   21</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super</a>().__init__(parent, highlightthickness=0, bd=0, bg=bg, **kwargs)</div>
+<div class="line"><span class="lineno">   21</span>        super().__init__(parent, highlightthickness=0, bd=0, bg=bg, **kwargs)</div>
 <div class="line"><span class="lineno">   22</span>        self.active_ghost = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   23</span>        self.handles = []</div>
 <div class="line"><span class="lineno">   24</span>        self.guides = []</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>

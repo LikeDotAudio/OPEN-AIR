@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('d9/d59/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BugLog Entry: 20260413_141500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1395"></a> </p>
-<h1><a class="anchor" id="autotoc_md1396"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1660"></a> </p>
+<h1><a class="anchor" id="autotoc_md1661"></a>
 Issue Summary</h1>
 <p>Audit of <code>oaRustCore/src</code> for "Bad Comments" and formatting violations revealed a systemic absence of mandatory <code>Description</code> fields in module headers across 58 files. Additionally, the audit report identified instances of mechanistic or obsolete comments (though some were already removed or displaced in the current codebase).</p>
-<h1><a class="anchor" id="autotoc_md1397"></a>
+<h1><a class="anchor" id="autotoc_md1662"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Documentation Rot</b>: Rapid development of PyO3 extensions led to inconsistent application of the OPEN-AIR mandatory header standard.</li>
 <li><b>Mechanistic Documentation</b>: Some comments described <em>how</em> code worked (e.g., silencing a warning) rather than <em>why</em> the architectural choice was made.</li>
 <li><b>Redundant Artifacts</b>: Legacy regex patterns and TODOs were left in comments rather than being moved to dedicated tracking systems.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1398"></a>
+<h1><a class="anchor" id="autotoc_md1663"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Header Standardization</b>: Applied the mandatory 4-line header (FolderName/FileName, Author, Version, Description) to all 58 <code>.rs</code> files in <code>oaRustCore/src</code>.</li>
@@ -112,7 +112,7 @@ Resolution</h1>
 <li><b>Comment Refactoring</b>: Added an architectural "Why" comment to <code>oa_logging_gate_rs</code> regarding unused parameters to replace a missing/mechanistic explanation.</li>
 <li><b>Header Validation</b>: Verified that all <code>mod.rs</code> files now contain the <code>// Description:</code> field.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1399"></a>
+<h1><a class="anchor" id="autotoc_md1664"></a>
 Verification Evidence</h1>
 <ul>
 <li><b>Grep Audit</b>: <code>grep -L "// Description:" oaRustCore/src/**/*.rs</code> returns 0 files.</li>

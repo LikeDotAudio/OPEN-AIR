@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('d1/d56/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Recursive Splinker Feedback Loop</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1609"></a> </p>
-<h1><a class="anchor" id="autotoc_md1610"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2058"></a> </p>
+<h1><a class="anchor" id="autotoc_md2059"></a>
 Issue</h1>
 <p><b>User Complaint</b>: The Splinker works for a second but then enters a feedback loop. Suggestion: add a lock to prevent this feedback. <b>Log Files</b>: <code>Application_20260311_2311.log</code>, <code>Application_20260311_2314.log</code></p>
-<h1><a class="anchor" id="autotoc_md1611"></a>
+<h1><a class="anchor" id="autotoc_md2060"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>Bootstrap Failure</b>: A <code>RuntimeError: cannot set daemon status of active thread</code> in <code>protocol_router.py</code> caused the <code>ThreadPoolExecutor</code> to fail during initialization.</li>
@@ -105,13 +105,13 @@ Root Cause</h1>
 <li><b>Loop Prevention Bypass</b>: Without the Protocol Router's structured metadata enrichment and the Splinker's full management logic, events were bouncing back and forth through the MQTT broker without the <code>splink_active</code> tags, bypassing the initial timestamp-based loop prevention.</li>
 <li><b>Recursive Re-entry</b>: Even when active, a Splink could potentially trigger itself if the transformation (e.g., scaling) resulted in a value change that triggered the same Splink again before the first process completed.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1612"></a>
+<h1><a class="anchor" id="autotoc_md2061"></a>
 Investigation</h1>
 <ul>
 <li><b>Logs</b>: Identified <code>BrokenThreadPool: A thread initializer failed</code> in the bootstrap logs.</li>
 <li><b>Code Review</b>: Analyzed <code><a class="el" href="../../d4/df1/process__router__event_8py.html">process_router_event.py</a></code> and confirmed that while it had timestamp-based caching, it lacked an execution lock to prevent immediate re-entry within the same thread/partition.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1613"></a>
+<h1><a class="anchor" id="autotoc_md2062"></a>
 Resolution</h1>
 <ol type="1">
 <li><b><a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Fix</b>: Resolved the <code>RuntimeError</code> in <code>protocol_router.py</code> to ensure the Protocol Router and its thread pool always start correctly (Fixed in previous task).</li>
@@ -122,7 +122,7 @@ Resolution</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1614"></a>
+<h1><a class="anchor" id="autotoc_md2063"></a>
 Verification</h1>
 <ul>
 <li><b>Test Case</b>: Simulated a high-frequency bidirectional Splink where scaling <code>X -&gt; Y</code> and <code>Y -&gt; X</code> occurred.</li>

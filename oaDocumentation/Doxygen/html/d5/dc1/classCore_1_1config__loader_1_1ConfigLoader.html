@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d5/dc1/classCore_1_1config__loader_1_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a14759adbc7cd618fbb9589eb473b028d" id="r_a14759adbc7cd618fbb9589eb473b028d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dc1/classCore_1_1config__loader_1_1ConfigLoader.html#a14759adbc7cd618fbb9589eb473b028d">load</a> (config_path, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setup_path</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">local_debug</a>=True)</td></tr>
+<tr class="memitem:a14759adbc7cd618fbb9589eb473b028d" id="r_a14759adbc7cd618fbb9589eb473b028d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dc1/classCore_1_1config__loader_1_1ConfigLoader.html#a14759adbc7cd618fbb9589eb473b028d">load</a> (config_path, setup_path, local_debug=True)</td></tr>
 <tr class="separator:a14759adbc7cd618fbb9589eb473b028d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -148,29 +148,26 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/ddc/config__loader_8py_source.html#l00020">20</a> of file <a class="el" href="../../d1/ddc/config__loader_8py_source.html">config_loader.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   20</span>    <span class="keyword">def </span>load(config_path, setup_path, local_debug=True):</div>
-<div class="line"><span class="lineno">   21</span>        config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">configparser.ConfigParser</a>()</div>
+<div class="line"><span class="lineno">   21</span>        config = configparser.ConfigParser()</div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_path.exists</a>():</div>
-<div class="line"><span class="lineno">   24</span>            <span class="keywordflow">if</span> local_debug: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(f<span class="stringliteral">&quot;📜 config.ini not found at {config_path}. Recreating...&quot;</span>)</div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> config_path.exists():</div>
+<div class="line"><span class="lineno">   24</span>            <span class="keywordflow">if</span> local_debug: logger.debug(f<span class="stringliteral">&quot;📜 config.ini not found at {config_path}. Recreating...&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   26</span>                create_default_config_ini(config_path)</div>
-<div class="line"><span class="lineno">   27</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setup_path.exists</a>():</div>
-<div class="line"><span class="lineno">   28</span>                    <span class="keywordflow">if</span> local_debug: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.info</a>(<span class="stringliteral">&quot;🚀 Launching Setup.py...&quot;</span>)</div>
-<div class="line"><span class="lineno">   29</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>([<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.executable</a>, str(setup_path)], check=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   27</span>                <span class="keywordflow">if</span> setup_path.exists():</div>
+<div class="line"><span class="lineno">   28</span>                    <span class="keywordflow">if</span> local_debug: logger.info(<span class="stringliteral">&quot;🚀 Launching Setup.py...&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>                    subprocess.run([sys.executable, str(setup_path)], check=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   30</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   31</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ Failed to initialize config or setup: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>                logger.error(f<span class="stringliteral">&quot;❌ Failed to initialize config or setup: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span>                <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   35</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.read</a>(config_path)</div>
+<div class="line"><span class="lineno">   35</span>            config.read(config_path)</div>
 <div class="line"><span class="lineno">   36</span>            <span class="keywordflow">return</span> config</div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   38</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ Failed to read config.ini: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span>            logger.error(f<span class="stringliteral">&quot;❌ Failed to read config.ini: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

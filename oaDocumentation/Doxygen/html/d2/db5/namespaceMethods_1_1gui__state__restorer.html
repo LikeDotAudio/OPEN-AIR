@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d2/db5/namespaceMethods_1_1gui__state_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acf6c5c5e5158f8d347e2a45b388b7d54" id="r_acf6c5c5e5158f8d347e2a45b388b7d54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/db5/namespaceMethods_1_1gui__state__restorer.html#acf6c5c5e5158f8d347e2a45b388b7d54">restore_timeline</a> (dict[str, Any] <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cache_data</a>, Any state_mirror_engine)</td></tr>
+<tr class="memitem:acf6c5c5e5158f8d347e2a45b388b7d54" id="r_acf6c5c5e5158f8d347e2a45b388b7d54"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/db5/namespaceMethods_1_1gui__state__restorer.html#acf6c5c5e5158f8d347e2a45b388b7d54">restore_timeline</a> (dict[str, Any] cache_data, Any state_mirror_engine)</td></tr>
 <tr class="separator:acf6c5c5e5158f8d347e2a45b388b7d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -119,7 +119,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a> Methods.gui_state_restorer.restore_timeline </td>
+          <td class="memname"> None Methods.gui_state_restorer.restore_timeline </td>
           <td>(</td>
           <td class="paramtype">dict[str, Any]&#160;</td>
           <td class="paramname"><em>cache_data</em>, </td>
@@ -137,69 +137,57 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Iterate through the cache_data.
-Trigger the specific GUI update methods in display (or via the state_mirror if accessible)
-to visually set the knobs/labels/graphs.
+<pre class="fragment">Iterate through the cache_data in batches using the GUI event loop.
+This prevents the main thread from locking up and allows the UI to remain responsive.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00032">32</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span><span class="keyword">def </span>restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -&gt; <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">   33</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   34</span><span class="stringliteral">    Iterate through the cache_data.</span></div>
-<div class="line"><span class="lineno">   35</span><span class="stringliteral">    Trigger the specific GUI update methods in display (or via the state_mirror if accessible)</span></div>
-<div class="line"><span class="lineno">   36</span><span class="stringliteral">    to visually set the knobs/labels/graphs.</span></div>
-<div class="line"><span class="lineno">   37</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   38</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;⏪ Restoring State.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> state_mirror_engine:</div>
-<div class="line"><span class="lineno">   40</span>        <span class="comment"># Use debug instead of error to reduce noise during early boot partitions</span></div>
-<div class="line"><span class="lineno">   41</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(<span class="stringliteral">&quot;⏪ℹ️ State Mirror Engine not available for restoration (skipping GUI replay).&quot;</span>)</div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;⏪ Restoring GUI state from cache.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   46</span>        <span class="keyword">import</span> orjson</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">for</span> topic, payload <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cache_data.items</a>():</div>
-<div class="line"><span class="lineno">   48</span>            <span class="comment"># ⚡ OPTIMIZATION: Extract &#39;value&#39; for cleaner replaying logs</span></div>
-<div class="line"><span class="lineno">   49</span>            val_str = <span class="stringliteral">&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   51</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(payload, (str, bytes)):</div>
-<div class="line"><span class="lineno">   52</span>                    data = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.loads</a>(payload)</div>
-<div class="line"><span class="lineno">   53</span>                <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   54</span>                    data = payload <span class="comment"># Already parsed/dict</span></div>
-<div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, dict) <span class="keywordflow">and</span> <span class="stringliteral">&quot;value&quot;</span> <span class="keywordflow">in</span> data:</div>
-<div class="line"><span class="lineno">   57</span>                    val_str = f<span class="stringliteral">&quot; Val={data[&#39;value&#39;]}&quot;</span></div>
-<div class="line"><span class="lineno">   58</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   59</span>                <span class="comment"># ⚡ VOCAL: Cosmetic failure (just for cleaner logging), so trace is sufficient</span></div>
-<div class="line"><span class="lineno">   60</span>                matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;Cosmetic: Failed to extract &#39;value&#39; for replaying log: {e}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;⏪🔄 Topic=&#39;{topic}&#39;{val_str}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
-<div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>            <span class="comment"># ⚡ V3.1.22 RECURSION GUARD (RESTORE PHASE):</span></div>
-<div class="line"><span class="lineno">   65</span>            <span class="comment"># Skip topics that have recursive protocol segments (corrupted paths).</span></div>
-<div class="line"><span class="lineno">   66</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(x + <span class="stringliteral">&quot;/&quot;</span> + x + <span class="stringliteral">&quot;/&quot;</span> <span class="keywordflow">in</span> str(topic) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> [<span class="stringliteral">&quot;OSC&quot;</span>, <span class="stringliteral">&quot;MIDI&quot;</span>, <span class="stringliteral">&quot;GUI&quot;</span>, <span class="stringliteral">&quot;oaGui&quot;</span>, <span class="stringliteral">&quot;MQTT&quot;</span>]):</div>
-<div class="line"><span class="lineno">   67</span>                matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;restore_timeline&quot;</span>, f<span class="stringliteral">&quot;🛡️ [GUARD] Skipping corrupted recursive topic: {topic}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   68</span>                <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>            <span class="comment"># ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility</span></div>
-<div class="line"><span class="lineno">   71</span>            <span class="comment"># Only process valid functional state topics (Exclude System/Monitor/Heartbeat)</span></div>
-<div class="line"><span class="lineno">   72</span>            volatile = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(x <span class="keywordflow">in</span> str(topic) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> [<span class="stringliteral">&quot;/System/&quot;</span>, <span class="stringliteral">&quot;/Monitor/&quot;</span>, <span class="stringliteral">&quot;/Heartbeat/&quot;</span>])</div>
-<div class="line"><span class="lineno">   73</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.startswith</a>(<span class="stringliteral">&quot;OPEN-AIR/&quot;</span>) <span class="keywordflow">and</span> <span class="keywordflow">not</span> volatile:</div>
-<div class="line"><span class="lineno">   74</span>                message = MqttMessage(topic=topic, payload=payload)</div>
-<div class="line"><span class="lineno">   75</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_mirror_engine.sync_incoming_mqtt_to_gui</a>(message)</div>
-<div class="line"><span class="lineno">   76</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   77</span>                <span class="comment"># Log or handle non-functional data if necessary</span></div>
-<div class="line"><span class="lineno">   78</span>                matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;Skipping non-functional topic in cache: {topic}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>            <span class="comment"># ⚡ STABILITY: Replaying state directly into the GUI is expensive (redraws, reslices).</span></div>
-<div class="line"><span class="lineno">   81</span>            <span class="comment"># Throttle to 2ms per message to prevent overwhelming the main thread.</span></div>
-<div class="line"><span class="lineno">   82</span>            <span class="keyword">import</span> time</div>
-<div class="line"><span class="lineno">   83</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.sleep</a>(0.002)</div>
-<div class="line"><span class="lineno">   84</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;⏪✅ Timeline restored!&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">except</span> Exception:</div>
-<div class="line"><span class="lineno">   86</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(<span class="stringliteral">&quot;⏪❌ Error restoring timeline&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00029">29</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   29</span><span class="keyword">def </span>restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -&gt; <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">   30</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   31</span><span class="stringliteral">    Iterate through the cache_data in batches using the GUI event loop.</span></div>
+<div class="line"><span class="lineno">   32</span><span class="stringliteral">    This prevents the main thread from locking up and allows the UI to remain responsive.</span></div>
+<div class="line"><span class="lineno">   33</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> state_mirror_engine:</div>
+<div class="line"><span class="lineno">   35</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;restore_timeline&quot;</span>, <span class="stringliteral">&quot;⏪ℹ️ State Mirror Engine not available for restoration.&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;restore_timeline&quot;</span>, f<span class="stringliteral">&quot;⏪ Starting state restoration ({len(cache_data)} topics).&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>    items = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(cache_data.items())</div>
+<div class="line"><span class="lineno">   41</span>    batch_size = 50</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>    <span class="keyword">def </span>process_batch(start_idx):</div>
+<div class="line"><span class="lineno">   44</span>        end_idx = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(start_idx + batch_size, <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(items))</div>
+<div class="line"><span class="lineno">   45</span>        batch = items[start_idx:end_idx]</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">for</span> topic, payload <span class="keywordflow">in</span> batch:</div>
+<div class="line"><span class="lineno">   48</span>            <span class="comment"># ⚡ V3.1.22 RECURSION GUARD:</span></div>
+<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">if</span> any(x + <span class="stringliteral">&quot;/&quot;</span> + x + <span class="stringliteral">&quot;/&quot;</span> <span class="keywordflow">in</span> str(topic) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> [<span class="stringliteral">&quot;OSC&quot;</span>, <span class="stringliteral">&quot;MIDI&quot;</span>, <span class="stringliteral">&quot;GUI&quot;</span>, <span class="stringliteral">&quot;oaGui&quot;</span>, <span class="stringliteral">&quot;MQTT&quot;</span>]):</div>
+<div class="line"><span class="lineno">   50</span>                <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">   51</span> </div>
+<div class="line"><span class="lineno">   52</span>            volatile = any(x <span class="keywordflow">in</span> str(topic) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> [<span class="stringliteral">&quot;/System/&quot;</span>, <span class="stringliteral">&quot;/Monitor/&quot;</span>, <span class="stringliteral">&quot;/Heartbeat/&quot;</span>])</div>
+<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">if</span> topic.startswith(<span class="stringliteral">&quot;OPEN-AIR/&quot;</span>) <span class="keywordflow">and</span> <span class="keywordflow">not</span> volatile:</div>
+<div class="line"><span class="lineno">   54</span>                message = MqttMessage(topic=topic, payload=payload)</div>
+<div class="line"><span class="lineno">   55</span>                state_mirror_engine.sync_incoming_mqtt_to_gui(message)</div>
+<div class="line"><span class="lineno">   56</span> </div>
+<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">if</span> end_idx &lt; <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(items):</div>
+<div class="line"><span class="lineno">   58</span>            <span class="comment"># Schedule next batch</span></div>
+<div class="line"><span class="lineno">   59</span>            <span class="keywordflow">if</span> hasattr(state_mirror_engine, <span class="stringliteral">&quot;root&quot;</span>) <span class="keywordflow">and</span> state_mirror_engine.root:</div>
+<div class="line"><span class="lineno">   60</span>                state_mirror_engine.root.after(1, <span class="keyword">lambda</span>: process_batch(end_idx))</div>
+<div class="line"><span class="lineno">   61</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   62</span>                <span class="comment"># Headless/fallback: sync process with tiny sleep</span></div>
+<div class="line"><span class="lineno">   63</span>                <span class="keyword">import</span> time</div>
+<div class="line"><span class="lineno">   64</span>                time.sleep(0.01)</div>
+<div class="line"><span class="lineno">   65</span>                process_batch(end_idx)</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   67</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;restore_timeline&quot;</span>, <span class="stringliteral">&quot;⏪✅ Timeline restoration complete.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>    <span class="comment"># Launch initial batch</span></div>
+<div class="line"><span class="lineno">   70</span>    process_batch(0)</div>
+<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a4735a0c4d1b11f62ea44115d54a93087"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a></div><div class="ttdeci">repeat min</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">generated.rs:2081</a></div></div>
+<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
+<div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>.</p>
 
 </div>
 </div>
@@ -216,7 +204,7 @@ to visually set the knobs/labels/graphs.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00017">17</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00014">14</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
 
 </div>
 </div>
@@ -232,7 +220,7 @@ to visually set the knobs/labels/graphs.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00019">19</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00016">16</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
 
 </div>
 </div>
@@ -248,7 +236,7 @@ to visually set the knobs/labels/graphs.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00020">20</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html#l00017">17</a> of file <a class="el" href="../../d6/d13/gui__state__restorer_8py_source.html">gui_state_restorer.py</a>.</p>
 
 </div>
 </div>

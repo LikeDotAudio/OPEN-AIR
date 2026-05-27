@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('da/d2d/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260403_013000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1221"></a> </p>
-<h1><a class="anchor" id="autotoc_md1222"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1486"></a> </p>
+<h1><a class="anchor" id="autotoc_md1487"></a>
 Issue: Indentation Errors and Repetitive MQTT Processing Failures</h1>
-<p>The system was reporting multiple <code>IndentationError</code>s during module loading for <code><a class="el" href="../../da/dbb/yak__monitor_8py.html">yak_monitor.py</a></code> and <code><a class="el" href="../../da/d10/Showtime_8py.html">Showtime.py</a></code> (via <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code>). Additionally, <code>oaStateCache</code> was reporting repetitive failures when handling MQTT messages for specific topics, and the system was experiencing intermittent <code>Code -11</code> (Segment Fault) crashes.</p>
-<h1><a class="anchor" id="autotoc_md1223"></a>
+<p>The system was reporting multiple <code>IndentationError</code>s during module loading for <code>yak_monitor.py</code> and <code><a class="el" href="../../da/d10/Showtime_8py.html">Showtime.py</a></code> (via <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code>). Additionally, <code>oaStateCache</code> was reporting repetitive failures when handling MQTT messages for specific topics, and the system was experiencing intermittent <code>Code -11</code> (Segment Fault) crashes.</p>
+<h1><a class="anchor" id="autotoc_md1488"></a>
 Root Cause Analysis</h1>
 <ol type="1">
-<li><b>Syntax Errors</b>: <code><a class="el" href="../../da/dbb/yak__monitor_8py.html">yak_monitor.py</a></code> had an empty <code>if</code> block followed by unindented imports. <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code> had multiple blocks within a loop that were over-indented, likely due to a copy-paste or refactoring error.</li>
+<li><b>Syntax Errors</b>: <code>yak_monitor.py</code> had an empty <code>if</code> block followed by unindented imports. <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code> had multiple blocks within a loop that were over-indented, likely due to a copy-paste or refactoring error.</li>
 <li><b>Generic Error Catching</b>: <code>oaStateCache</code> caught all exceptions during MQTT handling but only logged a generic message without a traceback, masking the actual failure (likely related to payload format or Rust extension interaction).</li>
 <li><b>Unprotected Serialization</b>: <code>ProtocolRouter</code>'s MQTT dispatcher was calling <code>orjson.dumps</code> without error protection, which can cause segment faults if it encounters recursive objects or hits depth limits in certain environments.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1224"></a>
+<h1><a class="anchor" id="autotoc_md1489"></a>
 Resolution</h1>
 <ol type="1">
-<li><b>Fixed Indentation</b>: Properly structured the <code>if str(root_path) not in sys.path</code> block in <code><a class="el" href="../../da/dbb/yak__monitor_8py.html">yak_monitor.py</a></code> and aligned the text processing logic in <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code>.</li>
+<li><b>Fixed Indentation</b>: Properly structured the <code>if str(root_path) not in sys.path</code> block in <code>yak_monitor.py</code> and aligned the text processing logic in <code><a class="el" href="../../d5/d9c/from__soundbase__pdf__v2_8py.html">from_soundbase_pdf_v2.py</a></code>.</li>
 <li><b>Forensic Enhancement</b>: Updated <code>handle_incoming_mqtt</code> in <code>oaStateCache</code> to log full tracebacks using <code>traceback.format_exc()</code>.</li>
 <li><b>Robust Dispatch</b>: Wrapped MQTT payload serialization in a <code>try-except</code> block to prevent crashes from invalid data structures.</li>
-<li><b>Log Noise Reduction</b>: Updated <code>ModuleLoader</code> to skip GUI class warnings for gatekeeper and test files.</li>
+<li><b>Log Noise Reduction</b>: Updated <code>LoaderFacade</code> to skip GUI class warnings for gatekeeper and test files.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1225"></a>
+<h1><a class="anchor" id="autotoc_md1490"></a>
 Verification Evidence</h1>
 <ul>
 <li><b>Syntax Check</b>: All fixed files passed <code>python3 -m py_compile</code>.</li>

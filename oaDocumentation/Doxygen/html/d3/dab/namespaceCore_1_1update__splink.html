@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d3/dab/namespaceCore_1_1update__splink
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afaa9b12ffdf5e77eacf4dfadefedcc22" id="r_afaa9b12ffdf5e77eacf4dfadefedcc22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dab/namespaceCore_1_1update__splink.html#afaa9b12ffdf5e77eacf4dfadefedcc22">update_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink_id</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">new_data</a>)</td></tr>
+<tr class="memitem:afaa9b12ffdf5e77eacf4dfadefedcc22" id="r_afaa9b12ffdf5e77eacf4dfadefedcc22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dab/namespaceCore_1_1update__splink.html#afaa9b12ffdf5e77eacf4dfadefedcc22">update_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splink_id, new_data)</td></tr>
 <tr class="separator:afaa9b12ffdf5e77eacf4dfadefedcc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -143,16 +143,15 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d5/d5e/update__splink_8py_source.html#l00010">10</a> of file <a class="el" href="../../d5/d5e/update__splink_8py_source.html">update_splink.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   10</span><span class="keyword">def </span>update_splink(self, splink_id, new_data):</div>
 <div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;Updates an existing splink with new configuration.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">for</span> i, s <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(self.splinks):</div>
+<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">for</span> i, s <span class="keywordflow">in</span> enumerate(self.splinks):</div>
 <div class="line"><span class="lineno">   13</span>        <span class="keywordflow">if</span> s[<span class="stringliteral">&quot;id&quot;</span>] == splink_id:</div>
 <div class="line"><span class="lineno">   14</span>            self.splinks[i].update(new_data)</div>
 <div class="line"><span class="lineno">   15</span>            self.save_splink(self.splinks[i])</div>
 <div class="line"><span class="lineno">   16</span>            log_message = f<span class="stringliteral">&quot;🔗 Splinker: Splink {splink_id} Updated.&quot;</span></div>
 <div class="line"><span class="lineno">   17</span>            <span class="keywordflow">if</span> Splinker_debug_enabled:</div>
-<div class="line"><span class="lineno">   18</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(log_message)</div>
+<div class="line"><span class="lineno">   18</span>                splinker_logger.info(log_message)</div>
 <div class="line"><span class="lineno">   19</span>                self.notify_monitor(<span class="stringliteral">&quot;debug_log&quot;</span>, log_message)</div>
 <div class="line"><span class="lineno">   20</span>            <span class="keywordflow">return</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

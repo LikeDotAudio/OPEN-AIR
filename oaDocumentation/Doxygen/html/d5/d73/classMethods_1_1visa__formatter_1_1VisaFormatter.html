@@ -104,7 +104,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad06915609bdcb27894495981486854f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13203eb520128c3cc89ce766febae64a" id="r_a13203eb520128c3cc89ce766febae64a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d73/classMethods_1_1visa__formatter_1_1VisaFormatter.html#a13203eb520128c3cc89ce766febae64a">format_bool</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str cmd, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>)</td></tr>
 <tr class="separator:a13203eb520128c3cc89ce766febae64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e47f52b2e8c1d43a0136bd81213a1fc" id="r_a5e47f52b2e8c1d43a0136bd81213a1fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d73/classMethods_1_1visa__formatter_1_1VisaFormatter.html#a5e47f52b2e8c1d43a0136bd81213a1fc">format_command</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str cmd, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>)</td></tr>
+<tr class="memitem:a5e47f52b2e8c1d43a0136bd81213a1fc" id="r_a5e47f52b2e8c1d43a0136bd81213a1fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d73/classMethods_1_1visa__formatter_1_1VisaFormatter.html#a5e47f52b2e8c1d43a0136bd81213a1fc">format_command</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str cmd, float <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>)</td></tr>
 <tr class="separator:a5e47f52b2e8c1d43a0136bd81213a1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -136,13 +136,10 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d4/d9f/visa__formatter_8py_source.html#l00018">18</a> of file <a class="el" href="../../d4/d9f/visa__formatter_8py_source.html">visa_formatter.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>__init__(self):</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   20</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;💳🛠️🔗 [VISA] Using Rust formatter.&quot;</span>)</div>
-<div class="line"><span class="lineno">   21</span>        self._formatter = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustVisaFormatter</a>() <span class="keywordflow">if</span> HAS_RUST_VISA <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   20</span>            print(<span class="stringliteral">&quot;💳🛠️🔗 [VISA] Using Rust formatter.&quot;</span>)</div>
+<div class="line"><span class="lineno">   21</span>        self._formatter = RustVisaFormatter() <span class="keywordflow">if</span> HAS_RUST_VISA <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -209,7 +206,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a>&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>

@@ -93,31 +93,30 @@ $(document).ready(function(){initNavTree('db/dd9/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260402_003500.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1060"></a></p>
-<h1><a class="anchor" id="autotoc_md1061"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1325"></a></p>
+<h1><a class="anchor" id="autotoc_md1326"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1062"></a>
+<h1><a class="anchor" id="autotoc_md1327"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1063"></a>
+<h1><a class="anchor" id="autotoc_md1328"></a>
 Issue: IndentationError in gui_OSC.py prevents loading of the OSC Dashboard.</h1>
-<h2><a class="anchor" id="autotoc_md1064"></a>
+<h2><a class="anchor" id="autotoc_md1329"></a>
 🔍 ISSUE DESCRIPTION</h2>
 <p>The GUI Builder failed to load the OSC dashboard module due to an <code>IndentationError</code> at line 37 of <code>gui_OSC.py</code>. This was caused by an empty <code>if</code> statement intended for project root path injection.</p>
-<h2><a class="anchor" id="autotoc_md1065"></a>
+<h2><a class="anchor" id="autotoc_md1330"></a>
 🛠️ ROOT CAUSE</h2>
-<p>Malformed path guard logic: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> str(root_path) <span class="keywordflow">not</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.path</a>:</div>
-<div class="line"><span class="keyword">import</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComProtocols.oaComOSC.Entry</a> <span class="keyword">as</span> OSC_MODULE</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p>Malformed path guard logic: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> str(root_path) <span class="keywordflow">not</span> <span class="keywordflow">in</span> sys.path:</div>
+<div class="line"><span class="keyword">import</span> oaComProtocols.oaComOSC.Entry <span class="keyword">as</span> OSC_MODULE</div>
 </div><!-- fragment --><p> The <code>sys.path.insert</code> call was missing, leaving the <code>if</code> statement without an indented block.</p>
-<h2><a class="anchor" id="autotoc_md1066"></a>
+<h2><a class="anchor" id="autotoc_md1331"></a>
 🚀 RESOLUTION</h2>
 <p>Surgically added the missing <code>sys.path.insert(0, str(root_path))</code> call and properly indented it.</p>
-<h2><a class="anchor" id="autotoc_md1067"></a>
+<h2><a class="anchor" id="autotoc_md1332"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
 <li><b>Syntax Check</b>: <code>python3 -m py_compile oaGui/Assets/Assets/right_50/bottom_90/55_OSC/gui_OSC.py</code> returned success (exit code 0).</li>
-<li><b>Module Loader</b>: The module can now be executed and imported by the <code>ModuleLoader</code> without syntax errors. </li>
+<li><b>Module Loader</b>: The module can now be executed and imported by the <code>LoaderFacade</code> without syntax errors. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

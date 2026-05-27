@@ -37,7 +37,7 @@ class MDNSListener:
         ]
 
     def remove_service(self, zeroconf, type, name):
-        topic = f"OPEN-AIR/MDNS/Removed/{name.split('.')[0]}"
+        topic = f"OpenAir/MDNS/Removed/{name.split('.')[0]}"
         payload = {
             "action": "removed",
             "type": type,
@@ -96,7 +96,7 @@ class MDNSListener:
             self.known_services[name] = payload_hash
 
             # Topic differentiates by the first part of the service name (e.g., "MyRavennaDevice")
-            topic = f"OPEN-AIR/MDNS/Discovered/{name.split('.')[0]}"
+            topic = f"OpenAir/MDNS/Discovered/{name.split('.')[0]}"
             print(f"📈 [MDNS] Discovered/Updated: {name} ({type}) at {addresses}:{info.port}") # Enhanced print statement
             if self.rx_callback:
                 # Pass 'name' as source and 'type' as summary for better differentiation in the GUI

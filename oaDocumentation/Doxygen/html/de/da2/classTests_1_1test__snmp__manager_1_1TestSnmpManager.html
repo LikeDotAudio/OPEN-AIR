@@ -304,17 +304,16 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>        <span class="comment"># OPERATE: Patch SnmpTester to avoid subprocess execution</span></div>
 <div class="line"><span class="lineno">   98</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&quot;oaComProtocols.oaComSNMP.Workers.snmp_tester.SnmpTester.verify_oid_tree&quot;</span>) <span class="keyword">as</span> mock_tester:</div>
-<div class="line"><span class="lineno">   99</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_tester.return_value</a> = <span class="stringliteral">&quot;SUCCESS&quot;</span></div>
+<div class="line"><span class="lineno">   99</span>            mock_tester.return_value = <span class="stringliteral">&quot;SUCCESS&quot;</span></div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>            output = self.bridge.run_verification(mib_path=test_mib)</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span>            <span class="comment"># CHECK</span></div>
-<div class="line"><span class="lineno">  104</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_tester.assert_called_once_with</a>(base_oid=self.bridge.base_oid, mib_path=test_mib)</div>
+<div class="line"><span class="lineno">  104</span>            mock_tester.assert_called_once_with(base_oid=self.bridge.base_oid, mib_path=test_mib)</div>
 <div class="line"><span class="lineno">  105</span>            self.assertEqual(output, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><span class="lineno">  106</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d2e/nmos__manager_8py_source.html#l00019">Managers.nmos_manager.NmosManager.bridge</a>, <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00034">Tests.test_snmp_manager.TestSnmpManager.bridge</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d2e/nmos__manager_8py_source.html#l00019">Managers.nmos_manager.NmosManager.bridge</a>, and <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00034">Tests.test_snmp_manager.TestSnmpManager.bridge</a>.</p>
 
 </div>
 </div>
@@ -341,13 +340,13 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   77</span>        self.bridge._publish_status()</div>
 <div class="line"><span class="lineno">   78</span> </div>
 <div class="line"><span class="lineno">   79</span>        <span class="comment"># CHECK: Verify publication to system status tree via native client</span></div>
-<div class="line"><span class="lineno">   80</span>        self.mock_mqtt_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.assert_called</a>()</div>
+<div class="line"><span class="lineno">   80</span>        self.mock_mqtt_client.publish.assert_called()</div>
 <div class="line"><span class="lineno">   81</span> </div>
 <div class="line"><span class="lineno">   82</span>        found = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">for</span> call <span class="keywordflow">in</span> self.mock_mqtt_client.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.call_args_list</a>:</div>
+<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">for</span> call <span class="keywordflow">in</span> self.mock_mqtt_client.publish.call_args_list:</div>
 <div class="line"><span class="lineno">   84</span>            args, kwargs = call</div>
 <div class="line"><span class="lineno">   85</span>            <span class="comment"># Handle positional or keyword &#39;topic&#39;</span></div>
-<div class="line"><span class="lineno">   86</span>            topic = args[0] <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(args) &gt; 0 <span class="keywordflow">else</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&#39;topic&#39;</span>)</div>
+<div class="line"><span class="lineno">   86</span>            topic = args[0] <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(args) &gt; 0 <span class="keywordflow">else</span> kwargs.get(<span class="stringliteral">&#39;topic&#39;</span>)</div>
 <div class="line"><span class="lineno">   87</span>            <span class="keywordflow">if</span> topic == <span class="stringliteral">&quot;OPEN-AIR/System/Status/SNMP/Bridge&quot;</span>:</div>
 <div class="line"><span class="lineno">   88</span>                found = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   89</span>                <span class="keywordflow">break</span></div>
@@ -355,7 +354,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   91</span> </div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d2e/nmos__manager_8py_source.html#l00019">Managers.nmos_manager.NmosManager.bridge</a>, <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00034">Tests.test_snmp_manager.TestSnmpManager.bridge</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00021">Tests.test_snmp_manager.TestSnmpManager.mock_mqtt_client</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d2e/nmos__manager_8py_source.html#l00019">Managers.nmos_manager.NmosManager.bridge</a>, <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00034">Tests.test_snmp_manager.TestSnmpManager.bridge</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d3/d5e/test__snmp__manager_8py_source.html#l00021">Tests.test_snmp_manager.TestSnmpManager.mock_mqtt_client</a>.</p>
 
 </div>
 </div>

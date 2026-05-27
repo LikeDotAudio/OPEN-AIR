@@ -119,11 +119,11 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a6888e2685272ce20e2126061e3e37073" id="r_a6888e2685272ce20e2126061e3e37073"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#a6888e2685272ce20e2126061e3e37073">payload</a> | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytes</a> | dict[str, Any] | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>[Any]</td></tr>
+<tr class="memitem:a6888e2685272ce20e2126061e3e37073" id="r_a6888e2685272ce20e2126061e3e37073"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#a6888e2685272ce20e2126061e3e37073">payload</a> | bytes | dict[str, Any] | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>[Any]</td></tr>
 <tr class="separator:a6888e2685272ce20e2126061e3e37073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4dc1c74a147a60843f38b72c232d025" id="r_af4dc1c74a147a60843f38b72c232d025"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#af4dc1c74a147a60843f38b72c232d025">qos</a> = 0</td></tr>
 <tr class="separator:af4dc1c74a147a60843f38b72c232d025"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf250229a6561041d807466429740533" id="r_acf250229a6561041d807466429740533"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#acf250229a6561041d807466429740533">retain</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:acf250229a6561041d807466429740533" id="r_acf250229a6561041d807466429740533"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#acf250229a6561041d807466429740533">retain</a> = False</td></tr>
 <tr class="separator:acf250229a6561041d807466429740533"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6893291ef644fb0d95c6d7925299da27" id="r_a6893291ef644fb0d95c6d7925299da27"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dbd/classCore_1_1mqtt__message_1_1MqttMessage.html#a6893291ef644fb0d95c6d7925299da27">topic</a></td></tr>
 <tr class="separator:a6893291ef644fb0d95c6d7925299da27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,17 +158,16 @@ Frozen to ensure immutability as it passes through the system.
 <div class="line"><span class="lineno">   26</span><span class="stringliteral">        Helper to ensure payload is a string.</span></div>
 <div class="line"><span class="lineno">   27</span><span class="stringliteral">        ⚡ STABILITY: Uses a tiered fallback for non-UTF-8 byte sequences.</span></div>
 <div class="line"><span class="lineno">   28</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(self.payload, bytes):</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> isinstance(self.payload, bytes):</div>
 <div class="line"><span class="lineno">   30</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   31</span>                <span class="keywordflow">return</span> self.payload.decode(<span class="stringliteral">&quot;utf-8&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span>            <span class="keywordflow">except</span> UnicodeDecodeError:</div>
 <div class="line"><span class="lineno">   33</span>                <span class="comment"># Fallback to latin-1 which accepts all byte values</span></div>
 <div class="line"><span class="lineno">   34</span>                <span class="keywordflow">return</span> self.payload.decode(<span class="stringliteral">&quot;latin-1&quot;</span>)</div>
-<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(self.payload, (dict, list)):</div>
-<div class="line"><span class="lineno">   36</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(self.payload).decode(<span class="stringliteral">&quot;utf-8&quot;</span>)</div>
+<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">if</span> isinstance(self.payload, (dict, list)):</div>
+<div class="line"><span class="lineno">   36</span>            <span class="keywordflow">return</span> orjson.dumps(self.payload).decode(<span class="stringliteral">&quot;utf-8&quot;</span>)</div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> str(self.payload)</div>
 <div class="line"><span class="lineno">   38</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 <p class="reference">Referenced by <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00039">Core.mqtt_message.MqttMessage.get_json_payload()</a>.</p>
 
@@ -193,18 +192,18 @@ Frozen to ensure immutability as it passes through the system.
 <p class="definition">Definition at line <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00039">39</a> of file <a class="el" href="../../d2/d63/mqtt__message_8py_source.html">mqtt_message.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   39</span>    <span class="keyword">def </span>get_json_payload(self) -&gt; dict[str, Any] | list[Any]:</div>
 <div class="line"><span class="lineno">   40</span>        <span class="stringliteral">&quot;&quot;&quot;Helper to ensure payload is a dictionary or list (parsed JSON).&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   41</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(self.payload, (dict, list)):</div>
+<div class="line"><span class="lineno">   41</span>        <span class="keywordflow">if</span> isinstance(self.payload, (dict, list)):</div>
 <div class="line"><span class="lineno">   42</span>            <span class="keywordflow">return</span> self.payload</div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span>        decoded = self.decode_payload()</div>
 <div class="line"><span class="lineno">   45</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.loads</a>(decoded)</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">except</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.JSONDecodeError</a>:</div>
+<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">return</span> orjson.loads(decoded)</div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">except</span> orjson.JSONDecodeError:</div>
 <div class="line"><span class="lineno">   48</span>            <span class="comment"># Fallback for non-JSON payloads</span></div>
 <div class="line"><span class="lineno">   49</span>            <span class="keywordflow">return</span> {<span class="stringliteral">&quot;value&quot;</span>: decoded}</div>
 <div class="line"><span class="lineno">   50</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00024">Core.mqtt_message.MqttMessage.decode_payload()</a>, <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00020">Core.mqtt_message.MqttMessage.payload</a>, <a class="el" href="../../dd/d59/core__models_8py_source.html#l00122">IS07.core_models.EventCore.payload</a>, <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00025">Tests.demo_smpte2138.MockMqttMessage.payload</a>, <a class="el" href="../../d7/d2f/test__ptp__parser__rust_8py_source.html#l00018">Tests.test_ptp_parser_rust.MockPkt.payload</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00024">Core.mqtt_message.MqttMessage.decode_payload()</a>, <a class="el" href="../../d2/d63/mqtt__message_8py_source.html#l00020">Core.mqtt_message.MqttMessage.payload</a>, <a class="el" href="../../dd/d59/core__models_8py_source.html#l00122">IS07.core_models.EventCore.payload</a>, <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00025">Tests.demo_smpte2138.MockMqttMessage.payload</a>, and <a class="el" href="../../d7/d2f/test__ptp__parser__rust_8py_source.html#l00018">Tests.test_ptp_parser_rust.MockPkt.payload</a>.</p>
 
 </div>
 </div>
@@ -247,7 +246,7 @@ Frozen to ensure immutability as it passes through the system.
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">str Core.mqtt_message.MqttMessage.payload | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytes</a> | dict[str, Any] | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>[Any]</td>
+          <td class="memname">str Core.mqtt_message.MqttMessage.payload | bytes | dict[str, Any] | <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>[Any]</td>
         </tr>
       </table>
   </td>
@@ -331,7 +330,7 @@ Frozen to ensure immutability as it passes through the system.
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Core.mqtt_message.MqttMessage.retain = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> Core.mqtt_message.MqttMessage.retain = False</td>
         </tr>
       </table>
   </td>

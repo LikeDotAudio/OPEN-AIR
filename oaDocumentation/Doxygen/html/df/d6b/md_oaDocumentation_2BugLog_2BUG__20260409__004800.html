@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('df/d6b/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BugLog Entry: 20260409_004800</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1331"></a> </p>
-<h1><a class="anchor" id="autotoc_md1332"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1596"></a> </p>
+<h1><a class="anchor" id="autotoc_md1597"></a>
 Issue Summary</h1>
 <p><a class="el" href="../../df/da7/namespaceTests.html">Tests</a> for <code>oaAudioMixer</code> failed with &lsquo;ModuleNotFoundError: No module named 'oaaudiomixer_rs&rsquo;`. This occurred even after the module was manually compiled, because the test runner was likely executing in a context where the site-packages or environment paths were not synchronized, and the test script itself lacked the automatic compilation hook.</p>
-<h1><a class="anchor" id="autotoc_md1333"></a>
+<h1><a class="anchor" id="autotoc_md1598"></a>
 Root Cause Analysis</h1>
-<p>The test file <code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">oaAudioMixer/Tests/test_mixer_smoke.py</a></code> imported <code>oaaudiomixer_rs</code> directly without ensuring the module was compiled and installed in the current environment. While <code>Entry.py</code> included the <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ensure_compiled()</a></code> hook, direct execution of the test bypassed this safety check.</p>
-<h1><a class="anchor" id="autotoc_md1334"></a>
+<p>The test file <code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">oaAudioMixer/Tests/test_mixer_smoke.py</a></code> imported <code>oaaudiomixer_rs</code> directly without ensuring the module was compiled and installed in the current environment. While <code>Entry.py</code> included the <code>ensure_compiled()</code> hook, direct execution of the test bypassed this safety check.</p>
+<h1><a class="anchor" id="autotoc_md1599"></a>
 Resolution</h1>
-<p>Modified <code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">oaAudioMixer/Tests/test_mixer_smoke.py</a></code> to include the <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ensure_compiled()</a></code> hook call from the module's <code>compiler_hook.py</code> before attempting to import the native extension. This ensures that the test remains self-sufficient and reliable across different execution environments.</p>
-<h1><a class="anchor" id="autotoc_md1335"></a>
+<p>Modified <code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">oaAudioMixer/Tests/test_mixer_smoke.py</a></code> to include the <code>ensure_compiled()</code> hook call from the module's <code>compiler_hook.py</code> before attempting to import the native extension. This ensures that the test remains self-sufficient and reliable across different execution environments.</p>
+<h1><a class="anchor" id="autotoc_md1600"></a>
 Verification Evidence</h1>
 <ul>
 <li><b>Test Run</b>: Ran <code>/home/anthony/.venv/bin/python <a class="el" href="../../dd/d31/oaAudioMixer_2Entry_8py.html">oaAudioMixer/Entry.py</a></code> which successfully discovered and executed <code><a class="el" href="../../df/d73/test__mixer__smoke_8py.html">test_mixer_smoke.py</a></code>.</li>

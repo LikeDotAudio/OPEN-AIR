@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d2/df0/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log - 20260415_222400</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1435"></a> <b>Module</b>: <code>oaStateCache</code>, <code>oaGui</code> <b>Priority</b>: 1 (Critical) <b>Status</b>: Resolved</p>
-<h1><a class="anchor" id="autotoc_md1436"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1700"></a> <b>Module</b>: <code>oaStateCache</code>, <code>oaGui</code> <b>Priority</b>: 1 (Critical) <b>Status</b>: Resolved</p>
+<h1><a class="anchor" id="autotoc_md1701"></a>
 Description</h1>
 <p>A large number of "Deferred build error" messages were identified in the UI bootstrap sequence. Investigation revealed two primary root causes:</p><ol type="1">
 <li>&lsquo;AttributeError: 'NoneType&rsquo; object has no attribute 'trace_add'<code>in</code>StateMirrorEngine.register_widget<code>. 2.</code>ModuleNotFoundError: No module named 'oaGuiElements.Core.graphing.plot_widget_adapter'` during widget creation.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1437"></a>
+<h1><a class="anchor" id="autotoc_md1702"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>AttributeError</b>: Some complex widgets (like <code>JsonTree</code>) do not use a standard <code>tk.Variable</code> for state management and pass <code>None</code> to the registration system. The engine was assuming a variable was always present.</li>
 <li><b>ModuleNotFoundError</b>: The <code><a class="el" href="../../d3/d4b/plot__widget__adapter_8py.html">plot_widget_adapter.py</a></code> file was moved to a <code>Methods/</code> subdirectory, but the factory mapping in <code>oaGui</code> was still using the old path.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1438"></a>
+<h1><a class="anchor" id="autotoc_md1703"></a>
 Fix Applied</h1>
 <ol type="1">
-<li><b>StateMirrorEngine</b>: Added a conditional check <code>if tk_variable:</code> before calling <code>.<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">trace_add()</a></code>.</li>
+<li><b>StateMirrorEngine</b>: Added a conditional check <code>if tk_variable:</code> before calling <code>.trace_add()</code>.</li>
 <li><b>Factory Mapping</b>: Updated <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">oaGui/Core/factory/Core/factory_mapping.py</a></code> to use the correct absolute path: <code><a class="el" href="../../dc/d3b/namespaceoaGuiElements_1_1Core_1_1graphing_1_1Methods_1_1plot__widget__adapter.html">oaGuiElements.Core.graphing.Methods.plot_widget_adapter</a></code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1439"></a>
+<h1><a class="anchor" id="autotoc_md1704"></a>
 Verification Results</h1>
 <ul>
 <li><b>Reproduction Script (StateMirror)</b>: Confirmed that <code>register_widget</code> now handles <code>None</code> variables gracefully.</li>

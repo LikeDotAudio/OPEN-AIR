@@ -108,12 +108,12 @@ $(document).ready(function(){initNavTree('d1/ddf/classoaGuiElements_1_1Core_1_1t
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7fda5fdea72131ea4f8002df6e719a7e" id="r_a7fda5fdea72131ea4f8002df6e719a7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a7fda5fdea72131ea4f8002df6e719a7e">make_text_label_from_config</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent_widget, config_data, WidgetContext context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a7fda5fdea72131ea4f8002df6e719a7e" id="r_a7fda5fdea72131ea4f8002df6e719a7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a7fda5fdea72131ea4f8002df6e719a7e">make_text_label_from_config</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, parent_widget, config_data, WidgetContext context=None, **kwargs)</td></tr>
 <tr class="separator:a7fda5fdea72131ea4f8002df6e719a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a46e89cef6fafba0e9bb7fcf8229baee5" id="r_a46e89cef6fafba0e9bb7fcf8229baee5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a46e89cef6fafba0e9bb7fcf8229baee5">make</a> (parent_widget, config_data, context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a46e89cef6fafba0e9bb7fcf8229baee5" id="r_a46e89cef6fafba0e9bb7fcf8229baee5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a46e89cef6fafba0e9bb7fcf8229baee5">make</a> (parent_widget, config_data, context=None, **kwargs)</td></tr>
 <tr class="separator:a46e89cef6fafba0e9bb7fcf8229baee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -147,7 +147,7 @@ from a configuration dictionary.
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -171,11 +171,8 @@ from a configuration dictionary.
 <p class="definition">Definition at line <a class="el" href="../../da/d2d/text__label__from__config_8py_source.html#l00039">39</a> of file <a class="el" href="../../da/d2d/text__label__from__config_8py_source.html">text_label_from_config.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   39</span>    <span class="keyword">def </span>make(parent_widget, config_data, context=None, **kwargs):</div>
 <div class="line"><span class="lineno">   40</span>        creator = BuilderTextLabelFromConfigCreator()</div>
-<div class="line"><span class="lineno">   41</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">creator.make_text_label_from_config</a>(parent_widget, config_data, context, **kwargs)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   41</span>        <span class="keywordflow">return</span> creator.make_text_label_from_config(parent_widget, config_data, context, **kwargs)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a7fda5fdea72131ea4f8002df6e719a7e" name="a7fda5fdea72131ea4f8002df6e719a7e"></a>
@@ -206,7 +203,7 @@ from a configuration dictionary.
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">WidgetContext &#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -225,16 +222,14 @@ from a configuration dictionary.
 <p class="definition">Definition at line <a class="el" href="../../da/d2d/text__label__from__config_8py_source.html#l00029">29</a> of file <a class="el" href="../../da/d2d/text__label__from__config_8py_source.html">text_label_from_config.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    <span class="keyword">def </span>make_text_label_from_config(self, parent_widget, config_data, context: WidgetContext = <span class="keywordtype">None</span>, **kwargs):</div>
 <div class="line"><span class="lineno">   30</span>        <span class="stringliteral">&quot;&quot;&quot;Standardized factory wrapper for creating label widgets.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   31</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;🔬🏗️🔡 [BUILDER] Entering make_text_label_from_config&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;🔬🏗️🔡 [BUILDER] Entering make_text_label_from_config&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>        <span class="comment"># ⚡ PROXY: Directly call the standardized implementation</span></div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment"># Uses the static make method of the concrete label creator</span></div>
-<div class="line"><span class="lineno">   35</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;🔄🚀🔡 [PROXY] Routing label creation to BuilderTextLabelCreator.make&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
-<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">BuilderTextLabelCreator.make</a>(parent_widget, config_data, context=context, **kwargs)</div>
+<div class="line"><span class="lineno">   35</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;🔄🚀🔡 [PROXY] Routing label creation to BuilderTextLabelCreator.make&quot;</span>, level=<span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">return</span> BuilderTextLabelCreator.make(parent_widget, config_data, context=context, **kwargs)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

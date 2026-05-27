@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('d9/d84/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG_20260409_004700.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1324"></a></p>
-<h1><a class="anchor" id="autotoc_md1325"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1589"></a></p>
+<h1><a class="anchor" id="autotoc_md1590"></a>
 Author: Gemini (Collaborator)</h1>
-<h1><a class="anchor" id="autotoc_md1326"></a>
+<h1><a class="anchor" id="autotoc_md1591"></a>
 Version: 1.0.0</h1>
-<h2><a class="anchor" id="autotoc_md1327"></a>
+<h2><a class="anchor" id="autotoc_md1592"></a>
 Issue</h2>
 <p>MIDI tests were being skipped with the message: <code>Skipping real MIDI test in safety mode</code> because <code>OPEN_AIR_SKIP_REAL_MIDI</code> was set to <code>"1"</code> by default in the <code>TestRunner</code>.</p>
-<h2><a class="anchor" id="autotoc_md1328"></a>
+<h2><a class="anchor" id="autotoc_md1593"></a>
 Root Cause</h2>
 <ul>
 <li>The <code>setUp</code> methods in MIDI test files (<code><a class="el" href="../../dd/d35/test__midi_8py.html">test_midi.py</a></code>, <code><a class="el" href="../../d3/d99/test__midi__tx_8py.html">test_midi_tx.py</a></code>, <code><a class="el" href="../../d4/de0/test__midi__standalone_8py.html">test_midi_standalone.py</a></code>) explicitly checked for <code>OPEN_AIR_SKIP_REAL_MIDI == "1"</code> and called <code>self.skipTest()</code>.</li>
 <li>However, these tests already used <code>unittest.mock</code> to simulate MIDI hardware, making them safe to run even without real drivers or hardware.</li>
 <li><code>MidiManager._midi_listen_loop</code> also had a safety exit that prevented <code>test_monitor_notification_no_mqtt</code> from executing its logic.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1329"></a>
+<h2><a class="anchor" id="autotoc_md1594"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Test Modification</b>: Removed <code>skipTest</code> calls from <code>setUp</code> in all MIDI test files.</li>
 <li><b><a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Logic Adjustment</b>: Removed the premature safety exit from <code>MidiManager._midi_listen_loop</code>. The loop is now safe to run with mocked ports.</li>
 <li><b>Safety Maintenance</b>: <code>MIDIPortController</code> still honors the <code>OPEN_AIR_SKIP_REAL_MIDI</code> flag, ensuring that no real hardware discovery or port opening occurs if the flag is set.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1330"></a>
+<h2><a class="anchor" id="autotoc_md1595"></a>
 Verification Evidence</h2>
 <ul>
 <li>Ran <code>verify_midi_fix.py</code> which executes the tests with <code>OPEN_AIR_SKIP_REAL_MIDI=1</code>.</li>

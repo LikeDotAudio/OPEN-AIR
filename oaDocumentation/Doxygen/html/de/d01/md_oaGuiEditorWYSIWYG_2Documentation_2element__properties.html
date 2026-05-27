@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('de/d01/md_oaGuiEditorWYSIWYG_2Document
   <div class="headertitle"><div class="title">🏷️ Element Properties</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2843"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md2844"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md3123"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md3124"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md2845"></a>
+<h2><a class="anchor" id="autotoc_md3125"></a>
 File Level</h2>
 <p>Interface/Tabs/ElementProperties/element_properties.py</p>
 <p>The Element Properties Workspace. Provides a high-level UI for adjusting parameters of the focused element. Recursively displays all JSON properties on a single page with collapsible sections.</p>
 <p>Author: Gemini CLI</p>
-<h1><a class="anchor" id="autotoc_md2846"></a>
+<h1><a class="anchor" id="autotoc_md3126"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md2847"></a>
+<h1><a class="anchor" id="autotoc_md3127"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md2848"></a>
+<h2><a class="anchor" id="autotoc_md3128"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md2849"></a>
+<h3><a class="anchor" id="autotoc_md3129"></a>
 &lt;tt&gt;class AutoScrollbar&lt;/tt&gt;</h3>
 <p>A scrollbar that hides itself when it's not needed.</p>
-<h4><a class="anchor" id="autotoc_md2850"></a>
+<h4><a class="anchor" id="autotoc_md3130"></a>
 &lt;tt&gt;set(self, lo, hi)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -124,10 +124,10 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md2851"></a>
+<h3><a class="anchor" id="autotoc_md3131"></a>
 &lt;tt&gt;class ElementProperties&lt;/tt&gt;</h3>
 <p>A dedicated workspace for editing the properties of a selected element.</p>
-<h4><a class="anchor" id="autotoc_md2852"></a>
+<h4><a class="anchor" id="autotoc_md3132"></a>
 &lt;tt&gt;__init__(self, parent, *args, **kwargs)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -141,7 +141,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2853"></a>
+<h4><a class="anchor" id="autotoc_md3133"></a>
 &lt;tt&gt;_on_destroy(self, event)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -153,7 +153,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2854"></a>
+<h4><a class="anchor" id="autotoc_md3134"></a>
 &lt;tt&gt;_on_state_updated(self, json_data, source)&lt;/tt&gt;</h4>
 <p>Keep properties in sync if JSON changed elsewhere, but don't force a full redraw if we are the source.</p>
 <p><b>Parameters:</b></p><ul>
@@ -166,7 +166,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2855"></a>
+<h4><a class="anchor" id="autotoc_md3135"></a>
 &lt;tt&gt;_request_debounced_refresh(self, delay)&lt;/tt&gt;</h4>
 <p>Schedules a full properties rebuild after a delay to prevent flickering during rapid editing.</p>
 <p><b>Parameters:</b></p><ul>
@@ -178,7 +178,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2856"></a>
+<h4><a class="anchor" id="autotoc_md3136"></a>
 &lt;tt&gt;_on_focus_requested(self, path, source)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -191,7 +191,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2857"></a>
+<h4><a class="anchor" id="autotoc_md3137"></a>
 &lt;tt&gt;_refresh_content(self)&lt;/tt&gt;</h4>
 <p>Redraws the entire property tree for the focused element.</p>
 <p><b>Parameters:</b></p><ul>
@@ -203,7 +203,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2858"></a>
+<h4><a class="anchor" id="autotoc_md3138"></a>
 &lt;tt&gt;_deep_merge_for_display(self, template, actual)&lt;/tt&gt;</h4>
 <p>Creates a merged dictionary containing all template keys and all actual keys.</p>
 <p><b>Parameters:</b></p><ul>
@@ -216,7 +216,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2859"></a>
+<h4><a class="anchor" id="autotoc_md3139"></a>
 &lt;tt&gt;_build_ui(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -228,7 +228,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2860"></a>
+<h4><a class="anchor" id="autotoc_md3140"></a>
 &lt;tt&gt;_delete_focused_element(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -240,7 +240,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2861"></a>
+<h4><a class="anchor" id="autotoc_md3141"></a>
 &lt;tt&gt;_render_header_actions(self)&lt;/tt&gt;</h4>
 <p>Renders element-level actions at the top of the properties list.</p>
 <p><b>Parameters:</b></p><ul>
@@ -252,7 +252,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2862"></a>
+<h4><a class="anchor" id="autotoc_md3142"></a>
 &lt;tt&gt;_render_alignment_quick_tools(self, data, container)&lt;/tt&gt;</h4>
 <p>Specialized UI for L R C T B alignment mapping to 'layout.align'.</p>
 <p><b>Parameters:</b></p><ul>
@@ -265,7 +265,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2863"></a>
+<h4><a class="anchor" id="autotoc_md3143"></a>
 &lt;tt&gt;_render_sticky_quick_tools(self, data, container)&lt;/tt&gt;</h4>
 <p>Specialized UI for NSEW sticky (Stretching).</p>
 <p><b>Parameters:</b></p><ul>
@@ -278,7 +278,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2864"></a>
+<h4><a class="anchor" id="autotoc_md3144"></a>
 &lt;tt&gt;_update_tool_highlights(self, align_str, stretch_str, align_btns, sticky_buttons)&lt;/tt&gt;</h4>
 <p>Helper to sync button colors without a full re-render.</p>
 <p><b>Parameters:</b></p><ul>
@@ -293,7 +293,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2865"></a>
+<h4><a class="anchor" id="autotoc_md3145"></a>
 &lt;tt&gt;_render_missing_library_properties(self, data)&lt;/tt&gt;</h4>
 <p>No longer used directly as main pass now proactive, but keeping for standalone adds.</p>
 <p><b>Parameters:</b></p><ul>
@@ -305,7 +305,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2866"></a>
+<h4><a class="anchor" id="autotoc_md3146"></a>
 &lt;tt&gt;_render_recursive_properties(self, data, parent, prefix, depth, actual_data)&lt;/tt&gt;</h4>
 <p>Recursively renders all properties with collapsible headers and structural controls.</p>
 <p><b>Parameters:</b></p><ul>
@@ -321,7 +321,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2867"></a>
+<h4><a class="anchor" id="autotoc_md3147"></a>
 &lt;tt&gt;_move_out(self, path)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -333,7 +333,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2868"></a>
+<h4><a class="anchor" id="autotoc_md3148"></a>
 &lt;tt&gt;_move_in(self, path)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -345,7 +345,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md2869"></a>
+<h4><a class="anchor" id="autotoc_md3149"></a>
 &lt;tt&gt;_render_leaf_editor(self, key, value, parent, full_path, is_virtual)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -361,7 +361,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2870"></a>
+<h1><a class="anchor" id="autotoc_md3150"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

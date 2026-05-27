@@ -29,7 +29,7 @@ class TestMidiTx(unittest.TestCase):
         mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
 
-        topic = "OPEN-AIR/MIDI/my_device/ch0/cc7"
+        topic = "OpenAir/MIDI/my_device/ch0/cc7"
         value = {"value": 127}
 
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
@@ -49,7 +49,7 @@ class TestMidiTx(unittest.TestCase):
         mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
 
-        topic = "OPEN-AIR/MIDI/my_device/ch2/note60"
+        topic = "OpenAir/MIDI/my_device/ch2/note60"
         value = 100
 
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):

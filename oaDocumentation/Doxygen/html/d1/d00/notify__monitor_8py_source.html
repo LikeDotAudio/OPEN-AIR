@@ -111,11 +111,10 @@ $(document).ready(function(){initNavTree('d1/d00/notify__monitor_8py_source.html
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../da/da3/namespaceCore_1_1notify__monitor.html#a56a2793e2efc2a0d9e25c0be23849bd2">   10</a></span><span class="keyword">def </span>notify_monitor(self, message_type, data):</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordflow">for</span> cb <span class="keywordflow">in</span> self._monitor_callbacks:</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cb</a>(message_type, data)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            cb(message_type, data)</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.error</a>(f<span class="stringliteral">&quot;Splinker monitor callback error: {e}&quot;</span>)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            splinker_logger.error(f<span class="stringliteral">&quot;Splinker monitor callback error: {e}&quot;</span>)</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespaceConstants_1_1constants_html"><div class="ttname"><a href="../../d3/d59/namespaceConstants_1_1constants.html">Constants.constants</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d60/oaSplinker_2Constants_2constants_8py_source.html#l00001">constants.py:1</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

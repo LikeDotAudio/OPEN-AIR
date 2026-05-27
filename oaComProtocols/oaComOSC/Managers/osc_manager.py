@@ -120,7 +120,7 @@ class OSCManager:
                 if not self._running: break
 
             status = self.get_status()
-            topic = "OPEN-AIR/System/Status/OSC/Bridge"
+            topic = "OpenAir/System/Status/OSC/Bridge"
 
             if self.state_cache_manager and hasattr(self.state_cache_manager, 'handle_external_update'):
                 self.state_cache_manager.handle_external_update(topic, status, source="OSC-STATUS")
@@ -229,7 +229,7 @@ class OSCManager:
                 "client_id": f"OSC-CORE-{app_constants.FULL_INSTANCE_ID[:8]}"
             }
             if self.mqtt_transport.connect(connection_params):
-                self.mqtt_transport.subscribe("OPEN-AIR/#")
+                self.mqtt_transport.subscribe("OpenAir/#")
 
     def stop(self):
         """Stops the OSC bridge services and core transport."""
@@ -257,7 +257,7 @@ class OSCManager:
 
     def handle_incoming_osc(self, address, value):
         with self._state_lock:
-            topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
+            topic = self.osc_to_topic.get(address, f"OpenAir/OSC{address}")
 
         matrix_log("comms", "osc", "handle_incoming_osc",
                    f"RX: {address} -> {value} (Topic: {topic})", "DEBUG")
@@ -315,7 +315,7 @@ class OSCManager:
         is_self_reflection = (source == "MQTT" and message.get("full_id") == app_constants.FULL_INSTANCE_ID)
 
         # Skip non-OSC system/gui traffic
-        if source == "SYSTEM" or any(topic.startswith(x) for x in ["OPEN-AIR/System/", "OPEN-AIR/GUI/", "OPEN-AIR/oaGui/"]):
+        if source == "SYSTEM" or any(topic.startswith(x) for x in ["OpenAir/System/", "OpenAir/GUI/", "OpenAir/oaGui/"]):
             if "OSC" not in topic: return # Keep status updates
 
         if "/Monitor/" in topic: return
@@ -325,7 +325,7 @@ class OSCManager:
             osc_address = self.topic_to_osc.get(topic)
 
         if not osc_address:
-            base_topic = topic.replace("OPEN-AIR/", "").lstrip("/")
+            base_topic = topic.replace("OpenAir/", "").lstrip("/")
             osc_address = "/" + base_topic if base_topic.startswith("OSC/") else "/OSC/" + base_topic
             osc_address = osc_address.replace("//", "/").strip("/")
             if not osc_address.startswith("/"): osc_address = "/" + osc_address

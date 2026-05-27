@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d8/da8/classoaGuiElements_1_1Core_1_1m
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d29d46b09fd4fba66eb191811bc65b6" id="r_a3d29d46b09fd4fba66eb191811bc65b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Core_1_1number_1_1NumberDrawer.html#a3d29d46b09fd4fba66eb191811bc65b6">draw_labels</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, center_x, center_y, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tick_values</a>, min_val, max_val, start_angle_deg, end_angle_deg, extent_deg, main_arc_radius, text_offset_from_arc, fg_color, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scale_numbers</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_overrides</a>, counter_clockwise, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_radius</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a3d29d46b09fd4fba66eb191811bc65b6" id="r_a3d29d46b09fd4fba66eb191811bc65b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Core_1_1number_1_1NumberDrawer.html#a3d29d46b09fd4fba66eb191811bc65b6">draw_labels</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, center_x, center_y, tick_values, min_val, max_val, start_angle_deg, end_angle_deg, extent_deg, main_arc_radius, text_offset_from_arc, fg_color, scale_numbers, label_overrides, counter_clockwise, label_radius=None)</td></tr>
 <tr class="separator:a3d29d46b09fd4fba66eb191811bc65b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -209,7 +209,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>label_radius</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>label_radius</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,7 +230,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> scale_numbers:</div>
 <div class="line"><span class="lineno">   20</span>            <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">for</span> i, tick_val <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(tick_values):</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">for</span> i, tick_val <span class="keywordflow">in</span> enumerate(tick_values):</div>
 <div class="line"><span class="lineno">   23</span>            range_val = max_val - min_val</div>
 <div class="line"><span class="lineno">   24</span>            percentage = (tick_val - min_val) / range_val <span class="keywordflow">if</span> range_val != 0 <span class="keywordflow">else</span> 0</div>
 <div class="line"><span class="lineno">   25</span> </div>
@@ -239,15 +239,15 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   28</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   29</span>                current_angle_deg = start_angle_deg - (percentage * extent_deg)</div>
 <div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>            current_angle_rad = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.radians</a>(current_angle_deg)</div>
+<div class="line"><span class="lineno">   31</span>            current_angle_rad = math.radians(current_angle_deg)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>            <span class="keywordflow">if</span> label_radius <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   34</span>                text_radius_pos = label_radius</div>
 <div class="line"><span class="lineno">   35</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   36</span>                text_radius_pos = main_arc_radius + text_offset_from_arc</div>
 <div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>            tx = center_x + text_radius_pos * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.cos</a>(current_angle_rad)</div>
-<div class="line"><span class="lineno">   39</span>            ty = center_y - text_radius_pos * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.sin</a>(current_angle_rad)</div>
+<div class="line"><span class="lineno">   38</span>            tx = center_x + text_radius_pos * math.cos(current_angle_rad)</div>
+<div class="line"><span class="lineno">   39</span>            ty = center_y - text_radius_pos * math.sin(current_angle_rad)</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>            <span class="comment"># Check for label overrides</span></div>
 <div class="line"><span class="lineno">   42</span>            label_text = str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(tick_val))</div>
@@ -257,13 +257,12 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   46</span>                <span class="keywordflow">elif</span> str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(tick_val)) <span class="keywordflow">in</span> label_overrides:</div>
 <div class="line"><span class="lineno">   47</span>                    label_text = label_overrides[str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(tick_val))]</div>
 <div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.create_text</a>(</div>
+<div class="line"><span class="lineno">   49</span>            canvas.create_text(</div>
 <div class="line"><span class="lineno">   50</span>                tx, ty, text=label_text, fill=fg_color, font=(NUMBER_FONT_FAMILY, NUMBER_FONT_SIZE), tags=<span class="stringliteral">&quot;vu_element&quot;</span></div>
 <div class="line"><span class="lineno">   51</span>            )</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>.</p>
 
 </div>
 </div>

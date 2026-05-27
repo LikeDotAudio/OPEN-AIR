@@ -139,14 +139,11 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d1/dcd/test__visa__logic_8py_source.html#l00025">25</a> of file <a class="el" href="../../d1/dcd/test__visa__logic_8py_source.html">test_visa_logic.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   25</span>    <span class="keyword">def </span>test_visa_library_error(self):</div>
 <div class="line"><span class="lineno">   26</span>        <span class="stringliteral">&quot;&quot;&quot;Fail: LibraryError is raised due to missing pyvisa-py.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   27</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&quot;pyvisa.ResourceManager&quot;</span>, side_effect=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pyvisa.errors.LibraryError</a>(<span class="stringliteral">&quot;pyvisa-py missing&quot;</span>)):</div>
-<div class="line"><span class="lineno">   28</span>            <span class="keyword">with</span> self.assertRaises(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pyvisa.errors.LibraryError</a>):</div>
-<div class="line"><span class="lineno">   29</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pyvisa.ResourceManager</a>(<span class="stringliteral">&quot;@py&quot;</span>)</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&quot;pyvisa.ResourceManager&quot;</span>, side_effect=pyvisa.errors.LibraryError(<span class="stringliteral">&quot;pyvisa-py missing&quot;</span>)):</div>
+<div class="line"><span class="lineno">   28</span>            <span class="keyword">with</span> self.assertRaises(pyvisa.errors.LibraryError):</div>
+<div class="line"><span class="lineno">   29</span>                pyvisa.ResourceManager(<span class="stringliteral">&quot;@py&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aa4e645f3a62a9321f5dcb1a3af686051" name="aa4e645f3a62a9321f5dcb1a3af686051"></a>
@@ -171,11 +168,9 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># The constructor returns early if missing components</span></div>
 <div class="line"><span class="lineno">   44</span>        proxy = VisaProxy(<span class="keywordtype">None</span>, <span class="keywordtype">None</span>)</div>
 <div class="line"><span class="lineno">   45</span>        <span class="comment"># Verify it didn&#39;t finish initialization</span></div>
-<div class="line"><span class="lineno">   46</span>        self.assertFalse(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(proxy, <span class="stringliteral">&#39;command_queue&#39;</span>))</div>
+<div class="line"><span class="lineno">   46</span>        self.assertFalse(hasattr(proxy, <span class="stringliteral">&#39;command_queue&#39;</span>))</div>
 <div class="line"><span class="lineno">   47</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="abfc848c1a88b6b2184b8249f6ee02796" name="abfc848c1a88b6b2184b8249f6ee02796"></a>
@@ -202,12 +197,10 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>        proxy = VisaProxy(mqtt_controller, subscriber_router)</div>
 <div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(proxy, <span class="stringliteral">&#39;command_queue&#39;</span>))</div>
-<div class="line"><span class="lineno">   39</span>        self.assertFalse(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">proxy.shutdown_flag.is_set</a>())</div>
+<div class="line"><span class="lineno">   38</span>        self.assertTrue(hasattr(proxy, <span class="stringliteral">&#39;command_queue&#39;</span>))</div>
+<div class="line"><span class="lineno">   39</span>        self.assertFalse(proxy.shutdown_flag.is_set())</div>
 <div class="line"><span class="lineno">   40</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2945a42669086006e8e9ded4abc16b40" name="a2945a42669086006e8e9ded4abc16b40"></a>
@@ -230,15 +223,13 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   16</span>    <span class="keyword">def </span>test_visa_resource_lister(self):</div>
 <div class="line"><span class="lineno">   17</span>        <span class="stringliteral">&quot;&quot;&quot;Confirm the backend library loads and returns available hardware identifiers.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   18</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   19</span>            rm = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pyvisa.ResourceManager</a>(<span class="stringliteral">&quot;@py&quot;</span>)</div>
-<div class="line"><span class="lineno">   20</span>            resources = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rm.list_resources</a>()</div>
+<div class="line"><span class="lineno">   19</span>            rm = pyvisa.ResourceManager(<span class="stringliteral">&quot;@py&quot;</span>)</div>
+<div class="line"><span class="lineno">   20</span>            resources = rm.list_resources()</div>
 <div class="line"><span class="lineno">   21</span>            self.assertIsInstance(resources, tuple)</div>
 <div class="line"><span class="lineno">   22</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   23</span>            self.fail(f<span class="stringliteral">&quot;PyVISA ResourceManager failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   24</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

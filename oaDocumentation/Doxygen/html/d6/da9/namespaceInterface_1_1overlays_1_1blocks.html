@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d6/da9/namespaceInterface_1_1overlays_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae24f85ae48e46be5d38cbc1bc03673f7" id="r_ae24f85ae48e46be5d38cbc1bc03673f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da9/namespaceInterface_1_1overlays_1_1blocks.html#ae24f85ae48e46be5d38cbc1bc03673f7">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements</a>)</td></tr>
+<tr class="memitem:ae24f85ae48e46be5d38cbc1bc03673f7" id="r_ae24f85ae48e46be5d38cbc1bc03673f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da9/namespaceInterface_1_1overlays_1_1blocks.html#ae24f85ae48e46be5d38cbc1bc03673f7">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, design_elements)</td></tr>
 <tr class="separator:ae24f85ae48e46be5d38cbc1bc03673f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -150,29 +150,26 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   10</span><span class="keyword">def </span>apply_design_overlay(layout, widget, path, is_focused, design_elements):</div>
 <div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;Handles tiered block shading using a background overlay.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   12</span> </div>
-<div class="line"><span class="lineno">   13</span>    bg_overlay = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Frame</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.master</a>, bd=0, highlightthickness=0)</div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay._is_design_overlay</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   15</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements.append</a>(bg_overlay)</div>
+<div class="line"><span class="lineno">   13</span>    bg_overlay = tk.Frame(widget.master, bd=0, highlightthickness=0)</div>
+<div class="line"><span class="lineno">   14</span>    bg_overlay._is_design_overlay = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   15</span>    design_elements.append(bg_overlay)</div>
 <div class="line"><span class="lineno">   16</span> </div>
 <div class="line"><span class="lineno">   17</span>    <span class="keyword">def </span>sync(x, y, w, h):</div>
-<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">layout.show_blocks.get</a>() <span class="keywordflow">and</span> path:</div>
+<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> layout.show_blocks.get() <span class="keywordflow">and</span> path:</div>
 <div class="line"><span class="lineno">   19</span>            <span class="keywordflow">if</span> <span class="stringliteral">&quot;.fields.&quot;</span> <span class="keywordflow">in</span> path:</div>
 <div class="line"><span class="lineno">   20</span>                <span class="comment"># Nested Fields - Darker Shade</span></div>
-<div class="line"><span class="lineno">   21</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay.config</a>(bg=<span class="stringliteral">&quot;#1a1a1a&quot;</span>)</div>
+<div class="line"><span class="lineno">   21</span>                bg_overlay.config(bg=<span class="stringliteral">&quot;#1a1a1a&quot;</span>)</div>
 <div class="line"><span class="lineno">   22</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   23</span>                <span class="comment"># Root Block - Base Shade</span></div>
-<div class="line"><span class="lineno">   24</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay.config</a>(bg=<span class="stringliteral">&quot;#3a3a3a&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>                bg_overlay.config(bg=<span class="stringliteral">&quot;#3a3a3a&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay.place</a>(x=x, y=y, width=w, height=h)</div>
-<div class="line"><span class="lineno">   27</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay.lower</a>(widget) <span class="comment"># Stay behind functional element</span></div>
+<div class="line"><span class="lineno">   26</span>            bg_overlay.place(x=x, y=y, width=w, height=h)</div>
+<div class="line"><span class="lineno">   27</span>            bg_overlay.lower(widget) <span class="comment"># Stay behind functional element</span></div>
 <div class="line"><span class="lineno">   28</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   29</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bg_overlay.place_forget</a>()</div>
+<div class="line"><span class="lineno">   29</span>            bg_overlay.place_forget()</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">return</span> sync</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

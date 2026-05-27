@@ -145,13 +145,10 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   57</span>            self.skipTest(<span class="stringliteral">&quot;Rust oageometrymath_rs not installed.&quot;</span>)</div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>        <span class="comment"># Point (0, 100) from (0, 0) is 90 degrees</span></div>
-<div class="line"><span class="lineno">   60</span>        angle = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.get_angle</a>(0, 100, 0, 0)</div>
+<div class="line"><span class="lineno">   60</span>        angle = CoordinateTransformer.get_angle(0, 100, 0, 0)</div>
 <div class="line"><span class="lineno">   61</span>        self.assertAlmostEqual(angle, 90.0, places=5)</div>
 <div class="line"><span class="lineno">   62</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a590363238fd4704b129491b6e004155e" name="a590363238fd4704b129491b6e004155e"></a>
@@ -179,13 +176,11 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   45</span>            self.skipTest(<span class="stringliteral">&quot;Rust oageometrymath_rs not installed.&quot;</span>)</div>
 <div class="line"><span class="lineno">   46</span> </div>
 <div class="line"><span class="lineno">   47</span>        <span class="comment"># 0 degrees, distance 100 -&gt; (100, 0)</span></div>
-<div class="line"><span class="lineno">   48</span>        x, y = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.get_position</a>(0, 100, 0, 0)</div>
+<div class="line"><span class="lineno">   48</span>        x, y = CoordinateTransformer.get_position(0, 100, 0, 0)</div>
 <div class="line"><span class="lineno">   49</span>        self.assertAlmostEqual(x, 100.0, places=5)</div>
 <div class="line"><span class="lineno">   50</span>        self.assertAlmostEqual(y, 0.0, places=5)</div>
 <div class="line"><span class="lineno">   51</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a4ba3f3ae8d5a7a68b625dd5fbe21dacb" name="a4ba3f3ae8d5a7a68b625dd5fbe21dacb"></a>
@@ -212,15 +207,13 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   18</span>        <span class="keywordflow">except</span> ImportError:</div>
 <div class="line"><span class="lineno">   19</span>            self.skipTest(<span class="stringliteral">&quot;Rust oageometrymath_rs not installed.&quot;</span>)</div>
 <div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.normalize_value</a>(50, 0, 100), 0.5)</div>
-<div class="line"><span class="lineno">   22</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.normalize_value</a>(0, 0, 100), 0.0)</div>
-<div class="line"><span class="lineno">   23</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.normalize_value</a>(100, 0, 100), 1.0)</div>
+<div class="line"><span class="lineno">   21</span>        self.assertEqual(CoordinateTransformer.normalize_value(50, 0, 100), 0.5)</div>
+<div class="line"><span class="lineno">   22</span>        self.assertEqual(CoordinateTransformer.normalize_value(0, 0, 100), 0.0)</div>
+<div class="line"><span class="lineno">   23</span>        self.assertEqual(CoordinateTransformer.normalize_value(100, 0, 100), 1.0)</div>
 <div class="line"><span class="lineno">   24</span>        <span class="comment"># Clamping isn&#39;t explicitly in the code but division would happen</span></div>
-<div class="line"><span class="lineno">   25</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.normalize_value</a>(150, 0, 100), 1.5)</div>
+<div class="line"><span class="lineno">   25</span>        self.assertEqual(CoordinateTransformer.normalize_value(150, 0, 100), 1.5)</div>
 <div class="line"><span class="lineno">   26</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ae44d0e6d67d74d8957ac60450b45d0ab" name="ae44d0e6d67d74d8957ac60450b45d0ab"></a>
@@ -249,13 +242,11 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment"># Rotate (100, 0) by 90 degrees around (0, 0)</span></div>
 <div class="line"><span class="lineno">   35</span>        <span class="comment"># Should be approx (0, 100)</span></div>
-<div class="line"><span class="lineno">   36</span>        nx, ny = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">UIGeometryMath.rotate_point</a>(100, 0, 0, 0, 90)</div>
+<div class="line"><span class="lineno">   36</span>        nx, ny = CoordinateTransformer.rotate_point(100, 0, 0, 0, 90)</div>
 <div class="line"><span class="lineno">   37</span>        self.assertAlmostEqual(nx, 0.0, places=5)</div>
 <div class="line"><span class="lineno">   38</span>        self.assertAlmostEqual(ny, 100.0, places=5)</div>
 <div class="line"><span class="lineno">   39</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

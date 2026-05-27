@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('d0/db3/md_oaComProtocols_2oaComNmos_2C
 <p><a href="https://specs.amwa.tv/nmos-dashboard/dashboard.html">CI Dashboard</a></p>
 <p>SEARCH</p>
 <p><a href="../..//is-12/">IS-12</a> â¤ <a href="../..//is-12/releases/">releases</a> â¤ <a href="../..//is-12/releases/v1.0.1/">v1.0.1</a> â¤ <a href="../..//is-12/releases/v1.0.1/docs/">docs</a> â¤</p>
-<h1><a class="anchor" id="autotoc_md394"></a>
+<h1><a class="anchor" id="autotoc_md659"></a>
 Protocol messaging</h1>
 <p><a href="../../Security_and_authorization.html">âSecurity and authorization</a> Â· <a href="../../..">Indexâ</a> Â· <a href="../../Data_type_marshalling.html">Data type marshallingâ</a></p>
 <p>All protocol messages MUST have the <code>messageType</code> property to indicate the type of the message (e.g. Command).</p>
@@ -220,12 +220,12 @@ Protocol messaging</h1>
 <div class="line">  SubscriptionResponse = 4,</div>
 <div class="line">  Error = 5</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md395"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md660"></a>
 Control session</h2>
 <p>The control session context is delegated to the underlying WebSocket transport and its built in mechanisms for detecting communication failure. When a communication failure occurs, then both the controller and the device MUST dispose of the current WebSocket connection. Controllers can open a new WebSocket connection, but any previous control context is lost and has to be be recreated (e.g. subscriptions have to be reissued and initial states have to be reacquired). <br  />
  Under normal operating circumstances devices MUST keep the WebSocket connection open until the controller closes the connection.</p>
-<p>Concurrency control is left to specific device implementations, however devices MUST always return relevant error messages and statuses when there are conflicts, errors or other noteworthy states (see <a href="https://specs.amwa.tv/ms-05-02/branches/v1.0.x/docs/Framework.html#ncmethodresulterror">NcMethodResultError</a> and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Error messages</a>).</p>
-<h2><a class="anchor" id="autotoc_md396"></a>
+<p>Concurrency control is left to specific device implementations, however devices MUST always return relevant error messages and statuses when there are conflicts, errors or other noteworthy states (see <a href="https://specs.amwa.tv/ms-05-02/branches/v1.0.x/docs/Framework.html#ncmethodresulterror">NcMethodResultError</a> and Error messages).</p>
+<h2><a class="anchor" id="autotoc_md661"></a>
 Command message type</h2>
 <p>Commands are clearly distinguished using the <code>Command</code> messageType. Multiple messages MAY be sent in a <code>Command</code>. Each message MUST have the following:</p>
 <ul>
@@ -234,8 +234,8 @@ Command message type</h2>
 <li>methodId - unique method ID specified as the level and index of the method inside the class.</li>
 <li>arguments - dictionary of arguments where the keys are the argument names and the values are their desired values (only needed if the method requires arguments)</li>
 </ul>
-<p>Commands MUST be responded to by devices using the <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">CommandResponse</a> messageType and the matching <code>handle</code> for each message.</p>
-<h2><a class="anchor" id="autotoc_md397"></a>
+<p>Commands MUST be responded to by devices using the CommandResponse messageType and the matching <code>handle</code> for each message.</p>
+<h2><a class="anchor" id="autotoc_md662"></a>
 Command response message type</h2>
 <p>Command responses are clearly distinguished using the <code>CommandResponse</code> messageType. Multiple messages MAY be sent in a <code>CommandResponse</code>. Each message MUST have the following:</p>
 <ul>
@@ -243,7 +243,7 @@ Command response message type</h2>
 <li>result - result returned by the command which inherits from the base <a href="https://specs.amwa.tv/ms-05-02/branches/v1.0.x/docs/Framework.html#ncmethodresult">NcMethodResult</a>. This means all results MUST have a <code>status</code> property.</li>
 </ul>
 <p>When a method call encounters an error the return MUST be <a href="https://specs.amwa.tv/ms-05-02/branches/v1.0.x/docs/Framework.html#ncmethodresulterror">NcMethodResultError</a> or a derived datatype.</p>
-<h2><a class="anchor" id="autotoc_md398"></a>
+<h2><a class="anchor" id="autotoc_md663"></a>
 Notification message type</h2>
 <p>Notifications are clearly distinguished using the <code>Notification</code> messageType and are always sent from the device to the controllers subscribed to a particular event. Multiple messages MAY be sent in a <code>Notification</code>. Each message MUST have the following:</p>
 <ul>
@@ -251,7 +251,7 @@ Notification message type</h2>
 <li>eventId - unique event Id specified as a level and index.</li>
 <li>eventData - eventData (<a href="https://specs.amwa.tv/ms-05-02/branches/v1.0.x/docs/Framework.html#ncpropertychangedeventdata">NcPropertyChangedEventData</a> for property changed events).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md399"></a>
+<h2><a class="anchor" id="autotoc_md664"></a>
 Subscription message type</h2>
 <p>Subscription messages are clearly distinguished using the <code>Subscription</code> messageType. Each message MUST have the following:</p>
 <ul>
@@ -259,7 +259,7 @@ Subscription message type</h2>
 <li>subscriptions - Array of OIDs desired for subscription</li>
 </ul>
 <p>Subscription messages MUST be responded to by devices using the <code>SubscriptionResponse</code> messageType.</p>
-<h2><a class="anchor" id="autotoc_md400"></a>
+<h2><a class="anchor" id="autotoc_md665"></a>
 Subscription response message type</h2>
 <p>Subscription response messages are clearly distinguished using the <code>SubscriptionResponse</code> messageType. Each message MUST have the following:</p>
 <ul>
@@ -278,7 +278,7 @@ Subscription response message type</h2>
 <div class="line">  ]</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>This allows controllers to know which items they have successfully subscribed to.</p>
-<h2><a class="anchor" id="autotoc_md401"></a>
+<h2><a class="anchor" id="autotoc_md666"></a>
 Error messages</h2>
 <p>Error messages are clearly distinguished using the <code>Error</code> messageType. Each message MUST have the following:</p>
 <ul>

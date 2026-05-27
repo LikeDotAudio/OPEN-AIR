@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d9/dd9/namespaceCore_1_1delete__splink
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae097dcbeb0dab7d0b91f895389adc4b0" id="r_ae097dcbeb0dab7d0b91f895389adc4b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dd9/namespaceCore_1_1delete__splink.html#ae097dcbeb0dab7d0b91f895389adc4b0">delete_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink_id</a>)</td></tr>
+<tr class="memitem:ae097dcbeb0dab7d0b91f895389adc4b0" id="r_ae097dcbeb0dab7d0b91f895389adc4b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dd9/namespaceCore_1_1delete__splink.html#ae097dcbeb0dab7d0b91f895389adc4b0">delete_splink</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splink_id)</td></tr>
 <tr class="separator:ae097dcbeb0dab7d0b91f895389adc4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -135,14 +135,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   10</span>        del self.splink_states[splink_id]</div>
 <div class="line"><span class="lineno">   11</span> </div>
 <div class="line"><span class="lineno">   12</span>    file_path = self.storage_path / f<span class="stringliteral">&quot;{splink_id}.json&quot;</span></div>
-<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path.exists</a>():</div>
-<div class="line"><span class="lineno">   14</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path.unlink</a>()</div>
+<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">if</span> file_path.exists():</div>
+<div class="line"><span class="lineno">   14</span>        file_path.unlink()</div>
 <div class="line"><span class="lineno">   15</span> </div>
 <div class="line"><span class="lineno">   16</span>    self.publish_splinks()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

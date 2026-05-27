@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d7/d14/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: PanedWindow Layout Percentages Not Respected</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1721"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2170"></a></p><ul>
 <li><b>ID</b>: 20260314_183952</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 2 (High)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1722"></a>
+<h1><a class="anchor" id="autotoc_md2171"></a>
 Issue</h1>
 <p>The GUI was not correctly applying percentage-based layouts for <code>ttk.PanedWindow</code> widgets as defined by directory naming conventions (e.g., <code>top_10</code>, <code>bottom_90</code>). Instead of splitting the view into a 10/90 ratio, the UI defaulted to an equal 50/50 split. This indicated that while the layout <em>type</em> (vertical split) was being correctly identified, the <em>proportions</em> were being ignored.</p>
-<h1><a class="anchor" id="autotoc_md1723"></a>
+<h1><a class="anchor" id="autotoc_md2172"></a>
 Root Cause Analysis</h1>
-<p>The <code>_build_from_directory</code> method in <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code> is responsible for creating the <code>ttk.PanedWindow</code> when it receives a <code>horizontal_split</code> or <code>vertical_split</code> layout type from the parser. While the parser correctly extracted the percentage values (10 and 90) into a <code>weight</code> key for each panel, the builder was not using these weights to manually position the sash.</p>
-<p>The <code>ttk.PanedWindow</code> widget does not automatically distribute space based on the <code>weight</code> parameter of the <code>.add()</code> method in the way one might expect for pixel-perfect ratios. To enforce specific proportional sizes, one must manually calculate and set the position of the <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sash(es)</a> using the <code>.<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sashpos()</a></code> method after the window has been drawn and sized.</p>
+<p>The <code>_build_from_directory</code> method in <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code> is responsible for creating the <code>ttk.PanedWindow</code> when it receives a <code>horizontal_split</code> or <code>vertical_split</code> layout type from the parser. While the parser correctly extracted the percentage values (10 and 90) into a <code>weight</code> key for each panel, the builder was not using these weights to manually position the sash.</p>
+<p>The <code>ttk.PanedWindow</code> widget does not automatically distribute space based on the <code>weight</code> parameter of the <code>.add()</code> method in the way one might expect for pixel-perfect ratios. To enforce specific proportional sizes, one must manually calculate and set the position of the sash(es) using the <code>.sashpos()</code> method after the window has been drawn and sized.</p>
 <p>The logic to do this was missing. A previous refactoring had removed the <code>configure_sash</code> inner function that was responsible for this crucial step.</p>
-<h1><a class="anchor" id="autotoc_md1724"></a>
+<h1><a class="anchor" id="autotoc_md2173"></a>
 Resolution</h1>
 <p>The sash positioning logic was restored within the <code>_build_from_directory</code> method for split-pane layouts.</p>
 <ol type="1">
@@ -118,7 +118,7 @@ Resolution</h1>
 <li><b>Initial Positioning</b>: An <code>self.after(50, configure_sash)</code> call was added to trigger an initial positioning shortly after the widget is first created, ensuring the correct layout appears on the first render.</li>
 </ol>
 <p>This change ensures that the percentage values parsed from directory names are now correctly translated into visual proportions on the screen.</p>
-<h1><a class="anchor" id="autotoc_md1725"></a>
+<h1><a class="anchor" id="autotoc_md2174"></a>
 Verification</h1>
 <p>The UI now correctly renders the <code>top_10</code> and <code>bottom_90</code> directories as a 10/90 vertical split. Resizing the main window correctly maintains this ratio. All directory-based split-pane layouts are now being rendered with their intended proportions. </p>
 </div></div><!-- contents -->

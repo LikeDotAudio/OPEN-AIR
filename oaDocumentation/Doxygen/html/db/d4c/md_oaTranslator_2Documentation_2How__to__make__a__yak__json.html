@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('db/d4c/md_oaTranslator_2Documentation_
   <div class="headertitle"><div class="title">YAK Protocol Specification (v2.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4784"></a> This document defines the structure and requirements for YAK (Yet Another Kommander) JSON command definitions used in the OPEN-AIR translation layer. These definitions map high-level GUI interactions to SCPI (Standard Commands for Programmable Instruments) strings.</p>
-<h1><a class="anchor" id="autotoc_md4785"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5064"></a> This document defines the structure and requirements for YAK (Yet Another Kommander) JSON command definitions used in the OPEN-AIR translation layer. These definitions map high-level GUI interactions to SCPI (Standard Commands for Programmable Instruments) strings.</p>
+<h1><a class="anchor" id="autotoc_md5065"></a>
 I. Structural Standards</h1>
 <p>The YAK translation engine requires strict adherence to naming conventions and nesting patterns to ensure the GUI renderer correctly associates inputs with actuators.</p>
-<h2><a class="anchor" id="autotoc_md4786"></a>
+<h2><a class="anchor" id="autotoc_md5066"></a>
 1. Naming Conventions</h2>
 <ul>
 <li><b>Input Fields</b>: Must be named exactly <code>Input</code>.</li>
 <li><b>Output Fields</b>: Must be named exactly <code>Outputs</code>.</li>
 <li><b>Actuator Button</b>: Within a settings block, the button must be named <code>Execute Command</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4787"></a>
+<h2><a class="anchor" id="autotoc_md5067"></a>
 2. Architectural Patterns</h2>
 <p>There are two primary patterns for defining commands: the <b>Setting Construct</b> and the <b>Action Construct</b>.</p>
-<h3><a class="anchor" id="autotoc_md4788"></a>
+<h3><a class="anchor" id="autotoc_md5068"></a>
 Pattern A: The Setting Construct</h3>
 <p>Used for commands that require parameters (Inputs) or return data (Outputs), such as RIG, SET, or NAB operations.</p>
 <ul>
@@ -133,7 +133,7 @@ Pattern A: The Setting Construct</h3>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md4789"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5069"></a>
 Pattern B: The Action Construct</h3>
 <p>Used for instant triggers or toggles with no parameters (e.g., Run, Stop, Auto), typically mapped to DO operations.</p>
 <ul>
@@ -149,7 +149,7 @@ Pattern B: The Action Construct</h3>
 <div class="line">    &quot;message&quot;: &quot;:RUN&quot;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4790"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5070"></a>
 II. Operational Dimensions</h1>
 <p>YAK files are organized into four functional categories:</p>
 <ol type="1">
@@ -158,7 +158,7 @@ II. Operational Dimensions</h1>
 <li><b>SET (Component Parameters)</b>: For channel-specific settings (Vertical Scale, Offset). Uses Pattern A.</li>
 <li><b>DO (Execution)</b>: For immediate actions (Run, Stop, Clear). Uses Pattern B.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md4791"></a>
+<h1><a class="anchor" id="autotoc_md5071"></a>
 III. Implementation Checklist</h1>
 <p>Before deployment, verify the following:</p><ul>
 <li>[ ] Use <code>Input</code> and <code>Outputs</code> (Case Sensitive) instead of legacy <code>scpi_*</code> keys.</li>
@@ -167,7 +167,7 @@ III. Implementation Checklist</h1>
 <li>[ ] Hardcode all channel identifiers; dynamic variables (e.g., <code>&lt;n&gt;</code>) are not supported.</li>
 <li>[ ] Include <code>"AES70": "OcaBooleanActuator"</code> for all actuator types.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4792"></a>
+<h1><a class="anchor" id="autotoc_md5072"></a>
 IV. Reference Implementation</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;set&quot;: {</div>

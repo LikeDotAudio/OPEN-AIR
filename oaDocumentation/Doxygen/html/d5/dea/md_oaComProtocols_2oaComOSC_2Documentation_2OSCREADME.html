@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('d5/dea/md_oaComProtocols_2oaComOSC_2Do
   <div class="headertitle"><div class="title">🅾️ oaComProtocols.oaComOSC: OSC Communication Module</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md462"></a> </p>
-<h1><a class="anchor" id="autotoc_md463"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md727"></a> </p>
+<h1><a class="anchor" id="autotoc_md728"></a>
 📖 Overview</h1>
 <p>The <code>oaComProtocols.oaComOSC</code> package provides high-performance bridging between the OPEN-AIR system and external OSC (Open Sound Control) devices. It abstracts the complexities of UDP bundle handling and provides a unified, topic-aligned interface for remote control and telemetry.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md465"></a>
+<h1><a class="anchor" id="autotoc_md730"></a>
 🏗️ Core Components</h1>
-<h2><a class="anchor" id="autotoc_md466"></a>
+<h2><a class="anchor" id="autotoc_md731"></a>
 1. The Gatekeeper (&lt;tt&gt;Entry.py&lt;/tt&gt;)</h2>
 <p>The sole public API for the module. It manages the singleton instance of the <code>OSCManager</code> and provides high-level methods for sending messages and managing the bridge lifecycle.</p>
-<h2><a class="anchor" id="autotoc_md467"></a>
+<h2><a class="anchor" id="autotoc_md732"></a>
 2. OSC Orchestrator (&lt;tt&gt;Managers/osc_manager.py&lt;/tt&gt;)</h2>
 <p>The central hub that coordinates all OSC sub-services. It handles the mapping between OSC addresses and system topics, manages loop prevention, and orchestrates the background server/client workers.</p>
-<h2><a class="anchor" id="autotoc_md468"></a>
+<h2><a class="anchor" id="autotoc_md733"></a>
 3. RX Server (&lt;tt&gt;Workers/osc_rx_server.py&lt;/tt&gt;)</h2>
 <p>A background UDP listener that ingests incoming OSC bundles, decodes them, and injects the resulting data into the system via the <code>ProtocolRouter</code>.</p>
-<h2><a class="anchor" id="autotoc_md469"></a>
+<h2><a class="anchor" id="autotoc_md734"></a>
 4. TX Client (&lt;tt&gt;Workers/osc_tx_client.py&lt;/tt&gt;)</h2>
 <p>A dedicated client responsible for dispatching system state changes back to external OSC surfaces.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md471"></a>
+<h1><a class="anchor" id="autotoc_md736"></a>
 🔬 Data Pipeline</h1>
 <ol type="1">
 <li><b>Remote Input</b>: An OSC bundle arrives at the <code>OscRxServer</code>.</li>
@@ -122,12 +122,11 @@ $(document).ready(function(){initNavTree('d5/dea/md_oaComProtocols_2oaComOSC_2Do
 <li><b>Mirroring</b>: System changes from other sources (e.g., MQTT) are automatically translated into OSC addresses and dispatched to the <code>OscTxClient</code> for remote surface updates.</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md473"></a>
+<h1><a class="anchor" id="autotoc_md738"></a>
 🛠️ Usage</h1>
-<p>To start the OSC subsystem: </p><div class="fragment"><div class="line"><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComProtocols.oaComOSC</a> <span class="keyword">import</span> Entry <span class="keyword">as</span> osc_api</div>
-<div class="line"><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">osc_api.start</a>()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md474"></a>
+<p>To start the OSC subsystem: </p><div class="fragment"><div class="line"><span class="keyword">from</span> oaComProtocols.oaComOSC <span class="keyword">import</span> Entry <span class="keyword">as</span> osc_api</div>
+<div class="line">osc_api.start()</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md739"></a>
 🛡️ Dependencies</h1>
 <ul>
 <li><b>python-osc</b>: For low-level OSC protocol handling.</li>

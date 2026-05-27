@@ -105,7 +105,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6579a9e28fe82d2536d66ff0c3ce8bc9" id="r_a6579a9e28fe82d2536d66ff0c3ce8bc9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d42/namespaceMethods_1_1yak__command.html#a6579a9e28fe82d2536d66ff0c3ce8bc9">render_scpi_command</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scpi_command_template</a>, dict Input)</td></tr>
+<tr class="memitem:a6579a9e28fe82d2536d66ff0c3ce8bc9" id="r_a6579a9e28fe82d2536d66ff0c3ce8bc9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d42/namespaceMethods_1_1yak__command.html#a6579a9e28fe82d2536d66ff0c3ce8bc9">render_scpi_command</a> (str scpi_command_template, dict Input)</td></tr>
 <tr class="separator:a6579a9e28fe82d2536d66ff0c3ce8bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -146,40 +146,37 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   25</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   26</span><span class="stringliteral">    Takes an SCPI command template and replaces placeholders with values from inputs.</span></div>
 <div class="line"><span class="lineno">   27</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   28</span>    current_function_name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a></div>
-<div class="line"><span class="lineno">   29</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;🔍🔵 Entering {current_function_name} to render SCPI command.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   28</span>    current_function_name = inspect.currentframe().f_code.co_name</div>
+<div class="line"><span class="lineno">   29</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;🔍🔵 Entering {current_function_name} to render SCPI command.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>    rendered_command = scpi_command_template</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>    <span class="keywordflow">if</span> Input:</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">for</span> key, details <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Input.items</a>():</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">for</span> key, details <span class="keywordflow">in</span> Input.items():</div>
 <div class="line"><span class="lineno">   35</span>            placeholder = f<span class="stringliteral">&quot;&lt;{key}&gt;&quot;</span></div>
-<div class="line"><span class="lineno">   36</span>            value_to_substitute = str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">details.get</a>(<span class="stringliteral">&quot;value&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><span class="lineno">   36</span>            value_to_substitute = str(details.get(<span class="stringliteral">&quot;value&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>            <span class="comment"># --- NEW FIX: Replace the placeholder value with a single double quote for the path terminator ---</span></div>
-<div class="line"><span class="lineno">   39</span>            rendered_command = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rendered_command.replace</a>(<span class="stringliteral">&#39;&quot;&#39;</span>, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
+<div class="line"><span class="lineno">   39</span>            rendered_command = rendered_command.replace(<span class="stringliteral">&#39;&quot;&#39;</span>, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>            <span class="keywordflow">if</span> placeholder == <span class="stringliteral">&quot;&lt;path_terminator&gt;&quot;</span> <span class="keywordflow">and</span> placeholder <span class="keywordflow">in</span> rendered_command:</div>
-<div class="line"><span class="lineno">   42</span>                rendered_command = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rendered_command.replace</a>(placeholder, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
+<div class="line"><span class="lineno">   42</span>                rendered_command = rendered_command.replace(placeholder, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
 <div class="line"><span class="lineno">   43</span>                value_to_substitute = <span class="stringliteral">&#39;&quot;&#39;</span></div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="line"><span class="lineno">   45</span>            <span class="keywordflow">if</span> placeholder == <span class="stringliteral">&quot;&lt;path_starter&gt;&quot;</span> <span class="keywordflow">and</span> placeholder <span class="keywordflow">in</span> rendered_command:</div>
-<div class="line"><span class="lineno">   46</span>                rendered_command = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rendered_command.replace</a>(placeholder, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
+<div class="line"><span class="lineno">   46</span>                rendered_command = rendered_command.replace(placeholder, <span class="stringliteral">&#39;&quot;&#39;</span>)</div>
 <div class="line"><span class="lineno">   47</span>                value_to_substitute = <span class="stringliteral">&#39;&quot;&#39;</span></div>
 <div class="line"><span class="lineno">   48</span> </div>
 <div class="line"><span class="lineno">   49</span>            <span class="keywordflow">if</span> placeholder <span class="keywordflow">in</span> rendered_command:</div>
-<div class="line"><span class="lineno">   50</span>                rendered_command = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rendered_command.replace</a>(</div>
+<div class="line"><span class="lineno">   50</span>                rendered_command = rendered_command.replace(</div>
 <div class="line"><span class="lineno">   51</span>                    placeholder, value_to_substitute</div>
 <div class="line"><span class="lineno">   52</span>                )</div>
-<div class="line"><span class="lineno">   53</span>                matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;🔁 Replaced placeholder &#39;{placeholder}&#39; with value &#39;{value_to_substitute}&#39;.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   54</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;✅ Rendered SCPI Command: {rendered_command}&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">   53</span>                matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;🔁 Replaced placeholder &#39;{placeholder}&#39; with value &#39;{value_to_substitute}&#39;.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   54</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;✅ Rendered SCPI Command: {rendered_command}&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><span class="lineno">   55</span>    <span class="keywordflow">return</span> rendered_command</div>
 <div class="line"><span class="lineno">   56</span> </div>
 <div class="line"><span class="lineno">   57</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>

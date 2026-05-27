@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('d1/df6/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: UI Rendering Failure (Empty Screen) due to Cache Corruption</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1829"></a> </p>
-<h1><a class="anchor" id="autotoc_md1830"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2278"></a> </p>
+<h1><a class="anchor" id="autotoc_md2279"></a>
 [2026-03-15 22:55:00]</h1>
 <p><b>Status</b>: RESOLVED <b>Priority</b>: 1 (Critical/Crash - Functional Block)</p>
-<h2><a class="anchor" id="autotoc_md1831"></a>
+<h2><a class="anchor" id="autotoc_md2280"></a>
 Issue</h2>
 <p>After an initial successful build, subsequent application restarts resulted in an empty GUI with no panels or widgets being drawn. The logs showed the build finishing successfully, but with empty layout data for the root <code>display</code> directory.</p>
-<h2><a class="anchor" id="autotoc_md1832"></a>
+<h2><a class="anchor" id="autotoc_md2281"></a>
 Root Cause</h2>
-<p>A logic error in <code>DirectoryBuilderMixin._get_layout_info</code> caused the layout cache to become corrupted.</p>
+<p>A logic error in <code>FolderRecursiveScannerMixin._get_layout_info</code> caused the layout cache to become corrupted.</p>
 <ol type="1">
 <li>On a cache hit where the directory <code>mtime</code> matched, the code was retrieving the <b>already-normalized</b> layout data from the cache.</li>
-<li>It then incorrectly passed this normalized data back into <code>LayoutParser.parse_layout_data</code>.</li>
+<li>It then incorrectly passed this normalized data back into <code>FolderLayoutInterpreter.parse_layout_data</code>.</li>
 <li><code>parse_layout_data</code> expects <b>raw</b> layout dictionary input (where keys like <code>panels</code> or <code>tabs</code> are at the top level).</li>
 <li>Since the input was already normalized (keys were inside a nested <code>data</code> dictionary), the parser failed to find the required fields and returned empty lists.</li>
 <li>This empty result was then returned to the builder (causing the empty UI) and subsequently <b>saved back to disk</b>, permanently corrupting the cache for that path.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1833"></a>
+<h2><a class="anchor" id="autotoc_md2282"></a>
 Resolution</h2>
 <ol type="1">
-<li><b>Code Fix</b>: Modified <code>DirectoryBuilderMixin._get_layout_info</code> to return the <code>cached_entry</code> directly upon a cache hit with a matching <code>mtime</code>. This bypasses the redundant and incorrect re-normalization pass.</li>
-<li><b>System Cleanup</b>: Deleted the corrupted <code>oaDataCache/layout_cache.json</code> file to force the application to perform a clean directory scan and rebuild a healthy cache.</li>
+<li><b>Code Fix</b>: Modified <code>FolderRecursiveScannerMixin._get_layout_info</code> to return the <code>cached_entry</code> directly upon a cache hit with a matching <code>mtime</code>. This bypasses the redundant and incorrect re-normalization pass.</li>
+<li><b>System Cleanup</b>: Deleted the corrupted <code>oaDataCache/cache_layout_store.json</code> file to force the application to perform a clean directory scan and rebuild a healthy cache.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1834"></a>
+<h2><a class="anchor" id="autotoc_md2283"></a>
 Verification</h2>
 <ul>
-<li>Verified the corruption mechanism by tracing <code>LayoutParser.parse_layout_data</code> behavior with already-normalized input.</li>
-<li>Confirmed that <code>LayoutCacheManager</code> correctly restores <code>pathlib.Path</code> objects upon loading, making the direct return of cached data safe.</li>
+<li>Verified the corruption mechanism by tracing <code>FolderLayoutInterpreter.parse_layout_data</code> behavior with already-normalized input.</li>
+<li>Confirmed that <code>CacheLayoutStore</code> correctly restores <code>pathlib.Path</code> objects upon loading, making the direct return of cached data safe.</li>
 <li>Visual confirmation (simulated) that the root build pass now receives the correct panel list.</li>
 </ul>
 <p><b>Signed</b>: Elite Bug-Fixing Architect (Gemini CLI) </p>

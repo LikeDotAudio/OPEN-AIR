@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('d8/d93/classWorkers_1_1Launcher_1_1Wor
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f30d3ed4a185f0a5a121627cf18cac6" id="r_a9f30d3ed4a185f0a5a121627cf18cac6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d93/classWorkers_1_1Launcher_1_1WorkerLauncher.html#a9f30d3ed4a185f0a5a121627cf18cac6">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splash_screen, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">console_print_func</a>)</td></tr>
+<tr class="memitem:a9f30d3ed4a185f0a5a121627cf18cac6" id="r_a9f30d3ed4a185f0a5a121627cf18cac6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d93/classWorkers_1_1Launcher_1_1WorkerLauncher.html#a9f30d3ed4a185f0a5a121627cf18cac6">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splash_screen, console_print_func)</td></tr>
 <tr class="separator:a9f30d3ed4a185f0a5a121627cf18cac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07b358d98451dd86a721dd5a92842dff" id="r_a07b358d98451dd86a721dd5a92842dff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d93/classWorkers_1_1Launcher_1_1WorkerLauncher.html#a07b358d98451dd86a721dd5a92842dff">launch_all_workers</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a07b358d98451dd86a721dd5a92842dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,10 +277,10 @@ Thread Safety:
 <div class="line"><span class="lineno">   91</span><span class="stringliteral">            Executes on the calling thread. Individual workers may spawn their</span></div>
 <div class="line"><span class="lineno">   92</span><span class="stringliteral">            own threads or processes upon initialization.</span></div>
 <div class="line"><span class="lineno">   93</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   94</span>        current_function_name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a></div>
+<div class="line"><span class="lineno">   94</span>        current_function_name = inspect.currentframe().f_code.co_name</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   97</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(f<span class="stringliteral">&quot;🟢️️️🟢 Eureka! We are kicking off the worker &quot;</span></div>
+<div class="line"><span class="lineno">   97</span>            logger.debug(f<span class="stringliteral">&quot;🟢️️️🟢 Eureka! We are kicking off the worker &quot;</span></div>
 <div class="line"><span class="lineno">   98</span>                         f<span class="stringliteral">&quot;engines from &#39;{current_function_name}&#39;!&quot;</span>)</div>
 <div class="line"><span class="lineno">   99</span> </div>
 <div class="line"><span class="lineno">  100</span>        <span class="keywordflow">try</span>:</div>
@@ -288,12 +288,12 @@ Thread Safety:
 <div class="line"><span class="lineno">  102</span>            <span class="comment"># should be instantiated and registered here.</span></div>
 <div class="line"><span class="lineno">  103</span> </div>
 <div class="line"><span class="lineno">  104</span>            <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">  105</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.debug</a>(<span class="stringliteral">&quot;🟢️️️🔵 Worker &#39;ActivePeakPublisher&#39; initialized. &quot;</span></div>
+<div class="line"><span class="lineno">  105</span>                logger.debug(<span class="stringliteral">&quot;🟢️️️🔵 Worker &#39;ActivePeakPublisher&#39; initialized. &quot;</span></div>
 <div class="line"><span class="lineno">  106</span>                             <span class="stringliteral">&quot;The lab is buzzing with activity!&quot;</span>)</div>
 <div class="line"><span class="lineno">  107</span> </div>
 <div class="line"><span class="lineno">  108</span>            <span class="comment"># --- Celebration of Success ---</span></div>
 <div class="line"><span class="lineno">  109</span>            <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">  110</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.success</a>(<span class="stringliteral">&quot;✅ All workers have been successfully &quot;</span></div>
+<div class="line"><span class="lineno">  110</span>                logger.success(<span class="stringliteral">&quot;✅ All workers have been successfully &quot;</span></div>
 <div class="line"><span class="lineno">  111</span>                               <span class="stringliteral">&quot;conjured and set to their tasks!&quot;</span>)</div>
 <div class="line"><span class="lineno">  112</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">  113</span> </div>
@@ -302,16 +302,13 @@ Thread Safety:
 <div class="line"><span class="lineno">  116</span>            <span class="comment"># we log the traceback and return False to allow the caller to</span></div>
 <div class="line"><span class="lineno">  117</span>            <span class="comment"># decide whether to proceed or halt the application.</span></div>
 <div class="line"><span class="lineno">  118</span>            <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">  119</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(f<span class="stringliteral">&quot;❌ A dreadful error occurred in &quot;</span></div>
+<div class="line"><span class="lineno">  119</span>                logger.exception(f<span class="stringliteral">&quot;❌ A dreadful error occurred in &quot;</span></div>
 <div class="line"><span class="lineno">  120</span>                                 f<span class="stringliteral">&quot;&#39;{current_function_name}&#39;&quot;</span>)</div>
-<div class="line"><span class="lineno">  121</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(f<span class="stringliteral">&quot;❌ The worker initialization has gone &quot;</span></div>
+<div class="line"><span class="lineno">  121</span>                logger.exception(f<span class="stringliteral">&quot;❌ The worker initialization has gone &quot;</span></div>
 <div class="line"><span class="lineno">  122</span>                                 f<span class="stringliteral">&quot;haywire in &#39;{current_function_name}&#39;! &quot;</span></div>
 <div class="line"><span class="lineno">  123</span>                                 f<span class="stringliteral">&quot;The error: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  124</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -369,7 +366,7 @@ Thread Safety:
 
 <p class="definition">Definition at line <a class="el" href="../../d4/db4/Launcher_8py_source.html#l00065">65</a> of file <a class="el" href="../../d4/db4/Launcher_8py_source.html">Launcher.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d9/dbc/bootstrap__sequence_8py_source.html#l00083">Core.bootstrap_sequence.AsyncBootstrapEngine._connect_communication_services()</a>, <a class="el" href="../../d9/dbc/bootstrap__sequence_8py_source.html#l00122">Core.bootstrap_sequence.AsyncBootstrapEngine._launch_app()</a>, <a class="el" href="../../d9/dbc/bootstrap__sequence_8py_source.html#l00097">Core.bootstrap_sequence.AsyncBootstrapEngine._start_optional_services()</a>, and <a class="el" href="../../d9/dbc/bootstrap__sequence_8py_source.html#l00092">Core.bootstrap_sequence.AsyncBootstrapEngine._start_protocol_services()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/ddb/loader__bootstrap__engine_8py_source.html#l00032">Managers.bootstrap.loader_bootstrap_engine.LoaderBootstrapEngine.run()</a>.</p>
 
 </div>
 </div>

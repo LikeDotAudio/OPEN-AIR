@@ -143,13 +143,10 @@ MANDATORY Rust implementation.
 <p class="definition">Definition at line <a class="el" href="../../d3/d31/midi__engine_8py_source.html#l00015">15</a> of file <a class="el" href="../../d3/d31/midi__engine_8py_source.html">midi_engine.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    <span class="keyword">def </span>__init__(self):</div>
 <div class="line"><span class="lineno">   16</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   17</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;🎹🛠️🔗 [MIDI] Using PURE RUST engine.&quot;</span>)</div>
-<div class="line"><span class="lineno">   18</span>        self._engine = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustMidiEngine</a>()</div>
+<div class="line"><span class="lineno">   17</span>            print(<span class="stringliteral">&quot;🎹🛠️🔗 [MIDI] Using PURE RUST engine.&quot;</span>)</div>
+<div class="line"><span class="lineno">   18</span>        self._engine = RustMidiEngine()</div>
 <div class="line"><span class="lineno">   19</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -197,10 +194,10 @@ MANDATORY Rust implementation.
 <p class="definition">Definition at line <a class="el" href="../../d3/d31/midi__engine_8py_source.html#l00029">29</a> of file <a class="el" href="../../d3/d31/midi__engine_8py_source.html">midi_engine.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    <span class="keyword">def </span>get_events(self):</div>
 <div class="line"><span class="lineno">   30</span>        <span class="stringliteral">&quot;&quot;&quot;Polls for buffered MIDI events.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   31</span>        <span class="keywordflow">return</span> self._engine.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_buffered_events</a>()</div>
+<div class="line"><span class="lineno">   31</span>        <span class="keywordflow">return</span> self._engine.get_buffered_events()</div>
 <div class="line"><span class="lineno">   32</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/d31/midi__engine_8py_source.html#l00018">Methods.midi_engine.MidiEngine._engine</a>, <a class="el" href="../../d1/d46/ballistics_8py_source.html#l00048">oaGuiElements.Core.metering.meter_bar.Core.ballistics.BallisticsEngine._engine</a>, <a class="el" href="../../d4/d83/needle__engine_8py_source.html#l00027">oaGuiElements.Methods.needle_engine.NeedleEngine._engine</a>, <a class="el" href="../../d3/d06/pattern__engine_8py_source.html#l00028">oaGuiElements.Methods.pattern_engine.PatternEngine._engine</a>, <a class="el" href="../../d0/d0c/rotary__core_8py_source.html#l00027">oaGuiElements.Methods.rotary_core.RotaryCore._engine</a>, <a class="el" href="../../d6/dd9/ptp__clock_8py_source.html#l00026">Methods.ptp_clock.PtpClock._engine</a>, <a class="el" href="../../d1/d9d/native__pool_8py_source.html#l00023">Core.native_pool.NativePool._engine</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d3/d31/midi__engine_8py_source.html#l00018">Methods.midi_engine.MidiEngine._engine</a>, <a class="el" href="../../d1/d46/ballistics_8py_source.html#l00048">oaGuiElements.Core.metering.meter_bar.Core.ballistics.BallisticsEngine._engine</a>, <a class="el" href="../../d4/d83/needle__engine_8py_source.html#l00027">oaGuiElements.Methods.needle_engine.NeedleEngine._engine</a>, <a class="el" href="../../d3/d06/pattern__engine_8py_source.html#l00028">oaGuiElements.Methods.pattern_engine.PatternEngine._engine</a>, <a class="el" href="../../d0/d0c/rotary__core_8py_source.html#l00027">oaGuiElements.Methods.rotary_core.RotaryCore._engine</a>, <a class="el" href="../../d6/dd9/ptp__clock_8py_source.html#l00026">Methods.ptp_clock.PtpClock._engine</a>, and <a class="el" href="../../d1/d9d/native__pool_8py_source.html#l00023">Core.native_pool.NativePool._engine</a>.</p>
 
 </div>
 </div>

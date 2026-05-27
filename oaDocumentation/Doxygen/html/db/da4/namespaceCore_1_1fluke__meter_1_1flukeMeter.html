@@ -113,7 +113,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">Core.fluke_meter.flukeMeter.main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">void</a>&#160;</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -130,15 +130,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   51</span>    <span class="comment"># If 1200 baud fails, try 9600 or 19200.</span></div>
 <div class="line"><span class="lineno">   52</span>    BAUD_RATE = 1200</div>
 <div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;\n[*] Attempting to connect to {port_name} at {BAUD_RATE} baud...&quot;</span>)</div>
+<div class="line"><span class="lineno">   54</span>    print(f<span class="stringliteral">&quot;\n[*] Attempting to connect to {port_name} at {BAUD_RATE} baud...&quot;</span>)</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   57</span>        ser = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.Serial</a>(</div>
+<div class="line"><span class="lineno">   57</span>        ser = serial.Serial(</div>
 <div class="line"><span class="lineno">   58</span>            port=port_name,</div>
 <div class="line"><span class="lineno">   59</span>            baudrate=BAUD_RATE,</div>
-<div class="line"><span class="lineno">   60</span>            bytesize=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.EIGHTBITS</a>,</div>
-<div class="line"><span class="lineno">   61</span>            parity=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.PARITY_NONE</a>,</div>
-<div class="line"><span class="lineno">   62</span>            stopbits=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.STOPBITS_ONE</a>,</div>
+<div class="line"><span class="lineno">   60</span>            bytesize=serial.EIGHTBITS,</div>
+<div class="line"><span class="lineno">   61</span>            parity=serial.PARITY_NONE,</div>
+<div class="line"><span class="lineno">   62</span>            stopbits=serial.STOPBITS_ONE,</div>
 <div class="line"><span class="lineno">   63</span>            timeout=2,  <span class="comment"># Longer timeout for older hardware</span></div>
 <div class="line"><span class="lineno">   64</span>        )</div>
 <div class="line"><span class="lineno">   65</span> </div>
@@ -148,37 +148,36 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   69</span>        <span class="comment"># Note: Without a specific command, the device sits silently.</span></div>
 <div class="line"><span class="lineno">   70</span>        command_byte = b<span class="stringliteral">&quot;\x01&quot;</span></div>
 <div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;[*] Sending query byte: {command_byte.hex()}&quot;</span>)</div>
-<div class="line"><span class="lineno">   73</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ser.write</a>(command_byte)</div>
+<div class="line"><span class="lineno">   72</span>        print(f<span class="stringliteral">&quot;[*] Sending query byte: {command_byte.hex()}&quot;</span>)</div>
+<div class="line"><span class="lineno">   73</span>        ser.write(command_byte)</div>
 <div class="line"><span class="lineno">   74</span> </div>
 <div class="line"><span class="lineno">   75</span>        <span class="comment"># 4. Wait for response</span></div>
 <div class="line"><span class="lineno">   76</span>        <span class="comment">#time.sleep(1.0)</span></div>
 <div class="line"><span class="lineno">   77</span> </div>
-<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ser.in_waiting</a> &gt; 0:</div>
-<div class="line"><span class="lineno">   79</span>            raw_data = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ser.read</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ser.in_waiting</a>)</div>
-<div class="line"><span class="lineno">   80</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;\n[SUCCESS] Received {len(raw_data)} bytes:&quot;</span>)</div>
-<div class="line"><span class="lineno">   81</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;    Raw Hex: {raw_data.hex()}&quot;</span>)</div>
-<div class="line"><span class="lineno">   82</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;    ASCII:   {raw_data}&quot;</span>)</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">if</span> ser.in_waiting &gt; 0:</div>
+<div class="line"><span class="lineno">   79</span>            raw_data = ser.read(ser.in_waiting)</div>
+<div class="line"><span class="lineno">   80</span>            print(f<span class="stringliteral">&quot;\n[SUCCESS] Received {len(raw_data)} bytes:&quot;</span>)</div>
+<div class="line"><span class="lineno">   81</span>            print(f<span class="stringliteral">&quot;    Raw Hex: {raw_data.hex()}&quot;</span>)</div>
+<div class="line"><span class="lineno">   82</span>            print(f<span class="stringliteral">&quot;    ASCII:   {raw_data}&quot;</span>)</div>
 <div class="line"><span class="lineno">   83</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   84</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n[?] No data received.&quot;</span>)</div>
-<div class="line"><span class="lineno">   85</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;    Troubleshooting:&quot;</span>)</div>
-<div class="line"><span class="lineno">   86</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;    1. Is the Fluke 43B turned ON?&quot;</span>)</div>
-<div class="line"><span class="lineno">   87</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;    2. Is the optical eye aligned correctly?&quot;</span>)</div>
-<div class="line"><span class="lineno">   88</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;    3. Try changing baudrate to 9600 or 19200.&quot;</span>)</div>
+<div class="line"><span class="lineno">   84</span>            print(<span class="stringliteral">&quot;\n[?] No data received.&quot;</span>)</div>
+<div class="line"><span class="lineno">   85</span>            print(<span class="stringliteral">&quot;    Troubleshooting:&quot;</span>)</div>
+<div class="line"><span class="lineno">   86</span>            print(<span class="stringliteral">&quot;    1. Is the Fluke 43B turned ON?&quot;</span>)</div>
+<div class="line"><span class="lineno">   87</span>            print(<span class="stringliteral">&quot;    2. Is the optical eye aligned correctly?&quot;</span>)</div>
+<div class="line"><span class="lineno">   88</span>            print(<span class="stringliteral">&quot;    3. Try changing baudrate to 9600 or 19200.&quot;</span>)</div>
 <div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ser.close</a>()</div>
+<div class="line"><span class="lineno">   90</span>        ser.close()</div>
 <div class="line"><span class="lineno">   91</span> </div>
-<div class="line"><span class="lineno">   92</span>    <span class="keywordflow">except</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.SerialException</a> <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   93</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;\n[ERROR] Could not open port {port_name}.&quot;</span>)</div>
-<div class="line"><span class="lineno">   94</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;Reason: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keywordflow">except</span> serial.SerialException <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">   93</span>        print(f<span class="stringliteral">&quot;\n[ERROR] Could not open port {port_name}.&quot;</span>)</div>
+<div class="line"><span class="lineno">   94</span>        print(f<span class="stringliteral">&quot;Reason: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   95</span>    <span class="keywordflow">except</span> KeyboardInterrupt:</div>
-<div class="line"><span class="lineno">   96</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n[*] Exiting...&quot;</span>)</div>
+<div class="line"><span class="lineno">   96</span>        print(<span class="stringliteral">&quot;\n[*] Exiting...&quot;</span>)</div>
 <div class="line"><span class="lineno">   97</span> </div>
 <div class="line"><span class="lineno">   98</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespacemain_html"><div class="ttname"><a href="../../d2/dc1/namespacemain.html">main</a></div><div class="ttdef"><b>Definition</b> <a href="../../d1/d9c/oaComAES70_2Core_2aes70py-1_80_82_2main_8py_source.html#l00001">main.py:1</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../db/d47/flukeMeter_8py_source.html#l00013">Core.fluke_meter.flukeMeter.select_serial_port()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../db/d47/flukeMeter_8py_source.html#l00013">Core.fluke_meter.flukeMeter.select_serial_port()</a>.</p>
 
 </div>
 </div>
@@ -205,18 +204,18 @@ Returns the selected port device name (e.g., '/dev/ttyUSB0' or 'COM3').
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">    Scans for available serial ports and asks the user to select one.</span></div>
 <div class="line"><span class="lineno">   16</span><span class="stringliteral">    Returns the selected port device name (e.g., &#39;/dev/ttyUSB0&#39; or &#39;COM3&#39;).</span></div>
 <div class="line"><span class="lineno">   17</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   18</span>    ports = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">serial.tools.list_ports.comports</a>())</div>
+<div class="line"><span class="lineno">   18</span>    ports = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(serial.tools.list_ports.comports())</div>
 <div class="line"><span class="lineno">   19</span> </div>
 <div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> ports:</div>
-<div class="line"><span class="lineno">   21</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n[!] No serial devices found.&quot;</span>)</div>
-<div class="line"><span class="lineno">   22</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;    Check your cable connection and drivers.&quot;</span>)</div>
-<div class="line"><span class="lineno">   23</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.exit</a>(1)</div>
+<div class="line"><span class="lineno">   21</span>        print(<span class="stringliteral">&quot;\n[!] No serial devices found.&quot;</span>)</div>
+<div class="line"><span class="lineno">   22</span>        print(<span class="stringliteral">&quot;    Check your cable connection and drivers.&quot;</span>)</div>
+<div class="line"><span class="lineno">   23</span>        sys.exit(1)</div>
 <div class="line"><span class="lineno">   24</span> </div>
-<div class="line"><span class="lineno">   25</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n--- Available Serial Devices ---&quot;</span>)</div>
-<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">for</span> index, port <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(ports):</div>
+<div class="line"><span class="lineno">   25</span>    print(<span class="stringliteral">&quot;\n--- Available Serial Devices ---&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">for</span> index, port <span class="keywordflow">in</span> enumerate(ports):</div>
 <div class="line"><span class="lineno">   27</span>        <span class="comment"># port.device = the system path (e.g., COM3, /dev/ttyUSB0)</span></div>
 <div class="line"><span class="lineno">   28</span>        <span class="comment"># port.description = human readable name (e.g., FTDI Serial)</span></div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;{index + 1}: {port.device} - {port.description}&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>        print(f<span class="stringliteral">&quot;{index + 1}: {port.device} - {port.description}&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">try</span>:</div>
@@ -224,12 +223,12 @@ Returns the selected port device name (e.g., '/dev/ttyUSB0' or 'COM3').
 <div class="line"><span class="lineno">   34</span>            index = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(selection) - 1</div>
 <div class="line"><span class="lineno">   35</span>            <span class="keywordflow">if</span> 0 &lt;= index &lt; <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(ports):</div>
 <div class="line"><span class="lineno">   36</span>                selected_port = ports[index].device</div>
-<div class="line"><span class="lineno">   37</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;[*] You selected: {selected_port}&quot;</span>)</div>
+<div class="line"><span class="lineno">   37</span>                print(f<span class="stringliteral">&quot;[*] You selected: {selected_port}&quot;</span>)</div>
 <div class="line"><span class="lineno">   38</span>                <span class="keywordflow">return</span> selected_port</div>
 <div class="line"><span class="lineno">   39</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   40</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;[!] Invalid number. Please enter 1-{len(ports)}.&quot;</span>)</div>
+<div class="line"><span class="lineno">   40</span>                print(f<span class="stringliteral">&quot;[!] Invalid number. Please enter 1-{len(ports)}.&quot;</span>)</div>
 <div class="line"><span class="lineno">   41</span>        <span class="keywordflow">except</span> ValueError:</div>
-<div class="line"><span class="lineno">   42</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;[!] Please enter a valid integer.&quot;</span>)</div>
+<div class="line"><span class="lineno">   42</span>            print(<span class="stringliteral">&quot;[!] Please enter a valid integer.&quot;</span>)</div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
@@ -237,7 +236,7 @@ Returns the selected port device name (e.g., '/dev/ttyUSB0' or 'COM3').
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a877535c3b6ffdf230bce90c82c597d17"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a877535c3b6ffdf230bce90c82c597d17">input</a></div><div class="ttdeci">input</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02485">generated.rs:2485</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02485">input</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02485">input</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../db/d47/flukeMeter_8py_source.html#l00045">Core.fluke_meter.flukeMeter.main()</a>.</p>
 

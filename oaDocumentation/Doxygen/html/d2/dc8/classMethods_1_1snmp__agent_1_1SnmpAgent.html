@@ -145,14 +145,13 @@ MANDATORY Rust implementation.
 <div class="line"><span class="lineno">   31</span>            <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   34</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📡🛠️🔗 [SNMP] Using PURE RUST agent.&quot;</span>)</div>
+<div class="line"><span class="lineno">   34</span>            print(<span class="stringliteral">&quot;📡🛠️🔗 [SNMP] Using PURE RUST agent.&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   36</span>            self._agent = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustSnmpAgent</a>()</div>
+<div class="line"><span class="lineno">   36</span>            self._agent = RustSnmpAgent()</div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   38</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logging.error</a>(f<span class="stringliteral">&quot;❌ [SNMP] Rust SNMP agent instantiation failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span>            logging.error(f<span class="stringliteral">&quot;❌ [SNMP] Rust SNMP agent instantiation failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span>            self._agent = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   40</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

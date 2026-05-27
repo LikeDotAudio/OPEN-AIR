@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('d2/dd5/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Fix: Path Resolution Failures in UI Workspaces</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1461"></a></p>
-<h1><a class="anchor" id="autotoc_md1462"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1726"></a></p>
+<h1><a class="anchor" id="autotoc_md1727"></a>
 Date: 2026-04-16 23:10:00</h1>
-<h1><a class="anchor" id="autotoc_md1463"></a>
+<h1><a class="anchor" id="autotoc_md1728"></a>
 Status: RESOLVED</h1>
-<h2><a class="anchor" id="autotoc_md1464"></a>
+<h2><a class="anchor" id="autotoc_md1729"></a>
 Description</h2>
 <p>UI workspaces (<code>JsonEditor</code>, <code>ElementProperties</code>, <code>TreeRefactor</code>) were intermittently failing to resolve focus paths received from the <code>InteractiveLayout</code>. The logs showed paths like <code>.fader_config</code> (with leading dots) or paths missing the root key, causing the warning: <code>⚠️ JsonEditor: Path resolution failed. Defaulting to Root JSON.</code></p>
-<h2><a class="anchor" id="autotoc_md1465"></a>
+<h2><a class="anchor" id="autotoc_md1730"></a>
 Trigger</h2>
 <p>Selecting widgets in the visual layout editor that produce non-standard dot-notated paths.</p>
-<h2><a class="anchor" id="autotoc_md1466"></a>
+<h2><a class="anchor" id="autotoc_md1731"></a>
 Action Taken</h2>
 <ol type="1">
 <li><b>Unified Normalization</b>: Implemented <code>_normalize_path(path)</code> across all target workspaces.<ul>
@@ -120,7 +120,7 @@ Action Taken</h2>
 </li>
 <li><b>Traceability</b>: Added informational logs showing both raw and "clean" paths during synchronization.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1467"></a>
+<h2><a class="anchor" id="autotoc_md1732"></a>
 Verification</h2>
 <ul>
 <li>Verified that <code>.fader_config</code> now resolves to <code>root_key.fader_config</code> internally.</li>

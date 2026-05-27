@@ -89,10 +89,10 @@ class SMPTE2138MonitorManager:
         """
         # 1. Traffic Monitoring (External + Internal)
         self.router.subscribe_to_topic("st2138/#", self._on_smpte2138_traffic)
-        self.router.subscribe_to_topic("OPEN-AIR/#", self._on_smpte2138_traffic)
+        self.router.subscribe_to_topic("OpenAir/#", self._on_smpte2138_traffic)
 
         # 2. Bridge Status Monitoring
-        self.router.subscribe_to_topic("OPEN-AIR/System/Status/SMPTE2138/Bridge", self._on_bridge_status)
+        self.router.subscribe_to_topic("OpenAir/System/Status/SMPTE2138/Bridge", self._on_bridge_status)
 
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Monitor active and listening for st2138/# and OPEN-AIR/#.", "DEBUG")
 

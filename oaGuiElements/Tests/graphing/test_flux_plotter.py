@@ -47,14 +47,14 @@ class TestGraphPlotter(unittest.TestCase):
         self.mock_context = MagicMock()
         self.mock_context.state_mirror_engine = MagicMock()
         self.mock_context.subscriber_router = MagicMock()
-        self.mock_context.base_mqtt_topic_from_path = 'OPEN-AIR/test'
+        self.mock_context.base_mqtt_topic_from_path = 'OpenAir/test'
         self.mock_context.builder_instance = MagicMock()
         self.config = {'path': 'test/graph', 'datasets': [{'id': 'ds1', 'label': 'Dataset 1', 'style': {'line_color': 'red'}}], 'layout': {'width': 400, 'height': 300}}
 
     def test_creation(self):
         try:
             'Verify that GraphPlotter initializes without error.'
-            plotter = GraphPlotter(self.parent, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
+            plotter = GraphPlotter(self.parent, self.config, 'OpenAir/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
             self.assertIsInstance(plotter, GraphPlotter, f'Expected instance of GraphPlotter, got {type(plotter)}')
             self.assertIsNotNone(plotter.fig, 'Expected plotter.fig to be not None')
             self.assertIsNotNone(plotter.ax, 'Expected plotter.ax to be not None')

@@ -32,7 +32,8 @@ const VUMeterKnob = ({ value, onChange, config, topic, path_prefix }) => {
 
     // --- 2. Multi-Topic State Management ---
     const useMqttState = window.useMqttState || React.useState;
-    const knobTopic = c.knob_path ? `OpenAir/Gui${path_prefix}/${c.knob_path}` : null;
+    // path_prefix is already the full OpenAir/Gui/... file-derived prefix.
+    const knobTopic = c.knob_path ? `${path_prefix}/${c.knob_path}` : null;
     
     const [knobVal, setKnobVal] = knobTopic ? useMqttState(knobTopic, c.knob_value_default || 0, knobConfig) : [0, () => {}];
 

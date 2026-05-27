@@ -37,7 +37,7 @@ window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
           gap: '5px'
       }}>
         {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
-          <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
+          <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
         ))}
       </div>
     </div>

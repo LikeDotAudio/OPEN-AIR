@@ -151,14 +151,11 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00093">93</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   93</span>        <span class="keyword">def </span>setUp(self):</div>
 <div class="line"><span class="lineno">   94</span>            <span class="comment"># Ensure _instance exists, then set to None to force re-initialization</span></div>
-<div class="line"><span class="lineno">   95</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">StateManager._instance</a> = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   95</span>            StateManager._instance = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   96</span>            self.state_manager = StateManager()</div>
 <div class="line"><span class="lineno">   97</span>            self.state_manager.initialize({}) <span class="comment"># Initialize with empty data</span></div>
 <div class="line"><span class="lineno">   98</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ad8248c80c8b78e6cb03ed25ca6eaa349" name="ad8248c80c8b78e6cb03ed25ca6eaa349"></a>
@@ -206,11 +203,11 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  146</span>            }</div>
 <div class="line"><span class="lineno">  147</span>            self.assertEqual(self.state_manager.get_state(), expected_state)</div>
 <div class="line"><span class="lineno">  148</span>            <span class="comment"># Ensure STATE_UPDATED was called after the update</span></div>
-<div class="line"><span class="lineno">  149</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_publish.assert_called_with</a>(<span class="stringliteral">&quot;STATE_UPDATED&quot;</span>, json_data=self.state_manager.get_state(), source=<span class="stringliteral">&quot;test_grab_bag&quot;</span>)</div>
+<div class="line"><span class="lineno">  149</span>            mock_publish.assert_called_with(<span class="stringliteral">&quot;STATE_UPDATED&quot;</span>, json_data=self.state_manager.get_state(), source=<span class="stringliteral">&quot;test_grab_bag&quot;</span>)</div>
 <div class="line"><span class="lineno">  150</span> </div>
-<div class="line"><span class="lineno">  151</span>    <span class="keyword">class </span>TestOverlayManager(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.TestCase</a>):</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keyword">class </span>TestOverlayManager(unittest.TestCase):</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d1e/tree__drag__drop__handler_8py_source.html#l00015">tree_drag_drop_handler.TreeDragDropHandler.state_manager</a>, <a class="el" href="../../d4/d89/tree__ops__manager_8py_source.html#l00015">tree_ops_manager.TreeOpsManager.state_manager</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00034">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.state_manager</a>, <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00096">Tests.test_core_components.TestStateManager.state_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d1e/tree__drag__drop__handler_8py_source.html#l00015">tree_drag_drop_handler.TreeDragDropHandler.state_manager</a>, <a class="el" href="../../d4/d89/tree__ops__manager_8py_source.html#l00015">tree_ops_manager.TreeOpsManager.state_manager</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00034">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.state_manager</a>, and <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00096">Tests.test_core_components.TestStateManager.state_manager</a>.</p>
 
 </div>
 </div>
@@ -329,10 +326,10 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00126">126</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  126</span>        <span class="keyword">def </span>test_update_state_broadcasts_state_updated(self, mock_publish):</div>
 <div class="line"><span class="lineno">  127</span>            self.state_manager.update_state({<span class="stringliteral">&quot;new&quot;</span>: <span class="stringliteral">&quot;data&quot;</span>}, path=<span class="stringliteral">&quot;root&quot;</span>, source=<span class="stringliteral">&quot;test&quot;</span>)</div>
-<div class="line"><span class="lineno">  128</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_publish.assert_called_once_with</a>(<span class="stringliteral">&quot;STATE_UPDATED&quot;</span>, json_data=self.state_manager.get_state(), source=<span class="stringliteral">&quot;test&quot;</span>)</div>
+<div class="line"><span class="lineno">  128</span>            mock_publish.assert_called_once_with(<span class="stringliteral">&quot;STATE_UPDATED&quot;</span>, json_data=self.state_manager.get_state(), source=<span class="stringliteral">&quot;test&quot;</span>)</div>
 <div class="line"><span class="lineno">  129</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d1e/tree__drag__drop__handler_8py_source.html#l00015">tree_drag_drop_handler.TreeDragDropHandler.state_manager</a>, <a class="el" href="../../d4/d89/tree__ops__manager_8py_source.html#l00015">tree_ops_manager.TreeOpsManager.state_manager</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00034">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.state_manager</a>, <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00096">Tests.test_core_components.TestStateManager.state_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d1e/tree__drag__drop__handler_8py_source.html#l00015">tree_drag_drop_handler.TreeDragDropHandler.state_manager</a>, <a class="el" href="../../d4/d89/tree__ops__manager_8py_source.html#l00015">tree_ops_manager.TreeOpsManager.state_manager</a>, <a class="el" href="../../d0/dad/test__wysiwyg__editor_8py_source.html#l00034">Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.state_manager</a>, and <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00096">Tests.test_core_components.TestStateManager.state_manager</a>.</p>
 
 </div>
 </div>

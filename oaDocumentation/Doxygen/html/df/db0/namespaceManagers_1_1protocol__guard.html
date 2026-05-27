@@ -124,22 +124,19 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   13</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   14</span><span class="stringliteral">    Decorator to wrap protocol dispatch methods in a standardized try/except block.</span></div>
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   16</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decorator</a>(func):</div>
+<div class="line"><span class="lineno">   16</span>    <span class="keyword">def </span>decorator(func):</div>
 <div class="line"><span class="lineno">   17</span>        <span class="preprocessor">@functools.wraps(func)</span></div>
-<div class="line"><span class="lineno">   18</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">wrapper</a>(*args, **kwargs):</div>
+<div class="line"><span class="lineno">   18</span>        <span class="keyword">def </span>wrapper(*args, **kwargs):</div>
 <div class="line"><span class="lineno">   19</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   20</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">func</a>(*args, **kwargs)</div>
+<div class="line"><span class="lineno">   20</span>                <span class="keywordflow">return</span> func(*args, **kwargs)</div>
 <div class="line"><span class="lineno">   21</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   22</span>                <span class="comment"># Format a consistent error log for the protocol failure</span></div>
-<div class="line"><span class="lineno">   23</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router_logger.error</a>(f<span class="stringliteral">&quot;{protocol_name}🚫🛑 [ERROR] Dispatch Failure: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   23</span>                router_logger.error(f<span class="stringliteral">&quot;{protocol_name}🚫🛑 [ERROR] Dispatch Failure: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   24</span>                <span class="comment"># We return None or False depending on the function&#39;s expected return on failure</span></div>
 <div class="line"><span class="lineno">   25</span>                <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> wrapper</div>
 <div class="line"><span class="lineno">   27</span>    <span class="keywordflow">return</span> decorator</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

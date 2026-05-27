@@ -82,7 +82,7 @@ const TabManager = ({ directoryTree }) => {
                         {layoutFilesToRender.map(file => (
                             <div key={file.name} style={{ width: '100%', height: '100%' }}>
                                 {window.LoaderOrchestrator ? (
-                                    <window.LoaderOrchestrator layoutJson={file.content} />
+                                    <window.LoaderOrchestrator layoutJson={file.content} filePath={file.path} />
                                 ) : (
                                     <pre style={{padding: '20px'}}>{JSON.stringify(file.content, null, 2)}</pre>
                                 )}

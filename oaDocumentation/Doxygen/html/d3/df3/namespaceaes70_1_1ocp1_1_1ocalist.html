@@ -98,11 +98,11 @@ $(document).ready(function(){initNavTree('d3/df3/namespaceaes70_1_1ocp1_1_1ocali
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6484e7b123e500ef3e58e56234f0f98d" id="r_a6484e7b123e500ef3e58e56234f0f98d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a6484e7b123e500ef3e58e56234f0f98d">OcaList</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type</a>)</td></tr>
+<tr class="memitem:a6484e7b123e500ef3e58e56234f0f98d" id="r_a6484e7b123e500ef3e58e56234f0f98d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a6484e7b123e500ef3e58e56234f0f98d">OcaList</a> (_type)</td></tr>
 <tr class="separator:a6484e7b123e500ef3e58e56234f0f98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50dc7efc24ff05444c8da0e63bad1abd" id="r_a50dc7efc24ff05444c8da0e63bad1abd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a50dc7efc24ff05444c8da0e63bad1abd">OcaListConstantLength</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type</a>)</td></tr>
+<tr class="memitem:a50dc7efc24ff05444c8da0e63bad1abd" id="r_a50dc7efc24ff05444c8da0e63bad1abd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a50dc7efc24ff05444c8da0e63bad1abd">OcaListConstantLength</a> (_type)</td></tr>
 <tr class="separator:a50dc7efc24ff05444c8da0e63bad1abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a369673e1835a150fb7001c8d866d226c" id="r_a369673e1835a150fb7001c8d866d226c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a369673e1835a150fb7001c8d866d226c">OcaListDynamicLength</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type</a>)</td></tr>
+<tr class="memitem:a369673e1835a150fb7001c8d866d226c" id="r_a369673e1835a150fb7001c8d866d226c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/namespaceaes70_1_1ocp1_1_1ocalist.html#a369673e1835a150fb7001c8d866d226c">OcaListDynamicLength</a> (_type)</td></tr>
 <tr class="separator:a369673e1835a150fb7001c8d866d226c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -124,8 +124,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d9/d21/ocalist_8py_source.html#l00101">101</a> of file <a class="el" href="../../d9/d21/ocalist_8py_source.html">ocalist.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  101</span><span class="keyword">def </span>OcaList(_type):</div>
-<div class="line"><span class="lineno">  102</span>    <span class="keywordflow">return</span> OcaListConstantLength(_type) <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.is_constant_length</a> <span class="keywordflow">else</span> OcaListDynamicLength(_type)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">  102</span>    <span class="keywordflow">return</span> OcaListConstantLength(_type) <span class="keywordflow">if</span> _type.is_constant_length <span class="keywordflow">else</span> OcaListDynamicLength(_type)</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d9/d21/ocalist_8py_source.html#l00007">aes70.ocp1.ocalist.OcaListConstantLength()</a>, and <a class="el" href="../../d9/d21/ocalist_8py_source.html#l00051">aes70.ocp1.ocalist.OcaListDynamicLength()</a>.</p>
 
@@ -149,13 +148,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d9/d21/ocalist_8py_source.html#l00007">7</a> of file <a class="el" href="../../d9/d21/ocalist_8py_source.html">ocalist.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    7</span><span class="keyword">def </span>OcaListConstantLength(_type):</div>
-<div class="line"><span class="lineno">    8</span>    encodedLengthConst = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.encoded_length</a>(<span class="keywordtype">None</span>)</div>
-<div class="line"><span class="lineno">    9</span>    encodeToFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.encode_to</a></div>
-<div class="line"><span class="lineno">   10</span>    decodeFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.decode_from</a></div>
+<div class="line"><span class="lineno">    8</span>    encodedLengthConst = _type.encoded_length(<span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">    9</span>    encodeToFunc = _type.encode_to</div>
+<div class="line"><span class="lineno">   10</span>    decodeFunc = _type.decode_from</div>
 <div class="line"><span class="lineno">   11</span> </div>
 <div class="line"><span class="lineno">   12</span>    <span class="keyword">def </span>encoded_length(value):</div>
-<div class="line"><span class="lineno">   13</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, list) <span class="keywordflow">or</span> is_typed_array(value)):</div>
-<div class="line"><span class="lineno">   14</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Expected array.&#39;</span>)</div>
+<div class="line"><span class="lineno">   13</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (isinstance(value, list) <span class="keywordflow">or</span> is_typed_array(value)):</div>
+<div class="line"><span class="lineno">   14</span>            <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Expected array.&#39;</span>)</div>
 <div class="line"><span class="lineno">   15</span>        length = <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value)</div>
 <div class="line"><span class="lineno">   16</span>        <span class="keywordflow">if</span> length &gt; 0xffff:</div>
 <div class="line"><span class="lineno">   17</span>            <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;Array too long for OcaList OCP.1 encoding&#39;</span>)</div>
@@ -166,7 +165,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   22</span>        pack_into(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos, length)</div>
 <div class="line"><span class="lineno">   23</span>        pos += 2</div>
 <div class="line"><span class="lineno">   24</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   25</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodeToFunc</a>(dataView, pos, value[i])</div>
+<div class="line"><span class="lineno">   25</span>            pos = encodeToFunc(dataView, pos, value[i])</div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>    <span class="keyword">def </span>decode_from(dataView: bytearray, pos):</div>
@@ -174,7 +173,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   30</span>        pos += 2</div>
 <div class="line"><span class="lineno">   31</span>        value = [<span class="keywordtype">None</span>] * length</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   33</span>            value[i] = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeFunc</a>(dataView, pos)</div>
+<div class="line"><span class="lineno">   33</span>            value[i] = decodeFunc(dataView, pos)</div>
 <div class="line"><span class="lineno">   34</span>            pos += encodedLengthConst</div>
 <div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> pos, value</div>
 <div class="line"><span class="lineno">   36</span> </div>
@@ -219,20 +218,20 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d9/d21/ocalist_8py_source.html#l00051">51</a> of file <a class="el" href="../../d9/d21/ocalist_8py_source.html">ocalist.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   51</span><span class="keyword">def </span>OcaListDynamicLength(_type):</div>
-<div class="line"><span class="lineno">   52</span>    encodedLengthFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.encoded_length</a></div>
-<div class="line"><span class="lineno">   53</span>    encodeToFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.encode_to</a></div>
-<div class="line"><span class="lineno">   54</span>    decodeFromFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.decode_from</a></div>
-<div class="line"><span class="lineno">   55</span>    decodeLengthFunc = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_type.decode_length</a></div>
+<div class="line"><span class="lineno">   52</span>    encodedLengthFunc = _type.encoded_length</div>
+<div class="line"><span class="lineno">   53</span>    encodeToFunc = _type.encode_to</div>
+<div class="line"><span class="lineno">   54</span>    decodeFromFunc = _type.decode_from</div>
+<div class="line"><span class="lineno">   55</span>    decodeLengthFunc = _type.decode_length</div>
 <div class="line"><span class="lineno">   56</span> </div>
 <div class="line"><span class="lineno">   57</span>    <span class="keyword">def </span>encoded_length(value):</div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, list) <span class="keywordflow">or</span> is_typed_array(value)):</div>
-<div class="line"><span class="lineno">   59</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Expected array.&#39;</span>)</div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (isinstance(value, list) <span class="keywordflow">or</span> is_typed_array(value)):</div>
+<div class="line"><span class="lineno">   59</span>            <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Expected array.&#39;</span>)</div>
 <div class="line"><span class="lineno">   60</span>        length = <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value)</div>
 <div class="line"><span class="lineno">   61</span>        <span class="keywordflow">if</span> length &gt; 0xffff:</div>
 <div class="line"><span class="lineno">   62</span>            <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;Array too long for OcaList OCP.1 encoding&#39;</span>)</div>
 <div class="line"><span class="lineno">   63</span>        result = 2</div>
 <div class="line"><span class="lineno">   64</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   65</span>            result += <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodedLengthFunc</a>(value[i])</div>
+<div class="line"><span class="lineno">   65</span>            result += encodedLengthFunc(value[i])</div>
 <div class="line"><span class="lineno">   66</span>        <span class="keywordflow">return</span> result</div>
 <div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>    <span class="keyword">def </span>encode_to(dataView: bytearray, pos: int, value):</div>
@@ -240,7 +239,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   70</span>        pack_into(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos, length)</div>
 <div class="line"><span class="lineno">   71</span>        pos += 2</div>
 <div class="line"><span class="lineno">   72</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   73</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodeToFunc</a>(dataView, pos, value[i])</div>
+<div class="line"><span class="lineno">   73</span>            pos = encodeToFunc(dataView, pos, value[i])</div>
 <div class="line"><span class="lineno">   74</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span>    <span class="keyword">def </span>decode_from(dataView: bytearray, pos: int):</div>
@@ -248,7 +247,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   78</span>        pos += 2</div>
 <div class="line"><span class="lineno">   79</span>        value = [<span class="keywordtype">None</span>] * length</div>
 <div class="line"><span class="lineno">   80</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   81</span>            pos, tmp = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeFromFunc</a>(dataView, pos)</div>
+<div class="line"><span class="lineno">   81</span>            pos, tmp = decodeFromFunc(dataView, pos)</div>
 <div class="line"><span class="lineno">   82</span>            value[i] = tmp</div>
 <div class="line"><span class="lineno">   83</span>        <span class="keywordflow">return</span> (pos, value)</div>
 <div class="line"><span class="lineno">   84</span> </div>
@@ -256,7 +255,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   86</span>        length = unpack_from(<span class="stringliteral">&#39;!H&#39;</span>, dataView, pos)[0]</div>
 <div class="line"><span class="lineno">   87</span>        pos += 2</div>
 <div class="line"><span class="lineno">   88</span>        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
-<div class="line"><span class="lineno">   89</span>            pos = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeLengthFunc</a>(dataView, pos)</div>
+<div class="line"><span class="lineno">   89</span>            pos = decodeLengthFunc(dataView, pos)</div>
 <div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> pos</div>
 <div class="line"><span class="lineno">   91</span> </div>
 <div class="line"><span class="lineno">   92</span>    <span class="keywordflow">return</span> create_type(Type(</div>

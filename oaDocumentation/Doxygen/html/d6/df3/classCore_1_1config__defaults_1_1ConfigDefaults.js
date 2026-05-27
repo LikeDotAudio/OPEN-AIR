@@ -7,6 +7,7 @@ var classCore_1_1config__defaults_1_1ConfigDefaults =
     [ "ENABLE_DEBUG_MODE", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#aea810fab22556cd19fe01a91a0c91659", null ],
     [ "ENABLE_DEBUG_SCREEN", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#a331113d16606542f79cb354646348d30", null ],
     [ "ENABLE_LOG_TO_FILE", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#aef95669870f189310833d171aaa0da28", null ],
+    [ "FOOTER_ENABLED", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#afea8dfd4c2ee5f5045e90d06e9c6ebd9", null ],
     [ "FORCE_FUNCTIONS", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#a6d78f548b15a38ea0590a419d788ff43", null ],
     [ "HEADER_FONT_FAMILY", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#a41a47b89350e6daa521f8358b585af6f", null ],
     [ "HEADER_FONT_SIZE", "d6/df3/classCore_1_1config__defaults_1_1ConfigDefaults.html#a56edaa4c81e3737765460226ac096661", null ],

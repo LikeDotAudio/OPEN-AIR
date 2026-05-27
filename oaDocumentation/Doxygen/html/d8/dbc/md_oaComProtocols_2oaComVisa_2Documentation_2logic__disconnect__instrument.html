@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d8/dbc/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Logic Disconnect Instrument</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md678"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md679"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md943"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md944"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md680"></a>
+<h2><a class="anchor" id="autotoc_md945"></a>
 File Level</h2>
 <p><code>managers/VisaScipi/manager_visa_disconnect_instrument.py</code></p>
 <p>This file provides a utility function and manager logic for disconnecting from a VISA (Virtual Instrument Software Architecture) resource. It ensures that communication sessions are gracefully terminated and that the system state is updated to reflect the absence of an instrument.</p>
@@ -106,17 +106,17 @@ File Level</h2>
 <li>Broadcast disconnection status and clear device metadata in the UI.</li>
 </ul>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md681"></a>
+<h1><a class="anchor" id="autotoc_md946"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Assumes the provided instrument object is a valid PyVISA resource.</li>
 <li>Blocking I/O may occur during the closing handshake.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md682"></a>
+<h1><a class="anchor" id="autotoc_md947"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md683"></a>
+<h2><a class="anchor" id="autotoc_md948"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md684"></a>
+<h3><a class="anchor" id="autotoc_md949"></a>
 &lt;tt&gt;disconnect_instrument(inst)&lt;/tt&gt;</h3>
 <p>Closes the connection to a VISA instrument.</p>
 <p><b>Parameters:</b></p><ul>
@@ -130,12 +130,12 @@ Global Functions</h2>
 <li>Performs blocking I/O to terminate the hardware session.</li>
 <li>Does not modify global state; only affects the provided object.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md685"></a>
+<h2><a class="anchor" id="autotoc_md950"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md686"></a>
+<h3><a class="anchor" id="autotoc_md951"></a>
 &lt;tt&gt;class VisaDisconnector&lt;/tt&gt;</h3>
 <p>Manages the disconnection sequence and state cleanup for VISA instruments.</p>
-<h4><a class="anchor" id="autotoc_md687"></a>
+<h4><a class="anchor" id="autotoc_md952"></a>
 &lt;tt&gt;__init__(self, visa_proxy, gui_publisher)&lt;/tt&gt;</h4>
 <p>Initializes the VisaDisconnector with communication proxies.</p>
 <p><b>Parameters:</b></p><ul>
@@ -148,7 +148,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Assigns proxy references to internal state.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md688"></a>
+<h4><a class="anchor" id="autotoc_md953"></a>
 &lt;tt&gt;disconnect_instrument_logic(self, inst)&lt;/tt&gt;</h4>
 <p>Disconnects the application from the target VISA instrument.</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <li>Resets the global <code>visa_proxy</code> instrument instance to <code>None</code>.</li>
 <li>Publishes multiple status updates to clear device-specific info.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md689"></a>
+<h1><a class="anchor" id="autotoc_md954"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>If no instrument is present, ensure the proxy is reset and the UI reflects the disconnected state.</li>

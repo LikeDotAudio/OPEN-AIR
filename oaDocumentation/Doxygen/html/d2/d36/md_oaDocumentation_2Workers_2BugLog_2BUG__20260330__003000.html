@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d2/d36/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260330_003000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2040"></a> </p>
-<h1><a class="anchor" id="autotoc_md2041"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2489"></a> </p>
+<h1><a class="anchor" id="autotoc_md2490"></a>
 Issue</h1>
 <p>The Debug Matrix checkboxes were occupying too much space in the main <code>oaTests</code> side panel, causing UI clutter.</p>
-<h1><a class="anchor" id="autotoc_md2042"></a>
+<h1><a class="anchor" id="autotoc_md2491"></a>
 Root Cause</h1>
 <p>Initial implementation of the new Hierarchical Debug Matrix placed all toggles directly in the <code>LeftPanel</code>.</p>
-<h1><a class="anchor" id="autotoc_md2043"></a>
+<h1><a class="anchor" id="autotoc_md2492"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Pop-up Screen</b>: Created <code><a class="el" href="../../da/dba/debug__matrix__screen_8py.html">oaTests/Interface/debug_matrix_screen.py</a></code>, a dedicated Textual <code>Screen</code> that houses the hierarchical checkboxes in a centralized dialog box.</li>
 <li><b>UI Cleanup</b>: Updated <code><a class="el" href="../../df/df2/left__panel_8py.html">oaTests/Interface/left_panel.py</a></code> to remove the bulk checkboxes and replace them with a single "CONFIGURE DEBUG" button.</li>
 <li><b>Navigation Logic</b>: Updated <code><a class="el" href="../../d8/d62/TestsUI_8py.html">oaTests/Interface/TestsUI.py</a></code> to push the new <code>DebugMatrixScreen</code> when the configuration button is clicked and remove legacy event handlers from the main app scope.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2044"></a>
+<h1><a class="anchor" id="autotoc_md2493"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual UI audit confirms the "CONFIGURE DEBUG" button is visible and properly themed.</li>

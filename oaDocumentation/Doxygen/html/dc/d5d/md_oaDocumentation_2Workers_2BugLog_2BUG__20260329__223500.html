@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('dc/d5d/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_223500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1990"></a> </p>
-<h1><a class="anchor" id="autotoc_md1991"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2439"></a> </p>
+<h1><a class="anchor" id="autotoc_md2440"></a>
 Issue</h1>
 <p>A <code>TypeError</code> was reported during dynamic GUI building: &lsquo;TypeError: BuilderArrayCreator.make_array() got multiple values for argument 'context&rsquo;`</p>
-<h1><a class="anchor" id="autotoc_md1992"></a>
+<h1><a class="anchor" id="autotoc_md2441"></a>
 Root Cause</h1>
-<p>The <code>make_array</code> method in <code><a class="el" href="../../d6/d10/array_8py.html">oaGui/Core/array/array.py</a></code> was decorated with <code>@staticmethod</code> but the <code>GuiWidgetFactory</code> was calling it as an instance method, passing <code>builder_instance</code> as the first argument. This caused all positional arguments to shift, resulting in the <code>config_data</code> argument being assigned to the <code>context</code> parameter, and then the explicit <code>context=context</code> keyword argument causing a conflict.</p>
-<h1><a class="anchor" id="autotoc_md1993"></a>
+<p>The <code>make_array</code> method in <code>oaGui/Core/array/array.py</code> was decorated with <code>@staticmethod</code> but the <code>GuiWidgetFactory</code> was calling it as an instance method, passing <code>builder_instance</code> as the first argument. This caused all positional arguments to shift, resulting in the <code>config_data</code> argument being assigned to the <code>context</code> parameter, and then the explicit <code>context=context</code> keyword argument causing a conflict.</p>
+<h1><a class="anchor" id="autotoc_md2442"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Refactored <code>make_array</code></b>: Removed the <code>@staticmethod</code> decorator and added <code>self</code> as the first parameter to correctly consume the <code>builder_instance</code> passed by the factory.</li>
 <li><b>Standardized Factory Pattern</b>: Added a static <code>make</code> method to <code>BuilderArrayCreator</code> to follow the project's preferred factory pattern.</li>
 <li><b>Updated Factory Mapping</b>: Updated <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">oaGui/Core/factory/Core/factory_mapping.py</a></code> to use the <code>make</code> method for <code>OcaArray</code> and related identifiers.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1994"></a>
+<h1><a class="anchor" id="autotoc_md2443"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that the argument signature now correctly handles the <code>builder_instance</code> as <code>self</code>.</li>
-<li>The <code>self._create_dynamic_widgets</code> call now correctly refers to the <code>DynamicGuiBuilder</code> instance. </li>
+<li>The <code>self._create_dynamic_widgets</code> call now correctly refers to the <code>LoaderOrchestrator</code> instance. </li>
 </ol>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('dd/d02/md_oaGuiElements_2Documentation
   <div class="headertitle"><div class="title">🏷️ Graph Updater</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md3613"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md3614"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md3893"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md3894"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md3615"></a>
+<h2><a class="anchor" id="autotoc_md3895"></a>
 File Level</h2>
 <p>data_graphing/graph_updater.py</p>
-<h1><a class="anchor" id="autotoc_md3616"></a>
+<h1><a class="anchor" id="autotoc_md3896"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md3617"></a>
+<h1><a class="anchor" id="autotoc_md3897"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md3618"></a>
+<h2><a class="anchor" id="autotoc_md3898"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md3619"></a>
+<h3><a class="anchor" id="autotoc_md3899"></a>
 &lt;tt&gt;smooth_data(data, window_size)&lt;/tt&gt;</h3>
 <p>Applies a simple moving average smoothing to the data.</p>
 <p><b>Parameters:</b></p><ul>
@@ -119,7 +119,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3620"></a>
+<h3><a class="anchor" id="autotoc_md3900"></a>
 &lt;tt&gt;update_graph_data(line, x_data, y_data, new_x, new_y, smoothing)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -136,7 +136,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3621"></a>
+<h3><a class="anchor" id="autotoc_md3901"></a>
 &lt;tt&gt;load_initial_data(line, x_data, y_data, x_values, y_values, smoothing)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -153,7 +153,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3622"></a>
+<h3><a class="anchor" id="autotoc_md3902"></a>
 &lt;tt&gt;clear_plot_data(line, x_data, y_data)&lt;/tt&gt;</h3>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -167,7 +167,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3623"></a>
+<h3><a class="anchor" id="autotoc_md3903"></a>
 &lt;tt&gt;autoscale_and_redraw(ax, canvas)&lt;/tt&gt;</h3>
 <p>⚡ HIGH PERFORMANCE: Redraws the graph using Blit logic if possible. Bypasses Matplotlib's slow 'get_window_extent' text measurement on every frame.</p>
 <p><b>Parameters:</b></p><ul>
@@ -180,7 +180,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3624"></a>
+<h3><a class="anchor" id="autotoc_md3904"></a>
 &lt;tt&gt;perform_fast_blit(ax, canvas, lines)&lt;/tt&gt;</h3>
 <p>Redraws ONLY the lines on top of a cached background. Stops the 12-second 'get_window_extent' stall cold.</p>
 <p><b>Parameters:</b></p><ul>
@@ -194,7 +194,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3625"></a>
+<h1><a class="anchor" id="autotoc_md3905"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

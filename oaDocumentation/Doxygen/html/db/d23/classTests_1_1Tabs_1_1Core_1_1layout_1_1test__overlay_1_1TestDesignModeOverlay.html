@@ -178,7 +178,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   21</span>        <span class="stringliteral">&quot;&quot;&quot;Set up mock dependencies for tests.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   22</span>        <span class="comment"># Mock the element that would be behind the overlay</span></div>
 <div class="line"><span class="lineno">   23</span>        self.mock_element_behind = MagicMock()</div>
-<div class="line"><span class="lineno">   24</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">is_visible.return_value</a> = <span class="keyword">True</span> <span class="comment"># Assume it&#39;s visible for testing</span></div>
+<div class="line"><span class="lineno">   24</span>        self.mock_element_behind.is_visible.return_value = <span class="keyword">True</span> <span class="comment"># Assume it&#39;s visible for testing</span></div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>        <span class="comment"># Mock event handlers that the overlay itself would expose/use</span></div>
 <div class="line"><span class="lineno">   27</span>        self.overlay_click_handler = MagicMock()</div>
@@ -198,31 +198,31 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>        <span class="comment"># Dummy overlay class simulating the behavior described in the instruction.</span></div>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># In a real scenario, this would be the actual DesignModeOverlay class.</span></div>
-<div class="line"><span class="lineno">   44</span>        <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyOverlay</a>:</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keyword">class </span>DummyOverlay:</div>
 <div class="line"><span class="lineno">   45</span>            <span class="keyword">def </span>__init__(self, underlying_element, event_handlers):</div>
 <div class="line"><span class="lineno">   46</span>                self.underlying_element = underlying_element</div>
 <div class="line"><span class="lineno">   47</span>                self._event_handlers = event_handlers</div>
 <div class="line"><span class="lineno">   48</span>                self.is_active = <span class="keyword">True</span> <span class="comment"># Overlay is active by default for testing interception</span></div>
 <div class="line"><span class="lineno">   49</span> </div>
-<div class="line"><span class="lineno">   50</span>            <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(self, event_type: str, event_data: dict):</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keyword">def </span>handle_event(self, event_type: str, event_data: dict):</div>
 <div class="line"><span class="lineno">   51</span>                <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   52</span><span class="stringliteral">                Simulates the overlay&#39;s event handling logic.</span></div>
 <div class="line"><span class="lineno">   53</span><span class="stringliteral">                If active, it calls its own handler. If inactive, it passes to the underlying element.</span></div>
 <div class="line"><span class="lineno">   54</span><span class="stringliteral">                &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   55</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Overlay handling event: {event_type} with data {event_data}&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   55</span>                print(f<span class="stringliteral">&quot;DEBUG: Overlay handling event: {event_type} with data {event_data}&quot;</span>) <span class="comment"># Example debug log</span></div>
 <div class="line"><span class="lineno">   56</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.is_active:</div>
 <div class="line"><span class="lineno">   57</span>                    <span class="comment"># Overlay is inactive, pass event to the underlying element if it has a handler for it.</span></div>
-<div class="line"><span class="lineno">   58</span>                    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(self.underlying_element, event_type):</div>
-<div class="line"><span class="lineno">   59</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Overlay inactive, passing &#39;{event_type}&#39; to underlying element.&quot;</span>) <span class="comment"># Example debug log</span></div>
-<div class="line"><span class="lineno">   60</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self.underlying_element, event_type)(**event_data)</div>
+<div class="line"><span class="lineno">   58</span>                    <span class="keywordflow">if</span> hasattr(self.underlying_element, event_type):</div>
+<div class="line"><span class="lineno">   59</span>                        print(f<span class="stringliteral">&quot;DEBUG: Overlay inactive, passing &#39;{event_type}&#39; to underlying element.&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   60</span>                        getattr(self.underlying_element, event_type)(**event_data)</div>
 <div class="line"><span class="lineno">   61</span>                    <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   62</span> </div>
 <div class="line"><span class="lineno">   63</span>                <span class="comment"># Overlay is active, attempt to intercept and handle the event.</span></div>
 <div class="line"><span class="lineno">   64</span>                <span class="keywordflow">if</span> event_type <span class="keywordflow">in</span> self._event_handlers:</div>
-<div class="line"><span class="lineno">   65</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Overlay active, calling its &#39;{event_type}&#39; handler.&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   65</span>                    print(f<span class="stringliteral">&quot;DEBUG: Overlay active, calling its &#39;{event_type}&#39; handler.&quot;</span>) <span class="comment"># Example debug log</span></div>
 <div class="line"><span class="lineno">   66</span>                    self._event_handlers[event_type](**event_data)</div>
 <div class="line"><span class="lineno">   67</span>                <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   68</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Overlay active, but no specific handler for &#39;{event_type}&#39;. Event not intercepted.&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   68</span>                    print(f<span class="stringliteral">&quot;DEBUG: Overlay active, but no specific handler for &#39;{event_type}&#39;. Event not intercepted.&quot;</span>) <span class="comment"># Example debug log</span></div>
 <div class="line"><span class="lineno">   69</span>                    <span class="comment"># If no specific handler, it might still be considered intercepted if it doesn&#39;t reach the element below.</span></div>
 <div class="line"><span class="lineno">   70</span>                    <span class="comment"># For this test, we assume if it has a handler, it&#39;s intercepted.</span></div>
 <div class="line"><span class="lineno">   71</span>                    <span class="comment"># If no handler, it might still pass through, or be ignored by the overlay.</span></div>
@@ -231,15 +231,14 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   74</span>            <span class="keyword">def </span>set_active(self, active: bool):</div>
 <div class="line"><span class="lineno">   75</span>                <span class="stringliteral">&quot;&quot;&quot;Sets the active state of the overlay.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   76</span>                self.is_active = active</div>
-<div class="line"><span class="lineno">   77</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;DEBUG: Overlay set to active: {self.is_active}&quot;</span>) <span class="comment"># Example debug log</span></div>
+<div class="line"><span class="lineno">   77</span>                print(f<span class="stringliteral">&quot;DEBUG: Overlay set to active: {self.is_active}&quot;</span>) <span class="comment"># Example debug log</span></div>
 <div class="line"><span class="lineno">   78</span> </div>
 <div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>        self.overlay = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyOverlay</a>(</div>
+<div class="line"><span class="lineno">   80</span>        self.overlay = DummyOverlay(</div>
 <div class="line"><span class="lineno">   81</span>            underlying_element=self.mock_element_behind,</div>
 <div class="line"><span class="lineno">   82</span>            event_handlers=self.overlay_event_handlers</div>
 <div class="line"><span class="lineno">   83</span>        )</div>
 <div class="line"><span class="lineno">   84</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -268,21 +267,21 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">   88</span><span class="stringliteral">        preventing it from reaching the element behind it.</span></div>
 <div class="line"><span class="lineno">   89</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   90</span>        mock_event_data = {<span class="stringliteral">&quot;x&quot;</span>: 100, <span class="stringliteral">&quot;y&quot;</span>: 200, <span class="stringliteral">&quot;button&quot;</span>: <span class="stringliteral">&quot;left&quot;</span>}</div>
-<div class="line"><span class="lineno">   91</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_click_event&quot;</span>)</div>
+<div class="line"><span class="lineno">   91</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_click_event&quot;</span>)</div>
 <div class="line"><span class="lineno">   92</span> </div>
 <div class="line"><span class="lineno">   93</span>        <span class="comment"># Simulate a click event occurring</span></div>
-<div class="line"><span class="lineno">   94</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;click&quot;</span>, mock_event_data)</div>
+<div class="line"><span class="lineno">   94</span>        self.overlay.handle_event(<span class="stringliteral">&quot;click&quot;</span>, mock_event_data)</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>        <span class="comment"># Assert that the overlay&#39;s click handler was called</span></div>
-<div class="line"><span class="lineno">   97</span>        self.overlay_click_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(**mock_event_data)</div>
+<div class="line"><span class="lineno">   97</span>        self.overlay_click_handler.assert_called_once_with(**mock_event_data)</div>
 <div class="line"><span class="lineno">   98</span> </div>
 <div class="line"><span class="lineno">   99</span>        <span class="comment"># Assert that the element behind was NOT called for a click event</span></div>
-<div class="line"><span class="lineno">  100</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">click.assert_not_called</a>()</div>
-<div class="line"><span class="lineno">  101</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_click_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  100</span>        self.mock_element_behind.click.assert_not_called()</div>
+<div class="line"><span class="lineno">  101</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_click_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00027">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_click_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00027">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_click_handler</a>.</p>
 
 </div>
 </div>
@@ -309,16 +308,16 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">  149</span><span class="stringliteral">        Verify that the Design Mode Overlay successfully intercepts keypress events.</span></div>
 <div class="line"><span class="lineno">  150</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  151</span>        mock_event_data = {<span class="stringliteral">&quot;key&quot;</span>: <span class="stringliteral">&quot;Delete&quot;</span>, <span class="stringliteral">&quot;ctrlKey&quot;</span>: <span class="keyword">False</span>}</div>
-<div class="line"><span class="lineno">  152</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_keypress_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  152</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_keypress_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  153</span> </div>
-<div class="line"><span class="lineno">  154</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;keypress&quot;</span>, mock_event_data) <span class="comment"># Assuming keypress is also handled via this method for simplicity</span></div>
-<div class="line"><span class="lineno">  155</span>        self.overlay_keypress_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(**mock_event_data)</div>
+<div class="line"><span class="lineno">  154</span>        self.overlay.handle_event(<span class="stringliteral">&quot;keypress&quot;</span>, mock_event_data) <span class="comment"># Assuming keypress is also handled via this method for simplicity</span></div>
+<div class="line"><span class="lineno">  155</span>        self.overlay_keypress_handler.assert_called_once_with(**mock_event_data)</div>
 <div class="line"><span class="lineno">  156</span>        <span class="comment"># No direct assertion for element_behind keypress as it&#39;s not a mouse event,</span></div>
 <div class="line"><span class="lineno">  157</span>        <span class="comment"># but the principle is the same: if overlay handles it, element behind doesn&#39;t.</span></div>
-<div class="line"><span class="lineno">  158</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_keypress_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  158</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_keypress_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  159</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00031">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_keypress_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00031">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_keypress_handler</a>.</p>
 
 </div>
 </div>
@@ -345,15 +344,15 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">  123</span><span class="stringliteral">        Verify that the Design Mode Overlay successfully intercepts mousedown events.</span></div>
 <div class="line"><span class="lineno">  124</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  125</span>        mock_event_data = {<span class="stringliteral">&quot;x&quot;</span>: 120, <span class="stringliteral">&quot;y&quot;</span>: 220, <span class="stringliteral">&quot;button&quot;</span>: <span class="stringliteral">&quot;right&quot;</span>}</div>
-<div class="line"><span class="lineno">  126</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mousedown_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  126</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mousedown_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;mousedown&quot;</span>, mock_event_data)</div>
-<div class="line"><span class="lineno">  129</span>        self.overlay_mousedown_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(**mock_event_data)</div>
-<div class="line"><span class="lineno">  130</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mousedown.assert_not_called</a>()</div>
-<div class="line"><span class="lineno">  131</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mousedown_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  128</span>        self.overlay.handle_event(<span class="stringliteral">&quot;mousedown&quot;</span>, mock_event_data)</div>
+<div class="line"><span class="lineno">  129</span>        self.overlay_mousedown_handler.assert_called_once_with(**mock_event_data)</div>
+<div class="line"><span class="lineno">  130</span>        self.mock_element_behind.mousedown.assert_not_called()</div>
+<div class="line"><span class="lineno">  131</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mousedown_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  132</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00029">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mousedown_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00029">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mousedown_handler</a>.</p>
 
 </div>
 </div>
@@ -380,20 +379,20 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">  106</span><span class="stringliteral">        Verify that the Design Mode Overlay successfully intercepts mousemove events.</span></div>
 <div class="line"><span class="lineno">  107</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  108</span>        mock_event_data = {<span class="stringliteral">&quot;x&quot;</span>: 150, <span class="stringliteral">&quot;y&quot;</span>: 250, <span class="stringliteral">&quot;dx&quot;</span>: 5, <span class="stringliteral">&quot;dy&quot;</span>: 5}</div>
-<div class="line"><span class="lineno">  109</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mousemove_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  109</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mousemove_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  110</span> </div>
 <div class="line"><span class="lineno">  111</span>        <span class="comment"># Simulate a mousemove event occurring</span></div>
-<div class="line"><span class="lineno">  112</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;mousemove&quot;</span>, mock_event_data)</div>
+<div class="line"><span class="lineno">  112</span>        self.overlay.handle_event(<span class="stringliteral">&quot;mousemove&quot;</span>, mock_event_data)</div>
 <div class="line"><span class="lineno">  113</span> </div>
 <div class="line"><span class="lineno">  114</span>        <span class="comment"># Assert that the overlay&#39;s mousemove handler was called</span></div>
-<div class="line"><span class="lineno">  115</span>        self.overlay_mousemove_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(**mock_event_data)</div>
+<div class="line"><span class="lineno">  115</span>        self.overlay_mousemove_handler.assert_called_once_with(**mock_event_data)</div>
 <div class="line"><span class="lineno">  116</span> </div>
 <div class="line"><span class="lineno">  117</span>        <span class="comment"># Assert that the element behind was NOT called for a mousemove event</span></div>
-<div class="line"><span class="lineno">  118</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mousemove.assert_not_called</a>()</div>
-<div class="line"><span class="lineno">  119</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mousemove_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  118</span>        self.mock_element_behind.mousemove.assert_not_called()</div>
+<div class="line"><span class="lineno">  119</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mousemove_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  120</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00028">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mousemove_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00028">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mousemove_handler</a>.</p>
 
 </div>
 </div>
@@ -420,15 +419,15 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">  135</span><span class="stringliteral">        Verify that the Design Mode Overlay successfully intercepts mouseup events.</span></div>
 <div class="line"><span class="lineno">  136</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  137</span>        mock_event_data = {<span class="stringliteral">&quot;x&quot;</span>: 130, <span class="stringliteral">&quot;y&quot;</span>: 230, <span class="stringliteral">&quot;button&quot;</span>: <span class="stringliteral">&quot;left&quot;</span>}</div>
-<div class="line"><span class="lineno">  138</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mouseup_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  138</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_intercepts_mouseup_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  139</span> </div>
-<div class="line"><span class="lineno">  140</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;mouseup&quot;</span>, mock_event_data)</div>
-<div class="line"><span class="lineno">  141</span>        self.overlay_mouseup_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(**mock_event_data)</div>
-<div class="line"><span class="lineno">  142</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mouseup.assert_not_called</a>()</div>
-<div class="line"><span class="lineno">  143</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mouseup_event&quot;</span>)</div>
+<div class="line"><span class="lineno">  140</span>        self.overlay.handle_event(<span class="stringliteral">&quot;mouseup&quot;</span>, mock_event_data)</div>
+<div class="line"><span class="lineno">  141</span>        self.overlay_mouseup_handler.assert_called_once_with(**mock_event_data)</div>
+<div class="line"><span class="lineno">  142</span>        self.mock_element_behind.mouseup.assert_not_called()</div>
+<div class="line"><span class="lineno">  143</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_intercepts_mouseup_event&quot;</span>)</div>
 <div class="line"><span class="lineno">  144</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00030">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mouseup_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00030">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_mouseup_handler</a>.</p>
 
 </div>
 </div>
@@ -456,19 +455,19 @@ preventing it from reaching the element behind it.
 <div class="line"><span class="lineno">  163</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  164</span>        mock_event_data = {<span class="stringliteral">&quot;x&quot;</span>: 300, <span class="stringliteral">&quot;y&quot;</span>: 400}</div>
 <div class="line"><span class="lineno">  165</span>        self.overlay.set_active(<span class="keyword">False</span>) <span class="comment"># Deactivate the overlay</span></div>
-<div class="line"><span class="lineno">  166</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Starting test_overlay_passes_event_when_inactive&quot;</span>)</div>
+<div class="line"><span class="lineno">  166</span>        print(<span class="stringliteral">&quot;TEST: Starting test_overlay_passes_event_when_inactive&quot;</span>)</div>
 <div class="line"><span class="lineno">  167</span> </div>
 <div class="line"><span class="lineno">  168</span>        <span class="comment"># Simulate a click event occurring</span></div>
-<div class="line"><span class="lineno">  169</span>        self.overlay.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">handle_event</a>(<span class="stringliteral">&quot;click&quot;</span>, mock_event_data)</div>
+<div class="line"><span class="lineno">  169</span>        self.overlay.handle_event(<span class="stringliteral">&quot;click&quot;</span>, mock_event_data)</div>
 <div class="line"><span class="lineno">  170</span> </div>
 <div class="line"><span class="lineno">  171</span>        <span class="comment"># Assert that the overlay&#39;s click handler was NOT called</span></div>
-<div class="line"><span class="lineno">  172</span>        self.overlay_click_handler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_not_called</a>()</div>
+<div class="line"><span class="lineno">  172</span>        self.overlay_click_handler.assert_not_called()</div>
 <div class="line"><span class="lineno">  173</span> </div>
 <div class="line"><span class="lineno">  174</span>        <span class="comment"># Assert that the element behind WAS called for a click event</span></div>
-<div class="line"><span class="lineno">  175</span>        self.mock_element_behind.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">click.assert_called_once_with</a>(**mock_event_data)</div>
-<div class="line"><span class="lineno">  176</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;TEST: Finished test_overlay_passes_event_when_inactive&quot;</span>)</div>
+<div class="line"><span class="lineno">  175</span>        self.mock_element_behind.click.assert_called_once_with(**mock_event_data)</div>
+<div class="line"><span class="lineno">  176</span>        print(<span class="stringliteral">&quot;TEST: Finished test_overlay_passes_event_when_inactive&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00027">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_click_handler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00023">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.mock_element_behind</a>, <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00080">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay</a>, and <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00027">Tests.Tabs.Core.layout.test_overlay.TestDesignModeOverlay.overlay_click_handler</a>.</p>
 
 </div>
 </div>
@@ -511,7 +510,7 @@ preventing it from reaching the element behind it.
 
 <p class="definition">Definition at line <a class="el" href="../../d4/d8f/test__overlay_8py_source.html#l00048">48</a> of file <a class="el" href="../../d4/d8f/test__overlay_8py_source.html">test_overlay.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/de7/router_8py_source.html#l00332">Core.protocol_router.router.ProtocolRouter._dispatch_loop()</a>, <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00178">Core.factory.button_canvas_base.CanvasButton._draw()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00073">Managers.Failover.Manager.FailoverManager._heartbeat_loop()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00100">Managers.Failover.Manager.FailoverManager._monitor_loop()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00126">Managers.Failover.Manager.FailoverManager._transition_state()</a>, <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00065">Core.factory.button_canvas_base.CanvasButton.set_active()</a>, and <a class="el" href="../../de/de7/router_8py_source.html#l00175">Core.protocol_router.router.ProtocolRouter.set_active_state()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/de7/router_8py_source.html#l00333">Core.protocol_router.router.ProtocolRouter._dispatch_loop()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00073">Managers.Failover.Manager.FailoverManager._heartbeat_loop()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00100">Managers.Failover.Manager.FailoverManager._monitor_loop()</a>, <a class="el" href="../../d5/d26/Manager_8py_source.html#l00126">Managers.Failover.Manager.FailoverManager._transition_state()</a>, <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00064">Core.factory.button_canvas_base.CanvasButton.set_active()</a>, and <a class="el" href="../../de/de7/router_8py_source.html#l00175">Core.protocol_router.router.ProtocolRouter.set_active_state()</a>.</p>
 
 </div>
 </div>

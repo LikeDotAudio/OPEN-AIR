@@ -93,41 +93,41 @@ $(document).ready(function(){initNavTree('d6/d56/md_oaComBroker_2Documentation_2
   <div class="headertitle"><div class="title">oaComBroker/Documentation/open_air_core.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md44"></a># </p>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md309"></a># </p>
+<h1><a class="anchor" id="autotoc_md310"></a>
 Documentation for the safety-critical core services of the broker.</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md46"></a>
+<h1><a class="anchor" id="autotoc_md311"></a>
 Author: Anthony Peter Kuzub</h1>
-<h1><a class="anchor" id="autotoc_md47"></a>
+<h1><a class="anchor" id="autotoc_md312"></a>
 Blog: www.Like.audio (Contributor to this project)</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md48"></a>
+<h1><a class="anchor" id="autotoc_md313"></a>
 Professional services for customizing and tailoring this software to your specific</h1>
-<h1><a class="anchor" id="autotoc_md49"></a>
+<h1><a class="anchor" id="autotoc_md314"></a>
 application can be negotiated. There is no charge to use, modify, or fork this software.</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md50"></a>
+<h1><a class="anchor" id="autotoc_md315"></a>
 Build Log: https://like.audio/category/software/spectrum-scanner/</h1>
-<h1><a class="anchor" id="autotoc_md51"></a>
+<h1><a class="anchor" id="autotoc_md316"></a>
 Source Code: https://github.com/APKaudio/</h1>
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md317"></a>
 Feature Requests can be emailed to i @ like . audio</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md53"></a>
+<h1><a class="anchor" id="autotoc_md318"></a>
 Version 20260328.1515.1</h1>
-<h1><a class="anchor" id="autotoc_md54"></a>
+<h1><a class="anchor" id="autotoc_md319"></a>
 🏷️ Open Air Core</h1>
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md320"></a>
 📖 Description &amp; Purpose</h2>
-<h3><a class="anchor" id="autotoc_md56"></a>
+<h3><a class="anchor" id="autotoc_md321"></a>
 File Level</h3>
 <p>core/open_air_core.py</p>
 <p>The Safety-Critical <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Partition for OPEN-AIR. Handles MQTT, Hardware Watchdog, and Device <a class="el" href="../../d4/d7f/namespaceManagers.html">Managers</a>. Statically allocated, strictly typed, headless.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md323"></a>
 🏗️ Core Lifecycle Sequence</h2>
-<p>When <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">start_core_services()</a></code> is invoked via <code>Entry.py</code>, the following sequence occurs:</p>
+<p>When <code>start_core_services()</code> is invoked via <code>Entry.py</code>, the following sequence occurs:</p>
 <ol type="1">
 <li><b>Environment Setup</b>: Initializes system paths and console encoding.</li>
 <li><b>Liveness Monitoring</b>: Starts a hardware watchdog thread to ensure system liveness.</li>
@@ -136,7 +136,7 @@ File Level</h3>
 <li><b>Graceful Teardown</b>: Cleanly stops all registered managers on exit.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md325"></a>
 ⚙️ Assumptions &amp; Constraints</h2>
 <ul>
 <li>Assumes a POSIX-compliant environment for path handling.</li>
@@ -145,9 +145,9 @@ File Level</h3>
 <li>Intended to run as a headless, statically allocated service.</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md327"></a>
 📚 API Reference</h2>
-<h3><a class="anchor" id="autotoc_md63"></a>
+<h3><a class="anchor" id="autotoc_md328"></a>
 &lt;tt&gt;main()&lt;/tt&gt;</h3>
 <p>Orchestrates the startup, execution, and shutdown of the OPEN-AIR core.</p>
 <p><b>Parameters:</b></p><ul>

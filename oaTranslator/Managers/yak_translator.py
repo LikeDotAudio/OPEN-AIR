@@ -130,7 +130,7 @@ class YakTranslator:
 
     def _setup_mqtt_subscriptions(self):
         """Registers the primary MQTT trigger filter for the translator."""
-        trigger_topic_filter = "OPEN-AIR/yak/commands/#"
+        trigger_topic_filter = "OpenAir/yak/commands/#"
         self.subscriber_router.subscribe_to_topic(
             trigger_topic_filter, self._on_yak_trigger_message
         )
@@ -150,14 +150,14 @@ class YakTranslator:
             message: The incoming MqttMessage object containing topic and payload.
 
         Side Effects:
-            - Publishes a translated SCPI payload to 'OPEN-AIR/Proxy/Tx_Inbox'.
+            - Publishes a translated SCPI payload to 'OpenAir/Proxy/Tx_Inbox'.
             - Updates the internal context store for correlation.
         """
         topic = message.topic
         payload = message.payload
 
         # Strip the prefix to resolve the relative YAK path hierarchy.
-        yak_command_path = topic.replace("OPEN-AIR/yak/commands/", "").split("/")
+        yak_command_path = topic.replace("OpenAir/yak/commands/", "").split("/")
 
         declaration = self._get_command_declaration(yak_command_path)
         if not declaration:
@@ -193,7 +193,7 @@ class YakTranslator:
         }
 
         self.mqtt_util.get_client_instance().publish(
-            topic="OPEN-AIR/Proxy/Tx_Inbox",
+            topic="OpenAir/Proxy/Tx_Inbox",
             payload=orjson.dumps(proxy_payload).decode(),
             qos=0,
             retain=False,

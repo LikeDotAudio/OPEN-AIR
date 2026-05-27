@@ -6,6 +6,7 @@ var namespaceManagers =
       [ "LOCAL_DEBUG", "d0/dad/namespaceManagers_1_1application__initializer.html#a61e365bb6ebd8d1f2b8b7b01def073dd", null ],
       [ "logger", "d0/dad/namespaceManagers_1_1application__initializer.html#a1a221fb275ae37cea2a9148918bf476f", null ]
     ] ],
+    [ "assembler", "d1/d64/namespaceManagers_1_1assembler.html", "d1/d64/namespaceManagers_1_1assembler" ],
     [ "AuditRunner", "db/dda/namespaceManagers_1_1AuditRunner.html", [
       [ "estimate_tokens", "db/dda/namespaceManagers_1_1AuditRunner.html#abf5f568547c7780046f43418ac1ee5d3", null ],
       [ "extract_prompt_from_toml", "db/dda/namespaceManagers_1_1AuditRunner.html#a0070f9442dfc103aac17a933810cf603", null ],
@@ -16,6 +17,7 @@ var namespaceManagers =
       [ "OUTPUT_DIR", "db/dda/namespaceManagers_1_1AuditRunner.html#a9c170c2c58c8ecbf0d839748c00810b3", null ],
       [ "PROJECT_ROOT", "db/dda/namespaceManagers_1_1AuditRunner.html#a98575f5211abfae2b3c142c16e6407a5", null ]
     ] ],
+    [ "bootstrap", "d7/dcc/namespaceManagers_1_1bootstrap.html", "d7/dcc/namespaceManagers_1_1bootstrap" ],
     [ "cache_traffic_controller", "d2/dea/namespaceManagers_1_1cache__traffic__controller.html", [
       [ "process_traffic", "d2/dea/namespaceManagers_1_1cache__traffic__controller.html#acb7151983b39fb2f21a4a2149c39516f", null ],
       [ "app_constants", "d2/dea/namespaceManagers_1_1cache__traffic__controller.html#a24915af21b630fcd1f4b9d351acc9b83", null ],
@@ -41,15 +43,16 @@ var namespaceManagers =
       [ "VERSION", "d1/d25/namespaceManagers_1_1DependencyManager.html#aacd41a385ea1f52c01e423af8755492e", null ]
     ] ],
     [ "discovery_orchestrator", "d5/d4a/namespaceManagers_1_1discovery__orchestrator.html", "d5/d4a/namespaceManagers_1_1discovery__orchestrator" ],
+    [ "display", "de/db7/namespaceManagers_1_1display.html", "de/db7/namespaceManagers_1_1display" ],
     [ "Failover", "da/d4d/namespaceManagers_1_1Failover.html", "da/d4d/namespaceManagers_1_1Failover" ],
     [ "fleet_mqtt_bridge", "dc/dde/namespaceManagers_1_1fleet__mqtt__bridge.html", "dc/dde/namespaceManagers_1_1fleet__mqtt__bridge" ],
     [ "fleet_status_monitor", "d8/d2b/namespaceManagers_1_1fleet__status__monitor.html", "d8/d2b/namespaceManagers_1_1fleet__status__monitor" ],
-    [ "gui_batch", "d3/de7/namespaceManagers_1_1gui__batch.html", "d3/de7/namespaceManagers_1_1gui__batch" ],
-    [ "gui_display", "d7/d4b/namespaceManagers_1_1gui__display.html", "d7/d4b/namespaceManagers_1_1gui__display" ],
-    [ "gui_mqtt", "de/da8/namespaceManagers_1_1gui__mqtt.html", "de/da8/namespaceManagers_1_1gui__mqtt" ],
-    [ "gui_re", "de/da5/namespaceManagers_1_1gui__re.html", "de/da5/namespaceManagers_1_1gui__re" ],
+    [ "grid", "dd/d0d/namespaceManagers_1_1grid.html", "dd/d0d/namespaceManagers_1_1grid" ],
     [ "heartbeat_generator", "d0/dff/namespaceManagers_1_1heartbeat__generator.html", "d0/dff/namespaceManagers_1_1heartbeat__generator" ],
     [ "InstallationManager", "dc/dd0/namespaceManagers_1_1InstallationManager.html", "dc/dd0/namespaceManagers_1_1InstallationManager" ],
+    [ "instrument_controller", "d1/db8/namespaceManagers_1_1instrument__controller.html", "d1/db8/namespaceManagers_1_1instrument__controller" ],
+    [ "layout", "de/d8c/namespaceManagers_1_1layout.html", "de/d8c/namespaceManagers_1_1layout" ],
+    [ "lifecycle", "d9/d64/namespaceManagers_1_1lifecycle.html", "d9/d64/namespaceManagers_1_1lifecycle" ],
     [ "log_filter_engine", "d7/dab/namespaceManagers_1_1log__filter__engine.html", "d7/dab/namespaceManagers_1_1log__filter__engine" ],
     [ "LoggingManager", "d4/d4f/namespaceManagers_1_1LoggingManager.html", "d4/d4f/namespaceManagers_1_1LoggingManager" ],
     [ "MaintenanceManager", "d0/d58/namespaceManagers_1_1MaintenanceManager.html", "d0/d58/namespaceManagers_1_1MaintenanceManager" ],
@@ -58,16 +61,12 @@ var namespaceManagers =
     [ "mqtt_manager", "d9/db0/namespaceManagers_1_1mqtt__manager.html", "d9/db0/namespaceManagers_1_1mqtt__manager" ],
     [ "mqtt_subscriber_router", "de/d9d/namespaceManagers_1_1mqtt__subscriber__router.html", "de/d9d/namespaceManagers_1_1mqtt__subscriber__router" ],
     [ "nmos_manager", "db/d16/namespaceManagers_1_1nmos__manager.html", "db/d16/namespaceManagers_1_1nmos__manager" ],
-    [ "open_air_ui", "d6/dd9/namespaceManagers_1_1open__air__ui.html", [
-      [ "main", "d6/dd9/namespaceManagers_1_1open__air__ui.html#a0c98ec8753c991e902d25270e7f1a522", null ],
-      [ "current_dir", "d6/dd9/namespaceManagers_1_1open__air__ui.html#a2c677a79e7b110125f2bb5d952678344", null ],
-      [ "project_root", "d6/dd9/namespaceManagers_1_1open__air__ui.html#aeb3831075cbb5ef6c7a6c4eeb9ebeb95", null ]
-    ] ],
     [ "osc_manager", "da/d7e/namespaceManagers_1_1osc__manager.html", "da/d7e/namespaceManagers_1_1osc__manager" ],
     [ "palette_manager", "d6/d98/namespaceManagers_1_1palette__manager.html", "d6/d98/namespaceManagers_1_1palette__manager" ],
     [ "protocol_guard", "df/db0/namespaceManagers_1_1protocol__guard.html", [
       [ "protocol_guard", "df/db0/namespaceManagers_1_1protocol__guard.html#a2a4975bb907214532de258b6713b7427", null ]
     ] ],
+    [ "refresh", "d5/def/namespaceManagers_1_1refresh.html", "d5/def/namespaceManagers_1_1refresh" ],
     [ "registration_manager", "d9/d45/namespaceManagers_1_1registration__manager.html", [
       [ "post_resource", "d9/d45/namespaceManagers_1_1registration__manager.html#a2f5ea78447cbe17a1d377629d5f83d10", null ],
       [ "register_all_resources", "d9/d45/namespaceManagers_1_1registration__manager.html#aa19da1a2e79b472f1761d41f8c7502f5", null ],
@@ -87,6 +86,7 @@ var namespaceManagers =
     ] ],
     [ "Setup", "d1/d4d/namespaceManagers_1_1Setup.html", "d1/d4d/namespaceManagers_1_1Setup" ],
     [ "snmp_manager", "db/d6e/namespaceManagers_1_1snmp__manager.html", "db/d6e/namespaceManagers_1_1snmp__manager" ],
+    [ "tabs", "d7/d5d/namespaceManagers_1_1tabs.html", "d7/d5d/namespaceManagers_1_1tabs" ],
     [ "theme_applier", "d7/dd3/namespaceManagers_1_1theme__applier.html", [
       [ "apply_theme", "d7/dd3/namespaceManagers_1_1theme__applier.html#a8972cd0cbc8c65f55e1568e180e25bfa", null ]
     ] ],

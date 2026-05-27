@@ -11,6 +11,7 @@ from collections import deque
 from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.FileReaders.standardizers.schema_utils import coerce_pixel_size
 from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
@@ -60,8 +61,11 @@ class GraphPlotter(
         w = config.get("width") or geom.get("width") or layout_config.get("width") or 500
         h = config.get("height") or geom.get("height") or layout_config.get("height") or 400
 
-        kwargs["width"] = max(int(float(w)), 100)
-        kwargs["height"] = max(int(float(h)), 50)
+        # Percent strings like "100%" are layout directives, not pixel counts —
+        # coerce_pixel_size falls back to the default and lets grid sticky/weight
+        # do the stretch.
+        kwargs["width"] = max(coerce_pixel_size(w, 500), 100)
+        kwargs["height"] = max(coerce_pixel_size(h, 400), 50)
 
         super().__init__(parent, **kwargs)
 

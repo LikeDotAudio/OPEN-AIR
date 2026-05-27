@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('d9/d68/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260403_012500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1216"></a> </p>
-<h1><a class="anchor" id="autotoc_md1217"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1481"></a> </p>
+<h1><a class="anchor" id="autotoc_md1482"></a>
 Issue: Multiple System Component Failures and Boot Crashes</h1>
 <p>Several critical issues were identified through test failures and log analysis:</p><ol type="1">
 <li><code>oaComBroker</code>: Missing <code>rust_router</code> attribute in <code>ProtocolRouter</code> and incomplete ingestion into the Rust core.</li>
@@ -102,7 +102,7 @@ Issue: Multiple System Component Failures and Boot Crashes</h1>
 <li>System Stability: Code -11 (Segmentation Fault) crashes during boot state restoration.</li>
 <li>Test Regressions: <code>test_logic_mqtt_publisher</code> and <code>test_agent_mdns_zeroconf</code> were failing due to outdated logic and improper mocking.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1218"></a>
+<h1><a class="anchor" id="autotoc_md1483"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Missing Attribute</b>: The <code>ProtocolRouter</code> was refactored but the <code>rust_router</code> initialization was accidentally omitted from <code>__init__</code>.</li>
@@ -110,7 +110,7 @@ Root Cause Analysis</h1>
 <li><b>Resource Exhaustion</b>: High-volume message ingestion during boot state restoration overwhelmed the Rust router dispatch threads and the UI thread, causing memory corruption/crashes.</li>
 <li><b>Mocking Protocol</b>: <code>test_agent_mdns_zeroconf</code> didn't correctly implement the context manager protocol (<code>__enter__</code>/<code>__exit__</code>) for mocked sockets.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1219"></a>
+<h1><a class="anchor" id="autotoc_md1484"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>oaComBroker</b>: Restored <code>self.rust_router</code> to <code>ProtocolRouter.__init__</code>. Updated <code>normalize_and_ingest</code> and <code>create_silent_msg</code> to push messages to the Rust core.</li>
@@ -118,7 +118,7 @@ Resolution</h1>
 <li><b>Stability</b>: Implemented a 1ms throttle in <code><a class="el" href="../../da/d84/state__cache_8py.html">state_cache.py</a></code> and a 2ms throttle in <code><a class="el" href="../../d6/d13/gui__state__restorer_8py.html">gui_state_restorer.py</a></code> during boot restoration.</li>
 <li><b>Testing</b>: Updated <code>test_logic_mqtt_publisher</code> to match bulk-publishing logic and fixed <code>test_agent_mdns_zeroconf</code> socket mocks.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1220"></a>
+<h1><a class="anchor" id="autotoc_md1485"></a>
 Verification Evidence</h1>
 <ul>
 <li>Ran <code>pytest</code> on <code>oaComBroker</code> and <code>oaComProtocols.oaComVisa</code> test suites.</li>

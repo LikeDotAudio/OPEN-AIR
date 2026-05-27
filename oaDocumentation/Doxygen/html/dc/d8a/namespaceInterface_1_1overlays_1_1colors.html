@@ -102,7 +102,7 @@ Functions</h2></td></tr>
 <tr class="separator:a3d012cf69fbb93174793cf1fa3174765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a033109ec1d26d5f4c12c75fc72927f6f" id="r_a033109ec1d26d5f4c12c75fc72927f6f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8a/namespaceInterface_1_1overlays_1_1colors.html#a033109ec1d26d5f4c12c75fc72927f6f">_open_color_picker</a> (layout, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>)</td></tr>
 <tr class="separator:a033109ec1d26d5f4c12c75fc72927f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d5668e80941beca1dfb78188658a1d" id="r_a67d5668e80941beca1dfb78188658a1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8a/namespaceInterface_1_1overlays_1_1colors.html#a67d5668e80941beca1dfb78188658a1d">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements</a>)</td></tr>
+<tr class="memitem:a67d5668e80941beca1dfb78188658a1d" id="r_a67d5668e80941beca1dfb78188658a1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8a/namespaceInterface_1_1overlays_1_1colors.html#a67d5668e80941beca1dfb78188658a1d">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, design_elements)</td></tr>
 <tr class="separator:a67d5668e80941beca1dfb78188658a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -133,20 +133,17 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../db/d89/colors_8py_source.html#l00031">31</a> of file <a class="el" href="../../db/d89/colors_8py_source.html">colors.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   31</span><span class="keyword">def </span>_has_color_properties(path):</div>
 <div class="line"><span class="lineno">   32</span>    <span class="stringliteral">&quot;&quot;&quot;Helper to check if a widget path contains any color settings.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   33</span>    data = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_manager.get_value_at_path</a>(path)</div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, dict): <span class="keywordflow">return</span> <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">   33</span>    data = state_manager.get_value_at_path(path)</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(data, dict): <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_scan</a>(d):</div>
-<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">d.items</a>():</div>
-<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">if</span> <span class="stringliteral">&quot;color&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">k.lower</a>() <span class="keywordflow">or</span> <span class="stringliteral">&quot;colour&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">k.lower</a>(): <span class="keywordflow">return</span> <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   39</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(v, dict) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_scan</a>(v): <span class="keywordflow">return</span> <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   36</span>    <span class="keyword">def </span>_scan(d):</div>
+<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> d.items():</div>
+<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">if</span> <span class="stringliteral">&quot;color&quot;</span> <span class="keywordflow">in</span> k.lower() <span class="keywordflow">or</span> <span class="stringliteral">&quot;colour&quot;</span> <span class="keywordflow">in</span> k.lower(): <span class="keywordflow">return</span> <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   39</span>            <span class="keywordflow">if</span> isinstance(v, dict) <span class="keywordflow">and</span> _scan(v): <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   40</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_scan</a>(data)</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> _scan(data)</div>
 <div class="line"><span class="lineno">   42</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../db/d89/colors_8py_source.html#l00013">Interface.overlays.colors.apply_design_overlay()</a>.</p>
 
 </div>
@@ -190,19 +187,17 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   44</span>    <span class="stringliteral">&quot;&quot;&quot;Opens the OS color picker and updates the state_manager.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   45</span>    color_key = <span class="stringliteral">&quot;style.active_color&quot;</span></div>
 <div class="line"><span class="lineno">   46</span>    <span class="comment"># Smart key detection</span></div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;cap_config&quot;</span> <span class="keywordflow">in</span> path: color_key = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">path.replace</a>(<span class="stringliteral">&quot;cap_config&quot;</span>, <span class="stringliteral">&quot;cap_color&quot;</span>)</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;tick_config&quot;</span> <span class="keywordflow">in</span> path: color_key = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">path.replace</a>(<span class="stringliteral">&quot;tick_config&quot;</span>, <span class="stringliteral">&quot;tick_color&quot;</span>)</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;cap_config&quot;</span> <span class="keywordflow">in</span> path: color_key = path.replace(<span class="stringliteral">&quot;cap_config&quot;</span>, <span class="stringliteral">&quot;cap_color&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;tick_config&quot;</span> <span class="keywordflow">in</span> path: color_key = path.replace(<span class="stringliteral">&quot;tick_config&quot;</span>, <span class="stringliteral">&quot;tick_color&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;value_config&quot;</span> <span class="keywordflow">in</span> path: color_key = f<span class="stringliteral">&quot;{path}.bg_color&quot;</span></div>
 <div class="line"><span class="lineno">   50</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;track_config&quot;</span> <span class="keywordflow">in</span> path: color_key = f<span class="stringliteral">&quot;{path}.bar_color&quot;</span></div>
 <div class="line"><span class="lineno">   51</span>    <span class="keywordflow">else</span>: color_key = f<span class="stringliteral">&quot;{path}.style.active_color&quot;</span></div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>    initial = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_manager.get_value_at_path</a>(color_key) <span class="keywordflow">or</span> <span class="stringliteral">&quot;#FF9900&quot;</span></div>
-<div class="line"><span class="lineno">   54</span>    color = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">colorchooser.askcolor</a>(title=<span class="stringliteral">&quot;Pick Color&quot;</span>, initialcolor=initial)</div>
+<div class="line"><span class="lineno">   53</span>    initial = state_manager.get_value_at_path(color_key) <span class="keywordflow">or</span> <span class="stringliteral">&quot;#FF9900&quot;</span></div>
+<div class="line"><span class="lineno">   54</span>    color = colorchooser.askcolor(title=<span class="stringliteral">&quot;Pick Color&quot;</span>, initialcolor=initial)</div>
 <div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> color[1]:</div>
-<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_manager.update_state</a>(color[1], path=color_key, source=layout)</div>
+<div class="line"><span class="lineno">   56</span>        state_manager.update_state(color[1], path=color_key, source=layout)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../db/d89/colors_8py_source.html#l00013">Interface.overlays.colors.apply_design_overlay()</a>.</p>
 
 </div>
@@ -256,22 +251,22 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&quot;&quot;&quot;Handles the 🎨 color palette button.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   15</span> </div>
 <div class="line"><span class="lineno">   16</span>    <span class="comment"># 1. Setup Button</span></div>
-<div class="line"><span class="lineno">   17</span>    color_btn = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Label</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.master</a>, text=<span class="stringliteral">&quot;🎨&quot;</span>, bg=<span class="stringliteral">&quot;black&quot;</span>, fg=<span class="stringliteral">&quot;white&quot;</span>, font=(<span class="stringliteral">&quot;Arial&quot;</span>, 8), cursor=<span class="stringliteral">&quot;hand2&quot;</span>)</div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">color_btn._is_design_overlay</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   19</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements.append</a>(color_btn)</div>
+<div class="line"><span class="lineno">   17</span>    color_btn = tk.Label(widget.master, text=<span class="stringliteral">&quot;🎨&quot;</span>, bg=<span class="stringliteral">&quot;black&quot;</span>, fg=<span class="stringliteral">&quot;white&quot;</span>, font=(<span class="stringliteral">&quot;Arial&quot;</span>, 8), cursor=<span class="stringliteral">&quot;hand2&quot;</span>)</div>
+<div class="line"><span class="lineno">   18</span>    color_btn._is_design_overlay = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   19</span>    design_elements.append(color_btn)</div>
 <div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">color_btn.bind</a>(<span class="stringliteral">&quot;&lt;Button-1&gt;&quot;</span>, <span class="keyword">lambda</span> e: _open_color_picker(layout, path))</div>
+<div class="line"><span class="lineno">   21</span>    color_btn.bind(<span class="stringliteral">&quot;&lt;Button-1&gt;&quot;</span>, <span class="keyword">lambda</span> e: _open_color_picker(layout, path))</div>
 <div class="line"><span class="lineno">   22</span> </div>
 <div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>sync(x, y, w, h):</div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">layout.show_colors.get</a>() <span class="keywordflow">and</span> _has_color_properties(path):</div>
-<div class="line"><span class="lineno">   25</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">color_btn.place</a>(x=x+20, y=y, width=20, height=20)</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> layout.show_colors.get() <span class="keywordflow">and</span> _has_color_properties(path):</div>
+<div class="line"><span class="lineno">   25</span>            color_btn.place(x=x+20, y=y, width=20, height=20)</div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   27</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">color_btn.place_forget</a>()</div>
+<div class="line"><span class="lineno">   27</span>            color_btn.place_forget()</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>    <span class="keywordflow">return</span> sync</div>
 <div class="line"><span class="lineno">   30</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../db/d89/colors_8py_source.html#l00031">Interface.overlays.colors._has_color_properties()</a>, <a class="el" href="../../db/d89/colors_8py_source.html#l00043">Interface.overlays.colors._open_color_picker()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../db/d89/colors_8py_source.html#l00031">Interface.overlays.colors._has_color_properties()</a>, and <a class="el" href="../../db/d89/colors_8py_source.html#l00043">Interface.overlays.colors._open_color_picker()</a>.</p>
 
 </div>
 </div>

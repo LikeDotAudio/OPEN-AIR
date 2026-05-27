@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('db/d7e/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BugLog Entry: 20260409_004000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1314"></a> </p>
-<h1><a class="anchor" id="autotoc_md1315"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1579"></a> </p>
+<h1><a class="anchor" id="autotoc_md1580"></a>
 Issue Summary</h1>
 <p>The system reported a failure to load the Rust <code>ProceduralArtEngine</code> in <code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code>, falling back to a slower Python implementation. Log: &lsquo;WARNING:root:oaGuiElements: Failed to load Rust ProceduralArtEngine, falling back to Python: No module named 'oaproceduralart_rs&rsquo;`</p>
-<h1><a class="anchor" id="autotoc_md1316"></a>
+<h1><a class="anchor" id="autotoc_md1581"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Missing Binary</b>: The <code>oaproceduralart_rs</code> PyO3 extension was not compiled/installed in the Python environment.</li>
@@ -105,7 +105,7 @@ Root Cause Analysis</h1>
 <li><b>Missing Trait</b>: The Rust code was missing <code>use pyo3::IntoPyObjectExt;</code> which is required for <code>into_py_any</code> conversion in newer PyO3 versions.</li>
 <li><b>Compiler Warning</b>: Redundant initialization of <code>light_factor</code> in <code>lib.rs</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1317"></a>
+<h1><a class="anchor" id="autotoc_md1582"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Source Repair</b>: Fixed the corrupted <code>lib.rs</code> by removing redundant code at the end.</li>
@@ -113,7 +113,7 @@ Resolution</h1>
 <li><b>Warning Cleanup</b>: Refactored <code>light_factor</code> initialization to eliminate <code>unused_assignments</code> warning.</li>
 <li><b>Compilation</b>: Successfully built and installed the Rust module using <code>maturin develop --release</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1318"></a>
+<h1><a class="anchor" id="autotoc_md1583"></a>
 Verification Evidence</h1>
 <ul>
 <li><b>Import Verification</b>: Created and ran <code>.gemini/TempScripts/verify_oaproceduralart.py</code> which successfully imported the module and instantiated the engine.</li>

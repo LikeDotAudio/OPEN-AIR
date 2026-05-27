@@ -138,16 +138,16 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   26</span><span class="keyword">def </span>observeProperty(o, property, callback):</div>
 <div class="line"><span class="lineno">   27</span>    propertyName = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(property, str):</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> isinstance(property, str):</div>
 <div class="line"><span class="lineno">   30</span>        propertyName = property</div>
-<div class="line"><span class="lineno">   31</span>        property = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">o.get_properties</a>().find_property(propertyName)</div>
+<div class="line"><span class="lineno">   31</span>        property = o.get_properties().find_property(propertyName)</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> property:</div>
 <div class="line"><span class="lineno">   33</span>            <span class="keywordflow">raise</span> Exception(f<span class="stringliteral">&quot;Could not find property {propertyName} in {o.ClassName}&quot;</span>)</div>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   35</span>        propertyName = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">property.name</a></div>
+<div class="line"><span class="lineno">   35</span>        propertyName = property.name</div>
 <div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(property, <span class="stringliteral">&#39;static&#39;</span>, <span class="keyword">False</span>):</div>
-<div class="line"><span class="lineno">   38</span>        callback(<span class="keyword">True</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(o, propertyName))</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">if</span> getattr(property, <span class="stringliteral">&#39;static&#39;</span>, <span class="keyword">False</span>):</div>
+<div class="line"><span class="lineno">   38</span>        callback(<span class="keyword">True</span>, getattr(o, propertyName))</div>
 <div class="line"><span class="lineno">   39</span>        <span class="keywordflow">return</span> <span class="keyword">lambda</span>: <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   40</span> </div>
 <div class="line"><span class="lineno">   41</span>    lastValue = <span class="keywordtype">None</span></div>
@@ -156,53 +156,53 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   44</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   45</span>            callback(<span class="keyword">True</span>, lastValue, changeIndex)</div>
 <div class="line"><span class="lineno">   46</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> error:</div>
-<div class="line"><span class="lineno">   47</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logging.error</a>(<span class="stringliteral">&#39;Subscriber %s to property %s in %s threw exception %s&#39;</span>, callback, propertyName, o, error)</div>
+<div class="line"><span class="lineno">   47</span>            logging.error(<span class="stringliteral">&#39;Subscriber %s to property %s in %s threw exception %s&#39;</span>, callback, propertyName, o, error)</div>
 <div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">eventCallback</a>(value, changeType, eventId):</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keyword">def </span>eventCallback(value, changeType, eventId):</div>
 <div class="line"><span class="lineno">   50</span>        nonlocal lastValue</div>
 <div class="line"><span class="lineno">   51</span>        <span class="keywordflow">if</span> lastValue <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   52</span>            <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">changeType.value</a> == 1:  <span class="comment"># OcaPropertyChangeType.CurrentChanged</span></div>
-<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(lastValue, Arguments):</div>
-<div class="line"><span class="lineno">   55</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lastValue.values</a>[0] = value</div>
+<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">if</span> changeType.value == 1:  <span class="comment"># OcaPropertyChangeType.CurrentChanged</span></div>
+<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">if</span> isinstance(lastValue, Arguments):</div>
+<div class="line"><span class="lineno">   55</span>                lastValue.values[0] = value</div>
 <div class="line"><span class="lineno">   56</span>                notify(0)</div>
 <div class="line"><span class="lineno">   57</span>                <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   58</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   59</span>                lastValue = value</div>
 <div class="line"><span class="lineno">   60</span>                notify()</div>
 <div class="line"><span class="lineno">   61</span>                <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">changeType.value</a> == 2:  <span class="comment"># OcaPropertyChangeType.MinChanged</span></div>
-<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(lastValue, Arguments):</div>
-<div class="line"><span class="lineno">   64</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lastValue.values</a>[1] = value</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">elif</span> changeType.value == 2:  <span class="comment"># OcaPropertyChangeType.MinChanged</span></div>
+<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">if</span> isinstance(lastValue, Arguments):</div>
+<div class="line"><span class="lineno">   64</span>                lastValue.values[1] = value</div>
 <div class="line"><span class="lineno">   65</span>                notify(1)</div>
 <div class="line"><span class="lineno">   66</span>                <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">changeType.value</a> == 3:  <span class="comment"># OcaPropertyChangeType.MaxChanged</span></div>
-<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(lastValue, Arguments):</div>
-<div class="line"><span class="lineno">   69</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lastValue.values</a>[2] = value</div>
+<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">elif</span> changeType.value == 3:  <span class="comment"># OcaPropertyChangeType.MaxChanged</span></div>
+<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">if</span> isinstance(lastValue, Arguments):</div>
+<div class="line"><span class="lineno">   69</span>                lastValue.values[2] = value</div>
 <div class="line"><span class="lineno">   70</span>                notify(2)</div>
 <div class="line"><span class="lineno">   71</span>                <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   72</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   73</span>            <span class="comment"># No supported.</span></div>
 <div class="line"><span class="lineno">   74</span>            <span class="keywordflow">pass</span></div>
-<div class="line"><span class="lineno">   75</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logging.warning</a>(<span class="stringliteral">&#39;Unhandled event %s %s %s&#39;</span>, value, changeType, eventId)</div>
+<div class="line"><span class="lineno">   75</span>        logging.warning(<span class="stringliteral">&#39;Unhandled event %s %s %s&#39;</span>, value, changeType, eventId)</div>
 <div class="line"><span class="lineno">   76</span> </div>
 <div class="line"><span class="lineno">   77</span>    active = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   78</span>    event = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">property.event</a>(o)</div>
-<div class="line"><span class="lineno">   79</span>    getter = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">property.getter</a>(o)</div>
+<div class="line"><span class="lineno">   78</span>    event = property.event(o)</div>
+<div class="line"><span class="lineno">   79</span>    getter = property.getter(o)</div>
 <div class="line"><span class="lineno">   80</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> getter:</div>
 <div class="line"><span class="lineno">   81</span>        <span class="keywordflow">raise</span> Exception(f<span class="stringliteral">&quot;Not getter found for {propertyName} in {o.ClassName}&quot;</span>)</div>
 <div class="line"><span class="lineno">   82</span> </div>
 <div class="line"><span class="lineno">   83</span>    <span class="keywordflow">if</span> event:</div>
-<div class="line"><span class="lineno">   84</span>        p = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.subscribe</a>(eventCallback)</div>
+<div class="line"><span class="lineno">   84</span>        p = event.subscribe(eventCallback)</div>
 <div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> p:</div>
-<div class="line"><span class="lineno">   86</span>            <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">catch_callback</a>(error):</div>
+<div class="line"><span class="lineno">   86</span>            <span class="keyword">def </span>catch_callback(error):</div>
 <div class="line"><span class="lineno">   87</span>                nonlocal active</div>
 <div class="line"><span class="lineno">   88</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> active:</div>
 <div class="line"><span class="lineno">   89</span>                    <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   90</span>                callback(<span class="keyword">False</span>, error)</div>
-<div class="line"><span class="lineno">   91</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.catch</a>(catch_callback)</div>
+<div class="line"><span class="lineno">   91</span>            p.catch(catch_callback)</div>
 <div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getterCallback</a>(ok, result):</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keyword">def </span>getterCallback(ok, result):</div>
 <div class="line"><span class="lineno">   94</span>        nonlocal active, lastValue</div>
 <div class="line"><span class="lineno">   95</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> active:</div>
 <div class="line"><span class="lineno">   96</span>            <span class="keywordflow">return</span></div>
@@ -218,10 +218,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  106</span>        nonlocal active</div>
 <div class="line"><span class="lineno">  107</span>        active = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  108</span>        <span class="keywordflow">if</span> event:</div>
-<div class="line"><span class="lineno">  109</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.unsubscribe</a>(eventCallback)</div>
+<div class="line"><span class="lineno">  109</span>            event.unsubscribe(eventCallback)</div>
 <div class="line"><span class="lineno">  110</span> </div>
 <div class="line"><span class="lineno">  111</span>    <span class="keywordflow">return</span> unsubscribe</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

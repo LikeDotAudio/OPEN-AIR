@@ -132,24 +132,24 @@ a destination strategy based on the dynamic N x N routing matrix.
 <div class="line"><span class="lineno">   35</span><span class="stringliteral">    This function analyzes the message origin and logical source to assign </span></div>
 <div class="line"><span class="lineno">   36</span><span class="stringliteral">    a destination strategy based on the dynamic N x N routing matrix.</span></div>
 <div class="line"><span class="lineno">   37</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   38</span>    topic = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.get</a>(<span class="stringliteral">&quot;topic&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span>    topic = message.get(<span class="stringliteral">&quot;topic&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span>    source = message[<span class="stringliteral">&quot;source&quot;</span>]</div>
-<div class="line"><span class="lineno">   40</span>    logical_source = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.get</a>(<span class="stringliteral">&quot;logical_source&quot;</span>, source)</div>
-<div class="line"><span class="lineno">   41</span>    full_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.get</a>(<span class="stringliteral">&quot;full_id&quot;</span>)</div>
+<div class="line"><span class="lineno">   40</span>    logical_source = message.get(<span class="stringliteral">&quot;logical_source&quot;</span>, source)</div>
+<div class="line"><span class="lineno">   41</span>    full_id = message.get(<span class="stringliteral">&quot;full_id&quot;</span>)</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># --- Loop Prevention: Network Reflection Rejection ---</span></div>
 <div class="line"><span class="lineno">   44</span>    <span class="comment"># ⚡ V3.1.21 REFLECTION PURGE:</span></div>
 <div class="line"><span class="lineno">   45</span>    <span class="comment"># All messages arriving from MQTT that were authored by this instance</span></div>
 <div class="line"><span class="lineno">   46</span>    <span class="comment"># must be tagged for IGNORE. They still reach the local Monitor/Firehose</span></div>
 <div class="line"><span class="lineno">   47</span>    <span class="comment"># via the ingest pipeline but are blocked from re-dispatch.</span></div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;MQTT&quot;</span> <span class="keywordflow">and</span> full_id == <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a>:</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;MQTT&quot;</span> <span class="keywordflow">and</span> full_id == app_constants.FULL_INSTANCE_ID:</div>
 <div class="line"><span class="lineno">   49</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;IGNORE (REFLECT)&quot;</span></div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>    <span class="comment"># --- Dynamic Matrix Routing ---</span></div>
 <div class="line"><span class="lineno">   52</span>    <span class="keyword">from</span> .manager <span class="keyword">import</span> ProtocolRouter</div>
-<div class="line"><span class="lineno">   53</span>    router = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ProtocolRouter.get_instance</a>()</div>
+<div class="line"><span class="lineno">   53</span>    router = ProtocolRouter.get_instance()</div>
 <div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>    strategy = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.calculate_strategy_for_message</a>(logical_source, topic)</div>
+<div class="line"><span class="lineno">   55</span>    strategy = router.calculate_strategy_for_message(logical_source, topic)</div>
 <div class="line"><span class="lineno">   56</span> </div>
 <div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> strategy:</div>
 <div class="line"><span class="lineno">   58</span>        <span class="comment"># Default fallback for untracked sources</span></div>
@@ -157,7 +157,6 @@ a destination strategy based on the dynamic N x N routing matrix.
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>    <span class="keywordflow">return</span> strategy</div>
 <div class="line"><span class="lineno">   62</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -213,7 +212,7 @@ Returns:
 <div class="line"><span class="lineno">   74</span><span class="stringliteral">    Returns:</span></div>
 <div class="line"><span class="lineno">   75</span><span class="stringliteral">        list[str]: A list of uppercase tag tokens.</span></div>
 <div class="line"><span class="lineno">   76</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   77</span>    logical_source = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.get</a>(<span class="stringliteral">&quot;logical_source&quot;</span>, message[<span class="stringliteral">&quot;source&quot;</span>])</div>
+<div class="line"><span class="lineno">   77</span>    logical_source = message.get(<span class="stringliteral">&quot;logical_source&quot;</span>, message[<span class="stringliteral">&quot;source&quot;</span>])</div>
 <div class="line"><span class="lineno">   78</span>    is_local = (message[<span class="stringliteral">&quot;guid&quot;</span>] == local_guid)</div>
 <div class="line"><span class="lineno">   79</span>    is_mutation = message[<span class="stringliteral">&quot;meta&quot;</span>].get(<span class="stringliteral">&quot;mutation&quot;</span>, <span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   80</span> </div>
@@ -221,22 +220,22 @@ Returns:
 <div class="line"><span class="lineno">   82</span> </div>
 <div class="line"><span class="lineno">   83</span>    <span class="comment"># --- Protocol-Level Tagging ---</span></div>
 <div class="line"><span class="lineno">   84</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;-&quot;</span> <span class="keywordflow">in</span> logical_source:</div>
-<div class="line"><span class="lineno">   85</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;SYSTEM&quot;</span>)</div>
+<div class="line"><span class="lineno">   85</span>        tags.append(<span class="stringliteral">&quot;SYSTEM&quot;</span>)</div>
 <div class="line"><span class="lineno">   86</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;MIDI&quot;</span> <span class="keywordflow">in</span> logical_source:</div>
-<div class="line"><span class="lineno">   87</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;MIDI&quot;</span>)</div>
+<div class="line"><span class="lineno">   87</span>        tags.append(<span class="stringliteral">&quot;MIDI&quot;</span>)</div>
 <div class="line"><span class="lineno">   88</span>    <span class="keywordflow">elif</span> <span class="stringliteral">&quot;OSC&quot;</span> <span class="keywordflow">in</span> logical_source:</div>
-<div class="line"><span class="lineno">   89</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;OSC&quot;</span>)</div>
+<div class="line"><span class="lineno">   89</span>        tags.append(<span class="stringliteral">&quot;OSC&quot;</span>)</div>
 <div class="line"><span class="lineno">   90</span>    <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   91</span>        <span class="comment"># Geographic origin tagging.</span></div>
-<div class="line"><span class="lineno">   92</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;HERE&quot;</span> <span class="keywordflow">if</span> is_local <span class="keywordflow">else</span> <span class="stringliteral">&quot;REMOTE&quot;</span>)</div>
+<div class="line"><span class="lineno">   92</span>        tags.append(<span class="stringliteral">&quot;HERE&quot;</span> <span class="keywordflow">if</span> is_local <span class="keywordflow">else</span> <span class="stringliteral">&quot;REMOTE&quot;</span>)</div>
 <div class="line"><span class="lineno">   93</span> </div>
 <div class="line"><span class="lineno">   94</span>    <span class="comment"># --- Functional Tagging ---</span></div>
 <div class="line"><span class="lineno">   95</span>    <span class="keywordflow">if</span> is_mutation:</div>
 <div class="line"><span class="lineno">   96</span>        <span class="comment"># Flag hardware control events (YAK).</span></div>
-<div class="line"><span class="lineno">   97</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;MUTATION&quot;</span>)</div>
+<div class="line"><span class="lineno">   97</span>        tags.append(<span class="stringliteral">&quot;MUTATION&quot;</span>)</div>
 <div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> message[<span class="stringliteral">&quot;meta&quot;</span>].get(<span class="stringliteral">&quot;splink_active&quot;</span>) <span class="keywordflow">or</span> message[<span class="stringliteral">&quot;meta&quot;</span>].get(<span class="stringliteral">&quot;splinker_source&quot;</span>):</div>
 <div class="line"><span class="lineno">   99</span>        <span class="comment"># Flag patched/linked parameters.</span></div>
-<div class="line"><span class="lineno">  100</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tags.append</a>(<span class="stringliteral">&quot;SPLINK&quot;</span>)</div>
+<div class="line"><span class="lineno">  100</span>        tags.append(<span class="stringliteral">&quot;SPLINK&quot;</span>)</div>
 <div class="line"><span class="lineno">  101</span> </div>
 <div class="line"><span class="lineno">  102</span>    <span class="keywordflow">return</span> tags</div>
 </div><!-- fragment -->

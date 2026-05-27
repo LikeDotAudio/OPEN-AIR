@@ -42,13 +42,13 @@ class TestGraphPlotter(unittest.TestCase):
         self.mock_context = MagicMock()
         self.mock_context.state_mirror_engine = MagicMock()
         self.mock_context.subscriber_router = MagicMock()
-        self.mock_context.base_mqtt_topic_from_path = 'OPEN-AIR/test'
+        self.mock_context.base_mqtt_topic_from_path = 'OpenAir/test'
         self.mock_context.builder_instance = MagicMock()
 
     def test_creation(self):
         try:
             'Verify that GraphPlotter initializes correctly from sample.json.'
-            plotter = GraphPlotter(self.root, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
+            plotter = GraphPlotter(self.root, self.config, 'OpenAir/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
 
             # ⚡ FORCE SYNC: Ensure scheduled updates (which create lines) run immediately
             plotter._perform_scheduled_update()

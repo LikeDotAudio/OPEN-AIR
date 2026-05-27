@@ -157,22 +157,22 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../da/da7/graph__patina__mixin_8py_source.html#l00025">25</a> of file <a class="el" href="../../da/da7/graph__patina__mixin_8py_source.html">graph_patina_mixin.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   25</span>    <span class="keyword">def </span>_on_patina_update(self):</div>
 <div class="line"><span class="lineno">   26</span>        <span class="comment"># 🛡️ REBUILD GUARD</span></div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self.instance, <span class="stringliteral">&#39;_is_rebuilding&#39;</span>, <span class="keyword">False</span>): <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> getattr(self.instance, <span class="stringliteral">&#39;_is_rebuilding&#39;</span>, <span class="keyword">False</span>): <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;📈💹🎨 [SYNC] Injecting patina into GraphPlotter &#39;{self.widget_id}&#39;&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   30</span>        tk_canvas = self.canvas.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_tk_widget</a>()</div>
+<div class="line"><span class="lineno">   29</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;📈💹🎨 [SYNC] Injecting patina into GraphPlotter &#39;{self.widget_id}&#39;&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   30</span>        tk_canvas = self.canvas.get_tk_widget()</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># 0. Clear Blit Cache</span></div>
 <div class="line"><span class="lineno">   33</span>        fig_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf2488b95c97e0378c9bf49de3b50f28">id</a>(self.fig)</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">if</span> fig_id <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">graph_updater._bg_cache</a>: del <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">graph_updater._bg_cache</a>[fig_id]</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">if</span> fig_id <span class="keywordflow">in</span> graph_updater._bg_cache: del graph_updater._bg_cache[fig_id]</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>        <span class="comment"># 1. Sync flat color fallback</span></div>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   38</span>            bg_hex = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_canvas.cget</a>(<span class="stringliteral">&quot;bg&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span>            bg_hex = tk_canvas.cget(<span class="stringliteral">&quot;bg&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span>            <span class="keywordflow">if</span> bg_hex:</div>
-<div class="line"><span class="lineno">   40</span>                has_patina = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(tk_canvas, <span class="stringliteral">&#39;panel_bg_pil_slice&#39;</span>)</div>
-<div class="line"><span class="lineno">   41</span>                self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_facecolor</a>(bg_hex)</div>
-<div class="line"><span class="lineno">   42</span>                self.ax.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_facecolor</a>(bg_hex)</div>
+<div class="line"><span class="lineno">   40</span>                has_patina = hasattr(tk_canvas, <span class="stringliteral">&#39;panel_bg_pil_slice&#39;</span>)</div>
+<div class="line"><span class="lineno">   41</span>                self.fig.patch.set_facecolor(bg_hex)</div>
+<div class="line"><span class="lineno">   42</span>                self.ax.set_facecolor(bg_hex)</div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span>                is_trans = self.widget_config.get(<span class="stringliteral">&quot;transparent&quot;</span>) <span class="keywordflow">is</span> <span class="keyword">True</span> <span class="keywordflow">or</span> \</div>
 <div class="line"><span class="lineno">   45</span>                           self.widget_config.get(<span class="stringliteral">&quot;style&quot;</span>, {}).get(<span class="stringliteral">&quot;background_color&quot;</span>) == <span class="stringliteral">&quot;match_theme&quot;</span></div>
@@ -180,37 +180,36 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   47</span>                <span class="comment"># ⚡ FIX: Never hide the figure/axis patch if we want to see anything.</span></div>
 <div class="line"><span class="lineno">   48</span>                <span class="comment"># Matplotlib needs these to be visible to correctly capture the &#39;background&#39; for blitting.</span></div>
 <div class="line"><span class="lineno">   49</span>                <span class="comment"># Instead of hiding them, we set their alpha or keep them as fallback.</span></div>
-<div class="line"><span class="lineno">   50</span>                self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_visible</a>(<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">   51</span>                self.ax.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_visible</a>(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   50</span>                self.fig.patch.set_visible(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   51</span>                self.ax.patch.set_visible(<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>                <span class="keywordflow">if</span> has_patina <span class="keywordflow">or</span> is_trans:</div>
-<div class="line"><span class="lineno">   54</span>                    self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_alpha</a>(0.0)</div>
-<div class="line"><span class="lineno">   55</span>                    self.ax.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_alpha</a>(0.0)</div>
+<div class="line"><span class="lineno">   54</span>                    self.fig.patch.set_alpha(0.0)</div>
+<div class="line"><span class="lineno">   55</span>                    self.ax.patch.set_alpha(0.0)</div>
 <div class="line"><span class="lineno">   56</span>                <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   57</span>                    self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_alpha</a>(1.0)</div>
-<div class="line"><span class="lineno">   58</span>                    self.ax.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_alpha</a>(1.0)</div>
+<div class="line"><span class="lineno">   57</span>                    self.fig.patch.set_alpha(1.0)</div>
+<div class="line"><span class="lineno">   58</span>                    self.ax.patch.set_alpha(1.0)</div>
 <div class="line"><span class="lineno">   59</span>        <span class="keywordflow">except</span>: <span class="keywordflow">pass</span></div>
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>        <span class="comment"># 2. Sync texture details</span></div>
-<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(tk_canvas, <span class="stringliteral">&#39;panel_bg_pil_slice&#39;</span>):</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">if</span> hasattr(tk_canvas, <span class="stringliteral">&#39;panel_bg_pil_slice&#39;</span>):</div>
 <div class="line"><span class="lineno">   63</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   64</span>                slice_pil = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_canvas.panel_bg_pil_slice</a></div>
-<div class="line"><span class="lineno">   65</span>                w_px, h_px = self.canvas.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_width_height</a>()</div>
+<div class="line"><span class="lineno">   64</span>                slice_pil = tk_canvas.panel_bg_pil_slice</div>
+<div class="line"><span class="lineno">   65</span>                w_px, h_px = self.canvas.get_width_height()</div>
 <div class="line"><span class="lineno">   66</span>                <span class="keywordflow">if</span> w_px &gt; 1 <span class="keywordflow">and</span> h_px &gt; 1:</div>
-<div class="line"><span class="lineno">   67</span>                    resized = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">slice_pil.resize</a>((w_px, h_px), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.Resampling.LANCZOS</a>)</div>
-<div class="line"><span class="lineno">   68</span>                    self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">images.clear</a>()</div>
-<div class="line"><span class="lineno">   69</span>                    self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">figimage</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">np.array</a>(resized), 0, 0, zorder=-100, origin=<span class="stringliteral">&#39;upper&#39;</span>)</div>
-<div class="line"><span class="lineno">   70</span>                    self.fig.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_visible</a>(<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">   71</span>                    self.ax.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patch.set_visible</a>(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   67</span>                    resized = slice_pil.resize((w_px, h_px), Image.Resampling.LANCZOS)</div>
+<div class="line"><span class="lineno">   68</span>                    self.fig.images.clear()</div>
+<div class="line"><span class="lineno">   69</span>                    self.fig.figimage(np.array(resized), 0, 0, zorder=-100, origin=<span class="stringliteral">&#39;upper&#39;</span>)</div>
+<div class="line"><span class="lineno">   70</span>                    self.fig.patch.set_visible(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   71</span>                    self.ax.patch.set_visible(<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   72</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   73</span>                <span class="keywordflow">if</span> BUILDER_DEBUG: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">builder_logger.error</a>(f<span class="stringliteral">&quot;❌ GraphPlotter patina failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   73</span>                <span class="keywordflow">if</span> BUILDER_DEBUG: builder_logger.error(f<span class="stringliteral">&quot;❌ GraphPlotter patina failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   74</span> </div>
 <div class="line"><span class="lineno">   75</span>        <span class="comment"># 3. Redraw</span></div>
 <div class="line"><span class="lineno">   76</span>        self._force_redraw = <span class="keyword">True</span>; self._schedule_update()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_acf2488b95c97e0378c9bf49de3b50f28"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf2488b95c97e0378c9bf49de3b50f28">id</a></div><div class="ttdeci">id</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02476">generated.rs:2476</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00165">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter._perform_resize()</a>, and <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00107">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter.render()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00111">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter._init_plot_elements()</a>, and <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00179">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter._on_marker_var_change()</a>.</p>
 
 </div>
 </div>
@@ -255,7 +254,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../da/da7/graph__patina__mixin_8py_source.html#l00027">27</a> of file <a class="el" href="../../da/da7/graph__patina__mixin_8py_source.html">graph_patina_mixin.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00142">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter._on_resize_event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d4a/dynamic__graph_8py_source.html#l00147">oaGuiElements.Core.graphing.Methods.dynamic_graph.GraphPlotter._on_resize_event()</a>.</p>
 
 </div>
 </div>

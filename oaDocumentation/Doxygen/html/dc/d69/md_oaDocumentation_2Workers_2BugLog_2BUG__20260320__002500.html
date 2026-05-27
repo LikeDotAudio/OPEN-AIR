@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('dc/d69/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Comprehensive GUI Rendering &amp; Stability Fixes</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1920"></a> </p>
-<h1><a class="anchor" id="autotoc_md1921"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2369"></a> </p>
+<h1><a class="anchor" id="autotoc_md2370"></a>
 Issue</h1>
 <p>Multiple rendering and stability issues were reported across various GUI components:</p><ol type="1">
 <li><code>7_Data/2_demo</code> crashed the project during bootstrap.</li>
@@ -102,23 +102,23 @@ Issue</h1>
 <li><code>CMDP</code> threw an <code>AttributeError</code> on interaction.</li>
 <li><code>XY Graphs</code> were not displaying plot data or axes.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1922"></a>
+<h1><a class="anchor" id="autotoc_md2371"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>GuiTable Crash</b>: During initial data loading, the table was broadcasting every row to MQTT via <code>TableSyncEngine</code>. During the bootstrap phase, this high-volume asynchronous traffic created a feedback loop or race condition that stalled the application.</li>
 <li><b>Invisible Buttons/Meters</b>: Older JSON definitions used <code>widget_type</code> instead of <code>type</code>, which the builder was silently skipping after recent refactoring.</li>
 <li><b>CMDP Attribute Error</b>: The <code>refresh_pop_tree</code> method was not implemented in the new modular <code>CMDPWidget</code> class, but was still called by its group and file handlers.</li>
-<li><b>Invisible Graphs</b>: <code>GraphPatinaMixin</code> was hiding the Matplotlib axes patches (<code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible(False)</a></code>) when "transparent" or "match_theme" backgrounds were used. This prevented the blit engine from capturing a valid background buffer, resulting in empty/black plots.</li>
+<li><b>Invisible Graphs</b>: <code>GraphPatinaMixin</code> was hiding the Matplotlib axes patches (<code>set_visible(False)</code>) when "transparent" or "match_theme" backgrounds were used. This prevented the blit engine from capturing a valid background buffer, resulting in empty/black plots.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1923"></a>
+<h1><a class="anchor" id="autotoc_md2372"></a>
 Resolutions</h1>
 <ol type="1">
 <li><b>Table Stability</b>: Added a <code>suppress_mqtt</code> flag to <code>TableSyncEngine.update_full</code> and enabled it for the initial configuration data load.</li>
 <li><b>Schema Standardization</b>: Batch-replaced <code>widget_type</code> with <code>type</code> in <code><a class="el" href="../../df/d55/blinky__winky_8json.html">blinky_winky.json</a></code> and <code><a class="el" href="../../d6/d80/VU__Meter__Knob_8json.html">VU_Meter_Knob.json</a></code>.</li>
 <li><b>CMDP <a class="el" href="../../da/d9a/namespaceInterface.html">Interface</a></b>: Added the missing <code>refresh_pop_tree</code> method to <code>CMDPWidget</code> as a public alias for the tree manager's refresh logic.</li>
-<li><b>Graph Visibility</b>: Updated <code>GraphPatinaMixin</code> to use <code>set_alpha(0.0)</code> instead of <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible(False)</a></code>. Forced an initial redraw in <code>GraphPlotter</code> initialization to prime the blit cache.</li>
+<li><b>Graph Visibility</b>: Updated <code>GraphPatinaMixin</code> to use <code>set_alpha(0.0)</code> instead of <code>set_visible(False)</code>. Forced an initial redraw in <code>GraphPlotter</code> initialization to prime the blit cache.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1924"></a>
+<h1><a class="anchor" id="autotoc_md2373"></a>
 Files Modified</h1>
 <ul>
 <li><code><a class="el" href="../../d8/dd7/table__sync__engine_8py.html">oaGuiElements/Core/text/text_table/Core/table_sync_engine.py</a></code></li>
@@ -130,10 +130,10 @@ Files Modified</h1>
 <li><code>oaGui/Assets/right_50/bottom_90/9_Zoo/1_buttons/1_Wink/22_blinky_winky/blinky_winky.json</code></li>
 <li><code>oaGui/Assets/right_50/bottom_90/9_Zoo/2_Metering/5_VU_Meter_Knob/VU_Meter_Knob.json</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1925"></a>
+<h1><a class="anchor" id="autotoc_md2374"></a>
 Verification Evidence</h1>
 <ul>
-<li><b>Table</b>: Application now initializes past the <code>Data/2_demo</code> phase without crashing.</li>
+<li><b>Table</b>: EngineGuiDisplay now initializes past the <code>Data/2_demo</code> phase without crashing.</li>
 <li><b>Wink/VU</b>: JSON schema alignment confirmed via code analysis.</li>
 <li><b>CMDP</b>: Attribute error eliminated in class definition.</li>
 <li><b>Graphs</b>: Blit cache priming and alpha-based transparency now allow background sync without hiding plot elements. </li>

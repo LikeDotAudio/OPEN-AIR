@@ -6,7 +6,7 @@ var class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__But
     [ "_on_tab_selected", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#a31c4140dfc962f53b1ac3f3fc41c140a", null ],
     [ "_construct_dynamic_gui", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#ab22cd98bb29793496f95b84def66fa70", null ],
     [ "builder_container", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#a1e6833d0d92944fed922927ef4252e8f", null ],
-    [ "config_data", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#a13a4ee3e11173f9a2d304fc7514ce7d7", null ],
+    [ "configuration", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#aadb51594ca11149e4c0e3d0439facb5c", null ],
     [ "dynamic_gui", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#ae4407b56d0c78b12a1f9c1050aab7fc1", null ],
     [ "json_path", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#a5081b504fd26500a7072b05efa3413b6", null ],
     [ "state_mirror_engine", "d8/d6c/class9__Zoo_1_11__buttons_1_12__Trapezoid_1_16__Media__Buttons_1_1Media__Buttons_1_1GenericInstrumentGui.html#ae9b2778f88bcdc2e20fa1aa2c82071e1", null ],

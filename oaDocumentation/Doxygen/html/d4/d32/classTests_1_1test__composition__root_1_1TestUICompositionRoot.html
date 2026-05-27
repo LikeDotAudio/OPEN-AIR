@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('d4/d32/classTests_1_1test__composition
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3cc482539bb4273eadd69ab190a5381d" id="r_a3cc482539bb4273eadd69ab190a5381d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d32/classTests_1_1test__composition__root_1_1TestUICompositionRoot.html#a3cc482539bb4273eadd69ab190a5381d">setUp</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a3cc482539bb4273eadd69ab190a5381d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbd22a2c5127b85b64ebce712decb6de" id="r_afbd22a2c5127b85b64ebce712decb6de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d32/classTests_1_1test__composition__root_1_1TestUICompositionRoot.html#afbd22a2c5127b85b64ebce712decb6de">test_build_services_wires_all_layers</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_splinker</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_rest</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_osc</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_proto_get</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_mirror</a>, mock_cache, mock_router, mock_mqtt)</td></tr>
+<tr class="memitem:afbd22a2c5127b85b64ebce712decb6de" id="r_afbd22a2c5127b85b64ebce712decb6de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d32/classTests_1_1test__composition__root_1_1TestUICompositionRoot.html#afbd22a2c5127b85b64ebce712decb6de">test_build_services_wires_all_layers</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, mock_splinker, mock_rest, mock_osc, mock_proto_get, mock_mirror, mock_cache, mock_router, mock_mqtt)</td></tr>
 <tr class="separator:afbd22a2c5127b85b64ebce712decb6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -145,14 +145,13 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d6/df2/test__composition__root_8py_source.html#l00017">17</a> of file <a class="el" href="../../d6/df2/test__composition__root_8py_source.html">test_composition_root.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   17</span>    <span class="keyword">def </span>setUp(self):</div>
 <div class="line"><span class="lineno">   18</span>        <span class="stringliteral">&quot;&quot;&quot;Build mock root and constants.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   19</span>        self.mock_root = MagicMock(spec=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Tk</a>)</div>
+<div class="line"><span class="lineno">   19</span>        self.mock_root = MagicMock(spec=tk.Tk)</div>
 <div class="line"><span class="lineno">   20</span>        self.mock_constants = MagicMock()</div>
 <div class="line"><span class="lineno">   21</span>        self.mock_constants.SCAN_OSC = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   22</span>        self.mock_constants.SCAN_SNMP = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>        self.comp_root = UICompositionRoot(self.mock_root, self.mock_constants)</div>
+<div class="line"><span class="lineno">   24</span>        self.comp_root = LoaderServiceComposer(self.mock_root, self.mock_constants)</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -243,7 +242,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   49</span>        self.assertIn(<span class="stringliteral">&quot;osc_manager&quot;</span>, services)</div>
 <div class="line"><span class="lineno">   50</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/df2/test__composition__root_8py_source.html#l00024">Tests.test_composition_root.TestUICompositionRoot.comp_root</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/df2/test__composition__root_8py_source.html#l00024">Tests.test_composition_root.TestUICompositionRoot.comp_root</a>.</p>
 
 </div>
 </div>
@@ -296,7 +295,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/df2/test__composition__root_8py_source.html#l00019">19</a> of file <a class="el" href="../../d6/df2/test__composition__root_8py_source.html">test_composition_root.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../db/dec/test__shutdown__coordinator_8py_source.html#l00054">Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_attach_to_root()</a>, <a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py_source.html#l00072">Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_failure_triggers_shutdown()</a>, <a class="el" href="../../db/dec/test__shutdown__coordinator_8py_source.html#l00032">Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_on_closing_stops_managers()</a>, and <a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py_source.html#l00053">Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_run_executes_phases()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../db/dec/test__shutdown__coordinator_8py_source.html#l00054">Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_attach_to_root()</a>, <a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py_source.html#l00077">Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_failure_triggers_shutdown()</a>, <a class="el" href="../../db/dec/test__shutdown__coordinator_8py_source.html#l00032">Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_on_closing_stops_managers()</a>, and <a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py_source.html#l00057">Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_run_executes_phases()</a>.</p>
 
 </div>
 </div>

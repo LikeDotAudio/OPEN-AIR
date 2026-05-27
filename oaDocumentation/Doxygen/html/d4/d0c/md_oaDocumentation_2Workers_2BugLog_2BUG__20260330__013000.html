@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d4/d0c/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260330_013000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2054"></a> </p>
-<h1><a class="anchor" id="autotoc_md2055"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2503"></a> </p>
+<h1><a class="anchor" id="autotoc_md2504"></a>
 Issue</h1>
 <p>The <code>oaComProtocols.oaComOSC</code> module was emitting high-velocity debug logs (Heartbeats, RX/TX traffic) that were difficult to silence because they used static <code>LOCAL_DEBUG</code> flags initialized at module load.</p>
-<h1><a class="anchor" id="autotoc_md2056"></a>
+<h1><a class="anchor" id="autotoc_md2505"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>Static Initialization</b>: <code>LOCAL_DEBUG</code> was set once when the module was first imported, meaning changes to <code>config.ini</code> required a full application restart to take effect.</li>
 <li><b>Ungated Logs</b>: Several logs in the OSC manager and workers were either ungated or used the static flag.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2057"></a>
+<h1><a class="anchor" id="autotoc_md2506"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Dynamic Gating</b>: Refactored <code>oaComProtocols.oaComOSC/Managers/osc_manager.py</code>, <code>oaComProtocols.oaComOSC/Workers/osc_rx_server.py</code>, and <code>oaComProtocols.oaComOSC/Workers/osc_tx_client.py</code> to use a dynamic <code>_is_debug()</code> function.</li>
 <li><b>Matrix Integration</b>: The new <code>_is_debug()</code> function calls <code>is_debug_allowed(system="UI", element="OSC")</code>, which queries the live <code>LoggingMatrixManager</code>.</li>
 <li><b>Real-time Response</b>: Debugging for the entire OSC system can now be toggled on/off instantly via the <code>config.ini</code> or the Test TUI without restarting the process.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2058"></a>
+<h1><a class="anchor" id="autotoc_md2507"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual code audit confirms all <code>logger.debug</code> and <code>logger.success</code> calls in the OSC module are now gated by <code>if _is_debug():</code>.</li>

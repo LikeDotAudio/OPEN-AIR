@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('d9/d6c/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:52:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1165"></a> </p>
-<h1><a class="anchor" id="autotoc_md1166"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1430"></a> </p>
+<h1><a class="anchor" id="autotoc_md1431"></a>
 Issues</h1>
 <p>This report details the resolution of an <code>ImportError</code> in the <code>oasplinkcore_rs</code> tests and the fixing of incorrect binary path logic in <code>TestLogRealigner</code>.</p>
-<h1><a class="anchor" id="autotoc_md1167"></a>
+<h1><a class="anchor" id="autotoc_md1432"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1168"></a>
+<h2><a class="anchor" id="autotoc_md1433"></a>
 1. Stale Binary Shadowing in oasplinkcore_rs</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ImportError: cannot import name 'sum_as_string&rsquo; from 'oasplinkcore_rs.oasplinkcore_rs'<code>during unit tests.</code></li>
@@ -111,7 +111,7 @@ Root Causes &amp; Resolutions</h1>
 </code></li>
 </ul>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md1169"></a>
+<h2><a class="anchor" id="autotoc_md1434"></a>
 2. Broken Path Logic in TestLogRealigner</h2>
 <p><code></code></p>
 <p><code></p><ul>
@@ -125,7 +125,7 @@ Root Causes &amp; Resolutions</h1>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1170"></a>
+<h1><a class="anchor" id="autotoc_md1435"></a>
 Affected Modules</h1>
 <p><code></code></p>
 <p><code></p><ul>
@@ -134,7 +134,7 @@ Affected Modules</h1>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1171"></a>
+<h1><a class="anchor" id="autotoc_md1436"></a>
 Verification</h1>
 <p><code></code></p>
 <p><code>The tests have been aligned with the project's high-performance binary standards. The log realigner tests now correctly verify the Rust-accelerated path when available, and the Splinker core tests correctly exercise the pipeline logic. </code></p>

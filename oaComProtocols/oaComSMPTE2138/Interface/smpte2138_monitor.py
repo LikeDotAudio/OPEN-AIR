@@ -210,7 +210,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, SyncBehavior):
 
     def _send_bridge_cmd(self, active: bool):
         """Dispatches a remote control message to the bridge."""
-        topic = "OPEN-AIR/System/Control/SMPTE2138/Bridge"
+        topic = "OpenAir/System/Control/SMPTE2138/Bridge"
         payload = {"active": active}
         mqtt_publisher_service.publish_payload(topic, orjson.dumps(payload).decode())
         if LOCAL_DEBUG:

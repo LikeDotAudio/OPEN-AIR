@@ -29,7 +29,7 @@ window.SplitLayout = ({ nodeName, node, path_prefix, jsonPath }) => {
           <window.WidgetFactory
             nodeName={key}
             node={panel}
-            path_prefix={`${path_prefix}/${nodeName}`}
+            path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix}
             jsonPath={jsonPath ? `${jsonPath}.panels.${key}` : undefined}
           />
         </div>

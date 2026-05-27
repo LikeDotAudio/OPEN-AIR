@@ -63,7 +63,7 @@ window.OaEdPreviewCtx = window.OaEdPreviewCtx || React.createContext(false);
           const jp = jsonPath ? (inEditor ? `${jsonPath}.blueprint` : `${jsonPath}.data.${i}`) : undefined;
           return (
             <window.WidgetFactory key={instName} nodeName={instName} node={inst}
-              path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jp} />
+              path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jp} />
           );
         })}
         {inEditor && data.length > 1 && (

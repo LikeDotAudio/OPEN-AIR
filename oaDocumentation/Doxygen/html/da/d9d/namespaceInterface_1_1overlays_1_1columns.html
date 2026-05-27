@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('da/d9d/namespaceInterface_1_1overlays_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acbea4e4d0f48343aaefcb65f4ae2a507" id="r_acbea4e4d0f48343aaefcb65f4ae2a507"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d9d/namespaceInterface_1_1overlays_1_1columns.html#acbea4e4d0f48343aaefcb65f4ae2a507">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements</a>)</td></tr>
+<tr class="memitem:acbea4e4d0f48343aaefcb65f4ae2a507" id="r_acbea4e4d0f48343aaefcb65f4ae2a507"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d9d/namespaceInterface_1_1overlays_1_1columns.html#acbea4e4d0f48343aaefcb65f4ae2a507">apply_design_overlay</a> (layout, widget, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa28dc103258589d9cb421197fe2de90b">path</a>, is_focused, design_elements)</td></tr>
 <tr class="separator:acbea4e4d0f48343aaefcb65f4ae2a507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -150,29 +150,26 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   10</span><span class="keyword">def </span>apply_design_overlay(layout, widget, path, is_focused, design_elements):</div>
 <div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;Handles Column highlighting (Thick Orange Border) using an overlay.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   12</span> </div>
-<div class="line"><span class="lineno">   13</span>    border = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Frame</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.master</a>, bg=<span class="stringliteral">&quot;orange&quot;</span>, bd=0, highlightthickness=0)</div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">border._is_design_overlay</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   15</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements.append</a>(border)</div>
+<div class="line"><span class="lineno">   13</span>    border = tk.Frame(widget.master, bg=<span class="stringliteral">&quot;orange&quot;</span>, bd=0, highlightthickness=0)</div>
+<div class="line"><span class="lineno">   14</span>    border._is_design_overlay = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   15</span>    design_elements.append(border)</div>
 <div class="line"><span class="lineno">   16</span> </div>
-<div class="line"><span class="lineno">   17</span>    lbl = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Label</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.master</a>, text=<span class="stringliteral">&quot;COLUMN&quot;</span>, bg=<span class="stringliteral">&quot;orange&quot;</span>, fg=<span class="stringliteral">&quot;black&quot;</span>, font=(<span class="stringliteral">&quot;Arial&quot;</span>, 6, <span class="stringliteral">&quot;bold&quot;</span>))</div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lbl._is_design_overlay</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   19</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">design_elements.append</a>(lbl)</div>
+<div class="line"><span class="lineno">   17</span>    lbl = tk.Label(widget.master, text=<span class="stringliteral">&quot;COLUMN&quot;</span>, bg=<span class="stringliteral">&quot;orange&quot;</span>, fg=<span class="stringliteral">&quot;black&quot;</span>, font=(<span class="stringliteral">&quot;Arial&quot;</span>, 6, <span class="stringliteral">&quot;bold&quot;</span>))</div>
+<div class="line"><span class="lineno">   18</span>    lbl._is_design_overlay = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   19</span>    design_elements.append(lbl)</div>
 <div class="line"><span class="lineno">   20</span> </div>
 <div class="line"><span class="lineno">   21</span>    <span class="keyword">def </span>sync(x, y, w, h):</div>
-<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">layout.show_columns.get</a>() <span class="keywordflow">and</span> path <span class="keywordflow">and</span> (<span class="stringliteral">&quot;.fields&quot;</span> <span class="keywordflow">in</span> path <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">path.endswith</a>(<span class="stringliteral">&quot;fields&quot;</span>)):</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> layout.show_columns.get() <span class="keywordflow">and</span> path <span class="keywordflow">and</span> (<span class="stringliteral">&quot;.fields&quot;</span> <span class="keywordflow">in</span> path <span class="keywordflow">or</span> path.endswith(<span class="stringliteral">&quot;fields&quot;</span>)):</div>
 <div class="line"><span class="lineno">   23</span>            th = 3</div>
-<div class="line"><span class="lineno">   24</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">border.place</a>(x=x-th, y=y-th, width=w+(th*2), height=h+(th*2))</div>
-<div class="line"><span class="lineno">   25</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">border.lower</a>(widget)</div>
-<div class="line"><span class="lineno">   26</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lbl.place</a>(x=x, y=y - 12)</div>
+<div class="line"><span class="lineno">   24</span>            border.place(x=x-th, y=y-th, width=w+(th*2), height=h+(th*2))</div>
+<div class="line"><span class="lineno">   25</span>            border.lower(widget)</div>
+<div class="line"><span class="lineno">   26</span>            lbl.place(x=x, y=y - 12)</div>
 <div class="line"><span class="lineno">   27</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   28</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">border.place_forget</a>()</div>
-<div class="line"><span class="lineno">   29</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lbl.place_forget</a>()</div>
+<div class="line"><span class="lineno">   28</span>            border.place_forget()</div>
+<div class="line"><span class="lineno">   29</span>            lbl.place_forget()</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">return</span> sync</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

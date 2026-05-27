@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('da/dc0/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-03 00:15:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1184"></a> </p>
-<h1><a class="anchor" id="autotoc_md1185"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1449"></a> </p>
+<h1><a class="anchor" id="autotoc_md1450"></a>
 Issues</h1>
 <p>This report details the resolution of an <code>AttributeError</code> in the <code>BallisticsEngine</code> Python wrapper during testing.</p>
-<h1><a class="anchor" id="autotoc_md1186"></a>
+<h1><a class="anchor" id="autotoc_md1451"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1187"></a>
+<h2><a class="anchor" id="autotoc_md1452"></a>
 1. Missing Method Call in Rust Wrapper</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;'builtins.BallisticsEngine&rsquo; object has no attribute 'get_overload_fade_factor'<code>(and previously</code>overload_fade<code>missing).</code></li>
 <li><code> **Root Cause**: The Python wrapper</code><a class="el" href="../../d1/d46/ballistics_8py.html">oaGuiElements/Core/metering/meter_bar/Core/ballistics.py</a><code>was attempting to call a method</code>self.rust_engine.get_overload_fade_factor()<code>to retrieve the overload fade value. However, the Rust core implementation (</code>oaMeteringEngine_rs<code>) exposes this value as a direct property via a</code>#[getter]<code>, not as a callable method.</code></li>
 <li><code> **Resolution**: Updated the Python wrapper's properties (</code>overload_fade_factor<code>and</code>overload_fade<code>) to correctly access the value as a property (</code>self.rust_engine.overload_fade_factor`) rather than executing it as a method.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1188"></a>
+<h1><a class="anchor" id="autotoc_md1453"></a>
 Affected Modules</h1>
 <ul>
 <li><code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code> (Ballistics Engine <a class="el" href="../../df/da7/namespaceTests.html">Tests</a>)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1189"></a>
+<h1><a class="anchor" id="autotoc_md1454"></a>
 Verification</h1>
 <p>The unit tests (<code><a class="el" href="../../d5/d1f/test__rust__ballistics_8py.html">oaGuiElements/Tests/metering/test_rust_ballistics.py</a></code>) were re-run manually via the Python <code>unittest</code> module and successfully passed, confirming the wrapper now correctly accesses the underlying Rust struct properties. </p>
 </div></div><!-- contents -->

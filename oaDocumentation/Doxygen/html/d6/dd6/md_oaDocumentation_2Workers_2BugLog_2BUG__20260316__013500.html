@@ -93,38 +93,38 @@ $(document).ready(function(){initNavTree('d6/dd6/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Component Registration and Graphing Import Failures</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1888"></a> <b>Date:</b> 2026-03-16 01:35:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> UI rendering failures for complex layouts (Spectrum, Master Bin) and inefficient hardware discovery.</p>
-<h1><a class="anchor" id="autotoc_md1889"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2337"></a> <b>Date:</b> 2026-03-16 01:35:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> UI rendering failures for complex layouts (Spectrum, Master Bin) and inefficient hardware discovery.</p>
+<h1><a class="anchor" id="autotoc_md2338"></a>
 Issue</h1>
 <ol type="1">
 <li><b>AttributeError</b>: &lsquo;module 'hidden_BreakLine&rsquo; has no attribute 'BuilderBreakLineCreator'<code>triggered when attempting to render</code>OcaFold<code>widgets.</code></li>
 <li><code> **ModuleNotFoundError**:</code>No module named 'oaGui.graphing'<code>in graphing mixins after the widget migration.</code></li>
 <li><code> **Performance/Stability**:</code>IDN Query Error<code>and slow probing in</code>Visa_Fleet` due to redundant system calls.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1890"></a>
+<h1><a class="anchor" id="autotoc_md2339"></a>
 Root Cause</h1>
 <ol type="1">
-<li><b>Improper Mapping</b>: <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code> was manually overwriting the <code>WidgetRegistry</code> with an incorrect string-based reference to a class that wasn't yet properly implemented as a Creator.</li>
+<li><b>Improper Mapping</b>: <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code> was manually overwriting the <code>RegistryWidgetStore</code> with an incorrect string-based reference to a class that wasn't yet properly implemented as a Creator.</li>
 <li><b>Stale Imports</b>: <code><a class="el" href="../../d2/d60/graph__throttle__mixin_8py.html">graph_throttle_mixin.py</a></code> and <code><a class="el" href="../../da/da7/graph__patina__mixin_8py.html">graph_patina_mixin.py</a></code> were missed during the initial automated import update for the <code>graphing</code> migration.</li>
 <li><b>Over-defensive Probing</b>: <code>VisaUtilityParser.query_device_safe</code> was calling <code>rm.list_resources()</code> on every single device probe, which is an extremely expensive blocking operation.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1891"></a>
+<h1><a class="anchor" id="autotoc_md2340"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Corrected OcaFold</b>: Fully implemented <code>BuilderBreakLineCreator</code> in <code><a class="el" href="../../d2/d58/hidden__BreakLine_8py.html">hidden_BreakLine.py</a></code> and removed the redundant manual entry from <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code>.</li>
 <li><b>Updated Graphing Imports</b>: Manually corrected the <code><a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a></code> import paths in the affected mixins.</li>
 <li><b>Optimized VISA Probing</b>:<ul>
-<li>Removed <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">list_resources()</a></code> from the hot path.</li>
+<li>Removed <code>list_resources()</code> from the hot path.</li>
 <li>Wrapped PyVISA <code>open_resource</code> and <code>query</code> in robust <code>try-except</code> blocks.</li>
 <li>Ensured resources are always closed via <code>finally</code> blocks.</li>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1892"></a>
+<h1><a class="anchor" id="autotoc_md2341"></a>
 Verification</h1>
 <ul>
-<li><b>Registry Test</b>: Confirmed via script that <code>OcaFold</code>, <code>plot_widget</code>, and <code>bar_graph</code> are correctly registered in the <code>WidgetRegistry</code>.</li>
-<li><b>Import Test</b>: Confirmed <code>DynamicGuiBuilder</code> and its mixins load without <code>ModuleNotFoundError</code>.</li>
+<li><b>Registry Test</b>: Confirmed via script that <code>OcaFold</code>, <code>plot_widget</code>, and <code>bar_graph</code> are correctly registered in the <code>RegistryWidgetStore</code>.</li>
+<li><b>Import Test</b>: Confirmed <code>LoaderOrchestrator</code> and its mixins load without <code>ModuleNotFoundError</code>.</li>
 <li><b>Output</b>: <div class="fragment"><div class="line">OcaFold: &lt;class &#39;oaGuiElements.utils.break_line.hidden_BreakLine.BuilderBreakLineCreator&#39;&gt;</div>
 <div class="line">plot_widget: &lt;class &#39;oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator&#39;&gt;</div>
 <div class="line">bar_graph: &lt;class &#39;oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator&#39;&gt;</div>

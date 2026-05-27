@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('df/d23/namespaceMethods_1_1draw__bargr
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac34a9622db0cafa9d5ec6a40424b8758" id="r_ac34a9622db0cafa9d5ec6a40424b8758"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d23/namespaceMethods_1_1draw__bargraph.html#ac34a9622db0cafa9d5ec6a40424b8758">create_bar_graph_image</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#af575f17e6be3f269b86b041a60560dbf">text</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a5558ace5433f9aabbf0a0ec059900d94">width</a>=200, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ad6d040b79093a1652d3e3a0f02172d83">height</a>=60, bg_color=(200, 200, 200), <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bar_color</a>=(0, 0, 255), text_color=(0, 0, 0))</td></tr>
+<tr class="memitem:ac34a9622db0cafa9d5ec6a40424b8758" id="r_ac34a9622db0cafa9d5ec6a40424b8758"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d23/namespaceMethods_1_1draw__bargraph.html#ac34a9622db0cafa9d5ec6a40424b8758">create_bar_graph_image</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#af575f17e6be3f269b86b041a60560dbf">text</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a5558ace5433f9aabbf0a0ec059900d94">width</a>=200, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ad6d040b79093a1652d3e3a0f02172d83">height</a>=60, bg_color=(200, 200, 200), bar_color=(0, 0, 255), text_color=(0, 0, 0))</td></tr>
 <tr class="separator:ac34a9622db0cafa9d5ec6a40424b8758"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -168,8 +168,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   27</span>    value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(-100, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(0, value))</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>    <span class="comment"># Create a new image with a transparent background</span></div>
-<div class="line"><span class="lineno">   30</span>    img = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.new</a>(<span class="stringliteral">&quot;RGBA&quot;</span>, (width, height), (0, 0, 0, 0))</div>
-<div class="line"><span class="lineno">   31</span>    draw = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageDraw.Draw</a>(img)</div>
+<div class="line"><span class="lineno">   30</span>    img = Image.new(<span class="stringliteral">&quot;RGBA&quot;</span>, (width, height), (0, 0, 0, 0))</div>
+<div class="line"><span class="lineno">   31</span>    draw = ImageDraw.Draw(img)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>    <span class="comment"># Calculate the width of the bar</span></div>
 <div class="line"><span class="lineno">   34</span>    bar_height = 10</div>
@@ -177,29 +177,28 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   36</span>    bar_width = (value + 100) * width / 100</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>    <span class="comment"># Draw the bar</span></div>
-<div class="line"><span class="lineno">   39</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw.rectangle</a>(</div>
+<div class="line"><span class="lineno">   39</span>    draw.rectangle(</div>
 <div class="line"><span class="lineno">   40</span>        [(0, bar_y_position), (bar_width, bar_y_position + bar_height)], fill=bar_color</div>
 <div class="line"><span class="lineno">   41</span>    )</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># Draw the text</span></div>
 <div class="line"><span class="lineno">   44</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   45</span>        font = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageFont.truetype</a>(<span class="stringliteral">&quot;arial.ttf&quot;</span>, 10)</div>
+<div class="line"><span class="lineno">   45</span>        font = ImageFont.truetype(<span class="stringliteral">&quot;arial.ttf&quot;</span>, 10)</div>
 <div class="line"><span class="lineno">   46</span>    <span class="keywordflow">except</span> OSError:</div>
-<div class="line"><span class="lineno">   47</span>        font = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageFont.load_default</a>()</div>
+<div class="line"><span class="lineno">   47</span>        font = ImageFont.load_default()</div>
 <div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw.text</a>((5, 5), text, font=font, fill=text_color)</div>
+<div class="line"><span class="lineno">   49</span>    draw.text((5, 5), text, font=font, fill=text_color)</div>
 <div class="line"><span class="lineno">   50</span> </div>
 <div class="line"><span class="lineno">   51</span>    <span class="comment"># Save the image to the DATA folder</span></div>
 <div class="line"><span class="lineno">   52</span>    image_name = f<span class="stringliteral">&quot;bar_graph_{value}.png&quot;</span></div>
-<div class="line"><span class="lineno">   53</span>    image_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">project_paths.DATA_DIR</a>, image_name)</div>
-<div class="line"><span class="lineno">   54</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">img.save</a>(image_path)</div>
+<div class="line"><span class="lineno">   53</span>    image_path = os.path.join(project_paths.DATA_DIR, image_name)</div>
+<div class="line"><span class="lineno">   54</span>    img.save(image_path)</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    <span class="keywordflow">return</span> image_path</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a4735a0c4d1b11f62ea44115d54a93087"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a></div><div class="ttdeci">repeat min</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">generated.rs:2081</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa83862769f78fffb512bc9283007ef67"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a></div><div class="ttdeci">repeat max</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">generated.rs:1711</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>.</p>
 
 </div>
 </div>

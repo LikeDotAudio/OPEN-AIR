@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('dc/d0c/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: ModuleNotFoundError after Widget Migration</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1868"></a> <b>Date:</b> 2026-03-16 01:05:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Total application failure during UI bootstrap.</p>
-<h1><a class="anchor" id="autotoc_md1869"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2317"></a> <b>Date:</b> 2026-03-16 01:05:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Total application failure during UI bootstrap.</p>
+<h1><a class="anchor" id="autotoc_md2318"></a>
 Issue</h1>
 <p>A &lsquo;ModuleNotFoundError: No module named 'oaGui.panels&rsquo;<code>occurred, along with dozens of other broken imports, following the migration of widget directories to</code>workers/builder/widgets/`.</p>
-<h1><a class="anchor" id="autotoc_md1870"></a>
+<h1><a class="anchor" id="autotoc_md2319"></a>
 Root Cause</h1>
 <p>The refactoring that moved widget folders into categorical sub-containers (e.g., <code>widgets/buttons/</code>, <code>widgets/faders/</code>) was completed, but not all import statements and string-based module paths in the <code>FactoryMapping</code> were updated to reflect the new structure.</p>
-<h1><a class="anchor" id="autotoc_md1871"></a>
+<h1><a class="anchor" id="autotoc_md2320"></a>
 Resolution</h1>
 <p>Executed a comprehensive automated update of the codebase using a Python script to remap all <code>oaGui.&lt;widget&gt;</code> imports to their new <code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a>.&lt;category&gt;.&lt;widget&gt;</code> locations. This included:</p><ol type="1">
 <li>Updating <code>managers/Display/factory/core/factory_mapping.py</code> lazy-load strings.</li>
 <li>Updating <code>workers/builder/core/background.py</code>.</li>
 <li>Updating dozens of inter-widget dependencies and mixins.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1872"></a>
+<h1><a class="anchor" id="autotoc_md2321"></a>
 Verification</h1>
-<p>Ran a Python reproduction script that imports <code>DynamicGuiBuilder</code> and its dependencies:</p><ul>
-<li><b>Output:</b> <code>DynamicGuiBuilder Success</code></li>
+<p>Ran a Python reproduction script that imports <code>LoaderOrchestrator</code> and its dependencies:</p><ul>
+<li><b>Output:</b> <code>LoaderOrchestrator Success</code></li>
 <li><b>Log trace:</b> Confirmed all core builder components load without error. </li>
 </ul>
 </div></div><!-- contents -->

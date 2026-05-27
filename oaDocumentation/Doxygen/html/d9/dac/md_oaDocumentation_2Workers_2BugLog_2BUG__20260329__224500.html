@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d9/dac/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_224500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2000"></a> </p>
-<h1><a class="anchor" id="autotoc_md2001"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2449"></a> </p>
+<h1><a class="anchor" id="autotoc_md2450"></a>
 Issue</h1>
 <p>The WYSIWYG editor failed to populate the "Grab Bag" palette, logging the following error: &lsquo;ERROR | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:28 - ❌ GrabBagLoader: Builder root 'workers/builder&rsquo; does not exist.`</p>
-<h1><a class="anchor" id="autotoc_md2002"></a>
+<h1><a class="anchor" id="autotoc_md2451"></a>
 Root Cause</h1>
 <p>The <code>GrabBagLoader</code> was using a hardcoded relative path (<code>workers/builder</code>) from a legacy project structure. In the current Linux-optimized architecture, widget components are located in <code><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></code> and its subdirectories.</p>
-<h1><a class="anchor" id="autotoc_md2003"></a>
+<h1><a class="anchor" id="autotoc_md2452"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Standardized Pathing</b>: Updated <code><a class="el" href="../../dc/d6c/grab__bag__loader_8py.html">oaGuiEditorWYSIWYG/FileReaders/grab_bag_loader.py</a></code> to use <code>GLOBAL_PROJECT_ROOT</code> from <code>oaOchestration</code> to resolve paths relative to the project root.</li>
-<li><b>Recursive Scanning</b>: Changed the scan logic from <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">iterdir()</a></code> (top-level only) to <code>rglob("sample.json")</code> to correctly find widget samples located in nested subdirectories (e.g., <code>Core/utils</code>).</li>
+<li><b>Recursive Scanning</b>: Changed the scan logic from <code>iterdir()</code> (top-level only) to <code>rglob("sample.json")</code> to correctly find widget samples located in nested subdirectories (e.g., <code>Core/utils</code>).</li>
 <li><b>Autonomous Defaults</b>: Set the default <code>builder_root</code> to <code>None</code> in <code>__init__</code>, allowing the loader to automatically resolve the correct standard path if none is provided.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2004"></a>
+<h1><a class="anchor" id="autotoc_md2453"></a>
 Verification</h1>
 <p>Executed a verification script: &lsquo;python3 -c "from oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader import GrabBagLoader; loader = GrabBagLoader(); lib = loader.scan_library(); print(f'Found {len(lib)} components&amp;rsquo;)"<code> Output:</code>Found 40 components`. The editor now correctly discovers all 40 available widget types. </p>
 </div></div><!-- contents -->

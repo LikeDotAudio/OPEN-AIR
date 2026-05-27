@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('db/dff/md_oaComProtocols_2oaComMQTT_2D
   <div class="headertitle"><div class="title">🏷️ Mqtt Connection Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md234"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md235"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md499"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md500"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md236"></a>
+<h2><a class="anchor" id="autotoc_md501"></a>
 File Level</h2>
 <p>mqtt/mqtt_connection_manager.py</p>
 <p>Manages the singleton MQTT client connection using aiomqtt (asyncio wrapper for paho). Bridges the async MQTT loop with the synchronous Tkinter application using a background thread.</p>
 <p>Author: Anthony Peter Kuzub Version 20260218.AioMqtt.2</p>
-<h1><a class="anchor" id="autotoc_md237"></a>
+<h1><a class="anchor" id="autotoc_md502"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md238"></a>
+<h1><a class="anchor" id="autotoc_md503"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md239"></a>
+<h2><a class="anchor" id="autotoc_md504"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md240"></a>
+<h3><a class="anchor" id="autotoc_md505"></a>
 &lt;tt&gt;class MqttConnectionManager&lt;/tt&gt;</h3>
 <p>No class description provided.</p>
-<h4><a class="anchor" id="autotoc_md241"></a>
+<h4><a class="anchor" id="autotoc_md506"></a>
 &lt;tt&gt;__init__(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md242"></a>
+<h4><a class="anchor" id="autotoc_md507"></a>
 &lt;tt&gt;is_connected(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -135,7 +135,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md243"></a>
+<h4><a class="anchor" id="autotoc_md508"></a>
 &lt;tt&gt;get_client_instance(self)&lt;/tt&gt;</h4>
 <p>Returns self as a proxy for publishing and subscribing.</p>
 <p><b>Parameters:</b></p><ul>
@@ -147,7 +147,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md244"></a>
+<h4><a class="anchor" id="autotoc_md509"></a>
 &lt;tt&gt;publish(self, topic, payload, qos, retain)&lt;/tt&gt;</h4>
 <p>Thread-safe publish proxy.</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md245"></a>
+<h4><a class="anchor" id="autotoc_md510"></a>
 &lt;tt&gt;subscribe(self, topic, qos)&lt;/tt&gt;</h4>
 <p>Thread-safe subscribe proxy. Queues the request for the async loop.</p>
 <p><b>Parameters:</b></p><ul>
@@ -175,7 +175,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md246"></a>
+<h4><a class="anchor" id="autotoc_md511"></a>
 &lt;tt&gt;connect_to_broker(self, address, port, on_message_callback, subscriber_router)&lt;/tt&gt;</h4>
 <p>Starts the async MQTT loop in a background thread.</p>
 <p><b>Parameters:</b></p><ul>
@@ -190,7 +190,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md247"></a>
+<h4><a class="anchor" id="autotoc_md512"></a>
 &lt;tt&gt;_run_async_loop(self)&lt;/tt&gt;</h4>
 <p><a class="el" href="../../d7/d00/namespaceEntry.html">Entry</a> point for the background thread.</p>
 <p><b>Parameters:</b></p><ul>
@@ -202,7 +202,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md248"></a>
+<h4><a class="anchor" id="autotoc_md513"></a>
 &lt;tt&gt;disconnect(self)&lt;/tt&gt;</h4>
 <p>Triggers graceful shutdown of the async loop.</p>
 <p><b>Parameters:</b></p><ul>
@@ -214,7 +214,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md249"></a>
+<h1><a class="anchor" id="autotoc_md514"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

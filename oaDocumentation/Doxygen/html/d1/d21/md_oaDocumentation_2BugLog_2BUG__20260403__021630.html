@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d1/d21/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: GraphPlotter Display Issue</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1226"></a><b>Date:</b> 2026-04-03 02:16:30 <b>Priority:</b> 1 (Critical/Crash)</p>
-<h1><a class="anchor" id="autotoc_md1227"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1491"></a><b>Date:</b> 2026-04-03 02:16:30 <b>Priority:</b> 1 (Critical/Crash)</p>
+<h1><a class="anchor" id="autotoc_md1492"></a>
 Issue</h1>
 <p>The <code>GraphPlotter</code> (used for <code>plot_widget</code>) was failing to render anything inside an <code>OcaBin</code> container when the <code>sticky</code> property in its layout config was empty (<code>""</code>). Because the grid layout manager wasn't stretching the <code>tk.Frame</code>, the widget defaulted to a requested size of <code>0x0</code>, rendering it invisible.</p>
-<h1><a class="anchor" id="autotoc_md1228"></a>
+<h1><a class="anchor" id="autotoc_md1493"></a>
 Root Cause</h1>
-<p>In <code>oaGuiElements/Core/graphing/graphing/dynamic_graph.py</code>, <code>GraphPlotter.__init__</code> was calling <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super()</a>.__init__(parent, **kwargs)</code> without injecting explicit <code>width</code> and <code>height</code> dimensions. It then correctly disabled child propagation (<code>self.pack_propagate(False)</code> and <code>self.grid_propagate(False)</code>) to prevent vibrating resize loops, which meant the frame relied entirely on external grid weights or initial sizes. Without initial sizes, it remained invisible if <code>sticky</code> was disabled.</p>
-<h1><a class="anchor" id="autotoc_md1229"></a>
+<p>In <code>oaGuiElements/Core/graphing/graphing/dynamic_graph.py</code>, <code>GraphPlotter.__init__</code> was calling <code>super().__init__(parent, **kwargs)</code> without injecting explicit <code>width</code> and <code>height</code> dimensions. It then correctly disabled child propagation (<code>self.pack_propagate(False)</code> and <code>self.grid_propagate(False)</code>) to prevent vibrating resize loops, which meant the frame relied entirely on external grid weights or initial sizes. Without initial sizes, it remained invisible if <code>sticky</code> was disabled.</p>
+<h1><a class="anchor" id="autotoc_md1494"></a>
 Resolution</h1>
-<p>Modified <code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> to extract <code>width</code> and <code>height</code> from the JSON <code>geometry</code> and <code>layout</code> structures, and explicitly pass them into <code>kwargs</code> for <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super()</a>.__init__</code>. This ensures the <code>GraphPlotter</code> frame starts at the requested size (minimum <code>100x50</code>) instead of <code>0x0</code>, displaying perfectly regardless of grid stretching logic.</p>
-<h1><a class="anchor" id="autotoc_md1230"></a>
+<p>Modified <code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> to extract <code>width</code> and <code>height</code> from the JSON <code>geometry</code> and <code>layout</code> structures, and explicitly pass them into <code>kwargs</code> for <code>super().__init__</code>. This ensures the <code>GraphPlotter</code> frame starts at the requested size (minimum <code>100x50</code>) instead of <code>0x0</code>, displaying perfectly regardless of grid stretching logic.</p>
+<h1><a class="anchor" id="autotoc_md1495"></a>
 Verification</h1>
 <ul>
 <li>Added <code>kwargs["width"]</code> and <code>kwargs["height"]</code> directly into the <code>__init__</code> logic of <code>GraphPlotter</code>.</li>
-<li>Confirmed this initializes the <code>tk.Frame</code> with the correct starting dimensions, satisfying <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pack_propagate(False)</a></code>.</li>
+<li>Confirmed this initializes the <code>tk.Frame</code> with the correct starting dimensions, satisfying <code>pack_propagate(False)</code>.</li>
 <li>Issue is fully resolved. </li>
 </ul>
 </div></div><!-- contents -->

@@ -249,7 +249,7 @@ class OscDashboardImplementation(tk.Frame, SyncBehavior):
             self.inspect_text.insert(tk.END, f"  MQTT TOPIC : {data['topic']}")
 
             # Deduce if it's a standard mapping
-            is_std = data['topic'].startswith("OPEN-AIR/")
+            is_std = data['topic'].startswith("OpenAir/")
             self.inspect_text.insert(tk.END, f"  MAPPING    : {'Standard Auto-Map' if is_std else 'Manual User Route'}")
 
         self.inspect_text.insert(tk.END, "╚═════════════════════ END ════════════════════════╝")

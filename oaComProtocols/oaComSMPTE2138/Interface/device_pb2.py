@@ -17,6 +17,11 @@ _runtime_version.ValidateProtobufRuntimeVersion(
     '',
     'device.proto'
 )
+from . import constraint_pb2 as constraint__pb2
+from . import param_pb2 as param__pb2
+from . import menu_pb2 as menu__pb2
+from . import language_pb2 as language__pb2
+from . import externalobject_pb2 as externalobject__pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()

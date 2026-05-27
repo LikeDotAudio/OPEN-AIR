@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d2/dd4/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa Json Builder</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md788"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md789"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1053"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1054"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md790"></a>
+<h2><a class="anchor" id="autotoc_md1055"></a>
 File Level</h2>
 <p>managers/STATE_VISA_FLEET_Manager/manager_visa_json_builder.py</p>
 <p>Manages the construction and augmentation of JSON data for VISA devices.</p>
 <p>Author: Gemini Agent</p>
-<h1><a class="anchor" id="autotoc_md791"></a>
+<h1><a class="anchor" id="autotoc_md1056"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md792"></a>
+<h1><a class="anchor" id="autotoc_md1057"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md793"></a>
+<h2><a class="anchor" id="autotoc_md1058"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md794"></a>
+<h3><a class="anchor" id="autotoc_md1059"></a>
 &lt;tt&gt;class VisaJsonBuilder&lt;/tt&gt;</h3>
 <p>No class description provided.</p>
-<h4><a class="anchor" id="autotoc_md795"></a>
+<h4><a class="anchor" id="autotoc_md1060"></a>
 &lt;tt&gt;__init__(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md796"></a>
+<h4><a class="anchor" id="autotoc_md1061"></a>
 &lt;tt&gt;augment_device_details(self, device_entry)&lt;/tt&gt;</h4>
 <p>Looks up the Model Number in KNOWN_DEVICES and adds Type/Notes to the entry.</p>
 <p><b>Parameters:</b></p><ul>
@@ -135,7 +135,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md797"></a>
+<h4><a class="anchor" id="autotoc_md1062"></a>
 &lt;tt&gt;save_inventory_to_json(self, inventory_data)&lt;/tt&gt;</h4>
 <p>Saves the current fleet inventory to a JSON file in an atomic way to prevent corruption. It writes to a temporary file first and then renames it.</p>
 <p><b>Parameters:</b></p><ul>
@@ -147,7 +147,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md798"></a>
+<h4><a class="anchor" id="autotoc_md1063"></a>
 &lt;tt&gt;load_inventory_from_json(self)&lt;/tt&gt;</h4>
 <p>Loads fleet inventory from a JSON file if it exists, is not empty, and flattens it.</p>
 <p><b>Parameters:</b></p><ul>
@@ -159,7 +159,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md799"></a>
+<h4><a class="anchor" id="autotoc_md1064"></a>
 &lt;tt&gt;load_grouped_inventory_from_json(self)&lt;/tt&gt;</h4>
 <p>Loads fleet inventory from a JSON file if it exists and returns the raw, hierarchical (grouped) dictionary without flattening.</p>
 <p><b>Parameters:</b></p><ul>
@@ -171,7 +171,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md800"></a>
+<h4><a class="anchor" id="autotoc_md1065"></a>
 &lt;tt&gt;save_query_response_to_json(self, serial, response, command, corr_id)&lt;/tt&gt;</h4>
 <p>Saves a query response to a JSON file in the DATA directory. Filename format: oaDataRunningFiles/{serial}_query_{timestamp}.json</p>
 <p><b>Parameters:</b></p><ul>
@@ -186,7 +186,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md801"></a>
+<h4><a class="anchor" id="autotoc_md1066"></a>
 &lt;tt&gt;_group_devices_by_type_and_model(self, inventory_data)&lt;/tt&gt;</h4>
 <p>Groups a flat list of device dictionaries first by 'device_type', then a constant 'YAK' topic, then 'model' (forced uppercase), then a constant 'Connection' topic, and finally by 'gpib_address'. The innermost level will contain the device's full details.</p>
 <p><b>Parameters:</b></p><ul>
@@ -198,7 +198,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md802"></a>
+<h4><a class="anchor" id="autotoc_md1067"></a>
 &lt;tt&gt;_flatten_grouped_inventory(self, grouped_data)&lt;/tt&gt;</h4>
 <p>Flattens the hierarchical grouped inventory data back into a list of individual device dictionaries. Expected structure: device_type -&gt; "YAK" -&gt; model -&gt; "Connection" -&gt; "Table" -&gt; gpib_address -&gt; device_dict</p>
 <p><b>Parameters:</b></p><ul>
@@ -210,7 +210,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md803"></a>
+<h1><a class="anchor" id="autotoc_md1068"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

@@ -29,7 +29,7 @@ class MidiMqttWorker:
         self._running = False
 
         # Base topic for MIDI
-        self.base_topic = "OPEN-AIR/MIDI/#"
+        self.base_topic = "OpenAir/MIDI/#"
 
     def start(self):
         if self._running: return

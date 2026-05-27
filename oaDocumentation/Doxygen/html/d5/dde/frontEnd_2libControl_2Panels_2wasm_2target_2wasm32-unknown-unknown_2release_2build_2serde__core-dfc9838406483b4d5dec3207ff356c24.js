@@ -1,0 +1,4 @@
+var frontEnd_2libControl_2Panels_2wasm_2target_2wasm32_unknown_unknown_2release_2build_2serde__core_dfc9838406483b4d5dec3207ff356c24 =
+[
+    [ "__private228", "d5/dde/frontEnd_2libControl_2Panels_2wasm_2target_2wasm32-unknown-unknown_2release_2build_2serde__core-dfc9838406483b4d5dec3207ff356c24.html#a05a8671f04ee2e03856155c9241b2a78", null ]
+];

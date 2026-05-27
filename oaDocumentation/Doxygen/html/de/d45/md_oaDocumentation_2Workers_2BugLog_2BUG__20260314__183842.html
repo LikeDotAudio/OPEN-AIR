@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('de/d45/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Race Condition in GUI Builder Causing Partial Render</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1716"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2165"></a></p><ul>
 <li><b>ID</b>: 20260314_183842</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1717"></a>
+<h1><a class="anchor" id="autotoc_md2166"></a>
 Issue</h1>
 <p>The application's GUI was only partially rendering, often appearing as if it had stopped midway through building. This was most noticeable when processing directories without an explicit <code>layout.json</code>, where the builder would fall back to its default item-processing logic. The application would incorrectly signal that the build was complete while child components were still being asynchronously processed, leading to an incomplete and non-functional UI.</p>
-<h1><a class="anchor" id="autotoc_md1718"></a>
+<h1><a class="anchor" id="autotoc_md2167"></a>
 Root Cause Analysis</h1>
-<p>A critical race condition existed in the <code>_build_from_directory</code> method within <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code>. This function is the core of the recursive GUI build process.</p>
+<p>A critical race condition existed in the <code>_build_from_directory</code> method within <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code>. This function is the core of the recursive GUI build process.</p>
 <ol type="1">
 <li>When <code>_build_from_directory</code> was called for a directory that should be processed by the default "directory listing" logic, it would delegate the work to a helper function, <code>_process_default_directory_items</code>.</li>
 <li>Crucially, <code>_build_from_directory</code> did <b>not</b> pass its <code>on_complete</code> callback to the helper function. Instead, it called the helper and then immediately called <code>on_complete</code> itself.</li>
 <li>The <code>_process_default_directory_items</code> function works asynchronously, using <code>self.after()</code> to iterate through subdirectories and GUI files without blocking the main loop.</li>
 <li>Because the <code>on_complete</code> callback was fired prematurely by the parent function, the main application logic would proceed as if the build was finished (e.g., triggering state restoration, saving caches). However, the helper function was still in the middle of building the UI in the background. This race condition resulted in the "half-rendered" state reported by the user.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1719"></a>
+<h1><a class="anchor" id="autotoc_md2168"></a>
 Resolution</h1>
 <p>The race condition was resolved by correctly propagating the <code>on_complete</code> callback down the execution chain.</p>
 <ol type="1">
@@ -120,7 +120,7 @@ Resolution</h1>
 <li>The <code>_process_default_directory_items</code> function is now responsible for calling the <code>on_complete</code> callback at the very end of its own asynchronous processing loop, specifically after the last item (subdirectory or GUI file) has been processed.</li>
 </ol>
 <p>This change ensures that the <code>on_complete</code> event is only fired after all asynchronous build tasks for that branch are truly finished, eliminating the race condition and allowing the UI to render completely and reliably. A <code>try...except</code> block was also added to ensure <code>on_complete</code> is still called even if a catastrophic failure occurs in the main build function, preventing the application from hanging.</p>
-<h1><a class="anchor" id="autotoc_md1720"></a>
+<h1><a class="anchor" id="autotoc_md2169"></a>
 Verification</h1>
 <p>The application now renders all GUI elements completely and consistently. The issue of the UI build process appearing to "stop" midway through is resolved. The main application window and all its sub-components, including JSON-defined GUIs, are fully drawn as expected. </p>
 </div></div><!-- contents -->

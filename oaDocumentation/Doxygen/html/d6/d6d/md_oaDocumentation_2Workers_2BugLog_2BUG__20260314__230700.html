@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d6/d6d/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Missing MQTT Announcements for GUI Changes</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1768"></a> <b>Date:</b> 2026-03-14 23:07:00 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2217"></a> <b>Date:</b> 2026-03-14 23:07:00 <br  />
  <b>Priority:</b> 1 (Critical - Functional regression) <br  />
  <b>Status:</b> Resolved <br  />
  <b>Module:</b> <code>workers/logic/state_mirror_engine.py</code></p>
-<h1><a class="anchor" id="autotoc_md1769"></a>
+<h1><a class="anchor" id="autotoc_md2218"></a>
 Issue</h1>
 <p>GUI changes performed by the user (e.g., turning a knob, sliding a fader) were intermittently failing to produce MQTT event announcements. This resulted in other parts of the system and external MQTT monitors not receiving state updates from the UI.</p>
-<h1><a class="anchor" id="autotoc_md1770"></a>
+<h1><a class="anchor" id="autotoc_md2219"></a>
 Root Cause</h1>
 <p>The <code>StateMirrorEngine</code> relied on individual widget creators to manually invoke <code>broadcast_gui_change_to_mqtt()</code> within their specific event handlers (click, drag, release). Several newer or refactored widgets lacked these manual calls, and others only triggered the broadcast on 'release', causing 'real-time' tracking to fail.</p>
 <p>Furthermore, any programmatic updates to the underlying Tkinter variables (e.g., from custom macro logic) were not being broadcast at all.</p>
-<h1><a class="anchor" id="autotoc_md1771"></a>
+<h1><a class="anchor" id="autotoc_md2220"></a>
 Resolution</h1>
 <p>Modified <code>StateMirrorEngine.register_widget</code> to automatically attach a <code>trace_add("write", ...)</code> callback to every registered Tkinter variable. This ensures that <em>any</em> change to a registered variable (whether from user interaction or internal logic) is automatically evaluated and broadcast to the MQTT bus, provided it passes the engine's built-in throttling and loop-prevention checks.</p>
-<h1><a class="anchor" id="autotoc_md1772"></a>
+<h1><a class="anchor" id="autotoc_md2221"></a>
 Verification Evidence</h1>
 <ol type="1">
 <li><b>Reproduction</b>: A script <code>reproduce_mqtt_issue.py</code> was created to register a variable with the engine and verify that <code>var.set()</code> did NOT trigger a call to the <code>StateCacheManager</code> or the MQTT publisher.</li>
 <li><b>Fix Verification</b>: The same script now confirms that <code>var.set()</code> triggers a successful MQTT broadcast via the automatic trace mechanism.</li>
 <li><b>Robustness</b>: The fix correctly respects <code>_silent_update</code> and <code>_binding_suspended</code> flags to prevent recursive feedback loops during remote sync or startup.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1773"></a>
+<h1><a class="anchor" id="autotoc_md2222"></a>
 Impact</h1>
 <p>Ensures 100% reliable state synchronization between the GUI and the MQTT network for all widget types across the entire application. </p>
 </div></div><!-- contents -->

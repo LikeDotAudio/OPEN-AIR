@@ -17,6 +17,7 @@ _runtime_version.ValidateProtobufRuntimeVersion(
     '',
     'externalobject.proto'
 )
+from . import param_pb2 as param__pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()

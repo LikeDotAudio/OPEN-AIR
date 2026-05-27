@@ -35,35 +35,35 @@ HZ_TO_MHZ = 1_000_000
 # --- MQTT Topic Constants (No Magic Numbers) ---
 # Frequency
 FREQ_START_INPUT = (
-    "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/Input/start_freq/value"
+    "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/Input/start_freq/value"
 )
-FREQ_STOP_INPUT = "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/Input/stop_freq/value"
-FREQ_TRIGGER = "OPEN-AIR/yak/Frequency/rig/Rig_freq_start_stop/scpi_details/Execute Command/trigger"
+FREQ_STOP_INPUT = "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/Input/stop_freq/value"
+FREQ_TRIGGER = "OpenAir/yak/Frequency/rig/Rig_freq_start_stop/scpi_details/Execute Command/trigger"
 
 # Bandwidth
-RBW_INPUT = "OPEN-AIR/yak/Bandwidth/set/Set_RBW/Input/hz_value/value"
-RBW_TRIGGER = "OPEN-AIR/yak/Bandwidth/set/Set_RBW/scpi_details/Execute Command/trigger"
-VBW_INPUT = "OPEN-AIR/yak/Bandwidth/set/Set_VBW/Input/hz_value/value"
-VBW_TRIGGER = "OPEN-AIR/yak/Bandwidth/set/Set_VBW/scpi_details/Execute Command/trigger"
+RBW_INPUT = "OpenAir/yak/Bandwidth/set/Set_RBW/Input/hz_value/value"
+RBW_TRIGGER = "OpenAir/yak/Bandwidth/set/Set_RBW/scpi_details/Execute Command/trigger"
+VBW_INPUT = "OpenAir/yak/Bandwidth/set/Set_VBW/Input/hz_value/value"
+VBW_TRIGGER = "OpenAir/yak/Bandwidth/set/Set_VBW/scpi_details/Execute Command/trigger"
 
 # Amplitude
 AMP_TRIGGER = (
-    "OPEN-AIR/yak/Amplitude/rig/rig_Ref_Level_dBm/scpi_details/Execute Command/trigger"
+    "OpenAir/yak/Amplitude/rig/rig_Ref_Level_dBm/scpi_details/Execute Command/trigger"
 )
-AMP_REF_LEVEL = "OPEN-AIR/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Ref_Level_dBm/value"
+AMP_REF_LEVEL = "OpenAir/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Ref_Level_dBm/value"
 AMP_ATTENUATION = (
-    "OPEN-AIR/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Attenuation_dB/value"
+    "OpenAir/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Attenuation_dB/value"
 )
-AMP_PREAMP = "OPEN-AIR/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Preamp_On/value"
+AMP_PREAMP = "OpenAir/yak/Amplitude/rig/rig_Ref_Level_dBm/Input/Preamp_On/value"
 
 # Trace Modes
 TRACE_TRIGGER = (
-    "OPEN-AIR/yak/Trace/rig/rig_All_trace_modes/scpi_details/Execute Command/trigger"
+    "OpenAir/yak/Trace/rig/rig_All_trace_modes/scpi_details/Execute Command/trigger"
 )
-TRACE_MODE_1_INPUT = "OPEN-AIR/yak/Trace/rig/rig_All_trace_modes/Input/mode1/value"
-TRACE_MODE_2_INPUT = "OPEN-AIR/yak/Trace/rig/rig_All_trace_modes/Input/mode2/value"
-TRACE_MODE_3_INPUT = "OPEN-AIR/yak/Trace/rig/rig_All_trace_modes/Input/mode3/value"
-TRACE_MODE_4_INPUT = "OPEN-AIR/yak/Trace/rig/rig_All_trace_modes/Input/mode4/value"
+TRACE_MODE_1_INPUT = "OpenAir/yak/Trace/rig/rig_All_trace_modes/Input/mode1/value"
+TRACE_MODE_2_INPUT = "OpenAir/yak/Trace/rig/rig_All_trace_modes/Input/mode2/value"
+TRACE_MODE_3_INPUT = "OpenAir/yak/Trace/rig/rig_All_trace_modes/Input/mode3/value"
+TRACE_MODE_4_INPUT = "OpenAir/yak/Trace/rig/rig_All_trace_modes/Input/mode4/value"
 
 
 class PresetPusherWorker:

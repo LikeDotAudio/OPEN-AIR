@@ -14,10 +14,9 @@ var namespaceWorkers =
       [ "LOCAL_DEBUG", "d7/d61/namespaceWorkers_1_1agent__usb__enumerator.html#a02f1823018de63e76a2f08db45b8414d", null ],
       [ "rm", "d7/d61/namespaceWorkers_1_1agent__usb__enumerator.html#a37d362e79c696737d60309a9144e5e4a", null ]
     ] ],
-    [ "async_grid_renderer", "df/dbe/namespaceWorkers_1_1async__grid__renderer.html", "df/dbe/namespaceWorkers_1_1async__grid__renderer" ],
+    [ "batch_layout_engine", "de/d61/namespaceWorkers_1_1batch__layout__engine.html", "de/d61/namespaceWorkers_1_1batch__layout__engine" ],
     [ "batch_sink", "d7/d1c/namespaceWorkers_1_1batch__sink.html", "d7/d1c/namespaceWorkers_1_1batch__sink" ],
     [ "broker_monitor", "da/d33/namespaceWorkers_1_1broker__monitor.html", "da/d33/namespaceWorkers_1_1broker__monitor" ],
-    [ "builder", "db/d1b/namespaceWorkers_1_1builder.html", "db/d1b/namespaceWorkers_1_1builder" ],
     [ "CleanupApps", "d2/d0a/namespaceWorkers_1_1CleanupApps.html", "d2/d0a/namespaceWorkers_1_1CleanupApps" ],
     [ "cli_visa_find", "d3/d21/namespaceWorkers_1_1cli__visa__find.html", [
       [ "main", "d3/d21/namespaceWorkers_1_1cli__visa__find.html#aa52d5eaabcddbd532d32aa80301cd828", null ]
@@ -25,8 +24,10 @@ var namespaceWorkers =
     [ "collate_data", "da/d81/namespaceWorkers_1_1collate__data.html", [
       [ "collate_extra_tabs", "da/d81/namespaceWorkers_1_1collate__data.html#a9e43ca17f23992669790cbdc748f28b0", null ]
     ] ],
-    [ "launcher", "df/d3c/namespaceWorkers_1_1launcher.html", "df/d3c/namespaceWorkers_1_1launcher" ],
+    [ "compositing", "d7/d14/namespaceWorkers_1_1compositing.html", "d7/d14/namespaceWorkers_1_1compositing" ],
     [ "Launcher", "da/dcd/namespaceWorkers_1_1Launcher.html", "da/dcd/namespaceWorkers_1_1Launcher" ],
+    [ "launcher", "df/d3c/namespaceWorkers_1_1launcher.html", "df/d3c/namespaceWorkers_1_1launcher" ],
+    [ "layout_building", "d4/dfe/namespaceWorkers_1_1layout__building.html", "d4/dfe/namespaceWorkers_1_1layout__building" ],
     [ "logic_connect_instrument", "d3/df9/namespaceWorkers_1_1logic__connect__instrument.html", "d3/df9/namespaceWorkers_1_1logic__connect__instrument" ],
     [ "logic_disconnect_instrument", "d5/d4f/namespaceWorkers_1_1logic__disconnect__instrument.html", "d5/d4f/namespaceWorkers_1_1logic__disconnect__instrument" ],
     [ "logic_mqtt_listen", "d1/d0c/namespaceWorkers_1_1logic__mqtt__listen.html", "d1/d0c/namespaceWorkers_1_1logic__mqtt__listen" ],
@@ -36,8 +37,10 @@ var namespaceWorkers =
     ] ],
     [ "midi_mqtt_worker", "df/dea/namespaceWorkers_1_1midi__mqtt__worker.html", "df/dea/namespaceWorkers_1_1midi__mqtt__worker" ],
     [ "mqtt_async_worker", "d7/dfc/namespaceWorkers_1_1mqtt__async__worker.html", "d7/dfc/namespaceWorkers_1_1mqtt__async__worker" ],
+    [ "orchestration", "d2/d0f/namespaceWorkers_1_1orchestration.html", "d2/d0f/namespaceWorkers_1_1orchestration" ],
     [ "osc_rx_server", "d8/dd9/namespaceWorkers_1_1osc__rx__server.html", "d8/dd9/namespaceWorkers_1_1osc__rx__server" ],
     [ "osc_tx_client", "d3/db5/namespaceWorkers_1_1osc__tx__client.html", "d3/db5/namespaceWorkers_1_1osc__tx__client" ],
+    [ "rendering", "d5/d99/namespaceWorkers_1_1rendering.html", "d5/d99/namespaceWorkers_1_1rendering" ],
     [ "run_report_builder", "d7/d64/namespaceWorkers_1_1run__report__builder.html", "d7/d64/namespaceWorkers_1_1run__report__builder" ],
     [ "runTask", "d7/d69/namespaceWorkers_1_1runTask.html", "d7/d69/namespaceWorkers_1_1runTask" ],
     [ "sap_listener_worker", "dd/df0/namespaceWorkers_1_1sap__listener__worker.html", [

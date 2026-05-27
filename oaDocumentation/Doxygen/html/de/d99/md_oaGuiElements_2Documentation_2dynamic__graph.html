@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('de/d99/md_oaGuiElements_2Documentation
   <div class="headertitle"><div class="title">🏷️ Dynamic Graph</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md3364"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md3365"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md3644"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md3645"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md3366"></a>
+<h2><a class="anchor" id="autotoc_md3646"></a>
 File Level</h2>
 <p>data_graphing/dynamic_graph.py</p>
-<h1><a class="anchor" id="autotoc_md3367"></a>
+<h1><a class="anchor" id="autotoc_md3647"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md3368"></a>
+<h1><a class="anchor" id="autotoc_md3648"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md3369"></a>
+<h2><a class="anchor" id="autotoc_md3649"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md3370"></a>
+<h3><a class="anchor" id="autotoc_md3650"></a>
 &lt;tt&gt;class GraphPlotter&lt;/tt&gt;</h3>
 <p>A Tkinter-compatible Matplotlib graph widget that dynamically renders plots with multiple datasets. OPTIMIZED: 30 FPS throttle and redundancy filter.</p>
-<h4><a class="anchor" id="autotoc_md3371"></a>
+<h4><a class="anchor" id="autotoc_md3651"></a>
 &lt;tt&gt;__init__(self, parent, config, base_mqtt_topic_from_path, widget_id, builder_instance, **kwargs)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -126,9 +126,9 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3372"></a>
+<h4><a class="anchor" id="autotoc_md3652"></a>
 &lt;tt&gt;render(self)&lt;/tt&gt;</h4>
-<p>Hook for TransparencyManager to trigger redraw when background changes.</p>
+<p>Hook for EngineVisualEffects to trigger redraw when background changes.</p>
 <p><b>Parameters:</b></p><ul>
 <li>None</li>
 </ul>
@@ -138,7 +138,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3373"></a>
+<h4><a class="anchor" id="autotoc_md3653"></a>
 &lt;tt&gt;_on_patina_update(self)&lt;/tt&gt;</h4>
 <p>⚡ HIGH-FIDELITY: Draws patina DETAILS inside Matplotlib Figure.</p>
 <p><b>Parameters:</b></p><ul>
@@ -150,7 +150,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3374"></a>
+<h4><a class="anchor" id="autotoc_md3654"></a>
 &lt;tt&gt;_draw(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3375"></a>
+<h4><a class="anchor" id="autotoc_md3655"></a>
 &lt;tt&gt;_schedule_update(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -174,7 +174,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3376"></a>
+<h4><a class="anchor" id="autotoc_md3656"></a>
 &lt;tt&gt;_perform_scheduled_update(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -186,7 +186,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3377"></a>
+<h4><a class="anchor" id="autotoc_md3657"></a>
 &lt;tt&gt;_on_dataset_var_change(self, dataset_id, *args)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -199,7 +199,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3378"></a>
+<h4><a class="anchor" id="autotoc_md3658"></a>
 &lt;tt&gt;_on_pick(self, e)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -211,7 +211,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3379"></a>
+<h4><a class="anchor" id="autotoc_md3659"></a>
 &lt;tt&gt;_on_motion(self, e)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -223,7 +223,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3380"></a>
+<h4><a class="anchor" id="autotoc_md3660"></a>
 &lt;tt&gt;_save_marker_style(self, m)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -235,7 +235,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3381"></a>
+<h4><a class="anchor" id="autotoc_md3661"></a>
 &lt;tt&gt;_restore_marker_style(self, m)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -247,7 +247,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3382"></a>
+<h4><a class="anchor" id="autotoc_md3662"></a>
 &lt;tt&gt;_apply_highlight(self, m)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -259,7 +259,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3383"></a>
+<h4><a class="anchor" id="autotoc_md3663"></a>
 &lt;tt&gt;_on_marker_release(self, e)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -271,7 +271,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3384"></a>
+<h4><a class="anchor" id="autotoc_md3664"></a>
 &lt;tt&gt;_update_marker_value(self, l, v)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -284,7 +284,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3385"></a>
+<h4><a class="anchor" id="autotoc_md3665"></a>
 &lt;tt&gt;_rename_marker(self, o, n)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -297,7 +297,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3386"></a>
+<h4><a class="anchor" id="autotoc_md3666"></a>
 &lt;tt&gt;_on_resize(self, event)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -309,7 +309,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3387"></a>
+<h4><a class="anchor" id="autotoc_md3667"></a>
 &lt;tt&gt;_perform_resize(self, w, h)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -322,7 +322,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3388"></a>
+<h4><a class="anchor" id="autotoc_md3668"></a>
 &lt;tt&gt;_initialize_marker_mirroring(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -334,7 +334,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3389"></a>
+<h4><a class="anchor" id="autotoc_md3669"></a>
 &lt;tt&gt;_on_marker_var_change(self, *args)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -346,7 +346,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3390"></a>
+<h4><a class="anchor" id="autotoc_md3670"></a>
 &lt;tt&gt;_initialize_state_mirroring(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -358,7 +358,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3391"></a>
+<h4><a class="anchor" id="autotoc_md3671"></a>
 &lt;tt&gt;_on_setting_var_change(self, setting)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -370,7 +370,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3392"></a>
+<h4><a class="anchor" id="autotoc_md3672"></a>
 &lt;tt&gt;_initialize_plot_elements(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -382,7 +382,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3393"></a>
+<h4><a class="anchor" id="autotoc_md3673"></a>
 &lt;tt&gt;_process_dataset_config(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -394,7 +394,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3394"></a>
+<h4><a class="anchor" id="autotoc_md3674"></a>
 &lt;tt&gt;_load_all_initial_data(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -406,7 +406,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3395"></a>
+<h4><a class="anchor" id="autotoc_md3675"></a>
 &lt;tt&gt;load_initial_data(self, dataset_id, x_vals, y_vals)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -420,7 +420,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3396"></a>
+<h4><a class="anchor" id="autotoc_md3676"></a>
 &lt;tt&gt;update_plot(self, dataset_id, x_new, y_new)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -434,7 +434,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3397"></a>
+<h4><a class="anchor" id="autotoc_md3677"></a>
 &lt;tt&gt;clear_plot(self, dataset_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -446,7 +446,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3398"></a>
+<h4><a class="anchor" id="autotoc_md3678"></a>
 &lt;tt&gt;_on_view_change(self, xlim, ylim)&lt;/tt&gt;</h4>
 <p>Callback for zoom/pan events.</p>
 <p><b>Parameters:</b></p><ul>
@@ -459,7 +459,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3399"></a>
+<h4><a class="anchor" id="autotoc_md3679"></a>
 &lt;tt&gt;_on_setting_change(self, name, value)&lt;/tt&gt;</h4>
 <p>Callback for setting changes from the context menu.</p>
 <p><b>Parameters:</b></p><ul>
@@ -472,7 +472,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3400"></a>
+<h4><a class="anchor" id="autotoc_md3680"></a>
 &lt;tt&gt;_on_add_marker(self, m_type, value)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -485,7 +485,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3401"></a>
+<h1><a class="anchor" id="autotoc_md3681"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

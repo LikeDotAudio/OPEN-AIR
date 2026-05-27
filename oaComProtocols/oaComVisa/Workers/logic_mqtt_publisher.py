@@ -52,7 +52,7 @@ class VisaGuiPublisher:
         """
         try:
             base_topic = (
-                "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices"
+                "OpenAir/Device/Instrument_Connection/Search_and_Connect/Found_devices"
             )
 
             num_resources_to_show = min(len(resources), MAX_GUI_DEVICE_SLOTS)
@@ -116,7 +116,7 @@ class VisaGuiPublisher:
         """
         if self.mqtt_util:
             base_topic = (
-                "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status"
+                "OpenAir/Device/Instrument_Connection/Search_and_Connect/Device_status"
             )
             full_topic = f"{base_topic}/{topic_suffix}"
 
@@ -144,7 +144,7 @@ class VisaGuiPublisher:
         Returns:
         - None.
         """
-        topic = "OPEN-AIR/Proxy/Status"
+        topic = "OpenAir/Proxy/Status"
         payload_data = {"status": status, "timestamp": time.time()}
         self.mqtt_util.get_client_instance().publish(
             topic=topic, payload=orjson.dumps(payload_data).decode(), qos=0, retain=True

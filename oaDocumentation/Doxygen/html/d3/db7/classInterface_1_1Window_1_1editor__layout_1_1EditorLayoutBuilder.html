@@ -136,28 +136,25 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   25</span>        matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, <span class="stringliteral">&quot;🎨🎨🎨 [RENDER] Assemble Editor Layout&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        <span class="comment"># 1. Status Bar</span></div>
-<div class="line"><span class="lineno">   28</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.status_bar</a> = EditorStatusBar(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window</a>)</div>
+<div class="line"><span class="lineno">   28</span>        editor.status_bar = EditorStatusBar(editor.window)</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>        <span class="comment"># 1.5 Global Toolbar</span></div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.toolbar</a> = EditorToolbar(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window</a>, editor)</div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.toolbar.pack</a>(side=<span class="stringliteral">&quot;top&quot;</span>, fill=<span class="stringliteral">&quot;x&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>        editor.toolbar = EditorToolbar(editor.window, editor)</div>
+<div class="line"><span class="lineno">   32</span>        editor.toolbar.pack(side=<span class="stringliteral">&quot;top&quot;</span>, fill=<span class="stringliteral">&quot;x&quot;</span>)</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment"># 2. Main Container (PanedWindow)</span></div>
-<div class="line"><span class="lineno">   35</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.PanedWindow</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.window</a>, orient=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.HORIZONTAL</a>, bg=<span class="stringliteral">&quot;#2b2b2b&quot;</span>, sashwidth=6, bd=0)</div>
-<div class="line"><span class="lineno">   36</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">editor.main_pane.pack</a>(fill=<span class="stringliteral">&quot;both&quot;</span>, expand=<span class="keyword">True</span>, padx=5, pady=5)</div>
+<div class="line"><span class="lineno">   35</span>        editor.main_pane = tk.PanedWindow(editor.window, orient=tk.HORIZONTAL, bg=<span class="stringliteral">&quot;#2b2b2b&quot;</span>, sashwidth=6, bd=0)</div>
+<div class="line"><span class="lineno">   36</span>        editor.main_pane.pack(fill=<span class="stringliteral">&quot;both&quot;</span>, expand=<span class="keyword">True</span>, padx=5, pady=5)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment"># 3. Assemble Regions</span></div>
-<div class="line"><span class="lineno">   39</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SidebarBuilder.build_left</a>(editor)</div>
-<div class="line"><span class="lineno">   40</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">CanvasBuilder.build_center</a>(editor)</div>
-<div class="line"><span class="lineno">   41</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SidebarBuilder.build_right</a>(editor)</div>
+<div class="line"><span class="lineno">   39</span>        SidebarBuilder.build_left(editor)</div>
+<div class="line"><span class="lineno">   40</span>        CanvasBuilder.build_center(editor)</div>
+<div class="line"><span class="lineno">   41</span>        SidebarBuilder.build_right(editor)</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># 4. Finalize</span></div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SashManager.setup</a>(editor)</div>
+<div class="line"><span class="lineno">   44</span>        SashManager.setup(editor)</div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

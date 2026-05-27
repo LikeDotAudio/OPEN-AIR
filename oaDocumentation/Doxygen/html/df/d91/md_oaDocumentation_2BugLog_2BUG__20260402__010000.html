@@ -93,55 +93,55 @@ $(document).ready(function(){initNavTree('df/d91/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 01:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1068"></a> </p>
-<h1><a class="anchor" id="autotoc_md1069"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1333"></a> </p>
+<h1><a class="anchor" id="autotoc_md1334"></a>
 Issues</h1>
 <p>This report details a batch of bugs fixed on 2026-04-02. The issues ranged from critical crashes to UI rendering errors and threading problems.</p>
-<h1><a class="anchor" id="autotoc_md1070"></a>
+<h1><a class="anchor" id="autotoc_md1335"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1071"></a>
+<h2><a class="anchor" id="autotoc_md1336"></a>
 1. AttributeError in StateManager</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;AttributeError: 'StateManager&rsquo; object has no attribute '_json_data'<code></code></li>
 <li><code> **Root Cause**: The</code>StateManager<code>was trying to access a non-existent</code>_json_data<code>attribute. The state is managed by a Rust backend and should be accessed via the</code>get_state()<code>method.</code></li>
 <li><code> **Resolution**: Modified</code><a class="el" href="../../d7/dac/state_8py.html">oaGuiEditorWYSIWYG/Core/state.py</a><code>to call</code>self.get_state()<code>instead of accessing</code>self._json_data`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1072"></a>
+<h2><a class="anchor" id="autotoc_md1337"></a>
 2. AttributeError in BallisticsEngine</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;AttributeError: 'BallisticsEngine&rsquo; object has no attribute 'overload_fade_factor'<code></code></li>
 <li><code> **Root Cause**: The</code>BallisticsEngine<code>Python wrapper did not expose the</code>overload_fade_factor<code>attribute from the underlying Rust engine.</code></li>
 <li><code> **Resolution**: Added a property to the</code>BallisticsEngine<code>class in</code><a class="el" href="../../d1/d46/ballistics_8py.html">oaGuiElements/Core/metering/meter_bar/Core/ballistics.py</a>` to expose the value from the Rust engine.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1073"></a>
+<h2><a class="anchor" id="autotoc_md1338"></a>
 3. SyntaxError in text_value_with_units.py</h2>
 <ul>
 <li><b>Issue</b>: <code>SyntaxError: invalid syntax</code></li>
 <li><b>Root Cause</b>: A trailing comma in a function call.</li>
 <li><b>Resolution</b>: Removed the trailing comma in <code>oaGuiElements/Core/text/text_value_with_units/text_value_with_units.py</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1074"></a>
+<h2><a class="anchor" id="autotoc_md1339"></a>
 4. FileNotFoundError for UI Blueprints</h2>
 <ul>
 <li><b>Issue</b>: <code>FileNotFoundError: The Blueprint is missing! Cannot find JSON at: ...</code></li>
 <li><b>Root Cause</b>: The GUI builder was attempting to load JSON files that did not exist.</li>
 <li><b>Resolution</b>: Created empty JSON files for the missing blueprints to prevent the application from crashing.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1075"></a>
+<h2><a class="anchor" id="autotoc_md1340"></a>
 5. IndentationError in gui_REST.py</h2>
 <ul>
 <li><b>Issue</b>: <code>IndentationError: expected an indented block</code></li>
 <li><b>Root Cause</b>: An <code>import</code> statement was not correctly indented.</li>
 <li><b>Resolution</b>: Fixed the indentation in <code>oaGui/Assets/Assets/right_50/bottom_90/44_REST/gui_REST.py</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1076"></a>
+<h2><a class="anchor" id="autotoc_md1341"></a>
 6. RuntimeError in SMPTE2138 Monitor</h2>
 <ul>
 <li><b>Issue</b>: <code>RuntimeError: main thread is not in main loop</code></li>
 <li><b>Root Cause</b>: A background thread was attempting to directly update the GUI, which is not thread-safe in Tkinter.</li>
 <li><b>Resolution</b>: Modified <code>oaComProtocols.oaComSMPTE2138/Managers/smpte2138_monitor_manager.py</code> to use the application-wide <code>event_bus</code> for communication between the manager and the GUI, ensuring that all GUI updates are performed on the main thread.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1077"></a>
+<h1><a class="anchor" id="autotoc_md1342"></a>
 Verification</h1>
 <p>The fixes have been applied and the application should no longer crash or produce the errors listed in the initial log. The UI for the components with missing blueprints will be empty, but this is expected behaviour given the missing files. </p>
 </div></div><!-- contents -->

@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d9/dce/namespaceMethods_1_1log__filter
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5b8241fe19b5b0f567ecf2f6210740aa" id="r_a5b8241fe19b5b0f567ecf2f6210740aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dce/namespaceMethods_1_1log__filters.html#a5b8241fe19b5b0f567ecf2f6210740aa">rust_gate_filter</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">record</a>)</td></tr>
+<tr class="memitem:a5b8241fe19b5b0f567ecf2f6210740aa" id="r_a5b8241fe19b5b0f567ecf2f6210740aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dce/namespaceMethods_1_1log__filters.html#a5b8241fe19b5b0f567ecf2f6210740aa">rust_gate_filter</a> (record)</td></tr>
 <tr class="separator:a5b8241fe19b5b0f567ecf2f6210740aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -126,7 +126,7 @@ Ensures every log call is gated by nanosecond-latency Rust checks.
 <div class="line"><span class="lineno">    9</span><span class="stringliteral">    ⚡ IRON OXIDE - PHASE 1: Universal Rust Gating</span></div>
 <div class="line"><span class="lineno">   10</span><span class="stringliteral">    Ensures every log call is gated by nanosecond-latency Rust checks.</span></div>
 <div class="line"><span class="lineno">   11</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">if</span> record[<span class="stringliteral">&quot;extra&quot;</span>].get(<span class="stringliteral">&quot;category&quot;</span>) == <span class="stringliteral">&quot;🚫 QUARANTINE&quot;</span>:</div>
+<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">if</span> record[<span class="stringliteral">&quot;extra&quot;</span>].get(<span class="stringliteral">&quot;category_name&quot;</span>) == <span class="stringliteral">&quot;QUARANTINE&quot;</span>:</div>
 <div class="line"><span class="lineno">   13</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   14</span> </div>
 <div class="line"><span class="lineno">   15</span>    <span class="comment"># Always allow high-gravity logs</span></div>
@@ -135,16 +135,24 @@ Ensures every log call is gated by nanosecond-latency Rust checks.
 <div class="line"><span class="lineno">   18</span> </div>
 <div class="line"><span class="lineno">   19</span>    <span class="comment"># Extract clean partition and category names</span></div>
 <div class="line"><span class="lineno">   20</span>    raw_part = record[<span class="stringliteral">&quot;extra&quot;</span>].get(<span class="stringliteral">&quot;partition&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><span class="lineno">   21</span>    partition = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">raw_part.split</a>()[-1].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>() <span class="keywordflow">if</span> raw_part <span class="keywordflow">else</span> <span class="stringliteral">&quot;system&quot;</span></div>
-<div class="line"><span class="lineno">   22</span>    category = record[<span class="stringliteral">&quot;extra&quot;</span>].get(<span class="stringliteral">&quot;category&quot;</span>, <span class="stringliteral">&quot;&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</div>
-<div class="line"><span class="lineno">   23</span>    func_name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">record.get</a>(<span class="stringliteral">&quot;function&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">   21</span>    partition = raw_part.split()[-1].lower() <span class="keywordflow">if</span> raw_part <span class="keywordflow">else</span> <span class="stringliteral">&quot;system&quot;</span></div>
+<div class="line"><span class="lineno">   22</span>    category = record[<span class="stringliteral">&quot;extra&quot;</span>].get(<span class="stringliteral">&quot;category_name&quot;</span>, <span class="stringliteral">&quot;SYSTEM&quot;</span>).lower()</div>
+<div class="line"><span class="lineno">   23</span>    func_name = record.get(<span class="stringliteral">&quot;function&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><span class="lineno">   24</span> </div>
-<div class="line"><span class="lineno">   25</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Methods.matrix_gate</a> <span class="keyword">import</span> is_debug_allowed</div>
-<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">return</span> is_debug_allowed(partition, category, func_name)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   25</span>    <span class="comment"># ⚡ MAPPING: Normalize generic &#39;comms&#39; logs to use the category as element</span></div>
+<div class="line"><span class="lineno">   26</span>    <span class="comment"># This allows &#39;element_smpte2138&#39; to gate both matrix_log and direct logger calls.</span></div>
+<div class="line"><span class="lineno">   27</span>    sys_lookup = partition</div>
+<div class="line"><span class="lineno">   28</span>    el_lookup = category</div>
+<div class="line"><span class="lineno">   29</span> </div>
+<div class="line"><span class="lineno">   30</span>    <span class="keywordflow">if</span> partition == <span class="stringliteral">&quot;system&quot;</span> <span class="keywordflow">and</span> category != <span class="stringliteral">&quot;system&quot;</span>:</div>
+<div class="line"><span class="lineno">   31</span>        <span class="comment"># If it&#39;s a protocol log but partition isn&#39;t set, try &#39;comms&#39; as fallback system</span></div>
+<div class="line"><span class="lineno">   32</span>        <span class="keyword">from</span> oaLogging.Methods.matrix_gate <span class="keyword">import</span> is_debug_allowed</div>
+<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> is_debug_allowed(<span class="stringliteral">&quot;comms&quot;</span>, category, func_name):</div>
+<div class="line"><span class="lineno">   34</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    <span class="keyword">from</span> oaLogging.Methods.matrix_gate <span class="keyword">import</span> is_debug_allowed</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> is_debug_allowed(sys_lookup, el_lookup, func_name)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

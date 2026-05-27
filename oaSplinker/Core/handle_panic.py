@@ -32,14 +32,14 @@ def handle_panic(self, trigger_splink_id=None):
     self.notify_monitor("panic", panic_payload)
     if self.mqtt_manager:
         self.mqtt_manager.publish(
-            "OPEN-AIR/System/Status/Splinker/Panic",
+            "OpenAir/System/Status/Splinker/Panic",
             orjson.dumps(panic_payload).decode(),
             retain=True
         )
 
     # Broadcast to ProtocolRouter for system-wide awareness
     if hasattr(self, 'router') and self.router:
-        self.router.ingest("SPLINKER", "OPEN-AIR/System/Status/Splinker/Panic", True)
+        self.router.ingest("SPLINKER", "OpenAir/System/Status/Splinker/Panic", True)
 
 def _reset_panic(self):
     """Clear the panic state."""
@@ -51,7 +51,7 @@ def _reset_panic(self):
     self.notify_monitor("panic", reset_payload)
     if self.mqtt_manager:
         self.mqtt_manager.publish(
-            "OPEN-AIR/System/Status/Splinker/Panic",
+            "OpenAir/System/Status/Splinker/Panic",
             orjson.dumps(reset_payload).decode(),
             retain=True
         )

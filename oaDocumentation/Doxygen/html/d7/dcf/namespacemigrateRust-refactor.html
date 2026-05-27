@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d7/dcf/namespacemigrateRust-refactor.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acd452a780c21e7d5c082de721e013a63" id="r_acd452a780c21e7d5c082de721e013a63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dcf/namespacemigrateRust-refactor.html#acd452a780c21e7d5c082de721e013a63">refactor_python_imports</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">root_dir</a>)</td></tr>
+<tr class="memitem:acd452a780c21e7d5c082de721e013a63" id="r_acd452a780c21e7d5c082de721e013a63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dcf/namespacemigrateRust-refactor.html#acd452a780c21e7d5c082de721e013a63">refactor_python_imports</a> (root_dir)</td></tr>
 <tr class="separator:acd452a780c21e7d5c082de721e013a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -126,51 +126,50 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d50/migrateRust-refactor_8py_source.html#l00068">68</a> of file <a class="el" href="../../d8/d50/migrateRust-refactor_8py_source.html">migrateRust-refactor.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   68</span><span class="keyword">def </span>refactor_python_imports(root_dir):</div>
-<div class="line"><span class="lineno">   69</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;Starting project-wide import refactor in: {root_dir}&quot;</span>)</div>
+<div class="line"><span class="lineno">   69</span>    print(f<span class="stringliteral">&quot;Starting project-wide import refactor in: {root_dir}&quot;</span>)</div>
 <div class="line"><span class="lineno">   70</span> </div>
 <div class="line"><span class="lineno">   71</span>    <span class="comment"># Pre-compile regex patterns for performance</span></div>
 <div class="line"><span class="lineno">   72</span>    <span class="comment"># This matches &#39;import oaName_rs&#39; or &#39;from oaName_rs import ...&#39;</span></div>
 <div class="line"><span class="lineno">   73</span>    patterns = {}</div>
-<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">for</span> old, new <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">IMPORT_MAP.items</a>():</div>
+<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">for</span> old, new <span class="keywordflow">in</span> IMPORT_MAP.items():</div>
 <div class="line"><span class="lineno">   75</span>        patterns[old] = (</div>
-<div class="line"><span class="lineno">   76</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.compile</a>(rf<span class="stringliteral">&quot;\bimport {old}\b&quot;</span>),</div>
-<div class="line"><span class="lineno">   77</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.compile</a>(rf<span class="stringliteral">&quot;\bfrom {old} import\b&quot;</span>)</div>
+<div class="line"><span class="lineno">   76</span>            re.compile(rf<span class="stringliteral">&quot;\bimport {old}\b&quot;</span>),</div>
+<div class="line"><span class="lineno">   77</span>            re.compile(rf<span class="stringliteral">&quot;\bfrom {old} import\b&quot;</span>)</div>
 <div class="line"><span class="lineno">   78</span>        )</div>
 <div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">for</span> root, dirs, files <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.walk</a>(root_dir):</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">for</span> root, dirs, files <span class="keywordflow">in</span> os.walk(root_dir):</div>
 <div class="line"><span class="lineno">   81</span>        <span class="comment"># Skip the new Rust core directory to avoid circular confusion</span></div>
 <div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> <span class="stringliteral">&quot;oaRustCore&quot;</span> <span class="keywordflow">in</span> root:</div>
 <div class="line"><span class="lineno">   83</span>            <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   84</span> </div>
 <div class="line"><span class="lineno">   85</span>        <span class="keywordflow">for</span> file <span class="keywordflow">in</span> files:</div>
-<div class="line"><span class="lineno">   86</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file.endswith</a>(<span class="stringliteral">&quot;.py&quot;</span>):</div>
-<div class="line"><span class="lineno">   87</span>                file_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(root, file)</div>
+<div class="line"><span class="lineno">   86</span>            <span class="keywordflow">if</span> file.endswith(<span class="stringliteral">&quot;.py&quot;</span>):</div>
+<div class="line"><span class="lineno">   87</span>                file_path = os.path.join(root, file)</div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>                <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(file_path, encoding=<span class="stringliteral">&#39;utf-8&#39;</span>) <span class="keyword">as</span> f:</div>
-<div class="line"><span class="lineno">   90</span>                    content = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.read</a>()</div>
+<div class="line"><span class="lineno">   90</span>                    content = f.read()</div>
 <div class="line"><span class="lineno">   91</span> </div>
 <div class="line"><span class="lineno">   92</span>                original_content = content</div>
-<div class="line"><span class="lineno">   93</span>                <span class="keywordflow">for</span> old, (imp_pattern, from_pattern) <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patterns.items</a>():</div>
+<div class="line"><span class="lineno">   93</span>                <span class="keywordflow">for</span> old, (imp_pattern, from_pattern) <span class="keywordflow">in</span> patterns.items():</div>
 <div class="line"><span class="lineno">   94</span>                    new_module = IMPORT_MAP[old]</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>                    <span class="comment"># Replace &#39;import oaName_rs&#39; -&gt; &#39;from oaRustCore import oa_name_rs as oaName_rs&#39;</span></div>
 <div class="line"><span class="lineno">   97</span>                    <span class="comment"># We use &#39;as&#39; to keep your existing variable names working!</span></div>
-<div class="line"><span class="lineno">   98</span>                    content = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">imp_pattern.sub</a>(f<span class="stringliteral">&quot;from oaRustCore import {new_module} as {old}&quot;</span>, content)</div>
+<div class="line"><span class="lineno">   98</span>                    content = imp_pattern.sub(f<span class="stringliteral">&quot;from oaRustCore import {new_module} as {old}&quot;</span>, content)</div>
 <div class="line"><span class="lineno">   99</span> </div>
 <div class="line"><span class="lineno">  100</span>                    <span class="comment"># Replace &#39;from oaName_rs import X&#39; -&gt; &#39;from oaRustCore.oa_name_rs import X&#39;</span></div>
-<div class="line"><span class="lineno">  101</span>                    content = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">from_pattern.sub</a>(f<span class="stringliteral">&quot;from oaRustCore.{new_module} import&quot;</span>, content)</div>
+<div class="line"><span class="lineno">  101</span>                    content = from_pattern.sub(f<span class="stringliteral">&quot;from oaRustCore.{new_module} import&quot;</span>, content)</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span>                <span class="keywordflow">if</span> content != original_content:</div>
 <div class="line"><span class="lineno">  104</span>                    <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(file_path, <span class="stringliteral">&#39;w&#39;</span>, encoding=<span class="stringliteral">&#39;utf-8&#39;</span>) <span class="keyword">as</span> f:</div>
-<div class="line"><span class="lineno">  105</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.write</a>(content)</div>
-<div class="line"><span class="lineno">  106</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;Refactored: {file_path}&quot;</span>)</div>
+<div class="line"><span class="lineno">  105</span>                        f.write(content)</div>
+<div class="line"><span class="lineno">  106</span>                    print(f<span class="stringliteral">&quot;Refactored: {file_path}&quot;</span>)</div>
 <div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\nRefactor Complete. All Python files now point to oaRustCore.&quot;</span>)</div>
+<div class="line"><span class="lineno">  108</span>    print(<span class="stringliteral">&quot;\nRefactor Complete. All Python files now point to oaRustCore.&quot;</span>)</div>
 <div class="line"><span class="lineno">  109</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, <a class="el" href="../../d8/d50/migrateRust-refactor_8py_source.html#l00068">refactor_python_imports()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, and <a class="el" href="../../d8/d50/migrateRust-refactor_8py_source.html#l00068">refactor_python_imports()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d8/d50/migrateRust-refactor_8py_source.html#l00068">refactor_python_imports()</a>.</p>
 

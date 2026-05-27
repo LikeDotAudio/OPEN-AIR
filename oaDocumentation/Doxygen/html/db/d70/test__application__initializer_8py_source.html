@@ -105,13 +105,13 @@ $(document).ready(function(){initNavTree('db/d70/test__application__initializer_
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"># Description: Tests for the application_initializer.py functions.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> unittest</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.mock</a> <span class="keyword">import</span> patch</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> unittest.mock <span class="keyword">import</span> patch</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaOchestration.Managers.application_initializer</a> <span class="keyword">import</span> initialize_app</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">from</span> oaOchestration.Managers.application_initializer <span class="keyword">import</span> initialize_app</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="foldopen" id="foldopen00013" data-start="" data-end="">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html">TestApplicationInitializer</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.TestCase</a>):</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html">TestApplicationInitializer</a>(unittest.TestCase):</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="preprocessor">@patch(&#39;oaOchestration.Managers.application_initializer.logger&#39;)</span></div>
 <div class="foldopen" id="foldopen00016" data-start="" data-end="">
@@ -126,8 +126,8 @@ $(document).ready(function(){initNavTree('db/d70/test__application__initializer_
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            result = initialize_app()</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            self.assertTrue(result)</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.debug.assert_called</a>()</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.success.assert_called_with</a>(<span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] Application initialization completed.&quot;</span>)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            mock_logger.debug.assert_called()</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            mock_logger.success.assert_called_with(<span class="stringliteral">&quot;🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.&quot;</span>)</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="preprocessor">@patch(&#39;oaOchestration.Managers.application_initializer.logger&#39;)</span></div>
@@ -140,24 +140,23 @@ $(document).ready(function(){initNavTree('db/d70/test__application__initializer_
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="comment"># Force an exception by mocking something inside the function</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="comment"># or in this case, since it does almost nothing, we&#39;ll patch logger.success to raise Exception</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.success.side_effect</a> = Exception(<span class="stringliteral">&quot;Forced error&quot;</span>)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        mock_logger.success.side_effect = Exception(<span class="stringliteral">&quot;Forced error&quot;</span>)</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">with</span> patch(<span class="stringliteral">&#39;oaOchestration.Managers.application_initializer.LOCAL_DEBUG&#39;</span>, <span class="keyword">True</span>):</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            result = initialize_app()</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            self.assertFalse(result)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.exception.assert_called</a>()</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            args, _ = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.exception.call_args</a></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            mock_logger.exception.assert_called()</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            args, _ = mock_logger.exception.call_args</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            self.assertIn(<span class="stringliteral">&quot;Error during application initialization: Forced error&quot;</span>, args[0])</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 </div>
 </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.main</a>()</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    unittest.main()</div>
 <div class="ttc" id="aclassTests_1_1test__application__initializer_1_1TestApplicationInitializer_html"><div class="ttname"><a href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html">Tests.test_application_initializer.TestApplicationInitializer</a></div><div class="ttdef"><b>Definition</b> <a href="../../db/d70/test__application__initializer_8py_source.html#l00013">test_application_initializer.py:13</a></div></div>
 <div class="ttc" id="aclassTests_1_1test__application__initializer_1_1TestApplicationInitializer_html_a951467acd9ddd2a9d80310ee7d1b1cf8"><div class="ttname"><a href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html#a951467acd9ddd2a9d80310ee7d1b1cf8">Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_success</a></div><div class="ttdeci">test_initialize_app_success(self, mock_logger)</div><div class="ttdef"><b>Definition</b> <a href="../../db/d70/test__application__initializer_8py_source.html#l00016">test_application_initializer.py:16</a></div></div>
 <div class="ttc" id="aclassTests_1_1test__application__initializer_1_1TestApplicationInitializer_html_ac3eb9014e5e171f22c390a2dfe6807d7"><div class="ttname"><a href="../../dc/dfb/classTests_1_1test__application__initializer_1_1TestApplicationInitializer.html#ac3eb9014e5e171f22c390a2dfe6807d7">Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_exception</a></div><div class="ttdeci">test_initialize_app_exception(self, mock_logger)</div><div class="ttdef"><b>Definition</b> <a href="../../db/d70/test__application__initializer_8py_source.html#l00031">test_application_initializer.py:31</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

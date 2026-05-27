@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('df/d11/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0047</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1280"></a> </p>
-<h1><a class="anchor" id="autotoc_md1281"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1545"></a> </p>
+<h1><a class="anchor" id="autotoc_md1546"></a>
 Issue</h1>
 <p>NameError: name 'config' is not defined in <code>oaGuiElements/Core/text/text_table/text_table.py</code>.</p>
-<h1><a class="anchor" id="autotoc_md1282"></a>
+<h1><a class="anchor" id="autotoc_md1547"></a>
 Root Cause</h1>
 <p>Incorrect variable name 'config' used instead of 'config_data' in make_text_table.</p>
-<h1><a class="anchor" id="autotoc_md1283"></a>
+<h1><a class="anchor" id="autotoc_md1548"></a>
 Resolution</h1>
 <ul>
 <li>Changed 'config' to 'config_data'.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1284"></a>
+<h1><a class="anchor" id="autotoc_md1549"></a>
 Verification</h1>
 <ul>
 <li>Logic reviewed; variable 'config_data' is clearly the correct object in this scope. </li>

@@ -17,6 +17,10 @@ _runtime_version.ValidateProtobufRuntimeVersion(
     '',
     'service.proto'
 )
+from . import device_pb2 as device__pb2
+from . import param_pb2 as param__pb2
+from . import language_pb2 as language__pb2
+from . import externalobject_pb2 as externalobject__pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()

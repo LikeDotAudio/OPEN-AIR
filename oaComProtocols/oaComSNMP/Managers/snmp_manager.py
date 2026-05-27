@@ -123,7 +123,7 @@ class SNMPManager:
             else:
                 self.context.mqtt_client.on_message_callback = self.handle_mqtt_message
 
-            self.context.mqtt_client.subscribe("OPEN-AIR/#")
+            self.context.mqtt_client.subscribe("OpenAir/#")
 
             self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
             self._status_update_thread.start()
@@ -164,7 +164,7 @@ class SNMPManager:
     def _publish_status(self):
         if not self.context.mqtt_client: return
         status = self.get_status()
-        self.context.mqtt_client.publish("OPEN-AIR/System/Status/SNMP/Bridge", status)
+        self.context.mqtt_client.publish("OpenAir/System/Status/SNMP/Bridge", status)
 
     def _start_specifics(self):
         pass
@@ -214,7 +214,7 @@ class SNMPManager:
                 "topic": topic, "direction": direction, "timestamp": time.time(), "metadata": metadata,
                 "origin_source": "oaComSNMP"
             }
-            self.context.mqtt_client.publish("OPEN-AIR/System/Monitor/SNMP/Activity", monitor_payload)
+            self.context.mqtt_client.publish("OpenAir/System/Monitor/SNMP/Activity", monitor_payload)
 
     def add_monitor_callback(self, callback):
         with self._state_lock:
@@ -269,7 +269,7 @@ class SNMPObserver(SNMPManager):
         value = payload.get("value") if isinstance(payload, dict) else payload
         meta = payload if isinstance(payload, dict) else {}
 
-        if topic == "OPEN-AIR/System/Monitor/SNMP/Activity" and isinstance(payload, dict):
+        if topic == "OpenAir/System/Monitor/SNMP/Activity" and isinstance(payload, dict):
             self._notify_monitor(
                 payload.get("direction", "RX"), payload.get("oid", "unknown"),
                 payload.get("value"), payload.get("topic"), payload.get("metadata")

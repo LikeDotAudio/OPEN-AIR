@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('d4/d1c/md_oaComProtocols_2oaComMQTT_2D
   <div class="headertitle"><div class="title">🏷️ Mqtt Flattening</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md259"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md260"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md524"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md525"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md261"></a>
+<h2><a class="anchor" id="autotoc_md526"></a>
 File Level</h2>
 <p>mqtt/mqtt_flattening.py</p>
 <p>A utility module to process and flatten nested MQTT payloads into a format suitable for display in a flat table or export to CSV. It buffers incoming messages until a complete set is received, then pivots the data.</p>
 <p>Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
 <p>Version 20250821.200641.1</p>
-<h1><a class="anchor" id="autotoc_md262"></a>
+<h1><a class="anchor" id="autotoc_md527"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md263"></a>
+<h1><a class="anchor" id="autotoc_md528"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md264"></a>
+<h2><a class="anchor" id="autotoc_md529"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md265"></a>
+<h3><a class="anchor" id="autotoc_md530"></a>
 &lt;tt&gt;class MqttDataFlattenerUtility&lt;/tt&gt;</h3>
 <p>Manages the buffering and flattening of incoming MQTT messages based on dynamic topic identifiers.</p>
-<h4><a class="anchor" id="autotoc_md266"></a>
+<h4><a class="anchor" id="autotoc_md531"></a>
 &lt;tt&gt;__init__(self, print_to_gui_func)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -125,7 +125,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md267"></a>
+<h4><a class="anchor" id="autotoc_md532"></a>
 &lt;tt&gt;clear_buffer(self)&lt;/tt&gt;</h4>
 <p>Clears the internal data buffer.</p>
 <p><b>Parameters:</b></p><ul>
@@ -137,7 +137,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md268"></a>
+<h4><a class="anchor" id="autotoc_md533"></a>
 &lt;tt&gt;process_mqtt_message_and_pivot(self, topic, payload, topic_prefix)&lt;/tt&gt;</h4>
 <p>Processes a single MQTT message. It triggers flattening when it detects the start of a new data set based on the unique identifier.</p>
 <p><a class="el" href="../../dc/d16/main_8rs.html#db/da7/structArgs">Args</a>: topic (str): The MQTT topic of the message. payload (str): The JSON payload of the message. topic_prefix (str): The root topic to be used for filtering.</p>
@@ -153,7 +153,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md269"></a>
+<h4><a class="anchor" id="autotoc_md534"></a>
 &lt;tt&gt;_flush_buffer(self, new_topic, new_data, new_identifier)&lt;/tt&gt;</h4>
 <p>Processes and flattens the current buffer.</p>
 <p><b>Parameters:</b></p><ul>
@@ -167,7 +167,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md270"></a>
+<h1><a class="anchor" id="autotoc_md535"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

@@ -93,36 +93,36 @@ $(document).ready(function(){initNavTree('da/ddc/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: TypeError in Recursive GUI Build Process</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1696"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2145"></a></p><ul>
 <li><b>ID</b>: 20260314_160625</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code>, <code>oaGui.parser.layout_parser</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code>, <code>oaGui.parser.layout_parser</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1697"></a>
+<h1><a class="anchor" id="autotoc_md2146"></a>
 Issue</h1>
 <p>The GUI build process was crashing with a <code>TypeError</code> when processing a <code>layout.json</code> file that used the <code>recursive_build</code> type with nested layouts (i.e., a <code>child_containers</code> item that was a dictionary itself instead of a file path). The application would only partially render the UI and then halt, as seen in the logs where a critical exception terminated the build thread.</p>
-<h1><a class="anchor" id="autotoc_md1698"></a>
+<h1><a class="anchor" id="autotoc_md2147"></a>
 Root Cause Analysis</h1>
 <ol type="1">
-<li><b>Type Mismatch</b>: The <code>_process_recursive</code> function in <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code> was designed to handle a list of file paths (<code>str</code> or <code>pathlib.Path</code>). It iterated through its <code>all_items</code> list and passed each item directly to <code>self.module_loader.load_and_instantiate_gui</code>, which expects a file path.</li>
+<li><b>Type Mismatch</b>: The <code>_process_recursive</code> function in <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code> was designed to handle a list of file paths (<code>str</code> or <code>pathlib.Path</code>). It iterated through its <code>all_items</code> list and passed each item directly to <code>self.loader_facade.load_and_instantiate_gui</code>, which expects a file path.</li>
 <li><b>Nested Layouts</b>: When a <code>layout.json</code> defined a nested layout, one of the items in the <code>child_containers</code> list was a <code>dict</code>, representing the layout definition for the child.</li>
 <li><b>The Crash</b>: Passing this <code>dict</code> to <code>load_and_instantiate_gui</code> caused a <code>TypeError</code> because the function tried to perform file-system operations on a dictionary, which is not a valid path object. This exception was caught by the top-level handler, which terminated the build for that branch of the GUI.</li>
-<li><b>Inconsistent Parsing</b>: The <code>LayoutParser</code> had logic to parse <code>layout.json</code> files, but there was no public method to re-run this parsing logic on a dictionary that had already been loaded, leading to the type mismatch downstream.</li>
+<li><b>Inconsistent Parsing</b>: The <code>FolderLayoutInterpreter</code> had logic to parse <code>layout.json</code> files, but there was no public method to re-run this parsing logic on a dictionary that had already been loaded, leading to the type mismatch downstream.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1699"></a>
+<h1><a class="anchor" id="autotoc_md2148"></a>
 Resolution</h1>
 <p>A two-part refactoring was implemented to make the layout processing robust and type-safe:</p>
 <ol type="1">
-<li><b>Refactored <code>LayoutParser</code></b>:<ul>
+<li><b>Refactored <code>FolderLayoutInterpreter</code></b>:<ul>
 <li>A new public method, <code>parse_layout_data(layout_data, source_path)</code>, was created. This method contains the core logic for parsing a layout dictionary, resolving relative paths within it, and returning a standardized data structure.</li>
 <li>The existing <code>parse_directory</code> method was updated to simply load a <code>layout.json</code> file and then call <code>parse_layout_data</code> to process it. This ensures both file-based and dictionary-based layouts go through the exact same parsing logic.</li>
 </ul>
 </li>
-<li><b>Refactored <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code></b>:<ul>
+<li><b>Refactored <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code></b>:<ul>
 <li>The <code>_build_from_directory</code> function was replaced with a new version that accepts a <code>layout_override</code> dictionary. This allows it to receive nested layouts directly.</li>
 <li>The <code>_process_recursive</code> function was updated with a crucial type-check. It now inspects each <code>item</code> in its list:<ul>
-<li>If <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance(item, dict)</a></code>, it recognizes it as a nested layout and calls <code>self._build_from_directory</code>, passing the dictionary as the <code>layout_override</code>.</li>
+<li>If <code>isinstance(item, dict)</code>, it recognizes it as a nested layout and calls <code>self._build_from_directory</code>, passing the dictionary as the <code>layout_override</code>.</li>
 <li>If <code>isinstance(item, (str, pathlib.Path))</code>, it proceeds as before, loading it as a standard GUI file.</li>
 </ul>
 </li>
@@ -130,7 +130,7 @@ Resolution</h1>
 </li>
 </ol>
 <p>This change ensures that nested layout dictionaries are correctly re-parsed and built recursively, fixing the <code>TypeError</code> and allowing the entire GUI to load as designed.</p>
-<h1><a class="anchor" id="autotoc_md1700"></a>
+<h1><a class="anchor" id="autotoc_md2149"></a>
 Verification</h1>
 <p>The application now fully loads the GUI without any <code>TypeError</code> exceptions in the log. All components defined in nested <code>recursive_build</code> layouts are correctly rendered in their designated slots. </p>
 </div></div><!-- contents -->

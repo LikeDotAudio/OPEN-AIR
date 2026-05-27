@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('d9/d1f/oaComProtocols_2oaComManager_2M
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"># Ensure project root is in sys.path for direct execution</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../dd/dcb/namespacemanager.html#a0c186782163ce84c4ab01c160e54959d">   13</a></span>current_dir = pathlib.Path(__file__).resolve().parent</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../dd/dcb/namespacemanager.html#a5d14a83b19fa71f42498bb35a7f6547f">   14</a></span>project_root = current_dir.parent.parent <span class="comment"># Project root is two levels up</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../dd/dcb/namespacemanager.html#a5d14a83b19fa71f42498bb35a7f6547f">   14</a></span>project_root = current_dir.parent.parent.parent <span class="comment"># Project root is three levels up</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordflow">if</span> str(project_root) <span class="keywordflow">not</span> <span class="keywordflow">in</span> sys.path:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    sys.path.insert(0, str(project_root))</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>

@@ -99,12 +99,12 @@ $(document).ready(function(){initNavTree('d2/d01/classMethods_1_1preset__pusher_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5bf8229dca464bb583d87514e6bd249f" id="r_a5bf8229dca464bb583d87514e6bd249f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d01/classMethods_1_1preset__pusher_1_1MockMqttUtility.html#a5bf8229dca464bb583d87514e6bd249f">publish_message</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str topic, str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subtopic</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, retain=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a>)</td></tr>
+<tr class="memitem:a5bf8229dca464bb583d87514e6bd249f" id="r_a5bf8229dca464bb583d87514e6bd249f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d01/classMethods_1_1preset__pusher_1_1MockMqttUtility.html#a5bf8229dca464bb583d87514e6bd249f">publish_message</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str topic, str subtopic, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, retain=False)</td></tr>
 <tr class="separator:a5bf8229dca464bb583d87514e6bd249f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html#l00253">253</a> of file <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html">preset_pusher.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html#l00250">250</a> of file <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html">preset_pusher.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5bf8229dca464bb583d87514e6bd249f" name="a5bf8229dca464bb583d87514e6bd249f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5bf8229dca464bb583d87514e6bd249f">&#9670;&#160;</a></span>publish_message()</h2>
@@ -140,7 +140,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>retain</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></code>&#160;</td>
+          <td class="paramname"><em>retain</em> = <code>False</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -150,16 +150,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html#l00254">254</a> of file <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html">preset_pusher.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  254</span>        <span class="keyword">def </span>publish_message(self, topic: str, subtopic: str, value, retain=<span class="keyword">False</span>):</div>
-<div class="line"><span class="lineno">  255</span>            full_topic = f<span class="stringliteral">&quot;{topic}/{subtopic}&quot;</span> <span class="keywordflow">if</span> subtopic <span class="keywordflow">else</span> topic</div>
-<div class="line"><span class="lineno">  256</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;Mock publish: {full_topic} -&gt; {value}&quot;</span>)</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>    mock_mqtt_util = MockMqttUtility()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html#l00251">251</a> of file <a class="el" href="../../d6/d1c/preset__pusher_8py_source.html">preset_pusher.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  251</span>        <span class="keyword">def </span>publish_message(self, topic: str, subtopic: str, value, retain=<span class="keyword">False</span>):</div>
+<div class="line"><span class="lineno">  252</span>            full_topic = f<span class="stringliteral">&quot;{topic}/{subtopic}&quot;</span> <span class="keywordflow">if</span> subtopic <span class="keywordflow">else</span> topic</div>
+<div class="line"><span class="lineno">  253</span>            print(f<span class="stringliteral">&quot;Mock publish: {full_topic} -&gt; {value}&quot;</span>)</div>
+<div class="line"><span class="lineno">  254</span> </div>
+<div class="line"><span class="lineno">  255</span>    mock_mqtt_util = MockMqttUtility()</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

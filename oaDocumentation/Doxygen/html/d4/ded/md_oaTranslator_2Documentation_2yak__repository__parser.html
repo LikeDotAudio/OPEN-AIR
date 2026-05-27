@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('d4/ded/md_oaTranslator_2Documentation_
   <div class="headertitle"><div class="title">🏷️ Yak Repository Parser</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4850"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4851"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5130"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md5131"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4852"></a>
+<h2><a class="anchor" id="autotoc_md5132"></a>
 File Level</h2>
 <p>managers/yak_manager/yak_repository_parser.py</p>
 <p>This file (<a class="el" href="../../d1/d6c/yak__repository__parser_8py.html">yak_repository_parser.py</a>) provides utility functions for parsing the YAK repository, enabling lookup of SCPI commands, inputs, and outputs based on a given command node. A complete and comprehensive pre-amble that describes the file and the functions within. The purpose is to provide clear documentation and versioning.</p>
 <p>The hash calculation drops the leading zero from the hour (e.g., 08 -&gt; 8) As the current hour is 20, no change is needed. Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
-<h1><a class="anchor" id="autotoc_md4853"></a>
+<h1><a class="anchor" id="autotoc_md5133"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4854"></a>
+<h1><a class="anchor" id="autotoc_md5134"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4855"></a>
+<h2><a class="anchor" id="autotoc_md5135"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md4856"></a>
+<h3><a class="anchor" id="autotoc_md5136"></a>
 &lt;tt&gt;get_command_node(repo, command_path_parts, function_name)&lt;/tt&gt;</h3>
 <p>Traverses the repository to find the base node for a command and logs each step. Returns the command's base dictionary or None if not found.</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4857"></a>
+<h3><a class="anchor" id="autotoc_md5137"></a>
 &lt;tt&gt;lookup_scpi_command(command_node, model_key, command_path)&lt;/tt&gt;</h3>
 <p>Looks up and returns the SCPI command string from a given command node.</p>
 <p><b>Parameters:</b></p><ul>
@@ -137,7 +137,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4858"></a>
+<h3><a class="anchor" id="autotoc_md5138"></a>
 &lt;tt&gt;lookup_inputs(command_node, command_path)&lt;/tt&gt;</h3>
 <p>Looks up and returns the inputs for a given command node.</p>
 <p><b>Parameters:</b></p><ul>
@@ -150,7 +150,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4859"></a>
+<h3><a class="anchor" id="autotoc_md5139"></a>
 &lt;tt&gt;retrieve_command_outputs(command_node, command_path)&lt;/tt&gt;</h3>
 <p>Looks up and returns the outputs for a given command node.</p>
 <p><b>Parameters:</b></p><ul>
@@ -163,7 +163,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4860"></a>
+<h1><a class="anchor" id="autotoc_md5140"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

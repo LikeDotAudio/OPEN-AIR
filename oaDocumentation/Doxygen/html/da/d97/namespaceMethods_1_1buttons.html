@@ -110,7 +110,7 @@ Variables</h2></td></tr>
 <tr class="separator:a221b811261d874f7baebbd115c6bbe7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9559a5e964d161c9192813d506577c7" id="r_ad9559a5e964d161c9192813d506577c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a> = 120000</td></tr>
 <tr class="separator:ad9559a5e964d161c9192813d506577c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a610c209f2a789e658c78f9aed4c4355e" id="r_a610c209f2a789e658c78f9aed4c4355e"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a610c209f2a789e658c78f9aed4c4355e">current_version</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f&quot;</a>{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195">Current_Date</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a221b811261d874f7baebbd115c6bbe7a">Current_iteration</a>}&quot;</td></tr>
+<tr class="memitem:a610c209f2a789e658c78f9aed4c4355e" id="r_a610c209f2a789e658c78f9aed4c4355e"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a610c209f2a789e658c78f9aed4c4355e">current_version</a> = f&quot;{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195">Current_Date</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a221b811261d874f7baebbd115c6bbe7a">Current_iteration</a>}&quot;</td></tr>
 <tr class="separator:a610c209f2a789e658c78f9aed4c4355e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f46db308850fb4d2e6790163cfa9468" id="r_a5f46db308850fb4d2e6790163cfa9468"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a5f46db308850fb4d2e6790163cfa9468">current_version_hash</a> = <a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195">Current_Date</a> * <a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a> * <a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a221b811261d874f7baebbd115c6bbe7a">Current_iteration</a></td></tr>
 <tr class="separator:a5f46db308850fb4d2e6790163cfa9468"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,17 +171,14 @@ Returns:
 <div class="line"><span class="lineno">   40</span><span class="stringliteral">        ttk.Button: The created button.</span></div>
 <div class="line"><span class="lineno">   41</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   42</span>    image_path = create_bar_graph_image(value, text)</div>
-<div class="line"><span class="lineno">   43</span>    img = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Image.open</a>(image_path)</div>
-<div class="line"><span class="lineno">   44</span>    photo = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ImageTk.PhotoImage</a>(img)</div>
+<div class="line"><span class="lineno">   43</span>    img = Image.open(image_path)</div>
+<div class="line"><span class="lineno">   44</span>    photo = ImageTk.PhotoImage(img)</div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>    button = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ttk.Button</a>(parent, image=photo)</div>
-<div class="line"><span class="lineno">   47</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">button.image</a> = photo  <span class="comment"># Keep a reference to the image to prevent garbage collection</span></div>
+<div class="line"><span class="lineno">   46</span>    button = ttk.Button(parent, image=photo)</div>
+<div class="line"><span class="lineno">   47</span>    button.image = photo  <span class="comment"># Keep a reference to the image to prevent garbage collection</span></div>
 <div class="line"><span class="lineno">   48</span> </div>
 <div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> button</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -240,7 +237,7 @@ Returns:
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">str Methods.buttons.current_version = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f&quot;</a>{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195">Current_Date</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a221b811261d874f7baebbd115c6bbe7a">Current_iteration</a>}&quot;</td>
+          <td class="memname">str Methods.buttons.current_version = f&quot;{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ae64b453717b5764f44d19487dd167195">Current_Date</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#ad9559a5e964d161c9192813d506577c7">Current_Time</a>}.{<a class="el" href="../../da/d97/namespaceMethods_1_1buttons.html#a221b811261d874f7baebbd115c6bbe7a">Current_iteration</a>}&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">

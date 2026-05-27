@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('d6/d01/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: Reliability &amp; Debugging Overhaul (2026-03-14)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1662"></a> </p>
-<h1><a class="anchor" id="autotoc_md1663"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2111"></a> </p>
+<h1><a class="anchor" id="autotoc_md2112"></a>
 Issue</h1>
 <p>Distilled faults from system execution logs:</p><ol type="1">
 <li><b>Critical</b>: UI crashes with &lsquo;ValueError: unknown color specifier: &rsquo;'<code>when hovering over certain buttons.</code></li>
 <li><code>**High**: Log spam with</code>name 'router_verbose_logging_enabled' is not defined<code>during every message ingest.</code></li>
 <li><code>**Moderate**: VISA discovery encountering</code>wrong xid in reply` desync errors on multi-port gateways.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1664"></a>
+<h1><a class="anchor" id="autotoc_md2113"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>UI Crash</b>: <code><a class="el" href="../../d4/de0/button__canvas__base_8py.html">button_canvas_base.py</a></code> was passing raw configuration strings directly to PIL's <code>ImageColor.getcolor()</code>. Empty strings <code>""</code> in JSON layout files were not sanitized.</li>
 <li><b>Log Spam</b>: A documentation update mistakenly replaced <code>router_verbose_logging_enabled</code> with <code>LOCAL_DEBUG</code> in the module definition but left one reference in the logic loop.</li>
 <li><b>VISA Desync</b>: Concurrent network probes to the same gateway IP address caused VXI-11 RPC ID (XID) collisions.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1665"></a>
+<h1><a class="anchor" id="autotoc_md2114"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Sanitization</b>: Implemented <code>_get_color()</code> helper in <code><a class="el" href="../../d4/de0/button__canvas__base_8py.html">button_canvas_base.py</a></code> with a safe fallback to <code>#2b2b2b</code> for empty or NULL inputs.</li>
 <li><b>Flag Alignment</b>: Corrected the logic loop in <code>protocol_router.py</code> to use the standardized <code>LOCAL_DEBUG</code> flag.</li>
 <li><b>Concurrency Control</b>: Implemented a per-IP mutex registry (<code>_IP_LOCKS</code>) in <code>manager_visa_Search.py</code> to ensure only one probe hits a specific gateway at a time. Reduced <code>VISA_TIMEOUT</code> to 1000ms to improve discovery speed on dead networks.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1666"></a>
+<h1><a class="anchor" id="autotoc_md2115"></a>
 Verification</h1>
 <ul>
 <li><b>UI</b>: Hovering over buttons no longer triggers <code>ValueError</code>.</li>

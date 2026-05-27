@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d4/d6b/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Widgets Using 'widget_type' Not Rendering</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1914"></a> </p>
-<h1><a class="anchor" id="autotoc_md1915"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2363"></a> </p>
+<h1><a class="anchor" id="autotoc_md2364"></a>
 Issue</h1>
 <p>GUI components defined using the <code>widget_type</code> key instead of the standard <code>type</code> key were not rendering in the application. This specifically affected the new <code><a class="el" href="../../d2/d60/black__to__wink__2_8json.html">black_to_wink_2.json</a></code> test file and other components like <code><a class="el" href="../../d6/d80/VU__Meter__Knob_8json.html">VU_Meter_Knob.json</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md1916"></a>
+<h1><a class="anchor" id="autotoc_md2365"></a>
 Root Cause</h1>
-<p>The <code>WidgetTypeResolver.resolve_type</code> method was only inspecting the <code>type</code> key in the widget configuration. If <code>type</code> was missing, it returned an empty string. The <code>WidgetSchemaNormalizer</code> then assigned this empty string back to the <code>type</code> key. During the build process, the <code>BatchProcessingEngine</code> would see the empty type and fail to find a corresponding widget creator, silently skipping the widget creation.</p>
-<h1><a class="anchor" id="autotoc_md1917"></a>
+<p>The <code>WidgetTypeResolver.resolve_type</code> method was only inspecting the <code>type</code> key in the widget configuration. If <code>type</code> was missing, it returned an empty string. The <code>WidgetSchemaNormalizer</code> then assigned this empty string back to the <code>type</code> key. During the build process, the <code>EngineRenderScheduler</code> would see the empty type and fail to find a corresponding widget creator, silently skipping the widget creation.</p>
+<h1><a class="anchor" id="autotoc_md2366"></a>
 Resolution</h1>
 <ol type="1">
 <li>Modified <code>oaGui/Core/parser/standardizers/widget_type_resolver.py</code> to check both <code>type</code> and <code>widget_type</code> keys during type resolution.</li>
 <li>Standardized <code>oaGui/Assets/right_50/bottom_90/9_Zoo/1_buttons/1_Wink/11_black_to_wink_2/black_to_wink_2.json</code> to use the standard <code>type</code> key for all its 100 widgets to ensure maximum compatibility and follow project conventions.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1918"></a>
+<h1><a class="anchor" id="autotoc_md2367"></a>
 Files Modified</h1>
 <ul>
 <li><code>oaGui/Core/parser/standardizers/widget_type_resolver.py</code></li>
 <li><code>oaGui/Assets/right_50/bottom_90/9_Zoo/1_buttons/1_Wink/11_black_to_wink_2/black_to_wink_2.json</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1919"></a>
+<h1><a class="anchor" id="autotoc_md2368"></a>
 Verification Evidence</h1>
-<p>Analysis of the <code>WidgetSchemaNormalizer</code> and <code>BatchProcessingEngine</code> code confirmed the failure path when <code>type</code> was empty. The fix ensures that any widget using <code>widget_type</code> is now correctly identified and its creator method is retrieved. </p>
+<p>Analysis of the <code>WidgetSchemaNormalizer</code> and <code>EngineRenderScheduler</code> code confirmed the failure path when <code>type</code> was empty. The fix ensures that any widget using <code>widget_type</code> is now correctly identified and its creator method is retrieved. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

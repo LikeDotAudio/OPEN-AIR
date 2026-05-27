@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('de/dbe/namespaceoaGuiElements_1_1Core_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6cd41d8dfd979950515f818074c60a22" id="r_a6cd41d8dfd979950515f818074c60a22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dbe/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__state.html#a6cd41d8dfd979950515f818074c60a22">create_wink_state</a> (config, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">initial_value</a>)</td></tr>
+<tr class="memitem:a6cd41d8dfd979950515f818074c60a22" id="r_a6cd41d8dfd979950515f818074c60a22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dbe/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__state.html#a6cd41d8dfd979950515f818074c60a22">create_wink_state</a> (config, initial_value)</td></tr>
 <tr class="separator:a6cd41d8dfd979950515f818074c60a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -136,20 +136,17 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   12</span>        <span class="stringliteral">&quot;current_open&quot;</span>: 1.0 <span class="keywordflow">if</span> initial_value <span class="keywordflow">else</span> 0.0,</div>
 <div class="line"><span class="lineno">   13</span>        <span class="stringliteral">&quot;is_pressed&quot;</span>: <span class="keyword">False</span>,</div>
 <div class="line"><span class="lineno">   14</span>        <span class="stringliteral">&quot;is_latched&quot;</span>: initial_value,</div>
-<div class="line"><span class="lineno">   15</span>        <span class="stringliteral">&quot;is_locked&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.get</a>(<span class="stringliteral">&quot;is_locked_init&quot;</span>, <span class="keyword">False</span>),</div>
+<div class="line"><span class="lineno">   15</span>        <span class="stringliteral">&quot;is_locked&quot;</span>: config.get(<span class="stringliteral">&quot;is_locked_init&quot;</span>, <span class="keyword">False</span>),</div>
 <div class="line"><span class="lineno">   16</span>        <span class="stringliteral">&quot;is_hovering&quot;</span>: <span class="keyword">False</span>,</div>
 <div class="line"><span class="lineno">   17</span>        <span class="stringliteral">&quot;shutter_ids&quot;</span>: [],</div>
 <div class="line"><span class="lineno">   18</span>        <span class="stringliteral">&quot;animating&quot;</span>: <span class="keyword">False</span>,</div>
 <div class="line"><span class="lineno">   19</span>        <span class="stringliteral">&quot;blink_open&quot;</span>: <span class="keyword">True</span>,</div>
 <div class="line"><span class="lineno">   20</span>        <span class="stringliteral">&quot;is_blinking_active&quot;</span>: <span class="keyword">False</span>,</div>
 <div class="line"><span class="lineno">   21</span>        <span class="stringliteral">&quot;last_click_was_alt&quot;</span>: <span class="keyword">False</span>,</div>
-<div class="line"><span class="lineno">   22</span>        <span class="stringliteral">&quot;dims&quot;</span>: {<span class="stringliteral">&quot;w&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.get</a>(<span class="stringliteral">&quot;width&quot;</span>), <span class="stringliteral">&quot;h&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.get</a>(<span class="stringliteral">&quot;height&quot;</span>)},</div>
+<div class="line"><span class="lineno">   22</span>        <span class="stringliteral">&quot;dims&quot;</span>: {<span class="stringliteral">&quot;w&quot;</span>: config.get(<span class="stringliteral">&quot;width&quot;</span>), <span class="stringliteral">&quot;h&quot;</span>: config.get(<span class="stringliteral">&quot;height&quot;</span>)},</div>
 <div class="line"><span class="lineno">   23</span>        <span class="stringliteral">&quot;_resize_timer&quot;</span>: <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   24</span>    }</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

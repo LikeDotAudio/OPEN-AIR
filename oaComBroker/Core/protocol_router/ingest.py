@@ -77,15 +77,29 @@ def normalize_and_ingest(
         - Injects a new dictionary into the inbound_queue.
     """
     value_representation = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
-    if app_constants.ROUTER_INGEST_LOGS:
-        matrix_log("comms", "broker", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {value_representation}", "DEBUG")
+    # Suppress log output for topics matching any prefix in MUTE_TOPICS (config.ini
+    # [DEBUG_ROUTER] mute_topics). The message itself still flows through ingest;
+    # only the broker's log lines are silenced. Used to quiet heartbeat / status
+    # chatter without breaking the failover or routing pipeline.
+    _mute = getattr(app_constants, "MUTE_TOPICS", ()) or ()
+    is_muted_topic = bool(_mute) and any(str(topic).startswith(p) for p in _mute)
+    if app_constants.ROUTER_INGEST_LOGS and not is_muted_topic:
+        # Surface the publisher's claimed identity inline so the operator can
+        # tell at a glance whether a publish came from Python, the web, or a
+        # third-party MQTT client. Identity is sourced from the same fields the
+        # echo canceller checks (metadata.full_id/src, payload.full_id/origin_source/src).
+        _src = (metadata.get("full_id") or metadata.get("src")) if isinstance(metadata, dict) else None
+        if not _src and isinstance(value, dict):
+            _src = value.get("full_id") or value.get("origin_source") or value.get("src")
+        _src_tag = f" (Src: {_src})" if _src else ""
+        matrix_log("comms", "broker", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {value_representation}{_src_tag}", "DEBUG")
 
 
     # Standardize None to empty string or keep as None depending on protocol?
     # For OPEN-AIR, None is a valid 'Reset' state for many parameters,
     # but we must ensure it doesn't crash consumers.
     if value is None:
-        if app_constants.ROUTER_INGEST_LOGS:
+        if app_constants.ROUTER_INGEST_LOGS and not is_muted_topic:
             matrix_log("comms", "broker", "normalize_and_ingest", f"⚠️ [ROUTER] Received 'None' for {topic}. Propagating as Reset state.", "TRACE")
         return
 
@@ -99,21 +113,27 @@ def normalize_and_ingest(
     if state_cache and not metadata_context.get("boot") and not is_event_stream:
         cached_val = state_cache.get_cached_value(topic)
         if cached_val == value:
-            if app_constants.ROUTER_INGEST_LOGS:
+            if app_constants.ROUTER_INGEST_LOGS and not is_muted_topic:
                 matrix_log("comms", "broker", "normalize_and_ingest", f"📉🚫📉 [ROUTER] DEAD-BAND: Dropping identical value for {topic}", "TRACE")
             return
 
     # Boot sequence messages are ingested silently to prevent console flood.
     if metadata_context.get("boot"):
-        if app_constants.ROUTER_INGEST_LOGS:
+        if app_constants.ROUTER_INGEST_LOGS and not is_muted_topic:
             matrix_log("comms", "broker", "normalize_and_ingest", f"👢🤫👢 [BOOT] Silent ingestion for {topic}", "DEBUG")
         silent_ingest_callback(transport_source, topic, value, metadata_context)
         return
 
     # --- Identity Extraction & Loop Prevention ---
+    # full_id is the LOCAL reference identity used by the reflection check
+    # below ("is this message authored by *me*?"). It MUST always be the local
+    # instance — never read from metadata, because _parse_mqtt_payload copies
+    # the entire inbound JSON payload into metadata, which means the publisher's
+    # claimed full_id ends up there. Trusting it as the local reference makes
+    # every foreign publish look like its own reflection.
     session_guid = metadata_context.get("GUID") or metadata_context.get("guid") or local_guid
     partition = metadata_context.get("partition") or app_constants.PARTITION_ID
-    full_id = metadata_context.get("full_id") or app_constants.FULL_INSTANCE_ID
+    full_id = app_constants.FULL_INSTANCE_ID
 
     logical_source = transport_source
 
@@ -175,11 +195,19 @@ def normalize_and_ingest(
         is_settled = False
 
     # --- V3.0.0 METADATA HARDENING ---
-    # Ensure 'src' (Source Identity) is explicitly tagged for Echo Cancellation.
-    # If not provided by transport, we inject the local full_id.
-    message_src_id = metadata_context.get("src")
+    # message_src_id is what THIS message claims as its origin identity. It
+    # feeds the reflection check ("is the claimed src == our local full_id?").
+    # The MQTT path's _parse_mqtt_payload copies the payload's full_id into
+    # metadata, so check metadata first; otherwise fall back to the value dict
+    # (for callers that pass raw dict values). External publishers (web,
+    # third-party MQTT clients) put their identity in the payload's full_id /
+    # origin_source — we honor those so foreign messages aren't mis-flagged
+    # as our own reflections. Falls back to local full_id only when no source
+    # identity is present anywhere (anonymous publish from an internal caller).
+    message_src_id = metadata_context.get("src") or metadata_context.get("full_id")
     if isinstance(value, dict):
-        message_src_id = message_src_id or value.get("src")
+        message_src_id = (message_src_id or value.get("src")
+                          or value.get("full_id") or value.get("origin_source"))
 
     message_src_id = message_src_id or full_id
 
@@ -187,7 +215,7 @@ def normalize_and_ingest(
     is_reflection = metadata_context.get("is_reflection") or (message_src_id == full_id and transport_source == "MQTT")
 
     if is_reflection:
-        if app_constants.ROUTER_INGEST_LOGS:
+        if app_constants.ROUTER_INGEST_LOGS and not is_muted_topic:
             matrix_log("comms", "broker", "normalize_and_ingest", f"🛡️ [ECHO] Reflection identified for {topic} (Src: {message_src_id})", "TRACE")
 
     # INTERACTION LOCK (BROKER LEVEL):

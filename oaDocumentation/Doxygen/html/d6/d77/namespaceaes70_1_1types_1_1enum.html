@@ -131,7 +131,7 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d0/db8/types_2enum_8py_source.html#l00006">6</a> of file <a class="el" href="../../d0/db8/types_2enum_8py_source.html">enum.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    6</span><span class="keyword">def </span>Enum(values):</div>
 <div class="line"><span class="lineno">    7</span>    names = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">    8</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getName</a>(value):</div>
+<div class="line"><span class="lineno">    8</span>    <span class="keyword">def </span>getName(value):</div>
 <div class="line"><span class="lineno">    9</span>        nonlocal names</div>
 <div class="line"><span class="lineno">   10</span>        <span class="keywordflow">if</span> names <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   11</span>            names = {}</div>
@@ -139,47 +139,47 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   13</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> hasOwnProperty(values, name):</div>
 <div class="line"><span class="lineno">   14</span>                    <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   15</span>                names[values[name]] = name</div>
-<div class="line"><span class="lineno">   16</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">names.get</a>(value)</div>
+<div class="line"><span class="lineno">   16</span>        <span class="keywordflow">return</span> names.get(value)</div>
 <div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getValue</a>(name):</div>
+<div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>getValue(name):</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> name <span class="keywordflow">in</span> values:</div>
 <div class="line"><span class="lineno">   20</span>            <span class="keywordflow">return</span> values[name]</div>
 <div class="line"><span class="lineno">   21</span> </div>
 <div class="line"><span class="lineno">   22</span>    blueprints = <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setBlueprint</a>(value, o):</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keyword">def </span>setBlueprint(value, o):</div>
 <div class="line"><span class="lineno">   25</span>        nonlocal blueprints</div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">if</span> blueprints <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   27</span>            blueprints = {}</div>
 <div class="line"><span class="lineno">   28</span>        blueprints[value] = o</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># Descriptor to emulate JavaScript static property getter behavior on the class.</span></div>
-<div class="line"><span class="lineno">   31</span>    <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">EnumDescriptor</a>:</div>
+<div class="line"><span class="lineno">   31</span>    <span class="keyword">class </span>EnumDescriptor:</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keyword">def </span>__init__(self, name):</div>
 <div class="line"><span class="lineno">   33</span>            self.name = name</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__get__</a>(self, instance, owner):</div>
-<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">owner</a>(values[self.name])</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keyword">def </span>__get__(self, instance, owner):</div>
+<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">return</span> owner(values[self.name])</div>
 <div class="line"><span class="lineno">   36</span>        <span class="keyword">def </span>__str__(self):</div>
 <div class="line"><span class="lineno">   37</span>            <span class="keywordflow">return</span> <span class="stringliteral">&#39;EnumDescriptor:&#39;</span>+self.name</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>    <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a937d4dd628a8858b443a399410d2600b">result</a>:</div>
 <div class="line"><span class="lineno">   40</span>        <span class="preprocessor">@property</span></div>
-<div class="line"><span class="lineno">   41</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isEnum</a>(self):</div>
+<div class="line"><span class="lineno">   41</span>        <span class="keyword">def </span>isEnum(self):</div>
 <div class="line"><span class="lineno">   42</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span>        <span class="keyword">def </span>__new__(cls, value):</div>
 <div class="line"><span class="lineno">   45</span>            <span class="comment"># If value is a string, retrieve the corresponding enum using the class attribute.</span></div>
-<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, str):</div>
+<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">if</span> isinstance(value, str):</div>
 <div class="line"><span class="lineno">   47</span>                <span class="keywordflow">if</span> value <span class="keywordflow">not</span> <span class="keywordflow">in</span> values:</div>
 <div class="line"><span class="lineno">   48</span>                    <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;No such enum value.&#39;</span>)</div>
-<div class="line"><span class="lineno">   49</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(cls, value)</div>
+<div class="line"><span class="lineno">   49</span>                <span class="keywordflow">return</span> getattr(cls, value)</div>
 <div class="line"><span class="lineno">   50</span>            <span class="comment"># If a blueprint already exists for this value, return it.</span></div>
 <div class="line"><span class="lineno">   51</span>            <span class="keywordflow">if</span> blueprints <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">and</span> value <span class="keywordflow">in</span> blueprints:</div>
 <div class="line"><span class="lineno">   52</span>                <span class="keywordflow">return</span> blueprints[value]</div>
 <div class="line"><span class="lineno">   53</span>            <span class="comment"># Create a new instance and store its value.</span></div>
-<div class="line"><span class="lineno">   54</span>            instance = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super</a>().__new__(cls)</div>
-<div class="line"><span class="lineno">   55</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">instance._value</a> = value</div>
-<div class="line"><span class="lineno">   56</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setBlueprint</a>(value, instance)</div>
+<div class="line"><span class="lineno">   54</span>            instance = super().__new__(cls)</div>
+<div class="line"><span class="lineno">   55</span>            instance._value = value</div>
+<div class="line"><span class="lineno">   56</span>            setBlueprint(value, instance)</div>
 <div class="line"><span class="lineno">   57</span>            <span class="keywordflow">return</span> instance</div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>        <span class="keyword">def </span>__init__(self, value):</div>
@@ -188,25 +188,25 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   62</span> </div>
 <div class="line"><span class="lineno">   63</span>        <span class="preprocessor">@property</span></div>
 <div class="line"><span class="lineno">   64</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../da/d6a/manager_8rs.html#ab3221fe7e7c0c316184658ce8b8bf9fa">name</a>(self):</div>
-<div class="line"><span class="lineno">   65</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getName</a>(self._value)</div>
+<div class="line"><span class="lineno">   65</span>            <span class="keywordflow">return</span> getName(self._value)</div>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>        <span class="preprocessor">@property</span></div>
 <div class="line"><span class="lineno">   68</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>(self):</div>
 <div class="line"><span class="lineno">   69</span>            <span class="keywordflow">return</span> self._value</div>
 <div class="line"><span class="lineno">   70</span> </div>
 <div class="line"><span class="lineno">   71</span>        <span class="keyword">def </span>__str__(self):</div>
-<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getName</a>(self._value)</div>
+<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">return</span> getName(self._value)</div>
 <div class="line"><span class="lineno">   73</span> </div>
 <div class="line"><span class="lineno">   74</span>        <span class="preprocessor">@staticmethod</span></div>
-<div class="line"><span class="lineno">   75</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getName</a>(value):</div>
-<div class="line"><span class="lineno">   76</span>            name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getName</a>(value)</div>
+<div class="line"><span class="lineno">   75</span>        <span class="keyword">def </span>getName(value):</div>
+<div class="line"><span class="lineno">   76</span>            name = getName(value)</div>
 <div class="line"><span class="lineno">   77</span>            <span class="keywordflow">if</span> name <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   78</span>                <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;No such enum value.&#39;</span>)</div>
 <div class="line"><span class="lineno">   79</span>            <span class="keywordflow">return</span> name</div>
 <div class="line"><span class="lineno">   80</span> </div>
 <div class="line"><span class="lineno">   81</span>        <span class="preprocessor">@staticmethod</span></div>
-<div class="line"><span class="lineno">   82</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getValue</a>(name):</div>
-<div class="line"><span class="lineno">   83</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getValue</a>(name)</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keyword">def </span>getValue(name):</div>
+<div class="line"><span class="lineno">   83</span>            value = getValue(name)</div>
 <div class="line"><span class="lineno">   84</span>            <span class="keywordflow">if</span> value <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   85</span>                <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&#39;No such enum value.&#39;</span>)</div>
 <div class="line"><span class="lineno">   86</span>            <span class="keywordflow">return</span> value</div>
@@ -219,12 +219,11 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   93</span>    <span class="keywordflow">for</span> name <span class="keywordflow">in</span> values:</div>
 <div class="line"><span class="lineno">   94</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> hasOwnProperty(values, name):</div>
 <div class="line"><span class="lineno">   95</span>            <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">   96</span>        descriptor = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">EnumDescriptor</a>(name)</div>
-<div class="line"><span class="lineno">   97</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setattr</a>(result, name, descriptor)</div>
+<div class="line"><span class="lineno">   96</span>        descriptor = EnumDescriptor(name)</div>
+<div class="line"><span class="lineno">   97</span>        setattr(result, name, descriptor)</div>
 <div class="line"><span class="lineno">   98</span> </div>
 <div class="line"><span class="lineno">   99</span>    <span class="keywordflow">return</span> result</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7b6bc2414e0cc8dd1cb020560e19ad4f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7b6bc2414e0cc8dd1cb020560e19ad4f">values</a></div><div class="ttdeci">values</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02771">generated.rs:2771</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a937d4dd628a8858b443a399410d2600b"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a937d4dd628a8858b443a399410d2600b">result</a></div><div class="ttdeci">result</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02660">generated.rs:2660</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_afcc7a4b78ecd8fa7e713f8cfa0f51017"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a></div><div class="ttdeci">value</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02770">generated.rs:2770</a></div></div>
 <div class="ttc" id="amanager_8rs_html_ab3221fe7e7c0c316184658ce8b8bf9fa"><div class="ttname"><a href="../../da/d6a/manager_8rs.html#ab3221fe7e7c0c316184658ce8b8bf9fa">name</a></div><div class="ttdeci">pub name</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6a/manager_8rs_source.html#l00029">manager.rs:29</a></div></div>

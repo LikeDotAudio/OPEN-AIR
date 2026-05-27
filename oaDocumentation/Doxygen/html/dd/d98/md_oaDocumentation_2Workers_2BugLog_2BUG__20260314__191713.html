@@ -93,29 +93,28 @@ $(document).ready(function(){initNavTree('dd/d98/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: PanedWindow Sash Dragging Disabled</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1731"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2180"></a></p><ul>
 <li><b>ID</b>: 20260314_191713</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 3 (Moderate)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1732"></a>
+<h1><a class="anchor" id="autotoc_md2181"></a>
 Issue</h1>
 <p>The sash dividers in <code>ttk.PanedWindow</code> widgets could not be moved by the user via a click-and-drag mouse action. While the panes were being laid out with the correct proportions programmatically, the user had no ability to manually override or adjust them, which is a core feature of a paned window.</p>
-<h1><a class="anchor" id="autotoc_md1733"></a>
+<h1><a class="anchor" id="autotoc_md2182"></a>
 Root Cause Analysis</h1>
-<p>During a previous debugging session for layout recursion issues, a line of code was added to the <code>_build_from_directory</code> function in <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code>:</p>
-<div class="fragment"><div class="line"><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">paned_window.bind</a>(<span class="stringliteral">&quot;&lt;B1-Motion&gt;&quot;</span>, <span class="keyword">lambda</span> e: <span class="stringliteral">&quot;break&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p>During a previous debugging session for layout recursion issues, a line of code was added to the <code>_build_from_directory</code> function in <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code>:</p>
+<div class="fragment"><div class="line">paned_window.bind(<span class="stringliteral">&quot;&lt;B1-Motion&gt;&quot;</span>, <span class="keyword">lambda</span> e: <span class="stringliteral">&quot;break&quot;</span>)</div>
 </div><!-- fragment --><p>This line binds to the left-mouse-button-drag event (<code>&lt;B1-Motion&gt;</code>) for all created <code>PanedWindow</code> widgets. The <code>lambda</code> function returns the string <code>"break"</code>. In the Tkinter event model, returning <code>"break"</code> from an event callback stops the event from propagating further. This effectively cancelled the default drag behavior of the sash, preventing the user from being able to move it. This line was intended to be a temporary debugging measure but was accidentally committed.</p>
-<h1><a class="anchor" id="autotoc_md1734"></a>
+<h1><a class="anchor" id="autotoc_md2183"></a>
 Resolution</h1>
 <p>The fix was to simply remove the erroneous line of code.</p>
 <ol type="1">
 <li>The line <code>paned_window.bind("&lt;B1-Motion&gt;", lambda e: "break")</code> was deleted from the <code>horizontal_split</code>/<code>vertical_split</code> block in the <code>_build_from_directory</code> method.</li>
 </ol>
 <p>This action restores the default event handling for the <code>ttk.PanedWindow</code> sash, allowing users to click and drag it to resize the panes as expected. The programmatic layout via the <code>&lt;Configure&gt;</code> event still works correctly to set the initial and resized proportions, while the user now has the ability to manually adjust them.</p>
-<h1><a class="anchor" id="autotoc_md1735"></a>
+<h1><a class="anchor" id="autotoc_md2184"></a>
 Verification</h1>
 <p>After the fix, all sashes in the application can be freely moved by clicking and dragging with the mouse. The initial layout proportions are still correctly set, and the layout continues to update correctly when the main application window is resized. </p>
 </div></div><!-- contents -->

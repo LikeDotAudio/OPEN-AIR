@@ -110,9 +110,9 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a3923cac02ea0a5a85f5c6a7b25d905af" id="r_a3923cac02ea0a5a85f5c6a7b25d905af"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd3/namespacesmpte2138__monitor__manager.html#a3923cac02ea0a5a85f5c6a7b25d905af">interface_path</a> = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parents[1] / &quot;Interface&quot;</td></tr>
+<tr class="memitem:a3923cac02ea0a5a85f5c6a7b25d905af" id="r_a3923cac02ea0a5a85f5c6a7b25d905af"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd3/namespacesmpte2138__monitor__manager.html#a3923cac02ea0a5a85f5c6a7b25d905af">interface_path</a> = Path(__file__).resolve().parents[1] / &quot;Interface&quot;</td></tr>
 <tr class="separator:a3923cac02ea0a5a85f5c6a7b25d905af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a119ec8cc18070609382b1927caaf015f" id="r_a119ec8cc18070609382b1927caaf015f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd3/namespacesmpte2138__monitor__manager.html#a119ec8cc18070609382b1927caaf015f">LOCAL_DEBUG</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td></tr>
+<tr class="memitem:a119ec8cc18070609382b1927caaf015f" id="r_a119ec8cc18070609382b1927caaf015f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dd3/namespacesmpte2138__monitor__manager.html#a119ec8cc18070609382b1927caaf015f">LOCAL_DEBUG</a> = False</td></tr>
 <tr class="separator:a119ec8cc18070609382b1927caaf015f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -139,15 +139,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d56/smpte2138__monitor__manager_8py_source.html#l00037">37</a> of file <a class="el" href="../../d0/d56/smpte2138__monitor__manager_8py_source.html">smpte2138_monitor_manager.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span><span class="keyword">def </span>_is_debug():</div>
-<div class="line"><span class="lineno">   38</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Methods.matrix_gate</a> <span class="keyword">import</span> is_debug_allowed</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">return</span> is_debug_allowed(system=<span class="stringliteral">&quot;comms&quot;</span>, element=<span class="stringliteral">&quot;smpte2138&quot;</span>)</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d0/d56/smpte2138__monitor__manager_8py_source.html#l00035">35</a> of file <a class="el" href="../../d0/d56/smpte2138__monitor__manager_8py_source.html">smpte2138_monitor_manager.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span><span class="keyword">def </span>_is_debug():</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keyword">from</span> oaLogging.Methods.matrix_gate <span class="keyword">import</span> is_debug_allowed</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> is_debug_allowed(system=<span class="stringliteral">&quot;comms&quot;</span>, element=<span class="stringliteral">&quot;smpte2138&quot;</span>)</div>
+<div class="line"><span class="lineno">   38</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -158,7 +155,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">str smpte2138_monitor_manager.interface_path = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parents[1] / &quot;Interface&quot;</td>
+          <td class="memname">str smpte2138_monitor_manager.interface_path = Path(__file__).resolve().parents[1] / &quot;Interface&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -174,7 +171,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> smpte2138_monitor_manager.LOCAL_DEBUG = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></td>
+          <td class="memname"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> smpte2138_monitor_manager.LOCAL_DEBUG = False</td>
         </tr>
       </table>
 </div><div class="memdoc">

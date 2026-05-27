@@ -116,13 +116,13 @@ $(document).ready(function(){initNavTree('da/d12/handle__panic_8py_source.html',
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">if</span> trigger_splink_id:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        message = f<span class="stringliteral">&quot;🆘 SPLINKER PANIC TRIGGERED by splink [{trigger_splink_id}]! High-frequency loop detected.&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.critical</a>(message)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    splinker_logger.critical(message)</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="comment"># Deactivate all splinks</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.splinks:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.get</a>(<span class="stringliteral">&quot;active&quot;</span>):</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> s.get(<span class="stringliteral">&quot;active&quot;</span>):</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            s[<span class="stringliteral">&quot;active&quot;</span>] = <span class="keyword">False</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.warning</a>(f<span class="stringliteral">&quot;  🛑 Deactivating splink [{s[&#39;id&#39;]}] for safety.&quot;</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            splinker_logger.warning(f<span class="stringliteral">&quot;  🛑 Deactivating splink [{s[&#39;id&#39;]}] for safety.&quot;</span>)</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="comment"># Trigger persistence</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            self.save_splink(s)</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
@@ -134,12 +134,12 @@ $(document).ready(function(){initNavTree('da/d12/handle__panic_8py_source.html',
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> self.mqtt_manager:</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        self.mqtt_manager.publish(</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(panic_payload).decode(),</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            orjson.dumps(panic_payload).decode(),</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            retain=<span class="keyword">True</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        )</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment"># Broadcast to ProtocolRouter for system-wide awareness</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(self, <span class="stringliteral">&#39;router&#39;</span>) <span class="keywordflow">and</span> self.router:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> hasattr(self, <span class="stringliteral">&#39;router&#39;</span>) <span class="keywordflow">and</span> self.router:</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        self.router.ingest(<span class="stringliteral">&quot;SPLINKER&quot;</span>, <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>, <span class="keyword">True</span>)</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 </div>
@@ -148,18 +148,17 @@ $(document).ready(function(){initNavTree('da/d12/handle__panic_8py_source.html',
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="stringliteral">&quot;&quot;&quot;Clear the panic state.&quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">import</span> orjson</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    self.panic_active = <span class="keyword">False</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(<span class="stringliteral">&quot;✅ SPLINKER PANIC RESET. Ready for operation.&quot;</span>)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    splinker_logger.info(<span class="stringliteral">&quot;✅ SPLINKER PANIC RESET. Ready for operation.&quot;</span>)</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    reset_payload = {<span class="stringliteral">&quot;value&quot;</span>: <span class="keyword">False</span>}</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    self.notify_monitor(<span class="stringliteral">&quot;panic&quot;</span>, reset_payload)</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> self.mqtt_manager:</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        self.mqtt_manager.publish(</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/Panic&quot;</span>,</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(reset_payload).decode(),</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            orjson.dumps(reset_payload).decode(),</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            retain=<span class="keyword">True</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        )</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespaceConstants_1_1constants_html"><div class="ttname"><a href="../../d3/d59/namespaceConstants_1_1constants.html">Constants.constants</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d60/oaSplinker_2Constants_2constants_8py_source.html#l00001">constants.py:1</a></div></div>
 <div class="ttc" id="anamespaceCore_1_1handle__panic_html_ad660cd4e75ac4f6ca76bd01da40df863"><div class="ttname"><a href="../../d3/db8/namespaceCore_1_1handle__panic.html#ad660cd4e75ac4f6ca76bd01da40df863">Core.handle_panic._reset_panic</a></div><div class="ttdeci">_reset_panic(self)</div><div class="ttdef"><b>Definition</b> <a href="../../da/d12/handle__panic_8py_source.html#l00044">handle_panic.py:44</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

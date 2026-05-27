@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('dd/d6c/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_235500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2025"></a> </p>
-<h1><a class="anchor" id="autotoc_md2026"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2474"></a> </p>
+<h1><a class="anchor" id="autotoc_md2475"></a>
 Issue</h1>
 <p>Global and local debug flags were fragile, primitive, and caused "log firehose" problems where high-velocity comms logs would drown out UI or core logic debugging.</p>
-<h1><a class="anchor" id="autotoc_md2027"></a>
+<h1><a class="anchor" id="autotoc_md2476"></a>
 Root Cause</h1>
 <p>The previous system relied on hardcoded <code>LOCAL_DEBUG</code> booleans in every file. There was no way to enable debugging for a specific element (like MQTT) while keeping the rest of the system quiet, or to mute specific high-frequency functions.</p>
-<h1><a class="anchor" id="autotoc_md2028"></a>
+<h1><a class="anchor" id="autotoc_md2477"></a>
 Resolution</h1>
 <p>Implemented a <b>Hierarchical Debug Matrix</b> architecture:</p><ol type="1">
 <li><b>Centralized Control</b>: Added <code>[DEBUG_MATRIX]</code> section to <code>config.ini</code>.</li>
@@ -114,7 +114,7 @@ Resolution</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2029"></a>
+<h1><a class="anchor" id="autotoc_md2478"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>config.ini</code> settings are correctly parsed by <code>Config.get_instance()</code>.</li>

@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('d7/de2/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 03:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1084"></a> </p>
-<h1><a class="anchor" id="autotoc_md1085"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1349"></a> </p>
+<h1><a class="anchor" id="autotoc_md1350"></a>
 Issues</h1>
 <p>This report details the resolution of several <code>ModuleNotFoundError</code> exceptions and loading warnings related to Rust extensions during the OPEN-AIR bootstrap process.</p>
-<h1><a class="anchor" id="autotoc_md1086"></a>
+<h1><a class="anchor" id="autotoc_md1351"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1087"></a>
+<h2><a class="anchor" id="autotoc_md1352"></a>
 1. ModuleNotFoundError: 'compiler_hook' in YakTranslator</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ModuleNotFoundError: No module named 'compiler_hook&rsquo;<code>in</code><a class="el" href="../../de/d01/yak__translator_8py.html">oaTranslator/Managers/yak_translator.py</a><code>.</code></li>
 <li><code> **Root Cause**: The code was using a hacky</code>sys.path<code>modification to import a local</code>compiler_hook.py<code>file, but the path was hardcoded with a hyphen (</code>oaTranslatorCore-rs<code>) while the actual directory used an underscore (</code>oaTranslatorCore_rs<code>).</code></li>
 <li><code> **Resolution**: Replaced the</code>sys.path<code>hack with a standard absolute import:</code>from oaStateCache.Core.oaTranslatorCore_rs import compiler_hook`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1088"></a>
+<h2><a class="anchor" id="autotoc_md1353"></a>
 2. Loading Warnings for ScrewGenerator and CMDPMath</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;WARNING:root:oaGuiElements: Failed to load Rust ScrewGenerator/CMDPMath... No module named 'oaGuiElements.Methods.oaScrewGenerator_rs.oascrewgenerator_rs&rsquo;<code></code></li>
 <li><code> **Root Cause**: Both modules were attempting to import their respective Rust extensions using relative paths that did not match the top-level installation performed by</code>maturin develop<code>.</code></li>
-<li><code> **Resolution**: Updated</code><a class="el" href="../../d8/def/Core_2utils_2panel__screw_2screw__generator_8py.html">oaGuiElements/Core/utils/panel_screw/screw_generator.py</a><code>and</code><a class="el" href="../../d2/dda/utils_2circular__motion__displacement__potentiometer_2Core_2cmdp__math_8py.html">oaGuiElements/Core/utils/circular_motion_displacement_potentiometer/Core/cmdp_math.py</a><code>to use absolute imports for the compiled Rust packages (</code>oascrewgenerator_rs<code>and</code>oacmdpmath_rs`).</li>
+<li><code> **Resolution**: Updated</code>oaGuiElements/Core/utils/panel_screw/screw_generator.py<code>and</code>oaGuiElements/Core/utils/circular_motion_displacement_potentiometer/Core/cmdp_math.py<code>to use absolute imports for the compiled Rust packages (</code>oascrewgenerator_rs<code>and</code>oacmdpmath_rs`).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1089"></a>
+<h2><a class="anchor" id="autotoc_md1354"></a>
 3. Hardening Compiler Hooks</h2>
 <ul>
 <li><b>Issue</b>: Risk of <code>externally-managed-environment</code> errors during <code>pip</code> operations within the compiler hooks.</li>
 <li><b>Root Cause</b>: Inconsistent virtual environment detection and lack of PEP 668 overrides in some older compiler hook templates.</li>
 <li><b>Resolution</b>: Updated the <code>compiler_hook.py</code> scripts for <code>oascrewgenerator_rs</code> and <code>oacmdpmath_rs</code> to include robust cleanup, explicit venv Python routing, and the <code>PIP_BREAK_SYSTEM_PACKAGES</code> environment variable override.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1090"></a>
+<h1><a class="anchor" id="autotoc_md1355"></a>
 Verification</h1>
 <p>The fixes ensure that the <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> partition can now correctly locate and execute its compiler hooks, and the UI partition can successfully bind to its performance-critical Rust math engines. </p>
 </div></div><!-- contents -->

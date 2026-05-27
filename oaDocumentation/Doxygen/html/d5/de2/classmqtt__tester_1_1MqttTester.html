@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d5/de2/classmqtt__tester_1_1MqttTester
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad0ea1d77512ec62d004aaea5b8fbfe54" id="r_ad0ea1d77512ec62d004aaea5b8fbfe54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de2/classmqtt__tester_1_1MqttTester.html#ad0ea1d77512ec62d004aaea5b8fbfe54">publish_rebuild</a> (json_filepath, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">new_data</a>)</td></tr>
+<tr class="memitem:ad0ea1d77512ec62d004aaea5b8fbfe54" id="r_ad0ea1d77512ec62d004aaea5b8fbfe54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de2/classmqtt__tester_1_1MqttTester.html#ad0ea1d77512ec62d004aaea5b8fbfe54">publish_rebuild</a> (json_filepath, new_data)</td></tr>
 <tr class="separator:ad0ea1d77512ec62d004aaea5b8fbfe54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -151,41 +151,38 @@ Sends the current editor state over the 'Rebuild' topic.
 <div class="line"><span class="lineno">   24</span>        matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;test&quot;</span>, f<span class="stringliteral">&quot;🚦 [PIPELINE] Standalone Builder: &#39;Test&#39; triggered for {json_filepath.name}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   27</span>            <span class="keyword">import</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">paho.mqtt.client</a> <span class="keyword">as</span> mqtt</div>
-<div class="line"><span class="lineno">   28</span>            app_config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
+<div class="line"><span class="lineno">   27</span>            <span class="keyword">import</span> paho.mqtt.client <span class="keyword">as</span> mqtt</div>
+<div class="line"><span class="lineno">   28</span>            app_config = Config.get_instance()</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>            <span class="comment"># Connection parameters from global config</span></div>
-<div class="line"><span class="lineno">   31</span>            broker = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_config, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>, <span class="stringliteral">&quot;localhost&quot;</span>)</div>
-<div class="line"><span class="lineno">   32</span>            port = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_config, <span class="stringliteral">&quot;MQTT_BROKER_PORT&quot;</span>, 1883)</div>
-<div class="line"><span class="lineno">   33</span>            user = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_config, <span class="stringliteral">&quot;MQTT_USERNAME&quot;</span>, <span class="keywordtype">None</span>)</div>
-<div class="line"><span class="lineno">   34</span>            pw = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(app_config, <span class="stringliteral">&quot;MQTT_PASSWORD&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   31</span>            broker = getattr(app_config, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>, <span class="stringliteral">&quot;localhost&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span>            port = getattr(app_config, <span class="stringliteral">&quot;MQTT_BROKER_PORT&quot;</span>, 1883)</div>
+<div class="line"><span class="lineno">   33</span>            user = getattr(app_config, <span class="stringliteral">&quot;MQTT_USERNAME&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   34</span>            pw = getattr(app_config, <span class="stringliteral">&quot;MQTT_PASSWORD&quot;</span>, <span class="keywordtype">None</span>)</div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>            client = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mqtt.Client</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mqtt.CallbackAPIVersion.VERSION2</a>)</div>
+<div class="line"><span class="lineno">   36</span>            client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)</div>
 <div class="line"><span class="lineno">   37</span>            <span class="keywordflow">if</span> user <span class="keywordflow">and</span> pw:</div>
-<div class="line"><span class="lineno">   38</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">client.username_pw_set</a>(user, pw)</div>
+<div class="line"><span class="lineno">   38</span>                client.username_pw_set(user, pw)</div>
 <div class="line"><span class="lineno">   39</span> </div>
-<div class="line"><span class="lineno">   40</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">client.connect</a>(broker, port, keepalive=10)</div>
+<div class="line"><span class="lineno">   40</span>            client.connect(broker, port, keepalive=10)</div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>            <span class="comment"># The topic OPEN-AIR listens to for design-time rebuilds</span></div>
 <div class="line"><span class="lineno">   43</span>            rebuild_topic = <span class="stringliteral">&quot;OPEN-AIR/System/Control/UI/Rebuild&quot;</span></div>
 <div class="line"><span class="lineno">   44</span>            payload = {</div>
-<div class="line"><span class="lineno">   45</span>                <span class="stringliteral">&quot;path&quot;</span>: str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">json_filepath.resolve</a>()),</div>
+<div class="line"><span class="lineno">   45</span>                <span class="stringliteral">&quot;path&quot;</span>: str(json_filepath.resolve()),</div>
 <div class="line"><span class="lineno">   46</span>                <span class="stringliteral">&quot;config&quot;</span>: new_data</div>
 <div class="line"><span class="lineno">   47</span>            }</div>
 <div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">client.publish</a>(rebuild_topic, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(payload))</div>
-<div class="line"><span class="lineno">   50</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">client.disconnect</a>()</div>
+<div class="line"><span class="lineno">   49</span>            client.publish(rebuild_topic, orjson.dumps(payload))</div>
+<div class="line"><span class="lineno">   50</span>            client.disconnect()</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>            matrix_log(<span class="stringliteral">&quot;ui&quot;</span>, <span class="stringliteral">&quot;gui_builder&quot;</span>, <span class="stringliteral">&quot;test&quot;</span>, <span class="stringliteral">&quot;✅ Standalone Builder: Rebuild request published to MQTT.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">except</span> ImportError:</div>
-<div class="line"><span class="lineno">   55</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(<span class="stringliteral">&quot;Standalone Builder: &#39;paho-mqtt&#39; library missing. Test functionality disabled.&quot;</span>)</div>
+<div class="line"><span class="lineno">   55</span>            logger.error(<span class="stringliteral">&quot;Standalone Builder: &#39;paho-mqtt&#39; library missing. Test functionality disabled.&quot;</span>)</div>
 <div class="line"><span class="lineno">   56</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   57</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;Standalone Builder: MQTT Publish failed: {e}&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   57</span>            logger.error(f<span class="stringliteral">&quot;Standalone Builder: MQTT Publish failed: {e}&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

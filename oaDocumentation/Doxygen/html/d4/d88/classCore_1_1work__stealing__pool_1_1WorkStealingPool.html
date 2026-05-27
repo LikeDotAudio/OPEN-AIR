@@ -100,9 +100,9 @@ $(document).ready(function(){initNavTree('d4/d88/classCore_1_1work__stealing__po
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad774716c970d188cc66d1e657531432e" id="r_ad774716c970d188cc66d1e657531432e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html#ad774716c970d188cc66d1e657531432e">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">num_workers</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:ad774716c970d188cc66d1e657531432e" id="r_ad774716c970d188cc66d1e657531432e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html#ad774716c970d188cc66d1e657531432e">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, num_workers=None)</td></tr>
 <tr class="separator:ad774716c970d188cc66d1e657531432e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba03dc2d40fc21248dfa9fa87dd3b706" id="r_aba03dc2d40fc21248dfa9fa87dd3b706"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html#aba03dc2d40fc21248dfa9fa87dd3b706">apply_batch</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tasks</a>)</td></tr>
+<tr class="memitem:aba03dc2d40fc21248dfa9fa87dd3b706" id="r_aba03dc2d40fc21248dfa9fa87dd3b706"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html#aba03dc2d40fc21248dfa9fa87dd3b706">apply_batch</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, tasks)</td></tr>
 <tr class="separator:aba03dc2d40fc21248dfa9fa87dd3b706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a137e2471b8841fdd0e8524fa319114f8" id="r_a137e2471b8841fdd0e8524fa319114f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d88/classCore_1_1work__stealing__pool_1_1WorkStealingPool.html#a137e2471b8841fdd0e8524fa319114f8">shutdown</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a137e2471b8841fdd0e8524fa319114f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +136,7 @@ MANDATORY Rust implementation for true parallelism.
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_workers</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>num_workers</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -194,16 +194,15 @@ Returns a list of results.
 <div class="line"><span class="lineno">   25</span>        results = []</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        <span class="comment"># Helper to execute and append to closure-captured list</span></div>
-<div class="line"><span class="lineno">   28</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_exec_task</a>(task_data):</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keyword">def </span>_exec_task(task_data):</div>
 <div class="line"><span class="lineno">   29</span>            func, args, kwargs = task_data</div>
-<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">func</a>(*args, **kwargs)</div>
+<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">return</span> func(*args, **kwargs)</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># Use Rust parallel map for execution</span></div>
 <div class="line"><span class="lineno">   33</span>        <span class="keywordflow">return</span> self._pool.par_map(tasks, _exec_task)</div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d75/task__pool_8py_source.html#l00030">Core.task_pool.TaskPool._pool</a>, <a class="el" href="../../d8/d21/work__stealing__pool_8py_source.html#l00017">Core.work_stealing_pool.WorkStealingPool._pool</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d75/task__pool_8py_source.html#l00030">Core.task_pool.TaskPool._pool</a>, and <a class="el" href="../../d8/d21/work__stealing__pool_8py_source.html#l00017">Core.work_stealing_pool.WorkStealingPool._pool</a>.</p>
 
 </div>
 </div>
@@ -228,7 +227,7 @@ Returns a list of results.
 <div class="line"><span class="lineno">   40</span>        <span class="comment"># Rayon handles shutdown via drop in Rust</span></div>
 <div class="line"><span class="lineno">   41</span>        <span class="keywordflow">pass</span></div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../db/d99/wysiwyg__editor_8py_source.html#l00101">Managers.wysiwyg_editor.WysiwygEditor.close_window()</a>, <a class="el" href="../../da/de0/visa__proxy_8py_source.html#l00204">Core.visa_proxy.VisaProxy.set_instrument_instance()</a>, and <a class="el" href="../../dc/de1/transports_8py_source.html#l00059">IS07.transports.Is07Bridge.stop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../db/d99/wysiwyg__editor_8py_source.html#l00102">Managers.wysiwyg_editor.WysiwygEditor.close_window()</a>, <a class="el" href="../../da/de0/visa__proxy_8py_source.html#l00204">Core.visa_proxy.VisaProxy.set_instrument_instance()</a>, and <a class="el" href="../../dc/de1/transports_8py_source.html#l00059">IS07.transports.Is07Bridge.stop()</a>.</p>
 
 </div>
 </div>

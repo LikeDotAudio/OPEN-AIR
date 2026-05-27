@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['🗝️_20core_20themes_0',['🗝️ Core Themes',['../d2/d5a/md_oaGuiEditorWYSIWYG_2Documentation_2Summary.html#autotoc_md3026',1,'']]]
+  ['🔬_20data_20pipeline_0',['🔬 data pipeline',['..//home/anthony/Documents/OPEN-AIR/oaComProtocols/oaComMidi/Documentation/README.md#autotoc_md439',1,'🔬 Data Pipeline'],['../d5/dea/md_oaComProtocols_2oaComOSC_2Documentation_2OSCREADME.html#autotoc_md736',1,'🔬 Data Pipeline']]],
+  ['🔬_20data_20science_20mathematical_20computation_1',['🔬 data science mathematical computation',['../d9/d05/md_oaDocumentation_2Documentation_2Landmarks_2Installation__Guide.html#autotoc_md1971',1,'🔬 Data Science &amp; Mathematical Computation'],['../d9/da1/md_oaInstallation_2Documentation_2Dependencies.html#autotoc_md4795',1,'🔬 Data Science &amp; Mathematical Computation']]],
+  ['🔬_20forensics_20monitoring_2',['🔬 Forensics &amp; Monitoring',['..//home/anthony/Documents/OPEN-AIR/oaComBroker/Documentation/README.md#autotoc_md351',1,'']]],
+  ['🔬_20high_20availability_20monitoring_3',['🔬 High Availability Monitoring',['..//home/anthony/Documents/OPEN-AIR/oaTests/Documentation/README.md#autotoc_md5039',1,'']]],
+  ['🔬_20telemetry_20forensics_20tt_20monitor_20py_20tt_4',['🔬 Telemetry &amp; Forensics (&lt;tt&gt;monitor.py&lt;/tt&gt;)',['../d2/dd4/md_oaComBroker_2Documentation_2oaComBroker.html#autotoc_md308',1,'']]]
 ];

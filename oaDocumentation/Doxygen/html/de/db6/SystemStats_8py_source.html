@@ -119,9 +119,9 @@ $(document).ready(function(){initNavTree('de/db6/SystemStats_8py_source.html','.
 <div class="foldopen" id="foldopen00018" data-start="" data-end="">
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#a9f508dc798a3835fe70c66a4926a28a1">   18</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#a9f508dc798a3835fe70c66a4926a28a1">get_cpu_speed</a>():</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="stringliteral">&quot;&quot;&quot;Returns current CPU frequency in MHz.&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        freq = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">psutil.cpu_freq</a>()</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        freq = psutil.cpu_freq()</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">if</span> freq:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">freq.current</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="keywordflow">return</span> freq.current</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">return</span> 0.0</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 </div>
@@ -129,27 +129,27 @@ $(document).ready(function(){initNavTree('de/db6/SystemStats_8py_source.html','.
 <div class="foldopen" id="foldopen00026" data-start="" data-end="">
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad1f4a968b3d5aa7dec44cd31644c2568">   26</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad1f4a968b3d5aa7dec44cd31644c2568">get_cpu_cores</a>():</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="stringliteral">&quot;&quot;&quot;Returns the number of logical CPU cores.&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.cpu_count</a>()</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> os.cpu_count()</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="preprocessor">@staticmethod</span></div>
 <div class="foldopen" id="foldopen00031" data-start="" data-end="">
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad42d56b44025448e1254b1d162a9b9c3">   31</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad42d56b44025448e1254b1d162a9b9c3">get_ram_usage</a>():</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="stringliteral">&quot;&quot;&quot;Returns RAM usage as a percentage and used/total in GB.&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        ram = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">psutil.virtual_memory</a>()</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        used_gb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ram.used</a> / (1024 ** 3)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        total_gb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ram.total</a> / (1024 ** 3)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ram.percent</a>, used_gb, total_gb</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        ram = psutil.virtual_memory()</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        used_gb = ram.used / (1024 ** 3)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        total_gb = ram.total / (1024 ** 3)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> ram.percent, used_gb, total_gb</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="preprocessor">@staticmethod</span></div>
 <div class="foldopen" id="foldopen00039" data-start="" data-end="">
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#a4e42b9c04ba5b81ae0c017a5b9eb95ec">   39</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#a4e42b9c04ba5b81ae0c017a5b9eb95ec">get_disk_space</a>(path=&quot;/&quot;):</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="stringliteral">&quot;&quot;&quot;Returns disk usage for the specified path.&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        usage = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shutil.disk_usage</a>(path)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        percent = (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">usage.used</a> / <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">usage.total</a>) * 100</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        free_gb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">usage.free</a> / (1024 ** 3)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        total_gb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">usage.total</a> / (1024 ** 3)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        usage = shutil.disk_usage(path)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        percent = (usage.used / usage.total) * 100</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        free_gb = usage.free / (1024 ** 3)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        total_gb = usage.total / (1024 ** 3)</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> percent, free_gb, total_gb</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 </div>
@@ -179,7 +179,6 @@ $(document).ready(function(){initNavTree('de/db6/SystemStats_8py_source.html','.
 <div class="ttc" id="aclassCore_1_1SystemStats_1_1SystemStatsProvider_html_a9f508dc798a3835fe70c66a4926a28a1"><div class="ttname"><a href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#a9f508dc798a3835fe70c66a4926a28a1">Core.SystemStats.SystemStatsProvider.get_cpu_speed</a></div><div class="ttdeci">get_cpu_speed()</div><div class="ttdef"><b>Definition</b> <a href="../../de/db6/SystemStats_8py_source.html#l00018">SystemStats.py:18</a></div></div>
 <div class="ttc" id="aclassCore_1_1SystemStats_1_1SystemStatsProvider_html_ad1f4a968b3d5aa7dec44cd31644c2568"><div class="ttname"><a href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad1f4a968b3d5aa7dec44cd31644c2568">Core.SystemStats.SystemStatsProvider.get_cpu_cores</a></div><div class="ttdeci">get_cpu_cores()</div><div class="ttdef"><b>Definition</b> <a href="../../de/db6/SystemStats_8py_source.html#l00026">SystemStats.py:26</a></div></div>
 <div class="ttc" id="aclassCore_1_1SystemStats_1_1SystemStatsProvider_html_ad42d56b44025448e1254b1d162a9b9c3"><div class="ttname"><a href="../../d4/d50/classCore_1_1SystemStats_1_1SystemStatsProvider.html#ad42d56b44025448e1254b1d162a9b9c3">Core.SystemStats.SystemStatsProvider.get_ram_usage</a></div><div class="ttdeci">get_ram_usage()</div><div class="ttdef"><b>Definition</b> <a href="../../de/db6/SystemStats_8py_source.html#l00031">SystemStats.py:31</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

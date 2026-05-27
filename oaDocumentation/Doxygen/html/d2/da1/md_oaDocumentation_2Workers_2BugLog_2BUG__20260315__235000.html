@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('d2/da1/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260315_235000 - Comprehensive Error Handling Refactor</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1841"></a> </p>
-<h1><a class="anchor" id="autotoc_md1842"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2290"></a> </p>
+<h1><a class="anchor" id="autotoc_md2291"></a>
 Issue</h1>
 <p>An audit of the OPEN-AIR codebase identified 165 instances of "Bad Error Handling," including bare <code>except:</code> blocks, silent failures (<code>pass</code>), and generic <code>except Exception:</code> catches without proper logging. These issues made forensic analysis difficult and could hide critical system failures.</p>
-<h1><a class="anchor" id="autotoc_md1843"></a>
+<h1><a class="anchor" id="autotoc_md2292"></a>
 Root Cause</h1>
 <p>Inconsistent application of error handling standards across legacy modules and rapid prototyping phases.</p>
-<h1><a class="anchor" id="autotoc_md1844"></a>
+<h1><a class="anchor" id="autotoc_md2293"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Standardization</b>: Systematically refactored 113 files across the <code>managers/</code> and <code>workers/</code> directories.</li>
@@ -112,7 +112,7 @@ Resolution</h1>
 </li>
 <li><b>Gravity Compliance</b>: Ensured that error logging is NOT gated behind <code>LOCAL_DEBUG</code> flags, allowing for visibility in production/standard run states.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1845"></a>
+<h1><a class="anchor" id="autotoc_md2294"></a>
 Key Files Refactored (Top Offenders)</h1>
 <ul>
 <li><code>managers/Visa_Fleet/Prototype/cli_visa_find.py</code></li>
@@ -121,13 +121,13 @@ Key Files Refactored (Top Offenders)</h1>
 <li><code>workers/logic/state_mirror_engine.py</code></li>
 <li><code>workers/builder/graphing/</code> (multiple mixins)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1846"></a>
+<h1><a class="anchor" id="autotoc_md2295"></a>
 Verification</h1>
 <ul>
 <li><b>Static Analysis</b>: Verified that no bare <code>except:</code> blocks remain in the targeted files.</li>
 <li><b>Manual Review</b>: Confirmed that logging output is generated when simulated errors occur in key components (e.g., <code>state_mirror_engine</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1847"></a>
+<h1><a class="anchor" id="autotoc_md2296"></a>
 Status</h1>
 <p><b>CLOSED</b> </p>
 </div></div><!-- contents -->

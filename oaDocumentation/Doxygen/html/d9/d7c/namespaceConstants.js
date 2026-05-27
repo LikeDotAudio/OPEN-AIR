@@ -3,13 +3,19 @@ var namespaceConstants =
     [ "builder_constants", "df/d22/namespaceConstants_1_1builder__constants.html", [
       [ "BREAKLINE_DEFAULT_COLOR", "df/d22/namespaceConstants_1_1builder__constants.html#ab97a76343a43d5a13404f639f10d56d4", null ],
       [ "BREAKLINE_MIN_THICKNESS", "df/d22/namespaceConstants_1_1builder__constants.html#a31461fd2d72da2b6b86feb4408074a63", null ],
+      [ "DEFAULT_ENTRY_WIDTH", "df/d22/namespaceConstants_1_1builder__constants.html#a56c00d606bfedd86662beb8a5851be23", null ],
+      [ "DEFAULT_TREE_COLUMN_WIDTH", "df/d22/namespaceConstants_1_1builder__constants.html#ae28976b8eb64d79378ad26c09b20d54d", null ],
+      [ "GHOST_WIDGET_DEFAULT_SIZE", "df/d22/namespaceConstants_1_1builder__constants.html#acc5842b01c6339bb650d4d335d574307", null ],
+      [ "LARGE_TREE_COLUMN_WIDTH", "df/d22/namespaceConstants_1_1builder__constants.html#ae55d109ed00ca97a36d7dd557e133790", null ],
+      [ "MAX_LOG_ENTRIES", "df/d22/namespaceConstants_1_1builder__constants.html#a9caf6c5450e5a2c58707438378c41d6d", null ],
       [ "RESIZE_THROTTLE_DELAY", "df/d22/namespaceConstants_1_1builder__constants.html#a4dd4b7ddbe4b19ad76f76ca15230017c", null ],
       [ "RESIZE_WIDTH_THRESHOLD", "df/d22/namespaceConstants_1_1builder__constants.html#a875c8f5a99b2286df8f295c2bf8b654c", null ],
       [ "SCROLL_SYNC_DELAY", "df/d22/namespaceConstants_1_1builder__constants.html#ae1407e9de35b3c57285947e2bed98ec0", null ],
       [ "SLICING_DELAY_NORMAL", "df/d22/namespaceConstants_1_1builder__constants.html#a0597934123202456d99923bf6d1e3512", null ],
       [ "SLICING_DELAY_REBUILD", "df/d22/namespaceConstants_1_1builder__constants.html#a13d31d38f86f748f368c91ced377d4bc", null ],
       [ "SLICING_POSITION_EPSILON", "df/d22/namespaceConstants_1_1builder__constants.html#a9ec617d83946daa52e73552377709b21", null ],
-      [ "SLICING_REGEN_THRESHOLD", "df/d22/namespaceConstants_1_1builder__constants.html#a413370aae0c93a6309589c0b02ad8f25", null ]
+      [ "SLICING_REGEN_THRESHOLD", "df/d22/namespaceConstants_1_1builder__constants.html#a413370aae0c93a6309589c0b02ad8f25", null ],
+      [ "SMALL_TREE_COLUMN_WIDTH", "df/d22/namespaceConstants_1_1builder__constants.html#a2f4085123723ed8127ad7e98916506f9", null ]
     ] ],
     [ "constants", "d3/d59/namespaceConstants_1_1constants.html", [
       [ "app_constants", "d3/d59/namespaceConstants_1_1constants.html#a4d3b7513b2fa481b9b62f5ba411077b5", null ],
@@ -78,6 +84,12 @@ var namespaceConstants =
       [ "RECONNECT_DELAY", "d9/d7f/namespaceConstants_1_1mqtt__config.html#a89dd6df4677c13c711d84b42d5d26098", null ],
       [ "TOPIC_STATUS", "d9/d7f/namespaceConstants_1_1mqtt__config.html#a4b80edcf0d6cff39902c2f5860155fe4", null ],
       [ "WORKER_KICK_TIMEOUT", "d9/d7f/namespaceConstants_1_1mqtt__config.html#aee2fa81f2d0c9e3db413d5f6561ce7b3", null ]
+    ] ],
+    [ "nmos_constants", "d9/daa/namespaceConstants_1_1nmos__constants.html", [
+      [ "NMOS_IS07_CONNECTION_WAIT", "d9/daa/namespaceConstants_1_1nmos__constants.html#a477b7b5e9e09d7a1a43d1fe5d9a31c08", null ],
+      [ "NMOS_IS07_DEFAULT_PORT", "d9/daa/namespaceConstants_1_1nmos__constants.html#a16a1eda45a1e52f6983b28b95a3ca758", null ],
+      [ "NMOS_IS07_DEFAULT_URI", "d9/daa/namespaceConstants_1_1nmos__constants.html#a6ca02cd414ed9902633c6ef1cbc90191", null ],
+      [ "NMOS_IS07_RECONNECT_INTERVAL", "d9/daa/namespaceConstants_1_1nmos__constants.html#ab54e2745e6235ac1a311b79499c686d5", null ]
     ] ],
     [ "project_paths", "df/d56/namespaceConstants_1_1project__paths.html", [
       [ "get_absolute_path", "df/d56/namespaceConstants_1_1project__paths.html#a8a78156a162e8cc6883948bf218dd9db", null ],

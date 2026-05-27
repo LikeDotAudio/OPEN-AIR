@@ -124,25 +124,25 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">    Scans the audits directory and returns an HTML snippet for the tab content.</span></div>
 <div class="line"><span class="lineno">   16</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   17</span>    audit_files = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">glob.glob</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(data_dir, <span class="stringliteral">&quot;*.md&quot;</span>)) + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">glob.glob</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(data_dir, <span class="stringliteral">&quot;*.txt&quot;</span>))</div>
+<div class="line"><span class="lineno">   17</span>    audit_files = glob.glob(os.path.join(data_dir, <span class="stringliteral">&quot;*.md&quot;</span>)) + glob.glob(os.path.join(data_dir, <span class="stringliteral">&quot;*.txt&quot;</span>))</div>
 <div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> audit_files:</div>
 <div class="line"><span class="lineno">   19</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;h3&gt;No Audit Reports Found&lt;/h3&gt;&lt;p&gt;Run an audit command to generate reports.&lt;/p&gt;&quot;</span></div>
 <div class="line"><span class="lineno">   20</span> </div>
 <div class="line"><span class="lineno">   21</span>    <span class="comment"># Sort by modification time (newest first)</span></div>
-<div class="line"><span class="lineno">   22</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">audit_files.sort</a>(key=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.getmtime</a>, reverse=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   22</span>    audit_files.sort(key=os.path.getmtime, reverse=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>    tab_html = <span class="stringliteral">&quot;&lt;h3&gt;Latest Audit Reports&lt;/h3&gt;&quot;</span></div>
 <div class="line"><span class="lineno">   25</span>    <span class="keywordflow">for</span> file_path <span class="keywordflow">in</span> audit_files[:5]: <span class="comment"># Show latest 5</span></div>
-<div class="line"><span class="lineno">   26</span>        filename = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.basename</a>(file_path)</div>
-<div class="line"><span class="lineno">   27</span>        mtime = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">datetime.fromtimestamp</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.getmtime</a>(file_path)).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">strftime</a>(<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)</div>
+<div class="line"><span class="lineno">   26</span>        filename = os.path.basename(file_path)</div>
+<div class="line"><span class="lineno">   27</span>        mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime(<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>        <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(file_path, encoding=<span class="stringliteral">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</div>
 <div class="line"><span class="lineno">   30</span>            <span class="comment"># ⚡ OPTIMIZATION: Limit read to 100KB per file</span></div>
-<div class="line"><span class="lineno">   31</span>            content = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.read</a>(100000)</div>
-<div class="line"><span class="lineno">   32</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.read</a>(1): <span class="comment"># Check if there&#39;s more</span></div>
+<div class="line"><span class="lineno">   31</span>            content = f.read(100000)</div>
+<div class="line"><span class="lineno">   32</span>            <span class="keywordflow">if</span> f.read(1): <span class="comment"># Check if there&#39;s more</span></div>
 <div class="line"><span class="lineno">   33</span>                content += <span class="stringliteral">&quot;\n\n... (Report Truncated for Performance) ...&quot;</span></div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>        escaped_content = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">html.escape</a>(content)</div>
+<div class="line"><span class="lineno">   35</span>        escaped_content = html.escape(content)</div>
 <div class="line"><span class="lineno">   36</span> </div>
 <div class="line"><span class="lineno">   37</span>        tab_html += f<span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   38</span><span class="stringliteral">        &lt;div class=&quot;log-entry&quot;&gt;</span></div>
@@ -154,10 +154,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   44</span><span class="stringliteral">        &lt;/div&gt;</span></div>
 <div class="line"><span class="lineno">   45</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   46</span>    <span class="keywordflow">return</span> tab_html</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>.</p>
 
 </div>
 </div>

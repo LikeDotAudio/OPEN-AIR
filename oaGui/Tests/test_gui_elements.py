@@ -28,7 +28,7 @@ class TestGuiElements(unittest.TestCase):
         self.mock_context = MagicMock()
         self.mock_context.state_mirror_engine = MagicMock()
         self.mock_context.subscriber_router = MagicMock()
-        self.mock_context.base_mqtt_topic_from_path = "OPEN-AIR/mock"
+        self.mock_context.base_mqtt_topic_from_path = "OpenAir/mock"
 
         self.mock_builder = MagicMock()
         self.mock_builder._apply_transparency = MagicMock()

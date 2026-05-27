@@ -125,7 +125,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00030">30</a> of file <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html">demo_smpte2138.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   30</span><span class="keyword">def </span>run_demo():</div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;🚀 [DEMO] Starting oaComProtocols.oaComSMPTE2138 &amp; ST 2138 Monitor Demonstration...&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>    print(<span class="stringliteral">&quot;🚀 [DEMO] Starting oaComProtocols.oaComSMPTE2138 &amp; ST 2138 Monitor Demonstration...&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>    <span class="comment"># 1. Mock the MQTT environment</span></div>
 <div class="line"><span class="lineno">   34</span>    mock_mqtt = MagicMock()</div>
@@ -139,21 +139,21 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># Track monitor callbacks</span></div>
 <div class="line"><span class="lineno">   44</span>    decoded_packets = []</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">monitor_callback</a>(topic, data):</div>
-<div class="line"><span class="lineno">   46</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decoded_packets.append</a>((topic, data))</div>
+<div class="line"><span class="lineno">   45</span>    <span class="keyword">def </span>monitor_callback(topic, data):</div>
+<div class="line"><span class="lineno">   46</span>        decoded_packets.append((topic, data))</div>
 <div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> <span class="stringliteral">&quot;oid&quot;</span> <span class="keywordflow">in</span> data:</div>
-<div class="line"><span class="lineno">   48</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🔗 [MONITOR] Decoded packet from {topic}: {data[&#39;oid&#39;]} = {data[&#39;value&#39;]}&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>            print(f<span class="stringliteral">&quot;🔗 [MONITOR] Decoded packet from {topic}: {data[&#39;oid&#39;]} = {data[&#39;value&#39;]}&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span> </div>
-<div class="line"><span class="lineno">   50</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">SMPTE2138MonitorManager.register_callback</a>(monitor_callback)</div>
+<div class="line"><span class="lineno">   50</span>    SMPTE2138MonitorManager.register_callback(monitor_callback)</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>    <span class="keyword">def </span>mock_publish(topic, payload, qos=0, retain=False):</div>
-<div class="line"><span class="lineno">   53</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">published_messages.append</a>((topic, payload))</div>
-<div class="line"><span class="lineno">   54</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡 [OUTBOUND] Published binary payload to: {topic}&quot;</span>)</div>
+<div class="line"><span class="lineno">   53</span>        published_messages.append((topic, payload))</div>
+<div class="line"><span class="lineno">   54</span>        print(f<span class="stringliteral">&quot;📡 [OUTBOUND] Published binary payload to: {topic}&quot;</span>)</div>
 <div class="line"><span class="lineno">   55</span>        <span class="comment"># Simulate the loopback to the monitor</span></div>
-<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">monitor._on_smpte2138_traffic</a>(MockMqttMessage(topic, payload))</div>
+<div class="line"><span class="lineno">   56</span>        monitor._on_smpte2138_traffic(MockMqttMessage(topic, payload))</div>
 <div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_mqtt.publish</a> = mock_publish</div>
-<div class="line"><span class="lineno">   59</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_mqtt.get_client_instance.return_value</a> = mock_mqtt</div>
+<div class="line"><span class="lineno">   58</span>    mock_mqtt.publish = mock_publish</div>
+<div class="line"><span class="lineno">   59</span>    mock_mqtt.get_client_instance.return_value = mock_mqtt</div>
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>    <span class="comment"># 3. Initialize the Bridge Manager</span></div>
 <div class="line"><span class="lineno">   62</span>    bridge = SMPTE2138BridgeManager(mock_mqtt, mock_router)</div>
@@ -161,10 +161,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   64</span>    <span class="comment"># 4. Simulate an internal &quot;Action&quot;</span></div>
 <div class="line"><span class="lineno">   65</span>    test_topic = <span class="stringliteral">&quot;oa/action/sig_gen/frequency&quot;</span></div>
 <div class="line"><span class="lineno">   66</span>    test_value = 440.0</div>
-<div class="line"><span class="lineno">   67</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;\n📥 [SIMULATION] Internal Action: {test_topic} -&gt; {test_value}&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>    print(f<span class="stringliteral">&quot;\n📥 [SIMULATION] Internal Action: {test_topic} -&gt; {test_value}&quot;</span>)</div>
 <div class="line"><span class="lineno">   68</span> </div>
 <div class="line"><span class="lineno">   69</span>    <span class="comment"># Manually trigger the callback</span></div>
-<div class="line"><span class="lineno">   70</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bridge._on_internal_action</a>(MockMqttMessage(test_topic, str(test_value)))</div>
+<div class="line"><span class="lineno">   70</span>    bridge._on_internal_action(MockMqttMessage(test_topic, str(test_value)))</div>
 <div class="line"><span class="lineno">   71</span> </div>
 <div class="line"><span class="lineno">   72</span>    <span class="comment"># 5. Verify and Decode the Output</span></div>
 <div class="line"><span class="lineno">   73</span>    <span class="keywordflow">if</span> published_messages:</div>
@@ -172,16 +172,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   75</span>        traffic = [m <span class="keywordflow">for</span> m <span class="keywordflow">in</span> published_messages <span class="keywordflow">if</span> <span class="stringliteral">&quot;st2138&quot;</span> <span class="keywordflow">in</span> m[0] <span class="keywordflow">and</span> <span class="stringliteral">&quot;Bridge&quot;</span> <span class="keywordflow">not</span> <span class="keywordflow">in</span> m[0]]</div>
 <div class="line"><span class="lineno">   76</span>        <span class="keywordflow">if</span> traffic:</div>
 <div class="line"><span class="lineno">   77</span>            topic, payload = traffic[0]</div>
-<div class="line"><span class="lineno">   78</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;\n🔍 [VERIFICATION] Outbound message count (traffic): {len(traffic)}&quot;</span>)</div>
-<div class="line"><span class="lineno">   79</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;✅ [SUCCESS] Monitor decoded {len([p for p in decoded_packets if p[1].get(&#39;_message_type&#39;) != &#39;HEARTBEAT&#39;])} packet(s).&quot;</span>)</div>
+<div class="line"><span class="lineno">   78</span>            print(f<span class="stringliteral">&quot;\n🔍 [VERIFICATION] Outbound message count (traffic): {len(traffic)}&quot;</span>)</div>
+<div class="line"><span class="lineno">   79</span>            print(f<span class="stringliteral">&quot;✅ [SUCCESS] Monitor decoded {len([p for p in decoded_packets if p[1].get(&#39;_message_type&#39;) != &#39;HEARTBEAT&#39;])} packet(s).&quot;</span>)</div>
 <div class="line"><span class="lineno">   80</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   81</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;\n🔍 [VERIFICATION] Only status messages detected.&quot;</span>)</div>
+<div class="line"><span class="lineno">   81</span>            print(<span class="stringliteral">&quot;\n🔍 [VERIFICATION] Only status messages detected.&quot;</span>)</div>
 <div class="line"><span class="lineno">   82</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   83</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;❌ [FAILURE] No outbound messages detected.&quot;</span>)</div>
+<div class="line"><span class="lineno">   83</span>        print(<span class="stringliteral">&quot;❌ [FAILURE] No outbound messages detected.&quot;</span>)</div>
 <div class="line"><span class="lineno">   84</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00030">Tests.demo_smpte2138.run_demo()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00030">Tests.demo_smpte2138.run_demo()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d2/d5f/demo__smpte2138_8py_source.html#l00030">Tests.demo_smpte2138.run_demo()</a>.</p>
 

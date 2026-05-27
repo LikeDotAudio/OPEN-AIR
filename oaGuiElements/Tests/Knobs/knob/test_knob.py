@@ -48,7 +48,7 @@ class TestKnobWidget(unittest.TestCase):
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.subscriber_router = MagicMock()
-        self.context.base_mqtt_topic_from_path = 'OPEN-AIR/test'
+        self.context.base_mqtt_topic_from_path = 'OpenAir/test'
         self.context.builder_instance = MagicMock()
 
     def test_creation_via_builder(self):

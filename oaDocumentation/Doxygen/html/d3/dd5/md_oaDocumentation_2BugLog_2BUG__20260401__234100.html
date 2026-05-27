@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('d3/dd5/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260401_234100.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1036"></a></p>
-<h1><a class="anchor" id="autotoc_md1037"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1301"></a></p>
+<h1><a class="anchor" id="autotoc_md1302"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1038"></a>
+<h1><a class="anchor" id="autotoc_md1303"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1039"></a>
+<h1><a class="anchor" id="autotoc_md1304"></a>
 Issue: Insecure and inefficient "best-effort" JSON validation in the Orchestrator.</h1>
-<h2><a class="anchor" id="autotoc_md1040"></a>
+<h2><a class="anchor" id="autotoc_md1305"></a>
 🔍 ISSUE DESCRIPTION</h2>
 <p>The <code><a class="el" href="../../d4/dec/json__validator_8py.html">json_validator.py</a></code> was using <code>orjson.dumps().decode()</code> to verify if data was serializable. This provided no actual schema enforcement and was computationally expensive for high-frequency protocol traffic.</p>
-<h2><a class="anchor" id="autotoc_md1041"></a>
+<h2><a class="anchor" id="autotoc_md1306"></a>
 🛠️ ROOT CAUSE</h2>
 <p>Reliance on Python's dynamic typing and serializing-to-string just to verify structure, leading to GIL bottlenecks and potential data integrity risks at the system entry gate.</p>
-<h2><a class="anchor" id="autotoc_md1042"></a>
+<h2><a class="anchor" id="autotoc_md1307"></a>
 🚀 RESOLUTION</h2>
 <p>Implemented a native Rust safety gate (<code>oasafetycore_rs</code>):</p><ul>
 <li>Uses <code>pythonize</code> for zero-copy mapping of Python dicts to Rust structures.</li>
 <li>Employs <code>serde_json</code> for strict validation of JSON compliance.</li>
 <li>Provides a sub-microsecond validation path that blocks malformed data before it reaches the core router.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1043"></a>
+<h2><a class="anchor" id="autotoc_md1308"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
 <li><b>Benchmark Iterations</b>: 100,000</li>

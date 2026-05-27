@@ -32,9 +32,9 @@ class MIDIProtocolMapper:
         self._dev_id_cache = {}
 
     def midi_to_topic(self, message, port_name):
-        if not message: return "OPEN-AIR/MIDI/unknown/error", 0
+        if not message: return "OpenAir/MIDI/unknown/error", 0
         if not HAS_RUST_MIDI:
-            return "OPEN-AIR/MIDI/unknown/no_rust", 0
+            return "OpenAir/MIDI/unknown/no_rust", 0
 
         # 1. Device ID Sanitization (Rust)
         if port_name in self._dev_id_cache:

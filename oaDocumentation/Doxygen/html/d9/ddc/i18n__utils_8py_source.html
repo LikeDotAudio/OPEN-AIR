@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OPEN-AIR: oaGui/Methods/i18n_utils.py Source File</title>
+<title>OPEN-AIR: oaGui/Methods/formatting/i18n_utils.py Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -98,17 +98,17 @@ $(document).ready(function(){initNavTree('d9/ddc/i18n__utils_8py_source.html','.
   <div class="headertitle"><div class="title">i18n_utils.py</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d9/ddc/i18n__utils_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../df/de9/namespaceMethods_1_1i18n__utils.html">    1</a></span><span class="comment"># oaGui/Methods/i18n_utils.py</span></div>
+<a href="../../d9/ddc/i18n__utils_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../dd/dec/namespacei18n__utils.html">    1</a></span><span class="comment"># oaGui/Methods/i18n_utils.py</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"># Author: Gemini (Collaborator)</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"># Version: 20260405.2345.1</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"># Description: Internationalization utilities for GUI text.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaConfigurationManager.FileReaders.config_reader</a> <span class="keyword">import</span> Config</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> oaConfigurationManager.FileReaders.config_reader <span class="keyword">import</span> Config</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00010" data-start="" data-end="">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../df/de9/namespaceMethods_1_1i18n__utils.html#a8c5d082e27d04bbffa308102dc6f3360">   10</a></span><span class="keyword">def </span>get_text(data, fallback=&quot;&quot;):</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../dd/dec/namespacei18n__utils.html#ab16dacbb03edfb9b581e06519d482bbe">   10</a></span><span class="keyword">def </span>get_text(data, fallback=&quot;&quot;):</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="stringliteral">    Safely retrieves text from a potentially localized data structure.</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="stringliteral">    </span></div>
@@ -116,14 +116,14 @@ $(document).ready(function(){initNavTree('d9/ddc/i18n__utils_8py_source.html','.
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="stringliteral">    If data is a string, returns it directly (legacy support).</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">    If data is a dict, attempts to use SYSTEM_LANGUAGE, then &quot;En&quot;, then first available key.</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, str):</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> isinstance(data, str):</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span> data</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, dict):</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(data, dict):</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">return</span> str(fallback) <span class="keywordflow">if</span> data <span class="keywordflow">is</span> <span class="keywordtype">None</span> <span class="keywordflow">else</span> str(data)</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    lang = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(config, <span class="stringliteral">&#39;SYSTEM_LANGUAGE&#39;</span>, <span class="stringliteral">&#39;En&#39;</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    config = Config.get_instance()</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    lang = getattr(config, <span class="stringliteral">&#39;SYSTEM_LANGUAGE&#39;</span>, <span class="stringliteral">&#39;En&#39;</span>)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment"># 1. Try current language</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">if</span> lang <span class="keywordflow">in</span> data <span class="keywordflow">and</span> data[lang]:</div>
@@ -134,19 +134,18 @@ $(document).ready(function(){initNavTree('d9/ddc/i18n__utils_8py_source.html','.
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">return</span> data[<span class="stringliteral">&quot;En&quot;</span>]</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment"># 3. Try any available non-empty value</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">for</span> value <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data.values</a>():</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">for</span> value <span class="keywordflow">in</span> data.values():</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> value:</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> value</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> fallback</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_6ed4650a1a7a8c2f1cac136819f91c09.html">oaGui</a></li><li class="navelem"><a class="el" href="../../dir_7d03b756b62c750868383e1da583de20.html">Methods</a></li><li class="navelem"><a class="el" href="../../d9/ddc/i18n__utils_8py.html">i18n_utils.py</a></li>
+    <li class="navelem"><a class="el" href="../../dir_6ed4650a1a7a8c2f1cac136819f91c09.html">oaGui</a></li><li class="navelem"><a class="el" href="../../dir_7d03b756b62c750868383e1da583de20.html">Methods</a></li><li class="navelem"><a class="el" href="../../dir_4e454c98c538f8296a97e811d98d77e0.html">formatting</a></li><li class="navelem"><a class="el" href="../../d9/ddc/i18n__utils_8py.html">i18n_utils.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

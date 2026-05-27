@@ -138,23 +138,20 @@ Checks:
 <div class="line"><span class="lineno">   17</span><span class="stringliteral">        1. origin_source matches local FULL_INSTANCE_ID.</span></div>
 <div class="line"><span class="lineno">   18</span><span class="stringliteral">        2. full_id (legacy) matches local FULL_INSTANCE_ID.</span></div>
 <div class="line"><span class="lineno">   19</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(payload, dict):</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(payload, dict):</div>
 <div class="line"><span class="lineno">   21</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>    local_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.FULL_INSTANCE_ID</a></div>
+<div class="line"><span class="lineno">   23</span>    local_id = app_constants.FULL_INSTANCE_ID</div>
 <div class="line"><span class="lineno">   24</span> </div>
 <div class="line"><span class="lineno">   25</span>    <span class="comment"># ⚡ SHIELD CHECK: Is this the Ghost of our own Fader?</span></div>
-<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.get</a>(<span class="stringliteral">&quot;origin_source&quot;</span>) == local_id:</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> payload.get(<span class="stringliteral">&quot;origin_source&quot;</span>) == local_id:</div>
 <div class="line"><span class="lineno">   27</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.get</a>(<span class="stringliteral">&quot;full_id&quot;</span>) == local_id:</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> payload.get(<span class="stringliteral">&quot;full_id&quot;</span>) == local_id:</div>
 <div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>    <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>

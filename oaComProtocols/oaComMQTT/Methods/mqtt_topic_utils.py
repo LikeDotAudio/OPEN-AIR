@@ -74,7 +74,7 @@ def get_topic(*args) -> str:
 
 def generate_base_topic(module_name: str) -> str:
     """Generates a standardized base topic string."""
-    return f"OPEN-AIR/{module_name}"
+    return f"OpenAir/{module_name}"
 
 def generate_widget_topic(base_topic: str, widget_id: str) -> str:
     """Generates a standardized widget topic string."""

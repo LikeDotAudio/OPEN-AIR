@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('d1/d89/classoaGuiElements_1_1Core_1_1g
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a04437588afb77a8dc5d7c13882ef328b" id="r_a04437588afb77a8dc5d7c13882ef328b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d89/classoaGuiElements_1_1Core_1_1graphing_1_1Entry_1_1GraphEntry.html#a04437588afb77a8dc5d7c13882ef328b">make</a> (parent_widget, config_data, context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a04437588afb77a8dc5d7c13882ef328b" id="r_a04437588afb77a8dc5d7c13882ef328b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d89/classoaGuiElements_1_1Core_1_1graphing_1_1Entry_1_1GraphEntry.html#a04437588afb77a8dc5d7c13882ef328b">make</a> (parent_widget, config_data, context=None, **kwargs)</td></tr>
 <tr class="separator:a04437588afb77a8dc5d7c13882ef328b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
@@ -171,7 +171,7 @@ Static Protected Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -194,21 +194,18 @@ Static Protected Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/dc9/oaGuiElements_2Core_2graphing_2Entry_8py_source.html#l00041">41</a> of file <a class="el" href="../../d8/dc9/oaGuiElements_2Core_2graphing_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   41</span>    <span class="keyword">def </span>make(parent_widget, config_data, context=None, **kwargs):</div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">GraphEntry._validate_config</a>(config_data):</div>
-<div class="line"><span class="lineno">   43</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">builder_logger.error</a>(f<span class="stringliteral">&quot;❌ [GRAPH] Validation failed for {config_data.get(&#39;id&#39;, &#39;Unknown&#39;)}&quot;</span>)</div>
+<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> GraphEntry._validate_config(config_data):</div>
+<div class="line"><span class="lineno">   43</span>            builder_logger.error(f<span class="stringliteral">&quot;❌ [GRAPH] Validation failed for {config_data.get(&#39;id&#39;, &#39;Unknown&#39;)}&quot;</span>)</div>
 <div class="line"><span class="lineno">   44</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>        w_type = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_data.get</a>(<span class="stringliteral">&quot;type&quot;</span>)</div>
+<div class="line"><span class="lineno">   46</span>        w_type = config_data.get(<span class="stringliteral">&quot;type&quot;</span>)</div>
 <div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> w_type <span class="keywordflow">in</span> [<span class="stringliteral">&quot;plot_widget&quot;</span>, <span class="stringliteral">&quot;_GuiGraph&quot;</span>]:</div>
-<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">PlotAdapter.create</a>(parent_widget, config_data, context, **kwargs)</div>
+<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">return</span> PlotAdapter.create(parent_widget, config_data, context, **kwargs)</div>
 <div class="line"><span class="lineno">   49</span>        <span class="keywordflow">elif</span> w_type == <span class="stringliteral">&quot;bar_graph&quot;</span>:</div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">BarGraphAdapter.create</a>(parent_widget, config_data, context, **kwargs)</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> BarGraphAdapter.create(parent_widget, config_data, context, **kwargs)</div>
 <div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

@@ -46,9 +46,9 @@ class MqttManager:
         self._thread = None
 
         # Subscribe to Control Topics
-        self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Broker/Delete/#", self._handle_delete_command)
-        self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Broker/Service/#", self._handle_service_command)
-        self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/Fleet/Complete", self._on_fleet_scan_complete)
+        self.subscriber_router.subscribe_to_topic("OpenAir/System/Control/Broker/Delete/#", self._handle_delete_command)
+        self.subscriber_router.subscribe_to_topic("OpenAir/System/Control/Broker/Service/#", self._handle_service_command)
+        self.subscriber_router.subscribe_to_topic("OpenAir/System/Status/Fleet/Complete", self._on_fleet_scan_complete)
 
         matrix_log("comms", "mqtt", "__init__", "🚀 [MQTT] MqttManager initialized.", "DEBUG")
 
@@ -78,7 +78,7 @@ class MqttManager:
             "port": str(app_constants.MQTT_BROKER_PORT)
         }
         status_json = orjson.dumps(status_payload)
-        self.mqtt_client.publish("OPEN-AIR/System/Status/Broker/Connection", status_json, qos=1)
+        self.mqtt_client.publish("OpenAir/System/Status/Broker/Connection", status_json, qos=1)
 
     def _system_status_loop(self):
         """Periodically prepares connection status and system paths."""
@@ -96,7 +96,7 @@ class MqttManager:
                         "yak": str(app_paths.YAKETY_YAK_REPO_PATH),
                         "presets": str(app_paths.PRESET_REPO_PATH)
                     }
-                    self.mqtt_client.publish("OPEN-AIR/System/Status/Paths", orjson.dumps(paths_payload), qos=1)
+                    self.mqtt_client.publish("OpenAir/System/Status/Paths", orjson.dumps(paths_payload), qos=1)
                 else:
                     self._publish_status("OFFLINE")
                     self._attempt_reconnect()

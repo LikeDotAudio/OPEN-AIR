@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d3/dd9/namespaceaes70_1_1ocp1_1_1ocabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a370d46da25d9da88f1fc7db8023ef807" id="r_a370d46da25d9da88f1fc7db8023ef807"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dd9/namespaceaes70_1_1ocp1_1_1ocablobfixedlen.html#a370d46da25d9da88f1fc7db8023ef807">OcaBlobFixedLen</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Length</a>)</td></tr>
+<tr class="memitem:a370d46da25d9da88f1fc7db8023ef807" id="r_a370d46da25d9da88f1fc7db8023ef807"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dd9/namespaceaes70_1_1ocp1_1_1ocablobfixedlen.html#a370d46da25d9da88f1fc7db8023ef807">OcaBlobFixedLen</a> (Length)</td></tr>
 <tr class="separator:a370d46da25d9da88f1fc7db8023ef807"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -124,9 +124,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">    8</span>    <span class="keyword">def </span>encoded_length(value):</div>
 <div class="line"><span class="lineno">    9</span>        <span class="keywordflow">return</span> Length</div>
 <div class="line"><span class="lineno">   10</span> </div>
-<div class="line"><span class="lineno">   11</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">encodeTo</a>(dataView: bytearray, pos, value):</div>
-<div class="line"><span class="lineno">   12</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, list) <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (bytearray, bytes))):</div>
-<div class="line"><span class="lineno">   13</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Expected Array or Uint8Array&#39;</span>)</div>
+<div class="line"><span class="lineno">   11</span>    <span class="keyword">def </span>encodeTo(dataView: bytearray, pos, value):</div>
+<div class="line"><span class="lineno">   12</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> (isinstance(value, list) <span class="keywordflow">or</span> isinstance(value, (bytearray, bytes))):</div>
+<div class="line"><span class="lineno">   13</span>            <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Expected Array or Uint8Array&#39;</span>)</div>
 <div class="line"><span class="lineno">   14</span> </div>
 <div class="line"><span class="lineno">   15</span>        length = <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value)</div>
 <div class="line"><span class="lineno">   16</span> </div>
@@ -135,10 +135,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   19</span> </div>
 <div class="line"><span class="lineno">   20</span>        start = pos</div>
 <div class="line"><span class="lineno">   21</span>        end = start + Length</div>
-<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, list):</div>
-<div class="line"><span class="lineno">   23</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a>(value)</div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, bytes):</div>
-<div class="line"><span class="lineno">   25</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a>(value)</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> isinstance(value, list):</div>
+<div class="line"><span class="lineno">   23</span>            value = bytearray(value)</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">elif</span> isinstance(value, bytes):</div>
+<div class="line"><span class="lineno">   25</span>            value = bytearray(value)</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>        pack_into(str(len) + <span class="stringliteral">&#39;s&#39;</span>, dataView, pos, length)</div>
 <div class="line"><span class="lineno">   28</span> </div>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   31</span>    <span class="keyword">def </span>decode(dataView, pos):</div>
 <div class="line"><span class="lineno">   32</span>        start = pos</div>
 <div class="line"><span class="lineno">   33</span>        end = start + Length</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a>(dataView[start:end])</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> bytearray(dataView[start:end])</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="keywordflow">return</span> create_type(Type(</div>
 <div class="line"><span class="lineno">   37</span>        is_constant_length=<span class="keyword">False</span>,</div>
@@ -155,7 +155,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   39</span>        encode_to=encodeTo,</div>
 <div class="line"><span class="lineno">   40</span>        decode_from=decode,</div>
 <div class="line"><span class="lineno">   41</span>    ))</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>

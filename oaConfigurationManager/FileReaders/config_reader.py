@@ -172,7 +172,7 @@ class Config(ConfigDefaults):
                 section = config[section_name]
                 for key in section:
                     # ⚡ FIX: Skip known string-based keys to avoid ValueError
-                    if key.lower() in ["mute_functions", "force_functions", "oid_map_source"]:
+                    if key.lower() in ["mute_functions", "force_functions", "mute_topics", "oid_map_source"]:
                         continue
                     # Store all keys in uppercase for consistent matrix lookup
                     try:
@@ -223,12 +223,15 @@ class Config(ConfigDefaults):
             self.ROUTER_DISPATCH_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_dispatch", True, "bool")
             self.ROUTER_SETTLE_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_settle", True, "bool")
             self.ROUTER_FAILOVER_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_failover", True, "bool")
+            raw_mute = config["DEBUG_ROUTER"].get("mute_topics", "")
+            self.MUTE_TOPICS = tuple(p.strip() for p in raw_mute.split(",") if p.strip())
         else:
             # Set defaults if the section is missing
             self.ROUTER_INGEST_LOGS = True
             self.ROUTER_DISPATCH_LOGS = True
             self.ROUTER_SETTLE_LOGS = True
             self.ROUTER_FAILOVER_LOGS = True
+            self.MUTE_TOPICS = ()
 
 
         if LOCAL_DEBUG:

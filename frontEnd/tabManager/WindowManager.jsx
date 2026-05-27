@@ -102,7 +102,7 @@ const TabContainer = ({ node, path = '' }) => {
                         onContextMenu={(e) => { e.preventDefault(); window.launchWysiwygEditor && window.launchWysiwygEditor({ filePath: f.path, content: f.content }); }}
                         title="Right-click: Open WYSIWYG editor"
                         style={{ flexGrow: 1, flexBasis: '0', minHeight: '300px', borderBottom: '1px solid #333' }}>
-                        <window.LoaderOrchestrator layoutJson={f.content} />
+                        <window.LoaderOrchestrator layoutJson={f.content} filePath={f.path} />
                      </div>
                  ))}
             </div>

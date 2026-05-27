@@ -93,37 +93,37 @@ $(document).ready(function(){initNavTree('d6/d95/md_oaGuiEditorWYSIWYG_2Document
   <div class="headertitle"><div class="title">ARCHITECTURE.md - The WYSIWYG Orchestration</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2806"></a># </p>
-<h1><a class="anchor" id="autotoc_md2807"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md3086"></a># </p>
+<h1><a class="anchor" id="autotoc_md3087"></a>
 Author: Anthony Peter Kuzub</h1>
-<h1><a class="anchor" id="autotoc_md2808"></a>
+<h1><a class="anchor" id="autotoc_md3088"></a>
 Version 20260417.0100.1</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md2809"></a>
+<h1><a class="anchor" id="autotoc_md3089"></a>
 Description: Narrative architectural guide for the WYSIWYG Editor.</h1>
-<h2><a class="anchor" id="autotoc_md2810"></a>
+<h2><a class="anchor" id="autotoc_md3090"></a>
 🎭 The Narrative</h2>
 <p>Imagine a professional broadcast studio where the engineers (<a class="el" href="../../d3/d7a/namespaceCore.html">Core</a>) and the on-air talent (UI) are separated by a thick glass pane. They communicate via headsets (Event Bus) to ensure that no matter how chaotic things get on stage, the underlying broadcast remains stable.</p>
 <p>This is the <b>Partitioned Architecture</b> of the OPEN-AIR WYSIWYG Editor.</p>
-<h2><a class="anchor" id="autotoc_md2811"></a>
+<h2><a class="anchor" id="autotoc_md3091"></a>
 🏗️ How it Works</h2>
-<h3><a class="anchor" id="autotoc_md2812"></a>
+<h3><a class="anchor" id="autotoc_md3092"></a>
 1. The Pulse (Events)</h3>
 <p>Everything in the editor starts with a 🖱️ <code>[ACTION]</code>. A user grabs a fader or drags a new component from the Library. The UI doesn't directly change the data; it broadcasts a <code>FOCUS_REQUESTED</code> or <code>COMPONENT_DROPPED</code> event.</p>
-<h3><a class="anchor" id="autotoc_md2813"></a>
+<h3><a class="anchor" id="autotoc_md3093"></a>
 2. The Brain (Core State)</h3>
 <p>The <code>StateManager</code> listens to these events. It performs the heavy lifting:</p><ul>
 <li>Validating the JSON schema.</li>
 <li>Moving elements between containers.</li>
 <li>Updating property values. Once the state is mutated, it yells back: 🧠📡📤 <code>[COMPUTE] STATE_UPDATED</code>.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md2814"></a>
+<h3><a class="anchor" id="autotoc_md3094"></a>
 3. The Stage (Dynamic Rendering)</h3>
-<p>The <code>InteractiveLayout</code> receives the update and triggers a ♻️ <code>[REBUILD]</code>. It uses an <code>AsyncGridRenderer</code> to rebuild the UI in batches. To keep the experience fluid, it employs a "Skeleton-First" strategy:</p><ol type="1">
+<p>The <code>InteractiveLayout</code> receives the update and triggers a ♻️ <code>[REBUILD]</code>. It uses an <code>BatchLayoutEngine</code> to rebuild the UI in batches. To keep the experience fluid, it employs a "Skeleton-First" strategy:</p><ol type="1">
 <li><b>Ghost Mode</b>: In high-speed drag operations, the editor renders simple boxes and green insertion lines to indicate intent.</li>
 <li><b>Surgical Refresh</b>: Only the affected branches of the UI are re-rendered when possible.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md2815"></a>
+<h2><a class="anchor" id="autotoc_md3095"></a>
 🛠️ The Interaction Layers (Overlays)</h2>
 <p>Traditional Tkinter event handling is too slow for pixel-perfect design. We use a <b>Ghost Overlay**—a transparent canvas that sits above the rendered widgets.</p><ul>
 <li>**Green Line: Indicates a valid drop insertion point.</li>
@@ -132,7 +132,7 @@ Description: Narrative architectural guide for the WYSIWYG Editor.</h1>
 </ul>
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md2816"></a>
+<h2><a class="anchor" id="autotoc_md3096"></a>
 🔌 Integration with MQTT</h2>
 <p><b> The editor is "Live-Aware". Every change made in the WYSIWYG environment can be mirrored to a running device in real-time via the <code>oaComBroker</code>. This creates a true "What You See Is What You Get" loop where the design on your screen is the reality on the hardware. </b></p>
 </div></div><!-- contents -->

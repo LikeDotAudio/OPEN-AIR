@@ -51,7 +51,7 @@ class MaintenanceManager:
         self.log_callback("🧹 [CLEANUP] Wiping the MQTT topic tree...")
         def task():
             try:
-                sweeper = MQTTSweeper("localhost", 1883, "OPEN-AIR")
+                sweeper = MQTTSweeper("localhost", 1883, "OpenAir")
                 sweeper.sweep()
                 self.log_callback("✨ [SUCCESS] MQTT topic tree sanitized.")
             except Exception as e:

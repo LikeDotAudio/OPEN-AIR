@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d5/df8/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: [ROUTER] ImportError: 'router_logger' Missing in logger.py</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1667"></a> </p>
-<h1><a class="anchor" id="autotoc_md1668"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2116"></a> </p>
+<h1><a class="anchor" id="autotoc_md2117"></a>
 📅 Timeline</h1>
 <ul>
 <li><b>Discovery Date:</b> 2026-03-14 01:46:27</li>
 <li><b>Resolution Date:</b> 2026-03-14 14:15:00</li>
 <li><b>Priority:</b> 1 (Critical/Crash)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1669"></a>
+<h1><a class="anchor" id="autotoc_md2118"></a>
 🔍 Issue Summary</h1>
 <p>The OPEN-AIR application failed to bootstrap both the UI and <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> partitions due to a missing standardized logger (<code>router_logger</code>) in <code>workers/logger/logger.py</code>. This caused a cascading <code>ImportError</code> in <code>ProtocolRouter</code>, which is a central dependency for almost all communication subsystems.</p>
-<h1><a class="anchor" id="autotoc_md1670"></a>
+<h1><a class="anchor" id="autotoc_md2119"></a>
 🪱 Root Cause</h1>
 <p>A recent refactoring or update (likely <code>20260313.Router.Refactored</code>) added a dependency on <code>router_logger</code> in <code>workers/Command_Router/protocol_router.py</code>, but this logger was never defined in the central <code>workers/logger/logger.py</code> registry.</p>
-<h1><a class="anchor" id="autotoc_md1671"></a>
+<h1><a class="anchor" id="autotoc_md2120"></a>
 🛠️ Resolution</h1>
 <ol type="1">
 <li><b>Modified <code>workers/logger/logger.py</code></b>: Added <code>router_logger = logger.bind(category="ROUTER")</code> to the standardized subsystem loggers.</li>
@@ -118,14 +118,14 @@ $(document).ready(function(){initNavTree('d5/df8/md_oaDocumentation_2Workers_2Bu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1672"></a>
+<h1><a class="anchor" id="autotoc_md2121"></a>
 ✅ Verification Evidence</h1>
 <ul>
 <li><b>Empirical Proof</b>: Verified successful import of <code>ProtocolRouter</code>, <code>OSCManager</code>, and <code>StateCacheManager</code> via CLI.</li>
 <li><b>Command</b>: &lsquo;python3 -c "from oaComBroker.Managers.protocol_router import ProtocolRouter; from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager; from workers.Command_Router.State_Cache.state_cache import StateCacheManager; print('Success&amp;rsquo;)"<code></code></li>
 <li><code>**Result**:</code>Success`</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1673"></a>
+<h1><a class="anchor" id="autotoc_md2122"></a>
 📋 System Impact</h1>
 <ul>
 <li>UI Bootstrap: Restored.</li>

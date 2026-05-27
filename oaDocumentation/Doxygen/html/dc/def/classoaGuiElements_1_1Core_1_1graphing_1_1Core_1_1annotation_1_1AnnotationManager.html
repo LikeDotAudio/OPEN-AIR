@@ -99,15 +99,15 @@ $(document).ready(function(){initNavTree('dc/def/classoaGuiElements_1_1Core_1_1g
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1603be59a017a6d9f6d98e51aa8bff1e" id="r_a1603be59a017a6d9f6d98e51aa8bff1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/def/classoaGuiElements_1_1Core_1_1graphing_1_1Core_1_1annotation_1_1AnnotationManager.html#a1603be59a017a6d9f6d98e51aa8bff1e">update</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a3b65133bb9997cd1ccf311af0927fc9e">event</a>, ax, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot</a>)</td></tr>
-<tr class="separator:a1603be59a017a6d9f6d98e51aa8bff1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7061e4b198331ac4cde448858d891ec" id="r_ab7061e4b198331ac4cde448858d891ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/def/classoaGuiElements_1_1Core_1_1graphing_1_1Core_1_1annotation_1_1AnnotationManager.html#ab7061e4b198331ac4cde448858d891ec">update</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a3b65133bb9997cd1ccf311af0927fc9e">event</a>, ax, annot, plotter=None)</td></tr>
+<tr class="separator:ab7061e4b198331ac4cde448858d891ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Handles hover-based annotations, intersection dots, and vertical crosshair lines.</pre> 
 <p class="definition">Definition at line <a class="el" href="../../d0/daf/annotation_8py_source.html#l00010">10</a> of file <a class="el" href="../../d0/daf/annotation_8py_source.html">annotation.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1603be59a017a6d9f6d98e51aa8bff1e" name="a1603be59a017a6d9f6d98e51aa8bff1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1603be59a017a6d9f6d98e51aa8bff1e">&#9670;&#160;</a></span>update()</h2>
+<a id="ab7061e4b198331ac4cde448858d891ec" name="ab7061e4b198331ac4cde448858d891ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7061e4b198331ac4cde448858d891ec">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>annot</em>&#160;</td>
+          <td class="paramname"><em>annot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>plotter</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -147,55 +153,69 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d0/daf/annotation_8py_source.html#l00014">14</a> of file <a class="el" href="../../d0/daf/annotation_8py_source.html">annotation.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   14</span>    <span class="keyword">def </span>update(event, ax, annot):</div>
-<div class="line"><span class="lineno">   15</span>        v_line = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(ax, <span class="stringliteral">&quot;_hover_vline&quot;</span>, <span class="keywordtype">None</span>)</div>
-<div class="line"><span class="lineno">   16</span>        dots = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(ax, <span class="stringliteral">&quot;_hover_dots&quot;</span>, [])</div>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>    <span class="keyword">def </span>update(event, ax, annot, plotter=None):</div>
+<div class="line"><span class="lineno">   15</span>        v_line = getattr(ax, <span class="stringliteral">&quot;_hover_vline&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   16</span>        dots = getattr(ax, <span class="stringliteral">&quot;_hover_dots&quot;</span>, [])</div>
 <div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.inaxes</a> == ax <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(ax, <span class="stringliteral">&quot;hover_enabled&quot;</span>, <span class="keyword">True</span>):</div>
+<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> event.inaxes == ax <span class="keywordflow">and</span> getattr(ax, <span class="stringliteral">&quot;hover_enabled&quot;</span>, <span class="keyword">True</span>):</div>
 <div class="line"><span class="lineno">   19</span>            data_text, marker_text, active_dot_count = [], [], 0</div>
-<div class="line"><span class="lineno">   20</span>            <span class="keywordflow">if</span> v_line: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">v_line.set_xdata</a>([<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.xdata</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.xdata</a>]); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">v_line.set_visible</a>(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   20</span>            <span class="keywordflow">if</span> v_line: v_line.set_xdata([event.xdata, event.xdata]); v_line.set_visible(<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>            <span class="keywordflow">for</span> line <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ax.lines</a>:</div>
-<div class="line"><span class="lineno">   23</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.get_visible</a>() <span class="keywordflow">or</span> line == v_line: <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">   24</span>                label = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.get_label</a>()</div>
-<div class="line"><span class="lineno">   25</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> label <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label.startswith</a>(<span class="stringliteral">&quot;_&quot;</span>): <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">   22</span>            <span class="keywordflow">for</span> line <span class="keywordflow">in</span> ax.lines:</div>
+<div class="line"><span class="lineno">   23</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> line.get_visible() <span class="keywordflow">or</span> line == v_line: <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">   24</span>                label = line.get_label()</div>
+<div class="line"><span class="lineno">   25</span>                <span class="keywordflow">if</span> <span class="keywordflow">not</span> label <span class="keywordflow">or</span> label.startswith(<span class="stringliteral">&quot;_&quot;</span>): <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   26</span> </div>
-<div class="line"><span class="lineno">   27</span>                x_d, y_d = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.get_xdata</a>(), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.get_ydata</a>()</div>
+<div class="line"><span class="lineno">   27</span>                x_d, y_d = line.get_xdata(), line.get_ydata()</div>
 <div class="line"><span class="lineno">   28</span>                <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(x_d) == 0: <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>                <span class="keywordflow">if</span> <span class="stringliteral">&quot;Marker&quot;</span> <span class="keywordflow">in</span> label <span class="keywordflow">or</span> <span class="stringliteral">&quot;MRK&quot;</span> <span class="keywordflow">in</span> label:</div>
-<div class="line"><span class="lineno">   31</span>                    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">np.all</a>(x_d == x_d[0]): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">marker_text.append</a>(f<span class="stringliteral">&quot;{label}: X={x_d[0]:.2f}&quot;</span>)</div>
-<div class="line"><span class="lineno">   32</span>                    <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">np.all</a>(y_d == y_d[0]): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">marker_text.append</a>(f<span class="stringliteral">&quot;{label}: Y={y_d[0]:.2f}&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>                    <span class="keywordflow">if</span> np.all(x_d == x_d[0]): marker_text.append(f<span class="stringliteral">&quot;{label}: X={x_d[0]:.2f}&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span>                    <span class="keywordflow">elif</span> np.all(y_d == y_d[0]): marker_text.append(f<span class="stringliteral">&quot;{label}: Y={y_d[0]:.2f}&quot;</span>)</div>
 <div class="line"><span class="lineno">   33</span>                    <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>                idx = (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">np.abs</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">np.array</a>(x_d) - <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.xdata</a>)).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">argmin</a>()</div>
+<div class="line"><span class="lineno">   35</span>                idx = (np.abs(np.array(x_d) - event.xdata)).argmin()</div>
 <div class="line"><span class="lineno">   36</span>                val_x, val_y = x_d[idx], y_d[idx]</div>
-<div class="line"><span class="lineno">   37</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_text.append</a>(f<span class="stringliteral">&quot;{label}: {val_y:.2f}&quot;</span>)</div>
+<div class="line"><span class="lineno">   37</span>                data_text.append(f<span class="stringliteral">&quot;{label}: {val_y:.2f}&quot;</span>)</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>                <span class="keywordflow">if</span> active_dot_count &lt; <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(dots):</div>
-<div class="line"><span class="lineno">   40</span>                    dots[active_dot_count].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_data</a>([val_x], [val_y])</div>
-<div class="line"><span class="lineno">   41</span>                    dots[active_dot_count].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_color</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">line.get_color</a>())</div>
-<div class="line"><span class="lineno">   42</span>                    dots[active_dot_count].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible</a>(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   40</span>                    dots[active_dot_count].set_data([val_x], [val_y])</div>
+<div class="line"><span class="lineno">   41</span>                    dots[active_dot_count].set_color(line.get_color())</div>
+<div class="line"><span class="lineno">   42</span>                    dots[active_dot_count].set_visible(<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   43</span>                    active_dot_count += 1</div>
 <div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>            <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(active_dot_count, <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(dots)): dots[i].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_visible</a>(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   45</span>            <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(active_dot_count, <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(dots)): dots[i].set_visible(<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   46</span> </div>
 <div class="line"><span class="lineno">   47</span>            <span class="keywordflow">if</span> data_text <span class="keywordflow">or</span> marker_text:</div>
 <div class="line"><span class="lineno">   48</span>                content = [f<span class="stringliteral">&quot;X: {event.xdata:.2f}&quot;</span>] + data_text + ([<span class="stringliteral">&quot;---&quot;</span>] <span class="keywordflow">if</span> data_text <span class="keywordflow">and</span> marker_text <span class="keywordflow">else</span> []) + marker_text</div>
-<div class="line"><span class="lineno">   49</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot.set_text</a>(<span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(content)); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot.xy</a> = (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.xdata</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event.ydata</a>); <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot.set_visible</a>(<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">   50</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ax.figure.canvas.draw_idle</a>()</div>
-<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   52</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot.get_visible</a>(): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">annot.set_visible</a>(<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">if</span> v_line: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">v_line.set_visible</a>(<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">for</span> d <span class="keywordflow">in</span> dots: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">d.set_visible</a>(<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">   55</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ax.figure.canvas.draw_idle</a>()</div>
+<div class="line"><span class="lineno">   49</span>                annot.set_text(<span class="stringliteral">&quot;\n&quot;</span>.join(content)); annot.xy = (event.xdata, event.ydata); annot.set_visible(<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>                <span class="keywordflow">if</span> plotter:</div>
+<div class="line"><span class="lineno">   52</span>                    plotter._schedule_update()</div>
+<div class="line"><span class="lineno">   53</span>                <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   54</span>                    ax.figure.canvas.draw_idle()</div>
+<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   56</span>            <span class="keywordflow">if</span> annot.get_visible():</div>
+<div class="line"><span class="lineno">   57</span>                annot.set_visible(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   58</span>                <span class="keywordflow">if</span> plotter: plotter._schedule_update()</div>
+<div class="line"><span class="lineno">   59</span>                <span class="keywordflow">else</span>: ax.figure.canvas.draw_idle()</div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>            <span class="keywordflow">if</span> v_line <span class="keywordflow">and</span> v_line.get_visible():</div>
+<div class="line"><span class="lineno">   62</span>                v_line.set_visible(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   63</span>                <span class="keywordflow">if</span> plotter: plotter._schedule_update()</div>
+<div class="line"><span class="lineno">   64</span>                <span class="keywordflow">else</span>: ax.figure.canvas.draw_idle()</div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>            <span class="keywordflow">for</span> d <span class="keywordflow">in</span> dots:</div>
+<div class="line"><span class="lineno">   67</span>                <span class="keywordflow">if</span> d.get_visible():</div>
+<div class="line"><span class="lineno">   68</span>                    d.set_visible(<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   69</span>                    <span class="keywordflow">if</span> plotter: plotter._schedule_update()</div>
+<div class="line"><span class="lineno">   70</span>                    <span class="keywordflow">else</span>: ax.figure.canvas.draw_idle()</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a2185332cb740507fd92af736c19f90ad"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a></div><div class="ttdeci">unicode range</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">generated.rs:1997</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">range</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">range</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d3e/snmp__verify__mib__impl_8py_source.html#l00121">Interface.snmp_verify_mib_impl.SnmpVerifyMibImplementation.run_test()</a>, <a class="el" href="../../d8/d8e/snmp__verify__oid__impl_8py_source.html#l00110">Interface.snmp_verify_oid_impl.SnmpVerifyOidImplementation.run_test()</a>, and <a class="el" href="../../da/d59/MixerUI_8py_source.html#l00075">MixerUI.PCMBitMonitor.update_bits()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d3b/loader__orchestrator_8py_source.html#l00119">Workers.orchestration.loader_orchestrator.LoaderOrchestrator._on_gui_visible()</a>, <a class="el" href="../../d0/d3e/snmp__verify__mib__impl_8py_source.html#l00121">Interface.snmp_verify_mib_impl.SnmpVerifyMibImplementation.run_test()</a>, <a class="el" href="../../d8/d8e/snmp__verify__oid__impl_8py_source.html#l00110">Interface.snmp_verify_oid_impl.SnmpVerifyOidImplementation.run_test()</a>, and <a class="el" href="../../da/d59/MixerUI_8py_source.html#l00075">MixerUI.PCMBitMonitor.update_bits()</a>.</p>
 
 </div>
 </div>

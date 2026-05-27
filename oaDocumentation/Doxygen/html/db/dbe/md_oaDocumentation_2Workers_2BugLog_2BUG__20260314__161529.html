@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('db/dbe/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: GUI Layout Regression from Directory Name Parsing</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1701"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2150"></a></p><ul>
 <li><b>ID</b>: 20260314_161529</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 2 (High)</li>
 <li><b>COMPONENT</b>: <code>oaGui.parser.layout_parser</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1702"></a>
+<h1><a class="anchor" id="autotoc_md2151"></a>
 Issue</h1>
 <p>The GUI was failing to create the main horizontal 50/50 split view defined by the <code>oaGui/Assets/left_50</code> and <code>oaGui/Assets/right_50</code> directory structure. Instead of creating a <code>ttk.PanedWindow</code>, it was treating the subdirectories as simple content folders, causing them to render incorrectly as stacked elements rather than side-by-side panes. This was a regression introduced during a recent refactoring of the layout parsing logic.</p>
-<h1><a class="anchor" id="autotoc_md1703"></a>
+<h1><a class="anchor" id="autotoc_md2152"></a>
 Root Cause Analysis</h1>
-<p>The refactoring of the <code>LayoutParser</code> class in the previous fix introduced a logic error in the <code>_parse_directory_listing</code> method. This method is the fallback for when no <code>layout.json</code> is found in a directory.</p>
-<p>The previous implementation of this method correctly identified subdirectories named with the <code>left_</code> or <code>right_</code> prefix, interpreted them as a <code>horizontal_split</code> layout, and parsed the percentage values. The refactored version, however, had this logic stripped out. It was only identifying "content" directories and "gui files", completely ignoring the directory names that are intended to define the window layout. As a result, when <code>_build_from_directory</code> in <code><a class="el" href="../../d5/d83/gui__display_8py.html">gui_display.py</a></code> called the parser for the main <code>display</code> directory, the parser was returning a <code>directory_listing</code> type instead of the expected <code>horizontal_split</code> type, breaking the layout.</p>
-<h1><a class="anchor" id="autotoc_md1704"></a>
+<p>The refactoring of the <code>FolderLayoutInterpreter</code> class in the previous fix introduced a logic error in the <code>_parse_directory_listing</code> method. This method is the fallback for when no <code>layout.json</code> is found in a directory.</p>
+<p>The previous implementation of this method correctly identified subdirectories named with the <code>left_</code> or <code>right_</code> prefix, interpreted them as a <code>horizontal_split</code> layout, and parsed the percentage values. The refactored version, however, had this logic stripped out. It was only identifying "content" directories and "gui files", completely ignoring the directory names that are intended to define the window layout. As a result, when <code>_build_from_directory</code> in <code><a class="el" href="../../d7/d84/engine__gui__display_8py.html">engine_gui_display.py</a></code> called the parser for the main <code>display</code> directory, the parser was returning a <code>directory_listing</code> type instead of the expected <code>horizontal_split</code> type, breaking the layout.</p>
+<h1><a class="anchor" id="autotoc_md2153"></a>
 Resolution</h1>
 <p>The logic for parsing layout-defining directory names was restored and corrected within the <code>_parse_directory_listing</code> method in <code>managers/Display/parser/layout_parser.py</code>.</p>
 <ol type="1">
@@ -117,9 +117,9 @@ Resolution</h1>
 <li>If no such layout-defining directories are found, it proceeds with the fallback behavior of returning a simple <code>directory_listing</code>.</li>
 </ol>
 <p>This change restores the critical functionality of defining layouts via directory naming conventions, fixing the regression.</p>
-<h1><a class="anchor" id="autotoc_md1705"></a>
+<h1><a class="anchor" id="autotoc_md2154"></a>
 Verification</h1>
-<p>After the fix, the application correctly renders the main display with a 50/50 horizontal split. The <code>left_50</code> and <code><a class="el" href="../../df/d24/namespaceright__50.html">right_50</a></code> directories are now correctly interpreted as panels in a <code>ttk.PanedWindow</code>, and the GUI appears as intended. Log files now show that the <code>LayoutParser</code> correctly identifies the <code>horizontal_split</code> type for the <code>display</code> directory. </p>
+<p>After the fix, the application correctly renders the main display with a 50/50 horizontal split. The <code>left_50</code> and <code><a class="el" href="../../df/d24/namespaceright__50.html">right_50</a></code> directories are now correctly interpreted as panels in a <code>ttk.PanedWindow</code>, and the GUI appears as intended. Log files now show that the <code>FolderLayoutInterpreter</code> correctly identifies the <code>horizontal_split</code> type for the <code>display</code> directory. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

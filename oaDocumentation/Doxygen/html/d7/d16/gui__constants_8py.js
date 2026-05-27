@@ -9,6 +9,7 @@ var gui__constants_8py =
     [ "DEFAULT_FONT_SIZE", "d7/d16/gui__constants_8py.html#abe065bd69b85b7b7971045ed838b089c", null ],
     [ "DEFAULT_PAD_X", "d7/d16/gui__constants_8py.html#a3169ee7781cf2cc7b0a35b3b22c0e4b7", null ],
     [ "DEFAULT_PAD_Y", "d7/d16/gui__constants_8py.html#a8d89749263744a183f85987931d57456", null ],
+    [ "DEFAULT_PANEL_CONFIG", "d7/d16/gui__constants_8py.html#a2c91e53976d9745c29286fbaa878c6c6", null ],
     [ "DIAL_MAX_VALUE", "d7/d16/gui__constants_8py.html#a86b709f55c9e31ce1c9d1c449e36bfb1", null ],
     [ "DIAL_WRAP_THRESHOLD", "d7/d16/gui__constants_8py.html#a12c31f28834f370b3d2e86b02c4b6e86", null ],
     [ "GRID_ROW_MINSIZE_BOTTOM", "d7/d16/gui__constants_8py.html#a2d8709add640ebe24ba54ebf2ed95d27", null ],

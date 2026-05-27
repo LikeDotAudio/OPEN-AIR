@@ -5,7 +5,6 @@ var dir_6ed4650a1a7a8c2f1cac136819f91c09 =
     [ "Core", "dir_f2a433ed0fa5386818fcf3c4ce4d14b0.html", "dir_f2a433ed0fa5386818fcf3c4ce4d14b0" ],
     [ "Documentation", "dir_7408f43758e908fddd6faabf20682c0d.html", "dir_7408f43758e908fddd6faabf20682c0d" ],
     [ "FileReaders", "dir_0e5400d8ccacab937844c4055e0d4be2.html", "dir_0e5400d8ccacab937844c4055e0d4be2" ],
-    [ "FileWriters", "dir_6125a51c23c4a2a4fbf374a2c0d1eef5.html", "dir_6125a51c23c4a2a4fbf374a2c0d1eef5" ],
     [ "Hooks", "dir_00707a2b4d028f0b4f205afcd950466e.html", "dir_00707a2b4d028f0b4f205afcd950466e" ],
     [ "Interface", "dir_0817fabd8e61c45bc27e7e9559bdaaa1.html", "dir_0817fabd8e61c45bc27e7e9559bdaaa1" ],
     [ "Managers", "dir_c6b100ee061a5d7b4cd0d3897174c3d6.html", "dir_c6b100ee061a5d7b4cd0d3897174c3d6" ],

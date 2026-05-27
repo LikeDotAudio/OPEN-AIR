@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('d2/dd9/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:15:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1142"></a> </p>
-<h1><a class="anchor" id="autotoc_md1143"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1407"></a> </p>
+<h1><a class="anchor" id="autotoc_md1408"></a>
 Issues Resolved</h1>
-<h2><a class="anchor" id="autotoc_md1144"></a>
+<h2><a class="anchor" id="autotoc_md1409"></a>
 1. CRITICAL: Test Suite Ingestion Failures</h2>
 <ul>
 <li><b>Root Cause</b>: Missing <code>__init__.py</code> files in <code>python/tests</code> directories prevented Pytest from treating them as importable packages.</li>
 <li><b>Resolution</b>: Surgically created <code>__init__.py</code> files across all native Rust extension test paths.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1145"></a>
+<h2><a class="anchor" id="autotoc_md1410"></a>
 2. HIGH: Native Logging Gate Offline</h2>
 <ul>
 <li><b>Root Cause</b>: <code>oalogginggate_rs</code> was not being automatically compiled or linked, causing a fallback to slow Python logic.</li>
 <li><b>Resolution</b>: Updated <code><a class="el" href="../../d3/da2/matrix__gate_8py.html">matrix_gate.py</a></code> to utilize the established <code>compiler_hook</code> pattern.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1146"></a>
+<h2><a class="anchor" id="autotoc_md1411"></a>
 3. MODERATE: Missing Rust Core Assets</h2>
 <ul>
 <li><b>Root Cause</b>: Several native modules lacked <code>README.md</code> files required by their <code>pyproject.toml</code> metadata, causing <code>maturin</code> build failures.</li>

@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('db/dd9/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG LOG: 20260403_004000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1231"></a></p>
-<h1><a class="anchor" id="autotoc_md1232"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1496"></a></p>
+<h1><a class="anchor" id="autotoc_md1497"></a>
 Date: 2026-04-03</h1>
-<h1><a class="anchor" id="autotoc_md1233"></a>
+<h1><a class="anchor" id="autotoc_md1498"></a>
 Issue: Core Exited (Code -11) Segmentation Fault and NoneType Errors</h1>
-<h1><a class="anchor" id="autotoc_md1234"></a>
+<h1><a class="anchor" id="autotoc_md1499"></a>
 Root Cause: Stack overflow in Rust persistence engine and unhandled None values in SNMP observer.</h1>
-<h2><a class="anchor" id="autotoc_md1235"></a>
+<h2><a class="anchor" id="autotoc_md1500"></a>
 Analysis</h2>
 <ul>
 <li><b>Segfault (Code -11)</b>: The <code>oaDiskFlusher_rs</code> module's <code>py_to_value</code> function was recursively converting Python dictionaries to Rust/Serde values without depth protection. If a dictionary contained a circular reference (which could be created during in-place metadata updates in the router) or was excessively deep, it would cause a stack overflow and a segmentation fault.</li>
 <li><b>SNMP None Error</b>: <code>SNMPObserver.handle_protocol_event</code> attempted to call <code>.get()</code> on a <code>None</code> value when processing SNMP activity telemetry, leading to an <code>AttributeError</code>.</li>
 <li><b>Router Signature Mismatch</b>: <code>ProtocolRouter._dispatch_loop</code> was passing individual manager references to <code>dispatch_message</code>, which now expects a single <code>managers</code> dictionary.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1236"></a>
+<h2><a class="anchor" id="autotoc_md1501"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Updated <code>oaStateCache/Core/oaDiskFlusher_rs/src/lib.rs</code></b>: Added a recursion depth limit (100) to <code>py_to_value</code>. If exceeded, it returns a placeholder string instead of recursing further.</li>
-<li><b>Updated <code>oaComProtocols.oaComSNMP/Managers/snmp_manager.py</code></b>: Added an <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance(value, dict)</a></code> check before processing SNMP activity monitor messages.</li>
+<li><b>Updated <code>oaComProtocols.oaComSNMP/Managers/snmp_manager.py</code></b>: Added an <code>isinstance(value, dict)</code> check before processing SNMP activity monitor messages.</li>
 <li><b>Updated <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code></b>: Refactored the <code>dispatch_message</code> call to pass a dictionary of all registered transport managers.</li>
 <li><b>Updated <code><a class="el" href="../../d0/d9b/ingest_8py.html">oaComBroker/Core/protocol_router/ingest.py</a></code></b>: Added explicit <code>None</code> handling and logging during the ingestion phase.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1237"></a>
+<h2><a class="anchor" id="autotoc_md1502"></a>
 Verification Evidence</h2>
 <ul>
 <li>Modified Rust source code for <code><a class="el" href="../../d3/d4d/oa__disk__flusher__rs_2mod_8rs.html#d8/d84/structDiskFlusher">DiskFlusher</a></code> verified for safety.</li>

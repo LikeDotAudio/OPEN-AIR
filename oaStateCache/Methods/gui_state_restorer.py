@@ -50,7 +50,7 @@ def restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -> No
                 continue
 
             volatile = any(x in str(topic) for x in ["/System/", "/Monitor/", "/Heartbeat/"])
-            if topic.startswith("OPEN-AIR/") and not volatile:
+            if topic.startswith("OpenAir/") and not volatile:
                 message = MqttMessage(topic=topic, payload=payload)
                 state_mirror_engine.sync_incoming_mqtt_to_gui(message)
 

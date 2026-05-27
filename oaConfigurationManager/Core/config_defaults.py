@@ -34,7 +34,7 @@ class ConfigDefaults:
     MQTT_USERNAME = None
     MQTT_PASSWORD = None
     MQTT_RETAIN_BEHAVIOR = False
-    MQTT_BASE_TOPIC = "OPEN-AIR"
+    MQTT_BASE_TOPIC = "OpenAir"
 
     # Font Settings
     DEFAULT_FONT_FAMILY = "Helvetica"
@@ -89,3 +89,8 @@ class ConfigDefaults:
     }
     MUTE_FUNCTIONS = ""
     FORCE_FUNCTIONS = ""
+    # Comma-separated topic prefixes whose broker log lines (INBOUND/ECHO/ROUTER
+    # dispatch) should be suppressed. The messages still flow through the
+    # pipeline — only their logging is silenced. Useful for muting high-rate
+    # heartbeat/status traffic without breaking failover.
+    MUTE_TOPICS = ()

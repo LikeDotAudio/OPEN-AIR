@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d2/d3f/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260409_002400</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1301"></a></p>
-<h1><a class="anchor" id="autotoc_md1302"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1566"></a></p>
+<h1><a class="anchor" id="autotoc_md1567"></a>
 Author: Gemini CLI (Elite Bug-Fixing Architect)</h1>
-<h1><a class="anchor" id="autotoc_md1303"></a>
+<h1><a class="anchor" id="autotoc_md1568"></a>
 Version: 20260409.0024.1</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1304"></a>
+<h1><a class="anchor" id="autotoc_md1569"></a>
 Description: Resolution of noisy ERROR logging for handled blueprint validation failures in oaGui.</h1>
-<h2><a class="anchor" id="autotoc_md1305"></a>
+<h2><a class="anchor" id="autotoc_md1570"></a>
 Issue</h2>
-<p>The <code>UniversalGuiLoader</code> in <code>oaGui</code> would log an <code>ERROR</code> whenever a GUI blueprint (JSON file) was missing. While the error was correctly handled by the UI (displaying a red error label) and by unit tests, the <code>ERROR</code> log level was noisy and cluttering CI/CD output for expected validation failures during test runs or discovery phases.</p>
-<h2><a class="anchor" id="autotoc_md1306"></a>
+<p>The <code>JsonGuiHost</code> in <code>oaGui</code> would log an <code>ERROR</code> whenever a GUI blueprint (JSON file) was missing. While the error was correctly handled by the UI (displaying a red error label) and by unit tests, the <code>ERROR</code> log level was noisy and cluttering CI/CD output for expected validation failures during test runs or discovery phases.</p>
+<h2><a class="anchor" id="autotoc_md1571"></a>
 Root Cause</h2>
-<p>The <code>_construct_dynamic_gui</code> method in <code><a class="el" href="../../d7/d18/gui__from__json_8py.html">oaGui/Core/loader/gui_from_json.py</a></code> explicitly caught <code>FileNotFoundError</code> but logged it using <code>logger.error</code> instead of a more appropriate level for handled validation failures. Additionally, the logging did not follow the project's visual standards (three emojis and bracketed categories).</p>
-<h2><a class="anchor" id="autotoc_md1307"></a>
+<p>The <code>_construct_dynamic_gui</code> method in <code>oaGui/Core/loader/json_gui_host.py</code> explicitly caught <code>FileNotFoundError</code> but logged it using <code>logger.error</code> instead of a more appropriate level for handled validation failures. Additionally, the logging did not follow the project's visual standards (three emojis and bracketed categories).</p>
+<h2><a class="anchor" id="autotoc_md1572"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Level Demotion</b>: Changed the log level for <code>FileNotFoundError</code> (missing blueprint) from <code>ERROR</code> to <code>WARNING</code>.</li>
@@ -121,10 +121,10 @@ Resolution</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1308"></a>
+<h2><a class="anchor" id="autotoc_md1573"></a>
 Verification Evidence</h2>
 <ol type="1">
-<li><b>Empirical Reproduction</b>: Ran the existing unit test <code><a class="el" href="../../d7/d71/test__gui__from__json_8py.html">oaGui/Tests/test_gui_from_json.py</a></code>.</li>
+<li><b>Empirical Reproduction</b>: Ran the existing unit test <code>oaGui/Tests/test_json_gui_host.py</code>.</li>
 <li><b>Before Fix</b>: Logged <code>ERROR | ❌ Blueprint missing! ...</code>.</li>
 <li><b>After Fix</b>: Logged <code>WARNING | ⚠️⚠️⚠️ [VALIDATION] Blueprint missing! ...</code>.</li>
 <li><b><a class="el" href="../../df/da7/namespaceTests.html">Tests</a> Status</b>: All tests passed (2/2), confirming that functional behavior (UI error state transition) is preserved while logging is cleaned up.</li>

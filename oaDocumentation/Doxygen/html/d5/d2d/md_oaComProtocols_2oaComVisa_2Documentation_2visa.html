@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('d5/d2d/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md737"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md738"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1002"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1003"></a>
 🏷️ Manager Visa: Bonjour &amp; Proxy Module</h1>
 <p>The <b>VISA</b> module provides query/response control for SCPI-compatible laboratory and broadcast hardware. In V3.1.0, it is enhanced with <b>Bonjour</b> Zero-Conf discovery to automatically map IP-based instruments.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md740"></a>
+<h2><a class="anchor" id="autotoc_md1005"></a>
 1. V3.1.0 Behavioral Matrix</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -111,38 +111,38 @@ $(document).ready(function(){initNavTree('d5/d2d/md_oaComProtocols_2oaComVisa_2D
 <td class="markdownTableBodyLeft"><b>Timeout Protection</b>   </td><td class="markdownTableBodyLeft">Individual device timeouts prevent a single slow instrument from hanging the entire proxy bridge.   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md742"></a>
+<h2><a class="anchor" id="autotoc_md1007"></a>
 2. Core Functional Role</h2>
 <ul>
 <li><b>Proxy Discovery:</b> The VISA module acts as a bridge between the physical instrument and the MQTT backbone, ensuring that discovered hardware is instantly controllable via the <code>OPEN-AIR/Proxy/</code> namespace.</li>
 <li><b>Stateless Control:</b> It handles the translation of high-level MQTT "Intents" into low-level SCPI strings.</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md744"></a>
+<h2><a class="anchor" id="autotoc_md1009"></a>
 3. Topic Mapping</h2>
 <ul>
 <li><b>Primary Path:</b> <code>OPEN-AIR/Proxy/#</code></li>
 <li><b>Discovery Path:</b> <code>OPEN-AIR/Discovery/Bonjour/[DeviceID]</code></li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md746"></a>
+<h2><a class="anchor" id="autotoc_md1011"></a>
 📖 Description &amp; Purpose</h2>
-<h3><a class="anchor" id="autotoc_md747"></a>
+<h3><a class="anchor" id="autotoc_md1012"></a>
 File Level</h3>
 <p>managers/VisaScipi/manager_visa.py</p>
 <p>Main orchestrator for VISA device interactions.</p>
 <p>Author: Anthony Peter Kuzub</p>
-<h2><a class="anchor" id="autotoc_md748"></a>
+<h2><a class="anchor" id="autotoc_md1013"></a>
 ⚙️ Assumptions &amp; Constraints</h2>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h2><a class="anchor" id="autotoc_md749"></a>
+<h2><a class="anchor" id="autotoc_md1014"></a>
 📚 API Reference</h2>
-<h3><a class="anchor" id="autotoc_md750"></a>
+<h3><a class="anchor" id="autotoc_md1015"></a>
 Classes</h3>
-<h4><a class="anchor" id="autotoc_md751"></a>
+<h4><a class="anchor" id="autotoc_md1016"></a>
 &lt;tt&gt;class VisaManagerOrchestrator&lt;/tt&gt;</h4>
 <p>No class description provided.</p>
-<p><a class="anchor" id="autotoc_md752"></a> </p><h5><code>__init__(self, mqtt_connection_manager, subscriber_router)</code></h5>
+<p><a class="anchor" id="autotoc_md1017"></a> </p><h5><code>__init__(self, mqtt_connection_manager, subscriber_router)</code></h5>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
 <li><code>mqtt_connection_manager</code>: [TODO: Detail meaning, valid ranges, special cases]</li>
@@ -154,7 +154,7 @@ Classes</h3>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<p><a class="anchor" id="autotoc_md753"></a> </p><h5><code>get_managers(self)</code></h5>
+<p><a class="anchor" id="autotoc_md1018"></a> </p><h5><code>get_managers(self)</code></h5>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
 <li>None</li>
@@ -165,7 +165,7 @@ Classes</h3>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md754"></a>
+<h2><a class="anchor" id="autotoc_md1019"></a>
 📝 Focus on Intent (Inline Comments)</h2>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

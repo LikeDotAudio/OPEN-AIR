@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('d5/d44/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: Noisy Traceback for Missing Blueprints</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1255"></a><b>Date:</b> 2026-04-04 <b>Time:</b> 22:35:00 <b>Module:</b> oaGui.Core.loader.gui_from_json <b>Priority:</b> 2 (High/Spam)</p>
-<h1><a class="anchor" id="autotoc_md1256"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1520"></a><b>Date:</b> 2026-04-04 <b>Time:</b> 22:35:00 <b>Module:</b> oaGui.Core.loader.json_gui_host <b>Priority:</b> 2 (High/Spam)</p>
+<h1><a class="anchor" id="autotoc_md1521"></a>
 Issue</h1>
-<p>When a GUI blueprint (JSON file) was missing, the <code>UniversalGuiLoader</code> would log a full traceback using <code>logger.exception</code>. While the error was correctly handled by transitioning the UI to an error state, the verbose traceback in the logs was confusing and cluttered CI/CD output, appearing as an unhandled crash.</p>
-<h1><a class="anchor" id="autotoc_md1257"></a>
+<p>When a GUI blueprint (JSON file) was missing, the <code>JsonGuiHost</code> would log a full traceback using <code>logger.exception</code>. While the error was correctly handled by transitioning the UI to an error state, the verbose traceback in the logs was confusing and cluttered CI/CD output, appearing as an unhandled crash.</p>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 Root Cause</h1>
 <p>The <code>_construct_dynamic_gui</code> method used a generic <code>except Exception</code> block with <code>logger.exception</code> to catch all errors during the build process. <code>FileNotFoundError</code> (raised when a blueprint is missing) fell into this block, triggering a full stack trace.</p>
-<h1><a class="anchor" id="autotoc_md1258"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 Resolution</h1>
 <p>Refactored the <code>try...except</code> block to explicitly catch <code>FileNotFoundError</code>.</p><ul>
 <li><code>FileNotFoundError</code> is now logged as a standard <code>logger.error</code> (no traceback).</li>
 <li><code>Exception</code> remains as a fallback for unexpected catastrophic failures, preserving the full traceback for debugging.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1259"></a>
+<h1><a class="anchor" id="autotoc_md1524"></a>
 Verification Evidence</h1>
 <p>Verified with a reproduction script (<code>.gemini/TempScripts/reproduce_bug.py</code>):</p><ol type="1">
 <li><b>Missing Blueprint:</b> Logs a single line: <code>❌ Blueprint missing! Module: ... | Path: ...</code></li>

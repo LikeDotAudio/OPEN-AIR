@@ -42,7 +42,7 @@ class FailoverManager:
         self.HEARTBEAT_INTERVAL = 1.0
         self.FAILOVER_TIMEOUT = 3.5
 
-        self.topic_root = "OPEN-AIR/System/Failover"
+        self.topic_root = "OpenAir/System/Failover"
         self.partition = app_constants.PARTITION_ID
         self.heartbeat_topic = f"{self.topic_root}/{self.partition}/Heartbeat/{self.guid}"
         self.discovery_topic = f"{self.topic_root}/{self.partition}/Heartbeat/#"

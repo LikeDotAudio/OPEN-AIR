@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📦_20open_20air_20project_20dependencies_0',['📦 OPEN-AIR Project Dependencies',['../d9/da1/md_oaInstallation_2Documentation_2Dependencies.html',1,'']]]
+  ['📚_20meter_20config_20api_20reference_0',['📚 Meter Config API Reference',['../dc/dde/md_oaGuiElements_2Documentation_2references_2meter__config__api.html',1,'']]]
 ];

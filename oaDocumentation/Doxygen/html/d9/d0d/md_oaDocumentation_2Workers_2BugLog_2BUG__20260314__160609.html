@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('d9/d0d/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: TypeError in Recursive GUI Build Process</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1691"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2140"></a></p><ul>
 <li><b>ID</b>: 20260314_160609</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code>, <code>oaGui.parser.layout_parser</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code>, <code>oaGui.parser.layout_parser</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1692"></a>
+<h1><a class="anchor" id="autotoc_md2141"></a>
 Issue</h1>
 <p>The GUI build process was crashing with a when processing a file that used the type with nested layouts (i.e., a item that was a dictionary itself instead of a file path). The application would only partially render the UI and then halt, as seen in the logs where a critical exception terminated the build thread.</p>
-<h1><a class="anchor" id="autotoc_md1693"></a>
+<h1><a class="anchor" id="autotoc_md2142"></a>
 Root Cause Analysis</h1>
 <ol type="1">
 <li><b>Type Mismatch</b>: The function in was designed to handle a list of file paths ( or ). It iterated through its list and passed each item directly to , which expects a file path.</li>
@@ -110,7 +110,7 @@ Root Cause Analysis</h1>
 <li><b>The Crash</b>: Passing this to caused a because the function tried to perform file-system operations on a dictionary, which is not a valid path object. This exception was caught by the top-level handler, which terminated the build for that branch of the GUI.</li>
 <li><b>Inconsistent Parsing</b>: The had logic to parse files, but there was no public method to re-run this parsing logic on a dictionary that had already been loaded, leading to the type mismatch downstream.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1694"></a>
+<h1><a class="anchor" id="autotoc_md2143"></a>
 Resolution</h1>
 <p>A two-part refactoring was implemented to make the layout processing robust and type-safe:</p>
 <ol type="1">
@@ -130,7 +130,7 @@ Resolution</h1>
 </li>
 </ol>
 <p>This change ensures that nested layout dictionaries are correctly re-parsed and built recursively, fixing the and allowing the entire GUI to load as designed.</p>
-<h1><a class="anchor" id="autotoc_md1695"></a>
+<h1><a class="anchor" id="autotoc_md2144"></a>
 Verification</h1>
 <p>The application now fully loads the GUI without any exceptions in the log. All components defined in nested layouts are correctly rendered in their designated slots. </p>
 </div></div><!-- contents -->

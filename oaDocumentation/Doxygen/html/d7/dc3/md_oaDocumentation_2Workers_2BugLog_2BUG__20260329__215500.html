@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d7/dc3/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_215500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1965"></a> </p>
-<h1><a class="anchor" id="autotoc_md1966"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2414"></a> </p>
+<h1><a class="anchor" id="autotoc_md2415"></a>
 Issue</h1>
 <p>The ProtocolRouter was emitting high-velocity <code>[INBOUND]</code> and <code>[OUTBOUND]</code> debug logs to the console even when <code>LOCAL_DEBUG</code> was disabled. This caused console flooding and performance overhead during normal operation.</p>
-<h1><a class="anchor" id="autotoc_md1967"></a>
+<h1><a class="anchor" id="autotoc_md2416"></a>
 Root Cause</h1>
 <p>Several <code>router_logger.debug()</code> calls in <code><a class="el" href="../../d0/d9b/ingest_8py.html">oaComBroker/Core/protocol_router/ingest.py</a></code> and <code><a class="el" href="../../d0/d9a/dispatch_8py.html">oaComBroker/Core/protocol_router/dispatch.py</a></code> were not wrapped in <code>if LOCAL_DEBUG:</code> gates.</p>
-<h1><a class="anchor" id="autotoc_md1968"></a>
+<h1><a class="anchor" id="autotoc_md2417"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Ingest Gating</b>: Wrapped the primary <code>[INBOUND]</code> log in <code><a class="el" href="../../d0/d9b/ingest_8py.html">oaComBroker/Core/protocol_router/ingest.py</a></code> with <code>if LOCAL_DEBUG:</code>.</li>
 <li><b>Dispatch Gating</b>: Wrapped all protocol-specific <code>[OUTBOUND]</code> logs (MQTT, OSC, MIDI, SNMP) in <code><a class="el" href="../../d0/d9a/dispatch_8py.html">oaComBroker/Core/protocol_router/dispatch.py</a></code> with <code>if LOCAL_DEBUG:</code>.</li>
 <li><b>Standard Compliance</b>: Ensured that the logs now correctly follow the project's "Zero-Cost Gates" architectural mandate.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1969"></a>
+<h1><a class="anchor" id="autotoc_md2418"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code><a class="el" href="../../dd/d48/oaComBroker_2Core_2protocol__router_2constants_8py.html">oaComBroker/Core/protocol_router/constants.py</a></code> has <code>LOCAL_DEBUG = False</code>.</li>

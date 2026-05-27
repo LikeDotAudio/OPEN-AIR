@@ -180,15 +180,12 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    <span class="keyword">def </span>test_disconnect_instrument_failure(self):</div>
 <div class="line"><span class="lineno">   30</span>        <span class="stringliteral">&quot;&quot;&quot;Test the standalone disconnect_instrument function when close raises an exception.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   31</span>        mock_inst = MagicMock()</div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_inst.close.side_effect</a> = Exception(<span class="stringliteral">&quot;Close error&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span>        mock_inst.close.side_effect = Exception(<span class="stringliteral">&quot;Close error&quot;</span>)</div>
 <div class="line"><span class="lineno">   33</span>        result = disconnect_instrument(mock_inst)</div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="line"><span class="lineno">   35</span>        self.assertFalse(result)</div>
 <div class="line"><span class="lineno">   36</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="afe686080fb08620e62e81a59b91d59de" name="afe686080fb08620e62e81a59b91d59de"></a>
@@ -220,11 +217,11 @@ CHECK: Assert it resets the proxy and publishes disconnected status.
 <div class="line"><span class="lineno">   64</span>        result = self.disconnector.disconnect_instrument_logic(<span class="keywordtype">None</span>)</div>
 <div class="line"><span class="lineno">   65</span> </div>
 <div class="line"><span class="lineno">   66</span>        self.assertTrue(result)</div>
-<div class="line"><span class="lineno">   67</span>        self.mock_proxy.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_instrument_instance.assert_called_with</a>(inst=<span class="keywordtype">None</span>)</div>
-<div class="line"><span class="lineno">   68</span>        self.mock_publisher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_proxy_status.assert_called_with</a>(<span class="stringliteral">&quot;DISCONNECTED&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>        self.mock_proxy.set_instrument_instance.assert_called_with(inst=<span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   68</span>        self.mock_publisher._publish_proxy_status.assert_called_with(<span class="stringliteral">&quot;DISCONNECTED&quot;</span>)</div>
 <div class="line"><span class="lineno">   69</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d60/visa__manager_8py_source.html#l00034">Managers.visa_manager.VisaManagerOrchestrator.disconnector</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00019">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.disconnector</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00041">Workers.logic_mqtt_listen.VisaMqttListener.disconnector</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00017">Tests.test_logic_connect_instrument.TestVisaConnector.mock_proxy</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00017">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_proxy</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d60/visa__manager_8py_source.html#l00034">Managers.visa_manager.VisaManagerOrchestrator.disconnector</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00019">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.disconnector</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00041">Workers.logic_mqtt_listen.VisaMqttListener.disconnector</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00017">Tests.test_logic_connect_instrument.TestVisaConnector.mock_proxy</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00017">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_proxy</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>.</p>
 
 </div>
 </div>
@@ -259,13 +256,13 @@ CHECK: Assert it closes the instrument, resets the proxy, and publishes status u
 <div class="line"><span class="lineno">   50</span>        result = self.disconnector.disconnect_instrument_logic(mock_inst)</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>        self.assertTrue(result)</div>
-<div class="line"><span class="lineno">   53</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_inst.close.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">   54</span>        self.mock_proxy.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">set_instrument_instance.assert_called_with</a>(inst=<span class="keywordtype">None</span>)</div>
-<div class="line"><span class="lineno">   55</span>        self.mock_publisher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_status.assert_any_call</a>(<span class="stringliteral">&quot;brand&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
-<div class="line"><span class="lineno">   56</span>        self.mock_publisher.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_publish_proxy_status.assert_called_with</a>(<span class="stringliteral">&quot;DISCONNECTED&quot;</span>)</div>
+<div class="line"><span class="lineno">   53</span>        mock_inst.close.assert_called_once()</div>
+<div class="line"><span class="lineno">   54</span>        self.mock_proxy.set_instrument_instance.assert_called_with(inst=<span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   55</span>        self.mock_publisher._publish_status.assert_any_call(<span class="stringliteral">&quot;brand&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
+<div class="line"><span class="lineno">   56</span>        self.mock_publisher._publish_proxy_status.assert_called_with(<span class="stringliteral">&quot;DISCONNECTED&quot;</span>)</div>
 <div class="line"><span class="lineno">   57</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d60/visa__manager_8py_source.html#l00034">Managers.visa_manager.VisaManagerOrchestrator.disconnector</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00019">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.disconnector</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00041">Workers.logic_mqtt_listen.VisaMqttListener.disconnector</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00017">Tests.test_logic_connect_instrument.TestVisaConnector.mock_proxy</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00017">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_proxy</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d60/visa__manager_8py_source.html#l00034">Managers.visa_manager.VisaManagerOrchestrator.disconnector</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00019">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.disconnector</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00041">Workers.logic_mqtt_listen.VisaMqttListener.disconnector</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00017">Tests.test_logic_connect_instrument.TestVisaConnector.mock_proxy</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00017">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_proxy</a>, <a class="el" href="../../d9/de8/test__logic__connect__instrument_8py_source.html#l00018">Tests.test_logic_connect_instrument.TestVisaConnector.mock_publisher</a>, <a class="el" href="../../d3/d9a/test__logic__disconnect__instrument_8py_source.html#l00018">Tests.test_logic_disconnect_instrument.TestVisaDisconnector.mock_publisher</a>, and <a class="el" href="../../d3/d14/test__logic__mqtt__listen_8py_source.html#l00026">Tests.test_logic_mqtt_listen.TestVisaMqttListener.mock_publisher</a>.</p>
 
 </div>
 </div>
@@ -317,11 +314,9 @@ CHECK: Assert it closes the instrument, resets the proxy, and publishes status u
 <div class="line"><span class="lineno">   24</span>        result = disconnect_instrument(mock_inst)</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>        self.assertTrue(result)</div>
-<div class="line"><span class="lineno">   27</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_inst.close.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">   27</span>        mock_inst.close.assert_called_once()</div>
 <div class="line"><span class="lineno">   28</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

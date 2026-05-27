@@ -40,8 +40,16 @@ class TopicCalculator:
         else:
             # Also filter tab_name
             tab_parts = str(tab_name).split("/")
-            # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Strip GUI/oaGui
-            tab_parts = [p for p in tab_parts if p.lower() not in ["oagui", "gui"]]
+            # ⚡ ALIGNMENT WITH WEB: tab_name from generate_topic_path_from_filepath
+            # is the full file-walker hierarchy (Gui_Frames/Window/Spectrum/...).
+            # The web frontend publishes under a flat OpenAir/Gui/<json_root>/...
+            # shape, so collapse the file walk to just "Gui" here. Telemetry
+            # snitches use a separate code path (get_topic) and keep the full
+            # hierarchy for per-widget differentiation.
+            if tab_parts and tab_parts[0].lower() == "gui_frames":
+                tab_parts = ["Gui"]
+            else:
+                tab_parts = [p for p in tab_parts if p.lower() not in ["oagui", "gui"]]
 
             clean_tab_parts = [p for p in tab_parts if p.lower() not in ["display", "assets", "oaguielements"]]
             clean_tab = "/".join(clean_tab_parts)

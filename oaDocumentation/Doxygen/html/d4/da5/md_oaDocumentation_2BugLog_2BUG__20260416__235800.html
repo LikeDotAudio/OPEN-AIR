@@ -93,33 +93,33 @@ $(document).ready(function(){initNavTree('d4/da5/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260416_235800</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1482"></a> </p>
-<h1><a class="anchor" id="autotoc_md1483"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1747"></a> </p>
+<h1><a class="anchor" id="autotoc_md1748"></a>
 Description</h1>
 <p>&lsquo;AttributeError: 'Frame&rsquo; object has no attribute 'variable'<code>occurred during the creation of</code>OcaCompositeFaderKnob<code>widgets. This was caused by the composite widget creator failing to unpack the</code>(frame, canvas)<code>tuple returned by sub-widget factories (</code>make_fader_horizontal<code>and</code>make_knob`).</p>
-<h1><a class="anchor" id="autotoc_md1484"></a>
+<h1><a class="anchor" id="autotoc_md1749"></a>
 Error Clusters</h1>
 <ul>
 <li><b>Cluster A: Composite Widget Assembly Failure</b>: Multiple instances of <code>AttributeError</code> when accessing <code>.variable</code> on a tuple instead of a widget instance.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1485"></a>
+<h1><a class="anchor" id="autotoc_md1750"></a>
 Trigger Event</h1>
 <p>GUI rebuild or interactive layout refresh containing <code>OcaCompositeFaderKnob</code> elements.</p>
-<h1><a class="anchor" id="autotoc_md1486"></a>
+<h1><a class="anchor" id="autotoc_md1751"></a>
 Domain Mapping</h1>
 <ul>
 <li><code>oaGuiElements/Core/utils/composite_horizontal_dial_value/composite_horizontal_dial_value.py</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1487"></a>
+<h1><a class="anchor" id="autotoc_md1752"></a>
 Action Taken</h1>
 <ul>
-<li>Modified <code>_assemble_ui</code> in <code>composite_horizontal_dial_value.py</code> to correctly unpack the returned tuples:<ul>
+<li>Modified <code>_assemble_ui</code> in <code><a class="el" href="../../d0/da6/composite__horizontal__dial__value_8py.html">composite_horizontal_dial_value.py</a></code> to correctly unpack the returned tuples:<ul>
 <li><code>fader_widget, _ = self.make_fader_horizontal(...)</code></li>
 <li><code>dial_widget, _ = self.make_knob(...)</code></li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1488"></a>
+<h1><a class="anchor" id="autotoc_md1753"></a>
 Verification Results</h1>
 <p>Source code corrected to handle standard factory return types. This ensures the <code>.variable</code> attribute (present on the frame/hull) is correctly accessed for trace bindings. </p>
 </div></div><!-- contents -->

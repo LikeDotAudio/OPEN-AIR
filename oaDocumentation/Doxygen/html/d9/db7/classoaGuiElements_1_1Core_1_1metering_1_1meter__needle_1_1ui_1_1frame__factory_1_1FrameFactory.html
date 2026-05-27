@@ -138,25 +138,25 @@ Static Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    <span class="keyword">def </span>calculate_dimensions(config):</div>
 <div class="line"><span class="lineno">   30</span>        <span class="comment"># Dynamic Geometry Calculation</span></div>
 <div class="line"><span class="lineno">   31</span>        padding = LAYOUT_PADDING_DEFAULT</div>
-<div class="line"><span class="lineno">   32</span>        main_arc_radius = (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.size</a> - padding) / 2</div>
+<div class="line"><span class="lineno">   32</span>        main_arc_radius = (config.size - padding) / 2</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment"># Calculate the extremes of the arc to determine bounding box</span></div>
-<div class="line"><span class="lineno">   35</span>        half_angle = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.meter_viewable_angle</a> / 2.0</div>
-<div class="line"><span class="lineno">   36</span>        a1 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.radians</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.meter_center_angle</a> + half_angle)</div>
-<div class="line"><span class="lineno">   37</span>        a2 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.radians</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.meter_center_angle</a> - half_angle)</div>
+<div class="line"><span class="lineno">   35</span>        half_angle = config.meter_viewable_angle / 2.0</div>
+<div class="line"><span class="lineno">   36</span>        a1 = math.radians(config.meter_center_angle + half_angle)</div>
+<div class="line"><span class="lineno">   37</span>        a2 = math.radians(config.meter_center_angle - half_angle)</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>        <span class="comment"># Points to check: pivot(0,0), arc start, arc end, and any cardinal directions in between</span></div>
 <div class="line"><span class="lineno">   40</span>        pts = [(0, 0),</div>
-<div class="line"><span class="lineno">   41</span>               (main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.cos</a>(a1), -main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.sin</a>(a1)),</div>
-<div class="line"><span class="lineno">   42</span>               (main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.cos</a>(a2), -main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.sin</a>(a2))]</div>
+<div class="line"><span class="lineno">   41</span>               (main_arc_radius * math.cos(a1), -main_arc_radius * math.sin(a1)),</div>
+<div class="line"><span class="lineno">   42</span>               (main_arc_radius * math.cos(a2), -main_arc_radius * math.sin(a2))]</div>
 <div class="line"><span class="lineno">   43</span> </div>
 <div class="line"><span class="lineno">   44</span>        <span class="comment"># Check for cardinal directions within the arc sweep</span></div>
 <div class="line"><span class="lineno">   45</span>        <span class="keywordflow">for</span> angle_deg <span class="keywordflow">in</span> [0, 90, 180, 270]:</div>
 <div class="line"><span class="lineno">   46</span>            <span class="comment"># Normalize angle to be relative to center</span></div>
-<div class="line"><span class="lineno">   47</span>            diff = (angle_deg - <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.meter_center_angle</a> + 180) % 360 - 180</div>
+<div class="line"><span class="lineno">   47</span>            diff = (angle_deg - config.meter_center_angle + 180) % 360 - 180</div>
 <div class="line"><span class="lineno">   48</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a676b0dba508a56547eb8d9eedca0705a">abs</a>(diff) &lt;= half_angle:</div>
-<div class="line"><span class="lineno">   49</span>                ar = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.radians</a>(angle_deg)</div>
-<div class="line"><span class="lineno">   50</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pts.append</a>((main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.cos</a>(ar), -main_arc_radius * <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">math.sin</a>(ar)))</div>
+<div class="line"><span class="lineno">   49</span>                ar = math.radians(angle_deg)</div>
+<div class="line"><span class="lineno">   50</span>                pts.append((main_arc_radius * math.cos(ar), -main_arc_radius * math.sin(ar)))</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>        min_x = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(p[0] <span class="keywordflow">for</span> p <span class="keywordflow">in</span> pts)</div>
 <div class="line"><span class="lineno">   53</span>        max_x = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(p[0] <span class="keywordflow">for</span> p <span class="keywordflow">in</span> pts)</div>
@@ -164,15 +164,15 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   55</span>        max_y = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(p[1] <span class="keywordflow">for</span> p <span class="keywordflow">in</span> pts)</div>
 <div class="line"><span class="lineno">   56</span> </div>
 <div class="line"><span class="lineno">   57</span>        <span class="comment"># Add padding for labels</span></div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.scale_numbers</a>:</div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> config.scale_numbers:</div>
 <div class="line"><span class="lineno">   59</span>            min_x -= LAYOUT_LABEL_PADDING_X; max_x += LAYOUT_LABEL_PADDING_X</div>
 <div class="line"><span class="lineno">   60</span>            min_y -= 5; max_y += 15 <span class="comment"># Kept some internal ones as they seem specific to text bounding box logic</span></div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>        bb_width = max_x - min_x</div>
 <div class="line"><span class="lineno">   63</span>        bb_height = max_y - min_y</div>
 <div class="line"><span class="lineno">   64</span> </div>
-<div class="line"><span class="lineno">   65</span>        requested_w = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.width</a></div>
-<div class="line"><span class="lineno">   66</span>        requested_h = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.height</a></div>
+<div class="line"><span class="lineno">   65</span>        requested_w = config.width</div>
+<div class="line"><span class="lineno">   66</span>        requested_h = config.height</div>
 <div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>        total_width = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(bb_width + LAYOUT_CANVAS_MARGIN_W), requested_w)</div>
 <div class="line"><span class="lineno">   69</span>        total_height = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(bb_height + LAYOUT_CANVAS_MARGIN_H), requested_h)</div>
@@ -191,8 +191,8 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   82</span>            offset_y += (requested_h - (bb_height + LAYOUT_CANVAS_MARGIN_H)) / 2</div>
 <div class="line"><span class="lineno">   83</span> </div>
 <div class="line"><span class="lineno">   84</span>        <span class="comment"># Apply Pivot Crop (Layout)</span></div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.pivot_crop</a> &gt; 0:</div>
-<div class="line"><span class="lineno">   86</span>            crop_pixels = main_arc_radius * (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.pivot_crop</a> / 100.0)</div>
+<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> config.pivot_crop &gt; 0:</div>
+<div class="line"><span class="lineno">   86</span>            crop_pixels = main_arc_radius * (config.pivot_crop / 100.0)</div>
 <div class="line"><span class="lineno">   87</span>            total_height = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(LAYOUT_PIVOT_CROP_MIN_H, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(total_height - crop_pixels))</div>
 <div class="line"><span class="lineno">   88</span> </div>
 <div class="line"><span class="lineno">   89</span>        <span class="keywordflow">return</span> total_width, total_height, offset_x, offset_y</div>
@@ -200,10 +200,9 @@ Static Public Member Functions</h2></td></tr>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a4735a0c4d1b11f62ea44115d54a93087"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a></div><div class="ttdeci">repeat min</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">generated.rs:2081</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a676b0dba508a56547eb8d9eedca0705a"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a676b0dba508a56547eb8d9eedca0705a">abs</a></div><div class="ttdeci">abs</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">generated.rs:2271</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa83862769f78fffb512bc9283007ef67"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a></div><div class="ttdeci">repeat max</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">generated.rs:1711</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">abs</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">abs</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>.</p>
 
 </div>
 </div>
@@ -255,18 +254,16 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../df/d3c/frame__factory_8py_source.html#l00092">92</a> of file <a class="el" href="../../df/d3c/frame__factory_8py_source.html">frame_factory.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   92</span>    <span class="keyword">def </span>create_canvas(frame, total_width, total_height, bg_color):</div>
-<div class="line"><span class="lineno">   93</span>        canvas = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Canvas</a>(</div>
+<div class="line"><span class="lineno">   93</span>        canvas = tk.Canvas(</div>
 <div class="line"><span class="lineno">   94</span>            frame,</div>
 <div class="line"><span class="lineno">   95</span>            width=total_width,</div>
 <div class="line"><span class="lineno">   96</span>            height=total_height,</div>
 <div class="line"><span class="lineno">   97</span>            bg=bg_color,</div>
 <div class="line"><span class="lineno">   98</span>            highlightthickness=0,</div>
 <div class="line"><span class="lineno">   99</span>        )</div>
-<div class="line"><span class="lineno">  100</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.pack</a>(side=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.TOP</a>, fill=<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.NONE</a>, expand=<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">  100</span>        canvas.pack(side=tk.TOP, fill=tk.NONE, expand=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">  101</span>        <span class="keywordflow">return</span> canvas</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a0b9c5c1388496d114e9dfad82b3d6655" name="a0b9c5c1388496d114e9dfad82b3d6655"></a>
@@ -306,12 +303,10 @@ Static Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../df/d3c/frame__factory_8py_source.html#l00023">23</a> of file <a class="el" href="../../df/d3c/frame__factory_8py_source.html">frame_factory.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>create_frame(parent, config):</div>
 <div class="line"><span class="lineno">   24</span>        <span class="comment"># ⚡ HIGH-FIDELITY: Use tk.Canvas for the root frame to support background slicing</span></div>
-<div class="line"><span class="lineno">   25</span>        frame = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.Canvas</a>(parent, bd=0, highlightthickness=0, relief=<span class="stringliteral">&quot;flat&quot;</span>)</div>
+<div class="line"><span class="lineno">   25</span>        frame = tk.Canvas(parent, bd=0, highlightthickness=0, relief=<span class="stringliteral">&quot;flat&quot;</span>)</div>
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> frame</div>
 <div class="line"><span class="lineno">   27</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

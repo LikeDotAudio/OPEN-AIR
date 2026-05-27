@@ -149,30 +149,27 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html#l00024">24</a> of file <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html">test_is07_transport.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   24</span>    <span class="keyword">def </span>test_mqtt_transport_connect(self, mock_client):</div>
 <div class="line"><span class="lineno">   25</span>        <span class="comment"># Mocking Client</span></div>
-<div class="line"><span class="lineno">   26</span>        mock_instance = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.return_value</a></div>
+<div class="line"><span class="lineno">   26</span>        mock_instance = mock_client.return_value</div>
 <div class="line"><span class="lineno">   27</span>        transport = Is07MqttTransport()</div>
 <div class="line"><span class="lineno">   28</span> </div>
 <div class="line"><span class="lineno">   29</span>        <span class="comment"># Simulate connection success</span></div>
-<div class="line"><span class="lineno">   30</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_connect</a>(*args, **kwargs):</div>
-<div class="line"><span class="lineno">   31</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport._is_connected</a> = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   30</span>        <span class="keyword">def </span>mock_connect(*args, **kwargs):</div>
+<div class="line"><span class="lineno">   31</span>            transport._is_connected = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   32</span>            <span class="keywordflow">return</span> 0</div>
 <div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_instance.connect.side_effect</a> = mock_connect</div>
+<div class="line"><span class="lineno">   34</span>        mock_instance.connect.side_effect = mock_connect</div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>        params = {</div>
 <div class="line"><span class="lineno">   37</span>            <span class="stringliteral">&quot;destination_host&quot;</span>: <span class="stringliteral">&quot;localhost&quot;</span>,</div>
 <div class="line"><span class="lineno">   38</span>            <span class="stringliteral">&quot;destination_port&quot;</span>: 1883</div>
 <div class="line"><span class="lineno">   39</span>        }</div>
 <div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>        success = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.connect</a>(params)</div>
+<div class="line"><span class="lineno">   41</span>        success = transport.connect(params)</div>
 <div class="line"><span class="lineno">   42</span>        self.assertTrue(success)</div>
-<div class="line"><span class="lineno">   43</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.is_connected</a>())</div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_instance.loop_start.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">   43</span>        self.assertTrue(transport.is_connected())</div>
+<div class="line"><span class="lineno">   44</span>        mock_instance.loop_start.assert_called_once()</div>
 <div class="line"><span class="lineno">   45</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a6aebe44c6bf28296508c3f2d1ed08fa3" name="a6aebe44c6bf28296508c3f2d1ed08fa3"></a>
@@ -194,11 +191,9 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html#l00019">19</a> of file <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html">test_is07_transport.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span>test_mqtt_transport_init(self):</div>
 <div class="line"><span class="lineno">   20</span>        transport = Is07MqttTransport()</div>
-<div class="line"><span class="lineno">   21</span>        self.assertFalse(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.is_connected</a>())</div>
+<div class="line"><span class="lineno">   21</span>        self.assertFalse(transport.is_connected())</div>
 <div class="line"><span class="lineno">   22</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="afc3c8c8bafc9aa8fe2a3469d87ba4e08" name="afc3c8c8bafc9aa8fe2a3469d87ba4e08"></a>
@@ -229,23 +224,21 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html#l00047">47</a> of file <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html">test_is07_transport.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   47</span>    <span class="keyword">def </span>test_mqtt_transport_publish(self, mock_client):</div>
-<div class="line"><span class="lineno">   48</span>        mock_instance = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_client.return_value</a></div>
+<div class="line"><span class="lineno">   48</span>        mock_instance = mock_client.return_value</div>
 <div class="line"><span class="lineno">   49</span>        transport = Is07MqttTransport()</div>
-<div class="line"><span class="lineno">   50</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport._is_connected</a> = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   51</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.client</a> = mock_instance</div>
+<div class="line"><span class="lineno">   50</span>        transport._is_connected = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">   51</span>        transport.client = mock_instance</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>        <span class="comment"># Mock publish result</span></div>
 <div class="line"><span class="lineno">   54</span>        mock_info = MagicMock()</div>
-<div class="line"><span class="lineno">   55</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_info.rc</a> = 0 <span class="comment"># mqtt.MQTT_ERR_SUCCESS</span></div>
-<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_instance.publish.return_value</a> = mock_info</div>
+<div class="line"><span class="lineno">   55</span>        mock_info.rc = 0 <span class="comment"># mqtt.MQTT_ERR_SUCCESS</span></div>
+<div class="line"><span class="lineno">   56</span>        mock_instance.publish.return_value = mock_info</div>
 <div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>        success = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.publish</a>(<span class="stringliteral">&quot;test/topic&quot;</span>, {<span class="stringliteral">&quot;val&quot;</span>: <span class="keyword">True</span>})</div>
+<div class="line"><span class="lineno">   58</span>        success = transport.publish(<span class="stringliteral">&quot;test/topic&quot;</span>, {<span class="stringliteral">&quot;val&quot;</span>: <span class="keyword">True</span>})</div>
 <div class="line"><span class="lineno">   59</span>        self.assertTrue(success)</div>
-<div class="line"><span class="lineno">   60</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_instance.publish.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">   60</span>        mock_instance.publish.assert_called_once()</div>
 <div class="line"><span class="lineno">   61</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a6cd8fa06f6a792d06e4376d0aac4010e" name="a6cd8fa06f6a792d06e4376d0aac4010e"></a>
@@ -267,11 +260,9 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html#l00015">15</a> of file <a class="el" href="../../d8/d8e/test__is07__transport_8py_source.html">test_is07_transport.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    <span class="keyword">def </span>test_ws_transport_init(self):</div>
 <div class="line"><span class="lineno">   16</span>        transport = Is07WebSocketTransport()</div>
-<div class="line"><span class="lineno">   17</span>        self.assertFalse(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">transport.is_connected</a>())</div>
+<div class="line"><span class="lineno">   17</span>        self.assertFalse(transport.is_connected())</div>
 <div class="line"><span class="lineno">   18</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

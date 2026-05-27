@@ -104,7 +104,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a114c1af4b0624b0db72c8e96908b0323" id="r_a114c1af4b0624b0db72c8e96908b0323"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d47/namespaceMethods_1_1config__retrieval.html#a114c1af4b0624b0db72c8e96908b0323">_config_instance_cache</a> = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></td></tr>
+<tr class="memitem:a114c1af4b0624b0db72c8e96908b0323" id="r_a114c1af4b0624b0db72c8e96908b0323"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d47/namespaceMethods_1_1config__retrieval.html#a114c1af4b0624b0db72c8e96908b0323">_config_instance_cache</a> = None</td></tr>
 <tr class="separator:a114c1af4b0624b0db72c8e96908b0323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -162,26 +162,23 @@ Outputs:
 <div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> _config_instance_cache</div>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   29</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaConfigurationManager.FileReaders.config_reader</a> <span class="keyword">import</span> Config</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(Config, <span class="stringliteral">&quot;_instance&quot;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config._instance</a>:</div>
-<div class="line"><span class="lineno">   31</span>            _config_instance_cache = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config._instance</a></div>
+<div class="line"><span class="lineno">   29</span>        <span class="keyword">from</span> oaConfigurationManager.FileReaders.config_reader <span class="keyword">import</span> Config</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">if</span> hasattr(Config, <span class="stringliteral">&quot;_instance&quot;</span>) <span class="keywordflow">and</span> Config._instance:</div>
+<div class="line"><span class="lineno">   31</span>            _config_instance_cache = Config._instance</div>
 <div class="line"><span class="lineno">   32</span>            <span class="keywordflow">return</span> _config_instance_cache</div>
 <div class="line"><span class="lineno">   33</span>    <span class="keywordflow">except</span> ImportError:</div>
 <div class="line"><span class="lineno">   34</span>        <span class="keywordflow">pass</span></div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="comment"># Fallback to allow logging before the configuration system is fully online.</span></div>
-<div class="line"><span class="lineno">   37</span>    <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyConfig</a>:</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keyword">class </span>DummyConfig:</div>
 <div class="line"><span class="lineno">   38</span>        ENABLE_DEBUG_MODE = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   39</span>        ENABLE_DEBUG_SCREEN = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   40</span>        global_settings = {<span class="stringliteral">&quot;debug_enabled&quot;</span>: <span class="keyword">True</span>}</div>
 <div class="line"><span class="lineno">   41</span>        <span class="comment"># Added DEBUG_MATRIX for matrix-aware logs</span></div>
 <div class="line"><span class="lineno">   42</span>        DEBUG_MATRIX = {}</div>
 <div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DummyConfig</a>()</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">return</span> DummyConfig()</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -195,7 +192,7 @@ Outputs:
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Methods.config_retrieval._config_instance_cache = <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></td>
+          <td class="memname">Methods.config_retrieval._config_instance_cache = None</td>
         </tr>
       </table>
   </td>

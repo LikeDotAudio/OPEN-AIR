@@ -93,30 +93,30 @@ $(document).ready(function(){initNavTree('df/d55/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: GUI Layout Regression for Directory-Based Notebooks</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1706"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2155"></a></p><ul>
 <li><b>ID</b>: 20260314_170217</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 2 (High)</li>
 <li><b>COMPONENT</b>: <code>oaGui.parser.layout_parser</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1707"></a>
+<h1><a class="anchor" id="autotoc_md2156"></a>
 Issue</h1>
 <p>The GUI was failing to create <code>ttk.Notebook</code> widgets based on numbered subdirectory naming conventions (e.g., <code>0_MQTT</code>, <code>1_Setup</code>). For example, the "Setup" tab, which should contain several sub-tabs, was rendering incorrectly because the layout parser was no longer identifying the structure as a notebook. This was a regression introduced during a recent refactoring.</p>
-<h1><a class="anchor" id="autotoc_md1708"></a>
+<h1><a class="anchor" id="autotoc_md2157"></a>
 Root Cause Analysis</h1>
-<p>The <code>_parse_directory_listing</code> method in <code><a class="el" href="../../d5/d28/layout__parser_8py.html">layout_parser.py</a></code> is the designated fallback for creating layouts when a <code>layout.json</code> file is not present. During a previous refactoring, the logic to detect numbered subdirectories and interpret them as a <code>notebook</code> layout was inadvertently removed.</p>
-<p>The function would correctly identify <code>horizontal_split</code> and <code>vertical_split</code> layouts from names like <code>left_50</code>, but it would then fall through to a simple directory listing for any other case. It was no longer checking for subdirectories starting with digits (e.g., <code>0_</code>, <code>1_</code>) which is the convention for defining a notebook layout. Consequently, the parser returned a generic <code>directory_listing</code> type, and the <code>gui_display</code> builder did not create the expected <code>ttk.Notebook</code>.</p>
-<h1><a class="anchor" id="autotoc_md1709"></a>
+<p>The <code>_parse_directory_listing</code> method in <code>layout_parser.py</code> is the designated fallback for creating layouts when a <code>layout.json</code> file is not present. During a previous refactoring, the logic to detect numbered subdirectories and interpret them as a <code>notebook</code> layout was inadvertently removed.</p>
+<p>The function would correctly identify <code>horizontal_split</code> and <code>vertical_split</code> layouts from names like <code>left_50</code>, but it would then fall through to a simple directory listing for any other case. It was no longer checking for subdirectories starting with digits (e.g., <code>0_</code>, <code>1_</code>) which is the convention for defining a notebook layout. Consequently, the parser returned a generic <code>directory_listing</code> type, and the <code>engine_gui_display</code> builder did not create the expected <code>ttk.Notebook</code>.</p>
+<h1><a class="anchor" id="autotoc_md2158"></a>
 Resolution</h1>
 <p>The notebook-parsing logic was restored to the <code>_parse_directory_listing</code> method in <code>managers/Display/parser/layout_parser.py</code>.</p>
 <ol type="1">
 <li>After checking for split-pane layouts (<code>left_</code>, <code>top_</code>, etc.), the function now explicitly checks for subdirectories whose names begin with a digit.</li>
 <li>If found, it correctly identifies the layout type as <code>notebook</code>.</li>
-<li>It then iterates through these numbered directories, sorts them, and generates the <code>tabs</code> data structure required by the <code>gui_display</code> builder. This includes creating a user-friendly <code>display_name</code> from the directory name (e.g., <code>0_Fleet_Manager</code> becomes "Fleet Manager").</li>
+<li>It then iterates through these numbered directories, sorts them, and generates the <code>tabs</code> data structure required by the <code>engine_gui_display</code> builder. This includes creating a user-friendly <code>display_name</code> from the directory name (e.g., <code>0_Fleet_Manager</code> becomes "Fleet Manager").</li>
 <li>The logic to filter out empty directories using <code>_scan_for_gui_files</code> is also preserved to prevent the creation of empty, non-functional tabs.</li>
 </ol>
 <p>This change restores the critical functionality of defining notebook layouts via directory naming conventions, fixing the regression.</p>
-<h1><a class="anchor" id="autotoc_md1710"></a>
+<h1><a class="anchor" id="autotoc_md2159"></a>
 Verification</h1>
 <p>After the fix, the "Setup" tab and any other sections using numbered subdirectories now correctly render as <code>ttk.Notebook</code> widgets with the appropriate sub-tabs. The application UI is fully restored to its intended structure. </p>
 </div></div><!-- contents -->

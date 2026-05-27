@@ -40,12 +40,24 @@ class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
         self.path, self.state_mirror_engine, self.base_mqtt_topic = path, state_mirror_engine, base_mqtt_topic
         self.widget_config, self.orientation = config, "vertical"
 
-        # 2. Parameters
-        self.min_val = float(f_cfg.get("value_min", DEFAULT_MIN_VAL))
-        self.max_val = float(f_cfg.get("value_max", DEFAULT_MAX_VAL))
+        # 2. Parameters — pillar reads, matching frontEnd/libControl/faders/LTPFader/LTPFader.jsx.
+        #   domain.{min,max}, value.default_value, readout.{show_value,show_units},
+        #   cosmetics.colors.highlight all live INSIDE fader_config (not at top level).
+        #   Note: the JsonSchemaNormalizer's LEXICON renames "value" -> "value_default"
+        #   recursively, so the value pillar may show up under either key.
+        fc_domain = f_cfg.get("domain") if isinstance(f_cfg.get("domain"), dict) else {}
+        fc_readout = f_cfg.get("readout") if isinstance(f_cfg.get("readout"), dict) else {}
+        fc_cosmetics = f_cfg.get("cosmetics") if isinstance(f_cfg.get("cosmetics"), dict) else {}
+        fc_colors = fc_cosmetics.get("colors") if isinstance(fc_cosmetics.get("colors"), dict) else {}
+
+        self.min_val = float(fc_domain.get("min", f_cfg.get("value_min", config.get("min", DEFAULT_MIN_VAL))))
+        self.max_val = float(fc_domain.get("max", f_cfg.get("value_max", config.get("max", DEFAULT_MAX_VAL))))
         self.log_exponent = float(f_cfg.get("log_exponent", DEFAULT_LOG_EXPONENT))
-        self.value_highlight_color = f_cfg.get("value_highlight_color", colors.get("accent"))
-        self.show_value, self.show_units, self.unit_text = bool(f_cfg.get("show_value", True)), bool(f_cfg.get("show_units", False)), f_cfg.get("unit_text", "")
+        rail_highlight = fc_colors.get("highlight")
+        self.value_highlight_color = f_cfg.get("value_highlight_color", rail_highlight or colors.get("accent"))
+        self.show_value = bool(fc_readout.get("show_value", f_cfg.get("show_value", True)))
+        self.show_units = bool(fc_readout.get("show_units", f_cfg.get("show_units", False)))
+        self.unit_text = f_cfg.get("unit_text", "")
 
         self.rotation_min = float(k_cfg.get("rotation_min", ROTATION_MIN))
         self.rotation_max = float(k_cfg.get("rotation_max", ROTATION_MAX))
@@ -67,8 +79,19 @@ class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
         self.tick_color = s_cfg.get("tick_color", "light grey")
         self.accent_color, self.value_color = colors.get("accent"), colors.get("accent")
 
-        # 3. State
-        self.linear_var = kwargs.get("linear_variable") or tk.DoubleVar(master=master, value=float(f_cfg.get("value_default", 0.0)))
+        # 3. State — linear default mirrors LTPFader.jsx:
+        #   defaultVal = fc.value.default_value ?? (min + max) / 2
+        # The value pillar may be a dict (`{default_value: -10.0}`) or a scalar
+        # shorthand (`-10.0`). Accept both, and resolve under either key name
+        # since LEXICON renames "value" -> "value_default".
+        val_pillar = f_cfg.get("value", f_cfg.get("value_default"))
+        if isinstance(val_pillar, dict):
+            linear_default = float(val_pillar.get("default_value", val_pillar.get("default", (self.min_val + self.max_val) / 2)))
+        elif isinstance(val_pillar, (int, float)):
+            linear_default = float(val_pillar)
+        else:
+            linear_default = (self.min_val + self.max_val) / 2
+        self.linear_var = kwargs.get("linear_variable") or tk.DoubleVar(master=master, value=linear_default)
         self.rotation_var = kwargs.get("rotation_variable") or tk.DoubleVar(master=master, value=float(k_cfg.get("rotation_default", 0.0)))
         self.is_sliding, self.is_hovered = False, False
         self._setup_drag_state()

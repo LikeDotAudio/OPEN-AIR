@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d5/d1d/classMethods_1_1yakety__yak_1_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad8b8d79c8da88249b83370ef2620269a" id="r_ad8b8d79c8da88249b83370ef2620269a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d1d/classMethods_1_1yakety__yak_1_1DeprecatedYaketyYakManager.html#ad8b8d79c8da88249b83370ef2620269a">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, *args, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:ad8b8d79c8da88249b83370ef2620269a" id="r_ad8b8d79c8da88249b83370ef2620269a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d1d/classMethods_1_1yakety__yak_1_1DeprecatedYaketyYakManager.html#ad8b8d79c8da88249b83370ef2620269a">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, *args, **kwargs)</td></tr>
 <tr class="separator:ad8b8d79c8da88249b83370ef2620269a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -141,16 +141,13 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../de/d5a/yakety__yak_8py_source.html#l00027">27</a> of file <a class="el" href="../../de/d5a/yakety__yak_8py_source.html">yakety_yak.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   27</span>    <span class="keyword">def </span>__init__(self, *args, **kwargs):</div>
-<div class="line"><span class="lineno">   28</span>        current_function_name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a></div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(<span class="stringliteral">&quot;❌❌❌ WARNING: DeprecatedYaketyYakManager is being instantiated. Use YakTranslator instead!&quot;</span>)</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DeprecationWarning</a>(</div>
+<div class="line"><span class="lineno">   28</span>        current_function_name = inspect.currentframe().f_code.co_name</div>
+<div class="line"><span class="lineno">   29</span>        logger.error(<span class="stringliteral">&quot;❌❌❌ WARNING: DeprecatedYaketyYakManager is being instantiated. Use YakTranslator instead!&quot;</span>)</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">raise</span> DeprecationWarning(</div>
 <div class="line"><span class="lineno">   31</span>            <span class="stringliteral">&quot;YaketyYakManager is deprecated. Use YakTranslator for YAK command translation.&quot;</span></div>
 <div class="line"><span class="lineno">   32</span>        )</div>
 <div class="line"><span class="lineno">   33</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

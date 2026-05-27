@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('de/dc4/md_oaDocumentation_2Documentati
   <div class="headertitle"><div class="title">OPEN-AIR System Architecture: The State-Aware Logic Engine</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1590"></a></p>
-<h1><a class="anchor" id="autotoc_md1591"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2039"></a></p>
+<h1><a class="anchor" id="autotoc_md2040"></a>
 Version: 20260407.1930.1</h1>
-<h2><a class="anchor" id="autotoc_md1592"></a>
+<h2><a class="anchor" id="autotoc_md2041"></a>
 1. Executive Summary</h2>
 <p>OPEN-AIR has evolved from a linear "Message Passthrough" system into a distributed <b>State-Aware Logic Engine</b>. By utilizing a central MQTT Storage as a shared "Source of Truth," individual protocol modules operate as independent, asynchronous agents. The system utilizes metadata tagging, asynchronous non-blocking I/O, and the <b>Protocol Matrix</b> as the central decision-making hub to ensure absolute decoupling and hardware stability.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1594"></a>
+<h2><a class="anchor" id="autotoc_md2043"></a>
 2. Functional Phases</h2>
-<h3><a class="anchor" id="autotoc_md1595"></a>
+<h3><a class="anchor" id="autotoc_md2044"></a>
 A. Inbound Phase: Generators &amp; Ingest</h3>
 <ul>
 <li><b>Metadata Tagging (<code>src</code> ID):** Every receiver and generator wraps raw hardware data in a JSON envelope. For example, a MIDI fader move publishes to <code>OPEN-AIR/MIDI/</code> with a unique <code>src</code> identifier, critical for downstream echo cancellation.</b></li>
@@ -110,7 +110,7 @@ A. Inbound Phase: Generators &amp; Ingest</h3>
 <li><b> <b>Protocol Monitor (Inbound):</b> Intercepts traffic between the detector and storage to provide real-time diagnostic telemetry (PPS, bit-rate, and latency) for the GUI.</b></li>
 </ul>
 <p><b></b></p>
-<h3><a class="anchor" id="autotoc_md1596"></a>
+<h3><a class="anchor" id="autotoc_md2045"></a>
 B. Core Phase: The Decision Engine</h3>
 <p><b></p><ul>
 <li><b>Protocol Matrix (The Virtual Patchbay):</b> This is the central logic bridge. It maps topics between protocols (e.g., <code>OSC/Master</code> → <code>AES70/Gain</code>) without direct module coupling. It watches the <b>MQTT Storage</b> and publishes "Intents" back to the system.</li>
@@ -118,7 +118,7 @@ B. Core Phase: The Decision Engine</h3>
 </ul>
 <p></b></p>
 <p><b></b></p>
-<h3><a class="anchor" id="autotoc_md1597"></a>
+<h3><a class="anchor" id="autotoc_md2046"></a>
 C. Outbound Phase: Filtering &amp; Execution</h3>
 <p><b></p><ul>
 <li><b>Self-Filter / Echo Remover:</b> Acts as a gatekeeper for <b>Output Commands</b>. It compares the incoming message's <code>src</code> tag against the local module ID. If they match, the message is dropped to prevent feedback loops.</li>
@@ -129,11 +129,11 @@ C. Outbound Phase: Filtering &amp; Execution</h3>
 <p><b></p><hr  />
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md1599"></a>
+<h2><a class="anchor" id="autotoc_md2048"></a>
 3. The Event Lifecycle: SPLICE, LINK, and SPLINKER</h2>
 <p><b> To handle the physical reality of hardware control (e.g., motorized faders and "Ghost Touches"), the system employs three primary micro-logic gates.</b></p>
 <p><b></b></p>
-<h3><a class="anchor" id="autotoc_md1600"></a>
+<h3><a class="anchor" id="autotoc_md2049"></a>
 A. The SPLICE (Update Partner)</h3>
 <p><b></p><ul>
 <li><b>Role:</b> The entry gate for a new event.</li>
@@ -142,7 +142,7 @@ A. The SPLICE (Update Partner)</h3>
 </ul>
 <p></b></p>
 <p><b></b></p>
-<h3><a class="anchor" id="autotoc_md1601"></a>
+<h3><a class="anchor" id="autotoc_md2050"></a>
 B. The LINK (The Payload Generator)</h3>
 <p><b></p><ul>
 <li><b>Role:</b> The data packager.</li>
@@ -155,7 +155,7 @@ B. The LINK (The Payload Generator)</h3>
 </ul>
 <p></b></p>
 <p><b></b></p>
-<h3><a class="anchor" id="autotoc_md1602"></a>
+<h3><a class="anchor" id="autotoc_md2051"></a>
 C. The SPLINKER (Consumer Update)</h3>
 <p><b></p><ul>
 <li><b>Role:</b> The distribution engine.</li>
@@ -169,7 +169,7 @@ C. The SPLINKER (Consumer Update)</h3>
 <p><b></p><hr  />
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md1604"></a>
+<h2><a class="anchor" id="autotoc_md2053"></a>
 4. Protocol Behavioral Matrix</h2>
 <p><b> The system supports a wide array of protocols, each with specific asynchronous handling requirements.</b></p>
 <p><b></p><table class="markdownTable">
@@ -206,7 +206,7 @@ C. The SPLINKER (Consumer Update)</h3>
 <p><b></p><hr  />
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md1606"></a>
+<h2><a class="anchor" id="autotoc_md2055"></a>
 5. Persistence &amp; State Mirroring</h2>
 <p><b></p><ul>
 <li><b>State Cache Mirroring:</b> The Cache only mirrors "Functional State," ignoring volatile telemetry.</li>
@@ -218,7 +218,7 @@ C. The SPLINKER (Consumer Update)</h3>
 <p><b></p><hr  />
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md1608"></a>
+<h2><a class="anchor" id="autotoc_md2057"></a>
 6. Summary of System Behavior</h2>
 <p><b></p><ul>
 <li><b>Asynchronous:</b> No module waits for hardware. The <b>LINK</b> fires and forgets; the <b>SPLINKER</b> catches and executes.</li>

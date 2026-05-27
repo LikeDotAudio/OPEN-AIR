@@ -99,9 +99,9 @@ $(document).ready(function(){initNavTree('dd/dfc/namespaceMethods_1_1group.html'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:accad5fd6dc05c802ae655c7883f27bbd" id="r_accad5fd6dc05c802ae655c7883f27bbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfc/namespaceMethods_1_1group.html#accad5fd6dc05c802ae655c7883f27bbd">group_markers</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">raw_marker_data</a>)</td></tr>
+<tr class="memitem:accad5fd6dc05c802ae655c7883f27bbd" id="r_accad5fd6dc05c802ae655c7883f27bbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfc/namespaceMethods_1_1group.html#accad5fd6dc05c802ae655c7883f27bbd">group_markers</a> (raw_marker_data)</td></tr>
 <tr class="separator:accad5fd6dc05c802ae655c7883f27bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacbc424f3e16bd142c1f32365be4e5c4" id="r_aacbc424f3e16bd142c1f32365be4e5c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfc/namespaceMethods_1_1group.html#aacbc424f3e16bd142c1f32365be4e5c4">process_and_sort_markers</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">showtime_tab_instance</a>)</td></tr>
+<tr class="memitem:aacbc424f3e16bd142c1f32365be4e5c4" id="r_aacbc424f3e16bd142c1f32365be4e5c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfc/namespaceMethods_1_1group.html#aacbc424f3e16bd142c1f32365be4e5c4">process_and_sort_markers</a> (showtime_tab_instance)</td></tr>
 <tr class="separator:aacbc424f3e16bd142c1f32365be4e5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae150d6083d83204697e6931120505933" id="r_ae150d6083d83204697e6931120505933"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfc/namespaceMethods_1_1group.html#ae150d6083d83204697e6931120505933">sort_markers</a> (grouped_markers)</td></tr>
 <tr class="separator:ae150d6083d83204697e6931120505933"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,18 +142,15 @@ Returns:
 <div class="line"><span class="lineno">   21</span><span class="stringliteral">    Returns:</span></div>
 <div class="line"><span class="lineno">   22</span><span class="stringliteral">        defaultdict: Nested structure {zone: {group: [markers]}}</span></div>
 <div class="line"><span class="lineno">   23</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   24</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;🟢 [DATA] Grouping marker data by Zone and Group.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;🟢 [DATA] Grouping marker data by Zone and Group.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span>    grouped = defaultdict(<span class="keyword">lambda</span>: defaultdict(list))</div>
 <div class="line"><span class="lineno">   26</span>    <span class="keywordflow">for</span> row <span class="keywordflow">in</span> raw_marker_data:</div>
-<div class="line"><span class="lineno">   27</span>        zone = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">row.get</a>(<span class="stringliteral">&quot;ZONE&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
-<div class="line"><span class="lineno">   28</span>        group = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">row.get</a>(<span class="stringliteral">&quot;GROUP&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
-<div class="line"><span class="lineno">   29</span>        grouped[zone][group].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">append</a>(row)</div>
+<div class="line"><span class="lineno">   27</span>        zone = row.get(<span class="stringliteral">&quot;ZONE&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
+<div class="line"><span class="lineno">   28</span>        group = row.get(<span class="stringliteral">&quot;GROUP&quot;</span>, <span class="stringliteral">&quot;N/A&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>        grouped[zone][group].append(row)</div>
 <div class="line"><span class="lineno">   30</span>    <span class="keywordflow">return</span> grouped</div>
 <div class="line"><span class="lineno">   31</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aacbc424f3e16bd142c1f32365be4e5c4" name="aacbc424f3e16bd142c1f32365be4e5c4"></a>
@@ -180,17 +177,17 @@ Refactored for Modular SRP.
 <div class="line"><span class="lineno">   45</span><span class="stringliteral">    ⚡ ORCHESTRATOR: Coordinates the grouping and sorting pipeline.</span></div>
 <div class="line"><span class="lineno">   46</span><span class="stringliteral">    Refactored for Modular SRP.</span></div>
 <div class="line"><span class="lineno">   47</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   48</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;🟢️️️🔵 Starting marker processing pipeline.&quot;</span>, level=<span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;🟢️️️🔵 Starting marker processing pipeline.&quot;</span>, level=<span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span> </div>
 <div class="line"><span class="lineno">   50</span>    <span class="comment"># SRP REFACTOR: Step 1 - Grouping</span></div>
-<div class="line"><span class="lineno">   51</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">showtime_tab_instance.grouped_markers</a> = group_markers(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">showtime_tab_instance.marker_data</a>)</div>
+<div class="line"><span class="lineno">   51</span>    showtime_tab_instance.grouped_markers = group_markers(showtime_tab_instance.marker_data)</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>    <span class="comment"># SRP REFACTOR: Step 2 - Sorting</span></div>
-<div class="line"><span class="lineno">   54</span>    sort_markers(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">showtime_tab_instance.grouped_markers</a>)</div>
+<div class="line"><span class="lineno">   54</span>    sort_markers(showtime_tab_instance.grouped_markers)</div>
 <div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;✅ Markers grouped and sorted successfully.&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">   56</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;✅ Markers grouped and sorted successfully.&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d3f/group_8py_source.html#l00032">Methods.group.sort_markers()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/d3f/group_8py_source.html#l00032">Methods.group.sort_markers()</a>.</p>
 
 </div>
 </div>
@@ -220,14 +217,12 @@ Inputs:
 <div class="line"><span class="lineno">   35</span><span class="stringliteral">    Inputs:</span></div>
 <div class="line"><span class="lineno">   36</span><span class="stringliteral">        grouped_markers (dict): The nested structure to sort.</span></div>
 <div class="line"><span class="lineno">   37</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   38</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, <span class="stringliteral">&quot;🔵 [DATA] Sorting markers by Device Name.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">for</span> zone, groups <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">grouped_markers.items</a>():</div>
-<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">for</span> group, devices <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">groups.items</a>():</div>
-<div class="line"><span class="lineno">   41</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">devices.sort</a>(key=<span class="keyword">lambda</span> x: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">x.get</a>(<span class="stringliteral">&quot;NAME&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><span class="lineno">   38</span>    matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;SHOWTIME&quot;</span>, inspect.currentframe().f_code.co_name, <span class="stringliteral">&quot;🔵 [DATA] Sorting markers by Device Name.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">for</span> zone, groups <span class="keywordflow">in</span> grouped_markers.items():</div>
+<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">for</span> group, devices <span class="keywordflow">in</span> groups.items():</div>
+<div class="line"><span class="lineno">   41</span>            devices.sort(key=<span class="keyword">lambda</span> x: x.get(<span class="stringliteral">&quot;NAME&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line"><span class="lineno">   42</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../d6/d3f/group_8py_source.html#l00043">Methods.group.process_and_sort_markers()</a>.</p>
 
 </div>

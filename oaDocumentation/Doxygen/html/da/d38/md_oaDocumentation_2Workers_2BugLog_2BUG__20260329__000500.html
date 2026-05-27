@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('da/d38/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_000500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1950"></a> </p>
-<h1><a class="anchor" id="autotoc_md1951"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2399"></a> </p>
+<h1><a class="anchor" id="autotoc_md2400"></a>
 Issue</h1>
 <p>A <code>SyntaxError</code> was reported in <code>oaComProtocols.oaComOSC/Managers/osc_manager.py</code> during test collection. </p><div class="fragment"><div class="line">  File &quot;/home/anthony/Documents/OPEN-AIR/oaComProtocols.oaComOSC/Managers/osc_manager.py&quot;, line 394</div>
 <div class="line">    late topic to OSC address</div>
 <div class="line">         ^^^^^</div>
 <div class="line">SyntaxError: invalid syntax</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1952"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2401"></a>
 Root Cause</h1>
 <p>The file <code>oaComProtocols.oaComOSC/Managers/osc_manager.py</code> had redundant and broken code appended to the end. The <code>register_route</code> function was duplicated, and a malformed block of code starting with <code>late topic to OSC address</code> (possibly a truncated comment) was present between the two definitions.</p>
-<h1><a class="anchor" id="autotoc_md1953"></a>
+<h1><a class="anchor" id="autotoc_md2402"></a>
 Resolution</h1>
 <p>The file was cleaned by removing all redundant and malformed code after the first correct definition of <code>register_route</code>.</p>
-<h1><a class="anchor" id="autotoc_md1954"></a>
+<h1><a class="anchor" id="autotoc_md2403"></a>
 Verification</h1>
 <p>The test <code>oaComProtocols.oaComOSC/Tests/test_osc.py</code> was executed using <code>python3 -m pytest oaComProtocols.oaComOSC/Tests/test_osc.py</code> and all 4 tests passed. </p>
 </div></div><!-- contents -->

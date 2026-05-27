@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('da/d11/md_oaTranslator_2Documentation_
   <div class="headertitle"><div class="title">🏷️ State Mirror Engine</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4793"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4794"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5073"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md5074"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4795"></a>
+<h2><a class="anchor" id="autotoc_md5075"></a>
 File Level</h2>
 <p>logic/state_mirror_engine.py</p>
 <p>This file defines the StateMirrorEngine class, which synchronizes GUI state with the MQTT broker. Optimized: Global outbound throttle, Change-only filtering, and Variable lifetime safety.</p>
 <p>Author: Anthony Peter Kuzub Version 20260222.Optimized.2</p>
-<h1><a class="anchor" id="autotoc_md4796"></a>
+<h1><a class="anchor" id="autotoc_md5076"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4797"></a>
+<h1><a class="anchor" id="autotoc_md5077"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4798"></a>
+<h2><a class="anchor" id="autotoc_md5078"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md4799"></a>
+<h3><a class="anchor" id="autotoc_md5079"></a>
 &lt;tt&gt;class StateMirrorEngine&lt;/tt&gt;</h3>
 <p>Synchronizes GUI state with the MQTT broker with high-performance throttling.</p>
-<h4><a class="anchor" id="autotoc_md4800"></a>
+<h4><a class="anchor" id="autotoc_md5080"></a>
 &lt;tt&gt;__init__(self, base_topic, subscriber_router, root, state_cache_manager)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -126,7 +126,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4801"></a>
+<h4><a class="anchor" id="autotoc_md5081"></a>
 &lt;tt&gt;_registration_worker(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -138,7 +138,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4802"></a>
+<h4><a class="anchor" id="autotoc_md5082"></a>
 &lt;tt&gt;shutdown(self)&lt;/tt&gt;</h4>
 <p>Signals background workers to stop.</p>
 <p><b>Parameters:</b></p><ul>
@@ -150,7 +150,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4803"></a>
+<h4><a class="anchor" id="autotoc_md5083"></a>
 &lt;tt&gt;suspend_bindings(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4804"></a>
+<h4><a class="anchor" id="autotoc_md5084"></a>
 &lt;tt&gt;start_queue_processing(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -174,7 +174,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4805"></a>
+<h4><a class="anchor" id="autotoc_md5085"></a>
 &lt;tt&gt;_schedule_queue_processing(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -186,7 +186,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4806"></a>
+<h4><a class="anchor" id="autotoc_md5086"></a>
 &lt;tt&gt;_process_queue_wrapper(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -198,7 +198,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4807"></a>
+<h4><a class="anchor" id="autotoc_md5087"></a>
 &lt;tt&gt;_process_queue(self)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -210,7 +210,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4808"></a>
+<h4><a class="anchor" id="autotoc_md5088"></a>
 &lt;tt&gt;calculate_topic(self, widget_id, tab_name)&lt;/tt&gt;</h4>
 <p>⚡ OPTIMIZED: Calculates the full MQTT topic for a widget. Uses memoization to skip redundant string operations.</p>
 <p><b>Parameters:</b></p><ul>
@@ -223,7 +223,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4809"></a>
+<h4><a class="anchor" id="autotoc_md5089"></a>
 &lt;tt&gt;register_widget(self, widget_id, tk_variable, tab_name, config, update_callback, instance)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -240,7 +240,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4810"></a>
+<h4><a class="anchor" id="autotoc_md5090"></a>
 &lt;tt&gt;initialize_widget_state(self, widget_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -252,7 +252,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4811"></a>
+<h4><a class="anchor" id="autotoc_md5091"></a>
 &lt;tt&gt;broadcast_gui_change_to_mqtt(self, widget_id, extra_payload)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -265,7 +265,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4812"></a>
+<h4><a class="anchor" id="autotoc_md5092"></a>
 &lt;tt&gt;sync_incoming_mqtt_to_gui(self, msg)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -277,7 +277,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4813"></a>
+<h4><a class="anchor" id="autotoc_md5093"></a>
 &lt;tt&gt;_safe_execute_callback(self, callback, data, widget_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -291,7 +291,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4814"></a>
+<h4><a class="anchor" id="autotoc_md5094"></a>
 &lt;tt&gt;publish_command(self, topic, payload)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -304,7 +304,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4815"></a>
+<h4><a class="anchor" id="autotoc_md5095"></a>
 &lt;tt&gt;initialize_widget_state_from_cache(self, widget_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -316,7 +316,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4816"></a>
+<h4><a class="anchor" id="autotoc_md5096"></a>
 &lt;tt&gt;is_widget_registered(self, widget_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -328,7 +328,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md4817"></a>
+<h4><a class="anchor" id="autotoc_md5097"></a>
 &lt;tt&gt;get_widget_topic(self, widget_id)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -340,7 +340,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4818"></a>
+<h1><a class="anchor" id="autotoc_md5098"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

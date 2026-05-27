@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('de/d88/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260312_002600</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1627"></a> </p>
-<h1><a class="anchor" id="autotoc_md1628"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2076"></a> </p>
+<h1><a class="anchor" id="autotoc_md2077"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p><b>User Complaint</b>: "sometimes when Im in the splinker log it crashes all the gui except it" <b>Evidence</b>: GUI becomes unresponsive (frozen) when viewing high-frequency Splinker activity, especially after tearing off the log into its own window.</p>
-<h1><a class="anchor" id="autotoc_md1629"></a>
+<h1><a class="anchor" id="autotoc_md2078"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <ol type="1">
-<li><b>Event Flooding</b>: <code>SplinkerLogs</code> was triggering an immediate <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">after(0, ...)</a></code> UI update for every single Splinker event. High-frequency brokerage activity (hundreds/thousands per second) saturated the Tkinter event queue, starving all other UI tasks (clicks, redraws).</li>
-<li><b>Resource Leak (Tear-off)</b>: <code>WindowManager.tear_off_tab</code> used <code>notebook.forget()</code> to hide the original tab, but failed to <code>destroy()</code> its children. This left the hidden instance of <code>SplinkerLogs</code> active and processing events in the background, doubling the UI thread load every time the tab was torn off.</li>
+<li><b>Event Flooding</b>: <code>SplinkerLogs</code> was triggering an immediate <code>after(0, ...)</code> UI update for every single Splinker event. High-frequency brokerage activity (hundreds/thousands per second) saturated the Tkinter event queue, starving all other UI tasks (clicks, redraws).</li>
+<li><b>Resource Leak (Tear-off)</b>: <code>TabWindowManager.tear_off_tab</code> used <code>notebook.forget()</code> to hide the original tab, but failed to <code>destroy()</code> its children. This left the hidden instance of <code>SplinkerLogs</code> active and processing events in the background, doubling the UI thread load every time the tab was torn off.</li>
 <li><b>Static Re-configuration</b>: <code>tag_configure</code> was called for every single tree insert, adding unnecessary Tcl overhead to the hot update path.</li>
 <li><b>Data Truncation</b>: No safety limits on investigation report text allowed extremely large data packets to freeze the <code>tk.Text</code> widget.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1630"></a>
+<h1><a class="anchor" id="autotoc_md2079"></a>
 &lt;strong&gt;Investigation&lt;/strong&gt;</h1>
 <ol type="1">
-<li><b>Code Review</b>: Identified <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">after(0, ...)</a></code> as a bottleneck and the lack of destruction in <code>WindowManager</code>.</li>
+<li><b>Code Review</b>: Identified <code>after(0, ...)</code> as a bottleneck and the lack of destruction in <code>TabWindowManager</code>.</li>
 <li><b>Empirical Reproduction</b>: Created <code>reproduce_splinker_leak.py</code> and <code>reproduce_splinker_crash.py</code> to simulate high-frequency floods. Confirmed that multiple hidden instances correctly receive events and freeze the UI thread.</li>
 <li><b>Trace Analysis</b>: Observed that while the UI thread stayed "alive" (mainloop running), it was so backlogged with Splinker updates that no other events were being processed.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1631"></a>
+<h1><a class="anchor" id="autotoc_md2080"></a>
 &lt;strong&gt;Resolution&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Throttled Batch Updates</b>: Modified <code>SplinkerLogs</code> to buffer incoming events in <code>self.pending_events</code> and update the UI in batches (max 50 per batch) every 100ms.</li>
 <li><b>Visibility Management</b>: Added <code>&lt;Map&gt;</code> and <code>&lt;Unmap&gt;</code> bindings to <code>SplinkerLogs</code> to automatically pause UI updates when the widget is not visible.</li>
-<li><b>Cleanup Hardening</b>: Updated <code>WindowManager.tear_off_tab</code> to explicitly <code>destroy()</code> the children of the original frame after forgetting it, ensuring clean unregistration of callbacks.</li>
+<li><b>Cleanup Hardening</b>: Updated <code>TabWindowManager.tear_off_tab</code> to explicitly <code>destroy()</code> the children of the original frame after forgetting it, ensuring clean unregistration of callbacks.</li>
 <li><b>UI Optimization</b>: Moved <code>tag_configure</code> to setup and implemented safe truncation (<code>_safe_str</code>) for investigation reports.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1632"></a>
+<h1><a class="anchor" id="autotoc_md2081"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Leak Test</b>: <code>verify_splinker_fix.py</code> confirmed that destroying the frame successfully unregisters the Splinker monitor callback, preventing leaks.</li>

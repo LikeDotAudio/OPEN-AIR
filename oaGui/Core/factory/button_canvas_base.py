@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+from oaGui.FileReaders.standardizers.schema_utils import coerce_pixel_size
 from oaGui.Methods.rendering.button_image_renderer import ButtonImageRenderer
 
 
@@ -48,7 +49,8 @@ class CanvasButton(tk.Canvas):
         self.configuration = config
         self.transparency_applicator = transparency_applicator
 
-        super().__init__(parent, width=max(1, int(width)), height=max(1, int(height)),
+        # Percent strings ('100%') are layout directives, not pixel counts.
+        super().__init__(parent, width=max(1, coerce_pixel_size(width, 100)), height=max(1, coerce_pixel_size(height, 50)),
                          bg=parent.cget("bg") if not transparency_applicator else "#2b2b2b",
                          highlightthickness=0, bd=0, relief="flat", **kwargs)
 

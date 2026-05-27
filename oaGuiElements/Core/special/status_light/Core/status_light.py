@@ -57,7 +57,7 @@ class StatusLightWidget(tk.Frame):
         # 4. Subscribe to MQTT
         if self.state_mirror_engine and self.subscriber_router:
             # Global topic
-            global_topic = "OPEN-AIR/GUI/Global/Header/StatusLight"
+            global_topic = "OpenAir/GUI/Global/Header/StatusLight"
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔄 [MQTT] Subscribing to GLOBAL status topic: {global_topic}", level="TRACE")
             self.subscriber_router.subscribe_to_topic(
                 global_topic, self._update_status_light
@@ -180,7 +180,7 @@ class BuilderStatusLightCreator:
         # Resolve dependencies from context or kwargs
         state_mirror_engine = context.state_mirror_engine if context else kwargs.get("state_mirror_engine")
         subscriber_router = context.subscriber_router if context else kwargs.get("subscriber_router")
-        base_topic_path = context.base_mqtt_topic_from_path if context else kwargs.get("base_mqtt_topic_from_path", "OPEN-AIR")
+        base_topic_path = context.base_mqtt_topic_from_path if context else kwargs.get("base_mqtt_topic_from_path", "OpenAir")
 
         # Create the Status Light Widget
         status_widget = StatusLightWidget(

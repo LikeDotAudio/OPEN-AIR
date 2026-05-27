@@ -36,7 +36,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
         """
         self.publisher._publish_status("connected", True)
 
-        expected_topic = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status/connected"
+        expected_topic = "OpenAir/Device/Instrument_Connection/Search_and_Connect/Device_status/connected"
         self.mock_client.publish.assert_called_once()
         args, kwargs = self.mock_client.publish.call_args
 
@@ -55,7 +55,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
         """
         self.publisher._publish_proxy_status("CONNECTED")
 
-        expected_topic = "OPEN-AIR/Proxy/Status"
+        expected_topic = "OpenAir/Proxy/Status"
         self.mock_client.publish.assert_called_once()
         args, kwargs = self.mock_client.publish.call_args
 
@@ -80,7 +80,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
 
         # Check bulk population
         self.mock_client.publish.assert_any_call(
-            topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/all",
+            topic="OpenAir/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/all",
             payload=unittest.mock.ANY,
             qos=0,
             retain=False
@@ -88,7 +88,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
 
         # Check first device auto-selection
         self.mock_client.publish.assert_any_call(
-            topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/1/selected",
+            topic="OpenAir/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/1/selected",
             payload=unittest.mock.ANY,
             qos=0,
             retain=False

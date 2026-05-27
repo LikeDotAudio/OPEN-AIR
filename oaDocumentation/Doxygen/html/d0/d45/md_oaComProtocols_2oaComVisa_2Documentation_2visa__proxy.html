@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d0/d45/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa Proxy</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md834"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md835"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1099"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1100"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md836"></a>
+<h2><a class="anchor" id="autotoc_md1101"></a>
 File Level</h2>
 <p><code>managers/VisaScipi/manager_visa_proxy.py</code></p>
 <p>This manager provides a safe, low-level interface for executing SCPI write and query commands via PyVISA. It acts as a command queue and execution engine for instrument communication, ensuring that I/O operations are serialized and handled gracefully in a background thread.</p>
@@ -107,21 +107,21 @@ File Level</h2>
 <li>Listen for inbound MQTT commands and dispatch results/errors.</li>
 </ul>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md837"></a>
+<h1><a class="anchor" id="autotoc_md1102"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Assumes only one instrument is active at a time per proxy instance.</li>
 <li>Blocking VISA I/O is offloaded to a dedicated worker thread.</li>
 <li>MQTT payloads must follow the project's standard command format.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md838"></a>
+<h1><a class="anchor" id="autotoc_md1103"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md839"></a>
+<h2><a class="anchor" id="autotoc_md1104"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md840"></a>
+<h3><a class="anchor" id="autotoc_md1105"></a>
 &lt;tt&gt;class VisaProxy&lt;/tt&gt;</h3>
 <p>Manages the PyVISA connection and provides safe, serial command execution.</p>
-<h4><a class="anchor" id="autotoc_md841"></a>
+<h4><a class="anchor" id="autotoc_md1106"></a>
 &lt;tt&gt;__init__(self, mqtt_controller, subscriber_router)&lt;/tt&gt;</h4>
 <p>Initializes the VisaProxy with MQTT and subscription services.</p>
 <p><b>Parameters:</b></p><ul>
@@ -134,7 +134,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Initializes an internal command queue and state variables.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md842"></a>
+<h4><a class="anchor" id="autotoc_md1107"></a>
 &lt;tt&gt;shutdown(self)&lt;/tt&gt;</h4>
 <p>Terminates the command processor worker thread gracefully.</p>
 <p><b>Parameters:</b></p><ul>
@@ -147,7 +147,7 @@ Classes</h2>
 <li>Signals the worker thread to stop and joins it.</li>
 <li>Resets thread and flag state to <code>None</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md843"></a>
+<h4><a class="anchor" id="autotoc_md1108"></a>
 &lt;tt&gt;_command_processor_worker(self)&lt;/tt&gt;</h4>
 <p>Background worker loop that executes queued SCPI commands.</p>
 <p><b>Parameters:</b></p><ul>
@@ -161,7 +161,7 @@ Classes</h2>
 <li>Executes blocking VISA I/O operations (write/query).</li>
 <li>Handles and logs exceptions during command execution.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md844"></a>
+<h4><a class="anchor" id="autotoc_md1109"></a>
 &lt;tt&gt;_setup_mqtt_subscriptions(self)&lt;/tt&gt;</h4>
 <p>Registers the inbound command inbox topic.</p>
 <p><b>Parameters:</b></p><ul>
@@ -173,7 +173,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Modifies the <code>subscriber_router</code> state.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md845"></a>
+<h4><a class="anchor" id="autotoc_md1110"></a>
 &lt;tt&gt;_on_tx_inbox_message(self, msg)&lt;/tt&gt;</h4>
 <p>Handles inbound MQTT messages intended for instrument execution.</p>
 <p><b>Parameters:</b></p><ul>
@@ -185,7 +185,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Enqueues command information for the background worker thread.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md846"></a>
+<h4><a class="anchor" id="autotoc_md1111"></a>
 &lt;tt&gt;_publish_proxy_error(self, message, command)&lt;/tt&gt;</h4>
 <p>Logs and publishes proxy-level error information.</p>
 <p><b>Parameters:</b></p><ul>
@@ -195,7 +195,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>None.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md847"></a>
+<h4><a class="anchor" id="autotoc_md1112"></a>
 &lt;tt&gt;_publish_proxy_response(self, response, command, correlation_id)&lt;/tt&gt;</h4>
 <p>Logs the response received from an instrument query.</p>
 <p><b>Parameters:</b></p><ul>
@@ -206,7 +206,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>None.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md848"></a>
+<h4><a class="anchor" id="autotoc_md1113"></a>
 &lt;tt&gt;set_instrument_instance(self, inst)&lt;/tt&gt;</h4>
 <p>Links a physical instrument session to the proxy and starts worker.</p>
 <p><b>Parameters:</b></p><ul>
@@ -219,7 +219,7 @@ Classes</h2>
 <li>Configures instrument session timeout.</li>
 <li>Manages the lifecycle of the background worker thread.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md849"></a>
+<h4><a class="anchor" id="autotoc_md1114"></a>
 &lt;tt&gt;_reset_device(self)&lt;/tt&gt;</h4>
 <p>Sends a standard IEEE 488.2 reset command (<code>*RST</code>) to the device.</p>
 <p><b>Parameters:</b></p><ul>
@@ -229,7 +229,7 @@ Classes</h2>
 <li><code>True</code> if the command was successfully sent.</li>
 <li><code>False</code> if communication failed.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md850"></a>
+<h4><a class="anchor" id="autotoc_md1115"></a>
 &lt;tt&gt;write_safe(self, command)&lt;/tt&gt;</h4>
 <p>Executes a non-query SCPI command with error handling.</p>
 <p><b>Parameters:</b></p><ul>
@@ -238,7 +238,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>The result of the external <code>write_safe</code> utility.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md851"></a>
+<h4><a class="anchor" id="autotoc_md1116"></a>
 &lt;tt&gt;query_safe(self, command, correlation_id)&lt;/tt&gt;</h4>
 <p>Executes a SCPI query command and returns the response safely.</p>
 <p><b>Parameters:</b></p><ul>
@@ -248,7 +248,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>The result of the external <code>query_safe</code> utility.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md852"></a>
+<h1><a class="anchor" id="autotoc_md1117"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Using a non-blocking get to allow for rapid shutdown signaling.</li>

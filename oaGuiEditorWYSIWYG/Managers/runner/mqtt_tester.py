@@ -40,7 +40,7 @@ class MqttTester:
             client.connect(broker, port, keepalive=10)
 
             # The topic OPEN-AIR listens to for design-time rebuilds
-            rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
+            rebuild_topic = "OpenAir/System/Control/UI/Rebuild"
             payload = {
                 "path": str(json_filepath.resolve()),
                 "config": new_data

@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('d8/d9d/namespaceMethods_1_1log__patche
 Functions</h2></td></tr>
 <tr class="memitem:a8e0b701e054a5ced42470b2c773e2e74" id="r_a8e0b701e054a5ced42470b2c773e2e74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d9d/namespaceMethods_1_1log__patchers.html#a8e0b701e054a5ced42470b2c773e2e74">get_ptp_time</a> ()</td></tr>
 <tr class="separator:a8e0b701e054a5ced42470b2c773e2e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46fde6ac1433f41c047e2b47ec48d8ff" id="r_a46fde6ac1433f41c047e2b47ec48d8ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d9d/namespaceMethods_1_1log__patchers.html#a46fde6ac1433f41c047e2b47ec48d8ff">ptp_patcher</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">record</a>)</td></tr>
+<tr class="memitem:a46fde6ac1433f41c047e2b47ec48d8ff" id="r_a46fde6ac1433f41c047e2b47ec48d8ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d9d/namespaceMethods_1_1log__patchers.html#a46fde6ac1433f41c047e2b47ec48d8ff">ptp_patcher</a> (record)</td></tr>
 <tr class="separator:a46fde6ac1433f41c047e2b47ec48d8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -127,15 +127,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00014">14</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   14</span>    <span class="keyword">def </span>get_ptp_time():</div>
-<div class="line"><span class="lineno">   15</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">time.time</a>()</div>
-<div class="line"><span class="lineno">   16</span> </div>
-<div class="line"><span class="lineno">   17</span><span class="comment"># --- Internal State for PTP Patcher ---</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00013">13</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>    <span class="keyword">def </span>get_ptp_time():</div>
+<div class="line"><span class="lineno">   14</span>        <span class="keywordflow">return</span> time.time()</div>
+<div class="line"><span class="lineno">   15</span> </div>
+<div class="line"><span class="lineno">   16</span><span class="comment"># --- Internal State for PTP Patcher ---</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a46fde6ac1433f41c047e2b47ec48d8ff" name="a46fde6ac1433f41c047e2b47ec48d8ff"></a>
@@ -156,37 +153,29 @@ Variables</h2></td></tr>
 <pre class="fragment">Instruments log records with high-precision PTP (TAI) timestamps.
 Respects the global 'timestamp_logs' setting.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00021">21</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span><span class="keyword">def </span>ptp_patcher(record):</div>
-<div class="line"><span class="lineno">   22</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   23</span><span class="stringliteral">    Instruments log records with high-precision PTP (TAI) timestamps.</span></div>
-<div class="line"><span class="lineno">   24</span><span class="stringliteral">    Respects the global &#39;timestamp_logs&#39; setting.</span></div>
-<div class="line"><span class="lineno">   25</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   26</span>    <span class="keyword">global</span> _last_ptp_second, _cached_hhmmss</div>
-<div class="line"><span class="lineno">   27</span> </div>
-<div class="line"><span class="lineno">   28</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Methods.config_retrieval</a> <span class="keyword">import</span> _get_cached_config</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    config = _get_cached_config()</div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.global_settings.get</a>(<span class="stringliteral">&quot;timestamp_logs&quot;</span>, <span class="keyword">True</span>):</div>
-<div class="line"><span class="lineno">   32</span>        record[<span class="stringliteral">&quot;extra&quot;</span>][<span class="stringliteral">&quot;ptp_time&quot;</span>] = <span class="stringliteral">&quot;000000.000&quot;</span></div>
-<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">return</span></div>
+<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00020">20</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   20</span><span class="keyword">def </span>ptp_patcher(record):</div>
+<div class="line"><span class="lineno">   21</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   22</span><span class="stringliteral">    Instruments log records with high-precision PTP (TAI) timestamps.</span></div>
+<div class="line"><span class="lineno">   23</span><span class="stringliteral">    Respects the global &#39;timestamp_logs&#39; setting.</span></div>
+<div class="line"><span class="lineno">   24</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   25</span>    <span class="keyword">global</span> _last_ptp_second, _cached_hhmmss</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>    <span class="comment"># 1. Architectural Safety: Ensure required metadata exists for sinks</span></div>
+<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;category&quot;</span> <span class="keywordflow">not</span> <span class="keywordflow">in</span> record[<span class="stringliteral">&quot;extra&quot;</span>]:</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keyword">from</span> oaLogging.Constants.subsystem_emojis <span class="keyword">import</span> SUBSYSTEM_EMOJIS</div>
+<div class="line"><span class="lineno">   30</span>        record[<span class="stringliteral">&quot;extra&quot;</span>][<span class="stringliteral">&quot;category&quot;</span>] = SUBSYSTEM_EMOJIS.get(<span class="stringliteral">&quot;SYSTEM&quot;</span>, <span class="stringliteral">&quot;❓&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;category_name&quot;</span> <span class="keywordflow">not</span> <span class="keywordflow">in</span> record[<span class="stringliteral">&quot;extra&quot;</span>]:</div>
+<div class="line"><span class="lineno">   33</span>        record[<span class="stringliteral">&quot;extra&quot;</span>][<span class="stringliteral">&quot;category_name&quot;</span>] = <span class="stringliteral">&quot;SYSTEM&quot;</span></div>
 <div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>    ptp_now = get_ptp_time()</div>
-<div class="line"><span class="lineno">   36</span>    current_second = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>(ptp_now)</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>    <span class="comment"># Cache the HHMMSS string and only update when the integer second changes.</span></div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> current_second != _last_ptp_second:</div>
-<div class="line"><span class="lineno">   40</span>        dt = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">datetime.fromtimestamp</a>(ptp_now)</div>
-<div class="line"><span class="lineno">   41</span>        _cached_hhmmss = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">dt.strftime</a>(<span class="stringliteral">&quot;%H%M%S&quot;</span>)</div>
-<div class="line"><span class="lineno">   42</span>        _last_ptp_second = current_second</div>
-<div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>    <span class="comment"># Append milliseconds using fast f-string formatting.</span></div>
-<div class="line"><span class="lineno">   45</span>    ms = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a>((ptp_now - current_second) * 1000)</div>
-<div class="line"><span class="lineno">   46</span>    record[<span class="stringliteral">&quot;extra&quot;</span>][<span class="stringliteral">&quot;ptp_time&quot;</span>] = f<span class="stringliteral">&quot;{_cached_hhmmss}.{ms:03d}&quot;</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a61569f2965b7a369eb10b6d75d410d11"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">generated.rs:2487</a></div></div>
+<div class="line"><span class="lineno">   35</span>    <span class="keyword">from</span> oaLogging.Methods.config_retrieval <span class="keyword">import</span> _get_cached_config</div>
+<div class="line"><span class="lineno">   36</span> </div>
+<div class="line"><span class="lineno">   37</span>    config = _get_cached_config()</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> config.global_settings.get(<span class="stringliteral">&quot;timestamp_logs&quot;</span>, <span class="keyword">True</span>):</div>
+<div class="line"><span class="lineno">   39</span>        record[<span class="stringliteral">&quot;extra&quot;</span>][<span class="stringliteral">&quot;ptp_time&quot;</span>] = <span class="stringliteral">&quot;000000.000&quot;</span></div>
+<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">return</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02487">int</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -210,7 +199,7 @@ Respects the global 'timestamp_logs' setting.
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00019">19</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00018">18</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
 
 </div>
 </div>
@@ -234,7 +223,7 @@ Respects the global 'timestamp_logs' setting.
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00018">18</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/d92/log__patchers_8py_source.html#l00017">17</a> of file <a class="el" href="../../d2/d92/log__patchers_8py_source.html">log_patchers.py</a>.</p>
 
 </div>
 </div>

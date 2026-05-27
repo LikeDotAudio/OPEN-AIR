@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d0/d2e/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Visa Csv Builder</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md755"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md756"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1020"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1021"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md757"></a>
+<h2><a class="anchor" id="autotoc_md1022"></a>
 File Level</h2>
 <p>No top-of-file comment provided. [TODO: Clearly state the file's purpose and its primary responsibilities. (GNU)]</p>
 <p>[TODO: Document specific platform requirements, ABI expectations, or required privileges. (GNU)]</p>
-<h1><a class="anchor" id="autotoc_md758"></a>
+<h1><a class="anchor" id="autotoc_md1023"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md759"></a>
+<h1><a class="anchor" id="autotoc_md1024"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md760"></a>
+<h2><a class="anchor" id="autotoc_md1025"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md761"></a>
+<h3><a class="anchor" id="autotoc_md1026"></a>
 &lt;tt&gt;class VisaCsvBuilder&lt;/tt&gt;</h3>
 <p>No class description provided.</p>
-<h4><a class="anchor" id="autotoc_md762"></a>
+<h4><a class="anchor" id="autotoc_md1027"></a>
 &lt;tt&gt;__init__(self, json_path, csv_dir)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md763"></a>
+<h4><a class="anchor" id="autotoc_md1028"></a>
 &lt;tt&gt;build_csvs_from_json(self)&lt;/tt&gt;</h4>
 <p>Main method to load the STATE_VISA_FLEET.json and generate a CSV file for each table found.</p>
 <p><b>Parameters:</b></p><ul>
@@ -135,7 +135,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md764"></a>
+<h4><a class="anchor" id="autotoc_md1029"></a>
 &lt;tt&gt;_traverse_and_build(self, node, current_path)&lt;/tt&gt;</h4>
 <p>Recursively traverses the JSON structure. If a "Table" key is found, it triggers the CSV writing for that specific table's data.</p>
 <p><b>Parameters:</b></p><ul>
@@ -148,7 +148,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md765"></a>
+<h4><a class="anchor" id="autotoc_md1030"></a>
 &lt;tt&gt;_write_table_to_csv(self, table_node, table_path)&lt;/tt&gt;</h4>
 <p>Writes a single table's data to a CSV file.</p>
 <p><b>Parameters:</b></p><ul>
@@ -161,7 +161,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md766"></a>
+<h1><a class="anchor" id="autotoc_md1031"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

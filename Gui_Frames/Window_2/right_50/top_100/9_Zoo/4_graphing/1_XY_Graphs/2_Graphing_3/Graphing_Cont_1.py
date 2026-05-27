@@ -31,7 +31,7 @@ current_version_hash = 32806991192
 current_file = f"{os.path.basename(__file__)}"
 current_path = pathlib.Path(__file__).resolve()
 
-# Automatically turns 'gui_yak_bandwidth' into 'OPEN-AIR/yak/bandwidth'
+# Automatically turns 'gui_yak_bandwidth' into 'OpenAir/yak/bandwidth'
 module_name = current_path.stem.replace("gui_", "")
 
 

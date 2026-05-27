@@ -137,7 +137,7 @@ class TestsApp(App):
                         self.call_from_thread(lambda: self.query_one("#role_label", Label).update(f"ROLE: [bold {color}]{role}[/]"))
                 except Exception: pass
         self.mqtt_client.connect_to_broker(on_message_callback=on_message)
-        self.mqtt_client.subscribe("OPEN-AIR/System/Failover/Status/#")
+        self.mqtt_client.subscribe("OpenAir/System/Failover/Status/#")
 
     def update_stats(self) -> None:
         stats = self.stats_provider.get_all_stats()

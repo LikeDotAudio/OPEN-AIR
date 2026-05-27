@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d7/d24/md_oaConfigurationManager_2Docu
   <div class="headertitle"><div class="title">🏷️ Config Validator</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md972"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md973"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1237"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1238"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md974"></a>
+<h2><a class="anchor" id="autotoc_md1239"></a>
 File Level</h2>
 <p>managers/configini/config_validator.py</p>
 <p>This module is responsible for verifying the correctness and completeness of the application's configuration. It ensures that all required parameters are present and within valid ranges before the system proceeds with execution.</p>
-<h1><a class="anchor" id="autotoc_md975"></a>
+<h1><a class="anchor" id="autotoc_md1240"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Depends on the 'Config' singleton for accessing the current settings.</li>
 <li>Assumes that 'config_reader' has already attempted to load or create the configuration.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md976"></a>
+<h1><a class="anchor" id="autotoc_md1241"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md977"></a>
+<h2><a class="anchor" id="autotoc_md1242"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md978"></a>
+<h3><a class="anchor" id="autotoc_md1243"></a>
 &lt;tt&gt;validate_configuration(print_func)&lt;/tt&gt;</h3>
 <p>Validates the application's configuration settings.</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Global Functions</h2>
 <li>Invokes 'print_func', which may perform I/O.</li>
 <li>This function is thread-safe as it only reads from the configuration.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md979"></a>
+<h1><a class="anchor" id="autotoc_md1244"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Debugging log to track the start of the validation process.</li>

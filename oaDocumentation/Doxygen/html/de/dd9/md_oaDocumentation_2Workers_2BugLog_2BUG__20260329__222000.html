@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('de/dd9/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_222000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1975"></a> </p>
-<h1><a class="anchor" id="autotoc_md1976"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2424"></a> </p>
+<h1><a class="anchor" id="autotoc_md2425"></a>
 Issue</h1>
 <p>The <code>MidiKeyboard</code> UI component was emitting high-velocity <code>TRACE</code> logs to the console for every MIDI <code>note_on</code> and <code>note_off</code> event, causing console congestion.</p>
-<h1><a class="anchor" id="autotoc_md1977"></a>
+<h1><a class="anchor" id="autotoc_md2426"></a>
 Root Cause</h1>
-<p>The <code>handle_midi()</code> method in <code><a class="el" href="../../d7/dcc/oaGuiElements_2Core_2utils_2midi__keyboard_2midi__keyboard_8py.html">oaGuiElements/Core/utils/midi_keyboard/midi_keyboard.py</a></code> used <code>logger.trace()</code> without any conditional debug gate.</p>
-<h1><a class="anchor" id="autotoc_md1978"></a>
+<p>The <code>handle_midi()</code> method in <code>oaGuiElements/Core/utils/midi_keyboard/midi_keyboard.py</code> used <code>logger.trace()</code> without any conditional debug gate.</p>
+<h1><a class="anchor" id="autotoc_md2427"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Gating Logic</b>: Added <code>LOCAL_DEBUG = False</code> to the file.</li>
 <li><b>Surgical Fix</b>: Wrapped the <code>note_on</code> and <code>note_off</code> trace logs in <code>if LOCAL_DEBUG:</code> blocks.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1979"></a>
+<h1><a class="anchor" id="autotoc_md2428"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>LOCAL_DEBUG</code> is <code>False</code> by default.</li>

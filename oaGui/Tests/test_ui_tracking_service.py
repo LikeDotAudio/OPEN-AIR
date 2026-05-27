@@ -25,7 +25,7 @@ class TestUITrackingService(unittest.TestCase):
         self.mock_widget.after_cancel = MagicMock()
 
         self.mock_engine = MagicMock()
-        self.mock_engine.base_topic = "OPEN-AIR"
+        self.mock_engine.base_topic = "OpenAir"
 
         # Mock geometry for winfo_toplevel
         self.mock_toplevel = MagicMock()

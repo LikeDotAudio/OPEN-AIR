@@ -112,11 +112,11 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a5be5415ff76745d698db9c72a1263bcc" id="r_a5be5415ff76745d698db9c72a1263bcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a5be5415ff76745d698db9c72a1263bcc">__all__</a></td></tr>
 <tr class="separator:a5be5415ff76745d698db9c72a1263bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cb29e336c9364bee38ba487e392fd0d" id="r_a8cb29e336c9364bee38ba487e392fd0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a8cb29e336c9364bee38ba487e392fd0d">cmd</a> = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td></tr>
+<tr class="memitem:a8cb29e336c9364bee38ba487e392fd0d" id="r_a8cb29e336c9364bee38ba487e392fd0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a8cb29e336c9364bee38ba487e392fd0d">cmd</a> = sys.argv[1].lower()</td></tr>
 <tr class="separator:a8cb29e336c9364bee38ba487e392fd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc547d1d677c4deaef5672f3ba99845" id="r_a9dc547d1d677c4deaef5672f3ba99845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a9dc547d1d677c4deaef5672f3ba99845">current_dir</a> = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).parent.absolute()</td></tr>
+<tr class="memitem:a9dc547d1d677c4deaef5672f3ba99845" id="r_a9dc547d1d677c4deaef5672f3ba99845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a9dc547d1d677c4deaef5672f3ba99845">current_dir</a> = Path(__file__).parent.resolve()</td></tr>
 <tr class="separator:a9dc547d1d677c4deaef5672f3ba99845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03022b58b613664848409d6f5eb30e01" id="r_a03022b58b613664848409d6f5eb30e01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a03022b58b613664848409d6f5eb30e01">project_root</a> = <a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a9dc547d1d677c4deaef5672f3ba99845">current_dir</a></td></tr>
+<tr class="memitem:a03022b58b613664848409d6f5eb30e01" id="r_a03022b58b613664848409d6f5eb30e01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a03022b58b613664848409d6f5eb30e01">project_root</a> = current_dir.parent</td></tr>
 <tr class="separator:a03022b58b613664848409d6f5eb30e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -134,50 +134,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Discover and run tests in the local Tests/ directory using unittest via subprocess.
-Ensures isolation and proper sys.path handling.
-</pre> 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00023">23</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span><span class="keyword">def </span>run_tests():</div>
-<div class="line"><span class="lineno">   24</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   25</span><span class="stringliteral">    Discover and run tests in the local Tests/ directory using unittest via subprocess.</span></div>
-<div class="line"><span class="lineno">   26</span><span class="stringliteral">    Ensures isolation and proper sys.path handling.</span></div>
-<div class="line"><span class="lineno">   27</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   28</span>    <span class="keyword">import</span> subprocess</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...&quot;</span>)</div>
-<div class="line"><span class="lineno">   31</span>    test_dir = current_dir / <span class="stringliteral">&quot;Tests&quot;</span></div>
-<div class="line"><span class="lineno">   32</span> </div>
-<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_dir.exists</a>():</div>
-<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.&quot;</span>)</div>
-<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>    env = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.environ.copy</a>()</div>
-<div class="line"><span class="lineno">   38</span>    env[<span class="stringliteral">&quot;PYTHONPATH&quot;</span>] = str(project_root) + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.pathsep</a> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">env.get</a>(<span class="stringliteral">&quot;PYTHONPATH&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><span class="lineno">   39</span> </div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   41</span>        <span class="comment"># Run from project root to ensure module resolution works correctly</span></div>
-<div class="line"><span class="lineno">   42</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>(</div>
-<div class="line"><span class="lineno">   43</span>            [<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.executable</a>, <span class="stringliteral">&quot;-m&quot;</span>, <span class="stringliteral">&quot;unittest&quot;</span>, <span class="stringliteral">&quot;discover&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_dir.relative_to</a>(project_root)), <span class="stringliteral">&quot;-p&quot;</span>, <span class="stringliteral">&quot;test_*.py&quot;</span>],</div>
-<div class="line"><span class="lineno">   44</span>            cwd=str(project_root),</div>
-<div class="line"><span class="lineno">   45</span>            env=env,</div>
-<div class="line"><span class="lineno">   46</span>            capture_output=<span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   47</span>        )</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.returncode</a> == 0:</div>
-<div class="line"><span class="lineno">   49</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.&quot;</span>)</div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   52</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.&quot;</span>)</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   55</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}&quot;</span>)</div>
-<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<pre class="fragment">Runs the module's unit tests.</pre> 
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00065">65</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span><span class="keyword">def </span>run_tests():</div>
+<div class="line"><span class="lineno">   66</span>    <span class="stringliteral">&quot;&quot;&quot;Runs the module&#39;s unit tests.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   67</span>    <span class="keyword">import</span> pytest</div>
+<div class="line"><span class="lineno">   68</span>    test_path = current_dir / <span class="stringliteral">&quot;Tests&quot;</span></div>
+<div class="line"><span class="lineno">   69</span>    pytest.main([str(test_path)])</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span><span class="comment"># Standalone execution</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00066">oaGuiElements.Entry.status()</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>
 
 </div>
 </div>
@@ -195,15 +162,13 @@ Ensures isolation and proper sys.path handling.
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Start the module services.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00058">58</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span><span class="keyword">def </span>start():</div>
-<div class="line"><span class="lineno">   59</span>    <span class="stringliteral">&quot;&quot;&quot;Start the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   60</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🚀 [START] Starting {Path(__file__).parent.name} services...&quot;</span>)</div>
-<div class="line"><span class="lineno">   61</span> </div>
+<pre class="fragment">Initializes the GUI Elements module.</pre> 
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00053">53</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span><span class="keyword">def </span>start():</div>
+<div class="line"><span class="lineno">   54</span>    <span class="stringliteral">&quot;&quot;&quot;Initializes the GUI Elements module.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   55</span>    print(<span class="stringliteral">&quot;🎨 [GUI_ELEMENTS] Module Started.&quot;</span>)</div>
+<div class="line"><span class="lineno">   56</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a905a1b4d0b86b717d58a1609f842570b" name="a905a1b4d0b86b717d58a1609f842570b"></a>
@@ -220,16 +185,13 @@ Ensures isolation and proper sys.path handling.
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Get the module status.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00066">66</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   66</span><span class="keyword">def </span>status():</div>
-<div class="line"><span class="lineno">   67</span>    <span class="stringliteral">&quot;&quot;&quot;Get the module status.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   68</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📊 [STATUS] Checking {Path(__file__).parent.name} status...&quot;</span>)</div>
-<div class="line"><span class="lineno">   69</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Running&quot;</span></div>
-<div class="line"><span class="lineno">   70</span> </div>
+<pre class="fragment">Returns the status of the GUI Elements module.</pre> 
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00061">61</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span><span class="keyword">def </span>status():</div>
+<div class="line"><span class="lineno">   62</span>    <span class="stringliteral">&quot;&quot;&quot;Returns the status of the GUI Elements module.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Running&quot;</span></div>
+<div class="line"><span class="lineno">   64</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00023">oaGuiElements.Entry.run_tests()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a3a68cb2e53441fffd7a78e9ef4bcc3c0" name="a3a68cb2e53441fffd7a78e9ef4bcc3c0"></a>
@@ -246,15 +208,13 @@ Ensures isolation and proper sys.path handling.
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Stop the module services.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00062">62</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span><span class="keyword">def </span>stop():</div>
-<div class="line"><span class="lineno">   63</span>    <span class="stringliteral">&quot;&quot;&quot;Stop the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   64</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [STOP] Stopping {Path(__file__).parent.name} services...&quot;</span>)</div>
-<div class="line"><span class="lineno">   65</span> </div>
+<pre class="fragment">Shuts down the GUI Elements module.</pre> 
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00057">57</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span><span class="keyword">def </span>stop():</div>
+<div class="line"><span class="lineno">   58</span>    <span class="stringliteral">&quot;&quot;&quot;Shuts down the GUI Elements module.&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   59</span>    print(<span class="stringliteral">&quot;🎨 [GUI_ELEMENTS] Module Stopped.&quot;</span>)</div>
+<div class="line"><span class="lineno">   60</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -281,10 +241,34 @@ Ensures isolation and proper sys.path handling.
 <div class="line"><span class="lineno">    2</span>    <span class="stringliteral">&quot;start&quot;</span>,</div>
 <div class="line"><span class="lineno">    3</span>    <span class="stringliteral">&quot;stop&quot;</span>,</div>
 <div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&quot;status&quot;</span>,</div>
-<div class="line"><span class="lineno">    5</span>    <span class="stringliteral">&quot;run_tests&quot;</span></div>
-<div class="line"><span class="lineno">    6</span>]</div>
+<div class="line"><span class="lineno">    5</span>    <span class="stringliteral">&quot;run_tests&quot;</span>,</div>
+<div class="line"><span class="lineno">    6</span>    <span class="stringliteral">&quot;PanelGenerator&quot;</span>,</div>
+<div class="line"><span class="lineno">    7</span>    <span class="stringliteral">&quot;TiledPanelGenerator&quot;</span>,</div>
+<div class="line"><span class="lineno">    8</span>    <span class="stringliteral">&quot;BuilderPanelCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">    9</span>    <span class="stringliteral">&quot;ScrewGenerator&quot;</span>,</div>
+<div class="line"><span class="lineno">   10</span>    <span class="stringliteral">&quot;PanelUtils&quot;</span>,</div>
+<div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;BuilderKnobCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   12</span>    <span class="stringliteral">&quot;BuilderFaderCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   13</span>    <span class="stringliteral">&quot;BuilderFaderHorizontalCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&quot;BuilderFaderBarGraphCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   15</span>    <span class="stringliteral">&quot;BuilderMeterNeedleCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   16</span>    <span class="stringliteral">&quot;BuilderMeterBarCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   17</span>    <span class="stringliteral">&quot;BuilderButtonWinkCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   18</span>    <span class="stringliteral">&quot;BuilderButtonToggleCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   19</span>    <span class="stringliteral">&quot;BuilderButtonTogglerCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   20</span>    <span class="stringliteral">&quot;BuilderTextLabelCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   21</span>    <span class="stringliteral">&quot;BuilderTextTableCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   22</span>    <span class="stringliteral">&quot;BuilderCheckboxCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   23</span>    <span class="stringliteral">&quot;BuilderListboxCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   24</span>    <span class="stringliteral">&quot;BuilderSliderValueCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   25</span>    <span class="stringliteral">&quot;BuilderDataJsonTreeCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   26</span>    <span class="stringliteral">&quot;BuilderCompositeHorizontalDialValueCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   27</span>    <span class="stringliteral">&quot;BuilderCircularMotionDisplacementPotentiometerCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   28</span>    <span class="stringliteral">&quot;BuilderCompositeMdpCreator&quot;</span>,</div>
+<div class="line"><span class="lineno">   29</span>    <span class="stringliteral">&quot;BuilderStatusLightCreator&quot;</span></div>
+<div class="line"><span class="lineno">   30</span>]</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00093">93</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00086">86</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
 
 </div>
 </div>
@@ -295,12 +279,12 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">oaGuiElements.Entry.cmd = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td>
+          <td class="memname">oaGuiElements.Entry.cmd = sys.argv[1].lower()</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00079">79</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00074">74</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
 
 </div>
 </div>
@@ -311,12 +295,12 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">oaGuiElements.Entry.current_dir = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).parent.absolute()</td>
+          <td class="memname">oaGuiElements.Entry.current_dir = Path(__file__).parent.resolve()</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00012">12</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00011">11</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
 
 </div>
 </div>
@@ -327,12 +311,12 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">oaGuiElements.Entry.project_root = <a class="el" href="../../de/d9a/namespaceoaGuiElements_1_1Entry.html#a9dc547d1d677c4deaef5672f3ba99845">current_dir</a></td>
+          <td class="memname">oaGuiElements.Entry.project_root = current_dir.parent</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00013">13</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html#l00012">12</a> of file <a class="el" href="../../de/da7/oaGuiElements_2Entry_8py_source.html">Entry.py</a>.</p>
 
 </div>
 </div>

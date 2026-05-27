@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('db/d3d/namespaceCore_1_1protocol__rout
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a334c5af6c63e19f7cf9b01349ef6369b" id="r_a334c5af6c63e19f7cf9b01349ef6369b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d3d/namespaceCore_1_1protocol__router_1_1dpi.html#a334c5af6c63e19f7cf9b01349ef6369b">investigate_packet</a> (message, mib_cache=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a334c5af6c63e19f7cf9b01349ef6369b" id="r_a334c5af6c63e19f7cf9b01349ef6369b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d3d/namespaceCore_1_1protocol__router_1_1dpi.html#a334c5af6c63e19f7cf9b01349ef6369b">investigate_packet</a> (message, mib_cache=None)</td></tr>
 <tr class="separator:a334c5af6c63e19f7cf9b01349ef6369b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>mib_cache</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>mib_cache</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -162,15 +162,15 @@ Side Effects:
 <div class="line"><span class="lineno">   44</span>    source = message[<span class="stringliteral">&quot;source&quot;</span>]</div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>    <span class="comment"># --- SNMP Investigation: Resolve numeric OIDs to human-readable names ---</span></div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;SNMP&quot;</span> <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.startswith</a>(<span class="stringliteral">&quot;.1.3.6&quot;</span>):</div>
-<div class="line"><span class="lineno">   48</span>        mib = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mib_cache.get</a>(topic, <span class="stringliteral">&quot;Unknown OID&quot;</span>) <span class="keywordflow">if</span> mib_cache <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown OID&quot;</span></div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;SNMP&quot;</span> <span class="keywordflow">or</span> topic.startswith(<span class="stringliteral">&quot;.1.3.6&quot;</span>):</div>
+<div class="line"><span class="lineno">   48</span>        mib = mib_cache.get(topic, <span class="stringliteral">&quot;Unknown OID&quot;</span>) <span class="keywordflow">if</span> mib_cache <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown OID&quot;</span></div>
 <div class="line"><span class="lineno">   49</span>        message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;mib_resolution&quot;</span>] = mib</div>
 <div class="line"><span class="lineno">   50</span>        message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = f<span class="stringliteral">&quot;SNMP MIB: {mib}&quot;</span></div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>    <span class="comment"># --- OSC Investigation: Map logical topics back to OSC addresses ---</span></div>
 <div class="line"><span class="lineno">   53</span>    <span class="keywordflow">if</span> source == <span class="stringliteral">&quot;OSC&quot;</span> <span class="keywordflow">or</span> <span class="stringliteral">&quot;osc_address&quot;</span> <span class="keywordflow">in</span> message[<span class="stringliteral">&quot;meta&quot;</span>]:</div>
 <div class="line"><span class="lineno">   54</span>        osc_addr = message[<span class="stringliteral">&quot;meta&quot;</span>].get(<span class="stringliteral">&quot;osc_address&quot;</span>,</div>
-<div class="line"><span class="lineno">   55</span>                                   <span class="stringliteral">&quot;/&quot;</span> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.replace</a>(<span class="stringliteral">&quot;OPEN-AIR/&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><span class="lineno">   55</span>                                   <span class="stringliteral">&quot;/&quot;</span> + topic.replace(<span class="stringliteral">&quot;OPEN-AIR/&quot;</span>, <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line"><span class="lineno">   56</span>        message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = f<span class="stringliteral">&quot;OSC Map: {osc_addr}&quot;</span></div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>    <span class="comment"># --- MIDI Investigation: Dissect raw bytes and identify signal type ---</span></div>
@@ -180,7 +180,7 @@ Side Effects:
 <div class="line"><span class="lineno">   62</span>        m_type = message[<span class="stringliteral">&quot;meta&quot;</span>].get(<span class="stringliteral">&quot;midi_type&quot;</span>, <span class="stringliteral">&quot;message&quot;</span>)</div>
 <div class="line"><span class="lineno">   63</span> </div>
 <div class="line"><span class="lineno">   64</span>        <span class="comment"># Flag real-time clock signals to differentiate from control changes.</span></div>
-<div class="line"><span class="lineno">   65</span>        <span class="keywordflow">if</span> <span class="stringliteral">&quot;clock&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">raw.lower</a>():</div>
+<div class="line"><span class="lineno">   65</span>        <span class="keywordflow">if</span> <span class="stringliteral">&quot;clock&quot;</span> <span class="keywordflow">in</span> raw.lower():</div>
 <div class="line"><span class="lineno">   66</span>            message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = f<span class="stringliteral">&quot;🎹 MIDI [CLOCK] from {port}&quot;</span></div>
 <div class="line"><span class="lineno">   67</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   68</span>            message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = f<span class="stringliteral">&quot;🎹 MIDI [{m_type.upper()}] &quot;</span> \</div>
@@ -188,8 +188,8 @@ Side Effects:
 <div class="line"><span class="lineno">   70</span> </div>
 <div class="line"><span class="lineno">   71</span>    <span class="comment"># --- YAK Hardware Safety: Flag potential hardware mutations ---</span></div>
 <div class="line"><span class="lineno">   72</span>    <span class="comment"># Mutation events (SET, NAB) require elevated logging and audit trails.</span></div>
-<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;YAK&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.upper</a>():</div>
-<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(k <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.upper</a>() <span class="keywordflow">for</span> k <span class="keywordflow">in</span> [<span class="stringliteral">&quot;SET&quot;</span>, <span class="stringliteral">&quot;NAB&quot;</span>, <span class="stringliteral">&quot;LEVEL&quot;</span>, <span class="stringliteral">&quot;FREQ&quot;</span>]):</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">if</span> <span class="stringliteral">&quot;YAK&quot;</span> <span class="keywordflow">in</span> topic.upper():</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> any(k <span class="keywordflow">in</span> topic.upper() <span class="keywordflow">for</span> k <span class="keywordflow">in</span> [<span class="stringliteral">&quot;SET&quot;</span>, <span class="stringliteral">&quot;NAB&quot;</span>, <span class="stringliteral">&quot;LEVEL&quot;</span>, <span class="stringliteral">&quot;FREQ&quot;</span>]):</div>
 <div class="line"><span class="lineno">   75</span>            message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;mutation&quot;</span>] = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   76</span>            message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = <span class="stringliteral">&quot;🚨 YAK Hardware Mutation&quot;</span></div>
 <div class="line"><span class="lineno">   77</span> </div>
@@ -205,7 +205,6 @@ Side Effects:
 <div class="line"><span class="lineno">   87</span>        message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;blob&quot;</span>] = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   88</span>        message[<span class="stringliteral">&quot;meta&quot;</span>][<span class="stringliteral">&quot;investigation&quot;</span>] = f<span class="stringliteral">&quot;📦 Large Configuration Blob &quot;</span> \</div>
 <div class="line"><span class="lineno">   89</span>                                        f<span class="stringliteral">&quot;({len(val_str)} bytes)&quot;</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>.</p>

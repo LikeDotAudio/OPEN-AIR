@@ -63,7 +63,7 @@ class OpenAirTerminator:
         """
         count = 0
         for topic in topic_list:
-            if topic.startswith("OPEN-AIR"):
+            if topic.startswith("OpenAir"):
                 try:
                     self.client.publish(topic, payload=None, qos=1, retain=True)
                     count += 1

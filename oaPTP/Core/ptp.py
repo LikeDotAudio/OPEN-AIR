@@ -55,7 +55,7 @@ class PtpManager:
     def start(self):
         """Starts the sniffing worker and MQTT subscriptions."""
         if self.subscriber_router:
-            self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/PTP/Capture", self._on_external_data)
+            self.subscriber_router.subscribe_to_topic("OpenAir/System/PTP/Capture", self._on_external_data)
 
         if not SCAPY_AVAILABLE:
             matrix_log("core", "ptp", "start", "⚠️ Scapy not available. Local sniffing disabled.", "WARNING")
@@ -124,4 +124,4 @@ class PtpManager:
             self.last_heartbeat = now
             if self.mqtt:
                 payload = {"status": "alive", "last_ptp_message": data["message_type"], "timestamp": data["timestamp"]}
-                self.mqtt.publish("OPEN-AIR/System/PTP/Heartbeat", orjson.dumps(payload).decode())
+                self.mqtt.publish("OpenAir/System/PTP/Heartbeat", orjson.dumps(payload).decode())

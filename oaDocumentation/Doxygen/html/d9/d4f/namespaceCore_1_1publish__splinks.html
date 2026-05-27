@@ -120,16 +120,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/d34/publish__splinks_8py_source.html#l00008">8</a> of file <a class="el" href="../../d7/d34/publish__splinks_8py_source.html">publish_splinks.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    8</span><span class="keyword">def </span>publish_splinks(self):</div>
-<div class="line"><span class="lineno">    9</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComBroker.Core.protocol_router.manager</a> <span class="keyword">import</span> ProtocolRouter</div>
-<div class="line"><span class="lineno">   10</span>    router = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ProtocolRouter.get_instance</a>()</div>
+<div class="line"><span class="lineno">    9</span>    <span class="keyword">from</span> oaComBroker.Core.protocol_router.manager <span class="keyword">import</span> ProtocolRouter</div>
+<div class="line"><span class="lineno">   10</span>    router = ProtocolRouter.get_instance()</div>
 <div class="line"><span class="lineno">   11</span> </div>
 <div class="line"><span class="lineno">   12</span>    <span class="comment"># ⚡ INGEST: Pass the status update to the router for broadcast</span></div>
 <div class="line"><span class="lineno">   13</span>    <span class="comment"># This ensures it&#39;s wrapped with GUID and Partition correctly.</span></div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.ingest</a>(<span class="stringliteral">&quot;SPLINKER&quot;</span>, <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/List&quot;</span>, self.registry.all_splinks())</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   14</span>    router.ingest(<span class="stringliteral">&quot;SPLINKER&quot;</span>, <span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/List&quot;</span>, self.registry.all_splinks())</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

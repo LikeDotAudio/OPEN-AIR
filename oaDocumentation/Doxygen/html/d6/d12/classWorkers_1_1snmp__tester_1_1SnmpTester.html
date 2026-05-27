@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('d6/d12/classWorkers_1_1snmp__tester_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aec8601f52a5df34d5e81ffce48e5e8f3" id="r_aec8601f52a5df34d5e81ffce48e5e8f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d12/classWorkers_1_1snmp__tester_1_1SnmpTester.html#aec8601f52a5df34d5e81ffce48e5e8f3">verify_oid_tree</a> (base_oid, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mib_content</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, mib_path=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:aec8601f52a5df34d5e81ffce48e5e8f3" id="r_aec8601f52a5df34d5e81ffce48e5e8f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d12/classWorkers_1_1snmp__tester_1_1SnmpTester.html#aec8601f52a5df34d5e81ffce48e5e8f3">verify_oid_tree</a> (base_oid, mib_content=None, mib_path=None)</td></tr>
 <tr class="separator:aec8601f52a5df34d5e81ffce48e5e8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
@@ -137,12 +137,9 @@ Static Protected Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/d3d/snmp__tester_8py_source.html#l00022">22</a> of file <a class="el" href="../../d6/d3d/snmp__tester_8py_source.html">snmp_tester.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   22</span>    <span class="keyword">def </span>_debug_enabled():</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> LOCAL_DEBUG <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">app_constants.SNMP_DEBUG_ENABLE</a></div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> LOCAL_DEBUG <span class="keywordflow">or</span> app_constants.SNMP_DEBUG_ENABLE</div>
 <div class="line"><span class="lineno">   24</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aec8601f52a5df34d5e81ffce48e5e8f3" name="aec8601f52a5df34d5e81ffce48e5e8f3"></a>
@@ -164,13 +161,13 @@ Static Protected Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>mib_content</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>mib_content</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>mib_path</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>mib_path</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -207,12 +204,12 @@ If a MIB is provided, it returns translated symbolic names (-Os) with diagnostic
 <div class="line"><span class="lineno">   41</span>            <span class="comment"># -Cc: Continue on error (sometimes helpful for walk)</span></div>
 <div class="line"><span class="lineno">   42</span>            cmd = [<span class="stringliteral">&quot;snmpwalk&quot;</span>, <span class="stringliteral">&quot;-v2c&quot;</span>, <span class="stringliteral">&quot;-c&quot;</span>, <span class="stringliteral">&quot;public&quot;</span>, <span class="stringliteral">&quot;-On&quot;</span>, <span class="stringliteral">&quot;localhost&quot;</span>, base_oid]</div>
 <div class="line"><span class="lineno">   43</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   44</span>                result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>(cmd, capture_output=<span class="keyword">True</span>, text=<span class="keyword">True</span>, timeout=10)</div>
-<div class="line"><span class="lineno">   45</span>                output = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stdout</a></div>
-<div class="line"><span class="lineno">   46</span>                <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stderr</a>: output = <span class="stringliteral">&quot;ERRORS/WARNINGS:\n&quot;</span> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stderr</a> + <span class="stringliteral">&quot;\n&quot;</span> + <span class="stringliteral">&quot;-&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span> + output</div>
-<div class="line"><span class="lineno">   47</span>                <span class="keywordflow">return</span> output <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">output.strip</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;No OID data returned. Is snmpd running?&quot;</span></div>
+<div class="line"><span class="lineno">   44</span>                result = subprocess.run(cmd, capture_output=<span class="keyword">True</span>, text=<span class="keyword">True</span>, timeout=10)</div>
+<div class="line"><span class="lineno">   45</span>                output = result.stdout</div>
+<div class="line"><span class="lineno">   46</span>                <span class="keywordflow">if</span> result.stderr: output = <span class="stringliteral">&quot;ERRORS/WARNINGS:\n&quot;</span> + result.stderr + <span class="stringliteral">&quot;\n&quot;</span> + <span class="stringliteral">&quot;-&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span> + output</div>
+<div class="line"><span class="lineno">   47</span>                <span class="keywordflow">return</span> output <span class="keywordflow">if</span> output.strip() <span class="keywordflow">else</span> <span class="stringliteral">&quot;No OID data returned. Is snmpd running?&quot;</span></div>
 <div class="line"><span class="lineno">   48</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   49</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">snmp_logger.error</a>(f<span class="stringliteral">&quot;Raw Walk Exception: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   49</span>                snmp_logger.error(f<span class="stringliteral">&quot;Raw Walk Exception: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   50</span>                <span class="keywordflow">return</span> f<span class="stringliteral">&quot;Raw Walk Exception: {e}&quot;</span></div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>        <span class="comment"># --- MIB MODE: MIB provided or requested ---</span></div>
@@ -222,54 +219,54 @@ If a MIB is provided, it returns translated symbolic names (-Os) with diagnostic
 <div class="line"><span class="lineno">   56</span>        std_mib_path = <span class="stringliteral">&quot;/usr/share/snmp/mibs&quot;</span></div>
 <div class="line"><span class="lineno">   57</span>        fallback_path = <span class="stringliteral">&quot;/usr/share/apps/snmpb/mibs&quot;</span></div>
 <div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>        has_std_mibs = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(std_mib_path, <span class="stringliteral">&quot;SNMPv2-SMI.txt&quot;</span>)) <span class="keywordflow">or</span> \</div>
-<div class="line"><span class="lineno">   60</span>                       <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(std_mib_path, <span class="stringliteral">&quot;SNMPv2-SMI&quot;</span>))</div>
+<div class="line"><span class="lineno">   59</span>        has_std_mibs = os.path.exists(os.path.join(std_mib_path, <span class="stringliteral">&quot;SNMPv2-SMI.txt&quot;</span>)) <span class="keywordflow">or</span> \</div>
+<div class="line"><span class="lineno">   60</span>                       os.path.exists(os.path.join(std_mib_path, <span class="stringliteral">&quot;SNMPv2-SMI&quot;</span>))</div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> has_std_mibs:</div>
-<div class="line"><span class="lineno">   63</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(<span class="stringliteral">&quot;! SYSTEM MIBS MISSING: Found no &#39;SNMPv2-SMI&#39; in /usr/share/snmp/mibs.&quot;</span>)</div>
-<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(fallback_path):</div>
-<div class="line"><span class="lineno">   65</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(f<span class="stringliteral">&quot;* Using found fallback MIB path: {fallback_path}&quot;</span>)</div>
+<div class="line"><span class="lineno">   63</span>            diagnostics.append(<span class="stringliteral">&quot;! SYSTEM MIBS MISSING: Found no &#39;SNMPv2-SMI&#39; in /usr/share/snmp/mibs.&quot;</span>)</div>
+<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">if</span> os.path.exists(fallback_path):</div>
+<div class="line"><span class="lineno">   65</span>                diagnostics.append(f<span class="stringliteral">&quot;* Using found fallback MIB path: {fallback_path}&quot;</span>)</div>
 <div class="line"><span class="lineno">   66</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   67</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(<span class="stringliteral">&quot;  Fix: sudo apt-get install snmp-mibs-downloader&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>                diagnostics.append(<span class="stringliteral">&quot;  Fix: sudo apt-get install snmp-mibs-downloader&quot;</span>)</div>
 <div class="line"><span class="lineno">   68</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   69</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(<span class="stringliteral">&quot;- System MIBs found in /usr/share/snmp/mibs.&quot;</span>)</div>
+<div class="line"><span class="lineno">   69</span>            diagnostics.append(<span class="stringliteral">&quot;- System MIBs found in /usr/share/snmp/mibs.&quot;</span>)</div>
 <div class="line"><span class="lineno">   70</span> </div>
 <div class="line"><span class="lineno">   71</span>        <span class="comment"># 2. Process custom MIB</span></div>
 <div class="line"><span class="lineno">   72</span>        module_name = <span class="stringliteral">&quot;OPENAIR-MIB&quot;</span></div>
 <div class="line"><span class="lineno">   73</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> active_mib_path <span class="keywordflow">and</span> mib_content:</div>
 <div class="line"><span class="lineno">   74</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   75</span>                <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(temp_mib, <span class="stringliteral">&quot;w&quot;</span>) <span class="keyword">as</span> f:</div>
-<div class="line"><span class="lineno">   76</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.write</a>(mib_content)</div>
+<div class="line"><span class="lineno">   76</span>                    f.write(mib_content)</div>
 <div class="line"><span class="lineno">   77</span>                active_mib_path = temp_mib</div>
 <div class="line"><span class="lineno">   78</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   79</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">snmp_logger.error</a>(f<span class="stringliteral">&quot;FAILED to write temporary MIB: {e}&quot;</span>)</div>
-<div class="line"><span class="lineno">   80</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(f<span class="stringliteral">&quot;! FAILED to write temporary MIB: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   79</span>                snmp_logger.error(f<span class="stringliteral">&quot;FAILED to write temporary MIB: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   80</span>                diagnostics.append(f<span class="stringliteral">&quot;! FAILED to write temporary MIB: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> active_mib_path <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(active_mib_path):</div>
-<div class="line"><span class="lineno">   83</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(f<span class="stringliteral">&quot;- Custom MIB found: {os.path.basename(active_mib_path)}&quot;</span>)</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> active_mib_path <span class="keywordflow">and</span> os.path.exists(active_mib_path):</div>
+<div class="line"><span class="lineno">   83</span>            diagnostics.append(f<span class="stringliteral">&quot;- Custom MIB found: {os.path.basename(active_mib_path)}&quot;</span>)</div>
 <div class="line"><span class="lineno">   84</span>            <span class="comment"># Detect module name</span></div>
 <div class="line"><span class="lineno">   85</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   86</span>                <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(active_mib_path) <span class="keyword">as</span> f:</div>
-<div class="line"><span class="lineno">   87</span>                    first_lines = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.read</a>(2000)</div>
-<div class="line"><span class="lineno">   88</span>                    match = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.search</a>(<span class="stringliteral">r&quot;^([\w-]+)\s+DEFINITIONS\s+::=\s+BEGIN&quot;</span>, first_lines, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.MULTILINE</a>)</div>
+<div class="line"><span class="lineno">   87</span>                    first_lines = f.read(2000)</div>
+<div class="line"><span class="lineno">   88</span>                    match = re.search(<span class="stringliteral">r&quot;^([\w-]+)\s+DEFINITIONS\s+::=\s+BEGIN&quot;</span>, first_lines, re.MULTILINE)</div>
 <div class="line"><span class="lineno">   89</span>                    <span class="keywordflow">if</span> match:</div>
-<div class="line"><span class="lineno">   90</span>                        module_name = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">match.group</a>(1)</div>
-<div class="line"><span class="lineno">   91</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(f<span class="stringliteral">&quot;- Module name detected: {module_name}&quot;</span>)</div>
+<div class="line"><span class="lineno">   90</span>                        module_name = match.group(1)</div>
+<div class="line"><span class="lineno">   91</span>                        diagnostics.append(f<span class="stringliteral">&quot;- Module name detected: {module_name}&quot;</span>)</div>
 <div class="line"><span class="lineno">   92</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   93</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">snmp_logger.debug</a>(f<span class="stringliteral">&quot;Failed to detect module name from MIB: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   93</span>                snmp_logger.debug(f<span class="stringliteral">&quot;Failed to detect module name from MIB: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   94</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   95</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(<span class="stringliteral">&quot;! No custom MIB provided or found.&quot;</span>)</div>
+<div class="line"><span class="lineno">   95</span>            diagnostics.append(<span class="stringliteral">&quot;! No custom MIB provided or found.&quot;</span>)</div>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>        <span class="comment"># Phase 2: Execution</span></div>
-<div class="line"><span class="lineno">   98</span>        env = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.environ.copy</a>()</div>
+<div class="line"><span class="lineno">   98</span>        env = os.environ.copy()</div>
 <div class="line"><span class="lineno">   99</span> </div>
 <div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> active_mib_path:</div>
-<div class="line"><span class="lineno">  101</span>            mib_dir = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.dirname</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.abspath</a>(active_mib_path))</div>
+<div class="line"><span class="lineno">  101</span>            mib_dir = os.path.dirname(os.path.abspath(active_mib_path))</div>
 <div class="line"><span class="lineno">  102</span>            search_paths = [mib_dir]</div>
-<div class="line"><span class="lineno">  103</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(std_mib_path): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">search_paths.append</a>(std_mib_path)</div>
-<div class="line"><span class="lineno">  104</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(fallback_path): <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">search_paths.append</a>(fallback_path)</div>
+<div class="line"><span class="lineno">  103</span>            <span class="keywordflow">if</span> os.path.exists(std_mib_path): search_paths.append(std_mib_path)</div>
+<div class="line"><span class="lineno">  104</span>            <span class="keywordflow">if</span> os.path.exists(fallback_path): search_paths.append(fallback_path)</div>
 <div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>            search_path_str = <span class="stringliteral">&quot;:&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(search_paths)</div>
+<div class="line"><span class="lineno">  106</span>            search_path_str = <span class="stringliteral">&quot;:&quot;</span>.join(search_paths)</div>
 <div class="line"><span class="lineno">  107</span>            env[<span class="stringliteral">&quot;MIBDIRS&quot;</span>] = f<span class="stringliteral">&quot;{search_path_str}&quot;</span> <span class="comment"># ⚡ ABSOLUTE search path</span></div>
 <div class="line"><span class="lineno">  108</span> </div>
 <div class="line"><span class="lineno">  109</span>            <span class="comment"># Build Command</span></div>
@@ -285,27 +282,27 @@ If a MIB is provided, it returns translated symbolic names (-Os) with diagnostic
 <div class="line"><span class="lineno">  119</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">  120</span>            cmd = [<span class="stringliteral">&quot;snmpwalk&quot;</span>, <span class="stringliteral">&quot;-v2c&quot;</span>, <span class="stringliteral">&quot;-c&quot;</span>, <span class="stringliteral">&quot;public&quot;</span>, <span class="stringliteral">&quot;localhost&quot;</span>, base_oid]</div>
 <div class="line"><span class="lineno">  121</span> </div>
-<div class="line"><span class="lineno">  122</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(f<span class="stringliteral">&quot;&gt; Executing walk on {base_oid}...&quot;</span>)</div>
-<div class="line"><span class="lineno">  123</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">diagnostics.append</a>(<span class="stringliteral">&quot;=&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span>)</div>
+<div class="line"><span class="lineno">  122</span>        diagnostics.append(f<span class="stringliteral">&quot;&gt; Executing walk on {base_oid}...&quot;</span>)</div>
+<div class="line"><span class="lineno">  123</span>        diagnostics.append(<span class="stringliteral">&quot;=&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span>)</div>
 <div class="line"><span class="lineno">  124</span> </div>
 <div class="line"><span class="lineno">  125</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  126</span>            result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>(cmd, capture_output=<span class="keyword">True</span>, text=<span class="keyword">True</span>, timeout=10, env=env)</div>
-<div class="line"><span class="lineno">  127</span>            output = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stdout</a></div>
-<div class="line"><span class="lineno">  128</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stderr</a>:</div>
-<div class="line"><span class="lineno">  129</span>                output = <span class="stringliteral">&quot;SNMPWALK ERRORS/WARNINGS:\n&quot;</span> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.stderr</a> + <span class="stringliteral">&quot;\n&quot;</span> + <span class="stringliteral">&quot;-&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span> + output</div>
+<div class="line"><span class="lineno">  126</span>            result = subprocess.run(cmd, capture_output=<span class="keyword">True</span>, text=<span class="keyword">True</span>, timeout=10, env=env)</div>
+<div class="line"><span class="lineno">  127</span>            output = result.stdout</div>
+<div class="line"><span class="lineno">  128</span>            <span class="keywordflow">if</span> result.stderr:</div>
+<div class="line"><span class="lineno">  129</span>                output = <span class="stringliteral">&quot;SNMPWALK ERRORS/WARNINGS:\n&quot;</span> + result.stderr + <span class="stringliteral">&quot;\n&quot;</span> + <span class="stringliteral">&quot;-&quot;</span>*40 + <span class="stringliteral">&quot;\n&quot;</span> + output</div>
 <div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">output.strip</a>() <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.returncode</a> == 0:</div>
+<div class="line"><span class="lineno">  131</span>            <span class="keywordflow">if</span> <span class="keywordflow">not</span> output.strip() <span class="keywordflow">and</span> result.returncode == 0:</div>
 <div class="line"><span class="lineno">  132</span>                output = <span class="stringliteral">&quot;No data returned. Bridge is active but tree is empty.&quot;</span></div>
-<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">elif</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">output.strip</a>():</div>
+<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">elif</span> <span class="keywordflow">not</span> output.strip():</div>
 <div class="line"><span class="lineno">  134</span>                output = <span class="stringliteral">&quot;No data returned and walk failed. Check snmpd logs.&quot;</span></div>
 <div class="line"><span class="lineno">  135</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  136</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">snmp_logger.error</a>(f<span class="stringliteral">&quot;Process Exception during SNMP walk: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  136</span>            snmp_logger.error(f<span class="stringliteral">&quot;Process Exception during SNMP walk: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  137</span>            output = f<span class="stringliteral">&quot;Process Exception: {e}&quot;</span></div>
 <div class="line"><span class="lineno">  138</span> </div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(diagnostics) + output</div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.join(diagnostics) + output</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>.</p>
 
 </div>
 </div>

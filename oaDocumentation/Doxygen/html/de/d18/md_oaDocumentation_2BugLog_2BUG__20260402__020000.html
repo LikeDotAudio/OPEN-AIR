@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('de/d18/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 02:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1078"></a> </p>
-<h1><a class="anchor" id="autotoc_md1079"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1343"></a> </p>
+<h1><a class="anchor" id="autotoc_md1344"></a>
 Issues</h1>
 <p>This report details a batch of bugs fixed on 2026-04-02. The issues involved a <code>TypeError</code> when persisting the state cache using the Rust engine, and a persistent <code>ImportError</code> preventing the <code>BlueprintParser</code> from being loaded from its compiled Rust extension.</p>
-<h1><a class="anchor" id="autotoc_md1080"></a>
+<h1><a class="anchor" id="autotoc_md1345"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1081"></a>
+<h2><a class="anchor" id="autotoc_md1346"></a>
 1. TypeError in CacheSaveEngine</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;TypeError: argument 'data&rsquo;: '<a class="el" href="../../da/d42/oa__state__registry__rs_2mod_8rs.html#da/d1e/structStateRegistryCore">StateRegistryCore</a>' object cannot be converted to 'PyDict'<code>in</code><a class="el" href="../../d4/d86/cache__save__engine_8py.html">oaStateCache/Core/cache_save_engine.py</a><code>.</code></li>
 <li><code> **Root Cause**: The</code>_worker<code>method in</code>CacheSaveEngine<code>attempted to pass the Rust</code><a class="el" href="../../da/d42/oa__state__registry__rs_2mod_8rs.html#da/d1e/structStateRegistryCore">StateRegistryCore</a><code>object (</code>self.cache<code>) directly to</code>flusher_instance.flush_async()<code>. PyO3 could not automatically coerce this custom Rust object into a Python dictionary (</code>PyDict<code>).</code></li>
 <li><code> **Resolution**: Modified the code to check if</code>self.cache<code>has a</code>to_dict<code>method (which the Rust implementation provides). If so, it calls</code>self.cache.to_dict()<code>to generate a standard dictionary before passing it to the flusher. Otherwise, it falls back to</code>dict(self.cache)`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1082"></a>
+<h2><a class="anchor" id="autotoc_md1347"></a>
 2. ImportError for BlueprintParser</h2>
 <ul>
-<li><b>Issue</b>: &lsquo;ImportError: cannot import name 'BlueprintParser&rsquo; from 'oablueprintparser_rs'<code>in</code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">oaGui/FileReaders/blueprint_loader.py</a><code>and</code>oaGui/FileReaders/oaBlueprintParser_rs/compiler_hook.py<code>.</code></li>
+<li><b>Issue</b>: &lsquo;ImportError: cannot import name 'BlueprintParser&rsquo; from 'oablueprintparser_rs'<code>in</code>oaGui/FileReaders/json_blueprint_reader.py<code>and</code>oaGui/FileReaders/oaBlueprintParser_rs/compiler_hook.py<code>.</code></li>
 <li><code> **Root Cause**: The</code>maturin<code>develop command generated an</code>__init__.py<code>wrapper for the</code>oablueprintparser_rs<code>Python package that failed to correctly expose the</code>BlueprintParser<code>class from the underlying compiled</code>.so<code>extension (named</code>oablueprintparser_rs.cpython...so<code>). The class was successfully compiled but hidden within the</code>oablueprintparser_rs.oablueprintparser_rs<code>namespace.</code></li>
-<li><code> **Resolution**: Updated all import statements across</code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">blueprint_loader.py</a><code>and</code>compiler_hook.py<code>to bypass the generated</code>__init__.py<code>wrapper and import the class directly from the compiled shared object:</code>from oablueprintparser_rs.oablueprintparser_rs import BlueprintParser`.</li>
+<li><code> **Resolution**: Updated all import statements across</code><a class="el" href="../../de/df1/json__blueprint__reader_8py.html">json_blueprint_reader.py</a><code>and</code>compiler_hook.py<code>to bypass the generated</code>__init__.py<code>wrapper and import the class directly from the compiled shared object:</code>from oablueprintparser_rs.oablueprintparser_rs import BlueprintParser`.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1083"></a>
+<h1><a class="anchor" id="autotoc_md1348"></a>
 Verification</h1>
 <p>The fixes have been applied and the application should now successfully save the state cache to disk and instantiate the <code>BlueprintParser</code> during the GUI bootstrap sequence without raising exceptions. </p>
 </div></div><!-- contents -->

@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('d0/d71/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260312_004500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1645"></a> </p>
-<h1><a class="anchor" id="autotoc_md1646"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2094"></a> </p>
+<h1><a class="anchor" id="autotoc_md2095"></a>
 &lt;strong&gt;Issue&lt;/strong&gt;</h1>
 <p><b>User Analysis</b>: "the system is getting trapped in the echo chamber... cache restoration wakes up and reads the saved state from disk. It floods the MQTT broker... Both partitions independently preparing to settle the exact same parameters at the exact same time... infinite ping-pong." <b>Problem</b>: Competing partitions (CORE and UI) were both starting settling timers for the same external events, leading to a feedback loop where each partition's "settled" broadcast triggered the other to re-settle. Additionally, the Panic protocol crashed the MQTT publisher with raw dictionary payloads.</p>
-<h1><a class="anchor" id="autotoc_md1647"></a>
+<h1><a class="anchor" id="autotoc_md2096"></a>
 &lt;strong&gt;Root Cause&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Non-Terminal Feedback</b>: <code>ProtocolRouter.ingest</code> triggered a <code>_schedule_settling</code> timer for any message passing the local loop prevention, regardless of whether it was a control "Action" or a state "Feedback".</li>
 <li><b>Publisher TypeError</b>: <code>aiomqtt</code> (or the underlying paho-mqtt client) expects strings or bytes for payloads. The <code>SplinkerManager._handle_panic</code> method was passing a raw Python dictionary, causing a fatal error in the publishing worker.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1648"></a>
+<h1><a class="anchor" id="autotoc_md2097"></a>
 &lt;strong&gt;Investigation&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Log Analysis</b>: Verified in <code>Application_20260312_0040.log</code> that both partitions were firing "⏳ Settling" messages for the same topics repeatedly.</li>
 <li><b>Code Review</b>: Confirmed <code>ProtocolRouter.ingest</code> did not distinguish between <code>msg_type</code> for the purpose of starting the settling timer.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1649"></a>
+<h1><a class="anchor" id="autotoc_md2098"></a>
 &lt;strong&gt;Resolution&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Terminal Settling</b>: Modified <code>ProtocolRouter.ingest</code> to strictly suppress the settling timer for <code>LINK_FEEDBACK</code> messages. Only <code>SPLICE_ACTION</code> (original movements) can now trigger a settling cycle.</li>
 <li><b>Panic Payload Hardening</b>: Updated <code>SplinkerManager._handle_panic</code> and <code>_reset_panic</code> to explicitly serialize dictionary payloads using <code>orjson.dumps().decode()</code> before passing them to the MQTT manager.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1650"></a>
+<h1><a class="anchor" id="autotoc_md2099"></a>
 &lt;strong&gt;Verification&lt;/strong&gt;</h1>
 <ol type="1">
 <li><b>Unit Test</b>: <code>reproduce_settling_loop.py</code> confirmed that receiving a <code>LINK_FEEDBACK</code> message no longer triggers a "Settling: Firing final LINK_FEEDBACK" log entry.</li>

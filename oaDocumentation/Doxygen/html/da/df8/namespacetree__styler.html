@@ -120,38 +120,35 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d9/d1e/tree__styler_8py_source.html#l00010">10</a> of file <a class="el" href="../../d9/d1e/tree__styler_8py_source.html">tree_styler.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   10</span><span class="keyword">def </span>apply_tree_styles():</div>
 <div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;Configures the dark mode styles for the Treeview and containers.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   12</span>    style = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ttk.Style</a>()</div>
+<div class="line"><span class="lineno">   12</span>    style = ttk.Style()</div>
 <div class="line"><span class="lineno">   13</span> </div>
 <div class="line"><span class="lineno">   14</span>    <span class="comment"># Dark Frame</span></div>
-<div class="line"><span class="lineno">   15</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;Dark.TFrame&quot;</span>, background=<span class="stringliteral">&quot;#2b2b2b&quot;</span>)</div>
+<div class="line"><span class="lineno">   15</span>    style.configure(<span class="stringliteral">&quot;Dark.TFrame&quot;</span>, background=<span class="stringliteral">&quot;#2b2b2b&quot;</span>)</div>
 <div class="line"><span class="lineno">   16</span> </div>
 <div class="line"><span class="lineno">   17</span>    <span class="comment"># Dark Treeview</span></div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;Treeview&quot;</span>,</div>
+<div class="line"><span class="lineno">   18</span>    style.configure(<span class="stringliteral">&quot;Treeview&quot;</span>,</div>
 <div class="line"><span class="lineno">   19</span>        background=<span class="stringliteral">&quot;#1a1a1a&quot;</span>,</div>
 <div class="line"><span class="lineno">   20</span>        foreground=<span class="stringliteral">&quot;#dcdcdc&quot;</span>,</div>
 <div class="line"><span class="lineno">   21</span>        fieldbackground=<span class="stringliteral">&quot;#1a1a1a&quot;</span>,</div>
 <div class="line"><span class="lineno">   22</span>        borderwidth=0,</div>
 <div class="line"><span class="lineno">   23</span>        font=(<span class="stringliteral">&quot;Segoe UI&quot;</span>, 9)</div>
 <div class="line"><span class="lineno">   24</span>    )</div>
-<div class="line"><span class="lineno">   25</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(<span class="stringliteral">&quot;Treeview&quot;</span>,</div>
+<div class="line"><span class="lineno">   25</span>    style.map(<span class="stringliteral">&quot;Treeview&quot;</span>,</div>
 <div class="line"><span class="lineno">   26</span>        background=[(<span class="stringliteral">&#39;selected&#39;</span>, <span class="stringliteral">&#39;#33A1FD&#39;</span>)],</div>
 <div class="line"><span class="lineno">   27</span>        foreground=[(<span class="stringliteral">&#39;selected&#39;</span>, <span class="stringliteral">&#39;white&#39;</span>)]</div>
 <div class="line"><span class="lineno">   28</span>    )</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># Dark Treeview Heading</span></div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.configure</a>(<span class="stringliteral">&quot;Treeview.Heading&quot;</span>,</div>
+<div class="line"><span class="lineno">   31</span>    style.configure(<span class="stringliteral">&quot;Treeview.Heading&quot;</span>,</div>
 <div class="line"><span class="lineno">   32</span>        background=<span class="stringliteral">&quot;#333333&quot;</span>,</div>
 <div class="line"><span class="lineno">   33</span>        foreground=<span class="stringliteral">&quot;#888888&quot;</span>,</div>
 <div class="line"><span class="lineno">   34</span>        relief=<span class="stringliteral">&quot;flat&quot;</span>,</div>
 <div class="line"><span class="lineno">   35</span>        font=(<span class="stringliteral">&quot;Segoe UI&quot;</span>, 9, <span class="stringliteral">&quot;bold&quot;</span>)</div>
 <div class="line"><span class="lineno">   36</span>    )</div>
-<div class="line"><span class="lineno">   37</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">style.map</a>(<span class="stringliteral">&quot;Treeview.Heading&quot;</span>,</div>
+<div class="line"><span class="lineno">   37</span>    style.map(<span class="stringliteral">&quot;Treeview.Heading&quot;</span>,</div>
 <div class="line"><span class="lineno">   38</span>        background=[(<span class="stringliteral">&#39;active&#39;</span>, <span class="stringliteral">&#39;#444444&#39;</span>)]</div>
 <div class="line"><span class="lineno">   39</span>    )</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

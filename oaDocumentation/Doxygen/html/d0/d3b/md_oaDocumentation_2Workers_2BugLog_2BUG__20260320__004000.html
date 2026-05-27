@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d0/d3b/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Composite Widget Crash, Graphing Errors, and Asset Loading Failures</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1932"></a> </p>
-<h1><a class="anchor" id="autotoc_md1933"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2381"></a> </p>
+<h1><a class="anchor" id="autotoc_md2382"></a>
 Issue</h1>
 <ol type="1">
-<li>Application crash when loading <code>_VUMeterKnob</code> due to <code>AttributeError</code>.</li>
+<li>EngineGuiDisplay crash when loading <code>_VUMeterKnob</code> due to <code>AttributeError</code>.</li>
 <li>Graphing components (<code>DynamicGraph</code>, <code>DynamicBarGraph</code>) failed to render with "Unknown functional widget" errors.</li>
 <li>Animations failed to load with "GIF not found" errors.</li>
 <li><code>ProgressBar</code> threw registry warnings about a missing <code>make</code> method.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1934"></a>
+<h1><a class="anchor" id="autotoc_md2383"></a>
 Root Cause Analysis</h1>
 <ol type="1">
-<li><b>Composite Crash</b>: <code>BuilderMeterKnobWithVuMeterCreator</code> was attempting to call <code>self.make_meter_needle</code> directly on the builder instance. In the modular architecture, this method is no longer present on the builder and must be called via the specialized creator class. Additionally, <code>_NeedleVUMeter</code> was not registered with the <code>WidgetRegistry</code>.</li>
+<li><b>Composite Crash</b>: <code>BuilderMeterKnobWithVuMeterCreator</code> was attempting to call <code>self.make_meter_needle</code> directly on the builder instance. In the modular architecture, this method is no longer present on the builder and must be called via the specialized creator class. Additionally, <code>_NeedleVUMeter</code> was not registered with the <code>RegistryWidgetStore</code>.</li>
 <li><b>Missing Graphs</b>: The <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code> was missing the lazy-wrapper entries for several graphing widget aliases used in JSON configurations.</li>
 <li><b>Asset Mismatch</b>: JSON definitions for animations were pointing to a non-existent directory <code>oaDataCache/assets/images/</code>, while the actual assets were located in <code>oaGui/Assets/</code>.</li>
 <li><b>Registry Inconsistency</b>: <code>BuilderImagesProgressBarCreator</code> was registered but lacked the standard static <code>make</code> method required by the new factory pattern.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1935"></a>
+<h1><a class="anchor" id="autotoc_md2384"></a>
 Resolutions</h1>
 <ol type="1">
 <li><b>Composite Fix</b>:<ul>
@@ -122,7 +122,7 @@ Resolutions</h1>
 <li><b>Asset Correction</b>: Batch-updated JSON paths for <code>time_circuits.gif</code> using <code>sed</code>.</li>
 <li><b><a class="el" href="../../da/d9a/namespaceInterface.html">Interface</a> Alignment</b>: Added the static <code>make</code> method to <code>BuilderImagesProgressBarCreator</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1936"></a>
+<h1><a class="anchor" id="autotoc_md2385"></a>
 Files Modified</h1>
 <ul>
 <li><code>oaGuiElements/Core/metering/meter_needle/meter_needle.py</code></li>
@@ -132,7 +132,7 @@ Files Modified</h1>
 <li><code>oaGui/Assets/right_50/bottom_90/9_Zoo/4_images/1_animation_display/animation_display.json</code></li>
 <li><code>oaGui/Assets/right_50/bottom_90/9_Zoo/4_images/2_image_display/image_display.json</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1937"></a>
+<h1><a class="anchor" id="autotoc_md2386"></a>
 Verification Evidence</h1>
 <p>The <code>AttributeError</code> is eliminated by moving to class-level <code>make()</code> calls. The "Unknown functional widget" errors are resolved by populating the factory mapping. GIF loading is verified by the existence of the assets at the new paths. </p>
 </div></div><!-- contents -->

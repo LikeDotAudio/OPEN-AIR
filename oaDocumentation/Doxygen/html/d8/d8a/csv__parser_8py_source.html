@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OPEN-AIR: oaFileImportCSV/Methods/csv_parser.py Source File</title>
+<title>OPEN-AIR: oaFileHandlers/oaFileImportCSV/Methods/csv_parser.py Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d8/d8a/csv__parser_8py_source.html','.
   <div class="headertitle"><div class="title">csv_parser.py</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d8/d8a/csv__parser_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../d8/d95/namespaceMethods_1_1csv__parser.html">    1</a></span><span class="comment"># oaFileImportCSV/Methods/csv_parser.py</span></div>
+<a href="../../d8/d8a/csv__parser_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../d8/d95/namespaceMethods_1_1csv__parser.html">    1</a></span><span class="comment"># oaFileHandlers/oaFileImportCSV/Methods/csv_parser.py</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"># Author: Anthony Peter Kuzub</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"># Version: 20260331.2150.2</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#</span></div>
@@ -118,27 +118,26 @@ $(document).ready(function(){initNavTree('d8/d8a/csv__parser_8py_source.html','.
 <div class="foldopen" id="foldopen00017" data-start="" data-end="">
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a3e78e92c848a06cfc41ebaf524c1c1ae">   17</a></span>    <span class="keyword">def </span>convert_csv_unknown(file_path: str):</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📄🛠️🔗 [CSV] Using PURE RUST parser (nom/regex).&quot;</span>)</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oacsvparser_rs.convert_csv_unknown</a>(file_path)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            print(<span class="stringliteral">&quot;📄🛠️🔗 [CSV] Using PURE RUST parser (nom/regex).&quot;</span>)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span> oacsvparser_rs.convert_csv_unknown(file_path)</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="preprocessor">@staticmethod</span></div>
 <div class="foldopen" id="foldopen00023" data-start="" data-end="">
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a9cba85416e9dddb4a5d7f92394da1b43">   23</a></span>    <span class="keyword">def </span><a class="code hl_function" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a9cba85416e9dddb4a5d7f92394da1b43">load_large_csv</a>(file_path: str):</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📊🛠️🔗 [CSV] Using PURE RUST loader (Polars).&quot;</span>)</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oacsvparser_rs.load_large_csv</a>(file_path)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            print(<span class="stringliteral">&quot;📊🛠️🔗 [CSV] Using PURE RUST loader (Polars).&quot;</span>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> oacsvparser_rs.load_large_csv(file_path)</div>
 </div>
 </div>
 <div class="ttc" id="aclassMethods_1_1csv__parser_1_1CSVParser_html"><div class="ttname"><a href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html">Methods.csv_parser.CSVParser</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/d8a/csv__parser_8py_source.html#l00011">csv_parser.py:11</a></div></div>
 <div class="ttc" id="aclassMethods_1_1csv__parser_1_1CSVParser_html_a9cba85416e9dddb4a5d7f92394da1b43"><div class="ttname"><a href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a9cba85416e9dddb4a5d7f92394da1b43">Methods.csv_parser.CSVParser.load_large_csv</a></div><div class="ttdeci">load_large_csv(str file_path)</div><div class="ttdef"><b>Definition</b> <a href="../../d8/d8a/csv__parser_8py_source.html#l00023">csv_parser.py:23</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_3d9dcb73cb3c08db1da480d8518c6e16.html">oaFileImportCSV</a></li><li class="navelem"><a class="el" href="../../dir_6900fb2b177518a656d73d433c9513dc.html">Methods</a></li><li class="navelem"><a class="el" href="../../d8/d8a/csv__parser_8py.html">csv_parser.py</a></li>
+    <li class="navelem"><a class="el" href="../../dir_cd8eb49f916affde456fad18276f7491.html">oaFileHandlers</a></li><li class="navelem"><a class="el" href="../../dir_7dbcd8c54a42d7545a88b8a7117ea5ef.html">oaFileImportCSV</a></li><li class="navelem"><a class="el" href="../../dir_9ddee9ce7c1394f6ce1ffa20e6fc5671.html">Methods</a></li><li class="navelem"><a class="el" href="../../d8/d8a/csv__parser_8py.html">csv_parser.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

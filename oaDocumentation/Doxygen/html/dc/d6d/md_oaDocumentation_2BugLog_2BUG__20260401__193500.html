@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('dc/d6d/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: UI Launch Failure &amp; Missing Rust Modules</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1007"></a> </p>
-<h1><a class="anchor" id="autotoc_md1008"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1272"></a> </p>
+<h1><a class="anchor" id="autotoc_md1273"></a>
 Issue</h1>
-<p>The system failed to launch Partition B (UI) due to a <code>SyntaxError</code> in <code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">blueprint_loader.py</a></code>. Additionally, Partition A (<a class="el" href="../../d3/d7a/namespaceCore.html">Core</a>) reported fatal errors regarding missing Rust Translator modules, despite compilation attempts.</p>
-<h1><a class="anchor" id="autotoc_md1009"></a>
+<p>The system failed to launch Partition B (UI) due to a <code>SyntaxError</code> in <code><a class="el" href="../../de/df1/json__blueprint__reader_8py.html">json_blueprint_reader.py</a></code>. Additionally, Partition A (<a class="el" href="../../d3/d7a/namespaceCore.html">Core</a>) reported fatal errors regarding missing Rust Translator modules, despite compilation attempts.</p>
+<h1><a class="anchor" id="autotoc_md1274"></a>
 Root Cause</h1>
 <ol type="1">
-<li><b>SyntaxError</b>: Malformed docstrings with escaped triple quotes (<code>\"\\"\\"</code>) in <code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">blueprint_loader.py</a></code> corrupted the Python parser state.</li>
+<li><b>SyntaxError</b>: Malformed docstrings with escaped triple quotes (<code>\"\\"\\"</code>) in <code><a class="el" href="../../de/df1/json__blueprint__reader_8py.html">json_blueprint_reader.py</a></code> corrupted the Python parser state.</li>
 <li><b>Missing Modules</b>: The automatic <code>compiler_hook.py</code> failed to correctly register the Rust binaries in the Python environment path during the supervisor spawn.</li>
 <li><b>Noisy Logs</b>: <code><a class="el" href="../../d6/d13/gui__state__restorer_8py.html">gui_state_restorer.py</a></code> logged errors for missing mirror engines which are expected during early boot phases.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1010"></a>
+<h1><a class="anchor" id="autotoc_md1275"></a>
 Resolution</h1>
 <ol type="1">
-<li><b>Surgical Fix</b>: Manually repaired docstring structure in <code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">blueprint_loader.py</a></code>.</li>
+<li><b>Surgical Fix</b>: Manually repaired docstring structure in <code><a class="el" href="../../de/df1/json__blueprint__reader_8py.html">json_blueprint_reader.py</a></code>.</li>
 <li><b>Hook Enhancement</b>: Updated <code>compiler_hook.py</code> in <code>oaTranslatorCore-rs</code>, <code>oaBlueprintParser-rs</code>, and <code>oaGeometryMath-rs</code> to include <code>importlib.invalidate_caches()</code> and explicit <code>.venv</code> path synchronization.</li>
 <li><b>Maturin Alignment</b>: Installed <code>maturin</code> in the virtual environment to ensure <code>maturin develop</code> installs modules to the correct high-performance path.</li>
 <li><b>Log Sanitization</b>: Downgraded restoration warning to DEBUG level.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1011"></a>
+<h1><a class="anchor" id="autotoc_md1276"></a>
 Verification</h1>
 <p>Verified via <code>verify_fixes.py</code> script ensuring all imports and native modules are active. </p>
 </div></div><!-- contents -->

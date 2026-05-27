@@ -93,40 +93,40 @@ $(document).ready(function(){initNavTree('dc/dac/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 04:30:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1098"></a> </p>
-<h1><a class="anchor" id="autotoc_md1099"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1363"></a> </p>
+<h1><a class="anchor" id="autotoc_md1364"></a>
 Issues Resolved</h1>
-<h2><a class="anchor" id="autotoc_md1100"></a>
+<h2><a class="anchor" id="autotoc_md1365"></a>
 1. CRITICAL: `ImportError` for `BlueprintParser`</h2>
 <ul>
-<li><b>Module</b>: `oaGui.<a class="el" href="../../d1/d31/namespaceFileReaders_1_1blueprint__loader.html">FileReaders.blueprint_loader</a>`</li>
+<li><b>Module</b>: `oaGui.<a class="el" href="../../d2/d85/namespaceFileReaders_1_1loader_1_1json__blueprint__reader.html">FileReaders.loader.json_blueprint_reader</a>`</li>
 <li><b>Root Cause</b>: Name collision between the `oablueprintparser_rs` package and its underlying shared object module. The `__init__.py` wrapper failed to correctly export `BlueprintParser`.</li>
 <li><b>Resolution</b>: Updated all import calls to use the direct sub-module path: `from oablueprintparser_rs.oablueprintparser_rs import BlueprintParser`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1101"></a>
+<h2><a class="anchor" id="autotoc_md1366"></a>
 2. CRITICAL: `TypeError` in State Cache Saver</h2>
 <ul>
 <li><b>Module</b>: `oaStateCache.<a class="el" href="../../d9/d65/namespaceCore_1_1cache__save__engine.html">Core.cache_save_engine</a>`</li>
 <li><b>Root Cause</b>: The Rust `StateRegistryCore` object was being passed directly to the Rust `DiskFlusher.flush_async`, which expects a Python `PyDict`. PyO3 cannot auto-coerce custom Rust classes to `PyDict`.</li>
 <li><b>Resolution</b>: Added explicit `to_dict()` conversion logic in the save worker loop before passing data to the flusher.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1102"></a>
+<h2><a class="anchor" id="autotoc_md1367"></a>
 3. HIGH: `IndentationError` in OSC Dashboard</h2>
 <ul>
 <li><b>File</b>: `oaGui/Assets/Assets/right_50/bottom_90/55_OSC/gui_OSC.py`</li>
 <li><b>Root Cause</b>: Misaligned indentation on line 37 (body of an `if` statement).</li>
 <li><b>Resolution</b>: Normalized indentation to 4 spaces.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1103"></a>
+<h1><a class="anchor" id="autotoc_md1368"></a>
 Performance Enhancements</h1>
-<h2><a class="anchor" id="autotoc_md1104"></a>
+<h2><a class="anchor" id="autotoc_md1369"></a>
 1. `oaPDFParser_rs` Migration</h2>
 <ul>
 <li><b>Category</b>: CPU/IO Heat (as identified in Audit 20260402).</li>
 <li><b>Implementation</b>: Created a native Rust extension using the `pdf-extract` crate for high-speed text extraction.</li>
 <li><b>Integration</b>: Updated SoundBase V2 importer to prioritize the native parser, significantly reducing ingestion latency for large reports.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1105"></a>
+<h1><a class="anchor" id="autotoc_md1370"></a>
 Verification Evidence</h1>
 <ul>
 <li>Direct import test (`python -c ...`) confirmed `oablueprintparser_rs.oablueprintparser_rs.BlueprintParser` is reachable.</li>

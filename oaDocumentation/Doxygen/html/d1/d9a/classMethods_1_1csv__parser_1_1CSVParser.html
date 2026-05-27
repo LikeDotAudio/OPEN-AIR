@@ -99,9 +99,9 @@ $(document).ready(function(){initNavTree('d1/d9a/classMethods_1_1csv__parser_1_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3e78e92c848a06cfc41ebaf524c1c1ae" id="r_a3e78e92c848a06cfc41ebaf524c1c1ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a3e78e92c848a06cfc41ebaf524c1c1ae">convert_csv_unknown</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path</a>)</td></tr>
+<tr class="memitem:a3e78e92c848a06cfc41ebaf524c1c1ae" id="r_a3e78e92c848a06cfc41ebaf524c1c1ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a3e78e92c848a06cfc41ebaf524c1c1ae">convert_csv_unknown</a> (str file_path)</td></tr>
 <tr class="separator:a3e78e92c848a06cfc41ebaf524c1c1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cba85416e9dddb4a5d7f92394da1b43" id="r_a9cba85416e9dddb4a5d7f92394da1b43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a9cba85416e9dddb4a5d7f92394da1b43">load_large_csv</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">file_path</a>)</td></tr>
+<tr class="memitem:a9cba85416e9dddb4a5d7f92394da1b43" id="r_a9cba85416e9dddb4a5d7f92394da1b43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9a/classMethods_1_1csv__parser_1_1CSVParser.html#a9cba85416e9dddb4a5d7f92394da1b43">load_large_csv</a> (str file_path)</td></tr>
 <tr class="separator:a9cba85416e9dddb4a5d7f92394da1b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -137,13 +137,10 @@ MANDATORY Rust implementation.
 <p class="definition">Definition at line <a class="el" href="../../d8/d8a/csv__parser_8py_source.html#l00017">17</a> of file <a class="el" href="../../d8/d8a/csv__parser_8py_source.html">csv_parser.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   17</span>    <span class="keyword">def </span>convert_csv_unknown(file_path: str):</div>
 <div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   19</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📄🛠️🔗 [CSV] Using PURE RUST parser (nom/regex).&quot;</span>)</div>
-<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oacsvparser_rs.convert_csv_unknown</a>(file_path)</div>
+<div class="line"><span class="lineno">   19</span>            print(<span class="stringliteral">&quot;📄🛠️🔗 [CSV] Using PURE RUST parser (nom/regex).&quot;</span>)</div>
+<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">return</span> oacsvparser_rs.convert_csv_unknown(file_path)</div>
 <div class="line"><span class="lineno">   21</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a9cba85416e9dddb4a5d7f92394da1b43" name="a9cba85416e9dddb4a5d7f92394da1b43"></a>
@@ -173,15 +170,13 @@ MANDATORY Rust implementation.
 <p class="definition">Definition at line <a class="el" href="../../d8/d8a/csv__parser_8py_source.html#l00023">23</a> of file <a class="el" href="../../d8/d8a/csv__parser_8py_source.html">csv_parser.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>load_large_csv(file_path: str):</div>
 <div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   25</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;📊🛠️🔗 [CSV] Using PURE RUST loader (Polars).&quot;</span>)</div>
-<div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oacsvparser_rs.load_large_csv</a>(file_path)</div>
+<div class="line"><span class="lineno">   25</span>            print(<span class="stringliteral">&quot;📊🛠️🔗 [CSV] Using PURE RUST loader (Polars).&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span>        <span class="keywordflow">return</span> oacsvparser_rs.load_large_csv(file_path)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>oaFileImportCSV/Methods/<a class="el" href="../../d8/d8a/csv__parser_8py_source.html">csv_parser.py</a></li>
+<li>oaFileHandlers/oaFileImportCSV/Methods/<a class="el" href="../../d8/d8a/csv__parser_8py_source.html">csv_parser.py</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

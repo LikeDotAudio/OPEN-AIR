@@ -93,39 +93,39 @@ $(document).ready(function(){initNavTree('d7/d65/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Log Noise &amp; Warning Reduction</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2075"></a><b>Date:</b> 2026-04-09 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2524"></a><b>Date:</b> 2026-04-09 <br  />
  <b>Status:</b> Resolved <br  />
  <b>Priority:</b> 2 (Moderate/Spam)</p>
-<h1><a class="anchor" id="autotoc_md2076"></a>
+<h1><a class="anchor" id="autotoc_md2525"></a>
 1. Issue Description</h1>
 <p>The system logs were cluttered with several high-priority warnings that did not represent actual system failures but rather standard initialization or fallback paths.</p>
-<h2><a class="anchor" id="autotoc_md2077"></a>
+<h2><a class="anchor" id="autotoc_md2526"></a>
 Evidence:</h2>
 <ul>
 <li><code>WARNING | oaTranslator.Managers.yak_translator | ⚠️ YAK repository missing. Creating default.</code></li>
 <li><code>WARNING | oaGui.Core.layout_parser | Warning: _parse_directory_listing called with a file path...</code></li>
 <li><code>WARNING | oaPTP.Core.ptp | ⏱️ PTP Sniffer: [PERMISSION DENIED]...</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2078"></a>
+<h1><a class="anchor" id="autotoc_md2527"></a>
 2. Root Cause Analysis</h1>
 <ol type="1">
 <li><b>YAK Translator:</b> The initialization logic flagged the creation of a default repository as a warning instead of a standard setup step.</li>
 <li><b>Layout Parser:</b> The fallback mechanism for parsing individual JSON files within a split-pane directory was incorrectly triggering a warning intended for logic errors.</li>
 <li><b>PTP Manager:</b> The sniffer's inability to run without root privileges was being flagged as a system warning, even though it's a known constraint for standard users.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2079"></a>
+<h1><a class="anchor" id="autotoc_md2528"></a>
 3. Resolution Strategy</h1>
 <ul>
 <li><b>Surgical Level Adjustment:</b> Each instance was reviewed and downgraded from <code>WARNING</code> to <code>INFO</code> or <code>DEBUG</code> to preserve log signal quality.</li>
 <li><b>Standardized Messaging:</b> Standardized the prefixing of these logs with <code>ℹ️</code> to indicate handled fallback or status information.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2080"></a>
+<h1><a class="anchor" id="autotoc_md2529"></a>
 4. Verification Evidence</h1>
 <ul>
 <li><b>Log Review:</b> Verified that system boot no longer emits <code>WARNING</code> level messages for these standard conditions.</li>
 <li><b>Functional Check:</b> Confirmed that YAK repository creation, GUI layout parsing, and PTP status reporting still function as expected.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2081"></a>
+<h1><a class="anchor" id="autotoc_md2530"></a>
 5. System Impact</h1>
 <ul>
 <li><b>Forensic Clarity:</b> High-gravity logs (ERROR/CRITICAL) are no longer obscured by initialization noise.</li>

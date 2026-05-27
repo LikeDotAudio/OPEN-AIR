@@ -140,12 +140,9 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00062">62</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   62</span>        <span class="keyword">def </span>setUp(self):</div>
-<div class="line"><span class="lineno">   63</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.reset</a>() <span class="comment"># Ensure a clean slate for each test</span></div>
+<div class="line"><span class="lineno">   63</span>            event_bus.reset() <span class="comment"># Ensure a clean slate for each test</span></div>
 <div class="line"><span class="lineno">   64</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2b6402792c73a4d1d1b49527aac51e2d" name="a2b6402792c73a4d1d1b49527aac51e2d"></a>
@@ -168,16 +165,14 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   83</span>        <span class="keyword">def </span>test_multiple_subscribers(self):</div>
 <div class="line"><span class="lineno">   84</span>            mock_handler1 = MagicMock()</div>
 <div class="line"><span class="lineno">   85</span>            mock_handler2 = MagicMock()</div>
-<div class="line"><span class="lineno">   86</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.subscribe</a>(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, mock_handler1)</div>
-<div class="line"><span class="lineno">   87</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.subscribe</a>(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, mock_handler2)</div>
-<div class="line"><span class="lineno">   88</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.publish</a>(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, value=123)</div>
-<div class="line"><span class="lineno">   89</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_handler1.assert_called_once_with</a>(value=123)</div>
-<div class="line"><span class="lineno">   90</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_handler2.assert_called_once_with</a>(value=123)</div>
+<div class="line"><span class="lineno">   86</span>            event_bus.subscribe(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, mock_handler1)</div>
+<div class="line"><span class="lineno">   87</span>            event_bus.subscribe(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, mock_handler2)</div>
+<div class="line"><span class="lineno">   88</span>            event_bus.publish(<span class="stringliteral">&quot;MULTI_EVENT&quot;</span>, value=123)</div>
+<div class="line"><span class="lineno">   89</span>            mock_handler1.assert_called_once_with(value=123)</div>
+<div class="line"><span class="lineno">   90</span>            mock_handler2.assert_called_once_with(value=123)</div>
 <div class="line"><span class="lineno">   91</span> </div>
-<div class="line"><span class="lineno">   92</span>    <span class="keyword">class </span>TestStateManager(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.TestCase</a>):</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keyword">class </span>TestStateManager(unittest.TestCase):</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a628f963865945719378e197b90a48622" name="a628f963865945719378e197b90a48622"></a>
@@ -199,12 +194,10 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00078">78</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   78</span>        <span class="keyword">def </span>test_publish_no_subscribers(self):</div>
 <div class="line"><span class="lineno">   79</span>            mock_handler = MagicMock()</div>
-<div class="line"><span class="lineno">   80</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.publish</a>(<span class="stringliteral">&quot;NON_EXISTENT_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
-<div class="line"><span class="lineno">   81</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_handler.assert_not_called</a>()</div>
+<div class="line"><span class="lineno">   80</span>            event_bus.publish(<span class="stringliteral">&quot;NON_EXISTENT_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
+<div class="line"><span class="lineno">   81</span>            mock_handler.assert_not_called()</div>
 <div class="line"><span class="lineno">   82</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a3c324cac7e12e5577aae667af1f38029" name="a3c324cac7e12e5577aae667af1f38029"></a>
@@ -226,13 +219,11 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00065">65</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   65</span>        <span class="keyword">def </span>test_subscribe_and_publish(self):</div>
 <div class="line"><span class="lineno">   66</span>            mock_handler = MagicMock()</div>
-<div class="line"><span class="lineno">   67</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.subscribe</a>(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
-<div class="line"><span class="lineno">   68</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.publish</a>(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
-<div class="line"><span class="lineno">   69</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_handler.assert_called_once_with</a>(data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
+<div class="line"><span class="lineno">   67</span>            event_bus.subscribe(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
+<div class="line"><span class="lineno">   68</span>            event_bus.publish(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
+<div class="line"><span class="lineno">   69</span>            mock_handler.assert_called_once_with(data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
 <div class="line"><span class="lineno">   70</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a535c0d469db8061c149925151a5bccf4" name="a535c0d469db8061c149925151a5bccf4"></a>
@@ -254,14 +245,12 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00071">71</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   71</span>        <span class="keyword">def </span>test_unsubscribe(self):</div>
 <div class="line"><span class="lineno">   72</span>            mock_handler = MagicMock()</div>
-<div class="line"><span class="lineno">   73</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.subscribe</a>(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
-<div class="line"><span class="lineno">   74</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.unsubscribe</a>(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
-<div class="line"><span class="lineno">   75</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_bus.publish</a>(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
-<div class="line"><span class="lineno">   76</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_handler.assert_not_called</a>()</div>
+<div class="line"><span class="lineno">   73</span>            event_bus.subscribe(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
+<div class="line"><span class="lineno">   74</span>            event_bus.unsubscribe(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, mock_handler)</div>
+<div class="line"><span class="lineno">   75</span>            event_bus.publish(<span class="stringliteral">&quot;TEST_EVENT&quot;</span>, data=<span class="stringliteral">&quot;test_data&quot;</span>)</div>
+<div class="line"><span class="lineno">   76</span>            mock_handler.assert_not_called()</div>
 <div class="line"><span class="lineno">   77</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

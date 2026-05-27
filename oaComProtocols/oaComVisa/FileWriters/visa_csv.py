@@ -95,7 +95,7 @@ class VisaCsvBuilder:
         data = orjson.loads(raw_data)
 
         # Start the recursive traversal from the root node.
-        self._traverse_and_build(data, ["OPEN-AIR"])
+        self._traverse_and_build(data, ["OpenAir"])
         if LOCAL_DEBUG:
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CSV build process complete.", "DEBUG")
 

@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('dc/d3b/md_oaDocumentation_2Workers_2Ch
   <div class="headertitle"><div class="title">🛠️ Evolution of the Tools</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2197"></a> This document traces the architectural progression and technical maturity of the OPEN-AIR core tooling, moving from legacy monolithic structures to a highly decoupled, plugin-based ecosystem.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2542"></a> This document traces the architectural progression and technical maturity of the OPEN-AIR core tooling, moving from legacy monolithic structures to a highly decoupled, plugin-based ecosystem.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2199"></a>
+<h1><a class="anchor" id="autotoc_md2544"></a>
 🏗️ 1. Dynamic GUI Construction</h1>
 <p><b>From Hardcoded Mixins to Registry-Based Discovery.</b></p>
 <ul>
-<li><b>Legacy (2025):</b> The <code>DynamicGuiBuilder</code> relied on the <code>GuiWidgetFactoryMixin</code>, a "Dependency Magnet" that required explicit imports of every widget class. Adding a new widget meant modifying the core builder.</li>
-<li><b>The Transition (Feb 2026):</b> Introduction of the <code>WidgetRegistry</code> and the <code>@register</code> decorator. This enabled a <b>Plugin Architecture</b> where widgets could exist in isolated directories and register themselves during a recursive filesystem scan (<code>scan_widgets</code>).</li>
-<li><b>Modern (March 2026):</b> Implementation of <code>_lazy_wrap</code> in <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code>. By deferring module imports until the exact moment a widget is instantiated, the system achieved <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">O(1)</a> startup time regardless of the number of available widgets.</li>
+<li><b>Legacy (2025):</b> The <code>LoaderOrchestrator</code> relied on the <code>GuiWidgetFactoryMixin</code>, a "Dependency Magnet" that required explicit imports of every widget class. Adding a new widget meant modifying the core builder.</li>
+<li><b>The Transition (Feb 2026):</b> Introduction of the <code>RegistryWidgetStore</code> and the <code>@register</code> decorator. This enabled a <b>Plugin Architecture</b> where widgets could exist in isolated directories and register themselves during a recursive filesystem scan (<code>scan_widgets</code>).</li>
+<li><b>Modern (March 2026):</b> Implementation of <code>_lazy_wrap</code> in <code><a class="el" href="../../d0/d56/factory__mapping_8py.html">factory_mapping.py</a></code>. By deferring module imports until the exact moment a widget is instantiated, the system achieved O(1) startup time regardless of the number of available widgets.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2201"></a>
+<h1><a class="anchor" id="autotoc_md2546"></a>
 🧠 2. State Mirroring &amp; Communication</h1>
 <p><b>From Static Callbacks to the Global State Mirror Engine.</b></p>
 <ul>
 <li><b>Legacy:</b> Widgets managed their own MQTT logic, leading to redundant subscriptions and complex "Infinite Feedback" loops.</li>
 <li><b>The Transition:</b> Extraction of the <code>StateMirrorEngine</code>. This centralized the mapping between Tkinter variables and MQTT topics.</li>
-<li><b>Modern:</b> The <code>UITrackingService</code> now handles automated event binding. The engine supports <b>Path-Based Topic Generation</b>, where a widget's address is automatically derived from its location in the filesystem-based GUI tree, eliminating manual topic configuration in JSON.</li>
+<li><b>Modern:</b> The <code>InteractionTelemetryService</code> now handles automated event binding. The engine supports <b>Path-Based Topic Generation</b>, where a widget's address is automatically derived from its location in the filesystem-based GUI tree, eliminating manual topic configuration in JSON.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2203"></a>
+<h1><a class="anchor" id="autotoc_md2548"></a>
 📡 3. The "Splinker" (Command Router)</h1>
 <p><b>From Point-to-Point Links to Dynamic Bidirectional Mapping.</b></p>
 <ul>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('dc/d3b/md_oaDocumentation_2Workers_2Ch
 <li><b>Modern:</b> The <b>Splinker</b> system. A dedicated tool for creating dynamic, debounced, and bidirectional links between arbitrary data points. It includes loop prevention, scale transformation, and real-time "Firehose" monitoring of packet envelopes.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2205"></a>
+<h1><a class="anchor" id="autotoc_md2550"></a>
 💳 4. Hardware Discovery &amp; Fleet Management</h1>
 <p><b>From Static IPs to Autonomous Protocol Agents.</b></p>
 <ul>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('dc/d3b/md_oaDocumentation_2Workers_2Ch
 <li><b>Modern:</b> The <b>Yak Fleet Command Builder</b>. This tool autonomously probes discovered hardware, identifies device models, and "invisibly" loads their command repertoire from JSON subsystems, preparing the system for control without user intervention.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2207"></a>
+<h1><a class="anchor" id="autotoc_md2552"></a>
 💾 5. State Persistence</h1>
 <p><b>From Manual Saves to the Debounced Cache Save Engine.</b></p>
 <ul>
@@ -139,11 +139,11 @@ $(document).ready(function(){initNavTree('dc/d3b/md_oaDocumentation_2Workers_2Ch
 <li><b>Modern:</b> The <code>CacheSaveEngine</code> implements <b>Batching and Debouncing</b>. System state is aggregated in memory and committed to disk in chunks (250+ lines or 5s intervals), significantly reducing latency in high-speed data environments like spectral monitoring.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2209"></a>
+<h1><a class="anchor" id="autotoc_md2554"></a>
 🖥️ 6. Process Partitioning</h1>
 <p><b>From Monolithic Execution to Partitioned Core/UI.</b></p>
 <ul>
-<li><b>Evolution:</b> The system was split into <code><a class="el" href="../../da/d5b/open__air__core_8py.html">open_air_core.py</a></code> (Hardware/Logic) and <code><a class="el" href="../../d2/ddc/open__air__ui_8py.html">open_air_ui.py</a></code> (Visuals). Managed by a Python-based <b>Supervisor</b> (<code>OpenAir.py</code>), this partitioning ensures that a UI crash does not take down hardware control loops, and provides OS-level process isolation for mission-critical reliability. </li>
+<li><b>Evolution:</b> The system was split into <code><a class="el" href="../../da/d5b/open__air__core_8py.html">open_air_core.py</a></code> (Hardware/Logic) and <code><a class="el" href="../../d3/dd3/loader__main__service_8py.html">loader_main_service.py</a></code> (Visuals). Managed by a Python-based <b>Supervisor</b> (<code>OpenAir.py</code>), this partitioning ensures that a UI crash does not take down hardware control loops, and provides OS-level process isolation for mission-critical reliability. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

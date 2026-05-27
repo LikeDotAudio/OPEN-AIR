@@ -119,11 +119,11 @@ $(document).ready(function(){initNavTree('d3/dc3/yak__trigger__handler_8py_sourc
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">from</span> loguru <span class="keyword">import</span> logger</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComProtocols.oaComMQTT.Core.mqtt_message</a> <span class="keyword">import</span> MqttMessage</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaConfigurationManager.FileReaders.config_reader</a> <span class="keyword">import</span> Config</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Methods.matrix_gate</a> <span class="keyword">import</span> matrix_log</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">from</span> oaComProtocols.oaComMQTT.Core.mqtt_message <span class="keyword">import</span> MqttMessage</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">from</span> oaConfigurationManager.FileReaders.config_reader <span class="keyword">import</span> Config</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">from</span> oaLogging.Methods.matrix_gate <span class="keyword">import</span> matrix_log</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a69325b5add4acafc70fc3f2a81df0fa7">   26</a></span>app_constants = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../d3/d1b/namespaceManagers_1_1yak__trigger__handler.html#a69325b5add4acafc70fc3f2a81df0fa7">   26</a></span>app_constants = Config.get_instance()</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"># --- Internal Registry ---</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"># Global list of callbacks (observers) representing UI dashboard instances.</span></div>
@@ -142,8 +142,8 @@ $(document).ready(function(){initNavTree('d3/dc3/yak__trigger__handler_8py_sourc
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">        - Logs the registration event to the matrix gate.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> callback_func <span class="keywordflow">not</span> <span class="keywordflow">in</span> _gui_observers:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_gui_observers.append</a>(callback_func)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        _gui_observers.append(callback_func)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;TRANSLATOR&quot;</span>, inspect.currentframe().f_code.co_name,</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                   <span class="stringliteral">&quot;✅ [CONFIG] Yak Monitor GUI registered.&quot;</span>, level=<span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 </div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('d3/dc3/yak__trigger__handler_8py_sourc
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="stringliteral">        callback_func (callable): The previously registered callback.</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> callback_func <span class="keywordflow">in</span> _gui_observers:</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_gui_observers.remove</a>(callback_func)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        _gui_observers.remove(callback_func)</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 </div>
 <div class="foldopen" id="foldopen00058" data-start="" data-end="">
@@ -175,17 +175,16 @@ $(document).ready(function(){initNavTree('d3/dc3/yak__trigger__handler_8py_sourc
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="stringliteral">        - Callbacks are executed sequentially; long-running callbacks will </span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="stringliteral">          block the router thread.</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    topic = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.topic</a></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.decode_payload</a>()</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    topic = message.topic</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    payload = message.decode_payload()</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="comment"># Notify all registered GUI dashboards.</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">for</span> callback <span class="keywordflow">in</span> _gui_observers:</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            callback(topic, payload)</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">except</span> Exception:</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>             <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(<span class="stringliteral">&quot;❌ [UI] Error updating Yak Monitor dashboard.&quot;</span>)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>             logger.exception(<span class="stringliteral">&quot;❌ [UI] Error updating Yak Monitor dashboard.&quot;</span>)</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

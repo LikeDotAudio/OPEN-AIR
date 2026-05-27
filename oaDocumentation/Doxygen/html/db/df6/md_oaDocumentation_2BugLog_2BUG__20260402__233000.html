@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('db/df6/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:30:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1147"></a> </p>
-<h1><a class="anchor" id="autotoc_md1148"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1412"></a> </p>
+<h1><a class="anchor" id="autotoc_md1413"></a>
 Issues Resolved</h1>
-<h2><a class="anchor" id="autotoc_md1149"></a>
+<h2><a class="anchor" id="autotoc_md1414"></a>
 1. CRITICAL: &lt;tt&gt;MqttMessage&lt;/tt&gt; NameError</h2>
 <ul>
 <li><b>Root Cause</b>: Circular/Premature type hinting reference in <code><a class="el" href="../../da/d84/state__cache_8py.html">oaStateCache/Core/state_cache.py</a></code>.</li>
 <li><b>Resolution</b>: Converted type hints to strings ('MqttMessage') to allow forward referencing.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1150"></a>
+<h2><a class="anchor" id="autotoc_md1415"></a>
 2. CRITICAL: Rust Compilation Failures</h2>
 <ul>
 <li><b>Root Cause</b>: <code>pyproject.toml</code> files required a <code>README.md</code> that did not exist.</li>
 <li><b>Resolution</b>: Created empty <code>README.md</code> files in all new native module roots.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1151"></a>
+<h2><a class="anchor" id="autotoc_md1416"></a>
 3. HIGH: REST Dashboard NameError</h2>
 <ul>
 <li><b>Root Cause</b>: Conditional import of <code>REST_MODULE</code> failed when paths were already set.</li>
 <li><b>Resolution</b>: Updated <code>gui_REST.py</code> to ensure the module is always imported.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1152"></a>
+<h2><a class="anchor" id="autotoc_md1417"></a>
 4. HIGH: SMPTE 2138 API Mismatch</h2>
 <ul>
 <li><b>Root Cause</b>: GUI monitor was calling a non-existent callback registration API on the manager.</li>

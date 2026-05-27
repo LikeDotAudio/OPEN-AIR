@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('da/d33/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Sash Reconfiguration Loop</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1681"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2130"></a></p><ul>
 <li><b>ID</b>: 20260314_154858</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 2 (High)</li>
-<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.gui_display</code></li>
+<li><b>COMPONENT</b>: <code>oaGuiBuild.Managers.engine_gui_display</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1682"></a>
+<h1><a class="anchor" id="autotoc_md2131"></a>
 Issue</h1>
 <p>The application's UI was entering a high-frequency loop, repeatedly enforcing sash positions for <code>ttk.PanedWindow</code> widgets. This resulted in significant log spam with the "[LAYOUT]" tag and caused high CPU utilization, leading to a sluggish and potentially unresponsive user interface. The issue was triggered by a recursive feedback loop where the <code>&lt;Configure&gt;</code> event binding would re-trigger the sash positioning logic while it was already running.</p>
-<h1><a class="anchor" id="autotoc_md1683"></a>
+<h1><a class="anchor" id="autotoc_md2132"></a>
 Root Cause Analysis</h1>
 <p>The <code>configure_sash</code> function was bound to the paned window's <code>&lt;Configure&gt;</code> event. Inside this function, a call to <code>paned_window.tk.call(..., "sashpos", ...)</code> would adjust the sash. This adjustment itself would sometimes trigger another <code>&lt;Configure&gt;</code> event, causing the function to call itself recursively without any guard, leading to an infinite loop.</p>
-<h1><a class="anchor" id="autotoc_md1684"></a>
+<h1><a class="anchor" id="autotoc_md2133"></a>
 Resolution</h1>
 <p>A recursion guard was implemented to break the loop.</p><ol type="1">
 <li>A boolean attribute (<code>sash_config_in_progress</code>) was added to the <code>paned_window</code> instance, initialized to <code>False</code>.</li>
@@ -114,7 +114,7 @@ Resolution</h1>
 <li>A <code>try...finally</code> block was wrapped around the core logic to ensure the flag is always reset to <code>False</code> upon completion, even if an error occurs.</li>
 </ol>
 <p>This ensures that even if a <code>&lt;Configure&gt;</code> event is fired while the sash is being programmatically positioned, the handler will not execute again until the current execution is complete.</p>
-<h1><a class="anchor" id="autotoc_md1685"></a>
+<h1><a class="anchor" id="autotoc_md2134"></a>
 Verification</h1>
 <p>The absence of the "[LAYOUT] Sash positions enforced for..." log spam during window resizing confirms the fix. The application's CPU usage remains normal during these operations, and the UI remains responsive. </p>
 </div></div><!-- contents -->

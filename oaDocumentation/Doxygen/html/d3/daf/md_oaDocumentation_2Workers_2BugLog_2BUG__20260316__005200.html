@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OPEN-AIR: Bug Report: ModuleNotFoundError in DynamicGuiBuilder</title>
+<title>OPEN-AIR: Bug Report: ModuleNotFoundError in LoaderOrchestrator</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -90,22 +90,22 @@ $(document).ready(function(){initNavTree('d3/daf/md_oaDocumentation_2Workers_2Bu
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Bug Report: ModuleNotFoundError in DynamicGuiBuilder</div></div>
+  <div class="headertitle"><div class="title">Bug Report: ModuleNotFoundError in LoaderOrchestrator</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1858"></a> <b>Date:</b> 2026-03-16 00:52:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Application failure during UI building phase, preventing the main GUI from appearing.</p>
-<h1><a class="anchor" id="autotoc_md1859"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2307"></a> <b>Date:</b> 2026-03-16 00:52:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> EngineGuiDisplay failure during UI building phase, preventing the main GUI from appearing.</p>
+<h1><a class="anchor" id="autotoc_md2308"></a>
 Issue</h1>
 <p>A &lsquo;ModuleNotFoundError: No module named 'oaGui.breakoff_manager&rsquo;<code>occurred in</code>workers/builder/builder.py` on line 45.</p>
-<h1><a class="anchor" id="autotoc_md1860"></a>
+<h1><a class="anchor" id="autotoc_md2309"></a>
 Root Cause</h1>
 <p>The <code>breakoff_manager</code> directory was renamed or moved to <code>breakoff</code> during the recent "Massive Naming and Containerization Overhaul," but the import in <code>workers/builder/builder.py</code> still referenced the old name.</p>
-<h1><a class="anchor" id="autotoc_md1861"></a>
+<h1><a class="anchor" id="autotoc_md2310"></a>
 Resolution</h1>
 <p>Modified <code>workers/builder/builder.py</code> to correctly import <code>HiddenBreakoffManagerMixin</code> from <code>.breakoff.hidden_breakoff</code>.</p>
-<h1><a class="anchor" id="autotoc_md1862"></a>
+<h1><a class="anchor" id="autotoc_md2311"></a>
 Verification</h1>
-<p>Ran a Python reproduction script that imports <code>DynamicGuiBuilder</code> and verifies successful module resolution:</p><ul>
+<p>Ran a Python reproduction script that imports <code>LoaderOrchestrator</code> and verifies successful module resolution:</p><ul>
 <li><b>Output:</b> <code>Success</code></li>
 <li><b>Log trace:</b> Shows successful loading of associated mixins. </li>
 </ul>

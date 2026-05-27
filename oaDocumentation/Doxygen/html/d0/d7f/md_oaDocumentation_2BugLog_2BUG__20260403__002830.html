@@ -93,22 +93,22 @@ $(document).ready(function(){initNavTree('d0/d7f/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">BUG LOG: 20260403_002830</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1195"></a></p>
-<h1><a class="anchor" id="autotoc_md1196"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1460"></a></p>
+<h1><a class="anchor" id="autotoc_md1461"></a>
 Date: 2026-04-03</h1>
-<h1><a class="anchor" id="autotoc_md1197"></a>
+<h1><a class="anchor" id="autotoc_md1462"></a>
 Issue: Critical GUI Crashes and Spamming Errors</h1>
-<h1><a class="anchor" id="autotoc_md1198"></a>
+<h1><a class="anchor" id="autotoc_md1463"></a>
 Root Cause: API mismatches, incorrect logging calls, and missing return values in Python-Rust bridge.</h1>
-<h2><a class="anchor" id="autotoc_md1199"></a>
+<h2><a class="anchor" id="autotoc_md1464"></a>
 Analysis</h2>
 <ul>
 <li><b>SmartMeter Error</b>: <code>BallisticsEngine.update</code> was not returning the tuple from the underlying Rust engine, causing a <code>TypeError</code> when unpacking in <code>SmartMeter._animate</code>.</li>
 <li><b>TextValueWithUnits TypeError</b>: <code>matrix_log</code> calls in <code><a class="el" href="../../da/db2/text__value__with__units_8py.html">text_value_with_units.py</a></code> passed unsupported keyword arguments (<code>file</code>, <code>version</code>, <code>function</code>).</li>
 <li><b>TextValueWithUnits KeyError</b>: <code>logger.exception</code> string was not an f-string, causing a &lsquo;KeyError: 'label&rsquo;<code>during error reporting.</code></li>
-<li><code>**CMDP Attribute Error**:</code>circular_motion_displacement_potentiometer.py<code>called</code>f.render()<code>on</code>CMDP_LTPObject<code>instances, which only implement</code>render_fader_visuals()`.</li>
+<li><code>**CMDP Attribute Error**:</code><a class="el" href="../../d6/d53/circular__motion__displacement__potentiometer_8py.html">circular_motion_displacement_potentiometer.py</a><code>called</code>f.render()<code>on</code>CMDP_LTPObject<code>instances, which only implement</code>render_fader_visuals()`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1200"></a>
+<h2><a class="anchor" id="autotoc_md1465"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Updated <code><a class="el" href="../../d1/d46/ballistics_8py.html">oaGuiElements/Core/metering/meter_bar/Core/ballistics.py</a></code></b>: Added <code>return</code> to <code>update</code> method.</li>
@@ -121,7 +121,7 @@ Resolution</h2>
 <li><b>Updated <code>oaGuiElements/Core/utils/circular_motion_displacement_potentiometer/circular_motion_displacement_potentiometer.py</code></b>: Renamed <code>f.render()</code> to <code>f.render_fader_visuals()</code>.</li>
 <li><b>Updated <code>oaGuiElements/Core/special/circular_motion_displacement_potentiometer/circular_motion_displacement_potentiometer.py</code></b>: Renamed <code>f.render()</code> to <code>f.render_fader_visuals()</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1201"></a>
+<h2><a class="anchor" id="autotoc_md1466"></a>
 Verification Evidence</h2>
 <ul>
 <li><code>BallisticsEngine</code> import and structure verified.</li>

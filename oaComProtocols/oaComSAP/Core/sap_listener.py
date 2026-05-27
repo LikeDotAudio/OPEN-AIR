@@ -94,7 +94,7 @@ class SAPListener:
 
             # Clean IP address for MQTT Topic path
             safe_ip = addr[0].replace('.', '_')
-            topic = f"OPEN-AIR/SAP/Discovered/{safe_ip}"
+            topic = f"OpenAir/SAP/Discovered/{safe_ip}"
 
             print(f"📈 [SAP] Discovered/Updated: {session_name} from {addr[0]}")
 

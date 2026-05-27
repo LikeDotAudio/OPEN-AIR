@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('d2/d27/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Fix: AttributeError in TreeRefactor Initialization</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1447"></a></p>
-<h1><a class="anchor" id="autotoc_md1448"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1712"></a></p>
+<h1><a class="anchor" id="autotoc_md1713"></a>
 Date: 2026-04-16 22:40:00</h1>
-<h1><a class="anchor" id="autotoc_md1449"></a>
+<h1><a class="anchor" id="autotoc_md1714"></a>
 Status: RESOLVED</h1>
-<h2><a class="anchor" id="autotoc_md1450"></a>
+<h2><a class="anchor" id="autotoc_md1715"></a>
 Description</h2>
 <p>A crash occurred during WYSIWYG Editor startup: &lsquo;AttributeError: 'TreeRefactor&rsquo; object has no attribute '_last_clean_path'<code>. This was caused by a race condition where the</code>__init__<code>method called</code>_on_state_updated<code>, which in turn accessed</code>_last_clean_path` before it was formally initialized in the constructor.</p>
-<h2><a class="anchor" id="autotoc_md1451"></a>
+<h2><a class="anchor" id="autotoc_md1716"></a>
 Trigger</h2>
 <p>Launching the WYSIWYG editor with pre-existing state data.</p>
-<h2><a class="anchor" id="autotoc_md1452"></a>
+<h2><a class="anchor" id="autotoc_md1717"></a>
 Action Taken</h2>
 <ol type="1">
 <li>Modified <code>oaGuiEditorWYSIWYG/Interface/workspaces/tree_refactor.py</code>:<ul>
@@ -113,7 +113,7 @@ Action Taken</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1453"></a>
+<h2><a class="anchor" id="autotoc_md1718"></a>
 Verification</h2>
 <ul>
 <li>Ran existing unit tests <code><a class="el" href="../../d7/dfd/test__core__components_8py.html">Tests/test_core_components.py</a></code> -&gt; PASSED (12/12 tests).</li>

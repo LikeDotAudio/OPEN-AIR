@@ -93,31 +93,31 @@ $(document).ready(function(){initNavTree('d2/da8/md_oaConfigurationManager_2Docu
   <div class="headertitle"><div class="title">🏷️ Logging Matrix Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md988"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md989"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1253"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1254"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md990"></a>
+<h2><a class="anchor" id="autotoc_md1255"></a>
 File Level</h2>
 <p><a class="el" href="../../d1/db8/oaConfigurationManager_2Managers_2LoggingManager_2manager_8py.html">oaConfigurationManager/Managers/LoggingManager/manager.py</a></p>
 <p>The <b>Logging Matrix Manager</b> is the central orchestrator for the hierarchical debugging system in OPEN-AIR. It transforms static logging into a dynamic, surgical tool that can be tuned at runtime. By using a tiered permission structure, it ensures that only the most relevant data reaches the logs, saving both CPU cycles and forensic analysis time.</p>
-<h1><a class="anchor" id="autotoc_md991"></a>
+<h1><a class="anchor" id="autotoc_md1256"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Assumes that <code>config.ini</code> contains a <code>[DEBUG_MATRIX]</code> section.</li>
 <li>Requires the <code>loguru</code> and <code>oaConfigurationManager.FileReaders.config_reader</code> modules.</li>
 <li>The manager is a singleton and must be accessed via <code>get_instance()</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md992"></a>
+<h1><a class="anchor" id="autotoc_md1257"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md993"></a>
+<h2><a class="anchor" id="autotoc_md1258"></a>
 LoggingMatrixManager Class</h2>
-<h3><a class="anchor" id="autotoc_md994"></a>
+<h3><a class="anchor" id="autotoc_md1259"></a>
 &lt;tt&gt;get_instance()&lt;/tt&gt;</h3>
 <p>Retrieves the thread-safe singleton instance of the manager.</p>
 <p><b>Returns:</b></p><ul>
 <li><code>LoggingMatrixManager</code>: The global instance.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md995"></a>
+<h3><a class="anchor" id="autotoc_md1260"></a>
 &lt;tt&gt;is_debug_allowed(system, element, func_name)&lt;/tt&gt;</h3>
 <p>The primary gatekeeper for logging. Evaluates rules in this order:</p><ol type="1">
 <li><b>Master Killswitch</b>: If <code>MASTER_DEBUG_ENABLE</code> is False, all debug logging is suppressed.</li>
@@ -133,7 +133,7 @@ LoggingMatrixManager Class</h2>
 <p><b>Returns:</b></p><ul>
 <li><code>bool</code>: True if logging is permitted.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md996"></a>
+<h1><a class="anchor" id="autotoc_md1261"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Singleton pattern ensures a single source of truth for debug states.</li>

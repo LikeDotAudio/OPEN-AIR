@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('dd/d7e/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260416_235900</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1489"></a> </p>
-<h1><a class="anchor" id="autotoc_md1490"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1754"></a> </p>
+<h1><a class="anchor" id="autotoc_md1755"></a>
 Description</h1>
 <p>High-frequency crashes and visual feedback failures during drag-and-drop operations in the WYSIWYG editor.</p>
-<h1><a class="anchor" id="autotoc_md1491"></a>
+<h1><a class="anchor" id="autotoc_md1756"></a>
 Error Clusters</h1>
 <ul>
-<li><b>Cluster A: Canvas Stacking Collision</b>: <code>TclError: wrong # args</code> when calling <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">raise()</a></code> on a Canvas widget.</li>
+<li><b>Cluster A: Canvas Stacking Collision</b>: <code>TclError: wrong # args</code> when calling <code>raise()</code> on a Canvas widget.</li>
 <li><b>Cluster B: Ghost Overlay Displacement</b>: The green insertion line was invisible due to incorrect coordinate offsets.</li>
 <li><b>Cluster C: Drop Target Path Resolution</b>: Elements were being added to the state but not appearing because they were assigned to invalid JSON branches.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1492"></a>
+<h1><a class="anchor" id="autotoc_md1757"></a>
 Action Taken</h1>
 <ol type="1">
 <li><b>InteractiveLayout</b>:<ul>
 <li>Switched <code>self.ghost_overlay.tkraise()</code> to <code>tk.Widget.tkraise(self.ghost_overlay)</code> to resolve shadowing conflict.</li>
-<li>Corrected <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">place()</a></code> offsets for the interaction layer.</li>
+<li>Corrected <code>place()</code> offsets for the interaction layer.</li>
 </ul>
 </li>
 <li><b>FocusManager</b>:<ul>
@@ -122,7 +122,7 @@ Action Taken</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1493"></a>
+<h1><a class="anchor" id="autotoc_md1758"></a>
 Verification Results</h1>
 <ul>
 <li><code>wrong # args</code> error resolved.</li>

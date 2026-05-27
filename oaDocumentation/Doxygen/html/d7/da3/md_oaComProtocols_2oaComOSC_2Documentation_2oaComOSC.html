@@ -95,13 +95,13 @@ $(document).ready(function(){initNavTree('d7/da3/md_oaComProtocols_2oaComOSC_2Do
 <div class="contents">
 <div class="textblock"><p>Here is a comprehensive Markdown documentation file explaining the architecture and data flow of your OSC module. You can save this directly as <code>README.md</code> or <code><a class="el" href="../../da/d01/ARCHITECTURE_8md.html">ARCHITECTURE.md</a></code> inside your <code>oaComProtocols.oaComOSC</code> directory.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md444"></a>
+<h1><a class="anchor" id="autotoc_md709"></a>
 oaComProtocols.oaComOSC: Open Sound Control Bridge Architecture</h1>
-<h2><a class="anchor" id="autotoc_md445"></a>
+<h2><a class="anchor" id="autotoc_md710"></a>
 Overview</h2>
 <p>The <code>oaComProtocols.oaComOSC</code> module is a standalone, thread-safe bidirectional communication bridge. It is designed to send and receive Open Sound Control (OSC) messages over UDP, translating raw network traffic into structured internal application states.</p>
 <p>Crucially, this module is decoupled from the main application's UI and utilizes a strict "Anti-Feedback Spec" to ensure that synchronizing two live systems does not result in infinite message loops.</p>
-<h2><a class="anchor" id="autotoc_md446"></a>
+<h2><a class="anchor" id="autotoc_md711"></a>
 Core Components</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -116,7 +116,7 @@ Core Components</h2>
 <td class="markdownTableBodyLeft"><b>TX Worker</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="../../d2/d2d/osc__tx__client_8py.html">osc_tx_client.py</a></code>   </td><td class="markdownTableBodyLeft">A lightweight <code>SimpleUDPClient</code> that pushes outbound OSC messages to a configured remote IP/Port.   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md448"></a>
+<h2><a class="anchor" id="autotoc_md713"></a>
 How It Works: Inbound Message Flow (RX)</h2>
 <p>When an external device sends an OSC message to the application, the following sequence occurs:</p>
 <ol type="1">
@@ -128,7 +128,7 @@ How It Works: Inbound Message Flow (RX)</h2>
 <li><b>UI Monitor Update:</b> A secondary payload is fired to <code>OPEN-AIR/System/Monitor/OSC/Activity</code> so the GUI dashboard can visually reflect the incoming traffic.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md450"></a>
+<h2><a class="anchor" id="autotoc_md715"></a>
 How It Works: Outbound Message Flow (TX)</h2>
 <p>When the internal application state changes and needs to sync with an external OSC device:</p>
 <ol type="1">
@@ -142,7 +142,7 @@ How It Works: Outbound Message Flow (TX)</h2>
 <li><b>Forensics &amp; Monitoring:</b> The transmitted event is looped back into the <code>ProtocolRouter</code> under the source <code>OSC-TX</code> for internal logging, and the UI monitor callbacks are triggered to show outbound network activity.</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md452"></a>
+<h2><a class="anchor" id="autotoc_md717"></a>
 Key Design Patterns</h2>
 <ul>
 <li><b>Thread-Safe Shared State:</b> Because network messages arrive asynchronously on background threads while the UI operates on the main thread, <code>OSCManager</code> wraps all mutable variables (like routing tables and active callbacks) in a <code>threading.RLock()</code>.</li>

@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('df/d86/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">BUG: Catastrophic Failure of Core Protocol Dispatch</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1751"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2200"></a></p><ul>
 <li><b>ID</b>: 20260314_193426</li>
 <li><b>STATUS</b>: RESOLVED</li>
 <li><b>SEVERITY</b>: 1 (Critical)</li>
 <li><b>COMPONENT</b>: <code>oaComBroker.protocol_router</code>, <code>oaThreadManager</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1752"></a>
+<h1><a class="anchor" id="autotoc_md2201"></a>
 Issue</h1>
 <p>Multiple core, unrelated application features, including MIDI I/O, SNMP, and OSC, were completely non-functional. Log files indicated that the respective managers for these protocols were starting successfully, but no data was being sent or received. The system was failing silently, creating a highly confusing and critical state.</p>
-<h1><a class="anchor" id="autotoc_md1753"></a>
+<h1><a class="anchor" id="autotoc_md2202"></a>
 Root Cause Analysis</h1>
 <p>The root cause was a cascade of failures originating from a single, catastrophic bug in the <code>ProtocolRouter</code> and exacerbated by a disorganized startup sequence in the <code>manager_launcher</code>.</p>
 <ol type="1">
@@ -110,7 +110,7 @@ Root Cause Analysis</h1>
 <li>**Disordered Initialization (<code>manager_launcher</code>)**: The <code>launch_core_managers</code> function was not structured correctly. It initialized and started managers in a haphazard order. Crucially, it did not provide the <code>ProtocolRouter</code> with references to the OSC, MIDI, and SNMP managers, so even if the dispatch logic <em>had</em> existed, the router wouldn't have been able to call them.</li>
 </ol>
 <p>These two issues combined to create a total failure of the application's message bus for all non-MQTT protocols.</p>
-<h1><a class="anchor" id="autotoc_md1754"></a>
+<h1><a class="anchor" id="autotoc_md2203"></a>
 Resolution</h1>
 <p>A comprehensive, two-part fix was implemented to restore the entire message bus.</p>
 <ol type="1">
@@ -129,7 +129,7 @@ Resolution</h1>
 </li>
 </ol>
 <p>This overhaul ensures that the central message bus is correctly configured, fully linked, and logically complete, thereby restoring all core protocol functionality.</p>
-<h1><a class="anchor" id="autotoc_md1755"></a>
+<h1><a class="anchor" id="autotoc_md2204"></a>
 Verification</h1>
 <p>After the fix, MIDI, SNMP, and OSC message passing is fully functional. GUI actions correctly trigger outbound MIDI and OSC messages, and inbound data from these protocols is correctly routed to the UI and other systems. The application is now fully operational. </p>
 </div></div><!-- contents -->

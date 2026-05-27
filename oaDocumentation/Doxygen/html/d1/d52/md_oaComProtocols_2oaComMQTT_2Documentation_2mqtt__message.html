@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d1/d52/md_oaComProtocols_2oaComMQTT_2D
   <div class="headertitle"><div class="title">🏷️ Mqtt Message</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md271"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md272"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md536"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md537"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md273"></a>
+<h2><a class="anchor" id="autotoc_md538"></a>
 File Level</h2>
 <p>mqtt/mqtt_message.py</p>
 <p>Defines the standardized MqttMessage dataclass for the application. Enforces strict typing for all MQTT traffic between partitions.</p>
-<p>Author: Anthony P. <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Kuzub(Refactored)</a> Version 20260221.1</p>
-<h1><a class="anchor" id="autotoc_md274"></a>
+<p>Author: Anthony P. Kuzub(Refactored) Version 20260221.1</p>
+<h1><a class="anchor" id="autotoc_md539"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md275"></a>
+<h1><a class="anchor" id="autotoc_md540"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md276"></a>
+<h2><a class="anchor" id="autotoc_md541"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md277"></a>
+<h3><a class="anchor" id="autotoc_md542"></a>
 &lt;tt&gt;class MqttMessage&lt;/tt&gt;</h3>
 <p>Standardized MQTT message container. Frozen to ensure immutability as it passes through the system.</p>
-<h4><a class="anchor" id="autotoc_md278"></a>
+<h4><a class="anchor" id="autotoc_md543"></a>
 &lt;tt&gt;decode_payload(self)&lt;/tt&gt;</h4>
 <p>Helper to ensure payload is a string.</p>
 <p><b>Parameters:</b></p><ul>
@@ -123,7 +123,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md279"></a>
+<h4><a class="anchor" id="autotoc_md544"></a>
 &lt;tt&gt;get_json_payload(self)&lt;/tt&gt;</h4>
 <p>Helper to ensure payload is a dictionary or list (parsed JSON).</p>
 <p><b>Parameters:</b></p><ul>
@@ -135,7 +135,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md280"></a>
+<h4><a class="anchor" id="autotoc_md545"></a>
 &lt;tt&gt;to_dict(self)&lt;/tt&gt;</h4>
 <p>Converts to a dictionary for publishing.</p>
 <p><b>Parameters:</b></p><ul>
@@ -147,7 +147,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md281"></a>
+<h1><a class="anchor" id="autotoc_md546"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

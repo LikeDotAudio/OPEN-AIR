@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('d1/dbe/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: UI Initialization Crash (X11 BadValue)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1260"></a><b>Date:</b> 2026-04-04 <b>Time:</b> 22:50:00 <b>Module:</b> oaGui.Interface.ui_window, oaGuiBuildShell.Core.directory <b>Priority:</b> 1 (Critical/Crash)</p>
-<h1><a class="anchor" id="autotoc_md1261"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1525"></a><b>Date:</b> 2026-04-04 <b>Time:</b> 22:50:00 <b>Module:</b> oaGui.Interface.viewport.tab_physical_window, oaGuiBuildShell.Core.directory <b>Priority:</b> 1 (Critical/Crash)</p>
+<h1><a class="anchor" id="autotoc_md1526"></a>
 Issue</h1>
 <p>The UI partition would crash on Linux with an X11 error: <code>X Error of failed request: BadValue (integer parameter out of range for operation) Major opcode 12 (X_ConfigureWindow) Value 0x0</code>. This typically occurred shortly after the splash screen appeared and the workspace build began.</p>
-<h1><a class="anchor" id="autotoc_md1262"></a>
+<h1><a class="anchor" id="autotoc_md1527"></a>
 Root Cause</h1>
 <ol type="1">
 <li><b>Premature Maximization:</b> The root window was being maximized (<code>-zoomed</code>) while in a <code>withdrawn</code> state. On certain Linux window managers/X11 backends, this causes a deferred <code>BadValue</code> error when the system tries to calculate or apply dimensions.</li>
 <li><b>Aggressive Event Processing:</b> The use of <code>root.update()</code> during the recursive build process forced synchronous X11 communication while windows and widgets were in transient states (unmapped, 0-dimension parents).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1263"></a>
+<h1><a class="anchor" id="autotoc_md1528"></a>
 Resolution</h1>
 <ol type="1">
-<li><b>Deferred Maximization:</b> Refactored <code>UIWindowManager</code> to move the maximization logic from <code>create_root_window</code> (where it was withdrawn) to <code>reveal_main_window</code> (where it is deiconified).</li>
-<li><b>Safer Event Loops:</b> Replaced all instances of <code>root.update()</code> in <code>DirectoryBuilderMixin</code> and <code>AsyncBootstrapEngine</code> with <code>root.update_idletasks()</code>. This ensures the UI remains responsive for geometry/layout updates without forcing potentially invalid X11 configurations during the build.</li>
+<li><b>Deferred Maximization:</b> Refactored <code>TabWindowManager</code> to move the maximization logic from <code>create_root_window</code> (where it was withdrawn) to <code>reveal_main_window</code> (where it is deiconified).</li>
+<li><b>Safer Event Loops:</b> Replaced all instances of <code>root.update()</code> in <code>FolderRecursiveScannerMixin</code> and <code>LoaderBootstrapEngine</code> with <code>root.update_idletasks()</code>. This ensures the UI remains responsive for geometry/layout updates without forcing potentially invalid X11 configurations during the build.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1264"></a>
+<h1><a class="anchor" id="autotoc_md1529"></a>
 Verification Evidence</h1>
 <ol type="1">
-<li><b>Unit <a class="el" href="../../df/da7/namespaceTests.html">Tests</a>:</b> <code><a class="el" href="../../d0/ded/test__ui__window_8py.html">test_ui_window.py</a></code> and <code><a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py.html">test_bootstrap_sequence.py</a></code> passed, confirming correct logic flow and successful service initialization.</li>
+<li><b>Unit <a class="el" href="../../df/da7/namespaceTests.html">Tests</a>:</b> <code>test_tab_physical_window.py</code> and <code>test_loader_bootstrap_engine.py</code> passed, confirming correct logic flow and successful service initialization.</li>
 <li><b>Refined UI Sequence:</b> The logs now correctly show the sequence of events without triggering X11 exceptions during the background build.</li>
 </ol>
 <p><b>Status:</b> Fixed &amp; Verified. </p>

@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('d7/d89/md_oaGuiElements_2Documentation
   <div class="headertitle"><div class="title">🏷️ Knob Rotary Selector</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md3790"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md3791"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4070"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4071"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md3792"></a>
+<h2><a class="anchor" id="autotoc_md4072"></a>
 File Level</h2>
 <p>workers/builder/knob_rotary_selector/knob_rotary_selector.py</p>
 <p>A specialized knob for multi-position rotary switching. Supports Industrial Transparency and procedural rendering.</p>
 <p>Author: Anthony Peter Kuzub Version 20260223.Modernized.1</p>
-<h1><a class="anchor" id="autotoc_md3793"></a>
+<h1><a class="anchor" id="autotoc_md4073"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md3794"></a>
+<h1><a class="anchor" id="autotoc_md4074"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md3795"></a>
+<h2><a class="anchor" id="autotoc_md4075"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md3796"></a>
+<h3><a class="anchor" id="autotoc_md4076"></a>
 &lt;tt&gt;class RotarySelectorSwitch&lt;/tt&gt;</h3>
 <p>A specialized frame for a multi-position selector switch. Inherits from CustomKnobFrame to leverage common event handling and state.</p>
-<h4><a class="anchor" id="autotoc_md3797"></a>
+<h4><a class="anchor" id="autotoc_md4077"></a>
 &lt;tt&gt;__init__(self, parent, variable, positions, continuous, path, state_mirror_engine, *args, **kwargs)&lt;/tt&gt;</h4>
 <p>[TODO: Brief verb-first description. Start with action (e.g., 'Allocates...', 'Parses...').]</p>
 <p><b>Parameters:</b></p><ul>
@@ -130,7 +130,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3798"></a>
+<h4><a class="anchor" id="autotoc_md4078"></a>
 &lt;tt&gt;_draw_selector(self, canvas, width, height, current_idx, positions, fg_color, accent_color, indicator_color, secondary, shape, pointer_style, knob_style, no_center, continuous, main_label, selection_text, show_label)&lt;/tt&gt;</h4>
 <p>Internal drawing pipeline for the selector switch.</p>
 <p><b>Parameters:</b></p><ul>
@@ -158,10 +158,10 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md3799"></a>
+<h3><a class="anchor" id="autotoc_md4079"></a>
 &lt;tt&gt;class BuilderKnobRotarySelectorCreator&lt;/tt&gt;</h3>
 <p>Factory for creating Rotary Selector Switch widgets.</p>
-<h4><a class="anchor" id="autotoc_md3800"></a>
+<h4><a class="anchor" id="autotoc_md4080"></a>
 &lt;tt&gt;make(parent_widget, config_data, context, **kwargs)&lt;/tt&gt;</h4>
 <p>Static factory method for the registry.</p>
 <p><b>Parameters:</b></p><ul>
@@ -176,7 +176,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md3801"></a>
+<h4><a class="anchor" id="autotoc_md4081"></a>
 &lt;tt&gt;make_knob_rotary_selector(parent_widget, config_data, context, **kwargs)&lt;/tt&gt;</h4>
 <p>Main entry point for creating a rotary selector.</p>
 <p><b>Parameters:</b></p><ul>
@@ -191,7 +191,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any locks, I/O, or global state.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3802"></a>
+<h1><a class="anchor" id="autotoc_md4082"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

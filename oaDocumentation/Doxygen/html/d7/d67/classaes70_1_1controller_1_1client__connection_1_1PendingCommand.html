@@ -205,7 +205,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   16</span> </div>
 <div class="ttc" id="aoa__osc__core__rs_2mod_8rs_html_ac23356feb70c1fabc719e2746177bed5"><div class="ttname"><a href="../../df/d68/oa__osc__core__rs_2mod_8rs.html#ac23356feb70c1fabc719e2746177bed5">handle</a></div><div class="ttdeci">running handle</div><div class="ttdef"><b>Definition</b> <a href="../../df/d68/oa__osc__core__rs_2mod_8rs_source.html#l00028">mod.rs:28</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00021">aes70.controller.client_connection.PendingCommand.command</a>, and <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00038">Core.factory.button_canvas_base.CanvasButton.command</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00021">aes70.controller.client_connection.PendingCommand.command</a>, and <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00037">Core.factory.button_canvas_base.CanvasButton.command</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d6/dc6/response_8py_source.html#l00026">aes70.ocp1.response.Response.decode_from()</a>, <a class="el" href="../../d9/d28/command_8py_source.html#l00063">aes70.ocp1.command.Command.decode_from()</a>, <a class="el" href="../../d9/d28/command_8py_source.html#l00027">aes70.ocp1.command.Command.encode_to()</a>, <a class="el" href="../../d6/dc6/response_8py_source.html#l00045">aes70.ocp1.response.Response.encode_to()</a>, and <a class="el" href="../../d9/d28/command_8py_source.html#l00086">aes70.ocp1.command.Command.response()</a>.</p>
 
@@ -241,21 +241,21 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   25</span>    <span class="keyword">def </span>response(self, o):</div>
 <div class="line"><span class="lineno">   26</span>        resolve, reject, return_types, command = self.resolve, self.reject, self.return_types, self.command</div>
 <div class="line"><span class="lineno">   27</span> </div>
-<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">o.status_code</a> != 0:</div>
-<div class="line"><span class="lineno">   29</span>            reject(RemoteError(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">o.status_code</a>, command))</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">if</span> o.status_code != 0:</div>
+<div class="line"><span class="lineno">   29</span>            reject(RemoteError(o.status_code, command))</div>
 <div class="line"><span class="lineno">   30</span>        <span class="keywordflow">elif</span> <span class="keywordflow">not</span> return_types:</div>
 <div class="line"><span class="lineno">   31</span>            resolve(o)</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   33</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   34</span>                <span class="comment">#print(&quot;@@@@ delivering a response with return values&quot;)</span></div>
 <div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>                length = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">o.param_count</a>, <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(return_types))</div>
+<div class="line"><span class="lineno">   36</span>                length = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a>(o.param_count, <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(return_types))</div>
 <div class="line"><span class="lineno">   37</span>                <span class="comment">#print(&quot;length of return types: &quot;, length)</span></div>
 <div class="line"><span class="lineno">   38</span>                <span class="keywordflow">if</span> length == 0:</div>
 <div class="line"><span class="lineno">   39</span>                    resolve()</div>
 <div class="line"><span class="lineno">   40</span>                <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   41</span>                    result = [<span class="keywordtype">None</span>] * length</div>
-<div class="line"><span class="lineno">   42</span>                    data_view = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytearray</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">o.parameters</a>)</div>
+<div class="line"><span class="lineno">   42</span>                    data_view = bytearray(o.parameters)</div>
 <div class="line"><span class="lineno">   43</span>                    <span class="comment">#print(&quot;=&gt; data_view: &quot;, data_view)</span></div>
 <div class="line"><span class="lineno">   44</span>                    pos = 0</div>
 <div class="line"><span class="lineno">   45</span>                    <span class="keywordflow">for</span> i <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a>(length):</div>
@@ -269,10 +269,9 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a2185332cb740507fd92af736c19f90ad"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range</a></div><div class="ttdeci">unicode range</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">generated.rs:1997</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a4735a0c4d1b11f62ea44115d54a93087"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a4735a0c4d1b11f62ea44115d54a93087">min</a></div><div class="ttdeci">repeat min</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">generated.rs:2081</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00021">aes70.controller.client_connection.PendingCommand.command</a>, <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00038">Core.factory.button_canvas_base.CanvasButton.command</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">range</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00019">aes70.controller.client_connection.PendingCommand.reject</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00018">aes70.controller.client_connection.PendingCommand.resolve</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00020">aes70.controller.client_connection.PendingCommand.return_types</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00021">aes70.controller.client_connection.PendingCommand.command</a>, <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00037">Core.factory.button_canvas_base.CanvasButton.command</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02081">min</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01997">range</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00019">aes70.controller.client_connection.PendingCommand.reject</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00018">aes70.controller.client_connection.PendingCommand.resolve</a>, <a class="el" href="../../d5/ddf/json__shorthand__resolver_8py_source.html#l00033">FileReaders.standardizers.json_shorthand_resolver.JsonShorthandResolver.resolve()</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00020">aes70.controller.client_connection.PendingCommand.return_types</a>.</p>
 
 </div>
 </div>
@@ -291,7 +290,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00021">21</a> of file <a class="el" href="../../d4/d36/client__connection_8py_source.html">client_connection.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00092">Core.factory.button_canvas_base.CanvasButton._safe_execute_command()</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00014">aes70.controller.client_connection.PendingCommand.handle()</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00025">aes70.controller.client_connection.PendingCommand.response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/de0/button__canvas__base_8py_source.html#l00091">Core.factory.button_canvas_base.CanvasButton._safe_execute_command()</a>, <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00014">aes70.controller.client_connection.PendingCommand.handle()</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00025">aes70.controller.client_connection.PendingCommand.response()</a>.</p>
 
 </div>
 </div>
@@ -343,7 +342,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00018">18</a> of file <a class="el" href="../../d4/d36/client__connection_8py_source.html">client_connection.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00025">aes70.controller.client_connection.PendingCommand.response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d5/ddf/json__shorthand__resolver_8py_source.html#l00033">FileReaders.standardizers.json_shorthand_resolver.JsonShorthandResolver.resolve()</a>, and <a class="el" href="../../d4/d36/client__connection_8py_source.html#l00025">aes70.controller.client_connection.PendingCommand.response()</a>.</p>
 
 </div>
 </div>

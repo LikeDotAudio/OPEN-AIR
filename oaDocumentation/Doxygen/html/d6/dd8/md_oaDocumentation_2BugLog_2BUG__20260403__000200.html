@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('d6/dd8/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-03 00:02:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1172"></a> </p>
-<h1><a class="anchor" id="autotoc_md1173"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1437"></a> </p>
+<h1><a class="anchor" id="autotoc_md1438"></a>
 Issues</h1>
 <p>This report details the resolution of an <code>ImportError</code> that caused test suite failures in the <code>oacorerouter_rs</code> module during the execution of Python unit tests.</p>
-<h1><a class="anchor" id="autotoc_md1174"></a>
+<h1><a class="anchor" id="autotoc_md1439"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1175"></a>
+<h2><a class="anchor" id="autotoc_md1440"></a>
 1. Hardcoded Unprotected Import in Tests</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ImportError: cannot import name 'sum_as_string&rsquo; from 'oacorerouter_rs.oacorerouter_rs'<code>during test discovery.</code></li>
@@ -112,7 +112,7 @@ Root Causes &amp; Resolutions</h1>
 </code></li>
 </ul>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1176"></a>
+<h1><a class="anchor" id="autotoc_md1441"></a>
 Affected Modules</h1>
 <p><code></code></p>
 <p><code></p><ul>
@@ -120,7 +120,7 @@ Affected Modules</h1>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1177"></a>
+<h1><a class="anchor" id="autotoc_md1442"></a>
 Verification</h1>
 <p><code></code></p>
 <p><code>The test file was verified for syntactic correctness and resilience. The test suite can now discover and execute (or gracefully skip) the tests regardless of minor structural variations in the compiled Rust binary's Python exposure, preventing test suite crashes. </code></p>

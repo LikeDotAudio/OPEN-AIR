@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('da/dbe/classCore_1_1mqtt__subscriber__
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a65228cb9b185c24c9c8479e3e1ace5da" id="r_a65228cb9b185c24c9c8479e3e1ace5da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dbe/classCore_1_1mqtt__subscriber__mixin_1_1MqttSubscriberMixin.html#a65228cb9b185c24c9c8479e3e1ace5da">register_mqtt_topics</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, topic_map, subscriber_router=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a65228cb9b185c24c9c8479e3e1ace5da" id="r_a65228cb9b185c24c9c8479e3e1ace5da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dbe/classCore_1_1mqtt__subscriber__mixin_1_1MqttSubscriberMixin.html#a65228cb9b185c24c9c8479e3e1ace5da">register_mqtt_topics</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, topic_map, subscriber_router=None)</td></tr>
 <tr class="separator:a65228cb9b185c24c9c8479e3e1ace5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -128,7 +128,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>subscriber_router</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>subscriber_router</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -152,21 +152,18 @@ Args:
 <div class="line"><span class="lineno">   21</span><span class="stringliteral">            topic_map (dict): Mapping of {topic_filter: callback_func}.</span></div>
 <div class="line"><span class="lineno">   22</span><span class="stringliteral">            subscriber_router: Optional router instance. If None, uses self.subscriber_router.</span></div>
 <div class="line"><span class="lineno">   23</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   24</span>        router = subscriber_router <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self, <span class="stringliteral">&quot;subscriber_router&quot;</span>, <span class="keywordtype">None</span>)</div>
+<div class="line"><span class="lineno">   24</span>        router = subscriber_router <span class="keywordflow">or</span> getattr(self, <span class="stringliteral">&quot;subscriber_router&quot;</span>, <span class="keywordtype">None</span>)</div>
 <div class="line"><span class="lineno">   25</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> router:</div>
-<div class="line"><span class="lineno">   26</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;{self.__class__.__name__}: No subscriber_router available for MQTT registration.&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span>            logger.error(f<span class="stringliteral">&quot;{self.__class__.__name__}: No subscriber_router available for MQTT registration.&quot;</span>)</div>
 <div class="line"><span class="lineno">   27</span>            <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">for</span> topic, callback <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic_map.items</a>():</div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">for</span> topic, callback <span class="keywordflow">in</span> topic_map.items():</div>
 <div class="line"><span class="lineno">   30</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   31</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">router.subscribe_to_topic</a>(topic_filter=topic, callback_func=callback)</div>
-<div class="line"><span class="lineno">   32</span>                matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;✅ {self.__class__.__name__}: Subscribed to &#39;{topic}&#39;&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>                router.subscribe_to_topic(topic_filter=topic, callback_func=callback)</div>
+<div class="line"><span class="lineno">   32</span>                matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;✅ {self.__class__.__name__}: Subscribed to &#39;{topic}&#39;&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
 <div class="line"><span class="lineno">   33</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   34</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ {self.__class__.__name__}: Failed to subscribe to &#39;{topic}&#39;: {e}&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   34</span>                logger.error(f<span class="stringliteral">&quot;❌ {self.__class__.__name__}: Failed to subscribe to &#39;{topic}&#39;: {e}&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

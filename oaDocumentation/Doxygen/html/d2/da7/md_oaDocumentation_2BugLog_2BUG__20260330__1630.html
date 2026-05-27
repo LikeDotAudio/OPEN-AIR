@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('d2/da7/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: MqttManager Incomplete Implementation and Test Mismatch</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1002"></a> <b>Issue Date:</b> 2026-03-30 <b>Issue ID:</b> BUG_20260330_1630</p>
-<h1><a class="anchor" id="autotoc_md1003"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1267"></a> <b>Issue Date:</b> 2026-03-30 <b>Issue ID:</b> BUG_20260330_1630</p>
+<h1><a class="anchor" id="autotoc_md1268"></a>
 Issue Summary</h1>
 <p>The <code>MqttManager</code> in <code>oaComProtocols.oaComMQTT/Managers/mqtt_manager.py</code> was missing several key methods that were required by the system's status reporting and reconnection logic, and also expected by its unit tests. Furthermore, the unit tests in <code>oaComProtocols.oaComMQTT/Tests/test_mqtt_manager.py</code> contained several implementation errors and incorrect assertions that prevented them from running or accurately reflecting the system's state.</p>
-<h1><a class="anchor" id="autotoc_md1004"></a>
+<h1><a class="anchor" id="autotoc_md1269"></a>
 Root Cause Analysis</h1>
 <ul>
 <li><b>Incomplete Implementation:</b> The <code>MqttManager</code> class was a skeleton implementation that didn't yet contain the full logic for starting/stopping the status loop, handling reconnections, and reporting service status.</li>
 <li><b>Architectural Shift:</b> The <code>oaComProtocols.oaComMQTT</code> module had undergone an architectural shift (e.g., using <code>matrix_log</code> instead of standard <code>logger</code>, and updating JSON payloads) which was not reflected in the tests.</li>
 <li><b>Test Bugs:</b> The <code>MockMqttClient</code> used in the tests was not properly using <code>MagicMock</code> for its methods, leading to errors when tests tried to set <code>return_value</code> or check <code>assert_called_with</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1005"></a>
+<h1><a class="anchor" id="autotoc_md1270"></a>
 Resolution Details</h1>
 <ul>
 <li><b>MqttManager Update:</b><ul>
@@ -124,7 +124,7 @@ Resolution Details</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1006"></a>
+<h1><a class="anchor" id="autotoc_md1271"></a>
 Verification Evidence</h1>
 <p><b>Command Executed:</b> <code>PYTHONPATH=. pytest oaComProtocols.oaComMQTT/Tests/test_mqtt_manager.py</code></p>
 <p><b>Result:</b> <code>oaComProtocols.oaComMQTT/Tests/test_mqtt_manager.py ................... [100%]</code> <code>19 passed in 0.04s</code></p>

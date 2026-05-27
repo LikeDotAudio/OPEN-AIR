@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('dd/df8/namespaceMethods_1_1FlameGraph_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a746ca6faca8741ff1ef9f5b5b1bad8b2" id="r_a746ca6faca8741ff1ef9f5b5b1bad8b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df8/namespaceMethods_1_1FlameGraph_1_1Methods_1_1flame__events.html#a746ca6faca8741ff1ef9f5b5b1bad8b2">generate_table_rows</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">performance_stats</a>)</td></tr>
+<tr class="memitem:a746ca6faca8741ff1ef9f5b5b1bad8b2" id="r_a746ca6faca8741ff1ef9f5b5b1bad8b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df8/namespaceMethods_1_1FlameGraph_1_1Methods_1_1flame__events.html#a746ca6faca8741ff1ef9f5b5b1bad8b2">generate_table_rows</a> (performance_stats)</td></tr>
 <tr class="separator:a746ca6faca8741ff1ef9f5b5b1bad8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac93540ad6fc6150f071f170525b1391f" id="r_ac93540ad6fc6150f071f170525b1391f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df8/namespaceMethods_1_1FlameGraph_1_1Methods_1_1flame__events.html#ac93540ad6fc6150f071f170525b1391f">process_stats_for_ui</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ps</a>)</td></tr>
+<tr class="memitem:ac93540ad6fc6150f071f170525b1391f" id="r_ac93540ad6fc6150f071f170525b1391f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df8/namespaceMethods_1_1FlameGraph_1_1Methods_1_1flame__events.html#ac93540ad6fc6150f071f170525b1391f">process_stats_for_ui</a> (ps)</td></tr>
 <tr class="separator:ac93540ad6fc6150f071f170525b1391f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -124,32 +124,31 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  116</span><span class="keyword">def </span>generate_table_rows(performance_stats):</div>
 <div class="line"><span class="lineno">  117</span>    <span class="stringliteral">&quot;&quot;&quot;Generates HTML table rows with data attributes for filtering/sorting.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">  118</span>    rows = []</div>
-<div class="line"><span class="lineno">  119</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">performance_stats.sort</a>(key=<span class="keyword">lambda</span> x: x[<span class="stringliteral">&#39;cumtime&#39;</span>], reverse=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">  119</span>    performance_stats.sort(key=<span class="keyword">lambda</span> x: x[<span class="stringliteral">&#39;cumtime&#39;</span>], reverse=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">  120</span>    max_cumtime = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a>(s[<span class="stringliteral">&#39;cumtime&#39;</span>] <span class="keywordflow">for</span> s <span class="keywordflow">in</span> performance_stats) <span class="keywordflow">if</span> performance_stats <span class="keywordflow">else</span> 1</div>
 <div class="line"><span class="lineno">  121</span> </div>
 <div class="line"><span class="lineno">  122</span>    <span class="comment"># ⚡ NO LIMIT: All events displayed</span></div>
 <div class="line"><span class="lineno">  123</span>    <span class="keywordflow">for</span> stat <span class="keywordflow">in</span> performance_stats:</div>
 <div class="line"><span class="lineno">  124</span>        contrib = (stat[<span class="stringliteral">&#39;cumtime&#39;</span>] / max_cumtime) * 100</div>
 <div class="line"><span class="lineno">  125</span>        filename = stat[<span class="stringliteral">&#39;filename&#39;</span>]</div>
-<div class="line"><span class="lineno">  126</span>        layer = <span class="stringliteral">&quot;LIB&quot;</span> <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">any</a>(p <span class="keywordflow">in</span> filename <span class="keywordflow">for</span> p <span class="keywordflow">in</span> [<span class="stringliteral">&quot;site-packages&quot;</span>, <span class="stringliteral">&quot;lib/python&quot;</span>]) <span class="keywordflow">else</span> <span class="stringliteral">&quot;CORE&quot;</span> <span class="keywordflow">if</span> (filename == <span class="stringliteral">&quot;~&quot;</span> <span class="keywordflow">or</span> <span class="stringliteral">&quot;/usr/lib&quot;</span> <span class="keywordflow">in</span> filename) <span class="keywordflow">else</span> <span class="stringliteral">&quot;APP&quot;</span></div>
+<div class="line"><span class="lineno">  126</span>        layer = <span class="stringliteral">&quot;LIB&quot;</span> <span class="keywordflow">if</span> any(p <span class="keywordflow">in</span> filename <span class="keywordflow">for</span> p <span class="keywordflow">in</span> [<span class="stringliteral">&quot;site-packages&quot;</span>, <span class="stringliteral">&quot;lib/python&quot;</span>]) <span class="keywordflow">else</span> <span class="stringliteral">&quot;CORE&quot;</span> <span class="keywordflow">if</span> (filename == <span class="stringliteral">&quot;~&quot;</span> <span class="keywordflow">or</span> <span class="stringliteral">&quot;/usr/lib&quot;</span> <span class="keywordflow">in</span> filename) <span class="keywordflow">else</span> <span class="stringliteral">&quot;APP&quot;</span></div>
 <div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>        tags_html = <span class="stringliteral">&quot;&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>([f<span class="stringliteral">&#39;&lt;span class=&quot;tag&quot;&gt;{r}&lt;/span&gt;&#39;</span> <span class="keywordflow">for</span> r <span class="keywordflow">in</span> stat[<span class="stringliteral">&quot;roots&quot;</span>]])</div>
+<div class="line"><span class="lineno">  128</span>        tags_html = <span class="stringliteral">&quot;&quot;</span>.join([f<span class="stringliteral">&#39;&lt;span class=&quot;tag&quot;&gt;{r}&lt;/span&gt;&#39;</span> <span class="keywordflow">for</span> r <span class="keywordflow">in</span> stat[<span class="stringliteral">&quot;roots&quot;</span>]])</div>
 <div class="line"><span class="lineno">  129</span> </div>
 <div class="line"><span class="lineno">  130</span>        <span class="comment"># Escape function name for HTML display</span></div>
-<div class="line"><span class="lineno">  131</span>        safe_funcname = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">html.escape</a>(stat[<span class="stringliteral">&quot;funcname&quot;</span>])</div>
+<div class="line"><span class="lineno">  131</span>        safe_funcname = html.escape(stat[<span class="stringliteral">&quot;funcname&quot;</span>])</div>
 <div class="line"><span class="lineno">  132</span> </div>
 <div class="line"><span class="lineno">  133</span>        row = f<span class="stringliteral">&#39;&lt;tr data-layer=&quot;{layer}&quot; data-roots=&quot;{&quot; &quot;.join(stat[&quot;roots&quot;])}&quot;&gt;&#39;</span></div>
 <div class="line"><span class="lineno">  134</span>        row += f<span class="stringliteral">&#39;&lt;td&gt;&lt;div style=&quot;margin-bottom:4px&quot;&gt;&lt;span class=&quot;tag tag-layer-{layer}&quot;&gt;{layer}&lt;/span&gt;{tags_html}&lt;/div&gt;&#39;</span></div>
 <div class="line"><span class="lineno">  135</span>        row += f<span class="stringliteral">&#39;&lt;span style=&quot;color:#fff&quot;&gt;{safe_funcname}&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color:#666;font-size:11px&quot;&gt;{os.path.basename(filename)}:{stat[&quot;lineno&quot;]}&lt;/span&gt;&lt;/td&gt;&#39;</span></div>
 <div class="line"><span class="lineno">  136</span>        row += f<span class="stringliteral">&#39;&lt;td class=&quot;stat-value&quot;&gt;{stat[&quot;ncalls&quot;]}&lt;/td&gt;&lt;td class=&quot;stat-value&quot;&gt;{stat[&quot;tottime&quot;]:.6f}s&lt;/td&gt;&lt;td class=&quot;stat-value&quot;&gt;{stat[&quot;cumtime&quot;]:.6f}s&lt;/td&gt;&lt;td class=&quot;stat-value&quot;&gt;{stat[&quot;per_call&quot;]:.6f}s&lt;/td&gt;&#39;</span></div>
 <div class="line"><span class="lineno">  137</span>        row += f<span class="stringliteral">&#39;&lt;td&gt;&lt;div style=&quot;width:{min(100, contrib):.1f}%;height:4px;background:#3498db;border-radius:2px&quot;&gt;&lt;/div&gt;&lt;span style=&quot;font-size:10px;color:#666&quot;&gt;{contrib:.1f}%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&#39;</span></div>
-<div class="line"><span class="lineno">  138</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">rows.append</a>(row)</div>
+<div class="line"><span class="lineno">  138</span>        rows.append(row)</div>
 <div class="line"><span class="lineno">  139</span> </div>
-<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(rows)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;\n&quot;</span>.join(rows)</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa83862769f78fffb512bc9283007ef67"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa83862769f78fffb512bc9283007ef67">max</a></div><div class="ttdeci">repeat max</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">generated.rs:1711</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l01711">max</a>.</p>
 
 </div>
 </div>
@@ -177,13 +176,13 @@ and layer tagging (APP/LIB/CORE).
 <div class="line"><span class="lineno">   34</span><span class="stringliteral">    Transforms raw pstats into a rich list of dicts with root attribution </span></div>
 <div class="line"><span class="lineno">   35</span><span class="stringliteral">    and layer tagging (APP/LIB/CORE).</span></div>
 <div class="line"><span class="lineno">   36</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   37</span>    stats = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ps.stats</a></div>
+<div class="line"><span class="lineno">   37</span>    stats = ps.stats</div>
 <div class="line"><span class="lineno">   38</span>    vroot = (<span class="stringliteral">&quot;&lt;virtual&gt;&quot;</span>, 0, <span class="stringliteral">&quot;total_execution&quot;</span>)</div>
 <div class="line"><span class="lineno">   39</span> </div>
 <div class="line"><span class="lineno">   40</span>    <span class="comment"># ⚡ VIRTUAL ROOT INJECTION (Mirroring make_graph.py logic)</span></div>
 <div class="line"><span class="lineno">   41</span>    <span class="comment"># This ensures we can trace every function back to a top-level entry point.</span></div>
-<div class="line"><span class="lineno">   42</span>    roots = [f <span class="keywordflow">for</span> f, data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stats.items</a>() <span class="keywordflow">if</span> <span class="keywordflow">not</span> data[4]]</div>
-<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">for</span> func <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stats.keys</a>()):</div>
+<div class="line"><span class="lineno">   42</span>    roots = [f <span class="keywordflow">for</span> f, data <span class="keywordflow">in</span> stats.items() <span class="keywordflow">if</span> <span class="keywordflow">not</span> data[4]]</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">for</span> func <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(stats.keys()):</div>
 <div class="line"><span class="lineno">   44</span>        <span class="keywordflow">if</span> func == vroot: <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   45</span>        cc, nc, tt, ct, callers = stats[func]</div>
 <div class="line"><span class="lineno">   46</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> callers <span class="keywordflow">or</span> func <span class="keywordflow">in</span> roots:</div>
@@ -193,12 +192,12 @@ and layer tagging (APP/LIB/CORE).
 <div class="line"><span class="lineno">   50</span>            stats[func] = (cc, nc, tt, ct, new_callers)</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>    <span class="comment"># 1. Map hierarchy for root attribution</span></div>
-<div class="line"><span class="lineno">   53</span>    roots_to_analyze = [f <span class="keywordflow">for</span> f, data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stats.items</a>() <span class="keywordflow">if</span> vroot <span class="keywordflow">in</span> data[4]]</div>
+<div class="line"><span class="lineno">   53</span>    roots_to_analyze = [f <span class="keywordflow">for</span> f, data <span class="keywordflow">in</span> stats.items() <span class="keywordflow">if</span> vroot <span class="keywordflow">in</span> data[4]]</div>
 <div class="line"><span class="lineno">   54</span> </div>
 <div class="line"><span class="lineno">   55</span>    callees = defaultdict(list)</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">for</span> func, data <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stats.items</a>():</div>
+<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">for</span> func, data <span class="keywordflow">in</span> stats.items():</div>
 <div class="line"><span class="lineno">   57</span>        <span class="keywordflow">for</span> caller <span class="keywordflow">in</span> data[4]:</div>
-<div class="line"><span class="lineno">   58</span>            callees[caller].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">append</a>(func)</div>
+<div class="line"><span class="lineno">   58</span>            callees[caller].append(func)</div>
 <div class="line"><span class="lineno">   59</span> </div>
 <div class="line"><span class="lineno">   60</span>    func_to_roots = defaultdict(set)</div>
 <div class="line"><span class="lineno">   61</span>    root_naming_map = {</div>
@@ -209,33 +208,33 @@ and layer tagging (APP/LIB/CORE).
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>    MAX_LABEL_LENGTH = 10</div>
 <div class="line"><span class="lineno">   68</span> </div>
-<div class="line"><span class="lineno">   69</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_format_root_label</a>(file_path):</div>
+<div class="line"><span class="lineno">   69</span>    <span class="keyword">def </span>_format_root_label(file_path):</div>
 <div class="line"><span class="lineno">   70</span>        <span class="stringliteral">&quot;&quot;&quot;Cleans and formats a file path into a standardized root label.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   71</span>        base = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.basename</a>(file_path)</div>
-<div class="line"><span class="lineno">   72</span>        clean = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">base.replace</a>(<span class="stringliteral">&#39;.py&#39;</span>, <span class="stringliteral">&#39;&#39;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42385a0b3c596879a9b70b0df184bb7a">replace</a>(<span class="stringliteral">&#39;gui_&#39;</span>, <span class="stringliteral">&#39;&#39;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42385a0b3c596879a9b70b0df184bb7a">replace</a>(<span class="stringliteral">&#39;manager_&#39;</span>, <span class="stringliteral">&#39;&#39;</span>)</div>
-<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">clean.upper</a>()[:MAX_LABEL_LENGTH]</div>
+<div class="line"><span class="lineno">   71</span>        base = os.path.basename(file_path)</div>
+<div class="line"><span class="lineno">   72</span>        clean = base.replace(<span class="stringliteral">&#39;.py&#39;</span>, <span class="stringliteral">&#39;&#39;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42385a0b3c596879a9b70b0df184bb7a">replace</a>(<span class="stringliteral">&#39;gui_&#39;</span>, <span class="stringliteral">&#39;&#39;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42385a0b3c596879a9b70b0df184bb7a">replace</a>(<span class="stringliteral">&#39;manager_&#39;</span>, <span class="stringliteral">&#39;&#39;</span>)</div>
+<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">return</span> clean.upper()[:MAX_LABEL_LENGTH]</div>
 <div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_root_label</a>(f):</div>
-<div class="line"><span class="lineno">   76</span>        desc = f<span class="stringliteral">&quot;{f[0]} {f[2]}&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">for</span> pattern, label <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">root_naming_map.items</a>():</div>
+<div class="line"><span class="lineno">   75</span>    <span class="keyword">def </span>get_root_label(f):</div>
+<div class="line"><span class="lineno">   76</span>        desc = f<span class="stringliteral">&quot;{f[0]} {f[2]}&quot;</span>.lower()</div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">for</span> pattern, label <span class="keywordflow">in</span> root_naming_map.items():</div>
 <div class="line"><span class="lineno">   78</span>            <span class="keywordflow">if</span> pattern <span class="keywordflow">in</span> desc: <span class="keywordflow">return</span> label</div>
-<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">_format_root_label</a>(f[0])</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">return</span> _format_root_label(f[0])</div>
 <div class="line"><span class="lineno">   80</span> </div>
 <div class="line"><span class="lineno">   81</span>    <span class="keywordflow">for</span> root_func <span class="keywordflow">in</span> roots_to_analyze:</div>
-<div class="line"><span class="lineno">   82</span>        label = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_root_label</a>(root_func)</div>
+<div class="line"><span class="lineno">   82</span>        label = get_root_label(root_func)</div>
 <div class="line"><span class="lineno">   83</span>        queue = deque([root_func])</div>
 <div class="line"><span class="lineno">   84</span>        visited = {root_func}</div>
 <div class="line"><span class="lineno">   85</span>        <span class="keywordflow">while</span> queue:</div>
-<div class="line"><span class="lineno">   86</span>            curr = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.popleft</a>()</div>
+<div class="line"><span class="lineno">   86</span>            curr = queue.popleft()</div>
 <div class="line"><span class="lineno">   87</span>            func_to_roots[curr].add(label)</div>
 <div class="line"><span class="lineno">   88</span>            <span class="keywordflow">for</span> child <span class="keywordflow">in</span> callees[curr]:</div>
 <div class="line"><span class="lineno">   89</span>                <span class="keywordflow">if</span> child <span class="keywordflow">not</span> <span class="keywordflow">in</span> visited:</div>
-<div class="line"><span class="lineno">   90</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">visited.add</a>(child)</div>
-<div class="line"><span class="lineno">   91</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.append</a>(child)</div>
+<div class="line"><span class="lineno">   90</span>                    visited.add(child)</div>
+<div class="line"><span class="lineno">   91</span>                    queue.append(child)</div>
 <div class="line"><span class="lineno">   92</span> </div>
 <div class="line"><span class="lineno">   93</span>    <span class="comment"># 2. Build final flattened performance stats</span></div>
 <div class="line"><span class="lineno">   94</span>    performance_stats = []</div>
-<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">for</span> func, (cc, nc, tt, ct, callers) <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">stats.items</a>():</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">for</span> func, (cc, nc, tt, ct, callers) <span class="keywordflow">in</span> stats.items():</div>
 <div class="line"><span class="lineno">   96</span>        <span class="keywordflow">if</span> func == vroot: <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   97</span>        fname = func[2]</div>
 <div class="line"><span class="lineno">   98</span> </div>
@@ -246,11 +245,11 @@ and layer tagging (APP/LIB/CORE).
 <div class="line"><span class="lineno">  103</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">  104</span>                fname = f<span class="stringliteral">&quot;built-in: {fname}&quot;</span></div>
 <div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">performance_stats.append</a>({</div>
+<div class="line"><span class="lineno">  106</span>        performance_stats.append({</div>
 <div class="line"><span class="lineno">  107</span>            <span class="stringliteral">&#39;filename&#39;</span>: func[0], <span class="stringliteral">&#39;lineno&#39;</span>: func[1], <span class="stringliteral">&#39;funcname&#39;</span>: fname <span class="keywordflow">or</span> <span class="stringliteral">&quot;&lt;unknown&gt;&quot;</span>,</div>
 <div class="line"><span class="lineno">  108</span>            <span class="stringliteral">&#39;ncalls&#39;</span>: nc, <span class="stringliteral">&#39;tottime&#39;</span>: tt, <span class="stringliteral">&#39;cumtime&#39;</span>: ct,</div>
 <div class="line"><span class="lineno">  109</span>            <span class="stringliteral">&#39;per_call&#39;</span>: tt/nc <span class="keywordflow">if</span> nc &gt; 0 <span class="keywordflow">else</span> 0,</div>
-<div class="line"><span class="lineno">  110</span>            <span class="stringliteral">&#39;roots&#39;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sorted</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(func_to_roots[func])),</div>
+<div class="line"><span class="lineno">  110</span>            <span class="stringliteral">&#39;roots&#39;</span>: sorted(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(func_to_roots[func])),</div>
 <div class="line"><span class="lineno">  111</span>            <span class="stringliteral">&#39;raw_key&#39;</span>: func</div>
 <div class="line"><span class="lineno">  112</span>        })</div>
 <div class="line"><span class="lineno">  113</span> </div>
@@ -259,7 +258,7 @@ and layer tagging (APP/LIB/CORE).
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a42385a0b3c596879a9b70b0df184bb7a"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a42385a0b3c596879a9b70b0df184bb7a">replace</a></div><div class="ttdeci">replace</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02658">generated.rs:2658</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02658">replace</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02658">replace</a>.</p>
 
 </div>
 </div>

@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('d2/d88/md_oaStateCache_2Documentation_
   <div class="headertitle"><div class="title">🏷️ Cache Io Handler</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4650"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md4651"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4930"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4931"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md4652"></a>
+<h2><a class="anchor" id="autotoc_md4932"></a>
 File Level</h2>
 <p>State_Cache/cache_io_handler.py</p>
 <p>Handles all disk I/O operations for the application's state cache, including loading and atomic saving of snapshots.</p>
 <p>Author: Anthony Peter Kuzub</p>
 <p>specific application can be negotiated. There is no charge to use, modify, or fork this software.</p>
 <p>Version 20250821.200641.1</p>
-<h1><a class="anchor" id="autotoc_md4653"></a>
+<h1><a class="anchor" id="autotoc_md4933"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <p>*(Document any specific platform requirements, ABI expectations, or required execution privileges here)*</p>
-<h1><a class="anchor" id="autotoc_md4654"></a>
+<h1><a class="anchor" id="autotoc_md4934"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md4655"></a>
+<h2><a class="anchor" id="autotoc_md4935"></a>
 Global Functions</h2>
-<h3><a class="anchor" id="autotoc_md4656"></a>
+<h3><a class="anchor" id="autotoc_md4936"></a>
 &lt;tt&gt;load_cache()&lt;/tt&gt;</h3>
 <p>Reads device_state_cache.json from the DATA directory defined in app_constants. Returns an empty dict on failure/missing file.</p>
 <p><b>Parameters:</b></p><ul>
@@ -122,7 +122,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4657"></a>
+<h3><a class="anchor" id="autotoc_md4937"></a>
 &lt;tt&gt;save_cache(data)&lt;/tt&gt;</h3>
 <p>Writes the dictionary to disk. Use a temp file + rename (atomic write)</p>
 <p><b>Parameters:</b></p><ul>
@@ -134,7 +134,7 @@ Global Functions</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4658"></a>
+<h1><a class="anchor" id="autotoc_md4938"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <blockquote class="doxtable">
 <p>&zwj;<em>Reminder: Ensure inline comments focus on the 'why'—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em> </p>

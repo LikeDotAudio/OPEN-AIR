@@ -93,33 +93,33 @@ $(document).ready(function(){initNavTree('dc/df1/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260417_000500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1501"></a> </p>
-<h1><a class="anchor" id="autotoc_md1502"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1766"></a> </p>
+<h1><a class="anchor" id="autotoc_md1767"></a>
 Description</h1>
-<p><code>TypeError: can only concatenate str (not "int") to str</code> and &lsquo;AttributeError: 'Frame&rsquo; object has no attribute 'variable'<code>occurring during the instantiation of the</code>OcaCompositeFaderKnob<code>widget (</code>composite_horizontal_dial_value.py`).</p>
-<h1><a class="anchor" id="autotoc_md1503"></a>
+<p><code>TypeError: can only concatenate str (not "int") to str</code> and &lsquo;AttributeError: 'Frame&rsquo; object has no attribute 'variable'<code>occurring during the instantiation of the</code>OcaCompositeFaderKnob<code>widget (</code><a class="el" href="../../d0/da6/composite__horizontal__dial__value_8py.html">composite_horizontal_dial_value.py</a>`).</p>
+<h1><a class="anchor" id="autotoc_md1768"></a>
 Error Clusters</h1>
 <ul>
 <li><b>Cluster A: Tuple Unpacking Failure</b>: <code>TypeError</code> in <code>tkinter.cget</code> caused by a tuple being passed as a widget parent.</li>
 <li><b>Cluster B: Ghost Mode Sync Crash</b>: <code>AttributeError</code> when attempting to bind <code>trace_add</code> to <code>.variable</code> on ghost-rendered sub-widgets that lack full initialization attributes.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1504"></a>
+<h1><a class="anchor" id="autotoc_md1769"></a>
 Trigger Event</h1>
 <p>GUI Rebuild or initial rendering of a composite widget, especially while in "Ghost" or "Fast" render tiers (which occurs during drag-and-drop operations).</p>
-<h1><a class="anchor" id="autotoc_md1505"></a>
+<h1><a class="anchor" id="autotoc_md1770"></a>
 Domain Mapping</h1>
 <ul>
 <li><code>oaGuiElements/Core/utils/composite_horizontal_dial_value/composite_horizontal_dial_value.py</code></li>
-<li><code><a class="el" href="../../d2/d75/base__widget__creator_8py.html">oaGui/Core/base_widget_creator.py</a></code></li>
+<li><code>oaGui/Core/base_widget_creator.py</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1506"></a>
+<h1><a class="anchor" id="autotoc_md1771"></a>
 Action Taken</h1>
 <ol type="1">
-<li><b>Unpacking Removal</b>: Reverted the tuple unpacking in <code>composite_horizontal_dial_value.py</code> to <code>fader_widget = self.make_fader_horizontal(...)</code> since <code>BaseWidgetCreator.build</code> was recently refactored to return only the single widget instance, not a <code>(widget, canvas)</code> tuple.</li>
+<li><b>Unpacking Removal</b>: Reverted the tuple unpacking in <code><a class="el" href="../../d0/da6/composite__horizontal__dial__value_8py.html">composite_horizontal_dial_value.py</a></code> to <code>fader_widget = self.make_fader_horizontal(...)</code> since <code>BaseWidgetCreator.build</code> was recently refactored to return only the single widget instance, not a <code>(widget, canvas)</code> tuple.</li>
 <li><b>Ghost Awareness</b>: Added a safety check (&lsquo;is_ghost = not hasattr(fader_widget, 'variable&rsquo;) or not hasattr(dial_widget, 'variable')<code>) to the state synchronization block in</code>_assemble_ui<code>. This prevents the builder from attempting to bind variable traces to lightweight ghost placeholders.</code></li>
-<li><code>**Log Noise Reduction**: Removed noisy repetitive logging calls from</code>TransparencyMixin.register_for_bg_sync()`.</li>
+<li><code>**Log Noise Reduction**: Removed noisy repetitive logging calls from</code>SyncBehavior.register_for_bg_sync()`.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1507"></a>
+<h1><a class="anchor" id="autotoc_md1772"></a>
 Verification Results</h1>
 <ul>
 <li>Composite dial and fader widgets successfully instantiate during both High-Res and Ghost render tiers.</li>

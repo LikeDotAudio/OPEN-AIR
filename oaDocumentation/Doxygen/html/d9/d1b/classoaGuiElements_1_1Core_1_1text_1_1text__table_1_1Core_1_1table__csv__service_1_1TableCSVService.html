@@ -155,10 +155,9 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   24</span>        self.writer = TableCsvWriter()</div>
 <div class="line"><span class="lineno">   25</span>        self.reader = TableCsvReader()</div>
 <div class="line"><span class="lineno">   26</span>        self.checker = TableCsvCheck()</div>
-<div class="line"><span class="lineno">   27</span>        clean_lbl = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re.sub</a>(<span class="stringliteral">r&quot;[^a-zA-Z0-9]&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>, label)</div>
-<div class="line"><span class="lineno">   28</span>        self.csv_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(CSV_SAVE_DIR, f<span class="stringliteral">&quot;{clean_lbl}.csv&quot;</span>)</div>
+<div class="line"><span class="lineno">   27</span>        clean_lbl = re.sub(<span class="stringliteral">r&quot;[^a-zA-Z0-9]&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>, label)</div>
+<div class="line"><span class="lineno">   28</span>        self.csv_path = os.path.join(CSV_SAVE_DIR, f<span class="stringliteral">&quot;{clean_lbl}.csv&quot;</span>)</div>
 <div class="line"><span class="lineno">   29</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -226,7 +225,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   37</span>        <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   38</span>            headers, data = self.reader.read_from_csv(self.csv_path)</div>
 <div class="line"><span class="lineno">   39</span>        <span class="keywordflow">except</span> FileNotFoundError:</div>
-<div class="line"><span class="lineno">   40</span>            matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   40</span>            matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
 <div class="line"><span class="lineno">   41</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> data:</div>
@@ -234,13 +233,13 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>        data_dict = {}</div>
 <div class="line"><span class="lineno">   47</span>        kp = [<span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;gpib_address&quot;</span>, <span class="stringliteral">&quot;serial_number&quot;</span>, <span class="stringliteral">&quot;resource_string&quot;</span>, <span class="stringliteral">&quot;model&quot;</span>]</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">for</span> i, row <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(data):</div>
-<div class="line"><span class="lineno">   49</span>            key = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">next</a>((row[k] <span class="keywordflow">for</span> k <span class="keywordflow">in</span> kp <span class="keywordflow">if</span> k <span class="keywordflow">in</span> row <span class="keywordflow">and</span> row[k]), f<span class="stringliteral">&quot;row_{i}&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">for</span> i, row <span class="keywordflow">in</span> enumerate(data):</div>
+<div class="line"><span class="lineno">   49</span>            key = next((row[k] <span class="keywordflow">for</span> k <span class="keywordflow">in</span> kp <span class="keywordflow">if</span> k <span class="keywordflow">in</span> row <span class="keywordflow">and</span> row[k]), f<span class="stringliteral">&quot;row_{i}&quot;</span>)</div>
 <div class="line"><span class="lineno">   50</span>            data_dict[key] = row</div>
 <div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> data_dict</div>
 <div class="line"><span class="lineno">   52</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00028">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.csv_path</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00297">io::LineReader.reader</a>, <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00025">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.reader</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00028">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.csv_path</a>, <a class="el" href="../../d3/d8e/csv_8h_source.html#l00297">io::LineReader.reader</a>, and <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00025">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.reader</a>.</p>
 
 </div>
 </div>
@@ -280,11 +279,11 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   30</span>    <span class="keyword">def </span>save(self, headers, item_map):</div>
 <div class="line"><span class="lineno">   31</span>        <span class="stringliteral">&quot;&quot;&quot;Writes current item_map to the local CSV backup.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">if</span> headers:</div>
-<div class="line"><span class="lineno">   33</span>            self.writer.write_to_csv(self.csv_path, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(headers), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">item_map.values</a>()))</div>
+<div class="line"><span class="lineno">   33</span>            self.writer.write_to_csv(self.csv_path, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(headers), <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(item_map.values()))</div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00028">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.csv_path</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>, and <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00024">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.writer</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00028">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.csv_path</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/dff/table__csv__service_8py_source.html#l00024">oaGuiElements.Core.text.text_table.Core.table_csv_service.TableCSVService.writer</a>.</p>
 
 </div>
 </div>

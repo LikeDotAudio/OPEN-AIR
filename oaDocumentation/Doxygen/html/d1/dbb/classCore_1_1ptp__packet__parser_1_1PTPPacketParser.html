@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('d1/dbb/classCore_1_1ptp__packet__parse
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a430854bd67c06e3d08b86c1ccbcd625f" id="r_a430854bd67c06e3d08b86c1ccbcd625f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dbb/classCore_1_1ptp__packet__parser_1_1PTPPacketParser.html#a430854bd67c06e3d08b86c1ccbcd625f">tear_apart</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cls</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pkt</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ptp_layer</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a430854bd67c06e3d08b86c1ccbcd625f" id="r_a430854bd67c06e3d08b86c1ccbcd625f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dbb/classCore_1_1ptp__packet__parser_1_1PTPPacketParser.html#a430854bd67c06e3d08b86c1ccbcd625f">tear_apart</a> (cls, pkt, ptp_layer=None)</td></tr>
 <tr class="separator:a430854bd67c06e3d08b86c1ccbcd625f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -134,7 +134,7 @@ Static Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>ptp_layer</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>ptp_layer</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -155,28 +155,25 @@ If `ptp_layer` is provided, we can still parse it, but we prefer raw bytes.
 <div class="line"><span class="lineno">   41</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> HAS_RUST:</div>
 <div class="line"><span class="lineno">   42</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">scapy.all</a> <span class="keyword">import</span> IP, UDP</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keyword">from</span> scapy.all <span class="keyword">import</span> IP, UDP</div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>        <span class="comment"># If we didn&#39;t extract raw payload in ptp.py, do it here</span></div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pkt.haslayer</a>(UDP):</div>
-<div class="line"><span class="lineno">   48</span>            payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">bytes</a>(pkt[UDP].payload)</div>
-<div class="line"><span class="lineno">   49</span>            source_ip = pkt[IP].src <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pkt.haslayer</a>(IP) <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown&quot;</span></div>
-<div class="line"><span class="lineno">   50</span>            destination_ip = pkt[IP].dst <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pkt.haslayer</a>(IP) <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown&quot;</span></div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> pkt.haslayer(UDP):</div>
+<div class="line"><span class="lineno">   48</span>            payload = bytes(pkt[UDP].payload)</div>
+<div class="line"><span class="lineno">   49</span>            source_ip = pkt[IP].src <span class="keywordflow">if</span> pkt.haslayer(IP) <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown&quot;</span></div>
+<div class="line"><span class="lineno">   50</span>            destination_ip = pkt[IP].dst <span class="keywordflow">if</span> pkt.haslayer(IP) <span class="keywordflow">else</span> <span class="stringliteral">&quot;Unknown&quot;</span></div>
 <div class="line"><span class="lineno">   51</span>            udp_port = pkt[UDP].dport</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>            <span class="comment"># Offload heavy lifting to Rust</span></div>
 <div class="line"><span class="lineno">   54</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   55</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaptpparser_rs.parse_packet</a>(payload, source_ip, destination_ip, udp_port)</div>
+<div class="line"><span class="lineno">   55</span>                <span class="keywordflow">return</span> oaptpparser_rs.parse_packet(payload, source_ip, destination_ip, udp_port)</div>
 <div class="line"><span class="lineno">   56</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   57</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ [PTP] Rust parsing failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   57</span>                logger.error(f<span class="stringliteral">&quot;❌ [PTP] Rust parsing failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   58</span>                <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   59</span> </div>
 <div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   61</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

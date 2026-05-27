@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('d2/d2b/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260330_001500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2035"></a> </p>
-<h1><a class="anchor" id="autotoc_md2036"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2484"></a> </p>
+<h1><a class="anchor" id="autotoc_md2485"></a>
 Issue</h1>
 <p>The testing module (<code>oaTests</code>) had "force debug on/off" buttons that performed blanket scans/replacements, which was fragile and did not align with the new Hierarchical Debug Matrix.</p>
-<h1><a class="anchor" id="autotoc_md2037"></a>
+<h1><a class="anchor" id="autotoc_md2486"></a>
 Root Cause</h1>
 <p>Legacy implementation relied on overwriting <code>LOCAL_DEBUG</code> constants in source files instead of utilizing a centralized configuration.</p>
-<h1><a class="anchor" id="autotoc_md2038"></a>
+<h1><a class="anchor" id="autotoc_md2487"></a>
 Resolution</h1>
 <ol type="1">
 <li><b>Centralized Hub</b>: Created <code><a class="el" href="../../de/dff/oaTests_2Managers_2configIniEditor_2manager_8py.html">oaTests/Managers/configIniEditor/manager.py</a></code> to handle direct manipulation of the <code>[DEBUG_MATRIX]</code> section in <code>config.ini</code>.</li>
@@ -112,7 +112,7 @@ Resolution</h1>
 </li>
 <li><b>Event Integration</b>: Updated <code><a class="el" href="../../d8/d62/TestsUI_8py.html">oaTests/Interface/TestsUI.py</a></code> to handle <code>Checkbox.Changed</code> events and commit changes to disk immediately.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2039"></a>
+<h1><a class="anchor" id="autotoc_md2488"></a>
 Verification</h1>
 <ol type="1">
 <li>Manual UI audit confirms checkboxes load with correct initial values from <code>config.ini</code>.</li>

@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('db/d7e/md_oaDocumentation_2Documentati
   <div class="headertitle"><div class="title">OPEN-AIR User Manual</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1566"></a> </p>
-<h1><a class="anchor" id="autotoc_md1567"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2015"></a> </p>
+<h1><a class="anchor" id="autotoc_md2016"></a>
 05. Customization</h1>
 <p>One of OPEN-AIR's greatest strengths is its deep customization through simple, human-readable configuration.</p>
-<h2><a class="anchor" id="autotoc_md1568"></a>
+<h2><a class="anchor" id="autotoc_md2017"></a>
 Customizing the UI Layout</h2>
 <p>To reorganize your dashboard:</p><ol type="1">
 <li><b>Rearrange Folders:</b> Move folders within the <code>oaGui/Assets/</code> directory. For example, moving a folder from <code>left_50/top_10</code> to <code>right_50/top_10</code> will move that entire UI block to the right column.</li>
 <li><b>Add New Tabs:</b> Create a new folder (e.g., <code>5_My_Dashboard</code>) within a container directory. The system will automatically add it as a new tab.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1569"></a>
+<h2><a class="anchor" id="autotoc_md2018"></a>
 Editing Widget Configurations</h2>
 <p>Most UI elements are defined in <code>.json</code> files. You can modify these files to change widget behavior:</p><ul>
 <li><b>Change Labels:</b> Update the <code>"label"</code> key for any block or widget.</li>
 <li><b>Adjust Colors:</b> Set <code>"background_color"</code> or <code>"text_color"</code> to hexadecimal values (e.g., <code>#2b2b2b</code>).</li>
 <li><b>Scale Widgets:</b> Change <code>"width"</code> and <code>"height"</code> properties.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1570"></a>
+<h2><a class="anchor" id="autotoc_md2019"></a>
 "Next Gen" Meter Customization</h2>
 <p>You can apply photorealistic bezels to any meter by adding <code>style_overrides</code> to its JSON definition:</p>
 <div class="fragment"><div class="line">&quot;style_overrides&quot;: {</div>
@@ -121,14 +121,14 @@ Editing Widget Configurations</h2>
 <div class="line">    &quot;aperture_mask&quot;: &quot;smile&quot;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Supported Bezel Shapes:</b> <code>gem</code>, <code>pyramid</code>, <code>cylinder</code>, <code>hex</code>, <code>squircle</code>, <code>badge</code>, <code>crest</code>.</p>
-<h2><a class="anchor" id="autotoc_md1571"></a>
+<h2><a class="anchor" id="autotoc_md2020"></a>
 Global System Configuration</h2>
 <p>The <code>config.ini</code> file in the root directory manages system-level settings:</p><ul>
 <li>**<code>broker_address</code>:** IP address of your MQTT broker.</li>
 <li>**<code>enable_debug_mode</code>:** Set to <code>True</code> for verbose logging.</li>
 <li>**<code>mission_critical_mode</code>:** If enabled, the supervisor will automatically restart any partitions that crash.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1572"></a>
+<h2><a class="anchor" id="autotoc_md2021"></a>
 Background and Screws</h2>
 <p>OPEN-AIR can automatically generate industrial backgrounds and panel screws for your UI.</p><ul>
 <li><b>Default Panels:</b> If a JSON GUI doesn't specify a background, it defaults to the configuration in <code>oaGui/Assets/default_panel.json</code>.</li>

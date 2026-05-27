@@ -37,7 +37,7 @@ current_version_hash = int(current_date) * int(current_time) * 3
 current_file = f"{os.path.basename(__file__)}"
 
 # --- MQTT Topic Constants (No Magic Numbers) ---
-ROOT_TOPIC = "OPEN-AIR/yak/Memory"
+ROOT_TOPIC = "OpenAir/yak/Memory"
 NAB_TRIGGER_TOPIC = f"{ROOT_TOPIC}/Nab/Nab_Preset_Catalog/scpi_details/N9342CN/trigger"
 NAB_OUTPUT_TOPIC = (
     f"{ROOT_TOPIC}/Nab/Nab_Preset_Catalog/Outputs/preset_catalog_list/value"
@@ -46,7 +46,7 @@ SET_FILENAME_TOPIC = f"{ROOT_TOPIC}/Set/Set_Store_Preset/Input/preset_fileName/v
 SET_TRIGGER_TOPIC = f"{ROOT_TOPIC}/Set/Set_Store_Preset/scpi_details/N9342CN/trigger"
 
 # --- NEW: MQTT Topic for publishing presets ---
-PRESET_REPOSITORY_TOPIC = "OPEN-AIR/repository/presets"
+PRESET_REPOSITORY_TOPIC = "OpenAir/repository/presets"
 
 
 class PresetFromDeviceWorker:

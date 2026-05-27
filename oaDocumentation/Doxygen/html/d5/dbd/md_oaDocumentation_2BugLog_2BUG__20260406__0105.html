@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('d5/dbd/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0105</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1295"></a> </p>
-<h1><a class="anchor" id="autotoc_md1296"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1560"></a> </p>
+<h1><a class="anchor" id="autotoc_md1561"></a>
 Issue</h1>
 <p>Graphs are completely invisible or not displaying datasets for components lacking explicit grid sticky/stretch attributes (e.g., <a class="el" href="../../d3/d3b/Scan_8json.html">Scan.json</a>).</p>
-<h1><a class="anchor" id="autotoc_md1297"></a>
+<h1><a class="anchor" id="autotoc_md1562"></a>
 Root Cause</h1>
 <ol type="1">
-<li><code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> explicitly overwrote its requested frame dimensions to 1x1 during initialization (an old X11 BadValue workaround), which alongside <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pack_propagate(False)</a></code> meant the widget rendered at 1x1 pixels unless stretched by a parent container.</li>
+<li><code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> explicitly overwrote its requested frame dimensions to 1x1 during initialization (an old X11 BadValue workaround), which alongside <code>pack_propagate(False)</code> meant the widget rendered at 1x1 pixels unless stretched by a parent container.</li>
 <li>JSON multi-lingual dictionary objects were passed raw to Matplotlib axis and line label functions, causing potential rendering errors or ugly <code>str(dict)</code> outputs.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1298"></a>
+<h1><a class="anchor" id="autotoc_md1563"></a>
 Resolution</h1>
 <ul>
 <li>Removed the <code>self.config(width=1, height=1)</code> override. The frame now respects the <code>width</code> and <code>height</code> constraints parsed directly from the layout JSON schema (minimum 100x50).</li>
 <li>Wrapped all dictionary-based labels with <code>get_text()</code> in <code><a class="el" href="../../d0/d4a/dynamic__graph_8py.html">dynamic_graph.py</a></code> and <code><a class="el" href="../../d9/de7/graph__styler_8py.html">graph_styler.py</a></code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1299"></a>
+<h1><a class="anchor" id="autotoc_md1564"></a>
 Verification</h1>
 <ul>
 <li>The graphing widgets will now reserve their correct physical size and draw Matplotlib figures synchronously without relying on parent layout stretch events. </li>

@@ -48,7 +48,7 @@ class RESTManager:
     Mandate: Always Online. The REST API is a core system service and 
     cannot be disabled while the module is present.
     """
-    STATE_TOPIC = "OPEN-AIR/System/Config/REST/Status" # Changed from Enabled to Status
+    STATE_TOPIC = "OpenAir/System/Config/REST/Status" # Changed from Enabled to Status
 
     def __init__(self, state_cache_manager, protocol_router):
         self.state_cache = state_cache_manager

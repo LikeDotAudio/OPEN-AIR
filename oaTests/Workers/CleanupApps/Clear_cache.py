@@ -108,7 +108,7 @@ def purge_cache():
     try:
         import paho.mqtt.publish as publish
         matrix_log("core", "system", "purge_cache", "📡 Broadcasting global cache clear command...", "INFO")
-        publish.single("OPEN-AIR/System/Control/ClearCache", "true", hostname="localhost", port=1883)
+        publish.single("OpenAir/System/Control/ClearCache", "true", hostname="localhost", port=1883)
     except Exception as e:
         logger.warning(f"  └─ ⚠️ Failed to broadcast MQTT clear cache command: {e}")
 

@@ -46,7 +46,7 @@ class TestRadarWidget(unittest.TestCase):
         self.mock_context = MagicMock()
         self.mock_context.state_mirror_engine = self.radar_creator.state_mirror_engine
         self.mock_context.subscriber_router = self.radar_creator.subscriber_router
-        self.mock_context.base_mqtt_topic_from_path = 'OPEN-AIR/test'
+        self.mock_context.base_mqtt_topic_from_path = 'OpenAir/test'
         self.mock_context.builder_instance = MagicMock()
 
     def test_creation(self):

@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('da/dfc/classaes70_1_1controller_1_1pro
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7a723edfef62204d1d1e3a6940da316b" id="r_a7a723edfef62204d1d1e3a6940da316b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dfc/classaes70_1_1controller_1_1property__event_1_1PropertyEvent.html#a7a723edfef62204d1d1e3a6940da316b">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a8d11a7e58d6e8b6570c77ba2b5250c8e">object</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a798101813052df6fb3664e23e54a13ce">id</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">propertyType</a>)</td></tr>
+<tr class="memitem:a7a723edfef62204d1d1e3a6940da316b" id="r_a7a723edfef62204d1d1e3a6940da316b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dfc/classaes70_1_1controller_1_1property__event_1_1PropertyEvent.html#a7a723edfef62204d1d1e3a6940da316b">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a8d11a7e58d6e8b6570c77ba2b5250c8e">object</a>, <a class="el" href="../../d7/de2/classaes70_1_1controller_1_1base__event_1_1BaseEvent.html#a798101813052df6fb3664e23e54a13ce">id</a>, propertyType)</td></tr>
 <tr class="separator:a7a723edfef62204d1d1e3a6940da316b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac4fc1395cc217b65f3f219c6a2ee8f" id="r_a6ac4fc1395cc217b65f3f219c6a2ee8f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dfc/classaes70_1_1controller_1_1property__event_1_1PropertyEvent.html#a6ac4fc1395cc217b65f3f219c6a2ee8f">do_subscribe</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a6ac4fc1395cc217b65f3f219c6a2ee8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,23 +189,22 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/d51/property__event_8py_source.html#l00016">16</a> of file <a class="el" href="../../d6/d51/property__event_8py_source.html">property_event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   16</span>    <span class="keyword">def </span>__init__(self, object, id, propertyType):</div>
-<div class="line"><span class="lineno">   17</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">super</a>().__init__(object, id, propertyType)</div>
+<div class="line"><span class="lineno">   17</span>        super().__init__(object, id, propertyType)</div>
 <div class="line"><span class="lineno">   18</span>        <span class="keyword">def </span>callback(args):</div>
 <div class="line"><span class="lineno">   19</span>            id_arg, dataView, changeType = args</div>
-<div class="line"><span class="lineno">   20</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">id_arg.DefLevel</a> != self.id.DefLevel <span class="keywordflow">or</span></div>
-<div class="line"><span class="lineno">   21</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">id_arg.PropertyIndex</a> != self.id.PropertyIndex):</div>
+<div class="line"><span class="lineno">   20</span>            <span class="keywordflow">if</span> (id_arg.DefLevel != self.id.DefLevel <span class="keywordflow">or</span></div>
+<div class="line"><span class="lineno">   21</span>                id_arg.PropertyIndex != self.id.PropertyIndex):</div>
 <div class="line"><span class="lineno">   22</span>                <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>            value = propertyType[0].<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decodeFrom</a>(dataView, 0)[1]</div>
+<div class="line"><span class="lineno">   24</span>            value = propertyType[0].decodeFrom(dataView, 0)[1]</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>            <span class="keywordflow">for</span> callback <span class="keywordflow">in</span> self.handlers:</div>
 <div class="line"><span class="lineno">   27</span>                <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   28</span>                    callback(object, value, changeType, id_arg)</div>
 <div class="line"><span class="lineno">   29</span>                <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   30</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(e)</div>
+<div class="line"><span class="lineno">   30</span>                    logger.error(e)</div>
 <div class="line"><span class="lineno">   31</span>        self.callback = callback</div>
 <div class="line"><span class="lineno">   32</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d6/d51/property__event_8py_source.html#l00031">aes70.controller.property_event.PropertyEvent.callback</a>, <a class="el" href="../../df/d88/base__event_8py_source.html#l00027">aes70.controller.base_event.BaseEvent.handlers</a>, <a class="el" href="../../d1/df6/event_8py_source.html#l00019">aes70.controller.event.Event.handlers</a>, and <a class="el" href="../../df/d88/base__event_8py_source.html#l00010">aes70.controller.base_event.BaseEvent.id</a>.</p>
 
@@ -232,7 +231,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/d51/property__event_8py_source.html#l00033">33</a> of file <a class="el" href="../../d6/d51/property__event_8py_source.html">property_event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   33</span>    <span class="keyword">def </span>do_subscribe(self):</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> self.object.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">OnPropertyChanged.subscribe</a>(self.callback)</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> self.object.OnPropertyChanged.subscribe(self.callback)</div>
 <div class="line"><span class="lineno">   35</span> </div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d1/df6/event_8py_source.html#l00044">aes70.controller.event.Event.callback</a>, <a class="el" href="../../d6/d51/property__event_8py_source.html#l00031">aes70.controller.property_event.PropertyEvent.callback</a>, and <a class="el" href="../../df/d88/base__event_8py_source.html#l00009">aes70.controller.base_event.BaseEvent.object</a>.</p>
@@ -269,7 +268,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/d51/property__event_8py_source.html#l00036">36</a> of file <a class="el" href="../../d6/d51/property__event_8py_source.html">property_event.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   36</span>    <span class="keyword">def </span>do_unsubscribe(self, callback):</div>
-<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> self.object.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">OnPropertyChanged.unsubscribe</a>(self.callback)</div>
+<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> self.object.OnPropertyChanged.unsubscribe(self.callback)</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d1/df6/event_8py_source.html#l00044">aes70.controller.event.Event.callback</a>, <a class="el" href="../../d6/d51/property__event_8py_source.html#l00031">aes70.controller.property_event.PropertyEvent.callback</a>, and <a class="el" href="../../df/d88/base__event_8py_source.html#l00009">aes70.controller.base_event.BaseEvent.object</a>.</p>
 

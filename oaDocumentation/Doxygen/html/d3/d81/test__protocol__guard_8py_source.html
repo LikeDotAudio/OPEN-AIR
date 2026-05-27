@@ -105,13 +105,13 @@ $(document).ready(function(){initNavTree('d3/d81/test__protocol__guard_8py_sourc
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"># Description: Tests for the protocol_guard decorator.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> unittest</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.mock</a> <span class="keyword">import</span> patch</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> unittest.mock <span class="keyword">import</span> patch</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">from</span> <a class="code hl_namespace" href="../../d3/d8f/namespaceoaOchestration_1_1Managers_1_1protocol__guard.html">oaOchestration.Managers.protocol_guard</a> <span class="keyword">import</span> protocol_guard</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="foldopen" id="foldopen00013" data-start="" data-end="">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html">TestProtocolGuard</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.TestCase</a>):</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html">TestProtocolGuard</a>(unittest.TestCase):</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="preprocessor">@patch(&#39;oaOchestration.Managers.protocol_guard.router_logger&#39;)</span></div>
 <div class="foldopen" id="foldopen00016" data-start="" data-end="">
@@ -122,13 +122,13 @@ $(document).ready(function(){initNavTree('d3/d81/test__protocol__guard_8py_sourc
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral">        CHECK: Assert the function returns its expected result and no errors are logged.</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="preprocessor">@protocol_guard(&quot;TEST_PROTOCOL&quot;)</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">successful_func</a>(x, y):</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">def </span>successful_func(x, y):</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">return</span> x + y</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">successful_func</a>(2, 3)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        result = successful_func(2, 3)</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        self.assertEqual(result, 5)</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.error.assert_not_called</a>()</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        mock_logger.error.assert_not_called()</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="preprocessor">@patch(&#39;oaOchestration.Managers.protocol_guard.router_logger&#39;)</span></div>
@@ -140,14 +140,14 @@ $(document).ready(function(){initNavTree('d3/d81/test__protocol__guard_8py_sourc
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="stringliteral">        CHECK: Assert the exception is caught, an error is logged with the protocol name, and None is returned.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="preprocessor">@protocol_guard(&quot;TEST_PROTOCOL&quot;)</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">failing_func</a>():</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ValueError</a>(<span class="stringliteral">&quot;Something went wrong&quot;</span>)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">def </span>failing_func():</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">raise</span> ValueError(<span class="stringliteral">&quot;Something went wrong&quot;</span>)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">failing_func</a>()</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        result = failing_func()</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        self.assertIsNone(result)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.error.assert_called_once</a>()</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        args, _ = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_logger.error.call_args</a></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        mock_logger.error.assert_called_once()</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        args, _ = mock_logger.error.call_args</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        self.assertIn(<span class="stringliteral">&quot;TEST_PROTOCOL&quot;</span>, args[0])</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        self.assertIn(<span class="stringliteral">&quot;Something went wrong&quot;</span>, args[0])</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        self.assertIn(<span class="stringliteral">&quot;Dispatch Failure&quot;</span>, args[0])</div>
@@ -155,11 +155,10 @@ $(document).ready(function(){initNavTree('d3/d81/test__protocol__guard_8py_sourc
 </div>
 </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">unittest.main</a>()</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    unittest.main()</div>
 <div class="ttc" id="aclassTests_1_1test__protocol__guard_1_1TestProtocolGuard_html"><div class="ttname"><a href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html">Tests.test_protocol_guard.TestProtocolGuard</a></div><div class="ttdef"><b>Definition</b> <a href="../../d3/d81/test__protocol__guard_8py_source.html#l00013">test_protocol_guard.py:13</a></div></div>
 <div class="ttc" id="aclassTests_1_1test__protocol__guard_1_1TestProtocolGuard_html_a6ddabc8f633e51783b9d657fee56c2b3"><div class="ttname"><a href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html#a6ddabc8f633e51783b9d657fee56c2b3">Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_exception</a></div><div class="ttdeci">test_protocol_guard_exception(self, mock_logger)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d81/test__protocol__guard_8py_source.html#l00032">test_protocol_guard.py:32</a></div></div>
 <div class="ttc" id="aclassTests_1_1test__protocol__guard_1_1TestProtocolGuard_html_ac890b8a40525df470431982c7b203c2c"><div class="ttname"><a href="../../df/dc1/classTests_1_1test__protocol__guard_1_1TestProtocolGuard.html#ac890b8a40525df470431982c7b203c2c">Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_success</a></div><div class="ttdeci">test_protocol_guard_success(self, mock_logger)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d81/test__protocol__guard_8py_source.html#l00016">test_protocol_guard.py:16</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespaceoaOchestration_1_1Managers_1_1protocol__guard_html"><div class="ttname"><a href="../../d3/d8f/namespaceoaOchestration_1_1Managers_1_1protocol__guard.html">protocol_guard</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

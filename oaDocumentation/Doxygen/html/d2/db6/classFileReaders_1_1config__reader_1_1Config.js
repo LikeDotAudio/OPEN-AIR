@@ -30,6 +30,7 @@ var classFileReaders_1_1config__reader_1_1Config =
     [ "ENABLE_DEBUG_MODE", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#ac75b62ea7d860dfe7bf16e7e9604dd04", null ],
     [ "ENABLE_DEBUG_SCREEN", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#ac71f1b39e03a07865069c0a9afe73b35", null ],
     [ "ENABLE_LOG_TO_FILE", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#a5b29fdc2e28d23b8f25af7accc380214", null ],
+    [ "FOOTER_ENABLED", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#a57c47ba497d301c267bdc669b9dec240", null ],
     [ "FORCE_FUNCTIONS", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#aca40399ab80fc71877e62fa63ef5753d", null ],
     [ "HEADER_FONT_FAMILY", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#a6d7e4482d6837c52b68d02c749279728", null ],
     [ "HEADER_FONT_SIZE", "d2/db6/classFileReaders_1_1config__reader_1_1Config.html#a184a9579778562b49c067eae35905b71", null ],

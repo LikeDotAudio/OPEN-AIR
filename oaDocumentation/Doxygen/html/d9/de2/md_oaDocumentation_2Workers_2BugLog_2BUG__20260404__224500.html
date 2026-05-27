@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('d9/de2/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Log: BUG_20260404_224500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2059"></a><b>Issue</b>: Redundant traceback logging and inconsistent shutdown calls in AsyncBootstrapEngine. <b>Root Cause</b>: logger.exception was used with manual traceback.format_exc(), and one shutdown call bypassed the main thread queue. <b>Resolution</b>: Cleaned up log calls and wrapped shutdown in root.after(). <b>Verification</b>: Verified with <a class="el" href="../../d7/dc7/test__bootstrap__sequence_8py.html">oaGui/Tests/test_bootstrap_sequence.py</a>. </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2508"></a><b>Issue</b>: Redundant traceback logging and inconsistent shutdown calls in LoaderBootstrapEngine. <b>Root Cause</b>: logger.exception was used with manual traceback.format_exc(), and one shutdown call bypassed the main thread queue. <b>Resolution</b>: Cleaned up log calls and wrapped shutdown in root.after(). <b>Verification</b>: Verified with oaGui/Tests/test_loader_bootstrap_engine.py. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

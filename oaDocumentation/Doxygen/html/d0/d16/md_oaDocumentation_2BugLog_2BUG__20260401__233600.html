@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('d0/d16/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260401_233600.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1028"></a></p>
-<h1><a class="anchor" id="autotoc_md1029"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1293"></a></p>
+<h1><a class="anchor" id="autotoc_md1294"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1030"></a>
+<h1><a class="anchor" id="autotoc_md1295"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1031"></a>
+<h1><a class="anchor" id="autotoc_md1296"></a>
 Issue: UI hangs and slow performance during report generation.</h1>
-<h2><a class="anchor" id="autotoc_md1032"></a>
+<h2><a class="anchor" id="autotoc_md1297"></a>
 🔍 ISSUE DESCRIPTION</h2>
-<p>Generating the "Application Run Logs" tab in the Unified Intelligence Report was extremely slow for large log files. Python's &lsquo;split(&rsquo;|')<code>and manual string concatenation were creating a bottleneck, causing the</code>TestsUI` to hang for several seconds.</p>
-<h2><a class="anchor" id="autotoc_md1033"></a>
+<p>Generating the "EngineGuiDisplay Run Logs" tab in the Unified Intelligence Report was extremely slow for large log files. Python's &lsquo;split(&rsquo;|')<code>and manual string concatenation were creating a bottleneck, causing the</code>TestsUI` to hang for several seconds.</p>
+<h2><a class="anchor" id="autotoc_md1298"></a>
 🛠️ ROOT CAUSE</h2>
 <p>Inefficient synchronous string processing and HTML construction in pure Python for high-volume log data.</p>
-<h2><a class="anchor" id="autotoc_md1034"></a>
+<h2><a class="anchor" id="autotoc_md1299"></a>
 🚀 RESOLUTION</h2>
 <p>Migrated the log parsing and HTML row generation to a native Rust extension (<code>oalogprocessor_rs</code>):</p><ul>
 <li>Native file I/O and buffered reading.</li>
@@ -115,7 +115,7 @@ Issue: UI hangs and slow performance during report generation.</h1>
 <li>High-speed HTML escaping using the <code>html-escape</code> crate.</li>
 <li>Direct construction of the final HTML blob in memory.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1035"></a>
+<h2><a class="anchor" id="autotoc_md1300"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
 <li><b>Log Lines Processed</b>: 2,000 (per file)</li>

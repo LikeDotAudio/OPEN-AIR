@@ -17,15 +17,15 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 # Constants for MQTT Topics
-MQTT_TOPIC_SEARCH_TRIGGER = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger"
-MQTT_TOPIC_DEVICE_SELECT = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected"
+MQTT_TOPIC_SEARCH_TRIGGER = "OpenAir/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger"
+MQTT_TOPIC_DEVICE_SELECT = "OpenAir/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected"
 MQTT_TOPIC_CONNECT_TRIGGER = (
-    "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger"
+    "OpenAir/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger"
 )
 MQTT_TOPIC_DISCONNECT_TRIGGER = (
-    "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger"
+    "OpenAir/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger"
 )
-MQTT_TOPIC_CONNECT_RESOURCE_REQUEST = "OPEN-AIR/commands/instrument/connect"
+MQTT_TOPIC_CONNECT_RESOURCE_REQUEST = "OpenAir/commands/instrument/connect"
 
 
 class VisaMqttListener:

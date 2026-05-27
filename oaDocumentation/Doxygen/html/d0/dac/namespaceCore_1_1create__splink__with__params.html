@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d0/dac/namespaceCore_1_1create__splink
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:add4aea273431d603e392253c6a76ee99" id="r_add4aea273431d603e392253c6a76ee99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dac/namespaceCore_1_1create__splink__with__params.html#add4aea273431d603e392253c6a76ee99">create_splink_with_params</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2090a647eea4ba8be07c28e6d52e97de">source</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">dest</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">source_val</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">dest_val</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:add4aea273431d603e392253c6a76ee99" id="r_add4aea273431d603e392253c6a76ee99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dac/namespaceCore_1_1create__splink__with__params.html#add4aea273431d603e392253c6a76ee99">create_splink_with_params</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2090a647eea4ba8be07c28e6d52e97de">source</a>, dest, source_val=None, dest_val=None)</td></tr>
 <tr class="separator:add4aea273431d603e392253c6a76ee99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -130,13 +130,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>source_val</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>source_val</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>dest_val</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>dest_val</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -148,9 +148,9 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/d39/create__splink__with__params_8py_source.html#l00013">13</a> of file <a class="el" href="../../d7/d39/create__splink__with__params_8py_source.html">create_splink_with_params.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span><span class="keyword">def </span>create_splink_with_params(self, source, dest, source_val=None, dest_val=None):</div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(f<span class="stringliteral">&quot;🔗 Splinker: create_splink_with_params received. Source={source} ({source_val}), Dest={dest} ({dest_val})&quot;</span>)</div>
+<div class="line"><span class="lineno">   14</span>    splinker_logger.info(f<span class="stringliteral">&quot;🔗 Splinker: create_splink_with_params received. Source={source} ({source_val}), Dest={dest} ({dest_val})&quot;</span>)</div>
 <div class="line"><span class="lineno">   15</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> source <span class="keywordflow">or</span> <span class="keywordflow">not</span> dest:</div>
-<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.error</a>(f<span class="stringliteral">&quot;❌ Splinker: Cannot create splink with missing source or dest. source={source}, dest={dest}&quot;</span>)</div>
+<div class="line"><span class="lineno">   16</span>        splinker_logger.error(f<span class="stringliteral">&quot;❌ Splinker: Cannot create splink with missing source or dest. source={source}, dest={dest}&quot;</span>)</div>
 <div class="line"><span class="lineno">   17</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span></div>
 <div class="line"><span class="lineno">   18</span> </div>
 <div class="line"><span class="lineno">   19</span>    <span class="comment"># ⚡ ROBUSTNESS: Ensure source and dest are strings for split()</span></div>
@@ -161,9 +161,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   24</span> </div>
 <div class="line"><span class="lineno">   25</span>    <span class="comment"># ⚡ UNIQUE PREVENTION: Avoid duplicate splinks for the same source/dest pair</span></div>
 <div class="line"><span class="lineno">   26</span>    <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.splinks:</div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.get</a>(<span class="stringliteral">&quot;source&quot;</span>) == source <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">s.get</a>(<span class="stringliteral">&quot;dest&quot;</span>) == dest:</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> s.get(<span class="stringliteral">&quot;source&quot;</span>) == source <span class="keywordflow">and</span> s.get(<span class="stringliteral">&quot;dest&quot;</span>) == dest:</div>
 <div class="line"><span class="lineno">   28</span>            <span class="keywordflow">if</span> Splinker_debug_enabled:</div>
-<div class="line"><span class="lineno">   29</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.debug</a>(f<span class="stringliteral">&quot;  ⏭️ Splink already exists for {source} -&gt; {dest}. Skipping duplicate.&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>                splinker_logger.debug(f<span class="stringliteral">&quot;  ⏭️ Splink already exists for {source} -&gt; {dest}. Skipping duplicate.&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span>            <span class="keywordflow">return</span> s[<span class="stringliteral">&quot;id&quot;</span>]</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>    <span class="comment"># Create with a default scale handler as requested (MIN/MAX source -&gt; MIN/MAX dest)</span></div>
@@ -187,7 +187,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   50</span>            }</div>
 <div class="line"><span class="lineno">   51</span>        ]</div>
 <div class="line"><span class="lineno">   52</span>    }</div>
-<div class="line"><span class="lineno">   53</span>    self.splinks.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">append</a>(splink)</div>
+<div class="line"><span class="lineno">   53</span>    self.splinks.append(splink)</div>
 <div class="line"><span class="lineno">   54</span>    self._save_splink(splink)</div>
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    <span class="comment"># Detailed Debug Report for Discovery</span></div>
@@ -213,31 +213,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> current_val <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   77</span>        <span class="comment"># We process it through the pipeline</span></div>
 <div class="line"><span class="lineno">   78</span>        pipeline = SplinkPipeline(splink, self)</div>
-<div class="line"><span class="lineno">   79</span>        processed = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pipeline.process</a>(current_val, {}, direction=<span class="stringliteral">&quot;FORWARD&quot;</span>)</div>
+<div class="line"><span class="lineno">   79</span>        processed = pipeline.process(current_val, {}, direction=<span class="stringliteral">&quot;FORWARD&quot;</span>)</div>
 <div class="line"><span class="lineno">   80</span> </div>
-<div class="line"><span class="lineno">   81</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">debug_report.append</a>(f<span class="stringliteral">&quot;  SYNC ({sync_method}): {current_val} -&gt; {processed} (Linkage Point)&quot;</span>)</div>
+<div class="line"><span class="lineno">   81</span>        debug_report.append(f<span class="stringliteral">&quot;  SYNC ({sync_method}): {current_val} -&gt; {processed} (Linkage Point)&quot;</span>)</div>
 <div class="line"><span class="lineno">   82</span> </div>
 <div class="line"><span class="lineno">   83</span>        <span class="keywordflow">if</span> processed <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><span class="lineno">   84</span>            self._broker_splice(splink, processed, <span class="stringliteral">&quot;GUI-INIT&quot;</span>)</div>
 <div class="line"><span class="lineno">   85</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   86</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">debug_report.append</a>(<span class="stringliteral">&quot;  SYNC       : No source state found. Waiting for movement.&quot;</span>)</div>
+<div class="line"><span class="lineno">   86</span>        debug_report.append(<span class="stringliteral">&quot;  SYNC       : No source state found. Waiting for movement.&quot;</span>)</div>
 <div class="line"><span class="lineno">   87</span> </div>
-<div class="line"><span class="lineno">   88</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">debug_report.append</a>(<span class="stringliteral">&quot;╚══════════════════════════════════════════════════╝&quot;</span>)</div>
+<div class="line"><span class="lineno">   88</span>    debug_report.append(<span class="stringliteral">&quot;╚══════════════════════════════════════════════════╝&quot;</span>)</div>
 <div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>    full_debug = <span class="stringliteral">&quot;\n&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(debug_report)</div>
+<div class="line"><span class="lineno">   90</span>    full_debug = <span class="stringliteral">&quot;\n&quot;</span>.join(debug_report)</div>
 <div class="line"><span class="lineno">   91</span> </div>
 <div class="line"><span class="lineno">   92</span>    <span class="comment"># ⚡ FIREHOSE: Ingest creation event for visibility</span></div>
-<div class="line"><span class="lineno">   93</span>    <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaComBroker.Core.protocol_router.manager</a> <span class="keyword">import</span> ProtocolRouter</div>
-<div class="line"><span class="lineno">   94</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ProtocolRouter.get_instance</a>().ingest(<span class="stringliteral">&quot;SPLINKER&quot;</span>, f<span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/{new_id}&quot;</span>, <span class="stringliteral">&quot;CREATED&quot;</span>, {<span class="stringliteral">&quot;id&quot;</span>: new_id, <span class="stringliteral">&quot;type&quot;</span>: <span class="stringliteral">&quot;Direct&quot;</span>, <span class="stringliteral">&quot;source&quot;</span>: source, <span class="stringliteral">&quot;dest&quot;</span>: dest})</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keyword">from</span> oaComBroker.Core.protocol_router.manager <span class="keyword">import</span> ProtocolRouter</div>
+<div class="line"><span class="lineno">   94</span>    ProtocolRouter.get_instance().ingest(<span class="stringliteral">&quot;SPLINKER&quot;</span>, f<span class="stringliteral">&quot;OPEN-AIR/System/Status/Splinker/{new_id}&quot;</span>, <span class="stringliteral">&quot;CREATED&quot;</span>, {<span class="stringliteral">&quot;id&quot;</span>: new_id, <span class="stringliteral">&quot;type&quot;</span>: <span class="stringliteral">&quot;Direct&quot;</span>, <span class="stringliteral">&quot;source&quot;</span>: source, <span class="stringliteral">&quot;dest&quot;</span>: dest})</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>    <span class="keywordflow">if</span> Splinker_debug_enabled:</div>
-<div class="line"><span class="lineno">   97</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(f<span class="stringliteral">&quot;🔗 Splinker: create_splink_with_params(source=&#39;{source}&#39;, dest=&#39;{dest}&#39;) CALL received.&quot;</span>)</div>
-<div class="line"><span class="lineno">   98</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(f<span class="stringliteral">&quot;🔗 Splinker: Direct Splink Created {new_id}&quot;</span>)</div>
+<div class="line"><span class="lineno">   97</span>        splinker_logger.info(f<span class="stringliteral">&quot;🔗 Splinker: create_splink_with_params(source=&#39;{source}&#39;, dest=&#39;{dest}&#39;) CALL received.&quot;</span>)</div>
+<div class="line"><span class="lineno">   98</span>        splinker_logger.info(f<span class="stringliteral">&quot;🔗 Splinker: Direct Splink Created {new_id}&quot;</span>)</div>
 <div class="line"><span class="lineno">   99</span>        self._notify_monitor(<span class="stringliteral">&quot;debug_log&quot;</span>, full_debug)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__trie__rs_2mod_8rs_html_a7807a445d8432cb3c0289fad22aae283"><div class="ttname"><a href="../../d2/d63/oa__trie__rs_2mod_8rs.html#a7807a445d8432cb3c0289fad22aae283">split</a></div><div class="ttdeci">for part in topic split('/')</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">mod.rs:33</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">split()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/d63/oa__trie__rs_2mod_8rs_source.html#l00033">split()</a>.</p>
 
 </div>
 </div>

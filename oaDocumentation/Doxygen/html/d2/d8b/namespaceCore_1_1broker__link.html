@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d2/d8b/namespaceCore_1_1broker__link.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab3e0a725a239cea7112f8fa4cd18bd66" id="r_ab3e0a725a239cea7112f8fa4cd18bd66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d8b/namespaceCore_1_1broker__link.html#ab3e0a725a239cea7112f8fa4cd18bd66">broker_link</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splink, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_source</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:ab3e0a725a239cea7112f8fa4cd18bd66" id="r_ab3e0a725a239cea7112f8fa4cd18bd66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d8b/namespaceCore_1_1broker__link.html#ab3e0a725a239cea7112f8fa4cd18bd66">broker_link</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, splink, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afcc7a4b78ecd8fa7e713f8cfa0f51017">value</a>, original_source, original_message=None)</td></tr>
 <tr class="separator:ab3e0a725a239cea7112f8fa4cd18bd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -136,7 +136,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>original_message</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>original_message</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -156,9 +156,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   16</span>    target_val = value</div>
 <div class="line"><span class="lineno">   17</span>    <span class="keywordflow">if</span> src_key:</div>
 <div class="line"><span class="lineno">   18</span>        current_dict = self.state_cache_manager.get(src_topic)</div>
-<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(current_dict, dict):</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(current_dict, dict):</div>
 <div class="line"><span class="lineno">   20</span>            current_dict = {}</div>
-<div class="line"><span class="lineno">   21</span>        new_dict = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">current_dict.copy</a>()</div>
+<div class="line"><span class="lineno">   21</span>        new_dict = current_dict.copy()</div>
 <div class="line"><span class="lineno">   22</span>        new_dict[src_key] = value</div>
 <div class="line"><span class="lineno">   23</span>        target_val = new_dict</div>
 <div class="line"><span class="lineno">   24</span> </div>
@@ -166,7 +166,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> cached_val == target_val: <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> Splinker_debug_enabled:</div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splinker_logger.info</a>(f<span class="stringliteral">&quot;🔗 Splinker: LINK [{splink[&#39;id&#39;]}] Brokering {original_source} -&gt; {src_topic} value={target_val}&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>        splinker_logger.info(f<span class="stringliteral">&quot;🔗 Splinker: LINK [{splink[&#39;id&#39;]}] Brokering {original_source} -&gt; {src_topic} value={target_val}&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span> </div>
 <div class="line"><span class="lineno">   31</span>    <span class="comment"># ⚡ ANTI-FEEDBACK SPEC: Brokered messages are LINK_FEEDBACK</span></div>
 <div class="line"><span class="lineno">   32</span>    meta = {</div>
@@ -177,13 +177,13 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   37</span>        <span class="stringliteral">&quot;splink_active&quot;</span>: <span class="keyword">True</span>,</div>
 <div class="line"><span class="lineno">   38</span>        <span class="stringliteral">&quot;splink_source_path&quot;</span>: splink[<span class="stringliteral">&quot;dest&quot;</span>], <span class="comment"># REVERSE: Dest is the trigger</span></div>
 <div class="line"><span class="lineno">   39</span>        <span class="stringliteral">&quot;splink_dest_path&quot;</span>: splink[<span class="stringliteral">&quot;source&quot;</span>], <span class="comment"># REVERSE: Source is the destination</span></div>
-<div class="line"><span class="lineno">   40</span>        <span class="stringliteral">&quot;splink_label&quot;</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">splink.get</a>(<span class="stringliteral">&quot;label&quot;</span>, <span class="stringliteral">&quot;Splink (REVERSE)&quot;</span>)</div>
+<div class="line"><span class="lineno">   40</span>        <span class="stringliteral">&quot;splink_label&quot;</span>: splink.get(<span class="stringliteral">&quot;label&quot;</span>, <span class="stringliteral">&quot;Splink (REVERSE)&quot;</span>)</div>
 <div class="line"><span class="lineno">   41</span>    }</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="keywordflow">if</span> original_message:</div>
-<div class="line"><span class="lineno">   44</span>        orig_guid = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message.get</a>(<span class="stringliteral">&quot;message_guid&quot;</span>) <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message.get</a>(<span class="stringliteral">&quot;logical_guid&quot;</span>) <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message.get</a>(<span class="stringliteral">&quot;guid&quot;</span>)</div>
-<div class="line"><span class="lineno">   45</span>        orig_source = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message.get</a>(<span class="stringliteral">&quot;origin_source&quot;</span>) <span class="keywordflow">or</span> original_source</div>
-<div class="line"><span class="lineno">   46</span>        orig_ts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_message.get</a>(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
+<div class="line"><span class="lineno">   44</span>        orig_guid = original_message.get(<span class="stringliteral">&quot;message_guid&quot;</span>) <span class="keywordflow">or</span> original_message.get(<span class="stringliteral">&quot;logical_guid&quot;</span>) <span class="keywordflow">or</span> original_message.get(<span class="stringliteral">&quot;guid&quot;</span>)</div>
+<div class="line"><span class="lineno">   45</span>        orig_source = original_message.get(<span class="stringliteral">&quot;origin_source&quot;</span>) <span class="keywordflow">or</span> original_source</div>
+<div class="line"><span class="lineno">   46</span>        orig_ts = original_message.get(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
 <div class="line"><span class="lineno">   47</span> </div>
 <div class="line"><span class="lineno">   48</span>        <span class="comment"># ⚡ ANTI-FEEDBACK SPEC: Preserve original Identity</span></div>
 <div class="line"><span class="lineno">   49</span>        meta[<span class="stringliteral">&quot;message_guid&quot;</span>] = orig_guid</div>
@@ -198,10 +198,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   58</span>        meta[<span class="stringliteral">&quot;timestamp&quot;</span>] = orig_ts</div>
 <div class="line"><span class="lineno">   59</span> </div>
 <div class="line"><span class="lineno">   60</span>    self.state_cache_manager.handle_external_update(src_topic, target_val, source=<span class="stringliteral">&quot;SPLINKER&quot;</span>, metadata=meta)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

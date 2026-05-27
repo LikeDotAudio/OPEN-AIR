@@ -34,7 +34,7 @@ class InteractionMqttGatewayMixin:
         if not self.subscriber_router or not self.json_filepath:
             return
 
-        rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
+        rebuild_topic = "OpenAir/System/Control/UI/Rebuild"
         self.subscriber_router.subscribe_to_topic(
             rebuild_topic,
             lambda msg: MqttRebuildHandler.handle_request(self, msg)

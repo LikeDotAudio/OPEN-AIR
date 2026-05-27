@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d5/d02/namespaceaes70_1_1ocp1_1_1struc
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7c850d3727808c9bafecad397ae6089e" id="r_a7c850d3727808c9bafecad397ae6089e"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d02/namespaceaes70_1_1ocp1_1_1struct.html#a7c850d3727808c9bafecad397ae6089e">Struct</a> (dict[str, Any] types, Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_type</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a7c850d3727808c9bafecad397ae6089e" id="r_a7c850d3727808c9bafecad397ae6089e"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d02/namespaceaes70_1_1ocp1_1_1struct.html#a7c850d3727808c9bafecad397ae6089e">Struct</a> (dict[str, Any] types, Any data_type=None)</td></tr>
 <tr class="separator:a7c850d3727808c9bafecad397ae6089e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Any &#160;</td>
-          <td class="paramname"><em>data_type</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>data_type</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -130,45 +130,45 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../db/de0/struct_8py_source.html#l00006">6</a> of file <a class="el" href="../../db/de0/struct_8py_source.html">struct.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    6</span><span class="keyword">def </span>Struct(types: dict[str, Any], data_type: Any = <span class="keywordtype">None</span>) -&gt; Any:</div>
-<div class="line"><span class="lineno">    7</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">struct_decode_from</a>(data: bytearray, pos: int):</div>
+<div class="line"><span class="lineno">    7</span>    <span class="keyword">def </span>struct_decode_from(data: bytearray, pos: int):</div>
 <div class="line"><span class="lineno">    8</span>        <span class="comment">#print(&quot;Struct decode_from&quot;)</span></div>
 <div class="line"><span class="lineno">    9</span>        vals = []</div>
-<div class="line"><span class="lineno">   10</span>        <span class="keywordflow">for</span> name <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">types.keys</a>():</div>
+<div class="line"><span class="lineno">   10</span>        <span class="keywordflow">for</span> name <span class="keywordflow">in</span> types.keys():</div>
 <div class="line"><span class="lineno">   11</span>            decoder = types[name]</div>
 <div class="line"><span class="lineno">   12</span>            <span class="comment">#print(&quot;name: &quot;, name, &quot; decoder: &quot;, decoder)</span></div>
-<div class="line"><span class="lineno">   13</span>            pos, d = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decoder.decode_from</a>(data, pos)</div>
+<div class="line"><span class="lineno">   13</span>            pos, d = decoder.decode_from(data, pos)</div>
 <div class="line"><span class="lineno">   14</span>            <span class="comment">#print(&quot;decoded &quot;, name, &quot; to &quot;, d)</span></div>
-<div class="line"><span class="lineno">   15</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vals.append</a>(d)</div>
+<div class="line"><span class="lineno">   15</span>            vals.append(d)</div>
 <div class="line"><span class="lineno">   16</span>        <span class="comment">#print(&quot;vals: &quot;, vals)</span></div>
 <div class="line"><span class="lineno">   17</span>        <span class="comment">#print(&quot;Datatype: &quot;, DataType)</span></div>
-<div class="line"><span class="lineno">   18</span>        s = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DataType</a>(*vals)</div>
+<div class="line"><span class="lineno">   18</span>        s = DataType(*vals)</div>
 <div class="line"><span class="lineno">   19</span>        <span class="comment">#print(&quot;decoded object: &quot;, s)</span></div>
 <div class="line"><span class="lineno">   20</span>        <span class="comment">#for x in s.__dict__:</span></div>
 <div class="line"><span class="lineno">   21</span>            <span class="comment">#print(x, &quot;: &quot;, s.__dict__[x])</span></div>
 <div class="line"><span class="lineno">   22</span>        <span class="keywordflow">return</span> pos, s</div>
 <div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">struct_decode_length</a>(data: bytearray, pos: int) -&gt; int:</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keyword">def </span>struct_decode_length(data: bytearray, pos: int) -&gt; int:</div>
 <div class="line"><span class="lineno">   25</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a>(types[name][<span class="stringliteral">&#39;decode_length&#39;</span>](data, pos) <span class="keywordflow">for</span> name <span class="keywordflow">in</span> types)</div>
 <div class="line"><span class="lineno">   26</span> </div>
-<div class="line"><span class="lineno">   27</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">struct_encode_to</a>(data: bytearray, pos: int, value) -&gt; int:</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keyword">def </span>struct_encode_to(data: bytearray, pos: int, value) -&gt; int:</div>
 <div class="line"><span class="lineno">   28</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a>(types[name][<span class="stringliteral">&#39;encode_to&#39;</span>](data, pos, value[name]) <span class="keywordflow">for</span> name <span class="keywordflow">in</span> types)</div>
 <div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">struct_encoded_length</a>(value) -&gt; int:</div>
+<div class="line"><span class="lineno">   30</span>    <span class="keyword">def </span>struct_encoded_length(value) -&gt; int:</div>
 <div class="line"><span class="lineno">   31</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a>(types[name][<span class="stringliteral">&#39;encode_length&#39;</span>](value[name]) <span class="keywordflow">for</span> name <span class="keywordflow">in</span> types)</div>
 <div class="line"><span class="lineno">   32</span> </div>
 <div class="line"><span class="lineno">   33</span>    count_types = <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(types)</div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="line"><span class="lineno">   35</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> data_type:</div>
-<div class="line"><span class="lineno">   36</span>        <span class="keyword">class </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">DataType</a>:</div>
+<div class="line"><span class="lineno">   36</span>        <span class="keyword">class </span>DataType:</div>
 <div class="line"><span class="lineno">   37</span>            <span class="keyword">def </span>__init__(self, *args):</div>
 <div class="line"><span class="lineno">   38</span>                <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(args) == count_types:</div>
-<div class="line"><span class="lineno">   39</span>                    <span class="keywordflow">for</span> i, name <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(types):</div>
-<div class="line"><span class="lineno">   40</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setattr</a>(self, name, args[i])</div>
-<div class="line"><span class="lineno">   41</span>                <span class="keywordflow">elif</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(args) == 1 <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(args[0], dict):</div>
+<div class="line"><span class="lineno">   39</span>                    <span class="keywordflow">for</span> i, name <span class="keywordflow">in</span> enumerate(types):</div>
+<div class="line"><span class="lineno">   40</span>                        setattr(self, name, args[i])</div>
+<div class="line"><span class="lineno">   41</span>                <span class="keywordflow">elif</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(args) == 1 <span class="keywordflow">and</span> isinstance(args[0], dict):</div>
 <div class="line"><span class="lineno">   42</span>                    <span class="keywordflow">for</span> name <span class="keywordflow">in</span> types:</div>
-<div class="line"><span class="lineno">   43</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">setattr</a>(self, name, args[0][name])</div>
+<div class="line"><span class="lineno">   43</span>                        setattr(self, name, args[0][name])</div>
 <div class="line"><span class="lineno">   44</span>                <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   45</span>                    <span class="keywordflow">raise</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TypeError</a>(<span class="stringliteral">&#39;Unexpected arguments.&#39;</span>)</div>
+<div class="line"><span class="lineno">   45</span>                    <span class="keywordflow">raise</span> TypeError(<span class="stringliteral">&#39;Unexpected arguments.&#39;</span>)</div>
 <div class="line"><span class="lineno">   46</span>    <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   47</span>        DataType = data_type</div>
 <div class="line"><span class="lineno">   48</span> </div>
@@ -180,7 +180,6 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   54</span>        decode_from=struct_decode_from,</div>
 <div class="line"><span class="lineno">   55</span>        decode_length=struct_decode_length)</div>
 <div class="line"><span class="lineno">   56</span>        )</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_acf1c2f84aee675205f2d93e5006b0cd8"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#acf1c2f84aee675205f2d93e5006b0cd8">sum</a></div><div class="ttdeci">sum</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02726">generated.rs:2726</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📁_20forensic_20documentation_0',['📁 Forensic Documentation',['../dc/d37/md_oaDocumentation_2Workers_2BugLog_2BUG__20260319__233000.html#autotoc_md1907',1,'']]]
+  ['💳_204_20hardware_20discovery_20fleet_20management_0',['💳 4. Hardware Discovery &amp; Fleet Management',['../dc/d3b/md_oaDocumentation_2Workers_2ChangeLog_2EVOLUTION__OF__TOOLS.html#autotoc_md2550',1,'']]]
 ];

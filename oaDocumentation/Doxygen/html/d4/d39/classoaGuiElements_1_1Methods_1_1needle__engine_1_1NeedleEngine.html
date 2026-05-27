@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('d4/d39/classoaGuiElements_1_1Methods_1
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a02a80dc857ba1af0c750d229f7755c8a" id="r_a02a80dc857ba1af0c750d229f7755c8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d39/classoaGuiElements_1_1Methods_1_1needle__engine_1_1NeedleEngine.html#a02a80dc857ba1af0c750d229f7755c8a">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>)</td></tr>
 <tr class="separator:a02a80dc857ba1af0c750d229f7755c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb63a741f862c31f84ee4a29422cecfb" id="r_abb63a741f862c31f84ee4a29422cecfb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d39/classoaGuiElements_1_1Methods_1_1needle__engine_1_1NeedleEngine.html#abb63a741f862c31f84ee4a29422cecfb">calculate_geometry</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac6018b746835ced81445d633fcbd75be">cx</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a84aa7492d91fb680c50ef076eeac03c8">cy</a>, dict <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_dict</a>)</td></tr>
+<tr class="memitem:abb63a741f862c31f84ee4a29422cecfb" id="r_abb63a741f862c31f84ee4a29422cecfb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d39/classoaGuiElements_1_1Methods_1_1needle__engine_1_1NeedleEngine.html#abb63a741f862c31f84ee4a29422cecfb">calculate_geometry</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, float <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac6018b746835ced81445d633fcbd75be">cx</a>, float <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a84aa7492d91fb680c50ef076eeac03c8">cy</a>, dict config_dict)</td></tr>
 <tr class="separator:abb63a741f862c31f84ee4a29422cecfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -136,16 +136,13 @@ MANDATORY Rust implementation for smooth rendering.
 <div class="fragment"><div class="line"><span class="lineno">   23</span>    <span class="keyword">def </span>__init__(self):</div>
 <div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> HAS_RUST:</div>
 <div class="line"><span class="lineno">   25</span>            <span class="keywordflow">if</span> LOCAL_DEBUG:</div>
-<div class="line"><span class="lineno">   26</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(<span class="stringliteral">&quot;🏗️🛠️🔗 [NEEDLE] Using PURE RUST geometry engine.&quot;</span>)</div>
-<div class="line"><span class="lineno">   27</span>            self._engine = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">RustNeedleEngine</a>()</div>
+<div class="line"><span class="lineno">   26</span>                print(<span class="stringliteral">&quot;🏗️🛠️🔗 [NEEDLE] Using PURE RUST geometry engine.&quot;</span>)</div>
+<div class="line"><span class="lineno">   27</span>            self._engine = RustNeedleEngine()</div>
 <div class="line"><span class="lineno">   28</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   29</span>            self._engine = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">   30</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logging.error</a>(<span class="stringliteral">&quot;oaGuiElements: Missing mandatory Rust needle engine.&quot;</span>)</div>
+<div class="line"><span class="lineno">   30</span>            logging.error(<span class="stringliteral">&quot;oaGuiElements: Missing mandatory Rust needle engine.&quot;</span>)</div>
 <div class="line"><span class="lineno">   31</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -164,13 +161,13 @@ MANDATORY Rust implementation for smooth rendering.
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a>&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>cx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">float</a>&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>cy</em>, </td>
         </tr>
         <tr>

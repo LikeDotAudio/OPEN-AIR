@@ -7,7 +7,7 @@ var classMixerUI_1_1MixerApp =
     [ "on_mount", "dd/da0/classMixerUI_1_1MixerApp.html#a1b750c87d9a7363c4105994f57c94715", null ],
     [ "on_universal_volume_control_changed", "dd/da0/classMixerUI_1_1MixerApp.html#a30fda66971aa640e207951f222b1f150", null ],
     [ "on_unmount", "dd/da0/classMixerUI_1_1MixerApp.html#aee0570c6111724ba1a91cd0b194fc46e", null ],
-    [ "refresh_data", "dd/da0/classMixerUI_1_1MixerApp.html#a08ef49dd47881b8159dfb61ffa8eca55", null ],
+    [ "refreshMixer", "dd/da0/classMixerUI_1_1MixerApp.html#a0d27a51cd6a9fb5542a74bc8108f66b4", null ],
     [ "start_pcm_visualizer", "dd/da0/classMixerUI_1_1MixerApp.html#a676047bf6e4720f52ee9c444b60b08ef", null ],
     [ "BINDINGS", "dd/da0/classMixerUI_1_1MixerApp.html#a8042b9ed8a4a79f243fc7fd914f7d114", null ],
     [ "CSS", "dd/da0/classMixerUI_1_1MixerApp.html#a33985edb7233b0df74eae1bb2b7cb8f3", null ],

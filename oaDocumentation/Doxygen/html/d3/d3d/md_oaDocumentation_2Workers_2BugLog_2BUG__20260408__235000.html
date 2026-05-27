@@ -93,37 +93,37 @@ $(document).ready(function(){initNavTree('d3/d3d/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: SNMP Indentation &amp; Router Attribute Errors</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2061"></a><b>Date:</b> 2026-04-08 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2510"></a><b>Date:</b> 2026-04-08 <br  />
  <b>Status:</b> Resolved <br  />
  <b>Priority:</b> 1 (Critical/Crash)</p>
-<h1><a class="anchor" id="autotoc_md2062"></a>
+<h1><a class="anchor" id="autotoc_md2511"></a>
 1. Issue Description</h1>
 <p>The system encountered a fatal crash during the UI startup phase. The supervisor reported that the User <a class="el" href="../../da/d9a/namespaceInterface.html">Interface</a> exited unexpectedly.</p>
-<h2><a class="anchor" id="autotoc_md2063"></a>
+<h2><a class="anchor" id="autotoc_md2512"></a>
 Log Evidence:</h2>
 <div class="fragment"><div class="line">  File &quot;/home/anthony/Documents/OPEN-AIR/oaComProtocols/oaComSNMP/Managers/snmp_manager.py&quot;, line 304</div>
 <div class="line">    if self.context.mqtt_connection_manager and self.context.subscriber_router:</div>
 <div class="line">IndentationError: unexpected indent</div>
 </div><!-- fragment --><p> Additionally, a prior error was noted: </p><div class="fragment"><div class="line">🛑 [ERROR] Failed to instantiate ProtocolMatrix: &#39;ProtocolRouter&#39; object has no attribute &#39;routing_matrix&#39;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2064"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2513"></a>
 2. Root Cause Analysis</h1>
 <ol type="1">
 <li><b>SNMP Indentation:</b> A previous refactoring turn introduced a duplicated and incorrectly indented code block at the end of <code><a class="el" href="../../d9/d12/snmp__manager_8py.html">snmp_manager.py</a></code>. This corruption prevented the file from being parsed by the Python interpreter.</li>
 <li><b>Missing Router Attribute:</b> The <code>routing_matrix</code> N x N data structure was removed from the <code>ProtocolRouter</code> class during a "Hub-and-Spoke" transition. However, several UI components (like <code>ProtocolMatrix</code>) still required this specific attribute for their visualization logic.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2065"></a>
+<h1><a class="anchor" id="autotoc_md2514"></a>
 3. Resolution Strategy</h1>
 <ol type="1">
 <li><b>SNMP Fix:</b> Surgically removed the duplicated code block from <code><a class="el" href="../../d9/d12/snmp__manager_8py.html">oaComProtocols/oaComSNMP/Managers/snmp_manager.py</a></code> and restored clean class inheritance.</li>
 <li><b>Router Fix:</b> Restored the <code>routing_matrix</code> attribute to <code>ProtocolRouter</code> in <code><a class="el" href="../../de/de7/router_8py.html">oaComBroker/Core/protocol_router/router.py</a></code>. The matrix is now synchronized with the new hub-and-spoke enablement maps to maintain both modern logic and legacy UI compatibility.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2066"></a>
+<h1><a class="anchor" id="autotoc_md2515"></a>
 4. Verification Evidence</h1>
 <ul>
 <li><b>Syntax Check:</b> Ran <code>python3 -m py_compile</code> on both modified files. Both passed with no errors.</li>
-<li><b>Boot Test:</b> Confirmed that <code>UICompositionRoot</code> can now successfully import <code>SNMPManager</code> and instantiate the <code>ProtocolRouter</code>.</li>
+<li><b>Boot Test:</b> Confirmed that <code>LoaderServiceComposer</code> can now successfully import <code>SNMPManager</code> and instantiate the <code>ProtocolRouter</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2067"></a>
+<h1><a class="anchor" id="autotoc_md2516"></a>
 5. System Impact</h1>
 <ul>
 <li><b>Stability:</b> System-wide startup is now stable.</li>

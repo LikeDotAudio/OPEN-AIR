@@ -25,9 +25,9 @@ class TestLearningThirdParty(unittest.TestCase):
     def test_paho_mqtt_topic_matching(self):
         """Learning Test: Verify MQTT wildcard matching assumptions"""
         # This tests our understanding of topic_matches_sub
-        self.assertTrue(mqtt.topic_matches_sub('OPEN-AIR/+/status', 'OPEN-AIR/Device1/status'))
-        self.assertTrue(mqtt.topic_matches_sub('OPEN-AIR/#', 'OPEN-AIR/any/nested/topic'))
-        self.assertFalse(mqtt.topic_matches_sub('OPEN-AIR/+/status', 'OPEN-AIR/Device1/error'))
+        self.assertTrue(mqtt.topic_matches_sub('OpenAir/+/status', 'OpenAir/Device1/status'))
+        self.assertTrue(mqtt.topic_matches_sub('OpenAir/#', 'OpenAir/any/nested/topic'))
+        self.assertFalse(mqtt.topic_matches_sub('OpenAir/+/status', 'OpenAir/Device1/error'))
 
 if __name__ == "__main__":
     unittest.main()

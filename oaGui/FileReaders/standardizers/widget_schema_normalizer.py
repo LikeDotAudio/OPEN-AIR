@@ -102,8 +102,27 @@ class WidgetSchemaNormalizer:
             if is_struct: config["transparent"] = True
 
         # 4. Geometry and Space
-        if "width" in geometry: config["width"] = max(1, int(float(geometry["width"])))
-        if "height" in geometry: config["height"] = max(1, int(float(geometry["height"])))
+        # Percent strings ("100%") on width/height mean "fill the parent" — they
+        # become a stretch directive (so calculate_sticky picks them up) instead
+        # of a literal pixel value.
+        stretch_additions = []
+        if "width" in geometry:
+            w = geometry["width"]
+            if isinstance(w, str) and w.strip().endswith("%"):
+                stretch_additions.append("width")
+            else:
+                config["width"] = max(1, int(float(w)))
+        if "height" in geometry:
+            h = geometry["height"]
+            if isinstance(h, str) and h.strip().endswith("%"):
+                stretch_additions.append("height")
+            else:
+                config["height"] = max(1, int(float(h)))
+
+        if stretch_additions:
+            geometry = dict(geometry)
+            existing_stretch = str(geometry.get("stretch", "")).strip()
+            geometry["stretch"] = (existing_stretch + " " + " ".join(stretch_additions)).strip()
 
         final_sticky = calculate_sticky(geometry)
         if "layout" not in config: config["layout"] = {}

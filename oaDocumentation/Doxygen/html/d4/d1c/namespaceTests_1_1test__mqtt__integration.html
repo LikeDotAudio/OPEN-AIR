@@ -110,7 +110,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:abef8349f07beca39de9354e39c0fc0c8" id="r_abef8349f07beca39de9354e39c0fc0c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d1c/namespaceTests_1_1test__mqtt__integration.html#abef8349f07beca39de9354e39c0fc0c8">project_root</a> = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>))))</td></tr>
+<tr class="memitem:abef8349f07beca39de9354e39c0fc0c8" id="r_abef8349f07beca39de9354e39c0fc0c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d1c/namespaceTests_1_1test__mqtt__integration.html#abef8349f07beca39de9354e39c0fc0c8">project_root</a> = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))</td></tr>
 <tr class="separator:abef8349f07beca39de9354e39c0fc0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -144,19 +144,16 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   23</span><span class="keyword">def </span>is_mqtt_broker_reachable(host=&quot;localhost&quot;, port=1883):</div>
 <div class="line"><span class="lineno">   24</span>    <span class="stringliteral">&quot;&quot;&quot;Check if the MQTT broker is reachable.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   25</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   26</span>        sock = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.socket</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.AF_INET</a>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">socket.SOCK_STREAM</a>)</div>
-<div class="line"><span class="lineno">   27</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sock.settimeout</a>(1)</div>
-<div class="line"><span class="lineno">   28</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sock.connect_ex</a>((host, port))</div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sock.close</a>()</div>
+<div class="line"><span class="lineno">   26</span>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div>
+<div class="line"><span class="lineno">   27</span>        sock.settimeout(1)</div>
+<div class="line"><span class="lineno">   28</span>        result = sock.connect_ex((host, port))</div>
+<div class="line"><span class="lineno">   29</span>        sock.close()</div>
 <div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> result == 0</div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">except</span>:</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span><span class="preprocessor">@unittest.skipUnless(is_mqtt_broker_reachable()</span>, <span class="stringliteral">&quot;Local MQTT broker (Mosquitto) is not reachable.&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -167,7 +164,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Tests.test_mqtt_integration.project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>))))</td>
+          <td class="memname">Tests.test_mqtt_integration.project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))</td>
         </tr>
       </table>
 </div><div class="memdoc">

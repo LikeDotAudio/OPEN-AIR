@@ -93,27 +93,27 @@ $(document).ready(function(){initNavTree('d1/d18/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: ImportError in GraphPlotter (Graph Component)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1783"></a> <b>Date:</b> 2026-03-15 00:45:00 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md2232"></a> <b>Date:</b> 2026-03-15 00:45:00 <br  />
  <b>Priority:</b> 1 (Critical/Crash) <br  />
  <b>Status:</b> Resolved <br  />
  <b>Modules:</b> <code>workers/builder/graphing/core/graph_patina_mixin.py</code>, <code>workers/builder/graphing/core/graph_throttle_mixin.py</code></p>
-<h1><a class="anchor" id="autotoc_md1784"></a>
+<h1><a class="anchor" id="autotoc_md2233"></a>
 Issue</h1>
 <p>The UI failed to launch with the following error: &lsquo;ImportError: cannot import name '<a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a>&rsquo; from 'oaGui.graphing.core' (unknown location)`</p>
-<h1><a class="anchor" id="autotoc_md1785"></a>
+<h1><a class="anchor" id="autotoc_md2234"></a>
 Root Cause</h1>
 <p>A recent modularization move of graph-related mixins into a <code>core/</code> sub-directory left behind incorrect relative imports. The files <code><a class="el" href="../../da/da7/graph__patina__mixin_8py.html">graph_patina_mixin.py</a></code> and <code><a class="el" href="../../d2/d60/graph__throttle__mixin_8py.html">graph_throttle_mixin.py</a></code> were attempting to import <code><a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a></code> using <code>from . import <a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a></code>, which looked for the module within the <code>core/</code> directory instead of the parent <code>data_graphing/</code> directory where it actually resides.</p>
-<h1><a class="anchor" id="autotoc_md1786"></a>
+<h1><a class="anchor" id="autotoc_md2235"></a>
 Resolution</h1>
 <p>Converted the problematic relative imports to absolute imports: Changed <code>from . import <a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a></code> to <code>from oaGui.graphing import <a class="el" href="../../d8/dd6/namespacegraph__updater.html">graph_updater</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md1787"></a>
+<h1><a class="anchor" id="autotoc_md2236"></a>
 Verification Evidence</h1>
 <ol type="1">
 <li><b>Source Audit</b>: Confirmed <code>graph_updater.py</code> is located in <code>workers/builder/graphing/</code>.</li>
 <li><b>Import Test</b>: Verified that the new absolute import correctly resolves the module from the sub-directory.</li>
-<li><b>Launch Sequence</b>: The UI bootstrap can now import <code>Application</code> and its dependencies without triggering the <code>ImportError</code>.</li>
+<li><b>Launch Sequence</b>: The UI bootstrap can now import <code>EngineGuiDisplay</code> and its dependencies without triggering the <code>ImportError</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1788"></a>
+<h1><a class="anchor" id="autotoc_md2237"></a>
 Impact</h1>
 <p>Restores functionality to the data graphing components and allows the primary UI to boot successfully. </p>
 </div></div><!-- contents -->

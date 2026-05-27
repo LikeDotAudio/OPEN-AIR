@@ -99,12 +99,12 @@ $(document).ready(function(){initNavTree('dc/db7/classoaGuiElements_1_1Core_1_1g
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a32a87d9ca7fce9b3448cf5218c827ed8" id="r_a32a87d9ca7fce9b3448cf5218c827ed8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db7/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1bar__graph__adapter_1_1BarGraphAdapter.html#a32a87d9ca7fce9b3448cf5218c827ed8">create</a> (parent_widget, config_data, context=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, **<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs</a>)</td></tr>
+<tr class="memitem:a32a87d9ca7fce9b3448cf5218c827ed8" id="r_a32a87d9ca7fce9b3448cf5218c827ed8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db7/classoaGuiElements_1_1Core_1_1graphing_1_1adapters_1_1bar__graph__adapter_1_1BarGraphAdapter.html#a32a87d9ca7fce9b3448cf5218c827ed8">create</a> (parent_widget, config_data, context=None, **kwargs)</td></tr>
 <tr class="separator:a32a87d9ca7fce9b3448cf5218c827ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Adapter for creating Bar Graph widgets.</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html#l00014">14</a> of file <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html">bar_graph_adapter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html#l00013">13</a> of file <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html">bar_graph_adapter.py</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a32a87d9ca7fce9b3448cf5218c827ed8" name="a32a87d9ca7fce9b3448cf5218c827ed8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32a87d9ca7fce9b3448cf5218c827ed8">&#9670;&#160;</a></span>create()</h2>
@@ -131,7 +131,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>context</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>context</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -152,36 +152,33 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html#l00018">18</a> of file <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html">bar_graph_adapter.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   18</span>    <span class="keyword">def </span>create(parent_widget, config_data, context=None, **kwargs):</div>
-<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> context:</div>
-<div class="line"><span class="lineno">   20</span>            state_mirror_engine = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.state_mirror_engine</a></div>
-<div class="line"><span class="lineno">   21</span>            subscriber_router = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.subscriber_router</a></div>
-<div class="line"><span class="lineno">   22</span>            base_mqtt_topic_from_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.base_mqtt_topic_from_path</a></div>
-<div class="line"><span class="lineno">   23</span>            builder_instance = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">context.builder_instance</a></div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   25</span>            state_mirror_engine = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;state_mirror_engine&quot;</span>)</div>
-<div class="line"><span class="lineno">   26</span>            subscriber_router = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;subscriber_router&quot;</span>)</div>
-<div class="line"><span class="lineno">   27</span>            base_mqtt_topic_from_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;base_mqtt_topic_from_path&quot;</span>)</div>
-<div class="line"><span class="lineno">   28</span>            builder_instance = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">kwargs.get</a>(<span class="stringliteral">&quot;builder_instance&quot;</span>)</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>        widget_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_data.get</a>(<span class="stringliteral">&quot;path&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config_data.get</a>(<span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;bar_graph&quot;</span>))</div>
-<div class="line"><span class="lineno">   31</span> </div>
-<div class="line"><span class="lineno">   32</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a>, f<span class="stringliteral">&quot;🔬🏗️📊 [BUILDER] bar_graph_adapter: Spawning DynamicBarGraph &#39;{widget_id}&#39;.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">return</span> DynamicBarGraph(</div>
-<div class="line"><span class="lineno">   35</span>            parent=parent_widget,</div>
-<div class="line"><span class="lineno">   36</span>            config=config_data,</div>
-<div class="line"><span class="lineno">   37</span>            base_mqtt_topic_from_path=base_mqtt_topic_from_path,</div>
-<div class="line"><span class="lineno">   38</span>            widget_id=widget_id,</div>
-<div class="line"><span class="lineno">   39</span>            state_mirror_engine=state_mirror_engine,</div>
-<div class="line"><span class="lineno">   40</span>            subscriber_router=subscriber_router,</div>
-<div class="line"><span class="lineno">   41</span>            builder_instance=builder_instance,</div>
-<div class="line"><span class="lineno">   42</span>        )</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html#l00017">17</a> of file <a class="el" href="../../d3/d1a/bar__graph__adapter_8py_source.html">bar_graph_adapter.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>    <span class="keyword">def </span>create(parent_widget, config_data, context=None, **kwargs):</div>
+<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> context:</div>
+<div class="line"><span class="lineno">   19</span>            state_mirror_engine = context.state_mirror_engine</div>
+<div class="line"><span class="lineno">   20</span>            subscriber_router = context.subscriber_router</div>
+<div class="line"><span class="lineno">   21</span>            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path</div>
+<div class="line"><span class="lineno">   22</span>            builder_instance = context.builder_instance</div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   24</span>            state_mirror_engine = kwargs.get(<span class="stringliteral">&quot;state_mirror_engine&quot;</span>)</div>
+<div class="line"><span class="lineno">   25</span>            subscriber_router = kwargs.get(<span class="stringliteral">&quot;subscriber_router&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span>            base_mqtt_topic_from_path = kwargs.get(<span class="stringliteral">&quot;base_mqtt_topic_from_path&quot;</span>)</div>
+<div class="line"><span class="lineno">   27</span>            builder_instance = kwargs.get(<span class="stringliteral">&quot;builder_instance&quot;</span>)</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>        widget_id = config_data.get(<span class="stringliteral">&quot;path&quot;</span>, config_data.get(<span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;bar_graph&quot;</span>))</div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span>        matrix_log(<span class="stringliteral">&quot;UI&quot;</span>, <span class="stringliteral">&quot;GUI_ELEMENTS&quot;</span>, inspect.currentframe().f_code.co_name, f<span class="stringliteral">&quot;🔬🏗️📊 [BUILDER] bar_graph_adapter: Spawning DynamicBarGraph &#39;{widget_id}&#39;.&quot;</span>, level=<span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">return</span> DynamicBarGraph(</div>
+<div class="line"><span class="lineno">   34</span>            parent=parent_widget,</div>
+<div class="line"><span class="lineno">   35</span>            config=config_data,</div>
+<div class="line"><span class="lineno">   36</span>            base_mqtt_topic_from_path=base_mqtt_topic_from_path,</div>
+<div class="line"><span class="lineno">   37</span>            widget_id=widget_id,</div>
+<div class="line"><span class="lineno">   38</span>            state_mirror_engine=state_mirror_engine,</div>
+<div class="line"><span class="lineno">   39</span>            subscriber_router=subscriber_router,</div>
+<div class="line"><span class="lineno">   40</span>            builder_instance=builder_instance,</div>
+<div class="line"><span class="lineno">   41</span>        )</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

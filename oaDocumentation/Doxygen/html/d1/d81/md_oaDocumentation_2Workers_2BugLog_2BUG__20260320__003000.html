@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('d1/d81/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Broken Scrolling and Invisible Components in Dynamic GUIs</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1926"></a> </p>
-<h1><a class="anchor" id="autotoc_md1927"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2375"></a> </p>
+<h1><a class="anchor" id="autotoc_md2376"></a>
 Issue</h1>
 <p>Large GUI components, specifically <code>7_Data/2_demo</code>, were not displaying correctly. The user reported that "none of the json displays" and the project crashes.</p>
-<h1><a class="anchor" id="autotoc_md1928"></a>
+<h1><a class="anchor" id="autotoc_md2377"></a>
 Root Cause Analysis</h1>
 <ol type="1">
-<li><b>Broken Scrolling</b>: A recent change in <code>DynamicGuiBuilder</code> converted <code>scroll_frame</code> from a <code>tk.Frame</code> to a <code>tk.Canvas</code> and disabled geometry propagation (<code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pack_propagate(False)</a></code> and <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">grid_propagate(False)</a></code>).<ul>
+<li><b>Broken Scrolling</b>: A recent change in <code>LoaderOrchestrator</code> converted <code>scroll_frame</code> from a <code>tk.Frame</code> to a <code>tk.Canvas</code> and disabled geometry propagation (<code>pack_propagate(False)</code> and <code>grid_propagate(False)</code>).<ul>
 <li>In <code>tkinter</code>, when widgets are gridded into a <code>Canvas</code> (instead of being added as canvas objects), they do not contribute to the <code>bbox("all")</code> calculation.</li>
 <li>The <code>_on_frame_configure</code> handler was setting the <code>scrollregion</code> based on <code>bbox("all")</code>, which resulted in a zero-sized scrollable area.</li>
 <li>Consequently, all gridded children were effectively outside the visible viewport.</li>
@@ -108,20 +108,20 @@ Root Cause Analysis</h1>
 </li>
 <li><b>Missing Path Resolution</b>: <code>GuiTable</code> (and potentially other widgets) was relying exclusively on <code>config_data.get("path")</code>. Many JSON definitions (like <code><a class="el" href="../../db/d15/demo_8json.html">demo.json</a></code>) omit this field, expecting the builder to provide a hierarchical path. This led to unregistered widgets and failed MQTT synchronization.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1929"></a>
+<h1><a class="anchor" id="autotoc_md2378"></a>
 Resolutions</h1>
 <ol type="1">
-<li><b>Restore Scroll Frame</b>: Changed <code>scroll_frame</code> back to <code>tk.Frame</code> in <code><a class="el" href="../../dd/d93/oaGui_2Workers_2builder_8py.html">oaGui/Workers/builder.py</a></code>.</li>
-<li><b>Enable Propagation</b>: Removed <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">grid_propagate(False)</a></code> on <code>scroll_frame</code> to allow it to expand to the size of its children, which is required for the outer <code>Canvas</code> to correctly calculate its <code>scrollregion</code>.</li>
+<li><b>Restore Scroll Frame</b>: Changed <code>scroll_frame</code> back to <code>tk.Frame</code> in <code>oaGui/Workers/builder.py</code>.</li>
+<li><b>Enable Propagation</b>: Removed <code>grid_propagate(False)</code> on <code>scroll_frame</code> to allow it to expand to the size of its children, which is required for the outer <code>Canvas</code> to correctly calculate its <code>scrollregion</code>.</li>
 <li><b>Fix Path Resolution</b>: Updated <code>make_text_table</code> in <code>oaGuiElements/Core/text/text_table/text_table.py</code> to use <code>path = config_data.get("path") or kwargs.get("path")</code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1930"></a>
+<h1><a class="anchor" id="autotoc_md2379"></a>
 Files Modified</h1>
 <ul>
-<li><code><a class="el" href="../../dd/d93/oaGui_2Workers_2builder_8py.html">oaGui/Workers/builder.py</a></code></li>
+<li><code>oaGui/Workers/builder.py</code></li>
 <li><code>oaGuiElements/Core/text/text_table/text_table.py</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1931"></a>
+<h1><a class="anchor" id="autotoc_md2380"></a>
 Verification Evidence</h1>
 <p>The structural change to <code>scroll_frame</code> correctly restores the standard <code>tkinter</code> scrolling pattern. By using a <code>Frame</code> as the <code>create_window</code> object, the <code>Canvas</code> can now accurately track the content size via <code>&lt;Configure&gt;</code> events on the <code>Frame</code>. </p>
 </div></div><!-- contents -->

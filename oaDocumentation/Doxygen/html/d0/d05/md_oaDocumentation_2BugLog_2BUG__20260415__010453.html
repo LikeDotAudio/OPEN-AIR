@@ -93,34 +93,34 @@ $(document).ready(function(){initNavTree('d0/d05/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 20260415_010453</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1423"></a> </p>
-<h1><a class="anchor" id="autotoc_md1424"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1688"></a> </p>
+<h1><a class="anchor" id="autotoc_md1689"></a>
 Issue 1: &lt;tt&gt;EmberManager.init()&lt;/tt&gt; unexpected keyword argument 'state_cache_manager'</h1>
-<h2><a class="anchor" id="autotoc_md1425"></a>
+<h2><a class="anchor" id="autotoc_md1690"></a>
 Description</h2>
 <p>The <code>EmberManager</code> in <code><a class="el" href="../../db/d78/oaComProtocols_2oaComEmber_2Entry_8py.html">oaComProtocols/oaComEmber/Entry.py</a></code> was not correctly initialized in its <code>__init__</code> method, leading to a <code>TypeError</code> when <code><a class="el" href="../../d0/d5b/test__ember__manager_8py.html">test_ember_manager.py</a></code> attempted to pass <code>state_cache_manager</code> as an argument. The existing <code>EmberManager</code> definition in <code>Entry.py</code> was a placeholder and did not include this expected argument in its constructor signature.</p>
-<h2><a class="anchor" id="autotoc_md1426"></a>
+<h2><a class="anchor" id="autotoc_md1691"></a>
 Root Cause</h2>
 <p>The <code>EmberManager.__init__</code> method did not declare <code>state_cache_manager</code> as an accepted argument, while the test suite <code><a class="el" href="../../d0/d5b/test__ember__manager_8py.html">test_ember_manager.py</a></code> was designed to provide it.</p>
-<h2><a class="anchor" id="autotoc_md1427"></a>
+<h2><a class="anchor" id="autotoc_md1692"></a>
 Resolution</h2>
 <p>Modified <code><a class="el" href="../../db/d78/oaComProtocols_2oaComEmber_2Entry_8py.html">oaComProtocols/oaComEmber/Entry.py</a></code> to include <code>state_cache_manager=None</code> in the <code>EmberManager.__init__</code> method signature and assigned it as a class instance variable. This aligns the manager's interface with the test's expectations and potential future requirements for state management.</p>
-<h2><a class="anchor" id="autotoc_md1428"></a>
+<h2><a class="anchor" id="autotoc_md1693"></a>
 Verification</h2>
 <p>The <code><a class="el" href="../../d0/d5b/test__ember__manager_8py.html">oaComProtocols/oaComEmber/Tests/test_ember_manager.py</a></code> suite now passes all tests, confirming that <code>EmberManager</code> can be instantiated correctly with the <code>state_cache_manager</code> argument.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1430"></a>
+<h1><a class="anchor" id="autotoc_md1695"></a>
 Issue 2: &lt;tt&gt;NMOSManager&lt;/tt&gt; &lt;tt&gt;test_standardized_lifecycle&lt;/tt&gt; failure (running state after stop)</h1>
-<h2><a class="anchor" id="autotoc_md1431"></a>
+<h2><a class="anchor" id="autotoc_md1696"></a>
 Description</h2>
 <p>The <code>test_standardized_lifecycle</code> in <code><a class="el" href="../../df/d1a/test__nmos__manager_8py.html">oaComProtocols/oaComNmos/Tests/test_nmos_manager.py</a></code> failed because the <code>NMOSManager</code>'s <code>status()["running"]</code> returned <code>True</code> even after the <code>stop()</code> function was called. This indicated that the <code>stop()</code> function was not correctly updating the module's internal running state.</p>
-<h2><a class="anchor" id="autotoc_md1432"></a>
+<h2><a class="anchor" id="autotoc_md1697"></a>
 Root Cause</h2>
 <p>The <code>stop()</code> function in <code><a class="el" href="../../d7/d4b/oaComProtocols_2oaComNmos_2Entry_8py.html">oaComProtocols/oaComNmos/Entry.py</a></code> was responsible for stopping the <code>_bridge_manager</code> but did not explicitly set the <code>global_state["RUNNING"]</code> flag to <code>False</code>. As a result, the <code>status()</code> function, which relies on <code>global_state["RUNNING"]</code>, continued to report the module as running.</p>
-<h2><a class="anchor" id="autotoc_md1433"></a>
+<h2><a class="anchor" id="autotoc_md1698"></a>
 Resolution</h2>
 <p>Modified <code><a class="el" href="../../d7/d4b/oaComProtocols_2oaComNmos_2Entry_8py.html">oaComProtocols/oaComNmos/Entry.py</a></code> to add <code>global_state["RUNNING"] = False</code> within the <code>stop()</code> function. This ensures that the global state accurately reflects the stopped status of the NMOS module.</p>
-<h2><a class="anchor" id="autotoc_md1434"></a>
+<h2><a class="anchor" id="autotoc_md1699"></a>
 Verification</h2>
 <p>The <code><a class="el" href="../../df/d1a/test__nmos__manager_8py.html">oaComProtocols/oaComNmos/Tests/test_nmos_manager.py</a></code> suite now passes all tests, specifically the <code>test_standardized_lifecycle</code> test, confirming that the <code>NMOSManager</code> correctly reports its stopped state after the <code>stop()</code> function is invoked. </p>
 </div></div><!-- contents -->

@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('dc/dd1/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Visa Fleet Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md767"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md768"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1032"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1033"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md769"></a>
+<h2><a class="anchor" id="autotoc_md1034"></a>
 File Level</h2>
 <p><code>managers/Visa_Fleet/visa_fleet.py</code></p>
 <p>Orchestrates the discovery and management of VISA-compatible instruments across the network.</p>
@@ -106,7 +106,7 @@ File Level</h2>
 <li>Bridging fleet data and commands between the core logic and MQTT.</li>
 <li>Providing a thread-safe interface for sending SCPI commands to specific devices.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md770"></a>
+<h1><a class="anchor" id="autotoc_md1035"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li><b>Library Dependencies:</b> Relies on <code>orjson</code> for high-performance JSON serialization and <code>loguru</code> for structured logging.</li>
@@ -114,14 +114,14 @@ File Level</h2>
 <li><b>Persistence:</b> Standardizes on local JSON files for state persistence, with CSV exports for external tool compatibility.</li>
 <li><b>Threading:</b> Uses a thread-safe command queueing model to allow multiple components to interact with instruments without blocking the main event loop.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md771"></a>
+<h1><a class="anchor" id="autotoc_md1036"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md772"></a>
+<h2><a class="anchor" id="autotoc_md1037"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md773"></a>
+<h3><a class="anchor" id="autotoc_md1038"></a>
 &lt;tt&gt;class VisaFleetManager&lt;/tt&gt;</h3>
 <p>Commander for the VISA instrument fleet, managing discovery, inventory, and communication.</p>
-<h4><a class="anchor" id="autotoc_md774"></a>
+<h4><a class="anchor" id="autotoc_md1039"></a>
 &lt;tt&gt;__init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None)&lt;/tt&gt;</h4>
 <p>Initializes the <code>VisaFleetManager</code> and its constituent components.</p>
 <p><b>Parameters:</b></p><ul>
@@ -136,7 +136,7 @@ Classes</h2>
 <li>Loads the initial fleet inventory from local JSON storage.</li>
 <li>Initializes the MQTT bridge and registers scan trigger callbacks.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md775"></a>
+<h4><a class="anchor" id="autotoc_md1040"></a>
 &lt;tt&gt;set_callbacks(self, on_inventory_update, on_device_response, on_device_error, on_proxy_status)&lt;/tt&gt;</h4>
 <p>Links external listeners (such as a GUI or higher-level automation logic) to internal fleet events.</p>
 <p><b>Parameters:</b></p><ul>
@@ -151,7 +151,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Updates internal callback references.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md776"></a>
+<h4><a class="anchor" id="autotoc_md1041"></a>
 &lt;tt&gt;start(self)&lt;/tt&gt;</h4>
 <p>Activates the fleet manager and its orchestrator.</p>
 <p><b>Parameters:</b></p><ul>
@@ -160,7 +160,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li><code>None</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md777"></a>
+<h4><a class="anchor" id="autotoc_md1042"></a>
 &lt;tt&gt;stop(self)&lt;/tt&gt;</h4>
 <p>Gracefully shuts down the discovery orchestrator and disconnects from the MQTT broker.</p>
 <p><b>Parameters:</b></p><ul>
@@ -173,7 +173,7 @@ Classes</h2>
 <li>Stops all background threads managed by the <code>DiscoveryOrchestrator</code>.</li>
 <li>Disconnects the <code>MqttFleetBridge</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md778"></a>
+<h4><a class="anchor" id="autotoc_md1043"></a>
 &lt;tt&gt;trigger_scan(self)&lt;/tt&gt;</h4>
 <p>Initiates a comprehensive network scan to discover and manage VISA instruments.</p>
 <p><b>Parameters:</b></p><ul>
@@ -186,7 +186,7 @@ Classes</h2>
 <li>Clears the <code>initial_scan_complete_event</code>.</li>
 <li>Publishes scan status messages (Start/Complete) to the MQTT broker.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md779"></a>
+<h4><a class="anchor" id="autotoc_md1044"></a>
 &lt;tt&gt;wait_for_initial_scan(self, timeout=None)&lt;/tt&gt;</h4>
 <p>Blocks the calling thread until the first device scan is complete.</p>
 <p><b>Parameters:</b></p><ul>
@@ -198,7 +198,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Synchronously blocks the execution of the calling thread.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md780"></a>
+<h4><a class="anchor" id="autotoc_md1045"></a>
 &lt;tt&gt;_publish_scan_status(self, status, payload)&lt;/tt&gt;</h4>
 <p>Publishes the current progress of a fleet scan to the MQTT status topic.</p>
 <p><b>Parameters:</b></p><ul>
@@ -208,7 +208,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li><code>None</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md781"></a>
+<h4><a class="anchor" id="autotoc_md1046"></a>
 &lt;tt&gt;enqueue_command(self, serial, command, query=False, correlation_id="N/A")&lt;/tt&gt;</h4>
 <p>Sends a SCPI command or query to a specific instrument identified by its serial number.</p>
 <p><b>Parameters:</b></p><ul>
@@ -224,7 +224,7 @@ Classes</h2>
 <li>Queues the command in the appropriate device proxy's worker thread.</li>
 <li>Triggers the error callback if the specified serial number is not found in the fleet.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md782"></a>
+<h4><a class="anchor" id="autotoc_md1047"></a>
 &lt;tt&gt;_notify_inventory(self, inventory_data)&lt;/tt&gt;</h4>
 <p>Receives raw inventory data from the orchestrator, augments it with metadata, and persists it.</p>
 <p><b>Parameters:</b></p><ul>
@@ -237,7 +237,7 @@ Classes</h2>
 <li>Persists the augmented inventory to both JSON and CSV files.</li>
 <li>Triggers the <code>cb_inventory</code> callback and publishes grouped inventory data to MQTT.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md783"></a>
+<h4><a class="anchor" id="autotoc_md1048"></a>
 &lt;tt&gt;_notify_response(self, serial, response, command, corr_id)&lt;/tt&gt;</h4>
 <p>Handles an incoming SCPI query response from a device proxy.</p>
 <p><b>Parameters:</b></p><ul>
@@ -253,7 +253,7 @@ Classes</h2>
 <li>Persists the response to a timestamped JSON file for audit logging.</li>
 <li>Triggers the <code>cb_response</code> callback.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md784"></a>
+<h4><a class="anchor" id="autotoc_md1049"></a>
 &lt;tt&gt;_notify_error(self, serial, message, command)&lt;/tt&gt;</h4>
 <p>Relays an error reported by a device proxy to the registered error callback.</p>
 <p><b>Parameters:</b></p><ul>
@@ -264,7 +264,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li><code>None</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md785"></a>
+<h4><a class="anchor" id="autotoc_md1050"></a>
 &lt;tt&gt;_notify_status(self, serial, status)&lt;/tt&gt;</h4>
 <p>Relays a status change reported by a device proxy to the registered status callback.</p>
 <p><b>Parameters:</b></p><ul>
@@ -274,7 +274,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li><code>None</code>.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md786"></a>
+<h4><a class="anchor" id="autotoc_md1051"></a>
 &lt;tt&gt;current_inventory(self)&lt;/tt&gt;</h4>
 <p>Returns the most recent list of discovered instruments.</p>
 <p><b>Parameters:</b></p><ul>
@@ -283,7 +283,7 @@ Classes</h2>
 <p><b>Returns:</b></p><ul>
 <li>A list of dictionaries representing the current fleet inventory.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md787"></a>
+<h1><a class="anchor" id="autotoc_md1052"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li><b>JSON Augmentation:</b> We augment raw device data with human-friendly metadata (manufacturer, model) to improve the usability of the UI and exported files.</li>

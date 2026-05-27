@@ -147,11 +147,10 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00033">33</a> of file <a class="el" href="../../d8/de5/flame__capture_8py_source.html">flame_capture.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   33</span>    <span class="keyword">def </span>__init__(self):</div>
 <div class="line"><span class="lineno">   34</span>        self.profilers = []</div>
-<div class="line"><span class="lineno">   35</span>        self.lock = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Lock</a>()</div>
-<div class="line"><span class="lineno">   36</span>        self.main_profiler = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cProfile.Profile</a>()</div>
+<div class="line"><span class="lineno">   35</span>        self.lock = threading.Lock()</div>
+<div class="line"><span class="lineno">   36</span>        self.main_profiler = cProfile.Profile()</div>
 <div class="line"><span class="lineno">   37</span>        self._is_installed = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   38</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -174,29 +173,29 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00083">83</a> of file <a class="el" href="../../d8/de5/flame__capture_8py_source.html">flame_capture.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   83</span>    <span class="keyword">def </span>get_stats(self):</div>
-<div class="line"><span class="lineno">   84</span>        self.main_profiler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">disable</a>()</div>
+<div class="line"><span class="lineno">   84</span>        self.main_profiler.disable()</div>
 <div class="line"><span class="lineno">   85</span> </div>
 <div class="line"><span class="lineno">   86</span>        <span class="comment"># Initialize with main thread stats</span></div>
 <div class="line"><span class="lineno">   87</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   88</span>            combined_stats = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pstats.Stats</a>(self.main_profiler)</div>
+<div class="line"><span class="lineno">   88</span>            combined_stats = pstats.Stats(self.main_profiler)</div>
 <div class="line"><span class="lineno">   89</span>        <span class="keywordflow">except</span> TypeError:</div>
 <div class="line"><span class="lineno">   90</span>            <span class="comment"># Fallback to empty stats if main_profiler is somehow still empty</span></div>
 <div class="line"><span class="lineno">   91</span>            <span class="comment"># We use an empty Profile that has been toggled to ensure it&#39;s not &quot;empty&quot;</span></div>
-<div class="line"><span class="lineno">   92</span>            empty_p = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cProfile.Profile</a>()</div>
-<div class="line"><span class="lineno">   93</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">empty_p.enable</a>()</div>
-<div class="line"><span class="lineno">   94</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">empty_p.disable</a>()</div>
-<div class="line"><span class="lineno">   95</span>            combined_stats = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pstats.Stats</a>(empty_p)</div>
+<div class="line"><span class="lineno">   92</span>            empty_p = cProfile.Profile()</div>
+<div class="line"><span class="lineno">   93</span>            empty_p.enable()</div>
+<div class="line"><span class="lineno">   94</span>            empty_p.disable()</div>
+<div class="line"><span class="lineno">   95</span>            combined_stats = pstats.Stats(empty_p)</div>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>        <span class="keyword">with</span> self.lock:</div>
 <div class="line"><span class="lineno">   98</span>            <span class="keywordflow">for</span> p <span class="keywordflow">in</span> self.profilers:</div>
-<div class="line"><span class="lineno">   99</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.disable</a>()</div>
+<div class="line"><span class="lineno">   99</span>                p.disable()</div>
 <div class="line"><span class="lineno">  100</span>                <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  101</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">combined_stats.add</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">pstats.Stats</a>(p))</div>
+<div class="line"><span class="lineno">  101</span>                    combined_stats.add(pstats.Stats(p))</div>
 <div class="line"><span class="lineno">  102</span>                <span class="keywordflow">except</span> (TypeError, ValueError, RuntimeError):</div>
 <div class="line"><span class="lineno">  103</span>                    <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">  104</span>        <span class="keywordflow">return</span> combined_stats</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/d8e/csv_8h_source.html#l00261">io::detail::AsynchronousReader.lock</a>, <a class="el" href="../../d1/df3/midi__hardware__lock_8py_source.html#l00028">Core.midi_hardware_lock.MIDIHardwareLock.lock()</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00035">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.lock</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00034">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.profilers</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d3/d8e/csv_8h_source.html#l00261">io::detail::AsynchronousReader.lock</a>, <a class="el" href="../../d1/df3/midi__hardware__lock_8py_source.html#l00028">Core.midi_hardware_lock.MIDIHardwareLock.lock()</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00035">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.lock</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>, and <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00034">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.profilers</a>.</p>
 
 </div>
 </div>
@@ -224,37 +223,37 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   43</span>        kill_all_profilers()</div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="line"><span class="lineno">   45</span>        <span class="comment"># Ensure main profiler is enabled</span></div>
-<div class="line"><span class="lineno">   46</span>        self.main_profiler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enable</a>()</div>
+<div class="line"><span class="lineno">   46</span>        self.main_profiler.enable()</div>
 <div class="line"><span class="lineno">   47</span> </div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread</a>, <span class="stringliteral">&quot;_original_run&quot;</span>):</div>
-<div class="line"><span class="lineno">   49</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread._original_run</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread.run</a></div>
+<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> hasattr(threading.Thread, <span class="stringliteral">&quot;_original_run&quot;</span>):</div>
+<div class="line"><span class="lineno">   49</span>            threading.Thread._original_run = threading.Thread.run</div>
 <div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>        original_run = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread._original_run</a></div>
+<div class="line"><span class="lineno">   51</span>        original_run = threading.Thread._original_run</div>
 <div class="line"><span class="lineno">   52</span>        outer_self = self</div>
 <div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">patched_run</a>(self_thread):</div>
+<div class="line"><span class="lineno">   54</span>        <span class="keyword">def </span>patched_run(self_thread):</div>
 <div class="line"><span class="lineno">   55</span>            <span class="comment"># Clear any inherited profilers in this new thread</span></div>
 <div class="line"><span class="lineno">   56</span>            kill_all_profilers()</div>
 <div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>            p = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cProfile.Profile</a>()</div>
+<div class="line"><span class="lineno">   58</span>            p = cProfile.Profile()</div>
 <div class="line"><span class="lineno">   59</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   60</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.enable</a>()</div>
-<div class="line"><span class="lineno">   61</span>                <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">outer_self.lock</a>:</div>
-<div class="line"><span class="lineno">   62</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">outer_self.profilers.append</a>(p)</div>
+<div class="line"><span class="lineno">   60</span>                p.enable()</div>
+<div class="line"><span class="lineno">   61</span>                <span class="keyword">with</span> outer_self.lock:</div>
+<div class="line"><span class="lineno">   62</span>                    outer_self.profilers.append(p)</div>
 <div class="line"><span class="lineno">   63</span>                <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   64</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_run</a>(self_thread)</div>
+<div class="line"><span class="lineno">   64</span>                    original_run(self_thread)</div>
 <div class="line"><span class="lineno">   65</span>                <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">   66</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">p.disable</a>()</div>
+<div class="line"><span class="lineno">   66</span>                    p.disable()</div>
 <div class="line"><span class="lineno">   67</span>            <span class="keywordflow">except</span> ValueError <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   68</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">TEST_LOGGER.warning</a>(f<span class="stringliteral">&quot;FlameGraph: Profiler enable failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   68</span>                TEST_LOGGER.warning(f<span class="stringliteral">&quot;FlameGraph: Profiler enable failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   69</span>                <span class="comment"># Fallback if another profiler is active (e.g. nested calls)</span></div>
-<div class="line"><span class="lineno">   70</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">original_run</a>(self_thread)</div>
+<div class="line"><span class="lineno">   70</span>                original_run(self_thread)</div>
 <div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread.run</a> = patched_run</div>
+<div class="line"><span class="lineno">   72</span>        threading.Thread.run = patched_run</div>
 <div class="line"><span class="lineno">   73</span>        self._is_installed = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   74</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00037">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler._is_installed</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00017">Methods.FlameGraph.Methods.flame_capture.kill_all_profilers()</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00037">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler._is_installed</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00017">Methods.FlameGraph.Methods.flame_capture.kill_all_profilers()</a>, and <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>.</p>
 
 </div>
 </div>
@@ -278,13 +277,13 @@ Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   75</span>    <span class="keyword">def </span>stop(self):</div>
 <div class="line"><span class="lineno">   76</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self._is_installed:</div>
 <div class="line"><span class="lineno">   77</span>            <span class="keywordflow">return</span></div>
-<div class="line"><span class="lineno">   78</span>        self.main_profiler.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">disable</a>()</div>
-<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread</a>, <span class="stringliteral">&quot;_original_run&quot;</span>):</div>
-<div class="line"><span class="lineno">   80</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread.run</a> = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread._original_run</a></div>
+<div class="line"><span class="lineno">   78</span>        self.main_profiler.disable()</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">if</span> hasattr(threading.Thread, <span class="stringliteral">&quot;_original_run&quot;</span>):</div>
+<div class="line"><span class="lineno">   80</span>            threading.Thread.run = threading.Thread._original_run</div>
 <div class="line"><span class="lineno">   81</span>        self._is_installed = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   82</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00037">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler._is_installed</a>, <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00037">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler._is_installed</a>, and <a class="el" href="../../d8/de5/flame__capture_8py_source.html#l00036">Methods.FlameGraph.Methods.flame_capture.MultiThreadProfiler.main_profiler</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../de/de7/router_8py_source.html#l00165">Core.protocol_router.router.ProtocolRouter.shutdown()</a>.</p>
 

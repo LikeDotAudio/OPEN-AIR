@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('d3/d4d/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Logic Connect Instrument</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md667"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md668"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md932"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md933"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md669"></a>
+<h2><a class="anchor" id="autotoc_md934"></a>
 File Level</h2>
 <p><code>managers/VisaScipi/manager_logic_connect_instrument.py</code></p>
 <p>This file provides the logic for connecting to a VISA instrument. It manages the lifecycle of the connection, including resource allocation through PyVISA and instrument identification via SCPI *IDN? queries.</p>
@@ -106,21 +106,21 @@ File Level</h2>
 <li>Extract and broadcast hardware metadata (manufacturer, model, etc.).</li>
 </ul>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md670"></a>
+<h1><a class="anchor" id="autotoc_md935"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Requires a valid VISA backend (e.g., NI-VISA, Keysight, or PyVISA-py).</li>
 <li>Assumes instruments support standard IEEE 488.2 SCPI *IDN? queries.</li>
 <li>Networked instruments must be reachable via the local system's I/O layer.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md671"></a>
+<h1><a class="anchor" id="autotoc_md936"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md672"></a>
+<h2><a class="anchor" id="autotoc_md937"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md673"></a>
+<h3><a class="anchor" id="autotoc_md938"></a>
 &lt;tt&gt;class VisaConnector&lt;/tt&gt;</h3>
 <p>Manages the connection lifecycle for VISA-compliant instruments.</p>
-<h4><a class="anchor" id="autotoc_md674"></a>
+<h4><a class="anchor" id="autotoc_md939"></a>
 &lt;tt&gt;__init__(self, visa_proxy, gui_publisher)&lt;/tt&gt;</h4>
 <p>Initializes the VisaConnector with communication proxies.</p>
 <p><b>Parameters:</b></p><ul>
@@ -133,11 +133,11 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Assigns proxy references to internal state. Not thread-safe if multiple threads attempt to initialize the same instance.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md675"></a>
+<h4><a class="anchor" id="autotoc_md940"></a>
 &lt;tt&gt;setup_visa_instrument(self, resource_name)&lt;/tt&gt;</h4>
 <p>Establishes a connection to a VISA instrument.</p>
 <p><b>Parameters:</b></p><ul>
-<li><code>resource_name</code>: A string representing the VISA resource address (e.g., 'TCPIP::192.168.1.1<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">INSTR</a>', 'GPIB0::7<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">INSTR</a>').</li>
+<li><code>resource_name</code>: A string representing the VISA resource address (e.g., 'TCPIP::192.168.1.1::INSTR', 'GPIB0::7::INSTR').</li>
 </ul>
 <p><b>Returns:</b></p><ul>
 <li>A <code>pyvisa.Resource</code> object on success.</li>
@@ -147,7 +147,7 @@ Classes</h2>
 <li>Performs blocking I/O to initialize the hardware interface.</li>
 <li>Configures instrument timeout (5s) and termination characters.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md676"></a>
+<h4><a class="anchor" id="autotoc_md941"></a>
 &lt;tt&gt;connect_instrument_logic(self, resource_name)&lt;/tt&gt;</h4>
 <p>Handles the full connection sequence to a VISA instrument.</p>
 <p><b>Parameters:</b></p><ul>
@@ -162,7 +162,7 @@ Classes</h2>
 <li>Dispatches multiple MQTT/GUI status messages for device metadata.</li>
 <li>Performs synchronous SCPI queries; may block the calling thread.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md677"></a>
+<h1><a class="anchor" id="autotoc_md942"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Set default communication parameters required for reliable SCPI message exchange (timeout, terminations).</li>

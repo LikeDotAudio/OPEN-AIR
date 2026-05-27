@@ -10,7 +10,6 @@ var classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin =
     [ "_bg_task_id", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#a4edf1fc5f4cb3218564295f2595b7263", null ],
     [ "_last_bg_size", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#a1cc27e51323290973509ca6d823e4ae8", null ],
     [ "_trigger_reslice_all", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#aa0600d8228a93c9c096819d8c1ad561d", null ],
-    [ "canvas_window_id", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#abca2f48729fe5a5196395ad57d095f20", null ],
     [ "panel_bg_image", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#a55b3afda0c39927329313e3715e9d8fe", null ],
     [ "panel_bg_label", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#a308f663d293250dfd72ca7cfdf5b7250", null ],
     [ "panel_bg_pil", "df/dd6/classoaGuiElements_1_1Core_1_1background_1_1BuilderBackgroundManagerMixin.html#a2682aab9785d381c76f9bd380ac29f36", null ],

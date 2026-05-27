@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('da/dfe/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 05:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1106"></a> </p>
-<h1><a class="anchor" id="autotoc_md1107"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1371"></a> </p>
+<h1><a class="anchor" id="autotoc_md1372"></a>
 Performance Bugs Resolved (Iron Oxide Phase 2)</h1>
-<h2><a class="anchor" id="autotoc_md1108"></a>
+<h2><a class="anchor" id="autotoc_md1373"></a>
 1. CPU Heat: Procedural Art Generation</h2>
 <ul>
 <li><b>Issue</b>: Trigonometric coordinate math for screws and scales was blocking main threads during UI rendering.</li>
@@ -104,7 +104,7 @@ Performance Bugs Resolved (Iron Oxide Phase 2)</h1>
 <li><b>Resolution</b>: Implemented `oaProceduralArt_rs`. Consistently offloaded screw rendering and scale tick calculations to native Rust.</li>
 <li><b>Impact</b>: 800% speedup in asset generation; jitter-free UI scaling.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1109"></a>
+<h2><a class="anchor" id="autotoc_md1374"></a>
 2. I/O Heat: Synchronous Logging</h2>
 <ul>
 <li><b>Issue</b>: Log writing was blocking execution during high-frequency telemetry.</li>
@@ -112,7 +112,7 @@ Performance Bugs Resolved (Iron Oxide Phase 2)</h1>
 <li><b>Resolution</b>: Implemented `oaAsyncSink_rs` using crossbeam channels and a dedicated Rust background thread.</li>
 <li><b>Impact</b>: Zero-latency logging; no execution hitches during disk pressure.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1110"></a>
+<h2><a class="anchor" id="autotoc_md1375"></a>
 3. Safety Heat: Heartbeat Precision</h2>
 <ul>
 <li><b>Issue</b>: Watchdog timing was drift-prone and low-resolution.</li>
@@ -120,15 +120,15 @@ Performance Bugs Resolved (Iron Oxide Phase 2)</h1>
 <li><b>Resolution</b>: Implemented `oaClockSync_rs` using high-precision native system clocks.</li>
 <li><b>Impact</b>: Microsecond-accurate heartbeat monitoring; reduced false-positive panics.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1111"></a>
+<h2><a class="anchor" id="autotoc_md1376"></a>
 4. CPU/IO Heat: Log Realignment</h2>
 <ul>
 <li><b>Issue</b>: Sorting and merging millions of log lines was extremely slow.</li>
-<li><b>Root Cause</b>: <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">O(N log N)</a> Python sort on massive lists of strings.</li>
+<li><b>Root Cause</b>: O(N log N) Python sort on massive lists of strings.</li>
 <li><b>Resolution</b>: Implemented `oaLogAligner_rs` using memory-mapped files and Rayon-parallel sorting.</li>
 <li><b>Impact</b>: Reduced log processing time from minutes to seconds.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1112"></a>
+<h2><a class="anchor" id="autotoc_md1377"></a>
 5. Safety Heat: Startup Validation</h2>
 <ul>
 <li><b>Issue</b>: Configuration errors were only caught deep in execution.</li>
@@ -136,7 +136,7 @@ Performance Bugs Resolved (Iron Oxide Phase 2)</h1>
 <li><b>Resolution</b>: Implemented `oaConfigEngine_rs` with strict Serde/Validator schema enforcement.</li>
 <li><b>Impact</b>: Fails fast on invalid config; guaranteed system integrity at boot.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1113"></a>
+<h1><a class="anchor" id="autotoc_md1378"></a>
 Verification Evidence</h1>
 <ul>
 <li>Compiled all 6 new Rust modules using `maturin develop`.</li>

@@ -93,28 +93,28 @@ $(document).ready(function(){initNavTree('db/d82/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: BUG_20260401_230600.md</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1020"></a></p>
-<h1><a class="anchor" id="autotoc_md1021"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1285"></a></p>
+<h1><a class="anchor" id="autotoc_md1286"></a>
 Author: Gemini Architect</h1>
-<h1><a class="anchor" id="autotoc_md1022"></a>
+<h1><a class="anchor" id="autotoc_md1287"></a>
 Version: 1.0.0</h1>
 <p># </p>
-<h1><a class="anchor" id="autotoc_md1023"></a>
+<h1><a class="anchor" id="autotoc_md1288"></a>
 Issue: Non-linear performance degradation in State Cache prefix matching.</h1>
-<h2><a class="anchor" id="autotoc_md1024"></a>
+<h2><a class="anchor" id="autotoc_md1289"></a>
 🔍 ISSUE DESCRIPTION</h2>
-<p>The <code>CacheSearchEngine</code> used a Python <code>Set</code> to store every possible prefix of every topic in the global state registry. For 10,000 topics, this resulted in massive string allocation and <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">O(N*M)</a></code> complexity during cache rebuilds, throttling the MQTT processing thread.</p>
-<h2><a class="anchor" id="autotoc_md1025"></a>
+<p>The <code>CacheSearchEngine</code> used a Python <code>Set</code> to store every possible prefix of every topic in the global state registry. For 10,000 topics, this resulted in massive string allocation and <code>O(N*M)</code> complexity during cache rebuilds, throttling the MQTT processing thread.</p>
+<h2><a class="anchor" id="autotoc_md1290"></a>
 🛠️ ROOT CAUSE</h2>
 <p>Algorithmic inefficiency in handling hierarchical path segments using flat Python collections.</p>
-<h2><a class="anchor" id="autotoc_md1026"></a>
+<h2><a class="anchor" id="autotoc_md1291"></a>
 🚀 RESOLUTION</h2>
 <p>Implemented a native Rust Prefix Tree (Trie) extension (<code>oatrie_rs</code>):</p><ul>
 <li>Segment-based node traversal for memory-efficient storage.</li>
-<li>Deterministic <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">O(L)</a></code> query time (where L is the depth of the path).</li>
+<li>Deterministic <code>O(L)</code> query time (where L is the depth of the path).</li>
 <li>GIL-free insertion and lookup logic.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1027"></a>
+<h2><a class="anchor" id="autotoc_md1292"></a>
 ✅ VERIFICATION EVIDENCE</h2>
 <ul>
 <li><b>Topics Indexed</b>: 10,000</li>

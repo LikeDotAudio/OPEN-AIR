@@ -84,14 +84,14 @@ class ProtocolRouter:
 
         # ⚡ PROTOCOL TOPIC PREFIXES: Used to auto-detect logical source from MQTT topics.
         self.protocol_prefixes = {
-            "GUI": ["OPEN-AIR/GUI", "OPEN-AIR/oaGui"],
-            "MIDI": "OPEN-AIR/MIDI",
-            "OSC": "OPEN-AIR/OSC",
-            "SNMP": "OPEN-AIR/System/Monitor/SNMP",
-            "NMOS": "OPEN-AIR/NMOS",
-            "AES70": "OPEN-AIR/AES70",
-            "SMPTE2138": "OPEN-AIR/SMPTE2138",
-            "EMBER": "OPEN-AIR/EMBER"
+            "GUI": ["OpenAir/GUI", "OpenAir/oaGui"],
+            "MIDI": "OpenAir/MIDI",
+            "OSC": "OpenAir/OSC",
+            "SNMP": "OpenAir/System/Monitor/SNMP",
+            "NMOS": "OpenAir/NMOS",
+            "AES70": "OpenAir/AES70",
+            "SMPTE2138": "OpenAir/SMPTE2138",
+            "EMBER": "OpenAir/EMBER"
         }
 
         # ⚡ HUB-AND-SPOKE: Boolean enablement maps
@@ -312,8 +312,11 @@ class ProtocolRouter:
         self.monitor.broadcast_to_observers(message)
 
         if getattr(app_constants, "ROUTER_DISPATCH_LOGS", True):
-            val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
-            matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {message['topic']}: {val_str}", "DEBUG")
+            _topic = message['topic']
+            _mute = getattr(app_constants, "MUTE_TOPICS", ()) or ()
+            if not (_mute and any(str(_topic).startswith(p) for p in _mute)):
+                val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
+                matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {_topic}: {val_str}", "DEBUG")
 
         self._dispatch_by_strategy(strategy, message)
 

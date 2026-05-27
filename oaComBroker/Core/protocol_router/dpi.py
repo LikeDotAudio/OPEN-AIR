@@ -52,7 +52,7 @@ def investigate_packet(message, mib_cache=None):
     # --- OSC Investigation: Map logical topics back to OSC addresses ---
     if source == "OSC" or "osc_address" in message["meta"]:
         osc_addr = message["meta"].get("osc_address",
-                                   "/" + topic.replace("OPEN-AIR/", ""))
+                                   "/" + topic.replace("OpenAir/", ""))
         message["meta"]["investigation"] = f"OSC Map: {osc_addr}"
 
     # --- MIDI Investigation: Dissect raw bytes and identify signal type ---

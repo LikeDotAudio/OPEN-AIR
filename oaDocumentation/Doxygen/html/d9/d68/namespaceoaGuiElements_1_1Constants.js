@@ -10,6 +10,7 @@ var namespaceoaGuiElements_1_1Constants =
       [ "DEFAULT_FONT_SIZE", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#abe065bd69b85b7b7971045ed838b089c", null ],
       [ "DEFAULT_PAD_X", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a3169ee7781cf2cc7b0a35b3b22c0e4b7", null ],
       [ "DEFAULT_PAD_Y", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a8d89749263744a183f85987931d57456", null ],
+      [ "DEFAULT_PANEL_CONFIG", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a2c91e53976d9745c29286fbaa878c6c6", null ],
       [ "DIAL_MAX_VALUE", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a86b709f55c9e31ce1c9d1c449e36bfb1", null ],
       [ "DIAL_WRAP_THRESHOLD", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a12c31f28834f370b3d2e86b02c4b6e86", null ],
       [ "GRID_ROW_MINSIZE_BOTTOM", "db/de9/namespaceoaGuiElements_1_1Constants_1_1gui__constants.html#a2d8709add640ebe24ba54ebf2ed95d27", null ],

@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('db/d48/md_oaComProtocols_2oaComVisa_2D
   <div class="headertitle"><div class="title">🏷️ Manager Logic Mqtt Publisher</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md706"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md707"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md971"></a> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version" class="inline"/> <img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md972"></a>
 📖 Description &amp; Purpose</h1>
-<h2><a class="anchor" id="autotoc_md708"></a>
+<h2><a class="anchor" id="autotoc_md973"></a>
 File Level</h2>
 <p><code>managers/VisaScipi/manager_visa_transmit.py</code></p>
 <p>This manager handles publishing device status and information to the MQTT broker. It synchronizes the internal VISA state with the external GUI and monitoring layers by formatting and dispatching telemetry updates.</p>
@@ -106,21 +106,21 @@ File Level</h2>
 <li>Maintain proxy-level connectivity status for system-wide health monitoring.</li>
 </ul>
 <p>Author: Anthony Peter Kuzub</p>
-<h1><a class="anchor" id="autotoc_md709"></a>
+<h1><a class="anchor" id="autotoc_md974"></a>
 ⚙️ Assumptions &amp; Constraints</h1>
 <ul>
 <li>Assumes the <code>mqtt_controller</code> provides a valid, connected paho-mqtt client.</li>
 <li>Supports a fixed maximum of 40 GUI device slots (<code>MAX_GUI_DEVICE_SLOTS</code>).</li>
 <li>Dispatches messages with QoS 0 to minimize latency.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md710"></a>
+<h1><a class="anchor" id="autotoc_md975"></a>
 📚 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md711"></a>
+<h2><a class="anchor" id="autotoc_md976"></a>
 Classes</h2>
-<h3><a class="anchor" id="autotoc_md712"></a>
+<h3><a class="anchor" id="autotoc_md977"></a>
 &lt;tt&gt;class VisaGuiPublisher&lt;/tt&gt;</h3>
 <p>Dispatches instrument telemetry and GUI state updates via MQTT.</p>
-<h4><a class="anchor" id="autotoc_md713"></a>
+<h4><a class="anchor" id="autotoc_md978"></a>
 &lt;tt&gt;__init__(self, mqtt_controller)&lt;/tt&gt;</h4>
 <p>Initializes the VisaGuiPublisher with an MQTT controller.</p>
 <p><b>Parameters:</b></p><ul>
@@ -132,7 +132,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Generates a unique 16-bit GUID for session identity.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md714"></a>
+<h4><a class="anchor" id="autotoc_md979"></a>
 &lt;tt&gt;_update_found_devices_gui(self, resources)&lt;/tt&gt;</h4>
 <p>Updates the GUI's device selection list based on search results.</p>
 <p><b>Parameters:</b></p><ul>
@@ -144,7 +144,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Performs multiple non-blocking MQTT publish operations.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md715"></a>
+<h4><a class="anchor" id="autotoc_md980"></a>
 &lt;tt&gt;_publish_status(self, topic_suffix, value)&lt;/tt&gt;</h4>
 <p>Publishes a device-specific status value to the broker.</p>
 <p><b>Parameters:</b></p><ul>
@@ -157,7 +157,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Publishes with the 'retain' flag set to True to ensure persistent state.</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md716"></a>
+<h4><a class="anchor" id="autotoc_md981"></a>
 &lt;tt&gt;_publish_proxy_status(self, status)&lt;/tt&gt;</h4>
 <p>Publishes the high-level proxy connection status.</p>
 <p><b>Parameters:</b></p><ul>
@@ -169,7 +169,7 @@ Classes</h2>
 <p><b>Side Effects &amp; Thread-Safety:</b></p><ul>
 <li>Publishes to the <code>OPEN-AIR/Proxy/Status</code> topic.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md717"></a>
+<h1><a class="anchor" id="autotoc_md982"></a>
 📝 Focus on Intent (Inline Comments)</h1>
 <ul>
 <li>Populate active slots with discovered resource addresses.</li>

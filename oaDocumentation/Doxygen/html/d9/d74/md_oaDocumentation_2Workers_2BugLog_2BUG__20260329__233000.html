@@ -93,23 +93,23 @@ $(document).ready(function(){initNavTree('d9/d74/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: BUG_20260329_233000</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2020"></a> </p>
-<h1><a class="anchor" id="autotoc_md2021"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2469"></a> </p>
+<h1><a class="anchor" id="autotoc_md2470"></a>
 Issue</h1>
 <p>High-velocity debug logs and repetitive initialization messages were flooding the console even when the system was running in non-debug mode. This made it difficult to monitor critical system events.</p>
-<h1><a class="anchor" id="autotoc_md2022"></a>
+<h1><a class="anchor" id="autotoc_md2471"></a>
 Root Cause</h1>
-<p>Multiple modules across the codebase contained <code>logger.debug()</code>, <code>logger.info()</code>, or <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print()</a></code> statements that were not wrapped in <code>if LOCAL_DEBUG:</code> gates, violating the project's <b>Zero-Cost Gates</b> architectural mandate.</p>
-<h1><a class="anchor" id="autotoc_md2023"></a>
+<p>Multiple modules across the codebase contained <code>logger.debug()</code>, <code>logger.info()</code>, or <code>print()</code> statements that were not wrapped in <code>if LOCAL_DEBUG:</code> gates, violating the project's <b>Zero-Cost Gates</b> architectural mandate.</p>
+<h1><a class="anchor" id="autotoc_md2472"></a>
 Resolution</h1>
 <p>Applied comprehensive gating to the following modules:</p><ol type="1">
-<li><b>oaGui</b>: Gated window creation and service composition logs in <code><a class="el" href="../../d3/db0/ui__window_8py.html">ui_window.py</a></code> and <code><a class="el" href="../../d4/d92/composition__root_8py.html">composition_root.py</a></code>.</li>
+<li><b>oaGui</b>: Gated window creation and service composition logs in <code><a class="el" href="../../d0/d93/tab__physical__window_8py.html">tab_physical_window.py</a></code> and <code><a class="el" href="../../d1/d2e/loader__service__composer_8py.html">loader_service_composer.py</a></code>.</li>
 <li><b><a class="el" href="../../df/d9e/namespaceoaGuiElements.html">oaGuiElements</a></b>: Gated lifecycle and status update logs in <code><a class="el" href="../../de/d8f/splash__screen_8py.html">splash_screen.py</a></code>.</li>
 <li><b>oaGui/Core/factory</b>: Gated widget discovery and registry merge logs in <code><a class="el" href="../../d0/d2d/widget__discovery__engine_8py.html">widget_discovery_engine.py</a></code>.</li>
 <li><b>oaComProtocols.oaComSNMP</b>: Gated thread startup/shutdown and network linking logs in <code><a class="el" href="../../d9/d12/snmp__manager_8py.html">snmp_manager.py</a></code>, <code><a class="el" href="../../da/d6b/snmp__state__persister_8py.html">snmp_state_persister.py</a></code>, and <code><a class="el" href="../../dc/da0/snmp__log__monitor_8py.html">snmp_log_monitor.py</a></code>.</li>
 <li><b>oaComProtocols.oaComMidi</b>: Gated repetitive heartbeat logs in <code><a class="el" href="../../da/d57/midi__manager_8py.html">midi_manager.py</a></code>.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2024"></a>
+<h1><a class="anchor" id="autotoc_md2473"></a>
 Verification</h1>
 <ol type="1">
 <li>Verified that <code>LOCAL_DEBUG</code> is set to <code>False</code> by default in all modified files.</li>

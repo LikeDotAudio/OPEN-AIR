@@ -70,9 +70,9 @@ class SMPTE2138BridgeManager:
             "oa/action/sig_gen/waveform": "waveform",
             "oa/action/device/play": "play",
             # Normalized paths from GUI interactions
-            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz": "frequency",
-            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz": "frequency_start",
-            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz": "frequency_center"
+            "OpenAir/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz": "frequency",
+            "OpenAir/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz": "frequency_start",
+            "OpenAir/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz": "frequency_center"
         }
 
         self._setup_subscriptions()
@@ -120,10 +120,10 @@ class SMPTE2138BridgeManager:
         # 1. Action Triggers (Raw MQTT fallback / Broad Subscription)
         # We subscribe to the root namespace to ensure
         # that we catch ALL changes even if the ProtocolRouter dispatch is gated.
-        self.router.subscribe_to_topic("OPEN-AIR/#", self._on_internal_action)
+        self.router.subscribe_to_topic("OpenAir/#", self._on_internal_action)
 
         # 2. Remote Bridge Control (from GUI)
-        self.router.subscribe_to_topic("OPEN-AIR/System/Control/SMPTE2138/Bridge", self._on_remote_control)
+        self.router.subscribe_to_topic("OpenAir/System/Control/SMPTE2138/Bridge", self._on_remote_control)
 
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for OPEN-AIR/# Actions and Control.", "DEBUG")
 
@@ -180,7 +180,7 @@ class SMPTE2138BridgeManager:
         # ⚡ GENERIC FALLBACK: If no OID is mapped, use a portion of the topic path.
         if not oid:
             # We strip the root namespace to create a relative OID
-            oid = topic.replace("OPEN-AIR/", "")
+            oid = topic.replace("OpenAir/", "")
 
         if not oid:
             # Silent skip for unmapped or empty topics
@@ -289,7 +289,7 @@ class SMPTE2138BridgeManager:
             "timestamp": time.time()
         }
         self.mqtt.publish(
-            topic="OPEN-AIR/System/Status/SMPTE2138/Bridge",
+            topic="OpenAir/System/Status/SMPTE2138/Bridge",
             payload=orjson.dumps(status_payload).decode(),
             qos=0,
             retain=True

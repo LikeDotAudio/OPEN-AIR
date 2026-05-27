@@ -73,7 +73,7 @@ window.OcaBin = ({ nodeName, node, path_prefix, jsonPath }) => {
       <_OaPanelCtx.Provider value={ancestorHasPanel || renderPanel}>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, flex: '1 1 auto', width: '100%' }}>
           {children.map(({ key, k, v, path }) => (
-            <window.WidgetFactory key={key} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={path} />
+            <window.WidgetFactory key={key} nodeName={k} node={v} path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={path} />
           ))}
         </div>
       </_OaPanelCtx.Provider>

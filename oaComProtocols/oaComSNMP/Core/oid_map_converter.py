@@ -81,7 +81,7 @@ class OidMapConverter:
                 continue
 
             parts = topic.split('/')
-            if parts[0] == "OPEN-AIR": parts = parts[1:]
+            if parts[0] == "OpenAir": parts = parts[1:]
 
             oid_nodes = ["1"] # Base OID node for dynamic data
             path_acc = []

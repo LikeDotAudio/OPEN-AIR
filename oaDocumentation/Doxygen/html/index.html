@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OPEN-AIR: oaComBroker/Documentation/README.md</title>
+<title>OPEN-AIR: editorWYSIWYG — HTML5 WYSIWYG GUI editor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,109 +90,77 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title"><a class="el" href="df/dba/oaComBroker_2Documentation_2README_8md.html">oaComBroker/Documentation/README.md</a> </div></div>
+  <div class="headertitle"><div class="title">editorWYSIWYG — HTML5 WYSIWYG GUI editor </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_oaComBroker_2Documentation_2README"></a># </p>
-<h1><a class="anchor" id="autotoc_md65"></a>
-Primary technical documentation for the Communication Broker module.</h1>
-<p># </p>
-<h1><a class="anchor" id="autotoc_md66"></a>
-Author: Anthony Peter Kuzub</h1>
-<h1><a class="anchor" id="autotoc_md67"></a>
-Blog: www.Like.audio (Contributor to this project)</h1>
-<p># </p>
-<h1><a class="anchor" id="autotoc_md68"></a>
-Professional services for customizing and tailoring this software to your specific</h1>
-<h1><a class="anchor" id="autotoc_md69"></a>
-application can be negotiated. There is no charge to use, modify, or fork this software.</h1>
-<p># </p>
-<h1><a class="anchor" id="autotoc_md70"></a>
-Build Log: https://like.audio/category/software/spectrum-scanner/</h1>
-<h1><a class="anchor" id="autotoc_md71"></a>
-Source Code: https://github.com/APKaudio/</h1>
-<h1><a class="anchor" id="autotoc_md72"></a>
-Feature Requests can be emailed to i @ like . audio</h1>
-<p># </p>
-<h1><a class="anchor" id="autotoc_md73"></a>
-Version 20260328.1505.1</h1>
-<h1><a class="anchor" id="autotoc_md74"></a>
-📡 oaComBroker: Communication Broker &amp; Protocol Router</h1>
-<h2><a class="anchor" id="autotoc_md75"></a>
-📖 Overview</h2>
-<p>The <code>oaComBroker</code> package is the central nervous system of the OPEN-AIR architecture. It serves as the sole orchestrator for communication, bridging hardware-facing partition logic with high-level network traffic.</p>
-<p>At its heart is the <b>Protocol Router</b>, a highly modular, thread-safe, and deeply inspected routing engine that standardizes all incoming network traffic (MQTT, OSC, MIDI, SNMP) into a single "Unified Message Schema."</p>
-<hr  />
-<h2><a class="anchor" id="autotoc_md77"></a>
-🏗️ System Architecture: The Nerve Center</h2>
-<div class="fragment"><div class="line">graph TD</div>
-<div class="line">    subgraph Core [oaComBroker - The Hub]</div>
-<div class="line">        E[Entry.py - Gateway]</div>
-<div class="line">        R[ProtocolRouter - Hub]</div>
-<div class="line">        I[Ingest.py - Normalizer]</div>
-<div class="line">        D[Dispatch.py - Egress]</div>
-<div class="line">        PR[Strategy.py - Routing]</div>
-<div class="line">        DPI[DPI.py - Inspection]</div>
-<div class="line">        S[Settle.py - Jitter Guard]</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    subgraph Transports [External Interfaces]</div>
-<div class="line">        MQTT[MQTT Broker]</div>
-<div class="line">        OSC[OSC Surface]</div>
-<div class="line">        MIDI[MIDI Device]</div>
-<div class="line">        SNMP[SNMP Network]</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    Transports --&gt;|Raw Ingress| I</div>
-<div class="line">    I --&gt;|Unified Msg| R</div>
-<div class="line">    R --&gt;|Inspection| DPI</div>
-<div class="line">    R --&gt;|Settling Logic| S</div>
-<div class="line">    R --&gt;|Strategy Engine| PR</div>
-<div class="line">    PR --&gt;|Strategy Tags| D</div>
-<div class="line">    D --&gt;|Filtered Egress| Transports</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md79"></a>
-🏗️ Core Components</h2>
-<h3><a class="anchor" id="autotoc_md80"></a>
-1. The Gateway (&lt;tt&gt;Entry.py&lt;/tt&gt;)</h3>
-<p>Following the <b>Partitioned Architecture</b>, <code>Entry.py</code> is the only file in the module root. It acts as the public API for the broker, providing methods to start core services and access the Singleton router instance.</p>
-<h3><a class="anchor" id="autotoc_md81"></a>
-2. The Protocol Router (&lt;tt&gt;Core/protocol_router/router.py&lt;/tt&gt;)</h3>
-<p>A singleton hub that manages inbound and outbound queues. It handles the lifecycle of worker threads and manages the failover state (Active/Shadow) to prevent hardware collisions.</p>
-<h3><a class="anchor" id="autotoc_md82"></a>
-3. Unified Ingestion (&lt;tt&gt;Core/protocol_router/ingest.py&lt;/tt&gt;)</h3>
-<p>Normalizes all raw transport data (e.g., MIDI bytes, OSC bundles) into a unified dictionary format containing:</p><ul>
-<li><code>timestamp</code>: High-precision timestamp.</li>
-<li><code>logical_source</code>: The protocol origin (MQTT, GUI, etc.).</li>
-<li><code>msg_guid</code>: Unique identifier for tracking a packet through its lifecycle.</li>
-<li><code>msg_type</code>: Categorizes the message (SPLICE_ACTION, LINK_FEEDBACK).</li>
-</ul>
-<hr  />
-<h2><a class="anchor" id="autotoc_md84"></a>
-🧠 Data Pipeline Flow</h2>
-<p>For a narrative "play-by-play" of how events flow through the system, see the <a class="el" href="dd/d49/md_oaComBroker_2Documentation_2Event__Playbook.html">Event Playbook</a>.</p>
-<ol type="1">
-<li><b>Ingest</b>: Normalize raw data and apply dead-band filtering.</li>
-<li><b>DPI</b>: Perform Deep Packet Inspection for metadata enrichment.</li>
-<li><b>Strategy</b>: Apply an emoji-based routing strategy to determine destinations.</li>
-<li><b>Settle</b>: Manage interaction locks to prevent feedback jitter.</li>
-<li><b>Dispatch</b>: Route to transport managers for final transmission.</li>
-</ol>
-<hr  />
-<h2><a class="anchor" id="autotoc_md86"></a>
-🔬 Forensics &amp; Monitoring</h2>
-<p>The router maintains a 2000-packet rolling buffer (the Firehose) and provides forensic APIs for:</p><ul>
-<li>**<code>get_dpi_report(timestamp)</code>**: Detailed analysis of a specific packet.</li>
-<li>**<code>get_splink_relationship(timestamp)</code>**: Correlation between patched parameters.</li>
-</ul>
-<hr  />
-<h2><a class="anchor" id="autotoc_md88"></a>
-🛠️ Configuration &amp; Dependencies</h2>
-<ul>
-<li><b>Partitioned Architecture</b>: Strictly separates transport logic from business rules.</li>
-<li><b>Concurrency</b>: Uses a <code>ThreadPoolExecutor</code> for non-blocking dispatch.</li>
-<li><b>Dependencies</b>: Relies on <code>oaLogging</code> for forensic tracing and <code>oaOchestration</code> for protocol safety guards. </li>
-</ul>
+<div class="textblock"><p><a class="anchor" id="md_frontEnd_2editorWYSIWYG_2README"></a> An in-browser editor for the OPEN-AIR <code>Gui_Frames</code> JSON definitions, modelled on the Tkinter editor in <a href="../../oaGuiEditorWYSIWYG"><code>oaGuiEditorWYSIWYG</code></a>. It runs inside the web frontend (<code>frontEnd/</code>) and reuses the live runtime renderer (<code>LoaderOrchestrator</code> + <code>WidgetFactory</code>) as its WYSIWYG preview.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Launching</h1>
+<p>Right-click any JSON-backed panel in the web UI → the editor opens full-screen for that panel's file. <code>Esc</code> closes, <code>Ctrl/Cmd+S</code> saves.</p>
+<p>Programmatic launch:</p>
+<div class="fragment"><div class="line">window.launchWysiwygEditor({ filePath: &quot;/Window_1/.../bandwidth.json&quot;, content: {...} });</div>
+</div><!-- fragment --><p><code>WindowManager</code> listens for the <code>oa-open-wysiwyg</code> window event and renders <code>&lt;window.WysiwygEditor&gt;</code> inside the app tree (so it shares the MqttProvider context and the live renderer).</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Folder ↔ function map (mirrors the Python editor)</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Path   </th><th class="markdownTableHeadNone">Global   </th><th class="markdownTableHeadNone">Role    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Entry.jsx</code>   </td><td class="markdownTableBodyNone"><code>launchWysiwygEditor</code>   </td><td class="markdownTableBodyNone">Launch surface (event dispatch).    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Core/state.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdState</code>, <code>useEditorStore</code>   </td><td class="markdownTableBodyNone">Central JSON state + pub/sub; path ops (get/set/delete/rename/reorder/move/insert).    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>FileReaders/file_reader.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdFileReader</code>   </td><td class="markdownTableBodyNone">Load a definition (via <code>/api/tree</code>).    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>FileReaders/grab_bag_loader.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdGrabBagLoader</code>   </td><td class="markdownTableBodyNone">Load + cache the palette (<code>/api/grabbag</code>).    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>FileWriters/file_writer.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdFileWriter</code>   </td><td class="markdownTableBodyNone">Save (<code>POST /api/save</code>, server writes a <code>.old</code> backup) + download fallback.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/layout_engine/snap_logic.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdSnap</code>   </td><td class="markdownTableBodyNone">Grid snapping math.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/layout_engine/focus.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdFocus</code>   </td><td class="markdownTableBodyNone">Screen-coord → element path (<code>data-oca-path</code>).    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/layout_engine/overlay_manager.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdSelectionOverlay</code>   </td><td class="markdownTableBodyNone">Selection outline over the preview.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/layout_engine/preview_engine.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdPreview</code>   </td><td class="markdownTableBodyNone">Live preview via <code>LoaderOrchestrator</code>.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/layout_engine/ruler.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdRuler</code>   </td><td class="markdownTableBodyNone">Pixel rulers.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Methods/builder_editor_grid.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdGrid</code>   </td><td class="markdownTableBodyNone">100px grid backdrop.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/PropertyEditor/property_leaf.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdPropertyLeaf</code>   </td><td class="markdownTableBodyNone">One editable field (bool/number/color/text).    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/renderers/tree_renderer.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdPropertyTree</code>   </td><td class="markdownTableBodyNone">Recursive property editor.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/Tabs/InteractiveLayout/interactive_layout.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdCanvas</code>   </td><td class="markdownTableBodyNone">WYSIWYG canvas: select + drop + rulers + grid.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/Tabs/ElementProperties/Entry.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdProperties</code>   </td><td class="markdownTableBodyNone">Inspector: rename/reorder/duplicate/delete + props.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/Tabs/JsonEditor/json_editor.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdJsonEditor</code>   </td><td class="markdownTableBodyNone">Raw JSON, two-way synced.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/Tabs/TreeRefactor/Entry.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdTree</code>   </td><td class="markdownTableBodyNone">Hierarchy: select/reorder/delete + drag-to-move.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/Tabs/GrabBagView/grab_bag_view.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdGrabBag</code>   </td><td class="markdownTableBodyNone">Categorized draggable palette.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Interface/Window/editor_toolbar.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdToolbar</code>   </td><td class="markdownTableBodyNone">Save / Download / Close + dirty flag.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Interface/Window/editor_layout.jsx</code>   </td><td class="markdownTableBodyNone"><code>OaEdLayout</code>   </td><td class="markdownTableBodyNone">Left tabs (Structure/JSON/Library) + canvas + properties.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Managers/wysiwyg_editor.jsx</code>   </td><td class="markdownTableBodyNone"><code>WysiwygEditor</code>   </td><td class="markdownTableBodyNone">Overlay controller; wires Save + shortcuts.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Data model</h1>
+<p>State is the whole file object <code>{ rootKey: OcaBin }</code>. Paths are dot-strings, e.g. <code>Spectrum_Instrument_bandwidth.blocks.Resolution Bandwidth.fields.RBW</code> (GUI keys never contain <code>.</code>). Selection on the canvas relies on the <code>data-oca-path</code> attribute emitted by <code>WidgetFactory</code>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Where the library (palette) comes from</h1>
+<p><code>GET /api/grabbag</code> (<code>LauchWebserver.py → get_grab_bag()</code>) is the library source. It is now <b>README-driven</b>: each <code>frontEnd/libControl/&lt;category&gt;/&lt;Component&gt;/Readme.md</code> embeds one ``<code>json sample block (see the "Sample (WYSIWYG library source)" section in any component README). The server scans those READMEs first — they are authoritative — and supplies each widget's palette entry, live preview, and property manipulators from that block. It then falls back to </code>oaGuiElements/*/sample.json<code>for any widget no README has provided (deduped by sample name).</code>_LEGEND<code>arrays from either source become the property-editor dropdowns.</code><a class="el" href="d1/de4/Sample_8json.html">Gui_Frames/Sample.json</a>` is a generated catalog frame holding one instance of every component — open it to see the whole library at once.</p>
+<p>To add/change a widget in the editor: edit the JSON block in its component README (or add a new component folder with a README) — no editor code change.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Server requirement</h1>
+<p>The palette and save use endpoints in <code>frontEnd/Core/Launch/LauchWebserver.py</code> (<code>GET /api/grabbag</code>, <code>POST /api/save</code>). <b>Restart the web server</b> after editing a component README so the regenerated palette is live.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Not yet implemented (vs. the Python editor)</h1>
+<p>Resize/drag handles on the canvas, snap-on-move, undo/redo, and MQTT "Test UI" push. Selection, property editing, add (palette), reorder/move (tree), JSON round-trip, and save-with-backup are functional. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

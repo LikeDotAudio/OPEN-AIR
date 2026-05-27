@@ -1,5 +1,20 @@
 const MqttContext = React.createContext();
 
+// Per-session identity. Matches Python's FULL_INSTANCE_ID shape ("<8-byte-hex>:<partition>:<pid>")
+// from oaConfigurationManager/Core/identity.py so the Python broker's reflection
+// check (ingest.py:187, dispatch.py:85) sees this browser as a distinct origin
+// instead of stamping anonymous web publishes with Python's own GUID and
+// dropping them as self-echoes. Random per page load — survives a Python
+// restart but rotates on every browser refresh.
+const SESSION_FULL_ID = (() => {
+    const bytes = new Uint8Array(8);
+    (window.crypto || window.msCrypto).getRandomValues(bytes);
+    const guid = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    return `${guid}:WEB:${Date.now()}`;
+})();
+window.OA_SESSION_FULL_ID = SESSION_FULL_ID;
+console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
+
 window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
@@ -87,7 +102,9 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         if (publish && nodeJson && !initialPublishDone.current) {
             publish(`${topic}/config`, JSON.stringify(nodeJson));
             if (messages[topic] === undefined) {
-                publish(topic, JSON.stringify({ value: defaultValue }));
+                // Include full_id so Python's broker doesn't mistake this
+                // for one of its own reflections (see SESSION_FULL_ID above).
+                publish(topic, JSON.stringify({ value: defaultValue, full_id: SESSION_FULL_ID }));
             }
             initialPublishDone.current = true;
         }
@@ -97,8 +114,9 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         // Optimistic UI Update: instantly snap the local React component
         setLocalValue(newValue);
 
-        // Push to global store
-        const payload = JSON.stringify({ value: newValue });
+        // Push to global store. full_id identifies this browser session so
+        // Python's broker treats it as a foreign source, not a self-echo.
+        const payload = JSON.stringify({ value: newValue, full_id: SESSION_FULL_ID });
         publish(topic, payload);
     };
 

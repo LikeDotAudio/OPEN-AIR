@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('d3/dee/namespaceoaGuiElements_1_1Core_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a26f9d17fac65b24223b83f80698db7c7" id="r_a26f9d17fac65b24223b83f80698db7c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dee/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__physics.html#a26f9d17fac65b24223b83f80698db7c7">blink_loop</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d6/d15/oa__metering__engine__rs_2mod_8rs.html#ab2af64f94e4237a4cd0dc73692634b5d">state</a>, config, value_var, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw_visuals_callback</a>)</td></tr>
+<tr class="memitem:a26f9d17fac65b24223b83f80698db7c7" id="r_a26f9d17fac65b24223b83f80698db7c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dee/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__physics.html#a26f9d17fac65b24223b83f80698db7c7">blink_loop</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d6/d15/oa__metering__engine__rs_2mod_8rs.html#ab2af64f94e4237a4cd0dc73692634b5d">state</a>, config, value_var, draw_visuals_callback)</td></tr>
 <tr class="separator:a26f9d17fac65b24223b83f80698db7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0e7f0d5925288e29b2e456e2efe0344" id="r_af0e7f0d5925288e29b2e456e2efe0344"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dee/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__physics.html#af0e7f0d5925288e29b2e456e2efe0344">update_physics</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d6/d15/oa__metering__engine__rs_2mod_8rs.html#ab2af64f94e4237a4cd0dc73692634b5d">state</a>, config, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw_visuals_callback</a>)</td></tr>
+<tr class="memitem:af0e7f0d5925288e29b2e456e2efe0344" id="r_af0e7f0d5925288e29b2e456e2efe0344"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dee/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Core_1_1wink__physics.html#af0e7f0d5925288e29b2e456e2efe0344">update_physics</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d6/d15/oa__metering__engine__rs_2mod_8rs.html#ab2af64f94e4237a4cd0dc73692634b5d">state</a>, config, draw_visuals_callback)</td></tr>
 <tr class="separator:af0e7f0d5925288e29b2e456e2efe0344"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -152,27 +152,24 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   45</span><span class="keyword">def </span>blink_loop(canvas, state, config, value_var, draw_visuals_callback):</div>
 <div class="line"><span class="lineno">   46</span>    <span class="stringliteral">&quot;&quot;&quot;Toggles the shutter state periodically if blinking is active.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   47</span>    <span class="comment"># ⚡ TERMINATION SAFETY: Stop loop if blink becomes disabled or value turns off.</span></div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state.get</a>(<span class="stringliteral">&quot;is_blinking_active&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">or</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value_var.get</a>():</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> state.get(<span class="stringliteral">&quot;is_blinking_active&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">or</span> <span class="keywordflow">not</span> value_var.get():</div>
 <div class="line"><span class="lineno">   49</span>        state[<span class="stringliteral">&quot;is_blinking_active&quot;</span>] = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   50</span>        <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>    state[<span class="stringliteral">&quot;blink_open&quot;</span>] = <span class="keywordflow">not</span> state[<span class="stringliteral">&quot;blink_open&quot;</span>]</div>
 <div class="line"><span class="lineno">   53</span>    state[<span class="stringliteral">&quot;target_open&quot;</span>] = 1.0 <span class="keywordflow">if</span> state[<span class="stringliteral">&quot;blink_open&quot;</span>] <span class="keywordflow">else</span> 0.0</div>
 <div class="line"><span class="lineno">   54</span> </div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state.get</a>(<span class="stringliteral">&quot;animating&quot;</span>, <span class="keyword">False</span>):</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> state.get(<span class="stringliteral">&quot;animating&quot;</span>, <span class="keyword">False</span>):</div>
 <div class="line"><span class="lineno">   56</span>        state[<span class="stringliteral">&quot;animating&quot;</span>] = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   57</span>        update_physics(canvas, state, config, draw_visuals_callback)</div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>    <span class="comment"># ⚡ OVERLAP PROTECTION: Cancel existing blink timer if present (handled by logic flow)</span></div>
 <div class="line"><span class="lineno">   60</span>    <span class="comment"># The canvas.after approach means only one chain lives per button.</span></div>
-<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(canvas, <span class="stringliteral">&quot;winfo_exists&quot;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.winfo_exists</a>():</div>
-<div class="line"><span class="lineno">   62</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.after</a>(config[<span class="stringliteral">&quot;blink_interval&quot;</span>], <span class="keyword">lambda</span>: blink_loop(canvas, state,</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> hasattr(canvas, <span class="stringliteral">&quot;winfo_exists&quot;</span>) <span class="keywordflow">and</span> canvas.winfo_exists():</div>
+<div class="line"><span class="lineno">   62</span>        canvas.after(config[<span class="stringliteral">&quot;blink_interval&quot;</span>], <span class="keyword">lambda</span>: blink_loop(canvas, state,</div>
 <div class="line"><span class="lineno">   63</span>                                                                 config, value_var,</div>
 <div class="line"><span class="lineno">   64</span>                                                                 draw_visuals_callback))</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="af0e7f0d5925288e29b2e456e2efe0344" name="af0e7f0d5925288e29b2e456e2efe0344"></a>
@@ -235,26 +232,26 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   25</span>        moved = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>    <span class="keywordflow">if</span> moved:</div>
-<div class="line"><span class="lineno">   28</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw_visuals_callback</a>()</div>
+<div class="line"><span class="lineno">   28</span>        draw_visuals_callback()</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># ⚡ TERMINATION SAFETY: Use microscopic epsilon for floating point comparison.</span></div>
 <div class="line"><span class="lineno">   31</span>    <span class="comment"># Also check moved flag to ensure we don&#39;t loop if no delta was applied.</span></div>
 <div class="line"><span class="lineno">   32</span>    is_at_target = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a676b0dba508a56547eb8d9eedca0705a">abs</a>(state[<span class="stringliteral">&quot;current_open&quot;</span>] - target) &lt; 0.001</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> (moved <span class="keywordflow">or</span> state[<span class="stringliteral">&quot;is_pressed&quot;</span>]) <span class="keywordflow">and</span> <span class="keywordflow">not</span> is_at_target:</div>
-<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(canvas, <span class="stringliteral">&quot;winfo_exists&quot;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.winfo_exists</a>():</div>
-<div class="line"><span class="lineno">   36</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.after</a>(16, <span class="keyword">lambda</span>: update_physics(canvas, state, config,</div>
+<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">if</span> hasattr(canvas, <span class="stringliteral">&quot;winfo_exists&quot;</span>) <span class="keywordflow">and</span> canvas.winfo_exists():</div>
+<div class="line"><span class="lineno">   36</span>            canvas.after(16, <span class="keyword">lambda</span>: update_physics(canvas, state, config,</div>
 <div class="line"><span class="lineno">   37</span>                                                    draw_visuals_callback))</div>
 <div class="line"><span class="lineno">   38</span>    <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   39</span>        state[<span class="stringliteral">&quot;animating&quot;</span>] = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   40</span>        <span class="comment"># Ensure terminal value is exact</span></div>
 <div class="line"><span class="lineno">   41</span>        state[<span class="stringliteral">&quot;current_open&quot;</span>] = target</div>
 <div class="line"><span class="lineno">   42</span>        <span class="comment"># Final redraw to snap to perfect position</span></div>
-<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">draw_visuals_callback</a>()</div>
+<div class="line"><span class="lineno">   43</span>        draw_visuals_callback()</div>
 <div class="line"><span class="lineno">   44</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a676b0dba508a56547eb8d9eedca0705a"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a676b0dba508a56547eb8d9eedca0705a">abs</a></div><div class="ttdeci">abs</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">generated.rs:2271</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">abs</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02271">abs</a>.</p>
 
 </div>
 </div>

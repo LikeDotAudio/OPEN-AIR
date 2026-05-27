@@ -118,9 +118,9 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:af13dd563646029b25ce5bae2d866fbd7" id="r_af13dd563646029b25ce5bae2d866fbd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#af13dd563646029b25ce5bae2d866fbd7">__all__</a></td></tr>
 <tr class="separator:af13dd563646029b25ce5bae2d866fbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6275d450a07097256317e74dbfd1283e" id="r_a6275d450a07097256317e74dbfd1283e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#a6275d450a07097256317e74dbfd1283e">cmd</a> = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td></tr>
+<tr class="memitem:a6275d450a07097256317e74dbfd1283e" id="r_a6275d450a07097256317e74dbfd1283e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#a6275d450a07097256317e74dbfd1283e">cmd</a> = sys.argv[1].lower()</td></tr>
 <tr class="separator:a6275d450a07097256317e74dbfd1283e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a955b4bef60750d77f96de8274cf397e8" id="r_a955b4bef60750d77f96de8274cf397e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#a955b4bef60750d77f96de8274cf397e8">current_dir</a> = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).parent.absolute()</td></tr>
+<tr class="memitem:a955b4bef60750d77f96de8274cf397e8" id="r_a955b4bef60750d77f96de8274cf397e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#a955b4bef60750d77f96de8274cf397e8">current_dir</a> = Path(__file__).parent.absolute()</td></tr>
 <tr class="separator:a955b4bef60750d77f96de8274cf397e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4163cf66bbbd1f98acd0212b2a52212" id="r_ab4163cf66bbbd1f98acd0212b2a52212"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#ab4163cf66bbbd1f98acd0212b2a52212">project_root</a> = <a class="el" href="../../d0/d35/namespaceCore_1_1IS12_1_1Entry.html#a955b4bef60750d77f96de8274cf397e8">current_dir</a></td></tr>
 <tr class="separator:ab4163cf66bbbd1f98acd0212b2a52212"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,41 +149,38 @@ Ensures isolation and proper sys.path handling.
 <div class="line"><span class="lineno">   83</span><span class="stringliteral">    Discover and run tests in the local Tests/ directory using unittest via subprocess.</span></div>
 <div class="line"><span class="lineno">   84</span><span class="stringliteral">    Ensures isolation and proper sys.path handling.</span></div>
 <div class="line"><span class="lineno">   85</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   86</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...&quot;</span>)</div>
+<div class="line"><span class="lineno">   86</span>    print(f<span class="stringliteral">&quot;📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...&quot;</span>)</div>
 <div class="line"><span class="lineno">   87</span>    test_dir = current_dir / <span class="stringliteral">&quot;Tests&quot;</span></div>
 <div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_dir.exists</a>():</div>
-<div class="line"><span class="lineno">   90</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.&quot;</span>)</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> test_dir.exists():</div>
+<div class="line"><span class="lineno">   90</span>        print(f<span class="stringliteral">&quot;⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.&quot;</span>)</div>
 <div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>    env = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.environ.copy</a>()</div>
-<div class="line"><span class="lineno">   94</span>    env[<span class="stringliteral">&quot;PYTHONPATH&quot;</span>] = str(project_root) + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.pathsep</a> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">env.get</a>(<span class="stringliteral">&quot;PYTHONPATH&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">   93</span>    env = os.environ.copy()</div>
+<div class="line"><span class="lineno">   94</span>    env[<span class="stringliteral">&quot;PYTHONPATH&quot;</span>] = str(project_root) + os.pathsep + env.get(<span class="stringliteral">&quot;PYTHONPATH&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   97</span>        rel_test_dir = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.relpath</a>(test_dir, project_root)</div>
-<div class="line"><span class="lineno">   98</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>(</div>
-<div class="line"><span class="lineno">   99</span>            [<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.executable</a>, <span class="stringliteral">&quot;-m&quot;</span>, <span class="stringliteral">&quot;unittest&quot;</span>, <span class="stringliteral">&quot;discover&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, rel_test_dir, <span class="stringliteral">&quot;-p&quot;</span>, <span class="stringliteral">&quot;test_*.py&quot;</span>],</div>
+<div class="line"><span class="lineno">   97</span>        rel_test_dir = os.path.relpath(test_dir, project_root)</div>
+<div class="line"><span class="lineno">   98</span>        result = subprocess.run(</div>
+<div class="line"><span class="lineno">   99</span>            [sys.executable, <span class="stringliteral">&quot;-m&quot;</span>, <span class="stringliteral">&quot;unittest&quot;</span>, <span class="stringliteral">&quot;discover&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, rel_test_dir, <span class="stringliteral">&quot;-p&quot;</span>, <span class="stringliteral">&quot;test_*.py&quot;</span>],</div>
 <div class="line"><span class="lineno">  100</span>            cwd=str(project_root),</div>
 <div class="line"><span class="lineno">  101</span>            env=env,</div>
 <div class="line"><span class="lineno">  102</span>            capture_output=<span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  103</span>        )</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.returncode</a> <span class="keywordflow">in</span> [0, 5]:</div>
-<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.returncode</a> == 5:</div>
-<div class="line"><span class="lineno">  106</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: No tests found, but discovery succeeded.&quot;</span>)</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> result.returncode <span class="keywordflow">in</span> [0, 5]:</div>
+<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">if</span> result.returncode == 5:</div>
+<div class="line"><span class="lineno">  106</span>                print(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: No tests found, but discovery succeeded.&quot;</span>)</div>
 <div class="line"><span class="lineno">  107</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  108</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.&quot;</span>)</div>
+<div class="line"><span class="lineno">  108</span>                print(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.&quot;</span>)</div>
 <div class="line"><span class="lineno">  109</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">  110</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  111</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.&quot;</span>)</div>
+<div class="line"><span class="lineno">  111</span>            print(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.&quot;</span>)</div>
 <div class="line"><span class="lineno">  112</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  113</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  114</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  114</span>        print(f<span class="stringliteral">&quot;🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  115</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  116</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00125">Core.IS12.Entry.status()</a>.</p>
 
 </div>
@@ -206,11 +203,9 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00117">117</a> of file <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  117</span><span class="keyword">def </span>start():</div>
 <div class="line"><span class="lineno">  118</span>    <span class="stringliteral">&quot;&quot;&quot;Start the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  119</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🚀 [START] Starting {Path(__file__).parent.name} services...&quot;</span>)</div>
+<div class="line"><span class="lineno">  119</span>    print(f<span class="stringliteral">&quot;🚀 [START] Starting {Path(__file__).parent.name} services...&quot;</span>)</div>
 <div class="line"><span class="lineno">  120</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a9d09e77603c9b8604f2ba949889b2f9a" name="a9d09e77603c9b8604f2ba949889b2f9a"></a>
@@ -231,11 +226,11 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00125">125</a> of file <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  125</span><span class="keyword">def </span>status():</div>
 <div class="line"><span class="lineno">  126</span>    <span class="stringliteral">&quot;&quot;&quot;Get the module status.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  127</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📊 [STATUS] Checking {Path(__file__).parent.name} status...&quot;</span>)</div>
+<div class="line"><span class="lineno">  127</span>    print(f<span class="stringliteral">&quot;📊 [STATUS] Checking {Path(__file__).parent.name} status...&quot;</span>)</div>
 <div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Running&quot;</span></div>
 <div class="line"><span class="lineno">  129</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00081">Core.IS12.Entry.run_tests()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00081">Core.IS12.Entry.run_tests()</a>.</p>
 
 </div>
 </div>
@@ -257,11 +252,9 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html#l00121">121</a> of file <a class="el" href="../../dd/d6f/oaComProtocols_2oaComNmos_2Core_2IS12_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  121</span><span class="keyword">def </span>stop():</div>
 <div class="line"><span class="lineno">  122</span>    <span class="stringliteral">&quot;&quot;&quot;Stop the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  123</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [STOP] Stopping {Path(__file__).parent.name} services...&quot;</span>)</div>
+<div class="line"><span class="lineno">  123</span>    print(f<span class="stringliteral">&quot;🛑 [STOP] Stopping {Path(__file__).parent.name} services...&quot;</span>)</div>
 <div class="line"><span class="lineno">  124</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -303,7 +296,7 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Core.IS12.Entry.cmd = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td>
+          <td class="memname">Core.IS12.Entry.cmd = sys.argv[1].lower()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -319,7 +312,7 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Core.IS12.Entry.current_dir = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).parent.absolute()</td>
+          <td class="memname">Core.IS12.Entry.current_dir = Path(__file__).parent.absolute()</td>
         </tr>
       </table>
 </div><div class="memdoc">

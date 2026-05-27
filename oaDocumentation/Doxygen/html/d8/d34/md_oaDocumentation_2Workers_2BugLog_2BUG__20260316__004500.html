@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d8/d34/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: NameError in LyricManager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1848"></a> <b>Date:</b> 2026-03-16 00:45:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Application failure during splash screen initialization.</p>
-<h1><a class="anchor" id="autotoc_md1849"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2297"></a> <b>Date:</b> 2026-03-16 00:45:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> EngineGuiDisplay failure during splash screen initialization.</p>
+<h1><a class="anchor" id="autotoc_md2298"></a>
 Issue</h1>
 <p>A &lsquo;NameError: name 'lyrics_data&rsquo; is not defined<code>occurred in</code>workers/splash_screen/core/lyric.py` on line 14.</p>
-<h1><a class="anchor" id="autotoc_md1850"></a>
+<h1><a class="anchor" id="autotoc_md2299"></a>
 Root Cause</h1>
-<p>The <code>LyricManager._load</code> method was attempting to access a variable named <code>lyrics_data</code> that was neither imported nor defined. It was trying to use a <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr(lyrics_data, ...)</a></code> call while the import statement was <code>from .. import lyrics</code>.</p>
-<h1><a class="anchor" id="autotoc_md1851"></a>
+<p>The <code>LyricManager._load</code> method was attempting to access a variable named <code>lyrics_data</code> that was neither imported nor defined. It was trying to use a <code>getattr(lyrics_data, ...)</code> call while the import statement was <code>from .. import lyrics</code>.</p>
+<h1><a class="anchor" id="autotoc_md2300"></a>
 Resolution</h1>
 <p>Modified <code>workers/splash_screen/core/lyric.py</code> to correctly import the <code>lyrics</code> list from the <code>lyrics</code> module and assign it to <code>self.lyrics</code>. Added type checking and robust error handling to prevent future crashes.</p>
-<h1><a class="anchor" id="autotoc_md1852"></a>
+<h1><a class="anchor" id="autotoc_md2301"></a>
 Verification</h1>
 <p>Ran a Python reproduction script that imports <code>LyricManager</code> and verifies the lyrics are correctly loaded:</p><ul>
 <li><b>Output:</b> <code>Lyrics loaded: 16 lines</code></li>

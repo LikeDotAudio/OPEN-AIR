@@ -2,6 +2,7 @@ var dir_8c29078197cf4b4a5f83aac59af7eeac =
 [
     [ "Assets", "dir_4481adbefca861d06b2a71a1dbd58ba1.html", "dir_4481adbefca861d06b2a71a1dbd58ba1" ],
     [ "BugLog", "dir_91a0244a2e7f0727546831448932cedc.html", null ],
+    [ "ChangeLog", "dir_1602ba14e224089b45437895b2dadeba.html", null ],
     [ "Constants", "dir_d65c5428e82bf731ec6478e61c020651.html", "dir_d65c5428e82bf731ec6478e61c020651" ],
     [ "Core", "dir_f691a504fca7faf68d51a4cf8ed51551.html", "dir_f691a504fca7faf68d51a4cf8ed51551" ],
     [ "Documentation", "dir_f3c648b4c671823a0140f3b263fddc0a.html", "dir_f3c648b4c671823a0140f3b263fddc0a" ],

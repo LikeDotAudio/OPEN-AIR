@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('d0/d15/md_oaDocumentation_2Documentati
   <div class="headertitle"><div class="title">Splinker Core v1.1.0 - Revision Plan &amp; Strategy</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1529"></a> </p>
-<h1><a class="anchor" id="autotoc_md1530"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1978"></a> </p>
+<h1><a class="anchor" id="autotoc_md1979"></a>
 1. Logic Analysis: "The Splinker" Architecture</h1>
 <p>The core problem "The Splinker" solves is the "Connection Gap" in decoupled hardware-software systems. When physical controls (motors, faders) are detached from the digital engine they manipulate, the latency between action, software processing, network routing, and physical feedback can cause chaotic oscillations ("Infinite Echo") and ghost touches.</p>
 <p><b>Bifurcated Routing:</b></p><ol type="1">
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('d0/d15/md_oaDocumentation_2Documentati
 <li>It checks <code>is_settled</code>. If <code>false</code> (human is still moving the control), it engages the Ghost Touch Lock on its motors, allowing only the local human finger to drive the value. Displays (LCDs) continue to update via the Link path.</li>
 <li>Once the physical interaction ceases, a debounce timer expires, and a final packet is sent with <code>is_settled: true</code>. The Splinker reflects this, and the hardware motor lock disengages, snapping the physical fader to the definitive software value.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1531"></a>
+<h1><a class="anchor" id="autotoc_md1980"></a>
 2. Payload Format Check</h1>
 <p>The entire system (GUI, MQTT, OSC, SNMP, MIDI) must conform to this strict JSON schema.</p>
 <div class="fragment"><div class="line">{</div>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('d0/d15/md_oaDocumentation_2Documentati
 <li><b>Parser Safety:</b> All ingest nodes must use strict <code>try/except</code> JSON parsing to drop malformed packets gracefully.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1533"></a>
+<h1><a class="anchor" id="autotoc_md1982"></a>
 3. The 10-Point Strategy for Implementation</h1>
 <ol type="1">
 <li><b>Schema Standardization:</b> Update <code>StateCacheManager.handle_external_update</code> and <code>StateMirrorEngine.broadcast_gui_change_to_mqtt</code> to strictly output the new JSON schema (including <code>origin_source</code>, <code>target_parameter</code>, <code>is_locked</code>, <code>is_settled</code>, <code>msg_guid</code>).</li>
@@ -146,34 +146,34 @@ $(document).ready(function(){initNavTree('d0/d15/md_oaDocumentation_2Documentati
 <li><b>System-Wide Telemetry Validation:</b> Use the new <code>UPPER_SNAKE_CASE</code> origin sources to filter and visualize MQTT traffic cleanly in the debug logs (using the established Three Emoji standard).</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1535"></a>
+<h1><a class="anchor" id="autotoc_md1984"></a>
 4. Test Set Scenarios</h1>
-<h2><a class="anchor" id="autotoc_md1536"></a>
+<h2><a class="anchor" id="autotoc_md1985"></a>
 Test 1: The Echo Cancellation Test</h2>
 <ul>
 <li><b>Action:</b> Simulate a <code>GUI</code> node sending a <code>value: 0.5</code> payload with <code>origin_source: "GUI_Main"</code>.</li>
 <li><b>Expected Result:</b> The <code>Splinker</code> links this to an external system, which acknowledges the change. The <code>GUI_Main</code> node receives the confirmation packet but drops it silently because <code>origin_source == "GUI_Main"</code>, preventing an infinite loop.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1537"></a>
+<h2><a class="anchor" id="autotoc_md1986"></a>
 Test 2: The Ghost Touch (Conflict) Test</h2>
 <ul>
 <li><b>Action:</b> A user is actively dragging <code>fader_1</code> in the UI (<code>is_locked: true</code>). Concurrently, an incoming MQTT message arrives attempting to set <code>fader_1</code> to <code>0.9</code> with <code>is_settled: false</code>.</li>
 <li><b>Expected Result:</b> The <code>StateMirrorEngine</code> drops the incoming network packet to prevent the fader from jumping around while the user holds it.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1538"></a>
+<h2><a class="anchor" id="autotoc_md1987"></a>
 Test 3: The Settle &amp; Snap Test</h2>
 <ul>
 <li><b>Action:</b> The user releases <code>fader_1</code> in the UI.</li>
 <li><b>Expected Result:</b> A final MQTT broadcast is fired containing the exact final float <code>value</code> and <code>is_settled: true</code>. The receiving hardware node unlocks its physical motor and drives it to the matching position.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1539"></a>
+<h2><a class="anchor" id="autotoc_md1988"></a>
 Test 4: The Poison Packet (Malformed JSON) Test</h2>
 <ul>
 <li><b>Action:</b> Publish a raw string <code>{"origin_source": "BAD_JSON", value: 1}</code> (missing quotes around 'value') to the root MQTT topic.</li>
 <li><b>Expected Result:</b> The <code>StateCacheManager</code> ingest function catches the JSONDecodeError, drops the packet, logs a <code>🚫🛑 [ERROR] Malformed Payload</code> warning, and the system continues running without crashing.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1541"></a>
+<h1><a class="anchor" id="autotoc_md1990"></a>
 5. Proposed Changelog Entry</h1>
 <div class="fragment"><div class="line">## [Upcoming] Splinker Core v1.1.0 Architecture Overhaul</div>
 <div class="line">**************************************</div>

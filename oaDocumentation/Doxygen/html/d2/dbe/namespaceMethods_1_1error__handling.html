@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('d2/dbe/namespaceMethods_1_1error__hand
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a67992c006576973a2568274493e810ba" id="r_a67992c006576973a2568274493e810ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/namespaceMethods_1_1error__handling.html#a67992c006576973a2568274493e810ba">vocal_capture</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">category</a>, str message=&quot;Error <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">captured&quot;</a>)</td></tr>
+<tr class="memitem:a67992c006576973a2568274493e810ba" id="r_a67992c006576973a2568274493e810ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/namespaceMethods_1_1error__handling.html#a67992c006576973a2568274493e810ba">vocal_capture</a> (str category, str message=&quot;Error captured&quot;)</td></tr>
 <tr class="separator:a67992c006576973a2568274493e810ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab78f09a7d28d2f99e8c735819fae128e" id="r_ab78f09a7d28d2f99e8c735819fae128e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/namespaceMethods_1_1error__handling.html#ab78f09a7d28d2f99e8c735819fae128e">vocal_failure_handler</a> (str message=&quot;Critical <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Failure</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Detected&quot;</a>, str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">category</a>=&quot;SYSTEM&quot;, Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">fallback</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">re_raise</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a>, Any widget=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:ab78f09a7d28d2f99e8c735819fae128e" id="r_ab78f09a7d28d2f99e8c735819fae128e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dbe/namespaceMethods_1_1error__handling.html#ab78f09a7d28d2f99e8c735819fae128e">vocal_failure_handler</a> (str message=&quot;Critical Failure Detected&quot;, str category=&quot;SYSTEM&quot;, Any fallback=None, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> re_raise=False, Any widget=None)</td></tr>
 <tr class="separator:ab78f09a7d28d2f99e8c735819fae128e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -127,7 +127,7 @@ Responsibilities:
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">str &#160;</td>
-          <td class="paramname"><em>message</em> = <code>&quot;Error&#160;<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">captured&quot;</a></code>&#160;</td>
+          <td class="paramname"><em>message</em> = <code>&quot;Error&#160;captured&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -153,14 +153,11 @@ Usage:
 <div class="line"><span class="lineno">   83</span><span class="stringliteral">        except Exception as e:</span></div>
 <div class="line"><span class="lineno">   84</span><span class="stringliteral">            vocal_capture(&quot;MQTT&quot;, &quot;Failed to connect to broker&quot;)</span></div>
 <div class="line"><span class="lineno">   85</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   86</span>    tb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">traceback.format_exc</a>()</div>
-<div class="line"><span class="lineno">   87</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FAILURE_LOGGER.bind</a>(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
+<div class="line"><span class="lineno">   86</span>    tb = traceback.format_exc()</div>
+<div class="line"><span class="lineno">   87</span>    FAILURE_LOGGER.bind(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
 <div class="line"><span class="lineno">   88</span>        f<span class="stringliteral">&quot;❌🔴 [VOCAL CAPTURE] {message}\n\n🕵️ FORENSIC TRACE:\n{tb}&quot;</span></div>
 <div class="line"><span class="lineno">   89</span>    )</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ab78f09a7d28d2f99e8c735819fae128e" name="ab78f09a7d28d2f99e8c735819fae128e"></a>
@@ -173,7 +170,7 @@ Usage:
           <td class="memname">Methods.error_handling.vocal_failure_handler </td>
           <td>(</td>
           <td class="paramtype">str &#160;</td>
-          <td class="paramname"><em>message</em> = <code>&quot;Critical&#160;<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Failure</a>&#160;<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Detected&quot;</a></code>, </td>
+          <td class="paramname"><em>message</em> = <code>&quot;Critical&#160;Failure&#160;Detected&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -185,19 +182,19 @@ Usage:
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Any &#160;</td>
-          <td class="paramname"><em>fallback</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>, </td>
+          <td class="paramname"><em>fallback</em> = <code>None</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> &#160;</td>
-          <td class="paramname"><em>re_raise</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">False</a></code>, </td>
+          <td class="paramname"><em>re_raise</em> = <code>False</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Any &#160;</td>
-          <td class="paramname"><em>widget</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>widget</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -233,25 +230,25 @@ Args:
 <div class="line"><span class="lineno">   41</span><span class="stringliteral">        re_raise (bool): Whether to re-propagate the exception after logging.</span></div>
 <div class="line"><span class="lineno">   42</span><span class="stringliteral">        widget (Any): Optional Tkinter widget to display a &#39;Red Screen of Warning&#39;.</span></div>
 <div class="line"><span class="lineno">   43</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   44</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decorator</a>(func: Callable):</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keyword">def </span>decorator(func: Callable):</div>
 <div class="line"><span class="lineno">   45</span>        <span class="preprocessor">@functools.wraps(func)</span></div>
-<div class="line"><span class="lineno">   46</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">wrapper</a>(*args, **kwargs):</div>
+<div class="line"><span class="lineno">   46</span>        <span class="keyword">def </span>wrapper(*args, **kwargs):</div>
 <div class="line"><span class="lineno">   47</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   48</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">func</a>(*args, **kwargs)</div>
+<div class="line"><span class="lineno">   48</span>                <span class="keywordflow">return</span> func(*args, **kwargs)</div>
 <div class="line"><span class="lineno">   49</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   50</span>                <span class="comment"># 1. Capture forensic detail</span></div>
-<div class="line"><span class="lineno">   51</span>                tb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">traceback.format_exc</a>()</div>
+<div class="line"><span class="lineno">   51</span>                tb = traceback.format_exc()</div>
 <div class="line"><span class="lineno">   52</span>                error_message = f<span class="stringliteral">&quot;❌🔴 [FAILURE] {message} in &#39;{func.__name__}&#39;: {e}&quot;</span></div>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="line"><span class="lineno">   54</span>                <span class="comment"># 2. Vocal Logging</span></div>
-<div class="line"><span class="lineno">   55</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FAILURE_LOGGER.bind</a>(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
+<div class="line"><span class="lineno">   55</span>                FAILURE_LOGGER.bind(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
 <div class="line"><span class="lineno">   56</span>                    f<span class="stringliteral">&quot;{error_message}\n\n🕵️ FORENSIC TRACE:\n{tb}&quot;</span></div>
 <div class="line"><span class="lineno">   57</span>                )</div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>                <span class="comment"># 3. Visual &#39;Red Screen of Warning&#39; (if widget provided)</span></div>
-<div class="line"><span class="lineno">   60</span>                <span class="keywordflow">if</span> widget <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(widget, <span class="stringliteral">&#39;config&#39;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.winfo_exists</a>():</div>
+<div class="line"><span class="lineno">   60</span>                <span class="keywordflow">if</span> widget <span class="keywordflow">and</span> hasattr(widget, <span class="stringliteral">&#39;config&#39;</span>) <span class="keywordflow">and</span> widget.winfo_exists():</div>
 <div class="line"><span class="lineno">   61</span>                    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   62</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.config</a>(</div>
+<div class="line"><span class="lineno">   62</span>                        widget.config(</div>
 <div class="line"><span class="lineno">   63</span>                            text=f<span class="stringliteral">&quot;❌ CRITICAL FAILURE\n\n{message}\n{e}&quot;</span>,</div>
 <div class="line"><span class="lineno">   64</span>                            foreground=<span class="stringliteral">&quot;red&quot;</span>,</div>
 <div class="line"><span class="lineno">   65</span>                            font=(<span class="stringliteral">&quot;Consolas&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>),</div>
@@ -267,8 +264,6 @@ Args:
 <div class="line"><span class="lineno">   75</span>    <span class="keywordflow">return</span> decorator</div>
 <div class="line"><span class="lineno">   76</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

@@ -139,23 +139,20 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>        <span class="comment"># Mock message objects</span></div>
 <div class="line"><span class="lineno">   43</span>        message_in_root = MagicMock()</div>
-<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message_in_root.topic</a> = <span class="stringliteral">&quot;OPEN-AIR/some/topic&quot;</span></div>
+<div class="line"><span class="lineno">   44</span>        message_in_root.topic = <span class="stringliteral">&quot;OPEN-AIR/some/topic&quot;</span></div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>        message_outside = MagicMock()</div>
-<div class="line"><span class="lineno">   47</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message_outside.topic</a> = <span class="stringliteral">&quot;OTHER-PROJECT/topic&quot;</span></div>
+<div class="line"><span class="lineno">   47</span>        message_outside.topic = <span class="stringliteral">&quot;OTHER-PROJECT/topic&quot;</span></div>
 <div class="line"><span class="lineno">   48</span> </div>
 <div class="line"><span class="lineno">   49</span>        <span class="comment"># Trigger on_message</span></div>
-<div class="line"><span class="lineno">   50</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sweeper.on_message</a>(<span class="keywordtype">None</span>, <span class="keywordtype">None</span>, message_in_root)</div>
-<div class="line"><span class="lineno">   51</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sweeper.on_message</a>(<span class="keywordtype">None</span>, <span class="keywordtype">None</span>, message_outside)</div>
+<div class="line"><span class="lineno">   50</span>        sweeper.on_message(<span class="keywordtype">None</span>, <span class="keywordtype">None</span>, message_in_root)</div>
+<div class="line"><span class="lineno">   51</span>        sweeper.on_message(<span class="keywordtype">None</span>, <span class="keywordtype">None</span>, message_outside)</div>
 <div class="line"><span class="lineno">   52</span> </div>
 <div class="line"><span class="lineno">   53</span>        <span class="comment"># Check results</span></div>
-<div class="line"><span class="lineno">   54</span>        self.assertIn(<span class="stringliteral">&quot;OPEN-AIR/some/topic&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sweeper.topics</a>)</div>
-<div class="line"><span class="lineno">   55</span>        self.assertNotIn(<span class="stringliteral">&quot;OTHER-PROJECT/topic&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sweeper.topics</a>)</div>
+<div class="line"><span class="lineno">   54</span>        self.assertIn(<span class="stringliteral">&quot;OPEN-AIR/some/topic&quot;</span>, sweeper.topics)</div>
+<div class="line"><span class="lineno">   55</span>        self.assertNotIn(<span class="stringliteral">&quot;OTHER-PROJECT/topic&quot;</span>, sweeper.topics)</div>
 <div class="line"><span class="lineno">   56</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a2c7351d528fc0be95872cac5b0816574" name="a2c7351d528fc0be95872cac5b0816574"></a>
@@ -180,18 +177,16 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   26</span>        calc = TopicCalculator(base_topic=<span class="stringliteral">&quot;OPEN-AIR&quot;</span>)</div>
 <div class="line"><span class="lineno">   27</span> </div>
 <div class="line"><span class="lineno">   28</span>        <span class="comment"># Test basic formatting</span></div>
-<div class="line"><span class="lineno">   29</span>        topic = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">calc.calculate</a>(<span class="stringliteral">&quot;volume&quot;</span>, <span class="stringliteral">&quot;MainTab&quot;</span>)</div>
+<div class="line"><span class="lineno">   29</span>        topic = calc.calculate(<span class="stringliteral">&quot;volume&quot;</span>, <span class="stringliteral">&quot;MainTab&quot;</span>)</div>
 <div class="line"><span class="lineno">   30</span>        self.assertEqual(topic, <span class="stringliteral">&quot;OPEN-AIR/MainTab/volume&quot;</span>)</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        <span class="comment"># Test stripping layout/structural tokens</span></div>
-<div class="line"><span class="lineno">   33</span>        topic_with_extra = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">calc.calculate</a>(<span class="stringliteral">&quot;gui/knob1&quot;</span>, <span class="stringliteral">&quot;oaGui/Assets/Tab1&quot;</span>)</div>
+<div class="line"><span class="lineno">   33</span>        topic_with_extra = calc.calculate(<span class="stringliteral">&quot;gui/knob1&quot;</span>, <span class="stringliteral">&quot;oaGui/Assets/Tab1&quot;</span>)</div>
 <div class="line"><span class="lineno">   34</span>        self.assertNotIn(<span class="stringliteral">&quot;display&quot;</span>, topic_with_extra)</div>
 <div class="line"><span class="lineno">   35</span>        self.assertNotIn(<span class="stringliteral">&quot;gui&quot;</span>, topic_with_extra)</div>
 <div class="line"><span class="lineno">   36</span>        self.assertEqual(topic_with_extra, <span class="stringliteral">&quot;OPEN-AIR/Tab1/knob1&quot;</span>)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

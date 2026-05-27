@@ -115,10 +115,10 @@ $(document).ready(function(){initNavTree('d1/d0c/error__handling_8py_source.html
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> functools</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> traceback</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">collections.abc</a> <span class="keyword">import</span> Callable</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Callable</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">from</span> typing <span class="keyword">import</span> Any</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaLogging.Core.logger</a> <span class="keyword">import</span> FAILURE_LOGGER, get_emoji</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">from</span> oaLogging.Core.logger <span class="keyword">import</span> FAILURE_LOGGER, get_emoji</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="foldopen" id="foldopen00024" data-start="" data-end="">
@@ -142,25 +142,25 @@ $(document).ready(function(){initNavTree('d1/d0c/error__handling_8py_source.html
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">        re_raise (bool): Whether to re-propagate the exception after logging.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="stringliteral">        widget (Any): Optional Tkinter widget to display a &#39;Red Screen of Warning&#39;.</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">decorator</a>(func: Callable):</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">def </span>decorator(func: Callable):</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="preprocessor">@functools.wraps(func)</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">def </span><a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">wrapper</a>(*args, **kwargs):</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">def </span>wrapper(*args, **kwargs):</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">func</a>(*args, **kwargs)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="keywordflow">return</span> func(*args, **kwargs)</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <span class="comment"># 1. Capture forensic detail</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                tb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">traceback.format_exc</a>()</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                tb = traceback.format_exc()</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                error_message = f<span class="stringliteral">&quot;❌🔴 [FAILURE] {message} in &#39;{func.__name__}&#39;: {e}&quot;</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                <span class="comment"># 2. Vocal Logging</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FAILURE_LOGGER.bind</a>(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                FAILURE_LOGGER.bind(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                    f<span class="stringliteral">&quot;{error_message}\n\n🕵️ FORENSIC TRACE:\n{tb}&quot;</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                )</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                <span class="comment"># 3. Visual &#39;Red Screen of Warning&#39; (if widget provided)</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="keywordflow">if</span> widget <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(widget, <span class="stringliteral">&#39;config&#39;</span>) <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.winfo_exists</a>():</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="keywordflow">if</span> widget <span class="keywordflow">and</span> hasattr(widget, <span class="stringliteral">&#39;config&#39;</span>) <span class="keywordflow">and</span> widget.winfo_exists():</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    <span class="keywordflow">try</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">widget.config</a>(</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                        widget.config(</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                            text=f<span class="stringliteral">&quot;❌ CRITICAL FAILURE\n\n{message}\n{e}&quot;</span>,</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                            foreground=<span class="stringliteral">&quot;red&quot;</span>,</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                            font=(<span class="stringliteral">&quot;Consolas&quot;</span>, 10, <span class="stringliteral">&quot;bold&quot;</span>),</div>
@@ -186,12 +186,11 @@ $(document).ready(function(){initNavTree('d1/d0c/error__handling_8py_source.html
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="stringliteral">        except Exception as e:</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral">            vocal_capture(&quot;MQTT&quot;, &quot;Failed to connect to broker&quot;)</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    tb = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">traceback.format_exc</a>()</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">FAILURE_LOGGER.bind</a>(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    tb = traceback.format_exc()</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    FAILURE_LOGGER.bind(category=f<span class="stringliteral">&quot;{get_emoji(&#39;FAILURE&#39;)} {category}&quot;</span>).error(</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        f<span class="stringliteral">&quot;❌🔴 [VOCAL CAPTURE] {message}\n\n🕵️ FORENSIC TRACE:\n{tb}&quot;</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    )</div>
 </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

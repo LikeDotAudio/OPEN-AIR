@@ -1,5 +1,5 @@
 var namespaceprotocol__matrix =
 [
-    [ "ProtocolMatrix", "d9/d6d/classprotocol__matrix_1_1ProtocolMatrix.html", "d9/d6d/classprotocol__matrix_1_1ProtocolMatrix" ],
-    [ "get_gui_class", "d5/d43/namespaceprotocol__matrix.html#ab3c7babc31b26df713090806f8e755fb", null ]
+    [ "ProtocolMatrixProxy", "df/da0/classprotocol__matrix_1_1ProtocolMatrixProxy.html", null ],
+    [ "get_gui_class", "d5/d43/namespaceprotocol__matrix.html#a6ff8c7d95e69723fa55afa4fded4bed6", null ]
 ];

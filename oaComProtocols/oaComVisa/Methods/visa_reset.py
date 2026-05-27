@@ -40,7 +40,7 @@ class VisaResetManager(MqttSubscriberMixin):
             self.CMD_RESET_DEVICE = "*RST"
 
             # --- MQTT Topic Constants ---
-            self.BASE_TOPIC = "OPEN-AIR/Device/Instrument_Connection/System_Reset"
+            self.BASE_TOPIC = "OpenAir/Device/Instrument_Connection/System_Reset"
             self.TOPIC_RESET = f"{self.BASE_TOPIC}/Reset_device/trigger"
 
             self.register_mqtt_topics({self.TOPIC_RESET: self._on_reset_request})

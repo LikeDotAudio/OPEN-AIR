@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🏹_20precision_20interaction_0',['🏹 Precision Interaction',['../d2/d5a/md_oaGuiEditorWYSIWYG_2Documentation_2Summary.html#autotoc_md3027',1,'']]]
+  ['🏛️_20the_20realignment_20story_3a_20industrial_20precision_0',['🏛️ The Realignment Story: &quot;Industrial Precision&quot;',['../de/dd6/md_oaGui_2Documentation_2Summary.html#autotoc_md3025',1,'']]]
 ];

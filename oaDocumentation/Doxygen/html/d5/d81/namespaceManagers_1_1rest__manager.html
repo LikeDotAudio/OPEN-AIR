@@ -133,17 +133,14 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   27</span><span class="keyword">def </span>check_fastapi_availability():</div>
 <div class="line"><span class="lineno">   28</span>    <span class="stringliteral">&quot;&quot;&quot;Checks if FastAPI and its required dependencies are installed.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   29</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">importlib.import_module</a>(<span class="stringliteral">&quot;fastapi&quot;</span>)</div>
-<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">importlib.import_module</a>(<span class="stringliteral">&quot;uvicorn&quot;</span>)</div>
+<div class="line"><span class="lineno">   30</span>        importlib.import_module(<span class="stringliteral">&quot;fastapi&quot;</span>)</div>
+<div class="line"><span class="lineno">   31</span>        importlib.import_module(<span class="stringliteral">&quot;uvicorn&quot;</span>)</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   33</span>    <span class="keywordflow">except</span> ImportError <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   34</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;rest&quot;</span>, <span class="stringliteral">&quot;check_fastapi_availability&quot;</span>, f<span class="stringliteral">&quot;❌ [REST] Dependency check failed: {e}&quot;</span>, <span class="stringliteral">&quot;ERROR&quot;</span>)</div>
 <div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   36</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="../../d2/d7f/rest__manager_8py_source.html#l00078">Managers.rest_manager.RESTManager._try_initialize()</a>.</p>
 
 </div>

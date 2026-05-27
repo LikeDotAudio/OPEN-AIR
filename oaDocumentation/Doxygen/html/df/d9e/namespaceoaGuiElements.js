@@ -12,7 +12,6 @@ var namespaceoaGuiElements =
       [ "current_dir", "de/d9a/namespaceoaGuiElements_1_1Entry.html#a9dc547d1d677c4deaef5672f3ba99845", null ],
       [ "project_root", "de/d9a/namespaceoaGuiElements_1_1Entry.html#a03022b58b613664848409d6f5eb30e01", null ]
     ] ],
-    [ "Interface", "d8/dba/namespaceoaGuiElements_1_1Interface.html", "d8/dba/namespaceoaGuiElements_1_1Interface" ],
     [ "Methods", "d1/d42/namespaceoaGuiElements_1_1Methods.html", "d1/d42/namespaceoaGuiElements_1_1Methods" ],
     [ "Tests", "dd/dd0/namespaceoaGuiElements_1_1Tests.html", "dd/dd0/namespaceoaGuiElements_1_1Tests" ]
 ];

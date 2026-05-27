@@ -173,12 +173,11 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00022">22</a> of file <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html">test_midi_tx.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   22</span>    <span class="keyword">def </span>tearDown(self):</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(self, <span class="stringliteral">&#39;midi&#39;</span>):</div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> hasattr(self, <span class="stringliteral">&#39;midi&#39;</span>):</div>
 <div class="line"><span class="lineno">   24</span>            self.midi.stop()</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, and <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>.</p>
 
 </div>
 </div>
@@ -202,8 +201,8 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   26</span>    <span class="keyword">def </span>test_publish_cc_to_midi(self):</div>
 <div class="line"><span class="lineno">   27</span>        <span class="stringliteral">&quot;&quot;&quot;Test that a system CC topic is correctly translated and sent to MIDI ports.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   28</span>        mock_out = MagicMock()</div>
-<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.name</a> = <span class="stringliteral">&quot;my_device&quot;</span></div>
-<div class="line"><span class="lineno">   30</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.outports</a> = [mock_out]</div>
+<div class="line"><span class="lineno">   29</span>        mock_out.name = <span class="stringliteral">&quot;my_device&quot;</span></div>
+<div class="line"><span class="lineno">   30</span>        self.midi.ports.outports = [mock_out]</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>        topic = <span class="stringliteral">&quot;OPEN-AIR/MIDI/my_device/ch0/cc7&quot;</span></div>
 <div class="line"><span class="lineno">   33</span>        value = {<span class="stringliteral">&quot;value&quot;</span>: 127}</div>
@@ -212,15 +211,15 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   36</span>            self.midi.publish(topic, value)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>        <span class="comment"># Verify mido.Message was sent</span></div>
-<div class="line"><span class="lineno">   39</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.called</a>)</div>
-<div class="line"><span class="lineno">   40</span>        message = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.call_args</a>[0][0]</div>
-<div class="line"><span class="lineno">   41</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.type</a>, <span class="stringliteral">&#39;control_change&#39;</span>)</div>
-<div class="line"><span class="lineno">   42</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.channel</a>, 0)</div>
-<div class="line"><span class="lineno">   43</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.control</a>, 7)</div>
-<div class="line"><span class="lineno">   44</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.value</a>, 127)</div>
+<div class="line"><span class="lineno">   39</span>        self.assertTrue(mock_out.send.called)</div>
+<div class="line"><span class="lineno">   40</span>        message = mock_out.send.call_args[0][0]</div>
+<div class="line"><span class="lineno">   41</span>        self.assertEqual(message.type, <span class="stringliteral">&#39;control_change&#39;</span>)</div>
+<div class="line"><span class="lineno">   42</span>        self.assertEqual(message.channel, 0)</div>
+<div class="line"><span class="lineno">   43</span>        self.assertEqual(message.control, 7)</div>
+<div class="line"><span class="lineno">   44</span>        self.assertEqual(message.value, 127)</div>
 <div class="line"><span class="lineno">   45</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, and <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>.</p>
 
 </div>
 </div>
@@ -244,8 +243,8 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>    <span class="keyword">def </span>test_publish_note_to_midi(self):</div>
 <div class="line"><span class="lineno">   47</span>        <span class="stringliteral">&quot;&quot;&quot;Test that a system Note topic is correctly translated and sent to MIDI ports.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   48</span>        mock_out = MagicMock()</div>
-<div class="line"><span class="lineno">   49</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.name</a> = <span class="stringliteral">&quot;my_device&quot;</span></div>
-<div class="line"><span class="lineno">   50</span>        self.midi.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">ports.outports</a> = [mock_out]</div>
+<div class="line"><span class="lineno">   49</span>        mock_out.name = <span class="stringliteral">&quot;my_device&quot;</span></div>
+<div class="line"><span class="lineno">   50</span>        self.midi.ports.outports = [mock_out]</div>
 <div class="line"><span class="lineno">   51</span> </div>
 <div class="line"><span class="lineno">   52</span>        topic = <span class="stringliteral">&quot;OPEN-AIR/MIDI/my_device/ch2/note60&quot;</span></div>
 <div class="line"><span class="lineno">   53</span>        value = 100</div>
@@ -254,15 +253,15 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   56</span>            self.midi.publish(topic, value)</div>
 <div class="line"><span class="lineno">   57</span> </div>
 <div class="line"><span class="lineno">   58</span>        <span class="comment"># Verify mido.Message was sent</span></div>
-<div class="line"><span class="lineno">   59</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.called</a>)</div>
-<div class="line"><span class="lineno">   60</span>        message = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_out.send.call_args</a>[0][0]</div>
-<div class="line"><span class="lineno">   61</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.type</a>, <span class="stringliteral">&#39;note_on&#39;</span>)</div>
-<div class="line"><span class="lineno">   62</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.channel</a>, 2)</div>
-<div class="line"><span class="lineno">   63</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.note</a>, 60)</div>
-<div class="line"><span class="lineno">   64</span>        self.assertEqual(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">message.velocity</a>, 100)</div>
+<div class="line"><span class="lineno">   59</span>        self.assertTrue(mock_out.send.called)</div>
+<div class="line"><span class="lineno">   60</span>        message = mock_out.send.call_args[0][0]</div>
+<div class="line"><span class="lineno">   61</span>        self.assertEqual(message.type, <span class="stringliteral">&#39;note_on&#39;</span>)</div>
+<div class="line"><span class="lineno">   62</span>        self.assertEqual(message.channel, 2)</div>
+<div class="line"><span class="lineno">   63</span>        self.assertEqual(message.note, 60)</div>
+<div class="line"><span class="lineno">   64</span>        self.assertEqual(message.velocity, 100)</div>
 <div class="line"><span class="lineno">   65</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../dd/d35/test__midi_8py_source.html#l00031">Tests.test_midi.TestMidiManager.midi</a>, <a class="el" href="../../d4/de0/test__midi__standalone_8py_source.html#l00018">Tests.test_midi_standalone.TestMidiStandalone.midi</a>, and <a class="el" href="../../d3/d99/test__midi__tx_8py_source.html#l00019">Tests.test_midi_tx.TestMidiTx.midi</a>.</p>
 
 </div>
 </div>

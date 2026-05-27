@@ -28,7 +28,7 @@ current_version = "20251226.000000.1"
 current_version_hash = (20251226 * 0 * 1)
 current_file = f"{os.path.basename(__file__)}"
 
-MQTT_BASE_TOPIC = "OPEN-AIR/repository/markers"
+MQTT_BASE_TOPIC = "OpenAir/repository/markers"
 
 
 # Recursively publishes all key-value pairs of a nested dictionary to MQTT.

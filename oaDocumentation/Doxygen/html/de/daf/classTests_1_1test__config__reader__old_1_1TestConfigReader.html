@@ -137,15 +137,12 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html#l00019">19</a> of file <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html">test_config_reader_old.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   19</span>    <span class="keyword">def </span>test_default_values(self):</div>
 <div class="line"><span class="lineno">   20</span>        <span class="stringliteral">&quot;&quot;&quot;Test that default values are present after initialization.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   21</span>        config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
+<div class="line"><span class="lineno">   21</span>        config = Config.get_instance()</div>
 <div class="line"><span class="lineno">   22</span>        <span class="comment"># These are likely to exist if initialized.</span></div>
-<div class="line"><span class="lineno">   23</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(config, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>), <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS missing&quot;</span>)</div>
-<div class="line"><span class="lineno">   24</span>        self.assertTrue(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(config, <span class="stringliteral">&quot;CURRENT_VERSION&quot;</span>), <span class="stringliteral">&quot;CURRENT_VERSION missing&quot;</span>)</div>
+<div class="line"><span class="lineno">   23</span>        self.assertTrue(hasattr(config, <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS&quot;</span>), <span class="stringliteral">&quot;MQTT_BROKER_ADDRESS missing&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>        self.assertTrue(hasattr(config, <span class="stringliteral">&quot;CURRENT_VERSION&quot;</span>), <span class="stringliteral">&quot;CURRENT_VERSION missing&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a768f5964f309a4e58154356f4e7046ad" name="a768f5964f309a4e58154356f4e7046ad"></a>
@@ -167,15 +164,13 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html#l00026">26</a> of file <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html">test_config_reader_old.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   26</span>    <span class="keyword">def </span>test_global_settings_property(self):</div>
 <div class="line"><span class="lineno">   27</span>        <span class="stringliteral">&quot;&quot;&quot;Test the global_settings property.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   28</span>        config = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
-<div class="line"><span class="lineno">   29</span>        settings = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">config.global_settings</a></div>
+<div class="line"><span class="lineno">   28</span>        config = Config.get_instance()</div>
+<div class="line"><span class="lineno">   29</span>        settings = config.global_settings</div>
 <div class="line"><span class="lineno">   30</span>        self.assertIsInstance(settings, dict)</div>
 <div class="line"><span class="lineno">   31</span>        self.assertIn(<span class="stringliteral">&quot;general_debug_enabled&quot;</span>, settings)</div>
 <div class="line"><span class="lineno">   32</span>        self.assertIn(<span class="stringliteral">&quot;debug_enabled&quot;</span>, settings)</div>
 <div class="line"><span class="lineno">   33</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="aa3810f77467761c98650f008654910a7" name="aa3810f77467761c98650f008654910a7"></a>
@@ -197,13 +192,11 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html#l00013">13</a> of file <a class="el" href="../../d4/de7/test__config__reader__old_8py_source.html">test_config_reader_old.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>    <span class="keyword">def </span>test_singleton(self):</div>
 <div class="line"><span class="lineno">   14</span>        <span class="stringliteral">&quot;&quot;&quot;Test that the Config class acts as a singleton.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   15</span>        instance1 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
-<div class="line"><span class="lineno">   16</span>        instance2 = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">Config.get_instance</a>()</div>
+<div class="line"><span class="lineno">   15</span>        instance1 = Config.get_instance()</div>
+<div class="line"><span class="lineno">   16</span>        instance2 = Config.get_instance()</div>
 <div class="line"><span class="lineno">   17</span>        self.assertIs(instance1, instance2, <span class="stringliteral">&quot;Config instance is not the same&quot;</span>)</div>
 <div class="line"><span class="lineno">   18</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

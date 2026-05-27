@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('d2/d00/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:51:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1159"></a> </p>
-<h1><a class="anchor" id="autotoc_md1160"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1424"></a> </p>
+<h1><a class="anchor" id="autotoc_md1425"></a>
 Issues</h1>
 <p>This report details the resolution of an <code>ImportError</code> in the Rust extension tests for <code>oacorerouter_rs</code>.</p>
-<h1><a class="anchor" id="autotoc_md1161"></a>
+<h1><a class="anchor" id="autotoc_md1426"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1162"></a>
+<h2><a class="anchor" id="autotoc_md1427"></a>
 1. Stale Binary Shadowing in Tests</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;ImportError: cannot import name 'sum_as_string&rsquo; from 'oacorerouter_rs.oacorerouter_rs'<code>during unit tests.</code></li>
@@ -111,7 +111,7 @@ Root Causes &amp; Resolutions</h1>
 </code></li>
 </ul>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1163"></a>
+<h1><a class="anchor" id="autotoc_md1428"></a>
 Affected Modules</h1>
 <p><code></code></p>
 <p><code></p><ul>
@@ -119,7 +119,7 @@ Affected Modules</h1>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md1164"></a>
+<h1><a class="anchor" id="autotoc_md1429"></a>
 Verification</h1>
 <p><code></code></p>
 <p><code>The tests have been updated to be more resilient to environment inconsistencies and now verify the actual core logic of the router in addition to the boilerplate helper functions. </code></p>

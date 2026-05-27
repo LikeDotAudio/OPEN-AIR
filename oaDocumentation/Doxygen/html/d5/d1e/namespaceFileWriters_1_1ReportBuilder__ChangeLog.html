@@ -124,8 +124,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   12</span><span class="stringliteral">    Reads the main CHANGELOG.md and returns an HTML snippet for the tab content.</span></div>
 <div class="line"><span class="lineno">   13</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   14</span>    changelog_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.join</a>(data_dir, <span class="stringliteral">&quot;CHANGELOG.md&quot;</span>)</div>
-<div class="line"><span class="lineno">   15</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.exists</a>(changelog_path):</div>
+<div class="line"><span class="lineno">   14</span>    changelog_path = os.path.join(data_dir, <span class="stringliteral">&quot;CHANGELOG.md&quot;</span>)</div>
+<div class="line"><span class="lineno">   15</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(changelog_path):</div>
 <div class="line"><span class="lineno">   16</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;h3&gt;No Change Logs Found&lt;/h3&gt;&lt;p&gt;Ensure CHANGELOG.md exists in the data directory.&lt;/p&gt;&quot;</span></div>
 <div class="line"><span class="lineno">   17</span> </div>
 <div class="line"><span class="lineno">   18</span>    <span class="keyword">from</span> collections <span class="keyword">import</span> deque</div>
@@ -133,7 +133,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   20</span>        <span class="keyword">with</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a>(changelog_path) <span class="keyword">as</span> f:</div>
 <div class="line"><span class="lineno">   21</span>            <span class="comment"># Use deque to efficiently keep only the last 1000 lines</span></div>
 <div class="line"><span class="lineno">   22</span>            lines = deque(f, maxlen=1000)</div>
-<div class="line"><span class="lineno">   23</span>            content = <span class="stringliteral">&quot;&quot;</span>.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">join</a>(lines)</div>
+<div class="line"><span class="lineno">   23</span>            content = <span class="stringliteral">&quot;&quot;</span>.join(lines)</div>
 <div class="line"><span class="lineno">   24</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   25</span>        <span class="keywordflow">return</span> f<span class="stringliteral">&quot;&lt;h3&gt;Error Reading Change Log&lt;/h3&gt;&lt;p&gt;{e}&lt;/p&gt;&quot;</span></div>
 <div class="line"><span class="lineno">   26</span> </div>
@@ -147,10 +147,9 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   34</span><span class="stringliteral">    &lt;/div&gt;</span></div>
 <div class="line"><span class="lineno">   35</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   36</span>    <span class="keywordflow">return</span> html</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_aa8ef7bba54ee37a8beab56f5091c552f"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#aa8ef7bba54ee37a8beab56f5091c552f">open</a></div><div class="ttdeci">open</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">generated.rs:2614</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02614">open</a>.</p>
 
 </div>
 </div>

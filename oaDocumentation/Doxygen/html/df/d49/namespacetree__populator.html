@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('df/d49/namespacetree__populator.html',
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a923190e0640adf54026b1d174713bca7" id="r_a923190e0640adf54026b1d174713bca7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d49/namespacetree__populator.html#a923190e0640adf54026b1d174713bca7">populate_tree</a> (tree, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parent_node</a>, <a class="el" href="../../d1/d2c/oa__editor__state__rs_2mod_8rs.html#a640275e0eed2426caacf63f5f66286b7">data</a>)</td></tr>
+<tr class="memitem:a923190e0640adf54026b1d174713bca7" id="r_a923190e0640adf54026b1d174713bca7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d49/namespacetree__populator.html#a923190e0640adf54026b1d174713bca7">populate_tree</a> (tree, parent_node, <a class="el" href="../../d1/d2c/oa__editor__state__rs_2mod_8rs.html#a640275e0eed2426caacf63f5f66286b7">data</a>)</td></tr>
 <tr class="separator:a923190e0640adf54026b1d174713bca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -139,30 +139,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">    8</span>    <span class="stringliteral">&quot;&quot;&quot;Recursively populates the tree from JSON data.&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">    9</span> </div>
 <div class="line"><span class="lineno">   10</span>    <span class="comment"># Handle List (e.g. OcaArray.data)</span></div>
-<div class="line"><span class="lineno">   11</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, list):</div>
-<div class="line"><span class="lineno">   12</span>        <span class="keywordflow">for</span> i, value <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">enumerate</a>(data):</div>
+<div class="line"><span class="lineno">   11</span>    <span class="keywordflow">if</span> isinstance(data, list):</div>
+<div class="line"><span class="lineno">   12</span>        <span class="keywordflow">for</span> i, value <span class="keywordflow">in</span> enumerate(data):</div>
 <div class="line"><span class="lineno">   13</span>            node_text = f<span class="stringliteral">&quot;[{i}]&quot;</span></div>
 <div class="line"><span class="lineno">   14</span>            node_type = <span class="stringliteral">&quot;Data&quot;</span></div>
 <div class="line"><span class="lineno">   15</span> </div>
 <div class="line"><span class="lineno">   16</span>            <span class="comment"># Heuristic: try to find an id or description for the list item</span></div>
-<div class="line"><span class="lineno">   17</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, dict):</div>
-<div class="line"><span class="lineno">   18</span>                node_type = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.get</a>(<span class="stringliteral">&quot;type&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.get</a>(<span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;Item&quot;</span>))</div>
+<div class="line"><span class="lineno">   17</span>            <span class="keywordflow">if</span> isinstance(value, dict):</div>
+<div class="line"><span class="lineno">   18</span>                node_type = value.get(<span class="stringliteral">&quot;type&quot;</span>, value.get(<span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;Item&quot;</span>))</div>
 <div class="line"><span class="lineno">   19</span>                node_text = f<span class="stringliteral">&quot;[{i}] {value.get(&#39;description&#39;, value.get(&#39;id&#39;, &#39;Item&#39;))}&quot;</span></div>
 <div class="line"><span class="lineno">   20</span> </div>
 <div class="line"><span class="lineno">   21</span>            <span class="comment"># Path construction for list item</span></div>
 <div class="line"><span class="lineno">   22</span>            parent_path = <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   23</span>            <span class="keywordflow">if</span> parent_node != <span class="stringliteral">&quot;&quot;</span>:</div>
-<div class="line"><span class="lineno">   24</span>                p_info = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.item</a>(parent_node, <span class="stringliteral">&quot;values&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>                p_info = tree.item(parent_node, <span class="stringliteral">&quot;values&quot;</span>)</div>
 <div class="line"><span class="lineno">   25</span>                <span class="keywordflow">if</span> p_info: parent_path = p_info[0]</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>            full_path = f<span class="stringliteral">&quot;{parent_path}.{i}&quot;</span> <span class="keywordflow">if</span> parent_path <span class="keywordflow">else</span> str(i)</div>
 <div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>            node_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.insert</a>(parent_node, <span class="stringliteral">&quot;end&quot;</span>, text=node_text, values=(full_path, node_type), open=<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (dict, list)) <span class="keywordflow">and</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value) &gt; 0:</div>
-<div class="line"><span class="lineno">   31</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.insert</a>(node_id, <span class="stringliteral">&quot;end&quot;</span>, text=<span class="stringliteral">&quot;Loading...&quot;</span>, values=(<span class="stringliteral">&quot;dummy&quot;</span>, <span class="stringliteral">&quot;dummy&quot;</span>))</div>
+<div class="line"><span class="lineno">   29</span>            node_id = tree.insert(parent_node, <span class="stringliteral">&quot;end&quot;</span>, text=node_text, values=(full_path, node_type), open=<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">if</span> isinstance(value, (dict, list)) <span class="keywordflow">and</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value) &gt; 0:</div>
+<div class="line"><span class="lineno">   31</span>                tree.insert(node_id, <span class="stringliteral">&quot;end&quot;</span>, text=<span class="stringliteral">&quot;Loading...&quot;</span>, values=(<span class="stringliteral">&quot;dummy&quot;</span>, <span class="stringliteral">&quot;dummy&quot;</span>))</div>
 <div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data, dict): <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(data, dict): <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   35</span> </div>
 <div class="line"><span class="lineno">   36</span>    <span class="comment"># Determine container items based on standard keys</span></div>
 <div class="line"><span class="lineno">   37</span>    items = []</div>
@@ -172,53 +172,52 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>    <span class="comment"># ⚡ IMPROVED ROOT HANDLING</span></div>
 <div class="line"><span class="lineno">   43</span>    <span class="keywordflow">if</span> parent_node == <span class="stringliteral">&quot;&quot;</span>:</div>
-<div class="line"><span class="lineno">   44</span>        root_keys = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data.keys</a>())</div>
-<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(root_keys) == 1 <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(data[root_keys[0]], dict):</div>
+<div class="line"><span class="lineno">   44</span>        root_keys = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>(data.keys())</div>
+<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(root_keys) == 1 <span class="keywordflow">and</span> isinstance(data[root_keys[0]], dict):</div>
 <div class="line"><span class="lineno">   46</span>            k = root_keys[0]</div>
-<div class="line"><span class="lineno">   47</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">items.append</a>((k, data[k], k))</div>
+<div class="line"><span class="lineno">   47</span>            items.append((k, data[k], k))</div>
 <div class="line"><span class="lineno">   48</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data.items</a>():</div>
-<div class="line"><span class="lineno">   50</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">items.append</a>((k, v, k))</div>
+<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> data.items():</div>
+<div class="line"><span class="lineno">   50</span>                items.append((k, v, k))</div>
 <div class="line"><span class="lineno">   51</span>    <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   52</span>        <span class="comment"># Check for standard containers</span></div>
 <div class="line"><span class="lineno">   53</span>        found_standard = <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">for</span> ck <span class="keywordflow">in</span> container_keys:</div>
 <div class="line"><span class="lineno">   55</span>            <span class="keywordflow">if</span> ck <span class="keywordflow">in</span> data:</div>
-<div class="line"><span class="lineno">   56</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">items.append</a>((ck, data[ck], ck))</div>
+<div class="line"><span class="lineno">   56</span>                items.append((ck, data[ck], ck))</div>
 <div class="line"><span class="lineno">   57</span>                found_standard = <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>        <span class="comment"># Fallback for custom structures</span></div>
 <div class="line"><span class="lineno">   60</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> found_standard:</div>
 <div class="line"><span class="lineno">   61</span>            exclude = [<span class="stringliteral">&quot;type&quot;</span>, <span class="stringliteral">&quot;description&quot;</span>, <span class="stringliteral">&quot;layout&quot;</span>, <span class="stringliteral">&quot;geometry&quot;</span>, <span class="stringliteral">&quot;domain&quot;</span>, <span class="stringliteral">&quot;dynamics&quot;</span>, <span class="stringliteral">&quot;cosmetics&quot;</span>, <span class="stringliteral">&quot;behavior&quot;</span>]</div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data.items</a>():</div>
-<div class="line"><span class="lineno">   63</span>                <span class="keywordflow">if</span> k <span class="keywordflow">not</span> <span class="keywordflow">in</span> exclude <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(v, (dict, list)):</div>
-<div class="line"><span class="lineno">   64</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">items.append</a>((k, v, k))</div>
+<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">for</span> k, v <span class="keywordflow">in</span> data.items():</div>
+<div class="line"><span class="lineno">   63</span>                <span class="keywordflow">if</span> k <span class="keywordflow">not</span> <span class="keywordflow">in</span> exclude <span class="keywordflow">and</span> isinstance(v, (dict, list)):</div>
+<div class="line"><span class="lineno">   64</span>                    items.append((k, v, k))</div>
 <div class="line"><span class="lineno">   65</span> </div>
 <div class="line"><span class="lineno">   66</span>    <span class="keywordflow">for</span> key, value, relative_path <span class="keywordflow">in</span> items:</div>
 <div class="line"><span class="lineno">   67</span>        node_text = key</div>
 <div class="line"><span class="lineno">   68</span>        node_type = <span class="stringliteral">&quot;Element&quot;</span></div>
 <div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, dict):</div>
-<div class="line"><span class="lineno">   71</span>            node_type = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">value.get</a>(<span class="stringliteral">&quot;type&quot;</span>, <span class="stringliteral">&quot;Block&quot;</span>)</div>
+<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> isinstance(value, dict):</div>
+<div class="line"><span class="lineno">   71</span>            node_type = value.get(<span class="stringliteral">&quot;type&quot;</span>, <span class="stringliteral">&quot;Block&quot;</span>)</div>
 <div class="line"><span class="lineno">   72</span>            node_text = f<span class="stringliteral">&quot;{key} ({node_type})&quot;</span></div>
 <div class="line"><span class="lineno">   73</span> </div>
 <div class="line"><span class="lineno">   74</span>        <span class="comment"># Full path for state manager operations</span></div>
 <div class="line"><span class="lineno">   75</span>        parent_path = <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   76</span>        <span class="keywordflow">if</span> parent_node != <span class="stringliteral">&quot;&quot;</span>:</div>
-<div class="line"><span class="lineno">   77</span>            p_info = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.item</a>(parent_node, <span class="stringliteral">&quot;values&quot;</span>)</div>
+<div class="line"><span class="lineno">   77</span>            p_info = tree.item(parent_node, <span class="stringliteral">&quot;values&quot;</span>)</div>
 <div class="line"><span class="lineno">   78</span>            <span class="keywordflow">if</span> p_info: parent_path = p_info[0]</div>
 <div class="line"><span class="lineno">   79</span> </div>
 <div class="line"><span class="lineno">   80</span>        full_path = f<span class="stringliteral">&quot;{parent_path}.{relative_path}&quot;</span> <span class="keywordflow">if</span> parent_path <span class="keywordflow">else</span> relative_path</div>
 <div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>        node_id = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.insert</a>(parent_node, <span class="stringliteral">&quot;end&quot;</span>, text=node_text, values=(full_path, node_type), open=<span class="keyword">False</span>)</div>
+<div class="line"><span class="lineno">   82</span>        node_id = tree.insert(parent_node, <span class="stringliteral">&quot;end&quot;</span>, text=node_text, values=(full_path, node_type), open=<span class="keyword">False</span>)</div>
 <div class="line"><span class="lineno">   83</span> </div>
-<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, (dict, list)) <span class="keywordflow">and</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value) &gt; 0:</div>
-<div class="line"><span class="lineno">   85</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tree.insert</a>(node_id, <span class="stringliteral">&quot;end&quot;</span>, text=<span class="stringliteral">&quot;Loading...&quot;</span>, values=(<span class="stringliteral">&quot;dummy&quot;</span>, <span class="stringliteral">&quot;dummy&quot;</span>))</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">if</span> isinstance(value, (dict, list)) <span class="keywordflow">and</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(value) &gt; 0:</div>
+<div class="line"><span class="lineno">   85</span>            tree.insert(node_id, <span class="stringliteral">&quot;end&quot;</span>, text=<span class="stringliteral">&quot;Loading...&quot;</span>, values=(<span class="stringliteral">&quot;dummy&quot;</span>, <span class="stringliteral">&quot;dummy&quot;</span>))</div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6bbb80367a84ef6bc36dcf82df1fea55"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a></div><div class="ttdeci">list</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">generated.rs:2513</a></div></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02513">list</a>.</p>
 
 </div>
 </div>

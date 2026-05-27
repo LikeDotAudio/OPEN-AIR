@@ -162,15 +162,14 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00017">17</a> of file <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html">sync_queue_mixin.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   17</span>    <span class="keyword">def </span>_initialize_queues(self):</div>
-<div class="line"><span class="lineno">   18</span>        self._registration_queue = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.Queue</a>()</div>
-<div class="line"><span class="lineno">   19</span>        self.update_queue = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.Queue</a>()</div>
+<div class="line"><span class="lineno">   18</span>        self._registration_queue = queue.Queue()</div>
+<div class="line"><span class="lineno">   19</span>        self.update_queue = queue.Queue()</div>
 <div class="line"><span class="lineno">   20</span>        self._processing_scheduled = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   21</span>        self._schedule_lock = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Lock</a>()</div>
+<div class="line"><span class="lineno">   21</span>        self._schedule_lock = threading.Lock()</div>
 <div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>        self._reg_thread = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.Thread</a>(target=self._registration_worker, daemon=<span class="keyword">True</span>)</div>
+<div class="line"><span class="lineno">   23</span>        self._reg_thread = threading.Thread(target=self._registration_worker, daemon=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">   24</span>        self._reg_thread.start()</div>
 <div class="line"><span class="lineno">   25</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -200,28 +199,28 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00045">45</a> of file <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html">sync_queue_mixin.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   45</span>    <span class="keyword">def </span>_process_queue(self):</div>
-<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self, <span class="stringliteral">&#39;is_inert&#39;</span>, <span class="keyword">True</span>): <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">if</span> getattr(self, <span class="stringliteral">&#39;is_inert&#39;</span>, <span class="keyword">True</span>): <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   47</span>        count = 0</div>
 <div class="line"><span class="lineno">   48</span>        <span class="keywordflow">while</span> count &lt; 1000:</div>
 <div class="line"><span class="lineno">   49</span>            <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   50</span>                tk_var, value, widget_id = self.update_queue.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">get_nowait</a>()</div>
+<div class="line"><span class="lineno">   50</span>                tk_var, value, widget_id = self.update_queue.get_nowait()</div>
 <div class="line"><span class="lineno">   51</span>                count += 1</div>
 <div class="line"><span class="lineno">   52</span>                <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   53</span>                    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_var.get</a>() == value: <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">   54</span>                <span class="keywordflow">except</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk.TclError</a> <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">   53</span>                    <span class="keywordflow">if</span> tk_var.get() == value: <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">   54</span>                <span class="keywordflow">except</span> tk.TclError <span class="keyword">as</span> e:</div>
 <div class="line"><span class="lineno">   55</span>                    <span class="comment"># Specific exception for Tkinter errors to avoid masking underlying issues</span></div>
-<div class="line"><span class="lineno">   56</span>                    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.warning</a>(f<span class="stringliteral">&quot;⚠️ [GUI] Failed to read tk_var for widget_id {widget_id}: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   56</span>                    logger.warning(f<span class="stringliteral">&quot;⚠️ [GUI] Failed to read tk_var for widget_id {widget_id}: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   57</span>                    <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>                self._silent_update = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   60</span>                <span class="keywordflow">try</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">tk_var.set</a>(value)</div>
+<div class="line"><span class="lineno">   60</span>                <span class="keywordflow">try</span>: tk_var.set(value)</div>
 <div class="line"><span class="lineno">   61</span>                <span class="keywordflow">finally</span>: self._silent_update = <span class="keyword">False</span></div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">except</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">queue.Empty</a>: <span class="keywordflow">break</span></div>
+<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">except</span> queue.Empty: <span class="keywordflow">break</span></div>
 <div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.update_queue.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">empty</a>():</div>
+<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.update_queue.empty():</div>
 <div class="line"><span class="lineno">   65</span>            self._schedule_queue_processing()</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00019">Core.sync_queue_mixin.SyncQueueMixin.update_queue</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00019">Core.sync_queue_mixin.SyncQueueMixin.update_queue</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00040">Core.sync_queue_mixin.SyncQueueMixin._process_queue_wrapper()</a>.</p>
 
@@ -325,14 +324,14 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00033">33</a> of file <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html">sync_queue_mixin.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   33</span>    <span class="keyword">def </span>_schedule_queue_processing(self):</div>
-<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self, <span class="stringliteral">&#39;is_inert&#39;</span>, <span class="keyword">True</span>): <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">if</span> getattr(self, <span class="stringliteral">&#39;is_inert&#39;</span>, <span class="keyword">True</span>): <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   35</span>        <span class="keyword">with</span> self._schedule_lock:</div>
-<div class="line"><span class="lineno">   36</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">getattr</a>(self, <span class="stringliteral">&#39;_processing_scheduled&#39;</span>, <span class="keyword">False</span>): <span class="keywordflow">return</span></div>
+<div class="line"><span class="lineno">   36</span>            <span class="keywordflow">if</span> getattr(self, <span class="stringliteral">&#39;_processing_scheduled&#39;</span>, <span class="keyword">False</span>): <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   37</span>            self._processing_scheduled = <span class="keyword">True</span></div>
-<div class="line"><span class="lineno">   38</span>        self.root.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">after</a>(0, self._process_queue_wrapper)</div>
+<div class="line"><span class="lineno">   38</span>        self.root.after(0, self._process_queue_wrapper)</div>
 <div class="line"><span class="lineno">   39</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00020">Core.sync_queue_mixin.SyncQueueMixin._processing_scheduled</a>, <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00021">Core.sync_queue_mixin.SyncQueueMixin._schedule_lock</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00020">Core.sync_queue_mixin.SyncQueueMixin._processing_scheduled</a>, and <a class="el" href="../../d2/daf/sync__queue__mixin_8py_source.html#l00021">Core.sync_queue_mixin.SyncQueueMixin._schedule_lock</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/d72/state__mirror__engine_8py_source.html#l00155">Core.state_mirror_engine.StateMirrorEngine.initialize_widget_state()</a>, and <a class="el" href="../../d7/d72/state__mirror__engine_8py_source.html#l00279">Core.state_mirror_engine.StateMirrorEngine.sync_incoming_mqtt_to_gui()</a>.</p>
 

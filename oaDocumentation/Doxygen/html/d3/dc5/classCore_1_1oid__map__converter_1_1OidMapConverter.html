@@ -101,9 +101,9 @@ $(document).ready(function(){initNavTree('d3/dc5/classCore_1_1oid__map__converte
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a30b6713cc344957d1a0c4be70642ba35" id="r_a30b6713cc344957d1a0c4be70642ba35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a30b6713cc344957d1a0c4be70642ba35">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str <a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a658443d384addeae5635acf0de8ab19d">base_oid</a>, threading.RLock <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">thread_lock</a>)</td></tr>
+<tr class="memitem:a30b6713cc344957d1a0c4be70642ba35" id="r_a30b6713cc344957d1a0c4be70642ba35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a30b6713cc344957d1a0c4be70642ba35">__init__</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, str <a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a658443d384addeae5635acf0de8ab19d">base_oid</a>, threading.RLock thread_lock)</td></tr>
 <tr class="separator:a30b6713cc344957d1a0c4be70642ba35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86d1ecc23a22bc0c85998e7101e6bc1b" id="r_a86d1ecc23a22bc0c85998e7101e6bc1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a86d1ecc23a22bc0c85998e7101e6bc1b">build_oid_map</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, dict <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_snapshot</a>)</td></tr>
+<tr class="memitem:a86d1ecc23a22bc0c85998e7101e6bc1b" id="r_a86d1ecc23a22bc0c85998e7101e6bc1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc5/classCore_1_1oid__map__converter_1_1OidMapConverter.html#a86d1ecc23a22bc0c85998e7101e6bc1b">build_oid_map</a> (<a class="el" href="../../d4/dde/oa__core__router__rs_2mod_8rs.html#ae817cc2601857a58fd9b1e0d6aa916b4">self</a>, dict state_snapshot)</td></tr>
 <tr class="separator:a86d1ecc23a22bc0c85998e7101e6bc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -121,7 +121,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Responsible for converting MQTT topics and payload data into an SNMP OID map.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00029">29</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00031">31</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a30b6713cc344957d1a0c4be70642ba35" name="a30b6713cc344957d1a0c4be70642ba35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a30b6713cc344957d1a0c4be70642ba35">&#9670;&#160;</a></span>__init__()</h2>
@@ -160,23 +160,20 @@ Args:
     base_oid: The base OID for SNMP data.
     thread_lock: The RLock used by the calling manager for thread-safe access.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00034">34</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>    <span class="keyword">def </span>__init__(self, base_oid: str, thread_lock: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">threading.RLock</a>):</div>
-<div class="line"><span class="lineno">   35</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   36</span><span class="stringliteral">        Initializes the converter.</span></div>
-<div class="line"><span class="lineno">   37</span><span class="stringliteral">        </span></div>
-<div class="line"><span class="lineno">   38</span><span class="stringliteral">        Args:</span></div>
-<div class="line"><span class="lineno">   39</span><span class="stringliteral">            base_oid: The base OID for SNMP data.</span></div>
-<div class="line"><span class="lineno">   40</span><span class="stringliteral">            thread_lock: The RLock used by the calling manager for thread-safe access.</span></div>
-<div class="line"><span class="lineno">   41</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   42</span>        self.base_oid = base_oid</div>
-<div class="line"><span class="lineno">   43</span>        self._state_lock = thread_lock <span class="comment"># Use the provided lock for external state access</span></div>
-<div class="line"><span class="lineno">   44</span>        self.oid_map = {}</div>
-<div class="line"><span class="lineno">   45</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00036">36</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>    <span class="keyword">def </span>__init__(self, base_oid: str, thread_lock: threading.RLock):</div>
+<div class="line"><span class="lineno">   37</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   38</span><span class="stringliteral">        Initializes the converter.</span></div>
+<div class="line"><span class="lineno">   39</span><span class="stringliteral">        </span></div>
+<div class="line"><span class="lineno">   40</span><span class="stringliteral">        Args:</span></div>
+<div class="line"><span class="lineno">   41</span><span class="stringliteral">            base_oid: The base OID for SNMP data.</span></div>
+<div class="line"><span class="lineno">   42</span><span class="stringliteral">            thread_lock: The RLock used by the calling manager for thread-safe access.</span></div>
+<div class="line"><span class="lineno">   43</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   44</span>        self.base_oid = base_oid</div>
+<div class="line"><span class="lineno">   45</span>        self._state_lock = thread_lock <span class="comment"># Use the provided lock for external state access</span></div>
+<div class="line"><span class="lineno">   46</span>        self.oid_map = {}</div>
+<div class="line"><span class="lineno">   47</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -208,71 +205,73 @@ Args:
 <pre class="fragment">Updates the internal OID map from a state snapshot (MQTT topics/payloads).
 This method is designed to be called in a thread-safe context by the caller.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00046">46</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>    <span class="keyword">def </span>build_oid_map(self, state_snapshot: dict):</div>
-<div class="line"><span class="lineno">   47</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   48</span><span class="stringliteral">        Updates the internal OID map from a state snapshot (MQTT topics/payloads).</span></div>
-<div class="line"><span class="lineno">   49</span><span class="stringliteral">        This method is designed to be called in a thread-safe context by the caller.</span></div>
-<div class="line"><span class="lineno">   50</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   51</span>        new_oid_map = {}</div>
-<div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;snmp&quot;</span>, <span class="stringliteral">&quot;build_oid_map&quot;</span>,</div>
-<div class="line"><span class="lineno">   54</span>                   f<span class="stringliteral">&quot;OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
-<div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>        <span class="comment"># for topic, payload in state_snapshot.items():</span></div>
-<div class="line"><span class="lineno">   57</span>        <span class="comment">#     # ⚡ FILTER: Skip System control/status, Router, and large Blobs</span></div>
-<div class="line"><span class="lineno">   58</span>        <span class="comment">#     if any(x in topic for x in [&quot;/System/&quot;, &quot;/Control/&quot;, &quot;/Status/&quot;, &quot;/Router/&quot;]):</span></div>
-<div class="line"><span class="lineno">   59</span>        <span class="comment">#         continue</span></div>
-<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">for</span> topic, payload <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">state_snapshot.items</a>():</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>            <span class="comment"># ⚡ FILTER: Skip GUI Initialization and Discovery metadata</span></div>
-<div class="line"><span class="lineno">   63</span>            source = str(<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.get</a>(<span class="stringliteral">&quot;source&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">upper</a>() <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(payload, dict) <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">if</span> source <span class="keywordflow">in</span> [<span class="stringliteral">&quot;GUI-INIT&quot;</span>, <span class="stringliteral">&quot;GUI-LOAD&quot;</span>, <span class="stringliteral">&quot;SYSTEM-CONFIG&quot;</span>]:</div>
-<div class="line"><span class="lineno">   65</span>                <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">   66</span> </div>
-<div class="line"><span class="lineno">   67</span>            value = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">payload.get</a>(<span class="stringliteral">&quot;value&quot;</span>) <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(payload, dict) <span class="keywordflow">else</span> payload</div>
-<div class="line"><span class="lineno">   68</span> </div>
-<div class="line"><span class="lineno">   69</span>            <span class="comment"># ⚡ PERFORMANCE: Gracefully handle complex types instead of skipping</span></div>
-<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, dict):</div>
-<div class="line"><span class="lineno">   71</span>                val_str = <span class="stringliteral">&quot;DICT&quot;</span></div>
-<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(value, list):</div>
-<div class="line"><span class="lineno">   73</span>                val_str = <span class="stringliteral">&quot;LIST&quot;</span></div>
-<div class="line"><span class="lineno">   74</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   75</span>                val_str = str(value) <span class="keywordflow">if</span> value <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   76</span> </div>
-<div class="line"><span class="lineno">   77</span>            <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(val_str) &gt; OID_MAP_STR_LIMIT:</div>
-<div class="line"><span class="lineno">   78</span>                <span class="keywordflow">continue</span></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00048">48</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>    <span class="keyword">def </span>build_oid_map(self, state_snapshot: dict):</div>
+<div class="line"><span class="lineno">   49</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   50</span><span class="stringliteral">        Updates the internal OID map from a state snapshot (MQTT topics/payloads).</span></div>
+<div class="line"><span class="lineno">   51</span><span class="stringliteral">        This method is designed to be called in a thread-safe context by the caller.</span></div>
+<div class="line"><span class="lineno">   52</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   53</span>        new_oid_map = {}</div>
+<div class="line"><span class="lineno">   54</span> </div>
+<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">if</span> _is_debug():</div>
+<div class="line"><span class="lineno">   56</span>            matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;snmp&quot;</span>, <span class="stringliteral">&quot;build_oid_map&quot;</span>,</div>
+<div class="line"><span class="lineno">   57</span>                       f<span class="stringliteral">&quot;OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">   58</span> </div>
+<div class="line"><span class="lineno">   59</span>        <span class="comment"># for topic, payload in state_snapshot.items():</span></div>
+<div class="line"><span class="lineno">   60</span>        <span class="comment">#     # ⚡ FILTER: Skip System control/status, Router, and large Blobs</span></div>
+<div class="line"><span class="lineno">   61</span>        <span class="comment">#     if any(x in topic for x in [&quot;/System/&quot;, &quot;/Control/&quot;, &quot;/Status/&quot;, &quot;/Router/&quot;]):</span></div>
+<div class="line"><span class="lineno">   62</span>        <span class="comment">#         continue</span></div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">for</span> topic, payload <span class="keywordflow">in</span> state_snapshot.items():</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>            <span class="comment"># ⚡ FILTER: Skip GUI Initialization and Discovery metadata</span></div>
+<div class="line"><span class="lineno">   66</span>            source = str(payload.get(<span class="stringliteral">&quot;source&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)).upper() <span class="keywordflow">if</span> isinstance(payload, dict) <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">if</span> source <span class="keywordflow">in</span> [<span class="stringliteral">&quot;GUI-INIT&quot;</span>, <span class="stringliteral">&quot;GUI-LOAD&quot;</span>, <span class="stringliteral">&quot;SYSTEM-CONFIG&quot;</span>]:</div>
+<div class="line"><span class="lineno">   68</span>                <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>            value = payload.get(<span class="stringliteral">&quot;value&quot;</span>) <span class="keywordflow">if</span> isinstance(payload, dict) <span class="keywordflow">else</span> payload</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>            <span class="comment"># ⚡ PERFORMANCE: Gracefully handle complex types instead of skipping</span></div>
+<div class="line"><span class="lineno">   73</span>            <span class="keywordflow">if</span> isinstance(value, dict):</div>
+<div class="line"><span class="lineno">   74</span>                val_str = <span class="stringliteral">&quot;DICT&quot;</span></div>
+<div class="line"><span class="lineno">   75</span>            <span class="keywordflow">elif</span> isinstance(value, list):</div>
+<div class="line"><span class="lineno">   76</span>                val_str = <span class="stringliteral">&quot;LIST&quot;</span></div>
+<div class="line"><span class="lineno">   77</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   78</span>                val_str = str(value) <span class="keywordflow">if</span> value <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">else</span> <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>            parts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">topic.split</a>(<span class="stringliteral">&#39;/&#39;</span>)</div>
-<div class="line"><span class="lineno">   81</span>            <span class="keywordflow">if</span> parts[0] == <span class="stringliteral">&quot;OPEN-AIR&quot;</span>: parts = parts[1:]</div>
+<div class="line"><span class="lineno">   80</span>            <span class="keywordflow">if</span> <a class="code hl_function" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a>(val_str) &gt; OID_MAP_STR_LIMIT:</div>
+<div class="line"><span class="lineno">   81</span>                <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>            oid_nodes = [<span class="stringliteral">&quot;1&quot;</span>] <span class="comment"># Base OID node for dynamic data</span></div>
-<div class="line"><span class="lineno">   84</span>            path_acc = []</div>
-<div class="line"><span class="lineno">   85</span>            <span class="keywordflow">for</span> p <span class="keywordflow">in</span> parts:</div>
-<div class="line"><span class="lineno">   86</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">path_acc.append</a>(p)</div>
-<div class="line"><span class="lineno">   87</span>                <span class="comment"># Helper function to get SNMP node ID from path components</span></div>
-<div class="line"><span class="lineno">   88</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oid_nodes.append</a>(get_snmp_node_id(path_acc))</div>
-<div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>            full_oid = f<span class="stringliteral">&quot;{self.base_oid}.{&#39;.&#39;.join(oid_nodes)}&quot;</span></div>
-<div class="line"><span class="lineno">   91</span>            <span class="comment"># Helper function to get a human-readable descriptor</span></div>
-<div class="line"><span class="lineno">   92</span>            descriptor = get_snmp_descriptor(path_acc)</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>            new_oid_map[full_oid] = {</div>
-<div class="line"><span class="lineno">   95</span>                <span class="stringliteral">&quot;topic&quot;</span>: topic,</div>
-<div class="line"><span class="lineno">   96</span>                <span class="stringliteral">&quot;value&quot;</span>: val_str,</div>
-<div class="line"><span class="lineno">   97</span>                <span class="stringliteral">&quot;descriptor&quot;</span>: descriptor,</div>
-<div class="line"><span class="lineno">   98</span>                <span class="stringliteral">&quot;path_parts&quot;</span>: parts <span class="comment"># Keep original path parts for context if needed</span></div>
-<div class="line"><span class="lineno">   99</span>            }</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>        self.oid_map = new_oid_map <span class="comment"># Update internal map</span></div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>        matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;snmp&quot;</span>, <span class="stringliteral">&quot;build_oid_map&quot;</span>,</div>
-<div class="line"><span class="lineno">  104</span>                   f<span class="stringliteral">&quot;OidMapConverter: OID map built. Active objects: {len(self.oid_map)}&quot;</span>, <span class="stringliteral">&quot;DEBUG&quot;</span>)</div>
+<div class="line"><span class="lineno">   83</span>            parts = topic.split(<span class="stringliteral">&#39;/&#39;</span>)</div>
+<div class="line"><span class="lineno">   84</span>            <span class="keywordflow">if</span> parts[0] == <span class="stringliteral">&quot;OPEN-AIR&quot;</span>: parts = parts[1:]</div>
+<div class="line"><span class="lineno">   85</span> </div>
+<div class="line"><span class="lineno">   86</span>            oid_nodes = [<span class="stringliteral">&quot;1&quot;</span>] <span class="comment"># Base OID node for dynamic data</span></div>
+<div class="line"><span class="lineno">   87</span>            path_acc = []</div>
+<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">for</span> p <span class="keywordflow">in</span> parts:</div>
+<div class="line"><span class="lineno">   89</span>                path_acc.append(p)</div>
+<div class="line"><span class="lineno">   90</span>                <span class="comment"># Helper function to get SNMP node ID from path components</span></div>
+<div class="line"><span class="lineno">   91</span>                oid_nodes.append(get_snmp_node_id(path_acc))</div>
+<div class="line"><span class="lineno">   92</span> </div>
+<div class="line"><span class="lineno">   93</span>            full_oid = f<span class="stringliteral">&quot;{self.base_oid}.{&#39;.&#39;.join(oid_nodes)}&quot;</span></div>
+<div class="line"><span class="lineno">   94</span>            <span class="comment"># Helper function to get a human-readable descriptor</span></div>
+<div class="line"><span class="lineno">   95</span>            descriptor = get_snmp_descriptor(path_acc)</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>            new_oid_map[full_oid] = {</div>
+<div class="line"><span class="lineno">   98</span>                <span class="stringliteral">&quot;topic&quot;</span>: topic,</div>
+<div class="line"><span class="lineno">   99</span>                <span class="stringliteral">&quot;value&quot;</span>: val_str,</div>
+<div class="line"><span class="lineno">  100</span>                <span class="stringliteral">&quot;descriptor&quot;</span>: descriptor,</div>
+<div class="line"><span class="lineno">  101</span>                <span class="stringliteral">&quot;path_parts&quot;</span>: parts <span class="comment"># Keep original path parts for context if needed</span></div>
+<div class="line"><span class="lineno">  102</span>            }</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>        self.oid_map = new_oid_map <span class="comment"># Update internal map</span></div>
 <div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">return</span> self.oid_map</div>
+<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">if</span> _is_debug():</div>
+<div class="line"><span class="lineno">  107</span>            matrix_log(<span class="stringliteral">&quot;comms&quot;</span>, <span class="stringliteral">&quot;snmp&quot;</span>, <span class="stringliteral">&quot;build_oid_map&quot;</span>,</div>
+<div class="line"><span class="lineno">  108</span>                       f<span class="stringliteral">&quot;OidMapConverter: OID map built. Active objects: {len(self.oid_map)}&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>)</div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">return</span> self.oid_map</div>
 <div class="ttc" id="aoa__procedural__art__rs_2mod_8rs_html_a7fa61169d9e749ad77043c5f60289230"><div class="ttname"><a href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len</a></div><div class="ttdeci">if hex len() !</div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00044">Core.oid_map_converter.OidMapConverter.oid_map</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00056">Managers.snmp_manager.SNMPManager.oid_map</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00028">Core.oid_map_converter._is_debug()</a>, <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00046">Core.oid_map_converter.OidMapConverter.oid_map</a>, and <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00056">Managers.snmp_manager.SNMPManager.oid_map</a>.</p>
 
 </div>
 </div>
@@ -297,7 +296,7 @@ This method is designed to be called in a thread-safe context by the caller.
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00043">43</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00045">45</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00116">Managers.osc_manager.OSCManager._broadcast_status_loop()</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00173">Workers.logic_mqtt_listen.VisaMqttListener._connect_and_get_inst()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00155">Managers.osc_manager.OSCManager._notify_monitor()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00201">Managers.snmp_manager.SNMPManager._notify_monitor()</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00114">Workers.logic_mqtt_listen.VisaMqttListener._on_device_select()</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00141">Workers.logic_mqtt_listen.VisaMqttListener._on_gui_connect_request()</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00179">Workers.logic_mqtt_listen.VisaMqttListener._on_gui_disconnect_request()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00305">Managers.osc_manager.OSCManager._on_protocol_event()</a>, <a class="el" href="../../d0/d7f/logic__mqtt__listen_8py_source.html#l00090">Workers.logic_mqtt_listen.VisaMqttListener._on_search_request()</a>, <a class="el" href="../../da/d6b/snmp__state__persister_8py_source.html#l00094">Core.snmp_state_persister.SnmpStatePersister._persistence_loop()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00145">Managers.osc_manager.OSCManager.add_monitor_callback()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00219">Managers.snmp_manager.SNMPManager.add_monitor_callback()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00076">Managers.snmp_manager.SNMPManager.get_mqtt_state()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00134">Managers.osc_manager.OSCManager.get_status()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00188">Managers.snmp_manager.SNMPManager.get_status()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00258">Managers.osc_manager.OSCManager.handle_incoming_osc()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00133">Managers.snmp_manager.SNMPManager.handle_mqtt_message()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00064">Managers.snmp_manager.SNMPManager.register_mqtt_listener()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00354">Managers.osc_manager.OSCManager.register_route()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00150">Managers.osc_manager.OSCManager.remove_monitor_callback()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00224">Managers.snmp_manager.SNMPManager.remove_monitor_callback()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00070">Managers.snmp_manager.SNMPManager.remove_mqtt_listener()</a>, <a class="el" href="../../da/d6b/snmp__state__persister_8py_source.html#l00088">Core.snmp_state_persister.SnmpStatePersister.reset_delta_tracking()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00287">Managers.osc_manager.OSCManager.send()</a>, <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00216">Managers.osc_manager.OSCManager.start()</a>, and <a class="el" href="../../d8/d06/osc__manager_8py_source.html#l00234">Managers.osc_manager.OSCManager.stop()</a>.</p>
 
@@ -315,7 +314,7 @@ This method is designed to be called in a thread-safe context by the caller.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00042">42</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00044">44</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00255">Managers.snmp_manager.SNMPManager.get_installer_script()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00238">Managers.snmp_manager.SNMPManager.get_mib_content()</a>, <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00188">Managers.snmp_manager.SNMPManager.get_status()</a>, and <a class="el" href="../../d9/d12/snmp__manager_8py_source.html#l00233">Managers.snmp_manager.SNMPManager.run_verification()</a>.</p>
 
@@ -333,9 +332,9 @@ This method is designed to be called in a thread-safe context by the caller.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00044">44</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00046">46</a> of file <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html">oid_map_converter.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00046">Core.oid_map_converter.OidMapConverter.build_oid_map()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d3/d8e/oid__map__converter_8py_source.html#l00048">Core.oid_map_converter.OidMapConverter.build_oid_map()</a>.</p>
 
 </div>
 </div>

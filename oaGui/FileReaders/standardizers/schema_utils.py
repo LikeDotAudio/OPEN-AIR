@@ -17,6 +17,34 @@ def deep_merge(target, source):
             target[key] = value
     return target
 
+def coerce_pixel_size(value, fallback):
+    """Coerce a width/height value to int pixels.
+
+    Percent strings like "100%" mean "fill the parent" — they're a layout
+    directive, not a literal pixel count. The widget_schema_normalizer turns
+    them into Tk sticky bits at the geometry pillar, but some widget creators
+    (graph plotter, composite dials, button toggler) read width/height directly
+    from sub-config blocks that don't go through that normalizer. For those
+    sites, fall back to a sensible default size and let grid sticky/weight
+    handle the actual stretch.
+    """
+    if value is None:
+        return int(fallback) if fallback is not None else 0
+    if isinstance(value, bool):
+        return int(fallback) if fallback is not None else 0
+    if isinstance(value, (int, float)):
+        return int(value)
+    if isinstance(value, str):
+        s = value.strip()
+        if not s or s.endswith("%"):
+            return int(fallback) if fallback is not None else 0
+        try:
+            return int(float(s))
+        except (ValueError, TypeError):
+            return int(fallback) if fallback is not None else 0
+    return int(fallback) if fallback is not None else 0
+
+
 def expand_abbreviations(data):
     """Recursively translates Lexicon Abbreviations to Engine Keys."""
     if not isinstance(data, dict):

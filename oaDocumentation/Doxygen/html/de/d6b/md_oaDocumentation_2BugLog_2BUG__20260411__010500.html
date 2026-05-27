@@ -93,25 +93,25 @@ $(document).ready(function(){initNavTree('de/d6b/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: Ruler TypeError Fix</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1360"></a></p>
-<h1><a class="anchor" id="autotoc_md1361"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1625"></a></p>
+<h1><a class="anchor" id="autotoc_md1626"></a>
 Date: 2026-04-11 01:05:00</h1>
-<h1><a class="anchor" id="autotoc_md1362"></a>
+<h1><a class="anchor" id="autotoc_md1627"></a>
 Author: Gemini (Elite Bug-Fixing Architect)</h1>
-<h2><a class="anchor" id="autotoc_md1363"></a>
+<h2><a class="anchor" id="autotoc_md1628"></a>
 Issue</h2>
 <p>Tkinter callback error: &lsquo;TypeError: 'float&rsquo; object cannot be interpreted as an integer<code>in</code>oaGuiEditorWYSIWYG/Core/workspaces/Core/layout/ruler.py<code>during</code>redraw()`.</p>
-<h2><a class="anchor" id="autotoc_md1364"></a>
+<h2><a class="anchor" id="autotoc_md1629"></a>
 Root Cause</h2>
 <p>The <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range()</a></code> function in Python requires integer arguments for its <code>start</code>, <code>stop</code>, and <code>step</code> parameters. On certain canvas resize or scroll events, the calculated offsets and dimensions were being passed as floats, causing the UI thread to crash silently (filling the console but not stopping the app).</p>
-<h2><a class="anchor" id="autotoc_md1365"></a>
+<h2><a class="anchor" id="autotoc_md1630"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Surgical Fix</b>: Cast all <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a2185332cb740507fd92af736c19f90ad">range()</a></code> arguments (<code>start</code>, <code>w</code>, <code>h</code>, <code>step</code>) to <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int()</a></code> in <code><a class="el" href="../../d8/d9a/ruler_8py.html">ruler.py</a></code>.</li>
 <li><b>Proactive Cast</b>: Pre-cast <code>off_x</code> and <code>off_y</code> to <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a61569f2965b7a369eb10b6d75d410d11">int()</a></code> in <code><a class="el" href="../../df/d29/interactive__layout_8py.html">interactive_layout.py</a></code> before passing them to the rulers.</li>
 <li><b>Observability</b>: Wrapped <code>redraw()</code> in a <code>try-except</code> block and implemented <code>matrix_log</code> to capture any future failures in the system error logs instead of just the console.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1366"></a>
+<h2><a class="anchor" id="autotoc_md1631"></a>
 Verification</h2>
 <ul>
 <li>Created a verification script to mock <code>winfo_width</code> and <code>winfo_height</code> with float values and confirmed <code>redraw()</code> now handles them gracefully.</li>

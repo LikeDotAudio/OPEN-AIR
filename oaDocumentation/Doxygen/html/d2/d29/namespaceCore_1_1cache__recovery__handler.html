@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('d2/d29/namespaceCore_1_1cache__recover
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af6ccbe67163b8eec93cb3c913cd5f68a" id="r_af6ccbe67163b8eec93cb3c913cd5f68a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d29/namespaceCore_1_1cache__recovery__handler.html#af6ccbe67163b8eec93cb3c913cd5f68a">recover_corrupted_cache</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filepath</a>, exception)</td></tr>
+<tr class="memitem:af6ccbe67163b8eec93cb3c913cd5f68a" id="r_af6ccbe67163b8eec93cb3c913cd5f68a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d29/namespaceCore_1_1cache__recovery__handler.html#af6ccbe67163b8eec93cb3c913cd5f68a">recover_corrupted_cache</a> (filepath, exception)</td></tr>
 <tr class="separator:af6ccbe67163b8eec93cb3c913cd5f68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -129,28 +129,25 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <pre class="fragment">Handles state cache corruption by backing up the bad file and returning an empty state.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../db/da2/cache__recovery__handler_8py_source.html#l00015">15</a> of file <a class="el" href="../../db/da2/cache__recovery__handler_8py_source.html">cache_recovery_handler.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   15</span><span class="keyword">def </span>recover_corrupted_cache(filepath, exception):</div>
-<div class="line"><span class="lineno">   16</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   17</span><span class="stringliteral">    Handles state cache corruption by backing up the bad file and returning an empty state.</span></div>
-<div class="line"><span class="lineno">   18</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   19</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.critical</a>(f<span class="stringliteral">&quot;🧠💾🚫 [CACHE CORRUPTED] Critical error loading state cache: {filepath}&quot;</span>)</div>
-<div class="line"><span class="lineno">   20</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.critical</a>(f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>)</div>
-<div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filepath.exists</a>():</div>
-<div class="line"><span class="lineno">   23</span>        backup_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filepath.with_suffix</a>(f<span class="stringliteral">&quot;.corrupted_{datetime.datetime.now().strftime(&#39;%Y%m%d_%H%M%S&#39;)}.json&quot;</span>)</div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   25</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shutil.copy</a>(filepath, backup_path)</div>
-<div class="line"><span class="lineno">   26</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;🧠💾🛡️ [RECOVERY] Corrupted cache backed up to: {backup_path.name}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   28</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ Failed to create backup: {e}&quot;</span>)</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <span class="comment"># Return the definitive empty state</span></div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">return</span> {}</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../db/da2/cache__recovery__handler_8py_source.html#l00012">12</a> of file <a class="el" href="../../db/da2/cache__recovery__handler_8py_source.html">cache_recovery_handler.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   12</span><span class="keyword">def </span>recover_corrupted_cache(filepath, exception):</div>
+<div class="line"><span class="lineno">   13</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   14</span><span class="stringliteral">    Handles state cache corruption by backing up the bad file and returning an empty state.</span></div>
+<div class="line"><span class="lineno">   15</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   16</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;recover_corrupted_cache&quot;</span>, f<span class="stringliteral">&quot;🧠💾🚫 [CACHE CORRUPTED] Critical error loading state cache: {filepath}&quot;</span>, <span class="stringliteral">&quot;CRITICAL&quot;</span>)</div>
+<div class="line"><span class="lineno">   17</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;recover_corrupted_cache&quot;</span>, f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>, <span class="stringliteral">&quot;CRITICAL&quot;</span>)</div>
+<div class="line"><span class="lineno">   18</span> </div>
+<div class="line"><span class="lineno">   19</span>    <span class="keywordflow">if</span> filepath.exists():</div>
+<div class="line"><span class="lineno">   20</span>        backup_path = filepath.with_suffix(f<span class="stringliteral">&quot;.corrupted_{datetime.datetime.now().strftime(&#39;%Y%m%d_%H%M%S&#39;)}.json&quot;</span>)</div>
+<div class="line"><span class="lineno">   21</span>        <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">   22</span>            shutil.copy(filepath, backup_path)</div>
+<div class="line"><span class="lineno">   23</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;recover_corrupted_cache&quot;</span>, f<span class="stringliteral">&quot;🧠💾🛡️ [RECOVERY] Corrupted cache backed up to: {backup_path.name}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">   25</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;data&quot;</span>, <span class="stringliteral">&quot;recover_corrupted_cache&quot;</span>, f<span class="stringliteral">&quot;  └─ Failed to create backup: {e}&quot;</span>, <span class="stringliteral">&quot;ERROR&quot;</span>)</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>    <span class="comment"># Return the definitive empty state</span></div>
+<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">return</span> {}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

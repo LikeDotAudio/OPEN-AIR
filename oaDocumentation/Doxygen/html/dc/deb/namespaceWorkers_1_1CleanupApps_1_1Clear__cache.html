@@ -104,7 +104,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:adf86fac8994161d1ce3c30ffa6e98172" id="r_adf86fac8994161d1ce3c30ffa6e98172"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/deb/namespaceWorkers_1_1CleanupApps_1_1Clear__cache.html#adf86fac8994161d1ce3c30ffa6e98172">current_script_dir</a> = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td></tr>
+<tr class="memitem:adf86fac8994161d1ce3c30ffa6e98172" id="r_adf86fac8994161d1ce3c30ffa6e98172"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/deb/namespaceWorkers_1_1CleanupApps_1_1Clear__cache.html#adf86fac8994161d1ce3c30ffa6e98172">current_script_dir</a> = Path(__file__).resolve().parent</td></tr>
 <tr class="separator:adf86fac8994161d1ce3c30ffa6e98172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cb644c6c807c9af410a9b2984afedd8" id="r_a5cb644c6c807c9af410a9b2984afedd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/deb/namespaceWorkers_1_1CleanupApps_1_1Clear__cache.html#a5cb644c6c807c9af410a9b2984afedd8">datefmt</a></td></tr>
 <tr class="separator:a5cb644c6c807c9af410a9b2984afedd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,7 +154,7 @@ Excludes application logs but targets stateful data.
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># Specific files to remove</span></div>
 <div class="line"><span class="lineno">   44</span>    target_files = [</div>
 <div class="line"><span class="lineno">   45</span>        project_root / <span class="stringliteral">&quot;oaDataCache&quot;</span> / <span class="stringliteral">&quot;device_state_cache.json&quot;</span>,</div>
-<div class="line"><span class="lineno">   46</span>        project_root / <span class="stringliteral">&quot;oaDataCache&quot;</span> / <span class="stringliteral">&quot;layout_cache.json&quot;</span>,</div>
+<div class="line"><span class="lineno">   46</span>        project_root / <span class="stringliteral">&quot;oaDataCache&quot;</span> / <span class="stringliteral">&quot;cache_layout_store.json&quot;</span>,</div>
 <div class="line"><span class="lineno">   47</span>        project_root / <span class="stringliteral">&quot;oaComProtocols&quot;</span> / <span class="stringliteral">&quot;oaComSNMP&quot;</span> / <span class="stringliteral">&quot;Assets&quot;</span> / <span class="stringliteral">&quot;current.mib&quot;</span>,</div>
 <div class="line"><span class="lineno">   48</span>        project_root / <span class="stringliteral">&quot;oaComProtocols&quot;</span> / <span class="stringliteral">&quot;oaComSNMP&quot;</span> / <span class="stringliteral">&quot;Assets&quot;</span> / <span class="stringliteral">&quot;OPEN-AIR.mib&quot;</span>,</div>
 <div class="line"><span class="lineno">   49</span>        project_root / <span class="stringliteral">&quot;oaComProtocols&quot;</span> / <span class="stringliteral">&quot;oaComSNMP&quot;</span> / <span class="stringliteral">&quot;Assets&quot;</span> / <span class="stringliteral">&quot;openair_snmp_objects.txt&quot;</span>,</div>
@@ -166,32 +166,32 @@ Excludes application logs but targets stateful data.
 <div class="line"><span class="lineno">   55</span> </div>
 <div class="line"><span class="lineno">   56</span>    <span class="comment"># 1. Clean individual files</span></div>
 <div class="line"><span class="lineno">   57</span>    <span class="keywordflow">for</span> f <span class="keywordflow">in</span> target_files:</div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.exists</a>():</div>
-<div class="line"><span class="lineno">   59</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f.unlink</a>()</div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> f.exists():</div>
+<div class="line"><span class="lineno">   59</span>            f.unlink()</div>
 <div class="line"><span class="lineno">   60</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, f<span class="stringliteral">&quot;🗑️  Deleted: {f.name}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>    <span class="comment"># 2. Clean directories</span></div>
 <div class="line"><span class="lineno">   63</span>    <span class="keywordflow">for</span> data_dir <span class="keywordflow">in</span> data_dirs:</div>
-<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_dir.exists</a>():</div>
+<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> data_dir.exists():</div>
 <div class="line"><span class="lineno">   65</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, f<span class="stringliteral">&quot;🗑️  Nuking contents of: {data_dir.name}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   66</span>            <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   67</span>                <span class="comment"># To delete CONTENTS and not the dir itself (to preserve permissions/structure)</span></div>
 <div class="line"><span class="lineno">   68</span>                items_purged = 0</div>
-<div class="line"><span class="lineno">   69</span>                <span class="keywordflow">for</span> item <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">data_dir.iterdir</a>():</div>
+<div class="line"><span class="lineno">   69</span>                <span class="keywordflow">for</span> item <span class="keywordflow">in</span> data_dir.iterdir():</div>
 <div class="line"><span class="lineno">   70</span>                    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   71</span>                        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">item.is_file</a>() <span class="keywordflow">or</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">item.is_symlink</a>():</div>
-<div class="line"><span class="lineno">   72</span>                            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">item.unlink</a>()</div>
+<div class="line"><span class="lineno">   71</span>                        <span class="keywordflow">if</span> item.is_file() <span class="keywordflow">or</span> item.is_symlink():</div>
+<div class="line"><span class="lineno">   72</span>                            item.unlink()</div>
 <div class="line"><span class="lineno">   73</span>                            items_purged += 1</div>
-<div class="line"><span class="lineno">   74</span>                        <span class="keywordflow">elif</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">item.is_dir</a>():</div>
-<div class="line"><span class="lineno">   75</span>                            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">shutil.rmtree</a>(item)</div>
+<div class="line"><span class="lineno">   74</span>                        <span class="keywordflow">elif</span> item.is_dir():</div>
+<div class="line"><span class="lineno">   75</span>                            shutil.rmtree(item)</div>
 <div class="line"><span class="lineno">   76</span>                            items_purged += 1</div>
 <div class="line"><span class="lineno">   77</span>                    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   78</span>                        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ ❌ Failed to delete {item.name}: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   78</span>                        logger.error(f<span class="stringliteral">&quot;  └─ ❌ Failed to delete {item.name}: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   79</span> </div>
 <div class="line"><span class="lineno">   80</span>                <span class="keywordflow">if</span> items_purged &gt; 0:</div>
 <div class="line"><span class="lineno">   81</span>                    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, f<span class="stringliteral">&quot;  └─ 💥 Purged {items_purged} items from {data_dir.name}.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   82</span>            <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   83</span>                <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ ❌ Failed to access {data_dir.name}: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   83</span>                logger.error(f<span class="stringliteral">&quot;  └─ ❌ Failed to access {data_dir.name}: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   84</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">   85</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, f<span class="stringliteral">&quot;  └─ 🤷 {data_dir.name} directory not found.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   86</span> </div>
@@ -202,33 +202,32 @@ Excludes application logs but targets stateful data.
 <div class="line"><span class="lineno">   91</span>        initialize_paths()</div>
 <div class="line"><span class="lineno">   92</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, <span class="stringliteral">&quot;✨ Directory structure integrity verified.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   93</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   94</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;❌ Failed to initialize paths: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   94</span>        logger.error(f<span class="stringliteral">&quot;❌ Failed to initialize paths: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   95</span> </div>
 <div class="line"><span class="lineno">   96</span>    <span class="comment"># 3. Clear in-memory state cache to prevent automatic recreation with old data</span></div>
 <div class="line"><span class="lineno">   97</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   98</span>        <span class="keyword">import</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaStateCache.Entry</a> <span class="keyword">as</span> StateCacheEntry</div>
-<div class="line"><span class="lineno">   99</span>        registry = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">StateCacheEntry.get_registry</a>()</div>
-<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> registry <span class="keywordflow">and</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(registry, <span class="stringliteral">&quot;clear_all_state&quot;</span>):</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keyword">import</span> oaStateCache.Entry <span class="keyword">as</span> StateCacheEntry</div>
+<div class="line"><span class="lineno">   99</span>        registry = StateCacheEntry.get_registry()</div>
+<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> registry <span class="keywordflow">and</span> hasattr(registry, <span class="stringliteral">&quot;clear_all_state&quot;</span>):</div>
 <div class="line"><span class="lineno">  101</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, <span class="stringliteral">&quot;🧠 Wiping in-memory State Registry...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
-<div class="line"><span class="lineno">  102</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">registry.clear_all_state</a>()</div>
+<div class="line"><span class="lineno">  102</span>            registry.clear_all_state()</div>
 <div class="line"><span class="lineno">  103</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, <span class="stringliteral">&quot;🧠 In-memory State Registry wiped.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">  104</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  105</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ ❌ Failed to clear in-memory state cache: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  105</span>        logger.error(f<span class="stringliteral">&quot;  └─ ❌ Failed to clear in-memory state cache: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  106</span> </div>
 <div class="line"><span class="lineno">  107</span>    <span class="comment"># 4. Notify distributed processes via MQTT</span></div>
 <div class="line"><span class="lineno">  108</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keyword">import</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">paho.mqtt.publish</a> <span class="keyword">as</span> publish</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keyword">import</span> paho.mqtt.publish <span class="keyword">as</span> publish</div>
 <div class="line"><span class="lineno">  110</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, <span class="stringliteral">&quot;📡 Broadcasting global cache clear command...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
-<div class="line"><span class="lineno">  111</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">publish.single</a>(<span class="stringliteral">&quot;OPEN-AIR/System/Control/ClearCache&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>, hostname=<span class="stringliteral">&quot;localhost&quot;</span>, port=1883)</div>
+<div class="line"><span class="lineno">  111</span>        publish.single(<span class="stringliteral">&quot;OPEN-AIR/System/Control/ClearCache&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>, hostname=<span class="stringliteral">&quot;localhost&quot;</span>, port=1883)</div>
 <div class="line"><span class="lineno">  112</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  113</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.warning</a>(f<span class="stringliteral">&quot;  └─ ⚠️ Failed to broadcast MQTT clear cache command: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  113</span>        logger.warning(f<span class="stringliteral">&quot;  └─ ⚠️ Failed to broadcast MQTT clear cache command: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  114</span> </div>
 <div class="line"><span class="lineno">  115</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <span class="stringliteral">&quot;purge_cache&quot;</span>, <span class="stringliteral">&quot;📡📤📤 [CLEAR_CACHE] Cache purge complete.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">  116</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespaceoaOchestration_1_1Core_1_1path__initializer_html"><div class="ttname"><a href="../../db/d42/namespaceoaOchestration_1_1Core_1_1path__initializer.html">path_initializer</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d2/df2/Clear__cache_8py_source.html#l00028">Workers.CleanupApps.Clear_cache.purge_cache()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/df2/Clear__cache_8py_source.html#l00028">Workers.CleanupApps.Clear_cache.purge_cache()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d2/df2/Clear__cache_8py_source.html#l00028">Workers.CleanupApps.Clear_cache.purge_cache()</a>.</p>
 
@@ -242,7 +241,7 @@ Excludes application logs but targets stateful data.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Workers.CleanupApps.Clear_cache.current_script_dir = Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td>
+          <td class="memname">Workers.CleanupApps.Clear_cache.current_script_dir = Path(__file__).resolve().parent</td>
         </tr>
       </table>
 </div><div class="memdoc">

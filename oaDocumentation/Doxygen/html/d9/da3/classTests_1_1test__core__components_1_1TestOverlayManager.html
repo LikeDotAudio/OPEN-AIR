@@ -214,18 +214,17 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00169">169</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  169</span>        <span class="keyword">def </span>test_create_event_blocker(self):</div>
 <div class="line"><span class="lineno">  170</span>            mock_parent_widget = MagicMock() <span class="comment"># Simply a MagicMock</span></div>
-<div class="line"><span class="lineno">  171</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_parent_widget.winfo_width.return_value</a> = 100</div>
-<div class="line"><span class="lineno">  172</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_parent_widget.winfo_height.return_value</a> = 100</div>
+<div class="line"><span class="lineno">  171</span>            mock_parent_widget.winfo_width.return_value = 100</div>
+<div class="line"><span class="lineno">  172</span>            mock_parent_widget.winfo_height.return_value = 100</div>
 <div class="line"><span class="lineno">  173</span>            self.overlay_manager.create_event_blocker(mock_parent_widget)</div>
 <div class="line"><span class="lineno">  174</span> </div>
 <div class="line"><span class="lineno">  175</span>            self.assertIsNotNone(self.overlay_manager.event_blocker_canvas)</div>
-<div class="line"><span class="lineno">  176</span>            self.mock_canvas.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">assert_called_once_with</a>(mock_parent_widget, highlightthickness=0, bd=0)</div>
-<div class="line"><span class="lineno">  177</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.bind.assert_called</a>()</div>
-<div class="line"><span class="lineno">  178</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.place_forget.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">  176</span>            self.mock_canvas.assert_called_once_with(mock_parent_widget, highlightthickness=0, bd=0)</div>
+<div class="line"><span class="lineno">  177</span>            self.overlay_manager.event_blocker_canvas.bind.assert_called()</div>
+<div class="line"><span class="lineno">  178</span>            self.overlay_manager.event_blocker_canvas.place_forget.assert_called_once()</div>
 <div class="line"><span class="lineno">  179</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/d15/test__transparency_8py_source.html#l00023">Tests.test_transparency.TestTransparency.mock_canvas</a>, <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00160">Tests.test_core_components.TestOverlayManager.mock_canvas</a>, <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00163">Tests.test_core_components.TestOverlayManager.overlay_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d3/d15/test__transparency_8py_source.html#l00023">Tests.test_transparency.TestTransparency.mock_canvas</a>, <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00160">Tests.test_core_components.TestOverlayManager.mock_canvas</a>, and <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00163">Tests.test_core_components.TestOverlayManager.overlay_manager</a>.</p>
 
 </div>
 </div>
@@ -248,21 +247,21 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00180">180</a> of file <a class="el" href="../../d7/dfd/test__core__components_8py_source.html">test_core_components.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  180</span>        <span class="keyword">def </span>test_show_event_blocker(self):</div>
 <div class="line"><span class="lineno">  181</span>            mock_parent_widget = MagicMock() <span class="comment"># Simply a MagicMock</span></div>
-<div class="line"><span class="lineno">  182</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_parent_widget.winfo_width.return_value</a> = 100</div>
-<div class="line"><span class="lineno">  183</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">mock_parent_widget.winfo_height.return_value</a> = 100</div>
+<div class="line"><span class="lineno">  182</span>            mock_parent_widget.winfo_width.return_value = 100</div>
+<div class="line"><span class="lineno">  183</span>            mock_parent_widget.winfo_height.return_value = 100</div>
 <div class="line"><span class="lineno">  184</span>            self.overlay_manager.create_event_blocker(mock_parent_widget)</div>
-<div class="line"><span class="lineno">  185</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.reset_mock</a>() <span class="comment"># Reset all mocks on event_blocker_canvas after initial hide</span></div>
+<div class="line"><span class="lineno">  185</span>            self.overlay_manager.event_blocker_canvas.reset_mock() <span class="comment"># Reset all mocks on event_blocker_canvas after initial hide</span></div>
 <div class="line"><span class="lineno">  186</span> </div>
 <div class="line"><span class="lineno">  187</span>            <span class="comment"># Ensure the master of the canvas (parent) also returns valid dimensions</span></div>
-<div class="line"><span class="lineno">  188</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.master.winfo_width.return_value</a> = 100</div>
-<div class="line"><span class="lineno">  189</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.master.winfo_height.return_value</a> = 100</div>
+<div class="line"><span class="lineno">  188</span>            self.overlay_manager.event_blocker_canvas.master.winfo_width.return_value = 100</div>
+<div class="line"><span class="lineno">  189</span>            self.overlay_manager.event_blocker_canvas.master.winfo_height.return_value = 100</div>
 <div class="line"><span class="lineno">  190</span> </div>
 <div class="line"><span class="lineno">  191</span>            self.overlay_manager.show_event_blocker(<span class="keyword">True</span>)</div>
-<div class="line"><span class="lineno">  192</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.place.assert_called_once</a>()</div>
-<div class="line"><span class="lineno">  193</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.place_forget.assert_not_called</a>()</div>
+<div class="line"><span class="lineno">  192</span>            self.overlay_manager.event_blocker_canvas.place.assert_called_once()</div>
+<div class="line"><span class="lineno">  193</span>            self.overlay_manager.event_blocker_canvas.place_forget.assert_not_called()</div>
 <div class="line"><span class="lineno">  194</span> </div>
 <div class="line"><span class="lineno">  195</span>            self.overlay_manager.show_event_blocker(<span class="keyword">False</span>)</div>
-<div class="line"><span class="lineno">  196</span>            self.overlay_manager.<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">event_blocker_canvas.place_forget.assert_called_once</a>()</div>
+<div class="line"><span class="lineno">  196</span>            self.overlay_manager.event_blocker_canvas.place_forget.assert_called_once()</div>
 <div class="line"><span class="lineno">  197</span>            <span class="comment"># place is called once for show(True), and should not be called again for show(False)</span></div>
 <div class="line"><span class="lineno">  198</span>            <span class="comment"># Check the total calls to place.</span></div>
 <div class="line"><span class="lineno">  199</span>            <span class="comment"># If we call it once for True and it&#39;s not called for False, it should still be 1.</span></div>
@@ -272,7 +271,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  203</span> </div>
 <div class="line"><span class="lineno">  204</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00163">Tests.test_core_components.TestOverlayManager.overlay_manager</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d7/dfd/test__core__components_8py_source.html#l00163">Tests.test_core_components.TestOverlayManager.overlay_manager</a>.</p>
 
 </div>
 </div>

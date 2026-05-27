@@ -114,9 +114,9 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a3139a2a35ea7c70286a777067f7ba54e" id="r_a3139a2a35ea7c70286a777067f7ba54e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6bbb80367a84ef6bc36dcf82df1fea55">list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#a3139a2a35ea7c70286a777067f7ba54e">__all__</a> = [&quot;start&quot;, &quot;stop&quot;, &quot;status&quot;, &quot;run_tests&quot;]</td></tr>
 <tr class="separator:a3139a2a35ea7c70286a777067f7ba54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad477472995d6bd967c1ae460bea1567d" id="r_ad477472995d6bd967c1ae460bea1567d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#ad477472995d6bd967c1ae460bea1567d">cmd</a> = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td></tr>
+<tr class="memitem:ad477472995d6bd967c1ae460bea1567d" id="r_ad477472995d6bd967c1ae460bea1567d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#ad477472995d6bd967c1ae460bea1567d">cmd</a> = sys.argv[1].lower()</td></tr>
 <tr class="separator:ad477472995d6bd967c1ae460bea1567d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e0874f0dcd861bea089c302d672c8b5" id="r_a9e0874f0dcd861bea089c302d672c8b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#a9e0874f0dcd861bea089c302d672c8b5">current_dir</a> = pathlib.Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td></tr>
+<tr class="memitem:a9e0874f0dcd861bea089c302d672c8b5" id="r_a9e0874f0dcd861bea089c302d672c8b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#a9e0874f0dcd861bea089c302d672c8b5">current_dir</a> = pathlib.Path(__file__).resolve().parent</td></tr>
 <tr class="separator:a9e0874f0dcd861bea089c302d672c8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b5b3d2f733d6356b734db0a11f5131e" id="r_a5b5b3d2f733d6356b734db0a11f5131e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/de1/namespaceMethods_1_1FlameGraph_1_1Entry.html#a5b5b3d2f733d6356b734db0a11f5131e">project_root</a> = current_dir.parent.parent.parent</td></tr>
 <tr class="separator:a5b5b3d2f733d6356b734db0a11f5131e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +131,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">Methods.FlameGraph.Entry.main </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">void</a>&#160;</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -144,51 +144,51 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   34</span><span class="stringliteral">    Orchestrates a full profiling session of the OpenAir application.</span></div>
 <div class="line"><span class="lineno">   35</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   36</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Initializing Performance Profiling Session...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   36</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Initializing Performance Profiling Session...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   37</span> </div>
 <div class="line"><span class="lineno">   38</span>    manager = FlameManager()</div>
 <div class="line"><span class="lineno">   39</span> </div>
 <div class="line"><span class="lineno">   40</span>    <span class="comment"># 1. Start Profiling</span></div>
-<div class="line"><span class="lineno">   41</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.start_profiling</a>()</div>
+<div class="line"><span class="lineno">   41</span>    manager.start_profiling()</div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># 2. Register Panic Callback (Handle &quot;Halting and Catching Fire&quot;)</span></div>
 <div class="line"><span class="lineno">   44</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   45</span>        <span class="keyword">from</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">oaWatchdog.Managers.watchdog</a> <span class="keyword">import</span> register_panic_callback</div>
+<div class="line"><span class="lineno">   45</span>        <span class="keyword">from</span> oaWatchdog.Managers.watchdog <span class="keyword">import</span> register_panic_callback</div>
 <div class="line"><span class="lineno">   46</span>        <span class="comment"># Register a callback to ensure report is generated on critical failure</span></div>
-<div class="line"><span class="lineno">   47</span>        register_panic_callback(<span class="keyword">lambda</span>: <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.generate_report</a>())</div>
-<div class="line"><span class="lineno">   48</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Panic callback registered with Watchdog.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   47</span>        register_panic_callback(<span class="keyword">lambda</span>: manager.generate_report())</div>
+<div class="line"><span class="lineno">   48</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Panic callback registered with Watchdog.&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span>    <span class="keywordflow">except</span> ImportError:</div>
-<div class="line"><span class="lineno">   50</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.warning</a>(<span class="stringliteral">&quot;🔥 [ENTRY] Watchdog not found. Panic callbacks disabled.&quot;</span>)</div>
+<div class="line"><span class="lineno">   50</span>        logger.warning(<span class="stringliteral">&quot;🔥 [ENTRY] Watchdog not found. Panic callbacks disabled.&quot;</span>)</div>
 <div class="line"><span class="lineno">   51</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   52</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;🔥 [ENTRY] Failed to register panic callback: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   52</span>        logger.error(f<span class="stringliteral">&quot;🔥 [ENTRY] Failed to register panic callback: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>    <span class="comment"># 3. Launch the Application</span></div>
-<div class="line"><span class="lineno">   55</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Launching OpenAir Application...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   54</span>    <span class="comment"># 3. Launch the EngineGuiDisplay</span></div>
+<div class="line"><span class="lineno">   55</span>    matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Launching OpenAir EngineGuiDisplay...&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   56</span>    <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   57</span>        <span class="keyword">import</span> openair</div>
 <div class="line"><span class="lineno">   58</span>        <span class="comment"># Assuming openair has a main() entry point that starts the app</span></div>
 <div class="line"><span class="lineno">   59</span>        <span class="comment"># and blocking until the app is closed.</span></div>
-<div class="line"><span class="lineno">   60</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">openair.main</a>()</div>
+<div class="line"><span class="lineno">   60</span>        <a class="code hl_function" href="../../df/dbe/namespaceopenair.html#a9df33df86e33852ca82cd29db191c8c8">openair.main</a>()</div>
 <div class="line"><span class="lineno">   61</span>    <span class="keywordflow">except</span> KeyboardInterrupt:</div>
-<div class="line"><span class="lineno">   62</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Session interrupted by user (KeyboardInterrupt).&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   62</span>        matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Session interrupted by user (KeyboardInterrupt).&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   63</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   64</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.exception</a>(f<span class="stringliteral">&quot;🔥 [ENTRY] Application crashed during profiling: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">   64</span>        logger.exception(f<span class="stringliteral">&quot;🔥 [ENTRY] EngineGuiDisplay crashed during profiling: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">   65</span>    <span class="keywordflow">finally</span>:</div>
 <div class="line"><span class="lineno">   66</span>        <span class="comment"># 4. Stop Profiling and Generate Report</span></div>
-<div class="line"><span class="lineno">   67</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.stop_profiling</a>()</div>
-<div class="line"><span class="lineno">   68</span>        report_path = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">manager.generate_report</a>()</div>
+<div class="line"><span class="lineno">   67</span>        manager.stop_profiling()</div>
+<div class="line"><span class="lineno">   68</span>        report_path = manager.generate_report()</div>
 <div class="line"><span class="lineno">   69</span> </div>
 <div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> report_path:</div>
-<div class="line"><span class="lineno">   71</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Performance profiling session complete.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
-<div class="line"><span class="lineno">   72</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">inspect.currentframe</a>().<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">f_code.co_name</a> <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">globals</a>() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;🔥 [ENTRY] Report: {report_path}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
+<div class="line"><span class="lineno">   71</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, <span class="stringliteral">&quot;🔥 [ENTRY] Performance profiling session complete.&quot;</span>, <span class="stringliteral">&quot;SUCCESS&quot;</span>)</div>
+<div class="line"><span class="lineno">   72</span>            matrix_log(<span class="stringliteral">&quot;core&quot;</span>, <span class="stringliteral">&quot;system&quot;</span>, inspect.currentframe().f_code.co_name <span class="keywordflow">if</span> <span class="stringliteral">&quot;inspect&quot;</span> <span class="keywordflow">in</span> globals() <span class="keywordflow">else</span> <span class="stringliteral">&quot;unknown&quot;</span>, f<span class="stringliteral">&quot;🔥 [ENTRY] Report: {report_path}&quot;</span>, <span class="stringliteral">&quot;INFO&quot;</span>)</div>
 <div class="line"><span class="lineno">   73</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   74</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(<span class="stringliteral">&quot;🔥 [ENTRY] Failed to synthesize final report.&quot;</span>)</div>
+<div class="line"><span class="lineno">   74</span>            logger.error(<span class="stringliteral">&quot;🔥 [ENTRY] Failed to synthesize final report.&quot;</span>)</div>
 <div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 <div class="ttc" id="anamespacemain_html"><div class="ttname"><a href="../../d2/dc1/namespacemain.html">main</a></div><div class="ttdef"><b>Definition</b> <a href="../../d1/d9c/oaComAES70_2Core_2aes70py-1_80_82_2main_8py_source.html#l00001">main.py:1</a></div></div>
+<div class="ttc" id="anamespaceopenair_html_a9df33df86e33852ca82cd29db191c8c8"><div class="ttname"><a href="../../df/dbe/namespaceopenair.html#a9df33df86e33852ca82cd29db191c8c8">openair.main</a></div><div class="ttdeci">main()</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d77/openair_8py_source.html#l00054">openair.py:54</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/d77/openair_8py_source.html#l00054">openair.main()</a>.</p>
 
 </div>
 </div>
@@ -218,43 +218,43 @@ Ensures isolation and proper sys.path handling.
 <div class="line"><span class="lineno">   82</span>    <span class="keyword">import</span> sys</div>
 <div class="line"><span class="lineno">   83</span>    <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</div>
 <div class="line"><span class="lineno">   84</span> </div>
-<div class="line"><span class="lineno">   85</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...&quot;</span>)</div>
-<div class="line"><span class="lineno">   86</span>    current_dir = Path(__file__).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">parent.absolute</a>()</div>
+<div class="line"><span class="lineno">   85</span>    print(f<span class="stringliteral">&quot;📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...&quot;</span>)</div>
+<div class="line"><span class="lineno">   86</span>    current_dir = Path(__file__).parent.absolute()</div>
 <div class="line"><span class="lineno">   87</span>    test_dir = current_dir / <span class="stringliteral">&quot;Tests&quot;</span></div>
 <div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">test_dir.exists</a>():</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> test_dir.exists():</div>
 <div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   91</span> </div>
 <div class="line"><span class="lineno">   92</span>    project_root = current_dir</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">while</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">project_root.parent</a> != project_root:</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">while</span> project_root.parent != project_root:</div>
 <div class="line"><span class="lineno">   94</span>        <span class="keywordflow">if</span> (project_root / <span class="stringliteral">&quot;GEMINI.md&quot;</span>).<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a>():</div>
 <div class="line"><span class="lineno">   95</span>            <span class="keywordflow">break</span></div>
-<div class="line"><span class="lineno">   96</span>        project_root = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">project_root.parent</a></div>
+<div class="line"><span class="lineno">   96</span>        project_root = project_root.parent</div>
 <div class="line"><span class="lineno">   97</span> </div>
-<div class="line"><span class="lineno">   98</span>    env = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.environ.copy</a>()</div>
-<div class="line"><span class="lineno">   99</span>    env[<span class="stringliteral">&quot;PYTHONPATH&quot;</span>] = str(project_root) + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.pathsep</a> + <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">env.get</a>(<span class="stringliteral">&quot;PYTHONPATH&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">   98</span>    env = os.environ.copy()</div>
+<div class="line"><span class="lineno">   99</span>    env[<span class="stringliteral">&quot;PYTHONPATH&quot;</span>] = str(project_root) + os.pathsep + env.get(<span class="stringliteral">&quot;PYTHONPATH&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><span class="lineno">  100</span> </div>
 <div class="line"><span class="lineno">  101</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  102</span>        rel_test_dir = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">os.path.relpath</a>(test_dir, project_root)</div>
-<div class="line"><span class="lineno">  103</span>        result = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">subprocess.run</a>(</div>
-<div class="line"><span class="lineno">  104</span>            [<a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">sys.executable</a>, <span class="stringliteral">&quot;-m&quot;</span>, <span class="stringliteral">&quot;unittest&quot;</span>, <span class="stringliteral">&quot;discover&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, rel_test_dir, <span class="stringliteral">&quot;-p&quot;</span>, <span class="stringliteral">&quot;test_*.py&quot;</span>],</div>
+<div class="line"><span class="lineno">  102</span>        rel_test_dir = os.path.relpath(test_dir, project_root)</div>
+<div class="line"><span class="lineno">  103</span>        result = subprocess.run(</div>
+<div class="line"><span class="lineno">  104</span>            [sys.executable, <span class="stringliteral">&quot;-m&quot;</span>, <span class="stringliteral">&quot;unittest&quot;</span>, <span class="stringliteral">&quot;discover&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, rel_test_dir, <span class="stringliteral">&quot;-p&quot;</span>, <span class="stringliteral">&quot;test_*.py&quot;</span>],</div>
 <div class="line"><span class="lineno">  105</span>            cwd=str(project_root),</div>
 <div class="line"><span class="lineno">  106</span>            env=env,</div>
 <div class="line"><span class="lineno">  107</span>            capture_output=<span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  108</span>        )</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">result.returncode</a> == 0:</div>
-<div class="line"><span class="lineno">  110</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.&quot;</span>)</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">if</span> result.returncode == 0:</div>
+<div class="line"><span class="lineno">  110</span>            print(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.&quot;</span>)</div>
 <div class="line"><span class="lineno">  111</span>            <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">  112</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  113</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.&quot;</span>)</div>
+<div class="line"><span class="lineno">  113</span>            print(f<span class="stringliteral">&quot;📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.&quot;</span>)</div>
 <div class="line"><span class="lineno">  114</span>            <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  115</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  116</span>        <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}&quot;</span>)</div>
+<div class="line"><span class="lineno">  116</span>        print(f<span class="stringliteral">&quot;🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}&quot;</span>)</div>
 <div class="line"><span class="lineno">  117</span>        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 <div class="line"><span class="lineno">  118</span> </div>
 <div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a6ba751bf71957124ec1fb2c76724448b"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a6ba751bf71957124ec1fb2c76724448b">exists</a></div><div class="ttdeci">exists</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">generated.rs:2407</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02407">exists</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00128">Methods.FlameGraph.Entry.status()</a>.</p>
 
@@ -278,12 +278,10 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00119">119</a> of file <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  119</span><span class="keyword">def </span>start():</div>
 <div class="line"><span class="lineno">  120</span>    <span class="stringliteral">&quot;&quot;&quot;Start the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  121</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🚀 [START] Starting {Path(__file__).parent.name} services...&quot;</span>)</div>
+<div class="line"><span class="lineno">  121</span>    print(f<span class="stringliteral">&quot;🚀 [START] Starting {Path(__file__).parent.name} services...&quot;</span>)</div>
 <div class="line"><span class="lineno">  122</span>    <a class="code hl_namespace" href="../../d2/dc1/namespacemain.html">main</a>()</div>
 <div class="line"><span class="lineno">  123</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a5a0fb1c5141ffbdef881afb4601c9c2a" name="a5a0fb1c5141ffbdef881afb4601c9c2a"></a>
@@ -304,11 +302,11 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00128">128</a> of file <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  128</span><span class="keyword">def </span>status():</div>
 <div class="line"><span class="lineno">  129</span>    <span class="stringliteral">&quot;&quot;&quot;Get the module status.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  130</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;📊 [STATUS] Checking {Path(__file__).parent.name} status...&quot;</span>)</div>
+<div class="line"><span class="lineno">  130</span>    print(f<span class="stringliteral">&quot;📊 [STATUS] Checking {Path(__file__).parent.name} status...&quot;</span>)</div>
 <div class="line"><span class="lineno">  131</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Running&quot;</span></div>
 <div class="line"><span class="lineno">  132</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00077">Methods.FlameGraph.Entry.run_tests()</a>, and <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
+<p class="reference">References <a class="el" href="../../d5/de3/oa__procedural__art__rs_2mod_8rs.html#a7fa61169d9e749ad77043c5f60289230">len()</a>, and <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00077">Methods.FlameGraph.Entry.run_tests()</a>.</p>
 
 </div>
 </div>
@@ -330,11 +328,9 @@ Ensures isolation and proper sys.path handling.
 <p class="definition">Definition at line <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html#l00124">124</a> of file <a class="el" href="../../d9/de0/oaTests_2Methods_2FlameGraph_2Entry_8py_source.html">Entry.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  124</span><span class="keyword">def </span>stop():</div>
 <div class="line"><span class="lineno">  125</span>    <span class="stringliteral">&quot;&quot;&quot;Stop the module services.&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  126</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">print</a>(f<span class="stringliteral">&quot;🛑 [STOP] Stopping {Path(__file__).parent.name} services...&quot;</span>)</div>
+<div class="line"><span class="lineno">  126</span>    print(f<span class="stringliteral">&quot;🛑 [STOP] Stopping {Path(__file__).parent.name} services...&quot;</span>)</div>
 <div class="line"><span class="lineno">  127</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -369,7 +365,7 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Methods.FlameGraph.Entry.cmd = sys.argv[1].<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">lower</a>()</td>
+          <td class="memname">Methods.FlameGraph.Entry.cmd = sys.argv[1].lower()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -385,7 +381,7 @@ Ensures isolation and proper sys.path handling.
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Methods.FlameGraph.Entry.current_dir = pathlib.Path(<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">__file__</a>).resolve().parent</td>
+          <td class="memname">Methods.FlameGraph.Entry.current_dir = pathlib.Path(__file__).resolve().parent</td>
         </tr>
       </table>
 </div><div class="memdoc">

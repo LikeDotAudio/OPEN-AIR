@@ -10,6 +10,7 @@ var classManagers_1_1mqtt__connection_1_1MqttConnectionManager =
     [ "kick_event", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#aa03b7da4522de2bf00aab74d7f4b36db", null ],
     [ "loop", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#a2d0c5b4bb5de31e61fea64b2f4cb3531", null ],
     [ "publish", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#abf6ad6aedb7a6f47a6ddda7aff5ea448", null ],
+    [ "publish_batch", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#a713e3c3ca16b6d55a16d66f35b78a40a", null ],
     [ "stop_event", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#a2bd052ef10f27a68b578f0b059f01fdc", null ],
     [ "subscribe", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#a4efba24ded74f34bbcdc75155e631129", null ],
     [ "_connected", "dc/dff/classManagers_1_1mqtt__connection_1_1MqttConnectionManager.html#ae3c343c28d742d243d7a4148c4cd38af", null ],

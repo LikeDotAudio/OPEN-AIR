@@ -14,6 +14,6 @@ def assemble_system_control_links(sub_router, splinker_manager):
         )
 
     sub_router.subscribe_to_topic(
-        topic_filter="OPEN-AIR/System/Control/Splinker/#",
+        topic_filter="OpenAir/System/Control/Splinker/#",
         callback_func=_splinker_callback_bridge
     )

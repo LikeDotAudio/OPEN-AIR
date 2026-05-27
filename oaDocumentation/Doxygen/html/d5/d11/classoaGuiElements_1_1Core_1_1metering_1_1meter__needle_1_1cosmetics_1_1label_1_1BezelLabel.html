@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d5/d11/classoaGuiElements_1_1Core_1_1m
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a604c1993b6481a7790494cdbe0a5f582" id="r_a604c1993b6481a7790494cdbe0a5f582"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d11/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1label_1_1BezelLabel.html#a604c1993b6481a7790494cdbe0a5f582">draw</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac6018b746835ced81445d633fcbd75be">cx</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a84aa7492d91fb680c50ef076eeac03c8">cy</a>, cosmetics, current_value=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a604c1993b6481a7790494cdbe0a5f582" id="r_a604c1993b6481a7790494cdbe0a5f582"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d11/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1label_1_1BezelLabel.html#a604c1993b6481a7790494cdbe0a5f582">draw</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#afa9e9838abb44338f7cbe41dc6f846d4">canvas</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#ac6018b746835ced81445d633fcbd75be">cx</a>, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a84aa7492d91fb680c50ef076eeac03c8">cy</a>, cosmetics, current_value=None)</td></tr>
 <tr class="separator:a604c1993b6481a7790494cdbe0a5f582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -143,7 +143,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>current_value</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>current_value</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -166,18 +166,18 @@ Labels are defined in cosmetics['labels'] as a list of dictionaries.
 <div class="line"><span class="lineno">   12</span><span class="stringliteral">        Draws custom text labels on the meter face.</span></div>
 <div class="line"><span class="lineno">   13</span><span class="stringliteral">        Labels are defined in cosmetics[&#39;labels&#39;] as a list of dictionaries.</span></div>
 <div class="line"><span class="lineno">   14</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   15</span>        labels = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cosmetics.get</a>(<span class="stringliteral">&quot;labels&quot;</span>, [])</div>
+<div class="line"><span class="lineno">   15</span>        labels = cosmetics.get(<span class="stringliteral">&quot;labels&quot;</span>, [])</div>
 <div class="line"><span class="lineno">   16</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> labels:</div>
 <div class="line"><span class="lineno">   17</span>            <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>        default_color = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cosmetics.get</a>(<span class="stringliteral">&quot;colors&quot;</span>, {}).get(<span class="stringliteral">&quot;foreground&quot;</span>, <span class="stringliteral">&quot;white&quot;</span>)</div>
+<div class="line"><span class="lineno">   19</span>        default_color = cosmetics.get(<span class="stringliteral">&quot;colors&quot;</span>, {}).get(<span class="stringliteral">&quot;foreground&quot;</span>, <span class="stringliteral">&quot;white&quot;</span>)</div>
 <div class="line"><span class="lineno">   20</span> </div>
 <div class="line"><span class="lineno">   21</span>        <span class="keywordflow">for</span> label_cfg <span class="keywordflow">in</span> labels:</div>
-<div class="line"><span class="lineno">   22</span>            text = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;text&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">   22</span>            text = label_cfg.get(<span class="stringliteral">&quot;text&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>            <span class="comment"># --- Implement Value Overlay Logic ---</span></div>
-<div class="line"><span class="lineno">   25</span>            <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;value_overlay&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">and</span> current_value <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">   26</span>                sig_fig = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;sig_fig&quot;</span>, 3)</div>
+<div class="line"><span class="lineno">   25</span>            <span class="keywordflow">if</span> label_cfg.get(<span class="stringliteral">&quot;value_overlay&quot;</span>, <span class="keyword">False</span>) <span class="keywordflow">and</span> current_value <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">   26</span>                sig_fig = label_cfg.get(<span class="stringliteral">&quot;sig_fig&quot;</span>, 3)</div>
 <div class="line"><span class="lineno">   27</span>                <span class="keywordflow">try</span>:</div>
 <div class="line"><span class="lineno">   28</span>                    text = f<span class="stringliteral">&quot;{float(current_value):.{sig_fig}f}&quot;</span></div>
 <div class="line"><span class="lineno">   29</span>                <span class="keywordflow">except</span> (ValueError, TypeError):</div>
@@ -187,26 +187,23 @@ Labels are defined in cosmetics['labels'] as a list of dictionaries.
 <div class="line"><span class="lineno">   33</span>                <span class="keywordflow">continue</span></div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="line"><span class="lineno">   35</span>            <span class="comment"># Position relative to pivot (cx, cy)</span></div>
-<div class="line"><span class="lineno">   36</span>            rel_x = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;x&quot;</span>, 0)</div>
-<div class="line"><span class="lineno">   37</span>            rel_y = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;y&quot;</span>, 0)</div>
+<div class="line"><span class="lineno">   36</span>            rel_x = label_cfg.get(<span class="stringliteral">&quot;x&quot;</span>, 0)</div>
+<div class="line"><span class="lineno">   37</span>            rel_y = label_cfg.get(<span class="stringliteral">&quot;y&quot;</span>, 0)</div>
 <div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>            x = cx + rel_x</div>
 <div class="line"><span class="lineno">   40</span>            y = cy + rel_y</div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>            <span class="comment"># Style</span></div>
-<div class="line"><span class="lineno">   43</span>            font_family = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;font&quot;</span>, <span class="stringliteral">&quot;Helvetica&quot;</span>)</div>
-<div class="line"><span class="lineno">   44</span>            font_size = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;size&quot;</span>, 10)</div>
-<div class="line"><span class="lineno">   45</span>            font_weight = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;weight&quot;</span>, <span class="stringliteral">&quot;normal&quot;</span>)</div>
-<div class="line"><span class="lineno">   46</span>            color = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;color&quot;</span>, default_color)</div>
-<div class="line"><span class="lineno">   47</span>            anchor = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">label_cfg.get</a>(<span class="stringliteral">&quot;anchor&quot;</span>, <span class="stringliteral">&quot;center&quot;</span>)</div>
+<div class="line"><span class="lineno">   43</span>            font_family = label_cfg.get(<span class="stringliteral">&quot;font&quot;</span>, <span class="stringliteral">&quot;Helvetica&quot;</span>)</div>
+<div class="line"><span class="lineno">   44</span>            font_size = label_cfg.get(<span class="stringliteral">&quot;size&quot;</span>, 10)</div>
+<div class="line"><span class="lineno">   45</span>            font_weight = label_cfg.get(<span class="stringliteral">&quot;weight&quot;</span>, <span class="stringliteral">&quot;normal&quot;</span>)</div>
+<div class="line"><span class="lineno">   46</span>            color = label_cfg.get(<span class="stringliteral">&quot;color&quot;</span>, default_color)</div>
+<div class="line"><span class="lineno">   47</span>            anchor = label_cfg.get(<span class="stringliteral">&quot;anchor&quot;</span>, <span class="stringliteral">&quot;center&quot;</span>)</div>
 <div class="line"><span class="lineno">   48</span> </div>
 <div class="line"><span class="lineno">   49</span>            font_spec = (font_family, font_size, font_weight)</div>
 <div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>            <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">canvas.create_text</a>(x, y, text=text, fill=color, font=font_spec, anchor=anchor, tags=<span class="stringliteral">&quot;nextgen_foreground&quot;</span>)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<div class="line"><span class="lineno">   51</span>            canvas.create_text(x, y, text=text, fill=color, font=font_spec, anchor=anchor, tags=<span class="stringliteral">&quot;nextgen_foreground&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('d1/dc5/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: ImportError in VisaFleetManager (Circular Dependency Refactor)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1878"></a> <b>Date:</b> 2026-03-16 01:18:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Total application failure during <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Service launch.</p>
-<h1><a class="anchor" id="autotoc_md1879"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2327"></a> <b>Date:</b> 2026-03-16 01:18:00 <b>Priority:</b> 1 (Critical/Crash) <b>Impact:</b> Total application failure during <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Service launch.</p>
+<h1><a class="anchor" id="autotoc_md2328"></a>
 Issue</h1>
 <p>An &lsquo;ImportError: cannot import name 'DiscoveryOrchestrator&rsquo; from 'oaComProtocols.oaComVisa.Visa_Fleet'<code>occurred in</code>managers/Visa_Fleet/visa_fleet.py`.</p>
-<h1><a class="anchor" id="autotoc_md1880"></a>
+<h1><a class="anchor" id="autotoc_md2329"></a>
 Root Cause</h1>
 <p>To resolve a circular dependency between <code>DiscoveryOrchestrator</code> and <code>oaComProtocols.oaComVisa.Visa_Fleet</code>, the import of <code>DiscoveryOrchestrator</code> was removed from <code>managers/Visa_Fleet/__init__.py</code>. However, <code><a class="el" href="../../d1/d1e/visa__fleet_8py.html">visa_fleet.py</a></code> was still attempting to import it from the package level (<code>from oaComProtocols.oaComVisa.Visa_Fleet import DiscoveryOrchestrator</code>) instead of from its source in <code>oaComProtocols.oaComVisa</code>.</p>
-<h1><a class="anchor" id="autotoc_md1881"></a>
+<h1><a class="anchor" id="autotoc_md2330"></a>
 Resolution</h1>
 <p>Modified <code>managers/Visa_Fleet/visa_fleet.py</code> to import <code>DiscoveryOrchestrator</code> directly from its actual location: <code>from oaComProtocols.oaComVisa.discovery_orchestrator import DiscoveryOrchestrator</code></p>
-<h1><a class="anchor" id="autotoc_md1882"></a>
+<h1><a class="anchor" id="autotoc_md2331"></a>
 Verification</h1>
 <p>Ran a Python reproduction script that imports <code>VisaFleetManager</code>:</p><ul>
 <li><b>Output:</b> <code>VisaFleetManager Success</code></li>

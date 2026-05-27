@@ -101,7 +101,9 @@ $(document).ready(function(){initNavTree('df/d60/namespaceCore_1_1mqtt__publishe
 Functions</h2></td></tr>
 <tr class="memitem:a7266ac8dbd3a66228da455243457c973" id="r_a7266ac8dbd3a66228da455243457c973"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/namespaceCore_1_1mqtt__publisher__service.html#a7266ac8dbd3a66228da455243457c973">is_connected</a> ()</td></tr>
 <tr class="separator:a7266ac8dbd3a66228da455243457c973"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a922a5a589a4f720dad8a29592ea65e6d" id="r_a922a5a589a4f720dad8a29592ea65e6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/namespaceCore_1_1mqtt__publisher__service.html#a922a5a589a4f720dad8a29592ea65e6d">publish_json_structure</a> (str base_topic, dict <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">json_data</a>)</td></tr>
+<tr class="memitem:aa615f1de2d81667f1515fcad76e5f327" id="r_aa615f1de2d81667f1515fcad76e5f327"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/namespaceCore_1_1mqtt__publisher__service.html#aa615f1de2d81667f1515fcad76e5f327">publish_batch</a> (messages)</td></tr>
+<tr class="separator:aa615f1de2d81667f1515fcad76e5f327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922a5a589a4f720dad8a29592ea65e6d" id="r_a922a5a589a4f720dad8a29592ea65e6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/namespaceCore_1_1mqtt__publisher__service.html#a922a5a589a4f720dad8a29592ea65e6d">publish_json_structure</a> (str base_topic, dict json_data)</td></tr>
 <tr class="separator:a922a5a589a4f720dad8a29592ea65e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f999bfb361dbeda368e421381fee1c4" id="r_a3f999bfb361dbeda368e421381fee1c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/namespaceCore_1_1mqtt__publisher__service.html#a3f999bfb361dbeda368e421381fee1c4">publish_payload</a> (str topic, str payload, <a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a> retain=app_constants.MQTT_RETAIN_BEHAVIOR)</td></tr>
 <tr class="separator:a3f999bfb361dbeda368e421381fee1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +144,41 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="aa615f1de2d81667f1515fcad76e5f327" name="aa615f1de2d81667f1515fcad76e5f327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa615f1de2d81667f1515fcad76e5f327">&#9670;&#160;</a></span>publish_batch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Core.mqtt_publisher_service.publish_batch </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>messages</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Publishes multiple messages in a single call.
+Args:
+    messages: List of tuples (topic, payload, [qos], [retain])
+</pre> 
+<p class="definition">Definition at line <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html#l00037">37</a> of file <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html">mqtt_publisher_service.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span><span class="keyword">def </span>publish_batch(messages):</div>
+<div class="line"><span class="lineno">   38</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   39</span><span class="stringliteral">    Publishes multiple messages in a single call.</span></div>
+<div class="line"><span class="lineno">   40</span><span class="stringliteral">    Args:</span></div>
+<div class="line"><span class="lineno">   41</span><span class="stringliteral">        messages: List of tuples (topic, payload, [qos], [retain])</span></div>
+<div class="line"><span class="lineno">   42</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   43</span>    MqttConnectionManager().publish_batch(messages)</div>
+<div class="line"><span class="lineno">   44</span> </div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html#l00037">Core.mqtt_publisher_service.publish_batch()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html#l00037">Core.mqtt_publisher_service.publish_batch()</a>.</p>
+
+</div>
+</div>
 <a id="a922a5a589a4f720dad8a29592ea65e6d" name="a922a5a589a4f720dad8a29592ea65e6d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a922a5a589a4f720dad8a29592ea65e6d">&#9670;&#160;</a></span>publish_json_structure()</h2>
 
@@ -169,17 +206,14 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <pre class="fragment">Publishes the entire JSON structure to a base topic.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html#l00037">37</a> of file <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html">mqtt_publisher_service.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span><span class="keyword">def </span>publish_json_structure(base_topic: str, json_data: dict):</div>
-<div class="line"><span class="lineno">   38</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   39</span><span class="stringliteral">    Publishes the entire JSON structure to a base topic.</span></div>
-<div class="line"><span class="lineno">   40</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   41</span>    payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">orjson.dumps</a>(json_data).decode()</div>
-<div class="line"><span class="lineno">   42</span>    publish_payload(base_topic, payload)</div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html#l00045">45</a> of file <a class="el" href="../../d4/d17/mqtt__publisher__service_8py_source.html">mqtt_publisher_service.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span><span class="keyword">def </span>publish_json_structure(base_topic: str, json_data: dict):</div>
+<div class="line"><span class="lineno">   46</span>    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   47</span><span class="stringliteral">    Publishes the entire JSON structure to a base topic.</span></div>
+<div class="line"><span class="lineno">   48</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   49</span>    payload = orjson.dumps(json_data).decode()</div>
+<div class="line"><span class="lineno">   50</span>    publish_payload(base_topic, payload)</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a3f999bfb361dbeda368e421381fee1c4" name="a3f999bfb361dbeda368e421381fee1c4"></a>
@@ -223,8 +257,6 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   35</span>    MqttConnectionManager().publish(topic, payload, retain=retain)</div>
 <div class="line"><span class="lineno">   36</span> </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="ac57d26b46ae32729fa378484d6f20486" name="ac57d26b46ae32729fa378484d6f20486"></a>

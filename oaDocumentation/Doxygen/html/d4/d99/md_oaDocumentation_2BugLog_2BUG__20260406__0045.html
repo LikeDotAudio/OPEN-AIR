@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('d4/d99/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report: BUG_20260406_0045</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1270"></a> </p>
-<h1><a class="anchor" id="autotoc_md1271"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1535"></a> </p>
+<h1><a class="anchor" id="autotoc_md1536"></a>
 Issue</h1>
 <p>ModuleNotFoundError: No module named 'oaGui.Core.horizontal_fader_asset_generator'</p>
-<h1><a class="anchor" id="autotoc_md1272"></a>
+<h1><a class="anchor" id="autotoc_md1537"></a>
 Root Cause</h1>
-<p>Incorrect relative import in <code><a class="el" href="../../d1/de0/widget__schema__normalizer_8py.html">oaGui/Core/widget_schema_normalizer.py</a></code> and <code><a class="el" href="../../de/d0b/Core_2horizontal__fader__renderer__mixin_8py.html">oaGui/Core/horizontal_fader_renderer_mixin.py</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md1273"></a>
+<p>Incorrect relative import in <code>oaGui/Core/widget_schema_normalizer.py</code> and <code>oaGui/Core/horizontal_fader_renderer_mixin.py</code>.</p>
+<h1><a class="anchor" id="autotoc_md1538"></a>
 Resolution</h1>
 <ul>
 <li>Updated imports to absolute paths pointing to <code><a class="el" href="../../d6/d6c/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Core_1_1horizontal__fader__asset__generator.html">oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_asset_generator</a></code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1274"></a>
+<h1><a class="anchor" id="autotoc_md1539"></a>
 Verification</h1>
 <ul>
 <li>Codebase import analysis confirmed correct paths. </li>

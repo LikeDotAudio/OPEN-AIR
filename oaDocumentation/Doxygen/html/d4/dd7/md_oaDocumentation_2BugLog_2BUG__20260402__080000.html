@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('d4/dd7/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Report - 2026-04-02 23:00:00</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1127"></a> </p>
-<h1><a class="anchor" id="autotoc_md1128"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1392"></a> </p>
+<h1><a class="anchor" id="autotoc_md1393"></a>
 Issues</h1>
 <p>This report details the resolution of a critical <code>NameError</code> in the state cache and the fixing of multiple Rust build failures that were preventing graceful degradation.</p>
-<h1><a class="anchor" id="autotoc_md1129"></a>
+<h1><a class="anchor" id="autotoc_md1394"></a>
 Root Causes &amp; Resolutions</h1>
-<h2><a class="anchor" id="autotoc_md1130"></a>
+<h2><a class="anchor" id="autotoc_md1395"></a>
 1. NameError in StateRegistry</h2>
 <ul>
 <li><b>Issue</b>: &lsquo;NameError: name 'MqttMessage&rsquo; is not defined<code>in</code><a class="el" href="../../da/d84/state__cache_8py.html">oaStateCache/Core/state_cache.py</a><code>.</code></li>
 <li><code> **Root Cause**: During the implementation of the "Graceful Rust Failure" pattern in a previous turn, several critical imports (including</code>MqttMessage<code>,</code>Config<code>, and core engine references) were inadvertently removed. This caused the UI partition to crash during the class definition phase of</code>StateRegistry<code>.</code></li>
 <li><code> **Resolution**: Restored all missing imports and global variable initializations in</code><a class="el" href="../../da/d84/state__cache_8py.html">oaStateCache/Core/state_cache.py</a>`.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1131"></a>
+<h2><a class="anchor" id="autotoc_md1396"></a>
 2. Rust Build Failures (Missing README)</h2>
 <ul>
 <li><b>Issue</b>: <code>maturin failed: Failed to read readme specified in pyproject.toml</code>.</li>
@@ -117,14 +117,14 @@ Root Causes &amp; Resolutions</h1>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1132"></a>
+<h2><a class="anchor" id="autotoc_md1397"></a>
 3. Fragile Logging in Graceful Fallbacks</h2>
 <ul>
 <li><b>Issue</b>: Potential <code>NameError</code> during the "except" block of Rust imports.</li>
-<li><b>Root Cause</b>: Several files (<code><a class="el" href="../../de/dea/ptp__packet__parser_8py.html">ptp_packet_parser.py</a></code>, <code><a class="el" href="../../d9/d70/blueprint__loader_8py.html">blueprint_loader.py</a></code>, <code><a class="el" href="../../de/d01/yak__translator_8py.html">yak_translator.py</a></code>, <code><a class="el" href="../../d1/d25/visa__Search_8py.html">visa_Search.py</a></code>) were attempting to log warnings about missing Rust modules using <code>logger</code> or <code>logging</code> before those names were actually imported into the module namespace.</li>
+<li><b>Root Cause</b>: Several files (<code><a class="el" href="../../de/dea/ptp__packet__parser_8py.html">ptp_packet_parser.py</a></code>, <code><a class="el" href="../../de/df1/json__blueprint__reader_8py.html">json_blueprint_reader.py</a></code>, <code><a class="el" href="../../de/d01/yak__translator_8py.html">yak_translator.py</a></code>, <code><a class="el" href="../../d1/d25/visa__Search_8py.html">visa_Search.py</a></code>) were attempting to log warnings about missing Rust modules using <code>logger</code> or <code>logging</code> before those names were actually imported into the module namespace.</li>
 <li><b>Resolution</b>: Adjusted the import order in all affected files to ensure that logging utilities are available before any <code>try...except</code> blocks that might require them.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1133"></a>
+<h1><a class="anchor" id="autotoc_md1398"></a>
 Affected Modules</h1>
 <ul>
 <li><code>oaStateCache</code> (StateRegistry crash fixed)</li>
@@ -135,7 +135,7 @@ Affected Modules</h1>
 <li><code>oaTranslator</code> (Graceful failure logging fixed)</li>
 <li><code>oaComProtocols.oaComVisa</code> (Graceful failure logging fixed)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1134"></a>
+<h1><a class="anchor" id="autotoc_md1399"></a>
 Verification</h1>
 <p>The system now correctly handles the absence of Rust modules by logging a warning and continuing the boot process. The UI partition no longer crashes due to missing type definitions, and the background build system successfully processes all crates. </p>
 </div></div><!-- contents -->

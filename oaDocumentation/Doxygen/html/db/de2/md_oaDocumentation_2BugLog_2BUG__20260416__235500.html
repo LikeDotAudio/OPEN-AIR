@@ -93,35 +93,35 @@ $(document).ready(function(){initNavTree('db/de2/md_oaDocumentation_2BugLog_2BUG
   <div class="headertitle"><div class="title">Bug Log: 20260416_235500</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1475"></a> </p>
-<h1><a class="anchor" id="autotoc_md1476"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1740"></a> </p>
+<h1><a class="anchor" id="autotoc_md1741"></a>
 Description</h1>
 <p><code>SystemExit: 1</code> caused by <code>TclError</code> during application shutdown. The application was attempting to call <code>destroy()</code> on a root window that had already been destroyed (likely by manual user closure).</p>
-<h1><a class="anchor" id="autotoc_md1477"></a>
+<h1><a class="anchor" id="autotoc_md1742"></a>
 Error Clusters</h1>
 <ul>
 <li><b>Cluster A: Shutdown Race Condition</b>: <code>_tkinter.TclError: can't invoke "destroy" command: application has been destroyed</code>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1478"></a>
+<h1><a class="anchor" id="autotoc_md1743"></a>
 Trigger Event</h1>
-<p>Application shutdown sequence via <code>WM_DELETE_WINDOW</code> or signals.</p>
-<h1><a class="anchor" id="autotoc_md1479"></a>
+<p>EngineGuiDisplay shutdown sequence via <code>WM_DELETE_WINDOW</code> or signals.</p>
+<h1><a class="anchor" id="autotoc_md1744"></a>
 Domain Mapping</h1>
 <ul>
 <li><code><a class="el" href="../../de/d24/run__builder_8py.html">oaGuiEditorWYSIWYG/Managers/run_builder.py</a></code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1480"></a>
+<h1><a class="anchor" id="autotoc_md1745"></a>
 Action Taken</h1>
 <ul>
 <li>Modified <code>shutdown()</code> in <code><a class="el" href="../../de/d24/run__builder_8py.html">run_builder.py</a></code> to:<ul>
-<li>Check <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">winfo_exists()</a></code> before calling <code>destroy()</code>.</li>
+<li>Check <code>winfo_exists()</code> before calling <code>destroy()</code>.</li>
 <li>Wrap <code>destroy()</code> in a <code>try...except tk.TclError</code> block.</li>
 <li>Correctly handle <code>SystemExit</code> re-raising.</li>
 <li>Provide fallback logging for unexpected errors during exit.</li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1481"></a>
+<h1><a class="anchor" id="autotoc_md1746"></a>
 Verification Results</h1>
 <p>Source code reviewed for safety. The logic now prevents calls to destroyed Tkinter handles, ensuring <code>sys.exit(0)</code> is reached for a clean termination. </p>
 </div></div><!-- contents -->

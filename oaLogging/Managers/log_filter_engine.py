@@ -17,7 +17,7 @@ Purpose:
     enabling dynamic control over log verbosity without application restarts.
 
 Responsibilities:
-    - Subscribe to MQTT topic 'OPEN-AIR/system/logger/filter/set'.
+    - Subscribe to MQTT topic 'OpenAir/system/logger/filter/set'.
     - Parse incoming JSON payloads to determine module-specific log levels.
     - Dynamically update Loguru logger filters or levels based on received rules.
     - Maintain a cache of active filters for efficient application.
@@ -68,7 +68,7 @@ class LogFilterEngine:
             self.logger.warning("MqttSubscriberRouter is not available. Dynamic log filtering is disabled.")
             return
 
-        self.topic = "OPEN-AIR/system/logger/filter/set"
+        self.topic = "OpenAir/system/logger/filter/set"
         self.logger.info(f"Setting up MQTT subscription for dynamic log filtering on topic: {self.topic}")
         self.mqtt_router.subscribe_to_topic(self.topic, self.handle_filter_update)
 
@@ -192,7 +192,7 @@ if __name__ == "__main__":
     if _log_filter_engine:
         mock_logger_for_engine.info("Simulating MQTT message...")
         test_payload = '{"Manager.Display": "WARNING", "Worker.Logic": "TRACE"}'
-        mock_message = MqttMessage(topic="OPEN-AIR/system/logger/filter/set", payload=test_payload)
+        mock_message = MqttMessage(topic="OpenAir/system/logger/filter/set", payload=test_payload)
         _log_filter_engine.handle_filter_update(mock_message)
 
     # Add a message that should be filtered out by the simulated rules

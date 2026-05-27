@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('d1/dd1/namespaceMethods_1_1state__comp
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2a76811718f586e95ce99b42df807fd1" id="r_a2a76811718f586e95ce99b42df807fd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd1/namespaceMethods_1_1state__comparator.html#a2a76811718f586e95ce99b42df807fd1">should_update</a> (str <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">incoming_topic</a>, Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">incoming_payload</a>, Any <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cached_state</a>)</td></tr>
+<tr class="memitem:a2a76811718f586e95ce99b42df807fd1" id="r_a2a76811718f586e95ce99b42df807fd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d6a/manager_8rs.html#a357981ce2dff0787e2b62821fd2aa7db">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd1/namespaceMethods_1_1state__comparator.html#a2a76811718f586e95ce99b42df807fd1">should_update</a> (str incoming_topic, Any incoming_payload, Any cached_state)</td></tr>
 <tr class="separator:a2a76811718f586e95ce99b42df807fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -154,24 +154,24 @@ Supports Rust-backed StateRegistryCore for high-speed comparison.
 <div class="line"><span class="lineno">   28</span><span class="stringliteral">    Supports Rust-backed StateRegistryCore for high-speed comparison.</span></div>
 <div class="line"><span class="lineno">   29</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># 1. Use Rust if available</span></div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">hasattr</a>(cached_state, <span class="stringliteral">&quot;should_update&quot;</span>):</div>
-<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cached_state.should_update</a>(incoming_topic, incoming_payload)</div>
+<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> hasattr(cached_state, <span class="stringliteral">&quot;should_update&quot;</span>):</div>
+<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> cached_state.should_update(incoming_topic, incoming_payload)</div>
 <div class="line"><span class="lineno">   33</span> </div>
 <div class="line"><span class="lineno">   34</span>    <span class="comment"># --- Python Fallback ---</span></div>
 <div class="line"><span class="lineno">   35</span>    <span class="comment"># Normalize incoming_payload to a dict if it&#39;s a primitive</span></div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(incoming_payload, dict):</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(incoming_payload, dict):</div>
 <div class="line"><span class="lineno">   37</span>        incoming_payload = {<span class="stringliteral">&quot;value&quot;</span>: incoming_payload}</div>
 <div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    cached_payload = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cached_state.get</a>(incoming_topic)</div>
+<div class="line"><span class="lineno">   39</span>    cached_payload = cached_state.get(incoming_topic)</div>
 <div class="line"><span class="lineno">   40</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> cached_payload:</div>
 <div class="line"><span class="lineno">   41</span>        <span class="keywordflow">return</span> <span class="keyword">True</span>  <span class="comment"># Not in cache, so it&#39;s new</span></div>
 <div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>    <span class="comment"># Normalize cached_payload to a dict if it&#39;s a primitive</span></div>
-<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">isinstance</a>(cached_payload, dict):</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(cached_payload, dict):</div>
 <div class="line"><span class="lineno">   45</span>        cached_payload = {<span class="stringliteral">&quot;value&quot;</span>: cached_payload}</div>
 <div class="line"><span class="lineno">   46</span> </div>
-<div class="line"><span class="lineno">   47</span>    incoming_ts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">incoming_payload.get</a>(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
-<div class="line"><span class="lineno">   48</span>    cached_ts = <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">cached_payload.get</a>(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
+<div class="line"><span class="lineno">   47</span>    incoming_ts = incoming_payload.get(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
+<div class="line"><span class="lineno">   48</span>    cached_ts = cached_payload.get(<span class="stringliteral">&quot;timestamp&quot;</span>)</div>
 <div class="line"><span class="lineno">   49</span> </div>
 <div class="line"><span class="lineno">   50</span>    <span class="comment"># 1. Primary: Timestamp comparison (for historical replay safety)</span></div>
 <div class="line"><span class="lineno">   51</span>    <span class="keywordflow">if</span> incoming_ts <span class="keywordflow">and</span> cached_ts:</div>
@@ -185,10 +185,7 @@ Supports Rust-backed StateRegistryCore for high-speed comparison.
 <div class="line"><span class="lineno">   59</span>        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 <div class="line"><span class="lineno">   60</span> </div>
 <div class="line"><span class="lineno">   61</span>    <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>

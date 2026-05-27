@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('dc/d2b/namespaceMethods_1_1safe__file_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8a99adb721a59fe4395335b8ece254ba" id="r_a8a99adb721a59fe4395335b8ece254ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d2b/namespaceMethods_1_1safe__file__io.html#a8a99adb721a59fe4395335b8ece254ba">handle_file_read_error</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filepath</a>, exception, <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">fallback</a>=<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a>)</td></tr>
+<tr class="memitem:a8a99adb721a59fe4395335b8ece254ba" id="r_a8a99adb721a59fe4395335b8ece254ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d2b/namespaceMethods_1_1safe__file__io.html#a8a99adb721a59fe4395335b8ece254ba">handle_file_read_error</a> (filepath, exception, fallback=None)</td></tr>
 <tr class="separator:a8a99adb721a59fe4395335b8ece254ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78415d49e601a5ff5fd9ec38495e95ce" id="r_a78415d49e601a5ff5fd9ec38495e95ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d2b/namespaceMethods_1_1safe__file__io.html#a78415d49e601a5ff5fd9ec38495e95ce">handle_file_write_error</a> (<a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">filepath</a>, exception)</td></tr>
+<tr class="memitem:a78415d49e601a5ff5fd9ec38495e95ce" id="r_a78415d49e601a5ff5fd9ec38495e95ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d2b/namespaceMethods_1_1safe__file__io.html#a78415d49e601a5ff5fd9ec38495e95ce">handle_file_write_error</a> (filepath, exception)</td></tr>
 <tr class="separator:a78415d49e601a5ff5fd9ec38495e95ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -126,7 +126,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>fallback</em> = <code><a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">None</a></code>&#160;</td>
+          <td class="paramname"><em>fallback</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -144,16 +144,13 @@ Logs the error and returns a safe fallback value.
 <div class="line"><span class="lineno">   13</span><span class="stringliteral">    Standardized handler for file reading exceptions.</span></div>
 <div class="line"><span class="lineno">   14</span><span class="stringliteral">    Logs the error and returns a safe fallback value.</span></div>
 <div class="line"><span class="lineno">   15</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   16</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;📂🚫 [READ ERROR] Failed to read file: {filepath}&quot;</span>)</div>
-<div class="line"><span class="lineno">   17</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>)</div>
+<div class="line"><span class="lineno">   16</span>    logger.error(f<span class="stringliteral">&quot;📂🚫 [READ ERROR] Failed to read file: {filepath}&quot;</span>)</div>
+<div class="line"><span class="lineno">   17</span>    logger.error(f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>)</div>
 <div class="line"><span class="lineno">   18</span> </div>
 <div class="line"><span class="lineno">   19</span>    <span class="comment"># Optional: Logic to notify UI or trigger system recovery could be added here</span></div>
 <div class="line"><span class="lineno">   20</span>    <span class="keywordflow">return</span> fallback</div>
 <div class="line"><span class="lineno">   21</span> </div>
-<div class="ttc" id="adebug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_html_a7ea82552101f041fad7635b3ed036a84"><div class="ttname"><a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">vector</a></div><div class="ttdeci">vector</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">generated.rs:2773</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 <a id="a78415d49e601a5ff5fd9ec38495e95ce" name="a78415d49e601a5ff5fd9ec38495e95ce"></a>
@@ -190,14 +187,12 @@ Logs the error and returns False to indicate failure.
 <div class="line"><span class="lineno">   24</span><span class="stringliteral">    Standardized handler for file writing exceptions.</span></div>
 <div class="line"><span class="lineno">   25</span><span class="stringliteral">    Logs the error and returns False to indicate failure.</span></div>
 <div class="line"><span class="lineno">   26</span><span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   27</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;📂💾🚫 [WRITE ERROR] Failed to write file: {filepath}&quot;</span>)</div>
-<div class="line"><span class="lineno">   28</span>    <a class="code hl_variable" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs.html#a7ea82552101f041fad7635b3ed036a84">logger.error</a>(f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>)</div>
+<div class="line"><span class="lineno">   27</span>    logger.error(f<span class="stringliteral">&quot;📂💾🚫 [WRITE ERROR] Failed to write file: {filepath}&quot;</span>)</div>
+<div class="line"><span class="lineno">   28</span>    logger.error(f<span class="stringliteral">&quot;  └─ Reason: {exception}&quot;</span>)</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>    <span class="comment"># Logic for handling disk full, permission denied, etc.</span></div>
 <div class="line"><span class="lineno">   31</span>    <span class="keywordflow">return</span> <span class="keyword">False</span></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d07/debug_2build_2markup5ever-489bca3cd0a8ffe2_2out_2generated_8rs_source.html#l02773">vector</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->

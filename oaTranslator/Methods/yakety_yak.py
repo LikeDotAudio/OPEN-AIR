@@ -15,8 +15,8 @@ app_constants = Config.get_instance()
 
 
 # DELETED: YAKETY_YAK_REPO_PATH is now imported from worker_project_paths.py
-# repo_topic_filter = "OPEN-AIR/yak/#" # Not needed in deprecated stub
-# save_action_topic = "OPEN-AIR/actions/yak/save/trigger" # Not needed in deprecated stub
+# repo_topic_filter = "OpenAir/yak/#" # Not needed in deprecated stub
+# save_action_topic = "OpenAir/actions/yak/save/trigger" # Not needed in deprecated stub
 
 
 class DeprecatedYaketyYakManager:  # Renamed class

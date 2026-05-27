@@ -93,32 +93,32 @@ $(document).ready(function(){initNavTree('d1/ddc/md_oaDocumentation_2Workers_2Bu
   <div class="headertitle"><div class="title">Bug Report: Fader Interaction Sync &amp; Core API Crashes</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1817"></a> </p>
-<h1><a class="anchor" id="autotoc_md1818"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2266"></a> </p>
+<h1><a class="anchor" id="autotoc_md2267"></a>
 [2026-03-15 22:30:00]</h1>
 <p><b>Status</b>: RESOLVED <b>Priority</b>: 1 (Critical/Crash &amp; <a class="el" href="../../d3/d7a/namespaceCore.html">Core</a> Logic)</p>
-<h2><a class="anchor" id="autotoc_md1819"></a>
+<h2><a class="anchor" id="autotoc_md2268"></a>
 Issue</h2>
 <ol type="1">
 <li><b>Network Echo Loops</b>: Fader movements were causing "ghosting" or stuttering because the <code>is_settled</code> flag was defaulting to <code>True</code> during active movement. This allowed remote sources (including network echoes) to fight the local user's mouse.</li>
 <li><b>StateMirrorEngine AttributeError</b>: Multiple widgets (ButtonActuator, TextTable, Listbox, etc.) were crashing with &lsquo;AttributeError: 'StateMirrorEngine&rsquo; object has no attribute 'calculate_topic'<code>.</code></li>
-<li><code>**ShowtimeTab TclError**: The</code>ModuleLoader<code>was passing</code>json_path<code>to</code>ShowtimeTab<code>, which passed it to</code>tk.Frame.__init__`, resulting in an "unknown option" error.</li>
+<li><code>**ShowtimeTab TclError**: The</code>LoaderFacade<code>was passing</code>json_path<code>to</code>ShowtimeTab<code>, which passed it to</code>tk.Frame.__init__`, resulting in an "unknown option" error.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1820"></a>
+<h2><a class="anchor" id="autotoc_md2269"></a>
 Root Cause</h2>
 <ol type="1">
 <li><b>Metadata Omission</b>: <code>FaderInteractionMixin</code> was calling <code>broadcast_gui_change_to_mqtt</code> without specifying <code>LOCKED</code> or <code>SETTLED</code> state. The <code>StateMirrorEngine</code> was not automatically inferring these from the widget instance.</li>
 <li><b>API Drift</b>: The <code>StateMirrorEngine</code> refactor moved topic calculation logic into a sub-module (<code>TopicCalculator</code>) but didn't provide a shim on the main engine for existing callers.</li>
 <li><b>Signature Mismatch</b>: <code>ShowtimeTab</code> inherited from <code>tk.Frame</code> but didn't filter the <code>json_path</code> argument from its <code>**kwargs</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1821"></a>
+<h2><a class="anchor" id="autotoc_md2270"></a>
 Resolution</h2>
 <ol type="1">
 <li><b>Centralized Metadata</b>: Updated <code>StateMirrorEngine.broadcast_gui_change_to_mqtt</code> to automatically extract <code>is_locked</code> and <code>is_sliding</code> (inverted to <code>SETTLED</code>) from the widget instance.</li>
 <li><b>API Shim</b>: Added <code>StateMirrorEngine.calculate_topic()</code> as a proxy for <code>self.topic_calculator.calculate()</code>.</li>
 <li><b>Signature Hardening</b>: Updated <code>ShowtimeTab.__init__</code> to explicitly accept and store <code>json_path</code>.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1822"></a>
+<h2><a class="anchor" id="autotoc_md2271"></a>
 Verification</h2>
 <ul>
 <li>Manual verification of <code>StateMirrorEngine</code> shim logic.</li>

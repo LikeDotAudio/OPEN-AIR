@@ -356,7 +356,7 @@ class ProtocolRouter:
                     self._executor.submit(
                         dispatch_message,
                         message, managers,
-                        self.is_active
+                        is_active=self.is_active,
                     )
             except RuntimeError as e:
                 # ⚡ TEARDOWN SAFETY: Ignore executor shutdown errors during exit

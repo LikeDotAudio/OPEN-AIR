@@ -100,14 +100,19 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
 
     # --- MQTT Dispatch ---
     if "🚀" in strategy or "Ⓜ️" in strategy:
-        if is_active and router.routing_matrix.get(source, {}).get("MQTT", True):
-            mqtt_manager = managers.get("mqtt")
+        _gate = router.routing_matrix.get(source, {}).get("MQTT", True)
+        _mgr = managers.get("mqtt")
+        if is_active and _gate:
             # ⚡ V3.1.26 DISPATCH UPDATE:
             # Allow MQTT dispatch if explicitly requested by strategy (🚀),
             # even if the source was MQTT (for broadcasts/activity logs).
             # We only block standard loopback if NO broadcast strategy is present.
-            if mqtt_manager:
-                _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), message, value_representation)
+            if _mgr:
+                _dispatch_mqtt(_mgr, get_topic("MQTT"), message, value_representation)
+            elif app_constants.ROUTER_DISPATCH_LOGS:
+                matrix_log("comms", "broker", "dispatch_message", f"⚠️ [DISPATCH] MQTT skipped for {topic}: mqtt_manager is None.", "WARNING")
+        elif app_constants.ROUTER_DISPATCH_LOGS:
+            matrix_log("comms", "broker", "dispatch_message", f"⚠️ [DISPATCH] MQTT skipped for {topic}: is_active={is_active} matrix[{source}][MQTT]={_gate}", "WARNING")
 
     # --- OSC Dispatch ---
     if "🅾️" in strategy:

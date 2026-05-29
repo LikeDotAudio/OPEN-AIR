@@ -131,7 +131,23 @@ def normalize_and_ingest(
     # the entire inbound JSON payload into metadata, which means the publisher's
     # claimed full_id ends up there. Trusting it as the local reference makes
     # every foreign publish look like its own reflection.
-    session_guid = metadata_context.get("GUID") or metadata_context.get("guid") or local_guid
+    # session_guid is THIS MESSAGE'S claimed origin GUID (not the local
+    # reference). Web/third-party publishers typically don't set GUID/guid
+    # directly — they only carry full_id (format "<GUID>:<PARTITION>:<PID>").
+    # Extract the GUID portion from full_id when neither GUID nor guid is set
+    # so downstream consumers (firehose monitor, telemetry, cache) attribute
+    # the message to its real publisher instead of the local instance.
+    def _guid_from_full_id(fid):
+        if not fid: return None
+        s = str(fid)
+        return s.split(":", 1)[0] if ":" in s else s
+
+    _value_full_id = value.get("full_id") if isinstance(value, dict) else None
+    session_guid = (metadata_context.get("GUID")
+                    or metadata_context.get("guid")
+                    or _guid_from_full_id(metadata_context.get("full_id"))
+                    or _guid_from_full_id(_value_full_id)
+                    or local_guid)
     partition = metadata_context.get("partition") or app_constants.PARTITION_ID
     full_id = app_constants.FULL_INSTANCE_ID
 

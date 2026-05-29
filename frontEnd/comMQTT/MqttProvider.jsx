@@ -15,6 +15,15 @@ const SESSION_FULL_ID = (() => {
 window.OA_SESSION_FULL_ID = SESSION_FULL_ID;
 console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
 
+// Max outbound publish rate (ms) for live control values. A knob/fader/GCA drag
+// fires onChange on every pointer tick; without coalescing, each intermediate
+// value (27→28→29→…) round-trips through the Python broker and fans out to
+// MIDI/NMOS/SMPTE/settling, flooding the bus. setValue (below) throttles to one
+// publish per interval with a guaranteed trailing publish so the final resting
+// value is never lost. ~22ms ≈ 45 Hz: smooth for remote viewers, ~95% fewer
+// messages than raw per-tick publishing. Override via window.OA_PUBLISH_INTERVAL_MS.
+const PUBLISH_INTERVAL_MS = 22;
+
 window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
@@ -48,6 +57,25 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
         mqttClient.on('close',     () => setConnected(false));
         mqttClient.on('offline',   () => setConnected(false));
 
+        // Mirror Python's Failover heartbeat (1Hz). Lets the broker and other
+        // instances see this browser as a live participant under the WEB
+        // partition. Topic shape mirrors `OpenAir/System/Failover/<partition>/Heartbeat/<guid>`.
+        const guidPart = SESSION_FULL_ID.split(':')[0];
+        const hbTopic = `OpenAir/System/Failover/WEB/Heartbeat/${guidPart}`;
+        const startTs = Date.now() / 1000;
+        const hbInterval = setInterval(() => {
+            if (!mqttClient.connected) return;
+            const payload = JSON.stringify({
+                guid: guidPart,
+                full_id: SESSION_FULL_ID,
+                partition: 'WEB',
+                active: true,
+                start_ts: startTs,
+                timestamp: Date.now() / 1000,
+            });
+            mqttClient.publish(hbTopic, payload, { retain: true });
+        }, 1000);
+
         mqttClient.on('message', (topic, message) => {
             const payload = message.toString();
             // Debug diagnostic — enable in DevTools console with:
@@ -75,6 +103,19 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
         });
 
         return () => {
+            clearInterval(hbInterval);
+            // Publish one final "offline" heartbeat so subscribers see the
+            // session drop instead of relying on retain-message staleness.
+            try {
+                mqttClient.publish(hbTopic, JSON.stringify({
+                    guid: guidPart,
+                    full_id: SESSION_FULL_ID,
+                    partition: 'WEB',
+                    active: false,
+                    start_ts: startTs,
+                    timestamp: Date.now() / 1000,
+                }), { retain: true });
+            } catch (e) {}
             mqttClient.end();
         };
     }, [brokerUrl]);
@@ -151,14 +192,49 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         }
     }, [publish, topic, nodeJson, defaultValue, messages]);
 
+    // Per-topic outbound throttle (see PUBLISH_INTERVAL_MS). `pending` holds the
+    // latest value awaiting a trailing publish; `last` is the wall-clock time of
+    // the most recent publish. Cleared on unmount/topic change so a drag that
+    // ends as the widget unmounts can't fire a publish into a dead client.
+    const throttle = React.useRef({ timer: null, pending: false, value: undefined, last: 0 });
+    React.useEffect(() => {
+        const state = throttle.current;
+        return () => {
+            if (state.timer) { clearTimeout(state.timer); state.timer = null; }
+            state.pending = false;
+        };
+    }, [topic]);
+
     const setValue = (newValue) => {
         // Optimistic UI Update: instantly snap the local React component
         setLocalValue(newValue);
+        if (!publish) return;
 
-        // Push to global store. full_id identifies this browser session so
-        // Python's broker treats it as a foreign source, not a self-echo.
-        const payload = JSON.stringify({ value: newValue, full_id: SESSION_FULL_ID });
-        publish(topic, payload);
+        // Throttle the actual publish. full_id identifies this browser session so
+        // Python's broker treats it as a foreign source, not a self-echo. The
+        // leading edge publishes immediately for responsiveness; rapid follow-up
+        // changes coalesce onto a single trailing publish, so the bus sees at most
+        // one message per interval and always the final resting value.
+        const state = throttle.current;
+        state.value = newValue;
+        state.pending = true;
+
+        const flush = () => {
+            state.timer = null;
+            if (!state.pending) return;
+            state.pending = false;
+            state.last = Date.now();
+            publish(topic, JSON.stringify({ value: state.value, full_id: SESSION_FULL_ID }));
+        };
+
+        const interval = window.OA_PUBLISH_INTERVAL_MS || PUBLISH_INTERVAL_MS;
+        const elapsed = Date.now() - state.last;
+        if (!state.timer && elapsed >= interval) {
+            flush();
+        } else if (!state.timer) {
+            state.timer = setTimeout(flush, interval - elapsed);
+        }
+        // else: a trailing publish is already scheduled and will pick up state.value.
     };
 
     return [localValue, setValue, lang];

@@ -213,7 +213,16 @@ class CommandRouter(tk.Frame):
         utp = f"{message.get('timestamp', 0.0):.6f}"
         source = message.get("source", "UNKNOWN")             # Transport (e.g. MQTT)
         logical_source = message.get("logical_source", source) # Identity (e.g. MIDI)
-        guid = message.get("logical_guid", message.get("guid", "LOCAL")) # Identity (e.g. 32_0/3)
+        # GUID column: prefer the message's claimed source identity (`src`),
+        # populated by the ingest layer from payload.full_id / origin_source.
+        # Falls back to the legacy session/logical guid, then to "LOCAL" so
+        # boot/system rows that legitimately have no foreign identity still
+        # render. Foreign publishers (web sessions, third-party MQTT clients)
+        # now show their own GUID instead of the local Python instance ID.
+        guid = (message.get("src")
+                or message.get("logical_guid")
+                or message.get("guid")
+                or "LOCAL")
 
         strategy = message.get("strategy", "BROADCAST")
         topic = message.get("topic", "N/A")

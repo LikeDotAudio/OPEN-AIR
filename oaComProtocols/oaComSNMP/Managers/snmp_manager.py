@@ -156,6 +156,27 @@ class SNMPManager:
                 "meta": payload if isinstance(payload, dict) else {}
             }
 
+    def publish(self, topic: str, value: Any):
+        """⚡ DISPATCH INTERFACE: Ingests a value routed from the protocol router
+        into the SNMP state mirror so it is exposed through the OID tree.
+
+        The router calls this on the active manager (Observer or Bridge); we
+        record the value in the same mirror that handle_mqtt_message() feeds and
+        notify monitors so the bridge re-publishes activity for observers."""
+        if not self._running:
+            return
+
+        with self._state_lock:
+            self._mqtt_state[topic] = {
+                "source": "SNMP",
+                "topic": topic,
+                "value": value,
+                "meta": {}
+            }
+
+        oid = topic.split("/")[-1]
+        self._notify_monitor("TX", oid, value, topic, {})
+
     def _mqtt_status_loop(self):
         while self._running:
             self._publish_status()

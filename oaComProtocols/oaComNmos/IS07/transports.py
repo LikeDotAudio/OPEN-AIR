@@ -6,13 +6,14 @@
 # Removed: import threading # Only used by WebSocketEventTransport
 
 from collections.abc import Callable
+from dataclasses import asdict
 from typing import Any
 
 from oaComProtocols.oaComNmos.Constants import settings
 
 # ⚡ NATIVE CORE TRANSPORTS
 from oaComProtocols.oaComNmos.Core.is07_transport import Is07MqttTransport, Is07WebSocketTransport
-from oaComProtocols.oaComNmos.IS07.core_models import EventCore, Identity, Timing
+from oaComProtocols.oaComNmos.IS07.core_models import EventCore, Identity, MessageShutdownReboot, Timing
 
 # --- Abstract Base Classes for Transports ---
 
@@ -110,7 +111,10 @@ class Is07Bridge:
             return False
 
         event_data = EventCore(identity=identity, timing=timing, event_type=event_type, payload=payload_data)
-        message_dict = event_data.__dict__ # Convert dataclass to dict for JSON serialization
+        # ⚡ Use asdict() (recursive) so nested Identity/Timing dataclasses are
+        # converted to plain dicts. event_data.__dict__ is shallow and leaves
+        # them as dataclass instances, which json.dumps cannot serialize.
+        message_dict = asdict(event_data)
 
         if transport_type == "mqtt":
             return self.mqtt_transport.publish(transport_topic, message_dict, retain=True)
@@ -128,7 +132,7 @@ class Is07Bridge:
             return False
 
         message_data = MessageShutdownReboot(identity=identity, timing=timing, message_type=message_type)
-        message_dict = message_data.__dict__
+        message_dict = asdict(message_data)
 
         if transport_type == "mqtt":
             return self.mqtt_transport.publish(transport_topic, message_dict, retain=False) # Reboot/Shutdown typically not retained

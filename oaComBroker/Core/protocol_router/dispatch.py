@@ -102,7 +102,14 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
     if "🚀" in strategy or "Ⓜ️" in strategy:
         _gate = router.routing_matrix.get(source, {}).get("MQTT", True)
         _mgr = managers.get("mqtt")
-        if is_active and _gate:
+        # ⚡ V3.1.26 DISPATCH UPDATE:
+        # Explicit broadcast strategies (🚀/Ⓜ️) bypass standard MQTT loopback
+        # prevention. This is required for MQTT-sourced broadcasts (e.g. failover
+        # heartbeats, activity logs) to actually re-publish — otherwise the
+        # matrix[MQTT][MQTT]=False loopback gate silently drops them and floods
+        # the log with skip warnings.
+        _is_broadcast = "🚀" in strategy or "Ⓜ️" in strategy
+        if is_active and (_gate or _is_broadcast):
             # ⚡ V3.1.26 DISPATCH UPDATE:
             # Allow MQTT dispatch if explicitly requested by strategy (🚀),
             # even if the source was MQTT (for broadcasts/activity logs).

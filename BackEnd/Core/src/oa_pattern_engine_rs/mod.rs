@@ -19,8 +19,7 @@ const COLOR_NORMALIZATION_FACTOR: f64 = 127.5;
 const SAFETY_BAIL_OUT_LIMIT: i32 = 10000;
 
 #[pyclass]
-struct PatternEngine {
-
+struct PatternEngine;
 
 #[pymethods]
 impl PatternEngine {

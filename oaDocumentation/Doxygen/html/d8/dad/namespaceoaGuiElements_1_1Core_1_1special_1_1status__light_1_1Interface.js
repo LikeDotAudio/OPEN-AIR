@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface =
-[
-    [ "status_light_editor", "df/dc9/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor.html", "df/dc9/namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor" ]
-];

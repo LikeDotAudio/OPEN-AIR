@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Core =
-[
-    [ "button_wink_toggler", "dc/d29/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Core_1_1button__wink__toggler.html", "dc/d29/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Core_1_1button__wink__toggler" ]
-];

@@ -1,4 +1,0 @@
-var utils_2composite__horizontal__dial__value_2Core_2grid_8py =
-[
-    [ "oaGuiElements.Core.utils.composite_horizontal_dial_value.Core.grid.GridManager", "d0/d79/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager.html", "d0/d79/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager" ]
-];

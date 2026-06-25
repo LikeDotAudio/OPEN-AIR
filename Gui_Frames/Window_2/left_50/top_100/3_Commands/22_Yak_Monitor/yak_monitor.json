@@ -1,21 +1,21 @@
 {
-  "Migrated_GraphingCont": {
+  "Migrated_YakMonitor": {
     "type": "OcaBin",
-    "id": "migrated.Graphing_Cont",
+    "id": "migrated.yak_monitor",
     "geometry": { "anchor": "NSEW" },
     "blocks": {
       "MainBlock": {
         "type": "OcaBlock",
         "label": {
           "active": {
-            "text": { "En": "GraphingCont" },
+            "text": { "En": "YakMonitor" },
             "text_size": 14,
             "text_color": "#ffffff"
           }
         },
         "fields": {
           "component": {
-            "type": "_GraphingCont",
+            "type": "_YakMonitor",
             "layout": { "width": 400, "height": 300 }
           }
         }

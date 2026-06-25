@@ -1,0 +1,12 @@
+[package]
+name = "openair-ember"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+nom = { version = "7.1", optional = true }
+pyo3 = { version = "0.21.2", optional = true }
+
+[features]
+python = ["dep:pyo3", "dep:nom"]

@@ -1,7 +1,0 @@
-var classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__interaction__mixin_1_1DualFaderInteractionMixin =
-[
-    [ "_get_handle_under_mouse", "d1/d67/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__interaction__mixin_1_1DualFaderInteractionMixin.html#af4e0a303df63222c52af3794afca7271", null ],
-    [ "_on_drag", "d1/d67/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__interaction__mixin_1_1DualFaderInteractionMixin.html#a5916bac9120f43f2227ac5ee5e7340f5", null ],
-    [ "_on_press", "d1/d67/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__interaction__mixin_1_1DualFaderInteractionMixin.html#a46d626bca28025486d1e365bafcd4f84", null ],
-    [ "active_fader", "d1/d67/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__interaction__mixin_1_1DualFaderInteractionMixin.html#a83ff15a309c3a48d3f06df4bc702725b", null ]
-];

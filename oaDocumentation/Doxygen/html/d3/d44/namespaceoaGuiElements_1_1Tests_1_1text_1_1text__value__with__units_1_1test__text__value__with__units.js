@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Tests_1_1text_1_1text__value__with__units_1_1test__text__value__with__units =
-[
-    [ "TestTextValueBox", "dd/d68/classoaGuiElements_1_1Tests_1_1text_1_1text__value__with__units_1_1test__text__value__with__units_1_1TestTextValueBox.html", "dd/d68/classoaGuiElements_1_1Tests_1_1text_1_1text__value__with__units_1_1test__text__value__with__units_1_1TestTextValueBox" ]
-];

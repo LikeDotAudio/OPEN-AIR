@@ -1,6 +1,0 @@
-var classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath =
-[
-    [ "get_angle", "dc/df4/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath.html#a483d39b5169ef5b2c90942021aef7911", null ],
-    [ "get_position", "dc/df4/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath.html#adc352565608e7ac27996aa69b951fdb4", null ],
-    [ "rotate_point", "dc/df4/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__math_1_1CircularMath.html#af612b11f7a854e491da49782fcc53a5e", null ]
-];

@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__toggle_1_1Interface =
-[
-    [ "button_toggle_editor", "d1/dfe/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__toggle_1_1Interface_1_1button__toggle__editor.html", "d1/dfe/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__toggle_1_1Interface_1_1button__toggle__editor" ]
-];

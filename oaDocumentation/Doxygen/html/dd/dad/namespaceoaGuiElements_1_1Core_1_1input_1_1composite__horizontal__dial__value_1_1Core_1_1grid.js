@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid =
-[
-    [ "GridManager", "dc/d7b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager.html", "dc/d7b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager" ]
-];

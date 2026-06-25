@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="ZDICT_params_t",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d1/db3/release_2build_2zstd-sys-49158a597a425ab2_2out_2include_2zdict_8h.html#dc/d0d/structZDICT__params__t",tooltip=" "];
-}

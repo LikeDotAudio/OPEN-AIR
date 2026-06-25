@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Interface_1_1button__wink__toggler__editor =
-[
-    [ "ButtonWinkTogglerEditor", "d1/d31/classoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Interface_1_1button__wink__tog3818b8ef6fab5b25c927f5f1a938711a.html", "d1/d31/classoaGuiElements_1_1Core_1_1buttons_1_1button__wink__toggler_1_1Interface_1_1button__wink__tog3818b8ef6fab5b25c927f5f1a938711a" ]
-];

@@ -1,0 +1,13 @@
+[package]
+name = "openair-visa"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+futures = { version = "0.3", optional = true }
+tokio = { version = "1.35", features = ["full"], optional = true }
+pyo3 = { version = "0.21.2", optional = true }
+
+[features]
+python = ["dep:pyo3", "dep:futures", "dep:tokio"]

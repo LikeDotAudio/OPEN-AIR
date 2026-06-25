@@ -1,6 +1,0 @@
-var classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents =
-[
-    [ "build_entry", "de/d20/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents.html#a6247c8087baac3112fcf76ecb79d5b68", null ],
-    [ "build_label", "de/d20/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents.html#a7096d09fa079ecdd81a3faeb4446d4ff", null ],
-    [ "build_unit_label", "de/d20/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1ui__components_1_1CompositeUIComponents.html#afac0b2c8d6ee5866a52eb28123e95dc2", null ]
-];

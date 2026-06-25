@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor =
-[
-    [ "StatusLightEditor", "d9/dd3/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor.html", "d9/dd3/classoaGuiElements_1_1Core_1_1special_1_1status__light_1_1Interface_1_1status__light__editor_1_1StatusLightEditor" ]
-];

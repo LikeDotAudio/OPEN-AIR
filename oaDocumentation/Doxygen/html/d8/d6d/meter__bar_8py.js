@@ -1,4 +1,0 @@
-var meter__bar_8py =
-[
-    [ "oaGuiElements.Core.metering.meter_bar.Core.meter_bar.BuilderMeterBarCreator", "df/d5b/classoaGuiElements_1_1Core_1_1metering_1_1meter__bar_1_1Core_1_1meter__bar_1_1BuilderMeterBarCreator.html", "df/d5b/classoaGuiElements_1_1Core_1_1metering_1_1meter__bar_1_1Core_1_1meter__bar_1_1BuilderMeterBarCreator" ]
-];

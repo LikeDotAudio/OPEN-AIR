@@ -1,4 +1,0 @@
-var namespaceright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel =
-[
-    [ "PTPMeterPanel", "d5/dbc/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel.html", "d5/dbc/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__meter__panel_1_1PTPMeterPanel" ]
-];

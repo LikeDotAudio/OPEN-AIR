@@ -1,5 +1,0 @@
-var types_2ocagrouperstatuschangeeventdata_8py =
-[
-    [ "aes70.types.ocagrouperstatuschangeeventdata.IOcaGrouperStatusChangeEventData", "de/df4/classaes70_1_1types_1_1ocagrouperstatuschangeeventdata_1_1IOcaGrouperStatusChangeEventData.html", "de/df4/classaes70_1_1types_1_1ocagrouperstatuschangeeventdata_1_1IOcaGrouperStatusChangeEventData" ],
-    [ "aes70.types.ocagrouperstatuschangeeventdata.OcaGrouperStatusChangeEventData", "d5/d2b/classaes70_1_1types_1_1ocagrouperstatuschangeeventdata_1_1OcaGrouperStatusChangeEventData.html", "d5/d2b/classaes70_1_1types_1_1ocagrouperstatuschangeeventdata_1_1OcaGrouperStatusChangeEventData" ]
-];

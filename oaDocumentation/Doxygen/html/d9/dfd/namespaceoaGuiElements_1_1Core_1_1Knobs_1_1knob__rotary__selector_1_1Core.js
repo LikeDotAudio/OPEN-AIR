@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core =
-[
-    [ "knob_rotary_selector", "d8/d7d/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector.html", "d8/d7d/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector" ]
-];

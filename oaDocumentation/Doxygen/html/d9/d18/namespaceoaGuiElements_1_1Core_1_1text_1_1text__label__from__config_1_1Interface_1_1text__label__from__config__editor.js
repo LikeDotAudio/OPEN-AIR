@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface_1_1text__label__from__config__editor =
-[
-    [ "TextLabelFromConfigEditor", "d6/d46/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface_1_1text__label__frod534f37ae2e9cd941ed9b923afd52a62.html", "d6/d46/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface_1_1text__label__frod534f37ae2e9cd941ed9b923afd52a62" ]
-];

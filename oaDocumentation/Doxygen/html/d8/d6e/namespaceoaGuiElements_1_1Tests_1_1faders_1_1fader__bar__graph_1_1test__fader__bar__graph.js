@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Tests_1_1faders_1_1fader__bar__graph_1_1test__fader__bar__graph =
-[
-    [ "TestFaderBarGraph", "d1/d04/classoaGuiElements_1_1Tests_1_1faders_1_1fader__bar__graph_1_1test__fader__bar__graph_1_1TestFaderBarGraph.html", "d1/d04/classoaGuiElements_1_1Tests_1_1faders_1_1fader__bar__graph_1_1test__fader__bar__graph_1_1TestFaderBarGraph" ]
-];

@@ -1,5 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional__buttons =
-[
-    [ "BuilderInputDirectionalButtonsCreator", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional23741b0ea9f7f916ffd8998ec7643499.html", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional23741b0ea9f7f916ffd8998ec7643499" ],
-    [ "app_constants", "d5/d58/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional__buttons.html#a9c6232c77fb1c1cbf6660d45effab9c9", null ]
-];

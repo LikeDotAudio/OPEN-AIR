@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPEN-AIR HTML5 GUI</title>
+    <link rel="icon" href="data:,">
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.0/babel.min.js"></script>
+    <!-- ECharts (for graphs) -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <!-- MQTT.js -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        #root {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Scrollbar styles for dark theme */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Load Component Library -->
+    <script type="text/babel" src="../../libControl/faders/core/utils.js?v=5"></script>
+    <script type="text/babel" src="../../libControl/faders/core/Scale.jsx?v=8"></script>
+    <script type="text/babel" src="../../libControl/faders/core/Cap.jsx?v=5"></script>
+    <script type="text/babel" src="../../libControl/faders/core/Fader.jsx?v=17"></script>
+    <script type="text/babel" src="../../libControl/faders/DualFader/DualFader.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/faders/LTPFader/LTPFader.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/faders/FaderDial/FaderDial.jsx?v=31"></script>
+    <script type="text/babel" src="../../libControl/faders/FaderDial/Designer.jsx?v=3"></script>
+    <script type="text/babel" src="../../libControl/faders/FaderWithMeter/FaderWithMeter.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/faders/GCA/GCA.jsx?v=11"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Standard.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Chicken.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Marconi.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/British.jsx?v=3"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Pedal.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/K1176.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/API.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Fender.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/Moog.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/caps/WBSElma.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/Knobs/Knob/Knob.jsx?v=39"></script>
+    <script type="text/babel" src="../../libControl/Knobs/SelectorSwitch/SelectorSwitch.jsx?v=9"></script>
+    <script type="text/babel" src="../../libControl/metering/MeterBarGraph/MeterBarGraph.jsx?v=5"></script>
+    <script type="text/babel" src="../../libControl/metering/NeedleMeter/NeedleMeter.jsx?v=16"></script>
+    <script type="text/babel" src="../../libControl/metering/NeedleMeter/Designer.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/metering/VUMeterKnob/VUMeterKnob.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/metering/OcaProgressBar/OcaProgressBar.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/special/CMDP/CMDP.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/special/MDP/MDP.jsx?v=6"></script>
+    <!-- Migrated Components -->
+    <script type="text/babel" src="../../libControl/special/GraphingCont/GraphingCont.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/GraphingCont1/GraphingCont1.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/MediaButtons/MediaButtons.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/GraphingElements/GraphingElements.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/YakMonitor/YakMonitor.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/ProtocolMatrix/ProtocolMatrix.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/CommandRouter/CommandRouter.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Smpte2138Monitor/Smpte2138Monitor.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/NmosWebsockets/NmosWebsockets.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/NmosConnection/NmosConnection.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/NmosCommands/NmosCommands.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/MidiOutput/MidiOutput.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/MidiIn/MidiIn.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Sap/Sap.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Aes70/Aes70.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Ember/Ember.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/SnmpLog/SnmpLog.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/SnmpMib/SnmpMib.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/SnmpStatus/SnmpStatus.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/SnmpVerifyMib/SnmpVerifyMib.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/SnmpVerify/SnmpVerify.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Mdns/Mdns.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/GuiRest/GuiRest.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/Dnssd/Dnssd.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/GuiOsc/GuiOsc.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/special/ProtocolConfigDisplay/ProtocolConfigDisplay.jsx?v=1"></script>
+    <script type="text/babel" src="../../libControl/graphing/DynamicGraph/DynamicGraph.jsx?v=7"></script>
+    <script type="text/babel" src="../../libControl/graphing/Radar/Radar.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/buttons/Button/Button.jsx?v=5"></script>
+    <script type="text/babel" src="../../libControl/buttons/ButtonToggle/ButtonToggle.jsx?v=8"></script>
+    <script type="text/babel" src="../../libControl/buttons/ButtonToggler/ButtonToggler.jsx?v=23"></script>
+    <script type="text/babel" src="../../libControl/buttons/WinkButton/WinkButton.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/buttons/WinkButtonToggler/WinkButtonToggler.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/buttons/TrapezoidButton/TrapezoidButton.jsx?v=5"></script>
+    <script type="text/babel" src="../../libControl/buttons/TrapezoidButtonToggler/TrapezoidButtonToggler.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/text/TextElements/TextElements.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/text/OcaTable/OcaTable.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/text/OcaWebLink/OcaWebLink.jsx?v=5"></script>
+    <script type="text/babel" src="../../libControl/input/InputElements/InputElements.jsx?v=8"></script>
+    <script type="text/babel" src="../../libControl/input/DirectionalButtons/DirectionalButtons.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/input/IncDecButtons/IncDecButtons.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/input/OcaTextInput/OcaTextInput.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/input/OcaListbox/OcaListbox.jsx?v=8"></script>
+    <script type="text/babel" src="../../libControl/input/OcaCheckbox/OcaCheckbox.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/input/OcaSliderValue/OcaSliderValue.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/input/JsonTree/JsonTree.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/special/MidiKeyboard/MidiKeyboard.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/special/StatusLight/StatusLight.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/images/ImageDisplay/ImageDisplay.jsx?v=6"></script>
+    <script type="text/babel" src="../../libControl/images/AnimationDisplay/AnimationDisplay.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/BreakLine/BreakLine.jsx?v=5"></script>
+
+    <!-- Procedural Panel/Screw engine (WASM). The two engine scripts are CLASSIC
+         (not text/babel): pkg/oa_panels.js defines the global wasm_bindgen, then
+         panel_wasm_loader.js inits it and bridges exports to window.OAPanels. The
+         Panel/Screw components are Babel and only touch window.* -->
+    <script src="../../libControl/Panels/wasm/pkg/oa_panels.js?v=2"></script>
+    <script src="../../libControl/Panels/panel_wasm_loader.js?v=2"></script>
+    <script type="text/babel" src="../../libControl/Panels/Panel/Panel.jsx?v=2"></script>
+    <script type="text/babel" src="../../libControl/Panels/Screw/Screw.jsx?v=1"></script>
+
+    <!-- Load MQTT & Layout & Navigation Engines -->
+    <script src="../../comMQTT/topicUtils.js?v=1"></script>
+    <script src="../../comMQTT/topicMaker.jsx?v=1"></script>
+    <script type="text/babel" src="../../comMQTT/MqttProvider.jsx?v=11"></script>
+    <script type="text/babel" src="../../frameLayout/oaCssLen.js?v=3"></script>
+    <script src="../../frameLayout/transparency.js?v=2"></script>
+    <script type="text/babel" src="../../frameLayout/OcaBin.jsx?v=5"></script>
+    <script type="text/babel" src="../../frameLayout/OcaBlock.jsx?v=4"></script>
+    <script type="text/babel" src="../../frameLayout/OcaArray.jsx?v=2"></script>
+    <script type="text/babel" src="../../frameLayout/FieldComponent.jsx?v=14"></script>
+    <script type="text/babel" src="../../frameLayout/WidgetFactory.jsx?v=32"></script>
+    <script type="text/babel" src="../../frameLayout/SplitLayout.jsx?v=6"></script>
+    <script type="text/babel" src="../../frameLayout/TabLayout.jsx?v=6"></script>
+    <script type="text/babel" src="../../frameLayout/LoaderOrchestrator.jsx?v=10"></script>
+    <script type="text/babel" src="../../tabManager/nav_state.jsx?v=1"></script>
+    <script type="text/babel" src="../../tabManager/WindowManager.jsx?v=8"></script>
+
+    <!-- WYSIWYG Editor (HTML5) — mirrors oaGuiEditorWYSIWYG folder/function structure -->
+    <script type="text/babel" src="../../editorWYSIWYG/Core/state.jsx?v=7"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/FileReaders/file_reader.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/FileReaders/grab_bag_loader.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/FileWriters/file_writer.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Constants/property_options.jsx?v=7"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Constants/composite_schemas.jsx?v=13"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/snap_logic.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/focus.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/drag_move.jsx?v=1"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/overlay_manager.jsx?v=10"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/resize_handles.jsx?v=19"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/preview_engine.jsx?v=6"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/layout_engine/ruler.jsx?v=6"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Methods/builder_editor_grid.jsx?v=6"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/PropertyEditor/property_leaf.jsx?v=17"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/PropertyEditor/CopyStyle.jsx?v=2"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/PropertyEditor/CopyLayout.jsx?v=2"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/PropertyEditor/Copy_config.jsx?v=1"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/PropertyEditor/artistic_designer.jsx?v=4"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/renderers/tree_renderer.jsx?v=26"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Tabs/InteractiveLayout/interactive_layout.jsx?v=9"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Tabs/ElementProperties/Entry.jsx?v=29"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Tabs/JsonEditor/json_editor.jsx?v=17"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Tabs/TreeRefactor/Entry.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Tabs/GrabBagView/grab_bag_view.jsx?v=7"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Window/editor_toolbar.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Interface/Window/editor_layout.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Managers/wysiwyg_editor.jsx?v=5"></script>
+    <script type="text/babel" src="../../editorWYSIWYG/Entry.jsx?v=5"></script>
+
+    <!-- Main App Bootstrapper -->
+    <script type="text/babel">
+        function App() {
+            const [directoryTree, setDirectoryTree] = React.useState(null);
+            const [error, setError] = React.useState(null);
+
+            React.useEffect(() => {
+                // Fetch the directory structure from our Python Web Server
+                fetch('/api/tree')
+                    .then(res => {
+                        if (!res.ok) throw new Error("Failed to fetch layout tree from /api/tree");
+                        return res.json();
+                    })
+                    .then(data => {
+                        setDirectoryTree(data);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        setError(err.toString());
+                    });
+            }, []);
+
+            if (error) {
+                return (
+                    <div style={{ padding: '20px', color: '#ff5252' }}>
+                        <h3>Boot Sequence Error</h3>
+                        <p>{error}</p>
+                        <p>Ensure that LauchWebserver.py is running on localhost.</p>
+                    </div>
+                );
+            }
+
+            if (!directoryTree) {
+                return <div style={{ padding: '20px' }}>Initializing OPEN-AIR Kernel...</div>;
+            }
+
+            return (
+                <window.MqttProvider>
+                    <window.WindowManager directoryTree={directoryTree} />
+                </window.MqttProvider>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface =
-[
-    [ "text_web_link_editor", "d3/dc9/namespaceoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor.html", "d3/dc9/namespaceoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor" ]
-];

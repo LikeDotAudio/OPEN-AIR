@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface_1_1fader__bar__graph__editor =
-[
-    [ "FaderBarGraphEditor", "d8/d4e/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface_1_1fader__bar__graph__editor_1_1FaderBarGraphEditor.html", "d8/d4e/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface_1_1fader__bar__graph__editor_1_1FaderBarGraphEditor" ]
-];

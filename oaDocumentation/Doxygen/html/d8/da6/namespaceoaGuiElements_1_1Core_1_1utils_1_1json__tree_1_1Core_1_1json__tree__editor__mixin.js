@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin =
-[
-    [ "JsonTreeEditorMixin", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
-];

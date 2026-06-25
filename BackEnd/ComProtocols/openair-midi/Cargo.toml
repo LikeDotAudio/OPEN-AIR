@@ -1,0 +1,18 @@
+[package]
+name = "openair-midi"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.36", features = ["full"] }
+midir = "0.9.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+pyo3 = { version = "0.21.2", optional = true }
+crossbeam-channel = { version = "0.5", optional = true }
+once_cell = { version = "1.19", optional = true }
+regex = { version = "1.10", optional = true }
+
+[features]
+python = ["dep:pyo3", "dep:crossbeam-channel", "dep:once_cell", "dep:regex"]

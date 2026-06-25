@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="LanguagePack",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d3/de6/release_2build_2oaRustCore-a13e50a6292a5455_2out_2st2138_8rs.html#df/dfc/structLanguagePack",tooltip="Language Pack A map of string identifiers, e.g. \"greeting\" to strings which are all in the same langu..."];
-}

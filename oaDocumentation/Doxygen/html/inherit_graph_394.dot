@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.images.images\l_progress_bar.Interface.images\l_progress_bar_editor.ImagesProgressBarEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$dc/dca/classoaGuiElements_1_1Core_1_1images_1_1images__progress__bar_1_1Interface_1_1images__progress__28273f2e4c0b579a2c6ea843df233f16.html",tooltip=" "];
-}

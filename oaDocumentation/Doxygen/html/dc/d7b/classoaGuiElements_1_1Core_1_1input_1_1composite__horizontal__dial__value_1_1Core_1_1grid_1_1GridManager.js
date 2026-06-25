@@ -1,4 +1,0 @@
-var classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager =
-[
-    [ "configure", "dc/d7b/classoaGuiElements_1_1Core_1_1input_1_1composite__horizontal__dial__value_1_1Core_1_1grid_1_1GridManager.html#affaab26242713ba243c849a7cd0777d7", null ]
-];

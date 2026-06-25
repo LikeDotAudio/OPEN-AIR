@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.utils.checkbox.\lInterface.checkbox_editor.CheckboxEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d5/d82/classoaGuiElements_1_1Core_1_1utils_1_1checkbox_1_1Interface_1_1checkbox__editor_1_1CheckboxEditor.html",tooltip=" "];
-}

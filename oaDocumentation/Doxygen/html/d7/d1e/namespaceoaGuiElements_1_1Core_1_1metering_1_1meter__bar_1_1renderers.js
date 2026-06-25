@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__bar_1_1renderers =
-[
-    [ "tk_canvas_renderer", "d7/d80/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__bar_1_1renderers_1_1tk__canvas__renderer.html", "d7/d80/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__bar_1_1renderers_1_1tk__canvas__renderer" ]
-];

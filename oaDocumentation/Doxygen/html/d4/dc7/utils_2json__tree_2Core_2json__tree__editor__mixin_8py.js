@@ -1,4 +1,0 @@
-var utils_2json__tree_2Core_2json__tree__editor__mixin_8py =
-[
-    [ "oaGuiElements.Core.utils.json_tree.Core.json_tree_editor_mixin.JsonTreeEditorMixin", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "db/dba/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
-];

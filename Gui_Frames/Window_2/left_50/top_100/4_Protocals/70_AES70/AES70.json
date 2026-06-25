@@ -1,0 +1,100 @@
+{
+  "Migrated_Aes70": {
+    "type": "OcaBin",
+    "id": "migrated.AES70",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Aes70"
+            },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "HostInput": {
+            "type": "OcaTextInput",
+            "topic": "OpenAir/Protocol/Aes70/Host",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "IP Address"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 30
+            }
+          },
+          "PortInput": {
+            "type": "OcaTextInput",
+            "topic": "OpenAir/Protocol/Aes70/Port",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Port"
+                }
+              }
+            },
+            "layout": {
+              "width": 100,
+              "height": 30
+            }
+          },
+          "EnableToggle": {
+            "type": "OcaCheckbox",
+            "topic": "OpenAir/Protocol/Aes70/Enable",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Enable Protocol"
+                }
+              }
+            },
+            "layout": {
+              "width": 150,
+              "height": 30
+            }
+          },
+          "TrafficLog": {
+            "type": "OcaListbox",
+            "topic": "OpenAir/Protocol/Aes70/Log",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Traffic Log"
+                }
+              }
+            },
+            "layout": {
+              "width": 350,
+              "height": 200
+            }
+          },
+          "ConfigDisplay": {
+            "type": "ProtocolConfigDisplay",
+            "protocol_name": "aes70",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "config.ini"
+                }
+              }
+            },
+            "layout": {
+              "width": "100%",
+              "height": 220
+            }
+          }
+        }
+      }
+    }
+  }
+}

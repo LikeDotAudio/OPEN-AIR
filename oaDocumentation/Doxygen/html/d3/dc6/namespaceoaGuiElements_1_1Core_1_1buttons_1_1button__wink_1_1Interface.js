@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Interface =
-[
-    [ "button_wink_editor", "d7/d9e/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Interface_1_1button__wink__editor.html", "d7/d9e/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__wink_1_1Interface_1_1button__wink__editor" ]
-];

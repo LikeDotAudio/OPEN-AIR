@@ -1,4 +1,0 @@
-var input_2json__tree_2Core_2json__tree__editor__mixin_8py =
-[
-    [ "oaGuiElements.Core.input.json_tree.Core.json_tree_editor_mixin.JsonTreeEditorMixin", "df/d1d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin.html", "df/d1d/classoaGuiElements_1_1Core_1_1input_1_1json__tree_1_1Core_1_1json__tree__editor__mixin_1_1JsonTreeEditorMixin" ]
-];

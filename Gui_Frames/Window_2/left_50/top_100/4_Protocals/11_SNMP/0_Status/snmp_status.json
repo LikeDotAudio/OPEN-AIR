@@ -1,0 +1,100 @@
+{
+  "Migrated_SnmpStatus": {
+    "type": "OcaBin",
+    "id": "migrated.snmp_status",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "SnmpStatus"
+            },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "HostInput": {
+            "type": "OcaTextInput",
+            "topic": "OpenAir/Protocol/SnmpStatus/Host",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "IP Address"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 30
+            }
+          },
+          "PortInput": {
+            "type": "OcaTextInput",
+            "topic": "OpenAir/Protocol/SnmpStatus/Port",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Port"
+                }
+              }
+            },
+            "layout": {
+              "width": 100,
+              "height": 30
+            }
+          },
+          "EnableToggle": {
+            "type": "OcaCheckbox",
+            "topic": "OpenAir/Protocol/SnmpStatus/Enable",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Enable Protocol"
+                }
+              }
+            },
+            "layout": {
+              "width": 150,
+              "height": 30
+            }
+          },
+          "TrafficLog": {
+            "type": "OcaListbox",
+            "topic": "OpenAir/Protocol/SnmpStatus/Log",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Traffic Log"
+                }
+              }
+            },
+            "layout": {
+              "width": 350,
+              "height": 200
+            }
+          },
+          "ConfigDisplay": {
+            "type": "ProtocolConfigDisplay",
+            "protocol_name": "snmp",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "config.ini"
+                }
+              }
+            },
+            "layout": {
+              "width": "100%",
+              "height": 220
+            }
+          }
+        }
+      }
+    }
+  }
+}

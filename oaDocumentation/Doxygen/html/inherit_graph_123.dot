@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="Core.horizontal_fader\l_renderer_mixin.HorizontalFader\lRendererMixin",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d9/d6c/classCore_1_1horizontal__fader__renderer__mixin_1_1HorizontalFaderRendererMixin.html",tooltip=" "];
-}

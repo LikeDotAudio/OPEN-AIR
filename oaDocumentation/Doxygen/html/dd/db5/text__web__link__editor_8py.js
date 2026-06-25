@@ -1,4 +1,0 @@
-var text__web__link__editor_8py =
-[
-    [ "oaGuiElements.Core.text.text_web_link.Interface.text_web_link_editor.TextWebLinkEditor", "db/d4f/classoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor_1_1TextWebLinkEditor.html", "db/d4f/classoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor_1_1TextWebLinkEditor" ]
-];

@@ -1,4 +1,0 @@
-var dual__fader__renderer__mixin_8py =
-[
-    [ "oaGuiElements.Core.faders.fader_dual.Core.dual_fader_renderer_mixin.DualFaderRendererMixin", "db/d5d/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__renderer__mixin_1_1DualFaderRendererMixin.html", "db/d5d/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__renderer__mixin_1_1DualFaderRendererMixin" ]
-];

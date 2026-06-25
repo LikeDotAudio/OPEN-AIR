@@ -1,4 +1,0 @@
-var test__fader__bar__graph_8py =
-[
-    [ "oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph", "d1/d04/classoaGuiElements_1_1Tests_1_1faders_1_1fader__bar__graph_1_1test__fader__bar__graph_1_1TestFaderBarGraph.html", "d1/d04/classoaGuiElements_1_1Tests_1_1faders_1_1fader__bar__graph_1_1test__fader__bar__graph_1_1TestFaderBarGraph" ]
-];

@@ -1,4 +1,0 @@
-var utils_2json__tree_2Interface_2json__tree__editor_8py =
-[
-    [ "oaGuiElements.Core.utils.json_tree.Interface.json_tree_editor.JsonTreeEditor", "d1/dee/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor.html", "d1/dee/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Interface_1_1json__tree__editor_1_1JsonTreeEditor" ]
-];

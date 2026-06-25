@@ -1,5 +1,0 @@
-var classoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Core_1_1dropdown__style__mixin_1_1DropdownStyleMixin =
-[
-    [ "_blend_colors", "d9/d45/classoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Core_1_1dropdown__style__mixin_1_1DropdownStyleMixin.html#a2ccd3c5b7a5a54822400122f41616f8b", null ],
-    [ "apply_style", "d9/d45/classoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Core_1_1dropdown__style__mixin_1_1DropdownStyleMixin.html#a45ca8dd43d8901f5461709454095fc02", null ]
-];

@@ -1,5 +1,0 @@
-var special_2circular__motion__displacement__potentiometer_2Core_2cmdp__group__mixin_8py =
-[
-    [ "oaGuiElements.Core.special.circular_motion_displacement_potentiometer.Core.cmdp_group_mixin.CMDPGroupMixin", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1.html", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1" ],
-    [ "ACCENT_COLOR", "d8/d56/special_2circular__motion__displacement__potentiometer_2Core_2cmdp__group__mixin_8py.html#ac79fb444867739553c01628493d4309d", null ]
-];

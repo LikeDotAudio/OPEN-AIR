@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.faders.fader\l_linear_travelling_potentiometer.Core.ltp\l_asset_generator.LTPAssetGenerator",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d3/d54/classoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Core_1_1ltp_815992d9445ab16c9938be602bb0c483.html",tooltip=" "];
-}

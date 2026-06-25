@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.Knobs.knob.\lInterface.knob_editor.KnobEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$da/dc2/classoaGuiElements_1_1Core_1_1Knobs_1_1knob_1_1Interface_1_1knob__editor_1_1KnobEditor.html",tooltip=" "];
-}

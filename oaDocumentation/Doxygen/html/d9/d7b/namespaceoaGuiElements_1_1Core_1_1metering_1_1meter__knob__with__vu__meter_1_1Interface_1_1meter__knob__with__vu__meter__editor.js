@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__knob__with__vu__meter_1_1Interface_1_1meter__knob__with__vu__meter__editor =
-[
-    [ "MeterKnobWithVuMeterEditor", "d3/d1b/classoaGuiElements_1_1Core_1_1metering_1_1meter__knob__with__vu__meter_1_1Interface_1_1meter__knbbdcc2b654e02683da64afde10deabd8.html", "d3/d1b/classoaGuiElements_1_1Core_1_1metering_1_1meter__knob__with__vu__meter_1_1Interface_1_1meter__knbbdcc2b654e02683da64afde10deabd8" ]
-];

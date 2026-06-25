@@ -1,4 +1,0 @@
-var label_8py =
-[
-    [ "oaGuiElements.Core.metering.meter_needle.cosmetics.label.BezelLabel", "d5/d11/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1label_1_1BezelLabel.html", "d5/d11/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1label_1_1BezelLabel" ]
-];

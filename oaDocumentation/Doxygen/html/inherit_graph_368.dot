@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.faders.fader.\lInterface.fader_editor.FaderEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d2/d17/classoaGuiElements_1_1Core_1_1faders_1_1fader_1_1Interface_1_1fader__editor_1_1FaderEditor.html",tooltip=" "];
-}

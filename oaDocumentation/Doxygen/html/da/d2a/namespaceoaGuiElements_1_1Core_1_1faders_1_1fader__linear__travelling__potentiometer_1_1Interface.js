@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Interface =
-[
-    [ "fader_linear_travelling_potentiometer_editor", "d3/d6b/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Interfac6fadf16e1142d601d4e0c5a1a3eaa811.html", "d3/d6b/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Interfac6fadf16e1142d601d4e0c5a1a3eaa811" ]
-];

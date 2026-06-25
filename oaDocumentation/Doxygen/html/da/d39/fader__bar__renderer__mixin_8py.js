@@ -1,4 +1,0 @@
-var fader__bar__renderer__mixin_8py =
-[
-    [ "oaGuiElements.Core.faders.fader_bar_graph.Core.fader_bar_renderer_mixin.FaderBarRendererMixin", "d3/de3/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__renderer__mixin_1_1FaderBarRendererMixin.html", "d3/de3/classoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Core_1_1fader__bar__renderer__mixin_1_1FaderBarRendererMixin" ]
-];

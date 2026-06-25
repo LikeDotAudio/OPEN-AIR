@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="Core.protocol_router.settle.\lSettleManager",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d0/d32/classCore_1_1protocol__router_1_1settle_1_1SettleManager.html",tooltip=" "];
-}

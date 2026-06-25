@@ -1,0 +1,15 @@
+[package]
+name = "openair-smpte2138"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+prost = { version = "0.12", optional = true }
+pyo3 = { version = "0.21.2", optional = true }
+
+[build-dependencies]
+prost-build = "0.12"
+
+[features]
+python = ["dep:pyo3", "dep:prost"]

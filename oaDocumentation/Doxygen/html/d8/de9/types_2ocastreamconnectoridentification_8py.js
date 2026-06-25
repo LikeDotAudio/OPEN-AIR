@@ -1,5 +1,0 @@
-var types_2ocastreamconnectoridentification_8py =
-[
-    [ "aes70.types.ocastreamconnectoridentification.IOcaStreamConnectorIdentification", "dc/dcc/classaes70_1_1types_1_1ocastreamconnectoridentification_1_1IOcaStreamConnectorIdentification.html", "dc/dcc/classaes70_1_1types_1_1ocastreamconnectoridentification_1_1IOcaStreamConnectorIdentification" ],
-    [ "aes70.types.ocastreamconnectoridentification.OcaStreamConnectorIdentification", "d4/d0d/classaes70_1_1types_1_1ocastreamconnectoridentification_1_1OcaStreamConnectorIdentification.html", "d4/d0d/classaes70_1_1types_1_1ocastreamconnectoridentification_1_1OcaStreamConnectorIdentification" ]
-];

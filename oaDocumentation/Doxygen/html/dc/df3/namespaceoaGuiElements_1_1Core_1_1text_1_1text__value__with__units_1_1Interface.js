@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Interface =
-[
-    [ "text_value_with_units_editor", "de/dc4/namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Interface_1_1text__value__with__units__editor.html", "de/dc4/namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Interface_1_1text__value__with__units__editor" ]
-];

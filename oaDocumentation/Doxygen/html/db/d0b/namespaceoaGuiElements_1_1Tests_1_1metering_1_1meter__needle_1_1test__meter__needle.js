@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Tests_1_1metering_1_1meter__needle_1_1test__meter__needle =
-[
-    [ "TestMeterNeedle", "d2/dea/classoaGuiElements_1_1Tests_1_1metering_1_1meter__needle_1_1test__meter__needle_1_1TestMeterNeedle.html", "d2/dea/classoaGuiElements_1_1Tests_1_1metering_1_1meter__needle_1_1test__meter__needle_1_1TestMeterNeedle" ]
-];

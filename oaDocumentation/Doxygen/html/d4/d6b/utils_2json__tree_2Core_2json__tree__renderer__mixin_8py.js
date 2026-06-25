@@ -1,4 +1,0 @@
-var utils_2json__tree_2Core_2json__tree__renderer__mixin_8py =
-[
-    [ "oaGuiElements.Core.utils.json_tree.Core.json_tree_renderer_mixin.JsonTreeRendererMixin", "dc/d99/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin.html", "dc/d99/classoaGuiElements_1_1Core_1_1utils_1_1json__tree_1_1Core_1_1json__tree__renderer__mixin_1_1JsonTreeRendererMixin" ]
-];

@@ -1,4 +1,0 @@
-var classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Core_1_1visual__helpers_1_1MeterVisualHelpers =
-[
-    [ "draw_rounded_rect_poly", "d2/d7f/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Core_1_1visual__helpers_1_1MeterVisualHelpers.html#ad6c3ac5bb35380ce7bb92d88be02a635", null ]
-];

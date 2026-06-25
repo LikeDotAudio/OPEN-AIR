@@ -1,4 +1,0 @@
-var classaes70_1_1types_1_1ocamediaconnectorstatuschangedeventdata_1_1IOcaMediaConnectorStatusChangedEventData =
-[
-    [ "ConnectorStatus", "d3/d4a/classaes70_1_1types_1_1ocamediaconnectorstatuschangedeventdata_1_1IOcaMediaConnectorStatusChangedEventData.html#adc87f71a6e9ed42800bf1fa3b9a84723", null ]
-];

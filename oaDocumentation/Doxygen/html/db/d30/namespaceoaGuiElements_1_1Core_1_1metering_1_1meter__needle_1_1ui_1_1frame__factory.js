@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1ui_1_1frame__factory =
-[
-    [ "FrameFactory", "d9/db7/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1ui_1_1frame__factory_1_1FrameFactory.html", "d9/db7/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1ui_1_1frame__factory_1_1FrameFactory" ]
-];

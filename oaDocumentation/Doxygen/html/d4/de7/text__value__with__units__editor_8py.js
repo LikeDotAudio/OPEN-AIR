@@ -1,4 +1,0 @@
-var text__value__with__units__editor_8py =
-[
-    [ "oaGuiElements.Core.text.text_value_with_units.Interface.text_value_with_units_editor.TextValueWithUnitsEditor", "d3/d99/classoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Interface_1_1text__value__with20fd86225f3f6fbf531999dd07cc4a54.html", "d3/d99/classoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Interface_1_1text__value__with20fd86225f3f6fbf531999dd07cc4a54" ]
-];

@@ -1,4 +1,0 @@
-var input_2slider__value_2Interface_2slider__value__editor_8py =
-[
-    [ "oaGuiElements.Core.input.slider_value.Interface.slider_value_editor.SliderValueEditor", "dd/d7d/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor.html", "dd/d7d/classoaGuiElements_1_1Core_1_1input_1_1slider__value_1_1Interface_1_1slider__value__editor_1_1SliderValueEditor" ]
-];

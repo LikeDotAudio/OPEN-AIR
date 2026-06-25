@@ -1,5 +1,0 @@
-var classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0 =
-[
-    [ "make", "d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a46e89cef6fafba0e9bb7fcf8229baee5", null ],
-    [ "make_text_label_from_config", "d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html#a7fda5fdea72131ea4f8002df6e719a7e", null ]
-];

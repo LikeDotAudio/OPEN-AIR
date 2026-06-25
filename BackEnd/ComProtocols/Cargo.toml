@@ -1,0 +1,24 @@
+# Communication-protocol crates workspace.
+# Previously these were members of the repo-root workspace; that workspace was
+# moved into BackEnd/Core, and Cargo requires members to live below their root,
+# so the protocol crates now form their own sibling workspace here.
+[workspace]
+resolver = "2"
+members = [
+    "openair-aes70",
+    "openair-dnssd",
+    "openair-ember",
+    "openair-mdns",
+    "openair-midi",
+    "openair-mqtt",
+    "openair-nmos",
+    "openair-osc",
+    "openair-ptp",
+    "openair-rest",
+    "openair-sap",
+    "openair-smpte2138",
+    "openair-snmp",
+    "openair-visa",
+    "openair-websocket",
+    "openair-yak",
+]

@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.utils.knob\l_rotary_selector.Core.knob\l_rotary_selector.BuilderKnobRotarySelector\lCreator",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$da/d27/classoaGuiElements_1_1Core_1_1utils_1_1knob__rotary__selector_1_1Core_1_1knob__rotary__selector_8c9fb722b4755e6cb1732cdb3777654b.html",tooltip=" "];
-}

@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.utils.status\l_light.Core.status_light.BuilderStatus\lLightCreator",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d1/dc5/classoaGuiElements_1_1Core_1_1utils_1_1status__light_1_1Core_1_1status__light_1_1BuilderStatusLightCreator.html",tooltip=" "];
-}

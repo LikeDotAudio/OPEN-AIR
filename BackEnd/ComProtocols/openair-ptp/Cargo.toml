@@ -1,0 +1,12 @@
+[package]
+name = "openair-ptp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+parking_lot = { version = "0.12", optional = true }
+pyo3 = { version = "0.21.2", optional = true }
+
+[features]
+python = ["dep:pyo3", "dep:parking_lot"]

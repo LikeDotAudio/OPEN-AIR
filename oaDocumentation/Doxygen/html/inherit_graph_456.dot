@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.special.circular\l_motion_displacement_potentiometer.Interface.circular\l_motion_displacement_potentiometer_editor.CircularMotion\lDisplacementPotentiometerEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d4/d7d/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Interfafff697eeee228341169fb5492a55a9f.html",tooltip=" "];
-}

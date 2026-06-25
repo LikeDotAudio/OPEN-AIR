@@ -1,6 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core =
-[
-    [ "button_trapezoid", "d0/d85/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid.html", "d0/d85/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid" ],
-    [ "trapezoid_interaction_mixin", "d2/dc6/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mixin.html", "d2/dc6/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mixin" ],
-    [ "trapezoid_renderer_mixin", "d9/d0f/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin.html", "d9/d0f/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin" ]
-];

@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="oaGuiElements.Core.utils.breakoff.hidden\l_breakoff.HiddenBreakoffManagerMixin",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d6/db2/classoaGuiElements_1_1Core_1_1utils_1_1breakoff_1_1hidden__breakoff_1_1HiddenBreakoffManagerMixin.html",tooltip=" "];
-}

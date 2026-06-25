@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold =
-[
-    [ "MetalFoldLayer", "d4/d14/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer.html", "d4/d14/classoaGuiElements_1_1Core_1_1utils_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer" ]
-];

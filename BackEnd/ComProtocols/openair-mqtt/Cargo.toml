@@ -1,0 +1,13 @@
+[package]
+name = "openair-mqtt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+dashmap = { version = "5.5", optional = true }
+regex = { version = "1.10", optional = true }
+pyo3 = { version = "0.21.2", optional = true }
+
+[features]
+python = ["dep:pyo3", "dep:dashmap", "dep:regex"]

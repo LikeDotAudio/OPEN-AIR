@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Interface =
-[
-    [ "text_gui_dropdown_option_editor", "da/d0b/namespaceoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Interface_1_1text__gui__dropdown__option__editor.html", "da/d0b/namespaceoaGuiElements_1_1Core_1_1text_1_1text__gui__dropdown__option_1_1Interface_1_1text__gui__dropdown__option__editor" ]
-];

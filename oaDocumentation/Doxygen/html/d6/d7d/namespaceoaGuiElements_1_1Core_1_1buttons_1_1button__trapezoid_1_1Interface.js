@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Interface =
-[
-    [ "button_trapezoid_editor", "d3/dcb/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Interface_1_1button__trapezoid__editor.html", "d3/dcb/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Interface_1_1button__trapezoid__editor" ]
-];

@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core =
-[
-    [ "input_directional_buttons", "d5/d58/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional__buttons.html", "d5/d58/namespaceoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional__buttons" ]
-];

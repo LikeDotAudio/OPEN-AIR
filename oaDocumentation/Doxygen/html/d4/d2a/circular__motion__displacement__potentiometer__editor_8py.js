@@ -1,4 +1,0 @@
-var circular__motion__displacement__potentiometer__editor_8py =
-[
-    [ "Interface.circular_motion_displacement_potentiometer_editor.CircularMotionDisplacementPotentiometerEditor", "d2/d21/classInterface_1_1circular__motion__displacement__potentiometer__editor_1_1CircularMotionDisplacementPotentiometerEditor.html", "d2/d21/classInterface_1_1circular__motion__displacement__potentiometer__editor_1_1CircularMotionDisplacementPotentiometerEditor" ]
-];

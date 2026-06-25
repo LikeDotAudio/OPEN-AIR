@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="ZSTD_inBuffer_s",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d8/de7/release_2build_2zstd-sys-49158a597a425ab2_2out_2include_2zstd_8h.html#df/db1/structZSTD__inBuffer__s",tooltip=" "];
-}

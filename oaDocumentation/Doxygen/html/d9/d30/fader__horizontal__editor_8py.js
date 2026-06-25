@@ -1,4 +1,0 @@
-var fader__horizontal__editor_8py =
-[
-    [ "oaGuiElements.Core.faders.fader_horizontal.Interface.fader_horizontal_editor.FaderHorizontalEditor", "de/dab/classoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Interface_1_1fader__horizontal__editor_1_1FaderHorizontalEditor.html", "de/dab/classoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Interface_1_1fader__horizontal__editor_1_1FaderHorizontalEditor" ]
-];

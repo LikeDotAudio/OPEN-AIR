@@ -1,5 +1,0 @@
-var classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin_1_1TrapezoidRendererMixin =
-[
-    [ "adjust_color_lightness", "d0/d2d/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin_1_1TrapezoidRendererMixin.html#ad6250e3d293e18e317eab3c671242972", null ],
-    [ "render_trapezoid_button", "d0/d2d/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin_1_1TrapezoidRendererMixin.html#a0c2b458f049d06b62ec48e842a8fc306", null ]
-];

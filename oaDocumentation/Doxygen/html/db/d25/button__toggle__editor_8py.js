@@ -1,4 +1,0 @@
-var button__toggle__editor_8py =
-[
-    [ "oaGuiElements.Core.buttons.button_toggle.Interface.button_toggle_editor.ButtonToggleEditor", "dd/d0a/classoaGuiElements_1_1Core_1_1buttons_1_1button__toggle_1_1Interface_1_1button__toggle__editor_1_1ButtonToggleEditor.html", "dd/d0a/classoaGuiElements_1_1Core_1_1buttons_1_1button__toggle_1_1Interface_1_1button__toggle__editor_1_1ButtonToggleEditor" ]
-];

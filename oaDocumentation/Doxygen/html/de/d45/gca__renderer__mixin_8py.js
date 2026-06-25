@@ -1,4 +1,0 @@
-var gca__renderer__mixin_8py =
-[
-    [ "oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_renderer_mixin.GCARendererMixin", "d9/d6b/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Core_1_1gca__renderer__mixin_1_1GCARendererMixin.html", "d9/d6b/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Core_1_1gca__renderer__mixin_1_1GCARendererMixin" ]
-];

@@ -1,8 +1,0 @@
-node_modules/
-docs/openapi.yaml
-interface/schemata/device.json
-tools/data/*
-.redocly.yaml
-build/
-*.tgz
-

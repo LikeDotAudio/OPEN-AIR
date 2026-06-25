@@ -1,4 +1,0 @@
-var classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine =
-[
-    [ "populate", "d5/d01/classright__50_1_1bottom__90_1_12__monitors_1_11588__PTP__Monitor_1_1Core_1_1ptp__dissector__engine_1_1PTPDissectorEngine.html#a39386706ea5e9287e7af5c85b6790ff1", null ]
-];

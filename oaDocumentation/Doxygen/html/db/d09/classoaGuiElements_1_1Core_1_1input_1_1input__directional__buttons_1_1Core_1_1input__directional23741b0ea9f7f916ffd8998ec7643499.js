@@ -1,5 +1,0 @@
-var classoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional23741b0ea9f7f916ffd8998ec7643499 =
-[
-    [ "make", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional23741b0ea9f7f916ffd8998ec7643499.html#a458c3805629c4c125efc98c7a51b5451", null ],
-    [ "make_input_directional_buttons", "db/d09/classoaGuiElements_1_1Core_1_1input_1_1input__directional__buttons_1_1Core_1_1input__directional23741b0ea9f7f916ffd8998ec7643499.html#ab789bf8e31b6664e458203b46446fe4f", null ]
-];

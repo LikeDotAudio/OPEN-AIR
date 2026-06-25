@@ -1,4 +1,0 @@
-var fader__ganged__controlled__array__editor_8py =
-[
-    [ "oaGuiElements.Core.faders.fader_ganged_controlled_array.Interface.fader_ganged_controlled_array_editor.FaderGangedControlledArrayEditor", "db/d3a/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Interface_1_1fader__002f82a9d3e0a1b1ca3f839161cf093b.html", "db/d3a/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Interface_1_1fader__002f82a9d3e0a1b1ca3f839161cf093b" ]
-];

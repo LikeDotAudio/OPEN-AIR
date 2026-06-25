@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="io::single_and_empty\l_line_comment\< comment\l_start_char_list \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$de/d8e/structio_1_1single__and__empty__line__comment.html",tooltip=" "];
-}

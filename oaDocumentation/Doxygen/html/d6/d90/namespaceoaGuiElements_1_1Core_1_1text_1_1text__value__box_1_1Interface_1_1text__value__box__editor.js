@@ -1,4 +1,0 @@
-var namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface_1_1text__value__box__editor =
-[
-    [ "TextValueBoxEditor", "d2/d72/classoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface_1_1text__value__box__editor_1_1TextValueBoxEditor.html", "d2/d72/classoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface_1_1text__value__box__editor_1_1TextValueBoxEditor" ]
-];

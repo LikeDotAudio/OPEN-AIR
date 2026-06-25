@@ -1,4 +1,0 @@
-var meter__needle__editor_8py =
-[
-    [ "oaGuiElements.Core.metering.meter_needle.Interface.meter_needle_editor.MeterNeedleEditor", "db/de5/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Interface_1_1meter__needle__editor_1_1MeterNeedleEditor.html", "db/de5/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Interface_1_1meter__needle__editor_1_1MeterNeedleEditor" ]
-];

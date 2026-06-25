@@ -1,4 +1,0 @@
-var namespaceTests_1_1test__learning =
-[
-    [ "TestLearningThirdParty", "d6/d8d/classTests_1_1test__learning_1_1TestLearningThirdParty.html", "d6/d8d/classTests_1_1test__learning_1_1TestLearningThirdParty" ]
-];

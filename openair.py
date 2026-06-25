@@ -83,12 +83,24 @@ def build_rust(release: bool) -> bool:
     # oaRustCore enables; building both members at once would unify pyo3's
     # extension-module feature onto the orchestrator, which must NOT link
     # libpython. Separate `-p` builds keep their feature sets independent.
+    # Compiler warnings (unused imports, `non_snake_case` on the pyo3 module
+    # exports whose names must match the Python import, etc.) are benign but flood
+    # the launcher on every run. Swallow cargo's output on success and only surface
+    # it when a build FAILS — real errors still come through. Set
+    # OPENAIR_VERBOSE_BUILD=1 to stream the full output (warnings included).
+    verbose = bool(os.environ.get("OPENAIR_VERBOSE_BUILD"))
     for pkg in ("oaRustCore", "open-air-orchestrator"):
         _log(f"🦀 [RUST] Building {pkg} ({'release' if release else 'debug'})…")
         try:
-            subprocess.run(base + ["-p", pkg], check=True)
+            subprocess.run(base + ["-p", pkg], check=True,
+                           capture_output=not verbose, text=True)
         except subprocess.CalledProcessError as e:
             _log(f"❌ [RUST] Build of {pkg} failed (exit {e.returncode}).")
+            if not verbose:
+                if e.stdout:
+                    _log(e.stdout.rstrip())
+                if e.stderr:
+                    _log(e.stderr.rstrip())
             return False
     _log("✅ [RUST] Build complete.")
     return True

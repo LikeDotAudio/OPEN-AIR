@@ -113,11 +113,22 @@ async fn main() {
         .and_then(|p| p.parse().ok())
         .unwrap_or(8000);
     let addr = SocketAddr::from(([127, 0, 0, 1], port));
-    println!("🌐 [API] Frontend API Server listening on http://{}", addr);
 
-    // 4. Start the Async Runtime Server
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    // 4. Start the Async Runtime Server — bind gracefully (no panic) so a stale
+    // instance still holding the port produces a clear message, not a backtrace.
+    let listener = match tokio::net::TcpListener::bind(addr).await {
+        Ok(l) => l,
+        Err(e) => {
+            eprintln!("❌ [API] Could not bind {addr}: {e}");
+            eprintln!("        Another orchestrator is likely still running on port {port}. \
+                       Stop it, or set OPENAIR_CORE_PORT to a free port.");
+            return;
+        }
+    };
+    println!("🌐 [API] Frontend API Server listening on http://{}", addr);
+    if let Err(e) = axum::serve(listener, app).await {
+        eprintln!("❌ [API] server error: {e}");
+    }
 }
 
 // The WebSocket handler upgrades the HTTP request

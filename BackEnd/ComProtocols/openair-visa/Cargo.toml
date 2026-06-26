@@ -3,11 +3,19 @@ name = "openair-visa"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+[lib]
+name = "openair_visa"
+crate-type = ["cdylib", "rlib"]
 
+[dependencies]
 futures = { version = "0.3", optional = true }
 tokio = { version = "1.35", features = ["full"], optional = true }
-pyo3 = { version = "0.21.2", optional = true }
+pyo3 = { version = "0.21.2", features = ["extension-module"], optional = true }
+mdns-sd = "0.20.0"
+regex = "1.12.4"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+rumqttc = "0.25.1"
 
 [features]
 python = ["dep:pyo3", "dep:futures", "dep:tokio"]

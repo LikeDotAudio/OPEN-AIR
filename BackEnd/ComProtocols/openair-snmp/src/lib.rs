@@ -1,10 +1,12 @@
+#![allow(non_snake_case, unused_variables, dead_code, unused_imports)]
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    #![allow(non_snake_case, unused_variables, dead_code, unused_imports)]
+use pyo3::prelude::*;
 
     #[test]
     fn it_works() {

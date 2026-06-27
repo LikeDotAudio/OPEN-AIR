@@ -33,7 +33,11 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const faderRange = totalLength - paddingStart - paddingEnd; // The fader range (pixels)
 
     const [isDragging, setIsDragging] = React.useState(false);
+    const [localVal, setLocalVal] = React.useState(null);
+    const dwellTimerRef = React.useRef(null);
     const containerRef = React.useRef(null);
+
+    const displayValue = localVal !== null ? localVal : currentValue;
 
     const handleInteraction = (e) => {
         if (!containerRef.current) return;
@@ -48,12 +52,15 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
         
         const boundedNorm = clamp(normPos, 0, 1);
         const newValue = min + boundedNorm * range;
-        setCurrentValue(Math.round((newValue) * 100) / 100);
+        const rounded = Math.round((newValue) * 100) / 100;
+        setLocalVal(rounded);
+        setCurrentValue(rounded);
     };
 
     const handlePointerDown = (e) => {
         setIsDragging(true);
         handleInteraction(e);
+        clearTimeout(dwellTimerRef.current);
         if (containerRef.current) containerRef.current.setPointerCapture(e.pointerId);
     };
 
@@ -62,9 +69,11 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const handlePointerUp = (e) => {
         setIsDragging(false);
         if (containerRef.current) containerRef.current.releasePointerCapture(e.pointerId);
+        clearTimeout(dwellTimerRef.current);
+        dwellTimerRef.current = setTimeout(() => setLocalVal(null), 500);
     };
 
-    const norm = (currentValue - min) / (max - min);
+    const norm = (displayValue - min) / (max - min);
     const pos = clamp(norm, 0, 1) * faderRange;
 
     const containerStyle = { width, height, touchAction: 'none' };

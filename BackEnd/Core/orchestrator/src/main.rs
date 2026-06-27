@@ -1,3 +1,7 @@
+mod api;
+mod cli;
+mod mqtt;
+
 use axum::{
     extract::ws::{Message, WebSocket, WebSocketUpgrade},
     extract::State,
@@ -10,40 +14,43 @@ use std::sync::Arc;
 use tokio::sync::broadcast;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use clap::Parser;
+use std::path::PathBuf;
+use tower_http::services::ServeDir;
+use tower_http::cors::CorsLayer;
+use axum::http::Method;
 
-// This struct represents the unified data format that the Frontend React app expects.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SystemState {
     pub topic: String,
     pub value: Value,
 }
 
-// Shared state for the Axum router
 struct AppState {
     tx: broadcast::Sender<SystemState>,
 }
 
 #[tokio::main]
 async fn main() {
+    let args = cli::Args::parse();
     println!("🚀 [RUST ORCHESTRATOR] Booting OPEN-AIR Native Core...");
 
-    // 1. Create the high-speed lock-free channel for the internal message bus
-    // This replaces the old Python ProtocolRouter. All protocol agents will clone the sender.
+    let root = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+    
+    // MQTT Config Publisher
+    mqtt::publish_protocol_configs(&root, args.no_mqtt);
+
     let (tx, _rx) = broadcast::channel::<SystemState>(1024);
     let app_state = Arc::new(AppState { tx: tx.clone() });
 
-    // 2. Launch the Native Device Protocol Agents
-    // In the future, this reads `config.ini` and dynamically spawns these based on settings.
     let tx_clone_osc = tx.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native OSC Agent on 0.0.0.0:8000...");
         let osc_agent = openair_osc::OscAgent::new("0.0.0.0".to_string(), 8000);
         let (osc_tx, mut osc_rx) = tokio::sync::mpsc::channel(100);
-        
         tokio::spawn(async move {
             let _ = osc_agent.start(osc_tx).await;
         });
-
         while let Some(osc_event) = osc_rx.recv().await {
             let system_event = SystemState {
                 topic: format!("OpenAir/Protocol/GuiOsc/{}", osc_event.address),
@@ -56,40 +63,130 @@ async fn main() {
     let tx_clone_midi = tx.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native MIDI Agent...");
-        // Auto-select the first available port
-        let midi_agent = openair_midi::MidiAgent::new(None); 
+        
+        let devices_task = tokio::task::spawn_blocking(|| {
+            let inputs = openair_midi::oa_midi_scan::scan_inputs();
+            let outputs = openair_midi::oa_midi_scan::scan_outputs();
+            if !inputs.is_empty() || !outputs.is_empty() {
+                let _ = openair_midi::oa_midi_mqtt_publish::publish_devices_mqtt(
+                    "127.0.0.1", 
+                    1883, 
+                    "OpenAir/System/Protocols/midi/Device", 
+                    inputs, 
+                    outputs
+                );
+            }
+        });
+        
+        let midi_agent = std::sync::Arc::new(openair_midi::MidiAgent::new(None)); 
         let (midi_tx, mut midi_rx) = tokio::sync::mpsc::channel(100);
+        
+        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-midi-listener", "127.0.0.1", 1883);
+        mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
+        let (mqtt_client, mut mqtt_connection) = rumqttc::Client::new(mqttoptions, 10);
+        
+        let _ = mqtt_client.subscribe("OpenAir/System/Protocols/midi/Device/Output/#", rumqttc::QoS::AtLeastOnce);
+        
+        let midi_agent_clone = midi_agent.clone();
+        std::thread::spawn(move || {
+            for notification in mqtt_connection.iter() {
+                if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
+                    let topic = publish.topic.clone();
+                    if topic.contains("/Output/Dev") {
+                        let parts: Vec<&str> = topic.split('/').collect();
+                        if let Some(dev_idx) = parts.iter().position(|&p| p.starts_with("Dev")) {
+                            if let Ok(port_idx) = parts[dev_idx].trim_start_matches("Dev").parse::<usize>() {
+                                let payload = String::from_utf8_lossy(&publish.payload).trim().to_string();
+                                
+                                // Topic format: .../Output/Dev1/Channel0/Note/60
+                                if dev_idx + 2 < parts.len() && parts[dev_idx + 1].starts_with("Channel") {
+                                    if let Ok(channel_display) = parts[dev_idx + 1].trim_start_matches("Channel").parse::<u8>() {
+                                        let channel = if channel_display > 0 { channel_display - 1 } else { 0 };
+                                        let msg_type = parts[dev_idx + 2];
+                                        let data1 = if dev_idx + 3 < parts.len() {
+                                            parts[dev_idx + 3].parse::<u8>().unwrap_or(0)
+                                        } else { 0 };
+                                        
+                                        let val = payload.parse::<u8>().unwrap_or(0);
+                                        
+                                        let mut raw_data = Vec::new();
+                                        if msg_type == "Note" {
+                                            if val > 0 {
+                                                raw_data = vec![144 | channel, data1, val];
+                                            } else {
+                                                raw_data = vec![128 | channel, data1, 0];
+                                            }
+                                        } else if msg_type == "ControlChange" {
+                                            raw_data = vec![176 | channel, data1, val];
+                                        } else if msg_type == "ProgramChange" {
+                                            raw_data = vec![192 | channel, val, 0];
+                                        } else if msg_type == "PitchBend" {
+                                            let pval = payload.parse::<u16>().unwrap_or(0);
+                                            raw_data = vec![224 | channel, (pval & 0x7F) as u8, ((pval >> 7) & 0x7F) as u8];
+                                        }
+                                        
+                                        if !raw_data.is_empty() {
+                                            println!("   📡 [MIDI MQTT] ⮞ Output on Dev{} -> {} = {}", port_idx, topic, val);
+                                            let _ = midi_agent_clone.send(port_idx, &raw_data);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
         tokio::spawn(async move {
+            let _ = devices_task.await;
             if let Err(e) = midi_agent.start(midi_tx).await {
                 eprintln!("🎹❌ [MIDI AGENT] Failed to start: {:?}", e);
             }
         });
-
-        // Forward MIDI Events to the Global Broadcast Channel
+        
         while let Some(midi_event) = midi_rx.recv().await {
             let system_event = SystemState {
                 topic: format!("OpenAir/Protocol/MidiIn/{}", midi_event.address),
-                value: midi_event.value,
+                value: midi_event.value.clone(),
             };
             let _ = tx_clone_midi.send(system_event);
+            
+            if let Some(port_idx) = midi_event.value.get("port_index").and_then(|v| v.as_u64()) {
+                let channel = midi_event.value.get("channel").and_then(|v| v.as_u64()).unwrap_or(0) + 1;
+                let command = midi_event.value.get("command").and_then(|v| v.as_u64()).unwrap_or(0);
+                let data1 = midi_event.value.get("data1").and_then(|v| v.as_u64()).unwrap_or(0);
+                let data2 = midi_event.value.get("data2").and_then(|v| v.as_u64()).unwrap_or(0);
+
+                let (subtopic, payload_val) = match command {
+                    128 => (format!("Channel{}/Note/{}", channel, data1), 0),
+                    144 => (format!("Channel{}/Note/{}", channel, data1), data2),
+                    176 => (format!("Channel{}/ControlChange/{}", channel, data1), data2),
+                    192 => (format!("Channel{}/ProgramChange", channel), data1),
+                    224 => (format!("Channel{}/PitchBend", channel), (data2 << 7) | data1),
+                    _ => (format!("Channel{}/Raw/{}", channel, command), data1),
+                };
+
+                println!("   📡 [MIDI MQTT] ⮜ Input on Dev{} -> {} = {}", port_idx, subtopic, payload_val);
+                let topic = format!("OpenAir/System/Protocols/midi/Device/Input/Dev{}/{}", port_idx, subtopic);
+                let payload = payload_val.to_string();
+                let _ = mqtt_client.publish(topic, rumqttc::QoS::AtLeastOnce, false, payload.as_bytes());
+            }
         }
     });
 
     let tx_clone_aes70 = tx.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native AES70 Agent (OCP.1 TCP)...");
-        // For demonstration, connects to a hypothetical AES70 device on localhost:50014
         let aes70_agent = openair_aes70::Aes70Agent::new("127.0.0.1".to_string(), 50014); 
         let (aes70_tx, mut aes70_rx) = tokio::sync::mpsc::channel(100);
-
         tokio::spawn(async move {
             if let Err(e) = aes70_agent.start(aes70_tx).await {
-                eprintln!("🔊❌ [AES70 AGENT] Failed to start: {:?}", e);
+                if e.kind() != std::io::ErrorKind::ConnectionRefused {
+                    eprintln!("🔊❌ [AES70 AGENT] Failed to start: {:?}", e);
+                }
             }
         });
-
-        // Forward AES70 Events to the Global Broadcast Channel
         while let Some(aes70_event) = aes70_rx.recv().await {
             let system_event = SystemState {
                 topic: format!("OpenAir/Protocol/AES70/{}", aes70_event.address),
@@ -99,39 +196,234 @@ async fn main() {
         }
     });
 
-    // 3. Frontend WebSocket API (The axum Server)
-    // This replaces `oaComWebsocket`. The React Frontend will connect here.
-    let app = Router::new()
-        .route("/api/health", get(|| async { "Rust Core is Healthy" }))
+    let tx_clone_visa = tx.clone();
+    tokio::spawn(async move {
+        println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
+        
+        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-visa-scanner", "127.0.0.1", 1883);
+        mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
+        let (mqtt_client, mut mqtt_connection) = rumqttc::Client::new(mqttoptions, 10);
+        
+        std::thread::spawn(move || {
+            for _ in mqtt_connection.iter() {}
+        });
+
+        let devices = tokio::task::spawn_blocking(|| {
+            openair_visa::oa_visa_scan_for_devices::list_resources()
+        }).await.unwrap_or_default();
+        
+        let mut counts: std::collections::HashMap<(String, String), usize> = std::collections::HashMap::new();
+
+        let mut topic_to_resource = std::collections::HashMap::new();
+
+        for dev in devices {
+            println!("   📡 [VISA AGENT] Probing resource: {}", dev);
+            
+            let script = format!(r#"
+import pyvisa
+import json
+import sys
+
+try:
+    rm = pyvisa.ResourceManager('@py')
+except:
+    try:
+        rm = pyvisa.ResourceManager()
+    except Exception as e:
+        print(json.dumps({{"error": str(e)}}))
+        sys.exit(1)
+
+try:
+    inst = rm.open_resource('{}', open_timeout=1500)
+    inst.timeout = 1500
+    inst.read_termination = '\n'
+    inst.write_termination = '\n'
+    idn = inst.query('*IDN?')
+    inst.close()
+
+    parts = [p.strip() for p in idn.split(',')]
+    print(json.dumps({{
+        "manufacturer": parts[0] if len(parts) > 0 else 'Unknown',
+        "model": parts[1] if len(parts) > 1 else 'Unknown',
+        "serial": parts[2] if len(parts) > 2 else '',
+        "firmware": parts[3] if len(parts) > 3 else '',
+        "raw_idn": idn.strip()
+    }}))
+except Exception as e:
+    print(json.dumps({{"error": str(e)}}))
+"#, dev);
+
+            let mut info = serde_json::json!({ "resource": dev, "status": "found" });
+            if let Ok(output) = tokio::process::Command::new("python3").arg("-c").arg(script).output().await {
+                let out_str = String::from_utf8_lossy(&output.stdout);
+                if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(&out_str) {
+                    if parsed.get("error").is_none() {
+                        let mut merged = parsed.as_object().unwrap().clone();
+                        merged.insert("resource".to_string(), serde_json::Value::String(dev.clone()));
+                        merged.insert("status".to_string(), serde_json::Value::String("identified".to_string()));
+                        
+                        let model_str = merged.get("model").and_then(|m| m.as_str()).unwrap_or("Unknown").to_string();
+                        let (device_type, notes) = openair_visa::oa_visa_known_devices::get_device_info(&model_str);
+                        merged.insert("device_type".to_string(), serde_json::Value::String(device_type.clone()));
+                        merged.insert("notes".to_string(), serde_json::Value::String(notes));
+                        
+                        let key = (device_type.clone(), model_str.clone());
+                        let count = counts.entry(key).or_insert(0);
+                        
+                        let topic_prefix = format!("OpenAir/System/Protocols/visa/Device/{}/{}/Dev{}", device_type.replace(" ", "_"), model_str.replace(" ", "_"), count);
+                        topic_to_resource.insert(topic_prefix.clone(), dev.clone());
+                        
+                        let mut is_online = false;
+                        if let Some(raw_idn) = merged.get("raw_idn").and_then(|r| r.as_str()) {
+                            if !raw_idn.trim().is_empty() { is_online = true; }
+                        }
+                        
+                        if let Ok(duration) = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
+                            merged.insert("last_online".to_string(), serde_json::Value::Number(duration.as_secs().into()));
+                        }
+                        merged.insert("connected".to_string(), serde_json::Value::Number((if is_online { 1 } else { 0 }).into()));
+                        
+                        for (k, v) in &merged {
+                            let val_str = match v {
+                                serde_json::Value::String(s) => s.clone(),
+                                serde_json::Value::Number(n) => n.to_string(),
+                                _ => v.to_string(),
+                            };
+                            let _ = mqtt_client.publish(format!("{}/{}", topic_prefix, k), rumqttc::QoS::AtLeastOnce, true, val_str.into_bytes());
+                        }
+                        
+                        let _ = mqtt_client.publish(format!("{}/Write", topic_prefix), rumqttc::QoS::AtLeastOnce, true, "");
+                        let _ = mqtt_client.publish(format!("{}/Read", topic_prefix), rumqttc::QoS::AtLeastOnce, true, "");
+                        
+                        *count += 1;
+                        
+                        info = serde_json::Value::Object(merged);
+                        println!("     ✅ Identified & Published to MQTT: {}", model_str);
+                    } else {
+                        println!("     ⚠️  Identify failed: {:?}", parsed.get("error"));
+                    }
+                }
+            }
+
+            let system_event = SystemState {
+                topic: format!("OpenAir/System/Protocols/visa/Device/Found"),
+                value: info,
+            };
+            let _ = tx_clone_visa.send(system_event);
+        }
+        println!("✅ [VISA AGENT] Scan & MQTT Publish complete.");
+        
+        // Now sit and wait for Write commands
+        println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands...");
+        let sub_topic = "OpenAir/System/Protocols/visa/Device/+/+/+/Write";
+        let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", "127.0.0.1", 1883);
+        mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
+        let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
+        
+        let _ = mqtt_client_sub.subscribe(sub_topic, rumqttc::QoS::AtLeastOnce);
+        
+        std::thread::spawn(move || {
+            for notification in mqtt_connection_sub.iter() {
+                if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
+                    let topic = publish.topic.clone();
+                    let payload = String::from_utf8_lossy(&publish.payload).trim().to_string();
+                    
+                    if payload.is_empty() { continue; }
+                    
+                    if let Some(topic_prefix) = topic.strip_suffix("/Write") {
+                        if let Some(resource_name) = topic_to_resource.get(topic_prefix) {
+                            println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
+                            
+                            let safe_payload = payload.replace("'", "\\'");
+                            let script = format!(r#"
+import pyvisa
+import sys
+try:
+    rm = pyvisa.ResourceManager('@py')
+except:
+    rm = pyvisa.ResourceManager()
+try:
+    inst = rm.open_resource('{}', open_timeout=2000)
+    inst.timeout = 2000
+    inst.read_termination = '\n'
+    inst.write_termination = '\n'
+    if '?' in '{}':
+        print(inst.query('{}').strip())
+    else:
+        inst.write('{}')
+    inst.close()
+except Exception as e:
+    print("ERROR:", str(e))
+"#, resource_name, safe_payload, safe_payload, safe_payload);
+
+                            if let Ok(output) = std::process::Command::new("python3").arg("-c").arg(&script).output() {
+                                let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                                if payload.contains('?') {
+                                    println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
+                                    let read_topic = format!("{}/Read", topic_prefix);
+                                    let _ = mqtt_client_sub.publish(read_topic, rumqttc::QoS::AtLeastOnce, true, out_str.as_bytes());
+                                    let write_topic = format!("{}/Write", topic_prefix);
+                                    let _ = mqtt_client_sub.publish(write_topic, rumqttc::QoS::AtLeastOnce, true, "");
+                                } else {
+                                    if !out_str.is_empty() {
+                                        println!("      ⚠️ [VISA MQTT] {} warning/error -> {}", resource_name, out_str);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    // Sub-router for API endpoints
+    let api_state = api::ApiState { root_dir: root.clone() };
+    let api_router = api::router(api_state);
+
+    let cors = CorsLayer::new()
+        .allow_methods([Method::GET, Method::POST])
+        .allow_origin(tower_http::cors::Any);
+
+    let ws_router = Router::new()
         .route("/ws", get(ws_handler))
         .with_state(app_state);
 
-    // Port is overridable via OPENAIR_CORE_PORT so the launcher (openair.py) can
-    // keep this Rust core off the frontend static server's port. Defaults to 8000.
-    let port: u16 = std::env::var("OPENAIR_CORE_PORT")
-        .ok()
-        .and_then(|p| p.parse().ok())
-        .unwrap_or(8000);
-    let addr = SocketAddr::from(([127, 0, 0, 1], port));
+use axum::response::Redirect;
 
-    // 4. Start the Async Runtime Server — bind gracefully (no panic) so a stale
-    // instance still holding the port produces a clear message, not a backtrace.
+    let app = Router::new()
+        .route("/", get(|| async { Redirect::temporary("/Core/Launch/index.html") }))
+        .nest("/api", api_router)
+        .route("/api/health", get(|| async { "Rust Core is Healthy" }))
+        .merge(ws_router)
+        .fallback_service(ServeDir::new(root.join("FrontEnd")).append_index_html_on_directories(true))
+        .layer(cors);
+
+    // Run on the frontend port, since orchestrator replaces the python server.
+    let addr = SocketAddr::from(([0, 0, 0, 0], args.port));
+    
     let listener = match tokio::net::TcpListener::bind(addr).await {
         Ok(l) => l,
         Err(e) => {
             eprintln!("❌ [API] Could not bind {addr}: {e}");
-            eprintln!("        Another orchestrator is likely still running on port {port}. \
-                       Stop it, or set OPENAIR_CORE_PORT to a free port.");
+            eprintln!("        Another instance might be running. Stop it or change port.");
             return;
         }
     };
-    println!("🌐 [API] Frontend API Server listening on http://{}", addr);
+    
+    let url = format!("http://localhost:{}", args.port);
+    println!("🌐 [API] Frontend API Server listening on {}", url);
+    
+    if !args.no_browser {
+        println!("🌐 [WEB] Opening {} in the browser…", url);
+        let _ = open::that(url);
+    }
+    
     if let Err(e) = axum::serve(listener, app).await {
         eprintln!("❌ [API] server error: {e}");
     }
 }
 
-// The WebSocket handler upgrades the HTTP request
 async fn ws_handler(
     ws: WebSocketUpgrade,
     State(state): State<Arc<AppState>>,
@@ -140,34 +432,23 @@ async fn ws_handler(
     ws.on_upgrade(|socket| handle_socket(socket, state))
 }
 
-// The core loop for a connected WebSocket client
 async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
     println!("🟢 [WEBSOCKET] Client connected!");
-    
-    // Subscribe to the global message bus
     let mut rx = state.tx.subscribe();
-
-    // Loop to read from the broadcast channel and push to the WebSocket
     loop {
         tokio::select! {
-            // Receive from the core message bus
             Ok(msg) = rx.recv() => {
-                // Serialize the SystemState to JSON
                 if let Ok(json_str) = serde_json::to_string(&msg) {
-                    // Send to the React frontend
                     if socket.send(Message::Text(json_str)).await.is_err() {
                         println!("🔴 [WEBSOCKET] Client disconnected.");
                         break;
                     }
                 }
             }
-            // Optionally: Handle incoming messages from the frontend (e.g., UI clicks)
             Some(result) = socket.recv() => {
                 match result {
                     Ok(Message::Text(text)) => {
                         println!("📥 [WEBSOCKET] Received from UI: {}", text);
-                        // Here you would parse the UI intent and route it back to the gear
-                        // via the `tx` channel or a dedicated command channel.
                     }
                     Ok(Message::Close(_)) => {
                         println!("🔴 [WEBSOCKET] Client closed connection.");
@@ -183,3 +464,4 @@ async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
         }
     }
 }
+

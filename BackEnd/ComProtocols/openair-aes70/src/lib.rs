@@ -1,3 +1,4 @@
+#![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut, mismatched_lifetime_syntaxes)]
 use nom::{
     bytes::complete::take,
     multi::count,

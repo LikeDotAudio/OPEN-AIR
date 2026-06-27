@@ -15,7 +15,7 @@ impl ResourceManager {
     }
 
     pub fn list_resources(&self) -> PyResult<Vec<String>> {
-        oa_visa_scan_for_devices::list_resources()
+        Ok(oa_visa_scan_for_devices::list_resources())
     }
 
     pub fn open_resource(&self, resource_name: &str) -> PyResult<Instrument> {
@@ -27,7 +27,7 @@ impl ResourceManager {
     }
 
     pub fn scan_and_catalog(&self, py: Python<'_>) -> PyResult<PyObject> {
-        let resources = oa_visa_scan_for_devices::list_resources()?;
+        let resources = oa_visa_scan_for_devices::list_resources();
         let dict = pyo3::types::PyDict::new_bound(py);
         
         for (index, res) in resources.iter().enumerate() {

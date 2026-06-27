@@ -14,6 +14,16 @@ config = "0.14"
 openair-osc = { path = "../../ComProtocols/openair-osc" }
 openair-midi = { path = "../../ComProtocols/openair-midi" }
 openair-aes70 = { path = "../../ComProtocols/openair-aes70" }
+openair-visa = { path = "../../ComProtocols/openair-visa" }
+clap = { version = "4.5", features = ["derive"] }
+tower-http = { version = "0.5", features = ["fs", "cors"] }
+rust-ini = "0.21"
+rumqttc = "0.24"
+walkdir = "2.5"
+open = "5.1"
+tower = "0.4"
+chrono = "0.4"
+regex = "1.10"
 
 [build-dependencies]
 cc = "1.0"

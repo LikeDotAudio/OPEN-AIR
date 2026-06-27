@@ -166,7 +166,11 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     // Panner: knob outputs TWO values [leftPct, rightPct] (each 0-100).
     const _mid = (min + max) / 2;
     const _posOf = (v) => Array.isArray(v) ? Number(v[1] ?? _mid) : Number(v ?? _mid);
-    const displayValue = isPanner ? _posOf(value) : value;
+
+    const [localVal, setLocalVal] = React.useState(null);
+    const dwellTimerRef = React.useRef(null);
+
+    const displayValue = localVal !== null ? localVal : (isPanner ? _posOf(value) : value);
     const fireChange = (newPos) => {
         if (isPanner) {
             const r = (max - min) || 1;
@@ -197,17 +201,22 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const startValRef = React.useRef(0);
 
     const handlePointerDown = (e) => {
-        // Alt-click snaps the knob to its default value (no drag).
         if (e.altKey) {
             const dv = c.domain?.primary?.value_default ?? c.value?.default_value ?? c.value_default;
             const def = (dv !== undefined && dv !== null) ? Number(dv) : (isPanner ? _mid : min);
-            fireChange(_wrapOrClamp(Number.isFinite(def) ? def : _mid));
+            const nv = _wrapOrClamp(Number.isFinite(def) ? def : _mid);
+            fireChange(nv);
+            setLocalVal(nv);
+            clearTimeout(dwellTimerRef.current);
+            dwellTimerRef.current = setTimeout(() => setLocalVal(null), 500);
             return;
         }
         setIsDragging(true);
         startYRef.current = e.clientY;
-        startValRef.current = isPanner ? _posOf(value)
-            : (value !== undefined && value !== null ? value : min);
+        const cv = isPanner ? _posOf(value) : (value !== undefined && value !== null ? value : min);
+        startValRef.current = cv;
+        setLocalVal(cv);
+        clearTimeout(dwellTimerRef.current);
         e.target.setPointerCapture(e.pointerId);
     };
     const handlePointerMove = (e) => {
@@ -215,15 +224,18 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         const deltaY = startYRef.current - e.clientY;
         const range = max - min;
         const deltaVal = (deltaY / 150) * range;
-        fireChange(_wrapOrClamp(Math.round((startValRef.current + deltaVal) * 100) / 100));
+        const nv = _wrapOrClamp(Math.round((startValRef.current + deltaVal) * 100) / 100);
+        setLocalVal(nv);
+        fireChange(nv);
     };
     const handlePointerUp = (e) => {
         setIsDragging(false);
         e.target.releasePointerCapture(e.pointerId);
+        clearTimeout(dwellTimerRef.current);
+        dwellTimerRef.current = setTimeout(() => setLocalVal(null), 500);
     };
 
-    // Wheel — non-passive native listener (React's onWheel is passive; we need to
-    // preventDefault so a containing scroll panel doesn't eat the gesture).
+    // Wheel — non-passive native listener
     const svgRef = React.useRef(null);
     const wheelRef = React.useRef(null);
     wheelRef.current = (e) => {
@@ -237,7 +249,11 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         let next = _wrapOrClamp(cur + dir * step);
         next = Math.round(next / step) * step;
         const dec = (String(step).split('.')[1] || '').length;
-        fireChange(parseFloat(next.toFixed(Math.min(10, dec))));
+        const nv = parseFloat(next.toFixed(Math.min(10, dec)));
+        setLocalVal(nv);
+        fireChange(nv);
+        clearTimeout(dwellTimerRef.current);
+        dwellTimerRef.current = setTimeout(() => setLocalVal(null), 500);
     };
     React.useEffect(() => {
         const el = svgRef.current;

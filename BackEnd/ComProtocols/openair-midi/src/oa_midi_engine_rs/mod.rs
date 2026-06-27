@@ -85,6 +85,13 @@ impl MidiEngine {
         Ok(list)
     }
 
+    fn publish_devices_mqtt(&self, broker_ip: &str, port: u16, base_topic: &str) -> PyResult<()> {
+        let inputs = crate::oa_midi_scan::scan_inputs();
+        let outputs = crate::oa_midi_scan::scan_outputs();
+        crate::oa_midi_mqtt_publish::publish_devices_mqtt(broker_ip, port, base_topic, inputs, outputs)
+            .map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e))
+    }
+
     fn close(&self) {
         let mut in_lock = self.input_conn.lock().unwrap();
         *in_lock = None;

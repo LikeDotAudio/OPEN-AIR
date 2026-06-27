@@ -2,7 +2,7 @@ use crate::oa_visa_mdns_zeroconf;
 use crate::oa_visa_usb_enumerator;
 use crate::oa_visa_scanner;
 
-pub fn list_resources() -> pyo3::PyResult<Vec<String>> {
+pub fn list_resources() -> Vec<String> {
     let mut resources = Vec::new();
     
     // 1. USB/Local Enumerator
@@ -14,5 +14,5 @@ pub fn list_resources() -> pyo3::PyResult<Vec<String>> {
     // 3. Static IP / Subnet Prober & Gateway Scraper
     resources.extend(oa_visa_scanner::hunt_for_devices());
 
-    Ok(resources)
+    resources
 }

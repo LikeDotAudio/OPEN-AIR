@@ -163,9 +163,20 @@ async fn save_file(State(state): State<ApiState>, Json(mut payload): Json<SavePa
 }
 
 fn extract_readme_json(text: &str) -> Option<Value> {
-    let re = regex::Regex::new(r"```json\s*\n(.*?)\n```").ok()?;
-    let caps = re.captures(text)?;
-    serde_json::from_str(caps.get(1)?.as_str()).ok()
+    let re = regex::Regex::new(r"(?s)```json\s*\n(.*?)\n```").ok()?;
+    if let Some(caps) = re.captures(text) {
+        let json_str = caps.get(1)?.as_str();
+        match serde_json::from_str(json_str) {
+            Ok(val) => Some(val),
+            Err(e) => {
+                println!("Failed to parse JSON: {}", e);
+                None
+            }
+        }
+    } else {
+        println!("Regex didn't match.");
+        None
+    }
 }
 
 fn add_components(content: &Value, category: &str, relpath: &str, components: &mut Vec<Value>, legends: &mut serde_json::Map<String, Value>, seen: &mut HashSet<String>) {

@@ -21,11 +21,23 @@
     },
     /** Persist `value` for `key` into the URL hash (no reload). */
     set(key, value) {
+      const url = this.buildUrl(key, value);
+      // update local params
       params = parse();
-      if (value == null) params.delete(key); else params.set(key, value);
-      const s = params.toString();
-      const url = window.location.pathname + window.location.search + (s ? '#' + s : '');
       window.history.replaceState(null, '', url);
     },
+    /** Return a new URL with `value` set for `key`, without navigating */
+    buildUrl(key, value) {
+      const p = parse();
+      if (value == null) p.delete(key); else p.set(key, value);
+      const s = p.toString();
+      return window.location.pathname + window.location.search + (s ? '#' + s : '');
+    },
+    /** Return a new URL with the isolate query parameter set to fullPath */
+    buildIsolatedUrl(fullPath) {
+      const search = new URLSearchParams(window.location.search);
+      search.set('isolate', fullPath);
+      return window.location.pathname + '?' + search.toString() + window.location.hash;
+    }
   };
 })();

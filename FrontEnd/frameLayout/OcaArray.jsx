@@ -41,19 +41,32 @@ window.OaEdPreviewCtx = window.OaEdPreviewCtx || React.createContext(false);
   window.OcaArray = ({ nodeName, node, path_prefix, jsonPath }) => {
     const [lang] = (window.useMqttLang ? window.useMqttLang() : ['En']);
     const inEditor = React.useContext(window.OaEdPreviewCtx);
+    const [previewAllOverride, setPreviewAllOverride] = React.useState(false);
 
     const blueprint = node.blueprint || {};
     const data = Array.isArray(node.data) ? node.data : [];
     const cols = parseInt(node.layout_columns, 10) || data.length || 1;
 
-    // Editor: a single representative instance (template). Runtime: all entries.
-    const items = inEditor ? (data.length ? data.slice(0, 1) : [{}]) : data;
+    const showArrayInEditor = previewAllOverride || node.editor_show_array === true || node.editor_show_array === "true";
+    const renderFull = !inEditor || showArrayInEditor;
+
+    let gridCols = `repeat(${renderFull ? cols : 1}, minmax(0, 1fr))`;
+    if (renderFull && node.column_sizing && Array.isArray(node.column_sizing)) {
+      gridCols = node.column_sizing.map(col => {
+        const w = col.weight !== undefined ? col.weight : 1;
+        const minW = col.minwidth ? `${col.minwidth}px` : '0px';
+        return w > 0 ? `minmax(${minW}, ${w}fr)` : `minmax(${minW}, auto)`;
+      }).join(' ');
+    }
+
+    // Editor: a single representative instance (template) by default, or all if renderFull.
+    const items = renderFull ? data : (data.length ? data.slice(0, 1) : [{}]);
 
     return (
       <div className="oca-array" style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${inEditor ? 1 : cols}, minmax(0, 1fr))`,
-        gap: '6px', width: '100%', alignItems: 'start',
+        gridTemplateColumns: gridCols,
+        gap: '0px', width: '100%', alignItems: 'start',
       }}>
         {items.map((item, i) => {
           const inst = substitute(blueprint, item, lang);
@@ -66,9 +79,15 @@ window.OaEdPreviewCtx = window.OaEdPreviewCtx || React.createContext(false);
               path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jp} />
           );
         })}
-        {inEditor && data.length > 1 && (
+        {inEditor && data.length > 1 && !showArrayInEditor && (
           <div style={{ gridColumn: '1 / -1', fontSize: 10, color: '#cca35a', opacity: 0.85, padding: '2px 4px' }}>
-            ⤷ OcaArray template — renders ×{data.length} at runtime (showing 1)
+            ⤷ OcaArray template — renders ×{data.length} at runtime.{' '}
+            <button 
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setPreviewAllOverride(true); }}
+                style={{ background: '#FF9900', color: '#111', border: '1px solid #cca35a', padding: '2px 6px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', marginLeft: 8 }}
+            >
+              SHOW FULL ARRAY
+            </button>
           </div>
         )}
       </div>

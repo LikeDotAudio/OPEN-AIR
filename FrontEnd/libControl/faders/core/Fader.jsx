@@ -240,7 +240,7 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
                 tickTextColor={tickTextCol}
                 subTickTextColor={subTickTextCol}
                 tickThickness={scaleCfg.thickness ?? config?.tick_thickness ?? config?.style?.tick_thickness ?? 1}
-                customTicks={styleOverrides.custom_ticks || config?.custom_ticks || null}
+                customTicks={styleOverrides.custom_ticks || config?.custom_ticks || config?.ticks || null}
                 interval={scaleCfg.interval ?? config?.tick_interval ?? null}
                 subTicks={scaleCfg.sub_ticks ?? config?.sub_ticks ?? 4}
                 style={scaleCfg.style ?? config?.tick_style ?? 'simple'}

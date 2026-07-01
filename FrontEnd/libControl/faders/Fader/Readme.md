@@ -115,6 +115,55 @@ in the property editor.
       "weight": 1
     }
   },
+  "Custom_Fader_Example": {
+    "type": "_CustomFader",
+    "identity": {
+      "label": "Custom Fader"
+    },
+    "domain": {
+      "min": -100.0,
+      "max": 20.0,
+      "value_default": 0.0,
+      "log_exponent": 1.0
+    },
+    "ticks": [-100, -80, -60, -45, -30, -15, 0, 10, 20],
+    "tick_thickness": 1,
+    "tick_interval": 10.0,
+    "sub_ticks": 4,
+    "tick_style": "numeric",
+    "show_ticks": true,
+    "cosmetics": {
+      "colors": {
+        "primary": "#1a1a1a",
+        "tick_color": "#888888",
+        "sub_tick_color": "#444444"
+      },
+      "scale": {
+        "show": true,
+        "style": "numeric",
+        "sides": "both",
+        "interval": 10.0,
+        "sub_ticks": 4,
+        "size": 0.4,
+        "thickness": 1
+      },
+      "style_overrides": {
+        "custom_ticks": [-100, -80, -60, -45, -30, -15, 0, 10, 20]
+      }
+    },
+    "interaction": {
+      "reff_point": -15
+    },
+    "layout": {
+      "height": 250,
+      "weight_y": 1,
+      "sticky": "n",
+      "pady": 0
+    },
+    "geometry": {
+      "width": 155
+    }
+  },
   "_README": "This sample is REALLY REALLY COMPLETE. It follows the 5-pillar 'Universal Rhyme' schema (Identity, Geometry, Domain, Dynamics, Cosmetics) plus Readout, Interaction, and Layout.",
   "_LEGEND": {
     "fader_types": [
@@ -133,6 +182,18 @@ in the property editor.
     "unit_positions": [
       "left",
       "right"
+    ],
+    "scale_styles": [
+      "simple",
+      "dots",
+      "numeric"
+    ],
+    "scale_sides": [
+      "both",
+      "left",
+      "right",
+      "top",
+      "bottom"
     ],
     "cap_dimensions": "Defined in geometry.cap.w/h or top-level cap_width/height.",
     "mouse_actions": "Middle-click resets to reff_point. Alt-click opens manual entry."

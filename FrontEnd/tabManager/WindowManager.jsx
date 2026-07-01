@@ -4,6 +4,74 @@ const parseSplitName = (name) => {
     return null;
 };
 
+const ResizableSplit = ({ splits, isRow, path }) => {
+    const splitA = splits[0];
+    const splitB = splits[1];
+    const parsedA = parseSplitName(splitA.name);
+
+    const [percentA, setPercentA] = React.useState(parsedA ? parsedA.percent : 50);
+    const containerRef = React.useRef(null);
+    const isDragging = React.useRef(false);
+
+    const onMouseDown = (e) => {
+        isDragging.current = true;
+        document.body.style.cursor = isRow ? 'col-resize' : 'row-resize';
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+        e.preventDefault();
+    };
+
+    const onMouseMove = (e) => {
+        if (!isDragging.current || !containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        
+        let newPercent = 0;
+        if (isRow) {
+            const x = e.clientX - rect.left;
+            newPercent = (x / rect.width) * 100;
+        } else {
+            const y = e.clientY - rect.top;
+            newPercent = (y / rect.height) * 100;
+        }
+        
+        newPercent = Math.max(5, Math.min(95, newPercent));
+        setPercentA(newPercent);
+    };
+
+    const onMouseUp = () => {
+        isDragging.current = false;
+        document.body.style.cursor = '';
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    return (
+        <div ref={containerRef} style={{ display: 'flex', flexDirection: isRow ? 'row' : 'column', width: '100%', height: '100%' }}>
+            <div style={{ flexBasis: `${percentA}%`, flexGrow: 0, flexShrink: 0, overflow: 'hidden', minWidth: 0, minHeight: 0 }}>
+                <WindowLayout node={splitA} path={`${path}/${splitA.name}`} />
+            </div>
+            
+            <div 
+                onMouseDown={onMouseDown}
+                style={{
+                    [isRow ? 'width' : 'height']: '6px',
+                    backgroundColor: '#222',
+                    cursor: isRow ? 'col-resize' : 'row-resize',
+                    zIndex: 10,
+                    position: 'relative',
+                    transition: 'background-color 0.1s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f4902c'}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#222'}
+            />
+
+            <div style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden', minWidth: 0, minHeight: 0 }}>
+                <WindowLayout node={splitB} path={`${path}/${splitB.name}`} />
+            </div>
+        </div>
+    );
+};
+
 const WindowLayout = ({ node, path = '' }) => {
     if (!node || !node.children) return null;
 
@@ -24,6 +92,10 @@ const WindowLayout = ({ node, path = '' }) => {
             if (pA.direction === 'right' || pA.direction === 'bottom') return 1;
             return 0;
         });
+
+        if (sortedSplits.length === 2) {
+            return <ResizableSplit splits={sortedSplits} isRow={isRow} path={path} />;
+        }
 
         return (
             <div style={{ display: 'flex', flexDirection: isRow ? 'row' : 'column', width: '100%', height: '100%' }}>
@@ -121,11 +193,21 @@ const TabContainer = ({ node, path = '' }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
             <div style={{ display: 'flex', backgroundColor: '#0a0a0a', overflowX: 'auto', flexShrink: 0, borderBottom: '1px solid #222' }}>
-                {dirs.map(d => (
-                    <div
+                {dirs.map(d => {
+                    const fullPath = path ? `${path}/${d.name}` : d.name;
+                    const tabUrl = window.OaNav && window.OaNav.buildIsolatedUrl ? window.OaNav.buildIsolatedUrl(fullPath) : '#';
+                    return (
+                    <a
                         key={d.name}
-                        onClick={() => selectTab(d.name)}
+                        href={tabUrl}
+                        onClick={(e) => {
+                            if (e.ctrlKey || e.metaKey || e.button === 1) return;
+                            e.preventDefault();
+                            selectTab(d.name);
+                        }}
                         style={{
+                            display: 'block',
+                            textDecoration: 'none',
                             padding: '8px 16px',
                             cursor: 'pointer',
                             backgroundColor: activeTab === d.name ? '#1e1e1e' : 'transparent',
@@ -139,8 +221,9 @@ const TabContainer = ({ node, path = '' }) => {
                         }}
                     >
                         {cleanName(d.name)}
-                    </div>
-                ))}
+                    </a>
+                    );
+                })}
             </div>
             <div style={{ flexGrow: 1, overflow: 'hidden' }}>
                 {activeNode && <WindowLayout node={activeNode} path={`${path}/${activeNode.name}`} />}
@@ -178,22 +261,61 @@ const WindowManager = ({ directoryTree }) => {
 
     const activeWindowNode = windows.find(w => w.name === activeWindow) || directoryTree;
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const isolatePath = urlParams.get('isolate');
+
+    let isolatedNode = null;
+    if (isolatePath && directoryTree) {
+        let curr = directoryTree;
+        const parts = isolatePath.split('/').filter(Boolean);
+        for (let p of parts) {
+            curr = curr.children?.find(c => c.name === p);
+            if (!curr) break;
+        }
+        isolatedNode = curr;
+    }
+
+    if (isolatedNode) {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh', backgroundColor: '#000', color: '#fff' }}>
+                <div style={{ flexGrow: 1, overflow: 'hidden' }}>
+                    <WindowLayout node={isolatedNode} path={isolatePath} />
+                </div>
+                {editor && window.WysiwygEditor && (
+                    <window.WysiwygEditor
+                        filePath={editor.filePath}
+                        content={editor.content}
+                        onClose={() => setEditor(null)}
+                    />
+                )}
+            </div>
+        );
+    }
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh', backgroundColor: '#000', color: '#fff' }}>
             
             {/* Master Window Bar */}
             <div style={{ display: 'flex', backgroundColor: '#111', borderBottom: '1px solid #333', alignItems: 'center', padding: '0 10px', height: '35px', flexShrink: 0 }}>
                 <span style={{ color: '#fff', fontWeight: 'bold', marginRight: '20px', letterSpacing: '1px', fontSize: '12px' }}>OPEN-AIR</span>
-                {windows.map(w => (
-                    <div
+                {windows.map(w => {
+                    const winUrl = window.OaNav && window.OaNav.buildIsolatedUrl ? window.OaNav.buildIsolatedUrl(w.name) : '#';
+                    return (
+                    <a
                         key={w.name}
-                        onClick={() => selectWindow(w.name)}
+                        href={winUrl}
+                        onClick={(e) => {
+                            if (e.ctrlKey || e.metaKey || e.button === 1) return;
+                            e.preventDefault();
+                            selectWindow(w.name);
+                        }}
                         style={{
                             padding: '0 20px',
                             height: '100%',
                             display: 'flex',
                             alignItems: 'center',
                             cursor: 'pointer',
+                            textDecoration: 'none',
                             color: activeWindow === w.name ? '#fff' : '#666',
                             borderBottom: activeWindow === w.name ? '2px solid #fff' : '2px solid transparent',
                             textTransform: 'uppercase',
@@ -203,8 +325,9 @@ const WindowManager = ({ directoryTree }) => {
                         }}
                     >
                         {w.name.replace(/_/g, ' ')}
-                    </div>
-                ))}
+                    </a>
+                    );
+                })}
                 
                 <div style={{ flexGrow: 1 }} />
 

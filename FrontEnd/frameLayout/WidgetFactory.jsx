@@ -64,6 +64,28 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     ...((node.layout?.padx != null || node.layout?.pady != null)
       ? { padding: `${node.layout?.pady ?? 0}px ${node.layout?.padx ?? 0}px`, boxSizing: 'border-box' }
       : {}),
+    // Map Tkinter sticky (n, s, e, w) to CSS grid alignment
+    ...((() => {
+      const s = node.layout?.sticky;
+      if (typeof s !== 'string') return {};
+      const res = {};
+      const isN = s.toLowerCase().includes('n');
+      const isS = s.toLowerCase().includes('s');
+      const isE = s.toLowerCase().includes('e');
+      const isW = s.toLowerCase().includes('w');
+      
+      if (isN && isS) res.alignSelf = 'stretch';
+      else if (isN) res.alignSelf = 'start';
+      else if (isS) res.alignSelf = 'end';
+      else res.alignSelf = 'center';
+
+      if (isE && isW) res.justifySelf = 'stretch';
+      else if (isE) res.justifySelf = 'end';
+      else if (isW) res.justifySelf = 'start';
+      else res.justifySelf = 'center';
+
+      return res;
+    })()),
   };
 
   // Containers declared NSEW must fill their parent so 'overflow: auto' only

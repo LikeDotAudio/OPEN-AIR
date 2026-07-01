@@ -60,6 +60,23 @@ def generate_api_tree():
 # 1. At the front end of the deploy, generate the JSON tree!
 generate_api_tree()
 
+def generate_api_grabbag():
+    import urllib.request
+    print("🎒 Generating static /api/grabbag JSON from local backend...")
+    try:
+        req = urllib.request.Request("http://localhost:8000/api/grabbag")
+        with urllib.request.urlopen(req) as response:
+            data = response.read()
+            api_dir = os.path.join(script_dir, "api")
+            os.makedirs(api_dir, exist_ok=True)
+            with open(os.path.join(api_dir, "grabbag"), "wb") as f:
+                f.write(data)
+        print("✅ Static /api/grabbag generated successfully.")
+    except Exception as e:
+        print(f"⚠️ Could not fetch /api/grabbag: {e}")
+
+generate_api_grabbag()
+
 # Read .env file manually
 env_vars = {}
 env_path = os.path.join(script_dir, '.env')

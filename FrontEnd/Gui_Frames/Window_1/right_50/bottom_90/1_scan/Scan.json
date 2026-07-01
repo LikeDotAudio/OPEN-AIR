@@ -3,7 +3,8 @@
     "behavior": {
       "fluid_ew": true,
       "overflow_ew": "auto",
-      "overflow_ns": "auto"
+      "overflow_ns": "auto",
+      "scale_to_fit": true
     },
     "blocks": {
       "multi_dataset_graph": {

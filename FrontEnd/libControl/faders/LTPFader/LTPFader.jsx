@@ -145,7 +145,8 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     // else on the canvas are rail clicks → set linear value.
     const railFromEvent = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
-        const y = e.clientY - rect.top;
+        const scaleY = rect.height / (canvasRef.current.offsetHeight || 1);
+        const y = (e.clientY - rect.top) / scaleY;
         return Math.max(min, Math.min(max, getValFromY(y)));
     };
     const handleRailDown = (e) => {

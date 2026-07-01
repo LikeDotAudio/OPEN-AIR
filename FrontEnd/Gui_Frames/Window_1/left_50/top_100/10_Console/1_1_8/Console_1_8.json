@@ -8,7 +8,8 @@
     "behavior": {
       "overflow_ns": "auto",
       "overflow_ew": "auto",
-      "fluid_ew": true
+      "fluid_ew": true,
+      "scale_to_fit": true
     },
     "blocks": {
       "Mixing_Console_1-8": {
@@ -1182,7 +1183,7 @@
                   "color": "yellow",
                   "shutter_color": "#444444",
                   "shape_type": "round",
-                  "width": 60,
+                  "width": 50,
                   "height": 50,
                   "alpha": 0.9,
                   "latching": true,
@@ -1208,7 +1209,7 @@
                   "color": "red",
                   "shutter_color": "#444444",
                   "shape_type": "round",
-                  "width": 75,
+                  "width": 50,
                   "height": 50,
                   "latching": true,
                   "text_inside_color": "white",

@@ -56,9 +56,11 @@ const DualFader = ({ value, onChange, config }) => {
 
     const valueFromEvent = (e) => {
         const rect = containerRef.current.getBoundingClientRect();
+        const scaleY = rect.height / (containerRef.current.offsetHeight || 1);
+        const scaleX = rect.width / (containerRef.current.offsetWidth || 1);
         const norm = isVert
-            ? 1 - ((e.clientY - rect.top) - topRes - padding) / travelHeight
-            : ((e.clientX - rect.left) - topRes - padding) / travelWidth;
+            ? 1 - (((e.clientY - rect.top) / scaleY) - topRes - padding) / travelHeight
+            : (((e.clientX - rect.left) / scaleX) - topRes - padding) / travelWidth;
         return Math.round((min + clamp(norm, 0, 1) * (max - min)) * 100) / 100;
     };
 
@@ -72,7 +74,9 @@ const DualFader = ({ value, onChange, config }) => {
     const handlePointerDown = (e) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
-        const coord = isVert ? (e.clientY - rect.top) : (e.clientX - rect.left);
+        const scaleY = rect.height / (containerRef.current.offsetHeight || 1);
+        const scaleX = rect.width / (containerRef.current.offsetWidth || 1);
+        const coord = isVert ? ((e.clientY - rect.top) / scaleY) : ((e.clientX - rect.left) / scaleX);
         const id = Math.abs(coord - capPos1) <= Math.abs(coord - capPos2) ? 'fader1' : 'fader2';
         setIsDragging(id);
         apply(e, id);

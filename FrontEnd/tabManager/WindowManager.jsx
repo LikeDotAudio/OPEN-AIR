@@ -243,8 +243,34 @@ const WindowManager = ({ directoryTree }) => {
     React.useEffect(() => {
         const onOpen = (e) => setEditor(e.detail || null);
         window.addEventListener('oa-open-wysiwyg', onOpen);
+        
+        // Auto-open editor if specified in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const editorPath = urlParams.get('editor');
+        if (editorPath) {
+            if (editorPath === 'true') {
+                setEditor({ filePath: null, content: {} });
+            } else {
+                // Find file in directoryTree
+                const findFile = (node, path) => {
+                    if (node.type === 'file' && node.path === path) return node;
+                    if (node.children) {
+                        for (let child of node.children) {
+                            const found = findFile(child, path);
+                            if (found) return found;
+                        }
+                    }
+                    return null;
+                };
+                const fileNode = findFile(directoryTree, editorPath);
+                if (fileNode) {
+                    setEditor({ filePath: fileNode.path, content: fileNode.content });
+                }
+            }
+        }
+        
         return () => window.removeEventListener('oa-open-wysiwyg', onOpen);
-    }, []);
+    }, [directoryTree]);
 
     if (!directoryTree || !directoryTree.children) return <div style={{color: '#fff'}}>Loading Tree...</div>;
 

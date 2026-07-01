@@ -26,6 +26,7 @@
     const innerRef = React.useRef(null);
     const [scroll, setScroll] = React.useState({ x: 0, y: 0 });
     const [showGrid, setShowGrid] = React.useState(true);
+    const [limitHeight, setLimitHeight] = React.useState(true);
     const [dragOver, setDragOver] = React.useState(false);
     const [caret, setCaret] = React.useState(null);   // insertion cursor rect (move drag)
     const dragSrcRef = React.useRef(null);            // path of element being moved
@@ -95,6 +96,9 @@
           <label style={{ fontSize: 11, color: '#aaa', display: 'flex', alignItems: 'center', gap: 4 }}>
             <input type="checkbox" checked={showGrid} onChange={(e) => setShowGrid(e.target.checked)} /> grid
           </label>
+          <label style={{ fontSize: 11, color: '#aaa', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <input type="checkbox" checked={limitHeight} onChange={(e) => setLimitHeight(e.target.checked)} /> 100% height
+          </label>
           <span style={{ fontSize: 10, color: '#666', marginLeft: 'auto' }}>click a widget to select · drop from Library to add</span>
         </div>
 
@@ -112,7 +116,8 @@
             style={{ flex: 1, minWidth: 0, overflow: 'auto', position: 'relative', background: '#202020' }}
           >
             <div ref={innerRef} style={{
-              position: 'relative', width: '100%', minHeight: '100%',
+              position: 'relative', width: '100%', 
+              ...(limitHeight ? { height: '100%', overflow: 'hidden' } : { minHeight: '100%' }),
               ...(showGrid ? window.OaEdGrid.style(10) : {}),
             }}>
               <window.OaEdPreview data={st.data} />

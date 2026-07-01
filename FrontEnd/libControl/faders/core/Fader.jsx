@@ -94,12 +94,19 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const handleInteraction = (e) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
+        
+        // CSS transform scale factors: getBoundingClientRect gives scaled screen coords,
+        // offsetHeight/Width give unscaled DOM coords. We divide the screen delta by
+        // the scale to map the mouse back into the unscaled coordinate space.
+        const scaleY = rect.height / (containerRef.current.offsetHeight || 1);
+        const scaleX = rect.width / (containerRef.current.offsetWidth || 1);
+
         let norm = 0;
         if (orientation === 'vertical') {
-            const y = e.clientY - rect.top;
+            const y = (e.clientY - rect.top) / scaleY;
             norm = 1 - (y - topRes - padding) / travelHeight;
         } else {
-            const x = e.clientX - rect.left;
+            const x = (e.clientX - rect.left) / scaleX;
             norm = (x - topRes - padding) / travelWidth;
         }
         setCurrentValue(mapPositionToValue(norm, min, max, logExponent));

@@ -21,7 +21,11 @@
       'knob_style': 'knob_styles',
       'shape': 'knob_shapes',
       'pointer.style': 'pointer_styles',
-      'scale.style': 'tick_styles',
+      'scale.style': 'scale_styles', // faders use scale_styles, but they match tick_styles
+      'scale.sides': 'scale_sides',
+      'sides': 'scale_sides',
+      'tick_style': 'tick_styles',
+      'orientation': 'orientations',
       'law': 'laws',
       'ballistics': 'ballistics',
       'label_position': 'label_positions',

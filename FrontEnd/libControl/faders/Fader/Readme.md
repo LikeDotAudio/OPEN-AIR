@@ -195,6 +195,10 @@ in the property editor.
       "top",
       "bottom"
     ],
+    "orientations": [
+      "horizontal",
+      "vertical"
+    ],
     "cap_dimensions": "Defined in geometry.cap.w/h or top-level cap_width/height.",
     "mouse_actions": "Middle-click resets to reff_point. Alt-click opens manual entry."
   }

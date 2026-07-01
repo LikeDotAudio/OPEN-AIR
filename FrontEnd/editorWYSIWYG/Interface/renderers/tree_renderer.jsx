@@ -18,8 +18,13 @@
   const SKIP = new Set(['blocks', 'fields']);
   const DIM = new Set(['width', 'height', 'x', 'y']); // accept px or %
 
-  const Section = ({ title, depth, defaultOpen = false, accent, headerExtra, children }) => {
+  const Section = ({ title, depth, defaultOpen = false, accent, headerExtra, children, expandState }) => {
     const [open, setOpen] = React.useState(defaultOpen);
+    React.useEffect(() => {
+      if (expandState && expandState.tick > 0) {
+        setOpen(expandState.open);
+      }
+    }, [expandState]);
     return (
       <div>
         <div onClick={() => setOpen(!open)} style={{
@@ -51,7 +56,7 @@
 
   // value  = the value to render (may be a merged reference+instance object)
   // saved  = the corresponding value in the SAVED instance (undefined => not saved)
-  const PropertyNode = ({ k, value, saved, keyPath, basePath, store, depth, defaultOpen = false }) => {
+  const PropertyNode = ({ k, value, saved, keyPath, basePath, store, depth, defaultOpen = false, expandState }) => {
     if (isObj(value)) {
       // Composite sub-config: merge the library reference so all params show.
       // `saved` is the source of truth for "red" (notSaved); never overwrite it
@@ -64,22 +69,22 @@
       const entries = Object.entries(renderValue);
       const headerExtra = sectionExtra(k, saved !== undefined ? saved : value, basePath, keyPath, store);
       return (
-        <Section title={k} depth={depth} defaultOpen={defaultOpen} count={entries.length} headerExtra={headerExtra}>
+        <Section title={k} depth={depth} defaultOpen={defaultOpen} count={entries.length} headerExtra={headerExtra} expandState={expandState}>
           {entries.map(([ck, cv]) => (
             <PropertyNode key={ck} k={ck} value={cv}
               saved={isObj(savedObj) || Array.isArray(savedObj) ? savedObj[ck] : undefined}
-              keyPath={`${keyPath}.${ck}`} basePath={basePath} store={store} depth={depth + 1} />
+              keyPath={`${keyPath}.${ck}`} basePath={basePath} store={store} depth={depth + 1} expandState={expandState} />
           ))}
         </Section>
       );
     }
     if (Array.isArray(value)) {
       return (
-        <Section title={`${k} [${value.length}]`} depth={depth} defaultOpen={defaultOpen} count={value.length}>
+        <Section title={`${k} [${value.length}]`} depth={depth} defaultOpen={defaultOpen} count={value.length} expandState={expandState}>
           {value.map((item, i) => (
             <PropertyNode key={i} k={`#${i}`} value={item}
               saved={Array.isArray(saved) ? saved[i] : undefined}
-              keyPath={`${keyPath}.${i}`} basePath={basePath} store={store} depth={depth + 1} />
+              keyPath={`${keyPath}.${i}`} basePath={basePath} store={store} depth={depth + 1} expandState={expandState} />
           ))}
         </Section>
       );
@@ -98,6 +103,8 @@
    *  domain and value parents are open by default. `type` is shown in the header,
    *  so it's skipped here. */
   window.OaEdPropertyTree = ({ node, basePath, store }) => {
+    const [expandState, setExpandState] = React.useState({ open: false, tick: 0 });
+
     if (!node || typeof node !== 'object') {
       return <div style={{ color: '#777', fontSize: 11, padding: 10 }}>No element selected.</div>;
     }
@@ -112,13 +119,23 @@
 
     return (
       <div>
+        <div style={{ display: 'flex', gap: 6, padding: '4px 8px', background: '#111', borderBottom: '1px solid #222' }}>
+          <button onClick={() => setExpandState(s => ({ open: true, tick: s.tick + 1 }))}
+            style={{ flex: 1, background: '#222', color: '#ccc', border: '1px solid #333', borderRadius: 3, fontSize: 10, padding: '4px', cursor: 'pointer' }}>
+            ⬍ Expand All
+          </button>
+          <button onClick={() => setExpandState(s => ({ open: false, tick: s.tick + 1 }))}
+            style={{ flex: 1, background: '#222', color: '#ccc', border: '1px solid #333', borderRadius: 3, fontSize: 10, padding: '4px', cursor: 'pointer' }}>
+            ⬌ Collapse All
+          </button>
+        </div>
         {entries.map(([k, v]) => {
           const savedV = node[k]; // undefined => library-only => red
           if (isObj(v) || Array.isArray(v)) {
             return (
               <PropertyNode key={k} k={k} value={v} saved={savedV} keyPath={k}
                 basePath={basePath} store={store} depth={0}
-                defaultOpen={k === 'domain' || k === 'value'} />
+                defaultOpen={k === 'domain' || k === 'value'} expandState={expandState} />
             );
           }
           return (

@@ -155,9 +155,39 @@
   // Renders the actual widget from its (live-edited) node, like the palette does.
   const Preview = ({ nodeKey, node }) => {
     const layoutJson = React.useMemo(() => ({ [nodeKey || 'preview']: node }), [nodeKey, node]);
+    const containerRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const [scale, setScale] = React.useState(1);
+
+    React.useEffect(() => {
+      const container = containerRef.current;
+      const content = contentRef.current;
+      if (!container || !content) return;
+      let raf;
+      const ro = new ResizeObserver(() => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          if (!container || !content) return;
+          const cw = container.clientWidth - 32; // - padding
+          const ch = container.clientHeight - 32;
+          const iw = content.offsetWidth;
+          const ih = content.offsetHeight;
+          if (iw > 0 && ih > 0) {
+            const sx = cw / iw;
+            const sy = ch / ih;
+            const s = Math.max(0.1, Math.min(1, sx, sy));
+            setScale(s);
+          }
+        });
+      });
+      ro.observe(container);
+      ro.observe(content);
+      return () => { ro.disconnect(); cancelAnimationFrame(raf); };
+    }, [node]);
+
     return (
-      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto', padding: 16, boxSizing: 'border-box' }}>
-        <div style={{ width: '100%', maxWidth: 700 }}>
+      <div ref={containerRef} style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+        <div ref={contentRef} style={{ width: '100%', minWidth: 'max-content', transform: `scale(${scale})`, transformOrigin: 'center center' }}>
           {window.LoaderOrchestrator
             ? <window.LoaderOrchestrator layoutJson={layoutJson} />
             : <div style={{ color: '#777' }}>preview unavailable</div>}
@@ -328,6 +358,7 @@
     // Snapshot the node ONCE on open so "Abort changes" can revert the session.
     const [original] = React.useState(() => { try { return JSON.parse(JSON.stringify(node)); } catch (e) { return node; } });
     const [msg, setMsg] = React.useState(null);
+    const [leftFlex, setLeftFlex] = React.useState(55);
 
     // ---- click-to-highlight state ------------------------------------------
     // A label click sets this; the overlay watches it and auto-clears after 2.5s.
@@ -382,11 +413,37 @@
           </div>
           {/* body: preview | controls */}
           <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-            <div style={{ flex: '1 1 55%', minWidth: 0, borderRight: '1px solid #333', background: '#0d0d0d', display: 'flex', position: 'relative' }}>
+            <div style={{ width: `${leftFlex}%`, minWidth: 0, background: '#0d0d0d', display: 'flex', position: 'relative' }}>
               <Preview nodeKey={nodeKey} node={node} />
               <HighlightOverlay highlight={highlight} />
             </div>
-            <div style={{ flex: '1 1 45%', minWidth: 320, overflow: 'auto', padding: '4px 12px 16px' }}>
+            {/* Draggable Sash */}
+            <div
+              style={{ width: 6, margin: '0 -2px', background: '#333', cursor: 'col-resize', flexShrink: 0, zIndex: 100, position: 'relative' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = A}
+              onMouseLeave={(e) => e.currentTarget.style.background = '#333'}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                const el = e.currentTarget;
+                el.setPointerCapture(e.pointerId);
+                const startX = e.clientX;
+                const startFlex = leftFlex;
+                const parentWidth = el.parentElement.offsetWidth;
+                
+                const onMove = (me) => {
+                  const deltaPct = ((me.clientX - startX) / parentWidth) * 100;
+                  setLeftFlex(Math.max(20, Math.min(80, startFlex + deltaPct)));
+                };
+                const onUp = (ue) => {
+                  el.releasePointerCapture(ue.pointerId);
+                  el.removeEventListener('pointermove', onMove);
+                  el.removeEventListener('pointerup', onUp);
+                };
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerup', onUp);
+              }}
+            />
+            <div style={{ width: `calc(${100 - leftFlex}% - 6px)`, minWidth: 200, overflow: 'auto', padding: '4px 12px 16px' }}>
               <window.OaEdTransparencyControls store={store} path={path} node={node} onLabelClick={triggerHighlight} />
               {Bespoke
                 ? <Bespoke store={store} path={path} node={node} type={type} ctl={window.OaEdArtisticCtl} onLabelClick={triggerHighlight} />

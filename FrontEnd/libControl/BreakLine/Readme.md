@@ -3,10 +3,10 @@
 A thin horizontal or vertical separator line for laying out panels.
 
 - **Defines (global):** `BreakLine` (also `window.BreakLine`)
-- **Props:** `config` — `{ orientation: 'horizontal'|'vertical', color, thickness, margin }`
+- **Props:** `config` — `{ orientation: 'horizontal'|'vertical', color, thickness, margin, fold_up: boolean, is_folded: boolean }`
 - **Loaded by:** the live app via `frontEnd/Core/Launch/index.html`.
 
-Pure presentation; no MQTT, no state.
+Pure presentation, but can optionally act as a collapsible section header (`fold_up: true`), using DOM traversal to hide subsequent siblings until the next breakline.
 
 <!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
 ## Sample (WYSIWYG library source)
@@ -28,7 +28,9 @@ in the property editor.
       "pady": 5,
       "colour": "#555555",
       "alpha": 1.0,
-      "sticky": "ew"
+      "sticky": "ew",
+      "fold_up": true,
+      "is_folded": false
     },
     "cosmetics": {
       "colors": {

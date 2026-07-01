@@ -253,6 +253,13 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     }
 
     if (type.toLowerCase().includes('keyboard') || type.toLowerCase().includes('midi')) {
+        if (type === '_MidiMessageLog') {
+            return (
+                <div style={style}>
+                    {window.MidiMessageLog ? <window.MidiMessageLog value={val} config={node} /> : <div style={{background: '#222', color: '#fff'}}>MIDI Log</div>}
+                </div>
+            );
+        }
         return (
             <div style={style}>
                 {window.MidiKeyboard ? <window.MidiKeyboard value={val} onChange={setVal} config={node} /> : <div style={{background: '#222', color: '#fff'}}>MIDI Keyboard</div>}

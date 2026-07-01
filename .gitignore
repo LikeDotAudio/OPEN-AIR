@@ -34,3 +34,4 @@ target/
 *.dylib
 *.dll
 *.pyd
+.env

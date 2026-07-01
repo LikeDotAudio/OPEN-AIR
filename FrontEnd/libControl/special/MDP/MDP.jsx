@@ -7,7 +7,7 @@
  * Robust numeric extraction for MQTT composite states.
  */
 
-const MDP = ({ config, value, rotValue, angle, onChange }}) => {
+const MDP = ({ config, value, rotValue, angle, onChange }) => {
     const canvasRef = React.useRef(null);
     const [isHovered, setIsHovered] = React.useState(false);
     const [draggingRole, setDraggingRole] = React.useState(null); // 'cap', 'widget_move'
@@ -33,10 +33,10 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
         if (value.angle !== undefined) widgetAngle = getNum(value.angle, widgetAngle);
         if (value.x !== undefined) x = getNum(value.x, x);
         if (value.y !== undefined) y = getNum(value.y, y);
-    }} else {
+    } else {
         valCurrent = getNum(value, valCurrent);
         rotCurrent = getNum(rotValue, rotCurrent);
-    }}
+    }
 
     const rotatePoint = (px, py, cx, cy, angleDeg) => {
         const rad = angleDeg * (Math.PI / 180);
@@ -44,14 +44,14 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
         const sin = Math.sin(rad);
         const nx = cos * (px - cx) - sin * (py - cy) + cx;
         const ny = sin * (px - cx) + cos * (py - cy) + cy;
-        return { x: nx, y: ny }};
-    }};
+        return { x: nx, y: ny };
+    };
 
     const getCapPos = () => {
         const norm = (valCurrent - valMin) / (valMax - valMin || 1);
         const localY = (trackLen / 2) - (norm * trackLen);
         return rotatePoint(x, y + localY, x, y, widgetAngle);
-    }};
+    };
 
     const draw = (ctx) => {
         const cx = x; const cy = y;
@@ -81,7 +81,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
             const t3 = rotatePoint(cx + 15, cy + ly, cx, cy, ang);
             const t4 = rotatePoint(cx + 15 + len, cy + ly, cx, cy, ang);
             ctx.moveTo(t3.x, t3.y); ctx.lineTo(t4.x, t4.y);
-        }}
+        }
         ctx.stroke();
 
         // 3. Cap
@@ -125,14 +125,14 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
         ctx.font = "10px Arial"; ctx.textAlign = "center"; ctx.fillStyle = "white";
         ctx.fillText(Number(valCurrent).toFixed(1), capPos.x, capPos.y - 35);
         ctx.fillStyle = "#aaaaaa"; ctx.fillText("R:" + Number(rotCurrent).toFixed(0), capPos.x, capPos.y + 35);
-    }};
+    };
 
     React.useEffect(() => {
         if (canvasRef.current) {
             const ctx = canvasRef.current.getContext('2d');
             draw(ctx);
-        }}
-    }}, [valCurrent, rotCurrent, widgetAngle, x, y, isHovered, draggingRole]);
+        }
+    }, [valCurrent, rotCurrent, widgetAngle, x, y, isHovered, draggingRole]);
 
     const handlePointerDown = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -144,14 +144,14 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
 
         if (dist <= capRadius + 10) {
             setDraggingRole('cap');
-            setInteractionState({ startX: tx, startY: ty, startVal: valCurrent, startRot: rotCurrent }});
+            setInteractionState({ startX: tx, startY: ty, startVal: valCurrent, startRot: rotCurrent });
             canvasRef.current.setPointerCapture(e.pointerId);
-        }} else {
+        } else {
             setDraggingRole('widget_move');
-            setInteractionState({ startX: tx, startY: ty, startXPos: x, startYPos: y }});
+            setInteractionState({ startX: tx, startY: ty, startXPos: x, startYPos: y });
             canvasRef.current.setPointerCapture(e.pointerId);
-        }}
-    }};
+        }
+    };
 
     const handlePointerMove = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -177,20 +177,20 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
             let nextRot = rotCurrent;
             if (e.shiftKey) {
                 nextRot = Math.max(rotMin, Math.min(rotMax, interactionState.startRot + dx));
-            }}
+            }
 
-            if (onChange) onChange({ value: nextVal, rotValue: nextRot, angle: widgetAngle, x, y }});
-        }} else if (draggingRole === 'widget_move') {
+            if (onChange) onChange({ value: nextVal, rotValue: nextRot, angle: widgetAngle, x, y });
+        } else if (draggingRole === 'widget_move') {
             const dx = tx - interactionState.startX;
             const dy = ty - interactionState.startY;
-            if (onChange) onChange({ value: valCurrent, rotValue: rotCurrent, angle: widgetAngle, x: interactionState.startXPos + dx, y: interactionState.startYPos + dy }});
-        }}
-    }};
+            if (onChange) onChange({ value: valCurrent, rotValue: rotCurrent, angle: widgetAngle, x: interactionState.startXPos + dx, y: interactionState.startYPos + dy });
+        }
+    };
 
     const handlePointerUp = (e) => {
         setDraggingRole(null);
         if (canvasRef.current) canvasRef.current.releasePointerCapture(e.pointerId);
-    }};
+    };
 
     return (
         <canvas
@@ -200,7 +200,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }}) => {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            style={{ display: 'block', touchAction: 'none', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222') }}}
+            style={{ display: 'block', touchAction: 'none', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222') }}
         />
     );
 };

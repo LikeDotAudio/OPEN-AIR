@@ -4,10 +4,10 @@
 //
 // Description: Polar-coordinate panner/fader.
 
-const CMDP = ({ config, value, rotValue, onChange }}) => {
+const CMDP = ({ config, value, rotValue, onChange }) => {
     const canvasRef = React.useRef(null);
     const [dragging, setDragging] = React.useState(false);
-    const [interactionState, setInteractionState] = React.useState({ startX: 0, startY: 0, startVal: 0, startRot: 0, startAngle: 0 }});
+    const [interactionState, setInteractionState] = React.useState({ startX: 0, startY: 0, startVal: 0, startRot: 0, startAngle: 0 });
 
     const NEAR_RADIUS = 120;
     const FAR_RADIUS = 380;
@@ -24,10 +24,10 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
         valCurrent = getVal(value.value, valCurrent);
         rotCurrent = getVal(value.rotValue, rotCurrent);
         if (value.angle !== undefined) angle = getVal(value.angle, angle);
-    }} else {
+    } else {
         valCurrent = getVal(value, valCurrent);
         rotCurrent = getVal(rotValue, rotCurrent);
-    }}
+    }
 
     const colorHighlight = config?.color || "#f4902c";
     const label = config?.label || "CMDP";
@@ -105,7 +105,7 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
         ctx.fillStyle = colorHighlight; ctx.font = "bold 12px Arial"; ctx.textAlign = "center";
         ctx.fillText(label, 0, 0);
         ctx.restore();
-    }};
+    };
 
     React.useEffect(() => {
         if (canvasRef.current) {
@@ -113,8 +113,8 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
             const w = canvasRef.current.width;
             const h = canvasRef.current.height;
             draw(ctx, w, h);
-        }}
-    }}, [valCurrent, rotCurrent, angle, dragging]);
+        }
+    }, [valCurrent, rotCurrent, angle, dragging]);
 
     const handlePointerDown = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -139,10 +139,10 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
         const hitDist = Math.sqrt((mx - capX) ** 2 + (my - capY) ** 2);
         if (hitDist < 30) {
             setDragging(true);
-            setInteractionState({ startX: mx, startY: my, startVal: valCurrent, startRot: rotCurrent, startAngle: angle }});
+            setInteractionState({ startX: mx, startY: my, startVal: valCurrent, startRot: rotCurrent, startAngle: angle });
             canvasRef.current.setPointerCapture(e.pointerId);
-        }}
-    }};
+        }
+    };
 
     const handlePointerMove = (e) => {
         if (!dragging) return;
@@ -161,23 +161,23 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
             const proj = dx * tx + dy * ty; 
             const change = -(proj / trackLen) * 100; 
             const nextVal = Math.max(0, Math.min(100, interactionState.startVal + change));
-            if (onChange) onChange({ value: nextVal, rotValue: rotCurrent, angle }});
-        }} else if (e.buttons === 2) { // Right drag: Intensity
+            if (onChange) onChange({ value: nextVal, rotValue: rotCurrent, angle });
+        } else if (e.buttons === 2) { // Right drag: Intensity
             const dx = mx - interactionState.startX;
             const nextRot = Math.max(0, Math.min(100, interactionState.startRot + dx * 0.5));
-            if (onChange) onChange({ value: valCurrent, rotValue: nextRot, angle }});
-        }} else if (e.altKey) { // Alt + Drag: Azimuth
+            if (onChange) onChange({ value: valCurrent, rotValue: nextRot, angle });
+        } else if (e.altKey) { // Alt + Drag: Azimuth
             const dx = mx - cx;
             const dy = my - cy;
             const nextAngle = Math.atan2(dy, dx) * 180 / Math.PI;
-            if (onChange) onChange({ value: valCurrent, rotValue: rotCurrent, angle: nextAngle }});
-        }}
-    }};
+            if (onChange) onChange({ value: valCurrent, rotValue: rotCurrent, angle: nextAngle });
+        }
+    };
 
     const handlePointerUp = (e) => {
         setDragging(false);
         if (canvasRef.current) canvasRef.current.releasePointerCapture(e.pointerId);
-    }};
+    };
 
     return (
         <canvas
@@ -188,7 +188,7 @@ const CMDP = ({ config, value, rotValue, onChange }}) => {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onContextMenu={e => e.preventDefault()}
-            style={{ display: 'block', cursor: 'default', touchAction: 'none' }}}
+            style={{ display: 'block', cursor: 'default', touchAction: 'none' }}
         />
     );
 };

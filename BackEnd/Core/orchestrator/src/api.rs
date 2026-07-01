@@ -72,7 +72,7 @@ fn get_directory_tree(path: &Path, base_path: &Path) -> Value {
 }
 
 async fn get_tree(State(state): State<ApiState>) -> impl IntoResponse {
-    let gui_frames = state.root_dir.join("Gui_Frames");
+    let gui_frames = state.root_dir.join("FrontEnd").join("Gui_Frames");
     Json(get_directory_tree(&gui_frames, &gui_frames))
 }
 
@@ -136,9 +136,10 @@ fn strip_volatile(val: &mut Value) {
 
 async fn save_file(State(state): State<ApiState>, Json(mut payload): Json<SavePayload>) -> impl IntoResponse {
     let clean_rel = payload.path.trim_start_matches('/');
-    let abs_path = state.root_dir.join("Gui_Frames").join(clean_rel);
-    
-    if !abs_path.starts_with(state.root_dir.join("Gui_Frames")) || !abs_path.to_string_lossy().ends_with(".json") {
+    let gui_frames_dir = state.root_dir.join("FrontEnd").join("Gui_Frames");
+    let abs_path = gui_frames_dir.join(clean_rel);
+
+    if !abs_path.starts_with(&gui_frames_dir) || !abs_path.to_string_lossy().ends_with(".json") {
         return (StatusCode::FORBIDDEN, Json(json!({"ok": false, "error": "Path outside Gui_Frames"})));
     }
     

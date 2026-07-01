@@ -1,4 +1,4 @@
-const StatusLight = ({ value, config }}) => {
+const StatusLight = ({ value, config }) => {
     const title = config?.label_active?.En || config?.label?.En || "";
     const orientation = config?.Orientation || "horizontal";
     
@@ -6,9 +6,9 @@ const StatusLight = ({ value, config }}) => {
     let fillColor = "#ff0000"; // Default Red
     if (value === "green" || value === true || value === 1 || value === "1" || value === "online") {
         fillColor = "#00ff00";
-    }} else if (value === "yellow" || value === "warning") {
+    } else if (value === "yellow" || value === "warning") {
         fillColor = "#ffff00";
-    }}
+    }
 
     const dotSize = 16;
     const style = {
@@ -21,7 +21,7 @@ const StatusLight = ({ value, config }}) => {
         borderRadius: '20px',
         border: '1px solid #333',
         width: 'fit-content'
-    }};
+    };
 
     return (
         <div style={style}>
@@ -32,9 +32,9 @@ const StatusLight = ({ value, config }}) => {
                 backgroundColor: fillColor,
                 boxShadow: `0 0 10px ${fillColor}, inset 0 0 5px rgba(0,0,0,0.5)`,
                 border: '2px solid #fff'
-            }}} />
+            }} />
             {title && (
-                <span style={{ color: '#fff', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}}>
+                <span style={{ color: '#fff', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>
                     {title}
                 </span>
             )}

@@ -104,12 +104,14 @@ if result.returncode == 0 and result.stdout.strip():
         if os.path.isdir(full_local):
             for root, _, files in os.walk(full_local):
                 for f in files:
+                    if f.endswith('.py'):
+                        continue
                     full_f = os.path.join(root, f)
                     rel_f = os.path.relpath(full_f, repo_root)
                     if rel_f.startswith("FrontEnd/"):
                         files_to_upload.append(rel_f.replace("\\", "/"))
         else:
-            if filepath.startswith("FrontEnd/"):
+            if filepath.startswith("FrontEnd/") and not filepath.endswith('.py'):
                 files_to_upload.append(filepath.replace("\\", "/"))
 
 # Deduplicate
@@ -172,7 +174,7 @@ if sync_all:
     print("⏳ Comparing local and remote file dates. This might take a moment...")
     for root, dirs, files in os.walk("."):
         for f in files:
-            if f in [".env", ".gitignore", "deploy.py"]:
+            if f.endswith('.py') or f in [".env", ".gitignore"]:
                 continue
             
             local_full = os.path.join(root, f)

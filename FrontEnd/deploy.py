@@ -157,6 +157,15 @@ def get_remote_mtime(ftp_conn, remote_file):
         pass
     return 0
 
+def get_remote_size(ftp_conn, remote_file):
+    try:
+        res = ftp_conn.sendcmd(f"SIZE {remote_file}")
+        if res.startswith("213"):
+            return int(res[4:].strip())
+    except Exception:
+        pass
+    return -1
+
 # If we are doing a full sync, compare dates
 if sync_all:
     os.chdir(script_dir)
@@ -174,11 +183,15 @@ if sync_all:
                 continue
                 
             local_mtime = os.path.getmtime(local_full) # epoch seconds
+            local_size = os.path.getsize(local_full)
+            
             remote_filepath = remote_base_dir.rstrip('/') + '/' + local_rel.replace("\\", "/")
             remote_mtime = get_remote_mtime(ftp, remote_filepath)
+            remote_size = get_remote_size(ftp, remote_filepath)
             
             # Upload if local is newer than remote (with 2 seconds buffer for slight clock drift)
-            if local_mtime > remote_mtime + 2:
+            # OR if the file size is completely different
+            if (local_mtime > remote_mtime + 2) or (local_size != remote_size):
                 files_to_upload.append("FrontEnd/" + local_rel.replace("\\", "/"))
 
 files_to_upload = list(set(files_to_upload))
@@ -187,6 +200,15 @@ if not files_to_upload:
     print("✅ All files are up to date! Nothing to upload.")
     ftp.quit()
     sys.exit(0)
+
+# Sort to ensure index.html / index.htm are uploaded first
+def sort_priority(filepath):
+    base = os.path.basename(filepath).lower()
+    if base in ['index.html', 'index.htm']:
+        return 0
+    return 1
+
+files_to_upload.sort(key=sort_priority)
 
 print(f"\n🚀 Found {len(files_to_upload)} files to deploy.")
 for f in files_to_upload:

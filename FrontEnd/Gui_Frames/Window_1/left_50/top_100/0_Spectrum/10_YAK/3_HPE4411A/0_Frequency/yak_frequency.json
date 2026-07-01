@@ -1,0 +1,430 @@
+{
+  "Spectrum_YAK_HPE4411A_Frequency": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.3.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "NAB": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fréquence NAB",
+          "De": "NAB Frequenzüberwachung",
+          "Es": "Monitoreo de frecuencia NAB",
+          "show_label": false
+        },
+        "fields": {
+          "Frequency_settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fréquence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Get Frequency Settings",
+                      "Fr": "Get Fréquence Paramètres",
+                      "De": "Get Frequenz Einstellungen",
+                      "Es": "Get Frecuencia Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Get Frequency Settings",
+                      "Fr": "Get Fréquence Paramètres",
+                      "De": "Get Frequenz Einstellungen",
+                      "Es": "Get Frecuencia Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    }
+                  },
+                  "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    }
+                  },
+                  "center_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Center Frequency (Hz)",
+                      "Fr": "Fréquence centrale (Hz)",
+                      "De": "Mittenfrequenz (Hz)",
+                      "Es": "Frecuencia central (Hz)"
+                    }
+                  },
+                  "span_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Portée Fréquence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "RIG_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fréquence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
+        "fields": {
+          "freq_start_stop": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fréquence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Set Start and Stop Frequency",
+                      "Fr": "Set Démarrer and Arrêter Fréquence",
+                      "De": "Set Start and Stopp Frequenz",
+                      "Es": "Set Inicio and Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Set Start and Stop Frequency",
+                      "Fr": "Set Démarrer and Arrêter Fréquence",
+                      "De": "Set Start and Stopp Frequenz",
+                      "Es": "Set Inicio and Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    }
+                  },
+                  "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Span_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:SPAN <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Portée Fréquence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Start_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "En": "Set Start Frequency",
+                  "Fr": "Set Démarrer Fréquence",
+                  "De": "Set Start Frequenz",
+                  "Es": "Set Inicio Frecuencia"
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Stop_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Set Stop Frequency",
+                      "Fr": "Set Arrêter Fréquence",
+                      "De": "Set Stopp Frequenz",
+                      "Es": "Set Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Set Stop Frequency",
+                      "Fr": "Set Arrêter Fréquence",
+                      "De": "Set Stopp Frequenz",
+                      "Es": "Set Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STOP <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "Power_YAK_66104A_OUTPut": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Output": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Output Control",
+          "Fr": "Sortie Control",
+          "De": "Ausgang Control",
+          "Es": "Salida Control"
+        },
+        "fields": {
+          "Output_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Output_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "Execute Command": {
+                  "message": "INST:NSEL 1;OUTP ON"
+                }
+              },
+              "Output_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "Execute Command": {
+                  "message": "INST:NSEL 1;OUTP OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

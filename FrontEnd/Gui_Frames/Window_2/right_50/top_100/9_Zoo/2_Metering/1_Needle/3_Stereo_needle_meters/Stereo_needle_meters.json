@@ -1,0 +1,566 @@
+{
+  "Zoo_Metering_Needle_Stereo_needle_meters": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Stereo_Needle_Zoo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Stereo Needle Meter Demos (Varied Ballistics)",
+          "Fr": "Stereo Aiguille Meter Demos (Varied Ballistics)",
+          "De": "Stereo Nadel Meter Demos (Varied Ballistics)",
+          "Es": "Stereo Aguja Meter Demos (Varied Ballistics)"
+        },
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "vu_standard": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Standard VU",
+              "Fr": "Standard VU",
+              "De": "Standard VU",
+              "Es": "Estándar VU",
+              "show_label": true
+            },
+            "notes": "Classic VU response (300ms integration).",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "teardrop",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#FF0000",
+                "secondary_style": "line",
+                "thickness": 5,
+                "secondary_thickness": 2
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_ppm_fast": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Fast PPM",
+              "Fr": "Rapide PPM",
+              "De": "Schnell PPM",
+              "Es": "Rápido PPM",
+              "show_label": true
+            },
+            "notes": "Peak Program Meter: Instant attack, slow decay.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "taper",
+                "primary_color": "#00FFFF",
+                "secondary_color": "#FF00FF",
+                "secondary_style": "line",
+                "thickness": 4,
+                "secondary_thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_broadcast": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Broadcast Avg",
+              "Fr": "Broadcast Avg",
+              "De": "Broadcast Avg",
+              "Es": "Broadcast Avg",
+              "show_label": true
+            },
+            "notes": "Slow averaging for loudness consistency.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#00FF00",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_vintage": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Vintage Damped",
+              "Fr": "Vintage Damped",
+              "De": "Vintage Damped",
+              "Es": "Vintage Damped",
+              "show_label": true
+            },
+            "notes": "Heavy physical needle damping.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#8B4513",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_hyper_sensitive": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Hyper Sensitive",
+              "Fr": "Hyper Sensitive",
+              "De": "Hyper Sensitive",
+              "Es": "Hyper Sensitive",
+              "show_label": true
+            },
+            "notes": "Tracks transients perfectly (no smoothing).",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#FF0000",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_lazy_peak": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Lazy Peak",
+              "Fr": "Lazy Peak",
+              "De": "Lazy Peak",
+              "Es": "Lazy Peak",
+              "show_label": true
+            },
+            "notes": "Moderate attack, very long hold & decay.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#404040",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_stereo_comp": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Stereo Comp",
+              "Fr": "Stereo Comp",
+              "De": "Stereo Comp",
+              "Es": "Stereo Comp",
+              "show_label": true
+            },
+            "notes": "Compressor-style gain reduction ballistics.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#1E90FF",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": -3.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "vu_mastering": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Mastering",
+              "Fr": "Mastering",
+              "De": "Mastering",
+              "Es": "Mastering",
+              "show_label": true
+            },
+            "notes": "Tight range, highly damped precision.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_v1": -5.0,
+                "value_v2": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 300,
+              "resting_point": -20.0,
+              "dwell_time": 300,
+              "hold_time": 0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "visualization": "needle",
+                "show_grid": true
+              },
+              "pointer": {
+                "style": "line",
+                "primary_color": "#FFFFFF",
+                "secondary_color": "#C0C0C0",
+                "thickness": 3
+              },
+              "scale": {
+                "show": true,
+                "upper_range": 0.0,
+                "sub_ticks": 5
+              },
+              "style_overrides": {
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "meter_mode": "stereo",
+                "Peak_flag": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

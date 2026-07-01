@@ -1,0 +1,166 @@
+{
+  "Zoo_buttons_directional_buttons": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Navigation",
+              "Fr": "Navigation",
+              "De": "Navigation",
+              "Es": "Navigation"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": {
+              "En": "Navigation",
+              "Fr": "Navigation",
+              "De": "Navigation",
+              "Es": "Navigation"
+            },
+            "notes": "Standard directional buttons for navigation.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Camera Movement",
+              "Fr": "Camera Movement",
+              "De": "Camera Movement",
+              "Es": "Camera Movement"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": {
+              "En": "Camera Movement",
+              "Fr": "Camera Movement",
+              "De": "Camera Movement",
+              "Es": "Camera Movement"
+            },
+            "notes": "Controls for moving a camera (up, down, left, right).",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Robot Controls",
+              "Fr": "Robot Controls",
+              "De": "Robot Controls",
+              "Es": "Robot Controls"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": {
+              "En": "Robot Controls",
+              "Fr": "Robot Controls",
+              "De": "Robot Controls",
+              "Es": "Robot Controls"
+            },
+            "notes": "Used to control the movement of a robot.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Cursor",
+              "Fr": "Cursor",
+              "De": "Cursor",
+              "Es": "Cursor"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": {
+              "En": "Cursor",
+              "Fr": "Cursor",
+              "De": "Cursor",
+              "Es": "Cursor"
+            },
+            "notes": "Generic directional buttons for cursor movement.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Focus Adjust",
+              "Fr": "Focus Adjust",
+              "De": "Focus Adjust",
+              "Es": "Focus Adjust"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": {
+              "En": "Focus Adjust",
+              "Fr": "Focus Adjust",
+              "De": "Focus Adjust",
+              "Es": "Focus Adjust"
+            },
+            "notes": "Buttons for adjusting focus in optical systems.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

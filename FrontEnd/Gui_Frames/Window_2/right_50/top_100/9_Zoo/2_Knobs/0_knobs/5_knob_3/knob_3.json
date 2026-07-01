@@ -1,0 +1,1672 @@
+{
+  "Zoo_Knobs_knobs_knob_3": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.5.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Knob_Combined_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Combined Knob Showcase (Volume, Pitch, Filter)",
+          "Fr": "Combined Knob Showcase (Volume, Pitch, Filter)",
+          "De": "Combined Knob Showcase (Volume, Pitch, Filter)",
+          "Es": "Combined Knob Showcase (Volume, Pitch, Filter)"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "knob_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Std Brown",
+              "Fr": "Std Brown",
+              "De": "Std Brown",
+              "Es": "Std Brown",
+              "show_label": true
+            },
+            "notes": "Standard size, brown",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#996633",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 70.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Sm Red",
+              "Fr": "Sm Red",
+              "De": "Sm Red",
+              "Es": "Sm Red",
+              "show_label": true
+            },
+            "notes": "Small size, red",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF0000",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 20.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Lg Blue",
+              "Fr": "Lg Blue",
+              "De": "Lg Blue",
+              "Es": "Lg Blue",
+              "show_label": true
+            },
+            "notes": "Large size, blue",
+            "geometry": {
+              "width": 160,
+              "height": 160
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#0000FF",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "dot",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 10,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 80.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Med Green",
+              "Fr": "Med Green",
+              "De": "Med Green",
+              "Es": "Med Green",
+              "show_label": true
+            },
+            "notes": "Medium size, green",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FF00",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Yel",
+              "Fr": "Tiny Yel",
+              "De": "Tiny Yel",
+              "Es": "Tiny Yel",
+              "show_label": true
+            },
+            "notes": "Tiny size, yellow",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFF00",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "thin",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Giant Cyn",
+              "Fr": "Giant Cyn",
+              "De": "Giant Cyn",
+              "Es": "Giant Cyn",
+              "show_label": true
+            },
+            "notes": "Giant size, cyan",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FFFF",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "block",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 90.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Med Mag",
+              "Fr": "Med Mag",
+              "De": "Med Mag",
+              "Es": "Med Mag",
+              "show_label": true
+            },
+            "notes": "Medium size, magenta",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF00FF",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "tapered",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Lg Orange",
+              "Fr": "Lg Orange",
+              "De": "Lg Orange",
+              "Es": "Lg Orange",
+              "show_label": true
+            },
+            "notes": "Large size, orange",
+            "geometry": {
+              "width": 160,
+              "height": 160
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFA500",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "vintage",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Fine Tune",
+              "Fr": "Fine Tune",
+              "De": "Fine Tune",
+              "Es": "Fine Tune",
+              "show_label": true
+            },
+            "notes": "Green center detent",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 6,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -50.0,
+                "max": 50.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Coarse",
+              "Fr": "Coarse",
+              "De": "Coarse",
+              "Es": "Coarse",
+              "show_label": true
+            },
+            "notes": "Large blue",
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2196F3",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -12.0,
+                "max": 12.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Octave",
+              "Fr": "Octave",
+              "De": "Octave",
+              "Es": "Octave",
+              "show_label": true
+            },
+            "notes": "Small amber",
+            "geometry": {
+              "width": 80,
+              "height": 100,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "dot",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -2.0,
+                "max": 2.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Detune",
+              "Fr": "Detune",
+              "De": "Detune",
+              "Es": "Detune",
+              "show_label": true
+            },
+            "notes": "Purple detune",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9C27B0",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 15.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "LFO Amt",
+              "Fr": "LFO Amt",
+              "De": "LFO Amt",
+              "Es": "LFO Amt",
+              "show_label": true
+            },
+            "notes": "Cyan LFO",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BCD4",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "thin",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Env Mod",
+              "Fr": "Env Mod",
+              "De": "Env Mod",
+              "Es": "Env Mod",
+              "show_label": true
+            },
+            "notes": "Deep Orange Bipolar",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5722",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "block",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Key Trk",
+              "Fr": "Key Trk",
+              "De": "Key Trk",
+              "Es": "Key Trk",
+              "show_label": true
+            },
+            "notes": "Tiny brown",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#795548",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "tapered",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 10,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_p8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Glide",
+              "Fr": "Glide",
+              "De": "Glide",
+              "Es": "Glide",
+              "show_label": true
+            },
+            "notes": "Large grey",
+            "geometry": {
+              "width": 160,
+              "height": 160
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#607D8B",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "vintage",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 20.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cutoff",
+              "Fr": "Coupure",
+              "De": "Cutoff",
+              "Es": "Corte",
+              "show_label": true
+            },
+            "notes": "Giant Yellow Cutoff",
+            "geometry": {
+              "width": 180,
+              "height": 180
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFEB3B",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 20.0,
+                "max": 20000.0,
+                "value_default": 2000.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Resonance",
+              "Fr": "Résonance",
+              "De": "Resonanz",
+              "Es": "Resonancia",
+              "show_label": true
+            },
+            "notes": "Orange Res",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9800",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 10.0,
+                "value_default": 2.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Env Amt",
+              "Fr": "Env Amt",
+              "De": "Env Amt",
+              "Es": "Env Amt",
+              "show_label": true
+            },
+            "notes": "Red Envelope",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#F44336",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "dot",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Drive",
+              "Fr": "Drive",
+              "De": "Drive",
+              "Es": "Drive",
+              "show_label": true
+            },
+            "notes": "Dark Red Drive",
+            "geometry": {
+              "width": 80,
+              "height": 100,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D32F2F",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 11.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "HPF",
+              "Fr": "HPF",
+              "De": "HPF",
+              "Es": "HPF",
+              "show_label": true
+            },
+            "notes": "Light Green HPF",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "thin",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 6,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 20.0,
+                "max": 500.0,
+                "value_default": 80.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "LPF",
+              "Fr": "LPF",
+              "De": "LPF",
+              "Es": "LPF",
+              "show_label": true
+            },
+            "notes": "Green LPF",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "block",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1000.0,
+                "max": 20000.0,
+                "value_default": 12000.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Key Follow",
+              "Fr": "Key Follow",
+              "De": "Key Follow",
+              "Es": "Key Follow",
+              "show_label": true
+            },
+            "notes": "Lime Key",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#CDDC39",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "tapered",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 30.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "knob_f8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Vel Sens",
+              "Fr": "Vel Sens",
+              "De": "Vel Sens",
+              "Es": "Vel Sens",
+              "show_label": true
+            },
+            "notes": "Teal Vel",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#009688",
+                "tick": "#aaaaaa"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "vintage",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 70.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

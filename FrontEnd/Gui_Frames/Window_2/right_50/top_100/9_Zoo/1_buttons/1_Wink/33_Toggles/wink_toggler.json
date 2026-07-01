@@ -1,0 +1,539 @@
+{
+  "Zoo_buttons_Wink_Toggles": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.1.33",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Wink_Toggles_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Wink Button Toggler Demo",
+          "Fr": "Obturateur Bouton Bascule Démo",
+          "De": "Verschluss Taste Umschalter Demo",
+          "Es": "Obturador Botón Conmutador Demo"
+        },
+        "layout_columns": 4,
+        "fields": {
+          "demo_wink_rect_toggle": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Vertical Rects (Slow)",
+                  "Fr": "Vertical Rects (Slow)",
+                  "De": "Vertikal Rects (Slow)",
+                  "Es": "Vertical Rects (Slow)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 1,
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FF0000"
+              },
+              "2": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FF7F00"
+              },
+              "3": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFF00"
+              },
+              "4": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#00FF00"
+              },
+              "5": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#0000FF"
+              },
+              "6": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#4B0082"
+              }
+            },
+            "text_pos": "left",
+            "width": 80,
+            "height": 30,
+            "shutter_color": "black",
+            "shape_type": "rect",
+            "radius": 5,
+            "text_inside_color": "black",
+            "bezel_color": "#2b2b2b",
+            "open_speed": 1200,
+            "close_speed": 600
+          },
+          "demo_wink_round_toggle": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "A"
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Vertical Rounds (Medium)",
+                  "Fr": "Vertical Rounds (Medium)",
+                  "De": "Vertikal Rounds (Medium)",
+                  "Es": "Vertical Rounds (Medium)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 1,
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "text_pos": "right",
+            "width": 50,
+            "height": 50,
+            "color": "#FFFFFF",
+            "shutter_color": "black",
+            "shape_type": "round",
+            "text_inside_color": "black",
+            "bezel_color": "#2b2b2b",
+            "open_speed": 600,
+            "close_speed": 300
+          },
+          "demo_wink_tall_rect_toggle": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Tall Rects (Normal)",
+                  "Fr": "Tall Rects (Normal)",
+                  "De": "Tall Rects (Normal)",
+                  "Es": "Tall Rects (Normal)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 1,
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFFFF"
+              },
+              "2": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFFFF"
+              },
+              "3": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFFFF"
+              },
+              "4": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFFFF"
+              },
+              "5": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FF0000"
+              },
+              "6": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#00FF00"
+              }
+            },
+            "text_pos": "left",
+            "width": 30,
+            "height": 80,
+            "shutter_color": "black",
+            "shape_type": "rect",
+            "radius": 5,
+            "text_inside_color": "black",
+            "bezel_color": "#2b2b2b",
+            "open_speed": 300,
+            "close_speed": 150
+          },
+          "demo_wink_square_toggle": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Squares (Fast)",
+                  "Fr": "Squares (Fast)",
+                  "De": "Squares (Fast)",
+                  "Es": "Squares (Fast)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 1,
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "text_pos": "right",
+            "width": 50,
+            "height": 50,
+            "color": "#FFFFFF",
+            "shutter_color": "black",
+            "shape_type": "square",
+            "radius": 5,
+            "text_inside_color": "black",
+            "bezel_color": "#2b2b2b",
+            "open_speed": 150,
+            "close_speed": 75
+          },
+          "demo_wink_red_horiz": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "R1"
+            },
+            "layout": {
+              "col_span": 4
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Horizontal Red",
+                  "Fr": "Horizontal Red",
+                  "De": "Horizontal Red",
+                  "Es": "Horizontal Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 8,
+            "options": [
+              "R1",
+              "R2",
+              "R3",
+              "R4",
+              "R5",
+              "R6",
+              "R7",
+              "R8"
+            ],
+            "width": 50,
+            "height": 50,
+            "color": "#FF0000",
+            "shutter_color": "white",
+            "shape_type": "rect",
+            "radius": 5,
+            "bezel_color": "#2b2b2b"
+          },
+          "demo_wink_green_horiz": {
+            "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "G1"
+            },
+            "layout": {
+              "col_span": 4
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "White to Orange",
+                  "Fr": "White to Orange",
+                  "De": "White to Orange",
+                  "Es": "White to Orange"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout_columns": 8,
+            "options": {
+              "G1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G1",
+                      "Fr": "G1",
+                      "De": "G1",
+                      "Es": "G1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFFFFF"
+              },
+              "G2": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G2",
+                      "Fr": "G2",
+                      "De": "G2",
+                      "Es": "G2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFF2E0"
+              },
+              "G3": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G3",
+                      "Fr": "G3",
+                      "De": "G3",
+                      "Es": "G3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFE5C1"
+              },
+              "G4": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G4",
+                      "Fr": "G4",
+                      "De": "G4",
+                      "Es": "G4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFD8A2"
+              },
+              "G5": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G5",
+                      "Fr": "G5",
+                      "De": "G5",
+                      "Es": "G5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFCB83"
+              },
+              "G6": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G6",
+                      "Fr": "G6",
+                      "De": "G6",
+                      "Es": "G6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFBE64"
+              },
+              "G7": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G7",
+                      "Fr": "G7",
+                      "De": "G7",
+                      "Es": "G7"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFB145"
+              },
+              "G8": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "G8",
+                      "Fr": "G8",
+                      "De": "G8",
+                      "Es": "G8"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#FFA500"
+              }
+            },
+            "width": 50,
+            "height": 50,
+            "shutter_color": "black",
+            "shape_type": "round",
+            "bezel_color": "#2b2b2b",
+            "open_speed": 1000,
+            "close_speed": 3000
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,876 @@
+{
+  "Load_Instrument": {
+    "type": "OcaBin",
+    "id": "50.100.7.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "DC_Load_Station": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Energy Dissipation Interface",
+          "Fr": "Interface de dissipation d'énergie",
+          "De": "Energiedissipations-Schnittstelle",
+          "Es": "Interfaz de disipación de energía"
+        },
+        "fields": {
+          "Activation_Sector": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "MAIN INPUT CONTROL",
+              "Fr": "MAIN INPUT CONTROL",
+              "De": "MAIN INPUT CONTROL",
+              "Es": "MAIN INPUT CONTROL"
+            },
+            "fields": {
+              "Master_Input_Switch": {
+                "type": "_TrapezoidButton",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "LOAD DISENGAGED",
+                      "Fr": "CHARGE DÉSENGAGÉE",
+                      "De": "LAST GETRENNT",
+                      "Es": "CARGA DESENGANCHADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "state_default": false,
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "INP <state>"
+                  }
+                }
+              }
+            }
+          },
+          "Telemetry_Deck": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Real-Time Drain Analysis",
+              "Fr": "Analyse de consommation en temps réel",
+              "De": "Echtzeit-Entladungsanalyse",
+              "Es": "Análisis de drenaje en temps réel"
+            },
+            "fields": {
+              "Meter_Volts": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "100",
+                  "units": "V"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "INPUT VOLTS",
+                      "Fr": "VOLTS D'ENTRÉE",
+                      "De": "EINGANGSSPANNUNG",
+                      "Es": "VOLTIOS DE ENTRADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:VOLT?"
+                  }
+                }
+              },
+              "Meter_Amps": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "60",
+                  "units": "A"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "SINK CURRENT",
+                      "Fr": "SINK CURRENT",
+                      "De": "SINK CURRENT",
+                      "Es": "SINK CURRENT"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:CURR?"
+                  }
+                }
+              },
+              "Meter_Watts": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "300",
+                  "units": "W"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "DISSIPATION",
+                      "Fr": "DISSIPATION",
+                      "De": "DISSIPATION",
+                      "Es": "DISSIPATION"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:POW?"
+                  }
+                }
+              }
+            }
+          },
+          "History_Sector": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Visual Log",
+              "Fr": "Visual Log",
+              "De": "Visual Log",
+              "Es": "Visual Log"
+            },
+            "fields": {
+              "Load_Graph": {
+                "type": "_GuiGraph",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Drain Timeline",
+                      "Fr": "Chronologie de consommation",
+                      "De": "Entladungs-Zeitachse",
+                      "Es": "Línea de tiempo de drenaje"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Voltage/Current Drop over Time",
+                  "Fr": "Tension/Courant Drop over Temps",
+                  "De": "Spannenung/Strom Drop over Zeit",
+                  "Es": "Voltaje/Corriente Drop over Tiempo"
+                },
+                "height": 200,
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:ALL?"
+                  }
+                }
+              }
+            }
+          },
+          "Mode_Logic_Sector": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Physics Configuration",
+              "Fr": "Physics Configuration",
+              "De": "Physics Konfiguration",
+              "Es": "Physics Configuración"
+            },
+            "fields": {
+              "Mode_Selector": {
+                "type": "_GuiDropDownOption",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Operating Mode",
+                      "Fr": "Operating Mode",
+                      "De": "Operating Modus",
+                      "Es": "Operating Modo"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "options": [
+                  "CC (Const Current)",
+                  "CV (Const Volt)",
+                  "CR (Const Res)",
+                  "CP (Const Power)"
+                ],
+                "default_option": "CC (Const Current)",
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MODE <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Control_Banks": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Parameter Adjustment",
+              "Fr": "Parameter Adjustment",
+              "De": "Parameter Adjustment",
+              "Es": "Parameter Adjustment"
+            },
+            "fields": {
+              "CC_Controls": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Constant Current (CC)",
+                  "Fr": "Constant Courant (CC)",
+                  "De": "Constant Strom (CC)",
+                  "Es": "Constant Corriente (CC)"
+                },
+                "fields": {
+                  "Set_Current": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.0",
+                      "max": "60.0",
+                      "units": "A"
+                    },
+                    "value": {
+                      "default_value": "0.0"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Current Set",
+                          "Fr": "Réglage de courant",
+                          "De": "Stromeinstellung",
+                          "Es": "Ajuste de corriente"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "CURR <value>"
+                      }
+                    }
+                  },
+                  "Set_Slew": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "10",
+                      "max": "5000",
+                      "units": "A/s"
+                    },
+                    "value": {
+                      "default_value": "1000"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Slew Rate",
+                          "Fr": "Slew Rate",
+                          "De": "Slew Rate",
+                          "Es": "Slew Rate"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "CURR:SLEW <value>"
+                      }
+                    }
+                  }
+                }
+              },
+              "CV_CR_Controls": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "CV / CR Parameters",
+                  "Fr": "CV / CR Parameters",
+                  "De": "CV / CR Parameters",
+                  "Es": "CV / CR Parameters"
+                },
+                "fields": {
+                  "Set_Voltage": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.1",
+                      "max": "100.0",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "12.0"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Voltage Set",
+                          "Fr": "Réglage de tension",
+                          "De": "Spannungseinstellung",
+                          "Es": "Ajuste de voltaje"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "VOLT <value>"
+                      }
+                    }
+                  },
+                  "Set_Resistance": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.1",
+                      "max": "10000",
+                      "units": "Ω"
+                    },
+                    "value": {
+                      "default_value": "100"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Resistance Set",
+                          "Fr": "Résistance Set",
+                          "De": "Breitrstand Set",
+                          "Es": "Resistencia Set"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "RES <value>"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Transient_Lab": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Dynamic Pulse Testing",
+              "Fr": "Test de pulsation dynamique",
+              "De": "Dynamische Impulsprüfung",
+              "Es": "Prueba de pulso dinámico"
+            },
+            "fields": {
+              "Trans_Enable": {
+                "type": "_GuiButtonToggle",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "PULSE MODE ON",
+                      "Fr": "PULSE MODE ON",
+                      "De": "PULSE MODE ON",
+                      "Es": "PULSE MODE ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "PULSE MODE OFF",
+                      "Fr": "MODE PULSÉ DÉSACTIVÉ",
+                      "De": "IMPULSMODUS AUS",
+                      "Es": "MODO PULSO DESACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "state_default": false,
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "TRAN:STAT <value>"
+                  }
+                }
+              },
+              "Level_A": {
+                "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Level A (Base)",
+                      "Fr": "Niveau A (Base)",
+                      "De": "Pegel A (Base)",
+                      "Es": "Nivel A (Base)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "CURR:LEV <value>"
+                  }
+                }
+              },
+              "Level_B": {
+                "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "5.0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Level B (Peak)",
+                      "Fr": "Niveau B (Peak)",
+                      "De": "Pegel B (Peak)",
+                      "Es": "Nivel B (Peak)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "CURR:TLEV <value>"
+                  }
+                }
+              },
+              "Pulse_Freq": {
+                "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.1",
+                  "max": "10000",
+                  "units": "Hz"
+                },
+                "value": {
+                  "default_value": "100"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "TRAN:FREQ <value>"
+                  }
+                }
+              },
+              "Pulse_Duty": {
+                "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "1",
+                  "max": "99",
+                  "units": "%"
+                },
+                "value": {
+                  "default_value": "50"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Duty Cycle",
+                      "Fr": "Duty Cycle",
+                      "De": "Duty Cycle",
+                      "Es": "Duty Cycle"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "TRAN:DCYC <value>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

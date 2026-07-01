@@ -1,0 +1,832 @@
+{
+  "Zoo_data_graphing_radar_Sample_4": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.0.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Radar_Eye_Zoo_4": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Radar Eye Sample 4 - 12 Mini Radars",
+          "Fr": "Radar Eye Sample 4 - 12 Mini Radars",
+          "De": "Radar Eye Sample 4 - 12 Mini Radars",
+          "Es": "Radar Eye Sample 4 - 12 Mini Radars"
+        },
+        "layout_columns": 4,
+        "fields": {
+          "radar_01": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 01",
+                  "Fr": "Radar 01",
+                  "De": "Radar 01",
+                  "Es": "Radar 01"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_02": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 02",
+                  "Fr": "Radar 02",
+                  "De": "Radar 02",
+                  "Es": "Radar 02"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_03": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 03",
+                  "Fr": "Radar 03",
+                  "De": "Radar 03",
+                  "Es": "Radar 03"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_04": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 04",
+                  "Fr": "Radar 04",
+                  "De": "Radar 04",
+                  "Es": "Radar 04"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_05": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 05",
+                  "Fr": "Radar 05",
+                  "De": "Radar 05",
+                  "Es": "Radar 05"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_06": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 06",
+                  "Fr": "Radar 06",
+                  "De": "Radar 06",
+                  "Es": "Radar 06"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_07": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 07",
+                  "Fr": "Radar 07",
+                  "De": "Radar 07",
+                  "Es": "Radar 07"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_08": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 08",
+                  "Fr": "Radar 08",
+                  "De": "Radar 08",
+                  "Es": "Radar 08"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_09": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 09",
+                  "Fr": "Radar 09",
+                  "De": "Radar 09",
+                  "Es": "Radar 09"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_10": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 10",
+                  "Fr": "Radar 10",
+                  "De": "Radar 10",
+                  "Es": "Radar 10"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_11": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 11",
+                  "Fr": "Radar 11",
+                  "De": "Radar 11",
+                  "Es": "Radar 11"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          },
+          "radar_12": {
+            "type": "_Radar",
+            "transparent": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Radar 12",
+                  "Fr": "Radar 12",
+                  "De": "Radar 12",
+                  "Es": "Radar 12"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "app_settings": {
+              "title": "Mini",
+              "window_size": [
+                100,
+                100
+              ],
+              "background_color": "",
+              "refresh_rate_ms": 60,
+              "mode": "sweep"
+            },
+            "data_parameters": {
+              "min_value": 0,
+              "max_value": 10,
+              "points_per_revolution": 60,
+              "history_buffer_size": 60,
+              "clockwise": true,
+              "start_angle": 270
+            },
+            "visuals": {
+              "plot_style": "area",
+              "center_x": 50,
+              "center_y": 50,
+              "radius": 40
+            },
+            "grid_system": {
+              "show_grid": true,
+              "grid_color": "#CCCCCC",
+              "ring_interval": 5,
+              "spoke_interval": 90,
+              "labels": {
+                "show_values": false,
+                "show_time_scale": false,
+                "font": "Verdana 6"
+              }
+            },
+            "color_thresholds": {
+              "mid_point": 5,
+              "upper_point": 8,
+              "colors": {
+                "safe": "#FFFFFF",
+                "warning": "#AAAAAA",
+                "critical": "#555555"
+              }
+            },
+            "connectivity": {
+              "mqtt_enabled": false,
+              "mqtt_topic": "",
+              "log_to_file": false
+            },
+            "notes": ""
+          }
+        }
+      }
+    }
+  }
+}

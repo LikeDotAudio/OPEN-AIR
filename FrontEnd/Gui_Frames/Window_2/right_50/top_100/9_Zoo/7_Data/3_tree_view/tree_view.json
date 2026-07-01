@@ -1,0 +1,79 @@
+{
+  "Zoo_Data_tree_view": {
+    "type": "OcaBin",
+    "id": "50.90.9.7.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "JSON_Tree_Viewer_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Demonstration of the JSON Tree Viewer widget.",
+          "Fr": "Demonstration of the JSON Tree Viewer widget.",
+          "De": "Demonstration of the JSON Tree Viewer widget.",
+          "Es": "Demonstration of the JSON Tree Viewer widget."
+        },
+        "layout_columns": 1,
+        "fields": {
+          "AES70_Dataset": {
+            "type": "_JsonTree",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "AES70 Object Model (data_AES70.json)",
+                  "Fr": "AES70 Object Model (data_AES70.json)",
+                  "De": "AES70 Object Model (data_AES70.json)",
+                  "Es": "AES70 Object Model (data_AES70.json)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
+            "allow_filter": true
+          },
+          "Application_Config": {
+            "type": "JsonTree",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Dataset Configuration EngineGuiDisplay",
+                  "Fr": "Dataset Configuration EngineGuiDisplay",
+                  "De": "Dataset Configuration EngineGuiDisplay",
+                  "Es": "Dataset Configuration EngineGuiDisplay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "json_source": "display/right_50/bottom_90/10_sets/dataset_configuration_application.json",
+            "allow_filter": true
+          },
+          "Browse_Example": {
+            "type": "JsonTree",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "File Browser",
+                  "Fr": "File Browser",
+                  "De": "File Browser",
+                  "Es": "File Browser"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "allow_browse": true,
+            "allow_filter": true
+          }
+        }
+      }
+    }
+  }
+}

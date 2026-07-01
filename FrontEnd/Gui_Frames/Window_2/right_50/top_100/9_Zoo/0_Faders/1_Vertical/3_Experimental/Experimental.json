@@ -1,0 +1,654 @@
+{
+  "Zoo_Faders_Vertical_Experimental": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Experimental_Fader_Riot": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "20 Columns of Experimental Fader Madness",
+          "Fr": "20 Columns of Expérimental Fader Madness",
+          "De": "20 Columns of Experimentell Fader Madness",
+          "Es": "20 Columns of Experimental Fader Madness"
+        },
+        "layout_columns": 20,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "exp_1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "TITAN",
+              "Fr": "TITAN",
+              "De": "TITAN",
+              "Es": "TITAN"
+            },
+            "geometry": {
+              "width": 200,
+              "height": 600,
+              "cap": {
+                "x": 120,
+                "y": 80
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFD700",
+                "cap_highlights": "#000000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Atom",
+              "Fr": "Atom",
+              "De": "Atom",
+              "Es": "Atom"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 120,
+              "cap": {
+                "x": 20,
+                "y": 25
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF1493",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Flat",
+              "Fr": "Flat",
+              "De": "Flat",
+              "Es": "Flat"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 200,
+              "cap": {
+                "x": 180,
+                "y": 20
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FFFF",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Tower",
+              "Fr": "Tower",
+              "De": "Tower",
+              "Es": "Tower"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 700,
+              "cap": {
+                "x": 30,
+                "y": 120
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Pancake",
+              "Fr": "Pancake",
+              "De": "Pancake",
+              "Es": "Pancake"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 250,
+              "cap": {
+                "x": 160,
+                "y": 40
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF9800",
+                "cap_highlights": "#000000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Ghost",
+              "Fr": "Ghost",
+              "De": "Ghost",
+              "Es": "Ghost"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 40,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#111111",
+                "cap_highlights": "#00FF00"
+              }
+            },
+            "tick_label_position": "both",
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Bifrost",
+              "Fr": "Bifrost",
+              "De": "Bifrost",
+              "Es": "Bifrost"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 300,
+              "cap": {
+                "x": 40,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#9C27B0",
+                "cap_highlights": "#FFFF00"
+              }
+            },
+            "tick_color": "#FF00FF",
+            "tick_text_color": "#00FFFF",
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Monolith",
+              "Fr": "Monolith",
+              "De": "Monolith",
+              "Es": "Monolith"
+            },
+            "geometry": {
+              "width": 130,
+              "height": 450,
+              "cap": {
+                "x": 90,
+                "y": 100
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#444444",
+                "cap_highlights": "#FFD700"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_9": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Needle",
+              "Fr": "Aiguille",
+              "De": "Nadel",
+              "Es": "Aguja"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 15,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFFFF",
+                "cap_highlights": "#FF0000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_10": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Chonky",
+              "Fr": "Chonky",
+              "De": "Chonky",
+              "Es": "Chonky"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 350,
+              "cap": {
+                "x": 220,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF",
+                "cap_highlights": "#00FFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_11": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Toxic",
+              "Fr": "Toxic",
+              "De": "Toxic",
+              "Es": "Toxic"
+            },
+            "geometry": {
+              "width": 90,
+              "height": 300,
+              "cap": {
+                "x": 50,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#ADFF2F",
+                "cap_highlights": "#FF00FF"
+              }
+            },
+            "tick_label_position": "left",
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_12": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Candy",
+              "Fr": "Candy",
+              "De": "Candy",
+              "Es": "Candy"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 220,
+              "cap": {
+                "x": 40,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF69B4",
+                "cap_highlights": "#00BFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_13": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Deep",
+              "Fr": "Deep",
+              "De": "Deep",
+              "Es": "Deep"
+            },
+            "geometry": {
+              "width": 110,
+              "height": 400,
+              "cap": {
+                "x": 70,
+                "y": 80
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#000080",
+                "cap_highlights": "#FFA500"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_14": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Fire",
+              "Fr": "Fire",
+              "De": "Fire",
+              "Es": "Fire"
+            },
+            "geometry": {
+              "width": 85,
+              "height": 280,
+              "cap": {
+                "x": 45,
+                "y": 65
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#B22222",
+                "cap_highlights": "#FFD700"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_15": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Ice",
+              "Fr": "Ice",
+              "De": "Ice",
+              "Es": "Ice"
+            },
+            "geometry": {
+              "width": 85,
+              "height": 280,
+              "cap": {
+                "x": 45,
+                "y": 65
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#E0FFFF",
+                "cap_highlights": "#4682B4"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_16": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Forest",
+              "Fr": "Forest",
+              "De": "Forest",
+              "Es": "Forest"
+            },
+            "geometry": {
+              "width": 90,
+              "height": 350,
+              "cap": {
+                "x": 55,
+                "y": 55
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#006400",
+                "cap_highlights": "#90EE90"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_17": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Volt",
+              "Fr": "Volt",
+              "De": "Volt",
+              "Es": "Volt"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 45,
+                "y": 55
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00",
+                "cap_highlights": "#4B0082"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_18": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Void",
+              "Fr": "Void",
+              "De": "Void",
+              "Es": "Void"
+            },
+            "geometry": {
+              "width": 120,
+              "height": 380,
+              "cap": {
+                "x": 80,
+                "y": 35
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#050505",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_19": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Vapor",
+              "Fr": "Vapor",
+              "De": "Vapor",
+              "Es": "Vapor"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 260,
+              "cap": {
+                "x": 45,
+                "y": 55
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF00FF",
+                "cap_highlights": "#00FFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_20": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Steel",
+              "Fr": "Steel",
+              "De": "Steel",
+              "Es": "Steel"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 55,
+                "y": 55
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#C0C0C0",
+                "cap_highlights": "#0000FF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

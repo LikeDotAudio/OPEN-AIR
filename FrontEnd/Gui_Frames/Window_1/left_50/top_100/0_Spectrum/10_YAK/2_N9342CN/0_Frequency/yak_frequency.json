@@ -1,0 +1,291 @@
+{
+  "Spectrum_YAK_N9342CN_Frequency": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.2.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "NAB": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fréquence NAB",
+          "De": "NAB Frequenzüberwachung",
+          "Es": "Monitoreo de frecuencia NAB"
+        },
+        "fields": {
+          "Frequency_settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fréquence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "value": "The current start frequency in Hz.",
+                    "type": "_GuiValue"
+                  },
+                  "stop_freq": {
+                    "value": "The current stop frequency in Hz.",
+                    "type": "_GuiValue"
+                  },
+                  "center_freq": {
+                    "value": "The current center frequency in Hz.",
+                    "type": "_GuiValue"
+                  },
+                  "span_freq": {
+                    "value": "The current span frequency in Hz.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "RIG_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fréquence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
+        "fields": {
+          "freq_start_stop": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fréquence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  },
+                  "stop_freq": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Span_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:SPAN <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Start_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Stop_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STOP <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "987654321",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

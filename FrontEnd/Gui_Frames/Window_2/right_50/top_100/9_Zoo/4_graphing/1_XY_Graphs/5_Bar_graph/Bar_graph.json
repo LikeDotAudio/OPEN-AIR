@@ -1,0 +1,124 @@
+{
+  "Zoo_data_graphing_XY_Graphs_Bar_graph": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.1.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Gui Dynamic Bar Graph",
+              "Fr": "Gui Dynamic Bar Graph",
+              "De": "Gui Dynamic Bar Graph",
+              "Es": "Gui Dynamic Bar Graph"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "bar_graph_examples": {
+            "type": "OcaBlock",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Bar Graph Examples",
+                  "Fr": "Bar Graph Exemples",
+                  "De": "Bar Graph Beispiele",
+                  "Es": "Bar Graph Ejemplos"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "description": {
+              "En": "Examples of the DynamicBarGraph element.",
+              "Fr": "Exemples of the DynamicBarGraph element.",
+              "De": "Beispiele of the DynamicBarGraph element.",
+              "Es": "Ejemplos of the DynamicBarGraph element."
+            },
+            "fields": {
+              "simple_bar_graph": {
+                "type": "DynamicBarGraph",
+                "label": {
+                  "En": "Metric Comparison",
+                  "Fr": "Metric Comparison",
+                  "De": "Metric Comparison",
+                  "Es": "Metric Comparison"
+                },
+                "notes": "Demonstrates categorical data as bars.",
+                "show_title": true,
+                "title": "System Resource Usage",
+                "layout": {
+                  "height": 428,
+                  "alpha": 0.9
+                },
+                "axis": {
+                  "x": {
+                    "label": {
+                      "En": "Resource ID",
+                      "Fr": "Resource ID",
+                      "De": "Resource ID",
+                      "Es": "Resource ID"
+                    },
+                    "color": "white"
+                  },
+                  "y": {
+                    "label": {
+                      "En": "Usage (%)",
+                      "Fr": "Usage (%)",
+                      "De": "Usage (%)",
+                      "Es": "Usage (%)"
+                    },
+                    "domain": {
+                      "min": 0,
+                      "max": 100
+                    },
+                    "color": "cyan"
+                  },
+                  "show_grid": true,
+                  "show_x_axis": true,
+                  "show_y_axis": true
+                },
+                "datasets": [
+                  {
+                    "id": "ds_usage",
+                    "label": {
+                      "En": "Usage",
+                      "Fr": "Usage",
+                      "De": "Usage",
+                      "Es": "Usage"
+                    },
+                    "style": {
+                      "line_color": "cyan",
+                      "line_width": 1
+                    },
+                    "initial_csv_data": "x,y\n1,45\n2,78\n3,12\n4,90\n5,55"
+                  }
+                ],
+                "Navigation": {
+                  "enable_zoom": true,
+                  "enable_pan": true,
+                  "show_hover_value": true
+                },
+                "initial_markers": "y,80,red,2,Warning Threshold"
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "height": "400%"
+    }
+  }
+}

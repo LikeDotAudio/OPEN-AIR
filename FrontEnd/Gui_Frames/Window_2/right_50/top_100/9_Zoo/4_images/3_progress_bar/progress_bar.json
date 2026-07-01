@@ -1,0 +1,234 @@
+{
+  "Zoo_images_progress_bar": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Download Progress",
+              "Fr": "Download Progress",
+              "De": "Download Progress",
+              "Es": "Download Progress"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "download_progress_bar": {
+              "title": "File Download",
+              "description": {
+                "En": "Indicates the progress of a file download.",
+                "Fr": "Indicates the progress of a file download.",
+                "De": "Indicates the progress of a file download.",
+                "Es": "Indicates the progress of a file download."
+              },
+              "progress_bar": {
+                "type": "_SmartProgress",
+                "label": {
+                  "En": "Progress",
+                  "Fr": "Progress",
+                  "De": "Progress",
+                  "Es": "Progress"
+                },
+                "notes": "Shows the progress of a download.",
+                "domain": {
+                  "primary": {
+                    "max": 100,
+                    "value_default": 25
+                  }
+                },
+                "interaction": {
+                  "is_read_only": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Voltage Indicator",
+              "Fr": "Voltage Indicator",
+              "De": "Voltage Indicator",
+              "Es": "Voltage Indicator"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "voltage_progress_bar": {
+              "title": "Voltage Level",
+              "description": {
+                "En": "Displays current voltage level.",
+                "Fr": "Displays current voltage level.",
+                "De": "Displays current voltage level.",
+                "Es": "Displays current voltage level."
+              },
+              "progress_bar": {
+                "type": "_SmartProgress",
+                "label": {
+                  "En": "Voltage",
+                  "Fr": "Voltage",
+                  "De": "Voltage",
+                  "Es": "Voltage"
+                },
+                "notes": "Progress bar for voltage display.",
+                "domain": {
+                  "primary": {
+                    "max": 12.0,
+                    "value_default": 7.5,
+                    "units": "V"
+                  }
+                },
+                "interaction": {
+                  "is_read_only": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "System Load",
+              "Fr": "System Charger",
+              "De": "System Laden",
+              "Es": "System Cargar"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "domain": {
+              "min": 0,
+              "max": 1000,
+              "units": "Units"
+            },
+            "value": {
+              "default_value": 750
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "System Load",
+                  "Fr": "System Charger",
+                  "De": "System Laden",
+                  "Es": "System Cargar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "A progress bar indicating system load."
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Temperature Sensor",
+              "Fr": "Temperature Sensor",
+              "De": "Temperature Sensor",
+              "Es": "Temperature Sensor"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "domain": {
+              "min": -20,
+              "max": 50,
+              "units": "°C"
+            },
+            "value": {
+              "default_value": 18.2
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Temperature Sensor",
+                  "Fr": "Temperature Sensor",
+                  "De": "Temperature Sensor",
+                  "Es": "Temperature Sensor"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Displays temperature within a specific range."
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Initialization Steps",
+              "Fr": "Initialization Steps",
+              "De": "Initialization Steps",
+              "Es": "Initialization Steps"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "domain": {
+              "min": 0,
+              "max": 50,
+              "units": "Steps"
+            },
+            "value": {
+              "default_value": 40
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Initialization Steps",
+                  "Fr": "Initialization Steps",
+                  "De": "Initialization Steps",
+                  "Es": "Initialization Steps"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Progress bar tracking steps in an initialization process."
+          }
+        }
+      }
+    }
+  }
+}

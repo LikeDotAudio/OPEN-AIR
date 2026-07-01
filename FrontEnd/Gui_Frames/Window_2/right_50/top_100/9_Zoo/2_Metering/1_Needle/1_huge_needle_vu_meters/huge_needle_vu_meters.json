@@ -1,0 +1,566 @@
+{
+  "Zoo_Metering_Needle_huge_needle_vu_meters": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Large_Console_Bank": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Large Console Meters (Size 750)",
+          "Fr": "Large Console Meters (Size 750)",
+          "De": "Large Console Meters (Size 750)",
+          "Es": "Large Console Meters (Size 750)"
+        },
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Large_L": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Master Left (Hold 200ms)",
+              "Fr": "Master Gauche (Hold 200ms)",
+              "De": "Master Links (Hold 200ms)",
+              "Es": "Maestro Izquierda (Hold 200ms)",
+              "show_label": true
+            },
+            "notes": "Classic console look.",
+            "geometry": {
+              "width": 500,
+              "height": 500
+            },
+            "domain": {
+              "primary": {
+                "min": -30.0,
+                "max": 6.0,
+                "value_default": -30.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 1500,
+              "dwell_time": 600,
+              "hold_time": 200,
+              "resting_point": -30.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E0E0E0",
+                "alert": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 5,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 12,
+                "Scale_numbers": false,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 2
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "Large_R": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Master Right (Hold 200ms)",
+              "Fr": "Master Droite (Hold 200ms)",
+              "De": "Master Rechts (Hold 200ms)",
+              "Es": "Maestro Derecha (Hold 200ms)",
+              "show_label": true
+            },
+            "notes": "Matching right channel.",
+            "geometry": {
+              "width": 500,
+              "height": 500
+            },
+            "domain": {
+              "primary": {
+                "min": -30.0,
+                "max": 6.0,
+                "value_default": -30.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 1500,
+              "dwell_time": 600,
+              "hold_time": 200,
+              "resting_point": -30.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E0E0E0",
+                "alert": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 5,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 12,
+                "Scale_numbers": false,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 4
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "Needle_Styles_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Needle Style Variations",
+          "Fr": "Aiguille Style Variations",
+          "De": "Nadel Style Variationen",
+          "Es": "Aguja Style Variaciones"
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "meter_line": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Standard Line (White)",
+              "Fr": "Standard Line (White)",
+              "De": "Standard Line (White)",
+              "Es": "Estándar Line (White)",
+              "show_label": true
+            },
+            "notes": "Classic line pointer.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 10
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "meter_taper": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Tapered Pointer (White)",
+              "Fr": "Tapered Pointer (White)",
+              "De": "Tapered Pointer (White)",
+              "Es": "Tapered Pointer (White)",
+              "show_label": true
+            },
+            "notes": "Triangle tapering from pivot.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "taper",
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 16
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "meter_teardrop": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Teardrop Pointer (White)",
+              "Fr": "Teardrop Pointer (White)",
+              "De": "Teardrop Pointer (White)",
+              "Es": "Teardrop Pointer (White)",
+              "show_label": true
+            },
+            "notes": "Smoothed teardrop shape.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 1.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "teardrop",
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 20
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "meter_line_cyan": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Standard Line (White)",
+              "Fr": "Standard Line (White)",
+              "De": "Standard Line (White)",
+              "Es": "Estándar Line (White)",
+              "show_label": true
+            },
+            "notes": "Classic line pointer.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "Pointer_colour": "white",
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 10
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "meter_taper_magenta": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Tapered Pointer (White)",
+              "Fr": "Tapered Pointer (White)",
+              "De": "Tapered Pointer (White)",
+              "Es": "Tapered Pointer (White)",
+              "show_label": true
+            },
+            "notes": "Triangle tapering from pivot.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "Pointer_colour": "white",
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "taper",
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 16
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "meter_teardrop_yellow": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Teardrop Pointer (White)",
+              "Fr": "Teardrop Pointer (White)",
+              "De": "Teardrop Pointer (White)",
+              "Es": "Teardrop Pointer (White)",
+              "show_label": true
+            },
+            "notes": "Smoothed teardrop shape.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 1.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 200,
+              "release_ms": 500,
+              "dwell_time": 200,
+              "hold_time": 0,
+              "resting_point": -20.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "green",
+                "alert": "red"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "Pointer_colour": "white",
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90.0,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "teardrop",
+                "Pivot_size": 20,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "primary_color": "white",
+                "secondary_color": "#FF0000",
+                "thickness": 3,
+                "pivot_size": 20,
+                "pivot_color": "white"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

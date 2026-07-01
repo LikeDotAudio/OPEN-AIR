@@ -1,0 +1,223 @@
+{
+  "Power_Modules_Module_8": {
+    "type": "OcaBin",
+    "id": "50.100.5.2.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "PSU_Panel": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Power Supply Unit Control Panel",
+          "Fr": "Puissance Supply Unité Contrôle Panel",
+          "De": "Leistung Supply Einheit Steuerung Panel",
+          "Es": "Potencia Supply Unidad Control Panel"
+        },
+        "fields": {
+          "Voltage_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Voltage Output",
+              "Fr": "Tension Sortie",
+              "De": "Spannenung Ausgang",
+              "Es": "Voltaje Salida"
+            },
+            "fields": {
+              "voltage_set": {
+                "type": "_TextInput",
+                "value": {
+                  "default_value": "5.0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Voltage (V)",
+                      "Fr": "Tension (V)",
+                      "De": "Spannenung (V)",
+                      "Es": "Voltaje (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "VOLT <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Current_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Current Limit",
+              "Fr": "Limite de courant",
+              "De": "Strombegrenzung",
+              "Es": "Límite de corriente"
+            },
+            "fields": {
+              "current_set": {
+                "type": "_TextInput",
+                "value": {
+                  "default_value": "0.1"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Current (A)",
+                      "Fr": "Courant (A)",
+                      "De": "Strom (A)",
+                      "Es": "Corriente (A)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "CURR <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Output_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Output State",
+              "Fr": "Sortie State",
+              "De": "Ausgang State",
+              "Es": "Salida State"
+            },
+            "fields": {
+              "output_enable": {
+                "type": "_GuiButtonToggle",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "state_default": false,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "OUTP <state>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

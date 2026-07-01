@@ -1,0 +1,43 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.10",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 10 Bakelite | Base: #4b2c20 (flat)",
+          "Fr": "Patina: 10 Bakelite | Base: #4b2c20 (flat)",
+          "De": "Patina: 10 Bakelite | Base: #4b2c20 (flat)",
+          "Es": "Patina: 10 Bakelite | Base: #4b2c20 (flat)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#4b2c20",
+        "texture_type": "flat"
+      },
+      "studio_haze": {
+        "enabled": true,
+        "intensity": 0.2
+      }
+    }
+  }
+}

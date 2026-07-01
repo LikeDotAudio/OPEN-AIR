@@ -1,0 +1,143 @@
+{
+  "LCR_YAK_4263A_Capacitance": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Capacitance_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Capacitance Measurement"
+        },
+        "fields": {
+          "Capacitance Mode": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Mode",
+                  "Fr": "Définir le mode",
+                  "De": "Modus einstellen",
+                  "Es": "Establecer modo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "message": ":SENSe:FUNCtion:ON \"{value}\"",
+            "options": [
+              "CPD",
+              "CPQ",
+              "CPG",
+              "CSD",
+              "CSQ",
+              "CSRS"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Test Frequency": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Frequency",
+                  "Fr": "Définir la fréquence",
+                  "De": "Frequenz einstellen",
+                  "Es": "Establecer frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:FREQuency:CW {value}",
+            "options": [
+              "100",
+              "120",
+              "1k",
+              "10k",
+              "100k"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Averaging": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Average",
+                  "Fr": "Définir la moyenne",
+                  "De": "Mittelwert einstellen",
+                  "Es": "Establecer promedio"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:AVERage:COUNt {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "OPEN Correction": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OPEN",
+                  "Fr": "OUVERT",
+                  "De": "OFFEN",
+                  "Es": "ABIERTO"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:CORRection:OPEN",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "SHORT Correction": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SHORT",
+                  "Fr": "COURT",
+                  "De": "KURZ",
+                  "Es": "CORTO"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:CORRection:SHORt",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

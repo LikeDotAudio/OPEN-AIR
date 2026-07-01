@@ -1,0 +1,854 @@
+{
+  "Zoo_buttons_actuator": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "SENDING...",
+              "Fr": "SENDING...",
+              "De": "SENDING...",
+              "Es": "SENDING..."
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SENDING...",
+                  "Fr": "SENDING...",
+                  "De": "SENDING...",
+                  "Es": "SENDING..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "SEND",
+                  "Fr": "SEND",
+                  "De": "SEND",
+                  "Es": "SEND"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "A button to trigger a 'send' command.",
+            "geometry": {
+              "width": 100,
+              "height": 50,
+              "alpha": 0.9,
+              "font": 12
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "RUNNING",
+              "Fr": "RUNNING",
+              "De": "RUNNING",
+              "Es": "RUNNING"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING",
+                  "Fr": "RUNNING",
+                  "De": "RUNNING",
+                  "Es": "RUNNING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "START",
+                  "Fr": "START",
+                  "De": "START",
+                  "Es": "START"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Button to initiate a process, showing 'RUNNING' when active.",
+            "geometry": {
+              "width": 120,
+              "height": 50,
+              "font": 14
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "STOPPING!",
+              "Fr": "STOPPING!",
+              "De": "STOPPING!",
+              "Es": "STOPPING!"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "STOPPING!",
+                  "Fr": "STOPPING!",
+                  "De": "STOPPING!",
+                  "Es": "STOPPING!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Large emergency stop button.",
+            "geometry": {
+              "width": 150,
+              "height": 70,
+              "font": 18
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "RESETTING...",
+              "Fr": "RESETTING...",
+              "De": "RESETTING...",
+              "Es": "RESETTING..."
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RESETTING...",
+                  "Fr": "RESETTING...",
+                  "De": "RESETTING...",
+                  "Es": "RESETTING..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "RESET",
+                  "Fr": "RESET",
+                  "De": "RESET",
+                  "Es": "RESET"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Compact button to reset a device.",
+            "geometry": {
+              "width": 80,
+              "height": 30,
+              "font": 10
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "CALIBRATING",
+              "Fr": "CALIBRATING",
+              "De": "CALIBRATING",
+              "Es": "CALIBRATING"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CALIBRATING",
+                  "Fr": "CALIBRATING",
+                  "De": "CALIBRATING",
+                  "Es": "CALIBRATING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "CALIBRATE",
+                  "Fr": "CALIBRATE",
+                  "De": "CALIBRATE",
+                  "Es": "CALIBRATE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "notes": "Button to trigger sensor calibration.",
+            "geometry": {
+              "width": 110,
+              "height": 45,
+              "font": 11
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      },
+      "circular_demos": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Circular Actuators",
+              "Fr": "Circular Actuators",
+              "De": "Circular Actuators",
+              "Es": "Circular Actuators"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "panic_button": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "PANIC",
+                "Fr": "PANIC",
+                "De": "PANIC",
+                "Es": "PANIC"
+              },
+              "active": {
+                "text": {
+                  "En": "HALT!",
+                  "Fr": "HALT!",
+                  "De": "HALT!",
+                  "Es": "HALT!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "PANIC",
+                  "Fr": "PANIC",
+                  "De": "PANIC",
+                  "Es": "PANIC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100,
+              "font": 16
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 5.0,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "start_circle": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "START",
+                "Fr": "START",
+                "De": "START",
+                "Es": "START"
+              },
+              "active": {
+                "text": {
+                  "En": "GO!",
+                  "Fr": "GO!",
+                  "De": "GO!",
+                  "Es": "GO!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "START",
+                  "Fr": "START",
+                  "De": "START",
+                  "Es": "START"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "font": 14
+            },
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "trigger_circle": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "TRIG",
+                "Fr": "TRIG",
+                "De": "TRIG",
+                "Es": "TRIG"
+              },
+              "active": {
+                "text": {
+                  "En": "FIRING",
+                  "Fr": "FIRING",
+                  "De": "FIRING",
+                  "Es": "FIRING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "TRIG",
+                  "Fr": "TRIG",
+                  "De": "TRIG",
+                  "Es": "TRIG"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "font": 10
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "tiny_poke": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "Poke",
+                "Fr": "Poke",
+                "De": "Poke",
+                "Es": "Poke"
+              },
+              "active": {
+                "text": {
+                  "En": "!",
+                  "Fr": "!",
+                  "De": "!",
+                  "Es": "!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "?",
+                  "Fr": "?",
+                  "De": "?",
+                  "Es": "?"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 30,
+              "height": 30,
+              "font": 12
+            },
+            "style": {
+              "active": {
+                "border_color": "#00CCFF",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "cream_and_variants": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Cream & Color Variants",
+              "Fr": "Cream & Color Variants",
+              "De": "Cream & Color Variants",
+              "Es": "Cream & Color Variants"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "cream_off": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "CREAM DIM",
+                "Fr": "CREAM DIM",
+                "De": "CREAM DIM",
+                "Es": "CREAM DIM"
+              },
+              "active": {
+                "text": {
+                  "En": "...",
+                  "Fr": "...",
+                  "De": "...",
+                  "Es": "..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "DIM",
+                  "Fr": "DIM",
+                  "De": "DIM",
+                  "Es": "DIM"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 100,
+              "height": 60,
+              "font": 12
+            },
+            "style": {
+              "active": {
+                "text_color": "#FF902C",
+                "bg_color": "#c4bc96",
+                "border_color": "#FFFDD0"
+              },
+              "inactive": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#c4bc96"
+              }
+            }
+          },
+          "cream_on": {
+            "type": "_SmartActuator",
+            "label": {
+              "text": {
+                "En": "CREAM LIT",
+                "Fr": "CREAM LIT",
+                "De": "CREAM LIT",
+                "Es": "CREAM LIT"
+              },
+              "active": {
+                "text": {
+                  "En": "LIT",
+                  "Fr": "LIT",
+                  "De": "LIT",
+                  "Es": "LIT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "...",
+                  "Fr": "...",
+                  "De": "...",
+                  "Es": "..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "geometry": {
+              "width": 100,
+              "height": 60,
+              "font": 12
+            },
+            "style": {
+              "active": {
+                "text_color": "#FF902C",
+                "bg_color": "#FFFDD0",
+                "border_color": "#FFFDD0",
+                "glow_intensity": 5.0
+              },
+              "inactive": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#c4bc96",
+                "glow_intensity": 0
+              }
+            }
+          },
+          "ruby_pulse": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "RUBY",
+              "Fr": "RUBY",
+              "De": "RUBY",
+              "Es": "RUBY"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#400010",
+                "border_color": "#e0115f",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "emerald_glow": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "EMER",
+              "Fr": "EMER",
+              "De": "EMER",
+              "Es": "EMER"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#003010",
+                "border_color": "#50c878",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "sapphire_deep": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "SAPP",
+              "Fr": "SAPP",
+              "De": "SAPP",
+              "Es": "SAPP"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#001040",
+                "border_color": "#0f52ba",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "amber_warm": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "AMBR",
+              "Fr": "AMBR",
+              "De": "AMBR",
+              "Es": "AMBR"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#302000",
+                "border_color": "#ffbf00",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "violet_vibes": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "VIOL",
+              "Fr": "VIOL",
+              "De": "VIOL",
+              "Es": "VIOL"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#300030",
+                "border_color": "#ee82ee",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "cyan_ice": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "CYAN",
+              "Fr": "CYAN",
+              "De": "CYAN",
+              "Es": "CYAN"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#003030",
+                "border_color": "#00ffff",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "magenta_hot": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "MAGN",
+              "Fr": "MAGN",
+              "De": "MAGN",
+              "Es": "MAGN"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#400040",
+                "border_color": "#ff00ff",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "lime_zest": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "LIME",
+              "Fr": "LIME",
+              "De": "LIME",
+              "Es": "LIME"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#103000",
+                "border_color": "#32cd32",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "gold_lux": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "GOLD",
+              "Fr": "GOLD",
+              "De": "GOLD",
+              "Es": "GOLD"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#303000",
+                "border_color": "#ffd700",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          },
+          "slate_cool": {
+            "type": "_SmartActuator",
+            "label": {
+              "En": "SLAT",
+              "Fr": "SLAT",
+              "De": "SLAT",
+              "Es": "SLAT"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "style": {
+              "active": {
+                "bg_color": "#101020",
+                "border_color": "#708090",
+                "text_color": "#FF902C"
+              },
+              "inactive": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "Migrated_ProtocolMatrix": {
+    "type": "OcaBin",
+    "id": "migrated.protocol_matrix",
+    "geometry": { "anchor": "NSEW" },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": { "En": "ProtocolMatrix" },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "component": {
+            "type": "_ProtocolMatrix",
+            "layout": { "width": 400, "height": 300 }
+          }
+        }
+      }
+    }
+  }
+}

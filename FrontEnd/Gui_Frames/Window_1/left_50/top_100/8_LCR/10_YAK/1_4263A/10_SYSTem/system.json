@@ -1,0 +1,111 @@
+{
+  "HP_4263A_SYSTEM": {
+    "type": "OcaBin",
+    "id": "4263A.SYST.001",
+    "blocks": {
+      "Calibration": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Correction & Reset",
+          "Fr": "Correction & Réinitialiser",
+          "De": "Correction & Zurücksetzen",
+          "Es": "Correction & Reiniciar"
+        },
+        "fields": {
+          "Open_Corr": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "OPEN CORR",
+                  "Fr": "OPEN CORR",
+                  "De": "OPEN CORR",
+                  "Es": "OPEN CORR"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":CORR:OPEN:EXEC",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Short_Corr": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "SHORT CORR",
+                  "Fr": "SHORT CORR",
+                  "De": "SHORT CORR",
+                  "Es": "SHORT CORR"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":CORR:SHOR:EXEC",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Reset_Unit": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Factory Reset",
+                  "Fr": "Factory Réinitialiser",
+                  "De": "Factory Zurücksetzen",
+                  "Es": "Factory Reiniciar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "message": "*RST"
+          },
+          "Error_Log": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Read Error",
+                  "Fr": "Read Erreur",
+                  "De": "Read Fehler",
+                  "Es": "Read Error"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SYST:ERR?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

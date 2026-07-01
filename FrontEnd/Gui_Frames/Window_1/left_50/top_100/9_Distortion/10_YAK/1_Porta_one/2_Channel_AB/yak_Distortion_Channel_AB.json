@@ -1,0 +1,283 @@
+{
+  "Distortion_YAK_Porta_one_Channel_AB": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Global Analyzer Functions",
+          "Fr": "Fonctions d'analyseur globales",
+          "De": "Globale Analysatorfunktionen",
+          "Es": "Funciones globales del analizador"
+        },
+        "fields": {
+          "Function_Selection": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Select Measurement Mode",
+              "Fr": "Sélect. Measurement Mode",
+              "De": "Auswahl Measurement Mode",
+              "Es": "Selec. Measurement Mode"
+            },
+            "fields": {
+              "Mode_Amplitude": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion AMPLitude"
+                  }
+                }
+              },
+              "Mode_Noise": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion NOISE"
+                  }
+                }
+              },
+              "Mode_THD_N": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion THD"
+                  }
+                }
+              },
+              "Mode_Level_Stereo": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion LEVel"
+                  }
+                }
+              },
+              "Mode_Crosstalk": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion XTALK"
+                  }
+                }
+              },
+              "Mode_Phase": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion PHASE"
+                  }
+                }
+              },
+              "Mode_SINAD": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion SINad"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

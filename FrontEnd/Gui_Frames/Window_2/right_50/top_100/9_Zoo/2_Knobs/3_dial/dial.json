@@ -1,0 +1,3358 @@
+{
+  "Zoo_Knobs_dial": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dial_Petting_Zoo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Dial Variations (Petting Zoo)",
+          "Fr": "Dial Variations (Petting Zoo)",
+          "De": "Dial Variationen (Petting Zoo)",
+          "Es": "Dial Variaciones (Petting Zoo)"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Std Combo",
+              "Fr": "Std Combo",
+              "De": "Std Combo",
+              "Es": "Std Combo",
+              "show_label": true
+            },
+            "notes": "Standard combo",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#996633"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 250.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Pie Only",
+              "Fr": "Pie Only",
+              "De": "Pie Only",
+              "Es": "Pie Only",
+              "show_label": true
+            },
+            "notes": "Piechart only, red",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF0000"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 500.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Ptr Only",
+              "Fr": "Ptr Only",
+              "De": "Ptr Only",
+              "Es": "Ptr Only",
+              "show_label": true
+            },
+            "notes": "Pointer only, blue",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#0000FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 750.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Lg Pie",
+              "Fr": "Lg Pie",
+              "De": "Lg Pie",
+              "Es": "Lg Pie",
+              "show_label": true
+            },
+            "notes": "Large pie, green",
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FF00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 300.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Sm Ptr",
+              "Fr": "Sm Ptr",
+              "De": "Sm Ptr",
+              "Es": "Sm Ptr",
+              "show_label": true
+            },
+            "notes": "Small pointer, yellow",
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFF00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Giant Mix",
+              "Fr": "Giant Mix",
+              "De": "Giant Mix",
+              "Es": "Giant Mezcla",
+              "show_label": true
+            },
+            "notes": "Giant combo, cyan",
+            "geometry": {
+              "width": 160,
+              "height": 160
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FFFF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 600.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Purple",
+              "Fr": "Purple",
+              "De": "Purple",
+              "Es": "Purple",
+              "show_label": true
+            },
+            "notes": "Medium purple",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#800080"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 800.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Teal",
+              "Fr": "Teal",
+              "De": "Teal",
+              "Es": "Teal",
+              "show_label": true
+            },
+            "notes": "Medium teal pointer",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#008080"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 400.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Index": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Index Dial Variations",
+          "Fr": "Index Dial Variations",
+          "De": "Index Dial Variationen",
+          "Es": "Index Dial Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_idx1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 1",
+              "Fr": "Index 1",
+              "De": "Index 1",
+              "Es": "Index 1",
+              "show_label": true
+            },
+            "notes": "Blue Pointer",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2196F3"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 2",
+              "Fr": "Index 2",
+              "De": "Index 2",
+              "Es": "Index 2",
+              "show_label": true
+            },
+            "notes": "Amber Pie",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 20.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 3",
+              "Fr": "Index 3",
+              "De": "Index 3",
+              "Es": "Index 3",
+              "show_label": true
+            },
+            "notes": "Green Combo",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 30.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 4",
+              "Fr": "Index 4",
+              "De": "Index 4",
+              "Es": "Index 4",
+              "show_label": true
+            },
+            "notes": "Small Pink",
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E91E63"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 5",
+              "Fr": "Index 5",
+              "De": "Index 5",
+              "Es": "Index 5",
+              "show_label": true
+            },
+            "notes": "Large Purple",
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9C27B0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 6",
+              "Fr": "Index 6",
+              "De": "Index 6",
+              "Es": "Index 6",
+              "show_label": true
+            },
+            "notes": "Cyan Combo",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BCD4"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 7",
+              "Fr": "Index 7",
+              "De": "Index 7",
+              "Es": "Index 7",
+              "show_label": true
+            },
+            "notes": "Deep Orange",
+            "geometry": {
+              "width": 100,
+              "height": 110,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 70.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_idx8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Index 8",
+              "Fr": "Index 8",
+              "De": "Index 8",
+              "Es": "Index 8",
+              "show_label": true
+            },
+            "notes": "Brown Large",
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#795548"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 80.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Time": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Time/Clock Dial Variations",
+          "Fr": "Time/Clock Dial Variations",
+          "De": "Time/Clock Dial Variationen",
+          "Es": "Time/Clock Dial Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_tm1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Seconds",
+              "Fr": "Seconds",
+              "De": "Seconds",
+              "Es": "Seconds",
+              "show_label": true
+            },
+            "notes": "White Clock",
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFFFF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 15.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Minutes",
+              "Fr": "Minutes",
+              "De": "Minutes",
+              "Es": "Minutes",
+              "show_label": true
+            },
+            "notes": "Grey Clock",
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B0BEC5"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 45.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Millis",
+              "Fr": "Millis",
+              "De": "Millis",
+              "Es": "Millis",
+              "show_label": true
+            },
+            "notes": "Fast Red",
+            "geometry": {
+              "width": 100,
+              "height": 110,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF1744"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 500.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay",
+              "show_label": true
+            },
+            "notes": "Delay Blue",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2979FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 250.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Attack",
+              "Fr": "Attaque",
+              "De": "Attack",
+              "Es": "Ataque",
+              "show_label": true
+            },
+            "notes": "Fast Attack Green",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00E676"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 5.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Release",
+              "Fr": "Relâchement",
+              "De": "Release",
+              "Es": "Relajación",
+              "show_label": true
+            },
+            "notes": "Slow Release Orange",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9100"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 300.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Decay",
+              "Fr": "Decay",
+              "De": "Decay",
+              "Es": "Decay",
+              "show_label": true
+            },
+            "notes": "Decay Purple",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D500F9"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_tm8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Hold",
+              "Fr": "Hold",
+              "De": "Hold",
+              "Es": "Hold",
+              "show_label": true
+            },
+            "notes": "Dark Hold",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#3E2723"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Param": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Parameter Dial Variations",
+          "Fr": "Parameter Dial Variations",
+          "De": "Parameter Dial Variationen",
+          "Es": "Parameter Dial Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_prm1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Param A",
+              "Fr": "Param A",
+              "De": "Param A",
+              "Es": "Param A",
+              "show_label": true
+            },
+            "notes": "Cyan Electric",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00E5FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Param B",
+              "Fr": "Param B",
+              "De": "Param B",
+              "Es": "Param B",
+              "show_label": true
+            },
+            "notes": "Red Tech",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D50000"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Param C",
+              "Fr": "Param C",
+              "De": "Param C",
+              "Es": "Param C",
+              "show_label": true
+            },
+            "notes": "Lime Tech",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#64DD17"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mix X",
+              "Fr": "Mix X",
+              "De": "Mix X",
+              "Es": "Mezcla X",
+              "show_label": true
+            },
+            "notes": "Purple Deep",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#AA00FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mix Y",
+              "Fr": "Mix Y",
+              "De": "Mix Y",
+              "Es": "Mezcla Y",
+              "show_label": true
+            },
+            "notes": "Orange Blaze",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF6D00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 90.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mod 1",
+              "Fr": "Mod 1",
+              "De": "Mod 1",
+              "Es": "Mod 1",
+              "show_label": true
+            },
+            "notes": "Indigo",
+            "geometry": {
+              "width": 100,
+              "height": 110,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#304FFE"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 33.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mod 2",
+              "Fr": "Mod 2",
+              "De": "Mod 2",
+              "Es": "Mod 2",
+              "show_label": true
+            },
+            "notes": "Green Bright",
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00C853"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 66.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_prm8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Master",
+              "Fr": "Master",
+              "De": "Master",
+              "Es": "Maestro",
+              "show_label": true
+            },
+            "notes": "Dark Master",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#263238"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Process": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Process/Progress Dial Variations",
+          "Fr": "Process/Progress Dial Variations",
+          "De": "Process/Progress Dial Variationen",
+          "Es": "Process/Progress Dial Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_proc1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Loading",
+              "Fr": "Loading",
+              "De": "Loading",
+              "Es": "Loading",
+              "show_label": true
+            },
+            "notes": "Start",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B0BEC5"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Stage 1",
+              "Fr": "Stage 1",
+              "De": "Stage 1",
+              "Es": "Stage 1",
+              "show_label": true
+            },
+            "notes": "Blue Light",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#90CAF9"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Stage 2",
+              "Fr": "Stage 2",
+              "De": "Stage 2",
+              "Es": "Stage 2",
+              "show_label": true
+            },
+            "notes": "Blue Med",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#64B5F6"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Stage 3",
+              "Fr": "Stage 3",
+              "De": "Stage 3",
+              "Es": "Stage 3",
+              "show_label": true
+            },
+            "notes": "Blue Dark",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2196F3"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Complete",
+              "Fr": "Complete",
+              "De": "Complete",
+              "Es": "Complete",
+              "show_label": true
+            },
+            "notes": "Green Done",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Error",
+              "Fr": "Erreur",
+              "De": "Fehler",
+              "Es": "Error",
+              "show_label": true
+            },
+            "notes": "Red Error",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#F44336"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 88.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Warning",
+              "Fr": "Avertissement",
+              "De": "Warnung",
+              "Es": "Advertencia",
+              "show_label": true
+            },
+            "notes": "Amber Warn",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_proc8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Unknown",
+              "Fr": "Unknown",
+              "De": "Unknown",
+              "Es": "Unknown",
+              "show_label": true
+            },
+            "notes": "Grey Unknown",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9E9E9E"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Advanced": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Advanced Dial Features (Infinity, Layout, Thickness)",
+          "Fr": "Avancé Dial Caractéristiques (Infinity, Layout, Thickness)",
+          "De": "Erweitert Dial Funktionen (Infinity, Layout, Thickness)",
+          "Es": "Avanzado Dial Características (Infinity, Layout, Thickness)"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_adv1": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Infinite",
+              "Fr": "Infinite",
+              "De": "Infinite",
+              "Es": "Infinite",
+              "show_label": true
+            },
+            "notes": "Wraps around 0-100",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BCD4"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_adv2": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Fine Tune",
+              "Fr": "Fine Tune",
+              "De": "Fine Tune",
+              "Es": "Fine Tune",
+              "show_label": true
+            },
+            "notes": "10 turns for full range",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": true
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 1000.0,
+                "value_default": 500.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_adv3": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Thick Crust",
+              "Fr": "Thick Crust",
+              "De": "Thick Crust",
+              "Es": "Thick Crust",
+              "show_label": true
+            },
+            "notes": "10px Crust",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E91E63"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            },
+            "pie_crust_thickness": 10
+          },
+          "dial_adv4": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Thin Crust",
+              "Fr": "Thin Crust",
+              "De": "Thin Crust",
+              "Es": "Thin Crust",
+              "show_label": true
+            },
+            "notes": "1px Crust",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            },
+            "pie_crust_thickness": 1
+          },
+          "dial_adv5": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Val Top",
+              "Fr": "Val Haut",
+              "De": "Val Oben",
+              "Es": "Val Arriba",
+              "show_label": true
+            },
+            "notes": "Val Top, Text Bot",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "top",
+              "label_position": "bottom"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9C27B0"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_adv6": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Val Left",
+              "Fr": "Val Gauche",
+              "De": "Val Links",
+              "Es": "Val Izquierda",
+              "show_label": true
+            },
+            "notes": "Value on Left",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "left",
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_adv7": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Val Right",
+              "Fr": "Val Droite",
+              "De": "Val Rechts",
+              "Es": "Val Derecha",
+              "show_label": true
+            },
+            "notes": "Value on Right",
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "right",
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#3F51B5"
+              },
+              "style_flags": {
+                "show_grid": false
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            }
+          },
+          "dial_adv8": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Full Pie",
+              "Fr": "Complet Pie",
+              "De": "Vollständig Pie",
+              "Es": "Completo Pie",
+              "show_label": true
+            },
+            "notes": "Super thick crust",
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#607D8B"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0,
+                "step": 1
+              }
+            },
+            "pie_crust_thickness": 25
+          }
+        }
+      }
+    }
+  }
+}

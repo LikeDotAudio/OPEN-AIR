@@ -1,0 +1,407 @@
+{
+  "Router_Switcher_Coax": {
+    "type": "OcaBin",
+    "id": "50.100.1.1.0.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Card_000_Coax_Routing": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Card 000 - Coax Cross-Point Routing",
+          "Fr": "Card 000 - Coax Cross-Point Routing",
+          "De": "Card 000 - Coax Cross-Point Routing",
+          "Es": "Card 000 - Coax Cross-Point Routing"
+        },
+        "show_label": false,
+        "layout": {
+          "sticky": ""
+        },
+        "fields": {
+          "Main_IO_Toggler": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_relay_c9",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 4,
+              "width": 150,
+              "font": 14,
+              "padx": 10,
+              "pady": 10
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#ff0000",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "value": "901",
+                "label": {
+                  "active": {
+                    "En": "Patch Panel OUT",
+                    "Fr": "Patch Panel OUT",
+                    "De": "Patch Panel OUT",
+                    "Es": "Patch Panel OUT"
+                  },
+                  "inactive": {
+                    "En": "Patch Panel OUT",
+                    "Fr": "Patch Panel OUT",
+                    "De": "Patch Panel OUT",
+                    "Es": "Patch Panel OUT"
+                  }
+                },
+                "description": {
+                  "En": "Patch Panel OUT",
+                  "Fr": "Patch Panel OUT",
+                  "De": "Patch Panel OUT",
+                  "Es": "Patch Panel OUT"
+                }
+              },
+              "2": {
+                "value": "902",
+                "label": {
+                  "active": {
+                    "En": "Patch Panel IN",
+                    "Fr": "Patch Panel IN",
+                    "De": "Patch Panel IN",
+                    "Es": "Patch Panel IN"
+                  },
+                  "inactive": {
+                    "En": "Patch Panel IN",
+                    "Fr": "Patch Panel IN",
+                    "De": "Patch Panel IN",
+                    "Es": "Patch Panel IN"
+                  }
+                },
+                "description": {
+                  "En": "Patch Panel IN",
+                  "Fr": "Patch Panel IN",
+                  "De": "Patch Panel IN",
+                  "Es": "Patch Panel IN"
+                }
+              },
+              "3": {
+                "value": "903",
+                "label": {
+                  "active": {
+                    "En": "HP-xformer 1 IN",
+                    "Fr": "ENT transformateur HP 1",
+                    "De": "HP-Trafo 1 EIN",
+                    "Es": "ENT transformador HP 1"
+                  },
+                  "inactive": {
+                    "En": "HP-xformer 1 IN",
+                    "Fr": "ENT transformateur HP 1",
+                    "De": "HP-Trafo 1 EIN",
+                    "Es": "ENT transformador HP 1"
+                  }
+                },
+                "description": {
+                  "En": "HP-xformer 1 IN",
+                  "Fr": "ENT transformateur HP 1",
+                  "De": "HP-Trafo 1 EIN",
+                  "Es": "ENT transformador HP 1"
+                }
+              },
+              "4": {
+                "value": "904",
+                "label": {
+                  "active": {
+                    "En": "HP-xformer 2 IN",
+                    "Fr": "ENT transformateur HP 2",
+                    "De": "HP-Trafo 2 EIN",
+                    "Es": "ENT transformador HP 2"
+                  },
+                  "inactive": {
+                    "En": "HP-xformer 2 IN",
+                    "Fr": "ENT transformateur HP 2",
+                    "De": "HP-Trafo 2 EIN",
+                    "Es": "ENT transformador HP 2"
+                  }
+                },
+                "description": {
+                  "En": "HP-xformer 2 IN",
+                  "Fr": "ENT transformateur HP 2",
+                  "De": "HP-Trafo 2 EIN",
+                  "Es": "ENT transformador HP 2"
+                }
+              },
+              "5": {
+                "value": "905",
+                "label": {
+                  "active": {
+                    "En": "TO AMPLIFIER L",
+                    "Fr": "TO AMPLIFIER L",
+                    "De": "TO AMPLIFIER L",
+                    "Es": "TO AMPLIFIER L"
+                  },
+                  "inactive": {
+                    "En": "TO AMPLIFIER L",
+                    "Fr": "TO AMPLIFIER L",
+                    "De": "TO AMPLIFIER L",
+                    "Es": "TO AMPLIFIER L"
+                  }
+                },
+                "description": {
+                  "En": "TO AMPLIFIER L",
+                  "Fr": "TO AMPLIFIER L",
+                  "De": "TO AMPLIFIER L",
+                  "Es": "TO AMPLIFIER L"
+                }
+              },
+              "6": {
+                "value": "906",
+                "label": {
+                  "active": {
+                    "En": "TO AMPLIFIER R",
+                    "Fr": "TO AMPLIFIER R",
+                    "De": "TO AMPLIFIER R",
+                    "Es": "TO AMPLIFIER R"
+                  },
+                  "inactive": {
+                    "En": "TO AMPLIFIER R",
+                    "Fr": "TO AMPLIFIER R",
+                    "De": "TO AMPLIFIER R",
+                    "Es": "TO AMPLIFIER R"
+                  }
+                },
+                "description": {
+                  "En": "TO AMPLIFIER R",
+                  "Fr": "TO AMPLIFIER R",
+                  "De": "TO AMPLIFIER R",
+                  "Es": "TO AMPLIFIER R"
+                }
+              },
+              "7": {
+                "value": "907",
+                "label": {
+                  "active": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  },
+                  "inactive": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  }
+                },
+                "description": {
+                  "En": "From Signal Gen",
+                  "Fr": "From Signal Gen",
+                  "De": "From Signal Gen",
+                  "Es": "From Signal Gen"
+                }
+              },
+              "8": {
+                "value": "908",
+                "label": {
+                  "active": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  },
+                  "inactive": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  }
+                },
+                "description": {
+                  "En": "From Signal Gen",
+                  "Fr": "From Signal Gen",
+                  "De": "From Signal Gen",
+                  "Es": "From Signal Gen"
+                }
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card9",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          },
+          "Scopes_Toggler": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_relay_c9",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 4,
+              "width": 150,
+              "font": 14,
+              "padx": 10,
+              "pady": 10
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#ff0000",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "value": "910",
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 1",
+                    "Fr": "SCOPE IN 1",
+                    "De": "SCOPE IN 1",
+                    "Es": "SCOPE IN 1"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 1",
+                    "Fr": "SCOPE IN 1",
+                    "De": "SCOPE IN 1",
+                    "Es": "SCOPE IN 1"
+                  }
+                },
+                "description": {
+                  "En": "SCOPE IN 1",
+                  "Fr": "SCOPE IN 1",
+                  "De": "SCOPE IN 1",
+                  "Es": "SCOPE IN 1"
+                }
+              },
+              "2": {
+                "value": "920",
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 2",
+                    "Fr": "SCOPE IN 2",
+                    "De": "SCOPE IN 2",
+                    "Es": "SCOPE IN 2"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 2",
+                    "Fr": "SCOPE IN 2",
+                    "De": "SCOPE IN 2",
+                    "Es": "SCOPE IN 2"
+                  }
+                },
+                "description": {
+                  "En": "SCOPE IN 2",
+                  "Fr": "SCOPE IN 2",
+                  "De": "SCOPE IN 2",
+                  "Es": "SCOPE IN 2"
+                }
+              },
+              "3": {
+                "value": "930",
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 3",
+                    "Fr": "SCOPE IN 3",
+                    "De": "SCOPE IN 3",
+                    "Es": "SCOPE IN 3"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 3",
+                    "Fr": "SCOPE IN 3",
+                    "De": "SCOPE IN 3",
+                    "Es": "SCOPE IN 3"
+                  }
+                },
+                "description": {
+                  "En": "SCOPE IN 3",
+                  "Fr": "SCOPE IN 3",
+                  "De": "SCOPE IN 3",
+                  "Es": "SCOPE IN 3"
+                }
+              },
+              "4": {
+                "value": "940",
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 4",
+                    "Fr": "ENT SCOPE 4",
+                    "De": "SCOPE EIN 4",
+                    "Es": "ENT SCOPE 4"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 4",
+                    "Fr": "ENT SCOPE 4",
+                    "De": "SCOPE EIN 4",
+                    "Es": "ENT SCOPE 4"
+                  }
+                },
+                "description": {
+                  "En": "SCOPE IN 4",
+                  "Fr": "ENT SCOPE 4",
+                  "De": "SCOPE EIN 4",
+                  "Es": "ENT SCOPE 4"
+                }
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card9",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          }
+        }
+      }
+    },
+    "fields": {
+      "geometry": {
+        "width": 1379,
+        "height": 620
+      }
+    }
+  }
+}

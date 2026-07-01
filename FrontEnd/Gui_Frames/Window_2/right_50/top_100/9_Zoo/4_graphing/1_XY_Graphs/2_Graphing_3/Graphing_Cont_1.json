@@ -1,0 +1,25 @@
+{
+  "Migrated_GraphingCont1": {
+    "type": "OcaBin",
+    "id": "migrated.Graphing_Cont_1",
+    "geometry": { "anchor": "NSEW" },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": { "En": "GraphingCont1" },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "component": {
+            "type": "_GraphingCont1",
+            "layout": { "width": 400, "height": 300 }
+          }
+        }
+      }
+    }
+  }
+}

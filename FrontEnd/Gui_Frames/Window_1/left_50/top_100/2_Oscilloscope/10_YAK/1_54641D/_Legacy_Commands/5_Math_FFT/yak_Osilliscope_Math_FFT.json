@@ -1,0 +1,923 @@
+{
+  "Oscilloscope_YAK_54641D__Legacy_Commands_Math_FFT": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Math Measurements",
+          "Fr": "Math Mesurerments",
+          "De": "Math Messenments",
+          "Es": "Math Medidaments"
+        },
+        "fields": {
+          "Read_Math_Stats": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Read statistics for the active Math function",
+              "Fr": "Read statistics for the active Math function",
+              "De": "Read statistics for the active Math function",
+              "Es": "Read statistics for the active Math function"
+            },
+            "fields": {
+              "Get_Math_Statistics": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":MEASure:SOURce FUNCtion;:MEASure:VPP?;:MEASure:VMAX?;:MEASure:VMIN?;:MEASure:VAVerage?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "Measured Math Statistics",
+                      "Fr": "Mesurerd Math Statistics",
+                      "De": "Messend Math Statistics",
+                      "Es": "Medidad Math Statistics"
+                    },
+                    "fields": {
+                      "math_vpp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Vpp",
+                          "Fr": "Vpp",
+                          "De": "Vss",
+                          "Es": "Vpp"
+                        }
+                      },
+                      "math_vmax": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Vmax",
+                          "Fr": "Vmax",
+                          "De": "Vmax",
+                          "Es": "Vmax"
+                        }
+                      },
+                      "math_vmin": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Vmin",
+                          "Fr": "Vmin",
+                          "De": "Vmin",
+                          "Es": "Vmin"
+                        }
+                      },
+                      "math_avg": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Avg",
+                          "Fr": "Moy",
+                          "De": "Mittel",
+                          "Es": "Prom"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Math Configuration",
+          "Fr": "Math Configuration",
+          "De": "Math Konfiguration",
+          "Es": "Math Configuración"
+        },
+        "fields": {
+          "Math_Operation": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Select Operation",
+              "Fr": "Sélect. Operation",
+              "De": "Auswahl Operation",
+              "Es": "Selec. Operation"
+            },
+            "fields": {
+              "Set_Operation": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:OPERation <operation>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "Math Operation Input",
+                      "Fr": "Math Operation Entrée",
+                      "De": "Math Operation Eingang",
+                      "Es": "Math Operation Entrada"
+                    },
+                    "fields": {
+                      "operation": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Op",
+                          "Fr": "Op",
+                          "De": "Op",
+                          "Es": "Op"
+                        },
+                        "description": {
+                          "En": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "Fr": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "De": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "Es": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Math_Source_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Source Selection",
+              "Fr": "Source Sélectionnerion",
+              "De": "Source Auswählenion",
+              "Es": "Source Seleccionarion"
+            },
+            "fields": {
+              "Set_Source_CH1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:SOURce CHANnel1"
+                  }
+                }
+              },
+              "Set_Source_CH2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:SOURce CHANnel2"
+                  }
+                }
+              }
+            }
+          },
+          "Math_Vertical": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Vertical Scale & Offset",
+              "Fr": "Vertical Échelle & Décalage",
+              "De": "Vertical Skala & Versatz",
+              "Es": "Vertical Escala & Compensación"
+            },
+            "fields": {
+              "Set_Range": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:RANGe <range>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "Math Range Input",
+                      "Fr": "Math Plage Entrée",
+                      "De": "Math Bereich Eingang",
+                      "Es": "Math Rango Entrada"
+                    },
+                    "fields": {
+                      "range": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
+                        "description": {
+                          "En": "Full scale value",
+                          "Fr": "Full scale value",
+                          "De": "Full scale value",
+                          "Es": "Full scale value"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:OFFSet <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "Math Offset Input",
+                      "Fr": "Math Décalage Entrée",
+                      "De": "Math Versatz Eingang",
+                      "Es": "Math Compensación Entrada"
+                    },
+                    "fields": {
+                      "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
+                        "description": {
+                          "En": "Offset value",
+                          "Fr": "Décalage value",
+                          "De": "Versatz value",
+                          "Es": "Compensación value"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "FFT_Settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "FFT Specific Configuration",
+              "Fr": "FFT Specific Configuration",
+              "De": "FFT Specific Konfiguration",
+              "Es": "FFT Specific Configuración"
+            },
+            "fields": {
+              "Set_Window_RECTangular": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:WINDow <window>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
+                    "fields": {
+                      "window": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "RECTangular",
+                          "Fr": "RECTangular",
+                          "De": "RECTangular",
+                          "Es": "RECTangular"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Window_HANNing": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:WINDow <window>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
+                    "fields": {
+                      "window": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "HANNing",
+                          "Fr": "HANNing",
+                          "De": "HANNing",
+                          "Es": "HANNing"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Window_FLATtop": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:WINDow <window>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
+                    "fields": {
+                      "window": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "FLATtop",
+                          "Fr": "FLATtop",
+                          "De": "FLATtop",
+                          "Es": "FLATtop"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Center_Frequency": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:CENTer <frequency>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Center Frequency Input",
+                      "Fr": "FFT Centre Fréquence Entrée",
+                      "De": "FFT Mitte Frequenz Eingang",
+                      "Es": "FFT Centro Frecuencia Entrada"
+                    },
+                    "fields": {
+                      "frequency": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Center",
+                          "Fr": "Centre",
+                          "De": "Mitte",
+                          "Es": "Centro"
+                        },
+                        "description": {
+                          "En": "Center Freq in Hz",
+                          "Fr": "Fréq centrale en Hz",
+                          "De": "Mittenfreq in Hz",
+                          "Es": "Frec central en Hz"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Span": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:SPAN <span>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Span Input",
+                      "Fr": "FFT Portée Entrée",
+                      "De": "FFT Spanne Eingang",
+                      "Es": "FFT Intervalo Entrada"
+                    },
+                    "fields": {
+                      "span": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Span",
+                          "Fr": "Étendue",
+                          "De": "Spanne",
+                          "Es": "Intervalo"
+                        },
+                        "description": {
+                          "En": "Span in Hz",
+                          "Fr": "Portée in Hz",
+                          "De": "Spanne in Hz",
+                          "Es": "Intervalo in Hz"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_FFT_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":FUNCtion:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "description": {
+                      "En": "FFT Scale Input",
+                      "Fr": "FFT Échelle Entrée",
+                      "De": "FFT Skala Eingang",
+                      "Es": "FFT Escala Entrada"
+                    },
+                    "fields": {
+                      "scale": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "dB/div"
+                        },
+                        "label": {
+                          "En": "Scale",
+                          "Fr": "Échelle",
+                          "De": "Skala",
+                          "Es": "Escala"
+                        },
+                        "description": {
+                          "En": "dB per division",
+                          "Fr": "dB per division",
+                          "De": "dB per division",
+                          "Es": "dB per division"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Math_Display_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Math Display Controls",
+              "Fr": "Commandes d'affichage mathématique",
+              "De": "Math-Anzeigesteuerungen",
+              "Es": "Controles de visualización matemática"
+            },
+            "fields": {
+              "Do_Math_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Math ON",
+                      "Fr": "Math ON",
+                      "De": "Math EIN",
+                      "Es": "Math ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":FUNCtion:DISPlay ON"
+                }
+              },
+              "Do_Math_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Math OFF",
+                      "Fr": "Math OFF",
+                      "De": "Math AUS",
+                      "Es": "Math DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":FUNCtion:DISPlay OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

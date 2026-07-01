@@ -1,0 +1,3848 @@
+{
+  "Audio Technica": {
+    "1800": {
+      "C": {
+        "range": "C",
+        "start_freq": "541.5",
+        "end_freq": "566.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "655.5",
+        "end_freq": "680.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "2000": {
+      "I": {
+        "range": "I",
+        "start_freq": "487.125",
+        "end_freq": "506.5",
+        "num_presets": "10",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "656.125",
+        "end_freq": "678.5",
+        "num_presets": "10",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "3000": {
+      "I": {
+        "range": "I",
+        "start_freq": "480",
+        "end_freq": "507",
+        "num_presets": "1081",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "541.5",
+        "end_freq": "566.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "U": {
+        "range": "U",
+        "start_freq": "606",
+        "end_freq": "631",
+        "num_presets": "1001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "655.5",
+        "end_freq": "680.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G": {
+        "range": "G",
+        "start_freq": "721.5",
+        "end_freq": "746.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "795.5",
+        "end_freq": "820",
+        "num_presets": "981",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "F": {
+        "range": "F",
+        "start_freq": "840.125",
+        "end_freq": "864.9",
+        "num_presets": "992",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "4000/5000": {
+      "C": {
+        "range": "C",
+        "start_freq": "541.5",
+        "end_freq": "566.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "655.5",
+        "end_freq": "680.375",
+        "num_presets": "996",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "700 (Pro Series 5)": {
+      "542-561": {
+        "range": "542-561",
+        "start_freq": "542.125",
+        "end_freq": "561.25",
+        "num_presets": "8",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "7000": {
+      "728-740C": {
+        "range": "728-740C",
+        "start_freq": "728.125",
+        "end_freq": "740.5",
+        "num_presets": "100",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "944-952": {
+        "range": "944-952",
+        "start_freq": "944",
+        "end_freq": "952",
+        "num_presets": "161",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "M2 IEM": {
+      "L": {
+        "range": "L",
+        "start_freq": "575",
+        "end_freq": "608",
+        "num_presets": "1321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "M": {
+        "range": "M",
+        "start_freq": "614",
+        "end_freq": "647",
+        "num_presets": "1321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "M3 IEM": {
+      "L": {
+        "range": "L",
+        "start_freq": "575",
+        "end_freq": "608",
+        "num_presets": "1321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "M": {
+        "range": "M",
+        "start_freq": "614",
+        "end_freq": "647",
+        "num_presets": "1321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "790",
+        "end_freq": "822",
+        "num_presets": "1281",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "F": {
+        "range": "F",
+        "start_freq": "832",
+        "end_freq": "865",
+        "num_presets": "1321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Audix": {
+    "RAD360": {
+      "A": {
+        "range": "A",
+        "start_freq": "566",
+        "end_freq": "590",
+        "num_presets": "193",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "614",
+        "end_freq": "638",
+        "num_presets": "193",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "638",
+        "end_freq": "662",
+        "num_presets": "193",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "EV": {
+    "R300": {
+      "A": {
+        "range": "A",
+        "start_freq": "618",
+        "end_freq": "634",
+        "num_presets": "641",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "678",
+        "end_freq": "694",
+        "num_presets": "641",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "T": {
+        "range": "T",
+        "start_freq": "794",
+        "end_freq": "806",
+        "num_presets": "481",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "850",
+        "end_freq": "865",
+        "num_presets": "601",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "RE1": {
+      "G": {
+        "range": "G",
+        "start_freq": "614.1",
+        "end_freq": "637.9",
+        "num_presets": "953",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "F": {
+        "range": "F",
+        "start_freq": "650.1",
+        "end_freq": "673.9",
+        "num_presets": "953",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A": {
+        "range": "A",
+        "start_freq": "680.1",
+        "end_freq": "703.9",
+        "num_presets": "953",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "722.1",
+        "end_freq": "745.9",
+        "num_presets": "953",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "776.1",
+        "end_freq": "799.9",
+        "num_presets": "953",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "REV": {
+      "C1": {
+        "range": "C1",
+        "start_freq": "614",
+        "end_freq": "638",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C2": {
+        "range": "C2",
+        "start_freq": "650",
+        "end_freq": "674",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C3": {
+        "range": "C3",
+        "start_freq": "674",
+        "end_freq": "698",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C5": {
+        "range": "C5",
+        "start_freq": "722",
+        "end_freq": "746",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Generic": {
+    "Generic": {
+      "": {
+        "range": "",
+        "start_freq": "0",
+        "end_freq": "0",
+        "num_presets": "0",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "HME": {
+    "Pro 850": {
+      "1 TX Stock": {
+        "range": "1 TX Stock",
+        "start_freq": "488",
+        "end_freq": "505.975",
+        "num_presets": "12",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "2 TX Stock": {
+        "range": "2 TX Stock",
+        "start_freq": "506",
+        "end_freq": "523.975",
+        "num_presets": "12",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "4 TX Stock": {
+        "range": "4 TX Stock",
+        "start_freq": "542",
+        "end_freq": "559.975",
+        "num_presets": "12",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "9 RX Stock": {
+        "range": "9 RX Stock",
+        "start_freq": "632",
+        "end_freq": "649.975",
+        "num_presets": "36",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A RX Stock": {
+        "range": "A RX Stock",
+        "start_freq": "650",
+        "end_freq": "667.975",
+        "num_presets": "36",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C RX Stock": {
+        "range": "C RX Stock",
+        "start_freq": "686",
+        "end_freq": "703.975",
+        "num_presets": "36",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Lectrosonics": {
+    "100 KHz": {
+      "Block 470": {
+        "range": "Block 470",
+        "start_freq": "470.1",
+        "end_freq": "495.6",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 19": {
+        "range": "Block 19",
+        "start_freq": "486.4",
+        "end_freq": "511.9",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 20": {
+        "range": "Block 20",
+        "start_freq": "512",
+        "end_freq": "537.5",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 21": {
+        "range": "Block 21",
+        "start_freq": "537.6",
+        "end_freq": "563.1",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 22": {
+        "range": "Block 22",
+        "start_freq": "563.2",
+        "end_freq": "588.7",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 23": {
+        "range": "Block 23",
+        "start_freq": "588.8",
+        "end_freq": "607.9",
+        "num_presets": "192",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 606": {
+        "range": "Block 606",
+        "start_freq": "606",
+        "end_freq": "631.5",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 24": {
+        "range": "Block 24",
+        "start_freq": "614.4",
+        "end_freq": "639.9",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 25": {
+        "range": "Block 25",
+        "start_freq": "640",
+        "end_freq": "665.5",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 26": {
+        "range": "Block 26",
+        "start_freq": "665.6",
+        "end_freq": "691.1",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 27": {
+        "range": "Block 27",
+        "start_freq": "691.2",
+        "end_freq": "716.7",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 28": {
+        "range": "Block 28",
+        "start_freq": "716.8",
+        "end_freq": "742.3",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 29": {
+        "range": "Block 29",
+        "start_freq": "742.4",
+        "end_freq": "767.9",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 30": {
+        "range": "Block 30",
+        "start_freq": "768",
+        "end_freq": "793.5",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 32": {
+        "range": "Block 32",
+        "start_freq": "819.2",
+        "end_freq": "844.7",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 33": {
+        "range": "Block 33",
+        "start_freq": "844.8",
+        "end_freq": "862",
+        "num_presets": "173",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 944": {
+        "range": "Block 944",
+        "start_freq": "944.1",
+        "end_freq": "951.9",
+        "num_presets": "79",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "175 KHz": {
+      "VHF IFB": {
+        "range": "VHF IFB",
+        "start_freq": "174.1",
+        "end_freq": "215.75",
+        "num_presets": "239",
+        "prebuilt": "true",
+        "vhf_uhf": "VHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "25 KHz": {
+      "Block 470": {
+        "range": "Block 470",
+        "start_freq": "470.1",
+        "end_freq": "495.6",
+        "num_presets": "1021",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 19": {
+        "range": "Block 19",
+        "start_freq": "486.4",
+        "end_freq": "511.975",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 20": {
+        "range": "Block 20",
+        "start_freq": "512",
+        "end_freq": "537.575",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 21": {
+        "range": "Block 21",
+        "start_freq": "537.6",
+        "end_freq": "563.175",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 22": {
+        "range": "Block 22",
+        "start_freq": "563.2",
+        "end_freq": "588.775",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 23": {
+        "range": "Block 23",
+        "start_freq": "588.8",
+        "end_freq": "614.375",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 24": {
+        "range": "Block 24",
+        "start_freq": "614.4",
+        "end_freq": "639.975",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 25": {
+        "range": "Block 25",
+        "start_freq": "640",
+        "end_freq": "665.575",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 26": {
+        "range": "Block 26",
+        "start_freq": "665.6",
+        "end_freq": "691.175",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 27": {
+        "range": "Block 27",
+        "start_freq": "691.2",
+        "end_freq": "716.775",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 28": {
+        "range": "Block 28",
+        "start_freq": "716.8",
+        "end_freq": "742.375",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 29": {
+        "range": "Block 29",
+        "start_freq": "742.4",
+        "end_freq": "767.975",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 30": {
+        "range": "Block 30",
+        "start_freq": "768",
+        "end_freq": "793.575",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 32": {
+        "range": "Block 32",
+        "start_freq": "819.2",
+        "end_freq": "844.775",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 33": {
+        "range": "Block 33",
+        "start_freq": "844",
+        "end_freq": "862.075",
+        "num_presets": "724",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 944": {
+        "range": "Block 944",
+        "start_freq": "944.1",
+        "end_freq": "951.975",
+        "num_presets": "316",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "3 Block": {
+      "A1": {
+        "range": "A1",
+        "start_freq": "470.1",
+        "end_freq": "537.575",
+        "num_presets": "2700",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B1": {
+        "range": "B1",
+        "start_freq": "537.6",
+        "end_freq": "614.375",
+        "num_presets": "3072",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C1": {
+        "range": "C1",
+        "start_freq": "614.4",
+        "end_freq": "691.175",
+        "num_presets": "3072",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D1": {
+        "range": "D1",
+        "start_freq": "691.2",
+        "end_freq": "767.975",
+        "num_presets": "3072",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "D4/M4": {
+      "2 Channel": {
+        "range": "2 Channel",
+        "start_freq": "902",
+        "end_freq": "928",
+        "num_presets": "8",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "1.999",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "4 Channel": {
+        "range": "4 Channel",
+        "start_freq": "902",
+        "end_freq": "928",
+        "num_presets": "4",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "3.999",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      }
+    },
+    "DSW": {
+      "Block 470": {
+        "range": "Block 470",
+        "start_freq": "470.1",
+        "end_freq": "495.6",
+        "num_presets": "1021",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 19": {
+        "range": "Block 19",
+        "start_freq": "486.4",
+        "end_freq": "511.975",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 20": {
+        "range": "Block 20",
+        "start_freq": "512",
+        "end_freq": "537.575",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 21": {
+        "range": "Block 21",
+        "start_freq": "537.6",
+        "end_freq": "563.175",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 22": {
+        "range": "Block 22",
+        "start_freq": "563.2",
+        "end_freq": "588.775",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 23": {
+        "range": "Block 23",
+        "start_freq": "588.8",
+        "end_freq": "614.375",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 24": {
+        "range": "Block 24",
+        "start_freq": "614.4",
+        "end_freq": "639.975",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 25": {
+        "range": "Block 25",
+        "start_freq": "640",
+        "end_freq": "665.575",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 26": {
+        "range": "Block 26",
+        "start_freq": "665.6",
+        "end_freq": "691.175",
+        "num_presets": "1024",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.349",
+        "imd_3": "0.099",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Hybrid": {
+      "Blk 941": {
+        "range": "Blk 941",
+        "start_freq": "941.525",
+        "end_freq": "959.975",
+        "num_presets": "695",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "M2T": {
+      "A1B1": {
+        "range": "A1B1",
+        "start_freq": "470.1",
+        "end_freq": "607.95",
+        "num_presets": "5515",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "0.199",
+        "imd_3_tx_3rd": "0.099",
+        "imd_5": "0.099"
+      }
+    }
+  },
+  "Micron": {
+    "Explorer 100 (16ch)": {
+      "606-614": {
+        "range": "606-614",
+        "start_freq": "606.125",
+        "end_freq": "612.3",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "606-630": {
+        "range": "606-630",
+        "start_freq": "606.125",
+        "end_freq": "630.25",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Explorer 100 (256ch)": {
+      "606-638": {
+        "range": "606-638",
+        "start_freq": "606.125",
+        "end_freq": "638",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "656-688": {
+        "range": "656-688",
+        "start_freq": "656.125",
+        "end_freq": "688.125",
+        "num_presets": "256",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "TX700": {
+      "606-630 US": {
+        "range": "606-630 US",
+        "start_freq": "606.125",
+        "end_freq": "630.25",
+        "num_presets": "91",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "606-638": {
+        "range": "606-638",
+        "start_freq": "606.125",
+        "end_freq": "637.85",
+        "num_presets": "95",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "656-680": {
+        "range": "656-680",
+        "start_freq": "656.125",
+        "end_freq": "699.325",
+        "num_presets": "100",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Mipro": {
+    "ACT-311/312": {
+      "6A All": {
+        "range": "6A All",
+        "start_freq": "620",
+        "end_freq": "644",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6A Groups": {
+        "range": "6A Groups",
+        "start_freq": "620",
+        "end_freq": "644",
+        "num_presets": "48",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6B All": {
+        "range": "6B All",
+        "start_freq": "644",
+        "end_freq": "668",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6B Groups": {
+        "range": "6B Groups",
+        "start_freq": "644",
+        "end_freq": "668",
+        "num_presets": "48",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6C All": {
+        "range": "6C All",
+        "start_freq": "668",
+        "end_freq": "692",
+        "num_presets": "961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6C Groups": {
+        "range": "6C Groups",
+        "start_freq": "668",
+        "end_freq": "692",
+        "num_presets": "48",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "ACT-7": {
+      "6UA All": {
+        "range": "6UA All",
+        "start_freq": "526",
+        "end_freq": "698",
+        "num_presets": "6881",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "5US All": {
+        "range": "5US All",
+        "start_freq": "554",
+        "end_freq": "638",
+        "num_presets": "3112",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "5US Groups": {
+        "range": "5US Groups",
+        "start_freq": "554.275",
+        "end_freq": "625.9",
+        "num_presets": "379",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6UA Groups": {
+        "range": "6UA Groups",
+        "start_freq": "626.275",
+        "end_freq": "697.95",
+        "num_presets": "378",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "ACT-818/828": {
+      "5E Groups": {
+        "range": "5E Groups",
+        "start_freq": "482",
+        "end_freq": "542",
+        "num_presets": "207",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.599",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "5F Groups": {
+        "range": "5F Groups",
+        "start_freq": "542",
+        "end_freq": "602.675",
+        "num_presets": "206",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.599",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6E Groups": {
+        "range": "6E Groups",
+        "start_freq": "637.325",
+        "end_freq": "699.325",
+        "num_presets": "206",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.599",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Quantum": {
+    "Q5X": {
+      "Block 650": {
+        "range": "Block 650",
+        "start_freq": "650",
+        "end_freq": "675",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block #0": {
+        "range": "Block #0",
+        "start_freq": "665",
+        "end_freq": "690",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 675": {
+        "range": "Block 675",
+        "start_freq": "675",
+        "end_freq": "700",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block #1": {
+        "range": "Block #1",
+        "start_freq": "690",
+        "end_freq": "715",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 700": {
+        "range": "Block 700",
+        "start_freq": "700",
+        "end_freq": "725",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block #2": {
+        "range": "Block #2",
+        "start_freq": "715",
+        "end_freq": "740",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 725": {
+        "range": "Block 725",
+        "start_freq": "725",
+        "end_freq": "750",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block #3": {
+        "range": "Block #3",
+        "start_freq": "730",
+        "end_freq": "765",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 800": {
+        "range": "Block 800",
+        "start_freq": "800",
+        "end_freq": "825",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 825": {
+        "range": "Block 825",
+        "start_freq": "825",
+        "end_freq": "850",
+        "num_presets": "251",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "QT5000": {
+      "Block 600": {
+        "range": "Block 600",
+        "start_freq": "600",
+        "end_freq": "624.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 625": {
+        "range": "Block 625",
+        "start_freq": "625",
+        "end_freq": "649.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 650": {
+        "range": "Block 650",
+        "start_freq": "650",
+        "end_freq": "674.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 675": {
+        "range": "Block 675",
+        "start_freq": "675",
+        "end_freq": "699.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 700": {
+        "range": "Block 700",
+        "start_freq": "700",
+        "end_freq": "724.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 725": {
+        "range": "Block 725",
+        "start_freq": "725",
+        "end_freq": "749.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 750": {
+        "range": "Block 750",
+        "start_freq": "750",
+        "end_freq": "774.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 775": {
+        "range": "Block 775",
+        "start_freq": "775",
+        "end_freq": "799.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 800": {
+        "range": "Block 800",
+        "start_freq": "800",
+        "end_freq": "824.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 825": {
+        "range": "Block 825",
+        "start_freq": "825",
+        "end_freq": "849.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 850": {
+        "range": "Block 850",
+        "start_freq": "850",
+        "end_freq": "874.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 875": {
+        "range": "Block 875",
+        "start_freq": "875",
+        "end_freq": "899.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 900": {
+        "range": "Block 900",
+        "start_freq": "900",
+        "end_freq": "924.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Block 925": {
+        "range": "Block 925",
+        "start_freq": "925",
+        "end_freq": "949.975",
+        "num_presets": "1000",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "RADcom": {
+    "G1": {
+      "VHF": {
+        "range": "VHF",
+        "start_freq": "174",
+        "end_freq": "216",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "VHF",
+        "bandwidth": "0.1249",
+        "imd_3": "0.0079",
+        "imd_3_tx_3rd": "0.0079",
+        "imd_5": "0.0049"
+      },
+      "UHF": {
+        "range": "UHF",
+        "start_freq": "470",
+        "end_freq": "698",
+        "num_presets": "9121",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.1249",
+        "imd_3": "0.0079",
+        "imd_3_tx_3rd": "0.0079",
+        "imd_5": "0.0049"
+      }
+    }
+  },
+  "Sennheiser": {
+    "506-530 A": {
+      "506-530 A": {
+        "range": "506-530 A",
+        "start_freq": "506.2",
+        "end_freq": "529.875",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "560-584 A": {
+      "560-584 A": {
+        "range": "560-584 A",
+        "start_freq": "560",
+        "end_freq": "584",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "572-596 A": {
+      "572-596 A": {
+        "range": "572-596 A",
+        "start_freq": "572.2",
+        "end_freq": "595.875",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "584-608 A": {
+      "584-608 A": {
+        "range": "584-608 A",
+        "start_freq": "584.2",
+        "end_freq": "607.875",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "638-662 A": {
+      "638-662 A": {
+        "range": "638-662 A",
+        "start_freq": "638",
+        "end_freq": "662",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "722-746 A": {
+      "722-746 A": {
+        "range": "722-746 A",
+        "start_freq": "722",
+        "end_freq": "746",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "2000": {
+      "A": {
+        "range": "A",
+        "start_freq": "516",
+        "end_freq": "558",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G": {
+        "range": "G",
+        "start_freq": "558",
+        "end_freq": "626",
+        "num_presets": "2721",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "626",
+        "end_freq": "698",
+        "num_presets": "2881",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "718",
+        "end_freq": "790",
+        "num_presets": "2881",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "JA": {
+        "range": "JA",
+        "start_freq": "779",
+        "end_freq": "810",
+        "num_presets": "1241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "790",
+        "end_freq": "865",
+        "num_presets": "3001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "EK3253": {
+      "556-592": {
+        "range": "556-592",
+        "start_freq": "556",
+        "end_freq": "592",
+        "num_presets": "7201",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "576-611": {
+        "range": "576-611",
+        "start_freq": "576",
+        "end_freq": "611",
+        "num_presets": "7001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "EM3732": {
+      "A": {
+        "range": "A",
+        "start_freq": "470",
+        "end_freq": "560",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "518",
+        "end_freq": "608",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "614",
+        "end_freq": "704",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "678",
+        "end_freq": "768",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "F": {
+        "range": "F",
+        "start_freq": "708",
+        "end_freq": "798",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G": {
+        "range": "G",
+        "start_freq": "776",
+        "end_freq": "866",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "H": {
+        "range": "H",
+        "start_freq": "814",
+        "end_freq": "904",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "I": {
+        "range": "I",
+        "start_freq": "870",
+        "end_freq": "960",
+        "num_presets": "18001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "EM3732-II": {
+      "L": {
+        "range": "L",
+        "start_freq": "470",
+        "end_freq": "638",
+        "num_presets": "33601",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "N": {
+        "range": "N",
+        "start_freq": "614",
+        "end_freq": "698",
+        "num_presets": "16801",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "P": {
+        "range": "P",
+        "start_freq": "776",
+        "end_freq": "960",
+        "num_presets": "36801",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G1": {
+      "A": {
+        "range": "A",
+        "start_freq": "518",
+        "end_freq": "550",
+        "num_presets": "1281",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "630",
+        "end_freq": "662",
+        "num_presets": "1281",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "740",
+        "end_freq": "772",
+        "num_presets": "1281",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G2": {
+      "A": {
+        "range": "A",
+        "start_freq": "518",
+        "end_freq": "554",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "626",
+        "end_freq": "662",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "740",
+        "end_freq": "776",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "786",
+        "end_freq": "822",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "830",
+        "end_freq": "866",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G2 IEM": {
+      "G": {
+        "range": "G",
+        "start_freq": "572",
+        "end_freq": "608",
+        "num_presets": "1441",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G3": {
+      "A1": {
+        "range": "A1",
+        "start_freq": "470.1",
+        "end_freq": "558",
+        "num_presets": "3517",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A": {
+        "range": "A",
+        "start_freq": "516",
+        "end_freq": "558",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G": {
+        "range": "G",
+        "start_freq": "566",
+        "end_freq": "608",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "626",
+        "end_freq": "668",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C": {
+        "range": "C",
+        "start_freq": "734",
+        "end_freq": "776",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J": {
+        "range": "J",
+        "start_freq": "779",
+        "end_freq": "810",
+        "num_presets": "1241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "D": {
+        "range": "D",
+        "start_freq": "780",
+        "end_freq": "822",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E": {
+        "range": "E",
+        "start_freq": "823",
+        "end_freq": "865",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G4": {
+      "Aw+": {
+        "range": "Aw+",
+        "start_freq": "470.1",
+        "end_freq": "558",
+        "num_presets": "3517",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Gw": {
+        "range": "Gw",
+        "start_freq": "558",
+        "end_freq": "626",
+        "num_presets": "2721",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Gw1": {
+        "range": "Gw1",
+        "start_freq": "558",
+        "end_freq": "607.9",
+        "num_presets": "1997",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Bw": {
+        "range": "Bw",
+        "start_freq": "626",
+        "end_freq": "698",
+        "num_presets": "2881",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Evol G4 IEM": {
+      "A1": {
+        "range": "A1",
+        "start_freq": "470.1",
+        "end_freq": "516",
+        "num_presets": "1837",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A": {
+        "range": "A",
+        "start_freq": "516",
+        "end_freq": "558",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G": {
+        "range": "G",
+        "start_freq": "566",
+        "end_freq": "608",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B": {
+        "range": "B",
+        "start_freq": "626",
+        "end_freq": "668",
+        "num_presets": "1681",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Shure": {
+    "AD": {
+      "G57 US": {
+        "range": "G57 US",
+        "start_freq": "470.125",
+        "end_freq": "615.875",
+        "num_presets": "5582",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.299",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "X55": {
+        "range": "X55",
+        "start_freq": "941.625",
+        "end_freq": "959.725",
+        "num_presets": "665",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.299",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      }
+    },
+    "PGX": {
+      "H6": {
+        "range": "H6",
+        "start_freq": "524.125",
+        "end_freq": "541.875",
+        "num_presets": "86",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J6": {
+        "range": "J6",
+        "start_freq": "572.125",
+        "end_freq": "589.875",
+        "num_presets": "86",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "L5": {
+        "range": "L5",
+        "start_freq": "644.125",
+        "end_freq": "661.875",
+        "num_presets": "86",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PGXD": {
+      "X8": {
+        "range": "X8",
+        "start_freq": "902.75",
+        "end_freq": "927.75",
+        "num_presets": "60",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-1000": {
+      "G10": {
+        "range": "G10",
+        "start_freq": "470.125",
+        "end_freq": "541.875",
+        "num_presets": "2871",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "H8Z": {
+        "range": "H8Z",
+        "start_freq": "518.125",
+        "end_freq": "541.875",
+        "num_presets": "951",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "J8": {
+        "range": "J8",
+        "start_freq": "554.125",
+        "end_freq": "625.875",
+        "num_presets": "2622",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "J8E": {
+        "range": "J8E",
+        "start_freq": "554.125",
+        "end_freq": "625.875",
+        "num_presets": "2871",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "K10E": {
+        "range": "K10E",
+        "start_freq": "596.125",
+        "end_freq": "667.875",
+        "num_presets": "2871",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "L8": {
+        "range": "L8",
+        "start_freq": "626.125",
+        "end_freq": "697.875",
+        "num_presets": "2871",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "X2": {
+        "range": "X2",
+        "start_freq": "925.125",
+        "end_freq": "931.875",
+        "num_presets": "271",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "X1": {
+        "range": "X1",
+        "start_freq": "944.125",
+        "end_freq": "951.875",
+        "num_presets": "311",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      }
+    },
+    "PSM-200": {
+      "500 MHz": {
+        "range": "500 MHz",
+        "start_freq": "518.75",
+        "end_freq": "553.25",
+        "num_presets": "8",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-300": {
+      "G20": {
+        "range": "G20",
+        "start_freq": "488.15",
+        "end_freq": "511.85",
+        "num_presets": "123",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J13": {
+        "range": "J13",
+        "start_freq": "566.175",
+        "end_freq": "589.85",
+        "num_presets": "123",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "K12": {
+        "range": "K12",
+        "start_freq": "614.15",
+        "end_freq": "637.85",
+        "num_presets": "114",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-400": {
+      "HF": {
+        "range": "HF",
+        "start_freq": "722.325",
+        "end_freq": "745.675",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "X1": {
+        "range": "X1",
+        "start_freq": "944.2",
+        "end_freq": "951.875",
+        "num_presets": "16",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-600": {
+      "HA-HE": {
+        "range": "HA-HE",
+        "start_freq": "626.475",
+        "end_freq": "656.5",
+        "num_presets": "10",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-700": {
+      "500 MHz (H3)": {
+        "range": "500 MHz (H3)",
+        "start_freq": "524.2",
+        "end_freq": "553.8",
+        "num_presets": "32",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "600 MHz (L2)": {
+        "range": "600 MHz (L2)",
+        "start_freq": "632.2",
+        "end_freq": "661.8",
+        "num_presets": "32",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "700 MHz (HF)": {
+        "range": "700 MHz (HF)",
+        "start_freq": "722",
+        "end_freq": "746",
+        "num_presets": "32",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "800 MHz (MN)": {
+        "range": "800 MHz (MN)",
+        "start_freq": "800.375",
+        "end_freq": "829.7",
+        "num_presets": "32",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.399",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "PSM-900": {
+      "G6": {
+        "range": "G6",
+        "start_freq": "470.125",
+        "end_freq": "505.875",
+        "num_presets": "1431",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "G7": {
+        "range": "G7",
+        "start_freq": "506.125",
+        "end_freq": "541.875",
+        "num_presets": "1431",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "K1": {
+        "range": "K1",
+        "start_freq": "596.125",
+        "end_freq": "631.875",
+        "num_presets": "1431",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "L6": {
+        "range": "L6",
+        "start_freq": "656.125",
+        "end_freq": "691.875",
+        "num_presets": "1431",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "X2": {
+        "range": "X2",
+        "start_freq": "925.125",
+        "end_freq": "931.875",
+        "num_presets": "271",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "X1": {
+        "range": "X1",
+        "start_freq": "944.125",
+        "end_freq": "951.875",
+        "num_presets": "311",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.374",
+        "imd_3": "0.149",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      }
+    },
+    "SLX": {
+      "G4 Groups": {
+        "range": "G4 Groups",
+        "start_freq": "470.125",
+        "end_freq": "493.825",
+        "num_presets": "69",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G5 Groups": {
+        "range": "G5 Groups",
+        "start_freq": "494.125",
+        "end_freq": "517.75",
+        "num_presets": "69",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "H5 Groups": {
+        "range": "H5 Groups",
+        "start_freq": "518.2",
+        "end_freq": "541.8",
+        "num_presets": "72",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J3 Groups": {
+        "range": "J3 Groups",
+        "start_freq": "572.2",
+        "end_freq": "595.8",
+        "num_presets": "72",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "L4 Groups": {
+        "range": "L4 Groups",
+        "start_freq": "638.2",
+        "end_freq": "661.8",
+        "num_presets": "72",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "P4 Groups": {
+        "range": "P4 Groups",
+        "start_freq": "702.1",
+        "end_freq": "725.8",
+        "num_presets": "123",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "R5 All": {
+        "range": "R5 All",
+        "start_freq": "800.1",
+        "end_freq": "819.9",
+        "num_presets": "793",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "R5 Groups": {
+        "range": "R5 Groups",
+        "start_freq": "800.1",
+        "end_freq": "819.9",
+        "num_presets": "107",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "UC": {
+      "UB": {
+        "range": "UB",
+        "start_freq": "692.125",
+        "end_freq": "715.875",
+        "num_presets": "112",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "UA": {
+        "range": "UA",
+        "start_freq": "782.125",
+        "end_freq": "805.875",
+        "num_presets": "111",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "UHF": {
+      "J4": {
+        "range": "J4",
+        "start_freq": "554",
+        "end_freq": "584",
+        "num_presets": "1201",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "M4": {
+        "range": "M4",
+        "start_freq": "662",
+        "end_freq": "692",
+        "num_presets": "1201",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "UB": {
+        "range": "UB",
+        "start_freq": "692.125",
+        "end_freq": "716",
+        "num_presets": "192",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "UA": {
+        "range": "UA",
+        "start_freq": "782.125",
+        "end_freq": "805.875",
+        "num_presets": "191",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "UHF-R": {
+      "G1": {
+        "range": "G1",
+        "start_freq": "470.125",
+        "end_freq": "529.875",
+        "num_presets": "2391",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "H4": {
+        "range": "H4",
+        "start_freq": "518",
+        "end_freq": "578",
+        "num_presets": "2401",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J5": {
+        "range": "J5",
+        "start_freq": "578",
+        "end_freq": "638",
+        "num_presets": "2152",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "K4E": {
+        "range": "K4E",
+        "start_freq": "606.125",
+        "end_freq": "665.875",
+        "num_presets": "2391",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "L3": {
+        "range": "L3",
+        "start_freq": "638",
+        "end_freq": "697.875",
+        "num_presets": "2396",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Q5": {
+        "range": "Q5",
+        "start_freq": "740",
+        "end_freq": "814",
+        "num_presets": "2961",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "Q9": {
+        "range": "Q9",
+        "start_freq": "740",
+        "end_freq": "806",
+        "num_presets": "2641",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A24": {
+        "range": "A24",
+        "start_freq": "779.125",
+        "end_freq": "805.875",
+        "num_presets": "1071",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "MA": {
+        "range": "MA",
+        "start_freq": "782",
+        "end_freq": "810",
+        "num_presets": "1121",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "R9": {
+        "range": "R9",
+        "start_freq": "790",
+        "end_freq": "865",
+        "num_presets": "3001",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "X1": {
+        "range": "X1",
+        "start_freq": "944",
+        "end_freq": "952",
+        "num_presets": "321",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "ULX": {
+      "G3 Groups": {
+        "range": "G3 Groups",
+        "start_freq": "470.15",
+        "end_freq": "505.875",
+        "num_presets": "218",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "J1 Groups": {
+        "range": "J1 Groups",
+        "start_freq": "554.025",
+        "end_freq": "589.975",
+        "num_presets": "191",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "M1 Groups": {
+        "range": "M1 Groups",
+        "start_freq": "662.025",
+        "end_freq": "697.975",
+        "num_presets": "196",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "ULXD4": {
+      "V50": {
+        "range": "V50",
+        "start_freq": "174.125",
+        "end_freq": "215.825",
+        "num_presets": "1669",
+        "prebuilt": "true",
+        "vhf_uhf": "VHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "G50": {
+        "range": "G50",
+        "start_freq": "470.125",
+        "end_freq": "534",
+        "num_presets": "2556",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "H50": {
+        "range": "H50",
+        "start_freq": "534.125",
+        "end_freq": "597.875",
+        "num_presets": "2551",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "J50": {
+        "range": "J50",
+        "start_freq": "572",
+        "end_freq": "636",
+        "num_presets": "2312",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "L50": {
+        "range": "L50",
+        "start_freq": "632",
+        "end_freq": "696",
+        "num_presets": "2561",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "X52": {
+        "range": "X52",
+        "start_freq": "902.45",
+        "end_freq": "927.55",
+        "num_presets": "1005",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "X50": {
+        "range": "X50",
+        "start_freq": "925.125",
+        "end_freq": "931.875",
+        "num_presets": "271",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.325",
+        "imd_3": "0.074",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      }
+    }
+  },
+  "Sony": {
+    "WR": {
+      "68/69": {
+        "range": "68/69",
+        "start_freq": "794.125",
+        "end_freq": "805.875",
+        "num_presets": "94",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Telex": {
+    "BTR-800": {
+      "88 RX": {
+        "range": "88 RX",
+        "start_freq": "470.1",
+        "end_freq": "487.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "F TX": {
+        "range": "F TX",
+        "start_freq": "482.1",
+        "end_freq": "499.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "H TX": {
+        "range": "H TX",
+        "start_freq": "500.1",
+        "end_freq": "517.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "A TX": {
+        "range": "A TX",
+        "start_freq": "518.1",
+        "end_freq": "535.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "B TX": {
+        "range": "B TX",
+        "start_freq": "536.1",
+        "end_freq": "553.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "C TX": {
+        "range": "C TX",
+        "start_freq": "554.1",
+        "end_freq": "571.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "E TX": {
+        "range": "E TX",
+        "start_freq": "590.1",
+        "end_freq": "607.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "1 RX": {
+        "range": "1 RX",
+        "start_freq": "614.1",
+        "end_freq": "631.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "2 RX": {
+        "range": "2 RX",
+        "start_freq": "632.1",
+        "end_freq": "649.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "3 RX": {
+        "range": "3 RX",
+        "start_freq": "650.1",
+        "end_freq": "667.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "4 RX": {
+        "range": "4 RX",
+        "start_freq": "668.1",
+        "end_freq": "685.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "6 RX": {
+        "range": "6 RX",
+        "start_freq": "704.1",
+        "end_freq": "721.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "G TX": {
+        "range": "G TX",
+        "start_freq": "796.1",
+        "end_freq": "813.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      },
+      "9 RX": {
+        "range": "9 RX",
+        "start_freq": "844.1",
+        "end_freq": "861.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "BTR-80n": {
+      "F TX": {
+        "range": "F TX",
+        "start_freq": "482.1",
+        "end_freq": "499.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "H TX": {
+        "range": "H TX",
+        "start_freq": "500.1",
+        "end_freq": "519.9",
+        "num_presets": "793",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "A TX": {
+        "range": "A TX",
+        "start_freq": "518.1",
+        "end_freq": "535.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "B TX": {
+        "range": "B TX",
+        "start_freq": "536.1",
+        "end_freq": "553.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "C TX": {
+        "range": "C TX",
+        "start_freq": "554.1",
+        "end_freq": "571.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "D TX": {
+        "range": "D TX",
+        "start_freq": "572.1",
+        "end_freq": "589.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "E TX": {
+        "range": "E TX",
+        "start_freq": "590.1",
+        "end_freq": "607.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "1 RX": {
+        "range": "1 RX",
+        "start_freq": "614.1",
+        "end_freq": "631.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "2 RX": {
+        "range": "2 RX",
+        "start_freq": "632.1",
+        "end_freq": "649.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "3 RX": {
+        "range": "3 RX",
+        "start_freq": "650.1",
+        "end_freq": "667.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "4 RX": {
+        "range": "4 RX",
+        "start_freq": "668.1",
+        "end_freq": "685.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "5 RX": {
+        "range": "5 RX",
+        "start_freq": "686.1",
+        "end_freq": "703.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      },
+      "6 RX": {
+        "range": "6 RX",
+        "start_freq": "704.1",
+        "end_freq": "721.9",
+        "num_presets": "713",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.099",
+        "imd_3": "0.0749",
+        "imd_3_tx_3rd": "0.049",
+        "imd_5": "0.049"
+      }
+    }
+  },
+  "Wisycom": {
+    "Band 1": {
+      "470-640": {
+        "range": "470-640",
+        "start_freq": "470",
+        "end_freq": "640",
+        "num_presets": "6801",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Band 2": {
+      "566-798": {
+        "range": "566-798",
+        "start_freq": "566",
+        "end_freq": "798",
+        "num_presets": "9281",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    },
+    "Band 3": {
+      "510-698": {
+        "range": "510-698",
+        "start_freq": "510",
+        "end_freq": "698",
+        "num_presets": "7521",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "Default",
+        "imd_3": "Default",
+        "imd_3_tx_3rd": "Default",
+        "imd_5": "Default"
+      }
+    }
+  },
+  "Zaxcom": {
+    "Standard": {
+      "Block 20": {
+        "range": "Block 20",
+        "start_freq": "518",
+        "end_freq": "542",
+        "num_presets": "241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 21": {
+        "range": "Block 21",
+        "start_freq": "536",
+        "end_freq": "572",
+        "num_presets": "361",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 22": {
+        "range": "Block 22",
+        "start_freq": "560",
+        "end_freq": "590",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 23": {
+        "range": "Block 23",
+        "start_freq": "590",
+        "end_freq": "614",
+        "num_presets": "241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 24": {
+        "range": "Block 24",
+        "start_freq": "614",
+        "end_freq": "644",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 25": {
+        "range": "Block 25",
+        "start_freq": "638",
+        "end_freq": "668",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 26": {
+        "range": "Block 26",
+        "start_freq": "662",
+        "end_freq": "692",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 27": {
+        "range": "Block 27",
+        "start_freq": "686",
+        "end_freq": "722",
+        "num_presets": "361",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 28": {
+        "range": "Block 28",
+        "start_freq": "722",
+        "end_freq": "746",
+        "num_presets": "241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 29": {
+        "range": "Block 29",
+        "start_freq": "740",
+        "end_freq": "770",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 30": {
+        "range": "Block 30",
+        "start_freq": "764",
+        "end_freq": "794",
+        "num_presets": "301",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 31": {
+        "range": "Block 31",
+        "start_freq": "794",
+        "end_freq": "818",
+        "num_presets": "241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 32": {
+        "range": "Block 32",
+        "start_freq": "818",
+        "end_freq": "842",
+        "num_presets": "241",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block 33": {
+        "range": "Block 33",
+        "start_freq": "860",
+        "end_freq": "872",
+        "num_presets": "121",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      }
+    },
+    "TRX Series": {
+      "Block .5": {
+        "range": "Block .5",
+        "start_freq": "512",
+        "end_freq": "614",
+        "num_presets": "1021",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "Block .6": {
+        "range": "Block .6",
+        "start_freq": "596",
+        "end_freq": "698",
+        "num_presets": "1021",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "0.499",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      },
+      "2.4 GHz": {
+        "range": "2.4 GHz",
+        "start_freq": "2403",
+        "end_freq": "2475",
+        "num_presets": "73",
+        "prebuilt": "true",
+        "vhf_uhf": "UHF",
+        "bandwidth": "1.999",
+        "imd_3": "Disabled",
+        "imd_3_tx_3rd": "Disabled",
+        "imd_5": "Disabled"
+      }
+    }
+  }
+}

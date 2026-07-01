@@ -1,0 +1,91 @@
+{
+  "Power_YAK_66104A_SOURce": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Source": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Configuration",
+          "Fr": "Configuration",
+          "De": "Konfiguration",
+          "Es": "Configuración"
+        },
+        "fields": {
+          "Set_Levels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "INST:NSEL 1;VOLT <volt>;CURR <curr>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "volt": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
+                    "label": {
+                      "En": "Voltage",
+                      "Fr": "Tension",
+                      "De": "Spannung",
+                      "Es": "Voltaje"
+                    }
+                  },
+                  "curr": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Current",
+                      "Fr": "Courant",
+                      "De": "Strom",
+                      "Es": "Corriente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

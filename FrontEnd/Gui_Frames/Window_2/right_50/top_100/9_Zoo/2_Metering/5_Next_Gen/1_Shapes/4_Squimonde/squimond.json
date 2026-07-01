@@ -1,0 +1,638 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Squimonde": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Squimonde_Variations": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Squimonde (Diamond Squircle) Variations",
+          "Fr": "Squimonde (Diamond Squircle) Variations",
+          "De": "Squimonde (Diamond Squircle) Variationen",
+          "Es": "Squimonde (Diamond Squircle) Variaciones"
+        },
+        "layout_columns": 2,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Squimonde_1": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Ruby Diamond",
+              "Fr": "Ruby Diamond",
+              "De": "Ruby Diamond",
+              "Es": "Ruby Diamond"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFF",
+                "bezel": "red"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SQUIMONDE ELITE",
+                    "Fr": "SQUIMONDE ELITE",
+                    "De": "SQUIMONDE ELITE",
+                    "Es": "SQUIMONDE ELITE"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "white"
+                },
+                {
+                  "text": {
+                    "En": "RUBY-CORE",
+                    "Fr": "RUBY-CORE",
+                    "De": "RUBY-CORE",
+                    "Es": "RUBY-CORE"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "red"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -40,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#ffffff",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Squimonde_2": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Amber Gold",
+              "Fr": "Amber Gold",
+              "De": "Amber Gold",
+              "Es": "Amber Gold"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "gold",
+                "bezel": "gold"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 8,
+                "overlay_style": "aperture_mask",
+                "enable_lighting": true
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "PRESTIGE DIAMOND",
+                    "Fr": "PRESTIGE DIAMOND",
+                    "De": "PRESTIGE DIAMOND",
+                    "Es": "PRESTIGE DIAMOND"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "gold"
+                },
+                {
+                  "text": {
+                    "En": "24K GOLD EDITION",
+                    "Fr": "24K GOLD EDITION",
+                    "De": "24K GOLD EDITION",
+                    "Es": "24K GOLD EDITION"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "gold"
+                }
+              ]
+            }
+          },
+          "Squimonde_3": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Cyber Cyan",
+              "Fr": "Cyber Cyan",
+              "De": "Cyber Cyan",
+              "Es": "Cyber Cyan"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00E5FF",
+                "bezel": "#00E5FF"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 4,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "line"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "CYBER-D METER",
+                    "Fr": "CYBER-D METER",
+                    "De": "CYBER-D METER",
+                    "Es": "CYBER-D METER"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "font": "Courier New",
+                  "color": "#00E5FF"
+                },
+                {
+                  "text": {
+                    "En": "LINK ESTABLISHED",
+                    "Fr": "LINK ESTABLISHED",
+                    "De": "LINK ESTABLISHED",
+                    "Es": "LINK ESTABLISHED"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "font": "Courier New",
+                  "color": "#00E5FF"
+                }
+              ]
+            }
+          },
+          "Squimonde_4": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Vintage Cream",
+              "Fr": "Vintage Cream",
+              "De": "Vintage Cream",
+              "Es": "Vintage Cream"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#5D4037",
+                "bezel": "#8B4513"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 10,
+                "overlay_style": "aperture_mask",
+                "damping": 0.8
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "ANALOG PRECISION",
+                    "Fr": "ANALOG PRECISION",
+                    "De": "ANALOG PRECISION",
+                    "Es": "ANALOG PRECISION"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "font": "Times New Roman",
+                  "color": "#8B4513"
+                },
+                {
+                  "text": {
+                    "En": "ESTABLISHED 1965",
+                    "Fr": "ESTABLISHED 1965",
+                    "De": "ESTABLISHED 1965",
+                    "Es": "ESTABLISHED 1965"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "font": "Times New Roman",
+                  "color": "#8B4513"
+                }
+              ]
+            }
+          },
+          "Squimonde_5": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Midnight Blue",
+              "Fr": "Midnight Blue",
+              "De": "Midnight Blue",
+              "Es": "Midnight Blue"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ADD8E6",
+                "bezel": "silver"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "DEEP-VU MONITOR",
+                    "Fr": "DEEP-VU MONITOR",
+                    "De": "DEEP-VU MONITOR",
+                    "Es": "DEEP-VU MONITOR"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#ADD8E6"
+                },
+                {
+                  "text": {
+                    "En": "SAPPHIRE GLASS",
+                    "Fr": "SAPPHIRE GLASS",
+                    "De": "SAPPHIRE GLASS",
+                    "Es": "SAPPHIRE GLASS"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "#ADD8E6"
+                }
+              ]
+            }
+          },
+          "Squimonde_6": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Emerald City",
+              "Fr": "Emerald City",
+              "De": "Emerald City",
+              "Es": "Emerald City"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#0F0",
+                "bezel": "#0F0"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 5,
+                "overlay_style": "aperture_mask",
+                "enable_lighting": true
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "EMERALD INSTRUMENTS",
+                    "Fr": "EMERALD INSTRUMENTS",
+                    "De": "EMERALD INSTRUMENTS",
+                    "Es": "EMERALD INSTRUMENTS"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#0F0"
+                },
+                {
+                  "text": {
+                    "En": "GREENHOUSE SYSTEM",
+                    "Fr": "GREENHOUSE SYSTEM",
+                    "De": "GREENHOUSE SYSTEM",
+                    "Es": "GREENHOUSE SYSTEM"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "#0F0"
+                }
+              ]
+            }
+          },
+          "Squimonde_7": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Ghost Protocol",
+              "Fr": "Ghost Protocol",
+              "De": "Ghost Protocol",
+              "Es": "Ghost Protocol"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#888",
+                "bezel": "#333"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 12,
+                "overlay_style": "aperture_mask",
+                "damping": 0.99
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "STEALTH MONITOR",
+                    "Fr": "STEALTH MONITOR",
+                    "De": "STEALTH MONITOR",
+                    "Es": "STEALTH MONITOR"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 12,
+                  "weight": "bold",
+                  "color": "#888"
+                },
+                {
+                  "text": {
+                    "En": "PROTOTYPE-X",
+                    "Fr": "PROTOTYPE-X",
+                    "De": "PROTOTYPE-X",
+                    "Es": "PROTOTYPE-X"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "#888"
+                }
+              ]
+            }
+          },
+          "Squimonde_8": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Fireball",
+              "Fr": "Fireball",
+              "De": "Fireball",
+              "Es": "Fireball"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "yellow",
+                "bezel": "white"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 8,
+                "overlay_style": "aperture_mask",
+                "damping": 0.1
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "THERMAL PEAK",
+                    "Fr": "THERMAL PEAK",
+                    "De": "THERMAL PEAK",
+                    "Es": "THERMAL PEAK"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 18,
+                  "weight": "bold",
+                  "color": "white"
+                },
+                {
+                  "text": {
+                    "En": "CRITICAL LEVEL",
+                    "Fr": "CRITICAL LEVEL",
+                    "De": "CRITICAL LEVEL",
+                    "Es": "CRITICAL LEVEL"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "white"
+                }
+              ]
+            }
+          },
+          "Squimonde_9": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Royal Diamond",
+              "Fr": "Royal Diamond",
+              "De": "Royal Diamond",
+              "Es": "Royal Diamond"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "gold",
+                "bezel": "gold"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 10,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "ROYAL VU",
+                    "Fr": "ROYAL VU",
+                    "De": "ROYAL VU",
+                    "Es": "ROYAL VU"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 18,
+                  "font": "Times New Roman",
+                  "weight": "bold",
+                  "color": "gold"
+                },
+                {
+                  "text": {
+                    "En": "REGAL AUDIO",
+                    "Fr": "REGAL AUDIO",
+                    "De": "REGAL AUDIO",
+                    "Es": "REGAL AUDIO"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "gold"
+                }
+              ]
+            }
+          },
+          "Squimonde_10": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Slate Precision",
+              "Fr": "Slate Precision",
+              "De": "Slate Precision",
+              "Es": "Slate Precision"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -12.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFF",
+                "bezel": "#2F4F4F"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 4,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SLATE-SYSTEM",
+                    "Fr": "SLATE-SYSTEM",
+                    "De": "SLATE-SYSTEM",
+                    "Es": "SLATE-SYSTEM"
+                  },
+                  "x": 0,
+                  "y": -140,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "white"
+                },
+                {
+                  "text": {
+                    "En": "DURABLE SERIES",
+                    "Fr": "DURABLE SERIES",
+                    "De": "DURABLE SERIES",
+                    "Es": "DURABLE SERIES"
+                  },
+                  "x": 0,
+                  "y": 30,
+                  "size": 10,
+                  "color": "white"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "Distortion_YAK_Porta_one_System": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Système Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
+        "fields": {
+          "Output_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Master Generator Output",
+              "Fr": "Master Générateur Sortie",
+              "De": "Master Generator Ausgang",
+              "Es": "Master Generador Salida"
+            },
+            "fields": {
+              "Do_Output_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OUTPUT ON",
+                      "Fr": "OUTPUT ON",
+                      "De": "OUTPUT ON",
+                      "Es": "OUTPUT ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":OUTPut ON"
+                }
+              },
+              "Do_Output_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OUTPUT OFF",
+                      "Fr": "OUTPUT OFF",
+                      "De": "OUTPUT OFF",
+                      "Es": "OUTPUT OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":OUTPut OFF"
+                }
+              }
+            }
+          },
+          "System_Utilities": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Global Utilities",
+              "Fr": "Global Utilities",
+              "De": "Global Utilities",
+              "Es": "Global Utilities"
+            },
+            "fields": {
+              "Do_Reset": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RESET (*RST)",
+                      "Fr": "RESET (*RST)",
+                      "De": "RESET (*RST)",
+                      "Es": "RESET (*RST)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              },
+              "Do_Clear_Status": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CLS (*CLS)",
+                      "Fr": "CLS (*CLS)",
+                      "De": "CLS (*CLS)",
+                      "Es": "CLS (*CLS)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": "*CLS"
+                }
+              },
+              "Do_Display_Panel": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Display Panel",
+                      "Fr": "Affichage Panel",
+                      "De": "Anzeige Panel",
+                      "Es": "Pantalla Panel"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":DISPlay PANel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

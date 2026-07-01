@@ -1,0 +1,25 @@
+{
+  "Migrated_CommandRouter": {
+    "type": "OcaBin",
+    "id": "migrated.command_router",
+    "geometry": { "anchor": "NSEW" },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": { "En": "CommandRouter" },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "component": {
+            "type": "_CommandRouter",
+            "layout": { "width": 400, "height": 300 }
+          }
+        }
+      }
+    }
+  }
+}

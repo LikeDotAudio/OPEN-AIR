@@ -1,0 +1,438 @@
+{
+  "Zoo_Faders_Vertical_Even_More_Faders": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Fader_Zoo_Advanced": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Advanced Custom Fader Features",
+          "Fr": "Avancé Personnalisé Fader Caractéristiques",
+          "De": "Erweitert Benutzerdefiniert Fader Funktionen",
+          "Es": "Avanzado Personalizado Fader Características"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "cf_adv1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dual Labels",
+              "Fr": "Dual Labels",
+              "De": "Dual Labels",
+              "Es": "Dual Labels"
+            },
+            "notes": "Red Cap, Labels Both Sides",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 20.0,
+                "max": 20000.0
+              }
+            },
+            "cap_color": "#FF0000",
+            "tick_color": "#33A1FD",
+            "tick_text_color": "#FFFFFF",
+            "tick_label_position": "both",
+            "show_units": true,
+            "unit_text": "Hz"
+          },
+          "cf_adv2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Solid Green",
+              "Fr": "Solid Green",
+              "De": "Solid Green",
+              "Es": "Solid Green"
+            },
+            "notes": "Green Cap, Blue Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 10.0
+              }
+            },
+            "cap_color": "#00FF00",
+            "tick_color": "#448AFF",
+            "tick_text_color": "#FFEB3B",
+            "tick_thickness": 2
+          },
+          "cf_adv3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Solid Blue",
+              "Fr": "Solid Blue",
+              "De": "Solid Blue",
+              "Es": "Solid Blue"
+            },
+            "notes": "Blue Cap, Yellow Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#0000FF",
+            "tick_color": "#FFFF00",
+            "tick_text_color": "#00E676",
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "cf_adv4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Orange Punch",
+              "Fr": "Orange Punch",
+              "De": "Orange Punch",
+              "Es": "Orange Punch"
+            },
+            "notes": "Orange Cap, White Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#FF9800",
+            "cap_highlight_color": "#FFFFFF",
+            "tick_color": "#FFFFFF",
+            "tick_text_color": "#FF5722",
+            "show_units": true,
+            "unit_text": "C"
+          },
+          "cf_adv5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Purple Haze",
+              "Fr": "Purple Haze",
+              "De": "Purple Haze",
+              "Es": "Purple Haze"
+            },
+            "notes": "Purple Cap, Cyan Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#9C27B0",
+            "tick_color": "#00FFFF",
+            "tick_text_color": "#E1BEE7",
+            "show_units": true,
+            "unit_text": "PSI"
+          },
+          "cf_adv6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Yellow Mellow",
+              "Fr": "Yellow Mellow",
+              "De": "Yellow Mellow",
+              "Es": "Yellow Mellow"
+            },
+            "notes": "Yellow Cap, Pink Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 200.0
+              }
+            },
+            "cap_color": "#FFEB3B",
+            "tick_color": "#E91E63",
+            "tick_text_color": "#000000",
+            "show_units": true,
+            "unit_text": "MPH"
+          },
+          "cf_adv7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Cyan Neon",
+              "Fr": "Cyan Neon",
+              "De": "Cyan Neon",
+              "Es": "Cyan Neon"
+            },
+            "notes": "Cyan Cap, Red Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 1000.0
+              }
+            },
+            "cap_color": "#00BCD4",
+            "tick_color": "#F44336",
+            "tick_text_color": "#000000",
+            "show_units": true,
+            "unit_text": "m"
+          },
+          "cf_adv8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "White Ghost",
+              "Fr": "White Ghost",
+              "De": "White Ghost",
+              "Es": "White Ghost"
+            },
+            "notes": "White Cap, Grey Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 60.0
+              }
+            },
+            "cap_color": "#FFFFFF",
+            "cap_highlight_color": "#000000",
+            "tick_color": "#757575",
+            "tick_text_color": "#FFFFFF",
+            "show_units": true,
+            "unit_text": "s"
+          }
+        }
+      },
+      "Fader_Zoo_Advanced_Features": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Showcasing Color Modularity",
+          "Fr": "Showcasing Color Modularity",
+          "De": "Showcasing Color Modularity",
+          "Es": "Showcasing Color Modularity"
+        },
+        "layout_columns": 6,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "cf_feat1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Ghost Track",
+              "Fr": "Ghost Track",
+              "De": "Ghost Track",
+              "Es": "Ghost Track"
+            },
+            "notes": "Ticks & Text Mismatch",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": -100.0,
+                "max": 12.0
+              }
+            },
+            "tick_color": "#222222",
+            "tick_text_color": "#00FF00",
+            "sub_tick_color": "#111111",
+            "sub_tick_text_color": "#004400",
+            "cap_color": "#111111"
+          },
+          "cf_feat2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Leftie",
+              "Fr": "Leftie",
+              "De": "Leftie",
+              "Es": "Leftie"
+            },
+            "notes": "Labels on Left",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": -60.0,
+                "max": 12.0
+              }
+            },
+            "tick_label_position": "left",
+            "cap_color": "#FF9900"
+          },
+          "cf_feat3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Gold Highlight",
+              "Fr": "Gold Highlight",
+              "De": "Gold Highlight",
+              "Es": "Gold Highlight"
+            },
+            "notes": "Black Cap, Gold Line",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#000000",
+            "cap_highlight_color": "#FFD700"
+          },
+          "cf_feat4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "No Float",
+              "Fr": "Non Float",
+              "De": "Nein Float",
+              "Es": "No Float"
+            },
+            "notes": "Movement display OFF",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "movement_value_display": false,
+            "cap_color": "#333333"
+          },
+          "cf_feat5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Small Scale",
+              "Fr": "Small Scale",
+              "De": "Small Scale",
+              "Es": "Small Scale"
+            },
+            "notes": "Mini Fader",
+            "geometry": {
+              "fader_cap_scale": 0.6,
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#E0E0E0"
+          },
+          "cf_feat6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Pink Neon",
+              "Fr": "Pink Neon",
+              "De": "Pink Neon",
+              "Es": "Pink Neon"
+            },
+            "notes": "High contrast",
+            "geometry": {
+              "width": 80,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": 15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cap_color": "#FF1493",
+            "tick_color": "#00FF00",
+            "tick_text_color": "#FF1493"
+          }
+        }
+      }
+    }
+  }
+}

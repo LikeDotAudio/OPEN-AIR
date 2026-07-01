@@ -1,0 +1,569 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Super_Gem": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Super_Gem_Variations": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Super Gem (Superman) Meter Variations",
+          "Fr": "Super Gem (Superman) Meter Variations",
+          "De": "Super Gem (Superman) Meter Variationen",
+          "Es": "Super Gem (Superman) Meter Variaciones"
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SuperGem_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 350
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "red",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 12,
+                "Pointer_Style": "spade",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -17,
+                "tick_radius_offset": -17,
+                "label_radius_offset": -54,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SUPER GEM INSTRUMENTS",
+                    "Fr": "SUPER GEM INSTRUMENTS",
+                    "De": "SUPER GEM INSTRUMENTS",
+                    "Es": "SUPER GEM INSTRUMENTS"
+                  },
+                  "x": 0,
+                  "y": -150,
+                  "size": 14,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -100,
+                  "size": 16,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "SuperGem_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Medium Blue",
+              "Fr": "Moyen Blue",
+              "De": "Mittel Blue",
+              "Es": "Medio Blue"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -12.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ffffff",
+                "bezel": "#33A1FD",
+                "scale_label": "#ffffff"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 10,
+                "Pointer_Style": "teardrop",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "S-GEM SERIES",
+                    "Fr": "S-GEM SERIES",
+                    "De": "S-GEM SERIES",
+                    "Es": "S-GEM SERIES"
+                  },
+                  "x": 0,
+                  "y": -130,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#33A1FD"
+                }
+              ]
+            }
+          },
+          "SuperGem_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Small Gold",
+              "Fr": "Small Gold",
+              "De": "Small Gold",
+              "Es": "Small Gold"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFD700",
+                "bezel": "#FFD700",
+                "scale_label": "#FFD700"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 4,
+                "Pointer_Style": "baton",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -6,
+                "tick_radius_offset": -6,
+                "label_radius_offset": -30,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "PRECISION GOLD",
+                    "Fr": "PRECISION GOLD",
+                    "De": "PRECISION GOLD",
+                    "Es": "PRECISION GOLD"
+                  },
+                  "x": 0,
+                  "y": -90,
+                  "size": 8,
+                  "weight": "bold"
+                }
+              ]
+            }
+          },
+          "SuperGem_4_Ruby": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Ruby Red",
+              "Fr": "Ruby Red",
+              "De": "Ruby Red",
+              "Es": "Ruby Red"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFCCCC",
+                "bezel": "#FF0000",
+                "scale_label": "#FFCCCC"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 10,
+                "enable_lighting": true,
+                "Pointer_Style": "spade",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "RUBY-CORE",
+                    "Fr": "RUBY-CORE",
+                    "De": "RUBY-CORE",
+                    "Es": "RUBY-CORE"
+                  },
+                  "x": 0,
+                  "y": -130,
+                  "size": 12,
+                  "color": "red"
+                }
+              ]
+            }
+          },
+          "SuperGem_5_Emerald": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Emerald Flat",
+              "Fr": "Emerald Flat",
+              "De": "Emerald Flat",
+              "Es": "Emerald Flat"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#003300",
+                "bezel": "#006600",
+                "scale_label": "#003300"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 10,
+                "Pointer_Style": "knife-edge",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "EMERALD VU",
+                    "Fr": "EMERALD VU",
+                    "De": "EMERALD VU",
+                    "Es": "EMERALD VU"
+                  },
+                  "x": 0,
+                  "y": -125,
+                  "size": 10,
+                  "font": "Arial"
+                }
+              ]
+            }
+          },
+          "SuperGem_6_Sapphire": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Sapphire Deep",
+              "Fr": "Sapphire Deep",
+              "De": "Sapphire Deep",
+              "Es": "Sapphire Deep"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#0000FF",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 12,
+                "enable_lighting": true,
+                "Pointer_Style": "taper",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SAPPHIRE PRO",
+                    "Fr": "SAPPHIRE PRO",
+                    "De": "SAPPHIRE PRO",
+                    "Es": "SAPPHIRE PRO"
+                  },
+                  "x": 0,
+                  "y": -135,
+                  "size": 12,
+                  "color": "#FFFFFF"
+                }
+              ]
+            }
+          },
+          "SuperGem_7_Onyx": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Onyx Stealth",
+              "Fr": "Onyx Stealth",
+              "De": "Onyx Stealth",
+              "Es": "Onyx Stealth"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#444444",
+                "bezel": "#222222",
+                "scale_label": "#444444"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 15,
+                "enable_lighting": true,
+                "Pointer_Style": "line",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "STEALTH-X",
+                    "Fr": "STEALTH-X",
+                    "De": "STEALTH-X",
+                    "Es": "STEALTH-X"
+                  },
+                  "x": 0,
+                  "y": -130,
+                  "size": 10,
+                  "color": "#444"
+                }
+              ]
+            }
+          },
+          "SuperGem_8_Pearl": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Pearl White",
+              "Fr": "Pearl White",
+              "De": "Pearl White",
+              "Es": "Pearl White"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#999999",
+                "bezel": "#DDDDDD",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 3,
+                "enable_lighting": true,
+                "Pointer_Style": "baton",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "PEARL EDITION",
+                    "Fr": "PEARL EDITION",
+                    "De": "PEARL EDITION",
+                    "Es": "PEARL EDITION"
+                  },
+                  "x": 0,
+                  "y": -125,
+                  "size": 12,
+                  "color": "#999"
+                }
+              ]
+            }
+          },
+          "SuperGem_9_Amethyst": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Amethyst",
+              "Fr": "Amethyst",
+              "De": "Amethyst",
+              "Es": "Amethyst"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#E6E6FA",
+                "bezel": "#9370DB",
+                "scale_label": "#E6E6FA"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 10,
+                "enable_lighting": true,
+                "Pointer_Style": "spade",
+                "overlay_style": "aperture_mask",
+                "arc_radius_offset": -11,
+                "tick_radius_offset": -11,
+                "label_radius_offset": -42,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "AMETHYST VU",
+                    "Fr": "AMETHYST VU",
+                    "De": "AMETHYST VU",
+                    "Es": "AMETHYST VU"
+                  },
+                  "x": 0,
+                  "y": -130,
+                  "size": 12,
+                  "color": "#E6E6FA"
+                }
+              ]
+            }
+          },
+          "SuperGem_10_Superman": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Superman",
+              "Fr": "The Superman",
+              "De": "The Superman",
+              "Es": "The Superman"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 350
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFD700",
+                "bezel": "#CC0000",
+                "scale_label": "#FFD700"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 12,
+                "Pointer_Style": "spade",
+                "overlay_style": "aperture_mask",
+                "sub_ticks": 4,
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": -19,
+                "tick_radius_offset": -19,
+                "label_radius_offset": -49,
+                "needle_length_factor": 0.9,
+                "Meter_viewable_angle": 110.0
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "METROPOLIS INSTRUMENTS",
+                    "Fr": "METROPOLIS INSTRUMENTS",
+                    "De": "METROPOLIS INSTRUMENTS",
+                    "Es": "METROPOLIS INSTRUMENTS"
+                  },
+                  "x": 0,
+                  "y": -160,
+                  "size": 16,
+                  "weight": "bold",
+                  "color": "red"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.3.1.20",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "Fr": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "De": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "Es": "Patina: 20 Master Studio | Base: #1e1e1e (flat)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#1e1e1e"
+      },
+      "studio_haze": {
+        "enabled": true,
+        "intensity": 0.1
+      },
+      "screws": {
+        "enabled": true
+      }
+    }
+  }
+}

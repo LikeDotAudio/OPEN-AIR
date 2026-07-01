@@ -1,0 +1,58 @@
+{
+  "Zoo_5_Indicators_header_status_light": {
+    "type": "OcaBin",
+    "id": "50.90.9.5.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Header Status Light",
+              "Fr": "Header Statut Light",
+              "De": "Header Status Light",
+              "Es": "Header Estado Light"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "header_status_light_example": {
+              "title": "Header Status Light Example",
+              "description": {
+                "En": "Example of the HeaderStatusLight element.",
+                "Fr": "Example of the HeaderStatusLight element.",
+                "De": "Example of the HeaderStatusLight element.",
+                "Es": "Example of the HeaderStatusLight element."
+              },
+              "status_light": {
+                "type": "_SmartLight",
+                "label": {
+                  "En": "System Status",
+                  "Fr": "System Statut",
+                  "De": "System Status",
+                  "Es": "System Estado"
+                },
+                "notes": "A status light with a label.",
+                "interaction": {
+                  "is_read_only": false
+                },
+                "status": "green"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

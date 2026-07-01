@@ -1,0 +1,200 @@
+{
+  "Oscilloscope_YAK_54641D_SYSTem": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.10",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Utilities",
+          "Fr": "Système Utilities",
+          "De": "System Utilities",
+          "Es": "Sistema Utilities"
+        },
+        "fields": {
+          "Get_Error": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "SYSTem:ERRor?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "error": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Error",
+                      "Fr": "Erreur",
+                      "De": "Fehler",
+                      "Es": "Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Get_Setup": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "SYSTem:SETup?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "setup": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Setup",
+                      "Fr": "Installation",
+                      "De": "Einrichtung",
+                      "Es": "Configuración"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Control",
+          "Fr": "Système Contrôle",
+          "De": "System Steuerung",
+          "Es": "Sistema Control"
+        },
+        "fields": {
+          "Lock_Front_Panel": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "SYSTem:LOCK <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Lock",
+                      "Fr": "Verrouiller",
+                      "De": "Sperren",
+                      "Es": "Bloquear"
+                    },
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

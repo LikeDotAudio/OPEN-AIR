@@ -1,0 +1,43 @@
+{
+  "Generator_YAK_33210A_Connection": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.100.33210",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Discovered Devices",
+          "Fr": "Discovered Devices",
+          "De": "Discovered Devices",
+          "Es": "Discovered Devices"
+        },
+        "headers": [
+          "type",
+          "resource_string",
+          "ip_address",
+          "interface_port",
+          "gpib_address",
+          "status",
+          "manufacturer",
+          "model",
+          "serial_number",
+          "firmware",
+          "idn_string",
+          "device_type",
+          "notes",
+          "allocated",
+          "connection_timestamp"
+        ],
+        "data": {}
+      }
+    }
+  }
+}

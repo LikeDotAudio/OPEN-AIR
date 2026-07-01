@@ -1,0 +1,1360 @@
+{
+  "Spectrum_Instrument_amplitude": {
+    "type": "OcaBin",
+    "id": "50.100.0.3.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Pre Amp": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Settings for Attenuation",
+          "Fr": "Paramètres for Attenuation",
+          "De": "Einstellungen for Attenuation",
+          "Es": "Ajustes for Attenuation",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "preamp_on": {
+            "type": "_GuiButtonToggle",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_preamp",
+            "layout": {
+              "height": 50,
+              "stretch": "width",
+              "font": 15,
+              "width": "100%"
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "ON": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Preamp ON",
+                      "Fr": "Préampli ON",
+                      "De": "Vorverstärker EIN",
+                      "Es": "Preampli ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Preamp ON",
+                      "Fr": "Préampli ON",
+                      "De": "Vorverstärker EIN",
+                      "Es": "Preampli ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "OFF": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Preamp OFF",
+                      "Fr": "Préampli OFF",
+                      "De": "Vorverstärker AUS",
+                      "Es": "Preampli DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Preamp OFF",
+                      "Fr": "Préampli OFF",
+                      "De": "Vorverstärker AUS",
+                      "Es": "Preampli DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Gain",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          },
+          "high_sensitivity_on": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_high_sensitivity",
+            "layout": {
+              "height": 50,
+              "stretch": "width",
+              "font": 15,
+              "width": "100%"
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "ON": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "OFF": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_High_Sensitivity",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          }
+        }
+      },
+      "Fold_RefLevel": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Reference Level": {
+        "type": "OcaBlock",
+        "label": {
+          "En": "Reference Level",
+          "Fr": "Référence Niveau",
+          "De": "Referenz Pegel",
+          "Es": "Referencia Nivel",
+          "show_label": false
+        },
+        "description": {
+          "En": "Settings for Reference Level",
+          "Fr": "Paramètres du niveau de référence",
+          "De": "Einstellungen für Referenzpegel",
+          "Es": "Ajustes para nivel de referencia"
+        },
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "break_reffLeve": {
+            "type": "OcaFold",
+            "layout": {
+              "thickness": 2,
+              "pady": 5,
+              "color": "#33A1FD",
+              "stretch": "width"
+            }
+          },
+          "REFERENCE_LEVEL_dropdown": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "label": {
+              "En": "Reference Level",
+              "Fr": "Référence Niveau",
+              "De": "Referenz Pegel",
+              "Es": "Referencia Nivel"
+            },
+            "handler": "set_reference_level",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Reference_Level",
+              "input_name": "dbm_value",
+              "converter": "float"
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width"
+            },
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-125 dB",
+                      "Fr": "-125 dB",
+                      "De": "-125 dB",
+                      "Es": "-125 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-125 dB",
+                      "Fr": "-125 dB",
+                      "De": "-125 dB",
+                      "Es": "-125 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-125",
+                "units": "dB",
+                "selected": false
+              },
+              "2": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-120 dB",
+                      "Fr": "-120 dB",
+                      "De": "-120 dB",
+                      "Es": "-120 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-120 dB",
+                      "Fr": "-120 dB",
+                      "De": "-120 dB",
+                      "Es": "-120 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-120",
+                "units": "dB",
+                "selected": false
+              },
+              "3": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-115 dB",
+                      "Fr": "-115 dB",
+                      "De": "-115 dB",
+                      "Es": "-115 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-115 dB",
+                      "Fr": "-115 dB",
+                      "De": "-115 dB",
+                      "Es": "-115 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-115",
+                "units": "dB",
+                "selected": false
+              },
+              "4": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-110 dB",
+                      "Fr": "-110 dB",
+                      "De": "-110 dB",
+                      "Es": "-110 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-110 dB",
+                      "Fr": "-110 dB",
+                      "De": "-110 dB",
+                      "Es": "-110 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-110",
+                "units": "dB",
+                "selected": false
+              },
+              "5": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-105 dB",
+                      "Fr": "-105 dB",
+                      "De": "-105 dB",
+                      "Es": "-105 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-105 dB",
+                      "Fr": "-105 dB",
+                      "De": "-105 dB",
+                      "Es": "-105 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-105",
+                "units": "dB",
+                "selected": false
+              },
+              "6": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-100 dB",
+                      "Fr": "-100 dB",
+                      "De": "-100 dB",
+                      "Es": "-100 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-100 dB",
+                      "Fr": "-100 dB",
+                      "De": "-100 dB",
+                      "Es": "-100 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-100",
+                "units": "dB",
+                "selected": false
+              },
+              "7": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-95 dB",
+                      "Fr": "-95 dB",
+                      "De": "-95 dB",
+                      "Es": "-95 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-95 dB",
+                      "Fr": "-95 dB",
+                      "De": "-95 dB",
+                      "Es": "-95 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-95",
+                "units": "dB",
+                "selected": false
+              },
+              "8": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-90 dB",
+                      "Fr": "-90 dB",
+                      "De": "-90 dB",
+                      "Es": "-90 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-90 dB",
+                      "Fr": "-90 dB",
+                      "De": "-90 dB",
+                      "Es": "-90 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-90",
+                "units": "dB",
+                "selected": false
+              },
+              "9": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-85 dB",
+                      "Fr": "-85 dB",
+                      "De": "-85 dB",
+                      "Es": "-85 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-85 dB",
+                      "Fr": "-85 dB",
+                      "De": "-85 dB",
+                      "Es": "-85 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-85",
+                "units": "dB",
+                "selected": false
+              },
+              "10": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-80 dB",
+                      "Fr": "-80 dB",
+                      "De": "-80 dB",
+                      "Es": "-80 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-80 dB",
+                      "Fr": "-80 dB",
+                      "De": "-80 dB",
+                      "Es": "-80 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-80",
+                "units": "dB",
+                "selected": false
+              },
+              "11": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-75 dB",
+                      "Fr": "-75 dB",
+                      "De": "-75 dB",
+                      "Es": "-75 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-75 dB",
+                      "Fr": "-75 dB",
+                      "De": "-75 dB",
+                      "Es": "-75 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-75",
+                "units": "dB",
+                "selected": false
+              },
+              "12": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-70 dB",
+                      "Fr": "-70 dB",
+                      "De": "-70 dB",
+                      "Es": "-70 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-70 dB",
+                      "Fr": "-70 dB",
+                      "De": "-70 dB",
+                      "Es": "-70 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-70",
+                "units": "dB",
+                "selected": false
+              },
+              "13": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-65 dB",
+                      "Fr": "-65 dB",
+                      "De": "-65 dB",
+                      "Es": "-65 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-65 dB",
+                      "Fr": "-65 dB",
+                      "De": "-65 dB",
+                      "Es": "-65 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-65",
+                "units": "dB",
+                "selected": false
+              },
+              "14": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-60 dB",
+                      "Fr": "-60 dB",
+                      "De": "-60 dB",
+                      "Es": "-60 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-60 dB",
+                      "Fr": "-60 dB",
+                      "De": "-60 dB",
+                      "Es": "-60 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-60",
+                "units": "dB",
+                "selected": false
+              },
+              "15": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-55 dB",
+                      "Fr": "-55 dB",
+                      "De": "-55 dB",
+                      "Es": "-55 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-55 dB",
+                      "Fr": "-55 dB",
+                      "De": "-55 dB",
+                      "Es": "-55 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-55",
+                "units": "dB",
+                "selected": false
+              },
+              "16": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-50 dB",
+                      "Fr": "-50 dB",
+                      "De": "-50 dB",
+                      "Es": "-50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-50 dB",
+                      "Fr": "-50 dB",
+                      "De": "-50 dB",
+                      "Es": "-50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-50",
+                "units": "dB",
+                "selected": false
+              },
+              "17": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-45 dB",
+                      "Fr": "-45 dB",
+                      "De": "-45 dB",
+                      "Es": "-45 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-45 dB",
+                      "Fr": "-45 dB",
+                      "De": "-45 dB",
+                      "Es": "-45 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-45",
+                "units": "dB",
+                "selected": true
+              },
+              "18": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-40 dB",
+                      "Fr": "-40 dB",
+                      "De": "-40 dB",
+                      "Es": "-40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-40 dB",
+                      "Fr": "-40 dB",
+                      "De": "-40 dB",
+                      "Es": "-40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-40",
+                "units": "dB",
+                "selected": false
+              },
+              "19": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-35 dB",
+                      "Fr": "-35 dB",
+                      "De": "-35 dB",
+                      "Es": "-35 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-35 dB",
+                      "Fr": "-35 dB",
+                      "De": "-35 dB",
+                      "Es": "-35 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-35",
+                "units": "dB",
+                "selected": false
+              },
+              "20": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-30 dB",
+                      "Fr": "-30 dB",
+                      "De": "-30 dB",
+                      "Es": "-30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-30 dB",
+                      "Fr": "-30 dB",
+                      "De": "-30 dB",
+                      "Es": "-30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-30",
+                "units": "dB",
+                "selected": false
+              },
+              "21": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-25 dB",
+                      "Fr": "-25 dB",
+                      "De": "-25 dB",
+                      "Es": "-25 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-25 dB",
+                      "Fr": "-25 dB",
+                      "De": "-25 dB",
+                      "Es": "-25 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-25",
+                "units": "dB",
+                "selected": false
+              },
+              "22": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-20 dB",
+                      "Fr": "-20 dB",
+                      "De": "-20 dB",
+                      "Es": "-20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-20 dB",
+                      "Fr": "-20 dB",
+                      "De": "-20 dB",
+                      "Es": "-20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-20",
+                "units": "dB",
+                "selected": false
+              },
+              "23": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-15 dB",
+                      "Fr": "-15 dB",
+                      "De": "-15 dB",
+                      "Es": "-15 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-15 dB",
+                      "Fr": "-15 dB",
+                      "De": "-15 dB",
+                      "Es": "-15 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-15",
+                "units": "dB",
+                "selected": false
+              },
+              "24": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-10 dB",
+                      "Fr": "-10 dB",
+                      "De": "-10 dB",
+                      "Es": "-10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-10 dB",
+                      "Fr": "-10 dB",
+                      "De": "-10 dB",
+                      "Es": "-10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-10",
+                "units": "dB",
+                "selected": false
+              },
+              "25": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "-5 dB",
+                      "Fr": "-5 dB",
+                      "De": "-5 dB",
+                      "Es": "-5 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "-5 dB",
+                      "Fr": "-5 dB",
+                      "De": "-5 dB",
+                      "Es": "-5 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "-5",
+                "units": "dB",
+                "selected": false
+              }
+            }
+          },
+          "ref_level_dBm": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "-100",
+              "max": "0",
+              "units": "dBm",
+              "step_coarse": "10",
+              "step_fine": "1"
+            },
+            "value": {
+              "default_value": "-30"
+            },
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "En": "Reference Level",
+              "Fr": "Référence Niveau",
+              "De": "Referenz Pegel",
+              "Es": "Referencia Nivel",
+              "show_label": true
+            },
+            "handler": "set_ref_level",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Reference_Level",
+              "input_name": "dbm_value",
+              "converter": "float"
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#FF9900"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "Fold_Attenuation": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Attenuation": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Settings for Attenuation",
+          "Fr": "Paramètres for Attenuation",
+          "De": "Einstellungen for Attenuation",
+          "Es": "Ajustes for Attenuation",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "break_1": {
+            "type": "OcaFold",
+            "layout": {
+              "thickness": 1,
+              "pady": 5,
+              "color": "#FF9900",
+              "stretch": "width"
+            }
+          },
+          "POWER_ATTENUATION": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_power_attenuation",
+            "label": {
+              "En": "Power Attenuation",
+              "Fr": "Atténuation de puissance",
+              "De": "Leistungsdämpfung",
+              "Es": "Atenuación de potencia"
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Attenuation",
+              "input_name": "db_value",
+              "converter": "float"
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width"
+            },
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "0 dB",
+                      "Fr": "0 dB",
+                      "De": "0 dB",
+                      "Es": "0 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "0 dB",
+                      "Fr": "0 dB",
+                      "De": "0 dB",
+                      "Es": "0 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "0",
+                "units": "dB",
+                "selected": false
+              },
+              "2": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "10 dB",
+                      "Fr": "10 dB",
+                      "De": "10 dB",
+                      "Es": "10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "10 dB",
+                      "Fr": "10 dB",
+                      "De": "10 dB",
+                      "Es": "10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "10",
+                "units": "dB",
+                "selected": false
+              },
+              "3": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "20 dB",
+                      "Fr": "20 dB",
+                      "De": "20 dB",
+                      "Es": "20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "20 dB",
+                      "Fr": "20 dB",
+                      "De": "20 dB",
+                      "Es": "20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "20",
+                "units": "dB",
+                "selected": false
+              },
+              "4": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "30 dB",
+                      "Fr": "30 dB",
+                      "De": "30 dB",
+                      "Es": "30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "30 dB",
+                      "Fr": "30 dB",
+                      "De": "30 dB",
+                      "Es": "30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "30",
+                "units": "dB",
+                "selected": false
+              },
+              "5": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "40 dB",
+                      "Fr": "40 dB",
+                      "De": "40 dB",
+                      "Es": "40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "40 dB",
+                      "Fr": "40 dB",
+                      "De": "40 dB",
+                      "Es": "40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "40",
+                "units": "dB",
+                "selected": false
+              },
+              "6": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "50 dB",
+                      "Fr": "50 dB",
+                      "De": "50 dB",
+                      "Es": "50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "50 dB",
+                      "Fr": "50 dB",
+                      "De": "50 dB",
+                      "Es": "50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "50",
+                "units": "dB",
+                "selected": false
+              }
+            }
+          },
+          "power_attenuation_dB": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "-100",
+              "max": "0",
+              "units": "dBm",
+              "step_coarse": "10",
+              "step_fine": "1"
+            },
+            "value": {
+              "default_value": "10"
+            },
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Power Attenuation",
+                  "Fr": "Atténuation de puissance",
+                  "De": "Leistungsdämpfung",
+                  "Es": "Atenuación de potencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
+            },
+            "handler": "set_power_attenuation",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Attenuation",
+              "input_name": "db_value",
+              "converter": "float"
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#FF9900"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

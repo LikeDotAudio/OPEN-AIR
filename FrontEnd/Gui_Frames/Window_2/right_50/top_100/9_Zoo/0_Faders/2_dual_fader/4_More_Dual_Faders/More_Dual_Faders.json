@@ -1,0 +1,374 @@
+{
+  "Zoo_Faders_dual_fader_More_Dual_Faders": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.2.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dual_Fader_Expansion": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "20 Additional Dual Fader Variations",
+          "Fr": "20 Additionnel Dual Fader Variations",
+          "De": "20 Zusätzlich Dual Fader Variationen",
+          "Es": "20 Adicional Dual Fader Variaciones"
+        },
+        "layout_columns": 5,
+        "fields": {
+          "df_1": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Red/White",
+              "Fr": "Red/White",
+              "De": "Red/White",
+              "Es": "Red/White"
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000",
+                "highlight": "#FFFFFF"
+              }
+            }
+          },
+          "df_2": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Green/Black",
+              "Fr": "Green/Black",
+              "De": "Green/Black",
+              "Es": "Green/Black"
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00",
+                "highlight": "#000000"
+              }
+            }
+          },
+          "df_3": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Blue/Gold",
+              "Fr": "Blue/Gold",
+              "De": "Blue/Gold",
+              "Es": "Blue/Gold"
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF",
+                "highlight": "#FFD700"
+              }
+            }
+          },
+          "df_4": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Yellow/Purple",
+              "Fr": "Yellow/Purple",
+              "De": "Yellow/Purple",
+              "Es": "Yellow/Purple"
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00",
+                "highlight": "#4B0082"
+              }
+            }
+          },
+          "df_5": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Cyan/Red",
+              "Fr": "Cyan/Red",
+              "De": "Cyan/Red",
+              "Es": "Cyan/Red"
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FFFF",
+                "highlight": "#FF0000"
+              }
+            }
+          },
+          "df_6": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Tall Red",
+              "Fr": "Tall Red",
+              "De": "Tall Red",
+              "Es": "Tall Red"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            }
+          },
+          "df_7": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Tall Green",
+              "Fr": "Tall Green",
+              "De": "Tall Green",
+              "Es": "Tall Green"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            }
+          },
+          "df_8": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Tall Blue",
+              "Fr": "Tall Blue",
+              "De": "Tall Blue",
+              "Es": "Tall Blue"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            }
+          },
+          "df_9": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Tall Orange",
+              "Fr": "Tall Orange",
+              "De": "Tall Orange",
+              "Es": "Tall Orange"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF8C00"
+              }
+            }
+          },
+          "df_10": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Tall Pink",
+              "Fr": "Tall Pink",
+              "De": "Tall Pink",
+              "Es": "Tall Pink"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF1493"
+              }
+            }
+          },
+          "df_11": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Wide Red",
+              "Fr": "Wide Red",
+              "De": "Wide Red",
+              "Es": "Wide Red"
+            },
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            }
+          },
+          "df_12": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Wide Green",
+              "Fr": "Wide Green",
+              "De": "Wide Green",
+              "Es": "Wide Green"
+            },
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            }
+          },
+          "df_13": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Wide Blue",
+              "Fr": "Wide Blue",
+              "De": "Wide Blue",
+              "Es": "Wide Blue"
+            },
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            }
+          },
+          "df_14": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Wide Yellow",
+              "Fr": "Wide Yellow",
+              "De": "Wide Yellow",
+              "Es": "Wide Yellow"
+            },
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00"
+              }
+            }
+          },
+          "df_15": {
+            "type": "_CustomDualHorizontalFader",
+            "label": {
+              "En": "Wide Purple",
+              "Fr": "Wide Purple",
+              "De": "Wide Purple",
+              "Es": "Wide Purple"
+            },
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#800080"
+              }
+            }
+          },
+          "df_16": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Boxy 1",
+              "Fr": "Boxy 1",
+              "De": "Boxy 1",
+              "Es": "Boxy 1"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFFFF"
+              }
+            }
+          },
+          "df_17": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Boxy 2",
+              "Fr": "Boxy 2",
+              "De": "Boxy 2",
+              "Es": "Boxy 2"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#000000",
+                "highlight": "#00FF00"
+              }
+            }
+          },
+          "df_18": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Boxy 3",
+              "Fr": "Boxy 3",
+              "De": "Boxy 3",
+              "Es": "Boxy 3"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFD700"
+              }
+            }
+          },
+          "df_19": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Boxy 4",
+              "Fr": "Boxy 4",
+              "De": "Boxy 4",
+              "Es": "Boxy 4"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#C0C0C0"
+              }
+            }
+          },
+          "df_20": {
+            "type": "_CustomDualVerticalFader",
+            "label": {
+              "En": "Boxy 5",
+              "Fr": "Boxy 5",
+              "De": "Boxy 5",
+              "Es": "Boxy 5"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF4500"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "Zoo_Metering_Next_Gen_All": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Vintage_Aesthetics": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "Fr": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "De": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "Es": "VI. Vintage Aesthetics (Large Format Showcase)"
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Vintage_Hotdog_Mask": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Hotdog Style (Dome)",
+              "Fr": "Hotdog Style (Dome)",
+              "De": "Hotdog Style (Dome)",
+              "Es": "Hotdog Style (Dome)"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 5,
+                "Pointer_Style": "knife-edge",
+                "sub_ticks": 4
+              },
+              "labels": [
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": 20,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Vintage_Gem_Dome": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Gem (Aperture)",
+              "Fr": "The Gem (Aperture)",
+              "De": "The Gem (Aperture)",
+              "Es": "The Gem (Aperture)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "spade",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Super_Gem": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Superman (Super Gem)",
+              "Fr": "The Superman (Super Gem)",
+              "De": "The Superman (Super Gem)",
+              "Es": "The Superman (Super Gem)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "super_gem",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "spade",
+                "sub_ticks": 4,
+                "arc_radius_offset": -30,
+                "tick_radius_offset": -30,
+                "label_radius_offset": -60,
+                "needle_length_factor": 0.8
+              }
+            }
+          },
+          "Vintage_Hex_Dome": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Hex (Dome)",
+              "Fr": "The Hex (Dome)",
+              "De": "The Hex (Dome)",
+              "Es": "The Hex (Dome)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 6,
+                "Pointer_Style": "teardrop",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Stop_Sign": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Stop Sign (Octagon)",
+              "Fr": "Arrêter Sign (Octagon)",
+              "De": "Stop Sign (Octagon)",
+              "Es": "Parar Sign (Octagon)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "octagon",
+                "bezel_width": 6,
+                "Pointer_Style": "needle",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Squectangle": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Squectangle",
+              "Fr": "The Squectangle",
+              "De": "The Squectangle",
+              "Es": "The Squectangle"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "knife-edge",
+                "sub_ticks": 4
+              },
+              "labels": [
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -40,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Vintage_Squimonde": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Squimonde",
+              "Fr": "The Squimonde",
+              "De": "The Squimonde",
+              "Es": "The Squimonde"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "squimonde",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "knife-edge",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Squircle": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Squircle (Square)",
+              "Fr": "The Squircle (Square)",
+              "De": "The Squircle (Square)",
+              "Es": "The Squircle (Square)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "knife-edge",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Parking_Meter": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Parking Meter",
+              "Fr": "Parking Meter",
+              "De": "Parking Meter",
+              "Es": "Parking Meter"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "parking_meter",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": 30
+              }
+            }
+          },
+          "Vintage_Triangle": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Triangle",
+              "Fr": "The Triangle",
+              "De": "The Triangle",
+              "Es": "The Triangle"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": 15
+              }
+            }
+          },
+          "Vintage_Pyramid": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Pyramid",
+              "Fr": "The Pyramid",
+              "De": "The Pyramid",
+              "Es": "The Pyramid"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": -15,
+                "Meter_viewable_angle": 120
+              }
+            }
+          },
+          "Vintage_Badge": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Badge (Trapezoid)",
+              "Fr": "The Badge (Trapezoid)",
+              "De": "The Badge (Trapezoid)",
+              "Es": "The Badge (Trapezoid)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "trapezoid",
+                "bezel_width": 6,
+                "Pointer_Style": "baton",
+                "sub_ticks": 4
+              }
+            }
+          },
+          "Vintage_Crest": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "The Crest (Shield)",
+              "Fr": "The Crest (Shield)",
+              "De": "The Crest (Shield)",
+              "Es": "The Crest (Shield)"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "#000",
+                "scale_label": "#000",
+                "meter_face_colour": "transparent"
+              },
+              "style_overrides": {
+                "bezel_shape": "crest",
+                "bezel_width": 6,
+                "Pointer_Style": "teardrop",
+                "sub_ticks": 4
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

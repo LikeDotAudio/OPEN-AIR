@@ -1,0 +1,160 @@
+{
+  "LCR_YAK_4263A_System": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
+    "blocks": {
+      "System_Interface": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System & Interface"
+        },
+        "fields": {
+          "Identification": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "*IDN?",
+                  "Fr": "*IDN?",
+                  "De": "*IDN?",
+                  "Es": "*IDN?"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": "*IDN?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Reset": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Reset",
+                  "Fr": "Réinitialiser",
+                  "De": "Zurücksetzen",
+                  "Es": "Reiniciar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": "*RST",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Beeper State": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Beeper",
+                  "Fr": "Avertisseur",
+                  "De": "Beeper",
+                  "Es": "Beeper"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SYSTem:BEEPer:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Key Lock": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Key Lock",
+                  "Fr": "Verrouillage des touches",
+                  "De": "Tastensperre",
+                  "Es": "Bloqueo de teclas"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SYSTem:KLOCk {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Display State": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Display",
+                  "Fr": "Écran",
+                  "De": "Anzeige",
+                  "Es": "Pantalla"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":DISPlay:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Error Query": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Query Error",
+                  "Fr": "Interroger l'erreur",
+                  "De": "Fehler abfragen",
+                  "Es": "Consultar error"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SYSTem:ERRor?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

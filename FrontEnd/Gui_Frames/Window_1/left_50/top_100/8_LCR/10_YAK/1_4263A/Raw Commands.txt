@@ -1,0 +1,42 @@
+The HP/Agilent 4263A/B LCR Meters use the SCPI (Standard Commands for Programmable Instruments) language for remote operation. Below is a comprehensive list of commands organized by their functional subsystems as defined in the unit's technical documentation.
+
+HP 4263A/B SCPI Command Table
+Subsystem	Command	Description
+Measurement & Data	:FETCh?	Retrieves the most recent measurement data.
+:MEASure?	Executes a complete measurement and retrieves data.
+:READ?	Triggers a measurement and retrieves the results.
+Sense (Measurement Config)	:SENSe:FUNCtion[:ON]	Selects measurement parameters (e.g., CP-D, LS-Q).
+:SENSe:FREQuency[:CW]	Sets the test signal frequency (100, 1k, 10k, 100k Hz).
+:SENSe:CURRent:RANGe[:UPPer]	Sets the current measurement range.
+:SENSe:VOLTage:RANGe:AUTO	Enables or disables auto-ranging.
+:SENSe:CORRection:OPEN	Executes the OPEN correction.
+:SENSe:CORRection:SHORt	Executes the SHORT correction.
+:SENSe:AVERage:COUNt	Sets the number of measurement averages (1 to 256).
+Source (Signal Control)	:SOURce:VOLTage[:LEVel][:IMMediate]	Sets the test signal level (e.g., 100m, 500m, 1V).
+:SOURce:BIAS:VOLTage	Sets the internal DC bias voltage level.
+:SOURce:BIAS:STATe	Turns the DC bias ON or OFF.
+Calculate (Comparator)	:CALCulate:LIMit:LOWer	Sets the lower limit for the comparator.
+:CALCulate:LIMit:UPPer	Sets the higher limit for the comparator.
+:CALCulate:LIMit:STATe	Enables or disables the comparator function.
+Trigger System	:TRIGger[:IMMediate]	Manually triggers a measurement.
+:TRIGger:SOURce	Selects trigger source (INT, MAN, EXT, or BUS).
+:TRIGger:DELay	Sets the delay time before measurement starts.
+System & Interface	:SYSTem:BEEPer:STATe	Turns the front-panel beeper ON or OFF.
+:SYSTem:KLOCk	Locks or unlocks the front-panel keys.
+:SYSTem:ERRor?	Queries the next entry in the error queue.
+:DISPlay[:WINDow]:STATe	Turns the display ON or OFF.
+Common IEEE-488.2 Commands
+These general commands are supported for standard instrument management:
+
+*IDN?: Queries the instrument identification (Manufacturer, Model, Serial, Firmware).
+
+*RST: Resets the unit to its factory default settings.
+
+*TRG: Triggers the unit (equivalent to the Bus trigger).
+
+*CLS: Clears the status byte and error queue.
+
+*OPC?: Returns '1' once all pending operations are completed.
+
+Programming Tip
+When sending commands, the keywords in brackets (e.g., [:LEVel]) are optional and can be omitted for brevity. To query a current setting instead of changing it, simply add a question mark to the end of the root command (e.g., :SOUR:BIAS:STAT?).

@@ -1,0 +1,25 @@
+{
+  "Migrated_MediaButtons": {
+    "type": "OcaBin",
+    "id": "migrated.Media_Buttons",
+    "geometry": { "anchor": "NSEW" },
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": { "En": "MediaButtons" },
+            "text_size": 14,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "component": {
+            "type": "_MediaButtons",
+            "layout": { "width": 400, "height": 300 }
+          }
+        }
+      }
+    }
+  }
+}

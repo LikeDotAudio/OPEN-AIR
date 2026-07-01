@@ -1,0 +1,3054 @@
+{
+  "Zoo_buttons_button_toggler": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Select Channel",
+              "Fr": "Select Canal",
+              "De": "Select Kanal",
+              "Es": "Select Canal"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartToggler",
+            "label": {
+              "En": "Select Channel",
+              "Fr": "Select Canal",
+              "De": "Select Kanal",
+              "Es": "Select Canal"
+            },
+            "notes": "A 4-channel selector, with CH1 initially active.",
+            "geometry": {
+              "height": 50,
+              "alpha": 0.9,
+              "font": 12
+            },
+            "interaction": {
+              "options": {
+                "CH1": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CH1",
+                        "Fr": "CH1",
+                        "De": "CH1",
+                        "Es": "CH1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "CH2": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CH2",
+                        "Fr": "CH2",
+                        "De": "CH2",
+                        "Es": "CH2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "CH3": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CH3",
+                        "Fr": "CH3",
+                        "De": "CH3",
+                        "Es": "CH3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "CH4": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CH4",
+                        "Fr": "CH4",
+                        "De": "CH4",
+                        "Es": "CH4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 2
+            }
+          }
+        }
+      },
+      "neon_intensity": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Glow Intensity Demo",
+              "Fr": "Glow Intensity Démo",
+              "De": "Glow Intensity Demo",
+              "Es": "Glow Intensity Demo"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "glow_0_1": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 0.1
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "0.1 GLOW",
+                        "Fr": "0.1 GLOW",
+                        "De": "0.1 GLOW",
+                        "Es": "0.1 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "glow_1_0": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 1.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "1.0 GLOW",
+                        "Fr": "1.0 GLOW",
+                        "De": "1.0 GLOW",
+                        "Es": "1.0 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "glow_2_5": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 2.5
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "2.5 GLOW",
+                        "Fr": "2.5 GLOW",
+                        "De": "2.5 GLOW",
+                        "Es": "2.5 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "glow_5_0": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 5.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "5.0 GLOW",
+                        "Fr": "5.0 GLOW",
+                        "De": "5.0 GLOW",
+                        "Es": "5.0 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "color_spectrum": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Vivid Color Spectrum",
+              "Fr": "Vivid Color Spectrum",
+              "De": "Vivid Color Spectrum",
+              "Es": "Vivid Color Spectrum"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "red_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "R": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CRIMSON",
+                        "Fr": "CRIMSON",
+                        "De": "CRIMSON",
+                        "Es": "CRIMSON"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "amber_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "AMBER",
+                        "Fr": "AMBER",
+                        "De": "AMBER",
+                        "Es": "AMBER"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "gold_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#FFFF00",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "G": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "GOLD",
+                        "Fr": "GOLD",
+                        "De": "GOLD",
+                        "Es": "GOLD"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lime_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "L": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "LIME",
+                        "Fr": "LIME",
+                        "De": "LIME",
+                        "Es": "LIME"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "cyan_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FFFF",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "C": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "CYAN",
+                        "Fr": "CYAN",
+                        "De": "CYAN",
+                        "Es": "CYAN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "cobalt_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#0066FF",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "COBALT",
+                        "Fr": "COBALT",
+                        "De": "COBALT",
+                        "Es": "COBALT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "violet_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#9900FF",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "V": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "VIOLET",
+                        "Fr": "VIOLET",
+                        "De": "VIOLET",
+                        "Es": "VIOLET"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pink_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#FF00FF",
+                "border_thickness": 2,
+                "glow_intensity": 2.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "P": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "MAGENTA",
+                        "Fr": "MAGENTA",
+                        "De": "MAGENTA",
+                        "Es": "MAGENTA"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "O": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "industrial_color_pairs": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Industrial Color Pairs",
+              "Fr": "Industriel Color Pairs",
+              "De": "Industriell Color Pairs",
+              "Es": "Industrial Color Pairs"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "pair_1": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "OFF": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "TAG",
+                        "Fr": "TAG",
+                        "De": "TAG",
+                        "Es": "TAG"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0",
+                      "border_color": "#FFFDD0"
+                    },
+                    "inactive": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#4a483e"
+                    }
+                  }
+                },
+                "ON": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "TAG",
+                        "Fr": "TAG",
+                        "De": "TAG",
+                        "Es": "TAG"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0",
+                      "border_color": "#FFFDD0"
+                    },
+                    "inactive": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_2": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#e0115f",
+                      "border_color": "#e0115f"
+                    },
+                    "inactive": {
+                      "bg_color": "#400010"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#e0115f",
+                      "border_color": "#e0115f"
+                    },
+                    "inactive": {
+                      "bg_color": "#400010"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_3": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#50c878",
+                      "border_color": "#50c878"
+                    },
+                    "inactive": {
+                      "bg_color": "#003010"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#50c878",
+                      "border_color": "#50c878"
+                    },
+                    "inactive": {
+                      "bg_color": "#003010"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_4": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#0f52ba",
+                      "border_color": "#0f52ba"
+                    },
+                    "inactive": {
+                      "bg_color": "#001040"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#0f52ba",
+                      "border_color": "#0f52ba"
+                    },
+                    "inactive": {
+                      "bg_color": "#001040"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_5": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffbf00",
+                      "border_color": "#ffbf00"
+                    },
+                    "inactive": {
+                      "bg_color": "#302000"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffbf00",
+                      "border_color": "#ffbf00"
+                    },
+                    "inactive": {
+                      "bg_color": "#302000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_6": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ee82ee",
+                      "border_color": "#ee82ee"
+                    },
+                    "inactive": {
+                      "bg_color": "#300030"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ee82ee",
+                      "border_color": "#ee82ee"
+                    },
+                    "inactive": {
+                      "bg_color": "#300030"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_7": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#00ffff",
+                      "border_color": "#00ffff"
+                    },
+                    "inactive": {
+                      "bg_color": "#003030"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#00ffff",
+                      "border_color": "#00ffff"
+                    },
+                    "inactive": {
+                      "bg_color": "#003030"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_8": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff00ff",
+                      "border_color": "#ff00ff"
+                    },
+                    "inactive": {
+                      "bg_color": "#400040"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff00ff",
+                      "border_color": "#ff00ff"
+                    },
+                    "inactive": {
+                      "bg_color": "#400040"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_9": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#32cd32",
+                      "border_color": "#32cd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#103000"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#32cd32",
+                      "border_color": "#32cd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#103000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_10": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffd700",
+                      "border_color": "#ffd700"
+                    },
+                    "inactive": {
+                      "bg_color": "#303000"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffd700",
+                      "border_color": "#ffd700"
+                    },
+                    "inactive": {
+                      "bg_color": "#303000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_11": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#708090",
+                      "border_color": "#708090"
+                    },
+                    "inactive": {
+                      "bg_color": "#101020"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#708090",
+                      "border_color": "#708090"
+                    },
+                    "inactive": {
+                      "bg_color": "#101020"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_12": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#d2691e",
+                      "border_color": "#d2691e"
+                    },
+                    "inactive": {
+                      "bg_color": "#201000"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#d2691e",
+                      "border_color": "#d2691e"
+                    },
+                    "inactive": {
+                      "bg_color": "#201000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_13": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#20b2aa",
+                      "border_color": "#20b2aa"
+                    },
+                    "inactive": {
+                      "bg_color": "#002020"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#20b2aa",
+                      "border_color": "#20b2aa"
+                    },
+                    "inactive": {
+                      "bg_color": "#002020"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_14": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff4500",
+                      "border_color": "#ff4500"
+                    },
+                    "inactive": {
+                      "bg_color": "#300000"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff4500",
+                      "border_color": "#ff4500"
+                    },
+                    "inactive": {
+                      "bg_color": "#300000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_15": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#4682b4",
+                      "border_color": "#4682b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#001030"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#4682b4",
+                      "border_color": "#4682b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#001030"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_16": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#9acd32",
+                      "border_color": "#9acd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#102010"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#9acd32",
+                      "border_color": "#9acd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#102010"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_17": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ba55d3",
+                      "border_color": "#ba55d3"
+                    },
+                    "inactive": {
+                      "bg_color": "#200020"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ba55d3",
+                      "border_color": "#ba55d3"
+                    },
+                    "inactive": {
+                      "bg_color": "#200020"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_18": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#3cb371",
+                      "border_color": "#3cb371"
+                    },
+                    "inactive": {
+                      "bg_color": "#003020"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#3cb371",
+                      "border_color": "#3cb371"
+                    },
+                    "inactive": {
+                      "bg_color": "#003020"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_19": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#f0f0f0",
+                      "border_color": "#f0f0f0"
+                    },
+                    "inactive": {
+                      "bg_color": "#303030"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#f0f0f0",
+                      "border_color": "#f0f0f0"
+                    },
+                    "inactive": {
+                      "bg_color": "#303030"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pair_20": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff69b4",
+                      "border_color": "#ff69b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#1a1a1a"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff69b4",
+                      "border_color": "#ff69b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#1a1a1a"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "form_factors": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Size & Geometry Variety",
+              "Fr": "Size & Geometry Variety",
+              "De": "Size & Geometry Variety",
+              "Es": "Size & Geometry Variety"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "micro_strip": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 18,
+              "font": 7
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "S1",
+                        "Fr": "S1",
+                        "De": "S1",
+                        "Es": "S1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "2": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "S2",
+                        "Fr": "S2",
+                        "De": "S2",
+                        "Es": "S2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "3": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "S3",
+                        "Fr": "S3",
+                        "De": "S3",
+                        "Es": "S3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                }
+              }
+            }
+          },
+          "massive_alert": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 120,
+              "font": 32
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "border_color": "#FF3300",
+                "border_thickness": 2,
+                "glow_intensity": 3.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "STOP": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "STOP",
+                        "Fr": "STOP",
+                        "De": "STOP",
+                        "Es": "STOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "GO": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "GO",
+                        "Fr": "GO",
+                        "De": "GO",
+                        "Es": "GO"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "vertical_stack": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 40
+            },
+            "layout": {
+              "max_cols": 1
+            },
+            "interaction": {
+              "options": {
+                "TOP": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "TOP",
+                        "Fr": "TOP",
+                        "De": "TOP",
+                        "Es": "TOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "MID": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "MID",
+                        "Fr": "MID",
+                        "De": "MID",
+                        "Es": "MID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "BOT": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "BOT",
+                        "Fr": "BOT",
+                        "De": "BOT",
+                        "Es": "BOT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "wide_spread": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 30
+            },
+            "layout": {
+              "max_cols": 8
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "1",
+                        "Fr": "1",
+                        "De": "1",
+                        "Es": "1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "2": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "2",
+                        "Fr": "2",
+                        "De": "2",
+                        "Es": "2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "3": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "3",
+                        "Fr": "3",
+                        "De": "3",
+                        "Es": "3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "4": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "4",
+                        "Fr": "4",
+                        "De": "4",
+                        "Es": "4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "5": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "5",
+                        "Fr": "5",
+                        "De": "5",
+                        "Es": "5"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "6": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "6",
+                        "Fr": "6",
+                        "De": "6",
+                        "Es": "6"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "7": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "7",
+                        "Fr": "7",
+                        "De": "7",
+                        "Es": "7"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "8": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "8",
+                        "Fr": "8",
+                        "De": "8",
+                        "Es": "8"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "aesthetic_mix": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Industrial Styles",
+              "Fr": "Industriel Styles",
+              "De": "Industriell Styles",
+              "Es": "Industrial Styles"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "stealth": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "text_color": "#FFFFFF",
+                "border_color": "#333333",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "text_color": "#222222",
+                "bg_color": "#111111",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "OFF": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "VOID",
+                        "Fr": "VOID",
+                        "De": "VOID",
+                        "Es": "VOID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "ON": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "ACTIVE",
+                        "Fr": "ACTIVE",
+                        "De": "ACTIVE",
+                        "Es": "ACTIVE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                }
+              }
+            }
+          },
+          "hot_rod": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#FF4500",
+                "border_thickness": 2,
+                "glow_intensity": 2.5
+              },
+              "inactive": {
+                "bg_color": "#220000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "IGNITE": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "IGNITE",
+                        "Fr": "IGNITE",
+                        "De": "IGNITE",
+                        "Es": "IGNITE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "KILL": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "KILL",
+                        "Fr": "KILL",
+                        "De": "KILL",
+                        "Es": "KILL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "matrix": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "border_color": "#00FF41",
+                "border_thickness": 2,
+                "glow_intensity": 1.8
+              },
+              "inactive": {
+                "text_color": "#003B00",
+                "bg_color": "#000D00",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "DATA": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "STREAMING",
+                        "Fr": "STREAMING",
+                        "De": "STREAMING",
+                        "Es": "STREAMING"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "IDLE": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "IDLE",
+                        "Fr": "IDLE",
+                        "De": "IDLE",
+                        "Es": "IDLE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "ice": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "text_color": "#000080",
+                "border_color": "#F0F8FF",
+                "border_thickness": 2,
+                "glow_intensity": 1.2
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "FROST": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "FROZEN",
+                        "Fr": "FROZEN",
+                        "De": "FROZEN",
+                        "Es": "FROZEN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "MELT": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "THAW",
+                        "Fr": "THAW",
+                        "De": "THAW",
+                        "Es": "THAW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "vintage": {
+            "type": "_SmartToggler",
+            "style": {
+              "active": {
+                "text_color": "#4B0082",
+                "border_color": "#F4A460",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#2F4F4F",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "OLD": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "ANTIQUE",
+                        "Fr": "ANTIQUE",
+                        "De": "ANTIQUE",
+                        "Es": "ANTIQUE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "NEW": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "MODERN",
+                        "Fr": "MODERN",
+                        "De": "MODERN",
+                        "Es": "MODERN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "ghost_alpha": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "alpha": 0.3,
+              "height": 50
+            },
+            "style": {
+              "active": {
+                "border_color": "#FFFFFF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "VIS": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "VISIBLE",
+                        "Fr": "VISIBLE",
+                        "De": "VISIBLE",
+                        "Es": "VISIBLE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "INV": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "GHOST",
+                        "Fr": "GHOST",
+                        "De": "GHOST",
+                        "Es": "GHOST"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "complex_arrays": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Multi-Choice Arrays",
+              "Fr": "Multi-Choice Arrays",
+              "De": "Multi-Choice Arrays",
+              "Es": "Multi-Choice Arrays"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "radio_12": {
+            "type": "_SmartToggler",
+            "layout": {
+              "max_cols": 6
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF0099",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "A",
+                        "Fr": "A",
+                        "De": "A",
+                        "Es": "A"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "2": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "B",
+                        "Fr": "B",
+                        "De": "B",
+                        "Es": "B"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "3": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "C",
+                        "Fr": "C",
+                        "De": "C",
+                        "Es": "C"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "4": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "D",
+                        "Fr": "D",
+                        "De": "D",
+                        "Es": "D"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "5": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "E",
+                        "Fr": "E",
+                        "De": "E",
+                        "Es": "E"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "6": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "F",
+                        "Fr": "F",
+                        "De": "F",
+                        "Es": "F"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "7": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "G",
+                        "Fr": "G",
+                        "De": "G",
+                        "Es": "G"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "8": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "H",
+                        "Fr": "H",
+                        "De": "H",
+                        "Es": "H"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "9": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "I",
+                        "Fr": "I",
+                        "De": "I",
+                        "Es": "I"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "10": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "J",
+                        "Fr": "J",
+                        "De": "J",
+                        "Es": "J"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "11": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "K",
+                        "Fr": "K",
+                        "De": "K",
+                        "Es": "K"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "12": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "L",
+                        "Fr": "L",
+                        "De": "L",
+                        "Es": "L"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "circular_demos": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Circular Button Demos",
+              "Fr": "Circular Bouton Demos",
+              "De": "Circular Taste Demos",
+              "Es": "Circular Botón Demos"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "circular_channels": {
+            "type": "_SmartToggler",
+            "label": {
+              "En": "Round Selectors",
+              "Fr": "Round Selectors",
+              "De": "Round Selectors",
+              "Es": "Round Selectors"
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "font": 11
+            },
+            "style": {
+              "active": {
+                "border_color": "#00CCFF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "1",
+                        "Fr": "1",
+                        "De": "1",
+                        "Es": "1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "2": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "2",
+                        "Fr": "2",
+                        "De": "2",
+                        "Es": "2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "3": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "3",
+                        "Fr": "3",
+                        "De": "3",
+                        "Es": "3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "4": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "4",
+                        "Fr": "4",
+                        "De": "4",
+                        "Es": "4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 4
+            }
+          },
+          "circular_traffic": {
+            "type": "_SmartToggler",
+            "label": {
+              "En": "Traffic Lights",
+              "Fr": "Traffic Lights",
+              "De": "Traffic Lights",
+              "Es": "Traffic Lights"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "font": 14
+            },
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "RED": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "STOP",
+                        "Fr": "STOP",
+                        "De": "STOP",
+                        "Es": "STOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "active_color": "#FF0000",
+                  "glow_intensity": 3.0,
+                  "selected": true
+                },
+                "YEL": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "WAIT",
+                        "Fr": "WAIT",
+                        "De": "WAIT",
+                        "Es": "WAIT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "active_color": "#FFCC00",
+                  "glow_intensity": 2.5
+                },
+                "GRN": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "GO",
+                        "Fr": "GO",
+                        "De": "GO",
+                        "Es": "GO"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "active_color": "#00FF00",
+                  "glow_intensity": 2.5
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 3
+            }
+          },
+          "circular_tiny": {
+            "type": "_SmartToggler",
+            "label": {
+              "En": "Tiny Indicators",
+              "Fr": "Tiny Indicators",
+              "De": "Tiny Indicators",
+              "Es": "Tiny Indicators"
+            },
+            "geometry": {
+              "width": 30,
+              "height": 30,
+              "font": 8
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF00FF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "A",
+                        "Fr": "A",
+                        "De": "A",
+                        "Es": "A"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "B": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "B",
+                        "Fr": "B",
+                        "De": "B",
+                        "Es": "B"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                },
+                "C": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "C",
+                        "Fr": "C",
+                        "De": "C",
+                        "Es": "C"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "selected": true
+                },
+                "D": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "D",
+                        "Fr": "D",
+                        "De": "D",
+                        "Es": "D"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  }
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 4
+            }
+          },
+          "circular_large_lamp": {
+            "type": "_SmartToggler",
+            "label": {
+              "En": "Large Pilot Lamps",
+              "Fr": "Large Pilot Lamps",
+              "De": "Large Pilot Lamps",
+              "Es": "Large Pilot Lamps"
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120,
+              "font": 20
+            },
+            "style": {
+              "active": {
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 4.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "POWER": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "PWR",
+                        "Fr": "PWR",
+                        "De": "PWR",
+                        "Es": "PWR"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "active_color": "#00AAFF",
+                  "selected": true
+                },
+                "FAULT": {
+                  "label": {
+                    "active": {
+                      "text": {
+                        "En": "ERR",
+                        "Fr": "ERR",
+                        "De": "ERR",
+                        "Es": "ERR"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
+                  },
+                  "active_color": "#FF3300"
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

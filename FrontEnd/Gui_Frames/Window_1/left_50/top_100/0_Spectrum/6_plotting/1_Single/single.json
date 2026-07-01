@@ -1,0 +1,15 @@
+{
+  "Spectrum_plotting_Single": {
+    "type": "OcaBin",
+    "id": "50.100.0.6.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {}
+  }
+}

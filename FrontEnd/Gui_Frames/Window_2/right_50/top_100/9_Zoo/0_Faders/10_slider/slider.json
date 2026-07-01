@@ -1,0 +1,1445 @@
+{
+  "Zoo_Faders_slider": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.10",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Fader_Zoo_Volume": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Volume Fader Variations",
+          "Fr": "Variations de Faders de Volume",
+          "De": "Lautstärke-Fader-Variationen",
+          "Es": "Variaciones de Fader de Volumen"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "fader_vol1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Main",
+              "Fr": "Dark Main",
+              "De": "Dark Main",
+              "Es": "Dark Main"
+            },
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Grp 1",
+              "Fr": "Grp 1",
+              "De": "Grp 1",
+              "Es": "Grp 1"
+            },
+            "notes": "Red Group",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#FF5252"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Grp 2",
+              "Fr": "Grp 2",
+              "De": "Grp 2",
+              "Es": "Grp 2"
+            },
+            "notes": "Blue Group",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#448AFF"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Vox",
+              "Fr": "Vox",
+              "De": "Vox",
+              "Es": "Vox"
+            },
+            "notes": "Purple Vox",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#E040FB"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Drums",
+              "Fr": "Drums",
+              "De": "Drums",
+              "Es": "Drums"
+            },
+            "notes": "Orange Drums",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFAB40"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Bass",
+              "Fr": "Bass",
+              "De": "Bass",
+              "Es": "Bass"
+            },
+            "notes": "Green Bass",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -4.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#69F0AE"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Keys",
+              "Fr": "Keys",
+              "De": "Keys",
+              "Es": "Keys"
+            },
+            "notes": "Yellow Keys",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFFF00"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_vol8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark FX",
+              "Fr": "Dark FX",
+              "De": "Dark FX",
+              "Es": "Dark FX"
+            },
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#00BCD4"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "Fader_Zoo_Pan": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Pan Fader Variations (Horizontal)",
+          "Fr": "Panoramique Fader Variations (Horizontal)",
+          "De": "Panorama Fader Variationen (Horizontal)",
+          "Es": "Panorámico Fader Variaciones (Horizontal)"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "fader_pan1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark LCR",
+              "Fr": "Dark LCR",
+              "De": "Dark LCR",
+              "Es": "Dark LCR"
+            },
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "width": 150,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFC107"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Front",
+              "Fr": "Front",
+              "De": "Front",
+              "Es": "Front"
+            },
+            "notes": "Green Left",
+            "geometry": {
+              "width": 120,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": -50.0,
+                "max": 50.0,
+                "value_default": -25.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#00E676"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Rear",
+              "Fr": "Rear",
+              "De": "Rear",
+              "Es": "Rear"
+            },
+            "notes": "Blue Right",
+            "geometry": {
+              "width": 120,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": -50.0,
+                "max": 50.0,
+                "value_default": 25.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#00B0FF"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Surround",
+              "Fr": "Surround",
+              "De": "Surround",
+              "Es": "Surround"
+            },
+            "notes": "Purple",
+            "geometry": {
+              "width": 100,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#E040FB"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Width",
+              "Fr": "Largeur",
+              "De": "Breite",
+              "Es": "Ancho"
+            },
+            "notes": "Orange Width",
+            "geometry": {
+              "width": 150,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 200.0,
+                "value_default": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FF5722"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Div",
+              "Fr": "Div",
+              "De": "Div",
+              "Es": "Div"
+            },
+            "notes": "Grey Small",
+            "geometry": {
+              "width": 80,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#9E9E9E"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Focus",
+              "Fr": "Focus",
+              "De": "Focus",
+              "Es": "Focus"
+            },
+            "notes": "Red Wide",
+            "geometry": {
+              "width": 180,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#F44336"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_pan8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Trim",
+              "Fr": "Dark Trim",
+              "De": "Dark Trim",
+              "Es": "Dark Trim"
+            },
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "width": 100,
+              "orientation": "horiz"
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 20.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#3F51B5"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "Fader_Zoo_Gain": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Gain Fader Variations",
+          "Fr": "Variations de Faders de Gain",
+          "De": "Gain-Fader-Variationen",
+          "Es": "Variaciones de Fader de Ganancia"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "fader_gain1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark In",
+              "Fr": "Dark In",
+              "De": "Dark In",
+              "Es": "Dark In"
+            },
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 20.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#D32F2F"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Trim",
+              "Fr": "Trim",
+              "De": "Trim",
+              "Es": "Trim"
+            },
+            "notes": "Pink Trim",
+            "geometry": {
+              "height": 150,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -10.0,
+                "max": 10.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#C2185B"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Drive",
+              "Fr": "Drive",
+              "De": "Drive",
+              "Es": "Drive"
+            },
+            "notes": "Purple Drive",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#7B1FA2"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Makeup",
+              "Fr": "Compensation",
+              "De": "Makeup-Gain",
+              "Es": "Compensación"
+            },
+            "notes": "Deep Purple",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 24.0,
+                "value_default": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#512DA8"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Send",
+              "Fr": "Send",
+              "De": "Send",
+              "Es": "Send"
+            },
+            "notes": "Indigo Send",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 6.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#303F9F"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Return",
+              "Fr": "Return",
+              "De": "Return",
+              "Es": "Return"
+            },
+            "notes": "Blue Return",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 6.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#1976D2"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Output",
+              "Fr": "Sortie",
+              "De": "Ausgang",
+              "Es": "Salida"
+            },
+            "notes": "Light Blue Out",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 0.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#0288D1"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_gain8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Master",
+              "Fr": "Dark Master",
+              "De": "Dark Master",
+              "Es": "Dark Maestro"
+            },
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 10.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#0097A7"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "Fader_Zoo_DryWet": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Dry/Wet Fader Variations",
+          "Fr": "Dry/Wet Fader Variations",
+          "De": "Dry/Wet Fader Variationen",
+          "Es": "Dry/Wet Fader Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "fader_dw1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Verb",
+              "Fr": "Dark Verb",
+              "De": "Dark Verb",
+              "Es": "Dark Verb"
+            },
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#00796B"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
+            "notes": "Green Delay",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#388E3C"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Chorus",
+              "Fr": "Chorus",
+              "De": "Chorus",
+              "Es": "Coro"
+            },
+            "notes": "Light Green",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 30.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#689F38"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Flanger",
+              "Fr": "Flanger",
+              "De": "Flanger",
+              "Es": "Flanger"
+            },
+            "notes": "Lime Flanger",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#AFB42B"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Phaser",
+              "Fr": "Phaser",
+              "De": "Phaser",
+              "Es": "Phaser"
+            },
+            "notes": "Yellow Phaser",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FBC02D"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dist",
+              "Fr": "Dist",
+              "De": "Dist",
+              "Es": "Dist"
+            },
+            "notes": "Amber Dist",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 80.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#FFA000"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Comp",
+              "Fr": "Comp",
+              "De": "Comp",
+              "Es": "Comp"
+            },
+            "notes": "Orange Comp",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#F57C00"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_dw8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Gate",
+              "Fr": "Dark Porte",
+              "De": "Dark Gate",
+              "Es": "Dark Puerta"
+            },
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "height": 200,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#E64A19"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "Fader_Zoo_Threshold": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Threshold Fader Variations",
+          "Fr": "Seuil Fader Variations",
+          "De": "Schwellenwert Fader Variationen",
+          "Es": "Umbral Fader Variaciones"
+        },
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "fader_thr1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Gate",
+              "Fr": "Dark Porte",
+              "De": "Dark Gate",
+              "Es": "Dark Puerta"
+            },
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -80.0,
+                "max": 0.0,
+                "value_default": -40.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#5D4037"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Comp Thr",
+              "Fr": "Comp Thr",
+              "De": "Comp Thr",
+              "Es": "Comp Thr"
+            },
+            "notes": "Grey Comp",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 0.0,
+                "value_default": -20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#616161"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Limiter",
+              "Fr": "Limiteur",
+              "De": "Limiter",
+              "Es": "Limitador"
+            },
+            "notes": "Blue Grey",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 0.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#455A64"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Expander",
+              "Fr": "Expansion",
+              "De": "Expander",
+              "Es": "Expansor"
+            },
+            "notes": "Black Exp",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -80.0,
+                "max": 0.0,
+                "value_default": -50.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#000000"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "DeEss",
+              "Fr": "Dé-esseur",
+              "De": "DeEsser",
+              "Es": "DeEsser"
+            },
+            "notes": "Red DeEss",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -40.0,
+                "max": 0.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#D32F2F"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Ducker",
+              "Fr": "Ducker",
+              "De": "Ducker",
+              "Es": "Ducker"
+            },
+            "notes": "Pink Ducker",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 0.0,
+                "value_default": -30.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#C2185B"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Floor",
+              "Fr": "Floor",
+              "De": "Floor",
+              "Es": "Floor"
+            },
+            "notes": "Purple Floor",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": -40.0,
+                "value_default": -80.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#7B1FA2"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "fader_thr8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Dark Ceiling",
+              "Fr": "Dark Ceiling",
+              "De": "Dark Ceiling",
+              "Es": "Dark Ceiling"
+            },
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "height": 250,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 0.0,
+                "value_default": -0.1
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#512DA8"
+              },
+              "style_flags": {}
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

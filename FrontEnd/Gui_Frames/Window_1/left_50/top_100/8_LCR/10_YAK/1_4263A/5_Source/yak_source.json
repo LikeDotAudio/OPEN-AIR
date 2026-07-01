@@ -1,0 +1,89 @@
+{
+  "LCR_YAK_4263A_Source": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Source_Control": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Signal Source & Bias"
+        },
+        "fields": {
+          "Signal Level": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Level",
+                  "Fr": "Définir le niveau",
+                  "De": "Pegel einstellen",
+                  "Es": "Establecer nivel"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SOURce:VOLTage:LEVel {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "DC Bias Level": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set DC Bias",
+                  "Fr": "Définir la polarisation CC",
+                  "De": "DC-Bias einstellen",
+                  "Es": "Establecer polarización CC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SOURce:BIAS:VOLTage {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "DC Bias State": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "DC Bias",
+                  "Fr": "Polarisation CC",
+                  "De": "DC-Bias",
+                  "Es": "Polarización CC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SOURce:BIAS:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

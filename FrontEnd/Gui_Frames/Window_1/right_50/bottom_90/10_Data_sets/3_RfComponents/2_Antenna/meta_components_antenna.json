@@ -1,0 +1,44 @@
+{
+  "Omnidirectional_Dipole": {
+    "Type": "Omnidirectional (Dipole)",
+    "Description": "Radiates and receives signals equally well in all horizontal directions. Simple and widely used.",
+    "Use": "FM radio, Wi-Fi routers, short-range communication, general broadcasting.",
+    "Selected": "no"
+  },
+  "Omnidirectional_Ground_Plane": {
+    "Type": "Omnidirectional (Ground Plane)",
+    "Description": "A vertical radiator with horizontal radials acting as a ground plane, providing omnidirectional coverage.",
+    "Use": "VHF/UHF communication, amateur radio, base stations for mobile radio.",
+    "Selected": "no"
+  },
+  "Directional_Yagi_Uda": {
+    "Type": "Directional (Yagi-Uda)",
+    "Description": "Consists of a driven element, a reflector, and one or more directors. Highly directional with good gain.",
+    "Use": "TV reception, amateur radio, point-to-point communication, long-distance communication.",
+    "Selected": "no"
+  },
+  "Directional_Parabolic_Dish": {
+    "Type": "Directional (Parabolic Dish)",
+    "Description": "A large, curved reflector that focuses electromagnetic waves to or from a feed antenna at its focal point, providing very high gain and narrow beamwidth.",
+    "Use": "Satellite communication, radar, radio astronomy, microwave links.",
+    "Selected": "no"
+  },
+  "Loop_Antenna": {
+    "Type": "Loop Antenna",
+    "Description": "A closed-loop conductor. Can be small (resonant) or large (non-resonant), with varying directional properties depending on size and configuration.",
+    "Use": "AM radio reception, RFID, direction finding, amateur radio (especially for lower frequencies).",
+    "Selected": "no"
+  },
+  "Patch_Antenna": {
+    "Type": "Patch Antenna",
+    "Description": "A flat, rectangular or circular metal patch mounted over a ground plane. Compact and low-profile.",
+    "Use": "GPS devices, mobile phones, satellite communication, Wi-Fi access points.",
+    "Selected": "no"
+  },
+  "Horn_Antenna": {
+    "Type": "Horn Antenna",
+    "Description": "A flared metal waveguide, used for directing radio waves in a beam. High gain and good impedance matching.",
+    "Use": "Microwave communication, radar, satellite tracking, measurement systems.",
+    "Selected": "no"
+  }
+}

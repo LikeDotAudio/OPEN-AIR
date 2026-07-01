@@ -1,0 +1,100 @@
+{
+  "LCR_YAK_4263A_Resistance": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Resistance_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Resistance & DCR Measurement"
+        },
+        "fields": {
+          "Resistance Mode": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Mode",
+                  "Fr": "Définir le mode",
+                  "De": "Modus einstellen",
+                  "Es": "Establecer modo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "message": ":SENSe:FUNCtion:ON \"{value}\"",
+            "options": [
+              "RX",
+              "GB",
+              "DCR",
+              "LPDCR",
+              "LSDCR"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Test Frequency": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Frequency",
+                  "Fr": "Définir la fréquence",
+                  "De": "Frequenz einstellen",
+                  "Es": "Establecer frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:FREQuency:CW {value}",
+            "options": [
+              "100",
+              "120",
+              "1k",
+              "10k",
+              "100k"
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Current Range": {
+            "type": "_GuiActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Set Current Range",
+                  "Fr": "Définir la plage de courant",
+                  "De": "Strombereich einstellen",
+                  "Es": "Establecer rango de corriente"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":SENSe:CURRent:RANGe:UPPer {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

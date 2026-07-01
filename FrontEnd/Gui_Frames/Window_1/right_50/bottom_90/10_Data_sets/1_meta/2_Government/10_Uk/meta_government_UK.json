@@ -1,0 +1,62 @@
+{
+  "5G_NR_700MHz_Band_n28": {
+    "Value": "5G NR 700 MHz (Band n28)",
+    "Start_MHz": 703.0,
+    "Stop_MHz": 803.0
+  },
+  "4G_LTE_800MHz_Band_20": {
+    "Value": "4G LTE 800 MHz (Band 20)",
+    "Start_MHz": 791.0,
+    "Stop_MHz": 862.0
+  },
+  "2G_GSM_900MHz": {
+    "Value": "2G GSM 900 MHz",
+    "Start_MHz": 880.0,
+    "Stop_MHz": 960.0
+  },
+  "3G_UMTS_900MHz": {
+    "Value": "3G UMTS 900 MHz",
+    "Start_MHz": 880.0,
+    "Stop_MHz": 960.0
+  },
+  "2G_GSM_1800MHz": {
+    "Value": "2G GSM 1800 MHz",
+    "Start_MHz": 1710.0,
+    "Stop_MHz": 1880.0
+  },
+  "4G_LTE_1800MHz_Band_3": {
+    "Value": "4G LTE 1800 MHz (Band 3)",
+    "Start_MHz": 1710.0,
+    "Stop_MHz": 1880.0
+  },
+  "3G_UMTS_2100MHz": {
+    "Value": "3G UMTS 2100 MHz",
+    "Start_MHz": 1920.0,
+    "Stop_MHz": 2170.0
+  },
+  "4G_LTE_2100MHz_Band_1": {
+    "Value": "4G LTE 2100 MHz (Band 1)",
+    "Start_MHz": 1920.0,
+    "Stop_MHz": 2170.0
+  },
+  "4G_LTE_2300MHz_Band_40": {
+    "Value": "4G LTE 2300 MHz (Band 40)",
+    "Start_MHz": 2300.0,
+    "Stop_MHz": 2400.0
+  },
+  "4G_LTE_2600MHz_Band_7": {
+    "Value": "4G LTE 2600 MHz (Band 7)",
+    "Start_MHz": 2500.0,
+    "Stop_MHz": 2690.0
+  },
+  "5G_NR_3_4_3_8GHz_Band": {
+    "Value": "5G NR 3.4-3.8 GHz",
+    "Start_MHz": 3400.0,
+    "Stop_MHz": 3800.0
+  },
+  "5G_NR_26GHz_Band_n258": {
+    "Value": "5G NR 26 GHz (mmWave - n258)",
+    "Start_MHz": 24250.0,
+    "Stop_MHz": 27500.0
+  }
+}

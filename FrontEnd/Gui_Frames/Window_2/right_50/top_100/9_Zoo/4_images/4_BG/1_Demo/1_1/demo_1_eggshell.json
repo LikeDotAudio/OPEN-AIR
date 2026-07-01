@@ -1,0 +1,43 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.1",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 1 Eggshell | Base: #f0ead6 (flat) | Paint: #ffffff (0.1)",
+          "Fr": "Patina: 1 Eggshell | Base: #f0ead6 (flat) | Paint: #ffffff (0.1)",
+          "De": "Patina: 1 Eggshell | Base: #f0ead6 (flat) | Paint: #ffffff (0.1)",
+          "Es": "Patina: 1 Eggshell | Base: #f0ead6 (flat) | Paint: #ffffff (0.1)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#f0ead6",
+        "texture_type": "flat"
+      },
+      "paint_layer": {
+        "color": "#ffffff",
+        "opacity": 0.1
+      }
+    }
+  }
+}

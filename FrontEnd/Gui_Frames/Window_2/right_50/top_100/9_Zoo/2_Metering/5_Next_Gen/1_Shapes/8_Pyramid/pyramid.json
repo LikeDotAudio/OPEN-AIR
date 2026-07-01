@@ -1,0 +1,529 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Pyramid": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.8",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Pyramid_Variations": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Pyramid (Point Up) Meter Variations",
+          "Fr": "Pyramid (Point Up) Meter Variations",
+          "De": "Pyramid (Point Up) Meter Variationen",
+          "Es": "Pyramid (Point Up) Meter Variaciones"
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Pyramid_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Pyramid Large",
+              "Fr": "Pyramid Large",
+              "De": "Pyramid Large",
+              "Es": "Pyramid Large"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "silver",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 6,
+                "Pointer_Style": "needle",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": -5,
+                "tick_radius_offset": -5,
+                "label_radius_offset": -18,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "PYRAMID INSTRUMENTS",
+                    "Fr": "PYRAMID INSTRUMENTS",
+                    "De": "PYRAMID INSTRUMENTS",
+                    "Es": "PYRAMID INSTRUMENTS"
+                  },
+                  "x": 0,
+                  "y": 15,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -40,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#ffffff",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Pyramid_2_Emerald": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Emerald Pyramid",
+              "Fr": "Emerald Pyramid",
+              "De": "Emerald Pyramid",
+              "Es": "Emerald Pyramid"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FF00",
+                "bezel": "#008000",
+                "scale_label": "#00FF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "EMERALD SERIES",
+                    "Fr": "EMERALD SERIES",
+                    "De": "EMERALD SERIES",
+                    "Es": "EMERALD SERIES"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "#00FF00"
+                }
+              ]
+            }
+          },
+          "Pyramid_3_Small_Flat": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Small Flat",
+              "Fr": "Small Flat",
+              "De": "Small Flat",
+              "Es": "Small Flat"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#333333",
+                "bezel": "#33A1FD",
+                "scale_label": "#333333"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 2,
+                "Pointer_Style": "baton",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 20,
+                "tick_radius_offset": 20,
+                "label_radius_offset": 5,
+                "needle_length_factor": 1.4,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SMALL-P",
+                    "Fr": "SMALL-P",
+                    "De": "SMALL-P",
+                    "Es": "SMALL-P"
+                  },
+                  "x": 0,
+                  "y": 10,
+                  "size": 8
+                }
+              ]
+            }
+          },
+          "Pyramid_4_Night_Mode": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Night Mode",
+              "Fr": "Night Mode",
+              "De": "Night Mode",
+              "Es": "Night Mode"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFA500",
+                "bezel": "#333333",
+                "scale_label": "#FFA500"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "knife-edge",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "NIGHT CORE",
+                    "Fr": "NIGHT CORE",
+                    "De": "NIGHT CORE",
+                    "Es": "NIGHT CORE"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "#FFA500"
+                }
+              ]
+            }
+          },
+          "Pyramid_5_Royal": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Royal Pyramid",
+              "Fr": "Royal Pyramid",
+              "De": "Royal Pyramid",
+              "Es": "Royal Pyramid"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFD700",
+                "bezel": "#FFD700",
+                "scale_label": "#FFD700"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "spade",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "ROYAL VU",
+                    "Fr": "ROYAL VU",
+                    "De": "ROYAL VU",
+                    "Es": "ROYAL VU"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "gold"
+                }
+              ]
+            }
+          },
+          "Pyramid_6_Blueprint": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#FFFFFF",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 1,
+                "Pointer_Style": "line",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SCHEMATIC",
+                    "Fr": "SCHEMATIC",
+                    "De": "SCHEMATIC",
+                    "Es": "SCHEMATIC"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "white"
+                }
+              ]
+            }
+          },
+          "Pyramid_7_Cyber": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Cyber Pyramid",
+              "Fr": "Cyber Pyramid",
+              "De": "Cyber Pyramid",
+              "Es": "Cyber Pyramid"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FFFF",
+                "bezel": "#00FFFF",
+                "scale_label": "#00FFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "needle",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "CYBER CORE",
+                    "Fr": "CYBER CORE",
+                    "De": "CYBER CORE",
+                    "Es": "CYBER CORE"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "#00FFFF"
+                }
+              ]
+            }
+          },
+          "Pyramid_8_Classic_Cream": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Classic Cream",
+              "Fr": "Classique Cream",
+              "De": "Klassisch Cream",
+              "Es": "Clásico Cream"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#8B4513",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "baton",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "VINTAGE ANALOG",
+                    "Fr": "VINTAGE ANALOG",
+                    "De": "VINTAGE ANALOG",
+                    "Es": "VINTAGE ANALOG"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10
+                }
+              ]
+            }
+          },
+          "Pyramid_9_Ruby": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Ruby Pyramid",
+              "Fr": "Ruby Pyramid",
+              "De": "Ruby Pyramid",
+              "Es": "Ruby Pyramid"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#FF0000",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "pyramid",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop",
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": -15,
+                "needle_length_factor": 1.0,
+                "Meter_viewable_angle": 120
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "RUBY-P",
+                    "Fr": "RUBY-P",
+                    "De": "RUBY-P",
+                    "Es": "RUBY-P"
+                  },
+                  "x": 0,
+                  "y": 12,
+                  "size": 10,
+                  "color": "white"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

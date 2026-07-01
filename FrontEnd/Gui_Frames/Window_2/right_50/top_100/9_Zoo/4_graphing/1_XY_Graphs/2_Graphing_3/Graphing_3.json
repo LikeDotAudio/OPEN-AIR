@@ -1,0 +1,595 @@
+{
+  "Zoo_data_graphing_XY_Graphs_Graphing_3": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.1.2.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Log_Y_Zoom": {
+        "type": "plot_widget",
+        "title": "Logarithmic Y-Axis (Zoom Enabled)",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "axis": {
+          "y": {
+            "scale": "log"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        },
+        "datasets": [
+          {
+            "id": "exp_growth",
+            "initial_csv_data": "x,y\n0,1\n1,10\n2,100\n3,1000\n4,10000"
+          }
+        ],
+        "layout": {
+          "height": 50,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Log_X_Zoom": {
+        "type": "plot_widget",
+        "title": "Logarithmic X-Axis (Zoom Enabled)",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "axis": {
+          "x": {
+            "scale": "log"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        },
+        "datasets": [
+          {
+            "id": "log_decay",
+            "initial_csv_data": "x,y\n1,100\n10,10\n100,1\n1000,0.1"
+          }
+        ],
+        "layout": {
+          "height": 337,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Log_Log_Zoom": {
+        "type": "plot_widget",
+        "title": "Log-Log Plot (Zoom Enabled)",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "axis": {
+          "x": {
+            "scale": "log"
+          },
+          "y": {
+            "scale": "log"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true
+        },
+        "datasets": [
+          {
+            "id": "power_law",
+            "initial_csv_data": "x,y\n1,1\n2,8\n3,27\n4,64\n5,125"
+          }
+        ],
+        "layout": {
+          "height": 263,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Scatter_Plot": {
+        "type": "plot_widget",
+        "title": "Scatter Plot",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "datasets": [
+          {
+            "id": "scatter_data",
+            "initial_csv_data": "x,y\n1,5\n2,7\n3,3\n4,9\n5,5\n6,8\n7,2\n8,6",
+            "style": {
+              "marker": "x",
+              "line_style": "None"
+            }
+          }
+        ],
+        "layout": {
+          "height": 277,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "Multi_Style_Plot": {
+        "type": "plot_widget",
+        "title": "Multi-Style Plot",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "datasets": [
+          {
+            "id": "data1",
+            "label": {
+              "En": "Thick Red",
+              "Fr": "Thick Red",
+              "De": "Thick Red",
+              "Es": "Thick Red"
+            },
+            "initial_csv_data": "x,y\n0,1\n1,2\n2,1.5",
+            "style": {
+              "line_color": "red",
+              "line_width": 4
+            }
+          },
+          {
+            "id": "data2",
+            "label": {
+              "En": "Dashed Blue",
+              "Fr": "Dashed Blue",
+              "De": "Dashed Blue",
+              "Es": "Dashed Blue"
+            },
+            "initial_csv_data": "x,y\n0,2\n1,1\n2,1.2",
+            "style": {
+              "line_color": "blue",
+              "line_style": "--"
+            }
+          },
+          {
+            "id": "data3",
+            "label": {
+              "En": "Green Scatter",
+              "Fr": "Green Scatter",
+              "De": "Green Scatter",
+              "Es": "Green Scatter"
+            },
+            "initial_csv_data": "x,y\n0.5,1.5\n1.5,1.5",
+            "style": {
+              "marker": "o",
+              "line_style": "None",
+              "color": "green"
+            }
+          }
+        ],
+        "layout": {
+          "height": 261,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "Financial_Plot": {
+        "type": "plot_widget",
+        "title": "Stock Price",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "#003300",
+        "datasets": [
+          {
+            "id": "stock",
+            "initial_csv_data": "x,y\n0,100\n1,102\n2,101\n3,105\n4,103\n5,108\n6,110",
+            "style": {
+              "line_color": "lime"
+            }
+          }
+        ],
+        "layout": {
+          "height": 325,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "Heartbeat_Plot": {
+        "type": "plot_widget",
+        "title": "EKG",
+        "show_title": false,
+        "enable_hover": true,
+        "bg_color": "black",
+        "datasets": [
+          {
+            "id": "ekg",
+            "initial_csv_data": "x,y\n0,0\n0.1,0\n0.2,2\n0.3,-1\n0.4,0\n0.5,0.2\n0.6,0\n1,0\n1.1,0\n1.2,2\n1.3,-1\n1.4,0\n1.5,0.2\n1.6,0",
+            "style": {
+              "line_color": "#00FF00"
+            }
+          }
+        ],
+        "layout": {
+          "height": 309,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "Spiral_Plot": {
+        "type": "plot_widget",
+        "title": "Spiral",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "match_theme",
+        "datasets": [
+          {
+            "id": "spiral",
+            "initial_csv_data": "x,y\n0,0\n0.1,1\n1,1.1\n1.1,0.1\n0.2,0\n0,0.2\n0.8,0\n1,-0.8\n-0.8,-0.8\n-0.8,0.8\n0.8,0.8"
+          }
+        ],
+        "layout": {
+          "height": 321,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "Scientific_Plot": {
+        "type": "plot_widget",
+        "title": "Publication Style",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "white",
+        "datasets": [
+          {
+            "id": "scientific_data",
+            "initial_csv_data": "x,y\n1,2.1\n2,3.9\n3,6.2\n4,8.1\n5,10.3",
+            "style": {
+              "line_color": "black",
+              "marker": "s",
+              "line_style": "--"
+            }
+          }
+        ],
+        "layout": {
+          "height": 270,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        },
+        "axis": {
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          },
+          "y": {
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        }
+      },
+      "All_Features_Plot": {
+        "type": "plot_widget",
+        "title": "All Features",
+        "show_title": true,
+        "enable_hover": true,
+        "bg_color": "#2c3e50",
+        "axis": {
+          "y": {
+            "label": {
+              "En": "Amplitude",
+              "Fr": "Amplitude",
+              "De": "Amplitude",
+              "Es": "Amplitude"
+            }
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true,
+          "x": {
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
+            "scale": "linear",
+            "color": "white",
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
+          }
+        },
+        "datasets": [
+          {
+            "id": "signal",
+            "label": {
+              "En": "Signal",
+              "Fr": "Signal",
+              "De": "Signal",
+              "Es": "Signal"
+            },
+            "initial_csv_data": "x,y\n0,5\n1,6\n2,5\n3,4\n4,5",
+            "style": {
+              "line_color": "#1abc9c",
+              "line_width": 2
+            }
+          },
+          {
+            "id": "noise",
+            "label": {
+              "En": "Noise",
+              "Fr": "Noise",
+              "De": "Noise",
+              "Es": "Noise"
+            },
+            "initial_csv_data": "x,y\n0,0.1\n1,-0.2\n2,0.3\n3,-0.1\n4,0.2",
+            "style": {
+              "line_color": "#f1c40f",
+              "line_style": ":",
+              "line_width": 1
+            }
+          }
+        ],
+        "layout": {
+          "height": 196,
+          "alpha": 0.9
+        },
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "Zoo_text_value_box": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Set Point",
+              "Fr": "Set Point",
+              "De": "Set Point",
+              "Es": "Set Point"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartValue",
+            "label": {
+              "En": "Set Point",
+              "Fr": "Set Point",
+              "De": "Set Point",
+              "Es": "Set Point"
+            },
+            "notes": "An editable box for setting a numerical value with units.",
+            "geometry": {
+              "width": 150,
+              "height": 30,
+              "sticky": "ew",
+              "font": 14,
+              "colour": "#d18616"
+            },
+            "domain": {
+              "primary": {
+                "value_default": "25.0",
+                "units": "°C"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Name",
+              "Fr": "Name",
+              "De": "Name",
+              "Es": "Name"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartValue",
+            "label": {
+              "En": "Name",
+              "Fr": "Name",
+              "De": "Name",
+              "Es": "Name"
+            },
+            "notes": "An editable box for entering text, no units.",
+            "geometry": {
+              "width": 200,
+              "height": 35,
+              "font": 14
+            },
+            "domain": {
+              "primary": {
+                "value_default": "Guest",
+                "units": ""
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "IP Address",
+              "Fr": "IP Address",
+              "De": "IP Address",
+              "Es": "IP Address"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartValue",
+            "label": {
+              "En": "IP Address",
+              "Fr": "IP Address",
+              "De": "IP Address",
+              "Es": "IP Address"
+            },
+            "notes": "Input field specifically for IP addresses.",
+            "geometry": {
+              "width": 180,
+              "height": 30,
+              "font": 11
+            },
+            "domain": {
+              "primary": {
+                "value_default": "192.168.1.1"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartValue",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
+            "notes": "Compact input for a small numerical value.",
+            "geometry": {
+              "width": 120,
+              "height": 25,
+              "font": 10
+            },
+            "domain": {
+              "primary": {
+                "value_default": "0.5",
+                "units": "s"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Password",
+              "Fr": "Password",
+              "De": "Password",
+              "Es": "Password"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
+        },
+        "fields": {
+          "examplefields": {
+            "type": "_SmartValue",
+            "label": {
+              "En": "Password",
+              "Fr": "Password",
+              "De": "Password",
+              "Es": "Password"
+            },
+            "notes": "Example of a value box for sensitive input (visual only).",
+            "geometry": {
+              "width": 170,
+              "height": 30,
+              "sticky": "ew",
+              "font": 10,
+              "colour": "#888888"
+            },
+            "domain": {
+              "primary": {
+                "value_default": "******"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
+          }
+        }
+      }
+    }
+  }
+}

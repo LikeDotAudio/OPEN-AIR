@@ -1,0 +1,103 @@
+{
+  "HP_4263A_MODE": {
+    "type": "OcaBin",
+    "id": "4263A.FUNC.001",
+    "blocks": {
+      "Function_Select": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Measurement Type",
+          "Fr": "Mesurerment Type",
+          "De": "Messenment Typ",
+          "Es": "Medidament Tipo"
+        },
+        "fields": {
+          "Capacitance": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Cp-D",
+                  "Fr": "Cp-D",
+                  "De": "Cp-D",
+                  "Es": "Cp-D"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":FUNC:IMP:TYPE CPD",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Inductance": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Ls-Q",
+                  "Fr": "Ls-Q",
+                  "De": "Ls-Q",
+                  "Es": "Ls-Q"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":FUNC:IMP:TYPE LSQ",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Impedance": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Z-Theta",
+                  "Fr": "Z-Thêta",
+                  "De": "Z-Theta",
+                  "Es": "Z-Theta"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":FUNC:IMP:TYPE ZTD",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          },
+          "Transformer_N": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Turns Ratio (N)",
+                  "Fr": "Turns Ratio (N)",
+                  "De": "Turns Ratio (N)",
+                  "Es": "Turns Ratio (N)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "message": ":FUNC:TRNS:TYPE N",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

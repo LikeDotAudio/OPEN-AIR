@@ -1,0 +1,362 @@
+{
+  "Oscilloscope_YAK_54641D_TIMebase": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Timebase (Horizontal) Settings",
+          "Fr": "Tempsbase (Horizontal) Paramètres",
+          "De": "Zeitbase (Horizontal) Einstellungen",
+          "Es": "Tiempobase (Horizontal) Ajustes"
+        },
+        "fields": {
+          "Set_Scale": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TIMebase:SCALe <scale>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "scale": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s/div"
+                    },
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "Échelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Position": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TIMebase:POSition <pos>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "pos": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
+                    "label": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Reference": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TIMebase:REFerence <ref>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "ref": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ref",
+                      "Fr": "Réf",
+                      "De": "Ref",
+                      "Es": "Ref"
+                    },
+                    "description": {
+                      "En": "LEFT, CENTer, RIGHt",
+                      "Fr": "LEFT, CENTer, RIGHt",
+                      "De": "LEFT, CENTer, RIGHt",
+                      "Es": "LEFT, CENTer, RIGHt"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TIMebase:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "MAIN, WINDow, XY, ROLL",
+                      "Fr": "MAIN, WINDow, XY, ROLL",
+                      "De": "MAIN, WINDow, XY, ROLL",
+                      "Es": "MAIN, WINDow, XY, ROLL"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Window_Mode_Settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Zoom Window Settings",
+              "Fr": "Paramètres de la fenêtre de zoom",
+              "De": "Zoom-Fenster-Einstellungen",
+              "Es": "Ajustes de la ventana de zoom"
+            },
+            "fields": {
+              "Set_Window_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": "TIMebase:WINDow:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "scale": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "s/div"
+                        },
+                        "label": {
+                          "En": "Zoom Scale",
+                          "Fr": "Zoom Échelle",
+                          "De": "Zoom Skala",
+                          "Es": "Zoom Escala"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Window_Position": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": "TIMebase:WINDow:POSition <pos>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "pos": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
+                        "label": {
+                          "En": "Zoom Pos",
+                          "Fr": "Zoom Pos",
+                          "De": "Zoom Pos",
+                          "Es": "Zoom Pos"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

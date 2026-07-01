@@ -1,0 +1,108 @@
+{
+  "Distortion_YAK_Porta_one_Channel_B": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel B Configuration",
+          "Fr": "Canal B Configuration",
+          "De": "Kanal B Configuration",
+          "Es": "Canal B Configuration"
+        },
+        "fields": {
+          "Input_Selection_B": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Route signals to Analyzer B",
+              "Fr": "Route signals to Analyzer B",
+              "De": "Route signals to Analyzer B",
+              "Es": "Route signals to Analyzer B"
+            },
+            "fields": {
+              "Select_Input_Analog_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":INPut B"
+                  }
+                }
+              },
+              "Select_Input_Gen_Monitor_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": ":INPut GENB"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

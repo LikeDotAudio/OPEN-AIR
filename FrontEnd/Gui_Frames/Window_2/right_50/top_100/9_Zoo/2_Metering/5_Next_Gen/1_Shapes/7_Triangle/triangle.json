@@ -1,0 +1,476 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Triangle": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Triangle_Variations": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Triangle (Point Down) Meter Variations",
+          "Fr": "Triangle (Point Down) Meter Variations",
+          "De": "Triangle (Point Down) Meter Variationen",
+          "Es": "Triangle (Point Down) Meter Variaciones"
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Triangle_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Triangle Large",
+              "Fr": "Triangle Large",
+              "De": "Triangle Large",
+              "Es": "Triangle Large"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 350
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "gold",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 6,
+                "Pointer_Style": "needle",
+                "pivot_colour": "#FFFFFF"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "TRIANGLE INSTRUMENTS",
+                    "Fr": "TRIANGLE INSTRUMENTS",
+                    "De": "TRIANGLE INSTRUMENTS",
+                    "Es": "TRIANGLE INSTRUMENTS"
+                  },
+                  "x": 0,
+                  "y": -220,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "gold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -180,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#ffffff",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Triangle_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Triangle Medium",
+              "Fr": "Triangle Moyen",
+              "De": "Triangle Mittel",
+              "Es": "Triangle Medio"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "silver",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 5,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SILVER-TRI",
+                    "Fr": "SILVER-TRI",
+                    "De": "SILVER-TRI",
+                    "Es": "SILVER-TRI"
+                  },
+                  "x": 0,
+                  "y": -160,
+                  "size": 10,
+                  "weight": "bold"
+                }
+              ]
+            }
+          },
+          "Triangle_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Triangle Small",
+              "Fr": "Triangle Small",
+              "De": "Triangle Small",
+              "Es": "Triangle Small"
+            },
+            "geometry": {
+              "width": 150,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#000000",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 2,
+                "mask": false,
+                "Pointer_Style": "teardrop",
+                "arc_radius_offset": 80,
+                "tick_radius_offset": 80,
+                "label_radius_offset": 105,
+                "needle_length_factor": 2.5
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "MINI-T",
+                    "Fr": "MINI-T",
+                    "De": "MINI-T",
+                    "Es": "MINI-T"
+                  },
+                  "x": 0,
+                  "y": -190,
+                  "size": 8
+                }
+              ]
+            }
+          },
+          "Triangle_4_Hazard": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Hazard Triangle",
+              "Fr": "Hazard Triangle",
+              "De": "Hazard Triangle",
+              "Es": "Hazard Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "CAUTION: HIGH LEVEL",
+                    "Fr": "CAUTION: HIGH LEVEL",
+                    "De": "CAUTION: HIGH LEVEL",
+                    "Es": "CAUTION: HIGH LEVEL"
+                  },
+                  "x": 0,
+                  "y": -165,
+                  "size": 10,
+                  "weight": "bold"
+                }
+              ]
+            }
+          },
+          "Triangle_5_Ice": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Ice Triangle",
+              "Fr": "Ice Triangle",
+              "De": "Ice Triangle",
+              "Es": "Ice Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#ADD8E6",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 4,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "ICE-CORE VU",
+                    "Fr": "ICE-CORE VU",
+                    "De": "ICE-CORE VU",
+                    "Es": "ICE-CORE VU"
+                  },
+                  "x": 0,
+                  "y": -160,
+                  "size": 10,
+                  "color": "#00E5FF",
+                  "weight": "bold"
+                }
+              ]
+            }
+          },
+          "Triangle_6_Forest": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Forest Triangle",
+              "Fr": "Forest Triangle",
+              "De": "Forest Triangle",
+              "Es": "Forest Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#98FB98",
+                "bezel": "#006400",
+                "scale_label": "#98FB98"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "line"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "FOREST ANALOG",
+                    "Fr": "FOREST ANALOG",
+                    "De": "FOREST ANALOG",
+                    "Es": "FOREST ANALOG"
+                  },
+                  "x": 0,
+                  "y": -160,
+                  "size": 10,
+                  "color": "#98FB98"
+                }
+              ]
+            }
+          },
+          "Triangle_7_Neon": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Neon Triangle",
+              "Fr": "Neon Triangle",
+              "De": "Neon Triangle",
+              "Es": "Neon Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FF00FF",
+                "bezel": "#FF00FF",
+                "scale_label": "#FF00FF"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "NEON-TRI",
+                    "Fr": "NEON-TRI",
+                    "De": "NEON-TRI",
+                    "Es": "NEON-TRI"
+                  },
+                  "x": 0,
+                  "y": -165,
+                  "size": 12,
+                  "color": "#FF00FF",
+                  "weight": "bold"
+                }
+              ]
+            }
+          },
+          "Triangle_8_Slate": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Slate Triangle",
+              "Fr": "Slate Triangle",
+              "De": "Slate Triangle",
+              "Es": "Slate Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -12.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#2F4F4F",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "SLATE PRECISION",
+                    "Fr": "SLATE PRECISION",
+                    "De": "SLATE PRECISION",
+                    "Es": "SLATE PRECISION"
+                  },
+                  "x": 0,
+                  "y": -160,
+                  "size": 10
+                }
+              ]
+            }
+          },
+          "Triangle_9_Fire": {
+            "type": "_NeedleVUMeter",
+            "label": {
+              "En": "Fire Triangle",
+              "Fr": "Fire Triangle",
+              "De": "Fire Triangle",
+              "Es": "Fire Triangle"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#FF4500",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "triangle",
+                "bezel_width": 7,
+                "enable_lighting": true,
+                "Pointer_Style": "taper"
+              },
+              "labels": [
+                {
+                  "text": {
+                    "En": "THERMAL VU",
+                    "Fr": "THERMAL VU",
+                    "De": "THERMAL VU",
+                    "Es": "THERMAL VU"
+                  },
+                  "x": 0,
+                  "y": -170,
+                  "size": 12,
+                  "weight": "bold",
+                  "color": "#FF4500"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

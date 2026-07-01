@@ -1,0 +1,402 @@
+{
+  "Load_YAK_6060B_TRANsient": {
+    "type": "OcaBin",
+    "id": "50.100.7.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Transient": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Pulse & Dynamic Loading",
+          "Fr": "Chargement pulsé et dynamique",
+          "De": "Impuls- und dynamisches Laden",
+          "Es": "Carga pulsada y dinámica"
+        },
+        "fields": {
+          "Transient_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Transient_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Trans ON",
+                      "Fr": "Trans ON",
+                      "De": "Trans ON",
+                      "Es": "Trans ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": "TRAN:STAT ON"
+                }
+              },
+              "Transient_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Trans OFF",
+                      "Fr": "Trans DÉSACTIVÉ",
+                      "De": "Trans AUS",
+                      "Es": "Trans DESACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": "TRAN:STAT OFF"
+                }
+              }
+            }
+          },
+          "Set_Transient_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TRAN:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "CONT, PULS, TOGG",
+                      "Fr": "CONT, PULS, TOGG",
+                      "De": "CONT, PULS, TOGG",
+                      "Es": "CONT, PULS, TOGG"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Transient_Level_A": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "CURR:LEV <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Level A",
+                      "Fr": "Niveau A",
+                      "De": "Pegel A",
+                      "Es": "Nivel A"
+                    },
+                    "description": {
+                      "En": "Main Level",
+                      "Fr": "Main Niveau",
+                      "De": "Main Pegel",
+                      "Es": "Main Nivel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Transient_Level_B": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "CURR:TLEV <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Level B",
+                      "Fr": "Niveau B",
+                      "De": "Pegel B",
+                      "Es": "Nivel B"
+                    },
+                    "description": {
+                      "En": "Transient Level",
+                      "Fr": "Transitoire Niveau",
+                      "De": "Transient Pegel",
+                      "Es": "Transitorio Nivel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Transient_Freq": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TRAN:FREQ <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
+                    "description": {
+                      "En": "Hz",
+                      "Fr": "Hz",
+                      "De": "Hz",
+                      "Es": "Hz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Transient_Duty": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "TRAN:DCYC <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "%"
+                    },
+                    "label": {
+                      "En": "Duty Cycle",
+                      "Fr": "Duty Cycle",
+                      "De": "Duty Cycle",
+                      "Es": "Duty Cycle"
+                    },
+                    "description": {
+                      "En": "Percent",
+                      "Fr": "Percent",
+                      "De": "Percent",
+                      "Es": "Percent"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

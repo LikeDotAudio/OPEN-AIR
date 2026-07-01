@@ -1,0 +1,39 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.3.1.16",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "Fr": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "De": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "Es": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#777b7e",
+        "texture_type": "brushed"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.11",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "Fr": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "De": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "Es": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#8b8d8e",
+        "texture_type": "flat"
+      },
+      "screws": {
+        "enabled": true,
+        "locations": [
+          "top",
+          "bottom"
+        ]
+      }
+    }
+  }
+}

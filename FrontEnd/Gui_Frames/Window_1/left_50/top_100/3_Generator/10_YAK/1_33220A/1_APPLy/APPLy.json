@@ -1,0 +1,341 @@
+{
+  "Generator_YAK_33220A_APPLy": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "APPLy Subsystem",
+          "Fr": "Appliquer le sous-système",
+          "De": "Subsystem anwenden",
+          "Es": "Aplicar subsistema"
+        },
+        "fields": {
+          "Quick_Setup_Apply": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "APPLy Macro Commands",
+              "Fr": "Appliquer les commandes macro",
+              "De": "Makrobefehle anwenden",
+              "Es": "Aplicar comandos macro"
+            },
+            "fields": {
+              "Apply_Sine": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": "APPLy:SINusoid <freq>, <amp>, <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "freq": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        }
+                      },
+                      "amp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        },
+                        "description": {
+                          "En": "Amplitude in Vpp",
+                          "Fr": "Amplitude en Vpp",
+                          "De": "Amplitude in Vss",
+                          "Es": "Amplitud in Vpp"
+                        }
+                      },
+                      "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
+                        "description": {
+                          "En": "Offset in Volts",
+                          "Fr": "Décalage in Volts",
+                          "De": "Versatz in Volts",
+                          "Es": "Compensación in Volts"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Apply_Square": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": "APPLy:SQUare <freq>, <amp>, <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "freq": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        }
+                      },
+                      "amp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        }
+                      },
+                      "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Apply_Pulse": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "active": true,
+                    "message": "APPLy:PULSe <freq>, <amp>, <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "freq": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        }
+                      },
+                      "amp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        }
+                      },
+                      "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "APPLy Readbacks",
+          "Fr": "Lectures APPLY",
+          "De": "APPLY-Rücklesewerte",
+          "Es": "Lecturas APPLY"
+        },
+        "fields": {
+          "Get_Apply_String": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "APPLy?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "config_string": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Config String",
+                      "Fr": "Config String",
+                      "De": "Config String",
+                      "Es": "Config String"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

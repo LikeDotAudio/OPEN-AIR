@@ -1,0 +1,570 @@
+{
+  "rig": {
+    "type": "OcaBlock",
+    "description": {
+      "En": "Switching Commands",
+      "Fr": "Switching Commands",
+      "De": "Switching Commands",
+      "Es": "Switching Commands"
+    },
+    "fields": {
+      "Connect_Paths": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Close Relays",
+          "Fr": "Close Relays",
+          "De": "Close Relays",
+          "Es": "Close Relays"
+        },
+        "fields": {
+          "Close_Channels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "CLOSE <channel_list>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel_list": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
+                    "description": {
+                      "En": "List of channels to close",
+                      "Fr": "List of channels to close",
+                      "De": "List of channels to close",
+                      "Es": "List of channels to close"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Disconnect_Paths": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Open Relays",
+          "Fr": "Open Relays",
+          "De": "Open Relays",
+          "Es": "Open Relays"
+        },
+        "fields": {
+          "Open_Channels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "OPEN <channel_list>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel_list": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
+                    "description": {
+                      "En": "List of channels to open",
+                      "Fr": "List of channels to open",
+                      "De": "List of channels to open",
+                      "Es": "List of channels to open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Exclusive_Switching": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Break-Before-Make",
+          "Fr": "Break-Before-Make",
+          "De": "Break-Before-Make",
+          "Es": "Break-Before-Make"
+        },
+        "fields": {
+          "Select_Channel": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "description": {
+                  "En": "Opens all others in bank, then closes target.",
+                  "Fr": "Ouvre tous les autres dans la banque, puis ferme la cible.",
+                  "De": "Öffnet alle anderen in der Bank und schließt dann das Ziel.",
+                  "Es": "Abre todos los demás en el banco, luego cierra el objetivo."
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "SELECT <channel>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
+                    "description": {
+                      "En": "Target Channel",
+                      "Fr": "Target Canal",
+                      "De": "Target Kanal",
+                      "Es": "Target Canal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "set": {
+    "type": "OcaBlock",
+    "description": {
+      "En": "System Reset & Control",
+      "Fr": "Système Réinitialiser & Contrôle",
+      "De": "System Zurücksetzen & Steuerung",
+      "Es": "Sistema Reiniciar & Control"
+    },
+    "fields": {
+      "System_Reset": {
+        "type": "OcaBlock",
+        "fields": {
+          "Reset_System": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "RESET System",
+                  "Fr": "RESET Système",
+                  "De": "RESET System",
+                  "Es": "RESET Sistema"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "active": true,
+            "Execute Command": {
+              "message": "RESET"
+            }
+          },
+          "Card_Reset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Card Reset",
+                      "Fr": "Card Réinitialiser",
+                      "De": "Card Zurücksetzen",
+                      "Es": "Card Reiniciar"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "CRESET <slot>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "slot": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
+                    "description": {
+                      "En": "Slot to reset",
+                      "Fr": "Slot to reset",
+                      "De": "Slot to reset",
+                      "Es": "Slot to reset"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Clear_State": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Clear (CLR)",
+                  "Fr": "Effacer (CLR)",
+                  "De": "Löschen (CLR)",
+                  "Es": "Borrar (CLR)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "active": true,
+            "Execute Command": {
+              "message": "CLR"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Router_YAK_3235_Commands": {
+    "type": "OcaBlock",
+    "id": "50.100.1.10.1.1",
+    "description": {
+      "En": "State Queries & ID",
+      "Fr": "State Queries & ID",
+      "De": "State Queries & ID",
+      "Es": "State Queries & ID"
+    },
+    "fields": {
+      "Channel_Status": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Query specific relay state",
+          "Fr": "Query specific relay state",
+          "De": "Query specific relay state",
+          "Es": "Query specific relay state"
+        },
+        "fields": {
+          "Query_Channel_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "CLOSE? <channel>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
+                    "description": {
+                      "En": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Fr": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "De": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Es": "Formato: esnn (e=extender, s=slot, nn=channel)"
+                    }
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "System_Info": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Hardware Identification",
+          "Fr": "Hardware Identification",
+          "De": "Hardware Identification",
+          "Es": "Hardware Identification"
+        },
+        "fields": {
+          "Query_Slot_ID": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "ID? <slot>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "slot": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
+                    "description": {
+                      "En": "Slot Number (e.g., 100)",
+                      "Fr": "Slot Number (e.g., 100)",
+                      "De": "Slot Number (e.g., 100)",
+                      "Es": "Slot Number (e.g., 100)"
+                    }
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "id_string": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "ID String",
+                      "Fr": "Chaîne ID",
+                      "De": "ID-String",
+                      "Es": "Cadena de ID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

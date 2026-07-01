@@ -1,0 +1,43 @@
+{
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.2",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "Fr": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "De": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "Es": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#2a2a2a",
+        "texture_type": "hammered"
+      },
+      "rust": {
+        "enabled": true,
+        "intensity": 0.8
+      }
+    }
+  }
+}

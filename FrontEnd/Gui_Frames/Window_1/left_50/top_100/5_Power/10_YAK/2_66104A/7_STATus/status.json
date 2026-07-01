@@ -1,0 +1,79 @@
+{
+  "Power_YAK_66104A_STATus": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Status": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Status Registers",
+          "Fr": "État Registers",
+          "De": "Status Registers",
+          "Es": "Estado Registers"
+        },
+        "fields": {
+          "Questionable_Condition": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "active": true,
+                "message": "STAT:QUES:COND?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "condition": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Condition",
+                      "Fr": "Condition",
+                      "De": "Condition",
+                      "Es": "Condition"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

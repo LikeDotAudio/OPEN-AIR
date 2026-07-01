@@ -1,0 +1,1044 @@
+{
+  "Load_Instrument_B": {
+    "type": "OcaBin",
+    "id": "50.100.7.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dual_Entropy_Matrix": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Parallel Energy Depletion System",
+          "Fr": "Système de déplétion d'énergie parallèle",
+          "De": "Paralleles Energieentladungssystem",
+          "Es": "Sistema de agotamiento de energía paralelo"
+        },
+        "fields": {
+          "Global_Safety_Interlock": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "MASTER DISCONNECT",
+              "Fr": "DÉCONNEXION MAÎTRE",
+              "De": "HAUPTTRENNUNG",
+              "Es": "DESCONEXIÓN MAESTRA"
+            },
+            "fields": {
+              "Global_Kill_Switch": {
+                "type": "_TrapezoidButton",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "De": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "ENGAGE TWIN LOADS",
+                      "Fr": "ENGAGE TWIN LOADS",
+                      "De": "ENGAGE TWIN LOADS",
+                      "Es": "ENGAGE TWIN LOADS"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "state_default": false,
+                "message_details": {
+                  "DC_LOAD_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "INP:ALL <state>"
+                  }
+                }
+              }
+            }
+          },
+          "Chamber_Alpha_Left": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "--- CHAMBER ALPHA (Unit 1) ---",
+              "Fr": "--- CHAMBER ALPHA (Unité 1) ---",
+              "De": "--- CHAMBER ALPHA (Einheit 1) ---",
+              "Es": "--- CHAMBER ALPHA (Unidad 1) ---"
+            },
+            "fields": {
+              "Header_A": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Label_A": {
+                    "type": "_TextInput",
+                    "value": {
+                      "default_value": "Batt_LiPo_Cell_1"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "DUT 1 ID",
+                          "Fr": "DUT 1 ID",
+                          "De": "DUT 1 ID",
+                          "Es": "DUT 1 ID"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "SYST:LAB:1 <value>"
+                      }
+                    }
+                  },
+                  "Activate_A": {
+                    "type": "_GuiButtonToggle",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "A: SINKING 🔥",
+                          "Fr": "A: SINKING 🔥",
+                          "De": "A: SINKING 🔥",
+                          "Es": "A: SINKING 🔥"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      },
+                      "inactive": {
+                        "text": {
+                          "En": "A: STANDBY",
+                          "Fr": "A: STANDBY",
+                          "De": "A: STANDBY",
+                          "Es": "A: STANDBY"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "state_default": false,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;INP <state>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Fader_Deck_A": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Load Mixing A",
+                  "Fr": "Charger Mixing A",
+                  "De": "Laden Mixing A",
+                  "Es": "Cargar Mixing A"
+                },
+                "fields": {
+                  "Base_Fader_A": {
+                    "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "BASE (A)",
+                          "Fr": "BASE (A)",
+                          "De": "BASE (A)",
+                          "Es": "BASE (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;CURR <value>"
+                      }
+                    }
+                  },
+                  "Pulse_Fader_A": {
+                    "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "PEAK (A)",
+                          "Fr": "PEAK (A)",
+                          "De": "PEAK (A)",
+                          "Es": "PEAK (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;CURR:TLEV <value>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Dynamics_A": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Pulse & Protect A",
+                  "Fr": "Pulse & Protect A",
+                  "De": "Pulse & Protect A",
+                  "Es": "Pulse & Protect A"
+                },
+                "fields": {
+                  "Pulse_Enable_A": {
+                    "type": "_GuiButtonToggle",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "PULSE ON",
+                          "Fr": "PULSE ON",
+                          "De": "PULSE ON",
+                          "Es": "PULSE ON"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      },
+                      "inactive": {
+                        "text": {
+                          "En": "PULSE OFF",
+                          "Fr": "PULSE OFF",
+                          "De": "PULSE OFF",
+                          "Es": "PULSE OFF"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "state_default": false,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;TRAN:STAT <value>"
+                      }
+                    }
+                  },
+                  "Cutoff_Knob_A": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0",
+                      "max": "20",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "3.0"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Stop Volts",
+                          "Fr": "Arrêter Volts",
+                          "De": "Stopp Volts",
+                          "Es": "Parar Volts"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;VOLT:PROT:LOW <value>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Telemetry_A": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Stats A",
+                  "Fr": "Stats A",
+                  "De": "Statistiken A",
+                  "Es": "Estadísticas A"
+                },
+                "fields": {
+                  "Ah_A": {
+                    "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.00 Ah"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Ah Drained",
+                          "Fr": "Ah Drained",
+                          "De": "Ah Drained",
+                          "Es": "Ah Drained"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;MEAS:AH?"
+                      }
+                    }
+                  },
+                  "Graph_A": {
+                    "type": "_GuiGraph",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Discharge A",
+                          "Fr": "Discharge A",
+                          "De": "Discharge A",
+                          "Es": "Discharge A"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "height": 120,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;MEAS:VOLT?"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Chamber_Separator": {
+            "type": "OcaSeparator",
+            "description": {
+              "En": " | ",
+              "Fr": " | ",
+              "De": " | ",
+              "Es": " | "
+            }
+          },
+          "Chamber_Beta_Right": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "--- CHAMBER BETA (Unit 2) ---",
+              "Fr": "--- CHAMBER BETA (Unité 2) ---",
+              "De": "--- CHAMBER BETA (Einheit 2) ---",
+              "Es": "--- CHAMBER BETA (Unidad 2) ---"
+            },
+            "fields": {
+              "Header_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Label_B": {
+                    "type": "_TextInput",
+                    "value": {
+                      "default_value": "Batt_Lead_Acid_Old"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "DUT 2 ID",
+                          "Fr": "DUT 2 ID",
+                          "De": "DUT 2 ID",
+                          "Es": "DUT 2 ID"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "SYST:LAB:2 <value>"
+                      }
+                    }
+                  },
+                  "Activate_B": {
+                    "type": "_GuiButtonToggle",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "B: SINKING 🔥",
+                          "Fr": "B: SINKING 🔥",
+                          "De": "B: SINKING 🔥",
+                          "Es": "B: SINKING 🔥"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      },
+                      "inactive": {
+                        "text": {
+                          "En": "B: STANDBY",
+                          "Fr": "B: STANDBY",
+                          "De": "B: STANDBY",
+                          "Es": "B: STANDBY"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "state_default": false,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;INP <state>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Fader_Deck_B": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Load Mixing B",
+                  "Fr": "Mélange de charge B",
+                  "De": "Lastmischung B",
+                  "Es": "Mezcla de carga B"
+                },
+                "fields": {
+                  "Base_Fader_B": {
+                    "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "BASE (A)",
+                          "Fr": "BASE (A)",
+                          "De": "BASE (A)",
+                          "Es": "BASE (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;CURR <value>"
+                      }
+                    }
+                  },
+                  "Pulse_Fader_B": {
+                    "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "PEAK (A)",
+                          "Fr": "PEAK (A)",
+                          "De": "PEAK (A)",
+                          "Es": "PEAK (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;CURR:TLEV <value>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Dynamics_B": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Pulse & Protect B",
+                  "Fr": "Pulse & Protect B",
+                  "De": "Pulse & Protect B",
+                  "Es": "Pulse & Protect B"
+                },
+                "fields": {
+                  "Pulse_Enable_B": {
+                    "type": "_GuiButtonToggle",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "PULSE ON",
+                          "Fr": "PULSE ON",
+                          "De": "PULSE ON",
+                          "Es": "PULSE ON"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      },
+                      "inactive": {
+                        "text": {
+                          "En": "PULSE OFF",
+                          "Fr": "PULSE OFF",
+                          "De": "PULSE OFF",
+                          "Es": "PULSE OFF"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "state_default": false,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;TRAN:STAT <value>"
+                      }
+                    }
+                  },
+                  "Cutoff_Knob_B": {
+                    "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0",
+                      "max": "24",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "10.5"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Stop Volts",
+                          "Fr": "Arrêter Volts",
+                          "De": "Stopp Volts",
+                          "Es": "Parar Volts"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;VOLT:PROT:LOW <value>"
+                      }
+                    }
+                  }
+                }
+              },
+              "Telemetry_B": {
+                "type": "OcaBlock",
+                "description": {
+                  "En": "Stats B",
+                  "Fr": "Stats B",
+                  "De": "Statistiken B",
+                  "Es": "Estadísticas B"
+                },
+                "fields": {
+                  "Ah_B": {
+                    "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.00 Ah"
+                    },
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Ah Drained",
+                          "Fr": "Ah Drained",
+                          "De": "Ah Drained",
+                          "Es": "Ah Drained"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;MEAS:AH?"
+                      }
+                    }
+                  },
+                  "Graph_B": {
+                    "type": "_GuiGraph",
+                    "label": {
+                      "active": {
+                        "text": {
+                          "En": "Discharge B",
+                          "Fr": "Discharge B",
+                          "De": "Discharge B",
+                          "Es": "Discharge B"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
+                      }
+                    },
+                    "height": 120,
+                    "message_details": {
+                      "DC_LOAD_MODEL": {
+                        "type": "_GuiActuator",
+                        "style": {
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#FF902C",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
+                        },
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;MEAS:VOLT?"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

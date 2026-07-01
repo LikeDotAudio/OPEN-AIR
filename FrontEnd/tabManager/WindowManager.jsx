@@ -253,12 +253,29 @@ const WindowManager = ({ directoryTree }) => {
                 >
                     ID: {mqttFullId ? mqttFullId.split(':')[0] + ':' + (mqttFullId.split(':')[1] || '') : '—'}
                 </div>
-                <div style={{
-                    fontSize: '10px',
-                    color: mqttConnected ? '#0f0' : '#f55',
-                    fontWeight: 'bold',
-                    letterSpacing: '1px',
-                }}>
+                <div 
+                    onClick={() => {
+                        const current = new URLSearchParams(window.location.search).get('mqtt') || window.location.hostname || 'localhost';
+                        const override = window.prompt("Enter MQTT Broker IP or Hostname to connect to:", current);
+                        if (override && override.trim() !== "" && override !== current) {
+                            const url = new URL(window.location.href);
+                            url.searchParams.set('mqtt', override.trim());
+                            window.location.href = url.toString();
+                        }
+                    }}
+                    title="Click to configure MQTT Server IP"
+                    style={{
+                        fontSize: '10px',
+                        color: mqttConnected ? '#0f0' : '#f55',
+                        fontWeight: 'bold',
+                        letterSpacing: '1px',
+                        cursor: 'pointer',
+                        padding: '2px 5px',
+                        borderRadius: '3px',
+                        border: '1px solid #333',
+                        backgroundColor: '#000'
+                    }}
+                >
                     {mqttConnected ? 'MQTT ACTIVE' : 'MQTT OFFLINE'}
                 </div>
             </div>

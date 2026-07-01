@@ -1165,55 +1165,94 @@
               ],
               "fields": {
                 "solo": {
-                  "type": "_WinkButton",
-                  "label": {
+                  "type": "_HighVisButton",
+                  "geometry": {
+                    "width": 50,
+                    "height": 35,
+                    "corner_radius": 6
+                  },
+                  "cosmetics": {
+                    "shape": "rect"
+                  },
+                  "style": {
                     "active": {
-                      "text": {
-                        "En": "",
-                        "Fr": "",
-                        "De": "",
-                        "Es": ""
-                      },
-                      "text_size": 12,
-                      "text_color": "#cccccc"
+                      "text_color": "#FFFFFF",
+                      "rim_color": "#FAD02C",
+                      "inner_bg_color": "#222222",
+                      "glow_intensity": 8
+                    },
+                    "inactive": {
+                      "text_color": "#FFFFFF",
+                      "rim_color": "#555555",
+                      "inner_bg_color": "#111111",
+                      "glow_intensity": 0
                     }
                   },
-                  "text_inside": "S",
-                  "text_closed": "",
-                  "color": "yellow",
-                  "shutter_color": "#444444",
-                  "shape_type": "round",
-                  "width": 50,
-                  "height": 50,
-                  "alpha": 0.9,
-                  "latching": true,
-                  "text_inside_color": "black",
-                  "text_closed_color": "white"
+                  "interaction": {
+                    "options": {
+                      "ON": {
+                        "label": {
+                          "active": {
+                            "text": "SOLO"
+                          }
+                        },
+                        "selected": false
+                      },
+                      "OFF": {
+                        "label": {
+                          "inactive": {
+                            "text": "SOLO"
+                          }
+                        },
+                        "selected": true
+                      }
+                    }
+                  }
                 },
                 "ch_on": {
-                  "type": "_WinkButton",
-                  "label": {
+                  "type": "_HighVisButton",
+                  "geometry": {
+                    "width": 50,
+                    "height": 35,
+                    "corner_radius": 6
+                  },
+                  "cosmetics": {
+                    "shape": "rect"
+                  },
+                  "style": {
                     "active": {
-                      "text": {
-                        "En": "",
-                        "Fr": "",
-                        "De": "",
-                        "Es": ""
-                      },
-                      "text_size": 12,
-                      "text_color": "#cccccc"
+                      "text_color": "#FF6b35",
+                      "rim_color": "#4A6EAA",
+                      "inner_bg_color": "#222222",
+                      "glow_intensity": 6
+                    },
+                    "inactive": {
+                      "text_color": "#999999",
+                      "rim_color": "#555555",
+                      "inner_bg_color": "#2a2a2a",
+                      "glow_intensity": 0
                     }
                   },
-                  "text_inside": "CH ON",
-                  "text_closed": "",
-                  "color": "red",
-                  "shutter_color": "#444444",
-                  "shape_type": "round",
-                  "width": 50,
-                  "height": 50,
-                  "latching": true,
-                  "text_inside_color": "white",
-                  "text_closed_color": "white"
+                  "interaction": {
+                    "options": {
+                      "ON": {
+                        "label": {
+                          "active": {
+                            "text": "MUTE"
+                          }
+                        },
+                        "selected": false
+                      },
+                      "OFF": {
+                        "label": {
+                          "inactive": {
+                            "text": "MUTE"
+                          }
+                        },
+                        "selected": true
+                      }
+                    }
+                  }
                 }
               },
               "show_label": false

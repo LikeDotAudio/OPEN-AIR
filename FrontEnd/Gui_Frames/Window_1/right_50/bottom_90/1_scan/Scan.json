@@ -4,7 +4,7 @@
       "fluid_ew": true,
       "overflow_ew": "auto",
       "overflow_ns": "auto",
-      "scale_to_fit": true
+      "scale_to_fit": false
     },
     "blocks": {
       "multi_dataset_graph": {
@@ -94,7 +94,7 @@
           }
         ],
         "geometry": {
-          "width": 831
+          "width": "100%"
         },
         "id": "multi_dataset_plot",
         "layout": {

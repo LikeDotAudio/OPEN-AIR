@@ -1,0 +1,36 @@
+{
+  "Zoo_graphing_AudioDynamics": {
+    "type": "OcaBin",
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "AudioDynamics_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Audio Dynamics Graph"
+        },
+        "fields": {
+          "graph": {
+            "type": "_AudioDynamics",
+            "identity": {
+              "label": "Stagebox Mic 53"
+            },
+            "geometry": {
+              "width": 400,
+              "height": 400
+            },
+            "datasets": [
+              {
+                "id": "curve",
+                "initial_csv_data": "x,y\n-90,-90\n-40,-40\n-20,-20\n0,-12"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

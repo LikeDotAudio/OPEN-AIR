@@ -1,0 +1,107 @@
+{
+  "Zoo_buttons_HighVis": {
+    "type": "OcaBin",
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "HighVis_Buttons_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "High Visibility Buttons"
+        },
+        "layout_columns": 2,
+        "fields": {
+          "btn_1": {
+            "type": "_HighVisButton",
+            "geometry": {
+              "width": 80,
+              "height": 45,
+              "corner_radius": 6
+            },
+            "cosmetics": {
+              "shape": "rect"
+            },
+            "style": {
+              "active": {
+                "text_color": "#ffffff",
+                "rim_color": "#FAD02C",
+                "inner_bg_color": "#222",
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "text_color": "#aaaaaa",
+                "rim_color": "#555",
+                "inner_bg_color": "#111",
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label": {
+                    "active": {
+                      "text": "SOLO"
+                    }
+                  }
+                },
+                "OFF": {
+                  "label": {
+                    "inactive": {
+                      "text": "SOLO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "btn_2": {
+            "type": "_HighVisButton",
+            "geometry": {
+              "width": 80,
+              "height": 45,
+              "corner_radius": 6
+            },
+            "cosmetics": {
+              "shape": "rect"
+            },
+            "style": {
+              "active": {
+                "text_color": "#ffffff",
+                "rim_color": "#4A6EAA",
+                "inner_bg_color": "#222",
+                "glow_intensity": 6
+              },
+              "inactive": {
+                "text_color": "#aaaaaa",
+                "rim_color": "#555",
+                "inner_bg_color": "#111",
+                "glow_intensity": 0
+              }
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label": {
+                    "active": {
+                      "text": "MUTE"
+                    }
+                  }
+                },
+                "OFF": {
+                  "label": {
+                    "inactive": {
+                      "text": "MUTE"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

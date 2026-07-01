@@ -133,6 +133,20 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     // Standalone procedural screw (WASM). The Panel cover fastens its own; this
     // is for dropping a single screw on its own.
+    if (type === 'Spacer') {
+        const w = window.oaCssLen(node.geometry?.width || 0);
+        const h = window.oaCssLen(node.geometry?.height || 0);
+        return <div style={{width: w, height: h, display: 'inline-block'}}></div>;
+    }
+    
+    if (type === '_AudioAnalyzerDemo') {
+        return (
+            <div style={style}>
+                {window.AudioAnalyzerDemo ? <window.AudioAnalyzerDemo config={node} /> : null}
+            </div>
+        );
+    }
+    
     if (type === 'screw' || type === 'Screw') {
         return (
             <div style={{ ...style, height: 'auto' }}>
@@ -315,10 +329,16 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    if (type === 'DynamicGraph' || type === 'plot_widget' || type.toLowerCase().includes('graph')) {
+    if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_Equalization' || type.toLowerCase().includes('graph')) {
         return (
             <div style={style}>
-                {window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>}
+                {type === '_AudioDynamics' ? (
+                    window.AudioDynamics ? <window.AudioDynamics value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>AudioDynamics Component</div>
+                ) : type === '_Equalization' ? (
+                    window.Equalization ? <window.Equalization value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Equalization Component</div>
+                ) : (
+                    window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>
+                )}
             </div>
         );
     }
@@ -350,7 +370,8 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type.toLowerCase().includes('button') || type.toLowerCase().includes('actuator') || type.toLowerCase().includes('toggle')) {
         const isWink = type.toLowerCase().includes('wink');
         const isTrapezoid = type.toLowerCase().includes('trapezoid');
-        const isTogglerGroup = type.toLowerCase().includes('toggler') || (node.options && typeof node.options === 'object' && Object.keys(node.options).length > 1 && !isWink && !isTrapezoid);
+        const isHighVis = type.toLowerCase().includes('highvis');
+        const isTogglerGroup = type.toLowerCase().includes('toggler') || (node.options && typeof node.options === 'object' && Object.keys(node.options).length > 1 && !isWink && !isTrapezoid && !isHighVis);
         const isDirectional = type.toLowerCase().includes('directional');
         const isIncDec = type.toLowerCase().includes('inc_dec') || type.toLowerCase().includes('incdec');
 
@@ -397,6 +418,8 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
                     window.OcaWinkButton ? <window.OcaWinkButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
                 ) : isTrapezoid ? (
                     window.OcaTrapezoidButton ? <window.OcaTrapezoidButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
+                ) : isHighVis ? (
+                    window.HighVisButton ? <window.HighVisButton value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <button>{title}</button>
                 ) : (
                     window.ButtonToggle ? <window.ButtonToggle value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <button>{title}</button>
                 )}

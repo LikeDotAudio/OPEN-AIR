@@ -169,6 +169,63 @@ specific visualization are tagged in comments.
       "octagon",
       "gear"
     ]
+  },
+  "Crafty_Spoked": {
+    "type": "_SmartKnob",
+    "label": {
+      "En": "Delay",
+      "show_label": true
+    },
+    "geometry": {
+      "width": 80,
+      "height": 80
+    },
+    "cosmetics": {
+      "visualization": "crafty",
+      "variant": "spoked",
+      "colors": {
+        "primary": "#ffffff",
+        "secondary": "#5a3d7c"
+      }
+    }
+  },
+  "Crafty_Metallic": {
+    "type": "_SmartKnob",
+    "label": {
+      "En": "Phase",
+      "show_label": true
+    },
+    "geometry": {
+      "width": 80,
+      "height": 80
+    },
+    "cosmetics": {
+      "visualization": "crafty",
+      "variant": "metallic",
+      "colors": {
+        "primary": "#222222",
+        "secondary": "#444444"
+      }
+    }
+  },
+  "Crafty_LED_Ring": {
+    "type": "_SmartKnob",
+    "label": {
+      "En": "Mic",
+      "show_label": true
+    },
+    "geometry": {
+      "width": 80,
+      "height": 80
+    },
+    "cosmetics": {
+      "visualization": "crafty",
+      "variant": "led_ring",
+      "colors": {
+        "primary": "#88e077",
+        "secondary": "#444444"
+      }
+    }
   }
 }
 ```

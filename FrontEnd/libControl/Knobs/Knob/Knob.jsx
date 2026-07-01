@@ -124,6 +124,7 @@ function resolveCap(knobStyle, knobShape) {
         moog: window.KnobCapMoog,
         'wbs-elma': window.KnobCapWBSElma,
         wbselma: window.KnobCapWBSElma,
+        crafty: window.KnobCapCrafty,
     })[key];
     return M(k) || M(s) || window.KnobCapStandard;
 }

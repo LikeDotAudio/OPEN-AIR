@@ -411,9 +411,18 @@ use axum::response::Redirect;
         }
     };
     
-    let url = format!("http://localhost:{}", args.port);
+    let local_ip = match std::net::UdpSocket::bind("0.0.0.0:0") {
+        Ok(socket) => {
+            if socket.connect("8.8.8.8:80").is_ok() {
+                socket.local_addr().map(|addr| addr.ip().to_string()).unwrap_or_else(|_| "localhost".to_string())
+            } else {
+                "localhost".to_string()
+            }
+        },
+        Err(_) => "localhost".to_string(),
+    };
+    let url = format!("http://{}:{}", local_ip, args.port);
     println!("🌐 [API] Frontend API Server listening on {}", url);
-    
     if !args.no_browser {
         println!("🌐 [WEB] Opening {} in the browser…", url);
         let _ = open::that(url);

@@ -228,10 +228,10 @@
             }
 
             // Dynamically determine the MQTT broker URL:
-            // 1. Check if the user passed ?mqtt=192.168.1.X in the URL
-            // 2. Otherwise, use the exact hostname serving this webpage (e.g. openair.like.audio or localhost)
+            // 1. Check if the user passed ?mqtt=X.X.X.X in the URL
+            // 2. Otherwise, default to the local backend machine at 44.44.44.152
             const urlParams = new URLSearchParams(window.location.search);
-            let mqttHost = urlParams.get('mqtt') || window.location.hostname || 'localhost';
+            let mqttHost = urlParams.get('mqtt') || '44.44.44.152';
             
             // If the site is loaded over HTTPS, use WSS (Secure WebSockets), otherwise WS
             const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';

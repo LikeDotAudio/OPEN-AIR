@@ -227,8 +227,18 @@
                 return <div style={{ padding: '20px' }}>Initializing OPEN-AIR Kernel...</div>;
             }
 
+            // Dynamically determine the MQTT broker URL:
+            // 1. Check if the user passed ?mqtt=192.168.1.X in the URL
+            // 2. Otherwise, use the exact hostname serving this webpage (e.g. openair.like.audio or localhost)
+            const urlParams = new URLSearchParams(window.location.search);
+            let mqttHost = urlParams.get('mqtt') || window.location.hostname || 'localhost';
+            
+            // If the site is loaded over HTTPS, use WSS (Secure WebSockets), otherwise WS
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            const dynamicBrokerUrl = `${wsProtocol}://${mqttHost}:9001`;
+
             return (
-                <window.MqttProvider>
+                <window.MqttProvider brokerUrl={dynamicBrokerUrl}>
                     <window.WindowManager directoryTree={directoryTree} />
                 </window.MqttProvider>
             );

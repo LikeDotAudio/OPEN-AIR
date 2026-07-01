@@ -392,7 +392,7 @@ except Exception as e:
 use axum::response::Redirect;
 
     let app = Router::new()
-        .route("/", get(|| async { Redirect::temporary("/Core/Launch/index.html") }))
+        .route("/", get(|| async { Redirect::temporary("/index.html") }))
         .nest("/api", api_router)
         .route("/api/health", get(|| async { "Rust Core is Healthy" }))
         .merge(ws_router)

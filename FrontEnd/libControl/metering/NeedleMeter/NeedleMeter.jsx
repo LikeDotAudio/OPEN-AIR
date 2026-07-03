@@ -193,6 +193,8 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
   // the needle to `min` — that snap-to-floor-and-spring-back is the "bounce"
   // seen whenever any other widget changes value.
   const displayRef = React.useRef(min);
+  const peakRef = React.useRef(min);     // latched peak the needle attacks toward
+  const lastRawRef = React.useRef(min);  // last raw sample (to detect new samples)
   const configRef = React.useRef(config);
   configRef.current = config;
   React.useEffect(() => {
@@ -203,8 +205,17 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       const raw = typeof rawValueRef.current === 'number' ? rawValueRef.current : parseFloat(rawValueRef.current || min);
       const attack = config?.dynamics?.attack_ms ? (100 / config.dynamics.attack_ms) * 0.5 : 0.3;
       const release = config?.dynamics?.release_ms ? (100 / config.dynamics.release_ms) * 0.5 : 0.1;
-      if (raw > displayRef.current) displayRef.current += (raw - displayRef.current) * attack;
-      else displayRef.current -= (displayRef.current - raw) * release;
+      // Peak-hold-release ballistics: a NEW sample latches a peak to attack up to,
+      // then the needle falls back to the floor (min) at the release rate — a real
+      // VU/PPM meter that decays to rest instead of holding the value.
+      const eps = (max - min) * 0.005;
+      if (raw !== lastRawRef.current) { lastRawRef.current = raw; peakRef.current = raw; }
+      if (displayRef.current < peakRef.current - eps) {
+        displayRef.current += (peakRef.current - displayRef.current) * attack;
+      } else {
+        peakRef.current = min; // consume the peak so it releases fully to the floor
+        displayRef.current -= (displayRef.current - min) * release;
+      }
       const displayValue = displayRef.current;
 
       if (!canvasRef.current) { animationFrameId = requestAnimationFrame(render); return; }
@@ -292,6 +303,38 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       const angRad = (val) => { const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range; return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle)); };
       const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
       const nAng = angRad(boundedVal);
+
+      // --- Fit-guard: keep the whole gauge inside the bezel interior -----------
+      // Tall-origin shapes (squircle/squectangle/…) drop their math pivot below
+      // the shape in a square/near-square box, so the dial gets clipped by the
+      // cutout (visible in the per-shape zoo cards, hidden in the wider "All"
+      // grid). Here we clamp the pivot inside the bezel and cap the arc radius so
+      // the ticks/needle never leave the interior. It only shrinks/recenters when
+      // the gauge would overflow — configs that already fit are untouched.
+      if (layout) {
+        let iL = Infinity, iR = -Infinity, iT = Infinity, iB = -Infinity;
+        for (const [px, py] of layout.pts) { if (px < iL) iL = px; if (px > iR) iR = px; if (py < iT) iT = py; if (py > iB) iB = py; }
+        const fitM = frameWidth + 4;
+        iL += fitM; iR -= fitM; iT += fitM; iB -= fitM;
+        if (iR > iL && iB > iT) {
+          centerX = Math.max(iL, Math.min(iR, centerX));
+          // Don't fight an intentional pivot_crop (which pushes the pivot below
+          // the shape to crop the dial base); only rescue the un-cropped case.
+          if (!pivotCrop) centerY = Math.max(iT, Math.min(iB, centerY));
+          const SAMPLES = 24;
+          let maxR = Infinity;
+          for (let i = 0; i <= SAMPLES; i++) {
+            const a = angRad(minVal + range * (i / SAMPLES));
+            const ca = Math.cos(a), sa = Math.sin(a);
+            if (ca > 1e-6) maxR = Math.min(maxR, (iR - centerX) / ca);
+            else if (ca < -1e-6) maxR = Math.min(maxR, (iL - centerX) / ca);
+            if (sa > 1e-6) maxR = Math.min(maxR, (iB - centerY) / sa);
+            else if (sa < -1e-6) maxR = Math.min(maxR, (iT - centerY) / sa);
+          }
+          // 0.9 leaves room for the number ring / rule sitting outside the ticks.
+          if (Number.isFinite(maxR) && maxR > 0) arcRadius = Math.min(arcRadius, Math.max(6, maxR * 0.9));
+        }
+      }
 
       // --- Color-zone limits (green -> yellow -> red) ---
       const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range

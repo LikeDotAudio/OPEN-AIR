@@ -12,6 +12,8 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
     const [isHovered, setIsHovered] = React.useState(false);
     const [draggingRole, setDraggingRole] = React.useState(null); // 'cap', 'widget_move'
     const [interactionState, setInteractionState] = React.useState({});
+    const [rotaryActive, setRotaryActive] = React.useState(false); // true while intensity is being adjusted
+    const wheelTimerRef = React.useRef(null);
 
     const valMin = 0; const valMax = 100;
     const rotMin = -130; const rotMax = 130;
@@ -59,6 +61,16 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
         const tl = trackLen;
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        // 0. Widget Selection Glow (Free Move mode)
+        if (draggingRole === 'widget_move') {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(ang * Math.PI / 180);
+            ctx.fillStyle = "rgba(244, 144, 44, 0.3)";
+            ctx.fillRect(-40, -tl/2 - 20, 80, tl + 40);
+            ctx.restore();
+        }
 
         // 1. Track
         const p1 = rotatePoint(cx, cy - tl/2, cx, cy, ang);
@@ -108,7 +120,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
 
         // 5. Pointer
         const ptrAngle = (-90 + rotCurrent) * (Math.PI / 180);
-        const ptrLen = (draggingRole === 'cap') ? (r * 10) : (r - 2);
+        const ptrLen = rotaryActive ? (r * 10) : (r - 2);
         const pxPos = capPos.x + ptrLen * Math.cos(ptrAngle);
         const pyPos = capPos.y + ptrLen * Math.sin(ptrAngle);
 
@@ -132,7 +144,31 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
             const ctx = canvasRef.current.getContext('2d');
             draw(ctx);
         }
-    }, [valCurrent, rotCurrent, widgetAngle, x, y, isHovered, draggingRole]);
+    }, [valCurrent, rotCurrent, widgetAngle, x, y, isHovered, draggingRole, rotaryActive]);
+
+    // Scroll wheel adjusts intensity (rotValue) when the pointer is over the cap.
+    // Registered natively so we can preventDefault (React wheel handlers are passive).
+    React.useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const onWheel = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const tx = e.clientX - rect.left;
+            const ty = e.clientY - rect.top;
+            const capPos = getCapPos();
+            const dist = Math.sqrt((tx - capPos.x) ** 2 + (ty - capPos.y) ** 2);
+            if (dist > capRadius + 40) return; // only when hovering the cap
+            e.preventDefault();
+            const delta = Math.sign(e.deltaY) * -3; // 3 deg per notch
+            const nextRot = Math.max(rotMin, Math.min(rotMax, rotCurrent + delta));
+            setRotaryActive(true);
+            if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
+            wheelTimerRef.current = setTimeout(() => setRotaryActive(false), 500);
+            if (onChange) onChange({ value: valCurrent, rotValue: nextRot, angle: widgetAngle, x, y });
+        };
+        canvas.addEventListener('wheel', onWheel, { passive: false });
+        return () => canvas.removeEventListener('wheel', onWheel);
+    }, [valCurrent, rotCurrent, widgetAngle, x, y]);
 
     const handlePointerDown = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -173,10 +209,19 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
             const dv = -(localY / trackLen) * 100;
             
             const nextVal = Math.max(valMin, Math.min(valMax, interactionState.startVal + dv));
-            
+
+            // Haptic detent when crossing the 50% midpoint
+            const mid = (valMin + valMax) / 2;
+            if ((valCurrent < mid && nextVal >= mid) || (valCurrent > mid && nextVal <= mid)) {
+                if (navigator.vibrate) navigator.vibrate(15);
+            }
+
             let nextRot = rotCurrent;
             if (e.shiftKey) {
                 nextRot = Math.max(rotMin, Math.min(rotMax, interactionState.startRot + dx));
+                if (!rotaryActive) setRotaryActive(true);
+            } else if (rotaryActive) {
+                setRotaryActive(false);
             }
 
             if (onChange) onChange({ value: nextVal, rotValue: nextRot, angle: widgetAngle, x, y });
@@ -189,6 +234,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
 
     const handlePointerUp = (e) => {
         setDraggingRole(null);
+        setRotaryActive(false);
         if (canvasRef.current) canvasRef.current.releasePointerCapture(e.pointerId);
     };
 

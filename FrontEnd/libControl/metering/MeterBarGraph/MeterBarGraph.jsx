@@ -13,6 +13,8 @@ function useMeterBallistics(rawValue, config, min, max) {
     const [overloadFade, setOverloadFade] = React.useState(0);
     const lastTimeRef = React.useRef(Date.now());
     const peakHoldTimerRef = React.useRef(0);
+    const barTargetRef = React.useRef(min);  // latched peak the bar rises to
+    const lastRawRef = React.useRef(min);     // last raw sample (detect new samples)
 
     React.useEffect(() => {
         let animFrame;
@@ -32,12 +34,18 @@ function useMeterBallistics(rawValue, config, min, max) {
             const attackStep = dt / (attackMs / 1000 || 0.01);
             const releaseStep = dt / (releaseMs / 1000 || 0.01);
 
+            // Peak-hold-release: a new sample latches a peak to attack up to, then
+            // the bar falls back to the floor (min) at the release rate (so it
+            // decays to zero/rest instead of holding the value).
+            const eps = (max - min) * 0.005;
+            if (rawValue !== lastRawRef.current) { lastRawRef.current = rawValue; barTargetRef.current = rawValue; }
             setDisplayValue(prev => {
                 let next = prev;
-                if (rawValue > prev) {
-                    next += (rawValue - prev) * Math.min(1, attackStep);
+                if (prev < barTargetRef.current - eps) {
+                    next += (barTargetRef.current - prev) * Math.min(1, attackStep);
                 } else {
-                    next -= (prev - rawValue) * Math.min(1, releaseStep);
+                    barTargetRef.current = min; // consume the peak; release to floor
+                    next -= (prev - min) * Math.min(1, releaseStep);
                 }
                 return Math.max(min, Math.min(max, next));
             });

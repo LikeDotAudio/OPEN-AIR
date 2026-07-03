@@ -54,7 +54,11 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // (e.g. "OpenAir/Gui/Window/Spectrum/Instrument/frequency"), mirroring
     // Python's generate_topic_path_from_filepath. nodeName is the leaf
     // identifier; when empty (root passthrough), the prefix IS the topic.
-    const topic = nodeName ? `${path_prefix}/${nodeName}` : path_prefix;
+    // An explicit `topic` (or `shared_topic`) on the node overrides the
+    // folder-derived topic, letting sibling widgets share one MQTT state key
+    // (e.g. a CMDP display + its CMDPEditor pointing at the same channels).
+    const topic = node.topic || node.shared_topic
+        || (nodeName ? `${path_prefix}/${nodeName}` : path_prefix);
 
     // Determine default value. The canonical value pillar is value.default_value
     // (checked first); domain.primary.value_default and flat value_default are
@@ -116,6 +120,26 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         boxSizing: 'border-box',
     };
 
+    // --- Middle-click test: jump a meter to a random in-range value ---------
+    // Restores the old "middle-click to test ballistics" behavior on meters:
+    // middle-clicking a VU/needle meter or a bar graph publishes a random valid
+    // value (within the domain min/max, snapped to step) so you can watch the
+    // needle/bar move. Wired onto meter wrappers below via onMouseDown.
+    const _testMin = parseFloat(node.domain?.primary?.min ?? node.min ?? -60);
+    const _testMax = parseFloat(node.domain?.primary?.max ?? node.max ?? 10);
+    const testRandomValue = (e) => {
+        if (e.button !== 1) return; // middle button only
+        e.preventDefault();
+        const lo = Number.isFinite(_testMin) ? _testMin : -60;
+        const hi = Number.isFinite(_testMax) ? _testMax : 10;
+        const step = parseFloat(node.domain?.primary?.step ?? node.step);
+        const rnd = lo + Math.random() * (hi - lo);
+        const snapped = (Number.isFinite(step) && step > 0)
+            ? Math.round(rnd / step) * step
+            : Math.round(rnd * 100) / 100;
+        setVal(Math.max(lo, Math.min(hi, snapped)));
+    };
+
     // When a field is %-sized, mark its widget fluid so responsive widgets
     // (fader, knob) measure their box and redraw to fit (crisp).
     const fluidConfig = scaling ? { ...node, fluid: true } : node;
@@ -146,7 +170,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
             </div>
         );
     }
-    
+
     if (type === 'screw' || type === 'Screw') {
         return (
             <div style={{ ...style, height: 'auto' }}>
@@ -211,7 +235,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     if (type === '_VUMeterKnob' || type === '_Meter_Knob_With_Vu_Meter' || (type.toLowerCase().includes('knob') && type.toLowerCase().includes('vu'))) {
         return (
-            <div style={style}>
+            <div style={style} onMouseDown={testRandomValue}>
                 {window.VUMeterKnob ? <window.VUMeterKnob value={val} onChange={setVal} config={node} topic={topic} path_prefix={path_prefix} /> : <div style={{width: '150px', height: '150px', background: '#333'}}>VU Knob</div>}
             </div>
         );
@@ -220,15 +244,24 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type.toLowerCase().includes('meter') || type === '_BarGraph' || type === '_SmartMeter' || type === '_Meter' || type === 'DynamicBarGraph' || type.toLowerCase().includes('bargraph')) {
         if (type.toLowerCase().includes('needle')) {
             return (
-                <div style={style}>
+                <div style={style} onMouseDown={testRandomValue}>
                     {window.NeedleMeter ? <window.NeedleMeter value={val} config={node} /> : <div style={{width: '100px', height: '100px', background: 'darkred', borderRadius: '50% 50% 0 0'}}></div>}
                 </div>
             );
         }
         return (
-            <div style={style}>
+            <div style={style} onMouseDown={testRandomValue}>
                 <span style={titleStyle}>{title}</span>
                 {window.MeterBarGraph ? <window.MeterBarGraph value={val} config={node} /> : <div style={{width: '20px', height: '150px', background: 'green'}}></div>}
+            </div>
+        );
+    }
+
+    // CMDP grouping/editing panel — must precede the generic 'cmdp' knob branch.
+    if (type === '_CMDPEditor' || type === '_CMDP_Editor') {
+        return (
+            <div style={style}>
+                {window.CMDPEditor ? <window.CMDPEditor value={val} onChange={setVal} config={node} /> : <div style={{background: '#222', color: '#fff', padding: '8px'}}>CMDP Editor</div>}
             </div>
         );
     }

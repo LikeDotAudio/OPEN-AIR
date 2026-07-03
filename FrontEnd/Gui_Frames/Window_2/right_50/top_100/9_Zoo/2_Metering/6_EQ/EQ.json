@@ -1,0 +1,36 @@
+{
+  "Zoo_Metering_EQ": {
+    "type": "OcaBin",
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "EQ_Demo": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Equalization Metering"
+        },
+        "fields": {
+          "graph": {
+            "type": "_Equalization",
+            "identity": {
+              "label": "Stagebox Mic 53"
+            },
+            "geometry": {
+              "width": 500,
+              "height": 350
+            },
+            "datasets": [
+              {
+                "id": "curve",
+                "initial_csv_data": "x,y\n20,-32\n50,-10\n100,3\n150,2\n200,0\n300,-8\n500,-1\n1000,2\n2000,1\n5000,4\n10000,1\n20000,0"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

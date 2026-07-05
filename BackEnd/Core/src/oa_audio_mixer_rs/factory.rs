@@ -1,3 +1,13 @@
+/**
+ * Header: factory.rs
+ * Purpose: factory.rs implementation.
+ * Description: Logic and implementation for factory.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaAudioMixer/Core/oaAudioMixer_rs/factory.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1

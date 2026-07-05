@@ -1,3 +1,13 @@
+# ==========================================
+# Header: makegif_original.py
+# Purpose: makegif_original.py implementation.
+# Description: Logic and implementation for makegif_original.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 # Methods/makegif.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -61,6 +71,7 @@ colormap = LinearSegmentedColormap.from_list("orange_blue", colors, N=num_bars)
 bar_colors = colormap(np.linspace(0, 1, num_bars))
 
 
+# Inline comment: Logic for create_wave_layer
 def create_wave_layer(alpha_bar, color_line, width_line, alpha_line):
     bars = axes.bar(
         x_vals, np.zeros(num_bars), width=BAR_WIDTH, color=bar_colors, alpha=alpha_bar
@@ -80,10 +91,12 @@ bars5, line5 = create_wave_layer(0.60, "#FFA600", 2.0, 0.9)
 envelope = np.exp(ENVELOPE_COEFFICIENT * (np.linspace(-ENVELOPE_RANGE_LIMIT, ENVELOPE_RANGE_LIMIT, num_bars)) ** 2)
 
 
+# Inline comment: Logic for calculate_wave_height
 def calculate_wave_height(time_phase, offset_x, offset_t):
     return np.abs(np.sin(x_vals + offset_x - time_phase) * np.sin(0.5 * x_vals + time_phase + offset_t))
 
 
+# Inline comment: Logic for update_animation_frame
 def update_animation_frame(frame):
     progress = frame / FRAMES
     time_phase = 2 * np.pi * progress  # Perfect Loop

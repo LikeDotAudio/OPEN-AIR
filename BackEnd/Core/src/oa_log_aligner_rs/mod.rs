@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaStand_Alone_Utilities/Methods/oaLogAligner_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
 // Version: 20260413.1400.1
@@ -72,6 +82,7 @@ impl LogAligner {
 }
 
 #[pymodule]
+// Inline comment: Logic for oalogaligner_rs
 pub fn oalogaligner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<LogAligner>()?;
     Ok(())

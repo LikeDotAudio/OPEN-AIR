@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 #![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_assignments)]
 use pyo3::prelude::*;
 
@@ -53,6 +63,7 @@ pub mod oa_log_processor_rs;
 pub mod oa_manifest_gen_rs;
 
 #[pymodule]
+// Inline comment: Logic for oaRustCore
 fn oaRustCore(m: &Bound<'_, PyModule>) -> PyResult<()> {
     let sys_modules = m.py().import_bound("sys")?.getattr("modules")?;
 

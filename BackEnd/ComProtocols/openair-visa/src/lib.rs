@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 #[cfg(feature = "python")]
 use pyo3::prelude::*;
 
@@ -22,6 +32,7 @@ pub mod oa_visa_usb_enumerator;
 
 #[cfg(feature = "python")]
 #[pymodule]
+// Inline comment: Logic for openair_visa
 fn openair_visa(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ResourceManager>()?;
     m.add_class::<Instrument>()?;

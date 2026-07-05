@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaGuiElements/Methods/oaProceduralArt_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
 // Version: 20260413.1400.1
@@ -193,6 +203,7 @@ impl ProceduralArtEngine {
 }
 
 #[pymodule]
+// Inline comment: Logic for oaproceduralart_rs
 pub fn oaproceduralart_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ProceduralArtEngine>()?;
     Ok(())

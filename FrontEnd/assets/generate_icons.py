@@ -1,3 +1,13 @@
+# ==========================================
+# Header: generate_icons.py
+# Purpose: generate_icons.py implementation.
+# Description: Logic and implementation for generate_icons.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """
 OPEN-AIR Icon Generator
@@ -16,6 +26,7 @@ except ImportError:
 
 import math
 
+# Inline comment: Logic for generate_base_logo
 def generate_base_logo(size):
     # Transparent background
     img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
@@ -80,6 +91,7 @@ def generate_base_logo(size):
     
     return img
 
+# Inline comment: Logic for main
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     

@@ -1,6 +1,17 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use rumqttc::{Client, MqttOptions, QoS};
 use std::time::Duration;
 
+// Inline comment: Logic for publish_devices_mqtt
 pub fn publish_devices_mqtt(broker_ip: &str, port: u16, base_topic: &str, inputs: Vec<String>, outputs: Vec<String>) -> Result<(), String> {
     let mut mqttoptions = MqttOptions::new("open-air-midi-scanner", broker_ip, port);
     mqttoptions.set_keep_alive(Duration::from_secs(30));

@@ -1,9 +1,20 @@
+# ==========================================
+# Header: rewrite_protocol_guis.py
+# Purpose: rewrite_protocol_guis.py implementation.
+# Description: Logic and implementation for rewrite_protocol_guis.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import json
 from pathlib import Path
 
 PROTOCOLS_DIR = Path("/home/anthony/Documents/OPEN-AIR/Gui_Frames/Window_2/left_50/top_100/4_Protocals")
 
+# Inline comment: Logic for create_standard_protocol_layout
 def create_standard_protocol_layout(protocol_name, block_id):
     topic_base = f"OpenAir/Protocol/{protocol_name}"
     
@@ -42,6 +53,7 @@ def create_standard_protocol_layout(protocol_name, block_id):
         }
     }
 
+# Inline comment: Logic for process_directory
 def process_directory(directory):
     for root, _, files in os.walk(directory):
         for file in files:

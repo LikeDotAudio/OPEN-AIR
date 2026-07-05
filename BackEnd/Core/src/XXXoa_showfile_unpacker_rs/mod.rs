@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaFileImportShow/Methods/oaShowfileUnpacker_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -12,6 +22,7 @@ use std::io::Read;
 use zip::ZipArchive;
 
 #[pyfunction]
+// Inline comment: Logic for unpack_showfile
 fn unpack_showfile(py: Python<'_>, file_path: String) -> PyResult<Bound<'_, PyDict>> {
     let file = File::open(&file_path).map_err(|e| PyErr::new::<pyo3::exceptions::PyIOError, _>(e.to_string()))?;
     let mut archive = ZipArchive::new(file).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
@@ -38,6 +49,7 @@ fn unpack_showfile(py: Python<'_>, file_path: String) -> PyResult<Bound<'_, PyDi
 }
 
 #[pymodule]
+// Inline comment: Logic for oashowfileunpacker_rs
 pub fn oashowfileunpacker_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(unpack_showfile, m)?)?;
     Ok(())

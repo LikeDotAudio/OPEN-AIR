@@ -1,3 +1,13 @@
+# ==========================================
+# Header: update_crafty_zoo.py
+# Purpose: update_crafty_zoo.py implementation.
+# Description: Logic and implementation for update_crafty_zoo.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import json
 import re

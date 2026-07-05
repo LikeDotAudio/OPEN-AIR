@@ -1,3 +1,13 @@
+# ==========================================
+# Header: dnssd_tester.py
+# Purpose: dnssd_tester.py implementation.
+# Description: Logic and implementation for dnssd_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real dnssd tester: browse the network for the configured service type (zeroconf).
     python3 Validations/Protocols/dnssd/dnssd_tester.py [--type _osc._udp] [--timeout S]

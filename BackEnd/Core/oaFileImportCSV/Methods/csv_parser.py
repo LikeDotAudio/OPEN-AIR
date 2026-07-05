@@ -1,3 +1,13 @@
+# ==========================================
+# Header: csv_parser.py
+# Purpose: csv_parser.py implementation.
+# Description: Logic and implementation for csv_parser.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 # oaFileHandlers/oaFileImportCSV/Methods/csv_parser.py
 # Author: Anthony Peter Kuzub
 # Version: 20260331.2150.2

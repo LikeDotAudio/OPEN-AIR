@@ -1,3 +1,13 @@
+# ==========================================
+# Header: osc_tester.py
+# Purpose: osc_tester.py implementation.
+# Description: Logic and implementation for osc_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real OSC tester (headless UDP). Listen for OSC, or send a test message.
     python3 Validations/Protocols/osc/osc_tester.py listen [--port N] [--timeout S]

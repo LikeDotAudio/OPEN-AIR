@@ -1,7 +1,18 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use pyo3::prelude::*;
 use crate::oa_visa_known_devices;
 use crate::oa_visa_pyvisa_wrapper::execute_query;
 
+// Inline comment: Logic for identify_device
 pub fn identify_device(py: Python<'_>, resource_name: &str) -> PyResult<PyObject> {
     let idn = execute_query(py, resource_name, "*IDN?").unwrap_or_else(|_| "".to_string());
     

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: from_csv_unknown.py
+# Purpose: from_csv_unknown.py implementation.
+# Description: Logic and implementation for from_csv_unknown.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 # FileReaders/from_csv_unknown.py
 #
 # Best-effort CSV parser for unknown header formats.
@@ -21,6 +31,7 @@ except ImportError:
     logger.warning("🚀⚠️ [CSV] Rust CSV Parser missing. Falling back to slow Python parsing.")
     HAS_RUST_CSV = False
 
+# Inline comment: Logic for Marker_convert_csv_unknow_report_to_csv
 def Marker_convert_csv_unknow_report_to_csv(file_path):
     """
     Performs a 'best-effort' conversion of a CSV file with unknown headers

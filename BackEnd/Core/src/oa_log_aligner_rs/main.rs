@@ -1,3 +1,13 @@
+/**
+ * Header: main.rs
+ * Purpose: main.rs implementation.
+ * Description: Logic and implementation for main.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaStand_Alone_Utilities/Methods/oaLogAligner_rs/main.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.0010.1
@@ -31,6 +41,7 @@ struct LogLine {
     content: String,
 }
 
+// Inline comment: Logic for main
 fn main() -> io::Result<()> {
     let args = Args::parse();
     

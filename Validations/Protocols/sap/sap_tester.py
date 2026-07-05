@@ -1,3 +1,13 @@
+# ==========================================
+# Header: sap_tester.py
+# Purpose: sap_tester.py implementation.
+# Description: Logic and implementation for sap_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real SAP/SDP tester: join the SAP multicast group and print announcements.
     python3 Validations/Protocols/sap/sap_tester.py [--group A] [--port N] [--timeout S]

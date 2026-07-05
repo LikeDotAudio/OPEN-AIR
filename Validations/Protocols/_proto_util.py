@@ -1,3 +1,13 @@
+# ==========================================
+# Header: _proto_util.py
+# Purpose: _proto_util.py implementation.
+# Description: Logic and implementation for _proto_util.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Shared helpers for the real-protocol testers under Validations/Protocols/.
 
@@ -14,6 +24,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 COMPROTOCOLS = ROOT / "BackEnd" / "ComProtocols"
 
 
+# Inline comment: Logic for config
 def config(proto):
     """Return ({key: value}, ini_path) for openair-<proto>/config.ini."""
     ini = COMPROTOCOLS / f"openair-{proto}" / "config.ini"
@@ -24,6 +35,7 @@ def config(proto):
     return (dict(c.items(sect)) if sect else {}), ini
 
 
+# Inline comment: Logic for hexdump
 def hexdump(data, width=16):
     out = []
     for i in range(0, len(data), width):
@@ -34,6 +46,7 @@ def hexdump(data, width=16):
     return "\n".join(out)
 
 
+# Inline comment: Logic for tcp_probe
 def tcp_probe(host, port, probe=None, timeout=5.0, label="TCP"):
     """Connect to host:port, optionally send `probe` bytes, read whatever comes
     back within `timeout`, and hexdump it. Returns exit code (0 ok, 2 no data,

@@ -1,8 +1,19 @@
+# ==========================================
+# Header: splash.py
+# Purpose: splash.py implementation.
+# Description: Logic and implementation for splash.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import tkinter as tk
 import urllib.request
 import os
 import sys
 
+# Inline comment: Logic for check_server
 def check_server():
     try:
         # The Rust kernel starts the API server on 8000

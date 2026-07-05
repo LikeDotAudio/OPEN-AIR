@@ -1,3 +1,13 @@
+/**
+ * Header: mqtt.rs
+ * Purpose: mqtt.rs implementation.
+ * Description: Logic and implementation for mqtt.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use std::fs;
 use std::path::Path;
 use std::time::Duration;
@@ -5,6 +15,7 @@ use ini::Ini;
 use rumqttc::{Client, MqttOptions, QoS};
 use serde_json::json;
 
+// Inline comment: Logic for publish_protocol_configs
 pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
     if no_mqtt {
         println!("⏭️  [MQTT] --no-mqtt set; skipping protocol config publish.");

@@ -1,7 +1,18 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use std::time::Duration;
 use std::fs;
 use std::io::{Read, Write};
 
+// Inline comment: Logic for hunt_for_devices
 pub fn hunt_for_devices() -> Vec<String> {
     let mut resources = Vec::new();
 

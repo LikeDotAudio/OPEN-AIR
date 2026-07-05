@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaTests/Methods/oaLogProcessor_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
 // Version: 20260413.1400.1
@@ -11,6 +21,7 @@ use std::io::{BufRead, BufReader};
 use html_escape::encode_safe;
 
 #[pyfunction]
+// Inline comment: Logic for process_log_file
 fn process_log_file(file_path: String, max_lines: usize) -> PyResult<String> {
     let file = File::open(file_path)?;
     let reader = BufReader::new(file);
@@ -68,6 +79,7 @@ fn process_log_file(file_path: String, max_lines: usize) -> PyResult<String> {
 }
 
 #[pymodule]
+// Inline comment: Logic for oalogprocessor_rs
 pub fn oalogprocessor_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(process_log_file, m)?)?;
     Ok(())

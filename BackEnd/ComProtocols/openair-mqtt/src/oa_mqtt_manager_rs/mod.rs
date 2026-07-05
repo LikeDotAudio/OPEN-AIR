@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComMQTT/Core/oaMQTTManager_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -73,6 +83,7 @@ impl MqttRouter {
     }
 }
 
+// Inline comment: Logic for mqtt_filter_to_regex
 fn mqtt_filter_to_regex(filter: &str) -> String {
     let mut regex = filter.replace(".", "\\.");
     regex = regex.replace("+", "[^/]+");
@@ -80,6 +91,7 @@ fn mqtt_filter_to_regex(filter: &str) -> String {
     format!("^{}$", regex)
 }
 
+// Inline comment: Logic for matches_mqtt
 fn matches_mqtt(regex_str: &str, topic: &str) -> bool {
     if let Ok(re) = regex::Regex::new(regex_str) {
         re.is_match(topic)
@@ -89,6 +101,7 @@ fn matches_mqtt(regex_str: &str, topic: &str) -> bool {
 }
 
 #[pymodule]
+// Inline comment: Logic for oamqttmanager_rs
 pub fn oamqttmanager_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<MqttRouter>()?;
     Ok(())

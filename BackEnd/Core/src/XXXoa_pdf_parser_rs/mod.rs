@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaFileImportPDF/Methods/oaPDFParser_rs/src/lib.rs
 // Author: Gemini Iron Oxide Architect
 // Version: 20260402.0010.1
@@ -34,6 +44,7 @@ impl PDFEngine {
 }
 
 #[pymodule]
+// Inline comment: Logic for oapdfparser_rs
 pub fn oapdfparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PDFEngine>()?;
     Ok(())

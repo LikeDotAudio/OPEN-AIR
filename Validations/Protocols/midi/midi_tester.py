@@ -1,3 +1,13 @@
+# ==========================================
+# Header: midi_tester.py
+# Purpose: midi_tester.py implementation.
+# Description: Logic and implementation for midi_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real MIDI tester: list ports, listen for input, or send a test note.
     python3 Validations/Protocols/midi/midi_tester.py ports
@@ -10,6 +20,7 @@ import argparse, time
 from _proto_util import config  # noqa: E402
 import mido  # noqa: E402
 
+# Inline comment: Logic for pick
 def pick(names, want):
     if want and want != "auto":
         for n in names:

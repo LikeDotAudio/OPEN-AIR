@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaConfigurationManager/Methods/oaDebugToggler_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1
@@ -13,6 +23,7 @@ use pyo3::prelude::*;
 
 /// Efficiently scans and toggles debug flags across the project.
 #[pyfunction]
+// Inline comment: Logic for toggle_debug_flags_rs
 fn toggle_debug_flags_rs(project_root: String, target_state: bool) -> PyResult<bool> {
     let target_state_str = if target_state { "True" } else { "False" };
     // Pattern captures: LOCAL_DEBUG, BUILDER_DEBUG, or generic DEBUG assignments
@@ -71,6 +82,7 @@ fn toggle_debug_flags_rs(project_root: String, target_state: bool) -> PyResult<b
 }
 
 #[pymodule]
+// Inline comment: Logic for oadebugtoggler_rs
 pub fn oadebugtoggler_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(toggle_debug_flags_rs, m)?)?;
     Ok(())

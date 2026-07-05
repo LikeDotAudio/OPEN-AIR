@@ -1,5 +1,16 @@
+/**
+ * Header: test_regex.rs
+ * Purpose: test_regex.rs implementation.
+ * Description: Logic and implementation for test_regex.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use regex::Regex;
 
+// Inline comment: Logic for main
 fn main() {
     let text = std::fs::read_to_string("../../FrontEnd/libControl/faders/Fader/Readme.md").unwrap();
     let re = Regex::new(r"(?s)```json\s*\n(.*?)\n```").unwrap();

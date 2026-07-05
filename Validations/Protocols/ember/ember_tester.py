@@ -1,3 +1,13 @@
+# ==========================================
+# Header: ember_tester.py
+# Purpose: ember_tester.py implementation.
+# Description: Logic and implementation for ember_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real Ember+ (S101/GLOW over TCP) tester: connect + sniff wire bytes.
     python3 Validations/Protocols/ember/ember_tester.py [--host H] [--port N] [--timeout S]

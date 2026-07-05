@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use pyo3::prelude::*;
 use pyo3::exceptions::PyException;
 use std::io::{Read, Write};
@@ -68,6 +78,7 @@ impl Instrument {
     }
 }
 
+// Inline comment: Logic for open_resource
 pub fn open_resource(resource_name: &str) -> PyResult<Instrument> {
     if resource_name.starts_with("TCPIP") {
         let parts: Vec<&str> = resource_name.split("::").collect();

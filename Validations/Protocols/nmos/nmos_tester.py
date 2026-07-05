@@ -1,3 +1,13 @@
+# ==========================================
+# Header: nmos_tester.py
+# Purpose: nmos_tester.py implementation.
+# Description: Logic and implementation for nmos_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real NMOS tester: query the IS-04 registry/query API over HTTP.
     python3 Validations/Protocols/nmos/nmos_tester.py [--registry URL] [--path /x-nmos/query/v1.3/]

@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComOSC/Methods/oaOSCCore_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -92,6 +102,7 @@ impl OscServer {
     }
 }
 
+// Inline comment: Logic for handle_packet
 fn handle_packet(packet: OscPacket, callback: &Py<PyAny>) {
     match packet {
         OscPacket::Message(message) => {
@@ -105,6 +116,7 @@ fn handle_packet(packet: OscPacket, callback: &Py<PyAny>) {
     }
 }
 
+// Inline comment: Logic for dispatch_message
 fn dispatch_message(addr: String, args: Vec<OscType>, callback: &Py<PyAny>) {
     Python::with_gil(|py| {
         let py_args = pyo3::types::PyList::empty_bound(py);
@@ -216,6 +228,7 @@ impl OscClient {
 }
 
 #[pymodule]
+// Inline comment: Logic for oaosccore_rs
 pub fn oaosccore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<OscServer>()?;
     m.add_class::<OscClient>()?;

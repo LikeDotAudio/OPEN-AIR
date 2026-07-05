@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 #![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut, mismatched_lifetime_syntaxes)]
 use nom::{
     bytes::complete::take,
@@ -91,6 +101,7 @@ struct OcaMessage<'a> {
     parameters: &'a [u8],
 }
 
+// Inline comment: Logic for parse_message
 fn parse_message(input: &[u8]) -> IResult<&[u8], OcaMessage> {
     let (input, size) = be_u32(input)?;
     let (input, handle) = be_u32(input)?;
@@ -112,6 +123,7 @@ fn parse_message(input: &[u8]) -> IResult<&[u8], OcaMessage> {
     ))
 }
 
+// Inline comment: Logic for parse_pdu
 fn parse_pdu(input: &[u8]) -> IResult<&[u8], OcaPdu> {
     let (input, version) = be_u16(input)?;
     let (input, size) = be_u32(input)?;

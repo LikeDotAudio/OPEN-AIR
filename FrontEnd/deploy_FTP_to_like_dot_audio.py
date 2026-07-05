@@ -1,3 +1,13 @@
+# ==========================================
+# Header: deploy_FTP_to_like_dot_audio.py
+# Purpose: deploy_FTP_to_like_dot_audio.py implementation.
+# Description: Logic and implementation for deploy_FTP_to_like_dot_audio.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 import os
 import subprocess
@@ -10,6 +20,7 @@ import datetime
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
+# Inline comment: Logic for generate_api_tree
 def generate_api_tree():
     """Generate the static /api/tree JSON file from the Gui_Frames folder"""
     print("🌳 Generating static /api/tree JSON from Gui_Frames...")
@@ -60,6 +71,7 @@ def generate_api_tree():
 # 1. At the front end of the deploy, generate the JSON tree!
 generate_api_tree()
 
+# Inline comment: Logic for generate_api_grabbag
 def generate_api_grabbag():
     import urllib.request
     print("🎒 Generating static /api/grabbag JSON from local backend...")
@@ -148,6 +160,7 @@ except Exception as e:
     print(f"❌ Failed to connect to FTP: {e}")
     sys.exit(1)
 
+# Inline comment: Logic for ensure_remote_dir
 def ensure_remote_dir(ftp_conn, remote_path):
     dirs = [d for d in remote_path.split('/') if d]
     current = "/" if remote_path.startswith("/") else ""
@@ -163,6 +176,7 @@ def ensure_remote_dir(ftp_conn, remote_path):
             except Exception as e:
                 pass
 
+# Inline comment: Logic for get_remote_mtime
 def get_remote_mtime(ftp_conn, remote_file):
     try:
         res = ftp_conn.sendcmd(f"MDTM {remote_file}")
@@ -176,6 +190,7 @@ def get_remote_mtime(ftp_conn, remote_file):
         pass
     return 0
 
+# Inline comment: Logic for get_remote_size
 def get_remote_size(ftp_conn, remote_file):
     try:
         res = ftp_conn.sendcmd(f"SIZE {remote_file}")

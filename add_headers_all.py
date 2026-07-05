@@ -29,8 +29,8 @@ def process_file(file_path):
     # Check if header already exists
     if "Header:" in content and "Version:" in content:
         # Just update the version if it's there
-        if "Version: 1.0.0" in content:
-            new_content = content.replace("Version: 1.0.0", f"Version: {version_str}")
+        if "Version: 26.07.05.1" in content:
+            new_content = content.replace("Version: 26.07.05.1", f"Version: {version_str}")
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(new_content)
         return

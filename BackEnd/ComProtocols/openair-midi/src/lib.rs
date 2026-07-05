@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use midir::{MidiInput, MidiInputConnection, Ignore};
 use serde_json::{json, Value};
 use tokio::sync::mpsc;

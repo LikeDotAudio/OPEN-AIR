@@ -1,3 +1,13 @@
+/**
+ * Header: constraint.proto
+ * Purpose: constraint.proto implementation.
+ * Description: Logic and implementation for constraint.proto implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 /*
  * Copyright (c) by the Society of Motion Picture and Television Engineers
  *

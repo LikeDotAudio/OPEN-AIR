@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaFileExportCSV/Methods/oaCSVWriter_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -10,6 +20,7 @@ use pyo3::types::{PyList, PyDict};
 use std::thread;
 
 #[pyfunction]
+// Inline comment: Logic for dump_async
 fn dump_async(py: Python<'_>, data: Bound<'_, PyList>, filepath: String) -> PyResult<()> {
     // Extract data from Python list of dicts to Rust Vec of Vec of Strings
     let mut headers = Vec::new();
@@ -54,6 +65,7 @@ fn dump_async(py: Python<'_>, data: Bound<'_, PyList>, filepath: String) -> PyRe
 }
 
 #[pymodule]
+// Inline comment: Logic for oacsvwriter_rs
 pub fn oacsvwriter_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dump_async, m)?)?;
     Ok(())

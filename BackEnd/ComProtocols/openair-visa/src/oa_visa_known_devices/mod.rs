@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs;
@@ -9,6 +19,7 @@ struct DeviceInfo {
     notes: String,
 }
 
+// Inline comment: Logic for get_device_info
 pub fn get_device_info(model: &str) -> (String, String) {
     let mut known_devices: HashMap<String, DeviceInfo> = HashMap::new();
     

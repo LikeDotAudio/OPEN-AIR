@@ -1,3 +1,13 @@
+# ==========================================
+# Header: snmp_tester.py
+# Purpose: snmp_tester.py implementation.
+# Description: Logic and implementation for snmp_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real SNMP tester: runs snmpwalk against the agent.
     python3 Validations/Protocols/snmp/snmp_tester.py [--host H] [--oid OID] [--community C] [--version v]

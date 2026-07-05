@@ -1,3 +1,13 @@
+# ==========================================
+# Header: osc_monitor.py
+# Purpose: osc_monitor.py implementation.
+# Description: Logic and implementation for osc_monitor.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Standalone OSC protocol monitor / tester (real OSC over UDP).
 
@@ -28,6 +38,7 @@ except ImportError:
     raise SystemExit(1)
 
 
+# Inline comment: Logic for _default_port
 def _default_port():
     """Default OSC listen port from openair-osc/config.ini (fallback 9000)."""
     try:

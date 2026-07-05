@@ -1,3 +1,13 @@
+/**
+ * Header: param.proto
+ * Purpose: param.proto implementation.
+ * Description: Logic and implementation for param.proto implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 /*
  * Copyright (c) by the Society of Motion Picture and Television Engineers
  *

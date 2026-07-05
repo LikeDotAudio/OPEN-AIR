@@ -1,3 +1,13 @@
+# ==========================================
+# Header: mdns_tester.py
+# Purpose: mdns_tester.py implementation.
+# Description: Logic and implementation for mdns_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real mdns tester: browse the network for the configured service type (zeroconf).
     python3 Validations/Protocols/mdns/mdns_tester.py [--type _osc._udp] [--timeout S]

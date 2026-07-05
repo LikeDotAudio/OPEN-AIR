@@ -1,3 +1,13 @@
+# ==========================================
+# Header: smpte2138_tester.py
+# Purpose: smpte2138_tester.py implementation.
+# Description: Logic and implementation for smpte2138_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real SMPTE ST 2138 (CCM / protobuf over TCP) tester: connect + sniff bytes.
     python3 Validations/Protocols/smpte2138/smpte2138_tester.py [--host H] [--port N] [--timeout S]

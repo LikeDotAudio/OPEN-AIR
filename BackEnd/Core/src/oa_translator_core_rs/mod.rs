@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaTranslator/Core/oaTranslatorCore_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1
@@ -159,6 +169,7 @@ impl WidgetRegistry {
     }
 }
 
+// Inline comment: Logic for internal_diff_values
 fn internal_diff_values(path: &str, old: &Value, new: &Value, diffs: &mut HashMap<String, Value>) {
     match (old, new) {
         (Value::Object(old_obj), Value::Object(new_obj)) => {
@@ -205,6 +216,7 @@ impl JSONDiffer {
 }
 
 #[pymodule]
+// Inline comment: Logic for oatranslatorcore_rs
 pub fn oatranslatorcore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SplinkerLock>()?;
     m.add_class::<SettleLock>()?;

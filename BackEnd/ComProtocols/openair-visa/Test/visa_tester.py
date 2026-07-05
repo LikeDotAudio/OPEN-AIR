@@ -1,3 +1,13 @@
+# ==========================================
+# Header: visa_tester.py
+# Purpose: visa_tester.py implementation.
+# Description: Logic and implementation for visa_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real VISA tester: list instruments, or open a resource and query *IDN?.
     python3 Validations/Protocols/visa/visa_tester.py list

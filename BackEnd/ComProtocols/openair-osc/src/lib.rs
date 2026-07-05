@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use rosc::{OscPacket, OscType};
 use tokio::net::UdpSocket;
 use tokio::sync::mpsc;
@@ -54,6 +64,7 @@ impl OscAgent {
 use std::pin::Pin;
 use std::future::Future;
 
+// Inline comment: Logic for handle_packet
 fn handle_packet<'a>(
     packet: OscPacket,
     tx: &'a mpsc::Sender<OscEvent>,
@@ -78,6 +89,7 @@ fn handle_packet<'a>(
     })
 }
 
+// Inline comment: Logic for convert_osc_args
 fn convert_osc_args(args: Vec<OscType>) -> Option<Value> {
     if args.is_empty() {
         return None;
@@ -93,6 +105,7 @@ fn convert_osc_args(args: Vec<OscType>) -> Option<Value> {
     Some(json!(json_array))
 }
 
+// Inline comment: Logic for osc_type_to_json
 fn osc_type_to_json(arg: &OscType) -> Value {
     match arg {
         OscType::Int(i) => json!(i),

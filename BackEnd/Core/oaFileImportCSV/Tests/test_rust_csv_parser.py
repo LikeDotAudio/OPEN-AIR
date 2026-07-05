@@ -1,3 +1,13 @@
+# ==========================================
+# Header: test_rust_csv_parser.py
+# Purpose: test_rust_csv_parser.py implementation.
+# Description: Logic and implementation for test_rust_csv_parser.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 # oaFileHandlers/oaFileImportCSV/Tests/test_rust_csv_parser.py
 #
 # Tests for the CSV Parser (Rust implementation).

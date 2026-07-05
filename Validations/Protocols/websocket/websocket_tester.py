@@ -1,3 +1,13 @@
+# ==========================================
+# Header: websocket_tester.py
+# Purpose: websocket_tester.py implementation.
+# Description: Logic and implementation for websocket_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real WebSocket tester: connect, optionally send, print received frames.
     python3 Validations/Protocols/websocket/websocket_tester.py [--url ws://H:P] [--send MSG] [--timeout S]

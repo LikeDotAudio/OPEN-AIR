@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaStateCache/Methods/oaStateRegistry_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.0010.1
@@ -116,6 +126,7 @@ impl StateRegistryCore {
 }
 
 #[pymodule]
+// Inline comment: Logic for oastateregistry_rs
 pub fn oastateregistry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<StateRegistryCore>()?;
     Ok(())

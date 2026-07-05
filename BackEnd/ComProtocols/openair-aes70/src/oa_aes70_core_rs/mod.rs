@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComAES70/Methods/oaAES70Core_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -67,6 +77,7 @@ struct OcaMessage<'a> {
     parameters: &'a [u8],
 }
 
+// Inline comment: Logic for parse_message
 fn parse_message(input: &[u8]) -> IResult<&[u8], OcaMessage> {
     let (input, size) = be_u32(input)?;
     let (input, handle) = be_u32(input)?;
@@ -86,6 +97,7 @@ fn parse_message(input: &[u8]) -> IResult<&[u8], OcaMessage> {
     }))
 }
 
+// Inline comment: Logic for parse_pdu
 fn parse_pdu(input: &[u8]) -> IResult<&[u8], OcaPdu> {
     let (input, version) = be_u16(input)?;
     let (input, size) = be_u32(input)?;
@@ -102,6 +114,7 @@ fn parse_pdu(input: &[u8]) -> IResult<&[u8], OcaPdu> {
 }
 
 #[pymodule]
+// Inline comment: Logic for oaaes70core_rs
 pub fn oaaes70core_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<OcaParser>()?;
     Ok(())

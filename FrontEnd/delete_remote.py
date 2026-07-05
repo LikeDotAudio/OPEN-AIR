@@ -1,3 +1,13 @@
+# ==========================================
+# Header: delete_remote.py
+# Purpose: delete_remote.py implementation.
+# Description: Logic and implementation for delete_remote.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import ftplib
 import os
 import sys
@@ -19,6 +29,7 @@ user = env_vars.get('FTP_USER')
 passwd = env_vars.get('FTP_PASS')
 remote_base_dir = env_vars.get('REMOTE_DIR', '/')
 
+# Inline comment: Logic for remove_ftp_dir
 def remove_ftp_dir(ftp, path):
     try:
         # Try to list directory contents
@@ -39,6 +50,7 @@ def remove_ftp_dir(ftp, path):
     except Exception as e:
         print(f"⚠️ Note: {path} already removed or not found.")
 
+# Inline comment: Logic for main
 def main():
     if not host:
         print("No FTP host configured.")

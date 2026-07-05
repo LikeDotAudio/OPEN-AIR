@@ -1,3 +1,13 @@
+# ==========================================
+# Header: migrateRust-old paths.py
+# Purpose: migrateRust-old paths.py implementation.
+# Description: Logic and implementation for migrateRust-old paths.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import shutil
 
@@ -64,6 +74,7 @@ LEGACY_PATHS = [
     "oaTranslator/Methods/oaManifestGen_rs"
 ]
 
+# Inline comment: Logic for purge_the_schmutz
 def purge_the_schmutz():
     freed_space_count = 0
 

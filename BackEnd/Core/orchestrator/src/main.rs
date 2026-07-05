@@ -1,3 +1,13 @@
+/**
+ * Header: main.rs
+ * Purpose: main.rs implementation.
+ * Description: Logic and implementation for main.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 mod api;
 mod cli;
 mod mqtt;
@@ -31,6 +41,7 @@ struct AppState {
 }
 
 #[tokio::main]
+// Inline comment: Logic for main
 async fn main() {
     let args = cli::Args::parse();
     println!("🚀 [RUST ORCHESTRATOR] Booting OPEN-AIR Native Core...");
@@ -433,6 +444,7 @@ use axum::response::Redirect;
     }
 }
 
+// Inline comment: Logic for ws_handler
 async fn ws_handler(
     ws: WebSocketUpgrade,
     State(state): State<Arc<AppState>>,
@@ -441,6 +453,7 @@ async fn ws_handler(
     ws.on_upgrade(|socket| handle_socket(socket, state))
 }
 
+// Inline comment: Logic for handle_socket
 async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
     println!("🟢 [WEBSOCKET] Client connected!");
     let mut rx = state.tx.subscribe();

@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaTranslator/Methods/oaManifestGen_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -12,6 +22,7 @@ use uuid::Uuid;
 
 #[pyfunction]
 #[pyo3(signature = (value, topic, source="EXTERNAL", metadata=None, full_id=None, partition=None))]
+// Inline comment: Logic for create_manifest
 fn create_manifest<'py>(
     py: Python<'py>,
     value: &Bound<'py, PyAny>,
@@ -79,6 +90,7 @@ fn create_manifest<'py>(
 }
 
 #[pymodule]
+// Inline comment: Logic for oamanifestgen_rs
 pub fn oamanifestgen_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(create_manifest, m)?)?;
     Ok(())

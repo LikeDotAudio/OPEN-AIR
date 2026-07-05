@@ -1,3 +1,13 @@
+# ==========================================
+# Header: update_version.py
+# Purpose: update_version.py implementation.
+# Description: Logic and implementation for update_version.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 
 # Read the list of files

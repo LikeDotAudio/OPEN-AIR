@@ -1,3 +1,13 @@
+/**
+ * Header: logic_mqtt_listen.rs
+ * Purpose: logic_mqtt_listen.rs implementation.
+ * Description: Logic and implementation for logic_mqtt_listen.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use rumqttc::{Client, MqttOptions, QoS, Event, Packet};
 use std::time::Duration;
 use std::sync::Mutex;
@@ -8,6 +18,7 @@ use crate::oa_visa_pyvisa_wrapper::{execute_query, execute_write};
 
 pub static DEVICE_MAP: Mutex<Option<HashMap<String, String>>> = Mutex::new(None);
 
+// Inline comment: Logic for update_device_map
 pub fn update_device_map(topic: String, resource: String) {
     let mut map_guard = DEVICE_MAP.lock().unwrap();
     if map_guard.is_none() {
@@ -20,6 +31,7 @@ pub fn update_device_map(topic: String, resource: String) {
 
 #[pyfunction]
 #[pyo3(signature = (broker_ip, port, base_topic))]
+// Inline comment: Logic for start_mqtt_daemon
 pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> PyResult<()> {
     let mut mqttoptions = MqttOptions::new(format!("openair-visa-daemon-{}", std::process::id()), &broker_ip, port);
     mqttoptions.set_keep_alive(Duration::from_secs(5));

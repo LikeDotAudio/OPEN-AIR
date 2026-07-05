@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaTranslator/Core/oaTaskPool_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -54,6 +64,7 @@ impl TaskPool {
 }
 
 #[pymodule]
+// Inline comment: Logic for oataskpool_rs
 pub fn oataskpool_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<TaskPool>()?;
     Ok(())

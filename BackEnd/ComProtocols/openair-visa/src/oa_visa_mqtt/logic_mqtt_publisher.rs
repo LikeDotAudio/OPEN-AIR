@@ -1,3 +1,13 @@
+/**
+ * Header: logic_mqtt_publisher.rs
+ * Purpose: logic_mqtt_publisher.rs implementation.
+ * Description: Logic and implementation for logic_mqtt_publisher.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use rumqttc::{Client, MqttOptions, QoS};
 use std::time::Duration;
 

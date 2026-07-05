@@ -1,3 +1,13 @@
+# ==========================================
+# Header: test_readers.py
+# Purpose: test_readers.py implementation.
+# Description: Logic and implementation for test_readers.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 # Tests/test_readers.py
 #
 # Verification test for the Basic CSV venue asset.

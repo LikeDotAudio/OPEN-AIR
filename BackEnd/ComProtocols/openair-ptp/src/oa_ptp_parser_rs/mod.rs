@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaPTP/Methods/oaPTPParser_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1
@@ -9,6 +19,7 @@ use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+// Inline comment: Logic for format_clock_id
 fn format_clock_id(raw: &[u8]) -> String {
     if raw.len() >= 10 {
         let hex_part = format!("{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}",
@@ -20,6 +31,7 @@ fn format_clock_id(raw: &[u8]) -> String {
     }
 }
 
+// Inline comment: Logic for get_message_type
 fn get_message_type(m_id: u8) -> &'static str {
     match m_id {
         0 => "Sync",
@@ -37,6 +49,7 @@ fn get_message_type(m_id: u8) -> &'static str {
 }
 
 #[pyfunction]
+// Inline comment: Logic for parse_packet
 fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_port: u16) -> PyResult<Py<PyAny>> {
     let dict = PyDict::new_bound(py);
     
@@ -74,6 +87,7 @@ fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_
 }
 
 #[pymodule]
+// Inline comment: Logic for oaptpparser_rs
 pub fn oaptpparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(parse_packet, m)?)?;
     Ok(())

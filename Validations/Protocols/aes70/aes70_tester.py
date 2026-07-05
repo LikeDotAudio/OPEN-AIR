@@ -1,3 +1,13 @@
+# ==========================================
+# Header: aes70_tester.py
+# Purpose: aes70_tester.py implementation.
+# Description: Logic and implementation for aes70_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real AES70 (OCA / OCP.1 over TCP) tester: connect + sniff wire bytes.
     python3 Validations/Protocols/aes70/aes70_tester.py [--host H] [--port N] [--timeout S]

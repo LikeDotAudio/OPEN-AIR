@@ -1,3 +1,13 @@
+# ==========================================
+# Header: rest_tester.py
+# Purpose: rest_tester.py implementation.
+# Description: Logic and implementation for rest_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real REST tester: HTTP request to the configured endpoint.
     python3 Validations/Protocols/rest/rest_tester.py [--path /api] [--method GET] [--host H] [--port N]

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: migrateRust-refactor.py
+# Purpose: migrateRust-refactor.py implementation.
+# Description: Logic and implementation for migrateRust-refactor.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import re
 
@@ -65,6 +75,7 @@ IMPORT_MAP = {
     "oaManifestGen_rs": "oa_manifest_gen"
 }
 
+# Inline comment: Logic for refactor_python_imports
 def refactor_python_imports(root_dir):
     print(f"Starting project-wide import refactor in: {root_dir}")
 

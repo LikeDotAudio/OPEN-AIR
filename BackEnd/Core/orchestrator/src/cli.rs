@@ -1,3 +1,13 @@
+/**
+ * Header: cli.rs
+ * Purpose: cli.rs implementation.
+ * Description: Logic and implementation for cli.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use clap::Parser;
 
 #[derive(Parser, Debug)]

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: midi_tester.py
+# Purpose: midi_tester.py implementation.
+# Description: Logic and implementation for midi_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """
 MIDI Tester Script for OPEN-AIR
@@ -16,6 +26,7 @@ try:
 except ImportError:
     pass # Will handle gracefully below
 
+# Inline comment: Logic for main
 def main():
     ap = argparse.ArgumentParser(prog="midi_tester")
     ap.add_argument("action", nargs="?", default="daemon", choices=["list", "listen", "publish", "daemon"])

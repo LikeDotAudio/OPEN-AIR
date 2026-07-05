@@ -1,3 +1,13 @@
+# ==========================================
+# Header: yak_tester.py
+# Purpose: yak_tester.py implementation.
+# Description: Logic and implementation for yak_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real YAK instrument tester: SCPI *IDN? over TCP.
     python3 Validations/Protocols/yak/yak_tester.py --host 192.168.0.50 [--port 5025] [--cmd '*IDN?']

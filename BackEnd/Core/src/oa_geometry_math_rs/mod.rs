@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaGuiElements/Methods/oaGeometryMath_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1
@@ -9,6 +19,7 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
+// Inline comment: Logic for normalize_value
 fn normalize_value(value: f64, min_val: f64, max_val: f64) -> f64 {
     if (max_val - min_val).abs() < f64::EPSILON {
         return 0.0;
@@ -17,6 +28,7 @@ fn normalize_value(value: f64, min_val: f64, max_val: f64) -> f64 {
 }
 
 #[pyfunction]
+// Inline comment: Logic for value_to_pixel
 fn value_to_pixel(value: f64, min_val: f64, max_val: f64, pixel_length: f64, reverse: bool) -> f64 {
     let norm = normalize_value(value, min_val, max_val);
     if reverse {
@@ -27,6 +39,7 @@ fn value_to_pixel(value: f64, min_val: f64, max_val: f64, pixel_length: f64, rev
 }
 
 #[pyfunction]
+// Inline comment: Logic for rotate_point
 fn rotate_point(px: f64, py: f64, cx: f64, cy: f64, angle_deg: f64) -> (f64, f64) {
     let rad = angle_deg.to_radians();
     let cos_a = rad.cos();
@@ -39,6 +52,7 @@ fn rotate_point(px: f64, py: f64, cx: f64, cy: f64, angle_deg: f64) -> (f64, f64
 }
 
 #[pyfunction]
+// Inline comment: Logic for get_position
 fn get_position(angle_deg: f64, distance: f64, center_x: f64, center_y: f64) -> (f64, f64) {
     let rad = angle_deg.to_radians();
     let x = center_x + distance * rad.cos();
@@ -47,12 +61,14 @@ fn get_position(angle_deg: f64, distance: f64, center_x: f64, center_y: f64) -> 
 }
 
 #[pyfunction]
+// Inline comment: Logic for get_angle
 fn get_angle(px: f64, py: f64, cx: f64, cy: f64) -> f64 {
     let angle_rad = (py - cy).atan2(px - cx);
     angle_rad.to_degrees()
 }
 
 #[pymodule]
+// Inline comment: Logic for oageometrymath_rs
 pub fn oageometrymath_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(normalize_value, m)?)?;
     m.add_function(wrap_pyfunction!(value_to_pixel, m)?)?;

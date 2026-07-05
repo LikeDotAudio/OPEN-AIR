@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaFileImportHTML/Methods/oaHTMLScraper_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -11,6 +21,7 @@ use pyo3::types::{PyDict, PyList};
 use scraper::{Html, Selector};
 
 #[pyfunction]
+// Inline comment: Logic for scrape_tables
 fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<Bound<'_, PyList>> {
     let document = Html::parse_document(&html_content);
     let table_selector = Selector::parse("table").unwrap();
@@ -49,6 +60,7 @@ fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<Bound<'_, PyL
 }
 
 #[pymodule]
+// Inline comment: Logic for oahtmlscraper_rs
 pub fn oahtmlscraper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(scrape_tables, m)?)?;
     Ok(())

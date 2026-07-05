@@ -1,6 +1,17 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 
+// Inline comment: Logic for execute_write
 pub fn execute_write(py: Python<'_>, resource_name: &str, command: &str) -> PyResult<()> {
     let pyvisa = py.import_bound("pyvisa")?;
     let rm = pyvisa.getattr("ResourceManager")?.call1(("@py",)).or_else(|_| pyvisa.getattr("ResourceManager")?.call0())?;
@@ -15,6 +26,7 @@ pub fn execute_write(py: Python<'_>, resource_name: &str, command: &str) -> PyRe
     Ok(())
 }
 
+// Inline comment: Logic for execute_query
 pub fn execute_query(py: Python<'_>, resource_name: &str, command: &str) -> PyResult<String> {
     let pyvisa = py.import_bound("pyvisa")?;
     let rm = pyvisa.getattr("ResourceManager")?.call1(("@py",)).or_else(|_| pyvisa.getattr("ResourceManager")?.call0())?;
@@ -32,6 +44,7 @@ pub fn execute_query(py: Python<'_>, resource_name: &str, command: &str) -> PyRe
     Ok(res)
 }
 
+// Inline comment: Logic for execute_status_and_error
 pub fn execute_status_and_error(py: Python<'_>, resource_name: &str) -> PyResult<(String, String)> {
     let pyvisa = py.import_bound("pyvisa")?;
     let rm = pyvisa.getattr("ResourceManager")?.call1(("@py",)).or_else(|_| pyvisa.getattr("ResourceManager")?.call0())?;

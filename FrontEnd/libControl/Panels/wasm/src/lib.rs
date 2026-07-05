@@ -1,3 +1,13 @@
+/**
+ * Header: lib.rs
+ * Purpose: lib.rs implementation.
+ * Description: Logic and implementation for lib.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frontEnd/libControl/Panels/wasm/src/lib.rs
 // Author: Anthony Peter Kuzub
 //
@@ -155,19 +165,24 @@ impl Buf {
 fn obj<'a>(v: &'a Value, key: &str) -> Option<&'a Value> {
     v.get(key)
 }
+// Inline comment: Logic for f64_of
 fn f64_of(v: &Value, key: &str, d: f64) -> f64 {
     v.get(key).and_then(|x| x.as_f64()).unwrap_or(d)
 }
+// Inline comment: Logic for u32_of
 fn u32_of(v: &Value, key: &str, d: u32) -> u32 {
     v.get(key).and_then(|x| x.as_u64()).map(|n| n as u32).unwrap_or(d)
 }
+// Inline comment: Logic for bool_of
 fn bool_of(v: &Value, key: &str, d: bool) -> bool {
     v.get(key).and_then(|x| x.as_bool()).unwrap_or(d)
 }
+// Inline comment: Logic for str_of
 fn str_of(v: &Value, key: &str, d: &str) -> String {
     v.get(key).and_then(|x| x.as_str()).unwrap_or(d).to_string()
 }
 
+// Inline comment: Logic for hex_to_rgb
 fn hex_to_rgb(hex: &str) -> [u8; 3] {
     let h = hex.trim_start_matches('#');
     if h.len() != 6 {
@@ -198,6 +213,7 @@ fn streaks_gray(w: u32, h: u32, vertical: bool, sigma: f64, seed: u32) -> Vec<u8
     imageops::resize(&small, w, h, imageops::FilterType::Lanczos3).into_raw()
 }
 
+// Inline comment: Logic for hammered_gray
 fn hammered_gray(w: u32, h: u32, seed: u32) -> Vec<u8> {
     let base = Perlin::new(seed);
     let dimple = Perlin::new(seed.wrapping_add(1));
@@ -225,6 +241,7 @@ fn mul_planes(a: &[u8], b: &[u8]) -> Vec<u8> {
 // PANEL
 // ----------------------------------------------------------------------------
 #[wasm_bindgen]
+// Inline comment: Logic for generate_panel
 pub fn generate_panel(width: u32, height: u32, config_json: &str) -> Vec<u8> {
     let w = width.max(1);
     let h = height.max(1);
@@ -520,6 +537,7 @@ fn subtract_line(mask: &mut [u8], w: u32, h: u32, x1: i32, y1: i32, x2: i32, y2:
     }
 }
 
+// Inline comment: Logic for fill_circle
 fn fill_circle(buf: &mut Buf, cx: i32, cy: i32, r: i32, color: [u8; 4]) {
     for dy in -r..=r {
         for dx in -r..=r {
@@ -530,6 +548,7 @@ fn fill_circle(buf: &mut Buf, cx: i32, cy: i32, r: i32, color: [u8; 4]) {
     }
 }
 
+// Inline comment: Logic for vignette_gray
 fn vignette_gray(w: u32, h: u32, intensity: f64, depth: u32) -> Vec<u8> {
     let mut gray = vec![255u8; (w * h) as usize];
     let depth_f = depth as f64;
@@ -554,6 +573,7 @@ fn vignette_gray(w: u32, h: u32, intensity: f64, depth: u32) -> Vec<u8> {
     gray
 }
 
+// Inline comment: Logic for apply_rust
 fn apply_rust(panel: &mut Buf, intensity: f64, rng: &mut StdRng) {
     let w = panel.w;
     let h = panel.h;
@@ -585,6 +605,7 @@ fn apply_rust(panel: &mut Buf, intensity: f64, rng: &mut StdRng) {
     }
 }
 
+// Inline comment: Logic for dilate3
 fn dilate3(mask: &[u8], w: u32, h: u32) -> Vec<u8> {
     let mut out = vec![0u8; (w * h) as usize];
     for y in 0..h as i32 {
@@ -605,6 +626,7 @@ fn dilate3(mask: &[u8], w: u32, h: u32) -> Vec<u8> {
     out
 }
 
+// Inline comment: Logic for apply_metal_fold
 fn apply_metal_fold(panel: &mut Buf, cfg: &Value) {
     let w = panel.w;
     let h = panel.h;
@@ -725,6 +747,7 @@ fn screw_canvas_dim_internal(size: u32) -> u32 {
     size + padding * 2
 }
 
+// Inline comment: Logic for render_screw
 fn render_screw(size: u32, cfg: &Value, angle_deg: f64) -> Buf {
     let canvas = screw_canvas_dim_internal(size);
     let center = canvas as f64 / 2.0;
@@ -828,6 +851,7 @@ fn render_screw(size: u32, cfg: &Value, angle_deg: f64) -> Buf {
 }
 
 #[wasm_bindgen]
+// Inline comment: Logic for generate_screw
 pub fn generate_screw(size: u32, config_json: &str) -> Vec<u8> {
     let cfg: Value = serde_json::from_str(config_json).unwrap_or(Value::Null);
     let angle = f64_of(&cfg, "angle", 0.0);
@@ -835,6 +859,7 @@ pub fn generate_screw(size: u32, config_json: &str) -> Vec<u8> {
 }
 
 #[wasm_bindgen]
+// Inline comment: Logic for screw_canvas_dim
 pub fn screw_canvas_dim(size: u32) -> u32 {
     screw_canvas_dim_internal(size.max(1))
 }

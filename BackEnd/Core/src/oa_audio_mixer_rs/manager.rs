@@ -1,3 +1,13 @@
+/**
+ * Header: manager.rs
+ * Purpose: manager.rs implementation.
+ * Description: Logic and implementation for manager.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaAudioMixer/Core/oaAudioMixer_rs/manager.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1

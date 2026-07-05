@@ -1,3 +1,13 @@
+/**
+ * Header: pcm_visualizer.rs
+ * Purpose: pcm_visualizer.rs implementation.
+ * Description: Logic and implementation for pcm_visualizer.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaAudioMixer/Core/oaAudioMixer_rs/src/bin/pcm_visualizer.rs
 use std::process::{Command, Stdio};
 use std::io::Read;
@@ -5,6 +15,7 @@ use std::thread;
 use std::time::Duration;
 use std::env;
 
+// Inline comment: Logic for main
 fn main() {
     let args: Vec<String> = env::args().collect();
     let target = if args.len() > 1 { &args[1] } else { "@DEFAULT_AUDIO_SINK@" };

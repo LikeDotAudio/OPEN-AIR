@@ -1,3 +1,13 @@
+# ==========================================
+# Header: mqtt_tester.py
+# Purpose: mqtt_tester.py implementation.
+# Description: Logic and implementation for mqtt_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real MQTT tester: subscribe to the broker and print messages (the bus itself).
     python3 Validations/Protocols/mqtt/mqtt_tester.py [--topic '#'] [--timeout S] [--broker H] [--port N]

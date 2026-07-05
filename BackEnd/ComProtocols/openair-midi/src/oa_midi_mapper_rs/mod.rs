@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComMidi/Methods/oaMidiMapper_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.1400.1
@@ -14,6 +24,7 @@ static RE_UNDERSCORES: Lazy<Regex> = Lazy::new(|| Regex::new(r"_{2,}").unwrap())
 static RE_DIGITS: Lazy<Regex> = Lazy::new(|| Regex::new(r"\d+").unwrap());
 
 #[pyfunction]
+// Inline comment: Logic for sanitize_id
 fn sanitize_id(port_name: Option<String>) -> PyResult<String> {
     let name = match port_name {
         Some(n) => n,
@@ -38,6 +49,7 @@ fn sanitize_id(port_name: Option<String>) -> PyResult<String> {
 }
 
 #[pyfunction]
+// Inline comment: Logic for midi_to_topic
 fn midi_to_topic(dev_id: String, message_type: String, channel: u8, note_or_cc: u8, value: u8) -> PyResult<(String, u8)> {
     let base = format!("OPEN-AIR/MIDI/{}/ch{}", dev_id, channel);
     
@@ -50,6 +62,7 @@ fn midi_to_topic(dev_id: String, message_type: String, channel: u8, note_or_cc: 
 }
 
 #[pyfunction]
+// Inline comment: Logic for parse_channel_and_val
 fn parse_channel_and_val(topic_part: String) -> PyResult<u8> {
     if let Some(caps) = RE_DIGITS.find(&topic_part) {
         if let Ok(value) = caps.as_str().parse::<u8>() {
@@ -60,6 +73,7 @@ fn parse_channel_and_val(topic_part: String) -> PyResult<u8> {
 }
 
 #[pymodule]
+// Inline comment: Logic for oamidimapper_rs
 pub fn oamidimapper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sanitize_id, m)?)?;
     m.add_function(wrap_pyfunction!(midi_to_topic, m)?)?;

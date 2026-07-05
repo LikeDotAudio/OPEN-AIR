@@ -1,3 +1,13 @@
+# ==========================================
+# Header: openair.py
+# Purpose: openair.py implementation.
+# Description: Logic and implementation for openair.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Tiny launcher for OPEN-AIR that defers entirely to the Rust orchestrator."""
 import os
@@ -6,6 +16,7 @@ import sys
 
 import socket
 
+# Inline comment: Logic for get_local_ip
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -16,6 +27,7 @@ def get_local_ip():
     finally:
         s.close()
 
+# Inline comment: Logic for main
 def main():
     print("==================================================")
     print(f"🌍 OPEN-AIR IS RUNNING ON IP: {get_local_ip()}")

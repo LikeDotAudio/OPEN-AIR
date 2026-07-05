@@ -1,3 +1,13 @@
+# ==========================================
+# Header: refactor_protocols.py
+# Purpose: refactor_protocols.py implementation.
+# Description: Logic and implementation for refactor_protocols.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import shutil
 import configparser

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: ptp_tester.py
+# Purpose: ptp_tester.py implementation.
+# Description: Logic and implementation for ptp_tester.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 #!/usr/bin/env python3
 """Real PTP (IEEE 1588) tester: sniff PTP traffic on UDP 319/320 with scapy.
 Requires root (packet capture).  sudo python3 Validations/Protocols/ptp/ptp_tester.py [--timeout S]

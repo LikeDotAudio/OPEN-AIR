@@ -1,3 +1,13 @@
+/**
+ * Header: api.rs
+ * Purpose: api.rs implementation.
+ * Description: Logic and implementation for api.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 use axum::{
     extract::{Query, State},
     response::{IntoResponse, Json},
@@ -17,6 +27,7 @@ pub struct ApiState {
     pub root_dir: PathBuf,
 }
 
+// Inline comment: Logic for router
 pub fn router(state: ApiState) -> Router {
     Router::new()
         .route("/tree", get(get_tree))
@@ -26,6 +37,7 @@ pub fn router(state: ApiState) -> Router {
         .with_state(state)
 }
 
+// Inline comment: Logic for get_directory_tree
 fn get_directory_tree(path: &Path, base_path: &Path) -> Value {
     let name = path.file_name().unwrap_or_default().to_string_lossy().to_string();
     let mut children = Vec::new();
@@ -71,6 +83,7 @@ fn get_directory_tree(path: &Path, base_path: &Path) -> Value {
     })
 }
 
+// Inline comment: Logic for get_tree
 async fn get_tree(State(state): State<ApiState>) -> impl IntoResponse {
     let gui_frames = state.root_dir.join("FrontEnd").join("Gui_Frames");
     Json(get_directory_tree(&gui_frames, &gui_frames))
@@ -81,6 +94,7 @@ struct ConfigQuery {
     proto: Option<String>,
 }
 
+// Inline comment: Logic for get_config
 async fn get_config(State(state): State<ApiState>, Query(query): Query<ConfigQuery>) -> impl IntoResponse {
     if let Some(proto) = query.proto {
         if !proto.chars().all(|c| c.is_ascii_alphanumeric()) {
@@ -117,6 +131,7 @@ struct SavePayload {
     content: Value,
 }
 
+// Inline comment: Logic for strip_volatile
 fn strip_volatile(val: &mut Value) {
     match val {
         Value::Object(map) => {
@@ -134,6 +149,7 @@ fn strip_volatile(val: &mut Value) {
     }
 }
 
+// Inline comment: Logic for save_file
 async fn save_file(State(state): State<ApiState>, Json(mut payload): Json<SavePayload>) -> impl IntoResponse {
     let clean_rel = payload.path.trim_start_matches('/');
     let gui_frames_dir = state.root_dir.join("FrontEnd").join("Gui_Frames");
@@ -162,6 +178,7 @@ async fn save_file(State(state): State<ApiState>, Json(mut payload): Json<SavePa
     }
 }
 
+// Inline comment: Logic for extract_readme_json
 fn extract_readme_json(text: &str) -> Option<Value> {
     let re = regex::Regex::new(r"(?s)```json\s*\n(.*?)\n```").ok()?;
     if let Some(caps) = re.captures(text) {
@@ -179,6 +196,7 @@ fn extract_readme_json(text: &str) -> Option<Value> {
     }
 }
 
+// Inline comment: Logic for add_components
 fn add_components(content: &Value, category: &str, relpath: &str, components: &mut Vec<Value>, legends: &mut serde_json::Map<String, Value>, seen: &mut HashSet<String>) {
     if let Value::Object(map) = content {
         for (key, schema) in map {
@@ -217,6 +235,7 @@ fn add_components(content: &Value, category: &str, relpath: &str, components: &m
     }
 }
 
+// Inline comment: Logic for get_grabbag
 async fn get_grabbag(State(state): State<ApiState>) -> impl IntoResponse {
     let frontend = state.root_dir.join("FrontEnd");
     let mut components = Vec::new();

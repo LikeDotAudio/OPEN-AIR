@@ -1,3 +1,13 @@
+# ==========================================
+# Header: update_buttons.py
+# Purpose: update_buttons.py implementation.
+# Description: Logic and implementation for update_buttons.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import json
 import glob
 import os

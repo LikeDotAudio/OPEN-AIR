@@ -1,3 +1,13 @@
+# ==========================================
+# Header: migrateRust.py
+# Purpose: migrateRust.py implementation.
+# Description: Logic and implementation for migrateRust.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import re
 import shutil
@@ -65,10 +75,12 @@ CRATES = [
     "oaTranslator/Methods/oaManifestGen_rs"
 ]
 
+# Inline comment: Logic for to_snake_case
 def to_snake_case(name):
     name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
 
+# Inline comment: Logic for run_migration
 def run_migration():
     # Base directory for the new core
     core_src_dir = os.path.join("oaRustCore", "src")

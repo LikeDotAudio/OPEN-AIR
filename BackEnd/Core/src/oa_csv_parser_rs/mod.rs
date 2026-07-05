@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaFileImportCSV/Methods/oaCSVParser_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -13,6 +23,7 @@ use csv::ReaderBuilder;
 use regex::Regex;
 
 #[pyfunction]
+// Inline comment: Logic for convert_csv_unknown
 fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<String>, Py<PyList>)> {
     let standard_headers = vec!["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"];
     let mut header_aliases = HashMap::new();
@@ -91,6 +102,7 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
 }
 
 #[pymodule]
+// Inline comment: Logic for oacsvparser_rs
 pub fn oacsvparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(convert_csv_unknown, m)?)?;
     Ok(())

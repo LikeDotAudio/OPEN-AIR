@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComREST/Methods/oaFastAPI_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -59,6 +69,7 @@ impl RestServer {
     }
 }
 
+// Inline comment: Logic for handle_get
 async fn handle_get(
     Path(path): Path<String>,
     State(routes): State<Arc<Mutex<HashMap<String, Py<PyAny>>>>>,
@@ -77,6 +88,7 @@ async fn handle_get(
 }
 
 #[pymodule]
+// Inline comment: Logic for oafastapi_rs
 pub fn oafastapi_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RestServer>()?;
     Ok(())

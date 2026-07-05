@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaComEmber/Methods/oaEmberTree_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
 // Version: 20260413.1400.1
@@ -73,6 +83,7 @@ impl<'a> BerTlv<'a> {
     }
 }
 
+// Inline comment: Logic for parse_tag
 fn parse_tag(input: &[u8]) -> IResult<&[u8], (u32, bool, u8)> {
     let (input, first_byte) = u8(input)?;
     let class = (first_byte & 0xC0) >> 6;
@@ -97,6 +108,7 @@ fn parse_tag(input: &[u8]) -> IResult<&[u8], (u32, bool, u8)> {
     }
 }
 
+// Inline comment: Logic for parse_length
 fn parse_length(input: &[u8]) -> IResult<&[u8], usize> {
     let (input, first_byte) = u8(input)?;
     if first_byte == 0x80 {
@@ -119,6 +131,7 @@ fn parse_length(input: &[u8]) -> IResult<&[u8], usize> {
     }
 }
 
+// Inline comment: Logic for parse_ber_tlv
 fn parse_ber_tlv(input: &[u8]) -> IResult<&[u8], BerTlv> {
     let (input, (tag, is_constructed, class)) = parse_tag(input)?;
     let (input, length) = parse_length(input)?;
@@ -149,6 +162,7 @@ fn parse_ber_tlv(input: &[u8]) -> IResult<&[u8], BerTlv> {
 }
 
 #[pymodule]
+// Inline comment: Logic for oaembertree_rs
 pub fn oaembertree_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<EmberParser>()?;
     Ok(())

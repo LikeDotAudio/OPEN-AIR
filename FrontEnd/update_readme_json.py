@@ -1,3 +1,13 @@
+# ==========================================
+# Header: update_readme_json.py
+# Purpose: update_readme_json.py implementation.
+# Description: Logic and implementation for update_readme_json.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import json
 import re
 

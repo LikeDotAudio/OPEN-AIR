@@ -1,3 +1,13 @@
+/**
+ * Header: mod.rs
+ * Purpose: mod.rs implementation.
+ * Description: Logic and implementation for mod.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // oaLogging/Methods/oaLoggingGate_rs/mod.rs
 // Author: Gemini Architect
 // Version: 20260413.0010.1
@@ -22,12 +32,14 @@ static MASTER_LOG_ENABLED: AtomicBool = AtomicBool::new(true);
 static LOGGING_MATRIX: Lazy<DashMap<String, bool>> = Lazy::new(DashMap::new);
 
 #[pyfunction]
+// Inline comment: Logic for set_master_toggle
 fn set_master_toggle(enabled: bool) {
     MASTER_LOG_ENABLED.store(enabled, Ordering::SeqCst);
 }
 
 #[pyfunction]
 #[pyo3(signature = (system, element=None, enabled=true))]
+// Inline comment: Logic for set_gate_state
 fn set_gate_state(system: String, element: Option<String>, enabled: bool) {
     let key = match element {
         Some(element_name) => format!("{}:{}", system, element_name),
@@ -38,6 +50,7 @@ fn set_gate_state(system: String, element: Option<String>, enabled: bool) {
 
 #[pyfunction]
 #[pyo3(signature = (system, element=None, func_name=None))]
+// Inline comment: Logic for is_debug_allowed
 fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<String>) -> bool {
     // Master kill-switch evaluation is the fastest path. If the system is 
     // in PRODUCTION mode, all trace/debug logs are dropped here.
@@ -73,6 +86,7 @@ fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<S
 }
 
 #[pymodule]
+// Inline comment: Logic for oalogginggate_rs
 pub fn oalogginggate_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(is_debug_allowed, m)?)?;
     m.add_function(wrap_pyfunction!(set_gate_state, m)?)?;

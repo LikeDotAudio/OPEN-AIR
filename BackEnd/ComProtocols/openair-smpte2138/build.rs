@@ -1,3 +1,14 @@
+/**
+ * Header: build.rs
+ * Purpose: build.rs implementation.
+ * Description: Logic and implementation for build.rs implementation.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for main
 fn main() {
     // oa_st2138_codec_rs (the pyo3 ST2138 codec) is only compiled under the
     // `python` feature, and only it needs the generated protobuf bindings, so

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: flatten_protocols.py
+# Purpose: flatten_protocols.py implementation.
+# Description: Logic and implementation for flatten_protocols.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import shutil
 
@@ -38,26 +48,32 @@ class GenericManager:
         return {"running": False, "engine": "rust_pending"}
 
 _instance = None
+# Inline comment: Logic for get_manager
 def get_manager(*args, **kwargs):
     global _instance
     if _instance is None:
         _instance = GenericManager(*args, **kwargs)
     return _instance
 
+# Inline comment: Logic for start_bridge
 def start_bridge(*args, **kwargs):
     return get_manager(*args, **kwargs)
 
+# Inline comment: Logic for get_discovery_orchestrator
 def get_discovery_orchestrator(*args, **kwargs):
     return get_manager(*args, **kwargs)
 
+# Inline comment: Logic for start
 def start(*args, **kwargs):
     manager = get_manager(*args, **kwargs)
     manager.start()
 
+# Inline comment: Logic for stop
 def stop():
     if _instance:
         _instance.stop()
 
+# Inline comment: Logic for status
 def status():
     if _instance:
         return _instance.get_status()

@@ -1,3 +1,13 @@
+# ==========================================
+# Header: flatten_ptp.py
+# Purpose: flatten_ptp.py implementation.
+# Description: Logic and implementation for flatten_ptp.py implementation.
+# 
+# Version: 26.07.05.1
+# Change Log:
+# - 2026-07-05: Initial annotation and documentation added.
+# ==========================================
+
 import os
 import shutil
 

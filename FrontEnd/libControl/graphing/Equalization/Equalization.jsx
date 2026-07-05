@@ -173,8 +173,7 @@ const Equalization = ({ value: mqttData, config }) => {
         if (!mqttData || !chartInstance.current) return;
         try {
             if (typeof mqttData === 'string' && mqttData.includes(',')) {
-                const newData = parseCsv("x,y
-" + mqttData);
+                const newData = parseCsv("x,y\\n" + mqttData);
                 if (newData.length) {
                     chartInstance.current.setOption({
                         series: [{ data: [[20,0],[20000,0]] }, { data: newData }]

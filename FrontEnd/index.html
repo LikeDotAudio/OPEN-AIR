@@ -277,7 +277,7 @@
             //    current machine — surviving IP changes and working on localhost.
             // 3. Fall back to a fixed IP only if there's no hostname (e.g. file://).
             const urlParams = new URLSearchParams(window.location.search);
-            let mqttHost = urlParams.get('mqtt') || window.location.hostname || '44.44.44.152';
+            let mqttHost = urlParams.get('mqtt') || 'localhost';
             
             // If the site is loaded over HTTPS, use WSS (Secure WebSockets), otherwise WS
             const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';

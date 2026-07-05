@@ -40,6 +40,12 @@ def main():
     if os.path.exists(splash_path):
         subprocess.Popen([sys.executable, splash_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
+    # Launch Local Web Server for FrontEnd
+    frontend_dir = os.path.join(root, "FrontEnd")
+    if os.path.exists(frontend_dir):
+        print(f"🌐 [LAUNCHER] Starting local web server on http://localhost:8000 ...", flush=True)
+        subprocess.Popen([sys.executable, "-m", "http.server", "8000"], cwd=frontend_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
     core_dir = os.path.join(root, "BackEnd", "Core")
     manifest = os.path.join(core_dir, "Cargo.toml")
     

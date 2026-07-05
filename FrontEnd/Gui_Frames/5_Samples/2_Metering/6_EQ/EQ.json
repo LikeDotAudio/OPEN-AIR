@@ -7,27 +7,179 @@
       "fluid_ew": true
     },
     "blocks": {
-      "EQ_Demo": {
+      "Parametric_EQ_Demo": {
         "type": "OcaBlock",
         "description": {
-          "En": "Equalization Metering"
+          "En": "Parametric Equalizer Demo"
         },
+        "layout_columns": 1,
         "fields": {
-          "graph": {
+          "EQ_Graph": {
             "type": "_Equalization",
-            "identity": {
-              "label": "Stagebox Mic 53"
+            "label": {
+              "En": "Master Bus Parametric EQ"
             },
+            "command": "EQ_Params",
             "geometry": {
-              "width": 500,
-              "height": 350
+              "width": "100%",
+              "height": 400
+            }
+          },
+          "Band_Controls": {
+            "type": "OcaBlock",
+            "description": {
+              "En": ""
             },
-            "datasets": [
-              {
-                "id": "curve",
-                "initial_csv_data": "x,y\n20,-32\n50,-10\n100,3\n150,2\n200,0\n300,-8\n500,-1\n1000,2\n2000,1\n5000,4\n10000,1\n20000,0"
+            "layout_columns": 5,
+            "column_sizing": [
+              { "weight": 1 },
+              { "weight": 1 },
+              { "weight": 1 },
+              { "weight": 1 },
+              { "weight": 1 }
+            ],
+            "fields": {
+              "Band_0": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": { "En": "Low Band" },
+                "fields": {
+                  "Freq_0": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Low/Freq",
+                    "label": { "En": "Freq" },
+                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 60.0 } },
+                    "cosmetics": { "colors": { "pointer": "#FF5722" }, "style_overrides": { "scale_type": "log" } }
+                  },
+                  "Gain_0": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Low/Gain",
+                    "label": { "En": "Gain" },
+                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 2.5 } },
+                    "cosmetics": { "colors": { "pointer": "#FF5722" } }
+                  },
+                  "Q_0": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Low/Q",
+                    "label": { "En": "Q" },
+                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 0.7 } },
+                    "cosmetics": { "colors": { "pointer": "#FF5722" } }
+                  }
+                }
+              },
+              "Band_1": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": { "En": "LowMid Band" },
+                "fields": {
+                  "Freq_1": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/LowMid/Freq",
+                    "label": { "En": "Freq" },
+                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 250.0 } },
+                    "cosmetics": { "colors": { "pointer": "#4CAF50" }, "style_overrides": { "scale_type": "log" } }
+                  },
+                  "Gain_1": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/LowMid/Gain",
+                    "label": { "En": "Gain" },
+                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": -4.0 } },
+                    "cosmetics": { "colors": { "pointer": "#4CAF50" } }
+                  },
+                  "Q_1": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/LowMid/Q",
+                    "label": { "En": "Q" },
+                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 1.2 } },
+                    "cosmetics": { "colors": { "pointer": "#4CAF50" } }
+                  }
+                }
+              },
+              "Band_2": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": { "En": "Mid Band" },
+                "fields": {
+                  "Freq_2": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Mid/Freq",
+                    "label": { "En": "Freq" },
+                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 1000.0 } },
+                    "cosmetics": { "colors": { "pointer": "#03A9F4" }, "style_overrides": { "scale_type": "log" } }
+                  },
+                  "Gain_2": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Mid/Gain",
+                    "label": { "En": "Gain" },
+                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 1.5 } },
+                    "cosmetics": { "colors": { "pointer": "#03A9F4" } }
+                  },
+                  "Q_2": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/Mid/Q",
+                    "label": { "En": "Q" },
+                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 2.0 } },
+                    "cosmetics": { "colors": { "pointer": "#03A9F4" } }
+                  }
+                }
+              },
+              "Band_3": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": { "En": "HighMid Band" },
+                "fields": {
+                  "Freq_3": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/HighMid/Freq",
+                    "label": { "En": "Freq" },
+                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 4000.0 } },
+                    "cosmetics": { "colors": { "pointer": "#E91E63" }, "style_overrides": { "scale_type": "log" } }
+                  },
+                  "Gain_3": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/HighMid/Gain",
+                    "label": { "En": "Gain" },
+                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 0.0 } },
+                    "cosmetics": { "colors": { "pointer": "#E91E63" } }
+                  },
+                  "Q_3": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/HighMid/Q",
+                    "label": { "En": "Q" },
+                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 1.5 } },
+                    "cosmetics": { "colors": { "pointer": "#E91E63" } }
+                  }
+                }
+              },
+              "Band_4": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": { "En": "High Band" },
+                "fields": {
+                  "Freq_4": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/High/Freq",
+                    "label": { "En": "Freq" },
+                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 12000.0 } },
+                    "cosmetics": { "colors": { "pointer": "#9C27B0" }, "style_overrides": { "scale_type": "log" } }
+                  },
+                  "Gain_4": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/High/Gain",
+                    "label": { "En": "Gain" },
+                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 3.0 } },
+                    "cosmetics": { "colors": { "pointer": "#9C27B0" } }
+                  },
+                  "Q_4": {
+                    "type": "_FaderKnob",
+                    "command": "EQ_Params/High/Q",
+                    "label": { "En": "Q" },
+                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 0.7 } },
+                    "cosmetics": { "colors": { "pointer": "#9C27B0" } }
+                  }
+                }
               }
-            ]
+            }
           }
         }
       }

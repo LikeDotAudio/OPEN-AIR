@@ -32,152 +32,402 @@
             },
             "layout_columns": 5,
             "column_sizing": [
-              { "weight": 1 },
-              { "weight": 1 },
-              { "weight": 1 },
-              { "weight": 1 },
-              { "weight": 1 }
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              }
             ],
             "fields": {
               "Band_0": {
                 "type": "OcaBlock",
-                "layout_columns": 3,
-                "description": { "En": "Low Band" },
+                "layout_columns": 2,
+                "description": {
+                  "En": "Low Band"
+                },
                 "fields": {
-                  "Freq_0": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/Low/Freq",
-                    "label": { "En": "Freq" },
-                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 60.0 } },
-                    "cosmetics": { "colors": { "pointer": "#FF5722" }, "style_overrides": { "scale_type": "log" } }
-                  },
-                  "Gain_0": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/Low/Gain",
-                    "label": { "En": "Gain" },
-                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 2.5 } },
-                    "cosmetics": { "colors": { "pointer": "#FF5722" } }
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
+                    "command": "EQ_Params/Low",
+                    "label": {
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 20.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 60.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#FF5722"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -24.0,
+                      "rotation_max": 24.0,
+                      "rotation_default": 2.5,
+                      "cap_outline_color": "#FF5722",
+                      "freestyle": true
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   },
                   "Q_0": {
                     "type": "_FaderKnob",
                     "command": "EQ_Params/Low/Q",
-                    "label": { "En": "Q" },
-                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 0.7 } },
-                    "cosmetics": { "colors": { "pointer": "#FF5722" } }
+                    "label": {
+                      "En": "Q"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 0.1,
+                        "max": 10.0,
+                        "value_default": 0.7
+                      }
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "pointer": "#FF5722"
+                      }
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   }
-                }
+                },
+                "column_sizing": [
+                  {
+                    "weight": 3
+                  },
+                  {
+                    "weight": 1
+                  }
+                ]
               },
               "Band_1": {
                 "type": "OcaBlock",
-                "layout_columns": 3,
-                "description": { "En": "LowMid Band" },
+                "layout_columns": 2,
+                "description": {
+                  "En": "LowMid Band"
+                },
                 "fields": {
-                  "Freq_1": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/LowMid/Freq",
-                    "label": { "En": "Freq" },
-                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 250.0 } },
-                    "cosmetics": { "colors": { "pointer": "#4CAF50" }, "style_overrides": { "scale_type": "log" } }
-                  },
-                  "Gain_1": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/LowMid/Gain",
-                    "label": { "En": "Gain" },
-                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": -4.0 } },
-                    "cosmetics": { "colors": { "pointer": "#4CAF50" } }
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
+                    "command": "EQ_Params/LowMid",
+                    "label": {
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 20.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 250.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#4CAF50"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -24.0,
+                      "rotation_max": 24.0,
+                      "rotation_default": -4.0,
+                      "cap_outline_color": "#4CAF50",
+                      "freestyle": true
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   },
                   "Q_1": {
                     "type": "_FaderKnob",
                     "command": "EQ_Params/LowMid/Q",
-                    "label": { "En": "Q" },
-                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 1.2 } },
-                    "cosmetics": { "colors": { "pointer": "#4CAF50" } }
+                    "label": {
+                      "En": "Q"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 0.1,
+                        "max": 10.0,
+                        "value_default": 1.2
+                      }
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "pointer": "#4CAF50"
+                      }
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   }
-                }
+                },
+                "column_sizing": [
+                  {
+                    "weight": 3
+                  },
+                  {
+                    "weight": 1
+                  }
+                ]
               },
               "Band_2": {
                 "type": "OcaBlock",
-                "layout_columns": 3,
-                "description": { "En": "Mid Band" },
+                "layout_columns": 2,
+                "description": {
+                  "En": "Mid Band"
+                },
                 "fields": {
-                  "Freq_2": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/Mid/Freq",
-                    "label": { "En": "Freq" },
-                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 1000.0 } },
-                    "cosmetics": { "colors": { "pointer": "#03A9F4" }, "style_overrides": { "scale_type": "log" } }
-                  },
-                  "Gain_2": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/Mid/Gain",
-                    "label": { "En": "Gain" },
-                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 1.5 } },
-                    "cosmetics": { "colors": { "pointer": "#03A9F4" } }
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
+                    "command": "EQ_Params/Mid",
+                    "label": {
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 20.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 1000.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#03A9F4"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -24.0,
+                      "rotation_max": 24.0,
+                      "rotation_default": 1.5,
+                      "cap_outline_color": "#03A9F4",
+                      "freestyle": true
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   },
                   "Q_2": {
                     "type": "_FaderKnob",
                     "command": "EQ_Params/Mid/Q",
-                    "label": { "En": "Q" },
-                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 2.0 } },
-                    "cosmetics": { "colors": { "pointer": "#03A9F4" } }
+                    "label": {
+                      "En": "Q"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 0.1,
+                        "max": 10.0,
+                        "value_default": 2.0
+                      }
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "pointer": "#03A9F4"
+                      }
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   }
-                }
+                },
+                "column_sizing": [
+                  {
+                    "weight": 3
+                  },
+                  {
+                    "weight": 1
+                  }
+                ]
               },
               "Band_3": {
                 "type": "OcaBlock",
-                "layout_columns": 3,
-                "description": { "En": "HighMid Band" },
+                "layout_columns": 2,
+                "description": {
+                  "En": "HighMid Band"
+                },
                 "fields": {
-                  "Freq_3": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/HighMid/Freq",
-                    "label": { "En": "Freq" },
-                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 4000.0 } },
-                    "cosmetics": { "colors": { "pointer": "#E91E63" }, "style_overrides": { "scale_type": "log" } }
-                  },
-                  "Gain_3": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/HighMid/Gain",
-                    "label": { "En": "Gain" },
-                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 0.0 } },
-                    "cosmetics": { "colors": { "pointer": "#E91E63" } }
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
+                    "command": "EQ_Params/HighMid",
+                    "label": {
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 20.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 4000.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#E91E63"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -24.0,
+                      "rotation_max": 24.0,
+                      "rotation_default": 0.0,
+                      "cap_outline_color": "#E91E63",
+                      "freestyle": true
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   },
                   "Q_3": {
                     "type": "_FaderKnob",
                     "command": "EQ_Params/HighMid/Q",
-                    "label": { "En": "Q" },
-                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 1.5 } },
-                    "cosmetics": { "colors": { "pointer": "#E91E63" } }
+                    "label": {
+                      "En": "Q"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 0.1,
+                        "max": 10.0,
+                        "value_default": 1.5
+                      }
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "pointer": "#E91E63"
+                      }
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   }
-                }
+                },
+                "column_sizing": [
+                  {
+                    "weight": 3
+                  },
+                  {
+                    "weight": 1
+                  }
+                ]
               },
               "Band_4": {
                 "type": "OcaBlock",
-                "layout_columns": 3,
-                "description": { "En": "High Band" },
+                "layout_columns": 2,
+                "description": {
+                  "En": "High Band"
+                },
                 "fields": {
-                  "Freq_4": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/High/Freq",
-                    "label": { "En": "Freq" },
-                    "domain": { "primary": { "min": 20.0, "max": 20000.0, "value_default": 12000.0 } },
-                    "cosmetics": { "colors": { "pointer": "#9C27B0" }, "style_overrides": { "scale_type": "log" } }
-                  },
-                  "Gain_4": {
-                    "type": "_FaderKnob",
-                    "command": "EQ_Params/High/Gain",
-                    "label": { "En": "Gain" },
-                    "domain": { "primary": { "min": -24.0, "max": 24.0, "value_default": 3.0 } },
-                    "cosmetics": { "colors": { "pointer": "#9C27B0" } }
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
+                    "command": "EQ_Params/High",
+                    "label": {
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 20.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 12000.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#9C27B0"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -24.0,
+                      "rotation_max": 24.0,
+                      "rotation_default": 3.0,
+                      "cap_outline_color": "#9C27B0",
+                      "freestyle": true
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   },
                   "Q_4": {
                     "type": "_FaderKnob",
                     "command": "EQ_Params/High/Q",
-                    "label": { "En": "Q" },
-                    "domain": { "primary": { "min": 0.1, "max": 10.0, "value_default": 0.7 } },
-                    "cosmetics": { "colors": { "pointer": "#9C27B0" } }
+                    "label": {
+                      "En": "Q"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 0.1,
+                        "max": 10.0,
+                        "value_default": 0.7
+                      }
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "pointer": "#9C27B0"
+                      }
+                    },
+                    "layout": {
+                      "width": "100%",
+                      "height": 90
+                    }
                   }
-                }
+                },
+                "column_sizing": [
+                  {
+                    "weight": 3
+                  },
+                  {
+                    "weight": 1
+                  }
+                ]
               }
             }
           }

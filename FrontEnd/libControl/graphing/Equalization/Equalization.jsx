@@ -184,9 +184,9 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 for (const key in mqttData) {
                     const band = mqttData[key];
                     if (band && typeof band === 'object') {
-                        const freq = parseFloat(band.Freq || band.freq || band.Frequency || band.frequency);
-                        const gain = parseFloat(band.Gain || band.gain);
-                        const q = parseFloat(band.Q || band.q);
+                        const freq = parseFloat(band.Freq || band.freq || band.Frequency || band.frequency || band.value);
+                        const gain = parseFloat(band.Gain || band.gain || band.rotValue);
+                        const q = parseFloat(band.Q || band.q || 1.0); // Default Q if undefined
                         if (!isNaN(freq) && !isNaN(gain) && !isNaN(q)) {
                             bands.push({ name: key, freq, gain, q });
                         }
@@ -370,6 +370,8 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                         const publish = window.useMqttPublish();
                                         publish(topic + '/' + b.name + '/Freq', newFreq);
                                         publish(topic + '/' + b.name + '/Gain', newGain);
+                                        publish(topic + '/' + b.name + '/value', newFreq);
+                                        publish(topic + '/' + b.name + '/rotValue', newGain);
                                     }
                                 },
                                 onmousewheel: function (e) {

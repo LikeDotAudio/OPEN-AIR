@@ -478,8 +478,8 @@ const WindowManager = ({ directoryTree }) => {
 
     if (!directoryTree || !directoryTree.children) return <div style={{color: '#fff'}}>Loading Tree...</div>;
 
-    // The root usually contains "Window_1", "Window_2"
-    const windows = directoryTree.children.filter(c => c.type === 'directory' && c.name.toLowerCase().includes('window'));
+    // The root contains the top-level GUI folders
+    const windows = directoryTree.children.filter(c => c.type === 'directory');
 
     // Restore the active window from the URL hash (so refresh returns here).
     const [activeWindow, setActiveWindow] = React.useState(() => {

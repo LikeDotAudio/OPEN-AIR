@@ -1,3 +1,4 @@
+#![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut, mismatched_lifetime_syntaxes)]
 /**
  * Header: lib.rs
  * Purpose: lib.rs implementation.
@@ -8,7 +9,6 @@
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
-#![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut, mismatched_lifetime_syntaxes)]
 use nom::{
     bytes::complete::take,
     multi::count,

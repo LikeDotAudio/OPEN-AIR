@@ -157,17 +157,44 @@ const AudioDynamics = ({ value: mqttData, config }) => {
 
     // Handle real-time MQTT updates (if implemented in standard way)
     React.useEffect(() => {
-        if (!mqttData || !chartInstance.current) return;
-        // Basic merge of incoming data if it's formatted as expected
+        if (!chartInstance.current) return;
         try {
-            if (typeof mqttData === 'string' && mqttData.includes(',')) {
-                const newData = parseCsv("x,y\n" + mqttData);
-                if (newData.length) {
-                    chartInstance.current.setOption({
-                        series: [{}, { data: newData }]
-                    });
-                }
+            let thresh = -20;
+            let ratio = 2.0;
+            let gain = 0;
+            let knee = 5.0;
+
+            if (typeof mqttData === 'object' && mqttData !== null) {
+                thresh = parseFloat(mqttData.Thresh?.value || mqttData.Thresh) || -20;
+                ratio = parseFloat(mqttData.Ratio?.value || mqttData.Ratio) || 2.0;
+                gain = parseFloat(mqttData.Gain?.value || mqttData.Gain) || 0;
+                knee = parseFloat(mqttData.Knee?.value || mqttData.Knee) || 5.0;
             }
+
+            const newData = [];
+            // Generate standard compressor soft-knee curve
+            for (let x = -90; x <= 0; x += 1) {
+                let y = x;
+                const W = Math.max(0.1, knee);
+                
+                if (x - thresh < -W / 2) {
+                    y = x;
+                } else if (Math.abs(x - thresh) <= W / 2) {
+                    y = x + (1 / ratio - 1) * Math.pow(x - thresh + W / 2, 2) / (2 * W);
+                } else {
+                    y = thresh + (x - thresh) / ratio;
+                }
+                
+                y += gain;
+                newData.push([x, y]);
+            }
+
+            chartInstance.current.setOption({
+                series: [
+                    {}, // Reference line
+                    { data: newData }
+                ]
+            });
         } catch (e) {
             console.error(e);
         }

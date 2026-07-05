@@ -669,7 +669,7 @@ const WindowManager = ({ directoryTree }) => {
                         title={activeWindow === w.name ? "Click to cycle split layout" : ""}
                     >
                         {(() => {
-                            let label = w.name.replace(/_/g, ' ');
+                            let label = w.name.replace(/^\\d+[_-]?/, '').replace(/_/g, ' ');
                             if (activeWindow === w.name) {
                                 const p = splitStates[w.name];
                                 const leftArrow = p === 0 ? '' : '◀\u00A0\u00A0';

@@ -12,7 +12,7 @@
 // Renders a specialized frequency equalization curve based on ECharts.
 
 // Inline comment: Logic for Equalization
-const Equalization = ({ value: mqttData, config }) => {
+const Equalization = ({ value: mqttData, config, topic }) => {
     const chartRef = React.useRef(null);
     const chartInstance = React.useRef(null);
     const useMqttLang = window.useMqttLang || (() => ['En', () => {}]);

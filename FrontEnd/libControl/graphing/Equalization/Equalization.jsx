@@ -184,8 +184,16 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 for (const key in mqttData) {
                     const band = mqttData[key];
                     if (band && typeof band === 'object') {
-                        const freq = parseFloat(band.Freq || band.freq || band.Frequency || band.frequency || band.value);
-                        const gain = parseFloat(band.Gain || band.gain || band.rotValue);
+                        const freqCandidate = band.Freq || band.freq || band.Frequency || band.frequency;
+                        const gainCandidate = band.Gain || band.gain;
+                        
+                        let freq = parseFloat(freqCandidate);
+                        let gain = parseFloat(gainCandidate);
+                        
+                        // Fallback to vertical LTP mapping: value = Gain, rotValue = Freq
+                        if (isNaN(freq) && band.rotValue !== undefined) freq = parseFloat(band.rotValue);
+                        if (isNaN(gain) && band.value !== undefined) gain = parseFloat(band.value);
+                        
                         const q = parseFloat(band.Q || band.q || 1.0); // Default Q if undefined
                         if (!isNaN(freq) && !isNaN(gain) && !isNaN(q)) {
                             bands.push({ name: key, freq, gain, q });
@@ -366,13 +374,14 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     let newGain = Math.max(-32, Math.min(32, pt[1]));
                                     
                                     // Update graph smoothly temporarily? The state update will do it.
-                                    if (window.useMqttPublish) {
-                                        const publish = window.useMqttPublish();
-                                        publish(topic + '/' + b.name + '/Freq', newFreq);
-                                        publish(topic + '/' + b.name + '/Gain', newGain);
-                                        publish(topic + '/' + b.name + '/value', newFreq);
-                                        publish(topic + '/' + b.name + '/rotValue', newGain);
-                                    }
+                                        if (window.useMqttPublish) {
+                                            const publish = window.useMqttPublish();
+                                            publish(topic + '/' + b.name + '/Freq', newFreq);
+                                            publish(topic + '/' + b.name + '/Gain', newGain);
+                                            // Vertical LTP mapping
+                                            publish(topic + '/' + b.name + '/rotValue', newFreq);
+                                            publish(topic + '/' + b.name + '/value', newGain);
+                                        }
                                 },
                                 onmousewheel: function (e) {
                                     // Q adjustment

@@ -21,7 +21,7 @@
             },
             "command": "EQ_Params",
             "geometry": {
-              "width": "100%",
+              "width": 1000,
               "height": 400
             }
           },
@@ -60,15 +60,15 @@
                     "type": "_CustomLTP",
                     "command": "EQ_Params/Low",
                     "label": {
-                      "En": "Freq / Gain"
+                      "En": "Gain / Freq"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": 20.0,
-                        "max": 20000.0
+                        "min": -24.0,
+                        "max": 24.0
                       },
                       "value": {
-                        "default_value": 60.0
+                        "default_value": 2.5
                       },
                       "cosmetics": {
                         "colors": {
@@ -81,15 +81,15 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": -24.0,
-                      "rotation_max": 24.0,
-                      "rotation_default": 2.5,
+                      "rotation_min": 20.0,
+                      "rotation_max": 20000.0,
+                      "rotation_default": 60.0,
                       "cap_outline_color": "#FF5722",
                       "freestyle": true
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 90
+                      "width": 80,
+                      "height": 300
                     }
                   },
                   "Q_0": {
@@ -112,7 +112,7 @@
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 90
+                      "height": 300
                     }
                   }
                 },
@@ -136,15 +136,15 @@
                     "type": "_CustomLTP",
                     "command": "EQ_Params/LowMid",
                     "label": {
-                      "En": "Freq / Gain"
+                      "En": "Gain / Freq"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": 20.0,
-                        "max": 20000.0
+                        "min": -24.0,
+                        "max": 24.0
                       },
                       "value": {
-                        "default_value": 250.0
+                        "default_value": -4.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -157,15 +157,15 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": -24.0,
-                      "rotation_max": 24.0,
-                      "rotation_default": -4.0,
+                      "rotation_min": 20.0,
+                      "rotation_max": 20000.0,
+                      "rotation_default": 250.0,
                       "cap_outline_color": "#4CAF50",
                       "freestyle": true
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 90
+                      "width": 80,
+                      "height": 300
                     }
                   },
                   "Q_1": {
@@ -188,7 +188,7 @@
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 90
+                      "height": 300
                     }
                   }
                 },
@@ -212,15 +212,15 @@
                     "type": "_CustomLTP",
                     "command": "EQ_Params/Mid",
                     "label": {
-                      "En": "Freq / Gain"
+                      "En": "Gain / Freq"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": 20.0,
-                        "max": 20000.0
+                        "min": -24.0,
+                        "max": 24.0
                       },
                       "value": {
-                        "default_value": 1000.0
+                        "default_value": 1.5
                       },
                       "cosmetics": {
                         "colors": {
@@ -233,15 +233,15 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": -24.0,
-                      "rotation_max": 24.0,
-                      "rotation_default": 1.5,
+                      "rotation_min": 20.0,
+                      "rotation_max": 20000.0,
+                      "rotation_default": 1000.0,
                       "cap_outline_color": "#03A9F4",
                       "freestyle": true
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 90
+                      "width": 80,
+                      "height": 300
                     }
                   },
                   "Q_2": {
@@ -264,7 +264,7 @@
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 90
+                      "height": 300
                     }
                   }
                 },
@@ -288,15 +288,15 @@
                     "type": "_CustomLTP",
                     "command": "EQ_Params/HighMid",
                     "label": {
-                      "En": "Freq / Gain"
+                      "En": "Gain / Freq"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": 20.0,
-                        "max": 20000.0
+                        "min": -24.0,
+                        "max": 24.0
                       },
                       "value": {
-                        "default_value": 4000.0
+                        "default_value": 0.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -309,15 +309,15 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": -24.0,
-                      "rotation_max": 24.0,
-                      "rotation_default": 0.0,
+                      "rotation_min": 20.0,
+                      "rotation_max": 20000.0,
+                      "rotation_default": 4000.0,
                       "cap_outline_color": "#E91E63",
                       "freestyle": true
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 90
+                      "width": 80,
+                      "height": 300
                     }
                   },
                   "Q_3": {
@@ -340,7 +340,7 @@
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 90
+                      "height": 300
                     }
                   }
                 },
@@ -364,15 +364,15 @@
                     "type": "_CustomLTP",
                     "command": "EQ_Params/High",
                     "label": {
-                      "En": "Freq / Gain"
+                      "En": "Gain / Freq"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": 20.0,
-                        "max": 20000.0
+                        "min": -24.0,
+                        "max": 24.0
                       },
                       "value": {
-                        "default_value": 12000.0
+                        "default_value": 3.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -385,15 +385,15 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": -24.0,
-                      "rotation_max": 24.0,
-                      "rotation_default": 3.0,
+                      "rotation_min": 20.0,
+                      "rotation_max": 20000.0,
+                      "rotation_default": 12000.0,
                       "cap_outline_color": "#9C27B0",
                       "freestyle": true
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 90
+                      "width": 80,
+                      "height": 300
                     }
                   },
                   "Q_4": {
@@ -416,7 +416,7 @@
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 90
+                      "height": 300
                     }
                   }
                 },

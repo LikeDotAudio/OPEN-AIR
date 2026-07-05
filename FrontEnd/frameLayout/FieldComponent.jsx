@@ -378,7 +378,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
                 {type === '_AudioDynamics' ? (
                     window.AudioDynamics ? <window.AudioDynamics value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>AudioDynamics Component</div>
                 ) : type === '_Equalization' ? (
-                    window.Equalization ? <window.Equalization value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Equalization Component</div>
+                    window.Equalization ? <window.Equalization value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Equalization Component</div>
                 ) : (
                     window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>
                 )}

@@ -211,25 +211,51 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 }
                 
                 if (bands.length > 0) {
-                    const steps = 200;
+                    const steps = 500; // Using 500 points to match the user's Excel precision
                     const minF = Math.log10(20);
                     const maxF = Math.log10(20000);
                     
                     const totalData = [];
                     const bandDataArray = bands.map(() => []);
                     
+                    const fs = 48000;
+                    
+                    const getBiquadGainDB = (f, fc, Q, gainDB) => {
+                        if (gainDB === 0) return 0;
+                        const A = Math.pow(10, gainDB / 40);
+                        const w0 = 2 * Math.PI * fc / fs;
+                        const alpha = Math.sin(w0) / (2 * Q);
+
+                        const b0 = 1 + alpha * A;
+                        const b1 = -2 * Math.cos(w0);
+                        const b2 = 1 - alpha * A;
+                        const a0 = 1 + alpha / A;
+                        const a1 = -2 * Math.cos(w0);
+                        const a2 = 1 - alpha / A;
+
+                        const M0 = b0 / a0;
+                        const M1 = b1 / a0;
+                        const M2 = b2 / a0;
+                        const P1 = a1 / a0;
+                        const P2 = a2 / a0;
+
+                        const w = 2 * Math.PI * f / fs;
+                        const cos_w = Math.cos(w);
+                        const cos_2w = Math.cos(2 * w);
+
+                        const num = M0*M0 + M1*M1 + M2*M2 + 2*(M0*M1 + M1*M2)*cos_w + 2*M0*M2*cos_2w;
+                        const den = 1 + P1*P1 + P2*P2 + 2*(P1 + P1*P2)*cos_w + 2*P2*cos_2w;
+
+                        return 10 * Math.log10(num / den);
+                    };
+                    
                     for (let i = 0; i <= steps; i++) {
                         const f = Math.pow(10, minF + (maxF - minF) * (i / steps));
                         let totalGain = 0;
                         
                         bands.forEach((b, bIdx) => {
-                            let bandGain = 0;
-                            if (b.gain !== 0) {
-                                const w = f / b.freq;
-                                const denom = 1 + (b.q * b.q) * Math.pow(w - 1/w, 2);
-                                bandGain = b.gain / denom;
-                                totalGain += bandGain;
-                            }
+                            const bandGain = getBiquadGainDB(f, b.freq, b.q, b.gain);
+                            totalGain += bandGain;
                             bandDataArray[bIdx].push([parseFloat(f.toFixed(1)), parseFloat(bandGain.toFixed(2))]);
                         });
                         

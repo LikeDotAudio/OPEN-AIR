@@ -184,17 +184,26 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 for (const key in mqttData) {
                     const band = mqttData[key];
                     if (band && typeof band === 'object') {
-                        const freqCandidate = band.Freq || band.freq || band.Frequency || band.frequency;
-                        const gainCandidate = band.Gain || band.gain;
+                        const unwrap = (v) => {
+                            if (v === undefined || v === null) return undefined;
+                            if (typeof v === 'object' && v.value !== undefined) return v.value;
+                            return v;
+                        };
+
+                        const freqCandidate = unwrap(band.Freq) ?? unwrap(band.freq) ?? unwrap(band.Frequency) ?? unwrap(band.frequency);
+                        const gainCandidate = unwrap(band.Gain) ?? unwrap(band.gain);
+                        const rotVal = unwrap(band.rotValue);
+                        const linVal = unwrap(band.value);
                         
                         let freq = parseFloat(freqCandidate);
                         let gain = parseFloat(gainCandidate);
                         
                         // Fallback to vertical LTP mapping: value = Gain, rotValue = Freq
-                        if (isNaN(freq) && band.rotValue !== undefined) freq = parseFloat(band.rotValue);
-                        if (isNaN(gain) && band.value !== undefined) gain = parseFloat(band.value);
+                        if (isNaN(freq) && rotVal !== undefined) freq = parseFloat(rotVal);
+                        if (isNaN(gain) && linVal !== undefined) gain = parseFloat(linVal);
                         
-                        const q = parseFloat(band.Q || band.q || 1.0); // Default Q if undefined
+                        const qCandidate = unwrap(band.Q) ?? unwrap(band.q);
+                        const q = parseFloat(qCandidate) || 1.0; // Default Q if undefined
                         if (!isNaN(freq) && !isNaN(gain) && !isNaN(q)) {
                             bands.push({ name: key, freq, gain, q });
                         }

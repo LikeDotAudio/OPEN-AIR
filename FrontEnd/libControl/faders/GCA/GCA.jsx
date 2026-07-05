@@ -28,8 +28,14 @@ const GCA = ({ config, value, onChange }) => {
     const max = config?.domain?.max !== undefined ? config.domain.max
               : (config?.value_max !== undefined ? config.value_max : 100);
     const numChannels = config?.num_channels || (config?.channels?.length) || 1;
-    const width = config?.layout?.width || 120;
-    const height = config?.layout?.height || 400;
+    const overallWidth = config?.layout?.width || 120;
+    const overallHeight = config?.layout?.height || 400;
+    // Account for padding (10px x 2) + borders (2px)
+    const paddingX = 22;
+    // Account for padding (10px x 2) + borders (4px) + label text (~25px)
+    const paddingY = 49;
+    const width = Math.max(10, overallWidth - paddingX);
+    const height = Math.max(10, overallHeight - paddingY);
     const isRGB = config?.is_rgb === true;
 
     // Hook MUST be called in the component body, not inside draw() (which runs
@@ -401,6 +407,9 @@ const GCA = ({ config, value, onChange }) => {
 
     return (
         <div className="gca-wrapper" style={{ 
+            width: '100%',
+            height: '100%',
+            boxSizing: 'border-box',
             backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#3c3f41') : '#3c3f41'), 
             border: '1px solid #555', 
             borderTop: `3px solid ${config?.active_color || '#f4902c'}`, 

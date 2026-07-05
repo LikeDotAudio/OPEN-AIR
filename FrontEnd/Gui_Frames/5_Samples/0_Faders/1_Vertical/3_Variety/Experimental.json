@@ -1,0 +1,343 @@
+{
+  "Zoo_Faders_Vertical_Experimental": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Experimental_Fader_Riot": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "10 Columns of Experimental Fader Madness (Part 1)",
+          "Fr": "20 Columns of Exp\u00e9rimental Fader Madness",
+          "De": "20 Columns of Experimentell Fader Madness",
+          "Es": "20 Columns of Experimental Fader Madness"
+        },
+        "layout_columns": 10,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "exp_1": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "TITAN",
+              "Fr": "TITAN",
+              "De": "TITAN",
+              "Es": "TITAN"
+            },
+            "geometry": {
+              "width": 200,
+              "height": 600,
+              "cap": {
+                "x": 120,
+                "y": 80
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFD700",
+                "cap_highlights": "#000000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_2": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Atom",
+              "Fr": "Atom",
+              "De": "Atom",
+              "Es": "Atom"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 120,
+              "cap": {
+                "x": 20,
+                "y": 25
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF1493",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_3": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Flat",
+              "Fr": "Flat",
+              "De": "Flat",
+              "Es": "Flat"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 200,
+              "cap": {
+                "x": 180,
+                "y": 20
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FFFF",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_4": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Tower",
+              "Fr": "Tower",
+              "De": "Tower",
+              "Es": "Tower"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 700,
+              "cap": {
+                "x": 30,
+                "y": 120
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_5": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Pancake",
+              "Fr": "Pancake",
+              "De": "Pancake",
+              "Es": "Pancake"
+            },
+            "geometry": {
+              "width": 220,
+              "height": 250,
+              "cap": {
+                "x": 160,
+                "y": 40
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF9800",
+                "cap_highlights": "#000000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_6": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Ghost",
+              "Fr": "Ghost",
+              "De": "Ghost",
+              "Es": "Ghost"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 40,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#111111",
+                "cap_highlights": "#00FF00"
+              }
+            },
+            "tick_label_position": "both",
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_7": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Bifrost",
+              "Fr": "Bifrost",
+              "De": "Bifrost",
+              "Es": "Bifrost"
+            },
+            "geometry": {
+              "width": 80,
+              "height": 300,
+              "cap": {
+                "x": 40,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#9C27B0",
+                "cap_highlights": "#FFFF00"
+              }
+            },
+            "tick_color": "#FF00FF",
+            "tick_text_color": "#00FFFF",
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_8": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Monolith",
+              "Fr": "Monolith",
+              "De": "Monolith",
+              "Es": "Monolith"
+            },
+            "geometry": {
+              "width": 130,
+              "height": 450,
+              "cap": {
+                "x": 90,
+                "y": 100
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#444444",
+                "cap_highlights": "#FFD700"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_9": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Needle",
+              "Fr": "Aiguille",
+              "De": "Nadel",
+              "Es": "Aguja"
+            },
+            "geometry": {
+              "width": 100,
+              "height": 300,
+              "cap": {
+                "x": 15,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFFFF",
+                "cap_highlights": "#FF0000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "exp_10": {
+            "type": "_SmartFader",
+            "label": {
+              "En": "Chonky",
+              "Fr": "Chonky",
+              "De": "Chonky",
+              "Es": "Chonky"
+            },
+            "geometry": {
+              "width": 250,
+              "height": 350,
+              "cap": {
+                "x": 220,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF",
+                "cap_highlights": "#00FFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

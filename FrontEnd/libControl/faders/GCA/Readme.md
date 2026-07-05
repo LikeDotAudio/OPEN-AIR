@@ -19,77 +19,47 @@ in the property editor.
 
 ```json
 {
-  "horizontal_with_dial_Example": {
-    "type": "_Horizontal_with_dial_Value",
+  "Exhaustive_GCA_Example": {
+    "type": "_GCA",
     "label": {
       "active": {
         "text": {
-          "En": "Tuning",
-          "Fr": "Accord",
-          "De": "Abstimmung",
-          "Es": "Sintonía"
+          "En": "RGB Mixer",
+          "Fr": "Mélangeur RGB",
+          "De": "RGB-Mischer",
+          "Es": "Mezclador RGB"
         },
         "text_size": 12,
         "text_color": "#cccccc"
       }
     },
     "layout": {
-      "width": "100%",
-      "height": 90,
-      "stretch": "width",
-      "font": 14,
-      "padx": 10
+      "width": 140,
+      "height": 380,
+      "alpha": 0.9
     },
     "domain": {
-      "locked": false,
-      "min": "0",
-      "max": "1000",
-      "units": "MHz",
-      "step_coarse": "1",
-      "step_fine": "0.001",
-      "precision": "0.001"
+      "min": 0,
+      "max": 100
     },
+    "is_rgb": true,
+    "num_channels": 3,
+    "active_color": "#f4902c",
+    "sub_label": "COLOR",
+    "channels": [
+      { "default": 10, "label": { "En": "R" } },
+      { "default": 50, "label": { "En": "G" } },
+      { "default": 20, "label": { "En": "B" } }
+    ],
     "value": {
-      "default_value": "0"
-    },
-    "fader_config": {
-      "type": "_GuiFaderHorizontal",
-      "cosmetics": {
-        "scale": {
-          "interval": 100,
-          "show": true
-        }
-      },
-      "bar_color": "#333333",
-      "active_color": "#FF9900"
-    },
-    "dial_config": {
-      "type": "_GuiKnob",
-      "cosmetics": {
-        "style_overrides": {
-          "knob_style": "dial"
-        },
-        "colors": {
-          "active": "#00ffff",
-          "background": "#2b2b2b"
-        }
-      }
-    },
-    "value_config": {
-      "height": 30,
-      "colour": "#ffffff",
-      "bg_color": "#1a1a1a",
-      "width": 12,
-      "font": 18
+      "default_value": 0
     },
     "cosmetics": {
       "colors": {
-        "primary": "#FF9900",
-        "secondary": "#444444",
         "background": "#2b2b2b"
       }
     },
-    "_README": "Converted from the deprecated _CompositeFader to the canonical _Horizontal_with_dial_Value: a horizontal fader (whole number) + dial (decimal) that combine into one value."
+    "_README": "A complete GCA component example showing RGB mode and channel overrides."
   }
 }
 ```

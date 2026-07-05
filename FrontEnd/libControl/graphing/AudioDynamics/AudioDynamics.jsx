@@ -116,9 +116,7 @@ const AudioDynamics = ({ value: mqttData, config }) => {
                     data: dynamicData,
                     lineStyle: { color: '#f48a20', width: 3 },
                     itemStyle: { color: '#f48a20' },
-                    showSymbol: true,
-                    symbolSize: 4,
-                    symbol: 'emptyCircle',
+                    showSymbol: false,
                     animationDuration: 300
                 }
             ],

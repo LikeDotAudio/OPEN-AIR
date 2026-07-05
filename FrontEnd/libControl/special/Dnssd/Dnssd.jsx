@@ -1,3 +1,13 @@
+/**
+ * Header: Dnssd.jsx
+ * Purpose: Dnssd component or utility.
+ * Description: Handles logic and rendering for Dnssd component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for Dnssd
 // Replaces left_50/top_100/4_Protocals/67_DNSSD/DNSSD_GUI_Pointer.py
 

@@ -1,3 +1,13 @@
+/**
+ * Header: Fender.jsx
+ * Purpose: Fender component or utility.
+ * Description: Handles logic and rendering for Fender component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Fender.jsx — orchestrator-level renderer for the FENDER (Strat)
 // style. Inverted from a normal knob: the FACE rotates (knurl + ticks + numbers)
 // while a FIXED reference pointer marks the value. Only the static gradients

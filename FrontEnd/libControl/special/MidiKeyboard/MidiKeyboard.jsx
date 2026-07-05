@@ -1,3 +1,14 @@
+/**
+ * Header: MidiKeyboard.jsx
+ * Purpose: MidiKeyboard component or utility.
+ * Description: Handles logic and rendering for MidiKeyboard component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for MidiKeyboard
 const MidiKeyboard = ({ value, onChange, config }) => {
     const w = config?.geometry?.width || config?.layout?.width || 800;
     const h = config?.geometry?.height || config?.layout?.height || 120;

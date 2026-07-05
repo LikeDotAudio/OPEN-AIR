@@ -1,3 +1,13 @@
+/**
+ * Header: Fader.jsx
+ * Purpose: Fader component or utility.
+ * Description: Handles logic and rendering for Fader component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Fader Component (OrchestrAator)
 // Author: Gemini (Collaborator)
 // Version: 20260506.1400.4
@@ -11,6 +21,7 @@ const clamp = window.FaderUtils.clamp;
 const mapValueToPosition = window.FaderUtils.mapValueToPosition;
 const mapPositionToValue = window.FaderUtils.mapPositionToValue;
 
+// Inline comment: Logic for Fader
 const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     // 1. Domain configuration
     const domainCfg = config?.domain?.primary || {};

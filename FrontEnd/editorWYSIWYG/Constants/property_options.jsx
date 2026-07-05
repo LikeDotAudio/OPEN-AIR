@@ -1,4 +1,14 @@
 /**
+ * Header: property_options.jsx
+ * Purpose: property_options component or utility.
+ * Description: Handles logic and rendering for property_options component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Constants/property_options.jsx — enum lookup for property fields.
  *
  * The widget library declares allowed enum values in each sample.json `_LEGEND`

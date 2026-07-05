@@ -1,3 +1,13 @@
+/**
+ * Header: MidiMessageLog.jsx
+ * Purpose: MidiMessageLog component or utility.
+ * Description: Handles logic and rendering for MidiMessageLog component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for MidiMessageLog
 
 window.MidiMessageLog = ({ value, config }) => {

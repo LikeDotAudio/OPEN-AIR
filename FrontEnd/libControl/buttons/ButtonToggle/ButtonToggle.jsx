@@ -1,9 +1,20 @@
+/**
+ * Header: ButtonToggle.jsx
+ * Purpose: ButtonToggle component or utility.
+ * Description: Handles logic and rendering for ButtonToggle component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // ButtonToggle Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1000.1
 //
 // Description: Stateful toggle button component matching Python's ToggleButton.
 
+// Inline comment: Logic for ButtonToggle
 const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;

@@ -1,3 +1,14 @@
+/**
+ * Header: BreakLine.jsx
+ * Purpose: BreakLine component or utility.
+ * Description: Handles logic and rendering for BreakLine component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for BreakLine
 const BreakLine = ({ config }) => {
     const orientation = config?.orientation || 'horizontal';
     const color = config?.color || config?.colour || '#333';

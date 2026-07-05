@@ -1,3 +1,13 @@
+/**
+ * Header: LTPFader.jsx
+ * Purpose: LTPFader component or utility.
+ * Description: Handles logic and rendering for LTPFader component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // LTPFader — Linear Travelling Potentiometer
 // Author: Anthony Peter Kuzub (original concept) / refactor 20260526
 //
@@ -27,6 +37,7 @@
 //   cosmetics.colors.highlight              — rail master-fill colour
 //   interaction.freestyle                   — freestyle (both-at-once) mode
 
+// Inline comment: Logic for LTPFader
 const LTPFader = ({ config, value, rotValue, onChange }) => {
     const canvasRef = React.useRef(null);
     const wrapperRef = React.useRef(null);

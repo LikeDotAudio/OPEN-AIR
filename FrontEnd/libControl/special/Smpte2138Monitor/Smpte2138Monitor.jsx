@@ -1,3 +1,13 @@
+/**
+ * Header: Smpte2138Monitor.jsx
+ * Purpose: Smpte2138Monitor component or utility.
+ * Description: Handles logic and rendering for Smpte2138Monitor component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for Smpte2138Monitor
 // Replaces left_50/top_100/4_Protocals/2138_SMPTE_2138/smpte2138_monitor.py
 

@@ -1,4 +1,14 @@
 /**
+ * Header: AnimationDisplay.jsx
+ * Purpose: AnimationDisplay component or utility.
+ * Description: Handles logic and rendering for AnimationDisplay component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * AnimationDisplay — animated image widget (mirror of
  * oaGuiElements/Core/images/images_animation_display, type `AnimationDisplay`).
  *

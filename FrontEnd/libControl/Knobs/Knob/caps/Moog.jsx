@@ -1,3 +1,13 @@
+/**
+ * Header: Moog.jsx
+ * Purpose: Moog component or utility.
+ * Description: Handles logic and rendering for Moog component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Moog.jsx — Minimoog/Voyager-style knob cap.
 // Distinctive lathe-turned polished cap with CONCENTRIC RING GROOVES, on a
 // cylindrical body that may be FLUTED (knurled) or SMOOTH. Plus optional

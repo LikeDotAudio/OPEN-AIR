@@ -1,6 +1,17 @@
+/**
+ * Header: Equalization.jsx
+ * Purpose: Equalization component or utility.
+ * Description: Handles logic and rendering for Equalization component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Equalization Graph Component
 // Renders a specialized frequency equalization curve based on ECharts.
 
+// Inline comment: Logic for Equalization
 const Equalization = ({ value: mqttData, config }) => {
     const chartRef = React.useRef(null);
     const chartInstance = React.useRef(null);

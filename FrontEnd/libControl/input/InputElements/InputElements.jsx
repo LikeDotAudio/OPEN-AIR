@@ -1,3 +1,14 @@
+/**
+ * Header: InputElements.jsx
+ * Purpose: InputElements component or utility.
+ * Description: Handles logic and rendering for InputElements component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for OcaCheckbox
 const OcaCheckbox = ({ label, checked, onChange }) => {
     return (
         <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: '#ccc' }}>
@@ -24,6 +35,7 @@ const OcaCheckbox = ({ label, checked, onChange }) => {
     );
 };
 
+// Inline comment: Logic for OcaIncDecButtons
 const OcaIncDecButtons = ({ label, value, onChange, step = 1, min = -100, max = 100 }) => {
     const inc = () => onChange(Math.min(max, value + step));
     const dec = () => onChange(Math.max(min, value - step));
@@ -42,6 +54,7 @@ const OcaIncDecButtons = ({ label, value, onChange, step = 1, min = -100, max = 
     );
 };
 
+// Inline comment: Logic for OcaDropdown
 const OcaDropdown = ({ label, value, onChange, options = [], config }) => {
     let currentLang = 'En';
     let setLang = () => {};

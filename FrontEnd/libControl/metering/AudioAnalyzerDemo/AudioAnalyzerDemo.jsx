@@ -1,3 +1,14 @@
+/**
+ * Header: AudioAnalyzerDemo.jsx
+ * Purpose: AudioAnalyzerDemo component or utility.
+ * Description: Handles logic and rendering for AudioAnalyzerDemo component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for AudioAnalyzerDemo
 const AudioAnalyzerDemo = ({ config }) => {
     const videoRef = React.useRef(null);
     const audioCtxRef = React.useRef(null);

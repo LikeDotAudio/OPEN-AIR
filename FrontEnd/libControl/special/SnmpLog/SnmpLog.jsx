@@ -1,3 +1,13 @@
+/**
+ * Header: SnmpLog.jsx
+ * Purpose: SnmpLog component or utility.
+ * Description: Handles logic and rendering for SnmpLog component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for SnmpLog
 // Replaces left_50/top_100/4_Protocals/11_SNMP/00_Log/snmp_log.py
 

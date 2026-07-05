@@ -1,3 +1,13 @@
+/**
+ * Header: WidgetFactory.jsx
+ * Purpose: WidgetFactory component or utility.
+ * Description: Handles logic and rendering for WidgetFactory component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/WidgetFactory.jsx — recursive engine: container registry +
 // layout/grid mapping + fallback. OcaBin/OcaBlock/FieldComponent/oaCssLen are
 // split into sibling files (loaded before this in index.html).

@@ -1,4 +1,14 @@
 /**
+ * Header: nav_state.jsx
+ * Purpose: nav_state component or utility.
+ * Description: Handles logic and rendering for nav_state component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * tabManager/nav_state.jsx — persist the live view (active window + every pane's
  * active tab) in the URL hash so a refresh restores exactly where you were.
  *

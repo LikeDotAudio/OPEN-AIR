@@ -1,3 +1,13 @@
+/**
+ * Header: Crafty.jsx
+ * Purpose: Crafty component or utility.
+ * Description: Handles logic and rendering for Crafty component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Crafty Knob Cap renderer
 // Variants: 'spoked', 'metallic', 'led_ring'
 

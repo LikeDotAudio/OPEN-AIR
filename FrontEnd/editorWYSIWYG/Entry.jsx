@@ -1,4 +1,14 @@
 /**
+ * Header: Entry.jsx
+ * Purpose: Entry component or utility.
+ * Description: Handles logic and rendering for Entry component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Entry.jsx — launch surface for the HTML5 WYSIWYG editor.
  * Mirrors oaGuiEditorWYSIWYG/Entry.py (launch_editor).
  *

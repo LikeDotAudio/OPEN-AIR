@@ -1,3 +1,13 @@
+/**
+ * Header: ProtocolMatrix.jsx
+ * Purpose: ProtocolMatrix component or utility.
+ * Description: Handles logic and rendering for ProtocolMatrix component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for ProtocolMatrix
 // Replaces left_50/top_100/3_Commands/1_Router/2_Matrix/protocol_matrix.py
 

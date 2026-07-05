@@ -1,3 +1,13 @@
+/**
+ * Header: API.jsx
+ * Purpose: API component or utility.
+ * Description: Handles logic and rendering for API component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/API.jsx — 4-lobed rounded-square shell with a bright LED-style
 // centre disc (colors.primary) and a prominent corner pointer-notch that
 // protrudes at the value angle. Outer shell defaults to dark; styling.fill_color

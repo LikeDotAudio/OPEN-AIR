@@ -1,4 +1,14 @@
 /**
+ * Header: composite_schemas.jsx
+ * Purpose: composite_schemas component or utility.
+ * Description: Handles logic and rendering for composite_schemas component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Constants/composite_schemas.jsx — full param sets for composite sub-widgets.
  *
  * A composite (e.g. _Horizontal_with_dial_Value) carries sub-config blocks

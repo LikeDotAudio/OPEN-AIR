@@ -1,3 +1,13 @@
+/**
+ * Header: MidiOutput.jsx
+ * Purpose: MidiOutput component or utility.
+ * Description: Handles logic and rendering for MidiOutput component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for MidiOutput
 // Replaces left_50/top_100/4_Protocals/50_MIDI/2_Output/midi_output.py
 

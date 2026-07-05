@@ -1,4 +1,14 @@
 /**
+ * Header: artistic_designer.jsx
+ * Purpose: artistic_designer component or utility.
+ * Description: Handles logic and rendering for artistic_designer component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/PropertyEditor/artistic_designer.jsx — the "ARTISTIC PROPERTIES"
  * builder: a pop-out, interactive widget designer that complements the flat
  * property tree. Toggled from the top of the Properties tab.

@@ -1,3 +1,13 @@
+/**
+ * Header: SnmpVerifyMib.jsx
+ * Purpose: SnmpVerifyMib component or utility.
+ * Description: Handles logic and rendering for SnmpVerifyMib component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for SnmpVerifyMib
 // Replaces left_50/top_100/4_Protocals/11_SNMP/5_Verify_MIB/snmp_verify_mib.py
 

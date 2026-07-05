@@ -1,4 +1,14 @@
 /**
+ * Header: grab_bag_view.jsx
+ * Purpose: grab_bag_view component or utility.
+ * Description: Handles logic and rendering for grab_bag_view component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/Tabs/GrabBagView/grab_bag_view.jsx — categorized widget palette
  * with LIVE widget previews. Mirrors oaGuiEditorWYSIWYG/.../grab_bag_view.py.
  *

@@ -1,6 +1,17 @@
+/**
+ * Header: AudioDynamics.jsx
+ * Purpose: AudioDynamics component or utility.
+ * Description: Handles logic and rendering for AudioDynamics component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // AudioDynamics Graph Component
 // Renders a specialized dynamics compressor/expander curve based on ECharts.
 
+// Inline comment: Logic for AudioDynamics
 const AudioDynamics = ({ value: mqttData, config }) => {
     const chartRef = React.useRef(null);
     const chartInstance = React.useRef(null);

@@ -1,3 +1,13 @@
+/**
+ * Header: Marconi.jsx
+ * Purpose: Marconi component or utility.
+ * Description: Handles logic and rendering for Marconi component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Marconi.jsx — "Elma" British wing knob cap.
 // ONE solid rectangular wing that passes THROUGH the body and protrudes the
 // same distance on BOTH sides; the white indicator line is drawn only on the

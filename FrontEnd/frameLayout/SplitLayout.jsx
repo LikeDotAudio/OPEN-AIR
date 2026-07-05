@@ -1,4 +1,14 @@
 /**
+ * Header: SplitLayout.jsx
+ * Purpose: SplitLayout component or utility.
+ * Description: Handles logic and rendering for SplitLayout component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * SplitLayout: Renders a container split into multiple panels.
  */
 window.SplitLayout = ({ nodeName, node, path_prefix, jsonPath }) => {

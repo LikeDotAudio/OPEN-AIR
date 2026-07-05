@@ -1,3 +1,13 @@
+/**
+ * Header: SnmpVerify.jsx
+ * Purpose: SnmpVerify component or utility.
+ * Description: Handles logic and rendering for SnmpVerify component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for SnmpVerify
 // Replaces left_50/top_100/4_Protocals/11_SNMP/4_Verify_OID/snmp_verify.py
 

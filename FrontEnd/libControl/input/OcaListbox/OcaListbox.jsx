@@ -1,3 +1,13 @@
+/**
+ * Header: OcaListbox.jsx
+ * Purpose: OcaListbox component or utility.
+ * Description: Handles logic and rendering for OcaListbox component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // OcaListbox Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1200.1
@@ -5,6 +15,7 @@
 // Description: Dynamic Listbox with MQTT synchronization matching Python's BuilderListboxCreator.
 // Handles both Array and Object based options dictionaries.
 
+// Inline comment: Logic for OcaListbox
 const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;

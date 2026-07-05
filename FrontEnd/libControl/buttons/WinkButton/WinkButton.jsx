@@ -1,3 +1,14 @@
+/**
+ * Header: WinkButton.jsx
+ * Purpose: WinkButton component or utility.
+ * Description: Handles logic and rendering for WinkButton component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for OcaWinkButton
 const OcaWinkButton = ({ label, value, onChange, config }) => {
     const isOn = value === 1 || value === true;
     

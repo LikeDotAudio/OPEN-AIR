@@ -1,4 +1,14 @@
 /**
+ * Header: TrapezoidButtonToggler.jsx
+ * Purpose: TrapezoidButtonToggler component or utility.
+ * Description: Handles logic and rendering for TrapezoidButtonToggler component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * TrapezoidButtonToggler — a radio/multi group of trapezoid buttons (mirror of
  * oaGuiElements/Core/buttons/button_trapezoid_toggler, type
  * `_TrapezoidButtonToggler`). Reuses OcaTrapezoidButton for each option and the

@@ -1,9 +1,20 @@
+/**
+ * Header: OcaSliderValue.jsx
+ * Purpose: OcaSliderValue component or utility.
+ * Description: Handles logic and rendering for OcaSliderValue component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // OcaSliderValue Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1100.1
 //
 // Description: Composite Slider + Text Entry component matching Python's BuilderSliderValueCreator.
 
+// Inline comment: Logic for OcaSliderValue
 const OcaSliderValue = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;

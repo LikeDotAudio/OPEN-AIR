@@ -1,3 +1,13 @@
+/**
+ * Header: topicMaker.jsx
+ * Purpose: topicMaker component or utility.
+ * Description: Handles logic and rendering for topicMaker component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frontEnd/comMQTT/topicMaker.jsx
 //
 // Builds a HIERARCHICAL MQTT topic prefix from a Gui_Frames file path so the

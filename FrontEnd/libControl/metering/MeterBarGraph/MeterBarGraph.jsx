@@ -1,4 +1,14 @@
 /**
+ * Header: MeterBarGraph.jsx
+ * Purpose: MeterBarGraph component or utility.
+ * Description: Handles logic and rendering for MeterBarGraph component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * MeterBarGraph Architecture (Separated Concerns)
  * 1. MeterBallistics: Hook for smoothing and peak hold logic.
  * 2. MeterScale: Rendering ticks, grid, and labels.

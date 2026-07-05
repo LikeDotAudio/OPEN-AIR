@@ -1,4 +1,14 @@
 /**
+ * Header: Panel.jsx
+ * Purpose: Panel component or utility.
+ * Description: Handles logic and rendering for Panel component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Panel — the global procedural background "cover".
  *
  * A self-contained <canvas> that measures its own box, asks the WASM engine
@@ -24,6 +34,7 @@
 const _OA_PANEL_CACHE = (window._OA_PANEL_CACHE = window._OA_PANEL_CACHE || new Map());
 const _OA_PANEL_CACHE_MAX = 48;
 
+// Inline comment: Logic for _resolvePanelConfig
 function _resolvePanelConfig(config, node) {
   if (config && typeof config === "object") return config;
   const fromNode = node?.background || node?.cosmetics?.panel || node?.panel;
@@ -31,6 +42,7 @@ function _resolvePanelConfig(config, node) {
   return window.OA_PANEL_DEFAULT_CONFIG || {};
 }
 
+// Inline comment: Logic for Panel
 const Panel = ({ config, node, children, style, className }) => {
   const cfg = _resolvePanelConfig(config, node);
   // Explicit { enabled:false } turns the cover off (renders children bare).

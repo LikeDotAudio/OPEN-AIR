@@ -1,3 +1,13 @@
+/**
+ * Header: transparency.js
+ * Purpose: transparency component or utility.
+ * Description: Handles logic and rendering for transparency component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/transparency.js — central transparency / layering manager.
 //
 // With the procedural panel cover now rendered behind every OcaBin (see

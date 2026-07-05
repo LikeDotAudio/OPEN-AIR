@@ -1,4 +1,14 @@
 /**
+ * Header: WinkButtonToggler.jsx
+ * Purpose: WinkButtonToggler component or utility.
+ * Description: Handles logic and rendering for WinkButtonToggler component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * WinkButtonToggler — a radio/multi group of "wink" (shutter) buttons (mirror of
  * oaGuiElements/Core/buttons/button_wink_toggler, type `_WinkButtonToggler`).
  * Reuses OcaWinkButton for each option; the selected option is held OPEN (lit),

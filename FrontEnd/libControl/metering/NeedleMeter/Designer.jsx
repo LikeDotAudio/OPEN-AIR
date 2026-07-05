@@ -1,4 +1,14 @@
 /**
+ * Header: Designer.jsx
+ * Purpose: Designer component or utility.
+ * Description: Handles logic and rendering for Designer component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * NeedleMeter/Designer.jsx — bespoke "Artistic Properties" designer for the
  * _NeedleVUMeter (analog VU). Self-registers into window.OaDesignerRegistry.
  * Sections mirror the meter's anatomy: Window (bezel) · Face · NEEDLE (pointer +

@@ -1,9 +1,20 @@
+/**
+ * Header: IncDecButtons.jsx
+ * Purpose: IncDecButtons component or utility.
+ * Description: Handles logic and rendering for IncDecButtons component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // IncDecButtons Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1000.1
 //
 // Description: Increment/Decrement buttons matching Python's BuilderInputIncDecButtonsCreator.
 
+// Inline comment: Logic for IncDecButtons
 const IncDecButtons = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;

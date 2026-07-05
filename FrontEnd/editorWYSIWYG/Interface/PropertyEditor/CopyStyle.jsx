@@ -1,4 +1,14 @@
 /**
+ * Header: CopyStyle.jsx
+ * Purpose: CopyStyle component or utility.
+ * Description: Handles logic and rendering for CopyStyle component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/PropertyEditor/CopyStyle.jsx — copy/paste handlers for an element's
  * `style` object, rendered as a small button pair beside the `style` fold-out in
  * the property tree.

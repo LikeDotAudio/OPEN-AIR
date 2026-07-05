@@ -1,4 +1,14 @@
 /**
+ * Header: Entry.jsx
+ * Purpose: Entry component or utility.
+ * Description: Handles logic and rendering for Entry component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/Tabs/TreeRefactor/Entry.jsx — hierarchical structure tree.
  * Mirrors oaGuiEditorWYSIWYG/Interface/Tabs/TreeRefactor/Entry.py.
  *

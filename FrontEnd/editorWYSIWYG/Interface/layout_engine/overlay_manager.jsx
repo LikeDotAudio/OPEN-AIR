@@ -1,4 +1,14 @@
 /**
+ * Header: overlay_manager.jsx
+ * Purpose: overlay_manager component or utility.
+ * Description: Handles logic and rendering for overlay_manager component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/layout_engine/overlay_manager.jsx — designer overlays on the preview.
  * Mirrors oaGuiEditorWYSIWYG/Interface/layout_engine/overlay_manager.py +
  * overlays/selection_overlay.py.

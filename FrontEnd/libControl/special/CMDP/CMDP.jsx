@@ -1,3 +1,13 @@
+/**
+ * Header: CMDP.jsx
+ * Purpose: CMDP component or utility.
+ * Description: Handles logic and rendering for CMDP component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // CMDP - Circular Motion Displacement Potentiometer Component
 // Author: Gemini (Collaborator)
 // Version: 20260701.1200.2
@@ -8,6 +18,7 @@
 // the standalone CMDP demo (better track/tick/knob drawing, segment-distance
 // hit testing, hover label read-out, per-channel drag ballistics).
 
+// Inline comment: Logic for CMDP
 const CMDP = ({ config, value, onChange, size }) => {
     const canvasRef = React.useRef(null);
 

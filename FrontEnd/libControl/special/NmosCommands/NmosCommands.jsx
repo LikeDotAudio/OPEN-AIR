@@ -1,3 +1,13 @@
+/**
+ * Header: NmosCommands.jsx
+ * Purpose: NmosCommands component or utility.
+ * Description: Handles logic and rendering for NmosCommands component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for NmosCommands
 // Replaces left_50/top_100/4_Protocals/66_NMOS/00_Commands/nmos_commands.py
 

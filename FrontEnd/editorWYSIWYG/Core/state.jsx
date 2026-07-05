@@ -1,4 +1,14 @@
 /**
+ * Header: state.jsx
+ * Purpose: state component or utility.
+ * Description: Handles logic and rendering for state component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Core/state.jsx — Central State Engine for the HTML5 WYSIWYG editor.
  *
  * Mirrors oaGuiEditorWYSIWYG/Core/state.py (StateManager). Holds the master

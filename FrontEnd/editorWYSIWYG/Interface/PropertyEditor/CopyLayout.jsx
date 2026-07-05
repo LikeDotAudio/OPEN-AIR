@@ -1,4 +1,14 @@
 /**
+ * Header: CopyLayout.jsx
+ * Purpose: CopyLayout component or utility.
+ * Description: Handles logic and rendering for CopyLayout component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/PropertyEditor/CopyLayout.jsx — copy/paste handlers for an element's
  * `layout` object, rendered as a small button pair beside the `layout` fold-out in
  * the property tree.

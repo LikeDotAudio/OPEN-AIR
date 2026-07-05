@@ -1,3 +1,14 @@
+/**
+ * Header: SelectorSwitch.jsx
+ * Purpose: SelectorSwitch component or utility.
+ * Description: Handles logic and rendering for SelectorSwitch component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for SelectorSwitch
 const SelectorSwitch = ({ value, onChange, config }) => {
     // --- 1. Robust Config Extraction (Mirroring Python's knob_config.py) ---
     const c = config || {};
@@ -289,6 +300,7 @@ const SelectorSwitch = ({ value, onChange, config }) => {
     );
 };
 
+// Inline comment: Logic for describeArc
 function describeArc(x, y, radius, startAngle, endAngle) {
     const start = polarToCartesian(x, y, radius, endAngle);
     const end = polarToCartesian(x, y, radius, startAngle);
@@ -299,6 +311,7 @@ function describeArc(x, y, radius, startAngle, endAngle) {
     return ["M", start.x, start.y, "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(" ");
 }
 
+// Inline comment: Logic for polarToCartesian
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     const rad = angleInDegrees * Math.PI / 180.0;
     return { x: centerX + (radius * Math.cos(rad)), y: centerY - (radius * Math.sin(rad)) };

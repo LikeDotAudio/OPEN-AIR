@@ -1,4 +1,14 @@
 /**
+ * Header: LoaderOrchestrator.jsx
+ * Purpose: LoaderOrchestrator component or utility.
+ * Description: Handles logic and rendering for LoaderOrchestrator component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * LoaderOrchestrator: The main entry point for the React-based GUI engine.
  *
  * MQTT topic alignment: the topic prefix is derived from the frame's FOLDER PATH

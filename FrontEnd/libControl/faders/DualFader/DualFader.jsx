@@ -1,3 +1,13 @@
+/**
+ * Header: DualFader.jsx
+ * Purpose: DualFader component or utility.
+ * Description: Handles logic and rendering for DualFader component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // DualFader Component
 // Author: Gemini (Collaborator)
 // Version: 20260525.1200.0
@@ -7,8 +17,10 @@
 // separate side-by-side rails. Caps keep distinct colours so they're still
 // tellable apart while overlapping. Drag grabs the nearest cap.
 
+// Inline comment: Logic for clamp
 const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
 
+// Inline comment: Logic for DualFader
 const DualFader = ({ value, onChange, config }) => {
     const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : 0;
     const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 100;

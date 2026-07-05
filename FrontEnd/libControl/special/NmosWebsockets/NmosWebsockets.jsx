@@ -1,3 +1,13 @@
+/**
+ * Header: NmosWebsockets.jsx
+ * Purpose: NmosWebsockets component or utility.
+ * Description: Handles logic and rendering for NmosWebsockets component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for NmosWebsockets
 // Replaces left_50/top_100/4_Protocals/66_NMOS/01_Websockets/nmos_websockets.py
 

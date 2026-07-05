@@ -1,3 +1,13 @@
+/**
+ * Header: GCA.jsx
+ * Purpose: GCA component or utility.
+ * Description: Handles logic and rendering for GCA component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // GCA - Ganged Controlled Array Component
 // Author: Anthony Peter Kuzub / Gemini (Collaborator)
 // Version: 20260506.1800.1
@@ -5,6 +15,7 @@
 // Description: Multi-channel ganged fader array with macro/micro modes.
 // Based on the perfect reference at oaGuiElements/Core/faders/fader_ganged_controlled_array/index.htm
 
+// Inline comment: Logic for GCA
 const GCA = ({ config, value, onChange }) => {
     const canvasRef = React.useRef(null);
     const [mode, setMode] = React.useState('macro'); // 'macro' or 'micro'

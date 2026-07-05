@@ -1,4 +1,14 @@
 /**
+ * Header: wysiwyg_editor.jsx
+ * Purpose: wysiwyg_editor component or utility.
+ * Description: Handles logic and rendering for wysiwyg_editor component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Managers/wysiwyg_editor.jsx — main editor controller (overlay modal).
  * Mirrors oaGuiEditorWYSIWYG/Managers/wysiwyg_editor.py (WysiwygEditor).
  *

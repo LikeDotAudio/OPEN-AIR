@@ -1,4 +1,14 @@
 /**
+ * Header: interactive_layout.jsx
+ * Purpose: interactive_layout component or utility.
+ * Description: Handles logic and rendering for interactive_layout component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/Tabs/InteractiveLayout/interactive_layout.jsx — the WYSIWYG canvas.
  * Mirrors oaGuiEditorWYSIWYG/Interface/Tabs/InteractiveLayout/interactive_layout.py.
  *

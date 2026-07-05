@@ -1,18 +1,32 @@
+
 /**
+ * Header: editor_toolbar.jsx
+ * Purpose: Provides the top action bar (toolbar) for the WYSIWYG editor.
+ * Description: This file defines a React component that renders the top toolbar for the editor. It includes UI for saving, downloading, and closing the editor, and displays the current filename and save status. It mirrors the desktop application's toolbar actions for the web environment.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ * 
  * Interface/Window/editor_toolbar.jsx — top action bar for the editor.
  * Mirrors oaGuiEditorWYSIWYG/Interface/Window/editor_toolbar.py + editor_menus.py
  * (file actions are surfaced as toolbar buttons in the web build).
  */
 (function () {
+  // Helper function to generate consistent button styles
   const tbBtn = (extra) => ({
     background: '#2a2a2a', color: '#eee', border: '1px solid #444', borderRadius: 4,
     padding: '5px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 'bold', ...extra,
   });
 
+  // Main Toolbar Component
   window.OaEdToolbar = ({ store, onSave, onClose, saveMsg }) => {
+    // Subscribe to the editor store for reactive updates
     const st = window.useEditorStore(store);
+    // Extract just the filename from the full file path
     const fileName = (st.filePath || 'unsaved').split('/').pop();
 
+    // Handler to download the current editor state as a JSON file
     const download = () => window.OaEdFileWriter.download(fileName, store.getData());
 
     return (
@@ -26,6 +40,7 @@
 
         <div style={{ flex: 1 }} />
 
+        // Display feedback messages (e.g., successful save or errors)
         {saveMsg && (
           <span style={{ fontSize: 11, color: saveMsg.ok ? '#6c6' : '#f66' }}>
             {saveMsg.ok ? '✓ ' : '⚠ '}{saveMsg.text}

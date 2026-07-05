@@ -1,4 +1,14 @@
 /**
+ * Header: Designer.jsx
+ * Purpose: Designer component or utility.
+ * Description: Handles logic and rendering for Designer component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * FaderDial/Designer.jsx — BESPOKE "Artistic Properties" designer for the
  * _Horizontal_with_dial_Value composite (fader + knob + readout).
  *

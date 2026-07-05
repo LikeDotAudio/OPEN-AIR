@@ -1,3 +1,13 @@
+/**
+ * Header: K1176.jsx
+ * Purpose: K1176 component or utility.
+ * Description: Handles logic and rendering for K1176 component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/K1176.jsx — UA-1176 compressor style knob cap.
 // Fluted body + polished metallic top, with optional wide flange (white
 // indicator line on it) and optional chicken-foot pointer tab.

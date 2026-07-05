@@ -1,3 +1,14 @@
+/**
+ * Header: FaderWithMeter.jsx
+ * Purpose: FaderWithMeter component or utility.
+ * Description: Handles logic and rendering for FaderWithMeter component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for FaderWithMeter
 const FaderWithMeter = ({ value, onChange, config }) => {
     const title = config?.label?.[window.useMqttLang()[0]] || config?.label_active?.[window.useMqttLang()[0]] || "";
     

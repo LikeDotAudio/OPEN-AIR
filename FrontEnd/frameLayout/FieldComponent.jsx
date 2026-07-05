@@ -1,3 +1,13 @@
+/**
+ * Header: FieldComponent.jsx
+ * Purpose: FieldComponent component or utility.
+ * Description: Handles logic and rendering for FieldComponent component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/FieldComponent.jsx — the field/widget type dispatch + domain/value
 // flatten. Translates a leaf node's `type` into the matching libControl widget.
 window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {

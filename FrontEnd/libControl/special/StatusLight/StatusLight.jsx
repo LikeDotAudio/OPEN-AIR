@@ -1,3 +1,14 @@
+/**
+ * Header: StatusLight.jsx
+ * Purpose: StatusLight component or utility.
+ * Description: Handles logic and rendering for StatusLight component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for StatusLight
 const StatusLight = ({ value, config }) => {
     const title = config?.label_active?.En || config?.label?.En || "";
     const orientation = config?.Orientation || "horizontal";

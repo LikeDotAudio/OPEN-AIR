@@ -1,11 +1,23 @@
+/**
+ * Header: utils.js
+ * Purpose: utils component or utility.
+ * Description: Handles logic and rendering for utils component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Fader Utilities
 // Author: Gemini (Collaborator)
 // Version: 20260506.1100.1
 //
 // Description: Utility functions for fader components, matching Python geometry.
 
+// Inline comment: Logic for clamp
 const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
 
+// Inline comment: Logic for mapValueToPosition
 const mapValueToPosition = (value, min, max, logExponent) => {
     const range = max - min;
     if (range === 0) return 0;
@@ -14,6 +26,7 @@ const mapValueToPosition = (value, min, max, logExponent) => {
     return clamp(displayNorm, 0, 1);
 };
 
+// Inline comment: Logic for mapPositionToValue
 const mapPositionToValue = (pos, min, max, logExponent) => {
     const range = max - min;
     if (range === 0) return min;

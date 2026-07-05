@@ -1,9 +1,21 @@
+/**
+ * Header: WindowManager.jsx
+ * Purpose: WindowManager component or utility.
+ * Description: Handles logic and rendering for WindowManager component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for parseSplitName
 const parseSplitName = (name) => {
     const match = name.match(/^(left|right|top|bottom)_(\d+)$/i);
     if (match) return { direction: match[1].toLowerCase(), percent: parseInt(match[2], 10) };
     return null;
 };
 
+// Inline comment: Logic for MqttLazyPublisher
 const MqttLazyPublisher = ({ directoryTree }) => {
     const publish = window.useMqttPublish ? window.useMqttPublish() : null;
     const { connected } = window.useMqttStatus ? window.useMqttStatus() : { connected: false };
@@ -65,6 +77,7 @@ const MqttLazyPublisher = ({ directoryTree }) => {
     return null;
 };
 
+// Inline comment: Logic for ResizableSplit
 const ResizableSplit = ({ splits, isRow, path }) => {
     const splitA = splits[0];
     const splitB = splits[1];
@@ -210,6 +223,7 @@ const ResizableSplit = ({ splits, isRow, path }) => {
     );
 };
 
+// Inline comment: Logic for WindowLayout
 const WindowLayout = ({ node, path = '' }) => {
     if (!node || !node.children) return null;
 
@@ -260,6 +274,7 @@ const WindowLayout = ({ node, path = '' }) => {
     return <TabContainer node={node} path={path} />;
 };
 
+// Inline comment: Logic for TabContainer
 const TabContainer = ({ node, path = '' }) => {
     let dirs = node.children.filter(c => c.type === 'directory');
     dirs = [...dirs].sort((a, b) => {
@@ -370,6 +385,7 @@ const TabContainer = ({ node, path = '' }) => {
     );
 };
 
+// Inline comment: Logic for HeaderControlButton
 const HeaderControlButton = ({ label, color, onClick }) => {
     return (
         <button
@@ -395,6 +411,7 @@ const HeaderControlButton = ({ label, color, onClick }) => {
     );
 };
 
+// Inline comment: Logic for HeaderControls
 const HeaderControls = () => {
     if (!window.useMqttState) return null;
     
@@ -411,6 +428,7 @@ const HeaderControls = () => {
     );
 };
 
+// Inline comment: Logic for WindowManager
 const WindowManager = ({ directoryTree }) => {
     const [lang, setLang] = window.useMqttLang();
     const { connected: mqttConnected, fullId: mqttFullId } = (window.useMqttStatus ? window.useMqttStatus() : { connected: false, fullId: '' });

@@ -1,3 +1,13 @@
+/**
+ * Header: ProtocolConfigDisplay.jsx
+ * Purpose: ProtocolConfigDisplay component or utility.
+ * Description: Handles logic and rendering for ProtocolConfigDisplay component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // ProtocolConfigDisplay.jsx
 //
 // Displays a protocol's config.ini (read from the per-crate file under

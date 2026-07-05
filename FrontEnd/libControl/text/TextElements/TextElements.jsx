@@ -1,4 +1,14 @@
 /**
+ * Header: TextElements.jsx
+ * Purpose: TextElements component or utility.
+ * Description: Handles logic and rendering for TextElements component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * OcaTextLabel Component
  * Author: Gemini (Collaborator)
  * Version: 20260507.1100.2
@@ -6,6 +16,7 @@
  * Description: Feature-rich label component matching Python's BuilderTextLabelCreator.
  */
 
+// Inline comment: Logic for OcaTextLabel
 const OcaTextLabel = ({ value, config }) => {
     const useMqttLang = window.useMqttLang || (() => ['En', () => {}]);
     const [lang] = useMqttLang();

@@ -1,3 +1,13 @@
+/**
+ * Header: Chicken.jsx
+ * Purpose: Chicken component or utility.
+ * Description: Handles logic and rendering for Chicken component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Chicken.jsx — chicken-head knob cap renderer.
 // Long tapered BEAK forward + short blunt "bum" tail back, widest at the centre
 // hub (per the Q-parts top view). The beak IS the indicator (no separate

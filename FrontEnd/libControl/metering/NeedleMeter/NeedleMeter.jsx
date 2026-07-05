@@ -1,4 +1,14 @@
 /**
+ * Header: NeedleMeter.jsx
+ * Purpose: NeedleMeter component or utility.
+ * Description: Handles logic and rendering for NeedleMeter component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * NeedleMeter Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
  * Version: 20260524.0300.0
@@ -49,12 +59,14 @@ const SHAPE_BUILDERS = {
   stereo_diamond: (r, ys) => { const w = C.SD_W*r, h = C.SD_H*r, fw = C.SD_FW*r; return [[fw, h+ys], [w, ys], [fw, -h+ys], [-fw, -h+ys], [-w, ys], [-fw, h+ys]]; },
   intersecting_overlay: (r, ys) => { const w = C.IO_W*r, h = C.IO_H*r, sk = C.IO_SK*r, cr = C.IO_CR*r; const p = [[-w+sk, h+ys], [w+sk, h+ys], [w-sk, -h+ys]]; for (let i = 0; i <= 20; i++) { const a = Math.PI + (Math.PI*i/20); p.push([(w-sk)+cr*Math.cos(a), -h+cr*Math.sin(a)+ys]); } p.push([-w-sk, -h+ys]); return p; },
 };
+// Inline comment: Logic for _capsule
 function _capsule(r, ys, wsF, crF, cyF) {
   const ws = wsF*r, rc = crF*r, ccy = cyF*r; const p = [[0, ys], [ws, ys]];
   for (let i = 0; i <= C.CYL_STEPS; i++) { const a = (-90 + 180*i/C.CYL_STEPS)*Math.PI/180; p.push([ws+rc*Math.cos(a), ccy+rc*Math.sin(a)+ys]); }
   for (let i = 0; i <= C.CYL_STEPS; i++) { const a = (90 + 180*i/C.CYL_STEPS)*Math.PI/180; p.push([-ws+rc*Math.cos(a), ccy+rc*Math.sin(a)+ys]); }
   p.push([0, ys]); return p;
 }
+// Inline comment: Logic for _squircle
 function _squircle(r, ys, wf, hf, rot) {
   const n = C.SQ_N, w = wf*r, h = hf*r, p = [];
   const cr = Math.cos(Math.PI/4), sr = Math.sin(Math.PI/4);
@@ -67,6 +79,7 @@ function _squircle(r, ys, wf, hf, rot) {
   }
   return p;
 }
+// Inline comment: Logic for _shapeKey
 function _shapeKey(shape) {
   if (!shape) return null;
   let k = String(shape).toLowerCase();
@@ -93,6 +106,7 @@ function bezelLayout(shape, width, height, frameWidth) {
   return { pts, pivotX: offX, pivotY: offY, arcRadius: 0.32 * bw * scale };
 }
 
+// Inline comment: Logic for _tracePath
 function _tracePath(ctx, pts) {
   ctx.beginPath();
   ctx.moveTo(pts[0][0], pts[0][1]);
@@ -113,6 +127,7 @@ const FACE_PRESETS = {
 };
 const _FACE_CACHE = (window._OA_FACE_CACHE = window._OA_FACE_CACHE || new Map());
 
+// Inline comment: Logic for getFaceTexture
 function getFaceTexture(styleKey, w, h) {
   const cfg = FACE_PRESETS[String(styleKey || '').toLowerCase()];
   if (!cfg || w < 2 || h < 2) return null;
@@ -185,6 +200,7 @@ function drawNeedle(ctx, style, cx, cy, ang, len, thick, color) {
   }
 }
 
+// Inline comment: Logic for useNeedleBallistics
 function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config) {
   // Persist the animated needle position across re-renders, and read the latest
   // config via a ref. FieldComponent/VUMeterKnob hand NeedleMeter a fresh config
@@ -423,6 +439,7 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
   }, [min, max, width, height]);
 }
 
+// Inline comment: Logic for NeedleMeter
 const NeedleMeter = ({ value, config }) => {
   const getNum = (v, fallback) => {
     if (typeof v === 'number') return v;

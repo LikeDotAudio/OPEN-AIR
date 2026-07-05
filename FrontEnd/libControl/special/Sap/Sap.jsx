@@ -1,3 +1,13 @@
+/**
+ * Header: Sap.jsx
+ * Purpose: Sap component or utility.
+ * Description: Handles logic and rendering for Sap component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for Sap
 // Replaces left_50/top_100/4_Protocals/67_SAP/SAP_GUI_Pointer.py
 

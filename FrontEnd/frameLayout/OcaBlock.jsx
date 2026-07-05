@@ -1,3 +1,13 @@
+/**
+ * Header: OcaBlock.jsx
+ * Purpose: OcaBlock component or utility.
+ * Description: Handles logic and rendering for OcaBlock component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/OcaBlock.jsx — OcaBlock structural container.
 /**
  * Structural Component: OcaBlock

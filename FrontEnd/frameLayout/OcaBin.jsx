@@ -1,3 +1,13 @@
+/**
+ * Header: OcaBin.jsx
+ * Purpose: OcaBin component or utility.
+ * Description: Handles logic and rendering for OcaBin component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/OcaBin.jsx — OcaBin structural container.
 /**
  * Structural Component: OcaBin

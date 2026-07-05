@@ -1,4 +1,14 @@
 /**
+ * Header: property_leaf.jsx
+ * Purpose: property_leaf component or utility.
+ * Description: Handles logic and rendering for property_leaf component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/PropertyEditor/property_leaf.jsx — single editable property field.
  * Mirrors oaGuiEditorWYSIWYG/Interface/PropertyEditor/property_leaf.py.
  *

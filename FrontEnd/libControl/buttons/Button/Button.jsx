@@ -1,3 +1,14 @@
+/**
+ * Header: Button.jsx
+ * Purpose: Button component or utility.
+ * Description: Handles logic and rendering for Button component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for OcaButton
 const OcaButton = ({ label, onClick, color = '#444' }) => {
     return (
         <button 
@@ -31,6 +42,7 @@ const OcaButton = ({ label, onClick, color = '#444' }) => {
     );
 };
 
+// Inline comment: Logic for OcaToggleButton
 const OcaToggleButton = ({ label, value, onChange }) => {
     const isOn = value === 1 || value === true;
     

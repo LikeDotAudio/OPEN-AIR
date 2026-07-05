@@ -1,4 +1,14 @@
 /**
+ * Header: json_editor.jsx
+ * Purpose: json_editor component or utility.
+ * Description: Handles logic and rendering for json_editor component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/Tabs/JsonEditor/json_editor.jsx — raw JSON code view, two-way synced.
  * Mirrors oaGuiEditorWYSIWYG/Interface/Tabs/JsonEditor/json_editor.py.
  *

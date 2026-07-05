@@ -1,3 +1,14 @@
+/**
+ * Header: ImageDisplay.jsx
+ * Purpose: ImageDisplay component or utility.
+ * Description: Handles logic and rendering for ImageDisplay component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for ImageDisplay
 const ImageDisplay = ({ value, config }) => {
     const title = config?.label_active?.En || config?.label?.En || "";
     const imagePath = value || config?.value_default || "";

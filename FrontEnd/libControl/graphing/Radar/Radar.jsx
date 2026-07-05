@@ -1,4 +1,14 @@
 /**
+ * Header: Radar.jsx
+ * Purpose: Radar component or utility.
+ * Description: Handles logic and rendering for Radar component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Radar — radial "radar scope" display (mirror of oaGuiElements/Core/graphing/radar,
  * type `_Radar`). Pure SVG (no ECharts dependency) so the polar grid + sweep are
  * fully under our control.

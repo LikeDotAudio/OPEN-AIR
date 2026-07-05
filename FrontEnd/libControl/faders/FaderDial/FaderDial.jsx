@@ -1,4 +1,14 @@
 /**
+ * Header: FaderDial.jsx
+ * Purpose: FaderDial component or utility.
+ * Description: Handles logic and rendering for FaderDial component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * FaderDial: the "_Horizontal_with_dial_Value" composite — a horizontal fader
  * (whole-number part) + a rotary knob (decimal part) + a value readout. The two
  * controls add up to one number and operate independently.

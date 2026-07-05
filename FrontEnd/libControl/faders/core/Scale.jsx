@@ -1,3 +1,13 @@
+/**
+ * Header: Scale.jsx
+ * Purpose: Scale component or utility.
+ * Description: Handles logic and rendering for Scale component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Scale Component (Ticks and Labels)
 // Author: Gemini (Collaborator)
 // Version: 20260524.0200.0

@@ -1,4 +1,14 @@
 /**
+ * Header: resize_handles.jsx
+ * Purpose: resize_handles component or utility.
+ * Description: Handles logic and rendering for resize_handles component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/layout_engine/resize_handles.jsx — drag-to-stretch handles.
  * Mirrors oaGuiEditorWYSIWYG/Interface/overlays/sizing.py.
  *

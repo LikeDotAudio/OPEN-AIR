@@ -1,3 +1,13 @@
+/**
+ * Header: Pedal.jsx
+ * Purpose: Pedal component or utility.
+ * Description: Handles logic and rendering for Pedal component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Pedal.jsx — guitar-pedal style knob cap.
 // RECTANGULAR rounded body (taller along the pointer axis) with a RAISED
 // pointer TAB on one end. Two shadow-generating features:

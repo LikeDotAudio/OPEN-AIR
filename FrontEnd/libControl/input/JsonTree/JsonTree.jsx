@@ -1,3 +1,14 @@
+/**
+ * Header: JsonTree.jsx
+ * Purpose: JsonTree component or utility.
+ * Description: Handles logic and rendering for JsonTree component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for JsonNode
 const JsonNode = ({ nodeKey, value, isLast }) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
     const isObject = value !== null && typeof value === 'object';
@@ -72,6 +83,7 @@ const JsonNode = ({ nodeKey, value, isLast }) => {
     );
 };
 
+// Inline comment: Logic for OcaJsonTree
 const OcaJsonTree = ({ value, config }) => {
     const [jsonData, setJsonData] = React.useState(null);
     const [error, setError] = React.useState(null);

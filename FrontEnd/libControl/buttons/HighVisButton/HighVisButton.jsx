@@ -1,6 +1,17 @@
+/**
+ * Header: HighVisButton.jsx
+ * Purpose: HighVisButton component or utility.
+ * Description: Handles logic and rendering for HighVisButton component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // HighVisButton Component
 // A button with a thick, high-visibility outer rim and a dark inner pushable area.
 
+// Inline comment: Logic for HighVisButton
 const HighVisButton = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState || React.useState;

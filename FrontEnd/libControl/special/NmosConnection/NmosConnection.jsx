@@ -1,3 +1,13 @@
+/**
+ * Header: NmosConnection.jsx
+ * Purpose: NmosConnection component or utility.
+ * Description: Handles logic and rendering for NmosConnection component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for NmosConnection
 // Replaces left_50/top_100/4_Protocals/66_NMOS/02_Connection/nmos_connection.py
 

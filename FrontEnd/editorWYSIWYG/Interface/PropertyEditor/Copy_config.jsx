@@ -1,4 +1,14 @@
 /**
+ * Header: Copy_config.jsx
+ * Purpose: Copy_config component or utility.
+ * Description: Handles logic and rendering for Copy_config component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/PropertyEditor/Copy_config.jsx — copy/paste handlers for a widget's
  * sub-config objects (any key ending in `_config`: value_config, fader_config,
  * dial_config, …). Rendered as a small button pair beside that fold-out in the

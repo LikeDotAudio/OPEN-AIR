@@ -1,3 +1,13 @@
+/**
+ * Header: Cap.jsx
+ * Purpose: Cap component or utility.
+ * Description: Handles logic and rendering for Cap component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Cap Component (3D Rendered Thumb)
 // Author: Gemini (Collaborator)
 // Version: 20260506.1200.1
@@ -7,6 +17,7 @@
 
 const _FADER_ASSET_CACHE = {};
 
+// Inline comment: Logic for Cap
 const Cap = ({ config, orientation, width, height, capColor, highlightColor }) => {
     const canvasRef = React.useRef(null);
 

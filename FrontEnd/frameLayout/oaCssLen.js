@@ -1,3 +1,13 @@
+/**
+ * Header: oaCssLen.js
+ * Purpose: oaCssLen component or utility.
+ * Description: Handles logic and rendering for oaCssLen component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/oaCssLen.js — px/% length helper.
 // Convert a layout value to a CSS length: number or numeric-string -> px,
 // "%"/other CSS strings pass through. Lets width/height be entered as px OR %.

@@ -1,4 +1,14 @@
 /**
+ * Header: MDP.jsx
+ * Purpose: MDP component or utility.
+ * Description: Handles logic and rendering for MDP component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * MDP - Multi-Dimensional Panner Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
  * Version: 20260507.1200.1
@@ -7,6 +17,7 @@
  * Robust numeric extraction for MQTT composite states.
  */
 
+// Inline comment: Logic for MDP
 const MDP = ({ config, value, rotValue, angle, onChange }) => {
     const canvasRef = React.useRef(null);
     const [isHovered, setIsHovered] = React.useState(false);

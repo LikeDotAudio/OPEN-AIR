@@ -1,9 +1,20 @@
+/**
+ * Header: OcaTextInput.jsx
+ * Purpose: OcaTextInput component or utility.
+ * Description: Handles logic and rendering for OcaTextInput component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // OcaTextInput Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1100.1
 //
 // Description: MQTT-synchronized text input field matching Python's BuilderTextValueWithUnitsCreator.
 
+// Inline comment: Logic for OcaTextInput
 const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;

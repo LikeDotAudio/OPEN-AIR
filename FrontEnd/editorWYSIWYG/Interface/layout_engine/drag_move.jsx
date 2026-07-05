@@ -1,4 +1,14 @@
 /**
+ * Header: drag_move.jsx
+ * Purpose: drag_move component or utility.
+ * Description: Handles logic and rendering for drag_move component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/layout_engine/drag_move.jsx — drag-to-reorder geometry for the canvas.
  *
  * Given the cursor position and the path of the element being dragged, works out

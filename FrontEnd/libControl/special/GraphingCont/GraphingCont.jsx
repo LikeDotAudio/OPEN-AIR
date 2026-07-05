@@ -1,3 +1,13 @@
+/**
+ * Header: GraphingCont.jsx
+ * Purpose: GraphingCont component or utility.
+ * Description: Handles logic and rendering for GraphingCont component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for GraphingCont
 // Replaces right_50/top_100/9_Zoo/4_graphing/1_XY_Graphs/2_Graphing_2/Graphing_Cont.py
 

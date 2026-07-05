@@ -1,7 +1,18 @@
 /**
+ * Header: OcaProgressBar.jsx
+ * Purpose: OcaProgressBar component or utility.
+ * Description: Handles logic and rendering for OcaProgressBar component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * OcaProgressBar Component
  */
 
+// Inline comment: Logic for OcaProgressBar
 const OcaProgressBar = ({ value, config }) => {
     const min = config?.min ?? 0;
     const max = config?.max ?? 100;

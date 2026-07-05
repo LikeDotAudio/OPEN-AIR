@@ -1,4 +1,14 @@
 /**
+ * Header: preview_engine.jsx
+ * Purpose: preview_engine component or utility.
+ * Description: Handles logic and rendering for preview_engine component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Interface/layout_engine/preview_engine.jsx — live preview of the GUI JSON.
  * Mirrors oaGuiEditorWYSIWYG/Interface/layout_engine/preview_engine.py.
  *

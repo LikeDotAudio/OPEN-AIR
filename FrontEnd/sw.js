@@ -1,3 +1,13 @@
+/**
+ * Header: sw.js
+ * Purpose: sw component or utility.
+ * Description: Handles logic and rendering for sw component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 const CACHE_NAME = 'open-air-cache-v3';
 
 // Pre-cache essential files on install

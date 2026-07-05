@@ -1,4 +1,14 @@
 /**
+ * Header: Screw.jsx
+ * Purpose: Screw component or utility.
+ * Description: Handles logic and rendering for Screw component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * Screw — a single procedural Robertson screw head, rendered by the WASM engine
  * (window.OAPanels). The Panel cover auto-places its own screws; this component
  * is for dropping a standalone screw explicitly into a layout.

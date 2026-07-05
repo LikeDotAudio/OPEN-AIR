@@ -1,11 +1,23 @@
+/**
+ * Header: Fader.jsx
+ * Purpose: Fader component or utility.
+ * Description: Handles logic and rendering for Fader component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Fader Component
 // Author: Gemini (Collaborator)
 // Version: 20260505.1700.2
 //
 // Description: High-fidelity React Fader component, respecting dynamic JSON configuration and inferring orientation.
 
+// Inline comment: Logic for clamp
 const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
 
+// Inline comment: Logic for Fader
 const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : 0;
     const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 100;

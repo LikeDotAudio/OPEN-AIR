@@ -1,4 +1,14 @@
 /**
+ * Header: TrapezoidButton.jsx
+ * Purpose: TrapezoidButton component or utility.
+ * Description: Handles logic and rendering for TrapezoidButton component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * OcaTrapezoidButton Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
  * Version: 20260506.2100.1
@@ -7,6 +17,7 @@
  * Based on the industrial standard at oaGuiElements/Core/buttons/button_trapezoid
  */
 
+// Inline comment: Logic for OcaTrapezoidButton
 const OcaTrapezoidButton = ({ label: externalLabel, value, onChange, config }) => {
     const [isPressed, setIsPressed] = React.useState(false);
     const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];

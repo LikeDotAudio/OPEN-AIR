@@ -1,3 +1,13 @@
+/**
+ * Header: MqttProvider.jsx
+ * Purpose: MqttProvider component or utility.
+ * Description: Handles logic and rendering for MqttProvider component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 const MqttContext = React.createContext();
 
 // Per-session identity. Matches Python's FULL_INSTANCE_ID shape ("<8-byte-hex>:<partition>:<pid>")

@@ -1,3 +1,13 @@
+/**
+ * Header: topicUtils.js
+ * Purpose: topicUtils component or utility.
+ * Description: Handles logic and rendering for topicUtils component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frontEnd/comMQTT/topicUtils.js
 //
 // JS port of oaComProtocols/oaComMQTT/Methods/mqtt_topic_utils.py.

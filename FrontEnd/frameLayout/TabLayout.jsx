@@ -1,4 +1,14 @@
 /**
+ * Header: TabLayout.jsx
+ * Purpose: TabLayout component or utility.
+ * Description: Handles logic and rendering for TabLayout component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * TabLayout: Renders a tabbed "Notebook" interface.
  */
 window.TabLayout = ({ nodeName, node, path_prefix, jsonPath }) => {

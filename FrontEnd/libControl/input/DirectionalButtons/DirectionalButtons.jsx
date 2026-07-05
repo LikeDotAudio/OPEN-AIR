@@ -1,9 +1,20 @@
+/**
+ * Header: DirectionalButtons.jsx
+ * Purpose: DirectionalButtons component or utility.
+ * Description: Handles logic and rendering for DirectionalButtons component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // DirectionalButtons Component
 // Author: Gemini (Collaborator)
 // Version: 20260507.1000.1
 //
 // Description: D-Pad style buttons matching Python's BuilderInputDirectionalButtonsCreator.
 
+// Inline comment: Logic for DirectionalButtons
 const DirectionalButtons = ({ config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const publish = window.useMqttPublish ? window.useMqttPublish() : () => {};

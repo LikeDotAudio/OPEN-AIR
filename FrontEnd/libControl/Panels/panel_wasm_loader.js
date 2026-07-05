@@ -1,3 +1,13 @@
+/**
+ * Header: panel_wasm_loader.js
+ * Purpose: panel_wasm_loader component or utility.
+ * Description: Handles logic and rendering for panel_wasm_loader component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frontEnd/libControl/Panels/panel_wasm_loader.js
 // Author: Anthony Peter Kuzub
 //

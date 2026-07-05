@@ -1,3 +1,13 @@
+/**
+ * Header: MediaButtons.jsx
+ * Purpose: MediaButtons component or utility.
+ * Description: Handles logic and rendering for MediaButtons component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for MediaButtons
 // Replaces right_50/top_100/9_Zoo/1_buttons/2_Trapezoid/6_Media_Buttons/Media_Buttons.py
 

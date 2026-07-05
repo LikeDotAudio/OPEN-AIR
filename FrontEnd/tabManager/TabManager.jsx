@@ -1,3 +1,14 @@
+/**
+ * Header: TabManager.jsx
+ * Purpose: TabManager component or utility.
+ * Description: Handles logic and rendering for TabManager component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+// Inline comment: Logic for TabManager
 const TabManager = ({ directoryTree }) => {
     // Current path is a list of node names forming the path to the currently viewed element
     const [path, setPath] = React.useState([]);

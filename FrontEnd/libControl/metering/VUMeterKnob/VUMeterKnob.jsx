@@ -1,4 +1,14 @@
 /**
+ * Header: VUMeterKnob.jsx
+ * Purpose: VUMeterKnob component or utility.
+ * Description: Handles logic and rendering for VUMeterKnob component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
+/**
  * VUMeterKnob - Composite Meter + Knob Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
  * Version: 20260506.2200.2
@@ -6,6 +16,7 @@
  * Description: High-fidelity composite component featuring a NeedleMeter with a Knob at its pivot.
  */
 
+// Inline comment: Logic for VUMeterKnob
 const VUMeterKnob = ({ value, onChange, config, topic, path_prefix }) => {
     // --- 1. Config Splitting & Inheritance ---
     const c = config || {};

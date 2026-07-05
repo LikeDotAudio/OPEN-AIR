@@ -1,3 +1,13 @@
+/**
+ * Header: SnmpStatus.jsx
+ * Purpose: SnmpStatus component or utility.
+ * Description: Handles logic and rendering for SnmpStatus component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // React implementation for SnmpStatus
 // Replaces left_50/top_100/4_Protocals/11_SNMP/0_Status/snmp_status.py
 

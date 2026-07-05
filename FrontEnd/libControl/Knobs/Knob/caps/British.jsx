@@ -1,3 +1,13 @@
+/**
+ * Header: British.jsx
+ * Purpose: British component or utility.
+ * Description: Handles logic and rendering for British component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/British.jsx — OmterElec / classic UK fluted knob cap.
 // Four optional variants driven by cosmetics: knob-with-cap (polished metal
 // disc on top), knob-with-ring (knurled chrome base ring), knob-with-window

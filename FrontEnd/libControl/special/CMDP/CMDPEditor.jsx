@@ -1,3 +1,13 @@
+/**
+ * Header: CMDPEditor.jsx
+ * Purpose: CMDPEditor component or utility.
+ * Description: Handles logic and rendering for CMDPEditor component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // CMDPEditor - Grouping & Editing panel for the CMDP
 // Author: Anthony Peter Kuzub / Claude (Collaborator)
 // Version: 20260701.1500.0
@@ -9,6 +19,7 @@
 // publishes the full { channels, group_configs } state via onChange. Point this
 // element and a CMDP at the SAME MQTT path and edits live-update the display.
 
+// Inline comment: Logic for CMDPEditor
 const CMDPEditor = ({ config, value, onChange }) => {
     const accent = config?.color || '#f4902c';
 

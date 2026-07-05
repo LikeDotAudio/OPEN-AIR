@@ -1,3 +1,13 @@
+/**
+ * Header: OcaArray.jsx
+ * Purpose: OcaArray component or utility.
+ * Description: Handles logic and rendering for OcaArray component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // frameLayout/OcaArray.jsx — data-driven repeater container.
 /**
  * OcaArray renders its `blueprint` (a template node) ONCE PER entry in `data`,

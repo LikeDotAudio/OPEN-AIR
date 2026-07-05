@@ -1,3 +1,13 @@
+/**
+ * Header: Standard.jsx
+ * Purpose: Standard component or utility.
+ * Description: Handles logic and rendering for Standard component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/Standard.jsx — the DEFAULT knob cap (circle / octagon / gear cap
 // shapes with the standard separate pointer). Used when no specialized
 // visualization is set. The shape comes from style_overrides.shape OR is

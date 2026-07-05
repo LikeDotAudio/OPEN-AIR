@@ -1,3 +1,13 @@
+/**
+ * Header: WBSElma.jsx
+ * Purpose: WBSElma component or utility.
+ * Description: Handles logic and rendering for WBSElma component or utility.
+ * 
+ * Version: 26.07.05.1
+ * Change Log:
+ * - 2026-07-05: Initial annotation and documentation added.
+ */
+
 // Knob/caps/WBSElma.jsx — WBS-ELMA (Swiss instrumentation) knob cap.
 // Fluted cylindrical body with three variants driven by cosmetics:
 //   • REGULAR — colored cap inset on top + white indicator line (default).

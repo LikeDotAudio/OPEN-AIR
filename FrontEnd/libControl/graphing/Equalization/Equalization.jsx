@@ -60,10 +60,10 @@ const Equalization = ({ value: mqttData, config, topic }) => {
         if (primaryDataset?.initial_csv_data) {
             defaultData = parseCsv(primaryDataset.initial_csv_data);
         } else {
-            // Sample EQ curve data matching the screenshot feel roughly
+            // Zero setting if no data provided
             defaultData = [
-                [20, -32], [50, -10], [100, 3], [150, 2], [200, 0], [300, -8], 
-                [500, -1], [1000, 2], [2000, 1], [5000, 4], [10000, 1], [20000, 0]
+                [20, 0], [50, 0], [100, 0], [200, 0], [500, 0], 
+                [1000, 0], [2000, 0], [5000, 0], [10000, 0], [20000, 0]
             ];
         }
 

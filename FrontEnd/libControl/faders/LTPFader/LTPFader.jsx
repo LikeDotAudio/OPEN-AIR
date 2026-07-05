@@ -62,9 +62,9 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     const showVal   = fc?.readout?.show_value !== false;
     const showUnits = fc?.readout?.show_units !== false;
 
-    // Rotational domain (rotVal maps -100..100 → -135..135 degrees).
-    const rotMin = -100;
-    const rotMax = 100;
+    // Rotational domain (rotVal maps min..max -> -135..135 degrees).
+    const rotMin = kc?.rotation_min !== undefined ? kc.rotation_min : -100;
+    const rotMax = kc?.rotation_max !== undefined ? kc.rotation_max : 100;
     const freestyle = !!(config?.interaction?.freestyle || fc?.freestyle || config?.freestyle);
     const isHorizontal = width > height;
 

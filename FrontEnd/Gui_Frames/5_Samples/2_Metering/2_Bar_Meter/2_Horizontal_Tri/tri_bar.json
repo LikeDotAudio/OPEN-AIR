@@ -27,7 +27,7 @@
               "En": "01: Classic Green (Thick)",
               "Fr": "01: Classique Green (Thick)",
               "De": "01: Klassisch Green (Thick)",
-              "Es": "01: Clásico Green (Thick)",
+              "Es": "01: Cl\u00e1sico Green (Thick)",
               "show_label": true
             },
             "labels": {
@@ -83,6 +83,13 @@
             },
             "interaction": {
               "is_read_only": false
+            }
+          },
+          "SpacerField_1": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           },
           "demo_02_scale_top": {
@@ -149,6 +156,13 @@
               "is_read_only": false
             }
           },
+          "SpacerField_2": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
+            }
+          },
           "demo_03_no_ticks_bottom_text": {
             "type": "_SmartMeter",
             "label": {
@@ -210,6 +224,13 @@
             },
             "interaction": {
               "is_read_only": false
+            }
+          },
+          "SpacerField_3": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           },
           "demo_04_ticks_no_text": {
@@ -276,6 +297,13 @@
               "is_read_only": false
             }
           },
+          "SpacerField_4": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
+            }
+          },
           "demo_05_no_label_above": {
             "type": "_SmartMeter",
             "label": {
@@ -338,6 +366,13 @@
             },
             "interaction": {
               "is_read_only": false
+            }
+          },
+          "SpacerField_5": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           },
           "demo_06_rect_peak_top": {
@@ -404,6 +439,13 @@
               "is_read_only": false
             }
           },
+          "SpacerField_6": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
+            }
+          },
           "demo_07_minimalist_none": {
             "type": "_SmartMeter",
             "label": {
@@ -465,6 +507,13 @@
             },
             "interaction": {
               "is_read_only": false
+            }
+          },
+          "SpacerField_7": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           },
           "demo_08_inverted_colors": {
@@ -531,6 +580,13 @@
               "is_read_only": false
             }
           },
+          "SpacerField_8": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
+            }
+          },
           "demo_09_thick_bar_top": {
             "type": "_SmartMeter",
             "label": {
@@ -593,6 +649,13 @@
             },
             "interaction": {
               "is_read_only": false
+            }
+          },
+          "SpacerField_9": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           },
           "demo_10_ultra_fast_bottom": {

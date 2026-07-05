@@ -37,7 +37,7 @@
               "En": "Standard VU",
               "Fr": "Standard VU",
               "De": "Standard VU",
-              "Es": "Estándar VU"
+              "Es": "Est\u00e1ndar VU"
             },
             "notes": "Approximates 'perceived loudness'. 0 VU = +4 dBu.",
             "geometry": {
@@ -114,6 +114,24 @@
               "style_overrides": {
                 "gradient_level": 0
               }
+            }
+          }
+        }
+      },
+      "SpacerBlock_1": {
+        "type": "OcaBlock",
+        "layout_columns": 1,
+        "column_sizing": [
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SpacerField_1": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           }
         }
@@ -220,6 +238,24 @@
               "style_overrides": {
                 "gradient_level": 0
               }
+            }
+          }
+        }
+      },
+      "SpacerBlock_2": {
+        "type": "OcaBlock",
+        "layout_columns": 1,
+        "column_sizing": [
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SpacerField_2": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           }
         }
@@ -374,6 +410,24 @@
           }
         }
       },
+      "SpacerBlock_3": {
+        "type": "OcaBlock",
+        "layout_columns": 1,
+        "column_sizing": [
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SpacerField_3": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
+            }
+          }
+        }
+      },
       "Hardware_Scales_1_Bar": {
         "type": "OcaBlock",
         "description": {
@@ -400,7 +454,7 @@
               "En": "1. Standard BBC",
               "Fr": "1. Standard BBC",
               "De": "1. Standard BBC",
-              "Es": "1. Estándar BBC"
+              "Es": "1. Est\u00e1ndar BBC"
             },
             "notes": "Mark '4' is reference.",
             "geometry": {
@@ -541,6 +595,24 @@
                 "upper_range": 24.0,
                 "middle_range_colour": "#FFEB3B"
               }
+            }
+          }
+        }
+      },
+      "SpacerBlock_4": {
+        "type": "OcaBlock",
+        "layout_columns": 1,
+        "column_sizing": [
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SpacerField_4": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           }
         }
@@ -707,6 +779,24 @@
                   "-8": "TEST"
                 }
               }
+            }
+          }
+        }
+      },
+      "SpacerBlock_5": {
+        "type": "OcaBlock",
+        "layout_columns": 1,
+        "column_sizing": [
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "SpacerField_5": {
+            "type": "Spacer",
+            "geometry": {
+              "width": "100%",
+              "height": 40
             }
           }
         }
@@ -883,4 +973,4 @@
       }
     }
   }
-}
+} 

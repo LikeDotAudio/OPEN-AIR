@@ -1,0 +1,9 @@
+description = "Push changes to the FTP server."
+prompt = '''
+Your goal is to deploy the FrontEnd changes to the FTP server.
+
+Follow these steps exactly:
+1. Navigate to the `FrontEnd` directory (or use the absolute path).
+2. Run the `deploy_FTP_to_like_dot_audio.py` script to upload the changes.
+3. Observe the output and confirm the deployment was successful to the user.
+'''

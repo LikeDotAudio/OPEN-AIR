@@ -4,12 +4,74 @@ const parseSplitName = (name) => {
     return null;
 };
 
+const MqttLazyPublisher = ({ directoryTree }) => {
+    const publish = window.useMqttPublish ? window.useMqttPublish() : null;
+    const { connected } = window.useMqttStatus ? window.useMqttStatus() : { connected: false };
+
+    React.useEffect(() => {
+        if (!connected || !directoryTree || !publish) return;
+
+        // Gather all topics and configs from the entire directoryTree
+        const queue = [];
+        const crawl = (node) => {
+            if (node.type === 'file' && node.content) {
+                Object.values(node.content).forEach(comp => {
+                    if (comp && comp.behavior && comp.behavior.topic) {
+                        const topic = comp.behavior.topic;
+                        const defaultValue = comp.behavior.default_value;
+                        const config = comp;
+                        queue.push({ topic, defaultValue, config });
+                    }
+                });
+            } else if (node.children) {
+                node.children.forEach(crawl);
+            }
+        };
+        crawl(directoryTree);
+
+        let currentIndex = 0;
+        let idleCallbackId = null;
+
+        const processQueue = (deadline) => {
+            while (currentIndex < queue.length && (deadline.timeRemaining() > 2 || deadline.didTimeout)) {
+                const item = queue[currentIndex];
+                publish(`${item.topic}/config`, JSON.stringify(item.config));
+                if (window.OA_MQTT_LAST && window.OA_MQTT_LAST[item.topic] === undefined) {
+                    publish(item.topic, JSON.stringify({ value: item.defaultValue, full_id: window.OA_SESSION_FULL_ID || 'WEB_IDLE' }));
+                }
+                currentIndex++;
+            }
+            if (currentIndex < queue.length) {
+                if (window.requestIdleCallback) {
+                    idleCallbackId = window.requestIdleCallback(processQueue, { timeout: 1000 });
+                } else {
+                    idleCallbackId = setTimeout(() => processQueue({ timeRemaining: () => 10, didTimeout: false }), 100);
+                }
+            }
+        };
+
+        if (window.requestIdleCallback) {
+            idleCallbackId = window.requestIdleCallback(processQueue, { timeout: 2000 });
+        } else {
+            idleCallbackId = setTimeout(() => processQueue({ timeRemaining: () => 10, didTimeout: false }), 1000);
+        }
+
+        return () => {
+            if (window.cancelIdleCallback && idleCallbackId) window.cancelIdleCallback(idleCallbackId);
+            else clearTimeout(idleCallbackId);
+        };
+    }, [connected, directoryTree, publish]);
+
+    return null;
+};
+
 const ResizableSplit = ({ splits, isRow, path }) => {
     const splitA = splits[0];
     const splitB = splits[1];
     const parsedA = parseSplitName(splitA.name);
 
     const [percentA, setPercentA] = React.useState(parsedA ? parsedA.percent : 50);
+    const [savedPercent, setSavedPercent] = React.useState(parsedA ? parsedA.percent : 50);
     const containerRef = React.useRef(null);
     const isDragging = React.useRef(false);
 
@@ -34,8 +96,11 @@ const ResizableSplit = ({ splits, isRow, path }) => {
             newPercent = (y / rect.height) * 100;
         }
         
-        newPercent = Math.max(5, Math.min(95, newPercent));
+        newPercent = Math.max(0, Math.min(100, newPercent));
         setPercentA(newPercent);
+        if (newPercent > 5 && newPercent < 95) {
+            setSavedPercent(newPercent);
+        }
     };
 
     const onMouseUp = () => {
@@ -45,27 +110,100 @@ const ResizableSplit = ({ splits, isRow, path }) => {
         document.removeEventListener('mouseup', onMouseUp);
     };
 
+    const toggleLeft = () => {
+        if (percentA === 0) {
+            setPercentA(savedPercent);
+        } else {
+            if (percentA > 5 && percentA < 95) setSavedPercent(percentA);
+            setPercentA(0);
+        }
+    };
+
+    const toggleRight = () => {
+        if (percentA === 100) {
+            setPercentA(savedPercent);
+        } else {
+            if (percentA > 5 && percentA < 95) setSavedPercent(percentA);
+            setPercentA(100);
+        }
+    };
+    
+    const restoreCenter = () => {
+        setPercentA(50);
+        setSavedPercent(50);
+    };
+
+    const lastNonCenter = React.useRef(0);
+    const cycleSplit = () => {
+        if (percentA > 5 && percentA < 95) {
+            const nextTarget = lastNonCenter.current === 0 ? 100 : 0;
+            setPercentA(nextTarget);
+            lastNonCenter.current = nextTarget;
+        } else {
+            if (percentA === 0) lastNonCenter.current = 0;
+            if (percentA === 100) lastNonCenter.current = 100;
+            setPercentA(50);
+            setSavedPercent(50);
+        }
+    };
+
+    React.useEffect(() => {
+        if (!path.includes('/')) {
+            window.dispatchEvent(new CustomEvent('oa-split-state', { detail: { path, percent: percentA } }));
+        }
+    }, [percentA, path]);
+
+    React.useEffect(() => {
+        const handleGlobalToggle = (e) => {
+            // Only respond if this is the top-level split for the window
+            if (!path.includes('/')) {
+                if (e.detail === 'left') toggleLeft();
+                if (e.detail === 'right') toggleRight();
+                if (e.detail === 'center') restoreCenter();
+                if (e.detail === 'cycle') cycleSplit();
+            }
+        };
+        window.addEventListener('oa-global-split-toggle', handleGlobalToggle);
+        return () => window.removeEventListener('oa-global-split-toggle', handleGlobalToggle);
+    }, [percentA, savedPercent, path]);
+
     return (
         <div ref={containerRef} style={{ display: 'flex', flexDirection: isRow ? 'row' : 'column', width: '100%', height: '100%' }}>
-            <div style={{ flexBasis: `${percentA}%`, flexGrow: 0, flexShrink: 0, overflow: 'hidden', minWidth: 0, minHeight: 0 }}>
+            <div style={{ flexBasis: `${percentA}%`, flexGrow: 0, flexShrink: 0, overflow: 'hidden', minWidth: 0, minHeight: 0, display: percentA === 0 ? 'none' : 'block' }}>
                 <WindowLayout node={splitA} path={`${path}/${splitA.name}`} />
             </div>
             
             <div 
-                onMouseDown={onMouseDown}
                 style={{
-                    [isRow ? 'width' : 'height']: '6px',
-                    backgroundColor: '#222',
-                    cursor: isRow ? 'col-resize' : 'row-resize',
+                    display: 'flex',
+                    flexDirection: isRow ? 'column' : 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    [isRow ? 'width' : 'height']: '8px',
+                    backgroundColor: '#1a1a1a',
                     zIndex: 10,
                     position: 'relative',
-                    transition: 'background-color 0.1s'
+                    transition: 'background-color 0.2s',
+                    userSelect: 'none',
+                    borderLeft: isRow ? '1px solid #333' : 'none',
+                    borderRight: isRow ? '1px solid #333' : 'none',
+                    borderTop: !isRow ? '1px solid #333' : 'none',
+                    borderBottom: !isRow ? '1px solid #333' : 'none',
                 }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f4902c'}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#222'}
-            />
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#2a2a2a'}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#1a1a1a'}
+            >
+                <div 
+                    onMouseDown={onMouseDown}
+                    style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        cursor: isRow ? 'col-resize' : 'row-resize',
+                    }}
+                />
+            </div>
 
-            <div style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden', minWidth: 0, minHeight: 0 }}>
+            <div style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden', minWidth: 0, minHeight: 0, display: percentA === 100 ? 'none' : 'block' }}>
                 <WindowLayout node={splitB} path={`${path}/${splitB.name}`} />
             </div>
         </div>
@@ -232,9 +370,66 @@ const TabContainer = ({ node, path = '' }) => {
     );
 };
 
+const HeaderControlButton = ({ label, activeColor, inactiveColor, onClick, value }) => {
+    return (
+        <button
+            onClick={onClick}
+            style={{
+                backgroundColor: '#111',
+                color: value ? activeColor : inactiveColor,
+                border: `1px solid ${value ? activeColor : inactiveColor}`,
+                boxShadow: value ? `0 0 8px ${activeColor}` : 'none',
+                borderRadius: '4px',
+                padding: '4px 16px',
+                margin: '0 5px',
+                cursor: 'pointer',
+                fontFamily: 'Segoe UI, sans-serif',
+                fontWeight: 'bold',
+                fontSize: '11px',
+                textTransform: 'uppercase',
+                transition: 'all 0.1s'
+            }}
+        >
+            {label}
+        </button>
+    );
+};
+
+const HeaderControls = () => {
+    if (!window.useMqttState) return null;
+    
+    const [start, setStart] = window.useMqttState('System/Control/Start', false);
+    const [pause, setPause] = window.useMqttState('System/Control/Pause', false);
+    const [stop, setStop] = window.useMqttState('System/Control/Stop', false);
+
+    return (
+        <div style={{ display: 'flex', marginLeft: 'auto', marginRight: '10px', alignItems: 'center' }}>
+            <HeaderControlButton 
+                label="Start" activeColor="#00ff00" inactiveColor="#555" 
+                value={start} onClick={() => setStart(!start)} 
+            />
+            <HeaderControlButton 
+                label="Pause" activeColor="#ffff00" inactiveColor="#555" 
+                value={pause} onClick={() => setPause(!pause)} 
+            />
+            <HeaderControlButton 
+                label="Stop" activeColor="#ff0000" inactiveColor="#555" 
+                value={stop} onClick={() => setStop(!stop)} 
+            />
+        </div>
+    );
+};
+
 const WindowManager = ({ directoryTree }) => {
     const [lang, setLang] = window.useMqttLang();
     const { connected: mqttConnected, fullId: mqttFullId } = (window.useMqttStatus ? window.useMqttStatus() : { connected: false, fullId: '' });
+
+    const [splitStates, setSplitStates] = React.useState({});
+    React.useEffect(() => {
+        const handler = (e) => setSplitStates(prev => ({ ...prev, [e.detail.path]: e.detail.percent }));
+        window.addEventListener('oa-split-state', handler);
+        return () => window.removeEventListener('oa-split-state', handler);
+    }, []);
 
     // WYSIWYG editor open-state. Panels dispatch 'oa-open-wysiwyg' (see Entry.jsx)
     // on right-click; we render the editor overlay inside this tree so it shares
@@ -318,12 +513,98 @@ const WindowManager = ({ directoryTree }) => {
         );
     }
 
+    const [showSettings, setShowSettings] = React.useState(false);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100vw', height: '100vh', backgroundColor: '#000', color: '#fff' }}>
             
             {/* Master Window Bar */}
             <div style={{ display: 'flex', backgroundColor: '#111', borderBottom: '1px solid #333', alignItems: 'center', padding: '0 10px', height: '35px', flexShrink: 0 }}>
-                <span style={{ color: '#fff', fontWeight: 'bold', marginRight: '20px', letterSpacing: '1px', fontSize: '12px' }}>OPEN-AIR</span>
+                <div style={{ position: 'relative', marginRight: '20px' }}>
+                    <span 
+                        onClick={() => setShowSettings(!showSettings)}
+                        style={{ 
+                            color: mqttConnected ? '#0f0' : '#f55', 
+                            fontWeight: 'bold', 
+                            letterSpacing: '1px', 
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
+                        title={mqttConnected ? "MQTT ONLINE - Click for Settings" : "MQTT OFFLINE - Click for Settings"}
+                    >
+                        OPEN-AIR
+                    </span>
+                    {showSettings && (
+                        <div style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: '0',
+                            marginTop: '10px',
+                            backgroundColor: '#111',
+                            border: '1px solid #333',
+                            borderRadius: '4px',
+                            padding: '10px',
+                            zIndex: 100,
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '12px',
+                            minWidth: '200px'
+                        }}>
+                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                 <span style={{ fontSize: '10px', color: '#666', fontWeight: 'bold' }}>LANG:</span>
+                                 <select 
+                                     value={lang} 
+                                     onChange={(e) => setLang(e.target.value)}
+                                     style={{
+                                         backgroundColor: '#000', color: '#0f0', border: '1px solid #333',
+                                         fontSize: '10px', padding: '2px 5px', borderRadius: '3px',
+                                         outline: 'none', cursor: 'pointer', fontFamily: 'monospace', fontWeight: 'bold'
+                                     }}
+                                 >
+                                     <option value="En">ENGLISH</option>
+                                     <option value="Fr">FRANÇAIS</option>
+                                     <option value="De">DEUTSCH</option>
+                                     <option value="Es">ESPAÑOL</option>
+                                 </select>
+                             </div>
+                             
+                             <div 
+                                 title={`Browser session full_id: ${mqttFullId || 'unavailable'}\nClick to copy`}
+                                 onClick={() => {
+                                     if (mqttFullId && navigator.clipboard) {
+                                         navigator.clipboard.writeText(mqttFullId).catch(() => {});
+                                     }
+                                 }}
+                                 style={{ fontSize: '10px', color: '#888', fontFamily: 'monospace', cursor: 'pointer', userSelect: 'none' }}
+                             >
+                                 ID: {mqttFullId ? mqttFullId.split(':')[0] + ':' + (mqttFullId.split(':')[1] || '') : '—'}
+                             </div>
+
+                             <div 
+                                 onClick={() => {
+                                     const current = new URLSearchParams(window.location.search).get('mqtt') || '44.44.44.152';
+                                     const override = window.prompt("Enter MQTT Broker IP or Hostname to connect to:", current);
+                                     if (override && override.trim() !== "" && override !== current) {
+                                         const url = new URL(window.location.href);
+                                         url.searchParams.set('mqtt', override.trim());
+                                         window.location.href = url.toString();
+                                     }
+                                 }}
+                                 title="Click to configure MQTT Server IP"
+                                 style={{
+                                     fontSize: '10px', color: mqttConnected ? '#0f0' : '#f55', fontWeight: 'bold',
+                                     letterSpacing: '1px', cursor: 'pointer', padding: '4px 5px',
+                                     borderRadius: '3px', border: '1px solid #333', backgroundColor: '#000',
+                                     textAlign: 'center'
+                                 }}
+                             >
+                                 {mqttConnected ? 'MQTT ACTIVE' : 'MQTT OFFLINE'}
+                             </div>
+                        </div>
+                    )}
+                </div>
                 {windows.map(w => {
                     const winUrl = window.OaNav && window.OaNav.buildIsolatedUrl ? window.OaNav.buildIsolatedUrl(w.name) : '#';
                     return (
@@ -333,7 +614,11 @@ const WindowManager = ({ directoryTree }) => {
                         onClick={(e) => {
                             if (e.ctrlKey || e.metaKey || e.button === 1) return;
                             e.preventDefault();
-                            selectWindow(w.name);
+                            if (activeWindow === w.name) {
+                                window.dispatchEvent(new CustomEvent('oa-global-split-toggle', { detail: 'cycle' }));
+                            } else {
+                                selectWindow(w.name);
+                            }
                         }}
                         style={{
                             padding: '0 20px',
@@ -349,90 +634,34 @@ const WindowManager = ({ directoryTree }) => {
                             fontWeight: 'bold',
                             backgroundColor: activeWindow === w.name ? '#222' : 'transparent'
                         }}
+                        title={activeWindow === w.name ? "Click to cycle split layout" : ""}
                     >
-                        {w.name.replace(/_/g, ' ')}
+                        {(() => {
+                            let label = w.name.replace(/_/g, ' ');
+                            if (activeWindow === w.name) {
+                                const p = splitStates[w.name];
+                                const leftArrow = p === 0 ? '' : '◀\u00A0\u00A0';
+                                const rightArrow = p === 100 ? '' : '\u00A0\u00A0▶';
+                                label = `${leftArrow}${label}${rightArrow}`;
+                            }
+                            return label;
+                        })()}
                     </a>
                     );
                 })}
                 
+                <HeaderControls />
+
                 <div style={{ flexGrow: 1 }} />
-
-                {/* Language Selector */}
-                <div style={{ marginRight: '20px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ fontSize: '10px', color: '#666', marginRight: '8px', fontWeight: 'bold' }}>LANG:</span>
-                    <select 
-                        value={lang} 
-                        onChange={(e) => setLang(e.target.value)}
-                        style={{
-                            backgroundColor: '#000',
-                            color: '#0f0',
-                            border: '1px solid #333',
-                            fontSize: '10px',
-                            padding: '2px 5px',
-                            borderRadius: '3px',
-                            outline: 'none',
-                            cursor: 'pointer',
-                            fontFamily: 'monospace',
-                            fontWeight: 'bold'
-                        }}
-                    >
-                        <option value="En">ENGLISH</option>
-                        <option value="Fr">FRANÇAIS</option>
-                        <option value="De">DEUTSCH</option>
-                        <option value="Es">ESPAÑOL</option>
-                    </select>
-                </div>
-
-                {/* Session identity + live MQTT connection state */}
-                <div
-                    title={`Browser session full_id: ${mqttFullId || 'unavailable'}\nClick to copy`}
-                    onClick={() => {
-                        if (mqttFullId && navigator.clipboard) {
-                            navigator.clipboard.writeText(mqttFullId).catch(() => {});
-                        }
-                    }}
-                    style={{
-                        fontSize: '10px',
-                        color: '#888',
-                        fontFamily: 'monospace',
-                        marginRight: '12px',
-                        cursor: 'pointer',
-                        userSelect: 'none',
-                    }}
-                >
-                    ID: {mqttFullId ? mqttFullId.split(':')[0] + ':' + (mqttFullId.split(':')[1] || '') : '—'}
-                </div>
-                <div 
-                    onClick={() => {
-                        const current = new URLSearchParams(window.location.search).get('mqtt') || '44.44.44.152';
-                        const override = window.prompt("Enter MQTT Broker IP or Hostname to connect to:", current);
-                        if (override && override.trim() !== "" && override !== current) {
-                            const url = new URL(window.location.href);
-                            url.searchParams.set('mqtt', override.trim());
-                            window.location.href = url.toString();
-                        }
-                    }}
-                    title="Click to configure MQTT Server IP"
-                    style={{
-                        fontSize: '10px',
-                        color: mqttConnected ? '#0f0' : '#f55',
-                        fontWeight: 'bold',
-                        letterSpacing: '1px',
-                        cursor: 'pointer',
-                        padding: '2px 5px',
-                        borderRadius: '3px',
-                        border: '1px solid #333',
-                        backgroundColor: '#000'
-                    }}
-                >
-                    {mqttConnected ? 'MQTT ACTIVE' : 'MQTT OFFLINE'}
-                </div>
             </div>
 
             {/* Window Content */}
             <div style={{ flexGrow: 1, overflow: 'hidden' }}>
                 <WindowLayout node={activeWindowNode} path={activeWindow || ''} />
             </div>
+
+            {/* Background Lazy Publisher */}
+            <MqttLazyPublisher directoryTree={directoryTree} />
 
             {/* WYSIWYG editor overlay */}
             {editor && window.WysiwygEditor && (

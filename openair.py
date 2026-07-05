@@ -4,8 +4,30 @@ import os
 import subprocess
 import sys
 
+import socket
+
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('10.255.255.255', 1))
+        return s.getsockname()[0]
+    except Exception:
+        return '127.0.0.1'
+    finally:
+        s.close()
+
 def main():
+    print("==================================================")
+    print(f"🌍 OPEN-AIR IS RUNNING ON IP: {get_local_ip()}")
+    print("==================================================", flush=True)
+    
     root = os.path.dirname(os.path.abspath(__file__))
+    
+    # Launch GUI Splash Screen in the background
+    splash_path = os.path.join(root, "splash.py")
+    if os.path.exists(splash_path):
+        subprocess.Popen([sys.executable, splash_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
     core_dir = os.path.join(root, "BackEnd", "Core")
     manifest = os.path.join(core_dir, "Cargo.toml")
     

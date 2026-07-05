@@ -276,12 +276,25 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       if (config?.cosmetics?.transparent === true) outerBg = null;
       if (outerBg && outerBg !== 'transparent') { ctx.fillStyle = outerBg; ctx.fillRect(0, 0, width, height); }
 
+      // --- Scale geometry (tilt + direction) ---
+      const minVal = min, maxVal = max, range = maxVal - minVal || 1;
+      const viewAngle = pnum(styleOv.Meter_viewable_angle ?? styleOv.meter_viewable_angle ?? config?.meter_viewable_angle, 90);
+      const centerAngle = pnum(styleOv.Meter_center_angle ?? styleOv.meter_center_angle ?? config?.meter_center_angle, 90);
+      const ccw = (styleOv.Counter_Clockwise ?? styleOv.counter_clockwise) ? true : false;
+      const startDeg = centerAngle + viewAngle / 2, endDeg = centerAngle - viewAngle / 2;
+      const toRad = (deg) => -deg * Math.PI / 180;
+      const angRad = (val) => { const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range; return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle)); };
+      const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
+      const nAng = angRad(boundedVal);
+
+
       // --- Bezel body + clipped face ---
       ctx.save();
       if (layout) {
         _tracePath(ctx, layout.pts);
       } else {
-        ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius + 5, Math.PI, 0); ctx.lineTo(centerX, centerY); ctx.closePath();
+        const padDeg = 18;
+        ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius + 5, toRad(startDeg + padDeg), toRad(endDeg - padDeg), false); ctx.lineTo(centerX, centerY); ctx.closePath();
       }
       ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 10; ctx.shadowOffsetX = 2; ctx.shadowOffsetY = 2;
       ctx.fillStyle = colors.bezel || '#111';
@@ -308,17 +321,6 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
         gg.addColorStop(1, 'rgba(0,0,0,0.10)');
         ctx.fillStyle = gg; ctx.fillRect(0, 0, width, height);
       }
-
-      // --- Scale geometry (tilt + direction) ---
-      const minVal = min, maxVal = max, range = maxVal - minVal || 1;
-      const viewAngle = pnum(styleOv.Meter_viewable_angle ?? styleOv.meter_viewable_angle ?? config?.meter_viewable_angle, 90);
-      const centerAngle = pnum(styleOv.Meter_center_angle ?? styleOv.meter_center_angle ?? config?.meter_center_angle, 90);
-      const ccw = (styleOv.Counter_Clockwise ?? styleOv.counter_clockwise) ? true : false;
-      const startDeg = centerAngle + viewAngle / 2, endDeg = centerAngle - viewAngle / 2;
-      const toRad = (deg) => -deg * Math.PI / 180;
-      const angRad = (val) => { const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range; return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle)); };
-      const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
-      const nAng = angRad(boundedVal);
 
       // --- Fit-guard: keep the whole gauge inside the bezel interior -----------
       // Tall-origin shapes (squircle/squectangle/…) drop their math pivot below
@@ -479,3 +481,4 @@ const NeedleMeter = ({ value, config }) => {
   );
 };
 window.NeedleMeter = NeedleMeter;
+ 

@@ -35,12 +35,12 @@
               "En": "Standard VU",
               "Fr": "Standard VU",
               "De": "Standard VU",
-              "Es": "Estándar VU"
+              "Es": "Est\u00e1ndar VU"
             },
             "notes": "ANSI C16.5-1942. Philosophy: Approximates 'perceived loudness'. 0 VU = +4 dBu. Ballistics: 300ms attack/decay. Lead: 6-10 dB.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -76,8 +76,8 @@
             },
             "notes": "Mathematical calculation of average power over time. Ballistics: Variable windowing.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -138,8 +138,8 @@
             },
             "notes": "DIN 45406. Protection: Catches peaks to prevent overload. Ballistics: 10ms attack, 1.5s decay (-20dB).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -181,8 +181,8 @@
             },
             "notes": "BS 4297. Reduces operator eye fatigue. Ballistics: 10ms attack, 2.8s decay (-24dB).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -247,8 +247,8 @@
             },
             "notes": "ITU-R BS.1770. 'God View'. 4x Oversampling to detect Inter-Sample Peaks. Ballistics: Instant attack, peak hold decay.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -291,8 +291,8 @@
             },
             "notes": "ITU-R BS.1770-4. Sliding 400ms window. Perceived loudness calculation.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -333,8 +333,8 @@
             },
             "notes": "ITU-R BS.1770-4. Sliding 3s window. K-Weighted average.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -397,12 +397,12 @@
               "En": "1. Standard BBC",
               "Fr": "1. Standard BBC",
               "De": "1. Standard BBC",
-              "Es": "1. Estándar BBC"
+              "Es": "1. Est\u00e1ndar BBC"
             },
             "notes": "Scale 1 to 7. BS4297. White on Matte Black. Mark '4' is reference.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -447,8 +447,8 @@
             },
             "notes": "-20 to +4. Ref -8 ('R'). Yellow Caution Strip (0 to +6).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -486,8 +486,8 @@
             },
             "notes": "-20 to +4. Ref -8. Identical to Scale 2 but without 'R' or yellow markers.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -516,10 +516,10 @@
               "De": "4. APK (Canada)",
               "Es": "4. APK (Canada)"
             },
-            "notes": "-4 to +20. Ref +8. 'dBm 600 Ω'. Yellow Strip (+16 to +24).",
+            "notes": "-4 to +20. Ref +8. 'dBm 600 \u03a9'. Yellow Strip (+16 to +24).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -579,8 +579,8 @@
             },
             "notes": "-8 to +16. Ref +4 ('REF'). Yellow Strip (+12 to +20).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -617,8 +617,8 @@
             },
             "notes": "-12 to +12. Center 0. Symmetrical. Used for phase or balance nulling.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -652,8 +652,8 @@
             },
             "notes": "-12 to +12. Marked 'TEST' above zero.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -687,8 +687,8 @@
             },
             "notes": "-20 to +4. Ref -8. Marked 'TEST'. Yellow Caution Strip (0 to +6).",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -751,8 +751,8 @@
             },
             "notes": "Dial: #F5E6C4 (Buff/Parchment). Crisp, pale almond. Original 1940 factory look.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -791,8 +791,8 @@
             },
             "notes": "Dial: #E8D5A8. Slightly darkened by time and heat. RCA Console / Luxman look.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -831,8 +831,8 @@
             },
             "notes": "Dial: #FFC680. Warm, golden amber glow. Simulates No. 47 incandescent bulbs.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -871,8 +871,8 @@
             },
             "notes": "Case: #2B2B2B. Glossy dark brownish-black housing look.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -933,8 +933,8 @@
             },
             "notes": "Classic Vintage. Wide body, fine point. Allows eye to track momentum. Best for VU.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -963,8 +963,8 @@
             },
             "notes": "Scientific Instrument. Razor thin to eliminate parallax error. Best for PPM.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -993,8 +993,8 @@
             },
             "notes": "Industrial Indicator. Uniform rectangular bar. High distance visibility.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -1023,8 +1023,8 @@
             },
             "notes": "Hi-Fi Luxury. Skeletonized to reduce mass and improve transient response.",
             "geometry": {
-              "width": 150,
-              "height": 150
+              "width": 280,
+              "height": 200
             },
             "domain": {
               "primary": {
@@ -1071,9 +1071,11 @@
               "De": "The Physics of 'Doubling'",
               "Es": "The Physics of 'Doubling'"
             },
-            "notes": "• Doubling Power: +3 dB (e.g., 2 speakers playing same signal).\n• Doubling Voltage: +6 dB (Field Strength/Pressure).\n• Doubling Loudness: ~+10 dB (Psychoacoustic perception).",
+            "notes": "\u2022 Doubling Power: +3 dB (e.g., 2 speakers playing same signal).\n\u2022 Doubling Voltage: +6 dB (Field Strength/Pressure).\n\u2022 Doubling Loudness: ~+10 dB (Psychoacoustic perception).",
             "geometry": {
-              "sticky": "nw"
+              "sticky": "nw",
+              "width": 280,
+              "height": 200
             }
           },
           "Impedance_Rule": {
@@ -1086,11 +1088,13 @@
             },
             "notes": "Internal: 3k9. Series Resistor: 3k6. Must 'see' its own impedance for accuracy.",
             "geometry": {
-              "sticky": "nw"
+              "sticky": "nw",
+              "width": 280,
+              "height": 200
             }
           }
         }
       }
     }
   }
-}
+} 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'open-air-cache-v2';
+const CACHE_NAME = 'open-air-cache-v3';
 
 // Pre-cache essential files on install
 self.addEventListener("install", e => {

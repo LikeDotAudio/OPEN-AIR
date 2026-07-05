@@ -13,6 +13,10 @@ def check_server():
 
 class SplashScreen:
     def __init__(self):
+        import time
+        self.start_time = time.time()
+        self.min_display_time = 3.0 # Minimum seconds to show splash
+        
         self.root = tk.Tk()
         self.root.overrideredirect(True)
         self.root.configure(bg='black')
@@ -65,8 +69,14 @@ class SplashScreen:
         self.root.after(50, self.update_frame) # 20fps = 50ms
         
     def poll(self):
+        import time
         self.attempts += 1
-        if check_server() or self.attempts > 120: # 60 seconds max timeout
+        elapsed = time.time() - self.start_time
+        
+        server_ready = check_server()
+        time_met = elapsed >= self.min_display_time
+        
+        if (server_ready and time_met) or self.attempts > 120: # 60 seconds max timeout
             self.root.destroy()
         else:
             self.root.after(500, self.poll)

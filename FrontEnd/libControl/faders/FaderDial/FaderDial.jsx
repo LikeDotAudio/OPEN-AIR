@@ -84,9 +84,11 @@ const FaderDial = ({ value, onChange, config }) => {
     const H = (fluid && heightConstrained && boxH > 0) ? boxH : 80;
     const pad = Math.max(4, Math.min(12, Math.round(H * 0.12)));
     const labelFont = Math.max(8, Math.round(H * 0.20));
-    const valueFont = Math.max(9, Math.round(H * 0.26));
-    const knobSize = Math.max(16, H - pad * 2);
-    const faderH = Math.max(14, H - pad * 2 - labelFont - 4); // leave room for the label above
+    // Cap auto-font at 24px so it doesn't get ridiculously large if H is massive (e.g. 140)
+    const valueFont = Math.min(24, Math.max(9, Math.round(H * 0.26)));
+    // Allow knob to scale up to 100 width as requested, but no larger
+    const knobSize = Math.min(100, Math.max(16, H - pad * 2));
+    const faderH = Math.max(14, H - pad * 2 - labelFont - 4); // fader uses full H so it stays tall!
     const gap = Math.max(6, Math.min(18, Math.round(H * 0.18)));
 
     // Value readout config (value_config.*): text colour, background, font px,
@@ -95,7 +97,7 @@ const FaderDial = ({ value, onChange, config }) => {
     const vColor = vc.colour || vc.color || '#fff';
     const vBgRaw = vc.bg_color || vc.background || '#111';
     const vBg = window.OaTransparency ? window.OaTransparency.bg(config, vBgRaw) : vBgRaw;
-    const vFont = (vc.font != null) ? vc.font : valueFont;
+    const vFont = (vc.font != null) ? vc.font : (config?.layout?.font != null ? config.layout.font : valueFont);
     const vWidthCh = (vc.width != null) ? vc.width : valueChars;
     const vHeight = (vc.height != null) ? vc.height : null;
 
@@ -113,7 +115,7 @@ const FaderDial = ({ value, onChange, config }) => {
     // Per-column flex style: explicit % basis when column_spacing is set,
     // otherwise the supplied fallback (auto sizing).
     const colFlex = (i, fallback) =>
-        (cs && csTotal > 0) ? { flex: `0 1 ${csPct(i)}`, minWidth: 0 } : fallback;
+        (cs && csTotal > 0) ? { flex: `0 1 ${csPct(i)}`, minWidth: i === 0 ? 0 : 'min-content' } : fallback;
 
     const faderConfig = {
         ...config,
@@ -187,7 +189,7 @@ const FaderDial = ({ value, onChange, config }) => {
                 <input type="text" value={inputValue}
                     onChange={handleTextChange} onBlur={handleTextBlur} onKeyDown={handleTextKeyDown}
                     style={{
-                        width: `calc(${vWidthCh}ch + 4px)`, boxSizing: 'content-box',
+                        width: `calc(${vWidthCh}ch + 4px)`, maxWidth: '100%', boxSizing: 'content-box',
                         ...(vHeight ? { height: `${vHeight}px` } : {}),
                         backgroundColor: vBg, color: vColor, border: '1px inset #222',
                         padding: '2px 4px', textAlign: 'center', fontFamily: 'monospace',

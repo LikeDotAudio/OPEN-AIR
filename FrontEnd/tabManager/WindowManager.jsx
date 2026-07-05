@@ -370,15 +370,15 @@ const TabContainer = ({ node, path = '' }) => {
     );
 };
 
-const HeaderControlButton = ({ label, activeColor, inactiveColor, onClick, value }) => {
+const HeaderControlButton = ({ label, color, onClick }) => {
     return (
         <button
             onClick={onClick}
             style={{
                 backgroundColor: '#111',
-                color: value ? activeColor : inactiveColor,
-                border: `1px solid ${value ? activeColor : inactiveColor}`,
-                boxShadow: value ? `0 0 8px ${activeColor}` : 'none',
+                color: color,
+                border: `1px solid ${color}`,
+                boxShadow: `0 0 8px ${color}`,
                 borderRadius: '4px',
                 padding: '4px 16px',
                 margin: '0 5px',
@@ -398,23 +398,14 @@ const HeaderControlButton = ({ label, activeColor, inactiveColor, onClick, value
 const HeaderControls = () => {
     if (!window.useMqttState) return null;
     
-    const [start, setStart] = window.useMqttState('System/Control/Start', false);
-    const [pause, setPause] = window.useMqttState('System/Control/Pause', false);
-    const [stop, setStop] = window.useMqttState('System/Control/Stop', false);
+    const [isRunning, setIsRunning] = window.useMqttState('System/Control/Start', false);
 
     return (
         <div style={{ display: 'flex', marginLeft: 'auto', marginRight: '10px', alignItems: 'center' }}>
             <HeaderControlButton 
-                label="Start" activeColor="#00ff00" inactiveColor="#555" 
-                value={start} onClick={() => setStart(!start)} 
-            />
-            <HeaderControlButton 
-                label="Pause" activeColor="#ffff00" inactiveColor="#555" 
-                value={pause} onClick={() => setPause(!pause)} 
-            />
-            <HeaderControlButton 
-                label="Stop" activeColor="#ff0000" inactiveColor="#555" 
-                value={stop} onClick={() => setStop(!stop)} 
+                label={isRunning ? "Stop" : "Start"} 
+                color={isRunning ? "#ff0000" : "#00ff00"} 
+                onClick={() => setIsRunning(!isRunning)} 
             />
         </div>
     );
@@ -602,6 +593,29 @@ const WindowManager = ({ directoryTree }) => {
                              >
                                  {mqttConnected ? 'MQTT ACTIVE' : 'MQTT OFFLINE'}
                              </div>
+                             
+                             <button
+                                 onClick={() => {
+                                     if ('serviceWorker' in navigator) {
+                                         navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                                             for(let registration of registrations) {
+                                                 registration.unregister();
+                                             }
+                                             window.location.reload(true);
+                                         });
+                                     } else {
+                                         window.location.reload(true);
+                                     }
+                                 }}
+                                 style={{
+                                     fontSize: '10px', color: '#fff', fontWeight: 'bold',
+                                     letterSpacing: '1px', cursor: 'pointer', padding: '6px 5px',
+                                     borderRadius: '3px', border: '1px solid #555', backgroundColor: '#d33',
+                                     textAlign: 'center', marginTop: '2px'
+                                 }}
+                             >
+                                 FLUSH CACHE & RELOAD
+                             </button>
                         </div>
                     )}
                 </div>

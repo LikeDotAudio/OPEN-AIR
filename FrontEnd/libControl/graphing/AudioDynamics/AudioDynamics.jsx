@@ -106,7 +106,7 @@ const AudioDynamics = ({ value: mqttData, config }) => {
                     name: 'Reference',
                     type: 'line',
                     data: [[-90, -90], [0, 0]],
-                    lineStyle: { color: '#9c5a1a', width: 1 },
+                    lineStyle: { color: '#555', width: 2, type: 'dashed' },
                     showSymbol: false,
                     animation: false
                 },
@@ -117,6 +117,14 @@ const AudioDynamics = ({ value: mqttData, config }) => {
                     lineStyle: { color: '#f48a20', width: 3 },
                     itemStyle: { color: '#f48a20' },
                     showSymbol: false,
+                    animationDuration: 300
+                },
+                {
+                    name: 'Threshold Point',
+                    type: 'scatter',
+                    data: [[-20, -20]], // Default threshold
+                    itemStyle: { color: '#e74c3c' },
+                    symbolSize: 10,
                     animationDuration: 300
                 }
             ],
@@ -187,10 +195,35 @@ const AudioDynamics = ({ value: mqttData, config }) => {
                 newData.push([x, y]);
             }
 
+            const threshPoint = [[thresh, thresh + gain]];
+
             chartInstance.current.setOption({
                 series: [
-                    {}, // Reference line
-                    { data: newData }
+                    {
+                        name: 'Reference',
+                        type: 'line',
+                        data: [[-90, -90], [0, 0]],
+                        lineStyle: { color: '#555', width: 2, type: 'dashed' },
+                        showSymbol: false,
+                        animation: false
+                    },
+                    { 
+                        name: 'Curve',
+                        type: 'line',
+                        data: newData,
+                        lineStyle: { color: '#f48a20', width: 3 },
+                        itemStyle: { color: '#f48a20' },
+                        showSymbol: false,
+                        animationDuration: 300
+                    },
+                    {
+                        name: 'Threshold Point',
+                        type: 'scatter',
+                        data: threshPoint,
+                        itemStyle: { color: '#e74c3c' },
+                        symbolSize: 10,
+                        animationDuration: 300
+                    }
                 ]
             });
         } catch (e) {

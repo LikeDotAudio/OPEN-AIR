@@ -58,7 +58,6 @@
                 "fields": {
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
-                    "command": "EQ_Params/Low",
                     "label": {
                       "En": "Gain / Freq"
                     },
@@ -90,11 +89,11 @@
                     "layout": {
                       "width": 80,
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/Low"
                   },
                   "Q_0": {
                     "type": "_FaderKnob",
-                    "command": "EQ_Params/Low/Q",
                     "label": {
                       "En": "Q"
                     },
@@ -113,7 +112,8 @@
                     "layout": {
                       "width": "100%",
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/Low/Q"
                   }
                 },
                 "column_sizing": [
@@ -134,7 +134,6 @@
                 "fields": {
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
-                    "command": "EQ_Params/LowMid",
                     "label": {
                       "En": "Gain / Freq"
                     },
@@ -166,11 +165,11 @@
                     "layout": {
                       "width": 80,
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LowMid"
                   },
                   "Q_1": {
                     "type": "_FaderKnob",
-                    "command": "EQ_Params/LowMid/Q",
                     "label": {
                       "En": "Q"
                     },
@@ -189,7 +188,8 @@
                     "layout": {
                       "width": "100%",
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LowMid/Q"
                   }
                 },
                 "column_sizing": [
@@ -210,7 +210,6 @@
                 "fields": {
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
-                    "command": "EQ_Params/Mid",
                     "label": {
                       "En": "Gain / Freq"
                     },
@@ -242,11 +241,11 @@
                     "layout": {
                       "width": 80,
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/Mid"
                   },
                   "Q_2": {
                     "type": "_FaderKnob",
-                    "command": "EQ_Params/Mid/Q",
                     "label": {
                       "En": "Q"
                     },
@@ -265,7 +264,8 @@
                     "layout": {
                       "width": "100%",
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/Mid/Q"
                   }
                 },
                 "column_sizing": [
@@ -286,7 +286,6 @@
                 "fields": {
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
-                    "command": "EQ_Params/HighMid",
                     "label": {
                       "En": "Gain / Freq"
                     },
@@ -318,11 +317,11 @@
                     "layout": {
                       "width": 80,
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HighMid"
                   },
                   "Q_3": {
                     "type": "_FaderKnob",
-                    "command": "EQ_Params/HighMid/Q",
                     "label": {
                       "En": "Q"
                     },
@@ -341,7 +340,8 @@
                     "layout": {
                       "width": "100%",
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HighMid/Q"
                   }
                 },
                 "column_sizing": [
@@ -362,7 +362,6 @@
                 "fields": {
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
-                    "command": "EQ_Params/High",
                     "label": {
                       "En": "Gain / Freq"
                     },
@@ -394,11 +393,11 @@
                     "layout": {
                       "width": 80,
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/High"
                   },
                   "Q_4": {
                     "type": "_FaderKnob",
-                    "command": "EQ_Params/High/Q",
                     "label": {
                       "En": "Q"
                     },
@@ -417,7 +416,8 @@
                     "layout": {
                       "width": "100%",
                       "height": 300
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/High/Q"
                   }
                 },
                 "column_sizing": [

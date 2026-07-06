@@ -41,7 +41,6 @@
         "fields": {
           "Thresh": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Thresh",
             "label": {
               "En": "Thresh"
             },
@@ -54,11 +53,11 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Thresh"
           },
           "Ratio": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Ratio",
             "label": {
               "En": "Ratio"
             },
@@ -71,11 +70,11 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Ratio"
           },
           "Knee": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Knee",
             "label": {
               "En": "Knee"
             },
@@ -88,11 +87,11 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Knee"
           },
           "Gain": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Gain",
             "label": {
               "En": "Gain"
             },
@@ -105,11 +104,11 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Gain"
           },
           "Attack": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Attack",
             "label": {
               "En": "Attack"
             },
@@ -122,11 +121,11 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Attack"
           },
           "Release": {
             "type": "_FaderKnob",
-            "command": "Dyn_Params/Release",
             "label": {
               "En": "Release"
             },
@@ -139,7 +138,8 @@
             },
             "layout": {
               "height": 200
-            }
+            },
+            "topic": "OpenAir/Gui/Dyn_Params/Release"
           }
         }
       }

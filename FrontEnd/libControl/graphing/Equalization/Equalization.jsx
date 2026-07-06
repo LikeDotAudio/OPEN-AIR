@@ -85,20 +85,22 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             },
             xAxis: {
                 type: 'log',
+                logBase: 10,
                 min: 20,
                 max: 20000,
                 axisLabel: {
                     formatter: function (value) {
                         if (value === 20) return '20';
-                        if (value === 200) return '200';
-                        if (value === 2000) return '2k';
+                        if (value === 100) return '100';
+                        if (value === 1000) return '1k';
+                        if (value === 10000) return '10k';
                         if (value === 20000) return '20k';
                         return '';
                     },
                     color: '#f48a20',
                     fontWeight: 'bold'
                 },
-                splitLine: { show: false },
+                splitLine: { show: true, lineStyle: { color: '#333' } },
                 axisLine: { show: false },
                 axisTick: { show: false }
             },
@@ -111,7 +113,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                     color: '#f48a20',
                     fontWeight: 'bold'
                 },
-                splitLine: { show: false },
+                splitLine: { show: true, lineStyle: { color: '#333' } },
                 axisLine: { show: false },
                 axisTick: { show: false }
             },

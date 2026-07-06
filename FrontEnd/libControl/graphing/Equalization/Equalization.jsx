@@ -185,14 +185,14 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 return v;
             };
 
-            const parseBand = (key, bandData, ltpParsed, gainParsed) => {
+            const parseBand = (key, bandData, ltpParsed, qParsed) => {
                 let freq = unwrap(bandData?.Freq) ?? unwrap(bandData?.freq) ?? unwrap(bandData?.Frequency) ?? unwrap(bandData?.frequency);
                 let gain = unwrap(bandData?.Gain) ?? unwrap(bandData?.gain);
                 let q = unwrap(bandData?.Q) ?? unwrap(bandData?.q);
                 
                 if (freq === undefined && ltpParsed) freq = ltpParsed.value;
-                if (q === undefined && ltpParsed) q = ltpParsed.rotValue;
-                if (gain === undefined && gainParsed) gain = gainParsed.value !== undefined ? gainParsed.value : gainParsed;
+                if (gain === undefined && ltpParsed) gain = ltpParsed.rotValue;
+                if (q === undefined && qParsed) q = qParsed.value !== undefined ? qParsed.value : qParsed;
                 
                 freq = parseFloat(freq);
                 gain = parseFloat(gain);
@@ -215,19 +215,19 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             bandKeys.forEach(key => {
                 const topic = getBaseTopic(key);
                 const ltpMsg = messages[topic];
-                const gainMsg = messages[`${topic}/Gain`];
+                const qMsg = messages[`${topic}/Q`];
                 let ltpParsed = null;
-                let gainParsed = null;
+                let qParsed = null;
                 
                 if (ltpMsg) {
                     try { ltpParsed = JSON.parse(ltpMsg); } catch(e) {}
                 }
-                if (gainMsg) {
-                    try { gainParsed = JSON.parse(gainMsg); } catch(e) {}
+                if (qMsg) {
+                    try { qParsed = JSON.parse(qMsg); } catch(e) {}
                 }
                 
-                if (ltpParsed || gainParsed) {
-                    parseBand(key, {}, ltpParsed, gainParsed);
+                if (ltpParsed || qParsed) {
+                    parseBand(key, {}, ltpParsed, qParsed);
                 }
             });
 
@@ -471,8 +471,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                         if (window.useMqttPublish) {
                                             const publish = window.useMqttPublish();
                                             const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
-                                            publish(topic, { value: newFreq, rotValue: b.q });
-                                            publish(topic + '/Gain', { value: newGain });
+                                            publish(topic, { value: newFreq, rotValue: newGain });
                                         }
                                 },
                                 onmousewheel: function (e) {
@@ -485,7 +484,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     if (window.useMqttPublish) {
                                         const publish = window.useMqttPublish();
                                         const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
-                                        publish(topic, { value: b.freq, rotValue: newQ });
+                                        publish(topic + '/Q', { value: newQ });
                                     }
                                 }
                             };

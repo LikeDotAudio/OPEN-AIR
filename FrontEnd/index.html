@@ -226,10 +226,10 @@
                     }, 2500);
                 }
 
-                // Fetch the directory structure from our Python Web Server
-                fetch('/api/tree?t=' + new Date().getTime())
+                // Fetch the directory structure from our statically generated JSON
+                fetch('./api/tree.json?t=' + new Date().getTime())
                     .then(res => {
-                        if (!res.ok) throw new Error("Failed to fetch layout tree from /api/tree");
+                        if (!res.ok) throw new Error("Failed to fetch layout tree from ./api/tree.json");
                         return res.json();
                     })
                     .then(data => {

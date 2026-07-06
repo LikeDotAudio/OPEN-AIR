@@ -444,11 +444,9 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     // Update graph smoothly temporarily? The state update will do it.
                                         if (window.useMqttPublish) {
                                             const publish = window.useMqttPublish();
-                                            publish(topic + '/' + b.name + '/Freq', newFreq);
-                                            publish(topic + '/' + b.name + '/Gain', newGain);
-                                            // Vertical LTP mapping
-                                            publish(topic + '/' + b.name + '/rotValue', newFreq);
-                                            publish(topic + '/' + b.name + '/value', newGain);
+                                            const baseTopic = `OpenAir/Gui/${config?.command}`;
+                                            publish(baseTopic + '/' + b.name, { value: newFreq, rotValue: b.q });
+                                            publish(baseTopic + '/' + b.name + '/Gain', { value: newGain });
                                         }
                                 },
                                 onmousewheel: function (e) {
@@ -460,7 +458,8 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     newQ = Math.max(0.1, Math.min(10.0, newQ));
                                     if (window.useMqttPublish) {
                                         const publish = window.useMqttPublish();
-                                        publish(topic + '/' + b.name + '/Q', newQ);
+                                        const baseTopic = `OpenAir/Gui/${config?.command}`;
+                                        publish(baseTopic + '/' + b.name, { value: b.freq, rotValue: newQ });
                                     }
                                 }
                             };

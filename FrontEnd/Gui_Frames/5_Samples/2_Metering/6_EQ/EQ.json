@@ -56,18 +56,18 @@
                   "En": "Low Band"
                 },
                 "fields": {
-                  "LTP_Freq_Gain": {
+                  "LTP_Freq_Q": {
                     "type": "_CustomLTP",
                     "label": {
-                      "En": "Gain / Freq"
+                      "En": "Freq / Q"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": -24.0,
-                        "max": 24.0
+                        "min": 20.0,
+                        "max": 20000.0
                       },
                       "value": {
-                        "default_value": 2.5
+                        "default_value": 60.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -80,9 +80,9 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": 20.0,
-                      "rotation_max": 20000.0,
-                      "rotation_default": 60.0,
+                      "rotation_min": 0.1,
+                      "rotation_max": 10.0,
+                      "rotation_default": 0.7,
                       "cap_outline_color": "#FF5722",
                       "freestyle": true
                     },
@@ -92,16 +92,16 @@
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Low"
                   },
-                  "Q_0": {
+                  "Gain_0": {
                     "type": "_FaderKnob",
                     "label": {
-                      "En": "Q"
+                      "En": "Gain"
                     },
                     "domain": {
                       "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 0.7
+                        "min": -24.0,
+                        "max": 24.0,
+                        "value_default": 2.5
                       }
                     },
                     "cosmetics": {
@@ -113,7 +113,7 @@
                       "width": "100%",
                       "height": 300
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/Low/Q"
+                    "topic": "OpenAir/Gui/EQ_Params/Low/Gain"
                   }
                 },
                 "column_sizing": [
@@ -132,18 +132,18 @@
                   "En": "LowMid Band"
                 },
                 "fields": {
-                  "LTP_Freq_Gain": {
+                  "LTP_Freq_Q": {
                     "type": "_CustomLTP",
                     "label": {
-                      "En": "Gain / Freq"
+                      "En": "Freq / Q"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": -24.0,
-                        "max": 24.0
+                        "min": 20.0,
+                        "max": 20000.0
                       },
                       "value": {
-                        "default_value": -4.0
+                        "default_value": 250.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -156,9 +156,9 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": 20.0,
-                      "rotation_max": 20000.0,
-                      "rotation_default": 250.0,
+                      "rotation_min": 0.1,
+                      "rotation_max": 10.0,
+                      "rotation_default": 0.7,
                       "cap_outline_color": "#4CAF50",
                       "freestyle": true
                     },
@@ -168,16 +168,16 @@
                     },
                     "topic": "OpenAir/Gui/EQ_Params/LowMid"
                   },
-                  "Q_1": {
+                  "Gain_1": {
                     "type": "_FaderKnob",
                     "label": {
-                      "En": "Q"
+                      "En": "Gain"
                     },
                     "domain": {
                       "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 1.2
+                        "min": -24.0,
+                        "max": 24.0,
+                        "value_default": -4.0
                       }
                     },
                     "cosmetics": {
@@ -189,7 +189,7 @@
                       "width": "100%",
                       "height": 300
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/LowMid/Q"
+                    "topic": "OpenAir/Gui/EQ_Params/LowMid/Gain"
                   }
                 },
                 "column_sizing": [
@@ -208,18 +208,18 @@
                   "En": "Mid Band"
                 },
                 "fields": {
-                  "LTP_Freq_Gain": {
+                  "LTP_Freq_Q": {
                     "type": "_CustomLTP",
                     "label": {
-                      "En": "Gain / Freq"
+                      "En": "Freq / Q"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": -24.0,
-                        "max": 24.0
+                        "min": 20.0,
+                        "max": 20000.0
                       },
                       "value": {
-                        "default_value": 1.5
+                        "default_value": 1000.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -232,9 +232,9 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": 20.0,
-                      "rotation_max": 20000.0,
-                      "rotation_default": 1000.0,
+                      "rotation_min": 0.1,
+                      "rotation_max": 10.0,
+                      "rotation_default": 0.7,
                       "cap_outline_color": "#03A9F4",
                       "freestyle": true
                     },
@@ -244,16 +244,16 @@
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Mid"
                   },
-                  "Q_2": {
+                  "Gain_2": {
                     "type": "_FaderKnob",
                     "label": {
-                      "En": "Q"
+                      "En": "Gain"
                     },
                     "domain": {
                       "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 2.0
+                        "min": -24.0,
+                        "max": 24.0,
+                        "value_default": 1.5
                       }
                     },
                     "cosmetics": {
@@ -265,7 +265,7 @@
                       "width": "100%",
                       "height": 300
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/Mid/Q"
+                    "topic": "OpenAir/Gui/EQ_Params/Mid/Gain"
                   }
                 },
                 "column_sizing": [
@@ -284,18 +284,18 @@
                   "En": "HighMid Band"
                 },
                 "fields": {
-                  "LTP_Freq_Gain": {
+                  "LTP_Freq_Q": {
                     "type": "_CustomLTP",
                     "label": {
-                      "En": "Gain / Freq"
+                      "En": "Freq / Q"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": -24.0,
-                        "max": 24.0
+                        "min": 20.0,
+                        "max": 20000.0
                       },
                       "value": {
-                        "default_value": 0.0
+                        "default_value": 4000.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -308,9 +308,9 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": 20.0,
-                      "rotation_max": 20000.0,
-                      "rotation_default": 4000.0,
+                      "rotation_min": 0.1,
+                      "rotation_max": 10.0,
+                      "rotation_default": 0.7,
                       "cap_outline_color": "#E91E63",
                       "freestyle": true
                     },
@@ -320,16 +320,16 @@
                     },
                     "topic": "OpenAir/Gui/EQ_Params/HighMid"
                   },
-                  "Q_3": {
+                  "Gain_3": {
                     "type": "_FaderKnob",
                     "label": {
-                      "En": "Q"
+                      "En": "Gain"
                     },
                     "domain": {
                       "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 1.5
+                        "min": -24.0,
+                        "max": 24.0,
+                        "value_default": 0.0
                       }
                     },
                     "cosmetics": {
@@ -341,7 +341,7 @@
                       "width": "100%",
                       "height": 300
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/HighMid/Q"
+                    "topic": "OpenAir/Gui/EQ_Params/HighMid/Gain"
                   }
                 },
                 "column_sizing": [
@@ -360,18 +360,18 @@
                   "En": "High Band"
                 },
                 "fields": {
-                  "LTP_Freq_Gain": {
+                  "LTP_Freq_Q": {
                     "type": "_CustomLTP",
                     "label": {
-                      "En": "Gain / Freq"
+                      "En": "Freq / Q"
                     },
                     "fader_config": {
                       "domain": {
-                        "min": -24.0,
-                        "max": 24.0
+                        "min": 20.0,
+                        "max": 20000.0
                       },
                       "value": {
-                        "default_value": 3.0
+                        "default_value": 12000.0
                       },
                       "cosmetics": {
                         "colors": {
@@ -384,9 +384,9 @@
                       }
                     },
                     "knob_config": {
-                      "rotation_min": 20.0,
-                      "rotation_max": 20000.0,
-                      "rotation_default": 12000.0,
+                      "rotation_min": 0.1,
+                      "rotation_max": 10.0,
+                      "rotation_default": 0.7,
                       "cap_outline_color": "#9C27B0",
                       "freestyle": true
                     },
@@ -396,16 +396,16 @@
                     },
                     "topic": "OpenAir/Gui/EQ_Params/High"
                   },
-                  "Q_4": {
+                  "Gain_4": {
                     "type": "_FaderKnob",
                     "label": {
-                      "En": "Q"
+                      "En": "Gain"
                     },
                     "domain": {
                       "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 0.7
+                        "min": -24.0,
+                        "max": 24.0,
+                        "value_default": 3.0
                       }
                     },
                     "cosmetics": {
@@ -417,7 +417,7 @@
                       "width": "100%",
                       "height": 300
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/High/Q"
+                    "topic": "OpenAir/Gui/EQ_Params/High/Gain"
                   }
                 },
                 "column_sizing": [
@@ -435,4 +435,4 @@
       }
     }
   }
-} 
+}

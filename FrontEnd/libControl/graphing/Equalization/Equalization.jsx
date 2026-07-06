@@ -183,24 +183,18 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 return v;
             };
 
-            const parseBand = (key, bandData) => {
-                const freqCandidate = unwrap(bandData.Freq) ?? unwrap(bandData.freq) ?? unwrap(bandData.Frequency) ?? unwrap(bandData.frequency);
-                const gainCandidate = unwrap(bandData.Gain) ?? unwrap(bandData.gain);
+            const parseBand = (key, bandData, ltpParsed, gainParsed) => {
+                let freq = unwrap(bandData?.Freq) ?? unwrap(bandData?.freq) ?? unwrap(bandData?.Frequency) ?? unwrap(bandData?.frequency);
+                let gain = unwrap(bandData?.Gain) ?? unwrap(bandData?.gain);
+                let q = unwrap(bandData?.Q) ?? unwrap(bandData?.q);
                 
-                let rotVal = unwrap(bandData.rotValue);
-                if (rotVal === undefined && typeof bandData.value === 'object' && bandData.value !== null) {
-                    rotVal = bandData.value.rotValue;
-                }
-                const linVal = unwrap(bandData.value);
+                if (freq === undefined && ltpParsed) freq = ltpParsed.value;
+                if (q === undefined && ltpParsed) q = ltpParsed.rotValue;
+                if (gain === undefined && gainParsed) gain = gainParsed.value !== undefined ? gainParsed.value : gainParsed;
                 
-                let freq = parseFloat(freqCandidate);
-                let gain = parseFloat(gainCandidate);
-                
-                if (isNaN(freq) && rotVal !== undefined) freq = parseFloat(rotVal);
-                if (isNaN(gain) && linVal !== undefined) gain = parseFloat(linVal);
-                
-                const qCandidate = unwrap(bandData.Q) ?? unwrap(bandData.q);
-                const q = parseFloat(qCandidate) || 1.0;
+                freq = parseFloat(freq);
+                gain = parseFloat(gain);
+                q = parseFloat(q) || 1.0;
                 
                 if (!isNaN(freq) && !isNaN(gain) && !isNaN(q)) {
                     bands.push({ name: key, freq, gain, q });
@@ -210,19 +204,20 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             // 1. Scrape the raw messages dictionary for any sub-topics matching the base topic
             const bandKeys = ['Low', 'LowMid', 'Mid', 'HighMid', 'High'];
             bandKeys.forEach(key => {
-                const msg = messages[`${baseTopic}/${key}`];
-                if (msg) {
-                    try {
-                        const parsed = JSON.parse(msg);
-                        // A fader might publish { value: x, rotValue: y }
-                        // Wait, it might also publish Q as a subtopic: `${baseTopic}/${key}/Q`
-                        const qMsg = messages[`${baseTopic}/${key}/Q`];
-                        if (qMsg) {
-                            const qParsed = JSON.parse(qMsg);
-                            parsed.Q = qParsed.value !== undefined ? qParsed.value : qParsed;
-                        }
-                        parseBand(key, parsed);
-                    } catch (e) {}
+                const ltpMsg = messages[`${baseTopic}/${key}`];
+                const gainMsg = messages[`${baseTopic}/${key}/Gain`];
+                let ltpParsed = null;
+                let gainParsed = null;
+                
+                if (ltpMsg) {
+                    try { ltpParsed = JSON.parse(ltpMsg); } catch(e) {}
+                }
+                if (gainMsg) {
+                    try { gainParsed = JSON.parse(gainMsg); } catch(e) {}
+                }
+                
+                if (ltpParsed || gainParsed) {
+                    parseBand(key, {}, ltpParsed, gainParsed);
                 }
             });
 
@@ -245,6 +240,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             }
 
             // At this point we have our parsed bands. Now generate the points.
+            console.log(`[EQ] bands.length=${bands.length}, mqttData type=${typeof mqttData}`);
             if (bands.length > 0) {
                     const steps = 500; // Using 500 points to match the user's Excel precision
                     const minF = Math.log10(20);

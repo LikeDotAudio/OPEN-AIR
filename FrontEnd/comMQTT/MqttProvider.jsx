@@ -151,6 +151,11 @@ window.useMqttStatus = () => {
     return { connected: context.connected, fullId: context.fullId };
 };
 
+window.useMqttMessages = () => {
+    const context = React.useContext(MqttContext);
+    return context ? context.messages : {};
+};
+
 // Returns the raw retained-publish function for components that need to publish
 // to an arbitrary topic (not the per-widget topic useMqttState manages) — e.g.
 // the protocol panels publishing their config.ini to OpenAir/Config/<proto>.

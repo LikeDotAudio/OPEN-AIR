@@ -161,6 +161,8 @@ const AudioDynamics = ({ value: mqttData, config }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, [cfgKey, height, width, lang]);
 
+    const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+
     // Handle real-time MQTT updates (if implemented in standard way)
     React.useEffect(() => {
         if (!chartInstance.current) return;
@@ -170,11 +172,30 @@ const AudioDynamics = ({ value: mqttData, config }) => {
             let gain = 0;
             let knee = 5.0;
 
+            const baseTopic = `OpenAir/Gui/${config?.command}`;
+            
+            const getVal = (subTopic, defaultVal) => {
+                const msg = messages[`${baseTopic}/${subTopic}`];
+                if (!msg) return defaultVal;
+                try {
+                    const parsed = JSON.parse(msg);
+                    return parseFloat(parsed.value !== undefined ? parsed.value : parsed) || defaultVal;
+                } catch {
+                    return parseFloat(msg) || defaultVal;
+                }
+            };
+
+            thresh = getVal('Thresh', -20);
+            ratio = getVal('Ratio', 2.0);
+            gain = getVal('Gain', 0);
+            knee = getVal('Knee', 5.0);
+
+            // Also fallback to the aggregated mqttData if present (for backward compatibility)
             if (typeof mqttData === 'object' && mqttData !== null) {
-                thresh = parseFloat(mqttData.Thresh?.value || mqttData.Thresh) || -20;
-                ratio = parseFloat(mqttData.Ratio?.value || mqttData.Ratio) || 2.0;
-                gain = parseFloat(mqttData.Gain?.value || mqttData.Gain) || 0;
-                knee = parseFloat(mqttData.Knee?.value || mqttData.Knee) || 5.0;
+                if (mqttData.Thresh !== undefined) thresh = parseFloat(mqttData.Thresh?.value || mqttData.Thresh) || thresh;
+                if (mqttData.Ratio !== undefined) ratio = parseFloat(mqttData.Ratio?.value || mqttData.Ratio) || ratio;
+                if (mqttData.Gain !== undefined) gain = parseFloat(mqttData.Gain?.value || mqttData.Gain) || gain;
+                if (mqttData.Knee !== undefined) knee = parseFloat(mqttData.Knee?.value || mqttData.Knee) || knee;
             }
 
             const newData = [];

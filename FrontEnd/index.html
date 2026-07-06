@@ -214,13 +214,17 @@
         function App() {
             const [directoryTree, setDirectoryTree] = React.useState(null);
             const [error, setError] = React.useState(null);
-            const [splashFinished, setSplashFinished] = React.useState(false);
+            const isDeepLink = window.location.hash && window.location.hash.includes('__win=');
+            const [splashFinished, setSplashFinished] = React.useState(isDeepLink);
 
             React.useEffect(() => {
-                // Enforce a minimum splash screen time (2.5s) to appreciate the animation
-                const splashTimer = setTimeout(() => {
-                    setSplashFinished(true);
-                }, 2500);
+                let splashTimer;
+                if (!isDeepLink) {
+                    // Enforce a minimum splash screen time (2.5s) to appreciate the animation
+                    splashTimer = setTimeout(() => {
+                        setSplashFinished(true);
+                    }, 2500);
+                }
 
                 // Fetch the directory structure from our Python Web Server
                 fetch('/api/tree?t=' + new Date().getTime())

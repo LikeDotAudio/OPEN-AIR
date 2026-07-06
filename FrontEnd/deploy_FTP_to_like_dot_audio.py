@@ -63,7 +63,7 @@ def generate_api_tree():
         api_dir = os.path.join(script_dir, "api")
         os.makedirs(api_dir, exist_ok=True)
         with open(os.path.join(api_dir, "tree.json"), 'w', encoding='utf-8') as f:
-            json.dump(tree, f, indent=2)
+            json.dump(tree, f, separators=(',', ':'))
         print("✅ Static /api/tree.json generated successfully.")
     else:
         print("⚠️ Gui_Frames directory not found in FrontEnd, skipping tree generation.")

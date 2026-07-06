@@ -490,11 +490,10 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                         chartInstance.current.setOption({ graphic: graphics });
                     }, 50); // Give eCharts time to render
                 }
-            }
         } catch (e) {
             console.error(e);
         }
-    }, [mqttData, topic]);
+    }, [messages, config?.command, mqttData]);
 
     return (
         <div style={{ padding: '2px', backgroundColor: '#bbcad1', borderRadius: '4px', border: '1px solid #778' }}>

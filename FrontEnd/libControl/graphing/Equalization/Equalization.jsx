@@ -506,3 +506,4 @@ const Equalization = ({ value: mqttData, config, topic }) => {
 };
 
 window.Equalization = Equalization;
+ 

@@ -593,7 +593,7 @@ const WindowManager = ({ directoryTree }) => {
 
                              <div 
                                  onClick={() => {
-                                     const current = new URLSearchParams(window.location.search).get('mqtt') || 'localhost';
+                                     const current = new URLSearchParams(window.location.search).get('mqtt') || window.location.hostname || 'localhost';
                                      const override = window.prompt("Enter MQTT Broker IP or Hostname to connect to:", current);
                                      if (override && override.trim() !== "" && override !== current) {
                                          const url = new URL(window.location.href);

@@ -421,7 +421,25 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                             const a = document.createElement('a');
                             a.href = url;
                             a.download = 'eq_fir_filter.wav';
+                            document.body.appendChild(a);
                             a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                        };
+
+                        const exportCSV = () => {
+                            let csvContent = "Freq,Gain\n";
+                            totalData.forEach(row => {
+                                csvContent += `${row[0]},${row[1]}\n`;
+                            });
+                            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'eq_curve.csv';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
                             URL.revokeObjectURL(url);
                         };
 
@@ -485,6 +503,29 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                             ],
                             onclick: function () {
                                 exportFIR();
+                            }
+                        });
+
+                        graphics.push({
+                            type: 'group',
+                            id: 'btn_export_csv',
+                            right: 120,
+                            top: 20,
+                            children: [
+                                {
+                                    type: 'rect',
+                                    z: 100,
+                                    shape: { width: 90, height: 30, r: 4 },
+                                    style: { fill: '#333', stroke: '#888', lineWidth: 1 }
+                                },
+                                {
+                                    type: 'text',
+                                    z: 100,
+                                    style: { text: 'Export CSV', fill: '#fff', x: 14, y: 14, font: '12px sans-serif', fontWeight: 'bold' }
+                                }
+                            ],
+                            onclick: function () {
+                                exportCSV();
                             }
                         });
 

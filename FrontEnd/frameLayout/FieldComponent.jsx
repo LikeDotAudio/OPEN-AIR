@@ -19,6 +19,11 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     const _numU = (x) => { const n = parseFloat(x); return Number.isNaN(n) ? undefined : n; };
     const node = (rawNode && (rawNode.domain || rawNode.value)) ? {
         ...rawNode, ..._d, ..._v,
+        // CRITICAL: NEVER allow MQTT state (_v) to overwrite aesthetic configs from tree.json!
+        // The retained MQTT state might contain old UI configs that wipe out colors.
+        knob_config: rawNode.knob_config,
+        fader_config: rawNode.fader_config,
+        cosmetics: rawNode.cosmetics,
         step: _d.precision !== undefined ? _d.precision : rawNode.step,
         value_default: _v.default_value !== undefined ? _v.default_value
             : (_v.value_default !== undefined ? _v.value_default : rawNode.value_default),
@@ -82,11 +87,19 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         defaultVal = node.value_default;
     }
 
+    // Compound widgets (like LTPFader) need a compound default value so the global
+    // state initializes with both properties, avoiding undefined values on mount.
+    const type = node.type || '';
+    if (type.toLowerCase().includes('ltp')) {
+        defaultVal = { 
+            value: defaultVal, 
+            rotValue: node.knob_config?.rotation_default !== undefined ? node.knob_config.rotation_default : 0 
+        };
+    }
+
     // Connect to MQTT global state store
     const useMqttStateHook = window.useMqttState || React.useState;
     const [val, setVal, lang] = useMqttStateHook(topic, defaultVal, node);
-    
-    const type = node.type || '';
     
     // ⚡ ROBUST LABEL RESOLUTION: Handle string or object-based localization
     const getLocalizedLabel = (labelData) => {
@@ -118,16 +131,39 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     const ph = _pctFrac(node.layout?.height);
     const scaling = pw != null || ph != null;
 
+    const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    let isDisabled = false;
+
+    if (nodeName === 'Q_Knob') {
+        const t = topic || '';
+        if (t.includes('Low/Q')) {
+            const shelf = messages['OpenAir/Gui/EQ_Params/Low/Shelf'];
+            let sval = shelf;
+            try { if (typeof shelf === 'string') sval = JSON.parse(shelf).value; } catch(e){}
+            if (sval == 1 || sval === '1' || sval === true || String(shelf).includes('"value":1')) isDisabled = true;
+        } else if (t.includes('High/Q')) {
+            const shelf = messages['OpenAir/Gui/EQ_Params/High/Shelf'];
+            let sval = shelf;
+            try { if (typeof shelf === 'string') sval = JSON.parse(shelf).value; } catch(e){}
+            if (sval == 1 || sval === '1' || sval === true || String(shelf).includes('"value":1')) isDisabled = true;
+        }
+    }
+
     const style = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: scaling ? 'stretch' : 'center',
         margin: scaling ? 0 : '0 auto',
+        justifySelf: scaling ? 'stretch' : 'center',
         width: pw != null ? `${pw * 100}%` : (lWidth != null ? window.oaCssLen(lWidth) : '100%'),
         // Honor an explicit height (px or %); otherwise auto when scaling so the
         // widget sizes to content.
         height: lHeight != null ? (ph != null ? `${ph * 100}%` : window.oaCssLen(lHeight)) : (scaling ? 'auto' : '100%'),
         boxSizing: 'border-box',
+        opacity: isDisabled ? 0.3 : 1,
+        pointerEvents: isDisabled ? 'none' : 'auto',
+        transition: 'opacity 0.3s ease',
+        filter: isDisabled ? 'grayscale(100%)' : 'none'
     };
 
     // --- Middle-click test: jump a meter to a random in-range value ---------
@@ -220,8 +256,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     if (type.toLowerCase().includes('ltp')) {
         return (
-            <div style={style}>
-                <span style={titleStyle}>{title}</span>
+            <div style={{ ...style, justifyContent: 'center' }}>
                 {window.LTPFader ? <window.LTPFader value={val} onChange={setVal} config={node} /> : <div style={{width: '60px', height: '150px', background: '#444', borderRadius: '30px'}}></div>}
             </div>
         );
@@ -372,11 +407,13 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_Equalization' || type.toLowerCase().includes('graph')) {
+    if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_DynamicsEnvelope' || type === '_Equalization' || type.toLowerCase().includes('graph')) {
         return (
             <div style={style}>
                 {type === '_AudioDynamics' ? (
                     window.AudioDynamics ? <window.AudioDynamics value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>AudioDynamics Component</div>
+                ) : type === '_DynamicsEnvelope' ? (
+                    window.DynamicsEnvelope ? <window.DynamicsEnvelope value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>DynamicsEnvelope Component</div>
                 ) : type === '_Equalization' ? (
                     window.Equalization ? <window.Equalization value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Equalization Component</div>
                 ) : (
@@ -480,6 +517,14 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     // Dropdown = a native <select> menu (OcaDropdown), distinct from the scrolling
     // OcaListbox. `_GuiDropDownOption` and any 'dropdown' type render as a menu.
+    if (type === '_DynamicsPresets') {
+        return (
+            <div style={style}>
+                {window.DynamicsPresets ? <window.DynamicsPresets config={node} /> : <select><option>Presets</option></select>}
+            </div>
+        );
+    }
+
     if (type === '_GuiDropDownOption' || type.toLowerCase().includes('dropdown')) {
         return (
             <div style={style}>

@@ -55,8 +55,29 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     const max = fc?.domain?.max !== undefined ? fc.domain.max
               : (config?.max !== undefined ? config.max : 100);
     const defaultVal = fc?.value?.default_value !== undefined ? fc.value.default_value : ((min + max) / 2);
-    const width  = config?.layout?.width  || config?.width  || 100;
-    const height = config?.layout?.height || config?.height || 400;
+    const cfgWidth  = config?.layout?.width  || config?.width  || 100;
+    const cfgHeight = config?.layout?.height || config?.height || 400;
+    const [width, setWidth] = React.useState(typeof cfgWidth === 'number' ? cfgWidth : 100);
+    const [height, setHeight] = React.useState(typeof cfgHeight === 'number' ? cfgHeight : 400);
+
+    React.useLayoutEffect(() => {
+        if (!wrapperRef.current) return;
+        const needsObserver = typeof cfgWidth === 'string' || typeof cfgHeight === 'string';
+        if (!needsObserver) {
+            setWidth(cfgWidth);
+            setHeight(cfgHeight);
+            return;
+        }
+        const ro = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const rect = entry.contentRect;
+                if (rect.width > 0) setWidth(rect.width);
+                if (rect.height > 0) setHeight(rect.height);
+            }
+        });
+        ro.observe(wrapperRef.current);
+        return () => ro.disconnect();
+    }, [cfgWidth, cfgHeight]);
     const railColor = fc?.cosmetics?.colors?.highlight || kc?.cap_outline_color || '#f4902c';
     const unitText = fc?.unit_text || '';
     const showVal   = fc?.readout?.show_value !== false;
@@ -86,9 +107,26 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     }
 
     // -- Coordinate mapping ---------------------------------------------------
+    const isLog = config?.logarithmic ?? fc?.logarithmic ?? (min > 0 && max > 0 && (max / min) >= 100);
+    
+    const valToNorm = (v) => {
+        let clamped = Math.max(min, Math.min(max, v));
+        if (isLog) {
+            return Math.log10(clamped / min) / Math.log10(max / min);
+        }
+        return (clamped - min) / ((max - min) || 1);
+    };
+
+    const normToVal = (n) => {
+        let clampedN = Math.max(0, Math.min(1, n));
+        if (isLog) {
+            return min * Math.pow(max / min, clampedN);
+        }
+        return min + (clampedN * (max - min));
+    };
+
     const getHandlePos = (val) => {
-        const range = (max - min) || 1;
-        const norm = (val - min) / range;
+        const norm = valToNorm(val);
         if (isHorizontal) {
             const drawW = width - 40;
             return 20 + drawW * norm;
@@ -101,11 +139,11 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         if (isHorizontal) {
             const drawW = width - 40;
             const norm = (x - 20) / drawW;
-            return min + (norm * (max - min));
+            return normToVal(norm);
         } else {
             const drawH = height - 40;
             const norm = (drawH - (y - 20)) / drawH;
-            return min + (norm * (max - min));
+            return normToVal(norm);
         }
     };
 
@@ -138,6 +176,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
         // Master fill (bottom → handle) or (left → handle)
         const handlePos = getHandlePos(linearVal);
+        const isWbsElma = (kc?.knob_style === 'wbs-elma');
         ctx.strokeStyle = freestyle ? '#FF5555' : railColor;
         ctx.lineWidth = 4;
         ctx.beginPath();
@@ -187,39 +226,53 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         const hy = isHorizontal ? cy : handlePos;
 
         // -- Travelling cap ---------------------------------------------------
-        // Cap body (glows when pan-latched).
-        if (panLatch) {
-            ctx.save();
-            ctx.shadowColor = '#33A1FD';
-            ctx.shadowBlur = 15;
-            ctx.fillStyle = '#fff';
+        if (!isWbsElma) {
+            // Cap body (glows when pan-latched).
+            if (panLatch) {
+                ctx.save();
+                ctx.shadowColor = '#33A1FD';
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = '#fff';
+            } else {
+                ctx.fillStyle = capBody;
+            }
+            ctx.beginPath();
+            ctx.arc(hx, hy, capRadius, 0, Math.PI * 2);
+            ctx.fill();
+            if (panLatch) ctx.restore();
+
+            // Rotation indicator
+            const rotRange = (rotMax - rotMin) || 200;
+            const normalizedRot = ((currentRotVal - rotMin) / rotRange) * 2 - 1;
+            const angle = normalizedRot * 135;
+            const rad = (angle - 90) * Math.PI / 180;
+            const drawLen = isAdjustingPot ? capRadius * 10 : capRadius;
+            const px = hx + drawLen * Math.cos(rad);
+            const py = hy + drawLen * Math.sin(rad);
+            ctx.strokeStyle = capAccent;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(hx, hy);
+            ctx.lineTo(px, py);
+            ctx.stroke();
+
+            // Center dot
+            ctx.fillStyle = capAccent;
+            ctx.beginPath();
+            ctx.arc(hx, hy, 3, 0, Math.PI * 2);
+            ctx.fill();
         } else {
-            ctx.fillStyle = capBody;
+            if (panLatch) {
+                ctx.save();
+                ctx.shadowColor = '#33A1FD';
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = 'rgba(0,0,0,0)';
+                ctx.beginPath();
+                ctx.arc(hx, hy, capRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
         }
-        ctx.beginPath();
-        ctx.arc(hx, hy, capRadius, 0, Math.PI * 2);
-        ctx.fill();
-        if (panLatch) ctx.restore();
-
-        // Rotation indicator: rotVal (-100..100) → +/-135deg. When adjusting
-        // the pot the line extends 10x so the sweep is legible off the cap.
-        const angle = (currentRotVal / 100) * 135;
-        const rad = (angle - 90) * Math.PI / 180;
-        const drawLen = isAdjustingPot ? capRadius * 10 : capRadius;
-        const px = hx + drawLen * Math.cos(rad);
-        const py = hy + drawLen * Math.sin(rad);
-        ctx.strokeStyle = capAccent;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(hx, hy);
-        ctx.lineTo(px, py);
-        ctx.stroke();
-
-        // Center dot
-        ctx.fillStyle = capAccent;
-        ctx.beginPath();
-        ctx.arc(hx, hy, 3, 0, Math.PI * 2);
-        ctx.fill();
 
         // -- Numerics ---------------------------------------------------------
         if (!isNarrow) {
@@ -281,7 +334,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         try { canvasRef.current.setPointerCapture(e.pointerId); } catch (_) {}
         if (isOverHandle(x, y)) {
             const mode = freestyle ? 'both' : (panLatch || e.altKey ? 'rot' : 'linear');
-            dragRef.current = { active: true, mode, startX: x, startY: y, startLin: linearVal, startRot: currentRotVal, isMod: e.altKey };
+            dragRef.current = { active: true, mode, startX: x, startY: y, startLin: linearVal, startLinNorm: valToNorm(linearVal), startRot: currentRotVal, isMod: e.altKey };
             setDragMode(mode);
         } else {
             // Bare rail: alt → snap to default, otherwise absolute-Y jump/drag.
@@ -289,7 +342,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
                 onChange && onChange({ value: defaultVal, rotValue: currentRotVal });
                 return;
             }
-            dragRef.current = { active: true, mode: 'rail', startX: x, startY: y, startLin: linearVal, startRot: currentRotVal, isMod: false };
+            dragRef.current = { active: true, mode: 'rail', startX: x, startY: y, startLin: linearVal, startLinNorm: valToNorm(linearVal), startRot: currentRotVal, isMod: false };
             setDragMode('rail');
             const v = Math.max(min, Math.min(max, getValFromPos(x, y)));
             onChange && onChange({ value: v, rotValue: currentRotVal });
@@ -311,7 +364,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         if (!freestyle && !panLatch) {
             const nowMod = e.altKey;
             if (nowMod !== d.isMod) {
-                d.startX = x; d.startY = y; d.startLin = linearVal; d.startRot = currentRotVal;
+                d.startX = x; d.startY = y; d.startLin = linearVal; d.startLinNorm = valToNorm(linearVal); d.startRot = currentRotVal;
                 d.isMod = nowMod; d.mode = nowMod ? 'rot' : 'linear';
                 setDragMode(d.mode);
             }
@@ -329,14 +382,14 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             nextRot = Math.max(rotMin, Math.min(rotMax, d.startRot + change));
         }
         if (linActive) {
-            let change = 0;
+            let normChange = 0;
             if (isHorizontal) {
-                change = ((x - d.startX) / (width - 40)) * (max - min);
+                normChange = (x - d.startX) / (width - 40);
             } else {
-                change = -((y - d.startY) / (height - 40)) * (max - min);
+                normChange = -(y - d.startY) / (height - 40);
             }
-            if (freestyle) change /= 2;
-            nextLin = Math.max(min, Math.min(max, d.startLin + change));
+            if (freestyle) normChange /= 2;
+            nextLin = Math.max(min, Math.min(max, normToVal(d.startLinNorm + normChange)));
         }
         onChange && onChange({ value: nextLin, rotValue: nextRot });
     };
@@ -362,7 +415,8 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         const onWheel = (e) => {
             e.preventDefault();
             const delta = Math.sign(e.deltaY) * -1; // up is positive
-            if (e.altKey) {
+            const wheelControlsPot = config?.fader_config?.wheel_controls_pot === true || config?.wheel_controls_pot === true;
+            if (e.altKey || wheelControlsPot) {
                 const nr = Math.max(rotMin, Math.min(rotMax, currentRotVal + delta * 5));
                 onChange && onChange({ value: linearVal, rotValue: nr });
             } else {
@@ -376,28 +430,14 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
     return (
         <div ref={wrapperRef} className="ltp-wrapper" style={{
-            backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#3c3f41') : '#3c3f41'),
-            border: '1px solid #555',
-            padding: '8px',
-            borderRadius: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             position: 'relative',
+            width: typeof cfgWidth === 'string' ? cfgWidth : `${cfgWidth}px`,
+            height: typeof cfgHeight === 'string' ? cfgHeight : `${cfgHeight}px`,
+            justifyContent: 'center'
         }}>
-            <div className="widget-label" style={{
-                marginBottom: 6,
-                fontWeight: 'bold',
-                color: '#dcdcdc',
-                fontSize: width < 50 ? 9 : 12,
-                textAlign: 'center',
-            }}>
-                {String(
-                    (config?.label?.active?.text?.En)
-                    || (typeof config?.label === 'string' ? config.label : null)
-                    || 'LTP'
-                ).toUpperCase()}
-            </div>
             <div style={{ position: 'relative', width, height }}>
                 <canvas
                     ref={canvasRef}
@@ -416,6 +456,39 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
                         display: 'block',
                     }}
                 />
+                {(kc?.knob_style === 'wbs-elma') && window.KnobCapWBSElma && (
+                    <svg style={{
+                        position: 'absolute',
+                        left: (isHorizontal ? getHandlePos(linearVal) : width / 2) - capRadius,
+                        top: (isHorizontal ? height / 2 : getHandlePos(linearVal)) - capRadius,
+                        width: capRadius * 2,
+                        height: capRadius * 2,
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}>
+                        <window.KnobCapWBSElma 
+                            filterId={`ltpfader-${(config?.topic || Math.random().toString(36)).replace(/\W/g, '_')}`}
+                            center={capRadius}
+                            radius={capRadius}
+                            angle={-(((currentRotVal - rotMin) / ((rotMax - rotMin) || 200)) * 2 - 1) * 135 + 90}
+                            config={{
+                                cosmetics: {
+                                    styling: {
+                                        fill_color: "#546E7A",
+                                        cap_color: kc?.cap_color || capAccent,
+                                        outline_color: "#000",
+                                        outline_thickness: 1
+                                    },
+                                    flutes: 18,
+                                    cap: { show: true, color: kc?.cap_color || capAccent },
+                                    wing: { show: false },
+                                    pointer_tip: { show: true, color: "#546E7A", length: 0.2 },
+                                    line: { color: config?.cosmetics?.line?.color || "#ffffff" }
+                                }
+                            }}
+                        />
+                    </svg>
+                )}
             </div>
         </div>
     );

@@ -341,7 +341,7 @@ const TabContainer = ({ node, path = '' }) => {
     const activeNode = dirs.find(d => d.name === activeTab);
 
     // Clean up names like "0_Spectrum" -> "Spectrum"
-    const cleanName = (name) => name.replace(/^\d+_/, '').replace(/_/g, ' ');
+    const cleanName = (name) => name.replace(/^\d+[_\s-]?/, '').replace(/_/g, ' ');
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
@@ -669,7 +669,7 @@ const WindowManager = ({ directoryTree }) => {
                         title={activeWindow === w.name ? "Click to cycle split layout" : ""}
                     >
                         {(() => {
-                            let label = w.name.replace(/^\\d+[_-]?/, '').replace(/_/g, ' ');
+                            let label = w.name.replace(/^\d+[_\s-]?/, '').replace(/_/g, ' ');
                             if (activeWindow === w.name) {
                                 const p = splitStates[w.name];
                                 const leftArrow = p === 0 ? '' : '◀\u00A0\u00A0';

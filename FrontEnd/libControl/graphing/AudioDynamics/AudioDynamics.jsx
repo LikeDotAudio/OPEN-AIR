@@ -162,6 +162,7 @@ const AudioDynamics = ({ value: mqttData, config }) => {
     }, [cfgKey, height, width, lang]);
 
     const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    const publishFn = window.useMqttPublisher ? window.useMqttPublisher() : null;
 
     // Handle real-time MQTT updates (if implemented in standard way)
     React.useEffect(() => {
@@ -218,7 +219,42 @@ const AudioDynamics = ({ value: mqttData, config }) => {
 
             const threshPoint = [[thresh, thresh + gain]];
 
+            const pos = chartInstance.current.convertToPixel({seriesIndex: 0}, [thresh, thresh + gain]);
+            const graphics = [];
+            if (pos) {
+                graphics.push({
+                    type: 'circle',
+                    id: 'thresh_handle',
+                    position: pos,
+                    shape: { r: 12 },
+                    style: { fill: '#e74c3c', stroke: '#fff', lineWidth: 2, shadowBlur: 4, shadowColor: '#000' },
+                    invisible: false,
+                    draggable: true,
+                    z: 100,
+                    ondrag: function (e) {
+                        const pt = chartInstance.current.convertFromPixel({seriesIndex: 0}, [this.x, this.y]);
+                        let newThresh = Math.max(-90, Math.min(0, pt[0]));
+                        let newGain = Math.max(-24, Math.min(24, pt[1] - newThresh));
+                        if (publishFn) {
+                            publishFn(`${baseTopic}/Thresh`, { value: newThresh });
+                            publishFn(`${baseTopic}/Gain`, { value: newGain });
+                        }
+                    },
+                    onmousewheel: function (e) {
+                        e.event.preventDefault();
+                        e.event.stopPropagation();
+                        const delta = e.event.wheelDelta || -e.event.detail;
+                        let r = ratio + (delta > 0 ? 0.1 : -0.1);
+                        r = Math.max(1.0, Math.min(20.0, r));
+                        if (publishFn) {
+                            publishFn(`${baseTopic}/Ratio`, { value: r });
+                        }
+                    }
+                });
+            }
+
             chartInstance.current.setOption({
+                graphic: graphics,
                 series: [
                     {
                         name: 'Reference',
@@ -237,20 +273,13 @@ const AudioDynamics = ({ value: mqttData, config }) => {
                         showSymbol: false,
                         animationDuration: 300
                     },
-                    {
-                        name: 'Threshold Point',
-                        type: 'scatter',
-                        data: threshPoint,
-                        itemStyle: { color: '#e74c3c' },
-                        symbolSize: 10,
-                        animationDuration: 300
-                    }
+
                 ]
             });
         } catch (e) {
             console.error(e);
         }
-    }, [mqttData]);
+    }, [mqttData, messages, publishFn, config]);
 
     return (
         <div style={{ padding: '2px', backgroundColor: '#bbcad1', borderRadius: '4px', border: '1px solid #778' }}>

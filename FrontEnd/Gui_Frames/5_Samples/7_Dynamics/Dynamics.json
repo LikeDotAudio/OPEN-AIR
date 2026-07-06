@@ -1,0 +1,231 @@
+{
+  "Zoo_Metering_Dynamics": {
+    "type": "OcaBin",
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Split_Layout": {
+        "type": "OcaBlock",
+        "description": {
+          "show_label": false
+        },
+        "layout_columns": 2,
+        "fields": {
+          "Dynamics_Left": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Dynamics Core"
+            },
+            "layout_columns": 4,
+            "fields": {
+              "Presets": {
+                "type": "_DynamicsPresets",
+                "layout": {
+                  "col_span": 4,
+                  "pady": 10
+                }
+              },
+              "graph": {
+                "type": "_AudioDynamics",
+                "layout": { "col_span": 4 },
+                "identity": {
+                  "label": "Stagebox Mic 53"
+                },
+                "geometry": {
+                  "width": 800,
+                  "height": 400
+                },
+                "datasets": [
+                  {
+                    "id": "curve",
+                    "initial_csv_data": "x,y\n-90,-90\n-40,-40\n-20,-20\n0,-12"
+                  }
+                ],
+                "command": "Dyn_Params"
+              },
+              "line1": {
+                "type": "_Separator",
+                "layout": {
+                  "col_span": 4,
+                  "pady": 20
+                }
+              },
+              "Thresh": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": -60.0,
+                    "max": 0.0,
+                    "value_default": -20.0,
+                    "units": "dB"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [-60, -48, -36, -24, -12, 0],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "dB",
+                "topic": "OpenAir/Gui/Dyn_Params/Thresh"
+              },
+              "Ratio": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": 1.0,
+                    "max": 20.0,
+                    "value_default": 2.0,
+                    "units": ":1"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [1, 2, 4, 8, 12, 16, 20],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": ":1",
+                "topic": "OpenAir/Gui/Dyn_Params/Ratio"
+              },
+              "Knee": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": 0.0,
+                    "max": 30.0,
+                    "value_default": 5.0,
+                    "units": "dB"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [0, 5, 10, 15, 20, 25, 30],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "dB",
+                "topic": "OpenAir/Gui/Dyn_Params/Knee"
+              },
+              "Gain": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": -24.0,
+                    "max": 24.0,
+                    "value_default": 0.0,
+                    "units": "dB"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [-24, -12, -6, 0, 6, 12, 24],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "dB",
+                "topic": "OpenAir/Gui/Dyn_Params/Gain"
+              }
+            }
+          },
+          "Dynamics_Right": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Time Envelopes"
+            },
+            "layout_columns": 3,
+            "fields": {
+              "Attack": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": 0.1,
+                    "max": 100.0,
+                    "value_default": 10.0,
+                    "units": "ms"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [0.1, 10, 25, 50, 75, 100],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "ms",
+                "topic": "OpenAir/Gui/Dyn_Params/Attack"
+              },
+              "Hold": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": 0.0,
+                    "max": 100.0,
+                    "value_default": 20.0,
+                    "units": "ms"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [0, 20, 40, 60, 80, 100],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "ms",
+                "topic": "OpenAir/Gui/Dyn_Params/Hold"
+              },
+              "Release": {
+                "type": "_FaderKnob",
+                "domain": {
+                  "primary": {
+                    "min": 10.0,
+                    "max": 1000.0,
+                    "value_default": 100.0,
+                    "units": "ms"
+                  }
+                },
+                "layout": {
+                  "height": 350
+                },
+                "ticks": [10, 100, 250, 500, 750, 1000],
+                "sub_ticks": 1,
+                "tick_style": "numeric",
+                "show_units": true,
+                "unit_text": "ms",
+                "topic": "OpenAir/Gui/Dyn_Params/Release"
+              },
+              "line2": {
+                "type": "_Separator",
+                "layout": {
+                  "col_span": 3,
+                  "pady": 20
+                }
+              },
+              "envelope": {
+                "type": "_DynamicsEnvelope",
+                "layout": { "col_span": 3 },
+                "identity": {
+                  "label": "Time Envelope"
+                },
+                "geometry": {
+                  "width": 800,
+                  "height": 400
+                },
+                "command": "Dyn_Params",
+                "topic": "OpenAir/Gui/Dyn_Params"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

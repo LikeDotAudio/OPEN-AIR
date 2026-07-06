@@ -70,7 +70,7 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const orientation = _explicitOrient || (width > height ? 'horizontal' : 'vertical');
 
     const topRes = 25;
-    const botRes = 20;
+    const botRes = 30;
     const faderCapScale = config?.geometry?.fader_cap_scale ?? config?.fader_cap_scale ?? 1.0;
     const capW = (config?.geometry?.cap?.x || config?.cap_width || 40) * faderCapScale;
     const capH = (config?.geometry?.cap?.y || config?.cap_height || 50) * faderCapScale;
@@ -321,7 +321,7 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
             {/* Static Readout */}
             {showValue && (
                 <div style={{
-                    position: 'absolute', bottom: 10, left: 0, width: '100%',
+                    position: 'absolute', bottom: 5, left: 0, width: '100%',
                     textAlign: 'center', color: valHighlightCol,
                     fontSize: 10, pointerEvents: 'none',
                     zIndex: 2

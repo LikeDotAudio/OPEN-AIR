@@ -190,7 +190,11 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             let next;
             try {
                 const parsed = JSON.parse(messages[topic]);
-                next = parsed.value !== undefined ? parsed.value : parsed;
+                if (typeof parsed === 'object' && parsed !== null && Object.keys(parsed).some(k => k !== 'value' && k !== 'full_id')) {
+                    next = parsed;
+                } else {
+                    next = parsed.value !== undefined ? parsed.value : parsed;
+                }
             } catch (e) {
                 const num = parseFloat(messages[topic]);
                 next = isNaN(num) ? messages[topic] : num;
@@ -216,7 +220,8 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             if (messages[topic] === undefined) {
                 // Include full_id so Python's broker doesn't mistake this
                 // for one of its own reflections (see SESSION_FULL_ID above).
-                publish(topic, JSON.stringify({ value: defaultValue, full_id: SESSION_FULL_ID }));
+                const payload = (typeof defaultValue === 'object' && defaultValue !== null) ? { ...defaultValue, full_id: SESSION_FULL_ID } : { value: defaultValue, full_id: SESSION_FULL_ID };
+                publish(topic, JSON.stringify(payload));
             }
             initialPublishDone.current = true;
         }
@@ -254,7 +259,8 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             if (!state.pending) return;
             state.pending = false;
             state.last = Date.now();
-            publish(topic, JSON.stringify({ value: state.value, full_id: SESSION_FULL_ID }));
+            const payload = (typeof state.value === 'object' && state.value !== null) ? { ...state.value, full_id: SESSION_FULL_ID } : { value: state.value, full_id: SESSION_FULL_ID };
+            publish(topic, JSON.stringify(payload));
         };
 
         const interval = window.OA_PUBLISH_INTERVAL_MS || PUBLISH_INTERVAL_MS;

@@ -186,7 +186,11 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             const parseBand = (key, bandData) => {
                 const freqCandidate = unwrap(bandData.Freq) ?? unwrap(bandData.freq) ?? unwrap(bandData.Frequency) ?? unwrap(bandData.frequency);
                 const gainCandidate = unwrap(bandData.Gain) ?? unwrap(bandData.gain);
-                const rotVal = unwrap(bandData.rotValue);
+                
+                let rotVal = unwrap(bandData.rotValue);
+                if (rotVal === undefined && typeof bandData.value === 'object' && bandData.value !== null) {
+                    rotVal = bandData.value.rotValue;
+                }
                 const linVal = unwrap(bandData.value);
                 
                 let freq = parseFloat(freqCandidate);

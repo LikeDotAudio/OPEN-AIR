@@ -204,10 +204,18 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             };
 
             // 1. Scrape the raw messages dictionary for any sub-topics matching the base topic
-            const bandKeys = ['Low', 'LowMid', 'Mid', 'HighMid', 'High'];
+            let bandKeys = ['Low', 'LowMid', 'Mid', 'HighMid', 'High'];
+            let getBaseTopic = (key) => `${baseTopic}/${key}`;
+            
+            if (config?.topics) {
+                bandKeys = Object.keys(config.topics);
+                getBaseTopic = (key) => config.topics[key];
+            }
+
             bandKeys.forEach(key => {
-                const ltpMsg = messages[`${baseTopic}/${key}`];
-                const gainMsg = messages[`${baseTopic}/${key}/Gain`];
+                const topic = getBaseTopic(key);
+                const ltpMsg = messages[topic];
+                const gainMsg = messages[`${topic}/Gain`];
                 let ltpParsed = null;
                 let gainParsed = null;
                 
@@ -462,9 +470,9 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     // Update graph smoothly temporarily? The state update will do it.
                                         if (window.useMqttPublish) {
                                             const publish = window.useMqttPublish();
-                                            const baseTopic = `OpenAir/Gui/${config?.command}`;
-                                            publish(baseTopic + '/' + b.name, { value: newFreq, rotValue: b.q });
-                                            publish(baseTopic + '/' + b.name + '/Gain', { value: newGain });
+                                            const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
+                                            publish(topic, { value: newFreq, rotValue: b.q });
+                                            publish(topic + '/Gain', { value: newGain });
                                         }
                                 },
                                 onmousewheel: function (e) {
@@ -476,8 +484,8 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                     newQ = Math.max(0.1, Math.min(10.0, newQ));
                                     if (window.useMqttPublish) {
                                         const publish = window.useMqttPublish();
-                                        const baseTopic = `OpenAir/Gui/${config?.command}`;
-                                        publish(baseTopic + '/' + b.name, { value: b.freq, rotValue: newQ });
+                                        const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
+                                        publish(topic, { value: b.freq, rotValue: newQ });
                                     }
                                 }
                             };

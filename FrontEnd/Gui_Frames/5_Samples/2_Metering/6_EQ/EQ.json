@@ -19,7 +19,13 @@
             "label": {
               "En": "Master Bus Parametric EQ"
             },
-            "command": "EQ_Params",
+            "topics": {
+              "Low": "OpenAir/Gui/EQ_Params/Low",
+              "LowMid": "OpenAir/Gui/EQ_Params/LowMid",
+              "Mid": "OpenAir/Gui/EQ_Params/Mid",
+              "HighMid": "OpenAir/Gui/EQ_Params/HighMid",
+              "High": "OpenAir/Gui/EQ_Params/High"
+            },
             "geometry": {
               "width": 1000,
               "height": 400

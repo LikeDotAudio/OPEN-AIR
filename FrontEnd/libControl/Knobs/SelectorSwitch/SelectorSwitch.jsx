@@ -67,10 +67,14 @@ const SelectorSwitch = ({ value, onChange, config }) => {
     const centerY = h / 2;
     
     // Python Layout: adj_cy = cy + (top_res - bottom_res) / 2
-    const topRes = title ? 20 : 0;
-    const bottomRes = 20;
+    // hide_title/hide_value drop the internal reserves (use the field's own title);
+    // label_pad is the ring reserved for the position labels (smaller → bigger dial).
+    const showInternalTitle = title && c.hide_title !== true;
+    const topRes = showInternalTitle ? 20 : 0;
+    const bottomRes = c.hide_value === true ? 0 : 20;
     const adjCy = centerY + (topRes - bottomRes) / 2;
-    const radius = Math.min(w, h - topRes - bottomRes) / 2 - 25;
+    const labelPad = c.label_pad !== undefined ? c.label_pad : 25;
+    const radius = Math.min(w, h - topRes - bottomRes) / 2 - labelPad;
 
     const getAngleForIndex = (idx) => {
         return startAngle - (idx * angleStep);
@@ -245,7 +249,7 @@ const SelectorSwitch = ({ value, onChange, config }) => {
                 </defs>
 
                 {/* Title (n-anchor, top 10) */}
-                {title && (
+                {showInternalTitle && (
                     <text x={centerX} y={10} fill="#fff" fontSize="9" fontWeight="bold" textAnchor="middle" dominantBaseline="hanging">{title.toUpperCase()}</text>
                 )}
 

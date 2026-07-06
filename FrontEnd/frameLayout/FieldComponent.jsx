@@ -91,9 +91,13 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // state initializes with both properties, avoiding undefined values on mount.
     const type = node.type || '';
     if (type.toLowerCase().includes('ltp')) {
-        defaultVal = { 
-            value: defaultVal, 
-            rotValue: node.knob_config?.rotation_default !== undefined ? node.knob_config.rotation_default : 0 
+        defaultVal = {
+            value: defaultVal,
+            rotValue: node.knob_config?.rotation_default !== undefined ? node.knob_config.rotation_default : 0,
+            // Dual-pot second value (e.g. Q) + starting mode, so the graph reads a
+            // sane Q before the user ever switches modes.
+            rotValue2: node.knob_config?.rotation2_default !== undefined ? node.knob_config.rotation2_default : 1,
+            mode: 1
         };
     }
 
@@ -146,6 +150,20 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
             let sval = shelf;
             try { if (typeof shelf === 'string') sval = JSON.parse(shelf).value; } catch(e){}
             if (sval == 1 || sval === '1' || sval === true || String(shelf).includes('"value":1')) isDisabled = true;
+        }
+    }
+
+    // Cut-filter bypass: when a LoCut/HiCut Enable button is off, grey out every
+    // control of that filter (its Freq/Q/Slope/Type/Window) — but not the button.
+    {
+        const t = topic || '';
+        const m = t.match(/^(.*\/(?:LoCut|HiCut))\/(?!Enable$)/);
+        if (m) {
+            const enMsg = messages[`${m[1]}/Enable`];
+            let on = enMsg;
+            try { if (typeof enMsg === 'string') on = JSON.parse(enMsg); } catch (e) {}
+            if (on && typeof on === 'object' && on.value !== undefined) on = on.value;
+            if (on === 0 || on === false || on === '0') isDisabled = true;
         }
     }
 
@@ -407,7 +425,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_DynamicsEnvelope' || type === '_Equalization' || type.toLowerCase().includes('graph')) {
+    if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_DynamicsEnvelope' || type === '_Equalization' || type === '_Reverb' || type.toLowerCase().includes('graph')) {
         return (
             <div style={style}>
                 {type === '_AudioDynamics' ? (
@@ -416,6 +434,8 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
                     window.DynamicsEnvelope ? <window.DynamicsEnvelope value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>DynamicsEnvelope Component</div>
                 ) : type === '_Equalization' ? (
                     window.Equalization ? <window.Equalization value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Equalization Component</div>
+                ) : type === '_Reverb' ? (
+                    window.Reverb ? <window.Reverb value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Reverb Component</div>
                 ) : (
                     window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>
                 )}

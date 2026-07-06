@@ -21,7 +21,9 @@
 // Magnitude (dB) of a single band at frequency f. Bell/shelf use analog Bode
 // transfer functions (sample-rate independent); HP/LP use a digital biquad and
 // therefore depend on fs (the export sample rate).
-const getBiquadGainDB = (f, fc, Q, gainDB, type = 'peaking', enabled = true, fs = 48000) => {
+// slope = the HP/LP rolloff in dB/octave (6/12/18/24/48). A single biquad gives
+// 12 dB/oct; scaling the dB response by slope/12 cascades that to the chosen order.
+const getBiquadGainDB = (f, fc, Q, gainDB, type = 'peaking', enabled = true, fs = 48000, slope = 12) => {
     if (!enabled) return 0;
 
     if (type === 'lowshelf' || type === 'highshelf' || type === 'peaking') {
@@ -76,7 +78,8 @@ const getBiquadGainDB = (f, fc, Q, gainDB, type = 'peaking', enabled = true, fs 
     const num = M0*M0 + M1*M1 + M2*M2 + 2*(M0*M1 + M1*M2)*cos_w + 2*M0*M2*cos_2w;
     const den = 1 + P1*P1 + P2*P2 + 2*(P1 + P1*P2)*cos_w + 2*P2*cos_2w;
 
-    return 10 * Math.log10(num / den);
+    const oct = (Number.isFinite(slope) && slope > 0) ? slope / 12 : 1;
+    return 10 * Math.log10(num / den) * oct;
 };
 
 // In-place iterative radix-2 FFT. Length must be a power of two.
@@ -164,7 +167,7 @@ const generateFIR = (bands, opts) => {
         if (f > 0) {
             for (let bi = 0; bi < bands.length; bi++) {
                 const b = bands[bi];
-                db += getBiquadGainDB(f, b.freq, b.q, b.gain, b.type, b.enabled, fs);
+                db += getBiquadGainDB(f, b.freq, b.q, b.gain, b.type, b.enabled, fs, b.slope);
             }
         }
         const amp = Math.pow(10, db / 20);
@@ -238,12 +241,20 @@ const Equalization = ({ value: mqttData, config, topic }) => {
     const bandsRef = React.useRef([]);
     const totalDataRef = React.useRef([]);
 
+    // Drag state — while the user is dragging a handle we must NOT let the
+    // handle be rebuilt/repositioned from the MQTT echo of our own publish,
+    // otherwise the circle fights the pointer. lastPubRef throttles publishes.
+    const draggingRef = React.useRef(false);
+    const lastPubRef = React.useRef(0);
+
     // FIR export settings (exposed as dropdowns above the graph). Defaults match
     // the previous hardcoded export: 1024 taps @ 48kHz, linear phase, Hamming.
     const [firTaps, setFirTaps] = React.useState(1024);
     const [firSampleRate, setFirSampleRate] = React.useState(48000);
     const [firPhase, setFirPhase] = React.useState('linear');
     const [firWindow, setFirWindow] = React.useState('hamming');
+    // FIR needs configuration, so its button opens a small popover; CSV exports directly.
+    const [showFirDialog, setShowFirDialog] = React.useState(false);
 
     const handleExportFIR = () => {
         const bands = bandsRef.current || [];
@@ -256,6 +267,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
         let firContent = '';
         for (let i = 0; i < ir.length; i++) firContent += ir[i].toFixed(10) + '\n';
         _downloadText(firContent, 'eq_filter.fir', 'text/plain;charset=utf-8;');
+        setShowFirDialog(false);
     };
 
     const handleExportCSV = () => {
@@ -264,6 +276,34 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             csvContent += `${row[0]},${row[1]}\n`;
         });
         _downloadText(csvContent, 'eq_curve.csv', 'text/csv;charset=utf-8;');
+    };
+
+    // JFIR = the OPEN-AIR "JSON FIR" bundle: preset parameters + the FIR taps + the
+    // curve CSV, all in one object (shared window.OaJfir builder). EQ is single-channel.
+    const handleExportJFIR = () => {
+        const bands = bandsRef.current || [];
+        const opts = { taps: parseInt(firTaps, 10), sampleRate: parseInt(firSampleRate, 10), phase: firPhase, window: firWindow };
+        const ir = generateFIR(bands, opts);
+
+        let csv = "Freq,Gain\n";
+        (totalDataRef.current || []).forEach(row => { csv += `${row[0]},${row[1]}\n`; });
+
+        const meta = {
+            kind: 'eq',
+            label: title,
+            sampleRate: opts.sampleRate,
+            parameters: { bands },
+            fir: { taps: opts.taps, phase: firPhase, window: firWindow, channels: ['mono'], data: { mono: ir } },
+            curve: { columns: ['Freq', 'Gain'], csv },
+        };
+
+        if (window.OaJfir) {
+            window.OaJfir.download(window.OaJfir.build(meta), 'eq.jfir');
+        } else {
+            const obj = { format: 'JFIR', version: 1, ...meta, fir: { ...meta.fir, data: { mono: Array.from(ir).map(v => +v.toFixed(10)) } } };
+            _downloadText(JSON.stringify(obj, null, 2), 'eq.jfir', 'application/json;charset=utf-8;');
+        }
+        setShowFirDialog(false);
     };
 
     const title = config?.label?.[lang] || config?.label?.En || config?.title || "Equalizer";
@@ -293,7 +333,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
         return data;
     };
 
-    const cfgKey = JSON.stringify({ datasets: config?.datasets, title });
+    const cfgKey = JSON.stringify({ datasets: config?.datasets, title, bg_color: config?.cosmetics?.bg_color, bg_opacity: config?.cosmetics?.bg_opacity });
 
     React.useEffect(() => {
         if (!chartRef.current || typeof echarts === 'undefined') return;
@@ -315,19 +355,24 @@ const Equalization = ({ value: mqttData, config, topic }) => {
             ];
         }
 
+        // Translucent graph backdrop over the panel. Configurable:
+        //   cosmetics.bg_color   'black' | 'white' | any css colour  (default black)
+        //   cosmetics.bg_opacity 0..100 percent                       (default 20)
+        const bgColor = config?.cosmetics?.bg_color || 'black';
+        const bgOpacity = config?.cosmetics?.bg_opacity !== undefined ? config.cosmetics.bg_opacity : 20;
+        const _a = Math.max(0, Math.min(1, (parseFloat(bgOpacity) || 0) / 100));
+        const graphBg = bgColor === 'black' ? `rgba(0,0,0,${_a})`
+                      : bgColor === 'white' ? `rgba(255,255,255,${_a})`
+                      : bgColor; // pass through an explicit rgba()/hex
+
         const option = {
-            backgroundColor: '#050505',
-            title: {
-                text: title,
-                left: 10,
-                top: 10,
-                textStyle: { color: '#888', fontSize: 12, fontWeight: 'normal' }
-            },
+            backgroundColor: graphBg,
+            title: { show: false },
             grid: {
-                left: '8%',
-                right: '5%',
-                top: '15%',
-                bottom: '15%',
+                left: 8,
+                right: 10,
+                top: 12,
+                bottom: 22,
                 containLabel: true,
                 show: false,
             },
@@ -348,8 +393,11 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                     color: '#f48a20',
                     fontWeight: 'bold'
                 },
-                splitLine: { show: true, lineStyle: { color: '#333' } },
-                minorSplitLine: { show: true, lineStyle: { color: '#2a2a2a', width: 1 } },
+                // Major decade lines (20/100/1k/10k) stand out; minor ticks draw a
+                // line at every sub-decade division (2,3,4,5,6,7,8,9), not just even.
+                splitLine: { show: true, lineStyle: { color: '#555' } },
+                minorTick: { show: true, splitNumber: 10 },
+                minorSplitLine: { show: true, lineStyle: { color: '#333', width: 1 } },
                 axisLine: { show: false },
                 axisTick: { show: false }
             },
@@ -439,13 +487,24 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 } catch(e) { return v; }
             };
 
-            const parseBand = (key, bandData, ltpParsed, qParsed) => {
+            const parseBand = (key, bandData, ltpParsed, qParsed, freqParsed, slopeParsed, enableParsed) => {
                 let freq = unwrapMqtt(bandData?.Freq) ?? unwrapMqtt(bandData?.freq) ?? unwrapMqtt(bandData?.Frequency) ?? unwrapMqtt(bandData?.frequency);
                 let gain = unwrapMqtt(bandData?.Gain) ?? unwrapMqtt(bandData?.gain);
                 let q = unwrapMqtt(bandData?.Q) ?? unwrapMqtt(bandData?.q);
-                
+                // HP/LP rolloff steepness (dB/oct); selector publishes a string like "24".
+                let slope = parseFloat(unwrapMqtt(slopeParsed));
+                if (!Number.isFinite(slope) || slope <= 0) slope = 12;
+
+                // HP/LP filters carry their frequency on a `<topic>/Freq` sub-topic
+                // (a plain knob), not the compound LTP payload.
+                if (freq === undefined && freqParsed !== null && freqParsed !== undefined) {
+                    freq = freqParsed.value !== undefined ? freqParsed.value : freqParsed;
+                }
                 if (freq === undefined && ltpParsed) freq = ltpParsed.value;
                 if (gain === undefined && ltpParsed && ltpParsed.rotValue !== undefined) gain = ltpParsed.rotValue;
+                // Q now rides on the LTP's Mode-2 value (rotValue2); fall back to a
+                // legacy separate /Q topic if present.
+                if (q === undefined && ltpParsed && ltpParsed.rotValue2 !== undefined && ltpParsed.rotValue2 !== null) q = ltpParsed.rotValue2;
                 if (q === undefined && qParsed) q = qParsed.value !== undefined ? qParsed.value : qParsed;
                 
                 freq = parseFloat(freq);
@@ -477,8 +536,17 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 else if (type === 'lowpass') enabled = freq < 19999; // Enable if slightly below 20kHz
                 else enabled = gain !== 0;
 
+                // Explicit bypass button pulls the filter out of the curve entirely.
+                if (enableParsed !== undefined && enableParsed !== null) {
+                    const on = unwrapMqtt(enableParsed);
+                    if (on === 0 || on === false || on === '0') enabled = false;
+                }
+
+                // Preserve the LTP's current pot mode so republishing Q/gain doesn't flip it.
+                const mode = (ltpParsed && ltpParsed.mode === 2) ? 2 : 1;
+
                 if (!isNaN(freq) && !isNaN(gain) && !isNaN(q)) {
-                    bands.push({ name: key, freq, gain, q, type, enabled });
+                    bands.push({ name: key, freq, gain, q, type, enabled, slope, mode });
                 }
             };
 
@@ -495,18 +563,33 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                 const topic = getBaseTopic(key);
                 const ltpMsg = messages[topic];
                 const qMsg = messages[`${topic}/Q`];
+                const freqMsg = messages[`${topic}/Freq`];
+                const slopeMsg = messages[`${topic}/Slope`];
+                const enableMsg = messages[`${topic}/Enable`];
                 let ltpParsed = null;
                 let qParsed = null;
-                
+                let freqParsed = null;
+                let slopeParsed = null;
+                let enableParsed = null;
+
                 if (ltpMsg) {
                     try { ltpParsed = JSON.parse(ltpMsg); } catch(e) {}
                 }
                 if (qMsg) {
                     try { qParsed = JSON.parse(qMsg); } catch(e) {}
                 }
-                
-                if (ltpParsed || qParsed) {
-                    parseBand(key, {}, ltpParsed, qParsed);
+                if (freqMsg) {
+                    try { freqParsed = JSON.parse(freqMsg); } catch(e) {}
+                }
+                if (slopeMsg) {
+                    try { slopeParsed = JSON.parse(slopeMsg); } catch(e) { slopeParsed = slopeMsg; }
+                }
+                if (enableMsg) {
+                    try { enableParsed = JSON.parse(enableMsg); } catch(e) { enableParsed = enableMsg; }
+                }
+
+                if (ltpParsed || qParsed || freqParsed || slopeParsed || enableParsed) {
+                    parseBand(key, {}, ltpParsed, qParsed, freqParsed, slopeParsed, enableParsed);
                 }
             });
 
@@ -544,7 +627,7 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                         let totalGain = 0;
                         
                         bands.forEach((b, bIdx) => {
-                            const bandGain = getBiquadGainDB(f, b.freq, b.q, b.gain, b.type, b.enabled);
+                            const bandGain = getBiquadGainDB(f, b.freq, b.q, b.gain, b.type, b.enabled, 48000, b.slope);
                             totalGain += bandGain;
                             bandDataArray[bIdx].push([parseFloat(f.toFixed(1)), parseFloat(bandGain.toFixed(2))]);
                         });
@@ -555,9 +638,9 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                     const getBandColor = (name) => {
                         const defaultColors = {
                             'Low': '#4CAF50',
-                            'LowMid': '#FFEB3B',
+                            'LowMid': '#2196F3',
                             'Mid': '#FFEB3B',
-                            'HighMid': '#FFEB3B',
+                            'HighMid': '#F4902C',
                             'High': '#F44336',
                             'HiCut': '#795548',
                             'LoCut': '#BDBDBD'
@@ -617,13 +700,63 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                     totalDataRef.current = totalData;
 
                     // Setup Graphic elements for dragging (export lives in the HTML toolbar).
+                    // Skip the rebuild while a drag is in flight — otherwise the echo of
+                    // our own publish repositions the circle and fights the pointer.
                     setTimeout(() => {
                         if (!chartInstance.current) return;
+                        if (draggingRef.current) return;
+
+                        const domainLimits = {
+                            'LoCut': { min: 20, max: 400 },
+                            'Low': { min: 25, max: 400 },
+                            'LowMid': { min: 100, max: 1600 },
+                            'Mid': { min: 400, max: 6400 },
+                            'HighMid': { min: 800, max: 12800 },
+                            'High': { min: 1600, max: 20000 },
+                            'HiCut': { min: 5000, max: 20000 }
+                        };
+
+                        // For HP/LP filters the vertical (dB) axis has no gain meaning, so we
+                        // repurpose it to drive the filter Q/resonance. The dB span (-32..32)
+                        // maps onto the Q domain (0.1..10). Scale is approximate by design.
+                        const Q_MIN = 0.1, Q_MAX = 10, DB_SPAN = 64, DB_LO = -32;
+                        const qToDb = (q) => (((q - Q_MIN) / (Q_MAX - Q_MIN)) * DB_SPAN) + DB_LO;
+                        const dbToQ = (db) => {
+                            const clamped = Math.max(DB_LO, Math.min(DB_LO + DB_SPAN, db));
+                            return Q_MIN + ((clamped - DB_LO) / DB_SPAN) * (Q_MAX - Q_MIN);
+                        };
 
                         const graphics = bands.map((b, i) => {
-                            const pos = chartInstance.current.convertToPixel({seriesIndex: 0}, [b.freq, b.type === 'peaking' ? b.gain : 0]);
+                            const isCut = (b.type === 'highpass' || b.type === 'lowpass');
+                            // Peaking AND shelf bands carry gain → vertical drag is gain.
+                            const hasGain = (b.type === 'peaking' || b.type === 'lowshelf' || b.type === 'highshelf');
+                            const yVal = isCut ? qToDb(b.q) : (hasGain ? b.gain : 0);
+                            const pos = chartInstance.current.convertToPixel({seriesIndex: 0}, [b.freq, yVal]);
                             if (!pos) return null;
                             const bandColor = getBandColor(b.name);
+                            const bandTopic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
+                            const computeFromPointer = function (self) {
+                                const pt = chartInstance.current.convertFromPixel({seriesIndex: 0}, [self.x, self.y]);
+                                const limit = domainLimits[b.name] || { min: 20, max: 20000 };
+                                const newFreq = Math.max(limit.min, Math.min(limit.max, pt[0]));
+                                const newGain = hasGain ? Math.max(-32, Math.min(32, pt[1])) : b.gain;
+                                const newQ = isCut ? dbToQ(pt[1]) : b.q;
+                                return { newFreq, newGain, newQ };
+                            };
+                            // HP/LP publish frequency to the knob's `/Freq` sub-topic and the
+                            // vertical drag to `/Q`; peaking/shelf bands publish the compound
+                            // LTP payload (freq + gain) to the base topic.
+                            const publishBand = function (newFreq, newGain, newQ) {
+                                if (!publishFn) return;
+                                if (isCut) {
+                                    publishFn(bandTopic + '/Freq', { value: newFreq });
+                                    publishFn(bandTopic + '/Q', { value: newQ });
+                                } else {
+                                    // Q rides on the LTP's rotValue2 now — always send the full
+                                    // compound so freq/gain/Q/mode are preserved together.
+                                    publishFn(bandTopic, { value: newFreq, rotValue: newGain, rotValue2: newQ, mode: b.mode || 1 });
+                                }
+                            };
                             return {
                                 type: 'circle',
                                 id: `band_handle_${i}`,
@@ -633,40 +766,34 @@ const Equalization = ({ value: mqttData, config, topic }) => {
                                 invisible: false,
                                 draggable: true,
                                 z: 100,
+                                ondragstart: function () {
+                                    draggingRef.current = true;
+                                },
                                 ondrag: function (e) {
-                                    const pt = chartInstance.current.convertFromPixel({seriesIndex: 0}, [this.x, this.y]);
-                                    
-                                    const domainLimits = {
-                                        'LoCut': { min: 20, max: 400 },
-                                        'Low': { min: 25, max: 400 },
-                                        'LowMid': { min: 100, max: 1600 },
-                                        'Mid': { min: 400, max: 6400 },
-                                        'HighMid': { min: 800, max: 12800 },
-                                        'High': { min: 1600, max: 20000 },
-                                        'HiCut': { min: 5000, max: 20000 }
-                                    };
-                                    const limit = domainLimits[b.name] || { min: 20, max: 20000 };
-                                    
-                                    let newFreq = Math.max(limit.min, Math.min(limit.max, pt[0]));
-                                    let newGain = b.type === 'peaking' ? Math.max(-32, Math.min(32, pt[1])) : b.gain;
-                                    
-                                    // Update graph smoothly temporarily? The state update will do it.
-                                        if (publishFn) {
-                                            const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
-                                            publishFn(topic, { value: newFreq, rotValue: newGain });
-                                        }
+                                    draggingRef.current = true;
+                                    const { newFreq, newGain, newQ } = computeFromPointer(this);
+                                    // Throttle the stream so we don't flood the bus (and the knob).
+                                    const now = Date.now();
+                                    if (now - lastPubRef.current >= 40) {
+                                        lastPubRef.current = now;
+                                        publishBand(newFreq, newGain, newQ);
+                                    }
+                                },
+                                ondragend: function () {
+                                    // Always publish the final resting value, then release the guard
+                                    // on the next tick so the pending echo doesn't re-fight.
+                                    const { newFreq, newGain, newQ } = computeFromPointer(this);
+                                    publishBand(newFreq, newGain, newQ);
+                                    setTimeout(() => { draggingRef.current = false; }, 60);
                                 },
                                 onmousewheel: function (e) {
-                                    // Q adjustment
+                                    // Scroll over a dot → adjust that band's Q.
                                     e.event.preventDefault();
                                     e.event.stopPropagation();
                                     const delta = e.event.wheelDelta || -e.event.detail;
                                     let newQ = b.q + (delta > 0 ? 0.1 : -0.1);
-                                    newQ = Math.max(0.1, Math.min(10.0, newQ));
-                                    if (publishFn) {
-                                        const topic = config?.topics ? config.topics[b.name] : `OpenAir/Gui/${config?.command}/${b.name}`;
-                                        publishFn(topic + '/Q', { value: newQ });
-                                    }
+                                    newQ = Math.max(0.1, Math.min(24.0, newQ));
+                                    publishBand(b.freq, b.gain, newQ);
                                 }
                             };
                         }).filter(Boolean);
@@ -679,53 +806,64 @@ const Equalization = ({ value: mqttData, config, topic }) => {
         }
     }, [messages, config?.command, mqttData]);
 
-    const ctrlLabel = { display: 'flex', flexDirection: 'column', fontSize: '9px', color: '#334', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' };
-    const ctrlSelect = { fontSize: '11px', padding: '2px 4px', border: '1px solid #889', borderRadius: '3px', background: '#e8eef1', color: '#223', marginTop: '2px' };
-    const ctrlBtn = { fontSize: '11px', fontWeight: 'bold', padding: '5px 12px', border: '1px solid #556', borderRadius: '4px', background: '#334', color: '#fff', cursor: 'pointer', alignSelf: 'flex-end' };
+    const ctrlLabel = { display: 'flex', flexDirection: 'column', fontSize: '9px', color: '#bcd', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', gap: '2px' };
+    const ctrlSelect = { fontSize: '11px', padding: '2px 4px', border: '1px solid #667', borderRadius: '3px', background: '#e8eef1', color: '#223' };
+    // Small pill buttons that sit in the graph's top-right corner.
+    const iconBtn = { fontSize: '10px', fontWeight: 'bold', padding: '3px 8px', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '3px', background: 'rgba(40,44,52,0.75)', color: '#fff', cursor: 'pointer', backdropFilter: 'blur(2px)' };
 
     return (
-        <div style={{ width: '100%', padding: '2px', backgroundColor: '#bbcad1', borderRadius: '4px', border: '1px solid #778', boxSizing: 'border-box' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', gap: '8px', padding: '4px 6px' }}>
-                <label style={ctrlLabel}>
-                    Taps
-                    <select style={ctrlSelect} value={firTaps} onChange={(e) => setFirTaps(parseInt(e.target.value, 10))}>
-                        {[512, 1024, 2048, 4096, 8192, 16384].map(n => (
-                            <option key={n} value={n}>{n}</option>
-                        ))}
-                    </select>
-                </label>
-                <label style={ctrlLabel}>
-                    Sample Rate
-                    <select style={ctrlSelect} value={firSampleRate} onChange={(e) => setFirSampleRate(parseInt(e.target.value, 10))}>
-                        {[44100, 48000, 88200, 96000, 192000].map(n => (
-                            <option key={n} value={n}>{n >= 1000 ? (n / 1000) + ' kHz' : n}</option>
-                        ))}
-                    </select>
-                </label>
-                <label style={ctrlLabel}>
-                    Phase
-                    <select style={ctrlSelect} value={firPhase} onChange={(e) => setFirPhase(e.target.value)}>
-                        <option value="linear">Linear</option>
-                        <option value="minimum">Minimum</option>
-                    </select>
-                </label>
-                <label style={ctrlLabel}>
-                    Window
-                    <select style={ctrlSelect} value={firWindow} onChange={(e) => setFirWindow(e.target.value)}>
-                        <option value="hann">Hann</option>
-                        <option value="hamming">Hamming</option>
-                        <option value="blackman">Blackman</option>
-                        <option value="kaiser">Kaiser</option>
-                        <option value="rect">Rectangular</option>
-                    </select>
-                </label>
-                <button style={ctrlBtn} onClick={handleExportFIR}>Export FIR</button>
-                <button style={{ ...ctrlBtn, background: '#556' }} onClick={handleExportCSV}>Export CSV</button>
-            </div>
+        <div style={{ position: 'relative', width: '100%', padding: '2px', backgroundColor: 'transparent', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.15)', boxSizing: 'border-box' }}>
             <div
                 ref={chartRef}
                 style={{ width: '100%', height, position: 'relative' }}
             />
+
+            {/* Export buttons — top-right corner of the graph */}
+            <div style={{ position: 'absolute', top: 6, right: 8, display: 'flex', gap: 6, zIndex: 20 }}>
+                <button style={iconBtn} title="Export FIR filter…" onClick={() => setShowFirDialog(v => !v)}>FIR ▾</button>
+                <button style={iconBtn} title="Export frequency response as CSV" onClick={handleExportCSV}>CSV</button>
+            </div>
+
+            {/* FIR configuration popover */}
+            {showFirDialog && (
+                <div style={{ position: 'absolute', top: 34, right: 8, zIndex: 30, background: 'rgba(24,26,30,0.97)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '6px', padding: '10px 12px', boxShadow: '0 6px 20px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '170px' }}>
+                    <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#fff', letterSpacing: '0.5px' }}>FIR Filter Export</div>
+                    <label style={ctrlLabel}>
+                        Taps
+                        <select style={ctrlSelect} value={firTaps} onChange={(e) => setFirTaps(parseInt(e.target.value, 10))}>
+                            {[512, 1024, 2048, 4096, 8192, 16384].map(n => (<option key={n} value={n}>{n}</option>))}
+                        </select>
+                    </label>
+                    <label style={ctrlLabel}>
+                        Sample Rate
+                        <select style={ctrlSelect} value={firSampleRate} onChange={(e) => setFirSampleRate(parseInt(e.target.value, 10))}>
+                            {[44100, 48000, 88200, 96000, 192000].map(n => (<option key={n} value={n}>{n >= 1000 ? (n / 1000) + ' kHz' : n}</option>))}
+                        </select>
+                    </label>
+                    <label style={ctrlLabel}>
+                        Phase
+                        <select style={ctrlSelect} value={firPhase} onChange={(e) => setFirPhase(e.target.value)}>
+                            <option value="linear">Linear</option>
+                            <option value="minimum">Minimum</option>
+                        </select>
+                    </label>
+                    <label style={ctrlLabel}>
+                        Window
+                        <select style={ctrlSelect} value={firWindow} onChange={(e) => setFirWindow(e.target.value)}>
+                            <option value="hann">Hann</option>
+                            <option value="hamming">Hamming</option>
+                            <option value="blackman">Blackman</option>
+                            <option value="kaiser">Kaiser</option>
+                            <option value="rect">Rectangular</option>
+                        </select>
+                    </label>
+                    <div style={{ display: 'flex', gap: '6px', marginTop: '2px' }}>
+                        <button style={{ ...iconBtn, flex: 1, padding: '5px', background: '#2f6f3f' }} title="Single JSON bundle: params + FIR + curve CSV" onClick={handleExportJFIR}>JFIR</button>
+                        <button style={{ ...iconBtn, flex: 1, padding: '5px' }} title="Plain .fir taps" onClick={handleExportFIR}>FIR</button>
+                        <button style={{ ...iconBtn, padding: '5px 8px' }} onClick={() => setShowFirDialog(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

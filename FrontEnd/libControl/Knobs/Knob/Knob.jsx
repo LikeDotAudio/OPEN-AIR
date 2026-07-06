@@ -341,6 +341,23 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
                 ? <CapComp center={center} radius={radius} angle={pointerAngleDeg}
                            config={c} filterId={filterId} indicatorColor={indicatorColor} />
                 : null}
+
+            {/* Live value chip — shown while the knob is being turned. */}
+            {isDragging && (() => {
+                const n = typeof displayValue === 'number' ? displayValue
+                        : (Array.isArray(displayValue) ? Number(displayValue[1]) : parseFloat(displayValue));
+                if (!Number.isFinite(n)) return null;
+                const label = Math.abs(n) >= 100 ? n.toFixed(0) : (Number.isInteger(n) ? String(n) : n.toFixed(2));
+                const w = Math.max(28, label.length * 8 + 12);
+                const yTop = center + radius + 3;
+                return (
+                    <g pointerEvents="none">
+                        <rect x={center - w / 2} y={yTop} width={w} height={16} rx={3}
+                              fill="rgba(0,0,0,0.78)" stroke="rgba(255,255,255,0.25)" />
+                        <text x={center} y={yTop + 12} fill="#fff" fontSize="11" fontWeight="bold" textAnchor="middle">{label}</text>
+                    </g>
+                );
+            })()}
         </svg>
         </div>
     );

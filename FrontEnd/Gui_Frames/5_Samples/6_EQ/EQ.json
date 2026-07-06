@@ -14,163 +14,53 @@
         },
         "layout_columns": 1,
         "fields": {
-          "EQ_Graph": {
-            "type": "_Equalization",
-            "label": {
-              "En": "Master Bus Parametric EQ"
-            },
-            "topics": {
-              "LoCut": "OpenAir/Gui/EQ_Params/LoCut",
-              "Low": "OpenAir/Gui/EQ_Params/Low",
-              "LowMid": "OpenAir/Gui/EQ_Params/LowMid",
-              "Mid": "OpenAir/Gui/EQ_Params/Mid",
-              "HighMid": "OpenAir/Gui/EQ_Params/HighMid",
-              "High": "OpenAir/Gui/EQ_Params/High",
-              "HiCut": "OpenAir/Gui/EQ_Params/HiCut"
-            },
-            "geometry": {
-              "width": "100%",
-              "height": 400
-            }
-          },
-          "Band_Controls": {
+          "Top_Bands": {
             "type": "OcaBlock",
             "description": {
               "En": ""
             },
-            "layout_columns": 7,
-            "fields": {
-              "Band_LoCut": {
-                "type": "OcaBlock",
-                "layout_columns": 1,
-                "description": {
-                  "En": "LoCut"
-                },
-                "fields": {
-                  "Freq_Knob": {
-                    "type": "_Knob",
-                    "label": {
-                      "En": "Freq"
-                    },
-                    "domain": {
-                      "primary": {
-                        "min": 20,
-                        "max": 400,
-                        "value_default": 20
-                      }
-                    },
-                    "cosmetics": {
-                      "visualization": "wbs-elma",
-                      "colors": {
-                        "primary": "#546E7A",
-                        "cap": "#BDBDBD",
-                        "tick": "#aaaaaa"
-                      },
-                      "styling": {
-                        "fill_color": "#546E7A",
-                        "cap_color": "#BDBDBD",
-                        "outline_color": "#000",
-                        "outline_thickness": 1
-                      },
-                      "flutes": 18,
-                      "cap": {
-                        "show": true,
-                        "color": "#BDBDBD"
-                      },
-                      "pointer_tip": {
-                        "show": true,
-                        "color": "#546E7A",
-                        "length": 0.2
-                      },
-                      "line": {
-                        "color": "#000"
-                      },
-                      "scale": {
-                        "show": true,
-                        "style": "numeric",
-                        "count": 5,
-                        "length": 8,
-                        "thickness": 1
-                      }
-                    },
-                    "layout": {
-                      "width": 120,
-                      "height": 120
-                    },
-                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Freq",
-                    "logarithmic": true
-                  },
-                  "Spacer_1": {
-                    "type": "_Label",
-                    "label": {
-                      "En": ""
-                    },
-                    "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
-                  },
-                  "Q_Knob": {
-                    "type": "_Knob",
-                    "label": {
-                      "En": "Q"
-                    },
-                    "domain": {
-                      "primary": {
-                        "min": 0.1,
-                        "max": 10,
-                        "value_default": 0.7
-                      }
-                    },
-                    "cosmetics": {
-                      "visualization": "wbs-elma",
-                      "colors": {
-                        "primary": "#546E7A",
-                        "cap": "#BDBDBD",
-                        "tick": "#aaaaaa"
-                      },
-                      "styling": {
-                        "fill_color": "#546E7A",
-                        "cap_color": "#BDBDBD",
-                        "outline_color": "#000",
-                        "outline_thickness": 1
-                      },
-                      "flutes": 18,
-                      "cap": {
-                        "show": true,
-                        "color": "#BDBDBD"
-                      },
-                      "pointer_tip": {
-                        "show": true,
-                        "color": "#546E7A",
-                        "length": 0.2
-                      },
-                      "line": {
-                        "color": "#000"
-                      },
-                      "scale": {
-                        "show": true,
-                        "style": "numeric",
-                        "count": 5,
-                        "length": 8,
-                        "thickness": 1
-                      }
-                    },
-                    "layout": {
-                      "width": 120,
-                      "height": 120
-                    },
-                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Q"
-                  }
-                }
+            "layout_columns": 2,
+            "column_sizing": [
+              {
+                "weight": 1
               },
+              {
+                "weight": 1
+              }
+            ],
+            "fields": {
               "Band_0": {
                 "type": "OcaBlock",
-                "layout_columns": 1,
+                "layout_columns": 2,
                 "description": {
                   "En": "Low Band"
                 },
                 "fields": {
+                  "Shelf_Switch": {
+                    "type": "_WinkButton",
+                    "label": {
+                      "En": "SHELF"
+                    },
+                    "latching": true,
+                    "color": "#F4902C",
+                    "shutter_color": "#000000",
+                    "shape_type": "square",
+                    "radius": 4,
+                    "text_inside": "SHELF",
+                    "text_inside_color": "#000000",
+                    "domain": {
+                      "primary": {
+                        "min": 0,
+                        "max": 1,
+                        "value_default": 0
+                      }
+                    },
+                    "layout": {
+                      "width": 48,
+                      "height": 40
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/Low/Shelf"
+                  },
                   "LTP_Freq_Gain": {
                     "type": "_CustomLTP",
                     "label": {
@@ -201,129 +91,163 @@
                       "cap_outline_color": "#4CAF50",
                       "freestyle": true,
                       "knob_style": "wbs-elma",
-                      "cap_color": "#4CAF50"
+                      "cap_color": "#4CAF50",
+                      "cap_radius": 28,
+                      "rotation2_min": 0.1,
+                      "rotation2_max": 10,
+                      "rotation2_default": 0.7,
+                      "cap_color_2": "#ffffff"
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 100
+                      "height": 130
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Low",
                     "wheel_controls_pot": true
+                  }
+                },
+                "column_spacing": 12,
+                "column_sizing": [
+                  {
+                    "weight": 0,
+                    "minwidth": 74
                   },
-                  "LTP_Break": {
-                    "type": "_Label",
+                  {
+                    "weight": 1
+                  }
+                ]
+              },
+              "Band_4": {
+                "type": "OcaBlock",
+                "layout_columns": 2,
+                "description": {
+                  "En": "High Band"
+                },
+                "fields": {
+                  "LTP_Freq_Gain": {
+                    "type": "_CustomLTP",
                     "label": {
-                      "En": ""
+                      "En": "Freq / Gain"
+                    },
+                    "fader_config": {
+                      "domain": {
+                        "min": 1600.0,
+                        "max": 20000.0
+                      },
+                      "value": {
+                        "default_value": 12000.0
+                      },
+                      "cosmetics": {
+                        "colors": {
+                          "highlight": "#F44336"
+                        }
+                      },
+                      "readout": {
+                        "show_value": false,
+                        "show_units": false
+                      }
+                    },
+                    "knob_config": {
+                      "rotation_min": -32.0,
+                      "rotation_max": 32.0,
+                      "rotation_default": 0.0,
+                      "cap_outline_color": "#F44336",
+                      "freestyle": true,
+                      "knob_style": "wbs-elma",
+                      "cap_color": "#F44336",
+                      "cap_radius": 28,
+                      "rotation2_min": 0.1,
+                      "rotation2_max": 10,
+                      "rotation2_default": 0.7,
+                      "cap_color_2": "#ffffff"
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 30
-                    }
-                  },
-                  "Lower_Controls": {
-                    "type": "OcaBlock",
-                    "layout_columns": 3,
-                    "description": {
-                      "show_label": false
+                      "height": 130
                     },
-                    "column_sizing": [
-                      {
-                        "weight": 1
-                      },
-                      {
-                        "weight": 1
-                      },
-                      {
-                        "weight": 1
+                    "topic": "OpenAir/Gui/EQ_Params/High",
+                    "wheel_controls_pot": true
+                  },
+                  "Shelf_Switch": {
+                    "type": "_WinkButton",
+                    "label": {
+                      "En": "SHELF"
+                    },
+                    "latching": true,
+                    "color": "#F4902C",
+                    "shutter_color": "#000000",
+                    "shape_type": "square",
+                    "radius": 4,
+                    "text_inside": "SHELF",
+                    "text_inside_color": "#000000",
+                    "domain": {
+                      "primary": {
+                        "min": 0,
+                        "max": 1,
+                        "value_default": 0
                       }
-                    ],
-                    "fields": {
-                      "Shelf_Switch": {
-                        "type": "_Button",
-                        "label": {
-                          "En": "Shelf Mode"
-                        },
-                        "domain": {
-                          "primary": {
-                            "min": 0,
-                            "max": 1,
-                            "value_default": 0
-                          }
-                        },
-                        "layout": {
-                          "width": 60,
-                          "height": 40
-                        },
-                        "topic": "OpenAir/Gui/EQ_Params/Low/Shelf"
-                      },
-                      "Q_Knob": {
-                        "type": "_Knob",
-                        "label": {
-                          "En": "Q"
-                        },
-                        "domain": {
-                          "primary": {
-                            "min": 0.1,
-                            "max": 10.0,
-                            "value_default": 0.7
-                          }
-                        },
-                        "cosmetics": {
-                          "visualization": "wbs-elma",
-                          "colors": {
-                            "primary": "#546E7A",
-                            "cap": "#4CAF50",
-                            "tick": "#aaaaaa"
-                          },
-                          "styling": {
-                            "fill_color": "#546E7A",
-                            "cap_color": "#4CAF50",
-                            "outline_color": "#000",
-                            "outline_thickness": 1
-                          },
-                          "flutes": 18,
-                          "cap": {
-                            "show": true,
-                            "color": "#4CAF50"
-                          },
-                          "wing": {
-                            "show": false,
-                            "color": "#546E7A",
-                            "length": 0.2,
-                            "both": false
-                          },
-                          "pointer_tip": {
-                            "show": true,
-                            "color": "#546E7A",
-                            "length": 0.2
-                          },
-                          "line": {
-                            "color": "#ffffff"
-                          },
-                          "scale": {
-                            "show": true,
-                            "style": "numeric",
-                            "count": 5,
-                            "length": 8,
-                            "thickness": 1
-                          }
-                        },
-                        "layout": {
-                          "width": 120,
-                          "height": 120
-                        },
-                        "topic": "OpenAir/Gui/EQ_Params/Low/Q"
-                      },
-                      "Spacer": {
-                        "type": "_Label",
-                        "label": {
-                          "En": ""
-                        }
-                      }
-                    }
+                    },
+                    "layout": {
+                      "width": 48,
+                      "height": 40
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/High/Shelf"
                   }
-                }
+                },
+                "column_spacing": 12,
+                "column_sizing": [
+                  {
+                    "weight": 1
+                  },
+                  {
+                    "weight": 0,
+                    "minwidth": 74
+                  }
+                ]
+              }
+            }
+          },
+          "EQ_Graph": {
+            "type": "_Equalization",
+            "label": {
+              "En": "Master Bus Parametric EQ"
+            },
+            "topics": {
+              "LoCut": "OpenAir/Gui/EQ_Params/LoCut",
+              "Low": "OpenAir/Gui/EQ_Params/Low",
+              "LowMid": "OpenAir/Gui/EQ_Params/LowMid",
+              "Mid": "OpenAir/Gui/EQ_Params/Mid",
+              "HighMid": "OpenAir/Gui/EQ_Params/HighMid",
+              "High": "OpenAir/Gui/EQ_Params/High",
+              "HiCut": "OpenAir/Gui/EQ_Params/HiCut"
+            },
+            "geometry": {
+              "width": "100%",
+              "height": 400
+            },
+            "cosmetics": {
+              "bg_color": "black",
+              "bg_opacity": 50
+            }
+          },
+          "Mid_Bands": {
+            "type": "OcaBlock",
+            "description": {
+              "En": ""
+            },
+            "layout_columns": 3,
+            "column_sizing": [
+              {
+                "weight": 1
               },
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              }
+            ],
+            "fields": {
               "Band_1": {
                 "type": "OcaBlock",
                 "layout_columns": 1,
@@ -346,7 +270,7 @@
                       },
                       "cosmetics": {
                         "colors": {
-                          "highlight": "#FFEB3B"
+                          "highlight": "#2196F3"
                         }
                       },
                       "readout": {
@@ -358,14 +282,19 @@
                       "rotation_min": -32.0,
                       "rotation_max": 32.0,
                       "rotation_default": 12.0,
-                      "cap_outline_color": "#FFEB3B",
+                      "cap_outline_color": "#2196F3",
                       "freestyle": true,
                       "knob_style": "wbs-elma",
-                      "cap_color": "#FFEB3B"
+                      "cap_color": "#2196F3",
+                      "cap_radius": 28,
+                      "rotation2_min": 0.1,
+                      "rotation2_max": 24,
+                      "rotation2_default": 0.7,
+                      "cap_color_2": "#ffffff"
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 100
+                      "height": 130
                     },
                     "topic": "OpenAir/Gui/EQ_Params/LowMid",
                     "wheel_controls_pot": true,
@@ -374,76 +303,9 @@
                         "color": "#000000"
                       }
                     }
-                  },
-                  "LTP_Break": {
-                    "type": "_Label",
-                    "label": {
-                      "En": ""
-                    },
-                    "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
-                  },
-                  "Q_Knob": {
-                    "type": "_Knob",
-                    "label": {
-                      "En": "Q"
-                    },
-                    "domain": {
-                      "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 0.7
-                      }
-                    },
-                    "cosmetics": {
-                      "visualization": "wbs-elma",
-                      "colors": {
-                        "primary": "#546E7A",
-                        "cap": "#FFEB3B",
-                        "tick": "#aaaaaa"
-                      },
-                      "styling": {
-                        "fill_color": "#546E7A",
-                        "cap_color": "#FFEB3B",
-                        "outline_color": "#000",
-                        "outline_thickness": 1
-                      },
-                      "flutes": 18,
-                      "cap": {
-                        "show": true,
-                        "color": "#FFEB3B"
-                      },
-                      "wing": {
-                        "show": false,
-                        "color": "#546E7A",
-                        "length": 0.2,
-                        "both": false
-                      },
-                      "pointer_tip": {
-                        "show": true,
-                        "color": "#546E7A",
-                        "length": 0.2
-                      },
-                      "line": {
-                        "color": "#000000"
-                      },
-                      "scale": {
-                        "show": true,
-                        "style": "numeric",
-                        "count": 5,
-                        "length": 8,
-                        "thickness": 1
-                      }
-                    },
-                    "layout": {
-                      "width": 120,
-                      "height": 120
-                    },
-                    "topic": "OpenAir/Gui/EQ_Params/LowMid/Q"
                   }
-                }
+                },
+                "column_spacing": 12
               },
               "Band_2": {
                 "type": "OcaBlock",
@@ -482,11 +344,16 @@
                       "cap_outline_color": "#FFEB3B",
                       "freestyle": true,
                       "knob_style": "wbs-elma",
-                      "cap_color": "#FFEB3B"
+                      "cap_color": "#FFEB3B",
+                      "cap_radius": 28,
+                      "rotation2_min": 0.1,
+                      "rotation2_max": 24,
+                      "rotation2_default": 0.7,
+                      "cap_color_2": "#ffffff"
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 100
+                      "height": 130
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Mid",
                     "wheel_controls_pot": true,
@@ -495,76 +362,9 @@
                         "color": "#000000"
                       }
                     }
-                  },
-                  "LTP_Break": {
-                    "type": "_Label",
-                    "label": {
-                      "En": ""
-                    },
-                    "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
-                  },
-                  "Q_Knob": {
-                    "type": "_Knob",
-                    "label": {
-                      "En": "Q"
-                    },
-                    "domain": {
-                      "primary": {
-                        "min": 0.1,
-                        "max": 10.0,
-                        "value_default": 0.7
-                      }
-                    },
-                    "cosmetics": {
-                      "visualization": "wbs-elma",
-                      "colors": {
-                        "primary": "#546E7A",
-                        "cap": "#FFEB3B",
-                        "tick": "#aaaaaa"
-                      },
-                      "styling": {
-                        "fill_color": "#546E7A",
-                        "cap_color": "#FFEB3B",
-                        "outline_color": "#000",
-                        "outline_thickness": 1
-                      },
-                      "flutes": 18,
-                      "cap": {
-                        "show": true,
-                        "color": "#FFEB3B"
-                      },
-                      "wing": {
-                        "show": false,
-                        "color": "#546E7A",
-                        "length": 0.2,
-                        "both": false
-                      },
-                      "pointer_tip": {
-                        "show": true,
-                        "color": "#546E7A",
-                        "length": 0.2
-                      },
-                      "line": {
-                        "color": "#000000"
-                      },
-                      "scale": {
-                        "show": true,
-                        "style": "numeric",
-                        "count": 5,
-                        "length": 8,
-                        "thickness": 1
-                      }
-                    },
-                    "layout": {
-                      "width": 120,
-                      "height": 120
-                    },
-                    "topic": "OpenAir/Gui/EQ_Params/Mid/Q"
                   }
-                }
+                },
+                "column_spacing": 12
               },
               "Band_3": {
                 "type": "OcaBlock",
@@ -588,7 +388,7 @@
                       },
                       "cosmetics": {
                         "colors": {
-                          "highlight": "#FFEB3B"
+                          "highlight": "#F4902C"
                         }
                       },
                       "readout": {
@@ -600,14 +400,19 @@
                       "rotation_min": -32.0,
                       "rotation_max": 32.0,
                       "rotation_default": 0.0,
-                      "cap_outline_color": "#FFEB3B",
+                      "cap_outline_color": "#F4902C",
                       "freestyle": true,
                       "knob_style": "wbs-elma",
-                      "cap_color": "#FFEB3B"
+                      "cap_color": "#F4902C",
+                      "cap_radius": 28,
+                      "rotation2_min": 0.1,
+                      "rotation2_max": 24,
+                      "rotation2_default": 0.7,
+                      "cap_color_2": "#ffffff"
                     },
                     "layout": {
                       "width": "100%",
-                      "height": 100
+                      "height": 130
                     },
                     "topic": "OpenAir/Gui/EQ_Params/HighMid",
                     "wheel_controls_pot": true,
@@ -616,16 +421,111 @@
                         "color": "#000000"
                       }
                     }
-                  },
-                  "LTP_Break": {
-                    "type": "_Label",
+                  }
+                },
+                "column_spacing": 12
+              }
+            }
+          },
+          "Cut_Filters": {
+            "type": "OcaBlock",
+            "description": {
+              "En": ""
+            },
+            "layout_columns": 2,
+            "column_sizing": [
+              {
+                "weight": 1
+              },
+              {
+                "weight": 1
+              }
+            ],
+            "fields": {
+              "Band_LoCut": {
+                "type": "OcaBlock",
+                "layout_columns": 3,
+                "description": {
+                  "En": "LoCut"
+                },
+                "fields": {
+                  "Enable": {
+                    "type": "_WinkButton",
                     "label": {
-                      "En": ""
+                      "En": "ON"
+                    },
+                    "latching": true,
+                    "color": "#D5D5D5",
+                    "shutter_color": "#000000",
+                    "shape_type": "square",
+                    "radius": 4,
+                    "text_inside": "ON",
+                    "text_inside_color": "#000000",
+                    "domain": {
+                      "primary": {
+                        "min": 0,
+                        "max": 1,
+                        "value_default": 1
+                      }
                     },
                     "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
+                      "width": 56,
+                      "height": 48
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Enable"
+                  },
+                  "Freq_Knob": {
+                    "type": "_Knob",
+                    "label": {
+                      "En": "Freq"
+                    },
+                    "domain": {
+                      "primary": {
+                        "min": 20,
+                        "max": 400,
+                        "value_default": 20
+                      }
+                    },
+                    "cosmetics": {
+                      "visualization": "wbs-elma",
+                      "colors": {
+                        "primary": "#546E7A",
+                        "cap": "#D5D5D5",
+                        "tick": "#aaaaaa"
+                      },
+                      "styling": {
+                        "fill_color": "#546E7A",
+                        "cap_color": "#D5D5D5",
+                        "outline_color": "#000",
+                        "outline_thickness": 1
+                      },
+                      "flutes": 18,
+                      "cap": {
+                        "show": true,
+                        "color": "#D5D5D5"
+                      },
+                      "pointer_tip": {
+                        "show": true,
+                        "color": "#546E7A",
+                        "length": 0.2
+                      },
+                      "line": {
+                        "color": "#000"
+                      },
+                      "scale": {
+                        "show": true,
+                        "style": "numeric",
+                        "count": 3,
+                        "length": 5,
+                        "thickness": 1
+                      }
+                    },
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Freq",
+                    "logarithmic": true
                   },
                   "Q_Knob": {
                     "type": "_Knob",
@@ -635,7 +535,7 @@
                     "domain": {
                       "primary": {
                         "min": 0.1,
-                        "max": 10.0,
+                        "max": 10,
                         "value_default": 0.7
                       }
                     },
@@ -643,25 +543,19 @@
                       "visualization": "wbs-elma",
                       "colors": {
                         "primary": "#546E7A",
-                        "cap": "#FFEB3B",
+                        "cap": "#D5D5D5",
                         "tick": "#aaaaaa"
                       },
                       "styling": {
                         "fill_color": "#546E7A",
-                        "cap_color": "#FFEB3B",
+                        "cap_color": "#D5D5D5",
                         "outline_color": "#000",
                         "outline_thickness": 1
                       },
                       "flutes": 18,
                       "cap": {
                         "show": true,
-                        "color": "#FFEB3B"
-                      },
-                      "wing": {
-                        "show": false,
-                        "color": "#546E7A",
-                        "length": 0.2,
-                        "both": false
+                        "color": "#D5D5D5"
                       },
                       "pointer_tip": {
                         "show": true,
@@ -669,191 +563,161 @@
                         "length": 0.2
                       },
                       "line": {
-                        "color": "#000000"
+                        "color": "#000"
                       },
                       "scale": {
                         "show": true,
                         "style": "numeric",
-                        "count": 5,
-                        "length": 8,
+                        "count": 3,
+                        "length": 5,
                         "thickness": 1
                       }
                     },
                     "layout": {
-                      "width": 120,
-                      "height": 120
+                      "width": 84,
+                      "height": 84
                     },
-                    "topic": "OpenAir/Gui/EQ_Params/HighMid/Q"
-                  }
-                }
-              },
-              "Band_4": {
-                "type": "OcaBlock",
-                "layout_columns": 1,
-                "description": {
-                  "En": "High Band"
-                },
-                "fields": {
-                  "LTP_Freq_Gain": {
-                    "type": "_CustomLTP",
-                    "label": {
-                      "En": "Freq / Gain"
-                    },
-                    "fader_config": {
-                      "domain": {
-                        "min": 1600.0,
-                        "max": 20000.0
-                      },
-                      "value": {
-                        "default_value": 12000.0
-                      },
-                      "cosmetics": {
-                        "colors": {
-                          "highlight": "#F44336"
-                        }
-                      },
-                      "readout": {
-                        "show_value": false,
-                        "show_units": false
-                      }
-                    },
-                    "knob_config": {
-                      "rotation_min": -32.0,
-                      "rotation_max": 32.0,
-                      "rotation_default": 0.0,
-                      "cap_outline_color": "#F44336",
-                      "freestyle": true,
-                      "knob_style": "wbs-elma",
-                      "cap_color": "#F44336"
-                    },
-                    "layout": {
-                      "width": "100%",
-                      "height": 100
-                    },
-                    "topic": "OpenAir/Gui/EQ_Params/High",
-                    "wheel_controls_pot": true
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Q"
                   },
-                  "LTP_Break": {
-                    "type": "_Label",
+                  "Slope_Selector": {
+                    "type": "SelectorSwitch",
                     "label": {
-                      "En": ""
+                      "En": "Slope"
                     },
-                    "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
-                  },
-                  "Lower_Controls": {
-                    "type": "OcaBlock",
-                    "layout_columns": 3,
-                    "description": {
-                      "show_label": false
-                    },
-                    "column_sizing": [
-                      {
-                        "weight": 1
-                      },
-                      {
-                        "weight": 1
-                      },
-                      {
-                        "weight": 1
-                      }
+                    "positions": [
+                      "6",
+                      "12",
+                      "18",
+                      "24",
+                      "48"
                     ],
-                    "fields": {
-                      "Spacer": {
-                        "type": "_Label",
-                        "label": {
-                          "En": ""
-                        }
-                      },
-                      "Q_Knob": {
-                        "type": "_Knob",
-                        "label": {
-                          "En": "Q"
-                        },
-                        "domain": {
-                          "primary": {
-                            "min": 0.1,
-                            "max": 10.0,
-                            "value_default": 0.7
-                          }
-                        },
-                        "cosmetics": {
-                          "visualization": "wbs-elma",
-                          "colors": {
-                            "primary": "#546E7A",
-                            "cap": "#F44336",
-                            "tick": "#aaaaaa"
-                          },
-                          "styling": {
-                            "fill_color": "#546E7A",
-                            "cap_color": "#F44336",
-                            "outline_color": "#000",
-                            "outline_thickness": 1
-                          },
-                          "flutes": 18,
-                          "cap": {
-                            "show": true,
-                            "color": "#F44336"
-                          },
-                          "wing": {
-                            "show": false,
-                            "color": "#546E7A",
-                            "length": 0.2,
-                            "both": false
-                          },
-                          "pointer_tip": {
-                            "show": true,
-                            "color": "#546E7A",
-                            "length": 0.2
-                          },
-                          "line": {
-                            "color": "#ffffff"
-                          },
-                          "scale": {
-                            "show": true,
-                            "style": "numeric",
-                            "count": 5,
-                            "length": 8,
-                            "thickness": 1
-                          }
-                        },
-                        "layout": {
-                          "width": 120,
-                          "height": 120
-                        },
-                        "topic": "OpenAir/Gui/EQ_Params/High/Q"
-                      },
-                      "Shelf_Switch": {
-                        "type": "_Button",
-                        "label": {
-                          "En": "Shelf Mode"
-                        },
-                        "domain": {
-                          "primary": {
-                            "min": 0,
-                            "max": 1,
-                            "value_default": 0
-                          }
-                        },
-                        "layout": {
-                          "width": 60,
-                          "height": 40
-                        },
-                        "topic": "OpenAir/Gui/EQ_Params/High/Shelf"
+                    "continuous": false,
+                    "value": {
+                      "default_value": "12"
+                    },
+                    "indicator_color": "#D5D5D5",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#D5D5D5",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
                       }
-                    }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Slope",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
+                  },
+                  "Type_Selector": {
+                    "type": "SelectorSwitch",
+                    "label": {
+                      "En": "Type"
+                    },
+                    "positions": [
+                      "Butter",
+                      "L-R",
+                      "Bessel",
+                      "Cheby"
+                    ],
+                    "continuous": false,
+                    "value": {
+                      "default_value": "Butter"
+                    },
+                    "indicator_color": "#D5D5D5",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#D5D5D5",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
+                      }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Type",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
+                  },
+                  "Window_Selector": {
+                    "type": "SelectorSwitch",
+                    "label": {
+                      "En": "Window"
+                    },
+                    "positions": [
+                      "Rect",
+                      "Hann",
+                      "Hamm",
+                      "Black"
+                    ],
+                    "continuous": false,
+                    "value": {
+                      "default_value": "Hamm"
+                    },
+                    "indicator_color": "#D5D5D5",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#D5D5D5",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
+                      }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/LoCut/Window",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
                   }
-                }
+                },
+                "column_spacing": 6,
+                "row_spacing": 8
               },
               "Band_HiCut": {
                 "type": "OcaBlock",
-                "layout_columns": 1,
+                "layout_columns": 3,
                 "description": {
                   "En": "HiCut"
                 },
                 "fields": {
+                  "Enable": {
+                    "type": "_WinkButton",
+                    "label": {
+                      "En": "ON"
+                    },
+                    "latching": true,
+                    "color": "#555555",
+                    "shutter_color": "#000000",
+                    "shape_type": "square",
+                    "radius": 4,
+                    "text_inside": "ON",
+                    "text_inside_color": "#000000",
+                    "domain": {
+                      "primary": {
+                        "min": 0,
+                        "max": 1,
+                        "value_default": 1
+                      }
+                    },
+                    "layout": {
+                      "width": 56,
+                      "height": 48
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HiCut/Enable"
+                  },
                   "Freq_Knob": {
                     "type": "_Knob",
                     "label": {
@@ -895,27 +759,17 @@
                       "scale": {
                         "show": true,
                         "style": "numeric",
-                        "count": 5,
-                        "length": 8,
+                        "count": 3,
+                        "length": 5,
                         "thickness": 1
                       }
                     },
                     "layout": {
-                      "width": 120,
-                      "height": 120
+                      "width": 84,
+                      "height": 84
                     },
                     "topic": "OpenAir/Gui/EQ_Params/HiCut/Freq",
                     "logarithmic": true
-                  },
-                  "Spacer_1": {
-                    "type": "_Label",
-                    "label": {
-                      "En": ""
-                    },
-                    "layout": {
-                      "width": "100%",
-                      "height": 30
-                    }
                   },
                   "Q_Knob": {
                     "type": "_Knob",
@@ -958,36 +812,123 @@
                       "scale": {
                         "show": true,
                         "style": "numeric",
-                        "count": 5,
-                        "length": 8,
+                        "count": 3,
+                        "length": 5,
                         "thickness": 1
                       }
                     },
                     "layout": {
-                      "width": 120,
-                      "height": 120
+                      "width": 84,
+                      "height": 84
                     },
                     "topic": "OpenAir/Gui/EQ_Params/HiCut/Q"
+                  },
+                  "Slope_Selector": {
+                    "type": "SelectorSwitch",
+                    "label": {
+                      "En": "Slope"
+                    },
+                    "positions": [
+                      "6",
+                      "12",
+                      "18",
+                      "24",
+                      "48"
+                    ],
+                    "continuous": false,
+                    "value": {
+                      "default_value": "12"
+                    },
+                    "indicator_color": "#555555",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#555555",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
+                      }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HiCut/Slope",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
+                  },
+                  "Type_Selector": {
+                    "type": "SelectorSwitch",
+                    "label": {
+                      "En": "Type"
+                    },
+                    "positions": [
+                      "Butter",
+                      "L-R",
+                      "Bessel",
+                      "Cheby"
+                    ],
+                    "continuous": false,
+                    "value": {
+                      "default_value": "Butter"
+                    },
+                    "indicator_color": "#555555",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#555555",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
+                      }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HiCut/Type",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
+                  },
+                  "Window_Selector": {
+                    "type": "SelectorSwitch",
+                    "label": {
+                      "En": "Window"
+                    },
+                    "positions": [
+                      "Rect",
+                      "Hann",
+                      "Hamm",
+                      "Black"
+                    ],
+                    "continuous": false,
+                    "value": {
+                      "default_value": "Hamm"
+                    },
+                    "indicator_color": "#555555",
+                    "shape": "circle",
+                    "pointer_style": "line",
+                    "layout": {
+                      "width": 84,
+                      "height": 84
+                    },
+                    "cosmetics": {
+                      "colors": {
+                        "primary": "#555555",
+                        "secondary": "#444444",
+                        "background": "#2b2b2b"
+                      }
+                    },
+                    "topic": "OpenAir/Gui/EQ_Params/HiCut/Window",
+                    "hide_title": true,
+                    "hide_value": true,
+                    "label_pad": 8
                   }
-                }
-              },
-              "Spacer_1": {
-                "type": "_Label",
-                "label": {
-                  "En": ""
-                }
-              },
-              "Spacer_2": {
-                "type": "_Label",
-                "label": {
-                  "En": ""
-                }
-              },
-              "Spacer_3": {
-                "type": "_Label",
-                "label": {
-                  "En": ""
-                }
+                },
+                "column_spacing": 6,
+                "row_spacing": 8
               }
             }
           }

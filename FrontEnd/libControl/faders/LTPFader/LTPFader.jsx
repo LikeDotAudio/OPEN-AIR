@@ -42,6 +42,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     const canvasRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
     const dragRef = React.useRef({ active: false, mode: 'linear', startX: 0, startY: 0, startLin: 0, startRot: 0, isMod: false });
+    const lastMiddleRef = React.useRef(0); // timestamp of last middle-press (double-click detect)
     const [dragMode, setDragMode] = React.useState(null); // 'rail' | 'linear' | 'rot' | 'both'
     const [panLatch, setPanLatch] = React.useState(false);
 
@@ -83,28 +84,78 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
     const showVal   = fc?.readout?.show_value !== false;
     const showUnits = fc?.readout?.show_units !== false;
 
-    // Rotational domain (rotVal maps min..max -> -135..135 degrees).
+    // Dual-mode rotational pot. Mode 1 = primary rotation (e.g. Gain); Mode 2 =
+    // secondary rotation (e.g. Q), toggled by double-clicking the cap. Both values
+    // ride in the compound payload so nothing is lost when switching:
+    //   { value:<linear>, rotValue:<mode1>, rotValue2:<mode2>, mode:1|2 }.
     const rotMin = kc?.rotation_min !== undefined ? kc.rotation_min : -100;
     const rotMax = kc?.rotation_max !== undefined ? kc.rotation_max : 100;
+    const rot2Enabled = kc?.rotation2_min !== undefined || kc?.rotation2_max !== undefined || kc?.dual_pot === true;
+    const rot2Min = kc?.rotation2_min !== undefined ? kc.rotation2_min : 0.1;
+    const rot2Max = kc?.rotation2_max !== undefined ? kc.rotation2_max : 10;
+    const rot2Default = kc?.rotation2_default !== undefined ? kc.rotation2_default : rot2Min;
+
+    // Middle-button behaviour (configurable):
+    //   single press + vertical drag → "free mode" fine-adjust of the position
+    //   double middle-click        → normalize (recenter the active rotation)
+    const midFine = kc?.middle_fine !== undefined ? kc.middle_fine : 300;         // px per unit-norm (higher = finer)
+    const midDoubleMs = kc?.middle_double_ms !== undefined ? kc.middle_double_ms : 350;
+    const midDoubleNormalizes = kc?.middle_double_normalize !== false;
+
     const freestyle = !!(config?.interaction?.freestyle || fc?.freestyle || config?.freestyle);
     const isHorizontal = width > height;
 
-    // Cap cosmetics (demo body is a light disc with an orange indicator).
+    // Cap cosmetics (demo body is a light disc with an accent indicator).
     const capRadius = kc?.cap_radius || 18;
     const capBody   = kc?.cap_color || '#dcdcdc';
     const capAccent = kc?.cap_outline_color || railColor;
+    const capAccent2 = kc?.cap_color_2 || '#ffffff'; // Mode-2 (Q) cap colour
 
-    // Compound value extraction.
+    // Compound value extraction (legacy scalar / {value,rotValue} still accepted).
     const getNum = (v, fb) => (typeof v === 'number' ? v : (typeof v === 'string' && !Number.isNaN(parseFloat(v)) ? parseFloat(v) : fb));
     let linearVal = (min + max) / 2;
-    let currentRotVal = 0;
+    let gainVal = 0;         // mode-1 rotation
+    let qVal = rot2Default;  // mode-2 rotation
+    let potMode = 1;
     if (value && typeof value === 'object' && !Array.isArray(value)) {
         linearVal = getNum(value.value, linearVal);
-        currentRotVal = getNum(value.rotValue, currentRotVal);
+        gainVal = getNum(value.rotValue, gainVal);
+        qVal = getNum(value.rotValue2, qVal);
+        potMode = (value.mode === 2) ? 2 : 1;
     } else {
         linearVal = getNum(value, linearVal);
-        currentRotVal = getNum(rotValue, currentRotVal);
+        gainVal = getNum(rotValue, gainVal);
     }
+    if (!rot2Enabled) potMode = 1; // no second mode configured → always mode 1
+
+    // The active rotation (and its range/center) depends on the current mode.
+    const activeRotMin = potMode === 2 ? rot2Min : rotMin;
+    const activeRotMax = potMode === 2 ? rot2Max : rotMax;
+    const currentRotVal = potMode === 2 ? qVal : gainVal;
+    const capColorForMode = potMode === 2 ? capAccent2 : capAccent;
+
+    // Center + detent for the ACTIVE range (middle-click recenters; drag snaps).
+    const rotCenter = (activeRotMin + activeRotMax) / 2;
+    const rotDetent = Math.max(0.5, (activeRotMax - activeRotMin) * 0.015);
+    const snapRot = (v) => (Math.abs(v - rotCenter) <= rotDetent ? rotCenter : v);
+
+    // Emit a full compound payload, patching only what changed.
+    const emit = (patch) => {
+        if (!onChange) return;
+        onChange({
+            value: patch.value !== undefined ? patch.value : linearVal,
+            rotValue: patch.rotValue !== undefined ? patch.rotValue : gainVal,
+            rotValue2: patch.rotValue2 !== undefined ? patch.rotValue2 : qVal,
+            mode: patch.mode !== undefined ? patch.mode : potMode,
+        });
+    };
+    // Set the active-mode rotation (and optionally the linear value) in one emit.
+    const emitRot = (newActive, newLin) => {
+        const p = {};
+        if (newLin !== undefined) p.value = newLin;
+        if (potMode === 2) p.rotValue2 = newActive; else p.rotValue = newActive;
+        emit(p);
+    };
 
     // -- Coordinate mapping ---------------------------------------------------
     const isLog = config?.logarithmic ?? fc?.logarithmic ?? (min > 0 && max > 0 && (max / min) >= 100);
@@ -157,8 +208,8 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         // the pot: pan-latch on, or dragging in a rotation-capable mode.
         const isAdjustingPot = panLatch || dragMode === 'rot' || dragMode === 'both';
 
-        ctx.fillStyle = '#222';
-        ctx.fillRect(0, 0, width, height);
+        // Transparent background — let the panel/procedural backdrop show through.
+        ctx.clearRect(0, 0, width, height);
 
         // Track
         ctx.strokeStyle = '#444';
@@ -241,15 +292,15 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             ctx.fill();
             if (panLatch) ctx.restore();
 
-            // Rotation indicator
-            const rotRange = (rotMax - rotMin) || 200;
-            const normalizedRot = ((currentRotVal - rotMin) / rotRange) * 2 - 1;
+            // Rotation indicator (mapped over the ACTIVE range: gain or Q)
+            const rotRange = (activeRotMax - activeRotMin) || 200;
+            const normalizedRot = ((currentRotVal - activeRotMin) / rotRange) * 2 - 1;
             const angle = normalizedRot * 135;
             const rad = (angle - 90) * Math.PI / 180;
             const drawLen = isAdjustingPot ? capRadius * 10 : capRadius;
             const px = hx + drawLen * Math.cos(rad);
             const py = hy + drawLen * Math.sin(rad);
-            ctx.strokeStyle = capAccent;
+            ctx.strokeStyle = capColorForMode;
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(hx, hy);
@@ -257,7 +308,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             ctx.stroke();
 
             // Center dot
-            ctx.fillStyle = capAccent;
+            ctx.fillStyle = capColorForMode;
             ctx.beginPath();
             ctx.arc(hx, hy, 3, 0, Math.PI * 2);
             ctx.fill();
@@ -275,28 +326,37 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         }
 
         // -- Numerics ---------------------------------------------------------
+        const isDragging = dragMode !== null;
         if (!isNarrow) {
-            if (showVal) {
+            // Live value chip — shown whenever the readout is enabled OR the user is
+            // actively moving the control, so you always see the value while dragging.
+            if (showVal || isDragging) {
+                const fTxt = linearVal >= 1000 ? `${(linearVal / 1000).toFixed(2)}k` : `${linearVal.toFixed(0)}`;
+                const unit = showUnits && unitText ? unitText : 'Hz';
+                const actTxt = potMode === 2 ? `Q ${currentRotVal.toFixed(2)}` : `${currentRotVal.toFixed(1)} dB`;
+                const txt = `${fTxt} ${unit} · ${actTxt}`;
+                ctx.font = 'bold 11px Arial';
+                ctx.textAlign = 'center';
+                const bx = isHorizontal ? hx : cx;
+                const by = (isHorizontal ? cy : hy) - capRadius - 14;
+                const tw = ctx.measureText(txt).width + 12;
+                ctx.fillStyle = 'rgba(0,0,0,0.72)';
+                ctx.fillRect(bx - tw / 2, by - 10, tw, 17);
                 ctx.fillStyle = '#fff';
-                ctx.font = '10px Arial';
-                const lTxt = `L: ${linearVal.toFixed(1)}${showUnits && unitText ? ' ' + unitText : ''}`;
-                if (isHorizontal) {
-                    ctx.textAlign = 'right';
-                    ctx.fillText(lTxt, hx - 25, hy - 25);
-                    ctx.textAlign = 'left';
-                    ctx.fillText(`R: ${currentRotVal.toFixed(0)}`, hx + 25, hy - 25);
-                } else {
-                    ctx.textAlign = 'right';
-                    ctx.fillText(lTxt, cx - 25, hy + 4);
-                    ctx.textAlign = 'left';
-                    ctx.fillText(`R: ${currentRotVal.toFixed(0)}`, cx + 25, hy + 4);
-                }
+                ctx.fillText(txt, bx, by + 2);
             }
             if (freestyle) {
                 ctx.textAlign = 'center';
                 ctx.fillStyle = '#FF5555';
                 ctx.font = 'bold 10px Arial';
                 ctx.fillText('FREESTYLE', cx, isHorizontal ? height - 5 : height - 5);
+            }
+            // Dual-pot mode badge: shows which value the rotation is driving.
+            if (rot2Enabled) {
+                ctx.textAlign = 'center';
+                ctx.font = 'bold 9px Arial';
+                ctx.fillStyle = capColorForMode;
+                ctx.fillText(potMode === 2 ? 'MODE 2 · Q' : 'MODE 1 · GAIN', cx, 10);
             }
         } else if (showVal) {
             ctx.fillStyle = '#000';
@@ -311,7 +371,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             const ctx = canvasRef.current.getContext('2d');
             draw(ctx);
         }
-    }, [linearVal, currentRotVal, width, height, railColor, dragMode, panLatch, freestyle]);
+    }, [linearVal, currentRotVal, width, height, railColor, dragMode, panLatch, freestyle, potMode]);
 
     // -- Interaction ----------------------------------------------------------
     const getPos = (e) => {
@@ -331,6 +391,25 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
     const handlePointerDown = (e) => {
         const { x, y } = getPos(e);
+        // Middle button on the cap. Double middle-click → normalize (recenter the
+        // active rotation). Single press → "free mode": a vertical fine-adjust drag
+        // of the linear position (saves the start; up increments, down decrements).
+        if (e.button === 1) {
+            e.preventDefault();
+            if (!isOverHandle(x, y)) return;
+            const now = Date.now();
+            const isDouble = (now - lastMiddleRef.current) <= midDoubleMs;
+            lastMiddleRef.current = isDouble ? 0 : now;
+            if (isDouble && midDoubleNormalizes) {
+                emitRot(rotCenter);          // normalize
+                dragRef.current.active = false;
+                return;
+            }
+            try { canvasRef.current.setPointerCapture(e.pointerId); } catch (_) {}
+            dragRef.current = { active: true, mode: 'middle', startX: x, startY: y, startLin: linearVal, startLinNorm: valToNorm(linearVal), startRot: currentRotVal, moved: false };
+            setDragMode('linear');
+            return;
+        }
         try { canvasRef.current.setPointerCapture(e.pointerId); } catch (_) {}
         if (isOverHandle(x, y)) {
             const mode = freestyle ? 'both' : (panLatch || e.altKey ? 'rot' : 'linear');
@@ -339,13 +418,13 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
         } else {
             // Bare rail: alt → snap to default, otherwise absolute-Y jump/drag.
             if (e.altKey) {
-                onChange && onChange({ value: defaultVal, rotValue: currentRotVal });
+                emit({ value: defaultVal });
                 return;
             }
             dragRef.current = { active: true, mode: 'rail', startX: x, startY: y, startLin: linearVal, startLinNorm: valToNorm(linearVal), startRot: currentRotVal, isMod: false };
             setDragMode('rail');
             const v = Math.max(min, Math.min(max, getValFromPos(x, y)));
-            onChange && onChange({ value: v, rotValue: currentRotVal });
+            emit({ value: v });
         }
     };
 
@@ -356,7 +435,19 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
         if (d.mode === 'rail') {
             const v = Math.max(min, Math.min(max, getValFromPos(x, y)));
-            onChange && onChange({ value: v, rotValue: currentRotVal });
+            emit({ value: v });
+            return;
+        }
+
+        // Middle-drag "free mode": fine vertical adjust of the POTENTIOMETER (the
+        // active Gain/Q rotation) from the saved start — up = increment, down =
+        // decrement, independent of fader orientation.
+        if (d.mode === 'middle') {
+            const dPix = d.startY - y;              // up is positive
+            if (Math.abs(dPix) > 2) d.moved = true;
+            const change = (dPix / midFine) * (activeRotMax - activeRotMin); // midFine px = full range
+            const nextRot = snapRot(Math.max(activeRotMin, Math.min(activeRotMax, d.startRot + change)));
+            emitRot(nextRot);
             return;
         }
 
@@ -377,9 +468,11 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
         if (rotActive) {
             const dRot = isHorizontal ? (d.startY - y) : (x - d.startX);
-            let change = dRot * 0.5;
+            // Scale sensitivity to the active range so gain (span ~64) and Q
+            // (span ~10) feel the same under the pointer.
+            let change = dRot * ((activeRotMax - activeRotMin) / 128);
             if (freestyle) change /= 2;
-            nextRot = Math.max(rotMin, Math.min(rotMax, d.startRot + change));
+            nextRot = snapRot(Math.max(activeRotMin, Math.min(activeRotMax, d.startRot + change)));
         }
         if (linActive) {
             let normChange = 0;
@@ -391,10 +484,11 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             if (freestyle) normChange /= 2;
             nextLin = Math.max(min, Math.min(max, normToVal(d.startLinNorm + normChange)));
         }
-        onChange && onChange({ value: nextLin, rotValue: nextRot });
+        emitRot(nextRot, nextLin);
     };
 
     const handlePointerUp = (e) => {
+        // (Middle single-press = free-mode fine-adjust; normalize is on double-press.)
         dragRef.current.active = false;
         setDragMode(null);
         if (panLatch) setPanLatch(false);
@@ -405,7 +499,12 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
     const handleDoubleClick = (e) => {
         const { x, y } = getPos(e);
-        if (isOverHandle(x, y)) setPanLatch(true);
+        if (!isOverHandle(x, y)) return;
+        // Dual-pot: double-click toggles Mode 1 (gain) ↔ Mode 2 (Q). The cap flips
+        // colour to signal which value the rotation now drives. Falls back to the
+        // legacy pan-latch when no second mode is configured.
+        if (rot2Enabled) emit({ mode: potMode === 2 ? 1 : 2 });
+        else setPanLatch(true);
     };
 
     // Native, non-passive wheel so preventDefault works (fine-tune fader).
@@ -417,11 +516,14 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
             const delta = Math.sign(e.deltaY) * -1; // up is positive
             const wheelControlsPot = config?.fader_config?.wheel_controls_pot === true || config?.wheel_controls_pot === true;
             if (e.altKey || wheelControlsPot) {
-                const nr = Math.max(rotMin, Math.min(rotMax, currentRotVal + delta * 5));
-                onChange && onChange({ value: linearVal, rotValue: nr });
+                // Fine pot step scaled to the active range (Shift = 5× coarse);
+                // snaps to center when it lands within the detent.
+                const step = (e.shiftKey ? 5 : 1) * ((activeRotMax - activeRotMin) / 64);
+                const nr = snapRot(Math.max(activeRotMin, Math.min(activeRotMax, currentRotVal + delta * step)));
+                emitRot(nr);
             } else {
                 const nl = Math.max(min, Math.min(max, linearVal + delta * ((max - min) / 50)));
-                onChange && onChange({ value: nl, rotValue: currentRotVal });
+                emit({ value: nl });
             }
         };
         cv.addEventListener('wheel', onWheel, { passive: false });
@@ -449,9 +551,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
                     onDoubleClick={handleDoubleClick}
                     style={{
                         cursor: freestyle ? 'move' : 'ns-resize',
-                        backgroundColor: '#222',
-                        boxShadow: 'inset 0 0 5px rgba(0,0,0,0.5)',
-                        borderRadius: 4,
+                        backgroundColor: 'transparent',
                         touchAction: 'none',
                         display: 'block',
                     }}
@@ -470,17 +570,17 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
                             filterId={`ltpfader-${(config?.topic || Math.random().toString(36)).replace(/\W/g, '_')}`}
                             center={capRadius}
                             radius={capRadius}
-                            angle={-(((currentRotVal - rotMin) / ((rotMax - rotMin) || 200)) * 2 - 1) * 135 + 90}
+                            angle={-(((currentRotVal - activeRotMin) / ((activeRotMax - activeRotMin) || 200)) * 2 - 1) * 135 + 90}
                             config={{
                                 cosmetics: {
                                     styling: {
                                         fill_color: "#546E7A",
-                                        cap_color: kc?.cap_color || capAccent,
+                                        cap_color: capColorForMode,
                                         outline_color: "#000",
                                         outline_thickness: 1
                                     },
                                     flutes: 18,
-                                    cap: { show: true, color: kc?.cap_color || capAccent },
+                                    cap: { show: true, color: capColorForMode },
                                     wing: { show: false },
                                     pointer_tip: { show: true, color: "#546E7A", length: 0.2 },
                                     line: { color: config?.cosmetics?.line?.color || "#ffffff" }

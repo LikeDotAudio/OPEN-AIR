@@ -161,8 +161,19 @@ const AudioDynamics = ({ value: mqttData, config }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, [cfgKey, height, width, lang]);
 
-    const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
-    const publishFn = window.useMqttPublisher ? window.useMqttPublisher() : null;
+    const _messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    const [localOverrides, setLocalOverrides] = React.useState({});
+    const messages = { ..._messages, ...localOverrides };
+
+    const _publishFn = window.useMqttPublish ? window.useMqttPublish() : null;
+    const { connected } = window.useMqttStatus ? window.useMqttStatus() : { connected: true };
+    
+    const publishFn = React.useCallback((topic, payload) => {
+        if (_publishFn) _publishFn(topic, payload);
+        if (!connected) {
+            setLocalOverrides(prev => ({ ...prev, [topic]: typeof payload === 'string' ? payload : JSON.stringify(payload) }));
+        }
+    }, [_publishFn, connected]);
 
     // Handle real-time MQTT updates (if implemented in standard way)
     React.useEffect(() => {

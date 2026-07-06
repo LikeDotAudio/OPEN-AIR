@@ -83,9 +83,20 @@ const Reverb = ({ value: mqttData, config, topic }) => {
     const widthVal = config?.geometry?.width || config?.layout?.width || '100%';
     const width = typeof widthVal === 'number' ? `${widthVal}px` : widthVal;
 
-    const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    const _messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    const [localOverrides, setLocalOverrides] = React.useState({});
+    const messages = { ..._messages, ...localOverrides };
+
     // NB: useMqttPublish (the working hook), NOT useMqttPublisher.
-    const publishFn = window.useMqttPublish ? window.useMqttPublish() : null;
+    const _publishFn = window.useMqttPublish ? window.useMqttPublish() : null;
+    const { connected } = window.useMqttStatus ? window.useMqttStatus() : { connected: true };
+    const publishFn = React.useCallback((topic, payload) => {
+        if (_publishFn) _publishFn(topic, payload);
+        if (!connected) {
+            setLocalOverrides(prev => ({ ...prev, [topic]: typeof payload === 'string' ? payload : JSON.stringify(payload) }));
+        }
+    }, [_publishFn, connected]);
+
 
     const unwrapMqtt = (v) => {
         if (v === undefined || v === null) return undefined;

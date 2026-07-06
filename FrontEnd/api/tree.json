@@ -55006,24 +55006,12 @@
                 {
                   "name": "1588_PTP_Monitor",
                   "type": "directory",
-                  "children": [
-                    {
-                      "name": "__pycache__",
-                      "type": "directory",
-                      "children": []
-                    }
-                  ]
+                  "children": []
                 },
                 {
                   "name": "23_Showtime",
                   "type": "directory",
-                  "children": [
-                    {
-                      "name": "__pycache__",
-                      "type": "directory",
-                      "children": []
-                    }
-                  ]
+                  "children": []
                 }
               ]
             },
@@ -117315,11 +117303,6 @@
               "type": "directory",
               "children": [
                 {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
-                {
                   "name": "snmp_log.json",
                   "type": "file",
                   "content": {
@@ -117415,11 +117398,6 @@
               "name": "0_Status",
               "type": "directory",
               "children": [
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
                 {
                   "name": "snmp_status.json",
                   "type": "file",
@@ -117532,11 +117510,6 @@
               "type": "directory",
               "children": [
                 {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
-                {
                   "name": "snmp_mib.json",
                   "type": "file",
                   "content": {
@@ -117633,11 +117606,6 @@
               "type": "directory",
               "children": [
                 {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
-                {
                   "name": "snmp_verify.json",
                   "type": "file",
                   "content": {
@@ -117733,11 +117701,6 @@
               "name": "5_Verify_MIB",
               "type": "directory",
               "children": [
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
                 {
                   "name": "snmp_verify_mib.json",
                   "type": "file",
@@ -117841,11 +117804,6 @@
               "type": "directory",
               "children": [
                 {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
-                {
                   "name": "command_router.json",
                   "type": "file",
                   "content": {
@@ -117888,11 +117846,6 @@
               "name": "2_Matrix",
               "type": "directory",
               "children": [
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
                 {
                   "name": "protocol_matrix.json",
                   "type": "file",
@@ -117938,11 +117891,6 @@
           "name": "2138_SMPTE_2138",
           "type": "directory",
           "children": [
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
-            },
             {
               "name": "smpte2138_monitor.json",
               "type": "file",
@@ -118054,11 +118002,6 @@
           "name": "44_REST",
           "type": "directory",
           "children": [
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
-            },
             {
               "name": "gui_REST.json",
               "type": "file",
@@ -118313,11 +118256,6 @@
                     }
                   },
                   "path": "/5_Protocols/50_MIDI/1_Input/Midi_In.json"
-                },
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
                 }
               ]
             },
@@ -118325,11 +118263,6 @@
               "name": "2_Output",
               "type": "directory",
               "children": [
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
                 {
                   "name": "midi_output.json",
                   "type": "file",
@@ -118428,11 +118361,6 @@
           "name": "55_OSC",
           "type": "directory",
           "children": [
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
-            },
             {
               "name": "gui_OSC.json",
               "type": "file",
@@ -118548,11 +118476,6 @@
               "name": "00_Commands",
               "type": "directory",
               "children": [
-                {
-                  "name": "__pycache__",
-                  "type": "directory",
-                  "children": []
-                },
                 {
                   "name": "nmos_commands.json",
                   "type": "file",
@@ -118962,11 +118885,6 @@
                 }
               },
               "path": "/5_Protocols/67_DNSSD/DNSSD_GUI_Pointer.json"
-            },
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
             }
           ]
         },
@@ -119078,11 +118996,6 @@
                 }
               },
               "path": "/5_Protocols/67_MDNS/MDNS_GUI_Pointer.json"
-            },
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
             }
           ]
         },
@@ -119194,11 +119107,6 @@
                 }
               },
               "path": "/5_Protocols/67_SAP/SAP_GUI_Pointer.json"
-            },
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
             }
           ]
         },
@@ -119310,11 +119218,6 @@
                 }
               },
               "path": "/5_Protocols/70_AES70/AES70.json"
-            },
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
             }
           ]
         },
@@ -119426,11 +119329,6 @@
                 }
               },
               "path": "/5_Protocols/99_EMBER/Ember.json"
-            },
-            {
-              "name": "__pycache__",
-              "type": "directory",
-              "children": []
             }
           ]
         }
@@ -142462,11 +142360,6 @@
                         }
                       },
                       "path": "/5_Samples/1_buttons/2_Trapezoid/6_Media_Buttons/Media_Buttons.json"
-                    },
-                    {
-                      "name": "__pycache__",
-                      "type": "directory",
-                      "children": []
                     }
                   ]
                 },

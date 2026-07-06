@@ -87,8 +87,8 @@
                       "freestyle": true
                     },
                     "layout": {
-                      "width": 80,
-                      "height": 300
+                      "width": 300,
+                      "height": 80
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Low"
                   },
@@ -163,8 +163,8 @@
                       "freestyle": true
                     },
                     "layout": {
-                      "width": 80,
-                      "height": 300
+                      "width": 300,
+                      "height": 80
                     },
                     "topic": "OpenAir/Gui/EQ_Params/LowMid"
                   },
@@ -239,8 +239,8 @@
                       "freestyle": true
                     },
                     "layout": {
-                      "width": 80,
-                      "height": 300
+                      "width": 300,
+                      "height": 80
                     },
                     "topic": "OpenAir/Gui/EQ_Params/Mid"
                   },
@@ -315,8 +315,8 @@
                       "freestyle": true
                     },
                     "layout": {
-                      "width": 80,
-                      "height": 300
+                      "width": 300,
+                      "height": 80
                     },
                     "topic": "OpenAir/Gui/EQ_Params/HighMid"
                   },
@@ -391,8 +391,8 @@
                       "freestyle": true
                     },
                     "layout": {
-                      "width": 80,
-                      "height": 300
+                      "width": 300,
+                      "height": 80
                     },
                     "topic": "OpenAir/Gui/EQ_Params/High"
                   },

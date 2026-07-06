@@ -35,3 +35,6 @@ target/
 *.dll
 *.pyd
 .env
+
+.gemini/
+.claude/

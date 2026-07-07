@@ -24,8 +24,9 @@
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -48,7 +49,15 @@
                   }
                 },
                 "active": true,
-                "message": "CLOSE <channel_list>"
+                "message": "CLOSE <channel_list>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CLOSE Channels"
+                    },
+                    "text_size": 14
+                  }
+                }
               },
               "Input": {
                 "type": "OcaBlock",
@@ -93,8 +102,9 @@
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -117,7 +127,15 @@
                   }
                 },
                 "active": true,
-                "message": "OPEN <channel_list>"
+                "message": "OPEN <channel_list>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OPEN Channels"
+                    },
+                    "text_size": 14
+                  }
+                }
               },
               "Input": {
                 "type": "OcaBlock",
@@ -163,13 +181,14 @@
                 "description": {
                   "En": "Opens all others in bank, then closes target.",
                   "Fr": "Ouvre tous les autres dans la banque, puis ferme la cible.",
-                  "De": "Öffnet alle anderen in der Bank und schließt dann das Ziel.",
-                  "Es": "Abre todos los demás en el banco, luego cierra el objetivo."
+                  "De": "\u00d6ffnet alle anderen in der Bank und schlie\u00dft dann das Ziel.",
+                  "Es": "Abre todos los dem\u00e1s en el banco, luego cierra el objetivo."
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -192,7 +211,15 @@
                   }
                 },
                 "active": true,
-                "message": "SELECT <channel>"
+                "message": "SELECT <channel>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SELECT Channel"
+                    },
+                    "text_size": 14
+                  }
+                }
               },
               "Input": {
                 "type": "OcaBlock",
@@ -227,8 +254,8 @@
     "type": "OcaBlock",
     "description": {
       "En": "System Reset & Control",
-      "Fr": "Système Réinitialiser & Contrôle",
-      "De": "System Zurücksetzen & Steuerung",
+      "Fr": "Syst\u00e8me R\u00e9initialiser & Contr\u00f4le",
+      "De": "System Zur\u00fccksetzen & Steuerung",
       "Es": "Sistema Reiniciar & Control"
     },
     "fields": {
@@ -241,11 +268,11 @@
               "inactive": {
                 "text": {
                   "En": "RESET System",
-                  "Fr": "RESET Système",
+                  "Fr": "RESET Syst\u00e8me",
                   "De": "RESET System",
                   "Es": "RESET Sistema"
                 },
-                "text_size": 12,
+                "text_size": 14,
                 "text_color": "#cccccc"
               }
             },
@@ -273,6 +300,10 @@
             "active": true,
             "Execute Command": {
               "message": "RESET"
+            },
+            "layout": {
+              "height": 44,
+              "width": 250
             }
           },
           "Card_Reset": {
@@ -284,18 +315,19 @@
                   "inactive": {
                     "text": {
                       "En": "Card Reset",
-                      "Fr": "Card Réinitialiser",
-                      "De": "Card Zurücksetzen",
+                      "Fr": "Card R\u00e9initialiser",
+                      "De": "Card Zur\u00fccksetzen",
                       "Es": "Card Reiniciar"
                     },
-                    "text_size": 12,
+                    "text_size": 14,
                     "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -352,10 +384,10 @@
                 "text": {
                   "En": "Clear (CLR)",
                   "Fr": "Effacer (CLR)",
-                  "De": "Löschen (CLR)",
+                  "De": "L\u00f6schen (CLR)",
                   "Es": "Borrar (CLR)"
                 },
-                "text_size": 12,
+                "text_size": 14,
                 "text_color": "#cccccc"
               }
             },
@@ -383,6 +415,10 @@
             "active": true,
             "Execute Command": {
               "message": "CLR"
+            },
+            "layout": {
+              "height": 44,
+              "width": 250
             }
           }
         }
@@ -415,8 +451,9 @@
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -439,7 +476,15 @@
                   }
                 },
                 "active": true,
-                "message": "CLOSE? <channel>"
+                "message": "CLOSE? <channel>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "QUERY State"
+                    },
+                    "text_size": 14
+                  }
+                }
               },
               "Input": {
                 "type": "OcaBlock",
@@ -498,8 +543,9 @@
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "layout": {
-                  "height": 30,
-                  "sticky": ""
+                  "height": 44,
+                  "sticky": "",
+                  "width": 250
                 },
                 "style": {
                   "active": {
@@ -522,7 +568,15 @@
                   }
                 },
                 "active": true,
-                "message": "ID? <slot>"
+                "message": "ID? <slot>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "QUERY ID"
+                    },
+                    "text_size": 14
+                  }
+                }
               },
               "Input": {
                 "type": "OcaBlock",
@@ -554,7 +608,7 @@
                     "type": "_GuiValue",
                     "label": {
                       "En": "ID String",
-                      "Fr": "Chaîne ID",
+                      "Fr": "Cha\u00eene ID",
                       "De": "ID-String",
                       "Es": "Cadena de ID"
                     }

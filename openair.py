@@ -50,6 +50,13 @@ def main():
         subprocess.run(build_args + ["-p", "oaRustCore"], check=True)
         subprocess.run(build_args + ["-p", "open-air-orchestrator"], check=True)
         
+        print("🦀 [LAUNCHER] Building openair-yak agent...", flush=True)
+        yak_manifest = os.path.join(root, "BackEnd", "ComProtocols", "openair-yak", "Cargo.toml")
+        yak_build_args = ["cargo", "build", "--manifest-path", yak_manifest]
+        if release:
+            yak_build_args.append("--release")
+        subprocess.run(yak_build_args, check=True)
+        
         # Symlink the library so python helpers can use it
         built_lib = os.path.join(core_dir, "target", "release" if release else "debug", "liboaRustCore.so")
         link = os.path.join(core_dir, "oaRustCore.so")
@@ -64,6 +71,23 @@ def main():
     if "--no-rust" in args or "--no-orchestrator" in args:
         print("⏭️  [LAUNCHER] Rust execution skipped.", flush=True)
         return
+
+    print("🧹 [LAUNCHER] Cleaning up any ghost orchestrator processes...", flush=True)
+    subprocess.run(["pkill", "-f", "open-air-orchestrator"], check=False)
+    
+    print("🥊 [LAUNCHER] Bullying port 8000 to guarantee it's free...", flush=True)
+    subprocess.run("fuser -k -9 8000/tcp", shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+    subprocess.run("kill -9 $(lsof -t -i:8000)", shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+
+    # Start openair-yak in the background
+    yak_dir = os.path.join(root, "BackEnd", "ComProtocols", "openair-yak")
+    yak_binary_path = os.path.join(root, "BackEnd", "ComProtocols", "target", "release" if release else "debug", "openair-yak")
+    if os.path.exists(yak_binary_path):
+        print("🚀 [LAUNCHER] Starting openair-yak agent...", flush=True)
+        subprocess.run(["pkill", "-f", "openair-yak"], check=False)
+        subprocess.Popen([yak_binary_path], cwd=yak_dir)
+    else:
+        print(f"⚠️ [LAUNCHER] YAK Binary not found at {yak_binary_path}", file=sys.stderr)
 
     # Exec into the rust binary
     binary_path = os.path.join(core_dir, "target", "release" if release else "debug", "open-air-orchestrator")

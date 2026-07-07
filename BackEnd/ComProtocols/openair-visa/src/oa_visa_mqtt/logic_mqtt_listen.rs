@@ -63,21 +63,45 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
                     };
                     
                     if let Some(resource_name) = resource_opt {
-                        if payload.contains('?') {
+                        // Parse JSON if possible to extract correlation_id and command
+                        let mut correlation_id = None;
+                        let mut command_to_execute = payload.clone();
+                        
+                        if let Ok(json_val) = serde_json::from_str::<serde_json::Value>(&payload) {
+                            if let Some(cmd) = json_val.get("command").and_then(|v| v.as_str()) {
+                                command_to_execute = cmd.to_string();
+                            }
+                            if let Some(cid) = json_val.get("correlation_id").and_then(|v| v.as_str()) {
+                                correlation_id = Some(cid.to_string());
+                            }
+                        }
+
+                        if command_to_execute.contains('?') {
                             // Query: command contains a '?' so read response via PyVISA
-                            let result = Python::with_gil(|py| {
-                                execute_query(py, &resource_name, &payload)
+                            let result_str = Python::with_gil(|py| {
+                                execute_query(py, &resource_name, &command_to_execute)
                                     .unwrap_or_else(|e| format!("ERROR: {}", e))
                             });
                             
                             let read_topic = format!("{}/Read", topic_prefix);
                             let write_topic = format!("{}/Write", topic_prefix);
-                            let _ = client.publish(read_topic, QoS::AtLeastOnce, true, result.as_bytes());
+                            
+                            // Wrap result in JSON if correlation ID exists
+                            let final_result = if let Some(cid) = correlation_id {
+                                serde_json::json!({
+                                    "correlation_id": cid,
+                                    "result": result_str
+                                }).to_string()
+                            } else {
+                                result_str
+                            };
+                            
+                            let _ = client.publish(read_topic, QoS::AtLeastOnce, true, final_result.as_bytes());
                             let _ = client.publish(write_topic, QoS::AtLeastOnce, true, "".as_bytes());
                         } else {
                             // Write-only: send command via PyVISA
                             Python::with_gil(|py| {
-                                let _ = execute_write(py, &resource_name, &payload);
+                                let _ = execute_write(py, &resource_name, &command_to_execute);
                             });
                         }
                     }

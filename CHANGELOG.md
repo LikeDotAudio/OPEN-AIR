@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
+
+- **Intelligent Port Lifecycle Management**: Upgraded `openair.py` to aggressively hunt down and kill ghost processes on port 8000 using `fuser` and `lsof` during startup. This prevents the orchestrator from crashing due to "Address already in use" conflicts and ensures background VISA discovery tasks always complete.
+- **YAK Model-Aware Routing**: Integrated nested hardware model routing inside the YAK Repository. The YAK agent now dynamically builds SCPI templates based on the specific hardware models identified by the VISA scanner.
+- **Console Live-Monitoring**: Ripped out silent internal loggers from the Rust YAK agent (`mqtt.rs`, `rig.rs`, `set.rs`, `nab.rs`, `do_cmd.rs`) and replaced them with highly visible `println!` terminal output to mirror the MIDI agent's real-time MQTT debugging.
+- **Frontend YAK Command Router**: Migrated `CommandRouter` to a bespoke React component (`CommandRouter.jsx`) featuring an auto-scrolling, syntax-highlighted terminal interface that subscribes natively to YAK's `monitor/in` and `monitor/out` MQTT topics for live traffic visualization.
+- **Router UI Ergonomics (3235)**: Ran an automated script across `yak_router.json` to overhaul the tiny, default `OcaBooleanActuator` buttons. Actuators now feature massive 44x250 hitboxes and distinct, descriptive labels (e.g. `CLOSE Channels`, `SELECT Channel`) instead of the default generic "Toggle" text.
+- **Root Directory Cleanup**: Purged multiple unused experimental `.py` and `.js` scratch files to keep the root directory pristine.
+
 ## 2026-07-05 - Fader scaling, Web Splash, and Mobile PWA Enhancements
 
 - **FaderDial Overhaul**: Fixed an issue where horizontal fader elements overlapped their dial components due to unconstrained flex layout shrinking on smaller screens.

@@ -1,0 +1,59 @@
+{
+  "Multimeter_YAK_34401A_MEASure": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.1",
+    "geometry": { "anchor": "NSEW" },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": { "En": "MEASure Subsystem" },
+        "fields": {
+          "MEASure_Commands": {
+            "type": "OcaBlock",
+            "description": { "En": "MEASure Queries" },
+            "fields": {
+              "MEASure_Voltage_DC": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "active": true,
+                    "message": "MEASure:VOLTage:DC?"
+                  }
+                }
+              },
+              "MEASure_Voltage_AC": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "active": true,
+                    "message": "MEASure:VOLTage:AC?"
+                  }
+                }
+              },
+              "MEASure_Resistance": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "active": true,
+                    "message": "MEASure:RESistance?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

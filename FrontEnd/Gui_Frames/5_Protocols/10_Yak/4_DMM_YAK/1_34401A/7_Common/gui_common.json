@@ -1,0 +1,102 @@
+{
+  "DMM_YAK_34401A_Common": {
+    "type": "OcaBin",
+    "id": "50.100.4.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Common": {
+        "type": "OcaBlock",
+        "description": "Common Commands",
+        "fields": {
+          "Read_IDN": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "*IDN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "idn_string": {
+                    "value": "Device ID",
+                    "type": "_GuiValue",
+                    "label": "ID String",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          },
+          "Reset_Device": {
+            "type": "_GuiActuator",
+            "label_inactive": "*RST",
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "active": true,
+            "Execute Command": {
+              "message": "*RST"
+            }
+          },
+          "Clear_Status": {
+            "type": "_GuiActuator",
+            "label_inactive": "*CLS",
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "active": true,
+            "Execute Command": {
+              "message": "*CLS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

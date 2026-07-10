@@ -160,20 +160,45 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         el.style.animation = `oaPadGlow ${durMs}ms ease-out`;
     };
 
-    // Trigger a pad from the keyboard (full velocity), with a brief press + glow.
-    const triggerPadKey = (idx) => {
-        setVelocities((prev) => { const n = [...prev]; n[idx] = 100; return n; });
-        if (window.oaTriggerDrum) window.oaTriggerDrum(idx, 1);
-        if (typeof onHit === 'function') onHit(idx + 1, 100);
-        emitHit(idx, 100);
+    // Trigger a pad at a given velocity (0-100), with a brief press + glow.
+    // Shared by the number pad (100) and MIDI (mapped from note velocity).
+    const triggerPadAt = (idx, velocity) => {
+        const v = Math.max(1, Math.min(100, Math.round(velocity == null ? 100 : velocity)));
+        setVelocities((prev) => { const n = [...prev]; n[idx] = v; return n; });
+        if (window.oaTriggerDrum) window.oaTriggerDrum(idx, v / 100);
+        if (typeof onHit === 'function') onHit(idx + 1, v);
+        emitHit(idx, v);
         const el = padButtons.current[idx];
         if (el) {
             el.style.transform = 'scale(0.95)';
-            el.style.filter = 'brightness(1.5)';
-            startGlow(el, idx, 1);
+            el.style.filter = `brightness(${0.9 + 0.5 * (v / 100)})`;
+            startGlow(el, idx, v / 100);
             setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
         }
     };
+    const triggerPadKey = (idx) => triggerPadAt(idx, 100);
+
+    // ---- Web MIDI: map a connected controller's notes to the pads -----------
+    const [midiStatus, setMidiStatus] = React.useState('');
+    const [midiNote, setMidiNote] = React.useState(null);
+    const [midiBase, setMidiBase] = React.useState(36);   // MPC pads default to note 36
+    const midiBaseRef = React.useRef(36); midiBaseRef.current = midiBase;
+    const triggerRef = React.useRef(triggerPadAt); triggerRef.current = triggerPadAt;
+    React.useEffect(() => {
+        if (!navigator.requestMIDIAccess) { setMidiStatus('Web MIDI not supported (use Chrome/Edge)'); return; }
+        let access = null;
+        const onMsg = (e) => {
+            const status = e.data[0], note = e.data[1], vel = e.data[2];
+            if ((status & 0xf0) === 0x90 && vel > 0) {        // note-on
+                setMidiNote(note);
+                const idx = note - midiBaseRef.current;
+                if (idx >= 0 && idx < 16) triggerRef.current(idx, Math.max(1, Math.round(vel / 127 * 100)));
+            }
+        };
+        const attach = (a) => { const names = []; a.inputs.forEach((inp) => { inp.onmidimessage = onMsg; names.push(inp.name); }); setMidiStatus(names.length ? names.join(', ') : 'No MIDI inputs'); };
+        navigator.requestMIDIAccess().then((a) => { access = a; attach(a); a.onstatechange = () => attach(a); }).catch(() => setMidiStatus('MIDI access denied'));
+        return () => { if (access) access.inputs.forEach((inp) => { inp.onmidimessage = null; }); };
+    }, []);
 
     // Number-pad → pad mapping (only while this Sampler is on screen). The 3×3
     // numpad maps spatially to the bottom-left 3×3 of the MPC pads:
@@ -369,6 +394,13 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
 
             <div style={{ marginTop: '14px', fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
                 Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to browse sounds
+            </div>
+
+            {/* Web MIDI — map a connected controller's notes to the pads */}
+            <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', fontSize: '11px', color: '#888' }}>
+                <span>🎹 MIDI: <b style={{ color: (midiStatus && !/not supported|denied|No MIDI/i.test(midiStatus)) ? '#4caf50' : '#f55' }}>{midiStatus || 'connecting…'}</b></span>
+                <span>· pad 1 = note <input type="number" value={midiBase} onChange={(e) => setMidiBase(Number(e.target.value))} title="MIDI note number that triggers pad 1 (pads are consecutive from here)" style={{ width: '50px', background: '#000', color: '#f4902c', border: '1px solid #444', textAlign: 'center', borderRadius: '3px' }} /></span>
+                {midiNote != null && <span>· last note <b style={{ color: '#f4902c' }}>{midiNote}</b></span>}
             </div>
 
             {/* SETS — named snapshots of the whole kit */}

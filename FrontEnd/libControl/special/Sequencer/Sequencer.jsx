@@ -203,7 +203,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const loadTrackSample = async (trkIdx, file, meta) => {
         try {
             const ctx = window.oaAudioCtx();
-            const buf = await ctx.decodeAudioData(await file.arrayBuffer());
+            const buf = await window.oaDecodeAudio(ctx, await file.arrayBuffer());
             const prev = window.OA_DRUM_SAMPLES[trkIdx] || {};
             window.oaSetDrumSample(trkIdx, buf, { name: file.name, pitch: prev.pitch, loop: prev.loop, fade: prev.fade, offset: 0 });
             setTrackVer((v) => v + 1);

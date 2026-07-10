@@ -40,7 +40,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         try {
             const arrayBuf = await file.arrayBuffer();
             const ctx = window.oaAudioCtx();
-            const audioBuf = await ctx.decodeAudioData(arrayBuf);
+            const audioBuf = await window.oaDecodeAudio(ctx, arrayBuf);
             window.oaSetDrumSample(index, audioBuf, { name: file.name });
             setSampleNames((prev) => { const n = [...prev]; n[index] = file.name; return n; });
             publishSample(index, file.name, meta && meta.folder);

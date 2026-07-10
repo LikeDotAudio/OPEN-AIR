@@ -43,16 +43,9 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         try {
             const ctx = getCtx();
             const arrayBuffer = await file.arrayBuffer();
-            // decodeAudioData handles wav / mp3 / aiff / aac / m4a / ogg / flac per
-            // the browser's codecs — we just feed it any file. Dual promise+callback
-            // form so older Safari (callback-only) works too.
-            const decoded = await new Promise((resolve, reject) => {
-                let settled = false;
-                const ok = (b) => { if (!settled) { settled = true; resolve(b); } };
-                const no = (e) => { if (!settled) { settled = true; reject(e || new Error('decode failed')); } };
-                const p = ctx.decodeAudioData(arrayBuffer, ok, no);
-                if (p && typeof p.then === 'function') p.then(ok, no);
-            });
+            // oaDecodeAudio handles wav/mp3/aac/m4a/ogg/flac via the browser, and
+            // AIFF/AIFC via a hand-written parser (Chromium can't decode AIFF).
+            const decoded = await window.oaDecodeAudio(ctx, arrayBuffer);
             setFileName(file.name);
             setAudioBuffer(decoded);
             setView({ start: 0, end: 1 });

@@ -137,3 +137,78 @@ window.oaTriggerDrum = function (idx, volume, time) {
     window.oaPlayDrumVoice(ctx, window.OA_DRUM_KIT[idx], t, vol);
     return false;
 };
+
+// ---- Audio decode (with an AIFF/AIFC fallback) ------------------------------
+// Chromium's decodeAudioData frequently can't decode AIFF, so parse it by hand.
+// Reads an 80-bit IEEE extended float (AIFF sample rate).
+function oaRead80(dv, off) {
+    const expon = dv.getUint16(off, false);
+    const hi = dv.getUint32(off + 2, false);
+    const lo = dv.getUint32(off + 6, false);
+    const sign = (expon & 0x8000) ? -1 : 1;
+    const e = expon & 0x7fff;
+    if (e === 0 && hi === 0 && lo === 0) return 0;
+    const mant = hi * Math.pow(2, 32) + lo;
+    return sign * mant * Math.pow(2, e - 16383 - 63);
+}
+
+function oaDecodeAiff(ctx, ab) {
+    const dv = new DataView(ab);
+    const readStr = (o, n) => { let s = ''; for (let i = 0; i < n; i++) s += String.fromCharCode(dv.getUint8(o + i)); return s; };
+    let numChannels = 0, numFrames = 0, bitDepth = 0, sampleRate = 0, compression = 'NONE';
+    let ssndDataOffset = 0, ssndSize = 0;
+    let off = 12; // skip FORM + size + formType
+    while (off + 8 <= ab.byteLength) {
+        const id = readStr(off, 4);
+        const size = dv.getUint32(off + 4, false);
+        const body = off + 8;
+        if (id === 'COMM') {
+            numChannels = dv.getInt16(body, false);
+            numFrames = dv.getUint32(body + 2, false);
+            bitDepth = dv.getInt16(body + 6, false);
+            sampleRate = oaRead80(dv, body + 8);
+            if (size >= 22) compression = readStr(body + 18, 4);
+        } else if (id === 'SSND') {
+            const dataOffset = dv.getUint32(body, false);
+            ssndDataOffset = body + 8 + dataOffset;
+            ssndSize = size - 8 - dataOffset;
+        }
+        off = body + size + (size & 1); // chunks are padded to even length
+    }
+    if (!numChannels || !sampleRate) throw new Error('unsupported AIFF');
+    const le = (compression === 'sowt');   // sowt = byte-swapped (little-endian)
+    const bytesPer = bitDepth / 8;
+    const frames = numFrames || Math.floor(ssndSize / (bytesPer * numChannels));
+    const out = ctx.createBuffer(numChannels, frames, sampleRate);
+    const chans = [];
+    for (let c = 0; c < numChannels; c++) chans.push(out.getChannelData(c));
+    let p = ssndDataOffset;
+    for (let f = 0; f < frames; f++) {
+        for (let c = 0; c < numChannels; c++) {
+            let v = 0;
+            if (bitDepth === 16) { v = dv.getInt16(p, le) / 32768; p += 2; }
+            else if (bitDepth === 8) { v = dv.getInt8(p) / 128; p += 1; }
+            else if (bitDepth === 24) {
+                const a0 = dv.getUint8(p), a1 = dv.getUint8(p + 1), a2 = dv.getUint8(p + 2);
+                let val = le ? (a0 | (a1 << 8) | (a2 << 16)) : ((a0 << 16) | (a1 << 8) | a2);
+                if (val & 0x800000) val -= 0x1000000;
+                v = val / 8388608; p += 3;
+            } else if (bitDepth === 32) { v = dv.getInt32(p, le) / 2147483648; p += 4; }
+            else { p += bytesPer; }
+            chans[c][f] = v;
+        }
+    }
+    return out;
+}
+
+// Decode any audio ArrayBuffer. AIFF/AIFC is parsed manually (Chromium can't);
+// everything else goes to the browser's decodeAudioData.
+window.oaDecodeAudio = async function (ctx, arrayBuffer) {
+    const b = new Uint8Array(arrayBuffer);
+    const tag = (o) => (b.length > o + 3 ? String.fromCharCode(b[o], b[o + 1], b[o + 2], b[o + 3]) : '');
+    if (tag(0) === 'FORM' && (tag(8) === 'AIFF' || tag(8) === 'AIFC')) {
+        try { return oaDecodeAiff(ctx, arrayBuffer); }
+        catch (e) { /* fall through to native (Safari can do AIFF) */ }
+    }
+    return await ctx.decodeAudioData(arrayBuffer);
+};

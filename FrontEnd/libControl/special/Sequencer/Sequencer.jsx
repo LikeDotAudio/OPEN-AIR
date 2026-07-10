@@ -53,6 +53,70 @@ const BpmKnob = ({ value, min = 40, max = 300, onChange }) => {
     );
 };
 
+// Per-track sample menu: waveform + pitch + time-shift, opened by clicking a
+// track name. Edits the shared kit entry (OA_DRUM_SAMPLES[trkIdx]) directly.
+const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose, onChange }) => {
+    const entry = (window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx]) || null;
+    const hasBuf = !!(entry && entry.buffer);
+    const canvasRef = React.useRef(null);
+    const semiFromPitch = (p) => Math.round(12 * Math.log2(p || 1));
+    const [pitchSemi, setPitchSemi] = React.useState(semiFromPitch(entry && entry.pitch));
+    const [offset, setOffset] = React.useState((entry && entry.offset) || 0);
+
+    React.useEffect(() => {
+        const e = window.OA_DRUM_SAMPLES[trkIdx];
+        setPitchSemi(semiFromPitch(e && e.pitch));
+        setOffset((e && e.offset) || 0);
+    }, [version]);
+
+    React.useEffect(() => {
+        const c = canvasRef.current; if (!c) return;
+        c.width = c.clientWidth; c.height = c.clientHeight;
+        const cx = c.getContext('2d');
+        cx.fillStyle = '#0a0a0a'; cx.fillRect(0, 0, c.width, c.height);
+        const e = window.OA_DRUM_SAMPLES[trkIdx];
+        if (!e || !e.buffer) return;
+        const data = e.buffer.getChannelData(0);
+        const step = Math.ceil(data.length / c.width); const amp = c.height / 2;
+        cx.strokeStyle = '#f4902c'; cx.beginPath();
+        for (let x = 0; x < c.width; x++) { let mn = 1, mx = -1; for (let j = 0; j < step; j++) { const d = data[x * step + j]; if (d === undefined) break; if (d < mn) mn = d; if (d > mx) mx = d; } cx.moveTo(x, (1 + mn) * amp); cx.lineTo(x, (1 + mx) * amp); }
+        cx.stroke();
+        if (e.buffer.duration) { const ox = (e.offset || 0) / e.buffer.duration * c.width; cx.strokeStyle = '#8ab4f8'; cx.beginPath(); cx.moveTo(ox, 0); cx.lineTo(ox, c.height); cx.stroke(); }
+    }, [version, offset]);
+
+    const applyPitch = (s) => { setPitchSemi(s); window.oaUpdateDrumSample(trkIdx, { pitch: Math.pow(2, s / 12) }); onChange && onChange(); };
+    const applyOffset = (o) => { setOffset(o); window.oaUpdateDrumSample(trkIdx, { offset: o }); onChange && onChange(); };
+    const dur = hasBuf ? entry.buffer.duration : 0;
+
+    return (
+        <React.Fragment>
+            <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 9999 }} />
+            <div style={{ position: 'fixed', zIndex: 10000, width: '300px', top: Math.min(anchor.y, window.innerHeight - 340), left: Math.min(anchor.x, window.innerWidth - 320), background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', padding: '12px', color: '#eee', boxShadow: '0 8px 30px rgba(0,0,0,0.6)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ color: '#f4902c', fontWeight: 'bold', fontSize: '13px' }}>{trackName}</span>
+                    <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', fontSize: '16px' }}>×</button>
+                </div>
+                <div style={{ fontSize: '11px', color: '#aaa', marginBottom: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {hasBuf ? (entry.name || 'sample') : 'Synth voice — no sample loaded'}
+                </div>
+                <div style={{ width: '100%', height: '56px', background: '#0a0a0a', border: '1px solid #444' }}>
+                    <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
+                </div>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                    <button onClick={onBrowse} style={{ flex: 1, background: '#f4902c', color: '#111', border: 'none', borderRadius: '3px', padding: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>📁 Browse sample…</button>
+                    <button onClick={() => window.oaTriggerDrum && window.oaTriggerDrum(trkIdx, 1)} title="Preview" style={{ background: '#333', color: '#fff', border: '1px solid #444', borderRadius: '3px', padding: '6px 12px', cursor: 'pointer', fontSize: '12px' }}>►</button>
+                </div>
+                <div style={{ marginTop: '10px', opacity: hasBuf ? 1 : 0.4 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa' }}><span>PITCH</span><span style={{ color: '#f4902c' }}>{pitchSemi > 0 ? '+' : ''}{pitchSemi} st</span></div>
+                    <input type="range" min="-12" max="12" step="1" value={pitchSemi} disabled={!hasBuf} onChange={(e) => applyPitch(Number(e.target.value))} style={{ width: '100%' }} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa', marginTop: '6px' }}><span>TIME SHIFT (start)</span><span style={{ color: '#f4902c' }}>{offset.toFixed(3)}s</span></div>
+                    <input type="range" min="0" max={dur ? Number((dur * 0.9).toFixed(3)) : 0} step="0.001" value={offset} disabled={!hasBuf} onChange={(e) => applyOffset(Number(e.target.value))} style={{ width: '100%' }} />
+                </div>
+            </div>
+        </React.Fragment>
+    );
+};
+
 const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const audioCtxRef = React.useRef(null);
     const [isPlaying, setIsPlaying] = React.useState(false);
@@ -130,6 +194,20 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         window.addEventListener('oa-drum-hit', onDrumHit);
         return () => window.removeEventListener('oa-drum-hit', onDrumHit);
     }, []);
+
+    // Per-track sample menu (click a track name) + its Browse target.
+    const [trackMenu, setTrackMenu] = React.useState(null);   // { trkIdx, x, y }
+    const [browseTrack, setBrowseTrack] = React.useState(null);
+    const [trackVer, setTrackVer] = React.useState(0);
+    const loadTrackSample = async (trkIdx, file) => {
+        try {
+            const ctx = window.oaAudioCtx();
+            const buf = await ctx.decodeAudioData(await file.arrayBuffer());
+            const prev = window.OA_DRUM_SAMPLES[trkIdx] || {};
+            window.oaSetDrumSample(trkIdx, buf, { name: file.name, pitch: prev.pitch, loop: prev.loop, fade: prev.fade, offset: 0 });
+            setTrackVer((v) => v + 1);
+        } catch (e) { console.error('🛑 [Sequencer] load track sample:', e); }
+    };
 
     // Saved-pattern library — also pushed to / read from MQTT (retained), with a
     // localStorage seed so it still loads when the broker is offline.
@@ -344,7 +422,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                   const muted = mutes[trkIdx];
                   return (
                     <div key={trackName} style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                        <div style={{ width: '86px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '5px', paddingRight: '6px' }}>
+                        <div style={{ width: '96px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '5px', paddingRight: '6px', position: 'sticky', left: 0, background: '#1e1e1e', zIndex: 2 }}>
                             <button
                                 onClick={() => toggleMute(trkIdx)}
                                 title={muted ? `Unmute ${trackName}` : `Mute ${trackName}`}
@@ -352,7 +430,11 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                             >
                                 M
                             </button>
-                            <span style={{ fontSize: '11px', color: muted ? '#666' : '#ccc', textAlign: 'right' }}>
+                            <span
+                                onClick={(e) => { e.stopPropagation(); setTrackMenu({ trkIdx, x: e.clientX, y: e.clientY }); }}
+                                title={`${trackName} — click to pick a sample / pitch / time-shift`}
+                                style={{ fontSize: '11px', color: muted ? '#666' : '#ccc', textAlign: 'right', whiteSpace: 'nowrap', cursor: 'pointer' }}
+                            >
                                 {trackName}
                             </span>
                         </div>
@@ -424,6 +506,25 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     </div>
                 )}
             </div>
+
+            {trackMenu && (
+                <TrackSampleMenu
+                    trkIdx={trackMenu.trkIdx}
+                    trackName={(TRACKS[trackMenu.trkIdx] && TRACKS[trackMenu.trkIdx].name) || ''}
+                    anchor={{ x: trackMenu.x, y: trackMenu.y }}
+                    version={trackVer}
+                    onChange={() => setTrackVer((v) => v + 1)}
+                    onBrowse={() => setBrowseTrack(trackMenu.trkIdx)}
+                    onClose={() => setTrackMenu(null)}
+                />
+            )}
+            {browseTrack != null && window.SoundBrowse && (
+                <window.SoundBrowse
+                    targetLabel={(TRACKS[browseTrack] && TRACKS[browseTrack].name) || ''}
+                    onClose={() => setBrowseTrack(null)}
+                    onChoose={(file) => { loadTrackSample(browseTrack, file); setBrowseTrack(null); }}
+                />
+            )}
         </div>
     );
 };

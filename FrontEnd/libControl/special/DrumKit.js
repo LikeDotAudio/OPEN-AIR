@@ -56,7 +56,8 @@ window.oaSetDrumSample = function (idx, buffer, opts) {
     opts = opts || {};
     window.OA_DRUM_SAMPLES[idx] = {
         buffer: buffer,
-        pitch: opts.pitch || 1,     // playbackRate multiplier
+        pitch: opts.pitch || 1,     // playbackRate multiplier (pitch + speed)
+        offset: opts.offset || 0,   // start offset in seconds (time shift)
         loop: !!opts.loop,
         fade: !!opts.fade,
         name: opts.name || '',
@@ -93,9 +94,11 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume) {
     src.buffer = entry.buffer;
     src.playbackRate.value = entry.pitch || 1;
     src.loop = !!entry.loop;
+    const offset = Math.max(0, Math.min(entry.offset || 0, entry.buffer.duration - 0.001));
+    if (src.loop) src.loopStart = offset;
     src.connect(gain);
     gain.connect(ctx.destination);
-    const dur = entry.buffer.duration / (entry.pitch || 1);
+    const dur = (entry.buffer.duration - offset) / (entry.pitch || 1);
     const v = Math.max(0.0001, volume);
     if (entry.fade) {
         const f = Math.min(0.05, dur * 0.2);
@@ -108,7 +111,7 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume) {
     } else {
         gain.gain.setValueAtTime(v, time);
     }
-    src.start(time);
+    src.start(time, offset);
     return src;
 };
 

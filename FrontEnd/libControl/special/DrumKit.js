@@ -268,6 +268,27 @@ window.oaRestoreKit = async function (metaByIdx) {
     return { ok: true, restored };
 };
 
+// Ensure read permission on the persisted root folder (call from a user gesture).
+window.oaEnsureRootPermission = async function () {
+    const root = window.OA_SOUND_DIR || await window.oaIdbGet('oaRootDir');
+    if (!root) return false;
+    if (root.queryPermission) {
+        let p = await root.queryPermission({ mode: 'read' });
+        if (p !== 'granted' && root.requestPermission) p = await root.requestPermission({ mode: 'read' });
+        if (p !== 'granted') return false;
+    }
+    window.OA_SOUND_DIR = root;
+    return true;
+};
+
+// Resolve a File from {folder, name} using the persisted root (if permitted).
+window.oaResolveFile = async function (folderPath, name) {
+    const root = window.OA_SOUND_DIR || await window.oaIdbGet('oaRootDir');
+    if (!root) return null;
+    if (root.queryPermission) { const p = await root.queryPermission({ mode: 'read' }); if (p !== 'granted') return null; }
+    try { const fh = await oaNavigateToFile(root, folderPath, name); return await fh.getFile(); } catch (e) { return null; }
+};
+
 // Encode an AudioBuffer to a 16-bit PCM WAV ArrayBuffer (for RENDER/export).
 window.oaEncodeWav = function (audioBuffer) {
     const numCh = audioBuffer.numberOfChannels;

@@ -144,6 +144,8 @@ const SoundFolderNode = ({ name, handle, depth, defaultOpen, onSelectFolder, sel
     );
 };
 
+const loadFavs = () => { try { return JSON.parse(window.localStorage.getItem('oaSoundFavs')) || []; } catch (e) { return []; } };
+
 window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const supportsFS = typeof window.showDirectoryPicker === 'function';
     const [rootHandle, setRootHandle] = React.useState(supportsFS ? (window.OA_SOUND_DIR || null) : null);
@@ -164,6 +166,35 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const [deepResults, setDeepResults] = React.useState([]);
     const [deepSearching, setDeepSearching] = React.useState(false);
 
+    // Favorites (liked files), tracked over MQTT (retained) + localStorage.
+    const [favState, setFavState] = window.useMqttState('OpenAir/Gui/SoundFavorites', { items: loadFavs() });
+    const favorites = (favState && favState.items) || [];
+    React.useEffect(() => { try { localStorage.setItem('oaSoundFavs', JSON.stringify(favorites)); } catch (e) {} }, [favState]);
+    const [view, setView] = React.useState('files');   // 'files' | 'favorites'
+    const [favEntries, setFavEntries] = React.useState([]);
+    const isFav = (s) => !!s && favorites.some((f) => f.name === s.name && f.folder === (s.folder || ''));
+    const toggleFav = () => {
+        if (!selected) return;
+        const entry = { name: selected.name, folder: selected.folder || '' };
+        const exists = favorites.some((f) => f.name === entry.name && f.folder === entry.folder);
+        setFavState({ items: exists ? favorites.filter((f) => !(f.name === entry.name && f.folder === entry.folder)) : [...favorites, entry] });
+    };
+    const showFiles = () => { setView('files'); setSelectedIndex(-1); };
+    const showFavorites = async () => { setView('favorites'); setSelectedIndex(-1); if (window.oaEnsureRootPermission) await window.oaEnsureRootPermission(); };
+    // Resolve favorite files (from their folder path) when viewing favorites.
+    React.useEffect(() => {
+        if (view !== 'favorites') return;
+        let cancelled = false;
+        (async () => {
+            const es = await Promise.all(favorites.map(async (f) => {
+                const file = window.oaResolveFile ? await window.oaResolveFile(f.folder, f.name) : null;
+                return { name: f.name, folder: f.folder, file: file || undefined };
+            }));
+            if (!cancelled) setFavEntries(es);
+        })();
+        return () => { cancelled = true; };
+    }, [view, favState]);
+
     const bigCanvasRef = React.useRef(null);
     const gridScrollRef = React.useRef(null);
     const selectedThumbRef = React.useRef(null);
@@ -174,11 +205,12 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
 
     const [filter, setFilter] = React.useState('');
     const files = supportsFS ? folderFiles : flatEntries;
-    // Filtered view: for a real folder we deep-search the whole tree (uncapped);
-    // for the file-picker fallback we just filter the chosen files.
+    const baseList = view === 'favorites' ? favEntries : files;
+    // Filtered view: in the Files view of a real folder we deep-search the whole
+    // tree (uncapped); otherwise we just filter the current list.
     const shown = filter.trim()
-        ? (supportsFS ? deepResults : files.filter((f) => f.name.toLowerCase().includes(filter.trim().toLowerCase())))
-        : files;
+        ? ((view === 'files' && supportsFS) ? deepResults : baseList.filter((f) => f.name.toLowerCase().includes(filter.trim().toLowerCase())))
+        : baseList;
     const duration = buffer ? buffer.duration : 0;
 
     // Run the uncapped deep search when a filter is set on a real folder.
@@ -228,8 +260,9 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
         setSelectedIndex(idx);
         const entry = shown[idx];
         try {
-            const file = entry.file || await entry.handle.getFile();
-            const folder = supportsFS ? (selectedFolderPath + (entry.sub ? '/' + entry.sub : '')) : '';
+            const file = entry.file || (entry.handle && await entry.handle.getFile());
+            if (!file) { setErr('File unavailable — grant folder access or re-pick the folder.'); return; }
+            const folder = entry.folder != null ? entry.folder : (supportsFS ? (selectedFolderPath + (entry.sub ? '/' + entry.sub : '')) : '');
             setSelected({ name: entry.name, file, folder });
             setPos(0);
             try { setBuffer(await window.oaDecodeAudio(window.oaAudioCtx(), await file.arrayBuffer())); } catch (e) { setBuffer(null); }
@@ -321,6 +354,10 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 16px', borderBottom: '1px solid #2a2a2a', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', border: '1px solid #444', borderRadius: '4px', overflow: 'hidden' }}>
+                        <button onClick={showFiles} style={{ background: view === 'files' ? '#f4902c' : '#222', color: view === 'files' ? '#111' : '#ccc', border: 'none', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>FILES</button>
+                        <button onClick={showFavorites} style={{ background: view === 'favorites' ? '#f4902c' : '#222', color: view === 'favorites' ? '#111' : '#ccc', border: 'none', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>★ Favorites{favorites.length ? ` (${favorites.length})` : ''}</button>
+                    </div>
                     {supportsFS ? (
                         <button onClick={pickFolder} style={tbtn({ background: '#f4902c', color: '#111', border: 'none', fontWeight: 'bold' })}>📁 Choose folder…</button>
                     ) : (
@@ -351,7 +388,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                         )}
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                        {(chips.length > 0 || scanning) && (
+                        {view === 'files' && (chips.length > 0 || scanning) && (
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', padding: '6px 10px', borderBottom: '1px solid #2a2a2a', alignItems: 'center' }}>
                                 {scanning && <span style={{ fontSize: '11px', color: '#888' }}>scanning…</span>}
                                 {chips.map((c, i) => {
@@ -378,7 +415,9 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                                 </div>
                             ) : (
                                 <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>
-                                    {deepSearching ? 'Searching all folders…' : (scanning ? 'Scanning folders…' : (files.length ? 'No matches.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.')))}
+                                    {view === 'favorites'
+                                        ? (favorites.length ? 'No matching favorites.' : 'No favorites yet — open Files, pick a sound, and ☆ Favorite it.')
+                                        : (deepSearching ? 'Searching all folders…' : (scanning ? 'Scanning folders…' : (files.length ? 'No matches.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.'))))}
                                 </div>
                             )}
                         </div>
@@ -399,6 +438,10 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                         <label style={{ fontSize: '12px', color: '#ccc', display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <input type="checkbox" checked={loop} onChange={(e) => setLoop(e.target.checked)} /> Loop
                         </label>
+                        <button onClick={toggleFav} disabled={!selected} title="Add/remove this file from favorites"
+                            style={tbtn({ background: isFav(selected) ? '#f4902c' : '#333', color: isFav(selected) ? '#111' : '#fff', border: 'none', fontWeight: 'bold' })}>
+                            {isFav(selected) ? '★ Favorited' : '☆ Favorite'}
+                        </button>
                         <div style={{ flexGrow: 1 }} />
                         <button onClick={chooseIt} disabled={!selected} style={tbtn({ background: selected ? '#f4902c' : '#553', color: '#111', border: 'none', fontWeight: 'bold', padding: '8px 14px', cursor: selected ? 'pointer' : 'not-allowed' })}>
                             ⭳ Load to {targetLabel || 'pad'}

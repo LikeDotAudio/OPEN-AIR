@@ -15,8 +15,10 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     // playback volume AND the pad's visual glow.
     const [velocities, setVelocities] = React.useState(Array(16).fill(0));
 
-    // Hidden file inputs, one per pad, triggered only on ALT+press.
+    // Hidden file inputs, one per pad (fallback when the Sound Browse window
+    // isn't available). ALT+press normally opens the custom Sound Browse modal.
     const fileInputs = React.useRef([]);
+    const [browsePad, setBrowsePad] = React.useState(null);
 
     // The standard MPC layout is bottom-left to top-right:
     // 13 14 15 16
@@ -170,11 +172,12 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                 ref={(el) => { padButtons.current[idx] = el; }}
                                 title={hasSample ? `${name} — sample: ${sampleNames[idx]}\nALT+click to replace` : `${name} — synth voice\nALT+click to load a sample`}
                                 onPointerDown={(e) => {
-                                    // ALT+press opens the load dialog instead of playing.
+                                    // ALT+press opens Sound Browse (or the native
+                                    // picker as a fallback) instead of playing.
                                     if (e.altKey) {
                                         e.preventDefault();
-                                        const input = fileInputs.current[idx];
-                                        if (input) input.click();
+                                        if (window.SoundBrowse) setBrowsePad(idx);
+                                        else { const input = fileInputs.current[idx]; if (input) input.click(); }
                                         return;
                                     }
                                     const v = hitPad(e, idx);
@@ -249,8 +252,16 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             </div>
 
             <div style={{ marginTop: '14px', fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
-                Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to load a sample
+                Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to browse sounds
             </div>
+
+            {browsePad != null && window.SoundBrowse && (
+                <window.SoundBrowse
+                    targetLabel={(KIT[browsePad] && KIT[browsePad].name) || `Pad ${browsePad + 1}`}
+                    onClose={() => setBrowsePad(null)}
+                    onChoose={(file) => { handleFile(browsePad, file); setBrowsePad(null); }}
+                />
+            )}
         </div>
     );
 };

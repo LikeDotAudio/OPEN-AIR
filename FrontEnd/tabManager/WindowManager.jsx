@@ -433,6 +433,9 @@ const WindowManager = ({ directoryTree }) => {
     const [lang, setLang] = window.useMqttLang();
     const { connected: mqttConnected, fullId: mqttFullId } = (window.useMqttStatus ? window.useMqttStatus() : { connected: false, fullId: '' });
 
+    // MQTT connection settings modal (host/port/ws-vs-wss/path/auth).
+    const [showMqttSettings, setShowMqttSettings] = React.useState(false);
+
     const [splitStates, setSplitStates] = React.useState({});
     React.useEffect(() => {
         const handler = (e) => setSplitStates(prev => ({ ...prev, [e.detail.path]: e.detail.percent }));
@@ -591,17 +594,9 @@ const WindowManager = ({ directoryTree }) => {
                                  ID: {mqttFullId ? mqttFullId.split(':')[0] + ':' + (mqttFullId.split(':')[1] || '') : '—'}
                              </div>
 
-                             <div 
-                                 onClick={() => {
-                                     const current = new URLSearchParams(window.location.search).get('mqtt') || window.location.hostname || 'localhost';
-                                     const override = window.prompt("Enter MQTT Broker IP or Hostname to connect to:", current);
-                                     if (override && override.trim() !== "" && override !== current) {
-                                         const url = new URL(window.location.href);
-                                         url.searchParams.set('mqtt', override.trim());
-                                         window.location.href = url.toString();
-                                     }
-                                 }}
-                                 title="Click to configure MQTT Server IP"
+                             <div
+                                 onClick={() => setShowMqttSettings(true)}
+                                 title="Click to configure the MQTT connection (host, port, ws/wss, auth)"
                                  style={{
                                      fontSize: '10px', color: mqttConnected ? '#0f0' : '#f55', fontWeight: 'bold',
                                      letterSpacing: '1px', cursor: 'pointer', padding: '4px 5px',
@@ -702,6 +697,10 @@ const WindowManager = ({ directoryTree }) => {
                     content={editor.content}
                     onClose={() => setEditor(null)}
                 />
+            )}
+
+            {showMqttSettings && window.MqttSettingsModal && (
+                <window.MqttSettingsModal onClose={() => setShowMqttSettings(false)} />
             )}
         </div>
     );

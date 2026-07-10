@@ -169,7 +169,8 @@
     <!-- Load MQTT & Layout & Navigation Engines -->
     <script src="./comMQTT/topicUtils.js?v=1"></script>
     <script src="./comMQTT/topicMaker.jsx?v=1"></script>
-    <script type="text/babel" src="./comMQTT/MqttProvider.jsx?v=11"></script>
+    <script type="text/babel" src="./comMQTT/MqttProvider.jsx?v=12"></script>
+    <script type="text/babel" src="./comMQTT/MqttSettings.jsx?v=2"></script>
     <script type="text/babel" src="./frameLayout/oaCssLen.js?v=3"></script>
     <script src="./frameLayout/transparency.js?v=2"></script>
     <script type="text/babel" src="./frameLayout/OcaBin.jsx?v=5"></script>
@@ -181,7 +182,7 @@
     <script type="text/babel" src="./frameLayout/TabLayout.jsx?v=6"></script>
     <script type="text/babel" src="./frameLayout/LoaderOrchestrator.jsx?v=10"></script>
     <script type="text/babel" src="./tabManager/nav_state.jsx?v=1"></script>
-    <script type="text/babel" src="./tabManager/WindowManager.jsx?v=8"></script>
+    <script type="text/babel" src="./tabManager/WindowManager.jsx?v=9"></script>
 
     <!-- WYSIWYG Editor (HTML5) — mirrors oaGuiEditorWYSIWYG folder/function structure -->
     <script type="text/babel" src="./editorWYSIWYG/Core/state.jsx?v=7"></script>
@@ -216,7 +217,7 @@
 
     <script type="text/babel" src="./libControl/special/AudioEditor/AudioEditor.jsx?v=1"></script>
     <script type="text/babel" src="./libControl/special/Sequencer/Sequencer.jsx?v=1"></script>
-    <script type="text/babel" src="./libControl/special/Sampler/Sampler.jsx?v=1"></script>
+    <script type="text/babel" src="./libControl/special/Sampler/Sampler.jsx?v=2"></script>
 
     <!-- Main App Bootstrapper -->
     <script type="text/babel">
@@ -282,19 +283,16 @@
                 );
             }
 
-            // Dynamically determine the MQTT broker URL:
-            // 1. Check if the user passed ?mqtt=X.X.X.X in the URL
-            // 2. Otherwise, use the SAME host the page was served from
-            //    (window.location.hostname). The backend machine serves this page
-            //    AND runs the broker, so the browser always connects back to the
-            //    current machine — surviving IP changes and working on localhost.
-            // 3. Fall back to a fixed IP only if there's no hostname (e.g. file://).
-            const urlParams = new URLSearchParams(window.location.search);
-            let mqttHost = urlParams.get('mqtt') || window.location.hostname || 'localhost';
-            
-            // If the site is loaded over HTTPS, use WSS (Secure WebSockets), otherwise WS
-            const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-            const dynamicBrokerUrl = `${wsProtocol}://${mqttHost}:9001`;
+            // MQTT connection config comes from oaGetMqttConfig (comMQTT/MqttSettings.jsx):
+            //   - a saved profile in localStorage (host/port/ws-vs-wss/path/auth), set
+            //     via the MQTT settings modal, OR
+            //   - ?mqtt=X.X.X.X host override, OR
+            //   - the page host + :9001 (the local Python broker) as the default.
+            // Saved auth may be anonymous (empty user) for public test brokers.
+            const _mqttCfg = (window.oaGetMqttConfig
+                ? window.oaGetMqttConfig()
+                : { brokerUrl: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname || 'localhost'}:9001`, username: 'guest', password: 'guest' });
+            const dynamicBrokerUrl = _mqttCfg.brokerUrl;
 
             return (
                 <React.Fragment>
@@ -319,7 +317,7 @@
                     
                     {/* The app mounts IN THE BACKGROUND so the lazy loader starts crushing the fetching immediately! */}
                     <div style={{ display: splashFinished ? 'block' : 'none', height: '100vh', width: '100vw' }}>
-                        <window.MqttProvider brokerUrl={dynamicBrokerUrl}>
+                        <window.MqttProvider brokerUrl={dynamicBrokerUrl} username={_mqttCfg.username} password={_mqttCfg.password}>
                             <window.WindowManager directoryTree={directoryTree} />
                         </window.MqttProvider>
                     </div>

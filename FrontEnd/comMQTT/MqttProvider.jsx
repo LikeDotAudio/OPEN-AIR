@@ -34,7 +34,7 @@ console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
 // messages than raw per-tick publishing. Override via window.OA_PUBLISH_INTERVAL_MS.
 const PUBLISH_INTERVAL_MS = 22;
 
-window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
+window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', password = 'guest', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
     const [lang, setLang] = React.useState('En'); // Default to English
@@ -47,13 +47,20 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
             return;
         }
 
-        const mqttClient = window.mqtt.connect(brokerUrl, {
-            username: 'guest',
-            password: 'guest',
+        // Only send credentials when a username is provided. Public test brokers
+        // (test.mosquitto.org :8080/:8081) are anonymous — sending empty creds
+        // there can be rejected, so we connect without them.
+        const connectOptions = {
             keepalive: 60,
             reconnectPeriod: 5000, // Wait 5 seconds between retries
             connectTimeout: 30 * 1000,
-        });
+        };
+        if (username) {
+            connectOptions.username = username;
+            if (password) connectOptions.password = password;
+        }
+
+        const mqttClient = window.mqtt.connect(brokerUrl, connectOptions);
 
         mqttClient.on('connect', () => {
             console.log(`📡📥📥 [MQTT] Connected to WebSockets`);
@@ -128,7 +135,7 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
             } catch (e) {}
             mqttClient.end();
         };
-    }, [brokerUrl]);
+    }, [brokerUrl, username, password]);
 
     const publish = React.useCallback((topic, payload) => {
         if (client && client.connected) {

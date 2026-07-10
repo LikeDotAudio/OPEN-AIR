@@ -183,6 +183,16 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         setSeqRef.current({ grid, bpm: bpmRef.current, steps: stepsRef.current });
     };
 
+    // One-shot preview of a track's voice (never loops) — audible feedback when
+    // a step is placed. Also flashes the matching Sampler pad.
+    const previewVoice = (trkIdx, vel) => {
+        const ctx = window.oaAudioCtx();
+        const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
+        if (entry && entry.buffer && window.oaPlayDrumSample) window.oaPlayDrumSample(ctx, Object.assign({}, entry, { loop: false }), ctx.currentTime, vel / 100);
+        else if (window.oaPlayDrumVoice) window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], ctx.currentTime, vel / 100);
+        window.dispatchEvent(new CustomEvent('oa-drum-play', { detail: { idx: trkIdx, velocity: vel } }));
+    };
+
     React.useEffect(() => {
         const onDrumHit = (e) => {
             if (!recordingRef.current || !playingRef.current) return;
@@ -318,9 +328,23 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     const onStepPointerDown = (e, trkIdx, step) => {
         e.preventDefault();
-        // Plain click = toggle on/off. ALT+drag = large, detailed intensity fader.
+        // Plain click = toggle. Click-drag = PAINT the row with that on/off value.
+        // ALT+drag = large, detailed intensity fader.
         if (!e.altKey) {
-            writeStepVel(trkIdx, step, velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100);
+            const paintVel = velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100;
+            writeStepVel(trkIdx, step, paintVel);
+            if (paintVel > 0) previewVoice(trkIdx, paintVel);   // sound when placed
+            const painted = new Set([step]);
+            const move = (ev) => {
+                const el = document.elementFromPoint(ev.clientX, ev.clientY);
+                if (el && el.dataset && el.dataset.oaTrk !== undefined && Number(el.dataset.oaTrk) === trkIdx) {
+                    const s = Number(el.dataset.oaStep);
+                    if (!painted.has(s)) { painted.add(s); writeStepVel(trkIdx, s, paintVel); if (paintVel > 0) previewVoice(trkIdx, paintVel); }
+                }
+            };
+            const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+            window.addEventListener('pointermove', move);
+            window.addEventListener('pointerup', up);
             return;
         }
         const startY = e.clientY;
@@ -446,8 +470,9 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
                                 return (
                                     <div key={step}
+                                        data-oa-trk={trkIdx} data-oa-step={step}
                                         onPointerDown={(e) => onStepPointerDown(e, trkIdx, step)}
-                                        title={isLit ? `Velocity ${vel} — ALT+drag to adjust` : 'Click to add · ALT+drag to set intensity'}
+                                        title={isLit ? `Velocity ${vel} — ALT+drag to adjust` : 'Click/drag to paint · ALT+drag to set intensity'}
                                         style={{
                                             position: 'relative', overflow: 'hidden',
                                             width: '18px', height: '20px',
@@ -457,7 +482,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                             boxShadow: isLit ? `0 0 4px rgba(244, 144, 44, ${0.2 + 0.4 * (vel / 100)})` : 'none',
                                         }}>
                                         {isLit && !isCurrent && (
-                                            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})` }} />
+                                            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})`, pointerEvents: 'none' }} />
                                         )}
                                     </div>
                                 );

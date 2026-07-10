@@ -24,6 +24,8 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     const [fade, setFade] = React.useState(false);
     const [pitchSemi, setPitchSemi] = React.useState(0);            // -12..+12
     const [samples, setSamples] = React.useState([]);               // captured list
+    const [dragOver, setDragOver] = React.useState(false);          // drag-and-drop
+    const [loadError, setLoadError] = React.useState('');
 
     const padName = (i) => (KIT[i] && KIT[i].name) || `Pad ${i + 1}`;
     const selectedHasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[selectedPad]);
@@ -31,14 +33,29 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     // ---- File load -----------------------------------------------------------
     const handleFile = async (file) => {
         if (!file) return;
-        const ctx = getCtx();
-        const arrayBuffer = await file.arrayBuffer();
-        const decoded = await ctx.decodeAudioData(arrayBuffer);
-        setFileName(file.name);
-        setAudioBuffer(decoded);
-        setView({ start: 0, end: 1 });
-        setSelection({ start: 0.1, end: 0.6 });
-        setCursor(0.1);
+        setLoadError('');
+        try {
+            const ctx = getCtx();
+            const arrayBuffer = await file.arrayBuffer();
+            // decodeAudioData handles wav / mp3 / aiff / aac / m4a / ogg / flac per
+            // the browser's codecs — we just feed it any file. Dual promise+callback
+            // form so older Safari (callback-only) works too.
+            const decoded = await new Promise((resolve, reject) => {
+                let settled = false;
+                const ok = (b) => { if (!settled) { settled = true; resolve(b); } };
+                const no = (e) => { if (!settled) { settled = true; reject(e || new Error('decode failed')); } };
+                const p = ctx.decodeAudioData(arrayBuffer, ok, no);
+                if (p && typeof p.then === 'function') p.then(ok, no);
+            });
+            setFileName(file.name);
+            setAudioBuffer(decoded);
+            setView({ start: 0, end: 1 });
+            setSelection({ start: 0.1, end: 0.6 });
+            setCursor(0.1);
+        } catch (err) {
+            console.error('🛑 [AudioEditor] decode failed:', err);
+            setLoadError(`Could not decode "${file.name}" — unsupported or corrupt audio.`);
+        }
     };
 
     // ---- Waveform drawing (only the zoomed-in window) ------------------------
@@ -230,12 +247,32 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     const btn = (extra) => ({ background: '#333', color: '#ccc', border: '1px solid #444', padding: '5px 10px', cursor: 'pointer', borderRadius: '3px', fontSize: '12px', ...extra });
 
     return (
-        <div style={{ padding: '20px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box' }}>
+        <div
+            onDragOver={(e) => { e.preventDefault(); if (!dragOver) setDragOver(true); }}
+            onDragLeave={(e) => { if (e.currentTarget === e.target) setDragOver(false); }}
+            onDrop={(e) => {
+                e.preventDefault();
+                setDragOver(false);
+                const f = e.dataTransfer.files && e.dataTransfer.files[0];
+                if (f) handleFile(f);
+            }}
+            style={{ padding: '20px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: dragOver ? '1px dashed #f4902c' : '1px solid #333', width: '100%', boxSizing: 'border-box', position: 'relative' }}
+        >
+            {dragOver && (
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(244,144,44,0.12)', border: '2px dashed #f4902c', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5, pointerEvents: 'none', fontSize: '14px', color: '#f4902c', fontWeight: 'bold' }}>
+                    Drop audio file to load
+                </div>
+            )}
             <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#ccc' }}>{label}</h3>
+            {loadError && (
+                <div style={{ background: '#3a1a1a', border: '1px solid #a33', borderRadius: '3px', padding: '6px 10px', fontSize: '11px', color: '#f88', marginBottom: '8px' }}>
+                    ⚠️ {loadError}
+                </div>
+            )}
 
             {/* Top row: load, play, zoom */}
             <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <input type="file" accept="audio/*" style={{ fontSize: '12px', color: '#aaa', width: '190px' }} onChange={(e) => handleFile(e.target.files[0])} />
+                <input type="file" accept="audio/*,.mp3,.wav,.wave,.aif,.aiff,.aac,.m4a,.ogg,.oga,.flac,.opus" style={{ fontSize: '12px', color: '#aaa', width: '190px' }} onChange={(e) => handleFile(e.target.files[0])} />
                 <button onClick={playSlice} disabled={!audioBuffer} style={btn({ background: isPlaying ? '#c00' : '#333', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed', fontWeight: 'bold' })}>
                     {isPlaying ? 'Stop' : '► Play Slice'}
                 </button>
@@ -258,6 +295,12 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
                 style={{ width: '100%', height: '150px', backgroundColor: '#0a0a0a', border: '1px solid #444', position: 'relative', outline: 'none', cursor: audioBuffer ? 'text' : 'default' }}
             >
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
+
+                {!audioBuffer && (
+                    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555', fontSize: '12px', pointerEvents: 'none' }}>
+                        Drop an audio file here, or use the picker above
+                    </div>
+                )}
 
                 {/* Selection region (in..out) */}
                 {audioBuffer && (

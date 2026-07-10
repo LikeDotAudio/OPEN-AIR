@@ -1,4 +1,4 @@
-const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 10, onHit = null }) => {
+const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 10, onHit = null }) => {
     // Shared drum kit — the SAME 16 voices the Sequencer uses (DrumKit.js).
     const KIT = window.OA_DRUM_KIT || [];
 
@@ -57,16 +57,83 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
 
     // A pad was struck: compute velocity, store it, trigger the drum (sample or
     // synth) at a volume scaled by the velocity, notify.
+    // Broadcast a hit so the Sequencer can record it (idx + velocity 0-100).
+    const emitHit = (idx, velocity) => {
+        window.dispatchEvent(new CustomEvent('oa-drum-hit', { detail: { idx, velocity } }));
+    };
+
     const hitPad = (e, idx) => {
         const velocity = computeVelocity(e);
         setVelocities((prev) => { const n = [...prev]; n[idx] = velocity; return n; });
         if (window.oaTriggerDrum) window.oaTriggerDrum(idx, velocity / 100);
         if (typeof onHit === 'function') onHit(idx + 1, velocity);
+        emitHit(idx, velocity);
         return velocity;
     };
 
+    // Pad <button> elements (so keyboard triggers can flash their glow) plus a
+    // visibility gate so number-pad keys only fire when this Sampler is on screen.
+    const padButtons = React.useRef([]);
+    const rootRef = React.useRef(null);
+    const visibleRef = React.useRef(false);
+
+    // Restart the velocity glow on a pad element (bright → fades over sound length).
+    const startGlow = (el, idx, i) => {
+        if (!el) return;
+        const entry = window.OA_DRUM_SAMPLES[idx];
+        const durMs = (entry && entry.buffer) ? Math.max(120, Math.min(entry.buffer.duration * 1000, 5000)) : 180;
+        el.style.setProperty('--gi', i);
+        el.style.animation = 'none';
+        void el.offsetWidth;            // reflow → restart on rapid hits
+        el.style.animation = `oaPadGlow ${durMs}ms ease-out`;
+    };
+
+    // Trigger a pad from the keyboard (full velocity), with a brief press + glow.
+    const triggerPadKey = (idx) => {
+        setVelocities((prev) => { const n = [...prev]; n[idx] = 100; return n; });
+        if (window.oaTriggerDrum) window.oaTriggerDrum(idx, 1);
+        if (typeof onHit === 'function') onHit(idx + 1, 100);
+        emitHit(idx, 100);
+        const el = padButtons.current[idx];
+        if (el) {
+            el.style.transform = 'scale(0.95)';
+            el.style.filter = 'brightness(1.5)';
+            startGlow(el, idx, 1);
+            setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
+        }
+    };
+
+    // Number-pad → pad mapping (only while this Sampler is on screen). The 3×3
+    // numpad maps to drum pads 1-6 and 9-11 as requested:
+    //   1 2 3 → pads 1 2 3   ·   4 5 6 → pads 4 5 6   ·   7 8 9 → pads 9 10 11
+    const NUMKEY_TO_PADNUM = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 9, 8: 10, 9: 11 };
+
+    React.useEffect(() => {
+        const el = rootRef.current;
+        if (!el || typeof IntersectionObserver === 'undefined') return;
+        const io = new IntersectionObserver(([en]) => { visibleRef.current = en.isIntersecting; }, { threshold: 0.3 });
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
+    React.useEffect(() => {
+        const onKey = (e) => {
+            if (!visibleRef.current) return;
+            const t = e.target;
+            if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+            const m = /^(?:Numpad|Digit)([1-9])$/.exec(e.code || '');
+            if (!m) return;
+            const padNum = NUMKEY_TO_PADNUM[parseInt(m[1], 10)];
+            if (!padNum) return;
+            e.preventDefault();
+            triggerPadKey(padNum - 1);
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, []);
+
     return (
-        <div style={{ padding: '25px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
+        <div ref={rootRef} style={{ padding: '25px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
             {/* Velocity glow: bright on strike (scaled by --gi), fades over the sound's length. */}
             <style>{`
                 @keyframes oaPadGlow {
@@ -100,6 +167,7 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                     return (
                         <div key={padNum} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <button
+                                ref={(el) => { padButtons.current[idx] = el; }}
                                 title={hasSample ? `${name} — sample: ${sampleNames[idx]}\nALT+click to replace` : `${name} — synth voice\nALT+click to load a sample`}
                                 onPointerDown={(e) => {
                                     // ALT+press opens the load dialog instead of playing.
@@ -112,17 +180,9 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                                     const v = hitPad(e, idx);
                                     const i = v / 100;
                                     const el = e.currentTarget;
-                                    // Glow lasts exactly as long as the sound plays: the
-                                    // loaded sample's length, or ~180ms for the synth voice.
-                                    const entry = window.OA_DRUM_SAMPLES[idx];
-                                    const durMs = (entry && entry.buffer) ? Math.max(120, Math.min(entry.buffer.duration * 1000, 5000)) : 180;
-                                    // Glow brightness + spread scale with the hit velocity.
-                                    el.style.setProperty('--gi', i);
                                     el.style.transform = 'scale(0.95)';
                                     el.style.filter = `brightness(${0.9 + 0.7 * i})`;
-                                    el.style.animation = 'none';
-                                    void el.offsetWidth;            // reflow → restart on rapid hits
-                                    el.style.animation = `oaPadGlow ${durMs}ms ease-out`;
+                                    startGlow(el, idx, i);
                                 }}
                                 onPointerUp={(e) => {
                                     e.currentTarget.style.transform = 'scale(1)';

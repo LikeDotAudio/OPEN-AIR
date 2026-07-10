@@ -32,7 +32,7 @@
           "sampler_pads": {
             "type": "Sampler",
             "props": {
-              "label": "MPC Drum Sampler"
+              "label": "Drum Sampler"
             },
             "layout": {
               "sticky": "nsew"

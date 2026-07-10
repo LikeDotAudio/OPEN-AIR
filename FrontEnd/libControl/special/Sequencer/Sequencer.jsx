@@ -6,7 +6,10 @@ const STEP_OPTIONS = [4, 8, 16, 32, 64];   // selectable pattern lengths
 const DEFAULT_STEPS = 16;
 const LIBRARY_KEY = 'oaSequencerLibrary';
 
-const emptyPattern = (steps) => Array(TRACKS.length).fill().map(() => Array(steps).fill(false));
+// A step cell holds a VELOCITY: 0 = off, 1-100 = on at that intensity.
+// velOf tolerates legacy boolean grids (true -> 100).
+const emptyPattern = (steps) => Array(TRACKS.length).fill().map(() => Array(steps).fill(0));
+const velOf = (c) => (typeof c === 'number' ? c : (c ? 100 : 0));
 const clonePattern = (p) => p.map((row) => [...row]);
 
 const loadLibrary = () => {
@@ -85,7 +88,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const setSteps = (n) => {
         const grid = pattern.map((row) => {
             const r = row.slice(0, n);
-            while (r.length < n) r.push(false);
+            while (r.length < n) r.push(0);
             return r;
         });
         setSeq({ grid, bpm, steps: n });
@@ -99,6 +102,34 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     mutesRef.current = mutes;
     const toggleMute = (trkIdx) =>
         setMutes((prev) => { const n = [...prev]; n[trkIdx] = !n[trkIdx]; return n; });
+
+    // Record mode: while recording AND playing, pad hits from the Sampler write
+    // into the current step of the matching track at their played velocity.
+    const [recording, setRecording] = React.useState(false);
+    const recordingRef = React.useRef(recording); recordingRef.current = recording;
+    const playingRef = React.useRef(isPlaying); playingRef.current = isPlaying;
+    const setSeqRef = React.useRef(setSeq); setSeqRef.current = setSeq;
+
+    // Write a velocity into one step using the LIVE grid (ref) — safe from the
+    // stale render closures the record/drag listeners capture.
+    const writeStepVel = (trkIdx, step, vel) => {
+        const v = Math.max(0, Math.min(100, Math.round(vel)));
+        const grid = patternRef.current.map((r) => r.slice());
+        grid[trkIdx][step] = v;
+        setSeqRef.current({ grid, bpm: bpmRef.current, steps: stepsRef.current });
+    };
+
+    React.useEffect(() => {
+        const onDrumHit = (e) => {
+            if (!recordingRef.current || !playingRef.current) return;
+            const idx = e.detail && e.detail.idx;
+            if (idx == null || idx < 0 || idx >= TRACKS.length) return;
+            const step = currentStepRef.current % stepsRef.current;
+            writeStepVel(idx, step, Math.max(1, (e.detail.velocity || 100)));
+        };
+        window.addEventListener('oa-drum-hit', onDrumHit);
+        return () => window.removeEventListener('oa-drum-hit', onDrumHit);
+    }, []);
 
     // Saved-pattern library — also pushed to / read from MQTT (retained), with a
     // localStorage seed so it still loads when the broker is offline.
@@ -144,14 +175,16 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         // Here we'd normally trigger sounds from the Sampler state.
         // For this demo, we'll synthesize simple beeps based on active tracks.
         patternRef.current.forEach((track, trkIdx) => {
-            if (track[stepNumber] && !mutesRef.current[trkIdx]) {
+            const vel = velOf(track[stepNumber]);
+            if (vel > 0 && !mutesRef.current[trkIdx]) {
+                const vol = vel / 100;   // per-step intensity → volume
                 // Play the shared voice: the Sampler's loaded sample for this
                 // track if present (with its pitch/fade), otherwise the synth voice.
                 const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
                 if (entry && entry.buffer && window.oaPlayDrumSample) {
-                    window.oaPlayDrumSample(ctx, entry, time, 1);
+                    window.oaPlayDrumSample(ctx, entry, time, vol);
                 } else if (window.oaPlayDrumVoice) {
-                    window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, 1);
+                    window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, vol);
                 } else {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
@@ -159,7 +192,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     osc.type = TRACKS[trkIdx].type;
                     osc.connect(gain);
                     gain.connect(ctx.destination);
-                    gain.gain.setValueAtTime(1, time);
+                    gain.gain.setValueAtTime(vol, time);
                     gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
                     osc.start(time);
                     osc.stop(time + 0.1);
@@ -195,11 +228,42 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         }
     };
 
-    const toggleStep = (trkIdx, step) => {
-        const newPattern = [...pattern];
-        newPattern[trkIdx] = [...newPattern[trkIdx]];
-        newPattern[trkIdx][step] = !newPattern[trkIdx][step];
-        setPattern(newPattern);
+    // Click a step = toggle on(100)/off. Click-and-HOLD (or drag) = it becomes a
+    // small vertical fader; drag up/down to set that step's intensity (velocity).
+    const [activeFader, setActiveFader] = React.useState(null); // { trkIdx, step, vel }
+
+    const onStepPointerDown = (e, trkIdx, step) => {
+        e.preventDefault();
+        const startY = e.clientY;
+        const startVel = velOf(patternRef.current[trkIdx][step]);
+        const state = { active: false };
+        const enterFader = () => {
+            state.active = true;
+            const base = startVel > 0 ? startVel : 100;
+            writeStepVel(trkIdx, step, base);
+            setActiveFader({ trkIdx, step, vel: Math.round(base) });
+        };
+        const holdTimer = setTimeout(enterFader, 160);
+        const move = (ev) => {
+            if (!state.active && Math.abs(ev.clientY - startY) > 4) { clearTimeout(holdTimer); enterFader(); }
+            if (state.active) {
+                const base = startVel > 0 ? startVel : 100;
+                const vel = Math.max(1, Math.min(100, base + (startY - ev.clientY) * 1.2));
+                writeStepVel(trkIdx, step, vel);
+                setActiveFader({ trkIdx, step, vel: Math.round(vel) });
+            }
+        };
+        const up = () => {
+            clearTimeout(holdTimer);
+            window.removeEventListener('pointermove', move);
+            window.removeEventListener('pointerup', up);
+            setActiveFader(null);
+            if (!state.active) {   // quick tap → toggle on/off
+                writeStepVel(trkIdx, step, velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100);
+            }
+        };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
     };
 
     const savePattern = () => {
@@ -233,7 +297,13 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         <div style={{ padding: '12px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#ccc' }}>{label}</h3>
             <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', alignItems: 'center' }}>
-                <button style={{ background: '#d32f2f', color: '#fff', border: 'none', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', opacity: 0.5 }}>● Rec</button>
+                <button
+                    onClick={() => setRecording((r) => !r)}
+                    title="Record: while playing, hit the Sampler pads to write them into the pattern at their velocity"
+                    style={{ background: recording ? '#d32f2f' : '#5a1f1f', color: '#fff', border: recording ? '1px solid #ff8a80' : '1px solid #722', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', boxShadow: recording ? '0 0 8px rgba(211,47,47,0.85)' : 'none' }}
+                >
+                    ● Rec{recording ? ' ●' : ''}
+                </button>
                 <button 
                     onClick={togglePlayback}
                     style={{ background: isPlaying ? '#ffb300' : '#388e3c', color: '#fff', border: 'none', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold' }}
@@ -288,21 +358,33 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                         </div>
                         <div style={{ display: 'flex', gap: '3px', background: '#0a0a0a', padding: '4px', borderRadius: '4px', border: '1px solid #222', opacity: muted ? 0.4 : 1 }}>
                             {[...Array(steps)].map((_, step) => {
-                                const isLit = pattern[trkIdx][step];
+                                const vel = velOf(pattern[trkIdx][step]);
+                                const isLit = vel > 0;
                                 const isBeat = step % 4 === 0;
                                 const isCurrent = isPlaying && currentStep === step;
+                                const isFading = activeFader && activeFader.trkIdx === trkIdx && activeFader.step === step;
 
                                 return (
-                                    <div key={step} style={{
-                                        width: '18px', height: '20px',
-                                        backgroundColor: isCurrent ? '#fff' : (isLit ? '#f4902c' : (isBeat ? '#333' : '#1a1a1a')),
-                                        border: isLit ? '1px solid #ffa726' : '1px solid #111',
-                                        cursor: 'pointer',
-                                        borderRadius: '2px',
-                                        boxShadow: isLit ? '0 0 4px rgba(244, 144, 44, 0.5)' : 'none',
-                                    }}
-                                    onPointerDown={() => toggleStep(trkIdx, step)}
-                                    ></div>
+                                    <div key={step}
+                                        onPointerDown={(e) => onStepPointerDown(e, trkIdx, step)}
+                                        title={isLit ? `Velocity ${vel} — hold & drag to adjust` : 'Click to add · hold to set intensity'}
+                                        style={{
+                                            position: 'relative', overflow: 'hidden',
+                                            width: '18px', height: '20px',
+                                            backgroundColor: isCurrent ? '#fff' : (isBeat && !isLit ? '#333' : '#1a1a1a'),
+                                            border: isFading ? '1px solid #fff' : (isLit ? '1px solid #ffa726' : '1px solid #111'),
+                                            cursor: 'ns-resize', borderRadius: '2px', touchAction: 'none',
+                                            boxShadow: isLit ? `0 0 4px rgba(244, 144, 44, ${0.2 + 0.4 * (vel / 100)})` : 'none',
+                                        }}>
+                                        {isLit && !isCurrent && (
+                                            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})` }} />
+                                        )}
+                                        {isFading && (
+                                            <div style={{ position: 'absolute', bottom: '23px', left: '50%', transform: 'translateX(-50%)', background: '#000', color: '#f4902c', fontSize: '9px', fontWeight: 'bold', padding: '1px 3px', borderRadius: '2px', border: '1px solid #f4902c', zIndex: 10, pointerEvents: 'none' }}>
+                                                {activeFader.vel}
+                                            </div>
+                                        )}
+                                    </div>
                                 );
                             })}
                         </div>

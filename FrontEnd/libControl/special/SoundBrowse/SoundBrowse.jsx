@@ -78,6 +78,20 @@ const gatherFiles = async (handle, prefix, out, depth) => {
     for (const [n, h] of subdirs) { if (out.length >= MAX_FILES) break; await gatherFiles(h, prefix ? `${prefix}/${n}` : n, out, depth + 1); }
 };
 
+// Deep search: recurse the WHOLE tree (past MAX_FILES) collecting only files whose
+// name matches `term` — so a filter finds matches even beyond the initial cap.
+const DEEP_MAX = 20000;
+const gatherMatching = async (handle, prefix, out, term, depth) => {
+    if (depth > 12 || out.length >= DEEP_MAX) return;
+    const subdirs = [];
+    for await (const [n, h] of handle.entries()) {
+        if (out.length >= DEEP_MAX) break;
+        if (h.kind === 'directory') subdirs.push([n, h]);
+        else if (AUDIO_RE.test(n) && n.toLowerCase().includes(term)) out.push({ name: n, handle: h, sub: prefix });
+    }
+    for (const [n, h] of subdirs) { if (out.length >= DEEP_MAX) break; await gatherMatching(h, prefix ? `${prefix}/${n}` : n, out, term, depth + 1); }
+};
+
 // Find recurring name phrases across the gathered files → quick-filter chips.
 // Ranks tokens by how many distinct sub-folders they appear in, then frequency.
 const computeChips = (files) => {
@@ -142,6 +156,8 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const [err, setErr] = React.useState('');
     const [chips, setChips] = React.useState([]);
     const [scanning, setScanning] = React.useState(false);
+    const [deepResults, setDeepResults] = React.useState([]);
+    const [deepSearching, setDeepSearching] = React.useState(false);
 
     const bigCanvasRef = React.useRef(null);
     const gridScrollRef = React.useRef(null);
@@ -153,8 +169,29 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
 
     const [filter, setFilter] = React.useState('');
     const files = supportsFS ? folderFiles : flatEntries;
-    const shown = filter.trim() ? files.filter((f) => f.name.toLowerCase().includes(filter.trim().toLowerCase())) : files;
+    // Filtered view: for a real folder we deep-search the whole tree (uncapped);
+    // for the file-picker fallback we just filter the chosen files.
+    const shown = filter.trim()
+        ? (supportsFS ? deepResults : files.filter((f) => f.name.toLowerCase().includes(filter.trim().toLowerCase())))
+        : files;
     const duration = buffer ? buffer.duration : 0;
+
+    // Run the uncapped deep search when a filter is set on a real folder.
+    React.useEffect(() => {
+        const term = filter.trim().toLowerCase();
+        if (!term || !supportsFS || !selectedFolder) { setDeepResults([]); setDeepSearching(false); return; }
+        let cancelled = false;
+        setDeepSearching(true);
+        const timer = setTimeout(async () => {
+            const out = [];
+            try { await gatherMatching(selectedFolder, '', out, term, 0); } catch (e) {}
+            if (!cancelled) {
+                out.sort((a, b) => (a.sub === b.sub ? a.name.localeCompare(b.name) : (a.sub || '').localeCompare(b.sub || '')));
+                setDeepResults(out); setDeepSearching(false);
+            }
+        }, 300);
+        return () => { cancelled = true; clearTimeout(timer); };
+    }, [filter, selectedFolder]);
 
     const pickFolder = async () => {
         try {
@@ -292,6 +329,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                     </label>
                     <input type="text" value={filter} onChange={(e) => { setFilter(e.target.value); setSelectedIndex(-1); }} placeholder="Filter (e.g. HH)"
                         style={{ background: '#111', color: '#eee', border: '1px solid #444', borderRadius: '3px', padding: '4px 8px', fontSize: '12px', width: '130px' }} />
+                    {filter.trim() && <span style={{ fontSize: '11px', color: '#8ab4f8' }}>{deepSearching ? 'searching…' : `${shown.length} match${shown.length === 1 ? '' : 'es'}`}</span>}
                     <span style={{ fontSize: '11px', color: '#666' }}>↑ ↓ ← → browse · Enter load</span>
                 </div>
 
@@ -335,7 +373,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                                 </div>
                             ) : (
                                 <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>
-                                    {scanning ? 'Scanning folders…' : (files.length ? 'No files match the filter.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.'))}
+                                    {deepSearching ? 'Searching all folders…' : (scanning ? 'Scanning folders…' : (files.length ? 'No matches.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.')))}
                                 </div>
                             )}
                         </div>

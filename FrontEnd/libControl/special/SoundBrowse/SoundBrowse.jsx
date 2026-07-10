@@ -31,10 +31,21 @@ const drawWave = (canvas, buffer, color) => {
     cx.stroke();
 };
 
-// A single waveform thumbnail — decodes its own file to render the wave.
-const WaveThumb = ({ entry, selected, onSelect }) => {
+// A single waveform thumbnail — decodes its file to render the wave, but only
+// once it scrolls into view (a recursive folder scan can yield thousands).
+const WaveThumb = ({ entry, selected, onSelect, scrollRootRef }) => {
     const canvasRef = React.useRef(null);
+    const wrapRef = React.useRef(null);
+    const [visible, setVisible] = React.useState(false);
     React.useEffect(() => {
+        const el = wrapRef.current;
+        if (!el || typeof IntersectionObserver === 'undefined') { setVisible(true); return; }
+        const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { setVisible(true); io.disconnect(); } }, { root: (scrollRootRef && scrollRootRef.current) || null, rootMargin: '200px' });
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+    React.useEffect(() => {
+        if (!visible) return;
         let cancelled = false;
         (async () => {
             try {
@@ -44,14 +55,48 @@ const WaveThumb = ({ entry, selected, onSelect }) => {
             } catch (e) { /* undecodable — leave blank */ }
         })();
         return () => { cancelled = true; };
-    }, [entry]);
+    }, [entry, visible]);
     return (
-        <div onClick={onSelect}
+        <div ref={wrapRef} onClick={onSelect} title={entry.sub ? `${entry.sub}/${entry.name}` : entry.name}
             style={{ border: selected ? '2px solid #f4902c' : '1px solid #444', borderRadius: '4px', padding: '4px', cursor: 'pointer', background: selected ? '#2a2018' : '#141414', boxSizing: 'border-box' }}>
-            <canvas ref={canvasRef} style={{ width: '100%', height: '46px', display: 'block' }} />
+            <canvas ref={canvasRef} style={{ width: '100%', height: '46px', display: 'block', background: '#0a0a0a' }} />
             <div style={{ fontSize: '10px', color: selected ? '#f4902c' : '#bbb', marginTop: '3px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{entry.name}</div>
         </div>
     );
+};
+
+// Recursively collect audio files (with their sub-path) from a folder tree.
+const MAX_FILES = 4000;
+const gatherFiles = async (handle, prefix, out, depth) => {
+    if (depth > 8 || out.length >= MAX_FILES) return;
+    const subdirs = [];
+    for await (const [n, h] of handle.entries()) {
+        if (out.length >= MAX_FILES) break;
+        if (h.kind === 'directory') subdirs.push([n, h]);
+        else if (AUDIO_RE.test(n)) out.push({ name: n, handle: h, sub: prefix });
+    }
+    for (const [n, h] of subdirs) { if (out.length >= MAX_FILES) break; await gatherFiles(h, prefix ? `${prefix}/${n}` : n, out, depth + 1); }
+};
+
+// Find recurring name phrases across the gathered files → quick-filter chips.
+// Ranks tokens by how many distinct sub-folders they appear in, then frequency.
+const computeChips = (files) => {
+    const map = new Map(); // lowerToken -> { display, count, folders:Set }
+    files.forEach((f) => {
+        const base = f.name.replace(/\.[^.]+$/, '');
+        const parts = base.split(/[^A-Za-z0-9]+/).filter((t) => t.length >= 2 && !/^\d+$/.test(t));
+        const seen = new Set();
+        parts.forEach((p) => {
+            const k = p.toLowerCase();
+            if (seen.has(k)) return; seen.add(k);
+            let e = map.get(k); if (!e) { e = { display: p, count: 0, folders: new Set() }; map.set(k, e); }
+            e.count++; e.folders.add(f.sub || '');
+        });
+    });
+    return Array.from(map.values())
+        .filter((e) => e.count >= 2)
+        .sort((a, b) => (b.folders.size - a.folders.size) || (b.count - a.count))
+        .slice(0, 14);
 };
 
 // Folders-only tree node (files live in the right-hand grid).
@@ -95,6 +140,8 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const [autoPreview, setAutoPreview] = React.useState(true);
     const [pos, setPos] = React.useState(0);
     const [err, setErr] = React.useState('');
+    const [chips, setChips] = React.useState([]);
+    const [scanning, setScanning] = React.useState(false);
 
     const bigCanvasRef = React.useRef(null);
     const gridScrollRef = React.useRef(null);
@@ -114,12 +161,16 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
         catch (e) { /* cancelled */ }
     };
     const selectFolder = async (handle, path) => {
-        setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr('');
+        setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr(''); setFilter(''); setScanning(true); setChips([]);
         const items = [];
-        try { for await (const [n, h] of handle.entries()) if (h.kind === 'file' && AUDIO_RE.test(n)) items.push({ name: n, handle: h }); }
+        // Recurse through every sub-folder so all files show flattened in the grid.
+        try { await gatherFiles(handle, '', items, 0); }
         catch (e) { setErr('Could not read folder.'); }
-        items.sort((a, b) => a.name.localeCompare(b.name));
+        items.sort((a, b) => (a.sub === b.sub ? a.name.localeCompare(b.name) : (a.sub || '').localeCompare(b.sub || '')));
         setFolderFiles(items);
+        setChips(computeChips(items));
+        setScanning(false);
+        if (items.length >= MAX_FILES) setErr(`Showing the first ${MAX_FILES} files.`);
     };
     const onPlainFiles = (fileList) => {
         setFlatEntries(Array.from(fileList || []).filter((f) => AUDIO_RE.test(f.name)).map((f) => ({ name: f.name, file: f })));
@@ -132,7 +183,8 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
         const entry = shown[idx];
         try {
             const file = entry.file || await entry.handle.getFile();
-            setSelected({ name: entry.name, file, folder: supportsFS ? selectedFolderPath : '' });
+            const folder = supportsFS ? (selectedFolderPath + (entry.sub ? '/' + entry.sub : '')) : '';
+            setSelected({ name: entry.name, file, folder });
             setPos(0);
             try { setBuffer(await window.oaDecodeAudio(window.oaAudioCtx(), await file.arrayBuffer())); } catch (e) { setBuffer(null); }
         } catch (e) { setErr('Could not open file.'); }
@@ -251,20 +303,38 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                             </div>
                         )}
                     </div>
-                    <div ref={gridScrollRef} style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
-                        {shown.length > 0 ? (
-                            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: '8px' }}>
-                                {shown.map((entry, i) => (
-                                    <div key={i} ref={i === selectedIndex ? selectedThumbRef : undefined}>
-                                        <WaveThumb entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} />
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>
-                                {files.length ? 'No files match the filter.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.')}
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                        {(chips.length > 0 || scanning) && (
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', padding: '6px 10px', borderBottom: '1px solid #2a2a2a', alignItems: 'center' }}>
+                                {scanning && <span style={{ fontSize: '11px', color: '#888' }}>scanning…</span>}
+                                {chips.map((c, i) => {
+                                    const active = filter.toLowerCase() === c.display.toLowerCase();
+                                    return (
+                                        <button key={i} onClick={() => { setFilter(active ? '' : c.display); setSelectedIndex(-1); }}
+                                            title={`${c.count} files · ${c.folders.size} folders`}
+                                            style={{ background: active ? '#f4902c' : '#2a2a2a', color: active ? '#111' : '#cde', border: '1px solid #444', borderRadius: '12px', padding: '2px 9px', fontSize: '11px', cursor: 'pointer' }}>
+                                            {c.display}
+                                        </button>
+                                    );
+                                })}
+                                {filter && <button onClick={() => setFilter('')} style={{ background: 'none', border: 'none', color: '#888', fontSize: '11px', cursor: 'pointer' }}>clear</button>}
                             </div>
                         )}
+                        <div ref={gridScrollRef} style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
+                            {shown.length > 0 ? (
+                                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: '8px' }}>
+                                    {shown.map((entry, i) => (
+                                        <div key={i} ref={i === selectedIndex ? selectedThumbRef : undefined}>
+                                            <WaveThumb entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} scrollRootRef={gridScrollRef} />
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>
+                                    {scanning ? 'Scanning folders…' : (files.length ? 'No files match the filter.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.'))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 

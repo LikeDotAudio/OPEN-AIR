@@ -29,7 +29,13 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
 
     // Load a sample onto a pad: decode to an AudioBuffer in the SHARED store so
     // both this pad and the Sequencer's matching track play it.
-    const handleFile = async (index, file) => {
+    const mqttPublish = window.useMqttPublish ? window.useMqttPublish() : null;
+    // Persist which sample (name + source folder) is on a kit voice, retained.
+    const publishSample = (idx, name, folder) => {
+        if (mqttPublish) mqttPublish(`OpenAir/Gui/DrumKit/${idx}/sample`, { name: name || '', folder: folder || '' });
+    };
+
+    const handleFile = async (index, file, meta) => {
         if (!file) return;
         try {
             const arrayBuf = await file.arrayBuffer();
@@ -37,6 +43,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             const audioBuf = await ctx.decodeAudioData(arrayBuf);
             window.oaSetDrumSample(index, audioBuf, { name: file.name });
             setSampleNames((prev) => { const n = [...prev]; n[index] = file.name; return n; });
+            publishSample(index, file.name, meta && meta.folder);
         } catch (e) {
             console.error('🛑 [Sampler] Could not decode audio:', e);
         }
@@ -259,7 +266,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                 <window.SoundBrowse
                     targetLabel={(KIT[browsePad] && KIT[browsePad].name) || `Pad ${browsePad + 1}`}
                     onClose={() => setBrowsePad(null)}
-                    onChoose={(file) => { handleFile(browsePad, file); setBrowsePad(null); }}
+                    onChoose={(file, meta) => { handleFile(browsePad, file, meta); setBrowsePad(null); }}
                 />
             )}
         </div>

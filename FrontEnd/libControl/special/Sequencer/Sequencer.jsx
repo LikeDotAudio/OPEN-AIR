@@ -199,13 +199,15 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const [trackMenu, setTrackMenu] = React.useState(null);   // { trkIdx, x, y }
     const [browseTrack, setBrowseTrack] = React.useState(null);
     const [trackVer, setTrackVer] = React.useState(0);
-    const loadTrackSample = async (trkIdx, file) => {
+    const trackPublish = window.useMqttPublish ? window.useMqttPublish() : null;
+    const loadTrackSample = async (trkIdx, file, meta) => {
         try {
             const ctx = window.oaAudioCtx();
             const buf = await ctx.decodeAudioData(await file.arrayBuffer());
             const prev = window.OA_DRUM_SAMPLES[trkIdx] || {};
             window.oaSetDrumSample(trkIdx, buf, { name: file.name, pitch: prev.pitch, loop: prev.loop, fade: prev.fade, offset: 0 });
             setTrackVer((v) => v + 1);
+            if (trackPublish) trackPublish(`OpenAir/Gui/DrumKit/${trkIdx}/sample`, { name: file.name, folder: (meta && meta.folder) || '' });
         } catch (e) { console.error('🛑 [Sequencer] load track sample:', e); }
     };
 
@@ -524,7 +526,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 <window.SoundBrowse
                     targetLabel={(TRACKS[browseTrack] && TRACKS[browseTrack].name) || ''}
                     onClose={() => setBrowseTrack(null)}
-                    onChoose={(file) => { loadTrackSample(browseTrack, file); setBrowseTrack(null); }}
+                    onChoose={(file, meta) => { loadTrackSample(browseTrack, file, meta); setBrowseTrack(null); }}
                 />
             )}
         </div>

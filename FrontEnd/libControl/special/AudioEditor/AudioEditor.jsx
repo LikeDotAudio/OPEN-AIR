@@ -27,6 +27,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     const [dragOver, setDragOver] = React.useState(false);          // drag-and-drop
     const [loadError, setLoadError] = React.useState('');
     const [playingWhich, setPlayingWhich] = React.useState(null);   // 'in' | 'cursor' | 'seven'
+    const mqttPublish = window.useMqttPublish ? window.useMqttPublish() : null;
 
     const padName = (i) => (KIT[i] && KIT[i].name) || `Pad ${i + 1}`;
     const selectedHasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[selectedPad]);
@@ -51,8 +52,8 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
             setFileName(file.name);
             setAudioBuffer(decoded);
             setView({ start: 0, end: 1 });
-            setSelection({ start: 0.1, end: 0.6 });
-            setCursor(0.1);
+            setSelection({ start: 0, end: 1 });   // whole file — no trimmed in/out
+            setCursor(0);
         } catch (err) {
             console.error('🛑 [AudioEditor] decode failed:', err);
             setLoadError(`Could not decode "${file.name}" — unsupported or corrupt audio.`);
@@ -238,6 +239,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         window.oaSetDrumSample(selectedPad, sliced, {
             loop: autoLoop, fade, pitch: Math.pow(2, pitchSemi / 12), name,
         });
+        if (mqttPublish) mqttPublish(`OpenAir/Gui/DrumKit/${selectedPad}/sample`, { name, folder: '' });
         setSamples((list) => {
             const entry = { name, padIdx: selectedPad, padName: padName(selectedPad), loop: autoLoop, fade };
             const next = list.filter((x) => x.padIdx !== selectedPad);

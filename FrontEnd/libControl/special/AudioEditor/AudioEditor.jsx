@@ -28,14 +28,18 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     const [loadError, setLoadError] = React.useState('');
     const [playingWhich, setPlayingWhich] = React.useState(null);   // 'in' | 'cursor' | 'seven'
     const mqttPublish = window.useMqttPublish ? window.useMqttPublish() : null;
+    const [browsing, setBrowsing] = React.useState(false);          // Sound Browse open
+    const [loadedFolder, setLoadedFolder] = React.useState('');     // source folder of loaded file
+    const fileInputRef = React.useRef(null);
 
     const padName = (i) => (KIT[i] && KIT[i].name) || `Pad ${i + 1}`;
     const selectedHasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[selectedPad]);
 
     // ---- File load -----------------------------------------------------------
-    const handleFile = async (file) => {
+    const handleFile = async (file, folder) => {
         if (!file) return;
         setLoadError('');
+        setLoadedFolder(folder || '');
         try {
             const ctx = getCtx();
             const arrayBuffer = await file.arrayBuffer();
@@ -156,6 +160,19 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         waveWrapRef.current && waveWrapRef.current.focus();
         setCursor(clientXToPos(e.clientX));
     };
+
+    // Drag an in/out triangle handle along the waveform.
+    const dragPoint = (which) => (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const move = (ev) => {
+            const pos = clientXToPos(ev.clientX);
+            if (which === 'in') setSelection((s) => ({ ...s, start: Math.max(0, Math.min(pos, s.end - 0.001)) }));
+            else setSelection((s) => ({ ...s, end: Math.min(1, Math.max(pos, s.start + 0.001)) }));
+        };
+        const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+    };
     const onKeyDown = (e) => {
         if (!audioBuffer) return;
         const k = e.key.toLowerCase();
@@ -239,7 +256,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         window.oaSetDrumSample(selectedPad, sliced, {
             loop: autoLoop, fade, pitch: Math.pow(2, pitchSemi / 12), name,
         });
-        if (mqttPublish) mqttPublish(`OpenAir/Gui/DrumKit/${selectedPad}/sample`, { name, folder: '' });
+        if (mqttPublish) mqttPublish(`OpenAir/Gui/DrumKit/${selectedPad}/sample`, { name, folder: loadedFolder || '' });
         setSamples((list) => {
             const entry = { name, padIdx: selectedPad, padName: padName(selectedPad), loop: autoLoop, fade };
             const next = list.filter((x) => x.padIdx !== selectedPad);
@@ -288,7 +305,8 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
 
             {/* Top row: load, play, zoom */}
             <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <input type="file" accept="audio/*,.mp3,.wav,.wave,.aif,.aiff,.aac,.m4a,.ogg,.oga,.flac,.opus" style={{ fontSize: '12px', color: '#aaa', width: '190px' }} onChange={(e) => handleFile(e.target.files[0])} />
+                <button onClick={() => { if (window.SoundBrowse) setBrowsing(true); else fileInputRef.current && fileInputRef.current.click(); }} style={btn({ background: '#f4902c', color: '#111', border: 'none', fontWeight: 'bold' })}>📁 Browse…</button>
+                <input ref={fileInputRef} type="file" accept="audio/*,.mp3,.wav,.wave,.aif,.aiff,.aac,.m4a,.ogg,.oga,.flac,.opus" style={{ display: 'none' }} onChange={(e) => handleFile(e.target.files[0])} />
                 <button onClick={playFromIn} disabled={!audioBuffer} title="Play from the in point (I)" style={btn({ background: playingWhich === 'in' ? '#c00' : '#388e3c', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed', fontWeight: 'bold', border: 'none' })}>
                     {playingWhich === 'in' ? '■' : '►'} In
                 </button>
@@ -336,16 +354,14 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
                         pointerEvents: 'none',
                     }} />
                 )}
-                {/* In / Out flags */}
+                {/* In / Out triangle handles — drag along the waveform */}
                 {audioBuffer && inView(selection.start) && (
-                    <div style={{ position: 'absolute', top: 0, left: `${toPct(selection.start)}%`, transform: 'translateX(-1px)', pointerEvents: 'none' }}>
-                        <span style={{ background: '#f4902c', color: '#111', fontSize: '9px', fontWeight: 'bold', padding: '0 3px' }}>I</span>
-                    </div>
+                    <div onPointerDown={dragPoint('in')} title="In point — drag"
+                        style={{ position: 'absolute', bottom: 0, left: `${toPct(selection.start)}%`, transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '9px solid transparent', borderRight: '9px solid transparent', borderBottom: '13px solid #4caf50', cursor: 'ew-resize', zIndex: 7 }} />
                 )}
                 {audioBuffer && inView(selection.end) && (
-                    <div style={{ position: 'absolute', top: 0, left: `${toPct(selection.end)}%`, transform: 'translateX(-9px)', pointerEvents: 'none' }}>
-                        <span style={{ background: '#f4902c', color: '#111', fontSize: '9px', fontWeight: 'bold', padding: '0 3px' }}>O</span>
-                    </div>
+                    <div onPointerDown={dragPoint('out')} title="Out point — drag"
+                        style={{ position: 'absolute', bottom: 0, left: `${toPct(selection.end)}%`, transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '9px solid transparent', borderRight: '9px solid transparent', borderBottom: '13px solid #f44336', cursor: 'ew-resize', zIndex: 7 }} />
                 )}
                 {/* Cursor */}
                 {audioBuffer && inView(cursor) && (
@@ -366,21 +382,12 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
                 </div>
             )}
 
-            {/* Fine in/out sliders (kept for precise nudging) */}
+            {/* In / out readout (drag the triangles on the waveform to move them) */}
             {audioBuffer && (
-                <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
-                    <div style={{ flex: 1 }}>
-                        <span style={{ fontSize: '10px', color: '#aaa' }}>IN {(selection.start * audioBuffer.duration).toFixed(2)}s</span>
-                        <input type="range" min="0" max="0.999" step="0.001" value={selection.start}
-                            onChange={(e) => setSelection((s) => ({ ...s, start: Math.min(parseFloat(e.target.value), s.end - 0.001) }))}
-                            style={{ width: '100%' }} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <span style={{ fontSize: '10px', color: '#aaa' }}>OUT {(selection.end * audioBuffer.duration).toFixed(2)}s</span>
-                        <input type="range" min="0.001" max="1" step="0.001" value={selection.end}
-                            onChange={(e) => setSelection((s) => ({ ...s, end: Math.max(parseFloat(e.target.value), s.start + 0.001) }))}
-                            style={{ width: '100%' }} />
-                    </div>
+                <div style={{ display: 'flex', gap: '16px', marginTop: '8px', fontSize: '11px', color: '#aaa' }}>
+                    <span>IN <b style={{ color: '#4caf50' }}>{(selection.start * audioBuffer.duration).toFixed(3)}s</b></span>
+                    <span>OUT <b style={{ color: '#f44336' }}>{(selection.end * audioBuffer.duration).toFixed(3)}s</b></span>
+                    <span>LEN <b style={{ color: '#f4902c' }}>{((selection.end - selection.start) * audioBuffer.duration).toFixed(3)}s</b></span>
                 </div>
             )}
 
@@ -439,6 +446,14 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
                         ))}
                     </div>
                 </div>
+            )}
+
+            {browsing && window.SoundBrowse && (
+                <window.SoundBrowse
+                    targetLabel="Wave editor"
+                    onClose={() => setBrowsing(false)}
+                    onChoose={(file, meta) => { handleFile(file, meta && meta.folder); setBrowsing(false); }}
+                />
             )}
         </div>
     );

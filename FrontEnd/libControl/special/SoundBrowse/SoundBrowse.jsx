@@ -65,17 +65,22 @@ const WaveThumb = ({ entry, selected, onSelect, scrollRootRef }) => {
     );
 };
 
-// Recursively collect audio files (with their sub-path) from a folder tree.
-const MAX_FILES = 4000;
-const gatherFiles = async (handle, prefix, out, depth) => {
-    if (depth > 8 || out.length >= MAX_FILES) return;
+// One pass over the tree: collect ALL filenames (cheap — for the filter chips)
+// while capping the file HANDLES kept for the thumbnail grid.
+const MAX_FILES = 4000;    // cap on rendered thumbnails
+const NAME_MAX = 60000;    // cap on the name-only scan
+const gatherAll = async (handle, prefix, files, names, depth) => {
+    if (depth > 12 || names.length >= NAME_MAX) return;
     const subdirs = [];
     for await (const [n, h] of handle.entries()) {
-        if (out.length >= MAX_FILES) break;
+        if (names.length >= NAME_MAX) break;
         if (h.kind === 'directory') subdirs.push([n, h]);
-        else if (AUDIO_RE.test(n)) out.push({ name: n, handle: h, sub: prefix });
+        else if (AUDIO_RE.test(n)) {
+            names.push({ name: n, sub: prefix });
+            if (files.length < MAX_FILES) files.push({ name: n, handle: h, sub: prefix });
+        }
     }
-    for (const [n, h] of subdirs) { if (out.length >= MAX_FILES) break; await gatherFiles(h, prefix ? `${prefix}/${n}` : n, out, depth + 1); }
+    for (const [n, h] of subdirs) { if (names.length >= NAME_MAX) break; await gatherAll(h, prefix ? `${prefix}/${n}` : n, files, names, depth + 1); }
 };
 
 // Deep search: recurse the WHOLE tree (past MAX_FILES) collecting only files whose
@@ -203,15 +208,15 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     };
     const selectFolder = async (handle, path) => {
         setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr(''); setFilter(''); setScanning(true); setChips([]);
-        const items = [];
-        // Recurse through every sub-folder so all files show flattened in the grid.
-        try { await gatherFiles(handle, '', items, 0); }
+        const items = [], names = [];
+        // Recurse every sub-folder: all names feed the chips; handles (capped) the grid.
+        try { await gatherAll(handle, '', items, names, 0); }
         catch (e) { setErr('Could not read folder.'); }
         items.sort((a, b) => (a.sub === b.sub ? a.name.localeCompare(b.name) : (a.sub || '').localeCompare(b.sub || '')));
         setFolderFiles(items);
-        setChips(computeChips(items));
+        setChips(computeChips(names));   // chips from EVERY filename, not just the shown 4000
         setScanning(false);
-        if (items.length >= MAX_FILES) setErr(`Showing the first ${MAX_FILES} files.`);
+        if (names.length > MAX_FILES) setErr(`Showing ${MAX_FILES} of ${names.length}${names.length >= NAME_MAX ? '+' : ''} files — filter to find the rest.`);
     };
     const onPlainFiles = (fileList) => {
         setFlatEntries(Array.from(fileList || []).filter((f) => AUDIO_RE.test(f.name)).map((f) => ({ name: f.name, file: f })));

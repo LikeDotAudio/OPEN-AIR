@@ -13,7 +13,7 @@
     },
     "blocks": {
       "Sampler_Layout": {
-        "type": "OcaArray",
+        "type": "OcaBlock",
         "description": {
           "En": "Sampler & Sequencing Interface",
           "show_label": false
@@ -28,9 +28,8 @@
           "padx": 20,
           "align": "top"
         },
-        "children": [
-          {
-            "id": "sampler_pads",
+        "fields": {
+          "sampler_pads": {
             "type": "Sampler",
             "props": {
               "label": "MPC Drum Sampler"
@@ -39,9 +38,11 @@
               "sticky": "nsew"
             }
           },
-          {
-            "id": "right_column_tools",
-            "type": "OcaArray",
+          "right_column_tools": {
+            "type": "OcaBlock",
+            "description": {
+              "show_label": false
+            },
             "layout_columns": 1,
             "column_sizing": [
               { "weight": 1 }
@@ -51,9 +52,8 @@
               "pady": 0,
               "padx": 0
             },
-            "children": [
-              {
-                "id": "audio_editor",
+            "fields": {
+              "audio_editor": {
                 "type": "AudioEditor",
                 "props": {
                   "label": "Waveform Editor & Slicer"
@@ -62,8 +62,7 @@
                   "sticky": "ew"
                 }
               },
-              {
-                "id": "pattern_sequencer",
+              "pattern_sequencer": {
                 "type": "Sequencer",
                 "props": {
                   "label": "Pattern Sequencer"
@@ -72,9 +71,9 @@
                   "sticky": "ew"
                 }
               }
-            ]
+            }
           }
-        ]
+        }
       }
     }
   }

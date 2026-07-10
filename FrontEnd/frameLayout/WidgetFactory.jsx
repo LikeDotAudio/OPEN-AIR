@@ -168,7 +168,10 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
         node={node}
         path_prefix={path_prefix}
         jsonPath={jsonPath}
+        {...(node.props && typeof node.props === 'object' ? node.props : {})}
       />
+      {/* node.props is spread so leaf components authored as ({ label, ... })
+          receive their values from the JSON `props` object. */}
     </div>
   );
 };

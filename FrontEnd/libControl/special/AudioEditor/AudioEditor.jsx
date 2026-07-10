@@ -247,7 +247,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         }
         const name = fileName || 'slice';
         window.oaSetDrumSample(selectedPad, sliced, {
-            loop: autoLoop, fade, pitch: Math.pow(2, pitchSemi / 12), name,
+            loop: autoLoop, fade, pitch: Math.pow(2, pitchSemi / 12), name, folder: loadedFolder || '',
         });
         if (mqttPublish) mqttPublish(`OpenAir/Gui/DrumKit/${selectedPad}/sample`, { name, folder: loadedFolder || '' });
         setSamples((list) => {

@@ -61,6 +61,7 @@ window.oaSetDrumSample = function (idx, buffer, opts) {
         loop: !!opts.loop,
         fade: !!opts.fade,
         name: opts.name || '',
+        folder: opts.folder || '',  // source folder (for set snapshots / revert)
     };
 };
 

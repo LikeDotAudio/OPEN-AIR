@@ -53,19 +53,19 @@
               "padx": 0
             },
             "fields": {
-              "audio_editor": {
-                "type": "AudioEditor",
+              "pattern_sequencer": {
+                "type": "Sequencer",
                 "props": {
-                  "label": "Waveform Editor & Slicer"
+                  "label": "Pattern Sequencer"
                 },
                 "layout": {
                   "sticky": "ew"
                 }
               },
-              "pattern_sequencer": {
-                "type": "Sequencer",
+              "audio_editor": {
+                "type": "AudioEditor",
                 "props": {
-                  "label": "Pattern Sequencer"
+                  "label": "Waveform Editor & Slicer"
                 },
                 "layout": {
                   "sticky": "ew"

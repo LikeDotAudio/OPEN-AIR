@@ -1,3 +1,5 @@
+const loadDrumSets = () => { try { return JSON.parse(window.localStorage.getItem('oaDrumSets')) || {}; } catch (e) { return {}; } };
+
 const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 10, onHit = null }) => {
     // Shared drum kit — the SAME 16 voices the Sequencer uses (DrumKit.js).
     const KIT = window.OA_DRUM_KIT || [];
@@ -46,6 +48,41 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         setTimeout(() => setRestoreMsg(''), 2500);
     };
 
+    // ---- SETS: named snapshots of the whole pad kit --------------------------
+    const [setsState, setSetsState] = window.useMqttState('OpenAir/Gui/DrumSets', { items: loadDrumSets() });
+    const sets = (setsState && setsState.items) || {};
+    const [currentSet, setCurrentSet] = React.useState('');
+    React.useEffect(() => { try { localStorage.setItem('oaDrumSets', JSON.stringify(sets)); } catch (e) {} }, [setsState]);
+
+    const snapshotPads = () => {
+        const arr = [];
+        for (let i = 0; i < 16; i++) {
+            const e = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[i];
+            arr.push(e && e.buffer ? { name: e.name || '', folder: e.folder || '', pitch: e.pitch || 1, loop: !!e.loop, fade: !!e.fade, offset: e.offset || 0 } : null);
+        }
+        return arr;
+    };
+    const newSet = () => {
+        const name = (window.prompt('Name this set:', `Set ${Object.keys(sets).length + 1}`) || '').trim();
+        if (!name) return;
+        setSetsState({ items: Object.assign({}, sets, { [name]: snapshotPads() }) });
+        setCurrentSet(name);
+    };
+    const deleteSet = (name) => {
+        const next = Object.assign({}, sets); delete next[name];
+        setSetsState({ items: next });
+        if (currentSet === name) setCurrentSet('');
+    };
+    const loadSet = async (name) => {
+        setCurrentSet(name);
+        const set = sets[name]; if (!set) return;
+        const metaByIdx = {};
+        set.forEach((e, i) => { if (e && e.name) { metaByIdx[i] = { name: e.name, folder: e.folder }; publishSample(i, e.name, e.folder); } });
+        if (window.oaRestoreKit) { try { await window.oaRestoreKit(metaByIdx); } catch (err) {} }
+        set.forEach((e, i) => { if (e && window.OA_DRUM_SAMPLES[i]) window.oaUpdateDrumSample(i, { pitch: e.pitch, loop: e.loop, fade: e.fade, offset: e.offset }); });
+        setSampleNames((prev) => { const n = [...prev]; for (let i = 0; i < 16; i++) { const loaded = window.OA_DRUM_SAMPLES[i]; n[i] = loaded ? (loaded.name || '(loaded)') : (metaByIdx[i] ? metaByIdx[i].name : n[i]); } return n; });
+    };
+
     // The standard MPC layout is bottom-left to top-right:
     // 13 14 15 16
     // 9  10 11 12
@@ -67,7 +104,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             const arrayBuf = await file.arrayBuffer();
             const ctx = window.oaAudioCtx();
             const audioBuf = await window.oaDecodeAudio(ctx, arrayBuf);
-            window.oaSetDrumSample(index, audioBuf, { name: file.name });
+            window.oaSetDrumSample(index, audioBuf, { name: file.name, folder: (meta && meta.folder) || '' });
             setSampleNames((prev) => { const n = [...prev]; n[index] = file.name; return n; });
             publishSample(index, file.name, meta && meta.folder);
         } catch (e) {
@@ -332,6 +369,24 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
 
             <div style={{ marginTop: '14px', fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
                 Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to browse sounds
+            </div>
+
+            {/* SETS — named snapshots of the whole kit */}
+            <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '11px', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Sets</span>
+                <select value={currentSet} onChange={(e) => loadSet(e.target.value)}
+                    style={{ background: '#000', color: '#f4902c', border: '1px solid #444', borderRadius: '3px', padding: '4px 8px', fontSize: '12px', minWidth: '130px' }}>
+                    <option value="">— select set —</option>
+                    {Object.keys(sets).map((n) => <option key={n} value={n}>{n}</option>)}
+                </select>
+                <button onClick={newSet} title="Save the current kit as a new set"
+                    style={{ background: '#388e3c', color: '#fff', border: 'none', borderRadius: '3px', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                    + NEW set
+                </button>
+                {currentSet && (
+                    <button onClick={() => deleteSet(currentSet)} title={`Delete "${currentSet}"`}
+                        style={{ background: 'none', color: '#888', border: '1px solid #444', borderRadius: '3px', padding: '5px 8px', fontSize: '11px', cursor: 'pointer' }}>✕</button>
+                )}
             </div>
 
             {browsePad != null && window.SoundBrowse && (

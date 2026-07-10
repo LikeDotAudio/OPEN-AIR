@@ -21,7 +21,7 @@ const loadLibrary = () => {
 };
 
 // Self-contained rotary knob for tempo: drag up/down or scroll to change.
-const BpmKnob = ({ value, min = 40, max = 300, onChange }) => {
+const BpmKnob = ({ value, min = 40, max = 300, onChange, flash }) => {
     const drag = React.useRef(null);
     const angle = -135 + ((value - min) / (max - min)) * 270;   // 270° sweep
     const clamp = (v) => Math.round(Math.max(min, Math.min(max, v)));
@@ -41,7 +41,7 @@ const BpmKnob = ({ value, min = 40, max = 300, onChange }) => {
             <div
                 onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onWheel={onWheel}
                 title="Drag up/down or scroll to change BPM"
-                style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none', boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.6)' }}
+                style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: flash ? '2px solid #f4902c' : '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none', boxShadow: flash ? '0 0 14px rgba(244,144,44,0.9)' : 'inset 0 2px 5px rgba(0,0,0,0.6)', transition: 'box-shadow 0.08s, border-color 0.08s' }}
             >
                 <div style={{ position: 'absolute', inset: 0, transform: `rotate(${angle}deg)` }}>
                     <div style={{ position: 'absolute', left: '50%', top: '4px', width: '3px', height: '13px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '2px' }} />
@@ -49,6 +49,30 @@ const BpmKnob = ({ value, min = 40, max = 300, onChange }) => {
             </div>
             <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold', lineHeight: 1 }}>{value}</span>
             <span style={{ fontSize: '8px', color: '#888', letterSpacing: '0.5px' }}>BPM</span>
+        </div>
+    );
+};
+
+// Small rotary knob (volume / pan). Drag up/down or scroll.
+const MiniKnob = ({ value, min, max, label, display, onChange, size = 42 }) => {
+    const drag = React.useRef(null);
+    const frac = (value - min) / ((max - min) || 1);
+    const angle = -135 + frac * 270;
+    const clamp = (v) => Math.max(min, Math.min(max, v));
+    const onDown = (e) => { e.preventDefault(); drag.current = { y: e.clientY, v: value }; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} };
+    const onMove = (e) => { if (!drag.current) return; onChange(clamp(drag.current.v + (drag.current.y - e.clientY) * (max - min) / 120)); };
+    const onUp = () => { drag.current = null; };
+    const onWheel = (e) => { e.preventDefault(); onChange(clamp(value + (e.deltaY < 0 ? 1 : -1) * (max - min) / 60)); };
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+            <div onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onWheel={onWheel}
+                style={{ width: size, height: size, borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none' }}>
+                <div style={{ position: 'absolute', inset: 0, transform: `rotate(${angle}deg)` }}>
+                    <div style={{ position: 'absolute', left: '50%', top: '3px', width: '3px', height: `${Math.round(size * 0.3)}px`, background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '2px' }} />
+                </div>
+            </div>
+            <span style={{ fontSize: '10px', color: '#f4902c', fontWeight: 'bold', lineHeight: 1 }}>{display}</span>
+            <span style={{ fontSize: '8px', color: '#888' }}>{label}</span>
         </div>
     );
 };
@@ -148,6 +172,25 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const setPattern = (grid) => setSeq({ grid, bpm, steps });
     const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm, steps });
 
+    // Tap tempo — average the last few tap intervals; flashes the knob per tap.
+    const tapTimesRef = React.useRef([]);
+    const tapFlashRef = React.useRef(null);
+    const [tapping, setTapping] = React.useState(false);
+    const tapTempo = () => {
+        const now = performance.now();
+        const times = tapTimesRef.current;
+        if (times.length && now - times[times.length - 1] > 2000) times.length = 0; // reset after a pause
+        times.push(now);
+        if (times.length > 6) times.shift();
+        if (times.length >= 2) {
+            let sum = 0; for (let i = 1; i < times.length; i++) sum += times[i] - times[i - 1];
+            setBpm(Math.max(40, Math.min(300, Math.round(60000 / (sum / (times.length - 1))))));
+        }
+        setTapping(true);
+        if (tapFlashRef.current) clearTimeout(tapFlashRef.current);
+        tapFlashRef.current = setTimeout(() => setTapping(false), 130);
+    };
+
     // Change pattern length (4/8/16): truncate or pad each track row to n steps.
     const setSteps = (n) => {
         const grid = pattern.map((row) => {
@@ -166,6 +209,14 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     mutesRef.current = mutes;
     const toggleMute = (trkIdx) =>
         setMutes((prev) => { const n = [...prev]; n[trkIdx] = !n[trkIdx]; return n; });
+
+    // Per-track volume (0-1) + pan (-1..1), local to this client. Read via refs
+    // in the scheduler's stale RAF closure.
+    const [trackVol, setTrackVol] = React.useState(() => Array(TRACKS.length).fill(1));
+    const [trackPan, setTrackPan] = React.useState(() => Array(TRACKS.length).fill(0));
+    const trackVolRef = React.useRef(trackVol); trackVolRef.current = trackVol;
+    const trackPanRef = React.useRef(trackPan); trackPanRef.current = trackPan;
+    const [volPanTrack, setVolPanTrack] = React.useState(null); // { trkIdx, x, y }
 
     // Record mode: while recording AND playing, pad hits from the Sampler write
     // into the current step of the matching track at their played velocity.
@@ -187,9 +238,11 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     // a step is placed. Also flashes the matching Sampler pad.
     const previewVoice = (trkIdx, vel) => {
         const ctx = window.oaAudioCtx();
+        const vol = (vel / 100) * (trackVolRef.current[trkIdx] == null ? 1 : trackVolRef.current[trkIdx]);
+        const pan = trackPanRef.current[trkIdx] || 0;
         const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
-        if (entry && entry.buffer && window.oaPlayDrumSample) window.oaPlayDrumSample(ctx, Object.assign({}, entry, { loop: false }), ctx.currentTime, vel / 100);
-        else if (window.oaPlayDrumVoice) window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], ctx.currentTime, vel / 100);
+        if (entry && entry.buffer && window.oaPlayDrumSample) window.oaPlayDrumSample(ctx, Object.assign({}, entry, { loop: false }), ctx.currentTime, vol, pan);
+        else if (window.oaPlayDrumVoice) window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], ctx.currentTime, vol, pan);
         window.dispatchEvent(new CustomEvent('oa-drum-play', { detail: { idx: trkIdx, velocity: vel } }));
     };
 
@@ -267,7 +320,8 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         patternRef.current.forEach((track, trkIdx) => {
             const vel = velOf(track[stepNumber]);
             if (vel > 0 && !mutesRef.current[trkIdx]) {
-                const vol = vel / 100;   // per-step intensity → volume
+                const vol = (vel / 100) * (trackVolRef.current[trkIdx] == null ? 1 : trackVolRef.current[trkIdx]);
+                const pan = trackPanRef.current[trkIdx] || 0;
                 // Flash the matching Sampler pad's glow at this intensity, timed
                 // to when the note actually sounds (the scheduler runs ahead).
                 const glowDelay = Math.max(0, (time - ctx.currentTime) * 1000);
@@ -276,9 +330,9 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 // track if present (with its pitch/fade), otherwise the synth voice.
                 const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
                 if (entry && entry.buffer && window.oaPlayDrumSample) {
-                    window.oaPlayDrumSample(ctx, entry, time, vol);
+                    window.oaPlayDrumSample(ctx, entry, time, vol, pan);
                 } else if (window.oaPlayDrumVoice) {
-                    window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, vol);
+                    window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, vol, pan);
                 } else {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
@@ -438,7 +492,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     };
 
     return (
-        <div style={{ padding: '12px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
+        <div style={{ padding: '12px', backgroundColor: 'rgba(20,20,20,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#ccc' }}>{label}</h3>
             <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', alignItems: 'center' }}>
                 <button
@@ -456,7 +510,8 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 </button>
                 <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Tempo:</span>
-                    <BpmKnob value={bpm} onChange={setBpm} />
+                    <BpmKnob value={bpm} onChange={setBpm} flash={tapping} />
+                    <button onClick={tapTempo} title="Tap to set tempo" style={{ background: tapping ? '#f4902c' : '#333', color: tapping ? '#111' : '#ccc', border: '1px solid #444', borderRadius: '3px', padding: '6px 10px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>TAP</button>
                 </div>
                 <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '5px' }}>
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Steps:</span>
@@ -503,6 +558,13 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                 style={{ width: '17px', height: '17px', flexShrink: 0, padding: 0, fontSize: '9px', fontWeight: 'bold', lineHeight: 1, cursor: 'pointer', borderRadius: '3px', border: `1px solid ${muted ? '#d32f2f' : '#444'}`, background: muted ? '#d32f2f' : '#2a2a2a', color: muted ? '#fff' : '#888' }}
                             >
                                 M
+                            </button>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setVolPanTrack((cur) => (cur && cur.trkIdx === trkIdx ? null : { trkIdx, x: e.clientX, y: e.clientY })); }}
+                                title={`${trackName} — volume & pan`}
+                                style={{ width: '15px', height: '15px', flexShrink: 0, padding: 0, borderRadius: '50%', border: '1px solid #555', background: 'radial-gradient(circle at 50% 35%, #555, #222)', cursor: 'pointer', position: 'relative' }}
+                            >
+                                <span style={{ position: 'absolute', left: '50%', top: '1px', width: '2px', height: '5px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '1px' }} />
                             </button>
                             <span
                                 onClick={(e) => { e.stopPropagation(); setTrackMenu({ trkIdx, x: e.clientX, y: e.clientY }); }}
@@ -590,6 +652,21 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     </div>
                     <div style={{ fontSize: '9px', color: '#888', letterSpacing: '0.5px' }}>VELOCITY</div>
                 </div>
+            )}
+
+            {volPanTrack && (
+                <React.Fragment>
+                    <div onClick={() => setVolPanTrack(null)} style={{ position: 'fixed', inset: 0, zIndex: 9999 }} />
+                    <div style={{ position: 'fixed', zIndex: 10000, top: Math.min(volPanTrack.y, window.innerHeight - 130), left: Math.min(volPanTrack.x, window.innerWidth - 180), background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', padding: '10px 14px', display: 'flex', gap: '16px', alignItems: 'center', boxShadow: '0 8px 30px rgba(0,0,0,0.7)' }}>
+                        <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold' }}>{(TRACKS[volPanTrack.trkIdx] || {}).name}</span>
+                        <MiniKnob value={Math.round((trackVol[volPanTrack.trkIdx] == null ? 1 : trackVol[volPanTrack.trkIdx]) * 100)} min={0} max={100} label="VOL"
+                            display={`${Math.round((trackVol[volPanTrack.trkIdx] == null ? 1 : trackVol[volPanTrack.trkIdx]) * 100)}`}
+                            onChange={(v) => setTrackVol((prev) => { const n = [...prev]; n[volPanTrack.trkIdx] = v / 100; return n; })} />
+                        <MiniKnob value={Math.round((trackPan[volPanTrack.trkIdx] || 0) * 100)} min={-100} max={100} label="PAN"
+                            display={`${Math.round((trackPan[volPanTrack.trkIdx] || 0) * 100)}`}
+                            onChange={(v) => setTrackPan((prev) => { const n = [...prev]; n[volPanTrack.trkIdx] = v / 100; return n; })} />
+                    </div>
+                </React.Fragment>
             )}
 
             {trackMenu && (

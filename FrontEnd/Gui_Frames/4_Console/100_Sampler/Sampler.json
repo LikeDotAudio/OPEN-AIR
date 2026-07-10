@@ -19,6 +19,8 @@
           "show_label": false
         },
         "layout_columns": 2,
+        "responsive": true,
+        "responsive_min": 620,
         "column_sizing": [
           { "weight": 4, "minwidth": 450 },
           { "weight": 6, "minwidth": 600 }

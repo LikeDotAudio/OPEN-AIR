@@ -29,6 +29,12 @@ window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
       return w > 0 ? `minmax(${minW}, ${w}fr)` : `minmax(${minW}, auto)`;
     }).join(' ');
   }
+  // Responsive: collapse to fewer columns (and stack) when the container is too
+  // narrow to fit `responsive_min`-wide tracks side by side.
+  if (node.responsive) {
+    const rmin = node.responsive_min || 600;
+    gridCols = `repeat(auto-fit, minmax(min(100%, ${rmin}px), 1fr))`;
+  }
 
   // Background goes through the transparency manager so the panel cover behind
   // the bin shows through (instead of an opaque box). Per-node override via

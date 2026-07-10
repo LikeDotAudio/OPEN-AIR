@@ -72,14 +72,15 @@ window.oaUpdateDrumSample = function (idx, patch) {
 };
 
 // Synthesize a kit voice at `time` with `volume` (0..1). Used when no sample.
-window.oaPlayDrumVoice = function (ctx, track, time, volume) {
+window.oaPlayDrumVoice = function (ctx, track, time, volume, pan) {
     if (!track) return;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.frequency.value = track.freq;
     osc.type = track.type;
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    if (pan && ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); gain.connect(p); p.connect(ctx.destination); }
+    else gain.connect(ctx.destination);
     gain.gain.setValueAtTime(Math.max(0.0001, volume), time);
     gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
     osc.start(time);
@@ -88,7 +89,7 @@ window.oaPlayDrumVoice = function (ctx, track, time, volume) {
 
 // Play a loaded sample ENTRY at `time` with `volume` (0..1); honours pitch,
 // loop and fade. Returns the BufferSource so a looping voice can be stopped.
-window.oaPlayDrumSample = function (ctx, entry, time, volume) {
+window.oaPlayDrumSample = function (ctx, entry, time, volume, pan) {
     if (!entry || !entry.buffer) return null;
     const src = ctx.createBufferSource();
     const gain = ctx.createGain();
@@ -98,7 +99,8 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume) {
     const offset = Math.max(0, Math.min(entry.offset || 0, entry.buffer.duration - 0.001));
     if (src.loop) src.loopStart = offset;
     src.connect(gain);
-    gain.connect(ctx.destination);
+    if (pan && ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); gain.connect(p); p.connect(ctx.destination); }
+    else gain.connect(ctx.destination);
     const dur = (entry.buffer.duration - offset) / (entry.pitch || 1);
     const v = Math.max(0.0001, volume);
     if (entry.fade) {

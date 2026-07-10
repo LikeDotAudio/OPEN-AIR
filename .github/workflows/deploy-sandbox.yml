@@ -7,6 +7,12 @@ on:
     branches: [sandbox, develop]
   pull_request:
     branches: [sandbox, develop]
+  workflow_dispatch:
+    inputs:
+      full_sync:
+        description: "Full resync: upload every file by mtime/size, not just the pushed diff"
+        type: boolean
+        default: true
 
 # One deploy at a time per environment.
 concurrency:
@@ -33,10 +39,12 @@ jobs:
 
       # deploy.py regenerates FrontEnd/api/tree.json from Gui_Frames itself, so
       # there is no separate build step (the site uses CDN React/Babel, no npm).
-      - name: Deploy over FTPS (push only)
-        if: github.event_name == 'push'
+      - name: Deploy over FTPS
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:
           DEPLOY_ENV: sandbox
+          # Manual runs default to a full resync; pushes use the commit-range diff.
+          DEPLOY_FULL_SYNC: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_sync) && '1' || '' }}
           DEPLOY_DIFF_BASE: ${{ github.event.before }}
           DEPLOY_DIFF_HEAD: ${{ github.sha }}
           FTP_HOST: ${{ secrets.FTP_HOST }}

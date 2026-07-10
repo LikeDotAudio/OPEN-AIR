@@ -2,7 +2,7 @@
 // and the matching Sequencer track are the SAME voice — including any sample
 // loaded onto that pad.
 const TRACKS = window.OA_DRUM_KIT || [];
-const STEP_OPTIONS = [4, 8, 16];   // selectable pattern lengths
+const STEP_OPTIONS = [4, 8, 16, 32, 64];   // selectable pattern lengths
 const DEFAULT_STEPS = 16;
 const LIBRARY_KEY = 'oaSequencerLibrary';
 

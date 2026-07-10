@@ -65,6 +65,17 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
 
     return (
         <div style={{ padding: '25px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
+            {/* Velocity glow: bright on strike (scaled by --gi), fades over the sound's length. */}
+            <style>{`
+                @keyframes oaPadGlow {
+                    from {
+                        box-shadow: 0 0 calc(12px + var(--gi, 0.5) * 48px) calc(3px + var(--gi, 0.5) * 16px) rgba(244, 144, 44, calc(0.5 + var(--gi, 0.5) * 0.5));
+                    }
+                    to {
+                        box-shadow: 0 0 0 0 rgba(244, 144, 44, 0);
+                    }
+                }
+            `}</style>
             <h3 style={{ margin: '0 0 20px 0', fontSize: '18px', color: '#ccc', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '1px' }}>{label}</h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '18px', justifyContent: 'center', padding: '18px', background: '#0a0a0a', border: '1px solid #111', borderRadius: '8px' }}>
@@ -79,9 +90,10 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                     // orange, a synth-voice pad reads darker. Resting glow reflects
                     // the last hit's velocity.
                     const baseColor = hasSample ? '#f4902c' : '#3a3a3a';
-                    const restShadow = vel > 0
-                        ? `0 0 ${6 + 26 * intensity}px rgba(244, 144, 44, ${0.25 + 0.6 * intensity})`
-                        : (hasSample ? '0 4px 8px rgba(0,0,0,0.4)' : 'inset 0 1px 3px rgba(0,0,0,0.6)');
+                    // Resting shadow only — the velocity glow is a transient CSS
+                    // animation (oaPadGlow) that lasts exactly as long as the sound
+                    // plays, then fades to this dark resting state.
+                    const restShadow = hasSample ? '0 4px 8px rgba(0,0,0,0.4)' : 'inset 0 1px 3px rgba(0,0,0,0.6)';
 
                     return (
                         <div key={padNum} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -97,19 +109,26 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                                     }
                                     const v = hitPad(e, idx);
                                     const i = v / 100;
-                                    e.currentTarget.style.transform = 'scale(0.95)';
-                                    e.currentTarget.style.filter = `brightness(${0.75 + 0.6 * i})`;
-                                    e.currentTarget.style.boxShadow = `0 0 ${8 + 30 * i}px rgba(244, 144, 44, ${0.35 + 0.65 * i})`;
+                                    const el = e.currentTarget;
+                                    // Glow lasts exactly as long as the sound plays: the
+                                    // loaded sample's length, or ~180ms for the synth voice.
+                                    const buf = window.OA_DRUM_SAMPLES[idx];
+                                    const durMs = buf ? Math.max(120, Math.min(buf.duration * 1000, 5000)) : 180;
+                                    // Glow brightness + spread scale with the hit velocity.
+                                    el.style.setProperty('--gi', i);
+                                    el.style.transform = 'scale(0.95)';
+                                    el.style.filter = `brightness(${0.9 + 0.7 * i})`;
+                                    el.style.animation = 'none';
+                                    void el.offsetWidth;            // reflow → restart on rapid hits
+                                    el.style.animation = `oaPadGlow ${durMs}ms ease-out`;
                                 }}
                                 onPointerUp={(e) => {
                                     e.currentTarget.style.transform = 'scale(1)';
                                     e.currentTarget.style.filter = 'none';
-                                    e.currentTarget.style.boxShadow = restShadow;
                                 }}
                                 onPointerLeave={(e) => {
                                     e.currentTarget.style.transform = 'scale(1)';
                                     e.currentTarget.style.filter = 'none';
-                                    e.currentTarget.style.boxShadow = restShadow;
                                 }}
                                 style={{
                                     position: 'relative',
@@ -126,7 +145,7 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                                     display: 'flex', flexDirection: 'column',
                                     alignItems: 'center', justifyContent: 'center',
                                     textAlign: 'center', padding: '4px',
-                                    transition: 'transform 0.05s, background-color 0.05s, box-shadow 0.05s, filter 0.05s',
+                                    transition: 'transform 0.05s, background-color 0.05s, filter 0.05s',
                                     outline: 'none',
                                     touchAction: 'none'
                                 }}

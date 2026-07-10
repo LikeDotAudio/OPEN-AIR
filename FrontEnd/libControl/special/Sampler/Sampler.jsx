@@ -141,6 +141,23 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         return () => window.removeEventListener('keydown', onKey);
     }, []);
 
+    // Glow a pad whenever the Sequencer plays that voice (intensity = step velocity).
+    // Imperative only (no state) so 16th-note flashes don't churn React renders.
+    React.useEffect(() => {
+        const onPlay = (e) => {
+            const idx = e.detail && e.detail.idx;
+            if (idx == null) return;
+            const el = padButtons.current[idx];
+            if (!el) return;
+            const i = Math.max(0, Math.min(1, (e.detail.velocity || 0) / 100));
+            el.style.filter = `brightness(${0.9 + 0.5 * i})`;
+            startGlow(el, idx, i);
+            setTimeout(() => { if (el) el.style.filter = 'none'; }, 120);
+        };
+        window.addEventListener('oa-drum-play', onPlay);
+        return () => window.removeEventListener('oa-drum-play', onPlay);
+    }, []);
+
     return (
         <div ref={rootRef} style={{ padding: '25px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
             {/* Velocity glow: bright on strike (scaled by --gi), fades over the sound's length. */}

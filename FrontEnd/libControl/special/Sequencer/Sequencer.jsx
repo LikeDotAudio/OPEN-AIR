@@ -258,6 +258,10 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             const vel = velOf(track[stepNumber]);
             if (vel > 0 && !mutesRef.current[trkIdx]) {
                 const vol = vel / 100;   // per-step intensity → volume
+                // Flash the matching Sampler pad's glow at this intensity, timed
+                // to when the note actually sounds (the scheduler runs ahead).
+                const glowDelay = Math.max(0, (time - ctx.currentTime) * 1000);
+                setTimeout(() => window.dispatchEvent(new CustomEvent('oa-drum-play', { detail: { idx: trkIdx, velocity: vel } })), glowDelay);
                 // Play the shared voice: the Sampler's loaded sample for this
                 // track if present (with its pitch/fade), otherwise the synth voice.
                 const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];

@@ -89,7 +89,9 @@ def generate_api_grabbag():
 
 generate_api_grabbag()
 
-# Read .env file manually
+# Load credentials. In CI these come from OS environment (GitHub Environment
+# secrets); locally they fall back to the gitignored .env file. OS env always
+# wins so the same script serves both a laptop and the pipeline.
 env_vars = {}
 env_path = os.path.join(script_dir, '.env')
 if os.path.exists(env_path):
@@ -100,65 +102,133 @@ if os.path.exists(env_path):
                 key, val = line.split('=', 1)
                 env_vars[key.strip()] = val.strip()
 else:
-    print("❌ .env file not found.")
-    sys.exit(1)
+    print("ℹ️ No .env file found; relying on OS environment for credentials.")
 
-host = env_vars.get('FTP_HOST')
-user = env_vars.get('FTP_USER')
-passwd = env_vars.get('FTP_PASS')
-remote_base_dir = env_vars.get('REMOTE_DIR', '/')
+def cred(name, default=None):
+    return os.environ.get(name) or env_vars.get(name) or default
+
+host = cred('FTP_HOST')
+user = cred('FTP_USER')
+passwd = cred('FTP_PASS')
+remote_base_dir = cred('REMOTE_DIR', '/')
 
 if not all([host, user, passwd]):
-    print("❌ Missing FTP credentials in .env file.")
+    print("❌ Missing FTP credentials (FTP_HOST / FTP_USER / FTP_PASS).")
+    print("   Set them in FrontEnd/.env locally, or as GitHub Environment secrets in CI.")
     sys.exit(1)
-
-print("\n🔍 Finding uncommitted changed files in FrontEnd...")
 
 repo_root = os.path.dirname(script_dir)
 os.chdir(repo_root)
 
-# Check for uncommitted files via git
-result = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True)
 files_to_upload = []
-
-if result.returncode == 0 and result.stdout.strip():
-    for line in result.stdout.splitlines():
-        status = line[:2]
-        if 'D' in status:
-            continue
-        filepath = line[3:].strip('"')
-        
-        # If Git lists an entire untracked directory, we need to walk it and add all files
-        full_local = os.path.join(repo_root, filepath)
-        if os.path.isdir(full_local):
-            for root, _, files in os.walk(full_local):
-                for f in files:
-                    if f.endswith('.py'):
-                        continue
-                    full_f = os.path.join(root, f)
-                    rel_f = os.path.relpath(full_f, repo_root)
-                    if rel_f.startswith("FrontEnd/"):
-                        files_to_upload.append(rel_f.replace("\\", "/"))
-        else:
-            if filepath.startswith("FrontEnd/") and not filepath.endswith('.py'):
-                files_to_upload.append(filepath.replace("\\", "/"))
-
-# Deduplicate
-files_to_upload = list(set(files_to_upload))
 sync_all = False
 
-if not files_to_upload:
-    print("ℹ️ No uncommitted changes found. Falling back to FTP timestamp sync for all files...")
-    sync_all = True
+# ---- File selection strategy -------------------------------------------------
+# CI (commit-range):  DEPLOY_DIFF_BASE / DEPLOY_DIFF_HEAD are set by the workflow
+#                     from github.event.before / github.sha -> upload only the
+#                     FrontEnd files that changed in that push range.
+# Full sync:          DEPLOY_FULL_SYNC=1, or a first push (null base) -> compare
+#                     every local file against the server by mtime/size.
+# Local (default):    no env set -> upload uncommitted working-tree changes.
+diff_base = os.environ.get('DEPLOY_DIFF_BASE', '').strip()
+diff_head = (os.environ.get('DEPLOY_DIFF_HEAD', '').strip() or 'HEAD')
+force_full = os.environ.get('DEPLOY_FULL_SYNC') == '1'
 
-print(f"\n📡 Connecting to FTP server {host}...")
-try:
-    ftp = ftplib.FTP(host)
-    ftp.login(user, passwd)
-    print("✅ Connected and logged in.")
-except Exception as e:
-    print(f"❌ Failed to connect to FTP: {e}")
-    sys.exit(1)
+def _is_null_ref(ref):
+    # git's "no previous commit" sentinel is all zeros
+    return (not ref) or set(ref) == {'0'}
+
+if force_full:
+    print("\n🧹 DEPLOY_FULL_SYNC=1 -> full timestamp sync of all files.")
+    sync_all = True
+elif diff_base != '':
+    # CI commit-range mode
+    if _is_null_ref(diff_base):
+        print("\n🌱 No previous commit for this ref (first deploy) -> full timestamp sync.")
+        sync_all = True
+    else:
+        print(f"\n🔍 Commit-range deploy: {diff_base[:8]}..{diff_head[:8]}")
+        rng = subprocess.run(['git', 'diff', '--name-only', diff_base, diff_head],
+                             capture_output=True, text=True)
+        if rng.returncode != 0:
+            print(f"⚠️ git diff failed ({rng.stderr.strip()}); falling back to full sync.")
+            sync_all = True
+        else:
+            for filepath in rng.stdout.splitlines():
+                filepath = filepath.strip()
+                if filepath.startswith("FrontEnd/") and not filepath.endswith('.py'):
+                    if os.path.isfile(os.path.join(repo_root, filepath)):
+                        files_to_upload.append(filepath.replace("\\", "/"))
+            print(f"   {len(files_to_upload)} changed FrontEnd file(s) in range.")
+else:
+    # Local mode: uncommitted working-tree changes
+    print("\n🔍 Finding uncommitted changed files in FrontEnd...")
+    result = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True)
+    if result.returncode == 0 and result.stdout.strip():
+        for line in result.stdout.splitlines():
+            status = line[:2]
+            if 'D' in status:
+                continue
+            filepath = line[3:].strip('"')
+
+            # If Git lists an entire untracked directory, we need to walk it and add all files
+            full_local = os.path.join(repo_root, filepath)
+            if os.path.isdir(full_local):
+                for root, _, files in os.walk(full_local):
+                    for f in files:
+                        if f.endswith('.py'):
+                            continue
+                        full_f = os.path.join(root, f)
+                        rel_f = os.path.relpath(full_f, repo_root)
+                        if rel_f.startswith("FrontEnd/"):
+                            files_to_upload.append(rel_f.replace("\\", "/"))
+            else:
+                if filepath.startswith("FrontEnd/") and not filepath.endswith('.py'):
+                    files_to_upload.append(filepath.replace("\\", "/"))
+
+    files_to_upload = list(set(files_to_upload))
+    if not files_to_upload:
+        print("ℹ️ No uncommitted changes found. Falling back to FTP timestamp sync for all files...")
+        sync_all = True
+
+# Generated API artifacts are never in a git diff range, but the live site must
+# always get the freshest tree/grabbag and entry HTML. Force them in.
+if not sync_all:
+    for artifact in ("FrontEnd/api/tree.json", "FrontEnd/api/grabbag", "FrontEnd/index.html"):
+        if os.path.isfile(os.path.join(repo_root, artifact)):
+            files_to_upload.append(artifact)
+
+files_to_upload = list(set(files_to_upload))
+
+# Prefer explicit FTPS (encrypted control + data channel). Fall back to plain
+# FTP unless DEPLOY_FTP_REQUIRE_TLS=1. Force plain with DEPLOY_FTP_PLAIN=1.
+force_plain = os.environ.get('DEPLOY_FTP_PLAIN') == '1'
+require_tls = os.environ.get('DEPLOY_FTP_REQUIRE_TLS') == '1'
+ftp = None
+
+if not force_plain:
+    try:
+        print(f"\n🔒 Connecting to {host} over explicit FTPS...")
+        ftp = ftplib.FTP_TLS(host, timeout=30)
+        ftp.login(user, passwd)
+        ftp.prot_p()  # encrypt the data channel too
+        print("✅ Connected and logged in over FTPS (TLS).")
+    except Exception as e:
+        print(f"⚠️ FTPS unavailable: {e}")
+        if require_tls:
+            print("❌ DEPLOY_FTP_REQUIRE_TLS=1 but FTPS failed. Aborting.")
+            sys.exit(1)
+        ftp = None
+
+if ftp is None:
+    try:
+        print(f"\n📡 Connecting to {host} over plain FTP...")
+        ftp = ftplib.FTP(host, timeout=30)
+        ftp.login(user, passwd)
+        print("✅ Connected and logged in (plain FTP).")
+    except Exception as e:
+        print(f"❌ Failed to connect to FTP: {e}")
+        sys.exit(1)
 
 # Inline comment: Logic for ensure_remote_dir
 def ensure_remote_dir(ftp_conn, remote_path):
@@ -235,12 +305,13 @@ if not files_to_upload:
     ftp.quit()
     sys.exit(0)
 
-# Sort to ensure index.html / index.htm are uploaded first
+# Upload the entry HTML LAST so the live page never points at assets that
+# haven't finished uploading yet (near-atomic cutover).
 def sort_priority(filepath):
     base = os.path.basename(filepath).lower()
     if base in ['index.html', 'index.htm']:
-        return 0
-    return 1
+        return 1
+    return 0
 
 files_to_upload.sort(key=sort_priority)
 
@@ -274,3 +345,43 @@ for filepath in files_to_upload:
 
 ftp.quit()
 print("\n🎉 Deployment complete!")
+
+
+# ---- Post-deploy build stamp (observability) --------------------------------
+# Best-effort: publish the deployed commit + timestamp to MQTT so clients and
+# dashboards can see which build is live. No-op unless MQTT_HOST is configured.
+def publish_build_stamp():
+    mqtt_host = cred('MQTT_HOST')
+    if not mqtt_host:
+        return
+    try:
+        import paho.mqtt.publish as publish
+    except ImportError:
+        print("⚠️ paho-mqtt not installed; skipping build stamp.")
+        return
+
+    sha = os.environ.get('DEPLOY_DIFF_HEAD')
+    if not sha or sha == 'HEAD':
+        rev = subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True)
+        sha = rev.stdout.strip() if rev.returncode == 0 else 'unknown'
+
+    payload = json.dumps({
+        "environment": os.environ.get('DEPLOY_ENV', 'local'),
+        "commit": sha,
+        "deployed_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "files": len(files_to_upload),
+    })
+    topic = cred('MQTT_TOPIC', 'OpenAir/Deploy/stamp')
+    port = int(cred('MQTT_PORT', '1883'))
+    auth = None
+    if cred('MQTT_USER'):
+        auth = {'username': cred('MQTT_USER'), 'password': cred('MQTT_PASS', '')}
+
+    try:
+        publish.single(topic, payload, hostname=mqtt_host, port=port, auth=auth)
+        print(f"📣 Build stamp published to {mqtt_host}:{port} [{topic}]")
+    except Exception as e:
+        print(f"⚠️ Build stamp publish failed: {e}")
+
+
+publish_build_stamp()

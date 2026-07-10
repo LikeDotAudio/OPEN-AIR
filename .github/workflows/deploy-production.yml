@@ -1,0 +1,58 @@
+name: Deploy · Production
+
+# Branch = environment. Pushing main deploys to production.
+# Promote a validated build with a fast-forward:  git push origin sandbox:main
+# PRs targeting main validate the deploy but do NOT upload.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# One production deploy at a time.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production         # pulls production-scoped secrets
+    steps:
+      - name: Checkout (full history for commit-range diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0            # deploy.py diffs before..sha; needs history
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deploy dependencies
+        run: pip install -r FrontEnd/requirements-deploy.txt
+
+      # deploy.py regenerates FrontEnd/api/tree.json from Gui_Frames itself, so
+      # there is no separate build step (the site uses CDN React/Babel, no npm).
+      - name: Deploy over FTPS (push only)
+        if: github.event_name == 'push'
+        env:
+          DEPLOY_ENV: production
+          DEPLOY_DIFF_BASE: ${{ github.event.before }}
+          DEPLOY_DIFF_HEAD: ${{ github.sha }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
+          MQTT_HOST: ${{ secrets.MQTT_HOST }}
+          MQTT_PORT: ${{ secrets.MQTT_PORT }}
+          MQTT_USER: ${{ secrets.MQTT_USER }}
+          MQTT_PASS: ${{ secrets.MQTT_PASS }}
+          MQTT_TOPIC: ${{ secrets.MQTT_TOPIC }}
+        run: python3 FrontEnd/deploy_FTP_to_like_dot_audio.py
+
+      - name: Validate only (pull request)
+        if: github.event_name == 'pull_request'
+        run: |
+          python3 -m py_compile FrontEnd/deploy_FTP_to_like_dot_audio.py
+          echo "PR validated: deploy script compiles. No upload on PRs."

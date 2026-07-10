@@ -45,8 +45,29 @@ window.oaAudioCtx = function () {
     return window.OA_AUDIO_CTX;
 };
 
-// index -> decoded AudioBuffer. Populated by the Sampler on load, read by both.
+// index -> sample ENTRY { buffer, pitch, loop, fade, name }. Populated by the
+// Sampler / AudioEditor, read by both the Sampler pads and the Sequencer.
 window.OA_DRUM_SAMPLES = window.OA_DRUM_SAMPLES || {};
+// index -> currently-playing looping BufferSource (for auto-loop toggle pads).
+window.OA_DRUM_LOOPS = window.OA_DRUM_LOOPS || {};
+
+// Store/replace a pad's sample. opts: { loop, pitch, fade, name }.
+window.oaSetDrumSample = function (idx, buffer, opts) {
+    opts = opts || {};
+    window.OA_DRUM_SAMPLES[idx] = {
+        buffer: buffer,
+        pitch: opts.pitch || 1,     // playbackRate multiplier
+        loop: !!opts.loop,
+        fade: !!opts.fade,
+        name: opts.name || '',
+    };
+};
+
+// Patch an existing pad's options (pitch/loop/fade) without re-decoding.
+window.oaUpdateDrumSample = function (idx, patch) {
+    const e = window.OA_DRUM_SAMPLES[idx];
+    if (e) Object.assign(e, patch || {});
+};
 
 // Synthesize a kit voice at `time` with `volume` (0..1). Used when no sample.
 window.oaPlayDrumVoice = function (ctx, track, time, volume) {
@@ -63,24 +84,53 @@ window.oaPlayDrumVoice = function (ctx, track, time, volume) {
     osc.stop(time + 0.15);
 };
 
-// Play a loaded sample buffer at `time` with `volume` (0..1).
-window.oaPlayDrumSample = function (ctx, buffer, time, volume) {
+// Play a loaded sample ENTRY at `time` with `volume` (0..1); honours pitch,
+// loop and fade. Returns the BufferSource so a looping voice can be stopped.
+window.oaPlayDrumSample = function (ctx, entry, time, volume) {
+    if (!entry || !entry.buffer) return null;
     const src = ctx.createBufferSource();
     const gain = ctx.createGain();
-    src.buffer = buffer;
+    src.buffer = entry.buffer;
+    src.playbackRate.value = entry.pitch || 1;
+    src.loop = !!entry.loop;
     src.connect(gain);
     gain.connect(ctx.destination);
-    gain.gain.setValueAtTime(Math.max(0.0001, volume), time);
+    const dur = entry.buffer.duration / (entry.pitch || 1);
+    const v = Math.max(0.0001, volume);
+    if (entry.fade) {
+        const f = Math.min(0.05, dur * 0.2);
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.exponentialRampToValueAtTime(v, time + f);
+        if (!src.loop) {
+            gain.gain.setValueAtTime(v, Math.max(time + f, time + dur - f));
+            gain.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+        }
+    } else {
+        gain.gain.setValueAtTime(v, time);
+    }
     src.start(time);
+    return src;
 };
 
-// Trigger drum voice `idx` (0-15): sample if loaded, else synth. `time` optional
-// (defaults to now); `volume` 0..1. Central helper both components call.
+// Trigger drum voice `idx`: sample (pitch/loop/fade) if loaded, else synth.
+// For an auto-loop pad, TOGGLES the loop. Returns true if a loop just STARTED.
 window.oaTriggerDrum = function (idx, volume, time) {
     const ctx = window.oaAudioCtx();
     const t = (typeof time === 'number') ? time : ctx.currentTime;
     const vol = Math.max(0, Math.min(1, volume == null ? 1 : volume));
-    const buf = window.OA_DRUM_SAMPLES[idx];
-    if (buf) window.oaPlayDrumSample(ctx, buf, t, vol);
-    else window.oaPlayDrumVoice(ctx, window.OA_DRUM_KIT[idx], t, vol);
+    const entry = window.OA_DRUM_SAMPLES[idx];
+    if (entry && entry.buffer) {
+        if (entry.loop) {
+            const existing = window.OA_DRUM_LOOPS[idx];
+            if (existing) { try { existing.stop(); } catch (e) {} window.OA_DRUM_LOOPS[idx] = null; return false; }
+            const src = window.oaPlayDrumSample(ctx, entry, t, vol);
+            window.OA_DRUM_LOOPS[idx] = src;
+            if (src) src.onended = () => { if (window.OA_DRUM_LOOPS[idx] === src) window.OA_DRUM_LOOPS[idx] = null; };
+            return true;
+        }
+        window.oaPlayDrumSample(ctx, entry, t, vol);
+        return false;
+    }
+    window.oaPlayDrumVoice(ctx, window.OA_DRUM_KIT[idx], t, vol);
+    return false;
 };

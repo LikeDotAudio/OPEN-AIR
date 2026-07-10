@@ -107,10 +107,10 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         pattern.forEach((track, trkIdx) => {
             if (track[stepNumber] && !mutesRef.current[trkIdx]) {
                 // Play the shared voice: the Sampler's loaded sample for this
-                // track if present, otherwise the synth voice.
-                const buf = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
-                if (buf && window.oaPlayDrumSample) {
-                    window.oaPlayDrumSample(ctx, buf, time, 1);
+                // track if present (with its pitch/fade), otherwise the synth voice.
+                const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
+                if (entry && entry.buffer && window.oaPlayDrumSample) {
+                    window.oaPlayDrumSample(ctx, entry, time, 1);
                 } else if (window.oaPlayDrumVoice) {
                     window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, 1);
                 } else {

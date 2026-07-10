@@ -6,8 +6,10 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
     // The decoded audio lives in window.OA_DRUM_SAMPLES so the Sequencer plays it
     // too. Seed from that shared store so pads loaded before a remount still show.
     const [sampleNames, setSampleNames] = React.useState(() =>
-        Array(16).fill(null).map((_, i) =>
-            (window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[i]) ? '(loaded)' : null));
+        Array(16).fill(null).map((_, i) => {
+            const e = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[i];
+            return e ? (e.name || '(loaded)') : null;
+        }));
 
     // Side-car value per pad: velocity (0-100) of the most recent hit. Drives
     // playback volume AND the pad's visual glow.
@@ -31,7 +33,7 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
             const arrayBuf = await file.arrayBuffer();
             const ctx = window.oaAudioCtx();
             const audioBuf = await ctx.decodeAudioData(arrayBuf);
-            window.OA_DRUM_SAMPLES[index] = audioBuf;
+            window.oaSetDrumSample(index, audioBuf, { name: file.name });
             setSampleNames((prev) => { const n = [...prev]; n[index] = file.name; return n; });
         } catch (e) {
             console.error('🛑 [Sampler] Could not decode audio:', e);
@@ -112,8 +114,8 @@ const Sampler = ({ label = "MPC Sampler", centerVelocity = 100, edgeVelocity = 1
                                     const el = e.currentTarget;
                                     // Glow lasts exactly as long as the sound plays: the
                                     // loaded sample's length, or ~180ms for the synth voice.
-                                    const buf = window.OA_DRUM_SAMPLES[idx];
-                                    const durMs = buf ? Math.max(120, Math.min(buf.duration * 1000, 5000)) : 180;
+                                    const entry = window.OA_DRUM_SAMPLES[idx];
+                                    const durMs = (entry && entry.buffer) ? Math.max(120, Math.min(entry.buffer.duration * 1000, 5000)) : 180;
                                     // Glow brightness + spread scale with the hit velocity.
                                     el.style.setProperty('--gi', i);
                                     el.style.transform = 'scale(0.95)';

@@ -106,9 +106,9 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     };
 
     // Number-pad → pad mapping (only while this Sampler is on screen). The 3×3
-    // numpad maps to drum pads 1-6 and 9-11 as requested:
-    //   1 2 3 → pads 1 2 3   ·   4 5 6 → pads 4 5 6   ·   7 8 9 → pads 9 10 11
-    const NUMKEY_TO_PADNUM = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 9, 8: 10, 9: 11 };
+    // numpad maps spatially to the bottom-left 3×3 of the MPC pads:
+    //   1 2 3 → pads 1 2 3   ·   4 5 6 → pads 5 6 7   ·   7 8 9 → pads 9 10 11
+    const NUMKEY_TO_PADNUM = { 1: 1, 2: 2, 3: 3, 4: 5, 5: 6, 6: 7, 7: 9, 8: 10, 9: 11 };
 
     React.useEffect(() => {
         const el = rootRef.current;

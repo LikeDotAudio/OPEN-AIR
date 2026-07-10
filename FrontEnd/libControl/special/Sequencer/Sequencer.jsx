@@ -312,33 +312,25 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     const onStepPointerDown = (e, trkIdx, step) => {
         e.preventDefault();
+        // Plain click = toggle on/off. ALT+drag = large, detailed intensity fader.
+        if (!e.altKey) {
+            writeStepVel(trkIdx, step, velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100);
+            return;
+        }
         const startY = e.clientY;
-        const startVel = velOf(patternRef.current[trkIdx][step]);
-        const state = { active: false };
-        const enterFader = () => {
-            state.active = true;
-            const base = startVel > 0 ? startVel : 100;
-            writeStepVel(trkIdx, step, base);
-            setActiveFader({ trkIdx, step, vel: Math.round(base) });
-        };
-        const holdTimer = setTimeout(enterFader, 160);
+        const startVel = velOf(patternRef.current[trkIdx][step]) || 100;
+        writeStepVel(trkIdx, step, startVel);                 // ensure the step is on
+        setActiveFader({ trkIdx, step, vel: Math.round(startVel), x: e.clientX, y: e.clientY });
         const move = (ev) => {
-            if (!state.active && Math.abs(ev.clientY - startY) > 4) { clearTimeout(holdTimer); enterFader(); }
-            if (state.active) {
-                const base = startVel > 0 ? startVel : 100;
-                const vel = Math.max(1, Math.min(100, base + (startY - ev.clientY) * 1.2));
-                writeStepVel(trkIdx, step, vel);
-                setActiveFader({ trkIdx, step, vel: Math.round(vel) });
-            }
+            // Fine control: ~0.5 velocity per pixel (full range spans ~200px).
+            const vel = Math.max(1, Math.min(100, startVel + (startY - ev.clientY) * 0.5));
+            writeStepVel(trkIdx, step, vel);
+            setActiveFader((f) => (f ? { ...f, vel: Math.round(vel) } : f));
         };
         const up = () => {
-            clearTimeout(holdTimer);
             window.removeEventListener('pointermove', move);
             window.removeEventListener('pointerup', up);
             setActiveFader(null);
-            if (!state.active) {   // quick tap → toggle on/off
-                writeStepVel(trkIdx, step, velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100);
-            }
         };
         window.addEventListener('pointermove', move);
         window.addEventListener('pointerup', up);
@@ -449,22 +441,17 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                 return (
                                     <div key={step}
                                         onPointerDown={(e) => onStepPointerDown(e, trkIdx, step)}
-                                        title={isLit ? `Velocity ${vel} — hold & drag to adjust` : 'Click to add · hold to set intensity'}
+                                        title={isLit ? `Velocity ${vel} — ALT+drag to adjust` : 'Click to add · ALT+drag to set intensity'}
                                         style={{
                                             position: 'relative', overflow: 'hidden',
                                             width: '18px', height: '20px',
                                             backgroundColor: isCurrent ? '#fff' : (isBeat && !isLit ? '#333' : '#1a1a1a'),
                                             border: isFading ? '1px solid #fff' : (isLit ? '1px solid #ffa726' : '1px solid #111'),
-                                            cursor: 'ns-resize', borderRadius: '2px', touchAction: 'none',
+                                            cursor: 'pointer', borderRadius: '2px', touchAction: 'none',
                                             boxShadow: isLit ? `0 0 4px rgba(244, 144, 44, ${0.2 + 0.4 * (vel / 100)})` : 'none',
                                         }}>
                                         {isLit && !isCurrent && (
                                             <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})` }} />
-                                        )}
-                                        {isFading && (
-                                            <div style={{ position: 'absolute', bottom: '23px', left: '50%', transform: 'translateX(-50%)', background: '#000', color: '#f4902c', fontSize: '9px', fontWeight: 'bold', padding: '1px 3px', borderRadius: '2px', border: '1px solid #f4902c', zIndex: 10, pointerEvents: 'none' }}>
-                                                {activeFader.vel}
-                                            </div>
                                         )}
                                     </div>
                                 );
@@ -506,6 +493,21 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     </div>
                 )}
             </div>
+
+            {activeFader && (
+                <div style={{ position: 'fixed', zIndex: 10000, pointerEvents: 'none',
+                    left: Math.min(activeFader.x + 16, window.innerWidth - 90),
+                    top: Math.min(Math.max(activeFader.y - 130, 8), window.innerHeight - 260),
+                    width: '78px', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px',
+                    padding: '10px', boxShadow: '0 8px 30px rgba(0,0,0,0.75)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#f4902c', lineHeight: 1 }}>{activeFader.vel}</div>
+                    <div style={{ position: 'relative', width: '30px', height: '200px', background: '#0a0a0a', border: '1px solid #444', borderRadius: '3px', overflow: 'hidden' }}>
+                        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${activeFader.vel}%`, background: 'linear-gradient(to top, #b96a1e, #f4902c)' }} />
+                        <div style={{ position: 'absolute', left: '-2px', right: '-2px', bottom: `calc(${activeFader.vel}% - 2px)`, height: '4px', background: '#fff', borderRadius: '1px' }} />
+                    </div>
+                    <div style={{ fontSize: '9px', color: '#888', letterSpacing: '0.5px' }}>VELOCITY</div>
+                </div>
+            )}
 
             {trackMenu && (
                 <TrackSampleMenu

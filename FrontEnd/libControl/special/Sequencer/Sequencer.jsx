@@ -1,26 +1,12 @@
-// 16 Tracks, each with a name, synth pitch (Hz) and oscillator type
-const TRACKS = [
-    { name: 'Kick',    freq: 60,   type: 'sine' },
-    { name: 'Snare',   freq: 200,  type: 'sine' },
-    { name: 'Hi-Hat',  freq: 800,  type: 'square' },
-    { name: 'Perc',    freq: 400,  type: 'sine' },
-    { name: 'Clap',    freq: 300,  type: 'square' },
-    { name: 'Rim',     freq: 1000, type: 'square' },
-    { name: 'Tom Lo',  freq: 100,  type: 'sine' },
-    { name: 'Tom Mid', freq: 150,  type: 'sine' },
-    { name: 'Tom Hi',  freq: 250,  type: 'sine' },
-    { name: 'Cymbal',  freq: 1200, type: 'square' },
-    { name: 'Ride',    freq: 900,  type: 'square' },
-    { name: 'Cowbell', freq: 540,  type: 'square' },
-    { name: 'Conga',   freq: 350,  type: 'sine' },
-    { name: 'Clave',   freq: 1100, type: 'sine' },
-    { name: 'Shaker',  freq: 1500, type: 'square' },
-    { name: 'FX',      freq: 700,  type: 'sawtooth' },
-];
-const STEP_COUNT = 16;
+// The 16-voice drum kit is shared with the Sampler (DrumKit.js) so a Sampler pad
+// and the matching Sequencer track are the SAME voice — including any sample
+// loaded onto that pad.
+const TRACKS = window.OA_DRUM_KIT || [];
+const STEP_OPTIONS = [4, 8, 16];   // selectable pattern lengths
+const DEFAULT_STEPS = 16;
 const LIBRARY_KEY = 'oaSequencerLibrary';
 
-const emptyPattern = () => Array(TRACKS.length).fill().map(() => Array(STEP_COUNT).fill(false));
+const emptyPattern = (steps) => Array(TRACKS.length).fill().map(() => Array(steps).fill(false));
 const clonePattern = (p) => p.map((row) => [...row]);
 
 const loadLibrary = () => {
@@ -44,11 +30,36 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     // Live sequence (grid + tempo) — pushed to and read from MQTT. Wrapped in an
     // object so useMqttState treats it as a structured payload, not a scalar.
-    const [seq, setSeq] = window.useMqttState(patternTopic, { grid: emptyPattern(), bpm: 120 });
-    const pattern = (seq && seq.grid) || emptyPattern();
+    const [seq, setSeq] = window.useMqttState(patternTopic, { grid: emptyPattern(DEFAULT_STEPS), bpm: 120, steps: DEFAULT_STEPS });
+    const steps = (seq && seq.steps) || DEFAULT_STEPS;
+    const pattern = (seq && seq.grid) || emptyPattern(steps);
     const bpm = (seq && seq.bpm) || 120;
-    const setPattern = (grid) => setSeq({ grid, bpm });
-    const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm });
+
+    // Scheduler runs in a stale RAF closure, so read the live step count via a ref.
+    const stepsRef = React.useRef(steps);
+    stepsRef.current = steps;
+
+    const setPattern = (grid) => setSeq({ grid, bpm, steps });
+    const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm, steps });
+
+    // Change pattern length (4/8/16): truncate or pad each track row to n steps.
+    const setSteps = (n) => {
+        const grid = pattern.map((row) => {
+            const r = row.slice(0, n);
+            while (r.length < n) r.push(false);
+            return r;
+        });
+        setSeq({ grid, bpm, steps: n });
+    };
+
+    // Per-track mute: silences that track's audio but keeps its pattern intact.
+    // Local to this client (each client renders its own audio); read via ref in
+    // the scheduler's stale RAF closure.
+    const [mutes, setMutes] = React.useState(() => Array(TRACKS.length).fill(false));
+    const mutesRef = React.useRef(mutes);
+    mutesRef.current = mutes;
+    const toggleMute = (trkIdx) =>
+        setMutes((prev) => { const n = [...prev]; n[trkIdx] = !n[trkIdx]; return n; });
 
     // Saved-pattern library — also pushed to / read from MQTT (retained), with a
     // localStorage seed so it still loads when the broker is offline.
@@ -72,7 +83,10 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     const getAudioCtx = () => {
         if (!audioCtxRef.current) {
-            audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+            // Use the SHARED context so buffers the Sampler decoded play here too.
+            audioCtxRef.current = window.oaAudioCtx
+                ? window.oaAudioCtx()
+                : new (window.AudioContext || window.webkitAudioContext)();
         }
         return audioCtxRef.current;
     };
@@ -80,7 +94,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const nextNote = () => {
         const secondsPerBeat = 60.0 / bpm;
         nextNoteTimeRef.current += 0.25 * secondsPerBeat; // 16th note
-        currentStepRef.current = (currentStepRef.current + 1) % STEP_COUNT;
+        currentStepRef.current = (currentStepRef.current + 1) % stepsRef.current;
     };
 
     const scheduleNote = (stepNumber, time) => {
@@ -91,23 +105,26 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         // Here we'd normally trigger sounds from the Sampler state.
         // For this demo, we'll synthesize simple beeps based on active tracks.
         pattern.forEach((track, trkIdx) => {
-            if (track[stepNumber]) {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                
-                // Different pitch/timbre per track
-                osc.frequency.value = TRACKS[trkIdx].freq;
-                osc.type = TRACKS[trkIdx].type;
-                
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                
-                // Basic decay envelope
-                gain.gain.setValueAtTime(1, time);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
-                
-                osc.start(time);
-                osc.stop(time + 0.1);
+            if (track[stepNumber] && !mutesRef.current[trkIdx]) {
+                // Play the shared voice: the Sampler's loaded sample for this
+                // track if present, otherwise the synth voice.
+                const buf = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
+                if (buf && window.oaPlayDrumSample) {
+                    window.oaPlayDrumSample(ctx, buf, time, 1);
+                } else if (window.oaPlayDrumVoice) {
+                    window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, 1);
+                } else {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.frequency.value = TRACKS[trkIdx].freq;
+                    osc.type = TRACKS[trkIdx].type;
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    gain.gain.setValueAtTime(1, time);
+                    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+                    osc.start(time);
+                    osc.stop(time + 0.1);
+                }
             }
         });
     };
@@ -149,7 +166,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const savePattern = () => {
         const name = (window.prompt('Save pattern as:', `Pattern ${library.length + 1}`) || '').trim();
         if (!name) return;
-        const entry = { name, bpm, data: clonePattern(pattern) };
+        const entry = { name, bpm, steps, data: clonePattern(pattern) };
         // Overwrite an existing entry with the same name, otherwise append
         const idx = library.findIndex((p) => p.name === name);
         let next;
@@ -163,14 +180,15 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     };
 
     const loadPattern = (entry) => {
-        setSeq({ grid: clonePattern(entry.data), bpm: entry.bpm || bpm });
+        const loadedSteps = (entry.data[0] && entry.data[0].length) || entry.steps || DEFAULT_STEPS;
+        setSeq({ grid: clonePattern(entry.data), bpm: entry.bpm || bpm, steps: loadedSteps });
     };
 
     const deletePattern = (name) => {
         setLibraryItems(library.filter((p) => p.name !== name));
     };
 
-    const clearPattern = () => setPattern(emptyPattern());
+    const clearPattern = () => setSeq({ grid: emptyPattern(steps), bpm, steps });
 
     return (
         <div style={{ padding: '12px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
@@ -187,6 +205,15 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Tempo:</span>
                     <input type="number" value={bpm} onChange={(e) => setBpm(Number(e.target.value))} style={{ width: '50px', background: '#000', color: '#f4902c', border: '1px solid #444', textAlign: 'center' }} />
                     <span style={{ fontSize: '12px', color: '#aaa' }}>BPM</span>
+                </div>
+                <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '12px', color: '#aaa' }}>Steps:</span>
+                    {STEP_OPTIONS.map((n) => (
+                        <button key={n} onClick={() => setSteps(n)}
+                            style={{ background: steps === n ? '#f4902c' : '#333', color: steps === n ? '#111' : '#ccc', border: '1px solid #444', padding: '4px 9px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', fontSize: '12px' }}>
+                            {n}
+                        </button>
+                    ))}
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '6px' }}>
                     <button
@@ -205,13 +232,24 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', overflowX: 'auto', paddingBottom: '6px' }}>
-                {TRACKS.map(({ name: trackName }, trkIdx) => (
+                {TRACKS.map(({ name: trackName }, trkIdx) => {
+                  const muted = mutes[trkIdx];
+                  return (
                     <div key={trackName} style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                        <div style={{ width: '54px', fontSize: '11px', color: '#ccc', textAlign: 'right', paddingRight: '8px' }}>
-                            {trackName}
+                        <div style={{ width: '86px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '5px', paddingRight: '6px' }}>
+                            <button
+                                onClick={() => toggleMute(trkIdx)}
+                                title={muted ? `Unmute ${trackName}` : `Mute ${trackName}`}
+                                style={{ width: '17px', height: '17px', flexShrink: 0, padding: 0, fontSize: '9px', fontWeight: 'bold', lineHeight: 1, cursor: 'pointer', borderRadius: '3px', border: `1px solid ${muted ? '#d32f2f' : '#444'}`, background: muted ? '#d32f2f' : '#2a2a2a', color: muted ? '#fff' : '#888' }}
+                            >
+                                M
+                            </button>
+                            <span style={{ fontSize: '11px', color: muted ? '#666' : '#ccc', textAlign: 'right' }}>
+                                {trackName}
+                            </span>
                         </div>
-                        <div style={{ display: 'flex', gap: '3px', background: '#0a0a0a', padding: '4px', borderRadius: '4px', border: '1px solid #222' }}>
-                            {[...Array(STEP_COUNT)].map((_, step) => {
+                        <div style={{ display: 'flex', gap: '3px', background: '#0a0a0a', padding: '4px', borderRadius: '4px', border: '1px solid #222', opacity: muted ? 0.4 : 1 }}>
+                            {[...Array(steps)].map((_, step) => {
                                 const isLit = pattern[trkIdx][step];
                                 const isBeat = step % 4 === 0;
                                 const isCurrent = isPlaying && currentStep === step;
@@ -231,7 +269,8 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                             })}
                         </div>
                     </div>
-                ))}
+                  );
+                })}
             </div>
 
             <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '8px' }}>

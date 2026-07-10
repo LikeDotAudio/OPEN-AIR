@@ -26,6 +26,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
     const [samples, setSamples] = React.useState([]);               // captured list
     const [dragOver, setDragOver] = React.useState(false);          // drag-and-drop
     const [loadError, setLoadError] = React.useState('');
+    const [playingWhich, setPlayingWhich] = React.useState(null);   // 'in' | 'cursor' | 'seven'
 
     const padName = (i) => (KIT[i] && KIT[i].name) || `Pad ${i + 1}`;
     const selectedHasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[selectedPad]);
@@ -168,10 +169,15 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         setPlayhead(null);
         setIsPlaying(false);
+        setPlayingWhich(null);
     };
-    const playSlice = () => {
-        if (isPlaying) { stopPreview(); return; }
+
+    // Play [startFrac..endFrac] of the buffer with the current pitch/fade, animate
+    // the playhead. `which` tags which button is lit so it can toggle to stop.
+    const playRegion = (startFrac, endFrac, which) => {
         if (!audioBuffer) return;
+        if (playingWhich === which) { stopPreview(); return; }
+        stopPreview();
         const ctx = getCtx();
         const rate = Math.pow(2, pitchSemi / 12);
         const src = ctx.createBufferSource();
@@ -181,8 +187,10 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         src.connect(gain); gain.connect(ctx.destination);
 
         const dur = audioBuffer.duration;
-        const startSec = selection.start * dur;
-        const lenSec = (selection.end - selection.start) * dur;
+        const s = Math.max(0, Math.min(1, startFrac));
+        const e = Math.max(s + 0.0005, Math.min(1, endFrac));
+        const startSec = s * dur;
+        const lenSec = (e - s) * dur;
         const playSec = lenSec / rate;
         const now = ctx.currentTime;
         if (fade) {
@@ -196,16 +204,22 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
         src.onended = () => stopPreview();
         previewSrcRef.current = src;
         setIsPlaying(true);
+        setPlayingWhich(which);
 
         const t0 = performance.now();
         const tick = () => {
             const frac = (performance.now() - t0) / 1000 / playSec;
             if (frac >= 1) { setPlayhead(null); return; }
-            setPlayhead(selection.start + frac * (selection.end - selection.start));
+            setPlayhead(s + frac * (e - s));
             rafRef.current = requestAnimationFrame(tick);
         };
         rafRef.current = requestAnimationFrame(tick);
     };
+
+    // The three transport start points.
+    const playFromIn = () => playRegion(selection.start, selection.end, 'in');
+    const playFromCursor = () => playRegion(cursor, cursor < selection.end ? selection.end : 1, 'cursor');
+    const playFromSevenEighths = () => playRegion(selection.start + 0.875 * (selection.end - selection.start), selection.end, 'seven');
     React.useEffect(() => () => stopPreview(), []);
 
     // ---- Assign the current slice to the selected pad ------------------------
@@ -273,8 +287,14 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
             {/* Top row: load, play, zoom */}
             <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <input type="file" accept="audio/*,.mp3,.wav,.wave,.aif,.aiff,.aac,.m4a,.ogg,.oga,.flac,.opus" style={{ fontSize: '12px', color: '#aaa', width: '190px' }} onChange={(e) => handleFile(e.target.files[0])} />
-                <button onClick={playSlice} disabled={!audioBuffer} style={btn({ background: isPlaying ? '#c00' : '#333', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed', fontWeight: 'bold' })}>
-                    {isPlaying ? 'Stop' : '► Play Slice'}
+                <button onClick={playFromIn} disabled={!audioBuffer} title="Play from the in point (I)" style={btn({ background: playingWhich === 'in' ? '#c00' : '#388e3c', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed', fontWeight: 'bold', border: 'none' })}>
+                    {playingWhich === 'in' ? '■' : '►'} In
+                </button>
+                <button onClick={playFromCursor} disabled={!audioBuffer} title="Play from the cursor" style={btn({ background: playingWhich === 'cursor' ? '#c00' : '#333', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed' })}>
+                    {playingWhich === 'cursor' ? '■' : '►'} Cursor
+                </button>
+                <button onClick={playFromSevenEighths} disabled={!audioBuffer} title="Play the last ⅛ of the loop (checks the loop tail)" style={btn({ background: playingWhich === 'seven' ? '#c00' : '#333', color: '#fff', cursor: audioBuffer ? 'pointer' : 'not-allowed' })}>
+                    {playingWhich === 'seven' ? '■' : '►'} ⅞
                 </button>
                 <div style={{ width: '1px', height: '20px', background: '#444' }} />
                 <span style={{ fontSize: '10px', color: '#888' }}>ZOOM</span>

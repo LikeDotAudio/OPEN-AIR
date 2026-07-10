@@ -1,0 +1,81 @@
+{
+  "100_Sampler": {
+    "type": "OcaBin",
+    "id": "100.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true,
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Sampler_Layout": {
+        "type": "OcaArray",
+        "description": {
+          "En": "Sampler & Sequencing Interface",
+          "show_label": false
+        },
+        "layout_columns": 2,
+        "column_sizing": [
+          { "weight": 4, "minwidth": 450 },
+          { "weight": 6, "minwidth": 600 }
+        ],
+        "layout": {
+          "pady": 20,
+          "padx": 20,
+          "align": "top"
+        },
+        "children": [
+          {
+            "id": "sampler_pads",
+            "type": "Sampler",
+            "props": {
+              "label": "MPC Drum Sampler"
+            },
+            "layout": {
+              "sticky": "nsew"
+            }
+          },
+          {
+            "id": "right_column_tools",
+            "type": "OcaArray",
+            "layout_columns": 1,
+            "column_sizing": [
+              { "weight": 1 }
+            ],
+            "layout": {
+              "sticky": "nsew",
+              "pady": 0,
+              "padx": 0
+            },
+            "children": [
+              {
+                "id": "audio_editor",
+                "type": "AudioEditor",
+                "props": {
+                  "label": "Waveform Editor & Slicer"
+                },
+                "layout": {
+                  "sticky": "ew"
+                }
+              },
+              {
+                "id": "pattern_sequencer",
+                "type": "Sequencer",
+                "props": {
+                  "label": "Pattern Sequencer"
+                },
+                "layout": {
+                  "sticky": "ew"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

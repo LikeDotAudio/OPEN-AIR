@@ -33,6 +33,9 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     'OcaNotebook': window.TabLayout,
     'OcaSplit': window.SplitLayout,
     'OcaTable': window.OcaTable,
+    'Sampler': window.Sampler,
+    'AudioEditor': window.AudioEditor,
+    'Sequencer': window.Sequencer,
   };
 
   const ComponentToRender = COMPONENT_REGISTRY[node.type];

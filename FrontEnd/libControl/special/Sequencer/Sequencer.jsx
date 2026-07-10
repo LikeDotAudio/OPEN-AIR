@@ -17,6 +17,39 @@ const loadLibrary = () => {
     }
 };
 
+// Self-contained rotary knob for tempo: drag up/down or scroll to change.
+const BpmKnob = ({ value, min = 40, max = 300, onChange }) => {
+    const drag = React.useRef(null);
+    const angle = -135 + ((value - min) / (max - min)) * 270;   // 270° sweep
+    const clamp = (v) => Math.round(Math.max(min, Math.min(max, v)));
+    const onDown = (e) => {
+        e.preventDefault();
+        drag.current = { y: e.clientY, v: value };
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {}
+    };
+    const onMove = (e) => {
+        if (!drag.current) return;
+        onChange(clamp(drag.current.v + (drag.current.y - e.clientY) * 0.5)); // 0.5 BPM/px
+    };
+    const onUp = (e) => { drag.current = null; try { e.currentTarget.releasePointerCapture(e.pointerId); } catch (x) {} };
+    const onWheel = (e) => { e.preventDefault(); onChange(clamp(value - Math.sign(e.deltaY))); };
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
+            <div
+                onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onWheel={onWheel}
+                title="Drag up/down or scroll to change BPM"
+                style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none', boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.6)' }}
+            >
+                <div style={{ position: 'absolute', inset: 0, transform: `rotate(${angle}deg)` }}>
+                    <div style={{ position: 'absolute', left: '50%', top: '4px', width: '3px', height: '13px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '2px' }} />
+                </div>
+            </div>
+            <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold', lineHeight: 1 }}>{value}</span>
+            <span style={{ fontSize: '8px', color: '#888', letterSpacing: '0.5px' }}>BPM</span>
+        </div>
+    );
+};
+
 const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const audioCtxRef = React.useRef(null);
     const [isPlaying, setIsPlaying] = React.useState(false);
@@ -35,9 +68,15 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const pattern = (seq && seq.grid) || emptyPattern(steps);
     const bpm = (seq && seq.bpm) || 120;
 
-    // Scheduler runs in a stale RAF closure, so read the live step count via a ref.
+    // The scheduler runs in a stale RAF closure, so it reads live values via refs.
+    // This is what makes a step toggled ON mid-playback sound on its next pass,
+    // and a BPM/step change take effect immediately.
     const stepsRef = React.useRef(steps);
     stepsRef.current = steps;
+    const patternRef = React.useRef(pattern);
+    patternRef.current = pattern;
+    const bpmRef = React.useRef(bpm);
+    bpmRef.current = bpm;
 
     const setPattern = (grid) => setSeq({ grid, bpm, steps });
     const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm, steps });
@@ -92,7 +131,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     };
 
     const nextNote = () => {
-        const secondsPerBeat = 60.0 / bpm;
+        const secondsPerBeat = 60.0 / bpmRef.current;
         nextNoteTimeRef.current += 0.25 * secondsPerBeat; // 16th note
         currentStepRef.current = (currentStepRef.current + 1) % stepsRef.current;
     };
@@ -104,7 +143,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         const ctx = getAudioCtx();
         // Here we'd normally trigger sounds from the Sampler state.
         // For this demo, we'll synthesize simple beeps based on active tracks.
-        pattern.forEach((track, trkIdx) => {
+        patternRef.current.forEach((track, trkIdx) => {
             if (track[stepNumber] && !mutesRef.current[trkIdx]) {
                 // Play the shared voice: the Sampler's loaded sample for this
                 // track if present (with its pitch/fade), otherwise the synth voice.
@@ -201,10 +240,9 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 >
                     {isPlaying ? '■ Stop' : '► Play'}
                 </button>
-                <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Tempo:</span>
-                    <input type="number" value={bpm} onChange={(e) => setBpm(Number(e.target.value))} style={{ width: '50px', background: '#000', color: '#f4902c', border: '1px solid #444', textAlign: 'center' }} />
-                    <span style={{ fontSize: '12px', color: '#aaa' }}>BPM</span>
+                    <BpmKnob value={bpm} onChange={setBpm} />
                 </div>
                 <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '5px' }}>
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Steps:</span>

@@ -157,8 +157,12 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const duration = buffer ? buffer.duration : 0;
 
     const pickFolder = async () => {
-        try { const h = await window.showDirectoryPicker(); window.OA_SOUND_DIR = h; setRootHandle(h); selectFolder(h, h.name || 'root'); }
-        catch (e) { /* cancelled */ }
+        try {
+            const h = await window.showDirectoryPicker();
+            window.OA_SOUND_DIR = h; setRootHandle(h);
+            if (window.oaIdbSet) window.oaIdbSet('oaRootDir', h).catch(() => {}); // persist for revert
+            selectFolder(h, h.name || 'root');
+        } catch (e) { /* cancelled */ }
     };
     const selectFolder = async (handle, path) => {
         setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr(''); setFilter(''); setScanning(true); setChips([]);

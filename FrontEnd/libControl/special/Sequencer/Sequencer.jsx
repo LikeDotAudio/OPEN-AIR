@@ -393,6 +393,50 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     const clearPattern = () => setSeq({ grid: emptyPattern(steps), bpm, steps });
 
+    // RENDER: bounce one loop of the pattern to a loopable WAV and download it.
+    // Rendered with a tail; the tail is folded back onto the start so decays that
+    // ring past the loop boundary overlap the next loop seamlessly.
+    const [rendering, setRendering] = React.useState(false);
+    const renderLoop = async () => {
+        setRendering(true);
+        try {
+            const secPerStep = 0.25 * 60 / (bpm || 120);   // 16th note
+            const dur = steps * secPerStep;
+            const rate = (window.OA_AUDIO_CTX && window.OA_AUDIO_CTX.sampleRate) || 44100;
+            const Offline = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+            const tailSec = 2.0;
+            const offline = new Offline(2, Math.max(1, Math.ceil((dur + tailSec) * rate)), rate);
+            for (let step = 0; step < steps; step++) {
+                const t = step * secPerStep;
+                pattern.forEach((track, trkIdx) => {
+                    const v = velOf(track[step]);
+                    if (v > 0 && !mutes[trkIdx]) {
+                        const vol = v / 100;
+                        const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
+                        if (entry && entry.buffer && window.oaPlayDrumSample) window.oaPlayDrumSample(offline, Object.assign({}, entry, { loop: false }), t, vol);
+                        else if (window.oaPlayDrumVoice) window.oaPlayDrumVoice(offline, TRACKS[trkIdx], t, vol);
+                    }
+                });
+            }
+            const rendered = await offline.startRendering();
+            const loopLen = Math.max(1, Math.round(dur * rate));
+            const loopBuf = window.oaAudioCtx().createBuffer(2, loopLen, rate);
+            for (let ch = 0; ch < 2; ch++) {
+                const src = rendered.getChannelData(ch);
+                const dst = loopBuf.getChannelData(ch);
+                for (let i = 0; i < loopLen; i++) dst[i] = src[i] || 0;
+                for (let j = 0; j + loopLen < src.length && j < loopLen; j++) dst[j] += src[loopLen + j]; // wrap tail
+            }
+            const blob = new Blob([window.oaEncodeWav(loopBuf)], { type: 'audio/wav' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `${safeLabel}_${bpm}bpm_${steps}steps.wav`;
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+        } catch (e) { console.error('🛑 [Sequencer] render failed:', e); }
+        setRendering(false);
+    };
+
     return (
         <div style={{ padding: '12px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#ccc' }}>{label}</h3>
@@ -424,6 +468,14 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                     ))}
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '6px' }}>
+                    <button
+                        onClick={renderLoop}
+                        disabled={rendering}
+                        title="Render this pattern to a loopable WAV file"
+                        style={{ background: '#7b1fa2', color: '#fff', border: 'none', padding: '6px 12px', cursor: rendering ? 'wait' : 'pointer', borderRadius: '3px', fontWeight: 'bold' }}
+                    >
+                        {rendering ? '…rendering' : '⭳ RENDER'}
+                    </button>
                     <button
                         onClick={savePattern}
                         style={{ background: '#1565c0', color: '#fff', border: 'none', padding: '6px 12px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold' }}

@@ -22,6 +22,30 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     // "Load to other pad" mode: the next pad clicked receives this sample.
     const [pendingAssign, setPendingAssign] = React.useState(null); // { file, meta }
 
+    // Remembered assignments from retained MQTT: { idx: {name, folder} }. Lets the
+    // kit revert (labels immediately; audio via Restore) after a reload.
+    const mqttMessages = window.useMqttMessages ? window.useMqttMessages() : {};
+    const kitMeta = React.useMemo(() => {
+        const m = {};
+        for (let i = 0; i < 16; i++) {
+            const raw = mqttMessages[`OpenAir/Gui/DrumKit/${i}/sample`];
+            if (raw) { try { const o = JSON.parse(raw); if (o && o.name) m[i] = o; } catch (e) {} }
+        }
+        return m;
+    }, [mqttMessages]);
+    const [restoreMsg, setRestoreMsg] = React.useState('');
+    const missingCount = Object.keys(kitMeta).filter((i) => !(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[i])).length;
+    const restoreSounds = async () => {
+        if (!window.oaRestoreKit) return;
+        setRestoreMsg('restoring…');
+        const res = await window.oaRestoreKit(kitMeta);
+        if (res.ok) {
+            setRestoreMsg(`restored ${res.restored}`);
+            setSampleNames((prev) => { const n = [...prev]; for (let i = 0; i < 16; i++) { const e = window.OA_DRUM_SAMPLES[i]; if (e) n[i] = e.name || '(loaded)'; } return n; });
+        } else setRestoreMsg(res.reason === 'no-folder' ? 'pick a folder first' : 'permission denied');
+        setTimeout(() => setRestoreMsg(''), 2500);
+    };
+
     // The standard MPC layout is bottom-left to top-right:
     // 13 14 15 16
     // 9  10 11 12
@@ -187,7 +211,8 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                 {layout.map((padNum) => {
                     const idx = padNum - 1;
                     const name = (KIT[idx] && KIT[idx].name) || `Pad ${padNum}`;
-                    const hasSample = !!sampleNames[idx];   // custom sample loaded
+                    const hasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[idx] && window.OA_DRUM_SAMPLES[idx].buffer);
+                    const remembered = kitMeta[idx];        // known from MQTT but not (yet) loaded
                     const vel = velocities[idx];            // side-car value (0-100)
                     const intensity = vel / 100;
 
@@ -204,7 +229,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                         <div key={padNum} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <button
                                 ref={(el) => { padButtons.current[idx] = el; }}
-                                title={hasSample ? `${name} — sample: ${sampleNames[idx]}\nALT+click to replace` : `${name} — synth voice\nALT+click to load a sample`}
+                                title={hasSample ? `${name} — sample: ${(window.OA_DRUM_SAMPLES[idx] && window.OA_DRUM_SAMPLES[idx].name) || sampleNames[idx]}\nALT+click to replace` : (remembered ? `${name} — remembered: ${remembered.name}\n(Restore to re-load, or ALT+click to pick)` : `${name} — synth voice\nALT+click to load a sample`)}
                                 onPointerDown={(e) => {
                                     // "Load to other pad": this click assigns the pending sample here.
                                     if (pendingAssign) {
@@ -264,12 +289,16 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                     {padNum}
                                 </span>
 
-                                {/* SMP badge when a custom sample is loaded */}
-                                {hasSample && (
+                                {/* SMP badge when a custom sample is loaded; ○ when only remembered (from MQTT) */}
+                                {hasSample ? (
                                     <span style={{ position: 'absolute', bottom: '4px', right: '6px', fontSize: '8px', fontWeight: 'bold', opacity: 0.7, letterSpacing: '0.5px' }}>
                                         SMP
                                     </span>
-                                )}
+                                ) : (remembered && (
+                                    <span title={`Remembered: ${remembered.name}`} style={{ position: 'absolute', bottom: '3px', right: '5px', fontSize: '10px', fontWeight: 'bold', color: '#8ab4f8', opacity: 0.8 }}>
+                                        ○
+                                    </span>
+                                ))}
 
                                 {/* Side-car velocity readout */}
                                 {vel > 0 && (
@@ -291,6 +320,15 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     );
                 })}
             </div>
+
+            {missingCount > 0 && (
+                <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                    <button onClick={restoreSounds} title="Re-load the samples remembered on these pads (from MQTT) using the saved folder"
+                        style={{ background: '#8ab4f8', color: '#111', border: 'none', borderRadius: '3px', padding: '5px 12px', fontSize: '11px', fontWeight: 'bold', cursor: 'pointer' }}>
+                        ↻ Restore {missingCount} sample{missingCount > 1 ? 's' : ''}{restoreMsg ? ` · ${restoreMsg}` : ''}
+                    </button>
+                </div>
+            )}
 
             <div style={{ marginTop: '14px', fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
                 Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to browse sounds

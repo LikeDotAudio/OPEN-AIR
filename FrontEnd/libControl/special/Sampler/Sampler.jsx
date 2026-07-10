@@ -19,6 +19,8 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     // isn't available). ALT+press normally opens the custom Sound Browse modal.
     const fileInputs = React.useRef([]);
     const [browsePad, setBrowsePad] = React.useState(null);
+    // "Load to other pad" mode: the next pad clicked receives this sample.
+    const [pendingAssign, setPendingAssign] = React.useState(null); // { file, meta }
 
     // The standard MPC layout is bottom-left to top-right:
     // 13 14 15 16
@@ -158,6 +160,14 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         return () => window.removeEventListener('oa-drum-play', onPlay);
     }, []);
 
+    // Esc cancels "Load to other pad" mode.
+    React.useEffect(() => {
+        if (!pendingAssign) return;
+        const onEsc = (e) => { if (e.key === 'Escape') setPendingAssign(null); };
+        window.addEventListener('keydown', onEsc);
+        return () => window.removeEventListener('keydown', onEsc);
+    }, [pendingAssign]);
+
     return (
         <div ref={rootRef} style={{ padding: '25px', backgroundColor: '#1e1e1e', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
             {/* Velocity glow: bright on strike (scaled by --gi), fades over the sound's length. */}
@@ -196,6 +206,13 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                 ref={(el) => { padButtons.current[idx] = el; }}
                                 title={hasSample ? `${name} — sample: ${sampleNames[idx]}\nALT+click to replace` : `${name} — synth voice\nALT+click to load a sample`}
                                 onPointerDown={(e) => {
+                                    // "Load to other pad": this click assigns the pending sample here.
+                                    if (pendingAssign) {
+                                        e.preventDefault();
+                                        handleFile(idx, pendingAssign.file, pendingAssign.meta);
+                                        setPendingAssign(null);
+                                        return;
+                                    }
                                     // ALT+press opens Sound Browse (or the native
                                     // picker as a fallback) instead of playing.
                                     if (e.altKey) {
@@ -284,7 +301,14 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     targetLabel={(KIT[browsePad] && KIT[browsePad].name) || `Pad ${browsePad + 1}`}
                     onClose={() => setBrowsePad(null)}
                     onChoose={(file, meta) => { handleFile(browsePad, file, meta); setBrowsePad(null); }}
+                    onChooseOther={(file, meta) => { setBrowsePad(null); setPendingAssign({ file, meta }); }}
                 />
+            )}
+
+            {pendingAssign && (
+                <div style={{ position: 'fixed', top: '12px', left: '50%', transform: 'translateX(-50%)', zIndex: 10001, background: '#8ab4f8', color: '#111', padding: '8px 16px', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold', boxShadow: '0 4px 16px rgba(0,0,0,0.5)' }}>
+                    👆 Click a pad to assign "{pendingAssign.meta && pendingAssign.meta.name}" — Esc to cancel
+                </div>
             )}
         </div>
     );

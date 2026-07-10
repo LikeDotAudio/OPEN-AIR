@@ -80,7 +80,7 @@ const SoundFolderNode = ({ name, handle, depth, defaultOpen, onSelectFolder, sel
     );
 };
 
-window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
+window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const supportsFS = typeof window.showDirectoryPicker === 'function';
     const [rootHandle, setRootHandle] = React.useState(supportsFS ? (window.OA_SOUND_DIR || null) : null);
     const [selectedFolder, setSelectedFolder] = React.useState(null);
@@ -97,12 +97,16 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
     const [err, setErr] = React.useState('');
 
     const bigCanvasRef = React.useRef(null);
+    const gridScrollRef = React.useRef(null);
+    const selectedThumbRef = React.useRef(null);
     const srcRef = React.useRef(null);
     const startTimeRef = React.useRef(0);
     const offsetRef = React.useRef(0);
     const rafRef = React.useRef(null);
 
+    const [filter, setFilter] = React.useState('');
     const files = supportsFS ? folderFiles : flatEntries;
+    const shown = filter.trim() ? files.filter((f) => f.name.toLowerCase().includes(filter.trim().toLowerCase())) : files;
     const duration = buffer ? buffer.duration : 0;
 
     const pickFolder = async () => {
@@ -123,10 +127,9 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
     };
 
     const selectFileByIndex = async (idx) => {
-        const list = supportsFS ? folderFiles : flatEntries;
-        if (idx < 0 || idx >= list.length) return;
+        if (idx < 0 || idx >= shown.length) return;
         setSelectedIndex(idx);
-        const entry = list[idx];
+        const entry = shown[idx];
         try {
             const file = entry.file || await entry.handle.getFile();
             setSelected({ name: entry.name, file, folder: supportsFS ? selectedFolderPath : '' });
@@ -174,26 +177,38 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
     // Big waveform of the selected file.
     React.useEffect(() => { drawWave(bigCanvasRef.current, buffer, '#f4902c'); }, [buffer]);
 
+    // Keep the selected thumbnail centered in the grid as you browse.
+    React.useEffect(() => {
+        const el = selectedThumbRef.current, cont = gridScrollRef.current;
+        if (!el || !cont) return;
+        const cr = cont.getBoundingClientRect(), er = el.getBoundingClientRect();
+        const delta = (er.top - cr.top) - (cont.clientHeight / 2 - el.clientHeight / 2);
+        if (Math.abs(delta) > 2) cont.scrollTo({ top: cont.scrollTop + delta, behavior: 'smooth' });
+    }, [selectedIndex]);
+
     // Arrow-key navigation across the thumbnail grid; Enter = Load.
     React.useEffect(() => {
         const onKey = (e) => {
-            if (!files.length) return;
+            if (e.target && (e.target.tagName === 'INPUT')) return;  // don't hijack the filter box
+            if (!shown.length) return;
             let d = 0;
-            if (e.key === 'ArrowRight') d = 1;
-            else if (e.key === 'ArrowLeft') d = -1;
-            else if (e.key === 'ArrowDown') d = COLS;
-            else if (e.key === 'ArrowUp') d = -COLS;
+            // Snake traversal: forward advances one (…over, over, over, down a row),
+            // back reverses, both wrapping around the whole grid.
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') d = 1;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') d = -1;
             else if (e.key === 'Enter') { chooseIt(); e.preventDefault(); return; }
             else return;
             e.preventDefault();
-            const base = selectedIndex < 0 ? 0 : selectedIndex;
-            selectFileByIndex(Math.max(0, Math.min(files.length - 1, base + d)));
+            const n = shown.length;
+            const base = selectedIndex < 0 ? (d > 0 ? -1 : 0) : selectedIndex;
+            selectFileByIndex(((base + d) % n + n) % n);
         };
         window.addEventListener('keydown', onKey);
         return () => window.removeEventListener('keydown', onKey);
-    }, [files, selectedIndex, selectedFolderPath, selected]);
+    }, [shown, selectedIndex, selectedFolderPath, selected]);
 
     const chooseIt = () => { if (selected && onChoose) onChoose(selected.file, { name: selected.name, folder: selected.folder || '' }); };
+    const chooseOther = () => { if (selected && onChooseOther) onChooseOther(selected.file, { name: selected.name, folder: selected.folder || '' }); };
 
     const tbtn = (extra) => ({ background: '#333', color: '#fff', border: '1px solid #444', borderRadius: '3px', padding: '6px 12px', cursor: 'pointer', fontSize: '13px', ...extra });
 
@@ -219,7 +234,9 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
                     <label style={{ fontSize: '12px', color: '#ccc', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <input type="checkbox" checked={autoPreview} onChange={(e) => setAutoPreview(e.target.checked)} /> Auto-preview 5s
                     </label>
-                    <span style={{ fontSize: '11px', color: '#666' }}>↑ ↓ ← → to browse · Enter to load</span>
+                    <input type="text" value={filter} onChange={(e) => { setFilter(e.target.value); setSelectedIndex(-1); }} placeholder="Filter (e.g. HH)"
+                        style={{ background: '#111', color: '#eee', border: '1px solid #444', borderRadius: '3px', padding: '4px 8px', fontSize: '12px', width: '130px' }} />
+                    <span style={{ fontSize: '11px', color: '#666' }}>↑ ↓ ← → browse · Enter load</span>
                 </div>
 
                 {err && <div style={{ padding: '6px 16px', color: '#f88', fontSize: '12px' }}>⚠️ {err}</div>}
@@ -234,16 +251,18 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
                             </div>
                         )}
                     </div>
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
-                        {files.length > 0 ? (
+                    <div ref={gridScrollRef} style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
+                        {shown.length > 0 ? (
                             <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: '8px' }}>
-                                {files.map((entry, i) => (
-                                    <WaveThumb key={i} entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} />
+                                {shown.map((entry, i) => (
+                                    <div key={i} ref={i === selectedIndex ? selectedThumbRef : undefined}>
+                                        <WaveThumb entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} />
+                                    </div>
                                 ))}
                             </div>
                         ) : (
                             <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>
-                                {supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.'}
+                                {files.length ? 'No files match the filter.' : (supportsFS ? 'Select a folder on the left to see its waveforms.' : 'No files chosen yet.')}
                             </div>
                         )}
                     </div>
@@ -264,9 +283,14 @@ window.SoundBrowse = ({ onClose, onChoose, targetLabel }) => {
                             <input type="checkbox" checked={loop} onChange={(e) => setLoop(e.target.checked)} /> Loop
                         </label>
                         <div style={{ flexGrow: 1 }} />
-                        <button onClick={chooseIt} disabled={!selected} style={tbtn({ background: selected ? '#f4902c' : '#553', color: '#111', border: 'none', fontWeight: 'bold', padding: '8px 16px', cursor: selected ? 'pointer' : 'not-allowed' })}>
-                            ⭳ Load to pad
+                        <button onClick={chooseIt} disabled={!selected} style={tbtn({ background: selected ? '#f4902c' : '#553', color: '#111', border: 'none', fontWeight: 'bold', padding: '8px 14px', cursor: selected ? 'pointer' : 'not-allowed' })}>
+                            ⭳ Load to {targetLabel || 'pad'}
                         </button>
+                        {onChooseOther && (
+                            <button onClick={chooseOther} disabled={!selected} style={tbtn({ background: selected ? '#8ab4f8' : '#345', color: '#111', border: 'none', fontWeight: 'bold', padding: '8px 14px', cursor: selected ? 'pointer' : 'not-allowed' })}>
+                                ⭳ Load to other pad
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

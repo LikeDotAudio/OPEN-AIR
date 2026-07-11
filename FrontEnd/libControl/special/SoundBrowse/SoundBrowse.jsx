@@ -70,75 +70,103 @@ const CLOUD_PALETTE = ['#f4902c', '#8ab4f8', '#4caf50', '#e57373', '#ba68c8', '#
 const SoundCloudView = ({ data, rootHandle, onSelectFile }) => {
     const chartRef = React.useRef(null);
     const echartsInst = React.useRef(null);
-    // Y axis: 'complexity' (timbre) or 'group' (name category — a second Y axis).
-    const [yMode, setYMode] = React.useState('complexity');
+    const [detail, setDetail] = React.useState(null);   // clicked sample → side panel
 
     const groups = React.useMemo(() => Array.from(new Set(data.map((d) => d.group || 'Other'))).sort(), [data]);
     const colorFor = (g) => CLOUD_PALETTE[Math.max(0, groups.indexOf(g)) % CLOUD_PALETTE.length];
 
+    // Load (decode+play) a sample and show its detail.
+    const loadAndDetail = async (d) => {
+        setDetail(d);
+        try {
+            let h = rootHandle;
+            if (d.sub) { for (const p of d.sub.split(/[\/\\]/)) { if (p) h = await h.getDirectoryHandle(p); } }
+            const fh = await h.getFileHandle(d.name);
+            const file = await fh.getFile();
+            const folder = rootHandle.name + (d.sub ? '/' + d.sub : '');
+            onSelectFile({ name: d.name, folder, file });
+        } catch (e) { console.error('Could not load file from cloud:', e); }
+    };
+
     React.useEffect(() => {
         if (!chartRef.current || !window.echarts) return;
-        echartsInst.current = window.echarts.init(chartRef.current, 'dark');
+        const chart = window.echarts.init(chartRef.current, 'dark');
+        echartsInst.current = chart;
 
-        const lengths = data.map((d) => d.length);
-        const minL = Math.min(...lengths) || 0.1;
-        const maxL = Math.max(...lengths) || 5.0;
-        const scaleL = (l) => 8 + ((l - minL) / (maxL - minL || 1)) * 20;
+        const lengths = data.map((d) => d.length || 0.1);
+        const minL = Math.min(...lengths) || 0.1, maxL = Math.max(...lengths) || 5;
+        const sz = (l) => 6 + ((l - minL) / (maxL - minL || 1)) * 18;
+        const tip = (p) => { const d = p.data.raw; const t = d.transients || 0; return `<b>${d.name}</b><br/>${d.group || 'Other'}${t > 1 ? ' (loop)' : ''}<br/>Pitch ${(d.pitch || 0).toFixed(1)} Hz · Cx ${(d.complexity || 0).toFixed(1)} · ${(d.length || 0).toFixed(2)}s · ${t} transient${t === 1 ? '' : 's'}`; };
 
-        const option = {
+        // 3D: X = pitch, Y (depth) = name group, Z (height) = complexity.
+        chart.setOption({
             backgroundColor: 'transparent',
-            tooltip: {
-                formatter: (params) => {
-                    const d = params.data.raw;
-                    return `<b>${d.name}</b><br/>Group: ${d.group || 'Other'}<br/>Pitch: ${(d.pitch || 0).toFixed(1)} Hz<br/>Complexity: ${(d.complexity || 0).toFixed(2)}<br/>Length: ${(d.length || 0).toFixed(2)}s`;
-                },
-            },
-            legend: { type: 'scroll', top: 4, left: 8, right: 8, textStyle: { color: '#ccc', fontSize: 10 }, inactiveColor: '#555', itemWidth: 12, itemHeight: 8 },
-            grid: { left: yMode === 'group' ? 80 : 55, right: 20, top: 42, bottom: 40 },
-            xAxis: { type: 'value', name: 'Pitch (Hz)', nameTextStyle: { color: '#888' }, splitLine: { show: false }, axisLabel: { color: '#666' } },
-            yAxis: yMode === 'group'
-                ? { type: 'category', data: groups, name: 'Name group', nameTextStyle: { color: '#888' }, axisLabel: { color: '#aaa', fontSize: 10 }, splitLine: { lineStyle: { color: '#222' } } }
-                : { type: 'value', name: 'Complexity / Timbre', nameTextStyle: { color: '#888' }, splitLine: { lineStyle: { color: '#222' } }, axisLabel: { color: '#666' } },
+            legend: { type: 'scroll', top: 4, textStyle: { color: '#ccc', fontSize: 10 }, inactiveColor: '#555' },
+            tooltip: { formatter: tip },
+            xAxis3D: { name: 'Pitch', type: 'value', nameTextStyle: { color: '#888' }, axisLabel: { color: '#666' } },
+            yAxis3D: { name: 'Group', type: 'category', data: groups, nameTextStyle: { color: '#888' }, axisLabel: { color: '#aaa', fontSize: 9 } },
+            zAxis3D: { name: 'Complexity', type: 'value', nameTextStyle: { color: '#888' }, axisLabel: { color: '#666' } },
+            grid3D: { boxWidth: 100, boxDepth: 90, viewControl: { distance: 220 }, axisLine: { lineStyle: { color: '#444' } }, splitLine: { lineStyle: { color: '#222' } } },
             series: groups.map((g) => ({
-                name: g,
-                type: 'scatter',
-                symbolSize: (v, params) => scaleL(params.data.raw.length),
-                itemStyle: { color: colorFor(g), opacity: 0.75, borderColor: '#000', borderWidth: 0.3 },
-                emphasis: { itemStyle: { borderColor: '#fff', borderWidth: 2, opacity: 1 } },
-                data: data.filter((d) => (d.group || 'Other') === g).map((d) => {
-                    const y = yMode === 'group' ? groups.indexOf(g) : d.complexity;
-                    return { value: [d.pitch, y], raw: d };
-                }),
+                name: g, type: 'scatter3D',
+                itemStyle: { color: colorFor(g), opacity: 0.85 },
+                emphasis: { itemStyle: { color: '#fff' } },
+                data: data.filter((d) => (d.group || 'Other') === g).map((d) => ({ value: [d.pitch || 0, groups.indexOf(g), d.complexity || 0], raw: d, symbolSize: sz(d.length || 0.1) })),
             })),
-        };
-        echartsInst.current.setOption(option);
+        });
 
-        const onClick = async (params) => {
-            const d = params.data.raw;
-            try {
-                let h = rootHandle;
-                if (d.sub) { for (const p of d.sub.split(/[\/\\]/)) { if (p) h = await h.getDirectoryHandle(p); } }
-                const fh = await h.getFileHandle(d.name);
-                const file = await fh.getFile();
-                const folder = rootHandle.name + (d.sub ? '/' + d.sub : '');
-                onSelectFile({ name: d.name, folder, file });
-            } catch (e) { console.error('Could not load file from cloud:', e); }
-        };
-        echartsInst.current.on('click', onClick);
-        return () => { if (echartsInst.current) { echartsInst.current.off('click', onClick); echartsInst.current.dispose(); } };
-    }, [data, rootHandle, yMode]);
+        // If echarts-gl isn't available, grid3D won't exist — fall back to 2D.
+        let ok3D = false;
+        try { ok3D = !!(chart.getModel().getComponent('grid3D')); } catch (e) { ok3D = false; }
+        if (!ok3D) {
+            chart.clear();
+            chart.setOption({
+                backgroundColor: 'transparent',
+                legend: { type: 'scroll', top: 4, textStyle: { color: '#ccc', fontSize: 10 }, inactiveColor: '#555' },
+                tooltip: { formatter: tip },
+                grid: { left: 80, right: 20, top: 42, bottom: 40 },
+                xAxis: { type: 'value', name: 'Pitch (Hz)', nameTextStyle: { color: '#888' }, axisLabel: { color: '#666' }, splitLine: { show: false } },
+                yAxis: { type: 'category', data: groups, name: 'Name group', nameTextStyle: { color: '#888' }, axisLabel: { color: '#aaa', fontSize: 10 }, splitLine: { lineStyle: { color: '#222' } } },
+                series: groups.map((g) => ({
+                    name: g, type: 'scatter', symbolSize: (v, p) => sz(p.data.raw.length),
+                    itemStyle: { color: colorFor(g), opacity: 0.75, borderColor: '#000', borderWidth: 0.3 },
+                    emphasis: { itemStyle: { borderColor: '#fff', borderWidth: 2 } },
+                    data: data.filter((d) => (d.group || 'Other') === g).map((d) => ({ value: [d.pitch || 0, groups.indexOf(g)], raw: d })),
+                })),
+            });
+        }
 
-    const tBtn = (mode, txt) => (
-        <button onClick={() => setYMode(mode)} style={{ background: yMode === mode ? '#f4902c' : '#333', color: yMode === mode ? '#111' : '#ccc', border: '1px solid #444', borderRadius: '3px', padding: '2px 8px', fontSize: '11px', cursor: 'pointer', fontWeight: 'bold' }}>{txt}</button>
-    );
+        const onClick = (params) => { if (params.data && params.data.raw) loadAndDetail(params.data.raw); };
+        chart.on('click', onClick);
+        const onResize = () => chart.resize();
+        window.addEventListener('resize', onResize);
+        return () => { window.removeEventListener('resize', onResize); chart.off('click', onClick); chart.dispose(); };
+    }, [data, rootHandle]);
+
     return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ padding: '6px 16px', background: '#222', borderBottom: '1px solid #333', fontSize: '11px', color: '#888', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span>X: Pitch · size: Length · colour = name group · click a dot to load</span>
-                <div style={{ flexGrow: 1 }} />
-                <span>Y axis:</span>{tBtn('complexity', 'Complexity')}{tBtn('group', 'Name group')}
+        <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                <div style={{ padding: '6px 16px', background: '#222', borderBottom: '1px solid #333', fontSize: '11px', color: '#888' }}>
+                    X: Pitch · Y (depth): Name group · Z: Complexity · size: Length · drag to orbit · click a point to play
+                </div>
+                <div ref={chartRef} style={{ flex: 1, width: '100%' }} />
             </div>
-            <div ref={chartRef} style={{ flex: 1, width: '100%' }}></div>
+            <div style={{ width: '190px', flexShrink: 0, borderLeft: '1px solid #333', padding: '12px', overflowY: 'auto', fontSize: '12px', color: '#ccc' }}>
+                {detail ? (
+                    <div>
+                        <div style={{ color: '#f4902c', fontWeight: 'bold', marginBottom: '4px', wordBreak: 'break-word' }}>{detail.name}</div>
+                        <div style={{ fontSize: '11px', color: '#8ab4f8', marginBottom: '10px', wordBreak: 'break-word' }}>{detail.sub || '(root)'}</div>
+                        <div style={{ marginBottom: '3px' }}>Group: <b style={{ color: colorFor(detail.group || 'Other') }}>{detail.group || 'Other'}</b></div>
+                        <div style={{ marginBottom: '3px' }}>Pitch: <b>{(detail.pitch || 0).toFixed(1)} Hz</b></div>
+                        <div style={{ marginBottom: '3px' }}>Complexity: <b>{(detail.complexity || 0).toFixed(2)}</b></div>
+                        <div style={{ marginBottom: '3px' }}>Length: <b>{(detail.length || 0).toFixed(2)} s</b></div>
+                        <div style={{ marginBottom: '3px' }}>Transients: <b>{detail.transients || 0}</b>{(detail.transients || 0) > 1 ? <span style={{ color: '#f4902c', fontWeight: 'bold' }}> — loop</span> : <span style={{ color: '#8a8', fontWeight: 'bold' }}> — one-shot</span>}</div>
+                        <button onClick={() => loadAndDetail(detail)} style={{ marginTop: '10px', background: '#388e3c', color: '#fff', border: 'none', borderRadius: '3px', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>► Play</button>
+                    </div>
+                ) : (
+                    <div style={{ color: '#666' }}>Click a point to see its details and play it.</div>
+                )}
+            </div>
         </div>
     );
 };
@@ -199,7 +227,7 @@ const makeChipBuilder = () => {
             return Array.from(map.values())
                 .filter((e) => e.count >= 2)
                 .sort((a, b) => (b.folders.size - a.folders.size) || (b.count - a.count))
-                .slice(0, 14);
+                .slice(0, 28);
         },
     };
 };

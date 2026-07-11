@@ -24,10 +24,11 @@ struct Peak {
     folder: String, // sub-folder relative to the scanned root ("" = root)
     sub: String,    // alias of `folder` (SoundCloud view compatibility)
     path: String,   // absolute path
-    group: String,  // name-derived category (Kick, Snare, HiHat, … Other)
+    group: String,  // name-derived category (Kick, Snare, HiHat, … Other) — or "Loop" if >1 transient
     length: f64,
     pitch: f64,
     complexity: f64,
+    transients: usize, // onset count; >1 ⇒ a loop rather than a one-shot sample
 }
 
 /// Categorize a sample by its file name (for the cloud's name axis / grouping).
@@ -113,7 +114,8 @@ fn main() {
                     Some(p) => emit(&serde_json::json!({
                         "type": "result", "done": n, "total": total,
                         "name": p.name, "folder": p.folder, "group": p.group,
-                        "pitch": p.pitch, "complexity": p.complexity, "length": p.length
+                        "pitch": p.pitch, "complexity": p.complexity, "length": p.length,
+                        "transients": p.transients
                     })),
                     None => emit(&serde_json::json!({
                         "type": "skip", "done": n, "total": total,
@@ -167,6 +169,44 @@ fn read_wav_mono(path: &Path) -> Option<(Vec<f32>, u32)> {
         raw.chunks(ch).map(|frame| frame.iter().copied().sum::<f32>() / ch as f32).collect()
     };
     Some((mono, sr))
+}
+
+/// Count transients (onsets) via a short-time RMS envelope. Each rising edge
+/// that crosses ~25% of the peak level, separated by ≥50 ms from the last,
+/// counts as one attack. A one-shot sample has 1; a loop/phrase has several.
+fn count_transients(data: &[f32], sr: u32) -> usize {
+    if data.is_empty() {
+        return 0;
+    }
+    let hop = (sr as usize / 100).max(1); // ~10 ms frames
+    let mut env: Vec<f32> = Vec::with_capacity(data.len() / hop + 1);
+    let mut i = 0;
+    while i < data.len() {
+        let end = (i + hop).min(data.len());
+        let mut s = 0.0f32;
+        for &x in &data[i..end] {
+            s += x * x;
+        }
+        env.push((s / (end - i) as f32).sqrt());
+        i += hop;
+    }
+    let peak = env.iter().cloned().fold(0.0f32, f32::max);
+    if peak <= 0.0 {
+        return 0;
+    }
+    let thresh = peak * 0.25;
+    let min_gap = 5i32; // 5 frames ≈ 50 ms between attacks
+    let mut count = 0usize;
+    let mut last = -1000i32;
+    let mut prev = 0.0f32;
+    for (k, &e) in env.iter().enumerate() {
+        if e > thresh && prev <= thresh && (k as i32 - last) > min_gap {
+            count += 1;
+            last = k as i32;
+        }
+        prev = e;
+    }
+    count.max(1) // audible signal ⇒ at least one attack
 }
 
 fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
@@ -235,10 +275,14 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         (0.0, 0.0)
     };
 
+    // ---- Transients: >1 attack ⇒ this is a loop/phrase, not a one-shot sample.
+    let transients = count_transients(&data, sr);
+
     let name = path.file_name().and_then(|x| x.to_str()).unwrap_or("").to_string();
     let parent = path.parent().unwrap_or(root);
     let folder = parent.strip_prefix(root).ok().map(|p| p.to_string_lossy().replace('\\', "/")).unwrap_or_default();
-    let group = categorize(&name).to_string();
+    // A multi-transient file is a loop regardless of its name.
+    let group = if transients > 1 { "Loop".to_string() } else { categorize(&name).to_string() };
     Some(Peak {
         name,
         folder: folder.clone(),
@@ -248,5 +292,6 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         length,
         pitch: pitch_out,
         complexity,
+        transients,
     })
 }

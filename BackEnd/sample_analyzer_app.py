@@ -52,8 +52,9 @@ class AnalyzerApp:
         self.q = queue.Queue()
         self.proc = None
 
-        # live scatter data
-        self.px, self.py, self.ps = [], [], []
+        # live scatter data (pc = per-point colour: loops vs one-shots)
+        self.px, self.py, self.ps, self.pc = [], [], [], []
+        self.n_loops = 0
 
         self._build_ui()
         self.root.after(60, self._drain_queue)
@@ -110,7 +111,8 @@ class AnalyzerApp:
         self.is_analyzing = True
         self.action_btn.config(state=tk.DISABLED)
         self.progress["value"] = 0
-        self.px, self.py, self.ps = [], [], []
+        self.px, self.py, self.ps, self.pc = [], [], [], []
+        self.n_loops = 0
         self.ax.clear(); self._style_axes()
         self.scatter = self.ax.scatter([], [], c="#f4902c", alpha=0.6, edgecolors="w", linewidths=0.3)
         self.canvas.draw_idle()
@@ -150,6 +152,11 @@ class AnalyzerApp:
                         self.px.append(msg.get("pitch", 0.0))
                         self.py.append(msg.get("complexity", 0.0))
                         self.ps.append(8 + min(28, (msg.get("length", 0.1) or 0.1) * 6))
+                        tr = msg.get("transients", 1) or 1
+                        if tr > 1:
+                            self.pc.append("#4ea3ff"); self.n_loops += 1  # loop = blue
+                        else:
+                            self.pc.append("#f4902c")                     # one-shot = orange
                         redraw = True
                 elif t == "done":
                     self.status.config(text=f"Done — {msg.get('count', 0)} samples → {msg.get('out', '')}", foreground="#2a7")
@@ -164,8 +171,12 @@ class AnalyzerApp:
             import numpy as np
             self.scatter.set_offsets(np.column_stack([self.px, self.py]))
             self.scatter.set_sizes(self.ps)
+            self.scatter.set_color(self.pc)
             self.ax.set_xlim(0, max(self.px) * 1.1 + 1)
             self.ax.set_ylim(0, max(self.py) * 1.1 + 1)
+            n = len(self.px)
+            self.ax.set_title(f"{n} samples  ·  {self.n_loops} loops (blue)  ·  {n - self.n_loops} one-shots (orange)",
+                              color="#ccc", fontsize=9)
             self.canvas.draw_idle()
         self.root.after(80, self._drain_queue)
 

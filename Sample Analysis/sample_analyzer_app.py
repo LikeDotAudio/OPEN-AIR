@@ -33,6 +33,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
+# Folder pre-selected on startup (Browse to change).
+DEFAULT_DIR = "/home/anthony/Documents/Music Samples"
+
 # Same palette the web cloud uses, so the two graphs colour groups identically.
 CLOUD_PALETTE = [
     "#f4902c", "#8ab4f8", "#4caf50", "#e57373", "#ba68c8", "#4dd0e1",
@@ -61,7 +64,8 @@ class AnalyzerApp:
         self.root.title("Sample Analyzer (Rust core)")
         self.root.geometry("820x640")
 
-        self.directory = tk.StringVar(value="No directory selected")
+        _default = DEFAULT_DIR if os.path.isdir(DEFAULT_DIR) else "No directory selected"
+        self.directory = tk.StringVar(value=_default)
         self.binary = find_binary()
         self.is_analyzing = False
         self.q = queue.Queue()
@@ -118,6 +122,10 @@ class AnalyzerApp:
         self._build_examiner_tab()
         self._build_guess_tab()
         self._build_rename_tab()
+
+        # Enable Start if the default directory is valid and the binary is built.
+        if self.binary and os.path.isdir(self.directory.get()):
+            self.action_btn.config(state=tk.NORMAL)
 
     def _build_cloud_tab(self):
         tab = ttk.Frame(self.notebook)
@@ -416,7 +424,7 @@ class AnalyzerApp:
         top = ttk.Frame(tab, padding=6)
         top.pack(fill=tk.X)
         ttk.Button(top, text="Pick Directory…", command=self._rename_pick).pack(side=tk.LEFT)
-        self.rename_dir = tk.StringVar(value="No directory selected")
+        self.rename_dir = tk.StringVar(value=DEFAULT_DIR if os.path.isdir(DEFAULT_DIR) else "No directory selected")
         ttk.Label(top, textvariable=self.rename_dir, foreground="#c47a1a", wraplength=360).pack(side=tk.LEFT, padx=8)
 
         opt = ttk.Frame(tab, padding=(6, 0))

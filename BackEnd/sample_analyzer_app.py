@@ -73,6 +73,7 @@ class AnalyzerApp:
         self.d_group = []   # name group -> Y depth + colour
         self.n_loops = 0
         self._legend_groups = None  # last group set drawn in the legend
+        self._zoom = 1.0            # scroll-wheel zoom factor
 
         self._build_ui()
         self.root.after(60, self._drain_queue)
@@ -95,13 +96,25 @@ class AnalyzerApp:
                                 foreground=("#2a7" if self.binary else "#c33"), padding=(10, 4))
         self.status.pack(fill=tk.X)
 
-        # Live 3D cloud
+        # View controls
+        views = ttk.Frame(self.root, padding=(10, 2))
+        views.pack(fill=tk.X)
+        ttk.Label(views, text="View:", foreground="#888").pack(side=tk.LEFT, padx=(0, 6))
+        ttk.Button(views, text="Top", width=7, command=lambda: self._set_view(90, -90)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(views, text="Front", width=7, command=lambda: self._set_view(0, -90)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(views, text="Side", width=7, command=lambda: self._set_view(0, 0)).pack(side=tk.LEFT, padx=2)
+        ttk.Button(views, text="Iso", width=7, command=lambda: self._set_view(22, -60)).pack(side=tk.LEFT, padx=2)
+        ttk.Label(views, text="   (scroll to zoom · drag to orbit)", foreground="#555").pack(side=tk.LEFT, padx=6)
+
+        # Live 3D cloud — fill the whole panel, minimal margins.
         self.fig = Figure(figsize=(7, 4.4), dpi=100, facecolor="#1b1b1b")
         self.ax = self.fig.add_subplot(111, projection="3d", facecolor="#0f0f0f")
+        self.fig.subplots_adjust(left=0.0, right=1.0, bottom=0.0, top=1.0)
         self._style_axes()
         self.scatter = self.ax.scatter([], [], [], depthshade=True)
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
-        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=10, pady=(6, 10))
+        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
+        self.canvas.mpl_connect("scroll_event", self._on_scroll)
 
     def _style_axes(self):
         self.ax.set_xlabel("Pitch (Hz)", color="#aaa", labelpad=8)
@@ -116,9 +129,30 @@ class AnalyzerApp:
                 pane._axinfo["grid"]["color"] = (0.2, 0.2, 0.2, 1.0)
         except Exception:
             pass
+        self._apply_zoom()
 
     def _color_for(self, groups, g):
         return CLOUD_PALETTE[max(0, groups.index(g)) % len(CLOUD_PALETTE)]
+
+    def _apply_zoom(self):
+        # Modern matplotlib: box_aspect(zoom=...); fall back to camera distance.
+        try:
+            self.ax.set_box_aspect(None, zoom=self._zoom)
+        except Exception:
+            try:
+                self.ax.dist = 10.0 / max(0.2, self._zoom)
+            except Exception:
+                pass
+
+    def _on_scroll(self, event):
+        step = 1.15 if getattr(event, "button", "up") == "up" else 1.0 / 1.15
+        self._zoom = max(0.4, min(6.0, self._zoom * step))
+        self._apply_zoom()
+        self.canvas.draw_idle()
+
+    def _set_view(self, elev, azim):
+        self.ax.view_init(elev=elev, azim=azim)
+        self.canvas.draw_idle()
 
     def browse(self):
         if self.is_analyzing:

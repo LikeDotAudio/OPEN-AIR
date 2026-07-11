@@ -51,6 +51,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     const [browsePad, setBrowsePad] = React.useState(null);
     // "Load to other pad" mode: the next pad clicked receives this sample.
     const [pendingAssign, setPendingAssign] = React.useState(null); // { file, meta }
+    const [showPadBrowse, setShowPadBrowse] = React.useState(false);
 
     // Remembered assignments from retained MQTT: { idx: {name, folder} }. Lets the
     // kit revert (labels immediately; audio via Restore) after a reload.
@@ -451,6 +452,12 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     style={{ background: '#388e3c', color: '#fff', border: 'none', borderRadius: '3px', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
                     + NEW set
                 </button>
+                {window.PadBrowse && (
+                    <button onClick={() => setShowPadBrowse(true)} title="Browse a folder into all 16 pads at once"
+                        style={{ background: '#8ab4f8', color: '#111', border: 'none', borderRadius: '3px', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                        🎛 Pad Browser
+                    </button>
+                )}
                 {currentSet && (
                     <button onClick={() => deleteSet(currentSet)} title={`Delete "${currentSet}"`}
                         style={{ background: 'none', color: '#888', border: '1px solid #444', borderRadius: '3px', padding: '5px 8px', fontSize: '11px', cursor: 'pointer' }}>✕</button>
@@ -464,6 +471,10 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     onChoose={(file, meta) => { handleFile(browsePad, file, meta); setBrowsePad(null); }}
                     onChooseOther={(file, meta) => { setBrowsePad(null); setPendingAssign({ file, meta }); }}
                 />
+            )}
+
+            {showPadBrowse && window.PadBrowse && (
+                <window.PadBrowse onClose={() => setShowPadBrowse(false)} />
             )}
 
             {pendingAssign && (

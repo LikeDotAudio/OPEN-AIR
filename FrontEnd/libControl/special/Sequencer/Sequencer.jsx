@@ -86,11 +86,15 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
     const semiFromPitch = (p) => Math.round(12 * Math.log2(p || 1));
     const [pitchSemi, setPitchSemi] = React.useState(semiFromPitch(entry && entry.pitch));
     const [offset, setOffset] = React.useState((entry && entry.offset) || 0);
+    const [loop, setLoop] = React.useState(!!(entry && entry.loop));
+    const [end, setEnd] = React.useState((entry && entry.end != null) ? entry.end : (entry && entry.buffer ? entry.buffer.duration : 0));
 
     React.useEffect(() => {
         const e = window.OA_DRUM_SAMPLES[trkIdx];
         setPitchSemi(semiFromPitch(e && e.pitch));
         setOffset((e && e.offset) || 0);
+        setLoop(!!(e && e.loop));
+        setEnd((e && e.end != null) ? e.end : (e && e.buffer ? e.buffer.duration : 0));
     }, [version]);
 
     React.useEffect(() => {
@@ -105,11 +109,17 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
         cx.strokeStyle = '#f4902c'; cx.beginPath();
         for (let x = 0; x < c.width; x++) { let mn = 1, mx = -1; for (let j = 0; j < step; j++) { const d = data[x * step + j]; if (d === undefined) break; if (d < mn) mn = d; if (d > mx) mx = d; } cx.moveTo(x, (1 + mn) * amp); cx.lineTo(x, (1 + mx) * amp); }
         cx.stroke();
-        if (e.buffer.duration) { const ox = (e.offset || 0) / e.buffer.duration * c.width; cx.strokeStyle = '#8ab4f8'; cx.beginPath(); cx.moveTo(ox, 0); cx.lineTo(ox, c.height); cx.stroke(); }
-    }, [version, offset]);
+        if (e.buffer.duration) {
+            const ox = (e.offset || 0) / e.buffer.duration * c.width; cx.strokeStyle = '#8ab4f8'; cx.beginPath(); cx.moveTo(ox, 0); cx.lineTo(ox, c.height); cx.stroke();
+            const endSec = (e.end != null ? e.end : e.buffer.duration);
+            const ex = endSec / e.buffer.duration * c.width; cx.strokeStyle = '#e57373'; cx.beginPath(); cx.moveTo(ex, 0); cx.lineTo(ex, c.height); cx.stroke();
+        }
+    }, [version, offset, end]);
 
     const applyPitch = (s) => { setPitchSemi(s); window.oaUpdateDrumSample(trkIdx, { pitch: Math.pow(2, s / 12) }); onChange && onChange(); };
     const applyOffset = (o) => { setOffset(o); window.oaUpdateDrumSample(trkIdx, { offset: o }); onChange && onChange(); };
+    const applyLoop = (b) => { setLoop(b); window.oaUpdateDrumSample(trkIdx, { loop: b }); onChange && onChange(); };
+    const applyEnd = (val) => { setEnd(val); window.oaUpdateDrumSample(trkIdx, { end: val }); onChange && onChange(); };
     const dur = hasBuf ? entry.buffer.duration : 0;
 
     return (
@@ -126,15 +136,20 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
                 <div style={{ width: '100%', height: '56px', background: '#0a0a0a', border: '1px solid #444' }}>
                     <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
                 </div>
-                <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '8px', alignItems: 'center' }}>
                     <button onClick={onBrowse} style={{ flex: 1, background: '#f4902c', color: '#111', border: 'none', borderRadius: '3px', padding: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>📁 Browse sample…</button>
+                    <label title="Loop the sample (Sampler pad hold)" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#ccc', cursor: 'pointer' }}>
+                        <input type="checkbox" checked={loop} disabled={!hasBuf} onChange={(e) => applyLoop(e.target.checked)} /> Loop
+                    </label>
                     <button onClick={() => window.oaTriggerDrum && window.oaTriggerDrum(trkIdx, 1)} title="Preview" style={{ background: '#333', color: '#fff', border: '1px solid #444', borderRadius: '3px', padding: '6px 12px', cursor: 'pointer', fontSize: '12px' }}>►</button>
                 </div>
                 <div style={{ marginTop: '10px', opacity: hasBuf ? 1 : 0.4 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa' }}><span>PITCH</span><span style={{ color: '#f4902c' }}>{pitchSemi > 0 ? '+' : ''}{pitchSemi} st</span></div>
                     <input type="range" min="-12" max="12" step="1" value={pitchSemi} disabled={!hasBuf} onChange={(e) => applyPitch(Number(e.target.value))} style={{ width: '100%' }} />
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa', marginTop: '6px' }}><span>TIME SHIFT (start)</span><span style={{ color: '#f4902c' }}>{offset.toFixed(3)}s</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa', marginTop: '6px' }}><span style={{ color: '#8ab4f8' }}>TIME SHIFT (start)</span><span style={{ color: '#f4902c' }}>{offset.toFixed(3)}s</span></div>
                     <input type="range" min="0" max={dur ? Number((dur * 0.9).toFixed(3)) : 0} step="0.001" value={offset} disabled={!hasBuf} onChange={(e) => applyOffset(Number(e.target.value))} style={{ width: '100%' }} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa', marginTop: '6px' }}><span style={{ color: '#e57373' }}>END / CUT-OFF</span><span style={{ color: '#f4902c' }}>{Number(end || 0).toFixed(3)}s{dur && Math.abs((end || 0) - dur) < 0.0005 ? ' (EOF)' : ''}</span></div>
+                    <input type="range" min="0.01" max={dur ? Number(dur.toFixed(3)) : 0} step="0.001" value={Math.min(end || 0, dur || 0)} disabled={!hasBuf} onChange={(e) => applyEnd(Math.max(offset + 0.01, Number(e.target.value)))} style={{ width: '100%' }} />
                 </div>
                 <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '12px', borderTop: '1px solid #333', paddingTop: '10px' }}>
                     <MiniKnob value={Math.round((vol == null ? 1 : vol) * 100)} min={0} max={100} label="VOL" display={`${Math.round((vol == null ? 1 : vol) * 100)}`} onChange={(v) => onVol && onVol(v / 100)} />
@@ -333,7 +348,8 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 // track if present (with its pitch/fade), otherwise the synth voice.
                 const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx];
                 if (entry && entry.buffer && window.oaPlayDrumSample) {
-                    window.oaPlayDrumSample(ctx, entry, time, vol, pan);
+                    // One-shot per step (never loop in the sequence), but keep cut-off/pitch/fade.
+                    window.oaPlayDrumSample(ctx, Object.assign({}, entry, { loop: false }), time, vol, pan);
                 } else if (window.oaPlayDrumVoice) {
                     window.oaPlayDrumVoice(ctx, TRACKS[trkIdx], time, vol, pan);
                 } else {

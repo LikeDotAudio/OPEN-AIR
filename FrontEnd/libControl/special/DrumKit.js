@@ -58,6 +58,7 @@ window.oaSetDrumSample = function (idx, buffer, opts) {
         buffer: buffer,
         pitch: opts.pitch || 1,     // playbackRate multiplier (pitch + speed)
         offset: opts.offset || 0,   // start offset in seconds (time shift)
+        end: (opts.end != null ? opts.end : null),   // cut-off in seconds (null = EOF)
         loop: !!opts.loop,
         fade: !!opts.fade,
         name: opts.name || '',
@@ -97,11 +98,14 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume, pan) {
     src.playbackRate.value = entry.pitch || 1;
     src.loop = !!entry.loop;
     const offset = Math.max(0, Math.min(entry.offset || 0, entry.buffer.duration - 0.001));
-    if (src.loop) src.loopStart = offset;
+    // Cut-off / end point (buffer seconds). null/absent = play to EOF.
+    const end = (entry.end != null && entry.end > offset) ? Math.min(entry.end, entry.buffer.duration) : entry.buffer.duration;
+    const region = Math.max(0.001, end - offset);
+    if (src.loop) { src.loopStart = offset; src.loopEnd = end; }
     src.connect(gain);
     if (pan && ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); gain.connect(p); p.connect(ctx.destination); }
     else gain.connect(ctx.destination);
-    const dur = (entry.buffer.duration - offset) / (entry.pitch || 1);
+    const dur = region / (entry.pitch || 1);
     const v = Math.max(0.0001, volume);
     if (entry.fade) {
         const f = Math.min(0.05, dur * 0.2);
@@ -114,7 +118,8 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume, pan) {
     } else {
         gain.gain.setValueAtTime(v, time);
     }
-    src.start(time, offset);
+    if (src.loop) src.start(time, offset);
+    else src.start(time, offset, region);
     return src;
 };
 

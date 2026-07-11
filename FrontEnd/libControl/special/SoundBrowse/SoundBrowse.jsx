@@ -595,9 +595,9 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                         )}
                         <div ref={gridScrollRef} style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
                             {shown.length > 0 ? (
-                                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: '8px' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`, gap: '8px' }}>
                                     {shown.map((entry, i) => (
-                                        <div key={i} ref={i === selectedIndex ? selectedThumbRef : undefined}>
+                                        <div key={i} ref={i === selectedIndex ? selectedThumbRef : undefined} style={{ minWidth: 0 }}>
                                             <WaveThumb entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} scrollRootRef={gridScrollRef} />
                                         </div>
                                     ))}

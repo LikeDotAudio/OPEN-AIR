@@ -93,21 +93,23 @@ const SoundCloudView = ({ data, rootHandle, onSelectFile }) => {
                     return `<b>${d.name}</b><br/>Group: ${d.group || 'Other'}<br/>Pitch: ${(d.pitch || 0).toFixed(1)} Hz<br/>Complexity: ${(d.complexity || 0).toFixed(2)}<br/>Length: ${(d.length || 0).toFixed(2)}s`;
                 },
             },
-            grid: { left: yMode === 'group' ? 80 : 55, right: 20, top: 20, bottom: 40 },
+            legend: { type: 'scroll', top: 4, left: 8, right: 8, textStyle: { color: '#ccc', fontSize: 10 }, inactiveColor: '#555', itemWidth: 12, itemHeight: 8 },
+            grid: { left: yMode === 'group' ? 80 : 55, right: 20, top: 42, bottom: 40 },
             xAxis: { type: 'value', name: 'Pitch (Hz)', nameTextStyle: { color: '#888' }, splitLine: { show: false }, axisLabel: { color: '#666' } },
             yAxis: yMode === 'group'
                 ? { type: 'category', data: groups, name: 'Name group', nameTextStyle: { color: '#888' }, axisLabel: { color: '#aaa', fontSize: 10 }, splitLine: { lineStyle: { color: '#222' } } }
                 : { type: 'value', name: 'Complexity / Timbre', nameTextStyle: { color: '#888' }, splitLine: { lineStyle: { color: '#222' } }, axisLabel: { color: '#666' } },
-            series: [{
+            series: groups.map((g) => ({
+                name: g,
                 type: 'scatter',
                 symbolSize: (v, params) => scaleL(params.data.raw.length),
+                itemStyle: { color: colorFor(g), opacity: 0.75, borderColor: '#000', borderWidth: 0.3 },
                 emphasis: { itemStyle: { borderColor: '#fff', borderWidth: 2, opacity: 1 } },
-                data: data.map((d) => {
-                    const g = d.group || 'Other';
+                data: data.filter((d) => (d.group || 'Other') === g).map((d) => {
                     const y = yMode === 'group' ? groups.indexOf(g) : d.complexity;
-                    return { value: [d.pitch, y], raw: d, itemStyle: { color: colorFor(g), opacity: 0.75, borderColor: '#000', borderWidth: 0.3 } };
+                    return { value: [d.pitch, y], raw: d };
                 }),
-            }],
+            })),
         };
         echartsInst.current.setOption(option);
 

@@ -376,8 +376,9 @@ class AnalyzerApp:
             d2 = d[order[1]] if len(order) > 1 else d1 + 1.0
             conf = int(max(0.0, min(1.0, (d2 - d1) / (d2 + 1e-9))) * 100)
             cur = r.get("group") or "Other"
+            drum = " [drum-tag]" if r.get("audit") else ""
             if cur == "Other":
-                note, tag = f"OTHER → likely {g1}", "other"
+                note, tag = f"OTHER → likely {g1}{drum}", "other"
             elif cur != g1:
                 note, tag = f"named {cur}, looks like {g1}", "mismatch"
             else:
@@ -743,6 +744,8 @@ class AnalyzerApp:
         lines.append("channels: " + ("mono" if ch == 1 else "stereo" if ch == 2 else str(ch)))
         if rec.get("sustained"):
             lines.append("* sustained single note")
+        if rec.get("audit"):
+            lines.append("! generic 'drum' tag — needs audit")
         text = "\n".join(lines)
 
         if self._sel_txt is not None:

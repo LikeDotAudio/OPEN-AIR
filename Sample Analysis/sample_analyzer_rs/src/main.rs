@@ -29,6 +29,7 @@ struct Peak {
     timbre: String,       // feature-derived class (Percussive/Tonal/Noise/Bass/Bright/Loop/Pad)
     length_class: String, // one-shot length tier: Short / Medium / Long (or "Loop")
     subgroup: String,     // group + length tier, e.g. "Bass Short" (or "Loop")
+    audit: bool,          // generic "drum" tag, no specific type — flag for acoustic audit
 
     // --- time / envelope ---
     length: f64,       // seconds
@@ -208,7 +209,7 @@ fn main() {
                         "type": "result", "done": n, "total": total,
                         "name": p.name, "folder": p.folder, "group": p.group, "reason": p.reason,
                         "timbre": p.timbre, "length_class": p.length_class, "subgroup": p.subgroup,
-                        "sustained": p.sustained, "sustain": p.sustain,
+                        "sustained": p.sustained, "sustain": p.sustain, "audit": p.audit,
                         "pitch": p.pitch, "complexity": p.complexity, "length": p.length,
                         "transients": p.transients, "centroid": p.centroid, "harmonicity": p.harmonicity,
                         "brightness": p.high, "attack": p.attack, "bpm": p.bpm,
@@ -614,6 +615,15 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         format!("{} {}", group, length_class)
     };
 
+    // A generic "drum" tag with no specific instrument matched ⇒ flag for a
+    // second (acoustic) audit rather than trusting the vague name.
+    let audit = !is_loop && group == "Other" && normalize_name(&name).contains("drum");
+    let reason = if audit {
+        "generic \"drum\" tag — flagged for acoustic audit".to_string()
+    } else {
+        reason
+    };
+
     Some(Peak {
         name,
         folder: folder.clone(),
@@ -624,6 +634,7 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         timbre,
         length_class,
         subgroup,
+        audit,
         length,
         transients,
         attack,

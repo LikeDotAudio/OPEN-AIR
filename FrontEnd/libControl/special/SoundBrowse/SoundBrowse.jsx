@@ -10,7 +10,7 @@
  * back to a flat multi-file picker shown in the grid.
  */
 const AUDIO_RE = /\.(mp3|wav|wave|aif|aiff|aac|m4a|ogg|oga|flac|opus)$/i;
-const COLS = 3;   // grid columns (drives arrow up/down)
+const COLS = 4;   // grid columns (drives arrow up/down)
 
 const drawWave = (canvas, buffer, color) => {
     if (!canvas) return;
@@ -533,7 +533,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
 
     return (
         <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-            <div onClick={(e) => e.stopPropagation()} style={{ width: '760px', maxWidth: '95vw', height: '80vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
+            <div onClick={(e) => e.stopPropagation()} style={{ width: '66vw', minWidth: '760px', maxWidth: '95vw', height: '80vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid #333' }}>
                     <h3 style={{ margin: 0, color: '#f4902c', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '15px' }}>
                         Sound Browse{targetLabel ? ` → ${targetLabel}` : ''}

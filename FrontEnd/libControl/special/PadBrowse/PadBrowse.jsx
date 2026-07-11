@@ -39,7 +39,7 @@ const padGather = async (handle, prefix, out, depth) => {
 };
 
 // One pad cell: draws the current entry's waveform.
-const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle, onPlay }) => {
+const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle, onPlay, onBrowse }) => {
     const canvasRef = React.useRef(null);
     const entry = stack[selIdx];
     React.useEffect(() => {
@@ -65,16 +65,17 @@ const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle, onPlay 
     }, [entry]);
     return (
         <div onClick={() => { onFocus(); onPlay && onPlay(); }}
-            style={{ border: focused ? '2px solid #f4902c' : '1px solid #444', borderRadius: '5px', background: focused ? '#2a2018' : '#141414', padding: '5px', cursor: 'pointer', boxSizing: 'border-box' }}>
+            style={{ border: focused ? '2px solid #f4902c' : '1px solid #444', borderRadius: '5px', background: focused ? '#2a2018' : '#141414', padding: '5px', cursor: 'pointer', boxSizing: 'border-box', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
                 <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold' }}>{voice}</span>
                 <span style={{ fontSize: '9px', color: '#888' }}>{stack.length ? `${selIdx + 1}/${stack.length}` : '0'}</span>
             </div>
-            <canvas ref={canvasRef} style={{ width: '100%', height: '40px', display: 'block', background: '#0a0a0a' }} />
+            <canvas ref={canvasRef} style={{ width: '100%', flex: 1, minHeight: '40px', display: 'block', background: '#0a0a0a' }} />
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '3px' }}>
                 <button onClick={(e) => { e.stopPropagation(); onFocus(); onCycle(-1); }} disabled={!stack.length} style={{ background: '#333', color: '#ccc', border: '1px solid #444', borderRadius: '3px', width: '20px', cursor: 'pointer', fontSize: '11px' }}>▲</button>
                 <button onClick={(e) => { e.stopPropagation(); onFocus(); onCycle(1); }} disabled={!stack.length} style={{ background: '#333', color: '#ccc', border: '1px solid #444', borderRadius: '3px', width: '20px', cursor: 'pointer', fontSize: '11px' }}>▼</button>
                 <span style={{ fontSize: '9px', color: '#bbb', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{entry ? entry.name : (stack.length ? '' : 'no match')}</span>
+                <button onClick={(e) => { e.stopPropagation(); onFocus(); onBrowse && onBrowse(); }} title={`Open the Sound Browser for ${voice}`} style={{ background: '#1565c0', color: '#fff', border: 'none', borderRadius: '3px', padding: '2px 7px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold' }}>Browse</button>
             </div>
         </div>
     );
@@ -89,6 +90,8 @@ window.PadBrowse = ({ onClose }) => {
     const [focus, setFocus] = React.useState(0);   // layout position 0-15
     const [scanning, setScanning] = React.useState(false);
     const [err, setErr] = React.useState('');
+    const [browsePad, setBrowsePad] = React.useState(null);   // pad idx with the full Sound Browser open
+    const browsePadRef = React.useRef(browsePad); browsePadRef.current = browsePad;
     const publish = window.useMqttPublish ? window.useMqttPublish() : null;
 
     // MPC layout: 13-16 top row … 1-4 bottom row.
@@ -158,9 +161,22 @@ window.PadBrowse = ({ onClose }) => {
         });
     };
 
+    // Load an arbitrary file picked in the full Sound Browser onto a pad.
+    const browseChoose = async (idx, file, meta) => {
+        try {
+            const buf = await window.oaDecodeAudio(window.oaAudioCtx(), await file.arrayBuffer());
+            const prev = window.OA_DRUM_SAMPLES[idx] || {};
+            window.oaSetDrumSample(idx, buf, { name: file.name, folder: (meta && meta.folder) || '', pitch: prev.pitch, loop: prev.loop, fade: prev.fade });
+            if (publish) publish(`OpenAir/Gui/DrumKit/${idx}/sample`, { name: file.name, folder: (meta && meta.folder) || '' });
+            if (auditionRef.current) { try { auditionRef.current.stop(); } catch (e) {} auditionRef.current = null; }
+            if (window.oaPlayDrumSample) { const ctx = window.oaAudioCtx(); auditionRef.current = window.oaPlayDrumSample(ctx, window.OA_DRUM_SAMPLES[idx], ctx.currentTime, 1); }
+        } catch (e) {}
+    };
+
     // Keyboard: Left/Right move the focused pad; Up/Down cycle its sound.
     React.useEffect(() => {
         const onKey = (e) => {
+            if (browsePadRef.current != null) return;   // the Sound Browser has the keyboard
             if (e.key === 'Escape') { onClose(); e.preventDefault(); return; }
             if (e.target && e.target.tagName === 'INPUT') return;
             if (e.key === 'ArrowLeft') { setFocus((f) => (f + 15) % 16); e.preventDefault(); }
@@ -208,7 +224,7 @@ window.PadBrowse = ({ onClose }) => {
 
     return (
         <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-            <div onClick={(e) => e.stopPropagation()} style={{ width: '75vw', maxWidth: '75vw', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
+            <div onClick={(e) => e.stopPropagation()} style={{ width: '75vw', maxWidth: '75vw', height: '88vh', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid #333' }}>
                     <h3 style={{ margin: 0, color: '#f4902c', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '15px' }}>Pad Browser</h3>
                     <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#888', fontSize: '20px', cursor: 'pointer' }}>×</button>
@@ -220,8 +236,8 @@ window.PadBrowse = ({ onClose }) => {
                     <span style={{ fontSize: '11px', color: '#888' }}>{scanning ? 'scanning…' : (rootHandle ? (rootHandle.name || '') : '')} · ← → focus pad · ↑ ↓ swap sound</span>
                     {err && <span style={{ fontSize: '11px', color: '#f88' }}>⚠️ {err}</span>}
                 </div>
-                <div style={{ padding: '12px', overflowY: 'auto' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '8px' }}>
+                <div style={{ padding: '12px', overflowY: 'auto', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gridTemplateRows: 'repeat(4, minmax(0, 1fr))', gap: '8px', flex: 1, minHeight: 0 }}>
                         {layout.map((padNum, pos) => {
                             const idx = padNum - 1;
                             return (
@@ -231,11 +247,19 @@ window.PadBrowse = ({ onClose }) => {
                                     focused={focus === pos}
                                     onFocus={() => setFocus(pos)}
                                     onCycle={(d) => cyclePad(idx, d)}
-                                    onPlay={() => playPad(idx)} />
+                                    onPlay={() => playPad(idx)}
+                                    onBrowse={() => setBrowsePad(idx)} />
                             );
                         })}
                     </div>
                 </div>
+                {browsePad != null && window.SoundBrowse && (
+                    <window.SoundBrowse
+                        targetLabel={(KIT[browsePad] && KIT[browsePad].name) || `Pad ${browsePad + 1}`}
+                        onClose={() => setBrowsePad(null)}
+                        onChoose={(file, meta) => { browseChoose(browsePad, file, meta); setBrowsePad(null); }}
+                    />
+                )}
             </div>
         </div>
     );

@@ -20,62 +20,37 @@ const loadLibrary = () => {
     }
 };
 
-// Self-contained rotary knob for tempo: drag up/down or scroll to change.
-const BpmKnob = ({ value, min = 40, max = 300, onChange, flash }) => {
-    const drag = React.useRef(null);
-    const angle = -135 + ((value - min) / (max - min)) * 270;   // 270° sweep
-    const clamp = (v) => Math.round(Math.max(min, Math.min(max, v)));
-    const onDown = (e) => {
-        e.preventDefault();
-        drag.current = { y: e.clientY, v: value };
-        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {}
-    };
-    const onMove = (e) => {
-        if (!drag.current) return;
-        onChange(clamp(drag.current.v + (drag.current.y - e.clientY) * 0.5)); // 0.5 BPM/px
-    };
-    const onUp = (e) => { drag.current = null; try { e.currentTarget.releasePointerCapture(e.pointerId); } catch (x) {} };
-    const onWheel = (e) => { e.preventDefault(); onChange(clamp(value - Math.sign(e.deltaY))); };
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
-            <div
-                onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onWheel={onWheel}
-                title="Drag up/down or scroll to change BPM"
-                style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: flash ? '2px solid #f4902c' : '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none', boxShadow: flash ? '0 0 14px rgba(244,144,44,0.9)' : 'inset 0 2px 5px rgba(0,0,0,0.6)', transition: 'box-shadow 0.08s, border-color 0.08s' }}
-            >
-                <div style={{ position: 'absolute', inset: 0, transform: `rotate(${angle}deg)` }}>
-                    <div style={{ position: 'absolute', left: '50%', top: '4px', width: '3px', height: '13px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '2px' }} />
-                </div>
-            </div>
-            <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold', lineHeight: 1 }}>{value}</span>
-            <span style={{ fontSize: '8px', color: '#888', letterSpacing: '0.5px' }}>BPM</span>
-        </div>
-    );
-};
+// Sequencer knob — a label/readout wrapper around the SHARED window.Knob
+// (libControl/Knobs/Knob). Face, caps, drag/wheel/ALT-to-default behavior all
+// come from the shared component, so a style change there restyles this too.
+const SeqKnob = ({ value, min, max, onChange, label, display, size = 60, color = '#f4902c', flash, title, step = 1, def }) => (
+    <div title={title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', filter: flash ? 'drop-shadow(0 0 7px rgba(244,144,44,0.95))' : 'none', transition: 'filter 0.08s' }}>
+        <window.Knob
+            value={value}
+            onChange={(v) => onChange(Math.round(Math.max(min, Math.min(max, v))))}
+            size={size}
+            config={{ min, max, step, value_default: def, arc_width: 3, indicator_color: color }}
+        />
+        <span style={{ fontSize: '10px', color, fontWeight: 'bold', lineHeight: 1 }}>{display !== undefined ? display : Math.round(value)}</span>
+        <span style={{ fontSize: '8px', color: '#888', letterSpacing: '0.5px' }}>{label}</span>
+    </div>
+);
 
-// Small rotary knob (volume / pan). Drag up/down or scroll.
-const MiniKnob = ({ value, min, max, label, display, onChange, size = 42 }) => {
-    const drag = React.useRef(null);
-    const frac = (value - min) / ((max - min) || 1);
-    const angle = -135 + frac * 270;
-    const clamp = (v) => Math.max(min, Math.min(max, v));
-    const onDown = (e) => { e.preventDefault(); drag.current = { y: e.clientY, v: value }; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (x) {} };
-    const onMove = (e) => { if (!drag.current) return; onChange(clamp(drag.current.v + (drag.current.y - e.clientY) * (max - min) / 120)); };
-    const onUp = () => { drag.current = null; };
-    const onWheel = (e) => { e.preventDefault(); onChange(clamp(value + (e.deltaY < 0 ? 1 : -1) * (max - min) / 60)); };
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
-            <div onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onWheel={onWheel}
-                style={{ width: size, height: size, borderRadius: '50%', background: 'radial-gradient(circle at 50% 35%, #444, #1a1a1a)', border: '2px solid #555', position: 'relative', cursor: 'ns-resize', touchAction: 'none' }}>
-                <div style={{ position: 'absolute', inset: 0, transform: `rotate(${angle}deg)` }}>
-                    <div style={{ position: 'absolute', left: '50%', top: '3px', width: '3px', height: `${Math.round(size * 0.3)}px`, background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '2px' }} />
-                </div>
-            </div>
-            <span style={{ fontSize: '10px', color: '#f4902c', fontWeight: 'bold', lineHeight: 1 }}>{display}</span>
-            <span style={{ fontSize: '8px', color: '#888' }}>{label}</span>
-        </div>
-    );
-};
+// Sequencer button — the SHARED window.OcaButton (libControl/buttons/Button)
+// compacted for the toolbar. Style tweaks to OcaButton flow in here.
+const SeqButton = ({ label, onClick, active, color = '#333', activeColor = '#f4902c', textColor, title, disabled, style }) => (
+    <window.OcaButton
+        label={label}
+        onClick={onClick}
+        title={title}
+        disabled={disabled}
+        color={active ? activeColor : color}
+        style={Object.assign(
+            { padding: '4px 9px', fontSize: '12px', borderRadius: '3px', border: '1px solid #444', boxShadow: 'none', color: textColor || (active ? '#111' : '#ccc') },
+            style
+        )}
+    />
+);
 
 // Per-track sample menu: waveform + pitch + time-shift, opened by clicking a
 // track name. Edits the shared kit entry (OA_DRUM_SAMPLES[trkIdx]) directly.
@@ -161,8 +136,8 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
                     <input type="range" min="0.01" max={dur ? Number(dur.toFixed(3)) : 0} step="0.001" value={Math.min(end || 0, dur || 0)} disabled={!hasBuf} onChange={(e) => applyEnd(Math.max(offset + 0.01, Number(e.target.value)))} style={{ width: '100%' }} />
                 </div>
                 <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '12px', borderTop: '1px solid #333', paddingTop: '10px' }}>
-                    <MiniKnob value={Math.round((vol == null ? 1 : vol) * 100)} min={0} max={100} label="VOL" display={`${Math.round((vol == null ? 1 : vol) * 100)}`} onChange={(v) => onVol && onVol(v / 100)} />
-                    <MiniKnob value={Math.round((pan || 0) * 100)} min={-100} max={100} label="PAN" display={`${Math.round((pan || 0) * 100)}`} onChange={(v) => onPan && onPan(v / 100)} />
+                    <SeqKnob value={Math.round((vol == null ? 1 : vol) * 100)} min={0} max={100} def={100} label="VOL" display={`${Math.round((vol == null ? 1 : vol) * 100)}`} onChange={(v) => onVol && onVol(v / 100)} />
+                    <SeqKnob value={Math.round((pan || 0) * 100)} min={-100} max={100} def={0} label="PAN" display={`${Math.round((pan || 0) * 100)}`} onChange={(v) => onPan && onPan(v / 100)} />
                 </div>
             </div>
         </React.Fragment>
@@ -236,6 +211,25 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         while (tt.length < n) tt.push(null);
         setSeq({ grid, bpm, steps: n, toneTrack: tt, toneRoot });
     };
+
+    // Double the pattern out to n steps: the first n/2 steps are copied onto
+    // the second n/2 (the "+4/+8/+16/+32" buttons) — quick way to grow a beat.
+    const doubleTo = (n) => {
+        const half = n / 2;
+        const grid = pattern.map((row) => {
+            const h = row.slice(0, half);
+            while (h.length < half) h.push(0);
+            return [...h, ...h];
+        });
+        const th = toneTrack.slice(0, half);
+        while (th.length < half) th.push(null);
+        const tt = [...th, ...th.map((c) => (c ? { ...c } : null))];
+        setSeq({ grid, bpm, steps: n, toneTrack: tt, toneRoot });
+    };
+
+    // Metronome click volume (0-1) — the click only sounds while RECORDING.
+    const [clickVol, setClickVol] = React.useState(0.8);
+    const clickVolRef = React.useRef(clickVol); clickVolRef.current = clickVol;
 
     // Per-track mute: silences that track's audio but keeps its pattern intact.
     // Local to this client (each client renders its own audio); read via ref in
@@ -369,7 +363,19 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             } catch (e) { /* storage full / unavailable — keep running */ }
         }
     }, [lib]);
-    
+
+    // SONG — an ordered list of saved-pattern NAMES chained end-to-end at
+    // playback (pattern A, then B, then A again…). Shared over MQTT (retained)
+    // like the library so it survives reloads and syncs across clients.
+    const songTopic = `OpenAir/Gui/Sequencer/${safeLabel}/song`;
+    const [songState, setSongState] = window.useMqttState(songTopic, { items: [] });
+    const song = (songState && songState.items) || [];
+    const setSongItems = (items) => setSongState({ items });
+    const songItemsRef = React.useRef(song); songItemsRef.current = song;
+    const libraryRef = React.useRef(library); libraryRef.current = library;
+    const songRef = React.useRef(null);            // { idx } while a song plays
+    const [songPos, setSongPos] = React.useState(null);
+
     // Lookahead scheduling state
     const nextNoteTimeRef = React.useRef(0);
     const currentStepRef = React.useRef(0);
@@ -391,6 +397,33 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         const secondsPerBeat = 60.0 / bpmRef.current;
         nextNoteTimeRef.current += 0.25 * secondsPerBeat; // 16th note
         currentStepRef.current = (currentStepRef.current + 1) % stepsRef.current;
+        // Song mode: when the current pattern wraps, chain to the next one.
+        if (currentStepRef.current === 0 && songRef.current) advanceSong();
+    };
+
+    // Load a library entry into the LIVE refs synchronously (the scheduler can
+    // fire again before React re-renders) and push it to state/MQTT for the UI.
+    const applySongEntry = (entry) => {
+        const s = (entry.data[0] && entry.data[0].length) || entry.steps || DEFAULT_STEPS;
+        patternRef.current = clonePattern(entry.data);
+        stepsRef.current = s;
+        if (entry.bpm) bpmRef.current = entry.bpm;
+        toneTrackRef.current = entry.toneTrack || Array(s).fill(null);
+        toneRootRef.current = entry.toneRoot !== undefined ? entry.toneRoot : null;
+        setSeqRef.current({ grid: patternRef.current, bpm: bpmRef.current, steps: s, toneTrack: toneTrackRef.current, toneRoot: toneRootRef.current });
+    };
+
+    // Step to the next playable pattern in the song (skipping names whose
+    // library entry was deleted); loops back to the start when it runs off the end.
+    const advanceSong = () => {
+        const names = songItemsRef.current || [];
+        const libItems = libraryRef.current || [];
+        for (let hop = 1; hop <= names.length; hop++) {
+            const idx = (songRef.current.idx + hop) % names.length;
+            const entry = libItems.find((p) => p.name === names[idx]);
+            if (entry) { songRef.current = { idx }; setSongPos(idx); applySongEntry(entry); return; }
+        }
+        songRef.current = null; setSongPos(null);   // nothing playable left
     };
 
     const scheduleNote = (stepNumber, time) => {
@@ -432,6 +465,21 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             }
         });
 
+        // Metronome click — sounds only while RECORDING: a short blip on every
+        // beat (each 4 steps), accented on the pattern's downbeat.
+        if (recordingRef.current && clickVolRef.current > 0 && stepNumber % 4 === 0) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.value = stepNumber === 0 ? 1568 : 1046;
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(0.5 * clickVolRef.current, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+            osc.start(time);
+            osc.stop(time + 0.06);
+        }
+
         // Play tone track
         const tTrack = toneTrackRef.current;
         const tRoot = toneRootRef.current;
@@ -463,15 +511,37 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             cancelAnimationFrame(timerIDRef.current);
             setIsPlaying(false);
             setCurrentStep(0);
+            songRef.current = null;
+            setSongPos(null);
         } else {
             // Un-suspend AudioContext on first play if needed (browser policy)
             if (ctx.state === 'suspended') ctx.resume();
-            
+
+            songRef.current = null;   // plain Play loops the current pattern only
+            setSongPos(null);
             setIsPlaying(true);
             currentStepRef.current = 0;
             nextNoteTimeRef.current = ctx.currentTime + 0.05; // start shortly
             scheduler();
         }
+    };
+
+    // Play the SONG: load its first (playable) pattern and let nextNote() chain
+    // through the rest, looping the whole song until stopped.
+    const playSong = () => {
+        const names = songItemsRef.current || [];
+        const startIdx = names.findIndex((n) => (libraryRef.current || []).some((p) => p.name === n));
+        if (startIdx === -1) return;
+        const ctx = getAudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        if (isPlaying) cancelAnimationFrame(timerIDRef.current);
+        songRef.current = { idx: startIdx };
+        setSongPos(startIdx);
+        applySongEntry(libraryRef.current.find((p) => p.name === names[startIdx]));
+        setIsPlaying(true);
+        currentStepRef.current = 0;
+        nextNoteTimeRef.current = ctx.currentTime + 0.05;
+        scheduler();
     };
 
     // Click a step = toggle on(100)/off. Click-and-HOLD (or drag) = it becomes a
@@ -611,55 +681,69 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     return (
         <div style={{ padding: '12px', backgroundColor: 'rgba(18,18,18,0.28)', borderRadius: '4px', color: '#fff', border: '1px solid #333', width: '100%', boxSizing: 'border-box', marginTop: '10px' }}>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#ccc' }}>{label}</h3>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', alignItems: 'center' }}>
-                <button
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <SeqButton
+                    label={recording ? '● Rec ●' : '● Rec'}
                     onClick={toggleRecording}
+                    active={recording}
+                    color="#5a1f1f" activeColor="#d32f2f" textColor="#fff"
                     title="Record: while playing, hit the Sampler pads to write them into the pattern at their velocity"
-                    style={{ background: recording ? '#d32f2f' : '#5a1f1f', color: '#fff', border: recording ? '1px solid #ff8a80' : '1px solid #722', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', boxShadow: recording ? '0 0 8px rgba(211,47,47,0.85)' : 'none' }}
-                >
-                    ● Rec{recording ? ' ●' : ''}
-                </button>
-                <button 
+                    style={{ padding: '6px 15px', border: recording ? '1px solid #ff8a80' : '1px solid #722', boxShadow: recording ? '0 0 8px rgba(211,47,47,0.85)' : 'none' }}
+                />
+                <SeqKnob
+                    value={Math.round(clickVol * 100)} min={0} max={100} def={80}
+                    onChange={(v) => setClickVol(v / 100)}
+                    label="CLICK" display={`${Math.round(clickVol * 100)}`} color="#d32f2f"
+                    title="Metronome click volume — the click sounds on every beat while recording"
+                />
+                <SeqButton
+                    label={isPlaying ? '■ Stop' : '► Play'}
                     onClick={togglePlayback}
-                    style={{ background: isPlaying ? '#ffb300' : '#388e3c', color: '#fff', border: 'none', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold' }}
-                >
-                    {isPlaying ? '■ Stop' : '► Play'}
-                </button>
+                    color={isPlaying ? '#ffb300' : '#388e3c'} textColor="#fff"
+                    style={{ padding: '6px 15px', border: 'none' }}
+                />
                 <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{ fontSize: '12px', color: '#aaa' }}>Tempo:</span>
-                    <BpmKnob value={bpm} onChange={setBpm} flash={tapping} />
-                    <button onClick={tapTempo} title="Tap to set tempo" style={{ background: tapping ? '#f4902c' : '#333', color: tapping ? '#111' : '#ccc', border: '1px solid #444', borderRadius: '3px', padding: '6px 10px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>TAP</button>
+                    <SeqKnob value={bpm} min={40} max={300} def={120} onChange={setBpm} label="BPM" flash={tapping} title="Drag up/down or scroll to change BPM" />
+                    <SeqButton label="TAP" onClick={tapTempo} active={tapping} title="Tap to set tempo" style={{ padding: '6px 10px' }} />
                 </div>
-                <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <span style={{ fontSize: '12px', color: '#aaa' }}>Steps:</span>
-                    {STEP_OPTIONS.map((n) => (
-                        <button key={n} onClick={() => setSteps(n)}
-                            style={{ background: steps === n ? '#f4902c' : '#333', color: steps === n ? '#111' : '#ccc', border: '1px solid #444', padding: '4px 9px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', fontSize: '12px' }}>
-                            {n}
-                        </button>
+                <div style={{ marginLeft: '15px', display: 'flex', alignItems: 'flex-start', gap: '5px' }}>
+                    <span style={{ fontSize: '12px', color: '#aaa', marginTop: '6px' }}>Steps:</span>
+                    {STEP_OPTIONS.map((n, i) => (
+                        <div key={n} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                            <SeqButton label={String(n)} active={steps === n} onClick={() => setSteps(n)} />
+                            {i > 0 && (
+                                <SeqButton
+                                    label={`+${STEP_OPTIONS[i - 1]}`}
+                                    onClick={() => doubleTo(n)}
+                                    color="#26323a" textColor="#8ab4f8"
+                                    title={`Extend to ${n} steps: copy the first ${n / 2} onto the second ${n / 2}`}
+                                    style={{ border: '1px solid #3a4a58' }}
+                                />
+                            )}
+                        </div>
                     ))}
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '6px' }}>
-                    <button
+                    <SeqButton
+                        label={rendering ? '…rendering' : '⭳ RENDER'}
                         onClick={renderLoop}
                         disabled={rendering}
+                        color="#7b1fa2" textColor="#fff"
                         title="Render this pattern to a loopable WAV file"
-                        style={{ background: '#7b1fa2', color: '#fff', border: 'none', padding: '6px 12px', cursor: rendering ? 'wait' : 'pointer', borderRadius: '3px', fontWeight: 'bold' }}
-                    >
-                        {rendering ? '…rendering' : '⭳ RENDER'}
-                    </button>
-                    <button
+                        style={{ padding: '6px 12px', border: 'none', cursor: rendering ? 'wait' : 'pointer' }}
+                    />
+                    <SeqButton
+                        label="⭳ Save"
                         onClick={savePattern}
-                        style={{ background: '#1565c0', color: '#fff', border: 'none', padding: '6px 12px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold' }}
-                    >
-                        ⭳ Save
-                    </button>
-                    <button
+                        color="#1565c0" textColor="#fff"
+                        style={{ padding: '6px 12px', border: 'none' }}
+                    />
+                    <SeqButton
+                        label="Clear"
                         onClick={clearPattern}
-                        style={{ background: '#333', color: '#ccc', border: 'none', padding: '6px 12px', cursor: 'pointer', borderRadius: '3px' }}
-                    >
-                        Clear
-                    </button>
+                        style={{ padding: '6px 12px', border: 'none' }}
+                    />
                 </div>
             </div>
             
@@ -801,20 +885,67 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                             <div key={entry.name} style={{ display: 'flex', alignItems: 'center', background: '#2a2a2a', borderRadius: '3px', border: '1px solid #444', overflow: 'hidden' }}>
                                 <button
                                     onClick={() => loadPattern(entry)}
-                                    title={`Load "${entry.name}"${entry.bpm ? ` @ ${entry.bpm} BPM` : ''}`}
+                                    onContextMenu={(e) => { e.preventDefault(); if (window.confirm(`Delete pattern "${entry.name}"?`)) deletePattern(entry.name); }}
+                                    title={`Load "${entry.name}"${entry.bpm ? ` @ ${entry.bpm} BPM` : ''} · right-click to delete`}
                                     style={{ background: 'transparent', color: '#f4902c', border: 'none', padding: '5px 10px', cursor: 'pointer', fontSize: '12px' }}
                                 >
                                     {entry.name}
                                 </button>
                                 <button
-                                    onClick={() => deletePattern(entry.name)}
-                                    title={`Delete "${entry.name}"`}
-                                    style={{ background: 'transparent', color: '#777', border: 'none', borderLeft: '1px solid #444', padding: '5px 8px', cursor: 'pointer', fontSize: '12px' }}
+                                    onClick={() => setSongItems([...song, entry.name])}
+                                    title={`Append "${entry.name}" to the song`}
+                                    style={{ background: 'transparent', color: '#8bc34a', border: 'none', borderLeft: '1px solid #444', padding: '5px 8px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}
                                 >
-                                    ✕
+                                    ＋
                                 </button>
                             </div>
                         ))}
+                    </div>
+                )}
+            </div>
+
+            <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                        Song
+                    </span>
+                    <SeqButton
+                        label={songPos !== null ? '■ Stop Song' : '► Play Song'}
+                        onClick={songPos !== null ? togglePlayback : playSong}
+                        color={songPos !== null ? '#ffb300' : '#388e3c'} textColor="#fff"
+                        disabled={songPos === null && song.length === 0}
+                        title="Play the song: each pattern in order, looping the whole song"
+                        style={{ padding: '4px 12px', border: 'none' }}
+                    />
+                    <SeqButton
+                        label="Clear Song"
+                        onClick={() => setSongItems([])}
+                        disabled={!song.length}
+                        style={{ border: 'none' }}
+                    />
+                </div>
+                {song.length === 0 ? (
+                    <div style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
+                        Empty — press ＋ on a library pattern to append it to the song.
+                    </div>
+                ) : (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', alignItems: 'center' }}>
+                        {song.map((name, i) => {
+                            const exists = library.some((p) => p.name === name);
+                            const isNow = songPos === i;
+                            return (
+                                <React.Fragment key={`${name}-${i}`}>
+                                    {i > 0 && <span style={{ color: '#555', fontSize: '11px' }}>→</span>}
+                                    <button
+                                        onClick={() => setSongItems(song.filter((_, j) => j !== i))}
+                                        title={exists ? `${name} — click to remove from song` : `${name} (deleted pattern — skipped) — click to remove`}
+                                        style={{ background: isNow ? '#f4902c' : '#2a2a2a', color: isNow ? '#111' : (exists ? '#f4902c' : '#666'), textDecoration: exists ? 'none' : 'line-through', border: '1px solid #444', borderRadius: '3px', padding: '4px 10px', cursor: 'pointer', fontSize: '12px', fontWeight: isNow ? 'bold' : 'normal' }}
+                                    >
+                                        {i + 1}. {name}
+                                    </button>
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
                 )}
             </div>

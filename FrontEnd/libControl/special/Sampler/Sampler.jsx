@@ -213,10 +213,12 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     const [midiBase, setMidiBase] = React.useState(36);   // MPC pads default to note 36
     const midiBaseRef = React.useRef(36); midiBaseRef.current = midiBase;
     const triggerRef = React.useRef(triggerPadAt); triggerRef.current = triggerPadAt;
+    React.useEffect(() => { window.OA_MIDI_BASE = midiBase; }, [midiBase]);   // shared with Pad Browser
     React.useEffect(() => {
         if (!navigator.requestMIDIAccess) { setMidiStatus('Web MIDI not supported (use Chrome/Edge)'); return; }
         let access = null;
         const onMsg = (e) => {
+            if (window.OA_MIDI_CAPTURED) return;   // Pad Browser (or other modal) owns MIDI right now
             const status = e.data[0], note = e.data[1], vel = e.data[2];
             if ((status & 0xf0) === 0x90 && vel > 0) {        // note-on
                 setMidiNote(note);

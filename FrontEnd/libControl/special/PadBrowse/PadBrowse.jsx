@@ -94,6 +94,7 @@ window.PadBrowse = ({ onClose }) => {
     // MPC layout: 13-16 top row … 1-4 bottom row.
     const layout = [13, 14, 15, 16, 9, 10, 11, 12, 5, 6, 7, 8, 1, 2, 3, 4];
     const stacksRef = React.useRef(stacks); stacksRef.current = stacks;
+    const selRef = React.useRef(sel); selRef.current = sel;
 
     const buildStacks = async (handle) => {
         setScanning(true); setErr('');
@@ -146,6 +147,35 @@ window.PadBrowse = ({ onClose }) => {
         window.addEventListener('keydown', onKey);
         return () => window.removeEventListener('keydown', onKey);
     }, [focus]);
+
+    // MIDI: a note loads + plays that pad's current selection and focuses it.
+    const midiHit = (idx, vel01) => {
+        const stack = stacksRef.current[idx] || [];
+        const entry = stack[selRef.current[idx]];
+        const cur = window.OA_DRUM_SAMPLES[idx];
+        if (entry && cur && cur.buffer && cur.name === entry.name) { if (window.oaTriggerDrum) window.oaTriggerDrum(idx, vel01); }
+        else if (entry) loadPadSound(idx, entry);
+        else if (window.oaTriggerDrum) window.oaTriggerDrum(idx, vel01);
+        const pos = layout.indexOf(idx + 1); if (pos >= 0) setFocus(pos);
+    };
+    React.useEffect(() => {
+        window.OA_MIDI_CAPTURED = true;   // Sampler skips its own MIDI trigger while we're open
+        const inputs = [];
+        const onMsg = (e) => {
+            const s = e.data[0], note = e.data[1], v = e.data[2];
+            if ((s & 0xf0) === 0x90 && v > 0) {
+                const idx = note - (window.OA_MIDI_BASE || 36);
+                if (idx >= 0 && idx < 16) midiHit(idx, Math.max(0.05, v / 127));
+            }
+        };
+        if (navigator.requestMIDIAccess) {
+            navigator.requestMIDIAccess().then((a) => {
+                const attach = () => a.inputs.forEach((inp) => { if (!inputs.includes(inp)) { inp.addEventListener('midimessage', onMsg); inputs.push(inp); } });
+                attach(); a.onstatechange = attach;
+            }).catch(() => {});
+        }
+        return () => { window.OA_MIDI_CAPTURED = false; inputs.forEach((inp) => inp.removeEventListener('midimessage', onMsg)); };
+    }, []);
 
     return (
         <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>

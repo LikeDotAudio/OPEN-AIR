@@ -86,6 +86,7 @@ class AnalyzerApp:
 
         # full records (from the .PEAK file) for the Groups / Examiner tabs
         self.records = []
+        self.records_by_path = {}   # abs path -> record, for the renamer columns
         self.peak_path = None
         self.root_dir = None        # scanned root, to resolve sample paths
 
@@ -444,14 +445,20 @@ class AnalyzerApp:
 
         wrap = ttk.Frame(tab)
         wrap.pack(fill=tk.BOTH, expand=True)
-        tv = ttk.Treeview(wrap, columns=("old", "new"), show="headings")
+        cols = ("old", "new") + tuple(k for k, _h, _w in self.RENAME_PEAK_COLS)
+        tv = ttk.Treeview(wrap, columns=cols, show="headings")
         tv.heading("old", text="Old folder structure  (relative)")
-        tv.column("old", width=380, anchor=tk.W)
+        tv.column("old", width=260, anchor=tk.W)
         tv.heading("new", text="New file name")
-        tv.column("new", width=380, anchor=tk.W)
+        tv.column("new", width=240, anchor=tk.W)
+        for k, h, w in self.RENAME_PEAK_COLS:
+            tv.heading(k, text=h)
+            tv.column(k, width=w, anchor=tk.W, stretch=False)
         vs = ttk.Scrollbar(wrap, orient=tk.VERTICAL, command=tv.yview)
-        tv.configure(yscrollcommand=vs.set)
+        hs = ttk.Scrollbar(wrap, orient=tk.HORIZONTAL, command=tv.xview)
+        tv.configure(yscrollcommand=vs.set, xscrollcommand=hs.set)
         vs.pack(side=tk.RIGHT, fill=tk.Y)
+        hs.pack(side=tk.BOTTOM, fill=tk.X)
         tv.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         tv.tag_configure("collide", foreground="#c33")
         tv.tag_configure("noop", foreground="#777")
@@ -459,6 +466,48 @@ class AnalyzerApp:
         self.rename_map = []
 
     AUDIO_EXTS = (".wav", ".aif", ".aiff", ".aifc", ".mp3", ".flac", ".ogg", ".m4a")
+
+    # .PEAK fields shown as columns in the renamer: (key, header, width).
+    RENAME_PEAK_COLS = [
+        ("group", "Group", 70), ("subgroup", "Subgroup", 105), ("timbre", "Timbre", 70),
+        ("length_class", "Len tier", 60), ("pitch", "Pitch", 55), ("length", "Len s", 50),
+        ("transients", "Tr", 34), ("sustained", "Sust", 40), ("audit", "Audit", 44),
+        ("bpm", "BPM", 46), ("channels", "Ch", 46), ("sample_rate", "SR", 50),
+        ("bit_depth", "Bits", 38), ("harmonicity", "Harm", 46), ("centroid", "Bright", 55),
+        ("complexity", "Cplx", 50), ("cluster", "Clu", 38), ("reason", "Reason", 170),
+    ]
+
+    def _peak_for(self, abspath):
+        """Find the analysis record for a file: prefer its sidecar <stem>.PEAK,
+        else fall back to the loaded aggregate records (matched by path)."""
+        side = os.path.splitext(abspath)[0] + ".PEAK"
+        if os.path.isfile(side):
+            try:
+                with open(side, encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return self.records_by_path.get(abspath)
+
+    def _peak_values(self, abspath):
+        r = self._peak_for(abspath)
+        if not r:
+            return ["" for _ in self.RENAME_PEAK_COLS]
+
+        def fmt(key):
+            v = r.get(key)
+            if v is None:
+                return ""
+            if key in ("sustained", "audit"):
+                return "yes" if v else ""
+            if key == "channels":
+                return {1: "mono", 2: "stereo"}.get(v, str(v))
+            if key in ("pitch", "centroid", "complexity", "sample_rate"):
+                return f"{v:.0f}"
+            if key in ("length", "harmonicity", "bpm"):
+                return f"{v:.2f}" if v else ("" if key == "bpm" else f"{v:.2f}")
+            return str(v)
+        return [fmt(k) for k, _h, _w in self.RENAME_PEAK_COLS]
 
     def _rename_pick(self):
         d = filedialog.askdirectory(title="Select folder to flatten / rename")
@@ -519,7 +568,7 @@ class AnalyzerApp:
                 tags = ("collide",); n_collide += 1
             else:
                 n_change += 1
-            tv.insert("", "end", values=(rel, new_name), tags=tags)
+            tv.insert("", "end", values=(rel, new_name, *self._peak_values(abspath)), tags=tags)
         self.rename_map = rows
         self.rename_summary.config(
             text=f"{len(rows)} files · {n_change} to rename · {n_noop} unchanged · "
@@ -1097,6 +1146,7 @@ class AnalyzerApp:
             with open(out_path, encoding="utf-8") as f:
                 data = json.load(f)
             self.records = data if isinstance(data, list) else []
+            self.records_by_path = {r.get("path"): r for r in self.records if r.get("path")}
             self.peak_path = out_path
             # Prefer the authoritative full records for click-inspect too.
             if self.records and len(self.records) == len(self.d_rec):

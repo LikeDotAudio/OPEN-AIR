@@ -25,6 +25,7 @@ struct Peak {
     sub: String,    // alias of `folder` (SoundCloud view compatibility)
     path: String,   // absolute path
     group: String,  // name-derived category (Kick, Snare, HiHat, … Other) — or "Loop" if >1 transient
+    reason: String, // why it's in `group` (matched keyword, or the loop rule)
     timbre: String, // feature-derived class (Percussive/Tonal/Noise/Bass/Bright/Loop/Pad)
 
     // --- time / envelope ---
@@ -89,7 +90,8 @@ fn normalize_name(name: &str) -> String {
 /// abbreviation conventions for drum elements. Phrases are matched as
 /// substrings of the normalized name; ABBREVIATIONS are matched as whole
 /// tokens (so "bd" hits "BD_01" but not "bird"). Order = most specific first.
-fn categorize(name: &str) -> &'static str {
+/// Returns (group, matched-token) — the second value explains *why*.
+fn categorize(name: &str) -> (&'static str, &'static str) {
     let norm = normalize_name(name);
     let toks: Vec<&str> = norm.split_whitespace().collect();
     let tok = |t: &str| toks.iter().any(|x| *x == t);
@@ -123,11 +125,14 @@ fn categorize(name: &str) -> &'static str {
     ];
 
     for (cat, phrases, abbrevs) in RULES {
-        if phrases.iter().any(|p| ph(p)) || abbrevs.iter().any(|a| tok(a)) {
-            return cat;
+        if let Some(p) = phrases.iter().find(|p| ph(p)) {
+            return (cat, p);
+        }
+        if let Some(a) = abbrevs.iter().find(|a| tok(a)) {
+            return (cat, a);
         }
     }
-    "Other"
+    ("Other", "")
 }
 
 fn main() {
@@ -184,7 +189,7 @@ fn main() {
                 match &res {
                     Some(p) => emit(&serde_json::json!({
                         "type": "result", "done": n, "total": total,
-                        "name": p.name, "folder": p.folder, "group": p.group, "timbre": p.timbre,
+                        "name": p.name, "folder": p.folder, "group": p.group, "reason": p.reason, "timbre": p.timbre,
                         "pitch": p.pitch, "complexity": p.complexity, "length": p.length,
                         "transients": p.transients, "centroid": p.centroid, "harmonicity": p.harmonicity,
                         "brightness": p.high, "attack": p.attack, "bpm": p.bpm,
@@ -476,7 +481,14 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     let parent = path.parent().unwrap_or(root);
     let folder = parent.strip_prefix(root).ok().map(|p| p.to_string_lossy().replace('\\', "/")).unwrap_or_default();
     // Name-derived group (Loop overrides when multi-transient).
-    let group = if transients > 1 { "Loop".to_string() } else { categorize(&name).to_string() };
+    let (name_group, name_match) = categorize(&name);
+    let (group, reason) = if transients > 1 {
+        ("Loop".to_string(), format!("{} transients (>1) → loop", transients))
+    } else if name_match.is_empty() {
+        (name_group.to_string(), "no naming keyword matched".to_string())
+    } else {
+        (name_group.to_string(), format!("name matched \"{}\"", name_match))
+    };
     // Feature-derived timbre class — a blind, name-independent classification.
     let timbre = classify_timbre(transients, attack, crest, harmonicity, centroid, low, high).to_string();
 
@@ -486,6 +498,7 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         sub: folder,
         path: path.to_string_lossy().to_string(),
         group,
+        reason,
         timbre,
         length,
         transients,
@@ -713,8 +726,8 @@ mod tests {
             ("randomthing.wav", "Other"),
         ];
         for (name, want) in cases {
-            let got = categorize(name);
-            assert_eq!(got, *want, "categorize({:?}) = {:?}, want {:?}", name, got, want);
+            let (got, why) = categorize(name);
+            assert_eq!(got, *want, "categorize({:?}) = {:?} (why {:?}), want {:?}", name, got, why, want);
         }
     }
 }

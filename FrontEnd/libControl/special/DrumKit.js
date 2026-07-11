@@ -206,16 +206,18 @@ window.oaTriggerTone = function(rootIdx, semitones, volume, time) {
     const entry = window.OA_DRUM_SAMPLES[rootIdx];
     
     if (entry && entry.buffer) {
+        const pitchRatio = Math.pow(2, semitones / 12);
+        const totalPitch = (entry.pitch || 1) * pitchRatio;
+        
         // If we have a pre-rendered cache for this exact pitch, use it at 1x speed to save latency
         const cache = window.OA_TONE_CACHE[rootIdx];
         if (cache && cache[semitones]) {
-            window.oaPlayDrumSample(ctx, Object.assign({}, entry, { buffer: cache[semitones], pitch: entry.pitch || 1 }), t, vol);
+            window.oaPlayDrumSample(ctx, Object.assign({}, entry, { cachedBuffer: cache[semitones], pitch: totalPitch }), t, vol);
             return true;
         }
         
         // Fallback to real-time resampling if not in cache
-        const pitchRatio = Math.pow(2, semitones / 12);
-        window.oaPlayDrumSample(ctx, Object.assign({}, entry, { pitch: (entry.pitch || 1) * pitchRatio }), t, vol);
+        window.oaPlayDrumSample(ctx, Object.assign({}, entry, { pitch: totalPitch }), t, vol);
         return true;
     }
     
@@ -235,6 +237,7 @@ window.oaPrecacheTones = async function(rootIdx) {
     if (!entry || !entry.buffer) return;
     
     const origBuf = entry.buffer;
+    const basePitch = entry.pitch || 1;
     const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
     if (!OfflineCtx) return;
     
@@ -242,20 +245,23 @@ window.oaPrecacheTones = async function(rootIdx) {
     
     // Pre-render 2 octaves down and 3 octaves up
     for (let semitones = -24; semitones <= 36; semitones++) {
-        if (semitones === 0) {
-            window.OA_TONE_CACHE[rootIdx][0] = origBuf;
-            continue;
-        }
         if (window.OA_TONE_CACHE[rootIdx][semitones]) continue; // already cached
         
         try {
             const pitchRatio = Math.pow(2, semitones / 12);
-            const dur = origBuf.duration / pitchRatio;
+            const totalPitch = basePitch * pitchRatio;
+            
+            if (totalPitch === 1) {
+                window.OA_TONE_CACHE[rootIdx][semitones] = origBuf;
+                continue;
+            }
+            
+            const dur = origBuf.duration / totalPitch;
             const offCtx = new OfflineCtx(origBuf.numberOfChannels, Math.ceil(dur * origBuf.sampleRate), origBuf.sampleRate);
             
             const src = offCtx.createBufferSource();
             src.buffer = origBuf;
-            src.playbackRate.value = pitchRatio;
+            src.playbackRate.value = totalPitch;
             src.connect(offCtx.destination);
             src.start(0);
             

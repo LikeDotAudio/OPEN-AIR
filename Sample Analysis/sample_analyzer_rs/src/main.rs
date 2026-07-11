@@ -146,10 +146,12 @@ fn main() {
     let mut workers = 30usize;
     let mut max_len = 10.0f64;
     let mut clusters = 8usize;
+    let mut per_file = true;
     let mut i = 2;
     while i < args.len() {
         match args[i].as_str() {
             "--out" => { out = args.get(i + 1).map(PathBuf::from); i += 2; }
+            "--no-per-file" => { per_file = false; i += 1; }
             "--workers" => { workers = args.get(i + 1).and_then(|v| v.parse().ok()).unwrap_or(30); i += 2; }
             "--max-len" => { max_len = args.get(i + 1).and_then(|v| v.parse().ok()).unwrap_or(10.0); i += 2; }
             "--clusters" => { clusters = args.get(i + 1).and_then(|v| v.parse().ok()).unwrap_or(8); i += 2; }
@@ -214,12 +216,23 @@ fn main() {
     }
     emit(&serde_json::json!({ "type": "clusters", "k": clusters, "counts": cluster_counts }));
 
+    // Per-file sidecar PEAKs written beside each sample: "<file>.wav.PEAK".
+    if per_file {
+        results.par_iter().for_each(|p| {
+            let peak_path = format!("{}.PEAK", p.path);
+            if let Ok(js) = serde_json::to_string_pretty(p) {
+                let _ = std::fs::write(&peak_path, js);
+            }
+        });
+    }
+
+    // Aggregate PEAK (used by the cloud / Groups / Examiner views).
     if let Ok(json) = serde_json::to_string(&results) {
         if let Ok(mut fh) = std::fs::File::create(&out) {
             let _ = fh.write_all(json.as_bytes());
         }
     }
-    emit(&serde_json::json!({ "type": "done", "count": results.len(), "out": out.to_string_lossy() }));
+    emit(&serde_json::json!({ "type": "done", "count": results.len(), "out": out.to_string_lossy(), "per_file": per_file }));
 }
 
 fn emit(v: &serde_json::Value) {

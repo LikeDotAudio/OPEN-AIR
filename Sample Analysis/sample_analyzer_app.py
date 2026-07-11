@@ -138,30 +138,39 @@ class AnalyzerApp:
         body.pack(fill=tk.BOTH, expand=True)
 
         # --- left sidebar: show/hide groups + isolated-axis picker ---
-        side = ttk.Frame(body, padding=(6, 4), width=190)
+        side = ttk.Frame(body, width=196)
         side.pack(side=tk.LEFT, fill=tk.Y)
         side.pack_propagate(False)
-        ttk.Label(side, text="Groups (show / hide)", font=("Helvetica", 9, "bold")).pack(anchor=tk.W)
+
+        ttk.Label(side, text="Groups (show / hide)", font=("Helvetica", 9, "bold")).pack(anchor=tk.W, padx=6, pady=(4, 0))
         btns = ttk.Frame(side)
-        btns.pack(fill=tk.X, pady=(2, 4))
+        btns.pack(fill=tk.X, padx=6, pady=(2, 4))
         ttk.Button(btns, text="All", width=5, command=lambda: self._set_all_groups(True)).pack(side=tk.LEFT)
         ttk.Button(btns, text="None", width=5, command=lambda: self._set_all_groups(False)).pack(side=tk.LEFT, padx=3)
-        # scrollable checkbox list
-        gc = tk.Canvas(side, highlightthickness=0, bg="#f0f0f0", width=170)
-        gsb = ttk.Scrollbar(side, orient=tk.VERTICAL, command=gc.yview)
-        self.group_box = ttk.Frame(gc)
-        self.group_box.bind("<Configure>", lambda e: gc.configure(scrollregion=gc.bbox("all")))
-        gc.create_window((0, 0), window=self.group_box, anchor="nw")
-        gc.configure(yscrollcommand=gsb.set)
-        gc.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        gsb.pack(side=tk.RIGHT, fill=tk.Y)
 
-        ttk.Separator(side, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=6)
-        ttk.Label(side, text="When 1 group is isolated,\nY axis becomes:", justify=tk.LEFT).pack(anchor=tk.W)
+        # Isolated-axis controls pinned to the bottom (own frame — no side mixing).
+        bottom = ttk.Frame(side)
+        bottom.pack(side=tk.BOTTOM, fill=tk.X, padx=6, pady=4)
+        ttk.Separator(bottom, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=(0, 6))
+        ttk.Label(bottom, text="Isolate 1 group → Y axis:", justify=tk.LEFT).pack(anchor=tk.W)
         self.iso_axis = tk.StringVar(value="Group")
-        ttk.Combobox(side, textvariable=self.iso_axis, state="readonly", width=18,
+        ttk.Combobox(bottom, textvariable=self.iso_axis, state="readonly", width=18,
                      values=[lbl for lbl, _k in self.ISO_FEATURES]).pack(anchor=tk.W, pady=3)
         self.iso_axis.trace_add("write", lambda *_: self._redraw_cloud())
+
+        # Scrollable checkbox list fills the middle (canvas + scrollbar in their
+        # own container so LEFT/RIGHT packing never collides with the sidebar).
+        listwrap = ttk.Frame(side)
+        listwrap.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=6)
+        gc = tk.Canvas(listwrap, highlightthickness=0, bg="#f0f0f0")
+        gsb = ttk.Scrollbar(listwrap, orient=tk.VERTICAL, command=gc.yview)
+        gc.configure(yscrollcommand=gsb.set)
+        gsb.pack(side=tk.RIGHT, fill=tk.Y)
+        gc.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.group_box = ttk.Frame(gc)
+        self._gc_win = gc.create_window((0, 0), window=self.group_box, anchor="nw")
+        self.group_box.bind("<Configure>", lambda e: gc.configure(scrollregion=gc.bbox("all")))
+        gc.bind("<Configure>", lambda e: gc.itemconfigure(self._gc_win, width=e.width))
 
         # --- right: the 3D cloud, fills the rest ---
         right = ttk.Frame(body)

@@ -239,7 +239,8 @@ fn main() {
         let wrote = AtomicUsize::new(0);
         let failed = AtomicUsize::new(0);
         results.par_iter().for_each(|p| {
-            let peak_path = format!("{}.PEAK", p.path);
+            // Replace the extension: "Agogo Bell.wav" -> "Agogo Bell.PEAK".
+            let peak_path = Path::new(&p.path).with_extension("PEAK");
             match serde_json::to_string_pretty(p).map_err(|e| e.to_string())
                 .and_then(|js| std::fs::write(&peak_path, js).map_err(|e| e.to_string()))
             {

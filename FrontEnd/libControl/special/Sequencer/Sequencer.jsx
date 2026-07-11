@@ -79,7 +79,7 @@ const MiniKnob = ({ value, min, max, label, display, onChange, size = 42 }) => {
 
 // Per-track sample menu: waveform + pitch + time-shift, opened by clicking a
 // track name. Edits the shared kit entry (OA_DRUM_SAMPLES[trkIdx]) directly.
-const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose, onChange }) => {
+const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose, onChange, vol, pan, onVol, onPan }) => {
     const entry = (window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[trkIdx]) || null;
     const hasBuf = !!(entry && entry.buffer);
     const canvasRef = React.useRef(null);
@@ -135,6 +135,10 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
                     <input type="range" min="-12" max="12" step="1" value={pitchSemi} disabled={!hasBuf} onChange={(e) => applyPitch(Number(e.target.value))} style={{ width: '100%' }} />
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#aaa', marginTop: '6px' }}><span>TIME SHIFT (start)</span><span style={{ color: '#f4902c' }}>{offset.toFixed(3)}s</span></div>
                     <input type="range" min="0" max={dur ? Number((dur * 0.9).toFixed(3)) : 0} step="0.001" value={offset} disabled={!hasBuf} onChange={(e) => applyOffset(Number(e.target.value))} style={{ width: '100%' }} />
+                </div>
+                <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '12px', borderTop: '1px solid #333', paddingTop: '10px' }}>
+                    <MiniKnob value={Math.round((vol == null ? 1 : vol) * 100)} min={0} max={100} label="VOL" display={`${Math.round((vol == null ? 1 : vol) * 100)}`} onChange={(v) => onVol && onVol(v / 100)} />
+                    <MiniKnob value={Math.round((pan || 0) * 100)} min={-100} max={100} label="PAN" display={`${Math.round((pan || 0) * 100)}`} onChange={(v) => onPan && onPan(v / 100)} />
                 </div>
             </div>
         </React.Fragment>
@@ -216,7 +220,6 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const [trackPan, setTrackPan] = React.useState(() => Array(TRACKS.length).fill(0));
     const trackVolRef = React.useRef(trackVol); trackVolRef.current = trackVol;
     const trackPanRef = React.useRef(trackPan); trackPanRef.current = trackPan;
-    const [volPanTrack, setVolPanTrack] = React.useState(null); // { trkIdx, x, y }
 
     // Record mode: while recording AND playing, pad hits from the Sampler write
     // into the current step of the matching track at their played velocity.
@@ -549,9 +552,12 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', overflowX: 'auto', paddingBottom: '6px' }}>
                 {TRACKS.map(({ name: trackName }, trkIdx) => {
                   const muted = mutes[trkIdx];
+                  const tvol = trackVol[trkIdx] == null ? 1 : trackVol[trkIdx];
+                  const volAngle = -135 + tvol * 270;   // knob indicator reflects the track volume
+                  const openMenu = (e) => { e.stopPropagation(); setTrackMenu({ trkIdx, x: e.clientX, y: e.clientY }); };
                   return (
                     <div key={trackName} style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                        <div style={{ width: '96px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '5px', paddingRight: '6px', position: 'sticky', left: 0, background: '#1e1e1e', zIndex: 2 }}>
+                        <div style={{ width: '110px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '5px', paddingRight: '6px', position: 'sticky', left: 0, background: '#161616', zIndex: 2 }}>
                             <button
                                 onClick={() => toggleMute(trkIdx)}
                                 title={muted ? `Unmute ${trackName}` : `Mute ${trackName}`}
@@ -560,16 +566,18 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                 M
                             </button>
                             <button
-                                onClick={(e) => { e.stopPropagation(); setVolPanTrack((cur) => (cur && cur.trkIdx === trkIdx ? null : { trkIdx, x: e.clientX, y: e.clientY })); }}
-                                title={`${trackName} — volume & pan`}
-                                style={{ width: '15px', height: '15px', flexShrink: 0, padding: 0, borderRadius: '50%', border: '1px solid #555', background: 'radial-gradient(circle at 50% 35%, #555, #222)', cursor: 'pointer', position: 'relative' }}
+                                onClick={openMenu}
+                                title={`${trackName} — vol ${Math.round(tvol * 100)} · click for sample / pitch / vol / pan`}
+                                style={{ width: '17px', height: '17px', flexShrink: 0, padding: 0, borderRadius: '50%', border: '1px solid #555', background: 'radial-gradient(circle at 50% 35%, #555, #222)', cursor: 'pointer', position: 'relative' }}
                             >
-                                <span style={{ position: 'absolute', left: '50%', top: '1px', width: '2px', height: '5px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '1px' }} />
+                                <span style={{ position: 'absolute', inset: 0, transform: `rotate(${volAngle}deg)` }}>
+                                    <span style={{ position: 'absolute', left: '50%', top: '1px', width: '2px', height: '6px', background: '#f4902c', transform: 'translateX(-50%)', borderRadius: '1px' }} />
+                                </span>
                             </button>
                             <span
-                                onClick={(e) => { e.stopPropagation(); setTrackMenu({ trkIdx, x: e.clientX, y: e.clientY }); }}
-                                title={`${trackName} — click to pick a sample / pitch / time-shift`}
-                                style={{ fontSize: '11px', color: muted ? '#666' : '#ccc', textAlign: 'right', whiteSpace: 'nowrap', cursor: 'pointer' }}
+                                onClick={openMenu}
+                                title={`${trackName} — click to pick a sample / pitch / vol / pan`}
+                                style={{ fontSize: '11px', color: muted ? '#666' : '#ccc', textAlign: 'left', whiteSpace: 'nowrap', cursor: 'pointer' }}
                             >
                                 {trackName}
                             </span>
@@ -654,27 +662,16 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 </div>
             )}
 
-            {volPanTrack && (
-                <React.Fragment>
-                    <div onClick={() => setVolPanTrack(null)} style={{ position: 'fixed', inset: 0, zIndex: 9999 }} />
-                    <div style={{ position: 'fixed', zIndex: 10000, top: Math.min(volPanTrack.y, window.innerHeight - 130), left: Math.min(volPanTrack.x, window.innerWidth - 180), background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', padding: '10px 14px', display: 'flex', gap: '16px', alignItems: 'center', boxShadow: '0 8px 30px rgba(0,0,0,0.7)' }}>
-                        <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold' }}>{(TRACKS[volPanTrack.trkIdx] || {}).name}</span>
-                        <MiniKnob value={Math.round((trackVol[volPanTrack.trkIdx] == null ? 1 : trackVol[volPanTrack.trkIdx]) * 100)} min={0} max={100} label="VOL"
-                            display={`${Math.round((trackVol[volPanTrack.trkIdx] == null ? 1 : trackVol[volPanTrack.trkIdx]) * 100)}`}
-                            onChange={(v) => setTrackVol((prev) => { const n = [...prev]; n[volPanTrack.trkIdx] = v / 100; return n; })} />
-                        <MiniKnob value={Math.round((trackPan[volPanTrack.trkIdx] || 0) * 100)} min={-100} max={100} label="PAN"
-                            display={`${Math.round((trackPan[volPanTrack.trkIdx] || 0) * 100)}`}
-                            onChange={(v) => setTrackPan((prev) => { const n = [...prev]; n[volPanTrack.trkIdx] = v / 100; return n; })} />
-                    </div>
-                </React.Fragment>
-            )}
-
             {trackMenu && (
                 <TrackSampleMenu
                     trkIdx={trackMenu.trkIdx}
                     trackName={(TRACKS[trackMenu.trkIdx] && TRACKS[trackMenu.trkIdx].name) || ''}
                     anchor={{ x: trackMenu.x, y: trackMenu.y }}
                     version={trackVer}
+                    vol={trackVol[trackMenu.trkIdx]}
+                    pan={trackPan[trackMenu.trkIdx]}
+                    onVol={(v) => setTrackVol((prev) => { const n = [...prev]; n[trackMenu.trkIdx] = v; return n; })}
+                    onPan={(v) => setTrackPan((prev) => { const n = [...prev]; n[trackMenu.trkIdx] = v; return n; })}
                     onChange={() => setTrackVer((v) => v + 1)}
                     onBrowse={() => setBrowseTrack(trackMenu.trkIdx)}
                     onClose={() => setTrackMenu(null)}

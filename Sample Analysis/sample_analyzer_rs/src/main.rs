@@ -152,6 +152,9 @@ fn categorize(name: &str) -> (&'static str, &'static str) {
 }
 
 fn main() {
+    // Per-file panics are caught below; keep their default messages off stderr.
+    std::panic::set_hook(Box::new(|_| {}));
+
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 2 {
         eprintln!("usage: oa_sample_analyzer <dir> [--out <path>] [--workers <n>] [--max-len <s>]");
@@ -193,6 +196,8 @@ fn main() {
     }
 
     let done = AtomicUsize::new(0);
+    let wrote = AtomicUsize::new(0);
+    let failed = AtomicUsize::new(0);
     let stdout_lock = Mutex::new(());
     let pool = rayon::ThreadPoolBuilder::new().num_threads(workers.max(1)).build().unwrap();
 
@@ -200,7 +205,25 @@ fn main() {
         files
             .par_iter()
             .filter_map(|f| {
-                let res = analyze(f, &root, max_len);
+                // Catch any per-file panic so one bad sample can't abort the run.
+                let res = std::panic::catch_unwind(std::panic::AssertUnwindSafe(
+                    || analyze(f, &root, max_len),
+                ))
+                .unwrap_or(None);
+                // Write the per-file sidecar immediately, so it appears during
+                // the run and survives an interrupted/killed process.
+                if per_file {
+                    if let Some(p) = &res {
+                        let peak_path = Path::new(&p.path).with_extension("PEAK");
+                        match serde_json::to_string_pretty(p)
+                            .map_err(|e| e.to_string())
+                            .and_then(|js| std::fs::write(&peak_path, js).map_err(|e| e.to_string()))
+                        {
+                            Ok(_) => { wrote.fetch_add(1, Ordering::Relaxed); }
+                            Err(_) => { failed.fetch_add(1, Ordering::Relaxed); }
+                        }
+                    }
+                }
                 let n = done.fetch_add(1, Ordering::Relaxed) + 1;
                 // Stream progress / result (serialized to avoid interleaving).
                 let _g = stdout_lock.lock().unwrap();
@@ -234,18 +257,13 @@ fn main() {
     }
     emit(&serde_json::json!({ "type": "clusters", "k": clusters, "counts": cluster_counts }));
 
-    // Per-file sidecar PEAKs written beside each sample: "<file>.wav.PEAK".
+    // Sidecars were written incrementally during analysis (above). Rewrite each
+    // now so the final cluster id is included too.
     if per_file {
-        let wrote = AtomicUsize::new(0);
-        let failed = AtomicUsize::new(0);
         results.par_iter().for_each(|p| {
-            // Replace the extension: "Agogo Bell.wav" -> "Agogo Bell.PEAK".
             let peak_path = Path::new(&p.path).with_extension("PEAK");
-            match serde_json::to_string_pretty(p).map_err(|e| e.to_string())
-                .and_then(|js| std::fs::write(&peak_path, js).map_err(|e| e.to_string()))
-            {
-                Ok(_) => { wrote.fetch_add(1, Ordering::Relaxed); }
-                Err(_) => { failed.fetch_add(1, Ordering::Relaxed); }
+            if let Ok(js) = serde_json::to_string_pretty(p) {
+                let _ = std::fs::write(&peak_path, js);
             }
         });
         emit(&serde_json::json!({
@@ -505,7 +523,11 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     }
 
     // ---- Spectrum: centroid, spread (complexity), roll-off, flatness, bands.
-    let n = data.len().min(262_144).max(2);
+    // Guard tiny files: FFT needs ≥2 samples (data.len() may be 1).
+    let n = data.len().min(262_144);
+    if n < 2 {
+        return None;
+    }
     let start = (data.len().saturating_sub(n)) / 2;
     let mut buf: Vec<Complex<f32>> = data[start..start + n].iter().map(|&x| Complex { re: x, im: 0.0 }).collect();
     let mut planner = FftPlanner::<f32>::new();

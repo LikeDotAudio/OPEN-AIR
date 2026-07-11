@@ -440,8 +440,10 @@ class AnalyzerApp:
         drow.pack(fill=tk.X)
         ttk.Button(drow, text="Destination…", command=self._rename_pick_dest).pack(side=tk.LEFT)
         self.rename_dest = tk.StringVar(value="")
-        ttk.Label(drow, text="(optional — move renamed files here instead)", foreground="#888").pack(side=tk.LEFT, padx=6)
-        ttk.Label(drow, textvariable=self.rename_dest, foreground="#2a7", wraplength=340).pack(side=tk.LEFT, padx=6)
+        self.rename_copy = tk.BooleanVar(value=False)
+        ttk.Checkbutton(drow, text="COPY into destination (keep originals)",
+                        variable=self.rename_copy).pack(side=tk.LEFT, padx=6)
+        ttk.Label(drow, textvariable=self.rename_dest, foreground="#2a7", wraplength=300).pack(side=tk.LEFT, padx=6)
         ttk.Button(drow, text="Clear", command=lambda: (self.rename_dest.set(""), self._rename_scan())).pack(side=tk.RIGHT)
 
         ctl = ttk.Frame(tab, padding=(6, 4))
@@ -599,15 +601,17 @@ class AnalyzerApp:
             messagebox.showinfo("Apply Rename", "All files are already named correctly.")
             return
         dest = self.rename_dest.get()
+        copy = self.rename_copy.get()
+        verb = "COPIED" if copy else "MOVED"
         if dest and os.path.isdir(dest):
-            where = f"Files will be MOVED to:\n{dest}\n"
+            where = f"Files will be {verb} to:\n{dest}\n"
         elif flatten:
-            where = "Files will be MOVED up into the picked folder.\n"
+            where = f"Files will be {verb} up into the picked folder.\n"
         else:
-            where = "Files renamed in place.\n"
+            where = ("Renamed copies made in place.\n" if copy else "Files renamed in place.\n")
         if not messagebox.askyesno(
                 "Apply Rename",
-                f"Rename {len(todo)} file(s)?\n\n" + where + "This modifies files on disk. Continue?"):
+                f"{'Copy' if copy else 'Rename'} {len(todo)} file(s)?\n\n" + where + "This modifies files on disk. Continue?"):
             return
 
         used = set()
@@ -618,16 +622,19 @@ class AnalyzerApp:
         ok = fail = 0
         errors = []
         for abspath, rel, new_name, new_abs in todo:
-            dest = self._dedupe(new_abs, used)
-            used.add(dest)
+            target = self._dedupe(new_abs, used)
+            used.add(target)
             try:
-                os.makedirs(os.path.dirname(dest), exist_ok=True)
-                shutil.move(abspath, dest)
+                os.makedirs(os.path.dirname(target), exist_ok=True)
+                if copy:
+                    shutil.copy2(abspath, target)
+                else:
+                    shutil.move(abspath, target)
                 ok += 1
             except Exception as e:
                 fail += 1
                 errors.append(f"{rel}: {e}")
-        msg = f"Renamed {ok} file(s)."
+        msg = f"{'Copied' if copy else 'Renamed'} {ok} file(s)."
         if fail:
             msg += f"\n{fail} failed:\n" + "\n".join(errors[:8])
         messagebox.showinfo("Apply Rename", msg)

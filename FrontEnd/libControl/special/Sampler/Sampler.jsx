@@ -1,5 +1,9 @@
 const loadDrumSets = () => { try { return JSON.parse(window.localStorage.getItem('oaDrumSets')) || {}; } catch (e) { return {}; } };
 
+// MIDI note name (MPC convention: note 36 = C1). Pads map 36..51 to pads 1..16.
+const MIDI_NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const midiNoteName = (n) => `${MIDI_NOTE_NAMES[((n % 12) + 12) % 12]}${Math.floor(n / 12) - 2}`;
+
 // Faint waveform of a pad's loaded sample, drawn behind the pad label.
 const PadWave = ({ idx, ver }) => {
     const canvasRef = React.useRef(null);
@@ -297,6 +301,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                 {layout.map((padNum) => {
                     const idx = padNum - 1;
                     const name = (KIT[idx] && KIT[idx].name) || `Pad ${padNum}`;
+                    const midiNote = midiBase + idx;   // MPC Chromatic C1: pad 1 = 36
                     const hasSample = !!(window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[idx] && window.OA_DRUM_SAMPLES[idx].buffer);
                     const remembered = kitMeta[idx];        // known from MQTT but not (yet) loaded
                     const vel = velocities[idx];            // side-car value (0-100)
@@ -375,6 +380,11 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                 {/* Tiny pad number, corner */}
                                 <span style={{ position: 'absolute', bottom: '4px', left: '6px', fontSize: '9px', fontWeight: 'bold', opacity: 0.5 }}>
                                     {padNum}
+                                </span>
+
+                                {/* MIDI note (MPC Chromatic C1 mapping) */}
+                                <span title={`MIDI note ${midiNote}`} style={{ position: 'absolute', top: '4px', left: '6px', fontSize: '8px', fontWeight: 'bold', opacity: 0.6, color: hasSample ? '#3a1f00' : '#8ab4f8' }}>
+                                    {midiNoteName(midiNote)}
                                 </span>
 
                                 {/* SMP badge when a custom sample is loaded; ○ when only remembered (from MQTT) */}

@@ -72,7 +72,7 @@ window.oaSetPitchBend = function (cents) {
 // Store/replace a pad's sample. opts: { loop, pitch, fade, name }.
 window.oaSetDrumSample = function (idx, buffer, opts) {
     opts = opts || {};
-    window.OA_DRUM_SAMPLES[idx] = {
+    const entry = {
         buffer: buffer,
         pitch: opts.pitch || 1,     // playbackRate multiplier (pitch + speed)
         offset: opts.offset || 0,   // start offset in seconds (time shift)
@@ -82,12 +82,20 @@ window.oaSetDrumSample = function (idx, buffer, opts) {
         name: opts.name || '',
         folder: opts.folder || '',  // source folder (for set snapshots / revert)
     };
+    window.OA_DRUM_SAMPLES[idx] = entry;
+    if (window.oaPrecachePad) window.oaPrecachePad(entry);
 };
 
 // Patch an existing pad's options (pitch/loop/fade) without re-decoding.
 window.oaUpdateDrumSample = function (idx, patch) {
     const e = window.OA_DRUM_SAMPLES[idx];
-    if (e) Object.assign(e, patch || {});
+    if (e) {
+        const oldPitch = e.pitch || 1;
+        Object.assign(e, patch || {});
+        if (e.pitch !== oldPitch || !e.cachedBuffer) {
+            if (window.oaPrecachePad) window.oaPrecachePad(e);
+        }
+    }
 };
 
 // Synthesize a kit voice at `time` with `volume` (0..1). Used when no sample.
@@ -112,32 +120,48 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume, pan) {
     if (!entry || !entry.buffer) return null;
     const src = ctx.createBufferSource();
     const gain = ctx.createGain();
-    src.buffer = entry.buffer;
-    src.playbackRate.value = entry.pitch || 1;
+    
+    const pitch = entry.pitch || 1;
+    const useCache = !!entry.cachedBuffer;
+    
+    src.buffer = entry.cachedBuffer || entry.buffer;
+    src.playbackRate.value = useCache ? 1 : pitch;
     src.loop = !!entry.loop;
-    const offset = Math.max(0, Math.min(entry.offset || 0, entry.buffer.duration - 0.001));
-    // Cut-off / end point (buffer seconds). null/absent = play to EOF.
-    const end = (entry.end != null && entry.end > offset) ? Math.min(entry.end, entry.buffer.duration) : entry.buffer.duration;
-    const region = Math.max(0.001, end - offset);
+    
+    const origDur = entry.buffer.duration;
+    let offset = Math.max(0, Math.min(entry.offset || 0, origDur - 0.001));
+    let end = (entry.end != null && entry.end > offset) ? Math.min(entry.end, origDur) : origDur;
+    let region = Math.max(0.001, end - offset);
+    
+    const playDur = region / pitch;
+    
+    if (useCache) {
+        offset = offset / pitch;
+        end = end / pitch;
+        region = region / pitch;
+    }
+    
     if (src.loop) { src.loopStart = offset; src.loopEnd = end; }
     src.connect(gain);
     if (pan && ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); gain.connect(p); p.connect(ctx.destination); }
     else gain.connect(ctx.destination);
-    const dur = region / (entry.pitch || 1);
+    
     const v = Math.max(0.0001, volume);
     if (entry.fade) {
-        const f = Math.min(0.05, dur * 0.2);
+        const f = Math.min(0.05, playDur * 0.2);
         gain.gain.setValueAtTime(0.0001, time);
         gain.gain.exponentialRampToValueAtTime(v, time + f);
         if (!src.loop) {
-            gain.gain.setValueAtTime(v, Math.max(time + f, time + dur - f));
-            gain.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+            gain.gain.setValueAtTime(v, Math.max(time + f, time + playDur - f));
+            gain.gain.exponentialRampToValueAtTime(0.0001, time + playDur);
         }
     } else {
         gain.gain.setValueAtTime(v, time);
     }
+    
     if (src.loop) src.start(time, offset);
     else src.start(time, offset, region);
+    
     // Register as an active voice so a MIDI pitch-bend can retune it live, and
     // start it at the current wheel offset. Auto-removed when the note ends.
     try {
@@ -240,6 +264,33 @@ window.oaPrecacheTones = async function(rootIdx) {
         } catch(e) {
             console.error('Failed to pre-render pitch', semitones, e);
         }
+    }
+};
+
+// Pre-cache an individual pad's configured pitch to eliminate real-time latency
+window.oaPrecachePad = async function(entry) {
+    if (!entry || !entry.buffer) return;
+    const pitch = entry.pitch || 1;
+    if (pitch === 1) {
+        entry.cachedBuffer = entry.buffer;
+        return;
+    }
+    const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!OfflineCtx) {
+        entry.cachedBuffer = entry.buffer;
+        return;
+    }
+    try {
+        const dur = entry.buffer.duration / pitch;
+        const offCtx = new OfflineCtx(entry.buffer.numberOfChannels, Math.ceil(dur * entry.buffer.sampleRate), entry.buffer.sampleRate);
+        const src = offCtx.createBufferSource();
+        src.buffer = entry.buffer;
+        src.playbackRate.value = pitch;
+        src.connect(offCtx.destination);
+        src.start(0);
+        entry.cachedBuffer = await offCtx.startRendering();
+    } catch (e) {
+        entry.cachedBuffer = entry.buffer;
     }
 };
 

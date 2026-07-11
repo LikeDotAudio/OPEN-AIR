@@ -61,30 +61,69 @@ struct Peak {
     cluster: i32,      // K-Means cluster id, -1 until clustered
 }
 
-/// Categorize a sample by its file name (for the cloud's name axis / grouping).
+/// Normalize a file name into space-separated tokens for name matching:
+/// lower-cased, every non-alphanumeric run becomes a space, and letter↔digit
+/// boundaries are split (so "Tom2" → "tom 2", "OH_01" → "oh 01").
+fn normalize_name(name: &str) -> String {
+    let lower = name.to_lowercase();
+    let mut out = String::with_capacity(lower.len() + 8);
+    let mut prev = 0u8; // 0 = sep, 1 = alpha, 2 = digit
+    for c in lower.chars() {
+        let kind = if c.is_ascii_alphabetic() { 1 } else if c.is_ascii_digit() { 2 } else { 0 };
+        if kind == 0 {
+            if !out.ends_with(' ') {
+                out.push(' ');
+            }
+        } else {
+            if prev != 0 && prev != kind {
+                out.push(' ');
+            }
+            out.push(c);
+        }
+        prev = kind;
+    }
+    out
+}
+
+/// Categorize a sample by its file name, tolerant of the many spelling /
+/// abbreviation conventions for drum elements. Phrases are matched as
+/// substrings of the normalized name; ABBREVIATIONS are matched as whole
+/// tokens (so "bd" hits "BD_01" but not "bird"). Order = most specific first.
 fn categorize(name: &str) -> &'static str {
-    let n = name.to_lowercase();
-    const GROUPS: &[(&str, &[&str])] = &[
-        ("Kick", &["kick", "bd", "bassdrum"]),
-        ("Snare", &["snare", "snr", "sd"]),
-        ("HiHat", &["hihat", "hi-hat", "hh", "hat"]),
-        ("Clap", &["clap", "clp"]),
-        ("Rim", &["rimshot", "rim", "rs"]),
-        ("Tom", &["tom"]),
-        ("Cymbal", &["cymbal", "cym", "crash"]),
-        ("Ride", &["ride"]),
-        ("Cowbell", &["cowbell", "cowb", "cow"]),
-        ("Conga", &["conga", "cng"]),
-        ("Clave", &["clave", "clav"]),
-        ("Shaker", &["shaker", "shk"]),
-        ("Perc", &["perc", "prc"]),
-        ("Bass", &["bass", "808", "sub"]),
-        ("Vocal", &["vocal", "vox", "voice"]),
-        ("Loop", &["loop"]),
-        ("FX", &["fx", "sfx", "riser", "sweep", "noise", "atmos"]),
+    let norm = normalize_name(name);
+    let toks: Vec<&str> = norm.split_whitespace().collect();
+    let tok = |t: &str| toks.iter().any(|x| *x == t);
+    let ph = |p: &str| norm.contains(p);
+
+    // Each rule: (canonical group, phrases[], abbrev-tokens[]).
+    const RULES: &[(&str, &[&str], &[&str])] = &[
+        // Kick before Bass so "bass drum" -> Kick, plain "bass" -> Bass.
+        ("Kick", &["kick", "bass drum", "bassdrum"], &["bd", "kk", "kic", "kck"]),
+        ("Snare", &["snare"], &["sd", "sn", "snr"]),
+        // Hi-hat variants (closed/open/pedal).
+        ("HiHat", &["hihat", "hi hat", "closed hat", "open hat", "pedal hat", "hat"], &["hh", "chh", "ohh", "ch", "oh", "ph"]),
+        ("Ride", &["ride bell", "ride cymbal", "ride"], &["rd", "rdcym"]),
+        ("Cymbal", &["crash cymbal", "splash cymbal", "cymbal", "crash", "splash"], &["cy", "cym", "crsh"]),
+        ("Clap", &["handclap", "hand clap", "clap"], &["cp", "clp"]),
+        ("Rim", &["rimshot", "rim shot", "cross stick", "crossstick", "rim"], &["rs", "rm"]),
+        // Toms split high / mid / low, then generic.
+        ("Tom Hi", &["high tom", "hi tom", "rack tom 1", "tom 1", "hitom"], &["ht", "hitom"]),
+        ("Tom Mid", &["mid tom", "middle tom", "rack tom 2", "tom 2", "midtom"], &["mt", "midtom"]),
+        ("Tom Lo", &["low tom", "floor tom", "tom 3", "lotom"], &["lt", "ft", "lotom"]),
+        ("Tom", &["tom"], &["tm"]),
+        ("Cowbell", &["cowbell", "cow bell"], &["cb", "cow", "cowb"]),
+        ("Conga", &["conga", "tumba", "quinto"], &["cg", "con", "cng"]),
+        ("Clave", &["claves", "clave"], &["cv", "clv"]),
+        ("Shaker", &["shaker", "maracas", "cabasa"], &["shk", "sh"]),
+        ("Perc", &["percussion", "auxiliary", "perc"], &["prc"]),
+        ("Bass", &["bass", "808", "sub bass"], &["sub"]),
+        ("Vocal", &["vocal", "voice", "vox"], &["vx"]),
+        ("FX", &["sound effect", "foley", "atmosphere", "atmos", "riser", "sweep", "noise", "sfx", "fx"], &["fx", "sfx"]),
+        ("Loop", &["loop", "groove", "beat"], &["lp"]),
     ];
-    for (cat, kws) in GROUPS {
-        if kws.iter().any(|k| n.contains(k)) {
+
+    for (cat, phrases, abbrevs) in RULES {
+        if phrases.iter().any(|p| ph(p)) || abbrevs.iter().any(|a| tok(a)) {
             return cat;
         }
     }
@@ -642,4 +681,40 @@ fn classify_timbre(
         return "Percussive";
     }
     "Noise"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::categorize;
+
+    #[test]
+    fn naming_conventions() {
+        let cases: &[(&str, &str)] = &[
+            ("Kick_01.wav", "Kick"), ("BD_808.wav", "Kick"), ("Bass Drum 3.wav", "Kick"),
+            ("Kk-tight.wav", "Kick"),
+            ("Snare_Acoustic.wav", "Snare"), ("SD_04.wav", "Snare"), ("Snr_rimmy.wav", "Snare"),
+            ("HiHat_closed.wav", "HiHat"), ("HH_01.wav", "HiHat"), ("OH_open.wav", "HiHat"),
+            ("CH_tight.wav", "HiHat"), ("Pedal Hat.wav", "HiHat"),
+            ("Perc_shot.wav", "Perc"), ("PRC_02.wav", "Perc"),
+            ("Clap_big.wav", "Clap"), ("CP_room.wav", "Clap"), ("Handclap.wav", "Clap"),
+            ("Rimshot.wav", "Rim"), ("RS_dry.wav", "Rim"), ("Cross-stick.wav", "Rim"),
+            ("Low Tom.wav", "Tom Lo"), ("FT_floor.wav", "Tom Lo"), ("Tom3.wav", "Tom Lo"),
+            ("Mid Tom.wav", "Tom Mid"), ("Tom2.wav", "Tom Mid"),
+            ("High Tom.wav", "Tom Hi"), ("HT_rack.wav", "Tom Hi"), ("Tom1.wav", "Tom Hi"),
+            ("Crash Cymbal.wav", "Cymbal"), ("CY_splash.wav", "Cymbal"), ("Crsh.wav", "Cymbal"),
+            ("Ride Bell.wav", "Ride"), ("RD_ping.wav", "Ride"),
+            ("Cowbell.wav", "Cowbell"), ("CB_hi.wav", "Cowbell"),
+            ("Conga_open.wav", "Conga"), ("Tumba.wav", "Conga"), ("Quinto.wav", "Conga"),
+            ("Claves.wav", "Clave"), ("CV_01.wav", "Clave"),
+            ("Shaker.wav", "Shaker"), ("Maracas.wav", "Shaker"), ("Cabasa.wav", "Shaker"),
+            ("FX_riser.wav", "FX"), ("SFX_boom.wav", "FX"), ("Foley_door.wav", "FX"),
+            ("Sub_808.wav", "Bass"), ("Bassline.wav", "Bass"),
+            ("Vox_chop.wav", "Vocal"), ("Vocal_ah.wav", "Vocal"),
+            ("randomthing.wav", "Other"),
+        ];
+        for (name, want) in cases {
+            let got = categorize(name);
+            assert_eq!(got, *want, "categorize({:?}) = {:?}, want {:?}", name, got, want);
+        }
+    }
 }

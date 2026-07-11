@@ -69,7 +69,7 @@ const WaveThumb = ({ entry, selected, onSelect, scrollRootRef }) => {
 // while capping the file HANDLES kept for the thumbnail grid.
 const MAX_FILES = 4000;    // cap on rendered thumbnails
 const NAME_MAX = 60000;    // cap on the name-only scan
-const gatherAll = async (handle, prefix, files, names, depth) => {
+const gatherAll = async (handle, prefix, files, names, builder, onEmit, depth) => {
     if (depth > 12 || names.length >= NAME_MAX) return;
     const subdirs = [];
     for await (const [n, h] of handle.entries()) {
@@ -77,10 +77,12 @@ const gatherAll = async (handle, prefix, files, names, depth) => {
         if (h.kind === 'directory') subdirs.push([n, h]);
         else if (AUDIO_RE.test(n)) {
             names.push({ name: n, sub: prefix });
+            builder.add(n, prefix);
             if (files.length < MAX_FILES) files.push({ name: n, handle: h, sub: prefix });
+            if (names.length % 250 === 0) onEmit();   // grow the chip list live
         }
     }
-    for (const [n, h] of subdirs) { if (names.length >= NAME_MAX) break; await gatherAll(h, prefix ? `${prefix}/${n}` : n, files, names, depth + 1); }
+    for (const [n, h] of subdirs) { if (names.length >= NAME_MAX) break; await gatherAll(h, prefix ? `${prefix}/${n}` : n, files, names, builder, onEmit, depth + 1); }
 };
 
 // Deep search: recurse the WHOLE tree (past MAX_FILES) collecting only files whose
@@ -97,25 +99,31 @@ const gatherMatching = async (handle, prefix, out, term, depth) => {
     for (const [n, h] of subdirs) { if (out.length >= DEEP_MAX) break; await gatherMatching(h, prefix ? `${prefix}/${n}` : n, out, term, depth + 1); }
 };
 
-// Find recurring name phrases across the gathered files → quick-filter chips.
-// Ranks tokens by how many distinct sub-folders they appear in, then frequency.
-const computeChips = (files) => {
+// Incremental builder for the recurring-name chips: add filenames as they're
+// discovered and read the current top phrases at any time. Ranks tokens by how
+// many distinct sub-folders they appear in, then frequency — so the chip list
+// grows live as the tree is scanned.
+const makeChipBuilder = () => {
     const map = new Map(); // lowerToken -> { display, count, folders:Set }
-    files.forEach((f) => {
-        const base = f.name.replace(/\.[^.]+$/, '');
-        const parts = base.split(/[^A-Za-z0-9]+/).filter((t) => t.length >= 2 && !/^\d+$/.test(t));
-        const seen = new Set();
-        parts.forEach((p) => {
-            const k = p.toLowerCase();
-            if (seen.has(k)) return; seen.add(k);
-            let e = map.get(k); if (!e) { e = { display: p, count: 0, folders: new Set() }; map.set(k, e); }
-            e.count++; e.folders.add(f.sub || '');
-        });
-    });
-    return Array.from(map.values())
-        .filter((e) => e.count >= 2)
-        .sort((a, b) => (b.folders.size - a.folders.size) || (b.count - a.count))
-        .slice(0, 14);
+    return {
+        add(name, sub) {
+            const base = name.replace(/\.[^.]+$/, '');
+            const parts = base.split(/[^A-Za-z0-9]+/).filter((t) => t.length >= 2 && !/^\d+$/.test(t));
+            const seen = new Set();
+            parts.forEach((p) => {
+                const k = p.toLowerCase();
+                if (seen.has(k)) return; seen.add(k);
+                let e = map.get(k); if (!e) { e = { display: p, count: 0, folders: new Set() }; map.set(k, e); }
+                e.count++; e.folders.add(sub || '');
+            });
+        },
+        top() {
+            return Array.from(map.values())
+                .filter((e) => e.count >= 2)
+                .sort((a, b) => (b.folders.size - a.folders.size) || (b.count - a.count))
+                .slice(0, 14);
+        },
+    };
 };
 
 // Folders-only tree node (files live in the right-hand grid).
@@ -240,13 +248,14 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     };
     const selectFolder = async (handle, path) => {
         setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr(''); setFilter(''); setScanning(true); setChips([]);
-        const items = [], names = [];
+        const items = [], names = [], builder = makeChipBuilder();
+        const onEmit = () => setChips(builder.top());   // push the growing chip list to the UI
         // Recurse every sub-folder: all names feed the chips; handles (capped) the grid.
-        try { await gatherAll(handle, '', items, names, 0); }
+        try { await gatherAll(handle, '', items, names, builder, onEmit, 0); }
         catch (e) { setErr('Could not read folder.'); }
         items.sort((a, b) => (a.sub === b.sub ? a.name.localeCompare(b.name) : (a.sub || '').localeCompare(b.sub || '')));
         setFolderFiles(items);
-        setChips(computeChips(names));   // chips from EVERY filename, not just the shown 4000
+        setChips(builder.top());   // final list from EVERY filename
         setScanning(false);
         if (names.length > MAX_FILES) setErr(`Showing ${MAX_FILES} of ${names.length}${names.length >= NAME_MAX ? '+' : ''} files — filter to find the rest.`);
     };

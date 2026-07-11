@@ -313,10 +313,11 @@ class AnalyzerApp:
             self._rename_scan()
 
     def _encode_name(self, root, abspath):
-        """A/B/C/D.wav (relative to the picked root's PARENT) -> 'A-B-C-D.wav'."""
-        rel = os.path.relpath(abspath, os.path.dirname(root))
+        """B/C/D.wav (relative to the picked root, root name NOT included)
+        -> 'B - C - D.wav'."""
+        rel = os.path.relpath(abspath, root)
         parts = [p for p in rel.replace("\\", "/").split("/") if p]
-        return "-".join(parts)
+        return " - ".join(parts)
 
     def _rename_scan(self):
         tv = self.rename_tv

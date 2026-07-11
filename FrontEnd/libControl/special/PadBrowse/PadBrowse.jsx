@@ -39,7 +39,7 @@ const padGather = async (handle, prefix, out, depth) => {
 };
 
 // One pad cell: draws the current entry's waveform.
-const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle }) => {
+const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle, onPlay }) => {
     const canvasRef = React.useRef(null);
     const entry = stack[selIdx];
     React.useEffect(() => {
@@ -64,7 +64,7 @@ const PadCell = ({ voice, idx, stack, selIdx, focused, onFocus, onCycle }) => {
         return () => { cancelled = true; };
     }, [entry]);
     return (
-        <div onClick={onFocus}
+        <div onClick={() => { onFocus(); onPlay && onPlay(); }}
             style={{ border: focused ? '2px solid #f4902c' : '1px solid #444', borderRadius: '5px', background: focused ? '#2a2018' : '#141414', padding: '5px', cursor: 'pointer', boxSizing: 'border-box' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
                 <span style={{ fontSize: '11px', color: '#f4902c', fontWeight: 'bold' }}>{voice}</span>
@@ -95,6 +95,7 @@ window.PadBrowse = ({ onClose }) => {
     const layout = [13, 14, 15, 16, 9, 10, 11, 12, 5, 6, 7, 8, 1, 2, 3, 4];
     const stacksRef = React.useRef(stacks); stacksRef.current = stacks;
     const selRef = React.useRef(sel); selRef.current = sel;
+    const auditionRef = React.useRef(null);   // the currently-auditioning BufferSource, so a new pick can cut it off
 
     const buildStacks = async (handle) => {
         setScanning(true); setErr('');
@@ -122,8 +123,30 @@ window.PadBrowse = ({ onClose }) => {
             const prev = window.OA_DRUM_SAMPLES[idx] || {};
             window.oaSetDrumSample(idx, buf, { name: entry.name, folder: entry.sub || '', pitch: prev.pitch, loop: prev.loop, fade: prev.fade });
             if (publish) publish(`OpenAir/Gui/DrumKit/${idx}/sample`, { name: entry.name, folder: entry.sub || '' });
-            if (window.oaTriggerDrum) window.oaTriggerDrum(idx, 1);   // audition
+            // Cut off the previous audition before playing the new pick.
+            if (auditionRef.current) { try { auditionRef.current.stop(); } catch (e) {} auditionRef.current = null; }
+            if (window.oaPlayDrumSample) {
+                const ctx = window.oaAudioCtx();
+                auditionRef.current = window.oaPlayDrumSample(ctx, window.OA_DRUM_SAMPLES[idx], ctx.currentTime, 1);
+            } else if (window.oaTriggerDrum) {
+                window.oaTriggerDrum(idx, 1);   // audition
+            }
         } catch (e) {}
+    };
+
+    // Play a pad's currently-selected sample without changing the selection
+    // (used when the user clicks a pad cell). Cuts off any previous audition.
+    const playPad = (idx) => {
+        const entry = stacksRef.current[idx] && stacksRef.current[idx][selRef.current[idx]];
+        const cur = window.OA_DRUM_SAMPLES[idx];
+        if (entry && cur && cur.buffer && cur.name === entry.name) {
+            // Already loaded — just (re)play it, cutting off any prior audition.
+            if (auditionRef.current) { try { auditionRef.current.stop(); } catch (e) {} auditionRef.current = null; }
+            if (window.oaPlayDrumSample) { const ctx = window.oaAudioCtx(); auditionRef.current = window.oaPlayDrumSample(ctx, cur, ctx.currentTime, 1); }
+            else if (window.oaTriggerDrum) window.oaTriggerDrum(idx, 1);
+        } else if (entry) {
+            loadPadSound(idx, entry);
+        }
     };
 
     const cyclePad = (idx, delta) => {
@@ -185,7 +208,7 @@ window.PadBrowse = ({ onClose }) => {
 
     return (
         <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-            <div onClick={(e) => e.stopPropagation()} style={{ width: '740px', maxWidth: '95vw', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
+            <div onClick={(e) => e.stopPropagation()} style={{ width: '75vw', maxWidth: '75vw', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: '#1c1c1c', border: '1px solid #f4902c', borderRadius: '6px', color: '#eee', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid #333' }}>
                     <h3 style={{ margin: 0, color: '#f4902c', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '15px' }}>Pad Browser</h3>
                     <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#888', fontSize: '20px', cursor: 'pointer' }}>×</button>
@@ -198,7 +221,7 @@ window.PadBrowse = ({ onClose }) => {
                     {err && <span style={{ fontSize: '11px', color: '#f88' }}>⚠️ {err}</span>}
                 </div>
                 <div style={{ padding: '12px', overflowY: 'auto' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '8px' }}>
                         {layout.map((padNum, pos) => {
                             const idx = padNum - 1;
                             return (
@@ -207,7 +230,8 @@ window.PadBrowse = ({ onClose }) => {
                                     idx={idx} stack={stacks[idx]} selIdx={sel[idx]}
                                     focused={focus === pos}
                                     onFocus={() => setFocus(pos)}
-                                    onCycle={(d) => cyclePad(idx, d)} />
+                                    onCycle={(d) => cyclePad(idx, d)}
+                                    onPlay={() => playPad(idx)} />
                             );
                         })}
                     </div>

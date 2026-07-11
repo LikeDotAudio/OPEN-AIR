@@ -242,6 +242,15 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const recordingRef = React.useRef(recording); recordingRef.current = recording;
     const playingRef = React.useRef(isPlaying); playingRef.current = isPlaying;
     const setSeqRef = React.useRef(setSeq); setSeqRef.current = setSeq;
+    const [recordedNotes, setRecordedNotes] = React.useState(new Set());
+    const recordedNotesRef = React.useRef(recordedNotes); recordedNotesRef.current = recordedNotes;
+    
+    const toggleRecording = () => {
+        setRecording(r => {
+            if (r) setRecordedNotes(new Set());
+            return !r;
+        });
+    };
 
     // Write a velocity into one step using the LIVE grid (ref) — safe from the
     // stale render closures the record/drag listeners capture.
@@ -271,6 +280,11 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             if (idx == null || idx < 0 || idx >= TRACKS.length) return;
             const step = currentStepRef.current % stepsRef.current;
             writeStepVel(idx, step, Math.max(1, (e.detail.velocity || 100)));
+            setRecordedNotes(prev => {
+                const next = new Set(prev);
+                next.add(`${idx}-${step}`);
+                return next;
+            });
         };
         window.addEventListener('oa-drum-hit', onDrumHit);
         return () => window.removeEventListener('oa-drum-hit', onDrumHit);
@@ -406,13 +420,23 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         if (!e.altKey) {
             const paintVel = velOf(patternRef.current[trkIdx][step]) > 0 ? 0 : 100;
             writeStepVel(trkIdx, step, paintVel);
+            if (recordingRef.current && paintVel > 0) {
+                setRecordedNotes(prev => { const next = new Set(prev); next.add(`${trkIdx}-${step}`); return next; });
+            }
             if (paintVel > 0) previewVoice(trkIdx, paintVel);   // sound when placed
             const painted = new Set([step]);
             const move = (ev) => {
                 const el = document.elementFromPoint(ev.clientX, ev.clientY);
                 if (el && el.dataset && el.dataset.oaTrk !== undefined && Number(el.dataset.oaTrk) === trkIdx) {
                     const s = Number(el.dataset.oaStep);
-                    if (!painted.has(s)) { painted.add(s); writeStepVel(trkIdx, s, paintVel); if (paintVel > 0) previewVoice(trkIdx, paintVel); }
+                    if (!painted.has(s)) { 
+                        painted.add(s); 
+                        writeStepVel(trkIdx, s, paintVel); 
+                        if (recordingRef.current && paintVel > 0) {
+                            setRecordedNotes(prev => { const next = new Set(prev); next.add(`${trkIdx}-${s}`); return next; });
+                        }
+                        if (paintVel > 0) previewVoice(trkIdx, paintVel); 
+                    }
                 }
             };
             const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
@@ -423,6 +447,9 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         const startY = e.clientY;
         const startVel = velOf(patternRef.current[trkIdx][step]) || 100;
         writeStepVel(trkIdx, step, startVel);                 // ensure the step is on
+        if (recordingRef.current) {
+            setRecordedNotes(prev => { const next = new Set(prev); next.add(`${trkIdx}-${step}`); return next; });
+        }
         setActiveFader({ trkIdx, step, vel: Math.round(startVel), x: e.clientX, y: e.clientY });
         const move = (ev) => {
             // Fine control: ~0.5 velocity per pixel (full range spans ~200px).
@@ -515,7 +542,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             <h3 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#ccc' }}>{label}</h3>
             <div style={{ display: 'flex', gap: '10px', marginBottom: '10px', alignItems: 'center' }}>
                 <button
-                    onClick={() => setRecording((r) => !r)}
+                    onClick={toggleRecording}
                     title="Record: while playing, hit the Sampler pads to write them into the pattern at their velocity"
                     style={{ background: recording ? '#d32f2f' : '#5a1f1f', color: '#fff', border: recording ? '1px solid #ff8a80' : '1px solid #722', padding: '6px 15px', cursor: 'pointer', borderRadius: '3px', fontWeight: 'bold', boxShadow: recording ? '0 0 8px rgba(211,47,47,0.85)' : 'none' }}
                 >
@@ -605,6 +632,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                 const isBeat = step % 4 === 0;
                                 const isCurrent = isPlaying && currentStep === step;
                                 const isFading = activeFader && activeFader.trkIdx === trkIdx && activeFader.step === step;
+                                const isNewlyRecorded = recordedNotes.has(`${trkIdx}-${step}`);
 
                                 return (
                                     <div key={step}
@@ -615,12 +643,12 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                                             position: 'relative', overflow: 'hidden',
                                             width: '18px', height: '20px',
                                             backgroundColor: isCurrent ? '#fff' : (isBeat && !isLit ? '#333' : '#1a1a1a'),
-                                            border: isFading ? '1px solid #fff' : (isLit ? '1px solid #ffa726' : '1px solid #111'),
+                                            border: isFading ? '1px solid #fff' : (isLit ? (isNewlyRecorded ? '1px solid #ff5252' : '1px solid #ffa726') : '1px solid #111'),
                                             cursor: 'pointer', borderRadius: '2px', touchAction: 'none',
-                                            boxShadow: isLit ? `0 0 4px rgba(244, 144, 44, ${0.2 + 0.4 * (vel / 100)})` : 'none',
+                                            boxShadow: isLit ? (isNewlyRecorded ? `0 0 4px rgba(211, 47, 47, ${0.2 + 0.4 * (vel / 100)})` : `0 0 4px rgba(244, 144, 44, ${0.2 + 0.4 * (vel / 100)})`) : 'none',
                                         }}>
                                         {isLit && !isCurrent && (
-                                            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})`, pointerEvents: 'none' }} />
+                                            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, vel)}%`, background: isNewlyRecorded ? `rgba(211, 47, 47, ${0.4 + 0.6 * (vel / 100)})` : `rgba(244, 144, 44, ${0.4 + 0.6 * (vel / 100)})`, pointerEvents: 'none' }} />
                                         )}
                                     </div>
                                 );

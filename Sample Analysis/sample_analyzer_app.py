@@ -13,6 +13,7 @@ the web front-end shows in SoundBrowse ▸ THE CLOUD:
 The Rust process writes `sample_cloud_data.PEAK` with each file's name + folder.
 """
 import os
+import re
 import sys
 import csv
 import json
@@ -446,6 +447,18 @@ class AnalyzerApp:
         ttk.Label(drow, textvariable=self.rename_dest, foreground="#2a7", wraplength=300).pack(side=tk.LEFT, padx=6)
         ttk.Button(drow, text="Clear", command=lambda: (self.rename_dest.set(""), self._rename_scan())).pack(side=tk.RIGHT)
 
+        grow = ttk.Frame(tab, padding=(6, 0))
+        grow.pack(fill=tk.X)
+        self.rename_group_sort = tk.BooleanVar(value=False)
+        ttk.Checkbutton(grow, text="Sort into subfolders by", variable=self.rename_group_sort,
+                        command=self._rename_scan).pack(side=tk.LEFT)
+        self.rename_group_field = tk.StringVar(value="Group")
+        gcb = ttk.Combobox(grow, textvariable=self.rename_group_field, state="readonly", width=10,
+                           values=["Group", "Subgroup", "Timbre", "Cluster"])
+        gcb.pack(side=tk.LEFT, padx=4)
+        gcb.bind("<<ComboboxSelected>>", lambda e: self._rename_scan())
+        ttk.Label(grow, text="(e.g. Snare/, Loop/, Kick/ under the target)", foreground="#888").pack(side=tk.LEFT, padx=6)
+
         ctl = ttk.Frame(tab, padding=(6, 4))
         ctl.pack(fill=tk.X)
         ttk.Button(ctl, text="Rescan", command=self._rename_scan).pack(side=tk.LEFT)
@@ -504,8 +517,11 @@ class AnalyzerApp:
         r = self.records_by_path.get(abspath)
         return r if isinstance(r, dict) else None
 
-    def _peak_values(self, abspath):
-        r = self._peak_for(abspath)
+    @staticmethod
+    def _safe_folder(name):
+        return re.sub(r'[\\/:*?"<>|]+', "_", str(name)).strip() or "Unsorted"
+
+    def _peak_cols(self, r):
         if not r:
             return ["" for _ in self.RENAME_PEAK_COLS]
 
@@ -552,6 +568,11 @@ class AnalyzerApp:
             return
         flatten = self.rename_flatten.get()
         audio_only = self.rename_audio_only.get()
+        dest = self.rename_dest.get()
+        dest_ok = bool(dest) and os.path.isdir(dest)
+        sort_grp = self.rename_group_sort.get()
+        gfield = {"Group": "group", "Subgroup": "subgroup", "Timbre": "timbre",
+                  "Cluster": "cluster"}.get(self.rename_group_field.get(), "group")
         targets = {}   # new_abs -> count (collision detection)
         rows = []
         for dirpath, _dirs, files in os.walk(root):
@@ -564,20 +585,23 @@ class AnalyzerApp:
                     continue
                 abspath = os.path.join(dirpath, fn)
                 new_name = self._encode_name(root, abspath)
-                dest = self.rename_dest.get()
-                if dest and os.path.isdir(dest):
-                    dest_dir = dest          # explicit destination overrides
-                elif flatten:
-                    dest_dir = root
+                rec = self._peak_for(abspath)
+                base = dest if dest_ok else (root if flatten else dirpath)
+                if sort_grp:
+                    gval = rec.get(gfield) if rec else None
+                    gname = self._safe_folder(gval) if gval not in (None, "") else "Unsorted"
+                    dest_dir = os.path.join(base, gname)
+                    disp_new = os.path.join(gname, new_name)
                 else:
-                    dest_dir = dirpath
+                    dest_dir = base
+                    disp_new = new_name
                 new_abs = os.path.join(dest_dir, new_name)
                 rel = os.path.relpath(abspath, root)
-                rows.append([abspath, rel, new_name, new_abs])
+                rows.append([abspath, rel, disp_new, new_abs, rec])
                 targets[new_abs] = targets.get(new_abs, 0) + 1
 
         n_change = n_noop = n_collide = 0
-        for abspath, rel, new_name, new_abs in rows:
+        for abspath, rel, disp_new, new_abs, rec in rows:
             tags = ()
             if new_abs == abspath:
                 tags = ("noop",); n_noop += 1
@@ -585,7 +609,7 @@ class AnalyzerApp:
                 tags = ("collide",); n_collide += 1
             else:
                 n_change += 1
-            tv.insert("", "end", values=(rel, new_name, *self._peak_values(abspath)), tags=tags)
+            tv.insert("", "end", values=(rel, disp_new, *self._peak_cols(rec)), tags=tags)
         self.rename_map = rows
         self.rename_summary.config(
             text=f"{len(rows)} files · {n_change} to rename · {n_noop} unchanged · "
@@ -609,6 +633,8 @@ class AnalyzerApp:
             where = f"Files will be {verb} up into the picked folder.\n"
         else:
             where = ("Renamed copies made in place.\n" if copy else "Files renamed in place.\n")
+        if self.rename_group_sort.get():
+            where += f"Sorted into subfolders by {self.rename_group_field.get()}.\n"
         if not messagebox.askyesno(
                 "Apply Rename",
                 f"{'Copy' if copy else 'Rename'} {len(todo)} file(s)?\n\n" + where + "This modifies files on disk. Continue?"):
@@ -616,12 +642,12 @@ class AnalyzerApp:
 
         used = set()
         # Pre-seed with files that keep their name (no-ops) so we don't clobber them.
-        for abspath, rel, new_name, new_abs in self.rename_map:
+        for abspath, rel, _disp, new_abs, _rec in self.rename_map:
             if new_abs == abspath:
                 used.add(new_abs)
         ok = fail = 0
         errors = []
-        for abspath, rel, new_name, new_abs in todo:
+        for abspath, rel, _disp, new_abs, _rec in todo:
             target = self._dedupe(new_abs, used)
             used.add(target)
             try:

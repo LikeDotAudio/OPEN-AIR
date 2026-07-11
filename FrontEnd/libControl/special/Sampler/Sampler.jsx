@@ -279,7 +279,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     }, [pendingAssign]);
 
     return (
-        <div ref={rootRef} style={{ padding: '25px', backgroundColor: 'rgba(20,20,20,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
+        <div ref={rootRef} style={{ padding: '25px', backgroundColor: 'rgba(18,18,18,0.28)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', borderRadius: '4px', color: '#fff', border: '1px solid #333', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', boxSizing: 'border-box' }}>
             {/* Velocity glow: bright on strike (scaled by --gi), fades over the sound's length. */}
             <style>{`
                 @keyframes oaPadGlow {

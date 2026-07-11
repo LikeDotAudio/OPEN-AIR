@@ -282,7 +282,7 @@ const AudioEditor = ({ label = "Wave Audio Editor" }) => {
                 const f = e.dataTransfer.files && e.dataTransfer.files[0];
                 if (f) handleFile(f);
             }}
-            style={{ padding: '20px', backgroundColor: 'rgba(20,20,20,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: '4px', color: '#fff', border: dragOver ? '1px dashed #f4902c' : '1px solid #333', width: '100%', boxSizing: 'border-box', position: 'relative' }}
+            style={{ padding: '20px', backgroundColor: 'rgba(18,18,18,0.28)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', borderRadius: '4px', color: '#fff', border: dragOver ? '1px dashed #f4902c' : '1px solid #333', width: '100%', boxSizing: 'border-box', position: 'relative' }}
         >
             {dragOver && (
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(244,144,44,0.12)', border: '2px dashed #f4902c', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5, pointerEvents: 'none', fontSize: '14px', color: '#f4902c', fontWeight: 'bold' }}>

@@ -389,6 +389,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                         e.preventDefault();
                                         const newRoot = toneRoot === idx ? null : idx;
                                         setToneRoot(newRoot);
+                                        if (newRoot !== null && window.oaPrecacheTones) window.oaPrecacheTones(newRoot);
                                         window.dispatchEvent(new CustomEvent('oa-tone-mode', { detail: { rootIdx: newRoot } }));
                                         return;
                                     }

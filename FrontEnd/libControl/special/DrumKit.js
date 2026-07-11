@@ -56,6 +56,10 @@ window.OA_DRUM_LOOPS = window.OA_DRUM_LOOPS || {};
 window.OA_DRUM_VOICES = window.OA_DRUM_VOICES || [];
 window.OA_PITCH_BEND = window.OA_PITCH_BEND || 0;
 
+// Pre-rendered pitched buffers for Tone Mode (avoids real-time resampling latency)
+// rootIdx -> { semitones -> AudioBuffer }
+window.OA_TONE_CACHE = window.OA_TONE_CACHE || {};
+
 // Set the global pitch-bend (cents) and retune every sounding voice live.
 window.oaSetPitchBend = function (cents) {
     window.OA_PITCH_BEND = cents || 0;
@@ -176,20 +180,67 @@ window.oaTriggerTone = function(rootIdx, semitones, volume, time) {
     const t = (typeof time === 'number') ? time : ctx.currentTime;
     const vol = Math.max(0, Math.min(1, volume == null ? 1 : volume));
     const entry = window.OA_DRUM_SAMPLES[rootIdx];
-    const pitchRatio = Math.pow(2, semitones / 12);
-
+    
     if (entry && entry.buffer) {
+        // If we have a pre-rendered cache for this exact pitch, use it at 1x speed to save latency
+        const cache = window.OA_TONE_CACHE[rootIdx];
+        if (cache && cache[semitones]) {
+            window.oaPlayDrumSample(ctx, Object.assign({}, entry, { buffer: cache[semitones], pitch: entry.pitch || 1 }), t, vol);
+            return true;
+        }
+        
+        // Fallback to real-time resampling if not in cache
+        const pitchRatio = Math.pow(2, semitones / 12);
         window.oaPlayDrumSample(ctx, Object.assign({}, entry, { pitch: (entry.pitch || 1) * pitchRatio }), t, vol);
         return true;
     }
     
     // Fallback to pitched synth voice
+    const pitchRatio = Math.pow(2, semitones / 12);
     const track = window.OA_DRUM_KIT[rootIdx];
     if (track) {
         window.oaPlayDrumVoice(ctx, Object.assign({}, track, { freq: track.freq * pitchRatio }), t, vol);
         return true;
     }
     return false;
+};
+
+// Pre-render a sample at multiple pitches to eliminate real-time resampling latency
+window.oaPrecacheTones = async function(rootIdx) {
+    const entry = window.OA_DRUM_SAMPLES[rootIdx];
+    if (!entry || !entry.buffer) return;
+    
+    const origBuf = entry.buffer;
+    const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!OfflineCtx) return;
+    
+    window.OA_TONE_CACHE[rootIdx] = window.OA_TONE_CACHE[rootIdx] || {};
+    
+    // Pre-render 2 octaves down and 3 octaves up
+    for (let semitones = -24; semitones <= 36; semitones++) {
+        if (semitones === 0) {
+            window.OA_TONE_CACHE[rootIdx][0] = origBuf;
+            continue;
+        }
+        if (window.OA_TONE_CACHE[rootIdx][semitones]) continue; // already cached
+        
+        try {
+            const pitchRatio = Math.pow(2, semitones / 12);
+            const dur = origBuf.duration / pitchRatio;
+            const offCtx = new OfflineCtx(origBuf.numberOfChannels, Math.ceil(dur * origBuf.sampleRate), origBuf.sampleRate);
+            
+            const src = offCtx.createBufferSource();
+            src.buffer = origBuf;
+            src.playbackRate.value = pitchRatio;
+            src.connect(offCtx.destination);
+            src.start(0);
+            
+            const rendered = await offCtx.startRendering();
+            window.OA_TONE_CACHE[rootIdx][semitones] = rendered;
+        } catch(e) {
+            console.error('Failed to pre-render pitch', semitones, e);
+        }
+    }
 };
 
 // ---- Audio decode (with an AIFF/AIFC fallback) ------------------------------

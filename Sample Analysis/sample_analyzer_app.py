@@ -115,6 +115,7 @@ class AnalyzerApp:
         self._build_cloud_tab()
         self._build_groups_tab()
         self._build_examiner_tab()
+        self._build_guess_tab()
         self._build_rename_tab()
 
     def _build_cloud_tab(self):
@@ -152,11 +153,19 @@ class AnalyzerApp:
         bottom = ttk.Frame(side)
         bottom.pack(side=tk.BOTTOM, fill=tk.X, padx=6, pady=4)
         ttk.Separator(bottom, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=(0, 6))
-        ttk.Label(bottom, text="Isolate 1 group → Y axis:", justify=tk.LEFT).pack(anchor=tk.W)
-        self.iso_axis = tk.StringVar(value="Group")
-        ttk.Combobox(bottom, textvariable=self.iso_axis, state="readonly", width=18,
-                     values=[lbl for lbl, _k in self.ISO_FEATURES]).pack(anchor=tk.W, pady=3)
+        ttk.Label(bottom, text="Isolate 1 group → axes:", justify=tk.LEFT).pack(anchor=tk.W)
+        yrow = ttk.Frame(bottom); yrow.pack(fill=tk.X, pady=1)
+        ttk.Label(yrow, text="Y:", width=2).pack(side=tk.LEFT)
+        self.iso_axis = tk.StringVar(value="Length")
+        ttk.Combobox(yrow, textvariable=self.iso_axis, state="readonly", width=15,
+                     values=[lbl for lbl, _k in self.ISO_FEATURES]).pack(side=tk.LEFT)
+        zrow = ttk.Frame(bottom); zrow.pack(fill=tk.X, pady=1)
+        ttk.Label(zrow, text="Z:", width=2).pack(side=tk.LEFT)
+        self.iso_zaxis = tk.StringVar(value="Timbre")
+        ttk.Combobox(zrow, textvariable=self.iso_zaxis, state="readonly", width=15,
+                     values=[lbl for lbl, _k in self.ISO_FEATURES if _k is not None]).pack(side=tk.LEFT)
         self.iso_axis.trace_add("write", lambda *_: self._redraw_cloud())
+        self.iso_zaxis.trace_add("write", lambda *_: self._redraw_cloud())
 
         # Scrollable checkbox list fills the middle (canvas + scrollbar in their
         # own container so LEFT/RIGHT packing never collides with the sidebar).
@@ -181,9 +190,17 @@ class AnalyzerApp:
         self._style_axes()
         self.scatter = self.ax.scatter([], [], [], depthshade=True)
         self.canvas = FigureCanvasTkAgg(self.fig, master=right)
-        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
+        cw = self.canvas.get_tk_widget()
+        cw.pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
         self.canvas.mpl_connect("scroll_event", self._on_scroll)
         self.canvas.mpl_connect("button_press_event", self._on_click_point)
+        # Arrow keys orbit the camera (widget grabs focus on hover/click).
+        cw.configure(takefocus=True)
+        cw.bind("<Enter>", lambda e: cw.focus_set())
+        cw.bind("<Left>", lambda e: self._orbit(-12, 0))
+        cw.bind("<Right>", lambda e: self._orbit(12, 0))
+        cw.bind("<Up>", lambda e: self._orbit(0, 12))
+        cw.bind("<Down>", lambda e: self._orbit(0, -12))
         self.selected_rec = None
 
     # ---- Groups / CSV tab -------------------------------------------------
@@ -270,6 +287,125 @@ class AnalyzerApp:
                                    insertbackground="#ccc", font=("Courier", 9), wrap=tk.NONE)
         body.add(self.exam_detail, weight=1)
 
+    # ---- Auto-Guess tab ---------------------------------------------------
+    # Acoustic (name-independent) features used to fingerprint each group.
+    GUESS_FEATS = ["centroid", "harmonicity", "low", "mid", "high", "crest",
+                   "attack", "zcr", "rolloff", "flatness", "sustain", "loglen"]
+
+    def _feat_row(self, r):
+        import math
+        return [
+            r.get("centroid", 0) or 0, r.get("harmonicity", 0) or 0,
+            r.get("low", 0) or 0, r.get("mid", 0) or 0, r.get("high", 0) or 0,
+            r.get("crest", 0) or 0, r.get("attack", 0) or 0, r.get("zcr", 0) or 0,
+            r.get("rolloff", 0) or 0, r.get("flatness", 0) or 0, r.get("sustain", 0) or 0,
+            math.log(1.0 + (r.get("length", 0) or 0)),
+        ]
+
+    def _build_guess_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Auto-Guess")
+
+        ctl = ttk.Frame(tab, padding=6)
+        ctl.pack(fill=tk.X)
+        ttk.Button(ctl, text="Run guess", command=self._run_guess).pack(side=tk.LEFT)
+        self.guess_scope = tk.StringVar(value="Only 'Other' + mismatches")
+        ttk.Combobox(ctl, textvariable=self.guess_scope, state="readonly", width=26,
+                     values=["Only 'Other' + mismatches", "All one-shots"]).pack(side=tk.LEFT, padx=8)
+        ttk.Button(ctl, text="Play selected", command=self._guess_play).pack(side=tk.LEFT)
+        self.guess_summary = ttk.Label(ctl, text="Averages each named group's acoustics, then guesses the rest.",
+                                       foreground="#888")
+        self.guess_summary.pack(side=tk.RIGHT)
+
+        wrap = ttk.Frame(tab)
+        wrap.pack(fill=tk.BOTH, expand=True)
+        cols = ("folder", "current", "guess", "conf", "note")
+        tv = ttk.Treeview(wrap, columns=cols, show="tree headings")
+        tv.heading("#0", text="File")
+        tv.column("#0", width=240)
+        for c, (label, w) in {"folder": ("Folder", 150), "current": ("Current group", 100),
+                              "guess": ("Best guess", 100), "conf": ("Conf %", 60),
+                              "note": ("Note", 160)}.items():
+            tv.heading(c, text=label)
+            tv.column(c, width=w, anchor=tk.W)
+        vs = ttk.Scrollbar(wrap, orient=tk.VERTICAL, command=tv.yview)
+        tv.configure(yscrollcommand=vs.set)
+        vs.pack(side=tk.RIGHT, fill=tk.Y)
+        tv.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        tv.tag_configure("other", foreground="#1565c0")
+        tv.tag_configure("mismatch", foreground="#c33")
+        self.guess_tv = tv
+
+    def _run_guess(self):
+        if not self.records:
+            messagebox.showinfo("Auto-Guess", "No analysis loaded yet.")
+            return
+        # One-shots only (loops are a different animal).
+        recs = [r for r in self.records if (r.get("group") or "Other") != "Loop"]
+        if len(recs) < 3:
+            messagebox.showinfo("Auto-Guess", "Not enough one-shot samples.")
+            return
+
+        mat = np.array([self._feat_row(r) for r in recs], dtype=float)
+        mn = mat.min(axis=0)
+        rng = np.where((mat.max(axis=0) - mn) > 1e-12, mat.max(axis=0) - mn, 1.0)
+        norm = (mat - mn) / rng
+
+        # Group fingerprints = mean normalized feature vector of confidently named files.
+        known = [i for i, r in enumerate(recs) if (r.get("group") or "Other") != "Other"]
+        cents = {}
+        for i in known:
+            g = recs[i].get("group")
+            cents.setdefault(g, []).append(norm[i])
+        cents = {g: np.mean(v, axis=0) for g, v in cents.items() if len(v) >= 2}
+        if not cents:
+            messagebox.showinfo("Auto-Guess", "No named groups with ≥2 samples to learn from.")
+            return
+        gnames = list(cents.keys())
+        cmat = np.array([cents[g] for g in gnames])
+
+        scope_all = self.guess_scope.get() == "All one-shots"
+        tv = self.guess_tv
+        tv.delete(*tv.get_children())
+        rows = []
+        for i, r in enumerate(recs):
+            d = np.linalg.norm(cmat - norm[i], axis=1)
+            order = np.argsort(d)
+            g1 = gnames[order[0]]
+            d1 = d[order[0]]
+            d2 = d[order[1]] if len(order) > 1 else d1 + 1.0
+            conf = int(max(0.0, min(1.0, (d2 - d1) / (d2 + 1e-9))) * 100)
+            cur = r.get("group") or "Other"
+            if cur == "Other":
+                note, tag = f"OTHER → likely {g1}", "other"
+            elif cur != g1:
+                note, tag = f"named {cur}, looks like {g1}", "mismatch"
+            else:
+                note, tag = "consistent", ""
+            if not scope_all and tag == "":
+                continue
+            rows.append((r, cur, g1, conf, note, tag))
+
+        rows.sort(key=lambda x: (x[5] == "", -x[3]))
+        for r, cur, g1, conf, note, tag in rows:
+            tv.insert("", "end", text=r.get("name", ""), tags=(tag,) if tag else (),
+                      values=(r.get("folder", ""), cur, g1, conf, note))
+        self.guess_summary.config(
+            text=f"learned {len(gnames)} fingerprints · {len(rows)} shown "
+                 f"({sum(1 for x in rows if x[5]=='other')} Other, "
+                 f"{sum(1 for x in rows if x[5]=='mismatch')} mismatches)")
+
+    def _guess_play(self):
+        sel = self.guess_tv.selection()
+        if not sel:
+            return
+        name = self.guess_tv.item(sel[0], "text")
+        rec = next((r for r in self.records if r.get("name") == name), None)
+        if rec:
+            path = self._resolve_path(rec)
+            if path:
+                self._play_file(path)
+
     # ---- Flatten / Rename tab --------------------------------------------
     def _build_rename_tab(self):
         tab = ttk.Frame(self.notebook)
@@ -289,6 +425,14 @@ class AnalyzerApp:
         self.rename_audio_only = tk.BooleanVar(value=False)
         ttk.Checkbutton(opt, text="Audio files only", variable=self.rename_audio_only,
                         command=self._rename_scan).pack(side=tk.LEFT, padx=12)
+
+        drow = ttk.Frame(tab, padding=(6, 0))
+        drow.pack(fill=tk.X)
+        ttk.Button(drow, text="Destination…", command=self._rename_pick_dest).pack(side=tk.LEFT)
+        self.rename_dest = tk.StringVar(value="")
+        ttk.Label(drow, text="(optional — move renamed files here instead)", foreground="#888").pack(side=tk.LEFT, padx=6)
+        ttk.Label(drow, textvariable=self.rename_dest, foreground="#2a7", wraplength=340).pack(side=tk.LEFT, padx=6)
+        ttk.Button(drow, text="Clear", command=lambda: (self.rename_dest.set(""), self._rename_scan())).pack(side=tk.RIGHT)
 
         ctl = ttk.Frame(tab, padding=(6, 4))
         ctl.pack(fill=tk.X)
@@ -321,6 +465,12 @@ class AnalyzerApp:
             self.rename_dir.set(d)
             self._rename_scan()
 
+    def _rename_pick_dest(self):
+        d = filedialog.askdirectory(title="Select destination folder for renamed files")
+        if d:
+            self.rename_dest.set(d)
+            self._rename_scan()
+
     def _encode_name(self, root, abspath):
         """B/C/D.wav (relative to the picked root, root name NOT included)
         -> 'B - C - D.wav'."""
@@ -347,7 +497,13 @@ class AnalyzerApp:
                     continue
                 abspath = os.path.join(dirpath, fn)
                 new_name = self._encode_name(root, abspath)
-                dest_dir = root if flatten else dirpath
+                dest = self.rename_dest.get()
+                if dest and os.path.isdir(dest):
+                    dest_dir = dest          # explicit destination overrides
+                elif flatten:
+                    dest_dir = root
+                else:
+                    dest_dir = dirpath
                 new_abs = os.path.join(dest_dir, new_name)
                 rel = os.path.relpath(abspath, root)
                 rows.append([abspath, rel, new_name, new_abs])
@@ -377,11 +533,16 @@ class AnalyzerApp:
         if not todo:
             messagebox.showinfo("Apply Rename", "All files are already named correctly.")
             return
+        dest = self.rename_dest.get()
+        if dest and os.path.isdir(dest):
+            where = f"Files will be MOVED to:\n{dest}\n"
+        elif flatten:
+            where = "Files will be MOVED up into the picked folder.\n"
+        else:
+            where = "Files renamed in place.\n"
         if not messagebox.askyesno(
                 "Apply Rename",
-                f"Rename {len(todo)} file(s)?\n\n"
-                + ("Files will be MOVED up into the picked folder.\n" if flatten else "Files renamed in place.\n")
-                + "This modifies files on disk. Continue?"):
+                f"Rename {len(todo)} file(s)?\n\n" + where + "This modifies files on disk. Continue?"):
             return
 
         used = set()
@@ -437,20 +598,48 @@ class AnalyzerApp:
     def _color_for(self, groups, g):
         return CLOUD_PALETTE[max(0, groups.index(g)) % len(CLOUD_PALETTE)]
 
-    # Features that can replace the Y (group) axis when a single group is isolated.
+    # Features that can replace the Y / Z axes when a single group is isolated.
     ISO_FEATURES = [
-        ("Group", None), ("Complexity", "complexity"), ("Brightness (centroid)", "centroid"),
-        ("Harmonicity", "harmonicity"), ("Attack", "attack"), ("Length", "length"),
+        ("Group", None), ("Length", "length"), ("Timbre", "timbre"),
+        ("Complexity", "complexity"), ("Brightness (centroid)", "centroid"),
+        ("Harmonicity", "harmonicity"), ("Sustain", "sustain"), ("Attack", "attack"),
         ("Pitch", "pitch"), ("BPM", "bpm"), ("RMS", "rms"), ("ZCR", "zcr"),
         ("Roll-off", "rolloff"), ("Flatness", "flatness"),
     ]
+    CATEGORICAL_AXES = {"timbre"}
 
-    def _iso_key(self):
-        lbl = self.iso_axis.get()
+    def _feat_key(self, label):
         for l, k in self.ISO_FEATURES:
-            if l == lbl:
+            if l == label:
                 return k
         return None
+
+    def _iso_key(self):
+        return self._feat_key(self.iso_axis.get())
+
+    def _iso_zkey(self):
+        return self._feat_key(self.iso_zaxis.get())
+
+    def _axis_values(self, recs, key, groups):
+        """Return (values, label, ticks) for an axis. key=None -> group depth;
+        key in CATEGORICAL_AXES -> categorical index; else numeric feature."""
+        label = next((l for l, k in self.ISO_FEATURES if k == key), key or "Name group")
+        if key is None:
+            gidx = {g: i for i, g in enumerate(groups)}
+            vals = np.array([gidx[r.get("group", "Other") or "Other"] for r in recs], dtype=float)
+            return vals, "Name group", (list(range(len(groups))), groups)
+        if key in self.CATEGORICAL_AXES:
+            cats = sorted(set((r.get(key) or "?") for r in recs))
+            cidx = {c: i for i, c in enumerate(cats)}
+            vals = np.array([cidx[r.get(key) or "?"] for r in recs], dtype=float)
+            return vals, label, (list(range(len(cats))), cats)
+        if key == "complexity":
+            # Mono files dip below zero on the complexity axis (stereo stays +).
+            vals = np.array([(-1.0 if (r.get("channels", 2) or 2) == 1 else 1.0) * (r.get("complexity", 0) or 0)
+                             for r in recs], dtype=float)
+            return vals, "Complexity (mono = −)", None
+        vals = np.array([r.get(key, 0) or 0 for r in recs], dtype=float)
+        return vals, label, None
 
     def _sync_group_checkboxes(self, all_groups):
         """(Re)build the group show/hide checkboxes when the group set changes."""
@@ -494,6 +683,16 @@ class AnalyzerApp:
         self.ax.view_init(elev=elev, azim=azim)
         self.canvas.draw_idle()
 
+    def _orbit(self, d_azim, d_elev):
+        try:
+            elev = max(-89, min(89, (self.ax.elev or 0) + d_elev))
+            azim = (self.ax.azim or 0) + d_azim
+            self.ax.view_init(elev=elev, azim=azim)
+            self.canvas.draw_idle()
+        except Exception:
+            pass
+        return "break"
+
     # ---- click-to-inspect + play -----------------------------------------
     def _on_click_point(self, event):
         if event.inaxes != self.ax or self._pts is None or event.x is None:
@@ -519,7 +718,9 @@ class AnalyzerApp:
         self.sel_label.config(text=rec.get("name", "")[:40])
 
         # Overlay the PEAK record to the side of the graph.
-        lines = [rec.get("name", "")]
+        ch = rec.get("channels")
+        title = rec.get("name", "") + (" (mono)" if ch == 1 else "")
+        lines = [title]
         fld = rec.get("folder", "")
         if fld:
             lines.append("📁 " + fld)
@@ -539,6 +740,9 @@ class AnalyzerApp:
                 lines.append(f"{label}: " + fmt.format(v))
             except Exception:
                 lines.append(f"{label}: {v}")
+        lines.append("channels: " + ("mono" if ch == 1 else "stereo" if ch == 2 else str(ch)))
+        if rec.get("sustained"):
+            lines.append("★ sustained single note")
         text = "\n".join(lines)
 
         if self._sel_txt is not None:
@@ -816,14 +1020,12 @@ class AnalyzerApp:
         isolated = len(groups) == 1 and iso_key is not None
 
         xs = np.array([r.get("pitch", 0) or 0 for r in recs], dtype=float)
-        zs = np.array([r.get("complexity", 0) or 0 for r in recs], dtype=float)
         if isolated:
-            ys = np.array([r.get(iso_key, 0) or 0 for r in recs], dtype=float)
-            ylabel = self.iso_axis.get()
+            ys, ylabel, yticks = self._axis_values(recs, iso_key, groups)
+            zs, zlabel, zticks = self._axis_values(recs, self._iso_zkey(), groups)
         else:
-            gidx = {g: i for i, g in enumerate(groups)}
-            ys = np.array([gidx[grp(r)] for r in recs], dtype=float)
-            ylabel = "Name group"
+            ys, ylabel, yticks = self._axis_values(recs, None, groups)
+            zs, zlabel, zticks = self._axis_values(recs, "complexity", groups)
 
         lens = [r.get("length", 0.1) or 0.1 for r in recs]
         lmin, lmax = min(lens), max(lens)
@@ -839,20 +1041,31 @@ class AnalyzerApp:
         self.scatter.set_edgecolor("none")
 
         self.ax.set_xlim(0, float(xs.max()) * 1.1 + 1)
-        self.ax.set_zlim(0, float(zs.max()) * 1.1 + 1)
-        self.ax.set_ylabel(ylabel, color="#aaa", labelpad=12)
-        if isolated:
-            ymax = float(ys.max()) or 1.0
-            self.ax.set_ylim(0, ymax * 1.1 + 1e-9)
-            self.ax.set_yticks(np.linspace(0, ymax, 5))
-            self.ax.set_yticklabels([f"{v:.2g}" for v in np.linspace(0, ymax, 5)], fontsize=7, color="#bbb")
-        else:
-            self.ax.set_ylim(-0.5, len(groups) - 0.5)
-            self.ax.set_yticks(range(len(groups)))
-            self.ax.set_yticklabels(groups, fontsize=7, color="#bbb")
+
+        def _apply_axis(setlim, setticks, setlabels, setlabel, vals, label, ticks):
+            setlabel(label, color="#aaa", labelpad=10)
+            if ticks is not None:
+                positions, names = ticks
+                setlim(-0.5, max(0.5, len(positions) - 0.5))
+                setticks(positions)
+                setlabels(names, fontsize=7, color="#bbb")
+            else:
+                vmin = float(vals.min())
+                vmax = float(vals.max())
+                lo = min(0.0, vmin * 1.1)
+                hi = max(vmax * 1.1, lo + 1e-6)
+                setlim(lo, hi)
+                ticks = np.linspace(lo, hi, 5)
+                setticks(ticks)
+                setlabels([f"{v:.2g}" for v in ticks], fontsize=7, color="#bbb")
+
+        _apply_axis(self.ax.set_ylim, self.ax.set_yticks, self.ax.set_yticklabels,
+                    self.ax.set_ylabel, ys, ylabel, yticks)
+        _apply_axis(self.ax.set_zlim, self.ax.set_zticks, self.ax.set_zticklabels,
+                    self.ax.set_zlabel, zs, zlabel, zticks)
 
         # Rebuild the colour legend when the visible set / axis mode changes.
-        legend_key = (tuple(groups), isolated, ylabel)
+        legend_key = (tuple(groups), isolated, ylabel, zlabel)
         if legend_key != self._legend_groups:
             handles = [Line2D([0], [0], marker="o", linestyle="", markersize=6,
                               markerfacecolor=self._color_for(groups, g), markeredgecolor="none", label=g)
@@ -867,7 +1080,7 @@ class AnalyzerApp:
             self._legend_groups = legend_key
 
         n = len(recs)
-        extra = f" · ISOLATED: {groups[0]} (Y = {ylabel})" if isolated else ""
+        extra = f" · ISOLATED {groups[0]}: Y={ylabel}, Z={zlabel}" if isolated else ""
         self.ax.set_title(
             f"{n} shown  ·  {len(groups)}/{len(all_groups)} groups  ·  size = length{extra}",
             color="#f4902c", fontsize=9)

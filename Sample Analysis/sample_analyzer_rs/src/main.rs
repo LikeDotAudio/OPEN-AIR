@@ -24,9 +24,11 @@ struct Peak {
     folder: String, // sub-folder relative to the scanned root ("" = root)
     sub: String,    // alias of `folder` (SoundCloud view compatibility)
     path: String,   // absolute path
-    group: String,  // name-derived category (Kick, Snare, HiHat, … Other) — or "Loop" if >1 transient
-    reason: String, // why it's in `group` (matched keyword, or the loop rule)
-    timbre: String, // feature-derived class (Percussive/Tonal/Noise/Bass/Bright/Loop/Pad)
+    group: String,        // name-derived category (Kick, Snare, HiHat, … Other) — or "Loop" if >1 transient
+    reason: String,       // why it's in `group` (matched keyword, or the loop rule)
+    timbre: String,       // feature-derived class (Percussive/Tonal/Noise/Bass/Bright/Loop/Pad)
+    length_class: String, // one-shot length tier: Short / Medium / Long (or "Loop")
+    subgroup: String,     // group + length tier, e.g. "Bass Short" (or "Loop")
 
     // --- time / envelope ---
     length: f64,       // seconds
@@ -39,6 +41,8 @@ struct Peak {
     // --- pitch / harmonicity ---
     pitch: f64,        // Hz (autocorrelation)
     harmonicity: f64,  // 0 = atonal/noise … 1 = strongly pitched
+    sustain: f64,      // fraction of the file held above 50% of peak level
+    sustained: bool,   // a single fundamental note sustained the whole file
 
     // --- spectrum ---
     complexity: f64,   // spectral spread (timbral richness)
@@ -118,9 +122,13 @@ fn categorize(name: &str) -> (&'static str, &'static str) {
         ("Clave", &["claves", "clave"], &["cv", "clv"]),
         ("Shaker", &["shaker", "maracas", "cabasa"], &["shk", "sh"]),
         ("Perc", &["percussion", "auxiliary", "perc"], &["prc"]),
+        ("Guitar", &["guitar", "gtr", "acoustic gt", "electric gt"], &["gtr", "gt"]),
+        ("Strings", &["strings", "string", "violin", "viola", "cello", "orchestra", "ensemble", "pizz", "arco"], &[]),
         ("Bass", &["bass", "808", "sub bass"], &["sub"]),
         ("Vocal", &["vocal", "voice", "vox"], &["vx"]),
-        ("FX", &["sound effect", "foley", "atmosphere", "atmos", "riser", "sweep", "noise", "sfx", "fx"], &["fx", "sfx"]),
+        ("FX", &["sound effect", "foley", "atmosphere", "atmos", "riser", "sweep", "noise",
+                 "impact", "boom", "zap", "glitch", "drone", "whoosh", "reverse", "downlifter",
+                 "uplifter", "riser", "sfx", "fx"], &["fx", "sfx"]),
         ("Loop", &["loop", "groove", "beat"], &["lp"]),
     ];
 
@@ -191,11 +199,13 @@ fn main() {
                 match &res {
                     Some(p) => emit(&serde_json::json!({
                         "type": "result", "done": n, "total": total,
-                        "name": p.name, "folder": p.folder, "group": p.group, "reason": p.reason, "timbre": p.timbre,
+                        "name": p.name, "folder": p.folder, "group": p.group, "reason": p.reason,
+                        "timbre": p.timbre, "length_class": p.length_class, "subgroup": p.subgroup,
+                        "sustained": p.sustained, "sustain": p.sustain,
                         "pitch": p.pitch, "complexity": p.complexity, "length": p.length,
                         "transients": p.transients, "centroid": p.centroid, "harmonicity": p.harmonicity,
                         "brightness": p.high, "attack": p.attack, "bpm": p.bpm,
-                        "sample_rate": p.sample_rate, "bit_depth": p.bit_depth
+                        "sample_rate": p.sample_rate, "bit_depth": p.bit_depth, "channels": p.channels
                     })),
                     None => emit(&serde_json::json!({
                         "type": "skip", "done": n, "total": total,
@@ -218,12 +228,21 @@ fn main() {
 
     // Per-file sidecar PEAKs written beside each sample: "<file>.wav.PEAK".
     if per_file {
+        let wrote = AtomicUsize::new(0);
+        let failed = AtomicUsize::new(0);
         results.par_iter().for_each(|p| {
             let peak_path = format!("{}.PEAK", p.path);
-            if let Ok(js) = serde_json::to_string_pretty(p) {
-                let _ = std::fs::write(&peak_path, js);
+            match serde_json::to_string_pretty(p).map_err(|e| e.to_string())
+                .and_then(|js| std::fs::write(&peak_path, js).map_err(|e| e.to_string()))
+            {
+                Ok(_) => { wrote.fetch_add(1, Ordering::Relaxed); }
+                Err(_) => { failed.fetch_add(1, Ordering::Relaxed); }
             }
         });
+        emit(&serde_json::json!({
+            "type": "per_file", "wrote": wrote.load(Ordering::Relaxed),
+            "failed": failed.load(Ordering::Relaxed)
+        }));
     }
 
     // Aggregate PEAK (used by the cloud / Groups / Examiner views).
@@ -316,14 +335,16 @@ fn read_acid(path: &Path) -> (f64, i32) {
     none
 }
 
-/// Count transients (onsets) via a short-time RMS envelope. Each rising edge
-/// that crosses ~25% of the peak level, separated by ≥50 ms from the last,
-/// counts as one attack. A one-shot sample has 1; a loop/phrase has several.
+/// Count transients (attacks) by prominence peak-picking on the amplitude
+/// envelope. A hit is a rise to a local peak that stands at least `PROM` above
+/// the valley preceding it — so each re-attack in a loop counts, while a steady
+/// sustain or low-frequency envelope ripple (no real dip-then-rise) does not.
+/// A clean one-shot yields 1; a loop yields many.
 fn count_transients(data: &[f32], sr: u32) -> usize {
     if data.is_empty() {
         return 0;
     }
-    let hop = (sr as usize / 100).max(1); // ~10 ms frames
+    let hop = (sr as usize / 60).max(1); // ~16 ms frames (averages out sub-100 Hz ripple)
     let mut env: Vec<f32> = Vec::with_capacity(data.len() / hop + 1);
     let mut i = 0;
     while i < data.len() {
@@ -335,23 +356,76 @@ fn count_transients(data: &[f32], sr: u32) -> usize {
         env.push((s / (end - i) as f32).sqrt());
         i += hop;
     }
-    let peak = env.iter().cloned().fold(0.0f32, f32::max);
-    if peak <= 0.0 {
+    let n = env.len();
+    if n < 3 {
+        return if env.iter().any(|&e| e > 0.0) { 1 } else { 0 };
+    }
+    let emax = env.iter().cloned().fold(0.0f32, f32::max);
+    if emax <= 0.0 {
         return 0;
     }
-    let thresh = peak * 0.25;
-    let min_gap = 5i32; // 5 frames ≈ 50 ms between attacks
+
+    // Normalize + 3-tap smoothing.
+    let sm: Vec<f32> = (0..n)
+        .map(|k| {
+            let a = env[k.saturating_sub(1)];
+            let b = env[k];
+            let c = env[(k + 1).min(n - 1)];
+            (a + b + c) / (3.0 * emax)
+        })
+        .collect();
+
+    const PROM: f32 = 0.18;      // peak must rise this far above the preceding valley
+    const MIN_LEVEL: f32 = 0.12; // and reach at least this loudness
+    const EPS: f32 = 1e-4;
+
     let mut count = 0usize;
-    let mut last = -1000i32;
-    let mut prev = 0.0f32;
-    for (k, &e) in env.iter().enumerate() {
-        if e > thresh && prev <= thresh && (k as i32 - last) > min_gap {
-            count += 1;
-            last = k as i32;
+    let mut rising = false;
+    let mut valley = sm[0];
+    let mut peak = sm[0];
+    for k in 1..n {
+        if sm[k] > sm[k - 1] + EPS {
+            if !rising {
+                valley = sm[k - 1];
+                rising = true;
+            }
+            peak = sm[k];
+        } else if sm[k] < sm[k - 1] - EPS && rising {
+            if peak - valley >= PROM && peak >= MIN_LEVEL {
+                count += 1;
+            }
+            rising = false;
         }
-        prev = e;
     }
     count.max(1) // audible signal ⇒ at least one attack
+}
+
+/// Fraction of the file whose short-time RMS stays above 50 % of the peak
+/// level — a proxy for "held/sustained the whole time" (≈1 for a drone/pad,
+/// small for a percussive one-shot that decays quickly).
+fn sustain_ratio(data: &[f32], sr: u32) -> f64 {
+    if data.is_empty() {
+        return 0.0;
+    }
+    let hop = (sr as usize / 60).max(1);
+    let mut env: Vec<f32> = Vec::new();
+    let mut i = 0;
+    while i < data.len() {
+        let end = (i + hop).min(data.len());
+        let mut s = 0.0f32;
+        for &x in &data[i..end] {
+            s += x * x;
+        }
+        env.push((s / (end - i) as f32).sqrt());
+        i += hop;
+    }
+    let peak = env.iter().cloned().fold(0.0f32, f32::max);
+    if peak <= 0.0 || env.is_empty() {
+        return 0.0;
+    }
+    let thr = peak * 0.5;
+    let above = env.iter().filter(|&&e| e >= thr).count();
+    above as f64 / env.len() as f64
 }
 
 fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
@@ -486,6 +560,7 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
 
     // ---- Transients: >1 attack ⇒ this is a loop/phrase, not a one-shot sample.
     let transients = count_transients(&data, sr);
+    let sustain = sustain_ratio(&data, sr);
 
     // ---- Embedded ACID metadata (loop BPM / musical key), when present.
     let (bpm, root_note) = read_acid(path);
@@ -493,10 +568,20 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     let name = path.file_name().and_then(|x| x.to_str()).unwrap_or("").to_string();
     let parent = path.parent().unwrap_or(root);
     let folder = parent.strip_prefix(root).ok().map(|p| p.to_string_lossy().replace('\\', "/")).unwrap_or_default();
-    // Name-derived group (Loop overrides when multi-transient).
+    // Loop if it has multiple transients OR carries a BPM (ACID) tag.
+    let is_loop = transients > 1 || bpm > 0.0;
+    // A single fundamental note held for the whole file (drone/pad/sustained tone).
+    let sustained = harmonicity > 0.5 && !is_loop && sustain > 0.6;
     let (name_group, name_match) = categorize(&name);
-    let (group, reason) = if transients > 1 {
-        ("Loop".to_string(), format!("{} transients (>1) → loop", transients))
+    let (group, reason) = if is_loop {
+        let why = if transients > 1 && bpm > 0.0 {
+            format!("{} transients + {:.0} BPM tag → loop", transients, bpm)
+        } else if transients > 1 {
+            format!("{} transients (>1) → loop", transients)
+        } else {
+            format!("{:.0} BPM tag → loop", bpm)
+        };
+        ("Loop".to_string(), why)
     } else if name_match.is_empty() {
         (name_group.to_string(), "no naming keyword matched".to_string())
     } else {
@@ -504,6 +589,23 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     };
     // Feature-derived timbre class — a blind, name-independent classification.
     let timbre = classify_timbre(transients, attack, crest, harmonicity, centroid, low, high).to_string();
+
+    // Length tier: one-shots split Short / Medium / Long; loops are their own.
+    let length_class = if is_loop {
+        "Loop"
+    } else if length < 0.5 {
+        "Short"
+    } else if length < 2.0 {
+        "Medium"
+    } else {
+        "Long"
+    }
+    .to_string();
+    let subgroup = if is_loop {
+        "Loop".to_string()
+    } else {
+        format!("{} {}", group, length_class)
+    };
 
     Some(Peak {
         name,
@@ -513,6 +615,8 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         group,
         reason,
         timbre,
+        length_class,
+        subgroup,
         length,
         transients,
         attack,
@@ -521,6 +625,8 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         zcr,
         pitch,
         harmonicity,
+        sustain,
+        sustained,
         complexity,
         centroid,
         rolloff,
@@ -543,8 +649,8 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
 /// Loops are clustered separately from one-shots (cluster ids offset by k) so
 /// the two graphs get their own groupings.
 fn cluster_samples(results: &mut [Peak], k: usize) {
-    let idx_hits: Vec<usize> = (0..results.len()).filter(|&i| results[i].transients <= 1).collect();
-    let idx_loops: Vec<usize> = (0..results.len()).filter(|&i| results[i].transients > 1).collect();
+    let idx_hits: Vec<usize> = (0..results.len()).filter(|&i| results[i].group != "Loop").collect();
+    let idx_loops: Vec<usize> = (0..results.len()).filter(|&i| results[i].group == "Loop").collect();
     kmeans_assign(results, &idx_hits, k, 0);
     kmeans_assign(results, &idx_loops, k, k as i32);
 }

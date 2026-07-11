@@ -108,6 +108,8 @@ fn categorize(name: &str) -> (&'static str, &'static str) {
 
     // Each rule: (canonical group, phrases[], abbrev-tokens[]).
     const RULES: &[(&str, &[&str], &[&str])] = &[
+        // Impulse responses (convolution / cabinet / reverb IRs) — checked early.
+        ("IR", &["impulse response", "impulse", "convolution", "convol", "cabinet", "guitar cab", "reverb ir"], &["ir", "cab", "conv"]),
         // Kick before Bass so "bass drum" -> Kick, plain "bass" -> Bass.
         ("Kick", &["kick", "bass drum", "bassdrum"], &["bd", "kk", "kic", "kck"]),
         ("Snare", &["snare"], &["sd", "sn", "snr"]),
@@ -840,6 +842,8 @@ mod tests {
             ("High Tom.wav", "Tom Hi"), ("HT_rack.wav", "Tom Hi"), ("Tom1.wav", "Tom Hi"),
             ("Crash Cymbal.wav", "Cymbal"), ("CY_splash.wav", "Cymbal"), ("Crsh.wav", "Cymbal"),
             ("OHCYM.wav", "Cymbal"), ("808_CYM.wav", "Cymbal"), ("Tom_cym_hit.wav", "Cymbal"),
+            ("Hall_IR.wav", "IR"), ("guitar_cab.wav", "IR"), ("Impulse_room.wav", "IR"),
+            ("Convolution 01.wav", "IR"),
             ("Ride Bell.wav", "Ride"), ("RD_ping.wav", "Ride"),
             ("Cowbell.wav", "Cowbell"), ("CB_hi.wav", "Cowbell"),
             ("Conga_open.wav", "Conga"), ("Tumba.wav", "Conga"), ("Quinto.wav", "Conga"),

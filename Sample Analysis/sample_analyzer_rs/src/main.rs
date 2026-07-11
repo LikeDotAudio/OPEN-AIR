@@ -101,6 +101,11 @@ fn categorize(name: &str) -> (&'static str, &'static str) {
     let tok = |t: &str| toks.iter().any(|x| *x == t);
     let ph = |p: &str| norm.contains(p);
 
+    // "cym" anywhere ⇒ definitely a cymbal (highest priority).
+    if norm.contains("cym") {
+        return ("Cymbal", "cym");
+    }
+
     // Each rule: (canonical group, phrases[], abbrev-tokens[]).
     const RULES: &[(&str, &[&str], &[&str])] = &[
         // Kick before Bass so "bass drum" -> Kick, plain "bass" -> Bass.
@@ -834,6 +839,7 @@ mod tests {
             ("Mid Tom.wav", "Tom Mid"), ("Tom2.wav", "Tom Mid"),
             ("High Tom.wav", "Tom Hi"), ("HT_rack.wav", "Tom Hi"), ("Tom1.wav", "Tom Hi"),
             ("Crash Cymbal.wav", "Cymbal"), ("CY_splash.wav", "Cymbal"), ("Crsh.wav", "Cymbal"),
+            ("OHCYM.wav", "Cymbal"), ("808_CYM.wav", "Cymbal"), ("Tom_cym_hit.wav", "Cymbal"),
             ("Ride Bell.wav", "Ride"), ("RD_ping.wav", "Ride"),
             ("Cowbell.wav", "Cowbell"), ("CB_hi.wav", "Cowbell"),
             ("Conga_open.wav", "Conga"), ("Tumba.wav", "Conga"), ("Quinto.wav", "Conga"),

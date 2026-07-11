@@ -65,6 +65,82 @@ const WaveThumb = ({ entry, selected, onSelect, scrollRootRef }) => {
     );
 };
 
+const CLOUD_PALETTE = ['#f4902c', '#8ab4f8', '#4caf50', '#e57373', '#ba68c8', '#4dd0e1', '#ffd54f', '#a1887f', '#90a4ae', '#f06292', '#aed581', '#7986cb', '#ff8a65', '#4db6ac', '#dce775', '#9575cd', '#fff'];
+
+const SoundCloudView = ({ data, rootHandle, onSelectFile }) => {
+    const chartRef = React.useRef(null);
+    const echartsInst = React.useRef(null);
+    // Y axis: 'complexity' (timbre) or 'group' (name category — a second Y axis).
+    const [yMode, setYMode] = React.useState('complexity');
+
+    const groups = React.useMemo(() => Array.from(new Set(data.map((d) => d.group || 'Other'))).sort(), [data]);
+    const colorFor = (g) => CLOUD_PALETTE[Math.max(0, groups.indexOf(g)) % CLOUD_PALETTE.length];
+
+    React.useEffect(() => {
+        if (!chartRef.current || !window.echarts) return;
+        echartsInst.current = window.echarts.init(chartRef.current, 'dark');
+
+        const lengths = data.map((d) => d.length);
+        const minL = Math.min(...lengths) || 0.1;
+        const maxL = Math.max(...lengths) || 5.0;
+        const scaleL = (l) => 8 + ((l - minL) / (maxL - minL || 1)) * 20;
+
+        const option = {
+            backgroundColor: 'transparent',
+            tooltip: {
+                formatter: (params) => {
+                    const d = params.data.raw;
+                    return `<b>${d.name}</b><br/>Group: ${d.group || 'Other'}<br/>Pitch: ${(d.pitch || 0).toFixed(1)} Hz<br/>Complexity: ${(d.complexity || 0).toFixed(2)}<br/>Length: ${(d.length || 0).toFixed(2)}s`;
+                },
+            },
+            grid: { left: yMode === 'group' ? 80 : 55, right: 20, top: 20, bottom: 40 },
+            xAxis: { type: 'value', name: 'Pitch (Hz)', nameTextStyle: { color: '#888' }, splitLine: { show: false }, axisLabel: { color: '#666' } },
+            yAxis: yMode === 'group'
+                ? { type: 'category', data: groups, name: 'Name group', nameTextStyle: { color: '#888' }, axisLabel: { color: '#aaa', fontSize: 10 }, splitLine: { lineStyle: { color: '#222' } } }
+                : { type: 'value', name: 'Complexity / Timbre', nameTextStyle: { color: '#888' }, splitLine: { lineStyle: { color: '#222' } }, axisLabel: { color: '#666' } },
+            series: [{
+                type: 'scatter',
+                symbolSize: (v, params) => scaleL(params.data.raw.length),
+                emphasis: { itemStyle: { borderColor: '#fff', borderWidth: 2, opacity: 1 } },
+                data: data.map((d) => {
+                    const g = d.group || 'Other';
+                    const y = yMode === 'group' ? groups.indexOf(g) : d.complexity;
+                    return { value: [d.pitch, y], raw: d, itemStyle: { color: colorFor(g), opacity: 0.75, borderColor: '#000', borderWidth: 0.3 } };
+                }),
+            }],
+        };
+        echartsInst.current.setOption(option);
+
+        const onClick = async (params) => {
+            const d = params.data.raw;
+            try {
+                let h = rootHandle;
+                if (d.sub) { for (const p of d.sub.split(/[\/\\]/)) { if (p) h = await h.getDirectoryHandle(p); } }
+                const fh = await h.getFileHandle(d.name);
+                const file = await fh.getFile();
+                const folder = rootHandle.name + (d.sub ? '/' + d.sub : '');
+                onSelectFile({ name: d.name, folder, file });
+            } catch (e) { console.error('Could not load file from cloud:', e); }
+        };
+        echartsInst.current.on('click', onClick);
+        return () => { if (echartsInst.current) { echartsInst.current.off('click', onClick); echartsInst.current.dispose(); } };
+    }, [data, rootHandle, yMode]);
+
+    const tBtn = (mode, txt) => (
+        <button onClick={() => setYMode(mode)} style={{ background: yMode === mode ? '#f4902c' : '#333', color: yMode === mode ? '#111' : '#ccc', border: '1px solid #444', borderRadius: '3px', padding: '2px 8px', fontSize: '11px', cursor: 'pointer', fontWeight: 'bold' }}>{txt}</button>
+    );
+    return (
+        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '6px 16px', background: '#222', borderBottom: '1px solid #333', fontSize: '11px', color: '#888', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span>X: Pitch · size: Length · colour = name group · click a dot to load</span>
+                <div style={{ flexGrow: 1 }} />
+                <span>Y axis:</span>{tBtn('complexity', 'Complexity')}{tBtn('group', 'Name group')}
+            </div>
+            <div ref={chartRef} style={{ flex: 1, width: '100%' }}></div>
+        </div>
+    );
+};
+
 // One pass over the tree: collect ALL filenames (cheap — for the filter chips)
 // while capping the file HANDLES kept for the thumbnail grid.
 const MAX_FILES = 4000;    // cap on rendered thumbnails
@@ -178,8 +254,10 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     const [favState, setFavState] = window.useMqttState('OpenAir/Gui/SoundFavorites', { items: loadFavs() });
     const favorites = (favState && favState.items) || [];
     React.useEffect(() => { try { localStorage.setItem('oaSoundFavs', JSON.stringify(favorites)); } catch (e) {} }, [favState]);
-    const [view, setView] = React.useState('files');   // 'files' | 'favorites'
+    const [view, setView] = React.useState('files');   // 'files' | 'favorites' | 'cloud'
     const [favEntries, setFavEntries] = React.useState([]);
+    const [cloudData, setCloudData] = React.useState(null);
+    const [cloudErr, setCloudErr] = React.useState('');
     const isFav = (s) => !!s && favorites.some((f) => f.name === s.name && f.folder === (s.folder || ''));
     const toggleFav = () => {
         if (!selected) return;
@@ -189,6 +267,22 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     };
     const showFiles = () => { setView('files'); setSelectedIndex(-1); };
     const showFavorites = async () => { setView('favorites'); setSelectedIndex(-1); if (window.oaEnsureRootPermission) await window.oaEnsureRootPermission(); };
+    const showCloud = async () => { 
+        setView('cloud'); setSelectedIndex(-1); setCloudErr('');
+        if (!supportsFS || !rootHandle) {
+            setCloudErr('Please choose a folder first to view the sample cloud.');
+            return;
+        }
+        try {
+            const fh = await rootHandle.getFileHandle('sample_cloud_data.PEAK');
+            const file = await fh.getFile();
+            const text = await file.text();
+            setCloudData(JSON.parse(text));
+        } catch (e) {
+            setCloudErr('No sample_cloud_data.PEAK found. Run the analyzer on this folder: python3 BackEnd/sample_analyzer_app.py (Rust core, 30 workers).');
+            setCloudData(null);
+        }
+    };
     // Resolve favorite files (from their folder path) when viewing favorites.
     React.useEffect(() => {
         if (view !== 'favorites') return;
@@ -366,6 +460,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                     <div style={{ display: 'flex', border: '1px solid #444', borderRadius: '4px', overflow: 'hidden' }}>
                         <button onClick={showFiles} style={{ background: view === 'files' ? '#f4902c' : '#222', color: view === 'files' ? '#111' : '#ccc', border: 'none', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>FILES</button>
                         <button onClick={showFavorites} style={{ background: view === 'favorites' ? '#f4902c' : '#222', color: view === 'favorites' ? '#111' : '#ccc', border: 'none', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>★ Favorites{favorites.length ? ` (${favorites.length})` : ''}</button>
+                        <button onClick={showCloud} style={{ background: view === 'cloud' ? '#f4902c' : '#222', color: view === 'cloud' ? '#111' : '#ccc', border: 'none', padding: '5px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>☁ THE CLOUD</button>
                     </div>
                     {supportsFS ? (
                         <button onClick={pickFolder} style={tbtn({ background: '#f4902c', color: '#111', border: 'none', fontWeight: 'bold' })}>📁 Choose folder…</button>
@@ -421,6 +516,30 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
                                             <WaveThumb entry={entry} selected={i === selectedIndex} onSelect={() => selectFileByIndex(i)} scrollRootRef={gridScrollRef} />
                                         </div>
                                     ))}
+                                </div>
+                            ) : view === 'cloud' ? (
+                                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                                    {cloudErr ? (
+                                        <div style={{ color: '#ccc', fontSize: '13px', padding: '30px', textAlign: 'center', lineHeight: '1.6' }}>
+                                            <div style={{ fontSize: '24px', marginBottom: '10px' }}>☁️</div>
+                                            {cloudErr}
+                                        </div>
+                                    ) : cloudData ? (
+                                        <SoundCloudView data={cloudData} rootHandle={rootHandle} onSelectFile={(entry) => {
+                                            setSelected(entry);
+                                            // Auto-play when selected in cloud
+                                            const playIt = async () => {
+                                                setPos(0);
+                                                try {
+                                                    const buf = await window.oaDecodeAudio(window.oaAudioCtx(), await entry.file.arrayBuffer());
+                                                    setBuffer(buf);
+                                                } catch(e) {}
+                                            };
+                                            playIt();
+                                        }} />
+                                    ) : (
+                                        <div style={{ color: '#888', fontSize: '12px', padding: '30px', textAlign: 'center' }}>Loading cloud...</div>
+                                    )}
                                 </div>
                             ) : (
                                 <div style={{ color: '#666', fontSize: '12px', padding: '30px', textAlign: 'center' }}>

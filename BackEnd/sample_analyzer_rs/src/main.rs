@@ -24,9 +24,40 @@ struct Peak {
     folder: String, // sub-folder relative to the scanned root ("" = root)
     sub: String,    // alias of `folder` (SoundCloud view compatibility)
     path: String,   // absolute path
+    group: String,  // name-derived category (Kick, Snare, HiHat, … Other)
     length: f64,
     pitch: f64,
     complexity: f64,
+}
+
+/// Categorize a sample by its file name (for the cloud's name axis / grouping).
+fn categorize(name: &str) -> &'static str {
+    let n = name.to_lowercase();
+    const GROUPS: &[(&str, &[&str])] = &[
+        ("Kick", &["kick", "bd", "bassdrum"]),
+        ("Snare", &["snare", "snr", "sd"]),
+        ("HiHat", &["hihat", "hi-hat", "hh", "hat"]),
+        ("Clap", &["clap", "clp"]),
+        ("Rim", &["rimshot", "rim", "rs"]),
+        ("Tom", &["tom"]),
+        ("Cymbal", &["cymbal", "cym", "crash"]),
+        ("Ride", &["ride"]),
+        ("Cowbell", &["cowbell", "cowb", "cow"]),
+        ("Conga", &["conga", "cng"]),
+        ("Clave", &["clave", "clav"]),
+        ("Shaker", &["shaker", "shk"]),
+        ("Perc", &["perc", "prc"]),
+        ("Bass", &["bass", "808", "sub"]),
+        ("Vocal", &["vocal", "vox", "voice"]),
+        ("Loop", &["loop"]),
+        ("FX", &["fx", "sfx", "riser", "sweep", "noise", "atmos"]),
+    ];
+    for (cat, kws) in GROUPS {
+        if kws.iter().any(|k| n.contains(k)) {
+            return cat;
+        }
+    }
+    "Other"
 }
 
 fn main() {
@@ -81,7 +112,7 @@ fn main() {
                 match &res {
                     Some(p) => emit(&serde_json::json!({
                         "type": "result", "done": n, "total": total,
-                        "name": p.name, "folder": p.folder,
+                        "name": p.name, "folder": p.folder, "group": p.group,
                         "pitch": p.pitch, "complexity": p.complexity, "length": p.length
                     })),
                     None => emit(&serde_json::json!({
@@ -207,11 +238,13 @@ fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     let name = path.file_name().and_then(|x| x.to_str()).unwrap_or("").to_string();
     let parent = path.parent().unwrap_or(root);
     let folder = parent.strip_prefix(root).ok().map(|p| p.to_string_lossy().replace('\\', "/")).unwrap_or_default();
+    let group = categorize(&name).to_string();
     Some(Peak {
         name,
         folder: folder.clone(),
         sub: folder,
         path: path.to_string_lossy().to_string(),
+        group,
         length,
         pitch: pitch_out,
         complexity,

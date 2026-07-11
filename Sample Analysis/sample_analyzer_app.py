@@ -80,6 +80,10 @@ class AnalyzerApp:
         self._sel_txt = None        # overlay annotation for the selected point
         self._sel_marker = None     # highlight marker for the selected point
 
+        self.group_vars = {}        # group name -> BooleanVar (visible?)
+        self._group_box_keys = None # last set of groups drawn as checkboxes
+        self._pt_recs = []          # records parallel to the plotted points
+
         # full records (from the .PEAK file) for the Groups / Examiner tabs
         self.records = []
         self.peak_path = None
@@ -111,6 +115,7 @@ class AnalyzerApp:
         self._build_cloud_tab()
         self._build_groups_tab()
         self._build_examiner_tab()
+        self._build_rename_tab()
 
     def _build_cloud_tab(self):
         tab = ttk.Frame(self.notebook)
@@ -129,13 +134,44 @@ class AnalyzerApp:
         self.sel_label = ttk.Label(views, text="Click a point to inspect", foreground="#c47a1a")
         self.sel_label.pack(side=tk.RIGHT, padx=8)
 
-        # Live 3D cloud — fill the whole panel, minimal margins.
+        body = ttk.Frame(tab)
+        body.pack(fill=tk.BOTH, expand=True)
+
+        # --- left sidebar: show/hide groups + isolated-axis picker ---
+        side = ttk.Frame(body, padding=(6, 4), width=190)
+        side.pack(side=tk.LEFT, fill=tk.Y)
+        side.pack_propagate(False)
+        ttk.Label(side, text="Groups (show / hide)", font=("Helvetica", 9, "bold")).pack(anchor=tk.W)
+        btns = ttk.Frame(side)
+        btns.pack(fill=tk.X, pady=(2, 4))
+        ttk.Button(btns, text="All", width=5, command=lambda: self._set_all_groups(True)).pack(side=tk.LEFT)
+        ttk.Button(btns, text="None", width=5, command=lambda: self._set_all_groups(False)).pack(side=tk.LEFT, padx=3)
+        # scrollable checkbox list
+        gc = tk.Canvas(side, highlightthickness=0, bg="#f0f0f0", width=170)
+        gsb = ttk.Scrollbar(side, orient=tk.VERTICAL, command=gc.yview)
+        self.group_box = ttk.Frame(gc)
+        self.group_box.bind("<Configure>", lambda e: gc.configure(scrollregion=gc.bbox("all")))
+        gc.create_window((0, 0), window=self.group_box, anchor="nw")
+        gc.configure(yscrollcommand=gsb.set)
+        gc.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        gsb.pack(side=tk.RIGHT, fill=tk.Y)
+
+        ttk.Separator(side, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=6)
+        ttk.Label(side, text="When 1 group is isolated,\nY axis becomes:", justify=tk.LEFT).pack(anchor=tk.W)
+        self.iso_axis = tk.StringVar(value="Group")
+        ttk.Combobox(side, textvariable=self.iso_axis, state="readonly", width=18,
+                     values=[lbl for lbl, _k in self.ISO_FEATURES]).pack(anchor=tk.W, pady=3)
+        self.iso_axis.trace_add("write", lambda *_: self._redraw_cloud())
+
+        # --- right: the 3D cloud, fills the rest ---
+        right = ttk.Frame(body)
+        right.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.fig = Figure(figsize=(7, 4.4), dpi=100, facecolor="#1b1b1b")
         self.ax = self.fig.add_subplot(111, projection="3d", facecolor="#0f0f0f")
         self.fig.subplots_adjust(left=0.0, right=1.0, bottom=0.0, top=1.0)
         self._style_axes()
         self.scatter = self.ax.scatter([], [], [], depthshade=True)
-        self.canvas = FigureCanvasTkAgg(self.fig, master=tab)
+        self.canvas = FigureCanvasTkAgg(self.fig, master=right)
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
         self.canvas.mpl_connect("scroll_event", self._on_scroll)
         self.canvas.mpl_connect("button_press_event", self._on_click_point)
@@ -225,6 +261,154 @@ class AnalyzerApp:
                                    insertbackground="#ccc", font=("Courier", 9), wrap=tk.NONE)
         body.add(self.exam_detail, weight=1)
 
+    # ---- Flatten / Rename tab --------------------------------------------
+    def _build_rename_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Flatten / Rename")
+
+        top = ttk.Frame(tab, padding=6)
+        top.pack(fill=tk.X)
+        ttk.Button(top, text="Pick Directory…", command=self._rename_pick).pack(side=tk.LEFT)
+        self.rename_dir = tk.StringVar(value="No directory selected")
+        ttk.Label(top, textvariable=self.rename_dir, foreground="#c47a1a", wraplength=360).pack(side=tk.LEFT, padx=8)
+
+        opt = ttk.Frame(tab, padding=(6, 0))
+        opt.pack(fill=tk.X)
+        self.rename_flatten = tk.BooleanVar(value=True)
+        ttk.Checkbutton(opt, text="Flatten into the picked folder (move files up)",
+                        variable=self.rename_flatten, command=self._rename_scan).pack(side=tk.LEFT)
+        self.rename_audio_only = tk.BooleanVar(value=False)
+        ttk.Checkbutton(opt, text="Audio files only", variable=self.rename_audio_only,
+                        command=self._rename_scan).pack(side=tk.LEFT, padx=12)
+
+        ctl = ttk.Frame(tab, padding=(6, 4))
+        ctl.pack(fill=tk.X)
+        ttk.Button(ctl, text="Rescan", command=self._rename_scan).pack(side=tk.LEFT)
+        ttk.Button(ctl, text="Apply Rename", command=self._rename_apply).pack(side=tk.LEFT, padx=8)
+        self.rename_summary = ttk.Label(ctl, text="Pick a directory to preview.", foreground="#888")
+        self.rename_summary.pack(side=tk.RIGHT)
+
+        wrap = ttk.Frame(tab)
+        wrap.pack(fill=tk.BOTH, expand=True)
+        tv = ttk.Treeview(wrap, columns=("old", "new"), show="headings")
+        tv.heading("old", text="Old folder structure  (relative)")
+        tv.column("old", width=380, anchor=tk.W)
+        tv.heading("new", text="New file name")
+        tv.column("new", width=380, anchor=tk.W)
+        vs = ttk.Scrollbar(wrap, orient=tk.VERTICAL, command=tv.yview)
+        tv.configure(yscrollcommand=vs.set)
+        vs.pack(side=tk.RIGHT, fill=tk.Y)
+        tv.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        tv.tag_configure("collide", foreground="#c33")
+        tv.tag_configure("noop", foreground="#777")
+        self.rename_tv = tv
+        self.rename_map = []
+
+    AUDIO_EXTS = (".wav", ".aif", ".aiff", ".aifc", ".mp3", ".flac", ".ogg", ".m4a")
+
+    def _rename_pick(self):
+        d = filedialog.askdirectory(title="Select folder to flatten / rename")
+        if d:
+            self.rename_dir.set(d)
+            self._rename_scan()
+
+    def _encode_name(self, root, abspath):
+        """A/B/C/D.wav (relative to the picked root's PARENT) -> 'A-B-C-D.wav'."""
+        rel = os.path.relpath(abspath, os.path.dirname(root))
+        parts = [p for p in rel.replace("\\", "/").split("/") if p]
+        return "-".join(parts)
+
+    def _rename_scan(self):
+        tv = self.rename_tv
+        tv.delete(*tv.get_children())
+        self.rename_map = []
+        root = self.rename_dir.get()
+        if not os.path.isdir(root):
+            return
+        flatten = self.rename_flatten.get()
+        audio_only = self.rename_audio_only.get()
+        targets = {}   # new_abs -> count (collision detection)
+        rows = []
+        for dirpath, _dirs, files in os.walk(root):
+            for fn in sorted(files):
+                if fn.startswith("."):
+                    continue
+                if audio_only and not fn.lower().endswith(self.AUDIO_EXTS):
+                    continue
+                abspath = os.path.join(dirpath, fn)
+                new_name = self._encode_name(root, abspath)
+                dest_dir = root if flatten else dirpath
+                new_abs = os.path.join(dest_dir, new_name)
+                rel = os.path.relpath(abspath, root)
+                rows.append([abspath, rel, new_name, new_abs])
+                targets[new_abs] = targets.get(new_abs, 0) + 1
+
+        n_change = n_noop = n_collide = 0
+        for abspath, rel, new_name, new_abs in rows:
+            tags = ()
+            if new_abs == abspath:
+                tags = ("noop",); n_noop += 1
+            elif targets[new_abs] > 1:
+                tags = ("collide",); n_collide += 1
+            else:
+                n_change += 1
+            tv.insert("", "end", values=(rel, new_name), tags=tags)
+        self.rename_map = rows
+        self.rename_summary.config(
+            text=f"{len(rows)} files · {n_change} to rename · {n_noop} unchanged · "
+                 f"{n_collide} name clashes (auto-suffixed on apply)")
+
+    def _rename_apply(self):
+        if not self.rename_map:
+            messagebox.showinfo("Apply Rename", "Nothing to rename — pick a directory first.")
+            return
+        flatten = self.rename_flatten.get()
+        todo = [r for r in self.rename_map if r[3] != r[0]]
+        if not todo:
+            messagebox.showinfo("Apply Rename", "All files are already named correctly.")
+            return
+        if not messagebox.askyesno(
+                "Apply Rename",
+                f"Rename {len(todo)} file(s)?\n\n"
+                + ("Files will be MOVED up into the picked folder.\n" if flatten else "Files renamed in place.\n")
+                + "This modifies files on disk. Continue?"):
+            return
+
+        used = set()
+        # Pre-seed with files that keep their name (no-ops) so we don't clobber them.
+        for abspath, rel, new_name, new_abs in self.rename_map:
+            if new_abs == abspath:
+                used.add(new_abs)
+        ok = fail = 0
+        errors = []
+        for abspath, rel, new_name, new_abs in todo:
+            dest = self._dedupe(new_abs, used)
+            used.add(dest)
+            try:
+                os.makedirs(os.path.dirname(dest), exist_ok=True)
+                shutil.move(abspath, dest)
+                ok += 1
+            except Exception as e:
+                fail += 1
+                errors.append(f"{rel}: {e}")
+        msg = f"Renamed {ok} file(s)."
+        if fail:
+            msg += f"\n{fail} failed:\n" + "\n".join(errors[:8])
+        messagebox.showinfo("Apply Rename", msg)
+        self._rename_scan()
+
+    @staticmethod
+    def _dedupe(path, used):
+        if path not in used and not os.path.exists(path):
+            return path
+        base, ext = os.path.splitext(path)
+        i = 2
+        while True:
+            cand = f"{base}-{i}{ext}"
+            if cand not in used and not os.path.exists(cand):
+                return cand
+            i += 1
+
     def _style_axes(self):
         self.ax.set_xlabel("Pitch (Hz)", color="#aaa", labelpad=8)
         self.ax.set_ylabel("Name group", color="#aaa", labelpad=12)
@@ -242,6 +426,43 @@ class AnalyzerApp:
 
     def _color_for(self, groups, g):
         return CLOUD_PALETTE[max(0, groups.index(g)) % len(CLOUD_PALETTE)]
+
+    # Features that can replace the Y (group) axis when a single group is isolated.
+    ISO_FEATURES = [
+        ("Group", None), ("Complexity", "complexity"), ("Brightness (centroid)", "centroid"),
+        ("Harmonicity", "harmonicity"), ("Attack", "attack"), ("Length", "length"),
+        ("Pitch", "pitch"), ("BPM", "bpm"), ("RMS", "rms"), ("ZCR", "zcr"),
+        ("Roll-off", "rolloff"), ("Flatness", "flatness"),
+    ]
+
+    def _iso_key(self):
+        lbl = self.iso_axis.get()
+        for l, k in self.ISO_FEATURES:
+            if l == lbl:
+                return k
+        return None
+
+    def _sync_group_checkboxes(self, all_groups):
+        """(Re)build the group show/hide checkboxes when the group set changes."""
+        if all_groups == self._group_box_keys:
+            return
+        for w in self.group_box.winfo_children():
+            w.destroy()
+        for g in all_groups:
+            var = self.group_vars.get(g)
+            if var is None:
+                var = tk.BooleanVar(value=True)
+                self.group_vars[g] = var
+            cb = tk.Checkbutton(self.group_box, text=g, variable=var, anchor="w",
+                                bg="#f0f0f0", activebackground="#f0f0f0",
+                                command=self._redraw_cloud)
+            cb.pack(fill=tk.X, anchor="w")
+        self._group_box_keys = list(all_groups)
+
+    def _set_all_groups(self, on):
+        for var in self.group_vars.values():
+            var.set(on)
+        self._redraw_cloud()
 
     def _apply_zoom(self):
         # Modern matplotlib: box_aspect(zoom=...); fall back to camera distance.
@@ -280,9 +501,9 @@ class AnalyzerApp:
         self._select_point(i)
 
     def _select_point(self, i):
-        if i < 0 or i >= len(self.d_rec):
+        if i < 0 or i >= len(self._pt_recs):
             return
-        rec = self.d_rec[i]
+        rec = self._pt_recs[i]
         self.selected_rec = rec
         self.play_btn.config(state=tk.NORMAL)
         self.sel_label.config(text=rec.get("name", "")[:40])
@@ -559,23 +780,49 @@ class AnalyzerApp:
         self.root.after(120, self._drain_queue)
 
     def _redraw_cloud(self):
+        if not self.d_rec:
+            return
         # Preserve the user's current view angle across live updates.
         elev, azim = self.ax.elev, self.ax.azim
 
-        groups = sorted(set(self.d_group))
-        gidx = {g: i for i, g in enumerate(groups)}
-        xs = np.array(self.d_pitch, dtype=float)
-        ys = np.array([gidx[g] for g in self.d_group], dtype=float)  # depth = name group
-        zs = np.array(self.d_cx, dtype=float)
+        def grp(r):
+            return r.get("group", "Other") or "Other"
 
-        # size = length (bigger file span -> bigger dot).
-        lmin = min(self.d_len); lmax = max(self.d_len)
+        all_groups = sorted(set(grp(r) for r in self.d_rec))
+        self._sync_group_checkboxes(all_groups)
+        visible = {g for g in all_groups if g not in self.group_vars or self.group_vars[g].get()}
+        recs = [r for r in self.d_rec if grp(r) in visible]
+
+        if not recs:
+            self.scatter._offsets3d = ([], [], [])
+            self._pts = (np.array([]), np.array([]), np.array([]))
+            self._pt_recs = []
+            self.ax.set_title("(all groups hidden)", color="#888", fontsize=9)
+            self.canvas.draw_idle()
+            return
+
+        groups = sorted(set(grp(r) for r in recs))
+        iso_key = self._iso_key()
+        isolated = len(groups) == 1 and iso_key is not None
+
+        xs = np.array([r.get("pitch", 0) or 0 for r in recs], dtype=float)
+        zs = np.array([r.get("complexity", 0) or 0 for r in recs], dtype=float)
+        if isolated:
+            ys = np.array([r.get(iso_key, 0) or 0 for r in recs], dtype=float)
+            ylabel = self.iso_axis.get()
+        else:
+            gidx = {g: i for i, g in enumerate(groups)}
+            ys = np.array([gidx[grp(r)] for r in recs], dtype=float)
+            ylabel = "Name group"
+
+        lens = [r.get("length", 0.1) or 0.1 for r in recs]
+        lmin, lmax = min(lens), max(lens)
         span = (lmax - lmin) or 1.0
-        sizes = np.array([25 + ((l - lmin) / span) * 260 for l in self.d_len])
-        colors = [self._color_for(groups, g) for g in self.d_group]
+        sizes = np.array([25 + ((l - lmin) / span) * 260 for l in lens])
+        colors = [self._color_for(groups, grp(r)) for r in recs]
 
-        self._pts = (xs, ys, zs)  # remember for click-picking
-        # Update the single collection in place (keeps it fast + smooth).
+        self._pts = (xs, ys, zs)
+        self._pt_recs = recs
         self.scatter._offsets3d = (xs, ys, zs)
         self.scatter.set_sizes(sizes)
         self.scatter.set_color(colors)
@@ -583,12 +830,20 @@ class AnalyzerApp:
 
         self.ax.set_xlim(0, float(xs.max()) * 1.1 + 1)
         self.ax.set_zlim(0, float(zs.max()) * 1.1 + 1)
-        self.ax.set_ylim(-0.5, len(groups) - 0.5)
-        self.ax.set_yticks(range(len(groups)))
-        self.ax.set_yticklabels(groups, fontsize=7, color="#bbb")
+        self.ax.set_ylabel(ylabel, color="#aaa", labelpad=12)
+        if isolated:
+            ymax = float(ys.max()) or 1.0
+            self.ax.set_ylim(0, ymax * 1.1 + 1e-9)
+            self.ax.set_yticks(np.linspace(0, ymax, 5))
+            self.ax.set_yticklabels([f"{v:.2g}" for v in np.linspace(0, ymax, 5)], fontsize=7, color="#bbb")
+        else:
+            self.ax.set_ylim(-0.5, len(groups) - 0.5)
+            self.ax.set_yticks(range(len(groups)))
+            self.ax.set_yticklabels(groups, fontsize=7, color="#bbb")
 
-        # Rebuild the colour legend only when the set of groups changes.
-        if groups != self._legend_groups:
+        # Rebuild the colour legend when the visible set / axis mode changes.
+        legend_key = (tuple(groups), isolated, ylabel)
+        if legend_key != self._legend_groups:
             handles = [Line2D([0], [0], marker="o", linestyle="", markersize=6,
                               markerfacecolor=self._color_for(groups, g), markeredgecolor="none", label=g)
                        for g in groups]
@@ -599,11 +854,12 @@ class AnalyzerApp:
                 leg.set_title("Name group", prop={"size": 7})
                 if leg.get_title():
                     leg.get_title().set_color("#888")
-            self._legend_groups = groups
+            self._legend_groups = legend_key
 
-        n = len(self.d_pitch)
+        n = len(recs)
+        extra = f" · ISOLATED: {groups[0]} (Y = {ylabel})" if isolated else ""
         self.ax.set_title(
-            f"{n} samples  ·  {len(groups)} groups  ·  {self.n_loops} loops  ·  size = length",
+            f"{n} shown  ·  {len(groups)}/{len(all_groups)} groups  ·  size = length{extra}",
             color="#f4902c", fontsize=9)
 
         self.ax.view_init(elev=elev, azim=azim)

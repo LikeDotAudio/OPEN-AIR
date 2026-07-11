@@ -33,6 +33,7 @@ mod label;
 mod normalize;
 mod peak;
 mod pitch;
+mod root;
 mod run;
 mod sidecar;
 mod spectrum;

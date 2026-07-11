@@ -118,7 +118,16 @@ const TrackSampleMenu = ({ trkIdx, trackName, anchor, version, onBrowse, onClose
 
     const applyPitch = (s) => { setPitchSemi(s); window.oaUpdateDrumSample(trkIdx, { pitch: Math.pow(2, s / 12) }); onChange && onChange(); };
     const applyOffset = (o) => { setOffset(o); window.oaUpdateDrumSample(trkIdx, { offset: o }); onChange && onChange(); };
-    const applyLoop = (b) => { setLoop(b); window.oaUpdateDrumSample(trkIdx, { loop: b }); onChange && onChange(); };
+    const applyLoop = (b) => {
+        setLoop(b);
+        window.oaUpdateDrumSample(trkIdx, { loop: b });
+        // Checking Loop starts a looping preview immediately; unchecking stops it.
+        const loops = window.OA_DRUM_LOOPS || (window.OA_DRUM_LOOPS = {});
+        const existing = loops[trkIdx];
+        if (existing) { try { existing.stop(); } catch (e) {} loops[trkIdx] = null; }
+        if (b && hasBuf && window.oaTriggerDrum) window.oaTriggerDrum(trkIdx, 1);
+        onChange && onChange();
+    };
     const applyEnd = (val) => { setEnd(val); window.oaUpdateDrumSample(trkIdx, { end: val }); onChange && onChange(); };
     const dur = hasBuf ? entry.buffer.duration : 0;
 
@@ -173,10 +182,12 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     // Live sequence (grid + tempo) — pushed to and read from MQTT. Wrapped in an
     // object so useMqttState treats it as a structured payload, not a scalar.
-    const [seq, setSeq] = window.useMqttState(patternTopic, { grid: emptyPattern(DEFAULT_STEPS), bpm: 120, steps: DEFAULT_STEPS });
+    const [seq, setSeq] = window.useMqttState(patternTopic, { grid: emptyPattern(DEFAULT_STEPS), bpm: 120, steps: DEFAULT_STEPS, toneTrack: [], toneRoot: null });
     const steps = (seq && seq.steps) || DEFAULT_STEPS;
     const pattern = (seq && seq.grid) || emptyPattern(steps);
     const bpm = (seq && seq.bpm) || 120;
+    const toneTrack = (seq && seq.toneTrack) || [];
+    const toneRoot = (seq && seq.toneRoot !== undefined) ? seq.toneRoot : null;
 
     // The scheduler runs in a stale RAF closure, so it reads live values via refs.
     // This is what makes a step toggled ON mid-playback sound on its next pass,
@@ -187,9 +198,13 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     patternRef.current = pattern;
     const bpmRef = React.useRef(bpm);
     bpmRef.current = bpm;
+    const toneTrackRef = React.useRef(toneTrack);
+    toneTrackRef.current = toneTrack;
+    const toneRootRef = React.useRef(toneRoot);
+    toneRootRef.current = toneRoot;
 
-    const setPattern = (grid) => setSeq({ grid, bpm, steps });
-    const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm, steps });
+    const setPattern = (grid) => setSeq({ grid, bpm, steps, toneTrack, toneRoot });
+    const setBpm = (nextBpm) => setSeq({ grid: pattern, bpm: nextBpm, steps, toneTrack, toneRoot });
 
     // Tap tempo — average the last few tap intervals; flashes the knob per tap.
     const tapTimesRef = React.useRef([]);
@@ -217,7 +232,9 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
             while (r.length < n) r.push(0);
             return r;
         });
-        setSeq({ grid, bpm, steps: n });
+        const tt = toneTrack.slice(0, n);
+        while (tt.length < n) tt.push(null);
+        setSeq({ grid, bpm, steps: n, toneTrack: tt, toneRoot });
     };
 
     // Per-track mute: silences that track's audio but keeps its pattern intact.
@@ -258,7 +275,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
         const v = Math.max(0, Math.min(100, Math.round(vel)));
         const grid = patternRef.current.map((r) => r.slice());
         grid[trkIdx][step] = v;
-        setSeqRef.current({ grid, bpm: bpmRef.current, steps: stepsRef.current });
+        setSeqRef.current({ grid, bpm: bpmRef.current, steps: stepsRef.current, toneTrack: toneTrackRef.current, toneRoot: toneRootRef.current });
     };
 
     // One-shot preview of a track's voice (never loops) — audible feedback when
@@ -286,8 +303,42 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 return next;
             });
         };
+        const onToneHit = (e) => {
+            if (!recordingRef.current || !playingRef.current) return;
+            const { rootIdx, semitones, velocity } = e.detail;
+            if (rootIdx == null || semitones == null) return;
+            
+            const step = currentStepRef.current % stepsRef.current;
+            setSeqRef.current(prev => {
+                const tt = [...(prev.toneTrack || Array(prev.steps).fill(null))];
+                tt[step] = { vel: Math.max(1, (velocity || 100)), pitch: semitones };
+                return { ...prev, toneRoot: rootIdx, toneTrack: tt };
+            });
+            setRecordedNotes(prev => {
+                const next = new Set(prev);
+                next.add(`tone-${step}`);
+                return next;
+            });
+        };
+        const onToneMode = (e) => {
+            const rootIdx = e.detail && e.detail.rootIdx;
+            if (rootIdx !== undefined) {
+                setSeqRef.current(prev => ({ 
+                    ...prev, 
+                    toneRoot: rootIdx, 
+                    toneTrack: prev.toneTrack && prev.toneTrack.length > 0 ? prev.toneTrack : Array(prev.steps || DEFAULT_STEPS).fill(null) 
+                }));
+            }
+        };
+
         window.addEventListener('oa-drum-hit', onDrumHit);
-        return () => window.removeEventListener('oa-drum-hit', onDrumHit);
+        window.addEventListener('oa-tone-hit', onToneHit);
+        window.addEventListener('oa-tone-mode', onToneMode);
+        return () => {
+            window.removeEventListener('oa-drum-hit', onDrumHit);
+            window.removeEventListener('oa-tone-hit', onToneHit);
+            window.removeEventListener('oa-tone-mode', onToneMode);
+        };
     }, []);
 
     // Per-track sample menu (click a track name) + its Browse target.
@@ -380,6 +431,20 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                 }
             }
         });
+
+        // Play tone track
+        const tTrack = toneTrackRef.current;
+        const tRoot = toneRootRef.current;
+        if (tTrack && tRoot !== null && tTrack[stepNumber]) {
+            const { vel, pitch } = tTrack[stepNumber];
+            if (vel > 0 && window.oaTriggerTone) {
+                const vol = (vel / 100) * (trackVolRef.current[tRoot] == null ? 1 : trackVolRef.current[tRoot]);
+                window.oaTriggerTone(tRoot, pitch, vol, time);
+                // Flash pad (we fake a drum play for the root pad so it glows)
+                const glowDelay = Math.max(0, (time - ctx.currentTime) * 1000);
+                setTimeout(() => window.dispatchEvent(new CustomEvent('oa-drum-play', { detail: { idx: tRoot, velocity: vel } })), glowDelay);
+            }
+        }
     };
 
     const scheduler = () => {
@@ -469,7 +534,7 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
     const savePattern = () => {
         const name = (window.prompt('Save pattern as:', `Pattern ${library.length + 1}`) || '').trim();
         if (!name) return;
-        const entry = { name, bpm, steps, data: clonePattern(pattern) };
+        const entry = { name, bpm, steps, data: clonePattern(pattern), toneTrack, toneRoot };
         // Overwrite an existing entry with the same name, otherwise append
         const idx = library.findIndex((p) => p.name === name);
         let next;
@@ -484,14 +549,20 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
 
     const loadPattern = (entry) => {
         const loadedSteps = (entry.data[0] && entry.data[0].length) || entry.steps || DEFAULT_STEPS;
-        setSeq({ grid: clonePattern(entry.data), bpm: entry.bpm || bpm, steps: loadedSteps });
+        setSeq({ 
+            grid: clonePattern(entry.data), 
+            bpm: entry.bpm || bpm, 
+            steps: loadedSteps,
+            toneTrack: entry.toneTrack || Array(loadedSteps).fill(null),
+            toneRoot: entry.toneRoot !== undefined ? entry.toneRoot : null
+        });
     };
 
     const deletePattern = (name) => {
         setLibraryItems(library.filter((p) => p.name !== name));
     };
 
-    const clearPattern = () => setSeq({ grid: emptyPattern(steps), bpm, steps });
+    const clearPattern = () => setSeq({ grid: emptyPattern(steps), bpm, steps, toneTrack: Array(steps).fill(null), toneRoot: null });
 
     // RENDER: bounce one loop of the pattern to a loopable WAV and download it.
     // Rendered with a tail; the tail is folded back onto the start so decays that
@@ -658,6 +729,63 @@ const Sequencer = ({ label = "Pattern Sequencer" }) => {
                   );
                 })}
             </div>
+
+            {toneRoot !== null && (
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginTop: '10px', paddingTop: '10px', borderTop: '1px dashed #1976d2', paddingBottom: '8px' }}>
+                    <div style={{ width: '110px', flexShrink: 0, paddingRight: '6px' }}>
+                        <span style={{ fontSize: '11px', color: '#64b5f6', fontWeight: 'bold' }}>
+                            TONE: {(TRACKS[toneRoot] && TRACKS[toneRoot].name) || `Pad ${toneRoot+1}`}
+                        </span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '3px', background: '#001a33', padding: '4px', borderRadius: '4px', border: '1px solid #003366' }}>
+                        {[...Array(steps)].map((_, step) => {
+                            const noteData = toneTrack[step];
+                            const isLit = noteData && noteData.vel > 0;
+                            const isBeat = step % 4 === 0;
+                            const isCurrent = isPlaying && currentStep === step;
+                            const isNewlyRecorded = recordedNotes.has(`tone-${step}`);
+                            
+                            const pitch = isLit ? noteData.pitch : 0;
+                            const pitchPercent = (pitch / 15) * 100;
+                            
+                            return (
+                                <div key={`tone-${step}`}
+                                    onPointerDown={(e) => {
+                                        e.preventDefault();
+                                        const current = toneTrackRef.current[step];
+                                        const nextVel = current && current.vel > 0 ? 0 : 100;
+                                        // Default to root pitch (0) if none
+                                        const nextPitch = current ? current.pitch : 0;
+                                        
+                                        const newTrack = [...toneTrackRef.current];
+                                        newTrack[step] = nextVel > 0 ? { vel: nextVel, pitch: nextPitch } : null;
+                                        if (recordingRef.current && nextVel > 0) {
+                                            setRecordedNotes(prev => { const next = new Set(prev); next.add(`tone-${step}`); return next; });
+                                        }
+                                        setSeqRef.current({ grid: patternRef.current, bpm: bpmRef.current, steps: stepsRef.current, toneTrack: newTrack, toneRoot: toneRootRef.current });
+                                        if (nextVel > 0 && window.oaTriggerTone) window.oaTriggerTone(toneRootRef.current, nextPitch, 1);
+                                    }}
+                                    title={isLit ? `Pitch: +${pitch} st · Vel: ${noteData.vel}` : 'Click to add/remove note'}
+                                    style={{
+                                        position: 'relative', overflow: 'hidden',
+                                        width: '18px', height: '20px',
+                                        backgroundColor: isCurrent ? '#fff' : (isBeat && !isLit ? '#00264d' : '#0a1929'),
+                                        border: isLit ? (isNewlyRecorded ? '1px solid #ff5252' : '1px solid #42a5f5') : '1px solid #001122',
+                                        cursor: 'pointer', borderRadius: '2px', touchAction: 'none',
+                                        boxShadow: isLit ? (isNewlyRecorded ? `0 0 4px rgba(211,47,47,0.6)` : `0 0 4px rgba(66,165,245,0.6)`) : 'none',
+                                    }}>
+                                    {isLit && !isCurrent && (
+                                        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: `${Math.max(14, noteData.vel)}%`, background: isNewlyRecorded ? `rgba(211,47,47,0.7)` : `rgba(66,165,245,0.7)`, pointerEvents: 'none' }} />
+                                    )}
+                                    {isLit && (
+                                        <div style={{ position: 'absolute', left: 0, right: 0, bottom: `${Math.min(90, pitchPercent)}%`, height: '2px', background: '#fff', pointerEvents: 'none' }} />
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
 
             <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '8px' }}>
                 <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>

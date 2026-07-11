@@ -279,7 +279,7 @@ class GraphMixin:
         lines.append("")
         for k, label, fmt in (
             ("group", "group", "{}"), ("reason", "reason", "{}"), ("timbre", "timbre", "{}"),
-            ("cluster", "cluster", "{}"), ("pitch", "pitch", "{:.0f} Hz"),
+            ("cluster", "cluster", "{}"), ("root", "root", "{}"), ("pitch", "pitch", "{:.0f} Hz"),
             ("centroid", "brightness", "{:.0f} Hz"), ("harmonicity", "harmonicity", "{:.2f}"),
             ("complexity", "complexity", "{:.1f}"), ("attack", "attack", "{:.3f} s"),
             ("length", "length", "{:.2f} s"), ("transients", "transients", "{}"),

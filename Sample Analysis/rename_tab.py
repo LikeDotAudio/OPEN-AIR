@@ -21,7 +21,7 @@ class RenameMixin:
     # .PEAK fields shown as columns in the renamer: (key, header, width).
     RENAME_PEAK_COLS = [
         ("group", "Group", 70), ("subgroup", "Subgroup", 105), ("timbre", "Timbre", 70),
-        ("length_class", "Len tier", 60), ("pitch", "Pitch", 55), ("length", "Len s", 50),
+        ("length_class", "Len tier", 60), ("root", "Root", 46), ("pitch", "Pitch", 55), ("length", "Len s", 50),
         ("transients", "Tr", 34), ("sustained", "Sust", 40), ("audit", "Audit", 44),
         ("bpm", "BPM", 46), ("channels", "Ch", 46), ("sample_rate", "SR", 50),
         ("bit_depth", "Bits", 38), ("harmonicity", "Harm", 46), ("centroid", "Bright", 55),
@@ -148,6 +148,76 @@ class RenameMixin:
     def _safe_folder(name):
         return re.sub(r'[\\/:*?"<>|]+', "_", str(name)).strip() or "Unsorted"
 
+    # Name/keyword → (group, subgroup) rules, mirroring the Rust analyzer's
+    # categorize() so the renamer can still sort by name (e.g. "Bass Drum" → Kick)
+    # when a file has no .PEAK record. (group, subgroup, phrases, abbrev-tokens).
+    _NAME_RULES = [
+        ("IR", "", ["impulse response", "impulse", "convolution", "convol", "cabinet", "guitar cab", "reverb ir"], ["ir", "cab", "conv"]),
+        ("Kick", "", ["kick", "kik", "bass drum", "bassdrum"], ["bd", "kk", "kik", "kic", "kck"]),
+        ("Snare", "", ["snare"], ["sd", "sn", "snr"]),
+        ("HiHat", "", ["hihat", "hi hat", "closed hat", "open hat", "pedal hat", "hat"], ["hh", "chh", "ohh", "ch", "oh", "ph"]),
+        ("Ride", "", ["ride bell", "ride cymbal", "ride"], ["rd", "rdcym"]),
+        ("Cymbal", "", ["crash cymbal", "splash cymbal", "cymbal", "crash", "splash"], ["cy", "cym", "crsh"]),
+        ("Clap", "", ["handclap", "hand clap", "clap"], ["cp", "clp"]),
+        ("Rim", "", ["rimshot", "rim shot", "cross stick", "crossstick", "rim"], ["rs", "rm"]),
+        ("Tom Hi", "", ["high tom", "hi tom", "rack tom 1", "tom 1", "hitom"], ["ht", "hitom"]),
+        ("Tom Mid", "", ["mid tom", "middle tom", "rack tom 2", "tom 2", "midtom"], ["mt", "midtom"]),
+        ("Tom Lo", "", ["low tom", "floor tom", "tom 3", "lotom"], ["lt", "ft", "lotom"]),
+        ("Tom", "", ["tom"], ["tm"]),
+        ("Perc", "Cowbell", ["cowbell", "cow bell"], ["cb", "cow", "cowb"]),
+        ("Perc", "Conga", ["conga", "tumba", "quinto"], ["cg", "con", "cng"]),
+        ("Perc", "Bongo", ["bongo"], ["bng"]),
+        ("Perc", "Clave", ["claves", "clave"], ["cv", "clv"]),
+        ("Perc", "Shaker", ["shaker", "maracas", "cabasa"], ["shk", "sh"]),
+        ("Perc", "Block", ["woodblock", "wood block", "block"], ["wb"]),
+        ("Perc", "", ["percussion", "auxiliary", "perc"], ["prc"]),
+        ("Guitar", "", ["guitar", "gtr", "acoustic gt", "electric gt"], ["gtr", "gt"]),
+        ("Strings", "", ["strings", "string", "violin", "viola", "cello", "orchestra", "ensemble", "pizz", "arco"], []),
+        ("Bass", "", ["bass", "sub bass"], ["sub"]),
+        ("Vocal", "", ["vocal", "voice", "vox"], ["vx"]),
+        ("Keyboards", "Electric Piano", ["electric piano", "rhodes", "wurlitzer", "wurli", "e-piano", "epiano"], ["ep"]),
+        ("Keyboards", "Organ", ["organ", "hammond"], ["org"]),
+        ("Keyboards", "Clav", ["clavinet", "clav"], []),
+        ("Keyboards", "Piano", ["grand piano", "upright piano", "piano"], ["pno"]),
+        ("Keyboards", "Synth", ["synthesizer", "synth"], ["syn"]),
+        ("Keyboards", "", ["keyboard", "keys"], ["kb", "keyb"]),
+        ("Scratch", "", ["scratches", "scratch"], ["scr"]),
+        ("DJ", "", ["turntable", "deck"], ["dj"]),
+        ("FX", "", ["sound effect", "foley", "atmosphere", "atmos", "riser", "sweep", "noise",
+                    "impact", "boom", "zap", "glitch", "drone", "whoosh", "reverse", "downlifter",
+                    "uplifter", "sfx", "fx"], ["fx", "sfx"]),
+        ("Loops/Patterns", "", ["loop", "groove", "beat"], ["lp"]),
+    ]
+
+    @staticmethod
+    def _normalize_name(name):
+        """Lower-case, non-alnum runs → spaces, split letter↔digit boundaries
+        ('Tom2' → 'tom 2') — mirrors the Rust analyzer's normalize_name."""
+        out, prev = [], 0  # prev: 0=sep, 1=alpha, 2=digit
+        for c in name.lower():
+            kind = 1 if (c.isascii() and c.isalpha()) else 2 if (c.isascii() and c.isdigit()) else 0
+            if kind == 0:
+                if out and out[-1] != " ":
+                    out.append(" ")
+            else:
+                if prev not in (0, kind):
+                    out.append(" ")
+                out.append(c)
+            prev = kind
+        return "".join(out)
+
+    @classmethod
+    def _classify_name(cls, text):
+        """Fallback (group, subgroup) from a file path's keywords."""
+        norm = cls._normalize_name(text)
+        if "cym" in norm:
+            return ("Cymbal", "")
+        toks = set(norm.split())
+        for group, sub, phrases, abbrevs in cls._NAME_RULES:
+            if any(p in norm for p in phrases) or any(a in toks for a in abbrevs):
+                return (group, sub)
+        return ("Unclassified", "")
+
     @staticmethod
     def _dedup_words(stem):
         """Drop later word repeats (case-insensitive) by prefix/stem: a word is
@@ -267,6 +337,17 @@ class RenameMixin:
                 abspath = os.path.join(dirpath, fn)
                 new_name = self._encode_name(root, abspath)
                 rec = self._peak_for(abspath)
+                # Effective group/subgroup: prefer the PEAK record, else fall back
+                # to a name-based classification of the path, so e.g. "Bass Drum"
+                # sorts to Kick even when the file has no analysis record.
+                egroup = (rec.get("group") if rec else "") or ""
+                esub = (rec.get("subgroup") if rec else "") or ""
+                if not egroup or egroup == "Unclassified":
+                    fg, fsg = self._classify_name(os.path.relpath(abspath, root))
+                    if fg != "Unclassified" or not egroup:
+                        egroup = fg
+                    if not esub:
+                        esub = fsg
                 # Append the BPM before the extension (any real tempo, bpm > 10).
                 if add_bpm and rec and (rec.get("bpm") or 0) > 10:
                     stem, ext = os.path.splitext(new_name)
@@ -274,8 +355,9 @@ class RenameMixin:
                 # Prepend the category (e.g. "Snare - " or "Snare - Acoustic - ").
                 # Strip the group out of the subgroup so "Snare - Snare Medium"
                 # collapses to "Snare - Medium" (independent of the dedup option).
-                if prepend_group and rec:
-                    vals = [self._safe_folder(rec[k]) for k in prepend_keys if rec.get(k)]
+                if prepend_group:
+                    kv = {"group": egroup, "subgroup": esub}
+                    vals = [self._safe_folder(kv[k]) for k in prepend_keys if kv.get(k)]
                     if vals:
                         prefix = self._dedup_words(" - ".join(vals))
                         new_name = prefix + " - " + new_name
@@ -287,7 +369,12 @@ class RenameMixin:
                 sub_parts = []
                 if sort_grp:
                     def folder_for(field):
-                        v = rec.get(field) if rec else None
+                        if field == "group":
+                            v = egroup
+                        elif field == "subgroup":
+                            v = esub
+                        else:
+                            v = rec.get(field) if rec else None
                         return self._safe_folder(v) if v not in (None, "") else "Unsorted"
                     f1 = folder_for(gfield)
                     sub_parts.append(f1)

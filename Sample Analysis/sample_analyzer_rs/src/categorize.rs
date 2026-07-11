@@ -59,8 +59,9 @@ pub fn categorize(name: &str) -> (&'static str, &'static str, &'static str) {
         ("Keyboards", "Piano", &["grand piano", "upright piano", "piano"], &["pno"]),
         ("Keyboards", "Synth", &["synthesizer", "synth"], &["syn"]),
         ("Keyboards", "", &["keyboard", "keys"], &["kb", "keyb"]),
-        // DJ tools (scratches / turntable).
-        ("DJ", "", &["turntable", "scratch"], &["dj"]),
+        // Turntablism: scratches are their own group; DJ = turntable / decks.
+        ("Scratch", "", &["scratches", "scratch"], &["scr"]),
+        ("DJ", "", &["turntable", "deck"], &["dj"]),
         ("FX", "", &["sound effect", "foley", "atmosphere", "atmos", "riser", "sweep", "noise",
                  "impact", "boom", "zap", "glitch", "drone", "whoosh", "reverse", "downlifter",
                  "uplifter", "riser", "sfx", "fx"], &["fx", "sfx"]),
@@ -117,8 +118,9 @@ mod tests {
             ("Grand Piano C3.wav", "Keyboards", "Piano"), ("Rhodes_ep.wav", "Keyboards", "Electric Piano"),
             ("Hammond_organ.wav", "Keyboards", "Organ"), ("Clavinet.wav", "Keyboards", "Clav"),
             ("Keyboard_pad.wav", "Keyboards", ""),
-            // DJ tools + Loops/Patterns.
-            ("DJ_scratch.wav", "DJ", ""), ("Turntable_stop.wav", "DJ", ""),
+            // Turntablism (Scratch is its own group) + DJ + Loops/Patterns.
+            ("Scratch_01.wav", "Scratch", ""), ("Vinyl_scratches.wav", "Scratch", ""),
+            ("DJ_scratch.wav", "Scratch", ""), ("Turntable_stop.wav", "DJ", ""), ("DJ_fx.wav", "DJ", ""),
             ("Beat_01.wav", "Loops/Patterns", ""), ("Groove.wav", "Loops/Patterns", ""), ("Loop_120.wav", "Loops/Patterns", ""),
             ("randomthing.wav", "Unclassified", ""),
         ];

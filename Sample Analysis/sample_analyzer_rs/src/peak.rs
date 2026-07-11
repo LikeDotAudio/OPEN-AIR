@@ -43,6 +43,11 @@ pub struct Peak {
     pub bit_depth: u16,
     pub channels: u16,
 
+    // --- musical ROOT (note / key), FFT-derived (ACID takes precedence) ---
+    pub root: String,      // note name, e.g. "A3" ("" if unpitched/none)
+    pub root_hz: f64,      // detected fundamental Hz (0 if none)
+    pub root_cents: f64,   // cents off the equal-tempered note (−50..+50)
+
     // --- embedded metadata (ACID chunk, when present) ---
     pub bpm: f64,          // 0 if none
     pub root_note: i32,    // MIDI root note, -1 if none

@@ -13,6 +13,7 @@ pub fn emit_result(p: &Peak, done: usize, total: usize) {
         "pitch": p.pitch, "complexity": p.complexity, "length": p.length,
         "transients": p.transients, "centroid": p.centroid, "harmonicity": p.harmonicity,
         "brightness": p.high, "attack": p.attack, "bpm": p.bpm,
+        "root": p.root, "root_hz": p.root_hz, "root_cents": p.root_cents,
         "sample_rate": p.sample_rate, "bit_depth": p.bit_depth, "channels": p.channels
     }));
 }

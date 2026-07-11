@@ -426,6 +426,8 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
         } catch (e) { /* cancelled */ }
     };
     const selectFolder = async (handle, path) => {
+        // Clear the current list immediately, then scan the newly picked folder.
+        setFolderFiles([]); setDeepResults([]);
         setSelectedFolder(handle); setSelectedFolderPath(path || ''); setSelectedIndex(-1); setErr(''); setFilter(''); setScanning(true); setChips([]);
         const items = [], names = [], builder = makeChipBuilder();
         const onEmit = () => setChips(builder.top());   // push the growing chip list to the UI

@@ -5,7 +5,7 @@ from tkinter import ttk, filedialog, messagebox
 
 
 class ExaminerMixin:
-    EXAM_COLS = ("group", "reason", "timbre", "cluster", "pitch", "length", "tr",
+    EXAM_COLS = ("group", "reason", "timbre", "cluster", "root", "pitch", "length", "tr",
                  "centroid", "harm", "bpm", "sr", "bits")
 
     def _build_examiner_tab(self):
@@ -31,7 +31,7 @@ class ExaminerMixin:
         tv.heading("#0", text="File")
         tv.column("#0", width=220, stretch=True)
         heads = {"group": ("Group", 80), "reason": ("Reason", 150), "timbre": ("Timbre", 80),
-                 "cluster": ("Clust", 48), "pitch": ("Pitch", 55), "length": ("Len", 50),
+                 "cluster": ("Clust", 48), "root": ("Root", 46), "pitch": ("Pitch", 55), "length": ("Len", 50),
                  "tr": ("Tr", 40), "centroid": ("Cntrd", 60), "harm": ("Harm", 50),
                  "bpm": ("BPM", 50), "sr": ("SR", 55), "bits": ("Bits", 40)}
         for c in self.EXAM_COLS:
@@ -77,7 +77,7 @@ class ExaminerMixin:
                 continue
             tv.insert("", "end", text=r.get("name", ""), values=(
                 r.get("group", ""), r.get("reason", ""), r.get("timbre", ""), r.get("cluster", ""),
-                f"{r.get('pitch', 0):.0f}", f"{r.get('length', 0):.2f}", r.get("transients", ""),
+                r.get("root", ""), f"{r.get('pitch', 0):.0f}", f"{r.get('length', 0):.2f}", r.get("transients", ""),
                 f"{r.get('centroid', 0):.0f}", f"{r.get('harmonicity', 0):.2f}",
                 f"{r.get('bpm', 0):.0f}", r.get("sample_rate", ""), r.get("bit_depth", "")))
             shown += 1

@@ -163,6 +163,11 @@ window.PadBrowse = ({ onClose }) => {
         const inputs = [];
         const onMsg = (e) => {
             const s = e.data[0], note = e.data[1], v = e.data[2];
+            if ((s & 0xf0) === 0xe0) {                        // pitch-bend wheel
+                const val = ((e.data[2] << 7) | e.data[1]) - 8192;
+                if (window.oaSetPitchBend) window.oaSetPitchBend((val / 8192) * 200);  // ±2 semitones
+                return;
+            }
             if ((s & 0xf0) === 0x90 && v > 0) {
                 const idx = note - (window.OA_MIDI_BASE || 36);
                 if (idx >= 0 && idx < 16) midiHit(idx, Math.max(0.05, v / 127));

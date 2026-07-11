@@ -7,6 +7,7 @@ use crate::amplitude::amplitude_features;
 use crate::label::label_sample;
 use crate::peak::Peak;
 use crate::pitch::pitch_features;
+use crate::root::{extract_root, midi_to_name};
 use crate::spectrum::spectral_features;
 use crate::sustain::sustain_ratio;
 use crate::transients::count_transients;
@@ -27,6 +28,15 @@ pub fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
     let transients = count_transients(&data, sr);
     let sustain = sustain_ratio(&data, sr);
     let (bpm, root_note) = read_acid(path);
+
+    // ROOT note (musical key). Prefer the embedded ACID root when present,
+    // otherwise detect it from the spectrum (FFT + harmonic product spectrum).
+    let fft_root = extract_root(&data, sr_f);
+    let (root_name, root_hz, root_cents) = if root_note >= 0 {
+        (midi_to_name(root_note), 0.0, 0.0)
+    } else {
+        (fft_root.note, fft_root.hz, fft_root.cents)
+    };
 
     // Path → folder (relative to the scanned root).
     let name = path.file_name().and_then(|x| x.to_str()).unwrap_or("").to_string();
@@ -74,6 +84,9 @@ pub fn analyze(path: &Path, root: &Path, max_len: f64) -> Option<Peak> {
         sample_rate: sr,
         bit_depth,
         channels,
+        root: root_name,
+        root_hz,
+        root_cents,
         bpm,
         root_note,
         cluster: -1,

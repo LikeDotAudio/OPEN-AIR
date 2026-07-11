@@ -41,6 +41,9 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             return e ? (e.name || '(loaded)') : null;
         }));
 
+    // Tone mode: root pad index (0-15), or null if disabled.
+    const [toneRoot, setToneRoot] = React.useState(null);
+
     // Side-car value per pad: velocity (0-100) of the most recent hit. Drives
     // playback volume AND the pad's visual glow.
     const [velocities, setVelocities] = React.useState(Array(16).fill(0));
@@ -163,12 +166,20 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         window.dispatchEvent(new CustomEvent('oa-drum-hit', { detail: { idx, velocity } }));
     };
 
-    const hitPad = (e, idx) => {
+    const hitPad = (e, idx, explicitPadNum = null) => {
         const velocity = computeVelocity(e);
         setVelocities((prev) => { const n = [...prev]; n[idx] = velocity; return n; });
-        if (window.oaTriggerDrum) window.oaTriggerDrum(idx, velocity / 100);
-        if (typeof onHit === 'function') onHit(idx + 1, velocity);
-        emitHit(idx, velocity);
+        
+        if (toneRoot !== null && explicitPadNum !== null) {
+            const semitones = explicitPadNum - 1;
+            if (window.oaTriggerTone) window.oaTriggerTone(toneRoot, semitones, velocity / 100);
+            window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRoot, semitones, velocity } }));
+        } else {
+            if (window.oaTriggerDrum) window.oaTriggerDrum(idx, velocity / 100);
+            if (typeof onHit === 'function') onHit(idx + 1, velocity);
+            emitHit(idx, velocity);
+        }
+        
         return velocity;
     };
 
@@ -205,7 +216,24 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
         }
     };
-    const triggerPadKey = (idx) => triggerPadAt(idx, 100);
+    const triggerPadKey = (idx, explicitPadNum = null) => {
+        if (toneRoot !== null && explicitPadNum !== null) {
+            const v = 100;
+            const semitones = explicitPadNum - 1;
+            setVelocities((prev) => { const n = [...prev]; n[idx] = v; return n; });
+            if (window.oaTriggerTone) window.oaTriggerTone(toneRoot, semitones, v / 100);
+            window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRoot, semitones, velocity: v } }));
+            const el = padButtons.current[idx];
+            if (el) {
+                el.style.transform = 'scale(0.95)';
+                el.style.filter = `brightness(1.4)`;
+                startGlow(el, idx, 1);
+                setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
+            }
+        } else {
+            triggerPadAt(idx, 100);
+        }
+    };
 
     // ---- Web MIDI: map a connected controller's notes to the pads -----------
     const [midiStatus, setMidiStatus] = React.useState('');
@@ -220,6 +248,11 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         const onMsg = (e) => {
             if (window.OA_MIDI_CAPTURED) return;   // Pad Browser (or other modal) owns MIDI right now
             const status = e.data[0], note = e.data[1], vel = e.data[2];
+            if ((status & 0xf0) === 0xe0) {                   // pitch-bend wheel → retune sounding voices
+                const val = ((e.data[2] << 7) | e.data[1]) - 8192;   // 14-bit, centered at 0
+                if (window.oaSetPitchBend) window.oaSetPitchBend((val / 8192) * 200);  // ±2 semitones
+                return;
+            }
             if ((status & 0xf0) === 0x90 && vel > 0) {        // note-on
                 setMidiNote(note);
                 const idx = note - midiBaseRef.current;
@@ -254,7 +287,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             const padNum = NUMKEY_TO_PADNUM[parseInt(m[1], 10)];
             if (!padNum) return;
             e.preventDefault();
-            triggerPadKey(padNum - 1);
+            triggerPadKey(padNum - 1, padNum);
         };
         window.addEventListener('keydown', onKey);
         return () => window.removeEventListener('keydown', onKey);
@@ -310,21 +343,33 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     const vel = velocities[idx];            // side-car value (0-100)
                     const intensity = vel / 100;
 
+                    const isToneMode = toneRoot !== null;
+                    const semitones = padNum - 1;
+                    const rootOctave = Math.floor(semitones / 12);
+                    const noteName = MIDI_NOTE_NAMES[semitones % 12] + (rootOctave > 0 ? ` +${rootOctave}` : '');
+
                     // Every pad plays a sound; a loaded custom sample reads brighter
                     // orange, a synth-voice pad reads darker. Resting glow reflects
                     // the last hit's velocity.
-                    const baseColor = hasSample ? '#f4902c' : '#3a3a3a';
+                    const baseColor = isToneMode ? '#1565c0' : (hasSample ? '#f4902c' : '#3a3a3a');
                     // Resting shadow only — the velocity glow is a transient CSS
                     // animation (oaPadGlow) that lasts exactly as long as the sound
                     // plays, then fades to this dark resting state.
-                    const restShadow = hasSample ? '0 4px 8px rgba(0,0,0,0.4)' : 'inset 0 1px 3px rgba(0,0,0,0.6)';
+                    const restShadow = (hasSample || isToneMode) ? '0 4px 8px rgba(0,0,0,0.4)' : 'inset 0 1px 3px rgba(0,0,0,0.6)';
 
                     return (
                         <div key={padNum} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <button
                                 ref={(el) => { padButtons.current[idx] = el; }}
-                                title={hasSample ? `${name} — sample: ${(window.OA_DRUM_SAMPLES[idx] && window.OA_DRUM_SAMPLES[idx].name) || sampleNames[idx]}\nALT+click to replace` : (remembered ? `${name} — remembered: ${remembered.name}\n(Restore to re-load, or ALT+click to pick)` : `${name} — synth voice\nALT+click to load a sample`)}
+                                title={isToneMode ? `${noteName} — (Tone Mode for Pad ${toneRoot + 1})` : (hasSample ? `${name} — sample: ${(window.OA_DRUM_SAMPLES[idx] && window.OA_DRUM_SAMPLES[idx].name) || sampleNames[idx]}\nALT+click to replace` : (remembered ? `${name} — remembered: ${remembered.name}\n(Restore to re-load, or ALT+click to pick)` : `${name} — synth voice\nALT+click to load a sample`))}
                                 onPointerDown={(e) => {
+                                    if (e.ctrlKey) {
+                                        e.preventDefault();
+                                        const newRoot = toneRoot === idx ? null : idx;
+                                        setToneRoot(newRoot);
+                                        window.dispatchEvent(new CustomEvent('oa-tone-mode', { detail: { rootIdx: newRoot } }));
+                                        return;
+                                    }
                                     // "Load to other pad": this click assigns the pending sample here.
                                     if (pendingAssign) {
                                         e.preventDefault();
@@ -340,7 +385,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                         else { const input = fileInputs.current[idx]; if (input) input.click(); }
                                         return;
                                     }
-                                    const v = hitPad(e, idx);
+                                    const v = hitPad(e, idx, padNum);
                                     const i = v / 100;
                                     const el = e.currentTarget;
                                     el.style.transform = 'scale(0.95)';
@@ -375,10 +420,20 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                                     touchAction: 'none'
                                 }}
                             >
+                                
+                                <style>{`
+                                    @keyframes oaPadGlowBlue {
+                                        from { box-shadow: 0 0 calc(12px + var(--gi, 0.5) * 48px) calc(3px + var(--gi, 0.5) * 16px) rgba(66, 165, 245, calc(0.5 + var(--gi, 0.5) * 0.5)); }
+                                        to { box-shadow: 0 0 0 0 rgba(66, 165, 245, 0); }
+                                    }
+                                `}</style>
+
                                 {/* Faint waveform of the loaded sample behind the label */}
-                                {hasSample && <PadWave idx={idx} ver={sampleNames[idx]} />}
-                                {/* Pad name = shared kit / Sequencer track name */}
-                                <span style={{ position: 'relative', fontSize: '15px', lineHeight: 1.1, wordBreak: 'break-word' }}>{name}</span>
+                                {(hasSample && !isToneMode) && <PadWave idx={idx} ver={sampleNames[idx]} />}
+                                {/* Pad name = shared kit / Sequencer track name, or Note name if Tone Mode */}
+                                <span style={{ position: 'relative', fontSize: '15px', lineHeight: 1.1, wordBreak: 'break-word', color: isToneMode ? '#fff' : 'inherit' }}>
+                                    {isToneMode ? noteName : name}
+                                </span>
 
                                 {/* Tiny pad number, corner */}
                                 <span style={{ position: 'absolute', bottom: '4px', left: '6px', fontSize: '9px', fontWeight: 'bold', opacity: 0.5 }}>
@@ -432,7 +487,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             )}
 
             <div style={{ marginTop: '14px', fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
-                Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> a pad to browse sounds
+                Velocity: centre {centerVelocity}% · edge {edgeVelocity}% (sets volume) · <b>ALT+click</b> to browse · <b>CTRL+click</b> for Tone Mode
             </div>
 
             {/* Web MIDI — map a connected controller's notes to the pads */}

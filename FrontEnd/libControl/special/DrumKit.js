@@ -9,7 +9,7 @@
  * Plain JS (not JSX) so it runs before the text/babel component scripts and
  * window.OA_DRUM_KIT is ready when they execute.
  *
- * Version: 26.07.10.1
+ * Version: 26.07.11.1
  */
 
 // 16 voices: name + synth pitch (Hz) + oscillator type (used when no sample loaded).
@@ -50,6 +50,20 @@ window.oaAudioCtx = function () {
 window.OA_DRUM_SAMPLES = window.OA_DRUM_SAMPLES || {};
 // index -> currently-playing looping BufferSource (for auto-loop toggle pads).
 window.OA_DRUM_LOOPS = window.OA_DRUM_LOOPS || {};
+// Every currently-sounding BufferSource, for live MIDI pitch-bend. OA_PITCH_BEND
+// is the current wheel offset in CENTS (±200 = ±2 semitones); it is applied via
+// each source's `detune` AudioParam so the sample's base pitch is preserved.
+window.OA_DRUM_VOICES = window.OA_DRUM_VOICES || [];
+window.OA_PITCH_BEND = window.OA_PITCH_BEND || 0;
+
+// Set the global pitch-bend (cents) and retune every sounding voice live.
+window.oaSetPitchBend = function (cents) {
+    window.OA_PITCH_BEND = cents || 0;
+    for (let i = 0; i < window.OA_DRUM_VOICES.length; i++) {
+        const s = window.OA_DRUM_VOICES[i];
+        try { if (s.detune) s.detune.value = window.OA_PITCH_BEND; } catch (e) {}
+    }
+};
 
 // Store/replace a pad's sample. opts: { loop, pitch, fade, name }.
 window.oaSetDrumSample = function (idx, buffer, opts) {
@@ -120,6 +134,16 @@ window.oaPlayDrumSample = function (ctx, entry, time, volume, pan) {
     }
     if (src.loop) src.start(time, offset);
     else src.start(time, offset, region);
+    // Register as an active voice so a MIDI pitch-bend can retune it live, and
+    // start it at the current wheel offset. Auto-removed when the note ends.
+    try {
+        if (src.detune) src.detune.value = window.OA_PITCH_BEND || 0;
+        window.OA_DRUM_VOICES.push(src);
+        src.addEventListener('ended', function () {
+            const i = window.OA_DRUM_VOICES.indexOf(src);
+            if (i >= 0) window.OA_DRUM_VOICES.splice(i, 1);
+        });
+    } catch (e) {}
     return src;
 };
 
@@ -143,6 +167,28 @@ window.oaTriggerDrum = function (idx, volume, time) {
         return false;
     }
     window.oaPlayDrumVoice(ctx, window.OA_DRUM_KIT[idx], t, vol);
+    return false;
+};
+
+// Trigger a drum voice pitched by N semitones (Tone Mode)
+window.oaTriggerTone = function(rootIdx, semitones, volume, time) {
+    const ctx = window.oaAudioCtx();
+    const t = (typeof time === 'number') ? time : ctx.currentTime;
+    const vol = Math.max(0, Math.min(1, volume == null ? 1 : volume));
+    const entry = window.OA_DRUM_SAMPLES[rootIdx];
+    const pitchRatio = Math.pow(2, semitones / 12);
+
+    if (entry && entry.buffer) {
+        window.oaPlayDrumSample(ctx, Object.assign({}, entry, { pitch: (entry.pitch || 1) * pitchRatio }), t, vol);
+        return true;
+    }
+    
+    // Fallback to pitched synth voice
+    const track = window.OA_DRUM_KIT[rootIdx];
+    if (track) {
+        window.oaPlayDrumVoice(ctx, Object.assign({}, track, { freq: track.freq * pitchRatio }), t, vol);
+        return true;
+    }
     return false;
 };
 

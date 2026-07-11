@@ -172,7 +172,11 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
         setVelocities((prev) => { const n = [...prev]; n[idx] = velocity; return n; });
         
         if (toneRoot !== null && explicitPadNum !== null) {
-            const semitones = explicitPadNum - 1;
+            const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[toneRoot];
+            let semitones = explicitPadNum - 1;
+            if (entry && entry.sampleRoot != null) {
+                semitones = (midiBase + explicitPadNum - 1) - entry.sampleRoot;
+            }
             if (window.oaTriggerTone) window.oaTriggerTone(toneRoot, semitones, velocity / 100);
             window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRoot, semitones, velocity } }));
         } else {
@@ -220,7 +224,11 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
     const triggerPadKey = (idx, explicitPadNum = null, velocity = 100) => {
         if (toneRoot !== null && explicitPadNum !== null) {
             const v = velocity;
-            const semitones = explicitPadNum - 1;
+            const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[toneRoot];
+            let semitones = explicitPadNum - 1;
+            if (entry && entry.sampleRoot != null) {
+                semitones = (midiBaseRef.current + explicitPadNum - 1) - entry.sampleRoot;
+            }
             setVelocities((prev) => { const n = [...prev]; n[idx] = v; return n; });
             if (window.oaTriggerTone) window.oaTriggerTone(toneRoot, semitones, v / 100);
             window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRoot, semitones, velocity: v } }));
@@ -260,8 +268,12 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                 const velocity = Math.max(1, Math.round(vel / 127 * 100));
                 
                 if (toneRootRef.current !== null) {
-                    // In Tone Mode, map ANY note to a pitch relative to midiBase
-                    const semitones = idx;
+                    // In Tone Mode, map ANY note to a pitch relative to midiBase or sampleRoot
+                    const entry = window.OA_DRUM_SAMPLES && window.OA_DRUM_SAMPLES[toneRootRef.current];
+                    let semitones = idx; // idx is (note - midiBase)
+                    if (entry && entry.sampleRoot != null) {
+                        semitones = note - entry.sampleRoot;
+                    }
                     if (window.oaTriggerTone) window.oaTriggerTone(toneRootRef.current, semitones, velocity / 100);
                     window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRootRef.current, semitones, velocity } }));
                     
@@ -366,9 +378,8 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
                     const intensity = vel / 100;
 
                     const isToneMode = toneRoot !== null;
-                    const semitones = padNum - 1;
-                    const rootOctave = Math.floor(semitones / 12);
-                    const noteName = MIDI_NOTE_NAMES[semitones % 12] + (rootOctave > 0 ? ` +${rootOctave}` : '');
+                    const padNote = midiBase + padNum - 1;
+                    const noteName = midiNoteName(padNote);
 
                     // Every pad plays a sound; a loaded custom sample reads brighter
                     // orange, a synth-voice pad reads darker. Resting glow reflects

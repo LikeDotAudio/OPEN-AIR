@@ -72,14 +72,20 @@ window.oaSetPitchBend = function (cents) {
 // Store/replace a pad's sample. opts: { loop, pitch, fade, name }.
 window.oaSetDrumSample = function (idx, buffer, opts) {
     opts = opts || {};
+    let sampleRoot = null;
+    const name = opts.name || '';
+    const m = /ROOT-(\d+)/i.exec(name);
+    if (m) sampleRoot = parseInt(m[1], 10);
+    
     const entry = {
         buffer: buffer,
         pitch: opts.pitch || 1,     // playbackRate multiplier (pitch + speed)
+        sampleRoot: sampleRoot,     // MIDI note root parsed from filename
         offset: opts.offset || 0,   // start offset in seconds (time shift)
         end: (opts.end != null ? opts.end : null),   // cut-off in seconds (null = EOF)
         loop: !!opts.loop,
         fade: !!opts.fade,
-        name: opts.name || '',
+        name: name,
         folder: opts.folder || '',  // source folder (for set snapshots / revert)
     };
     window.OA_DRUM_SAMPLES[idx] = entry;

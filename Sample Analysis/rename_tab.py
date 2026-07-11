@@ -77,6 +77,9 @@ class RenameMixin:
                             values=["(none)", "Group", "Subgroup", "Timbre", "Cluster", "Len tier"])
         gcb2.pack(side=tk.LEFT, padx=4)
         gcb2.bind("<<ComboboxSelected>>", lambda e: self._rename_scan())
+        self.rename_add_root = tk.BooleanVar(value=False)
+        ttk.Checkbutton(grow, text="Append ROOT-note", variable=self.rename_add_root,
+                        command=self._rename_scan).pack(side=tk.LEFT, padx=(16, 4))
         self.rename_add_bpm = tk.BooleanVar(value=False)
         ttk.Checkbutton(grow, text="Append ###BPM (when > 10)", variable=self.rename_add_bpm,
                         command=self._rename_scan).pack(side=tk.LEFT, padx=(16, 4))
@@ -316,6 +319,7 @@ class RenameMixin:
                 "Cluster": "cluster", "Len tier": "length_class"}
         gfield = FMAP.get(self.rename_group_field.get(), "group")
         gfield2 = FMAP.get(self.rename_group_field2.get())  # None for "(none)"
+        add_root = self.rename_add_root.get()
         add_bpm = self.rename_add_bpm.get()
         prepend_group = self.rename_prepend_group.get()
         prepend_keys = {
@@ -348,6 +352,11 @@ class RenameMixin:
                         egroup = fg
                     if not esub:
                         esub = fsg
+                # Append ROOT-<note> before the extension (when a root is known),
+                # ahead of the BPM tag so the name reads "… - ROOT-A3 - 120BPM".
+                if add_root and rec and rec.get("root"):
+                    stem, ext = os.path.splitext(new_name)
+                    new_name = f"{stem} - ROOT-{rec['root']}{ext}"
                 # Append the BPM before the extension (any real tempo, bpm > 10).
                 if add_bpm and rec and (rec.get("bpm") or 0) > 10:
                     stem, ext = os.path.splitext(new_name)

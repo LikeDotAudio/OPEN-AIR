@@ -487,15 +487,20 @@ class AnalyzerApp:
 
     def _peak_for(self, abspath):
         """Find the analysis record for a file: prefer its sidecar <stem>.PEAK,
-        else fall back to the loaded aggregate records (matched by path)."""
+        else fall back to the loaded aggregate records (matched by path).
+        Returns a dict or None (guards against a .PEAK file matching itself,
+        whose contents are a list, and other non-record JSON)."""
         side = os.path.splitext(abspath)[0] + ".PEAK"
-        if os.path.isfile(side):
+        if side != abspath and os.path.isfile(side):
             try:
                 with open(side, encoding="utf-8") as f:
-                    return json.load(f)
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    return data
             except Exception:
                 pass
-        return self.records_by_path.get(abspath)
+        r = self.records_by_path.get(abspath)
+        return r if isinstance(r, dict) else None
 
     def _peak_values(self, abspath):
         r = self._peak_for(abspath)
@@ -551,6 +556,8 @@ class AnalyzerApp:
             for fn in sorted(files):
                 if fn.startswith("."):
                     continue
+                if fn.lower().endswith(".peak"):
+                    continue  # analysis sidecars aren't samples
                 if audio_only and not fn.lower().endswith(self.AUDIO_EXTS):
                     continue
                 abspath = os.path.join(dirpath, fn)

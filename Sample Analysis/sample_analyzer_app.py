@@ -723,7 +723,7 @@ class AnalyzerApp:
         lines = [title]
         fld = rec.get("folder", "")
         if fld:
-            lines.append("📁 " + fld)
+            lines.append("dir: " + fld)
         lines.append("")
         for k, label, fmt in (
             ("group", "group", "{}"), ("reason", "reason", "{}"), ("timbre", "timbre", "{}"),
@@ -742,7 +742,7 @@ class AnalyzerApp:
                 lines.append(f"{label}: {v}")
         lines.append("channels: " + ("mono" if ch == 1 else "stereo" if ch == 2 else str(ch)))
         if rec.get("sustained"):
-            lines.append("★ sustained single note")
+            lines.append("* sustained single note")
         text = "\n".join(lines)
 
         if self._sel_txt is not None:

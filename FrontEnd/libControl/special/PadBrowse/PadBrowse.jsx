@@ -138,6 +138,7 @@ window.PadBrowse = ({ onClose }) => {
     // Keyboard: Left/Right move the focused pad; Up/Down cycle its sound.
     React.useEffect(() => {
         const onKey = (e) => {
+            if (e.key === 'Escape') { onClose(); e.preventDefault(); return; }
             if (e.target && e.target.tagName === 'INPUT') return;
             if (e.key === 'ArrowLeft') { setFocus((f) => (f + 15) % 16); e.preventDefault(); }
             else if (e.key === 'ArrowRight') { setFocus((f) => (f + 1) % 16); e.preventDefault(); }

@@ -510,6 +510,7 @@ window.SoundBrowse = ({ onClose, onChoose, onChooseOther, targetLabel }) => {
     // Arrow-key navigation across the thumbnail grid; Enter = Load.
     React.useEffect(() => {
         const onKey = (e) => {
+            if (e.key === 'Escape') { onClose(); e.preventDefault(); return; }
             if (e.target && (e.target.tagName === 'INPUT')) return;  // don't hijack the filter box
             if (!shown.length) return;
             let d = 0;

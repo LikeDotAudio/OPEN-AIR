@@ -43,6 +43,7 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
 
     // Tone mode: root pad index (0-15), or null if disabled.
     const [toneRoot, setToneRoot] = React.useState(null);
+    const toneRootRef = React.useRef(toneRoot); toneRootRef.current = toneRoot;
 
     // Side-car value per pad: velocity (0-100) of the most recent hit. Drives
     // playback volume AND the pad's visual glow.
@@ -216,9 +217,9 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
         }
     };
-    const triggerPadKey = (idx, explicitPadNum = null) => {
+    const triggerPadKey = (idx, explicitPadNum = null, velocity = 100) => {
         if (toneRoot !== null && explicitPadNum !== null) {
-            const v = 100;
+            const v = velocity;
             const semitones = explicitPadNum - 1;
             setVelocities((prev) => { const n = [...prev]; n[idx] = v; return n; });
             if (window.oaTriggerTone) window.oaTriggerTone(toneRoot, semitones, v / 100);
@@ -227,11 +228,11 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             if (el) {
                 el.style.transform = 'scale(0.95)';
                 el.style.filter = `brightness(1.4)`;
-                startGlow(el, idx, 1);
+                startGlow(el, idx, v / 100);
                 setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
             }
         } else {
-            triggerPadAt(idx, 100);
+            triggerPadAt(idx, velocity);
         }
     };
 
@@ -256,7 +257,28 @@ const Sampler = ({ label = "Drum Sampler", centerVelocity = 100, edgeVelocity = 
             if ((status & 0xf0) === 0x90 && vel > 0) {        // note-on
                 setMidiNote(note);
                 const idx = note - midiBaseRef.current;
-                if (idx >= 0 && idx < 16) triggerRef.current(idx, Math.max(1, Math.round(vel / 127 * 100)));
+                const velocity = Math.max(1, Math.round(vel / 127 * 100));
+                
+                if (toneRootRef.current !== null) {
+                    // In Tone Mode, map ANY note to a pitch relative to midiBase
+                    const semitones = idx;
+                    if (window.oaTriggerTone) window.oaTriggerTone(toneRootRef.current, semitones, velocity / 100);
+                    window.dispatchEvent(new CustomEvent('oa-tone-hit', { detail: { rootIdx: toneRootRef.current, semitones, velocity } }));
+                    
+                    // Flash the pad if it falls within the 16 visual pads
+                    if (idx >= 0 && idx < 16) {
+                        setVelocities((prev) => { const n = [...prev]; n[idx] = velocity; return n; });
+                        const el = padButtons.current[idx];
+                        if (el) {
+                            el.style.transform = 'scale(0.95)';
+                            el.style.filter = `brightness(1.4)`;
+                            startGlow(el, idx, velocity / 100);
+                            setTimeout(() => { if (el) { el.style.transform = 'scale(1)'; el.style.filter = 'none'; } }, 90);
+                        }
+                    }
+                } else {
+                    if (idx >= 0 && idx < 16) triggerRef.current(idx, velocity);
+                }
             }
         };
         const attach = (a) => { const names = []; a.inputs.forEach((inp) => { inp.onmidimessage = onMsg; names.push(inp.name); }); setMidiStatus(names.length ? names.join(', ') : 'No MIDI inputs'); };

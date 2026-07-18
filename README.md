@@ -174,7 +174,7 @@ OPEN-AIR/
 ## 🚀 Quick start
 
 ```bash
-git clone https://github.com/APKaudio/OPEN-AIR
+git clone https://github.com/LikeDotAudio/OPEN-AIR
 cd OPEN-AIR
 
 # 1. The broker (the spine — start it first)

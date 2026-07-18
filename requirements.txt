@@ -1,1 +1,27 @@
-paho-mqtt==1.6.1
+# OPEN-AIR Python dependencies.
+#
+# Python is glue here, not the product: the instrument probe path and the
+# discovery/deploy tooling. Everything else is Rust and TypeScript.
+#
+#   pip install -r requirements.txt
+
+# --- Instrument control (REQUIRED for VISA discovery) -------------------
+# The orchestrator shells out to `python3 -c "import pyvisa ..."` to probe
+# *IDN? and to run live SCPI writes/queries. It requests the pure-Python
+# backend explicitly — ResourceManager('@py') — so pyvisa-py is NOT
+# optional; without it every instrument probe fails and the Discovered tab
+# comes up empty.
+pyvisa>=1.11
+pyvisa-py>=0.5
+
+# --- MQTT (REQUIRED for the discovered-GUI builder) --------------------
+# Deployment/build_discovered_gui.py subscribes to the retained discovery
+# topics and writes the Discovered tab panels. Works with paho 1.x and 2.x.
+paho-mqtt>=1.6
+
+# --- Optional -----------------------------------------------------------
+# pyvisa-py can use these for extra transports; not needed for the
+# TCPIP/VXI-11 instruments OPEN-AIR discovers today:
+#   pyserial>=3.5      # serial (ASRL) instruments
+#   psutil>=5.9        # interface enumeration for some discovery paths
+#   zeroconf>=0.100    # HiSLIP/mDNS instrument discovery via pyvisa-py

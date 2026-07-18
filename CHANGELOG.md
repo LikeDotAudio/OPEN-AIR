@@ -1,5 +1,49 @@
 # Changelog
 
+## 2026-07-18 - Deploy on Every Push · Repository Button · Install Path
+
+- **Every push publishes.** The production deploy workflow only fired for
+  `main`, so anything pushed on another branch silently never reached the
+  host — the "it doesn't publish every time" symptom. It now triggers on
+  every branch except the sandbox ones (which have their own workflow and
+  host), queues rather than drops concurrent pushes, writes a **deploy
+  summary** to the run page so a publish is visible rather than assumed, and
+  the previously-dead `full_sync` input is wired to a real full resync for
+  when the server's incremental sync state drifts.
+- **Deploy secret-hygiene fix.** `FTP-Deploy-Action`'s default excludes do
+  **not** cover `.env`, while the upload root is `./FrontEnd/` — which is
+  exactly where the local FTP credentials live. Both workflows now exclude
+  `.env*`, logs, and editor junk explicitly. (CI was never exposed —
+  `.env` is gitignored so it is absent from the runner's checkout — but a
+  local or misconfigured run would have published it.)
+- **Repository button** in the top-right of the header, linking to the source
+  on GitHub, with the GitHub mark and the project's orange hover treatment.
+  The README's clone URL pointed at `APKaudio/OPEN-AIR` while `origin` is
+  `LikeDotAudio/OPEN-AIR`; both now agree with the remote.
+- **`requirements.txt` is now real.** It listed `paho-mqtt` alone while the
+  orchestrator shells out to `python3 -c "import pyvisa"` using the
+  **pure-Python backend** (`ResourceManager('@py')`) — so a clean install
+  died at the first instrument probe. Now pins `pyvisa`, `pyvisa-py`, and
+  `paho-mqtt` with the reason for each, and documents the optional
+  pyvisa-py transports. Verified against installed versions.
+- **Discovered-GUI builder runs warning-free on paho 1.x and 2.x**
+  (`CallbackAPIVersion.VERSION2` when available; one callback signature
+  serves both APIs).
+
+### Decision record: the Sampler is product scope
+
+The 2026-07-17 executive review ordered the Sampler quarantined to its own
+repository; the follow-up review recorded that order as **reversed**. Making
+the decision explicit, as that review required:
+
+**The Sampler stays in OPEN-AIR as product scope.** `Console → Sampler` and
+its four widget files (`Sampler`, `SamplerDrumkit`, `SamplerSequencer`,
+`SamplerSoundBrowse`) are a console feature built on the same widget library,
+panel schema, and MQTT layer as every other panel — not an unrelated side
+project. It ships, it is documented here, and it is subject to the same
+contract validation as the rest of the tree. Superseding the audit's
+recommendation, on the record, rather than silently.
+
 ## 2026-07-18 - Documentation: plans become features
 
 - **The README is a real project README again**: what OPEN-AIR is, the four

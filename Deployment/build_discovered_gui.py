@@ -33,7 +33,9 @@ COLLECT_SECONDS = 5
 collected = {}
 
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc, properties=None):
+    # `properties` is passed by paho 2.x (CallbackAPIVersion.VERSION2) and
+    # absent under 1.x — defaulted so one signature serves both.
     print(f"[discovered-gui] connected rc={rc}")
     client.subscribe("OpenAir/System/Protocols/visa/Device/#")
     client.subscribe("OpenAir/System/Protocols/midi/Device/#")
@@ -193,8 +195,20 @@ def write_panels():
     return written
 
 
+def make_client():
+    """paho-mqtt 2.x requires an explicit callback API version (and warns on
+    VERSION1); 1.x has no such argument at all. requirements.txt allows
+    either, so build whichever this environment supports — `on_connect`
+    below takes the extra v2 `properties` argument optionally, which makes
+    one callback signature valid under both APIs."""
+    try:
+        return mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)  # paho >= 2.0
+    except AttributeError:
+        return mqtt.Client()  # paho 1.x
+
+
 def main():
-    client = mqtt.Client()
+    client = make_client()
     client.on_connect = on_connect
     client.on_message = on_message
     client.connect("127.0.0.1", 1883, 60)

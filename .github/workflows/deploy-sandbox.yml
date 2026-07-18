@@ -12,7 +12,7 @@ on:
       full_sync:
         description: "Full resync: upload every file by mtime/size, not just the pushed diff"
         type: boolean
-        default: true
+        default: false
 
 # One deploy at a time per environment.
 concurrency:
@@ -46,6 +46,17 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}
           local-dir: ./FrontEnd/
+          dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
+          # Never publish secrets or local junk — the action's defaults do
+          # NOT exclude .env, and FrontEnd/.env holds FTP credentials locally.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env
+            **/.env.*
+            **/*.log
+            **/.DS_Store
 
       - name: Validate only (pull request)
         if: github.event_name == 'pull_request'

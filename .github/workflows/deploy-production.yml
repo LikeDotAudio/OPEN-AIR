@@ -1,21 +1,27 @@
 name: Deploy · Production
 
-# Branch = environment. Pushing main deploys to production.
-# Promote a validated build with a fast-forward:  git push origin sandbox:main
-# PRs targeting main validate the deploy but do NOT upload.
+# EVERY push publishes to FTPS.
+#
+# Previously this only fired for `main`, so work pushed on any other branch
+# silently never reached the host — the "it doesn't publish every time"
+# symptom. Now every branch deploys EXCEPT the sandbox branches, which have
+# their own workflow and their own host.
+#
+# PRs still validate without uploading.
 on:
   push:
-    branches: [main]
+    branches-ignore: [sandbox, develop]
   pull_request:
     branches: [main]
   workflow_dispatch:
     inputs:
       full_sync:
-        description: "Full resync: upload every file by mtime/size, not just the pushed diff"
+        description: "Full resync: ignore the server-side sync state and re-upload everything"
         type: boolean
-        default: true
+        default: false
 
-# One production deploy at a time.
+# One production deploy at a time; queue rather than cancel, so no push is
+# silently dropped when two land together.
 concurrency:
   group: deploy-production
   cancel-in-progress: false
@@ -25,17 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: production         # pulls production-scoped secrets
     steps:
-      - name: Checkout (full history for commit-range diff)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0            # deploy.py diffs before..sha; needs history
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Build API Artifacts
+      # Regenerates FrontEnd/api/tree.json — the static host has no
+      # orchestrator, so the browser's live /api/tree falls back to this.
+      - name: Build API artifacts
         run: python3 Deployment/build_api_artifacts.py
 
       - name: Deploy over FTPS
@@ -47,6 +53,37 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}
           local-dir: ./FrontEnd/
+          # Wipe + re-upload when the sync state has drifted (manual runs).
+          dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
+          # Never publish secrets or local junk. The action's defaults do NOT
+          # exclude .env — and FrontEnd/.env holds FTP credentials locally.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env
+            **/.env.*
+            **/*.log
+            **/.DS_Store
+
+      - name: Publish summary
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          {
+            echo "### 🚀 Published to production over FTPS"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Branch | \`${GITHUB_REF_NAME}\` |"
+            echo "| Commit | \`${GITHUB_SHA:0:9}\` |"
+            echo "| Source | \`./FrontEnd/\` |"
+            echo "| Full resync | \`${{ inputs.full_sync || false }}\` |"
+            echo ""
+            echo "_Uploads are incremental: the action keeps"
+            echo "\`.ftp-deploy-sync-state.json\` on the server and skips unchanged"
+            echo "files. If the site looks stale, re-run this workflow with"
+            echo "**full_sync = true**._"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Validate only (pull request)
         if: github.event_name == 'pull_request'

@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-07-18 - Phase 2 Step 1: the `ui/` Package Exists and Builds
+
+- **The isolated typed frontend scaffold is real**: `ui/` joins the pnpm
+  workspace with exact-pinned deps (react 18.3.1 — the version the CDN tag
+  resolves today — echarts 5.5.0, echarts-gl 2.0.9, mqtt 5.10.1, zod,
+  `@openair/contracts`), Vite (`base './'`, `/api` proxy, cross-boundary
+  `fs.allow`), and the per-file one-way strict tsconfig.
+- **The 152-script-tag load order is captured as code**:
+  `scripts/gen-legacy.ts` deterministically regenerates `src/legacy.ts`
+  from `FrontEnd/index.html` — 142 side-effect imports in exact tag order,
+  4 dead tags (deleted Sampler files) skipped by name, 6 CDN tags dropped
+  in favor of npm. `main.tsx` recreates the CDN-globals world
+  (`window.React/ReactDOM/echarts/mqtt`) from the npm singletons before the
+  legacy graph loads.
+- **`vite build` bundles the entire legacy app on the first attempt** —
+  1,017 modules, zero files needing the comment-out escape hatch;
+  typecheck green. Not the runtime yet: `FrontEnd/index.html` stays the
+  only served app until the Phase 2 §4 overlap window opens deliberately.
+- Checklist audit: `Documents/Strategies/Phase 2 Step 1.md`.
+
 ## 2026-07-18 - Phase 0: Stop the Bleeding (all six items)
 
 - **The Discovered tab works again — every break in the audit's four-stage

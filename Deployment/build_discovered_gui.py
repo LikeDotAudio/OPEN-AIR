@@ -3,7 +3,7 @@ import json
 import os
 import time
 
-GUI_FRAMES_DIR = "/home/anthony/Documents/OPEN-AIR/FrontEnd/Gui_Frames/0_discovered"
+GUI_FRAMES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "FrontEnd", "Gui_Frames", "0_discovered")
 
 def on_connect(client, userdata, flags, rc):
     print(f"Connected with result code {rc}")

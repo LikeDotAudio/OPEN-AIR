@@ -34,32 +34,21 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deploy dependencies
-        run: pip install -r FrontEnd/requirements-deploy.txt
+      - name: Build API Artifacts
+        run: python3 Deployment/build_api_artifacts.py
 
-      # deploy.py regenerates FrontEnd/api/tree.json from Gui_Frames itself, so
-      # there is no separate build step (the site uses CDN React/Babel, no npm).
       - name: Deploy over FTPS
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        env:
-          DEPLOY_ENV: sandbox
-          # Manual runs default to a full resync; pushes use the commit-range diff.
-          DEPLOY_FULL_SYNC: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_sync) && '1' || '' }}
-          DEPLOY_DIFF_BASE: ${{ github.event.before }}
-          DEPLOY_DIFF_HEAD: ${{ github.sha }}
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_USER }}
-          FTP_PASS: ${{ secrets.FTP_PASS }}
-          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
-          MQTT_HOST: ${{ secrets.MQTT_HOST }}
-          MQTT_PORT: ${{ secrets.MQTT_PORT }}
-          MQTT_USER: ${{ secrets.MQTT_USER }}
-          MQTT_PASS: ${{ secrets.MQTT_PASS }}
-          MQTT_TOPIC: ${{ secrets.MQTT_TOPIC }}
-        run: python3 FrontEnd/deploy_FTP_to_like_dot_audio.py
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          server-dir: ${{ secrets.REMOTE_DIR || '/' }}
+          local-dir: ./FrontEnd/
 
       - name: Validate only (pull request)
         if: github.event_name == 'pull_request'
         run: |
-          python3 -m py_compile FrontEnd/deploy_FTP_to_like_dot_audio.py
-          echo "PR validated: deploy script compiles. No upload on PRs."
+          python3 -m py_compile Deployment/build_api_artifacts.py
+          echo "PR validated: build script compiles. No upload on PRs."

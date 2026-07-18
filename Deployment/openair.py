@@ -33,7 +33,7 @@ def main():
     print(f"🌍 OPEN-AIR IS RUNNING ON IP: {get_local_ip()}")
     print("==================================================", flush=True)
     
-    root = os.path.dirname(os.path.abspath(__file__))
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     core_dir = os.path.join(root, "BackEnd", "Core")
     manifest = os.path.join(core_dir, "Cargo.toml")

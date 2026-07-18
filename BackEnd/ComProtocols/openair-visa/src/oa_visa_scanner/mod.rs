@@ -33,7 +33,6 @@ pub fn hunt_for_devices() -> Vec<String> {
                     let gateway_paths = [
                         "assets/gateways.json",
                         "../assets/gateways.json",
-                        "/home/anthony/Documents/OPEN-AIR/BackEnd/ComProtocols/openair-visa/assets/gateways.json",
                         "/usr/local/share/openair/assets/gateways.json"
                     ];
                     for path in gateway_paths.iter() {

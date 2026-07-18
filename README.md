@@ -27,21 +27,7 @@ instruments with the same ease as a single device.
 ---
 
 ## 🧭 Navigation
-For detailed information, please refer to the modular documentation:
-
-- **[GUI Module](oaGui/Documentation/Summary.md)**: Deep dive into the Dynamic GUI Builder, Widget Registry, and Folder-Driven Layouts.
-- **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
-- **[Translator Module](oaTranslator/Documentation/Summary.md)**: Details on the YAK Command Translation and State Mirroring.
-- **[Logging Matrix](oaConfigurationManager/Documentation/logging_matrix.md)**: Learn how the hierarchical debug system works.
-- **[Installation Guide](oaDocumentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
-- **[Documentation Map](oaDocumentation/Project_Map/Documentation_Map.md)**: Deep dive into the project structure and modules.
-- **[SMPTE2138 Bridge](oaComProtocols/oaComSMPTE2138/Documentation/Summary.md)**: Details on the SMPTE ST 2138 Protobuf interface.
-- **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
-- **[WYSIWYG Editor](oaGuiEditorWYSIWYG/Documentation/wysiwyg_editor.md)**: Learn how to interactively design and build GUI definitions.
-- **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
-- **[Schematic Engine](../GitProjects/SchemWeb/crate-engine/Summary.md)**: High-performance Rust/WASM graph processing for the Partitioned Architecture.
-- **[Core Backend](../GitProjects/SchemWeb/backend/Summary.md)**: High-performance Express.js API serving the Partitioned Architecture and Widget Registry.
-- **[Frontend UI](../GitProjects/SchemWeb/frontend/src/Summary.md)**: React-based schematic visualization and orchestration layer following the Partitioned Architecture.
+Currently under revision. Please refer to the root folders for components.
 
 ---
 

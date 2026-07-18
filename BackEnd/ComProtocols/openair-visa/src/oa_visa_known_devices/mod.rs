@@ -27,7 +27,6 @@ pub fn get_device_info(model: &str) -> (String, String) {
     let paths = [
         "assets/visa_devices.json",
         "../assets/visa_devices.json",
-        "/home/anthony/Documents/OPEN-AIR/BackEnd/ComProtocols/openair-visa/assets/visa_devices.json",
         "/usr/local/share/openair/assets/visa_devices.json"
     ];
     

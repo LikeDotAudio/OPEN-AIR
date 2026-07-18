@@ -29,8 +29,8 @@ async fn main() {
     }
 
     // Load the YAK Repository
-    let repo_path = "/home/anthony/Documents/OPEN-AIR/FrontEnd/Gui_Frames/5_Protocols/10_Yak";
-    let repo = Arc::new(repository::YakRepository::new(repo_path));
+    let repo_path = std::env::var("YAK_REPO_PATH").unwrap_or_else(|_| String::from("../../FrontEnd/Gui_Frames/5_Protocols/10_Yak"));
+    let repo = Arc::new(repository::YakRepository::new(&repo_path));
 
     // Start the MQTT client loop which acts as the hub
     if let Err(e) = mqtt::start_mqtt_client(app_config, repo).await {

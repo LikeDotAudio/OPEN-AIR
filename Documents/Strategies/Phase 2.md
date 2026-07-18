@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — PARTIALLY SHIPPED — scaffold + ratchets done; conversions and cutover pending
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> Current state is documented in [`ui/README.md`](../../ui/README.md).
+> See [Strategies/README.md](README.md) for the full index.
+
 # Phase 2 Deep Dive — Frontend to TypeScript: Best Practices, Scaffolding, Setup
 
 *2026-07-17 · Companion to [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md)

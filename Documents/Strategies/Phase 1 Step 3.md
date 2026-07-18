@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — SHIPPED
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> Payload schemas, codegen, and the browser Last Will are described in [`contracts/README.md`](../../contracts/README.md) and [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md).
+> See [Strategies/README.md](README.md) for the full index.
+
 # Phase 1 Step 3 Deep Dive — AgentHeartbeat + DeviceRecord: Payload Schemas, Codegen Turn-On, First Live Consumer
 
 *2026-07-17 · Companion to [Phase 1.md](Phase%201.md) §7 (rollout step 3) and

@@ -1,3 +1,8 @@
+> ## 📌 HISTORICAL SNAPSHOT — 2026-07-17 (v40)
+>
+> Preserved as written. The "current state" diagrams describe v40. The contract layer, live tree, and agent liveness shown as *target* now exist — see [0_README.md](0_README.md#resolution-status).
+> How the system works **today**: [`README.md`](../../README.md), [`contracts/README.md`](../../contracts/README.md), [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md).
+
 # OPEN-AIR Architecture Diagrams
 
 *2026-07-17 · Companion to [1_Design_Audit.md](1_Design_Audit.md). Diagrams are Mermaid — GitHub, VS Code, and most viewers render them inline.*

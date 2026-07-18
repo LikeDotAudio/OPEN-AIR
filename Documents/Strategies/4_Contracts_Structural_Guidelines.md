@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — SHIPPED
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> These rules now live as review law in [`contracts/README.md`](../../contracts/README.md) — read that instead. Kept here for the code-level inventory that justified each rule.
+> See [Strategies/README.md](README.md) for the full index.
+
 # Structural Guidelines for `contracts/` — the Phase 1 Keystone
 
 *2026-07-17 · Companion to [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md)

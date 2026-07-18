@@ -1,51 +1,254 @@
 # 🏷️ OPEN-AIR
 
-![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Rust](https://img.shields.io/badge/rust-1.94-orange)
+![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 
+**A software VEE / LabVIEW: an open, vendor-neutral instrument orchestration
+environment.** Discover a lab full of instruments across a dozen protocols,
+abstract their dialects into one command vocabulary, compose the cockpit out
+of ordinary folders, and watch every byte of it flow across a single
+observable bus.
+
+---
+
 ## 💡 Why OPEN-AIR?
-**Traditional instrument software is rigid, vendor-locked, and visually dated.** 
 
-OPEN-AIR was created to bridge the gap between raw hardware capabilities and 
-high-fidelity, user-centric visualization. It transforms your laboratory into 
-a professional, photorealistic cockpit, allowing you to orchestrate a fleet of 
-instruments with the same ease as a single device.
+Traditional instrument software is rigid, vendor-locked, and visually dated.
+OPEN-AIR bridges raw hardware capability and high-fidelity visualization,
+turning a laboratory into a photorealistic cockpit where a fleet of
+instruments is orchestrated as easily as a single device.
 
-### The Four Pillars:
-1.  **Freedom from Vendor Lock-in:** Use one interface to control multiple 
-    brands of hardware through the YAK command abstraction.
-2.  **Partitioned Architecture (Core/UI):** High-performance separation of 
-    real-time hardware logic from the visual rendering engine.
-3.  **Encapsulated Module Standard:** The `oaGui` module follows a strict 
-    12-subfolder structure, organized into 7 Functional Pillars (Loader, 
-    Parser, Tab Maker, Json Parser, Persistence, Rendering, and Telemetry).
-4.  **Your Folders are Your Interface:** No complex UI designers. 
-    Reorganizing your `oaGui/Assets/` folders instantly redraws your 
-    dashboard via the new Widget Registry.
+### The Four Pillars
+
+1. **Discovery across protocols.** VISA/SCPI, MIDI, DNS-SD/mDNS, AES70, OSC,
+   SNMP, Ember+, SMPTE 2138, PTP — devices announce themselves and appear in
+   the UI. See [Protocol management](#-protocol-management--discovery).
+2. **YAK — the middleware definition plane.** Multiple instruments that do
+   the same thing differently are abstracted into one verb grammar
+   (`SET / RIG / NAB / DO`), defined as data, not code.
+3. **Your folders are your interface.** `FrontEnd/Gui_Frames/` *is* the
+   document model: folders become tabs (`N_` prefixes order them,
+   `left_50`-style names split panes), JSON files become panels, and the
+   in-app WYSIWYG editor saves back into the same tree. Right-click any tab
+   to edit its panel.
+4. **One observable bus.** Everything — control values, discovery, agent
+   liveness, logs — flows over MQTT, so any component or third-party tool can
+   watch, inject, log, or replay traffic. `mosquitto_sub -t 'OpenAir/#' -v`
+   is a debugger for the whole system.
+
+### The fifth thing that makes the four work: **contracts**
+
+The pillars were always good ideas; what hurt was the absence of agreements
+*between* them — every boundary was an unchecked string, and most subsystems
+had grown two sources of truth. That is what
+[`contracts/`](#-the-contract-layer) fixes, and it is the reason the current
+generation of the platform exists.
 
 ---
 
-## 🧭 Navigation
-Currently under revision. Please refer to the root folders for components.
+## 🏛 Architecture at a glance
 
----
+```
+                      ┌───────────────────────────────┐
+   Browser (React)    │       MQTT broker             │   Rust agents
+   ─────────────────► │  1883 (tcp) / 9001 (ws)       │ ◄─────────────────
+   panels, widgets,   │  retained topics = the        │  VISA, MIDI, DNS-SD,
+   WYSIWYG editor     │  system's state database      │  AES70, OSC, YAK, …
+                      └───────────────────────────────┘
+            ▲                       ▲                          ▲
+            │                       │                          │
+            └───────────────┬───────┴──────────────────────────┘
+                            │
+                   ┌────────────────────┐
+                   │    contracts/      │  ONE definition of every
+                   │  TS (zod) → JSON   │  cross-boundary shape,
+                   │  Schema → Rust     │  shared by all three sides
+                   └────────────────────┘
 
-## 🚀 Quick Start
-```bash
-# Clone and setup
-git clone https://github.com/APKaudio/OPEN-AIR
-cd OPEN-AIR
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Launch the full system (Supervisor Mode)
-python3 openair.py
+   Orchestrator (Rust/axum, :8000) — serves the UI, GET /api/tree (live
+   filesystem → tabs), POST /api/save (editor writes), spawns the agents.
 ```
 
-*Developed by Anthony Peter Kuzub (LikeDotAudio)*
+---
 
+## 📜 The contract layer
+
+`contracts/` is a single package that owns every shape crossing a process
+boundary. It is TypeScript-first (zod), exports JSON Schema, and generates
+the Rust types — so the browser, the Rust agents, and the tooling cannot
+disagree about the wire.
+
+**Full documentation: [`contracts/README.md`](contracts/README.md)**
+
+| What it defines | Where |
+|---|---|
+| **Topic grammar** — typed build/parse for the whole `OpenAir/…` namespace, retain class per family, and a classifier for every legacy v40 topic | `src/topics/` |
+| **DeviceRecord** — the canonical discovered-device document (one JSON doc per device, stable derived `deviceId`) | `src/device-record.ts` |
+| **AgentHeartbeat** — one liveness shape for every agent *and* every browser session, with the MQTT Last-Will helper | `src/heartbeat.ts` |
+| **Layout schema** — the panel JSON as it really is: widget-type classification, the `yak_handler` binding block, folder grammar (`N_`, splits) | `src/layout/` |
+| **YAK wire contract** — the runtime `yak_handler` message the agent actually receives | `src/yak/verbs.ts` |
+
+Three properties make it more than documentation:
+
+- **Codegen, not copies.** `pnpm gen` runs zod → JSON Schema → `cargo-typify`,
+  and CI fails if the committed output is stale. One source, two languages.
+- **Golden vectors.** Hand-written behavior (topic grammar, device-ID
+  derivation, time conversion) exists twice — TypeScript and Rust — and both
+  sides run the *same* vector files (`contracts/vectors/`). A vector added on
+  one side fails the other side's CI until implemented.
+- **A ratchet, not a cliff.** `pnpm validate` walks every panel, the YAK tree,
+  the folder grammar, and every `config.ini`. Day-one drift was **169 errors
+  and 2,093 named deprecations** — all baselined in
+  `contracts/validate.baseline.json`, so CI fails only on debt that *isn't*
+  in the baseline. Old debt is an inventory; new debt is impossible; the
+  number only goes down.
+
+```bash
+pnpm validate                    # ratchet report (exit 1 on NEW debt)
+pnpm validate -- --report json   # the full machine-readable inventory
+pnpm gen && pnpm gen:check       # regenerate schemas + Rust; verify freshness
+```
+
+---
+
+## 🔌 Protocol management & discovery
+
+Protocol agents are Rust crates under `BackEnd/ComProtocols/`, spawned by the
+orchestrator. Each one announces itself, publishes what it finds, and says
+honestly whether it is real.
+
+**Full documentation: [`BackEnd/ComProtocols/README.md`](BackEnd/ComProtocols/README.md)**
+
+- **Liveness is data on the bus.** Every agent publishes a retained
+  `AgentHeartbeat` to `OpenAir/System/Agents/{agent}` and registers an MQTT
+  **Last Will**, so a crashed agent (or a killed browser tab) flips to
+  `offline` automatically instead of lying forever. Browser sessions are
+  agents too (`web-{guid}`).
+- **Stubs admit they are stubs.** Placeholder crates publish
+  `status = stub`, never `online` — the system no longer reports health it
+  does not have.
+- **Discovery flows to the UI as data.** VISA and DNS-SD agents publish
+  retained device topics; the Discovered tab renders them as sortable tables
+  (`OcaTable`), one row per device, grouped by category — DMM, Oscilloscope,
+  Generator, Spectrum, dnssd, midi.
+- **Rescan on demand.** The Discovered tab's **RESCAN DEVICES** button
+  publishes to `OpenAir/System/Protocols/visa/Device/Rescan`; the VISA agent
+  re-probes the fleet, refreshes retained state, and regenerates the panels.
+  Retained and zero-value payloads deliberately never trigger a scan.
+- **DNS-SD browses continuously.** The `openair-dnssd` agent enumerates every
+  advertised service type on the network and publishes each resolved
+  instance; vanished services clear their own retained topics.
+
+---
+
+## 🗂 Repository layout
+
+```
+OPEN-AIR/
+├── contracts/          # THE contract layer — zod schemas, topic grammar,
+│                       #   golden vectors, generated JSON Schema + Rust crate,
+│                       #   the openair-validate CLI and its ratchet baseline
+├── BackEnd/
+│   ├── Core/           # orchestrator (axum): /api/tree, /api/save, agent spawn
+│   └── ComProtocols/   # one Rust crate per protocol (visa, midi, dnssd, yak, …)
+├── FrontEnd/
+│   ├── Gui_Frames/     # YOUR INTERFACE: folders → tabs, JSON → panels
+│   ├── libControl/     # the widget library (faders, knobs, meters, tables, …)
+│   ├── comMQTT/        # MQTT provider + hooks
+│   ├── frameLayout/    # loader, widget factory, field dispatch
+│   ├── tabManager/     # tab engine, splits, window manager
+│   └── editorWYSIWYG/  # in-app panel editor
+├── ui/                 # the typed frontend package (Vite + TypeScript) —
+│                       #   builds the app today, becomes the runtime at cutover
+├── broker/             # mosquitto.conf (1883 + websockets 9001, persistence)
+├── Deployment/         # launcher, deploy scripts, discovered-GUI builder
+├── Documents/          # audits (historical analysis) + strategies (historical plans)
+└── TESTS/              # protocol test harnesses
+```
+
+---
+
+## 🚀 Quick start
+
+```bash
+git clone https://github.com/APKaudio/OPEN-AIR
+cd OPEN-AIR
+
+# 1. The broker (the spine — start it first)
+mosquitto -c broker/mosquitto.conf
+
+# 2. Python deps (VISA probing still uses pyvisa)
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+# 3. The system
+python3 Deployment/openair.py        # launcher: builds the Rust core + starts everything
+#   …or run the orchestrator directly from the repo root:
+cargo run --manifest-path BackEnd/Core/Cargo.toml
+```
+
+Then open **http://localhost:8000**. Watch the whole system talk:
+
+```bash
+mosquitto_sub -t 'OpenAir/#' -v            # everything
+mosquitto_sub -t 'OpenAir/System/Agents/#' -v   # who is alive
+```
+
+## 🛠 Development
+
+The repo is a pnpm workspace (`contracts` + `ui`) alongside two Cargo
+workspaces (`BackEnd/Core`, `BackEnd/ComProtocols`) and the standalone
+`contracts/rust` crate.
+
+```bash
+corepack enable && pnpm install   # Node 24 (.nvmrc), pnpm pinned in package.json
+pnpm test                         # contracts vector suites
+pnpm typecheck
+pnpm validate                     # panel/YAK/config drift, ratcheted
+cargo test --manifest-path contracts/rust/Cargo.toml   # same vectors, Rust side
+pnpm --filter ui build            # the typed frontend bundle
+pnpm --filter ui dev              # Vite dev server (proxies /api to :8000)
+```
+
+CI (`.github/workflows/contracts-ci.yml`) runs all of the above on every PR:
+Node tests, the Rust vector suite, both-workspace compilation, codegen
+freshness, and the validate ratchet.
+
+---
+
+## 📈 Status
+
+| Area | State |
+|---|---|
+| Contract layer (topics, device records, heartbeats, layout, codegen, validate + ratchet) | ✅ Complete |
+| Protocol liveness (heartbeats, LWT, honest stub status) | ✅ Complete |
+| Discovery → Discovered tab (VISA + MIDI + DNS-SD, tables, rescan) | ✅ Working |
+| Live folder tree (`GET /api/tree`) driving the UI | ✅ Complete |
+| Typed frontend package (`ui/`) | ✅ Builds the whole app · ⏳ cutover pending |
+| YAK 2 capability model (class/model split, reply parsing, WASM core) | ⏳ Planned |
+| Device Registry service + supervisor (restart, TTL aging) | ⏳ Planned |
+| Native Rust VISA (retire the `python3` subshell) | ⏳ Planned |
+
+Detailed history lives in [`CHANGELOG.md`](CHANGELOG.md); every file moved,
+retired, or deleted during the migration is recorded in
+[`Documents/Strategies/Migration_Ledger.md`](Documents/Strategies/Migration_Ledger.md).
+
+## 📚 Documentation
+
+| Where | What |
+|---|---|
+| [`contracts/README.md`](contracts/README.md) | The contract layer: schemas, topic tree, codegen, validate/ratchet, and the schema design law |
+| [`BackEnd/ComProtocols/README.md`](BackEnd/ComProtocols/README.md) | Protocol agents: what each crate does, discovery topics, heartbeats, adding a protocol |
+| [`ui/README.md`](ui/README.md) | The typed frontend package and the migration mechanics |
+| [`Documents/Audits/`](Documents/Audits/) | The 2026-07-17 design audit — historical analysis; resolved findings now live in the READMEs above |
+| [`Documents/Strategies/`](Documents/Strategies/) | The migration plans — historical; the shipped parts are documented as features above |
+
+---
+
+*Developed by Anthony Peter Kuzub (LikeDotAudio)*
 
 ## MIT License
 

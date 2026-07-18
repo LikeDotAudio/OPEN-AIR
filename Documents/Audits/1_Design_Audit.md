@@ -1,3 +1,8 @@
+> ## 📌 HISTORICAL SNAPSHOT — 2026-07-17 (v40)
+>
+> Preserved as written. Many findings below are now FIXED — see the resolution table in [0_README.md](0_README.md#resolution-status).
+> How the system works **today**: [`README.md`](../../README.md), [`contracts/README.md`](../../contracts/README.md), [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md).
+
 # OPEN-AIR Design Audit — The Good, the Bad, and the Ugly
 
 *2026-07-17 · v40 · High-level design only; implementation details cited as evidence, not as complaints.*

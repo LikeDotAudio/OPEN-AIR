@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — SHIPPED
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> The `ui/` package is documented in [`ui/README.md`](../../ui/README.md).
+> See [Strategies/README.md](README.md) for the full index.
+
 # Phase 2 Step 1 — the `ui/` Scaffold: Deployment Checklist
 
 *2026-07-18 · Companion to [Phase 2.md](Phase%202.md) §1. Scope: the isolated

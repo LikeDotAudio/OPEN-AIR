@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — SHIPPED — all six rollout steps complete
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> The contract layer is documented in [`contracts/README.md`](../../contracts/README.md).
+> See [Strategies/README.md](README.md) for the full index.
+
 # Phase 1 Deep Dive — Deploying the `contracts/` Package
 
 *2026-07-17 · Companion to [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md)

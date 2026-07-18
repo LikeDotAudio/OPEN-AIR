@@ -1,3 +1,9 @@
+> ## ⚠️ HISTORICAL PLANNING DOCUMENT — Phases 0–1 SHIPPED · Phase 2 partial · Phases 3–5 are the roadmap
+>
+> This is a *plan*, not a description of how OPEN-AIR works today.
+> The shipped parts are documented as features in [`contracts/README.md`](../../contracts/README.md), [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md), and [`ui/README.md`](../../ui/README.md).
+> See [Strategies/README.md](README.md) for the full index.
+
 # The TypeScript + WASM Plan (v40 → v41)
 
 *2026-07-17 · Companion to [1_Design_Audit.md](../Audits/1_Design_Audit.md). Ordered so

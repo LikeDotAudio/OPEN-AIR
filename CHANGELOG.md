@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-07-18 - Documentation: plans become features
+
+- **The README is a real project README again**: what OPEN-AIR is, the four
+  pillars as they actually work, an architecture sketch, and two new
+  first-class sections — **the contract layer** and **protocol management &
+  discovery** — plus repo layout, quick start, workspace commands, and an
+  honest status table (what is complete vs. what is still roadmap).
+- **Section READMEs added**, so documentation lives with the code:
+  [`contracts/README.md`](contracts/README.md) (schemas, topic tree, codegen,
+  validate/ratchet, and the schema design law that used to live in the
+  planning docs), [`BackEnd/ComProtocols/README.md`](BackEnd/ComProtocols/README.md)
+  (the agent fleet with real/stub status, heartbeats + Last Will, discovery
+  topics, rescan semantics, how to add a protocol), and
+  [`ui/README.md`](ui/README.md) (the typed frontend and its ratchets).
+- **`Documents/Strategies/` deprecated as documentation**: every plan carries
+  a HISTORICAL banner pointing at the feature docs. `Migration_Ledger.md` and
+  `Validations/` remain **active records**, not history.
+- **`Documents/Audits/` marked as a 2026-07-17 snapshot** and left as written,
+  with a per-finding **resolution table**: what is fixed, what is detected but
+  not repaired, and what remains roadmap — including the Discovered-tab case
+  study, now fully resolved plus two further bugs found during the repair.
+
 ## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry
 
 - **Drag jiggle fixed — mouse capture wins**: while a control is being

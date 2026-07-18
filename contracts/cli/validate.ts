@@ -7,11 +7,16 @@
  * YAK-tree rules under 5_Protocols/10_Yak, checks folder grammar, and lints
  * every BackEnd config.ini `topic*` value against the topic grammar.
  *
- * Exit code: nonzero on ERRORS only; --strict flips deprecations to errors.
+ * THE RATCHET (Phase 1 §5): when contracts/validate.baseline.json exists,
+ * only debt NOT in the baseline fails the run — day-one debt is inventory,
+ * new debt is impossible. `--update-baseline` rewrites the baseline from the
+ * current state (use after fixing files; the number only goes down —
+ * REVIEW the diff: a growing baseline is the smell this flag must not hide).
+ * Without a baseline: nonzero on errors; `--strict` flips deprecations too.
  * Output is data first: --report json is the canonical debt inventory.
  */
 import { createHash } from 'node:crypto'
-import { readFileSync, readdirSync, statSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import { basename, dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -176,10 +181,11 @@ function lintConfigInis() {
           const value = m[2]!.replace(/\s*[;#].*$/, '')
           const bare = value.replace(/\/[#+]$/, '').replace(/\/$/, '')
           const parsed = Topics.parse(bare)
+          const rel = relative(REPO_ROOT, p) // repo-relative: baseline keys must be machine-independent
           if (parsed.kind === 'unknown') {
-            treeIssues.push({ level: 'error', code: 'config-ini-topic', path: `${p}:${i + 1}`, message: `${m[1]} = "${value}" does not parse against the topic grammar` })
+            treeIssues.push({ level: 'error', code: 'config-ini-topic', path: `${rel}:${i + 1}`, message: `${m[1]} = "${value}" does not parse against the topic grammar` })
           } else if (parsed.kind === 'legacy') {
-            treeIssues.push({ level: 'deprecation', code: 'config-ini-topic-legacy', path: `${p}:${i + 1}`, message: `${m[1]} = "${value}" targets the ${parsed.family} legacy namespace` })
+            treeIssues.push({ level: 'deprecation', code: 'config-ini-topic-legacy', path: `${rel}:${i + 1}`, message: `${m[1]} = "${value}" targets the ${parsed.family} legacy namespace` })
           }
         })
       }
@@ -207,17 +213,80 @@ const summary = {
   byCode: Object.fromEntries([...byCode.entries()].sort((a, b) => b[1] - a[1])),
 }
 
+// -------------------------------------------------------------- ratchet
+
+const BASELINE_PATH = join(REPO_ROOT, 'contracts/validate.baseline.json')
+const updateBaseline = args.includes('--update-baseline')
+
+/** Multiset of stable issue keys: same (file, code, path) may recur. */
+function issueCounts(): Record<string, number> {
+  const counts: Record<string, number> = {}
+  for (const i of allIssues) {
+    const key = `${(i as { file: string }).file}|${i.code}|${i.path}`
+    counts[key] = (counts[key] ?? 0) + 1
+  }
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)))
+}
+
+let baseline: { counts: Record<string, number> } | null = null
+try {
+  baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8')) as { counts: Record<string, number> }
+} catch {
+  baseline = null
+}
+
+if (updateBaseline) {
+  const counts = issueCounts()
+  writeFileSync(
+    BASELINE_PATH,
+    JSON.stringify(
+      {
+        $comment:
+          'openair-validate ratchet baseline (Phase 1 §5). This IS the technical-debt inventory: CI fails only on debt not listed here. Shrink it by fixing files and re-running with --update-baseline; review every diff — it must only go down.',
+        totals: summary.totals,
+        counts,
+      },
+      null,
+      2,
+    ) + '\n',
+  )
+  console.log(`baseline written: ${Object.keys(counts).length} keys, ${summary.totals.errors} errors + ${summary.totals.deprecations} deprecations`)
+}
+
+const newDebt: string[] = []
+let paidDown = 0
+if (baseline && !updateBaseline) {
+  const current = issueCounts()
+  for (const [key, n] of Object.entries(current)) {
+    const allowed = baseline.counts[key] ?? 0
+    if (n > allowed) newDebt.push(`${key} (${n} > baseline ${allowed})`)
+  }
+  for (const [key, n] of Object.entries(baseline.counts)) {
+    const have = current[key] ?? 0
+    if (have < n) paidDown += n - have
+  }
+}
+
+// ------------------------------------------------------------- reporting
+
 if (reportMode === 'json') {
-  console.log(JSON.stringify({ summary, files: reports, tree: treeIssues }, null, 2))
+  console.log(JSON.stringify({ summary, ratchet: { baselined: !!baseline, newDebt, paidDown }, files: reports, tree: treeIssues }, null, 2))
 } else {
   console.log(`openair-validate — ${GUI_ROOT}`)
   console.log(`  errors: ${errors.length}   deprecations: ${deprecations.length}`)
   console.log('  by code:')
   for (const [code, n] of Object.entries(summary.byCode)) console.log(`    ${String(n).padStart(6)}  ${code}`)
-  if (reportMode === 'pretty') {
+  if (baseline && !updateBaseline) {
+    console.log(`\n  ratchet: ${newDebt.length} new vs baseline${paidDown ? `; ${paidDown} baselined issue(s) fixed — run --update-baseline to lock the gain` : ''}`)
+    for (const d of newDebt.slice(0, 40)) console.log(`    NEW  ${d}`)
+  }
+  if (reportMode === 'pretty' && !baseline) {
     console.log('\n  errors (first 40):')
     for (const i of errors.slice(0, 40)) console.log(`    [${(i as { file: string }).file}${i.path}] ${i.code}: ${i.message}`)
   }
 }
 
-process.exit(errors.length > 0 || (strict && deprecations.length > 0) ? 1 : 0)
+const failed = baseline && !updateBaseline
+  ? newDebt.length > 0 || (strict && deprecations.length > 0)
+  : errors.length > 0 || (strict && deprecations.length > 0)
+process.exit(failed ? 1 : 0)

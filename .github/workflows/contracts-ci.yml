@@ -1,7 +1,4 @@
 # The repo's first non-deploy CI (Documents/Strategies/Phase 1.md §6).
-# Grows with the rollout:
-#   step 5: openair-validate in ratchet mode + migration-ledger check
-#   step 6: cargo build in BOTH BackEnd workspaces (proves the path-dep wiring)
 name: contracts-ci
 
 on:
@@ -21,6 +18,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @openair/contracts typecheck
       - run: pnpm --filter @openair/contracts test # includes the golden-vector suites
+      # THE RATCHET (step 5): fails only on debt not in validate.baseline.json.
+      # Fixing files shrinks the baseline via --update-baseline; growth is a bug.
+      - run: pnpm validate -- --report summary
 
   rust:
     runs-on: ubuntu-latest

@@ -14,8 +14,10 @@ export default defineConfig({
       allow: ['..'],
     },
     proxy: {
-      // GET /api/tree, POST /api/save → the orchestrator (axum).
+      // GET /api/tree, POST /api/save → the orchestrator (axum), which also
+      // serves FrontEnd/ statically — so its assets (splash gif) proxy too.
       '/api': 'http://localhost:8000',
+      '/assets': 'http://localhost:8000',
     },
   },
   build: {

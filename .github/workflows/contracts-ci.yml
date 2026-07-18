@@ -26,7 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # System libs the workspace's native deps need on a bare runner:
+      # alsa (openair-midi), pkg-config; cmake/gcc are preinstalled.
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config
       # rustup reads rust-toolchain.toml automatically
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            contracts/rust
+            BackEnd/Core
+            BackEnd/ComProtocols
       - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
       # step 6: the path-dep wiring — both BackEnd workspaces compile with
       # openair-contracts as a dependency (Core fully; ComProtocols via its

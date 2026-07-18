@@ -42,11 +42,18 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
     let mut mqttoptions = MqttOptions::new("open-air-orchestrator", &host, port);
     mqttoptions.set_keep_alive(Duration::from_secs(30));
     
-    let (client, mut connection) = Client::new(mqttoptions, 10);
-
-    std::thread::spawn(move || {
-        for _ in 0..10 {
-            if connection.iter().next().is_none() {
+    // Capacity must hold every queued publish: 1 heartbeat + config/status
+    // per protocol crate. rumqttc only puts packets on the wire while the
+    // connection eventloop is driven; the drain thread below runs until the
+    // disconnect (bottom of this fn) ends the iterator — the old
+    // fixed-10-events drain silently dropped most of the 33 queued messages.
+    // A thread (not inline) because Connection::iter() blocks internally and
+    // this fn is called from within the tokio runtime.
+    let (client, mut connection) = Client::new(mqttoptions, 64);
+    let drain = std::thread::spawn(move || {
+        let deadline = std::time::Instant::now() + Duration::from_secs(10);
+        for event in connection.iter() {
+            if event.is_err() || std::time::Instant::now() > deadline {
                 break;
             }
         }
@@ -55,8 +62,7 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
     // v41 AgentHeartbeat (contracts H1): the orchestrator's retained beat,
     // typed by openair-contracts. This client is ephemeral, so no LWT here —
     // the persistent supervisor client (Phase 4) owns liveness; until then
-    // staleness is readable from lastBeat. Published first so it flushes
-    // within the drained connection events.
+    // staleness is readable from lastBeat.
     let connected_at = openair_contracts::time::from_unix_seconds(
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -117,8 +123,8 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
                                 let status = if STUB_PROTOCOLS.contains(&proto) { "stub" } else { "online" };
                                 let _ = client.publish(format!("{}/config", topic), QoS::AtLeastOnce, true, payload.to_string());
                                 let _ = client.publish(format!("{}/status", topic), QoS::AtLeastOnce, true, status);
-                                
-                                published.push(topic);
+
+                                published.push((topic, status));
                             }
                         }
                     }
@@ -129,8 +135,14 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
     
     if !published.is_empty() {
         println!("📡 [MQTT] Published {} protocol configs (retained) to {}:{}:", published.len(), host, port);
-        for t in published {
-            println!("   • {}/config  (+ /status=online)", t);
+        for (t, status) in published {
+            println!("   • {}/config  (+ /status={})", t, status);
         }
     }
+
+    // Flush: disconnect ends the drain thread's iterator once every queued
+    // packet (and its QoS-1 ack) has been processed; the thread's own
+    // deadline bounds a dead-broker hang.
+    let _ = client.disconnect();
+    let _ = drain.join();
 }

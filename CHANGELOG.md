@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-07-18 - Local Stack Smoke Test + the MQTT Flush Bug
+
+- **Full local stack verified end-to-end**: broker + orchestrator (live
+  `/api/tree`) + `ui/` dev server. Headless boot against the LIVE tree
+  renders the real tab set (including `Instruments`, which the stale
+  snapshot never showed).
+- **Orchestrator flush bug found and fixed by the smoke test**: the boot
+  MQTT client's drain thread processed only 10 connection events, so most
+  of the 33 queued retained publishes (protocol configs/statuses,
+  heartbeat) never reached the broker — only 2 of 16 statuses landed.
+  Now: drain thread runs until `disconnect()` completes (deadline-bounded);
+  all 16 land, stub statuses verified on the wire
+  (`nmos/rest/sap/mdns/dnssd/websocket = stub`).
+- **CI rust job fixed for bare runners**: `libasound2-dev` installed
+  (openair-midi → alsa-sys) + rust-cache for the three cargo trees — the
+  first push's failure was exactly this.
+- Vite dev proxies `/assets` alongside `/api` to the orchestrator.
+
 ## 2026-07-18 - Phase 2 Step 1: the `ui/` Package Exists and Builds
 
 - **The isolated typed frontend scaffold is real**: `ui/` joins the pnpm

@@ -43,7 +43,7 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
     mqttoptions.set_keep_alive(Duration::from_secs(30));
     
     let (client, mut connection) = Client::new(mqttoptions, 10);
-    
+
     std::thread::spawn(move || {
         for _ in 0..10 {
             if connection.iter().next().is_none() {
@@ -51,7 +51,30 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
             }
         }
     });
-    
+
+    // v41 AgentHeartbeat (contracts H1): the orchestrator's retained beat,
+    // typed by openair-contracts. This client is ephemeral, so no LWT here —
+    // the persistent supervisor client (Phase 4) owns liveness; until then
+    // staleness is readable from lastBeat. Published first so it flushes
+    // within the drained connection events.
+    let connected_at = openair_contracts::time::from_unix_seconds(
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs_f64())
+            .unwrap_or(0.0),
+    );
+    if let Ok((hb_topic, mut beat)) =
+        openair_contracts::heartbeat::heartbeat_lwt("orchestrator", &connected_at, None)
+    {
+        beat.status = openair_contracts::heartbeat::AgentHeartbeatStatus::Online;
+        beat.version = Some(env!("CARGO_PKG_VERSION").to_string());
+        beat.pid = Some(std::process::id() as i64);
+        if let Ok(bytes) = serde_json::to_vec(&beat) {
+            let _ = client.publish(&hb_topic, QoS::AtLeastOnce, true, bytes);
+            println!("💓 [MQTT] AgentHeartbeat online (retained) at {}", hb_topic);
+        }
+    }
+
     let mut published = Vec::new();
     
     if let Ok(entries) = fs::read_dir(&com_protocols) {

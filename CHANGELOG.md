@@ -58,9 +58,18 @@
   collisions, 45 dead config.ini topic triples, and 45 converter uses the
   YAK agent silently passes through. Inventory published at
   `Documents/Strategies/Validations/contracts-debt-inventory.md`.
-- **Still open in Phase 1**: step 5 (arm the validate ratchet in CI against
-  the day-one baseline) and step 6 (Rust adoption seed — `openair-contracts`
-  as a path dependency in both BackEnd workspaces).
+- **Phase 1 step 5 deployed — the ratchet, armed**: `contracts/
+  validate.baseline.json` locks the day-one debt; CI now fails only on debt
+  NOT in the baseline (kill-tested: probe file → red, removed → green).
+  `--update-baseline` shrinks it after fixes; the number only goes down.
+- **Phase 1 step 6 deployed — Rust adoption seed. Phase 1 complete.**
+  `openair-contracts` is a path dependency in BOTH BackEnd workspaces. First
+  real consumers: the YAK agent registers an MQTT Last Will and publishes a
+  retained contract-typed `AgentHeartbeat` at `OpenAir/System/Agents/yak`
+  (verified live — SIGKILL flipped the retained status to `offline` via the
+  broker); the orchestrator publishes its retained beat (LWT deferred to the
+  Phase 4 supervisor's persistent client). All six Phase 1 DoD boxes ticked
+  in `Documents/Strategies/Phase 1.md` §7.
 
 ## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
 

@@ -19,6 +19,7 @@ clap = { version = "4.5", features = ["derive"] }
 tower-http = { version = "0.5", features = ["fs", "cors"] }
 rust-ini = "0.21"
 rumqttc = "0.24"
+openair-contracts = { path = "../../../contracts/rust" }
 walkdir = "2.5"
 open = "5.1"
 tower = "0.4"

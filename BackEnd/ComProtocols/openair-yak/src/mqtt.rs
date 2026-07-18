@@ -14,7 +14,34 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
     // Increase max packet size to 256MB to handle massive OPEN-AIR GUI retained JSON payloads
     mqttoptions.set_max_packet_size(256 * 1024 * 1024, 256 * 1024 * 1024);
 
+    // v41 AgentHeartbeat (contracts H1/H2): retained beat + Last Will at
+    // OpenAir/System/Agents/yak, typed by openair-contracts — a broker kill
+    // of this agent flips the retained status to "offline" automatically.
+    let connected_at = openair_contracts::time::from_unix_seconds(
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs_f64())
+            .unwrap_or(0.0),
+    );
+    let (hb_topic, lwt_payload) =
+        openair_contracts::heartbeat::heartbeat_lwt("yak", &connected_at, None)?;
+    mqttoptions.set_last_will(rumqttc::LastWill::new(
+        &hb_topic,
+        serde_json::to_vec(&lwt_payload)?,
+        QoS::AtLeastOnce,
+        true,
+    ));
+
     let (client, mut eventloop) = AsyncClient::new(mqttoptions, 1024);
+
+    let mut online_beat = lwt_payload.clone();
+    online_beat.status = openair_contracts::heartbeat::AgentHeartbeatStatus::Online;
+    online_beat.version = Some(env!("CARGO_PKG_VERSION").to_string());
+    online_beat.pid = Some(std::process::id() as i64);
+    client
+        .publish(&hb_topic, QoS::AtLeastOnce, true, serde_json::to_vec(&online_beat)?)
+        .await?;
+    eprintln!("   💓 [YAK AGENT] AgentHeartbeat online (retained) at {} — LWT registered", hb_topic);
 
     let listen_topic = "OpenAir/Gui/#";
     eprintln!("   📡 [YAK AGENT] Subscribing to listen topic: {}", listen_topic);

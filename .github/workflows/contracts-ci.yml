@@ -28,6 +28,11 @@ jobs:
       - uses: actions/checkout@v4
       # rustup reads rust-toolchain.toml automatically
       - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
+      # step 6: the path-dep wiring — both BackEnd workspaces compile with
+      # openair-contracts as a dependency (Core fully; ComProtocols via its
+      # contracts consumer, to keep CI under the ~5-minute budget)
+      - run: cargo check --manifest-path BackEnd/Core/Cargo.toml
+      - run: cargo check --manifest-path BackEnd/ComProtocols/Cargo.toml -p openair-yak
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
     runs-on: ubuntu-latest

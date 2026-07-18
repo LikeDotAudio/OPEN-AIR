@@ -379,14 +379,24 @@ Each step is a PR-sized unit that leaves `main` green and ships a schema
 | **5. Ratchet on** (1 d) | Committed baseline; CI enforces no-new-debt | CI; `Validations/contracts-debt-inventory.md` published |
 | **6. Rust adoption seed** (1–2 d) | `openair-contracts` as path dep in both workspaces | `openair-yak` parses one thing through contract types (e.g. its config/monitor payload) — proves the dependency direction before Phase 3 bets on it |
 
-Definition of done — all true at once:
+Definition of done — **closed out 2026-07-17**:
 
-- [ ] `pnpm gen --check`, vitest, cargo test, and both-workspace builds green in CI
-- [ ] Every vector passes in **both** languages
-- [ ] `openair-validate` runs in CI with the ratchet armed; baseline committed
-- [ ] Debt inventory published and linked from the audit README
-- [ ] `topicUtils.js` deleted; `topicMaker.jsx` semantics pinned by vectors
-- [ ] Zero runtime deps in `@openair/contracts` beyond zod; zero deps in `openair-contracts` beyond serde
+- [x] `pnpm gen --check`, vitest, cargo test, and both-workspace builds green in CI
+- [x] Every vector passes in **both** languages (topics, payloads, identity/time)
+- [x] `openair-validate` runs in CI with the ratchet armed; baseline committed
+      (169 errors / 2,093 deprecations — kill-tested: new debt fails, clean passes)
+- [x] Debt inventory published (`Documents/Strategies/Validations/`) and linked
+      from the audit README
+- [x] `topicUtils.js` deleted; `topicMaker.jsx` semantics pinned by vectors
+- [x] Zero runtime deps in `@openair/contracts` beyond zod; `openair-contracts`
+      deps: serde + serde_json + **regress** (amended step 3b — cargo-typify's
+      validation regex engine, pure validation, no I/O)
+
+Step 6 seed shipped beyond the minimum: the YAK agent registers a real MQTT
+LWT and publishes a retained contract-typed `AgentHeartbeat` (verified live —
+SIGKILL flipped the retained status to `offline`); the orchestrator publishes
+its retained beat (no LWT — its MQTT client is ephemeral until the Phase 4
+supervisor).
 
 ---
 

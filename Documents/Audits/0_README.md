@@ -14,6 +14,7 @@ TypeScript + WASM generation of the platform.
 | [Phase 1.md](../Strategies/Phase%201.md) | Deep dive: deployment strategy for the `contracts/` package — scaffolding, zod→JSON-Schema→Rust codegen, golden vectors, validate CLI with CI ratchet, rollout order |
 | [Phase 2.md](../Strategies/Phase%202.md) | Deep dive: frontend TypeScript migration — Vite/pnpm scaffolding, the `window.*` bridge mechanic, typed widget registry, cutover/deploy/PWA strategy |
 | [4_Contracts_Structural_Guidelines.md](../Strategies/4_Contracts_Structural_Guidelines.md) | Structural guidelines for the Phase 1 `contracts/` package, grounded in a full code-level inventory of every cross-boundary shape (topics, device records, heartbeats, layout JSON, YAK tree) |
+| [contracts-debt-inventory.md](../Strategies/Validations/contracts-debt-inventory.md) | The day-one `openair-validate` drift count (169 errors / 2,093 deprecations, 2026-07-17) — the ratchet baseline; the number only goes down |
 
 ## The one-paragraph verdict
 

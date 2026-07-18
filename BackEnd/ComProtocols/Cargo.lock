@@ -830,6 +830,10 @@ dependencies = [
 [[package]]
 name = "openair-dnssd"
 version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
+]
 
 [[package]]
 name = "openair-ember"

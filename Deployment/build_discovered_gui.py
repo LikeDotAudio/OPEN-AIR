@@ -37,6 +37,7 @@ def on_connect(client, userdata, flags, rc):
     print(f"[discovered-gui] connected rc={rc}")
     client.subscribe("OpenAir/System/Protocols/visa/Device/#")
     client.subscribe("OpenAir/System/Protocols/midi/Device/#")
+    client.subscribe("OpenAir/System/Protocols/dnssd/Device/#")
 
 
 def on_message(client, userdata, msg):
@@ -62,6 +63,14 @@ def on_message(client, userdata, msg):
         direction, dev_n, key = rest
         block = f"{direction} {dev_n}"
         collected.setdefault("midi", {}).setdefault(block, {})[key] = value
+    elif proto == "dnssd":
+        # {service_type}/{instance}/{key} — one Discovered category for all
+        # DNS-SD/mDNS services, one block per instance, grouped by type.
+        if len(rest) != 3 or not value:
+            return
+        service_type, instance, key = rest
+        block = f"{instance} ({service_type})"
+        collected.setdefault("dnssd", {}).setdefault(block, {})[key] = value
 
 
 def label(text):

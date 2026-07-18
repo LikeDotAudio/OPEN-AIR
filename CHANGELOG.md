@@ -2,6 +2,18 @@
 
 ## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry
 
+- **DNS-SD discovery is real — the `dnssd` crate is no longer a stub**: it
+  now browses `_services._dns-sd._udp.local.` (the meta-query enumerating
+  EVERY advertised service type), then browses each type via `mdns-sd` and
+  publishes retained attribute topics under
+  `OpenAir/System/Protocols/dnssd/Device/{type}/{instance}/`. Vanished
+  services clear their retained topics. The orchestrator spawns it as a
+  continuous browse thread; its protocol status honestly reports `online`
+  (left the stub list). The Discovered tab gains a **dnssd** category —
+  first live sweep found **42 services** (Rigol LAN, RTSP/AES67-style audio
+  streams, printers, Chromecasts...). RESCAN re-sweeps it like everything
+  else.
+
 - **WYSIWYG entry moved to the tabs, globally**: right-click any tab —
   folder tab or top-level window tab — to open the editor on that folder's
   first panel file (depth-first through subfolders). The canvas right-click

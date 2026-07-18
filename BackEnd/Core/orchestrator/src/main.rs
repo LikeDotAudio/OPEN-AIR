@@ -207,6 +207,14 @@ async fn main() {
         }
     });
 
+    // DNS-SD / mDNS discovery agent — continuous browse on its own thread
+    // (mdns-sd is sync); retained topics land in the Discovered tab via the
+    // same builder sweep as VISA/MIDI. No longer a stub.
+    std::thread::spawn(|| {
+        println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");
+        openair_dnssd::run_browse_agent("127.0.0.1", 1883);
+    });
+
     let tx_clone_visa = tx.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");

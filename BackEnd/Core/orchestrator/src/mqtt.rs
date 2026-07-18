@@ -118,8 +118,9 @@ pub fn publish_protocol_configs(root: &Path, no_mqtt: bool) {
                                 
                                 // Phase 0 item 4: stub crates must not claim health the
                                 // system does not have (contracts H1 'stub' status).
-                                const STUB_PROTOCOLS: [&str; 6] =
-                                    ["nmos", "rest", "sap", "mdns", "dnssd", "websocket"];
+                                // dnssd left the list 2026-07-18: real mdns-sd browse agent.
+                                const STUB_PROTOCOLS: [&str; 5] =
+                                    ["nmos", "rest", "sap", "mdns", "websocket"];
                                 let status = if STUB_PROTOCOLS.contains(&proto) { "stub" } else { "online" };
                                 let _ = client.publish(format!("{}/config", topic), QoS::AtLeastOnce, true, payload.to_string());
                                 let _ = client.publish(format!("{}/status", topic), QoS::AtLeastOnce, true, status);

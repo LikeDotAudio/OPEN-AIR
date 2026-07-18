@@ -9,10 +9,12 @@ fails the build. Git history is the archive; this file is the marker.
 
 Actions: `add` | `move` | `convert` (jsx→tsx, implies move to `ui/src`) |
 `retire` (kept on disk, no longer loaded) | `delete`.
+Commit column: write `(this commit)` when the row lands with the change
+itself; hashes may be back-filled later for cross-reference.
 
 | Date | Action | Old path | New path | Commit | Note |
 |---|---|---|---|---|---|
-| 2026-07-17 | add | — | `Documents/Audits/Migration_Ledger.md` | — | Ledger established (ruling: archive markers + checks at every step) |
-| 2026-07-17 | add | — | `pnpm-workspace.yaml`, `package.json`, `.nvmrc`, `rust-toolchain.toml` | — | Phase 1 step 1: workspace root + toolchain pins |
-| 2026-07-17 | add | — | `contracts/` | — | Phase 1 step 1: @openair/contracts package skeleton |
-| 2026-07-17 | add | — | `.github/workflows/contracts-ci.yml` | — | Phase 1 step 1: first non-deploy CI |
+| 2026-07-17 | add | — | `Documents/Audits/Migration_Ledger.md` | 72d7e531d | Ledger established (ruling: archive markers + checks at every step) |
+| 2026-07-17 | add | — | `pnpm-workspace.yaml`, `package.json`, `.nvmrc`, `rust-toolchain.toml` | fe130b3b0 | Phase 1 step 1: workspace root + toolchain pins |
+| 2026-07-17 | add | — | `contracts/` | fe130b3b0 | Phase 1 step 1: @openair/contracts package skeleton |
+| 2026-07-17 | add | — | `.github/workflows/contracts-ci.yml` | fe130b3b0 | Phase 1 step 1: first non-deploy CI |

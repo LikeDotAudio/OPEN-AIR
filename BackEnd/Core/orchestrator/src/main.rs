@@ -210,22 +210,36 @@ async fn main() {
     let tx_clone_visa = tx.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
-        
+
         let mut mqttoptions = rumqttc::MqttOptions::new("open-air-visa-scanner", "127.0.0.1", 1883);
         mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
         let (mqtt_client, mut mqtt_connection) = rumqttc::Client::new(mqttoptions, 10);
-        
+
         std::thread::spawn(move || {
             for _ in mqtt_connection.iter() {}
         });
 
+        // The Write daemon and the scan loop share the topic→resource map:
+        // every rescan swaps in a fresh mapping.
+        let topic_to_resource: std::sync::Arc<std::sync::Mutex<std::collections::HashMap<String, String>>> =
+            Default::default();
+        // Rescan trigger: the Discovered tab's Scan panel publishes value=1
+        // (non-retained) to .../visa/Device/Rescan; the daemon thread signals
+        // this loop. Capacity 1: triggers during a running scan coalesce.
+        let (rescan_tx, mut rescan_rx) = tokio::sync::mpsc::channel::<()>(1);
+
+        spawn_visa_write_daemon(topic_to_resource.clone(), rescan_tx);
+
+        loop {
+
         let devices = tokio::task::spawn_blocking(|| {
             openair_visa::oa_visa_scan_for_devices::list_resources()
         }).await.unwrap_or_default();
-        
+
         let mut counts: std::collections::HashMap<(String, String), usize> = std::collections::HashMap::new();
 
-        let mut topic_to_resource = std::collections::HashMap::new();
+        // Fresh map per scan; swapped into the shared handle after the loop.
+        let mut scan_topic_to_resource = std::collections::HashMap::new();
 
         for dev in devices {
             println!("   📡 [VISA AGENT] Probing resource: {}", dev);
@@ -282,7 +296,7 @@ except Exception as e:
                         let count = counts.entry(key).or_insert(0);
                         
                         let topic_prefix = format!("OpenAir/System/Protocols/visa/Device/{}/{}/Dev{}", device_type.replace(" ", "_"), model_str.replace(" ", "_"), count);
-                        topic_to_resource.insert(topic_prefix.clone(), dev.clone());
+                        scan_topic_to_resource.insert(topic_prefix.clone(), dev.clone());
                         
                         let mut is_online = false;
                         if let Some(raw_idn) = merged.get("raw_idn").and_then(|r| r.as_str()) {
@@ -324,6 +338,9 @@ except Exception as e:
         }
         println!("✅ [VISA AGENT] Scan & MQTT Publish complete.");
 
+        // Publish the fresh topic→resource mapping for the Write daemon.
+        *topic_to_resource.lock().unwrap() = scan_topic_to_resource;
+
         // Phase 0 item 3: regenerate the Discovered tab panels from the
         // retained discovery topics just published. Transitional — Phase 4
         // replaces this whole pipeline with the Device Registry + a live
@@ -342,68 +359,20 @@ except Exception as e:
             }
         }
 
-        // Now sit and wait for Write commands
-        println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands...");
-        let sub_topic = "OpenAir/System/Protocols/visa/Device/+/+/+/Write";
-        let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", "127.0.0.1", 1883);
-        mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
-        let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
-        
-        let _ = mqtt_client_sub.subscribe(sub_topic, rumqttc::QoS::AtLeastOnce);
-        
-        std::thread::spawn(move || {
-            for notification in mqtt_connection_sub.iter() {
-                if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
-                    let topic = publish.topic.clone();
-                    let payload = String::from_utf8_lossy(&publish.payload).trim().to_string();
-                    
-                    if payload.is_empty() { continue; }
-                    
-                    if let Some(topic_prefix) = topic.strip_suffix("/Write") {
-                        if let Some(resource_name) = topic_to_resource.get(topic_prefix) {
-                            println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
-                            
-                            let safe_payload = payload.replace("'", "\\'");
-                            let script = format!(r#"
-import pyvisa
-import sys
-try:
-    rm = pyvisa.ResourceManager('@py')
-except:
-    rm = pyvisa.ResourceManager()
-try:
-    inst = rm.open_resource('{}', open_timeout=2000)
-    inst.timeout = 2000
-    inst.read_termination = '\n'
-    inst.write_termination = '\n'
-    if '?' in '{}':
-        print(inst.query('{}').strip())
-    else:
-        inst.write('{}')
-    inst.close()
-except Exception as e:
-    print("ERROR:", str(e))
-"#, resource_name, safe_payload, safe_payload, safe_payload);
+        // Triggers that arrived DURING the scan are stale — the scan they
+        // asked for just ran. This also absorbs the browser's 400 ms
+        // settle-retained republish of the same press (forwarded live by
+        // the broker), which would otherwise queue a second scan.
+        while rescan_rx.try_recv().is_ok() {}
 
-                            if let Ok(output) = std::process::Command::new("python3").arg("-c").arg(&script).output() {
-                                let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
-                                if payload.contains('?') {
-                                    println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
-                                    let read_topic = format!("{}/Read", topic_prefix);
-                                    let _ = mqtt_client_sub.publish(read_topic, rumqttc::QoS::AtLeastOnce, true, out_str.as_bytes());
-                                    let write_topic = format!("{}/Write", topic_prefix);
-                                    let _ = mqtt_client_sub.publish(write_topic, rumqttc::QoS::AtLeastOnce, true, "");
-                                } else {
-                                    if !out_str.is_empty() {
-                                        println!("      ⚠️ [VISA MQTT] {} warning/error -> {}", resource_name, out_str);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+        // Wait for the Discovered tab's rescan trigger, then go again.
+        println!("⏸️  [VISA AGENT] Scan idle — publish 1 (non-retained) to OpenAir/System/Protocols/visa/Device/Rescan to rescan.");
+        if rescan_rx.recv().await.is_none() {
+            break;
+        }
+        println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
+
+        } // end scan loop
     });
 
     // Sub-router for API endpoints
@@ -505,3 +474,99 @@ async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
     }
 }
 
+
+/// VISA Write daemon + rescan listener. Owns its own MQTT connection on a
+/// dedicated OS thread (rumqttc sync iter blocks). `topic_to_resource` is
+/// shared with the scan loop, which swaps in a fresh mapping per scan;
+/// a non-retained truthy publish on .../Device/Rescan signals that loop.
+fn spawn_visa_write_daemon(
+    topic_to_resource: std::sync::Arc<std::sync::Mutex<std::collections::HashMap<String, String>>>,
+    rescan_tx: tokio::sync::mpsc::Sender<()>,
+) {
+    const RESCAN_TOPIC: &str = "OpenAir/System/Protocols/visa/Device/Rescan";
+    println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan trigger...");
+    let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", "127.0.0.1", 1883);
+    mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
+    let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
+
+    let _ = mqtt_client_sub.subscribe("OpenAir/System/Protocols/visa/Device/+/+/+/Write", rumqttc::QoS::AtLeastOnce);
+    let _ = mqtt_client_sub.subscribe(RESCAN_TOPIC, rumqttc::QoS::AtLeastOnce);
+
+    std::thread::spawn(move || {
+        for notification in mqtt_connection_sub.iter() {
+            if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
+                let topic = publish.topic.clone();
+                let payload = String::from_utf8_lossy(&publish.payload).trim().to_string();
+
+                if topic == RESCAN_TOPIC {
+                    // Retained messages are state, not commands: only a live
+                    // press triggers (the browser's settle-retained publish
+                    // and boot-time retained replay must not start scans).
+                    if !publish.retain && is_truthy_trigger(&payload) {
+                        println!("   🔁 [VISA MQTT] Rescan requested via {}", topic);
+                        let _ = rescan_tx.try_send(()); // full channel = scan already pending
+                    }
+                    continue;
+                }
+
+                if payload.is_empty() { continue; }
+
+                if let Some(topic_prefix) = topic.strip_suffix("/Write") {
+                    let resource = topic_to_resource.lock().unwrap().get(topic_prefix).cloned();
+                    if let Some(resource_name) = resource {
+                        println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
+
+                        let safe_payload = payload.replace("'", "\\'");
+                        let script = format!(r#"
+import pyvisa
+import sys
+try:
+    rm = pyvisa.ResourceManager('@py')
+except:
+    rm = pyvisa.ResourceManager()
+try:
+    inst = rm.open_resource('{}', open_timeout=2000)
+    inst.timeout = 2000
+    inst.read_termination = '\n'
+    inst.write_termination = '\n'
+    if '?' in '{}':
+        print(inst.query('{}').strip())
+    else:
+        inst.write('{}')
+    inst.close()
+except Exception as e:
+    print("ERROR:", str(e))
+"#, resource_name, safe_payload, safe_payload, safe_payload);
+
+                        if let Ok(output) = std::process::Command::new("python3").arg("-c").arg(&script).output() {
+                            let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                            if payload.contains('?') {
+                                println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
+                                let read_topic = format!("{}/Read", topic_prefix);
+                                let _ = mqtt_client_sub.publish(read_topic, rumqttc::QoS::AtLeastOnce, true, out_str.as_bytes());
+                                let write_topic = format!("{}/Write", topic_prefix);
+                                let _ = mqtt_client_sub.publish(write_topic, rumqttc::QoS::AtLeastOnce, true, "");
+                            } else if !out_str.is_empty() {
+                                println!("      ⚠️ [VISA MQTT] {} warning/error -> {}", resource_name, out_str);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+/// Truthy scan trigger: the GUI envelope `{"value":1,...}`, or a bare
+/// `1`/`true`/`scan`. `0`, `false`, and empty payloads never trigger.
+fn is_truthy_trigger(payload: &str) -> bool {
+    if let Ok(v) = serde_json::from_str::<serde_json::Value>(payload) {
+        return match v.get("value").unwrap_or(&v) {
+            serde_json::Value::Number(n) => n.as_f64().unwrap_or(0.0) != 0.0,
+            serde_json::Value::Bool(b) => *b,
+            serde_json::Value::String(s) => s == "1" || s.eq_ignore_ascii_case("true") || s.eq_ignore_ascii_case("scan"),
+            _ => false,
+        };
+    }
+    payload == "1" || payload.eq_ignore_ascii_case("true") || payload.eq_ignore_ascii_case("scan")
+}

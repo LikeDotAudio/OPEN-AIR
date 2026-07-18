@@ -68,6 +68,48 @@ def label(text):
     return {"active": {"text": {"En": str(text)}}}
 
 
+RESCAN_TOPIC = "OpenAir/System/Protocols/visa/Device/Rescan"
+
+
+def write_scan_panel(device_count):
+    """The Discovered tab's control panel: a RESCAN actuator wired (via
+    explicit topic override) to the orchestrator's rescan listener, plus a
+    scan-time stamp. Written on every run — 0_Scan sorts first in the tab."""
+    scan_dir = os.path.join(OUT_DIR, "0_Scan")
+    os.makedirs(scan_dir, exist_ok=True)
+    stamp = time.strftime("%Y-%m-%d %H:%M:%S")
+    doc = {
+        "Device_Scan": {
+            "type": "OcaBin",
+            "description": {"En": "Device discovery controls"},
+            "blocks": {
+                "Controls": {
+                    "type": "OcaBlock",
+                    "label": label("Device Discovery"),
+                    "fields": {
+                        "rescan": {
+                            "type": "_GuiActuator",
+                            "topic": RESCAN_TOPIC,
+                            "label": {
+                                "active": {"text": {"En": "RESCANNING..."}},
+                                "inactive": {"text": {"En": "RESCAN DEVICES"}},
+                            },
+                            "layout": {"height": 50, "width": 250},
+                        },
+                        "last_scan": {
+                            "type": "_GuiLabel",
+                            "label": label(f"Last scan: {stamp} — {device_count} device(s). Reload the page after a rescan to see updated panels."),
+                        },
+                    },
+                }
+            },
+        }
+    }
+    with open(os.path.join(scan_dir, "Scan.json"), "w") as f:
+        json.dump(doc, f, indent=2)
+    print(f"[discovered-gui] wrote scan control panel ({device_count} device(s) at {stamp})")
+
+
 def write_panels():
     written = 0
     for category, blocks in sorted(collected.items()):
@@ -107,8 +149,10 @@ def main():
     time.sleep(COLLECT_SECONDS)  # retained messages arrive immediately on subscribe
     client.loop_stop()
     n = write_panels()
+    devices = sum(len(blocks) for blocks in collected.values())
+    write_scan_panel(devices)
     if n == 0:
-        print("[discovered-gui] no retained discovery topics found — nothing written")
+        print("[discovered-gui] no retained discovery topics found — only the scan panel written")
 
 
 if __name__ == "__main__":

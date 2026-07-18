@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan
+
+- **Sampler is back**: `Console/Sampler` (panel + the four widget files) was
+  deleted by the `explosion` commit — before any migration work — and has
+  been restored from that commit's parent. The live tree picked it up with
+  no regeneration (the Phase 0 live-tree fix working as designed);
+  `legacy.ts` regenerated with zero dead tags remaining.
+- **The Discovered tab can now rescan on demand**: a new `0_Scan` control
+  panel (always written by the builder, sorts first in the tab) carries a
+  RESCAN DEVICES actuator publishing to
+  `OpenAir/System/Protocols/visa/Device/Rescan`. The orchestrator's VISA
+  agent is now a scan **loop**: trigger → full re-probe → retained topics
+  refreshed → Discovered panels regenerated → idle. Safety semantics:
+  retained and zero-value payloads never trigger (no scan storms on page
+  load or broker replay), and the browser's settle-republish of the same
+  press is deduped — live-tested: one press = exactly one scan. Reload the
+  page after a rescan to see updated panels (live tree redraw is Phase 5).
+
 ## 2026-07-18 - Local Stack Smoke Test + the MQTT Flush Bug
 
 - **Full local stack verified end-to-end**: broker + orchestrator (live

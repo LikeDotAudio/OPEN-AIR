@@ -1,0 +1,82 @@
+{
+  "100_Sampler": {
+    "type": "OcaBin",
+    "id": "100.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true,
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Sampler_Layout": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Sampler & Sequencing Interface",
+          "show_label": false
+        },
+        "layout_columns": 2,
+        "responsive": true,
+        "responsive_min": 620,
+        "column_sizing": [
+          { "weight": 4, "minwidth": 450 },
+          { "weight": 6, "minwidth": 600 }
+        ],
+        "layout": {
+          "pady": 20,
+          "padx": 20,
+          "align": "top"
+        },
+        "fields": {
+          "sampler_pads": {
+            "type": "Sampler",
+            "props": {
+              "label": "Drum Sampler"
+            },
+            "layout": {
+              "sticky": "nsew"
+            }
+          },
+          "right_column_tools": {
+            "type": "OcaBlock",
+            "description": {
+              "show_label": false
+            },
+            "layout_columns": 1,
+            "column_sizing": [
+              { "weight": 1 }
+            ],
+            "layout": {
+              "sticky": "nsew",
+              "pady": 0,
+              "padx": 0
+            },
+            "fields": {
+              "pattern_sequencer": {
+                "type": "Sequencer",
+                "props": {
+                  "label": "Pattern Sequencer"
+                },
+                "layout": {
+                  "sticky": "ew"
+                }
+              },
+              "audio_editor": {
+                "type": "AudioEditor",
+                "props": {
+                  "label": "Waveform Editor & Slicer"
+                },
+                "layout": {
+                  "sticky": "ew"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

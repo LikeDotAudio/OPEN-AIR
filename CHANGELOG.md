@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-07-18 - Phase 0: Stop the Bleeding (all six items)
+
+- **The Discovered tab works again — every break in the audit's four-stage
+  pipeline fixed**: the builder (`Deployment/build_discovered_gui.py`)
+  subscribes to the topics the agents actually publish
+  (`OpenAir/System/Protocols/{visa,midi}/Device/#`), emits **strict-valid
+  v41 panels** (verified against the layout contract) instead of the dead
+  `_GuiValue`+`subscribe` schema, and is spawned by the orchestrator after
+  each VISA scan. First live run produced 11 devices across 6 category
+  panels from the broker's retained state. `0_discovered/` is gitignored
+  and excluded from validate — discovery is data, not authored UI
+  (Phase 4 replaces this pipeline with the Device Registry).
+- **Live tree**: `index.html` fetches the orchestrator's `GET /api/tree`
+  first — new folders/panels appear without regenerating anything; the
+  static `tree.json` snapshot survives only as the FTPS-host fallback.
+- **YAK repo path**: the agent walks up from cwd to find
+  `FrontEnd/Gui_Frames/5_Protocols/10_Yak` (env `YAK_REPO_PATH` still
+  wins) — no more zero-definitions when launched from the wrong directory.
+- **Stubs stop lying**: nmos/rest/sap/mdns/dnssd/websocket now publish
+  `status = stub`, not `online`.
+- **Retained-fader flood fixed**: high-rate control values publish
+  `retain:false`; one settle-delayed retained publish (400 ms after rest)
+  preserves late-joiner state sync. Contracts T5 semantics, live today.
+- **`broker/mosquitto.conf` checked in** (1883 + websockets 9001,
+  persistence on) — the broker stops being an unmanaged assumption.
+
 ## 2026-07-17 - v41 Contracts Package: Plan Reconciliation + Phase 1 Steps 1-4
 
 - **Plan reconciliation**: `Phase 1.md`, `Phase 2.md`, and

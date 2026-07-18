@@ -323,7 +323,25 @@ except Exception as e:
             let _ = tx_clone_visa.send(system_event);
         }
         println!("✅ [VISA AGENT] Scan & MQTT Publish complete.");
-        
+
+        // Phase 0 item 3: regenerate the Discovered tab panels from the
+        // retained discovery topics just published. Transitional — Phase 4
+        // replaces this whole pipeline with the Device Registry + a live
+        // Discovered widget, and deletes the builder.
+        {
+            let builder = std::env::current_dir()
+                .unwrap_or_else(|_| std::path::PathBuf::from("."))
+                .join("Deployment/build_discovered_gui.py");
+            if builder.is_file() {
+                match tokio::process::Command::new("python3").arg(&builder).spawn() {
+                    Ok(_) => println!("🧩 [DISCOVERED-GUI] builder spawned: {}", builder.display()),
+                    Err(e) => println!("⚠️  [DISCOVERED-GUI] failed to spawn builder: {e}"),
+                }
+            } else {
+                println!("⚠️  [DISCOVERED-GUI] builder not found at {}", builder.display());
+            }
+        }
+
         // Now sit and wait for Write commands
         println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands...");
         let sub_topic = "OpenAir/System/Protocols/visa/Device/+/+/+/Write";

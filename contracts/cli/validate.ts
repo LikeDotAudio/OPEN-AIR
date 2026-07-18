@@ -51,6 +51,9 @@ function push(file: string, issues: LayoutIssue[]) {
 
 function* jsonFiles(dir: string): Generator<string> {
   for (const e of readdirSync(dir).sort()) {
+    // 0_discovered is machine-generated discovery data (Phase 0 item 3),
+    // not authored UI — gitignored and excluded here; Phase 4 deletes it.
+    if (e === '0_discovered') continue
     const p = join(dir, e)
     if (statSync(p).isDirectory()) yield* jsonFiles(p)
     else if (e.endsWith('.json') || e.endsWith('.json.old')) yield p

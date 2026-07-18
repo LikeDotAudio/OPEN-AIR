@@ -44,3 +44,6 @@ TESTS/Protocols/nmos/nmos-cpp-master/
 *-master/
 # Node (pnpm workspace — Phase 1)
 node_modules/
+
+# Generated discovered-device panels (Phase 0 item 3; deleted in Phase 4)
+FrontEnd/Gui_Frames/0_discovered/

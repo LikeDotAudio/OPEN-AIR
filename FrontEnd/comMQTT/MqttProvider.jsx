@@ -170,9 +170,12 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
         };
     }, [brokerUrl, username, password]);
 
-    const publish = React.useCallback((topic, payload) => {
+    // Retained by default (config/state topics); pass { retain: false } for
+    // live-event traffic — contracts T5: retain class belongs to the topic
+    // family, not the call-site whim. High-rate control values use it below.
+    const publish = React.useCallback((topic, payload, opts) => {
         if (client && client.connected) {
-            client.publish(topic, String(payload), { retain: true });
+            client.publish(topic, String(payload), { retain: !(opts && opts.retain === false) });
         }
     }, [client]);
 
@@ -271,11 +274,12 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     // latest value awaiting a trailing publish; `last` is the wall-clock time of
     // the most recent publish. Cleared on unmount/topic change so a drag that
     // ends as the widget unmounts can't fire a publish into a dead client.
-    const throttle = React.useRef({ timer: null, pending: false, value: undefined, last: 0 });
+    const throttle = React.useRef({ timer: null, pending: false, value: undefined, last: 0, settleTimer: null });
     React.useEffect(() => {
         const state = throttle.current;
         return () => {
             if (state.timer) { clearTimeout(state.timer); state.timer = null; }
+            if (state.settleTimer) { clearTimeout(state.settleTimer); state.settleTimer = null; }
             state.pending = false;
         };
     }, [topic]);
@@ -294,14 +298,29 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         state.value = newValue;
         state.pending = true;
 
+        const makePayload = () => (typeof state.value === 'object' && state.value !== null)
+            ? { ...state.value, full_id: SESSION_FULL_ID }
+            : { value: state.value, full_id: SESSION_FULL_ID };
+
+        // Phase 0 item 5 / contracts T5: control values are LIVE-EVENTS —
+        // the throttled stream publishes retain:false so a 45 Hz fader drag
+        // no longer leaves 45 retained messages/second on the broker. One
+        // settle-delayed RETAINED publish of the resting value preserves
+        // late-joiner state sync (reload still restores the last position).
         const flush = () => {
             state.timer = null;
             if (!state.pending) return;
             state.pending = false;
             state.last = Date.now();
-            const payload = (typeof state.value === 'object' && state.value !== null) ? { ...state.value, full_id: SESSION_FULL_ID } : { value: state.value, full_id: SESSION_FULL_ID };
-            publish(topic, JSON.stringify(payload));
+            publish(topic, JSON.stringify(makePayload()), { retain: false });
         };
+
+        const RETAIN_SETTLE_MS = 400;
+        if (state.settleTimer) clearTimeout(state.settleTimer);
+        state.settleTimer = setTimeout(() => {
+            state.settleTimer = null;
+            publish(topic, JSON.stringify(makePayload())); // retained: the resting value
+        }, RETAIN_SETTLE_MS);
 
         const interval = window.OA_PUBLISH_INTERVAL_MS || PUBLISH_INTERVAL_MS;
         const elapsed = Date.now() - state.last;

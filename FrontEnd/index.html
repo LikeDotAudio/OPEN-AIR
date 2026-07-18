@@ -239,11 +239,22 @@
                     }, 2500);
                 }
 
-                // Fetch the directory structure from our statically generated JSON
-                fetch('./api/tree.json?t=' + new Date().getTime())
+                // Phase 0 item 2: the LIVE tree first (orchestrator GET /api/tree),
+                // so new folders/panels appear without regenerating anything. The
+                // static tree.json snapshot survives only as the fallback for the
+                // FTPS-hosted build, where no orchestrator exists.
+                fetch('./api/tree?t=' + new Date().getTime())
                     .then(res => {
-                        if (!res.ok) throw new Error("Failed to fetch layout tree from ./api/tree.json");
+                        if (!res.ok) throw new Error('live /api/tree unavailable');
                         return res.json();
+                    })
+                    .catch(() => {
+                        console.warn('[tree] live /api/tree unavailable — falling back to static snapshot');
+                        return fetch('./api/tree.json?t=' + new Date().getTime())
+                            .then(res => {
+                                if (!res.ok) throw new Error("Failed to fetch layout tree (live /api/tree and static ./api/tree.json both unavailable)");
+                                return res.json();
+                            });
                     })
                     .then(data => {
                         setDirectoryTree(data);

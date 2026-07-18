@@ -232,6 +232,31 @@ async fn main() {
 
         loop {
 
+        // Clear the previous scan's retained topics first, so devices that
+        // moved category (e.g. after a knowledge-base fix) or disappeared
+        // don't linger as ghosts in the Discovered tab.
+        {
+            let old_prefixes: Vec<String> =
+                topic_to_resource.lock().unwrap().keys().cloned().collect();
+            if !old_prefixes.is_empty() {
+                const DEVICE_KEYS: [&str; 13] = [
+                    "manufacturer", "model", "serial", "firmware", "raw_idn", "resource",
+                    "status", "device_type", "notes", "last_online", "connected", "Write", "Read",
+                ];
+                for prefix in &old_prefixes {
+                    for key in DEVICE_KEYS {
+                        let _ = mqtt_client.publish(
+                            format!("{}/{}", prefix, key),
+                            rumqttc::QoS::AtLeastOnce,
+                            true,
+                            Vec::<u8>::new(), // empty retained payload = delete
+                        );
+                    }
+                }
+                println!("   🧹 [VISA AGENT] cleared retained topics for {} previous device(s)", old_prefixes.len());
+            }
+        }
+
         let devices = tokio::task::spawn_blocking(|| {
             openair_visa::oa_visa_scan_for_devices::list_resources()
         }).await.unwrap_or_default();

@@ -112,6 +112,16 @@ def write_scan_panel(device_count):
 
 
 def write_panels():
+    # Prune category folders whose devices vanished (or re-categorized —
+    # e.g. after a knowledge-base fix); 0_Scan is the permanent control panel.
+    if os.path.isdir(OUT_DIR):
+        for entry in os.listdir(OUT_DIR):
+            if entry != "0_Scan" and entry not in collected:
+                stale = os.path.join(OUT_DIR, entry)
+                if os.path.isdir(stale):
+                    import shutil
+                    shutil.rmtree(stale)
+                    print(f"[discovered-gui] pruned stale category {entry}/")
     written = 0
     for category, blocks in sorted(collected.items()):
         cat_dir = os.path.join(OUT_DIR, category)

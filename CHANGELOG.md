@@ -22,6 +22,17 @@
   load or broker replay), and the browser's settle-republish of the same
   press is deduped — live-tested: one press = exactly one scan. Reload the
   page after a rescan to see updated panels (live tree redraw is Phase 5).
+- **"Unknown Instrument" fixed — the knowledge base was never found**: the
+  VISA lookup read `assets/visa_devices.json` relative to the process cwd
+  only, so run from the repo root it matched nothing and all 17 instruments
+  (33210A/33220A/34401A×7/54641D×2/DS1104Z×2/N9340B...) fell to "Not in
+  Knowledge Base". Now: walk-up path resolution + the KB compiled into the
+  binary as guaranteed fallback (disk copy still wins, so the inventory
+  stays editable). Companion fixes: each rescan clears the previous scan's
+  retained topics (no ghosts when devices re-categorize or vanish), the
+  builder prunes stale category folders, and the 154 pre-fix ghost topics
+  were swept. Discovered tab now reads DMM(6)/Generator(2)/Oscilloscope(4)/
+  Spectrum(1)/midi(4). Note: N9342CN is genuinely absent from the KB.
 - **Discovered panels scroll**: generated panels now declare
   `behavior.overflow_ns: "auto"` — OcaBin clips by default, and a scan can
   find more devices than fit one screen (14 Unknown_Instruments did).

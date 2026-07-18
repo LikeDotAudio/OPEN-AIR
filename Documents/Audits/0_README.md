@@ -22,7 +22,8 @@ ugly — measured against the project's actual goal.
 |---|---|
 | [1_Design_Audit.md](1_Design_Audit.md) | The extracted mission statement, the scorecard, and the good/bad/ugly analysis of every subsystem — including the Discovered-tab case study |
 | [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md) | Diagrams: data transfer (current vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map |
-| [../2026-07-17_Executive_Review_Business_Value.md](../2026-07-17_Executive_Review_Business_Value.md) | The business-value review |
+| [../2026-07-17_Executive_Review_Business_Value.md](../2026-07-17_Executive_Review_Business_Value.md) | Executive committee business-value review — the audit that put the project on "Life Support" with three milestones |
+| [../2026-07-18_Executive_Review_Business_Value.md](../2026-07-18_Executive_Review_Business_Value.md) | **Follow-up review** — what the first day of Life Support delivered, milestone-by-milestone verification, and the revised verdict |
 | [../Strategies/](../Strategies/) | The plans that came out of this audit — historical; see their README for what shipped |
 
 ## Resolution status

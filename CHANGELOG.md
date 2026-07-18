@@ -38,6 +38,17 @@
   against the local broker (SIGKILL → retained `offline`). Crate-rule
   amendment: `regress` (typify's validation regex engine) joins
   serde/serde_json as the only allowed deps.
+- **Phase 1 step 4 deployed — the layout contract + the first honest drift
+  count**: `contracts/src/layout/` schemas the panel JSON as it exists
+  (widget-type classification seeded from the live dispatch code, two-mode
+  validation where deprecations are named not fatal, the L3 yak binding with
+  its cross-field rule, the L4 folder grammar) plus the Y7 runtime
+  `yak_handler` wire message. `pnpm validate` (openair-validate) walks
+  Gui_Frames + the YAK tree + every config.ini: **169 errors / 2,093
+  deprecations** on day one — including the two 34401As, 57 `N_` prefix
+  collisions, 45 dead config.ini topic triples, and 45 converter uses the
+  YAK agent silently passes through. Inventory published at
+  `Documents/Strategies/Validations/contracts-debt-inventory.md`.
 - **Docs reorganized**: forward-looking strategy documents (migration plan,
   Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
   `Documents/Audits/` to `Documents/Strategies/`; the point-in-time audits

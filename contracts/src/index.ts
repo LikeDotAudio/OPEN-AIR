@@ -38,6 +38,25 @@ export {
 export { deviceIdFor, fnv1a64, type DeviceIdentitySource } from './identity.js'
 export { fromUnixSeconds } from './time.js'
 
+export {
+  CONTAINER_TYPES,
+  EXACT_LEAF_TYPES,
+  LEAF_SUBSTRINGS,
+  LEGACY_WIDGET_TYPES,
+  classifyWidgetType,
+  type ContainerType,
+  type WidgetTypeClass,
+} from './layout/widget-types.js'
+export { KNOWN_CONVERTERS, YakBindingSchema, lintYakBinding, type YakBinding } from './layout/yak-binding.js'
+export { isStrictValid, validateLayoutDocument, type LayoutIssue, type LayoutIssueLevel } from './layout/node.js'
+export { findOrderCollisions, parseFolderName, type FolderCollision, type ParsedFolderName } from './layout/folder-grammar.js'
+export {
+  YakHandlerWireSchema,
+  YakIncomingMessageSchema,
+  type YakHandlerWire,
+  type YakIncomingMessage,
+} from './yak/verbs.js'
+
 export { Topics, type ParsedTopic } from './topics/builders.js'
 export {
   GUI_ROOT,

@@ -18,7 +18,7 @@
     "test": "vitest run",
     "gen": "tsx scripts/gen.ts",
     "gen:check": "tsx scripts/gen.ts --check",
-    "validate": "echo 'validate: CLI lands with rollout step 4'"
+    "validate": "tsx cli/validate.ts"
   },
   "dependencies": {
     "zod": "4.4.3"

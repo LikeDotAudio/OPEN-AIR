@@ -1,0 +1,240 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
+import time
+import webbrowser
+
+def generate_html(script_dir):
+    html_path = os.path.join(script_dir, "index.html")
+    html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMOS Registry Endpoints</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #58a6ff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        p.subtitle {
+            color: #8b949e;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 1100px;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border-color: #58a6ff;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+        .card p {
+            color: #8b949e;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            color: #58a6ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 16px;
+            align-self: flex-start;
+        }
+        .url {
+            font-family: monospace;
+            background: #0d1117;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 16px;
+            color: #79c0ff;
+            border: 1px solid #30363d;
+            word-break: break-all;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: rgba(88, 166, 255, 0.05);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            color: #8b949e;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>OPEN-AIR NMOS Registry</h1>
+    <p class="subtitle">Live API Endpoints & Discovery Explorer</p>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Nodes</h3>
+            <div class="value" id="count-nodes">-</div>
+        </div>
+        <div class="stat-card">
+            <h3>Devices</h3>
+            <div class="value" id="count-devices">-</div>
+        </div>
+        <div class="stat-card">
+            <h3>Senders</h3>
+            <div class="value" id="count-senders">-</div>
+        </div>
+        <div class="stat-card">
+            <h3>Receivers</h3>
+            <div class="value" id="count-receivers">-</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <a href="http://localhost:3210/x-nmos/registration/v1.3" class="card" target="_blank">
+            <h2>Registration API (IS-04)</h2>
+            <p>Handles the discovery and registration of Nodes and their resources. Devices dynamically find this via <code>_nmos-registration._tcp</code> mDNS.</p>
+            <div class="url">http://localhost:3210/x-nmos/registration/v1.3</div>
+            <span class="tag">Port 3210</span>
+        </a>
+        
+        <a href="http://localhost:3211/x-nmos/query/v1.3" class="card" target="_blank">
+            <h2>Query API (IS-04)</h2>
+            <p>Allows controllers to browse the registry. Clients can fetch the registry tree, or subscribe to WebSockets for real-time delta updates.</p>
+            <div class="url">http://localhost:3211/x-nmos/query/v1.3</div>
+            <span class="tag">Port 3211</span>
+        </a>
+
+        <a href="http://localhost:3212/x-nmos/node/v1.3" class="card" target="_blank">
+            <h2>Node API (IS-04)</h2>
+            <p>Hosted on the nodes themselves to expose their underlying capabilities and topology. Used for peer-to-peer exploration.</p>
+            <div class="url">http://localhost:3212/x-nmos/node/v1.3</div>
+            <span class="tag">Port 3212</span>
+        </a>
+    </div>
+
+    <script>
+        async function fetchCount(resource) {
+            try {
+                const response = await fetch(`http://localhost:3211/x-nmos/query/v1.3/${resource}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById(`count-${resource}`).innerText = data.length;
+                }
+            } catch (error) {
+                console.error(`Failed to fetch ${resource}:`, error);
+            }
+        }
+
+        function pollRegistry() {
+            fetchCount('nodes');
+            fetchCount('devices');
+            fetchCount('senders');
+            fetchCount('receivers');
+        }
+
+        // Poll immediately and then every 2 seconds
+        pollRegistry();
+        setInterval(pollRegistry, 2000);
+    </script>
+</body>
+</html>"""
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print(f"✨ Created interactive API dashboard at: {html_path}")
+    
+    try:
+        webbrowser.open(f"file://{os.path.abspath(html_path)}")
+        print("🌍 Opening dashboard in your default browser...")
+    except Exception as e:
+        print(f"⚠️ Could not automatically open browser: {e}")
+
+def main():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    print("🚀 Starting NMOS Sandbox Environment...")
+    
+    registry_script = os.path.join(script_dir, "run_registry.py")
+    device_script = os.path.join(script_dir, "run_test_device.py")
+    
+    print("Starting Registry...")
+    registry_proc = subprocess.Popen([sys.executable, registry_script])
+    
+    # Wait for registry to initialize so the device can discover it reliably
+    time.sleep(3)
+    
+    print("Starting Mock Device...")
+    # Pass explicit registry_address to bypass broken Avahi mDNS on Linux
+    device_proc = subprocess.Popen([sys.executable, device_script, '{"registry_address": "127.0.0.1"}'])
+    
+    # Generate and open dashboard
+    generate_html(script_dir)
+    
+    print("\n✅ Sandbox is running! Press Ctrl+C to stop both.")
+    
+    try:
+        registry_proc.wait()
+        device_proc.wait()
+    except KeyboardInterrupt:
+        print("\n🛑 Stopping Sandbox...")
+        registry_proc.terminate()
+        device_proc.terminate()
+        registry_proc.wait()
+        device_proc.wait()
+        print("✅ Sandbox stopped.")
+
+if __name__ == "__main__":
+    main()

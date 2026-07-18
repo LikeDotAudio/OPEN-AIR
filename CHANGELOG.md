@@ -22,6 +22,9 @@
   load or broker replay), and the browser's settle-republish of the same
   press is deduped — live-tested: one press = exactly one scan. Reload the
   page after a rescan to see updated panels (live tree redraw is Phase 5).
+- **Discovered panels scroll**: generated panels now declare
+  `behavior.overflow_ns: "auto"` — OcaBin clips by default, and a scan can
+  find more devices than fit one screen (14 Unknown_Instruments did).
 
 ## 2026-07-18 - Local Stack Smoke Test + the MQTT Flush Bug
 

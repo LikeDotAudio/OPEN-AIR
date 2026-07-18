@@ -82,6 +82,7 @@ def write_scan_panel(device_count):
         "Device_Scan": {
             "type": "OcaBin",
             "description": {"En": "Device discovery controls"},
+            "behavior": {"overflow_ns": "auto"},
             "blocks": {
                 "Controls": {
                     "type": "OcaBlock",
@@ -129,6 +130,9 @@ def write_panels():
             category: {
                 "type": "OcaBin",
                 "description": {"En": f"Discovered {category} devices (scan snapshot)"},
+                # OcaBin clips by default; a scan can find more devices than
+                # fit one screen (14 Unknown_Instruments and counting).
+                "behavior": {"overflow_ns": "auto"},
                 "blocks": panel_blocks,
             }
         }

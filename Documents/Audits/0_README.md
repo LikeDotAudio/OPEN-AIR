@@ -25,6 +25,7 @@ ugly — measured against the project's actual goal.
 | [2_Architecture_Diagrams.md](../notes/2_Architecture_Diagrams.md) | Diagrams: data transfer (v40 vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map — plus **§7, the current-state diagram (2026-07-18)**. *Lives in `Documents/notes/`; this link was dead until 2026-07-18* |
 | [../2026-07-17_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-17_Executive_Review_Business_Value.md) | Executive committee business-value review — the audit that put the project on "Life Support" with three milestones |
 | [../2026-07-18AM_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-18AM_Executive_Review_Business_Value.md) | **Follow-up review** — what the first day of Life Support delivered, milestone-by-milestone verification, and the revised verdict |
+| [../2026-07-18PM_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-18PM_Executive_Review_Business_Value.md) | **Afternoon review — twelve personas, present-tense only.** Audits solely what is in the tree and can ship; adds the Marketing, Sage Architect, and Quant seats. Verdict: Life Support continues, with three new milestones (startup path, stop over-claiming, stranger test) |
 | [../Strategies/](../Strategies/) | The plans that came out of this audit — historical; see their README for what shipped |
 
 ## Resolution status

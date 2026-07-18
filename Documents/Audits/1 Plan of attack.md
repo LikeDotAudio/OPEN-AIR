@@ -170,7 +170,7 @@ verdict demanded.
 | **D14-8** | Gate the deploy on tests | ✅ **Done** — both workflows | CFO #3; Resistant Eng. |
 | **D14-9** | Automate the doc link check | ✅ **Done** — 5 dead links fixed, CI job added | CEO M1 (regression) |
 
-**Milestone-1 definition of done:** a written rotation attestation; a broker that
+**Milestone-1 definition of done:** no credential outside GitHub Environments; a broker that
 refuses anonymous remote connections; no string-interpolated subprocess input
 anywhere in the tree; `pip install -r requirements.txt` sufficient for every
 first-party Python file that ships; a signed sampler decision; production

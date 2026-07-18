@@ -9,7 +9,12 @@
  */
 
 // Inline comment: Logic for OcaTable
-const OcaTable = ({ value, config }) => {
+// Accepts its setup as `config` (FieldComponent path) OR `node` (WidgetFactory
+// registry path — which passes node, not config; without this fallback every
+// registry-dispatched table rendered empty, e.g. Sample.json's
+// "Discovered Devices" example).
+const OcaTable = ({ value, config, node }) => {
+    config = config || node;
     const title = config?.description?.[window.useMqttLang()[0]] || config?.description?.En || "Data Table";
     const headers = config?.headers || [];
     

@@ -2,6 +2,15 @@
 
 ## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry
 
+- **Discovered tab uses the library table component**: the label-stack
+  display is gone — every category panel is now an `OcaTable`
+  (`libControl/text/OcaTable`: sticky header, zebra rows, row-count footer,
+  its own scroll region), with per-family column ordering and a readable
+  `last_seen` column. Bonus repair: `OcaTable` had been silently broken on
+  the WidgetFactory registry path (it received `node` but destructured
+  `config` — Sample.json's own "Discovered Devices" example rendered
+  empty); it now accepts either, fixing every registry-dispatched table
+  in the app.
 - **DNS-SD discovery is real — the `dnssd` crate is no longer a stub**: it
   now browses `_services._dns-sd._udp.local.` (the meta-query enumerating
   EVERY advertised service type), then browses each type via `mdns-sd` and

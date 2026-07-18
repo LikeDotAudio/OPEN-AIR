@@ -62,7 +62,10 @@ def on_message(client, userdata, msg):
             return
         direction, dev_n, key = rest
         block = f"{direction} {dev_n}"
+        if key == "type":
+            key = "direction"  # 'type' is widget vocabulary in panel JSON
         collected.setdefault("midi", {}).setdefault(block, {})[key] = value
+        collected["midi"][block].setdefault("port", f"{direction} {dev_n}")
     elif proto == "dnssd":
         # {service_type}/{instance}/{key} — one Discovered category for all
         # DNS-SD/mDNS services, one block per instance, grouped by type.
@@ -120,6 +123,33 @@ def write_scan_panel(device_count):
     print(f"[discovered-gui] wrote scan control panel ({device_count} device(s) at {stamp})")
 
 
+# Column order per protocol family; remaining keys append alphabetically.
+PREFERRED_COLUMNS = {
+    "visa": ["model", "manufacturer", "serial", "firmware", "resource", "status", "notes", "last_seen"],
+    "midi": ["port", "name", "direction"],
+    "dnssd": ["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
+}
+HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type"}
+
+
+def rows_for(category, blocks):
+    """Device dict -> OcaTable rows; unix last_online becomes readable last_seen."""
+    family = "visa" if category not in ("midi", "dnssd") else category
+    rows = []
+    for block_name, fields in sorted(blocks.items()):
+        row = dict(fields)
+        if "last_online" in row:
+            try:
+                row["last_seen"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(float(row["last_online"]))))
+            except (ValueError, OverflowError):
+                row["last_seen"] = row["last_online"]
+        rows.append(row)
+    keys = set().union(*[r.keys() for r in rows]) if rows else set()
+    preferred = [k for k in PREFERRED_COLUMNS.get(family, []) if k in keys]
+    rest = sorted(keys - set(preferred) - HIDDEN_COLUMNS)
+    return preferred + rest, rows
+
+
 def write_panels():
     # Prune category folders whose devices vanished (or re-categorized —
     # e.g. after a knowledge-base fix); 0_Scan is the permanent control panel.
@@ -135,31 +165,31 @@ def write_panels():
     for category, blocks in sorted(collected.items()):
         cat_dir = os.path.join(OUT_DIR, category)
         os.makedirs(cat_dir, exist_ok=True)
-        panel_blocks = {}
-        for block_name, fields in sorted(blocks.items()):
-            panel_blocks[block_name.replace(" ", "_")] = {
-                "type": "OcaBlock",
-                "label": label(block_name),
-                "fields": {
-                    key: {"type": "_GuiLabel", "label": label(f"{key}: {value}")}
-                    for key, value in sorted(fields.items())
-                },
-            }
+        headers, rows = rows_for(category, blocks)
+        # The library OcaTable (libControl/text/OcaTable) — the component
+        # built for exactly this ("Discovered Devices" in Sample.json):
+        # sticky header, zebra rows, row-count footer, own scroll region.
         doc = {
             category: {
                 "type": "OcaBin",
                 "description": {"En": f"Discovered {category} devices (scan snapshot)"},
-                # OcaBin clips by default; a scan can find more devices than
-                # fit one screen (14 Unknown_Instruments and counting).
                 "behavior": {"overflow_ns": "auto"},
-                "blocks": panel_blocks,
+                "blocks": {
+                    "Devices": {
+                        "type": "OcaTable",
+                        "description": {"En": f"Discovered {category} devices"},
+                        "headers": headers,
+                        "data": rows,
+                        "Sort": True,
+                    }
+                },
             }
         }
         out = os.path.join(cat_dir, f"{category}.json")
         with open(out, "w") as f:
             json.dump(doc, f, indent=2)
         written += 1
-        print(f"[discovered-gui] wrote {out} ({len(blocks)} device(s))")
+        print(f"[discovered-gui] wrote {out} ({len(rows)} device(s), {len(headers)} columns)")
     return written
 
 

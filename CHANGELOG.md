@@ -19,6 +19,17 @@
   typecheck green. Not the runtime yet: `FrontEnd/index.html` stays the
   only served app until the Phase 2 §4 overlap window opens deliberately.
 - Checklist audit: `Documents/Strategies/Phase 2 Step 1.md`.
+- **Cutover prep (same day)**: the inline `text/babel` boot block became
+  `ui/src/boot.tsx` (gen-legacy can't capture inline scripts — the bundle
+  now actually boots); `globals.d.ts` inventories the **182** window
+  globals (3 hand-typed, regen-safe); eslint + CI ratchets armed (no new
+  `window.*` outside named bridges, one-module-one-tree collision check,
+  generated-file freshness). **Headless Chrome smoke test: the bundle
+  boots and renders the same tab set as the legacy page**, with a cleaner
+  console (legacy throws 3 dead-Sampler load errors; the bundle skips
+  those tags by name). Two deltas logged for the human overlap window:
+  OAPanels wasm script-pair ordering, and a widget-count difference under
+  virtual time.
 
 ## 2026-07-18 - Phase 0: Stop the Bleeding (all six items)
 

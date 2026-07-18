@@ -34,6 +34,25 @@ jobs:
       - run: cargo check --manifest-path BackEnd/Core/Cargo.toml
       - run: cargo check --manifest-path BackEnd/ComProtocols/Cargo.toml -p openair-yak
 
+  ui: # Phase 2: the isolated typed frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      # freshness: legacy.ts and globals.d.ts must match their sources
+      - run: pnpm --filter ui gen:legacy && pnpm --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
+      # one-module-one-tree: a stem in both FrontEnd/ and ui/src is a copy, not a move
+      - run: pnpm --filter ui exec tsx scripts/check-collisions.ts
+      # ratchet: no .jsx/.js source in the converted tree — ts/tsx only
+      - run: '! find ui/src -name "*.jsx" -o -name "*.js" | grep -v -E "legacy|globals" | grep . '
+      - run: pnpm --filter ui typecheck
+      - run: pnpm --filter ui lint
+      - run: pnpm --filter ui build
+
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
     runs-on: ubuntu-latest
     steps:

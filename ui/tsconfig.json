@@ -16,5 +16,5 @@
       "@contracts/*": ["../contracts/src/*"]
     }
   },
-  "include": ["src/main.tsx", "src/globals.d.ts", "src/vite-env.d.ts", "scripts"]
+  "include": ["src/main.tsx", "src/boot.tsx", "src/globals.d.ts", "src/vite-env.d.ts", "scripts"]
 }

@@ -47,3 +47,38 @@ only runtime until the overlap window (Phase 2 §4) opens deliberately.*
   npm React via the plugin; unconverted files reading `window.React` get the
   same instance from main.tsx. One React, two access paths — verified at
   overlap, pinned exact now.
+
+---
+
+## Cutover-prep addendum (2026-07-18, done after step 1 shipped)
+
+- **`src/boot.tsx`**: the app boot half extracted from `index.html`'s inline
+  `text/babel` block (gen-legacy can't capture inline scripts — without this
+  the bundle loaded 142 files and booted nothing). Converted TSX; the splash
+  minimum-timer is gone (no compile to hide). Legacy page keeps its inline
+  copy until cutover, by design.
+- **`src/globals.d.ts`**: generated inventory of the window.* surface —
+  **182 globals** (audit estimated ~197), 3 hand-typed so far
+  (`MqttProvider`, `WindowManager`, `oaGetMqttConfig`); hand-typed entries
+  survive regeneration. `pnpm gen:globals`.
+- **Ratchets armed**: eslint floor (no `window.*` outside the named bridge
+  files: main/legacy/boot), CI `ui` job (freshness of generated files,
+  one-module-one-tree collision check, no-js/jsx-in-src, typecheck, lint,
+  build). ui pinned to TS 5.9 (typescript-eslint cannot parse TS 7 yet;
+  contracts stays on 7).
+
+### Headless smoke test (Chrome, virtual-time, dist staged like the FTPS host)
+
+**The bundle boots and renders the real app** — same tab set as the legacy
+page served identically (Console/Protocols/Samples/Setup), MQTT layer
+initializes with the same default broker config. The bundle is *cleaner*:
+the legacy page throws 3 uncaught errors loading the deleted Sampler files;
+the bundle skipped those tags by name.
+
+Known deltas for the human overlap window:
+1. `[OAPanels] pkg/oa_panels.js must be loaded before panel_wasm_loader.js`
+   — module-graph ordering differs from plain script tags for the wasm pair;
+   fix lands with the Panels family conversion.
+2. widget-wrapper counts differed in the headless run (11 vs 16) — likely
+   lazy-load timing under virtual time, but it is exactly the kind of thing
+   the §4 overlap window's human eyes must confirm.

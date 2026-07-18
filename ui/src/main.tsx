@@ -35,8 +35,12 @@ window.ReactDOM = { ...ReactDOM, ...ReactDOMClient }
 window.echarts = echarts
 window.mqtt = mqtt
 
-// Legacy graph LAST — globals above must exist first, exactly like the
-// old <script> order guaranteed.
-import('./legacy')
+// Legacy graph next — globals above must exist first, exactly like the old
+// <script> order guaranteed — then boot (the converted twin of the legacy
+// page's inline text/babel block).
+import('./legacy').then(async () => {
+  const { boot } = await import('./boot')
+  boot()
+})
 
 export {}

@@ -242,6 +242,16 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
                 const num = parseFloat(messages[topic]);
                 next = isNaN(num) ? messages[topic] : num;
             }
+            // Mouse-capture rule: while THIS control is being actively
+            // adjusted locally, the hand owns it — nothing inbound (our own
+            // stale broker echoes mid-drag, or a remote peer) may yank it
+            // backwards ("jiggle"). Inbound state applies again once the
+            // hand has rested for the grace window; by then our own
+            // settle-retained echo carries the same value we already show.
+            // Per-widget, so a shared_topic twin elsewhere on the page still
+            // mirrors the drag live.
+            const grace = window.OA_CAPTURE_GRACE_MS || 600;
+            if (throttle.current.lastLocal && (Date.now() - throttle.current.lastLocal) < grace) return;
             // Debug: confirm the effect fires for this widget's topic when
             // a Python-sourced update arrives. Enable in DevTools console:
             //     window.OA_MQTT_DEBUG = true
@@ -274,7 +284,7 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     // latest value awaiting a trailing publish; `last` is the wall-clock time of
     // the most recent publish. Cleared on unmount/topic change so a drag that
     // ends as the widget unmounts can't fire a publish into a dead client.
-    const throttle = React.useRef({ timer: null, pending: false, value: undefined, last: 0, settleTimer: null });
+    const throttle = React.useRef({ timer: null, pending: false, value: undefined, last: 0, settleTimer: null, lastLocal: 0 });
     React.useEffect(() => {
         const state = throttle.current;
         return () => {
@@ -287,6 +297,7 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     const setValue = (newValue) => {
         // Optimistic UI Update: instantly snap the local React component
         setLocalValue(newValue);
+        throttle.current.lastLocal = Date.now(); // mouse-capture marker
         if (!publish) return;
 
         // Throttle the actual publish. full_id identifies this browser session so

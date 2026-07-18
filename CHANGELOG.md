@@ -2,6 +2,13 @@
 
 ## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry
 
+- **Drag jiggle fixed — mouse capture wins**: while a control is being
+  adjusted locally, inbound MQTT state (including the browser's own stale
+  broker echoes, which arrive a few ms behind the hand) no longer yanks it
+  backwards. Inbound applies again once the hand rests (600 ms grace,
+  `window.OA_CAPTURE_GRACE_MS` to tune); the settle-retained publish means
+  the bus and the control agree at rest. Per-widget, so `shared_topic`
+  twins on the same page still mirror a drag live.
 - **Discovered tab uses the library table component**: the label-stack
   display is gone — every category panel is now an `OcaTable`
   (`libControl/text/OcaTable`: sticky header, zebra rows, row-count footer,

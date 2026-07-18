@@ -1,0 +1,18 @@
+# Migration Ledger — v40 → v41
+
+Append-only archive trail for the TypeScript/contracts migration. Every file
+the migration **moves**, **converts**, **retires**, or **deletes** gets one
+line here, in the same commit that does it. CI (contracts-ci) checks this
+trail: a module removed or relocated without a ledger line fails the build;
+a module present in both `FrontEnd/` and `ui/src` (copy instead of move)
+fails the build. Git history is the archive; this file is the marker.
+
+Actions: `add` | `move` | `convert` (jsx→tsx, implies move to `ui/src`) |
+`retire` (kept on disk, no longer loaded) | `delete`.
+
+| Date | Action | Old path | New path | Commit | Note |
+|---|---|---|---|---|---|
+| 2026-07-17 | add | — | `Documents/Audits/Migration_Ledger.md` | — | Ledger established (ruling: archive markers + checks at every step) |
+| 2026-07-17 | add | — | `pnpm-workspace.yaml`, `package.json`, `.nvmrc`, `rust-toolchain.toml` | — | Phase 1 step 1: workspace root + toolchain pins |
+| 2026-07-17 | add | — | `contracts/` | — | Phase 1 step 1: @openair/contracts package skeleton |
+| 2026-07-17 | add | — | `.github/workflows/contracts-ci.yml` | — | Phase 1 step 1: first non-deploy CI |

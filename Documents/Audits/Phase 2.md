@@ -91,7 +91,9 @@ FrontEnd/
   exists — formalize it with an `.env.example`).
 - WASM: wasm-pack `pkg/` output imports as a normal ES module under Vite
   (`vite-plugin-wasm` + `topLevelAwait` if needed). Prove it with `oa_panels`
-  in week one — it de-risks Phase 3's WASM core landing here.
+  in week one — it de-risks Phase 3's WASM core landing here. It imports from
+  `../FrontEnd/libControl/Panels/wasm/pkg` until the Panels widget family
+  converts, at which point the crate moves under `ui/` with its consumers.
 - Real dependencies replace CDNs: **pin `react`/`react-dom` to the exact
   version the CDN serves today** (check the `<script src>` URLs before
   deleting them — behavior differences between React 18 minors are rare but
@@ -135,13 +137,23 @@ migration mechanic, file by file:
    Converted consumers import; unconverted consumers keep reading the global.
    When the last consumer converts, the bridge line dies.
 3. **`src/legacy.ts` replaces the 160 script tags**: side-effect imports of
-   every unconverted file *in the exact current tag order* (the order encodes
-   the dependency graph nobody wrote down). Every conversion deletes one line.
-   Empty file = migration structurally done.
+   every unconverted `../FrontEnd` file *in the exact current tag order* (the
+   order encodes the dependency graph nobody wrote down). Every conversion
+   `git mv`s one file into `ui/src` and deletes one line. Empty file =
+   migration structurally done, and `FrontEnd/` is data-only.
 4. **Ratchet by lint** (same philosophy as the Phase 1 validate baseline):
    ESLint `no-restricted-properties` forbids *new* `window.*` reads/writes in
    `.ts/.tsx`, with the shrinking bridge list as exceptions; a repo rule
    forbids new `.jsx` files outright. The numbers only go down.
+5. **Archive markers + checks, every step** (ruling 2026-07-17, Anthony):
+   every move, conversion, deletion, or retirement is recorded as an
+   append-only line in `Documents/Audits/Migration_Ledger.md`
+   (`date | action | old path | new path/— | commit | note`), and `CHANGELOG.md`
+   gets an entry per shipped step. CI enforces the trail: a **collision
+   check** fails if any module exists in both `FrontEnd/` and `ui/src`
+   (copy instead of move), and a **ledger check** fails if `legacy.ts`
+   shrank without a matching ledger line. Nothing disappears silently —
+   the ledger is the archive marker; git history is the archive.
 
 Conversion order (leaf-first, per the migration plan, now with the mechanics
 above): `topicMaker.jsx` (delegates to `@openair/contracts` `Topics` — Phase 1
@@ -215,9 +227,9 @@ replaces the script tags, and the deploy/caching machinery around it.
    for the first cutover week. Any "the bundle broke X" report gets a
    30-second A/B answer instead of a revert.
 2. **Deploy learns to build.** The GitHub workflows gain a Node step:
-   `pnpm install --frozen-lockfile && pnpm --filter frontend build`, then the
-   FTPS script uploads `dist/` + `Gui_Frames/` + `api/` instead of the raw
-   source tree. The deploy script's `tree.json` regeneration survives only
+   `pnpm install --frozen-lockfile && pnpm --filter ui build`, then the
+   FTPS script uploads `ui/dist/` + `FrontEnd/Gui_Frames/` + `FrontEnd/api/`
+   instead of the raw source tree. The deploy script's `tree.json` regeneration survives only
    until Phase 0 item 2 / Phase 5 make the live tree real — don't entangle
    that fix with this phase.
 3. **Service worker, handled deliberately.** The hand-written `sw.js` +
@@ -230,7 +242,8 @@ replaces the script tags, and the deploy/caching machinery around it.
 4. **Delete on the way out**: the splash (`index.html` inline JSX duplicate
    included — with browser-Babel gone, there is no compile to hide),
    `TabManager.jsx`, `js/app.js`, `css/style.css`, empty `comDatabase/` and
-   `Core/Launch/`, and every `?v=` string in the repo.
+   `Core/Launch/`, and every `?v=` string in the repo. Each deletion is one
+   ledger line (§2.5) — nothing leaves the tree without its archive marker.
 
 ---
 
@@ -241,6 +254,10 @@ replaces the script tags, and the deploy/caching machinery around it.
       overlap window
 - [ ] `src/legacy.ts` is empty and deleted; zero `.jsx` files remain;
       `globals.d.ts` contains zero `any`
+- [ ] `FrontEnd/` contains no executable code — only `Gui_Frames/` and `api/`
+      remain; all source lives under `ui/src`
+- [ ] Every move/deletion has a `Migration_Ledger.md` line; the CI collision
+      and ledger checks are green (no module in both trees, no silent removals)
 - [ ] Widget registry: every widget registered with exact type + props schema;
       unknown types render the loud error widget (proven by a test)
 - [ ] All topic construction goes through `@openair/contracts` `Topics`;

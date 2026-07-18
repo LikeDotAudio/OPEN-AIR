@@ -6,6 +6,13 @@ pipeline, CI, and the week-by-week rollout. The prime directive: **a contract
 nobody consumes is documentation that lies** — every schema lands with a first
 consumer in the same step.*
 
+*Reconciled 2026-07-17 with
+[4_Contracts_Structural_Guidelines.md](4_Contracts_Structural_Guidelines.md):
+where the two disagreed, the guidelines (inventory-backed) win on schema
+content — `schemaVersion` not `"v"`, `schemas/` dir, D1/H1 field sets, the
+H1/D3 status enums — and this document wins on deployment mechanics (vectors,
+ratchet, committed codegen, hand-written `topics.rs`).*
+
 ---
 
 ## 0. Ground truth this plan is built on
@@ -60,22 +67,24 @@ Facts from the repo as of today, because the strategy has to deploy into
 OPEN-AIR/
 ├── pnpm-workspace.yaml          # NEW — workspace root; ui/ joins in Phase 2
 ├── package.json                 # NEW — private root, scripts only
-├── .nvmrc                       # NEW — pin Node 22 LTS
+├── .nvmrc                       # NEW — pin Node 24 LTS (matches dev machine)
 ├── rust-toolchain.toml          # NEW — pin stable (≥1.85; edition-2024 crates need it)
 ├── contracts/
 │   ├── package.json             # @openair/contracts
 │   ├── tsconfig.json
-│   ├── src/
+│   ├── src/                     # layout per 4_Contracts_Structural_Guidelines §1
 │   │   ├── index.ts             # the only public surface
-│   │   ├── topics/              # grammar: builder + parser + legacy map
-│   │   ├── discovery/           # DeviceRecord
-│   │   ├── layout/              # OcaBin / OcaBlock / field / yak binding
-│   │   ├── yak/                 # class capability + model binding (Phase 3 fills in)
-│   │   └── system/              # heartbeat, log event
+│   │   ├── topics/              # grammar.ts + tree.ts + builders.ts + legacy map
+│   │   ├── device-record.ts     # DeviceRecord + status enum + identity rule
+│   │   ├── heartbeat.ts         # AgentHeartbeat + LWT helper
+│   │   ├── envelope.ts          # {value, full_id} GUI envelope, versioned
+│   │   ├── layout/              # node / widget-types / yak-binding / folder-grammar
+│   │   ├── yak/                 # v40-definition + verbs now; class/model in Phase 3
+│   │   └── log-event.ts         # LogEvent (Phase 4 pre-work)
 │   ├── vectors/                 # language-neutral golden test vectors (JSON)
 │   │   ├── topics.json
 │   │   └── payloads/            # one sample doc per schema, valid + invalid
-│   ├── schema/                  # GENERATED JSON Schema 2020-12 — committed
+│   ├── schemas/                 # GENERATED JSON Schema 2020-12 — committed
 │   ├── rust/                    # openair-contracts crate
 │   │   ├── Cargo.toml
 │   │   └── src/
@@ -101,7 +110,7 @@ Decisions baked into that tree:
   nothing else.** No rumqttc (dodges the 0.24/0.25 skew entirely), no tokio.
   Types and topic strings only. The moment someone wants to add a client
   library to it, the answer is no — that belongs in the agent.
-- **Generated code is committed**, both `schema/` and `rust/src/gen/`. A repo
+- **Generated code is committed**, both `schemas/` and `rust/src/gen/`. A repo
   where `cargo build` works only after running a Node toolchain is a repo
   where the Rust half stops building the day Node breaks. CI enforces
   freshness instead (§5).
@@ -124,7 +133,7 @@ Decisions baked into that tree:
 ### 1.3 Codegen pipeline (TS → JSON Schema → Rust)
 
 ```
-src/**/*.ts ──(z.toJSONSchema)──► schema/*.schema.json ──(cargo-typify)──► rust/src/gen/*.rs
+src/**/*.ts ──(z.toJSONSchema)──► schemas/*.schema.json ──(cargo-typify)──► rust/src/gen/*.rs
      ▲                                    │
      └── z.infer<> types for ui/          └── also consumable by Python (jsonschema pip)
                                               during the transition
@@ -157,8 +166,9 @@ live broker. They go in `contracts/README.md` and they are review law.
 The broker holds retained payloads written by every version of the system
 that ever ran — including today's pre-contract shapes. Therefore:
 
-1. **Every payload document carries `"v": 1`** (integer, required). Parsers
-   dispatch on it. Version-less input is, by definition, "v0: the wild west" —
+1. **Every payload document carries `schemaVersion: 1`** (integer, required —
+   rule R4 in the structural guidelines; `"v"` is rejected as a field name).
+   Parsers dispatch on it. Version-less input is, by definition, "v0: the wild west" —
    schemas include a `legacy` variant where a real v0 shape exists (e.g. the
    `_GuiValue`/`subscribe` discovered-frame schema) so validators can *name*
    what they found instead of just failing.
@@ -181,8 +191,11 @@ that ever ran — including today's pre-contract shapes. Therefore:
   (serial when the instrument reports one, else a hash of address+model) —
   documented as *the* identity, replacing "folder name is identity."
 - **Enums are closed discriminated unions**, not strings: agent status is
-  `'online' | 'stub' | 'error' | 'offline'` — which is also what makes
-  Phase 0 item 4 (stubs must stop claiming `online`) mechanically checkable.
+  `'starting' | 'online' | 'degraded' | 'stub' | 'stopping' | 'offline'`
+  (guidelines H1); device status is `'discovered' | 'identified' |
+  'unresponsive' | 'stale' | 'removed'` (guidelines D3) — which is also what
+  makes Phase 0 item 4 (stubs must stop claiming `online`) mechanically
+  checkable.
 - One document type per file; schema name = file name = exported type name.
 - `z.any()` / `z.unknown()` require a `// WHY:` comment and show up in review.
 
@@ -190,11 +203,11 @@ that ever ran — including today's pre-contract shapes. Therefore:
 
 | Schema | Seeded from | Deliberate choices |
 |---|---|---|
-| `DeviceRecord` | VISA merge object (`main.rs:270-322`) | One JSON doc per device, retained at `OpenAir/Discovery/{protocol}/{deviceId}` — replaces field-per-topic explosion. Fields: `v, protocol, deviceId, class, make, model, serial?, address, firmware?, raw_idn?, status, lastSeen, notes?` |
-| `AgentHeartbeat` | `MqttProvider.jsx:77-124` payload | `v, agent, partition, status, version?, startedAt, beatAt`; retained, 1 Hz stays; `active:false` tombstone kept |
+| `DeviceRecord` | VISA merge object (`main.rs:270-322`) | One JSON doc per device, retained at `OpenAir/Discovery/{protocol}/{deviceId}` — replaces field-per-topic explosion. Fields per guidelines D1: `schemaVersion, protocol, deviceId, deviceClass, make, model, serial?, firmware?, address, rawIdn?, status, firstSeen, lastSeen, notes?, extra?` (typed per-protocol `extra`) |
+| `AgentHeartbeat` | `MqttProvider.jsx:77-124` payload | Per guidelines H1: `schemaVersion, agent, status, version?, startedAt, lastBeat, partition?, host?, pid?` (`partition` carried by web sessions); retained, 1 Hz stays; the `active:false` tombstone is replaced by a registered MQTT LWT `{status:"offline"}` (H2) |
 | `Layout` (`OcaBin`/`OcaBlock`/field) | Current `Gui_Frames` shape (root key → `{type:"OcaBin", id, geometry, behavior, blocks}`, nested `OcaBlock.fields`, multilingual labels) | Schema the shape **as it exists**, including `_GuiActuator` and the yak `"message"` binding; mark `_GuiValue`+`subscribe` as `deprecated: true` variants so validate reports them by name |
-| `YakBinding` | `"Execute Command"` blocks | Phase 1 only schemas the *current* binding block; the class/model capability split is Phase 3 and gets its own files under `src/yak/` when it lands |
-| `LogEvent` | YAK monitor topics | `v, source, level, message, at, data?` — pre-work for Phase 4 item 5 |
+| `YakBinding` + `YakHandlerMsg` | `"Execute Command"` blocks; `openair-yak/src/models.rs:9` | **Two contracts, not one** (guidelines finding #2 — the verbs arrive over MQTT, not in files): the in-file binding block (`enable, yak_type, sub_path, command, input_name?, converter?, marker_number?, trace_number?, trigger_only?`, guidelines L3) *and* the runtime `yak_handler` message + execute envelope incl. `correlation_id` (Y7). The class/model capability split is Phase 3 and gets its own files under `src/yak/` when it lands |
+| `LogEvent` | YAK monitor topics | `schemaVersion, source, level, message, at, data?` — pre-work for Phase 4 item 5 |
 
 Schema-ing the mess honestly (deprecated variants included) is the point: the
 validate CLI's day-one failure list is only a usable debt inventory if it says
@@ -308,6 +321,16 @@ openair-validate --report json|pretty|summary
   actually depends on — duplicate class prefixes (`4_DMM_YAK` vs `4_Load_YAK`),
   duplicate model numbers, `_Legacy_Commands/` and `*.json.old` files that the
   YAK loader currently ingests, colliding command names across models.
+- Also lints the static config surface (guidelines §7): every `config.ini`
+  `topic*` value must parse against the topic grammar — immediately surfacing
+  the three-way YAK listen-topic divergence (hardcoded `OpenAir/Gui/#` vs
+  config.ini vs code default).
+- **Archive markers ride along** (ruling 2026-07-17): every file the
+  migration moves, retires, or deletes gets an append-only line in
+  `Documents/Audits/Migration_Ledger.md` (`date | action | old path |
+  new path/— | commit | note`), and each shipped rollout step gets a
+  `CHANGELOG.md` entry. CI checks the trail the same way it checks the
+  ratchet: removals without a ledger line fail the build.
 - **The ratchet is the deployment trick that makes day one survivable.** The
   first run's failures are written to `contracts/validate.baseline.json` and
   committed — that file *is* the technical-debt inventory the plan asked for.
@@ -327,7 +350,7 @@ One new workflow, `.github/workflows/contracts-ci.yml`, on every PR + main
 ```yaml
 jobs:
   node:      # pnpm install --frozen-lockfile → typecheck → vitest (incl. vectors)
-             # → pnpm gen --check   ← fails if schema/ or rust/src/gen/ is stale
+             # → pnpm gen --check   ← fails if schemas/ or rust/src/gen/ is stale
              # → openair-validate (ratchet mode)
   rust:      # cargo test -p openair-contracts (incl. vectors)
              # → cargo build in BOTH workspaces  ← proves the path-dep wiring
@@ -351,8 +374,8 @@ Each step is a PR-sized unit that leaves `main` green and ships a schema
 |---|---|---|
 | **1. Scaffold** (1–2 d) | Workspace, empty package, toolchain pins, CI skeleton green | CI itself |
 | **2. Topic grammar** (2–3 d) | `Topics` build/parse + legacy map + `vectors/topics.json`, TS + Rust | Vector suites both sides; `topicMaker.jsx` internals delegate to the contracts build (via a tiny IIFE bundle or verbatim port — behavior pinned by vectors either way); `topicUtils.js` deleted |
-| **3. Heartbeat + DeviceRecord** (2 d) | `AgentHeartbeat`, `DeviceRecord` schemas + payload vectors | `MqttProvider.jsx` heartbeat emits the schema shape; a broker-dump replay test proves today's VISA fields map into `DeviceRecord` losslessly |
-| **4. Layout schema** (3–5 d, the long one) | `Layout` incl. deprecated variants + yak binding block | `openair-validate walk Gui_Frames` runs — first honest count of the drift |
+| **3. Heartbeat + DeviceRecord** (2 d) | `AgentHeartbeat`, `DeviceRecord` schemas + payload vectors | `MqttProvider.jsx` heartbeat emits the schema shape **and registers the `{status:"offline"}` LWT (H2)**; a broker-dump replay test proves today's VISA fields map into `DeviceRecord` losslessly |
+| **4. Layout schema** (3–5 d, the long one) | `Layout` incl. deprecated variants + yak binding block + `yak_handler` runtime message schema | `openair-validate walk Gui_Frames` runs (incl. config.ini topic lint) — first honest count of the drift |
 | **5. Ratchet on** (1 d) | Committed baseline; CI enforces no-new-debt | CI; `Validations/contracts-debt-inventory.md` published |
 | **6. Rust adoption seed** (1–2 d) | `openair-contracts` as path dep in both workspaces | `openair-yak` parses one thing through contract types (e.g. its config/monitor payload) — proves the dependency direction before Phase 3 bets on it |
 

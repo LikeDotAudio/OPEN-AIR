@@ -67,9 +67,14 @@ contracts/
 │   │   ├── model.ts        # YAK 2 model binding file (Phase 3 target)
 │   │   ├── v40-definition.ts # schema of TODAY'S tree files (migration source)
 │   │   └── verbs.ts        # SET/RIG/NAB/DO + yak_handler message schema
+│   ├── log-event.ts        # LogEvent stream doc (Phase 4 pre-work)
 │   └── index.ts
+├── vectors/                # language-neutral golden vectors (topics + payloads),
+│                           #   consumed by BOTH vitest and cargo test (Phase 1 §4)
 ├── schemas/                # generated JSON Schema output (checked in, diffed in CI)
-├── rust/openair-contracts/ # generated Rust crate (typify from schemas/) — never hand-edited
+├── rust/                   # openair-contracts crate: src/gen/ is typify output,
+│                           #   never hand-edited; src/topics.rs is the hand-written
+│                           #   grammar mirror, pinned honest by vectors/
 └── cli/validate.ts         # the walk-and-report CLI (§7)
 ```
 
@@ -251,7 +256,8 @@ Structural rules for the package itself:
 ### Guidelines
 
 - **H1 — One shape:** `AgentHeartbeat = { schemaVersion, agent, status,
-  version, startedAt, lastBeat, host?, pid? }`, retained at
+  version, startedAt, lastBeat, partition?, host?, pid? }` (`partition` is
+  the browser-failover field, carried by web sessions only), retained at
   `OpenAir/System/Agents/{agent}`. `status: starting | online | degraded |
   stub | stopping | offline`. Stub agents report `stub` — the contract makes
   the plan's Phase 0 item 4 permanent by construction, ending health the

@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-07-17 - v41 Plan Reconciliation + Phase 1 Scaffold
+
+- **Plan reconciliation**: `Phase 1.md`, `Phase 2.md`, and
+  `4_Contracts_Structural_Guidelines.md` reconciled — the inventory-backed
+  guidelines win on schema content (`schemaVersion` field, `schemas/` dir,
+  D1/H1 payload shapes, H1/D3 status enums, dual YAK contracts), Phase 1
+  wins on deployment mechanics (golden vectors, ratchet baseline, committed
+  codegen, hand-written `topics.rs`).
+- **UI isolation ruling**: Phase 2 rewritten — the typed app is a new `ui/`
+  package; `FrontEnd/` keeps data (`Gui_Frames/`, `api/`) and shrinking
+  legacy source. Conversion = `git mv`, never copy; enforced by a CI
+  collision check.
+- **Archive trail ruling**: every migration move/retire/delete records a line
+  in `Documents/Audits/Migration_Ledger.md` (append-only) and ships with a
+  changelog entry; CI fails silent removals.
+- **Phase 1 step 1 deployed**: pnpm workspace root, Node/Rust toolchain pins,
+  `@openair/contracts` package skeleton, and `contracts-ci.yml` — the repo's
+  first non-deploy CI.
+
 ## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
 
 - **Intelligent Port Lifecycle Management**: Upgraded `openair.py` to aggressively hunt down and kill ghost processes on port 8000 using `fuser` and `lsof` during startup. This prevents the orchestrator from crashing due to "Address already in use" conflicts and ensures background VISA discovery tasks always complete.

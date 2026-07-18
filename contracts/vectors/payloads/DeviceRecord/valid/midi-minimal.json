@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "protocol": "midi",
+  "deviceId": "midi:Faderport_8",
+  "deviceClass": "control surface",
+  "make": "PreSonus",
+  "model": "Faderport 8",
+  "address": "Faderport 8",
+  "status": "discovered",
+  "firstSeen": "2026-07-17T20:00:00.000Z",
+  "lastSeen": "2026-07-17T20:10:00.000Z",
+  "extra": { "midi": { "direction": "input", "portIndex": 0 } }
+}

@@ -26,6 +26,18 @@
   pinned by one golden-vector file (`contracts/vectors/topics.json`) run by
   vitest AND cargo — 64 TS + 5 Rust suite assertions green. `topicUtils.js`
   (the older, disagreeing topic utility, zero callers) deleted.
+- **Phase 1 step 3 deployed — payload contracts + codegen + the ghost-tab
+  fix**: `AgentHeartbeat` (H1) and `DeviceRecord` (D1) zod schemas with
+  legacy-v0 shapes schema'd by name; the zod→JSON-Schema→cargo-typify (0.7.0)
+  pipeline turned ON with committed output and a real `gen:check` CI gate;
+  D2 `deviceIdFor` (FNV-1a 64) + ISO time helpers vector-pinned in TS and
+  Rust; `mapV40VisaRecord` replay-proven lossless in both languages. The
+  browser now registers a real MQTT **Last Will** on
+  `OpenAir/System/Agents/web-{guid}` and dual-publishes the v41 heartbeat
+  beside the untouched legacy Failover beat — LWT delivery verified live
+  against the local broker (SIGKILL → retained `offline`). Crate-rule
+  amendment: `regress` (typify's validation regex engine) joins
+  serde/serde_json as the only allowed deps.
 - **Docs reorganized**: forward-looking strategy documents (migration plan,
   Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
   `Documents/Audits/` to `Documents/Strategies/`; the point-in-time audits

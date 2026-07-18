@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "protocol": "visa",
+  "deviceId": "visa:MY12345678",
+  "deviceClass": "spectrum analyzer",
+  "make": "Agilent Technologies",
+  "model": "N9340B",
+  "address": "TCPIP0::192.168.10.5::INSTR",
+  "status": "online",
+  "firstSeen": "2025-07-17T21:00:00.000Z",
+  "lastSeen": "2025-07-17T21:00:00.000Z"
+}

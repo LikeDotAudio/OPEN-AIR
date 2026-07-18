@@ -117,17 +117,29 @@ row starts.
   itself is the cleanup mechanism; a `mosquitto_pub -r -n` one-liner in the
   README is the manual eraser until Phase 4 TTL aging.
 
-## 5. Definition of done
+## 5. Definition of done — closed out 2026-07-17
 
-- [ ] Both schemas exported from `@openair/contracts` with H1/D1 field sets,
+- [x] Both schemas exported from `@openair/contracts` with H1/D1 field sets,
       closed enums, `schemaVersion: 1`
-- [ ] `pnpm gen` writes `schemas/` + `rust/src/gen/`; `gen:check` is a real CI
-      diff gate; generated Rust committed and compiling
-- [ ] Payload vectors (valid/invalid/legacy-v0) pass in **both** languages,
-      including through the generated Rust types
-- [ ] `deviceIdFor()` and `fromUnixSeconds()` vector-pinned in both languages
-- [ ] Browser registers a real MQTT LWT; kill-tab test observed live
-      (`offline` within keepalive); legacy Failover channel byte-identical
-- [ ] VISA replay fixture maps losslessly; `Dev{n}` identity provably replaced
+- [x] `pnpm gen` writes `schemas/` + `rust/src/gen/`; `gen:check` is a real CI
+      diff gate (dedicated `codegen` job, typify 0.7.0 cached); generated Rust
+      committed and compiling
+- [x] Payload vectors (valid/invalid/legacy-v0) pass in **both** languages,
+      including through the generated Rust types (93 TS / 13 Rust assertions)
+- [x] `deviceIdFor()` and `fromUnixSeconds()` vector-pinned in both languages
+- [x] Browser registers a real MQTT LWT; LWT delivery verified live against
+      the local broker with the browser's exact will registration (SIGKILL →
+      broker publishes retained schema-valid `offline`); legacy Failover
+      channel behavior unchanged. *Residual manual check for Anthony: kill a
+      real browser tab and watch `mosquitto_sub -t 'OpenAir/System/Agents/#'
+      -v` flip it to `offline`.*
+- [x] VISA replay fixture maps losslessly; `Dev{n}` identity provably replaced
       by the D2 derivation in the mapped output
-- [ ] Ledger rows 3a–3f, CHANGELOG entry, Phase 1 §7 row updated
+- [x] Ledger rows, CHANGELOG entry, Phase 1 §7 row links here
+
+**Deviations from plan, logged:** (1) crate rule amended — `regress`
+(cargo-typify's validation regex engine, no I/O) is now an allowed dependency
+of `openair-contracts`, in exchange for Rust-side pattern enforcement on
+deviceId/agent/ISO fields; (2) datetime `format` is stripped from the typify
+input only, so Rust sees pattern-validated strings instead of chrono types —
+the committed JSON Schemas keep `format` for other consumers.

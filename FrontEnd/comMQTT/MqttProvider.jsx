@@ -47,6 +47,30 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             return;
         }
 
+        const guidPart = SESSION_FULL_ID.split(':')[0];
+        const hbTopic = `OpenAir/System/Failover/WEB/Heartbeat/${guidPart}`;
+        const startTs = Date.now() / 1000;
+
+        // v41 AgentHeartbeat channel (contracts H1/H2/H3) — dual-published
+        // alongside the legacy Failover beat until Phase 2 migrates failover.
+        // MQTT allows ONE Last Will per connection; per contract H2 it targets
+        // the Agents channel (the Failover channel has no in-repo subscriber —
+        // see 4_Contracts_Structural_Guidelines §2). The LWT is the ghost-tab
+        // fix: a killed tab's retained status flips to "offline" within
+        // keepalive, no clean unmount required. Payload shape must match
+        // @openair/contracts AgentHeartbeatSchema (schemaVersion 1).
+        const agentId = `web-${guidPart}`;
+        const agentTopic = `OpenAir/System/Agents/${agentId}`;
+        const startedAtIso = new Date().toISOString();
+        const agentBeat = (status) => JSON.stringify({
+            schemaVersion: 1,
+            agent: agentId,
+            status,
+            partition: 'WEB',
+            startedAt: startedAtIso,
+            lastBeat: new Date().toISOString(),
+        });
+
         // Only send credentials when a username is provided. Public test brokers
         // (test.mosquitto.org :8080/:8081) are anonymous — sending empty creds
         // there can be rejected, so we connect without them.
@@ -54,6 +78,12 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             keepalive: 60,
             reconnectPeriod: 5000, // Wait 5 seconds between retries
             connectTimeout: 30 * 1000,
+            will: {
+                topic: agentTopic,
+                payload: agentBeat('offline'),
+                retain: true,
+                qos: 1
+            }
         };
         if (username) {
             connectOptions.username = username;
@@ -77,9 +107,6 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
         // Mirror Python's Failover heartbeat (1Hz). Lets the broker and other
         // instances see this browser as a live participant under the WEB
         // partition. Topic shape mirrors `OpenAir/System/Failover/<partition>/Heartbeat/<guid>`.
-        const guidPart = SESSION_FULL_ID.split(':')[0];
-        const hbTopic = `OpenAir/System/Failover/WEB/Heartbeat/${guidPart}`;
-        const startTs = Date.now() / 1000;
         const hbInterval = setInterval(() => {
             if (!mqttClient.connected) return;
             const payload = JSON.stringify({
@@ -91,6 +118,8 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
                 timestamp: Date.now() / 1000,
             });
             mqttClient.publish(hbTopic, payload, { retain: true });
+            // v41 twin (AgentHeartbeat schema, retained, same 1 Hz cadence)
+            mqttClient.publish(agentTopic, agentBeat('online'), { retain: true, qos: 1 });
         }, 1000);
 
         mqttClient.on('message', (topic, message) => {
@@ -132,6 +161,10 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
                     start_ts: startTs,
                     timestamp: Date.now() / 1000,
                 }), { retain: true });
+                // v41 twin: clean shutdown announces itself, then leaves the
+                // same retained "offline" the LWT would have delivered.
+                mqttClient.publish(agentTopic, agentBeat('stopping'), { retain: true, qos: 1 });
+                mqttClient.publish(agentTopic, agentBeat('offline'), { retain: true, qos: 1 });
             } catch (e) {}
             mqttClient.end();
         };

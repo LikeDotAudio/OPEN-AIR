@@ -1,6 +1,9 @@
 # openair-contracts — Rust mirror of @openair/contracts.
-# HARD RULE (Phase 1 §1.1): serde + serde_json and NOTHING else. No rumqttc,
-# no tokio. Types and topic strings only; client libraries belong in agents.
+# HARD RULE (Phase 1 §1.1, amended step 3b): serde + serde_json + regress and
+# NOTHING else. regress is cargo-typify's regex engine — required by the
+# generated pattern-validated newtypes (deviceId, agent, ISO datetimes) and
+# pure validation with no I/O. Still banned: rumqttc, tokio, any client or
+# async dep. Types and topic strings only; client libraries belong in agents.
 # Deliberately in neither BackEnd workspace — both reference it by path.
 [package]
 name = "openair-contracts"
@@ -11,3 +14,4 @@ description = "Cross-boundary contracts for OPEN-AIR: topic grammar + generated 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+regress = "0.10"

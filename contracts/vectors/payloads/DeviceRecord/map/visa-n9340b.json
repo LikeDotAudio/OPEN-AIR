@@ -1,0 +1,33 @@
+{
+  "$comment": "Step 3e replay proof: v40 VISA merge object -> canonical DeviceRecord. Dev{n} identity discarded for the D2 derivation.",
+  "input": {
+    "manufacturer": "Agilent Technologies",
+    "model": "N9340B",
+    "serial": "MY12345678",
+    "firmware": "B.08.10",
+    "raw_idn": "Agilent Technologies,N9340B,MY12345678,B.08.10",
+    "resource": "TCPIP0::192.168.10.5::INSTR",
+    "status": "identified",
+    "device_type": "spectrum analyzer",
+    "notes": "Handheld spectrum analyzer",
+    "last_online": 1752786000,
+    "connected": 1
+  },
+  "expected": {
+    "schemaVersion": 1,
+    "protocol": "visa",
+    "deviceId": "visa:MY12345678",
+    "deviceClass": "spectrum analyzer",
+    "make": "Agilent Technologies",
+    "model": "N9340B",
+    "serial": "MY12345678",
+    "firmware": "B.08.10",
+    "address": "TCPIP0::192.168.10.5::INSTR",
+    "rawIdn": "Agilent Technologies,N9340B,MY12345678,B.08.10",
+    "status": "identified",
+    "firstSeen": "2025-07-17T21:00:00.000Z",
+    "lastSeen": "2025-07-17T21:00:00.000Z",
+    "notes": "Handheld spectrum analyzer",
+    "extra": { "visa": { "resource": "TCPIP0::192.168.10.5::INSTR" } }
+  }
+}

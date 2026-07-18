@@ -20,8 +20,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @openair/contracts typecheck
-      - run: pnpm --filter @openair/contracts test # includes the golden-vector suite
-      - run: pnpm gen:check # freshness gate — echo-only until payload schemas land (step 3)
+      - run: pnpm --filter @openair/contracts test # includes the golden-vector suites
 
   rust:
     runs-on: ubuntu-latest
@@ -29,3 +28,19 @@ jobs:
       - uses: actions/checkout@v4
       # rustup reads rust-toolchain.toml automatically
       - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
+
+  codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-typify
+          key: cargo-typify-0.7.0-${{ runner.os }}
+      - run: command -v cargo-typify >/dev/null || cargo install cargo-typify@0.7.0 --locked
+      - run: pnpm gen:check

@@ -1,0 +1,13 @@
+{
+  "manufacturer": "Agilent Technologies",
+  "model": "N9340B",
+  "serial": "MY12345678",
+  "firmware": "B.08.10",
+  "raw_idn": "Agilent Technologies,N9340B,MY12345678,B.08.10",
+  "resource": "TCPIP0::192.168.10.5::INSTR",
+  "status": "identified",
+  "device_type": "spectrum analyzer",
+  "notes": "Handheld spectrum analyzer",
+  "last_online": 1752786000,
+  "connected": 1
+}

@@ -15,6 +15,29 @@
 
 export const CONTRACTS_VERSION = '0.1.0' as const
 
+export {
+  AgentHeartbeatSchema,
+  AgentStatusSchema,
+  LegacyFailoverHeartbeatV0Schema,
+  heartbeatLwt,
+  type AgentHeartbeat,
+  type AgentStatus,
+  type LegacyFailoverHeartbeatV0,
+} from './heartbeat.js'
+export {
+  DeviceExtraSchema,
+  DeviceRecordSchema,
+  DeviceStatusSchema,
+  LegacyVisaRecordV0Schema,
+  mapV40VisaRecord,
+  type DeviceExtra,
+  type DeviceRecord,
+  type DeviceStatus,
+  type LegacyVisaRecordV0,
+} from './device-record.js'
+export { deviceIdFor, fnv1a64, type DeviceIdentitySource } from './identity.js'
+export { fromUnixSeconds } from './time.js'
+
 export { Topics, type ParsedTopic } from './topics/builders.js'
 export {
   GUI_ROOT,

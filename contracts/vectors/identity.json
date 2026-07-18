@@ -1,0 +1,20 @@
+{
+  "$comment": "Golden vectors for identity + time helpers (guidelines D2, Phase 1 §2.2). Consumed by contracts/src/identity.test.ts AND contracts/rust tests.",
+  "deviceId": [
+    { "input": { "protocol": "visa", "serial": "MY12345678", "address": "TCPIP0::192.168.10.5::INSTR", "make": "Agilent Technologies", "model": "N9340B" }, "deviceId": "visa:MY12345678", "why": "serial wins over address" },
+    { "input": { "protocol": "visa", "serial": "MY 123 45", "address": "x" }, "deviceId": "visa:MY-123-45", "why": "spaces sanitized to '-'" },
+    { "input": { "protocol": "visa", "serial": "", "address": "TCPIP0::192.168.10.5::INSTR" }, "deviceId": "visa:TCPIP0::192.168.10.5::INSTR", "why": "empty serial falls to protocol-native address" },
+    { "input": { "protocol": "visa", "serial": "  ", "address": "USB0::0x0957::0x0407::MY44060332::INSTR" }, "deviceId": "visa:USB0::0x0957::0x0407::MY44060332::INSTR", "why": "whitespace-only serial ignored" },
+    { "input": { "protocol": "midi", "make": "PreSonus", "model": "Faderport 8", "address": "" }, "deviceId": "midi:5718cafba9aea2c3", "why": "no serial, no address → FNV-1a 64 of make|model|address" },
+    { "input": { "protocol": "visa", "serial": "Ünit§1" }, "deviceId": "visa:-nit-1", "why": "non-charset chars sanitized" }
+  ],
+  "fnv1a64": [
+    { "input": "", "hex": "cbf29ce484222325", "why": "offset basis — algorithm sanity" },
+    { "input": "PreSonus|Faderport 8|", "hex": "5718cafba9aea2c3" }
+  ],
+  "fromUnixSeconds": [
+    { "seconds": 0, "iso": "1970-01-01T00:00:00.000Z" },
+    { "seconds": 1752786000, "iso": "2025-07-17T21:00:00.000Z", "why": "the VISA agent's last_online era" },
+    { "seconds": 1752786000.789, "iso": "2025-07-17T21:00:00.789Z", "why": "float seconds, ms preserved" }
+  ]
+}

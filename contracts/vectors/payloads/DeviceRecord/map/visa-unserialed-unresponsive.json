@@ -1,0 +1,29 @@
+{
+  "$comment": "No serial -> address identity; identified + connected:0 -> unresponsive; empty optionals omitted.",
+  "input": {
+    "manufacturer": "Keysight",
+    "model": "34401A",
+    "serial": "",
+    "firmware": "",
+    "raw_idn": "",
+    "resource": "GPIB0::22::INSTR",
+    "status": "identified",
+    "device_type": "multimeter",
+    "notes": "",
+    "last_online": 1752786000.789,
+    "connected": 0
+  },
+  "expected": {
+    "schemaVersion": 1,
+    "protocol": "visa",
+    "deviceId": "visa:GPIB0::22::INSTR",
+    "deviceClass": "multimeter",
+    "make": "Keysight",
+    "model": "34401A",
+    "address": "GPIB0::22::INSTR",
+    "status": "unresponsive",
+    "firstSeen": "2025-07-17T21:00:00.789Z",
+    "lastSeen": "2025-07-17T21:00:00.789Z",
+    "extra": { "visa": { "resource": "GPIB0::22::INSTR" } }
+  }
+}

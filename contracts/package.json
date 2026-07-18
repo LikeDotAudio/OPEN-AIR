@@ -16,8 +16,8 @@
     "build": "tsup src/index.ts --format esm --dts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "gen": "echo 'gen: no schemas defined yet (lands with rollout step 2)'",
-    "gen:check": "echo 'gen:check: no schemas defined yet (lands with rollout step 2)'",
+    "gen": "tsx scripts/gen.ts",
+    "gen:check": "tsx scripts/gen.ts --check",
     "validate": "echo 'validate: CLI lands with rollout step 4'"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^26.1.1",
     "tsup": "^8.5.1",
+    "tsx": "^4.23.1",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }

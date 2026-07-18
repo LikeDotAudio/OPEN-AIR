@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "agent": "yak",
+  "status": "online",
+  "version": "0.4.1",
+  "startedAt": "2026-07-17T20:00:00.000Z",
+  "lastBeat": "2026-07-17T20:05:00.000Z",
+  "host": "lab-pc",
+  "pid": 4242
+}

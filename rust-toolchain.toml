@@ -1,0 +1,6 @@
+# Repo-wide Rust pin (Phase 1 step 1). Both Cargo workspaces already contain
+# edition-2024 crates, which require >=1.85 — this legalizes what was
+# implicitly true. Matches the installed toolchain.
+[toolchain]
+channel = "1.94.1"
+components = ["rustfmt", "clippy"]

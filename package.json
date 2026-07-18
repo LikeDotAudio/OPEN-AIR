@@ -1,0 +1,15 @@
+{
+  "name": "openair",
+  "private": true,
+  "packageManager": "pnpm@11.14.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "gen": "pnpm --filter @openair/contracts gen",
+    "gen:check": "pnpm --filter @openair/contracts gen:check",
+    "validate": "pnpm --filter @openair/contracts validate",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  }
+}

@@ -38,3 +38,9 @@ target/
 
 .gemini/
 .claude/
+
+# Third-party Copied Repositories (Test Mocks)
+TESTS/Protocols/nmos/nmos-cpp-master/
+*-master/
+# Node (pnpm workspace — Phase 1)
+node_modules/

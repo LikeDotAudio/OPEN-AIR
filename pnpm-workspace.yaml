@@ -1,0 +1,5 @@
+packages:
+  - contracts
+  - ui # Phase 2 — the isolated typed frontend package
+allowBuilds:
+  esbuild: true

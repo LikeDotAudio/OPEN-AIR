@@ -1,0 +1,31 @@
+{
+  "name": "@openair/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "gen": "echo 'gen: no schemas defined yet (lands with rollout step 2)'",
+    "gen:check": "echo 'gen:check: no schemas defined yet (lands with rollout step 2)'",
+    "validate": "echo 'validate: CLI lands with rollout step 4'"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

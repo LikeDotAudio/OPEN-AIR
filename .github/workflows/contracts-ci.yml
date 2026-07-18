@@ -1,0 +1,25 @@
+# Phase 1 step 1 — the repo's first non-deploy CI (Documents/Audits/Phase 1.md §6).
+# Grows with the rollout:
+#   step 2: vector suites (vitest + cargo test -p openair-contracts)
+#   step 5: openair-validate in ratchet mode + migration-ledger check
+#   step 6: cargo build in BOTH BackEnd workspaces (proves the path-dep wiring)
+name: contracts-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @openair/contracts typecheck
+      - run: pnpm --filter @openair/contracts test
+      - run: pnpm gen:check # freshness gate — echo-only until schemas land (step 2)

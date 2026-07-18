@@ -1,6 +1,11 @@
 # Changelog
 
-## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan
+## 2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry
+
+- **WYSIWYG entry moved to the tabs, globally**: right-click any tab —
+  folder tab or top-level window tab — to open the editor on that folder's
+  first panel file (depth-first through subfolders). The canvas right-click
+  entry is retired; panels keep the browser's native context menu.
 
 - **Sampler is back**: `Console/Sampler` (panel + the four widget files) was
   deleted by the `explosion` commit — before any migration work — and has

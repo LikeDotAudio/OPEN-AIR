@@ -9,6 +9,30 @@
  */
 
 // Inline comment: Logic for parseSplitName
+// The GLOBAL WYSIWYG entry gesture: right-click any tab (folder tab or
+// top-level window tab) to edit that folder's first panel file (depth-first
+// through subfolders). The canvas itself keeps the browser's native context
+// menu — the old per-panel right-click entry is retired.
+const oaFirstPanelFile = (n) => {
+    if (!n || !n.children) return null;
+    const file = n.children.find(c => c.type === 'file' && c.name.endsWith('.json'));
+    if (file) return file;
+    for (const child of n.children) {
+        if (child.type === 'directory') {
+            const found = oaFirstPanelFile(child);
+            if (found) return found;
+        }
+    }
+    return null;
+};
+const oaEditTabTarget = (e, node) => {
+    e.preventDefault();
+    const f = oaFirstPanelFile(node);
+    if (f && window.launchWysiwygEditor) {
+        window.launchWysiwygEditor({ filePath: f.path, content: f.content });
+    }
+};
+
 const parseSplitName = (name) => {
     const match = name.match(/^(left|right|top|bottom)_(\d+)$/i);
     if (match) return { direction: match[1].toLowerCase(), percent: parseInt(match[2], 10) };
@@ -322,10 +346,10 @@ const TabContainer = ({ node, path = '' }) => {
                 display: 'flex', 
                 flexDirection: 'column' 
             }}>
+                 {/* Editor entry moved to the TAB strip (right-click a tab) —
+                     the canvas keeps its native context menu. */}
                  {files.map(f => (
                      <div key={f.name}
-                        onContextMenu={(e) => { e.preventDefault(); window.launchWysiwygEditor && window.launchWysiwygEditor({ filePath: f.path, content: f.content }); }}
-                        title="Right-click: Open WYSIWYG editor"
                         style={{ flexGrow: 1, flexBasis: '0', minHeight: '300px', borderBottom: '1px solid #333' }}>
                         <window.LoaderOrchestrator layoutJson={f.content} filePath={f.path} />
                      </div>
@@ -343,6 +367,8 @@ const TabContainer = ({ node, path = '' }) => {
     // Clean up names like "0_Spectrum" -> "Spectrum"
     const cleanName = (name) => name.replace(/^\d+[_\s-]?/, '').replace(/_/g, ' ');
 
+    const editTab = (e, d) => oaEditTabTarget(e, d);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
             <div style={{ display: 'flex', backgroundColor: '#0a0a0a', overflowX: 'auto', flexShrink: 0, borderBottom: '1px solid #222' }}>
@@ -358,6 +384,8 @@ const TabContainer = ({ node, path = '' }) => {
                             e.preventDefault();
                             selectTab(d.name);
                         }}
+                        onContextMenu={(e) => editTab(e, d)}
+                        title="Right-click: edit this tab's panel"
                         style={{
                             display: 'block',
                             textDecoration: 'none',
@@ -661,7 +689,8 @@ const WindowManager = ({ directoryTree }) => {
                             fontWeight: 'bold',
                             backgroundColor: activeWindow === w.name ? '#222' : 'transparent'
                         }}
-                        title={activeWindow === w.name ? "Click to cycle split layout" : ""}
+                        onContextMenu={(e) => oaEditTabTarget(e, w)}
+                        title={activeWindow === w.name ? "Click to cycle split layout — right-click to edit" : "Right-click: edit this window's panel"}
                     >
                         {(() => {
                             let label = w.name.replace(/^\d+[_\s-]?/, '').replace(/_/g, ' ');

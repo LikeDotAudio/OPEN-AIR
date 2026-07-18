@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-07-17 - v41 Plan Reconciliation + Phase 1 Scaffold
+## 2026-07-17 - v41 Contracts Package: Plan Reconciliation + Phase 1 Steps 1-4
 
 - **Plan reconciliation**: `Phase 1.md`, `Phase 2.md`, and
   `4_Contracts_Structural_Guidelines.md` reconciled — the inventory-backed
@@ -13,8 +13,11 @@
   legacy source. Conversion = `git mv`, never copy; enforced by a CI
   collision check.
 - **Archive trail ruling**: every migration move/retire/delete records a line
-  in `Documents/Audits/Migration_Ledger.md` (append-only) and ships with a
-  changelog entry; CI fails silent removals.
+  in `Documents/Strategies/Migration_Ledger.md` (append-only) and ships with
+  a changelog entry; CI fails silent removals.
+- **Strategy-before-code ruling**: any step that touches a running component
+  gets its own deployment-strategy audit first — first applied as
+  `Documents/Strategies/Phase 1 Step 3.md`.
 - **Phase 1 step 1 deployed**: pnpm workspace root, Node/Rust toolchain pins,
   `@openair/contracts` package skeleton, and `contracts-ci.yml` — the repo's
   first non-deploy CI.
@@ -26,6 +29,12 @@
   pinned by one golden-vector file (`contracts/vectors/topics.json`) run by
   vitest AND cargo — 64 TS + 5 Rust suite assertions green. `topicUtils.js`
   (the older, disagreeing topic utility, zero callers) deleted.
+- **Docs reorganized**: forward-looking strategy documents (migration plan,
+  Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
+  `Documents/Audits/` to `Documents/Strategies/`; the point-in-time audits
+  (design audit, diagrams, executive review) stay in Audits. Cross-links
+  rewritten on both sides. Validation output lives in
+  `Documents/Strategies/Validations/`.
 - **Phase 1 step 3 deployed — payload contracts + codegen + the ghost-tab
   fix**: `AgentHeartbeat` (H1) and `DeviceRecord` (D1) zod schemas with
   legacy-v0 shapes schema'd by name; the zod→JSON-Schema→cargo-typify (0.7.0)
@@ -49,11 +58,9 @@
   collisions, 45 dead config.ini topic triples, and 45 converter uses the
   YAK agent silently passes through. Inventory published at
   `Documents/Strategies/Validations/contracts-debt-inventory.md`.
-- **Docs reorganized**: forward-looking strategy documents (migration plan,
-  Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
-  `Documents/Audits/` to `Documents/Strategies/`; the point-in-time audits
-  (design audit, diagrams, executive review) stay in Audits. Cross-links
-  rewritten on both sides.
+- **Still open in Phase 1**: step 5 (arm the validate ratchet in CI against
+  the day-one baseline) and step 6 (Rust adoption seed — `openair-contracts`
+  as a path dependency in both BackEnd workspaces).
 
 ## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
 

@@ -142,9 +142,9 @@ import '../../FrontEnd/editorWYSIWYG/Interface/Window/editor_toolbar.jsx'
 import '../../FrontEnd/editorWYSIWYG/Interface/Window/editor_layout.jsx'
 import '../../FrontEnd/editorWYSIWYG/Managers/wysiwyg_editor.jsx'
 import '../../FrontEnd/editorWYSIWYG/Entry.jsx'
-// SKIPPED (file missing on disk — dead tag in index.html): ../../FrontEnd/libControl/special/SamplerDrumkit/SamplerDrumkit.js
+import '../../FrontEnd/libControl/special/SamplerDrumkit/SamplerDrumkit.js'
 import '../../FrontEnd/libControl/special/AudioEditor/AudioEditor.jsx'
-// SKIPPED (file missing on disk — dead tag in index.html): ../../FrontEnd/libControl/special/SamplerSequencer/SamplerSequencer.jsx
-// SKIPPED (file missing on disk — dead tag in index.html): ../../FrontEnd/libControl/special/SamplerSoundBrowse/SamplerSoundBrowse.jsx
+import '../../FrontEnd/libControl/special/SamplerSequencer/SamplerSequencer.jsx'
+import '../../FrontEnd/libControl/special/SamplerSoundBrowse/SamplerSoundBrowse.jsx'
 import '../../FrontEnd/libControl/special/PadBrowse/PadBrowse.jsx'
-// SKIPPED (file missing on disk — dead tag in index.html): ../../FrontEnd/libControl/special/Sampler/Sampler.jsx
+import '../../FrontEnd/libControl/special/Sampler/Sampler.jsx'

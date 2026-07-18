@@ -30,19 +30,65 @@
   (`CallbackAPIVersion.VERSION2` when available; one callback signature
   serves both APIs).
 
-### Decision record: the Sampler is product scope
+### Decision record: the Sampler is removed from OPEN-AIR *(supersedes the entry below)*
 
-The 2026-07-17 executive review ordered the Sampler quarantined to its own
-repository; the follow-up review recorded that order as **reversed**. Making
-the decision explicit, as that review required:
+**Final — 2026-07-18.** The Sampler has been **moved out of the project
+entirely** and removed from this repository, together with the libraries that
+powered it. This executes the 2026-07-17 executive-review mandate and closes
+the governance finding that a board order had been reversed without a written
+decision.
 
-**The Sampler stays in OPEN-AIR as product scope.** `Console → Sampler` and
-its four widget files (`Sampler`, `SamplerDrumkit`, `SamplerSequencer`,
-`SamplerSoundBrowse`) are a console feature built on the same widget library,
-panel schema, and MQTT layer as every other panel — not an unrelated side
-project. It ships, it is documented here, and it is subject to the same
-contract validation as the rest of the tree. Superseding the audit's
-recommendation, on the record, rather than silently.
+Removed:
+
+| Path | What it was |
+|---|---|
+| `Gui_Frames/4_Console/100_Sampler/` | the `Console → Sampler` panel |
+| `libControl/special/Sampler/` | sampler widget |
+| `libControl/special/SamplerDrumkit/` | audio runtime — owned `oaAudioCtx`, `oaDecodeAudio`, `oaEncodeWav`, `OA_DRUM_*` |
+| `libControl/special/SamplerSequencer/` | step sequencer |
+| `libControl/special/SamplerSoundBrowse/` | sound browser |
+| `libControl/special/AudioEditor/` | waveform editor — **sampler-only**, despite the neutral name |
+| `libControl/special/PadBrowse/` | pad browser — **sampler-only**, despite the neutral name |
+
+`AudioEditor` and `PadBrowse` carry no "Sampler" prefix but depend on the audio
+runtime defined in `SamplerDrumkit.js` and appear in no panel outside
+`100_Sampler`. They are the "libraries that power it" and would have been dead
+code — or worse, broken references — had only the four prefixed widgets gone.
+Verified before removal: no surviving widget references any removed one.
+
+Also updated: 6 `<script>` tags dropped from `index.html`; the `Sampler` /
+`AudioEditor` / `Sequencer` entries removed from `WidgetFactory.jsx`'s registry;
+`ui/src/legacy.ts` regenerated (146 → 140 imports) and `ui/src/globals.d.ts`
+regenerated (210 → 178 globals — 32 audio globals retired).
+
+**No debt-reduction credit is claimed for this.** The Sampler contributed
+**zero** findings to `validate.baseline.json` (verified: errors 169 and
+deprecations 2,093 are unchanged, and no baselined key referenced a removed
+path). This is a **scope change, not debt paydown** — the distinction the
+executive review demanded, since a shrinking baseline achieved by deleting
+files is not progress. Note for the record that the 236 findings under
+`Gui_Frames/5_Samples/` belong to the widget **demo panels**, which are a
+different thing from the Sampler and remain in the tree.
+
+<details>
+<summary>Superseded earlier entry, kept for the record</summary>
+
+> **Decision record: the Sampler is product scope** *(2026-07-18, reversed the
+> same day by the entry above)*
+>
+> The 2026-07-17 executive review ordered the Sampler quarantined to its own
+> repository; the follow-up review recorded that order as **reversed**. Making
+> the decision explicit, as that review required:
+>
+> **The Sampler stays in OPEN-AIR as product scope.** `Console → Sampler` and
+> its four widget files (`Sampler`, `SamplerDrumkit`, `SamplerSequencer`,
+> `SamplerSoundBrowse`) are a console feature built on the same widget library,
+> panel schema, and MQTT layer as every other panel — not an unrelated side
+> project. It ships, it is documented here, and it is subject to the same
+> contract validation as the rest of the tree. Superseding the audit's
+> recommendation, on the record, rather than silently.
+
+</details>
 
 ## 2026-07-18 - Documentation: plans become features
 

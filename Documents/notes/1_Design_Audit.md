@@ -1,7 +1,12 @@
 > ## 📌 HISTORICAL SNAPSHOT — 2026-07-17 (v40)
 >
-> Preserved as written. Many findings below are now FIXED — see the resolution table in [0_README.md](0_README.md#resolution-status).
+> Preserved as written. Many findings below are now FIXED — see the resolution table in [0_README.md](../Audits/0_README.md#resolution-status).
 > How the system works **today**: [`README.md`](../../README.md), [`contracts/README.md`](../../contracts/README.md), [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md).
+>
+> **§8 (appended 2026-07-18) records what has since been accomplished and what happens
+> next**, re-verified against the working tree at `964f9d29e`. Sections 1–7 below are the
+> original text and are *not* edited; status markers in §8 supersede them wherever they
+> disagree. The task list lives in [1 Plan of attack.md](../Audits/1%20Plan%20of%20attack.md).
 
 # OPEN-AIR Design Audit — The Good, the Bad, and the Ugly
 
@@ -269,4 +274,144 @@ from README-JSON extraction in `api.rs:194`, not from discovery.
 
 The concrete migration sequence, the YAK 2 definition format, and the WASM
 strategy are in [3_TypeScript_Migration_Plan.md](../Strategies/3_TypeScript_Migration_Plan.md).
-Diagrams for all of the above are in [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md).
+Diagrams for all of the above are in [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md)
+(in `Documents/notes/`, not this folder — see its §7 for the current-state diagram).
+
+---
+
+# 8. Status — what has been accomplished, and next steps
+
+*Appended 2026-07-18. Re-verified against the working tree at `964f9d29e` by direct
+inspection — deliberately not against git history or the changelog's self-description.
+Where this section and §§1–7 disagree, this section is current.*
+
+## 8.1 Updated scorecard
+
+| Pillar | Execution 2026-07-17 | Execution 2026-07-18 | What moved |
+|---|---|---|---|
+| Discovery | ★★☆☆☆ | ★★★★☆ | 17 VISA instruments correctly categorized on real hardware; DNS-SD went from a `2+2` stub to a working mDNS agent finding 42 services. Delivery to the UI works. Held at 4 — still round-trips through the filesystem (§8.4). |
+| YAK middleware | ★★☆☆☆ | ★★☆☆☆ | Unchanged by design — YAK 2 is Phase 3 and explicitly frozen. Bindings are now *linted* (46 `yak-binding-lint` findings), which is measurement, not repair. |
+| Folders-make-tabs | ★★★☆☆ | ★★★★☆ | The browser now fetches the live `GET /api/tree`; the stale snapshot is only a static-host fallback. §4.1's headline instance is closed. |
+| MQTT bus | ★★★☆☆ | ★★★☆☆ | One declared topic grammar now exists and is enforced. **Not raised** because the `/ws` side-bus survives and is worse than described (§8.3). |
+| Supervision / keep-alive | ★☆☆☆☆ | ★★★☆☆ | Real `AgentHeartbeat` + MQTT Last Will on every agent *and* browser session, verified live with SIGKILL. Stubs publish `status = stub` instead of `online`. Restart/supervision still absent. |
+| Logging | ★★☆☆☆ | ★★☆☆☆ | Untouched. Phase 4. |
+| **Contracts** *(new pillar)* | — | ★★★★☆ | The §7.2 recommendation shipped: `contracts/` with zod schemas, a topic grammar, cross-language golden vectors, `zod → JSON Schema → cargo-typify` codegen with a freshness gate, and a CI ratchet. |
+
+## 8.2 Accomplished — findings now closed
+
+**From §4 (The Bad):**
+
+- **§4.1 UI tree** — ✅ Fixed. Live endpoint is authoritative.
+- **§4.1 MQTT topics** — ✅ Fixed. One topic grammar (`contracts/src/topics/`), legacy
+  classifier, and `config.ini` values now linted rather than ignored.
+- **§4.2 Stringly-typed boundaries** — ✅ **Fixed, and this was the audit's central
+  finding.** `contracts/` defines every shape crossing every boundary once in
+  TypeScript and *generates* the Rust the agents compile against. Golden vectors in
+  `contracts/vectors/` are consumed by **both** vitest and `cargo test`, so adding a
+  case on one side fails the other side's CI until implemented. Device-ID derivation
+  (FNV-1a 64) is implemented twice and pinned by vectors, because two agents computing
+  different IDs would silently fork the device registry.
+- **§4.4 Supervision is a facade** — ✅ Mostly fixed. Heartbeats and Last Will are real
+  and live-verified; the broker is the supervisor. Restart remains Phase 4.
+
+**From §5 (The Ugly):**
+
+- **§5.1 Hard-coded absolute paths** — ✅ Fixed in Rust (zero occurrences in any `.rs`
+  file) and in the discovered-GUI builder, which now derives its path from `__file__`.
+  Four remain in Python utilities (§8.3).
+- **§5.4 `retain: true` at 45 Hz** — ✅ Fixed. Control values publish non-retained; one
+  settle-delayed retained publish preserves late-joiner state.
+- **§5.5 Dead things** — 🔄 Partial. `topicUtils.js` deleted; `_Legacy_Commands/`,
+  `*.json.old`, and `temp_norm_*` are now *reported* (41 findings) rather than silently
+  ingested.
+
+**From §6 (the Discovered-tab case study):** ✅ All four documented breaks plus the
+latent fifth are fixed — correct topic (`build_discovered_gui.py:40`), derived path
+(`:28`), actually spawned (`main.rs:381`), current OcaBin schema. The *architectural*
+objection stands (§8.4).
+
+**Beyond the audit** — measurement infrastructure that did not previously exist:
+`openair-validate` names 169 errors and 2,093 deprecations, baselined in
+`validate.baseline.json` so CI fails only on *new* debt; `contracts-ci.yml` replaced
+deploy-only CI with four real jobs.
+
+> **The honest qualifier.** Of the above, the contract layer, the heartbeats, and the
+> tree fix are genuine repairs. The drift baseline is **measurement, not repair** — as
+> of today nothing in it has been paid down. That distinction is preserved deliberately;
+> see §8.5.
+
+## 8.3 Findings that got *worse* or were understated
+
+Three items where re-verification contradicts the optimistic reading:
+
+1. **§5.2 `python3 -c` interpolation is unauthenticated, network-reachable RCE.**
+   `main.rs:552` "escapes" quotes with `payload.replace("'", "\\'")`, which writes a
+   backslash into Python *source*; a payload ending in a trailing backslash consumes the
+   closing quote and breaks out. The payload arrives raw off MQTT (`main.rs:532`), and
+   `broker/mosquitto.conf:20` sets `allow_anonymous true` with no `bind_address` on
+   either listener. **Any host that can reach TCP 1883 gets code execution as the
+   orchestrator user.** This is now the highest-severity item in the repository.
+2. **§4.1 `/ws` side-bus has zero consumers.** Four producers publish `SystemState` to
+   it; grepping the tree for `/ws` yields only the route (`main.rs:420`) and a comment.
+   The browser uses MQTT-over-WebSocket on 9001 instead. MIDI and VISA are dual-homed
+   and survive — **OSC and AES70 discoveries therefore reach nothing at all.** This is a
+   bug, not architectural debt.
+3. **§5.6 folder-prefix collisions are 57, not 2.** Across 44 directories, including the
+   repo root and `5_Protocols/10_Yak` itself. §5.1's path problem also persists in four
+   Python files, all pointing at the *old* repo root — broken, not merely non-portable.
+4. **§4.1's "two sources of truth" is a *three*-way split for the YAK listen topic.**
+   `config.ini` declares `OpenAir/Gui/Protocols/Yak/#`; `config.rs:18` defaults to
+   `OpenAir/System/Protocols/yak/sub`; and `mqtt.rs:46` **hard-codes `"OpenAir/Gui/#"`
+   and subscribes to that**. `config.topic_listen` is parsed into the struct and then
+   referenced zero times. Detail in
+   [yak_protocol_report.md](yak_protocol_report.md#21-the-listen-topic-has-three-competing-values).
+
+Also note **§4.5 (frontend has no floor) is less improved than it appears**: `ui/`
+bundles the whole app only by side-effect-importing 146 untouched `.jsx` files through
+`legacy.ts`. Zero widget or manager modules are converted, 207 of 210 globals are still
+`any`, `ui/` has no tests, and `FrontEnd/index.html` remains the served runtime.
+
+## 8.4 Standing design conclusions, unchanged
+
+The two structural conclusions of this audit are **not** yet delivered and remain the
+target:
+
+- **Discovery is live data and must stop round-tripping through the filesystem.**
+  `build_discovered_gui.py:191` still writes panels to `Gui_Frames/0_discovered/`. The
+  script's own docstring concedes values are "baked as static text at scan time"
+  because the browser only subscribes to `OpenAir/Gui/#`. The §6 target shape — agents
+  publish retained records to `OpenAir/Discovery/<protocol>/<deviceId>`, the Discovered
+  tab is a live widget, "Promote to panel" writes authored frames — stands.
+- **§4.3 YAK has no capability model.** Unchanged and deliberately frozen. The
+  duplicate 34401A (§4.1) proves the cost: `repository.rs` keys on
+  `HashMap<model, …>` while `mqtt.rs:102-104` passes `model: None` on every execute, so
+  the two definitions **silently shadow each other** — last loaded wins. Note the
+  `None` is now *deliberate*, with a source comment explaining that the GUI hierarchy
+  no longer carries the model; it is a reasonable local decision that becomes a
+  correctness bug the moment two models share a command name.
+- **§5.3 YAK is transmit-only** — still true; no module parses replies. But the
+  missing half is now half-built: `nab.rs:25-31` wraps outbound commands in a
+  `correlation_id` envelope, so the receiver has something to match on. See
+  [yak_protocol_report.md](yak_protocol_report.md) §2.3, which also records that
+  `openair-yak` is **no longer a scaffold** — it is a 427-line binary implementing all
+  four verbs, with no `lib.rs` and therefore none of the `2+2` template problem.
+
+## 8.5 Next steps
+
+Full task list with sizes and evidence: **[1 Plan of attack.md](../Audits/1%20Plan%20of%20attack.md)**.
+Summarized against this audit's own sections:
+
+| Horizon | Work | Closes |
+|---|---|---|
+| **Day 14** | Bind + authenticate the broker; delete the subprocess interpolation and pin it with a trailing-backslash vector; fix the 4 broken Python paths; complete `requirements.txt`; attest credential rotation in writing; gate production deploys behind CI; evict the 210 MB `.crawler/` | §5.2, §5.1, §8.3 |
+| **Day 45** | One-command startup (broker + orchestrator + UI); CI green on a clean second machine; run the tests CI currently only `cargo check`s; retire `/ws` and publish OSC/AES70 to MQTT; codemod the two mechanical debt rules; merge the duplicate 34401A; fix root-level prefix collisions | §4.1, §4.6, §5.5, §5.6, §8.3 |
+| **Day 90** | A stranger installs and drives an instrument we do not own, without contacting the author | §7 as a whole |
+| **Frozen** | YAK 2 / class-model split (§4.3), WASM core, native Rust VXI-11, live Discovered widget (§6), unified logging (§4.6), device registry + restart supervision (§4.4) | Phase 3–4 |
+
+**The debt is more tractable than the raw count suggests.** Of 2,262 findings,
+`legacy-widget-type` (856) and `legacy-label-form` (655) are **1,511 — 67% — and both
+are mechanical codemods.** Two afternoons plus review retires two-thirds of the
+baseline. Conversely, 236 findings live under `5_Samples/`, so deleting demo files
+would book a 10.4% "reduction" while repairing nothing; the ratchet must therefore
+report per-rule, exclude `5_Samples/` from reduction targets, and fail when file counts
+drop without a Migration Ledger entry.

@@ -6,7 +6,7 @@
 
 # The TypeScript + WASM Plan (v40 → v41)
 
-*2026-07-17 · Companion to [1_Design_Audit.md](../Audits/1_Design_Audit.md). Ordered so
+*2026-07-17 · Companion to [1_Design_Audit.md](../notes/1_Design_Audit.md). Ordered so
 each phase pays for itself and nothing big-bangs. The prime directive
 throughout: **the migration's product is the contract layer** — TypeScript is
 the vehicle, not the destination.*

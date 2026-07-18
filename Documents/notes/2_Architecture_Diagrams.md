@@ -1,18 +1,36 @@
 > ## 📌 HISTORICAL SNAPSHOT — 2026-07-17 (v40)
 >
-> Preserved as written. The "current state" diagrams describe v40. The contract layer, live tree, and agent liveness shown as *target* now exist — see [0_README.md](0_README.md#resolution-status).
+> Preserved as written. The "current state" diagrams describe v40. The contract layer, live tree, and agent liveness shown as *target* now exist — see [0_README.md](../Audits/0_README.md#resolution-status).
 > How the system works **today**: [`README.md`](../../README.md), [`contracts/README.md`](../../contracts/README.md), [`BackEnd/ComProtocols/README.md`](../../BackEnd/ComProtocols/README.md).
+>
+> ### ⚠️ §1 and §4 are now materially out of date
+>
+> Re-verified 2026-07-18 against `964f9d29e`: the discovery pipeline in **§1 has been
+> repaired** (the builder runs, on the right topic, to the right path) and the browser
+> now fetches the **live** tree. **[§7 — Current state](#7-current-state--2026-07-18)
+> is the accurate picture of today**; §1 is kept only as the "before."
 
 # OPEN-AIR Architecture Diagrams
 
 *2026-07-17 · Companion to [1_Design_Audit.md](1_Design_Audit.md). Diagrams are Mermaid — GitHub, VS Code, and most viewers render them inline.*
 
+> **Location note:** this file, [1_Design_Audit.md](1_Design_Audit.md), and
+> [yak_protocol_report.md](yak_protocol_report.md) live in `Documents/notes/`;
+> the audit index and the plan live in `Documents/Audits/`. Cross-links between
+> the two folders broke twice on 2026-07-18 during reorganisation — they are now
+> checked on every push by `Deployment/check_doc_links.py`.
+
 ---
 
-## 1. Data transfer — as built today (v40)
+## 1. Data transfer — as built at v40 *(superseded — see [§7](#7-current-state--2026-07-18))*
 
 Two buses, three topic namespaces, and a discovery pipeline that dead-ends.
 Dashed red edges are broken or unwired paths.
+
+> **Superseded 2026-07-18.** Four of the breaks drawn below are fixed: `BUILDER` now
+> runs, subscribes to the correct topic, and writes to a derived path, and the browser
+> fetches the live `/api/tree`. The `/ws` edges are still accurate — and worse than
+> drawn (§7).
 
 ```mermaid
 flowchart LR
@@ -200,6 +218,15 @@ flowchart LR
         A7["FrontEnd/api/tree.json — 3.4 MB stale snapshot"]
     end
 
+%% 2026-07-18 corrections to the NOW column:
+%%   A2 is no longer an orphan — spawned by orchestrator/src/main.rs:381
+%%   A4 is 16 crates, not 10; stubs now publish status = stub, not online;
+%%      10 still carry a `cargo new` template lib.rs (5 are pyo3 shims with
+%%      real sibling modules; 5 — mdns/nmos/rest/sap/websocket — are truly empty)
+%%   A5 is 153 script tags / 154 files / 210 window globals (207 still `any`)
+%%   A7 is now only a static-host fallback; the browser fetches the live tree
+%%   NEW: contracts/ exists and is the keystone B1 called for
+
     subgraph NEXT["v41 (one concern per top-level dir)"]
         B1["contracts/ — THE keystone: TS types + JSON Schema + Rust codegen (topics, device records, YAK, layout, heartbeats)"]
         B2["agents/ — Rust workspace: supervisor + protocol agents + registry"]
@@ -295,3 +322,114 @@ Nothing the owner loves is lost: the widgets, ECharts, MQTT, React, the WASM
 panel art, and the whole folders-make-tabs model all carry forward. What is
 dropped is exactly the invisible tax: in-browser compilation, global-variable
 wiring, and the Python subshell inside the Rust hot path.
+
+---
+
+# 7. Current state — 2026-07-18
+
+*Added 2026-07-18, verified against the working tree at `964f9d29e`. This supersedes
+§1 as the picture of what runs today. Green = repaired since v40. Red = live defect.*
+
+```mermaid
+flowchart LR
+    subgraph HW["Lab Hardware — verified live: 17 VISA instruments, 42 mDNS services"]
+        DEVS["Instruments (SCPI / MIDI / mDNS)"]
+        OCADEV["AES70 / OSC devices"]
+    end
+
+    subgraph ORCH["Rust Orchestrator (port 8000)"]
+        VISA["VISA agent"]
+        MIDI["MIDI agent"]
+        DNSSD["DNS-SD agent (real mDNS, was a 2+2 stub)"]
+        AES70["AES70 agent"]
+        OSC["OSC agent"]
+        AXUM["Axum HTTP + /ws broadcast"]
+        PYSH["python3 -c pyvisa subshell — RCE"]
+    end
+
+    YAKAG["openair-yak (binary, 4 verbs, heartbeat+LWT)"]
+    BROKER[("MQTT broker — config in repo, but anonymous on ALL interfaces")]
+    BUILDER["build_discovered_gui.py — now spawned, right topic, right path"]
+    CONTRACTS["contracts/ — zod schemas, topic grammar, golden vectors, Rust codegen"]
+
+    subgraph BROWSER["Browser — still FrontEnd/index.html (in-browser Babel)"]
+        TREE["WindowManager: folders to tabs"]
+        MQTTJS["MqttProvider: ws 9001"]
+        DISCTAB["Discovered tab: sortable tables + RESCAN"]
+    end
+
+    UIPKG["ui/ — typed package, BUILDS the app but is NOT served"]
+
+    DEVS --- VISA
+    DEVS --- MIDI
+    DEVS --- DNSSD
+    OCADEV --- AES70
+    OCADEV --- OSC
+
+    VISA -->|"retained device records"| BROKER
+    MIDI -->|"retained + heartbeat"| BROKER
+    DNSSD -->|"retained + heartbeat"| BROKER
+    AES70 -.->|"only to /ws — NOBODY LISTENS"| AXUM
+    OSC -.->|"only to /ws — NOBODY LISTENS"| AXUM
+    AXUM -.->|"zero subscribers"| VOID(["dev/null"])
+
+    BROKER --> BUILDER
+    BUILDER -->|"writes panel JSON to Gui_Frames/0_discovered"| TREE
+    BROKER <--> MQTTJS
+    BROKER <--> YAKAG
+    BROKER -->|"any host on 1883 can publish"| PYSH
+    VISA --> PYSH
+
+    AXUM -->|"live GET /api/tree"| TREE
+    MQTTJS --> DISCTAB
+    CONTRACTS -.->|"generates + validates"| YAKAG
+    CONTRACTS -.->|"generates + validates"| BROWSER
+    UIPKG -.->|"imports 146 untouched .jsx via legacy.ts"| BROWSER
+
+    style PYSH fill:#7a2b2b,color:#fff
+    style VOID fill:#7a2b2b,color:#fff
+    style BROKER fill:#7a2b2b,color:#fff
+    style CONTRACTS fill:#1f5c2e,color:#fff
+    style DNSSD fill:#1f5c2e,color:#fff
+    style BUILDER fill:#1f5c2e,color:#fff
+    style DISCTAB fill:#1f5c2e,color:#fff
+```
+
+**What the diagram says that the v40 one did not:**
+
+1. **`contracts/` exists and is load-bearing.** The keystone drawn as `B1` in §4's
+   target column is real: it generates the Rust the agents compile against and is
+   enforced in CI. This was the audit's central recommendation.
+2. **The discovery pipeline is repaired but the wrong shape.** `BUILDER` now runs
+   correctly — and still routes live data through a filesystem-generation step. The
+   §2 target (Discovered tab as a live widget on `OpenAir/Discovery/#`) is unbuilt.
+3. **`/ws` is a bus with zero subscribers.** Only two references exist in the whole
+   tree: the route at `orchestrator/src/main.rs:420` and a comment in
+   `contracts/src/topics/legacy.ts:21`. MIDI and VISA are dual-homed to MQTT and
+   survive; **AES70 and OSC are not, so their discoveries reach nothing at all.**
+   §1 drew this as "two buses" — it is really one bus and one drain.
+4. **The Python subshell is now the top security defect, not just a tax.** The quote
+   escaping at `main.rs:552` is bypassable by a trailing backslash, the payload comes
+   raw off MQTT, and `broker/mosquitto.conf:20` sets `allow_anonymous true` with no
+   `bind_address` → unauthenticated RCE from any host that can reach port 1883.
+5. **`ui/` is drawn as a dotted feeder, not a replacement.** It bundles the whole app
+   only by side-effect-importing 146 untouched `.jsx` files through `legacy.ts`. Zero
+   modules are actually converted, and `FrontEnd/index.html` is still what is served.
+
+## 7b. Distance from here to the §2 target
+
+| Target element (§2) | Status |
+|---|---|
+| One topic grammar | ✅ Exists and is enforced |
+| Agent heartbeats on the bus | ✅ Real, with MQTT Last Will, live-verified |
+| Managed broker config in repo | 🔄 Config is in repo — but anonymous and unbound |
+| Native VISA, no python subshell | ❌ Phase 4; the *injection* is fixed at Day 14 |
+| Discovery as live retained records | ❌ Still filesystem-generated |
+| Device Registry + TTL | ❌ Unbuilt |
+| Restart with backoff | ❌ Unbuilt — liveness is *detected*, not *acted on* |
+| Typed browser (Vite) | 🔄 Builds, not served, 0 modules converted |
+| Live tree pushed on change | 🔄 Live fetch works; fs-watch push unbuilt |
+| One bus only | ❌ `/ws` survives |
+
+The honest summary: **the specification layer arrived; the runtime topology has not
+moved much.** §2 remains the target, unchanged.

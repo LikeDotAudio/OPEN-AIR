@@ -7,7 +7,7 @@
 # Structural Guidelines for `contracts/` — the Phase 1 Keystone
 
 *2026-07-17 · Companion to [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md)
-(Phase 1) and [1_Design_Audit.md](../Audits/1_Design_Audit.md) (§4.2, §7.2). Based on a
+(Phase 1) and [1_Design_Audit.md](../notes/1_Design_Audit.md) (§4.2, §7.2). Based on a
 full code-level inventory of every cross-boundary shape in v40: all MQTT topic
 strings in Rust/Python/JS, every device-record and heartbeat payload, the
 de-facto layout JSON schema across 478 `Gui_Frames` files, and all 192 files of

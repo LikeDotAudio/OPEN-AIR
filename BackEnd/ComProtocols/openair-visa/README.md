@@ -25,7 +25,7 @@ Because this is a Rust extension for Python, it uses `maturin` as its build syst
 To compile and install it globally into your active Python environment:
 
 ```bash
-cd /home/anthony/Documents/OPEN-AIR/BackEnd/ComProtocols/openair-visa
+cd BackEnd/ComProtocols/openair-visa   # from the repo root
 maturin develop
 ```
 

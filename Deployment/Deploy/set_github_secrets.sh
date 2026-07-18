@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-# Push FTP/MQTT credentials from FrontEnd/.env into a GitHub Environment as
-# secrets, so the deploy workflows can log in to FTPS.
+# Push FTP/MQTT credentials from the repo-root .env into a GitHub Environment
+# as secrets, so the deploy workflows can log in to FTPS.
+#
+# The file is <repo-root>/.env (see ENV_FILE below) — NOT FrontEnd/.env, which
+# this comment used to name. That path no longer exists and must not be
+# re-created: it was the location an executive review flagged as holding a
+# plaintext production credential. `.env` is gitignored; keep it that way, and
+# keep it out of any deploy upload (both workflows exclude **/.env).
 #
 # Prereqs:  gh CLI installed + authenticated  (gh auth login)
 # Usage:    ./set_github_secrets.sh production      # or: sandbox

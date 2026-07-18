@@ -101,7 +101,7 @@ So: **OPEN-AIR goes on Life Support.** Not funded, not killed. One engineer, 90 
 1. **Day 14 — Tell the truth and lock the doors.** Every dead link in `README.md` fixed or deleted; a `requirements.txt`/install path that works; the FTP credential rotated out of `FrontEnd/.env` and off every disk; every hardcoded `/home/anthony/` path removed from Rust source; the sampler code moved to its own repository. If we can't make the front door honest in two weeks, nothing behind it matters.
 2. **Day 45 — Second-machine proof.** `git clone` → one command → running system on a clean Linux box that none of us has touched before, with CI that builds the Rust workspace and runs a real test suite (the CSV-import tests plus new coverage on the VISA→YAK→MQTT path; the `2+2==4` stub is deleted or replaced). The demo is the loop: discover a real instrument, render its panel from JSON, fire a command from the phone, see it on the wire.
 3. **Day 90 — One stranger, one instrument, one vendor we don't own.** A person outside this room installs OPEN-AIR unassisted from the public repo and controls a second-vendor instrument through YAK, documented in a written case study committed to `Documents/Audits/`. That's the first evidence in ten years of anyone else running this software — and it's the only market signal I'll accept.
-
+Executive_Review_Business_ValueExecutive_Review_Business_Value
 Miss any one of the three and we archive the repo next to `.crawler/`, where this project already keeps its previous life. Hit all three, and we're not ten years behind anymore — we're ninety days in. Dismissed.
 
 ---

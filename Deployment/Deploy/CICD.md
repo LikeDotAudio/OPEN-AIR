@@ -55,8 +55,15 @@ Set these under **Settings → Environments → `sandbox`** and **`production`**
 | `MQTT_PASS`   | no       |                                         |
 | `MQTT_TOPIC`  | no       | default `OpenAir/Deploy/stamp`          |
 
-Nothing is committed — the local gitignored `FrontEnd/.env` is only for
-running the script by hand.
+**GitHub Environments are the store of record for every secret.** Nothing is
+committed, and the repository holds no credential of its own. The optional local
+gitignored **repo-root `.env`** exists only to seed those secrets when running
+this script by hand.
+
+> This section used to name `FrontEnd/.env`. That path no longer exists and must
+> not be re-created — it is where an executive review found a plaintext
+> production credential. Both deploy workflows exclude `**/.env` and `**/.env.*`
+> from upload; keep it that way.
 
 ## deploy.py env-var switches
 

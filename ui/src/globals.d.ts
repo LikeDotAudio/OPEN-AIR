@@ -2,7 +2,7 @@
 // The window.* inventory of the unconverted FrontEnd tree: the implicit
 // module system, typed. `any // from <file>` entries are the debt; replace
 // them with real types as files convert (hand-typed lines survive regen).
-// METRIC: 210 globals, 207 still `any`.
+// METRIC: 178 globals, 175 still `any`.
 
 export {}
 
@@ -39,7 +39,6 @@ declare global {
     AnimationDisplay: any // from libControl/images/AnimationDisplay/AnimationDisplay.jsx
     AudioAnalyzerDemo: any // from libControl/metering/AudioAnalyzerDemo/AudioAnalyzerDemo.jsx
     AudioDynamics: any // from libControl/graphing/AudioDynamics/AudioDynamics.jsx
-    AudioEditor: any // from libControl/special/AudioEditor/AudioEditor.jsx
     BreakLine: any // from libControl/BreakLine/BreakLine.jsx
     ButtonToggle: any // from libControl/buttons/ButtonToggle/ButtonToggle.jsx
     ButtonToggler: any // from libControl/buttons/ButtonToggler/ButtonToggler.jsx
@@ -86,25 +85,13 @@ declare global {
     MqttProvider: import('react').ComponentType<{ brokerUrl: string; username: string; password: string; children?: import('react').ReactNode }>
     MqttSettingsModal: any // from comMQTT/MqttSettings.jsx
     NeedleMeter: any // from libControl/metering/NeedleMeter/NeedleMeter.jsx
-    OA_AUDIO_CTX: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OA_COMPONENTS: any // from libControl/special/Aes70/Aes70.jsx (+25 more)
-    OA_DRUM_KIT: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    OA_DRUM_LOOPS: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js (+1 more)
-    OA_DRUM_SAMPLES: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    OA_DRUM_VOICES: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    OA_MIDI_BASE: any // from libControl/special/Sampler/Sampler.jsx
-    OA_MIDI_CAPTURED: any // from libControl/special/PadBrowse/PadBrowse.jsx
     OA_MQTT_DEBUG: any // from comMQTT/MqttProvider.jsx
     OA_MQTT_FILTER: any // from comMQTT/MqttProvider.jsx
     OA_MQTT_LAST: any // from comMQTT/MqttProvider.jsx
     OA_PANEL_DEFAULT_CONFIG: any // from libControl/Panels/panel_wasm_loader.js
-    OA_PITCH_BEND: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OA_SESSION_FULL_ID: any // from comMQTT/MqttProvider.jsx
-    OA_SOUND_DIR: any // from libControl/special/PadBrowse/PadBrowse.jsx (+2 more)
-    OA_TONE_CACHE: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaAudioCtx: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     oaCssLen: any // from frameLayout/oaCssLen.js
-    oaDecodeAudio: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OaDesigner_FaderDial: any // from libControl/faders/FaderDial/Designer.jsx
     OaDesigner_NeedleMeter: any // from libControl/metering/NeedleMeter/Designer.jsx
     OaDesignerRegistry: any // from editorWYSIWYG/Interface/PropertyEditor/artistic_designer.jsx (+2 more)
@@ -145,11 +132,7 @@ declare global {
     OaEdToolbar: any // from editorWYSIWYG/Interface/Window/editor_toolbar.jsx
     OaEdTransparencyControls: any // from editorWYSIWYG/Interface/PropertyEditor/artistic_designer.jsx
     OaEdTree: any // from editorWYSIWYG/Interface/Tabs/TreeRefactor/Entry.jsx
-    oaEncodeWav: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaEnsureRootPermission: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     oaGetMqttConfig: (() => { brokerUrl: string; username: string; password: string }) | undefined
-    oaIdbGet: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaIdbSet: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OaJfir: any // from libControl/graphing/_dsp/jfir.js
     oaLabelStyle: any // from frameLayout/oaCssLen.js
     oaLabelText: any // from frameLayout/oaCssLen.js
@@ -158,19 +141,8 @@ declare global {
     OAPanels: any // from libControl/Panels/panel_wasm_loader.js
     oaPickLabel: any // from frameLayout/oaCssLen.js
     oaPickLabelStyle: any // from frameLayout/oaCssLen.js
-    oaPlayDrumSample: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaPlayDrumVoice: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaPrecachePad: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaPrecacheTones: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaResolveFile: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaRestoreKit: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaSetDrumSample: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaSetPitchBend: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OaTopicMaker: any // from comMQTT/topicMaker.jsx
     OaTransparency: any // from frameLayout/transparency.js
-    oaTriggerDrum: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaTriggerTone: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
-    oaUpdateDrumSample: any // from libControl/special/SamplerDrumkit/SamplerDrumkit.js
     OcaArray: any // from frameLayout/OcaArray.jsx
     OcaBin: any // from frameLayout/OcaBin.jsx
     OcaBlock: any // from frameLayout/OcaBlock.jsx
@@ -190,18 +162,14 @@ declare global {
     OcaTrapezoidButton: any // from libControl/buttons/TrapezoidButton/TrapezoidButton.jsx
     OcaWebLink: any // from libControl/text/OcaWebLink/OcaWebLink.jsx
     OcaWinkButton: any // from libControl/buttons/WinkButton/WinkButton.jsx
-    PadBrowse: any // from libControl/special/PadBrowse/PadBrowse.jsx
     Panel: any // from libControl/Panels/Panel/Panel.jsx
     polarToCartesian: any // from libControl/Knobs/Knob/Knob.jsx
     ProtocolConfigDisplay: any // from libControl/special/ProtocolConfigDisplay/ProtocolConfigDisplay.jsx
     Radar: any // from libControl/graphing/Radar/Radar.jsx
     Reverb: any // from libControl/graphing/Reverb/Reverb.jsx
-    Sampler: any // from libControl/special/Sampler/Sampler.jsx
     Screw: any // from libControl/Panels/Screw/Screw.jsx
     SelectorSwitch: any // from libControl/Knobs/SelectorSwitch/SelectorSwitch.jsx
-    Sequencer: any // from libControl/special/SamplerSequencer/SamplerSequencer.jsx
     shadeHex: any // from libControl/Knobs/Knob/Knob.jsx
-    SoundBrowse: any // from libControl/special/SamplerSoundBrowse/SamplerSoundBrowse.jsx
     SplitLayout: any // from frameLayout/SplitLayout.jsx
     StatusLight: any // from libControl/special/StatusLight/StatusLight.jsx
     TabLayout: any // from frameLayout/TabLayout.jsx

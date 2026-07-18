@@ -7,6 +7,17 @@ on:
   pull_request:
 
 jobs:
+  # Documentation links. Milestone 1 claimed "all internal links programmatically
+  # verified to resolve"; that check ran once, by hand, and five links were dead
+  # within a day (a file in Documents/notes/ linked as if it were in
+  # Documents/Audits/, plus three broken by a folder move). Asserted once is not
+  # verified — so it runs on every push. No toolchain, ~1 second.
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 Deployment/check_doc_links.py
+
   node:
     runs-on: ubuntu-latest
     steps:

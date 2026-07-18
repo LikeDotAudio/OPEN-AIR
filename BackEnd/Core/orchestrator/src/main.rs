@@ -277,42 +277,14 @@ async fn main() {
         for dev in devices {
             println!("   📡 [VISA AGENT] Probing resource: {}", dev);
             
-            let script = format!(r#"
-import pyvisa
-import json
-import sys
-
-try:
-    rm = pyvisa.ResourceManager('@py')
-except:
-    try:
-        rm = pyvisa.ResourceManager()
-    except Exception as e:
-        print(json.dumps({{"error": str(e)}}))
-        sys.exit(1)
-
-try:
-    inst = rm.open_resource('{}', open_timeout=1500)
-    inst.timeout = 1500
-    inst.read_termination = '\n'
-    inst.write_termination = '\n'
-    idn = inst.query('*IDN?')
-    inst.close()
-
-    parts = [p.strip() for p in idn.split(',')]
-    print(json.dumps({{
-        "manufacturer": parts[0] if len(parts) > 0 else 'Unknown',
-        "model": parts[1] if len(parts) > 1 else 'Unknown',
-        "serial": parts[2] if len(parts) > 2 else '',
-        "firmware": parts[3] if len(parts) > 3 else '',
-        "raw_idn": idn.strip()
-    }}))
-except Exception as e:
-    print(json.dumps({{"error": str(e)}}))
-"#, dev);
-
             let mut info = serde_json::json!({ "resource": dev, "status": "found" });
-            if let Ok(output) = tokio::process::Command::new("python3").arg("-c").arg(script).output().await {
+            if let Ok(output) = tokio::process::Command::new("python3")
+                .arg("-c")
+                .arg(VISA_PROBE_SCRIPT)
+                .arg(&dev)
+                .output()
+                .await
+            {
                 let out_str = String::from_utf8_lossy(&output.stdout);
                 if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(&out_str) {
                     if parsed.get("error").is_none() {
@@ -508,6 +480,82 @@ async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
 }
 
 
+/// Executes one SCPI write or query against one instrument.
+///
+/// Takes `sys.argv[1]` = VISA resource, `sys.argv[2]` = SCPI command. Nothing is
+/// interpolated into this source — it is a constant, so no caller-supplied value
+/// can alter the program. Invoked as `python3 -c SCRIPT <resource> <command>`,
+/// which yields `sys.argv == ['-c', resource, command]`.
+///
+/// Phase 4 replaces this with native Rust VXI-11; until then argv is what keeps
+/// the subshell safe.
+const VISA_WRITE_SCRIPT: &str = r#"
+import pyvisa
+import sys
+
+resource = sys.argv[1]
+command = sys.argv[2]
+
+try:
+    rm = pyvisa.ResourceManager('@py')
+except Exception:
+    rm = pyvisa.ResourceManager()
+try:
+    inst = rm.open_resource(resource, open_timeout=2000)
+    inst.timeout = 2000
+    inst.read_termination = '\n'
+    inst.write_termination = '\n'
+    if '?' in command:
+        print(inst.query(command).strip())
+    else:
+        inst.write(command)
+    inst.close()
+except Exception as e:
+    print("ERROR:", str(e))
+"#;
+
+/// Probes one VISA resource for its `*IDN?` identity and prints a JSON record.
+///
+/// Takes `sys.argv[1]` = VISA resource. Same argv discipline as
+/// [`VISA_WRITE_SCRIPT`]: the resource string comes from the local enumerator
+/// rather than the network, but it is passed as data regardless — a resource
+/// name is not a place to rely on the trustworthiness of its source.
+const VISA_PROBE_SCRIPT: &str = r#"
+import pyvisa
+import json
+import sys
+
+resource = sys.argv[1]
+
+try:
+    rm = pyvisa.ResourceManager('@py')
+except:
+    try:
+        rm = pyvisa.ResourceManager()
+    except Exception as e:
+        print(json.dumps({"error": str(e)}))
+        sys.exit(1)
+
+try:
+    inst = rm.open_resource(resource, open_timeout=1500)
+    inst.timeout = 1500
+    inst.read_termination = '\n'
+    inst.write_termination = '\n'
+    idn = inst.query('*IDN?')
+    inst.close()
+
+    parts = [p.strip() for p in idn.split(',')]
+    print(json.dumps({
+        "manufacturer": parts[0] if len(parts) > 0 else 'Unknown',
+        "model": parts[1] if len(parts) > 1 else 'Unknown',
+        "serial": parts[2] if len(parts) > 2 else '',
+        "firmware": parts[3] if len(parts) > 3 else '',
+        "raw_idn": idn.strip()
+    }))
+except Exception as e:
+    print(json.dumps({"error": str(e)}))
+"#;
+
 /// VISA Write daemon + rescan listener. Owns its own MQTT connection on a
 /// dedicated OS thread (rumqttc sync iter blocks). `topic_to_resource` is
 /// shared with the scan loop, which swaps in a fresh mapping per scan;
@@ -549,29 +597,22 @@ fn spawn_visa_write_daemon(
                     if let Some(resource_name) = resource {
                         println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
 
-                        let safe_payload = payload.replace("'", "\\'");
-                        let script = format!(r#"
-import pyvisa
-import sys
-try:
-    rm = pyvisa.ResourceManager('@py')
-except:
-    rm = pyvisa.ResourceManager()
-try:
-    inst = rm.open_resource('{}', open_timeout=2000)
-    inst.timeout = 2000
-    inst.read_termination = '\n'
-    inst.write_termination = '\n'
-    if '?' in '{}':
-        print(inst.query('{}').strip())
-    else:
-        inst.write('{}')
-    inst.close()
-except Exception as e:
-    print("ERROR:", str(e))
-"#, resource_name, safe_payload, safe_payload, safe_payload);
-
-                        if let Ok(output) = std::process::Command::new("python3").arg("-c").arg(&script).output() {
+                        // SECURITY: the resource and the SCPI command are passed as
+                        // argv, never interpolated into the script body. The previous
+                        // version built the source with `payload.replace("'", "\\'")`,
+                        // which is not an escape — it writes a backslash into Python
+                        // source, so a payload ending in a backslash consumed the
+                        // closing quote and broke out into executable code. The
+                        // payload arrives raw off MQTT, so that was remote code
+                        // execution. As argv, a payload containing quotes,
+                        // backslashes, or newlines is inert data to the interpreter.
+                        if let Ok(output) = std::process::Command::new("python3")
+                            .arg("-c")
+                            .arg(VISA_WRITE_SCRIPT)
+                            .arg(&resource_name)
+                            .arg(&payload)
+                            .output()
+                        {
                             let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
                             if payload.contains('?') {
                                 println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);

@@ -27,7 +27,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Gate. Until this existed, contracts-ci.yml ran independently and could not
+  # block a release — a push that broke the contracts still published to the
+  # production host. This does NOT change which branches deploy (every branch
+  # still publishes, deliberately); it changes whether a broken one may.
+  verify:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck contracts
+        run: pnpm --filter @openair/contracts typecheck
+
+      - name: Test contracts
+        run: pnpm --filter @openair/contracts test
+
+      # The drift ratchet: fails on NEW debt, not on the baselined backlog.
+      - name: Validate (ratchet)
+        run: pnpm validate -- --report summary
+
   deploy:
+    needs: verify
+    # `verify` is skipped on pull_request (nothing uploads there), and a skipped
+    # dependency would otherwise skip this job too — taking the PR validation
+    # step with it. Proceed when verify passed OR was skipped; never when it failed.
+    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: production         # pulls production-scoped secrets
     steps:
@@ -56,7 +92,8 @@ jobs:
           # Wipe + re-upload when the sync state has drifted (manual runs).
           dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
           # Never publish secrets or local junk. The action's defaults do NOT
-          # exclude .env — and FrontEnd/.env holds FTP credentials locally.
+          # exclude .env — and the repo-root .env holds FTP credentials locally
+          # (not FrontEnd/.env, which no longer exists and must stay gone).
           exclude: |
             **/.git*
             **/.git*/**

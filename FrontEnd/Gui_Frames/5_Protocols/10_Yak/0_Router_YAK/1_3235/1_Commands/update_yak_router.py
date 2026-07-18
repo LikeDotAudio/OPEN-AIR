@@ -1,6 +1,9 @@
 import json
+from pathlib import Path
 
-path = "/home/anthony/Documents/OPEN-AIR/FrontEnd/Gui_Frames/5_Protocols/10_Yak/0_Router_YAK/1_3235/1_Commands/yak_router.json"
+# The target sits next to this script; derive it rather than hard-coding an
+# absolute path (which pointed at a repo location that no longer exists).
+path = Path(__file__).resolve().parent / "yak_router.json"
 with open(path, 'r') as f:
     data = json.load(f)
 

@@ -1,7 +1,8 @@
 # editorWYSIWYG — HTML5 WYSIWYG GUI editor
 
 An in-browser editor for the OPEN-AIR `Gui_Frames` JSON definitions, modelled on
-the Tkinter editor in [`oaGuiEditorWYSIWYG`](../../oaGuiEditorWYSIWYG). It runs
+the Tkinter editor `oaGuiEditorWYSIWYG` from the previous generation (no longer
+in this repository; an archived copy lives in `.crawler/`). It runs
 inside the web frontend (`frontEnd/`) and reuses the live runtime renderer
 (`LoaderOrchestrator` + `WidgetFactory`) as its WYSIWYG preview.
 

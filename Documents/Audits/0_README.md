@@ -20,10 +20,11 @@ ugly — measured against the project's actual goal.
 
 | File | What it covers |
 |---|---|
-| [1_Design_Audit.md](1_Design_Audit.md) | The extracted mission statement, the scorecard, and the good/bad/ugly analysis of every subsystem — including the Discovered-tab case study |
-| [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md) | Diagrams: data transfer (current vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map |
-| [../2026-07-17_Executive_Review_Business_Value.md](../2026-07-17_Executive_Review_Business_Value.md) | Executive committee business-value review — the audit that put the project on "Life Support" with three milestones |
-| [../2026-07-18_Executive_Review_Business_Value.md](../2026-07-18_Executive_Review_Business_Value.md) | **Follow-up review** — what the first day of Life Support delivered, milestone-by-milestone verification, and the revised verdict |
+| [1_Design_Audit.md](../notes/1_Design_Audit.md) | The extracted mission statement, the scorecard, and the good/bad/ugly analysis of every subsystem — including the Discovered-tab case study. **§8 (2026-07-18) records what has since been accomplished, what got worse, and the next steps** |
+| [1 Plan of attack.md](1%20Plan%20of%20attack.md) | **The response to the 2026-07-18 executive review** — every charge answered with evidence, four stale charges corrected, three escalations (incl. an unauthenticated RCE), and the Day-14 / Day-45 / Day-90 task list |
+| [2_Architecture_Diagrams.md](../notes/2_Architecture_Diagrams.md) | Diagrams: data transfer (v40 vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map — plus **§7, the current-state diagram (2026-07-18)**. *Lives in `Documents/notes/`; this link was dead until 2026-07-18* |
+| [../2026-07-17_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-17_Executive_Review_Business_Value.md) | Executive committee business-value review — the audit that put the project on "Life Support" with three milestones |
+| [../2026-07-18AM_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-18AM_Executive_Review_Business_Value.md) | **Follow-up review** — what the first day of Life Support delivered, milestone-by-milestone verification, and the revised verdict |
 | [../Strategies/](../Strategies/) | The plans that came out of this audit — historical; see their README for what shipped |
 
 ## Resolution status
@@ -35,7 +36,7 @@ ugly — measured against the project's actual goal.
 | §4.1 Two sources of truth — UI tree (stale `tree.json` snapshot) | ✅ **Fixed** | Browser fetches live `GET /api/tree`; snapshot is only the static-host fallback |
 | §4.1 — MQTT topics (three namespaces, config.ini vs hardcoded) | ✅ **Fixed** | One declared topic tree + legacy classifier — `contracts/README.md`; config.ini values now linted |
 | §4.1 — duplicate 34401A definitions | ⚠️ **Detected, not repaired** | `openair-validate` reports it as an error; baselined |
-| §4.1 — `/ws` side-bus alongside MQTT | ⏳ Open | Phase 4 (retire the side-bus) |
+| §4.1 — `/ws` side-bus alongside MQTT | ⚠️ **Open — worse than reported** | Re-verified 2026-07-18: the side-bus has **zero consumers** (only the route at `main.rs:420` and a comment in `topics/legacy.ts:21`). MIDI/VISA are dual-homed and survive; **OSC and AES70 discoveries reach nothing at all.** Reclassified from cleanup to bug — Day 45 |
 | §4.2 Stringly-typed boundaries with no contracts | ✅ **Fixed** | The whole point of `contracts/` — topics, device records, heartbeats, layout, YAK wire message |
 | §4.3 YAK has no capability model | ⏳ Open | Phase 3 (class/model split, WASM core) |
 | §4.4 Supervision is a facade — no heartbeats, stubs claim `online` | ✅ **Mostly fixed** | Real `AgentHeartbeat` + MQTT Last Will on every agent and browser session; stubs publish `status = stub` — `BackEnd/ComProtocols/README.md`. Restart/supervision remains Phase 4 |
@@ -47,7 +48,7 @@ ugly — measured against the project's actual goal.
 | Finding | Status | Notes |
 |---|---|---|
 | 1. Hard-coded absolute paths (YAK repo, discovered-GUI builder) | ✅ **Fixed** | Both derive their paths at runtime; the same class of bug was later found and fixed in the VISA knowledge-base loader |
-| 2. VISA agent shells out to `python3 -c` | ⏳ Open | Phase 4 (native Rust VXI-11) |
+| 2. VISA agent shells out to `python3 -c` | ✅ **Injection fixed 2026-07-18** | The quote "escaping" at `orchestrator/src/main.rs` was bypassable by a trailing backslash, and the payload arrived raw off an anonymous, all-interfaces broker → unauthenticated RCE. Now `VISA_WRITE_SCRIPT`/`VISA_PROBE_SCRIPT` are constants taking **argv**, and the broker binds loopback. The *subshell* (fork-per-command) remains — Phase 4 native VXI-11 |
 | 3. YAK is transmit-only (replies go nowhere) | ⏳ Open | Phase 3 (reply parsers; NAB requires one by contract) |
 | 4. `retain: true` on every publish at 45 Hz | ✅ **Fixed** | Control values publish non-retained; one settle-delayed retained publish preserves late-joiner state |
 | 5. Dead things that still bite | 🔄 Partial | `topicUtils.js` deleted; `_Legacy_Commands/`, `*.json.old`, `temp_norm_*` now *reported* by validate |

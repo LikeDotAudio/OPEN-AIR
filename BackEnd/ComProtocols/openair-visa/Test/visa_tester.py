@@ -15,7 +15,12 @@
 """
 import pathlib, sys
 import os
-sys.path.insert(0, "/home/anthony/Documents/OPEN-AIR/Validations/Protocols")
+
+# Locate the shared protocol-test helpers relative to this file rather than an
+# absolute path. This file is BackEnd/ComProtocols/openair-visa/Test/, so the
+# repo root is four parents up; the helpers moved to TESTS/Protocols/.
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(_REPO_ROOT / "TESTS" / "Protocols"))
 import argparse
 from _proto_util import config  # noqa: E402
 import pyvisa  # noqa: E402

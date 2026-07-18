@@ -33,9 +33,9 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     'OcaNotebook': window.TabLayout,
     'OcaSplit': window.SplitLayout,
     'OcaTable': window.OcaTable,
-    'Sampler': window.Sampler,
-    'AudioEditor': window.AudioEditor,
-    'Sequencer': window.Sequencer,
+    // 'Sampler' / 'AudioEditor' / 'Sequencer' removed 2026-07-18 with the
+    // Sampler feature (see CHANGELOG). Panels using these types now fall
+    // through to the dashed unknown-widget box, which validate reports.
   };
 
   const ComponentToRender = COMPONENT_REGISTRY[node.type];

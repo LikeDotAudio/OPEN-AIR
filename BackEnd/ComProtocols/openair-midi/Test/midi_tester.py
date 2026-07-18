@@ -18,7 +18,11 @@ import os
 import time
 import argparse
 
-sys.path.insert(0, "/home/anthony/Documents/OPEN-AIR/BackEnd")
+# Locate BackEnd/ (which holds the Core package with the compiled oaRustCore)
+# relative to this file rather than an absolute path. This file is
+# BackEnd/ComProtocols/openair-midi/Test/, so BackEnd/ is three parents up.
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parents[3]))
 try:
     from Core import oaRustCore
     # Or specifically

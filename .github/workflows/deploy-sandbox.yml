@@ -20,7 +20,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Same gate as production: contracts must typecheck, test, and clear the
+  # drift ratchet before anything reaches the sandbox host.
+  verify:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck contracts
+        run: pnpm --filter @openair/contracts typecheck
+
+      - name: Test contracts
+        run: pnpm --filter @openair/contracts test
+
+      - name: Validate (ratchet)
+        run: pnpm validate -- --report summary
+
   deploy:
+    needs: verify
+    # See deploy-production.yml: skipped-dependency handling for the PR path.
+    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: sandbox            # pulls sandbox-scoped secrets
     steps:
@@ -47,8 +78,9 @@ jobs:
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}
           local-dir: ./FrontEnd/
           dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
-          # Never publish secrets or local junk — the action's defaults do
-          # NOT exclude .env, and FrontEnd/.env holds FTP credentials locally.
+          # Never publish secrets or local junk — the action's defaults do NOT
+          # exclude .env, and the repo-root .env holds FTP credentials locally
+          # (not FrontEnd/.env, which no longer exists and must stay gone).
           exclude: |
             **/.git*
             **/.git*/**

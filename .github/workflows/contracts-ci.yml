@@ -1,6 +1,5 @@
-# Phase 1 step 1 — the repo's first non-deploy CI (Documents/Audits/Phase 1.md §6).
+# The repo's first non-deploy CI (Documents/Strategies/Phase 1.md §6).
 # Grows with the rollout:
-#   step 2: vector suites (vitest + cargo test -p openair-contracts)
 #   step 5: openair-validate in ratchet mode + migration-ledger check
 #   step 6: cargo build in BOTH BackEnd workspaces (proves the path-dep wiring)
 name: contracts-ci
@@ -21,5 +20,12 @@ jobs:
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @openair/contracts typecheck
-      - run: pnpm --filter @openair/contracts test
-      - run: pnpm gen:check # freshness gate — echo-only until schemas land (step 2)
+      - run: pnpm --filter @openair/contracts test # includes the golden-vector suite
+      - run: pnpm gen:check # freshness gate — echo-only until payload schemas land (step 3)
+
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # rustup reads rust-toolchain.toml automatically
+      - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest

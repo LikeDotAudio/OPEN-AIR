@@ -18,6 +18,14 @@
 - **Phase 1 step 1 deployed**: pnpm workspace root, Node/Rust toolchain pins,
   `@openair/contracts` package skeleton, and `contracts-ci.yml` — the repo's
   first non-deploy CI.
+- **Phase 1 step 2 deployed — the topic grammar**: `Topics` build/parse in
+  TypeScript (`contracts/src/topics/`) and Rust (`contracts/rust/`), one
+  declared topic-family table with retain classes, the full v40 legacy
+  namespace map (`isLegacy` + alias table), and `topicMaker.jsx`'s panel-path
+  semantics canonized as `Topics.gui.fromPanelPath`. Both implementations are
+  pinned by one golden-vector file (`contracts/vectors/topics.json`) run by
+  vitest AND cargo — 64 TS + 5 Rust suite assertions green. `topicUtils.js`
+  (the older, disagreeing topic utility, zero callers) deleted.
 
 ## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
 

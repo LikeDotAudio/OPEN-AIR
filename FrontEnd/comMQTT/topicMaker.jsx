@@ -10,6 +10,12 @@
 
 // frontEnd/comMQTT/topicMaker.jsx
 //
+// CANONICAL TWIN: contracts/src/topics/gui-path.ts. These semantics are the
+// contracts topic grammar's `Topics.gui.fromPanelPath()`; both copies are
+// pinned by contracts/vectors/topics.json (guiFromPanelPath cases). Change
+// behavior THERE first — this file is the runtime copy only until Phase 2
+// converts it to an import from @openair/contracts.
+//
 // Builds a HIERARCHICAL MQTT topic prefix from a Gui_Frames file path so the
 // broker tree mirrors the on-disk folder hierarchy instead of a flat,
 // underscore-joined leaf name:

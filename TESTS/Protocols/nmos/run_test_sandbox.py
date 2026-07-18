@@ -143,55 +143,157 @@ def generate_html(script_dir):
         </div>
     </div>
 
-    <div class="grid">
+    <h2 style="color: #ffffff; align-self: flex-start; max-width: 1100px; width: 100%; margin-top: 20px;">Registry Endpoints (IS-04)</h2>
+    <div class="grid" style="margin-bottom: 40px;">
         <a href="http://localhost:3210/x-nmos/registration/v1.3" class="card" target="_blank">
-            <h2>Registration API (IS-04)</h2>
-            <p>Handles the discovery and registration of Nodes and their resources. Devices dynamically find this via <code>_nmos-registration._tcp</code> mDNS.</p>
+            <h2>Registration API</h2>
+            <p>Handles the discovery and registration of Nodes and their resources. Devices POST their capabilities here.</p>
             <div class="url">http://localhost:3210/x-nmos/registration/v1.3</div>
             <span class="tag">Port 3210</span>
         </a>
         
         <a href="http://localhost:3211/x-nmos/query/v1.3" class="card" target="_blank">
-            <h2>Query API (IS-04)</h2>
+            <h2>Query API</h2>
             <p>Allows controllers to browse the registry. Clients can fetch the registry tree, or subscribe to WebSockets for real-time delta updates.</p>
             <div class="url">http://localhost:3211/x-nmos/query/v1.3</div>
             <span class="tag">Port 3211</span>
         </a>
+    </div>
 
-        <a href="http://localhost:3212/x-nmos/node/v1.3" class="card" target="_blank">
+    <h2 style="color: #ffffff; align-self: flex-start; max-width: 1100px; width: 100%;">Mock Device Endpoints</h2>
+    <div class="grid">
+        <a href="http://localhost:3300/x-nmos/node/v1.3" class="card" target="_blank">
             <h2>Node API (IS-04)</h2>
             <p>Hosted on the nodes themselves to expose their underlying capabilities and topology. Used for peer-to-peer exploration.</p>
-            <div class="url">http://localhost:3212/x-nmos/node/v1.3</div>
-            <span class="tag">Port 3212</span>
+            <div class="url">http://localhost:3300/x-nmos/node/v1.3</div>
+            <span class="tag">Port 3300</span>
         </a>
+
+        <a href="http://localhost:3300/x-nmos/connection/v1.1" class="card" target="_blank">
+            <h2>Connection API (IS-05)</h2>
+            <p>Provides the mechanism to connect senders and receivers together using SDP files and multicast parameters.</p>
+            <div class="url">http://localhost:3300/x-nmos/connection/v1.1</div>
+            <span class="tag">Port 3300</span>
+        </a>
+
+        <a href="http://localhost:3300/x-nmos/channelmapping/v1.0" class="card" target="_blank">
+            <h2>Channel Mapping (IS-08)</h2>
+            <p>Allows routing and re-mapping of audio channels within the active flows on the device.</p>
+            <div class="url">http://localhost:3300/x-nmos/channelmapping/v1.0</div>
+            <span class="tag">Port 3300</span>
+        </a>
+        
+        <a href="http://localhost:3300/x-nmos/events/v1.0" class="card" target="_blank">
+            <h2>Events API (IS-07)</h2>
+            <p>Event and Tally streaming. Subscribes to boolean or quantitative states on the network (e.g. Tally Lights).</p>
+            <div class="url">http://localhost:3300/x-nmos/events/v1.0</div>
+            <span class="tag">Port 3300</span>
+        </a>
+
+        <a href="ws://127.0.0.1:3302/x-nmos/ncp/v1.0" class="card" target="_blank">
+            <h2>Control Protocol (IS-12)</h2>
+            <p>WebSocket endpoint for real-time control of device properties (Gain, Mute, Matrix routing, etc).</p>
+            <div class="url">ws://127.0.0.1:3302/x-nmos/ncp/v1.0</div>
+            <span class="tag" style="background: rgba(163, 113, 247, 0.1); color: #a371f7;">Port 3302 (WS)</span>
+        </a>
+    </div>
+
+    <h2 style="color: #ffffff; align-self: flex-start; max-width: 1100px; width: 100%;">Validation & Testing</h2>
+    <div class="grid" style="margin-bottom: 20px;">
+        <a href="http://localhost:8000" class="card" target="_blank" style="border-color: #3fb950;">
+            <h2 style="color: #3fb950;">AMWA NMOS Testing Tool</h2>
+            <p>The official AMWA compliance testing suite. Use this to run automated tests against the Registry and the Mock Device.</p>
+            <div class="url">http://localhost:8000</div>
+            <span class="tag" style="color: #3fb950; background: rgba(63, 185, 80, 0.1);">Port 8000</span>
+        </a>
+    </div>
+
+    <h2 style="color: #ffffff; align-self: flex-start; max-width: 1100px; width: 100%; font-size: 1.2rem;">Testing Tool Cheat Sheet</h2>
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin-bottom: 40px; color: #8b949e;">
+        <p>Copy and paste these values into the AMWA Testing Tool forms when running test suites against the Sandbox.</p>
+        <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 16px;">
+            <thead>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <th style="padding-bottom: 12px; color: #c9d1d9;">API Name</th>
+                    <th style="padding-bottom: 12px; color: #c9d1d9;">IP/Hostname</th>
+                    <th style="padding-bottom: 12px; color: #c9d1d9;">Port</th>
+                    <th style="padding-bottom: 12px; color: #c9d1d9;">Version</th>
+                    <th style="padding-bottom: 12px; color: #c9d1d9;">URL Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <td style="padding: 12px 0;"><strong>Registry (IS-04)</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>3210</td>
+                    <td>v1.3</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <td style="padding: 12px 0;"><strong>Node API (IS-04)</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>3300</td>
+                    <td>v1.3</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <td style="padding: 12px 0;"><strong>Connection API (IS-05)</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>3300</td>
+                    <td>v1.1</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <td style="padding: 12px 0;"><strong>Control Protocol (IS-12 / NCP)</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>3302</td>
+                    <td>v1.0</td>
+                    <td>/x-nmos/ncp/v1.0</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #30363d;">
+                    <td style="padding: 12px 0;"><strong>Rust Control Device</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>3000</td>
+                    <td>v1.0</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px 0;"><strong>Testing Façade</strong></td>
+                    <td>127.0.0.1</td>
+                    <td>5001</td>
+                    <td>v1.0</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script>
         async function fetchCount(resource) {
             try {
-                const response = await fetch(`http://localhost:3211/x-nmos/query/v1.3/${resource}`);
+                const response = await fetch(`http://127.0.0.1:3211/x-nmos/query/v1.3/${resource}`);
                 if (response.ok) {
                     const data = await response.json();
-                    document.getElementById(`count-${resource}`).innerText = data.length;
+                    return data.length;
                 }
-            } catch (error) {
-                console.error(`Failed to fetch ${resource}:`, error);
-            }
+            } catch (e) {}
+            return 0;
         }
 
-        function pollRegistry() {
-            fetchCount('nodes');
-            fetchCount('devices');
-            fetchCount('senders');
-            fetchCount('receivers');
+        async function updateDashboard() {
+            document.getElementById('count-nodes').innerText = await fetchCount('nodes');
+            document.getElementById('count-devices').innerText = await fetchCount('devices');
+            document.getElementById('count-senders').innerText = await fetchCount('senders');
+            document.getElementById('count-receivers').innerText = await fetchCount('receivers');
         }
 
-        // Poll immediately and then every 2 seconds
-        pollRegistry();
-        setInterval(pollRegistry, 2000);
+        setInterval(updateDashboard, 2000);
+        updateDashboard();
     </script>
 </body>
-</html>"""
+</html>
+"""
+    html_path = os.path.join(script_dir, "index.html")
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html_content)
     print(f"✨ Created interactive API dashboard at: {html_path}")
@@ -218,22 +320,37 @@ def main():
     
     print("Starting Mock Device...")
     # Pass explicit registry_address to bypass broken Avahi mDNS on Linux
-    device_proc = subprocess.Popen([sys.executable, device_script, '{"registry_address": "127.0.0.1"}'])
+    # Run the device on port 3300 to avoid registry port collisions
+    device_proc = subprocess.Popen([sys.executable, device_script, '{"registry_address": "127.0.0.1", "http_port": 3300}'])
+    
+    print("Starting Rusty Control Device...")
+    rusty_script = os.path.join(script_dir, "run_rusty_control_device.py")
+    rusty_proc = subprocess.Popen([sys.executable, rusty_script])
+    
+    print("Starting AMWA Testing Tool...")
+    tester_script_dir = os.path.join(script_dir, "nmos-testing-tool-master")
+    tester_proc = subprocess.Popen([sys.executable, "nmos-test.py"], cwd=tester_script_dir)
     
     # Generate and open dashboard
     generate_html(script_dir)
     
-    print("\n✅ Sandbox is running! Press Ctrl+C to stop both.")
+    print("\n✅ Sandbox is running! Press Ctrl+C to stop all services.")
     
     try:
         registry_proc.wait()
         device_proc.wait()
+        rusty_proc.wait()
+        tester_proc.wait()
     except KeyboardInterrupt:
         print("\n🛑 Stopping Sandbox...")
         registry_proc.terminate()
         device_proc.terminate()
+        rusty_proc.terminate()
+        tester_proc.terminate()
         registry_proc.wait()
         device_proc.wait()
+        rusty_proc.wait()
+        tester_proc.wait()
         print("✅ Sandbox stopped.")
 
 if __name__ == "__main__":

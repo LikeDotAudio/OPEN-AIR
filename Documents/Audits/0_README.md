@@ -10,10 +10,10 @@ TypeScript + WASM generation of the platform.
 |---|---|
 | [1_Design_Audit.md](1_Design_Audit.md) | The extracted mission statement, the scorecard, and the good/bad/ugly analysis of every subsystem — including the Discovered-tab case study |
 | [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md) | Diagrams: data transfer (current vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map |
-| [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md) | The phased plan: contracts-first TypeScript migration, YAK 2 capability model, WASM strategy, supervision, and live discovery |
-| [Phase 1.md](Phase%201.md) | Deep dive: deployment strategy for the `contracts/` package — scaffolding, zod→JSON-Schema→Rust codegen, golden vectors, validate CLI with CI ratchet, rollout order |
-| [Phase 2.md](Phase%202.md) | Deep dive: frontend TypeScript migration — Vite/pnpm scaffolding, the `window.*` bridge mechanic, typed widget registry, cutover/deploy/PWA strategy |
-| [4_Contracts_Structural_Guidelines.md](4_Contracts_Structural_Guidelines.md) | Structural guidelines for the Phase 1 `contracts/` package, grounded in a full code-level inventory of every cross-boundary shape (topics, device records, heartbeats, layout JSON, YAK tree) |
+| [3_TypeScript_Migration_Plan.md](../Strategies/3_TypeScript_Migration_Plan.md) | The phased plan: contracts-first TypeScript migration, YAK 2 capability model, WASM strategy, supervision, and live discovery |
+| [Phase 1.md](../Strategies/Phase%201.md) | Deep dive: deployment strategy for the `contracts/` package — scaffolding, zod→JSON-Schema→Rust codegen, golden vectors, validate CLI with CI ratchet, rollout order |
+| [Phase 2.md](../Strategies/Phase%202.md) | Deep dive: frontend TypeScript migration — Vite/pnpm scaffolding, the `window.*` bridge mechanic, typed widget registry, cutover/deploy/PWA strategy |
+| [4_Contracts_Structural_Guidelines.md](../Strategies/4_Contracts_Structural_Guidelines.md) | Structural guidelines for the Phase 1 `contracts/` package, grounded in a full code-level inventory of every cross-boundary shape (topics, device records, heartbeats, layout JSON, YAK tree) |
 
 ## The one-paragraph verdict
 

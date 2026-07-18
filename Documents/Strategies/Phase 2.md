@@ -147,7 +147,7 @@ migration mechanic, file by file:
    forbids new `.jsx` files outright. The numbers only go down.
 5. **Archive markers + checks, every step** (ruling 2026-07-17, Anthony):
    every move, conversion, deletion, or retirement is recorded as an
-   append-only line in `Documents/Audits/Migration_Ledger.md`
+   append-only line in `Documents/Strategies/Migration_Ledger.md`
    (`date | action | old path | new path/— | commit | note`), and `CHANGELOG.md`
    gets an entry per shipped step. CI enforces the trail: a **collision
    check** fails if any module exists in both `FrontEnd/` and `ui/src`

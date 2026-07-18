@@ -20,4 +20,5 @@ itself; hashes may be back-filled later for cross-reference.
 | 2026-07-17 | add | — | `.github/workflows/contracts-ci.yml` | fe130b3b0 | Phase 1 step 1: first non-deploy CI |
 | 2026-07-17 | add | — | `contracts/src/topics/`, `contracts/vectors/topics.json`, `contracts/rust/` | (this commit) | Phase 1 step 2: topic grammar TS+Rust, pinned by golden vectors |
 | 2026-07-17 | delete | `FrontEnd/comMQTT/topicUtils.js` | — | (this commit) | Older of the two disagreeing topic utilities; zero callers; `topicMaker.jsx` semantics canonized in contracts instead |
-| 2026-07-17 | retire | `FrontEnd/index.html` script tag `comMQTT/topicUtils.js?v=1` | — | (this commit) | Tag removed with the file |
+| 2026-07-17 | retire | `FrontEnd/index.html` script tag `comMQTT/topicUtils.js?v=1` | — | 7f9df4b78 | Tag removed with the file |
+| 2026-07-17 | move | `Documents/Audits/{3_TypeScript_Migration_Plan, Phase 1, Phase 2, 4_Contracts_Structural_Guidelines, Migration_Ledger}.md` | `Documents/Strategies/` | (this commit) | Ruling: forward-looking strategy docs live in Strategies; point-in-time audits stay in Audits; cross-links rewritten |

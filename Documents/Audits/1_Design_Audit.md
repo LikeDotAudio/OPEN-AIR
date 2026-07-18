@@ -263,5 +263,5 @@ from README-JSON extraction in `api.rs:194`, not from discovery.
    time. That finally delivers the README's promise.
 
 The concrete migration sequence, the YAK 2 definition format, and the WASM
-strategy are in [3_TypeScript_Migration_Plan.md](3_TypeScript_Migration_Plan.md).
+strategy are in [3_TypeScript_Migration_Plan.md](../Strategies/3_TypeScript_Migration_Plan.md).
 Diagrams for all of the above are in [2_Architecture_Diagrams.md](2_Architecture_Diagrams.md).

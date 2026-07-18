@@ -26,6 +26,11 @@
   pinned by one golden-vector file (`contracts/vectors/topics.json`) run by
   vitest AND cargo — 64 TS + 5 Rust suite assertions green. `topicUtils.js`
   (the older, disagreeing topic utility, zero callers) deleted.
+- **Docs reorganized**: forward-looking strategy documents (migration plan,
+  Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
+  `Documents/Audits/` to `Documents/Strategies/`; the point-in-time audits
+  (design audit, diagrams, executive review) stay in Audits. Cross-links
+  rewritten on both sides.
 
 ## 2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics
 

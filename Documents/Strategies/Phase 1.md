@@ -327,7 +327,7 @@ openair-validate --report json|pretty|summary
   config.ini vs code default).
 - **Archive markers ride along** (ruling 2026-07-17): every file the
   migration moves, retires, or deletes gets an append-only line in
-  `Documents/Audits/Migration_Ledger.md` (`date | action | old path |
+  `Documents/Strategies/Migration_Ledger.md` (`date | action | old path |
   new path/— | commit | note`), and each shipped rollout step gets a
   `CHANGELOG.md` entry. CI checks the trail the same way it checks the
   ratchet: removals without a ledger line fail the build.

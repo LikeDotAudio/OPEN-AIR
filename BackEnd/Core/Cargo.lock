@@ -1946,6 +1946,7 @@ dependencies = [
  "crossbeam-channel",
  "open",
  "openair-aes70",
+ "openair-chromecast",
  "openair-contracts",
  "openair-dnssd",
  "openair-midi",
@@ -1971,6 +1972,14 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+]
+
+[[package]]
+name = "openair-chromecast"
+version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
 ]
 
 [[package]]

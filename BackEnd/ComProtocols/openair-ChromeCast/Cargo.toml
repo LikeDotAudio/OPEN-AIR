@@ -1,0 +1,11 @@
+[package]
+name = "openair-chromecast"
+version = "0.1.0"
+edition = "2024"
+
+# Discovery only. Control (the Cast V2 protocol — TLS to :8009, protobuf over
+# virtual channels, heartbeat) is deliberately NOT implemented yet; see the
+# module docs in src/lib.rs for what adding it would take.
+[dependencies]
+mdns-sd = "0.20"
+rumqttc = "0.24"

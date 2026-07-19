@@ -40,6 +40,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
     client.subscribe("OpenAir/System/Protocols/visa/Device/#")
     client.subscribe("OpenAir/System/Protocols/midi/Device/#")
     client.subscribe("OpenAir/System/Protocols/dnssd/Device/#")
+    client.subscribe("OpenAir/System/Protocols/chromecast/Device/#")
 
 
 def on_message(client, userdata, msg):
@@ -68,6 +69,16 @@ def on_message(client, userdata, msg):
             key = "direction"  # 'type' is widget vocabulary in panel JSON
         collected.setdefault("midi", {}).setdefault(block, {})[key] = value
         collected["midi"][block].setdefault("port", f"{direction} {dev_n}")
+    elif proto == "chromecast":
+        # {category}/{friendly_name}/{key} — the Cast agent has already decoded
+        # the TXT record and chosen a category, so this is a straight passthrough.
+        # One Discovered tab per category (Speaker, Video Cast, Smart Display …),
+        # which is the point: 40 raw mDNS rows become a handful of meaningful ones.
+        if len(rest) != 3 or not value:
+            return
+        category, friendly, key = rest
+        block = friendly.replace("_", " ")
+        collected.setdefault(f"cast_{category}", {}).setdefault(block, {})[key] = value
     elif proto == "dnssd":
         # {service_type}/{instance}/{key} — one Discovered category for all
         # DNS-SD/mDNS services, one block per instance, grouped by type.
@@ -130,6 +141,10 @@ PREFERRED_COLUMNS = {
     "visa": ["model", "manufacturer", "serial", "firmware", "resource", "status", "notes", "last_seen"],
     "midi": ["port", "name", "direction"],
     "dnssd": ["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
+    # Cast devices: identity first, then what it can do, then where it lives.
+    "chromecast": ["friendly_name", "model", "device_type", "capabilities",
+                   "status_text", "addresses", "port", "hostname",
+                   "protocol_version", "cast_id", "status", "last_seen"],
 }
 HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type", "_row_state"}
 
@@ -177,7 +192,12 @@ def row_state(row, now=None):
 
 def rows_for(category, blocks):
     """Device dict -> OcaTable rows; unix last_online becomes readable last_seen."""
-    family = "visa" if category not in ("midi", "dnssd") else category
+    if category.startswith("cast_"):
+        family = "chromecast"
+    elif category in ("midi", "dnssd"):
+        family = category
+    else:
+        family = "visa"
     rows = []
     for block_name, fields in sorted(blocks.items()):
         row = dict(fields)

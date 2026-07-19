@@ -6,6 +6,7 @@
 resolver = "2"
 members = [
     "openair-aes70",
+    "openair-ChromeCast",
     "openair-dnssd",
     "openair-ember",
     "openair-mdns",

@@ -207,6 +207,16 @@ async fn main() {
     // DNS-SD / mDNS discovery agent — continuous browse on its own thread
     // (mdns-sd is sync); retained topics land in the Discovered tab via the
     // same builder sweep as VISA/MIDI. No longer a stub.
+    // Google Cast discovery. Separate from DNS-SD on purpose: that agent sees
+    // these devices too, but publishes the TXT record verbatim because it cannot
+    // know what any given service's keys mean. Cast TXT keys ARE defined, so this
+    // agent decodes them into sortable columns (friendly name, model,
+    // capabilities, status). Discovery only — no Cast V2 control.
+    let (cast_mqtt_host, cast_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        openair_chromecast::run_browse_agent(&cast_mqtt_host, cast_mqtt_port);
+    });
+
     let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     std::thread::spawn(move || {
         println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");

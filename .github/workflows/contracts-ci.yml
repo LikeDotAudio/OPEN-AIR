@@ -24,14 +24,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          node-version-file: Deployment/.nvmrc
       - run: corepack enable
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @openair/contracts typecheck
-      - run: pnpm --filter @openair/contracts test # includes the golden-vector suites
+      - run: pnpm -C Deployment install --frozen-lockfile
+      - run: pnpm -C Deployment --filter @openair/contracts typecheck
+      - run: pnpm -C Deployment --filter @openair/contracts test # includes the golden-vector suites
       # THE RATCHET (step 5): fails only on debt not in validate.baseline.json.
       # Fixing files shrinks the baseline via --update-baseline; growth is a bug.
-      - run: pnpm validate -- --report summary
+      - run: pnpm -C Deployment validate -- --report summary
 
   rust:
     runs-on: ubuntu-latest
@@ -49,10 +49,14 @@ jobs:
             BackEnd/ComProtocols
       - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
       # step 6: the path-dep wiring — both BackEnd workspaces compile with
-      # openair-contracts as a dependency (Core fully; ComProtocols via its
-      # contracts consumer, to keep CI under the ~5-minute budget)
-      - run: cargo check --manifest-path BackEnd/Core/Cargo.toml
-      - run: cargo check --manifest-path BackEnd/ComProtocols/Cargo.toml -p openair-yak
+      # openair-contracts as a dependency.
+      # Check AND test the full workspaces, not a single package. Checking only
+      # `-p openair-yak` hid a whole crate (openair-ember) that did not compile,
+      # and left 10 inline #[cfg(test)] modules never executed.
+      - run: cargo check --workspace --manifest-path BackEnd/Core/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/Core/Cargo.toml
+      - run: cargo check --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
 
   ui: # Phase 2: the isolated typed frontend
     runs-on: ubuntu-latest
@@ -60,18 +64,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          node-version-file: Deployment/.nvmrc
       - run: corepack enable
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm -C Deployment install --frozen-lockfile
       # freshness: legacy.ts and globals.d.ts must match their sources
-      - run: pnpm --filter ui gen:legacy && pnpm --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
+      - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
       # one-module-one-tree: a stem in both FrontEnd/ and ui/src is a copy, not a move
-      - run: pnpm --filter ui exec tsx scripts/check-collisions.ts
+      - run: pnpm -C Deployment --filter ui exec tsx scripts/check-collisions.ts
       # ratchet: no .jsx/.js source in the converted tree — ts/tsx only
       - run: '! find ui/src -name "*.jsx" -o -name "*.js" | grep -v -E "legacy|globals" | grep . '
-      - run: pnpm --filter ui typecheck
-      - run: pnpm --filter ui lint
-      - run: pnpm --filter ui build
+      - run: pnpm -C Deployment --filter ui typecheck
+      - run: pnpm -C Deployment --filter ui lint
+      - run: pnpm -C Deployment --filter ui build
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
     runs-on: ubuntu-latest
@@ -79,12 +83,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          node-version-file: Deployment/.nvmrc
       - run: corepack enable
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm -C Deployment install --frozen-lockfile
       - uses: actions/cache@v4
         with:
           path: ~/.cargo/bin/cargo-typify
           key: cargo-typify-0.7.0-${{ runner.os }}
       - run: command -v cargo-typify >/dev/null || cargo install cargo-typify@0.7.0 --locked
-      - run: pnpm gen:check
+      - run: pnpm -C Deployment gen:check

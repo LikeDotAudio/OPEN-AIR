@@ -1,25 +1,34 @@
-/**
- * Header: lib.rs
- * Purpose: lib.rs implementation.
- * Description: Logic and implementation for lib.rs implementation.
- * 
- * Version: 26.07.05.1
- * Change Log:
- * - 2026-07-05: Initial annotation and documentation added.
- */
+//! `openair-nmos` — AMWA NMOS (IS-04/IS-05).
+//!
+//! # ⚠️ STUB — not implemented
+//!
+//! This crate is **declared intent, not working code**. No discovery, registration, or connection-management implemented.
+//!
+//! It is deliberately left unimplemented rather than half-built, and it is
+//! deliberately *not* listed among the working protocols in the project README.
+//! The agent that would run it reports `status = stub` on the bus, so the system
+//! does not claim health it does not have.
+//!
+//! The `cargo new` template `add()` that used to live here has been removed: a
+//! function asserting 2 + 2 as a crate's public entry point reads as "someone
+//! started this," which is a stronger claim than the truth.
+//!
+//! **Before implementing:** confirm the protocol is still in scope. Several of
+//! these were scaffolded ahead of demand.
 
-// Inline comment: Logic for add
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+/// Marker describing this crate's implementation state.
+///
+/// Exists so the stub status is greppable and testable from code rather than
+/// living only in prose.
+pub const STATUS: &str = "stub";
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn crate_is_declared_a_stub() {
+        // Guards against this crate quietly appearing implemented. If you
+        // implement it, change STATUS and update the README's protocol list in
+        // the same commit.
+        assert_eq!(super::STATUS, "stub");
     }
 }

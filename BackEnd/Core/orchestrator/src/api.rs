@@ -150,15 +150,61 @@ fn strip_volatile(val: &mut Value) {
 }
 
 // Inline comment: Logic for save_file
+/// Resolve a caller-supplied relative path to an absolute path that is provably
+/// inside `base`, or return `None`.
+///
+/// SECURITY: the previous implementation used `abs.starts_with(&base)` on an
+/// **unnormalised** path. `Path::starts_with` compares path *components* and does
+/// not resolve `..`, so `base/../../../tmp/x.json` literally begins with the
+/// components of `base` and passed the check — the OS then resolved `..` at write
+/// time and the file landed outside the tree. That made `POST /api/save` an
+/// arbitrary-file-write. Verified by execution before this fix.
+///
+/// The rules now are structural rather than textual:
+///   1. reject absolute paths and Windows-style prefixes outright,
+///   2. reject any `..` component *before* touching the filesystem — no symlink
+///      or TOCTOU trick can reintroduce it,
+///   3. canonicalise the resolved **parent** and require it to sit inside the
+///      canonicalised base, which also defeats symlinks pointing outward.
+///
+/// The `.json` suffix check remains, but as a secondary filter — never as the
+/// control that keeps writes inside the tree.
+fn resolve_within(base: &Path, rel: &str) -> Option<PathBuf> {
+    use std::path::Component;
+
+    let candidate = Path::new(rel);
+
+    // (1) + (2): only plain names are allowed. This rejects `/etc/x`, `C:\…`,
+    // and every form of `..` — including one hidden mid-path like `a/../../b`.
+    if !candidate.components().all(|c| matches!(c, Component::Normal(_))) {
+        return None;
+    }
+
+    let base_real = base.canonicalize().ok()?;
+    let abs = base_real.join(candidate);
+
+    // (3) The file may not exist yet, so canonicalise the parent directory that
+    // will contain it. A symlinked parent pointing outside the tree fails here.
+    let parent_real = abs.parent()?.canonicalize().ok()?;
+    if !parent_real.starts_with(&base_real) {
+        return None;
+    }
+
+    Some(parent_real.join(abs.file_name()?))
+}
+
 async fn save_file(State(state): State<ApiState>, Json(mut payload): Json<SavePayload>) -> impl IntoResponse {
     let clean_rel = payload.path.trim_start_matches('/');
     let gui_frames_dir = state.root_dir.join("FrontEnd").join("Gui_Frames");
-    let abs_path = gui_frames_dir.join(clean_rel);
 
-    if !abs_path.starts_with(&gui_frames_dir) || !abs_path.to_string_lossy().ends_with(".json") {
-        return (StatusCode::FORBIDDEN, Json(json!({"ok": false, "error": "Path outside Gui_Frames"})));
-    }
-    
+    let abs_path = match resolve_within(&gui_frames_dir, clean_rel) {
+        Some(p) if p.to_string_lossy().ends_with(".json") => p,
+        _ => {
+            eprintln!("   🚫 [API] Rejected save path: {:?}", payload.path);
+            return (StatusCode::FORBIDDEN, Json(json!({"ok": false, "error": "Path outside Gui_Frames"})));
+        }
+    };
+
     let mut backup_name = None;
     if abs_path.exists() {
         let ts = chrono::Local::now().format("%Y%m%d_%H%M%S");
@@ -296,4 +342,67 @@ async fn get_grabbag(State(state): State<ApiState>) -> impl IntoResponse {
         "components": components,
         "legends": legends
     }))
+}
+
+#[cfg(test)]
+mod path_safety_tests {
+    use super::resolve_within;
+    use std::fs;
+
+    /// Build a throwaway `base/` with a real subdirectory, plus a sibling
+    /// `outside/` that traversal payloads try to reach.
+    fn fixture(tag: &str) -> std::path::PathBuf {
+        let root = std::env::temp_dir().join(format!("openair_path_test_{tag}"));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(root.join("base/sub")).unwrap();
+        fs::create_dir_all(root.join("outside")).unwrap();
+        root
+    }
+
+    #[test]
+    fn accepts_paths_inside_the_tree() {
+        let root = fixture("ok");
+        let base = root.join("base");
+        assert!(resolve_within(&base, "panel.json").is_some());
+        assert!(resolve_within(&base, "sub/panel.json").is_some());
+    }
+
+    /// The regression this guard exists for. Every payload here passed the old
+    /// `starts_with` check and wrote outside the tree.
+    #[test]
+    fn rejects_traversal() {
+        let root = fixture("traversal");
+        let base = root.join("base");
+        for evil in [
+            "../outside/pwned.json",
+            "../../outside/pwned.json",
+            "sub/../../outside/pwned.json",
+            "./../outside/pwned.json",
+            "sub/../sub/../../outside/pwned.json",
+        ] {
+            assert!(
+                resolve_within(&base, evil).is_none(),
+                "traversal payload was accepted: {evil}"
+            );
+        }
+    }
+
+    #[test]
+    fn rejects_absolute_paths() {
+        let root = fixture("absolute");
+        let base = root.join("base");
+        assert!(resolve_within(&base, "/etc/passwd.json").is_none());
+        assert!(resolve_within(&base, "/tmp/pwned.json").is_none());
+    }
+
+    /// A parent that symlinks out of the tree must fail even though the path
+    /// contains no `..` — this is why the parent is canonicalised.
+    #[cfg(unix)]
+    #[test]
+    fn rejects_symlinked_parent() {
+        let root = fixture("symlink");
+        let base = root.join("base");
+        std::os::unix::fs::symlink(root.join("outside"), base.join("escape")).unwrap();
+        assert!(resolve_within(&base, "escape/pwned.json").is_none());
+    }
 }

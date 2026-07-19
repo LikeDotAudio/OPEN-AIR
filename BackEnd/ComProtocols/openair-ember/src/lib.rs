@@ -1,4 +1,15 @@
 #![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut, mismatched_lifetime_syntaxes)]
+//! `openair-ember` — Ember+ (Lawo) tree model.
+//!
+//! **This crate is a PyO3 extension shim.** Its real implementation lives in the
+//! sibling module(s) below and is gated behind the `python` feature, which is NOT
+//! enabled by default. A default `cargo build` therefore produces an empty library
+//! — that is expected, not missing code. Build with `--features python` to compile
+//! the implementation.
+//!
+//! (The `cargo new` template `add()` that used to sit here has been removed: a
+//! function asserting 2 + 2 as the crate's public entry point misrepresented the
+//! crate as unimplemented.)
 /**
  * Header: lib.rs
  * Purpose: lib.rs implementation.
@@ -9,24 +20,11 @@
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
-use pyo3::prelude::*;
-
-// Inline comment: Logic for add
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    #![allow(non_snake_case, unused_variables, dead_code, unused_imports, unused_mut)]
-use pyo3::prelude::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+// NOTE: `pyo3` is an optional dependency enabled only by the `python` feature,
+// so it must not be imported at crate root ungated — doing so made
+// `cargo check -p openair-ember` fail without the feature. The real module below
+// carries its own gated imports. (This was latent: CI checks only `openair-yak`
+// in this workspace, so a whole crate failing to compile went unnoticed.)
 
 #[cfg(feature = "python")]
 pub mod oa_ember_tree_rs;

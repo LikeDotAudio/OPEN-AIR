@@ -23,9 +23,12 @@ instruments is orchestrated as easily as a single device.
 
 ### The Four Pillars
 
-1. **Discovery across protocols.** VISA/SCPI, MIDI, DNS-SD/mDNS, AES70, OSC,
-   SNMP, Ember+, SMPTE 2138, PTP — devices announce themselves and appear in
-   the UI. See [Protocol management](#-protocol-management--discovery).
+1. **Discovery across protocols.** **Working today:** VISA/SCPI, MIDI,
+   DNS-SD/mDNS, AES70, OSC — devices announce themselves and appear in the UI.
+   **Scaffolded but not implemented:** SNMP, Ember+, SMPTE 2138, PTP (PyO3 shims,
+   built only with `--features python`) and NMOS, REST, SAP, WebSocket (stubs).
+   Stub agents report `status = stub` on the bus rather than claiming health they
+   do not have. See [Protocol management](#-protocol-management--discovery).
 2. **YAK — the middleware definition plane.** Multiple instruments that do
    the same thing differently are abstracted into one verb grammar
    (`SET / RIG / NAB / DO`), defined as data, not code.
@@ -164,33 +167,80 @@ OPEN-AIR/
 ├── ui/                 # the typed frontend package (Vite + TypeScript) —
 │                       #   builds the app today, becomes the runtime at cutover
 ├── broker/             # mosquitto.conf (1883 + websockets 9001, persistence)
-├── Deployment/         # launcher, deploy scripts, discovered-GUI builder
+│                       #   + acl.example — the policy for exposing the bus
+├── docker/             # the one-command startup path: launch.py, compose,
+│                       #   Dockerfile, container broker config
+├── Deployment/         # launcher, deploy scripts, discovered-GUI builder,
+│                       #   requirements.txt (Python is glue here, not the product)
 ├── Documents/          # audits (historical analysis) + strategies (historical plans)
 └── TESTS/              # protocol test harnesses
 ```
+
+**Root files are deliberately few, and every one is load-bearing** — each is
+found by a tool that only looks in the repo root:
+
+| File | Why it must be at the root |
+|---|---|
+| `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` | the pnpm workspace root; `pnpm -r` / `pnpm --filter` resolve from here |
+| `rust-toolchain.toml` | rustup searches upward from the crate — this sits *above* all three Cargo workspaces, so one pin covers them all |
+| `.nvmrc` | `node-version-file: .nvmrc` in every CI job |
+| `.gitignore`, `README.md`, `CHANGELOG.md` | git and GitHub read them from the root |
 
 ---
 
 ## 🚀 Quick start
 
+**One command. Only Docker required.**
+
 ```bash
 git clone https://github.com/LikeDotAudio/OPEN-AIR
 cd OPEN-AIR
+python3 docker/launch.py
+```
 
+Then open **http://localhost:8000**.
+
+That preflights Docker, brings up the broker and the orchestrator, installs the
+Python VISA dependencies inside the image, waits for the broker to be healthy
+before starting the agents, and opens a browser when it is ready. Everything it
+uses lives in [`docker/`](docker/README.md); plain
+`docker compose -f docker/docker-compose.yml up` works too. `FrontEnd/Gui_Frames/` is bind-mounted, so panels you edit
+in the WYSIWYG editor land on your disk and show up in `git diff`.
+
+> **Everything binds to host loopback.** The bus is not a passive transport —
+> publishing to the VISA `Write` topics executes SCPI on real instruments, and the
+> HTTP API can write panel files. Before exposing any port on a network, enable
+> broker authentication and an ACL (`broker/acl.example`) and put auth in front of
+> the HTTP API.
+
+<details>
+<summary><b>Running without Docker</b> (native toolchain)</summary>
+
+Needs Rust 1.94 (`rust-toolchain.toml`), Python 3, and a `mosquitto` broker
+installed on the host.
+
+```bash
 # 1. The broker (the spine — start it first)
 mosquitto -c broker/mosquitto.conf
 
-# 2. Python deps (VISA probing still uses pyvisa)
+# 2. Python deps (the VISA probe path shells out to pyvisa)
 python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+pip install -r Deployment/requirements.txt
+#   plus OS packages pip cannot install — see Deployment/requirements.txt:
+#   sudo apt-get install mosquitto mosquitto-clients python3-tk libasound2-dev
 
 # 3. The system
 python3 Deployment/openair.py        # launcher: builds the Rust core + starts everything
-#   …or run the orchestrator directly from the repo root:
+#   …or run the orchestrator directly:
 cargo run --manifest-path BackEnd/Core/Cargo.toml
 ```
 
-Then open **http://localhost:8000**. Watch the whole system talk:
+Useful flags: `--bind` (default `127.0.0.1`), `--mqtt-host` / `MQTT_HOST`
+(default `127.0.0.1`), `--osc-bind`, `--port`.
+
+</details>
+
+Watch the whole system talk:
 
 ```bash
 mosquitto_sub -t 'OpenAir/#' -v            # everything
@@ -232,7 +282,7 @@ freshness, and the validate ratchet.
 | Device Registry service + supervisor (restart, TTL aging) | ⏳ Planned |
 | Native Rust VISA (retire the `python3` subshell) | ⏳ Planned |
 
-Detailed history lives in [`CHANGELOG.md`](CHANGELOG.md); every file moved,
+Detailed history lives in [`Documents/CHANGELOG.md`](Documents/CHANGELOG.md); every file moved,
 retired, or deleted during the migration is recorded in
 [`Documents/Strategies/Migration_Ledger.md`](Documents/Strategies/Migration_Ledger.md).
 

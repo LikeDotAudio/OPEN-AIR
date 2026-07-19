@@ -131,7 +131,48 @@ PREFERRED_COLUMNS = {
     "midi": ["port", "name", "direction"],
     "dnssd": ["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
 }
-HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type"}
+HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type", "_row_state"}
+
+# How recently a device must have answered to count as ONLINE.
+#
+# Retained MQTT topics are the state store, so a device that was unplugged weeks
+# ago still has retained state and still appears in this table. Without an age
+# check every row looks equally current — which is how a table ends up showing a
+# 2026-07-07 reading next to a live one with no visual difference.
+ONLINE_WINDOW_SECONDS = 15 * 60
+
+
+def row_state(row, now=None):
+    """Classify a device row as 'online' | 'offline' | 'unknown'.
+
+    Recency is the primary signal, because every agent publishes `last_online`.
+    `connected` is only published by the VISA agent (it means "*IDN? answered"),
+    so its ABSENCE must not count as offline — DNS-SD rows have no such field,
+    and treating missing as false marked every live service red.
+
+    An explicit `connected = 0` does override recency: a device that was probed
+    seconds ago and failed to answer is not online, however fresh the timestamp.
+
+    'unknown' is deliberate rather than folded into 'offline': a row with no
+    timestamp at all (a probe that half-answered) is a different situation from
+    one we know is stale, and colouring it red would assert more than we know.
+    """
+    now = time.time() if now is None else now
+
+    # Explicit negative from an agent that actually measures it.
+    raw_connected = str(row.get("connected", "")).strip()
+    if raw_connected in ("0", "false", "False"):
+        return "offline"
+
+    raw = row.get("last_online")
+    if raw in (None, ""):
+        return "unknown"
+    try:
+        age = now - float(raw)
+    except (TypeError, ValueError):
+        return "unknown"
+
+    return "online" if 0 <= age <= ONLINE_WINDOW_SECONDS else "offline"
 
 
 def rows_for(category, blocks):
@@ -145,6 +186,8 @@ def rows_for(category, blocks):
                 row["last_seen"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(float(row["last_online"]))))
             except (ValueError, OverflowError):
                 row["last_seen"] = row["last_online"]
+        # Consumed by OcaTable for row colouring; hidden from the columns.
+        row["_row_state"] = row_state(row)
         rows.append(row)
     keys = set().union(*[r.keys() for r in rows]) if rows else set()
     preferred = [k for k in PREFERRED_COLUMNS.get(family, []) if k in keys]

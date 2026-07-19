@@ -1,5 +1,18 @@
+# pnpm workspace root.
+#
+# This file (and package.json / pnpm-lock.yaml / .nvmrc) lives in Deployment/
+# rather than the repo root, to keep the root to the files tools can ONLY find
+# there. The consequence: package globs are relative to THIS file, so they point
+# up and out with `../`.
+#
+# Run pnpm from anywhere with -C:
+#     pnpm -C Deployment install
+#     pnpm -C Deployment test
+#
+# (rust-toolchain.toml cannot move the same way: rustup searches upward from the
+# crate being built, so it must sit above the Cargo workspaces — at the root.)
 packages:
-  - contracts
-  - ui # Phase 2 — the isolated typed frontend package
+  - ../contracts
+  - ../ui
 allowBuilds:
   esbuild: true

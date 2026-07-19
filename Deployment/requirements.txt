@@ -1,9 +1,17 @@
 # OPEN-AIR Python dependencies.
 #
 # Python is glue here, not the product: the instrument probe path and the
-# discovery/deploy tooling. Everything else is Rust and TypeScript.
+# discovery/deploy tooling. Everything else is Rust and TypeScript. That is why
+# this lives in Deployment/ rather than the repo root — the root is reserved for
+# files a tool can only find there (pnpm workspace, rustup pin, .nvmrc).
 #
-#   pip install -r requirements.txt
+#   pip install -r Deployment/requirements.txt
+#
+# There are TWO requirements files and they are not duplicates:
+#   Deployment/requirements.txt        — this one; running the system
+#   Deployment/requirements-deploy.txt — the FTPS deploy script only
+# Keep the paho-mqtt bound identical in both; the deploy script and the
+# discovered-GUI builder both import it.
 
 # --- Instrument control (REQUIRED for VISA discovery) -------------------
 # The orchestrator shells out to `python3 -c "import pyvisa ..."` to probe

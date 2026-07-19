@@ -52,15 +52,30 @@ const OcaTable = ({ value, config, node }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {rows.length > 0 ? rows.map((row, i) => (
-                            <tr key={i} style={{ backgroundColor: i % 2 === 0 ? '#1a1a1a' : '#1e1e1e' }}>
+                        {rows.length > 0 ? rows.map((row, i) => {
+                            // Optional liveness tint. A row may carry `_row_state`
+                            // ('online' | 'offline' | 'unknown'); the key is hidden
+                            // from `headers` so it never renders as a column.
+                            // Tables without it keep the plain zebra striping.
+                            const state = row._row_state;
+                            const zebra = i % 2 === 0 ? '#1a1a1a' : '#1e1e1e';
+                            const TINT = {
+                                online:  { bg: 'rgba(46,160,67,0.14)',  bar: '#2ea043' },
+                                offline: { bg: 'rgba(248,81,73,0.13)',  bar: '#f85149' },
+                                unknown: { bg: 'rgba(210,153,34,0.12)', bar: '#d29922' },
+                            }[state];
+                            return (
+                            <tr key={i} title={state ? `status: ${state}` : undefined}
+                                style={{ backgroundColor: TINT ? TINT.bg : zebra,
+                                         boxShadow: TINT ? `inset 3px 0 0 ${TINT.bar}` : undefined }}>
                                 {headers.map(h => (
                                     <td key={h} style={{ padding: '8px 10px', borderBottom: '1px solid #222' }}>
                                         {String(row[h] !== undefined ? row[h] : '')}
                                     </td>
                                 ))}
                             </tr>
-                        )) : (
+                            );
+                        }) : (
                             <tr>
                                 <td colSpan={headers.length} style={{ padding: '20px', textAlign: 'center', color: '#555' }}>
                                     No data available in table.

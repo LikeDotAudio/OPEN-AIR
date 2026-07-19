@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  contracts:
+  ../contracts:
     dependencies:
       zod:
         specifier: 4.4.3
@@ -30,7 +30,7 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@26.1.1)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.27.7)(tsx@4.23.1)(yaml@2.9.0))
 
-  ui:
+  ../ui:
     dependencies:
       '@openair/contracts':
         specifier: workspace:*

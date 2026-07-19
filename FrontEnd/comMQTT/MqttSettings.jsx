@@ -13,17 +13,25 @@
   const KEY = 'oa_mqtt_settings';
 
   // Default broker used when there is no saved profile and no ?mqtt= override.
-  // Currently wired to the public Eclipse test broker over TLS WebSockets
-  // (works from both http and https pages; plain ws would be blocked on https).
-  // To go back to the local Python broker, set:
-  //   { host: window.location.hostname || 'localhost', port: 9001,
-  //     encrypted: window.location.protocol === 'https:',
-  //     username: 'guest', password: 'guest' }
-  // ...or just use the "This host · local broker" preset in the MQTT modal.
-  const DEFAULTS = {
-    host: 'test.mosquitto.org', port: 8081, encrypted: true, path: '',
-    username: '', password: '',   // anonymous
+  //
+  // Defaults to THIS HOST — the broker that `docker compose` (or a native
+  // `mosquitto -c broker/mosquitto.conf`) publishes on :9001. That is the real
+  // system: your agents, your instruments, your discovery. The public Eclipse
+  // test broker is the *other* preset, for demos and UI work with no backend.
+  //
+  // Anonymous by default: both broker configs in this repo set
+  // `allow_anonymous true` and neither defines a password file. If you enable
+  // auth (see broker/acl.example), set credentials in the modal.
+  const LOCAL_DEFAULTS = {
+    host: (typeof window !== 'undefined' && window.location.hostname) || 'localhost',
+    port: 9001,
+    // The broker speaks plain ws. A page served over https cannot open ws://,
+    // so mirror the page's scheme and let the user flip it if they terminate TLS.
+    encrypted: (typeof window !== 'undefined' && window.location.protocol === 'https:'),
+    path: '',
+    username: '', password: '',
   };
+  const DEFAULTS = LOCAL_DEFAULTS;
 
   const read = () => {
     try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }
@@ -47,10 +55,25 @@
     return { brokerUrl: `${proto}://${host}:${port}${path}`, username, password };
   };
 
+  // Two presets, because there are two real situations: run the actual system,
+  // or poke at the UI with no backend.
   const PRESETS = [
-    { label: 'test.mosquitto.org · TLS (wss:8081)', host: 'test.mosquitto.org', port: 8081, encrypted: true,  path: '', username: '', password: '' },
-    { label: 'test.mosquitto.org · plain (ws:8080)', host: 'test.mosquitto.org', port: 8080, encrypted: false, path: '', username: '', password: '' },
-    { label: 'This host · local broker (:9001)',      host: (window.location.hostname || 'localhost'), port: 9001, encrypted: (window.location.protocol === 'https:'), path: '', username: 'guest', password: 'guest' },
+    {
+      label: 'Docker / this host · your broker (ws:9001)',
+      hint: 'The real system — docker compose, or a native broker on :9001',
+      host: (window.location.hostname || 'localhost'),
+      port: 9001,
+      encrypted: (window.location.protocol === 'https:'),
+      path: '', username: '', password: '',   // anonymous: see broker configs
+    },
+    {
+      label: 'Public test broker · test.mosquitto.org (wss:8081)',
+      hint: 'Demo / UI-only. Public and unauthenticated — never send real data',
+      host: 'test.mosquitto.org',
+      port: 8081,
+      encrypted: true,   // TLS works from both http and https pages
+      path: '', username: '', password: '',
+    },
   ];
 
   const fieldStyle = {
@@ -119,13 +142,24 @@
           {/* Presets */}
           <label style={labelStyle}>Quick presets</label>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '16px' }}>
-            {PRESETS.map((p) => (
+            {PRESETS.map((p) => {
+              // Highlight the preset that matches what is currently in the form,
+              // so it is obvious which of the two you are on.
+              const active = (p.host === host && String(p.port) === String(port) && p.encrypted === encrypted);
+              return (
               <button key={p.label} onClick={() => applyPreset(p)}
-                style={{ textAlign: 'left', background: '#262626', color: '#ddd', border: '1px solid #3a3a3a',
+                style={{ textAlign: 'left', background: active ? '#2f2a20' : '#262626', color: '#ddd',
+                         border: `1px solid ${active ? '#f4902c' : '#3a3a3a'}`,
                          borderRadius: '3px', padding: '7px 10px', fontSize: '12px', cursor: 'pointer' }}>
-                {p.label}
+                <div style={{ color: active ? '#f4902c' : '#ddd' }}>
+                  {active ? '● ' : ''}{p.label}
+                </div>
+                {p.hint && (
+                  <div style={{ fontSize: '10px', color: '#8a8a8a', marginTop: '2px' }}>{p.hint}</div>
+                )}
               </button>
-            ))}
+              );
+            })}
           </div>
 
           {/* Fields */}

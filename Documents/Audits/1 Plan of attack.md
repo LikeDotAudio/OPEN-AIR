@@ -4,13 +4,20 @@
 deliberately ignoring git history — the question is not "what did we claim," it is
 "what is true on disk right now."*
 
-> **Status: Day-14 execution pass complete (2026-07-18).** 8 of 9 tasks done,
-> 1 deferred to the owner. This is no longer only a plan — **§3b is the
-> execution record**: per task, what was wrong, how it was fixed, what was
-> deliberately *not* done and why, and the command whose output proves it.
+> # ✅ CLOSED — Milestone 1 (Day 14) complete
 >
-> **One item needs you:** **restart the broker** — the config binds loopback but a
-> process from the old config is still listening on `0.0.0.0` (D14-2).
+> **8 of 9 tasks done; 1 deferred to the owner by request.** Every Day-14 item was
+> executed and verified on 2026-07-18. **§3b is the execution record**: per task,
+> what was wrong, how it was fixed, what was deliberately *not* done and why, and
+> the command whose output proves it.
+>
+> **This document is now historical.** All remaining work — Milestones 2 and 3, the
+> unresolved escalations in §2, and a critical new finding — has moved to
+> **[2 Plan of attack.md](2%20Plan%20of%20attack.md)**.
+>
+> **Two things still need you:** restart the broker (the config binds loopback but a
+> process from the old config is still on `0.0.0.0`), and see **P0-1** in the
+> successor plan — `POST /api/save` is an unauthenticated arbitrary-file-write.
 
 **Companion documents:** [2026-07-18 Executive Review](../Executive_Review_Business_Value/2026-07-18AM_Executive_Review_Business_Value.md) ·
 [Design Audit](../notes/1_Design_Audit.md) · [Resolution table](0_README.md#resolution-status)
@@ -73,7 +80,7 @@ re-created by a helpful future reader:
 
 ## §2 Escalations — findings worse than reported
 
-### 2.1 The VISA injection is unauthenticated RCE, network-reachable (CRITICAL)
+### 2.1 The VISA injection is unauthenticated RCE, network-reachable — ✅ **RESOLVED**
 
 The review called this "a remote command-injection surface." That undersells it.
 
@@ -112,9 +119,14 @@ spent its mandate on. It was on nobody's list.
 the broker, not the browser. This lowers the odds of accidental triggering; it does
 nothing to lower the odds of deliberate triggering.)*
 
-Fix: **D14-2** (bind + auth, same day) and **D14-3** (kill the interpolation).
+✅ **Resolved 2026-07-18.** D14-3 replaced both interpolated scripts with constants
+taking `sys.argv` (exploit-tested against three payloads that previously broke out),
+and D14-2 bound both broker listeners to `127.0.0.1`. **Residual, carried to
+[P1-2](2%20Plan%20of%20attack.md#p1--the-front-door-was-day-14-41--strategy-w1w2):**
+`allow_anonymous true` remains and there is no ACL, so safety still rests on the
+bind alone.
 
-### 2.2 The `/ws` side-bus has zero consumers — OSC and AES70 events reach nothing
+### 2.2 The `/ws` side-bus has zero consumers — ⏳ **OPEN → [P3](2%20Plan%20of%20attack.md#p3--one-bus-one-truth-was-d45-4--strategy-w3)**
 
 The design audit called `/ws` a "second bus" (§4.1). It is worse: it is a
 **write-only bus**. `main.rs:420` routes it and four producers publish `SystemState`
@@ -127,9 +139,14 @@ separate path.
 
 **Consequence: OSC and AES70 discoveries currently go nowhere at all.** This is not
 architectural debt to be retired in Phase 4 — it is two protocols that silently do
-not work. Reclassified from "cleanup" to "bug." Fix: **D45-4**.
+not work. Reclassified from "cleanup" to "bug."
 
-### 2.3 The debt baseline can be gamed by deleting sample files — literally
+⏳ **Still open — carried to P3.** Re-verified: the route is present and OSC/AES70
+still make zero MQTT publish calls. Note the ordering correction made since: OSC and
+AES70 must publish to the bus **before** the route is deleted, or two protocols go
+from "reaching nothing" to "not existing."
+
+### 2.3 The debt baseline can be gamed by deleting sample files — ⏳ **OPEN → [P4-3](2%20Plan%20of%20attack.md#p4--debt-paydown-and-a-ratchet-that-cannot-be-gamed-was-d45-567)**
 
 The CEO's jab ("a number he can hit by deleting sample files") is arithmetically
 correct. Of 2,262 baselined findings, **236 live under `5_Samples/`** — 147
@@ -149,13 +166,13 @@ review assumed — see §4.
 
 ---
 
-## §3 Milestone 1 — Day 14 (due 2026-07-31, clock does not reset)
+## §3 Milestone 1 — Day 14 — ✅ **COMPLETE**
 
 Ordered by liability-per-minute. The first four are the "boring items first" the
 verdict demanded.
 
-> **Execution pass run 2026-07-18.** Eight of nine complete, one deferred to the
-> owner. Task-by-task detail — what changed, how, and how it was
+> **✅ Executed and verified 2026-07-18.** Eight of nine complete; D14-7 deferred to
+> the owner by request. Task-by-task detail — what changed, how, and how it was
 > verified — is in **[§3b](#3b-execution-log--what-was-done-and-how)**.
 
 | # | Task | Status | Addresses |
@@ -432,97 +449,31 @@ is D45-5/6, and conflating the two would misrepresent both.
 
 ---
 
-## §4 Milestone 2 — Day 45: second-machine proof + a ratchet that actually ratchets
+## §4–§5 Milestones 2 and 3 — ➡️ **MOVED**
 
-### 4.1 The golden path (the Lazy Engineer's complaint, which is load-bearing)
+These were never started, and their analysis has been re-verified and carried
+forward rather than duplicated. **See [2 Plan of attack.md](2%20Plan%20of%20attack.md):**
 
-The review's sharpest *usability* finding was that the ceremony exceeds the payoff.
-Confirmed: the documented startup is **7 commands** (`README.md:174-190`) and does
-not even mention `corepack`/`pnpm install`, so the UI bundle is outside the
-documented path entirely. Full build prerequisites: Node ≥24 + corepack + pnpm
-11.14.0, Rust 1.94.1, **two** Cargo workspaces plus **three** standalone crates
-(the README claims one — it omits `FrontEnd/libControl/Panels/wasm`, which also
-implies an undocumented `wasm32` target), `cargo-typify@0.7.0` installed by hand,
-Python 3 + venv, `python3-tk`, and a `mosquitto` broker that is never listed as a
-prerequisite.
+| Was | Now | Status re-verified 2026-07-18 |
+|---|---|---|
+| D45-1 one-command startup | **P1-1** | No Dockerfile, compose file, or Makefile exists |
+| D45-2 CI green on a clean runner | **P5-3** | Blocked on P1-1 |
+| D45-3 CI coverage gap | **P5-1** | `cargo test` runs on `contracts/rust` only; no Python job |
+| D45-4 retire `/ws` | **P3-1 → P3-2** | Route present; OSC/AES70 make zero MQTT publishes — **ordering corrected** |
+| D45-5 codemod the two big rules | **P4-1** | 1,511 of 2,262 findings, unchanged |
+| D45-6 duplicate 34401A + collisions | **P4-2** | `8_Multimeter_YAK` still present |
+| D45-7 ungameable ratchet | **P4-3** | No exclusion logic in the validator |
+| D45-8 the `2+2` crates | **P2** | 10 template `lib.rs` remain |
+| Day 90 stranger test | **P5-4** | Blocked on P1 |
 
-- **D45-1 — One command.** `docker compose up` (or `make run`) that brings up
-  broker + orchestrator + UI. No Dockerfile or bootstrap script exists for
-  OPEN-AIR today; the only ones in the tree are vendored NMOS test tooling.
-- **D45-2 — CI green on a clean runner**, with the *second-machine* run scripted
-  and its transcript committed to `Documents/Audits/`.
-- **D45-3 — Fix the CI coverage lie.** `contracts-ci.yml` runs `cargo test` on
-  `contracts/rust` only; `BackEnd/Core` and `BackEnd/ComProtocols` get `cargo
-  check` — so the 10 inline `#[cfg(test)]` modules **never execute**. There is no
-  Python job at all, despite four real first-party pytest files under
-  `oaFileImportCSV/`. Add both. Also implement the ledger check that
-  `Phase 2.md:160-164` claims CI enforces but which does not exist.
-- **D45-4 — Retire the `/ws` side-bus** (§2.2). Publish OSC and AES70 to MQTT under
-  the contract topic grammar; delete the route. Two protocols start working.
+Two framings in the original §4 were **wrong and are corrected** in the successor:
+the ten template crates need *two different* treatments (five are pyo3 shims with
+real sibling modules, five are genuinely empty), and `/ws` must not be deleted
+until OSC and AES70 publish to MQTT.
 
-### 4.2 Paying down the ratchet — the honest version
-
-The Resistant Engineer's charge ("nothing was repaired; it was *inventoried*") is
-**correct as of today**. The counter is not that inventorying is enough — it is that
-the inventory reveals the debt is two mechanical problems wearing a trenchcoat:
-
-| Rule | Count | Nature |
-|---|---:|---|
-| `legacy-widget-type` | 856 | Mechanical rename — **codemoddable** |
-| `legacy-label-form` | 655 | Mechanical reshape — **codemoddable** |
-| `data-model-type` | 163 | Mechanical, 147 of them in `5_Samples` |
-| `legacy-flat-key:*` | 235 | Mechanical key migration |
-| `legacy-topic-override` | 72 | Semi-mechanical |
-| `unknown-widget-type` | 60 | **Needs judgement** — renders as the dashed fallback box |
-| `folder-order-collision` | 57 | **Needs judgement** — renames cascade into identity |
-| everything else | ~164 | Mixed |
-
-**1,511 of 2,262 findings — 67% — are two codemoddable patterns.** Two afternoons
-of codemod work plus review retires two-thirds of the baseline. That is a real
-plan, and it is defensible in a way the CTO's "10% per sprint" is not.
-
-- **D45-5 — Codemod `legacy-widget-type` + `legacy-label-form`.** Target: baseline
-  below **750 deprecations** (down from 2,093).
-- **D45-6 — Repair the two named items.** The duplicate 34401A is trivial:
-  `8_Multimeter_YAK/1_34401A/` contains **exactly one file**
-  (`1_MEASure/MEASure.json`) against a full tree in `4_DMM_YAK/1_34401A/`. Port
-  anything unique, delete the class, and 5 `yak-duplicate-definition` + 1
-  `yak-duplicate-model` errors resolve with it. This matters beyond tidiness:
-  `repository.rs` keys on `HashMap<model, …>` and `mqtt.rs` passes `model: None`
-  on every execute, so the two definitions **silently shadow each other** —
-  whichever loads last wins. Then fix the root-level `folder-order-collision`.
-- **D45-7 — Make the ratchet ungameable** (§2.3). Report per-rule, not just total;
-  exclude `5_Samples/` from the reduction target; fail CI if the *file count* drops
-  without a Migration Ledger entry. Deleting demos must not read as progress.
-
-### 4.3 The `2+2` crates
-
-Confirmed: **exactly 10** template `lib.rs` files. But the review's framing ("ten of
-our sixteen protocol crates are boilerplate") conflates two different situations,
-and the fix differs:
-
-- **Five are pyo3 shims with real sibling modules** — `ember` (169 L),
-  `mqtt` (108 L), `ptp` (90+93 L), `snmp` (24+91 L), `smpte2138` (78 L). The code is
-  real; the crate root is vestigial and gated `#[cfg(feature = "python")]`.
-  **Fix: delete the template, re-export the real modules.** Cosmetic, ~1 hour total.
-- **Five are wholly empty** — `mdns`, `nmos`, `rest`, `sap`, `websocket`. `src/`
-  contains the 25-line `cargo new` template and nothing else. Yet each ships a
-  `config.ini` with MQTT topics, which is *why* the validator flags them and why the
-  system appears to support protocols it does not.
-
-**D45-8 — Stop describing five empty crates as protocol implementations.** Either
-implement or mark `status = stub` end-to-end and remove them from every capability
-claim. This is the CFO's "certification overhang" (risk #5), and the honest move is
-to shrink the claim, not the backlog.
-
----
-
-## §5 Milestone 3 — Day 90: unchanged
-
-One stranger, one instrument, one vendor we do not own, **installing without
-contacting the author**, with the case study committed to `Documents/Audits/`. D45-1
-is the prerequisite: nobody clears this bar with a 7-command startup and an
-undocumented broker dependency.
+The successor also carries a finding that did not exist when this document was
+written: **[P0-1](2%20Plan%20of%20attack.md#p0-1--postapisave-is-an-unauthenticated-arbitrary-file-write)** —
+`POST /api/save` is an unauthenticated arbitrary-file-write, verified by execution.
 
 ---
 
@@ -606,29 +557,29 @@ Recorded so the plan is not mistaken for a rebuttal:
 
 ---
 
-## §8 Scoreboard for the next review
+## §8 Scoreboard — Day-14 final
 
-Concrete, checkable, and deliberately not gameable:
+✅ **Every Day-14 target met.** Forward targets moved to
+[2 Plan of attack.md](2%20Plan%20of%20attack.md#scoreboard); the Day-45 column below
+is retained only to show what was promised. "Start" = beginning of the execution pass.
 
-*Updated 2026-07-18 after the Day-14 execution pass. "Today" = start of that pass.*
-
-| Metric | Today | Now | Day 14 | Day 45 |
-|---|---|---|---|---|
-| Credential held anywhere but GitHub Environments | unclear | ✅ **no — GitHub is the sole store** | no | no |
-| Broker binds all interfaces | yes | ✅ **loopback** *(restart pending)* | no | no |
-| String-interpolated subprocess input | 1 site | ✅ **0** | 0 | 0 |
-| Broken `/home/anthony/` paths in code | 4 | ✅ **0** | 0 | 0 |
-| Ships-but-unlisted Python deps | 5 | ✅ **0** | 0 | 0 |
-| Deploy gated on tests | no | ✅ **yes, both workflows** | yes | yes |
-| Sampler scope decision recorded | no | ✅ **removed + recorded** | yes | yes |
-| Commands to first running instrument | 7 | 7 | 7 | **1** |
-| Baseline deprecations | 2,093 | 2,093 | 2,093 | **< 750** |
-| Baseline errors | 169 | 169 | 169 | **< 100** |
-| Template `lib.rs` in crates we call implementations | 10 | 10 | 10 | **0** |
-| Protocols publishing to a bus nobody reads | 2 | 2 | 2 | **0** |
-| Cargo workspaces whose tests CI executes | 1 of 3 | 1 of 3 | 1 of 3 | **3 of 3** |
-| `.crawler/` on disk | 210 MB | 210 MB *(owner's call)* | — | — |
-| Dead internal doc links | 5 | ✅ **0, CI-enforced** | 0 | 0 |
+| Metric | Start | **Day-14 final** | (Day 45 → now P3/P4) |
+|---|---|---|---|
+| Credential held anywhere but GitHub Environments | unclear | ✅ **no — GitHub is the sole store** | no |
+| Broker binds all interfaces | yes | ✅ **loopback** *(restart pending)* | no |
+| String-interpolated subprocess input | 1 site | ✅ **0** | 0 |
+| Broken `/home/anthony/` paths in code | 4 | ✅ **0** | 0 |
+| Ships-but-unlisted Python deps | 5 | ✅ **0** | 0 |
+| Deploy gated on tests | no | ✅ **yes, both workflows** | yes |
+| Sampler scope decision recorded | no | ✅ **removed + recorded** | yes |
+| Commands to first running instrument | 7 | 7 *(→ P1-1)* | **1** |
+| Baseline deprecations | 2,093 | 2,093 *(→ P4-1)* | **< 750** |
+| Baseline errors | 169 | 169 *(→ P4)* | **< 100** |
+| Template `lib.rs` in crates we call implementations | 10 | 10 *(→ P2)* | **0** |
+| Protocols publishing to a bus nobody reads | 2 | 2 *(→ P3-1)* | **0** |
+| Cargo workspaces whose tests CI executes | 1 of 3 | 1 of 3 *(→ P5-1)* | **3 of 3** |
+| `.crawler/` on disk | 210 MB | 210 MB *(owner's call)* | — |
+| Dead internal doc links | 5 | ✅ **0, CI-enforced** | 0 |
 
 ---
 

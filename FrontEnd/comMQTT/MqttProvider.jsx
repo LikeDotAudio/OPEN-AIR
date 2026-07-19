@@ -8,6 +8,12 @@
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
+// Topic carrying live VISA scan narration. Non-retained event stream — see
+// SCAN_LOG_TOPIC in BackEnd/Core/orchestrator/src/main.rs. Subscribed below and
+// printed to the browser console, because the orchestrator's own stdout is
+// invisible to anyone actually using the UI.
+const OA_SCAN_LOG_TOPIC = 'OpenAir/System/Protocols/visa/Scan/Log';
+
 const MqttContext = React.createContext();
 
 // Per-session identity. Matches Python's FULL_INSTANCE_ID shape ("<8-byte-hex>:<partition>:<pid>")
@@ -99,7 +105,30 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/Gui/#`);
             });
+            // Live scan narration -> browser console. The orchestrator's scan
+            // progress used to exist only in its own stdout, which is invisible
+            // to anyone running the UI (and doubly so in a container).
+            mqttClient.subscribe(OA_SCAN_LOG_TOPIC, (err) => {
+                if (!err) console.log(`🔎 [SCAN] watching ${OA_SCAN_LOG_TOPIC} — scan progress will appear here`);
+            });
         });
+        // Scan lines are console output, not application state: printing them
+        // here keeps them out of the value store and off the React render path.
+        mqttClient.on('message', (topic, payload) => {
+            if (topic !== OA_SCAN_LOG_TOPIC) return;
+            let line = {};
+            try { line = JSON.parse(payload.toString()); }
+            catch (e) { line = { level: 'info', message: payload.toString() }; }
+            const style = {
+                ok:    'color:#2ea043',
+                warn:  'color:#d29922',
+                error: 'color:#f85149',
+                info:  'color:#58a6ff',
+            }[line.level] || 'color:#58a6ff';
+            const icon = { ok: '✅', warn: '⚠️', error: '❌', info: '🔎' }[line.level] || '🔎';
+            console.log(`%c${icon} [SCAN] ${line.message}`, style);
+        });
+
         mqttClient.on('reconnect', () => setConnected(false));
         mqttClient.on('close',     () => setConnected(false));
         mqttClient.on('offline',   () => setConnected(false));

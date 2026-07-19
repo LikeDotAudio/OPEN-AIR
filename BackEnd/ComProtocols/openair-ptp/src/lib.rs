@@ -1,4 +1,15 @@
 #![allow(non_snake_case, unused_variables, dead_code, unused_imports)]
+//! `openair-ptp` — PTP (IEEE 1588) helpers.
+//!
+//! **This crate is a PyO3 extension shim.** Its real implementation lives in the
+//! sibling module(s) below and is gated behind the `python` feature, which is NOT
+//! enabled by default. A default `cargo build` therefore produces an empty library
+//! — that is expected, not missing code. Build with `--features python` to compile
+//! the implementation.
+//!
+//! (The `cargo new` template `add()` that used to sit here has been removed: a
+//! function asserting 2 + 2 as the crate's public entry point misrepresented the
+//! crate as unimplemented.)
 /**
  * Header: lib.rs
  * Purpose: lib.rs implementation.
@@ -8,24 +19,6 @@
  * Change Log:
  * - 2026-07-05: Initial annotation and documentation added.
  */
-
-// Inline comment: Logic for add
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    #![allow(non_snake_case, unused_variables, dead_code, unused_imports)]
-    use pyo3::prelude::*;
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
 
 #[cfg(feature = "python")]
 pub mod oa_ptp_clock_rs;

@@ -1,0 +1,58 @@
+# OPEN-AIR broker ACL — template
+#
+#   cp broker/acl.example broker/acl      # then edit, and keep broker/acl out of git
+#
+# WHY THIS EXISTS
+#
+# Authentication answers "who are you." It does not answer "what may you do."
+# Without an ACL, any authenticated client — including a browser tab someone left
+# open on an untrusted machine — can publish to
+#
+#     OpenAir/System/Protocols/visa/Device/+/+/+/Write
+#
+# which causes the orchestrator to execute that payload as a SCPI command on real
+# lab hardware. The UI never needs to do that directly; only the operator does.
+# This file is what separates "logged in" from "allowed to drive the bench."
+#
+# Enable it in broker/mosquitto.conf:
+#     password_file broker/passwd
+#     acl_file      broker/acl
+#     allow_anonymous false
+#
+# Create users with:
+#     mosquitto_passwd -c broker/passwd openair-agent
+#     mosquitto_passwd    broker/passwd openair-ui
+#     mosquitto_passwd    broker/passwd openair-operator
+#
+# Reload after any change: mosquitto is not watching this file.
+
+# ── Agents (Rust protocol agents, YAK, orchestrator) ─────────────────────────
+# Full access: they own device discovery, publish retained state, and must be
+# able to drive hardware. Run them as this user and nothing else as this user.
+user openair-agent
+topic readwrite OpenAir/#
+
+# ── UI (browser sessions) ────────────────────────────────────────────────────
+# Read everything: the UI is a viewer of system state, and retained topics are
+# how it learns that state.
+user openair-ui
+topic read OpenAir/#
+
+# Write ONLY control values and its own liveness. Note what is absent: no
+# blanket write to OpenAir/System/Protocols/#, so a compromised or careless
+# browser client cannot send SCPI to an instrument.
+topic write OpenAir/Gui/#
+topic write OpenAir/System/Agents/web-%c
+topic write OpenAir/System/Protocols/visa/Device/Rescan
+
+# ── Operator (deliberate hardware control) ───────────────────────────────────
+# Separate credential for the one action that executes on physical instruments.
+# Give this to a person, not to a page that anyone can leave open.
+user openair-operator
+topic read OpenAir/#
+topic write OpenAir/Gui/#
+topic write OpenAir/System/Protocols/+/Device/+/+/+/Write
+
+# ── Anonymous ────────────────────────────────────────────────────────────────
+# Intentionally absent. With `allow_anonymous false` set, unauthenticated
+# clients are rejected at connect and never reach these rules.

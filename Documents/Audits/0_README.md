@@ -21,6 +21,7 @@ ugly — measured against the project's actual goal.
 | File | What it covers |
 |---|---|
 | [1_Design_Audit.md](../notes/1_Design_Audit.md) | The extracted mission statement, the scorecard, and the good/bad/ugly analysis of every subsystem — including the Discovered-tab case study. **§8 (2026-07-18) records what has since been accomplished, what got worse, and the next steps** |
+| [strategy to repair current issues.md](strategy%20to%20repair%20current%20issues.md) | **Response to the 2026-07-18PM review** — every persona claim re-audited (verified / partly true / rejected), two findings nobody raised, and a four-workstream repair plan sequenced by liability-per-hour |
 | [1 Plan of attack.md](1%20Plan%20of%20attack.md) | **The response to the 2026-07-18 executive review** — every charge answered with evidence, four stale charges corrected, three escalations (incl. an unauthenticated RCE), and the Day-14 / Day-45 / Day-90 task list |
 | [2_Architecture_Diagrams.md](../notes/2_Architecture_Diagrams.md) | Diagrams: data transfer (v40 vs. target), YAK translation, file/folder structure, folders-make-tabs, the WYSIWYG loop, and the library map — plus **§7, the current-state diagram (2026-07-18)**. *Lives in `Documents/notes/`; this link was dead until 2026-07-18* |
 | [../2026-07-17_Executive_Review_Business_Value.md](../Executive_Review_Business_Value/2026-07-17_Executive_Review_Business_Value.md) | Executive committee business-value review — the audit that put the project on "Life Support" with three milestones |

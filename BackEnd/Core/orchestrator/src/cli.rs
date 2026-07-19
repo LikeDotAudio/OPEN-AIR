@@ -19,6 +19,43 @@ pub struct Args {
     #[arg(long, default_value_t = 8001, help = "Rust orchestrator port (default 8001).")]
     pub core_port: u16,
 
+    /// SECURITY: loopback by default.
+    ///
+    /// The HTTP server exposes `POST /api/save`, which writes files, and there is
+    /// no authentication in front of it. Binding all interfaces therefore hands
+    /// every host on the network a write primitive. Widening this is a deliberate
+    /// act with a prerequisite: put authentication on the mutating routes first.
+    /// Same opt-in discipline as `broker/mosquitto.conf`.
+    #[arg(
+        long,
+        default_value = "127.0.0.1",
+        help = "Address to bind the frontend server to (default 127.0.0.1, loopback only). \
+                Use 0.0.0.0 to expose on the network — only with auth in front of /api/save."
+    )]
+    pub bind: std::net::IpAddr,
+
+    /// SECURITY: loopback by default — see `--bind`.
+    #[arg(
+        long,
+        default_value = "127.0.0.1",
+        help = "Address the OSC agent listens on (default 127.0.0.1, loopback only)."
+    )]
+    pub osc_bind: std::net::IpAddr,
+
+    /// Broker hostname. Was hard-coded to "127.0.0.1" in six places, which meant
+    /// the orchestrator could only ever run on the same host as the broker —
+    /// including inside a container, where `broker` is a different host.
+    #[arg(
+        long,
+        env = "MQTT_HOST",
+        default_value = "127.0.0.1",
+        help = "MQTT broker hostname (env: MQTT_HOST)."
+    )]
+    pub mqtt_host: String,
+
+    #[arg(long, env = "MQTT_PORT", default_value_t = 1883, help = "MQTT broker port (env: MQTT_PORT).")]
+    pub mqtt_port: u16,
+
     #[arg(long, help = "Skip cargo builds.")]
     pub no_build: bool,
 

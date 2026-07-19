@@ -1,4 +1,7 @@
-# Runtime dependencies for FrontEnd/deploy_FTP_to_like_dot_audio.py.
+# Runtime dependencies for the FTPS deploy script ONLY.
+#
+# To RUN OPEN-AIR you want the other file: Deployment/requirements.txt.
+# The paho-mqtt bound below is deliberately identical to that file's.
 # The site itself has no build step (CDN React/Babel, in-browser JSX), so the
 # deploy only needs the stdlib plus paho-mqtt for the post-deploy build stamp.
 paho-mqtt>=1.6,<3

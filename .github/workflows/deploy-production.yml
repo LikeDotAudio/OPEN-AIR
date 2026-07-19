@@ -40,23 +40,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          node-version-file: Deployment/.nvmrc
 
       - name: Enable corepack
         run: corepack enable
 
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: pnpm -C Deployment install --frozen-lockfile
 
       - name: Typecheck contracts
-        run: pnpm --filter @openair/contracts typecheck
+        run: pnpm -C Deployment --filter @openair/contracts typecheck
 
       - name: Test contracts
-        run: pnpm --filter @openair/contracts test
+        run: pnpm -C Deployment --filter @openair/contracts test
 
       # The drift ratchet: fails on NEW debt, not on the baselined backlog.
       - name: Validate (ratchet)
-        run: pnpm validate -- --report summary
+        run: pnpm -C Deployment validate -- --report summary
 
   deploy:
     needs: verify

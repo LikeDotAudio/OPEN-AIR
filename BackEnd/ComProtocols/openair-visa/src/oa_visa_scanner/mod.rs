@@ -44,18 +44,34 @@ pub fn hunt_for_devices() -> Vec<String> {
                         }
                     }
                     
+                    // Bounded concurrency + a realistic timeout.
+                    //
+                    // This used to spawn one thread per address — 254 at once —
+                    // each racing several connects on a 200ms budget. Under that
+                    // burst the OS and the switch drop enough SYNs that live
+                    // instruments are missed: a Rigol at .161 answers port 111 in
+                    // 25ms when probed alone, yet never appeared in a scan.
+                    //
+                    // A missed instrument is worse than a slow scan, and it fails
+                    // silently — the device simply is not in the list.
+                    const SCAN_CHUNK: usize = 48;
                     let mut handles = Vec::new();
+                    let mut in_flight = 0usize;
+                    let mut chunk_results: Vec<Vec<String>> = Vec::new();
                     for ip in ips_to_scan {
                         handles.push(std::thread::spawn(move || {
                             let mut found = Vec::new();
                             let mut is_dedicated = false;
-                            if std::net::TcpStream::connect_timeout(&format!("{}:111", ip).parse().unwrap(), Duration::from_millis(200)).is_ok() {
+                            // 200ms was too tight under a 254-way burst; see the
+                            // concurrency note above.
+                            const CONNECT_TIMEOUT: Duration = Duration::from_millis(600);
+                            if std::net::TcpStream::connect_timeout(&format!("{}:111", ip).parse().unwrap(), CONNECT_TIMEOUT).is_ok() {
                                 is_dedicated = true;
-                            } else if std::net::TcpStream::connect_timeout(&format!("{}:5025", ip).parse().unwrap(), Duration::from_millis(200)).is_ok() {
+                            } else if std::net::TcpStream::connect_timeout(&format!("{}:5025", ip).parse().unwrap(), CONNECT_TIMEOUT).is_ok() {
                                 is_dedicated = true;
                             }
                             
-                            if std::net::TcpStream::connect_timeout(&format!("{}:5555", ip).parse().unwrap(), Duration::from_millis(200)).is_ok() {
+                            if std::net::TcpStream::connect_timeout(&format!("{}:5555", ip).parse().unwrap(), CONNECT_TIMEOUT).is_ok() {
                                 let visa_res = format!("TCPIP::{}::5555::SOCKET", ip);
                                 println!("     ➕ Added socket resource: {}", visa_res);
                                 found.push(visa_res);
@@ -102,11 +118,19 @@ pub fn hunt_for_devices() -> Vec<String> {
                             }
                             found
                         }));
-                    }
-                    for handle in handles {
-                        if let Ok(mut found) = handle.join() {
-                            resources.append(&mut found);
+                        in_flight += 1;
+                        if in_flight >= SCAN_CHUNK {
+                            for handle in handles.drain(..) {
+                                if let Ok(found) = handle.join() { chunk_results.push(found); }
+                            }
+                            in_flight = 0;
                         }
+                    }
+                    for handle in handles.drain(..) {
+                        if let Ok(found) = handle.join() { chunk_results.push(found); }
+                    }
+                    for mut found in chunk_results {
+                        resources.append(&mut found);
                     }
                 }
             }

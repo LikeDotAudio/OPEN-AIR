@@ -1,5 +1,184 @@
 # Changelog
 
+## 2026-07-18 - W1/W2: the Front Door · Path Traversal Fix · One-Command Startup
+
+Executes workstreams **W1** and **W2** of
+[strategy to repair current issues.md](Audits/strategy%20to%20repair%20current%20issues.md),
+which re-audited the 2026-07-18PM executive review against the working tree.
+
+### 🚨 Security
+
+- **`POST /api/save` was an unauthenticated arbitrary-file-write, reachable
+  from any host on the network** (finding N3 — raised by no persona, found
+  during the audit and **verified by execution**). The guard was
+  `abs_path.starts_with(&gui_frames_dir)`, but `Path::starts_with` compares
+  path *components* and never resolves `..`, so
+  `Gui_Frames/../../../tmp/x.json` literally begins with the components of
+  `Gui_Frames` and passed — the OS then resolved the traversal at `fs::write`
+  time and the file landed outside the tree. Replaced with `resolve_within()`,
+  which is **structural rather than textual**: every component must be
+  `Component::Normal` (rejecting absolute paths, Windows prefixes, and every
+  form of `..`), then the target's *parent* is canonicalised and required to
+  sit inside the canonicalised base — which also defeats a symlinked parent
+  pointing outward. The `.json` check survives as a secondary filter, never as
+  the control that keeps writes in the tree. Regression tests cover five
+  traversal payloads, absolute paths, and (unix) the symlink case. Same class
+  of defect as the VISA injection fixed earlier today: a guard doing string
+  matching where it needed structural validation.
+- **Nothing binds all interfaces by default any more.** The HTTP server and
+  the OSC listener both bound `0.0.0.0` — OSC was the lone outlier among the
+  agents (AES70, MIDI, DNS-SD already used loopback), so any host on the
+  network could inject OSC events. New `--bind` and `--osc-bind` both default
+  to `127.0.0.1`. ⚠️ **Breaking for anyone reaching the UI from another
+  machine** — pass `--bind 0.0.0.0` explicitly, and read the help text first:
+  loopback is a *mitigation*, not a fix. `/api/save` still has **no
+  authentication**, and putting auth in front of the mutating routes is the
+  stated prerequisite for widening the bind.
+- **A ready-made broker ACL ships as `broker/acl.example`**, separating agents
+  (full access), the UI (read-all, write only `Gui/#` and rescan), and a human
+  operator (the one credential allowed to publish the VISA `Write` topics that
+  execute SCPI on real hardware). Authentication answers *who you are*; this
+  answers *what you may do*. `broker/passwd` and `broker/acl` are now
+  gitignored. **Not yet enforced** — `allow_anonymous true` still stands, and
+  safety still rests on the loopback bind. The template is the policy; turning
+  it on is W1-2's remaining half.
+
+### One-command startup (F1 — the revenue gate)
+
+- **`python3 docker/launch.py`** replaces the 7-command quick start that never
+  mentioned `corepack`/`pnpm`. Preflights Docker, brings up broker +
+  orchestrator, waits for broker health before starting agents, and opens a
+  browser. `FrontEnd/Gui_Frames/` is bind-mounted, so panels edited in the
+  WYSIWYG editor land on disk and show up in `git diff`.
+  The launcher preflights before spending minutes on a build — daemon
+  reachable (with a specific hint for the docker-group case), compose v2 with a
+  v1 fallback, referenced paths present, ports free — and recognises the
+  project's own containers so a second run does not report a bogus port clash.
+- **Agents no longer race the broker.** The broker has a `$SYS/#` healthcheck
+  and the orchestrator gates on `service_healthy`, replacing the confusing
+  retry cascade when agents connected before the broker was accepting.
+- **`--host-net` is documented as the mode a real bench needs**, with the
+  reasoning: containers sit on a NAT'd bridge, so mDNS multicast never crosses
+  it and the VISA subnet scan derives `172.20.0.x` and sweeps a range where no
+  instrument lives. Both failures look identical to "no devices found", which
+  is why the trade-off is spelled out rather than left to be rediscovered.
+  Host mode correctly mounts the *bare-metal* `broker/mosquitto.conf`, since
+  with the port mapping gone the bind address is the only confinement left.
+- **`--hardware` exposes USB and MIDI** (`/dev/bus/usb`, `/dev/snd` with cgroup
+  rules for majors 116/189/180). Bind-mounted rather than declared via
+  `devices:`, which resolves once at container start — so hot-plugged
+  instruments would never appear and one absent at boot would block startup.
+- **The broker host is no longer hard-coded.** `127.0.0.1:1883` appeared in six
+  places, which made running the orchestrator in a container impossible — there
+  `broker` is a different host. New `--mqtt-host` / `--mqtt-port`, with
+  `MQTT_HOST` / `MQTT_PORT` env fallbacks, threaded through the OSC, MIDI,
+  AES70, DNS-SD, and VISA agents and the VISA write daemon.
+
+### One bus, one truth (W3-1 and W3-2, pulled forward)
+
+- **OSC and AES70 discoveries reached nothing at all** (F6). Both sent events
+  only to the in-process `/ws` broadcast channel, which had **no subscribers** —
+  MIDI and VISA were dual-homed onto MQTT and therefore worked. Both now publish
+  at QoS 1 to `OpenAir/Protocol/GuiOsc/<addr>` and `OpenAir/Protocol/AES70/<addr>`.
+  **Two protocols start working.**
+- **The `/ws` route is deleted** — handler, `SystemState`, and `AppState` with
+  it. Ordering was deliberate: publishing first, deleting second, or the two
+  protocols would have gone from "reaching nothing" to "not existing". This also
+  kills N2 — the orphan channel was *why* F6 survived multiple audits, since
+  events arrived somewhere, nothing errored, and nothing logged.
+
+### Discovery actually finds instruments
+
+- **VISA mDNS browsed two service types and missed a scope sitting in plain
+  sight.** Now browses six, and the load-bearing addition is `_http._tcp`: a
+  Rigol advertises only as `rigollan._http._tcp.local.` and was invisible to
+  this path despite listening on VXI-11. Second fix — the code trusted the
+  *advertised* port and built VISA resources pointing at web servers; an
+  advertisement is now only "a host worth probing", and ports 111 (`::INSTR`),
+  5025, and 5555 (`::SOCKET`) are probed with a 700 ms timeout. Hosts are
+  de-duplicated before probing and browses are stopped via `stop_browse`.
+- **The subnet scanner was silently losing devices to its own SYN burst.** It
+  spawned 254 threads at once, each racing several connects on a 200 ms budget;
+  a Rigol that answers port 111 in 25 ms when probed alone was missed entirely.
+  Now chunked at 48 concurrent with a 600 ms timeout — slower scan, no silent
+  losses.
+- **One instrument no longer appears as several rows.** `list_resources()`
+  merged USB + mDNS + subnet output with no de-duplication. Results are now
+  stable-sorted `::INSTR` ahead of `::SOCKET` (VXI-11 carries real device
+  semantics — timeouts, SRQ, clear — and the subnet scanner pushed SOCKET
+  first, so first-wins alone picked the wrong transport), then de-duped. After
+  `*IDN?`, duplicates collapse on `(model, serial)` — **but only when the serial
+  is usable**, because the bench has four HP 34401A DMMs all reporting serial
+  `0` and naive keying would merge them into one device.
+- **Ghost rows survive restarts no longer.** The retained-topic cleanup map was
+  memory-only, so topics published by an earlier run were never cleared and one
+  instrument accumulated stale rows no rescan could remove. `harvest_retained_device_prefixes()`
+  now drains retained deliveries at boot and adopts the prefixes it finds.
+- **Scan progress is visible to whoever is actually using the UI.** It existed
+  only in the orchestrator's stdout — invisible from a browser, doubly so in a
+  container. `scan_log()` publishes `{level, message, ts}` to
+  `OpenAir/System/Protocols/visa/Scan/Log` (QoS 0, **non-retained** — an event
+  stream, so a late joiner does not replay an old scan), and `MqttProvider`
+  prints it to the browser console, colour-coded by level and kept off the React
+  render path.
+- **Discovered rows are tinted by liveness.** Retained state means a device
+  unplugged weeks ago still renders, previously indistinguishable from a live
+  one. Rows carry `_row_state` (`online`/`offline`/`unknown`, 15-minute window)
+  and `OcaTable` tints them. Recency is the primary signal because every agent
+  publishes `last_online`, while `connected` is VISA-only — treating its
+  *absence* as offline marked every live DNS-SD service red. `unknown` is
+  deliberate rather than folded into `offline`: colouring a missing timestamp
+  red would assert more than we know.
+
+### Stop describing what we have not built (W2)
+
+- **Ten crates shipped a `cargo new` template asserting `2 + 2`** — but they
+  were not one situation, and treating them identically would have wasted
+  effort on half. Five (`ember`, `mqtt`, `ptp`, `snmp`, `smpte2138`) are **PyO3
+  shims with real sibling modules** behind the non-default `python` feature —
+  the template `add()` misrepresented working code as unimplemented, and is
+  gone. Five (`mdns`, `nmos`, `rest`, `sap`, `websocket`) are **genuinely
+  empty** and are now marked `pub const STATUS = "stub"` with a test asserting
+  it, so the status is greppable and implementing one forces a deliberate
+  update. `openair-mdns` is recorded as superseded in practice by
+  `openair-dnssd`; `openair-websocket` is noted as unrelated to the browser's
+  MQTT-over-WebSocket transport.
+- **`openair-ember` did not compile at all** — `use pyo3::prelude::*` sat
+  ungated at crate root while `pyo3` is optional behind the `python` feature.
+  **CI never noticed, because it only checked `-p openair-yak`.** Both BackEnd
+  workspaces are now `cargo check --workspace` *and* `cargo test --workspace`;
+  the narrow check had also left 10 inline `#[cfg(test)]` modules never
+  executed.
+- **README Pillar 1 stops over-claiming.** It listed SNMP, Ember+, SMPTE 2138,
+  and PTP as devices that "announce themselves and appear in the UI"; all four
+  are unimplemented. It now separates **working today** (VISA/SCPI, MIDI,
+  DNS-SD/mDNS, AES70, OSC) from scaffolded shims and stubs. The status table
+  further down was always honest — the pillar is what people read.
+
+### Layout and defaults
+
+- **The repo root is now only files a tool can *only* find there.**
+  `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `.nvmrc`, and
+  `requirements.txt` moved to `Deployment/`; `CHANGELOG.md` to `Documents/`.
+  Workspace globs point back up with `../`, and every CI job now uses
+  `pnpm -C Deployment` and `node-version-file: Deployment/.nvmrc`.
+  `rust-toolchain.toml` **cannot** move the same way — rustup searches upward
+  from the crate, so it must sit above all three Cargo workspaces.
+- **The MQTT default is your own broker, not a public one.** The UI defaulted
+  to `test.mosquitto.org` — a public, unauthenticated broker — so a fresh
+  install talked to the internet instead of the system it shipped with. Default
+  is now this host on `:9001`; the public broker remains as an explicitly
+  labelled demo/UI-only preset, and the active preset is highlighted.
+- **The two requirements files say why they are not duplicates** —
+  `requirements.txt` runs the system, `requirements-deploy.txt` serves the FTPS
+  deploy script only, with the `paho-mqtt` bound deliberately identical. The
+  install line is corrected to `pip install -r Deployment/requirements.txt`;
+  installing the deploy-only file left pyvisa missing and every probe failing.
+- **Cache-busters bumped** for `OcaTable.jsx` (v8), `MqttProvider.jsx` (v14),
+  and `MqttSettings.jsx` (v3) — these are `text/babel` scripts compiled in the
+  browser, so without the bump returning users keep the stale copies and see
+  none of the above.
+
 ## 2026-07-18 - Deploy on Every Push · Repository Button · Install Path
 
 - **Every push publishes.** The production deploy workflow only fired for
@@ -98,12 +277,12 @@ different thing from the Sampler and remain in the tree.
   discovery** — plus repo layout, quick start, workspace commands, and an
   honest status table (what is complete vs. what is still roadmap).
 - **Section READMEs added**, so documentation lives with the code:
-  [`contracts/README.md`](contracts/README.md) (schemas, topic tree, codegen,
+  [`contracts/README.md`](../contracts/README.md) (schemas, topic tree, codegen,
   validate/ratchet, and the schema design law that used to live in the
-  planning docs), [`BackEnd/ComProtocols/README.md`](BackEnd/ComProtocols/README.md)
+  planning docs), [`BackEnd/ComProtocols/README.md`](../BackEnd/ComProtocols/README.md)
   (the agent fleet with real/stub status, heartbeats + Last Will, discovery
   topics, rescan semantics, how to add a protocol), and
-  [`ui/README.md`](ui/README.md) (the typed frontend and its ratchets).
+  [`ui/README.md`](../ui/README.md) (the typed frontend and its ratchets).
 - **`Documents/Strategies/` deprecated as documentation**: every plan carries
   a HISTORICAL banner pointing at the feature docs. `Migration_Ledger.md` and
   `Validations/` remain **active records**, not history.

@@ -16,7 +16,7 @@ openair-midi = { path = "../../ComProtocols/openair-midi" }
 openair-aes70 = { path = "../../ComProtocols/openair-aes70" }
 openair-visa = { path = "../../ComProtocols/openair-visa" }
 openair-dnssd = { path = "../../ComProtocols/openair-dnssd" }
-clap = { version = "4.5", features = ["derive"] }
+clap = { version = "4.5", features = ["derive", "env"] }
 tower-http = { version = "0.5", features = ["fs", "cors"] }
 rust-ini = "0.21"
 rumqttc = "0.24"

@@ -13,32 +13,15 @@ mod cli;
 mod mqtt;
 
 use axum::{
-    extract::ws::{Message, WebSocket, WebSocketUpgrade},
-    extract::State,
-    response::IntoResponse,
     routing::get,
     Router,
 };
 use std::net::SocketAddr;
-use std::sync::Arc;
-use tokio::sync::broadcast;
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use clap::Parser;
 use std::path::PathBuf;
 use tower_http::services::ServeDir;
 use tower_http::cors::CorsLayer;
 use axum::http::Method;
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct SystemState {
-    pub topic: String,
-    pub value: Value,
-}
-
-struct AppState {
-    tx: broadcast::Sender<SystemState>,
-}
 
 #[tokio::main]
 // Inline comment: Logic for main
@@ -47,41 +30,55 @@ async fn main() {
     println!("🚀 [RUST ORCHESTRATOR] Booting OPEN-AIR Native Core...");
 
     let root = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+
+    // One broker address for every agent. Previously hard-coded six times.
+    let mqtt_host = args.mqtt_host.clone();
+    let mqtt_port = args.mqtt_port;
     
     // MQTT Config Publisher
     mqtt::publish_protocol_configs(&root, args.no_mqtt);
 
-    let (tx, _rx) = broadcast::channel::<SystemState>(1024);
-    let app_state = Arc::new(AppState { tx: tx.clone() });
-
-    let tx_clone_osc = tx.clone();
+    let osc_bind = args.osc_bind;
+    let (osc_mqtt_host, osc_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
-        println!("🚀 [AGENT] Launching Native OSC Agent on 0.0.0.0:8000...");
-        let osc_agent = openair_osc::OscAgent::new("0.0.0.0".to_string(), 8000);
+        println!("🚀 [AGENT] Launching Native OSC Agent on {osc_bind}:8000...");
+        // SECURITY: loopback unless --osc-bind says otherwise. Every other agent
+        // (AES70, MIDI, DNS-SD) already binds 127.0.0.1; this was the outlier.
+        let osc_agent = openair_osc::OscAgent::new(osc_bind.to_string(), 8000);
         let (osc_tx, mut osc_rx) = tokio::sync::mpsc::channel(100);
         tokio::spawn(async move {
             let _ = osc_agent.start(osc_tx).await;
         });
+        // Publish to MQTT — the one bus every consumer actually reads.
+        // Previously these events went only to the /ws broadcast channel, which
+        // has no subscribers, so OSC discoveries reached nothing at all. MIDI and
+        // VISA were dual-homed and therefore worked; OSC and AES70 were not.
+        let mut osc_mqtt_opts = rumqttc::MqttOptions::new("open-air-osc-publisher", &osc_mqtt_host, osc_mqtt_port);
+        osc_mqtt_opts.set_keep_alive(std::time::Duration::from_secs(30));
+        let (osc_mqtt, mut osc_conn) = rumqttc::Client::new(osc_mqtt_opts, 10);
+        std::thread::spawn(move || { for _ in osc_conn.iter() {} });
+
         while let Some(osc_event) = osc_rx.recv().await {
-            let system_event = SystemState {
-                topic: format!("OpenAir/Protocol/GuiOsc/{}", osc_event.address),
-                value: osc_event.value,
-            };
-            let _ = tx_clone_osc.send(system_event);
+            let topic = format!("OpenAir/Protocol/GuiOsc/{}", osc_event.address);
+            let payload = osc_event.value.to_string();
+            println!("   📡 [OSC MQTT] ⮜ {} = {}", topic, payload);
+            let _ = osc_mqtt.publish(topic.clone(), rumqttc::QoS::AtLeastOnce, false, payload.into_bytes());
+
         }
     });
 
-    let tx_clone_midi = tx.clone();
+    let (midi_mqtt_host, midi_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native MIDI Agent...");
         
-        let devices_task = tokio::task::spawn_blocking(|| {
+        let (dev_host, dev_port) = (midi_mqtt_host.clone(), midi_mqtt_port);
+        let devices_task = tokio::task::spawn_blocking(move || {
             let inputs = openair_midi::oa_midi_scan::scan_inputs();
             let outputs = openair_midi::oa_midi_scan::scan_outputs();
             if !inputs.is_empty() || !outputs.is_empty() {
                 let _ = openair_midi::oa_midi_mqtt_publish::publish_devices_mqtt(
-                    "127.0.0.1", 
-                    1883, 
+                    &dev_host,
+                    dev_port,
                     "OpenAir/System/Protocols/midi/Device", 
                     inputs, 
                     outputs
@@ -92,7 +89,7 @@ async fn main() {
         let midi_agent = std::sync::Arc::new(openair_midi::MidiAgent::new(None)); 
         let (midi_tx, mut midi_rx) = tokio::sync::mpsc::channel(100);
         
-        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-midi-listener", "127.0.0.1", 1883);
+        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-midi-listener", &midi_mqtt_host, midi_mqtt_port);
         mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
         let (mqtt_client, mut mqtt_connection) = rumqttc::Client::new(mqttoptions, 10);
         
@@ -157,12 +154,6 @@ async fn main() {
         });
         
         while let Some(midi_event) = midi_rx.recv().await {
-            let system_event = SystemState {
-                topic: format!("OpenAir/Protocol/MidiIn/{}", midi_event.address),
-                value: midi_event.value.clone(),
-            };
-            let _ = tx_clone_midi.send(system_event);
-            
             if let Some(port_idx) = midi_event.value.get("port_index").and_then(|v| v.as_u64()) {
                 let channel = midi_event.value.get("channel").and_then(|v| v.as_u64()).unwrap_or(0) + 1;
                 let command = midi_event.value.get("command").and_then(|v| v.as_u64()).unwrap_or(0);
@@ -186,7 +177,7 @@ async fn main() {
         }
     });
 
-    let tx_clone_aes70 = tx.clone();
+    let (aes_mqtt_host, aes_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native AES70 Agent (OCP.1 TCP)...");
         let aes70_agent = openair_aes70::Aes70Agent::new("127.0.0.1".to_string(), 50014); 
@@ -198,28 +189,35 @@ async fn main() {
                 }
             }
         });
+        // Publish to MQTT — see the OSC agent above for why this was missing.
+        let mut aes_mqtt_opts = rumqttc::MqttOptions::new("open-air-aes70-publisher", &aes_mqtt_host, aes_mqtt_port);
+        aes_mqtt_opts.set_keep_alive(std::time::Duration::from_secs(30));
+        let (aes_mqtt, mut aes_conn) = rumqttc::Client::new(aes_mqtt_opts, 10);
+        std::thread::spawn(move || { for _ in aes_conn.iter() {} });
+
         while let Some(aes70_event) = aes70_rx.recv().await {
-            let system_event = SystemState {
-                topic: format!("OpenAir/Protocol/AES70/{}", aes70_event.address),
-                value: aes70_event.value,
-            };
-            let _ = tx_clone_aes70.send(system_event);
+            let topic = format!("OpenAir/Protocol/AES70/{}", aes70_event.address);
+            let payload = aes70_event.value.to_string();
+            println!("   📡 [AES70 MQTT] ⮜ {} = {}", topic, payload);
+            let _ = aes_mqtt.publish(topic.clone(), rumqttc::QoS::AtLeastOnce, false, payload.into_bytes());
+
         }
     });
 
     // DNS-SD / mDNS discovery agent — continuous browse on its own thread
     // (mdns-sd is sync); retained topics land in the Discovered tab via the
     // same builder sweep as VISA/MIDI. No longer a stub.
-    std::thread::spawn(|| {
+    let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
         println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");
-        openair_dnssd::run_browse_agent("127.0.0.1", 1883);
+        openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
     });
 
-    let tx_clone_visa = tx.clone();
+    let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
 
-        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-visa-scanner", "127.0.0.1", 1883);
+        let mut mqttoptions = rumqttc::MqttOptions::new("open-air-visa-scanner", &visa_mqtt_host, visa_mqtt_port);
         mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
         let (mqtt_client, mut mqtt_connection) = rumqttc::Client::new(mqttoptions, 10);
 
@@ -236,7 +234,31 @@ async fn main() {
         // this loop. Capacity 1: triggers during a running scan coalesce.
         let (rescan_tx, mut rescan_rx) = tokio::sync::mpsc::channel::<()>(1);
 
-        spawn_visa_write_daemon(topic_to_resource.clone(), rescan_tx);
+        spawn_visa_write_daemon(topic_to_resource.clone(), rescan_tx, visa_mqtt_host.clone(), visa_mqtt_port);
+
+        // Seed the cleanup map from what is ALREADY retained on the broker.
+        //
+        // Retained topics outlive this process; the in-memory map does not. After
+        // a restart the agent had no record of what it had published, so device
+        // topics from previous runs were never cleared — they simply accumulated.
+        // The visible symptom was one instrument appearing as several rows in the
+        // Discovered tab, each a fossil of an earlier scan, and no rescan could
+        // remove them because nothing knew they existed.
+        //
+        // Harvesting them at boot makes the existing cleanup work across
+        // restarts, which is what it always intended to do.
+        {
+            let harvested = harvest_retained_device_prefixes(&visa_mqtt_host, visa_mqtt_port);
+            if !harvested.is_empty() {
+                println!("   🧹 [VISA AGENT] adopted {} retained device prefix(es) from a previous run", harvested.len());
+                let mut map = topic_to_resource.lock().unwrap();
+                for prefix in harvested {
+                    // Value is unused by the cleanup (it only needs the keys);
+                    // a real resource is filled in by the next successful scan.
+                    map.entry(prefix).or_insert_with(String::new);
+                }
+            }
+        }
 
         loop {
 
@@ -265,19 +287,37 @@ async fn main() {
             }
         }
 
+        scan_log(&mqtt_client, "info", "Scan started — hunting for VXI-11/LAN gateways and instruments…");
+
         let devices = tokio::task::spawn_blocking(|| {
             openair_visa::oa_visa_scan_for_devices::list_resources()
         }).await.unwrap_or_default();
 
+        scan_log(&mqtt_client, "info", format!("Found {} candidate resource(s); probing *IDN?…", devices.len()));
+
         let mut counts: std::collections::HashMap<(String, String), usize> = std::collections::HashMap::new();
+
+        // One physical instrument can be reachable by more than one transport —
+        // a Rigol scope answers BOTH `TCPIP::<ip>::INSTR` (VXI-11) and
+        // `TCPIP::<ip>::5555::SOCKET`, and showed up as two identical rows.
+        // After *IDN? we know the real identity, so publish each instrument once.
+        //
+        // Keyed on the SERIAL, and only when the serial is actually meaningful.
+        // This bench has four HP 34401A DMMs that all report serial "0"; keying
+        // on (model, serial) alone would silently merge four real instruments
+        // into one. When a device gives us nothing to identify itself with, every
+        // resource is kept — a duplicate row is a far smaller error than a
+        // disappeared instrument.
+        let mut seen_identities: std::collections::HashSet<(String, String)> =
+            std::collections::HashSet::new();
 
         // Fresh map per scan; swapped into the shared handle after the loop.
         let mut scan_topic_to_resource = std::collections::HashMap::new();
 
-        for dev in devices {
-            println!("   📡 [VISA AGENT] Probing resource: {}", dev);
+        let total = devices.len();
+        for (i, dev) in devices.into_iter().enumerate() {
+            scan_log(&mqtt_client, "info", format!("[{}/{}] probing {}", i + 1, total, dev));
             
-            let mut info = serde_json::json!({ "resource": dev, "status": "found" });
             if let Ok(output) = tokio::process::Command::new("python3")
                 .arg("-c")
                 .arg(VISA_PROBE_SCRIPT)
@@ -297,6 +337,26 @@ async fn main() {
                         merged.insert("device_type".to_string(), serde_json::Value::String(device_type.clone()));
                         merged.insert("notes".to_string(), serde_json::Value::String(notes));
                         
+                        // Suppress a second transport for an instrument already
+                        // published. First sighting wins, and list_resources()
+                        // orders sources USB -> mDNS -> subnet sweep, so the more
+                        // specific discovery (and VXI-11 INSTR before raw SOCKET)
+                        // is the one that survives.
+                        let serial = merged.get("serial").and_then(|v| v.as_str()).unwrap_or("").trim().to_string();
+                        let serial_is_usable = !serial.is_empty()
+                            && serial != "0"
+                            && !serial.eq_ignore_ascii_case("none")
+                            && !serial.eq_ignore_ascii_case("n/a");
+                        if serial_is_usable {
+                            let identity = (model_str.clone(), serial.clone());
+                            if !seen_identities.insert(identity) {
+                                scan_log(&mqtt_client, "info", format!(
+                                    "{} (serial {}) already found on another transport — skipping {}",
+                                    model_str, serial, dev));
+                                continue;
+                            }
+                        }
+
                         let key = (device_type.clone(), model_str.clone());
                         let count = counts.entry(key).or_insert(0);
                         
@@ -327,21 +387,21 @@ async fn main() {
                         
                         *count += 1;
                         
-                        info = serde_json::Value::Object(merged);
-                        println!("     ✅ Identified & Published to MQTT: {}", model_str);
+                        scan_log(&mqtt_client, "ok",
+                            format!("identified {} {} at {}", 
+                                merged.get("manufacturer").and_then(|m| m.as_str()).unwrap_or("?"),
+                                model_str, dev));
                     } else {
-                        println!("     ⚠️  Identify failed: {:?}", parsed.get("error"));
+                        scan_log(&mqtt_client, "warn",
+                            format!("no identity from {} — {}", dev,
+                                parsed.get("error").and_then(|e| e.as_str()).unwrap_or("no response")));
                     }
                 }
             }
 
-            let system_event = SystemState {
-                topic: format!("OpenAir/System/Protocols/visa/Device/Found"),
-                value: info,
-            };
-            let _ = tx_clone_visa.send(system_event);
         }
-        println!("✅ [VISA AGENT] Scan & MQTT Publish complete.");
+        scan_log(&mqtt_client, "ok",
+            format!("Scan complete — {} device(s) published to the bus", scan_topic_to_resource.len()));
 
         // Publish the fresh topic→resource mapping for the Write daemon.
         *topic_to_resource.lock().unwrap() = scan_topic_to_resource;
@@ -388,22 +448,20 @@ async fn main() {
         .allow_methods([Method::GET, Method::POST])
         .allow_origin(tower_http::cors::Any);
 
-    let ws_router = Router::new()
-        .route("/ws", get(ws_handler))
-        .with_state(app_state);
-
 use axum::response::Redirect;
 
     let app = Router::new()
         .route("/", get(|| async { Redirect::temporary("/index.html") }))
         .nest("/api", api_router)
         .route("/api/health", get(|| async { "Rust Core is Healthy" }))
-        .merge(ws_router)
         .fallback_service(ServeDir::new(root.join("FrontEnd")).append_index_html_on_directories(true))
         .layer(cors);
 
     // Run on the frontend port, since orchestrator replaces the python server.
-    let addr = SocketAddr::from(([0, 0, 0, 0], args.port));
+    // SECURITY: binds loopback unless --bind is given explicitly. This server
+    // exposes POST /api/save (a file write) with no authentication, so exposing
+    // it on the network is an opt-in decision, not the default. See cli.rs.
+    let addr = SocketAddr::from((args.bind, args.port));
     
     let listener = match tokio::net::TcpListener::bind(addr).await {
         Ok(l) => l,
@@ -436,49 +494,82 @@ use axum::response::Redirect;
     }
 }
 
-// Inline comment: Logic for ws_handler
-async fn ws_handler(
-    ws: WebSocketUpgrade,
-    State(state): State<Arc<AppState>>,
-) -> impl IntoResponse {
-    println!("🔌 [WEBSOCKET] Client requested connection...");
-    ws.on_upgrade(|socket| handle_socket(socket, state))
+
+/// Topic carrying live scan narration to anyone watching — currently the browser
+/// console (`MqttProvider.jsx`), which subscribes and prints each line.
+///
+/// Non-retained on purpose: this is an *event stream*, not state. A late joiner
+/// should not be shown the tail of a scan that finished an hour ago as though it
+/// were happening now. The resulting device records ARE retained; the narration
+/// about producing them is not.
+const SCAN_LOG_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/Log";
+
+/// Print a scan line to the container log AND publish it to the bus.
+///
+/// The container log is invisible to anyone running the UI — which is the whole
+/// problem this solves. Everything that matters goes on the bus (design audit
+/// §4.6); this is that principle applied to the scan.
+fn scan_log(client: &rumqttc::Client, level: &str, message: impl AsRef<str>) {
+    let message = message.as_ref();
+    println!("   📡 [VISA SCAN] {message}");
+    let payload = serde_json::json!({
+        "level": level,       // "info" | "ok" | "warn" | "error"
+        "message": message,
+        "ts": std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs())
+            .unwrap_or(0),
+    })
+    .to_string();
+    // QoS 0, non-retained: dropping a narration line under load is preferable to
+    // slowing the scan down for it.
+    let _ = client.publish(SCAN_LOG_TOPIC, rumqttc::QoS::AtMostOnce, false, payload.into_bytes());
 }
 
-// Inline comment: Logic for handle_socket
-async fn handle_socket(mut socket: WebSocket, state: Arc<AppState>) {
-    println!("🟢 [WEBSOCKET] Client connected!");
-    let mut rx = state.tx.subscribe();
-    loop {
-        tokio::select! {
-            Ok(msg) = rx.recv() => {
-                if let Ok(json_str) = serde_json::to_string(&msg) {
-                    if socket.send(Message::Text(json_str)).await.is_err() {
-                        println!("🔴 [WEBSOCKET] Client disconnected.");
-                        break;
-                    }
-                }
+/// Collect the device-topic prefixes already retained on the broker.
+///
+/// MQTT has no "delete by wildcard": clearing retained state requires publishing
+/// an empty payload to each exact topic. So to tidy up after a previous run we
+/// must first find out what that run left behind.
+///
+/// Subscribes to the device wildcard, drains retained deliveries for a short
+/// window, and returns the distinct `.../<Category>/<Model>/<DevN>` prefixes.
+fn harvest_retained_device_prefixes(host: &str, port: u16) -> Vec<String> {
+    use std::collections::HashSet;
+
+    let mut opts = rumqttc::MqttOptions::new("open-air-visa-retained-harvest", host, port);
+    opts.set_keep_alive(std::time::Duration::from_secs(5));
+    let (client, mut connection) = rumqttc::Client::new(opts, 64);
+    if client
+        .subscribe("OpenAir/System/Protocols/visa/Device/#", rumqttc::QoS::AtLeastOnce)
+        .is_err()
+    {
+        return Vec::new();
+    }
+
+    let mut prefixes: HashSet<String> = HashSet::new();
+    let deadline = std::time::Instant::now() + std::time::Duration::from_millis(1500);
+    for notification in connection.iter() {
+        if std::time::Instant::now() > deadline {
+            break;
+        }
+        if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(p))) = notification {
+            // Only retained deliveries describe prior state; live traffic during
+            // the window is somebody else's business.
+            if !p.retain || p.payload.is_empty() {
+                continue;
             }
-            Some(result) = socket.recv() => {
-                match result {
-                    Ok(Message::Text(text)) => {
-                        println!("📥 [WEBSOCKET] Received from UI: {}", text);
-                    }
-                    Ok(Message::Close(_)) => {
-                        println!("🔴 [WEBSOCKET] Client closed connection.");
-                        break;
-                    }
-                    Err(_) => {
-                        println!("⚠️ [WEBSOCKET] Error receiving from client.");
-                        break;
-                    }
-                    _ => {}
+            // .../Device/<Category>/<Model>/<DevN>/<key>  ->  strip <key>
+            if let Some((prefix, _key)) = p.topic.rsplit_once('/') {
+                if prefix.contains("/Device/") && prefix != "OpenAir/System/Protocols/visa/Device" {
+                    prefixes.insert(prefix.to_string());
                 }
             }
         }
     }
+    let _ = client.disconnect();
+    prefixes.into_iter().collect()
 }
-
 
 /// Executes one SCPI write or query against one instrument.
 ///
@@ -563,10 +654,12 @@ except Exception as e:
 fn spawn_visa_write_daemon(
     topic_to_resource: std::sync::Arc<std::sync::Mutex<std::collections::HashMap<String, String>>>,
     rescan_tx: tokio::sync::mpsc::Sender<()>,
+    daemon_host: String,
+    daemon_port: u16,
 ) {
     const RESCAN_TOPIC: &str = "OpenAir/System/Protocols/visa/Device/Rescan";
     println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan trigger...");
-    let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", "127.0.0.1", 1883);
+    let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", &daemon_host, daemon_port);
     mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
     let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
 

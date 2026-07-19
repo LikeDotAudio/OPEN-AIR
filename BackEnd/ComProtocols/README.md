@@ -18,9 +18,12 @@ no side channel, no shared memory, no direct call — which is why
 | `openair-yak` | **live** | The middleware definition plane: translates GUI intent into vendor SCPI via the YAK verb grammar (`SET / RIG / NAB / DO`) |
 | `openair-midi` | **live** | Enumerates MIDI in/out ports, publishes device topics, routes note/CC/program/pitch-bend both directions |
 | `openair-dnssd` | **live** | Browses DNS-SD/mDNS continuously: enumerates every advertised service type, publishes each resolved instance, clears retained topics when a service vanishes |
+| `openair-ravenna` | **live** | Discovers RAVENNA/AES67 streams: browses `_ravenna._tcp`/`_rtsp._tcp`, fetches each session's SDP over RTSP DESCRIBE, and files a stream only once its own SDP says it carries audio |
+| `openair-sap` | **live** | The other half of AES67 discovery: passively listens on the well-known SAP multicast groups (UDP 9875) for the raw SDP that Dante-in-AES67-mode pushes, publishes each audio session, and clears it on a SAP deletion or announcement timeout. Listen only — never announces |
+| `openair-avb-milan` | **live** | AVB/Milan discovery via AVDECC (IEEE 1722.1) — the only Layer 2 agent: captures raw Ethernet ADP announcements on `91:E0:F0:01:00:00`, decodes entity capabilities and gPTP grandmaster, expires entities on their own `valid_time`. Needs `CAP_NET_RAW`. Ships `avdecc-probe` (find entities) and `avdecc-identify` (blink a device's LED, like Hive's Identify button) |
 | `openair-osc` | **live** | OSC agent (UDP) |
 | `openair-aes70` | **live** | AES70/OCA parser (`nom`) |
-| `openair-ptp` | **live** | PTP timing |
+| `openair-ptp` | **live** | Watches PTPv1, PTPv2 and gPTP simultaneously on one NIC (UDP 319/320 + raw Ethernet 0x88F7), correlates Sync↔Follow_Up and the delay exchanges, and publishes one row per PTP port. Needs `CAP_NET_RAW` + `CAP_NET_BIND_SERVICE`. Ships `ptp-monitor` for the live packet view. Never transmits — an Announce could win a BMCA election |
 | `openair-snmp` | **live** | SNMP polling |
 | `openair-ember` | **live** | Ember+ |
 | `openair-smpte2138` | **live** | SMPTE 2138 (protobuf) |
@@ -28,7 +31,6 @@ no side channel, no shared memory, no direct call — which is why
 | `openair-mdns` | **stub** | 25-line placeholder — publishes `status = stub` |
 | `openair-nmos` | **stub** | ″ |
 | `openair-rest` | **stub** | ″ |
-| `openair-sap` | **stub** | ″ |
 | `openair-websocket` | **stub** | ″ |
 
 **Stubs tell the truth.** The orchestrator publishes `status = stub` for

@@ -1,0 +1,19 @@
+[package]
+name = "openair-avb-milan"
+version = "0.1.0"
+edition = "2024"
+
+# AVB is Layer 2, so this crate shares nothing with the AES67 agents: no SDP
+# parser, no IP socket. It needs libc directly for AF_PACKET raw capture, which
+# std does not expose.
+[dependencies]
+libc = "0.2"
+rumqttc = "0.24"
+
+[[bin]]
+name = "avdecc-probe"
+path = "src/bin/avdecc-probe.rs"
+
+[[bin]]
+name = "avdecc-identify"
+path = "src/bin/avdecc-identify.rs"

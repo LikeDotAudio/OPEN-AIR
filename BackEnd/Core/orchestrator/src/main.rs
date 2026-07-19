@@ -217,6 +217,68 @@ async fn main() {
         openair_chromecast::run_browse_agent(&cast_mqtt_host, cast_mqtt_port);
     });
 
+    // RAVENNA / AES67 audio streams. Follows mDNS -> RTSP DESCRIBE -> SDP, so a
+    // stream is only claimed once its own SDP says it carries audio (port 554
+    // alone proves nothing — IP cameras answer RTSP too).
+    let (rav_mqtt_host, rav_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        openair_ravenna::run_browse_agent(&rav_mqtt_host, rav_mqtt_port);
+    });
+
+    // SAP — the other half of AES67 discovery. RAVENNA announces over mDNS;
+    // Dante in AES67 mode pushes raw SDP to multicast 9875 instead, and never
+    // answers a query. Streams announced both ways (RAV2SAP, or a device with
+    // SAP publishing enabled) appear under both agents on purpose: which
+    // mechanisms a stream announces on is itself the interop answer.
+    let (sap_mqtt_host, sap_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        println!("🚀 [AGENT] Launching Native SAP Agent (passive multicast listen)...");
+        openair_sap::run_listen_agent(&sap_mqtt_host, sap_mqtt_port);
+    });
+
+    // Dante, in both personalities: native mDNS (_netaudio-*) AND the SAP
+    // multicast group it uses instead once AES67 mode is enabled.
+    let (dante_mqtt_host, dante_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        openair_dante::run_browse_agent(&dante_mqtt_host, dante_mqtt_port);
+    });
+
+    // PTP / gPTP clock discovery. Spans two transports at once because the
+    // three protocols do not share one: PTPv1 and PTPv2 over UDP 319/320,
+    // gPTP over raw Ethernet 0x88F7. Publishes on state change plus a slow
+    // heartbeat rather than per packet — gPTP Sync alone is 8/s per port, and
+    // a retained write per Sync would be thousands a minute saying nothing new.
+    let (ptp_mqtt_host, ptp_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        println!("🚀 [AGENT] Launching Native PTP Agent (v1 + v2 + gPTP)...");
+        openair_ptp::run_listen_agent(&ptp_mqtt_host, ptp_mqtt_port);
+    });
+
+    // AVB / Milan via AVDECC (IEEE 1722.1). The odd one out: AVB is Layer 2,
+    // so this agent reads raw Ethernet frames rather than opening a socket on
+    // an IP address — and therefore needs CAP_NET_RAW. Without that capability
+    // it logs the remedy once and exits its thread rather than restart-looping.
+    // Discovery (ADP) only: no SRP reservation, no ACMP connection management.
+    let (avb_mqtt_host, avb_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        println!("🚀 [AGENT] Launching Native AVB/Milan Agent (AVDECC ADP listen)...");
+        openair_avb_milan::run_listen_agent(&avb_mqtt_host, avb_mqtt_port);
+    });
+
+    // Printers: six Bonjour services per device, merged into one row by UUID.
+    let (prn_mqtt_host, prn_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        openair_printers::run_browse_agent(&prn_mqtt_host, prn_mqtt_port);
+    });
+
+    // AirPlay / HomeKit receivers — many roles, one device.
+    let (atv_host, atv_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || { openair_appletv::run_browse_agent(&atv_host, atv_port); });
+
+    // AMWA NMOS IS-04/IS-09 — each service is a distinct API role, keyed host+port.
+    let (nmos_host, nmos_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || { openair_nmos::run_browse_agent(&nmos_host, nmos_port); });
+
     let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     std::thread::spawn(move || {
         println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");
@@ -258,7 +320,26 @@ async fn main() {
         // Harvesting them at boot makes the existing cleanup work across
         // restarts, which is what it always intended to do.
         {
-            let harvested = harvest_retained_device_prefixes(&visa_mqtt_host, visa_mqtt_port);
+            // Run on a plain OS thread, NOT this one.
+            //
+            // This task is a `tokio::spawn`, so it runs on a runtime worker.
+            // `harvest_retained_device_prefixes` iterates a blocking rumqttc
+            // `Connection`, and that iterator calls `Runtime::block_on`
+            // internally (rumqttc client.rs:433) — starting a runtime from
+            // inside one, which tokio panics on. The panic killed this whole
+            // task before it ever scanned, so no VISA device topics were ever
+            // published and every instrument silently vanished from the
+            // Discovered tab. A plain thread carries no runtime context, so
+            // rumqttc's own runtime is free to block there.
+            //
+            // The other `connection.iter()` calls in this file were already on
+            // `std::thread::spawn` for the same reason; this one was the outlier.
+            let harvested = {
+                let host = visa_mqtt_host.clone();
+                std::thread::spawn(move || harvest_retained_device_prefixes(&host, visa_mqtt_port))
+                    .join()
+                    .unwrap_or_default()
+            };
             if !harvested.is_empty() {
                 println!("   🧹 [VISA AGENT] adopted {} retained device prefix(es) from a previous run", harvested.len());
                 let mut map = topic_to_resource.lock().unwrap();
@@ -279,12 +360,8 @@ async fn main() {
             let old_prefixes: Vec<String> =
                 topic_to_resource.lock().unwrap().keys().cloned().collect();
             if !old_prefixes.is_empty() {
-                const DEVICE_KEYS: [&str; 13] = [
-                    "manufacturer", "model", "serial", "firmware", "raw_idn", "resource",
-                    "status", "device_type", "notes", "last_online", "connected", "Write", "Read",
-                ];
                 for prefix in &old_prefixes {
-                    for key in DEVICE_KEYS {
+                    for key in DEVICE_TOPIC_KEYS {
                         let _ = mqtt_client.publish(
                             format!("{}/{}", prefix, key),
                             rumqttc::QoS::AtLeastOnce,
@@ -297,7 +374,11 @@ async fn main() {
             }
         }
 
+        set_scan_state(&mqtt_client, "scanning");
         scan_log(&mqtt_client, "info", "Scan started — hunting for VXI-11/LAN gateways and instruments…");
+        // Regenerate panels immediately so the tables show "scanning" rather than
+        // last scan's results while this one runs.
+        spawn_discovered_builder();
 
         let devices = tokio::task::spawn_blocking(|| {
             openair_visa::oa_visa_scan_for_devices::list_resources()
@@ -410,6 +491,7 @@ async fn main() {
             }
 
         }
+        set_scan_state(&mqtt_client, "idle");
         scan_log(&mqtt_client, "ok",
             format!("Scan complete — {} device(s) published to the bus", scan_topic_to_resource.len()));
 
@@ -514,6 +596,37 @@ use axum::response::Redirect;
 /// about producing them is not.
 const SCAN_LOG_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/Log";
 
+/// Retained scan state: `scanning` | `idle`.
+///
+/// Retained, unlike the log, because this IS state — a page loaded mid-scan
+/// should know a scan is running. The Discovered-tab builder reads it and marks
+/// every row amber while a scan is in flight, so a stale table cannot be
+/// mistaken for a current one.
+const SCAN_STATE_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/State";
+
+/// Regenerate the Discovered-tab panels.
+///
+/// Called at scan START (so the tables show "scanning" instead of last scan's
+/// results) as well as at the end. Fire-and-forget: a failed regeneration must
+/// not abort a scan.
+fn spawn_discovered_builder() {
+    let builder = std::env::current_dir()
+        .unwrap_or_else(|_| std::path::PathBuf::from("."))
+        .join("Deployment/build_discovered_gui.py");
+    if !builder.is_file() {
+        return;
+    }
+    let _ = std::process::Command::new("python3")
+        .arg(&builder)
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .spawn();
+}
+
+fn set_scan_state(client: &rumqttc::Client, state: &str) {
+    let _ = client.publish(SCAN_STATE_TOPIC, rumqttc::QoS::AtLeastOnce, true, state.as_bytes().to_vec());
+}
+
 /// Print a scan line to the container log AND publish it to the bus.
 ///
 /// The container log is invisible to anyone running the UI — which is the whole
@@ -535,6 +648,16 @@ fn scan_log(client: &rumqttc::Client, level: &str, message: impl AsRef<str>) {
     // slowing the scan down for it.
     let _ = client.publish(SCAN_LOG_TOPIC, rumqttc::QoS::AtMostOnce, false, payload.into_bytes());
 }
+
+/// Every attribute key published under a discovered-device prefix.
+///
+/// Shared by the per-scan cleanup and the CLEAR button, because deleting
+/// retained state means publishing an empty payload to each exact topic — so
+/// both paths must agree on the full key list or they leave fragments behind.
+const DEVICE_TOPIC_KEYS: [&str; 13] = [
+    "manufacturer", "model", "serial", "firmware", "raw_idn", "resource",
+    "status", "device_type", "notes", "last_online", "connected", "Write", "Read",
+];
 
 /// Collect the device-topic prefixes already retained on the broker.
 ///
@@ -668,19 +791,52 @@ fn spawn_visa_write_daemon(
     daemon_port: u16,
 ) {
     const RESCAN_TOPIC: &str = "OpenAir/System/Protocols/visa/Device/Rescan";
-    println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan trigger...");
+    /// Wipes every retained discovered-device topic. The Discovered tab's CLEAR
+    /// button publishes here.
+    const CLEAR_TOPIC: &str = "OpenAir/System/Protocols/visa/Device/Clear";
+    println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan/clear triggers...");
     let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", &daemon_host, daemon_port);
     mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
     let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
 
     let _ = mqtt_client_sub.subscribe("OpenAir/System/Protocols/visa/Device/+/+/+/Write", rumqttc::QoS::AtLeastOnce);
     let _ = mqtt_client_sub.subscribe(RESCAN_TOPIC, rumqttc::QoS::AtLeastOnce);
+    let _ = mqtt_client_sub.subscribe(CLEAR_TOPIC, rumqttc::QoS::AtLeastOnce);
 
     std::thread::spawn(move || {
         for notification in mqtt_connection_sub.iter() {
             if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
                 let topic = publish.topic.clone();
                 let payload = String::from_utf8_lossy(&publish.payload).trim().to_string();
+
+                if topic == CLEAR_TOPIC {
+                    // Same retained-vs-live rule as rescan: a retained replay at
+                    // boot must not wipe the registry.
+                    if !publish.retain && is_truthy_trigger(&payload) {
+                        println!("   🧹 [VISA MQTT] Clear requested — wiping retained device topics");
+                        // Harvest what is actually retained, then delete each by
+                        // publishing an empty retained payload. MQTT has no
+                        // delete-by-wildcard, and the in-memory map only knows
+                        // about devices this process found — anything left by an
+                        // earlier run would otherwise survive forever.
+                        let prefixes = harvest_retained_device_prefixes(&daemon_host, daemon_port);
+                        let mut wiped = 0usize;
+                        for prefix in &prefixes {
+                            for key in DEVICE_TOPIC_KEYS {
+                                let _ = mqtt_client_sub.publish(
+                                    format!("{prefix}/{key}"),
+                                    rumqttc::QoS::AtLeastOnce,
+                                    true,
+                                    Vec::<u8>::new(),
+                                );
+                            }
+                            wiped += 1;
+                        }
+                        topic_to_resource.lock().unwrap().clear();
+                        println!("   🧹 [VISA MQTT] cleared {wiped} device(s)");
+                    }
+                    continue;
+                }
 
                 if topic == RESCAN_TOPIC {
                     // Retained messages are state, not commands: only a live

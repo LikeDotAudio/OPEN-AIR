@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import socket
 import subprocess
@@ -88,12 +89,335 @@ def step(msg: str) -> None:
 
 # ─────────────────────────── docker plumbing ───────────────────────────
 
-# Set by main() from --host-net. Host networking is required for mDNS/DNS-SD
-# discovery to see the LAN: multicast does not cross a docker bridge.
-USE_HOST_NET = False
+# Host networking is the DEFAULT, and `--bridge-net` opts out.
+#
+# It was opt-in, and that was the wrong default: discovery is what this system
+# is for, and none of it works across a docker bridge.
+#
+#   * mDNS/DNS-SD is multicast (224.0.0.251) — does not cross the bridge, and
+#     resolves whatever it does find to the bridge gateway.
+#   * SAP is multicast (239.255.255.255) — same.
+#   * gPTP and AVDECC are Layer 2, EtherType 0x88F7 / 0x22F0 — the container
+#     sees only its own veth, so no amount of CAP_NET_RAW helps. Verified: the
+#     bridged container's /sys/class/net contains exactly `eth0` and `lo`.
+#
+# Every one of those fails *quietly* — an agent that hears nothing looks
+# identical to a network with nothing on it. Defaulting to the mode where
+# discovery actually works, and requiring a flag to break it, is the honest way
+# round.
+#
+# Security is unchanged: the host overlay binds the broker and the HTTP API to
+# 127.0.0.1 explicitly, which replaces the port-mapping confinement the bridge
+# setup relied on. See docker-compose.host.yml.
+USE_HOST_NET = True
 # Set by main() from --hardware. Exposes /dev/snd and /dev/bus/usb so MIDI and
 # USB instruments are visible; without it they silently enumerate as zero.
 USE_HARDWARE = False
+
+
+# ─────────────────────────── host diagnostic tools ───────────────────────────
+#
+# The containerised agents need no host privileges: compose grants the container
+# NET_RAW/NET_ADMIN/NET_BIND_SERVICE and the Dockerfile setcaps the binary, so
+# PTP and AVB work with no password at all.
+#
+# These standalone CLIs are different. They run ON the host, outside any
+# container, so the kernel needs file capabilities on each binary — and only
+# root can set those. That is the one thing in the whole launch that genuinely
+# requires elevation, which is why it is asked for explicitly, once, with the
+# exact commands shown first.
+#
+# Declining is fine and non-fatal: the system runs, the tabs populate, you just
+# do not get the packet-level views.
+HOST_TOOLS = [
+    # (crate directory, binary, capabilities, what it is for)
+    ("openair-ptp", "ptp-monitor", "cap_net_raw,cap_net_bind_service",
+     "live PTPv1/PTPv2/gPTP packet view"),
+    ("openair-AVB-Milan", "avdecc-probe", "cap_net_raw,cap_net_admin",
+     "find AVB/Milan entities"),
+    ("openair-AVB-Milan", "avdecc-identify", "cap_net_raw,cap_net_admin",
+     "blink an AVB device's LED"),
+]
+TOOL_BIN_DIR = Path.home() / ".local" / "bin"
+
+# Inbound UDP the discovery agents must be able to RECEIVE.
+#
+# Every one of these is multicast listening, not a service we expose. They are
+# needed because a host firewall with a default-deny INPUT policy drops them
+# silently — and "silently" is the whole problem: an agent that receives
+# nothing is indistinguishable from a network with nothing on it.
+#
+# This bench lost an hour to exactly that. ufw was dropping UDP 319/320, so
+# PTPv1 and PTPv2 were invisible while gPTP worked perfectly, because raw
+# AF_PACKET capture sits BELOW netfilter and UDP does not. tcpdump (also below
+# netfilter) saw the traffic the sockets never got.
+#
+# NOTE: gPTP and AVDECC need NO rule here for that same reason — they are
+# Layer 2 and never reach the IP firewall. Only the UDP-carried protocols do.
+DISCOVERY_UDP_PORTS = [
+    (319, "PTP event messages (Sync, Delay_Req)"),
+    (320, "PTP general messages (Follow_Up, Announce)"),
+    (5353, "mDNS/DNS-SD — RAVENNA, Dante, NMOS, Cast, AirPlay, printers"),
+    (9875, "SAP — Dante in AES67 mode"),
+]
+FIREWALL_MARKER = Path.home() / ".cache" / "openair" / "firewall-applied"
+
+
+def ufw_is_active() -> bool:
+    """True when ufw is installed and running.
+
+    Checked without sudo on purpose: `ufw status` needs root, and prompting for
+    a password just to discover there is nothing to do is exactly the friction
+    this whole path exists to remove.
+    """
+    if not shutil.which("ufw"):
+        return False
+    r = subprocess.run(["systemctl", "is-active", "ufw"], capture_output=True, text=True)
+    return r.stdout.strip() == "active"
+
+
+def offer_firewall_fix(assume_yes: bool = False) -> None:
+    """Open the discovery ports — asked for ONLY when they are demonstrably shut.
+
+    ufw's rule files are root-only and `sudo -n` needs cached credentials, so
+    there is no way to READ the current rules without a password. Bookkeeping
+    (a marker file recording what we applied) is not the same thing: it misses
+    rules added by hand and goes stale the moment ufw is reset.
+
+    So the check is empirical instead. The PTP agent publishes what it actually
+    received, split by transport, and `udp_blocked` is true only when UDP
+    sockets opened, Layer 2 traffic IS flowing, and UDP received nothing — the
+    unmistakable signature of a firewall, since raw capture sits below netfilter
+    and UDP does not.
+
+    Rules present and working -> no prompt, ever. Rules missing -> we can prove
+    it before asking.
+    """
+    if not ufw_is_active():
+        return
+    ifaces = capture_interfaces()
+    if not ifaces:
+        return
+    ports = ",".join(str(p) for p, _ in DISCOVERY_UDP_PORTS)
+
+    warn("discovery traffic is being dropped by the firewall")
+    print("    The PTP agent has Layer 2 traffic flowing but received ZERO UDP.")
+    print("    Raw capture sits below netfilter; UDP does not — so this is ufw,")
+    print("    not an empty network. Affected: PTPv1/PTPv2, mDNS discovery, SAP.")
+    print("    Proposed (inbound UDP only, scoped per interface):")
+    for iface in ifaces:
+        print(f"      {C.DIM}sudo ufw allow in on {iface} to any port {ports} proto udp{C.OFF}")
+    print()
+
+    if not assume_yes:
+        try:
+            answer = input("  Open these ports now? [Y/n] ").strip().lower()
+        except EOFError:
+            answer = "n"
+        if answer not in ("", "y", "yes"):
+            warn("skipped — discovery will stay partial until those ports are open")
+            return
+
+    for iface in ifaces:
+        r = subprocess.run(
+            ["sudo", "ufw", "allow", "in", "on", iface,
+             "to", "any", "port", ports, "proto", "udp"],
+            capture_output=True, text=True,
+        )
+        if r.returncode != 0:
+            warn(f"ufw rule failed on {iface}: {r.stderr.strip()}")
+            return
+    ok(f"discovery ports opened on {', '.join(ifaces)} — restart to pick them up")
+
+
+def capture_interfaces() -> list[str]:
+    """Physical interfaces the agents listen on — the ones worth scoping to."""
+    out = []
+    net = Path("/sys/class/net")
+    if not net.is_dir():
+        return out
+    for iface in sorted(p.name for p in net.iterdir()):
+        if iface == "lo" or iface.startswith(("br-", "docker", "veth", "virbr")):
+            continue
+        try:
+            if (net / iface / "operstate").read_text().strip() == "up":
+                out.append(iface)
+        except OSError:
+            continue
+    return out
+
+
+def tool_needs_caps(path: Path, wanted: str) -> bool:
+    """True when the binary is missing its capabilities (so sudo is warranted)."""
+    if not path.exists():
+        return True
+    try:
+        out = subprocess.run(["getcap", str(path)], capture_output=True, text=True).stdout
+    except FileNotFoundError:
+        return True   # no getcap: assume it needs doing rather than skip silently
+    return not all(cap in out for cap in wanted.split(","))
+
+
+def install_host_tools(assume_yes: bool = False) -> None:
+    """Build the diagnostic CLIs and grant them capabilities, asking once.
+
+    Ordering matters: everything that does NOT need a password happens first, so
+    the prompt appears only if there is genuinely something to elevate for.
+    """
+    protocols = REPO_ROOT / "BackEnd" / "ComProtocols"
+    if not shutil.which("cargo"):
+        return  # No Rust toolchain: the container path still works.
+
+    pending = []
+    for crate, binary, caps, purpose in HOST_TOOLS:
+        if (protocols / crate).is_dir():
+            pending.append((crate, binary, caps, purpose))
+    if not pending:
+        return
+
+    step("Host diagnostic tools")
+    print("  Optional CLIs that read raw packets directly on this machine:")
+    for _, binary, _, purpose in pending:
+        print(f"    {C.BOLD}{binary}{C.OFF} — {purpose}")
+    print(f"  {C.DIM}The containerised agents do NOT need this; it is for the packet views.{C.OFF}")
+
+    TOOL_BIN_DIR.mkdir(parents=True, exist_ok=True)
+    built = []
+    for crate, binary, caps, _ in pending:
+        dest = TOOL_BIN_DIR / binary
+        if not tool_needs_caps(dest, caps):
+            continue
+        r = subprocess.run(
+            ["cargo", "build", "--release", "--bin", binary],
+            cwd=protocols / crate, capture_output=True, text=True,
+        )
+        if r.returncode != 0:
+            warn(f"could not build {binary} — skipping")
+            continue
+        src = protocols / crate / "target" / "release" / binary
+        if not src.exists():
+            src = protocols / "target" / "release" / binary
+        if not src.exists():
+            warn(f"built {binary} but cannot find the binary — skipping")
+            continue
+        shutil.copy2(src, dest)
+        built.append((dest, caps))
+
+    if not built:
+        ok(f"diagnostic tools already installed in {TOOL_BIN_DIR}")
+        return
+
+    # THE one elevation in the whole launch. Both jobs go through it together,
+    # so there is never a second prompt.
+    print()
+    print(f"  {C.BOLD}Administrator password needed — once.{C.OFF}")
+    print("  Raw packet capture and binding ports 319/320 are privileged. Granting")
+    print("  each binary its own file capability avoids running the tools as root.")
+    print("  Exactly these commands will run:")
+    for dest, caps in built:
+        print(f"    {C.DIM}sudo setcap {caps}+eip {dest}{C.OFF}")
+    print(f"  {C.DIM}Skip with: --skip-tools (everything else still works){C.OFF}")
+    print()
+
+    if not assume_yes:
+        try:
+            answer = input("  Grant capabilities now? [Y/n] ").strip().lower()
+        except EOFError:
+            answer = "n"
+        if answer not in ("", "y", "yes"):
+            warn("skipped — run the setcap commands above yourself when you want them")
+            return
+
+    for dest, caps in built:
+        r = subprocess.run(["sudo", "setcap", f"{caps}+eip", str(dest)])
+        if r.returncode != 0:
+            warn(f"setcap failed for {dest.name}; run it manually when convenient")
+            return
+
+    ok(f"diagnostic tools ready in {TOOL_BIN_DIR}")
+    if str(TOOL_BIN_DIR) not in os.environ.get("PATH", ""):
+        print(f"  {C.DIM}Add to PATH: export PATH=\"$HOME/.local/bin:$PATH\"{C.OFF}")
+
+
+# ─────────────────────────── image staleness ───────────────────────────
+#
+# `up` reuses whatever image already exists. That is fast and almost always
+# right — but it means editing the Dockerfile or any Rust source and re-running
+# launch gives you the OLD binary, with no indication anything was skipped.
+#
+# This is not hypothetical: adding cap_net_bind_service to the Dockerfile and
+# re-launching produced a container whose bounding set had the capability and
+# whose binary did not, so the PTP agent kept reporting "permission denied" on
+# ports 319/320 while AVB (which needed only the older cap_net_raw) worked fine.
+# A half-working system with no error is the worst failure mode there is.
+#
+# So: compare the image's creation time against everything baked into it, and
+# rebuild automatically when it is behind.
+IMAGE_NAME = "openair-orchestrator"
+BUILD_INPUT_SUFFIXES = (".rs",)
+BUILD_INPUT_NAMES = {"Cargo.toml", "Cargo.lock", "Dockerfile", "docker-compose.yml"}
+
+
+def newest_build_input() -> tuple[float, Path | None]:
+    """Newest mtime among the sources compiled into the image."""
+    newest_t, newest_p = 0.0, None
+    for path in (DOCKER_DIR / "Dockerfile", COMPOSE_FILE):
+        if path.exists() and path.stat().st_mtime > newest_t:
+            newest_t, newest_p = path.stat().st_mtime, path
+    for base in (REPO_ROOT / "BackEnd", REPO_ROOT / "contracts"):
+        if not base.is_dir():
+            continue
+        for root, dirs, files in os.walk(base):
+            # Pruning `target` matters for speed AND correctness: build output
+            # is always newer than its sources and would make every image look
+            # stale forever.
+            dirs[:] = [d for d in dirs if d not in ("target", "node_modules", ".git")]
+            for name in files:
+                if name.endswith(BUILD_INPUT_SUFFIXES) or name in BUILD_INPUT_NAMES:
+                    fp = Path(root) / name
+                    try:
+                        t = fp.stat().st_mtime
+                    except OSError:
+                        continue
+                    if t > newest_t:
+                        newest_t, newest_p = t, fp
+    return newest_t, newest_p
+
+
+def image_created_epoch() -> float | None:
+    """When the orchestrator image was built, or None if it does not exist."""
+    r = subprocess.run(
+        ["docker", "image", "inspect", IMAGE_NAME, "--format", "{{.Created}}"],
+        capture_output=True, text=True,
+    )
+    if r.returncode != 0:
+        return None
+    raw = r.stdout.strip()
+    # Docker emits nanosecond precision; fromisoformat wants microseconds.
+    if "." in raw:
+        head, _, tail = raw.partition(".")
+        digits = "".join(c for c in tail if c.isdigit())[:6]
+        rest = tail[len(tail) - len(tail.lstrip("0123456789")):]
+        raw = f"{head}.{digits}{rest}"
+    try:
+        from datetime import datetime
+        return datetime.fromisoformat(raw).timestamp()
+    except ValueError:
+        return None
+
+
+def needs_rebuild() -> tuple[bool, str]:
+    """(should rebuild, why)."""
+    created = image_created_epoch()
+    if created is None:
+        return True, "no image yet — first build"
+    newest_t, newest_p = newest_build_input()
+    if newest_t > created:
+        rel = newest_p.relative_to(REPO_ROOT) if newest_p else "sources"
+        age = time.strftime("%H:%M:%S", time.localtime(newest_t))
+        img = time.strftime("%H:%M:%S", time.localtime(created))
+        return True, f"{rel} changed at {age}, image built {img}"
+    return False, ""
 
 
 def compose_cmd() -> list[str] | None:
@@ -285,11 +609,24 @@ def check_ports(cc: list[str]) -> bool:
     return False
 
 
+def compose_env() -> dict:
+    """Environment for compose: the host uid/gid the container should run as.
+
+    Without this the container runs as root and every file it writes through the
+    bind mount (discovered panels, editor saves) lands root-owned in the working
+    tree — breaking git and any host-side tooling.
+    """
+    env = dict(os.environ)
+    env.setdefault("OPENAIR_UID", str(os.getuid()))
+    env.setdefault("OPENAIR_GID", str(os.getgid()))
+    return env
+
+
 def run(cmd: list[str], capture: bool = False, check: bool = False):
     """Run a command from the repo root."""
     return subprocess.run(
         cmd, cwd=REPO_ROOT, text=True, check=check,
-        capture_output=capture,
+        capture_output=capture, env=compose_env(),
     )
 
 
@@ -360,10 +697,118 @@ def print_status(cc: list[str]) -> None:
 
 # ─────────────────────────── commands ───────────────────────────
 
+def clear_name_conflicts(cc: list[str]) -> None:
+    """Remove orphaned containers holding our `container_name:` values.
+
+    A failed `up` (a port clash, a bad build) can leave a container behind that
+    still owns the name. Compose then cannot reuse it and silently creates
+    `<hash>_openair-orchestrator` instead — the stack works but every `docker
+    exec openair-orchestrator` fails, and the mangled name is easy to miss in
+    the output. Reaping them first keeps the names stable.
+    """
+    wanted = {"openair-orchestrator", "openair-broker"}
+    live = {c.get("Name") for c in container_status(cc)
+            if (c.get("State") or "").lower() == "running"}
+    r = subprocess.run(
+        ["docker", "ps", "-a", "--format", "{{.Names}}"],
+        capture_output=True, text=True, env=compose_env(),
+    )
+    stale = [
+        n for n in (r.stdout or "").split()
+        # e.g. "e7d014f9165b_openair-orchestrator" — compose's fallback name
+        if any(n.endswith(f"_{w}") for w in wanted) and n not in live
+    ]
+    if stale:
+        warn(f"removing {len(stale)} orphaned container(s) holding our names")
+        for n in stale:
+            print(f"    {n}")
+        subprocess.run(["docker", "rm", "-f", *stale],
+                       capture_output=True, text=True, env=compose_env())
+
+
+def report_agent_health(timeout: float = 6.0) -> bool:
+    """Ask the agents on the bus whether they can actually see the network.
+
+    The orchestrator answering on :8000 only proves the HTTP server is up. It
+    says nothing about whether the discovery agents can hear anything — and the
+    failure modes that matter here (missing capability, firewall drop, bridged
+    network) all produce a perfectly healthy-looking orchestrator serving an
+    empty Discovered tab.
+
+    Agents that can self-assess publish `.../Agent/state`; this surfaces any
+    that are not fully listening, with the detail they reported.
+
+    Returns True when the PTP agent reports its UDP is firewall-blocked.
+    """
+    try:
+        import paho.mqtt.client as mqtt   # optional: never block a launch on it
+    except ImportError:
+        return False
+
+    states: dict[str, str] = {}
+    details: dict[str, str] = {}
+
+    def on_connect(c, u, f, rc, properties=None):
+        c.subscribe("OpenAir/System/Protocols/+/Agent/#")
+
+    def on_message(c, u, msg):
+        parts = msg.topic.split("/")
+        proto, leaf = parts[3], parts[-1]
+        payload = msg.payload.decode(errors="replace").strip()
+        if leaf == "state":
+            states[proto] = payload
+        elif leaf == "udp_blocked" and proto == "ptp":
+            details["__ptp_udp_blocked__"] = payload
+        elif leaf == "detail":
+            details[proto] = payload
+
+    try:
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    except Exception:
+        client = mqtt.Client()
+    client.on_connect, client.on_message = on_connect, on_message
+    try:
+        client.connect("127.0.0.1", 1883, 5)
+    except Exception:
+        return False
+    client.loop_start()
+    time.sleep(timeout)
+    client.loop_stop()
+
+    if not states:
+        return False
+
+    degraded = {p: st for p, st in states.items() if st != "listening"}
+    if degraded:
+        warn("some discovery agents are not fully listening")
+        for proto, state in sorted(degraded.items()):
+            print(f"    {C.BOLD}{proto}{C.OFF}: {state}")
+            detail = details.get(proto, "")
+            if detail:
+                print(f"      {C.DIM}{detail.splitlines()[0][:120]}{C.OFF}")
+    else:
+        ok(f"discovery agents listening: {', '.join(sorted(states))}")
+
+    # The firewall verdict, computed by the agent that can actually see the
+    # split. Absent means it has not flushed yet — say nothing rather than
+    # guess, since a wrong accusation here costs a needless password prompt.
+    return details.get("__ptp_udp_blocked__") == "true"
+
+
 def cmd_up(args, cc: list[str]) -> int:
+    clear_name_conflicts(cc)
     step("Starting OPEN-AIR")
     up = cc + ["up", "-d"]
-    if args.rebuild:
+    rebuild = bool(args.rebuild)
+    if not rebuild and not getattr(args, "no_auto_rebuild", False):
+        stale, why = needs_rebuild()
+        if stale:
+            warn(f"image is out of date — rebuilding ({why})")
+            print("    Reusing it would run the previous binary against the new")
+            print("    config, which fails silently rather than loudly.")
+            print(f"    {C.DIM}Skip with --no-auto-rebuild if you know it does not matter.{C.OFF}")
+            rebuild = True
+    if rebuild:
         up.append("--build")
     if run(up).returncode != 0:
         fail("docker compose up failed", "Re-run with `logs` to see why.")
@@ -375,6 +820,12 @@ def cmd_up(args, cc: list[str]) -> int:
     healthy = wait_until_up(args.timeout)
 
     if healthy:
+        step("Discovery health")
+        # 12s: the PTP agent's first flush lands at 10s, and its reception
+        # counters are what make the firewall check evidence-based.
+        if report_agent_health(timeout=12.0) and not getattr(args, "skip_tools", False):
+            offer_firewall_fix(assume_yes=bool(getattr(args, "yes", False)))
+
         step("Ready")
         print(f"  {C.BOLD}{UI_URL}{C.OFF}")
         print(f"  {C.DIM}Bus:   mosquitto_sub -h localhost -t 'OpenAir/#' -v{C.OFF}")
@@ -458,10 +909,22 @@ def main() -> int:
                         help="expose /dev/snd and /dev/bus/usb so MIDI and USB (USBTMC) "
                              "instruments are visible. Without it they enumerate as zero, "
                              "which looks identical to nothing being plugged in.")
+        # Kept as an accepted no-op: it is in the README, in shell history, and
+        # in muscle memory. Silently doing nothing is right — it asks for the
+        # behaviour that is now default.
         sp.add_argument("--host-net", action="store_true",
-                        help="share the host network stack. REQUIRED for mDNS/DNS-SD "
-                             "discovery to see LAN devices — multicast does not cross "
-                             "the docker bridge. Everything stays bound to loopback.")
+                        help="(default; kept for compatibility) share the host network stack")
+        sp.add_argument("--bridge-net", action="store_true",
+                        help="opt OUT of host networking, back onto the docker bridge. "
+                             "Outbound TCP still works, so VISA/SCPI is fine — but mDNS, "
+                             "SAP, gPTP and AVDECC discovery all go silent.")
+        sp.add_argument("--no-auto-rebuild", action="store_true",
+                        help="do not rebuild even when sources are newer than the image")
+        sp.add_argument("--skip-tools", action="store_true",
+                        help="do not build/setcap the host diagnostic CLIs "
+                             "(skips the one password prompt)")
+        sp.add_argument("--yes", "-y", action="store_true",
+                        help="assume yes for the capability prompt")
         sp.add_argument("--timeout", type=int, default=120,
                         help="seconds to wait for the orchestrator (default 120; a cold "
                              "Rust build inside the image can take a while)")
@@ -489,7 +952,7 @@ def main() -> int:
         args = p.parse_args(["up"])
 
     global USE_HOST_NET, USE_HARDWARE
-    USE_HOST_NET = bool(getattr(args, "host_net", False))
+    USE_HOST_NET = not bool(getattr(args, "bridge_net", False))
     USE_HARDWARE = bool(getattr(args, "hardware", False))
     if USE_HARDWARE:
         if not HARDWARE_FILE.exists():
@@ -501,13 +964,27 @@ def main() -> int:
         if not HOST_NET_FILE.exists():
             fail(f"missing {HOST_NET_FILE.name}")
             return 1
-        step("Host networking enabled")
-        print("  Containers share the host network stack, so mDNS/DNS-SD sees the")
-        print("  real LAN. Broker and HTTP API stay bound to 127.0.0.1.")
+        step("Host networking (default)")
+        print("  Containers share the host network stack, so mDNS/SAP multicast and")
+        print("  Layer 2 discovery (gPTP, AVDECC) see the real LAN.")
+        print(f"  {C.DIM}Broker and HTTP API stay bound to 127.0.0.1. Opt out: --bridge-net{C.OFF}")
+    else:
+        warn("bridge networking — discovery will not see the LAN")
+        print("    mDNS/DNS-SD, SAP, gPTP and AVDECC all go silent on the bridge;")
+        print("    each fails quietly, looking like an empty network. VISA/SCPI is")
+        print("    unaffected. Drop --bridge-net to restore discovery.")
 
     cc = preflight()
     if cc is None:
         return 1
+
+    # After preflight (so a broken docker fails first) and before starting, so
+    # the tools are ready by the time there is traffic to point them at.
+    if args.command in ("up", "rebuild") and not getattr(args, "skip_tools", False):
+        try:
+            install_host_tools(assume_yes=bool(getattr(args, "yes", False)))
+        except KeyboardInterrupt:
+            warn("skipped host tools")
 
     handlers = {
         "up": cmd_up,

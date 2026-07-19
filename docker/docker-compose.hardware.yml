@@ -47,7 +47,8 @@ services:
       - 'c 189:* rmw'   # usbfs — libusb / pyvisa USB backend
       - 'c 180:* rmw'   # usbtmc — USB Test & Measurement instruments
     group_add:
-      # /dev/snd/* is owned by group `audio` (gid 29 on this host). Without
-      # membership the nodes are visible but unreadable, which reads as
-      # "no MIDI devices" rather than as a permissions error.
-      - audio
+      # Numeric GIDs, because these groups must exist INSIDE the container to be
+      # named — and in a slim image they do not. The host's numeric ids are what
+      # the kernel checks against the device nodes.
+      - "29"   # audio  (host gid) — /dev/snd
+      - "46"   # plugdev (host gid) — USB

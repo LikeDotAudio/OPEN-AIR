@@ -819,6 +819,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "openair-appletv"
+version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
+]
+
+[[package]]
+name = "openair-avb-milan"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "rumqttc 0.24.0",
+]
+
+[[package]]
 name = "openair-chromecast"
 version = "0.1.0"
 dependencies = [
@@ -833,6 +849,15 @@ dependencies = [
  "regress",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "openair-dante"
+version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "openair-ravenna",
+ "rumqttc 0.24.0",
 ]
 
 [[package]]
@@ -882,6 +907,10 @@ dependencies = [
 [[package]]
 name = "openair-nmos"
 version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
+]
 
 [[package]]
 name = "openair-osc"
@@ -895,11 +924,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "openair-printers"
+version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
+]
+
+[[package]]
 name = "openair-ptp"
 version = "0.1.0"
 dependencies = [
+ "libc",
  "parking_lot",
  "pyo3",
+ "rumqttc 0.24.0",
+ "socket2",
+]
+
+[[package]]
+name = "openair-ravenna"
+version = "0.1.0"
+dependencies = [
+ "mdns-sd",
+ "rumqttc 0.24.0",
 ]
 
 [[package]]
@@ -909,6 +957,12 @@ version = "0.1.0"
 [[package]]
 name = "openair-sap"
 version = "0.1.0"
+dependencies = [
+ "if-addrs",
+ "openair-ravenna",
+ "rumqttc 0.24.0",
+ "socket2",
+]
 
 [[package]]
 name = "openair-smpte2138"

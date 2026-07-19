@@ -6,7 +6,10 @@
 resolver = "2"
 members = [
     "openair-aes70",
+    "openair-AppleTV",
+    "openair-AVB-Milan",
     "openair-ChromeCast",
+    "openair-Dante",
     "openair-dnssd",
     "openair-ember",
     "openair-mdns",
@@ -14,7 +17,9 @@ members = [
     "openair-mqtt",
     "openair-nmos",
     "openair-osc",
+    "openair-printers",
     "openair-ptp",
+    "openair-ravenna",
     "openair-rest",
     "openair-sap",
     "openair-smpte2138",

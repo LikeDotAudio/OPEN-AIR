@@ -1,8 +1,8 @@
 {
   "$comment": "openair-validate ratchet baseline (Phase 1 §5). This IS the technical-debt inventory: CI fails only on debt not listed here. Shrink it by fixing files and re-running with --update-baseline; review every diff — it must only go down.",
   "totals": {
-    "errors": 169,
-    "deprecations": 2093
+    "errors": 163,
+    "deprecations": 2091
   },
   "counts": {
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-aes70/config.ini:9": 1,
@@ -12,11 +12,9 @@
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-midi/config.ini:10": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-midi/config.ini:16": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-mqtt/config.ini:9": 1,
-    "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-nmos/config.ini:10": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-osc/config.ini:9": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-ptp/config.ini:7": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-rest/config.ini:11": 1,
-    "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-sap/config.ini:9": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-smpte2138/config.ini:9": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-snmp/config.ini:11": 1,
     "(tree)|config-ini-topic-legacy|BackEnd/ComProtocols/openair-visa/config.ini:8": 1,
@@ -43,9 +41,6 @@
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-mqtt/config.ini:11": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-mqtt/config.ini:13": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-mqtt/config.ini:15": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-nmos/config.ini:12": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-nmos/config.ini:14": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-nmos/config.ini:16": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-osc/config.ini:11": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-osc/config.ini:13": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-osc/config.ini:15": 1,
@@ -55,9 +50,6 @@
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-rest/config.ini:13": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-rest/config.ini:15": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-rest/config.ini:17": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-sap/config.ini:11": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-sap/config.ini:13": 1,
-    "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-sap/config.ini:15": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-smpte2138/config.ini:11": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-smpte2138/config.ini:13": 1,
     "(tree)|config-ini-topic|BackEnd/ComProtocols/openair-smpte2138/config.ini:15": 1,

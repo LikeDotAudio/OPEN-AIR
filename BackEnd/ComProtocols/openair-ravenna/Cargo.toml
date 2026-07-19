@@ -1,0 +1,11 @@
+[package]
+name = "openair-ravenna"
+version = "0.1.0"
+edition = "2024"
+
+# Discovery + stream description only. No RTP receive/transmit, no stream
+# subscription. Dependencies stay minimal: RTSP DESCRIBE is a few lines of
+# plain-text over TCP, so no RTSP crate is warranted.
+[dependencies]
+mdns-sd = "0.20"
+rumqttc = "0.24"

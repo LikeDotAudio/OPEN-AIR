@@ -1,0 +1,44 @@
+# Development overlay — live frontend editing.
+#
+#     python3 docker/launch.py --dev
+#     docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
+#
+# WHAT THIS CHANGES
+#
+# The base compose file bind-mounts only ../FrontEnd/Gui_Frames, so authored
+# panels persist and stay diffable. Everything else in FrontEnd/ — widgets,
+# index.html, comMQTT/ — is baked into the image by `COPY FrontEnd ./FrontEnd`
+# (see Dockerfile). Editing a widget therefore changes nothing until the image
+# is rebuilt, and that failure is silent: it looks exactly like an edit that
+# did not work.
+#
+# This overlay mounts the whole of FrontEnd/ instead. The orchestrator serves it
+# with ServeDir, which reads from disk per request, so a widget edit is live on
+# the next browser reload with no rebuild.
+#
+# WHY THIS IS NOT THE DEFAULT
+#
+# With this mounted, the container serves your uncommitted working tree. That is
+# what you want while iterating and precisely what you do NOT want when the
+# question is "does this run from a clean checkout" — which is the question
+# docker/ exists to answer. Keep the default honest; opt into this.
+#
+# WHAT IT DOES NOT DO
+#
+# Rust is compiled into the binary at image build time. Backend changes still
+# need `python3 docker/launch.py up --rebuild` with or without this overlay.
+#
+# BROWSER CACHING STILL APPLIES
+#
+# FrontEnd widgets are type="text/babel", compiled in-browser and cached by URL.
+# This overlay gets your edit into the container; it does not get it past the
+# browser cache. Either bump the ?v= in index.html (which is what ships) or use
+# a hard reload / devtools "disable cache" while iterating.
+
+services:
+  orchestrator:
+    volumes:
+      # Replaces the base file's Gui_Frames-only mount. Gui_Frames is a
+      # subdirectory of this one, so authored panels still land on the host and
+      # still show up in `git diff` — that behaviour is preserved, not dropped.
+      - ../FrontEnd:/app/FrontEnd

@@ -101,6 +101,12 @@ fn categorise(model: &str, capabilities: u64) -> &'static str {
     if m.contains("nest hub") || m.contains("home hub") {
         return "Smart Display";
     }
+    // "Chromecast Audio" is an audio-only puck — it must be tested BEFORE the
+    // generic "chromecast" match, or the substring wins and a speaker is filed
+    // under video. Real device on this bench; caught by category review.
+    if m.contains("chromecast audio") {
+        return "Speaker";
+    }
     if m.contains("chromecast") || m.contains("android tv") || m.contains("google tv") {
         return "Video Cast";
     }
@@ -114,6 +120,47 @@ fn categorise(model: &str, capabilities: u64) -> &'static str {
         (true, _) => "Video Cast",
         (false, true) => "Speaker",
         _ => "Cast Device",
+    }
+}
+
+/// Every category this agent can file a device under.
+///
+/// Needed because a device's category is derived, not intrinsic: improve
+/// `categorise()` and a device MOVES. Its old retained topics must be cleared or
+/// it appears twice — which is exactly what happened when "Chromecast Audio" was
+/// reclassified from Video Cast to Speaker.
+const ALL_CATEGORIES: [&str; 5] = [
+    "Speaker",
+    "Video_Cast",
+    "Smart_Display",
+    "Speaker_Group",
+    "Cast_Device",
+];
+
+/// Clear this device's retained topics under every category except `keep`.
+///
+/// Retained state is the database, so a stale entry is indistinguishable from a
+/// live one to anything reading the bus. Publishing an empty retained payload is
+/// the only way to delete.
+fn clear_other_categories(
+    client: &rumqttc::Client,
+    device_seg: &str,
+    keep: Option<&str>,
+) {
+    for category in ALL_CATEGORIES {
+        if Some(category) == keep {
+            continue;
+        }
+        let prefix =
+            format!("OpenAir/System/Protocols/chromecast/Device/{category}/{device_seg}");
+        for key in DEVICE_KEYS {
+            let _ = client.publish(
+                format!("{prefix}/{key}"),
+                rumqttc::QoS::AtLeastOnce,
+                true,
+                Vec::new(),
+            );
+        }
     }
 }
 
@@ -208,6 +255,11 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                     info.get_port()
                 );
 
+                // Drop any entry this device left under a different category
+                // before publishing the current one, so recategorisation moves a
+                // device rather than cloning it.
+                clear_other_categories(&mqtt_client, &seg(&friendly), Some(&seg(category)));
+
                 for (key, value) in DEVICE_KEYS.iter().zip(values) {
                     let _ = mqtt_client.publish(
                         format!("{prefix}/{key}"),
@@ -223,19 +275,8 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                 // category rather than leave a ghost in whichever one it used.
                 let instance = seg(fullname.trim_end_matches(CAST_SERVICE));
                 println!("   👋 [CAST] removed {fullname}");
-                for category in ["Speaker", "Video_Cast", "Smart_Display", "Speaker_Group", "Cast_Device"] {
-                    let prefix = format!(
-                        "OpenAir/System/Protocols/chromecast/Device/{category}/{instance}"
-                    );
-                    for key in DEVICE_KEYS {
-                        let _ = mqtt_client.publish(
-                            format!("{prefix}/{key}"),
-                            rumqttc::QoS::AtLeastOnce,
-                            true,
-                            Vec::new(),
-                        );
-                    }
-                }
+                // keep = None: clear it everywhere.
+                clear_other_categories(&mqtt_client, &instance, None);
             }
             _ => {}
         }
@@ -265,6 +306,9 @@ mod tests {
     fn categorise_prefers_model_then_falls_back_to_capabilities() {
         assert_eq!(categorise("Google Nest Mini", 4), "Speaker");
         assert_eq!(categorise("Chromecast Ultra", 5), "Video Cast");
+        // Substring order matters: "Chromecast Audio" must not match the
+        // generic "chromecast" -> Video Cast rule.
+        assert_eq!(categorise("Chromecast Audio", 4), "Speaker");
         assert_eq!(categorise("Nest Hub Max", 5), "Smart Display");
         assert_eq!(categorise("Google Cast Group", 4), "Speaker Group");
         // Unknown model, audio-only bits -> Speaker via capabilities.

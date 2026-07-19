@@ -1,0 +1,11 @@
+[package]
+name = "openair-dante"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+mdns-sd = "0.20"
+rumqttc = "0.24"
+# The SAP payload is an SDP record — the same grammar RAVENNA announces over
+# RTSP — so the parser is shared rather than written twice.
+openair-ravenna = { path = "../openair-ravenna" }

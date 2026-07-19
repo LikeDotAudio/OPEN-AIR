@@ -41,12 +41,24 @@ def on_connect(client, userdata, flags, rc, properties=None):
     client.subscribe("OpenAir/System/Protocols/midi/Device/#")
     client.subscribe("OpenAir/System/Protocols/dnssd/Device/#")
     client.subscribe("OpenAir/System/Protocols/chromecast/Device/#")
+    client.subscribe("OpenAir/System/Protocols/ravenna/Device/#")
+    client.subscribe("OpenAir/System/Protocols/dante/#")
+    client.subscribe("OpenAir/System/Protocols/printers/Device/#")
+    client.subscribe("OpenAir/System/Protocols/appletv/Device/#")
+    client.subscribe("OpenAir/System/Protocols/nmos/Device/#")
+    client.subscribe("OpenAir/System/Protocols/sap/Device/#")
+    client.subscribe("OpenAir/System/Protocols/avb/Device/#")
+    client.subscribe("OpenAir/System/Protocols/ptp/Device/#")
+    client.subscribe(SCAN_STATE_TOPIC)
 
 
 def on_message(client, userdata, msg):
+    if msg.topic == SCAN_STATE_TOPIC:
+        scan_state["value"] = msg.payload.decode(errors="replace").strip()
+        return
     parts = msg.topic.split("/")
     # OpenAir/System/Protocols/{proto}/Device/...
-    if len(parts) < 6 or parts[4] != "Device":
+    if len(parts) < 6 or parts[4] not in ("Device", "Stream"):
         return
     proto = parts[3]
     rest = parts[5:]
@@ -79,6 +91,87 @@ def on_message(client, userdata, msg):
         category, friendly, key = rest
         block = friendly.replace("_", " ")
         collected.setdefault(f"cast_{category}", {}).setdefault(block, {})[key] = value
+    elif proto in ("appletv", "nmos"):
+        # Both already merged to one entry per thing by their agent
+        # (Apple TV by hostname; NMOS by host+port), so straight passthrough.
+        if len(rest) != 2 or not value:
+            return
+        name, key = rest
+        collected.setdefault(proto, {}).setdefault(name.replace("_", " "), {})[key] = value
+    elif proto == "printers":
+        # Already merged to one entry per physical printer by the agent (keyed on
+        # the Bonjour UUID), so this is a straight passthrough.
+        if len(rest) != 2 or not value:
+            return
+        name, key = rest
+        collected.setdefault("printers", {}).setdefault(name.replace("_", " "), {})[key] = value
+    elif proto == "dante":
+        # Two shapes under one protocol, matching Dante's split personality:
+        #   Device/{name}/{key}          — native, found over mDNS
+        #   Stream/{origin}/{name}/{key} — AES67, found over SAP
+        # They get separate tabs because they answer different questions:
+        # "what hardware is here" vs "what audio is being announced".
+        # Native Dante only. AES67-over-SAP streams belong to openair-sap and
+        # land in the `sap` tab — SAP is vendor-neutral, so filing it under
+        # "Dante" would mislabel RAVENNA and translator traffic too.
+        if parts[4] == "Device" and len(rest) == 2 and value:
+            name, key = rest
+            collected.setdefault("dante", {}).setdefault(name.replace("_", " "), {})[key] = value
+        elif parts[4] == "Device" and len(rest) == 4 and rest[1] == "Channel" and value:
+            # Device/{device}/Channel/{ch}/{key} — channels live under their
+            # device, so a 16-channel interface is one device row plus 16
+            # channel rows, not 16 devices.
+            dev, _, ch, key = rest
+            collected.setdefault("dante_channels", {}).setdefault(f"{ch} @ {dev}", {})[key] = value
+    elif proto == "ravenna":
+        # {host}/{stream}/{key} — one tab for all RAVENNA audio, one row per
+        # stream, labelled with its host. A single node commonly publishes
+        # several streams, so host is context rather than a separate tab.
+        if len(rest) != 3 or not value:
+            return
+        host, stream_name, key = rest
+        block = f"{stream_name.replace('_',' ')} @ {host}"
+        collected.setdefault("ravenna", {}).setdefault(block, {})[key] = value
+        collected["ravenna"][block].setdefault("host", host)
+    elif proto == "sap":
+        # {origin_ip}/{session}/{key} — SAP is the announcement mechanism Dante
+        # uses in AES67 mode, so this is the same kind of audio stream RAVENNA
+        # publishes, discovered by the opposite means (passive multicast push
+        # rather than mDNS query). Kept as its own tab rather than merged into
+        # RAVENNA's: a stream appearing in both is the useful signal, not noise.
+        if len(rest) != 3 or not value:
+            return
+        origin, session_name, key = rest
+        block = f"{session_name.replace('_',' ')} @ {origin}"
+        collected.setdefault("sap", {}).setdefault(block, {})[key] = value
+        collected["sap"][block].setdefault("source", origin)
+    elif proto == "avb":
+        # {entity_id}/{key} — AVDECC entities. Keyed by entity ID because ADP
+        # carries no human-readable name at all; the name lives in the AEM
+        # descriptor tree, which discovery does not fetch. One tab for AVB.
+        if len(rest) != 2 or not value:
+            return
+        entity_id, key = rest
+        collected.setdefault("avb", {}).setdefault(entity_id, {})[key] = value
+    elif proto == "ptp":
+        # {clock_id}-{port}-d{domain}/{key} — one row per PTP *port*, not per
+        # device. A box can run several ports, several domains, and more than
+        # one PTP flavour at once (v1, v2 and gPTP on one NIC is the case this
+        # was built for), and each of those is an independent clock that can
+        # disagree with the others. Merging them by device would hide exactly
+        # the disagreement worth seeing.
+        if len(rest) != 2 or not value:
+            return
+        segment, key = rest
+        # Segment is "{id}-{port}-d{domain}"; the id itself is colon-separated,
+        # so split from the right and keep whatever does not match as-is.
+        parts_seg = segment.rsplit("-", 2)
+        if len(parts_seg) == 3 and parts_seg[2].startswith("d"):
+            clock, port_no, dom = parts_seg[0], parts_seg[1], parts_seg[2][1:]
+            block = f"{clock} port {port_no} (domain {dom})"
+        else:
+            block = segment
+        collected.setdefault("ptp", {}).setdefault(block, {})[key] = value
     elif proto == "dnssd":
         # {service_type}/{instance}/{key} — one Discovered category for all
         # DNS-SD/mDNS services, one block per instance, grouped by type.
@@ -93,7 +186,11 @@ def label(text):
     return {"active": {"text": {"En": str(text)}}}
 
 
+scan_state = {"value": "idle"}
+
 RESCAN_TOPIC = "OpenAir/System/Protocols/visa/Device/Rescan"
+CLEAR_TOPIC = "OpenAir/System/Protocols/visa/Device/Clear"
+SCAN_STATE_TOPIC = "OpenAir/System/Protocols/visa/Scan/State"
 
 
 def write_scan_panel(device_count):
@@ -122,9 +219,23 @@ def write_scan_panel(device_count):
                             },
                             "layout": {"height": 50, "width": 250},
                         },
+                        "clear": {
+                            "type": "_GuiActuator",
+                            "topic": CLEAR_TOPIC,
+                            "label": {
+                                "active": {"text": {"En": "CLEARING..."}},
+                                "inactive": {"text": {"En": "CLEAR ALL DEVICES"}},
+                            },
+                            "layout": {"height": 50, "width": 250},
+                        },
                         "last_scan": {
                             "type": "_GuiLabel",
-                            "label": label(f"Last scan: {stamp} — {device_count} device(s). Reload the page after a rescan to see updated panels."),
+                            "label": label(
+                                (f"⏳ SCAN IN PROGRESS — rows below are last scan's results and are shown amber until it finishes."
+                                 if scan_state["value"] == "scanning" else
+                                 f"Last scan: {stamp} — {device_count} device(s).")
+                                + " Reload the page after a rescan to see updated panels."
+                            ),
                         },
                     },
                 }
@@ -142,6 +253,48 @@ PREFERRED_COLUMNS = {
     "midi": ["port", "name", "direction"],
     "dnssd": ["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
     # Cast devices: identity first, then what it can do, then where it lives.
+    # RAVENNA: what the stream IS, then where it goes, then how it is clocked.
+    "ravenna": ["stream", "host", "format", "sample_rate", "channels",
+                "destination", "rtp_port", "ptime_ms", "clock_domain",
+                "direction", "refclk", "status", "last_seen"],
+    # SAP mirrors RAVENNA's column order — same stream facts, different
+    # announcement path — with the SAP-specific origin and msg id at the end.
+    "sap": ["stream", "source", "format", "sample_rate", "channels",
+            "destination", "rtp_port", "ptime_ms", "clock_domain",
+            "direction", "refclk", "announced_via", "msg_id", "status", "last_seen"],
+    # Printers: identity, then capabilities (the questions people ask), then
+    # how to reach it. Raw TXT is deliberately not a column — it is decoded.
+    "appletv": ["device", "model", "model_id", "os_version", "airplay_version",
+                "roles", "audio_codecs", "metadata", "features_raw", "addresses",
+                "status", "last_seen"],
+    "nmos": ["service", "role", "api_versions", "api_proto", "api_auth",
+             "priority", "host", "port", "addresses", "last_seen"],
+    "printers": ["printer", "manufacturer", "model", "color", "duplex", "scan",
+                 "fax", "paper_max", "transports", "languages", "addresses",
+                 "admin_url", "uuid", "status", "last_seen"],
+    "dante_channels": ["channel", "device", "id", "sample_rate", "bit_depth",
+                       "latency_ms", "frames_per_packet", "flow_channels",
+                       "redundancy", "last_seen"],
+    "dante": ["device", "manufacturer", "model", "discovery", "services",
+              "addresses", "port", "hostname", "status", "last_seen"],
+    "dante_aes67": ["stream", "discovery", "format", "sample_rate", "channels",
+                    "destination", "rtp_port", "origin", "status", "last_seen"],
+    # AVB: identity, then what it can carry, then the clock it follows —
+    # grandmaster mismatch is the usual reason a discovered entity won't pass audio.
+    "avb": ["entity_id", "mac", "oui", "interface", "talker_sources",
+            "listener_sinks", "talker_capabilities", "listener_capabilities",
+            "gptp_grandmaster", "gptp_domain", "milan", "entity_model_id",
+            "configuration_index", "valid_time_s", "status", "last_seen"],
+    # PTP: what kind of clock it is and who it follows, before the tuning
+    # details. grandmaster + gm_class answer "is time healthy?", which is the
+    # question a PTP tab exists for.
+    # `messages` sits high on purpose: a port that only sends Pdelay_Req has no
+    # Announce data, so every quality column is blank. The message mix is what
+    # tells you that row is a peer-delay-only port rather than a parse failure.
+    "ptp": ["clock_id", "port", "variant", "subdomain", "domain", "role",
+            "messages", "grandmaster", "gm_class", "gm_class_meaning",
+            "gm_accuracy", "time_source", "steps_removed", "priority1",
+            "priority2", "sync_interval_s", "two_step", "status", "last_seen"],
     "chromecast": ["friendly_name", "model", "device_type", "capabilities",
                    "status_text", "addresses", "port", "hostname",
                    "protocol_version", "cast_id", "status", "last_seen"],
@@ -194,7 +347,7 @@ def rows_for(category, blocks):
     """Device dict -> OcaTable rows; unix last_online becomes readable last_seen."""
     if category.startswith("cast_"):
         family = "chromecast"
-    elif category in ("midi", "dnssd"):
+    elif category in ("midi", "dnssd", "ravenna", "sap", "avb", "ptp"):
         family = category
     else:
         family = "visa"
@@ -207,7 +360,10 @@ def rows_for(category, blocks):
             except (ValueError, OverflowError):
                 row["last_seen"] = row["last_online"]
         # Consumed by OcaTable for row colouring; hidden from the columns.
-        row["_row_state"] = row_state(row)
+        # While a scan is running every row is provisional — the instrument may
+        # be gone and we simply have not re-probed it yet. Showing last scan's
+        # green during a live scan asserts something we do not currently know.
+        row["_row_state"] = "unknown" if scan_state["value"] == "scanning" else row_state(row)
         rows.append(row)
     keys = set().union(*[r.keys() for r in rows]) if rows else set()
     preferred = [k for k in PREFERRED_COLUMNS.get(family, []) if k in keys]
@@ -215,27 +371,118 @@ def rows_for(category, blocks):
     return preferred + rest, rows
 
 
+# ── Tab grouping ─────────────────────────────────────────────────────────────
+#
+# Folders make tabs, so nesting a category inside a group folder nests its tab.
+# Without this every discovery lands in one flat row of ~18 tabs, which stops
+# being navigable about half way along.
+#
+# The `N_` prefix orders the groups; the numbers are deliberately sparse so a
+# new group can be slotted between two existing ones without renumbering (and
+# renumbering is not free — the validator treats sibling prefix collisions as an
+# error, and folder names are identity here).
+GROUPS = {
+    "1_Lab_Instruments": None,   # default for VISA/GPIB categories — see below
+    # NMOS is here rather than in "Other" because it is media-over-IP
+    # infrastructure, not a peripheral: an IS-04 registry is what AES67 senders
+    # and receivers register WITH. It also carries video, so if this group is
+    # ever renamed, rename it to something like "Media_Over_IP".
+    "4_Audio_Over_IP": {"ravenna", "sap", "midi", "dante", "dante_channels",
+                        "avb", "nmos"},
+    "10_Google and Apple": {"appletv"},   # plus every cast_* category
+    "12_Other": {"printers", "dnssd"},
+}
+
+
+# Categories promoted OUT of the group folders to sit as their own top-level
+# tab, in the same shape as 0_Scan: `0_discovered/<folder>/<Name>.json` with no
+# intermediate category directory.
+#
+# PTP earns this because it is not one more discovered device family — it is the
+# clock every AES67 and AVB stream is disciplined to. When audio drops out, this
+# is the first tab you open, and burying it one level inside Audio_Over_IP puts
+# it at the same depth as the things it explains.
+#
+# The folder prefix orders it among the groups; 5 sits it directly after
+# 4_Audio_Over_IP, which is where you look next.
+TOP_LEVEL_TABS = {
+    "ptp": ("5_PTP", "PTP"),
+}
+
+
+def group_for(category):
+    """Which group folder a category's tab belongs in.
+
+    Lab instruments are the DEFAULT rather than an explicit list, because VISA
+    categories come from the instrument knowledge base at scan time — DMM,
+    Oscilloscope, Generator, Spectrum, Load, LCR, Power… Listing them here would
+    mean a newly-recognised instrument type silently landing in the wrong group
+    (or worse, at the top level) until someone remembered to update this map.
+    Everything discovered over the network is named explicitly; whatever is left
+    came off the bench.
+    """
+    if category.startswith("cast_"):
+        return "10_Google and Apple"
+    for group, members in GROUPS.items():
+        if members and category in members:
+            return group
+    return "1_Lab_Instruments"
+
+
 def write_panels():
-    # Prune category folders whose devices vanished (or re-categorized —
-    # e.g. after a knowledge-base fix); 0_Scan is the permanent control panel.
+    # Prune categories whose devices vanished (or moved group after a
+    # knowledge-base fix). Pruning has to walk INSIDE the group folders now:
+    # a top-level sweep would see the group names, not find them in `collected`,
+    # and delete every tab on each run.
+    import shutil
+    wanted = {(group_for(c), c) for c in collected if c not in TOP_LEVEL_TABS}
+    # Folder -> category, for the promoted tabs. These live at the top level and
+    # would otherwise be swept as "ungrouped leftovers" on the very next run —
+    # which is exactly what happened to a hand-made 5_PTP/ directory.
+    promoted = {folder: cat for cat, (folder, _) in TOP_LEVEL_TABS.items()}
     if os.path.isdir(OUT_DIR):
-        for entry in os.listdir(OUT_DIR):
-            if entry != "0_Scan" and entry not in collected:
-                stale = os.path.join(OUT_DIR, entry)
-                if os.path.isdir(stale):
-                    import shutil
-                    shutil.rmtree(stale)
-                    print(f"[discovered-gui] pruned stale category {entry}/")
+        for entry in sorted(os.listdir(OUT_DIR)):
+            path = os.path.join(OUT_DIR, entry)
+            if entry == "0_Scan" or not os.path.isdir(path):
+                continue
+            if entry in promoted:
+                # Keep it while its category still has devices; drop the whole
+                # folder when it does not, so an empty tab does not linger.
+                if promoted[entry] not in collected:
+                    shutil.rmtree(path)
+                    print(f"[discovered-gui] pruned empty top-level tab {entry}/")
+                continue
+            if entry in GROUPS:
+                for cat in sorted(os.listdir(path)):
+                    cat_path = os.path.join(path, cat)
+                    if os.path.isdir(cat_path) and (entry, cat) not in wanted:
+                        shutil.rmtree(cat_path)
+                        print(f"[discovered-gui] pruned stale category {entry}/{cat}/")
+                # An empty group folder would render as an empty tab.
+                if not os.listdir(path):
+                    os.rmdir(path)
+                    print(f"[discovered-gui] pruned empty group {entry}/")
+            else:
+                # A category left at the top level by an earlier, ungrouped
+                # build. Remove it so it does not shadow the grouped copy.
+                shutil.rmtree(path)
+                print(f"[discovered-gui] pruned ungrouped leftover {entry}/")
+
     written = 0
     for category, blocks in sorted(collected.items()):
-        cat_dir = os.path.join(OUT_DIR, category)
+        if category in TOP_LEVEL_TABS:
+            folder, doc_name = TOP_LEVEL_TABS[category]
+            cat_dir = os.path.join(OUT_DIR, folder)
+        else:
+            folder, doc_name = group_for(category), category
+            cat_dir = os.path.join(OUT_DIR, folder, category)
         os.makedirs(cat_dir, exist_ok=True)
         headers, rows = rows_for(category, blocks)
         # The library OcaTable (libControl/text/OcaTable) — the component
         # built for exactly this ("Discovered Devices" in Sample.json):
         # sticky header, zebra rows, row-count footer, own scroll region.
         doc = {
-            category: {
+            doc_name: {
                 "type": "OcaBin",
                 "description": {"En": f"Discovered {category} devices (scan snapshot)"},
                 "behavior": {"overflow_ns": "auto"},
@@ -250,11 +497,11 @@ def write_panels():
                 },
             }
         }
-        out = os.path.join(cat_dir, f"{category}.json")
+        out = os.path.join(cat_dir, f"{doc_name}.json")
         with open(out, "w") as f:
             json.dump(doc, f, indent=2)
         written += 1
-        print(f"[discovered-gui] wrote {out} ({len(rows)} device(s), {len(headers)} columns)")
+        print(f"[discovered-gui] wrote {folder}/{doc_name} ({len(rows)} device(s), {len(headers)} columns)")
     return written
 
 

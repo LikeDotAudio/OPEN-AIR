@@ -25,8 +25,10 @@ instruments is orchestrated as easily as a single device.
 
 1. **Discovery across protocols.** **Working today:** VISA/SCPI, MIDI,
    DNS-SD/mDNS, AES70, OSC — devices announce themselves and appear in the UI.
+   Also discovering: **Google Cast**, **RAVENNA/AES67**, **Dante**, **NMOS (IS-04/IS-09)**,
+   **AirPlay/HomeKit**, and **network printers**.
    **Scaffolded but not implemented:** SNMP, Ember+, SMPTE 2138, PTP (PyO3 shims,
-   built only with `--features python`) and NMOS, REST, SAP, WebSocket (stubs).
+   built only with `--features python`) and REST, WebSocket (stubs).
    Stub agents report `status = stub` on the bus rather than claiming health they
    do not have. See [Protocol management](#-protocol-management--discovery).
 2. **YAK — the middleware definition plane.** Multiple instruments that do

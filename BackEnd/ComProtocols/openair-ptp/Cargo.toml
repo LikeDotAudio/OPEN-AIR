@@ -3,10 +3,20 @@ name = "openair-ptp"
 version = "0.1.0"
 edition = "2021"
 
+# PTP spans two transports: UDP (privileged ports 319/320) and raw Ethernet
+# (EtherType 0x88F7 for gPTP). libc is needed directly for AF_PACKET, which std
+# does not expose; socket2 for SO_REUSEPORT on the shared UDP ports.
 [dependencies]
+libc = "0.2"
+socket2 = "0.6"
+rumqttc = "0.24"
 
 parking_lot = { version = "0.12", optional = true }
 pyo3 = { version = "0.21.2", optional = true }
 
 [features]
 python = ["dep:pyo3", "dep:parking_lot"]
+
+[[bin]]
+name = "ptp-monitor"
+path = "src/bin/ptp-monitor.rs"

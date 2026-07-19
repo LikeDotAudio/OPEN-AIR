@@ -52,6 +52,26 @@ WORKDIR /app
 
 COPY --from=build /src/BackEnd/Core/target/release/open-air-orchestrator /usr/local/bin/
 
+# AVDECC (AVB/Milan) is a Layer 2 protocol: it needs raw packet capture, which
+# means CAP_NET_RAW. The container runs as the host user (see `user:` in
+# docker-compose.yml) so it is NOT root and cannot inherit the capability from
+# the container's bounding set alone — FILE capabilities are what carry it to a
+# non-root process. `+eip` puts it in the effective, inheritable and permitted
+# sets so the binary has it the moment it starts.
+#
+# compose must still grant NET_RAW/NET_ADMIN via `cap_add`, or the bounding set
+# clamps this away. Both halves are required; either alone silently fails and
+# the AVB agent reports "raw packet capture denied".
+# cap_net_bind_service is for PTP, not AVDECC: PTPv1/v2 arrive on UDP ports 319
+# and 320, which are below 1024 and therefore privileged. Without it the PTP
+# agent reports "partial" — it still hears gPTP over raw Ethernet, but every
+# UDP-carried clock is invisible, which looks exactly like a network with no
+# PTPv1/v2 on it.
+RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin \
+    && setcap cap_net_raw,cap_net_admin,cap_net_bind_service+eip /usr/local/bin/open-air-orchestrator \
+    && apt-get purge -y libcap2-bin && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
 # The served UI and the authored panel tree. Gui_Frames is bind-mounted in
 # compose so edits from the WYSIWYG editor land on the host, not in the layer.
 COPY FrontEnd   ./FrontEnd

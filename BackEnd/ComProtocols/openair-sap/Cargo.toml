@@ -3,4 +3,12 @@ name = "openair-sap"
 version = "0.1.0"
 edition = "2024"
 
+# Passive multicast listen only — no announcement transmit, no RTP.
+# The SDP parser is shared with openair-ravenna rather than duplicated: the two
+# protocols disagree about how an SDP record is *delivered* (mDNS + RTSP pull
+# vs. SAP push), not about what one says.
 [dependencies]
+rumqttc = "0.24"
+socket2 = "0.6"
+if-addrs = "0.15"
+openair-ravenna = { path = "../openair-ravenna" }

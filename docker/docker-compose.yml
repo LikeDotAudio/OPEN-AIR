@@ -59,6 +59,21 @@ services:
     volumes:
       # Authored UI lives on the host, so WYSIWYG edits persist and are diffable.
       - ../FrontEnd/Gui_Frames:/app/FrontEnd/Gui_Frames
+    # Run as the invoking host user, so files written through the bind mount
+    # (discovered panels, WYSIWYG editor saves) are owned by you and not root.
+    # Without this the container writes root-owned files into your working tree,
+    # which then break `git`, the editor, and any native tooling run on the host.
+    # launch.py exports these; the 1000 fallback covers a bare `docker compose up`.
+    user: "${OPENAIR_UID:-1000}:${OPENAIR_GID:-1000}"
+    # AVB/Milan (AVDECC) is Layer 2 and needs raw sockets. The Dockerfile also
+    # setcaps the binary — a non-root process needs BOTH the file capability and
+    # this bounding-set grant. Without them the AVB agent reports
+    # "raw packet capture denied" and finds nothing, silently.
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+      # PTP listens on UDP 319/320 — privileged ports. See the Dockerfile.
+      - NET_BIND_SERVICE
     environment:
       - OPENAIR_BIND=0.0.0.0     # inside the container only — see Dockerfile
       - MQTT_HOST=broker

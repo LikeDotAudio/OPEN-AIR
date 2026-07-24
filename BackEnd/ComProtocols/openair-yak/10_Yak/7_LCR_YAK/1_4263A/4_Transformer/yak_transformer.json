@@ -1,0 +1,38 @@
+{
+  "LCR_YAK_4263A_Transformer": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.4",
+    "blocks": {
+      "Transformer_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Transformer Parameters (Opt 001)"
+        },
+        "fields": {
+          "Transformer Mode": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SENSe:FUNCtion:ON \"{value}\"",
+            "options": [
+              "L2N",
+              "L2M",
+              "L2R2"
+            ]
+          },
+          "Test Frequency": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SENSe:FREQuency:CW {value}",
+            "options": [
+              "100",
+              "120",
+              "1k",
+              "10k",
+              "100k"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "HP_4263A_CONFIG": {
+    "type": "OcaBin",
+    "id": "4263A.CONF.001",
+    "blocks": {
+      "Signal_Setup": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Test Signal & Timing",
+          "Fr": "Signal de test et synchronisation",
+          "De": "Testsignal & Timing",
+          "Es": "Se\u00f1al de prueba y sincronizaci\u00f3n"
+        },
+        "fields": {
+          "Frequency": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "1 kHz",
+                  "Fr": "1 kHz",
+                  "De": "1 kHz",
+                  "Es": "1 kHz"
+                }
+              }
+            },
+            "message": ":FREQ 1KHZ"
+          },
+          "Level": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "1V Level",
+                  "Fr": "1V Niveau",
+                  "De": "1V Pegel",
+                  "Es": "1V Nivel"
+                }
+              }
+            },
+            "message": ":VOLT 1V"
+          },
+          "Speed_Fast": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Fast (Short)",
+                  "Fr": "Rapide (Court)",
+                  "De": "Schnell (Kurz)",
+                  "Es": "R\u00e1pido (Corto)"
+                }
+              }
+            },
+            "message": ":APER SHOR"
+          },
+          "DC_Bias": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Bias ON",
+                  "Fr": "Biais ACTIV\u00c9",
+                  "De": "Bias AN",
+                  "Es": "Polarizaci\u00f3n ACTIVADA"
+                }
+              }
+            },
+            "message": ":BIAS:STAT ON"
+          }
+        }
+      }
+    }
+  }
+}

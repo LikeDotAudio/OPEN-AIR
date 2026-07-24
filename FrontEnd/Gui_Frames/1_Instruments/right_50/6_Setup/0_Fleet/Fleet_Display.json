@@ -80,7 +80,7 @@
           },
           "geometry": {
             "w": 1100,
-            "h": 600,
+            "h": 250,
             "pad": 10
           },
           "dynamics": {
@@ -90,6 +90,35 @@
           },
           "cosmetics": {
             "bg": "#1a1a1a"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "yak_auto_builder_group",
+        "lbl": "Discovered YAK Device GUI (Auto-Generated)"
+      },
+      "geometry": {
+        "row": 2,
+        "col": 0,
+        "pad": 10,
+        "sticky": "nsew"
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "YakAutoBuilder",
+            "id": "demo_yak_discovery"
+          },
+          "geometry": {
+            "w": 1100,
+            "h": 500,
+            "pad": 10
+          },
+          "config": {
+            "instrument_path": "1_Spectrum_YAK/1_N9340B/0_Frequency/yak_frequency.json"
           }
         }
       ]

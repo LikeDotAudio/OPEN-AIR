@@ -1,0 +1,48 @@
+{
+  "Distortion_YAK_Porta_one_Channel_B": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.1",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel B Configuration",
+          "Fr": "Canal B Configuration",
+          "De": "Kanal B Configuration",
+          "Es": "Canal B Configuration"
+        },
+        "fields": {
+          "Input_Selection_B": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Route signals to Analyzer B",
+              "Fr": "Route signals to Analyzer B",
+              "De": "Route signals to Analyzer B",
+              "Es": "Route signals to Analyzer B"
+            },
+            "fields": {
+              "Select_Input_Analog_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":INPut B"
+                  }
+                }
+              },
+              "Select_Input_Gen_Monitor_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":INPut GENB"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

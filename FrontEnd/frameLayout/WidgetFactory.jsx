@@ -33,6 +33,7 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     'OcaNotebook': window.TabLayout,
     'OcaSplit': window.SplitLayout,
     'OcaTable': window.OcaTable,
+    'YakAutoBuilder': window.YakAutoBuilder,
     // 'Sampler' / 'AudioEditor' / 'Sequencer' removed 2026-07-18 with the
     // Sampler feature (see CHANGELOG). Panels using these types now fall
     // through to the dashed unknown-widget box, which validate reports.

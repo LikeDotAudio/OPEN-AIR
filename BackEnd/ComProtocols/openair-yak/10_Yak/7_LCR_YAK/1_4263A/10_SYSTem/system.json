@@ -1,0 +1,75 @@
+{
+  "HP_4263A_SYSTEM": {
+    "type": "OcaBin",
+    "id": "4263A.SYST.001",
+    "blocks": {
+      "Calibration": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Correction & Reset",
+          "Fr": "Correction & R\u00e9initialiser",
+          "De": "Correction & Zur\u00fccksetzen",
+          "Es": "Correction & Reiniciar"
+        },
+        "fields": {
+          "Open_Corr": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "OPEN CORR",
+                  "Fr": "OPEN CORR",
+                  "De": "OPEN CORR",
+                  "Es": "OPEN CORR"
+                }
+              }
+            },
+            "message": ":CORR:OPEN:EXEC"
+          },
+          "Short_Corr": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "SHORT CORR",
+                  "Fr": "SHORT CORR",
+                  "De": "SHORT CORR",
+                  "Es": "SHORT CORR"
+                }
+              }
+            },
+            "message": ":CORR:SHOR:EXEC"
+          },
+          "Reset_Unit": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Factory Reset",
+                  "Fr": "Factory R\u00e9initialiser",
+                  "De": "Factory Zur\u00fccksetzen",
+                  "Es": "Factory Reiniciar"
+                }
+              }
+            },
+            "message": "*RST"
+          },
+          "Error_Log": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Read Error",
+                  "Fr": "Read Erreur",
+                  "De": "Read Fehler",
+                  "Es": "Read Error"
+                }
+              }
+            },
+            "message": ":SYST:ERR?"
+          }
+        }
+      }
+    }
+  }
+}

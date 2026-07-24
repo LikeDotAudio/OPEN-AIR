@@ -1,0 +1,65 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuraci\u00f3n"
+        },
+        "fields": {
+          "Horizontal_Settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Timebase",
+              "Fr": "Tempsbase",
+              "De": "Zeitbase",
+              "Es": "Tiempobase"
+            },
+            "fields": {
+              "Time_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TIMebase:MAIN:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "scale": {
+                        "value": "0.001",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "Time_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TIMebase:MAIN:OFFSet <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "offset": {
+                        "value": "0.0",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

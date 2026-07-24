@@ -1,0 +1,397 @@
+{
+  "Oscilloscope_YAK_54641D_CHANnel": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.2",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Analog Channel Settings",
+          "Fr": "Analog Canal Param\u00e8tres",
+          "De": "Analog Kanal Einstellungen",
+          "Es": "Analog Canal Ajustes"
+        },
+        "fields": {
+          "Set_Bandwidth_Limit": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:BWLimit <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Coupling": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:COUPling <coupling>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "coupling": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Coupling",
+                      "Fr": "Couplage",
+                      "De": "Kopplung",
+                      "Es": "Acoplamiento"
+                    },
+                    "description": {
+                      "En": "AC, DC, GND",
+                      "Fr": "AC, DC, GND",
+                      "De": "AC, DC, GND",
+                      "Es": "CA, CC, GND"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:OFFSet <offset>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "offset": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
+                    "label": {
+                      "En": "Offset",
+                      "Fr": "D\u00e9calage",
+                      "De": "Versatz",
+                      "Es": "Compensaci\u00f3n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Range": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:RANGe <range>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "range": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Scale": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:SCALe <scale>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "scale": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V/div"
+                    },
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "\u00c9chelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Display": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:DISPlay <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Impedance": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:IMPedance <imp>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "imp": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Imp",
+                      "Fr": "Imp",
+                      "De": "Imp",
+                      "Es": "Imp"
+                    },
+                    "description": {
+                      "En": "ONEMeg or FIFTy",
+                      "Fr": "ONEMeg or FIFTy",
+                      "De": "ONEMeg or FIFTy",
+                      "Es": "ONEMeg or FIFTy"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Probe": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:PROBe <atten>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "atten": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "X"
+                    },
+                    "label": {
+                      "En": "Atten",
+                      "Fr": "Att\u00e9n",
+                      "De": "Atten",
+                      "Es": "Aten"
+                    },
+                    "description": {
+                      "En": "1, 10, 100",
+                      "Fr": "1, 10, 100",
+                      "De": "1, 10, 100",
+                      "Es": "1, 10, 100"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Invert": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CHANnel<n>:INVert <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "n": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    }
+                  },
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

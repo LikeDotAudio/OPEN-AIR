@@ -1,0 +1,104 @@
+{
+  "Oscilloscope_YAK_DS1104Z_Commands_Root": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.1.0",
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Root Action Commands",
+          "Fr": "Root Action Commands",
+          "De": "Root Action Commands",
+          "Es": "Root Action Commands"
+        },
+        "fields": {
+          "Run_Stop_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":RUN"
+                }
+              },
+              "Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":STOP"
+                }
+              },
+              "Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SINGle"
+                }
+              },
+              "Auto": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTO",
+                      "Fr": "AUTO",
+                      "De": "AUTO",
+                      "Es": "AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":AUTO"
+                }
+              },
+              "Force_Trigger": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Force Trigger",
+                      "Fr": "D\u00e9clenchement forc\u00e9",
+                      "De": "Trigger erzwingen",
+                      "Es": "Disparo forzado"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":TFORce"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

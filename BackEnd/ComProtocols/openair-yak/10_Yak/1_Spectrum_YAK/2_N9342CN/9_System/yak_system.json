@@ -1,0 +1,174 @@
+{
+  "Spectrum_YAK_N9342CN_System": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.2.9",
+    "blocks": {
+      "Get": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Status and Identification",
+          "Fr": "Syst\u00e8me Statut and Identification",
+          "De": "System Status and Identification",
+          "Es": "Sistema Estado and Identification"
+        },
+        "fields": {
+          "Get_error_information": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "System Error Check",
+              "Fr": "V\u00e9rification d'erreur syst\u00e8me",
+              "De": "Systemfehlerpr\u00fcfung",
+              "Es": "Comprobaci\u00f3n de errores del sistema"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":SYSTem:ERRor?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "ERROR": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Error Count",
+                      "Fr": "Erreur Count",
+                      "De": "Fehler Count",
+                      "Es": "Error Count"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          },
+          "Get_identification_query": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Instrument ID",
+              "Fr": "ID de l'instrument",
+              "De": "Instrumenten-ID",
+              "Es": "ID del instrumento"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "identification_string": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "ID String",
+                      "Fr": "Cha\u00eene ID",
+                      "De": "ID-String",
+                      "Es": "Cadena de ID"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      },
+      "Actions": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Maintenance Controls",
+          "Fr": "Commandes de maintenance syst\u00e8me",
+          "De": "Systemwartungssteuerungen",
+          "Es": "Controles de mantenimiento del sistema"
+        },
+        "fields": {
+          "Do_Update_Display": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Update Display",
+                  "Fr": "Mettre \u00e0 jour Display",
+                  "De": "Aktualisieren Display",
+                  "Es": "Actualizar Display"
+                }
+              }
+            },
+            "Execute Command": {
+              "message": ":SYSTem:DISPlay:UPDate"
+            }
+          },
+          "Maintenance_Commands": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Hardware Reset and Clear",
+              "Fr": "Hardware R\u00e9initialiser and Effacer",
+              "De": "Hardware Zur\u00fccksetzen and L\u00f6schen",
+              "Es": "Hardware Reiniciar and Borrar"
+            },
+            "fields": {
+              "Do_Clear_Device": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear Status (*CLS)",
+                      "Fr": "Effacer Statut (*CLS)",
+                      "De": "L\u00f6schen Status (*CLS)",
+                      "Es": "Borrar Estado (*CLS)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "value": "*CLS"
+                }
+              },
+              "Do_Reset": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Reset Device (*RST)",
+                      "Fr": "R\u00e9initialiser l'appareil (*RST)",
+                      "De": "Ger\u00e4t zur\u00fccksetzen (*RST)",
+                      "Es": "Reiniciar dispositivo (*RST)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "value": "*RST"
+                }
+              },
+              "Do_Power_Cycle": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Power Cycle",
+                      "Fr": "Puissance Cycle",
+                      "De": "Leistung Cycle",
+                      "Es": "Potencia Cycle"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SYSTem:POWer:RESet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

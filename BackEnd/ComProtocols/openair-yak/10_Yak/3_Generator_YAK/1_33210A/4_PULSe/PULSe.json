@@ -1,0 +1,45 @@
+{
+  "Generator_YAK_33210A_PULSe": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.4",
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "PULSe Configuration",
+          "Fr": "PULSe Configuration",
+          "De": "PULSe Konfiguration",
+          "Es": "PULSe Configuraci\u00f3n"
+        },
+        "fields": {
+          "Setup_Pulse_Width": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "FUNCtion:PULSe:WIDTh <width_sec>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "width_sec": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
+                    "label": {
+                      "En": "Width",
+                      "Fr": "Largeur",
+                      "De": "Breite",
+                      "Es": "Ancho"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

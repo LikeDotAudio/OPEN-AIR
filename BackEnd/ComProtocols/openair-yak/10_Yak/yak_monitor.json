@@ -1,0 +1,17 @@
+{
+  "Migrated_YakMonitor": {
+    "type": "OcaBin",
+    "id": "migrated.yak_monitor",
+    "blocks": {
+      "MainBlock": {
+        "type": "OcaBlock",
+        "label": {},
+        "fields": {
+          "component": {
+            "type": "_YakMonitor"
+          }
+        }
+      }
+    }
+  }
+}

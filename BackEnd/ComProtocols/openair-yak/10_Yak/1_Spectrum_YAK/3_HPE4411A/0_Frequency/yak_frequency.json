@@ -1,0 +1,260 @@
+{
+  "Spectrum_YAK_HPE4411A_Frequency": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.3.0",
+    "blocks": {
+      "NAB": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fr\u00e9quence NAB",
+          "De": "NAB Frequenz\u00fcberwachung",
+          "Es": "Monitoreo de frecuencia NAB",
+          "show_label": false
+        },
+        "fields": {
+          "Frequency_settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fr\u00e9quence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Get Frequency Settings",
+                      "Fr": "Get Fr\u00e9quence Param\u00e8tres",
+                      "De": "Get Frequenz Einstellungen",
+                      "Es": "Get Frecuencia Ajustes"
+                    }
+                  }
+                },
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "D\u00e9marrer Fr\u00e9quence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  },
+                  "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arr\u00eater Fr\u00e9quence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    },
+                    "index": 1,
+                    "data_type": "string"
+                  },
+                  "center_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Center Frequency (Hz)",
+                      "Fr": "Fr\u00e9quence centrale (Hz)",
+                      "De": "Mittenfrequenz (Hz)",
+                      "Es": "Frecuencia central (Hz)"
+                    },
+                    "index": 2,
+                    "data_type": "string"
+                  },
+                  "span_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Port\u00e9e Fr\u00e9quence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    },
+                    "index": 3,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      },
+      "RIG_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fr\u00e9quence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
+        "fields": {
+          "freq_start_stop": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fr\u00e9quence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Set Start and Stop Frequency",
+                      "Fr": "Set D\u00e9marrer and Arr\u00eater Fr\u00e9quence",
+                      "De": "Set Start and Stopp Frequenz",
+                      "Es": "Set Inicio and Parar Frecuencia"
+                    }
+                  }
+                },
+                "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "D\u00e9marrer Fr\u00e9quence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    }
+                  },
+                  "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arr\u00eater Fr\u00e9quence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Span_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:SPAN <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Port\u00e9e Fr\u00e9quence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Start_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "En": "Set Start Frequency",
+                  "Fr": "Set D\u00e9marrer Fr\u00e9quence",
+                  "De": "Set Start Frequenz",
+                  "Es": "Set Inicio Frecuencia"
+                },
+                "message": ":FREQuency:STARt <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "D\u00e9marrer Fr\u00e9quence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Stop_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Set Stop Frequency",
+                      "Fr": "Set Arr\u00eater Fr\u00e9quence",
+                      "De": "Set Stopp Frequenz",
+                      "Es": "Set Parar Frecuencia"
+                    }
+                  }
+                },
+                "message": ":FREQuency:STOP <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

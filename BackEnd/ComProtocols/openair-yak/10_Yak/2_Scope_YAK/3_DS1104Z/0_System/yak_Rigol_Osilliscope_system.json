@@ -1,0 +1,125 @@
+{
+  "Oscilloscope_YAK_DS1104Z_System": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.0",
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Run_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":RUN"
+                }
+              },
+              "Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":STOP"
+                }
+              },
+              "Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SINGle"
+                }
+              },
+              "Auto_Scale": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTO",
+                      "Fr": "AUTO",
+                      "De": "AUTO",
+                      "Es": "AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":AUToscale"
+                }
+              }
+            }
+          },
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Clear": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear",
+                      "Fr": "Effacer",
+                      "De": "L\u00f6schen",
+                      "Es": "Borrar"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CLEar"
+                }
+              },
+              "Force_Trigger": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Force",
+                      "Fr": "Force",
+                      "De": "Force",
+                      "Es": "Force"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":TFORce"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

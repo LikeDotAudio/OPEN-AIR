@@ -1,0 +1,217 @@
+{
+  "Power_YAK_66104A__Legacy_Commands": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2",
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "MPS 8-Slot Metering",
+          "Fr": "MPS 8-Slot Metering",
+          "De": "MPS 8-Slot Metering",
+          "Es": "MPS 8-Slot Metering"
+        },
+        "fields": {
+          "Measurements": {
+            "type": "OcaBlock",
+            "fields": {
+              "Get_Values": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "INST:NSEL 1;MEAS:VOLT?;MEAS:CURR?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "volts": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      },
+                      "amps": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
+                        "index": 1,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Configuration (Volts/Amps)",
+          "Fr": "Configuration (Volts/Amps)",
+          "De": "Konfiguration (Volts/Ampere)",
+          "Es": "Configuraci\u00f3n (Volts/Amperios)"
+        },
+        "fields": {
+          "Config_Slot": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_S1_Levels": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "INST:NSEL 1;VOLT <volt>;CURR <curr>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "volt": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        }
+                      },
+                      "curr": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Syst\u00e8me Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
+        "fields": {
+          "Output_Toggles": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Individual Output Control",
+              "Fr": "Individual Sortie Contr\u00f4le",
+              "De": "Individual Ausgang Steuerung",
+              "Es": "Individual Salida Control"
+            },
+            "fields": {
+              "Slot_1_Controls": {
+                "type": "OcaBlock",
+                "fields": {
+                  "S1_ON": {
+                    "type": "_GuiActuator",
+                    "label": {
+                      "inactive": {
+                        "text": {
+                          "En": "ON",
+                          "Fr": "ON",
+                          "De": "EIN",
+                          "Es": "ENC"
+                        }
+                      }
+                    },
+                    "Execute Command": {
+                      "message": "INST:NSEL 1;OUTP ON"
+                    }
+                  },
+                  "S1_OFF": {
+                    "type": "_GuiActuator",
+                    "label": {
+                      "inactive": {
+                        "text": {
+                          "En": "OFF",
+                          "Fr": "OFF",
+                          "De": "AUS",
+                          "Es": "DES"
+                        }
+                      }
+                    },
+                    "Execute Command": {
+                      "message": "INST:NSEL 1;OUTP OFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "System_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "System_Reset": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Reset (*RST)",
+                      "Fr": "R\u00e9initialiser (*RST)",
+                      "De": "Zur\u00fccksetzen (*RST)",
+                      "Es": "Reiniciar (*RST)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              },
+              "Clear_Status": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear (*CLS)",
+                      "Fr": "Effacer (*CLS)",
+                      "De": "L\u00f6schen (*CLS)",
+                      "Es": "Borrar (*CLS)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*CLS"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

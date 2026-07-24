@@ -1,0 +1,228 @@
+{
+  "Oscilloscope_YAK_54641D_MARKer": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.8",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Cursor Settings",
+          "Fr": "Param\u00e8tres du curseur",
+          "De": "Cursoreinstellungen",
+          "Es": "Ajustes del cursor"
+        },
+        "fields": {
+          "Set_Marker_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "MARKer:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "MANual, MEASure, OFF",
+                      "Fr": "MANuel, MESure, D\u00c9SACTIV\u00c9",
+                      "De": "Manuell, Messen, Aus",
+                      "Es": "MANual, MEDida, DESACTIVADO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_X_Markers": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Time/Frequency Markers",
+              "Fr": "Temps/Fr\u00e9quence Marqueurs",
+              "De": "Zeit/Frequenz Markers",
+              "Es": "Tiempo/Frecuencia Marcadors"
+            },
+            "fields": {
+              "Set_X1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "MARKer:X1Position <pos>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "pos": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
+                        "label": {
+                          "En": "X1",
+                          "Fr": "X1",
+                          "De": "X1",
+                          "Es": "X1"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_X2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "MARKer:X2Position <pos>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "pos": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
+                        "label": {
+                          "En": "X2",
+                          "Fr": "X2",
+                          "De": "X2",
+                          "Es": "X2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Y_Markers": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Voltage Markers",
+              "Fr": "Tension Marqueurs",
+              "De": "Spannenung Markers",
+              "Es": "Voltaje Marcadors"
+            },
+            "fields": {
+              "Set_Y1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "MARKer:Y1Position <lev>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "lev": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Y1",
+                          "Fr": "Y1",
+                          "De": "Y1",
+                          "Es": "Y1"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Y2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "MARKer:Y2Position <lev>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "lev": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Y2",
+                          "Fr": "Y2",
+                          "De": "Y2",
+                          "Es": "Y2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Cursor Deltas",
+          "Fr": "Deltas de curseur",
+          "De": "Cursor-Deltas",
+          "Es": "Deltas de cursor"
+        },
+        "fields": {
+          "Get_X_Delta": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "MARKer:XDELta?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "delta": {
+                    "type": "_GuiValue",
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          },
+          "Get_Y_Delta": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "MARKer:YDELta?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "delta": {
+                    "type": "_GuiValue",
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

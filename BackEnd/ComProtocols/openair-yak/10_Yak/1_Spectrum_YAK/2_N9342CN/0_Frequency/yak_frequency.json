@@ -1,0 +1,157 @@
+{
+  "Spectrum_YAK_N9342CN_Frequency": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.2.0",
+    "blocks": {
+      "NAB": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fr\u00e9quence NAB",
+          "De": "NAB Frequenz\u00fcberwachung",
+          "Es": "Monitoreo de frecuencia NAB"
+        },
+        "fields": {
+          "Frequency_settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fr\u00e9quence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "value": "The current start frequency in Hz.",
+                    "type": "_GuiValue",
+                    "index": 0,
+                    "data_type": "string"
+                  },
+                  "stop_freq": {
+                    "value": "The current stop frequency in Hz.",
+                    "type": "_GuiValue",
+                    "index": 1,
+                    "data_type": "string"
+                  },
+                  "center_freq": {
+                    "value": "The current center frequency in Hz.",
+                    "type": "_GuiValue",
+                    "index": 2,
+                    "data_type": "string"
+                  },
+                  "span_freq": {
+                    "value": "The current span frequency in Hz.",
+                    "type": "_GuiValue",
+                    "index": 3,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      },
+      "RIG_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fr\u00e9quence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
+        "fields": {
+          "freq_start_stop": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fr\u00e9quence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "start_freq": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  },
+                  "stop_freq": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Span_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:SPAN <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Start_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:STARt <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "12345678",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Stop_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":FREQuency:STOP <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "value": "987654321",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

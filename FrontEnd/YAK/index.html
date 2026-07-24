@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAK Dynamic GUI Renderer - Full Instrument</title>
+    <link rel="stylesheet" href="yak_renderer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1>YAK Hardware Discovery</h1>
+                <p>Simulating Discovery of: 
+                    <select id="instrumentSelector" class="instrument-select">
+                        <option value="N9340B">Agilent N9340B (Spectrum Analyzer)</option>
+                        <option value="HP66102A">HP 66102A (DC Power Supply)</option>
+                        <option value="Router3235">Keysight 3235 (Switch Matrix)</option>
+                    </select>
+                </p>
+            </div>
+            <button id="discoverBtn" class="btn primary-btn">Simulate Discovery Handshake (*IDN?)</button>
+        </header>
+
+        <main id="guiContainer" class="gui-container hidden">
+            <div class="loader-container" id="loader">
+                <div class="spinner"></div>
+                <p>Parsing full instrument schema (7 subsystems)...</p>
+            </div>
+            
+            <div class="app-layout hidden" id="appLayout">
+                <aside class="sidebar">
+                    <h3 class="sidebar-title">Subsystems</h3>
+                    <ul class="nav-list" id="sidebarNav">
+                        <!-- Navigation tabs will be injected here -->
+                    </ul>
+                </aside>
+                
+                <section class="main-content" id="yakTree">
+                    <!-- Dynamic GUI fields will be injected here -->
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="yak_renderer.js"></script>
+</body>
+</html>

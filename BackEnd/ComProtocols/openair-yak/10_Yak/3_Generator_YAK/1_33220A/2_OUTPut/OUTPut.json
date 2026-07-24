@@ -1,0 +1,171 @@
+{
+  "Generator_YAK_33220A_OUTPut": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.2",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "OUTPut Configuration",
+          "Fr": "OUTPut Configuration",
+          "De": "OUTPut Konfiguration",
+          "Es": "OUTPut Configuraci\u00f3n"
+        },
+        "fields": {
+          "Set_Output_Load": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "OUTPut:LOAD <ohms>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "ohms": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
+                    "label": {
+                      "En": "Load",
+                      "Fr": "Charger",
+                      "De": "Laden",
+                      "Es": "Cargar"
+                    },
+                    "description": {
+                      "En": "Ohms or INFinity",
+                      "Fr": "Ohms or INFinity",
+                      "De": "Ohms or INFinity",
+                      "Es": "Ohms or INFinity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Output Control",
+          "Fr": "Sortie Control",
+          "De": "Ausgang Control",
+          "Es": "Salida Control"
+        },
+        "fields": {
+          "Output_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Output_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Output ON",
+                      "Fr": "Sortie ON",
+                      "De": "Ausgang ON",
+                      "Es": "Salida ON"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "OUTPut ON"
+                }
+              },
+              "Output_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Output OFF",
+                      "Fr": "Sortie D\u00c9SACTIV\u00c9E",
+                      "De": "Ausgang AUS",
+                      "Es": "Salida DESACTIVADA"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "OUTPut OFF"
+                }
+              },
+              "Sync_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Sync ON",
+                      "Fr": "Sync ON",
+                      "De": "Sync ON",
+                      "Es": "Sync ON"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "OUTPut:SYNC ON"
+                }
+              },
+              "Sync_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Sync OFF",
+                      "Fr": "Sync OFF",
+                      "De": "Sync OFF",
+                      "Es": "Sync OFF"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "OUTPut:SYNC OFF"
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Output Status",
+          "Fr": "Sortie Status",
+          "De": "Ausgang Status",
+          "Es": "Salida Status"
+        },
+        "fields": {
+          "Get_Output_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "OUTPut?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "is_on": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Is On",
+                      "Fr": "Is On",
+                      "De": "Is On",
+                      "Es": "Is On"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

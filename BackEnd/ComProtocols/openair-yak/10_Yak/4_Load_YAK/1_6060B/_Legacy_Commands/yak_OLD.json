@@ -1,0 +1,862 @@
+{
+  "Load_YAK_6060B__Legacy_Commands": {
+    "type": "OcaBin",
+    "id": "50.100.7.10.1",
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "DC Load Measurements",
+          "Fr": "Mesures de charge CC",
+          "De": "DC-Lastmessungen",
+          "Es": "Mediciones de carga de CC"
+        },
+        "fields": {
+          "Primary_Metering": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Voltage, Current, Power",
+              "Fr": "Tension, Courant, Puissance",
+              "De": "Spannung, Strom, Leistung",
+              "Es": "Voltaje, Corriente, Potencia"
+            },
+            "fields": {
+              "Measure_All": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "mode": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      },
+                      "volts": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
+                        "index": 1,
+                        "data_type": "string"
+                      },
+                      "amps": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
+                        "index": 2,
+                        "data_type": "string"
+                      },
+                      "watts": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "W"
+                        },
+                        "label": {
+                          "En": "Power",
+                          "Fr": "Puissance",
+                          "De": "Leistung",
+                          "Es": "Potencia"
+                        },
+                        "index": 3,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          },
+          "System_Status": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Diagnostics",
+              "Fr": "Diagnostics",
+              "De": "Diagnostics",
+              "Es": "Diagnostics"
+            },
+            "fields": {
+              "Status_Byte": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "*STB?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "status_byte": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Status",
+                          "Fr": "\u00c9tat",
+                          "De": "Status",
+                          "Es": "Estado"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Error": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "SYST:ERR?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "error_msg": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Error",
+                          "Fr": "Erreur",
+                          "De": "Fehler",
+                          "Es": "Error"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "IDN": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "*IDN?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "idn_string": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "ID String",
+                          "Fr": "Cha\u00eene ID",
+                          "De": "ID-String",
+                          "Es": "Cadena de ID"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Load Configuration",
+          "Fr": "Charger Configuration",
+          "De": "Laden Konfiguration",
+          "Es": "Cargar Configuraci\u00f3n"
+        },
+        "fields": {
+          "Mode": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "CC / CV / CR",
+              "Fr": "CC / CV / CR",
+              "De": "CC / CV / CR",
+              "Es": "CC / CV / CR"
+            },
+            "fields": {
+              "Set_Mode_Current": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Mode: CC",
+                      "Fr": "Mode: CC",
+                      "De": "Modus: CC",
+                      "Es": "Modo: CC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "MODE:CURR"
+                }
+              },
+              "Set_Mode_Voltage": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Mode: CV",
+                      "Fr": "Mode: CV",
+                      "De": "Modus: CV",
+                      "Es": "Modo: CV"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "MODE:VOLT"
+                }
+              },
+              "Set_Mode_Resistance": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Mode: CR",
+                      "Fr": "Mode: CR",
+                      "De": "Modus: CR",
+                      "Es": "Modo: CR"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "MODE:RES"
+                }
+              }
+            }
+          },
+          "Current": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Constant Current Parameters",
+              "Fr": "Constant Courant Parameters",
+              "De": "Constant Strom Parameters",
+              "Es": "Constant Corriente Parameters"
+            },
+            "fields": {
+              "Set_Current_Level": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "CURR <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
+                        "description": {
+                          "En": "Amps",
+                          "Fr": "Amps",
+                          "De": "Ampere",
+                          "Es": "Amperios"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Current_Range": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "CURR:RANG <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
+                        "description": {
+                          "En": "6 or 60 A",
+                          "Fr": "6 ou 60 A",
+                          "De": "6 oder 60 A",
+                          "Es": "6 o 60 A"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Current_Slew": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "CURR:SLEW <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A/s"
+                        },
+                        "label": {
+                          "En": "Slew Rate",
+                          "Fr": "Slew Rate",
+                          "De": "Slew Rate",
+                          "Es": "Slew Rate"
+                        },
+                        "description": {
+                          "En": "A/sec",
+                          "Fr": "A/sec",
+                          "De": "A/Sek",
+                          "Es": "A/seg"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Voltage": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Constant Voltage Parameters",
+              "Fr": "Param\u00e8tres de tension constante",
+              "De": "Konstantspannungsparameter",
+              "Es": "Par\u00e1metros de voltaje constante"
+            },
+            "fields": {
+              "Set_Voltage_Level": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "VOLT <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
+                        "description": {
+                          "En": "Volts",
+                          "Fr": "Volts",
+                          "De": "Volts",
+                          "Es": "Volts"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Voltage_Range": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "VOLT:RANG <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
+                        "description": {
+                          "En": "6, 60, etc",
+                          "Fr": "6, 60, etc",
+                          "De": "6, 60, etc",
+                          "Es": "6, 60, etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Resistance": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Constant Resistance Parameters",
+              "Fr": "Constant R\u00e9sistance Parameters",
+              "De": "Constant Breitrstand Parameters",
+              "Es": "Constant Resistencia Parameters"
+            },
+            "fields": {
+              "Set_Resistance_Level": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "RES <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Ohms"
+                        },
+                        "label": {
+                          "En": "Resistance",
+                          "Fr": "R\u00e9sistance",
+                          "De": "Widerstand",
+                          "Es": "Resistencia"
+                        },
+                        "description": {
+                          "En": "Ohms",
+                          "Fr": "Ohms",
+                          "De": "Ohm",
+                          "Es": "Ohmios"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Resistance_Range": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "RES:RANG <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Ohms"
+                        },
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
+                        "description": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Transients & Limits",
+          "Fr": "Transitoires & Limits",
+          "De": "Transients & Limits",
+          "Es": "Transitorios & Limits"
+        },
+        "fields": {
+          "Transient": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Pulse & Dynamic Loading",
+              "Fr": "Chargement puls\u00e9 et dynamique",
+              "De": "Impuls- und dynamisches Laden",
+              "Es": "Carga pulsada y din\u00e1mica"
+            },
+            "fields": {
+              "Set_Transient_Mode": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "TRAN:MODE <mode>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "mode": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Mode",
+                          "Fr": "Mode",
+                          "De": "Modus",
+                          "Es": "Modo"
+                        },
+                        "description": {
+                          "En": "CONT, PULS, TOGG",
+                          "Fr": "CONT, PULS, TOGG",
+                          "De": "CONT, PULS, TOGG",
+                          "Es": "CONT, PULS, TOGG"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Transient_Level_A": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "CURR:LEV <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Level A",
+                          "Fr": "Niveau A",
+                          "De": "Pegel A",
+                          "Es": "Nivel A"
+                        },
+                        "description": {
+                          "En": "Main Level",
+                          "Fr": "Main Niveau",
+                          "De": "Main Pegel",
+                          "Es": "Main Nivel"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Transient_Level_B": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "CURR:TLEV <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
+                        "label": {
+                          "En": "Level B",
+                          "Fr": "Niveau B",
+                          "De": "Pegel B",
+                          "Es": "Nivel B"
+                        },
+                        "description": {
+                          "En": "Transient Level",
+                          "Fr": "Transitoire Niveau",
+                          "De": "Transient Pegel",
+                          "Es": "Transitorio Nivel"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Transient_Freq": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "TRAN:FREQ <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fr\u00e9quence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
+                        "description": {
+                          "En": "Hz",
+                          "Fr": "Hz",
+                          "De": "Hz",
+                          "Es": "Hz"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Transient_Duty": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "TRAN:DCYC <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "%"
+                        },
+                        "label": {
+                          "En": "Duty Cycle",
+                          "Fr": "Duty Cycle",
+                          "De": "Duty Cycle",
+                          "Es": "Duty Cycle"
+                        },
+                        "description": {
+                          "En": "Percent",
+                          "Fr": "Percent",
+                          "De": "Percent",
+                          "Es": "Percent"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Input_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Input_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Input ON",
+                      "Fr": "Entr\u00e9e ON",
+                      "De": "Eingang ON",
+                      "Es": "Entrada ON"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "INP ON"
+                }
+              },
+              "Input_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Input OFF",
+                      "Fr": "Entr\u00e9e OFF",
+                      "De": "Eingang OFF",
+                      "Es": "Entrada OFF"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "INP OFF"
+                }
+              }
+            }
+          },
+          "Transient_Action": {
+            "type": "OcaBlock",
+            "fields": {
+              "Transient_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Trans ON",
+                      "Fr": "Trans ON",
+                      "De": "Trans ON",
+                      "Es": "Trans ON"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "TRAN:STAT ON"
+                }
+              },
+              "Transient_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Trans OFF",
+                      "Fr": "Trans D\u00c9SACTIV\u00c9",
+                      "De": "Trans AUS",
+                      "Es": "Trans DESACTIVADO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "TRAN:STAT OFF"
+                }
+              },
+              "Trigger": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Trigger (*TRG)",
+                      "Fr": "D\u00e9clencheur (*TRG)",
+                      "De": "Trigger (*TRG)",
+                      "Es": "Disparo (*TRG)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*TRG"
+                }
+              }
+            }
+          },
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Clear_Protection": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear Prot",
+                      "Fr": "Effacer Prot",
+                      "De": "L\u00f6schen Prot",
+                      "Es": "Borrar Prot"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "PROT:CLE"
+                }
+              },
+              "Reset_Device": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Reset (*RST)",
+                      "Fr": "R\u00e9initialiser (*RST)",
+                      "De": "Zur\u00fccksetzen (*RST)",
+                      "Es": "Reiniciar (*RST)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              },
+              "Clear_Status": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear (*CLS)",
+                      "Fr": "Effacer (*CLS)",
+                      "De": "L\u00f6schen (*CLS)",
+                      "Es": "Borrar (*CLS)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*CLS"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

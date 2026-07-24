@@ -1,0 +1,405 @@
+{
+  "rig": {
+    "type": "OcaBlock",
+    "description": {
+      "En": "Switching Commands",
+      "Fr": "Switching Commands",
+      "De": "Switching Commands",
+      "Es": "Switching Commands"
+    },
+    "fields": {
+      "Connect_Paths": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Close Relays",
+          "Fr": "Close Relays",
+          "De": "Close Relays",
+          "Es": "Close Relays"
+        },
+        "fields": {
+          "Close_Channels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CLOSE <channel_list>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CLOSE Channels"
+                    }
+                  }
+                }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel_list": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
+                    "description": {
+                      "En": "List of channels to close",
+                      "Fr": "List of channels to close",
+                      "De": "List of channels to close",
+                      "Es": "List of channels to close"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Disconnect_Paths": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Open Relays",
+          "Fr": "Open Relays",
+          "De": "Open Relays",
+          "Es": "Open Relays"
+        },
+        "fields": {
+          "Open_Channels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "OPEN <channel_list>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OPEN Channels"
+                    }
+                  }
+                }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel_list": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
+                    "description": {
+                      "En": "List of channels to open",
+                      "Fr": "List of channels to open",
+                      "De": "List of channels to open",
+                      "Es": "List of channels to open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Exclusive_Switching": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Break-Before-Make",
+          "Fr": "Break-Before-Make",
+          "De": "Break-Before-Make",
+          "Es": "Break-Before-Make"
+        },
+        "fields": {
+          "Select_Channel": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "description": {
+                  "En": "Opens all others in bank, then closes target.",
+                  "Fr": "Ouvre tous les autres dans la banque, puis ferme la cible.",
+                  "De": "\u00d6ffnet alle anderen in der Bank und schlie\u00dft dann das Ziel.",
+                  "Es": "Abre todos los dem\u00e1s en el banco, luego cierra el objetivo."
+                },
+                "message": "SELECT <channel>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SELECT Channel"
+                    }
+                  }
+                }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
+                    "description": {
+                      "En": "Target Channel",
+                      "Fr": "Target Canal",
+                      "De": "Target Kanal",
+                      "Es": "Target Canal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "set": {
+    "type": "OcaBlock",
+    "description": {
+      "En": "System Reset & Control",
+      "Fr": "Syst\u00e8me R\u00e9initialiser & Contr\u00f4le",
+      "De": "System Zur\u00fccksetzen & Steuerung",
+      "Es": "Sistema Reiniciar & Control"
+    },
+    "fields": {
+      "System_Reset": {
+        "type": "OcaBlock",
+        "fields": {
+          "Reset_System": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "RESET System",
+                  "Fr": "RESET Syst\u00e8me",
+                  "De": "RESET System",
+                  "Es": "RESET Sistema"
+                }
+              }
+            },
+            "Execute Command": {
+              "message": "RESET"
+            }
+          },
+          "Card_Reset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Card Reset",
+                      "Fr": "Card R\u00e9initialiser",
+                      "De": "Card Zur\u00fccksetzen",
+                      "Es": "Card Reiniciar"
+                    }
+                  }
+                },
+                "message": "CRESET <slot>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "slot": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
+                    "description": {
+                      "En": "Slot to reset",
+                      "Fr": "Slot to reset",
+                      "De": "Slot to reset",
+                      "Es": "Slot to reset"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Clear_State": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Clear (CLR)",
+                  "Fr": "Effacer (CLR)",
+                  "De": "L\u00f6schen (CLR)",
+                  "Es": "Borrar (CLR)"
+                }
+              }
+            },
+            "Execute Command": {
+              "message": "CLR"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Router_YAK_3235_Commands": {
+    "type": "OcaBlock",
+    "id": "50.100.1.10.1.1",
+    "description": {
+      "En": "State Queries & ID",
+      "Fr": "State Queries & ID",
+      "De": "State Queries & ID",
+      "Es": "State Queries & ID"
+    },
+    "fields": {
+      "Channel_Status": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Query specific relay state",
+          "Fr": "Query specific relay state",
+          "De": "Query specific relay state",
+          "Es": "Query specific relay state"
+        },
+        "fields": {
+          "Query_Channel_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CLOSE? <channel>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "QUERY State"
+                    }
+                  }
+                }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "channel": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
+                    "description": {
+                      "En": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Fr": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "De": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Es": "Formato: esnn (e=extender, s=slot, nn=channel)"
+                    }
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      },
+      "System_Info": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Hardware Identification",
+          "Fr": "Hardware Identification",
+          "De": "Hardware Identification",
+          "Es": "Hardware Identification"
+        },
+        "fields": {
+          "Query_Slot_ID": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "ID? <slot>",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "QUERY ID"
+                    }
+                  }
+                }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "slot": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
+                    "description": {
+                      "En": "Slot Number (e.g., 100)",
+                      "Fr": "Slot Number (e.g., 100)",
+                      "De": "Slot Number (e.g., 100)",
+                      "Es": "Slot Number (e.g., 100)"
+                    }
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "id_string": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "ID String",
+                      "Fr": "Cha\u00eene ID",
+                      "De": "ID-String",
+                      "Es": "Cadena de ID"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

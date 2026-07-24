@@ -1,0 +1,155 @@
+{
+  "Distortion_YAK_Porta_one_Measurements": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.0",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Measurement Units & Setup",
+          "Fr": "Mesurerment Unit\u00e9s & Installation",
+          "De": "Messenment Einheits & Einrichtung",
+          "Es": "Medidament Unidads & Configuraci\u00f3n"
+        },
+        "fields": {
+          "Analyzer_Units": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Select Output Unit (M1/M2)",
+              "Fr": "S\u00e9lect. Output Unit (M1/M2)",
+              "De": "Auswahl Output Unit (M1/M2)",
+              "Es": "Selec. Output Unit (M1/M2)"
+            },
+            "fields": {
+              "Set_Unit_Volts": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":AUNits V"
+                  }
+                }
+              },
+              "Set_Unit_dBm": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":AUNits DBM"
+                  }
+                }
+              },
+              "Set_Unit_dBu": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":AUNits DBU"
+                  }
+                }
+              },
+              "Set_Unit_dBV": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":AUNits DBV"
+                  }
+                }
+              },
+              "Set_Unit_Watts": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":AUNits W"
+                  }
+                }
+              }
+            }
+          },
+          "Read_Modes": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Read Commands",
+              "Fr": "Read Commands",
+              "De": "Read Commands",
+              "Es": "Read Commands"
+            },
+            "fields": {
+              "Read_Ch_A_Only": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "M1?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "val_a": {
+                        "value": "Ch A Value",
+                        "type": "_GuiValue",
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Read_Ch_B_Only": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "M2?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "val_b": {
+                        "value": "Ch B Value",
+                        "type": "_GuiValue",
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Read_Stereo_AB": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "M1?;M2?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "val_a": {
+                        "value": "Ch A Value",
+                        "type": "_GuiValue",
+                        "index": 0,
+                        "data_type": "string"
+                      },
+                      "val_b": {
+                        "value": "Ch B Value",
+                        "type": "_GuiValue",
+                        "index": 1,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

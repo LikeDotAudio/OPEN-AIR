@@ -1,0 +1,226 @@
+{
+  "Oscilloscope_YAK_54641D__Legacy_Commands_System": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.0",
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Oscilloscope Measurements & Status",
+          "Fr": "Oscilloscope Mesurerments & Statut",
+          "De": "Oszilloskop Messenments & Status",
+          "Es": "Osciloscopio Medidaments & Estado"
+        },
+        "fields": {
+          "System_Health": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Errors and ID",
+              "Fr": "Erreurs and ID",
+              "De": "Fehlers and ID",
+              "Es": "Errors and ID"
+            },
+            "fields": {
+              "Read_IDN": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "*IDN?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "idn_string": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "ID String",
+                          "Fr": "Cha\u00eene ID",
+                          "De": "ID-String",
+                          "Es": "Cadena de ID"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Read_Error": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":SYSTem:ERRor?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "error_msg": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Error Message",
+                          "Fr": "Erreur Message",
+                          "De": "Fehler Message",
+                          "Es": "Error Message"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Run_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Do_Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":RUN"
+                }
+              },
+              "Do_Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":STOP"
+                }
+              },
+              "Do_Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SINGle"
+                }
+              },
+              "Do_Autoscale": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTOSCALE",
+                      "Fr": "\u00c9CHELLE AUTO",
+                      "De": "AUTOSCALE",
+                      "Es": "ESCALA AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":AUToscale"
+                }
+              }
+            }
+          },
+          "Display_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Do_Clear_Display": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear Display",
+                      "Fr": "Effacer l'affichage",
+                      "De": "Anzeige l\u00f6schen",
+                      "Es": "Borrar pantalla"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":DISPlay:CLEar"
+                }
+              }
+            }
+          },
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Do_Clear_Status": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CLS",
+                      "Fr": "CLS",
+                      "De": "CLS",
+                      "Es": "CLS"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*CLS"
+                }
+              },
+              "Do_Reset": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Reset (*RST)",
+                      "Fr": "R\u00e9initialiser (*RST)",
+                      "De": "Zur\u00fccksetzen (*RST)",
+                      "Es": "Reiniciar (*RST)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

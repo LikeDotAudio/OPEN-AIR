@@ -1,0 +1,370 @@
+{
+  "Oscilloscope_YAK_DS1104Z__Legacy_Commands_Channel_2": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.3.2",
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
+        "fields": {
+          "Measurements_CH2": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Channel 2 Stats",
+              "Fr": "Canal 2",
+              "De": "Kanal 2",
+              "Es": "Canal 2"
+            },
+            "fields": {
+              "Get_Stats_CH2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":MEASure:VPP? CHANnel2;:MEASure:VRMS? CHANnel2;:MEASure:FREQuency? CHANnel2;:MEASure:PDUTy? CHANnel2"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "Vpp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
+                        "label": {
+                          "En": "Vpp (Volts)",
+                          "Fr": "Vpp (Volts)",
+                          "De": "Vpp (Volts)",
+                          "Es": "Vpp (Volts)"
+                        },
+                        "index": 0,
+                        "data_type": "string"
+                      },
+                      "Vrms": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
+                        "label": {
+                          "En": "Vrms (Volts)",
+                          "Fr": "Vrms (Volts)",
+                          "De": "Veff (Volts)",
+                          "Es": "Vrms (Volts)"
+                        },
+                        "index": 1,
+                        "data_type": "string"
+                      },
+                      "Freq": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
+                        "label": {
+                          "En": "Frequency (Hz)",
+                          "Fr": "Fr\u00e9quence (Hz)",
+                          "De": "Frequenz (Hz)",
+                          "Es": "Frecuencia (Hz)"
+                        },
+                        "index": 2,
+                        "data_type": "string"
+                      },
+                      "Duty": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "%"
+                        },
+                        "label": {
+                          "En": "Duty Cycle (%)",
+                          "Fr": "Cycle de service (%)",
+                          "De": "Tastverh\u00e4ltnis (%)",
+                          "Es": "Ciclo de trabajo (%)"
+                        },
+                        "index": 3,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuraci\u00f3n"
+        },
+        "fields": {
+          "Config_CH2": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Channel 2 Vertical",
+              "Fr": "Canal 2 Vertical",
+              "De": "Kanal 2 Vertikal",
+              "Es": "Canal 2 Vertical"
+            },
+            "fields": {
+              "CH2_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel2:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "scale": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts/Div"
+                        },
+                        "label": {
+                          "En": "Scale (Volts/Div)",
+                          "Fr": "\u00c9chelle (Volts/Div)",
+                          "De": "Skala (Volts/Div)",
+                          "Es": "Escala (Volts/Div)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "CH2_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel2:OFFSet <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
+                        "label": {
+                          "En": "Offset (Volts)",
+                          "Fr": "D\u00e9calage (Volts)",
+                          "De": "Versatz (Volts)",
+                          "Es": "Compensaci\u00f3n (Volts)"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "CH2_Coupling": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel2:COUPling <coupling>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "coupling": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Coupling",
+                          "Fr": "Couplage",
+                          "De": "Kopplung",
+                          "Es": "Acoplamiento"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "CH2_Probe": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel2:PROBe <atten>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "atten": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "X"
+                        },
+                        "label": {
+                          "En": "Probe Attenuation",
+                          "Fr": "Probe Att\u00e9nuation",
+                          "De": "Probe D\u00e4mpfung",
+                          "Es": "Probe Atenuaci\u00f3n"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "CH2_BWLimit": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel2:BWLimit <limit>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "limit": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Bandwidth Limit",
+                          "Fr": "Bande passante Limit",
+                          "De": "Bandbreite Limit",
+                          "Es": "Ancho de banda Limit"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Run_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":RUN"
+                }
+              },
+              "Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":STOP"
+                }
+              },
+              "Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SINGle"
+                }
+              },
+              "Auto_Scale": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTO",
+                      "Fr": "AUTO",
+                      "De": "AUTO",
+                      "Es": "AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":AUToscale"
+                }
+              }
+            }
+          },
+          "Channel_Display_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "CH2_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CH2 ON",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CHANnel2:DISPlay ON"
+                }
+              },
+              "CH2_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CH2 OFF",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CHANnel2:DISPlay OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

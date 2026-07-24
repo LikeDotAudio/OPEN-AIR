@@ -1,0 +1,55 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Clear": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear",
+                      "Fr": "Effacer",
+                      "De": "L\u00f6schen",
+                      "Es": "Borrar"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CLEar"
+                }
+              },
+              "Force_Trigger": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Force",
+                      "Fr": "Force",
+                      "De": "Force",
+                      "Es": "Force"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":TFORce"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

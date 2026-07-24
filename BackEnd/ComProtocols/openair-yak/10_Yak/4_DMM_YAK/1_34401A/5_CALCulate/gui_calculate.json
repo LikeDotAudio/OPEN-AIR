@@ -1,0 +1,195 @@
+{
+  "DMM_YAK_34401A_CALCulate": {
+    "type": "OcaBin",
+    "id": "50.100.4.10.1.5",
+    "blocks": {
+      "Calculate": {
+        "type": "OcaBlock",
+        "description": "Math and Statistics",
+        "fields": {
+          "Configure_Math": {
+            "type": "OcaBlock",
+            "description": "Math and Limits Setup",
+            "fields": {
+              "Set_Math_Function": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:FUNCtion <function>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "function": {
+                        "value": "NULL",
+                        "type": "_GuiValue",
+                        "label": "Function",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Enable_Math": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:STATe <state>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "state": {
+                        "value": "ON",
+                        "type": "_GuiValue",
+                        "label": "State",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Null_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:NULL:OFFSet <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "value": "0",
+                        "type": "_GuiValue",
+                        "label": "Value",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_dB_Ref": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:DB:REFerence <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "value": "0",
+                        "type": "_GuiValue",
+                        "label": "Value",
+                        "units": "dB"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_dBm_Ref": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:DBM:REFerence <value>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "value": {
+                        "value": "600",
+                        "type": "_GuiValue",
+                        "label": "Value",
+                        "units": "dBm"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Math_Readbacks": {
+            "type": "OcaBlock",
+            "description": "Statistics and Calc Results",
+            "fields": {
+              "Query_Average": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:AVERage:AVERage?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "result": {
+                        "value": "Average",
+                        "type": "_GuiValue",
+                        "label": "Average",
+                        "units": "",
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Query_Max": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:AVERage:MAXimum?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "result": {
+                        "value": "Max",
+                        "type": "_GuiValue",
+                        "label": "Max",
+                        "units": "",
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              },
+              "Query_Min": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CALCulate:AVERage:MINimum?"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "result": {
+                        "value": "Min",
+                        "type": "_GuiValue",
+                        "label": "Min",
+                        "units": "",
+                        "index": 0,
+                        "data_type": "string"
+                      }
+                    },
+                    "delimiter": ","
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

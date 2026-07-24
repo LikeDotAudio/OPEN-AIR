@@ -1,0 +1,178 @@
+{
+  "Oscilloscope_YAK_DS1104Z__Legacy_Commands_FFT": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.4",
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuraci\u00f3n"
+        },
+        "fields": {
+          "Trigger_Settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Trigger System",
+              "Fr": "D\u00e9clencheur System",
+              "De": "Trigger System",
+              "Es": "Disparo System"
+            },
+            "fields": {
+              "Trigger_Source": {
+                "type": "_GuiActuator",
+                "message": ":TRIGger:EDGe:SOURce <source>"
+              },
+              "Trigger_Level": {
+                "type": "_GuiActuator",
+                "message": ":TRIGger:EDGe:LEVel <level>"
+              },
+              "Trigger_Sweep": {
+                "type": "_GuiActuator",
+                "message": ":TRIGger:SWEep <sweep>"
+              }
+            }
+          },
+          "Horizontal_Settings": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Timebase",
+              "Fr": "Tempsbase",
+              "De": "Zeitbase",
+              "Es": "Tiempobase"
+            },
+            "fields": {
+              "Time_Scale": {
+                "type": "_GuiActuator",
+                "message": ":TIMebase:MAIN:SCALe <scale>"
+              },
+              "Time_Offset": {
+                "type": "_GuiActuator",
+                "message": ":TIMebase:MAIN:OFFSet <offset>"
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Run_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":RUN"
+                }
+              },
+              "Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":STOP"
+                }
+              },
+              "Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":SINGle"
+                }
+              },
+              "Auto_Scale": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTO",
+                      "Fr": "AUTO",
+                      "De": "AUTO",
+                      "Es": "AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":AUToscale"
+                }
+              }
+            }
+          },
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Clear": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Clear",
+                      "Fr": "Effacer",
+                      "De": "L\u00f6schen",
+                      "Es": "Borrar"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CLEar"
+                }
+              },
+              "Force_Trigger": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Force",
+                      "Fr": "Force",
+                      "De": "Force",
+                      "Es": "Force"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":TFORce"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

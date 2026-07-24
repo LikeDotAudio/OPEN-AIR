@@ -1,0 +1,231 @@
+{
+  "Oscilloscope_YAK_DS1104Z_Commands_CHANnel_Channel_4": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.1.2.4",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel 4 Settings",
+          "Fr": "Canal 4",
+          "De": "Kanal 4",
+          "Es": "Canal 4"
+        },
+        "fields": {
+          "Set_Display": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:DISPlay <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Bandwidth_Limit": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:BWLimit <limit>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "limit": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Limit",
+                      "Fr": "Limit",
+                      "De": "Limit",
+                      "Es": "Limit"
+                    },
+                    "description": {
+                      "En": "20M or OFF",
+                      "Fr": "20M or OFF",
+                      "De": "20M or OFF",
+                      "Es": "20M or OFF"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Coupling": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:COUPling <coupling>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "coupling": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Coupling",
+                      "Fr": "Couplage",
+                      "De": "Kopplung",
+                      "Es": "Acoplamiento"
+                    },
+                    "description": {
+                      "En": "AC, DC, GND",
+                      "Fr": "AC, DC, GND",
+                      "De": "AC, DC, GND",
+                      "Es": "CA, CC, GND"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Scale": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:SCALe <scale>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "scale": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V/div"
+                    },
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "\u00c9chelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:OFFSet <offset>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "offset": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
+                    "label": {
+                      "En": "Offset",
+                      "Fr": "D\u00e9calage",
+                      "De": "Versatz",
+                      "Es": "Compensaci\u00f3n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Units": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:UNITs <unit>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "unit": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Unit",
+                      "Fr": "Unit\u00e9",
+                      "De": "Einheit",
+                      "Es": "Unidad"
+                    },
+                    "description": {
+                      "En": "VOLTs, WATTs, AMPs, UNKNown",
+                      "Fr": "VOLTs, WATTs, AMPs, UNKNown",
+                      "De": "VOLTs, WATTs, AMPs, UNKNown",
+                      "Es": "VOLTs, WATTs, AMPs, UNKNown"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Probe": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CHANnel4:PROBe <atten>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "atten": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "X"
+                    },
+                    "label": {
+                      "En": "Atten",
+                      "Fr": "Att\u00e9n",
+                      "De": "Atten",
+                      "Es": "Aten"
+                    },
+                    "description": {
+                      "En": "0.01 to 1000",
+                      "Fr": "0.01 to 1000",
+                      "De": "0.01 to 1000",
+                      "Es": "0.01 to 1000"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

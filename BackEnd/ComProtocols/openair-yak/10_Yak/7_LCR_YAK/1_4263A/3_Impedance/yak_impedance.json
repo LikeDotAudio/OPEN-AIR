@@ -1,0 +1,48 @@
+{
+  "LCR_YAK_4263A_Impedance": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.3",
+    "blocks": {
+      "Impedance_Settings": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Impedance & Admittance"
+        },
+        "fields": {
+          "Impedance Mode": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SENSe:FUNCtion:ON \"{value}\"",
+            "options": [
+              "ZTD",
+              "ZTR",
+              "YTD",
+              "YTR"
+            ]
+          },
+          "Test Frequency": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SENSe:FREQuency:CW {value}",
+            "options": [
+              "100",
+              "120",
+              "1k",
+              "10k",
+              "100k"
+            ]
+          },
+          "Auto Voltage Range": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SENSe:VOLTage:RANGe:AUTO {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

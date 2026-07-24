@@ -1,0 +1,102 @@
+{
+  "Oscilloscope_YAK_54641D_FUNCtion": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.9",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Math Function Settings",
+          "Fr": "Param\u00e8tres de fonction math\u00e9matique",
+          "De": "Mathematische Funktionseinstellungen",
+          "Es": "Ajustes de funci\u00f3n matem\u00e1tica"
+        },
+        "fields": {
+          "Set_Function_Operation": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "FUNCtion:OPERation <op>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "op": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Op",
+                      "Fr": "Op",
+                      "De": "Op",
+                      "Es": "Op"
+                    },
+                    "description": {
+                      "En": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "Fr": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "De": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "Es": "ADD, SUBTract, MULTiply, FFT, INTegrate"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Function_Sources": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Source1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "FUNCtion:SOURce1 <src>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "src": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Src1",
+                          "Fr": "Src1",
+                          "De": "Src1",
+                          "Es": "Src1"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Source2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "FUNCtion:SOURce2 <src>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "src": {
+                        "type": "_GuiValue",
+                        "label": {
+                          "En": "Src2",
+                          "Fr": "Src2",
+                          "De": "Src2",
+                          "Es": "Src2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

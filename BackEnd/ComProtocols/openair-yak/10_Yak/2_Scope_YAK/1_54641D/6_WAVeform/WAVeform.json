@@ -1,0 +1,248 @@
+{
+  "Oscilloscope_YAK_54641D_WAVeform": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.6",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Waveform Data Transfer Settings",
+          "Fr": "Param\u00e8tres de transfert de donn\u00e9es de forme d'onde",
+          "De": "Wellenform-Datentransfer-Einstellungen",
+          "Es": "Ajustes de transferencia de datos de forma de onda"
+        },
+        "fields": {
+          "Set_Waveform_Source": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:SOURce <source>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "source": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
+                    "description": {
+                      "En": "CHANn, DIGn, PODn, FUNCtion, MATH",
+                      "Fr": "CANn, DIGn, PODn, FONCtion, MATH",
+                      "De": "KANn, DIGn, PODn, FUNCtion, MATH",
+                      "Es": "CANn, DIGn, PODn, FUNCI\u00d3N, MATEM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Waveform_Format": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:FORMat <format>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "format": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Format",
+                      "Fr": "Format",
+                      "De": "Format",
+                      "Es": "Formato"
+                    },
+                    "description": {
+                      "En": "ASCii, WORD, BYTE",
+                      "Fr": "ASCii, WORD, BYTE",
+                      "De": "ASCii, WORD, BYTE",
+                      "Es": "ASCii, WORD, BYTE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Waveform_Points": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:POINts <points>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "points": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Points",
+                      "Fr": "Points",
+                      "De": "Punkte",
+                      "Es": "Puntos"
+                    },
+                    "description": {
+                      "En": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Fr": "100, 250, 500, 1000, 2000, MAXimum",
+                      "De": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Es": "100, 250, 500, 1000, 2000, MAXimum"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Byte_Order": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:BYTeorder <order>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "order": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Order",
+                      "Fr": "Order",
+                      "De": "Order",
+                      "Es": "Order"
+                    },
+                    "description": {
+                      "En": "LSBFirst or MSBFirst",
+                      "Fr": "LSBFirst or MSBFirst",
+                      "De": "LSBFirst or MSBFirst",
+                      "Es": "LSBFirst or MSBFirst"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Unsigned": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:UNSigned <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Unsigned",
+                      "Fr": "Unsigned",
+                      "De": "Unsigned",
+                      "Es": "Unsigned"
+                    },
+                    "description": {
+                      "En": "ON (0-255) or OFF (-128-127)",
+                      "Fr": "ON (0-255) or OFF (-128-127)",
+                      "De": "ON (0-255) or OFF (-128-127)",
+                      "Es": "ON (0-255) or OFF (-128-127)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Waveform Data Readbacks",
+          "Fr": "Waveform Data Readbacks",
+          "De": "Waveform Data Readbacks",
+          "Es": "Waveform Data Readbacks"
+        },
+        "fields": {
+          "Get_Waveform_Data": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:DATA?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "data": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Data",
+                      "Fr": "Data",
+                      "De": "Data",
+                      "Es": "Data"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          },
+          "Get_Preamble": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "WAVeform:PREamble?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "preamble": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Preamble",
+                      "Fr": "Pr\u00e9ambule",
+                      "De": "Pr\u00e4ambel",
+                      "Es": "Pre\u00e1mbulo"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

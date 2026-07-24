@@ -1,0 +1,223 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
+        "fields": {
+          "Measurements_CH4": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Channel 4 Stats",
+              "Fr": "Canal 4",
+              "De": "Kanal 4",
+              "Es": "Canal 4"
+            },
+            "fields": {
+              "Get_Stats_CH4": {
+                "type": "_GuiActuator",
+                "message": ":MEASure:VPP? CHANnel4;:MEASure:VRMS? CHANnel4;:MEASure:FREQuency? CHANnel4;:MEASure:PDUTy? CHANnel4"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Vpp": {
+                    "value": "Vpp",
+                    "type": "_GuiValue",
+                    "index": 0,
+                    "data_type": "string"
+                  },
+                  "Vrms": {
+                    "value": "Vrms",
+                    "type": "_GuiValue",
+                    "index": 1,
+                    "data_type": "string"
+                  },
+                  "Freq": {
+                    "value": "Freq",
+                    "type": "_GuiValue",
+                    "index": 2,
+                    "data_type": "string"
+                  },
+                  "Duty": {
+                    "value": "Duty %",
+                    "type": "_GuiValue",
+                    "index": 3,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuraci\u00f3n"
+        },
+        "fields": {
+          "Config_CH4": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Channel 4 Vertical",
+              "Fr": "Canal 4",
+              "De": "Kanal 4",
+              "Es": "Canal 4"
+            },
+            "fields": {
+              "CH4_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel4:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "scale": {
+                        "value": "1.0",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH4_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel4:OFFSet <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "offset": {
+                        "value": "0.0",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH4_Coupling": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel4:COUPling <coupling>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "coupling": {
+                        "value": "DC",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH4_Probe": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel4:PROBe <atten>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "atten": {
+                        "value": "10",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH4_BWLimit": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":CHANnel4:BWLimit <limit>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "limit": {
+                        "value": "20M",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
+        "fields": {
+          "Channel_Display_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "CH4_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CH4 ON",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CHANnel4:DISPlay ON"
+                }
+              },
+              "CH4_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CH4 OFF",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":CHANnel4:DISPlay OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

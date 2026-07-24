@@ -1,0 +1,95 @@
+{
+  "Distortion_YAK_Porta_one_Digital": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.4",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Digital I/O Configuration",
+          "Fr": "Digital I/O Configuration",
+          "De": "Digital I/O Konfiguration",
+          "Es": "Digital I/O Configuraci\u00f3n"
+        },
+        "fields": {
+          "Digital_Input_Source": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Select Digital Input Connector",
+              "Fr": "S\u00e9lect. Digital Input Connector",
+              "De": "Auswahl Digital Input Connector",
+              "Es": "Selec. Digital Input Connector"
+            },
+            "fields": {
+              "Select_DIN_XLR": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DINPut XLR"
+                  }
+                }
+              },
+              "Select_DIN_BNC": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DINPut BNC"
+                  }
+                }
+              },
+              "Select_DIN_Optical": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DINPut OPTical"
+                  }
+                }
+              },
+              "Select_DIN_Generator": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DINPut GENerator"
+                  }
+                }
+              }
+            }
+          },
+          "Digital_Output_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Digital Output State",
+              "Fr": "Digital Sortie State",
+              "De": "Digital Ausgang State",
+              "Es": "Digital Salida State"
+            },
+            "fields": {
+              "Set_DOUT_ON": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DOUTput ON"
+                  }
+                }
+              },
+              "Set_DOUT_OFF": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":DOUTput OFF"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "Power_YAK_66102A_Common": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.8",
+    "blocks": {
+      "Common": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Common Commands",
+          "Fr": "Commun Commands",
+          "De": "Allgemein Commands",
+          "Es": "Com\u00fan Commands"
+        },
+        "fields": {
+          "System_Reset": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Reset (*RST)",
+                  "Fr": "R\u00e9initialiser (*RST)",
+                  "De": "Zur\u00fccksetzen (*RST)",
+                  "Es": "Reiniciar (*RST)"
+                }
+              }
+            },
+            "Execute Command": {
+              "message": "*RST"
+            }
+          },
+          "Clear_Status": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "Clear (*CLS)",
+                  "Fr": "Effacer (*CLS)",
+                  "De": "L\u00f6schen (*CLS)",
+                  "Es": "Borrar (*CLS)"
+                }
+              }
+            },
+            "Execute Command": {
+              "message": "*CLS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "Oscilloscope_YAK_54641D_Root": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.0",
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Root Action Commands",
+          "Fr": "Root Action Commands",
+          "De": "Root Action Commands",
+          "Es": "Root Action Commands"
+        },
+        "fields": {
+          "Run_Stop_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Run": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSF\u00dcHREN",
+                      "Es": "EJEC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "RUN"
+                }
+              },
+              "Stop": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "STOP"
+                }
+              },
+              "Single": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "SINGle"
+                }
+              },
+              "Autoscale": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "AUTOSCALE",
+                      "Fr": "\u00c9CHELLE AUTO",
+                      "De": "AUTOSCALE",
+                      "Es": "ESCALA AUTO"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "AUToscale"
+                }
+              }
+            }
+          },
+          "Digitize_Action": {
+            "type": "OcaBlock",
+            "fields": {
+              "Digitize_Channel": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": "DIGitize <channel>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "channel": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Channel",
+                          "Fr": "Canal",
+                          "De": "Kanal",
+                          "Es": "Canal"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

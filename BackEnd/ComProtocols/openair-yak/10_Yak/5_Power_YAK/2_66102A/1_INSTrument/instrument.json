@@ -1,0 +1,45 @@
+{
+  "Power_YAK_66102A_INSTrument": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.1",
+    "blocks": {
+      "Instrument": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel Selection",
+          "Fr": "Canal Selection",
+          "De": "Kanal Selection",
+          "Es": "Canal Selection"
+        },
+        "fields": {
+          "Select_Channel": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "INST:NSEL <chan>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "chan": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

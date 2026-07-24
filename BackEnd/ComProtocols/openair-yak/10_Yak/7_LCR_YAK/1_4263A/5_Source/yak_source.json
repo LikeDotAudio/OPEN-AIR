@@ -1,0 +1,35 @@
+{
+  "LCR_YAK_4263A_Source": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.5",
+    "blocks": {
+      "Source_Control": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Signal Source & Bias"
+        },
+        "fields": {
+          "Signal Level": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SOURce:VOLTage:LEVel {value}"
+          },
+          "DC Bias Level": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SOURce:BIAS:VOLTage {value}"
+          },
+          "DC Bias State": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SOURce:BIAS:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

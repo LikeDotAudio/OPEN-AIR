@@ -1,0 +1,52 @@
+{
+  "HP_4263A_MEASure": {
+    "type": "OcaBin",
+    "id": "4263A.MEAS.001",
+    "blocks": {
+      "Measurement": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "LCR Readback",
+          "Fr": "LCR Readback",
+          "De": "LCR Readback",
+          "Es": "LCR Readback"
+        },
+        "fields": {
+          "Execute_Measure": {
+            "type": "_GuiActuator",
+            "message": ":MEAS?"
+          },
+          "Display": {
+            "type": "OcaBlock",
+            "fields": {
+              "primary": {
+                "type": "_GuiValue",
+                "domain": {
+                  "units": ""
+                },
+                "label": {
+                  "En": "Primary (L/C/R/Z)",
+                  "Fr": "Primary (L/C/R/Z)",
+                  "De": "Primary (L/C/R/Z)",
+                  "Es": "Primary (L/C/R/Z)"
+                }
+              },
+              "secondary": {
+                "type": "_GuiValue",
+                "domain": {
+                  "units": ""
+                },
+                "label": {
+                  "En": "Secondary (D/Q/R/G)",
+                  "Fr": "Secondary (D/Q/R/G)",
+                  "De": "Secondary (D/Q/R/G)",
+                  "Es": "Secondary (D/Q/R/G)"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

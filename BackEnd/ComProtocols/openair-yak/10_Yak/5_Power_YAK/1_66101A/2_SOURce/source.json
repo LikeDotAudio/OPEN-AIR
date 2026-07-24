@@ -1,0 +1,57 @@
+{
+  "Power_YAK_66101A_SOURce": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.1.2",
+    "blocks": {
+      "Source": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Configuration",
+          "Fr": "Configuration",
+          "De": "Konfiguration",
+          "Es": "Configuraci\u00f3n"
+        },
+        "fields": {
+          "Set_Levels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "INST:NSEL 1;VOLT <volt>;CURR <curr>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "volt": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
+                    "label": {
+                      "En": "Voltage",
+                      "Fr": "Tension",
+                      "De": "Spannung",
+                      "Es": "Voltaje"
+                    }
+                  },
+                  "curr": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Current",
+                      "Fr": "Courant",
+                      "De": "Strom",
+                      "Es": "Corriente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

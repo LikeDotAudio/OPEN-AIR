@@ -1,0 +1,119 @@
+{
+  "DMM_YAK_34401A_TRIGger": {
+    "type": "OcaBin",
+    "id": "50.100.4.10.1.4",
+    "blocks": {
+      "Trigger": {
+        "type": "OcaBlock",
+        "description": "Trigger System",
+        "fields": {
+          "Configure_Triggering": {
+            "type": "OcaBlock",
+            "description": "Setup Trigger Model",
+            "fields": {
+              "Set_Trigger_Source": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:SOURce <source>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "source": {
+                        "value": "IMMediate",
+                        "type": "_GuiValue",
+                        "label": "Source",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Trigger_Delay": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:DELay <delay>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "delay": {
+                        "value": "0",
+                        "type": "_GuiValue",
+                        "label": "Delay",
+                        "units": "s"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Sample_Count": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":SAMPle:COUNt <count>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "count": {
+                        "value": "1",
+                        "type": "_GuiValue",
+                        "label": "Count",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Trigger_Count": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:COUNt <count>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "count": {
+                        "value": "1",
+                        "type": "_GuiValue",
+                        "label": "Count",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Measurement_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Initiate": {
+                "type": "_GuiActuator",
+                "label_inactive": "INIT",
+                "Execute Command": {
+                  "message": ":INITiate"
+                }
+              },
+              "Abort": {
+                "type": "_GuiActuator",
+                "label_inactive": "ABORT",
+                "Execute Command": {
+                  "message": ":ABORt"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

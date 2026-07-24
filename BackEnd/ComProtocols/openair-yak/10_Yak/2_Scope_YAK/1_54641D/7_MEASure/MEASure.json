@@ -1,0 +1,292 @@
+{
+  "Oscilloscope_YAK_54641D_MEASure": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.7",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Measurement Settings",
+          "Fr": "Mesurerment Param\u00e8tres",
+          "De": "Messenment Einstellungen",
+          "Es": "Medidament Ajustes"
+        },
+        "fields": {
+          "Set_Measure_Source": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "MEASure:SOURce <source>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "source": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
+                    "description": {
+                      "En": "CHANn, DIGn, MATH",
+                      "Fr": "CHANn, DIGn, MATH",
+                      "De": "CHANn, DIGn, MATH",
+                      "Es": "CHANn, DIGn, MATH"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Measure_Thresholds": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "MEASure:DEFine:THResholds <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "PERCent or ABSolute",
+                      "Fr": "POURCent ou ABSolu",
+                      "De": "Prozent oder Absolut",
+                      "Es": "PORCent o ABSoluto"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Measurements",
+          "Fr": "Mesurerments",
+          "De": "Messenments",
+          "Es": "Medidaments"
+        },
+        "fields": {
+          "Voltage_Measurements": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Voltage",
+              "Fr": "Tension",
+              "De": "Spannung",
+              "Es": "Voltaje"
+            },
+            "fields": {
+              "Get_Vpp": {
+                "type": "_GuiActuator",
+                "message": "MEASure:VPP?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_Vmax": {
+                "type": "_GuiActuator",
+                "message": "MEASure:VMAX?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_Vrms": {
+                "type": "_GuiActuator",
+                "message": "MEASure:VRMS?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_Vavg": {
+                "type": "_GuiActuator",
+                "message": "MEASure:VAVerage?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_Overshoot": {
+                "type": "_GuiActuator",
+                "message": "MEASure:OVERshoot?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "%",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              }
+            }
+          },
+          "Time_Measurements": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Time",
+              "Fr": "Temps",
+              "De": "Zeit",
+              "Es": "Tiempo"
+            },
+            "fields": {
+              "Get_Frequency": {
+                "type": "_GuiActuator",
+                "message": "MEASure:FREQuency?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "Hz",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_Period": {
+                "type": "_GuiActuator",
+                "message": "MEASure:PERiod?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_RiseTime": {
+                "type": "_GuiActuator",
+                "message": "MEASure:RISetime?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_FallTime": {
+                "type": "_GuiActuator",
+                "message": "MEASure:FALLtime?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_PosWidth": {
+                "type": "_GuiActuator",
+                "message": "MEASure:PWIDth?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              },
+              "Get_DutyCycle": {
+                "type": "_GuiActuator",
+                "message": "MEASure:DUTYcycle?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "%",
+                      "type": "_GuiValue",
+                      "index": 0,
+                      "data_type": "string"
+                    }
+                  },
+                  "delimiter": ","
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

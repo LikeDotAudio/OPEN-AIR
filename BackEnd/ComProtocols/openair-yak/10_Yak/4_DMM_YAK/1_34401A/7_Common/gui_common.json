@@ -1,0 +1,51 @@
+{
+  "DMM_YAK_34401A_Common": {
+    "type": "OcaBin",
+    "id": "50.100.4.10.1.7",
+    "blocks": {
+      "Common": {
+        "type": "OcaBlock",
+        "description": "Common Commands",
+        "fields": {
+          "Read_IDN": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "*IDN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "idn_string": {
+                    "value": "Device ID",
+                    "type": "_GuiValue",
+                    "label": "ID String",
+                    "units": "",
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          },
+          "Reset_Device": {
+            "type": "_GuiActuator",
+            "label_inactive": "*RST",
+            "Execute Command": {
+              "message": "*RST"
+            }
+          },
+          "Clear_Status": {
+            "type": "_GuiActuator",
+            "label_inactive": "*CLS",
+            "Execute Command": {
+              "message": "*CLS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

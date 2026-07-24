@@ -1,0 +1,121 @@
+{
+  "Distortion_YAK_Porta_one_System": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.0",
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Syst\u00e8me Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
+        "fields": {
+          "Output_Control": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Master Generator Output",
+              "Fr": "Master G\u00e9n\u00e9rateur Sortie",
+              "De": "Master Generator Ausgang",
+              "Es": "Master Generador Salida"
+            },
+            "fields": {
+              "Do_Output_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OUTPUT ON",
+                      "Fr": "OUTPUT ON",
+                      "De": "OUTPUT ON",
+                      "Es": "OUTPUT ON"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":OUTPut ON"
+                }
+              },
+              "Do_Output_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OUTPUT OFF",
+                      "Fr": "OUTPUT OFF",
+                      "De": "OUTPUT OFF",
+                      "Es": "OUTPUT OFF"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":OUTPut OFF"
+                }
+              }
+            }
+          },
+          "System_Utilities": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Global Utilities",
+              "Fr": "Global Utilities",
+              "De": "Global Utilities",
+              "Es": "Global Utilities"
+            },
+            "fields": {
+              "Do_Reset": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "RESET (*RST)",
+                      "Fr": "RESET (*RST)",
+                      "De": "RESET (*RST)",
+                      "Es": "RESET (*RST)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              },
+              "Do_Clear_Status": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "CLS (*CLS)",
+                      "Fr": "CLS (*CLS)",
+                      "De": "CLS (*CLS)",
+                      "Es": "CLS (*CLS)"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "*CLS"
+                }
+              },
+              "Do_Display_Panel": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "Display Panel",
+                      "Fr": "Affichage Panel",
+                      "De": "Anzeige Panel",
+                      "Es": "Pantalla Panel"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": ":DISPlay PANel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "Oscilloscope_YAK_DS1104Z_Commands_TRIGger": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.1.5",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Trigger Settings",
+          "Fr": "D\u00e9clencheur Settings",
+          "De": "Trigger Einstellungen",
+          "Es": "Disparo Settings"
+        },
+        "fields": {
+          "Set_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TRIGger:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "Fr": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "De": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "Es": "EDGE, PULSe, SLOPE, VIDEO, PATTern"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Edge_Trigger_Config": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Edge Trigger Configuration",
+              "Fr": "Configuration de d\u00e9clenchement sur front",
+              "De": "Flankentrigger-Konfiguration",
+              "Es": "Configuraci\u00f3n de disparo por flanco"
+            },
+            "fields": {
+              "Set_Edge_Source": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:EDGe:SOURce <source>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "source": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHANn, AC",
+                          "Fr": "CANn, CA",
+                          "De": "KANn, AC",
+                          "Es": "CANn, CA"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Edge_Slope": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:EDGe:SLOPe <slope>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "slope": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Slope",
+                          "Fr": "Pente",
+                          "De": "Flanke",
+                          "Es": "Pendiente"
+                        },
+                        "description": {
+                          "En": "POSitive, NEGative, RFALI",
+                          "Fr": "POSitive, NEGative, RFALI",
+                          "De": "POSitive, NEGative, RFALI",
+                          "Es": "POSitive, NEGative, RFALI"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Edge_Level": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:EDGe:LEVel <level>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "level": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
+                        "label": {
+                          "En": "Level",
+                          "Fr": "Niveau",
+                          "De": "Pegel",
+                          "Es": "Nivel"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Sweep_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Sweep": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":TRIGger:SWEep <sweep>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "sweep": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
+                        "label": {
+                          "En": "Sweep",
+                          "Fr": "Sweep",
+                          "De": "Sweep",
+                          "Es": "Sweep"
+                        },
+                        "description": {
+                          "En": "AUTO, NORMal, SINGle",
+                          "Fr": "AUTO, NORMAL, UNIQUE",
+                          "De": "AUTO, NORMAL, EINZEL",
+                          "Es": "AUTO, NORMAL, \u00daNICO"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Trigger Status",
+          "Fr": "D\u00e9clencheur Status",
+          "De": "Trigger Status",
+          "Es": "Disparo Status"
+        },
+        "fields": {
+          "Get_Status": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TRIGger:STATus?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "status": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Status",
+                      "Fr": "\u00c9tat",
+                      "De": "Status",
+                      "Es": "Estado"
+                    },
+                    "index": 0,
+                    "data_type": "string"
+                  }
+                },
+                "delimiter": ","
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

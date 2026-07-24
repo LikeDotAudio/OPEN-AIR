@@ -1,0 +1,58 @@
+{
+  "LCR_YAK_4263A_System": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.7",
+    "blocks": {
+      "System_Interface": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "System & Interface"
+        },
+        "fields": {
+          "Identification": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": "*IDN?"
+          },
+          "Reset": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": "*RST"
+          },
+          "Beeper State": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SYSTem:BEEPer:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ]
+          },
+          "Key Lock": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SYSTem:KLOCk {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ]
+          },
+          "Display State": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":DISPlay:STATe {value}",
+            "options": [
+              "ON",
+              "OFF"
+            ]
+          },
+          "Error Query": {
+            "type": "_GuiActuator",
+            "label": {},
+            "message": ":SYSTem:ERRor?"
+          }
+        }
+      }
+    }
+  }
+}

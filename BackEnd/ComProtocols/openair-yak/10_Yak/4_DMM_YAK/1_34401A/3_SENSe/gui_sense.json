@@ -1,0 +1,123 @@
+{
+  "DMM_YAK_34401A_SENSe": {
+    "type": "OcaBin",
+    "id": "50.100.4.10.1.3",
+    "blocks": {
+      "Sense": {
+        "type": "OcaBlock",
+        "description": "Measurement Parameters",
+        "fields": {
+          "Set_Range_and_Resolution": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_DCV_Range": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":SENSe:VOLTage:DC:RANGe <range>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "range": {
+                        "value": "10",
+                        "type": "_GuiValue",
+                        "label": "Range",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Integration_NPLC": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":SENSe:VOLTage:DC:NPLC <nplc>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "nplc": {
+                        "value": "10",
+                        "type": "_GuiValue",
+                        "label": "NPLC",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Input_Characteristics": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Input_Impedance": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":INPut:IMPedance:AUTO <state>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "state": {
+                        "value": "ON",
+                        "type": "_GuiValue",
+                        "label": "State",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_AC_Bandwidth": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "message": ":SENSe:VOLTage:AC:BANDwidth <filter>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "filter": {
+                        "value": "20",
+                        "type": "_GuiValue",
+                        "label": "Filter",
+                        "units": "Hz"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Auto_Zero": {
+            "type": "OcaBlock",
+            "fields": {
+              "Auto_Zero_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "Auto Zero ON",
+                "Execute Command": {
+                  "message": ":SENSe:ZERO:AUTO ON"
+                }
+              },
+              "Auto_Zero_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "Auto Zero OFF",
+                "Execute Command": {
+                  "message": ":SENSe:ZERO:AUTO OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

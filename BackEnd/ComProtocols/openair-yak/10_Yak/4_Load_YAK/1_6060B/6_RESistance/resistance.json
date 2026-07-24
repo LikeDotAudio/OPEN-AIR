@@ -1,0 +1,83 @@
+{
+  "Load_YAK_6060B_RESistance": {
+    "type": "OcaBin",
+    "id": "50.100.7.10.1.6",
+    "blocks": {
+      "Resistance": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Constant Resistance Parameters",
+          "Fr": "Constant R\u00e9sistance Parameters",
+          "De": "Constant Breitrstand Parameters",
+          "Es": "Constant Resistencia Parameters"
+        },
+        "fields": {
+          "Set_Resistance_Level": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "RES <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
+                    "label": {
+                      "En": "Resistance",
+                      "Fr": "R\u00e9sistance",
+                      "De": "Widerstand",
+                      "Es": "Resistencia"
+                    },
+                    "description": {
+                      "En": "Ohms",
+                      "Fr": "Ohms",
+                      "De": "Ohm",
+                      "Es": "Ohmios"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Resistance_Range": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "RES:RANG <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
+                    "description": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

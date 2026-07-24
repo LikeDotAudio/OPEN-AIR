@@ -1,0 +1,103 @@
+{
+  "Oscilloscope_YAK_DS1104Z_TIMebase": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.4",
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Horizontal Timebase Settings",
+          "Fr": "Horizontal Tempsbase Param\u00e8tres",
+          "De": "Horizontal Zeitbase Einstellungen",
+          "Es": "Horizontal Tiempobase Ajustes"
+        },
+        "fields": {
+          "Set_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TIMebase:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "description": {
+                      "En": "MAIN, XY, ROLL",
+                      "Fr": "MAIN, XY, ROLL",
+                      "De": "MAIN, XY, ROLL",
+                      "Es": "MAIN, XY, ROLL"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Scale": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TIMebase:SCALe <scale>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "scale": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s/div"
+                    },
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "\u00c9chelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TIMebase:OFFSet <offset>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "offset": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
+                    "label": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

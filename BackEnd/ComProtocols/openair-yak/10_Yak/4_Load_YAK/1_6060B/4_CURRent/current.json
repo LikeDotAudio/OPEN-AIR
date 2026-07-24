@@ -1,0 +1,115 @@
+{
+  "Load_YAK_6060B_CURRent": {
+    "type": "OcaBin",
+    "id": "50.100.7.10.1.4",
+    "blocks": {
+      "Current": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Constant Current Parameters",
+          "Fr": "Constant Courant Parameters",
+          "De": "Constant Strom Parameters",
+          "Es": "Constant Corriente Parameters"
+        },
+        "fields": {
+          "Set_Current_Level": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CURR <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Current",
+                      "Fr": "Courant",
+                      "De": "Strom",
+                      "Es": "Corriente"
+                    },
+                    "description": {
+                      "En": "Amps",
+                      "Fr": "Amps",
+                      "De": "Ampere",
+                      "Es": "Amperios"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Current_Range": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CURR:RANG <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
+                    "description": {
+                      "En": "6 or 60 A",
+                      "Fr": "6 ou 60 A",
+                      "De": "6 oder 60 A",
+                      "Es": "6 o 60 A"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Current_Slew": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": "CURR:SLEW <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "A/s"
+                    },
+                    "label": {
+                      "En": "Slew Rate",
+                      "Fr": "Slew Rate",
+                      "De": "Slew Rate",
+                      "Es": "Slew Rate"
+                    },
+                    "description": {
+                      "En": "A/sec",
+                      "Fr": "A/sec",
+                      "De": "A/Sek",
+                      "Es": "A/seg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

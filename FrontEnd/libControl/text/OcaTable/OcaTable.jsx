@@ -21,16 +21,36 @@ const OcaTable = ({ value, config, node }) => {
     // Data usually comes in as an object of objects or array of objects
     const [data, setData] = React.useState(config?.data || {});
 
+    // Live rows over MQTT.
+    //
+    // A table baked into a panel file is a snapshot: it only changes when
+    // something regenerates the file AND the browser is hard-refreshed. For
+    // discovery tables that is the wrong shape — devices appear, vanish and
+    // change state continuously, and a stale table that looks authoritative is
+    // worse than an empty one.
+    //
+    // Subscribing here (rather than in WidgetFactory) makes it work on BOTH
+    // render paths: tables declared as blocks go through the factory, which
+    // does no MQTT at all, while fields come via FieldComponent, which already
+    // passes `value`. An explicit `value` prop still wins, so the field path is
+    // unchanged.
+    //
+    // `config.data` remains the cold-start snapshot: the table is populated the
+    // instant the panel loads, then replaced by live rows when the first
+    // retained message lands.
+    const useMqttStateHook = window.useMqttState || React.useState;
+    const [liveValue] = useMqttStateHook(config?.topic, null, config);
+
     React.useEffect(() => {
-        if (value) {
-            try {
-                const parsed = typeof value === 'string' ? JSON.parse(value) : value;
-                setData(parsed);
-            } catch(e) {
-                console.error("Failed to parse table data:", e);
-            }
+        const incoming = (value !== undefined && value !== null) ? value : liveValue;
+        if (incoming === undefined || incoming === null || incoming === '') return;
+        try {
+            const parsed = typeof incoming === 'string' ? JSON.parse(incoming) : incoming;
+            setData(parsed);
+        } catch(e) {
+            console.error("Failed to parse table data:", e);
         }
-    }, [value]);
+    }, [value, liveValue]);
 
     const rows = Array.isArray(data) ? data : Object.values(data);
 

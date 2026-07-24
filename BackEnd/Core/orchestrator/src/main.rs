@@ -508,7 +508,12 @@ async fn main() {
                 .join("Deployment/build_discovered_gui.py");
             if builder.is_file() {
                 match tokio::process::Command::new("python3").arg(&builder).spawn() {
-                    Ok(_) => println!("🧩 [DISCOVERED-GUI] builder spawned: {}", builder.display()),
+                    Ok(_) => {
+                        println!("🧩 [DISCOVERED-GUI] builder spawned: {}", builder.display());
+                        // Rows go live from here on; the builder above is what
+                        // creates/updates the panel files themselves.
+                        spawn_discovered_watcher();
+                    }
                     Err(e) => println!("⚠️  [DISCOVERED-GUI] failed to spawn builder: {e}"),
                 }
             } else {
@@ -609,6 +614,33 @@ const SCAN_STATE_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/State";
 /// Called at scan START (so the tables show "scanning" instead of last scan's
 /// results) as well as at the end. Fire-and-forget: a failed regeneration must
 /// not abort a scan.
+/// Long-lived companion to the one-shot builder.
+///
+/// The builder writes panel FILES; a file is a snapshot, so a table only
+/// changed when something regenerated it AND the browser was hard-refreshed.
+/// The watcher publishes rows to retained MQTT topics the tables subscribe to,
+/// so devices appearing, vanishing or changing state show up live.
+///
+/// Publish-only — it never writes files, so it cannot race the builder.
+fn spawn_discovered_watcher() {
+    let builder = std::env::current_dir()
+        .unwrap_or_else(|_| std::path::PathBuf::from("."))
+        .join("Deployment/build_discovered_gui.py");
+    if !builder.is_file() {
+        return;
+    }
+    match std::process::Command::new("python3")
+        .arg(&builder)
+        .arg("--watch")
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .spawn()
+    {
+        Ok(_) => println!("🧩 [DISCOVERED-GUI] live table watcher started"),
+        Err(e) => println!("⚠️  [DISCOVERED-GUI] watcher failed to start: {e}"),
+    }
+}
+
 fn spawn_discovered_builder() {
     let builder = std::env::current_dir()
         .unwrap_or_else(|_| std::path::PathBuf::from("."))

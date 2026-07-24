@@ -21,12 +21,20 @@ hand: python3 Deployment/build_discovered_gui.py
 """
 import json
 import os
+import sys
 import time
 
 import paho.mqtt.client as mqtt
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(REPO_ROOT, "FrontEnd", "Gui_Frames", "0_discovered")
+
+# Where live table rows are published, one retained topic per category.
+#
+# The panel file carries a snapshot; this carries the truth. Columns still come
+# from the file, so a NEW column needs a rebuild — but rows appearing,
+# vanishing or changing state flow straight through.
+LIVE_TABLE_PREFIX = "OpenAir/System/Gui/Discovered"
 COLLECT_SECONDS = 5
 
 # {category: {block_name: {field_key: value}}}
@@ -429,6 +437,44 @@ def group_for(category):
     return "1_Lab_Instruments"
 
 
+def publish_live_tables(client) -> int:
+    """Publish each category's rows to its live topic. Returns categories sent."""
+    sent = 0
+    for category, blocks in sorted(collected.items()):
+        _headers, rows = rows_for(category, blocks)
+        client.publish(
+            f"{LIVE_TABLE_PREFIX}/{category}",
+            json.dumps(rows),
+            qos=1,
+            retain=True,
+        )
+        sent += 1
+    return sent
+
+
+def watch(client, interval: float = 2.0) -> None:
+    """Stay connected and republish rows whenever the retained tree changes.
+
+    Publish-only on purpose. The one-shot builder owns the panel FILES; two
+    processes writing the same tree would race, and only a new category (or a
+    new column) actually requires a file rewrite. Rows change constantly and
+    are exactly what this keeps live.
+
+    Republishing only on change keeps an idle bench quiet: PTP alone would
+    otherwise put a full table on the bus every couple of seconds forever.
+    """
+    print(f"[discovered-gui] watching — live rows -> {LIVE_TABLE_PREFIX}/<category>")
+    last = None
+    while True:
+        time.sleep(interval)
+        fingerprint = json.dumps(collected, sort_keys=True, default=str)
+        if fingerprint == last:
+            continue
+        last = fingerprint
+        n = publish_live_tables(client)
+        print(f"[discovered-gui] live update: {n} table(s)")
+
+
 def write_panels():
     # Prune categories whose devices vanished (or moved group after a
     # knowledge-base fix). Pruning has to walk INSIDE the group folders now:
@@ -490,6 +536,12 @@ def write_panels():
                     "Devices": {
                         "type": "OcaTable",
                         "description": {"En": f"Discovered {category} devices"},
+                        # Live rows. `data` below is the cold-start snapshot so
+                        # the table is populated the moment the panel loads;
+                        # this topic then replaces it as devices change, with no
+                        # rebuild and no browser refresh. Kept fresh by the
+                        # watcher (see --watch).
+                        "topic": f"{LIVE_TABLE_PREFIX}/{category}",
                         "headers": headers,
                         "data": rows,
                         "Sort": True,
@@ -518,16 +570,38 @@ def make_client():
 
 
 def main():
+    watching = "--watch" in sys.argv
+
     client = make_client()
     client.on_connect = on_connect
     client.on_message = on_message
     client.connect("127.0.0.1", 1883, 60)
     client.loop_start()
     time.sleep(COLLECT_SECONDS)  # retained messages arrive immediately on subscribe
+
+    if watching:
+        # Publish-only: never writes panel files, so it cannot race the
+        # one-shot builder. Rows go live; columns and new categories still come
+        # from a rebuild, which the orchestrator triggers on rescan.
+        publish_live_tables(client)
+        try:
+            watch(client)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            client.loop_stop()
+        return
+
     client.loop_stop()
     n = write_panels()
     devices = sum(len(blocks) for blocks in collected.values())
     write_scan_panel(devices)
+    # Seed the live topics too, so a panel written now has rows the instant it
+    # loads rather than waiting for the watcher's first change.
+    client.loop_start()
+    publish_live_tables(client)
+    time.sleep(0.5)
+    client.loop_stop()
     if n == 0:
         print("[discovered-gui] no retained discovery topics found — only the scan panel written")
 

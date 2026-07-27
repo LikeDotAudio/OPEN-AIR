@@ -12,8 +12,12 @@ panel builder stamps one instance per discovered device, so eight DMMs produce
 eight tabs, each bound to its own VISA resource.
 
 Nothing in the frontend reads this directory. `Deployment/build_instrument_panels.py`
-does, and writes the instances into `FrontEnd/Gui_Frames/1_Instruments/left_50/`
-(generated, gitignored).
+does, and writes the instances into `FrontEnd/Gui_Frames/1_Instruments/left_100/`
+(generated, gitignored) — `_100` because an instrument panel now takes the FULL
+tab width. The `right_50` half it used to sit beside is iced at
+`1_Instruments/__right_50/`; the `__` prefix is what makes the tree walkers skip
+it (`BackEnd/Core/orchestrator/src/api.rs`, `Deployment/build_api_artifacts.py`),
+so it stays in the repo but never reaches the UI. Rename it back to restore.
 
 ## manifest.json
 

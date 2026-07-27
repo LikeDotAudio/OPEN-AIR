@@ -51,7 +51,8 @@ FrontEnd/Gui_Frames/0_discovered/
 # Generated per-device instrument panels. The authored templates they are
 # stamped from live in BackEnd/Instruments/Templates/ and ARE tracked; what
 # lands here is one instance per discovered instrument, rebuilt on every scan.
-FrontEnd/Gui_Frames/1_Instruments/left_50/
+# left_100 = full tab width (was left_50, beside a right_50 that is now iced).
+FrontEnd/Gui_Frames/1_Instruments/left_100/
 
 # Broker secrets — never commit
 broker/passwd

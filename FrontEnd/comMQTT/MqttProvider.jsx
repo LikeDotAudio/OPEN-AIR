@@ -9,10 +9,83 @@
  */
 
 // Topic carrying live VISA scan narration. Non-retained event stream — see
-// SCAN_LOG_TOPIC in BackEnd/Core/orchestrator/src/main.rs. Subscribed below and
-// printed to the browser console, because the orchestrator's own stdout is
-// invisible to anyone actually using the UI.
+// SCAN_LOG_TOPIC in BackEnd/Core/orchestrator/src/main.rs. Subscribed below,
+// printed to the browser console AND fed to the activity store, because the
+// orchestrator's own stdout is invisible to anyone actually using the UI.
 const OA_SCAN_LOG_TOPIC = 'OpenAir/System/Protocols/visa/Scan/Log';
+
+// Retained `scanning` | `idle` — the VISA scan's state, not its narration.
+const OA_SCAN_STATE_TOPIC = 'OpenAir/System/Protocols/visa/Scan/State';
+
+// Narration for EVERY discovery agent, not just VISA: the discovered-GUI
+// watcher diffs the retained protocol tree and announces devices appearing,
+// vanishing and changing state (Deployment/build_discovered_gui.py).
+const OA_DISCOVERY_ACTIVITY_TOPIC = 'OpenAir/System/Discovery/Activity';
+
+// Live table rows for the Discovered tab, one retained topic per category.
+// Panels carry a cold-start snapshot; these carry the truth. WITHOUT this
+// subscription every discovery table froze at whatever was baked into its
+// panel file at build time — the tab looked static while the bus was busy.
+const OA_DISCOVERED_ROWS_FILTER = 'OpenAir/System/Gui/Discovered/#';
+
+// Topics handled by the activity store instead of the value store. They are an
+// event stream: putting them in `messages` would re-render every widget on the
+// page for each line of scan narration.
+const OA_ACTIVITY_TOPICS = new Set([OA_SCAN_LOG_TOPIC, OA_DISCOVERY_ACTIVITY_TOPIC]);
+
+// ── Discovery activity store ────────────────────────────────────────────────
+//
+// Deliberately OUTSIDE React state. Scan narration arrives in bursts of dozens
+// of lines; holding it in the provider's context would re-render the whole
+// widget tree per line. Components that want it subscribe individually via
+// window.useDiscoveryActivity(), so a burst only re-renders the feed itself.
+const OA_ACTIVITY_MAX = 300;
+const ScanActivityStore = {
+    lines: [],           // oldest first; capped at OA_ACTIVITY_MAX
+    scanState: 'idle',   // 'scanning' | 'idle'
+    listeners: new Set(),
+    _pending: null,
+    subscribe(fn) {
+        this.listeners.add(fn);
+        return () => this.listeners.delete(fn);
+    },
+    // Coalesced notify: a scan can emit many lines in one tick, and the feed
+    // only needs to paint the result once.
+    _emit() {
+        if (this._pending) return;
+        this._pending = setTimeout(() => {
+            this._pending = null;
+            this.listeners.forEach(fn => { try { fn(); } catch (e) {} });
+        }, 60);
+    },
+    push(line) {
+        const next = this.lines.concat([line]);
+        this.lines = next.length > OA_ACTIVITY_MAX ? next.slice(next.length - OA_ACTIVITY_MAX) : next;
+        this._emit();
+    },
+    setScanState(state) {
+        if (state === this.scanState) return;
+        this.scanState = state;
+        this._emit();
+    },
+    clear() {
+        this.lines = [];
+        this._emit();
+    },
+};
+window.OA_SCAN_ACTIVITY = ScanActivityStore;
+
+// Subscribe to the discovery activity feed. Returns the current lines plus
+// whether a VISA scan is in flight; re-renders only this component.
+window.useDiscoveryActivity = () => {
+    const [, force] = React.useReducer(x => x + 1, 0);
+    React.useEffect(() => ScanActivityStore.subscribe(force), []);
+    return {
+        lines: ScanActivityStore.lines,
+        scanning: ScanActivityStore.scanState === 'scanning',
+        clear: () => ScanActivityStore.clear(),
+    };
+};
 
 const MqttContext = React.createContext();
 
@@ -105,20 +178,40 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/Gui/#`);
             });
-            // Live scan narration -> browser console. The orchestrator's scan
-            // progress used to exist only in its own stdout, which is invisible
-            // to anyone running the UI (and doubly so in a container).
+            // Live scan narration -> console AND the on-page activity feed. The
+            // orchestrator's scan progress used to exist only in its own stdout,
+            // which is invisible to anyone running the UI (doubly so in a
+            // container) — "I see it in the terminal, not in the browser".
             mqttClient.subscribe(OA_SCAN_LOG_TOPIC, (err) => {
                 if (!err) console.log(`🔎 [SCAN] watching ${OA_SCAN_LOG_TOPIC} — scan progress will appear here`);
             });
+            // Narration from every OTHER discovery agent (DNS-SD, Cast, Dante,
+            // PTP, RAVENNA, SAP, printers…), which is most of what scrolls past
+            // in the terminal.
+            mqttClient.subscribe(OA_DISCOVERY_ACTIVITY_TOPIC);
+            // Scan state, so the UI can say "scanning" rather than infer it.
+            mqttClient.subscribe(OA_SCAN_STATE_TOPIC);
+            // Live discovery table rows. These are what make the Discovered tab
+            // move without a page reload.
+            mqttClient.subscribe(OA_DISCOVERED_ROWS_FILTER, (err) => {
+                if (!err) console.log(`📡📥📥 [MQTT] Subscribed to ${OA_DISCOVERED_ROWS_FILTER}`);
+            });
         });
-        // Scan lines are console output, not application state: printing them
-        // here keeps them out of the value store and off the React render path.
+        // Activity lines are an event stream, not application state: routing
+        // them to the store (and the console) keeps them out of `messages` and
+        // off the whole-tree React render path.
         mqttClient.on('message', (topic, payload) => {
-            if (topic !== OA_SCAN_LOG_TOPIC) return;
+            if (topic === OA_SCAN_STATE_TOPIC) {
+                ScanActivityStore.setScanState(payload.toString().trim());
+                return;
+            }
+            if (!OA_ACTIVITY_TOPICS.has(topic)) return;
             let line = {};
             try { line = JSON.parse(payload.toString()); }
             catch (e) { line = { level: 'info', message: payload.toString() }; }
+            if (!line.ts) line.ts = Date.now() / 1000;
+            if (!line.source) line.source = topic === OA_SCAN_LOG_TOPIC ? 'visa' : 'discovery';
+            ScanActivityStore.push(line);
             const style = {
                 ok:    'color:#2ea043',
                 warn:  'color:#d29922',
@@ -126,7 +219,7 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
                 info:  'color:#58a6ff',
             }[line.level] || 'color:#58a6ff';
             const icon = { ok: '✅', warn: '⚠️', error: '❌', info: '🔎' }[line.level] || '🔎';
-            console.log(`%c${icon} [SCAN] ${line.message}`, style);
+            console.log(`%c${icon} [${line.source.toUpperCase()}] ${line.message}`, style);
         });
 
         mqttClient.on('reconnect', () => setConnected(false));
@@ -152,6 +245,9 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
         }, 1000);
 
         mqttClient.on('message', (topic, message) => {
+            // Handled by the activity store above. Kept out of `messages`
+            // because every write there re-renders every widget on the page.
+            if (OA_ACTIVITY_TOPICS.has(topic) || topic === OA_SCAN_STATE_TOPIC) return;
             const payload = message.toString();
             // Debug diagnostic — enable in DevTools console with:
             //     window.OA_MQTT_DEBUG = true

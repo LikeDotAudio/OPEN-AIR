@@ -37,8 +37,30 @@ OUT_DIR = os.path.join(REPO_ROOT, "FrontEnd", "Gui_Frames", "0_discovered")
 LIVE_TABLE_PREFIX = "OpenAir/System/Gui/Discovered"
 COLLECT_SECONDS = 5
 
+# Narration for the browser's Discovery Activity feed.
+#
+# The VISA scan already narrates itself (visa/Scan/Log), but VISA is one agent
+# out of a dozen: everything DNS-SD, Cast, Dante, PTP, RAVENNA, SAP and the
+# printers find only ever appeared in the orchestrator's stdout. Whoever is
+# actually using the UI cannot see stdout, so the page looked frozen while the
+# terminal scrolled. This topic carries the same story onto the bus.
+#
+# Non-retained: it is an event stream. A page loaded an hour from now must not
+# be shown a device appearing as though it were happening right then — the
+# device records themselves are retained, the narration about them is not.
+ACTIVITY_TOPIC = "OpenAir/System/Discovery/Activity"
+
+# Above this many changes in one pass, narrate the count instead of every row.
+# The first pass after a restart sees ~100 devices "appear" at once; a hundred
+# lines of that buries the two changes that actually mattered.
+ACTIVITY_DETAIL_LIMIT = 8
+
 # {category: {block_name: {field_key: value}}}
 collected = {}
+
+# Retained `<category>/config` topics found under our own output prefix, left by
+# an older OcaTable that published its node definition alongside the rows.
+stale_gui_config = set()
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
@@ -58,11 +80,22 @@ def on_connect(client, userdata, flags, rc, properties=None):
     client.subscribe("OpenAir/System/Protocols/avb/Device/#")
     client.subscribe("OpenAir/System/Protocols/ptp/Device/#")
     client.subscribe(SCAN_STATE_TOPIC)
+    # Own output tree — read back only to find the retained `<category>/config`
+    # topics an older OcaTable left behind (see stale_gui_config below).
+    client.subscribe(f"{LIVE_TABLE_PREFIX}/#")
 
 
 def on_message(client, userdata, msg):
     if msg.topic == SCAN_STATE_TOPIC:
         scan_state["value"] = msg.payload.decode(errors="replace").strip()
+        return
+    if msg.topic.startswith(f"{LIVE_TABLE_PREFIX}/"):
+        # Rows we published ourselves; nothing to collect. The exception is the
+        # `<category>/config` siblings: the table widget used to publish its own
+        # node definition there (retained), which is dead weight on the broker
+        # and, worse, sat one keystroke away from overwriting the row topic.
+        if msg.topic.endswith("/config") and msg.payload:
+            stale_gui_config.add(msg.topic)
         return
     parts = msg.topic.split("/")
     # OpenAir/System/Protocols/{proto}/Device/...
@@ -242,8 +275,18 @@ def write_scan_panel(device_count):
                                 (f"⏳ SCAN IN PROGRESS — rows below are last scan's results and are shown amber until it finishes."
                                  if scan_state["value"] == "scanning" else
                                  f"Last scan: {stamp} — {device_count} device(s).")
-                                + " Reload the page after a rescan to see updated panels."
+                                + " Rows update live; reload only to pick up new tabs or columns."
                             ),
+                        },
+                        # The live feed. Everything the agents narrate on the bus
+                        # — VISA's own scan log plus the watcher's device diffs —
+                        # lands here, which is the whole point: a scan used to be
+                        # visible only in the orchestrator's stdout, so pressing
+                        # RESCAN from the browser looked like it did nothing.
+                        "activity": {
+                            "type": "_GuiScanActivity",
+                            "description": {"En": "Discovery Activity"},
+                            "layout": {"height": 340, "width": "100%"},
                         },
                     },
                 }
@@ -452,6 +495,66 @@ def publish_live_tables(client) -> int:
     return sent
 
 
+def publish_activity(client, level, message, source="discovery"):
+    """Put one narration line on the bus for the browser's activity feed.
+
+    QoS 0, non-retained — same reasoning as the orchestrator's scan_log: losing
+    a line of commentary under load is preferable to slowing discovery for it.
+    """
+    payload = json.dumps({
+        "level": level,          # "info" | "ok" | "warn" | "error"
+        "message": message,
+        "source": source,        # which agent family the line is about
+        "ts": time.time(),
+    })
+    client.publish(ACTIVITY_TOPIC, payload, qos=0, retain=False)
+
+
+def device_states():
+    """{(category, block): row_state} for everything currently collected."""
+    return {
+        (category, name): row_state(fields)
+        for category, blocks in collected.items()
+        for name, fields in blocks.items()
+    }
+
+
+def narrate_changes(client, before, after):
+    """Announce what changed between two device snapshots.
+
+    Only appearances, disappearances and online/offline transitions are
+    narrated. Field churn is deliberately silent: `last_online` moves on almost
+    every pass, and a feed that says "something changed" twice a second says
+    nothing at all.
+    """
+    added = [k for k in after if k not in before]
+    removed = [k for k in before if k not in after]
+    flipped = [k for k in after if k in before and before[k] != after[k]]
+
+    def summarize(keys, verb, level):
+        # Per-category counts read better than 53 individual lines the first
+        # time a watcher sees a populated bus.
+        counts = {}
+        for category, _name in keys:
+            counts[category] = counts.get(category, 0) + 1
+        for category, n in sorted(counts.items()):
+            publish_activity(client, level, f"{n} device(s) {verb}", source=category)
+
+    for keys, verb, level in ((added, "appeared", "ok"), (removed, "vanished", "warn")):
+        if not keys:
+            continue
+        if len(keys) > ACTIVITY_DETAIL_LIMIT:
+            summarize(keys, verb, level)
+        else:
+            for category, name in sorted(keys):
+                publish_activity(client, level, f"{name} {verb}", source=category)
+
+    for category, name in sorted(flipped):
+        state = after[(category, name)]
+        level = {"online": "ok", "offline": "warn"}.get(state, "info")
+        publish_activity(client, level, f"{name} is now {state}", source=category)
+
+
 def watch(client, interval: float = 2.0) -> None:
     """Stay connected and republish rows whenever the retained tree changes.
 
@@ -462,9 +565,18 @@ def watch(client, interval: float = 2.0) -> None:
 
     Republishing only on change keeps an idle bench quiet: PTP alone would
     otherwise put a full table on the bus every couple of seconds forever.
+
+    Every pass also narrates itself to ACTIVITY_TOPIC, which is what makes
+    discovery visible in the browser rather than only in this process's stdout.
     """
     print(f"[discovered-gui] watching — live rows -> {LIVE_TABLE_PREFIX}/<category>")
+    devices = sum(len(b) for b in collected.values())
+    publish_activity(
+        client, "info",
+        f"watching {len(collected)} categor(ies), {devices} device(s) — live rows are on the bus",
+    )
     last = None
+    seen = device_states()
     while True:
         time.sleep(interval)
         fingerprint = json.dumps(collected, sort_keys=True, default=str)
@@ -472,6 +584,9 @@ def watch(client, interval: float = 2.0) -> None:
             continue
         last = fingerprint
         n = publish_live_tables(client)
+        current = device_states()
+        narrate_changes(client, seen, current)
+        seen = current
         print(f"[discovered-gui] live update: {n} table(s)")
 
 
@@ -600,6 +715,18 @@ def main():
     # loads rather than waiting for the watcher's first change.
     client.loop_start()
     publish_live_tables(client)
+    # Drop the retained `<category>/config` leftovers. MQTT deletes retained
+    # state by publishing an empty payload to the exact topic.
+    for topic in sorted(stale_gui_config):
+        client.publish(topic, b"", qos=1, retain=True)
+    if stale_gui_config:
+        print(f"[discovered-gui] cleared {len(stale_gui_config)} stale /config topic(s)")
+    # Tell the browser the tab structure changed — a rebuild is the one thing
+    # live rows cannot deliver, so this is where "reload" is actually warranted.
+    publish_activity(
+        client, "info",
+        f"panels rebuilt — {n} categor(ies), {devices} device(s); reload for new tabs or columns",
+    )
     time.sleep(0.5)
     client.loop_stop()
     if n == 0:

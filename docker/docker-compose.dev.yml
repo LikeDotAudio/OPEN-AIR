@@ -42,3 +42,10 @@ services:
       # subdirectory of this one, so authored panels still land on the host and
       # still show up in `git diff` — that behaviour is preserved, not dropped.
       - ../FrontEnd:/app/FrontEnd
+      # Deployment/ too, for the same reason and one worse failure mode. The
+      # orchestrator spawns Deployment/build_discovered_gui.py to WRITE the
+      # Discovered panels, so a stale in-image copy does not merely fail to pick
+      # up an edit — it silently overwrites the edited panels with its own older
+      # output on the next rescan. Pure Python here (the image installs the pip
+      # deps into site-packages), so mounting it needs no rebuild.
+      - ../Deployment:/app/Deployment

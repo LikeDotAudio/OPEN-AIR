@@ -377,6 +377,17 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
+    // Discovery activity feed. Reads the bus directly (window.useDiscoveryActivity),
+    // so it takes no `value` and owns no topic — the narration it shows is an
+    // event stream several agents publish to, not this widget's state.
+    if (type === '_GuiScanActivity' || type.toLowerCase().includes('scanactivity') || type.toLowerCase().includes('scan_activity')) {
+        return (
+            <div style={style}>
+                {window.ScanActivity ? <window.ScanActivity config={node} /> : <div style={{background: '#222', color: '#fff'}}>Scan Activity</div>}
+            </div>
+        );
+    }
+
     if (type.toLowerCase().includes('progress') || type === 'ProgressBar' || type === '_ProgressBar' || type === '_SmartProgress') {
         return (
             <div style={style}>

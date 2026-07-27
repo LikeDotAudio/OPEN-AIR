@@ -38,8 +38,13 @@ const OcaTable = ({ value, config, node }) => {
     // `config.data` remains the cold-start snapshot: the table is populated the
     // instant the panel loads, then replaced by live rows when the first
     // retained message lands.
+    // Read-only on purpose: no `nodeJson` third argument. Passing one makes
+    // useMqttState publish the node as `<topic>/config` AND — when the retained
+    // rows have not arrived yet — publish its own null default to `<topic>`,
+    // which retained-overwrites the row payload the agents just produced. A
+    // table subscribes; it never owns the topic.
     const useMqttStateHook = window.useMqttState || React.useState;
-    const [liveValue] = useMqttStateHook(config?.topic, null, config);
+    const [liveValue] = useMqttStateHook(config?.topic, null);
 
     React.useEffect(() => {
         const incoming = (value !== undefined && value !== null) ? value : liveValue;

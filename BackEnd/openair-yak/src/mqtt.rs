@@ -49,6 +49,19 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
 
     let mut topic_configs: HashMap<String, crate::models::YakHandler> = HashMap::new();
 
+    // Last value seen on every GUI topic.
+    //
+    // An authored command block is an actuator plus its arguments as SIBLING
+    // widgets — `.../Apply_Sine/Execute Command` next to `.../Apply_Sine/Input/freq`,
+    // `/amp`, `/offset`. Each publishes to its own topic, so the press that fires
+    // the command carries only its own `1`; the three numbers the SCPI needs are
+    // elsewhere on the bus. Caching them is what lets `APPLy:SINusoid <freq>, <amp>,
+    // <offset>` be filled from a single button press, which is how the templates
+    // were authored to work and why they have never worked.
+    //
+    // Cheap: this agent already subscribes to OpenAir/Gui/# for the configs.
+    let mut topic_values: HashMap<String, serde_json::Value> = HashMap::new();
+
     loop {
         match eventloop.poll().await {
             Ok(Event::Incoming(Incoming::Publish(p))) => {
@@ -90,6 +103,16 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                             }
                         }
                     } else {
+                        // Remember every GUI value, command-bound or not — an argument
+                        // widget carries no yak_handler of its own, so this is the only
+                        // place its value is ever seen. Unwrapped: the GUI envelope is
+                        // {value: X, full_id: …}, and a placeholder wants X.
+                        {
+                            let stored = parsed_json.get("value").cloned()
+                                .unwrap_or_else(|| parsed_json.clone());
+                            topic_values.insert(p.topic.to_string(), stored);
+                        }
+
                         // Execution Payload
                         if let Some(yak) = topic_configs.get(&p.topic) {
                             eprintln!("   📡 [YAK MQTT] ⮜ RX EXECUTE: {} -> {}", p.topic, payload);
@@ -105,6 +128,30 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                             // panels still carry none, and verbs fall back to get_scpi()'s
                             // search-all-models behaviour as before.
                             let model_str: Option<String> = yak.model.clone();
+
+                            // Fold the sibling `Input/*` widgets into the payload, so a
+                            // verb sees {value: 1, freq: 1000, amp: 2, offset: 0} and can
+                            // fill every placeholder. Existing keys win: a widget that
+                            // published a compound value of its own is more specific than
+                            // its neighbours.
+                            let mut parsed_json = parsed_json;
+                            if let Some(base) = p.topic.rsplit_once('/').map(|(b, _)| b) {
+                                let prefix = format!("{base}/Input/");
+                                let siblings: Vec<(String, serde_json::Value)> = topic_values
+                                    .iter()
+                                    .filter(|(t, _)| t.starts_with(&prefix))
+                                    .filter_map(|(t, v)| {
+                                        t.strip_prefix(&prefix)
+                                            .filter(|leaf| !leaf.contains('/'))
+                                            .map(|leaf| (leaf.to_string(), v.clone()))
+                                    })
+                                    .collect();
+                                if let Some(obj) = parsed_json.as_object_mut() {
+                                    for (name, value) in siblings {
+                                        obj.entry(name).or_insert(value);
+                                    }
+                                }
+                            }
 
                             let msg = crate::models::IncomingMessage {
                                 handler: String::new(),

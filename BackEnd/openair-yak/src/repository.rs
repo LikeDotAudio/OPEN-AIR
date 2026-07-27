@@ -28,6 +28,15 @@ impl YakRepository {
                 let p = entry.path();
                 if p.is_dir() {
                     self.scan_directory(&p);
+                } else if p.file_name().map_or(false, |n| n == "model.json") {
+                    // Capability sheet, not a command table — what the model IS
+                    // (channel count, voltage/current ranges) rather than what it
+                    // accepts. Read by Deployment/build_instrument_panels.py to
+                    // clamp widgets and to decide how many channel strips to
+                    // stamp. It sits one level above the command files, so the
+                    // grandparent-is-the-model rule below would file it under
+                    // "Power_YAK"; skipping it keeps that from ever mattering.
+                    continue;
                 } else if p.is_file() && p.extension().map_or(false, |ext| ext == "json") {
                     // Extract model name from the grandparent folder (e.g. 1_N9340B / 0_Frequency / file.json)
                     let mut model_name = String::new();

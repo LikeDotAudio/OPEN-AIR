@@ -20,8 +20,10 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
         }
     };
     
-    // NAB is usually a query, like `FREQ:SPAN?`, so it doesn't need variable injection.
-    let scpi_string = template.clone();
+    // NAB is usually a query, like `FREQ:SPAN?`, so it takes no widget value —
+    // but it still needs its instance constants, or `INST:NSEL <chan>;MEAS:VOLT?`
+    // reaches the instrument with the placeholder still in it.
+    let scpi_string = super::apply_params(&template, yak);
     eprintln!("   📡 [YAK MQTT] ⮞ TX SCPI (Model: {}): {}", target_model, scpi_string);
     
     let payload = if let Some(cid) = msg.extra.get("full_id").and_then(|v| v.as_str()) {

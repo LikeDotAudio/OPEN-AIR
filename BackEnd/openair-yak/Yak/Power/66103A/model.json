@@ -1,0 +1,17 @@
+{
+  "model": "66103A",
+  "channels": 1,
+  "watts": 150,
+  "domains": {
+    "volt": {
+      "units": "V",
+      "min": 0,
+      "max": 35
+    },
+    "curr": {
+      "units": "A",
+      "min": 0,
+      "max": 4.5
+    }
+  }
+}

@@ -1,5 +1,146 @@
 # Changelog
 
+## 2026-07-27 - Instruments Become Instances · YAK Drives Real Hardware · Discovery You Can Watch
+
+A bench with eight 34401As had one DMM tab. Panels were a *display* of an
+instrument family, bound to no instrument in particular, and the commands they
+carried went to a topic nothing subscribed to. This makes a panel an instance of
+a discovered device, gives YAK a way to address that device, and puts discovery
+where you can see it happening.
+
+### Per-device instrument panels
+
+- **The authored panels moved out of the frontend** — `FrontEnd/Gui_Frames/1_Instruments/left_50/*`
+  → `BackEnd/Instruments/`, one directory per VISA knowledge-base type (`34401A → DMM`).
+  They are a template *library* now, not a tab tree. Nothing in the frontend reads
+  the directory; `Deployment/build_instrument_panels.py` does.
+- **One panel per discovered device**, stamped after every scan into
+  `Gui_Frames/1_Instruments/left_100/` (generated, gitignored). Eight meters →
+  eight tabs, each bound to its own VISA resource. Folder names carry the
+  resource tail (`34401A_44-44-44-111-gpib7-4`) because model alone is not
+  identity: all eight report serial `0`.
+- **`manifest.json` declares what gets instantiated** — the single-instrument
+  variant per type, plus `exclude` for multi-device children that would otherwise
+  appear as a sub-tab under every device, plus `groups` that COMPOSE bank views
+  from one unit template. `psu_eight.json` was 1183 lines of one module strip
+  written eight times, and could not be right about limits because the chassis
+  holds four module models; composed, each copy carries its own slot, model and
+  ranges. The hand-duplicated bank panels are deleted (29 files), along with 48
+  `*.json.old` editor backups.
+- **Model capability sheets** (`Yak/<type>/<model>/model.json`) supply channel
+  counts and voltage/current domains, so an 8 V module and a 60 V module no
+  longer get the same widget. Previously the ranges were English prose in
+  `visa_devices.json`.
+- **Pruning is stamp-based.** Only directories carrying `.generated-by-openair`
+  are removed, so a hand-authored panel dropped into the generated tree survives.
+
+### YAK: commands that reach an instrument
+
+- **`yak_handler` gained `target` and `model`**, stamped per device by the panel
+  builder. Every verb published its SCPI to one global topic
+  (`OpenAir/System/Protocols/yak/pub`) that **nothing subscribes to** — panels
+  have never actually moved an instrument. SCPI now goes to that device's VISA
+  `Write` topic as a raw string; hand-authored panels naming no device still use
+  the old topic and envelope.
+- **Every placeholder is filled, or nothing is sent.** `verbs::fill_placeholders`
+  replaces the old "substitute `<input_name>`, else the first `<…>`" logic, which
+  turned `APPLy:SINusoid <freq>, <amp>, <offset>` into
+  `APPLy:SINusoid 1000, <amp>, <offset>` — a syntax error a panel cannot show you.
+  Unresolved arguments now refuse the send and say which are missing.
+- **Arguments resolve from sibling widgets.** An authored command block is an
+  actuator beside its `Input/*` fields, each publishing to its own topic, so the
+  press that fires the command carries only `value: 1`. `mqtt.rs` caches values
+  from the `OpenAir/Gui/#` subscription it already held and folds the siblings in
+  before dispatch. A named argument beats the actuator's own press value —
+  without that ordering every command reads `1`.
+- **`params` carry per-instance constants** (`<chan>`, slot selectors), applied
+  before value injection so a voltage cannot land in a slot selector and quietly
+  command the wrong module.
+- **Boolean converters** (`bool_on_off`, `bool_off_on`, `bool_1_0`): a toggle
+  publishes `1`, and `:SENSe:VOLTage:DC:RANGe:AUTO 1` is a syntax error on a
+  34401A.
+- **The Generator template is fully bound** — 25 inline `message` strings became
+  handlers (11 `do`, 6 `set`, 5 `rig`, 3 `nab`), with the verb taken from the
+  block the command was already filed under. Inline SCPI in a template is inert:
+  only YAK translates and routes.
+- **The DMM template is bound** (13 widgets) against nine new bare
+  `CONFigure:…` commands authored in `Yak/DMM/34401A/Panel/`. The existing
+  `Config_*` entries all carry `<range>,<resolution>`, which a mode toggle has no
+  way to fill.
+- **`yak_readout: true`** points a display widget at its device's `/Read` topic,
+  so a query's answer has somewhere to land.
+
+### Discovery you can watch
+
+- **The browser subscribes to the live discovery topics.** `MqttProvider` had
+  `OpenAir/Gui/#` only, while discovery tables publish to
+  `OpenAir/System/Gui/Discovered/<category>` — so every table was frozen at
+  whatever was baked into its panel file at build time.
+- **A `_GuiScanActivity` feed** on the Discovered tab shows scan narration and
+  device changes as they happen. Scan progress previously existed only in the
+  orchestrator's stdout, which is invisible to anyone running the UI.
+- **Every discovery agent narrates now**, not just VISA: the discovered-GUI
+  watcher diffs the retained tree and announces appearances, disappearances and
+  liveness flips to `OpenAir/System/Discovery/Activity`, summarising per category
+  above eight changes so a staleness wave does not bury the two that mattered.
+- **The watcher is a singleton** (flock). The orchestrator spawns one after every
+  scan, so they accumulated — N copies republishing identical rows and narrating
+  every change N times.
+- **`OcaTable` is read-only.** It passed its node to `useMqttState`, which
+  published `<topic>/config` AND, before rows arrived, its own null default over
+  the row topic — retained-overwriting the data the agents had just produced.
+
+### Instrument liveness
+
+- **A heartbeat re-verifies one instrument per tick**, round-robin, using the
+  same `*IDN?` path the scan uses. `last_online` was stamped only when a scan
+  probed an instrument, so the table turned red fifteen minutes after every scan
+  whether or not anything had moved. `OPENAIR_VISA_HEARTBEAT_SECS=0` disables it.
+- ⚠️ **The first version of this wedged two LAN-GPIB gateways.** It probed the
+  transport with a bare TCP connect, which for VXI-11 means knocking on the RPC
+  portmapper (port 111). After ~20 minutes of 30-second knocks both gateways
+  stopped creating links; every instrument behind them returned `VI_ERROR_IO`,
+  to the scanner as much as to the UI, and they needed a power cycle. A directly
+  attached instrument on the same network was unaffected, which is what
+  identified the gateways as the victim. **No raw-socket probing** — the reason
+  is recorded in the code so the cheap-looking version does not come back.
+
+### Naming
+
+- **`10_Yak` → `Yak`, and every `#_` prefix is gone** from the definition tree
+  (177 directories): `10_Yak/4_DMM_YAK/1_34401A/1_MEASure/` is now
+  `Yak/DMM/34401A/MEASure/`. Model identity is unchanged — `repository.rs` reads
+  the grandparent directory and already stripped a leading `N_`.
+- **`_YAK` suffixes and `yak_` prefixes are gone** (64 more renames). Verified
+  behaviour-neutral: 18 models, 563 commands, identical model names before and
+  after. `find_yak_tree()`, both Python tools and `FrontEnd/YAK/yak_renderer.js`
+  updated — the renderer was stale twice over, still pointing into
+  `ComProtocols/` where the crate no longer lives.
+
+### Tooling
+
+- **`Deployment/yak_crossref.py`** cross-references panel controls against the
+  SCPI vocabulary, per instrument family: bound, matchable, control-with-no-command,
+  and command-no-control-exposes. Matching is a suggestion, not an authority —
+  name similarity cannot know that `Mode_FRES` means four-wire resistance, so
+  domain knowledge lives in a curated alias table and everything else is scored
+  for a human to judge.
+
+### Known gaps
+
+- Two LAN-GPIB gateways need a power cycle after the heartbeat incident above.
+- `Set_Relay_Card4/5/7/8/9` (Router) and `Set_High_Sensitivity` /
+  `Set_Power_Gain` (Spectrum) are bound to commands that do not exist in the
+  vocabulary — they fail at runtime with nothing but a log line.
+- 33 commands are ambiguous: same model, same name, different SCPI, resolved by
+  whichever file the directory walk reached last. Most come from
+  `_Legacy_Commands/` and `*_OLD.json`.
+- `repository.rs` registers a phantom command named `fields` (one per model, 18
+  in all) from the `fields:{"Execute Command"}` wrapper. No real command is lost,
+  but it is a name that resolves and should not.
+- 33210A, 33220A, 6060B and N9340B have no `model.json`, so their widgets ship
+  unclamped.
+
 ## 2026-07-18 - W1/W2: the Front Door · Path Traversal Fix · One-Command Startup
 
 Executes workstreams **W1** and **W2** of

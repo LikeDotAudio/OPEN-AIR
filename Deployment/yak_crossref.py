@@ -14,7 +14,7 @@ answering, per instrument family, three questions:
 This reads both sides from their sources of truth: the YAK tree using the SAME
 extraction rules as repository.rs (model = grandparent directory, command = a key
 whose node carries an `Execute Command` message), and the template library under
-BackEnd/Instruments/Templates.
+BackEnd/Instruments.
 
 Matching is a SUGGESTION, not an authority. Name similarity cannot know that a
 DMM's `Mode_FRES` means four-wire resistance; the curated ALIASES table carries
@@ -32,8 +32,8 @@ import os
 import re
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "10_Yak")
-TEMPLATE_ROOT = os.path.join(REPO_ROOT, "BackEnd", "Instruments", "Templates")
+YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
+TEMPLATE_ROOT = os.path.join(REPO_ROOT, "BackEnd", "Instruments")
 
 # Which models a type's panels should be cross-referenced against. A type can
 # have several (the bench has two scope families and four PSU modules), and a
@@ -45,9 +45,19 @@ TYPE_MODELS = {
     "Power": ["66101A", "66102A", "66103A", "66104A"],
     "Generator": ["33210A", "33220A"],
     "Oscilloscope": ["54641D", "DS1104Z"],
-    "Spectrum": ["N9340B", "N9342CN"],
+    "Spectrum": ["N9340B", "N9342CN", "HPE4411A"],
     "Router": ["3235"],
+    # LCR and Distortion have templates in the manifest and folders in the YAK
+    # tree, but were absent here — so the audit reported nothing about them and
+    # they read as "no problem" when in fact nobody had looked. Listed now even
+    # though 4263A and HP_8903B currently yield zero commands: an explicit
+    # all-controls-unbacked row is the finding, silence is not.
+    "LCR": ["4263A"],
+    "Distortion": ["Porta_one", "HP_8903B"],
 }
+
+# Every type in Templates/manifest.json must appear above, else it is silently
+# skipped. This is checked at startup rather than trusted.
 
 # Domain knowledge name similarity cannot supply. control name -> command name.
 # Deliberately small: only pairs a technician would call obvious, where the
@@ -136,7 +146,11 @@ def template_controls(type_name):
             wtype = node.get("type")
             if isinstance(wtype, str) and wtype.startswith("_") and name and name not in seen:
                 seen.add(name)
-                found.append((name, wtype, isinstance(node.get("yak_handler"), dict)))
+                # A readout is bound too: `yak_readout` makes the builder point the
+                # widget at the device's /Read topic, which is how a display widget
+                # participates. Counting it as unbound would report finished work.
+                bound = isinstance(node.get("yak_handler"), dict) or node.get("yak_readout") is True
+                found.append((name, wtype, bound))
             for key, value in node.items():
                 if key in SKIP_KEYS:
                     continue
@@ -259,6 +273,29 @@ def main():
     args = ap.parse_args()
 
     vocab = yak_vocabulary()
+
+    # A type present in the manifest but missing from TYPE_MODELS is not
+    # "clean" — it is unexamined. Say so loudly rather than omitting the row.
+    try:
+        with open(os.path.join(TEMPLATE_ROOT, "manifest.json")) as f:
+            unlisted = sorted(set(json.load(f)) - set(TYPE_MODELS))
+        if unlisted:
+            print(f"⚠️  manifest types with no models listed here (NOT analyzed): {', '.join(unlisted)}\n")
+    except (OSError, json.JSONDecodeError):
+        pass
+
+    # Commands whose model key is not a real model: the grandparent-is-the-model
+    # rule (repository.rs) mis-files anything nested deeper than
+    # <model>/<section>/file.json. These are unreachable at runtime whenever YAK
+    # narrows a lookup by model, so they are reported, not silently dropped.
+    real_models = {m for ms in TYPE_MODELS.values() for m in ms}
+    phantom = {m: len(c) for m, c in vocab.items() if m not in real_models}
+    if phantom:
+        total = sum(phantom.values())
+        detail = ", ".join(f"{m} ({n})" for m, n in sorted(phantom.items(), key=lambda kv: -kv[1]))
+        print(f"⚠️  {total} commands filed under non-model folders — unreachable by "
+              f"model-narrowed lookup: {detail}\n")
+
     types = [args.type] if args.type else list(TYPE_MODELS)
     for type_name in types:
         matched = report(type_name, vocab, verbose=args.verbose or args.emit)

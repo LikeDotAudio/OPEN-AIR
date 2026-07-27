@@ -1,0 +1,17 @@
+{
+  "model": "66101A",
+  "channels": 1,
+  "watts": 128,
+  "domains": {
+    "volt": {
+      "units": "V",
+      "min": 0,
+      "max": 8
+    },
+    "curr": {
+      "units": "A",
+      "min": 0,
+      "max": 16
+    }
+  }
+}

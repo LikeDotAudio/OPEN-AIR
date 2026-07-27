@@ -34,7 +34,7 @@ async fn main() {
     let repo_path = std::env::var("YAK_REPO_PATH").unwrap_or_else(|_| {
         find_yak_tree().unwrap_or_else(|| {
             error!("YAK tree not found from cwd; set YAK_REPO_PATH. Loading zero definitions.");
-            String::from("BackEnd/openair-yak/10_Yak")
+            String::from("BackEnd/openair-yak/Yak")
         })
     });
     info!("YAK repository path: {}", repo_path);
@@ -48,7 +48,7 @@ async fn main() {
 
 /// Walk up from the current directory looking for the YAK definition tree.
 fn find_yak_tree() -> Option<String> {
-    let rel = std::path::Path::new("BackEnd/openair-yak/10_Yak");
+    let rel = std::path::Path::new("BackEnd/openair-yak/Yak");
     let mut dir = std::env::current_dir().ok()?;
     loop {
         let candidate = dir.join(rel);

@@ -33,6 +33,20 @@ pub struct YakHandler {
     /// Agilent when two models share a command name.
     #[serde(default)]
     pub model: Option<String>,
+
+    /// Constants this panel instance was stamped with, substituted into the
+    /// SCPI template before the widget's value goes in: the mainframe slot a
+    /// module sits in, a scope channel number — anything fixed for one panel
+    /// but different on the next panel built from the same template.
+    ///
+    /// The command table is per MODEL, and four of the eight 66000A modules on
+    /// this bench are 66104As. With no per-instance channel there was nowhere
+    /// to put the slot except the table itself, which is why every module
+    /// command read `INST:NSEL 1` — one table, eight modules, all of them
+    /// addressing slot 1. Stamped by Deployment/build_instrument_panels.py from
+    /// the VISA resource (`gpib7,30,4::INSTR` → `chan = 5`).
+    #[serde(default)]
+    pub params: std::collections::HashMap<String, String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

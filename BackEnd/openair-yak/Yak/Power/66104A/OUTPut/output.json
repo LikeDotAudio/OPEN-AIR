@@ -1,0 +1,56 @@
+{
+  "Power_YAK_66104A_OUTPut": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.3",
+    "blocks": {
+      "Output": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Output Control",
+          "Fr": "Sortie Control",
+          "De": "Ausgang Control",
+          "Es": "Salida Control"
+        },
+        "fields": {
+          "Output_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Output_ON": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "INST:NSEL <chan>;OUTP ON"
+                }
+              },
+              "Output_OFF": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    }
+                  }
+                },
+                "Execute Command": {
+                  "message": "INST:NSEL <chan>;OUTP OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,33 +11,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registry of instruments available for this simulation
     const instruments = {
         'N9340B': {
-            basePath: '../../BackEnd/ComProtocols/openair-yak/10_Yak/1_Spectrum_YAK/1_N9340B/',
+            basePath: '../../BackEnd/openair-yak/Yak/Spectrum/N9340B/',
             schemas: [
-                { name: 'Frequency', path: '0_Frequency/yak_frequency.json' },
-                { name: 'Bandwidth', path: '1_Bandwidth/yak_bandwidth.json' },
-                { name: 'Amplitude', path: '2_Amplitude/yak_amplitude.json' },
-                { name: 'Trace', path: '3_Trace/yak_trace.json' },
-                { name: 'Markers', path: '7_Markers/yak_markers.json' },
-                { name: 'Memory', path: '8_Memory/memory.json' },
-                { name: 'System', path: '9_System/yak_system.json' }
+                { name: 'Frequency', path: 'Frequency/frequency.json' },
+                { name: 'Bandwidth', path: 'Bandwidth/bandwidth.json' },
+                { name: 'Amplitude', path: 'Amplitude/amplitude.json' },
+                { name: 'Trace', path: 'Trace/trace.json' },
+                { name: 'Markers', path: 'Markers/markers.json' },
+                { name: 'Memory', path: 'Memory/memory.json' },
+                { name: 'System', path: 'System/system.json' }
             ]
         },
         'HP66102A': {
-            basePath: '../../BackEnd/ComProtocols/openair-yak/10_Yak/5_Power_YAK/2_66102A/',
+            basePath: '../../BackEnd/openair-yak/Yak/Power/66102A/',
             schemas: [
-                { name: 'Instrument', path: '1_INSTrument/instrument.json' },
-                { name: 'Source', path: '2_SOURce/source.json' },
-                { name: 'Output', path: '3_OUTPut/output.json' },
-                { name: 'Measure', path: '4_MEASure/measure.json' },
-                { name: 'Trigger', path: '5_TRIGger/trigger.json' },
-                { name: 'System', path: '6_SYSTem/system.json' },
-                { name: 'Status', path: '7_STATus/status.json' }
+                { name: 'Instrument', path: 'INSTrument/instrument.json' },
+                { name: 'Source', path: 'SOURce/source.json' },
+                { name: 'Output', path: 'OUTPut/output.json' },
+                { name: 'Measure', path: 'MEASure/measure.json' },
+                { name: 'Trigger', path: 'TRIGger/trigger.json' },
+                { name: 'System', path: 'SYSTem/system.json' },
+                { name: 'Status', path: 'STATus/status.json' }
             ]
         },
         'Router3235': {
-            basePath: '../../BackEnd/ComProtocols/openair-yak/10_Yak/0_Router_YAK/1_3235/',
+            basePath: '../../BackEnd/openair-yak/Yak/Router/3235/',
             schemas: [
-                { name: 'Switching Commands', path: '1_Commands/yak_router.json' }
+                { name: 'Switching Commands', path: 'Commands/router.json' }
             ]
         }
     };

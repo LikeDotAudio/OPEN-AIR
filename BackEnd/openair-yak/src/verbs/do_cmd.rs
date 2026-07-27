@@ -20,7 +20,9 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
         }
     };
     
-    let scpi_string = template.clone();
+    // No widget value on DO, but the instance constants still apply — an
+    // `INST:NSEL <chan>;OUTP ON` must know which slot it is turning on.
+    let scpi_string = super::apply_params(&template, yak);
     eprintln!("   📡 [YAK MQTT] ⮞ TX SCPI (Model: {}): {}", target_model, scpi_string);
     
     let payload = if let Some(cid) = msg.extra.get("full_id").and_then(|v| v.as_str()) {

@@ -359,7 +359,7 @@ PREFERRED_COLUMNS = {
                    "protocol_version", "cast_id", "status", "last_seen"],
 }
 HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type", "_row_state",
-                  "_topic_prefix"}
+                  "_topic_prefix", "reachable"}
 
 # How recently a device must have answered to count as ONLINE.
 #
@@ -390,6 +390,14 @@ def row_state(row, now=None):
     # Explicit negative from an agent that actually measures it.
     raw_connected = str(row.get("connected", "")).strip()
     if raw_connected in ("0", "false", "False"):
+        return "offline"
+
+    # The VISA heartbeat's verdict (orchestrator spawn_visa_heartbeat): the
+    # instrument's transport stopped answering repeated probes. Distinct from
+    # `connected`, which records whether *IDN? ever answered — an instrument can
+    # be identified and later unplugged, and only this notices within 30s
+    # instead of waiting out ONLINE_WINDOW_SECONDS.
+    if str(row.get("reachable", "")).strip() in ("0", "false", "False"):
         return "offline"
 
     raw = row.get("last_online")

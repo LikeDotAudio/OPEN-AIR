@@ -1,0 +1,12 @@
+{
+  "model": "54641D",
+  "channels": 2,
+  "digital_channels": 16,
+  "domains": {
+    "bandwidth": {
+      "units": "Hz",
+      "min": 0,
+      "max": 350000000.0
+    }
+  }
+}

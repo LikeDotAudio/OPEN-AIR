@@ -49,6 +49,90 @@ pub async fn dispatch(
         .await;
 }
 
+/// Fill in the per-instance constants a panel was stamped with (`<chan>`, …).
+///
+/// Must run BEFORE the widget's value is injected. Value injection falls back
+/// to "replace the first `<…>` in the template" whenever the template has no
+/// `<input_name>` placeholder, so on `INST:NSEL <chan>;VOLT <volt>` it would
+/// otherwise write the voltage into the slot selector — quietly commanding the
+/// wrong module rather than failing.
+pub fn apply_params(template: &str, yak: &YakHandler) -> String {
+    let mut out = template.to_string();
+    for (name, value) in &yak.params {
+        out = out.replace(&format!("<{}>", name), value);
+    }
+    out
+}
+
+/// Fill every `<placeholder>` in a SCPI template, or say which ones are missing.
+///
+/// A command like `APPLy:SINusoid <freq>, <amp>, <offset>` has three arguments
+/// living in three sibling widgets. The old substitution filled exactly one —
+/// `<input_name>`, else the first `<…>` — and sent the rest to the instrument
+/// verbatim, so a three-argument command arrived as
+/// `APPLy:SINusoid 1000, <amp>, <offset>`. That is a syntax error the panel has
+/// no way to show you, which is why templates carrying multi-argument commands
+/// were never bound to anything.
+///
+/// Resolution order per placeholder:
+///   1. a same-named key in the payload — sibling `Input/*` widgets are folded
+///      in by mqtt.rs before dispatch, and a named argument always beats the
+///      actuator's own press value
+///   2. the primary value (converted) when the name matches `input_name`
+///   3. the primary value when it is the ONLY placeholder, preserving the old
+///      "first `<…>` wins" behaviour for handlers that name no input
+///
+/// Returns Err with the unresolved names rather than sending a half-built
+/// command: refusing is recoverable, a malformed write to an instrument is not.
+pub fn fill_placeholders(
+    template: &str,
+    msg: &crate::models::IncomingMessage,
+    yak: &YakHandler,
+    primary: &serde_json::Value,
+) -> Result<String, Vec<String>> {
+    let as_text = |v: &serde_json::Value| match v {
+        serde_json::Value::Null => String::new(),
+        serde_json::Value::String(s) => s.clone(),
+        other => other.to_string(),
+    };
+
+    let names: Vec<String> = template
+        .match_indices('<')
+        .filter_map(|(start, _)| {
+            template[start..].find('>').map(|end| template[start + 1..start + end].to_string())
+        })
+        .collect();
+
+    let single = names.len() == 1;
+    let mut out = template.to_string();
+    let mut missing = Vec::new();
+
+    for name in &names {
+        // A NAMED value wins over the primary, and that order matters: the
+        // handler sits on the actuator, so its own payload is the button press
+        // (`value: 1`), never the argument. `<freq>` must come from the sibling
+        // `Input/freq` widget even though the handler declares freq as its
+        // input_name — otherwise every command reads "1".
+        let resolved = if let Some(v) = msg.extra.get(name) {
+            Some(as_text(v))
+        } else if !yak.input_name.is_empty() && *name == yak.input_name {
+            Some(as_text(primary))
+        } else if single {
+            Some(as_text(primary))
+        } else {
+            None
+        };
+        match resolved {
+            Some(text) if !text.is_empty() => {
+                out = out.replace(&format!("<{name}>"), &text);
+            }
+            _ => missing.push(name.clone()),
+        }
+    }
+
+    if missing.is_empty() { Ok(out) } else { Err(missing) }
+}
+
 /// Which model's command table to look SCPI up in.
 ///
 /// Instance binding first (the panel knows what it was stamped for), then

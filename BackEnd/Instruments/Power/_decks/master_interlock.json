@@ -1,0 +1,75 @@
+{
+  "Power_Deck_Master_Interlock": {
+    "type": "OcaBin",
+    "id": "50.100.5.3.0",
+    "blocks": {
+      "Master_Override_Deck": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "GLOBAL SAFETY INTERLOCK",
+          "Fr": "GLOBAL SAFETY INTERLOCK",
+          "De": "GLOBAL SAFETY INTERLOCK",
+          "Es": "GLOBAL SAFETY INTERLOCK"
+        },
+        "layout": {
+          "col_span": 4
+        },
+        "fields": {
+          "Global_Kill_Switch": {
+            "type": "_TrapezoidButton",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "\u2622\ufe0f MASTER POWER: ACTIVE \u2622\ufe0f",
+                  "Fr": "\u2622\ufe0f MASTER POWER: ACTIVE \u2622\ufe0f",
+                  "De": "\u2622\ufe0f MASTER POWER: ACTIVE \u2622\ufe0f",
+                  "Es": "\u2622\ufe0f MASTER POWER: ACTIVE \u2622\ufe0f"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "MASTER POWER: OFF",
+                  "Fr": "MASTER POWER: OFF",
+                  "De": "MASTER POWER: OFF",
+                  "Es": "MASTER POWER: OFF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "state_default": false,
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "trigger": false,
+                "command_value": "OUTP:ALL <state>"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

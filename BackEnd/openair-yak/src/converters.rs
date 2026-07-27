@@ -11,6 +11,27 @@ pub fn apply_converter(converter: &str, val: Option<&Value>) -> Value {
         return val.clone();
     }
 
+    // Boolean-shaped converters run BEFORE the numeric branch: a GUI toggle
+    // publishes 1/0 (or true/false), and SCPI wants a keyword. Without these a
+    // toggle sends `:SENSe:VOLTage:DC:RANGe:AUTO 1`, which an HP 34401A rejects
+    // as a syntax error — the panel looks wired and the instrument disagrees.
+    let truthy = match val {
+        Value::Bool(b) => Some(*b),
+        Value::Number(n) => n.as_f64().map(|f| f != 0.0),
+        Value::String(s) => match s.trim().to_ascii_lowercase().as_str() {
+            "1" | "true" | "on" | "yes" => Some(true),
+            "0" | "false" | "off" | "no" => Some(false),
+            _ => None,
+        },
+        _ => None,
+    };
+    match (converter.to_lowercase().as_str(), truthy) {
+        ("bool_on_off", Some(b)) => return Value::String(if b { "ON" } else { "OFF" }.to_string()),
+        ("bool_off_on", Some(b)) => return Value::String(if b { "OFF" } else { "ON" }.to_string()),
+        ("bool_1_0", Some(b)) => return Value::String(if b { "1" } else { "0" }.to_string()),
+        _ => {}
+    }
+
     match val.as_f64() {
         Some(num) => {
             let converted = match converter.to_lowercase().as_str() {

@@ -307,6 +307,12 @@ async fn main() {
         let (rescan_tx, mut rescan_rx) = tokio::sync::mpsc::channel::<()>(1);
 
         spawn_visa_write_daemon(topic_to_resource.clone(), rescan_tx, visa_mqtt_host.clone(), visa_mqtt_port);
+        // Raised for the duration of a scan so the heartbeat stands aside: a
+        // GPIB gateway serves one link at a time, and two probers competing for
+        // it is how a healthy instrument reports as missing.
+        let scanning_flag = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+        spawn_visa_heartbeat(topic_to_resource.clone(), scanning_flag.clone(),
+                             visa_mqtt_host.clone(), visa_mqtt_port);
 
         // Seed the cleanup map from what is ALREADY retained on the broker.
         //
@@ -374,6 +380,7 @@ async fn main() {
             }
         }
 
+        scanning_flag.store(true, std::sync::atomic::Ordering::Relaxed);
         set_scan_state(&mqtt_client, "scanning");
         scan_log(&mqtt_client, "info", "Scan started — hunting for VXI-11/LAN gateways and instruments…");
         // Regenerate panels immediately so the tables show "scanning" rather than
@@ -491,6 +498,7 @@ async fn main() {
             }
 
         }
+        scanning_flag.store(false, std::sync::atomic::Ordering::Relaxed);
         set_scan_state(&mqtt_client, "idle");
         scan_log(&mqtt_client, "ok",
             format!("Scan complete — {} device(s) published to the bus", scan_topic_to_resource.len()));
@@ -655,6 +663,145 @@ fn spawn_discovered_builder() {
         .spawn();
 }
 
+/// Seconds between heartbeat probes. `OPENAIR_VISA_HEARTBEAT_SECS=0` disables it.
+///
+/// ONE instrument is probed per tick, round-robin, so this is also the per-device
+/// load: a 24-instrument bench sees one VISA session every 20 seconds and each
+/// instrument is re-verified about every 8 minutes — comfortably inside
+/// ONLINE_WINDOW_SECONDS (15 min) in build_discovered_gui.py, which is what
+/// decides whether a row is green.
+///
+/// Liveness used to be a by-product of scanning: `last_online` was stamped when a
+/// scan probed an instrument and never touched again, so the Discovered table
+/// turned red fifteen minutes after every scan whether or not anything had moved.
+fn visa_heartbeat_secs() -> u64 {
+    std::env::var("OPENAIR_VISA_HEARTBEAT_SECS")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(20)
+}
+
+/// Consecutive failed probes before an instrument is called unreachable.
+///
+/// One miss is a busy GPIB gateway mid-transaction, not a disconnected
+/// instrument. Two is a pattern.
+const VISA_HEARTBEAT_FAILS: u32 = 2;
+
+/// Keep discovered instruments' liveness current between scans.
+///
+/// Probes with the SAME `*IDN?` path the scan uses — one python process, one
+/// pyvisa session, opened and closed properly.
+///
+/// It is worth saying why, because the cheap-looking alternative is a trap. A
+/// previous version of this opened a bare TCP connection to each instrument's
+/// transport port instead: no python, no instrument traffic, microseconds per
+/// device. For `::SOCKET` instruments that is harmless. For VXI-11 it means
+/// knocking on the RPC portmapper (port 111), and this bench's LAN-GPIB gateways
+/// do not reclaim the state that leaves behind. After roughly twenty minutes of
+/// 30-second knocks BOTH gateways stopped creating links — every instrument
+/// behind them went dark with VI_ERROR_IO, including to the scanner, and they
+/// needed a power cycle. A directly-attached instrument on the same network was
+/// unaffected, which is what identified the gateways as the victim.
+///
+/// So: no raw-socket probing. A real VISA session, one at a time, is both the
+/// honest signal (the instrument answered, not merely its gateway's portmapper)
+/// and the gentle one.
+fn spawn_visa_heartbeat(
+    topic_to_resource: std::sync::Arc<std::sync::Mutex<std::collections::HashMap<String, String>>>,
+    scanning: std::sync::Arc<std::sync::atomic::AtomicBool>,
+    mqtt_host: String,
+    mqtt_port: u16,
+) {
+    let interval = visa_heartbeat_secs();
+    if interval == 0 {
+        println!("⏸️  [VISA HEARTBEAT] disabled (OPENAIR_VISA_HEARTBEAT_SECS=0)");
+        return;
+    }
+    tokio::spawn(async move {
+        let mut mqttoptions =
+            rumqttc::MqttOptions::new("open-air-visa-heartbeat", &mqtt_host, mqtt_port);
+        mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
+        let (client, mut connection) = rumqttc::Client::new(mqttoptions, 10);
+        std::thread::spawn(move || {
+            for _ in connection.iter() {}
+        });
+        println!("💓 [VISA HEARTBEAT] one instrument re-verified every {interval}s");
+
+        let mut misses: std::collections::HashMap<String, u32> = Default::default();
+        let mut unreachable: std::collections::HashSet<String> = Default::default();
+        let mut cursor: usize = 0;
+
+        loop {
+            tokio::time::sleep(std::time::Duration::from_secs(interval)).await;
+
+            // A scan is already talking to every instrument on the bench, and
+            // GPIB gateways serve one link at a time. Probing across it would
+            // contend for the resource the scan is mid-way through using.
+            if scanning.load(std::sync::atomic::Ordering::Relaxed) {
+                continue;
+            }
+
+            let mut devices: Vec<(String, String)> = {
+                let map = topic_to_resource.lock().unwrap();
+                map.iter().map(|(k, v)| (k.clone(), v.clone())).collect()
+            };
+            if devices.is_empty() {
+                continue;
+            }
+            // HashMap order is not stable across iterations; sorting makes the
+            // rotation actually visit every device instead of resampling.
+            devices.sort();
+            misses.retain(|prefix, _| devices.iter().any(|(p, _)| p == prefix));
+
+            let (prefix, resource) = devices[cursor % devices.len()].clone();
+            cursor = cursor.wrapping_add(1);
+
+            let alive = match tokio::process::Command::new("python3")
+                .arg("-c")
+                .arg(VISA_PROBE_SCRIPT)
+                .arg(&resource)
+                .output()
+                .await
+            {
+                Ok(out) => {
+                    let text = String::from_utf8_lossy(&out.stdout);
+                    serde_json::from_str::<serde_json::Value>(&text)
+                        .map(|v| v.get("error").is_none())
+                        .unwrap_or(false)
+                }
+                Err(_) => false,
+            };
+
+            if alive {
+                misses.insert(prefix.clone(), 0);
+                let now = std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .map(|d| d.as_secs())
+                    .unwrap_or(0);
+                let _ = client.publish(format!("{prefix}/last_online"), rumqttc::QoS::AtMostOnce,
+                                       true, now.to_string().into_bytes());
+                let _ = client.publish(format!("{prefix}/reachable"), rumqttc::QoS::AtMostOnce,
+                                       true, b"1".to_vec());
+                if unreachable.remove(&prefix) {
+                    let _ = client.publish(format!("{prefix}/status"), rumqttc::QoS::AtLeastOnce,
+                                           true, b"identified".to_vec());
+                    scan_log(&client, "ok", format!("{resource} is answering again"));
+                }
+            } else {
+                let count = misses.entry(prefix.clone()).or_insert(0);
+                *count += 1;
+                if *count >= VISA_HEARTBEAT_FAILS && unreachable.insert(prefix.clone()) {
+                    let _ = client.publish(format!("{prefix}/reachable"), rumqttc::QoS::AtLeastOnce,
+                                           true, b"0".to_vec());
+                    let _ = client.publish(format!("{prefix}/status"), rumqttc::QoS::AtLeastOnce,
+                                           true, b"unreachable".to_vec());
+                    scan_log(&client, "warn", format!("{resource} stopped answering"));
+                }
+            }
+        }
+    });
+}
+
 fn set_scan_state(client: &rumqttc::Client, state: &str) {
     let _ = client.publish(SCAN_STATE_TOPIC, rumqttc::QoS::AtLeastOnce, true, state.as_bytes().to_vec());
 }
@@ -686,9 +833,12 @@ fn scan_log(client: &rumqttc::Client, level: &str, message: impl AsRef<str>) {
 /// Shared by the per-scan cleanup and the CLEAR button, because deleting
 /// retained state means publishing an empty payload to each exact topic — so
 /// both paths must agree on the full key list or they leave fragments behind.
-const DEVICE_TOPIC_KEYS: [&str; 13] = [
+const DEVICE_TOPIC_KEYS: [&str; 14] = [
     "manufacturer", "model", "serial", "firmware", "raw_idn", "resource",
     "status", "device_type", "notes", "last_online", "connected", "Write", "Read",
+    // Written by the heartbeat, not the scan — and just as retained, so it has
+    // to be in the wipe list or a cleared device keeps a stale liveness flag.
+    "reachable",
 ];
 
 /// Collect the device-topic prefixes already retained on the broker.

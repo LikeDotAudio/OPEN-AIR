@@ -218,76 +218,18 @@
           "Es": "Marcador Command Sets"
         },
         "fields": {
-          "Marker_State_ON": {
+          "Set_Marker_State": {
             "type": "OcaBlock",
             "description": {
-              "En": "Enable Marker",
-              "Fr": "Enable Marqueur",
-              "De": "Enable Marker",
-              "Es": "Enable Marcador"
+              "En": "Set Marker State",
+              "Fr": "Set Marker State",
+              "De": "Set Marker State",
+              "Es": "Set Marker State"
             },
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "message": ":CALCulate:MARKer<marker_number>:STATe ON"
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "marker_number": {
-                    "type": "_GuiValue",
-                    "label": {
-                      "En": "Marker Number",
-                      "Fr": "Num\u00e9ro de marqueur",
-                      "De": "Markernummer",
-                      "Es": "N\u00famero de marcador"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Marker_State_OFF": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Disable Marker",
-              "Fr": "D\u00e9sactiver le marqueur",
-              "De": "Marker deaktivieren",
-              "Es": "Desactivar marcador"
-            },
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "message": ":CALCulate:MARKer<marker_number>:STATe OFF"
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "marker_number": {
-                    "type": "_GuiValue",
-                    "label": {
-                      "En": "Marker Number",
-                      "Fr": "Num\u00e9ro de marqueur",
-                      "De": "Markernummer",
-                      "Es": "N\u00famero de marcador"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Marker_X_position": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Set Marker Frequency",
-              "Fr": "Set Marqueur Fr\u00e9quence",
-              "De": "Set Marker Frequenz",
-              "Es": "Set Marcador Frecuencia"
-            },
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "message": ":CALCulate:MARKer<marker_number>:X <x_value>"
+                "message": ":CALCulate:MARKer<marker_number>:STATe <state_bool>"
               },
               "Input": {
                 "type": "OcaBlock",
@@ -301,7 +243,62 @@
                       "Es": "N\u00famero de marcador"
                     }
                   },
-                  "x_value": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "State"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_All_Markers_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CALCulate:MARKer:AOFF"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "State"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Marker_X_position": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Set Marker Frequency",
+              "Fr": "Set Marqueur Fr\u00e9quence",
+              "De": "Set Marker Frequenz",
+              "Es": "Set Marcador Frecuencia"
+            },
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":CALCulate:MARKer<marker_number>:X <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "marker_number": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "Marker Number",
+                      "Fr": "Num\u00e9ro de marqueur",
+                      "De": "Markernummer",
+                      "Es": "N\u00famero de marcador"
+                    }
+                  },
+                  "hz_value": {
                     "type": "_GuiValue",
                     "domain": {
                       "units": "Hz"

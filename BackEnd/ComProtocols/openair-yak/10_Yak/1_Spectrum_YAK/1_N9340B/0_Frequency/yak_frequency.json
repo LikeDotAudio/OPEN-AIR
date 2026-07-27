@@ -165,7 +165,7 @@
               }
             }
           },
-          "Span_Frequency": {
+          "Set_Span_Frequency": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -191,7 +191,7 @@
               }
             }
           },
-          "Start_Freq_MHz": {
+          "Set_Start_Freq_MHz": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -223,7 +223,7 @@
               }
             }
           },
-          "Stop_Freq_MHz": {
+          "Set_Stop_Freq_MHz": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -239,6 +239,32 @@
                   }
                 },
                 "message": ":FREQuency:STOP <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Center_Freq_MHz": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label": {
+                  "En": "Set Center Frequency",
+                  "Fr": "Set Fr\u00e9quence centrale",
+                  "De": "Set Mittenfrequenz",
+                  "Es": "Set Frecuencia central"
+                },
+                "message": ":FREQuency:CENTer <hz_value>"
               },
               "Input": {
                 "type": "OcaBlock",

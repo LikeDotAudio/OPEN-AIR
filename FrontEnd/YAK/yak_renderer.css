@@ -128,51 +128,48 @@ body {
 
 /* Application Layout */
 .app-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     min-height: 600px;
 }
 
-.sidebar {
-    background: var(--sidebar-bg);
+.tabs-nav-container {
+    background: var(--panel-bg);
     backdrop-filter: blur(12px);
-    border-radius: 16px;
+    border-radius: 12px;
     border: 1px solid var(--border-color);
-    padding: 1.5rem 0;
+    padding: 0.5rem 1rem;
     box-shadow: var(--card-shadow);
 }
 
-.sidebar-title {
-    padding: 0 1.5rem 1rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
-}
-
-.nav-list {
+.tabs-list {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .nav-item {
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    border-left: 3px solid transparent;
+    border-radius: 8px;
     font-weight: 500;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
 }
 
 .nav-item:hover {
     background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
 }
 
 .nav-item.active {
     background: rgba(59, 130, 246, 0.15);
-    border-left-color: var(--accent-color);
+    border-color: var(--accent-color);
     color: #60a5fa;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
 }
 
 /* YAK Tree rendering styles */

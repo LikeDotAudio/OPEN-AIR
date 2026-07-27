@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     const loaderText = loader.querySelector('p');
     const appLayout = document.getElementById('appLayout');
-    const sidebarNav = document.getElementById('sidebarNav');
+    const tabsNav = document.getElementById('tabsNav');
     const yakTree = document.getElementById('yakTree');
 
     // Registry of instruments available for this simulation
@@ -86,8 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 discoverBtn.textContent = 'Instrument Fully Loaded';
                 discoverBtn.classList.remove('primary-btn');
                 discoverBtn.style.backgroundColor = '#10b981'; // Green
-                
-                buildSidebar();
+                buildTabs();
                 
                 // Select first tab by default
                 if (currentInstrument.schemas.length > 0) {
@@ -100,20 +99,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function buildSidebar() {
-        sidebarNav.innerHTML = '';
+    function buildTabs() {
+        tabsNav.innerHTML = '';
         currentInstrument.schemas.forEach(schema => {
             const li = document.createElement('li');
             li.className = 'nav-item';
             li.textContent = schema.name;
             li.dataset.tab = schema.name;
             li.addEventListener('click', () => selectTab(schema.name));
-            sidebarNav.appendChild(li);
+            tabsNav.appendChild(li);
         });
     }
 
     function selectTab(tabName) {
-        Array.from(sidebarNav.children).forEach(li => {
+        Array.from(tabsNav.children).forEach(li => {
             if (li.dataset.tab === tabName) {
                 li.classList.add('active');
             } else {

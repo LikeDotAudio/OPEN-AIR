@@ -266,17 +266,17 @@
           "Es": "Individual Potencia Sets"
         },
         "fields": {
-          "Reference_Level": {
+          "Set_Reference_Level": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>"
+                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <dbm_value>"
               },
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "Ref_Level_dBm": {
+                  "dbm_value": {
                     "type": "_GuiValue",
                     "domain": {
                       "units": "dBm"
@@ -292,17 +292,17 @@
               }
             }
           },
-          "Power_Attenuation": {
+          "Set_Power_Attenuation": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "message": ":POWer:ATTenuation <Power_Attenuation>"
+                "message": ":POWer:ATTenuation <db_value>"
               },
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "Power_Attenuation": {
+                  "db_value": {
                     "type": "_GuiValue",
                     "domain": {
                       "units": "dB"

@@ -598,6 +598,89 @@
             }
           }
         }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Trace Command Sets"
+        },
+        "fields": {
+          "Set_Trace_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TRACe<trace_number>:MODE <mode_string>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "Trace Number"
+                    }
+                  },
+                  "mode_string": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "Mode"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Averaging": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":TRACe:AVERage:COUNt <count_int>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "count_int": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "Count"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Set_Continuous_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":INITiate:CONTinuous <state_bool>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "label": {
+                      "En": "State"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Do_Initiate_Continuous": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "message": ":INITiate:IMMediate"
+              }
+            }
+          }
+        }
       }
     }
   }

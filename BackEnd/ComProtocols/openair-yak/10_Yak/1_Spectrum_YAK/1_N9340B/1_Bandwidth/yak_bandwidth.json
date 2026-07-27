@@ -191,7 +191,7 @@
               }
             }
           },
-          "Sweep_Time": {
+          "Set_Sweep_time": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -206,12 +206,12 @@
                     }
                   }
                 },
-                "message": ":SENSe:SWEep:TIME <sweep_time_s>"
+                "message": ":SENSe:SWEep:TIME <s_value>"
               },
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "sweep_time_s": {
+                  "s_value": {
                     "type": "_GuiValue",
                     "domain": {
                       "units": "s"
@@ -227,7 +227,7 @@
               }
             }
           },
-          "Video_Bandwidth": {
+          "Set_VBW": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -263,7 +263,7 @@
               }
             }
           },
-          "Resolution_Bandwidth": {
+          "Set_RBW": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
@@ -299,120 +299,93 @@
               }
             }
           },
-          "Toggle_Sweep_Time_Auto": {
+          "Set_Sweep_time_Auto": {
             "type": "OcaBlock",
-            "description": {
-              "En": "Sweep Time Auto Switches",
-              "Fr": "Temps de balayage Auto Switches",
-              "De": "Wobbelzeit Auto Switches",
-              "Es": "Tiempo de barrido Auto Switches"
-            },
             "fields": {
-              "Do_Sweep_Time_Auto_ON": {
+              "Execute Command": {
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
                     "text": {
-                      "En": "Sweep Auto ON",
-                      "Fr": "Sweep Auto ON",
-                      "De": "Sweep Auto EIN",
-                      "Es": "Sweep Auto ENC"
+                      "En": "Set Sweep Auto"
                     }
                   }
                 },
-                "message": ":SENSe:SWEep:TIME:AUTO ON"
+                "message": ":SENSe:SWEep:TIME:AUTO <state_bool>"
               },
-              "Do_Sweep_Time_Auto_OFF": {
-                "type": "_GuiActuator",
-                "label": {
-                  "inactive": {
-                    "text": {
-                      "En": "Sweep Auto OFF",
-                      "Fr": "Sweep Auto OFF",
-                      "De": "Sweep Auto AUS",
-                      "Es": "Sweep Auto DES"
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State (0/1)"
                     }
                   }
-                },
-                "message": ":SENSe:SWEep:TIME:AUTO OFF"
+                }
               }
             }
           },
-          "Toggle_Video_Bandwidth_Auto": {
+          "Set_VBW_Auto": {
             "type": "OcaBlock",
-            "description": {
-              "En": "VBW Auto Switches",
-              "Fr": "VBW Auto Switches",
-              "De": "VBW Auto Switches",
-              "Es": "VBW Auto Switches"
-            },
             "fields": {
-              "do_Video_Bandwidth_Auto_ON": {
+              "Execute Command": {
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
                     "text": {
-                      "En": "VBW Auto ON",
-                      "Fr": "Auto VBW ACTIV\u00c9",
-                      "De": "VBW Auto AN",
-                      "Es": "Auto VBW ACTIVADO"
+                      "En": "Set VBW Auto"
                     }
                   }
                 },
-                "message": ":SENSe:BANDwidth:VIDeo:AUTO ON"
+                "message": ":SENSe:BANDwidth:VIDeo:AUTO <state_bool>"
               },
-              "do_Video_Bandwidth_Auto_OFF": {
-                "type": "_GuiActuator",
-                "label": {
-                  "inactive": {
-                    "text": {
-                      "En": "VBW Auto OFF",
-                      "Fr": "VBW Auto OFF",
-                      "De": "VBW Auto AUS",
-                      "Es": "VBW Auto DES"
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State (0/1)"
                     }
                   }
-                },
-                "message": ":SENSe:BANDwidth:VIDeo:AUTO OFF"
+                }
               }
             }
           },
-          "Toggle_Resolution_Bandwidth_Auto": {
+          "Set_RBW_Auto": {
             "type": "OcaBlock",
-            "description": {
-              "En": "RBW Auto Switches",
-              "Fr": "RBW Auto Switches",
-              "De": "RBW Auto Switches",
-              "Es": "RBW Auto Switches"
-            },
             "fields": {
-              "Set_Resolution_Bandwidth_Auto_ON": {
+              "Execute Command": {
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
                     "text": {
-                      "En": "RBW Auto ON",
-                      "Fr": "RBW Auto ON",
-                      "De": "RBW Auto EIN",
-                      "Es": "RBW Auto ENC"
+                      "En": "Set RBW Auto"
                     }
                   }
                 },
-                "message": ":SENSe:BANDwidth:RESolution:AUTO ON"
+                "message": ":SENSe:BANDwidth:RESolution:AUTO <state_bool>"
               },
-              "Set_Resolution_Bandwidth_Auto_OFF": {
-                "type": "_GuiActuator",
-                "label": {
-                  "inactive": {
-                    "text": {
-                      "En": "RBW Auto OFF",
-                      "Fr": "RBW Auto OFF",
-                      "De": "RBW Auto AUS",
-                      "Es": "RBW Auto DES"
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state_bool": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
+                    "label": {
+                      "En": "State (0/1)"
                     }
                   }
-                },
-                "message": ":SENSe:BANDwidth:RESolution:AUTO OFF"
+                }
               }
             }
           }

@@ -150,6 +150,11 @@ two architectural JSON patterns:
 All four survive unchanged in the Rust port, and the verb grammar is explicitly a
 *keeper* — design audit §3.3 calls it "the good part."
 
+> **See [yak_verbs.md](yak_verbs.md)** for how the four differ *as built* —
+> per-verb walkthroughs of `verbs/*.rs`, the two axes that actually separate them
+> (placeholder filling, correlation envelope), and why the vocabulary is worth
+> keeping even where two verbs currently share a code path.
+
 ### Evolution
 
 The original translation logic lived in `manager_yakety_yak.py`, later deprecated in

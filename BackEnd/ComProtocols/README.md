@@ -8,6 +8,11 @@ honestly whether they are real.
 no side channel, no shared memory, no direct call — which is why
 `mosquitto_sub -t 'OpenAir/#' -v` is a complete debugger.
 
+> `openair-yak` used to be listed here. It is not a wire protocol — it is the
+> definition plane that translates GUI intent into vendor SCPI — so it now lives
+> as its own back end at [`BackEnd/openair-yak/`](../openair-yak/), with its own
+> Cargo workspace and its own CI invocation.
+
 ---
 
 ## The fleet
@@ -15,7 +20,6 @@ no side channel, no shared memory, no direct call — which is why
 | Crate | Status | What it does |
 |---|---|---|
 | `openair-visa` | **live** | Scans the subnet/gateways for VISA/SCPI instruments, probes `*IDN?`, categorizes against the knowledge base, publishes retained device topics, and serves live SCPI writes/queries. Re-runs on demand (see [Rescan](#rescan)) |
-| `openair-yak` | **live** | The middleware definition plane: translates GUI intent into vendor SCPI via the YAK verb grammar (`SET / RIG / NAB / DO`) |
 | `openair-midi` | **live** | Enumerates MIDI in/out ports, publishes device topics, routes note/CC/program/pitch-bend both directions |
 | `openair-dnssd` | **live** | Browses DNS-SD/mDNS continuously: enumerates every advertised service type, publishes each resolved instance, clears retained topics when a service vanishes |
 | `openair-ravenna` | **live** | Discovers RAVENNA/AES67 streams: browses `_ravenna._tcp`/`_rtsp._tcp`, fetches each session's SDP over RTSP DESCRIBE, and files a stream only once its own SDP says it carries audio |

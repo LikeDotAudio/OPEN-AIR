@@ -1,0 +1,20 @@
+# The YAK agent is its own back end — a standalone workspace, not a member of
+# BackEnd/ComProtocols. It is the definition plane (GUI intent -> vendor SCPI),
+# not a wire protocol, and Cargo requires members to live below their workspace
+# root, so moving it up here necessarily took it out of that workspace.
+[workspace]
+
+[package]
+name = "openair-yak"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+openair-contracts = { path = "../../contracts/rust" }
+tokio = { version = "1", features = ["full"] }
+rumqttc = "0.24.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+env_logger = "0.11"
+rust-ini = "0.21.0"

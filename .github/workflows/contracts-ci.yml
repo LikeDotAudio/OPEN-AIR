@@ -47,6 +47,7 @@ jobs:
             contracts/rust
             BackEnd/Core
             BackEnd/ComProtocols
+            BackEnd/openair-yak
       - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
       # step 6: the path-dep wiring — both BackEnd workspaces compile with
       # openair-contracts as a dependency.
@@ -57,6 +58,11 @@ jobs:
       - run: cargo test  --workspace --manifest-path BackEnd/Core/Cargo.toml
       - run: cargo check --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
       - run: cargo test  --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
+      # openair-yak is its own back end / its own workspace, so it is NOT
+      # reached by the ComProtocols lines above — it needs its own invocation
+      # or it drops out of CI entirely.
+      - run: cargo check --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
 
   ui: # Phase 2: the isolated typed frontend
     runs-on: ubuntu-latest

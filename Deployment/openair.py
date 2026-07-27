@@ -51,7 +51,7 @@ def main():
         subprocess.run(build_args + ["-p", "open-air-orchestrator"], check=True)
         
         print("🦀 [LAUNCHER] Building openair-yak agent...", flush=True)
-        yak_manifest = os.path.join(root, "BackEnd", "ComProtocols", "openair-yak", "Cargo.toml")
+        yak_manifest = os.path.join(root, "BackEnd", "openair-yak", "Cargo.toml")
         yak_build_args = ["cargo", "build", "--manifest-path", yak_manifest]
         if release:
             yak_build_args.append("--release")
@@ -80,8 +80,10 @@ def main():
     subprocess.run("kill -9 $(lsof -t -i:8000)", shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
     # Start openair-yak in the background
-    yak_dir = os.path.join(root, "BackEnd", "ComProtocols", "openair-yak")
-    yak_binary_path = os.path.join(root, "BackEnd", "ComProtocols", "target", "release" if release else "debug", "openair-yak")
+    # Its own workspace now, so its target/ is under the crate — NOT the shared
+    # BackEnd/ComProtocols/target/ the agent used to build into.
+    yak_dir = os.path.join(root, "BackEnd", "openair-yak")
+    yak_binary_path = os.path.join(yak_dir, "target", "release" if release else "debug", "openair-yak")
     if os.path.exists(yak_binary_path):
         print("🚀 [LAUNCHER] Starting openair-yak agent...", flush=True)
         subprocess.run(["pkill", "-f", "openair-yak"], check=False)

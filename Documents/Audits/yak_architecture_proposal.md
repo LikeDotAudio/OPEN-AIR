@@ -11,7 +11,15 @@ The YAK JSON files are currently a hybrid entity. They contain:
 Placing them exclusively in the Frontend orphans the Backend, making it impossible to perform automated forensic logging or generate digital twins. Placing them in the Backend raises the question of how the Frontend can use them for GUI testing. 
 
 ## 3. Proposed Solution: The "Hardware Gatekeeper" Model
-The YAK files will remain in their current location: `/BackEnd/ComProtocols/openair-yak/`. 
+~~The YAK files will remain in their current location: `/BackEnd/ComProtocols/openair-yak/`.~~
+
+**Superseded 2026-07-26:** YAK is now its own back end at `/BackEnd/openair-yak/`,
+a standalone Cargo workspace rather than a member of the ComProtocols one. The
+reasoning below is unchanged — the gatekeeper model, the API delivery of YAK JSON
+to the frontend, and the `/10_Yak/` lookup all still hold; only the path moved.
+The move reflects exactly the distinction this document draws: YAK is the
+definition plane, not a wire protocol, so it does not belong beside the protocol
+agents.
 
 The Backend will act as the gatekeeper for all hardware. The Frontend will remain completely ignorant of SCPI commands, baud rates, or instrument-specific string formatting. Instead, the Backend will serve the YAK JSON files to the Frontend via an API, allowing the Frontend to dynamically render the GUI.
 

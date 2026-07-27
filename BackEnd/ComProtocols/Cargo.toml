@@ -2,6 +2,11 @@
 # Previously these were members of the repo-root workspace; that workspace was
 # moved into BackEnd/Core, and Cargo requires members to live below their root,
 # so the protocol crates now form their own sibling workspace here.
+#
+# openair-yak is NOT here: it is not a wire protocol but the definition plane
+# that translates GUI intent into vendor SCPI, so it now stands as its own
+# back end at BackEnd/openair-yak/ with its own workspace. Same rule as above —
+# living outside this directory, it could not have stayed a member.
 [workspace]
 resolver = "2"
 members = [
@@ -26,5 +31,4 @@ members = [
     "openair-snmp",
     "openair-visa",
     "openair-websocket",
-    "openair-yak",
 ]

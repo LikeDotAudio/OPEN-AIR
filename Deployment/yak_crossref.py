@@ -32,7 +32,7 @@ import os
 import re
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "ComProtocols", "openair-yak", "10_Yak")
+YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "10_Yak")
 TEMPLATE_ROOT = os.path.join(REPO_ROOT, "BackEnd", "Instruments", "Templates")
 
 # Which models a type's panels should be cross-referenced against. A type can

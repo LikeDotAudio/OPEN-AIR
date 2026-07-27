@@ -55,5 +55,5 @@ Only the Spectrum and Router templates currently carry `yak_handler` blocks. The
 DMM, Oscilloscope, Generator, Power, Load, LCR and Distortion panels render, and
 are bound, but declare no commands — so their controls still send nothing. The
 SCPI vocabulary for those models already exists under
-`BackEnd/ComProtocols/openair-yak/10_Yak/<n>_<TYPE>_YAK/<model>/`; wiring each
+`BackEnd/openair-yak/10_Yak/<n>_<TYPE>_YAK/<model>/`; wiring each
 widget to a command is per-type authoring work that has not been done.

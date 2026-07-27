@@ -1,0 +1,387 @@
+{
+  "model": "34401A",
+  "family": "DMM",
+  "set": {
+    "Display_Text": {
+      "scpi": ":DISPlay:TEXT <string>",
+      "description": "Display Text",
+      "group": "System Utilities",
+      "args": [
+        "string"
+      ],
+      "subsystem": "SYSTem"
+    },
+    "Enable_Math": {
+      "scpi": ":CALCulate:STATe <state>",
+      "description": "Enable Math",
+      "group": "Math and Limits Setup",
+      "args": [
+        "state"
+      ],
+      "subsystem": "CALCulate"
+    },
+    "Set_AC_Bandwidth": {
+      "scpi": ":SENSe:VOLTage:AC:BANDwidth <filter>",
+      "description": "Set AC Bandwidth",
+      "group": "Measurement Parameters",
+      "args": [
+        "filter"
+      ],
+      "subsystem": "SENSe"
+    },
+    "Set_Autorange": {
+      "scpi": ":SENSe:VOLTage:DC:RANGe:AUTO <state>",
+      "description": "Set Autorange",
+      "group": "SCOPED TO DC VOLTS on purpose: the 34401A has no function-agnostic autorange command, so :SENSe:VOLTage:DC:RANGe:AUTO is what a panel AUTO RANGE control can address. Selecting another function turns its own autorange on by default, which is why this is adequate for a bench panel and would not be for a test sequence.",
+      "args": [
+        "state"
+      ],
+      "subsystem": "Panel"
+    },
+    "Set_DCV_Range": {
+      "scpi": ":SENSe:VOLTage:DC:RANGe <range>",
+      "description": "Set DCV Range",
+      "group": "Measurement Parameters",
+      "args": [
+        "range"
+      ],
+      "subsystem": "SENSe"
+    },
+    "Set_Input_Impedance": {
+      "scpi": ":INPut:IMPedance:AUTO <state>",
+      "description": "Set Input Impedance",
+      "group": "Measurement Parameters",
+      "args": [
+        "state"
+      ],
+      "subsystem": "SENSe"
+    },
+    "Set_Integration_NPLC": {
+      "scpi": ":SENSe:VOLTage:DC:NPLC <nplc>",
+      "description": "Set Integration NPLC",
+      "group": "Measurement Parameters",
+      "args": [
+        "nplc"
+      ],
+      "subsystem": "SENSe"
+    },
+    "Set_Math_Function": {
+      "scpi": ":CALCulate:FUNCtion <function>",
+      "description": "Set Math Function",
+      "group": "Math and Limits Setup",
+      "args": [
+        "function"
+      ],
+      "subsystem": "CALCulate"
+    },
+    "Set_Null_Offset": {
+      "scpi": ":CALCulate:NULL:OFFSet <value>",
+      "description": "Set Null Offset",
+      "group": "Math and Limits Setup",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CALCulate"
+    },
+    "Set_Sample_Count": {
+      "scpi": ":SAMPle:COUNt <count>",
+      "description": "Set Sample Count",
+      "group": "Setup Trigger Model",
+      "args": [
+        "count"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Trigger_Count": {
+      "scpi": ":TRIGger:COUNt <count>",
+      "description": "Set Trigger Count",
+      "group": "Setup Trigger Model",
+      "args": [
+        "count"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Trigger_Delay": {
+      "scpi": ":TRIGger:DELay <delay>",
+      "description": "Set Trigger Delay",
+      "group": "Setup Trigger Model",
+      "args": [
+        "delay"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Trigger_Source": {
+      "scpi": ":TRIGger:SOURce <source>",
+      "description": "Set Trigger Source",
+      "group": "Setup Trigger Model",
+      "args": [
+        "source"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_dB_Ref": {
+      "scpi": ":CALCulate:DB:REFerence <value>",
+      "description": "Set dB Ref",
+      "group": "Math and Limits Setup",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CALCulate"
+    },
+    "Set_dBm_Ref": {
+      "scpi": ":CALCulate:DBM:REFerence <value>",
+      "description": "Set dBm Ref",
+      "group": "Math and Limits Setup",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CALCulate"
+    }
+  },
+  "do": {
+    "Abort": {
+      "scpi": ":ABORt",
+      "description": "Abort",
+      "group": "Trigger System",
+      "subsystem": "TRIGger"
+    },
+    "Auto_Zero_OFF": {
+      "scpi": ":SENSe:ZERO:AUTO OFF",
+      "description": "Auto Zero OFF",
+      "group": "Measurement Parameters",
+      "subsystem": "SENSe"
+    },
+    "Auto_Zero_ON": {
+      "scpi": ":SENSe:ZERO:AUTO ON",
+      "description": "Auto Zero ON",
+      "group": "Measurement Parameters",
+      "subsystem": "SENSe"
+    },
+    "Clear_Display": {
+      "scpi": ":DISPlay:TEXT:CLEar",
+      "description": "Clear Display",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Clear Status",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Initiate": {
+      "scpi": ":INITiate",
+      "description": "Initiate",
+      "group": "Trigger System",
+      "subsystem": "TRIGger"
+    },
+    "Reset_Device": {
+      "scpi": "*RST",
+      "description": "Reset Device",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Select_AC_Current": {
+      "scpi": ":CONFigure:CURRent:AC",
+      "description": "Select AC Current",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_AC_Volts": {
+      "scpi": ":CONFigure:VOLTage:AC",
+      "description": "Select AC Volts",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_Continuity": {
+      "scpi": ":CONFigure:CONTinuity",
+      "description": "Fixed 1 kOhm range, beeper on threshold — no range argument exists for this function",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_DC_Current": {
+      "scpi": ":CONFigure:CURRent:DC",
+      "description": "Select DC Current",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_DC_Volts": {
+      "scpi": ":CONFigure:VOLTage:DC",
+      "description": "Select DC Volts",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_Diode": {
+      "scpi": ":CONFigure:DIODe",
+      "description": "Fixed 1 mA / 1 V test, likewise argument-free",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_Resistance_2W": {
+      "scpi": ":CONFigure:RESistance",
+      "description": "Select Resistance 2W",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
+    "Select_Resistance_4W": {
+      "scpi": ":CONFigure:FRESistance",
+      "description": "Select Resistance 4W",
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    }
+  },
+  "rig": {
+    "Config_AC_Volts": {
+      "scpi": ":CONFigure:VOLTage:AC <range>,<resolution>",
+      "description": "Config AC Volts",
+      "group": "Preset meter for specific function",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "CONFigure"
+    },
+    "Config_DC_Volts": {
+      "scpi": ":CONFigure:VOLTage:DC <range>,<resolution>",
+      "description": "Config DC Volts",
+      "group": "Preset meter for specific function",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "CONFigure"
+    },
+    "Config_Resistance_4Wire": {
+      "scpi": ":CONFigure:FRESistance <range>,<resolution>",
+      "description": "Config Resistance 4Wire",
+      "group": "Preset meter for specific function",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "CONFigure"
+    },
+    "Config_Temperature": {
+      "scpi": ":CONFigure:TEMPerature <probe_type>,<sensor_type>",
+      "description": "Config Temperature",
+      "group": "Preset meter for specific function",
+      "args": [
+        "probe_type",
+        "sensor_type"
+      ],
+      "subsystem": "CONFigure"
+    }
+  },
+  "nab": {
+    "Fetch_Existing": {
+      "scpi": ":FETCh?",
+      "description": "Fetch Existing",
+      "group": "Fetch data after INITiate",
+      "subsystem": "MEASure"
+    },
+    "MEASure_Resistance": {
+      "scpi": "MEASure:RESistance?",
+      "description": "MEASure Resistance",
+      "group": "MEASure Queries",
+      "subsystem": "MEASure"
+    },
+    "MEASure_Voltage_AC": {
+      "scpi": "MEASure:VOLTage:AC?",
+      "description": "MEASure Voltage AC",
+      "group": "MEASure Queries",
+      "subsystem": "MEASure"
+    },
+    "MEASure_Voltage_DC": {
+      "scpi": "MEASure:VOLTage:DC?",
+      "description": "MEASure Voltage DC",
+      "group": "MEASure Queries",
+      "subsystem": "MEASure"
+    },
+    "Measure_AC_Voltage": {
+      "scpi": ":MEASure:VOLTage:AC? <range>,<resolution>",
+      "description": "Measure AC Voltage",
+      "group": "Configure and Measure immediately",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Measure_DC_Current": {
+      "scpi": ":MEASure:CURRent:DC? <range>,<resolution>",
+      "description": "Measure DC Current",
+      "group": "Configure and Measure immediately",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Measure_DC_Voltage": {
+      "scpi": ":MEASure:VOLTage:DC? <range>,<resolution>",
+      "description": "Measure DC Voltage",
+      "group": "Configure and Measure immediately",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Measure_Frequency": {
+      "scpi": ":MEASure:FREQuency? <range>,<resolution>",
+      "description": "Measure Frequency",
+      "group": "Configure and Measure immediately",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Measure_Resistance_2Wire": {
+      "scpi": ":MEASure:RESistance? <range>,<resolution>",
+      "description": "Measure Resistance (2W)",
+      "group": "Configure and Measure immediately",
+      "args": [
+        "range",
+        "resolution"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Query_Average": {
+      "scpi": ":CALCulate:AVERage:AVERage?",
+      "description": "Query Average",
+      "group": "Statistics and Calc Results",
+      "subsystem": "CALCulate"
+    },
+    "Query_Max": {
+      "scpi": ":CALCulate:AVERage:MAXimum?",
+      "description": "Query Max",
+      "group": "Statistics and Calc Results",
+      "subsystem": "CALCulate"
+    },
+    "Query_Min": {
+      "scpi": ":CALCulate:AVERage:MINimum?",
+      "description": "Query Min",
+      "group": "Statistics and Calc Results",
+      "subsystem": "CALCulate"
+    },
+    "Read_Error": {
+      "scpi": ":SYSTem:ERRor?",
+      "description": "Read Error",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "Read_IDN": {
+      "scpi": "*IDN?",
+      "description": "Read IDN",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Read_Next": {
+      "scpi": ":READ?",
+      "description": "Read Next",
+      "group": "Fetch data after INITiate",
+      "subsystem": "MEASure"
+    }
+  }
+}

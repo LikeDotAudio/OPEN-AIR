@@ -1,0 +1,938 @@
+{
+  "model": "54641D",
+  "family": "Scope",
+  "set": {
+    "CH1_BWLimit": {
+      "scpi": ":CHANnel1:BWLimit <state>",
+      "description": "CH1 BWLimit",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "state"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Coupling": {
+      "scpi": ":CHANnel1:COUPling <coupling>",
+      "description": "CH1 Coupling",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Invert": {
+      "scpi": ":CHANnel1:INVert <state>",
+      "description": "CH1 Invert",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "state"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Label": {
+      "scpi": ":CHANnel1:LABel <string>",
+      "description": "CH1 Label",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "string"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Offset": {
+      "scpi": ":CHANnel1:OFFSet <offset>",
+      "description": "CH1 Offset",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Probe": {
+      "scpi": ":CHANnel1:PROBe <attenuation>",
+      "description": "CH1 Probe",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "attenuation"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Scale": {
+      "scpi": ":CHANnel1:SCALe <scale>",
+      "description": "CH1 Scale",
+      "group": "Vertical Setup CH1",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH2_BWLimit": {
+      "scpi": ":CHANnel2:BWLimit <state>",
+      "description": "CH2 BWLimit",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "state"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Coupling": {
+      "scpi": ":CHANnel2:COUPling <coupling>",
+      "description": "CH2 Coupling",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Invert": {
+      "scpi": ":CHANnel2:INVert <state>",
+      "description": "CH2 Invert",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "state"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Label": {
+      "scpi": ":CHANnel2:LABel <string>",
+      "description": "CH2 Label",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "string"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Offset": {
+      "scpi": ":CHANnel2:OFFSet <offset>",
+      "description": "CH2 Offset",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Probe": {
+      "scpi": ":CHANnel2:PROBe <attenuation>",
+      "description": "CH2 Probe",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "attenuation"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Scale": {
+      "scpi": ":CHANnel2:SCALe <scale>",
+      "description": "CH2 Scale",
+      "group": "Vertical Setup CH2",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "Lock_Front_Panel": {
+      "scpi": "SYSTem:LOCK <state>",
+      "description": "Lock Front Panel",
+      "group": "System Control",
+      "args": [
+        "state"
+      ],
+      "subsystem": "SYSTem"
+    },
+    "Set_Acquire_Mode_AVERage": {
+      "scpi": ":ACQuire:TYPE <type>",
+      "description": "Set Acquire Mode AVERage",
+      "group": "Acquire Mode & Averaging",
+      "args": [
+        "type"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Acquire_Mode_HRESolution": {
+      "scpi": ":ACQuire:TYPE <type>",
+      "description": "Set Acquire Mode HRESolution",
+      "group": "Acquire Mode & Averaging",
+      "args": [
+        "type"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Acquire_Mode_NORMal": {
+      "scpi": ":ACQuire:TYPE <type>",
+      "description": "Set Acquire Mode NORMal",
+      "group": "Acquire Mode & Averaging",
+      "args": [
+        "type"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Acquire_Mode_PEAK": {
+      "scpi": ":ACQuire:TYPE <type>",
+      "description": "Set Acquire Mode PEAK",
+      "group": "Acquire Mode & Averaging",
+      "args": [
+        "type"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Acquire_Type": {
+      "scpi": "ACQuire:TYPE <type>",
+      "description": "Set Acquire Type",
+      "group": "Acquisition Settings",
+      "args": [
+        "type"
+      ],
+      "subsystem": "ACQuire"
+    },
+    "Set_Average_Count": {
+      "scpi": "ACQuire:COUNt <count>",
+      "description": "Set Average Count",
+      "group": "Acquisition Settings",
+      "args": [
+        "count"
+      ],
+      "subsystem": "ACQuire"
+    },
+    "Set_Averaging_Count": {
+      "scpi": ":ACQuire:COUNt <count>",
+      "description": "Set Averaging Count",
+      "group": "Acquire Mode & Averaging",
+      "args": [
+        "count"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Bandwidth_Limit": {
+      "scpi": "CHANnel<n>:BWLimit <state>",
+      "description": "Set Bandwidth Limit",
+      "group": "Analog Channel Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Byte_Order": {
+      "scpi": "WAVeform:BYTeorder <order>",
+      "description": "Set Byte Order",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "order"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Center_Frequency": {
+      "scpi": ":FUNCtion:CENTer <frequency>",
+      "description": "Set Center Frequency",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "frequency"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Coupling": {
+      "scpi": "CHANnel<n>:COUPling <coupling>",
+      "description": "Set Coupling",
+      "group": "Analog Channel Settings",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Digital_Display": {
+      "scpi": "DIGital<n>:DISPlay <state>",
+      "description": "Set Digital Display",
+      "group": "Digital Channel (MSO) Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "DIGital"
+    },
+    "Set_Digital_Label": {
+      "scpi": "DIGital<n>:LABel <label>",
+      "description": "Set Digital Label",
+      "group": "Digital Channel (MSO) Settings",
+      "args": [
+        "label"
+      ],
+      "subsystem": "DIGital"
+    },
+    "Set_Digital_Position": {
+      "scpi": "DIGital<n>:POSition <pos>",
+      "description": "Set Digital Position",
+      "group": "Digital Channel (MSO) Settings",
+      "args": [
+        "pos"
+      ],
+      "subsystem": "DIGital"
+    },
+    "Set_Display": {
+      "scpi": "CHANnel<n>:DISPlay <state>",
+      "description": "Set Display",
+      "group": "Analog Channel Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Edge_Slope": {
+      "scpi": "TRIGger:EDGE:SLOPe <slope>",
+      "description": "Set Edge Slope",
+      "group": "Edge Trigger Config",
+      "args": [
+        "slope"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Edge_Source": {
+      "scpi": "TRIGger:EDGE:SOURce <source>",
+      "description": "Set Edge Source",
+      "group": "Edge Trigger Config",
+      "args": [
+        "source"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Edge_Source_CH1": {
+      "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "description": "Set Edge Source CH1",
+      "group": "Trigger Configuration",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Edge_Source_CH2": {
+      "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "description": "Set Edge Source CH2",
+      "group": "Trigger Configuration",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Edge_Source_EXT": {
+      "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "description": "Set Edge Source EXT",
+      "group": "Trigger Configuration",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_FFT_Scale": {
+      "scpi": ":FUNCtion:SCALe <scale>",
+      "description": "Set FFT Scale",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Function_Operation": {
+      "scpi": "FUNCtion:OPERation <op>",
+      "description": "Set Function Operation",
+      "group": "Math Function Settings",
+      "args": [
+        "op"
+      ],
+      "subsystem": "FUNCtion"
+    },
+    "Set_Glitch_Condition": {
+      "scpi": "TRIGger:GLITch:QUALifier <qual>",
+      "description": "Set Glitch Condition",
+      "group": "Glitch/Pulse Width Config",
+      "args": [
+        "qual"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Glitch_Source": {
+      "scpi": "TRIGger:GLITch:SOURce <source>",
+      "description": "Set Glitch Source",
+      "group": "Glitch/Pulse Width Config",
+      "args": [
+        "source"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Glitch_Width": {
+      "scpi": "TRIGger:GLITch:LESSthan <time>",
+      "description": "Set Glitch Width",
+      "group": "Glitch/Pulse Width Config",
+      "args": [
+        "time"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Holdoff": {
+      "scpi": "TRIGger:HOLDoff <time>",
+      "description": "Set Holdoff",
+      "group": "Trigger Settings",
+      "args": [
+        "time"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Impedance": {
+      "scpi": "CHANnel<n>:IMPedance <imp>",
+      "description": "Set Impedance",
+      "group": "Analog Channel Settings",
+      "args": [
+        "imp"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Invert": {
+      "scpi": "CHANnel<n>:INVert <state>",
+      "description": "Set Invert",
+      "group": "Analog Channel Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Marker_Mode": {
+      "scpi": "MARKer:MODE <mode>",
+      "description": "Set Marker Mode",
+      "group": "Cursor Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "MARKer"
+    },
+    "Set_Measure_Source": {
+      "scpi": "MEASure:SOURce <source>",
+      "description": "Set Measure Source",
+      "group": "Measurement Settings",
+      "args": [
+        "source"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Set_Measure_Thresholds": {
+      "scpi": "MEASure:DEFine:THResholds <mode>",
+      "description": "Set Measure Thresholds",
+      "group": "Measurement Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Set_Mode": {
+      "scpi": "TIMebase:MODE <mode>",
+      "description": "Set Mode",
+      "group": "Timebase (Horizontal) Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Channel_Offset": {
+      "scpi": "CHANnel1:OFFSet <offset>",
+      "description": "Set Channel Offset",
+      "group": "Channel 1 Settings",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Math_Offset": {
+      "scpi": ":FUNCtion:OFFSet <offset>",
+      "description": "Set Math Offset",
+      "group": "Vertical Scale & Offset",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Operation": {
+      "scpi": ":FUNCtion:OPERation <operation>",
+      "description": "Set Operation",
+      "group": "Select Operation",
+      "args": [
+        "operation"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Pod_Threshold": {
+      "scpi": "POD<n>:THReshold <thresh>",
+      "description": "Set Pod Threshold",
+      "group": "Digital Channel (MSO) Settings",
+      "args": [
+        "thresh"
+      ],
+      "subsystem": "DIGital"
+    },
+    "Set_Points": {
+      "scpi": "ACQuire:POINts <points>",
+      "description": "Set Points",
+      "group": "Acquisition Settings",
+      "args": [
+        "points"
+      ],
+      "subsystem": "ACQuire"
+    },
+    "Set_Position": {
+      "scpi": "TIMebase:POSition <pos>",
+      "description": "Set Position",
+      "group": "Timebase (Horizontal) Settings",
+      "args": [
+        "pos"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Probe": {
+      "scpi": "CHANnel<n>:PROBe <atten>",
+      "description": "Set Probe",
+      "group": "Analog Channel Settings",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Channel_Range": {
+      "scpi": "CHANnel1:RANGe <range>",
+      "description": "Set Channel Range",
+      "group": "Channel 1 Settings",
+      "args": [
+        "range"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Math_Range": {
+      "scpi": ":FUNCtion:RANGe <range>",
+      "description": "Set Math Range",
+      "group": "Vertical Scale & Offset",
+      "args": [
+        "range"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Reference": {
+      "scpi": "TIMebase:REFerence <ref>",
+      "description": "Set Reference",
+      "group": "Timebase (Horizontal) Settings",
+      "args": [
+        "ref"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Channel_Scale": {
+      "scpi": "CHANnel1:SCALe <scale>",
+      "description": "Set Channel Scale",
+      "group": "Channel 1 Settings",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Timebase_Scale": {
+      "scpi": ":TIMebase:SCALe <scale>",
+      "description": "Set Timebase Scale",
+      "group": "Horizontal Controls",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Time"
+    },
+    "Set_Source1": {
+      "scpi": "FUNCtion:SOURce1 <src>",
+      "description": "Set Source1",
+      "group": "Math Function Settings",
+      "args": [
+        "src"
+      ],
+      "subsystem": "FUNCtion"
+    },
+    "Set_Source2": {
+      "scpi": "FUNCtion:SOURce2 <src>",
+      "description": "Set Source2",
+      "group": "Math Function Settings",
+      "args": [
+        "src"
+      ],
+      "subsystem": "FUNCtion"
+    },
+    "Set_Span": {
+      "scpi": ":FUNCtion:SPAN <span>",
+      "description": "Set Span",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "span"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Timebase_Position": {
+      "scpi": ":TIMebase:POSition <position>",
+      "description": "Set Timebase Position",
+      "group": "Horizontal Controls",
+      "args": [
+        "position"
+      ],
+      "subsystem": "Time"
+    },
+    "Set_Trigger_Level": {
+      "scpi": ":TRIGger:EDGE:LEVel <level>",
+      "description": "Set Trigger Level",
+      "group": "Trigger Configuration",
+      "args": [
+        "level"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Trigger_Mode": {
+      "scpi": ":TRIGger:MODE <mode>",
+      "description": "Set Trigger Mode",
+      "group": "Trigger Configuration",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Trigger_Sweep": {
+      "scpi": ":TRIGger:SWEep <sweep>",
+      "description": "Set Trigger Sweep",
+      "group": "Trigger Configuration",
+      "args": [
+        "sweep"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Set_Unsigned": {
+      "scpi": "WAVeform:UNSigned <state>",
+      "description": "Set Unsigned",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Waveform_Format": {
+      "scpi": "WAVeform:FORMat <format>",
+      "description": "Set Waveform Format",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "format"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Waveform_Points": {
+      "scpi": "WAVeform:POINts <points>",
+      "description": "Set Waveform Points",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "points"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Waveform_Source": {
+      "scpi": "WAVeform:SOURce <source>",
+      "description": "Set Waveform Source",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "source"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Window_FLATtop": {
+      "scpi": ":FUNCtion:WINDow <window>",
+      "description": "Set Window FLATtop",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "window"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Window_HANNing": {
+      "scpi": ":FUNCtion:WINDow <window>",
+      "description": "Set Window HANNing",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "window"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Window_Position": {
+      "scpi": "TIMebase:WINDow:POSition <pos>",
+      "description": "Set Window Position",
+      "group": "Zoom Window Settings",
+      "args": [
+        "pos"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Window_RECTangular": {
+      "scpi": ":FUNCtion:WINDow <window>",
+      "description": "Set Window RECTangular",
+      "group": "FFT Specific Configuration",
+      "args": [
+        "window"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Window_Scale": {
+      "scpi": "TIMebase:WINDow:SCALe <scale>",
+      "description": "Set Window Scale",
+      "group": "Zoom Window Settings",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_X1": {
+      "scpi": "MARKer:X1Position <pos>",
+      "description": "Set X1",
+      "group": "Time/Frequency Markers",
+      "args": [
+        "pos"
+      ],
+      "subsystem": "MARKer"
+    },
+    "Set_X2": {
+      "scpi": "MARKer:X2Position <pos>",
+      "description": "Set X2",
+      "group": "Time/Frequency Markers",
+      "args": [
+        "pos"
+      ],
+      "subsystem": "MARKer"
+    },
+    "Set_Y1": {
+      "scpi": "MARKer:Y1Position <lev>",
+      "description": "Set Y1",
+      "group": "Voltage Markers",
+      "args": [
+        "lev"
+      ],
+      "subsystem": "MARKer"
+    },
+    "Set_Y2": {
+      "scpi": "MARKer:Y2Position <lev>",
+      "description": "Set Y2",
+      "group": "Voltage Markers",
+      "args": [
+        "lev"
+      ],
+      "subsystem": "MARKer"
+    }
+  },
+  "do": {
+    "Autoscale": {
+      "scpi": "AUToscale",
+      "description": "Autoscale",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Digitize_Channel": {
+      "scpi": "DIGitize <chan>",
+      "description": "Digitize Channel",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Do_Autoscale": {
+      "scpi": ":AUToscale",
+      "description": "Do Autoscale",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_CH1_OFF": {
+      "scpi": ":CHANnel1:DISPlay OFF",
+      "description": "Do CH1 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_1"
+    },
+    "Do_CH1_ON": {
+      "scpi": ":CHANnel1:DISPlay ON",
+      "description": "Do CH1 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_1"
+    },
+    "Do_CH2_OFF": {
+      "scpi": ":CHANnel2:DISPlay OFF",
+      "description": "Do CH2 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_2"
+    },
+    "Do_CH2_ON": {
+      "scpi": ":CHANnel2:DISPlay ON",
+      "description": "Do CH2 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_2"
+    },
+    "Do_Clear_Display": {
+      "scpi": ":DISPlay:CLEar",
+      "description": "Do Clear Display",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Do Clear Status",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_Math_OFF": {
+      "scpi": ":FUNCtion:DISPlay OFF",
+      "description": "Do Math OFF",
+      "group": "Math Display Controls",
+      "subsystem": "Math_FFT"
+    },
+    "Do_Math_ON": {
+      "scpi": ":FUNCtion:DISPlay ON",
+      "description": "Do Math ON",
+      "group": "Math Display Controls",
+      "subsystem": "Math_FFT"
+    },
+    "Do_Reset": {
+      "scpi": "*RST",
+      "description": "Do Reset",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_Run": {
+      "scpi": ":RUN",
+      "description": "Do Run",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_Single": {
+      "scpi": ":SINGle",
+      "description": "Do Single",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Do_Stop": {
+      "scpi": ":STOP",
+      "description": "Do Stop",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Run": {
+      "scpi": "RUN",
+      "description": "Run",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Set_Source_CH1": {
+      "scpi": ":FUNCtion:SOURce CHANnel1",
+      "description": "Set Source CH1",
+      "group": "Source Selection",
+      "subsystem": "Math_FFT"
+    },
+    "Set_Source_CH2": {
+      "scpi": ":FUNCtion:SOURce CHANnel2",
+      "description": "Set Source CH2",
+      "group": "Source Selection",
+      "subsystem": "Math_FFT"
+    },
+    "Single": {
+      "scpi": "SINGle",
+      "description": "Single",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Stop": {
+      "scpi": "STOP",
+      "description": "Stop",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    }
+  },
+  "rig": {},
+  "nab": {
+    "Get_Error": {
+      "scpi": "SYSTem:ERRor?",
+      "description": "Get Error",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "Get_Math_Statistics": {
+      "scpi": ":MEASure:SOURce FUNCtion;:MEASure:VPP?;:MEASure:VMAX?;:MEASure:VMIN?;:MEASure:VAVerage?",
+      "description": "Get Math Statistics",
+      "group": "Read statistics for the active Math function",
+      "subsystem": "Math_FFT"
+    },
+    "Get_Preamble": {
+      "scpi": "WAVeform:PREamble?",
+      "description": "Get Preamble",
+      "group": "Waveform Data Readbacks",
+      "subsystem": "WAVeform"
+    },
+    "Get_Sample_Rate": {
+      "scpi": "ACQuire:SRATe?",
+      "description": "Get Sample Rate",
+      "group": "Acquisition Readbacks",
+      "subsystem": "ACQuire"
+    },
+    "Get_Setup": {
+      "scpi": "SYSTem:SETup?",
+      "description": "Get Setup",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "Get_Time_Stats_CH1": {
+      "scpi": ":MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?",
+      "description": "Get Time Stats CH1",
+      "group": "Channel 1 Measurements",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "Get_Time_Stats_CH2": {
+      "scpi": ":MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?",
+      "description": "Get Time Stats CH2",
+      "group": "Channel 2 Measurements",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "Get_Voltage_Stats_CH1": {
+      "scpi": ":MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?",
+      "description": "Get Voltage Stats CH1",
+      "group": "Channel 1 Measurements",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "Get_Voltage_Stats_CH2": {
+      "scpi": ":MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?",
+      "description": "Get Voltage Stats CH2",
+      "group": "Channel 2 Measurements",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "Get_Waveform_Data": {
+      "scpi": "WAVeform:DATA?",
+      "description": "Get Waveform Data",
+      "group": "Waveform Data Readbacks",
+      "subsystem": "WAVeform"
+    },
+    "Get_X_Delta": {
+      "scpi": "MARKer:XDELta?",
+      "description": "Get X Delta",
+      "group": "Cursor Deltas",
+      "subsystem": "MARKer"
+    },
+    "Get_Y_Delta": {
+      "scpi": "MARKer:YDELta?",
+      "description": "Get Y Delta",
+      "group": "Cursor Deltas",
+      "subsystem": "MARKer"
+    },
+    "Read_Error": {
+      "scpi": ":SYSTem:ERRor?",
+      "description": "Read Error",
+      "group": "Errors and ID",
+      "subsystem": "System"
+    },
+    "Read_IDN": {
+      "scpi": "*IDN?",
+      "description": "Read IDN",
+      "group": "Errors and ID",
+      "subsystem": "System"
+    }
+  }
+}

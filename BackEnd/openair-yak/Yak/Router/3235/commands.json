@@ -1,0 +1,57 @@
+{
+  "model": "3235",
+  "family": "Router",
+  "set": {
+    "Close_Channels": {
+      "scpi": "CLOSE <channel_list>",
+      "description": "Close Channels",
+      "group": "Close Relays",
+      "args": [
+        "channel_list"
+      ]
+    },
+    "Open_Channels": {
+      "scpi": "OPEN <channel_list>",
+      "description": "Open Channels",
+      "group": "Open Relays",
+      "args": [
+        "channel_list"
+      ]
+    }
+  },
+  "do": {
+    "Card_Reset": {
+      "scpi": "CRESET <slot>",
+      "description": "Card Reset",
+      "group": "System Reset & Control"
+    },
+    "Clear_State": {
+      "scpi": "CLR",
+      "description": "Clear State",
+      "group": "System Reset & Control"
+    },
+    "Reset_System": {
+      "scpi": "RESET",
+      "description": "Reset System",
+      "group": "System Reset & Control"
+    },
+    "Select_Channel": {
+      "scpi": "SELECT <chan>",
+      "description": "Select Channel",
+      "group": "Break-Before-Make"
+    }
+  },
+  "rig": {},
+  "nab": {
+    "Query_Channel_State": {
+      "scpi": "CLOSE? <chan>",
+      "description": "Query Channel State",
+      "group": "Query specific relay state"
+    },
+    "Query_Slot_ID": {
+      "scpi": "ID? <slot>",
+      "description": "Query Slot ID",
+      "group": "Hardware Identification"
+    }
+  }
+}

@@ -1,12 +1,10 @@
 {
   "DMM": {
     "tab": "4_DMM",
-    "panel": "Instrument",
     "groups": [
       {
         "name": "0_Bank_All",
-        "unit": "DMM/_unit/dmm_strip.json",
-        "header": "DMM/_decks/global_refresh.json",
+        "header": "Master_Control",
         "over": "devices",
         "by": "host",
         "size": "all",
@@ -17,7 +15,6 @@
       },
       {
         "name": "1_Quads",
-        "unit": "DMM/_unit/dmm_strip.json",
         "over": "devices",
         "by": "host",
         "size": 4,
@@ -28,7 +25,6 @@
       },
       {
         "name": "2_Pairs",
-        "unit": "DMM/_unit/dmm_strip.json",
         "over": "devices",
         "by": "host",
         "size": 2,
@@ -41,11 +37,9 @@
   },
   "Oscilloscope": {
     "tab": "2_Oscilloscope",
-    "panel": "Instrument",
     "groups": [
       {
         "name": "2_Channels",
-        "unit": "Oscilloscope/_unit/channel.json",
         "over": "channels",
         "columns": 2,
         "station": "Channel_Bank",
@@ -53,40 +47,36 @@
         "description": {
           "En": "Channels",
           "Fr": "Canaux",
-          "De": "Kan\u00e4le",
+          "De": "Kanäle",
           "Es": "Canales"
         }
       }
     ]
   },
   "Generator": {
-    "tab": "3_Generator",
-    "panel": "Instrument_1"
+    "tab": "3_Generator"
   },
   "Power": {
     "tab": "5_Power",
-    "panel": "Instrument",
     "groups": [
       {
         "name": "0_Bank_All",
-        "unit": "Power/Modules/psu_module.json",
-        "header": "Power/_decks/global_logger.json",
+        "header": "Global_Logger_Deck",
         "over": "devices",
         "size": "all",
         "columns": 4,
         "station": "Octo_PSU_Monitor",
         "id": "50.100.5.4",
         "description": {
-          "En": "Mainframe \u2014 all modules",
-          "Fr": "Ch\u00e2ssis \u2014 tous les modules",
-          "De": "Rahmen \u2014 alle Module",
-          "Es": "Bastidor \u2014 todos los m\u00f3dulos"
+          "En": "Mainframe — all modules",
+          "Fr": "Châssis — tous les modules",
+          "De": "Rahmen — alle Module",
+          "Es": "Bastidor — todos los módulos"
         }
       },
       {
         "name": "1_Quads",
-        "unit": "Power/Modules/psu_module.json",
-        "header": "Power/_decks/master_interlock.json",
+        "header": "Master_Override_Deck",
         "over": "devices",
         "size": 4,
         "columns": 4,
@@ -96,12 +86,11 @@
           "En": "4-Channel High-Voltage Injection Matrix",
           "Fr": "4-Canal Matrice d'injection haute tension",
           "De": "4-Kanal Hochspannungs-Injektionsmatrix",
-          "Es": "4-Canal Matriz de inyecci\u00f3n de alta tensi\u00f3n"
+          "Es": "4-Canal Matriz de inyección de alta tensión"
         }
       },
       {
         "name": "2_Pairs",
-        "unit": "Power/Modules/psu_module.json",
         "over": "devices",
         "size": 2,
         "columns": 2,
@@ -111,29 +100,24 @@
           "En": "Module pair",
           "Fr": "Paire de modules",
           "De": "Modulpaar",
-          "Es": "Par de m\u00f3dulos"
+          "Es": "Par de módulos"
         }
       }
     ]
   },
   "Load": {
-    "tab": "7_Load",
-    "panel": "Instrument"
+    "tab": "7_Load"
   },
   "Spectrum": {
-    "tab": "0_Spectrum",
-    "panel": "Instrument"
+    "tab": "0_Spectrum"
   },
   "Router": {
-    "tab": "1_Router",
-    "panel": "Switcher"
+    "tab": "1_Router"
   },
   "LCR": {
-    "tab": "8_LCR",
-    "panel": "Instrument"
+    "tab": "8_LCR"
   },
   "Distortion": {
-    "tab": "9_Distortion",
-    "panel": "Instrument"
+    "tab": "9_Distortion"
   }
 }

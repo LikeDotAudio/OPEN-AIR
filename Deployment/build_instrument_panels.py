@@ -14,6 +14,15 @@ Called by build_discovered_gui.py after every scan; also runnable by hand:
     python3 Deployment/build_instrument_panels.py
 
 Generated output is data: gitignored, and pruned when a device disappears.
+
+An instrument type is TWO authored files and no folders:
+
+    <Type>/<Type>.json     the instrument      — stamped once per device
+    <Type>/<Type>_N.json   N of the instrument — the block that repeats
+
+The sub-tab structure a device panel used to get from nested template folders
+now comes from the instrument file's top-level keys, so the tree the author
+edits is flat and the tree the UI renders is not.
 """
 import glob
 import json
@@ -164,20 +173,37 @@ def apply_domains(node, caps):
     return resolved
 
 
-def unit_block(doc):
-    """The one OcaBlock inside a unit/deck template, for nesting into a group.
+def template(itype, suffix=""):
+    """Path of one of an instrument's two authored files."""
+    return os.path.join(TEMPLATE_ROOT, itype, f"{itype}{suffix}.json")
 
-    A unit file is an ordinary panel — one OcaBin holding one block — so it can
-    be opened and edited in the WYSIWYG editor like any other. Grouping unwraps
-    it: the block becomes a field of the group's station block, which is exactly
-    the shape the hand-authored `psu_four`/`psu_eight` had, only reached by
-    composition instead of by copy-paste.
+
+def unit_blocks(itype):
+    """(repeating block, {deck name: deck block}) from `<Type>_N.json`.
+
+    The N file is an ordinary panel — one OcaBin — so it opens in the WYSIWYG
+    editor like anything else. Grouping unwraps it: the repeating block becomes
+    one field of a generated station block, which is the shape the hand-authored
+    `psu_four`/`psu_eight` had, only reached by composition instead of by
+    copy-paste.
+
+    The repeating block is the one carrying `${n}` in its name, because that is
+    already what makes N copies of it N distinct panels rather than one panel
+    claiming to exist N times. Every OTHER block in the file is a header deck —
+    a strip that commands the whole group (`OUTP:ALL`) rather than one member —
+    which a group spec asks for by name. Power keeps both of its decks that way:
+    the bank of eight gets the logger, the quads get the master interlock, and
+    neither needs a folder of its own to live in.
     """
+    doc = read_panel(template(itype, "_N"))
+    if doc is None:
+        return None, {}
     for outer in doc.values():
         blocks = outer.get("blocks") or {}
-        for name, block in blocks.items():
-            return name, block
-    return None, None
+        unit = next((b for name, b in blocks.items() if "${n}" in name), None)
+        decks = {name: b for name, b in blocks.items() if "${n}" not in name}
+        return unit, decks
+    return None, {}
 
 
 def device_slug(model, resource):
@@ -310,31 +336,50 @@ def write_panel(path, doc):
         json.dump(doc, f, indent=2)
 
 
-def instantiate(template_dir, out_dir, dev, exclude=()):
-    """Copy one template subtree, binding every panel in it to one device."""
+def instantiate(itype, out_dir, dev):
+    """Stamp `<Type>.json` for one device, exploding its top-level keys to tabs.
+
+    A device panel's sub-tabs used to be authored as nested template folders —
+    `Spectrum/Instrument/{amplitude,bandwidth,frequency,markers,traces}/`, one
+    file each, five folders deep to hold five panels. The folders were the only
+    thing the author got out of that depth, and the frontend builds tabs from
+    folders anyway (WindowManager.TabContainer), so the keys can carry it:
+
+        {"amplitude": {...}, "bandwidth": {...}}  ->  0_amplitude/, 1_bandwidth/
+
+    Key order is tab order, which is why the `<i>_` prefix goes on: TabContainer
+    sorts on it, and OaTopicMaker strips it back off, so the topic a widget
+    publishes on is unchanged by the numbering.
+
+    A key may instead hold a MAP of panels — the Router's `Coax` tab is two
+    cards stacked in one pane — which is the same either-a-node-or-a-map test
+    LoaderOrchestrator already makes on a file's own root. One key and one
+    panel means no sub-tab at all: the file lands straight in the device folder,
+    as the single-panel types (DMM, Load, LCR, …) have always rendered.
+    """
+    doc = read_panel(template(itype))
+    if doc is None:
+        print(f"[instrument-gui] template missing: {template(itype)}")
+        return 0, 0
+
+    entries = list(doc.items())
+    if len(entries) == 1:
+        bound_doc, handlers = prepare(dict(entries), dev)
+        write_panel(os.path.join(out_dir, f"{itype}.json"), bound_doc)
+        return 1, handlers
+
     panels = handlers = 0
-    for root, dirs, files in os.walk(template_dir):
-        rel = os.path.relpath(root, template_dir)
-        parts = [] if rel == "." else rel.split(os.sep)
-        if parts and parts[0] in exclude:
-            dirs[:] = []
-            continue
-        dirs[:] = [d for d in dirs if d not in exclude]
-        for name in sorted(files):
-            if not name.endswith(".json"):
-                continue
-            doc = read_panel(os.path.join(root, name))
-            if doc is None:
-                continue
-            doc, bound = prepare(doc, dev)
+    for i, (tab, node) in enumerate(entries):
+        stack = {tab: node} if isinstance(node.get("type"), str) else node
+        for j, (name, panel) in enumerate(stack.items()):
+            bound_doc, bound = prepare({name: panel}, dev)
+            write_panel(os.path.join(out_dir, f"{i}_{tab}", f"{j}_{name}.json"), bound_doc)
             handlers += bound
-            dest = out_dir if rel == "." else os.path.join(out_dir, rel)
-            write_panel(os.path.join(dest, name), doc)
             panels += 1
     return panels, handlers
 
 
-def repeat_unit(spec, members, station_id, root):
+def repeat_unit(itype, spec, members, station_id, root):
     """Compose N bound copies of one unit template into a single group panel.
 
     This is the whole point of the exercise. `psu_eight.json` was 1183 lines of
@@ -348,25 +393,25 @@ def repeat_unit(spec, members, station_id, root):
     `members` is [(tokens, device)] — the caller decides what repeats: sibling
     modules across a mainframe, or channels within one instrument.
     """
-    unit_doc = read_panel(os.path.join(TEMPLATE_ROOT, spec["unit"]))
-    if unit_doc is None:
-        return None, 0
-    _, unit = unit_block(unit_doc)
+    unit, decks = unit_blocks(itype)
     if unit is None:
-        print(f"[instrument-gui] {spec['unit']} has no block to repeat")
+        print(f"[instrument-gui] {template(itype, '_N')} has no ${{n}} block to repeat")
         return None, 0
 
     fields, handlers = {}, 0
-    if spec.get("header"):
-        header_doc = read_panel(os.path.join(TEMPLATE_ROOT, spec["header"]))
-        if header_doc is not None:
-            name, block = unit_block(header_doc)
-            if block is not None:
-                # The header commands the whole group (`OUTP:ALL`), so it binds
-                # to the first member — any of them reaches the mainframe.
-                block, bound = prepare(block, members[0][1], members[0][0])
-                handlers += bound
-                fields[name] = block
+    wanted_deck = spec.get("header")
+    if wanted_deck:
+        block = decks.get(wanted_deck)
+        if block is None:
+            print(f"[instrument-gui] {itype}_N.json has no '{wanted_deck}' deck — "
+                  f"{spec['name']} built without its header")
+        else:
+            # The header commands the whole group (`OUTP:ALL`), so it binds to
+            # the first member — any of them reaches the mainframe.
+            block, bound = prepare(json.loads(json.dumps(block)),
+                                   members[0][1], members[0][0])
+            handlers += bound
+            fields[wanted_deck] = block
 
     for tokens, dev in members:
         copy, bound = prepare(json.loads(json.dumps(unit)), dev, tokens)
@@ -395,7 +440,7 @@ def chunk(items, size):
     return [items[i:i + size] for i in range(0, len(items), size)]
 
 
-def build_group_panels(spec, tab, devices):
+def build_group_panels(itype, spec, tab, devices):
     """Emit the group views declared for one instrument type.
 
     `over: "devices"` repeats across the instruments sharing a mainframe — the
@@ -442,7 +487,7 @@ def build_group_panels(spec, tab, devices):
         for slug, members in instances:
             # Root key carries the slug: four pair-panels off one mainframe are
             # four panels, not one panel claiming to exist four times.
-            doc, handlers = repeat_unit(dict(group), members,
+            doc, handlers = repeat_unit(itype, dict(group), members,
                                         group.get("id", "50.100.0.0"),
                                         re.sub(r"[^A-Za-z0-9]+", "_", slug))
             if doc is None:
@@ -510,10 +555,6 @@ def build(devices):
             # SMU today). Silent skip would read as a broken build.
             print(f"[instrument-gui] no template for type {dev.get('type')!r} — {dev.get('model')} skipped")
             continue
-        template_dir = os.path.join(TEMPLATE_ROOT, dev["type"], spec["panel"])
-        if not os.path.isdir(template_dir):
-            print(f"[instrument-gui] template missing: {template_dir}")
-            continue
 
         slug = device_slug(dev.get("model", "unknown"), dev.get("resource", ""))
         out_dir = os.path.join(OUT_ROOT, spec["tab"], slug)
@@ -521,9 +562,9 @@ def build(devices):
         # worse than a missing one, and the folder is generated data.
         if os.path.isdir(out_dir):
             shutil.rmtree(out_dir)
-        panels, handlers = instantiate(
-            template_dir, out_dir, dev, exclude=set(spec.get("exclude", [])),
-        )
+        panels, handlers = instantiate(dev["type"], out_dir, dev)
+        if not panels:
+            continue
         with open(os.path.join(out_dir, STAMP), "w") as f:
             json.dump({"type": dev.get("type"), "model": dev.get("model"),
                        "resource": dev.get("resource"),
@@ -540,7 +581,7 @@ def build(devices):
         spec = manifest.get(dtype)
         if not spec or not spec.get("groups"):
             continue
-        gw, gb, gwanted = build_group_panels(spec, spec["tab"], group_devices)
+        gw, gb, gwanted = build_group_panels(dtype, spec, spec["tab"], group_devices)
         written += gw
         built += gb
         wanted |= gwanted

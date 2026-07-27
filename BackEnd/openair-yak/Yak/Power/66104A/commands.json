@@ -1,0 +1,127 @@
+{
+  "model": "66104A",
+  "family": "Power",
+  "set": {},
+  "do": {
+    "Clear_Protection": {
+      "scpi": "INST:NSEL <chan>;OUTP:PROT:CLE",
+      "description": "Clear Protection",
+      "group": "Output Control"
+    },
+    "Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Clear Status",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Output_OFF": {
+      "scpi": "INST:NSEL <chan>;OUTP OFF",
+      "description": "Output OFF",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Output_ON": {
+      "scpi": "INST:NSEL <chan>;OUTP ON",
+      "description": "Output ON",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Reset_Module": {
+      "scpi": "INST:NSEL <chan>;*RST",
+      "description": "Reset Module",
+      "group": "Output Control"
+    },
+    "S1_OFF": {
+      "scpi": "INST:NSEL 1;OUTP OFF",
+      "description": "S1 OFF",
+      "group": "Individual Output Control"
+    },
+    "S1_ON": {
+      "scpi": "INST:NSEL 1;OUTP ON",
+      "description": "S1 ON",
+      "group": "Individual Output Control"
+    },
+    "Select_Channel": {
+      "scpi": "INST:NSEL <chan>",
+      "description": "Select Channel",
+      "group": "Channel Selection",
+      "subsystem": "INSTrument"
+    },
+    "System_Reset": {
+      "scpi": "*RST",
+      "description": "System Reset",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Trigger_Immediate": {
+      "scpi": "*TRG",
+      "description": "Trigger Immediate",
+      "group": "Trigger System",
+      "subsystem": "TRIGger"
+    }
+  },
+  "rig": {
+    "Set_Levels": {
+      "scpi": "INST:NSEL <chan>;VOLT <volt>;CURR <curr>",
+      "description": "Set Levels",
+      "group": "Configuration",
+      "args": [
+        "volt",
+        "curr"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_Protection": {
+      "scpi": "INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>",
+      "description": "Set Protection",
+      "group": "MPS Settings",
+      "args": [
+        "ovp_level",
+        "ocp_state"
+      ]
+    },
+    "Set_S1_Levels": {
+      "scpi": "INST:NSEL 1;VOLT <volt>;CURR <curr>",
+      "description": "Set S1 Levels",
+      "group": "Configuration (Volts/Amps)",
+      "args": [
+        "volt",
+        "curr"
+      ]
+    },
+    "Set_Voltage_Current": {
+      "scpi": "INST:NSEL <chan>;VOLT <voltage>;CURR <current>",
+      "description": "Set Voltage Current",
+      "group": "MPS Settings",
+      "args": [
+        "voltage",
+        "current"
+      ]
+    }
+  },
+  "nab": {
+    "Get_Values": {
+      "scpi": "INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?",
+      "description": "Get Values",
+      "group": "Readback Queries",
+      "subsystem": "MEASure"
+    },
+    "Questionable_Condition": {
+      "scpi": "STAT:QUES:COND?",
+      "description": "Questionable Condition",
+      "group": "Status Registers",
+      "subsystem": "STATus"
+    },
+    "Read_Error": {
+      "scpi": "SYST:ERR?",
+      "description": "Read Error",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "Read_Values": {
+      "scpi": "INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?",
+      "description": "Read Voltage and Current",
+      "group": "MPS Metering"
+    }
+  }
+}

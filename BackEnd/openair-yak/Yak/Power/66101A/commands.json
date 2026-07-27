@@ -1,0 +1,94 @@
+{
+  "model": "66101A",
+  "family": "Power",
+  "set": {},
+  "do": {
+    "Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Clear Status",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Output_OFF": {
+      "scpi": "INST:NSEL <chan>;OUTP OFF",
+      "description": "Output OFF",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Output_ON": {
+      "scpi": "INST:NSEL <chan>;OUTP ON",
+      "description": "Output ON",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "S1_OFF": {
+      "scpi": "INST:NSEL 1;OUTP OFF",
+      "description": "S1 OFF",
+      "group": "Individual Output Control"
+    },
+    "S1_ON": {
+      "scpi": "INST:NSEL 1;OUTP ON",
+      "description": "S1 ON",
+      "group": "Individual Output Control"
+    },
+    "Select_Channel": {
+      "scpi": "INST:NSEL <chan>",
+      "description": "Select Channel",
+      "group": "Channel Selection",
+      "subsystem": "INSTrument"
+    },
+    "System_Reset": {
+      "scpi": "*RST",
+      "description": "System Reset",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Trigger_Immediate": {
+      "scpi": "*TRG",
+      "description": "Trigger Immediate",
+      "group": "Trigger System",
+      "subsystem": "TRIGger"
+    }
+  },
+  "rig": {
+    "Set_Levels": {
+      "scpi": "INST:NSEL <chan>;VOLT <volt>;CURR <curr>",
+      "description": "Set Levels",
+      "group": "Configuration",
+      "args": [
+        "volt",
+        "curr"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_S1_Levels": {
+      "scpi": "INST:NSEL 1;VOLT <volt>;CURR <curr>",
+      "description": "Set S1 Levels",
+      "group": "Configuration (Volts/Amps)",
+      "args": [
+        "volt",
+        "curr"
+      ]
+    }
+  },
+  "nab": {
+    "Get_Values": {
+      "scpi": "INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?",
+      "description": "Get Values",
+      "group": "Readback Queries",
+      "subsystem": "MEASure"
+    },
+    "Questionable_Condition": {
+      "scpi": "STAT:QUES:COND?",
+      "description": "Questionable Condition",
+      "group": "Status Registers",
+      "subsystem": "STATus"
+    },
+    "Read_Error": {
+      "scpi": "SYST:ERR?",
+      "description": "Read Error",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    }
+  }
+}

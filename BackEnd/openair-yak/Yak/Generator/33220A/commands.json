@@ -1,0 +1,203 @@
+{
+  "model": "33220A",
+  "family": "Generator",
+  "set": {
+    "Set_Amplitude": {
+      "scpi": "VOLTage <amp>",
+      "description": "Set Amplitude",
+      "group": "SOURce Configuration",
+      "args": [
+        "amp"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_Frequency": {
+      "scpi": "FREQuency <freq>",
+      "description": "Set Frequency",
+      "group": "SOURce Configuration",
+      "args": [
+        "freq"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_Function_Shape": {
+      "scpi": "FUNCtion <shape>",
+      "description": "Set Function Shape",
+      "group": "SOURce Configuration",
+      "args": [
+        "shape"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_Offset": {
+      "scpi": "VOLTage:OFFSet <offset>",
+      "description": "Set Offset",
+      "group": "SOURce Configuration",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Set_Output_Load": {
+      "scpi": "OUTPut:LOAD <ohms>",
+      "description": "Set Output Load",
+      "group": "OUTPut Configuration",
+      "args": [
+        "ohms"
+      ],
+      "subsystem": "OUTPut"
+    },
+    "Set_Voltage_Unit": {
+      "scpi": "VOLTage:UNIT <unit>",
+      "description": "Set Voltage Unit",
+      "group": "SOURce Configuration",
+      "args": [
+        "unit"
+      ],
+      "subsystem": "SOURce"
+    },
+    "Setup_Pulse_Width": {
+      "scpi": "FUNCtion:PULSe:WIDTh <width_sec>",
+      "description": "Setup Pulse Width",
+      "group": "PULSe Configuration",
+      "args": [
+        "width_sec"
+      ],
+      "subsystem": "PULSe"
+    }
+  },
+  "do": {
+    "AM_State_OFF": {
+      "scpi": "AM:STATe OFF",
+      "description": "AM State OFF",
+      "group": "Modulation Control",
+      "subsystem": "Modulation"
+    },
+    "AM_State_ON": {
+      "scpi": "AM:STATe ON",
+      "description": "AM State ON",
+      "group": "Modulation Control",
+      "subsystem": "Modulation"
+    },
+    "Clear_Text": {
+      "scpi": "DISPlay:TEXT:CLEar",
+      "description": "Clear Text",
+      "group": "System Actions",
+      "subsystem": "System"
+    },
+    "FM_State_OFF": {
+      "scpi": "FM:STATe OFF",
+      "description": "FM State OFF",
+      "group": "Modulation Control",
+      "subsystem": "Modulation"
+    },
+    "FM_State_ON": {
+      "scpi": "FM:STATe ON",
+      "description": "FM State ON",
+      "group": "Modulation Control",
+      "subsystem": "Modulation"
+    },
+    "Output_OFF": {
+      "scpi": "OUTPut OFF",
+      "description": "Output OFF",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Output_ON": {
+      "scpi": "OUTPut ON",
+      "description": "Output ON",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Reset_Device": {
+      "scpi": "*RST",
+      "description": "Reset Device",
+      "group": "System Actions",
+      "subsystem": "System"
+    },
+    "Sync_OFF": {
+      "scpi": "OUTPut:SYNC OFF",
+      "description": "Sync OFF",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Sync_ON": {
+      "scpi": "OUTPut:SYNC ON",
+      "description": "Sync ON",
+      "group": "Output Control",
+      "subsystem": "OUTPut"
+    },
+    "Trigger_Immediate": {
+      "scpi": "*TRG",
+      "description": "Trigger Immediate",
+      "group": "System Actions",
+      "subsystem": "System"
+    }
+  },
+  "rig": {
+    "Apply_Pulse": {
+      "scpi": "APPLy:PULSe <freq>, <amp>, <offset>",
+      "description": "Apply Pulse",
+      "group": "APPLy Macro Commands",
+      "args": [
+        "freq",
+        "amp",
+        "offset"
+      ],
+      "subsystem": "APPLy"
+    },
+    "Apply_Sine": {
+      "scpi": "APPLy:SINusoid <freq>, <amp>, <offset>",
+      "description": "Apply Sine",
+      "group": "APPLy Macro Commands",
+      "args": [
+        "freq",
+        "amp",
+        "offset"
+      ],
+      "subsystem": "APPLy"
+    },
+    "Apply_Square": {
+      "scpi": "APPLy:SQUare <freq>, <amp>, <offset>",
+      "description": "Apply Square",
+      "group": "APPLy Macro Commands",
+      "args": [
+        "freq",
+        "amp",
+        "offset"
+      ],
+      "subsystem": "APPLy"
+    },
+    "Setup_AM": {
+      "scpi": "AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>",
+      "description": "Setup AM",
+      "group": "Modulation Setup",
+      "args": [
+        "shape",
+        "freq",
+        "depth"
+      ],
+      "subsystem": "Modulation"
+    }
+  },
+  "nab": {
+    "Get_Apply_String": {
+      "scpi": "APPLy?",
+      "description": "Get Apply String",
+      "group": "APPLy Readbacks",
+      "subsystem": "APPLy"
+    },
+    "Get_Error_Queue": {
+      "scpi": "SYSTem:ERRor?",
+      "description": "Get Error Queue",
+      "group": "System Readbacks",
+      "subsystem": "System"
+    },
+    "Get_Output_State": {
+      "scpi": "OUTPut?",
+      "description": "Get Output State",
+      "group": "Output Status",
+      "subsystem": "OUTPut"
+    }
+  }
+}

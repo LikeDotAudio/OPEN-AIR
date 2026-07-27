@@ -1,0 +1,214 @@
+{
+  "model": "6060B",
+  "family": "Load",
+  "set": {
+    "Set_Current_Level": {
+      "scpi": "CURR <value>",
+      "description": "Set Current Level",
+      "group": "Constant Current Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CURRent"
+    },
+    "Set_Current_Range": {
+      "scpi": "CURR:RANG <value>",
+      "description": "Set Current Range",
+      "group": "Constant Current Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CURRent"
+    },
+    "Set_Current_Slew": {
+      "scpi": "CURR:SLEW <value>",
+      "description": "Set Current Slew",
+      "group": "Constant Current Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "CURRent"
+    },
+    "Set_Resistance_Level": {
+      "scpi": "RES <value>",
+      "description": "Set Resistance Level",
+      "group": "Constant Resistance Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "RESistance"
+    },
+    "Set_Resistance_Range": {
+      "scpi": "RES:RANG <value>",
+      "description": "Set Resistance Range",
+      "group": "Constant Resistance Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "RESistance"
+    },
+    "Set_Transient_Duty": {
+      "scpi": "TRAN:DCYC <value>",
+      "description": "Set Transient Duty",
+      "group": "Pulse & Dynamic Loading",
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRANsient"
+    },
+    "Set_Transient_Freq": {
+      "scpi": "TRAN:FREQ <value>",
+      "description": "Set Transient Freq",
+      "group": "Pulse & Dynamic Loading",
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRANsient"
+    },
+    "Set_Transient_Level_A": {
+      "scpi": "CURR:LEV <value>",
+      "description": "Set Transient Level A",
+      "group": "Pulse & Dynamic Loading",
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRANsient"
+    },
+    "Set_Transient_Level_B": {
+      "scpi": "CURR:TLEV <value>",
+      "description": "Set Transient Level B",
+      "group": "Pulse & Dynamic Loading",
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRANsient"
+    },
+    "Set_Transient_Mode": {
+      "scpi": "TRAN:MODE <mode>",
+      "description": "Set Transient Mode",
+      "group": "Pulse & Dynamic Loading",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "TRANsient"
+    },
+    "Set_Voltage_Level": {
+      "scpi": "VOLT <value>",
+      "description": "Set Voltage Level",
+      "group": "Constant Voltage Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLTage"
+    },
+    "Set_Voltage_Range": {
+      "scpi": "VOLT:RANG <value>",
+      "description": "Set Voltage Range",
+      "group": "Constant Voltage Parameters",
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLTage"
+    }
+  },
+  "do": {
+    "Clear_Protection": {
+      "scpi": "PROT:CLE",
+      "description": "Clear Protection",
+      "group": "Input Control",
+      "subsystem": "INPut"
+    },
+    "Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Clear Status",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Input_OFF": {
+      "scpi": "INP OFF",
+      "description": "Input OFF",
+      "group": "Input Control",
+      "subsystem": "INPut"
+    },
+    "Input_ON": {
+      "scpi": "INP ON",
+      "description": "Input ON",
+      "group": "Input Control",
+      "subsystem": "INPut"
+    },
+    "Reset_Device": {
+      "scpi": "*RST",
+      "description": "Reset Device",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Set_Mode_Current": {
+      "scpi": "MODE:CURR",
+      "description": "Set Mode Current",
+      "group": "CC / CV / CR",
+      "subsystem": "MODE"
+    },
+    "Set_Mode_Resistance": {
+      "scpi": "MODE:RES",
+      "description": "Set Mode Resistance",
+      "group": "CC / CV / CR",
+      "subsystem": "MODE"
+    },
+    "Set_Mode_Voltage": {
+      "scpi": "MODE:VOLT",
+      "description": "Set Mode Voltage",
+      "group": "CC / CV / CR",
+      "subsystem": "MODE"
+    },
+    "Transient_OFF": {
+      "scpi": "TRAN:STAT OFF",
+      "description": "Transient OFF",
+      "group": "Pulse & Dynamic Loading",
+      "subsystem": "TRANsient"
+    },
+    "Transient_ON": {
+      "scpi": "TRAN:STAT ON",
+      "description": "Transient ON",
+      "group": "Pulse & Dynamic Loading",
+      "subsystem": "TRANsient"
+    },
+    "Trigger": {
+      "scpi": "*TRG",
+      "description": "Trigger",
+      "group": "Actions and Toggles"
+    },
+    "Trigger_Immediate": {
+      "scpi": "*TRG",
+      "description": "Trigger Immediate",
+      "group": "Trigger System",
+      "subsystem": "TRIGger"
+    }
+  },
+  "rig": {},
+  "nab": {
+    "Error": {
+      "scpi": "SYST:ERR?",
+      "description": "Error",
+      "group": "System Utilities",
+      "subsystem": "SYSTem"
+    },
+    "IDN": {
+      "scpi": "*IDN?",
+      "description": "IDN",
+      "group": "Common Commands",
+      "subsystem": "Common"
+    },
+    "Measure_All": {
+      "scpi": "MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?",
+      "description": "Measure All",
+      "group": "Readback Queries",
+      "subsystem": "MEASure"
+    },
+    "Status_Byte": {
+      "scpi": "*STB?",
+      "description": "Status Byte",
+      "group": "Status Registers",
+      "subsystem": "STATus"
+    }
+  }
+}

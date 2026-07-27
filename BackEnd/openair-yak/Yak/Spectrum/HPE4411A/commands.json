@@ -1,0 +1,220 @@
+{
+  "model": "HPE4411A",
+  "family": "Spectrum",
+  "set": {
+    "Power_Attenuation": {
+      "scpi": ":POWer:ATTenuation <Power_Attenuation>",
+      "description": "Power Attenuation",
+      "group": "Individual Power Sets",
+      "args": [
+        "Power_Attenuation"
+      ],
+      "subsystem": "Amplitude"
+    },
+    "Set_Reference_Level": {
+      "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>",
+      "description": "Set Reference Level",
+      "group": "Individual Power Sets",
+      "args": [
+        "Ref_Level_dBm"
+      ],
+      "subsystem": "Amplitude"
+    },
+    "Resolution_Bandwidth": {
+      "scpi": ":SENSe:BANDwidth:RESolution <hz_value>",
+      "description": "Resolution Bandwidth",
+      "group": "RIG Bandwidth Commands",
+      "args": [
+        "hz_value"
+      ],
+      "subsystem": "Bandwidth"
+    },
+    "Set_Marker_X_position": {
+      "scpi": ":CALCulate:MARKer<marker_number>:X <x_value>",
+      "description": "Set Marker Frequency",
+      "group": "Marker Command Sets",
+      "args": [
+        "x_value"
+      ],
+      "subsystem": "Markers"
+    },
+    "Span_Frequency": {
+      "scpi": ":FREQuency:SPAN <hz_value>",
+      "description": "Span Frequency",
+      "group": "RIG Frequency commands",
+      "args": [
+        "hz_value"
+      ],
+      "subsystem": "Frequency"
+    },
+    "Start_Freq_MHz": {
+      "scpi": ":FREQuency:STARt <hz_value>",
+      "description": "Start Freq MHz",
+      "group": "RIG Frequency commands",
+      "args": [
+        "hz_value"
+      ],
+      "subsystem": "Frequency"
+    },
+    "Stop_Freq_MHz": {
+      "scpi": ":FREQuency:STOP <hz_value>",
+      "description": "Stop Freq MHz",
+      "group": "RIG Frequency commands",
+      "args": [
+        "hz_value"
+      ],
+      "subsystem": "Frequency"
+    },
+    "Sweep_Time": {
+      "scpi": ":SENSe:SWEep:TIME <sweep_time_s>",
+      "description": "Sweep Time",
+      "group": "RIG Bandwidth Commands",
+      "args": [
+        "sweep_time_s"
+      ],
+      "subsystem": "Bandwidth"
+    },
+    "Video_Bandwidth": {
+      "scpi": ":SENSe:BANDwidth:VIDeo <hz_value>",
+      "description": "Video Bandwidth",
+      "group": "RIG Bandwidth Commands",
+      "args": [
+        "hz_value"
+      ],
+      "subsystem": "Bandwidth"
+    }
+  },
+  "do": {
+    "Do_Power_Cycle": {
+      "scpi": ":SYSTem:POWer:RESet",
+      "description": "Do Power Cycle",
+      "group": "Hardware Reset and Clear",
+      "subsystem": "System"
+    },
+    "Do_Update_Display": {
+      "scpi": ":SYSTem:DISPlay:UPDate",
+      "description": "Do Update Display",
+      "group": "System Maintenance Controls",
+      "subsystem": "System"
+    },
+    "Set_Input_Auto_Attenuation_OFF": {
+      "scpi": ":POWer:ATTenuation:AUTO OFF",
+      "description": "Set Input Auto Attenuation OFF",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude"
+    },
+    "Set_Input_Auto_Attenuation_ON": {
+      "scpi": ":POWer:ATTenuation:AUTO ON",
+      "description": "Set Input Auto Attenuation ON",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude"
+    },
+    "Set_Marker_State_OFF": {
+      "scpi": ":CALCulate:MARKer<marker_number>:STATe OFF",
+      "description": "Disable Marker",
+      "group": "Marker Command Sets",
+      "subsystem": "Markers"
+    },
+    "Set_Marker_State_ON": {
+      "scpi": ":CALCulate:MARKer<marker_number>:STATe ON",
+      "description": "Enable Marker",
+      "group": "Marker Command Sets",
+      "subsystem": "Markers"
+    },
+    "Set_Power_Gain_OFF": {
+      "scpi": ":POWer:GAIN OFF",
+      "description": "Set Power Gain OFF",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude"
+    },
+    "Set_Power_Gain_ON": {
+      "scpi": ":POWer:GAIN ON",
+      "description": "Set Power Gain ON",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude"
+    }
+  },
+  "rig": {
+    "RBW_VBW_Hz": {
+      "scpi": ":SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>",
+      "description": "Set Resolution and Video BW",
+      "group": "RIG Bandwidth Commands",
+      "args": [
+        "rbw_hz_value",
+        "vbw_hz_value"
+      ],
+      "subsystem": "Bandwidth"
+    },
+    "Ref_Level_dBm": {
+      "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>",
+      "description": "Set Power Levels",
+      "group": "RIG Amplitude Commands",
+      "args": [
+        "Ref_Level_dBm",
+        "Attenuation_dB",
+        "Preamp_On"
+      ],
+      "subsystem": "Amplitude"
+    },
+    "freq_start_stop": {
+      "scpi": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>",
+      "description": "Frequency Range Commands",
+      "group": "RIG Frequency commands",
+      "args": [
+        "start_freq",
+        "stop_freq"
+      ],
+      "subsystem": "Frequency"
+    }
+  },
+  "nab": {
+    "Attenuation": {
+      "scpi": ":POWer:RF:ATTenuation?",
+      "description": "Attenuation",
+      "group": "Individual Read Queries",
+      "subsystem": "Amplitude"
+    },
+    "Frequency_settings": {
+      "scpi": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?",
+      "description": "Primary Frequency Monitoring",
+      "group": "NAB Frequency Monitoring",
+      "subsystem": "Frequency"
+    },
+    "Get_error_information": {
+      "scpi": ":SYSTem:ERRor?",
+      "description": "System Error Check",
+      "group": "System Status and Identification",
+      "subsystem": "System"
+    },
+    "NAB_all_marker_settings": {
+      "scpi": ":CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?",
+      "description": "Marker Amplitude and Frequency Readbacks",
+      "group": "NAB Marker Monitoring",
+      "subsystem": "Markers"
+    },
+    "Preamp_State": {
+      "scpi": ":SENSE:POWer:RF:GAIN:STATe?",
+      "description": "Preamp State",
+      "group": "Individual Read Queries",
+      "subsystem": "Amplitude"
+    },
+    "Get_Reference_Level": {
+      "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?",
+      "description": "Get Reference Level",
+      "group": "Individual Read Queries",
+      "subsystem": "Amplitude"
+    },
+    "amplitude_settings": {
+      "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?",
+      "description": "Power and Attenuation Readbacks",
+      "group": "NAB Amplitude Monitoring",
+      "subsystem": "Amplitude"
+    },
+    "bandwidth_settings": {
+      "scpi": ":SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?",
+      "description": "Bandwidth and Sweep Monitoring",
+      "group": "NAB Bandwidth Monitoring",
+      "subsystem": "Bandwidth"
+    }
+  }
+}

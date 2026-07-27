@@ -1,0 +1,584 @@
+{
+  "model": "DS1104Z",
+  "family": "Scope",
+  "set": {
+    "CH1_BWLimit": {
+      "scpi": ":CHANnel1:BWLimit <limit>",
+      "description": "CH1 BWLimit",
+      "group": "Channel 1 Vertical",
+      "args": [
+        "limit"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Coupling": {
+      "scpi": ":CHANnel1:COUPling <coupling>",
+      "description": "CH1 Coupling",
+      "group": "Channel 1 Vertical",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Offset": {
+      "scpi": ":CHANnel1:OFFSet <offset>",
+      "description": "CH1 Offset",
+      "group": "Channel 1 Vertical",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Probe": {
+      "scpi": ":CHANnel1:PROBe <atten>",
+      "description": "CH1 Probe",
+      "group": "Channel 1 Vertical",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH1_Scale": {
+      "scpi": ":CHANnel1:SCALe <scale>",
+      "description": "CH1 Scale",
+      "group": "Channel 1 Vertical",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_1"
+    },
+    "CH2_BWLimit": {
+      "scpi": ":CHANnel2:BWLimit <limit>",
+      "description": "CH2 BWLimit",
+      "group": "Channel 2 Vertical",
+      "args": [
+        "limit"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Coupling": {
+      "scpi": ":CHANnel2:COUPling <coupling>",
+      "description": "CH2 Coupling",
+      "group": "Channel 2 Vertical",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Offset": {
+      "scpi": ":CHANnel2:OFFSet <offset>",
+      "description": "CH2 Offset",
+      "group": "Channel 2 Vertical",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Probe": {
+      "scpi": ":CHANnel2:PROBe <atten>",
+      "description": "CH2 Probe",
+      "group": "Channel 2 Vertical",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH2_Scale": {
+      "scpi": ":CHANnel2:SCALe <scale>",
+      "description": "CH2 Scale",
+      "group": "Channel 2 Vertical",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_2"
+    },
+    "CH3_BWLimit": {
+      "scpi": ":CHANnel3:BWLimit <limit>",
+      "description": "CH3 BWLimit",
+      "group": "Channel 3 Vertical",
+      "args": [
+        "limit"
+      ],
+      "subsystem": "Channel_3"
+    },
+    "CH3_Coupling": {
+      "scpi": ":CHANnel3:COUPling <coupling>",
+      "description": "CH3 Coupling",
+      "group": "Channel 3 Vertical",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_3"
+    },
+    "CH3_Offset": {
+      "scpi": ":CHANnel3:OFFSet <offset>",
+      "description": "CH3 Offset",
+      "group": "Channel 3 Vertical",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_3"
+    },
+    "CH3_Probe": {
+      "scpi": ":CHANnel3:PROBe <atten>",
+      "description": "CH3 Probe",
+      "group": "Channel 3 Vertical",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "Channel_3"
+    },
+    "CH3_Scale": {
+      "scpi": ":CHANnel3:SCALe <scale>",
+      "description": "CH3 Scale",
+      "group": "Channel 3 Vertical",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_3"
+    },
+    "CH4_BWLimit": {
+      "scpi": ":CHANnel4:BWLimit <limit>",
+      "description": "CH4 BWLimit",
+      "group": "Channel 4 Vertical",
+      "args": [
+        "limit"
+      ],
+      "subsystem": "Channel_4"
+    },
+    "CH4_Coupling": {
+      "scpi": ":CHANnel4:COUPling <coupling>",
+      "description": "CH4 Coupling",
+      "group": "Channel 4 Vertical",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "Channel_4"
+    },
+    "CH4_Offset": {
+      "scpi": ":CHANnel4:OFFSet <offset>",
+      "description": "CH4 Offset",
+      "group": "Channel 4 Vertical",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Channel_4"
+    },
+    "CH4_Probe": {
+      "scpi": ":CHANnel4:PROBe <atten>",
+      "description": "CH4 Probe",
+      "group": "Channel 4 Vertical",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "Channel_4"
+    },
+    "CH4_Scale": {
+      "scpi": ":CHANnel4:SCALe <scale>",
+      "description": "CH4 Scale",
+      "group": "Channel 4 Vertical",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Channel_4"
+    },
+    "Set_Bandwidth_Limit": {
+      "scpi": ":CHANnel<n>:BWLimit <limit>",
+      "description": "Set Bandwidth Limit",
+      "group": "Channel Settings",
+      "args": [
+        "limit"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Coupling": {
+      "scpi": ":CHANnel<n>:COUPling <coupling>",
+      "description": "Set Coupling",
+      "group": "Channel Settings",
+      "args": [
+        "coupling"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Display": {
+      "scpi": ":CHANnel<n>:DISPlay <state>",
+      "description": "Set Display",
+      "group": "Channel Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Edge_Level": {
+      "scpi": ":TRIGger:EDGe:LEVel <level>",
+      "description": "Set Edge Level",
+      "group": "Edge Trigger Configuration",
+      "args": [
+        "level"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Edge_Slope": {
+      "scpi": ":TRIGger:EDGe:SLOPe <slope>",
+      "description": "Set Edge Slope",
+      "group": "Edge Trigger Configuration",
+      "args": [
+        "slope"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Edge_Source": {
+      "scpi": ":TRIGger:EDGe:SOURce <source>",
+      "description": "Set Edge Source",
+      "group": "Edge Trigger Configuration",
+      "args": [
+        "source"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Measure_Source": {
+      "scpi": ":MEASure:SOURce <source>",
+      "description": "Set Measure Source",
+      "group": "Measurement Settings",
+      "args": [
+        "source"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Set_Trigger_Mode": {
+      "scpi": ":TRIGger:MODE <mode>",
+      "description": "Set Trigger Mode",
+      "group": "Trigger Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Timebase_Mode": {
+      "scpi": ":TIMebase:MODE <mode>",
+      "description": "Set Timebase Mode",
+      "group": "Horizontal Timebase Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Channel_Offset": {
+      "scpi": ":CHANnel<n>:OFFSet <offset>",
+      "description": "Set Channel Offset",
+      "group": "Channel Settings",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Timebase_Offset": {
+      "scpi": ":TIMebase:OFFSet <offset>",
+      "description": "Set Timebase Offset",
+      "group": "Horizontal Timebase Settings",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Probe": {
+      "scpi": ":CHANnel<n>:PROBe <atten>",
+      "description": "Set Probe",
+      "group": "Channel Settings",
+      "args": [
+        "atten"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Channel_Scale": {
+      "scpi": ":CHANnel<n>:SCALe <scale>",
+      "description": "Set Channel Scale",
+      "group": "Channel Settings",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Timebase_Scale": {
+      "scpi": ":TIMebase:SCALe <scale>",
+      "description": "Set Timebase Scale",
+      "group": "Horizontal Timebase Settings",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "TIMebase"
+    },
+    "Set_Sweep": {
+      "scpi": ":TRIGger:SWEep <sweep>",
+      "description": "Set Sweep",
+      "group": "Trigger Settings",
+      "args": [
+        "sweep"
+      ],
+      "subsystem": "TRIGger"
+    },
+    "Set_Units": {
+      "scpi": ":CHANnel<n>:UNITs <unit>",
+      "description": "Set Units",
+      "group": "Channel Settings",
+      "args": [
+        "unit"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Waveform_Format": {
+      "scpi": ":WAVeform:FORMat <format>",
+      "description": "Set Waveform Format",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "format"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Waveform_Mode": {
+      "scpi": ":WAVeform:MODE <mode>",
+      "description": "Set Waveform Mode",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Set_Waveform_Source": {
+      "scpi": ":WAVeform:SOURce <source>",
+      "description": "Set Waveform Source",
+      "group": "Waveform Data Transfer Settings",
+      "args": [
+        "source"
+      ],
+      "subsystem": "WAVeform"
+    },
+    "Show_Statistics": {
+      "scpi": ":MEASure:STATistic:DISPlay <state>",
+      "description": "Show Statistics",
+      "group": "Measurement Settings",
+      "args": [
+        "state"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Time_Offset": {
+      "scpi": ":TIMebase:MAIN:OFFSet <offset>",
+      "description": "Time Offset",
+      "group": "Timebase",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "Time"
+    },
+    "Time_Scale": {
+      "scpi": ":TIMebase:MAIN:SCALe <scale>",
+      "description": "Time Scale",
+      "group": "Timebase",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Time"
+    },
+    "Trigger_Level": {
+      "scpi": ":TRIGger:EDGe:LEVel <level>",
+      "description": "Trigger Level",
+      "group": "Trigger System",
+      "args": [
+        "level"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Trigger_Source": {
+      "scpi": ":TRIGger:EDGe:SOURce <source>",
+      "description": "Trigger Source",
+      "group": "Trigger System",
+      "args": [
+        "source"
+      ],
+      "subsystem": "Trigger"
+    },
+    "Trigger_Sweep": {
+      "scpi": ":TRIGger:SWEep <sweep>",
+      "description": "Trigger Sweep",
+      "group": "Trigger System",
+      "args": [
+        "sweep"
+      ],
+      "subsystem": "Trigger"
+    }
+  },
+  "do": {
+    "Auto": {
+      "scpi": ":AUTO",
+      "description": "Auto",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Auto_Scale": {
+      "scpi": ":AUToscale",
+      "description": "Auto Scale",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "CH1_OFF": {
+      "scpi": ":CHANnel1:DISPlay OFF",
+      "description": "CH1 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_1"
+    },
+    "CH1_ON": {
+      "scpi": ":CHANnel1:DISPlay ON",
+      "description": "CH1 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_1"
+    },
+    "CH2_OFF": {
+      "scpi": ":CHANnel2:DISPlay OFF",
+      "description": "CH2 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_2"
+    },
+    "CH2_ON": {
+      "scpi": ":CHANnel2:DISPlay ON",
+      "description": "CH2 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_2"
+    },
+    "CH3_OFF": {
+      "scpi": ":CHANnel3:DISPlay OFF",
+      "description": "CH3 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_3"
+    },
+    "CH3_ON": {
+      "scpi": ":CHANnel3:DISPlay ON",
+      "description": "CH3 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_3"
+    },
+    "CH4_OFF": {
+      "scpi": ":CHANnel4:DISPlay OFF",
+      "description": "CH4 OFF",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_4"
+    },
+    "CH4_ON": {
+      "scpi": ":CHANnel4:DISPlay ON",
+      "description": "CH4 ON",
+      "group": "Actions and Toggles",
+      "subsystem": "Channel_4"
+    },
+    "Clear": {
+      "scpi": ":CLEar",
+      "description": "Clear",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
+    "Execute Command": {
+      "scpi": ":MEASure:CLEar",
+      "description": "Execute Command",
+      "group": "Measurement Settings",
+      "subsystem": "MEASure"
+    },
+    "Force_Trigger": {
+      "scpi": ":TFORce",
+      "description": "Force Trigger",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Run": {
+      "scpi": ":RUN",
+      "description": "Run",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Single": {
+      "scpi": ":SINGle",
+      "description": "Single",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    },
+    "Stop": {
+      "scpi": ":STOP",
+      "description": "Stop",
+      "group": "Root Action Commands",
+      "subsystem": "Root"
+    }
+  },
+  "rig": {},
+  "nab": {
+    "Get_Stats_CH1": {
+      "scpi": ":MEASure:VPP? CHANnel1;:MEASure:VRMS? CHANnel1;:MEASure:FREQuency? CHANnel1;:MEASure:PDUTy? CHANnel1",
+      "description": "Get Stats CH1",
+      "group": "Channel 1 Stats",
+      "subsystem": "Channel_1"
+    },
+    "Get_Stats_CH2": {
+      "scpi": ":MEASure:VPP? CHANnel2;:MEASure:VRMS? CHANnel2;:MEASure:FREQuency? CHANnel2;:MEASure:PDUTy? CHANnel2",
+      "description": "Get Stats CH2",
+      "group": "Channel 2 Stats",
+      "subsystem": "Channel_2"
+    },
+    "Get_Stats_CH3": {
+      "scpi": ":MEASure:VPP? CHANnel3;:MEASure:VRMS? CHANnel3;:MEASure:FREQuency? CHANnel3;:MEASure:PDUTy? CHANnel3",
+      "description": "Get Stats CH3",
+      "group": "Channel 3 Stats",
+      "subsystem": "Channel_3"
+    },
+    "Get_Stats_CH4": {
+      "scpi": ":MEASure:VPP? CHANnel4;:MEASure:VRMS? CHANnel4;:MEASure:FREQuency? CHANnel4;:MEASure:PDUTy? CHANnel4",
+      "description": "Get Stats CH4",
+      "group": "Channel 4 Stats",
+      "subsystem": "Channel_4"
+    },
+    "Get_Status": {
+      "scpi": ":TRIGger:STATus?",
+      "description": "Get Status",
+      "group": "Trigger Status",
+      "subsystem": "TRIGger"
+    },
+    "Get_Waveform_Data": {
+      "scpi": ":WAVeform:DATA?",
+      "description": "Get Waveform Data",
+      "group": "Waveform Data Readbacks",
+      "subsystem": "WAVeform"
+    },
+    "Get_XInc": {
+      "scpi": ":WAVeform:XINC?",
+      "description": "Get XInc",
+      "group": "Scaling Parameters",
+      "subsystem": "WAVeform"
+    },
+    "Get_YInc": {
+      "scpi": ":WAVeform:YINC?",
+      "description": "Get YInc",
+      "group": "Scaling Parameters",
+      "subsystem": "WAVeform"
+    },
+    "Get_YOrigin": {
+      "scpi": ":WAVeform:YORigin?",
+      "description": "Get YOrigin",
+      "group": "Scaling Parameters",
+      "subsystem": "WAVeform"
+    },
+    "Get_YRef": {
+      "scpi": ":WAVeform:YREFerence?",
+      "description": "Get YRef",
+      "group": "Scaling Parameters",
+      "subsystem": "WAVeform"
+    },
+    "Measure_Frequency": {
+      "scpi": ":MEASure:ITEM? FREQ,<chan>",
+      "description": "Measure Frequency",
+      "group": "Immediate Measurement (:MEAS:ITEM?)",
+      "subsystem": "MEASure"
+    },
+    "Measure_Vpp": {
+      "scpi": ":MEASure:ITEM? VPP,<chan>",
+      "description": "Measure Vpp",
+      "group": "Immediate Measurement (:MEAS:ITEM?)",
+      "subsystem": "MEASure"
+    }
+  }
+}

@@ -1,5 +1,97 @@
 # Changelog
 
+## 2026-07-27 - Two Files Per Instrument · YAK Commands Become A Table
+
+Both halves of the instrument stack were data pretending to be a GUI. The
+authored panels needed five directories to hold five files, because the frontend
+builds tabs from folders and the templates had been shaped to match. The YAK
+command tables were worse: 176 files shaped like panels, with the actual
+model → command → SCPI table *pattern-matched out of them at load*. This makes
+each one what it is — panels stay a tree, commands become a table.
+
+### Instruments: two files, no folders
+
+- **`<Type>/<Type>.json` and `<Type>/<Type>_N.json`** — the instrument, and the
+  block that repeats. That is the whole layout; 21 directories are gone.
+  `Power/Instrument/One_instrument/psu_one.json` was two levels of folder around
+  one file, and it rendered as a pointless "One instrument" sub-tab.
+- **Sub-tabs come from top-level keys.** `Spectrum.json` holds `amplitude`,
+  `bandwidth`, `frequency`, `markers`, `traces`; the builder writes each to
+  `0_amplitude/`, `1_bandwidth/` … Key order is tab order. A key holding a MAP of
+  panels is one tab with several stacked — the Router's `Coax` tab is two cards —
+  which is the same either-a-node-or-a-map test `LoaderOrchestrator` already
+  makes on a file's own root. One key and one panel means no sub-tab at all.
+  `OaTopicMaker` strips the `<i>_` prefix, so numbering the tabs never moves a
+  widget's topic.
+- **Header decks live in the N file** as siblings of the `${n}` block, and a group
+  spec asks for one by name. Power keeps both of its decks — the bank of eight
+  gets the logger, the quads get the master interlock — out of one file.
+- **`manifest.json` names neither template path**; both are convention now, and
+  `panel`/`unit`/`exclude` are gone with the folders they addressed.
+- Verified by building the same simulated bench through the old and new builders:
+  52 panel files each way, every MQTT topic prefix and every panel node hash
+  identical, one intended difference (Power lost its stray sub-tab).
+
+### YAK: SET, DO, RIG, NAB
+
+- **One `commands.json` per model**, 515 commands across 15 models, bucketed
+  under the verb that handles it — so a panel author picks `yak_type` by reading
+  the file. Assignment is mechanical from the SCPI: `?` → NAB, no arguments → DO,
+  one argument → SET, two or more → RIG. `<chan>`/`<slot>`/`<marker_number>` are
+  not arguments; they identify the instance and are stamped per panel.
+  Each command carries `description`, `group` and `subsystem`; `scpi` is the only
+  field YAK reads.
+- **The model is declared, not inferred.** It used to be read off the file's
+  grandparent directory, so anything nested deeper than `<Model>/<Subsystem>/`
+  was filed under a folder name — `_Legacy_Commands`, `CHANnel`, `Commands` — and
+  **391 commands were reachable only through the search-every-model fallback**.
+- **555 phantom commands gone.** The extractor matched an `Execute Command` child
+  on any key, and every widget wraps its own in a `fields` object, so `fields`
+  was filed as a command 555 times — 40% of what loaded.
+- **32 silent collisions resolved.** Nothing enforced one definition per name and
+  the winner was whichever file `read_dir` returned last. On the Power modules
+  that decided between `INST:NSEL <chan>` and `INST:NSEL 1` — between addressing
+  your slot and addressing slot 1 whichever module you clicked. Thirteen scope
+  commands existed as per-channel copies (`CHANnel1:SCALe`, `CHANnel2:SCALe`, …)
+  and collapse to `CHANnel<n>:SCALe`.
+- **`<channel>` → `<chan>` throughout.** Only `<chan>` is ever stamped, so a
+  template spelled the long way reached `fill_placeholders` unfilled, matched no
+  payload key, and the verb refused to send — the module silently never switched
+  on. The two spellings were split across the modern and legacy trees.
+- **Seven names that covered two subsystems are split** — `Set_Scale` became
+  `Set_Channel_Scale` / `Set_Timebase_Scale`, likewise Offset, Range and Mode.
+  Nothing bound them yet, and it removes a trap: a panel asking for `Set_Scale`
+  had no way to say whether it meant a channel or the timebase.
+- **`Multimeter/34401A` folded into `DMM/34401A`** — same model, two family
+  folders, and two files declaring model `34401A` would collide at load.
+- `repository.rs` reads the declared table instead of walking for panel patterns,
+  warns instead of overwriting on a duplicate name, and announces when it falls
+  back to another model's command. `yak_crossref.py` reads the tables too.
+  `commands_tree.md` and `Raw Commands.txt` stay — hand-written SCPI reference,
+  and the source material for the tables still empty.
+
+### Two generated sheets
+
+- **`Yak/CommandList.csv` / `.xlsx`** — 515 rows: verb, command, description,
+  arguments, instance params, group, subsystem.
+- **`Instruments/Instrument functions.csv` / `.xlsx`** — 221 rows, one per
+  control: tab, panel, block path, widget type, and whether it is driven by a
+  `yak_handler` or still by literal SCPI (87 / 84, plus 49 unbound).
+
+Both are reports regenerated from the JSON, not sources.
+
+### Still broken, now visible
+
+- **The Router panels have never worked.** 24 bindings to `Set_Relay_Card4` …
+  `Set_Relay_Card9`; `Router/3235` offers `Close_Channels` / `Open_Channels` /
+  `Select_Channel`. Predates this work. `yak_crossref.py` counts a widget as
+  BOUND when it carries a `yak_handler` without checking the command resolves,
+  which is why it reports the Router as finished.
+- **84 controls still carry literal SCPI** in `message_details.*.command_value`,
+  which is inert — only YAK translates and routes. 12 are dead duplicates beside
+  a working handler; the rest need binding, and `LCR/4263A` and
+  `Distortion/HP_8903B` need a vocabulary written before they can be.
+
 ## 2026-07-27 - Instruments Become Instances · YAK Drives Real Hardware · Discovery You Can Watch
 
 A bench with eight 34401As had one DMM tab. Panels were a *display* of an

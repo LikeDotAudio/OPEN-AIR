@@ -1,0 +1,516 @@
+Family,Model,Verb,Command,Description,SCPI,Arguments,Instance params,Group,Subsystem,SCPI statements,File
+DMM,34401A,DO,Abort,Abort,:ABORt,,,Trigger System,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,DO,Auto_Zero_OFF,Auto Zero OFF,:SENSe:ZERO:AUTO OFF,,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,DO,Auto_Zero_ON,Auto Zero ON,:SENSe:ZERO:AUTO ON,,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,DO,Clear_Display,Clear Display,:DISPlay:TEXT:CLEar,,,System Utilities,SYSTem,1,DMM/34401A/commands.json
+DMM,34401A,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,DMM/34401A/commands.json
+DMM,34401A,DO,Initiate,Initiate,:INITiate,,,Trigger System,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,DO,Reset_Device,Reset Device,*RST,,,Common Commands,Common,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_AC_Current,Select AC Current,:CONFigure:CURRent:AC,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_AC_Volts,Select AC Volts,:CONFigure:VOLTage:AC,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_Continuity,"Fixed 1 kOhm range, beeper on threshold — no range argument exists for this function",:CONFigure:CONTinuity,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_DC_Current,Select DC Current,:CONFigure:CURRent:DC,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_DC_Volts,Select DC Volts,:CONFigure:VOLTage:DC,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_Diode,"Fixed 1 mA / 1 V test, likewise argument-free",:CONFigure:DIODe,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_Resistance_2W,Select Resistance 2W,:CONFigure:RESistance,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,DO,Select_Resistance_4W,Select Resistance 4W,:CONFigure:FRESistance,,,One command per measurement function,Panel,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Fetch_Existing,Fetch Existing,:FETCh?,,,Fetch data after INITiate,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,MEASure_Resistance,MEASure Resistance,MEASure:RESistance?,,,MEASure Queries,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,MEASure_Voltage_AC,MEASure Voltage AC,MEASure:VOLTage:AC?,,,MEASure Queries,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,MEASure_Voltage_DC,MEASure Voltage DC,MEASure:VOLTage:DC?,,,MEASure Queries,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Measure_AC_Voltage,Measure AC Voltage,":MEASure:VOLTage:AC? <range>,<resolution>",range; resolution,,Configure and Measure immediately,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Measure_DC_Current,Measure DC Current,":MEASure:CURRent:DC? <range>,<resolution>",range; resolution,,Configure and Measure immediately,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Measure_DC_Voltage,Measure DC Voltage,":MEASure:VOLTage:DC? <range>,<resolution>",range; resolution,,Configure and Measure immediately,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Measure_Frequency,Measure Frequency,":MEASure:FREQuency? <range>,<resolution>",range; resolution,,Configure and Measure immediately,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Measure_Resistance_2Wire,Measure Resistance (2W),":MEASure:RESistance? <range>,<resolution>",range; resolution,,Configure and Measure immediately,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Query_Average,Query Average,:CALCulate:AVERage:AVERage?,,,Statistics and Calc Results,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Query_Max,Query Max,:CALCulate:AVERage:MAXimum?,,,Statistics and Calc Results,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Query_Min,Query Min,:CALCulate:AVERage:MINimum?,,,Statistics and Calc Results,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Read_Error,Read Error,:SYSTem:ERRor?,,,System Utilities,SYSTem,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Read_IDN,Read IDN,*IDN?,,,Common Commands,Common,1,DMM/34401A/commands.json
+DMM,34401A,NAB,Read_Next,Read Next,:READ?,,,Fetch data after INITiate,MEASure,1,DMM/34401A/commands.json
+DMM,34401A,RIG,Config_AC_Volts,Config AC Volts,":CONFigure:VOLTage:AC <range>,<resolution>",range; resolution,,Preset meter for specific function,CONFigure,1,DMM/34401A/commands.json
+DMM,34401A,RIG,Config_DC_Volts,Config DC Volts,":CONFigure:VOLTage:DC <range>,<resolution>",range; resolution,,Preset meter for specific function,CONFigure,1,DMM/34401A/commands.json
+DMM,34401A,RIG,Config_Resistance_4Wire,Config Resistance 4Wire,":CONFigure:FRESistance <range>,<resolution>",range; resolution,,Preset meter for specific function,CONFigure,1,DMM/34401A/commands.json
+DMM,34401A,RIG,Config_Temperature,Config Temperature,":CONFigure:TEMPerature <probe_type>,<sensor_type>",probe_type; sensor_type,,Preset meter for specific function,CONFigure,1,DMM/34401A/commands.json
+DMM,34401A,SET,Display_Text,Display Text,:DISPlay:TEXT <string>,string,,System Utilities,SYSTem,1,DMM/34401A/commands.json
+DMM,34401A,SET,Enable_Math,Enable Math,:CALCulate:STATe <state>,state,,Math and Limits Setup,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_AC_Bandwidth,Set AC Bandwidth,:SENSe:VOLTage:AC:BANDwidth <filter>,filter,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Autorange,Set Autorange,:SENSe:VOLTage:DC:RANGe:AUTO <state>,state,,"SCOPED TO DC VOLTS on purpose: the 34401A has no function-agnostic autorange command, so :SENSe:VOLTage:DC:RANGe:AUTO is what a panel AUTO RANGE control can address. Selecting another function turns its own autorange on by default, which is why this is adequate for a bench panel and would not be for a test sequence.",Panel,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_DCV_Range,Set DCV Range,:SENSe:VOLTage:DC:RANGe <range>,range,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Input_Impedance,Set Input Impedance,:INPut:IMPedance:AUTO <state>,state,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Integration_NPLC,Set Integration NPLC,:SENSe:VOLTage:DC:NPLC <nplc>,nplc,,Measurement Parameters,SENSe,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Math_Function,Set Math Function,:CALCulate:FUNCtion <function>,function,,Math and Limits Setup,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Null_Offset,Set Null Offset,:CALCulate:NULL:OFFSet <value>,value,,Math and Limits Setup,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Sample_Count,Set Sample Count,:SAMPle:COUNt <count>,count,,Setup Trigger Model,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Trigger_Count,Set Trigger Count,:TRIGger:COUNt <count>,count,,Setup Trigger Model,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Trigger_Delay,Set Trigger Delay,:TRIGger:DELay <delay>,delay,,Setup Trigger Model,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_Trigger_Source,Set Trigger Source,:TRIGger:SOURce <source>,source,,Setup Trigger Model,TRIGger,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_dB_Ref,Set dB Ref,:CALCulate:DB:REFerence <value>,value,,Math and Limits Setup,CALCulate,1,DMM/34401A/commands.json
+DMM,34401A,SET,Set_dBm_Ref,Set dBm Ref,:CALCulate:DBM:REFerence <value>,value,,Math and Limits Setup,CALCulate,1,DMM/34401A/commands.json
+Distortion,Porta_one,DO,Do_Clear_Status,Do Clear Status,*CLS,,,Global Utilities,System,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Do_Display_Panel,Do Display Panel,:DISPlay PANel,,,Global Utilities,System,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Do_Output_OFF,Do Output OFF,:OUTPut OFF,,,Master Generator Output,System,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Do_Output_ON,Do Output ON,:OUTPut ON,,,Master Generator Output,System,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Do_Reset,Do Reset,*RST,,,Global Utilities,System,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_Amplitude,Mode Amplitude,:FUNCtion AMPLitude,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_Crosstalk,Mode Crosstalk,:FUNCtion XTALK,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_Level_Stereo,Mode Level Stereo,:FUNCtion LEVel,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_Noise,Mode Noise,:FUNCtion NOISE,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_Phase,Mode Phase,:FUNCtion PHASE,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_SINAD,Mode SINAD,:FUNCtion SINad,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Mode_THD_N,Mode THD N,:FUNCtion THD,,,Select Measurement Mode,Channel_AB,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_DIN_BNC,Select DIN BNC,:DINPut BNC,,,Select Digital Input Connector,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_DIN_Generator,Select DIN Generator,:DINPut GENerator,,,Select Digital Input Connector,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_DIN_Optical,Select DIN Optical,:DINPut OPTical,,,Select Digital Input Connector,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_DIN_XLR,Select DIN XLR,:DINPut XLR,,,Select Digital Input Connector,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_Input_Analog_A,Select Input Analog A,:INPut A,,,Route signals to Analyzer A,Channel_A,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_Input_Analog_B,Select Input Analog B,:INPut B,,,Route signals to Analyzer B,Channel_B,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_Input_Gen_Monitor_A,Select Input Gen Monitor A,:INPut GENA,,,Route signals to Analyzer A,Channel_A,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Select_Input_Gen_Monitor_B,Select Input Gen Monitor B,:INPut GENB,,,Route signals to Analyzer B,Channel_B,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_DOUT_OFF,Set DOUT OFF,:DOUTput OFF,,,Digital Output State,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_DOUT_ON,Set DOUT ON,:DOUTput ON,,,Digital Output State,Digital,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Unit_Volts,Set Unit Volts,:AUNits V,,,Select Output Unit (M1/M2),Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Unit_Watts,Set Unit Watts,:AUNits W,,,Select Output Unit (M1/M2),Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Unit_dBV,Set Unit dBV,:AUNits DBV,,,Select Output Unit (M1/M2),Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Unit_dBm,Set Unit dBm,:AUNits DBM,,,Select Output Unit (M1/M2),Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Unit_dBu,Set Unit dBu,:AUNits DBU,,,Select Output Unit (M1/M2),Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Wave_IMD,Set Wave IMD,:WAVeform IMD,,,Select Waveform Shape,Signal_Generator,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Wave_Sine,Set Wave Sine,:WAVeform SINE,,,Select Waveform Shape,Signal_Generator,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Set_Wave_Square,Set Wave Square,:WAVeform SQUare,,,Select Waveform Shape,Signal_Generator,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,NAB,Read_Ch_A_Only,Read Ch A Only,M1?,,,Read Commands,Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,NAB,Read_Ch_B_Only,Read Ch B Only,M2?,,,Read Commands,Measurements,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,NAB,Read_Stereo_AB,Read Stereo AB,M1?;M2?,,,Read Commands,Measurements,2,Distortion/Porta_one/commands.json
+Distortion,Porta_one,SET,Set_Amplitude,Set Amplitude,:GAMPlitude <amp>,amp,,Set Signal Parameters,Signal_Generator,1,Distortion/Porta_one/commands.json
+Distortion,Porta_one,SET,Set_Frequency,Set Frequency,:GFREquency <freq>,freq,,Set Signal Parameters,Signal_Generator,1,Distortion/Porta_one/commands.json
+Generator,33210A,DO,AM_State_OFF,AM State OFF,AM:STATe OFF,,,Modulation Control,Modulation,1,Generator/33210A/commands.json
+Generator,33210A,DO,AM_State_ON,AM State ON,AM:STATe ON,,,Modulation Control,Modulation,1,Generator/33210A/commands.json
+Generator,33210A,DO,Clear_Text,Clear Text,DISPlay:TEXT:CLEar,,,System Actions,System,1,Generator/33210A/commands.json
+Generator,33210A,DO,FM_State_OFF,FM State OFF,FM:STATe OFF,,,Modulation Control,Modulation,1,Generator/33210A/commands.json
+Generator,33210A,DO,FM_State_ON,FM State ON,FM:STATe ON,,,Modulation Control,Modulation,1,Generator/33210A/commands.json
+Generator,33210A,DO,Output_OFF,Output OFF,OUTPut OFF,,,Output Control,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,DO,Output_ON,Output ON,OUTPut ON,,,Output Control,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,DO,Reset_Device,Reset Device,*RST,,,System Actions,System,1,Generator/33210A/commands.json
+Generator,33210A,DO,Sync_OFF,Sync OFF,OUTPut:SYNC OFF,,,Output Control,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,DO,Sync_ON,Sync ON,OUTPut:SYNC ON,,,Output Control,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,System Actions,System,1,Generator/33210A/commands.json
+Generator,33210A,NAB,Get_Apply_String,Get Apply String,APPLy?,,,APPLy Readbacks,APPLy,1,Generator/33210A/commands.json
+Generator,33210A,NAB,Get_Error_Queue,Get Error Queue,SYSTem:ERRor?,,,System Readbacks,System,1,Generator/33210A/commands.json
+Generator,33210A,NAB,Get_Output_State,Get Output State,OUTPut?,,,Output Status,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,RIG,Apply_Pulse,Apply Pulse,"APPLy:PULSe <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33210A/commands.json
+Generator,33210A,RIG,Apply_Sine,Apply Sine,"APPLy:SINusoid <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33210A/commands.json
+Generator,33210A,RIG,Apply_Square,Apply Square,"APPLy:SQUare <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33210A/commands.json
+Generator,33210A,RIG,Setup_AM,Setup AM,AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>,shape; freq; depth,,Modulation Setup,Modulation,3,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Amplitude,Set Amplitude,VOLTage <amp>,amp,,SOURce Configuration,SOURce,1,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Frequency,Set Frequency,FREQuency <freq>,freq,,SOURce Configuration,SOURce,1,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Function_Shape,Set Function Shape,FUNCtion <shape>,shape,,SOURce Configuration,SOURce,1,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Offset,Set Offset,VOLTage:OFFSet <offset>,offset,,SOURce Configuration,SOURce,1,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Output_Load,Set Output Load,OUTPut:LOAD <ohms>,ohms,,OUTPut Configuration,OUTPut,1,Generator/33210A/commands.json
+Generator,33210A,SET,Set_Voltage_Unit,Set Voltage Unit,VOLTage:UNIT <unit>,unit,,SOURce Configuration,SOURce,1,Generator/33210A/commands.json
+Generator,33210A,SET,Setup_Pulse_Width,Setup Pulse Width,FUNCtion:PULSe:WIDTh <width_sec>,width_sec,,PULSe Configuration,PULSe,1,Generator/33210A/commands.json
+Generator,33220A,DO,AM_State_OFF,AM State OFF,AM:STATe OFF,,,Modulation Control,Modulation,1,Generator/33220A/commands.json
+Generator,33220A,DO,AM_State_ON,AM State ON,AM:STATe ON,,,Modulation Control,Modulation,1,Generator/33220A/commands.json
+Generator,33220A,DO,Clear_Text,Clear Text,DISPlay:TEXT:CLEar,,,System Actions,System,1,Generator/33220A/commands.json
+Generator,33220A,DO,FM_State_OFF,FM State OFF,FM:STATe OFF,,,Modulation Control,Modulation,1,Generator/33220A/commands.json
+Generator,33220A,DO,FM_State_ON,FM State ON,FM:STATe ON,,,Modulation Control,Modulation,1,Generator/33220A/commands.json
+Generator,33220A,DO,Output_OFF,Output OFF,OUTPut OFF,,,Output Control,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,DO,Output_ON,Output ON,OUTPut ON,,,Output Control,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,DO,Reset_Device,Reset Device,*RST,,,System Actions,System,1,Generator/33220A/commands.json
+Generator,33220A,DO,Sync_OFF,Sync OFF,OUTPut:SYNC OFF,,,Output Control,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,DO,Sync_ON,Sync ON,OUTPut:SYNC ON,,,Output Control,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,System Actions,System,1,Generator/33220A/commands.json
+Generator,33220A,NAB,Get_Apply_String,Get Apply String,APPLy?,,,APPLy Readbacks,APPLy,1,Generator/33220A/commands.json
+Generator,33220A,NAB,Get_Error_Queue,Get Error Queue,SYSTem:ERRor?,,,System Readbacks,System,1,Generator/33220A/commands.json
+Generator,33220A,NAB,Get_Output_State,Get Output State,OUTPut?,,,Output Status,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,RIG,Apply_Pulse,Apply Pulse,"APPLy:PULSe <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33220A/commands.json
+Generator,33220A,RIG,Apply_Sine,Apply Sine,"APPLy:SINusoid <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33220A/commands.json
+Generator,33220A,RIG,Apply_Square,Apply Square,"APPLy:SQUare <freq>, <amp>, <offset>",freq; amp; offset,,APPLy Macro Commands,APPLy,1,Generator/33220A/commands.json
+Generator,33220A,RIG,Setup_AM,Setup AM,AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>,shape; freq; depth,,Modulation Setup,Modulation,3,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Amplitude,Set Amplitude,VOLTage <amp>,amp,,SOURce Configuration,SOURce,1,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Frequency,Set Frequency,FREQuency <freq>,freq,,SOURce Configuration,SOURce,1,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Function_Shape,Set Function Shape,FUNCtion <shape>,shape,,SOURce Configuration,SOURce,1,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Offset,Set Offset,VOLTage:OFFSet <offset>,offset,,SOURce Configuration,SOURce,1,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Output_Load,Set Output Load,OUTPut:LOAD <ohms>,ohms,,OUTPut Configuration,OUTPut,1,Generator/33220A/commands.json
+Generator,33220A,SET,Set_Voltage_Unit,Set Voltage Unit,VOLTage:UNIT <unit>,unit,,SOURce Configuration,SOURce,1,Generator/33220A/commands.json
+Generator,33220A,SET,Setup_Pulse_Width,Setup Pulse Width,FUNCtion:PULSe:WIDTh <width_sec>,width_sec,,PULSe Configuration,PULSe,1,Generator/33220A/commands.json
+Load,6060B,DO,Clear_Protection,Clear Protection,PROT:CLE,,,Input Control,INPut,1,Load/6060B/commands.json
+Load,6060B,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,Load/6060B/commands.json
+Load,6060B,DO,Input_OFF,Input OFF,INP OFF,,,Input Control,INPut,1,Load/6060B/commands.json
+Load,6060B,DO,Input_ON,Input ON,INP ON,,,Input Control,INPut,1,Load/6060B/commands.json
+Load,6060B,DO,Reset_Device,Reset Device,*RST,,,Common Commands,Common,1,Load/6060B/commands.json
+Load,6060B,DO,Set_Mode_Current,Set Mode Current,MODE:CURR,,,CC / CV / CR,MODE,1,Load/6060B/commands.json
+Load,6060B,DO,Set_Mode_Resistance,Set Mode Resistance,MODE:RES,,,CC / CV / CR,MODE,1,Load/6060B/commands.json
+Load,6060B,DO,Set_Mode_Voltage,Set Mode Voltage,MODE:VOLT,,,CC / CV / CR,MODE,1,Load/6060B/commands.json
+Load,6060B,DO,Transient_OFF,Transient OFF,TRAN:STAT OFF,,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,DO,Transient_ON,Transient ON,TRAN:STAT ON,,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,DO,Trigger,Trigger,*TRG,,,Actions and Toggles,,1,Load/6060B/commands.json
+Load,6060B,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,Trigger System,TRIGger,1,Load/6060B/commands.json
+Load,6060B,NAB,Error,Error,SYST:ERR?,,,System Utilities,SYSTem,1,Load/6060B/commands.json
+Load,6060B,NAB,IDN,IDN,*IDN?,,,Common Commands,Common,1,Load/6060B/commands.json
+Load,6060B,NAB,Measure_All,Measure All,MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?,,,Readback Queries,MEASure,4,Load/6060B/commands.json
+Load,6060B,NAB,Status_Byte,Status Byte,*STB?,,,Status Registers,STATus,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Current_Level,Set Current Level,CURR <value>,value,,Constant Current Parameters,CURRent,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Current_Range,Set Current Range,CURR:RANG <value>,value,,Constant Current Parameters,CURRent,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Current_Slew,Set Current Slew,CURR:SLEW <value>,value,,Constant Current Parameters,CURRent,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Resistance_Level,Set Resistance Level,RES <value>,value,,Constant Resistance Parameters,RESistance,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Resistance_Range,Set Resistance Range,RES:RANG <value>,value,,Constant Resistance Parameters,RESistance,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Transient_Duty,Set Transient Duty,TRAN:DCYC <value>,value,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Transient_Freq,Set Transient Freq,TRAN:FREQ <value>,value,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Transient_Level_A,Set Transient Level A,CURR:LEV <value>,value,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Transient_Level_B,Set Transient Level B,CURR:TLEV <value>,value,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Transient_Mode,Set Transient Mode,TRAN:MODE <mode>,mode,,Pulse & Dynamic Loading,TRANsient,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Voltage_Level,Set Voltage Level,VOLT <value>,value,,Constant Voltage Parameters,VOLTage,1,Load/6060B/commands.json
+Load,6060B,SET,Set_Voltage_Range,Set Voltage Range,VOLT:RANG <value>,value,,Constant Voltage Parameters,VOLTage,1,Load/6060B/commands.json
+Power,66101A,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,Power/66101A/commands.json
+Power,66101A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,chan,Output Control,OUTPut,2,Power/66101A/commands.json
+Power,66101A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,chan,Output Control,OUTPut,2,Power/66101A/commands.json
+Power,66101A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,Individual Output Control,,2,Power/66101A/commands.json
+Power,66101A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,Individual Output Control,,2,Power/66101A/commands.json
+Power,66101A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,chan,Channel Selection,INSTrument,1,Power/66101A/commands.json
+Power,66101A,DO,System_Reset,System Reset,*RST,,,Common Commands,Common,1,Power/66101A/commands.json
+Power,66101A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,Trigger System,TRIGger,1,Power/66101A/commands.json
+Power,66101A,NAB,Get_Values,Get Values,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,Readback Queries,MEASure,3,Power/66101A/commands.json
+Power,66101A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,Status Registers,STATus,1,Power/66101A/commands.json
+Power,66101A,NAB,Read_Error,Read Error,SYST:ERR?,,,System Utilities,SYSTem,1,Power/66101A/commands.json
+Power,66101A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,volt; curr,chan,Configuration,SOURce,3,Power/66101A/commands.json
+Power,66101A,RIG,Set_S1_Levels,Set S1 Levels,INST:NSEL 1;VOLT <volt>;CURR <curr>,volt; curr,,Configuration (Volts/Amps),,3,Power/66101A/commands.json
+Power,66102A,DO,Clear_Protection,Clear Protection,INST:NSEL <chan>;OUTP:PROT:CLE,,chan,Output Control,,2,Power/66102A/commands.json
+Power,66102A,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,Power/66102A/commands.json
+Power,66102A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,chan,Output Control,OUTPut,2,Power/66102A/commands.json
+Power,66102A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,chan,Output Control,OUTPut,2,Power/66102A/commands.json
+Power,66102A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,chan,Output Control,,2,Power/66102A/commands.json
+Power,66102A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,Individual Output Control,,2,Power/66102A/commands.json
+Power,66102A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,Individual Output Control,,2,Power/66102A/commands.json
+Power,66102A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,chan,Channel Selection,INSTrument,1,Power/66102A/commands.json
+Power,66102A,DO,System_Reset,System Reset,*RST,,,Common Commands,Common,1,Power/66102A/commands.json
+Power,66102A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,Trigger System,TRIGger,1,Power/66102A/commands.json
+Power,66102A,NAB,Get_Values,Get Values,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,Readback Queries,MEASure,3,Power/66102A/commands.json
+Power,66102A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,Status Registers,STATus,1,Power/66102A/commands.json
+Power,66102A,NAB,Read_Error,Read Error,SYST:ERR?,,,System Utilities,SYSTem,1,Power/66102A/commands.json
+Power,66102A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,MPS Metering,,3,Power/66102A/commands.json
+Power,66102A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,volt; curr,chan,Configuration,SOURce,3,Power/66102A/commands.json
+Power,66102A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,ovp_level; ocp_state,chan,MPS Settings,,3,Power/66102A/commands.json
+Power,66102A,RIG,Set_S1_Levels,Set S1 Levels,INST:NSEL 1;VOLT <volt>;CURR <curr>,volt; curr,,Configuration (Volts/Amps),,3,Power/66102A/commands.json
+Power,66102A,RIG,Set_Voltage_Current,Set Voltage Current,INST:NSEL <chan>;VOLT <voltage>;CURR <current>,voltage; current,chan,MPS Settings,,3,Power/66102A/commands.json
+Power,66103A,DO,Clear_Protection,Clear Protection,INST:NSEL <chan>;OUTP:PROT:CLE,,chan,Output Control,,2,Power/66103A/commands.json
+Power,66103A,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,Power/66103A/commands.json
+Power,66103A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,chan,Output Control,OUTPut,2,Power/66103A/commands.json
+Power,66103A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,chan,Output Control,OUTPut,2,Power/66103A/commands.json
+Power,66103A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,chan,Output Control,,2,Power/66103A/commands.json
+Power,66103A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,Individual Output Control,,2,Power/66103A/commands.json
+Power,66103A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,Individual Output Control,,2,Power/66103A/commands.json
+Power,66103A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,chan,Channel Selection,INSTrument,1,Power/66103A/commands.json
+Power,66103A,DO,System_Reset,System Reset,*RST,,,Common Commands,Common,1,Power/66103A/commands.json
+Power,66103A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,Trigger System,TRIGger,1,Power/66103A/commands.json
+Power,66103A,NAB,Get_Values,Get Values,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,Readback Queries,MEASure,3,Power/66103A/commands.json
+Power,66103A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,Status Registers,STATus,1,Power/66103A/commands.json
+Power,66103A,NAB,Read_Error,Read Error,SYST:ERR?,,,System Utilities,SYSTem,1,Power/66103A/commands.json
+Power,66103A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,MPS Metering,,3,Power/66103A/commands.json
+Power,66103A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,volt; curr,chan,Configuration,SOURce,3,Power/66103A/commands.json
+Power,66103A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,ovp_level; ocp_state,chan,MPS Settings,,3,Power/66103A/commands.json
+Power,66103A,RIG,Set_S1_Levels,Set S1 Levels,INST:NSEL 1;VOLT <volt>;CURR <curr>,volt; curr,,Configuration (Volts/Amps),,3,Power/66103A/commands.json
+Power,66103A,RIG,Set_Voltage_Current,Set Voltage Current,INST:NSEL <chan>;VOLT <voltage>;CURR <current>,voltage; current,chan,MPS Settings,,3,Power/66103A/commands.json
+Power,66104A,DO,Clear_Protection,Clear Protection,INST:NSEL <chan>;OUTP:PROT:CLE,,chan,Output Control,,2,Power/66104A/commands.json
+Power,66104A,DO,Clear_Status,Clear Status,*CLS,,,Common Commands,Common,1,Power/66104A/commands.json
+Power,66104A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,chan,Output Control,OUTPut,2,Power/66104A/commands.json
+Power,66104A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,chan,Output Control,OUTPut,2,Power/66104A/commands.json
+Power,66104A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,chan,Output Control,,2,Power/66104A/commands.json
+Power,66104A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,Individual Output Control,,2,Power/66104A/commands.json
+Power,66104A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,Individual Output Control,,2,Power/66104A/commands.json
+Power,66104A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,chan,Channel Selection,INSTrument,1,Power/66104A/commands.json
+Power,66104A,DO,System_Reset,System Reset,*RST,,,Common Commands,Common,1,Power/66104A/commands.json
+Power,66104A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,Trigger System,TRIGger,1,Power/66104A/commands.json
+Power,66104A,NAB,Get_Values,Get Values,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,Readback Queries,MEASure,3,Power/66104A/commands.json
+Power,66104A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,Status Registers,STATus,1,Power/66104A/commands.json
+Power,66104A,NAB,Read_Error,Read Error,SYST:ERR?,,,System Utilities,SYSTem,1,Power/66104A/commands.json
+Power,66104A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,chan,MPS Metering,,3,Power/66104A/commands.json
+Power,66104A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,volt; curr,chan,Configuration,SOURce,3,Power/66104A/commands.json
+Power,66104A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,ovp_level; ocp_state,chan,MPS Settings,,3,Power/66104A/commands.json
+Power,66104A,RIG,Set_S1_Levels,Set S1 Levels,INST:NSEL 1;VOLT <volt>;CURR <curr>,volt; curr,,Configuration (Volts/Amps),,3,Power/66104A/commands.json
+Power,66104A,RIG,Set_Voltage_Current,Set Voltage Current,INST:NSEL <chan>;VOLT <voltage>;CURR <current>,voltage; current,chan,MPS Settings,,3,Power/66104A/commands.json
+Router,3235,DO,Card_Reset,Card Reset,CRESET <slot>,,slot,System Reset & Control,,1,Router/3235/commands.json
+Router,3235,DO,Clear_State,Clear State,CLR,,,System Reset & Control,,1,Router/3235/commands.json
+Router,3235,DO,Reset_System,Reset System,RESET,,,System Reset & Control,,1,Router/3235/commands.json
+Router,3235,DO,Select_Channel,Select Channel,SELECT <chan>,,chan,Break-Before-Make,,1,Router/3235/commands.json
+Router,3235,NAB,Query_Channel_State,Query Channel State,CLOSE? <chan>,,chan,Query specific relay state,,1,Router/3235/commands.json
+Router,3235,NAB,Query_Slot_ID,Query Slot ID,ID? <slot>,,slot,Hardware Identification,,1,Router/3235/commands.json
+Router,3235,SET,Close_Channels,Close Channels,CLOSE <channel_list>,channel_list,,Close Relays,,1,Router/3235/commands.json
+Router,3235,SET,Open_Channels,Open Channels,OPEN <channel_list>,channel_list,,Open Relays,,1,Router/3235/commands.json
+Scope,54641D,DO,Autoscale,Autoscale,AUToscale,,,Root Action Commands,Root,1,Scope/54641D/commands.json
+Scope,54641D,DO,Digitize_Channel,Digitize Channel,DIGitize <chan>,,chan,Root Action Commands,Root,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Autoscale,Do Autoscale,:AUToscale,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_CH1_OFF,Do CH1 OFF,:CHANnel1:DISPlay OFF,,,Actions and Toggles,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_CH1_ON,Do CH1 ON,:CHANnel1:DISPlay ON,,,Actions and Toggles,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_CH2_OFF,Do CH2 OFF,:CHANnel2:DISPlay OFF,,,Actions and Toggles,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_CH2_ON,Do CH2 ON,:CHANnel2:DISPlay ON,,,Actions and Toggles,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Clear_Display,Do Clear Display,:DISPlay:CLEar,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Clear_Status,Do Clear Status,*CLS,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Math_OFF,Do Math OFF,:FUNCtion:DISPlay OFF,,,Math Display Controls,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Math_ON,Do Math ON,:FUNCtion:DISPlay ON,,,Math Display Controls,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Reset,Do Reset,*RST,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Run,Do Run,:RUN,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Single,Do Single,:SINGle,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Do_Stop,Do Stop,:STOP,,,Actions and Toggles,System,1,Scope/54641D/commands.json
+Scope,54641D,DO,Run,Run,RUN,,,Root Action Commands,Root,1,Scope/54641D/commands.json
+Scope,54641D,DO,Set_Source_CH1,Set Source CH1,:FUNCtion:SOURce CHANnel1,,,Source Selection,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,DO,Set_Source_CH2,Set Source CH2,:FUNCtion:SOURce CHANnel2,,,Source Selection,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,DO,Single,Single,SINGle,,,Root Action Commands,Root,1,Scope/54641D/commands.json
+Scope,54641D,DO,Stop,Stop,STOP,,,Root Action Commands,Root,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Error,Get Error,SYSTem:ERRor?,,,System Utilities,SYSTem,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Math_Statistics,Get Math Statistics,:MEASure:SOURce FUNCtion;:MEASure:VPP?;:MEASure:VMAX?;:MEASure:VMIN?;:MEASure:VAVerage?,,,Read statistics for the active Math function,Math_FFT,5,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Preamble,Get Preamble,WAVeform:PREamble?,,,Waveform Data Readbacks,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Sample_Rate,Get Sample Rate,ACQuire:SRATe?,,,Acquisition Readbacks,ACQuire,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Setup,Get Setup,SYSTem:SETup?,,,System Utilities,SYSTem,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Time_Stats_CH1,Get Time Stats CH1,:MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?,source,,Channel 1 Measurements,Channel_1,5,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Time_Stats_CH2,Get Time Stats CH2,:MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?,source,,Channel 2 Measurements,Channel_2,5,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Voltage_Stats_CH1,Get Voltage Stats CH1,:MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?,source,,Channel 1 Measurements,Channel_1,5,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Voltage_Stats_CH2,Get Voltage Stats CH2,:MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?,source,,Channel 2 Measurements,Channel_2,5,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Waveform_Data,Get Waveform Data,WAVeform:DATA?,,,Waveform Data Readbacks,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_X_Delta,Get X Delta,MARKer:XDELta?,,,Cursor Deltas,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Get_Y_Delta,Get Y Delta,MARKer:YDELta?,,,Cursor Deltas,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Read_Error,Read Error,:SYSTem:ERRor?,,,Errors and ID,System,1,Scope/54641D/commands.json
+Scope,54641D,NAB,Read_IDN,Read IDN,*IDN?,,,Errors and ID,System,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_BWLimit,CH1 BWLimit,:CHANnel1:BWLimit <state>,state,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Coupling,CH1 Coupling,:CHANnel1:COUPling <coupling>,coupling,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Invert,CH1 Invert,:CHANnel1:INVert <state>,state,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Label,CH1 Label,:CHANnel1:LABel <string>,string,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Offset,CH1 Offset,:CHANnel1:OFFSet <offset>,offset,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Probe,CH1 Probe,:CHANnel1:PROBe <attenuation>,attenuation,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH1_Scale,CH1 Scale,:CHANnel1:SCALe <scale>,scale,,Vertical Setup CH1,Channel_1,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_BWLimit,CH2 BWLimit,:CHANnel2:BWLimit <state>,state,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Coupling,CH2 Coupling,:CHANnel2:COUPling <coupling>,coupling,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Invert,CH2 Invert,:CHANnel2:INVert <state>,state,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Label,CH2 Label,:CHANnel2:LABel <string>,string,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Offset,CH2 Offset,:CHANnel2:OFFSet <offset>,offset,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Probe,CH2 Probe,:CHANnel2:PROBe <attenuation>,attenuation,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,CH2_Scale,CH2 Scale,:CHANnel2:SCALe <scale>,scale,,Vertical Setup CH2,Channel_2,1,Scope/54641D/commands.json
+Scope,54641D,SET,Lock_Front_Panel,Lock Front Panel,SYSTem:LOCK <state>,state,,System Control,SYSTem,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Acquire_Mode_AVERage,Set Acquire Mode AVERage,:ACQuire:TYPE <type>,type,,Acquire Mode & Averaging,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Acquire_Mode_HRESolution,Set Acquire Mode HRESolution,:ACQuire:TYPE <type>,type,,Acquire Mode & Averaging,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Acquire_Mode_NORMal,Set Acquire Mode NORMal,:ACQuire:TYPE <type>,type,,Acquire Mode & Averaging,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Acquire_Mode_PEAK,Set Acquire Mode PEAK,:ACQuire:TYPE <type>,type,,Acquire Mode & Averaging,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Acquire_Type,Set Acquire Type,ACQuire:TYPE <type>,type,,Acquisition Settings,ACQuire,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Average_Count,Set Average Count,ACQuire:COUNt <count>,count,,Acquisition Settings,ACQuire,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Averaging_Count,Set Averaging Count,:ACQuire:COUNt <count>,count,,Acquire Mode & Averaging,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Bandwidth_Limit,Set Bandwidth Limit,CHANnel<n>:BWLimit <state>,state,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Byte_Order,Set Byte Order,WAVeform:BYTeorder <order>,order,,Waveform Data Transfer Settings,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Center_Frequency,Set Center Frequency,:FUNCtion:CENTer <frequency>,frequency,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Channel_Offset,Set Channel Offset,CHANnel1:OFFSet <offset>,offset,,Channel 1 Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Channel_Range,Set Channel Range,CHANnel1:RANGe <range>,range,,Channel 1 Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Channel_Scale,Set Channel Scale,CHANnel1:SCALe <scale>,scale,,Channel 1 Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Coupling,Set Coupling,CHANnel<n>:COUPling <coupling>,coupling,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Digital_Display,Set Digital Display,DIGital<n>:DISPlay <state>,state,n,Digital Channel (MSO) Settings,DIGital,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Digital_Label,Set Digital Label,DIGital<n>:LABel <label>,label,n,Digital Channel (MSO) Settings,DIGital,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Digital_Position,Set Digital Position,DIGital<n>:POSition <pos>,pos,n,Digital Channel (MSO) Settings,DIGital,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Display,Set Display,CHANnel<n>:DISPlay <state>,state,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Edge_Slope,Set Edge Slope,TRIGger:EDGE:SLOPe <slope>,slope,,Edge Trigger Config,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Edge_Source,Set Edge Source,TRIGger:EDGE:SOURce <source>,source,,Edge Trigger Config,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Edge_Source_CH1,Set Edge Source CH1,:TRIGger:EDGE:SOURce <source>,source,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Edge_Source_CH2,Set Edge Source CH2,:TRIGger:EDGE:SOURce <source>,source,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Edge_Source_EXT,Set Edge Source EXT,:TRIGger:EDGE:SOURce <source>,source,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_FFT_Scale,Set FFT Scale,:FUNCtion:SCALe <scale>,scale,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Function_Operation,Set Function Operation,FUNCtion:OPERation <op>,op,,Math Function Settings,FUNCtion,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Glitch_Condition,Set Glitch Condition,TRIGger:GLITch:QUALifier <qual>,qual,,Glitch/Pulse Width Config,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Glitch_Source,Set Glitch Source,TRIGger:GLITch:SOURce <source>,source,,Glitch/Pulse Width Config,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Glitch_Width,Set Glitch Width,TRIGger:GLITch:LESSthan <time>,time,,Glitch/Pulse Width Config,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Holdoff,Set Holdoff,TRIGger:HOLDoff <time>,time,,Trigger Settings,TRIGger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Impedance,Set Impedance,CHANnel<n>:IMPedance <imp>,imp,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Invert,Set Invert,CHANnel<n>:INVert <state>,state,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Marker_Mode,Set Marker Mode,MARKer:MODE <mode>,mode,,Cursor Settings,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Math_Offset,Set Math Offset,:FUNCtion:OFFSet <offset>,offset,,Vertical Scale & Offset,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Math_Range,Set Math Range,:FUNCtion:RANGe <range>,range,,Vertical Scale & Offset,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Measure_Source,Set Measure Source,MEASure:SOURce <source>,source,,Measurement Settings,MEASure,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Measure_Thresholds,Set Measure Thresholds,MEASure:DEFine:THResholds <mode>,mode,,Measurement Settings,MEASure,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Mode,Set Mode,TIMebase:MODE <mode>,mode,,Timebase (Horizontal) Settings,TIMebase,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Operation,Set Operation,:FUNCtion:OPERation <operation>,operation,,Select Operation,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Pod_Threshold,Set Pod Threshold,POD<n>:THReshold <thresh>,thresh,n,Digital Channel (MSO) Settings,DIGital,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Points,Set Points,ACQuire:POINts <points>,points,,Acquisition Settings,ACQuire,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Position,Set Position,TIMebase:POSition <pos>,pos,,Timebase (Horizontal) Settings,TIMebase,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Probe,Set Probe,CHANnel<n>:PROBe <atten>,atten,n,Analog Channel Settings,CHANnel,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Reference,Set Reference,TIMebase:REFerence <ref>,ref,,Timebase (Horizontal) Settings,TIMebase,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Source1,Set Source1,FUNCtion:SOURce1 <src>,src,,Math Function Settings,FUNCtion,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Source2,Set Source2,FUNCtion:SOURce2 <src>,src,,Math Function Settings,FUNCtion,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Span,Set Span,:FUNCtion:SPAN <span>,span,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Timebase_Position,Set Timebase Position,:TIMebase:POSition <position>,position,,Horizontal Controls,Time,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Timebase_Scale,Set Timebase Scale,:TIMebase:SCALe <scale>,scale,,Horizontal Controls,Time,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Trigger_Level,Set Trigger Level,:TRIGger:EDGE:LEVel <level>,level,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Trigger_Mode,Set Trigger Mode,:TRIGger:MODE <mode>,mode,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Trigger_Sweep,Set Trigger Sweep,:TRIGger:SWEep <sweep>,sweep,,Trigger Configuration,Trigger,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Unsigned,Set Unsigned,WAVeform:UNSigned <state>,state,,Waveform Data Transfer Settings,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Waveform_Format,Set Waveform Format,WAVeform:FORMat <format>,format,,Waveform Data Transfer Settings,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Waveform_Points,Set Waveform Points,WAVeform:POINts <points>,points,,Waveform Data Transfer Settings,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Waveform_Source,Set Waveform Source,WAVeform:SOURce <source>,source,,Waveform Data Transfer Settings,WAVeform,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Window_FLATtop,Set Window FLATtop,:FUNCtion:WINDow <window>,window,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Window_HANNing,Set Window HANNing,:FUNCtion:WINDow <window>,window,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Window_Position,Set Window Position,TIMebase:WINDow:POSition <pos>,pos,,Zoom Window Settings,TIMebase,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Window_RECTangular,Set Window RECTangular,:FUNCtion:WINDow <window>,window,,FFT Specific Configuration,Math_FFT,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Window_Scale,Set Window Scale,TIMebase:WINDow:SCALe <scale>,scale,,Zoom Window Settings,TIMebase,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_X1,Set X1,MARKer:X1Position <pos>,pos,,Time/Frequency Markers,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_X2,Set X2,MARKer:X2Position <pos>,pos,,Time/Frequency Markers,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Y1,Set Y1,MARKer:Y1Position <lev>,lev,,Voltage Markers,MARKer,1,Scope/54641D/commands.json
+Scope,54641D,SET,Set_Y2,Set Y2,MARKer:Y2Position <lev>,lev,,Voltage Markers,MARKer,1,Scope/54641D/commands.json
+Scope,DS1104Z,DO,Auto,Auto,:AUTO,,,Root Action Commands,Root,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Auto_Scale,Auto Scale,:AUToscale,,,Actions and Toggles,System,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH1_OFF,CH1 OFF,:CHANnel1:DISPlay OFF,,,Actions and Toggles,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH1_ON,CH1 ON,:CHANnel1:DISPlay ON,,,Actions and Toggles,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH2_OFF,CH2 OFF,:CHANnel2:DISPlay OFF,,,Actions and Toggles,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH2_ON,CH2 ON,:CHANnel2:DISPlay ON,,,Actions and Toggles,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH3_OFF,CH3 OFF,:CHANnel3:DISPlay OFF,,,Actions and Toggles,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH3_ON,CH3 ON,:CHANnel3:DISPlay ON,,,Actions and Toggles,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH4_OFF,CH4 OFF,:CHANnel4:DISPlay OFF,,,Actions and Toggles,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,CH4_ON,CH4 ON,:CHANnel4:DISPlay ON,,,Actions and Toggles,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Clear,Clear,:CLEar,,,Actions and Toggles,System,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Execute Command,Execute Command,:MEASure:CLEar,,,Measurement Settings,MEASure,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Force_Trigger,Force Trigger,:TFORce,,,Root Action Commands,Root,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Run,Run,:RUN,,,Root Action Commands,Root,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Single,Single,:SINGle,,,Root Action Commands,Root,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,DO,Stop,Stop,:STOP,,,Root Action Commands,Root,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Stats_CH1,Get Stats CH1,:MEASure:VPP? CHANnel1;:MEASure:VRMS? CHANnel1;:MEASure:FREQuency? CHANnel1;:MEASure:PDUTy? CHANnel1,,,Channel 1 Stats,Channel_1,4,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Stats_CH2,Get Stats CH2,:MEASure:VPP? CHANnel2;:MEASure:VRMS? CHANnel2;:MEASure:FREQuency? CHANnel2;:MEASure:PDUTy? CHANnel2,,,Channel 2 Stats,Channel_2,4,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Stats_CH3,Get Stats CH3,:MEASure:VPP? CHANnel3;:MEASure:VRMS? CHANnel3;:MEASure:FREQuency? CHANnel3;:MEASure:PDUTy? CHANnel3,,,Channel 3 Stats,Channel_3,4,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Stats_CH4,Get Stats CH4,:MEASure:VPP? CHANnel4;:MEASure:VRMS? CHANnel4;:MEASure:FREQuency? CHANnel4;:MEASure:PDUTy? CHANnel4,,,Channel 4 Stats,Channel_4,4,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Status,Get Status,:TRIGger:STATus?,,,Trigger Status,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_Waveform_Data,Get Waveform Data,:WAVeform:DATA?,,,Waveform Data Readbacks,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_XInc,Get XInc,:WAVeform:XINC?,,,Scaling Parameters,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_YInc,Get YInc,:WAVeform:YINC?,,,Scaling Parameters,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_YOrigin,Get YOrigin,:WAVeform:YORigin?,,,Scaling Parameters,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Get_YRef,Get YRef,:WAVeform:YREFerence?,,,Scaling Parameters,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Measure_Frequency,Measure Frequency,":MEASure:ITEM? FREQ,<chan>",,chan,Immediate Measurement (:MEAS:ITEM?),MEASure,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,NAB,Measure_Vpp,Measure Vpp,":MEASure:ITEM? VPP,<chan>",,chan,Immediate Measurement (:MEAS:ITEM?),MEASure,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH1_BWLimit,CH1 BWLimit,:CHANnel1:BWLimit <limit>,limit,,Channel 1 Vertical,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH1_Coupling,CH1 Coupling,:CHANnel1:COUPling <coupling>,coupling,,Channel 1 Vertical,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH1_Offset,CH1 Offset,:CHANnel1:OFFSet <offset>,offset,,Channel 1 Vertical,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH1_Probe,CH1 Probe,:CHANnel1:PROBe <atten>,atten,,Channel 1 Vertical,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH1_Scale,CH1 Scale,:CHANnel1:SCALe <scale>,scale,,Channel 1 Vertical,Channel_1,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH2_BWLimit,CH2 BWLimit,:CHANnel2:BWLimit <limit>,limit,,Channel 2 Vertical,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH2_Coupling,CH2 Coupling,:CHANnel2:COUPling <coupling>,coupling,,Channel 2 Vertical,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH2_Offset,CH2 Offset,:CHANnel2:OFFSet <offset>,offset,,Channel 2 Vertical,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH2_Probe,CH2 Probe,:CHANnel2:PROBe <atten>,atten,,Channel 2 Vertical,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH2_Scale,CH2 Scale,:CHANnel2:SCALe <scale>,scale,,Channel 2 Vertical,Channel_2,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH3_BWLimit,CH3 BWLimit,:CHANnel3:BWLimit <limit>,limit,,Channel 3 Vertical,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH3_Coupling,CH3 Coupling,:CHANnel3:COUPling <coupling>,coupling,,Channel 3 Vertical,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH3_Offset,CH3 Offset,:CHANnel3:OFFSet <offset>,offset,,Channel 3 Vertical,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH3_Probe,CH3 Probe,:CHANnel3:PROBe <atten>,atten,,Channel 3 Vertical,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH3_Scale,CH3 Scale,:CHANnel3:SCALe <scale>,scale,,Channel 3 Vertical,Channel_3,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH4_BWLimit,CH4 BWLimit,:CHANnel4:BWLimit <limit>,limit,,Channel 4 Vertical,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH4_Coupling,CH4 Coupling,:CHANnel4:COUPling <coupling>,coupling,,Channel 4 Vertical,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH4_Offset,CH4 Offset,:CHANnel4:OFFSet <offset>,offset,,Channel 4 Vertical,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH4_Probe,CH4 Probe,:CHANnel4:PROBe <atten>,atten,,Channel 4 Vertical,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,CH4_Scale,CH4 Scale,:CHANnel4:SCALe <scale>,scale,,Channel 4 Vertical,Channel_4,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Bandwidth_Limit,Set Bandwidth Limit,:CHANnel<n>:BWLimit <limit>,limit,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Channel_Offset,Set Channel Offset,:CHANnel<n>:OFFSet <offset>,offset,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Channel_Scale,Set Channel Scale,:CHANnel<n>:SCALe <scale>,scale,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Coupling,Set Coupling,:CHANnel<n>:COUPling <coupling>,coupling,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Display,Set Display,:CHANnel<n>:DISPlay <state>,state,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Edge_Level,Set Edge Level,:TRIGger:EDGe:LEVel <level>,level,,Edge Trigger Configuration,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Edge_Slope,Set Edge Slope,:TRIGger:EDGe:SLOPe <slope>,slope,,Edge Trigger Configuration,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Edge_Source,Set Edge Source,:TRIGger:EDGe:SOURce <source>,source,,Edge Trigger Configuration,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Measure_Source,Set Measure Source,:MEASure:SOURce <source>,source,,Measurement Settings,MEASure,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Probe,Set Probe,:CHANnel<n>:PROBe <atten>,atten,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Sweep,Set Sweep,:TRIGger:SWEep <sweep>,sweep,,Trigger Settings,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Timebase_Mode,Set Timebase Mode,:TIMebase:MODE <mode>,mode,,Horizontal Timebase Settings,TIMebase,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Timebase_Offset,Set Timebase Offset,:TIMebase:OFFSet <offset>,offset,,Horizontal Timebase Settings,TIMebase,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Timebase_Scale,Set Timebase Scale,:TIMebase:SCALe <scale>,scale,,Horizontal Timebase Settings,TIMebase,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Trigger_Mode,Set Trigger Mode,:TRIGger:MODE <mode>,mode,,Trigger Settings,TRIGger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Units,Set Units,:CHANnel<n>:UNITs <unit>,unit,n,Channel Settings,CHANnel,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Waveform_Format,Set Waveform Format,:WAVeform:FORMat <format>,format,,Waveform Data Transfer Settings,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Waveform_Mode,Set Waveform Mode,:WAVeform:MODE <mode>,mode,,Waveform Data Transfer Settings,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Set_Waveform_Source,Set Waveform Source,:WAVeform:SOURce <source>,source,,Waveform Data Transfer Settings,WAVeform,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Show_Statistics,Show Statistics,:MEASure:STATistic:DISPlay <state>,state,,Measurement Settings,MEASure,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Time_Offset,Time Offset,:TIMebase:MAIN:OFFSet <offset>,offset,,Timebase,Time,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Time_Scale,Time Scale,:TIMebase:MAIN:SCALe <scale>,scale,,Timebase,Time,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Trigger_Level,Trigger Level,:TRIGger:EDGe:LEVel <level>,level,,Trigger System,Trigger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Trigger_Source,Trigger Source,:TRIGger:EDGe:SOURce <source>,source,,Trigger System,Trigger,1,Scope/DS1104Z/commands.json
+Scope,DS1104Z,SET,Trigger_Sweep,Trigger Sweep,:TRIGger:SWEep <sweep>,sweep,,Trigger System,Trigger,1,Scope/DS1104Z/commands.json
+Spectrum,HPE4411A,DO,Do_Power_Cycle,Do Power Cycle,:SYSTem:POWer:RESet,,,Hardware Reset and Clear,System,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Do_Update_Display,Do Update Display,:SYSTem:DISPlay:UPDate,,,System Maintenance Controls,System,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Input_Auto_Attenuation_OFF,Set Input Auto Attenuation OFF,:POWer:ATTenuation:AUTO OFF,,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Input_Auto_Attenuation_ON,Set Input Auto Attenuation ON,:POWer:ATTenuation:AUTO ON,,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Marker_State_OFF,Disable Marker,:CALCulate:MARKer<marker_number>:STATe OFF,,marker_number,Marker Command Sets,Markers,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Marker_State_ON,Enable Marker,:CALCulate:MARKer<marker_number>:STATe ON,,marker_number,Marker Command Sets,Markers,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Power_Gain_OFF,Set Power Gain OFF,:POWer:GAIN OFF,,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,DO,Set_Power_Gain_ON,Set Power Gain ON,:POWer:GAIN ON,,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,Attenuation,Attenuation,:POWer:RF:ATTenuation?,,,Individual Read Queries,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,Frequency_settings,Primary Frequency Monitoring,:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?,,,NAB Frequency Monitoring,Frequency,4,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,Get_Reference_Level,Get Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel?,,,Individual Read Queries,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,Get_error_information,System Error Check,:SYSTem:ERRor?,,,System Status and Identification,System,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,NAB_all_marker_settings,Marker Amplitude and Frequency Readbacks,:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?,,,NAB Marker Monitoring,Markers,12,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,Preamp_State,Preamp State,:SENSE:POWer:RF:GAIN:STATe?,,,Individual Read Queries,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,amplitude_settings,Power and Attenuation Readbacks,:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?,,,NAB Amplitude Monitoring,Amplitude,3,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,NAB,bandwidth_settings,Bandwidth and Sweep Monitoring,:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?,,,NAB Bandwidth Monitoring,Bandwidth,5,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,RIG,RBW_VBW_Hz,Set Resolution and Video BW,:SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>,rbw_hz_value; vbw_hz_value,,RIG Bandwidth Commands,Bandwidth,2,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,RIG,Ref_Level_dBm,Set Power Levels,:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>,Ref_Level_dBm; Attenuation_dB; Preamp_On,,RIG Amplitude Commands,Amplitude,3,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,RIG,freq_start_stop,Frequency Range Commands,:FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>,start_freq; stop_freq,,RIG Frequency commands,Frequency,2,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Power_Attenuation,Power Attenuation,:POWer:ATTenuation <Power_Attenuation>,Power_Attenuation,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Resolution_Bandwidth,Resolution Bandwidth,:SENSe:BANDwidth:RESolution <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Set_Marker_X_position,Set Marker Frequency,:CALCulate:MARKer<marker_number>:X <x_value>,x_value,marker_number,Marker Command Sets,Markers,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Set_Reference_Level,Set Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>,Ref_Level_dBm,,Individual Power Sets,Amplitude,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Span_Frequency,Span Frequency,:FREQuency:SPAN <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Start_Freq_MHz,Start Freq MHz,:FREQuency:STARt <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Stop_Freq_MHz,Stop Freq MHz,:FREQuency:STOP <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Sweep_Time,Sweep Time,:SENSe:SWEep:TIME <sweep_time_s>,sweep_time_s,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/HPE4411A/commands.json
+Spectrum,HPE4411A,SET,Video_Bandwidth,Video Bandwidth,:SENSe:BANDwidth:VIDeo <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/HPE4411A/commands.json
+Spectrum,N9340B,DO,Do_Initiate_Continuous,Do Initiate Continuous,:INITiate:IMMediate,,,Trace Command Sets,Trace,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Power_Cycle,Power Cycle,:SYSTem:POWer:RESet,,,Hardware Reset and Clear,System,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Set_All_Markers_State,Set All Markers State,:CALCulate:MARKer:AOFF,,,Marker Command Sets,Markers,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Set_Input_Auto_Attenuation_OFF,Set Input Auto Attenuation OFF,:POWer:ATTenuation:AUTO OFF,,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Set_Input_Auto_Attenuation_ON,Set Input Auto Attenuation ON,:POWer:ATTenuation:AUTO ON,,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Set_Power_Gain_OFF,Set Power Gain OFF,:POWer:GAIN OFF,,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Set_Power_Gain_ON,Set Power Gain ON,:POWer:GAIN ON,,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Update_Display,Update Display,:SYSTem:DISPlay:UPDate,,,System Maintenance Controls,System,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,Attenuation,Attenuation,:POWer:RF:ATTenuation?,,,Individual Read Queries,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,Frequency_settings,Primary Frequency Monitoring,:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?,,,NAB Frequency Monitoring,Frequency,4,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,Preamp_State,Preamp State,:SENSE:POWer:RF:GAIN:STATe?,,,Individual Read Queries,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,Reference_Level,Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel?,,,Individual Read Queries,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,all_marker_settings,Marker Amplitude and Frequency Readbacks,:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?,,,NAB Marker Monitoring,Markers,12,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,amplitude_settings,Power and Attenuation Readbacks,:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?,,,NAB Amplitude Monitoring,Amplitude,3,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,bandwidth_settings,Bandwidth and Sweep Monitoring,:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?,,,NAB Bandwidth Monitoring,Bandwidth,5,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,error_information,System Error Check,:SYSTem:ERRor?,,,System Status and Identification,System,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,RIG,RBW_VBW_Hz,Set Resolution and Video BW,:SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>,rbw_hz_value; vbw_hz_value,,RIG Bandwidth Commands,Bandwidth,2,Spectrum/N9340B/commands.json
+Spectrum,N9340B,RIG,Ref_Level_dBm,Set Power Levels,:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>,Ref_Level_dBm; Attenuation_dB; Preamp_On,,RIG Amplitude Commands,Amplitude,3,Spectrum/N9340B/commands.json
+Spectrum,N9340B,RIG,freq_start_stop,Frequency Range Commands,:FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>,start_freq; stop_freq,,RIG Frequency commands,Frequency,2,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Averaging,Set Averaging,:TRACe:AVERage:COUNt <count_int>,count_int,,Trace Command Sets,Trace,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Center_Freq_MHz,Set Center Freq MHz,:FREQuency:CENTer <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Continuous_Mode,Set Continuous Mode,:INITiate:CONTinuous <state_bool>,state_bool,,Trace Command Sets,Trace,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Marker_State,Set Marker State,:CALCulate:MARKer<marker_number>:STATe <state_bool>,state_bool,marker_number,Marker Command Sets,Markers,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Marker_X_position,Set Marker Frequency,:CALCulate:MARKer<marker_number>:X <hz_value>,hz_value,marker_number,Marker Command Sets,Markers,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Power_Attenuation,Set Power Attenuation,:POWer:ATTenuation <db_value>,db_value,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_RBW,Set RBW,:SENSe:BANDwidth:RESolution <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_RBW_Auto,Set RBW Auto,:SENSe:BANDwidth:RESolution:AUTO <state_bool>,state_bool,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Reference_Level,Set Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel <dbm_value>,dbm_value,,Individual Power Sets,Amplitude,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Span_Frequency,Set Span Frequency,:FREQuency:SPAN <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Start_Freq_MHz,Set Start Freq MHz,:FREQuency:STARt <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Stop_Freq_MHz,Set Stop Freq MHz,:FREQuency:STOP <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Sweep_time,Set Sweep time,:SENSe:SWEep:TIME <s_value>,s_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Sweep_time_Auto,Set Sweep time Auto,:SENSe:SWEep:TIME:AUTO <state_bool>,state_bool,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_Trace_Mode,Set Trace Mode,:TRACe<trace_number>:MODE <mode_string>,mode_string,trace_number,Trace Command Sets,Trace,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_VBW,Set VBW,:SENSe:BANDwidth:VIDeo <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9340B,SET,Set_VBW_Auto,Set VBW Auto,:SENSe:BANDwidth:VIDeo:AUTO <state_bool>,state_bool,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9340B/commands.json
+Spectrum,N9342CN,DO,Do_Power_Cycle,Do Power Cycle,:SYSTem:POWer:RESet,,,Hardware Reset and Clear,System,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Do_Update_Display,Do Update Display,:SYSTem:DISPlay:UPDate,,,System Maintenance Controls,System,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Marker_State_OFF,Disable Marker,:CALCulate:MARKer<marker_number>:STATe OFF,,marker_number,Marker Command Sets,Markers,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Marker_State_ON,Enable Marker,:CALCulate:MARKer<marker_number>:STATe ON,,marker_number,Marker Command Sets,Markers,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Set_Input_Auto_Attenuation_OFF,Set Input Auto Attenuation OFF,:POWer:ATTenuation:AUTO OFF,,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Set_Input_Auto_Attenuation_ON,Set Input Auto Attenuation ON,:POWer:ATTenuation:AUTO ON,,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Set_Power_Gain_OFF,Set Power Gain OFF,:POWer:GAIN OFF,,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,DO,Set_Power_Gain_ON,Set Power Gain ON,:POWer:GAIN ON,,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,Attenuation,Attenuation,:POWer:RF:ATTenuation?,,,Individual Read Queries,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,Frequency_settings,Primary Frequency Monitoring,:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?,,,NAB Frequency Monitoring,Frequency,4,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,Get_Reference_Level,Get Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel?,,,Individual Read Queries,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,Get_error_information,System Error Check,:SYSTem:ERRor?,,,System Status and Identification,System,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,Preamp_State,Preamp State,:SENSE:POWer:RF:GAIN:STATe?,,,Individual Read Queries,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,all_marker_settings,Marker Amplitude and Frequency Readbacks,:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?,,,NAB Marker Monitoring,Markers,12,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,amplitude_settings,Power and Attenuation Readbacks,:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?,,,NAB Amplitude Monitoring,Amplitude,3,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,NAB,bandwidth_settings,Bandwidth and Sweep Monitoring,:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?,,,NAB Bandwidth Monitoring,Bandwidth,5,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,RIG,RBW_VBW_Hz,Set Resolution and Video BW,:SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>,rbw_hz_value; vbw_hz_value,,RIG Bandwidth Commands,Bandwidth,2,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,RIG,Ref_Level_dBm,Set Power Levels,:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>,Ref_Level_dBm; Attenuation_dB; Preamp_On,,RIG Amplitude Commands,Amplitude,3,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,RIG,freq_start_stop,Frequency Range Commands,:FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>,start_freq; stop_freq,,RIG Frequency commands,Frequency,2,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Marker_X_position,Set Marker Frequency,:CALCulate:MARKer<marker_number>:X <x_value>,x_value,marker_number,Marker Command Sets,Markers,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Power_Attenuation,Power Attenuation,:POWer:ATTenuation <Power_Attenuation>,Power_Attenuation,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Resolution_Bandwidth,Resolution Bandwidth,:SENSe:BANDwidth:RESolution <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Set_Reference_Level,Set Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>,Ref_Level_dBm,,Individual Power Sets,Amplitude,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Span_Frequency,Span Frequency,:FREQuency:SPAN <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Start_Freq_MHz,Start Freq MHz,:FREQuency:STARt <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Stop_Freq_MHz,Stop Freq MHz,:FREQuency:STOP <hz_value>,hz_value,,RIG Frequency commands,Frequency,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Sweep_Time,Sweep Time,:SENSe:SWEep:TIME <sweep_time_s>,sweep_time_s,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9342CN/commands.json
+Spectrum,N9342CN,SET,Video_Bandwidth,Video Bandwidth,:SENSe:BANDwidth:VIDeo <hz_value>,hz_value,,RIG Bandwidth Commands,Bandwidth,1,Spectrum/N9342CN/commands.json

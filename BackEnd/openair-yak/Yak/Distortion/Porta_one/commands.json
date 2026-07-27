@@ -1,0 +1,227 @@
+{
+  "model": "Porta_one",
+  "family": "Distortion",
+  "set": {
+    "Set_Amplitude": {
+      "scpi": ":GAMPlitude <amp>",
+      "description": "Set Amplitude",
+      "group": "Set Signal Parameters",
+      "args": [
+        "amp"
+      ],
+      "subsystem": "Signal_Generator"
+    },
+    "Set_Frequency": {
+      "scpi": ":GFREquency <freq>",
+      "description": "Set Frequency",
+      "group": "Set Signal Parameters",
+      "args": [
+        "freq"
+      ],
+      "subsystem": "Signal_Generator"
+    }
+  },
+  "do": {
+    "Do_Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Do Clear Status",
+      "group": "Global Utilities",
+      "subsystem": "System"
+    },
+    "Do_Display_Panel": {
+      "scpi": ":DISPlay PANel",
+      "description": "Do Display Panel",
+      "group": "Global Utilities",
+      "subsystem": "System"
+    },
+    "Do_Output_OFF": {
+      "scpi": ":OUTPut OFF",
+      "description": "Do Output OFF",
+      "group": "Master Generator Output",
+      "subsystem": "System"
+    },
+    "Do_Output_ON": {
+      "scpi": ":OUTPut ON",
+      "description": "Do Output ON",
+      "group": "Master Generator Output",
+      "subsystem": "System"
+    },
+    "Do_Reset": {
+      "scpi": "*RST",
+      "description": "Do Reset",
+      "group": "Global Utilities",
+      "subsystem": "System"
+    },
+    "Mode_Amplitude": {
+      "scpi": ":FUNCtion AMPLitude",
+      "description": "Mode Amplitude",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_Crosstalk": {
+      "scpi": ":FUNCtion XTALK",
+      "description": "Mode Crosstalk",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_Level_Stereo": {
+      "scpi": ":FUNCtion LEVel",
+      "description": "Mode Level Stereo",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_Noise": {
+      "scpi": ":FUNCtion NOISE",
+      "description": "Mode Noise",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_Phase": {
+      "scpi": ":FUNCtion PHASE",
+      "description": "Mode Phase",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_SINAD": {
+      "scpi": ":FUNCtion SINad",
+      "description": "Mode SINAD",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Mode_THD_N": {
+      "scpi": ":FUNCtion THD",
+      "description": "Mode THD N",
+      "group": "Select Measurement Mode",
+      "subsystem": "Channel_AB"
+    },
+    "Select_DIN_BNC": {
+      "scpi": ":DINPut BNC",
+      "description": "Select DIN BNC",
+      "group": "Select Digital Input Connector",
+      "subsystem": "Digital"
+    },
+    "Select_DIN_Generator": {
+      "scpi": ":DINPut GENerator",
+      "description": "Select DIN Generator",
+      "group": "Select Digital Input Connector",
+      "subsystem": "Digital"
+    },
+    "Select_DIN_Optical": {
+      "scpi": ":DINPut OPTical",
+      "description": "Select DIN Optical",
+      "group": "Select Digital Input Connector",
+      "subsystem": "Digital"
+    },
+    "Select_DIN_XLR": {
+      "scpi": ":DINPut XLR",
+      "description": "Select DIN XLR",
+      "group": "Select Digital Input Connector",
+      "subsystem": "Digital"
+    },
+    "Select_Input_Analog_A": {
+      "scpi": ":INPut A",
+      "description": "Select Input Analog A",
+      "group": "Route signals to Analyzer A",
+      "subsystem": "Channel_A"
+    },
+    "Select_Input_Analog_B": {
+      "scpi": ":INPut B",
+      "description": "Select Input Analog B",
+      "group": "Route signals to Analyzer B",
+      "subsystem": "Channel_B"
+    },
+    "Select_Input_Gen_Monitor_A": {
+      "scpi": ":INPut GENA",
+      "description": "Select Input Gen Monitor A",
+      "group": "Route signals to Analyzer A",
+      "subsystem": "Channel_A"
+    },
+    "Select_Input_Gen_Monitor_B": {
+      "scpi": ":INPut GENB",
+      "description": "Select Input Gen Monitor B",
+      "group": "Route signals to Analyzer B",
+      "subsystem": "Channel_B"
+    },
+    "Set_DOUT_OFF": {
+      "scpi": ":DOUTput OFF",
+      "description": "Set DOUT OFF",
+      "group": "Digital Output State",
+      "subsystem": "Digital"
+    },
+    "Set_DOUT_ON": {
+      "scpi": ":DOUTput ON",
+      "description": "Set DOUT ON",
+      "group": "Digital Output State",
+      "subsystem": "Digital"
+    },
+    "Set_Unit_Volts": {
+      "scpi": ":AUNits V",
+      "description": "Set Unit Volts",
+      "group": "Select Output Unit (M1/M2)",
+      "subsystem": "Measurements"
+    },
+    "Set_Unit_Watts": {
+      "scpi": ":AUNits W",
+      "description": "Set Unit Watts",
+      "group": "Select Output Unit (M1/M2)",
+      "subsystem": "Measurements"
+    },
+    "Set_Unit_dBV": {
+      "scpi": ":AUNits DBV",
+      "description": "Set Unit dBV",
+      "group": "Select Output Unit (M1/M2)",
+      "subsystem": "Measurements"
+    },
+    "Set_Unit_dBm": {
+      "scpi": ":AUNits DBM",
+      "description": "Set Unit dBm",
+      "group": "Select Output Unit (M1/M2)",
+      "subsystem": "Measurements"
+    },
+    "Set_Unit_dBu": {
+      "scpi": ":AUNits DBU",
+      "description": "Set Unit dBu",
+      "group": "Select Output Unit (M1/M2)",
+      "subsystem": "Measurements"
+    },
+    "Set_Wave_IMD": {
+      "scpi": ":WAVeform IMD",
+      "description": "Set Wave IMD",
+      "group": "Select Waveform Shape",
+      "subsystem": "Signal_Generator"
+    },
+    "Set_Wave_Sine": {
+      "scpi": ":WAVeform SINE",
+      "description": "Set Wave Sine",
+      "group": "Select Waveform Shape",
+      "subsystem": "Signal_Generator"
+    },
+    "Set_Wave_Square": {
+      "scpi": ":WAVeform SQUare",
+      "description": "Set Wave Square",
+      "group": "Select Waveform Shape",
+      "subsystem": "Signal_Generator"
+    }
+  },
+  "rig": {},
+  "nab": {
+    "Read_Ch_A_Only": {
+      "scpi": "M1?",
+      "description": "Read Ch A Only",
+      "group": "Read Commands",
+      "subsystem": "Measurements"
+    },
+    "Read_Ch_B_Only": {
+      "scpi": "M2?",
+      "description": "Read Ch B Only",
+      "group": "Read Commands",
+      "subsystem": "Measurements"
+    },
+    "Read_Stereo_AB": {
+      "scpi": "M1?;M2?",
+      "description": "Read Stereo AB",
+      "group": "Read Commands",
+      "subsystem": "Measurements"
+    }
+  }
+}

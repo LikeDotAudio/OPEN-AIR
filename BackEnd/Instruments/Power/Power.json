@@ -1,0 +1,441 @@
+{
+  "Power_Instrument": {
+    "type": "OcaBin",
+    "id": "50.100.5.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "PSU_Reactor_Interface": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "High-Voltage Analog Injection System",
+          "Fr": "High-Tension Analog Injection Système",
+          "De": "High-Spannenung Analog Injection System",
+          "Es": "High-Voltaje Analog Injection Sistema"
+        },
+        "fields": {
+          "Top_Level_Interlock": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "MAIN POWER BUS",
+              "Fr": "MAIN POWER BUS",
+              "De": "MAIN POWER BUS",
+              "Es": "MAIN POWER BUS"
+            },
+            "fields": {
+              "Master_Output_Switch": {
+                "type": "_TrapezoidButton",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "De": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "Es": "☢️ MAIN BUS: ACTIVE ☢️"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "MAIN BUS: DISENGAGED",
+                      "Fr": "MAIN BUS: DISENGAGED",
+                      "De": "MAIN BUS: DISENGAGED",
+                      "Es": "MAIN BUS: DISENGAGED"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "state_default": false,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "OUTP <state>"
+                  }
+                }
+              }
+            }
+          },
+          "Analog_Telemetry_Deck": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Galvanometer Array",
+              "Fr": "Réseau de galvanomètres",
+              "De": "Galvanometer-Array",
+              "Es": "Matriz de galvanómetros"
+            },
+            "fields": {
+              "Meter_Voltage": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "100",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "VOLTAGE",
+                      "Fr": "TENSION",
+                      "De": "SPANNUNG",
+                      "Es": "VOLTAJE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Potential Difference",
+                  "Fr": "Potential Difference",
+                  "De": "Potential Difference",
+                  "Es": "Potential Difference"
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:VOLT?"
+                  }
+                }
+              },
+              "Meter_Current": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "10",
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "CURRENT",
+                      "Fr": "COURANT",
+                      "De": "STROM",
+                      "Es": "CORRIENTE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Electron Flow",
+                  "Fr": "Electron Flow",
+                  "De": "Electron Flow",
+                  "Es": "Electron Flow"
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:CURR?"
+                  }
+                }
+              },
+              "Meter_Power": {
+                "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "1000",
+                  "units": "W"
+                },
+                "value": {
+                  "default_value": "0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "TOTAL POWER",
+                      "Fr": "TOTAL POWER",
+                      "De": "TOTAL POWER",
+                      "Es": "TOTAL POWER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Energy Consumption",
+                  "Fr": "Consommation d'énergie",
+                  "De": "Energieverbrauch",
+                  "Es": "Consumo de energía"
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:POW?"
+                  }
+                }
+              }
+            }
+          },
+          "Visual_History_Sector": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Temporal Log",
+              "Fr": "Temporal Log",
+              "De": "Temporal Log",
+              "Es": "Temporal Log"
+            },
+            "fields": {
+              "Power_History": {
+                "type": "_GuiGraph",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Stability Matrix",
+                      "Fr": "Stability Matrix",
+                      "De": "Stability Matrix",
+                      "Es": "Stability Matrix"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Voltage & Current over Time",
+                  "Fr": "Tension et courant au fil du temps",
+                  "De": "Spannung & Strom über die Zeit",
+                  "Es": "Voltaje y corriente a lo largo del tiempo"
+                },
+                "height": 200,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:SCAL:ALL?"
+                  }
+                }
+              }
+            }
+          },
+          "Reactor_Control_Rods": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Manual Regulation",
+              "Fr": "Manuel Regulation",
+              "De": "Manuell Regulation",
+              "Es": "Manual Regulation"
+            },
+            "fields": {
+              "Voltage_Fader": {
+                "type": "_GuiVerticalFader",
+                "domain": {
+                  "min": "0.0",
+                  "max": "100.0",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "5.0"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "SET VOLTS (V)",
+                      "Fr": "SET VOLTS (V)",
+                      "De": "SET VOLTS (V)",
+                      "Es": "SET VOLTS (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "VOLT <value>"
+                  }
+                }
+              },
+              "Current_Fader": {
+                "type": "_GuiVerticalFader",
+                "domain": {
+                  "min": "0.0",
+                  "max": "10.0",
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "0.1"
+                },
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "LIMIT AMPS (A)",
+                      "Fr": "LIMIT AMPS (A)",
+                      "De": "LIMIT AMPS (A)",
+                      "Es": "LIMIT AMPS (A)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#FF902C",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
+                    },
+                    "trigger": false,
+                    "command_value": "CURR <value>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

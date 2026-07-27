@@ -27,6 +27,7 @@ Nothing here writes a binding — see --emit for a handler stub.
 """
 import argparse
 import difflib
+import glob
 import json
 import os
 import re
@@ -96,49 +97,39 @@ SKIP_KEYS = {"label", "style", "cosmetics", "layout", "domain", "options", "desc
              "message_details", "behavior", "geometry"}
 
 
-def clean_model(dirname):
-    head, _, tail = dirname.partition("_")
-    return tail if head.isdigit() and tail else dirname
-
-
 def yak_vocabulary():
-    """{model: {command: scpi}} — mirrors YakRepository::extract_commands."""
+    """{model: {command: scpi}} from `Yak/<Family>/<Model>/commands.json`.
+
+    A read, not a reconstruction. The tables used to be panel trees that a
+    command table was pattern-matched out of, so this function mirrored
+    YakRepository::extract_commands including its two failure modes: a widget's
+    `fields` key counted as a command (555 of them), and the model taken from the
+    file's grandparent directory, which filed 391 commands under folder names.
+    Both went away with the shape.
+    """
     models = {}
-
-    def extract(node, model):
-        if isinstance(node, dict):
-            for key, value in node.items():
-                if isinstance(value, dict):
-                    exec_cmd = value.get("Execute Command")
-                    if exec_cmd is None and isinstance(value.get("fields"), dict):
-                        exec_cmd = value["fields"].get("Execute Command")
-                    if isinstance(exec_cmd, dict) and isinstance(exec_cmd.get("message"), str):
-                        models.setdefault(model, {})[key] = exec_cmd["message"]
-                extract(value, model)
-        elif isinstance(node, list):
-            for item in node:
-                extract(item, model)
-
-    for dirpath, _dirs, files in os.walk(YAK_ROOT):
-        for name in files:
-            if not name.endswith(".json"):
-                continue
-            path = os.path.join(dirpath, name)
-            model = clean_model(os.path.basename(os.path.dirname(os.path.dirname(path))))
-            try:
-                with open(path) as f:
-                    extract(json.load(f), model)
-            except (OSError, json.JSONDecodeError):
-                continue
+    for path in glob.glob(os.path.join(YAK_ROOT, "*", "*", "commands.json")):
+        try:
+            with open(path) as f:
+                table = json.load(f)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"⚠️  unreadable {path}: {e}")
+            continue
+        commands = models.setdefault(table["model"], {})
+        for verb in ("set", "do", "rig", "nab"):
+            for name, entry in (table.get(verb) or {}).items():
+                commands[name] = entry["scpi"]
     return models
 
 
 def template_controls(type_name):
-    """[(widget_name, widget_type, has_handler)] for a type's per-device panel."""
-    with open(os.path.join(TEMPLATE_ROOT, "manifest.json")) as f:
-        spec = json.load(f)[type_name]
-    base = os.path.join(TEMPLATE_ROOT, type_name, spec["panel"])
-    exclude = set(spec.get("exclude", []))
+    """[(widget_name, widget_type, has_handler)] for a type's per-device panel.
+
+    One file per type — `<Type>/<Type>.json` — since the templates flattened;
+    see the README there. The `<Type>_N.json` beside it is deliberately not read:
+    its widgets are the same controls again, repeated per member, and counting
+    them would report a type's coverage twice.
+    """
     found, seen = [], set()
 
     def walk(node, name):
@@ -159,16 +150,12 @@ def template_controls(type_name):
             for item in node:
                 walk(item, name)
 
-    for dirpath, dirs, files in os.walk(base):
-        dirs[:] = [d for d in dirs if d not in exclude]
-        for name in files:
-            if not name.endswith(".json"):
-                continue
-            try:
-                with open(os.path.join(dirpath, name)) as f:
-                    walk(json.load(f), None)
-            except (OSError, json.JSONDecodeError):
-                continue
+    path = os.path.join(TEMPLATE_ROOT, type_name, f"{type_name}.json")
+    try:
+        with open(path) as f:
+            walk(json.load(f), None)
+    except (OSError, json.JSONDecodeError):
+        pass
     return found
 
 

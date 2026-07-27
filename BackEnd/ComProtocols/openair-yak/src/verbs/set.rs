@@ -16,9 +16,9 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
     // Apply the converter (if any)
     let converted_val = converters::apply_converter(&yak.converter, raw_val);
     
-    // Lookup SCPI template
-    // We try to grab the model from the payload if provided, otherwise empty string for fallback
-    let target_model = msg.model.as_deref().or(msg.device.as_deref()).unwrap_or("");
+    // Lookup SCPI template. The instance's own model wins — see verbs::target_model.
+    let target_model = super::target_model(msg, yak);
+    let target_model = target_model.as_str();
     let template = match repo.get_scpi(target_model, &yak.command) {
         Some(t) => t,
         None => {
@@ -46,13 +46,8 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
     }
     
     eprintln!("   📡 [YAK MQTT] ⮞ TX SCPI (Model: {}): {}", target_model, scpi_command);
-    
-    // Publish out to VISA
-    if let Err(e) = client.publish(&config.topic_publish, rumqttc::QoS::AtMostOnce, false, scpi_command.clone()).await {
-        eprintln!("   ❌ [YAK MQTT] Failed to relay SET command: {}", e);
-    }
 
-    // Publish to monitor out
-    let monitor_out = format!("{}/monitor/out", config.topic);
-    let _ = client.publish(monitor_out, rumqttc::QoS::AtMostOnce, false, scpi_command).await;
+    // SET has no correlation envelope of its own, so both destinations carry
+    // the same raw command.
+    super::dispatch(client, config, yak, &scpi_command, &scpi_command, "SET").await;
 }

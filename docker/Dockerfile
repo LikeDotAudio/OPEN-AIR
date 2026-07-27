@@ -77,6 +77,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin \
 COPY FrontEnd   ./FrontEnd
 COPY Deployment ./Deployment
 
+# Instrument panel templates. Not source and not UI — the library that
+# build_instrument_panels.py stamps one instance from per discovered device, so
+# eight 34401As get eight bound panels. Without it that builder finds no
+# manifest and every instrument tab silently stays empty.
+COPY BackEnd/Instruments ./BackEnd/Instruments
+
 EXPOSE 8000
 
 # SECURITY: bind 0.0.0.0 *inside the container only*. Compose publishes the port

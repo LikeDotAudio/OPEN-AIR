@@ -48,6 +48,11 @@ node_modules/
 # Generated discovered-device panels (Phase 0 item 3; deleted in Phase 4)
 FrontEnd/Gui_Frames/0_discovered/
 
+# Generated per-device instrument panels. The authored templates they are
+# stamped from live in BackEnd/Instruments/Templates/ and ARE tracked; what
+# lands here is one instance per discovered instrument, rebuilt on every scan.
+FrontEnd/Gui_Frames/1_Instruments/left_50/
+
 # Broker secrets — never commit
 broker/passwd
 broker/acl

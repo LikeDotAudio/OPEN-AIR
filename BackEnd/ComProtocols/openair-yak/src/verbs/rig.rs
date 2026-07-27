@@ -17,7 +17,9 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
         _ => converted_val.to_string(),
     };
     
-    let target_model = msg.model.as_deref().or(msg.device.as_deref()).unwrap_or("");
+    // The instance's own model wins — see verbs::target_model.
+    let target_model = super::target_model(msg, yak);
+    let target_model = target_model.as_str();
     let template = match repo.get_scpi(target_model, &yak.command) {
         Some(t) => t,
         None => {
@@ -50,9 +52,5 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
         scpi_string.clone()
     };
 
-    if let Err(e) = client.publish(&config.topic_publish, rumqttc::QoS::AtMostOnce, false, payload).await {
-        eprintln!("   ❌ [YAK MQTT] Failed to relay RIG command: {}", e);
-    }
-    let monitor_out = format!("{}/monitor/out", config.topic);
-    let _ = client.publish(&monitor_out, rumqttc::QoS::AtMostOnce, false, scpi_string).await;
+    super::dispatch(client, config, yak, &scpi_string, &payload, "RIG").await;
 }

@@ -19,9 +19,11 @@ by the Phase 4 Device Registry + live Discovered widget):
 Spawned by the orchestrator after the VISA scan completes; also runnable by
 hand: python3 Deployment/build_discovered_gui.py
 """
+import fcntl
 import json
 import os
 import sys
+import tempfile
 import time
 
 import paho.mqtt.client as mqtt
@@ -111,7 +113,13 @@ def on_message(client, userdata, msg):
             return
         dev_type, model, dev_n, key = rest
         block = f"{model} ({dev_n})"
-        collected.setdefault(dev_type, {}).setdefault(block, {})[key] = value
+        entry = collected.setdefault(dev_type, {}).setdefault(block, {})
+        entry[key] = value
+        # The device's own topic prefix, kept because the Write topic cannot be
+        # rebuilt from the row fields (Dev index appears nowhere in them) and
+        # per-device instrument panels are bound to exactly that topic.
+        # Hidden from the table columns like the other underscore keys.
+        entry["_topic_prefix"] = "/".join(parts[:4] + ["Device", dev_type, model, dev_n])
     elif proto == "midi":
         # {Input|Output}/Dev{n}/{key}
         if len(rest) != 3 or not value:
@@ -350,7 +358,8 @@ PREFERRED_COLUMNS = {
                    "status_text", "addresses", "port", "hostname",
                    "protocol_version", "cast_id", "status", "last_seen"],
 }
-HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type", "_row_state"}
+HIDDEN_COLUMNS = {"last_online", "connected", "raw_idn", "device_type", "_row_state",
+                  "_topic_prefix"}
 
 # How recently a device must have answered to count as ONLINE.
 #
@@ -495,6 +504,33 @@ def publish_live_tables(client) -> int:
     return sent
 
 
+# One watcher per machine, enforced with a lock file.
+#
+# The orchestrator calls spawn_discovered_watcher() after EVERY scan, so without
+# this each rescan left another watcher running: N copies republishing identical
+# rows and narrating every change N times. The symptom in the browser is a feed
+# that says everything twice, which reads as a bug in the diff rather than a
+# process leak. flock is released automatically when the process dies, however it
+# dies, so a crashed watcher never blocks its replacement.
+WATCHER_LOCK_PATH = os.path.join(tempfile.gettempdir(), "openair-discovered-watcher.lock")
+_watcher_lock = None  # module-level: the handle must outlive acquire_watcher_lock()
+
+
+def acquire_watcher_lock():
+    """True if this process may watch; False if another watcher already is."""
+    global _watcher_lock
+    handle = open(WATCHER_LOCK_PATH, "w")
+    try:
+        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        handle.close()
+        return False
+    handle.write(f"{os.getpid()}\n")
+    handle.flush()
+    _watcher_lock = handle
+    return True
+
+
 def publish_activity(client, level, message, source="discovery"):
     """Put one narration line on the bus for the browser's activity feed.
 
@@ -549,10 +585,20 @@ def narrate_changes(client, before, after):
             for category, name in sorted(keys):
                 publish_activity(client, level, f"{name} {verb}", source=category)
 
-    for category, name in sorted(flipped):
-        state = after[(category, name)]
+    # Liveness flips summarize by DESTINATION STATE, not as one lump. They arrive
+    # in waves: every device an agent last touched at the same moment crosses the
+    # staleness window together, so an agent restart turns the whole table amber
+    # in one pass. One line per device is then ~80 lines that say one thing.
+    by_state = {}
+    for key in flipped:
+        by_state.setdefault(after[key], []).append(key)
+    for state, keys in sorted(by_state.items()):
         level = {"online": "ok", "offline": "warn"}.get(state, "info")
-        publish_activity(client, level, f"{name} is now {state}", source=category)
+        if len(keys) > ACTIVITY_DETAIL_LIMIT:
+            summarize(keys, f"went {state}", level)
+        else:
+            for category, name in sorted(keys):
+                publish_activity(client, level, f"{name} is now {state}", source=category)
 
 
 def watch(client, interval: float = 2.0) -> None:
@@ -687,6 +733,12 @@ def make_client():
 def main():
     watching = "--watch" in sys.argv
 
+    # Claim the watcher slot BEFORE connecting, so a redundant copy costs one
+    # file open rather than a broker connection and five seconds of collection.
+    if watching and not acquire_watcher_lock():
+        print("[discovered-gui] another watcher holds the lock — exiting")
+        return
+
     client = make_client()
     client.on_connect = on_connect
     client.on_message = on_message
@@ -711,6 +763,18 @@ def main():
     n = write_panels()
     devices = sum(len(blocks) for blocks in collected.values())
     write_scan_panel(devices)
+
+    # One control panel per discovered instrument, stamped from the backend
+    # template library. Runs here rather than as its own spawned process
+    # because it needs exactly the device map this collector just built, and
+    # because two processes writing Gui_Frames would race.
+    try:
+        import build_instrument_panels
+        panels, built = build_instrument_panels.build(
+            build_instrument_panels.devices_from_collected(collected))
+        print(f"[discovered-gui] instrument panels: {built} device(s), {panels} file(s)")
+    except Exception as e:  # a panel-build failure must not lose the tables
+        print(f"⚠️  [discovered-gui] instrument panel build failed: {e}")
     # Seed the live topics too, so a panel written now has rows the instant it
     # loads rather than waiting for the watcher's first change.
     client.loop_start()

@@ -15,6 +15,24 @@ pub struct YakHandler {
     pub input_name: String,
     #[serde(default)]
     pub converter: String,
+
+    /// Where this control's SCPI goes — the VISA daemon's Write topic for ONE
+    /// instrument (`.../visa/Device/DMM/34401A/Dev3/Write`).
+    ///
+    /// Stamped per instance by Deployment/build_instrument_panels.py, so eight
+    /// discovered 34401As get eight panels that each drive their own meter.
+    /// Absent on hand-authored panels, which fall back to the global publish
+    /// topic — historically the only path, and one nothing subscribes to, which
+    /// is why panels never actually moved an instrument.
+    #[serde(default)]
+    pub target: Option<String>,
+
+    /// The instrument model this instance is bound to, so SCPI lookup uses that
+    /// model's command table instead of "first command of this name found in
+    /// any model" — a fallback that silently sends a Rigol's syntax to an
+    /// Agilent when two models share a command name.
+    #[serde(default)]
+    pub model: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

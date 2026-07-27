@@ -99,9 +99,12 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                                 continue;
                             }
 
-                            // We no longer guess the model from parts[5] because the GUI hierarchy for Instruments doesn't contain it.
-                            // By leaving it None, verbs will pass "" to get_scpi(), which triggers the "search all models" fallback.
-                            let model_str: Option<String> = None;
+                            // The model is no longer guessed from the topic path: generated
+                            // instrument panels carry it in the yak_handler itself, stamped
+                            // from the device that was actually discovered. Hand-authored
+                            // panels still carry none, and verbs fall back to get_scpi()'s
+                            // search-all-models behaviour as before.
+                            let model_str: Option<String> = yak.model.clone();
 
                             let msg = crate::models::IncomingMessage {
                                 handler: String::new(),

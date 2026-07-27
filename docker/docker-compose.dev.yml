@@ -49,3 +49,7 @@ services:
       # output on the next rescan. Pure Python here (the image installs the pip
       # deps into site-packages), so mounting it needs no rebuild.
       - ../Deployment:/app/Deployment
+      # The instrument template library the panel builder stamps from. Mounted
+      # for the same reason: editing a template should show up on the next scan,
+      # not on the next image build.
+      - ../BackEnd/Instruments:/app/BackEnd/Instruments

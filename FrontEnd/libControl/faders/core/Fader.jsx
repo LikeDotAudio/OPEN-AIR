@@ -3,9 +3,11 @@
  * Purpose: Fader component or utility.
  * Description: Handles logic and rendering for Fader component or utility.
  * 
- * Version: 26.07.05.1
+ * Version: 26.07.26.1
  * Change Log:
  * - 2026-07-05: Initial annotation and documentation added.
+ * - 2026-07-26: Coerce the MQTT value to a finite number — string/object
+ *   payloads crashed the render tree on currentValue.toFixed().
  */
 
 // Fader Component (OrchestrAator)
@@ -35,7 +37,17 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;
     const [val, setVal] = useMqtt ? useMqttState(topic, externalValue || min, nodeJson) : [externalValue, onChange, 'En'];
-    const currentValue = useMqtt ? val : (externalValue !== undefined ? externalValue : min);
+    const rawValue = useMqtt ? val : (externalValue !== undefined ? externalValue : min);
+    // The bus carries whatever the publisher sent: a bare number, a numeric
+    // string, or a {value: ...} object (useMqttState hands all three through).
+    // Everything downstream — cap geometry, wheel step, readout — does real
+    // arithmetic, so normalize to a finite number once, here. Anything that
+    // isn't a number rests at min rather than poisoning the render with NaN.
+    const asNumber = (v) => {
+        const n = (v !== null && typeof v === 'object') ? Number(v.value) : Number(v);
+        return Number.isFinite(n) ? n : min;
+    };
+    const currentValue = asNumber(rawValue);
 
     const setCurrentValue = (newVal) => {
         const clampedVal = clamp(newVal, min, max);

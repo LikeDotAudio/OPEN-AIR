@@ -1,0 +1,40 @@
+{
+  "DMM": {
+    "tab": "4_DMM",
+    "panel": "1_Instrument",
+    "exclude": ["1_Instrument_Bank_8_ctrl"]
+  },
+  "Oscilloscope": {
+    "tab": "2_Oscilloscope",
+    "panel": "2_Instrument_1"
+  },
+  "Generator": {
+    "tab": "3_Generator",
+    "panel": "1_Instrument_1"
+  },
+  "Power": {
+    "tab": "5_Power",
+    "panel": "1_Instrument",
+    "exclude": ["2_All_8", "1_four_instruments"]
+  },
+  "Load": {
+    "tab": "7_Load",
+    "panel": "1_Instrument"
+  },
+  "Spectrum": {
+    "tab": "0_Spectrum",
+    "panel": "3_Instrument"
+  },
+  "Router": {
+    "tab": "1_Router",
+    "panel": "1_Switcher"
+  },
+  "LCR": {
+    "tab": "8_LCR",
+    "panel": "1_Instrument"
+  },
+  "Distortion": {
+    "tab": "9_Distortion",
+    "panel": "1_Instrument"
+  }
+}

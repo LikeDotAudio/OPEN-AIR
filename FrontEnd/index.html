@@ -63,6 +63,31 @@
 <body>
     <div id="root"></div>
 
+    <!-- Stale-asset canary. Classic script: runs before Babel compiles anything.
+         index.html is served without cache-control, so a browser can hold an old
+         copy and load the OLD ?v= widget URLs it names, while /api/tree (which
+         IS cache-busted) delivers fresh panels. New JSON through old widgets does
+         not look like a caching problem — it looks like an edit that did nothing.
+         The banner names the build actually running; the canary says so out loud
+         when the page is older than the panels it is rendering. -->
+    <script>
+        window.OA_UI_BUILD = '2026-07-26.2';
+        console.log(`%c OPEN-AIR UI build ${window.OA_UI_BUILD} `,
+                    'background:#f4902c;color:#000;font-weight:bold');
+        window.addEventListener('load', () => {
+            // Babel compiles text/babel scripts after load; give it a moment.
+            setTimeout(() => {
+                if (!window.ScanActivity) {
+                    console.warn('%c⚠️ STALE UI — this page is running cached JavaScript.\n'
+                        + 'Widgets loaded here predate the build that serves them. Fix it with:\n'
+                        + "navigator.serviceWorker.getRegistrations().then(r=>Promise.all(r.map(x=>x.unregister())))"
+                        + ".then(()=>caches.keys()).then(k=>Promise.all(k.map(c=>caches.delete(c)))).then(()=>location.reload())",
+                        'color:#d29922;font-weight:bold');
+                }
+            }, 4000);
+        });
+    </script>
+
     <!-- Load Component Library -->
     <script type="text/babel" src="./libControl/faders/core/utils.js?v=5"></script>
     <script type="text/babel" src="./libControl/faders/core/Scale.jsx?v=8"></script>

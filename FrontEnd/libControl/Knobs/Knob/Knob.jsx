@@ -3,9 +3,12 @@
  * Purpose: Knob component or utility.
  * Description: Handles logic and rendering for Knob component or utility.
  * 
- * Version: 26.07.05.1
+ * Version: 26.07.26.1
  * Change Log:
  * - 2026-07-05: Initial annotation and documentation added.
+ * - 2026-07-26: Resolve the incoming value to a finite scalar once (currentPos) —
+ *   string/object payloads made the drag delta NaN and poisoned the cap angle,
+ *   the indicator arc and every tick line.
  */
 
 /**
@@ -178,12 +181,26 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     };
     // Panner: knob outputs TWO values [leftPct, rightPct] (each 0-100).
     const _mid = (min + max) / 2;
-    const _posOf = (v) => Array.isArray(v) ? Number(v[1] ?? _mid) : Number(v ?? _mid);
+    // `value` arrives as whatever the bus carried — a number, a numeric string, or
+    // a {value: ...} object — plus the panner's own [left, right] pair. The drag
+    // delta, the wheel step and the pointer angle all do real arithmetic on it, so
+    // resolve it to one finite scalar position here; anything else rests at the
+    // fallback rather than turning the whole knob into NaN geometry.
+    const _posOf = (v) => {
+        if (Array.isArray(v)) return Number(v[1] ?? _mid);
+        if (v !== null && typeof v === 'object') return Number(v.value);
+        return Number(v ?? _mid);
+    };
+    const _numOr = (v, fallback) => {
+        const n = _posOf(v);
+        return Number.isFinite(n) ? n : fallback;
+    };
+    const currentPos = _numOr(value, isPanner ? _mid : min);
 
     const [localVal, setLocalVal] = React.useState(null);
     const dwellTimerRef = React.useRef(null);
 
-    const displayValue = localVal !== null ? localVal : (isPanner ? _posOf(value) : value);
+    const displayValue = localVal !== null ? localVal : currentPos;
     const fireChange = (newPos) => {
         if (isPanner) {
             const r = (max - min) || 1;
@@ -226,7 +243,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         }
         setIsDragging(true);
         startYRef.current = e.clientY;
-        const cv = isPanner ? _posOf(value) : (value !== undefined && value !== null ? value : min);
+        const cv = currentPos;
         startValRef.current = cv;
         setLocalVal(cv);
         clearTimeout(dwellTimerRef.current);
@@ -257,8 +274,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         const sc = parseFloat(c.domain?.primary?.step ?? c.step);
         const step = (Number.isFinite(sc) && sc > 0) ? sc : range / 50;
         const dir = e.deltaY < 0 ? 1 : -1;
-        const cur = Number(isPanner ? _posOf(value)
-            : ((value !== undefined && value !== null) ? value : min));
+        const cur = currentPos;
         let next = _wrapOrClamp(cur + dir * step);
         next = Math.round(next / step) * step;
         const dec = (String(step).split('.')[1] || '').length;

@@ -1,0 +1,1069 @@
+//! Per-device instrument panels — one control surface per discovered instrument.
+//!
+//! The Rust port of `build_instrument_panels.py`. The instrument panels used to
+//! be a fixed display: one hand-placed DMM tab bound to no instrument in
+//! particular, however many DMMs were actually on the bench. This bench has
+//! eight 34401As, two loads and several scopes; it had one of each on screen.
+//!
+//! So the authored panels live in `BackEnd/Instruments/` and this stamps one
+//! instance per discovered device into the frontend tree — eight DMMs become
+//! eight tabs, each bound to its own VISA resource.
+//!
+//! An instrument type is TWO authored files and no folders:
+//!
+//! ```text
+//! <Type>/<Type>.json     the instrument      — stamped once per device
+//! <Type>/<Type>_N.json   N of the instrument — the block that repeats
+//! ```
+//!
+//! The sub-tab structure a device panel used to get from nested template folders
+//! now comes from the instrument file's top-level keys, so the tree the author
+//! edits is flat and the tree the UI renders is not. That makes key ORDER
+//! load-bearing throughout this module — see the `preserve_order` note in
+//! Cargo.toml.
+//!
+//! Generated output is data: gitignored, and pruned when a device disappears.
+
+use std::collections::{BTreeMap, BTreeSet, HashMap};
+use std::path::{Path, PathBuf};
+
+use regex::Regex;
+use serde_json::{json, Map, Value};
+
+use crate::discovered::Collected;
+
+/// Marker file identifying a generated device folder.
+///
+/// Pruning only ever deletes directories carrying this, so a hand-authored panel
+/// dropped into the same tree survives — deleting someone's authored work
+/// because it sat in a generated directory is not a recoverable mistake.
+const STAMP: &str = ".generated-by-openair";
+
+/// One discovered instrument, as the builder needs it.
+#[derive(Clone, Debug)]
+pub struct Device {
+    pub dtype: String,
+    pub model: String,
+    pub resource: String,
+    pub write_topic: String,
+}
+
+fn template_root(root: &Path) -> PathBuf {
+    root.join("BackEnd").join("Instruments")
+}
+
+fn yak_root(root: &Path) -> PathBuf {
+    root.join("BackEnd").join("openair-yak").join("Yak")
+}
+
+/// Back into the tab the templates were evacuated from, so the Instruments tab
+/// keeps its place in the UI — only its contents are now generated rather than
+/// authored. `left_100` (not `left_50`) because an instrument gets the FULL tab
+/// width: the right-hand half was retired, and a bench panel reads better across
+/// the whole window than squeezed into a column. See
+/// `WindowManager.parseSplitName` — `/^(left|right|top|bottom)_(\d+)$/`, the
+/// number being percent of the parent.
+fn out_root(root: &Path) -> PathBuf {
+    root.join("FrontEnd")
+        .join("Gui_Frames")
+        .join("1_Instruments")
+        .join("left_100")
+}
+
+/// `${name}`, and deliberately not `<name>`: panel templates carry SCPI
+/// fragments (`"command_value": "VOLT <value>"`) and YAK's own command tables
+/// use `<chan>`, `<n>`, `<slot>`. Two substitution passes run over this data —
+/// this one at build time, YAK's at send time — and giving them the same
+/// delimiter is how a slot number ends up where a voltage belongs.
+fn token_re() -> &'static Regex {
+    static RE: std::sync::OnceLock<Regex> = std::sync::OnceLock::new();
+    RE.get_or_init(|| Regex::new(r"\$\{(\w+)\}").unwrap())
+}
+
+fn slot_re() -> &'static Regex {
+    static RE: std::sync::OnceLock<Regex> = std::sync::OnceLock::new();
+    RE.get_or_init(|| Regex::new(r"(?i)gpib\d+,(\d+),(\d+)").unwrap())
+}
+
+fn chassis_re() -> &'static Regex {
+    static RE: std::sync::OnceLock<Regex> = std::sync::OnceLock::new();
+    RE.get_or_init(|| Regex::new(r"(?i)(gpib\d+,\d+),\d+").unwrap())
+}
+
+// ── Instrument facts ─────────────────────────────────────────────────────────
+
+/// What each model IS, from `BackEnd/openair-yak/Yak/**/<model>/model.json`.
+///
+/// Channel counts and voltage/current ranges are properties of the instrument,
+/// so they live with the SCPI vocabulary rather than in the panel. Before this
+/// they lived nowhere machine-readable: the ranges were English in
+/// `knownDevices.json` ("Module 8V / 16A (128W)") and the scope's channel count
+/// was a description field reading "1, 2, 3, 4". Panels therefore shipped with
+/// no clamps at all, and the 8V module and the 60V module got the same widget.
+///
+/// Keyed by model name, not by type — model names are unique across the YAK
+/// tree, and a second type→directory table is a second thing to keep in sync.
+/// The directory may carry a manufacturer prefix (`HP_8903B`), which is split
+/// off so the key is the bare model.
+fn load_capabilities(root: &Path) -> HashMap<String, Value> {
+    let mut caps = HashMap::new();
+    let yak = yak_root(root);
+    let Ok(families) = std::fs::read_dir(&yak) else {
+        return caps;
+    };
+    let mut families: Vec<_> = families.flatten().map(|e| e.path()).collect();
+    families.sort();
+    for family in families {
+        let Ok(models) = std::fs::read_dir(&family) else {
+            continue;
+        };
+        let mut models: Vec<_> = models.flatten().map(|e| e.path()).collect();
+        models.sort();
+        for model_dir in models {
+            let path = model_dir.join("model.json");
+            if !path.is_file() {
+                continue;
+            }
+            let Some(dir_name) = model_dir.file_name().and_then(|n| n.to_str()) else {
+                continue;
+            };
+            // `HP_8903B` -> `8903B`; a bare `34401A` is unchanged.
+            let key = dir_name.splitn(2, '_').last().unwrap_or(dir_name).to_string();
+            if let Ok(body) = std::fs::read_to_string(&path) {
+                if let Ok(value) = serde_json::from_str::<Value>(&body) {
+                    caps.entry(key).or_insert(value);
+                }
+            }
+        }
+    }
+    caps
+}
+
+/// Mainframe slot from a VISA resource, or None if the device isn't in one.
+///
+/// `TCPIP::44.44.44.111::gpib7,30,4::INSTR` — board 7, primary 30, SECONDARY 4.
+/// The secondary address is the 66000A slot, and the only thing distinguishing
+/// the eight modules that all answer at primary 30.
+///
+/// Three comma-parts is the test, and it has to be: the scope at `gpib7,6::INSTR`
+/// has two, where the `6` is its own primary address. Reading that as a slot
+/// would stamp `INST:NSEL 6` onto an instrument that has no slots.
+fn slot_of(resource: &str) -> Option<u32> {
+    slot_re()
+        .captures(resource)
+        .and_then(|c| c.get(2))
+        .and_then(|m| m.as_str().parse().ok())
+}
+
+/// Key identifying the mainframe a device is plugged into.
+///
+/// The resource with the secondary address removed, so all eight modules at
+/// `44.44.44.111::gpib7,30,*` share one key and group together, while a
+/// standalone supply is its own chassis of one.
+fn chassis_of(resource: &str) -> String {
+    chassis_re().replace_all(resource, "$1").into_owned()
+}
+
+/// The instrument's host, for grouping things that share a bench but not a box.
+///
+/// The eight 34401As are eight separate meters at eight GPIB primary addresses
+/// behind one gateway — no mainframe to group them by, yet a bank of eight is
+/// exactly the view that bench wants. `by: "host"` in the manifest selects this
+/// axis; `by: "chassis"` (the default) is for modules that really do plug into
+/// the same frame.
+fn host_of(resource: &str) -> String {
+    resource
+        .split("::")
+        .nth(1)
+        .unwrap_or(resource)
+        .to_string()
+}
+
+/// Folder name for one device — this becomes its tab label.
+///
+/// Model alone is not identity: this bench has eight 34401As reporting serial
+/// "0", so `34401A` would name all eight. The VISA resource is what actually
+/// distinguishes them (host + GPIB address), so the address tail rides along:
+/// `34401A_44-44-44-111_gpib7-4`. Ugly, and correct; a friendly name belongs in
+/// a user-editable alias map, not in the identity that panels are keyed on.
+fn device_slug(model: &str, resource: &str) -> String {
+    let tail = resource.replace("TCPIP::", "").replace("::INSTR", "");
+    let tail = Regex::new(r"[^A-Za-z0-9]+")
+        .unwrap()
+        .replace_all(&tail, "-")
+        .trim_matches('-')
+        .to_string();
+    let slug = if tail.is_empty() {
+        model.to_string()
+    } else {
+        format!("{model}_{tail}")
+    };
+    Regex::new(r"[^A-Za-z0-9_.-]+")
+        .unwrap()
+        .replace_all(&slug, "_")
+        .into_owned()
+}
+
+// ── Template binding ─────────────────────────────────────────────────────────
+
+/// Replace `${...}` through a copied template — in values AND in key names.
+///
+/// Key names matter as much as values: a panel's identity in the frontend tree
+/// is its top-level key, so eight copies of one module template all named
+/// `Power_Module_1` would be eight panels claiming to be the same panel. That
+/// single differing line is the only thing the eight hand-maintained module
+/// files ever encoded.
+fn substitute(node: &Value, tokens: &BTreeMap<String, String>) -> Value {
+    let expand = |s: &str| -> String {
+        token_re()
+            .replace_all(s, |c: &regex::Captures| {
+                tokens
+                    .get(&c[1])
+                    .cloned()
+                    .unwrap_or_else(|| c[0].to_string())
+            })
+            .into_owned()
+    };
+    match node {
+        Value::Object(map) => {
+            let mut out = Map::new();
+            for (k, v) in map {
+                out.insert(expand(k), substitute(v, tokens));
+            }
+            Value::Object(out)
+        }
+        Value::Array(items) => Value::Array(items.iter().map(|v| substitute(v, tokens)).collect()),
+        Value::String(s) => Value::String(expand(s)),
+        other => other.clone(),
+    }
+}
+
+/// Resolve `"yak_domain": "volt"` against the model's capability sheet.
+///
+/// The template names the quantity; the model supplies units and limits. A
+/// template cannot hardcode them and stay one template — this bench runs four
+/// module models spanning 8V/16A to 60V/2.5A off the same panel.
+fn apply_domains(node: &mut Value, caps: &Value) -> usize {
+    let mut resolved = 0;
+    match node {
+        Value::Object(map) => {
+            if let Some(Value::String(key)) = map.get("yak_domain").cloned() {
+                match caps.get("domains").and_then(|d| d.get(&key)) {
+                    Some(Value::Object(spec)) => {
+                        let entry = map
+                            .entry("domain".to_string())
+                            .or_insert_with(|| Value::Object(Map::new()));
+                        if let Value::Object(existing) = entry {
+                            for (k, v) in spec {
+                                existing.insert(k.clone(), v.clone());
+                            }
+                        }
+                        resolved += 1;
+                    }
+                    // Silence here would look identical to a clamped widget.
+                    _ => println!(
+                        "[instrument-gui] no '{key}' domain for model {} — widget left unclamped",
+                        caps.get("model").and_then(|m| m.as_str()).unwrap_or("?")
+                    ),
+                }
+            }
+            for (_, v) in map.iter_mut() {
+                resolved += apply_domains(v, caps);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                resolved += apply_domains(item, caps);
+            }
+        }
+        _ => {}
+    }
+    resolved
+}
+
+/// Point display widgets at the device's SCPI reply topic.
+///
+/// A query is only half a readout: YAK sends `:READ?` to the Write topic, the
+/// VISA daemon executes it and publishes the answer (retained) to `/Read`. A
+/// widget marked `"yak_readout": true` gets `topic` set to that reply topic, so
+/// the meter shows what the instrument said instead of a dash. Without this the
+/// panel can command an instrument but never hear it.
+///
+/// The template cannot hardcode the topic — it is per device — which is why this
+/// is a marker the builder resolves rather than a literal.
+fn bind_readout(node: &mut Value, read_topic: &str) -> usize {
+    let mut bound = 0;
+    match node {
+        Value::Object(map) => {
+            if map.get("yak_readout") == Some(&Value::Bool(true)) {
+                map.insert("topic".to_string(), Value::String(read_topic.to_string()));
+                bound += 1;
+            }
+            for (_, v) in map.iter_mut() {
+                bound += bind_readout(v, read_topic);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                bound += bind_readout(item, read_topic);
+            }
+        }
+        _ => {}
+    }
+    bound
+}
+
+/// Recursively stamp device binding onto every `yak_handler` in a panel.
+///
+/// `target` is the topic the VISA daemon executes SCPI on; without it YAK
+/// publishes every command to its global pub topic, which nothing subscribes to
+/// — the reason the panels never actually drove an instrument. `model` narrows
+/// YAK's SCPI lookup to this instrument's command table instead of "first
+/// command of that name found in any model".
+///
+/// `params` are the constants this instance addresses itself with — `chan` for a
+/// mainframe slot or a scope channel. The command table is per model, and four
+/// of the eight modules here are 66104As, so the slot cannot live in the table:
+/// it read `INST:NSEL 1` for every one of them. YAK substitutes these before the
+/// widget value (`openair-yak/src/verbs/mod.rs`, `apply_params`).
+fn bind_node(
+    node: &mut Value,
+    write_topic: &str,
+    model: &str,
+    params: &BTreeMap<String, String>,
+) -> usize {
+    let mut stamped = 0;
+    match node {
+        Value::Object(map) => {
+            if let Some(Value::Object(handler)) = map.get_mut("yak_handler") {
+                handler.insert("target".to_string(), Value::String(write_topic.to_string()));
+                handler.insert("model".to_string(), Value::String(model.to_string()));
+                if !params.is_empty() {
+                    let mut p = Map::new();
+                    for (k, v) in params {
+                        p.insert(k.clone(), Value::String(v.clone()));
+                    }
+                    handler.insert("params".to_string(), Value::Object(p));
+                }
+                stamped += 1;
+            }
+            for (_, v) in map.iter_mut() {
+                stamped += bind_node(v, write_topic, model, params);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                stamped += bind_node(item, write_topic, model, params);
+            }
+        }
+        _ => {}
+    }
+    stamped
+}
+
+/// Bind one panel document to one device: tokens, limits, topics, slot.
+///
+/// Every panel goes through here, whether it was stamped on its own or nested
+/// into a group, so a module strip in the bank-of-8 is bound exactly as tightly
+/// as the same strip on its own tab.
+fn prepare(
+    doc: &Value,
+    dev: &Device,
+    tokens: Option<&BTreeMap<String, String>>,
+    caps_by_model: &HashMap<String, Value>,
+) -> (Value, usize) {
+    let slot = slot_of(&dev.resource);
+    let empty = Value::Object(Map::new());
+    let caps = caps_by_model.get(&dev.model).unwrap_or(&empty);
+
+    let mut marks = tokens.cloned().unwrap_or_default();
+    marks.entry("model".into()).or_insert_with(|| dev.model.clone());
+    marks.entry("resource".into()).or_insert_with(|| dev.resource.clone());
+    marks
+        .entry("slot".into())
+        .or_insert_with(|| slot.map(|s| s.to_string()).unwrap_or_else(|| "-".into()));
+
+    let mut doc = substitute(doc, &marks);
+    apply_domains(&mut doc, caps);
+
+    // SCPI channel numbering is 1-based; the GPIB secondary address is 0-based.
+    let mut params = BTreeMap::new();
+    if let Some(chan) = marks.get("chan") {
+        params.insert("chan".to_string(), chan.clone());
+    } else if let Some(s) = slot {
+        params.insert("chan".to_string(), (s + 1).to_string());
+    }
+
+    let handlers = bind_node(&mut doc, &dev.write_topic, &dev.model, &params);
+
+    // `/Read` is where the VISA daemon publishes what the instrument answered;
+    // the Write topic is where commands go.
+    if let Some(base) = dev.write_topic.strip_suffix("/Write") {
+        bind_readout(&mut doc, &format!("{base}/Read"));
+    }
+    (doc, handlers)
+}
+
+// ── Files ────────────────────────────────────────────────────────────────────
+
+/// Path of one of an instrument's two authored files.
+fn template(root: &Path, itype: &str, suffix: &str) -> PathBuf {
+    template_root(root)
+        .join(itype)
+        .join(format!("{itype}{suffix}.json"))
+}
+
+/// Load one authored panel, or None if it isn't one.
+fn read_panel(path: &Path) -> Option<Value> {
+    let body = std::fs::read_to_string(path).ok()?;
+    match serde_json::from_str(&body) {
+        Ok(v) => Some(v),
+        Err(e) => {
+            println!("[instrument-gui] skipping malformed {}: {e}", path.display());
+            None
+        }
+    }
+}
+
+fn write_panel(path: &Path, doc: &Value) {
+    if let Some(parent) = path.parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
+    match serde_json::to_string_pretty(doc) {
+        Ok(body) => {
+            if let Err(e) = std::fs::write(path, body) {
+                println!("[instrument-gui] could not write {}: {e}", path.display());
+            }
+        }
+        Err(e) => println!("[instrument-gui] could not serialize {}: {e}", path.display()),
+    }
+}
+
+/// `(repeating block, {deck name: deck block})` from `<Type>_N.json`.
+///
+/// The N file is an ordinary panel — one OcaBin — so it opens in the WYSIWYG
+/// editor like anything else. Grouping unwraps it: the repeating block becomes
+/// one field of a generated station block, which is the shape the hand-authored
+/// `psu_four`/`psu_eight` had, only reached by composition instead of copy-paste.
+///
+/// The repeating block is the one carrying `${n}` in its NAME, because that is
+/// already what makes N copies of it N distinct panels rather than one panel
+/// claiming to exist N times. Every OTHER block is a header deck — a strip that
+/// commands the whole group (`OUTP:ALL`) rather than one member — which a group
+/// spec asks for by name. Power keeps both of its decks that way: the bank of
+/// eight gets the logger, the quads get the master interlock, and neither needs
+/// a folder of its own to live in.
+fn unit_blocks(root: &Path, itype: &str) -> (Option<Value>, Map<String, Value>) {
+    let Some(doc) = read_panel(&template(root, itype, "_N")) else {
+        return (None, Map::new());
+    };
+    let Some(outer) = doc.as_object().and_then(|o| o.values().next()) else {
+        return (None, Map::new());
+    };
+    let blocks = match outer.get("blocks").and_then(|b| b.as_object()) {
+        Some(b) => b.clone(),
+        None => Map::new(),
+    };
+    let unit = blocks
+        .iter()
+        .find(|(name, _)| name.contains("${n}"))
+        .map(|(_, b)| b.clone());
+    let decks: Map<String, Value> = blocks
+        .into_iter()
+        .filter(|(name, _)| !name.contains("${n}"))
+        .collect();
+    (unit, decks)
+}
+
+/// Stamp `<Type>.json` for one device, exploding its top-level keys to tabs.
+///
+/// A device panel's sub-tabs used to be authored as nested template folders —
+/// `Spectrum/Instrument/{amplitude,bandwidth,frequency,markers,traces}/`, one
+/// file each, five folders deep to hold five panels. The folders were the only
+/// thing the author got out of that depth, and the frontend builds tabs from
+/// folders anyway (`WindowManager.TabContainer`), so the keys can carry it:
+///
+/// ```text
+/// {"amplitude": {...}, "bandwidth": {...}}  ->  0_amplitude/, 1_bandwidth/
+/// ```
+///
+/// Key order is tab order, which is why the `<i>_` prefix goes on: TabContainer
+/// sorts on it, and OaTopicMaker strips it back off, so the topic a widget
+/// publishes on is unchanged by the numbering.
+///
+/// A key may instead hold a MAP of panels — the Router's `Coax` tab is two cards
+/// stacked in one pane — which is the same either-a-node-or-a-map test
+/// LoaderOrchestrator already makes on a file's own root. One key and one panel
+/// means no sub-tab at all: the file lands straight in the device folder, as the
+/// single-panel types (DMM, Load, LCR, …) have always rendered.
+fn instantiate(
+    root: &Path,
+    itype: &str,
+    out_dir: &Path,
+    dev: &Device,
+    caps: &HashMap<String, Value>,
+) -> (usize, usize) {
+    let path = template(root, itype, "");
+    let Some(doc) = read_panel(&path) else {
+        println!("[instrument-gui] template missing: {}", path.display());
+        return (0, 0);
+    };
+    let Some(entries) = doc.as_object() else {
+        return (0, 0);
+    };
+
+    if entries.len() == 1 {
+        let (bound, handlers) = prepare(&doc, dev, None, caps);
+        write_panel(&out_dir.join(format!("{itype}.json")), &bound);
+        return (1, handlers);
+    }
+
+    let (mut panels, mut handlers) = (0, 0);
+    for (i, (tab, node)) in entries.iter().enumerate() {
+        // Either the value IS a panel, or it is a map of them.
+        let stack: Map<String, Value> = if node.get("type").map(|t| t.is_string()) == Some(true) {
+            let mut m = Map::new();
+            m.insert(tab.clone(), node.clone());
+            m
+        } else {
+            node.as_object().cloned().unwrap_or_default()
+        };
+        for (j, (name, panel)) in stack.iter().enumerate() {
+            let mut one = Map::new();
+            one.insert(name.clone(), panel.clone());
+            let (bound, n) = prepare(&Value::Object(one), dev, None, caps);
+            write_panel(
+                &out_dir.join(format!("{i}_{tab}")).join(format!("{j}_{name}.json")),
+                &bound,
+            );
+            handlers += n;
+            panels += 1;
+        }
+    }
+    (panels, handlers)
+}
+
+/// Compose N bound copies of one unit template into a single group panel.
+///
+/// This is the whole point of the exercise. `psu_eight.json` was 1183 lines of
+/// one module strip written out eight times; `psu_four.json` was the same strip
+/// four times with a different header. Neither could be right about limits,
+/// because a hand-authored file has one set of widgets and this chassis holds
+/// four different module models — the 8V strip and the 60V strip were the same
+/// strip. Composed here, each copy is bound to its own device, its own slot and
+/// its own model's ranges.
+///
+/// `members` is `[(tokens, device)]` — the caller decides what repeats: sibling
+/// modules across a mainframe, or channels within one instrument.
+fn repeat_unit(
+    root: &Path,
+    itype: &str,
+    spec: &Value,
+    members: &[(BTreeMap<String, String>, Device)],
+    station_id: &str,
+    root_key: &str,
+    caps: &HashMap<String, Value>,
+) -> (Option<Value>, usize) {
+    let (unit, decks) = unit_blocks(root, itype);
+    let Some(unit) = unit else {
+        println!(
+            "[instrument-gui] {} has no ${{n}} block to repeat",
+            template(root, itype, "_N").display()
+        );
+        return (None, 0);
+    };
+
+    let mut fields = Map::new();
+    let mut handlers = 0;
+
+    if let Some(wanted_deck) = spec.get("header").and_then(|h| h.as_str()) {
+        match decks.get(wanted_deck) {
+            None => println!(
+                "[instrument-gui] {itype}_N.json has no '{wanted_deck}' deck — {} built without its header",
+                spec.get("name").and_then(|n| n.as_str()).unwrap_or("?")
+            ),
+            Some(block) => {
+                // The header commands the whole group (`OUTP:ALL`), so it binds
+                // to the first member — any of them reaches the mainframe.
+                let (tokens, dev) = &members[0];
+                let (bound, n) = prepare(block, dev, Some(tokens), caps);
+                handlers += n;
+                fields.insert(wanted_deck.to_string(), bound);
+            }
+        }
+    }
+
+    for (tokens, dev) in members {
+        let (copy, n) = prepare(&unit, dev, Some(tokens), caps);
+        handlers += n;
+        let idx = tokens.get("n").cloned().unwrap_or_default();
+        fields.insert(format!("Unit_{idx}"), copy);
+    }
+
+    let name = spec.get("name").and_then(|n| n.as_str()).unwrap_or("");
+    let description = spec
+        .get("description")
+        .cloned()
+        .unwrap_or_else(|| json!({ "En": name }));
+    let columns = spec
+        .get("columns")
+        .cloned()
+        .unwrap_or_else(|| json!(std::cmp::min(4, members.len())));
+
+    let station = json!({
+        "type": "OcaBlock",
+        "description": description,
+        "layout_columns": columns,
+        "fields": Value::Object(fields),
+    });
+    let station_key = spec
+        .get("station")
+        .and_then(|s| s.as_str())
+        .unwrap_or("Station");
+
+    let doc = json!({
+        root_key: {
+            "type": "OcaBin",
+            "id": station_id,
+            "geometry": { "anchor": "NSEW" },
+            "behavior": { "overflow_ns": "auto", "overflow_ew": "auto", "fluid_ew": true },
+            "blocks": { station_key: station },
+        }
+    });
+    (Some(doc), handlers)
+}
+
+/// Split into groups of `size`; `"all"` means one group of everything.
+fn chunk<T: Clone>(items: &[T], size: &Value) -> Vec<Vec<T>> {
+    if size.as_str() == Some("all") {
+        return if items.is_empty() {
+            vec![]
+        } else {
+            vec![items.to_vec()]
+        };
+    }
+    let n = size.as_u64().unwrap_or(0) as usize;
+    if n == 0 {
+        return vec![];
+    }
+    items.chunks(n).map(|c| c.to_vec()).collect()
+}
+
+/// Emit the group views declared for one instrument type.
+///
+/// `over: "devices"` repeats across the instruments sharing a mainframe — the
+/// bank of 8, the quads, the pairs. `over: "channels"` repeats within a single
+/// instrument, once per channel its model declares, which is the same shape: two
+/// 54641Ds and a 4-channel Rigol are three devices whose panels differ only in
+/// how many identical channel strips they carry.
+fn build_group_panels(
+    root: &Path,
+    itype: &str,
+    spec: &Value,
+    tab: &str,
+    devices: &[Device],
+    caps: &HashMap<String, Value>,
+) -> (usize, usize, BTreeSet<String>) {
+    let (mut written, mut built) = (0, 0);
+    let mut wanted = BTreeSet::new();
+
+    let groups = spec.get("groups").and_then(|g| g.as_array()).cloned().unwrap_or_default();
+    for group in &groups {
+        let gname = group.get("name").and_then(|n| n.as_str()).unwrap_or("");
+        let mut instances: Vec<(String, Vec<(BTreeMap<String, String>, Device)>)> = Vec::new();
+
+        if group.get("over").and_then(|o| o.as_str()) == Some("channels") {
+            for dev in devices {
+                let channels = caps
+                    .get(&dev.model)
+                    .and_then(|c| c.get("channels"))
+                    .and_then(|c| c.as_u64());
+                let Some(n) = channels.filter(|n| *n > 0) else {
+                    println!(
+                        "[instrument-gui] {} declares no channel count in its YAK model.json — {gname} skipped",
+                        dev.model
+                    );
+                    continue;
+                };
+                let members = (1..=n)
+                    .map(|i| {
+                        let mut t = BTreeMap::new();
+                        t.insert("n".to_string(), i.to_string());
+                        t.insert("chan".to_string(), i.to_string());
+                        t.insert("label".to_string(), format!("CH{i}"));
+                        (t, dev.clone())
+                    })
+                    .collect();
+                instances.push((device_slug(&dev.model, &dev.resource), members));
+            }
+        } else {
+            let by_host = group.get("by").and_then(|b| b.as_str()) == Some("host");
+            let mut chassis: BTreeMap<String, Vec<Device>> = BTreeMap::new();
+            for dev in devices {
+                let key = if by_host {
+                    host_of(&dev.resource)
+                } else {
+                    chassis_of(&dev.resource)
+                };
+                chassis.entry(key).or_default().push(dev.clone());
+            }
+            for (key, mut members) in chassis {
+                // Slot order where there are slots, address order otherwise, so
+                // a bank reads left-to-right the way the rack is wired rather
+                // than in whatever order discovery happened to answer.
+                members.sort_by(|a, b| {
+                    (slot_of(&a.resource).unwrap_or(0), &a.resource)
+                        .cmp(&(slot_of(&b.resource).unwrap_or(0), &b.resource))
+                });
+                if members.len() < 2 {
+                    continue; // a "bank" of one is just the device's own panel
+                }
+                let size = group.get("size").cloned().unwrap_or_else(|| json!("all"));
+                for (idx, part) in chunk(&members, &size).into_iter().enumerate() {
+                    let tagged = part
+                        .into_iter()
+                        .enumerate()
+                        .map(|(i, d)| {
+                            let mut t = BTreeMap::new();
+                            t.insert("n".to_string(), (i + 1).to_string());
+                            t.insert("label".to_string(), d.model.clone());
+                            (t, d)
+                        })
+                        .collect();
+                    let slug = device_slug(gname, &key);
+                    let name = if size.as_str() == Some("all") {
+                        slug
+                    } else {
+                        format!("{slug}_{}", idx + 1)
+                    };
+                    instances.push((name, tagged));
+                }
+            }
+        }
+
+        for (slug, members) in instances {
+            // Root key carries the slug: four pair-panels off one mainframe are
+            // four panels, not one panel claiming to exist four times.
+            let root_key = Regex::new(r"[^A-Za-z0-9]+")
+                .unwrap()
+                .replace_all(&slug, "_")
+                .into_owned();
+            let station_id = group
+                .get("id")
+                .and_then(|i| i.as_str())
+                .unwrap_or("50.100.0.0");
+            let (doc, handlers) =
+                repeat_unit(root, itype, group, &members, station_id, &root_key, caps);
+            let Some(doc) = doc else { continue };
+
+            let out_dir = out_root(root).join(tab).join(gname).join(&slug);
+            if out_dir.is_dir() {
+                let _ = std::fs::remove_dir_all(&out_dir);
+            }
+            write_panel(&out_dir.join("group.json"), &doc);
+            write_stamp(
+                &out_dir,
+                &json!({ "group": gname, "members": members.len() }),
+            );
+            wanted.insert(format!("{tab}/{gname}/{slug}"));
+            written += 1;
+            built += 1;
+            println!(
+                "[instrument-gui] {tab}/{gname}/{slug} — {} unit(s), {handlers} bound command(s)",
+                members.len()
+            );
+        }
+    }
+    (written, built, wanted)
+}
+
+fn write_stamp(dir: &Path, body: &Value) {
+    let _ = std::fs::create_dir_all(dir);
+    if let Ok(text) = serde_json::to_string_pretty(body) {
+        let _ = std::fs::write(dir.join(STAMP), text);
+    }
+}
+
+/// Delete generated folders that no longer match a live device or group.
+///
+/// `wanted` holds paths relative to the output root. Matching on the stamp file
+/// rather than on a fixed depth, because a device panel sits at `<tab>/<slug>`
+/// and a group panel one level deeper at `<tab>/<group>/<slug>`. Only stamped
+/// directories are removed — see `STAMP`.
+fn prune(root: &Path, wanted: &BTreeSet<String>) {
+    let out = out_root(root);
+    if !out.is_dir() {
+        return;
+    }
+
+    let mut stale = Vec::new();
+    for entry in walkdir::WalkDir::new(&out).into_iter().flatten() {
+        if !entry.file_type().is_dir() || !entry.path().join(STAMP).is_file() {
+            continue;
+        }
+        let Ok(rel) = entry.path().strip_prefix(&out) else {
+            continue;
+        };
+        let rel = rel.to_string_lossy().replace('\\', "/");
+        if !wanted.contains(&rel) {
+            stale.push((rel, entry.path().to_path_buf()));
+        }
+    }
+    for (rel, path) in stale {
+        let _ = std::fs::remove_dir_all(&path);
+        println!("[instrument-gui] pruned {rel}");
+    }
+
+    // Empty tab/group folders go with them, so a type that vanished from the
+    // bench does not leave a dead tab behind. Deepest-first, so a group folder
+    // emptied by its own pruning is collected in the same pass.
+    let mut dirs: Vec<PathBuf> = walkdir::WalkDir::new(&out)
+        .into_iter()
+        .flatten()
+        .filter(|e| e.file_type().is_dir())
+        .map(|e| e.path().to_path_buf())
+        .collect();
+    dirs.sort_by_key(|p| std::cmp::Reverse(p.components().count()));
+    for dir in dirs {
+        if dir == out {
+            continue;
+        }
+        if std::fs::read_dir(&dir).map(|mut e| e.next().is_none()).unwrap_or(false) {
+            let _ = std::fs::remove_dir(&dir);
+        }
+    }
+}
+
+/// One panel set per device. Returns `(panels_written, devices_built)`.
+pub fn build(root: &Path, devices: &[Device]) -> (usize, usize) {
+    let manifest_path = template_root(root).join("manifest.json");
+    let Some(manifest) = read_panel(&manifest_path) else {
+        println!("[instrument-gui] no manifest at {}", manifest_path.display());
+        return (0, 0);
+    };
+    let caps = load_capabilities(root);
+
+    let mut wanted = BTreeSet::new();
+    let (mut written, mut built) = (0, 0);
+    let mut by_type: BTreeMap<String, Vec<Device>> = BTreeMap::new();
+
+    for dev in devices {
+        by_type.entry(dev.dtype.clone()).or_default().push(dev.clone());
+        let Some(spec) = manifest.get(&dev.dtype) else {
+            // A discovered type with no authored template (VNA, Counter, DAQ,
+            // SMU today). A silent skip would read as a broken build.
+            println!(
+                "[instrument-gui] no template for type '{}' — {} skipped",
+                dev.dtype, dev.model
+            );
+            continue;
+        };
+        let tab = spec.get("tab").and_then(|t| t.as_str()).unwrap_or("");
+        let slug = device_slug(&dev.model, &dev.resource);
+        let out_dir = out_root(root).join(tab).join(&slug);
+        // Rewrite rather than merge: a stale panel from a previous template is
+        // worse than a missing one, and the folder is generated data.
+        if out_dir.is_dir() {
+            let _ = std::fs::remove_dir_all(&out_dir);
+        }
+        let (panels, handlers) = instantiate(root, &dev.dtype, &out_dir, dev, &caps);
+        if panels == 0 {
+            continue;
+        }
+        write_stamp(
+            &out_dir,
+            &json!({
+                "type": dev.dtype,
+                "model": dev.model,
+                "resource": dev.resource,
+                "write_topic": dev.write_topic,
+            }),
+        );
+        wanted.insert(format!("{tab}/{slug}"));
+        written += panels;
+        built += 1;
+        println!("[instrument-gui] {tab}/{slug} — {panels} panel(s), {handlers} bound command(s)");
+    }
+
+    // Group views come after the per-device pass because they are about the
+    // bench rather than about one instrument — which modules share a mainframe,
+    // how many channels a scope has. Nothing to build until every device is in.
+    for (dtype, group_devices) in &by_type {
+        let Some(spec) = manifest.get(dtype) else { continue };
+        if spec.get("groups").and_then(|g| g.as_array()).map(|g| g.is_empty()) != Some(false) {
+            continue;
+        }
+        let tab = spec.get("tab").and_then(|t| t.as_str()).unwrap_or("");
+        let (gw, gb, gwanted) = build_group_panels(root, dtype, spec, tab, group_devices, &caps);
+        written += gw;
+        built += gb;
+        wanted.extend(gwanted);
+    }
+
+    prune(root, &wanted);
+    (written, built)
+}
+
+/// Adapt the discovery mirror's `collected` map to `build`'s device list.
+///
+/// VISA categories ARE the knowledge-base type (DMM, Spectrum, …), so the
+/// category name selects the template. `_topic_prefix` is recorded by the
+/// collector because the device's Write topic cannot be reconstructed from the
+/// row fields alone — the Dev index appears in none of them.
+pub fn devices_from_collected(root: &Path, collected: &Collected) -> Vec<Device> {
+    let manifest = read_panel(&template_root(root).join("manifest.json"));
+    let mut devices = Vec::new();
+    for (category, blocks) in collected {
+        if manifest.as_ref().and_then(|m| m.get(category)).is_none() {
+            continue;
+        }
+        for fields in blocks.values() {
+            let Some(prefix) = fields.get("_topic_prefix") else {
+                continue;
+            };
+            devices.push(Device {
+                dtype: category.clone(),
+                model: fields.get("model").cloned().unwrap_or_else(|| "unknown".into()),
+                resource: fields.get("resource").cloned().unwrap_or_default(),
+                write_topic: format!("{prefix}/Write"),
+            });
+        }
+    }
+    devices
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn dev(model: &str, resource: &str) -> Device {
+        Device {
+            dtype: "Power".into(),
+            model: model.into(),
+            resource: resource.into(),
+            write_topic: "OpenAir/System/Protocols/visa/Device/Power/66104A/Dev0/Write".into(),
+        }
+    }
+
+    #[test]
+    fn a_secondary_address_is_a_slot_but_a_primary_one_is_not() {
+        // board 7, primary 30, SECONDARY 4 -> slot 4.
+        assert_eq!(slot_of("TCPIP::44.44.44.111::gpib7,30,4::INSTR"), Some(4));
+        // The scope's `6` is its own primary address, not a slot. Reading it as
+        // one would stamp INST:NSEL 6 onto an instrument that has no slots.
+        assert_eq!(slot_of("TCPIP::44.44.44.111::gpib7,6::INSTR"), None);
+        assert_eq!(slot_of("TCPIP::44.44.44.66::INSTR"), None);
+    }
+
+    #[test]
+    fn modules_of_one_mainframe_share_a_chassis_key() {
+        let a = chassis_of("TCPIP::44.44.44.111::gpib7,30,0::INSTR");
+        let h = chassis_of("TCPIP::44.44.44.111::gpib7,30,7::INSTR");
+        assert_eq!(a, h);
+        // A standalone instrument is its own chassis of one.
+        assert_ne!(a, chassis_of("TCPIP::44.44.44.111::gpib7,6::INSTR"));
+        // Eight meters behind one gateway group by host instead.
+        assert_eq!(host_of("TCPIP::44.44.44.111::gpib7,4::INSTR"), "44.44.44.111");
+    }
+
+    #[test]
+    fn the_slug_distinguishes_identical_models() {
+        // This bench has eight 34401As all reporting serial "0", so the model
+        // alone would name all eight the same thing.
+        let a = device_slug("34401A", "TCPIP::44.44.44.111::gpib7,4::INSTR");
+        let b = device_slug("34401A", "TCPIP::44.44.44.111::gpib7,11::INSTR");
+        assert_ne!(a, b);
+        // Everything non-alphanumeric in the resource tail collapses to a dash;
+        // only the model/tail join is an underscore. (The Python docstring
+        // renders this as `34401A_44-44-44-111_gpib7-4`, which its own code does
+        // not produce — the generated folders on disk carry the dash.)
+        assert_eq!(a, "34401A_44-44-44-111-gpib7-4");
+        // No resource at all falls back to the bare model.
+        assert_eq!(device_slug("N9340B", ""), "N9340B");
+    }
+
+    #[test]
+    fn substitution_rewrites_key_names_as_well_as_values() {
+        // The key is the panel's identity in the frontend tree, so eight copies
+        // named `PSU_Module_${n}` must become eight DIFFERENT names.
+        let mut tokens = BTreeMap::new();
+        tokens.insert("n".to_string(), "3".to_string());
+        let doc = json!({ "PSU_Module_${n}": { "label": "Module ${n}" } });
+        let out = substitute(&doc, &tokens);
+        assert!(out.get("PSU_Module_3").is_some());
+        assert_eq!(out["PSU_Module_3"]["label"], "Module 3");
+
+        // An unknown token is left alone rather than blanked — a `<value>` SCPI
+        // placeholder must survive to YAK's own substitution pass.
+        let out = substitute(&json!({"cmd": "VOLT ${unknown}"}), &tokens);
+        assert_eq!(out["cmd"], "VOLT ${unknown}");
+    }
+
+    #[test]
+    fn every_handler_gets_its_target_model_and_slot() {
+        let mut caps = HashMap::new();
+        caps.insert("66104A".to_string(), json!({ "model": "66104A" }));
+        let doc = json!({
+            "Panel": { "fields": { "v": { "yak_handler": { "verb": "set" } } } }
+        });
+        let (bound, handlers) = prepare(
+            &doc,
+            &dev("66104A", "TCPIP::44.44.44.111::gpib7,30,4::INSTR"),
+            None,
+            &caps,
+        );
+        assert_eq!(handlers, 1);
+        let h = &bound["Panel"]["fields"]["v"]["yak_handler"];
+        assert_eq!(h["model"], "66104A");
+        assert!(h["target"].as_str().unwrap().ends_with("/Write"));
+        // SCPI channels are 1-based, the GPIB secondary address is 0-based —
+        // slot 4 addresses itself as channel 5.
+        assert_eq!(h["params"]["chan"], "5");
+    }
+
+    #[test]
+    fn a_readout_widget_is_pointed_at_the_reply_topic() {
+        let caps = HashMap::new();
+        let doc = json!({ "P": { "fields": { "m": { "yak_readout": true } } } });
+        let (bound, _) = prepare(&doc, &dev("66104A", ""), None, &caps);
+        assert_eq!(
+            bound["P"]["fields"]["m"]["topic"],
+            "OpenAir/System/Protocols/visa/Device/Power/66104A/Dev0/Read"
+        );
+    }
+
+    #[test]
+    fn domains_come_from_the_model_not_the_template() {
+        // The 8V module and the 60V module share one template; only the model's
+        // capability sheet can tell the widgets apart.
+        let mut caps = HashMap::new();
+        caps.insert(
+            "66104A".to_string(),
+            json!({ "model": "66104A", "domains": { "volt": { "min": 0, "max": 60 } } }),
+        );
+        let doc = json!({ "P": { "fields": { "v": { "yak_domain": "volt" } } } });
+        let (bound, _) = prepare(&doc, &dev("66104A", ""), None, &caps);
+        assert_eq!(bound["P"]["fields"]["v"]["domain"]["max"], 60);
+    }
+
+    #[test]
+    fn chunking_splits_banks_and_all_means_one_group() {
+        let items = vec![1, 2, 3, 4, 5];
+        assert_eq!(chunk(&items, &json!("all")), vec![vec![1, 2, 3, 4, 5]]);
+        assert_eq!(chunk(&items, &json!(2)), vec![vec![1, 2], vec![3, 4], vec![5]]);
+        let empty: Vec<i32> = vec![];
+        assert!(chunk(&empty, &json!("all")).is_empty());
+    }
+
+    #[test]
+    fn template_key_order_becomes_tab_order() {
+        // Alphabetically `amplitude` precedes `bandwidth`, so this test only
+        // means anything because serde_json is built with preserve_order: the
+        // point is that the AUTHORED order wins, whatever it is.
+        let doc: Value =
+            serde_json::from_str(r#"{"zulu": {"type": "OcaBin"}, "alpha": {"type": "OcaBin"}}"#)
+                .unwrap();
+        let keys: Vec<&String> = doc.as_object().unwrap().keys().collect();
+        assert_eq!(keys, vec!["zulu", "alpha"], "key order was not preserved");
+    }
+}

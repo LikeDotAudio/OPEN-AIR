@@ -19,7 +19,7 @@ pub struct YakHandler {
     /// Where this control's SCPI goes — the VISA daemon's Write topic for ONE
     /// instrument (`.../visa/Device/DMM/34401A/Dev3/Write`).
     ///
-    /// Stamped per instance by Deployment/build_instrument_panels.py, so eight
+    /// Stamped per instance by the orchestrator's instruments.rs, so eight
     /// discovered 34401As get eight panels that each drive their own meter.
     /// Absent on hand-authored panels, which fall back to the global publish
     /// topic — historically the only path, and one nothing subscribes to, which
@@ -43,7 +43,7 @@ pub struct YakHandler {
     /// this bench are 66104As. With no per-instance channel there was nowhere
     /// to put the slot except the table itself, which is why every module
     /// command read `INST:NSEL 1` — one table, eight modules, all of them
-    /// addressing slot 1. Stamped by Deployment/build_instrument_panels.py from
+    /// addressing slot 1. Stamped by the orchestrator's instruments.rs from
     /// the VISA resource (`gpib7,30,4::INSTR` → `chan = 5`).
     #[serde(default)]
     pub params: std::collections::HashMap<String, String>,

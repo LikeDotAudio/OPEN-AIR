@@ -91,7 +91,7 @@ impl YakRepository {
                 self.load_table(&p);
             }
             // `model.json` beside it is the capability sheet — channel counts and
-            // voltage/current ranges, read by Deployment/build_instrument_panels.py
+            // voltage/current ranges, read by the orchestrator's instruments.rs
             // to clamp widgets. What the model IS, not what it accepts.
         }
     }

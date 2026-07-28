@@ -11,6 +11,7 @@
 mod api;
 mod cli;
 mod discovered;
+mod instruments;
 mod mqtt;
 
 use axum::{
@@ -286,7 +287,7 @@ async fn main() {
         openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
     });
 
-    // Discovered-device panels and live tables (was Deployment/build_discovered_gui.py).
+    // Discovered-device panels and live tables (see discovered.rs).
     // One mirror of the retained discovery tree serves both the scan loop, which
     // rebuilds the panel FILES, and the watcher task, which keeps the rows live.
     let discovered_mirror = discovered::Mirror::spawn(root.clone(), &mqtt_host, mqtt_port);
@@ -631,7 +632,7 @@ const SCAN_STATE_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/State";
 /// ONE instrument is probed per tick, round-robin, so this is also the per-device
 /// load: a 24-instrument bench sees one VISA session every 20 seconds and each
 /// instrument is re-verified about every 8 minutes — comfortably inside
-/// ONLINE_WINDOW_SECONDS (15 min) in build_discovered_gui.py, which is what
+/// ONLINE_WINDOW_SECONDS (15 min) in discovered.rs, which is what
 /// decides whether a row is green.
 ///
 /// Liveness used to be a by-product of scanning: `last_online` was stamped when a

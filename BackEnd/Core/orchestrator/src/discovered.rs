@@ -1294,10 +1294,12 @@ impl Mirror {
         }
 
         // One control surface per discovered instrument, stamped from the
-        // backend template library. Still Python — the next step of this port
-        // takes it. It collects the same retained tree itself, so it needs
-        // nothing passed in.
-        self.build_instrument_panels();
+        // backend template library. Runs from the map just collected rather than
+        // re-reading the bus, and in-process rather than as a second writer, so
+        // it cannot race the panel tree this just wrote.
+        let instruments = crate::instruments::devices_from_collected(&self.root, &collected);
+        let (panels, built) = crate::instruments::build(&self.root, &instruments);
+        println!("[discovered-gui] instrument panels: {built} device(s), {panels} file(s)");
 
         // Seed the live topics too, so a panel written now has rows the instant
         // it loads rather than waiting for the watcher's first change.
@@ -1328,39 +1330,6 @@ impl Mirror {
 
         if written == 0 {
             println!("[discovered-gui] no retained discovery topics found — only the scan panel written");
-        }
-    }
-
-    /// Stamp one control panel per discovered instrument.
-    ///
-    /// Interim: `build_instrument_panels.py` is the next thing this port
-    /// replaces. Run to completion rather than detached, because it writes into
-    /// the same `Gui_Frames` tree the build above just wrote and two writers
-    /// would race.
-    fn build_instrument_panels(&self) {
-        let builder = self
-            .root
-            .join("BackEnd/Core/orchestrator/gui/build_instrument_panels.py");
-        if !builder.is_file() {
-            println!("⚠️  [DISCOVERED-GUI] instrument panel builder not found at {}", builder.display());
-            return;
-        }
-        match std::process::Command::new("python3").arg(&builder).output() {
-            Ok(out) => {
-                // Its own per-panel narration is worth keeping — it is the only
-                // report of which instruments got bound commands.
-                for line in String::from_utf8_lossy(&out.stdout).lines() {
-                    println!("{line}");
-                }
-                if !out.status.success() {
-                    println!(
-                        "⚠️  [DISCOVERED-GUI] instrument panel build failed: {}",
-                        String::from_utf8_lossy(&out.stderr).trim()
-                    );
-                }
-            }
-            // A panel-build failure must not lose the tables.
-            Err(e) => println!("⚠️  [DISCOVERED-GUI] instrument panel build failed: {e}"),
         }
     }
 

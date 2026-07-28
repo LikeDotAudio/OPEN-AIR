@@ -76,18 +76,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin \
 # compose so edits from the WYSIWYG editor land on the host, not in the layer.
 COPY FrontEnd   ./FrontEnd
 
-# The Discovered/instrument panel builders the orchestrator shells out to. They
-# resolve as `BackEnd/Core/orchestrator/gui/...` from the working directory, so
-# they have to land under /app at exactly that path — miss it and every scan
-# ends in "[DISCOVERED-GUI] builder not found" and no tabs are written.
-#
-# They used to be part of `COPY Deployment`, which is why that line carried
-# them; Deployment/ is now only the host-side launcher, which the container
-# never runs (see CMD — it execs the orchestrator binary directly).
-COPY BackEnd/Core/orchestrator/gui ./BackEnd/Core/orchestrator/gui
+# No panel-builder copy here any more: the Discovered tables and the per-device
+# instrument panels are built inside the orchestrator binary (discovered.rs and
+# instruments.rs). What used to be two Python builders shelled out to on every
+# scan is now compiled in, so the image needs nothing on disk for them.
 
 # Instrument panel templates. Not source and not UI — the library that
-# build_instrument_panels.py stamps one instance from per discovered device, so
+# instruments.rs stamps one instance from per discovered device, so
 # eight 34401As get eight bound panels. Without it that builder finds no
 # manifest and every instrument tab silently stays empty.
 COPY BackEnd/Instruments ./BackEnd/Instruments

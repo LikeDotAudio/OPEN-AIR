@@ -240,7 +240,7 @@ def report(type_name, vocab, verbose=False):
 def emit_stubs(type_name, matched):
     """yak_handler blocks for the proposed bindings, ready to paste.
 
-    `target` and `model` are deliberately absent: build_instrument_panels.py
+    `target` and `model` are deliberately absent: the orchestrator's instruments.rs
     stamps those per device, and a hardcoded one in the template would point
     every instance at the same instrument.
     """

@@ -6,7 +6,12 @@ edition = "2021"
 [dependencies]
 tokio = { version = "1.36", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+# preserve_order is REQUIRED, not a preference. Panel JSON uses key order as
+# layout: a template's top-level key order is its tab order (and the `0_`, `1_`
+# prefixes derived from it), and a block's field order is the order widgets
+# render in. serde_json's default sorts object keys alphabetically, which would
+# silently reorder every generated tab and control surface.
+serde_json = { version = "1.0", features = ["preserve_order"] }
 crossbeam-channel = "0.5"
 axum = { version = "0.7", features = ["ws"] }
 config = "0.14"

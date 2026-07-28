@@ -17,7 +17,7 @@ sheet that stays quiet about it reads as 3600 working commands.
 `Arguments` and `Instance params` split the SCPI placeholders two ways, and the
 split is the whole reason a panel author reads this file. Arguments come from the
 operator through sibling `Input/*` widgets; instance params (`<chan>`, `<slot>`)
-are stamped per panel by build_instrument_panels.py and substituted by
+are stamped per panel by the orchestrator's instruments.rs and substituted by
 `verbs::apply_params` BEFORE any widget value goes in. A placeholder in neither
 column is a name nothing will ever fill — the verb refuses to send rather than
 half-build the command, so it shows up here as a table bug, not a runtime mystery.

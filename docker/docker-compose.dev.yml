@@ -42,13 +42,17 @@ services:
       # subdirectory of this one, so authored panels still land on the host and
       # still show up in `git diff` — that behaviour is preserved, not dropped.
       - ../FrontEnd:/app/FrontEnd
-      # Deployment/ too, for the same reason and one worse failure mode. The
-      # orchestrator spawns Deployment/build_discovered_gui.py to WRITE the
-      # Discovered panels, so a stale in-image copy does not merely fail to pick
-      # up an edit — it silently overwrites the edited panels with its own older
-      # output on the next rescan. Pure Python here (the image installs the pip
-      # deps into site-packages), so mounting it needs no rebuild.
-      - ../Deployment:/app/Deployment
+      # The GUI builders too, for the same reason and one worse failure mode. The
+      # orchestrator spawns build_discovered_gui.py to WRITE the Discovered
+      # panels, so a stale in-image copy does not merely fail to pick up an edit
+      # — it silently overwrites the edited panels with its own older output on
+      # the next rescan. Pure Python here (the image installs the pip deps into
+      # site-packages), so mounting it needs no rebuild.
+      #
+      # These used to live in Deployment/, which is why that whole directory was
+      # mounted. They moved under the orchestrator that spawns them; Deployment/
+      # is now only the host-side launcher and the container never runs it.
+      - ../BackEnd/Core/orchestrator/gui:/app/BackEnd/Core/orchestrator/gui
       # The instrument template library the panel builder stamps from. Mounted
       # for the same reason: editing a template should show up on the next scan,
       # not on the next image build.

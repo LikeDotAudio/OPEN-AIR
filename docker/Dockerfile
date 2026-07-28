@@ -75,7 +75,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin \
 # The served UI and the authored panel tree. Gui_Frames is bind-mounted in
 # compose so edits from the WYSIWYG editor land on the host, not in the layer.
 COPY FrontEnd   ./FrontEnd
-COPY Deployment ./Deployment
+
+# The Discovered/instrument panel builders the orchestrator shells out to. They
+# resolve as `BackEnd/Core/orchestrator/gui/...` from the working directory, so
+# they have to land under /app at exactly that path — miss it and every scan
+# ends in "[DISCOVERED-GUI] builder not found" and no tabs are written.
+#
+# They used to be part of `COPY Deployment`, which is why that line carried
+# them; Deployment/ is now only the host-side launcher, which the container
+# never runs (see CMD — it execs the orchestrator binary directly).
+COPY BackEnd/Core/orchestrator/gui ./BackEnd/Core/orchestrator/gui
 
 # Instrument panel templates. Not source and not UI — the library that
 # build_instrument_panels.py stamps one instance from per discovered device, so

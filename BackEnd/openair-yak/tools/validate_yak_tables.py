@@ -1,7 +1,7 @@
 """Check the YAK command tables against their own invariants.
 
-    python3 Deployment/validate_yak_tables.py           # report
-    python3 Deployment/validate_yak_tables.py --strict  # exit 1 on any finding
+    python3 BackEnd/openair-yak/tools/validate_yak_tables.py           # report
+    python3 BackEnd/openair-yak/tools/validate_yak_tables.py --strict  # exit 1 on any finding
 
 Written after a multi-step edit pass silently dropped ten hand-authored commands:
 the tables are large enough now that a regression is invisible in a diff, and
@@ -19,7 +19,10 @@ import os
 import re
 import sys
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/openair-yak/tools/ -> repo root is three levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+)
 YAK = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 VERBS = ("set", "do", "rig", "nab")
 VOWELS = set("AEIOU")

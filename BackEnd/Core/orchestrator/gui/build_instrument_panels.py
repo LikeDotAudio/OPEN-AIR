@@ -11,7 +11,7 @@ tree — eight DMMs become eight tabs, each bound to its own VISA resource.
 
 Called by build_discovered_gui.py after every scan; also runnable by hand:
 
-    python3 Deployment/build_instrument_panels.py
+    python3 BackEnd/Core/orchestrator/gui/build_instrument_panels.py
 
 Generated output is data: gitignored, and pruned when a device disappears.
 
@@ -30,7 +30,10 @@ import os
 import re
 import shutil
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/Core/orchestrator/gui/ -> repo root is four levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..")
+)
 TEMPLATE_ROOT = os.path.join(REPO_ROOT, "BackEnd", "Instruments")
 YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 

@@ -11,8 +11,8 @@ domain knowledge no generator can reproduce — that the 6060B is a power supply
 running backwards, that a 66000A module is unreachable until you select its slot.
 Regenerating replaces the block and leaves that prose alone.
 
-    python3 Deployment/build_yak_command_trees.py           # rewrite every tree
-    python3 Deployment/build_yak_command_trees.py --check    # exit 1 if stale
+    python3 BackEnd/openair-yak/tools/build_yak_command_trees.py           # rewrite every tree
+    python3 BackEnd/openair-yak/tools/build_yak_command_trees.py --check    # exit 1 if stale
 """
 import argparse
 import glob
@@ -21,10 +21,17 @@ import os
 import re
 import sys
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/openair-yak/tools/ -> repo root is three levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+)
 YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 
-BEGIN = "<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->"
+BEGIN = "<!-- BEGIN GENERATED — BackEnd/openair-yak/tools/build_yak_command_trees.py -->"
+# Trees generated before this tool moved out of Deployment/ carry the old
+# marker. Recognised so a regeneration REPLACES that block, instead of failing
+# to find it and burying the whole stale tree under "Notes carried over".
+LEGACY_BEGIN = "<!-- BEGIN GENERATED — BackEnd/openair-yak/tools/build_yak_command_trees.py -->"
 END = "<!-- END GENERATED -->"
 CARRIED = "## Notes carried over"
 
@@ -161,7 +168,7 @@ def render(rel, table):
     out = [BEGIN, "",
            f"# {family}/{model} — command tree", "",
            f"Generated from `commands.json` by "
-           f"`Deployment/build_yak_command_trees.py`. Edit the table, not this file.", "",
+           f"`BackEnd/openair-yak/tools/build_yak_command_trees.py`. Edit the table, not this file.", "",
            f"**{total} commands** — SET {counts['set']} · RIG {counts['rig']} · "
            f"NAB {counts['nab']} · DO {counts['do']}"
            + (f" · {unverified} unverified ({unverified * 100 // total}%)"
@@ -204,10 +211,11 @@ def merge(path, block):
     if not os.path.exists(path):
         return block + "\n"
     existing = open(path).read()
-    if BEGIN in existing and END in existing:
-        head, _, rest = existing.partition(BEGIN)
-        _, _, tail = rest.partition(END)
-        return head + block + tail
+    for marker in (BEGIN, LEGACY_BEGIN):
+        if marker in existing and END in existing:
+            head, _, rest = existing.partition(marker)
+            _, _, tail = rest.partition(END)
+            return head + block + tail
     # First run against a hand-written tree: keep every word of it.
     return f"{block}\n\n---\n\n{CARRIED}\n\n{existing.lstrip()}"
 

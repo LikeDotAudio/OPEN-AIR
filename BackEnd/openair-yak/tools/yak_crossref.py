@@ -21,9 +21,9 @@ DMM's `Mode_FRES` means four-wire resistance; the curated ALIASES table carries
 the domain knowledge, and everything else is scored so a human can judge it.
 Nothing here writes a binding — see --emit for a handler stub.
 
-    python3 Deployment/yak_crossref.py                 # summary for every type
-    python3 Deployment/yak_crossref.py DMM --verbose   # full table for one type
-    python3 Deployment/yak_crossref.py DMM --emit      # yak_handler stubs to paste
+    python3 BackEnd/openair-yak/tools/yak_crossref.py                 # summary for every type
+    python3 BackEnd/openair-yak/tools/yak_crossref.py DMM --verbose   # full table for one type
+    python3 BackEnd/openair-yak/tools/yak_crossref.py DMM --emit      # yak_handler stubs to paste
 """
 import argparse
 import difflib
@@ -32,7 +32,10 @@ import json
 import os
 import re
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/openair-yak/tools/ -> repo root is three levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+)
 YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 TEMPLATE_ROOT = os.path.join(REPO_ROOT, "BackEnd", "Instruments")
 

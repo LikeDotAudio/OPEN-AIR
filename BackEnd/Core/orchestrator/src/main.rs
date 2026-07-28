@@ -513,7 +513,7 @@ async fn main() {
         {
             let builder = std::env::current_dir()
                 .unwrap_or_else(|_| std::path::PathBuf::from("."))
-                .join("Deployment/build_discovered_gui.py");
+                .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
             if builder.is_file() {
                 match tokio::process::Command::new("python3").arg(&builder).spawn() {
                     Ok(_) => {
@@ -633,7 +633,7 @@ const SCAN_STATE_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/State";
 fn spawn_discovered_watcher() {
     let builder = std::env::current_dir()
         .unwrap_or_else(|_| std::path::PathBuf::from("."))
-        .join("Deployment/build_discovered_gui.py");
+        .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
     if !builder.is_file() {
         return;
     }
@@ -652,7 +652,7 @@ fn spawn_discovered_watcher() {
 fn spawn_discovered_builder() {
     let builder = std::env::current_dir()
         .unwrap_or_else(|_| std::path::PathBuf::from("."))
-        .join("Deployment/build_discovered_gui.py");
+        .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
     if !builder.is_file() {
         return;
     }

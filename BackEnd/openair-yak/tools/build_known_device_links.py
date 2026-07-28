@@ -1,7 +1,7 @@
 """Point each known device at its command table, where one exists.
 
-    python3 Deployment/build_known_device_links.py           # rewrite the links
-    python3 Deployment/build_known_device_links.py --check    # exit 1 if stale
+    python3 BackEnd/openair-yak/tools/build_known_device_links.py           # rewrite the links
+    python3 BackEnd/openair-yak/tools/build_known_device_links.py --check    # exit 1 if stale
 
 `Yak/knownDevices.json` says what an instrument IS — `*IDN?` gives a model, this
 gives back a manufacturer, a type and a note. What it could not say is whether
@@ -27,7 +27,10 @@ import json
 import os
 import sys
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/openair-yak/tools/ -> repo root is three levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+)
 YAK = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 KNOWN = os.path.join(YAK, "knownDevices.json")
 FIELD_ORDER = ("manufacturer", "type", "notes", "commands")

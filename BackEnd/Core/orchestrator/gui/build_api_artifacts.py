@@ -3,7 +3,11 @@ import os
 import json
 import urllib.request
 
-script_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "FrontEnd")
+# BackEnd/Core/orchestrator/gui/ -> repo root is four levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..")
+)
+script_dir = os.path.join(REPO_ROOT, "FrontEnd")
 
 def generate_api_tree():
     """Generate the static /api/tree JSON file from the Gui_Frames folder"""

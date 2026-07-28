@@ -22,8 +22,8 @@ are stamped per panel by build_instrument_panels.py and substituted by
 column is a name nothing will ever fill — the verb refuses to send rather than
 half-build the command, so it shows up here as a table bug, not a runtime mystery.
 
-    python3 Deployment/build_yak_command_list.py           # rewrite both files
-    python3 Deployment/build_yak_command_list.py --check    # exit 1 if stale
+    python3 BackEnd/openair-yak/tools/build_yak_command_list.py           # rewrite both files
+    python3 BackEnd/openair-yak/tools/build_yak_command_list.py --check    # exit 1 if stale
 """
 import argparse
 import csv
@@ -33,7 +33,10 @@ import os
 import re
 import sys
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/openair-yak/tools/ -> repo root is three levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+)
 YAK_ROOT = os.path.join(REPO_ROOT, "BackEnd", "openair-yak", "Yak")
 CSV_PATH = os.path.join(YAK_ROOT, "CommandList.csv")
 XLSX_PATH = os.path.join(YAK_ROOT, "CommandList.xlsx")

@@ -17,7 +17,7 @@ by the Phase 4 Device Registry + live Discovered widget):
 - output dir is generated data: gitignored, excluded from openair-validate
 
 Spawned by the orchestrator after the VISA scan completes; also runnable by
-hand: python3 Deployment/build_discovered_gui.py
+hand: python3 BackEnd/Core/orchestrator/gui/build_discovered_gui.py
 """
 import fcntl
 import json
@@ -28,7 +28,10 @@ import time
 
 import paho.mqtt.client as mqtt
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BackEnd/Core/orchestrator/gui/ -> repo root is four levels up.
+REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..")
+)
 OUT_DIR = os.path.join(REPO_ROOT, "FrontEnd", "Gui_Frames", "0_discovered")
 
 # Where live table rows are published, one retained topic per category.

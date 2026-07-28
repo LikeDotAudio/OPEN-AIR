@@ -16,12 +16,12 @@ ordering prefixes: those are the UI's tab-order mechanism and mean nothing here.
 Generated output takes its ordering from `manifest.json` and from key order
 within the files below.
 
-`Deployment/build_instrument_panels.py` is the only reader, and it
+`BackEnd/Core/orchestrator/gui/build_instrument_panels.py` is the only reader, and it
 writes the instances into `FrontEnd/Gui_Frames/1_Instruments/left_100/`
 (generated, gitignored) — `_100` because an instrument panel now takes the FULL
 tab width. The `right_50` half it used to sit beside is iced at
 `1_Instruments/__right_50/`; the `__` prefix is what makes the tree walkers skip
-it (`BackEnd/Core/orchestrator/src/api.rs`, `Deployment/build_api_artifacts.py`),
+it (`BackEnd/Core/orchestrator/src/api.rs`, `BackEnd/Core/orchestrator/gui/build_api_artifacts.py`),
 so it stays in the repo but never reaches the UI. Rename it back to restore.
 
 ## Two files, no folders

@@ -209,7 +209,7 @@ rather than idle.
 
 ## Discovered tab
 
-`Deployment/build_discovered_gui.py` subscribes to the tree above and builds a
+`BackEnd/Core/orchestrator/gui/build_discovered_gui.py` subscribes to the tree above and builds a
 `ptp` tab, one row per port, with the grandmaster columns first — `grandmaster`
 and `gm_class` answer "is time healthy?", which is the question the tab exists
 for.

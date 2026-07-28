@@ -9,8 +9,8 @@ reviews moved into their own folder. A claim that is only true on the day it is
 made is not a check. This is the check.
 
 Usage:
-    python3 Deployment/check_doc_links.py          # whole repo
-    python3 Deployment/check_doc_links.py Documents  # a subtree
+    python3 BackEnd/Tools/check_doc_links.py          # whole repo
+    python3 BackEnd/Tools/check_doc_links.py Documents  # a subtree
 
 Exits 1 with a report if anything is dead. Stdlib only, no third-party deps.
 """

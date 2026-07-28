@@ -49,6 +49,42 @@ def tables():
             yield path, json.load(f)
 
 
+def check_known_devices(findings):
+    """The `commands` links in knownDevices.json must resolve and be complete.
+
+    A dangling link reads as coverage, and a model with a table but no entry is
+    unreachable by discovery however complete its vocabulary is.
+    """
+    known_path = os.path.join(YAK, "knownDevices.json")
+    try:
+        with open(known_path) as f:
+            known = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        findings.append(("knownDevices", known_path, f"unreadable: {e}"))
+        return
+    on_disk = {}
+    for path in glob.glob(os.path.join(YAK, "*", "*", "commands.json")):
+        with open(path) as f:
+            on_disk[json.load(f).get("model")] = \
+                os.path.relpath(path, YAK).replace(os.sep, "/")
+    for model, rec in known.items():
+        link = rec.get("commands")
+        if link and not os.path.isfile(os.path.join(YAK, link)):
+            findings.append((model, "knownDevices.commands",
+                             f"link points at nothing: {link}"))
+        elif link and on_disk.get(model) != link:
+            findings.append((model, "knownDevices.commands",
+                             f"link is {link}, table is at {on_disk.get(model)}"))
+        elif not link and model in on_disk:
+            findings.append((model, "knownDevices.commands",
+                             f"has a table ({on_disk[model]}) but no link"))
+    for model, rel in on_disk.items():
+        if model not in known:
+            findings.append((model, rel,
+                             "command table with no knownDevices entry — "
+                             "discovery cannot reach it"))
+
+
 def check():
     findings = []
     counts = {}
@@ -140,6 +176,7 @@ def check():
                                 "scpiFast is not the short form of its keywords")
                             break
         counts[model] = n
+    check_known_devices(findings)
     return findings, counts
 
 

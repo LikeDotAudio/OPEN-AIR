@@ -4,7 +4,52 @@ The SCPI vocabulary, one file per instrument model:
 
     <Family>/<Model>/commands.json    what the model ACCEPTS — the command table
     <Family>/<Model>/model.json       what the model IS — channels, V/A ranges
-    <Family>/<Model>/commands_tree.md hand-written SCPI reference for the model
+    <Family>/<Model>/commands_tree.md the model's SCPI tree, generated
+
+## A folder per known device
+
+`knownDevices.json` lists 181 instruments this bench might meet, and every one of
+them has a `<Type>/<Model>/` folder here — vocabulary or not. 16 have a command
+table; the other 165 carry a `model.json` reading `"vocabulary": "none"`.
+
+That is the point of them. A directory listing is now the inventory: a model with
+no table is a *known* gap with a name, a manufacturer and a one-line description,
+rather than an instrument nobody thought about. Five families exist here only as
+folders — Counter, DAQ, SMU, VNA and most of Oscilloscope — and none of them had
+anywhere to put a command table before.
+
+Seeded sheets carry nothing invented: `model`, `manufacturer`, `type` and `notes`,
+straight out of the list. Channel counts and domains are absent until someone
+reads a manual, because a guessed clamp is worse than an unclamped widget.
+
+The list points back. A device with a table gains a path to it, relative to this
+directory, so the pair travels together:
+
+    "34401A": { "manufacturer": "HP / Agilent / Keysight", "type": "DMM",
+                "notes": "6.5 Digit Benchtop Standard (Legacy)",
+                "commands": "DMM/34401A/commands.json" }
+
+Only the 16 populated models carry the key. Every one of the 181 has a
+`model.json`, so a link to *that* would be present on all of them and tell a
+reader nothing; `commands` is present exactly where there is something to read.
+
+Generated, never hand-kept — an index of 181 entries against a tree that gains
+tables one instrument at a time is wrong by the second commit:
+
+    python3 Deployment/build_known_device_links.py           # rewrite the links
+    python3 Deployment/build_known_device_links.py --check    # exit 1 if stale
+
+A dead link is worse than no link, because it reads as coverage, so
+`validate_yak_tables.py` fails on one that resolves to nothing, on one pointing
+somewhere other than where the table actually is, on a table with no link, and on
+a table whose model has no entry at all — that last one is a full vocabulary that
+discovery can never reach, since `*IDN?` yields a model and a model absent from
+the list answers "Unknown Instrument".
+
+`Scope/` was renamed `Oscilloscope/` to match: `manifest.json`,
+`BackEnd/Instruments/` and `knownDevices.json` all use the long name, and this
+tree was the only place that did not. The two tables that moved had their
+declared `family` updated with the path.
 
 `commands.json` buckets every command under the YAK verb that handles it
 (`src/verbs/`), so a panel author picks `yak_type` by reading the file:

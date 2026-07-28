@@ -77,7 +77,8 @@
   "3235": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Router",
-    "notes": "High-perf Switching Matrix"
+    "notes": "High-perf Switching Matrix",
+    "commands": "Router/3235/commands.json"
   },
   "3235A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -92,12 +93,14 @@
   "33210A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Generator",
-    "notes": "10 MHz Function/Arb"
+    "notes": "10 MHz Function/Arb",
+    "commands": "Generator/33210A/commands.json"
   },
   "33220A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Generator",
-    "notes": "20 MHz Function/Arb"
+    "notes": "20 MHz Function/Arb",
+    "commands": "Generator/33220A/commands.json"
   },
   "33250A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -177,7 +180,8 @@
   "34401A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "DMM",
-    "notes": "6.5 Digit Benchtop Standard (Legacy)"
+    "notes": "6.5 Digit Benchtop Standard (Legacy)",
+    "commands": "DMM/34401A/commands.json"
   },
   "34410A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -242,7 +246,8 @@
   "4263A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "LCR",
-    "notes": "LCR Meter (100 Hz - 100 kHz test signal)"
+    "notes": "LCR Meter (100 Hz - 100 kHz test signal)",
+    "commands": "LCR/4263A/commands.json"
   },
   "53131A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -282,7 +287,8 @@
   "54641D": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Oscilloscope",
-    "notes": "Mixed Signal (2+16 Chan, 350MHz)"
+    "notes": "Mixed Signal (2+16 Chan, 350MHz)",
+    "commands": "Oscilloscope/54641D/commands.json"
   },
   "6032A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -292,7 +298,8 @@
   "6060B": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Load",
-    "notes": "DC Electronic Load (300W, 60V, 60A)"
+    "notes": "DC Electronic Load (300W, 60V, 60A)",
+    "commands": "Load/6060B/commands.json"
   },
   "6063B": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -307,22 +314,26 @@
   "66101A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Power",
-    "notes": "Module 8V / 16A (128W)"
+    "notes": "Module 8V / 16A (128W)",
+    "commands": "Power/66101A/commands.json"
   },
   "66102A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Power",
-    "notes": "Module 20V / 7.5A (150W)"
+    "notes": "Module 20V / 7.5A (150W)",
+    "commands": "Power/66102A/commands.json"
   },
   "66103A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Power",
-    "notes": "Module 35V / 4.5A (150W)"
+    "notes": "Module 35V / 4.5A (150W)",
+    "commands": "Power/66103A/commands.json"
   },
   "66104A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Power",
-    "notes": "Module 60V / 2.5A (150W)"
+    "notes": "Module 60V / 2.5A (150W)",
+    "commands": "Power/66104A/commands.json"
   },
   "6632B": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -487,7 +498,8 @@
   "DS1104Z": {
     "manufacturer": "Rigol",
     "type": "Oscilloscope",
-    "notes": "100 MHz 4 Ch Digital"
+    "notes": "100 MHz 4 Ch Digital",
+    "commands": "Oscilloscope/DS1104Z/commands.json"
   },
   "DS1104Z Plus": {
     "manufacturer": "Rigol",
@@ -712,7 +724,8 @@
   "HPE4411A": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Spectrum",
-    "notes": "ESA-L Series 1.5 GHz"
+    "notes": "ESA-L Series 1.5 GHz",
+    "commands": "Spectrum/HPE4411A/commands.json"
   },
   "HP_8903B": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -827,12 +840,14 @@
   "N9340B": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Spectrum",
-    "notes": "Handheld (100 kHz - 3 GHz)"
+    "notes": "Handheld (100 kHz - 3 GHz)",
+    "commands": "Spectrum/N9340B/commands.json"
   },
   "N9342CN": {
     "manufacturer": "HP / Agilent / Keysight",
     "type": "Spectrum",
-    "notes": "Handheld (9 kHz - 7 GHz)"
+    "notes": "Handheld (9 kHz - 7 GHz)",
+    "commands": "Spectrum/N9342CN/commands.json"
   },
   "N9912A": {
     "manufacturer": "HP / Agilent / Keysight",
@@ -857,7 +872,8 @@
   "Porta_one": {
     "manufacturer": "Audio Precision",
     "type": "Distortion",
-    "notes": "Audio Precision Portable One Plus / Dual Domain audio analyzer"
+    "notes": "Audio Precision Portable One Plus / Dual Domain audio analyzer",
+    "commands": "Distortion/Porta_one/commands.json"
   },
   "RTB2002": {
     "manufacturer": "Rohde & Schwarz",

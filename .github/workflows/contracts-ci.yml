@@ -46,10 +46,27 @@ jobs:
       # cannot drift out of step with package.json.
       - name: Install the pinned pnpm
         run: |
+          set -euo pipefail
           PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
           echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
+          corepack disable || true
           npm i -g "pnpm@$PNPM_VERSION"
-          pnpm --version
+          hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
+          ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
+            exit 1
+          }
       - run: pnpm -C Deployment install --frozen-lockfile
       - run: pnpm -C Deployment --filter @openair/contracts typecheck
       - run: pnpm -C Deployment --filter @openair/contracts test # includes the golden-vector suites
@@ -115,10 +132,27 @@ jobs:
       # cannot drift out of step with package.json.
       - name: Install the pinned pnpm
         run: |
+          set -euo pipefail
           PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
           echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
+          corepack disable || true
           npm i -g "pnpm@$PNPM_VERSION"
-          pnpm --version
+          hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
+          ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
+            exit 1
+          }
       - run: pnpm -C Deployment install --frozen-lockfile
       # freshness: legacy.ts and globals.d.ts must match their sources
       - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
@@ -157,10 +191,27 @@ jobs:
       # cannot drift out of step with package.json.
       - name: Install the pinned pnpm
         run: |
+          set -euo pipefail
           PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
           echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
+          corepack disable || true
           npm i -g "pnpm@$PNPM_VERSION"
-          pnpm --version
+          hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
+          ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
+            exit 1
+          }
       - run: pnpm -C Deployment install --frozen-lockfile
       - uses: actions/cache@v4
         with:

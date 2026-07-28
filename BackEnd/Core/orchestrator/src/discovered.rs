@@ -404,7 +404,10 @@ fn preferred_columns(family: &str) -> &'static [&'static str] {
     match family {
         "visa" => &["model", "manufacturer", "serial", "firmware", "resource", "status", "notes", "last_seen"],
         "midi" => &["port", "name", "direction"],
-        "dnssd" => &["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
+        // `vendor` sits next to the thing it explains throughout: it is derived
+        // from the OUI of a hardware address, and a manufacturer name three
+        // screens right of the address it decodes may as well not be there.
+        "dnssd" => &["instance", "service_type", "vendor", "hostname", "addresses", "port", "txt", "status", "last_seen"],
         // What the stream IS, then where it goes, then how it is clocked.
         "ravenna" => &["stream", "host", "format", "sample_rate", "channels", "destination",
                        "rtp_port", "ptime_ms", "clock_domain", "direction", "refclk", "status", "last_seen"],
@@ -415,7 +418,7 @@ fn preferred_columns(family: &str) -> &'static [&'static str] {
                    "announced_via", "msg_id", "status", "last_seen"],
         // Identity, then what it can carry, then the clock it follows —
         // grandmaster mismatch is the usual reason an entity won't pass audio.
-        "avb" => &["entity_id", "mac", "oui", "interface", "talker_sources", "listener_sinks",
+        "avb" => &["entity_id", "mac", "oui", "vendor", "interface", "talker_sources", "listener_sinks",
                    "talker_capabilities", "listener_capabilities", "gptp_grandmaster",
                    "gptp_domain", "milan", "entity_model_id", "configuration_index",
                    "valid_time_s", "status", "last_seen"],
@@ -424,13 +427,31 @@ fn preferred_columns(family: &str) -> &'static [&'static str] {
         // that only sends Pdelay_Req has no Announce data, so every quality
         // column is blank. The message mix is what tells you that row is a
         // peer-delay-only port rather than a parse failure.
-        "ptp" => &["clock_id", "port", "variant", "subdomain", "domain", "role", "messages",
+        "ptp" => &["clock_id", "vendor", "port", "variant", "subdomain", "domain", "role", "messages",
                    "grandmaster", "gm_class", "gm_class_meaning", "gm_accuracy", "time_source",
                    "steps_removed", "priority1", "priority2", "sync_interval_s", "two_step",
                    "status", "last_seen"],
-        "chromecast" => &["friendly_name", "model", "device_type", "capabilities", "status_text",
+        "chromecast" => &["friendly_name", "model", "vendor", "device_type", "capabilities", "status_text",
                           "addresses", "port", "hostname", "protocol_version", "cast_id",
                           "status", "last_seen"],
+        // Identity, then what it can do, then where it lives.
+        "appletv" => &["device", "model", "vendor", "model_id", "os_version", "airplay_version",
+                       "roles", "audio_codecs", "metadata", "features_raw", "addresses",
+                       "status", "last_seen"],
+        "nmos" => &["service", "role", "vendor", "api_versions", "api_proto", "api_auth",
+                    "priority", "host", "port", "addresses", "last_seen"],
+        // Identity, then capabilities (the questions people ask), then how to
+        // reach it. Raw TXT is deliberately not a column — it is decoded.
+        // `manufacturer` comes from the IPP record and `vendor` from the MAC;
+        // they disagree often enough to be worth showing side by side.
+        "printers" => &["printer", "manufacturer", "vendor", "model", "color", "duplex", "scan",
+                        "fax", "paper_max", "transports", "languages", "addresses",
+                        "admin_url", "uuid", "status", "last_seen"],
+        "dante" => &["device", "manufacturer", "vendor", "model", "mac", "discovery", "services",
+                     "addresses", "port", "hostname", "status", "last_seen"],
+        "dante_channels" => &["channel", "device", "id", "sample_rate", "bit_depth",
+                              "latency_ms", "frames_per_packet", "flow_channels",
+                              "redundancy", "last_seen"],
         _ => &[],
     }
 }
@@ -439,7 +460,16 @@ fn preferred_columns(family: &str) -> &'static [&'static str] {
 fn family_of(category: &str) -> &str {
     if category.starts_with("cast_") {
         "chromecast"
-    } else if matches!(category, "midi" | "dnssd" | "ravenna" | "sap" | "avb" | "ptp") {
+    } else if matches!(
+        category,
+        // Every category with a column order of its own. The five network
+        // families after `ptp` were missing here, so their carefully ordered
+        // lists were unreachable and their tables silently fell back to the
+        // VISA instrument columns — which name none of the fields they carry,
+        // leaving every column to sort alphabetically.
+        "midi" | "dnssd" | "ravenna" | "sap" | "avb" | "ptp"
+            | "appletv" | "nmos" | "printers" | "dante" | "dante_channels"
+    ) {
         category
     } else {
         "visa"
@@ -1536,6 +1566,51 @@ mod tests {
         blocks.insert("a".to_string(), fields(&[("last_online", "99999999999")]));
         let (_, rows) = rows_for("DMM", &blocks, true);
         assert_eq!(rows[0]["_row_state"], "unknown");
+    }
+
+    #[test]
+    fn the_manufacturer_sits_next_to_the_address_it_decodes() {
+        // A PTP clock id IS a MAC (EUI-64), and `vendor` is the OUI decoded. A
+        // manufacturer name that sorts into the alphabetical tail lands three
+        // screens right of the address it explains, which is how it went
+        // unnoticed for as long as it did.
+        let mut blocks = Blocks::new();
+        blocks.insert(
+            "a".to_string(),
+            fields(&[
+                ("clock_id", "00:07:F5:FF:FE:00:54:72"),
+                ("vendor", "Bosch Security Systems"),
+                ("port", "1"),
+                ("role", "grandmaster"),
+            ]),
+        );
+        let (headers, _) = rows_for("ptp", &blocks, false);
+        assert_eq!(headers[0], "clock_id");
+        assert_eq!(headers[1], "vendor");
+    }
+
+    #[test]
+    fn every_family_with_its_own_columns_is_routed_to_them() {
+        // These five were defined but unreachable: family_of sent them to the
+        // VISA list, which names none of their fields, so every column fell
+        // through to the alphabetical tail.
+        for (category, first) in [
+            ("printers", "printer"),
+            ("appletv", "device"),
+            ("nmos", "service"),
+            ("dante", "device"),
+            ("dante_channels", "channel"),
+        ] {
+            assert_eq!(family_of(category), category, "{category} was not routed to itself");
+            assert_eq!(
+                preferred_columns(category).first(),
+                Some(&first),
+                "{category} has no column order of its own"
+            );
+        }
+        // Anything unrecognised is a bench instrument, and gets the VISA order.
+        assert_eq!(family_of("DMM"), "visa");
+        assert_eq!(family_of("cast_Speaker"), "chromecast");
     }
 
     #[test]

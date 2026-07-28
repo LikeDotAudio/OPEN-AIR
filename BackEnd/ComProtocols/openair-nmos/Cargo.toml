@@ -6,3 +6,6 @@ edition = "2024"
 [dependencies]
 mdns-sd = "0.20"
 rumqttc = "0.24"
+
+# The MAC a SLAAC address was built from, and who IEEE gave that block to.
+openair-maclookup = { path = "../openair-MacLookup" }

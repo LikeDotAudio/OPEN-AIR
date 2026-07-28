@@ -56,7 +56,7 @@ const PRINTER_SERVICES: [(&str, &str); 6] = [
 
 /// Column order in the Discovered tab: identity, then what it can do, then how
 /// to reach it, then the bookkeeping.
-const DEVICE_KEYS: [&str; 15] = [
+const DEVICE_KEYS: [&str; 17] = [
     "printer",
     "manufacturer",
     "model",
@@ -68,6 +68,12 @@ const DEVICE_KEYS: [&str; 15] = [
     "transports",
     "languages",
     "addresses",
+    // Neither is advertised. Both are recovered from the SLAAC IPv6 address,
+    // which carries the host's MAC in its low 64 bits — `mac` is the address
+    // itself, `vendor` is who holds that IEEE block. Blank for a host using
+    // privacy addressing, where the interface ID is genuinely random.
+    "mac",
+    "vendor",
     "admin_url",
     "uuid",
     "status",
@@ -144,6 +150,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     let mut opts = rumqttc::MqttOptions::new("open-air-printers", mqtt_host, mqtt_port);
     opts.set_keep_alive(Duration::from_secs(30));
     let (mqtt_client, mut connection) = rumqttc::Client::new(opts, 32);
+    let vendors = openair_maclookup::MacVendors::start();
     std::thread::spawn(move || {
         for _ in connection.iter() {}
     });
@@ -251,6 +258,19 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
             p.transports.iter().cloned().collect::<Vec<_>>().join(", "),
             summarise_pdl(&get("pdl")),
             p.addresses.iter().cloned().collect::<Vec<_>>().join(", "),
+            {
+                let addrs: Vec<String> = p.addresses.iter().cloned().collect();
+                vendors
+                    .mac_of_any(addrs.iter().map(String::as_str))
+                    .map(|m| m.to_string())
+                    .unwrap_or_else(|| "-".to_string())
+            },
+            {
+                let addrs: Vec<String> = p.addresses.iter().cloned().collect();
+                vendors
+                    .vendor_of_any(addrs.iter().map(String::as_str))
+                    .unwrap_or_else(|| "-".to_string())
+            },
             { let a = get("adminurl"); if a.is_empty() { "-".into() } else { a } },
             uuid.clone(),
             "identified".to_string(),

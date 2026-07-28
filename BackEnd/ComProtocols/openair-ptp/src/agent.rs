@@ -16,8 +16,19 @@ use crate::monitor::{ClockTable, Observation, Transports};
 use std::time::{Duration, Instant};
 
 /// Retained attribute keys per clock port. Order here is the UI column order.
-pub const CLOCK_KEYS: [&str; 19] = [
+///
+/// `vendor` sits directly after `clock_id` because it is a reading OF that
+/// column, not a fact beside it: the identity is a MAC with `FF:FE` inserted,
+/// and its first three bytes are the manufacturer's IEEE block. A table of four
+/// clocks called `00:07:F5:FF:FE:…` is complete and unreadable; the same table
+/// with *Bridgeco Co AG* under each one is the same data.
+///
+/// It is published as its own key rather than folded into `clock_id`, because
+/// `clock_id` is an identity — the topic segment is built from it and the
+/// `grandmaster` column is matched against it. Decorating it would break both.
+pub const CLOCK_KEYS: [&str; 20] = [
     "clock_id",
+    "vendor",
     "port",
     "variant",
     "domain",
@@ -95,6 +106,11 @@ pub fn run_listen_agent(mqtt_host: &str, mqtt_port: u16) {
     println!("🔎 [PTP] {state}: {detail}");
     report_agent_state(&mqtt_client, state, &detail);
 
+    // Started once per run: it owns a cache and one worker thread, and every
+    // clock on a bench tends to come from a handful of manufacturers, so this
+    // reaches steady state within a flush or two and never calls out again.
+    let vendors = openair_maclookup::MacVendors::start();
+
     let mut tracker = FlowTracker::default();
     let mut table = ClockTable::default();
     let mut published: std::collections::HashMap<String, String> = Default::default();
@@ -139,7 +155,7 @@ pub fn run_listen_agent(mqtt_host: &str, mqtt_port: u16) {
 
             if last_flush.elapsed() >= HEARTBEAT {
                 last_flush = Instant::now();
-                flush(&mqtt_client, &mut table, &mut published);
+                flush(&mqtt_client, &mut table, &mut published, &vendors);
                 report_reception(&mqtt_client, udp_seen, l2_seen, !transports.udp.is_empty());
             }
         },
@@ -152,6 +168,7 @@ fn flush(
     mqtt_client: &rumqttc::Client,
     table: &mut ClockTable,
     published: &mut std::collections::HashMap<String, String>,
+    vendors: &openair_maclookup::MacVendors,
 ) {
     let now = Instant::now();
     let now_secs = std::time::SystemTime::now()
@@ -176,8 +193,13 @@ fn flush(
         };
         let dash = || "-".to_string();
 
+        let clock_id = format_clock_id(&clock.key.clock_identity);
         let values = [
-            format_clock_id(&clock.key.clock_identity),
+            clock_id.clone(),
+            // Non-blocking: unknown the first time a manufacturer appears, and
+            // named from the next heartbeat on. This runs on the capture
+            // thread, where a blocking HTTP call would drop Sync messages.
+            vendors.vendor(&clock_id).unwrap_or_else(dash),
             clock.key.port_number.to_string(),
             clock.variant.label().to_string(),
             clock.domain.to_string(),
@@ -311,6 +333,6 @@ mod tests {
 
     #[test]
     fn key_count_is_stable() {
-        assert_eq!(CLOCK_KEYS.len(), 19);
+        assert_eq!(CLOCK_KEYS.len(), 20);
     }
 }

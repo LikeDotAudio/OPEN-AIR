@@ -522,278 +522,221 @@ Several statements in one message, so they hang off no single branch. Every stat
 
 ## Notes carried over
 
-Based on the provided Programmer's Guide (Agilent 54621A/22A/24A/41A/42A and 54621D/22D/41D/42D), here are the augmented notes for the **54641D Mixed Signal Oscilloscope**.
+The **Keysight/Agilent 54641D** is a **Mixed Signal Oscilloscope (MSO)**, and that
+is what makes its command tree bigger than a meter's. It deals with time, triggers
+and two kinds of data: **analog** (voltage vs time) and **digital** (logic level vs
+time). The tree splits the vertical controls to match — `CHANnel` for the 2 analog
+BNC inputs, `DIGital`/`POD` for the 16 logic inputs.
 
-The 54641D is part of the "54640-series" referenced in the manual, which supports specific features like 50$\Omega$ input impedance and deeper memory options not available on the 54620-series.
+It is part of the "54640-series", which has 50 Ω input impedance and deeper memory
+than the 54620-series. Where a command below is 54640-only, it says so.
 
----
-
-### **1. The Root (Action Commands) & `ACQuire**`
-
-*Augmentation: You must configure **how** data is captured before you `DIGitize` it.*
-
-* 
-**`ACQuire`** 
-
-
-* 
-`:TYPE` `NORMal|AVERage|PEAK`  Set to `AVERage` to reduce noise, or `PEAK` to catch glitches.
-
-
-* 
-`:COUNt` `<number>`  Number of averages (e.g., 8, 64).
-
-
-* `:POINts` `100|250|500|1000|2000|MAXimum`  **Crucial:** Sets the memory depth. Use `MAXimum` to use the deep memory (up to 2MB on some models).
-
-
-* 
-`:SRATe?`  Query the current sample rate.
-
-
-
-
+Sources: the Agilent 54621A/22A/24A/41A/42A and 54621D/22D/41D/42D Programmer's
+Guide.
 
 ---
 
-### **2. `CHANnel<n>` (Analog Vertical)**
+### 1. Root actions and `ACQuire`
 
-*Augmentation: Added Impedance (54640 specific) and Probe settings.*
+The flow controls sit at the top of the tree — running versus stopped.
+
+* **`RUN`** — start the scope (green light).
+* **`STOP`** — stop it (red light).
+* **`SINGle`** — one acquisition, then stop.
+* **`AUToscale`** — the "Auto Set" button; tries to find the signal for you.
+* **`DIGitize`** `<channel>` — block the computer until data is ready. This is the
+  one you use from a script.
+
+Configure **how** data is captured before you `DIGitize` it:
+
+* **`ACQuire`**
+  * `:TYPE` `NORMal|AVERage|PEAK` — `AVERage` to reduce noise, `PEAK` to catch
+    glitches.
+  * `:COUNt` `<number>` — number of averages (8, 64, …).
+  * `:POINts` `100|250|500|1000|2000|MAXimum` — memory depth. `MAXimum` uses the
+    deep memory, up to 2 MB on some models.
+  * `:SRATe?` — current sample rate.
+
+---
+
+### 2. `CHANnel<n>` — analog vertical
+
+The two BNC inputs on the front. `<n>` is 1 or 2.
 
 * **`CHANnel<n>`**
-* ... *(User's existing commands: BWLimit, COUPling, OFFSet, RANGe, SCALe, DISPlay)*
-* 
-`:IMPedance` `ONEMeg|FIFTy`  **54641D Specific:** Select **50$\Omega$** for high-speed RF active probes or **1M$\Omega$** for standard passive probes.
-
-
-* 
-`:PROBe` `<attenuation>`  Set probe ratio (1, 10, 100) so the scope math is correct.
-
-
-* 
-`:PROBe:SKEW` `<seconds>`  Deskew analog channels to match digital timing.
-
-
-* 
-`:INVert` `ON|OFF`  Invert the signal polarity.
-
-
-* 
-`:UNITs` `VOLTs|AMPeres`  Use Amps if a current probe is attached.
-
-
-
-
+  * `:BWLimit` `ON|OFF` — 20 MHz low-pass filter.
+  * `:COUPling` `AC|DC|GND` — input coupling.
+  * `:OFFSet` `<volts>` — moves the trace up or down (zero point).
+  * `:RANGe` `<volts>` — full-scale vertical range, e.g. 40 V.
+  * `:SCALe` `<volts/div>` — volts per division, e.g. 5 V.
+  * `:DISPlay` `ON|OFF` — show or hide the trace.
+  * `:IMPedance` `ONEMeg|FIFTy` — **54640-specific.** 50 Ω for high-speed active
+    RF probes, 1 MΩ for standard passive probes.
+  * `:PROBe` `<attenuation>` — probe ratio (1, 10, 100), so the scope's math is
+    right.
+  * `:PROBe:SKEW` `<seconds>` — deskew the analog channels to match digital timing.
+  * `:INVert` `ON|OFF` — invert signal polarity.
+  * `:UNITs` `VOLTs|AMPeres` — amps when a current probe is attached.
 
 ---
 
-### **3. `DIGital<n>` & `POD<n>` (Digital Vertical)**
+### 3. `DIGital<n>` and `POD<n>` — digital vertical
 
-*Augmentation: Size and Threshold details.*
+**This is the MSO part.** 16 digital lines, D0–D15.
 
-* **`DIGital<n>`**
-* ... *(User's existing commands: DISPlay, POSition, LABel)*
-* `:POSition`  Note: The range depends on the display size. (0–7 for Large, 0–15 for Medium, 0–31 for Small) .
+* **Channels** are individual: `DIG0` … `DIG15`.
+* **Pods** are groups of 8: `POD1` = D0–D7, `POD2` = D8–D15.
 
+* **`DIGital<n>`** (n is 0–15)
+  * `:DISPlay` `ON|OFF` — turn one logic bit on or off.
+  * `:POSition` `<number>` — move the line up or down on screen. The range depends
+    on display size: 0–7 large, 0–15 medium, 0–31 small.
+  * `:LABel` `<string>` — rename "D0" to something like "CLK".
 
-
-
-* **`POD<n>`**
-* `:THReshold` `TTL|CMOS|ECL|<voltage>`
-* 
-*Augmentation:* You can set a custom voltage (e.g., 1.5V) by sending a number instead of a standard name.
-
-
-
-
-
-
+* **`POD<n>`** (n is 1 or 2)
+  * `:THReshold` `TTL|CMOS|ECL|<voltage>` — logic level for the *entire* group of
+    8 pins. Send a number instead of a standard name for a custom threshold, e.g.
+    1.5 V.
+  * **Note:** you cannot set D0 and D1 separately — they share the Pod 1 threshold.
 
 ---
 
-### **4. `TIMebase` (Horizontal)**
+### 4. `TIMebase` — horizontal
 
-*Augmentation: Zoom window and Roll mode.*
+The X axis, and it applies to **all** channels at once, analog and digital.
 
 * **`TIMebase`**
-* ... *(User's existing commands: SCALe, POSition, REFerence)*
-* 
-`:MODE` `MAIN|WINDow|XY|ROLL`.
-
-
-* `MAIN`: Normal Y-T view.
-* `WINDow`: Split screen "Zoom" mode.
-* `XY`: Lissajous mode (Voltage vs Voltage).
-* `ROLL`: Strip-chart mode (for slow signals).
-
-
-* 
-**`:WINDow`** (Delayed Sweep / Zoom) 
-
-
-* `:POSition` `<seconds>`  Scroll the zoom window.
-* `:SCALe` `<seconds>`  Set zoom factor (width of the window).
-
-
-
-
+  * `:SCALe` `<seconds>` — time per division, e.g. `500e-6` for 500 µs.
+  * `:POSition` `<seconds>` — delay from trigger to centre of screen.
+  * `:REFerence` `LEFT|CENTer|RIGHt` — where the trigger point stays as you zoom.
+  * `:MODE` `MAIN|WINDow|XY|ROLL`
+    * `MAIN` — normal Y-T view.
+    * `WINDow` — split-screen zoom.
+    * `XY` — Lissajous, voltage vs voltage.
+    * `ROLL` — strip chart, for slow signals.
+  * **`:WINDow`** (delayed sweep / zoom)
+    * `:POSition` `<seconds>` — scroll the zoom window.
+    * `:SCALe` `<seconds>` — zoom factor, i.e. the window's width.
 
 ---
 
-### **5. `TRIGger` (The Brains)**
+### 5. `TRIGger` — the brains
 
-*Augmentation: Added Pulse Width (Glitch), TV, and Serial Trigger details.*
+Advanced triggering, because of the digital lines.
 
 * **`TRIGger`**
-* 
-`:MODE` `EDGE|GLITch|PATTern|TV|IIC|SPI|USB|CAN...`.
-
-
-* 
-`:HOLDoff` `<seconds>`  Holdoff time before re-triggering (crucial for complex bursts).
-
-
-* 
-**`:GLITch` (Pulse Width Trigger)** 
-
-
-* `:SOURce` `<channel>`
-* `:POLarity` `POSitive|NEGative`  Trigger on High or Low pulse.
-* `:QUALifier` `LESSthan|GREaterthan|RANGe`  Trigger on pulses narrower/wider than X.
-* `:LESSthan` / `:GREaterthan` `<seconds>`  Set the time limits.
-
-
-* 
-**`:TV`** 
-
-
-* `:STANdard` `NTSC|PAL|SECAM`
-* `:MODE` `LINE|FIEld1|FIEld2`
-
-
-* 
-**`:IIC` (I2C Trigger)** 
-
-
-* `:SOURce:CLOCk` `<channel>`
-* `:SOURce:DATA` `<channel>`
-* `:TRIGger:TYPE` `STARt|STOP|READ7|WRITe7|NACK...`
-
-
-* 
-**`:SPI`** 
-
-
-* `:SOURce:CLOCk` `<channel>`
-* `:SOURce:DATA` `<channel>`
-* `:SOURce:FRAMe` `<channel>` (Chip Select)
-
-
-
-
+  * `:MODE` `EDGE|GLITch|PATTern|TV|IIC|SPI|USB|CAN…` — trigger type.
+  * `:HOLDoff` `<seconds>` — holdoff before re-triggering. Crucial for complex
+    bursts.
+  * **`:EDGE`** (standard)
+    * `:SOURce` `CHAN1|CHAN2|DIG0…DIG15|EXT` — analog channel 1, or digital bit 5.
+    * `:SLOPe` `POSitive|NEGative`
+  * **`:PATTern`** (logic)
+    * `:LOGic` `<string>` — a binary code, e.g. `"10XX01"`.
+  * **`:GLITch`** (pulse width)
+    * `:SOURce` `<channel>`
+    * `:POLarity` `POSitive|NEGative` — trigger on a high or a low pulse.
+    * `:QUALifier` `LESSthan|GREaterthan|RANGe` — pulses narrower or wider than X.
+    * `:LESSthan` / `:GREaterthan` `<seconds>` — the time limits.
+  * **`:TV`**
+    * `:STANdard` `NTSC|PAL|SECAM`
+    * `:MODE` `LINE|FIEld1|FIEld2`
+  * **`:IIC`** (I²C)
+    * `:SOURce:CLOCk` `<channel>` · `:SOURce:DATA` `<channel>`
+    * `:TRIGger:TYPE` `STARt|STOP|READ7|WRITe7|NACK…`
+  * **`:SPI`**
+    * `:SOURce:CLOCk` `<channel>` · `:SOURce:DATA` `<channel>`
+    * `:SOURce:FRAMe` `<channel>` — chip select.
 
 ---
 
-### **6. `WAVeform` (Getting Data Out)**
+### 6. `WAVeform` — getting data out
 
-*Augmentation: Data typing and memory depth.*
+A meter gives you one number; a scope gives you an array of 2000+ points. Set the
+format before asking for data.
 
 * **`WAVeform`**
-* ... *(User's existing commands: SOURce, FORMat, DATA?, PREamble?)*
-* 
-`:POINts` `100|250|500|1000|2000|MAXimum`  **Critical:** If you don't set this, you might only get 500 screen points instead of the full memory dump.
-
-
-* 
-`:BYTeorder` `LSBFirst|MSBFirst`  Controls binary endianness (default is usually correct for PC).
-
-
-* `:UNSigned` `ON|OFF`  If ON, returns 0..255. If OFF, returns -128..127.
-
-
-* 
-`:TYPE?`  Returns if data is Normal, Average, or Peak detect.
-
-
-
-
+  * `:SOURce` `CHAN1|DIGital0…` — which signal to download.
+  * `:FORMat` `ASCii|WORD|BYTE`
+    * `ASCii` — slow, human readable: `1.23, 1.24, 1.25…`
+    * `BYTE` — fast, raw binary 0–255.
+  * `:POINts` `100|250|500|1000|2000|MAXimum` — **critical.** Leave it unset and
+    you may get 500 screen points instead of the full memory dump.
+  * `:BYTeorder` `LSBFirst|MSBFirst` — binary endianness; the default is usually
+    right for a PC.
+  * `:UNSigned` `ON|OFF` — ON returns 0..255, OFF returns -128..127.
+  * `:DATA?` — **the query.** The actual array of points.
+  * `:PREamble?` — the scale factors that convert `BYTE` data back to volts and
+    seconds.
+  * `:TYPE?` — whether the data is normal, average or peak detect.
 
 ---
 
-### **7. `MEASure` (Automated Math)**
-
-*Augmentation: Full measurement list and Threshold definitions.*
+### 7. `MEASure` — automated math
 
 * **`MEASure`**
-* ... *(User's existing commands: VPP, FREQ, RISetime, VMAX)*
-* 
-**Time:** `:PERiod?`, `:DUTYcycle?`, `:FALLtime?`, `:PWIDth?` (Positive Width), `:NWIDth?` (Negative Width).
-
-
-* 
-**Voltage:** `:VRMS?`, `:VAVerage?` (Mean), `:VBASE?`, `:VTOP?`, `:OVERshoot?`, `:PREShoot?`.
-
-
-* 
-**Mixed:** `:DELay?` (Time between Ch1 and Ch2 edges), `:PHASE?`.
-
-
-* 
-**`:DEFine`** 
-
-
-* `:THResholds` `PERCent|ABSolute`  Define if rise time is 10%/90% or specific voltages.
-
-
-
-
+  * `:SOURce` `<channel>` — which channel to measure.
+  * **Voltage:** `:VPP?`, `:VMAX?`, `:VRMS?`, `:VAVerage?` (mean), `:VBASE?`,
+    `:VTOP?`, `:OVERshoot?`, `:PREShoot?`
+  * **Time:** `:FREQuency?`, `:PERiod?`, `:RISetime?`, `:FALLtime?`,
+    `:DUTYcycle?`, `:PWIDth?` (positive width), `:NWIDth?` (negative width)
+  * **Mixed:** `:DELay?` (time between Ch1 and Ch2 edges), `:PHASE?`
+  * **`:DEFine`**
+    * `:THResholds` `PERCent|ABSolute` — whether rise time means 10%/90% or
+      specific voltages.
 
 ---
 
-### **8. `MARKer` (Cursors)**
+### 8. `MARKer` — cursors
 
-*Augmentation: Missing subsystem.*
-*Manual usage for measurements often involves cursors. These commands control the X and Y markers.*
+Manual measurement is cursor work; these are the X and Y markers.
 
-* 
-**`MARKer`** 
-
-
-* `:MODE` `MANual|MEASure|OFF`
-* `:X1Position` / `:X2Position` `<seconds>`  Set time cursors.
-* `:Y1Position` / `:Y2Position` `<volts>`  Set voltage cursors.
-* `:XDELta?`  Query time difference ().
-* `:YDELta?`  Query voltage difference ().
-
-
+* **`MARKer`**
+  * `:MODE` `MANual|MEASure|OFF`
+  * `:X1Position` / `:X2Position` `<seconds>` — time cursors.
+  * `:Y1Position` / `:Y2Position` `<volts>` — voltage cursors.
+  * `:XDELta?` — time difference between them.
+  * `:YDELta?` — voltage difference between them.
 
 ---
 
-### **9. `FUNCtion` (Math Traces)**
+### 9. `FUNCtion` — math trace
 
-*Augmentation: Missing subsystem.*
-*Used to configure the "Math" trace (pink line).*
+The "Math" trace, the pink line.
 
-* 
-**`FUNCtion`** 
-
-
-* `:OPERation` `ADD|SUBTract|MULTiply|FFT|INTegrate`
-* `:SOURce1` `<channel>`
-* `:SOURce2` `<channel>`
-
-
+* **`FUNCtion`**
+  * `:OPERation` `ADD|SUBTract|MULTiply|FFT|INTegrate`
+  * `:SOURce1` `<channel>` · `:SOURce2` `<channel>`
 
 ---
 
-### **10. `SYSTem` (Utilities)**
+### 10. `SYSTem` — utilities
 
-*Augmentation: Error checking.*
+* **`SYSTem`**
+  * `:ERRor?` — read the error queue; returns a code and a string.
+  * `:SETup?` — the complete instrument setup as a binary block, to save and
+    restore state.
+  * `:LOCK` `ON|OFF` — lock the front-panel keys.
 
-* 
-**`SYSTem`** 
+---
 
+### Worked examples
 
-* `:ERRor?`  Read error queue (returns error code and string).
-* `:SETup?`  Read the complete instrument setup (binary block) to save/restore state.
-* `:LOCK` `ON|OFF`  Lock front panel keys.
+**Setting up the digital channels.** Viewing an SPI bus with D0 as clock and D1 as
+data, at TTL levels:
+
+```text
+POD1:THR TTL               (set D0-D7 to trigger at 1.4V)
+DIG0:DISP ON               (turn on D0)
+DIG1:DISP ON               (turn on D1)
+DIG0:LAB "SPI_CLK"         (label D0)
+TRIG:MODE EDGE             (set trigger mode)
+TRIG:EDGE:SOUR DIG0        (trigger on the clock line)
+```
+
+**Asking for a measurement.** The frequency of that clock:
+
+```text
+MEAS:SOUR DIG0             (focus the measurement system on D0)
+MEAS:FREQ?                 (scope answers: +1.00000E+06)
+```

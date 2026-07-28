@@ -11,6 +11,11 @@ libc = "0.2"
 socket2 = "0.6"
 rumqttc = "0.24"
 
+# A clock identity is a MAC with FF:FE inserted, so the OUI in it names the
+# manufacturer. Non-blocking by contract — see the crate docs; this agent
+# resolves from a capture thread.
+openair-maclookup = { path = "../openair-MacLookup" }
+
 parking_lot = { version = "0.12", optional = true }
 pyo3 = { version = "0.21.2", optional = true }
 

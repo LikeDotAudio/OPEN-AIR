@@ -31,6 +31,7 @@ no side channel, no shared memory, no direct call — which is why
 | `openair-snmp` | **live** | SNMP polling |
 | `openair-ember` | **live** | Ember+ |
 | `openair-smpte2138` | **live** | SMPTE 2138 (protobuf) |
+| `openair-maclookup` | **library** | Not an agent — publishes nothing. Names the manufacturer behind a hardware address from its OUI (the first 24 bits), against macvendors.com. Caches by OUI, remembers 404s, persists across restarts and answers without blocking, because its callers ask from packet-capture threads. Fills the `mac` and `vendor` columns across every discovery tab that has anything to read — PTP, AVB, DNS-SD, Cast, printers, Dante, AppleTV, NMOS. For the mDNS ones neither is advertised: both are recovered from the host's SLAAC IPv6 address, which carries its MAC in the low 64 bits. Ships `mac-lookup` for the shell |
 | `openair-mqtt` | config | Broker connection settings consumed by the orchestrator |
 | `openair-mdns` | **stub** | 25-line placeholder — publishes `status = stub` |
 | `openair-nmos` | **stub** | ″ |

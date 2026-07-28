@@ -9,3 +9,7 @@ edition = "2024"
 [dependencies]
 mdns-sd = "0.20"
 rumqttc = "0.24"
+
+# Cast hardware is not all Google-built — JBL, Sony and Lenovo ship Cast
+# devices — so the OUI in the SLAAC address says who actually made the box.
+openair-maclookup = { path = "../openair-MacLookup" }

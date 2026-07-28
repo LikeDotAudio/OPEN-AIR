@@ -2,6 +2,7 @@
 # It is not intended for manual editing.
 version = 4
 
+[[package]]
 name = "adler2"
 version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1986,6 +1987,7 @@ name = "openair-appletv"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -1994,6 +1996,7 @@ name = "openair-avb-milan"
 version = "0.1.0"
 dependencies = [
  "libc",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -2002,6 +2005,7 @@ name = "openair-chromecast"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -2019,6 +2023,7 @@ name = "openair-dante"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "openair-ravenna",
  "rumqttc 0.24.0",
 ]
@@ -2028,6 +2033,7 @@ name = "openair-dnssd"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -2041,6 +2047,13 @@ version = "0.1.0"
 dependencies = [
  "nom",
  "pyo3",
+]
+
+[[package]]
+name = "openair-maclookup"
+version = "0.1.0"
+dependencies = [
+ "ureq",
 ]
 
 [[package]]
@@ -2072,6 +2085,7 @@ name = "openair-nmos"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -2091,6 +2105,7 @@ name = "openair-printers"
 version = "0.1.0"
 dependencies = [
  "mdns-sd",
+ "openair-maclookup",
  "rumqttc 0.24.0",
 ]
 
@@ -2099,6 +2114,7 @@ name = "openair-ptp"
 version = "0.1.0"
 dependencies = [
  "libc",
+ "openair-maclookup",
  "parking_lot",
  "pyo3",
  "rumqttc 0.24.0",
@@ -2950,6 +2966,7 @@ dependencies = [
  "aws-lc-rs",
  "log",
  "once_cell",
+ "ring",
  "rustls-pki-types",
  "rustls-webpki 0.103.13",
  "subtle",
@@ -3171,6 +3188,7 @@ version = "1.0.150"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8014e44b4736ed0538adeecded0fce2a272f22dc9578a7eb6b2d9993c74cfb9"
 dependencies = [
+ "indexmap",
  "itoa",
  "memchr",
  "serde",
@@ -3852,6 +3870,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
+name = "ureq"
+version = "2.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02d1a66277ed75f640d608235660df48c8e3c19f3b4edb6a263315626cc3c01d"
+dependencies = [
+ "base64 0.22.1",
+ "flate2",
+ "log",
+ "once_cell",
+ "rustls 0.23.41",
+ "rustls-pki-types",
+ "url",
+ "webpki-roots 0.26.11",
+]
+
+[[package]]
 name = "url"
 version = "2.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4073,6 +4107,24 @@ checksum = "4f2dfbb17949fa2088e5d39408c48368947b86f7834484e87b73de55bc14d97d"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "0.26.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "521bc38abb08001b01866da9f51eb7c5d647a19260e00054a8c7fd5f9e57f7a9"
+dependencies = [
+ "webpki-roots 1.0.9",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "1.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7dcd9d09a39985f5344844e66b0c530a33843579125f23e21e9f0f220850f22a"
+dependencies = [
+ "rustls-pki-types",
 ]
 
 [[package]]

@@ -33,12 +33,18 @@ const CAST_SERVICE: &str = "_googlecast._tcp.local.";
 
 /// Retained attribute keys published per device. The Discovered-tab builder
 /// renders these as columns, so order here is the natural column order.
-const DEVICE_KEYS: [&str; 12] = [
+const DEVICE_KEYS: [&str; 14] = [
     "friendly_name",
     "model",
     "device_type",
     "capabilities",
     "addresses",
+    // Who built the hardware, from the OUI inside the SLAAC address. `model`
+    // is what the device calls itself ("Chromecast Audio"); this is who holds
+    // the IEEE block, which is how a JBL or Sony Cast speaker gives itself away.
+    // The address `vendor` was read out of — the evidence for the name.
+    "mac",
+    "vendor",
     "port",
     "hostname",
     "cast_id",
@@ -173,6 +179,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     let mut opts = rumqttc::MqttOptions::new("open-air-chromecast", mqtt_host, mqtt_port);
     opts.set_keep_alive(std::time::Duration::from_secs(30));
     let (mqtt_client, mut connection) = rumqttc::Client::new(opts, 32);
+    let vendors = openair_maclookup::MacVendors::start();
     std::thread::spawn(move || {
         for _ in connection.iter() {}
     });
@@ -237,6 +244,13 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                     category.to_string(),
                     decode_capabilities(ca),
                     addresses.join(", "),
+                    vendors
+                        .mac_of_any(addresses.iter().map(String::as_str))
+                        .map(|m| m.to_string())
+                        .unwrap_or_else(|| "-".to_string()),
+                    vendors
+                        .vendor_of_any(addresses.iter().map(String::as_str))
+                        .unwrap_or_else(|| "-".to_string()),
                     info.get_port().to_string(),
                     info.get_hostname().trim_end_matches('.').to_string(),
                     get("id"),

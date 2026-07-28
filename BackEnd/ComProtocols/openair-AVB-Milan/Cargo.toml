@@ -10,6 +10,10 @@ edition = "2024"
 libc = "0.2"
 rumqttc = "0.24"
 
+# Names the manufacturer behind each entity's OUI. Never blocks the capture
+# loop: an unknown OUI resolves in the background and lands on a later refresh.
+openair-maclookup = { path = "../openair-MacLookup" }
+
 [[bin]]
 name = "avdecc-probe"
 path = "src/bin/avdecc-probe.rs"

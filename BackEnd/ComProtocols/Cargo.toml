@@ -17,6 +17,7 @@ members = [
     "openair-Dante",
     "openair-dnssd",
     "openair-ember",
+    "openair-MacLookup",
     "openair-mdns",
     "openair-midi",
     "openair-mqtt",

@@ -60,9 +60,15 @@ const SAP_GROUP: Ipv4Addr = Ipv4Addr::new(239, 255, 255, 255);
 const SAP_PORT: u16 = 9875;
 
 /// Retained keys per Dante device (mDNS path).
-const DEVICE_KEYS: [&str; 11] = [
+/// `mac` and `vendor` are recovered, not advertised: Dante announces over mDNS,
+/// which carries no hardware address, but a SLAAC IPv6 address holds the MAC in
+/// its low 64 bits. `vendor` sits beside the device's OWN `manufacturer` claim
+/// on purpose — `mf=PreSonus` is what the box says, the OUI is what IEEE
+/// registered, and an OEM module in someone else's chassis makes them differ.
+const DEVICE_KEYS: [&str; 13] = [
     "device", "manufacturer", "model", "discovery", "services",
-    "channels", "addresses", "port", "hostname", "status", "last_online",
+    "channels", "addresses", "mac", "vendor", "port", "hostname", "status",
+    "last_online",
 ];
 
 /// Split a Dante mDNS instance name into (device, channel).
@@ -128,6 +134,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     let mut opts = rumqttc::MqttOptions::new("open-air-dante", mqtt_host, mqtt_port);
     opts.set_keep_alive(Duration::from_secs(30));
     let (mqtt_client, mut connection) = rumqttc::Client::new(opts, 32);
+    let vendors = openair_maclookup::MacVendors::start();
     std::thread::spawn(move || {
         for _ in connection.iter() {}
     });
@@ -269,6 +276,13 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                 services,
                 if channel_count > 0 { channel_count.to_string() } else { "-".to_string() },
                 addresses.join(", "),
+                vendors
+                    .mac_of_any(addresses.iter().map(String::as_str))
+                    .map(|m| m.to_string())
+                    .unwrap_or_else(|| "-".to_string()),
+                vendors
+                    .vendor_of_any(addresses.iter().map(String::as_str))
+                    .unwrap_or_else(|| "-".to_string()),
                 info.get_port().to_string(),
                 host.clone(),
                 "identified".to_string(),

@@ -6,6 +6,11 @@ edition = "2024"
 [dependencies]
 mdns-sd = "0.20"
 rumqttc = "0.24"
+
+# `manufacturer` is what the device says about itself (mf=PreSonus in its TXT).
+# `vendor` is who IEEE gave the OUI to. They can differ — an OEM board in
+# someone else's box — so both are published rather than one chosen.
+openair-maclookup = { path = "../openair-MacLookup" }
 # The SAP payload is an SDP record — the same grammar RAVENNA announces over
 # RTSP — so the parser is shared rather than written twice.
 openair-ravenna = { path = "../openair-ravenna" }

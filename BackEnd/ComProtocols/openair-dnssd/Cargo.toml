@@ -6,3 +6,7 @@ edition = "2024"
 [dependencies]
 mdns-sd = "0.20"
 rumqttc = "0.24"
+
+# DNS-SD advertises no hardware address, but a SLAAC link-local address
+# contains one. See Oui::from_ipv6 — that is the whole reason this is here.
+openair-maclookup = { path = "../openair-MacLookup" }

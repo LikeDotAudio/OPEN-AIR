@@ -59,7 +59,7 @@ const APPLE_SERVICES: [(&str, &str); 8] = [
     ("_sleep-proxy._udp.local.", "sleep-proxy"),
 ];
 
-const DEVICE_KEYS: [&str; 12] = [
+const DEVICE_KEYS: [&str; 14] = [
     "device",
     "model",
     "model_id",
@@ -70,6 +70,12 @@ const DEVICE_KEYS: [&str; 12] = [
     "metadata",
     "features_raw",
     "addresses",
+    // Neither is advertised. Both are recovered from the SLAAC IPv6 address,
+    // which carries the host's MAC in its low 64 bits — `mac` is the address
+    // itself, `vendor` is who holds that IEEE block. Blank for a host using
+    // privacy addressing, where the interface ID is genuinely random.
+    "mac",
+    "vendor",
     "status",
     "last_online",
 ];
@@ -160,6 +166,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     let mut opts = rumqttc::MqttOptions::new("open-air-appletv", mqtt_host, mqtt_port);
     opts.set_keep_alive(Duration::from_secs(30));
     let (mqtt_client, mut connection) = rumqttc::Client::new(opts, 32);
+    let vendors = openair_maclookup::MacVendors::start();
     std::thread::spawn(move || {
         for _ in connection.iter() {}
     });
@@ -262,6 +269,19 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
             decode_metadata(&get("md")),
             { let ft = get("ft"); if ft.is_empty() { "-".into() } else { ft } },
             d.addresses.iter().cloned().collect::<Vec<_>>().join(", "),
+            {
+                let addrs: Vec<String> = d.addresses.iter().cloned().collect();
+                vendors
+                    .mac_of_any(addrs.iter().map(String::as_str))
+                    .map(|m| m.to_string())
+                    .unwrap_or_else(|| "-".to_string())
+            },
+            {
+                let addrs: Vec<String> = d.addresses.iter().cloned().collect();
+                vendors
+                    .vendor_of_any(addrs.iter().map(String::as_str))
+                    .unwrap_or_else(|| "-".to_string())
+            },
             "identified".to_string(),
             now_secs().to_string(),
         ];

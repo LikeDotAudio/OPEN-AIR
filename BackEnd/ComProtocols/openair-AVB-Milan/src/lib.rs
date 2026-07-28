@@ -63,10 +63,15 @@ use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// Retained attribute keys per entity. Order here is the UI column order.
-pub const ENTITY_KEYS: [&str; 18] = [
+///
+/// `vendor` follows `oui` because it is that column read aloud: the OUI is the
+/// IEEE block, the vendor is who IEEE gave it to. The table already carried the
+/// number and never the name.
+pub const ENTITY_KEYS: [&str; 19] = [
     "entity_id",
     "mac",
     "oui",
+    "vendor",
     "interface",
     "entity_model_id",
     "talker_sources",
@@ -185,6 +190,9 @@ pub fn run_listen_agent(mqtt_host: &str, mqtt_port: u16) {
 
     let by_index: HashMap<u32, String> =
         interfaces.iter().map(|i| (i.index, i.name.clone())).collect();
+    // One cache and one worker thread for the life of the agent.
+    let vendors = openair_maclookup::MacVendors::start();
+
     let mut known: HashMap<u64, Known> = HashMap::new();
     let mut buf = [0u8; 2048];
 
@@ -193,7 +201,7 @@ pub fn run_listen_agent(mqtt_host: &str, mqtt_port: u16) {
             Ok(Some((len, if_index))) => {
                 let iface = by_index.get(&if_index).map(String::as_str).unwrap_or("?");
                 if let Ok(entity) = adp::parse_frame(&buf[..len]) {
-                    handle_entity(&entity, iface, &mqtt_client, &mut known);
+                    handle_entity(&entity, iface, &mqtt_client, &mut known, &vendors);
                 }
             }
             Ok(None) => {} // Read timeout: fall through to the expiry sweep.
@@ -234,6 +242,7 @@ fn handle_entity(
     iface: &str,
     mqtt_client: &rumqttc::Client,
     known: &mut HashMap<u64, Known>,
+    vendors: &openair_maclookup::MacVendors,
 ) {
     match entity.message_type {
         MessageType::EntityDiscover => return, // Another controller asking, not a device.
@@ -267,6 +276,12 @@ fn handle_entity(
         adp::format_id(entity.entity_id),
         adp::format_mac(&entity.source_mac),
         adp::format_oui(&entity.source_mac),
+        // Non-blocking: a manufacturer not seen before is unknown on this
+        // announcement and named on the next one. ADP re-announces on its own
+        // valid_time, so the name lands without anything having to poll.
+        vendors
+            .vendor(&adp::format_mac(&entity.source_mac))
+            .unwrap_or_else(|| "-".to_string()),
         iface.to_string(),
         adp::format_id(entity.entity_model_id),
         entity.talker_stream_sources.to_string(),
@@ -369,6 +384,6 @@ mod tests {
     /// truncate the device's attributes in the UI.
     #[test]
     fn key_count_matches_published_value_count() {
-        assert_eq!(ENTITY_KEYS.len(), 18);
+        assert_eq!(ENTITY_KEYS.len(), 19);
     }
 }

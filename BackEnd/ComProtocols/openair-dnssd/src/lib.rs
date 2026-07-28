@@ -20,8 +20,31 @@ use std::time::Duration;
 
 const META_QUERY: &str = "_services._dns-sd._udp.local.";
 
-const DEVICE_KEYS: [&str; 8] =
-    ["service_type", "instance", "hostname", "addresses", "port", "txt", "status", "last_online"];
+/// Retained attribute keys per resolved instance. Order here is the UI column
+/// order.
+///
+/// `vendor` follows `addresses` because that is where it comes from. DNS-SD
+/// advertises no hardware address at all — but a host that built its IPv6
+/// address by SLAAC embedded its MAC in the low 64 bits, so the OUI is sitting
+/// in the `addresses` column already, one bit-flip away from a manufacturer.
+/// See `openair_maclookup::Oui::from_ipv6`.
+///
+/// It stays blank for a device using RFC 4941 privacy addressing, where the
+/// interface ID really is random. Apple hosts do; naming one anyway would mean
+/// reading a vendor out of noise.
+const DEVICE_KEYS: [&str; 10] = [
+    "service_type",
+    "instance",
+    "hostname",
+    "addresses",
+    // The address `vendor` was read out of — the evidence for the name.
+    "mac",
+    "vendor",
+    "port",
+    "txt",
+    "status",
+    "last_online",
+];
 
 /// MQTT topic segment: strip `.local.`, replace anything the topic grammar
 /// rejects (spaces, `/ + #`, dots) with `_`.
@@ -46,6 +69,12 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     std::thread::spawn(move || {
         for _ in connection.iter() {} // drive the eventloop forever
     });
+
+    // One cache and one worker thread for the life of the agent. This tab is
+    // the widest by far — 50-odd instances across a dozen service types — and
+    // most of them are the same handful of hosts announcing several services,
+    // so the OUI cache collapses it to a few requests.
+    let vendors = openair_maclookup::MacVendors::start();
 
     let daemon = match ServiceDaemon::new() {
         Ok(d) => d,
@@ -118,6 +147,16 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                     info.fullname.clone(),
                     info.host.trim_end_matches('.').to_string(),
                     addresses.join(", "),
+                    // Non-blocking, like every other caller: unknown on the
+                    // first sighting of a manufacturer, named once the worker
+                    // has been round. mDNS re-announces, so it lands on its own.
+                    vendors
+                        .mac_of_any(addresses.iter().map(String::as_str))
+                        .map(|m| m.to_string())
+                        .unwrap_or_else(|| "-".to_string()),
+                    vendors
+                        .vendor_of_any(addresses.iter().map(String::as_str))
+                        .unwrap_or_else(|| "-".to_string()),
                     info.port.to_string(),
                     if txt.is_empty() { "-".to_string() } else { txt.join(" | ") },
                     "identified".to_string(),

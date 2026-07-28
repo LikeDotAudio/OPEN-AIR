@@ -57,7 +57,7 @@ const NMOS_SERVICES: [(&str, &str); 5] = [
     ("_nmos-system._tcp.local.", "System"),
 ];
 
-const DEVICE_KEYS: [&str; 10] = [
+const DEVICE_KEYS: [&str; 12] = [
     "service",
     "role",
     "api_versions",
@@ -67,6 +67,12 @@ const DEVICE_KEYS: [&str; 10] = [
     "host",
     "port",
     "addresses",
+    // Neither is advertised. Both are recovered from the SLAAC IPv6 address,
+    // which carries the host's MAC in its low 64 bits — `mac` is the address
+    // itself, `vendor` is who holds that IEEE block. Blank for a host using
+    // privacy addressing, where the interface ID is genuinely random.
+    "mac",
+    "vendor",
     "last_online",
 ];
 
@@ -144,6 +150,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     let mut opts = rumqttc::MqttOptions::new("open-air-nmos", mqtt_host, mqtt_port);
     opts.set_keep_alive(Duration::from_secs(30));
     let (mqtt_client, mut connection) = rumqttc::Client::new(opts, 32);
+    let vendors = openair_maclookup::MacVendors::start();
     std::thread::spawn(move || {
         for _ in connection.iter() {}
     });
@@ -225,6 +232,19 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
             s.host.clone(),
             s.port.to_string(),
             s.addresses.iter().cloned().collect::<Vec<_>>().join(", "),
+            {
+                let addrs: Vec<String> = s.addresses.iter().cloned().collect();
+                vendors
+                    .mac_of_any(addrs.iter().map(String::as_str))
+                    .map(|m| m.to_string())
+                    .unwrap_or_else(|| "-".to_string())
+            },
+            {
+                let addrs: Vec<String> = s.addresses.iter().cloned().collect();
+                vendors
+                    .vendor_of_any(addrs.iter().map(String::as_str))
+                    .unwrap_or_else(|| "-".to_string())
+            },
             now_secs().to_string(),
         ];
 

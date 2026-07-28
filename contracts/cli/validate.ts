@@ -121,8 +121,27 @@ function walkYakTreeRules() {
   let files: string[]
   try {
     files = [...jsonFiles(YAK_SUBTREE)]
-  } catch {
-    treeIssues.push({ level: 'error', code: 'yak-tree-missing', path: YAK_SUBTREE, message: 'YAK subtree not found' })
+  } catch (e) {
+    // An absent subtree is not a finding. 5_Protocols/10_Yak is GENERATED from
+    // BackEnd/openair-yak/Yak by the tree builder and is not tracked, so every
+    // fresh checkout legitimately lacks it — CI included. Reporting that as an
+    // error made the ratchet fail on a clean clone, which is the one state that
+    // must always pass. The authoritative lint for these definitions is the
+    // builder's own `validate` over the source tree; this pass only adds rules
+    // about the generated copy, and there is nothing generated to have rules
+    // about.
+    //
+    // Narrow to ENOENT on purpose: a subtree that exists but cannot be read is
+    // a real fault and must keep surfacing rather than being swallowed here.
+    if ((e as NodeJS.ErrnoException)?.code === 'ENOENT') return
+    treeIssues.push({
+      level: 'error',
+      code: 'yak-tree-unreadable',
+      // relative, not absolute: this string becomes a ratchet baseline key, and
+      // an absolute path would key the inventory to one machine's checkout.
+      path: relative(GUI_ROOT, YAK_SUBTREE),
+      message: `YAK subtree could not be read: ${(e as Error)?.message ?? e}`,
+    })
     return
   }
   const byMd5 = new Map<string, string[]>()

@@ -13,5 +13,8 @@
       "min": 0,
       "max": 2.5
     }
-  }
+  },
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Power",
+  "notes": "Module 60V / 2.5A (150W)"
 }

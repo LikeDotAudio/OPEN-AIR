@@ -4,7 +4,11 @@
   "set": {
     "Marker_X_position": {
       "scpi": ":CALCulate:MARKer<marker_number>:X <x_value>",
+      "scpiFast": ":CALC:MARK<marker_number>:X <x_value>",
       "description": "Set Marker Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Marker Command Sets",
       "args": [
         "x_value"
@@ -13,7 +17,12 @@
     },
     "Power_Attenuation": {
       "scpi": ":POWer:ATTenuation <Power_Attenuation>",
+      "scpiFast": ":POW:ATT <Power_Attenuation>",
       "description": "Power Attenuation",
+      "arg": {
+        "kind": "numeric",
+        "unit": "dB"
+      },
       "group": "Individual Power Sets",
       "args": [
         "Power_Attenuation"
@@ -22,7 +31,12 @@
     },
     "Set_Reference_Level": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV <Ref_Level_dBm>",
       "description": "Set Reference Level",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
       "group": "Individual Power Sets",
       "args": [
         "Ref_Level_dBm"
@@ -31,7 +45,11 @@
     },
     "Resolution_Bandwidth": {
       "scpi": ":SENSe:BANDwidth:RESolution <hz_value>",
+      "scpiFast": ":SENS:BAND:RES <hz_value>",
       "description": "Resolution Bandwidth",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "hz_value"
@@ -40,7 +58,11 @@
     },
     "Span_Frequency": {
       "scpi": ":FREQuency:SPAN <hz_value>",
+      "scpiFast": ":FREQ:SPAN <hz_value>",
       "description": "Span Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -49,7 +71,11 @@
     },
     "Start_Freq_MHz": {
       "scpi": ":FREQuency:STARt <hz_value>",
+      "scpiFast": ":FREQ:STAR <hz_value>",
       "description": "Start Freq MHz",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -58,7 +84,11 @@
     },
     "Stop_Freq_MHz": {
       "scpi": ":FREQuency:STOP <hz_value>",
+      "scpiFast": ":FREQ:STOP <hz_value>",
       "description": "Stop Freq MHz",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -67,7 +97,12 @@
     },
     "Sweep_Time": {
       "scpi": ":SENSe:SWEep:TIME <sweep_time_s>",
+      "scpiFast": ":SENS:SWE:TIME <sweep_time_s>",
       "description": "Sweep Time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "sweep_time_s"
@@ -76,7 +111,11 @@
     },
     "Video_Bandwidth": {
       "scpi": ":SENSe:BANDwidth:VIDeo <hz_value>",
+      "scpiFast": ":SENS:BAND:VID <hz_value>",
       "description": "Video Bandwidth",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "hz_value"
@@ -87,48 +126,56 @@
   "do": {
     "Do_Power_Cycle": {
       "scpi": ":SYSTem:POWer:RESet",
+      "scpiFast": ":SYST:POW:RES",
       "description": "Do Power Cycle",
       "group": "Hardware Reset and Clear",
       "subsystem": "System"
     },
     "Do_Update_Display": {
       "scpi": ":SYSTem:DISPlay:UPDate",
+      "scpiFast": ":SYST:DISP:UPD",
       "description": "Do Update Display",
       "group": "System Maintenance Controls",
       "subsystem": "System"
     },
     "Marker_State_OFF": {
       "scpi": ":CALCulate:MARKer<marker_number>:STATe OFF",
+      "scpiFast": ":CALC:MARK<marker_number>:STAT OFF",
       "description": "Disable Marker",
       "group": "Marker Command Sets",
       "subsystem": "Markers"
     },
     "Marker_State_ON": {
       "scpi": ":CALCulate:MARKer<marker_number>:STATe ON",
+      "scpiFast": ":CALC:MARK<marker_number>:STAT ON",
       "description": "Enable Marker",
       "group": "Marker Command Sets",
       "subsystem": "Markers"
     },
     "Set_Input_Auto_Attenuation_OFF": {
       "scpi": ":POWer:ATTenuation:AUTO OFF",
+      "scpiFast": ":POW:ATT:AUTO OFF",
       "description": "Set Input Auto Attenuation OFF",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Input_Auto_Attenuation_ON": {
       "scpi": ":POWer:ATTenuation:AUTO ON",
+      "scpiFast": ":POW:ATT:AUTO ON",
       "description": "Set Input Auto Attenuation ON",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Power_Gain_OFF": {
       "scpi": ":POWer:GAIN OFF",
+      "scpiFast": ":POW:GAIN OFF",
       "description": "Set Power Gain OFF",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Power_Gain_ON": {
       "scpi": ":POWer:GAIN ON",
+      "scpiFast": ":POW:GAIN ON",
       "description": "Set Power Gain ON",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
@@ -137,7 +184,11 @@
   "rig": {
     "RBW_VBW_Hz": {
       "scpi": ":SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>",
+      "scpiFast": ":SENS:BAND:RES <rbw_hz_value>;:SENS:BAND:VID <vbw_hz_value>",
       "description": "Set Resolution and Video BW",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "rbw_hz_value",
@@ -147,7 +198,12 @@
     },
     "Ref_Level_dBm": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV <Ref_Level_dBm>;:POW:RF:ATT <Attenuation_dB>;:POW:GAIN <Preamp_On>",
       "description": "Set Power Levels",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
       "group": "RIG Amplitude Commands",
       "args": [
         "Ref_Level_dBm",
@@ -158,7 +214,11 @@
     },
     "freq_start_stop": {
       "scpi": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>",
+      "scpiFast": ":FREQ:STAR <start_freq>;:FREQ:STOP <stop_freq>",
       "description": "Frequency Range Commands",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "start_freq",
@@ -170,49 +230,198 @@
   "nab": {
     "Attenuation": {
       "scpi": ":POWer:RF:ATTenuation?",
+      "scpiFast": ":POW:RF:ATT?",
       "description": "Attenuation",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "Frequency_settings": {
       "scpi": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?",
+      "scpiFast": ":FREQ:STAR?;:FREQ:STOP?;:FREQ:CENT?;:FREQ:SPAN?",
       "description": "Primary Frequency Monitoring",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "start",
+            "type": "NR3"
+          },
+          {
+            "name": "stop",
+            "type": "NR3"
+          },
+          {
+            "name": "center",
+            "type": "NR3"
+          },
+          {
+            "name": "span",
+            "type": "NR3"
+          }
+        ]
+      },
       "group": "NAB Frequency Monitoring",
       "subsystem": "Frequency"
     },
     "Get_error_information": {
       "scpi": ":SYSTem:ERRor?",
+      "scpiFast": ":SYST:ERR?",
       "description": "System Error Check",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Status and Identification",
       "subsystem": "System"
     },
     "Preamp_State": {
       "scpi": ":SENSE:POWer:RF:GAIN:STATe?",
+      "scpiFast": ":SENS:POW:RF:GAIN:STAT?",
       "description": "Preamp State",
+      "returns": {
+        "count": 1,
+        "type": "BOOL",
+        "unit": "dB"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "Get_Reference_Level": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV?",
       "description": "Get Reference Level",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "all_marker_settings": {
       "scpi": ":CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?",
+      "scpiFast": ":CALC:MARK1:Y?;:CALC:MARK2:Y?;:CALC:MARK3:Y?;:CALC:MARK4:Y?;:CALC:MARK5:Y?;:CALC:MARK6:Y?;:CALC:MARK1:X?;:CALC:MARK2:X?;:CALC:MARK3:X?;:CALC:MARK4:X?;:CALC:MARK5:X?;:CALC:MARK6:X?",
       "description": "Marker Amplitude and Frequency Readbacks",
+      "returns": {
+        "count": 12,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "y_1",
+            "type": "NR3"
+          },
+          {
+            "name": "y_2",
+            "type": "NR3"
+          },
+          {
+            "name": "y_3",
+            "type": "NR3"
+          },
+          {
+            "name": "y_4",
+            "type": "NR3"
+          },
+          {
+            "name": "y_5",
+            "type": "NR3"
+          },
+          {
+            "name": "y_6",
+            "type": "NR3"
+          },
+          {
+            "name": "x_1",
+            "type": "NR3"
+          },
+          {
+            "name": "x_2",
+            "type": "NR3"
+          },
+          {
+            "name": "x_3",
+            "type": "NR3"
+          },
+          {
+            "name": "x_4",
+            "type": "NR3"
+          },
+          {
+            "name": "x_5",
+            "type": "NR3"
+          },
+          {
+            "name": "x_6",
+            "type": "NR3"
+          }
+        ]
+      },
       "group": "NAB Marker Monitoring",
       "subsystem": "Markers"
     },
     "amplitude_settings": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV?;:POW:ATT?;:POW:GAIN?",
       "description": "Power and Attenuation Readbacks",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "rlevel",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "attenuation",
+            "type": "NR3",
+            "unit": "dB"
+          },
+          {
+            "name": "gain",
+            "type": "NR3",
+            "unit": "dB"
+          }
+        ]
+      },
       "group": "NAB Amplitude Monitoring",
       "subsystem": "Amplitude"
     },
     "bandwidth_settings": {
       "scpi": ":SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?",
+      "scpiFast": ":SENS:BAND:RES?;:SENS:BAND:VID?;:SENS:BAND:VID:AUTO?;:INIT:CONT?;:SENS:SWE:TIME?",
       "description": "Bandwidth and Sweep Monitoring",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "resolution"
+          },
+          {
+            "name": "video"
+          },
+          {
+            "name": "auto",
+            "type": "BOOL"
+          },
+          {
+            "name": "continuous",
+            "type": "BOOL"
+          },
+          {
+            "name": "time",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
       "group": "NAB Bandwidth Monitoring",
       "subsystem": "Bandwidth"
     }

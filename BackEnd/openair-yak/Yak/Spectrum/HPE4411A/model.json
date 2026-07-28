@@ -1,0 +1,47 @@
+{
+  "model": "HPE4411A",
+  "description": "HP/Agilent E4411A ESA-L1500A spectrum analyzer, 9 kHz – 1.5 GHz",
+  "channels": 1,
+  "unverified": true,
+  "provenance": "Manufacturer datasheet figures, not read out of the manual set. The ESA-L programmer's guide `HP - E441190003` IS in the manual set — Documents/Audits/'Yak commands missing.md' §'Instruments in the manual set with no YAK model at all' lists it as unswept, having not connected it to this model directory. Sweeping it would settle both the 28-command vocabulary and these limits. Standard-instrument bounds assumed: RBW narrower than 1 kHz needs option 1DR, and the attenuator steps in 10 dB, so `attenuation` is a range of reachable values rather than a continuum.",
+  "domains": {
+    "freq": {
+      "units": "Hz",
+      "min": 9000,
+      "max": 1500000000
+    },
+    "span": {
+      "units": "Hz",
+      "min": 0,
+      "max": 1500000000
+    },
+    "ref_level": {
+      "units": "dBm",
+      "min": -100,
+      "max": 30
+    },
+    "attenuation": {
+      "units": "dB",
+      "min": 0,
+      "max": 60
+    },
+    "rbw": {
+      "units": "Hz",
+      "min": 1000,
+      "max": 3000000
+    },
+    "vbw": {
+      "units": "Hz",
+      "min": 30,
+      "max": 3000000
+    },
+    "sweep_time": {
+      "units": "s",
+      "min": 0.005,
+      "max": 2000
+    }
+  },
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Spectrum",
+  "notes": "ESA-L Series 1.5 GHz"
+}

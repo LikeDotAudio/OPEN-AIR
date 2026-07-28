@@ -4,7 +4,11 @@
   "set": {
     "Close_Channels": {
       "scpi": "CLOSE <channel_list>",
+      "scpiFast": "CLOS <channel_list>",
       "description": "Close Channels",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Close Relays",
       "args": [
         "channel_list"
@@ -13,6 +17,9 @@
     "Open_Channels": {
       "scpi": "OPEN <channel_list>",
       "description": "Open Channels",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Open Relays",
       "args": [
         "channel_list"
@@ -22,6 +29,7 @@
   "do": {
     "Card_Reset": {
       "scpi": "CRESET <slot>",
+      "scpiFast": "CRES <slot>",
       "description": "Card Reset",
       "group": "System Reset & Control"
     },
@@ -32,11 +40,13 @@
     },
     "Reset_System": {
       "scpi": "RESET",
+      "scpiFast": "RES",
       "description": "Reset System",
       "group": "System Reset & Control"
     },
     "Select_Channel": {
       "scpi": "SELECT <chan>",
+      "scpiFast": "SEL <chan>",
       "description": "Select Channel",
       "group": "Break-Before-Make"
     }
@@ -45,12 +55,19 @@
   "nab": {
     "Query_Channel_State": {
       "scpi": "CLOSE? <chan>",
+      "scpiFast": "CLOS? <chan>",
       "description": "Query Channel State",
+      "returns": {
+        "count": 1
+      },
       "group": "Query specific relay state"
     },
     "Query_Slot_ID": {
       "scpi": "ID? <slot>",
       "description": "Query Slot ID",
+      "returns": {
+        "count": 1
+      },
       "group": "Hardware Identification"
     }
   }

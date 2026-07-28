@@ -69,7 +69,7 @@ def yak_capabilities(model):
     Channel counts and voltage/current ranges are properties of the instrument,
     so they live with the SCPI vocabulary rather than in the panel. Before this
     they lived nowhere machine-readable: the ranges were English in
-    `visa_devices.json` ("Module 8V / 16A (128W)") and the scope's channel count
+    `knownDevices.json` ("Module 8V / 16A (128W)") and the scope's channel count
     was a description field reading "1, 2, 3, 4". Panels therefore shipped with
     no clamps at all, and the 8V module and the 60V module got the same widget.
 

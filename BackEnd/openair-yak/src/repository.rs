@@ -7,17 +7,35 @@ use log::error;
 /// One command: the SCPI template plus the verb whose bucket it was declared in.
 #[derive(Debug, Clone)]
 pub struct Command {
+    /// Long form — every keyword spelled out.
     pub scpi: String,
+    /// Short form, where it differs. The 6060B programming manual: *"The short
+    /// form provides the fastest program execution."* Absent when the long form
+    /// is already short, so callers read `scpi_fast.unwrap_or(scpi)`.
+    pub scpi_fast: Option<String>,
     /// "set" | "do" | "rig" | "nab" — which handler the table says owns this.
     pub verb: &'static str,
 }
 
-/// Only `scpi` is read at runtime. `description`, `group`, `args` and
-/// `subsystem` are in the file for the panel author and the generated
-/// CommandList sheet; serde skips what it is not asked for.
+impl Command {
+    /// The template to put on the wire, given whether speed was asked for.
+    pub fn template(&self, prefer_fast: bool) -> &str {
+        match (prefer_fast, &self.scpi_fast) {
+            (true, Some(f)) => f,
+            _ => &self.scpi,
+        }
+    }
+}
+
+/// `scpi` and `scpiFast` are read at runtime. `description`, `arg`, `returns`,
+/// `group`, `args` and `subsystem` are in the file for the panel author, the
+/// generated CommandList sheet and the test harness; serde skips what it is not
+/// asked for.
 #[derive(Debug, Deserialize)]
 struct Entry {
     scpi: String,
+    #[serde(default, rename = "scpiFast")]
+    scpi_fast: Option<String>,
 }
 
 /// `Yak/<Family>/<Model>/commands.json` — the whole vocabulary for one model.
@@ -109,13 +127,25 @@ impl YakRepository {
                               table.model, name, prev.verb, verb);
                     continue;
                 }
-                bucket.insert(name, Command { scpi: entry.scpi, verb });
+                bucket.insert(name, Command {
+                    scpi: entry.scpi,
+                    scpi_fast: entry.scpi_fast,
+                    verb,
+                });
             }
         }
     }
 
     pub fn get_scpi(&self, model_name: &str, command_name: &str) -> Option<String> {
-        self.get(model_name, command_name).map(|c| c.scpi.clone())
+        self.get_scpi_form(model_name, command_name, false)
+    }
+
+    /// `prefer_fast` picks the short-form spelling where the table carries one.
+    /// Same command, same instrument, fewer bytes on a 1980s GPIB link.
+    pub fn get_scpi_form(&self, model_name: &str, command_name: &str,
+                         prefer_fast: bool) -> Option<String> {
+        self.get(model_name, command_name)
+            .map(|c| c.template(prefer_fast).to_string())
     }
 
     pub fn get(&self, model_name: &str, command_name: &str) -> Option<&Command> {

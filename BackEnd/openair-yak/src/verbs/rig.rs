@@ -15,7 +15,7 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
     // The instance's own model wins — see verbs::target_model.
     let target_model = super::target_model(msg, yak);
     let target_model = target_model.as_str();
-    let template = match repo.get_scpi(target_model, &yak.command) {
+    let template = match repo.get_scpi_form(target_model, &yak.command, config.prefer_short_scpi) {
         Some(t) => t,
         None => {
             eprintln!("   ❌ [YAK RIG] Command '{}' not found in YAK repository for model '{}'!", yak.command, target_model);

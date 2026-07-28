@@ -2,36 +2,498 @@
   "model": "33210A",
   "family": "Generator",
   "set": {
+    "Set_Am_Source": {
+      "scpi": "AM:SOUR <value>",
+      "description": "AM Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "INT",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "AM",
+      "unverified": true
+    },
     "Set_Amplitude": {
       "scpi": "VOLTage <amp>",
+      "scpiFast": "VOLT <amp>",
       "description": "Set Amplitude",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "limits": "query"
+      },
       "group": "SOURce Configuration",
       "args": [
         "amp"
       ],
       "subsystem": "SOURce"
     },
+    "Set_Beeper_State": {
+      "scpi": ":BEEPer:STATe <value>",
+      "scpiFast": ":BEEP:STAT <value>",
+      "description": "System-Related Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BEEP",
+      "unverified": true
+    },
+    "Set_Burst_Gate_Polarity": {
+      "scpi": "BURSt:GATE:POLarity <value>",
+      "scpiFast": "BURS:GATE:POL <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "NORM",
+          "INV"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Set_Burst_State": {
+      "scpi": "BURSt:STATe <value>",
+      "scpiFast": "BURS:STAT <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Set_Calibration_Secure_State": {
+      "scpi": "CAL:SEC:STAT <value>",
+      "description": "Set calibration secure state",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Calibration_String": {
+      "scpi": "CAL:STR <value>",
+      "description": "Calibration Message",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Calibration_Value": {
+      "scpi": "CAL:VAL <value>",
+      "description": "Set calibration value",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Deviation_Dcycle": {
+      "scpi": "DEViation:DCYCle <value>",
+      "scpiFast": "DEV:DCYC <value>",
+      "description": "Pulse Width Modulation (PWM) Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "%",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DEV",
+      "unverified": true
+    },
+    "Set_Display_Text": {
+      "scpi": "DISP:TEXT <value>",
+      "description": "System-Related Operations",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Ese": {
+      "scpi": "*ESE <value>",
+      "description": "Set ese",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Fm_Deviation": {
+      "scpi": "FM:DEViation <value>",
+      "scpiFast": "FM:DEV <value>",
+      "description": "FM Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Set_Fm_Internal_Frequency": {
+      "scpi": "FM:INTernal:FREQuency <value>",
+      "scpiFast": "FM:INT:FREQ <value>",
+      "description": "Modulating Waveform Frequency",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Set_Fm_Source": {
+      "scpi": "FM:SOUR <value>",
+      "description": "FM Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "INT",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Set_Format_Border": {
+      "scpi": "FORMat:BORDer <value>",
+      "scpiFast": "FORM:BORD <value>",
+      "description": "Arbitrary Waveform Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FORM",
+      "unverified": true
+    },
     "Set_Frequency": {
       "scpi": "FREQuency <freq>",
+      "scpiFast": "FREQ <freq>",
       "description": "Set Frequency",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "SOURce Configuration",
       "args": [
         "freq"
       ],
       "subsystem": "SOURce"
     },
+    "Set_Frequency_Center": {
+      "scpi": "FREQuency:CENTer <value>",
+      "scpiFast": "FREQ:CENT <value>",
+      "description": "Frequency Sweep Commands",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Frequency_Span": {
+      "scpi": "FREQuency:SPAN <value>",
+      "scpiFast": "FREQ:SPAN <value>",
+      "description": "Set frequency span",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Frequency_Start": {
+      "scpi": "FREQuency:STARt <value>",
+      "scpiFast": "FREQ:STAR <value>",
+      "description": "Start Frequency and Stop Frequency",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Frequency_Stop": {
+      "scpi": "FREQuency:STOP <value>",
+      "scpiFast": "FREQ:STOP <value>",
+      "description": "Start Frequency and Stop Frequency",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Fskey_Frequency": {
+      "scpi": "FSKey:FREQuency <value>",
+      "scpiFast": "FSK:FREQ <value>",
+      "description": "FSK Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Set_Fskey_Internal_Rate": {
+      "scpi": "FSKey:INTernal:RATE <value>",
+      "scpiFast": "FSK:INT:RATE <value>",
+      "description": "FSK Commands",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Set_Fskey_Source": {
+      "scpi": "FSK:SOUR <value>",
+      "description": "FSK Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "INT",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Set_Fskey_State": {
+      "scpi": "FSKey:STATe <value>",
+      "scpiFast": "FSK:STAT <value>",
+      "description": "FSK Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Set_Function_Pulse_Dcycle": {
+      "scpi": "FUNCtion:PULSe:DCYCle <value>",
+      "scpiFast": "FUNC:PULS:DCYC <value>",
+      "description": "Pulse Configuration Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "%",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Set_Function_Pulse_Hold": {
+      "scpi": "FUNC:PULS:HOLD <value>",
+      "description": "Using the APPLy Command",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "WIDT",
+          "DCYC"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Set_Function_Pulse_Transition": {
+      "scpi": "FUNCtion:PULSe:TRANsition <value>",
+      "scpiFast": "FUNC:PULS:TRAN <value>",
+      "description": "Edge Time",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Set_Function_Ramp_Symmetry": {
+      "scpi": "FUNCtion:RAMP:SYMMetry <value>",
+      "scpiFast": "FUNC:RAMP:SYMM <value>",
+      "description": "Output Configuration Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
     "Set_Function_Shape": {
       "scpi": "FUNCtion <shape>",
+      "scpiFast": "FUNC <shape>",
       "description": "Set Function Shape",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "SOURce Configuration",
       "args": [
         "shape"
       ],
       "subsystem": "SOURce"
     },
+    "Set_Function_Square_Dcycle": {
+      "scpi": "FUNCtion:SQUare:DCYCle <value>",
+      "scpiFast": "FUNC:SQU:DCYC <value>",
+      "description": "Output Configuration Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "%",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Set_Function_User": {
+      "scpi": "FUNC:USER <value>",
+      "description": "Arbitrary Waveform Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Set_Klock_Exclude": {
+      "scpi": ":KLOCk:EXCLude <value>",
+      "scpiFast": ":KLOC:EXCL <value>",
+      "description": "System-Related Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "KLOC",
+      "unverified": true
+    },
+    "Set_Marker_Frequency": {
+      "scpi": "MARKer:FREQuency <value>",
+      "scpiFast": "MARK:FREQ <value>",
+      "description": "Marker Frequency",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MARK",
+      "unverified": true
+    },
+    "Set_Memory_State_Name": {
+      "scpi": "MEMory:STATe:NAME <value>",
+      "scpiFast": "MEM:STAT:NAME <value>",
+      "description": "State Storage Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEM",
+      "unverified": true
+    },
     "Set_Offset": {
       "scpi": "VOLTage:OFFSet <offset>",
+      "scpiFast": "VOLT:OFFS <offset>",
       "description": "Set Offset",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "limits": "query"
+      },
       "group": "SOURce Configuration",
       "args": [
         "offset"
@@ -40,16 +502,532 @@
     },
     "Set_Output_Load": {
       "scpi": "OUTPut:LOAD <ohms>",
+      "scpiFast": "OUTP:LOAD <ohms>",
       "description": "Set Output Load",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "OUTPut Configuration",
       "args": [
         "ohms"
       ],
       "subsystem": "OUTPut"
     },
+    "Set_Output_Polarity": {
+      "scpi": "OUTPut:POLarity <value>",
+      "scpiFast": "OUTP:POL <value>",
+      "description": "Set output polarity",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "NORM",
+          "INV"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Trigger": {
+      "scpi": "OUTPut:TRIGger <value>",
+      "scpiFast": "OUTP:TRIG <value>",
+      "description": "Trigger Out Signal",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Trigger_Slope": {
+      "scpi": "OUTPut:TRIGger:SLOPe <value>",
+      "scpiFast": "OUTP:TRIG:SLOP <value>",
+      "description": "Trigger Out Signal",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "POS",
+          "NEG"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Phase_Unlock_Error_State": {
+      "scpi": "PHASe:UNLock:ERRor:STATe <value>",
+      "scpiFast": "PHAS:UNL:ERR:STAT <value>",
+      "description": "Phase-Lock Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PHAS",
+      "unverified": true
+    },
+    "Set_Pm_Deviation": {
+      "scpi": "PM:DEViation <value>",
+      "scpiFast": "PM:DEV <value>",
+      "description": "PM Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Set_Pm_Internal_Frequency": {
+      "scpi": "PM:INTernal:FREQuency <value>",
+      "scpiFast": "PM:INT:FREQ <value>",
+      "description": "Modulating Waveform Frequency",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Set_Pm_Source": {
+      "scpi": "PM:SOUR <value>",
+      "description": "PM Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "INT",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Set_Pm_State": {
+      "scpi": "PM:STATe <value>",
+      "scpiFast": "PM:STAT <value>",
+      "description": "PM Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Set_Psc": {
+      "scpi": "*PSC <value>",
+      "description": "Set psc",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Pulse_Period": {
+      "scpi": "PULSe:PERiod <value>",
+      "scpiFast": "PULS:PER <value>",
+      "description": "Pulse Configuration Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PULS",
+      "unverified": true
+    },
+    "Set_Pwm_Deviation": {
+      "scpi": "PWM:DEV <value>",
+      "description": "PWM Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Set_Pwm_Deviation_Dcycle": {
+      "scpi": "PWM:DEViation:DCYCle <value>",
+      "scpiFast": "PWM:DEV:DCYC <value>",
+      "description": "PWM Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "%",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Set_Pwm_Internal_Frequency": {
+      "scpi": "PWM:INTernal:FREQuency <value>",
+      "scpiFast": "PWM:INT:FREQ <value>",
+      "description": "Modulating Waveform Frequency",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Set_Pwm_Source": {
+      "scpi": "PWM:SOURce <value>",
+      "scpiFast": "PWM:SOUR <value>",
+      "description": "PWM Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "INT",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Set_Pwm_State": {
+      "scpi": "PWM:STATe <value>",
+      "scpiFast": "PWM:STAT <value>",
+      "description": "PWM Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Set_Questionable_Enable": {
+      "scpi": ":QUEStionable:ENABle <value>",
+      "scpiFast": ":QUES:ENAB <value>",
+      "description": "Status Reporting Commands",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Set_Rcl": {
+      "scpi": "*RCL <value>",
+      "description": "Set rcl",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Sav": {
+      "scpi": "*SAV <value>",
+      "description": "Set sav",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Secure_State": {
+      "scpi": ":SECure:STATe <value>",
+      "scpiFast": ":SEC:STAT <value>",
+      "description": "Calibration Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Set_Sre": {
+      "scpi": "*SRE <value>",
+      "description": "Set sre",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_State_Questionable_Enable": {
+      "scpi": "STAT:QUES:ENAB <value>",
+      "description": "The Questionable Data Register",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Sweep_Spacing": {
+      "scpi": "SWEep:SPACing <value>",
+      "scpiFast": "SWE:SPAC <value>",
+      "description": "Sweep Mode",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "LIN",
+          "LOG"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SWE",
+      "unverified": true
+    },
+    "Set_Sweep_State": {
+      "scpi": "SWEep:STATe <value>",
+      "scpiFast": "SWE:STAT <value>",
+      "description": "Sweep Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SWE",
+      "unverified": true
+    },
+    "Set_Sweep_Time": {
+      "scpi": "SWE:TIME <value>",
+      "description": "Sweep Time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SWE",
+      "unverified": true
+    },
+    "Set_System_Beeper_State": {
+      "scpi": "SYST:BEEP:STAT <value>",
+      "description": "System-Related Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Communicate_Lan_Ipaddress": {
+      "scpi": "SYSTem:COMMunicate:LAN:IPADdress <value>",
+      "scpiFast": "SYST:COMM:LAN:IPAD <value>",
+      "description": "Remote Interface Configuration",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Communicate_Lan_Mediasense": {
+      "scpi": "SYSTem:COMMunicate:LAN:MEDiasense <value>",
+      "scpiFast": "SYST:COMM:LAN:MED <value>",
+      "description": "Set system communicate lan mediasense",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Communicate_Lan_Netbios": {
+      "scpi": "SYSTem:COMMunicate:LAN:NETBios <value>",
+      "scpiFast": "SYST:COMM:LAN:NETB <value>",
+      "description": "Set system communicate lan netbios",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Communicate_Lan_Telnet_Prompt": {
+      "scpi": "SYSTem:COMMunicate:LAN:TELNet:PROMpt <value>",
+      "scpiFast": "SYST:COMM:LAN:TELN:PROM <value>",
+      "description": "Set system communicate lan telnet prompt",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Communicate_Lan_Telnet_Wmessage": {
+      "scpi": "SYSTem:COMMunicate:LAN:TELNet:WMESsage <value>",
+      "scpiFast": "SYST:COMM:LAN:TELN:WMES <value>",
+      "description": "Set system communicate lan telnet wmessage",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_Telnet_Prompt": {
+      "scpi": ":TELNet:PROMpt <value>",
+      "scpiFast": ":TELN:PROM <value>",
+      "description": "Interface Configuration Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TELN",
+      "unverified": true
+    },
+    "Set_Telnet_Wmessage": {
+      "scpi": ":TELNet:WMESsage <value>",
+      "scpiFast": ":TELN:WMES <value>",
+      "description": "Interface Configuration Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TELN",
+      "unverified": true
+    },
+    "Set_Trigger_Slope": {
+      "scpi": "TRIGger:SLOPe <value>",
+      "scpiFast": "TRIG:SLOP <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "POS",
+          "NEG"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Source": {
+      "scpi": "TRIG:SOUR <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "IMM",
+          "EXT",
+          "BUS"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Unit_Angle": {
+      "scpi": "UNIT:ANGLe <value>",
+      "scpiFast": "UNIT:ANGL <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "UNIT",
+      "unverified": true
+    },
     "Set_Voltage_Unit": {
       "scpi": "VOLTage:UNIT <unit>",
+      "scpiFast": "VOLT:UNIT <unit>",
       "description": "Set Voltage Unit",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "VPP",
+          "VRMS",
+          "DBM"
+        ]
+      },
       "group": "SOURce Configuration",
       "args": [
         "unit"
@@ -58,7 +1036,12 @@
     },
     "Setup_Pulse_Width": {
       "scpi": "FUNCtion:PULSe:WIDTh <width_sec>",
+      "scpiFast": "FUNC:PULS:WIDT <width_sec>",
       "description": "Setup Pulse Width",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
       "group": "PULSe Configuration",
       "args": [
         "width_sec"
@@ -69,42 +1052,375 @@
   "do": {
     "AM_State_OFF": {
       "scpi": "AM:STATe OFF",
+      "scpiFast": "AM:STAT OFF",
       "description": "AM State OFF",
       "group": "Modulation Control",
       "subsystem": "Modulation"
     },
     "AM_State_ON": {
       "scpi": "AM:STATe ON",
+      "scpiFast": "AM:STAT ON",
       "description": "AM State ON",
       "group": "Modulation Control",
       "subsystem": "Modulation"
     },
     "Clear_Text": {
       "scpi": "DISPlay:TEXT:CLEar",
+      "scpiFast": "DISP:TEXT:CLE",
       "description": "Clear Text",
       "group": "System Actions",
       "subsystem": "System"
     },
+    "Do_Am_Internal": {
+      "scpi": "AM:INTernal",
+      "scpiFast": "AM:INT",
+      "description": "AM Commands",
+      "subsystem": "AM",
+      "unverified": true
+    },
+    "Do_Apply_Noise": {
+      "scpi": "APPLy:NOISe",
+      "scpiFast": "APPL:NOIS",
+      "description": "Using the APPLy Command",
+      "subsystem": "APPL",
+      "unverified": true
+    },
+    "Do_Apply_Ramp": {
+      "scpi": "APPL:RAMP",
+      "description": "Output Frequency",
+      "subsystem": "APPL",
+      "unverified": true
+    },
+    "Do_Apply_User": {
+      "scpi": "APPL:USER",
+      "description": "Do apply user",
+      "subsystem": "APPL",
+      "unverified": true
+    },
+    "Do_Calibration_Secure_Code": {
+      "scpi": "CAL:SECure:CODE",
+      "scpiFast": "CAL:SEC:CODE",
+      "description": "Calibration Commands",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Cls": {
+      "scpi": "*CLS",
+      "description": "Do cls",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Data_Copy": {
+      "scpi": "DATA:COPY",
+      "description": "Arbitrary Waveform Commands",
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Do_Data_Dac": {
+      "scpi": "DATA:DAC",
+      "description": "Arbitrary Waveform Commands",
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Do_Data_Delete": {
+      "scpi": "DATA:DEL",
+      "description": "Arbitrary Waveform Commands",
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Do_Fm_Internal": {
+      "scpi": "FM:INTernal",
+      "scpiFast": "FM:INT",
+      "description": "FM Commands",
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Do_Fm_Internal_Function": {
+      "scpi": "FM:INTernal:FUNCtion",
+      "scpiFast": "FM:INT:FUNC",
+      "description": "Modulating Waveform Shape",
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Do_Function_Pulse": {
+      "scpi": "FUNC:PULS",
+      "description": "Pulse Configuration Commands",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Function_Ramp": {
+      "scpi": "FUNC:RAMP",
+      "description": "frequency reduced for ramp function",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Function_Shape": {
+      "scpi": "FUNCtion:SHAPe",
+      "scpiFast": "FUNC:SHAP",
+      "description": "Do function shape",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Gate_Polarity": {
+      "scpi": "GATE:POLarity",
+      "scpiFast": "GATE:POL",
+      "description": "Do gate polarity",
+      "subsystem": "GATE",
+      "unverified": true
+    },
+    "Do_Internal_Period": {
+      "scpi": "INTernal:PERiod",
+      "scpiFast": "INT:PER",
+      "description": "Do internal period",
+      "subsystem": "INT",
+      "unverified": true
+    },
+    "Do_Klock_State": {
+      "scpi": ":KLOCk:STATe",
+      "scpiFast": ":KLOC:STAT",
+      "description": "System-Related Commands",
+      "subsystem": "KLOC",
+      "unverified": true
+    },
+    "Do_Lan_Ipaddress": {
+      "scpi": "LAN:IPADdress",
+      "scpiFast": "LAN:IPAD",
+      "description": "Do lan ipaddress",
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Do_Lan_Mediasense": {
+      "scpi": "LAN:MEDiasense",
+      "scpiFast": "LAN:MED",
+      "description": "Do lan mediasense",
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Do_Lan_Netbios": {
+      "scpi": "LAN:NETBios",
+      "scpiFast": "LAN:NETB",
+      "description": "Do lan netbios",
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Do_Lan_Telnet_Prompt": {
+      "scpi": "LAN:TELNet:PROM",
+      "scpiFast": "LAN:TELN:PROM",
+      "description": "Do lan telnet prompt",
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Do_Lan_Telnet_Wmessage": {
+      "scpi": "LAN:TELNet:WMES",
+      "scpiFast": "LAN:TELN:WMES",
+      "description": "Do lan telnet wmessage",
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Do_Memory_State": {
+      "scpi": "MEMory:STATe",
+      "scpiFast": "MEM:STAT",
+      "description": "State Storage Commands",
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Do_Memory_State_Delete": {
+      "scpi": "MEMory:STATe:DELete",
+      "scpiFast": "MEM:STAT:DEL",
+      "description": "Do memory state delete",
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Do_Opc": {
+      "scpi": "*OPC",
+      "description": "Do opc",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Phase_Reference": {
+      "scpi": "PHASe:REFerence",
+      "scpiFast": "PHAS:REF",
+      "description": "Phase-Lock Commands",
+      "subsystem": "PHAS",
+      "unverified": true
+    },
+    "Do_Pm_Internal": {
+      "scpi": "PM:INTernal",
+      "scpiFast": "PM:INT",
+      "description": "PM Commands",
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Do_Pm_Internal_Function": {
+      "scpi": "PM:INTernal:FUNCtion",
+      "scpiFast": "PM:INT:FUNC",
+      "description": "Modulating Waveform Shape",
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Do_Pulse_Transition": {
+      "scpi": "PULSe:TRANsition",
+      "scpiFast": "PULS:TRAN",
+      "description": "Do pulse transition",
+      "subsystem": "PULS",
+      "unverified": true
+    },
+    "Do_Pulse_Width": {
+      "scpi": "PULSe:WIDTh",
+      "scpiFast": "PULS:WIDT",
+      "description": "Do pulse width",
+      "subsystem": "PULS",
+      "unverified": true
+    },
+    "Do_Pwm_Internal": {
+      "scpi": "PWM:INTernal",
+      "scpiFast": "PWM:INT",
+      "description": "PWM Commands",
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Do_Pwm_Internal_Function": {
+      "scpi": "PWM:INTernal:FUNCtion",
+      "scpiFast": "PWM:INT:FUNC",
+      "description": "Modulating Waveform Shape",
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Do_Secure_Code": {
+      "scpi": ":SECure:CODE",
+      "scpiFast": ":SEC:CODE",
+      "description": "Calibration Commands",
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Do_State_Preset": {
+      "scpi": "STATus:PRESet",
+      "scpiFast": "STAT:PRES",
+      "description": "Status Reporting Commands",
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Do_State_Questionable": {
+      "scpi": "STATus:QUEStionable",
+      "scpiFast": "STAT:QUES",
+      "description": "Do state questionable",
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Do_System_Beeper": {
+      "scpi": "SYSTem:BEEPer",
+      "scpiFast": "SYST:BEEP",
+      "description": "Do system beeper",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Communicate_Lan": {
+      "scpi": "SYSTem:COMMunicate:LAN",
+      "scpiFast": "SYST:COMM:LAN",
+      "description": "Interface Configuration Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Communicate_Rlstate": {
+      "scpi": "SYSTem:COMMunicate:RLSTate",
+      "scpiFast": "SYST:COMM:RLST",
+      "description": "Interface Configuration Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Klock_State": {
+      "scpi": "SYSTem:KLOCk:STATe",
+      "scpiFast": "SYST:KLOC:STAT",
+      "description": "Do system klock state",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Local": {
+      "scpi": "SYSTem:LOCal",
+      "scpiFast": "SYST:LOC",
+      "description": "Interface Configuration Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Remote": {
+      "scpi": "SYSTem:REMote",
+      "scpiFast": "SYST:REM",
+      "description": "Interface Configuration Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Rwlock": {
+      "scpi": "SYSTem:RWLock",
+      "scpiFast": "SYST:RWL",
+      "description": "Interface Configuration Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Secure_Immediate": {
+      "scpi": "SYSTem:SECurity:IMMediate",
+      "scpiFast": "SYST:SEC:IMM",
+      "description": "System-Related Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_Text_Clear": {
+      "scpi": ":TEXT:CLEar",
+      "scpiFast": ":TEXT:CLE",
+      "description": "System-Related Commands",
+      "subsystem": "TEXT",
+      "unverified": true
+    },
+    "Do_Unlock_Error_State": {
+      "scpi": "UNLock:ERRor:STATe",
+      "scpiFast": "UNL:ERR:STAT",
+      "description": "Do unlock error state",
+      "subsystem": "UNL",
+      "unverified": true
+    },
+    "Do_Voltage_High": {
+      "scpi": "VOLTage:HIGH",
+      "scpiFast": "VOLT:HIGH",
+      "description": "Output Configuration",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Low": {
+      "scpi": "VOLTage:LOW",
+      "scpiFast": "VOLT:LOW",
+      "description": "Output Configuration",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Wai": {
+      "scpi": "*WAI",
+      "description": "Do wai",
+      "subsystem": "Common",
+      "unverified": true
+    },
     "FM_State_OFF": {
       "scpi": "FM:STATe OFF",
+      "scpiFast": "FM:STAT OFF",
       "description": "FM State OFF",
       "group": "Modulation Control",
       "subsystem": "Modulation"
     },
     "FM_State_ON": {
       "scpi": "FM:STATe ON",
+      "scpiFast": "FM:STAT ON",
       "description": "FM State ON",
       "group": "Modulation Control",
       "subsystem": "Modulation"
     },
     "Output_OFF": {
       "scpi": "OUTPut OFF",
+      "scpiFast": "OUTP OFF",
       "description": "Output OFF",
       "group": "Output Control",
       "subsystem": "OUTPut"
     },
     "Output_ON": {
       "scpi": "OUTPut ON",
+      "scpiFast": "OUTP ON",
       "description": "Output ON",
       "group": "Output Control",
       "subsystem": "OUTPut"
@@ -117,12 +1433,14 @@
     },
     "Sync_OFF": {
       "scpi": "OUTPut:SYNC OFF",
+      "scpiFast": "OUTP:SYNC OFF",
       "description": "Sync OFF",
       "group": "Output Control",
       "subsystem": "OUTPut"
     },
     "Sync_ON": {
       "scpi": "OUTPut:SYNC ON",
+      "scpiFast": "OUTP:SYNC ON",
       "description": "Sync ON",
       "group": "Output Control",
       "subsystem": "OUTPut"
@@ -137,7 +1455,11 @@
   "rig": {
     "Apply_Pulse": {
       "scpi": "APPLy:PULSe <freq>, <amp>, <offset>",
+      "scpiFast": "APPL:PULS <freq>, <amp>, <offset>",
       "description": "Apply Pulse",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "APPLy Macro Commands",
       "args": [
         "freq",
@@ -148,7 +1470,11 @@
     },
     "Apply_Sine": {
       "scpi": "APPLy:SINusoid <freq>, <amp>, <offset>",
+      "scpiFast": "APPL:SIN <freq>, <amp>, <offset>",
       "description": "Apply Sine",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "APPLy Macro Commands",
       "args": [
         "freq",
@@ -159,7 +1485,11 @@
     },
     "Apply_Square": {
       "scpi": "APPLy:SQUare <freq>, <amp>, <offset>",
+      "scpiFast": "APPL:SQU <freq>, <amp>, <offset>",
       "description": "Apply Square",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "APPLy Macro Commands",
       "args": [
         "freq",
@@ -170,7 +1500,11 @@
     },
     "Setup_AM": {
       "scpi": "AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>",
+      "scpiFast": "AM:INT:FUNC <shape>;AM:INT:FREQ <freq>;AM:DEPT <depth>",
       "description": "Setup AM",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Modulation Setup",
       "args": [
         "shape",
@@ -178,26 +1512,1221 @@
         "depth"
       ],
       "subsystem": "Modulation"
+    },
+    "Setup_Burst": {
+      "scpi": ":BURSt:MODE <mode>;:BURSt:NCYCles <cycles>;:BURSt:PHASe <phase>;:BURSt:INTernal:PERiod <period>",
+      "scpiFast": ":BURS:MODE <mode>;:BURS:NCYC <cycles>;:BURS:PHAS <phase>;:BURS:INT:PER <period>",
+      "description": "Configure burst mode, count, phase and period in order",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "TRIG",
+          "GAT"
+        ]
+      },
+      "group": "Burst Configuration",
+      "args": [
+        "mode",
+        "cycles",
+        "phase",
+        "period"
+      ],
+      "subsystem": "BURSt",
+      "unverified": true
     }
   },
   "nab": {
+    "Get_Am_Depth": {
+      "scpi": "AM:DEPTh?",
+      "scpiFast": "AM:DEPT?",
+      "description": "AM Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "AM",
+      "unverified": true
+    },
+    "Get_Am_Internal_Frequency": {
+      "scpi": "AM:INTernal:FREQuency?",
+      "scpiFast": "AM:INT:FREQ?",
+      "description": "Amplitude Modulation (AM) Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "AM",
+      "unverified": true
+    },
+    "Get_Am_Source": {
+      "scpi": "AM:SOURce?",
+      "scpiFast": "AM:SOUR?",
+      "description": "AM Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "AM",
+      "unverified": true
+    },
+    "Get_Am_State": {
+      "scpi": "AM:STATe?",
+      "scpiFast": "AM:STAT?",
+      "description": "AM Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "AM",
+      "unverified": true
+    },
     "Get_Apply_String": {
       "scpi": "APPLy?",
+      "scpiFast": "APPL?",
       "description": "Get Apply String",
+      "returns": {
+        "count": 1
+      },
       "group": "APPLy Readbacks",
       "subsystem": "APPLy"
     },
+    "Get_Attribute_Average": {
+      "scpi": ":ATTRibute:AVERage?",
+      "scpiFast": ":ATTR:AVER?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "dB"
+      },
+      "subsystem": "ATTR",
+      "unverified": true
+    },
+    "Get_Attribute_Cfactor": {
+      "scpi": ":ATTRibute:CFACtor?",
+      "scpiFast": ":ATTR:CFAC?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
+      "subsystem": "ATTR",
+      "unverified": true
+    },
+    "Get_Attribute_Points": {
+      "scpi": ":ATTRibute:POINts?",
+      "scpiFast": ":ATTR:POIN?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "dB"
+      },
+      "subsystem": "ATTR",
+      "unverified": true
+    },
+    "Get_Attribute_Ptpeak": {
+      "scpi": ":ATTRibute:PTPeak?",
+      "scpiFast": ":ATTR:PTP?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
+      "subsystem": "ATTR",
+      "unverified": true
+    },
+    "Get_Beeper_State": {
+      "scpi": ":BEEPer:STATe?",
+      "scpiFast": ":BEEP:STAT?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "BEEP",
+      "unverified": true
+    },
+    "Get_Burst_Gate_Polarity": {
+      "scpi": "BURSt:GATE:POLarity?",
+      "scpiFast": "BURS:GATE:POL?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Burst_Internal_Period": {
+      "scpi": "BURSt:INTernal:PERiod?",
+      "scpiFast": "BURS:INT:PER?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Burst_Mode": {
+      "scpi": "BURSt:MODE?",
+      "scpiFast": "BURS:MODE?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Burst_Ncycles": {
+      "scpi": "BURSt:NCYCles?",
+      "scpiFast": "BURS:NCYC?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Burst_Phase": {
+      "scpi": "BURSt:PHASe?",
+      "scpiFast": "BURS:PHAS?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Burst_State": {
+      "scpi": "BURSt:STATe?",
+      "scpiFast": "BURS:STAT?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "BURS",
+      "unverified": true
+    },
+    "Get_Calibration_Count": {
+      "scpi": "CAL:COUNt?",
+      "scpiFast": "CAL:COUN?",
+      "description": "Calibration Count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_Secure_State": {
+      "scpi": "CAL:SECure:STATe?",
+      "scpiFast": "CAL:SEC:STAT?",
+      "description": "Get calibration secure state",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_String": {
+      "scpi": "CAL:STRing?",
+      "scpiFast": "CAL:STR?",
+      "description": "Calibration Message",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_Value": {
+      "scpi": "CAL:VALue?",
+      "scpiFast": "CAL:VAL?",
+      "description": "Get calibration value",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Data_Attribute_Average": {
+      "scpi": "DATA:ATTRibute:AVERage?",
+      "scpiFast": "DATA:ATTR:AVER?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "dB"
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Attribute_Cfactor": {
+      "scpi": "DATA:ATTRibute:CFACtor?",
+      "scpiFast": "DATA:ATTR:CFAC?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Attribute_Points": {
+      "scpi": "DATA:ATTRibute:POINts?",
+      "scpiFast": "DATA:ATTR:POIN?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "dB"
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Attribute_Ptpeak": {
+      "scpi": "DATA:ATTRibute:PTPeak?",
+      "scpiFast": "DATA:ATTR:PTP?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Catalog": {
+      "scpi": "DATA:CAT?",
+      "description": "Get data catalog",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Nvolatile_Catalog": {
+      "scpi": "DATA:NVOLatile:CATalog?",
+      "scpiFast": "DATA:NVOL:CAT?",
+      "description": "Get data nvolatile catalog",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Nvolatile_Free": {
+      "scpi": "DATA:NVOLatile:FREE?",
+      "scpiFast": "DATA:NVOL:FREE?",
+      "description": "Get data nvolatile free",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Deviation_Dcycle": {
+      "scpi": ":DEV:DCYC?",
+      "description": "Pulse Width Modulation (PWM) Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "%"
+      },
+      "subsystem": "DEV",
+      "unverified": true
+    },
+    "Get_Display_Text": {
+      "scpi": "DISPlay:TEXT?",
+      "scpiFast": "DISP:TEXT?",
+      "description": "System-Related Operations",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
     "Get_Error_Queue": {
       "scpi": "SYSTem:ERRor?",
+      "scpiFast": "SYST:ERR?",
       "description": "Get Error Queue",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Readbacks",
       "subsystem": "System"
     },
+    "Get_Ese": {
+      "scpi": "*ESE?",
+      "description": "Get ese",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Esr": {
+      "scpi": "*ESR?",
+      "description": "Get esr",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Fm_Deviation": {
+      "scpi": "FM:DEViation?",
+      "scpiFast": "FM:DEV?",
+      "description": "FM Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Get_Fm_Internal_Frequency": {
+      "scpi": "FM:INTernal:FREQuency?",
+      "scpiFast": "FM:INT:FREQ?",
+      "description": "Frequency Modulation (FM) Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Get_Fm_Source": {
+      "scpi": "FM:SOURce?",
+      "scpiFast": "FM:SOUR?",
+      "description": "FM Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Get_Fm_State": {
+      "scpi": "FM:STATe?",
+      "scpiFast": "FM:STAT?",
+      "description": "FM Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "FM",
+      "unverified": true
+    },
+    "Get_Format_Border": {
+      "scpi": "FORMat:BORDer?",
+      "scpiFast": "FORM:BORD?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FORM",
+      "unverified": true
+    },
+    "Get_Frequency_Center": {
+      "scpi": "FREQuency:CENTer?",
+      "scpiFast": "FREQ:CENT?",
+      "description": "Frequency Sweep Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Get_Frequency_Span": {
+      "scpi": "FREQuency:SPAN?",
+      "scpiFast": "FREQ:SPAN?",
+      "description": "Get frequency span",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Get_Fskey_Frequency": {
+      "scpi": "FSKey:FREQuency?",
+      "scpiFast": "FSK:FREQ?",
+      "description": "FSK Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Get_Fskey_Internal_Rate": {
+      "scpi": "FSKey:INTernal:RATE?",
+      "scpiFast": "FSK:INT:RATE?",
+      "description": "FSK Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Get_Fskey_Source": {
+      "scpi": "FSKey:SOURce?",
+      "scpiFast": "FSK:SOUR?",
+      "description": "FSK Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Get_Fskey_State": {
+      "scpi": "FSKey:STATe?",
+      "scpiFast": "FSK:STAT?",
+      "description": "FSK Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "FSK",
+      "unverified": true
+    },
+    "Get_Function_Pulse_Dcycle": {
+      "scpi": "FUNCtion:PULSe:DCYCle?",
+      "scpiFast": "FUNC:PULS:DCYC?",
+      "description": "Pulse Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "%"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Pulse_Hold": {
+      "scpi": "FUNCtion:PULSe:HOLD?",
+      "scpiFast": "FUNC:PULS:HOLD?",
+      "description": "Using the APPLy Command",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Pulse_Transition": {
+      "scpi": "FUNCtion:PULSe:TRANsition?",
+      "scpiFast": "FUNC:PULS:TRAN?",
+      "description": "Pulse Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Pulse_Width": {
+      "scpi": "FUNCtion:PULSe:WIDTh?",
+      "scpiFast": "FUNC:PULS:WIDT?",
+      "description": "Pulse Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Ramp_Symmetry": {
+      "scpi": "FUNCtion:RAMP:SYMMetry?",
+      "scpiFast": "FUNC:RAMP:SYMM?",
+      "description": "Output Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Square_Dcycle": {
+      "scpi": "FUNCtion:SQUare:DCYCle?",
+      "scpiFast": "FUNC:SQU:DCYC?",
+      "description": "Output Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "%"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_User": {
+      "scpi": "FUNCtion:USER?",
+      "scpiFast": "FUNC:USER?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Idn": {
+      "scpi": "*IDN?",
+      "description": "Get idn",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Klock_Exclude": {
+      "scpi": ":KLOCk:EXCLude?",
+      "scpiFast": ":KLOC:EXCL?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "KLOC",
+      "unverified": true
+    },
+    "Get_Lan_Lipaddress": {
+      "scpi": "LAN:LIPaddress?",
+      "scpiFast": "LAN:LIP?",
+      "description": "Get lan lipaddress",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Get_Lan_Mac": {
+      "scpi": "LAN:MAC?",
+      "description": "Get lan mac",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "LAN",
+      "unverified": true
+    },
+    "Get_Lrn": {
+      "scpi": "*LRN?",
+      "description": "Get lrn",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Marker_Frequency": {
+      "scpi": "MARKer:FREQuency?",
+      "scpiFast": "MARK:FREQ?",
+      "description": "Frequency Sweep Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MARK",
+      "unverified": true
+    },
+    "Get_Memory_Nstates": {
+      "scpi": "MEMory:NSTates?",
+      "scpiFast": "MEM:NST?",
+      "description": "State Storage Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Get_Memory_State_Catalog": {
+      "scpi": "MEMory:STATe:CATalog?",
+      "scpiFast": "MEM:STAT:CAT?",
+      "description": "Get memory state catalog",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Get_Memory_State_Name": {
+      "scpi": "MEMory:STATe:NAME?",
+      "scpiFast": "MEM:STAT:NAME?",
+      "description": "State Storage Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Get_Memory_State_Value": {
+      "scpi": "MEMory:STATe:VALid?",
+      "scpiFast": "MEM:STAT:VAL?",
+      "description": "State Storage Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEM",
+      "unverified": true
+    },
+    "Get_Nvolatile_Catalog": {
+      "scpi": ":NVOLatile:CATalog?",
+      "scpiFast": ":NVOL:CAT?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "NVOL",
+      "unverified": true
+    },
+    "Get_Nvolatile_Free": {
+      "scpi": ":NVOLatile:FREE?",
+      "scpiFast": ":NVOL:FREE?",
+      "description": "Arbitrary Waveform Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "NVOL",
+      "unverified": true
+    },
+    "Get_Opc": {
+      "scpi": "*OPC?",
+      "description": "Get opc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Output_Load": {
+      "scpi": "OUTPut:LOAD?",
+      "scpiFast": "OUTP:LOAD?",
+      "description": "Get output load",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Polarity": {
+      "scpi": "OUTPut:POLarity?",
+      "scpiFast": "OUTP:POL?",
+      "description": "Get output polarity",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
     "Get_Output_State": {
       "scpi": "OUTPut?",
+      "scpiFast": "OUTP?",
       "description": "Get Output State",
+      "returns": {
+        "count": 1
+      },
       "group": "Output Status",
       "subsystem": "OUTPut"
+    },
+    "Get_Output_Sync": {
+      "scpi": "OUTPut:SYNC?",
+      "scpiFast": "OUTP:SYNC?",
+      "description": "Output Configuration",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Trigger": {
+      "scpi": "OUTPut:TRIGger?",
+      "scpiFast": "OUTP:TRIG?",
+      "description": "Trigger Out Signal",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Trigger_Slope": {
+      "scpi": "OUTPut:TRIGger:SLOPe?",
+      "scpiFast": "OUTP:TRIG:SLOP?",
+      "description": "Trigger Out Signal",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Phase_Unlock_Error_State": {
+      "scpi": "PHASe:UNLock:ERRor:STATe?",
+      "scpiFast": "PHAS:UNL:ERR:STAT?",
+      "description": "Phase-Lock Commands",
+      "returns": {
+        "count": 1,
+        "type": "ERROR"
+      },
+      "subsystem": "PHAS",
+      "unverified": true
+    },
+    "Get_Pm_Deviation": {
+      "scpi": "PM:DEViation?",
+      "scpiFast": "PM:DEV?",
+      "description": "PM Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Get_Pm_Internal_Frequency": {
+      "scpi": "PM:INTernal:FREQuency?",
+      "scpiFast": "PM:INT:FREQ?",
+      "description": "Phase Modulation (PM) Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Get_Pm_Source": {
+      "scpi": "PM:SOURce?",
+      "scpiFast": "PM:SOUR?",
+      "description": "PM Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Get_Pm_State": {
+      "scpi": "PM:STATe?",
+      "scpiFast": "PM:STAT?",
+      "description": "PM Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "PM",
+      "unverified": true
+    },
+    "Get_Psc": {
+      "scpi": "*PSC?",
+      "description": "Get psc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Pulse_Period": {
+      "scpi": "PULSe:PERiod?",
+      "scpiFast": "PULS:PER?",
+      "description": "Pulse Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "PULS",
+      "unverified": true
+    },
+    "Get_Pwm_Deviation": {
+      "scpi": "PWM:DEViation?",
+      "scpiFast": "PWM:DEV?",
+      "description": "PWM Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Get_Pwm_Deviation_Dcycle": {
+      "scpi": "PWM:DEViation:DCYCle?",
+      "scpiFast": "PWM:DEV:DCYC?",
+      "description": "PWM Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "%"
+      },
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Get_Pwm_Internal_Frequency": {
+      "scpi": "PWM:INTernal:FREQuency?",
+      "scpiFast": "PWM:INT:FREQ?",
+      "description": "Pulse Width Modulation (PWM) Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Get_Pwm_Source": {
+      "scpi": "PWM:SOURce?",
+      "scpiFast": "PWM:SOUR?",
+      "description": "PWM Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Get_Pwm_State": {
+      "scpi": "PWM:STATe?",
+      "scpiFast": "PWM:STAT?",
+      "description": "PWM Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "PWM",
+      "unverified": true
+    },
+    "Get_Questionable_Condition": {
+      "scpi": ":QUEStionable:CONDition?",
+      "scpiFast": ":QUES:COND?",
+      "description": "Status Reporting Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Questionable_Enable": {
+      "scpi": ":QUEStionable:ENABle?",
+      "scpiFast": ":QUES:ENAB?",
+      "description": "Status Reporting Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Questionable_Event": {
+      "scpi": ":QUEStionable:EVENt?",
+      "scpiFast": ":QUES:EVEN?",
+      "description": "Status Reporting Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Secure_State": {
+      "scpi": ":SECure:STATe?",
+      "scpiFast": ":SEC:STAT?",
+      "description": "Calibration Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Get_Square_Dcycle": {
+      "scpi": "SQUare:DCYCle?",
+      "scpiFast": "SQU:DCYC?",
+      "description": "Output Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "%"
+      },
+      "subsystem": "SQU",
+      "unverified": true
+    },
+    "Get_Sre": {
+      "scpi": "*SRE?",
+      "description": "Get sre",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_State_Questionable_Condition": {
+      "scpi": "STATus:QUEStionable:CONDition?",
+      "scpiFast": "STAT:QUES:COND?",
+      "description": "Get state questionable condition",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_State_Questionable_Enable": {
+      "scpi": "STATus:QUEStionable:ENABle?",
+      "scpiFast": "STAT:QUES:ENAB?",
+      "description": "The Questionable Data Register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_State_Questionable_Event": {
+      "scpi": "STAT:QUES:EVEN?",
+      "description": "What is an Event Register?",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Stb": {
+      "scpi": "*STB?",
+      "description": "Get stb",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Sweep_Config": {
+      "scpi": ":SWEep:STATe?;:SWEep:TIME?;:SWEep:SPACing?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":SWE:STAT?;:SWE:TIME?;:SWE:SPAC?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Read the whole sweep setup in one transaction",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "time",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "spacing"
+          },
+          {
+            "name": "start",
+            "type": "NR3"
+          },
+          {
+            "name": "stop",
+            "type": "NR3"
+          }
+        ]
+      },
+      "group": "Sweep Readbacks",
+      "subsystem": "SWEep",
+      "unverified": true
+    },
+    "Get_System_Beeper_State": {
+      "scpi": "SYSTem:BEEPer:STATe?",
+      "scpiFast": "SYST:BEEP:STAT?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Ipaddress": {
+      "scpi": "SYSTem:COMMunicate:LAN:IPADdress?",
+      "scpiFast": "SYST:COMM:LAN:IPAD?",
+      "description": "Remote Interface Configuration",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Lipaddress": {
+      "scpi": "SYSTem:COMMunicate:LAN:LIPaddress?",
+      "scpiFast": "SYST:COMM:LAN:LIP?",
+      "description": "Get system communicate lan lipaddress",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Mac": {
+      "scpi": "SYSTem:COMMunicate:LAN:MAC?",
+      "scpiFast": "SYST:COMM:LAN:MAC?",
+      "description": "Get system communicate lan mac",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Mediasense": {
+      "scpi": "SYSTem:COMMunicate:LAN:MEDiasense?",
+      "scpiFast": "SYST:COMM:LAN:MED?",
+      "description": "Get system communicate lan mediasense",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Netbios": {
+      "scpi": "SYSTem:COMMunicate:LAN:NETBios?",
+      "scpiFast": "SYST:COMM:LAN:NETB?",
+      "description": "Get system communicate lan netbios",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Telnet_Prompt": {
+      "scpi": "SYSTem:COMMunicate:LAN:TELNet:PROMpt?",
+      "scpiFast": "SYST:COMM:LAN:TELN:PROM?",
+      "description": "Get system communicate lan telnet prompt",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Communicate_Lan_Telnet_Wmessage": {
+      "scpi": "SYSTem:COMMunicate:LAN:TELNet:WMESsage?",
+      "scpiFast": "SYST:COMM:LAN:TELN:WMES?",
+      "description": "Get system communicate lan telnet wmessage",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Klock_Exclude": {
+      "scpi": "SYSTem:KLOCk:EXCLude?",
+      "scpiFast": "SYST:KLOC:EXCL?",
+      "description": "Get system klock exclude",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Version": {
+      "scpi": "SYSTem:VERSion?",
+      "scpiFast": "SYST:VERS?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_Telnet_Prompt": {
+      "scpi": ":TELNet:PROMpt?",
+      "scpiFast": ":TELN:PROM?",
+      "description": "Interface Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TELN",
+      "unverified": true
+    },
+    "Get_Telnet_Wmessage": {
+      "scpi": ":TELNet:WMESsage?",
+      "scpiFast": ":TELN:WMES?",
+      "description": "Interface Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TELN",
+      "unverified": true
+    },
+    "Get_Trigger_Slope": {
+      "scpi": "TRIGger:SLOPe?",
+      "scpiFast": "TRIG:SLOP?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Source": {
+      "scpi": "TRIGger:SOURce?",
+      "scpiFast": "TRIG:SOUR?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Tst": {
+      "scpi": "*TST?",
+      "description": "Get tst",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Unit_Angle": {
+      "scpi": "UNIT:ANGLe?",
+      "scpiFast": "UNIT:ANGL?",
+      "description": "Burst Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "UNIT",
+      "unverified": true
+    },
+    "Get_Voltage_Offset": {
+      "scpi": "VOLTage:OFFSet?",
+      "scpiFast": "VOLT:OFFS?",
+      "description": "Output Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Get_Voltage_Unit": {
+      "scpi": "VOLTage:UNIT?",
+      "scpiFast": "VOLT:UNIT?",
+      "description": "Output Configuration Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
     }
   }
 }

@@ -4,7 +4,11 @@
   "set": {
     "Display_Text": {
       "scpi": ":DISPlay:TEXT <string>",
+      "scpiFast": ":DISP:TEXT <string>",
       "description": "Display Text",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "System Utilities",
       "args": [
         "string"
@@ -13,7 +17,15 @@
     },
     "Enable_Math": {
       "scpi": ":CALCulate:STATe <state>",
+      "scpiFast": ":CALC:STAT <state>",
       "description": "Enable Math",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Math and Limits Setup",
       "args": [
         "state"
@@ -22,7 +34,14 @@
     },
     "Set_AC_Bandwidth": {
       "scpi": ":SENSe:VOLTage:AC:BANDwidth <filter>",
+      "scpiFast": ":SENS:VOLT:AC:BAND <filter>",
       "description": "Set AC Bandwidth",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
       "group": "Measurement Parameters",
       "args": [
         "filter"
@@ -31,25 +50,230 @@
     },
     "Set_Autorange": {
       "scpi": ":SENSe:VOLTage:DC:RANGe:AUTO <state>",
+      "scpiFast": ":SENS:VOLT:DC:RANG:AUTO <state>",
       "description": "Set Autorange",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "SCOPED TO DC VOLTS on purpose: the 34401A has no function-agnostic autorange command, so :SENSe:VOLTage:DC:RANGe:AUTO is what a panel AUTO RANGE control can address. Selecting another function turns its own autorange on by default, which is why this is adequate for a bench panel and would not be for a test sequence.",
       "args": [
         "state"
       ],
       "subsystem": "Panel"
     },
+    "Set_Beeper_State": {
+      "scpi": ":BEEPer:STATe <value>",
+      "scpiFast": ":BEEP:STAT <value>",
+      "description": "System-Related Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BEEP",
+      "unverified": true
+    },
+    "Set_Calibration_Secure_State": {
+      "scpi": "CALibration:SECure:STATe <value>",
+      "scpiFast": "CAL:SEC:STAT <value>",
+      "description": "Calibration Overview",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Calibration_String": {
+      "scpi": "CALibration:STRing <value>",
+      "scpiFast": "CAL:STR <value>",
+      "description": "Calibration Message",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Calibration_Value": {
+      "scpi": "CALibration:VALue <value>",
+      "scpiFast": "CAL:VAL <value>",
+      "description": "Calibration Commands",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
     "Set_DCV_Range": {
       "scpi": ":SENSe:VOLTage:DC:RANGe <range>",
+      "scpiFast": ":SENS:VOLT:DC:RANG <range>",
       "description": "Set DCV Range",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
       "group": "Measurement Parameters",
       "args": [
         "range"
       ],
       "subsystem": "SENSe"
     },
+    "Set_Data_Feed": {
+      "scpi": "DATA:FEED <value>",
+      "description": "Math Operations",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Set_Db_Reference": {
+      "scpi": ":DB:REFerence <value>",
+      "scpiFast": ":DB:REF <value>",
+      "description": "Math Operation Commands",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DB",
+      "unverified": true
+    },
+    "Set_Detector_Bandwidth": {
+      "scpi": "DETector:BANDwidth <value>",
+      "scpiFast": "DET:BAND <value>",
+      "description": "Set detector bandwidth",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DET",
+      "unverified": true
+    },
+    "Set_Ese": {
+      "scpi": "*ESE <value>",
+      "description": "Set ese",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Frequency_Aperture": {
+      "scpi": "FREQuency:APERture <value>",
+      "scpiFast": "FREQ:APER <value>",
+      "description": "Measurement Configuration",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Frequency_Voltage_Range": {
+      "scpi": "FREQuency:VOLTage:RANGe <value>",
+      "scpiFast": "FREQ:VOLT:RANG <value>",
+      "description": "Set frequency voltage range",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Set_Fresistance_Nplcycles": {
+      "scpi": "FRESistance:NPLCycles <value>",
+      "scpiFast": "FRES:NPLC <value>",
+      "description": "Set fresistance nplcycles",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FRES",
+      "unverified": true
+    },
+    "Set_Fresistance_Range": {
+      "scpi": "FRESistance:RANGe <value>",
+      "scpiFast": "FRES:RANG <value>",
+      "description": "Set fresistance range",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FRES",
+      "unverified": true
+    },
+    "Set_Fresistance_Resolution": {
+      "scpi": "FRESistance:RESolution <value>",
+      "scpiFast": "FRES:RES <value>",
+      "description": "Measurement Configuration Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FRES",
+      "unverified": true
+    },
     "Set_Input_Impedance": {
       "scpi": ":INPut:IMPedance:AUTO <state>",
+      "scpiFast": ":INP:IMP:AUTO <state>",
       "description": "Set Input Impedance",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Measurement Parameters",
       "args": [
         "state"
@@ -58,16 +282,60 @@
     },
     "Set_Integration_NPLC": {
       "scpi": ":SENSe:VOLTage:DC:NPLC <nplc>",
+      "scpiFast": ":SENS:VOLT:DC:NPLC <nplc>",
       "description": "Set Integration NPLC",
+      "arg": {
+        "kind": "integer",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
       "group": "Measurement Parameters",
       "args": [
         "nplc"
       ],
       "subsystem": "SENSe"
     },
+    "Set_Limit_Lower": {
+      "scpi": ":LIMit:LOWer <value>",
+      "scpiFast": ":LIM:LOW <value>",
+      "description": "Set limit lower",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "LIM",
+      "unverified": true
+    },
+    "Set_Limit_Upper": {
+      "scpi": ":LIMit:UPPer <value>",
+      "scpiFast": ":LIM:UPP <value>",
+      "description": "Set limit upper",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "LIM",
+      "unverified": true
+    },
     "Set_Math_Function": {
       "scpi": ":CALCulate:FUNCtion <function>",
+      "scpiFast": ":CALC:FUNC <function>",
       "description": "Set Math Function",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "NULL",
+          "DB",
+          "DBM",
+          "AVER",
+          "LIM"
+        ]
+      },
       "group": "Math and Limits Setup",
       "args": [
         "function"
@@ -76,25 +344,213 @@
     },
     "Set_Null_Offset": {
       "scpi": ":CALCulate:NULL:OFFSet <value>",
+      "scpiFast": ":CALC:NULL:OFFS <value>",
       "description": "Set Null Offset",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
       "group": "Math and Limits Setup",
       "args": [
         "value"
       ],
       "subsystem": "CALCulate"
     },
+    "Set_Null_Offset_Alt": {
+      "scpi": ":NULL:OFFSet <value>",
+      "scpiFast": ":NULL:OFFS <value>",
+      "description": "Math Operation Commands",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "NULL",
+      "unverified": true
+    },
+    "Set_Period_Aperture": {
+      "scpi": "PERiod:APERture <value>",
+      "scpiFast": "PER:APER <value>",
+      "description": "Measurement Configuration",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PER",
+      "unverified": true
+    },
+    "Set_Period_Voltage_Range": {
+      "scpi": "PERiod:VOLTage:RANGe <value>",
+      "scpiFast": "PER:VOLT:RANG <value>",
+      "description": "Set period voltage range",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "PER",
+      "unverified": true
+    },
+    "Set_Psc": {
+      "scpi": "*PSC <value>",
+      "description": "Set psc",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Questionable_Enable": {
+      "scpi": ":QUEStionable:ENABle <value>",
+      "scpiFast": ":QUES:ENAB <value>",
+      "description": "Status Reporting Commands",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Set_Resolution_Nplcycles": {
+      "scpi": "RESistance:NPLCycles <value>",
+      "scpiFast": "RES:NPLC <value>",
+      "description": "Set resolution nplcycles",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "RES",
+      "unverified": true
+    },
+    "Set_Resolution_Range": {
+      "scpi": "RESistance:RANGe <value>",
+      "scpiFast": "RES:RANG <value>",
+      "description": "Set resolution range",
+      "arg": {
+        "kind": "numeric",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "RES",
+      "unverified": true
+    },
+    "Set_Resolution_Resolution": {
+      "scpi": "RESistance:RESolution <value>",
+      "scpiFast": "RES:RES <value>",
+      "description": "Measurement Configuration Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "RES",
+      "unverified": true
+    },
     "Set_Sample_Count": {
       "scpi": ":SAMPle:COUNt <count>",
+      "scpiFast": ":SAMP:COUN <count>",
       "description": "Set Sample Count",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
       "group": "Setup Trigger Model",
       "args": [
         "count"
       ],
       "subsystem": "TRIGger"
     },
+    "Set_Secure_State": {
+      "scpi": ":SECure:STATe <value>",
+      "scpiFast": ":SEC:STAT <value>",
+      "description": "Calibration Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Set_Sre": {
+      "scpi": "*SRE <value>",
+      "description": "Set sre",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_State_Questionable_Enable": {
+      "scpi": "STATus:QUEStionable:ENABle <value>",
+      "scpiFast": "STAT:QUES:ENAB <value>",
+      "description": "The SCPI Status Model",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_System_Beeper_State": {
+      "scpi": "SYSTem:BEEPer:STATe <value>",
+      "scpiFast": "SYST:BEEP:STAT <value>",
+      "description": "System-Related Commands",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
     "Set_Trigger_Count": {
       "scpi": ":TRIGger:COUNt <count>",
+      "scpiFast": ":TRIG:COUN <count>",
       "description": "Set Trigger Count",
+      "arg": {
+        "kind": "integer",
+        "limits": "query"
+      },
       "group": "Setup Trigger Model",
       "args": [
         "count"
@@ -103,7 +559,13 @@
     },
     "Set_Trigger_Delay": {
       "scpi": ":TRIGger:DELay <delay>",
+      "scpiFast": ":TRIG:DEL <delay>",
       "description": "Set Trigger Delay",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s",
+        "limits": "query"
+      },
       "group": "Setup Trigger Model",
       "args": [
         "delay"
@@ -112,16 +574,45 @@
     },
     "Set_Trigger_Source": {
       "scpi": ":TRIGger:SOURce <source>",
+      "scpiFast": ":TRIG:SOUR <source>",
       "description": "Set Trigger Source",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "BUS",
+          "IMM",
+          "EXT"
+        ]
+      },
       "group": "Setup Trigger Model",
       "args": [
         "source"
       ],
       "subsystem": "TRIGger"
     },
+    "Set_Voltage_Range": {
+      "scpi": "VOLTage:RANGe <value>",
+      "scpiFast": "VOLT:RANG <value>",
+      "description": "An Introduction to the SCPI Language",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLT",
+      "unverified": true
+    },
     "Set_dB_Ref": {
       "scpi": ":CALCulate:DB:REFerence <value>",
+      "scpiFast": ":CALC:DB:REF <value>",
       "description": "Set dB Ref",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Math and Limits Setup",
       "args": [
         "value"
@@ -130,7 +621,11 @@
     },
     "Set_dBm_Ref": {
       "scpi": ":CALCulate:DBM:REFerence <value>",
+      "scpiFast": ":CALC:DBM:REF <value>",
       "description": "Set dBm Ref",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Math and Limits Setup",
       "args": [
         "value"
@@ -141,24 +636,28 @@
   "do": {
     "Abort": {
       "scpi": ":ABORt",
+      "scpiFast": ":ABOR",
       "description": "Abort",
       "group": "Trigger System",
       "subsystem": "TRIGger"
     },
     "Auto_Zero_OFF": {
       "scpi": ":SENSe:ZERO:AUTO OFF",
+      "scpiFast": ":SENS:ZERO:AUTO OFF",
       "description": "Auto Zero OFF",
       "group": "Measurement Parameters",
       "subsystem": "SENSe"
     },
     "Auto_Zero_ON": {
       "scpi": ":SENSe:ZERO:AUTO ON",
+      "scpiFast": ":SENS:ZERO:AUTO ON",
       "description": "Auto Zero ON",
       "group": "Measurement Parameters",
       "subsystem": "SENSe"
     },
     "Clear_Display": {
       "scpi": ":DISPlay:TEXT:CLEar",
+      "scpiFast": ":DISP:TEXT:CLE",
       "description": "Clear Display",
       "group": "System Utilities",
       "subsystem": "SYSTem"
@@ -169,8 +668,143 @@
       "group": "Common Commands",
       "subsystem": "Common"
     },
+    "Do_Back_Goto": {
+      "scpi": "BACK:GOTO",
+      "description": "Using the Status Registers",
+      "subsystem": "BACK",
+      "unverified": true
+    },
+    "Do_Calibration_Secure": {
+      "scpi": "CALibration:SECure",
+      "scpiFast": "CAL:SEC",
+      "description": "Do calibration secure",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibration_Secure_Code": {
+      "scpi": "CALibration:SECure:CODE",
+      "scpiFast": "CAL:SEC:CODE",
+      "description": "Calibration Overview",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Configure_Frequency": {
+      "scpi": "CONF:FREQ",
+      "description": "Measurement Configuration",
+      "subsystem": "CONF",
+      "unverified": true
+    },
+    "Do_Configure_Period": {
+      "scpi": "CONFigure:PERiod",
+      "scpiFast": "CONF:PER",
+      "description": "Do configure period",
+      "subsystem": "CONF",
+      "unverified": true
+    },
+    "Do_Configure_Voltage": {
+      "scpi": "CONF:VOLT",
+      "description": "Do configure voltage",
+      "subsystem": "CONF",
+      "unverified": true
+    },
+    "Do_Dcv_Dcv": {
+      "scpi": "DCV:DCV",
+      "description": "Do dcv dcv",
+      "subsystem": "DCV",
+      "unverified": true
+    },
+    "Do_Frequency_Voltage": {
+      "scpi": "FREQuency:VOLTage",
+      "scpiFast": "FREQ:VOLT",
+      "description": "Do frequency voltage",
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Do_Opc": {
+      "scpi": "*OPC",
+      "description": "Do opc",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Period_Voltage": {
+      "scpi": "PERiod:VOLTage",
+      "scpiFast": "PER:VOLT",
+      "description": "Do period voltage",
+      "subsystem": "PER",
+      "unverified": true
+    },
+    "Do_Secure_Code": {
+      "scpi": ":SECure:CODE",
+      "scpiFast": ":SEC:CODE",
+      "description": "Calibration Commands",
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Do_Sense_Function": {
+      "scpi": "SENSe:FUNCtion",
+      "scpiFast": "SENS:FUNC",
+      "description": "Using the CONFigure Command",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_State_Preset": {
+      "scpi": "STATus:PRESet",
+      "scpiFast": "STAT:PRES",
+      "description": "Status Reporting Commands",
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Do_System_Beeper": {
+      "scpi": "SYSTem:BEEPer",
+      "scpiFast": "SYST:BEEP",
+      "description": "Do system beeper",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Local": {
+      "scpi": "SYSTem:LOCal",
+      "scpiFast": "SYST:LOC",
+      "description": "RS-232 Interface Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Remote": {
+      "scpi": "SYSTem:REMote",
+      "scpiFast": "SYST:REM",
+      "description": "RS-232 Interface Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Rwlock": {
+      "scpi": "SYSTem:RWLock",
+      "scpiFast": "SYST:RWL",
+      "description": "RS-232 Interface Commands",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_Text_Clear": {
+      "scpi": ":TEXT:CLEar",
+      "scpiFast": ":TEXT:CLE",
+      "description": "System-Related Commands",
+      "subsystem": "TEXT",
+      "unverified": true
+    },
+    "Do_Trg": {
+      "scpi": "*TRG",
+      "description": "Do trg",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Trigger_Source_Immediate": {
+      "scpi": "TRIGger:SOURce:IMMediate",
+      "scpiFast": "TRIG:SOUR:IMM",
+      "description": "How to Use the Message Available Bit (MAV)",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
     "Initiate": {
       "scpi": ":INITiate",
+      "scpiFast": ":INIT",
       "description": "Initiate",
       "group": "Trigger System",
       "subsystem": "TRIGger"
@@ -183,48 +817,56 @@
     },
     "Select_AC_Current": {
       "scpi": ":CONFigure:CURRent:AC",
+      "scpiFast": ":CONF:CURR:AC",
       "description": "Select AC Current",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_AC_Volts": {
       "scpi": ":CONFigure:VOLTage:AC",
+      "scpiFast": ":CONF:VOLT:AC",
       "description": "Select AC Volts",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_Continuity": {
       "scpi": ":CONFigure:CONTinuity",
+      "scpiFast": ":CONF:CONT",
       "description": "Fixed 1 kOhm range, beeper on threshold — no range argument exists for this function",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_DC_Current": {
       "scpi": ":CONFigure:CURRent:DC",
+      "scpiFast": ":CONF:CURR:DC",
       "description": "Select DC Current",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_DC_Volts": {
       "scpi": ":CONFigure:VOLTage:DC",
+      "scpiFast": ":CONF:VOLT:DC",
       "description": "Select DC Volts",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_Diode": {
       "scpi": ":CONFigure:DIODe",
+      "scpiFast": ":CONF:DIOD",
       "description": "Fixed 1 mA / 1 V test, likewise argument-free",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_Resistance_2W": {
       "scpi": ":CONFigure:RESistance",
+      "scpiFast": ":CONF:RES",
       "description": "Select Resistance 2W",
       "group": "One command per measurement function",
       "subsystem": "Panel"
     },
     "Select_Resistance_4W": {
       "scpi": ":CONFigure:FRESistance",
+      "scpiFast": ":CONF:FRES",
       "description": "Select Resistance 4W",
       "group": "One command per measurement function",
       "subsystem": "Panel"
@@ -233,7 +875,14 @@
   "rig": {
     "Config_AC_Volts": {
       "scpi": ":CONFigure:VOLTage:AC <range>,<resolution>",
+      "scpiFast": ":CONF:VOLT:AC <range>,<resolution>",
       "description": "Config AC Volts",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
       "group": "Preset meter for specific function",
       "args": [
         "range",
@@ -243,7 +892,14 @@
     },
     "Config_DC_Volts": {
       "scpi": ":CONFigure:VOLTage:DC <range>,<resolution>",
+      "scpiFast": ":CONF:VOLT:DC <range>,<resolution>",
       "description": "Config DC Volts",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt",
+        "limits": "query"
+      },
       "group": "Preset meter for specific function",
       "args": [
         "range",
@@ -253,7 +909,11 @@
     },
     "Config_Resistance_4Wire": {
       "scpi": ":CONFigure:FRESistance <range>,<resolution>",
+      "scpiFast": ":CONF:FRES <range>,<resolution>",
       "description": "Config Resistance 4Wire",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Preset meter for specific function",
       "args": [
         "range",
@@ -263,43 +923,711 @@
     },
     "Config_Temperature": {
       "scpi": ":CONFigure:TEMPerature <probe_type>,<sensor_type>",
+      "scpiFast": ":CONF:TEMP <probe_type>,<sensor_type>",
       "description": "Config Temperature",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Preset meter for specific function",
       "args": [
         "probe_type",
         "sensor_type"
       ],
       "subsystem": "CONFigure"
+    },
+    "Setup_Limits": {
+      "scpi": ":CALCulate:LIMit:LOWer <lower>;:CALCulate:LIMit:UPPer <upper>",
+      "scpiFast": ":CALC:LIM:LOW <lower>;:CALC:LIM:UPP <upper>",
+      "description": "Set both comparator limits in one transaction",
+      "arg": {
+        "kind": "unknown"
+      },
+      "group": "Math and Limits Setup",
+      "args": [
+        "lower",
+        "upper"
+      ],
+      "subsystem": "CALCulate",
+      "unverified": true
     }
   },
   "nab": {
     "Fetch_Existing": {
       "scpi": ":FETCh?",
+      "scpiFast": ":FETC?",
       "description": "Fetch Existing",
+      "returns": {
+        "count": 1
+      },
       "group": "Fetch data after INITiate",
       "subsystem": "MEASure"
     },
+    "Get_Average_Average": {
+      "scpi": ":AVERage:AVERage?",
+      "scpiFast": ":AVER:AVER?",
+      "description": "Math Operation Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "AVER",
+      "unverified": true
+    },
+    "Get_Average_Count": {
+      "scpi": ":AVERage:COUNt?",
+      "scpiFast": ":AVER:COUN?",
+      "description": "Math Operation Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "AVER",
+      "unverified": true
+    },
+    "Get_Beeper_State": {
+      "scpi": ":BEEPer:STATe?",
+      "scpiFast": ":BEEP:STAT?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "BEEP",
+      "unverified": true
+    },
+    "Get_Calculate_Average_Count": {
+      "scpi": "CALCulate:AVERage:COUNt?",
+      "scpiFast": "CALC:AVER:COUN?",
+      "description": "Math Operations",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Db_Reference": {
+      "scpi": "CALCulate:DB:REFerence?",
+      "scpiFast": "CALC:DB:REF?",
+      "description": "Get calculate db reference",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Function": {
+      "scpi": "CALCulate:FUNCtion?",
+      "scpiFast": "CALC:FUNC?",
+      "description": "Get calculate function",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Limit_Lower": {
+      "scpi": "CALCulate:LIMit:LOWer?",
+      "scpiFast": "CALC:LIM:LOW?",
+      "description": "Math Operations",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Limit_Upper": {
+      "scpi": "CALCulate:LIMit:UPPer?",
+      "scpiFast": "CALC:LIM:UPP?",
+      "description": "Math Operations",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Null_Offset": {
+      "scpi": "CALCulate:NULL:OFFSet?",
+      "scpiFast": "CALC:NULL:OFFS?",
+      "description": "Get calculate null offset",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_State": {
+      "scpi": "CALCulate:STATe?",
+      "scpiFast": "CALC:STAT?",
+      "description": "Get calculate state",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calibration_Count": {
+      "scpi": "CALibration:COUNt?",
+      "scpiFast": "CAL:COUN?",
+      "description": "Calibration Count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_Secure_State": {
+      "scpi": "CALibration:SECure:STATe?",
+      "scpiFast": "CAL:SEC:STAT?",
+      "description": "Calibration Overview",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_String": {
+      "scpi": "CALibration:STRing?",
+      "scpiFast": "CAL:STR?",
+      "description": "Calibration Message",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibration_Value": {
+      "scpi": "CALibration:VALue?",
+      "scpiFast": "CAL:VAL?",
+      "description": "Calibration Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Data_Feed": {
+      "scpi": "DATA:FEED?",
+      "description": "Math Operations",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Data_Points": {
+      "scpi": "DATA:POINts?",
+      "scpiFast": "DATA:POIN?",
+      "description": "Get data points",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "DATA",
+      "unverified": true
+    },
+    "Get_Db_Reference": {
+      "scpi": ":DB:REFerence?",
+      "scpiFast": ":DB:REF?",
+      "description": "Math Operation Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "DB",
+      "unverified": true
+    },
+    "Get_Detector_Bandwidth": {
+      "scpi": "DETector:BANDwidth?",
+      "scpiFast": "DET:BAND?",
+      "description": "Get detector bandwidth",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DET",
+      "unverified": true
+    },
+    "Get_Display_Text": {
+      "scpi": "DISPlay:TEXT?",
+      "scpiFast": "DISP:TEXT?",
+      "description": "Get display text",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Ese": {
+      "scpi": "*ESE?",
+      "description": "Get ese",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Esr": {
+      "scpi": "*ESR?",
+      "description": "Get esr",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Frequency_Aperture": {
+      "scpi": "FREQuency:APERture?",
+      "scpiFast": "FREQ:APER?",
+      "description": "Measurement Configuration",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Get_Frequency_Voltage_Range": {
+      "scpi": "FREQuency:VOLTage:RANGe?",
+      "scpiFast": "FREQ:VOLT:RANG?",
+      "description": "Get frequency voltage range",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "FREQ",
+      "unverified": true
+    },
+    "Get_Fresistance_Nplcycles": {
+      "scpi": "FRESistance:NPLCycles?",
+      "scpiFast": "FRES:NPLC?",
+      "description": "Get fresistance nplcycles",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "FRES",
+      "unverified": true
+    },
+    "Get_Fresistance_Range": {
+      "scpi": "FRESistance:RANGe?",
+      "scpiFast": "FRES:RANG?",
+      "description": "Get fresistance range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FRES",
+      "unverified": true
+    },
+    "Get_Fresistance_Resolution": {
+      "scpi": "FRESistance:RESolution?",
+      "scpiFast": "FRES:RES?",
+      "description": "Measurement Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "FRES",
+      "unverified": true
+    },
+    "Get_Limit_Lower": {
+      "scpi": ":LIMit:LOWer?",
+      "scpiFast": ":LIM:LOW?",
+      "description": "Get limit lower",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "LIM",
+      "unverified": true
+    },
+    "Get_Limit_Upper": {
+      "scpi": ":LIMit:UPPer?",
+      "scpiFast": ":LIM:UPP?",
+      "description": "Get limit upper",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "LIM",
+      "unverified": true
+    },
+    "Get_Math_Stats": {
+      "scpi": ":CALCulate:AVERage:MINimum?;:CALCulate:AVERage:MAXimum?;:CALCulate:AVERage:AVERage?",
+      "scpiFast": ":CALC:AVER:MIN?;:CALC:AVER:MAX?;:CALC:AVER:AVER?",
+      "description": "Read min, max and average in one transaction",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "minimum"
+          },
+          {
+            "name": "maximum"
+          },
+          {
+            "name": "average",
+            "type": "NR1"
+          }
+        ]
+      },
+      "group": "Statistics and Calc Results",
+      "subsystem": "CALCulate",
+      "unverified": true
+    },
+    "Get_Measure_Continuity": {
+      "scpi": "MEASure:CONTinuity?",
+      "scpiFast": "MEAS:CONT?",
+      "description": "The MEASure? and CONFigure Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Diode": {
+      "scpi": "MEASure:DIODe?",
+      "scpiFast": "MEAS:DIOD?",
+      "description": "Get measure diode",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Fresistance": {
+      "scpi": "MEASure:FRESistance?",
+      "scpiFast": "MEAS:FRES?",
+      "description": "Get measure fresistance",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Period": {
+      "scpi": "MEASure:PERiod?",
+      "scpiFast": "MEAS:PER?",
+      "description": "Get measure period",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Null_Offset": {
+      "scpi": ":NULL:OFFSet?",
+      "scpiFast": ":NULL:OFFS?",
+      "description": "Math Operation Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "NULL",
+      "unverified": true
+    },
+    "Get_Opc": {
+      "scpi": "*OPC?",
+      "description": "Get opc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Period_Aperture": {
+      "scpi": "PERiod:APERture?",
+      "scpiFast": "PER:APER?",
+      "description": "Measurement Configuration",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "PER",
+      "unverified": true
+    },
+    "Get_Period_Voltage_Range": {
+      "scpi": "PERiod:VOLTage:RANGe?",
+      "scpiFast": "PER:VOLT:RANG?",
+      "description": "Get period voltage range",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "PER",
+      "unverified": true
+    },
+    "Get_Psc": {
+      "scpi": "*PSC?",
+      "description": "Get psc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Questionable_Enable": {
+      "scpi": ":QUEStionable:ENABle?",
+      "scpiFast": ":QUES:ENAB?",
+      "description": "Status Reporting Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Questionable_Event": {
+      "scpi": ":QUEStionable:EVENt?",
+      "scpiFast": ":QUES:EVEN?",
+      "description": "Status Reporting Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Resolution_Nplcycles": {
+      "scpi": "RESistance:NPLCycles?",
+      "scpiFast": "RES:NPLC?",
+      "description": "Get resolution nplcycles",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "RES",
+      "unverified": true
+    },
+    "Get_Resolution_Range": {
+      "scpi": "RESistance:RANGe?",
+      "scpiFast": "RES:RANG?",
+      "description": "Get resolution range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "RES",
+      "unverified": true
+    },
+    "Get_Resolution_Resolution": {
+      "scpi": "RESistance:RESolution?",
+      "scpiFast": "RES:RES?",
+      "description": "Measurement Configuration Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "RES",
+      "unverified": true
+    },
+    "Get_Route_Terminals": {
+      "scpi": "ROUTe:TERMinals?",
+      "scpiFast": "ROUT:TERM?",
+      "description": "Front / Rear Input Terminal Switching",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "ROUT",
+      "unverified": true
+    },
+    "Get_Sample_Count": {
+      "scpi": "SAMP:COUN?",
+      "description": "Get sample count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SAMP",
+      "unverified": true
+    },
+    "Get_Secure_State": {
+      "scpi": ":SECure:STATe?",
+      "scpiFast": ":SEC:STAT?",
+      "description": "Calibration Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "SEC",
+      "unverified": true
+    },
+    "Get_Sre": {
+      "scpi": "*SRE?",
+      "description": "Get sre",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_State_Questionable_Enable": {
+      "scpi": "STATus:QUEStionable:ENABle?",
+      "scpiFast": "STAT:QUES:ENAB?",
+      "description": "The SCPI Status Model",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_State_Questionable_Event": {
+      "scpi": "STATus:QUEStionable:EVENt?",
+      "scpiFast": "STAT:QUES:EVEN?",
+      "description": "Get state questionable event",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Stb": {
+      "scpi": "*STB?",
+      "description": "Get stb",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_System_Beeper_State": {
+      "scpi": "SYSTem:BEEPer:STATe?",
+      "scpiFast": "SYST:BEEP:STAT?",
+      "description": "System-Related Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Version": {
+      "scpi": "SYSTem:VERSion?",
+      "scpiFast": "SYST:VERS?",
+      "description": "SCPI Language Version Query",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_Trigger_Count": {
+      "scpi": "TRIGger:COUNt?",
+      "scpiFast": "TRIG:COUN?",
+      "description": "Get trigger count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Delay": {
+      "scpi": "TRIGger:DELay?",
+      "scpiFast": "TRIG:DEL?",
+      "description": "Get trigger delay",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Source": {
+      "scpi": "TRIGger:SOURce?",
+      "scpiFast": "TRIG:SOUR?",
+      "description": "Trigger Source Choices",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Tst": {
+      "scpi": "*TST?",
+      "description": "Get tst",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Voltage_Range": {
+      "scpi": "VOLTage:RANGe?",
+      "scpiFast": "VOLT:RANG?",
+      "description": "An Introduction to the SCPI Language",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
+    },
     "MEASure_Resistance": {
       "scpi": "MEASure:RESistance?",
+      "scpiFast": "MEAS:RES?",
       "description": "MEASure Resistance",
+      "returns": {
+        "count": 1
+      },
       "group": "MEASure Queries",
       "subsystem": "MEASure"
     },
     "MEASure_Voltage_AC": {
       "scpi": "MEASure:VOLTage:AC?",
+      "scpiFast": "MEAS:VOLT:AC?",
       "description": "MEASure Voltage AC",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "MEASure Queries",
       "subsystem": "MEASure"
     },
     "MEASure_Voltage_DC": {
       "scpi": "MEASure:VOLTage:DC?",
+      "scpiFast": "MEAS:VOLT:DC?",
       "description": "MEASure Voltage DC",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "MEASure Queries",
       "subsystem": "MEASure"
     },
     "Measure_AC_Voltage": {
       "scpi": ":MEASure:VOLTage:AC? <range>,<resolution>",
+      "scpiFast": ":MEAS:VOLT:AC? <range>,<resolution>",
       "description": "Measure AC Voltage",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "Configure and Measure immediately",
       "args": [
         "range",
@@ -309,7 +1637,12 @@
     },
     "Measure_DC_Current": {
       "scpi": ":MEASure:CURRent:DC? <range>,<resolution>",
+      "scpiFast": ":MEAS:CURR:DC? <range>,<resolution>",
       "description": "Measure DC Current",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
       "group": "Configure and Measure immediately",
       "args": [
         "range",
@@ -319,7 +1652,13 @@
     },
     "Measure_DC_Voltage": {
       "scpi": ":MEASure:VOLTage:DC? <range>,<resolution>",
+      "scpiFast": ":MEAS:VOLT:DC? <range>,<resolution>",
       "description": "Measure DC Voltage",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "Configure and Measure immediately",
       "args": [
         "range",
@@ -329,7 +1668,11 @@
     },
     "Measure_Frequency": {
       "scpi": ":MEASure:FREQuency? <range>,<resolution>",
+      "scpiFast": ":MEAS:FREQ? <range>,<resolution>",
       "description": "Measure Frequency",
+      "returns": {
+        "count": 1
+      },
       "group": "Configure and Measure immediately",
       "args": [
         "range",
@@ -339,7 +1682,11 @@
     },
     "Measure_Resistance_2Wire": {
       "scpi": ":MEASure:RESistance? <range>,<resolution>",
+      "scpiFast": ":MEAS:RES? <range>,<resolution>",
       "description": "Measure Resistance (2W)",
+      "returns": {
+        "count": 1
+      },
       "group": "Configure and Measure immediately",
       "args": [
         "range",
@@ -349,37 +1696,62 @@
     },
     "Query_Average": {
       "scpi": ":CALCulate:AVERage:AVERage?",
+      "scpiFast": ":CALC:AVER:AVER?",
       "description": "Query Average",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
       "group": "Statistics and Calc Results",
       "subsystem": "CALCulate"
     },
     "Query_Max": {
       "scpi": ":CALCulate:AVERage:MAXimum?",
+      "scpiFast": ":CALC:AVER:MAX?",
       "description": "Query Max",
+      "returns": {
+        "count": 1
+      },
       "group": "Statistics and Calc Results",
       "subsystem": "CALCulate"
     },
     "Query_Min": {
       "scpi": ":CALCulate:AVERage:MINimum?",
+      "scpiFast": ":CALC:AVER:MIN?",
       "description": "Query Min",
+      "returns": {
+        "count": 1
+      },
       "group": "Statistics and Calc Results",
       "subsystem": "CALCulate"
     },
     "Read_Error": {
       "scpi": ":SYSTem:ERRor?",
+      "scpiFast": ":SYST:ERR?",
       "description": "Read Error",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Utilities",
       "subsystem": "SYSTem"
     },
     "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Read IDN",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
       "group": "Common Commands",
       "subsystem": "Common"
     },
     "Read_Next": {
       "scpi": ":READ?",
       "description": "Read Next",
+      "returns": {
+        "count": 1
+      },
       "group": "Fetch data after INITiate",
       "subsystem": "MEASure"
     }

@@ -1,0 +1,349 @@
+<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+
+# Spectrum/N9340B — command tree
+
+Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+
+**223 commands** — SET 81 · RIG 3 · NAB 89 · DO 50 · 187 unverified (83%)
+
+`SET` one argument · `RIG` several applied together · `NAB` a query · `DO` a parameterless action. **†** marks a command swept out of a manual and never sent to the instrument.
+
+## Compound commands
+
+Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header's path and the instrument answers `-113`.
+
+- **NAB** `Frequency_settings` · → start, stop, center, span<br>Primary Frequency Monitoring
+  - `:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?`
+- **RIG** `RBW_VBW_Hz` · args: `rbw_hz_value`, `vbw_hz_value`<br>Set Resolution and Video BW
+  - `:SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>`
+- **RIG** `Ref_Level_dBm` · args: `Ref_Level_dBm`, `Attenuation_dB`, `Preamp_On` · numeric (V)<br>Set Power Levels
+  - `:DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>`
+- **NAB** `all_marker_settings` · → y_1, y_2, y_3, y_4, y_5, y_6, x_1, x_2, x_3, x_4, x_5, x_6<br>Marker Amplitude and Frequency Readbacks
+  - `:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?`
+- **NAB** `amplitude_settings` · → rlevel, attenuation, gain<br>Power and Attenuation Readbacks
+  - `:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?`
+- **NAB** `bandwidth_settings` · → resolution, video, auto, continuous, time<br>Bandwidth and Sweep Monitoring
+  - `:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?`
+- **RIG** `freq_start_stop` · args: `start_freq`, `stop_freq` · numeric<br>Frequency Range Commands
+  - `:FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>`
+
+## Tree
+
+- **`BWIDth`**
+  - `INTegration` — **SET** `Set_Bwidth_Integration` · `<value>` · args: `value` · †<br>Set the Chan Integ BW
+  - `RESolution` — **SET** `Set_Bwidth_Resolution` · `<value>` · args: `value` · †<br>Set the Channel Res BW
+  - `VIDeo` — **SET** `Set_Bwidth_Video` · `<value>` · args: `value` · †<br>Video Bandwidth
+  - `INTegration?` — **NAB** `Get_Bwidth_Integration` · → 1 value · †<br>Set the Chan Integ BW
+  - `RESolution?` — **NAB** `Get_Bwidth_Resolution` · → 1 value · †<br>Set the Channel Res BW
+  - `VIDeo?` — **NAB** `Get_Bwidth_Video` · → 1 value · †<br>Video Bandwidth
+  - **`VIDeo`**
+    - `RATio` — **SET** `Set_Bwidth_Video_Ratio` · `<value>` · args: `value` · numeric · †<br>Video to Resolution Bandwidth Ratio
+    - `RATio?` — **NAB** `Get_Bwidth_Video_Ratio` · → NR3 · †<br>Video to Resolution Bandwidth Ratio
+- **`CAL`**
+  - **`SOUR`**
+    - `STAT` — **DO** `Do_Calibration_Source_State` · †<br>Using C with Marker Peak Search and Peak Excursion
+- **`CALC`**
+  - **`MARK`**
+    - `MODE` — **DO** `Do_Calculate_Marker_Mode` · †
+    - **`PEAK`**
+      - `EXC` — **DO** `Do_Calculate_Marker_Peak_Exc` · †
+      - `THR` — **DO** `Do_Calculate_Marker_Peak_Thr` · †
+      - **`THR`**
+        - `STAT` — **DO** `Do_Calculate_Marker_Peak_Thr_State` · †
+  - **`MARK1`**
+    - `PHN` — **DO** `Do_Calculate_Marker_Phn` · †
+  - **`PHN`**
+    - `OFFS` — **DO** `Do_Calculate_Phn_Offset` · †
+- **`CALCulate`**
+  - `LLINe<n>` — **DO** `Do_Calculate_Lline` · per-instance: `n` · †<br>Limit Line Y-axis Value
+  - `MARKer<n>` — **DO** `Do_Calculate_Marker` · per-instance: `n` · †
+  - **`LLINe1`**
+    - `STATe` — **SET** `Set_Calculate_Lline_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Limit Line Testing
+    - `STATe?` — **NAB** `Get_Calculate_Lline_State` · → BOOL · †<br>Limit Line Testing
+    - **`BUZZer`**
+      - `STATe?` — **NAB** `Get_Calculate_Lline_Buzzer_State` · → BOOL · †<br>Turn on/off the Buzzer
+      - `STATe` — **DO** `Do_Calculate_Lline_Buzzer_Statoff` · `OFF` · †<br>Turn on/off the Buzzer
+  - **`MARKer`**
+    - `AOFF` — **DO** `Set_All_Markers_State`
+  - **`MARKer1`**
+    - `FCOunt` — **DO** `Do_Calculate_Marker_Fcount` · †<br>Frequency Counter Marker
+  - **`MARKer<marker_number>`**
+    - `STATe` — **SET** `Set_Marker_State` · `<state_bool>` · args: `state_bool` · bool: `OFF` | `ON` · per-instance: `marker_number`
+    - `X` — **SET** `Set_Marker_X_position` · `<hz_value>` · args: `hz_value` · numeric · per-instance: `marker_number`<br>Set Marker Frequency
+- **`DEMod`**
+  - **`AM`**
+    - `STATe` — **SET** `Set_Demod_Am_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>AM Demodulation
+    - `STATe?` — **NAB** `Get_Demod_Am_State` · → BOOL · †<br>AM Demodulation
+  - **`FM`**
+    - `STATe` — **SET** `Set_Demod_Fm_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>FM Demodulation
+    - `STATe?` — **NAB** `Get_Demod_Fm_State` · → BOOL · †<br>FM Demodulation
+- **`DISPlay`**
+  - **`MODE`**
+    - `BRIGhtness` — **SET** `Set_Display_Mode_Brightness` · `<value>` · args: `value` · †<br>Brightness
+    - `BRIGhtness?` — **NAB** `Get_Display_Mode_Brightness` · → 1 value · †<br>Brightness
+  - **`WINDow`**
+    - `TRACe` — **DO** `Do_Display_Window_Trace` · †<br>Trace Y-Axis Scaling
+    - **`TRACe`**
+      - **`Y`**
+        - `RLEVel` — **SET** `Set_Reference_Level` · `<dbm_value>` · args: `dbm_value` · numeric (V)
+        - `RLEVel?` — **NAB** `Reference_Level` · → NR3 V
+- **`FCOunt`**
+  - `STATe` — **SET** `Set_Fcount_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Frequency Counter Marker
+  - `STATe?` — **NAB** `Get_Fcount_State` · → BOOL · †<br>Frequency Counter Marker
+- **`FREQuency`**
+  - `CENTer` — **SET** `Set_Center_Freq_MHz` · `<hz_value>` · args: `hz_value` · numeric
+  - `SPAN` — **SET** `Set_Span_Frequency` · `<hz_value>` · args: `hz_value` · numeric
+  - `STARt` — **SET** `Set_Start_Freq_MHz` · `<hz_value>` · args: `hz_value` · numeric
+  - `STOP` — **SET** `Set_Stop_Freq_MHz` · `<hz_value>` · args: `hz_value` · numeric
+- **`INITiate`**
+  - `CONTinuous` — **SET** `Set_Continuous_Mode` · `<state_bool>` · args: `state_bool` · bool: `OFF` | `ON`
+  - `IMMediate` — **DO** `Do_Initiate_Continuous`
+- **`INSTrument`**
+  - `MEASure` — **SET** `Set_Instrument_Measure` · `<value>` · args: `value` · enum: `CHP` | `ACPR` | `OBW` | `SEM` · †<br>Power Measurement
+  - `SELect` — **SET** `Set_Instrument_Select` · `<value>` · args: `value` · enum: `SA` | `TGEN` | `DAN` | `POW` · †<br>Instrument Mode
+  - `MEASure?` — **NAB** `Get_Instrument_Measure` · → 1 value · †<br>Power Measurement
+  - `SELect?` — **NAB** `Get_Instrument_Select` · → CRD · †<br>Instrument Mode
+- **`MEAS`**
+  - **`SEM`**
+    - `BWID` — **DO** `Do_Measure_Semask_Bwidth` · †
+    - **`BAND`**
+      - `INT` — **DO** `Do_Measure_Semask_Bandwidth_Integration` · †
+    - **`BWID`**
+      - `INT` — **DO** `Do_Measure_Semask_Bwidth_Integration` · †
+    - **`OFFS`**
+      - **`LIST`**
+        - **`STOP`**
+          - `ABS` — **DO** `Do_Measure_Semask_Offset_List_Stop_Absolute` · †<br>Set the Abs Stop
+          - `RCAR` — **DO** `Do_Measure_Semask_Offset_List_Stop_Rcarrier` · †
+- **`MEASure`**
+  - `CHPower?` — **NAB** `Get_Measure_Chpower` · → 1 value · †<br>Channel Power and Density
+  - **`ACPR`**
+    - `ADJacent` — **SET** `Set_Measure_Acpr_Adjacent` · `<value>` · args: `value` · †<br>Adjacent channel
+    - `CENTer` — **SET** `Set_Measure_Acpr_Center` · `<value>` · args: `value` · numeric · †<br>Center Freq
+    - `MAIN` — **SET** `Set_Measure_Acpr_Main` · `<value>` · args: `value` · †<br>Main channel
+    - `SPACe` — **SET** `Set_Measure_Acpr_Spacing` · `<value>` · args: `value` · †<br>Channel space
+    - `ADJacent?` — **NAB** `Get_Measure_Acpr_Adjacent` · → 1 value · †<br>Adjacent channel
+    - `CENTer?` — **NAB** `Get_Measure_Acpr_Center` · → NR3 · †<br>Center Freq
+    - `LPOWer?` — **NAB** `Get_Measure_Acpr_Lpower` · → 1 value · †<br>Low Adjacent Channel Power
+    - `LRATio?` — **NAB** `Get_Measure_Acpr_Lratio` · → 1 value · †<br>Low Adjacent Channel Power Ratio
+    - `MAIN?` — **NAB** `Get_Measure_Acpr_Main` · → 1 value · †<br>Main channel
+    - `MPOWer?` — **NAB** `Get_Measure_Acpr_Mpower` · → 1 value · †<br>Main Channel Power
+    - `SPACe?` — **NAB** `Get_Measure_Acpr_Spacing` · → 1 value · †<br>Channel space
+    - `UPOWer?` — **NAB** `Get_Measure_Acpr_Upower` · → 1 value · †<br>Upper Adjacent Channel Power
+    - `URATio?` — **NAB** `Get_Measure_Acpr_Uratio` · → 1 value · †<br>Upper Adjacent Channel Power Ratio
+  - **`CHPower`**
+    - `CENTer` — **SET** `Set_Measure_Chpower_Center` · `<value>` · args: `value` · numeric · †<br>Center Freq
+    - `IBW` — **SET** `Set_Measure_Chpower_Ibw` · `<value>` · args: `value` · †
+    - `SPAN` — **SET** `Set_Measure_Chpower_Span` · `<value>` · args: `value` · numeric · †<br>Channel Span
+    - `CENTer?` — **NAB** `Get_Measure_Chpower_Center` · → NR3 · †<br>Center Freq
+    - `CHPower?` — **NAB** `Get_Measure_Chpower_Chpower` · → 1 value · †<br>Channel Power and Density
+    - `DENSity?` — **NAB** `Get_Measure_Chpower_Density` · → 1 value · †<br>Channel Power and Density
+    - `IBW?` — **NAB** `Get_Measure_Chpower_Ibw` · → 1 value · †
+    - `SPAN?` — **NAB** `Get_Measure_Chpower_Span` · → NR3 · †<br>Channel Span
+  - **`OBW`**
+    - `METHod` — **SET** `Set_Measure_Obw_Method` · `<value>` · args: `value` · enum: `PERC` | `XDB` · †<br>Select the measurement method of OBW
+    - `PERCent` — **SET** `Set_Measure_Obw_Percent` · `<value>` · args: `value` · numeric (s) · †<br>Set percentage (%) method of OBW
+    - `XDB` — **SET** `Set_Measure_Obw_Xdb` · `<value>` · args: `value` · numeric · †<br>Set dBc method of OBW
+    - `METHod?` — **NAB** `Get_Measure_Obw_Method` · → 1 value · †<br>Select the measurement method of OBW
+    - `PERCent?` — **NAB** `Get_Measure_Obw_Percent` · → NR3 s · †<br>Set percentage (%) method of OBW
+    - `XDB?` — **NAB** `Get_Measure_Obw_Xdb` · → NR3 · †<br>Set dBc method of OBW
+  - **`SEMask`**
+    - `SWEeptime` — **SET** `Set_Measure_Semask_Sweep` · `<value>` · args: `value` · enum · †<br>Set the Sweep Time
+    - `SWEeptime?` — **NAB** `Get_Measure_Semask_Sweep` · → CRD s · †<br>Set the Sweep Time
+    - `BANDwidth` — **DO** `Do_Measure_Semask_Bandwidth` · †<br>Set the Chan Integ BW
+    - `MARKer<n>` — **DO** `Do_Measure_Semask_Marker` · per-instance: `n` · †<br>Turn On/Off the Marker
+    - **`AVERage`**
+      - `COUNt` — **SET** `Set_Measure_Semask_Average_Count` · `<value>` · args: `value` · integer · †<br>Set the Average
+      - `STATe` — **SET** `Set_Measure_Semask_Average_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Set the Average
+      - `COUNt?` — **NAB** `Get_Measure_Semask_Average_Count` · → NR1 · †<br>Set the Average
+      - `STATe?` — **NAB** `Get_Measure_Semask_Average_State` · → BOOL · †<br>Set the Average
+    - **`CARRier`**
+      - `POWer` — **SET** `Set_Measure_Semask_Carrier_Power` · `<value>` · args: `value` · †<br>Set Total Power Reference
+      - `POWer?` — **NAB** `Get_Measure_Semask_Carrier_Power` · → 1 value · †<br>Set Total Power Reference
+    - **`FREQuency`**
+      - `CENTer` — **SET** `Set_Measure_Semask_Frequency_Center` · `<value>` · args: `value` · numeric · †<br>Set Center Frequency
+      - `SPAN` — **SET** `Set_Measure_Semask_Frequency_Span` · `<value>` · args: `value` · numeric · †<br>Set Chan Span
+      - `CENTer?` — **NAB** `Get_Measure_Semask_Frequency_Center` · → NR3 · †<br>Set Center Frequency
+      - `SPAN?` — **NAB** `Get_Measure_Semask_Frequency_Span` · → NR3 · †<br>Set Chan Span
+    - **`OFFSet`**
+      - **`LIST`**
+        - `STATe` — **SET** `Set_Measure_Semask_Offset_List_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Set the Start Freq
+        - `SWEeptime` — **SET** `Set_Measure_Semask_Offset_List_Sweep` · `<value>` · args: `value` · enum · †<br>Set the Sweep Time
+        - `TEST` — **SET** `Set_Measure_Semask_Offset_List_Test` · `<value>` · args: `value` · †<br>Set the Fail Mask
+        - `STATe?` — **NAB** `Get_Measure_Semask_Offset_List_State` · → BOOL · †<br>Set the Start Freq
+        - `SWEeptime?` — **NAB** `Get_Measure_Semask_Offset_List_Sweep` · → CRD s · †<br>Set the Sweep Time
+        - `BAND` — **DO** `Do_Measure_Semask_Offset_List_Bandwidth` · †<br>Set the Channel Res BW
+        - **`FREQuency`**
+          - `STARt` — **SET** `Set_Measure_Semask_Offset_List_Frequency_Start` · `<value>` · args: `value` · numeric · †<br>Set the Start Freq
+          - `STARt?` — **NAB** `Get_Measure_Semask_Offset_List_Frequency_Start` · → NR3 · †<br>Set the Start Freq
+          - `STOP?` — **NAB** `Get_Measure_Semask_Offset_List_Frequency_Stop` · → NR3 · †<br>Set the Stop Freq
+        - **`STARt`**
+          - `ABSolute` — **SET** `Set_Measure_Semask_Offset_List_Start_Absolute` · `<value>` · args: `value` · †<br>Set the Abs Start
+          - `RCARrier` — **SET** `Set_Measure_Semask_Offset_List_Start_Rcarrier` · `<value>` · args: `value` · †<br>Set the Rel Start
+          - `ABSolute?` — **NAB** `Get_Measure_Semask_Offset_List_Start_Absolute` · → 1 value · †<br>Set the Abs Start
+          - `RCARrier?` — **NAB** `Get_Measure_Semask_Offset_List_Start_Rcarrier` · → 1 value · †<br>Set the Rel Start
+        - **`STOP`**
+          - **`ABSolute`**
+            - `COU` — **DO** `Do_Measure_Semask_Offset_List_Stop_Absolute_Cou` · †<br>Set the Abs Stop
+          - **`RCARrier`**
+            - `COU` — **DO** `Do_Measure_Semask_Offset_List_Stop_Rcarrier_Cou` · †
+    - **`OFFSetn`**
+      - **`LIST`**
+        - `TEST?` — **NAB** `Get_Measure_Semask_Offset_List_Test` · → 1 value · †<br>Set the Fail Mask
+- **`POWer`**
+  - `ATTenuation` — **SET** `Set_Power_Attenuation` · `<db_value>` · args: `db_value` · numeric (dB)
+  - `GAIN` — **DO** `Set_Power_Gain_OFF` · `OFF`
+  - `GAIN` — **DO** `Set_Power_Gain_ON` · `ON`
+  - **`ATTenuation`**
+    - `AUTO` — **DO** `Set_Input_Auto_Attenuation_OFF` · `OFF`
+    - `AUTO` — **DO** `Set_Input_Auto_Attenuation_ON` · `ON`
+  - **`RF`**
+    - `ATTenuation?` — **NAB** `Attenuation` · → NR3 dB
+- **`SCALe`**
+  - `PDIVision` — **SET** `Set_Scale_Pdivision` · `<value>` · args: `value` · †<br>Trace Y-Axis Scaling
+  - `SPACing` — **SET** `Set_Scale_Spacing` · `<value>` · args: `value` · †<br>Vertical Axis Scaling
+  - `PDIVision?` — **NAB** `Get_Scale_Pdivision` · → 1 value · †<br>Trace Y-Axis Scaling
+  - `SPACing?` — **NAB** `Get_Scale_Spacing` · → 1 value · †<br>Vertical Axis Scaling
+  - **`RLEVel`**
+    - `OFFSet` — **SET** `Set_Scale_Rlevel_Offset` · `<value>` · args: `value` · numeric (V) · †<br>Trace Y-Axis Reference Level
+    - `OFFSet?` — **NAB** `Get_Scale_Rlevel_Offset` · → NR3 V · †<br>Trace Y-Axis Reference Level
+- **`SENS`**
+  - **`FREQ`**
+    - `CENT` — **SET** `Set_Sense_Frequency_Center` · `<value>` · args: `value` · enum: `UP` | `DOWN` · †<br>Using C with Marker Peak Search and Peak Excursion
+    - `SPAN` — **SET** `Set_Sense_Frequency_Span` · `<value>` · args: `value` · numeric (Hz) · †<br>Using C with Marker Peak Search and Peak Excursion
+    - `STAR` — **SET** `Set_Sense_Frequency_Start` · `<value>` · args: `value` · numeric (Hz) · †<br>Start Frequency
+    - `STOP` — **SET** `Set_Sense_Frequency_Stop` · `<value>` · args: `value` · numeric (Hz) · †<br>Stop Frequency
+- **`SENSE`**
+  - **`POWer`**
+    - **`RF`**
+      - **`GAIN`**
+        - `STATe?` — **NAB** `Preamp_State` · → BOOL dB
+- **`SENSe`**
+  - `AVERage` — **DO** `Do_Sense_Average` · †
+  - `BANDwidth` — **DO** `Do_Sense_Bandwidth` · †
+  - `DETector` — **DO** `Do_Sense_Detector` · †
+  - `FREQuency` — **DO** `Do_Sense_Frequency` · †
+  - `POWer` — **DO** `Do_Sense_Power` · †
+  - `SWEep` — **DO** `Do_Sense_Sweep` · †
+  - **`AVERage`**
+    - `TRACe<n>` — **DO** `Do_Sense_Average_Trace` · per-instance: `n` · †<br>Set the Average Count
+  - **`BANDwidth`**
+    - `RESolution` — **SET** `Set_RBW` · `<hz_value>` · args: `hz_value`
+    - `VIDeo` — **SET** `Set_VBW` · `<hz_value>` · args: `hz_value`
+    - **`RESolution`**
+      - `AUTO` — **SET** `Set_RBW_Auto` · `<state_bool>` · args: `state_bool` · bool: `OFF` | `ON`
+    - **`VIDeo`**
+      - `AUTO` — **SET** `Set_VBW_Auto` · `<state_bool>` · args: `state_bool` · bool: `OFF` | `ON`
+  - **`DETector`**
+    - `FUNCtion?` — **NAB** `Get_Sense_Detector_Function` · → CRD · †<br>Type of Detection
+    - **`FUNCtion`**
+      - `NEGative` — **DO** `Do_Sense_Detector_Funcneg` · †<br>Type of Detection
+  - **`FREQuency`**
+    - `CENTer?` — **NAB** `Get_Sense_Frequency_Center` · → NR3 · †<br>Center Frequency
+    - `SPAN?` — **NAB** `Get_Sense_Frequency_Span` · → NR3 · †<br>Frequency Span
+    - `STARt?` — **NAB** `Get_Sense_Frequency_Start` · → NR3 · †<br>Start Frequency
+    - `STOP?` — **NAB** `Get_Sense_Frequency_Stop` · → NR3 · †<br>Stop Frequency
+    - **`CENTer`**
+      - **`STEP`**
+        - `INCRement` — **SET** `Set_Sense_Frequency_Center_Step_Increment` · `<value>` · args: `value` · †<br>Center Frequency Step Size
+        - `INCRement?` — **NAB** `Get_Sense_Frequency_Center_Step_Increment` · → 1 value · †<br>Center Frequency Step Size
+    - **`SPAN`**
+      - `FULL` — **DO** `Do_Sense_Frequency_Span_Full` · †<br>Full Frequency Span
+      - `PREVious` — **DO** `Do_Sense_Frequency_Span_Previous` · †<br>Last Frequency Span
+      - `ZERO` — **DO** `Do_Sense_Frequency_Span_Zero` · †<br>DEMOdulation Subsystem
+  - **`POWer`**
+    - **`RF`**
+      - `ATTenuation` — **SET** `Set_Sense_Power_Rf_Attenuation` · `<value>` · args: `value` · numeric (dB) · †<br>Input Attenuation
+      - `ATTenuation?` — **NAB** `Get_Sense_Power_Rf_Attenuation` · → NR3 dB · †<br>Input Attenuation
+      - **`GAIN`**
+        - `STATe` — **SET** `Set_Sense_Power_Rf_Gain_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Input Port Power Gain
+        - `STATe?` — **NAB** `Get_Sense_Power_Rf_Gain_State` · → BOOL dB · †<br>Input Port Power Gain
+  - **`SWEep`**
+    - `TDMode` — **SET** `Set_Sense_Sweep_Tdmode` · `<value>` · args: `value` · †
+    - `TIME` — **SET** `Set_Sweep_time` · `<s_value>` · args: `s_value` · numeric (s)
+    - `TDMode?` — **NAB** `Get_Sense_Sweep_Tdmode` · → 1 value · †
+    - **`TIME`**
+      - `AUTO` — **SET** `Set_Sweep_time_Auto` · `<state_bool>` · args: `state_bool` · bool: `OFF` | `ON`
+- **`SYSTem`**
+  - `CHANnel` — **SET** `Set_System_Channel` · `<value>` · args: `value` · enum · †<br>Low Frequency Channel
+  - `DATE` — **SET** `Set_System_Date` · `<value>` · args: `value` · †<br>Set Date
+  - `TIME` — **SET** `Set_System_Time` · `<value>` · args: `value` · numeric (s) · †<br>Set Time
+  - `CHANnel?` — **NAB** `Get_System_Channel` · → CRD · †<br>Low Frequency Channel
+  - `DATE?` — **NAB** `Get_System_Date` · → 1 value · †<br>Set Date
+  - `TIME?` — **NAB** `Get_System_Time` · → NR3 s · †<br>Set Time
+  - `ERRor?` — **NAB** `error_information` · → NR2<br>System Error Check
+  - `PRESet` — **DO** `Do_System_Preset` · †
+  - **`CONFigure`**
+    - `PORT` — **SET** `Set_System_Configure_Port` · `<value>` · args: `value` · enum: `REF` | `TRIG` · †<br>Power on Type
+    - `PORT?` — **NAB** `Get_System_Configure_Port` · → 1 value · †<br>Power on Type
+  - **`DISPlay`**
+    - `UPDate` — **DO** `Update_Display`
+  - **`ERRor`**
+    - `NEXT?` — **NAB** `Get_System_Error_Next` · → ERROR · †<br>Error Information Query
+  - **`FILE`**
+    - `SAVE` — **DO** `Do_System_File_Save` · †<br>Screen save
+  - **`POWer`**
+    - `RESet` — **DO** `Power_Cycle`
+- **`TGENerator`**
+  - `AMPLitude` — **SET** `Set_Tgenerator_Amplitude` · `<value>` · args: `value` · †<br>Output Amplitdue
+  - `AMPLitude?` — **NAB** `Get_Tgenerator_Amplitude` · → 1 value · †<br>Output Amplitdue
+  - **`AMPLitude`**
+    - `STATe` — **SET** `Set_Tgenerator_Amplitude_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Amplitude On/Off
+    - `STEP` — **SET** `Set_Tgenerator_Amplitude_Step` · `<value>` · args: `value` · integer · †<br>Amplitude Step
+    - `STATe?` — **NAB** `Get_Tgenerator_Amplitude_State` · → BOOL · †<br>Amplitude On/Off
+    - `STEP?` — **NAB** `Get_Tgenerator_Amplitude_Step` · → NR1 · †<br>Amplitude Step
+    - `OFFSet` — **DO** `Do_Tgenerator_Amplitude_Offset` · †<br>Amplitude Offset
+  - **`NORMalize`**
+    - `LEVel` — **SET** `Set_Tgenerator_Normalize_Level` · `<value>` · args: `value` · numeric · †<br>Normalization Reference Level
+    - `POSN` — **SET** `Set_Tgenerator_Normalize_Posn` · `<value>` · args: `value` · numeric · †<br>Normalization Reference Position
+    - `STATe` — **SET** `Set_Tgenerator_Normalize_State` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>Normalization
+    - `TRACe` — **SET** `Set_Tgenerator_Normalize_Trace` · `<value>` · args: `value` · block · †<br>Reference Trace
+    - `LEVel?` — **NAB** `Get_Tgenerator_Normalize_Level` · → NR3 · †<br>Normalization Reference Level
+    - `POSN?` — **NAB** `Get_Tgenerator_Normalize_Posn` · → NR3 · †<br>Normalization Reference Position
+    - `STATe?` — **NAB** `Get_Tgenerator_Normalize_State` · → BOOL · †<br>Normalization
+    - `TRACe?` — **NAB** `Get_Tgenerator_Normalize_Trace` · → BLOCK · †<br>Reference Trace
+    - `REF` — **DO** `Do_Tgenerator_Normalize_Ref` · †<br>Storing as Reference
+- **`TRACe`**
+  - `FORMat` — **SET** `Set_Trace_Format` · `<value>` · args: `value` · enum: `ASC` | `REAL` · †<br>Trace format
+  - `FORMat?` — **NAB** `Get_Trace_Format` · → CRD · †<br>Trace format
+  - **`AVERage`**
+    - `COUNt` — **SET** `Set_Averaging` · `<count_int>` · args: `count_int` · integer
+- **`TRACe<trace_number>`**
+  - `MODE` — **SET** `Set_Trace_Mode` · `<mode_string>` · args: `mode_string` · enum · per-instance: `trace_number`
+- **`TRIGger`**
+  - **`SEQuence`**
+    - `DELaytime` — **SET** `Set_Trigger_Sequence_Delaytime` · `<value>` · args: `value` · numeric (s) · †<br>Trigger Delay Time
+    - `SOURce` — **SET** `Set_Trigger_Sequence_Source` · `<value>` · args: `value` · enum: `IMM` | `VID` | `EXT` · †<br>Initiate a Single Sweep
+    - `DELaytime?` — **NAB** `Get_Trigger_Sequence_Delaytime` · → NR3 s · †<br>Trigger Delay Time
+    - `SOURce?` — **NAB** `Get_Trigger_Sequence_Source` · → CRD · †<br>Trigger Source
+    - **`EXTernal1`**
+      - `SLOPe` — **SET** `Set_Trigger_Sequence_External_Slope` · `<value>` · args: `value` · enum: `POS` | `NEG` · †<br>External Trigger Slope
+      - `SLOPe?` — **NAB** `Get_Trigger_Sequence_External_Slope` · → CRD · †<br>External Trigger Slope
+    - **`VIDeo`**
+      - `LEVel` — **SET** `Set_Trigger_Sequence_Video_Level` · `<value>` · args: `value` · numeric · †<br>Command Example
+      - `LEVel?` — **NAB** `Get_Trigger_Sequence_Video_Level` · → NR3 · †<br>Video Trigger Level Amplitude
+- **`UNIT`**
+  - `POW` — **SET** `Set_Unit_Power` · `<value>` · args: `value` · enum: `DBM` | `DBMV` | `DBUV` | `DBUA` | `V` | `W` | `A` · †<br>Using C with Marker Peak Search and Peak Excursion
+  - `POWer?` — **NAB** `Get_Unit_Power` · → 1 value · †<br>Select Power Units of Measure
+  - **`POWer`**
+    - `EMF` — **SET** `Set_Unit_Power_Emf` · `<value>` · args: `value` · bool: `OFF` | `ON` · †<br>EMF Mode
+    - `EMF?` — **NAB** `Get_Unit_Power_Emf` · → BOOL · †<br>EMF Mode
+
+## Common commands (IEEE 488.2)
+
+- `*CLS` — **DO** `Do_Cls` · †
+- `*OPC` — **DO** `Do_Opc` · †
+- `*RST` — **DO** `Do_Rst` · †
+- `*TRG` — **DO** `Do_Trg` · †
+- `*WAI` — **DO** `Do_Wai` · †
+- `*ESE?` — **NAB** `Get_Ese` · → NR1 · †
+- `*ESR?` — **NAB** `Get_Esr` · → NR1 · †
+- `*IDN?` — **NAB** `Get_Idn` · → AARD · †
+- `*OPC?` — **NAB** `Get_Opc` · → NR1 · †
+- `*SRE?` — **NAB** `Get_Sre` · → NR1 · †
+- `*STB?` — **NAB** `Get_Stb` · → NR1 · †
+- `*TST?` — **NAB** `Get_Tst` · → NR1 · †
+- `*ESE <value>` — **SET** `Set_Ese` · `<value>` · args: `value` · integer · †
+- `*SRE <value>` — **SET** `Set_Sre` · `<value>` · args: `value` · integer · †
+
+<!-- END GENERATED -->

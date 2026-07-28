@@ -1,10 +1,18 @@
 {
   "model": "54641D",
-  "family": "Scope",
+  "family": "Oscilloscope",
   "set": {
     "CH1_BWLimit": {
       "scpi": ":CHANnel1:BWLimit <state>",
+      "scpiFast": ":CHAN1:BWL <state>",
       "description": "CH1 BWLimit",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "state"
@@ -13,7 +21,11 @@
     },
     "CH1_Coupling": {
       "scpi": ":CHANnel1:COUPling <coupling>",
+      "scpiFast": ":CHAN1:COUP <coupling>",
       "description": "CH1 Coupling",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "coupling"
@@ -22,7 +34,15 @@
     },
     "CH1_Invert": {
       "scpi": ":CHANnel1:INVert <state>",
+      "scpiFast": ":CHAN1:INV <state>",
       "description": "CH1 Invert",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "state"
@@ -31,7 +51,11 @@
     },
     "CH1_Label": {
       "scpi": ":CHANnel1:LABel <string>",
+      "scpiFast": ":CHAN1:LAB <string>",
       "description": "CH1 Label",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "string"
@@ -40,7 +64,11 @@
     },
     "CH1_Offset": {
       "scpi": ":CHANnel1:OFFSet <offset>",
+      "scpiFast": ":CHAN1:OFFS <offset>",
       "description": "CH1 Offset",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "offset"
@@ -49,7 +77,11 @@
     },
     "CH1_Probe": {
       "scpi": ":CHANnel1:PROBe <attenuation>",
+      "scpiFast": ":CHAN1:PROB <attenuation>",
       "description": "CH1 Probe",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "attenuation"
@@ -58,7 +90,11 @@
     },
     "CH1_Scale": {
       "scpi": ":CHANnel1:SCALe <scale>",
+      "scpiFast": ":CHAN1:SCAL <scale>",
       "description": "CH1 Scale",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH1",
       "args": [
         "scale"
@@ -67,7 +103,15 @@
     },
     "CH2_BWLimit": {
       "scpi": ":CHANnel2:BWLimit <state>",
+      "scpiFast": ":CHAN2:BWL <state>",
       "description": "CH2 BWLimit",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "state"
@@ -76,7 +120,11 @@
     },
     "CH2_Coupling": {
       "scpi": ":CHANnel2:COUPling <coupling>",
+      "scpiFast": ":CHAN2:COUP <coupling>",
       "description": "CH2 Coupling",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "coupling"
@@ -85,7 +133,15 @@
     },
     "CH2_Invert": {
       "scpi": ":CHANnel2:INVert <state>",
+      "scpiFast": ":CHAN2:INV <state>",
       "description": "CH2 Invert",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "state"
@@ -94,7 +150,11 @@
     },
     "CH2_Label": {
       "scpi": ":CHANnel2:LABel <string>",
+      "scpiFast": ":CHAN2:LAB <string>",
       "description": "CH2 Label",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "string"
@@ -103,7 +163,11 @@
     },
     "CH2_Offset": {
       "scpi": ":CHANnel2:OFFSet <offset>",
+      "scpiFast": ":CHAN2:OFFS <offset>",
       "description": "CH2 Offset",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "offset"
@@ -112,7 +176,11 @@
     },
     "CH2_Probe": {
       "scpi": ":CHANnel2:PROBe <attenuation>",
+      "scpiFast": ":CHAN2:PROB <attenuation>",
       "description": "CH2 Probe",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "attenuation"
@@ -121,7 +189,11 @@
     },
     "CH2_Scale": {
       "scpi": ":CHANnel2:SCALe <scale>",
+      "scpiFast": ":CHAN2:SCAL <scale>",
       "description": "CH2 Scale",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Setup CH2",
       "args": [
         "scale"
@@ -130,16 +202,50 @@
     },
     "Lock_Front_Panel": {
       "scpi": "SYSTem:LOCK <state>",
+      "scpiFast": "SYST:LOCK <state>",
       "description": "Lock Front Panel",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "System Control",
       "args": [
         "state"
       ],
       "subsystem": "SYSTem"
     },
+    "Set_Acquire_Complete": {
+      "scpi": ":ACQuire:COMPlete <value>",
+      "scpiFast": ":ACQ:COMP <value>",
+      "description": "Set acquire complete",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "ACQ",
+      "unverified": true
+    },
+    "Set_Acquire_Mode": {
+      "scpi": ":ACQuire:MODE <value>",
+      "scpiFast": ":ACQ:MODE <value>",
+      "description": "Set acquire mode",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "ACQ",
+      "unverified": true
+    },
     "Set_Acquire_Mode_AVERage": {
       "scpi": ":ACQuire:TYPE <type>",
+      "scpiFast": ":ACQ:TYPE <type>",
       "description": "Set Acquire Mode AVERage",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Acquire Mode & Averaging",
       "args": [
         "type"
@@ -148,7 +254,11 @@
     },
     "Set_Acquire_Mode_HRESolution": {
       "scpi": ":ACQuire:TYPE <type>",
+      "scpiFast": ":ACQ:TYPE <type>",
       "description": "Set Acquire Mode HRESolution",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Acquire Mode & Averaging",
       "args": [
         "type"
@@ -157,7 +267,11 @@
     },
     "Set_Acquire_Mode_NORMal": {
       "scpi": ":ACQuire:TYPE <type>",
+      "scpiFast": ":ACQ:TYPE <type>",
       "description": "Set Acquire Mode NORMal",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Acquire Mode & Averaging",
       "args": [
         "type"
@@ -166,7 +280,11 @@
     },
     "Set_Acquire_Mode_PEAK": {
       "scpi": ":ACQuire:TYPE <type>",
+      "scpiFast": ":ACQ:TYPE <type>",
       "description": "Set Acquire Mode PEAK",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Acquire Mode & Averaging",
       "args": [
         "type"
@@ -175,7 +293,11 @@
     },
     "Set_Acquire_Type": {
       "scpi": "ACQuire:TYPE <type>",
+      "scpiFast": "ACQ:TYPE <type>",
       "description": "Set Acquire Type",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Acquisition Settings",
       "args": [
         "type"
@@ -184,7 +306,11 @@
     },
     "Set_Average_Count": {
       "scpi": "ACQuire:COUNt <count>",
+      "scpiFast": "ACQ:COUN <count>",
       "description": "Set Average Count",
+      "arg": {
+        "kind": "integer"
+      },
       "group": "Acquisition Settings",
       "args": [
         "count"
@@ -193,7 +319,11 @@
     },
     "Set_Averaging_Count": {
       "scpi": ":ACQuire:COUNt <count>",
+      "scpiFast": ":ACQ:COUN <count>",
       "description": "Set Averaging Count",
+      "arg": {
+        "kind": "integer"
+      },
       "group": "Acquire Mode & Averaging",
       "args": [
         "count"
@@ -202,7 +332,15 @@
     },
     "Set_Bandwidth_Limit": {
       "scpi": "CHANnel<n>:BWLimit <state>",
+      "scpiFast": "CHAN<n>:BWL <state>",
       "description": "Set Bandwidth Limit",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Analog Channel Settings",
       "args": [
         "state"
@@ -211,25 +349,102 @@
     },
     "Set_Byte_Order": {
       "scpi": "WAVeform:BYTeorder <order>",
+      "scpiFast": "WAV:BYT <order>",
       "description": "Set Byte Order",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Waveform Data Transfer Settings",
       "args": [
         "order"
       ],
       "subsystem": "WAVeform"
     },
+    "Set_Calibrate_Label": {
+      "scpi": ":CALibrate:LABel <value>",
+      "scpiFast": ":CAL:LAB <value>",
+      "description": "Set calibrate label",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
     "Set_Center_Frequency": {
       "scpi": ":FUNCtion:CENTer <frequency>",
+      "scpiFast": ":FUNC:CENT <frequency>",
       "description": "Set Center Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "frequency"
       ],
       "subsystem": "Math_FFT"
     },
+    "Set_Channel_Coupling": {
+      "scpi": ":CHANNEL1:COUPLING <value>",
+      "scpiFast": ":CHAN1:COUP <value>",
+      "description": "Receiving Information from the Instrument",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Set_Channel_Offset": {
+      "scpi": "CHANnel1:OFFSet <offset>",
+      "scpiFast": "CHAN1:OFFS <offset>",
+      "description": "Set Channel Offset",
+      "arg": {
+        "kind": "numeric"
+      },
+      "group": "Channel 1 Settings",
+      "args": [
+        "offset"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Channel_Range": {
+      "scpi": "CHANnel1:RANGe <range>",
+      "scpiFast": "CHAN1:RANG <range>",
+      "description": "Set Channel Range",
+      "arg": {
+        "kind": "numeric"
+      },
+      "group": "Channel 1 Settings",
+      "args": [
+        "range"
+      ],
+      "subsystem": "CHANnel"
+    },
+    "Set_Channel_Scale": {
+      "scpi": "CHANnel1:SCALe <scale>",
+      "scpiFast": "CHAN1:SCAL <scale>",
+      "description": "Set Channel Scale",
+      "arg": {
+        "kind": "numeric"
+      },
+      "group": "Channel 1 Settings",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "CHANnel"
+    },
     "Set_Coupling": {
       "scpi": "CHANnel<n>:COUPling <coupling>",
+      "scpiFast": "CHAN<n>:COUP <coupling>",
       "description": "Set Coupling",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Analog Channel Settings",
       "args": [
         "coupling"
@@ -238,7 +453,15 @@
     },
     "Set_Digital_Display": {
       "scpi": "DIGital<n>:DISPlay <state>",
+      "scpiFast": "DIG<n>:DISP <state>",
       "description": "Set Digital Display",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Digital Channel (MSO) Settings",
       "args": [
         "state"
@@ -247,7 +470,11 @@
     },
     "Set_Digital_Label": {
       "scpi": "DIGital<n>:LABel <label>",
+      "scpiFast": "DIG<n>:LAB <label>",
       "description": "Set Digital Label",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Digital Channel (MSO) Settings",
       "args": [
         "label"
@@ -256,7 +483,11 @@
     },
     "Set_Digital_Position": {
       "scpi": "DIGital<n>:POSition <pos>",
+      "scpiFast": "DIG<n>:POS <pos>",
       "description": "Set Digital Position",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Digital Channel (MSO) Settings",
       "args": [
         "pos"
@@ -265,16 +496,94 @@
     },
     "Set_Display": {
       "scpi": "CHANnel<n>:DISPlay <state>",
+      "scpiFast": "CHAN<n>:DISP <state>",
       "description": "Set Display",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Analog Channel Settings",
       "args": [
         "state"
       ],
       "subsystem": "CHANnel"
     },
+    "Set_Display_Data": {
+      "scpi": ":DISPlay:DATA <value>",
+      "scpiFast": ":DISP:DATA <value>",
+      "description": "Set display data",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Display_Label": {
+      "scpi": ":DISPlay:LABel <value>",
+      "scpiFast": ":DISP:LAB <value>",
+      "description": "Set display label",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Display_Persistence": {
+      "scpi": "DISPlay:PERSistence <value>",
+      "scpiFast": "DISP:PERS <value>",
+      "description": "Set display persistence",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Display_Source": {
+      "scpi": ":DISPlay:SOURce <value>",
+      "scpiFast": ":DISP:SOUR <value>",
+      "description": "Set display source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Display_Vectors": {
+      "scpi": "DISPlay:VECTors <value>",
+      "scpiFast": "DISP:VECT <value>",
+      "description": "Set display vectors",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
     "Set_Edge_Slope": {
       "scpi": "TRIGger:EDGE:SLOPe <slope>",
+      "scpiFast": "TRIG:EDGE:SLOP <slope>",
       "description": "Set Edge Slope",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Edge Trigger Config",
       "args": [
         "slope"
@@ -283,7 +592,11 @@
     },
     "Set_Edge_Source": {
       "scpi": "TRIGger:EDGE:SOURce <source>",
+      "scpiFast": "TRIG:EDGE:SOUR <source>",
       "description": "Set Edge Source",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Edge Trigger Config",
       "args": [
         "source"
@@ -292,7 +605,11 @@
     },
     "Set_Edge_Source_CH1": {
       "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "scpiFast": ":TRIG:EDGE:SOUR <source>",
       "description": "Set Edge Source CH1",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trigger Configuration",
       "args": [
         "source"
@@ -301,7 +618,11 @@
     },
     "Set_Edge_Source_CH2": {
       "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "scpiFast": ":TRIG:EDGE:SOUR <source>",
       "description": "Set Edge Source CH2",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trigger Configuration",
       "args": [
         "source"
@@ -310,16 +631,105 @@
     },
     "Set_Edge_Source_EXT": {
       "scpi": ":TRIGger:EDGE:SOURce <source>",
+      "scpiFast": ":TRIG:EDGE:SOUR <source>",
       "description": "Set Edge Source EXT",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trigger Configuration",
       "args": [
         "source"
       ],
       "subsystem": "Trigger"
     },
+    "Set_Ese": {
+      "scpi": "*ESE <value>",
+      "description": "Set ese",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_External_Bwlimit": {
+      "scpi": ":EXTernal:BWLimit <value>",
+      "scpiFast": ":EXT:BWL <value>",
+      "description": "Set external bwlimit",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Set_External_Impedance": {
+      "scpi": "EXTernal:IMPedance <value>",
+      "scpiFast": "EXT:IMP <value>",
+      "description": "Set external impedance",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Set_External_Probe": {
+      "scpi": ":EXTernal:PROBe <value>",
+      "scpiFast": ":EXT:PROB <value>",
+      "description": "Set external probe",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Set_External_Range": {
+      "scpi": ":EXTernal:RANGe <value>",
+      "scpiFast": ":EXT:RANG <value>",
+      "description": "Set external range",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Set_External_Units": {
+      "scpi": ":EXTernal:UNITs <value>",
+      "scpiFast": ":EXT:UNIT <value>",
+      "description": "Set external units",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "EXT",
+      "unverified": true
+    },
     "Set_FFT_Scale": {
       "scpi": ":FUNCtion:SCALe <scale>",
+      "scpiFast": ":FUNC:SCAL <scale>",
       "description": "Set FFT Scale",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "scale"
@@ -328,16 +738,37 @@
     },
     "Set_Function_Operation": {
       "scpi": "FUNCtion:OPERation <op>",
+      "scpiFast": "FUNC:OPER <op>",
       "description": "Set Function Operation",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Math Function Settings",
       "args": [
         "op"
       ],
       "subsystem": "FUNCtion"
     },
+    "Set_Function_Reference": {
+      "scpi": ":FUNCtion:REFerence <value>",
+      "scpiFast": ":FUNC:REF <value>",
+      "description": "Set function reference",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FUNC",
+      "unverified": true
+    },
     "Set_Glitch_Condition": {
       "scpi": "TRIGger:GLITch:QUALifier <qual>",
+      "scpiFast": "TRIG:GLIT:QUAL <qual>",
       "description": "Set Glitch Condition",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Glitch/Pulse Width Config",
       "args": [
         "qual"
@@ -346,7 +777,11 @@
     },
     "Set_Glitch_Source": {
       "scpi": "TRIGger:GLITch:SOURce <source>",
+      "scpiFast": "TRIG:GLIT:SOUR <source>",
       "description": "Set Glitch Source",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Glitch/Pulse Width Config",
       "args": [
         "source"
@@ -355,16 +790,76 @@
     },
     "Set_Glitch_Width": {
       "scpi": "TRIGger:GLITch:LESSthan <time>",
+      "scpiFast": "TRIG:GLIT:LESS <time>",
       "description": "Set Glitch Width",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Glitch/Pulse Width Config",
       "args": [
         "time"
       ],
       "subsystem": "TRIGger"
     },
+    "Set_Hardcopy_Factors": {
+      "scpi": ":HARDcopy:FACTors <value>",
+      "scpiFast": ":HARD:FACT <value>",
+      "description": "Set hardcopy factors",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Set_Hardcopy_Ffeed": {
+      "scpi": ":HARDcopy:FFEed <value>",
+      "scpiFast": ":HARD:FFE <value>",
+      "description": "Set hardcopy ffeed",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Set_Hardcopy_Format": {
+      "scpi": "HARDcopy:FORMat <value>",
+      "scpiFast": "HARD:FORM <value>",
+      "description": "Obsolete and Discontinued Commands",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Set_Hardcopy_Grayscale": {
+      "scpi": ":HARDcopy:GRAYscale <value>",
+      "scpiFast": ":HARD:GRAY <value>",
+      "description": "Set hardcopy grayscale",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "HARD",
+      "unverified": true
+    },
     "Set_Holdoff": {
       "scpi": "TRIGger:HOLDoff <time>",
+      "scpiFast": "TRIG:HOLD <time>",
       "description": "Set Holdoff",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Trigger Settings",
       "args": [
         "time"
@@ -373,7 +868,11 @@
     },
     "Set_Impedance": {
       "scpi": "CHANnel<n>:IMPedance <imp>",
+      "scpiFast": "CHAN<n>:IMP <imp>",
       "description": "Set Impedance",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Analog Channel Settings",
       "args": [
         "imp"
@@ -382,7 +881,15 @@
     },
     "Set_Invert": {
       "scpi": "CHANnel<n>:INVert <state>",
+      "scpiFast": "CHAN<n>:INV <state>",
       "description": "Set Invert",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Analog Channel Settings",
       "args": [
         "state"
@@ -391,61 +898,299 @@
     },
     "Set_Marker_Mode": {
       "scpi": "MARKer:MODE <mode>",
+      "scpiFast": "MARK:MODE <mode>",
       "description": "Set Marker Mode",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Cursor Settings",
       "args": [
         "mode"
       ],
       "subsystem": "MARKer"
     },
-    "Set_Measure_Source": {
-      "scpi": "MEASure:SOURce <source>",
-      "description": "Set Measure Source",
-      "group": "Measurement Settings",
-      "args": [
-        "source"
-      ],
-      "subsystem": "MEASure"
-    },
-    "Set_Measure_Thresholds": {
-      "scpi": "MEASure:DEFine:THResholds <mode>",
-      "description": "Set Measure Thresholds",
-      "group": "Measurement Settings",
-      "args": [
-        "mode"
-      ],
-      "subsystem": "MEASure"
-    },
-    "Set_Mode": {
-      "scpi": "TIMebase:MODE <mode>",
-      "description": "Set Mode",
-      "group": "Timebase (Horizontal) Settings",
-      "args": [
-        "mode"
-      ],
-      "subsystem": "TIMebase"
-    },
-    "Set_Channel_Offset": {
-      "scpi": "CHANnel1:OFFSet <offset>",
-      "description": "Set Channel Offset",
-      "group": "Channel 1 Settings",
-      "args": [
-        "offset"
-      ],
-      "subsystem": "CHANnel"
-    },
     "Set_Math_Offset": {
       "scpi": ":FUNCtion:OFFSet <offset>",
+      "scpiFast": ":FUNC:OFFS <offset>",
       "description": "Set Math Offset",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Vertical Scale & Offset",
       "args": [
         "offset"
       ],
       "subsystem": "Math_FFT"
     },
+    "Set_Math_Range": {
+      "scpi": ":FUNCtion:RANGe <range>",
+      "scpiFast": ":FUNC:RANG <range>",
+      "description": "Set Math Range",
+      "arg": {
+        "kind": "numeric"
+      },
+      "group": "Vertical Scale & Offset",
+      "args": [
+        "range"
+      ],
+      "subsystem": "Math_FFT"
+    },
+    "Set_Measure_Count": {
+      "scpi": ":MEASure:COUNter <value>",
+      "scpiFast": ":MEAS:COUN <value>",
+      "description": "Set measure count",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Delay": {
+      "scpi": ":MEASure:DELay <value>",
+      "scpiFast": ":MEAS:DEL <value>",
+      "description": "Set measure delay",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Falltime": {
+      "scpi": ":MEASure:FALLtime <value>",
+      "scpiFast": ":MEAS:FALL <value>",
+      "description": "Set measure falltime",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Nwidth": {
+      "scpi": ":MEASure:NWIDth <value>",
+      "scpiFast": ":MEAS:NWID <value>",
+      "description": "Set measure nwidth",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Overshoot": {
+      "scpi": ":MEASure:OVERshoot <value>",
+      "scpiFast": ":MEAS:OVER <value>",
+      "description": "Set measure overshoot",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Phase": {
+      "scpi": ":MEASure:PHASe <value>",
+      "scpiFast": ":MEAS:PHAS <value>",
+      "description": "Set measure phase",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Preshoot": {
+      "scpi": ":MEASure:PREShoot <value>",
+      "scpiFast": ":MEAS:PRES <value>",
+      "description": "Set measure preshoot",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Pwidth": {
+      "scpi": ":MEASure:PWIDth <value>",
+      "scpiFast": ":MEAS:PWID <value>",
+      "description": "Set measure pwidth",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Show": {
+      "scpi": ":MEASure:SHOW <value>",
+      "scpiFast": ":MEAS:SHOW <value>",
+      "description": "Set measure show",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Source": {
+      "scpi": "MEASure:SOURce <source>",
+      "scpiFast": "MEAS:SOUR <source>",
+      "description": "Set Measure Source",
+      "arg": {
+        "kind": "enum"
+      },
+      "group": "Measurement Settings",
+      "args": [
+        "source"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Set_Measure_Tedge": {
+      "scpi": ":MEASure:TEDGe <value>",
+      "scpiFast": ":MEAS:TEDG <value>",
+      "description": "Set measure tedge",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Thresholds": {
+      "scpi": "MEASure:DEFine:THResholds <mode>",
+      "scpiFast": "MEAS:DEF:THR <mode>",
+      "description": "Set Measure Thresholds",
+      "arg": {
+        "kind": "numeric"
+      },
+      "group": "Measurement Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "MEASure"
+    },
+    "Set_Measure_Tvalue": {
+      "scpi": "MEASure:TVALue <value>",
+      "scpiFast": "MEAS:TVAL <value>",
+      "description": "Set measure tvalue",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Vamplitude": {
+      "scpi": ":MEASure:VAMPlitude <value>",
+      "scpiFast": ":MEAS:VAMP <value>",
+      "description": "Set measure vamplitude",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Vbase": {
+      "scpi": ":MEASure:VBASe <value>",
+      "scpiFast": ":MEAS:VBAS <value>",
+      "description": "Set measure vbase",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Vtop": {
+      "scpi": ":MEASure:VTOP <value>",
+      "scpiFast": ":MEAS:VTOP <value>",
+      "description": "Set measure vtop",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Xmax": {
+      "scpi": "MEASure:XMAX <value>",
+      "scpiFast": "MEAS:XMAX <value>",
+      "description": "Obsolete and Discontinued Commands",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Xmin": {
+      "scpi": "MEASure:XMIN <value>",
+      "scpiFast": "MEAS:XMIN <value>",
+      "description": "Obsolete and Discontinued Commands",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Mode": {
+      "scpi": "TIMebase:MODE <mode>",
+      "scpiFast": "TIM:MODE <mode>",
+      "description": "Set Mode",
+      "arg": {
+        "kind": "enum"
+      },
+      "group": "Timebase (Horizontal) Settings",
+      "args": [
+        "mode"
+      ],
+      "subsystem": "TIMebase"
+    },
     "Set_Operation": {
       "scpi": ":FUNCtion:OPERation <operation>",
+      "scpiFast": ":FUNC:OPER <operation>",
       "description": "Set Operation",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Select Operation",
       "args": [
         "operation"
@@ -454,7 +1199,11 @@
     },
     "Set_Pod_Threshold": {
       "scpi": "POD<n>:THReshold <thresh>",
+      "scpiFast": "POD<n>:THR <thresh>",
       "description": "Set Pod Threshold",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Digital Channel (MSO) Settings",
       "args": [
         "thresh"
@@ -463,7 +1212,11 @@
     },
     "Set_Points": {
       "scpi": "ACQuire:POINts <points>",
+      "scpiFast": "ACQ:POIN <points>",
       "description": "Set Points",
+      "arg": {
+        "kind": "integer"
+      },
       "group": "Acquisition Settings",
       "args": [
         "points"
@@ -472,7 +1225,12 @@
     },
     "Set_Position": {
       "scpi": "TIMebase:POSition <pos>",
+      "scpiFast": "TIM:POS <pos>",
       "description": "Set Position",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "Timebase (Horizontal) Settings",
       "args": [
         "pos"
@@ -481,61 +1239,74 @@
     },
     "Set_Probe": {
       "scpi": "CHANnel<n>:PROBe <atten>",
+      "scpiFast": "CHAN<n>:PROB <atten>",
       "description": "Set Probe",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Analog Channel Settings",
       "args": [
         "atten"
       ],
       "subsystem": "CHANnel"
     },
-    "Set_Channel_Range": {
-      "scpi": "CHANnel1:RANGe <range>",
-      "description": "Set Channel Range",
-      "group": "Channel 1 Settings",
+    "Set_Probe_Skew": {
+      "scpi": ":PROBe:SKEW <value>",
+      "scpiFast": ":PROB:SKEW <value>",
+      "description": "Set probe skew",
+      "arg": {
+        "kind": "numeric"
+      },
       "args": [
-        "range"
+        "value"
       ],
-      "subsystem": "CHANnel"
+      "subsystem": "PROB",
+      "unverified": true
     },
-    "Set_Math_Range": {
-      "scpi": ":FUNCtion:RANGe <range>",
-      "description": "Set Math Range",
-      "group": "Vertical Scale & Offset",
+    "Set_Rcl": {
+      "scpi": "*RCL <value>",
+      "description": "Set rcl",
+      "arg": {
+        "kind": "unknown"
+      },
       "args": [
-        "range"
+        "value"
       ],
-      "subsystem": "Math_FFT"
+      "subsystem": "Common",
+      "unverified": true
     },
     "Set_Reference": {
       "scpi": "TIMebase:REFerence <ref>",
+      "scpiFast": "TIM:REF <ref>",
       "description": "Set Reference",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Timebase (Horizontal) Settings",
       "args": [
         "ref"
       ],
       "subsystem": "TIMebase"
     },
-    "Set_Channel_Scale": {
-      "scpi": "CHANnel1:SCALe <scale>",
-      "description": "Set Channel Scale",
-      "group": "Channel 1 Settings",
+    "Set_Sav": {
+      "scpi": "*SAV <value>",
+      "description": "Set sav",
+      "arg": {
+        "kind": "unknown"
+      },
       "args": [
-        "scale"
+        "value"
       ],
-      "subsystem": "CHANnel"
-    },
-    "Set_Timebase_Scale": {
-      "scpi": ":TIMebase:SCALe <scale>",
-      "description": "Set Timebase Scale",
-      "group": "Horizontal Controls",
-      "args": [
-        "scale"
-      ],
-      "subsystem": "Time"
+      "subsystem": "Common",
+      "unverified": true
     },
     "Set_Source1": {
       "scpi": "FUNCtion:SOURce1 <src>",
+      "scpiFast": "FUNC:SOUR1 <src>",
       "description": "Set Source1",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Math Function Settings",
       "args": [
         "src"
@@ -544,7 +1315,11 @@
     },
     "Set_Source2": {
       "scpi": "FUNCtion:SOURce2 <src>",
+      "scpiFast": "FUNC:SOUR2 <src>",
       "description": "Set Source2",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Math Function Settings",
       "args": [
         "src"
@@ -553,52 +1328,745 @@
     },
     "Set_Span": {
       "scpi": ":FUNCtion:SPAN <span>",
+      "scpiFast": ":FUNC:SPAN <span>",
       "description": "Set Span",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "span"
       ],
       "subsystem": "Math_FFT"
     },
+    "Set_Sre": {
+      "scpi": "*SRE <value>",
+      "description": "Set sre",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_System_Date": {
+      "scpi": ":SYSTem:DATE <value>",
+      "scpiFast": ":SYST:DATE <value>",
+      "description": "Set system date",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Time": {
+      "scpi": ":SYSTem:TIME <value>",
+      "scpiFast": ":SYST:TIME <value>",
+      "description": "Set system time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
     "Set_Timebase_Position": {
       "scpi": ":TIMebase:POSition <position>",
+      "scpiFast": ":TIM:POS <position>",
       "description": "Set Timebase Position",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "Horizontal Controls",
       "args": [
         "position"
       ],
       "subsystem": "Time"
     },
+    "Set_Timebase_Range": {
+      "scpi": ":TIMebase:RANGe <value>",
+      "scpiFast": ":TIM:RANG <value>",
+      "description": "Set timebase range",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Set_Timebase_Scale": {
+      "scpi": ":TIMebase:SCALe <scale>",
+      "scpiFast": ":TIM:SCAL <scale>",
+      "description": "Set Timebase Scale",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "group": "Horizontal Controls",
+      "args": [
+        "scale"
+      ],
+      "subsystem": "Time"
+    },
+    "Set_Timebase_Window_Range": {
+      "scpi": ":TIMebase:WINDow:RANGe <value>",
+      "scpiFast": ":TIM:WIND:RANG <value>",
+      "description": "Set timebase window range",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Acknowledge": {
+      "scpi": ":TRIGger:CAN:ACKNowledge <value>",
+      "scpiFast": ":TRIG:CAN:ACKN <value>",
+      "description": "Set trigger can acknowledge",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Pattern_Data": {
+      "scpi": ":TRIGger:CAN:PATTern:DATA <value>",
+      "scpiFast": ":TRIG:CAN:PATT:DATA <value>",
+      "description": "Table 5-1",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Pattern_Id": {
+      "scpi": "TRIGger:CAN:PATTern:ID <value>",
+      "scpiFast": "TRIG:CAN:PATT:ID <value>",
+      "description": "Table 5-1",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Pattern_Id_Mode": {
+      "scpi": ":TRIGger:CAN:PATTern:ID:MODE <value>",
+      "scpiFast": ":TRIG:CAN:PATT:ID:MODE <value>",
+      "description": "Set trigger can pattern id mode",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Samplepoint": {
+      "scpi": ":TRIGger:CAN:SAMPlepoint <value>",
+      "scpiFast": ":TRIG:CAN:SAMP <value>",
+      "description": "Set trigger can samplepoint",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Signal_Baudrate": {
+      "scpi": ":TRIGger:CAN:SIGNal:BAUDrate <value>",
+      "scpiFast": ":TRIG:CAN:SIGN:BAUD <value>",
+      "description": "Set trigger can signal baudrate",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Source": {
+      "scpi": ":TRIGger:CAN:SOURce <value>",
+      "scpiFast": ":TRIG:CAN:SOUR <value>",
+      "description": "Set trigger can source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Can_Trigger": {
+      "scpi": ":TRIGger:CAN:TRIGger <value>",
+      "scpiFast": ":TRIG:CAN:TRIG <value>",
+      "description": "Set trigger can trigger",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Duration_Pattern": {
+      "scpi": ":TRIGger:DURation:PATTern <value>",
+      "scpiFast": ":TRIG:DUR:PATT <value>",
+      "description": "Set trigger duration pattern",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Duration_Qualifier": {
+      "scpi": ":TRIGger:DURation:QUALifier <value>",
+      "scpiFast": ":TRIG:DUR:QUAL <value>",
+      "description": "Set trigger duration qualifier",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Duration_Range": {
+      "scpi": ":TRIGger:DURation:RANGe <value>",
+      "scpiFast": ":TRIG:DUR:RANG <value>",
+      "description": "Set trigger duration range",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Glitch_Level": {
+      "scpi": ":TRIGger:GLITch:LEVel <value>",
+      "scpiFast": ":TRIG:GLIT:LEV <value>",
+      "description": "Set trigger glitch level",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Glitch_Polarity": {
+      "scpi": ":TRIGger:GLITch:POLarity <value>",
+      "scpiFast": ":TRIG:GLIT:POL <value>",
+      "description": "Set trigger glitch polarity",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Glitch_Range": {
+      "scpi": ":TRIGger:GLITch:RANGe <value>",
+      "scpiFast": ":TRIG:GLIT:RANG <value>",
+      "description": "Set trigger glitch range",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Hfreject": {
+      "scpi": ":TRIGger:HFReject <value>",
+      "scpiFast": ":TRIG:HFR <value>",
+      "description": "Set trigger hfreject",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Iic_Pattern_Address": {
+      "scpi": ":TRIGger:IIC:PATTern:ADDRess <value>",
+      "scpiFast": ":TRIG:IIC:PATT:ADDR <value>",
+      "description": "Set trigger iic pattern address",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Iic_Pattern_Data": {
+      "scpi": ":TRIGger:IIC:PATTern:DATA <value>",
+      "scpiFast": ":TRIG:IIC:PATT:DATA <value>",
+      "description": "Set trigger iic pattern data",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Iic_Trigger_Qualifier": {
+      "scpi": ":TRIGger:IIC:TRIGger:QUALifier <value>",
+      "scpiFast": ":TRIG:IIC:TRIG:QUAL <value>",
+      "description": "Set trigger iic trigger qualifier",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
     "Set_Trigger_Level": {
       "scpi": ":TRIGger:EDGE:LEVel <level>",
+      "scpiFast": ":TRIG:EDGE:LEV <level>",
       "description": "Set Trigger Level",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Trigger Configuration",
       "args": [
         "level"
       ],
       "subsystem": "Trigger"
     },
+    "Set_Trigger_Lin_Signal_Baudrate": {
+      "scpi": ":TRIGger:LIN:SIGNal:BAUDrate <value>",
+      "scpiFast": ":TRIG:LIN:SIGN:BAUD <value>",
+      "description": "Set trigger lin signal baudrate",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Lin_Source": {
+      "scpi": ":TRIGger:LIN:SOURce <value>",
+      "scpiFast": ":TRIG:LIN:SOUR <value>",
+      "description": "Set trigger lin source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Lin_Trigger": {
+      "scpi": ":TRIGger:LIN:TRIGger <value>",
+      "scpiFast": ":TRIG:LIN:TRIG <value>",
+      "description": "Set trigger lin trigger",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
     "Set_Trigger_Mode": {
       "scpi": ":TRIGger:MODE <mode>",
+      "scpiFast": ":TRIG:MODE <mode>",
       "description": "Set Trigger Mode",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trigger Configuration",
       "args": [
         "mode"
       ],
       "subsystem": "Trigger"
     },
+    "Set_Trigger_Nreject": {
+      "scpi": ":TRIGger:NREJect <value>",
+      "scpiFast": ":TRIG:NREJ <value>",
+      "description": "Set trigger nreject",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Pattern": {
+      "scpi": ":TRIGger:PATTern <value>",
+      "scpiFast": ":TRIG:PATT <value>",
+      "description": "Set trigger pattern",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Count": {
+      "scpi": ":TRIGger:SEQuence:COUNt <value>",
+      "scpiFast": ":TRIG:SEQ:COUN <value>",
+      "description": "Set trigger sequence count",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Find": {
+      "scpi": ":TRIGGER:SEQuence:FIND <value>",
+      "scpiFast": ":TRIG:SEQ:FIND <value>",
+      "description": "Set trigger sequence find",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Reset": {
+      "scpi": ":TRIGGER:SEQuence:RESet <value>",
+      "scpiFast": ":TRIG:SEQ:RES <value>",
+      "description": "Set trigger sequence reset",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Timebase": {
+      "scpi": ":TRIGGER:SEQuence:TIMer <value>",
+      "scpiFast": ":TRIG:SEQ:TIM <value>",
+      "description": "Set trigger sequence timebase",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Trigger": {
+      "scpi": ":TRIGGER:SEQuence:TRIGger <value>",
+      "scpiFast": ":TRIG:SEQ:TRIG <value>",
+      "description": "Set trigger sequence trigger",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Clock_Slope": {
+      "scpi": ":TRIGger:SPI:CLOCk:SLOPe <value>",
+      "scpiFast": ":TRIG:SPI:CLOC:SLOP <value>",
+      "description": "Set trigger spi clock slope",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Clock_Timebase": {
+      "scpi": ":TRIGger:SPI:CLOCk:TIMeout <value>",
+      "scpiFast": ":TRIG:SPI:CLOC:TIM <value>",
+      "description": "Set trigger spi clock timebase",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Frame": {
+      "scpi": ":TRIGger:SPI:FRAMing <value>",
+      "scpiFast": ":TRIG:SPI:FRAM <value>",
+      "description": "Set trigger spi frame",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Pattern_Data": {
+      "scpi": ":TRIGger:SPI:PATTern:DATA <value>",
+      "scpiFast": ":TRIG:SPI:PATT:DATA <value>",
+      "description": "Set trigger spi pattern data",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Pattern_Width": {
+      "scpi": "TRIGger:SPI:PATTern:WIDth <value>",
+      "scpiFast": "TRIG:SPI:PATT:WID <value>",
+      "description": "Set trigger spi pattern width",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Source_Clock": {
+      "scpi": ":TRIGger:SPI:SOURce:CLOCk <value>",
+      "scpiFast": ":TRIG:SPI:SOUR:CLOC <value>",
+      "description": "Set trigger spi source clock",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Source_Data": {
+      "scpi": ":TRIGger:SPI:SOURce:DATA <value>",
+      "scpiFast": ":TRIG:SPI:SOUR:DATA <value>",
+      "description": "Set trigger spi source data",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Spi_Source_Frame": {
+      "scpi": ":TRIGger:SPI:SOURce:FRAMe <value>",
+      "scpiFast": ":TRIG:SPI:SOUR:FRAM <value>",
+      "description": "Set trigger spi source frame",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
     "Set_Trigger_Sweep": {
       "scpi": ":TRIGger:SWEep <sweep>",
+      "scpiFast": ":TRIG:SWE <sweep>",
       "description": "Set Trigger Sweep",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trigger Configuration",
       "args": [
         "sweep"
       ],
       "subsystem": "Trigger"
     },
+    "Set_Trigger_Tv_Line": {
+      "scpi": ":TRIGger:TV:LINE <value>",
+      "scpiFast": ":TRIG:TV:LINE <value>",
+      "description": "Set trigger tv line",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Tv_Mode": {
+      "scpi": "TRIGger:TV:MODE <value>",
+      "scpiFast": "TRIG:TV:MODE <value>",
+      "description": "Set trigger tv mode",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Tv_Polarity": {
+      "scpi": ":TRIGger:TV:POLarity <value>",
+      "scpiFast": ":TRIG:TV:POL <value>",
+      "description": "Set trigger tv polarity",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Tv_Source": {
+      "scpi": ":TRIGger:TV:SOURce <value>",
+      "scpiFast": ":TRIG:TV:SOUR <value>",
+      "description": "Set trigger tv source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Tv_Standard": {
+      "scpi": ":TRIGger:TV:STANdard <value>",
+      "scpiFast": ":TRIG:TV:STAN <value>",
+      "description": "Set trigger tv standard",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Usb_Source_Dminus": {
+      "scpi": ":TRIGger:USB:SOURce:DMINus <value>",
+      "scpiFast": ":TRIG:USB:SOUR:DMIN <value>",
+      "description": "Set trigger usb source dminus",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Usb_Source_Dplus": {
+      "scpi": ":TRIGger:USB:SOURce:DPLus <value>",
+      "scpiFast": ":TRIG:USB:SOUR:DPL <value>",
+      "description": "Set trigger usb source dplus",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Usb_Speed": {
+      "scpi": ":TRIGger:USB:SPEed <value>",
+      "scpiFast": ":TRIG:USB:SPE <value>",
+      "description": "Set trigger usb speed",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Usb_Trigger": {
+      "scpi": ":TRIGger:USB:TRIGer <value>",
+      "scpiFast": ":TRIG:USB:TRIG <value>",
+      "description": "Set trigger usb trigger",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
     "Set_Unsigned": {
       "scpi": "WAVeform:UNSigned <state>",
+      "scpiFast": "WAV:UNS <state>",
       "description": "Set Unsigned",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Waveform Data Transfer Settings",
       "args": [
         "state"
@@ -607,7 +2075,11 @@
     },
     "Set_Waveform_Format": {
       "scpi": "WAVeform:FORMat <format>",
+      "scpiFast": "WAV:FORM <format>",
       "description": "Set Waveform Format",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Waveform Data Transfer Settings",
       "args": [
         "format"
@@ -616,7 +2088,11 @@
     },
     "Set_Waveform_Points": {
       "scpi": "WAVeform:POINts <points>",
+      "scpiFast": "WAV:POIN <points>",
       "description": "Set Waveform Points",
+      "arg": {
+        "kind": "integer"
+      },
       "group": "Waveform Data Transfer Settings",
       "args": [
         "points"
@@ -625,16 +2101,37 @@
     },
     "Set_Waveform_Source": {
       "scpi": "WAVeform:SOURce <source>",
+      "scpiFast": "WAV:SOUR <source>",
       "description": "Set Waveform Source",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Waveform Data Transfer Settings",
       "args": [
         "source"
       ],
       "subsystem": "WAVeform"
     },
+    "Set_Waveform_View": {
+      "scpi": ":WAVeform:VIEW <value>",
+      "scpiFast": ":WAV:VIEW <value>",
+      "description": "Set waveform view",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "WAV",
+      "unverified": true
+    },
     "Set_Window_FLATtop": {
       "scpi": ":FUNCtion:WINDow <window>",
+      "scpiFast": ":FUNC:WIND <window>",
       "description": "Set Window FLATtop",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "window"
@@ -643,7 +2140,11 @@
     },
     "Set_Window_HANNing": {
       "scpi": ":FUNCtion:WINDow <window>",
+      "scpiFast": ":FUNC:WIND <window>",
       "description": "Set Window HANNing",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "window"
@@ -652,7 +2153,12 @@
     },
     "Set_Window_Position": {
       "scpi": "TIMebase:WINDow:POSition <pos>",
+      "scpiFast": "TIM:WIND:POS <pos>",
       "description": "Set Window Position",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "Zoom Window Settings",
       "args": [
         "pos"
@@ -661,7 +2167,11 @@
     },
     "Set_Window_RECTangular": {
       "scpi": ":FUNCtion:WINDow <window>",
+      "scpiFast": ":FUNC:WIND <window>",
       "description": "Set Window RECTangular",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "FFT Specific Configuration",
       "args": [
         "window"
@@ -670,7 +2180,12 @@
     },
     "Set_Window_Scale": {
       "scpi": "TIMebase:WINDow:SCALe <scale>",
+      "scpiFast": "TIM:WIND:SCAL <scale>",
       "description": "Set Window Scale",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "Zoom Window Settings",
       "args": [
         "scale"
@@ -679,7 +2194,11 @@
     },
     "Set_X1": {
       "scpi": "MARKer:X1Position <pos>",
+      "scpiFast": "MARK:X1Position <pos>",
       "description": "Set X1",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Time/Frequency Markers",
       "args": [
         "pos"
@@ -688,7 +2207,11 @@
     },
     "Set_X2": {
       "scpi": "MARKer:X2Position <pos>",
+      "scpiFast": "MARK:X2Position <pos>",
       "description": "Set X2",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Time/Frequency Markers",
       "args": [
         "pos"
@@ -697,7 +2220,11 @@
     },
     "Set_Y1": {
       "scpi": "MARKer:Y1Position <lev>",
+      "scpiFast": "MARK:Y1Position <lev>",
       "description": "Set Y1",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Voltage Markers",
       "args": [
         "lev"
@@ -706,7 +2233,11 @@
     },
     "Set_Y2": {
       "scpi": "MARKer:Y2Position <lev>",
+      "scpiFast": "MARK:Y2Position <lev>",
       "description": "Set Y2",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Voltage Markers",
       "args": [
         "lev"
@@ -717,48 +2248,105 @@
   "do": {
     "Autoscale": {
       "scpi": "AUToscale",
+      "scpiFast": "AUT",
       "description": "Autoscale",
       "group": "Root Action Commands",
       "subsystem": "Root"
     },
     "Digitize_Channel": {
       "scpi": "DIGitize <chan>",
+      "scpiFast": "DIG <chan>",
       "description": "Digitize Channel",
       "group": "Root Action Commands",
       "subsystem": "Root"
     },
     "Do_Autoscale": {
       "scpi": ":AUToscale",
+      "scpiFast": ":AUT",
       "description": "Do Autoscale",
       "group": "Actions and Toggles",
       "subsystem": "System"
     },
     "Do_CH1_OFF": {
       "scpi": ":CHANnel1:DISPlay OFF",
+      "scpiFast": ":CHAN1:DISP OFF",
       "description": "Do CH1 OFF",
       "group": "Actions and Toggles",
       "subsystem": "Channel_1"
     },
     "Do_CH1_ON": {
       "scpi": ":CHANnel1:DISPlay ON",
+      "scpiFast": ":CHAN1:DISP ON",
       "description": "Do CH1 ON",
       "group": "Actions and Toggles",
       "subsystem": "Channel_1"
     },
     "Do_CH2_OFF": {
       "scpi": ":CHANnel2:DISPlay OFF",
+      "scpiFast": ":CHAN2:DISP OFF",
       "description": "Do CH2 OFF",
       "group": "Actions and Toggles",
       "subsystem": "Channel_2"
     },
     "Do_CH2_ON": {
       "scpi": ":CHANnel2:DISPlay ON",
+      "scpiFast": ":CHAN2:DISP ON",
       "description": "Do CH2 ON",
       "group": "Actions and Toggles",
       "subsystem": "Channel_2"
     },
+    "Do_Channel_Activity": {
+      "scpi": "CHANnel:ACTivity",
+      "scpiFast": "CHAN:ACT",
+      "description": "Do channel activity",
+      "subsystem": "CHAN",
+      "unverified": true
+    },
+    "Do_Channel_Bwlimit": {
+      "scpi": ":CHANNEL1:BWLIMIT",
+      "scpiFast": ":CHAN1:BWL",
+      "description": "Do channel bwlimit",
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Do_Channel_Math": {
+      "scpi": "CHANnel:MATH",
+      "scpiFast": "CHAN:MATH",
+      "description": "Do channel math",
+      "subsystem": "CHAN",
+      "unverified": true
+    },
+    "Do_Channel_Offset": {
+      "scpi": ":CHANNEL1:OFFSET",
+      "scpiFast": ":CHAN1:OFFS",
+      "description": "Do channel offset",
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Do_Channel_Probe": {
+      "scpi": ":CHANNEL1:PROBE",
+      "scpiFast": ":CHAN1:PROB",
+      "description": "Setting Up the Instrument",
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Do_Channel_Skew": {
+      "scpi": "CHANnel2:SKEW",
+      "scpiFast": "CHAN2:SKEW",
+      "description": "Do channel skew",
+      "subsystem": "CHAN",
+      "unverified": true
+    },
+    "Do_Channel_Threshold": {
+      "scpi": "CHANnel:THReshold",
+      "scpiFast": "CHAN:THR",
+      "description": "Do channel threshold",
+      "subsystem": "CHAN",
+      "unverified": true
+    },
     "Do_Clear_Display": {
       "scpi": ":DISPlay:CLEar",
+      "scpiFast": ":DISP:CLE",
       "description": "Do Clear Display",
       "group": "Actions and Toggles",
       "subsystem": "System"
@@ -769,17 +2357,284 @@
       "group": "Actions and Toggles",
       "subsystem": "System"
     },
+    "Do_Display_Column": {
+      "scpi": "DISPlay:COLumn",
+      "scpiFast": "DISP:COL",
+      "description": "Do display column",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Connect": {
+      "scpi": "DISPlay:CONNect",
+      "scpiFast": "DISP:CONN",
+      "description": "Do display connect",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Grid": {
+      "scpi": "DISPlay:GRID",
+      "scpiFast": "DISP:GRID",
+      "description": "Do display grid",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Invert": {
+      "scpi": "DISPlay:INVerse",
+      "scpiFast": "DISP:INV",
+      "description": "Do display invert",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Line": {
+      "scpi": "DISPLay:LINE",
+      "scpiFast": "DISPL:LINE",
+      "description": "Do display line",
+      "subsystem": "DISPL",
+      "unverified": true
+    },
+    "Do_Display_Order": {
+      "scpi": "DISPlay:ORDer",
+      "scpiFast": "DISP:ORD",
+      "description": "Do display order",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Pixel": {
+      "scpi": "DISPlay:PIXel",
+      "scpiFast": "DISP:PIX",
+      "description": "Do display pixel",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Position": {
+      "scpi": "DISPlay:POSition",
+      "scpiFast": "DISP:POS",
+      "description": "Do display position",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Row": {
+      "scpi": "DISPlay:ROW",
+      "scpiFast": "DISP:ROW",
+      "description": "Do display row",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Display_Text": {
+      "scpi": "DISPlay:TEXT",
+      "scpiFast": "DISP:TEXT",
+      "description": "Do display text",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_External_Input": {
+      "scpi": "EXTernal:INPut",
+      "scpiFast": "EXT:INP",
+      "description": "Do external input",
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Do_External_Pmode": {
+      "scpi": "EXTernal:PMODe",
+      "scpiFast": "EXT:PMOD",
+      "description": "Do external pmode",
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Do_External_Protection_Clear": {
+      "scpi": ":EXTernal:PROTection:CLEAR",
+      "scpiFast": ":EXT:PROT:CLE",
+      "description": "Do external protection clear",
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Do_Function_Move": {
+      "scpi": "FUNCtion:MOVE",
+      "scpiFast": "FUNC:MOVE",
+      "description": "Do function move",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Function_Peaks": {
+      "scpi": "FUNCtion:PEAKs",
+      "scpiFast": "FUNC:PEAK",
+      "description": "Do function peaks",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Function_View": {
+      "scpi": "FUNCtion:VIEW",
+      "scpiFast": "FUNC:VIEW",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Do_Hardcopy_Address": {
+      "scpi": "HARDcopy:ADDRess",
+      "scpiFast": "HARD:ADDR",
+      "description": "Do hardcopy address",
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Do_Hardcopy_Destination": {
+      "scpi": ":HARDcopy:DESTination",
+      "scpiFast": ":HARD:DEST",
+      "description": "Do hardcopy destination",
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Do_Hardcopy_Device": {
+      "scpi": "HARDcopy:DEVice",
+      "scpiFast": "HARD:DEV",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Do_Marker_Tdelta": {
+      "scpi": "MARKer:TDELta",
+      "scpiFast": "MARK:TDEL",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MARK",
+      "unverified": true
+    },
+    "Do_Marker_Vdelta": {
+      "scpi": "MARKer:VDELta",
+      "scpiFast": "MARK:VDEL",
+      "description": "Do marker vdelta",
+      "subsystem": "MARK",
+      "unverified": true
+    },
     "Do_Math_OFF": {
       "scpi": ":FUNCtion:DISPlay OFF",
+      "scpiFast": ":FUNC:DISP OFF",
       "description": "Do Math OFF",
       "group": "Math Display Controls",
       "subsystem": "Math_FFT"
     },
     "Do_Math_ON": {
       "scpi": ":FUNCtion:DISPlay ON",
+      "scpiFast": ":FUNC:DISP ON",
       "description": "Do Math ON",
       "group": "Math Display Controls",
       "subsystem": "Math_FFT"
+    },
+    "Do_Measure_Clear": {
+      "scpi": "MEASure:CLEar",
+      "scpiFast": "MEAS:CLE",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Lower": {
+      "scpi": "MEASure:LOWer",
+      "scpiFast": "MEAS:LOW",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Risetime": {
+      "scpi": ":MEASure:RISEtime",
+      "scpiFast": ":MEAS:RISE",
+      "description": "Do measure risetime",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Scratch": {
+      "scpi": "MEASure:SCRatch",
+      "scpiFast": "MEAS:SCR",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tdelta": {
+      "scpi": "MEASure:TDELta",
+      "scpiFast": "MEAS:TDEL",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Threshold": {
+      "scpi": "MEASure:THResholds",
+      "scpiFast": "MEAS:THR",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tmax": {
+      "scpi": "MEASure:TMAX",
+      "scpiFast": "MEAS:TMAX",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tmin": {
+      "scpi": "MEASure:TMIN",
+      "scpiFast": "MEAS:TMIN",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tstart": {
+      "scpi": "MEASure:TSTArt",
+      "scpiFast": "MEAS:TSTA",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tstop": {
+      "scpi": "MEASure:TSTOp",
+      "scpiFast": "MEAS:TSTO",
+      "description": "Obsolete and Discontinued Commands",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Tvolt": {
+      "scpi": "MEASure:TVOLt",
+      "scpiFast": "MEAS:TVOL",
+      "description": "Do measure tvolt",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Upper": {
+      "scpi": "MEASure:UPPer",
+      "scpiFast": "MEAS:UPP",
+      "description": "Do measure upper",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Vdelta": {
+      "scpi": "MEASure:VDELta",
+      "scpiFast": "MEAS:VDEL",
+      "description": "Do measure vdelta",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Vstart": {
+      "scpi": "MEASure:VSTArt",
+      "scpiFast": "MEAS:VSTA",
+      "description": "Do measure vstart",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Vstop": {
+      "scpi": "MEASure:VSTOp",
+      "scpiFast": "MEAS:VSTO",
+      "description": "Do measure vstop",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Opc": {
+      "scpi": "*OPC",
+      "description": "Do opc",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Protection_Clear": {
+      "scpi": ":PROTection:CLEAR",
+      "scpiFast": ":PROT:CLE",
+      "description": "Do protection clear",
+      "subsystem": "PROT",
+      "unverified": true
     },
     "Do_Reset": {
       "scpi": "*RST",
@@ -795,6 +2650,7 @@
     },
     "Do_Single": {
       "scpi": ":SINGle",
+      "scpiFast": ":SING",
       "description": "Do Single",
       "group": "Actions and Toggles",
       "subsystem": "System"
@@ -805,6 +2661,283 @@
       "group": "Actions and Toggles",
       "subsystem": "System"
     },
+    "Do_System_Dsp": {
+      "scpi": "SYSTem:DSP",
+      "scpiFast": "SYST:DSP",
+      "description": "Message Queue",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Key": {
+      "scpi": "SYSTem:KEY",
+      "scpiFast": "SYST:KEY",
+      "description": "Do system key",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_Timebase_Delay": {
+      "scpi": "TIM:DEL",
+      "description": "Program Header Options",
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Do_Timebase_Window": {
+      "scpi": "TIMebase:WINDow",
+      "scpiFast": "TIM:WIND",
+      "description": "Command Set Organization",
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Do_Trg": {
+      "scpi": "*TRG",
+      "description": "Do trg",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Trigger_Advanced": {
+      "scpi": "TRIGger:ADVanced",
+      "scpiFast": "TRIG:ADV",
+      "description": "Do trigger advanced",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Can": {
+      "scpi": "TRIGger:CAN",
+      "scpiFast": "TRIG:CAN",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Can_Pattern": {
+      "scpi": "TRIGger:CAN:PATTern",
+      "scpiFast": "TRIG:CAN:PATT",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Can_Signal": {
+      "scpi": "TRIGger:CAN:SIGNal",
+      "scpiFast": "TRIG:CAN:SIGN",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Duration": {
+      "scpi": "TRIGger:DURation",
+      "scpiFast": "TRIG:DUR",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Duration_Greaterthan": {
+      "scpi": ":TRIGGER:DURation:GREaterthan",
+      "scpiFast": ":TRIG:DUR:GRE",
+      "description": "Do trigger duration greaterthan",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Duration_Lessthan": {
+      "scpi": ":TRIGGER:DURation:LESSthan",
+      "scpiFast": ":TRIG:DUR:LESS",
+      "description": "Do trigger duration lessthan",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Edge": {
+      "scpi": "TRIGger:EDGE",
+      "scpiFast": "TRIG:EDGE",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Glitch": {
+      "scpi": "TRIGger:GLITch",
+      "scpiFast": "TRIG:GLIT",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Glitch_Greaterthan": {
+      "scpi": ":TRIGGER:GLITch:GREaterthan",
+      "scpiFast": ":TRIG:GLIT:GRE",
+      "description": "Do trigger glitch greaterthan",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Glitch_Lessthan": {
+      "scpi": ":TRIGGER:GLITch:LESSthan",
+      "scpiFast": ":TRIG:GLIT:LESS",
+      "description": "Do trigger glitch lessthan",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Iic": {
+      "scpi": "TRIGger:IIC",
+      "scpiFast": "TRIG:IIC",
+      "description": "Command Set Organization",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Iic_Pattern": {
+      "scpi": "TRIGger:IIC:PATTern",
+      "scpiFast": "TRIG:IIC:PATT",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Iic_Source": {
+      "scpi": ":TRIGger:IIC:SOURce",
+      "scpiFast": ":TRIG:IIC:SOUR",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Iic_Trigger": {
+      "scpi": "TRIGger:IIC:TRIGger",
+      "scpiFast": "TRIG:IIC:TRIG",
+      "description": "Command Set Organization",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Level": {
+      "scpi": ":TRIGGER:LEVEL",
+      "scpiFast": ":TRIG:LEV",
+      "description": "Do trigger level",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Lin": {
+      "scpi": "TRIGger:LIN",
+      "scpiFast": "TRIG:LIN",
+      "description": "Command Set Organization",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Lin_Signal": {
+      "scpi": "TRIGger:LIN:SIGNal",
+      "scpiFast": "TRIG:LIN:SIGN",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Sequence": {
+      "scpi": "TRIGger:SEQuence",
+      "scpiFast": "TRIG:SEQ",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Sequence_Edge": {
+      "scpi": ":TRIGger:SEQuence:EDGE",
+      "scpiFast": ":TRIG:SEQ:EDGE",
+      "description": "Do trigger sequence edge",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Sequence_Pattern": {
+      "scpi": ":TRIGger:SEQuence:PATTern",
+      "scpiFast": ":TRIG:SEQ:PATT",
+      "description": "Do trigger sequence pattern",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Slope": {
+      "scpi": ":TRIGGER:SLOPE",
+      "scpiFast": ":TRIG:SLOP",
+      "description": "Do trigger slope",
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Do_Trigger_Spi": {
+      "scpi": "TRIGger:SPI",
+      "scpiFast": "TRIG:SPI",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Spi_Clock": {
+      "scpi": "TRIGger:SPI:CLOCk",
+      "scpiFast": "TRIG:SPI:CLOC",
+      "description": "Command Set Organization",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Spi_Pattern": {
+      "scpi": "TRIGger:SPI:PATTERN",
+      "scpiFast": "TRIG:SPI:PATT",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Spi_Source": {
+      "scpi": "TRIGger:SPI:SOURce",
+      "scpiFast": "TRIG:SPI:SOUR",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Threshold": {
+      "scpi": "TRIGger:THReshold",
+      "scpiFast": "TRIG:THR",
+      "description": "Do trigger threshold",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Tv": {
+      "scpi": "TRIGger:TV",
+      "scpiFast": "TRIG:TV",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Tv_Field": {
+      "scpi": "TRIGger:TV:FIELd",
+      "scpiFast": "TRIG:TV:FIEL",
+      "description": "Do trigger tv field",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Tv_Tvhfrej": {
+      "scpi": "TRIGger:TV:TVHFrej",
+      "scpiFast": "TRIG:TV:TVHF",
+      "description": "Do trigger tv tvhfrej",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Tv_Tvmode": {
+      "scpi": "TRIGger:TV:TVMode",
+      "scpiFast": "TRIG:TV:TVM",
+      "description": "Do trigger tv tvmode",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Tv_Vir": {
+      "scpi": "TRIGger:TV:VIR",
+      "scpiFast": "TRIG:TV:VIR",
+      "description": "Do trigger tv vir",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Usb": {
+      "scpi": "TRIGger:USB",
+      "scpiFast": "TRIG:USB",
+      "description": "Command Set Organization",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Usb_Source": {
+      "scpi": "TRIGger:USB:SOURce",
+      "scpiFast": "TRIG:USB:SOUR",
+      "description": "Table 5-1",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Wai": {
+      "scpi": "*WAI",
+      "description": "Do wai",
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Run": {
       "scpi": "RUN",
       "description": "Run",
@@ -813,18 +2946,21 @@
     },
     "Set_Source_CH1": {
       "scpi": ":FUNCtion:SOURce CHANnel1",
+      "scpiFast": ":FUNC:SOUR CHANnel1",
       "description": "Set Source CH1",
       "group": "Source Selection",
       "subsystem": "Math_FFT"
     },
     "Set_Source_CH2": {
       "scpi": ":FUNCtion:SOURce CHANnel2",
+      "scpiFast": ":FUNC:SOUR CHANnel2",
       "description": "Set Source CH2",
       "group": "Source Selection",
       "subsystem": "Math_FFT"
     },
     "Single": {
       "scpi": "SINGle",
+      "scpiFast": "SING",
       "description": "Single",
       "group": "Root Action Commands",
       "subsystem": "Root"
@@ -836,41 +2972,844 @@
       "subsystem": "Root"
     }
   },
-  "rig": {},
+  "rig": {
+    "Setup_Trigger_Edge": {
+      "scpi": ":TRIGger:EDGE:SOURce <source>;:TRIGger:EDGE:SLOPe <slope>;:TRIGger:EDGE:LEVel <level>",
+      "scpiFast": ":TRIG:EDGE:SOUR <source>;:TRIG:EDGE:SLOP <slope>;:TRIG:EDGE:LEV <level>",
+      "description": "Set edge trigger source, slope and level together",
+      "arg": {
+        "kind": "enum"
+      },
+      "group": "Edge Trigger Config",
+      "args": [
+        "source",
+        "slope",
+        "level"
+      ],
+      "subsystem": "TRIGger",
+      "unverified": true
+    }
+  },
   "nab": {
+    "Get_Acquire_Complete": {
+      "scpi": ":ACQuire:COMPlete?",
+      "scpiFast": ":ACQ:COMP?",
+      "description": "Get acquire complete",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "ACQ",
+      "unverified": true
+    },
+    "Get_Acquire_Count": {
+      "scpi": ":ACQuire:COUNT?",
+      "scpiFast": ":ACQ:COUN?",
+      "description": "Get acquire count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "ACQ",
+      "unverified": true
+    },
+    "Get_Acquire_Mode": {
+      "scpi": ":ACQuire:MODE?",
+      "scpiFast": ":ACQ:MODE?",
+      "description": "Get acquire mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "ACQ",
+      "unverified": true
+    },
+    "Get_Acquire_Points": {
+      "scpi": ":ACQuire:POINts?",
+      "scpiFast": ":ACQ:POIN?",
+      "description": "Get acquire points",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "ACQ",
+      "unverified": true
+    },
+    "Get_Calibrate_Date": {
+      "scpi": ":CALibrate:DATE?",
+      "scpiFast": ":CAL:DATE?",
+      "description": "Get calibrate date",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibrate_Label": {
+      "scpi": ":CALibrate:LABel?",
+      "scpiFast": ":CAL:LAB?",
+      "description": "Get calibrate label",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibrate_Switch": {
+      "scpi": ":CALibrate:SWITch?",
+      "scpiFast": ":CAL:SWIT?",
+      "description": "Get calibrate switch",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Calibrate_Time": {
+      "scpi": ":CALibrate:TIME?",
+      "scpiFast": ":CAL:TIME?",
+      "description": "Get calibrate time",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Channel_Coupling": {
+      "scpi": ":CHANNEL1:COUPLING?",
+      "scpiFast": ":CHAN1:COUP?",
+      "description": "Receiving Information from the Instrument",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Get_Channel_Range": {
+      "scpi": ":CHANNEL1:RANGE?",
+      "scpiFast": ":CHAN1:RANG?",
+      "description": "Address Varies According to Configuration",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "CHANNEL",
+      "unverified": true
+    },
+    "Get_Display_Data": {
+      "scpi": ":DISPlay:DATA?",
+      "scpiFast": ":DISP:DATA?",
+      "description": "Get display data",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Display_Label": {
+      "scpi": ":DISPlay:LABel?",
+      "scpiFast": ":DISP:LAB?",
+      "description": "Get display label",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Display_Persistence": {
+      "scpi": ":DISPlay:PERSistence?",
+      "scpiFast": ":DISP:PERS?",
+      "description": "Get display persistence",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Display_Source": {
+      "scpi": ":DISPlay:SOURce?",
+      "scpiFast": ":DISP:SOUR?",
+      "description": "Get display source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Display_Vectors": {
+      "scpi": ":DISPlay:VECTors?",
+      "scpiFast": ":DISP:VECT?",
+      "description": "Get display vectors",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
     "Get_Error": {
       "scpi": "SYSTem:ERRor?",
+      "scpiFast": "SYST:ERR?",
       "description": "Get Error",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Utilities",
       "subsystem": "SYSTem"
     },
+    "Get_Ese": {
+      "scpi": "*ESE?",
+      "description": "Get ese",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Esr": {
+      "scpi": "*ESR?",
+      "description": "Get esr",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_External_Bwlimit": {
+      "scpi": ":EXTernal:BWLimit?",
+      "scpiFast": ":EXT:BWL?",
+      "description": "Get external bwlimit",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_External_Impedance": {
+      "scpi": ":EXTernal:IMPedance?",
+      "scpiFast": ":EXT:IMP?",
+      "description": "Get external impedance",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_External_Probe": {
+      "scpi": ":EXTernal:PROBe?",
+      "scpiFast": ":EXT:PROB?",
+      "description": "Get external probe",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_External_Protection": {
+      "scpi": ":EXTernal:PROTection?",
+      "scpiFast": ":EXT:PROT?",
+      "description": "Get external protection",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_External_Range": {
+      "scpi": ":EXTernal:RANGe?",
+      "scpiFast": ":EXT:RANG?",
+      "description": "Get external range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_External_Units": {
+      "scpi": ":EXTernal:UNITs?",
+      "scpiFast": ":EXT:UNIT?",
+      "description": "Get external units",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "EXT",
+      "unverified": true
+    },
+    "Get_Function_Center": {
+      "scpi": ":FUNCtion:CENTer?",
+      "scpiFast": ":FUNC:CENT?",
+      "description": "Get function center",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Display": {
+      "scpi": ":FUNCtion:DISPlay?",
+      "scpiFast": ":FUNC:DISP?",
+      "description": "Obsolete and Discontinued Commands",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Offset": {
+      "scpi": ":FUNCtion:OFFSet?",
+      "scpiFast": ":FUNC:OFFS?",
+      "description": "Get function offset",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Operation": {
+      "scpi": ":FUNCtion:OPERation?",
+      "scpiFast": ":FUNC:OPER?",
+      "description": "Get function operation",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Range": {
+      "scpi": ":FUNCtion:RANGe?",
+      "scpiFast": ":FUNC:RANG?",
+      "description": "Get function range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Reference": {
+      "scpi": ":FUNCtion:REFerence?",
+      "scpiFast": ":FUNC:REF?",
+      "description": "Get function reference",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Source": {
+      "scpi": ":FUNCtion:SOURce?",
+      "scpiFast": ":FUNC:SOUR?",
+      "description": "Get function source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Span": {
+      "scpi": ":FUNCtion:SPAN?",
+      "scpiFast": ":FUNC:SPAN?",
+      "description": "Get function span",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Function_Window": {
+      "scpi": ":FUNCtion:WINDow?",
+      "scpiFast": ":FUNC:WIND?",
+      "description": "Get function window",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "FUNC",
+      "unverified": true
+    },
+    "Get_Hardcopy_Factors": {
+      "scpi": ":HARDcopy:FACTors?",
+      "scpiFast": ":HARD:FACT?",
+      "description": "Get hardcopy factors",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Get_Hardcopy_Ffeed": {
+      "scpi": ":HARDcopy:FFEed?",
+      "scpiFast": ":HARD:FFE?",
+      "description": "Get hardcopy ffeed",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Get_Hardcopy_Format": {
+      "scpi": ":HARDcopy:FORMat?",
+      "scpiFast": ":HARD:FORM?",
+      "description": "Obsolete and Discontinued Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Get_Hardcopy_Grayscale": {
+      "scpi": ":HARDcopy:GRAYscale?",
+      "scpiFast": ":HARD:GRAY?",
+      "description": "Get hardcopy grayscale",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "HARD",
+      "unverified": true
+    },
+    "Get_Lrn": {
+      "scpi": "*LRN?",
+      "description": "Get lrn",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Marker_Mode": {
+      "scpi": ":MARKer:MODE?",
+      "scpiFast": ":MARK:MODE?",
+      "description": "Get marker mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "MARK",
+      "unverified": true
+    },
+    "Get_Marker_Xdelta": {
+      "scpi": ":MARker:XDELta?",
+      "scpiFast": ":MAR:XDEL?",
+      "description": "Get marker xdelta",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MAR",
+      "unverified": true
+    },
     "Get_Math_Statistics": {
       "scpi": ":MEASure:SOURce FUNCtion;:MEASure:VPP?;:MEASure:VMAX?;:MEASure:VMIN?;:MEASure:VAVerage?",
+      "scpiFast": ":MEAS:SOUR FUNCtion;:MEAS:VPP?;:MEAS:VMAX?;:MEAS:VMIN?;:MEAS:VAV?",
       "description": "Get Math Statistics",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmax",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmin",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vaverage",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
       "group": "Read statistics for the active Math function",
       "subsystem": "Math_FFT"
     },
+    "Get_Measure_Count": {
+      "scpi": "MEASure:COUNter?",
+      "scpiFast": "MEAS:COUN?",
+      "description": "Get measure count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Delay": {
+      "scpi": ":MEASure:DELay?",
+      "scpiFast": ":MEAS:DEL?",
+      "description": "Get measure delay",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Falltime": {
+      "scpi": ":MEASure:FALLtime?",
+      "scpiFast": ":MEAS:FALL?",
+      "description": "Get measure falltime",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Nwidth": {
+      "scpi": ":MEASure:NWIDth?",
+      "scpiFast": ":MEAS:NWID?",
+      "description": "Get measure nwidth",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Overshoot": {
+      "scpi": ":MEASure:OVERshoot?",
+      "scpiFast": ":MEAS:OVER?",
+      "description": "Get measure overshoot",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Phase": {
+      "scpi": ":MEASure:PHASe?",
+      "scpiFast": ":MEAS:PHAS?",
+      "description": "Get measure phase",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Preshoot": {
+      "scpi": ":MEASure:PREShoot?",
+      "scpiFast": ":MEAS:PRES?",
+      "description": "Get measure preshoot",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Pwidth": {
+      "scpi": ":MEASure:PWIDth?",
+      "scpiFast": ":MEAS:PWID?",
+      "description": "Get measure pwidth",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Risetime": {
+      "scpi": ":MEASURE:RISETIME?",
+      "scpiFast": ":MEAS:RIS?",
+      "description": "Query Command",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEASURE",
+      "unverified": true
+    },
+    "Get_Measure_Show": {
+      "scpi": ":MEASure:SHOW?",
+      "scpiFast": ":MEAS:SHOW?",
+      "description": "Get measure show",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Source": {
+      "scpi": ":MEASure:SOURce?",
+      "scpiFast": ":MEAS:SOUR?",
+      "description": "Get measure source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Tedge": {
+      "scpi": ":MEASure:TEDGe?",
+      "scpiFast": ":MEAS:TEDG?",
+      "description": "Get measure tedge",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Tvalue": {
+      "scpi": ":MEASure:TVALue?",
+      "scpiFast": ":MEAS:TVAL?",
+      "description": "Get measure tvalue",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Vamplitude": {
+      "scpi": ":MEASure:VAMPlitude?",
+      "scpiFast": ":MEAS:VAMP?",
+      "description": "Get measure vamplitude",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Vbase": {
+      "scpi": ":MEASure:VBASe?",
+      "scpiFast": ":MEAS:VBAS?",
+      "description": "Get measure vbase",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Vtime": {
+      "scpi": ":MEASure:VTIMe?",
+      "scpiFast": ":MEAS:VTIM?",
+      "description": "Get measure vtime",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Vtop": {
+      "scpi": ":MEASure:VTOP?",
+      "scpiFast": ":MEAS:VTOP?",
+      "description": "Get measure vtop",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Xmax": {
+      "scpi": ":MEASure:XMAX?",
+      "scpiFast": ":MEAS:XMAX?",
+      "description": "Obsolete and Discontinued Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Xmin": {
+      "scpi": ":MEASure:XMIN?",
+      "scpiFast": ":MEAS:XMIN?",
+      "description": "Obsolete and Discontinued Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Opc": {
+      "scpi": "*OPC?",
+      "description": "Get opc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Opt": {
+      "scpi": "*OPT?",
+      "description": "Get opt",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Get_Preamble": {
       "scpi": "WAVeform:PREamble?",
+      "scpiFast": "WAV:PRE?",
       "description": "Get Preamble",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
       "group": "Waveform Data Readbacks",
       "subsystem": "WAVeform"
     },
+    "Get_Probe_Skew": {
+      "scpi": "PROBe:SKEW?",
+      "scpiFast": "PROB:SKEW?",
+      "description": "Get probe skew",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "PROB",
+      "unverified": true
+    },
     "Get_Sample_Rate": {
       "scpi": "ACQuire:SRATe?",
+      "scpiFast": "ACQ:SRAT?",
       "description": "Get Sample Rate",
+      "returns": {
+        "count": 1
+      },
       "group": "Acquisition Readbacks",
       "subsystem": "ACQuire"
     },
     "Get_Setup": {
       "scpi": "SYSTem:SETup?",
+      "scpiFast": "SYST:SET?",
       "description": "Get Setup",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
       "group": "System Utilities",
       "subsystem": "SYSTem"
     },
+    "Get_Sre": {
+      "scpi": "*SRE?",
+      "description": "Get sre",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Stb": {
+      "scpi": "*STB?",
+      "description": "Get stb",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_System_Date": {
+      "scpi": ":SYSTem:DATE?",
+      "scpiFast": ":SYST:DATE?",
+      "description": "Get system date",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Dsp": {
+      "scpi": "SYSTEM:DSP?",
+      "scpiFast": "SYST:DSP?",
+      "description": "Message Queue",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYSTEM",
+      "unverified": true
+    },
+    "Get_System_Lock": {
+      "scpi": ":SYSTem:LOCK?",
+      "scpiFast": ":SYST:LOCK?",
+      "description": "Get system lock",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Time": {
+      "scpi": ":SYSTem:TIME?",
+      "scpiFast": ":SYST:TIME?",
+      "description": "Get system time",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
     "Get_Time_Stats_CH1": {
       "scpi": ":MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?",
+      "scpiFast": ":MEAS:SOUR <source>;:MEAS:FREQ?;:MEAS:PER?;:MEAS:DUTY?;:MEAS:RIS?",
       "description": "Get Time Stats CH1",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "frequency"
+          },
+          {
+            "name": "period",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "dutycycle",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "risetime",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
       "group": "Channel 1 Measurements",
       "args": [
         "source"
@@ -879,16 +3818,805 @@
     },
     "Get_Time_Stats_CH2": {
       "scpi": ":MEASure:SOURce <source>;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?",
+      "scpiFast": ":MEAS:SOUR <source>;:MEAS:FREQ?;:MEAS:PER?;:MEAS:DUTY?;:MEAS:RIS?",
       "description": "Get Time Stats CH2",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "frequency"
+          },
+          {
+            "name": "period",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "dutycycle",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "risetime",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
       "group": "Channel 2 Measurements",
       "args": [
         "source"
       ],
       "subsystem": "Channel_2"
     },
+    "Get_Timebase_Mode": {
+      "scpi": ":TIMebase:MODE?",
+      "scpiFast": ":TIM:MODE?",
+      "description": "Get timebase mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Position": {
+      "scpi": ":TIMebase:POSition?",
+      "scpiFast": ":TIM:POS?",
+      "description": "Get timebase position",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Range": {
+      "scpi": ":TIMebase:RANGe?",
+      "scpiFast": ":TIM:RANG?",
+      "description": "Get timebase range",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Reference": {
+      "scpi": ":TIMebase:REFerence?",
+      "scpiFast": ":TIM:REF?",
+      "description": "Get timebase reference",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Scale": {
+      "scpi": ":TIMebase:SCALe?",
+      "scpiFast": ":TIM:SCAL?",
+      "description": "Get timebase scale",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Window_Position": {
+      "scpi": ":TIMebase:WINDow:POSition?",
+      "scpiFast": ":TIM:WIND:POS?",
+      "description": "Get timebase window position",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Window_Range": {
+      "scpi": ":TIMebase:WINDow:RANGe?",
+      "scpiFast": ":TIM:WIND:RANG?",
+      "description": "Get timebase window range",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Timebase_Window_Scale": {
+      "scpi": ":TIMebase:WINDow:SCALe?",
+      "scpiFast": ":TIM:WIND:SCAL?",
+      "description": "Get timebase window scale",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TIM",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Acknowledge": {
+      "scpi": ":TRIGger:CAN:ACKNowledge?",
+      "scpiFast": ":TRIG:CAN:ACKN?",
+      "description": "Get trigger can acknowledge",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Pattern_Data": {
+      "scpi": ":TRIGger:CAN:PATTern:DATA?",
+      "scpiFast": ":TRIG:CAN:PATT:DATA?",
+      "description": "Table 5-1",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Pattern_Id": {
+      "scpi": ":TRIGger:CAN:PATTern:ID?",
+      "scpiFast": ":TRIG:CAN:PATT:ID?",
+      "description": "Table 5-1",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Pattern_Id_Mode": {
+      "scpi": ":TRIGger:CAN:PATTern:ID:MODE?",
+      "scpiFast": ":TRIG:CAN:PATT:ID:MODE?",
+      "description": "Get trigger can pattern id mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Samplepoint": {
+      "scpi": ":TRIGger:CAN:SAMPlepoint?",
+      "scpiFast": ":TRIG:CAN:SAMP?",
+      "description": "Get trigger can samplepoint",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Signal_Baudrate": {
+      "scpi": ":TRIGger:CAN:SIGNal:BAUDrate?",
+      "scpiFast": ":TRIG:CAN:SIGN:BAUD?",
+      "description": "Get trigger can signal baudrate",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Source": {
+      "scpi": ":TRIGger:CAN:SOURce?",
+      "scpiFast": ":TRIG:CAN:SOUR?",
+      "description": "Get trigger can source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Can_Trigger": {
+      "scpi": ":TRIGger:CAN:TRIGer?",
+      "scpiFast": ":TRIG:CAN:TRIG?",
+      "description": "Get trigger can trigger",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Coupling": {
+      "scpi": ":TRIGger:COUPling?",
+      "scpiFast": ":TRIG:COUP?",
+      "description": "Get trigger coupling",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Duration_Greaterthan": {
+      "scpi": ":TRIGger:DURation:GREaterthan?",
+      "scpiFast": ":TRIG:DUR:GRE?",
+      "description": "Get trigger duration greaterthan",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Duration_Lessthan": {
+      "scpi": ":TRIGger:DURation:LESSthan?",
+      "scpiFast": ":TRIG:DUR:LESS?",
+      "description": "Get trigger duration lessthan",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Duration_Pattern": {
+      "scpi": ":TRIGger:DURation:PATTern?",
+      "scpiFast": ":TRIG:DUR:PATT?",
+      "description": "Get trigger duration pattern",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Duration_Qualifier": {
+      "scpi": ":TRIGger:DURation:QUALifier?",
+      "scpiFast": ":TRIG:DUR:QUAL?",
+      "description": "Get trigger duration qualifier",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Duration_Range": {
+      "scpi": ":TRIGger:DURation:RANGe?",
+      "scpiFast": ":TRIG:DUR:RANG?",
+      "description": "Get trigger duration range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Edge_Level": {
+      "scpi": ":TRIGger:EDGE:LEVel?",
+      "scpiFast": ":TRIG:EDGE:LEV?",
+      "description": "Get trigger edge level",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Edge_Slope": {
+      "scpi": ":TRIGger:EDGE:SLOPe?",
+      "scpiFast": ":TRIG:EDGE:SLOP?",
+      "description": "Get trigger edge slope",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Edge_Source": {
+      "scpi": ":TRIGger:EDGE:SOURce?",
+      "scpiFast": ":TRIG:EDGE:SOUR?",
+      "description": "Get trigger edge source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Greaterthan": {
+      "scpi": ":TRIGger:GLITch:GREaterthan?",
+      "scpiFast": ":TRIG:GLIT:GRE?",
+      "description": "Get trigger glitch greaterthan",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Lessthan": {
+      "scpi": ":TRIGger:GLITch:LESSthan?",
+      "scpiFast": ":TRIG:GLIT:LESS?",
+      "description": "Get trigger glitch lessthan",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Level": {
+      "scpi": ":TRIGger:GLITch:LEVel?",
+      "scpiFast": ":TRIG:GLIT:LEV?",
+      "description": "Get trigger glitch level",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Polarity": {
+      "scpi": ":TRIGger:GLITch:POLarity?",
+      "scpiFast": ":TRIG:GLIT:POL?",
+      "description": "Get trigger glitch polarity",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Qualifier": {
+      "scpi": ":TRIGger:GLITch:QUALifier?",
+      "scpiFast": ":TRIG:GLIT:QUAL?",
+      "description": "Get trigger glitch qualifier",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Range": {
+      "scpi": ":TRIGger:GLITch:RANGe?",
+      "scpiFast": ":TRIG:GLIT:RANG?",
+      "description": "Get trigger glitch range",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Glitch_Source": {
+      "scpi": ":TRIGger:GLITch:SOURce?",
+      "scpiFast": ":TRIG:GLIT:SOUR?",
+      "description": "Get trigger glitch source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Hfreject": {
+      "scpi": ":TRIGger:HFReject?",
+      "scpiFast": ":TRIG:HFR?",
+      "description": "Get trigger hfreject",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Holdoff": {
+      "scpi": ":TRIGger:HOLDoff?",
+      "scpiFast": ":TRIG:HOLD?",
+      "description": "Get trigger holdoff",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Iic_Pattern_Address": {
+      "scpi": ":TRIGger:IIC:PATTern:ADDRess?",
+      "scpiFast": ":TRIG:IIC:PATT:ADDR?",
+      "description": "Get trigger iic pattern address",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Iic_Pattern_Data": {
+      "scpi": ":TRIGger:IIC:PATTern:DATA?",
+      "scpiFast": ":TRIG:IIC:PATT:DATA?",
+      "description": "Get trigger iic pattern data",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Iic_Trigger_Qualifier": {
+      "scpi": ":TRIGger:IIC:TRIGger:QUALifer?",
+      "scpiFast": ":TRIG:IIC:TRIG:QUAL?",
+      "description": "Get trigger iic trigger qualifier",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Lin_Signal_Baudrate": {
+      "scpi": ":TRIGger:LIN:SIGNal:BAUDrate?",
+      "scpiFast": ":TRIG:LIN:SIGN:BAUD?",
+      "description": "Get trigger lin signal baudrate",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Lin_Source": {
+      "scpi": ":TRIGger:LIN:SOURce?",
+      "scpiFast": ":TRIG:LIN:SOUR?",
+      "description": "Get trigger lin source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Lin_Trigger": {
+      "scpi": ":TRIGger:LIN:TRIGger?",
+      "scpiFast": ":TRIG:LIN:TRIG?",
+      "description": "Get trigger lin trigger",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Mode": {
+      "scpi": ":TRIGger:MODE?",
+      "scpiFast": ":TRIG:MODE?",
+      "description": "Get trigger mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Nreject": {
+      "scpi": ":TRIGger:NREJect?",
+      "scpiFast": ":TRIG:NREJ?",
+      "description": "Get trigger nreject",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Pattern": {
+      "scpi": ":TRIGger:PATTern?",
+      "scpiFast": ":TRIG:PATT?",
+      "description": "Get trigger pattern",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Reject": {
+      "scpi": ":TRIGger:REJect?",
+      "scpiFast": ":TRIG:REJ?",
+      "description": "Get trigger reject",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Count": {
+      "scpi": ":TRIGger:SEQuence:COUNt?",
+      "scpiFast": ":TRIG:SEQ:COUN?",
+      "description": "Get trigger sequence count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Find": {
+      "scpi": ":TRIGGER:SEQuence:FIND?",
+      "scpiFast": ":TRIG:SEQ:FIND?",
+      "description": "Get trigger sequence find",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Reset": {
+      "scpi": ":TRIGGER:SEQuence:RESet?",
+      "scpiFast": ":TRIG:SEQ:RES?",
+      "description": "Get trigger sequence reset",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Timebase": {
+      "scpi": ":TRIGGER:SEQuence:TIMer?",
+      "scpiFast": ":TRIG:SEQ:TIM?",
+      "description": "Get trigger sequence timebase",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Trigger": {
+      "scpi": ":TRIGGER:SEQuence:TRIGger?",
+      "scpiFast": ":TRIG:SEQ:TRIG?",
+      "description": "Get trigger sequence trigger",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIGGER",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Clock_Slope": {
+      "scpi": ":TRIGger:SPI:CLOCk:SLOPe?",
+      "scpiFast": ":TRIG:SPI:CLOC:SLOP?",
+      "description": "Get trigger spi clock slope",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Clock_Timebase": {
+      "scpi": ":TRIGger:SPI:CLOCk:TIMeout?",
+      "scpiFast": ":TRIG:SPI:CLOC:TIM?",
+      "description": "Get trigger spi clock timebase",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Frame": {
+      "scpi": ":TRIGger:SPI:FRAMing?",
+      "scpiFast": ":TRIG:SPI:FRAM?",
+      "description": "Get trigger spi frame",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Pattern_Data": {
+      "scpi": ":TRIGger:SPI:PATTern:DATA?",
+      "scpiFast": ":TRIG:SPI:PATT:DATA?",
+      "description": "Get trigger spi pattern data",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Pattern_Width": {
+      "scpi": ":TRIGger:SPI:PATTern:WIDth?",
+      "scpiFast": ":TRIG:SPI:PATT:WID?",
+      "description": "Get trigger spi pattern width",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Source_Clock": {
+      "scpi": ":TRIGger:SPI:SOURce:CLOCk?",
+      "scpiFast": ":TRIG:SPI:SOUR:CLOC?",
+      "description": "Get trigger spi source clock",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Source_Data": {
+      "scpi": ":TRIGger:SPI:SOURce:DATA?",
+      "scpiFast": ":TRIG:SPI:SOUR:DATA?",
+      "description": "Get trigger spi source data",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Spi_Source_Frame": {
+      "scpi": ":TRIGger:SPI:SOURce:FRAMe?",
+      "scpiFast": ":TRIG:SPI:SOUR:FRAM?",
+      "description": "Get trigger spi source frame",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sweep": {
+      "scpi": ":TRIGger:SWEep?",
+      "scpiFast": ":TRIG:SWE?",
+      "description": "Get trigger sweep",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Line": {
+      "scpi": ":TRIGger:TV:LINE?",
+      "scpiFast": ":TRIG:TV:LINE?",
+      "description": "Get trigger tv line",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Mode": {
+      "scpi": ":TRIGger:TV:MODE?",
+      "scpiFast": ":TRIG:TV:MODE?",
+      "description": "Get trigger tv mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Polarity": {
+      "scpi": ":TRIGger:TV:POLarity?",
+      "scpiFast": ":TRIG:TV:POL?",
+      "description": "Get trigger tv polarity",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Source": {
+      "scpi": ":TRIGger:TV:SOURce?",
+      "scpiFast": ":TRIG:TV:SOUR?",
+      "description": "Get trigger tv source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Standard": {
+      "scpi": ":TRIGger:TV:STANdard?",
+      "scpiFast": ":TRIG:TV:STAN?",
+      "description": "Get trigger tv standard",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Tv_Tvmode": {
+      "scpi": ":TRIGger:TV:TVMODE?",
+      "scpiFast": ":TRIG:TV:TVM?",
+      "description": "Get trigger tv tvmode",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Usb_Source_Dminus": {
+      "scpi": ":TRIGger:USB:SOURce:DMINus?",
+      "scpiFast": ":TRIG:USB:SOUR:DMIN?",
+      "description": "Get trigger usb source dminus",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Usb_Source_Dplus": {
+      "scpi": ":TRIGger:USB:SOURce:DPLus?",
+      "scpiFast": ":TRIG:USB:SOUR:DPL?",
+      "description": "Get trigger usb source dplus",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Usb_Speed": {
+      "scpi": ":TRIGger:USB:SPEed?",
+      "scpiFast": ":TRIG:USB:SPE?",
+      "description": "Get trigger usb speed",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Usb_Trigger": {
+      "scpi": ":TRIGger:USB:TRIGger?",
+      "scpiFast": ":TRIG:USB:TRIG?",
+      "description": "Get trigger usb trigger",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Tst": {
+      "scpi": "*TST?",
+      "description": "Get tst",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Get_Voltage_Stats_CH1": {
       "scpi": ":MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?",
+      "scpiFast": ":MEAS:SOUR <source>;:MEAS:VPP?;:MEAS:VRMS?;:MEAS:VMAX?;:MEAS:VMIN?",
       "description": "Get Voltage Stats CH1",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmax",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmin",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
       "group": "Channel 1 Measurements",
       "args": [
         "source"
@@ -897,40 +4625,233 @@
     },
     "Get_Voltage_Stats_CH2": {
       "scpi": ":MEASure:SOURce <source>;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?",
+      "scpiFast": ":MEAS:SOUR <source>;:MEAS:VPP?;:MEAS:VRMS?;:MEAS:VMAX?;:MEAS:VMIN?",
       "description": "Get Voltage Stats CH2",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmax",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vmin",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
       "group": "Channel 2 Measurements",
       "args": [
         "source"
       ],
       "subsystem": "Channel_2"
     },
+    "Get_Waveform_Byteorder": {
+      "scpi": ":WAVeform:BYTeorder?",
+      "scpiFast": ":WAV:BYT?",
+      "description": "Get waveform byteorder",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Count": {
+      "scpi": ":WAVeform:COUNt?",
+      "scpiFast": ":WAV:COUN?",
+      "description": "Get waveform count",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
     "Get_Waveform_Data": {
       "scpi": "WAVeform:DATA?",
+      "scpiFast": "WAV:DATA?",
       "description": "Get Waveform Data",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
       "group": "Waveform Data Readbacks",
       "subsystem": "WAVeform"
     },
+    "Get_Waveform_Format": {
+      "scpi": ":WAVeform:FORMat?",
+      "scpiFast": ":WAV:FORM?",
+      "description": "Get waveform format",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Points": {
+      "scpi": ":WAVeform:POINts?",
+      "scpiFast": ":WAV:POIN?",
+      "description": "Get waveform points",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Source": {
+      "scpi": ":WAVeform:SOURce?",
+      "scpiFast": ":WAV:SOUR?",
+      "description": "Get waveform source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Unsigned": {
+      "scpi": ":WAVeform:UNSigned?",
+      "scpiFast": ":WAV:UNS?",
+      "description": "Get waveform unsigned",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_View": {
+      "scpi": ":WAVeform:VIEW?",
+      "scpiFast": ":WAV:VIEW?",
+      "description": "Get waveform view",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Xincrement": {
+      "scpi": ":WAVeform:XINCrement?",
+      "scpiFast": ":WAV:XINC?",
+      "description": "Get waveform xincrement",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Xorigin": {
+      "scpi": ":WAVeform:XORigin?",
+      "scpiFast": ":WAV:XOR?",
+      "description": "Get waveform xorigin",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Xreference": {
+      "scpi": ":WAVeform:XREFerence?",
+      "scpiFast": ":WAV:XREF?",
+      "description": "Get waveform xreference",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Yincrement": {
+      "scpi": ":WAVeform:YINCrement?",
+      "scpiFast": ":WAV:YINC?",
+      "description": "Get waveform yincrement",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Yorigin": {
+      "scpi": ":WAVeform:YORigin?",
+      "scpiFast": ":WAV:YOR?",
+      "description": "Get waveform yorigin",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
+    "Get_Waveform_Yreference": {
+      "scpi": ":WAVeform:YREFerence?",
+      "scpiFast": ":WAV:YREF?",
+      "description": "Get waveform yreference",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "WAV",
+      "unverified": true
+    },
     "Get_X_Delta": {
       "scpi": "MARKer:XDELta?",
+      "scpiFast": "MARK:XDEL?",
       "description": "Get X Delta",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
       "group": "Cursor Deltas",
       "subsystem": "MARKer"
     },
     "Get_Y_Delta": {
       "scpi": "MARKer:YDELta?",
+      "scpiFast": "MARK:YDEL?",
       "description": "Get Y Delta",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
       "group": "Cursor Deltas",
       "subsystem": "MARKer"
     },
     "Read_Error": {
       "scpi": ":SYSTem:ERRor?",
+      "scpiFast": ":SYST:ERR?",
       "description": "Read Error",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "Errors and ID",
       "subsystem": "System"
     },
     "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Read IDN",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
       "group": "Errors and ID",
       "subsystem": "System"
     }

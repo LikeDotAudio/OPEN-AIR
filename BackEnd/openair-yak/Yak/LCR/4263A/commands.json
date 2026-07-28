@@ -1,0 +1,341 @@
+{
+  "model": "4263A",
+  "family": "LCR",
+  "set": {
+    "Average_Count": {
+      "scpi": ":SENSe:AVERage:COUNt <count>",
+      "scpiFast": ":SENS:AVER:COUN <count>",
+      "description": "Sets the number of measurement averages (1 to 256).",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "count"
+      ],
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Current_Range": {
+      "scpi": ":SENSe:CURRent:RANGe <range>",
+      "scpiFast": ":SENS:CURR:RANG <range>",
+      "description": "Sets the current measurement range.",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "range"
+      ],
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Display_State": {
+      "scpi": ":DISPlay:STATe <state>",
+      "scpiFast": ":DISP:STAT <state>",
+      "description": "Turns the display ON or OFF.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "DISPlay",
+      "unverified": true
+    },
+    "Key_Lock": {
+      "scpi": ":SYSTem:KLOCk <state>",
+      "scpiFast": ":SYST:KLOC <state>",
+      "description": "Locks or unlocks the front-panel keys.",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "SYSTem",
+      "unverified": true
+    },
+    "Limit_Lower": {
+      "scpi": ":CALCulate:LIMit:LOWer <limit>",
+      "scpiFast": ":CALC:LIM:LOW <limit>",
+      "description": "Sets the lower limit for the comparator.",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "limit"
+      ],
+      "subsystem": "CALCulate",
+      "unverified": true
+    },
+    "Limit_State": {
+      "scpi": ":CALCulate:LIMit:STATe <state>",
+      "scpiFast": ":CALC:LIM:STAT <state>",
+      "description": "Enables or disables the comparator function.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "CALCulate",
+      "unverified": true
+    },
+    "Limit_Upper": {
+      "scpi": ":CALCulate:LIMit:UPPer <limit>",
+      "scpiFast": ":CALC:LIM:UPP <limit>",
+      "description": "Sets the higher limit for the comparator.",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "limit"
+      ],
+      "subsystem": "CALCulate",
+      "unverified": true
+    },
+    "Measurement_Function": {
+      "scpi": ":SENSe:FUNCtion <function>",
+      "scpiFast": ":SENS:FUNC <function>",
+      "description": "Selects measurement parameters (e.g., CP-D, LS-Q).",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "function"
+      ],
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Set_Beeper": {
+      "scpi": ":SYSTem:BEEPer:STATe <state>",
+      "scpiFast": ":SYST:BEEP:STAT <state>",
+      "description": "Turns the front-panel beeper ON or OFF.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "SYSTem",
+      "unverified": true
+    },
+    "Set_Bias_State": {
+      "scpi": ":SOURce:BIAS:STATe <state>",
+      "scpiFast": ":SOUR:BIAS:STAT <state>",
+      "description": "Turns the DC bias ON or OFF.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "SOURce",
+      "unverified": true
+    },
+    "Set_Bias_Voltage": {
+      "scpi": ":SOURce:BIAS:VOLTage <volt>",
+      "scpiFast": ":SOUR:BIAS:VOLT <volt>",
+      "description": "Sets the internal DC bias voltage level.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
+      "args": [
+        "volt"
+      ],
+      "subsystem": "SOURce",
+      "unverified": true
+    },
+    "Set_Test_Frequency": {
+      "scpi": ":SENSe:FREQuency <freq>",
+      "scpiFast": ":SENS:FREQ <freq>",
+      "description": "Sets the test signal frequency (100, 1k, 10k, 100k Hz).",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "freq"
+      ],
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Set_Test_Level": {
+      "scpi": ":SOURce:VOLTage <level>",
+      "scpiFast": ":SOUR:VOLT <level>",
+      "description": "Sets the test signal level (e.g., 100m, 500m, 1V).",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
+      "args": [
+        "level"
+      ],
+      "subsystem": "SOURce",
+      "unverified": true
+    },
+    "Trigger_Delay": {
+      "scpi": ":TRIGger:DELay <seconds>",
+      "scpiFast": ":TRIG:DEL <seconds>",
+      "description": "Sets the delay time before measurement starts.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "seconds"
+      ],
+      "subsystem": "TRIGger",
+      "unverified": true
+    },
+    "Trigger_Source": {
+      "scpi": ":TRIGger:SOURce <source>",
+      "scpiFast": ":TRIG:SOUR <source>",
+      "description": "Selects trigger source (INT, MAN, EXT, or BUS).",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "source"
+      ],
+      "subsystem": "TRIGger",
+      "unverified": true
+    },
+    "Voltage_Range_Auto": {
+      "scpi": ":SENSe:VOLTage:RANGe:AUTO <state>",
+      "scpiFast": ":SENS:VOLT:RANG:AUTO <state>",
+      "description": "Enables or disables auto-ranging.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "subsystem": "SENSe",
+      "unverified": true
+    }
+  },
+  "do": {
+    "Clear_Status": {
+      "scpi": "*CLS",
+      "description": "Clears the status byte and error queue.",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Correction_Open": {
+      "scpi": ":SENSe:CORRection:OPEN",
+      "scpiFast": ":SENS:CORR:OPEN",
+      "description": "Executes the OPEN correction.",
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Correction_Short": {
+      "scpi": ":SENSe:CORRection:SHORt",
+      "scpiFast": ":SENS:CORR:SHOR",
+      "description": "Executes the SHORT correction.",
+      "subsystem": "SENSe",
+      "unverified": true
+    },
+    "Reset_Device": {
+      "scpi": "*RST",
+      "description": "Resets the unit to its factory default settings.",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Trigger_Bus": {
+      "scpi": "*TRG",
+      "description": "Triggers the unit (equivalent to the Bus trigger).",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Trigger_Immediate": {
+      "scpi": ":TRIGger",
+      "scpiFast": ":TRIG",
+      "description": "Manually triggers a measurement.",
+      "subsystem": "TRIGger",
+      "unverified": true
+    }
+  },
+  "nab": {
+    "Fetch_Existing": {
+      "scpi": ":FETCh?",
+      "scpiFast": ":FETC?",
+      "description": "Retrieves the most recent measurement data.",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEASure",
+      "unverified": true
+    },
+    "Get_Error_Queue": {
+      "scpi": ":SYSTem:ERRor?",
+      "scpiFast": ":SYST:ERR?",
+      "description": "Queries the next entry in the error queue.",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
+      "subsystem": "SYSTem",
+      "unverified": true
+    },
+    "Get_Identity": {
+      "scpi": "*IDN?",
+      "description": "Queries the instrument identification (Manufacturer, Model, Serial, Firmware).",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Operation_Complete": {
+      "scpi": "*OPC?",
+      "description": "Returns '1' once all pending operations are completed.",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Measure": {
+      "scpi": ":MEASure?",
+      "scpiFast": ":MEAS?",
+      "description": "Executes a complete measurement and retrieves data.",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEASure",
+      "unverified": true
+    },
+    "Read_Measurement": {
+      "scpi": ":READ?",
+      "description": "Triggers a measurement and retrieves the results.",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEASure",
+      "unverified": true
+    }
+  },
+  "rig": {}
+}

@@ -8,5 +8,8 @@
       "min": 0,
       "max": 350000000.0
     }
-  }
+  },
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Oscilloscope",
+  "notes": "Mixed Signal (2+16 Chan, 350MHz)"
 }

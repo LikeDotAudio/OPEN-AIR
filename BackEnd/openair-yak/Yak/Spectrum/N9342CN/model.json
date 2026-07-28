@@ -1,0 +1,47 @@
+{
+  "model": "N9342CN",
+  "description": "Keysight N9342C handheld spectrum analyzer, 9 kHz – 7 GHz",
+  "channels": 1,
+  "unverified": true,
+  "provenance": "Manufacturer datasheet figures, not read out of the manual set — no N9342C guide was swept, so this model's 28 commands were authored by hand. Frequency coverage is the number this sheet exists for and is solid; RBW/VBW/attenuation/sweep bounds are the ones to check against the data sheet before a widget is clamped to them.",
+  "domains": {
+    "freq": {
+      "units": "Hz",
+      "min": 9000,
+      "max": 7000000000
+    },
+    "span": {
+      "units": "Hz",
+      "min": 0,
+      "max": 7000000000
+    },
+    "ref_level": {
+      "units": "dBm",
+      "min": -100,
+      "max": 30
+    },
+    "attenuation": {
+      "units": "dB",
+      "min": 0,
+      "max": 50
+    },
+    "rbw": {
+      "units": "Hz",
+      "min": 1,
+      "max": 3000000
+    },
+    "vbw": {
+      "units": "Hz",
+      "min": 1,
+      "max": 3000000
+    },
+    "sweep_time": {
+      "units": "s",
+      "min": 0.01,
+      "max": 1000
+    }
+  },
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Spectrum",
+  "notes": "Handheld (9 kHz - 7 GHz)"
+}

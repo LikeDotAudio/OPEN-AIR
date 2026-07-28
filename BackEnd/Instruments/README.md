@@ -2,7 +2,7 @@
 
 The authored control surface for each instrument FAMILY, one directory per
 device type as named by the VISA knowledge base
-(`BackEnd/ComProtocols/openair-visa/assets/visa_devices.json` — `34401A → DMM`).
+(`BackEnd/openair-yak/Yak/knownDevices.json` — `34401A → DMM`).
 
 These used to live in `FrontEnd/Gui_Frames/1_Instruments/left_50/`, where they
 were a *display*: one hand-placed DMM tab regardless of how many DMMs were on
@@ -161,7 +161,7 @@ and the 60V strip were the same strip. Only the builder, which sees the
 discovery table, knows which model is in which slot.
 
 `channels` feeds `over: "channels"` the same way. Before these files existed the
-ranges were English in `visa_devices.json` ("Module 8V / 16A (128W)") and the
+ranges were English in the knowledge base ("Module 8V / 16A (128W)") and the
 scope's channel count was a description field reading "1, 2, 3, 4" — so the
 Rigol, a 4-channel scope, was handed the 2-channel Agilent template.
 

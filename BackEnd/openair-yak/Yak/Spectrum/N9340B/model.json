@@ -1,0 +1,47 @@
+{
+  "model": "N9340B",
+  "description": "Agilent N9340B handheld spectrum analyzer, 100 kHz – 3 GHz",
+  "channels": 1,
+  "unverified": true,
+  "provenance": "Manufacturer datasheet figures, not read out of the manual set — the N9340B programming guide documents commands, not limits. Frequency coverage is the number this sheet exists for and is solid; RBW/VBW/attenuation/sweep bounds are the ones to check against the data sheet before a widget is clamped to them.",
+  "domains": {
+    "freq": {
+      "units": "Hz",
+      "min": 100000,
+      "max": 3000000000
+    },
+    "span": {
+      "units": "Hz",
+      "min": 0,
+      "max": 3000000000
+    },
+    "ref_level": {
+      "units": "dBm",
+      "min": -100,
+      "max": 30
+    },
+    "attenuation": {
+      "units": "dB",
+      "min": 0,
+      "max": 50
+    },
+    "rbw": {
+      "units": "Hz",
+      "min": 30,
+      "max": 1000000
+    },
+    "vbw": {
+      "units": "Hz",
+      "min": 30,
+      "max": 1000000
+    },
+    "sweep_time": {
+      "units": "s",
+      "min": 0.01,
+      "max": 1000
+    }
+  },
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Spectrum",
+  "notes": "Handheld (100 kHz - 3 GHz)"
+}

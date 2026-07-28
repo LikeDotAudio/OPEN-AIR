@@ -93,9 +93,11 @@ OpenAir/System/Protocols/dnssd/Device/{service_type}/{instance}/{key}
 
 ### The VISA knowledge base
 
-`openair-visa/assets/visa_devices.json` maps model → `{type, notes}`, and is
-what turns a bare `*IDN?` string into a category (DMM, Oscilloscope,
-Generator, Spectrum…). It is **compiled into the binary** as a fallback and
+`BackEnd/openair-yak/Yak/knownDevices.json` maps model →
+`{manufacturer, type, notes}`, and is what turns a bare `*IDN?` string into a
+category (DMM, Oscilloscope, Generator, Spectrum…). It used to be duplicated at
+`openair-visa/assets/visa_devices.json`; the two were byte-identical, so that
+copy is gone and this is the only one. It is **compiled into the binary** as a fallback and
 resolved from disk by walking up from the working directory, so it is found
 no matter where the process starts. To teach the system a new instrument, add
 its model key — no recompile needed when running from the repo.

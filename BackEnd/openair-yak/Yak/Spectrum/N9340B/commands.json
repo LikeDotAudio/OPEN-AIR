@@ -4,16 +4,93 @@
   "set": {
     "Set_Averaging": {
       "scpi": ":TRACe:AVERage:COUNt <count_int>",
+      "scpiFast": ":TRAC:AVER:COUN <count_int>",
       "description": "Set Averaging",
+      "arg": {
+        "kind": "integer"
+      },
       "group": "Trace Command Sets",
       "args": [
         "count_int"
       ],
       "subsystem": "Trace"
     },
+    "Set_Bwidth_Integration": {
+      "scpi": "BWIDth:INTegration <value>",
+      "scpiFast": "BWID:INT <value>",
+      "description": "Set the Chan Integ BW",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Set_Bwidth_Resolution": {
+      "scpi": "BWIDth:RESolution <value>",
+      "scpiFast": "BWID:RES <value>",
+      "description": "Set the Channel Res BW",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Set_Bwidth_Video": {
+      "scpi": "BWIDth:VIDeo <value>",
+      "scpiFast": "BWID:VID <value>",
+      "description": "Video Bandwidth",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Set_Bwidth_Video_Ratio": {
+      "scpi": "BWIDth:VIDeo:RATio <value>",
+      "scpiFast": "BWID:VID:RAT <value>",
+      "description": "Video to Resolution Bandwidth Ratio",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Set_Calculate_Lline_State": {
+      "scpi": ":CALCulate:LLINe1:STATe <value>",
+      "scpiFast": ":CALC:LLIN1:STAT <value>",
+      "description": "Limit Line Testing",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CALC",
+      "unverified": true
+    },
     "Set_Center_Freq_MHz": {
       "scpi": ":FREQuency:CENTer <hz_value>",
+      "scpiFast": ":FREQ:CENT <hz_value>",
       "description": "Set Center Freq MHz",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -22,16 +99,146 @@
     },
     "Set_Continuous_Mode": {
       "scpi": ":INITiate:CONTinuous <state_bool>",
+      "scpiFast": ":INIT:CONT <state_bool>",
       "description": "Set Continuous Mode",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Trace Command Sets",
       "args": [
         "state_bool"
       ],
       "subsystem": "Trace"
     },
+    "Set_Demod_Am_State": {
+      "scpi": ":DEMod:AM:STATe <value>",
+      "scpiFast": ":DEM:AM:STAT <value>",
+      "description": "AM Demodulation",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DEM",
+      "unverified": true
+    },
+    "Set_Demod_Fm_State": {
+      "scpi": ":DEMod:FM:STATe <value>",
+      "scpiFast": ":DEM:FM:STAT <value>",
+      "description": "FM Demodulation",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DEM",
+      "unverified": true
+    },
+    "Set_Display_Mode_Brightness": {
+      "scpi": ":DISPlay:MODE:BRIGhtness <value>",
+      "scpiFast": ":DISP:MODE:BRIG <value>",
+      "description": "Brightness",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Ese": {
+      "scpi": "*ESE <value>",
+      "description": "Set ese",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Fcount_State": {
+      "scpi": "FCOunt:STATe <value>",
+      "scpiFast": "FCO:STAT <value>",
+      "description": "Frequency Counter Marker",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "FCO",
+      "unverified": true
+    },
+    "Set_Instrument_Measure": {
+      "scpi": ":INSTrument:MEASure <value>",
+      "scpiFast": ":INST:MEAS <value>",
+      "description": "Power Measurement",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "CHP",
+          "ACPR",
+          "OBW",
+          "SEM"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "INST",
+      "unverified": true
+    },
+    "Set_Instrument_Select": {
+      "scpi": ":INSTrument:SELect <value>",
+      "scpiFast": ":INST:SEL <value>",
+      "description": "Instrument Mode",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "SA",
+          "TGEN",
+          "DAN",
+          "POW"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "INST",
+      "unverified": true
+    },
     "Set_Marker_State": {
       "scpi": ":CALCulate:MARKer<marker_number>:STATe <state_bool>",
+      "scpiFast": ":CALC:MARK<marker_number>:STAT <state_bool>",
       "description": "Set Marker State",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "Marker Command Sets",
       "args": [
         "state_bool"
@@ -40,16 +247,324 @@
     },
     "Set_Marker_X_position": {
       "scpi": ":CALCulate:MARKer<marker_number>:X <hz_value>",
+      "scpiFast": ":CALC:MARK<marker_number>:X <hz_value>",
       "description": "Set Marker Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "Marker Command Sets",
       "args": [
         "hz_value"
       ],
       "subsystem": "Markers"
     },
+    "Set_Measure_Acpr_Adjacent": {
+      "scpi": ":MEASure:ACPR:ADJacent <value>",
+      "scpiFast": ":MEAS:ACPR:ADJ <value>",
+      "description": "Adjacent channel",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Acpr_Center": {
+      "scpi": ":MEASure:ACPR:CENTer <value>",
+      "scpiFast": ":MEAS:ACPR:CENT <value>",
+      "description": "Center Freq",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Acpr_Main": {
+      "scpi": ":MEASure:ACPR:MAIN <value>",
+      "scpiFast": ":MEAS:ACPR:MAIN <value>",
+      "description": "Main channel",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Acpr_Spacing": {
+      "scpi": ":MEASure:ACPR:SPACe <value>",
+      "scpiFast": ":MEAS:ACPR:SPAC <value>",
+      "description": "Channel space",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Chpower_Center": {
+      "scpi": ":MEASure:CHPower:CENTer <value>",
+      "scpiFast": ":MEAS:CHP:CENT <value>",
+      "description": "Center Freq",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Chpower_Ibw": {
+      "scpi": ":MEASure:CHPower:IBW <value>",
+      "scpiFast": ":MEAS:CHP:IBW <value>",
+      "description": "Set measure chpower ibw",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Chpower_Span": {
+      "scpi": ":MEASure:CHPower:SPAN <value>",
+      "scpiFast": ":MEAS:CHP:SPAN <value>",
+      "description": "Channel Span",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Obw_Method": {
+      "scpi": ":MEASure:OBW:METHod <value>",
+      "scpiFast": ":MEAS:OBW:METH <value>",
+      "description": "Select the measurement method of OBW",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "PERC",
+          "XDB"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Obw_Percent": {
+      "scpi": ":MEASure:OBW:PERCent <value>",
+      "scpiFast": ":MEAS:OBW:PERC <value>",
+      "description": "Set percentage (%) method of OBW",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Obw_Xdb": {
+      "scpi": ":MEASure:OBW:XDB <value>",
+      "scpiFast": ":MEAS:OBW:XDB <value>",
+      "description": "Set dBc method of OBW",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Average_Count": {
+      "scpi": ":MEASure:SEMask:AVERage:COUNt <value>",
+      "scpiFast": ":MEAS:SEM:AVER:COUN <value>",
+      "description": "Set the Average",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Average_State": {
+      "scpi": ":MEASure:SEMask:AVERage:STATe <value>",
+      "scpiFast": ":MEAS:SEM:AVER:STAT <value>",
+      "description": "Set the Average",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Carrier_Power": {
+      "scpi": ":MEASure:SEMask:CARRier:POWer <value>",
+      "scpiFast": ":MEAS:SEM:CARR:POW <value>",
+      "description": "Set Total Power Reference",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Frequency_Center": {
+      "scpi": "MEASure:SEMask:FREQuency:CENTer <value>",
+      "scpiFast": "MEAS:SEM:FREQ:CENT <value>",
+      "description": "Set Center Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Frequency_Span": {
+      "scpi": ":MEASure:SEMask:FREQuency:SPAN <value>",
+      "scpiFast": ":MEAS:SEM:FREQ:SPAN <value>",
+      "description": "Set Chan Span",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_Frequency_Start": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:FREQuency:STARt <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:FREQ:STAR <value>",
+      "description": "Set the Start Freq",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_Start_Absolute": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STARt:ABSolute <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAR:ABS <value>",
+      "description": "Set the Abs Start",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_Start_Rcarrier": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STARt:RCARrier <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAR:RCAR <value>",
+      "description": "Set the Rel Start",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_State": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STATe <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAT <value>",
+      "description": "Set the Start Freq",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_Sweep": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:SWEeptime <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:SWE <value>",
+      "description": "Set the Sweep Time",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Offset_List_Test": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:TEST <value>",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:TEST <value>",
+      "description": "Set the Fail Mask",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Set_Measure_Semask_Sweep": {
+      "scpi": ":MEASure:SEMask:SWEeptime <value>",
+      "scpiFast": ":MEAS:SEM:SWE <value>",
+      "description": "Set the Sweep Time",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "MEAS",
+      "unverified": true
+    },
     "Set_Power_Attenuation": {
       "scpi": ":POWer:ATTenuation <db_value>",
+      "scpiFast": ":POW:ATT <db_value>",
       "description": "Set Power Attenuation",
+      "arg": {
+        "kind": "numeric",
+        "unit": "dB"
+      },
       "group": "Individual Power Sets",
       "args": [
         "db_value"
@@ -58,7 +573,11 @@
     },
     "Set_RBW": {
       "scpi": ":SENSe:BANDwidth:RESolution <hz_value>",
+      "scpiFast": ":SENS:BAND:RES <hz_value>",
       "description": "Set RBW",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "hz_value"
@@ -67,7 +586,15 @@
     },
     "Set_RBW_Auto": {
       "scpi": ":SENSe:BANDwidth:RESolution:AUTO <state_bool>",
+      "scpiFast": ":SENS:BAND:RES:AUTO <state_bool>",
       "description": "Set RBW Auto",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "state_bool"
@@ -76,25 +603,202 @@
     },
     "Set_Reference_Level": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <dbm_value>",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV <dbm_value>",
       "description": "Set Reference Level",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
       "group": "Individual Power Sets",
       "args": [
         "dbm_value"
       ],
       "subsystem": "Amplitude"
     },
+    "Set_Scale_Pdivision": {
+      "scpi": ":SCALe:PDIVision <value>",
+      "scpiFast": ":SCAL:PDIV <value>",
+      "description": "Trace Y-Axis Scaling",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Set_Scale_Rlevel_Offset": {
+      "scpi": ":SCALe:RLEVel:OFFSet <value>",
+      "scpiFast": ":SCAL:RLEV:OFFS <value>",
+      "description": "Trace Y-Axis Reference Level",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Set_Scale_Spacing": {
+      "scpi": ":SCALe:SPACing <value>",
+      "scpiFast": ":SCAL:SPAC <value>",
+      "description": "Vertical Axis Scaling",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Set_Sense_Frequency_Center": {
+      "scpi": "SENS:FREQ:CENT <value>",
+      "description": "Using C with Marker Peak Search and Peak Excursion",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "UP",
+          "DOWN"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Frequency_Center_Step_Increment": {
+      "scpi": ":SENSe:FREQuency:CENTer:STEP:INCRement <value>",
+      "scpiFast": ":SENS:FREQ:CENT:STEP:INCR <value>",
+      "description": "Center Frequency Step Size",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Frequency_Span": {
+      "scpi": "SENS:FREQ:SPAN <value>",
+      "description": "Using C with Marker Peak Search and Peak Excursion",
+      "arg": {
+        "kind": "numeric",
+        "unit": "Hz"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Frequency_Start": {
+      "scpi": "SENS:FREQ:STAR <value>",
+      "description": "Start Frequency",
+      "arg": {
+        "kind": "numeric",
+        "unit": "Hz"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Frequency_Stop": {
+      "scpi": ":SENS:FREQ:STOP <value>",
+      "description": "Stop Frequency",
+      "arg": {
+        "kind": "numeric",
+        "unit": "Hz"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Power_Rf_Attenuation": {
+      "scpi": ":SENSe:POWer:RF:ATTenuation <value>",
+      "scpiFast": ":SENS:POW:RF:ATT <value>",
+      "description": "Input Attenuation",
+      "arg": {
+        "kind": "numeric",
+        "unit": "dB"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Power_Rf_Gain_State": {
+      "scpi": ":SENSe:POWer:RF:GAIN:STATe <value>",
+      "scpiFast": ":SENS:POW:RF:GAIN:STAT <value>",
+      "description": "Input Port Power Gain",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Set_Sense_Sweep_Tdmode": {
+      "scpi": ":SENSe:SWEep:TDMode <value>",
+      "scpiFast": ":SENS:SWE:TDM <value>",
+      "description": "Set sense sweep tdmode",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SENS",
+      "unverified": true
+    },
     "Set_Span_Frequency": {
       "scpi": ":FREQuency:SPAN <hz_value>",
+      "scpiFast": ":FREQ:SPAN <hz_value>",
       "description": "Set Span Frequency",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
       ],
       "subsystem": "Frequency"
     },
+    "Set_Sre": {
+      "scpi": "*SRE <value>",
+      "description": "Set sre",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Set_Start_Freq_MHz": {
       "scpi": ":FREQuency:STARt <hz_value>",
+      "scpiFast": ":FREQ:STAR <hz_value>",
       "description": "Set Start Freq MHz",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -103,7 +807,11 @@
     },
     "Set_Stop_Freq_MHz": {
       "scpi": ":FREQuency:STOP <hz_value>",
+      "scpiFast": ":FREQ:STOP <hz_value>",
       "description": "Set Stop Freq MHz",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "hz_value"
@@ -112,7 +820,12 @@
     },
     "Set_Sweep_time": {
       "scpi": ":SENSe:SWEep:TIME <s_value>",
+      "scpiFast": ":SENS:SWE:TIME <s_value>",
       "description": "Set Sweep time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "s_value"
@@ -121,25 +834,314 @@
     },
     "Set_Sweep_time_Auto": {
       "scpi": ":SENSe:SWEep:TIME:AUTO <state_bool>",
+      "scpiFast": ":SENS:SWE:TIME:AUTO <state_bool>",
       "description": "Set Sweep time Auto",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "state_bool"
       ],
       "subsystem": "Bandwidth"
     },
+    "Set_System_Channel": {
+      "scpi": ":SYSTem:CHANnel <value>",
+      "scpiFast": ":SYST:CHAN <value>",
+      "description": "Low Frequency Channel",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Configure_Port": {
+      "scpi": ":SYSTem:CONFigure:PORT <value>",
+      "scpiFast": ":SYST:CONF:PORT <value>",
+      "description": "Power on Type",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "REF",
+          "TRIG"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Date": {
+      "scpi": ":SYSTem:DATE <value>",
+      "scpiFast": ":SYST:DATE <value>",
+      "description": "Set Date",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_System_Time": {
+      "scpi": ":SYSTem:TIME <value>",
+      "scpiFast": ":SYST:TIME <value>",
+      "description": "Set Time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Set_Tgenerator_Amplitude": {
+      "scpi": ":TGENerator:AMPLitude <value>",
+      "scpiFast": ":TGEN:AMPL <value>",
+      "description": "Output Amplitdue",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Amplitude_State": {
+      "scpi": ":TGENerator:AMPLitude:STATe <value>",
+      "scpiFast": ":TGEN:AMPL:STAT <value>",
+      "description": "Amplitude On/Off",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Amplitude_Step": {
+      "scpi": ":TGENerator:AMPLitude:STEP <value>",
+      "scpiFast": ":TGEN:AMPL:STEP <value>",
+      "description": "Amplitude Step",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Normalize_Level": {
+      "scpi": ":TGENerator:NORMalize:LEVel <value>",
+      "scpiFast": ":TGEN:NORM:LEV <value>",
+      "description": "Normalization Reference Level",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Normalize_Posn": {
+      "scpi": ":TGENerator:NORMalize:POSN <value>",
+      "scpiFast": ":TGEN:NORM:POSN <value>",
+      "description": "Normalization Reference Position",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Normalize_State": {
+      "scpi": ":TGENerator:NORMalize:STATe <value>",
+      "scpiFast": ":TGEN:NORM:STAT <value>",
+      "description": "Normalization",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Tgenerator_Normalize_Trace": {
+      "scpi": ":TGENerator:NORMalize:TRACe <value>",
+      "scpiFast": ":TGEN:NORM:TRAC <value>",
+      "description": "Reference Trace",
+      "arg": {
+        "kind": "block"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Set_Trace_Format": {
+      "scpi": ":TRACe:FORMat <value>",
+      "scpiFast": ":TRAC:FORM <value>",
+      "description": "Trace format",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "ASC",
+          "REAL"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRAC",
+      "unverified": true
+    },
     "Set_Trace_Mode": {
       "scpi": ":TRACe<trace_number>:MODE <mode_string>",
+      "scpiFast": ":TRAC<trace_number>:MODE <mode_string>",
       "description": "Set Trace Mode",
+      "arg": {
+        "kind": "enum"
+      },
       "group": "Trace Command Sets",
       "args": [
         "mode_string"
       ],
       "subsystem": "Trace"
     },
+    "Set_Trigger_Sequence_Delaytime": {
+      "scpi": ":TRIGger:SEQuence:DELaytime <value>",
+      "scpiFast": ":TRIG:SEQ:DEL <value>",
+      "description": "Trigger Delay Time",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_External_Slope": {
+      "scpi": ":TRIGger:SEQuence:EXTernal1:SLOPe <value>",
+      "scpiFast": ":TRIG:SEQ:EXT1:SLOP <value>",
+      "description": "External Trigger Slope",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "POS",
+          "NEG"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Source": {
+      "scpi": ":TRIGger:SEQuence:SOURce <value>",
+      "scpiFast": ":TRIG:SEQ:SOUR <value>",
+      "description": "Initiate a Single Sweep",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "IMM",
+          "VID",
+          "EXT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Sequence_Video_Level": {
+      "scpi": ":TRIGger:SEQuence:VIDeo:LEVel <value>",
+      "scpiFast": ":TRIG:SEQ:VID:LEV <value>",
+      "description": "Command Example",
+      "arg": {
+        "kind": "numeric"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Unit_Power": {
+      "scpi": "UNIT:POW <value>",
+      "description": "Using C with Marker Peak Search and Peak Excursion",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "DBM",
+          "DBMV",
+          "DBUV",
+          "DBUA",
+          "V",
+          "W",
+          "A"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "UNIT",
+      "unverified": true
+    },
+    "Set_Unit_Power_Emf": {
+      "scpi": ":UNIT:POWer:EMF <value>",
+      "scpiFast": ":UNIT:POW:EMF <value>",
+      "description": "EMF Mode",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "UNIT",
+      "unverified": true
+    },
     "Set_VBW": {
       "scpi": ":SENSe:BANDwidth:VIDeo <hz_value>",
+      "scpiFast": ":SENS:BAND:VID <hz_value>",
       "description": "Set VBW",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "hz_value"
@@ -148,7 +1150,15 @@
     },
     "Set_VBW_Auto": {
       "scpi": ":SENSe:BANDwidth:VIDeo:AUTO <state_bool>",
+      "scpiFast": ":SENS:BAND:VID:AUTO <state_bool>",
       "description": "Set VBW Auto",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "state_bool"
@@ -157,50 +1167,335 @@
     }
   },
   "do": {
+    "Do_Calculate_Lline": {
+      "scpi": ":CALCulate:LLINe<n>",
+      "scpiFast": ":CALC:LLIN<n>",
+      "description": "Limit Line Y-axis Value",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Lline_Buzzer_Statoff": {
+      "scpi": ":CALCulate:LLINe1:BUZZer:STATe OFF",
+      "scpiFast": ":CALC:LLIN1:BUZZ:STAT OFF",
+      "description": "Turn on/off the Buzzer",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker": {
+      "scpi": ":CALCulate:MARKer<n>",
+      "scpiFast": ":CALC:MARK<n>",
+      "description": "Do calculate marker",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Fcount": {
+      "scpi": ":CALCulate:MARKer1:FCOunt",
+      "scpiFast": ":CALC:MARK1:FCO",
+      "description": "Frequency Counter Marker",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Mode": {
+      "scpi": "CALC:MARK:MODE",
+      "description": "Do calculate marker mode",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Peak_Exc": {
+      "scpi": "CALC:MARK:PEAK:EXC",
+      "description": "Do calculate marker peak exc",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Peak_Thr": {
+      "scpi": "CALC:MARK:PEAK:THR",
+      "description": "Do calculate marker peak thr",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Peak_Thr_State": {
+      "scpi": "CALC:MARK:PEAK:THR:STAT",
+      "description": "Do calculate marker peak thr state",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Marker_Phn": {
+      "scpi": "CALC:MARK1:PHN",
+      "description": "Do calculate marker phn",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calculate_Phn_Offset": {
+      "scpi": "CALC:PHN:OFFS",
+      "description": "Do calculate phn offset",
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Do_Calibration_Source_State": {
+      "scpi": "CAL:SOUR:STAT",
+      "description": "Using C with Marker Peak Search and Peak Excursion",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Cls": {
+      "scpi": "*CLS",
+      "description": "Do cls",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Display_Window_Trace": {
+      "scpi": ":DISPlay:WINDow:TRACe",
+      "scpiFast": ":DISP:WIND:TRAC",
+      "description": "Trace Y-Axis Scaling",
+      "subsystem": "DISP",
+      "unverified": true
+    },
     "Do_Initiate_Continuous": {
       "scpi": ":INITiate:IMMediate",
+      "scpiFast": ":INIT:IMM",
       "description": "Do Initiate Continuous",
       "group": "Trace Command Sets",
       "subsystem": "Trace"
     },
+    "Do_Measure_Semask_Bandwidth": {
+      "scpi": ":MEASure:SEMask:BANDwidth",
+      "scpiFast": ":MEAS:SEM:BAND",
+      "description": "Set the Chan Integ BW",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Bandwidth_Integration": {
+      "scpi": ":MEAS:SEM:BAND:INT",
+      "description": "Do measure semask bandwidth integration",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Bwidth": {
+      "scpi": "MEAS:SEM:BWID",
+      "description": "Do measure semask bwidth",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Bwidth_Integration": {
+      "scpi": ":MEAS:SEM:BWID:INT",
+      "description": "Do measure semask bwidth integration",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Marker": {
+      "scpi": "MEASure:SEMask:MARKer<n>",
+      "scpiFast": "MEAS:SEM:MARK<n>",
+      "description": "Turn On/Off the Marker",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Offset_List_Bandwidth": {
+      "scpi": "MEASure:SEMask:OFFSet:LIST:BAND",
+      "scpiFast": "MEAS:SEM:OFFS:LIST:BAND",
+      "description": "Set the Channel Res BW",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Offset_List_Stop_Absolute": {
+      "scpi": ":MEAS:SEM:OFFS:LIST:STOP:ABS",
+      "description": "Set the Abs Stop",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Offset_List_Stop_Absolute_Cou": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STOP:ABSolute:COU",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STOP:ABS:COU",
+      "description": "Set the Abs Stop",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Offset_List_Stop_Rcarrier": {
+      "scpi": ":MEAS:SEM:OFFS:LIST:STOP:RCAR",
+      "description": "Do measure semask offset list stop rcarrier",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Measure_Semask_Offset_List_Stop_Rcarrier_Cou": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STOP:RCARrier:COU",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STOP:RCAR:COU",
+      "description": "Do measure semask offset list stop rcarrier cou",
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Do_Opc": {
+      "scpi": "*OPC",
+      "description": "Do opc",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Rst": {
+      "scpi": "*RST",
+      "description": "Do rst",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Sense_Average": {
+      "scpi": ":SENSe:AVERage",
+      "scpiFast": ":SENS:AVER",
+      "description": "Do sense average",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Average_Trace": {
+      "scpi": ":SENSe:AVERage:TRACe<n>",
+      "scpiFast": ":SENS:AVER:TRAC<n>",
+      "description": "Set the Average Count",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Bandwidth": {
+      "scpi": ":SENSe:BANDwidth",
+      "scpiFast": ":SENS:BAND",
+      "description": "Do sense bandwidth",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Detector": {
+      "scpi": ":SENSe:DETector",
+      "scpiFast": ":SENS:DET",
+      "description": "Do sense detector",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Detector_Funcneg": {
+      "scpi": ":SENSe:DETector:FUNCtion:NEGative",
+      "scpiFast": ":SENS:DET:FUNC:NEG",
+      "description": "Type of Detection",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Frequency": {
+      "scpi": ":SENSe:FREQuency",
+      "scpiFast": ":SENS:FREQ",
+      "description": "Do sense frequency",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Frequency_Span_Full": {
+      "scpi": ":SENSe:FREQuency:SPAN:FULL",
+      "scpiFast": ":SENS:FREQ:SPAN:FULL",
+      "description": "Full Frequency Span",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Frequency_Span_Previous": {
+      "scpi": ":SENSe:FREQuency:SPAN:PREVious",
+      "scpiFast": ":SENS:FREQ:SPAN:PREV",
+      "description": "Last Frequency Span",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Frequency_Span_Zero": {
+      "scpi": ":SENSe:FREQuency:SPAN:ZERO",
+      "scpiFast": ":SENS:FREQ:SPAN:ZERO",
+      "description": "DEMOdulation Subsystem",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Power": {
+      "scpi": ":SENSe:POWer",
+      "scpiFast": ":SENS:POW",
+      "description": "Do sense power",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_Sense_Sweep": {
+      "scpi": ":SENSe:SWEep",
+      "scpiFast": ":SENS:SWE",
+      "description": "Do sense sweep",
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Do_System_File_Save": {
+      "scpi": ":SYSTem:FILE:SAVE",
+      "scpiFast": ":SYST:FILE:SAVE",
+      "description": "Screen save",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_System_Preset": {
+      "scpi": ":SYSTem:PRESet",
+      "scpiFast": ":SYST:PRES",
+      "description": "Do system preset",
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Do_Tgenerator_Amplitude_Offset": {
+      "scpi": ":TGENerator:AMPLitude:OFFSet",
+      "scpiFast": ":TGEN:AMPL:OFFS",
+      "description": "Amplitude Offset",
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Do_Tgenerator_Normalize_Ref": {
+      "scpi": ":TGENerator:NORMalize:REF",
+      "scpiFast": ":TGEN:NORM:REF",
+      "description": "Storing as Reference",
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Do_Trg": {
+      "scpi": "*TRG",
+      "description": "Do trg",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Wai": {
+      "scpi": "*WAI",
+      "description": "Do wai",
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Power_Cycle": {
       "scpi": ":SYSTem:POWer:RESet",
+      "scpiFast": ":SYST:POW:RES",
       "description": "Power Cycle",
       "group": "Hardware Reset and Clear",
       "subsystem": "System"
     },
     "Set_All_Markers_State": {
       "scpi": ":CALCulate:MARKer:AOFF",
+      "scpiFast": ":CALC:MARK:AOFF",
       "description": "Set All Markers State",
       "group": "Marker Command Sets",
       "subsystem": "Markers"
     },
     "Set_Input_Auto_Attenuation_OFF": {
       "scpi": ":POWer:ATTenuation:AUTO OFF",
+      "scpiFast": ":POW:ATT:AUTO OFF",
       "description": "Set Input Auto Attenuation OFF",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Input_Auto_Attenuation_ON": {
       "scpi": ":POWer:ATTenuation:AUTO ON",
+      "scpiFast": ":POW:ATT:AUTO ON",
       "description": "Set Input Auto Attenuation ON",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Power_Gain_OFF": {
       "scpi": ":POWer:GAIN OFF",
+      "scpiFast": ":POW:GAIN OFF",
       "description": "Set Power Gain OFF",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Set_Power_Gain_ON": {
       "scpi": ":POWer:GAIN ON",
+      "scpiFast": ":POW:GAIN ON",
       "description": "Set Power Gain ON",
       "group": "Individual Power Sets",
       "subsystem": "Amplitude"
     },
     "Update_Display": {
       "scpi": ":SYSTem:DISPlay:UPDate",
+      "scpiFast": ":SYST:DISP:UPD",
       "description": "Update Display",
       "group": "System Maintenance Controls",
       "subsystem": "System"
@@ -209,7 +1504,11 @@
   "rig": {
     "RBW_VBW_Hz": {
       "scpi": ":SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>",
+      "scpiFast": ":SENS:BAND:RES <rbw_hz_value>;:SENS:BAND:VID <vbw_hz_value>",
       "description": "Set Resolution and Video BW",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "RIG Bandwidth Commands",
       "args": [
         "rbw_hz_value",
@@ -219,7 +1518,12 @@
     },
     "Ref_Level_dBm": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV <Ref_Level_dBm>;:POW:RF:ATT <Attenuation_dB>;:POW:GAIN <Preamp_On>",
       "description": "Set Power Levels",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
       "group": "RIG Amplitude Commands",
       "args": [
         "Ref_Level_dBm",
@@ -230,7 +1534,11 @@
     },
     "freq_start_stop": {
       "scpi": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>",
+      "scpiFast": ":FREQ:STAR <start_freq>;:FREQ:STOP <stop_freq>",
       "description": "Frequency Range Commands",
+      "arg": {
+        "kind": "numeric"
+      },
       "group": "RIG Frequency commands",
       "args": [
         "start_freq",
@@ -242,49 +1550,1060 @@
   "nab": {
     "Attenuation": {
       "scpi": ":POWer:RF:ATTenuation?",
+      "scpiFast": ":POW:RF:ATT?",
       "description": "Attenuation",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "Frequency_settings": {
       "scpi": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?",
+      "scpiFast": ":FREQ:STAR?;:FREQ:STOP?;:FREQ:CENT?;:FREQ:SPAN?",
       "description": "Primary Frequency Monitoring",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "start",
+            "type": "NR3"
+          },
+          {
+            "name": "stop",
+            "type": "NR3"
+          },
+          {
+            "name": "center",
+            "type": "NR3"
+          },
+          {
+            "name": "span",
+            "type": "NR3"
+          }
+        ]
+      },
       "group": "NAB Frequency Monitoring",
       "subsystem": "Frequency"
     },
+    "Get_Bwidth_Integration": {
+      "scpi": "BWIDth:INTegration?",
+      "scpiFast": "BWID:INT?",
+      "description": "Set the Chan Integ BW",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Get_Bwidth_Resolution": {
+      "scpi": "BWIDth:RESolution?",
+      "scpiFast": "BWID:RES?",
+      "description": "Set the Channel Res BW",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Get_Bwidth_Video": {
+      "scpi": "BWIDth:VIDeo?",
+      "scpiFast": "BWID:VID?",
+      "description": "Video Bandwidth",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Get_Bwidth_Video_Ratio": {
+      "scpi": "BWIDth:VIDeo:RATio?",
+      "scpiFast": "BWID:VID:RAT?",
+      "description": "Video to Resolution Bandwidth Ratio",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "BWID",
+      "unverified": true
+    },
+    "Get_Calculate_Lline_Buzzer_State": {
+      "scpi": ":CALCulate:LLINe1:BUZZer:STATe?",
+      "scpiFast": ":CALC:LLIN1:BUZZ:STAT?",
+      "description": "Turn on/off the Buzzer",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Calculate_Lline_State": {
+      "scpi": ":CALCulate:LLINe1:STATe?",
+      "scpiFast": ":CALC:LLIN1:STAT?",
+      "description": "Limit Line Testing",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "CALC",
+      "unverified": true
+    },
+    "Get_Demod_Am_State": {
+      "scpi": ":DEMod:AM:STATe?",
+      "scpiFast": ":DEM:AM:STAT?",
+      "description": "AM Demodulation",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "DEM",
+      "unverified": true
+    },
+    "Get_Demod_Fm_State": {
+      "scpi": ":DEMod:FM:STATe?",
+      "scpiFast": ":DEM:FM:STAT?",
+      "description": "FM Demodulation",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "DEM",
+      "unverified": true
+    },
+    "Get_Display_Mode_Brightness": {
+      "scpi": ":DISPlay:MODE:BRIGhtness?",
+      "scpiFast": ":DISP:MODE:BRIG?",
+      "description": "Brightness",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Ese": {
+      "scpi": "*ESE?",
+      "description": "Get ese",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Esr": {
+      "scpi": "*ESR?",
+      "description": "Get esr",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Fcount_State": {
+      "scpi": "FCOunt:STATe?",
+      "scpiFast": "FCO:STAT?",
+      "description": "Frequency Counter Marker",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "FCO",
+      "unverified": true
+    },
+    "Get_Idn": {
+      "scpi": "*IDN?",
+      "description": "Get idn",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Instrument_Measure": {
+      "scpi": ":INSTrument:MEASure?",
+      "scpiFast": ":INST:MEAS?",
+      "description": "Power Measurement",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "INST",
+      "unverified": true
+    },
+    "Get_Instrument_Select": {
+      "scpi": ":INSTrument:SELect?",
+      "scpiFast": ":INST:SEL?",
+      "description": "Instrument Mode",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "INST",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Adjacent": {
+      "scpi": ":MEASure:ACPR:ADJacent?",
+      "scpiFast": ":MEAS:ACPR:ADJ?",
+      "description": "Adjacent channel",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Center": {
+      "scpi": ":MEASure:ACPR:CENTer?",
+      "scpiFast": ":MEAS:ACPR:CENT?",
+      "description": "Center Freq",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Lpower": {
+      "scpi": ":MEASure:ACPR:LPOWer?",
+      "scpiFast": ":MEAS:ACPR:LPOW?",
+      "description": "Low Adjacent Channel Power",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Lratio": {
+      "scpi": ":MEASure:ACPR:LRATio?",
+      "scpiFast": ":MEAS:ACPR:LRAT?",
+      "description": "Low Adjacent Channel Power Ratio",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Main": {
+      "scpi": ":MEASure:ACPR:MAIN?",
+      "scpiFast": ":MEAS:ACPR:MAIN?",
+      "description": "Main channel",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Mpower": {
+      "scpi": ":MEASure:ACPR:MPOWer?",
+      "scpiFast": ":MEAS:ACPR:MPOW?",
+      "description": "Main Channel Power",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Spacing": {
+      "scpi": ":MEASure:ACPR:SPACe?",
+      "scpiFast": ":MEAS:ACPR:SPAC?",
+      "description": "Channel space",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Upower": {
+      "scpi": ":MEASure:ACPR:UPOWer?",
+      "scpiFast": ":MEAS:ACPR:UPOW?",
+      "description": "Upper Adjacent Channel Power",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Acpr_Uratio": {
+      "scpi": ":MEASure:ACPR:URATio?",
+      "scpiFast": ":MEAS:ACPR:URAT?",
+      "description": "Upper Adjacent Channel Power Ratio",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower": {
+      "scpi": ":MEASure:CHPower?",
+      "scpiFast": ":MEAS:CHP?",
+      "description": "Channel Power and Density",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower_Center": {
+      "scpi": ":MEASure:CHPower:CENTer?",
+      "scpiFast": ":MEAS:CHP:CENT?",
+      "description": "Center Freq",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower_Chpower": {
+      "scpi": ":MEASure:CHPower:CHPower?",
+      "scpiFast": ":MEAS:CHP:CHP?",
+      "description": "Channel Power and Density",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower_Density": {
+      "scpi": ":MEASure:CHPower:DENSity?",
+      "scpiFast": ":MEAS:CHP:DENS?",
+      "description": "Channel Power and Density",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower_Ibw": {
+      "scpi": ":MEASure:CHPower:IBW?",
+      "scpiFast": ":MEAS:CHP:IBW?",
+      "description": "Get measure chpower ibw",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Chpower_Span": {
+      "scpi": ":MEASure:CHPower:SPAN?",
+      "scpiFast": ":MEAS:CHP:SPAN?",
+      "description": "Channel Span",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Obw_Method": {
+      "scpi": ":MEASure:OBW:METHod?",
+      "scpiFast": ":MEAS:OBW:METH?",
+      "description": "Select the measurement method of OBW",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Obw_Percent": {
+      "scpi": ":MEASure:OBW:PERCent?",
+      "scpiFast": ":MEAS:OBW:PERC?",
+      "description": "Set percentage (%) method of OBW",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Obw_Xdb": {
+      "scpi": ":MEASure:OBW:XDB?",
+      "scpiFast": ":MEAS:OBW:XDB?",
+      "description": "Set dBc method of OBW",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Average_Count": {
+      "scpi": ":MEASure:SEMask:AVERage:COUNt?",
+      "scpiFast": ":MEAS:SEM:AVER:COUN?",
+      "description": "Set the Average",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Average_State": {
+      "scpi": ":MEASure:SEMask:AVERage:STATe?",
+      "scpiFast": ":MEAS:SEM:AVER:STAT?",
+      "description": "Set the Average",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Carrier_Power": {
+      "scpi": ":MEASure:SEMask:CARRier:POWer?",
+      "scpiFast": ":MEAS:SEM:CARR:POW?",
+      "description": "Set Total Power Reference",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Frequency_Center": {
+      "scpi": "MEASure:SEMask:FREQuency:CENTer?",
+      "scpiFast": "MEAS:SEM:FREQ:CENT?",
+      "description": "Set Center Frequency",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Frequency_Span": {
+      "scpi": ":MEASure:SEMask:FREQuency:SPAN?",
+      "scpiFast": ":MEAS:SEM:FREQ:SPAN?",
+      "description": "Set Chan Span",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Frequency_Start": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:FREQuency:STARt?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:FREQ:STAR?",
+      "description": "Set the Start Freq",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Frequency_Stop": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:FREQuency:STOP?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:FREQ:STOP?",
+      "description": "Set the Stop Freq",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Start_Absolute": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STARt:ABSolute?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAR:ABS?",
+      "description": "Set the Abs Start",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Start_Rcarrier": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STARt:RCARrier?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAR:RCAR?",
+      "description": "Set the Rel Start",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_State": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:STATe?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:STAT?",
+      "description": "Set the Start Freq",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Sweep": {
+      "scpi": ":MEASure:SEMask:OFFSet:LIST:SWEeptime?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:SWE?",
+      "description": "Set the Sweep Time",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Offset_List_Test": {
+      "scpi": ":MEASure:SEMask:OFFSetn:LIST:TEST?",
+      "scpiFast": ":MEAS:SEM:OFFS:LIST:TEST?",
+      "description": "Set the Fail Mask",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Measure_Semask_Sweep": {
+      "scpi": ":MEASure:SEMask:SWEeptime?",
+      "scpiFast": ":MEAS:SEM:SWE?",
+      "description": "Set the Sweep Time",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "s"
+      },
+      "subsystem": "MEAS",
+      "unverified": true
+    },
+    "Get_Opc": {
+      "scpi": "*OPC?",
+      "description": "Get opc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Scale_Pdivision": {
+      "scpi": ":SCALe:PDIVision?",
+      "scpiFast": ":SCAL:PDIV?",
+      "description": "Trace Y-Axis Scaling",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Get_Scale_Rlevel_Offset": {
+      "scpi": ":SCALe:RLEVel:OFFSet?",
+      "scpiFast": ":SCAL:RLEV:OFFS?",
+      "description": "Trace Y-Axis Reference Level",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Get_Scale_Spacing": {
+      "scpi": ":SCALe:SPACing?",
+      "scpiFast": ":SCAL:SPAC?",
+      "description": "Vertical Axis Scaling",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SCAL",
+      "unverified": true
+    },
+    "Get_Sense_Detector_Function": {
+      "scpi": ":SENSe:DETector:FUNCtion?",
+      "scpiFast": ":SENS:DET:FUNC?",
+      "description": "Type of Detection",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Frequency_Center": {
+      "scpi": ":SENSe:FREQuency:CENTer?",
+      "scpiFast": ":SENS:FREQ:CENT?",
+      "description": "Center Frequency",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Frequency_Center_Step_Increment": {
+      "scpi": ":SENSe:FREQuency:CENTer:STEP:INCRement?",
+      "scpiFast": ":SENS:FREQ:CENT:STEP:INCR?",
+      "description": "Center Frequency Step Size",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Frequency_Span": {
+      "scpi": ":SENSe:FREQuency:SPAN?",
+      "scpiFast": ":SENS:FREQ:SPAN?",
+      "description": "Frequency Span",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Frequency_Start": {
+      "scpi": ":SENSe:FREQuency:STARt?",
+      "scpiFast": ":SENS:FREQ:STAR?",
+      "description": "Start Frequency",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Frequency_Stop": {
+      "scpi": ":SENSe:FREQuency:STOP?",
+      "scpiFast": ":SENS:FREQ:STOP?",
+      "description": "Stop Frequency",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Power_Rf_Attenuation": {
+      "scpi": ":SENSe:POWer:RF:ATTenuation?",
+      "scpiFast": ":SENS:POW:RF:ATT?",
+      "description": "Input Attenuation",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "dB"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Power_Rf_Gain_State": {
+      "scpi": ":SENSe:POWer:RF:GAIN:STATe?",
+      "scpiFast": ":SENS:POW:RF:GAIN:STAT?",
+      "description": "Input Port Power Gain",
+      "returns": {
+        "count": 1,
+        "type": "BOOL",
+        "unit": "dB"
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sense_Sweep_Tdmode": {
+      "scpi": ":SENSe:SWEep:TDMode?",
+      "scpiFast": ":SENS:SWE:TDM?",
+      "description": "Get sense sweep tdmode",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SENS",
+      "unverified": true
+    },
+    "Get_Sre": {
+      "scpi": "*SRE?",
+      "description": "Get sre",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Stb": {
+      "scpi": "*STB?",
+      "description": "Get stb",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_System_Channel": {
+      "scpi": ":SYSTem:CHANnel?",
+      "scpiFast": ":SYST:CHAN?",
+      "description": "Low Frequency Channel",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Configure_Port": {
+      "scpi": ":SYSTem:CONFigure:PORT?",
+      "scpiFast": ":SYST:CONF:PORT?",
+      "description": "Power on Type",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Date": {
+      "scpi": ":SYSTem:DATE?",
+      "scpiFast": ":SYST:DATE?",
+      "description": "Set Date",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Error_Next": {
+      "scpi": ":SYSTem:ERRor:NEXT?",
+      "scpiFast": ":SYST:ERR:NEXT?",
+      "description": "Error Information Query",
+      "returns": {
+        "count": 1,
+        "type": "ERROR"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_System_Time": {
+      "scpi": ":SYSTem:TIME?",
+      "scpiFast": ":SYST:TIME?",
+      "description": "Set Time",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_Tgenerator_Amplitude": {
+      "scpi": ":TGENerator:AMPLitude?",
+      "scpiFast": ":TGEN:AMPL?",
+      "description": "Output Amplitdue",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Amplitude_State": {
+      "scpi": ":TGENerator:AMPLitude:STATe?",
+      "scpiFast": ":TGEN:AMPL:STAT?",
+      "description": "Amplitude On/Off",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Amplitude_Step": {
+      "scpi": ":TGENerator:AMPLitude:STEP?",
+      "scpiFast": ":TGEN:AMPL:STEP?",
+      "description": "Amplitude Step",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Normalize_Level": {
+      "scpi": ":TGENerator:NORMalize:LEVel?",
+      "scpiFast": ":TGEN:NORM:LEV?",
+      "description": "Normalization Reference Level",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Normalize_Posn": {
+      "scpi": ":TGENerator:NORMalize:POSN?",
+      "scpiFast": ":TGEN:NORM:POSN?",
+      "description": "Normalization Reference Position",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Normalize_State": {
+      "scpi": ":TGENerator:NORMalize:STATe?",
+      "scpiFast": ":TGEN:NORM:STAT?",
+      "description": "Normalization",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Tgenerator_Normalize_Trace": {
+      "scpi": ":TGENerator:NORMalize:TRACe?",
+      "scpiFast": ":TGEN:NORM:TRAC?",
+      "description": "Reference Trace",
+      "returns": {
+        "count": 1,
+        "type": "BLOCK"
+      },
+      "subsystem": "TGEN",
+      "unverified": true
+    },
+    "Get_Trace_Format": {
+      "scpi": ":TRACe:FORMat?",
+      "scpiFast": ":TRAC:FORM?",
+      "description": "Trace format",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRAC",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Delaytime": {
+      "scpi": ":TRIGger:SEQuence:DELaytime?",
+      "scpiFast": ":TRIG:SEQ:DEL?",
+      "description": "Trigger Delay Time",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_External_Slope": {
+      "scpi": ":TRIGger:SEQuence:EXTernal1:SLOPe?",
+      "scpiFast": ":TRIG:SEQ:EXT1:SLOP?",
+      "description": "External Trigger Slope",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Source": {
+      "scpi": ":TRIGger:SEQuence:SOURce?",
+      "scpiFast": ":TRIG:SEQ:SOUR?",
+      "description": "Trigger Source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Sequence_Video_Level": {
+      "scpi": ":TRIGger:SEQuence:VIDeo:LEVel?",
+      "scpiFast": ":TRIG:SEQ:VID:LEV?",
+      "description": "Video Trigger Level Amplitude",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Tst": {
+      "scpi": "*TST?",
+      "description": "Get tst",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Unit_Power": {
+      "scpi": ":UNIT:POWer?",
+      "scpiFast": ":UNIT:POW?",
+      "description": "Select Power Units of Measure",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "UNIT",
+      "unverified": true
+    },
+    "Get_Unit_Power_Emf": {
+      "scpi": ":UNIT:POWer:EMF?",
+      "scpiFast": ":UNIT:POW:EMF?",
+      "description": "EMF Mode",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "UNIT",
+      "unverified": true
+    },
     "Preamp_State": {
       "scpi": ":SENSE:POWer:RF:GAIN:STATe?",
+      "scpiFast": ":SENS:POW:RF:GAIN:STAT?",
       "description": "Preamp State",
+      "returns": {
+        "count": 1,
+        "type": "BOOL",
+        "unit": "dB"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "Reference_Level": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV?",
       "description": "Reference Level",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
       "group": "Individual Read Queries",
       "subsystem": "Amplitude"
     },
     "all_marker_settings": {
       "scpi": ":CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?",
+      "scpiFast": ":CALC:MARK1:Y?;:CALC:MARK2:Y?;:CALC:MARK3:Y?;:CALC:MARK4:Y?;:CALC:MARK5:Y?;:CALC:MARK6:Y?;:CALC:MARK1:X?;:CALC:MARK2:X?;:CALC:MARK3:X?;:CALC:MARK4:X?;:CALC:MARK5:X?;:CALC:MARK6:X?",
       "description": "Marker Amplitude and Frequency Readbacks",
+      "returns": {
+        "count": 12,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "y_1",
+            "type": "NR3"
+          },
+          {
+            "name": "y_2",
+            "type": "NR3"
+          },
+          {
+            "name": "y_3",
+            "type": "NR3"
+          },
+          {
+            "name": "y_4",
+            "type": "NR3"
+          },
+          {
+            "name": "y_5",
+            "type": "NR3"
+          },
+          {
+            "name": "y_6",
+            "type": "NR3"
+          },
+          {
+            "name": "x_1",
+            "type": "NR3"
+          },
+          {
+            "name": "x_2",
+            "type": "NR3"
+          },
+          {
+            "name": "x_3",
+            "type": "NR3"
+          },
+          {
+            "name": "x_4",
+            "type": "NR3"
+          },
+          {
+            "name": "x_5",
+            "type": "NR3"
+          },
+          {
+            "name": "x_6",
+            "type": "NR3"
+          }
+        ]
+      },
       "group": "NAB Marker Monitoring",
       "subsystem": "Markers"
     },
     "amplitude_settings": {
       "scpi": ":DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?",
+      "scpiFast": ":DISP:WIND:TRAC:Y:RLEV?;:POW:ATT?;:POW:GAIN?",
       "description": "Power and Attenuation Readbacks",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "rlevel",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "attenuation",
+            "type": "NR3",
+            "unit": "dB"
+          },
+          {
+            "name": "gain",
+            "type": "NR3",
+            "unit": "dB"
+          }
+        ]
+      },
       "group": "NAB Amplitude Monitoring",
       "subsystem": "Amplitude"
     },
     "bandwidth_settings": {
       "scpi": ":SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?",
+      "scpiFast": ":SENS:BAND:RES?;:SENS:BAND:VID?;:SENS:BAND:VID:AUTO?;:INIT:CONT?;:SENS:SWE:TIME?",
       "description": "Bandwidth and Sweep Monitoring",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "resolution"
+          },
+          {
+            "name": "video"
+          },
+          {
+            "name": "auto",
+            "type": "BOOL"
+          },
+          {
+            "name": "continuous",
+            "type": "BOOL"
+          },
+          {
+            "name": "time",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
       "group": "NAB Bandwidth Monitoring",
       "subsystem": "Bandwidth"
     },
     "error_information": {
       "scpi": ":SYSTem:ERRor?",
+      "scpiFast": ":SYST:ERR?",
       "description": "System Error Check",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Status and Identification",
       "subsystem": "System"
     }

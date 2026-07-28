@@ -1,0 +1,7 @@
+{
+  "model": "HP_8903B",
+  "manufacturer": "HP / Agilent / Keysight",
+  "type": "Distortion",
+  "notes": "Audio Analyzer (20 Hz - 100 kHz, distortion/level)",
+  "vocabulary": "none"
+}

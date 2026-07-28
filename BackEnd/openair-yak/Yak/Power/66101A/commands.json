@@ -1,13 +1,1030 @@
 {
   "model": "66101A",
   "family": "Power",
-  "set": {},
+  "set": {
+    "Set_Calibrate_Status": {
+      "scpi": "CAL:STAT <value>",
+      "description": "RST Value OFF",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Set_Current_Trigger": {
+      "scpi": "CURR:TRIG <value>",
+      "description": "Set current trigger",
+      "arg": {
+        "kind": "numeric",
+        "unit": "A",
+        "domain": "curr"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Set_Display_Window_Status": {
+      "scpi": "DISP:WIND:STAT <value>",
+      "description": "This command turns the power module optional front panel voltage and current displays on and off",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Set_Ese": {
+      "scpi": "*ESE <value>",
+      "description": "Set ese",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Initiate_Continuous": {
+      "scpi": "INIT:CONT <value>",
+      "description": "Set initiate continuous",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "INIT",
+      "unverified": true
+    },
+    "Set_Output_Dfi_Link": {
+      "scpi": "OUTP:DFI:LINK <value>",
+      "description": "This command specifies which events within the power module are linked to DFI source events",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Dfi_Source": {
+      "scpi": "OUTP:DFI:SOUR <value>",
+      "description": "This command selects the source for DFI events",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Dfi_Status": {
+      "scpi": "OUTP:DFI:STAT <value>",
+      "description": "This command enables or disables the discrete fault indicator (DFI) signal to the power module backplane",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Protection_Delay": {
+      "scpi": "OUTP:PROT:DEL <value>",
+      "description": "Set output protection delay",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Relay": {
+      "scpi": "OUTP:REL <value>",
+      "description": "Output Subsystem",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Relay_Polarity": {
+      "scpi": "OUTP:REL:POL <value>",
+      "description": "This command is valid only if the power module is configured for the optional relay connector",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Relay_Status": {
+      "scpi": "OUTP:REL:STAT <value>",
+      "description": "This command is valid only if the power module is configured for the optional relay connector",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Status": {
+      "scpi": "OUTP:STAT <value>",
+      "description": "If the power module is configured to use the relay option, the command opens the relay contacts when the output is disabled and closes them when it is enabled",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Ttltrg_Link": {
+      "scpi": "OUTP:TTLT:LINK <value>",
+      "description": "Set output ttltrg link",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Ttltrg_Source": {
+      "scpi": "OUTP:TTLT:SOUR <value>",
+      "description": "Set output ttltrg source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Output_Ttltrg_Status": {
+      "scpi": "OUTP:TTLT:STAT <value>",
+      "description": "This command enables or disables the power module Trigger Out signal, which is available at a BNC connector on the rear of the mainframe",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Set_Psc": {
+      "scpi": "*PSC <value>",
+      "description": "Set psc",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Rcl": {
+      "scpi": "*RCL <value>",
+      "description": "Set rcl",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Sav": {
+      "scpi": "*SAV <value>",
+      "description": "Set sav",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Source_Current_Level_Immediate_Amplitude": {
+      "scpi": "SOUR:CURR:LEV:IMM:AMPL <value>",
+      "description": "Set source current level immediate amplitude",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Current_Level_Trigger_Amplitude": {
+      "scpi": "SOUR:CURR:LEV:TRIG:AMPL <value>",
+      "description": "Set source current level trigger amplitude",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Current_Mode": {
+      "scpi": "SOURce:CURRent:MODE <value>",
+      "scpiFast": "SOUR:CURR:MODE <value>",
+      "description": "LIST:CURR . If the LIST parameter is used, then the output current may be changed by the subsequent execution of a list",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Current_Protection_Status": {
+      "scpi": "SOURce:CURRent:PROTection:STATe <value>",
+      "scpiFast": "SOUR:CURR:PROT:STAT <value>",
+      "description": "This command enables or disables the power module overcurrent (OC) protection function",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_List_Count": {
+      "scpi": "SOURce:LIST:COUNt <value>",
+      "scpiFast": "SOUR:LIST:COUN <value>",
+      "description": "This command sets the number of times that the list is executed before it is completed",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_List_Dwel": {
+      "scpi": "SOURce:LIST:DWEL<chan> <value>",
+      "scpiFast": "SOUR:LIST:DWEL<chan> <value>",
+      "description": "- If LIST:STEP ONCE has been programmed, the output remains at the present level until a trigger sequences the next point in the list",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_List_Step": {
+      "scpi": "SOUR:LIST:STEP <value>",
+      "description": "In either mode, triggers that occur during a dwell interval are ignored",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Voltage_Level_Trigger_Amplitude": {
+      "scpi": "SOUR:VOLT:LEV:TRIG:AMPL <value>",
+      "description": "Set source voltage level trigger amplitude",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Voltage_Mode": {
+      "scpi": "SOURce:VOLTage:MODE <value>",
+      "scpiFast": "SOUR:VOLT:MODE <value>",
+      "description": "LIST:VOLT . If the LIST parameter is used, then the output voltage may be changed by the subsequent execution of a list",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Source_Voltage_Protection_Level": {
+      "scpi": "SOUR:VOLT:PROT:LEV <value>",
+      "description": "Set source voltage protection level",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Set_Sre": {
+      "scpi": "*SRE <value>",
+      "description": "Set sre",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Set_Status_Operation": {
+      "scpi": "STAT:OPER <value>",
+      "description": "Register Commands",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Operation_Enable": {
+      "scpi": "STAT:OPER:ENAB <value>",
+      "description": "This command and its query set and read the value of the Operation Enable register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Operation_Event": {
+      "scpi": "STAT:OPER:EVEN <value>",
+      "description": "This query returns the value of the Operation Event register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Operation_Ntransition": {
+      "scpi": "STAT:OPER:NTR <value>",
+      "description": "corresponding Operation Event register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Operation_Ptransition": {
+      "scpi": "STAT:OPER:PTR <value>",
+      "description": "corresponding Operation Event register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Questionable": {
+      "scpi": "STAT:QUES <value>",
+      "description": "Register Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Questionable_Enable": {
+      "scpi": "STAT:QUES:ENAB <value>",
+      "description": "This command sets or reads the value of the Questionable Enable register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Questionable_Ntransition": {
+      "scpi": "STAT:QUES:NTR <value>",
+      "description": "corresponding Questionable Event register",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Status_Questionable_Ptransition": {
+      "scpi": "STAT:QUES:PTR <value>",
+      "description": "Register Commands",
+      "arg": {
+        "kind": "integer"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Set_Trigger_Delay": {
+      "scpi": "TRIG:DEL <value>",
+      "description": "Set trigger delay",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Link": {
+      "scpi": "TRIG:LINK <value>",
+      "description": "Set trigger link",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Source": {
+      "scpi": "TRIG:SOUR <value>",
+      "description": "Set trigger source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Start_Delay": {
+      "scpi": "TRIGger:STARt:DELay <value>",
+      "scpiFast": "TRIG:STAR:DEL <value>",
+      "description": "This command sets the time delay between the detection of an event on the specified trigger source and the start of any corresponding trigger action on the power module’s output",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Start_Link": {
+      "scpi": "TRIG:STAR:LINK <value>",
+      "description": "This command specifies which event conditions within the power module are linked to trigger source events when LINK is the parameter of the TRIG:SOUR command",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Trigger_Start_Source": {
+      "scpi": "TRIGger:STARt:SOURce <value>",
+      "scpiFast": "TRIG:STAR:SOUR <value>",
+      "description": "This command selects the power module input trigger source as follows",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Set_Voltage_Alc_Source": {
+      "scpi": "VOLT:ALC:SOUR <value>",
+      "description": "Set voltage alc source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Set_Voltage_Protection": {
+      "scpi": "VOLT:PROT <value>",
+      "description": "Query Indicator",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Set_Voltage_Sense_Source": {
+      "scpi": "VOLT:SENS:SOUR <value>",
+      "description": "Set voltage sense source",
+      "arg": {
+        "kind": "enum"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Set_Voltage_Trigger": {
+      "scpi": "VOLT:TRIG <value>",
+      "description": "Set voltage trigger",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V",
+        "domain": "volt"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "VOLT",
+      "unverified": true
+    }
+  },
   "do": {
     "Clear_Status": {
       "scpi": "*CLS",
       "description": "Clear Status",
       "group": "Common Commands",
       "subsystem": "Common"
+    },
+    "Do_Calibrate_Aut": {
+      "scpi": "CAL:AUT",
+      "description": "Do calibrate aut",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Current": {
+      "scpi": "CAL:CURR",
+      "description": "Do calibrate current",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Current_Data": {
+      "scpi": "CAL:CURR:DATA",
+      "description": "This command can only be used in the calibration mode",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Current_Level": {
+      "scpi": "CAL:CURR:LEV",
+      "description": "This command can only be used in the calibration mode",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Passcode": {
+      "scpi": "CAL:PASS",
+      "description": "If the password is set to 0, password protection is removed and the ability to enter the calibration mode is unrestricted",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Sav": {
+      "scpi": "CAL:SAV",
+      "description": "Do calibrate sav",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Voltage": {
+      "scpi": "CAL:VOLT",
+      "description": "Do calibrate voltage",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Voltage_Data": {
+      "scpi": "CAL:VOLT:DATA",
+      "description": "This command can only be used in the calibration mode",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Voltage_Level": {
+      "scpi": "CAL:VOLT:LEV",
+      "description": "This command can only be used in the calibration mode",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Calibrate_Voltage_Protection": {
+      "scpi": "CAL:VOLT:PROT",
+      "description": "Do calibrate voltage protection",
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Do_Current_Immediate": {
+      "scpi": "CURR:IMM",
+      "description": "Do current immediate",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Level": {
+      "scpi": "CURR:LEV",
+      "description": "Do current level",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Level_Immediate": {
+      "scpi": "CURR:LEV:IMM",
+      "description": "Do current level immediate",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Level_Trigger": {
+      "scpi": "CURR:LEV:TRIG",
+      "description": "Trigger Subsystem",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_List": {
+      "scpi": "CURR:LIST",
+      "description": "Do current list",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Mode": {
+      "scpi": "CURR:MODE",
+      "description": "Do current mode",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Mode_List": {
+      "scpi": "CURR:MODE:LIST",
+      "description": "Do current mode list",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Protection": {
+      "scpi": "CURRent:PROTection",
+      "scpiFast": "CURR:PROT",
+      "description": "Do current protection",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Current_Protection_Status": {
+      "scpi": "CURR:PROT:STAT",
+      "description": "Do current protection status",
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Do_Display_Status": {
+      "scpi": "DISP:STAT",
+      "description": "Do display status",
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Do_Immediate_Amplitude": {
+      "scpi": ":IMMediate:AMPLitude",
+      "scpiFast": ":IMM:AMPL",
+      "description": "This command directly programs the immediate current level of the power module",
+      "subsystem": "IMM",
+      "unverified": true
+    },
+    "Do_Initiate_Immediate": {
+      "scpi": "INIT:IMM",
+      "description": "subsequent trigger action",
+      "subsystem": "INIT",
+      "unverified": true
+    },
+    "Do_List_Count": {
+      "scpi": "LIST:COUN",
+      "description": "Do list count",
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Do_List_Current": {
+      "scpi": "LIST:CURR",
+      "description": "Do list current",
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Do_List_Dwel": {
+      "scpi": "LIST:DWEL",
+      "description": "Do list dwel",
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Do_List_Step": {
+      "scpi": "LIST:STEP",
+      "description": "Do list step",
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Do_List_Voltage": {
+      "scpi": "LIST:VOLT",
+      "description": "Do list voltage",
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Do_Opc": {
+      "scpi": "*OPC",
+      "description": "Do opc",
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Do_Output_Dfi": {
+      "scpi": "OUTP:DFI",
+      "description": "Do output dfi",
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Do_Output_Protection": {
+      "scpi": "OUTP:PROT",
+      "description": "Do output protection",
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Do_Output_Protection_Clear": {
+      "scpi": "OUTP:PROT:CLE",
+      "description": "OUTP:PROT:DEL Sets the delay time between the programming of an output change that produces a CV, CC, or UNREG condition and the recording of that condition by the Status Operation Condition register",
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Do_Output_Ttltrg": {
+      "scpi": "OUTP:TTLT",
+      "description": "Do output ttltrg",
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Do_Protection_Clear": {
+      "scpi": "PROTECTION:CLEAR",
+      "scpiFast": "PROT:CLE",
+      "description": "The Effect of Optional Headers",
+      "subsystem": "PROTECTION",
+      "unverified": true
+    },
+    "Do_Source_Current_Level": {
+      "scpi": "SOURce:CURRent:LEVel",
+      "scpiFast": "SOUR:CURR:LEV",
+      "description": "This command directly programs the immediate current level of the power module",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Current_Level_Trigger": {
+      "scpi": "SOURce:CURRent:LEVel:TRIGgered",
+      "scpiFast": "SOUR:CURR:LEV:TRIG",
+      "description": "This command programs the pending triggered current level of the power module",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Currlev_Trigger": {
+      "scpi": "SOURce:CURRent:LEVel:TRIGgered",
+      "scpiFast": "SOUR:CURR:LEV:TRIG",
+      "description": "RST Value _See Table 3-2_",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_List": {
+      "scpi": "SOURce:LIST",
+      "scpiFast": "SOUR:LIST",
+      "description": "Conventions",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_List_Current": {
+      "scpi": "SOURce:LIST:CURRent",
+      "scpiFast": "SOUR:LIST:CURR",
+      "description": "This command specifies the output current points in a list",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_List_Voltage": {
+      "scpi": "SOURce:LIST:VOLTage",
+      "scpiFast": "SOUR:LIST:VOLT",
+      "description": "This command specifies the output voltage points in a list",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Voltage_Level": {
+      "scpi": "SOURce:VOLTage:LEVel",
+      "scpiFast": "SOUR:VOLT:LEV",
+      "description": "This command directly programs the immediate voltage level of the power module",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Voltage_Level_Immediate_Amplitude": {
+      "scpi": "SOUR:VOLT:LEV:IMM:AMPL",
+      "description": "Do source voltage level immediate amplitude",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Voltage_Level_Trigger": {
+      "scpi": "SOURce:VOLTage:LEVel:TRIGgered",
+      "scpiFast": "SOUR:VOLT:LEV:TRIG",
+      "description": "This command programs the pending triggered voltage level of the power module",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Voltage_Protection": {
+      "scpi": "SOURce:VOLTage:PROTection",
+      "scpiFast": "SOUR:VOLT:PROT",
+      "description": "- Status Reporting\")",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Source_Voltlev_Trigger": {
+      "scpi": "SOURce:VOLTage:LEVel:TRIGgered",
+      "scpiFast": "SOUR:VOLT:LEV:TRIG",
+      "description": "Do source voltlev trigger",
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Do_Status_Pre": {
+      "scpi": "STAT:PRE",
+      "description": "Status Registers",
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Do_Trigger_Immediate": {
+      "scpi": "TRIG:IMM",
+      "description": "Do trigger immediate",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Trigger_Start_Immediate": {
+      "scpi": "TRIGger:STARt:IMMediate",
+      "scpiFast": "TRIG:STAR:IMM",
+      "description": "1. Initiate a pending level change as specified by CURR[:LEV]:TRIG or VOLT[:LEV]:TRIG",
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Do_Ttltrg_Link": {
+      "scpi": "TTLT:LINK",
+      "description": "Do ttltrg link",
+      "subsystem": "TTLT",
+      "unverified": true
+    },
+    "Do_Voltage_Immediate": {
+      "scpi": "VOLT:IMM",
+      "description": "Do voltage immediate",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Level": {
+      "scpi": "VOLT:LEV",
+      "description": "Do voltage level",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Level_Immediate": {
+      "scpi": "VOLT:LEV:IMM",
+      "description": "Do voltage level immediate",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Level_Trigger": {
+      "scpi": "VOLT:LEV:TRIG",
+      "description": "Trigger Subsystem",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_List": {
+      "scpi": "VOLT:LIST",
+      "description": "SCPI Command Completion",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Mode": {
+      "scpi": "VOLT:MODE",
+      "description": "Do voltage mode",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Protection_Level": {
+      "scpi": "VOLT:PROT:LEV",
+      "description": "Do voltage protection level",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Voltage_Tiug": {
+      "scpi": "VOLT:TIUG",
+      "description": "Do voltage tiug",
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Do_Wai": {
+      "scpi": "*WAI",
+      "description": "Do wai",
+      "subsystem": "Common",
+      "unverified": true
     },
     "Output_OFF": {
       "scpi": "INST:NSEL <chan>;OUTP OFF",
@@ -54,6 +1071,9 @@
     "Set_Levels": {
       "scpi": "INST:NSEL <chan>;VOLT <volt>;CURR <curr>",
       "description": "Set Levels",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Configuration",
       "args": [
         "volt",
@@ -64,6 +1084,9 @@
     "Set_S1_Levels": {
       "scpi": "INST:NSEL 1;VOLT <volt>;CURR <curr>",
       "description": "Set S1 Levels",
+      "arg": {
+        "kind": "unknown"
+      },
       "group": "Configuration (Volts/Amps)",
       "args": [
         "volt",
@@ -72,21 +1095,764 @@
     }
   },
   "nab": {
+    "Get_Calibrate_Status": {
+      "scpi": "CALibrate:STATe?",
+      "scpiFast": "CAL:STAT?",
+      "description": "RST Value OFF",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "CAL",
+      "unverified": true
+    },
+    "Get_Current_Trigger": {
+      "scpi": "CURR:TRIG?",
+      "description": "Get current trigger",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "A"
+      },
+      "subsystem": "CURR",
+      "unverified": true
+    },
+    "Get_Display_Window_Status": {
+      "scpi": "DISPlay:WINDow:STAT?",
+      "scpiFast": "DISP:WIND:STAT?",
+      "description": "This command turns the power module optional front panel voltage and current displays on and off",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "DISP",
+      "unverified": true
+    },
+    "Get_Ese": {
+      "scpi": "*ESE?",
+      "description": "Get ese",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Esr": {
+      "scpi": "*ESR?",
+      "description": "Get esr",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Idn": {
+      "scpi": "*IDN?",
+      "description": "Get idn",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Immediate_Amplitude": {
+      "scpi": ":IMMediate:AMPlitude?",
+      "scpiFast": ":IMM:AMP?",
+      "description": "RST Value Table 3-2",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "IMM",
+      "unverified": true
+    },
+    "Get_Initiate_Continuous": {
+      "scpi": "INITiate:CONTinuous?",
+      "scpiFast": "INIT:CONT?",
+      "description": "Get initiate continuous",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "INIT",
+      "unverified": true
+    },
+    "Get_List_Current_Points": {
+      "scpi": "LIST:CURR:POIN?",
+      "description": "Get list current points",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "A"
+      },
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Get_List_Dwel_Points": {
+      "scpi": "LIST:DWEL:POIN?",
+      "description": "Get list dwel points",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Get_List_Voltage_Points": {
+      "scpi": "LIST:VOLT:POIN?",
+      "description": "Get list voltage points",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "V"
+      },
+      "subsystem": "LIST",
+      "unverified": true
+    },
+    "Get_Opc": {
+      "scpi": "*OPC?",
+      "description": "Get opc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Opt": {
+      "scpi": "*OPT?",
+      "description": "Get opt",
+      "returns": {
+        "count": 1,
+        "type": "AARD"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Output_Dfi_Link": {
+      "scpi": "OUTPut:DFI:LINK?",
+      "scpiFast": "OUTP:DFI:LINK?",
+      "description": "This command specifies which events within the power module are linked to DFI source events",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Dfi_Source": {
+      "scpi": "OUTPut:DFI:SOUR?",
+      "scpiFast": "OUTP:DFI:SOUR?",
+      "description": "This command selects the source for DFI events",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Dfi_Status": {
+      "scpi": "OUTPut:DFI:STATe?",
+      "scpiFast": "OUTP:DFI:STAT?",
+      "description": "This command enables or disables the discrete fault indicator (DFI) signal to the power module backplane",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Protection_Delay": {
+      "scpi": "OUTPut:PROTection:DELay?",
+      "scpiFast": "OUTP:PROT:DEL?",
+      "description": "Get output protection delay",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Relay": {
+      "scpi": "OUTP:REL?",
+      "description": "Output Subsystem",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Relay_Polarity": {
+      "scpi": "OUTPut:RELay:POLarity?",
+      "scpiFast": "OUTP:REL:POL?",
+      "description": "This command is valid only if the power module is configured for the optional relay connector",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Relay_Status": {
+      "scpi": "OUTP:REL:STAT?",
+      "description": "This command is valid only if the power module is configured for the optional relay connector",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Status": {
+      "scpi": "OUTPut:STATe?",
+      "scpiFast": "OUTP:STAT?",
+      "description": "If the power module is configured to use the relay option, the command opens the relay contacts when the output is disabled and closes them when it is enabled",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Ttltrg_Link": {
+      "scpi": "OUTP:TTLT:LINK?",
+      "description": "Get output ttltrg link",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Ttltrg_Source": {
+      "scpi": "OUTP:TTLT:SOUR?",
+      "description": "Get output ttltrg source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Output_Ttltrg_Status": {
+      "scpi": "OUTP:TTLT:STAT?",
+      "description": "This command enables or disables the power module Trigger Out signal, which is available at a BNC connector on the rear of the mainframe",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "OUTP",
+      "unverified": true
+    },
+    "Get_Psc": {
+      "scpi": "*PSC?",
+      "description": "Get psc",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Questionable_Event": {
+      "scpi": "QUES:EVEN?",
+      "description": "Get questionable event",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Source_Current_Level_Immediate_Amplitude": {
+      "scpi": "SOUR:CURR:LEV:IMM:AMPL?",
+      "description": "Get source current level immediate amplitude",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Current_Level_Trigger_Amplitude": {
+      "scpi": "SOUR:CURR:LEV:TRIG:AMPL?",
+      "description": "Get source current level trigger amplitude",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Current_Mode": {
+      "scpi": "SOURce:CURRent:MODE?",
+      "scpiFast": "SOUR:CURR:MODE?",
+      "description": "LIST:CURR . If the LIST parameter is used, then the output current may be changed by the subsequent execution of a list",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Current_Protection_Status": {
+      "scpi": "SOURce:CURRent:PROTection:STATe?",
+      "scpiFast": "SOUR:CURR:PROT:STAT?",
+      "description": "This command enables or disables the power module overcurrent (OC) protection function",
+      "returns": {
+        "count": 1,
+        "type": "NR3"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Count": {
+      "scpi": "SOURce:LIST:COUNt?",
+      "scpiFast": "SOUR:LIST:COUN?",
+      "description": "This command sets the number of times that the list is executed before it is completed",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Current_Points": {
+      "scpi": "SOURce:LIST:CURRent:POINts?",
+      "scpiFast": "SOUR:LIST:CURR:POIN?",
+      "description": "This query returns the number of points specified in LIST:CURR",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Dwel": {
+      "scpi": "SOUR:LIST:DWEL?",
+      "description": "- If LIST:STEP ONCE has been programmed, the output remains at the present level until a trigger sequences the next point in the list",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Dwel_Points": {
+      "scpi": "SOUR:LIST:DWEL:POIN?",
+      "description": "Get source list dwel points",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Dwfl_Points": {
+      "scpi": "SOURce:LIST:DWFL1:POINts?",
+      "scpiFast": "SOUR:LIST:DWFL1:POIN?",
+      "description": "This query returns the number of points specified in LIST:DWEL",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Step": {
+      "scpi": "SOUR:LIST:STEP?",
+      "description": "In either mode, triggers that occur during a dwell interval are ignored",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_List_Voltage_Points": {
+      "scpi": "SOURce:LIST:VOLTage:POINts?",
+      "scpiFast": "SOUR:LIST:VOLT:POIN?",
+      "description": "This query returns the number of points specified in LIST:VOLT",
+      "returns": {
+        "count": 1,
+        "type": "NR1",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Voltage_Level_Trigger_Amplitude": {
+      "scpi": "SOUR:VOLT:LEV:TRIG:AMPL?",
+      "description": "Get source voltage level trigger amplitude",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Voltage_Mode": {
+      "scpi": "SOURce:VOLTage:MODE?",
+      "scpiFast": "SOUR:VOLT:MODE?",
+      "description": "LIST:VOLT . If the LIST parameter is used, then the output voltage may be changed by the subsequent execution of a list",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Voltage_Protection_Level": {
+      "scpi": "SOUR:VOLT:PROT:LEV?",
+      "description": "Get source voltage protection level",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Voltage_Sense": {
+      "scpi": "SOUR:VOLT:SENS?",
+      "description": "Get source voltage sense",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Source_Voltage_Sense_Source": {
+      "scpi": "SOURce:VOLTage:SENSe:SOURce?",
+      "scpiFast": "SOUR:VOLT:SENS:SOUR?",
+      "description": "This command reads the state of the power module output connector remote sense switch",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "V"
+      },
+      "subsystem": "SOUR",
+      "unverified": true
+    },
+    "Get_Souri_Voltage_Level_Immediate_Amplitude": {
+      "scpi": "SOURI:VOLT:LEV:IMM:AMPL?",
+      "scpiFast": "SOUR:VOLT:LEV:IMM:AMPL?",
+      "description": "Get souri voltage level immediate amplitude",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "SOURI",
+      "unverified": true
+    },
+    "Get_Sre": {
+      "scpi": "*SRE?",
+      "description": "Get sre",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_Status_Operation": {
+      "scpi": "STAT:OPER?",
+      "description": "Register Commands",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Operation_Condition": {
+      "scpi": "STAT:OPER:COND?",
+      "description": "This command returns the value of the Operation Condition register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Operation_Enable": {
+      "scpi": "STAT:OPER:ENAB?",
+      "description": "This command and its query set and read the value of the Operation Enable register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Operation_Event": {
+      "scpi": "STAT:OPER:EVEN?",
+      "description": "This query returns the value of the Operation Event register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Operation_Ntransition": {
+      "scpi": "STAT:OPER:NTR?",
+      "description": "corresponding Operation Event register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Operation_Ptransition": {
+      "scpi": "STAT:OPER:PTR?",
+      "description": "corresponding Operation Event register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Questionable": {
+      "scpi": "STAT:QUES?",
+      "description": "Register Commands",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Questionable_Enable": {
+      "scpi": "STAT:QUES:ENAB?",
+      "description": "This command sets or reads the value of the Questionable Enable register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Questionable_Event": {
+      "scpi": "STAT:QUES:EVEN?",
+      "description": "This command returns the value of the Questionable Event register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Questionable_Ntransition": {
+      "scpi": "STATus:QUEStionable:NTRansition?",
+      "scpiFast": "STAT:QUES:NTR?",
+      "description": "corresponding Questionable Event register",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Status_Questionable_Ptransition": {
+      "scpi": "STATus:QUEStionable:PTRansitiion?",
+      "scpiFast": "STAT:QUES:PTR?",
+      "description": "Register Commands",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "STAT",
+      "unverified": true
+    },
+    "Get_Stb": {
+      "scpi": "*STB?",
+      "description": "Get stb",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
+    "Get_System_Version": {
+      "scpi": "SYST:VERS?",
+      "description": "This query returns the SCPI version number to which the power module complies",
+      "returns": {
+        "count": 1
+      },
+      "subsystem": "SYST",
+      "unverified": true
+    },
+    "Get_Trigger_Delay": {
+      "scpi": "TRIG:DEL?",
+      "description": "Get trigger delay",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Link": {
+      "scpi": "TRIG:LINK?",
+      "description": "Get trigger link",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Source": {
+      "scpi": "TRIG:SOUR?",
+      "description": "Get trigger source",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Start_Delay": {
+      "scpi": "TRIGger:STARt:DELay?",
+      "scpiFast": "TRIG:STAR:DEL?",
+      "description": "This command sets the time delay between the detection of an event on the specified trigger source and the start of any corresponding trigger action on the power module’s output",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "s"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Start_Link": {
+      "scpi": "TRIGger:STARt:LINK?",
+      "scpiFast": "TRIG:STAR:LINK?",
+      "description": "This command specifies which event conditions within the power module are linked to trigger source events when LINK is the parameter of the TRIG:SOUR command",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Trigger_Start_Source": {
+      "scpi": "TRIGger:STARt:SOURce?",
+      "scpiFast": "TRIG:STAR:SOUR?",
+      "description": "This command selects the power module input trigger source as follows",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "subsystem": "TRIG",
+      "unverified": true
+    },
+    "Get_Tst": {
+      "scpi": "*TST?",
+      "description": "Get tst",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
+      "subsystem": "Common",
+      "unverified": true
+    },
     "Get_Values": {
       "scpi": "INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?",
       "description": "Get Values",
+      "returns": {
+        "count": 2,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "voltage",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "current",
+            "type": "NR3",
+            "unit": "A"
+          }
+        ]
+      },
       "group": "Readback Queries",
       "subsystem": "MEASure"
+    },
+    "Get_Voltage_Alc_Source": {
+      "scpi": "VOLT:ALC:SOUR?",
+      "description": "Get voltage alc source",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Get_Voltage_Protection": {
+      "scpi": "VOLT:PROT?",
+      "description": "Query Indicator",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Get_Voltage_Sense_Source": {
+      "scpi": "VOLT:SENS:SOUR?",
+      "description": "Get voltage sense source",
+      "returns": {
+        "count": 1,
+        "type": "CRD",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
+    },
+    "Get_Voltage_Trigger": {
+      "scpi": "VOLT:TRIG?",
+      "description": "Get voltage trigger",
+      "returns": {
+        "count": 1,
+        "type": "NR3",
+        "unit": "V"
+      },
+      "subsystem": "VOLT",
+      "unverified": true
     },
     "Questionable_Condition": {
       "scpi": "STAT:QUES:COND?",
       "description": "Questionable Condition",
+      "returns": {
+        "count": 1,
+        "type": "NR1"
+      },
       "group": "Status Registers",
       "subsystem": "STATus"
     },
     "Read_Error": {
       "scpi": "SYST:ERR?",
       "description": "Read Error",
+      "returns": {
+        "count": 1,
+        "type": "NR2"
+      },
       "group": "System Utilities",
       "subsystem": "SYSTem"
     }

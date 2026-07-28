@@ -1,0 +1,907 @@
+{
+  "2000": {
+    "manufacturer": "Keithley",
+    "type": "DMM",
+    "notes": "6.5 Digit Multimeter (Legacy)"
+  },
+  "2400": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "SourceMeter (200V, 1A, 20W)"
+  },
+  "2410": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "High Voltage SourceMeter (1000V)"
+  },
+  "2420": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "High Current SourceMeter (3A)"
+  },
+  "2425": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "SourceMeter (100W)"
+  },
+  "2430": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "Pulse Mode SourceMeter (100W)"
+  },
+  "2450": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "SourceMeter Touch (200V, 1A, 20W)"
+  },
+  "2460": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "High Current Touchscreen (7A)"
+  },
+  "2461": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "High Current Touchscreen (10A Pulse)"
+  },
+  "2601B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Single Channel)"
+  },
+  "2602B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Dual Channel)"
+  },
+  "2611B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Single Channel, 200V)"
+  },
+  "2612B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Dual Channel, 200V)"
+  },
+  "2635B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Single Channel, 0.1fA)"
+  },
+  "2636B": {
+    "manufacturer": "Keithley",
+    "type": "SMU",
+    "notes": "System SourceMeter (Dual Channel, 0.1fA)"
+  },
+  "3235": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Router",
+    "notes": "High-perf Switching Matrix"
+  },
+  "3235A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Router",
+    "notes": "High-perf Switching Matrix"
+  },
+  "33120A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "15 MHz Function/Arb (Classic)"
+  },
+  "33210A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "10 MHz Function/Arb"
+  },
+  "33220A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "20 MHz Function/Arb"
+  },
+  "33250A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "80 MHz Function/Arb"
+  },
+  "33509B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "20 MHz 1-Ch Trueform"
+  },
+  "33510B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "20 MHz 2-Ch Trueform"
+  },
+  "33511B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "20 MHz 1-Ch Trueform (with Arbitrary)"
+  },
+  "33512B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "20 MHz 2-Ch Trueform (with Arbitrary)"
+  },
+  "33519B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "30 MHz 1-Ch Trueform (without Arbitrary)"
+  },
+  "33520B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "30 MHz 2-Ch Trueform (without Arbitrary)"
+  },
+  "33521B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "30 MHz 1-Ch Trueform"
+  },
+  "33522B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "30 MHz 2-Ch Trueform"
+  },
+  "33611A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "80 MHz 1-Ch Trueform"
+  },
+  "33612A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "80 MHz 2-Ch Trueform"
+  },
+  "33619A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "80 MHz 1-Ch Trueform (without Arbitrary)"
+  },
+  "33620A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "80 MHz 2-Ch Trueform (without Arbitrary)"
+  },
+  "33621A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "120 MHz 1-Ch Trueform"
+  },
+  "33622A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Generator",
+    "notes": "120 MHz 2-Ch Trueform"
+  },
+  "34401A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit Benchtop Standard (Legacy)"
+  },
+  "34410A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit High Performance"
+  },
+  "34411A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit Enhanced Performance"
+  },
+  "34420A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "Nano-volt / Micro-ohm Meter"
+  },
+  "34450A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "5.5 Digit Dual Display"
+  },
+  "34460A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit Truevolt (Basic)"
+  },
+  "34461A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit Truevolt (34401A Replacement)"
+  },
+  "34465A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "6.5 Digit Performance Truevolt"
+  },
+  "34470A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "7.5 Digit Truevolt"
+  },
+  "3458A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "8.5 Digit Industrial Standard"
+  },
+  "34970A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DAQ",
+    "notes": "Data Acq / Switch Unit (Serial/GPIB)"
+  },
+  "34972A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DAQ",
+    "notes": "Data Acq / Switch Unit (USB/LAN)"
+  },
+  "34980A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DAQ",
+    "notes": "Multifunction Switch/Measure (8-slot)"
+  },
+  "4263A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "LCR",
+    "notes": "LCR Meter (100 Hz - 100 kHz test signal)"
+  },
+  "53131A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "Universal Counter (225 MHz, 10 digit/s)"
+  },
+  "53132A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "Universal Counter (225 MHz, 12 digit/s)"
+  },
+  "53181A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "RF Counter (225 MHz, 10 digit/s)"
+  },
+  "53210A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "350 MHz RF (1-Channel)"
+  },
+  "53220A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "350 MHz Universal (Modern)"
+  },
+  "53230A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Counter",
+    "notes": "350 MHz Universal (High Precision)"
+  },
+  "54622D": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "Mixed Signal (2+16 Chan, 100MHz)"
+  },
+  "54641D": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "Mixed Signal (2+16 Chan, 350MHz)"
+  },
+  "6032A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "1000W Autoranging (60V/50A)"
+  },
+  "6060B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Load",
+    "notes": "DC Electronic Load (300W, 60V, 60A)"
+  },
+  "6063B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Load",
+    "notes": "DC Electronic Load (250W, 240V, 10A)"
+  },
+  "66000A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Modular System Mainframe (8 Slots)"
+  },
+  "66101A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Module 8V / 16A (128W)"
+  },
+  "66102A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Module 20V / 7.5A (150W)"
+  },
+  "66103A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Module 35V / 4.5A (150W)"
+  },
+  "66104A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Module 60V / 2.5A (150W)"
+  },
+  "6632B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "100W System Supply (20V/5A)"
+  },
+  "8560A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 2.9 GHz (Legacy)"
+  },
+  "8560E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 2.9 GHz (Enhanced)"
+  },
+  "8561E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 6.5 GHz"
+  },
+  "8562E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 13.2 GHz"
+  },
+  "8563E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 26.5 GHz"
+  },
+  "8564E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 40 GHz"
+  },
+  "8565E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Portable 50 GHz"
+  },
+  "8566B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "High Perf 22 GHz (The 'Beast')"
+  },
+  "8568B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "High Perf 1.5 GHz"
+  },
+  "8590 Series": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Low Cost Portable (Legacy)"
+  },
+  "8720ES": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "Microwave VNA 20 GHz"
+  },
+  "8753E": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "RF VNA 3/6 GHz (Classic)"
+  },
+  "AFG1022": {
+    "manufacturer": "Tektronix",
+    "type": "Generator",
+    "notes": "25 MHz 2 Ch Arbitrary"
+  },
+  "AFG31000": {
+    "manufacturer": "Tektronix",
+    "type": "Generator",
+    "notes": "Advanced High Perf Arb Gen"
+  },
+  "AFG3102": {
+    "manufacturer": "Tektronix",
+    "type": "Generator",
+    "notes": "100 MHz 2 Ch Dual (Classic)"
+  },
+  "B2901A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "SMU",
+    "notes": "Precision SMU (1 Ch, 100fA)"
+  },
+  "B2902A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "SMU",
+    "notes": "Precision SMU (2 Ch, 100fA)"
+  },
+  "B2912A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "SMU",
+    "notes": "Precision SMU (2 Ch, 10fA)"
+  },
+  "DAQ970A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DAQ",
+    "notes": "Data Acq System (Next Gen)"
+  },
+  "DG1022Z": {
+    "manufacturer": "Rigol",
+    "type": "Generator",
+    "notes": "25 MHz 2 Ch Arbitrary"
+  },
+  "DG4102": {
+    "manufacturer": "Rigol",
+    "type": "Generator",
+    "notes": "100 MHz 2 Ch Arbitrary"
+  },
+  "DG812": {
+    "manufacturer": "Rigol",
+    "type": "Generator",
+    "notes": "10 MHz 1 Ch (Basic)"
+  },
+  "DHO804": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "70 MHz 4 Ch (12-bit High Res)"
+  },
+  "DM3058": {
+    "manufacturer": "Rigol",
+    "type": "DMM",
+    "notes": "5.5 Digit Benchtop"
+  },
+  "DM3068": {
+    "manufacturer": "Rigol",
+    "type": "DMM",
+    "notes": "6.5 Digit Benchtop"
+  },
+  "DMM6500": {
+    "manufacturer": "Keithley",
+    "type": "DMM",
+    "notes": "6.5 Digit Touchscreen"
+  },
+  "DP711": {
+    "manufacturer": "Rigol",
+    "type": "Power",
+    "notes": "Single Output 30V/5A"
+  },
+  "DP832": {
+    "manufacturer": "Rigol",
+    "type": "Power",
+    "notes": "Triple Output (30V/3A x2, 5V/3A)"
+  },
+  "DP832A": {
+    "manufacturer": "Rigol",
+    "type": "Power",
+    "notes": "Triple Output (High Accuracy Color)"
+  },
+  "DS1054Z": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "50 MHz 4 Ch (The 'Hobbyist Standard')"
+  },
+  "DS1074Z": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "70 MHz 4 Ch"
+  },
+  "DS1104Z": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "100 MHz 4 Ch Digital"
+  },
+  "DS1104Z Plus": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "100 MHz 4 Ch (Upgradable)"
+  },
+  "DS7014": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "100 MHz 4 Ch Performance"
+  },
+  "DSA815-TG": {
+    "manufacturer": "Rigol",
+    "type": "Spectrum",
+    "notes": "1.5 GHz Analyzer + Tracking Gen"
+  },
+  "DSA832": {
+    "manufacturer": "Rigol",
+    "type": "Spectrum",
+    "notes": "3.2 GHz Spectrum Analyzer"
+  },
+  "DSO9064A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "600 MHz 4 Ch (Infiniium 9000)"
+  },
+  "DSO9104A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "1 GHz 4 Ch (Infiniium 9000)"
+  },
+  "DSOS054A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "500 MHz 4 Ch (Infiniium S-Series)"
+  },
+  "DSOS104A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "1 GHz 4 Ch (Infiniium S-Series)"
+  },
+  "DSOX1102G": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "70/100 MHz 2 Ch + Gen (InfiniiVision 1000X)"
+  },
+  "DSOX2002A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "70 MHz 2 Ch (InfiniiVision 2000X)"
+  },
+  "DSOX4024A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "200 MHz 4 Ch (InfiniiVision 4000X)"
+  },
+  "E3610A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "30W Bench (8V/3A or 15V/2A)"
+  },
+  "E3615A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "60W Bench (20V/3A)"
+  },
+  "E3620A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Dual Output 50W (25V/1A x2)"
+  },
+  "E36300 Series": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Triple Output Low Noise (Modern E3631A)"
+  },
+  "E3630A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Triple Output 35W (6V, +20V, -20V)"
+  },
+  "E3631A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Triple Output 80W Programmable"
+  },
+  "E3632A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "120W Programmable (15V/7A or 30V/4A)"
+  },
+  "E3633A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "200W Programmable (8V/20A or 20V/10A)"
+  },
+  "E3634A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "200W Programmable (25V/7A or 50V/4A)"
+  },
+  "E3640A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "30W Programmable (8V/3A or 20V/1.5A)"
+  },
+  "E3641A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "30W Programmable (35V/0.8A or 60V/0.5A)"
+  },
+  "E3642A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "50W Programmable (8V/5A or 20V/2.5A)"
+  },
+  "E3643A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "50W Programmable (35V/1.4A or 60V/0.8A)"
+  },
+  "E3644A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "80W Programmable (8V/8A or 20V/4A)"
+  },
+  "E3645A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "80W Programmable (35V/2.2A or 60V/1.3A)"
+  },
+  "E3646A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Dual 60W Programmable"
+  },
+  "E3647A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Dual 60W Programmable"
+  },
+  "E3648A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Dual 100W Programmable (8V/5A or 20V/2.5A)"
+  },
+  "E3649A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Dual 100W Programmable (35V/1.4A or 60V/0.8A)"
+  },
+  "E4401B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "ESA-E Series 1.5 GHz"
+  },
+  "E4407B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "ESA-E Series 26.5 GHz"
+  },
+  "E5061B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "ENA Series (Low Frequency/RF)"
+  },
+  "E5071C": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "ENA Series (RF 20 GHz)"
+  },
+  "E5270B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "SMU",
+    "notes": "8-Slot Precision Measurement Mainframe"
+  },
+  "E8361C": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "PNA Series (67 GHz)"
+  },
+  "EL30000": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Load",
+    "notes": "Bench DC Electronic Load (Modern)"
+  },
+  "FPC1000": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Spectrum",
+    "notes": "Entry Spectrum Analyzer (1-3 GHz)"
+  },
+  "FPC1500": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Spectrum",
+    "notes": "Spectrum Analyzer + Vector Network"
+  },
+  "FSH4": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Spectrum",
+    "notes": "Handheld Spectrum Analyzer"
+  },
+  "FSV3000": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Spectrum",
+    "notes": "Signal and Spectrum Analyzer"
+  },
+  "HMO1002": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "Mixed Signal 50-100MHz (Legacy Hameg)"
+  },
+  "HMP2020": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Power",
+    "notes": "Dual Output High Perf (188W)"
+  },
+  "HMP4040": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Power",
+    "notes": "Quad Output High Perf (384W)"
+  },
+  "HPE4411A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "ESA-L Series 1.5 GHz"
+  },
+  "HP_8903B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Distortion",
+    "notes": "Audio Analyzer (20 Hz - 100 kHz, distortion/level)"
+  },
+  "MDO3014": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "Mixed Domain (Scope + Spectrum)"
+  },
+  "MDO4000C": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "High Perf Mixed Domain"
+  },
+  "MSO24": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "2 Series Handheld/Bench (Battery)"
+  },
+  "MSO44": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "4 Series Mixed Signal"
+  },
+  "MSO5074": {
+    "manufacturer": "Rigol",
+    "type": "Oscilloscope",
+    "notes": "70 MHz 4 Ch Mixed Signal (Touch)"
+  },
+  "MSO54": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "5 Series Mixed Signal (8 FlexCh)"
+  },
+  "MSO64": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "6 Series Mixed Signal"
+  },
+  "MSOX3014T": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "100 MHz 4+16 Ch Touch (InfiniiVision 3000T)"
+  },
+  "MXO4": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "Next Gen High Speed Scope"
+  },
+  "N3300A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Load",
+    "notes": "Modular Load Mainframe (1800W)"
+  },
+  "N5221B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "PNA Series (13.5 GHz)"
+  },
+  "N5222B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "PNA Series (26.5 GHz)"
+  },
+  "N5245B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "VNA",
+    "notes": "PNA-X Series (50 GHz, 2/4 Port)"
+  },
+  "N6700C": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Low-Profile Modular Mainframe (400W)"
+  },
+  "N6701C": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Low-Profile Modular Mainframe (600W)"
+  },
+  "N6702C": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Power",
+    "notes": "Low-Profile Modular Mainframe (1200W)"
+  },
+  "N9000B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "CXA Signal Analyzer"
+  },
+  "N9010B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "EXA Signal Analyzer"
+  },
+  "N9020B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "MXA Signal Analyzer"
+  },
+  "N9030B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "PXA Signal Analyzer (High Performance)"
+  },
+  "N9040B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "UXA Signal Analyzer (Ultra Performance)"
+  },
+  "N9340B": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Handheld (100 kHz - 3 GHz)"
+  },
+  "N9342CN": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "Handheld (9 kHz - 7 GHz)"
+  },
+  "N9912A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "FieldFox RF Analyzer (4 GHz)"
+  },
+  "N9918A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Spectrum",
+    "notes": "FieldFox RF Analyzer (26.5 GHz)"
+  },
+  "NGL200": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Power",
+    "notes": "Precision Power Supply (Linear)"
+  },
+  "NGM200": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Power",
+    "notes": "Precision Power Supply (High Speed)"
+  },
+  "Porta_one": {
+    "manufacturer": "Audio Precision",
+    "type": "Distortion",
+    "notes": "Audio Precision Portable One Plus / Dual Domain audio analyzer"
+  },
+  "RTB2002": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "70-300 MHz 2 Ch (10-bit ADC)"
+  },
+  "RTB2004": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "70-300 MHz 4 Ch (10-bit ADC)"
+  },
+  "RTH1002": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "Scope Rider Handheld (Isolated)"
+  },
+  "RTM3004": {
+    "manufacturer": "Rohde & Schwarz",
+    "type": "Oscilloscope",
+    "notes": "100-1000 MHz 4 Ch (10-bit ADC)"
+  },
+  "TBS1052B": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "50 MHz 2 Ch (Basic)"
+  },
+  "TBS2000B": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "Digital Storage Scope (Modern Basic)"
+  },
+  "TDS2024C": {
+    "manufacturer": "Tektronix",
+    "type": "Oscilloscope",
+    "notes": "200 MHz 4 Ch (Legacy Workhorse)"
+  },
+  "U1272A": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "DMM",
+    "notes": "Handheld 4.5 Digit, Water/Dust Resistant"
+  },
+  "Z204": {
+    "manufacturer": "HP / Agilent / Keysight",
+    "type": "Oscilloscope",
+    "notes": "Generic Z-Series Reference"
+  }
+}

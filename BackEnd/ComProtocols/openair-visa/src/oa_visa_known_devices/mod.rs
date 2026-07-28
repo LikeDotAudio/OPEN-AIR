@@ -20,19 +20,25 @@ struct DeviceInfo {
 }
 
 /// The knowledge base compiled into the binary — the guaranteed fallback.
-/// The on-disk copy (openair-visa/assets/visa_devices.json) wins when found,
-/// so devices can be added without recompiling.
-const EMBEDDED_KB: &str = include_str!("../../assets/visa_devices.json");
+/// The on-disk copy wins when found, so devices can be added without
+/// recompiling.
+///
+/// It lives at `BackEnd/openair-yak/Yak/knownDevices.json`. It used to be
+/// duplicated at `openair-visa/assets/visa_devices.json`; the two were
+/// byte-identical, which is one edit away from a discovery table and a command
+/// table disagreeing about what an instrument is.
+const EMBEDDED_KB: &str = include_str!("../../../../openair-yak/Yak/knownDevices.json");
 
 fn load_kb() -> HashMap<String, DeviceInfo> {
     // On-disk copies, in order: next to cwd (running from the crate dir),
     // then walking UP from cwd to find the repo-layout path — the old
     // cwd-only lookup is why every instrument showed "Unknown Instrument"
     // when the orchestrator ran from the repo root.
-    let mut candidates: Vec<std::path::PathBuf> = vec!["assets/visa_devices.json".into()];
+    let mut candidates: Vec<std::path::PathBuf> =
+        vec!["../../openair-yak/Yak/knownDevices.json".into()];
     if let Ok(mut dir) = std::env::current_dir() {
         loop {
-            candidates.push(dir.join("BackEnd/ComProtocols/openair-visa/assets/visa_devices.json"));
+            candidates.push(dir.join("BackEnd/openair-yak/Yak/knownDevices.json"));
             if !dir.pop() {
                 break;
             }

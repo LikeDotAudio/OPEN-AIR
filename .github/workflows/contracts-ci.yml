@@ -26,22 +26,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: Deployment/.nvmrc
-      - run: corepack enable
-      # Activate the version Deployment/package.json pins, from the directory
-      # that pins it.
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
       #
-      # corepack resolves `packageManager` by searching up from the CURRENT
+      # corepack resolves `packageManager` by searching up from the current
       # directory, and every pnpm call below runs from the repo root via
       # `-C Deployment`. The root has no package.json, so corepack found no pin
-      # and fetched whatever pnpm was newest — then pnpm read
-      # Deployment/package.json, saw a different version, and refused to run.
-      # The failure only appeared when a newer pnpm was published, which is the
-      # worst time for CI to start disagreeing with every developer's machine.
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
       #
-      # `--activate` records this as corepack's fallback, so the `-C` calls
-      # resolve to it too. No version is repeated here: it is read from the pin.
-      - run: corepack prepare --activate
-        working-directory: Deployment
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
+      - name: Install the pinned pnpm
+        run: |
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          npm i -g "pnpm@$PNPM_VERSION"
+          pnpm --version
       - run: pnpm -C Deployment install --frozen-lockfile
       - run: pnpm -C Deployment --filter @openair/contracts typecheck
       - run: pnpm -C Deployment --filter @openair/contracts test # includes the golden-vector suites
@@ -87,22 +95,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: Deployment/.nvmrc
-      - run: corepack enable
-      # Activate the version Deployment/package.json pins, from the directory
-      # that pins it.
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
       #
-      # corepack resolves `packageManager` by searching up from the CURRENT
+      # corepack resolves `packageManager` by searching up from the current
       # directory, and every pnpm call below runs from the repo root via
       # `-C Deployment`. The root has no package.json, so corepack found no pin
-      # and fetched whatever pnpm was newest — then pnpm read
-      # Deployment/package.json, saw a different version, and refused to run.
-      # The failure only appeared when a newer pnpm was published, which is the
-      # worst time for CI to start disagreeing with every developer's machine.
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
       #
-      # `--activate` records this as corepack's fallback, so the `-C` calls
-      # resolve to it too. No version is repeated here: it is read from the pin.
-      - run: corepack prepare --activate
-        working-directory: Deployment
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
+      - name: Install the pinned pnpm
+        run: |
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          npm i -g "pnpm@$PNPM_VERSION"
+          pnpm --version
       - run: pnpm -C Deployment install --frozen-lockfile
       # freshness: legacy.ts and globals.d.ts must match their sources
       - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
@@ -121,22 +137,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: Deployment/.nvmrc
-      - run: corepack enable
-      # Activate the version Deployment/package.json pins, from the directory
-      # that pins it.
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
       #
-      # corepack resolves `packageManager` by searching up from the CURRENT
+      # corepack resolves `packageManager` by searching up from the current
       # directory, and every pnpm call below runs from the repo root via
       # `-C Deployment`. The root has no package.json, so corepack found no pin
-      # and fetched whatever pnpm was newest — then pnpm read
-      # Deployment/package.json, saw a different version, and refused to run.
-      # The failure only appeared when a newer pnpm was published, which is the
-      # worst time for CI to start disagreeing with every developer's machine.
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
       #
-      # `--activate` records this as corepack's fallback, so the `-C` calls
-      # resolve to it too. No version is repeated here: it is read from the pin.
-      - run: corepack prepare --activate
-        working-directory: Deployment
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
+      - name: Install the pinned pnpm
+        run: |
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          npm i -g "pnpm@$PNPM_VERSION"
+          pnpm --version
       - run: pnpm -C Deployment install --frozen-lockfile
       - uses: actions/cache@v4
         with:

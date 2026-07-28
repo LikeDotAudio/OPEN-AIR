@@ -2,7 +2,7 @@
 // The window.* inventory of the unconverted FrontEnd tree: the implicit
 // module system, typed. `any // from <file>` entries are the debt; replace
 // them with real types as files convert (hand-typed lines survive regen).
-// METRIC: 178 globals, 175 still `any`.
+// METRIC: 184 globals, 181 still `any`.
 
 export {}
 
@@ -85,11 +85,12 @@ declare global {
     MqttProvider: import('react').ComponentType<{ brokerUrl: string; username: string; password: string; children?: import('react').ReactNode }>
     MqttSettingsModal: any // from comMQTT/MqttSettings.jsx
     NeedleMeter: any // from libControl/metering/NeedleMeter/NeedleMeter.jsx
-    OA_COMPONENTS: any // from libControl/special/Aes70/Aes70.jsx (+25 more)
+    OA_COMPONENTS: any // from libControl/special/Aes70/Aes70.jsx (+27 more)
     OA_MQTT_DEBUG: any // from comMQTT/MqttProvider.jsx
     OA_MQTT_FILTER: any // from comMQTT/MqttProvider.jsx
     OA_MQTT_LAST: any // from comMQTT/MqttProvider.jsx
     OA_PANEL_DEFAULT_CONFIG: any // from libControl/Panels/panel_wasm_loader.js
+    OA_SCAN_ACTIVITY: any // from comMQTT/MqttProvider.jsx
     OA_SESSION_FULL_ID: any // from comMQTT/MqttProvider.jsx
     oaCssLen: any // from frameLayout/oaCssLen.js
     OaDesigner_FaderDial: any // from libControl/faders/FaderDial/Designer.jsx
@@ -133,6 +134,7 @@ declare global {
     OaEdTransparencyControls: any // from editorWYSIWYG/Interface/PropertyEditor/artistic_designer.jsx
     OaEdTree: any // from editorWYSIWYG/Interface/Tabs/TreeRefactor/Entry.jsx
     oaGetMqttConfig: (() => { brokerUrl: string; username: string; password: string }) | undefined
+    OaIsMomentaryControl: any // from comMQTT/MqttProvider.jsx
     OaJfir: any // from libControl/graphing/_dsp/jfir.js
     oaLabelStyle: any // from frameLayout/oaCssLen.js
     oaLabelText: any // from frameLayout/oaCssLen.js
@@ -167,6 +169,7 @@ declare global {
     ProtocolConfigDisplay: any // from libControl/special/ProtocolConfigDisplay/ProtocolConfigDisplay.jsx
     Radar: any // from libControl/graphing/Radar/Radar.jsx
     Reverb: any // from libControl/graphing/Reverb/Reverb.jsx
+    ScanActivity: any // from libControl/special/ScanActivity/ScanActivity.jsx
     Screw: any // from libControl/Panels/Screw/Screw.jsx
     SelectorSwitch: any // from libControl/Knobs/SelectorSwitch/SelectorSwitch.jsx
     shadeHex: any // from libControl/Knobs/Knob/Knob.jsx
@@ -175,16 +178,19 @@ declare global {
     TabLayout: any // from frameLayout/TabLayout.jsx
     TabManager: any // from tabManager/TabManager.jsx
     TrapezoidButtonToggler: any // from libControl/buttons/TrapezoidButtonToggler/TrapezoidButtonToggler.jsx
+    useDiscoveryActivity: any // from comMQTT/MqttProvider.jsx
     useEditorStore: any // from editorWYSIWYG/Core/state.jsx
     useMqttLang: any // from comMQTT/MqttProvider.jsx
     useMqttMessages: any // from comMQTT/MqttProvider.jsx
     useMqttPublish: any // from comMQTT/MqttProvider.jsx
     useMqttState: any // from comMQTT/MqttProvider.jsx
     useMqttStatus: any // from comMQTT/MqttProvider.jsx
+    useMqttTrigger: any // from comMQTT/MqttProvider.jsx
     VUMeterKnob: any // from libControl/metering/VUMeterKnob/VUMeterKnob.jsx
     WidgetFactory: any // from frameLayout/WidgetFactory.jsx
     WindowManager: import('react').ComponentType<{ directoryTree: unknown }>
     WinkButtonToggler: any // from libControl/buttons/WinkButtonToggler/WinkButtonToggler.jsx
     WysiwygEditor: any // from editorWYSIWYG/Managers/wysiwyg_editor.jsx
+    YakAutoBuilder: any // from libControl/special/YakAutoBuilder/YakAutoBuilder.jsx
   }
 }

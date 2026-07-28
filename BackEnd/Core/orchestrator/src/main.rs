@@ -10,6 +10,7 @@
 
 mod api;
 mod cli;
+mod discovered;
 mod mqtt;
 
 use axum::{
@@ -285,9 +286,23 @@ async fn main() {
         openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
     });
 
+    // Discovered-device panels and live tables (was Deployment/build_discovered_gui.py).
+    // One mirror of the retained discovery tree serves both the scan loop, which
+    // rebuilds the panel FILES, and the watcher task, which keeps the rows live.
+    let discovered_mirror = discovered::Mirror::spawn(root.clone(), &mqtt_host, mqtt_port);
+
     let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
+
+        // Let the retained tree land before anything is written. The first scan
+        // starts immediately, and its opening rebuild would otherwise run against
+        // an empty mirror — which does not merely write empty tables, it PRUNES
+        // every existing category folder for having no devices in it.
+        discovered_mirror.settle().await;
+        // Rows go live from here, whether or not a scan ever runs: the dozen
+        // network agents publish continuously and none of them needs VISA.
+        discovered_mirror.spawn_watcher();
 
         let mut mqttoptions = rumqttc::MqttOptions::new("open-air-visa-scanner", &visa_mqtt_host, visa_mqtt_port);
         mqttoptions.set_keep_alive(std::time::Duration::from_secs(30));
@@ -383,9 +398,15 @@ async fn main() {
         scanning_flag.store(true, std::sync::atomic::Ordering::Relaxed);
         set_scan_state(&mqtt_client, "scanning");
         scan_log(&mqtt_client, "info", "Scan started — hunting for VXI-11/LAN gateways and instruments…");
+        // Told directly rather than read back off the bus. The mirror does
+        // subscribe to the scan-state topic, but the publish above has not
+        // round-tripped the broker yet, and the rebuild below is immediate —
+        // it would render last scan's rows green while this scan invalidates
+        // them.
+        discovered_mirror.set_scanning(true);
         // Regenerate panels immediately so the tables show "scanning" rather than
         // last scan's results while this one runs.
-        spawn_discovered_builder();
+        discovered_mirror.build_async().await;
 
         let devices = tokio::task::spawn_blocking(|| {
             openair_visa::oa_visa_scan_for_devices::list_resources()
@@ -506,28 +527,16 @@ async fn main() {
         // Publish the fresh topic→resource mapping for the Write daemon.
         *topic_to_resource.lock().unwrap() = scan_topic_to_resource;
 
-        // Phase 0 item 3: regenerate the Discovered tab panels from the
-        // retained discovery topics just published. Transitional — Phase 4
-        // replaces this whole pipeline with the Device Registry + a live
-        // Discovered widget, and deletes the builder.
-        {
-            let builder = std::env::current_dir()
-                .unwrap_or_else(|_| std::path::PathBuf::from("."))
-                .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
-            if builder.is_file() {
-                match tokio::process::Command::new("python3").arg(&builder).spawn() {
-                    Ok(_) => {
-                        println!("🧩 [DISCOVERED-GUI] builder spawned: {}", builder.display());
-                        // Rows go live from here on; the builder above is what
-                        // creates/updates the panel files themselves.
-                        spawn_discovered_watcher();
-                    }
-                    Err(e) => println!("⚠️  [DISCOVERED-GUI] failed to spawn builder: {e}"),
-                }
-            } else {
-                println!("⚠️  [DISCOVERED-GUI] builder not found at {}", builder.display());
-            }
-        }
+        // Regenerate the Discovered tab panels from the retained discovery
+        // topics just published. Phase 4 replaces this whole pipeline with the
+        // Device Registry + a live Discovered widget.
+        discovered_mirror.set_scanning(false);
+        // The instruments this scan just found are published but not yet
+        // mirrored — the retained tree has to come back round the broker. Give
+        // it the same settle window a fresh subscribe gets, or the rebuild
+        // writes tables that are one scan behind.
+        discovered_mirror.settle().await;
+        discovered_mirror.build_async().await;
 
         // Triggers that arrived DURING the scan are stale — the scan they
         // asked for just ran. This also absorbs the browser's 400 ms
@@ -616,52 +625,6 @@ const SCAN_LOG_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/Log";
 /// every row amber while a scan is in flight, so a stale table cannot be
 /// mistaken for a current one.
 const SCAN_STATE_TOPIC: &str = "OpenAir/System/Protocols/visa/Scan/State";
-
-/// Regenerate the Discovered-tab panels.
-///
-/// Called at scan START (so the tables show "scanning" instead of last scan's
-/// results) as well as at the end. Fire-and-forget: a failed regeneration must
-/// not abort a scan.
-/// Long-lived companion to the one-shot builder.
-///
-/// The builder writes panel FILES; a file is a snapshot, so a table only
-/// changed when something regenerated it AND the browser was hard-refreshed.
-/// The watcher publishes rows to retained MQTT topics the tables subscribe to,
-/// so devices appearing, vanishing or changing state show up live.
-///
-/// Publish-only — it never writes files, so it cannot race the builder.
-fn spawn_discovered_watcher() {
-    let builder = std::env::current_dir()
-        .unwrap_or_else(|_| std::path::PathBuf::from("."))
-        .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
-    if !builder.is_file() {
-        return;
-    }
-    match std::process::Command::new("python3")
-        .arg(&builder)
-        .arg("--watch")
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .spawn()
-    {
-        Ok(_) => println!("🧩 [DISCOVERED-GUI] live table watcher started"),
-        Err(e) => println!("⚠️  [DISCOVERED-GUI] watcher failed to start: {e}"),
-    }
-}
-
-fn spawn_discovered_builder() {
-    let builder = std::env::current_dir()
-        .unwrap_or_else(|_| std::path::PathBuf::from("."))
-        .join("BackEnd/Core/orchestrator/gui/build_discovered_gui.py");
-    if !builder.is_file() {
-        return;
-    }
-    let _ = std::process::Command::new("python3")
-        .arg(&builder)
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .spawn();
-}
 
 /// Seconds between heartbeat probes. `OPENAIR_VISA_HEARTBEAT_SECS=0` disables it.
 ///
@@ -1074,7 +1037,7 @@ fn spawn_visa_write_daemon(
 
 /// Truthy scan trigger: the GUI envelope `{"value":1,...}`, or a bare
 /// `1`/`true`/`scan`. `0`, `false`, and empty payloads never trigger.
-fn is_truthy_trigger(payload: &str) -> bool {
+pub(crate) fn is_truthy_trigger(payload: &str) -> bool {
     if let Ok(v) = serde_json::from_str::<serde_json::Value>(payload) {
         return match v.get("value").unwrap_or(&v) {
             serde_json::Value::Number(n) => n.as_f64().unwrap_or(0.0) != 0.0,

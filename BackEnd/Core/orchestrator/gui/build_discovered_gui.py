@@ -1,4 +1,18 @@
-"""Discovered-device GUI builder — Phase 0 item 3 (transitional).
+"""Discovered-device GUI builder — SUPERSEDED, kept only as a collector.
+
+The orchestrator no longer runs this. Panels, live rows and the activity feed
+are built in-process by `src/discovered.rs`, which this file was ported to;
+`discovered::tests::matches_the_panel_the_python_builder_wrote` pins the Rust
+output to the panel this used to write.
+
+What survives is the collector: `build_instrument_panels.py` still imports
+`on_connect`/`on_message`/`collected` from here to read the retained VISA tree
+when run standalone. Porting that builder is what deletes this file — until
+then, editing the panel-writing half below changes nothing that runs.
+
+Original description follows.
+
+Discovered-device GUI builder — Phase 0 item 3 (transitional).
 
 Collects the retained VISA/MIDI discovery topics off the broker and writes
 one authored-shape panel per device category into Gui_Frames/0_discovered/,
@@ -313,7 +327,11 @@ def write_scan_panel(device_count):
 PREFERRED_COLUMNS = {
     "visa": ["model", "manufacturer", "serial", "firmware", "resource", "status", "notes", "last_seen"],
     "midi": ["port", "name", "direction"],
-    "dnssd": ["instance", "service_type", "hostname", "addresses", "port", "txt", "status", "last_seen"],
+    # `vendor` sits right after `addresses` because it is read OUT of them: a
+    # SLAAC IPv6 address carries the host's MAC, so the OUI is already in that
+    # column. Blank for privacy-addressed hosts, which is the honest answer.
+    "dnssd": ["instance", "service_type", "hostname", "addresses", "mac", "vendor",
+              "port", "txt", "status", "last_seen"],
     # Cast devices: identity first, then what it can do, then where it lives.
     # RAVENNA: what the stream IS, then where it goes, then how it is clocked.
     "ravenna": ["stream", "host", "format", "sample_rate", "channels",
@@ -326,24 +344,24 @@ PREFERRED_COLUMNS = {
             "direction", "refclk", "announced_via", "msg_id", "status", "last_seen"],
     # Printers: identity, then capabilities (the questions people ask), then
     # how to reach it. Raw TXT is deliberately not a column — it is decoded.
-    "appletv": ["device", "model", "model_id", "os_version", "airplay_version",
-                "roles", "audio_codecs", "metadata", "features_raw", "addresses",
+    "appletv": ["device", "model", "model_id", "vendor", "os_version", "airplay_version",
+                "roles", "audio_codecs", "metadata", "features_raw", "addresses", "mac",
                 "status", "last_seen"],
     "nmos": ["service", "role", "api_versions", "api_proto", "api_auth",
-             "priority", "host", "port", "addresses", "last_seen"],
-    "printers": ["printer", "manufacturer", "model", "color", "duplex", "scan",
-                 "fax", "paper_max", "transports", "languages", "addresses",
+             "priority", "host", "port", "addresses", "mac", "vendor", "last_seen"],
+    "printers": ["printer", "manufacturer", "vendor", "model", "color", "duplex", "scan",
+                 "fax", "paper_max", "transports", "languages", "addresses", "mac",
                  "admin_url", "uuid", "status", "last_seen"],
     "dante_channels": ["channel", "device", "id", "sample_rate", "bit_depth",
                        "latency_ms", "frames_per_packet", "flow_channels",
                        "redundancy", "last_seen"],
-    "dante": ["device", "manufacturer", "model", "discovery", "services",
-              "addresses", "port", "hostname", "status", "last_seen"],
+    "dante": ["device", "manufacturer", "vendor", "model", "discovery", "services",
+              "addresses", "mac", "port", "hostname", "status", "last_seen"],
     "dante_aes67": ["stream", "discovery", "format", "sample_rate", "channels",
                     "destination", "rtp_port", "origin", "status", "last_seen"],
     # AVB: identity, then what it can carry, then the clock it follows —
     # grandmaster mismatch is the usual reason a discovered entity won't pass audio.
-    "avb": ["entity_id", "mac", "oui", "interface", "talker_sources",
+    "avb": ["entity_id", "mac", "oui", "vendor", "interface", "talker_sources",
             "listener_sinks", "talker_capabilities", "listener_capabilities",
             "gptp_grandmaster", "gptp_domain", "milan", "entity_model_id",
             "configuration_index", "valid_time_s", "status", "last_seen"],
@@ -353,11 +371,14 @@ PREFERRED_COLUMNS = {
     # `messages` sits high on purpose: a port that only sends Pdelay_Req has no
     # Announce data, so every quality column is blank. The message mix is what
     # tells you that row is a peer-delay-only port rather than a parse failure.
-    "ptp": ["clock_id", "port", "variant", "subdomain", "domain", "role",
+    # `vendor` is second because it reads the column before it: a clock identity
+    # is a MAC with FF:FE inserted, and openair-maclookup names the OUI in it.
+    # Four rows of 00:07:F5:FF:FE:xx say nothing until one of them says Bridgeco.
+    "ptp": ["clock_id", "vendor", "port", "variant", "subdomain", "domain", "role",
             "messages", "grandmaster", "gm_class", "gm_class_meaning",
             "gm_accuracy", "time_source", "steps_removed", "priority1",
             "priority2", "sync_interval_s", "two_step", "status", "last_seen"],
-    "chromecast": ["friendly_name", "model", "device_type", "capabilities",
+    "chromecast": ["friendly_name", "model", "device_type", "vendor", "mac", "capabilities",
                    "status_text", "addresses", "port", "hostname",
                    "protocol_version", "cast_id", "status", "last_seen"],
 }

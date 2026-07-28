@@ -1,5 +1,138 @@
 # Changelog
 
+## 2026-07-27 - A Command Library Instead Of A Command Table
+
+515 commands became 3656, read out of the instrument manuals we actually own.
+Every query now declares what it answers with, every setter what it accepts, and
+every command carries its short-form spelling. The device knowledge base stopped
+being duplicated.
+
+### The sweep
+
+- **`Documents/Audits/Yak commands missing.md`** — every SCPI command the manuals
+  document and the tables did not, as pasteable YAK entries. 2483 of them, 1128
+  queries. Written before anything was applied, so the diff between the audit and
+  the tables is reviewable rather than a fait accompli.
+- **+3141 commands across 12 models.** DS1104Z 73 → 760, Porta_one 35 → 608,
+  54641D 113 → 438, the Generators 25 → 254, N9340B 36 → 223, the Power modules
+  13-18 → ~190, 34401A 49 → 155, 6060B 28 → 122.
+- **NAB went from 95 to 1553.** The tables could set far more than they could read
+  back, which is why a panel meter showed a dash while the knob beside it worked.
+- **Two PDFs read directly**, after the markdown-only sweep reported both models
+  unreachable:
+  - `Porta_one` — the markdown was mojibake and I called it unrecoverable. Wrong:
+    the PDF has a text layer whose font is offset by a constant **29**. Shift every
+    code point back and the document is intact (`DQ\x03IRUP` is `any form`). No OCR.
+    573 commands, 286 queries, 311 factory defaults, and the choice lists.
+  - `6060B` — a genuine 93-page scan: `pdftotext` returns 93 characters for the
+    whole document and `tesseract` is not installed. Read visually, and what is in
+    the table is **Table 4-1, "Summary of Commands and Parameters"** — the manual's
+    own authoritative list rather than a regex sweep of prose. It also documents
+    three aliases worth knowing before binding: `INST`=`CHAN`, `OUTP`=`INP`,
+    `FUNC`=`MODE`.
+- **Three models remain unreachable**: `3235`, `HP_8903B` and the LCR's own
+  programming manual are PDF-only scans with no OCR available. The Router's 24
+  panel bindings still name commands that do not exist.
+
+### What a question answers
+
+- **`returns` on all 1553 NAB entries** — `{count, type, unit}`, or one named field
+  per answer where the command is **several questions in a row**. 33 are:
+  `MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?` puts four values on the wire and a
+  `yak_readout` widget bound to it received one semicolon-joined string with no
+  rule for splitting it. `NAB_all_marker_settings` returns **twelve** the same way.
+- `count` is exact — the number of `?`, which also correctly ignores the leading
+  setter in `INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?` (two answers, not three).
+- Types are the SCPI response forms the 6060B manual's Tables 2-1 and 2-4 define:
+  NR1 / NR2 / NR3 / BOOL / CRD / AARD / BLOCK / ERROR. 43 are the type the 66000A
+  dictionary states outright; **429 are left blank rather than guessed**.
+
+### What a setter accepts
+
+- **`arg` on all 1366 SET/RIG entries** — kind (numeric 412, enum 350, bool 158,
+  integer 140, block 9, **unknown 291**), plus **350 choice lists**, **433
+  defaults**, 222 units, 60 min/max pairs.
+- **A range is a property of the instrument, not of the command.** 49 Power setters
+  take a voltage; storing min/max on each would be 49 copies of one fact that then
+  drift. `arg.domain` points at `model.json`, which is already where panels read
+  limits from via `yak_domain`.
+- **`limits: "query"` on 87** — the instruments that accept `MIN`/`MAX` as a query
+  argument will report their own limits, so nothing has to author them. Verified
+  per manual: the 34401A has 286 such forms, the 33220A 119, the 6060B's Table 4-1
+  offers it on every numeric query. The Rigol's `MIN` tokens are measurement-item
+  names, not limits; the N9340B and 54641D never mention it.
+- **`unverified: true` on 3141.** The SCPI is what the manual prints; nothing has
+  watched an instrument honour it. `grep -c unverified` per model says how much of
+  a table is unproven.
+
+### `scpiFast`
+
+- **The short-form spelling, under the long form, on 2621 commands.** The 6060B
+  manual, chapter 2: *"The short form provides the fastest program execution."* It
+  also states the construction rule, so this is computed rather than authored — four
+  letters or fewer keeps all of them, five or more takes the first four, or the
+  first three when the fourth letter is a vowel. That agrees with the mixed-case
+  capitals everywhere both exist (`RESistance` → RES, fourth letter a vowel;
+  `SOURce` → SOUR, not).
+- `repository.rs` reads it, `Command::template(prefer_fast)` picks the form, and all
+  four verbs route through `get_scpi_form`. **`prefer_short_scpi` in config.ini,
+  off by default** — the long form is what the tables were swept as and what a
+  monitor log is readable in.
+
+### One knowledge base, not two
+
+- **`Yak/knownDevices.json`, 181 models** with `{manufacturer, type, notes}`.
+  `openair-visa/assets/visa_devices.json` was **byte-identical** to it and is
+  deleted; `oa_visa_known_devices/mod.rs` now embeds and resolves the Yak copy.
+- **`manufacturer` restored.** It existed in `manager_visa_known_types.py` only as
+  section comments, so converting to JSON dropped it and sorting the keys destroyed
+  even the ordering that implied it. Kept as the source's own grouping —
+  "HP / Agilent / Keysight" is one label because the 34401A was sold under all
+  three names as the company changed hands; splitting it would invent a
+  distinction the data never made.
+- **+39 models**, and two types that did not exist: **LCR** and **Distortion**.
+  Five models with YAK command tables were absent from the knowledge base
+  entirely, so discovery answered "Unknown Instrument" and the panel builder
+  skipped them — including Porta_one, which now has the largest vocabulary here.
+
+### Defects the work exposed
+
+- **Ten hand-authored commands were silently dropped** by the multi-step edit pass
+  — three 34401A `CALCulate:AVERage` queries, four 6060B transient setters, three
+  54641D trigger-edge setters, and no other name served their SCPI. Restored from
+  git. It recurred once after the first restore and the cause is **not identified**;
+  `validate_yak_tables.py --snapshot` / `--against` is how it was caught both times
+  and is the guard until it is.
+- **Nine commands had glued mnemonics** — `SOURce:CURRentLEVel:TRIGgered` is not
+  valid SCPI, it is `SOURce:CURRent:LEVel:TRIGgered`, run together where the manual
+  broke a line. Four Power models and the N9340B. Those commands could never have
+  worked.
+- **`subsystem` kept a trailing `?`** on six entries, from building the field off
+  the SCPI string without stripping it.
+
+### New tooling
+
+- **`Deployment/validate_yak_tables.py`** — invariant checks (verb matches the
+  template's shape, `returns.count` equals the number of `?`, chained queries carry
+  one field per answer, enums have choices, no duplicate names or aliased nodes,
+  `scpiFast` really is the short form), plus `--snapshot` / `--against` for the
+  count regression that needs a baseline. Findings went 518 → 234 as its own
+  false positives were fixed and the real defects were repaired.
+- `Deployment/build_yak_command_list.py` and `build_yak_command_trees.py`
+  regenerate `CommandList.csv` and the per-model `commands_tree.md` views, both
+  with `--check`.
+
+### Still open
+
+- **122 enums with no choice list**, 44 of them on the 54641D, whose manual has no
+  parameter tables — its choices are inline prose. Nothing can generate a legal
+  test value for those.
+- **Nothing was added to RIG.** The manuals name arguments inconsistently, so every
+  swept parameter is a one-value SET; the multi-argument commands RIG exists for
+  are sitting in SET.
+- 291 `arg` blocks and 429 `returns` types are `unknown` — a live sweep answers
+  both immediately, which is what the `unverified` flag is waiting for.
+
 ## 2026-07-27 - Two Files Per Instrument · YAK Commands Become A Table
 
 Both halves of the instrument stack were data pretending to be a GUI. The

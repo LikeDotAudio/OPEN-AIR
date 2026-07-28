@@ -1,6 +1,6 @@
 <!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
 
-# Scope/54641D — command tree
+# Oscilloscope/54641D — command tree
 
 Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
 

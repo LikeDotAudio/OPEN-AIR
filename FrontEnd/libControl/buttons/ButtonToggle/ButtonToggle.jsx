@@ -23,10 +23,11 @@ const MOMENTARY_FLASH_MS = 180;
 // stays lit as though reset were a mode, and the second press (turning it back
 // "off") sends the command AGAIN, because YAK fires on any value arriving at a
 // topic that has a handler cached. Opt out with `"momentary": false`.
-const isMomentary = (config) => {
-    if (config && typeof config.momentary === 'boolean') return config.momentary;
-    return String((config && config.type) || '').toLowerCase().includes('actuator');
-};
+// Asked at render time, so the load order of these two files does not matter.
+// The fallback keeps the button usable if the provider is absent entirely.
+const isMomentary = (config) => (window.OaIsMomentaryControl
+    ? window.OaIsMomentaryControl(config)
+    : String((config && config.type) || '').toLowerCase().includes('actuator'));
 
 // Inline comment: Logic for ButtonToggle
 const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {

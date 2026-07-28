@@ -359,6 +359,17 @@ window.useMqttPublish = () => {
 // replays it to itself on reconnect, which for a Setup page means `*RST` firing
 // at an instrument because an agent restarted. Retain class belongs to the topic
 // family (contracts T5), and a trigger's family is live-event.
+// Is this widget a trigger rather than a state?
+//
+// Canonical here because MqttProvider owns publish semantics and loads before
+// anything renders; ButtonToggle asks at render time. An ACTUATOR fires once per
+// press and has no value to rest at — which decides both how it publishes and
+// whether it may be seeded at all.
+window.OaIsMomentaryControl = (node) => {
+    if (node && typeof node.momentary === 'boolean') return node.momentary;
+    return String((node && node.type) || '').toLowerCase().includes('actuator');
+};
+
 window.useMqttTrigger = () => {
     const publish = window.useMqttPublish();
     return React.useCallback((topic, value) => publish(
@@ -424,7 +435,22 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     React.useEffect(() => {
         if (publish && nodeJson && !initialPublishDone.current) {
             publish(`${topic}/config`, JSON.stringify(nodeJson));
-            if (messages[topic] === undefined) {
+            // A trigger is never seeded. The seed exists so a late joiner sees a
+            // control's initial position, which is meaningless for something that
+            // has no position — and actively harmful once the value is a command:
+            // YAK executes on ANY value reaching a bound topic, so seeding
+            // `{value:false}` on mount fired the widget's command simply because
+            // its tab was opened. On an instrument Setup page that is a `*RST`
+            // for walking into the room.
+            // Nor is a READOUT seeded, for a sharper reason: `yak_readout`
+            // points the widget at the instrument's `/Read` topic, so seeding
+            // publishes the placeholder ("---") ON TOP of whatever the
+            // instrument last answered. A display-only widget must never write
+            // to the topic it displays.
+            const seedable = !(window.OaIsMomentaryControl
+                && window.OaIsMomentaryControl(nodeJson))
+                && nodeJson.yak_readout !== true;
+            if (seedable && messages[topic] === undefined) {
                 // Include full_id so Python's broker doesn't mistake this
                 // for one of its own reflections (see SESSION_FULL_ID above).
                 const payload = (typeof defaultValue === 'object' && defaultValue !== null) ? { ...defaultValue, full_id: SESSION_FULL_ID } : { value: defaultValue, full_id: SESSION_FULL_ID };

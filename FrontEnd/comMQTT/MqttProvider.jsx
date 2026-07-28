@@ -506,12 +506,26 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             publish(topic, JSON.stringify(makePayload()), { retain: false });
         };
 
-        const RETAIN_SETTLE_MS = 400;
-        if (state.settleTimer) clearTimeout(state.settleTimer);
-        state.settleTimer = setTimeout(() => {
-            state.settleTimer = null;
-            publish(topic, JSON.stringify(makePayload())); // retained: the resting value
-        }, RETAIN_SETTLE_MS);
+        // The settle publish exists so a late joiner can restore a control's
+        // resting position. A COMMAND topic has no resting position to restore,
+        // and sending one costs a second execution: YAK fires on any value
+        // arriving at a bound topic, and MQTT clears the retain flag on delivery
+        // to an already-subscribed client, so the settle arrives looking exactly
+        // like a fresh press. Every bound control was therefore running its
+        // command twice per change — visible in the agent log as each RX EXECUTE
+        // appearing twice with an identical payload and full_id.
+        //
+        // Retain class belongs to the topic family (contracts T5), and a command
+        // topic's family is live-event.
+        const isCommand = !!(nodeJson && nodeJson.yak_handler);
+        if (!isCommand) {
+            const RETAIN_SETTLE_MS = 400;
+            if (state.settleTimer) clearTimeout(state.settleTimer);
+            state.settleTimer = setTimeout(() => {
+                state.settleTimer = null;
+                publish(topic, JSON.stringify(makePayload())); // retained: the resting value
+            }, RETAIN_SETTLE_MS);
+        }
 
         const interval = window.OA_PUBLISH_INTERVAL_MS || PUBLISH_INTERVAL_MS;
         const elapsed = Date.now() - state.last;

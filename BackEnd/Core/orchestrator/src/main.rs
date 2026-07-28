@@ -576,7 +576,26 @@ use axum::response::Redirect;
         .route("/", get(|| async { Redirect::temporary("/index.html") }))
         .nest("/api", api_router)
         .route("/api/health", get(|| async { "Rust Core is Healthy" }))
-        .fallback_service(ServeDir::new(root.join("FrontEnd")).append_index_html_on_directories(true))
+        .fallback_service(
+            ServeDir::new(root.join("FrontEnd")).append_index_html_on_directories(true),
+        )
+        // The entry point must always be revalidated.
+        //
+        // Widgets are cache-busted with `?v=N` in index.html, which only works
+        // if the browser actually re-reads index.html to learn the new N. No
+        // Cache-Control was sent at all, so browsers fell back to heuristic
+        // caching and kept serving a stale index — which pins every widget at
+        // its old version no matter how many times the file is edited or how
+        // hard the page is refreshed. Editing a widget then looks like an edit
+        // that did nothing.
+        //
+        // `no-cache` means "revalidate before use", not "do not store": the
+        // 304 path still works, so this costs one conditional request per load,
+        // not a re-download of the tree.
+        .layer(tower_http::set_header::SetResponseHeaderLayer::if_not_present(
+            axum::http::header::CACHE_CONTROL,
+            axum::http::HeaderValue::from_static("no-cache"),
+        ))
         .layer(cors);
 
     // Run on the frontend port, since orchestrator replaces the python server.

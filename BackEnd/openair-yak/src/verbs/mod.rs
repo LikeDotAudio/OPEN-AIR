@@ -89,6 +89,44 @@ pub async fn dispatch(
         .await;
 }
 
+/// Drop a decimal point that carries no information.
+///
+/// `1.0` is not how a number is written to an instrument — the widget said
+/// "one", the table declares NPLC as `kind: integer`, and the meter should be
+/// sent `1`. A GUI knob emits whatever its `value_default` string says and
+/// JSON renders a whole f64 as `1.0`, so both routes produce a decimal point
+/// nobody asked for.
+///
+/// Deliberately conservative: only trailing zeros after a decimal point are
+/// removed, and only when what remains is still the same number. Genuine
+/// fractions are left exactly as written, because plenty of this bench's
+/// commands need them — a DS1104Z takes 0.001 V/div and a channel calibration
+/// of -1e-07, and "no decimal points" applied literally would send those as 0.
+/// Exponent forms are never touched.
+fn scpi_number(text: &str) -> String {
+    let s = text.trim();
+    // Only plain decimal numbers; anything with an exponent, unit or keyword is
+    // somebody else's business.
+    let body = s.strip_prefix('-').unwrap_or(s);
+    let mut parts = body.split('.');
+    let (Some(int), Some(frac), None) = (parts.next(), parts.next(), parts.next()) else {
+        return s.to_string();
+    };
+    if int.is_empty()
+        || !int.bytes().all(|b| b.is_ascii_digit())
+        || !frac.bytes().all(|b| b.is_ascii_digit())
+    {
+        return s.to_string();
+    }
+    let trimmed = frac.trim_end_matches('0');
+    let sign = if s.starts_with('-') { "-" } else { "" };
+    if trimmed.is_empty() {
+        format!("{sign}{int}")
+    } else {
+        format!("{sign}{int}.{trimmed}")
+    }
+}
+
 /// Fill in the per-instance constants a panel was stamped with (`<chan>`, …).
 ///
 /// Must run BEFORE the widget's value is injected. Value injection falls back
@@ -132,7 +170,8 @@ pub fn fill_placeholders(
 ) -> Result<String, Vec<String>> {
     let as_text = |v: &serde_json::Value| match v {
         serde_json::Value::Null => String::new(),
-        serde_json::Value::String(s) => s.clone(),
+        serde_json::Value::String(s) => scpi_number(s),
+        serde_json::Value::Number(n) => scpi_number(&n.to_string()),
         other => other.to_string(),
     };
 
@@ -186,4 +225,38 @@ pub fn target_model(msg: &crate::models::IncomingMessage, yak: &YakHandler) -> S
         .or(msg.device.as_deref())
         .unwrap_or("")
         .to_string()
+}
+
+#[cfg(test)]
+mod number_tests {
+    use super::scpi_number;
+
+    #[test]
+    fn a_whole_number_is_written_without_a_decimal_point() {
+        // What the log showed going to a 34401A whose table declares NPLC as an
+        // integer: `:SENSe:VOLTage:DC:NPLC 1.0`.
+        assert_eq!(scpi_number("1.0"), "1");
+        assert_eq!(scpi_number("10.000"), "10");
+        assert_eq!(scpi_number("-5.00"), "-5");
+        assert_eq!(scpi_number("1"), "1");
+    }
+
+    #[test]
+    fn a_real_fraction_survives_intact() {
+        // This bench needs these: 1 mV/div on a DS1104Z, 0.02 NPLC on a meter.
+        assert_eq!(scpi_number("0.001"), "0.001");
+        assert_eq!(scpi_number("0.02"), "0.02");
+        assert_eq!(scpi_number("1.50"), "1.5");
+        assert_eq!(scpi_number("-0.10"), "-0.1");
+    }
+
+    #[test]
+    fn anything_that_is_not_a_plain_decimal_is_left_alone() {
+        // Exponents, keywords and units are not ours to rewrite.
+        assert_eq!(scpi_number("1e-07"), "1e-07");
+        assert_eq!(scpi_number("MAX"), "MAX");
+        assert_eq!(scpi_number("ON"), "ON");
+        assert_eq!(scpi_number("1.2.3"), "1.2.3");
+        assert_eq!(scpi_number("10 V"), "10 V");
+    }
 }

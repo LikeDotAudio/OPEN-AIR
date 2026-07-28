@@ -432,6 +432,29 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
 
     const initialPublishDone = React.useRef(false);
 
+    // A widget INSTANCE is reused when the panel moves between device
+    // instantiations: same component, same position in the tree, different
+    // topic. React keeps its state across that, which broke two things at once.
+    //
+    // The visible one: the previous instrument's button positions bleed into the
+    // next instrument's tab — eight 34401As each showing whatever the meter
+    // before it was set to. The sync effect above cannot correct it, because it
+    // only fires once the NEW topic already has a value.
+    //
+    // The invisible one, and the worse of the two: `initialPublishDone` stayed
+    // true, so the new topic's `/config` was never published. That config is how
+    // YAK learns a control's yak_handler, so every device after the first had no
+    // handler cached and its buttons did nothing at all — which is exactly how
+    // it looked from the outside.
+    const previousTopic = React.useRef(topic);
+    if (previousTopic.current !== topic) {
+        previousTopic.current = topic;
+        initialPublishDone.current = false;
+        // Adopt the new topic's own value if it has one; otherwise fall back to
+        // the default rather than showing the last instrument's state.
+        if (messages[topic] === undefined) setLocalValue(defaultValue);
+    }
+
     React.useEffect(() => {
         if (publish && nodeJson && !initialPublishDone.current) {
             publish(`${topic}/config`, JSON.stringify(nodeJson));

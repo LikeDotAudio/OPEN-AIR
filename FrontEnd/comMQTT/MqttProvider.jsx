@@ -36,6 +36,21 @@ const OA_DISCOVERED_ROWS_FILTER = 'OpenAir/System/Gui/Discovered/#';
 // stdout, so pressing a bound button looked identical whether it had driven an
 // instrument or found no command at all.
 const OA_YAK_ACTIVITY_TOPIC = 'OpenAir/System/Protocols/yak/Activity';
+
+// Where an instrument's answer lands: the VISA daemon publishes whatever the
+// hardware replied to `.../Device/<type>/<model>/<dev>/Read`, and `yak_readout`
+// binds a display widget to exactly that topic.
+//
+// The page subscribed to OpenAir/Gui/# and nothing else, so a readout was bound
+// to a topic the browser never received — every reply arrived on the bus and no
+// widget could see it. Pressing READ IDENTITY worked end to end and still showed
+// "---".
+//
+// Scoped to the reply leaf rather than the device tree: the discovery topics
+// under it are already delivered as Discovered table rows, and subscribing to
+// the whole tree would put every attribute of every instrument through the
+// React store for nothing.
+const OA_VISA_READ_FILTER = 'OpenAir/System/Protocols/visa/Device/+/+/+/Read';
 const OA_ACTIVITY_TOPICS = new Set([OA_SCAN_LOG_TOPIC, OA_DISCOVERY_ACTIVITY_TOPIC, OA_YAK_ACTIVITY_TOPIC]);
 
 // ── Discovery activity store ────────────────────────────────────────────────
@@ -204,6 +219,10 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             // move without a page reload.
             mqttClient.subscribe(OA_DISCOVERED_ROWS_FILTER, (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to ${OA_DISCOVERED_ROWS_FILTER}`);
+            });
+            // Instrument replies, so `yak_readout` widgets can show them.
+            mqttClient.subscribe(OA_VISA_READ_FILTER, (err) => {
+                if (!err) console.log(`📥 [VISA] watching ${OA_VISA_READ_FILTER} — instrument replies will fill readouts`);
             });
         });
         // Activity lines are an event stream, not application state: routing

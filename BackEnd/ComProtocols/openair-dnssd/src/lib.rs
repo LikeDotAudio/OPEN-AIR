@@ -15,7 +15,7 @@
 //! retained at that moment.
 
 use mdns_sd::{ServiceDaemon, ServiceEvent};
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::time::Duration;
 
 const META_QUERY: &str = "_services._dns-sd._udp.local.";
@@ -121,6 +121,24 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
     }
 
     // Publisher: resolved instances become retained attribute topics.
+    //
+    // mDNS re-announces continuously, so the SAME service resolves again every
+    // few seconds for as long as it is on the network. Republishing ten
+    // identical retained topics and printing a line each time is what made
+    // discovery look like a scan running on a loop that nobody asked for — 54
+    // services on this network, forever. Nothing about the service has changed;
+    // only the fact that it said so again.
+    //
+    // So: remember what was last published per topic, and write only what
+    // actually differs.
+    let mut published: HashMap<String, String> = HashMap::new();
+    // `last_online` is the exception — it IS the re-announcement, and the
+    // Discovered table colours a row on its age. Refreshed on a timer rather
+    // than on every announcement, which keeps liveness current without putting
+    // a message on the bus every few seconds per device.
+    let mut last_beat: HashMap<String, std::time::Instant> = HashMap::new();
+    const BEAT_INTERVAL: Duration = Duration::from_secs(60);
+
     while let Ok(event) = found_rx.recv() {
         match event {
             ServiceEvent::ServiceResolved(info) => {
@@ -162,16 +180,38 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                     "identified".to_string(),
                     now_secs.to_string(),
                 ];
-                println!(
-                    "   ✅ [DNSSD] resolved {} @ {}:{}",
-                    info.fullname, info.host, info.port
-                );
+                let beat_due = last_beat
+                    .get(&prefix)
+                    .map(|t| t.elapsed() >= BEAT_INTERVAL)
+                    .unwrap_or(true);
+                let mut wrote = 0usize;
                 for (key, value) in DEVICE_KEYS.iter().zip(values) {
+                    let topic = format!("{prefix}/{key}");
+                    if *key == "last_online" {
+                        if !beat_due {
+                            continue;
+                        }
+                    } else if published.get(&topic).is_some_and(|p| *p == value) {
+                        continue;
+                    }
+                    published.insert(topic.clone(), value.clone());
+                    wrote += 1;
                     let _ = mqtt_client.publish(
-                        format!("{prefix}/{key}"),
+                        topic,
                         rumqttc::QoS::AtLeastOnce,
                         true,
                         value.into_bytes(),
+                    );
+                }
+                if beat_due {
+                    last_beat.insert(prefix.clone(), std::time::Instant::now());
+                }
+                // Announced only when it is news. A service saying the same
+                // thing again is not an event worth a line.
+                if wrote > 0 && !(wrote == 1 && beat_due) {
+                    println!(
+                        "   ✅ [DNSSD] resolved {} @ {}:{}",
+                        info.fullname, info.host, info.port
                     );
                 }
             }
@@ -182,6 +222,10 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
                 let instance = seg(fullname.trim_end_matches(&stype));
                 let prefix = format!("OpenAir/System/Protocols/dnssd/Device/{s}/{instance}");
                 println!("   👋 [DNSSD] removed {fullname}");
+                // Forget it, so a service that comes back is published in full
+                // rather than mistaken for unchanged.
+                published.retain(|topic, _| !topic.starts_with(&prefix));
+                last_beat.remove(&prefix);
                 for key in DEVICE_KEYS {
                     let _ = mqtt_client.publish(
                         format!("{prefix}/{key}"),

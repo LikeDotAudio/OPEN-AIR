@@ -25,6 +25,63 @@ use tower_http::services::ServeDir;
 use tower_http::cors::CorsLayer;
 use axum::http::Method;
 
+/// Holds the network browsers until the bench has been scanned.
+///
+/// A gate rather than a channel because every browser waits on the same event —
+/// a channel has one receiver, and the first agent to take the message would
+/// leave the rest waiting forever.
+#[derive(Clone)]
+struct VisaGate(std::sync::Arc<(std::sync::Mutex<bool>, std::sync::Condvar)>);
+
+impl VisaGate {
+    /// How long a browser will wait before going anyway.
+    ///
+    /// Bounded on purpose: a VISA scan that hangs, or a bench with no
+    /// instruments to find, must not leave the network permanently undiscovered.
+    /// Generous next to a real scan — this bench probes 26 resources in well
+    /// under a minute.
+    const CAP: std::time::Duration = std::time::Duration::from_secs(180);
+
+    fn new() -> Self {
+        Self(std::sync::Arc::new((
+            std::sync::Mutex::new(false),
+            std::sync::Condvar::new(),
+        )))
+    }
+
+    /// Let everyone through. Idempotent — a rescan finds it already open.
+    fn open(&self) {
+        let (lock, cvar) = &*self.0;
+        if let Ok(mut opened) = lock.lock() {
+            if !*opened {
+                *opened = true;
+                cvar.notify_all();
+            }
+        }
+    }
+
+    /// Block until the scan is done, or the cap expires.
+    fn wait(&self, who: &str) {
+        let (lock, cvar) = &*self.0;
+        let Ok(mut opened) = lock.lock() else { return };
+        let deadline = std::time::Instant::now() + Self::CAP;
+        while !*opened {
+            let left = deadline.saturating_duration_since(std::time::Instant::now());
+            if left.is_zero() {
+                println!(
+                    "⚠️  [AGENT] VISA scan unfinished after {}s — starting {who} anyway",
+                    Self::CAP.as_secs()
+                );
+                return;
+            }
+            match cvar.wait_timeout(opened, left) {
+                Ok((guard, _)) => opened = guard,
+                Err(_) => return,
+            }
+        }
+    }
+}
+
 #[tokio::main]
 // Inline comment: Logic for main
 async fn main() {
@@ -46,6 +103,19 @@ async fn main() {
     
     // MQTT Config Publisher
     mqtt::publish_protocol_configs(&root, args.no_mqtt);
+
+    // The bench is scanned before anything else goes looking.
+    //
+    // Every network browser waits here until the VISA scan has finished its
+    // first pass. They are all "discovery", but only one of them is answering a
+    // question about hardware that is plugged in and expected to be there —
+    // and ~50 mDNS services arriving at once bury the instrument probe in both
+    // the log and the Discovered tab.
+    //
+    // The passive listeners (PTP, SAP, AVB) are deliberately NOT gated: they
+    // transmit nothing and only hear what the network volunteers, so they cost
+    // the scan nothing and would lose announcements by sitting them out.
+    let visa_gate = VisaGate::new();
 
     let osc_bind = args.osc_bind;
     let (osc_mqtt_host, osc_mqtt_port) = (mqtt_host.clone(), mqtt_port);
@@ -222,7 +292,9 @@ async fn main() {
     // agent decodes them into sortable columns (friendly name, model,
     // capabilities, status). Discovery only — no Cast V2 control.
     let (cast_mqtt_host, cast_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let gate_chromecast = visa_gate.clone();
     std::thread::spawn(move || {
+        gate_chromecast.wait("Chromecast");
         openair_chromecast::run_browse_agent(&cast_mqtt_host, cast_mqtt_port);
     });
 
@@ -230,7 +302,9 @@ async fn main() {
     // stream is only claimed once its own SDP says it carries audio (port 554
     // alone proves nothing — IP cameras answer RTSP too).
     let (rav_mqtt_host, rav_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let gate_ravenna = visa_gate.clone();
     std::thread::spawn(move || {
+        gate_ravenna.wait("RAVENNA");
         openair_ravenna::run_browse_agent(&rav_mqtt_host, rav_mqtt_port);
     });
 
@@ -248,7 +322,9 @@ async fn main() {
     // Dante, in both personalities: native mDNS (_netaudio-*) AND the SAP
     // multicast group it uses instead once AES67 mode is enabled.
     let (dante_mqtt_host, dante_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let gate_dante = visa_gate.clone();
     std::thread::spawn(move || {
+        gate_dante.wait("Dante");
         openair_dante::run_browse_agent(&dante_mqtt_host, dante_mqtt_port);
     });
 
@@ -276,46 +352,40 @@ async fn main() {
 
     // Printers: six Bonjour services per device, merged into one row by UUID.
     let (prn_mqtt_host, prn_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let gate_printers = visa_gate.clone();
     std::thread::spawn(move || {
+        gate_printers.wait("Printers");
         openair_printers::run_browse_agent(&prn_mqtt_host, prn_mqtt_port);
     });
 
     // AirPlay / HomeKit receivers — many roles, one device.
     let (atv_host, atv_port) = (mqtt_host.clone(), mqtt_port);
-    std::thread::spawn(move || { openair_appletv::run_browse_agent(&atv_host, atv_port); });
+    let gate_appletv = visa_gate.clone();
+    std::thread::spawn(move || {
+        gate_appletv.wait("AppleTV");
+        openair_appletv::run_browse_agent(&atv_host, atv_port);
+    });
 
     // AMWA NMOS IS-04/IS-09 — each service is a distinct API role, keyed host+port.
     let (nmos_host, nmos_port) = (mqtt_host.clone(), mqtt_port);
-    std::thread::spawn(move || { openair_nmos::run_browse_agent(&nmos_host, nmos_port); });
+    let gate_nmos = visa_gate.clone();
+    std::thread::spawn(move || {
+        gate_nmos.wait("NMOS");
+        openair_nmos::run_browse_agent(&nmos_host, nmos_port);
+    });
+
+    let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let gate_dnssd = visa_gate.clone();
+    std::thread::spawn(move || {
+        gate_dnssd.wait("DNS-SD");
+        println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");
+        openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
+    });
 
     // Discovered-device panels and live tables (see discovered.rs).
     // One mirror of the retained discovery tree serves both the scan loop, which
     // rebuilds the panel FILES, and the watcher task, which keeps the rows live.
     let discovered_mirror = discovered::Mirror::spawn(root.clone(), &mqtt_host, mqtt_port);
-
-    // The bench comes first: DNS-SD does not start browsing until the VISA scan
-    // has finished its first pass.
-    //
-    // Both are "scanning" but only one is answering questions about hardware
-    // that is plugged in and expected to be there. A continuous mDNS browse
-    // finding ~50 services buries the instrument probe in both the log and the
-    // Discovered tab, and the first thing anyone wants after a start is the
-    // bench, not the building's Chromecasts.
-    let (visa_first_scan_tx, visa_first_scan_rx) = std::sync::mpsc::channel::<()>();
-
-    let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
-    std::thread::spawn(move || {
-        // Waiting, but never indefinitely: a VISA scan that dies or hangs must
-        // not take DNS-SD discovery down with it. The cap is generous enough for
-        // a full bench (this one probes 26 resources in well under a minute).
-        const VISA_FIRST_SCAN_CAP: std::time::Duration = std::time::Duration::from_secs(180);
-        match visa_first_scan_rx.recv_timeout(VISA_FIRST_SCAN_CAP) {
-            Ok(()) => println!("🚀 [AGENT] VISA scan done — launching Native DNS-SD Agent (continuous browse)..."),
-            Err(_) => println!("⚠️  [AGENT] VISA scan did not finish within {}s — starting DNS-SD anyway",
-                               VISA_FIRST_SCAN_CAP.as_secs()),
-        }
-        openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
-    });
 
     let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
@@ -564,11 +634,10 @@ async fn main() {
         discovered_mirror.settle().await;
         discovered_mirror.build_async().await;
 
-        // Release DNS-SD, which has been holding since boot so the bench got the
-        // network to itself. Send on every pass and ignore the error: the
-        // receiver is gone after the first one, and a rescan has nothing left to
-        // release.
-        let _ = visa_first_scan_tx.send(());
+        // Release the network browsers, which have been holding since boot so
+        // the bench got the network to itself. Idempotent, so a rescan simply
+        // finds the gate already open.
+        visa_gate.open();
 
         // Triggers that arrived DURING the scan are stale — the scan they
         // asked for just ran. This also absorbs the browser's 400 ms

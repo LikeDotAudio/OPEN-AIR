@@ -1207,7 +1207,7 @@
       "subsystem": "VOLT",
       "unverified": true
     },
-    "IDN": {
+    "Read_IDN": {
       "scpi": "*IDN?",
       "description": "IDN",
       "returns": {

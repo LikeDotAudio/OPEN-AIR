@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Generator/33210A — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **247 commands** — SET 73 · RIG 5 · NAB 110 · DO 59 · 222 unverified (89%)
 
@@ -333,13 +333,13 @@ Several statements in one message, so they hang off no single branch. Every stat
 - `*WAI` — **DO** `Do_Wai` · †
 - `*ESE?` — **NAB** `Get_Ese` · → NR1 · †
 - `*ESR?` — **NAB** `Get_Esr` · → NR1 · †
-- `*IDN?` — **NAB** `Get_Idn` · → AARD · †
 - `*LRN?` — **NAB** `Get_Lrn` · → AARD · †
 - `*OPC?` — **NAB** `Get_Opc` · → NR1 · †
 - `*PSC?` — **NAB** `Get_Psc` · → NR1 · †
 - `*SRE?` — **NAB** `Get_Sre` · → NR1 · †
 - `*STB?` — **NAB** `Get_Stb` · → NR1 · †
 - `*TST?` — **NAB** `Get_Tst` · → NR1 · †
+- `*IDN?` — **NAB** `Read_IDN` · → AARD · †<br>Get idn
 - `*RST` — **DO** `Reset_Device`
 - `*ESE <value>` — **SET** `Set_Ese` · `<value>` · args: `value` · integer · †
 - `*PSC <value>` — **SET** `Set_Psc` · `<value>` · args: `value` · †

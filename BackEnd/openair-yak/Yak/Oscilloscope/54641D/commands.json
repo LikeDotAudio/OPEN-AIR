@@ -2636,7 +2636,7 @@
       "subsystem": "PROT",
       "unverified": true
     },
-    "Do_Reset": {
+    "Reset_Device": {
       "scpi": "*RST",
       "description": "Do Reset",
       "group": "Actions and Toggles",

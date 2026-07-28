@@ -172,7 +172,6 @@ Distortion,Porta_one,DO,Do_Output_OFF,Do Output OFF,:OUTPut OFF,:OUTP OFF,,,,,Ma
 Distortion,Porta_one,DO,Do_Output_ON,Do Output ON,:OUTPut ON,:OUTP ON,,,,,Master Generator Output,System,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Do_Phas_Aver,Selects the averaging function for the Phase meter,PHASe:AVERage,PHAS:AVER,,,,,,PHAS,,,,,1,yes,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Do_Ref_Watt,Do ref watt,REF:WATT,,,,,,,REF,,,,,1,yes,Distortion/Porta_one/commands.json
-Distortion,Porta_one,DO,Do_Reset,Do Reset,*RST,,,,,,Global Utilities,System,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Do_Thd_Medium,Do thd medium,THD:MEDIUM,THD:MED,,,,,,THD,,,,,1,yes,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Mode_Amplitude,Mode Amplitude,:FUNCtion AMPLitude,:FUNC AMPLitude,,,,,Select Measurement Mode,Channel_AB,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Mode_Crosstalk,Mode Crosstalk,:FUNCtion XTALK,:FUNC XTALK,,,,,Select Measurement Mode,Channel_AB,,,,,1,,Distortion/Porta_one/commands.json
@@ -181,6 +180,7 @@ Distortion,Porta_one,DO,Mode_Noise,Mode Noise,:FUNCtion NOISE,:FUNC NOISE,,,,,Se
 Distortion,Porta_one,DO,Mode_Phase,Mode Phase,:FUNCtion PHASE,:FUNC PHASE,,,,,Select Measurement Mode,Channel_AB,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Mode_SINAD,Mode SINAD,:FUNCtion SINad,:FUNC SINad,,,,,Select Measurement Mode,Channel_AB,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Mode_THD_N,Mode THD N,:FUNCtion THD,:FUNC THD,,,,,Select Measurement Mode,Channel_AB,,,,,1,,Distortion/Porta_one/commands.json
+Distortion,Porta_one,DO,Reset_Device,Do Reset,*RST,,,,,,Global Utilities,System,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Select_DIN_BNC,Select DIN BNC,:DINPut BNC,:DINP BNC,,,,,Select Digital Input Connector,Digital,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Select_DIN_Generator,Select DIN Generator,:DINPut GENerator,:DINP GENerator,,,,,Select Digital Input Connector,Digital,,,,,1,,Distortion/Porta_one/commands.json
 Distortion,Porta_one,DO,Select_DIN_Optical,Select DIN Optical,:DINPut OPTical,:DINP OPTical,,,,,Select Digital Input Connector,Digital,,,,,1,,Distortion/Porta_one/commands.json
@@ -871,7 +871,6 @@ Generator,33210A,NAB,Get_Function_Pulse_Width,Pulse Configuration Commands,FUNCt
 Generator,33210A,NAB,Get_Function_Ramp_Symmetry,Output Configuration Commands,FUNCtion:RAMP:SYMMetry?,FUNC:RAMP:SYMM?,,,,,,FUNC,1,,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Function_Square_Dcycle,Output Configuration Commands,FUNCtion:SQUare:DCYCle?,FUNC:SQU:DCYC?,,,,,,FUNC,1,NR3,%,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Function_User,Arbitrary Waveform Commands,FUNCtion:USER?,FUNC:USER?,,,,,,FUNC,1,,,,1,yes,Generator/33210A/commands.json
-Generator,33210A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Klock_Exclude,System-Related Commands,:KLOCk:EXCLude?,:KLOC:EXCL?,,,,,,KLOC,1,,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Lan_Lipaddress,Get lan lipaddress,LAN:LIPaddress?,LAN:LIP?,,,,,,LAN,1,,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Lan_Mac,Get lan mac,LAN:MAC?,,,,,,,LAN,1,,,,1,yes,Generator/33210A/commands.json
@@ -931,6 +930,7 @@ Generator,33210A,NAB,Get_Tst,Get tst,*TST?,,,,,,,Common,1,NR1,,,1,yes,Generator/
 Generator,33210A,NAB,Get_Unit_Angle,Burst Commands,UNIT:ANGLe?,UNIT:ANGL?,,,,,,UNIT,1,,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Voltage_Offset,Output Configuration Commands,VOLTage:OFFSet?,VOLT:OFFS?,,,,,,VOLT,1,NR3,V,,1,yes,Generator/33210A/commands.json
 Generator,33210A,NAB,Get_Voltage_Unit,Output Configuration Commands,VOLTage:UNIT?,VOLT:UNIT?,,,,,,VOLT,1,CRD,V,,1,yes,Generator/33210A/commands.json
+Generator,33210A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Generator/33210A/commands.json
 Generator,33210A,RIG,Apply_Pulse,Apply Pulse,"APPLy:PULSe <freq>, <amp>, <offset>","APPL:PULS <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33210A/commands.json
 Generator,33210A,RIG,Apply_Sine,Apply Sine,"APPLy:SINusoid <freq>, <amp>, <offset>","APPL:SIN <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33210A/commands.json
 Generator,33210A,RIG,Apply_Square,Apply Square,"APPLy:SQUare <freq>, <amp>, <offset>","APPL:SQU <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33210A/commands.json
@@ -1120,7 +1120,6 @@ Generator,33220A,NAB,Get_Function_Pulse_Width,Pulse Configuration Commands,FUNCt
 Generator,33220A,NAB,Get_Function_Ramp_Symmetry,Output Configuration Commands,FUNCtion:RAMP:SYMMetry?,FUNC:RAMP:SYMM?,,,,,,FUNC,1,,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Function_Square_Dcycle,Output Configuration Commands,FUNCtion:SQUare:DCYCle?,FUNC:SQU:DCYC?,,,,,,FUNC,1,NR3,%,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Function_User,Arbitrary Waveform Commands,FUNCtion:USER?,FUNC:USER?,,,,,,FUNC,1,,,,1,yes,Generator/33220A/commands.json
-Generator,33220A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Klock_Exclude,System-Related Commands,:KLOCk:EXCLude?,:KLOC:EXCL?,,,,,,KLOC,1,,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Lan_Lipaddress,Get lan lipaddress,LAN:LIPaddress?,LAN:LIP?,,,,,,LAN,1,,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Lan_Mac,Get lan mac,LAN:MAC?,,,,,,,LAN,1,,,,1,yes,Generator/33220A/commands.json
@@ -1182,6 +1181,7 @@ Generator,33220A,NAB,Get_Tst,Get tst,*TST?,,,,,,,Common,1,NR1,,,1,yes,Generator/
 Generator,33220A,NAB,Get_Unit_Angle,Burst Commands,UNIT:ANGLe?,UNIT:ANGL?,,,,,,UNIT,1,,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Voltage_Offset,Output Configuration Commands,VOLTage:OFFSet?,VOLT:OFFS?,,,,,,VOLT,1,NR3,V,,1,yes,Generator/33220A/commands.json
 Generator,33220A,NAB,Get_Voltage_Unit,Output Configuration Commands,VOLTage:UNIT?,VOLT:UNIT?,,,,,,VOLT,1,CRD,V,,1,yes,Generator/33220A/commands.json
+Generator,33220A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Generator/33220A/commands.json
 Generator,33220A,RIG,Apply_Pulse,Apply Pulse,"APPLy:PULSe <freq>, <amp>, <offset>","APPL:PULS <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33220A/commands.json
 Generator,33220A,RIG,Apply_Sine,Apply Sine,"APPLy:SINusoid <freq>, <amp>, <offset>","APPL:SIN <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33220A/commands.json
 Generator,33220A,RIG,Apply_Square,Apply Square,"APPLy:SQUare <freq>, <amp>, <offset>","APPL:SQU <freq>, <amp>, <offset>",freq; amp; offset,unknown,,,APPLy Macro Commands,APPLy,,,,,1,,Generator/33220A/commands.json
@@ -1271,9 +1271,9 @@ LCR,4263A,DO,Trigger_Bus,Triggers the unit (equivalent to the Bus trigger).,*TRG
 LCR,4263A,DO,Trigger_Immediate,Manually triggers a measurement.,:TRIGger,:TRIG,,,,,,TRIGger,,,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,NAB,Fetch_Existing,Retrieves the most recent measurement data.,:FETCh?,:FETC?,,,,,,MEASure,1,,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,NAB,Get_Error_Queue,Queries the next entry in the error queue.,:SYSTem:ERRor?,:SYST:ERR?,,,,,,SYSTem,1,NR2,,,1,yes,LCR/4263A/commands.json
-LCR,4263A,NAB,Get_Identity,"Queries the instrument identification (Manufacturer, Model, Serial, Firmware).",*IDN?,,,,,,,Common,1,AARD,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,NAB,Get_Operation_Complete,Returns '1' once all pending operations are completed.,*OPC?,,,,,,,Common,1,NR1,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,NAB,Measure,Executes a complete measurement and retrieves data.,:MEASure?,:MEAS?,,,,,,MEASure,1,,,,1,yes,LCR/4263A/commands.json
+LCR,4263A,NAB,Read_IDN,"Queries the instrument identification (Manufacturer, Model, Serial, Firmware).",*IDN?,,,,,,,Common,1,AARD,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,NAB,Read_Measurement,Triggers a measurement and retrieves the results.,:READ?,,,,,,,MEASure,1,,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,SET,Average_Count,Sets the number of measurement averages (1 to 256).,:SENSe:AVERage:COUNt <count>,:SENS:AVER:COUN <count>,count,integer,,,,SENSe,,,,,1,yes,LCR/4263A/commands.json
 LCR,4263A,SET,Current_Range,Sets the current measurement range.,:SENSe:CURRent:RANGe <range>,:SENS:CURR:RANG <range>,range,numeric,,,,SENSe,,,,,1,yes,LCR/4263A/commands.json
@@ -1374,8 +1374,8 @@ Load,6060B,NAB,Get_Volt,Query the programmed main voltage level,VOLT?,,,,,,,VOLT
 Load,6060B,NAB,Get_Volt_Lev_Trig,Query the triggered voltage level,VOLT:LEV:TRIG?,,,,,,,VOLT,1,NR3,V,,1,yes,Load/6060B/commands.json
 Load,6060B,NAB,Get_Volt_Slew,Query the voltage slew rate,VOLT:SLEW?,,,,,,,VOLT,1,NR3,V,,1,yes,Load/6060B/commands.json
 Load,6060B,NAB,Get_Volt_Tlev,Query the transient voltage level,VOLT:TLEV?,,,,,,,VOLT,1,NR3,V,,1,yes,Load/6060B/commands.json
-Load,6060B,NAB,IDN,IDN,*IDN?,,,,,,Common Commands,Common,1,AARD,,,1,,Load/6060B/commands.json
 Load,6060B,NAB,Measure_All,Measure All,MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?,,,,,,Readback Queries,MEASure,4,CRD; NR3; NR3; NR3,; V; A; W,mode; voltage; current; power,4,,Load/6060B/commands.json
+Load,6060B,NAB,Read_IDN,IDN,*IDN?,,,,,,Common Commands,Common,1,AARD,,,1,,Load/6060B/commands.json
 Load,6060B,NAB,Status_Byte,Status Byte,*STB?,,,,,,Status Registers,STATus,1,NR1,,,1,,Load/6060B/commands.json
 Load,6060B,RIG,Setup_Transient_Profile,"Set both transient levels, duty and frequency together",:CURR:LEV <level_a>;:CURR:TLEV <level_b>;:TRAN:DCYC <duty>;:TRAN:FREQ <freq>,,level_a; level_b; duty; freq,numeric,,,Pulse & Dynamic Loading,TRANsient,,,,,4,yes,Load/6060B/commands.json
 Load,6060B,SET,Set_Chan,Select the electronic load channel this command stream addresses (INST is an alias),CHAN <value>,,value,enum,,,,CHAN,,,,,1,yes,Load/6060B/commands.json
@@ -1469,7 +1469,6 @@ Oscilloscope,54641D,DO,Do_Measure_Vstart,Do measure vstart,MEASure:VSTArt,MEAS:V
 Oscilloscope,54641D,DO,Do_Measure_Vstop,Do measure vstop,MEASure:VSTOp,MEAS:VSTO,,,,,,MEAS,,,,,1,yes,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Opc,Do opc,*OPC,,,,,,,Common,,,,,1,yes,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Protection_Clear,Do protection clear,:PROTection:CLEAR,:PROT:CLE,,,,,,PROT,,,,,1,yes,Oscilloscope/54641D/commands.json
-Oscilloscope,54641D,DO,Do_Reset,Do Reset,*RST,,,,,,Actions and Toggles,System,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Run,Do Run,:RUN,,,,,,Actions and Toggles,System,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Single,Do Single,:SINGle,:SING,,,,,Actions and Toggles,System,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Stop,Do Stop,:STOP,,,,,,Actions and Toggles,System,,,,,1,,Oscilloscope/54641D/commands.json
@@ -1513,6 +1512,7 @@ Oscilloscope,54641D,DO,Do_Trigger_Tv_Vir,Do trigger tv vir,TRIGger:TV:VIR,TRIG:T
 Oscilloscope,54641D,DO,Do_Trigger_Usb,Command Set Organization,TRIGger:USB,TRIG:USB,,,,,,TRIG,,,,,1,yes,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Trigger_Usb_Source,Table 5-1,TRIGger:USB:SOURce,TRIG:USB:SOUR,,,,,,TRIG,,,,,1,yes,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Oscilloscope/54641D/commands.json
+Oscilloscope,54641D,DO,Reset_Device,Do Reset,*RST,,,,,,Actions and Toggles,System,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Run,Run,RUN,,,,,,Root Action Commands,Root,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Set_Source_CH1,Set Source CH1,:FUNCtion:SOURce CHANnel1,:FUNC:SOUR CHANnel1,,,,,Source Selection,Math_FFT,,,,,1,,Oscilloscope/54641D/commands.json
 Oscilloscope,54641D,DO,Set_Source_CH2,Set Source CH2,:FUNCtion:SOURce CHANnel2,:FUNC:SOUR CHANnel2,,,,,Source Selection,Math_FFT,,,,,1,,Oscilloscope/54641D/commands.json
@@ -1887,7 +1887,6 @@ Oscilloscope,DS1104Z,DO,Do_Measure_Recover,Recover the measurement item which ha
 Oscilloscope,DS1104Z,DO,Do_Measure_Statistic_Reset,Clear the history data and make statistic again,:MEASure:STATistic:RESet,:MEAS:STAT:RES,,,,,,MEAS,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Do_Opc,Do opc,*OPC,,,,,,,Common,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Do_Phase_Initiate,Execute the align phase operation,:PHASe:INITiate,:PHAS:INIT,,,,,,PHAS,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
-Oscilloscope,DS1104Z,DO,Do_Rst,Do rst,*RST,,,,,,,Common,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Do_System_Option_Install,Install a option. |Name|Type|Range|Default| |---|---|---|---| |<license>|ASCII String|Refer to,:SYSTem:OPTion:INSTall,:SYST:OPT:INST,,,,,,SYST,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Do_System_Option_Uninstall,Uninstall the options installed,:SYSTem:OPTion:UNINSTall,:SYST:OPT:UNINST,,,,,,SYST,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Do_Trigger_Delay,Set or query the trigger source A in delay trigger,:TRIGger:DELay,:TRIG:DEL,,,,,,TRIG,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
@@ -1911,6 +1910,7 @@ Oscilloscope,DS1104Z,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Oscilloscope/D
 Oscilloscope,DS1104Z,DO,Do_Waveform_Sor,LabVIEW Programming Demo,:WAV:SOR,,,,,,,WAV,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Execute Command,Execute Command,:MEASure:CLEar,:MEAS:CLE,,,,,Measurement Settings,MEASure,,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Force_Trigger,Force Trigger,:TFORce,:TFOR,,,,,Root Action Commands,Root,,,,,1,,Oscilloscope/DS1104Z/commands.json
+Oscilloscope,DS1104Z,DO,Reset_Device,Do rst,*RST,,,,,,,Common,,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Run,Run,:RUN,,,,,,Root Action Commands,Root,,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Single,Single,:SINGle,:SING,,,,,Root Action Commands,Root,,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,DO,Stop,Stop,:STOP,,,,,,Root Action Commands,Root,,,,,1,,Oscilloscope/DS1104Z/commands.json
@@ -2035,7 +2035,6 @@ Oscilloscope,DS1104Z,NAB,Get_Function_Wreplay_Fmax,"Query theb maximum number of
 Oscilloscope,DS1104Z,NAB,Get_Function_Wreplay_Fstart,Set or query the start frame of waveform playback,:FUNCtion:WREPlay:FSTart?,:FUNC:WREP:FST?,,,,,,FUNC,1,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Get_Function_Wreplay_Mode,Set or query the waveform playback mode,:FUNCtion:WREPlay:MODE?,:FUNC:WREP:MODE?,,,,,,FUNC,1,CRD,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Get_Function_Wreplay_Operator,"Start, pause, or stop the waveform playback, or query the status of the waveform playback",:FUNCtion:WREPlay:OPERate?,:FUNC:WREP:OPER?,,,,,,FUNC,1,CRD,,,1,yes,Oscilloscope/DS1104Z/commands.json
-Oscilloscope,DS1104Z,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Get_Iic_Address,Set or query the signal source of the clock channel in I2C decoding,:IIC:ADDRess?,:IIC:ADDR?,,,,,,IIC,1,NR1,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Get_Iic_Clk,Set or query the signal source of the clock channel in I2C decoding,:IIC:CLK?,,,,,,,IIC,1,,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Get_Iic_Data,Set or query the signal source of the clock channel in I2C decoding,:IIC:DATA?,,,,,,,IIC,1,BLOCK,,,1,yes,Oscilloscope/DS1104Z/commands.json
@@ -2272,6 +2271,7 @@ Oscilloscope,DS1104Z,NAB,Get_YOrigin,Get YOrigin,:WAVeform:YORigin?,:WAV:YOR?,,,
 Oscilloscope,DS1104Z,NAB,Get_YRef,Get YRef,:WAVeform:YREFerence?,:WAV:YREF?,,,,,Scaling Parameters,WAVeform,1,NR3,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Measure_Frequency,Measure Frequency,":MEASure:ITEM? FREQ,<chan>",":MEAS:ITEM? FREQ,<chan>",,,,chan,Immediate Measurement (:MEAS:ITEM?),MEASure,1,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,NAB,Measure_Vpp,Measure Vpp,":MEASure:ITEM? VPP,<chan>",":MEAS:ITEM? VPP,<chan>",,,,chan,Immediate Measurement (:MEAS:ITEM?),MEASure,1,,,,1,,Oscilloscope/DS1104Z/commands.json
+Oscilloscope,DS1104Z,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,SET,CH1_BWLimit,CH1 BWLimit,:CHANnel1:BWLimit <limit>,:CHAN1:BWL <limit>,limit,enum,20M; OFF,,Channel 1 Vertical,Channel_1,,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,SET,CH1_Coupling,CH1 Coupling,:CHANnel1:COUPling <coupling>,:CHAN1:COUP <coupling>,coupling,enum,AC; DC; GND,,Channel 1 Vertical,Channel_1,,,,,1,,Oscilloscope/DS1104Z/commands.json
 Oscilloscope,DS1104Z,SET,CH1_Offset,CH1 Offset,:CHANnel1:OFFSet <offset>,:CHAN1:OFFS <offset>,offset,numeric,,,Channel 1 Vertical,Channel_1,,,,,1,,Oscilloscope/DS1104Z/commands.json
@@ -2671,17 +2671,16 @@ Power,66101A,DO,Do_Voltage_Tiug,Do voltage tiug,VOLT:TIUG,,,,,,,VOLT,,,,,1,yes,P
 Power,66101A,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Power/66101A/commands.json
 Power,66101A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66101A/commands.json
 Power,66101A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66101A/commands.json
+Power,66101A,DO,Reset_Device,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66101A/commands.json
 Power,66101A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,,,,Individual Output Control,,,,,,2,,Power/66101A/commands.json
 Power,66101A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,,,,Individual Output Control,,,,,,2,,Power/66101A/commands.json
 Power,66101A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,,,,chan,Channel Selection,INSTrument,,,,,1,,Power/66101A/commands.json
-Power,66101A,DO,System_Reset,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66101A/commands.json
 Power,66101A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,,,,Trigger System,TRIGger,,,,,1,,Power/66101A/commands.json
 Power,66101A,NAB,Get_Calibrate_Status,RST Value OFF,CALibrate:STATe?,CAL:STAT?,,,,,,CAL,1,NR3,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Current_Trigger,Get current trigger,CURR:TRIG?,,,,,,,CURR,1,NR3,A,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Display_Window_Status,This command turns the power module optional front panel voltage and current displays on and off,DISPlay:WINDow:STAT?,DISP:WIND:STAT?,,,,,,DISP,1,NR3,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Ese,Get ese,*ESE?,,,,,,,Common,1,NR1,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Esr,Get esr,*ESR?,,,,,,,Common,1,NR1,,,1,yes,Power/66101A/commands.json
-Power,66101A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Immediate_Amplitude,RST Value Table 3-2,:IMMediate:AMPlitude?,:IMM:AMP?,,,,,,IMM,1,,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_Initiate_Continuous,Get initiate continuous,INITiate:CONTinuous?,INIT:CONT?,,,,,,INIT,1,NR3,,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Get_List_Current_Points,Get list current points,LIST:CURR:POIN?,,,,,,,LIST,1,NR1,A,,1,yes,Power/66101A/commands.json
@@ -2747,6 +2746,7 @@ Power,66101A,NAB,Get_Voltage_Sense_Source,Get voltage sense source,VOLT:SENS:SOU
 Power,66101A,NAB,Get_Voltage_Trigger,Get voltage trigger,VOLT:TRIG?,,,,,,,VOLT,1,NR3,V,,1,yes,Power/66101A/commands.json
 Power,66101A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,,,,Status Registers,STATus,1,NR1,,,1,,Power/66101A/commands.json
 Power,66101A,NAB,Read_Error,Read Error,SYST:ERR?,,,,,,System Utilities,SYSTem,1,NR2,,,1,,Power/66101A/commands.json
+Power,66101A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66101A/commands.json
 Power,66101A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,,volt; curr,unknown,,chan,Configuration,SOURce,,,,,3,,Power/66101A/commands.json
 Power,66101A,RIG,Set_S1_Levels,Set S1 Levels,INST:NSEL 1;VOLT <volt>;CURR <curr>,,volt; curr,unknown,,,Configuration (Volts/Amps),,,,,,3,,Power/66101A/commands.json
 Power,66101A,SET,Set_Calibrate_Status,RST Value OFF,CAL:STAT <value>,,value,bool,OFF; ON,,,CAL,,,,,1,yes,Power/66101A/commands.json
@@ -2857,18 +2857,17 @@ Power,66102A,DO,Do_Voltage_Tiug,Do voltage tiug,VOLT:TIUG,,,,,,,VOLT,,,,,1,yes,P
 Power,66102A,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Power/66102A/commands.json
 Power,66102A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66102A/commands.json
 Power,66102A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66102A/commands.json
+Power,66102A,DO,Reset_Device,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66102A/commands.json
 Power,66102A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,,,,chan,Output Control,,,,,,2,,Power/66102A/commands.json
 Power,66102A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,,,,Individual Output Control,,,,,,2,,Power/66102A/commands.json
 Power,66102A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,,,,Individual Output Control,,,,,,2,,Power/66102A/commands.json
 Power,66102A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,,,,chan,Channel Selection,INSTrument,,,,,1,,Power/66102A/commands.json
-Power,66102A,DO,System_Reset,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66102A/commands.json
 Power,66102A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,,,,Trigger System,TRIGger,,,,,1,,Power/66102A/commands.json
 Power,66102A,NAB,Get_Calibrate_Status,RST Value OFF,CALibrate:STATe?,CAL:STAT?,,,,,,CAL,1,NR3,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Current_Trigger,Get current trigger,CURR:TRIG?,,,,,,,CURR,1,NR3,A,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Display_Window_Status,This command turns the power module optional front panel voltage and current displays on and off,DISPlay:WINDow:STAT?,DISP:WIND:STAT?,,,,,,DISP,1,NR3,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Ese,Get ese,*ESE?,,,,,,,Common,1,NR1,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Esr,Get esr,*ESR?,,,,,,,Common,1,NR1,,,1,yes,Power/66102A/commands.json
-Power,66102A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Immediate_Amplitude,RST Value Table 3-2,:IMMediate:AMPlitude?,:IMM:AMP?,,,,,,IMM,1,,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_Initiate_Continuous,Get initiate continuous,INITiate:CONTinuous?,INIT:CONT?,,,,,,INIT,1,NR3,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Get_List_Current_Points,Get list current points,LIST:CURR:POIN?,,,,,,,LIST,1,NR1,A,,1,yes,Power/66102A/commands.json
@@ -2934,6 +2933,7 @@ Power,66102A,NAB,Get_Voltage_Sense_Source,Get voltage sense source,VOLT:SENS:SOU
 Power,66102A,NAB,Get_Voltage_Trigger,Get voltage trigger,VOLT:TRIG?,,,,,,,VOLT,1,NR3,V,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,,,,Status Registers,STATus,1,NR1,,,1,,Power/66102A/commands.json
 Power,66102A,NAB,Read_Error,Read Error,SYST:ERR?,,,,,,System Utilities,SYSTem,1,NR2,,,1,,Power/66102A/commands.json
+Power,66102A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66102A/commands.json
 Power,66102A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,,,,chan,MPS Metering,,2,NR3; NR3,V; A,voltage; current,3,,Power/66102A/commands.json
 Power,66102A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,,volt; curr,unknown,,chan,Configuration,SOURce,,,,,3,,Power/66102A/commands.json
 Power,66102A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,,ovp_level; ocp_state,unknown,,chan,MPS Settings,,,,,,3,,Power/66102A/commands.json
@@ -3046,18 +3046,17 @@ Power,66103A,DO,Do_Voltage_Tiug,Do voltage tiug,VOLT:TIUG,,,,,,,VOLT,,,,,1,yes,P
 Power,66103A,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Power/66103A/commands.json
 Power,66103A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66103A/commands.json
 Power,66103A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66103A/commands.json
+Power,66103A,DO,Reset_Device,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66103A/commands.json
 Power,66103A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,,,,chan,Output Control,,,,,,2,,Power/66103A/commands.json
 Power,66103A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,,,,Individual Output Control,,,,,,2,,Power/66103A/commands.json
 Power,66103A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,,,,Individual Output Control,,,,,,2,,Power/66103A/commands.json
 Power,66103A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,,,,chan,Channel Selection,INSTrument,,,,,1,,Power/66103A/commands.json
-Power,66103A,DO,System_Reset,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66103A/commands.json
 Power,66103A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,,,,Trigger System,TRIGger,,,,,1,,Power/66103A/commands.json
 Power,66103A,NAB,Get_Calibrate_Status,RST Value OFF,CALibrate:STATe?,CAL:STAT?,,,,,,CAL,1,NR3,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Current_Trigger,Get current trigger,CURR:TRIG?,,,,,,,CURR,1,NR3,A,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Display_Window_Status,This command turns the power module optional front panel voltage and current displays on and off,DISPlay:WINDow:STAT?,DISP:WIND:STAT?,,,,,,DISP,1,NR3,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Ese,Get ese,*ESE?,,,,,,,Common,1,NR1,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Esr,Get esr,*ESR?,,,,,,,Common,1,NR1,,,1,yes,Power/66103A/commands.json
-Power,66103A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Immediate_Amplitude,RST Value Table 3-2,:IMMediate:AMPlitude?,:IMM:AMP?,,,,,,IMM,1,,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_Initiate_Continuous,Get initiate continuous,INITiate:CONTinuous?,INIT:CONT?,,,,,,INIT,1,NR3,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Get_List_Current_Points,Get list current points,LIST:CURR:POIN?,,,,,,,LIST,1,NR1,A,,1,yes,Power/66103A/commands.json
@@ -3123,6 +3122,7 @@ Power,66103A,NAB,Get_Voltage_Sense_Source,Get voltage sense source,VOLT:SENS:SOU
 Power,66103A,NAB,Get_Voltage_Trigger,Get voltage trigger,VOLT:TRIG?,,,,,,,VOLT,1,NR3,V,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,,,,Status Registers,STATus,1,NR1,,,1,,Power/66103A/commands.json
 Power,66103A,NAB,Read_Error,Read Error,SYST:ERR?,,,,,,System Utilities,SYSTem,1,NR2,,,1,,Power/66103A/commands.json
+Power,66103A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66103A/commands.json
 Power,66103A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,,,,chan,MPS Metering,,2,NR3; NR3,V; A,voltage; current,3,,Power/66103A/commands.json
 Power,66103A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,,volt; curr,unknown,,chan,Configuration,SOURce,,,,,3,,Power/66103A/commands.json
 Power,66103A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,,ovp_level; ocp_state,unknown,,chan,MPS Settings,,,,,,3,,Power/66103A/commands.json
@@ -3236,18 +3236,17 @@ Power,66104A,DO,Do_Voltage_Tiug,Do voltage tiug,VOLT:TIUG,,,,,,,VOLT,,,,,1,yes,P
 Power,66104A,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Power/66104A/commands.json
 Power,66104A,DO,Output_OFF,Output OFF,INST:NSEL <chan>;OUTP OFF,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66104A/commands.json
 Power,66104A,DO,Output_ON,Output ON,INST:NSEL <chan>;OUTP ON,,,,,chan,Output Control,OUTPut,,,,,2,,Power/66104A/commands.json
+Power,66104A,DO,Reset_Device,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66104A/commands.json
 Power,66104A,DO,Reset_Module,Reset Module,INST:NSEL <chan>;*RST,,,,,chan,Output Control,,,,,,2,,Power/66104A/commands.json
 Power,66104A,DO,S1_OFF,S1 OFF,INST:NSEL 1;OUTP OFF,,,,,,Individual Output Control,,,,,,2,,Power/66104A/commands.json
 Power,66104A,DO,S1_ON,S1 ON,INST:NSEL 1;OUTP ON,,,,,,Individual Output Control,,,,,,2,,Power/66104A/commands.json
 Power,66104A,DO,Select_Channel,Select Channel,INST:NSEL <chan>,,,,,chan,Channel Selection,INSTrument,,,,,1,,Power/66104A/commands.json
-Power,66104A,DO,System_Reset,System Reset,*RST,,,,,,Common Commands,Common,,,,,1,,Power/66104A/commands.json
 Power,66104A,DO,Trigger_Immediate,Trigger Immediate,*TRG,,,,,,Trigger System,TRIGger,,,,,1,,Power/66104A/commands.json
 Power,66104A,NAB,Get_Calibrate_Status,RST Value OFF,CALibrate:STATe?,CAL:STAT?,,,,,,CAL,1,NR3,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Current_Trigger,Controlling Fixed-Mode Output,CURR:TRIG?,,,,,,,CURR,1,NR3,A,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Display_Window_Status,This command turns the power module optional front panel voltage and current displays on and off,DISPlay:WINDow:STAT?,DISP:WIND:STAT?,,,,,,DISP,1,NR3,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Ese,Get ese,*ESE?,,,,,,,Common,1,NR1,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Esr,Get esr,*ESR?,,,,,,,Common,1,NR1,,,1,yes,Power/66104A/commands.json
-Power,66104A,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Immediate_Amplitude,RST Value Table 3-2,:IMMediate:AMPlitude?,:IMM:AMP?,,,,,,IMM,1,,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_Initiate_Continuous,Controlling Triggers,INITiate:CONTinuous?,INIT:CONT?,,,,,,INIT,1,NR3,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Get_List_Current_Points,Controlling List-Mode Output,LIST:CURR:POIN?,,,,,,,LIST,1,NR1,A,,1,yes,Power/66104A/commands.json
@@ -3314,6 +3313,7 @@ Power,66104A,NAB,Get_Voltage_Sense_Source,Local Voltage Sensing,VOLT:SENS:SOUR?,
 Power,66104A,NAB,Get_Voltage_Trigger,Get voltage trigger,VOLT:TRIG?,,,,,,,VOLT,1,NR3,V,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Questionable_Condition,Questionable Condition,STAT:QUES:COND?,,,,,,Status Registers,STATus,1,NR1,,,1,,Power/66104A/commands.json
 Power,66104A,NAB,Read_Error,Read Error,SYST:ERR?,,,,,,System Utilities,SYSTem,1,NR2,,,1,,Power/66104A/commands.json
+Power,66104A,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Power/66104A/commands.json
 Power,66104A,NAB,Read_Values,Read Voltage and Current,INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?,,,,,chan,MPS Metering,,2,NR3; NR3,V; A,voltage; current,3,,Power/66104A/commands.json
 Power,66104A,RIG,Set_Levels,Set Levels,INST:NSEL <chan>;VOLT <volt>;CURR <curr>,,volt; curr,unknown,,chan,Configuration,SOURce,,,,,3,,Power/66104A/commands.json
 Power,66104A,RIG,Set_Protection,Set Protection,INST:NSEL <chan>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>,,ovp_level; ocp_state,unknown,,chan,MPS Settings,,,,,,3,,Power/66104A/commands.json
@@ -3370,7 +3370,7 @@ Power,66104A,SET,Set_Voltage_Sense_Source,Local Voltage Sensing,VOLT:SENS:SOUR <
 Power,66104A,SET,Set_Voltage_Trigger,Set voltage trigger,VOLT:TRIG <value>,,value,numeric,,,,VOLT,,,,,1,yes,Power/66104A/commands.json
 Router,3235,DO,Card_Reset,Card Reset,CRESET <slot>,CRES <slot>,,,,slot,System Reset & Control,,,,,,1,,Router/3235/commands.json
 Router,3235,DO,Clear_State,Clear State,CLR,,,,,,System Reset & Control,,,,,,1,,Router/3235/commands.json
-Router,3235,DO,Reset_System,Reset System,RESET,RES,,,,,System Reset & Control,,,,,,1,,Router/3235/commands.json
+Router,3235,DO,Reset_Device,Reset System,RESET,RES,,,,,System Reset & Control,,,,,,1,,Router/3235/commands.json
 Router,3235,DO,Select_Channel,Select Channel,SELECT <chan>,SEL <chan>,,,,chan,Break-Before-Make,,,,,,1,,Router/3235/commands.json
 Router,3235,NAB,Query_Channel_State,Query Channel State,CLOSE? <chan>,CLOS? <chan>,,,,chan,Query specific relay state,,1,,,,1,,Router/3235/commands.json
 Router,3235,NAB,Query_Slot_ID,Query Slot ID,ID? <slot>,,,,,slot,Hardware Identification,,1,,,,1,,Router/3235/commands.json
@@ -3429,7 +3429,6 @@ Spectrum,N9340B,DO,Do_Measure_Semask_Offset_List_Stop_Absolute_Cou,Set the Abs S
 Spectrum,N9340B,DO,Do_Measure_Semask_Offset_List_Stop_Rcarrier,Do measure semask offset list stop rcarrier,:MEAS:SEM:OFFS:LIST:STOP:RCAR,,,,,,,MEAS,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Measure_Semask_Offset_List_Stop_Rcarrier_Cou,Do measure semask offset list stop rcarrier cou,:MEASure:SEMask:OFFSet:LIST:STOP:RCARrier:COU,:MEAS:SEM:OFFS:LIST:STOP:RCAR:COU,,,,,,MEAS,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Opc,Do opc,*OPC,,,,,,,Common,,,,,1,yes,Spectrum/N9340B/commands.json
-Spectrum,N9340B,DO,Do_Rst,Do rst,*RST,,,,,,,Common,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Sense_Average,Do sense average,:SENSe:AVERage,:SENS:AVER,,,,,,SENS,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Sense_Average_Trace,Set the Average Count,:SENSe:AVERage:TRACe<n>,:SENS:AVER:TRAC<n>,,,,n,,SENS,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Sense_Bandwidth,Do sense bandwidth,:SENSe:BANDwidth,:SENS:BAND,,,,,,SENS,,,,,1,yes,Spectrum/N9340B/commands.json
@@ -3448,6 +3447,7 @@ Spectrum,N9340B,DO,Do_Tgenerator_Normalize_Ref,Storing as Reference,:TGENerator:
 Spectrum,N9340B,DO,Do_Trg,Do trg,*TRG,,,,,,,Common,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Do_Wai,Do wai,*WAI,,,,,,,Common,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Power_Cycle,Power Cycle,:SYSTem:POWer:RESet,:SYST:POW:RES,,,,,Hardware Reset and Clear,System,,,,,1,,Spectrum/N9340B/commands.json
+Spectrum,N9340B,DO,Reset_Device,Do rst,*RST,,,,,,,Common,,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Set_All_Markers_State,Set All Markers State,:CALCulate:MARKer:AOFF,:CALC:MARK:AOFF,,,,,Marker Command Sets,Markers,,,,,1,,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Set_Input_Auto_Attenuation_OFF,Set Input Auto Attenuation OFF,:POWer:ATTenuation:AUTO OFF,:POW:ATT:AUTO OFF,,,,,Individual Power Sets,Amplitude,,,,,1,,Spectrum/N9340B/commands.json
 Spectrum,N9340B,DO,Set_Input_Auto_Attenuation_ON,Set Input Auto Attenuation ON,:POWer:ATTenuation:AUTO ON,:POW:ATT:AUTO ON,,,,,Individual Power Sets,Amplitude,,,,,1,,Spectrum/N9340B/commands.json
@@ -3468,7 +3468,6 @@ Spectrum,N9340B,NAB,Get_Display_Mode_Brightness,Brightness,:DISPlay:MODE:BRIGhtn
 Spectrum,N9340B,NAB,Get_Ese,Get ese,*ESE?,,,,,,,Common,1,NR1,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Esr,Get esr,*ESR?,,,,,,,Common,1,NR1,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Fcount_State,Frequency Counter Marker,FCOunt:STATe?,FCO:STAT?,,,,,,FCO,1,BOOL,,,1,yes,Spectrum/N9340B/commands.json
-Spectrum,N9340B,NAB,Get_Idn,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Instrument_Measure,Power Measurement,:INSTrument:MEASure?,:INST:MEAS?,,,,,,INST,1,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Instrument_Select,Instrument Mode,:INSTrument:SELect?,:INST:SEL?,,,,,,INST,1,CRD,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Measure_Acpr_Adjacent,Adjacent channel,:MEASure:ACPR:ADJacent?,:MEAS:ACPR:ADJ?,,,,,,MEAS,1,,,,1,yes,Spectrum/N9340B/commands.json
@@ -3538,6 +3537,7 @@ Spectrum,N9340B,NAB,Get_Tst,Get tst,*TST?,,,,,,,Common,1,NR1,,,1,yes,Spectrum/N9
 Spectrum,N9340B,NAB,Get_Unit_Power,Select Power Units of Measure,:UNIT:POWer?,:UNIT:POW?,,,,,,UNIT,1,,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Get_Unit_Power_Emf,EMF Mode,:UNIT:POWer:EMF?,:UNIT:POW:EMF?,,,,,,UNIT,1,BOOL,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Preamp_State,Preamp State,:SENSE:POWer:RF:GAIN:STATe?,:SENS:POW:RF:GAIN:STAT?,,,,,Individual Read Queries,Amplitude,1,BOOL,dB,,1,,Spectrum/N9340B/commands.json
+Spectrum,N9340B,NAB,Read_IDN,Get idn,*IDN?,,,,,,,Common,1,AARD,,,1,yes,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,Reference_Level,Reference Level,:DISPlay:WINDow:TRACe:Y:RLEVel?,:DISP:WIND:TRAC:Y:RLEV?,,,,,Individual Read Queries,Amplitude,1,NR3,V,,1,,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,all_marker_settings,Marker Amplitude and Frequency Readbacks,:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?,:CALC:MARK1:Y?;:CALC:MARK2:Y?;:CALC:MARK3:Y?;:CALC:MARK4:Y?;:CALC:MARK5:Y?;:CALC:MARK6:Y?;:CALC:MARK1:X?;:CALC:MARK2:X?;:CALC:MARK3:X?;:CALC:MARK4:X?;:CALC:MARK5:X?;:CALC:MARK6:X?,,,,,NAB Marker Monitoring,Markers,12,NR3; NR3; NR3; NR3; NR3; NR3; NR3; NR3; NR3; NR3; NR3; NR3,; ; ; ; ; ; ; ; ; ; ; ,y_1; y_2; y_3; y_4; y_5; y_6; x_1; x_2; x_3; x_4; x_5; x_6,12,,Spectrum/N9340B/commands.json
 Spectrum,N9340B,NAB,amplitude_settings,Power and Attenuation Readbacks,:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?,:DISP:WIND:TRAC:Y:RLEV?;:POW:ATT?;:POW:GAIN?,,,,,NAB Amplitude Monitoring,Amplitude,3,NR3; NR3; NR3,V; dB; dB,rlevel; attenuation; gain,3,,Spectrum/N9340B/commands.json

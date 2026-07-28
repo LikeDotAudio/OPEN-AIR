@@ -38,7 +38,7 @@
       "description": "Clear State",
       "group": "System Reset & Control"
     },
-    "Reset_System": {
+    "Reset_Device": {
       "scpi": "RESET",
       "scpiFast": "RES",
       "description": "Reset System",

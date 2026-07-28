@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # LCR/4263A — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **28 commands** — SET 16 · RIG 0 · NAB 6 · DO 6 · 28 unverified (100%)
 
@@ -51,8 +51,8 @@ Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit 
 ## Common commands (IEEE 488.2)
 
 - `*CLS` — **DO** `Clear_Status` · †<br>Clears the status byte and error queue.
-- `*IDN?` — **NAB** `Get_Identity` · → AARD · †<br>Queries the instrument identification (Manufacturer, Model, Serial, Firmware).
 - `*OPC?` — **NAB** `Get_Operation_Complete` · → NR1 · †<br>Returns '1' once all pending operations are completed.
+- `*IDN?` — **NAB** `Read_IDN` · → AARD · †<br>Queries the instrument identification (Manufacturer, Model, Serial, Firmware).
 - `*RST` — **DO** `Reset_Device` · †<br>Resets the unit to its factory default settings.
 - `*TRG` — **DO** `Trigger_Bus` · †<br>Triggers the unit (equivalent to the Bus trigger).
 

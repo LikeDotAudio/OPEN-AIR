@@ -2134,7 +2134,7 @@
       "subsystem": "FUNC",
       "unverified": true
     },
-    "Get_Idn": {
+    "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Get idn",
       "returns": {

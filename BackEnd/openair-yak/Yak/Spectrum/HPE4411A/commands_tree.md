@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Spectrum/HPE4411A — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **28 commands** — SET 9 · RIG 3 · NAB 8 · DO 8 · 0 unverified (0%)
 

@@ -297,7 +297,7 @@
       "subsystem": "SYSTem",
       "unverified": true
     },
-    "Get_Identity": {
+    "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Queries the instrument identification (Manufacturer, Model, Serial, Firmware).",
       "returns": {

@@ -1,14 +1,12 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Load/6060B — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **122 commands** — SET 35 · RIG 1 · NAB 46 · DO 40 · 94 unverified (77%)
 
 `SET` one argument · `RIG` several applied together · `NAB` a query · `DO` a parameterless action. **†** marks a command swept out of a manual and never sent to the instrument.
-
-Written notes for this family: [`Load/commands_tree.md`](../commands_tree.md).
 
 ## Compound commands
 
@@ -165,7 +163,7 @@ Several statements in one message, so they hang off no single branch. Every stat
 
 - `*CLS` — **DO** `Clear_Status`
 - `*RDT?` — **NAB** `Get_Rdt` · → 1 value · †<br>Return the device identification / topology string
-- `*IDN?` — **NAB** `IDN` · → AARD
+- `*IDN?` — **NAB** `Read_IDN` · → AARD<br>IDN
 - `*RST` — **DO** `Reset_Device`
 - `*ESE <value>` — **SET** `Set_Ese` · `<value>` · args: `value` · integer · †
 - `*RCL <value>` — **SET** `Set_Rcl` · `<value>` · args: `value` · †

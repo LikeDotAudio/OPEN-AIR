@@ -4586,7 +4586,7 @@
       "subsystem": "REF",
       "unverified": true
     },
-    "Do_Reset": {
+    "Reset_Device": {
       "scpi": "*RST",
       "description": "Do Reset",
       "group": "Global Utilities",

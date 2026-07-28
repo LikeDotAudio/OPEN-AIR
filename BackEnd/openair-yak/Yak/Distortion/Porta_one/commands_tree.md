@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Distortion/Porta_one — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **608 commands** — SET 274 · RIG 0 · NAB 289 · DO 45 · 573 unverified (94%)
 
@@ -668,6 +668,6 @@ Several statements in one message, so they hang off no single branch. Every stat
 ## Common commands (IEEE 488.2)
 
 - `*CLS` — **DO** `Do_Clear_Status`
-- `*RST` — **DO** `Do_Reset`
+- `*RST` — **DO** `Reset_Device`<br>Do Reset
 
 <!-- END GENERATED -->

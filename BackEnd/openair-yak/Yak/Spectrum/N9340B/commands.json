@@ -1328,7 +1328,7 @@
       "subsystem": "Common",
       "unverified": true
     },
-    "Do_Rst": {
+    "Reset_Device": {
       "scpi": "*RST",
       "description": "Do rst",
       "subsystem": "Common",
@@ -1715,7 +1715,7 @@
       "subsystem": "FCO",
       "unverified": true
     },
-    "Get_Idn": {
+    "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Get idn",
       "returns": {

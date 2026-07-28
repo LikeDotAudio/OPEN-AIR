@@ -223,5 +223,78 @@
         }
       }
     }
+  },
+  "Setup": {
+    "type": "OcaBin",
+    "id": "50.100.9.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Instrument_Setup": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Reset, identity and calibration",
+          "Fr": "Réinitialisation, identité et étalonnage",
+          "De": "Zurücksetzen, Identität und Kalibrierung",
+          "Es": "Reinicio, identidad y calibración"
+        },
+        "fields": {
+          "Reset_Device": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "RESET INSTRUMENT (*RST)",
+                  "Fr": "RÉINITIALISER (*RST)",
+                  "De": "ZURÜCKSETZEN (*RST)",
+                  "Es": "REINICIAR (*RST)"
+                },
+                "text_size": 12,
+                "text_color": "#FF6B6B"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF6B6B",
+                "bg_color": "#000000",
+                "border_color": "#FF3B30",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "Execute Command": {
+              "yak_handler": {
+                "enable": true,
+                "yak_type": "do",
+                "sub_path": "Distortion",
+                "command": "Reset_Device"
+              }
+            }
+          },
+          "Setup_Break": {
+            "type": "OcaSeparator",
+            "description": "------------------------------------------------"
+          }
+        }
+      }
+    }
   }
 }

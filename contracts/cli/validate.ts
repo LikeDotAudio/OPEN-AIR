@@ -49,13 +49,23 @@ function push(file: string, issues: LayoutIssue[]) {
 
 // ---------------------------------------------------------------- walkers
 
-function* jsonFiles(dir: string): Generator<string> {
+// Generated panel trees, keyed by path relative to GUI_ROOT. Both are written by
+// the orchestrator (discovered.rs and instruments.rs) and both are gitignored;
+// neither is authored UI, so neither is this validator's to police.
+//
+// `1_Instruments/left_100` was missing here, and its absence was invisible in CI:
+// a fresh checkout has no generated panels, so the walker found nothing to
+// complain about. Locally, anyone who had run a scan got ~40 spurious findings
+// against a baseline that cannot ever contain them — the tree is restamped per
+// discovered device, so its paths change with the bench.
+const GENERATED_TREES = new Set(['0_discovered', '1_Instruments/left_100'])
+
+function* jsonFiles(dir: string, rel = ''): Generator<string> {
   for (const e of readdirSync(dir).sort()) {
-    // 0_discovered is machine-generated discovery data (Phase 0 item 3),
-    // not authored UI — gitignored and excluded here; Phase 4 deletes it.
-    if (e === '0_discovered') continue
+    const childRel = rel ? `${rel}/${e}` : e
+    if (GENERATED_TREES.has(childRel)) continue
     const p = join(dir, e)
-    if (statSync(p).isDirectory()) yield* jsonFiles(p)
+    if (statSync(p).isDirectory()) yield* jsonFiles(p, childRel)
     else if (e.endsWith('.json') || e.endsWith('.json.old')) yield p
   }
 }
@@ -79,6 +89,10 @@ function walkLayoutTree() {
 }
 
 function walkFolderGrammar(dir: string) {
+  // Same exclusion as jsonFiles: a generated tree's folder names are stamped per
+  // discovered device, so its ordering prefixes are the builder's business and
+  // change with whatever is plugged into the bench.
+  if (GENERATED_TREES.has(relative(GUI_ROOT, dir))) return
   const entries = readdirSync(dir).sort()
   const dirs = entries.filter((e) => statSync(join(dir, e)).isDirectory())
   for (const c of findOrderCollisions(dirs)) {

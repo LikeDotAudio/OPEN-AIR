@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Router/3235 — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **8 commands** — SET 2 · RIG 0 · NAB 2 · DO 4 · 0 unverified (0%)
 
@@ -16,7 +16,7 @@ Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit 
 - `ID?` — **NAB** `Query_Slot_ID` · `<slot>` · per-instance: `slot` · → 1 value
 - `CRESET` — **DO** `Card_Reset` · `<slot>` · per-instance: `slot`
 - `CLR` — **DO** `Clear_State`
-- `RESET` — **DO** `Reset_System`
+- `RESET` — **DO** `Reset_Device`<br>Reset System
 - `SELECT` — **DO** `Select_Channel` · `<chan>` · per-instance: `chan`
 
 <!-- END GENERATED -->

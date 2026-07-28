@@ -1054,7 +1054,7 @@
       "group": "Channel Selection",
       "subsystem": "INSTrument"
     },
-    "System_Reset": {
+    "Reset_Device": {
       "scpi": "*RST",
       "description": "System Reset",
       "group": "Common Commands",
@@ -1148,7 +1148,7 @@
       "subsystem": "Common",
       "unverified": true
     },
-    "Get_Idn": {
+    "Read_IDN": {
       "scpi": "*IDN?",
       "description": "Get idn",
       "returns": {

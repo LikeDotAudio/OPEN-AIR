@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Power/66101A — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **187 commands** — SET 49 · RIG 2 · NAB 71 · DO 65 · 174 unverified (93%)
 
@@ -275,19 +275,19 @@ Several statements in one message, so they hang off no single branch. Every stat
 - `*WAI` — **DO** `Do_Wai` · †
 - `*ESE?` — **NAB** `Get_Ese` · → NR1 · †
 - `*ESR?` — **NAB** `Get_Esr` · → NR1 · †
-- `*IDN?` — **NAB** `Get_Idn` · → AARD · †
 - `*OPC?` — **NAB** `Get_Opc` · → NR1 · †
 - `*OPT?` — **NAB** `Get_Opt` · → AARD · †
 - `*PSC?` — **NAB** `Get_Psc` · → NR1 · †
 - `*SRE?` — **NAB** `Get_Sre` · → NR1 · †
 - `*STB?` — **NAB** `Get_Stb` · → NR1 · †
 - `*TST?` — **NAB** `Get_Tst` · → NR1 · †
+- `*IDN?` — **NAB** `Read_IDN` · → AARD · †<br>Get idn
+- `*RST` — **DO** `Reset_Device`<br>System Reset
 - `*ESE <value>` — **SET** `Set_Ese` · `<value>` · args: `value` · integer · †
 - `*PSC <value>` — **SET** `Set_Psc` · `<value>` · args: `value` · †
 - `*RCL <value>` — **SET** `Set_Rcl` · `<value>` · args: `value` · †
 - `*SAV <value>` — **SET** `Set_Sav` · `<value>` · args: `value` · †
 - `*SRE <value>` — **SET** `Set_Sre` · `<value>` · args: `value` · integer · †
-- `*RST` — **DO** `System_Reset`
 - `*TRG` — **DO** `Trigger_Immediate`
 
 <!-- END GENERATED -->

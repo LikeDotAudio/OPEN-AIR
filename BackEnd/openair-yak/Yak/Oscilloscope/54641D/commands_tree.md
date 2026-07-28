@@ -1,8 +1,8 @@
-<!-- BEGIN GENERATED — Deployment/build_yak_command_trees.py -->
+<!-- BEGIN GENERATED — openair-yak build-trees -->
 
 # Oscilloscope/54641D — command tree
 
-Generated from `commands.json` by `Deployment/build_yak_command_trees.py`. Edit the table, not this file.
+Generated from `commands.json` by `openair-yak build-trees`. Edit the table, not this file.
 
 **438 commands** — SET 169 · RIG 1 · NAB 163 · DO 105 · 325 unverified (74%)
 
@@ -499,7 +499,6 @@ Several statements in one message, so they hang off no single branch. Every stat
 
 - `*CLS` — **DO** `Do_Clear_Status`
 - `*OPC` — **DO** `Do_Opc` · †
-- `*RST` — **DO** `Do_Reset`
 - `*TRG` — **DO** `Do_Trg` · †
 - `*WAI` — **DO** `Do_Wai` · †
 - `*ESE?` — **NAB** `Get_Ese` · → NR1 · †
@@ -511,6 +510,7 @@ Several statements in one message, so they hang off no single branch. Every stat
 - `*STB?` — **NAB** `Get_Stb` · → NR1 · †
 - `*TST?` — **NAB** `Get_Tst` · → NR1 · †
 - `*IDN?` — **NAB** `Read_IDN` · → AARD
+- `*RST` — **DO** `Reset_Device`<br>Do Reset
 - `*ESE <value>` — **SET** `Set_Ese` · `<value>` · args: `value` · integer · †
 - `*RCL <value>` — **SET** `Set_Rcl` · `<value>` · args: `value` · †
 - `*SAV <value>` — **SET** `Set_Sav` · `<value>` · args: `value` · †

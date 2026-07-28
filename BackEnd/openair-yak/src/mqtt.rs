@@ -7,6 +7,21 @@ use std::time::Duration;
 use std::sync::Arc;
 use std::collections::HashMap;
 
+/// Is this GUI value a press, rather than the release that follows it?
+///
+/// Mirrors the orchestrator's rule for its own Rescan/Clear triggers, so the
+/// whole system agrees on what counts as "the button was pressed".
+fn is_truthy_trigger(v: &serde_json::Value) -> bool {
+    match v {
+        serde_json::Value::Bool(b) => *b,
+        serde_json::Value::Number(n) => n.as_f64().unwrap_or(0.0) != 0.0,
+        serde_json::Value::String(s) => {
+            s == "1" || s.eq_ignore_ascii_case("true") || s.eq_ignore_ascii_case("on")
+        }
+        _ => false,
+    }
+}
+
 pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Result<(), Box<dyn std::error::Error>> {
     let client_id = format!("openair-yak-agent-{}", std::process::id());
     let mut mqttoptions = MqttOptions::new(client_id, "localhost", 1883);
@@ -130,6 +145,25 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                                 eprintln!("   ⏭️  [YAK] retained replay on {} — state, not a command; not firing '{}'",
                                           p.topic, yak.command);
                                 continue;
+                            }
+                            // A momentary control reports BOTH edges: true on
+                            // press, false on release. That is what a button
+                            // physically does, and the GUI is right to say so —
+                            // but a DO or a NAB carries no widget value, so both
+                            // edges look identical here and the command would run
+                            // twice per press, once on the way down and once on
+                            // the way up.
+                            //
+                            // Only the truthy edge is a trigger. SET and RIG are
+                            // untouched: there the value IS the payload, and
+                            // `false` is a legitimate thing to send.
+                            let verb = yak.yak_type.to_lowercase();
+                            if matches!(verb.as_str(), "do" | "nab") {
+                                if let Some(v) = parsed_json.get("value") {
+                                    if !is_truthy_trigger(v) {
+                                        continue;
+                                    }
+                                }
                             }
                             eprintln!("   📡 [YAK MQTT] ⮜ RX EXECUTE: {} -> {}", p.topic, payload);
                             

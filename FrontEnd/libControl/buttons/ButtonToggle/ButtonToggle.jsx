@@ -14,10 +14,6 @@
 //
 // Description: Stateful toggle button component matching Python's ToggleButton.
 
-// How long the button shows itself pressed. Long enough to see, short enough
-// that a second press is never blocked by the first.
-const MOMENTARY_FLASH_MS = 180;
-
 // An ACTUATOR is a trigger, not a state: it fires once per press and has no
 // "on" to sit in. A latching toggle on `*RST` is wrong twice over — the button
 // stays lit as though reset were a mode, and the second press (turning it back
@@ -83,13 +79,11 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
 
     const momentary = isMomentary(config);
     const trigger = window.useMqttTrigger ? window.useMqttTrigger() : null;
-    const [flash, setFlash] = React.useState(false);
-    const flashTimer = React.useRef(null);
-    React.useEffect(() => () => { if (flashTimer.current) clearTimeout(flashTimer.current); }, []);
+    // Held down, not latched: the press is the only thing that lights it, and it
+    // goes out on release like the physical contact it stands for.
+    const [held, setHeld] = React.useState(false);
 
-    // A momentary button is lit by the press itself, not by the topic's value —
-    // it has no resting "on" to reflect.
-    const lit = momentary ? flash : val;
+    const lit = momentary ? held : val;
     const s = lit ? grpActive : grpInactive;
     const currentText = lit ? onText : offText;
     const currentBg = s.bg_color;
@@ -101,16 +95,24 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const fontStyleCss = s.font_style === 'italic' ? 'italic' : 'normal';
     const fontSizeCss = s.font_size ? `${s.font_size}px` : '12px';
 
-    const handlePointerDown = () => {
+    // Both edges are reported, because that is what a momentary contact does:
+    // true while held, false once released. Only the press is a command — YAK
+    // acts on the truthy edge of a DO/NAB and ignores the release, so saying so
+    // here costs nothing and keeps the widget honest about its own state.
+    const sendMomentary = (state) => {
+        setHeld(state);
+        if (useMqtt && trigger) trigger(topic, state);
+        else if (onChange) onChange(state);
+    };
+
+    const handlePointerDown = (e) => {
         if (momentary) {
-            // One publish, non-retained, and never a release edge: YAK executes
-            // on any value reaching a bound topic, so sending 0 on the way back
-            // up would fire the command a second time.
-            if (useMqtt) trigger(topic, 1);
-            else if (onChange) onChange(1);
-            setFlash(true);
-            if (flashTimer.current) clearTimeout(flashTimer.current);
-            flashTimer.current = setTimeout(() => setFlash(false), MOMENTARY_FLASH_MS);
+            // Keep receiving the pointer even if it slides off the button, so a
+            // release outside it still reports false instead of sticking on.
+            if (e && e.currentTarget && e.pointerId !== undefined) {
+                try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+            }
+            sendMomentary(true);
             return;
         }
         const newVal = !val;
@@ -119,6 +121,10 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
         } else if (onChange) {
             onChange(newVal);
         }
+    };
+
+    const handlePointerUp = () => {
+        if (momentary && held) sendMomentary(false);
     };
 
     const handlePointerEnter = () => {
@@ -154,6 +160,8 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
                     transition: 'all 0.1s'
                 }}
                 onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
                 onPointerEnter={handlePointerEnter}
                 onPointerLeave={handlePointerLeave}
             >

@@ -992,21 +992,20 @@
                 }
               },
               "Identity_Readout": {
-                "type": "_GuiLabel",
+                "type": "_TextInput",
                 "label": {
-                  "inactive": {
-                    "text": {
-                      "En": "— press READ IDENTITY —",
-                      "Fr": "— appuyez sur LIRE —",
-                      "De": "— IDENTITÄT LESEN drücken —",
-                      "Es": "— pulse LEER —"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
+                  "En": "Identity",
+                  "Fr": "Identité",
+                  "De": "Identität",
+                  "Es": "Identidad"
                 },
                 "value_default": "---",
-                "yak_readout": true
+                "yak_readout": true,
+                "read_only": true,
+                "layout": {
+                  "width": "100%",
+                  "font": 13
+                }
               }
             }
           }

@@ -35,7 +35,14 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
     const fontSize = layout.font || geom.font || 13;
     const color = layout.colour || geom.colour || "#fff";
 
+    // A readout displays what an instrument answered; it must never publish to
+    // the topic it is reading. `yak_readout` already points this widget at the
+    // device's /Read topic, so an editable box there would let a keystroke
+    // overwrite the instrument's reply.
+    const readOnly = config?.read_only === true || config?.yak_readout === true;
+
     const handleChange = (e) => {
+        if (readOnly) return;
         const next = e.target.value;
         if (useMqtt) setVal(next);
         else if (onChange) onChange(next);
@@ -52,6 +59,8 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
                 type="text" 
                 value={val} 
                 onChange={handleChange}
+                readOnly={readOnly}
+                title={readOnly ? 'Reported by the instrument' : undefined}
                 style={{
                     flexGrow: 1,
                     backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1a1a1a') : '#1a1a1a'),

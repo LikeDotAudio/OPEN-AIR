@@ -27,6 +27,21 @@ jobs:
         with:
           node-version-file: Deployment/.nvmrc
       - run: corepack enable
+      # Activate the version Deployment/package.json pins, from the directory
+      # that pins it.
+      #
+      # corepack resolves `packageManager` by searching up from the CURRENT
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest — then pnpm read
+      # Deployment/package.json, saw a different version, and refused to run.
+      # The failure only appeared when a newer pnpm was published, which is the
+      # worst time for CI to start disagreeing with every developer's machine.
+      #
+      # `--activate` records this as corepack's fallback, so the `-C` calls
+      # resolve to it too. No version is repeated here: it is read from the pin.
+      - run: corepack prepare --activate
+        working-directory: Deployment
       - run: pnpm -C Deployment install --frozen-lockfile
       - run: pnpm -C Deployment --filter @openair/contracts typecheck
       - run: pnpm -C Deployment --filter @openair/contracts test # includes the golden-vector suites
@@ -73,6 +88,21 @@ jobs:
         with:
           node-version-file: Deployment/.nvmrc
       - run: corepack enable
+      # Activate the version Deployment/package.json pins, from the directory
+      # that pins it.
+      #
+      # corepack resolves `packageManager` by searching up from the CURRENT
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest — then pnpm read
+      # Deployment/package.json, saw a different version, and refused to run.
+      # The failure only appeared when a newer pnpm was published, which is the
+      # worst time for CI to start disagreeing with every developer's machine.
+      #
+      # `--activate` records this as corepack's fallback, so the `-C` calls
+      # resolve to it too. No version is repeated here: it is read from the pin.
+      - run: corepack prepare --activate
+        working-directory: Deployment
       - run: pnpm -C Deployment install --frozen-lockfile
       # freshness: legacy.ts and globals.d.ts must match their sources
       - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
@@ -92,6 +122,21 @@ jobs:
         with:
           node-version-file: Deployment/.nvmrc
       - run: corepack enable
+      # Activate the version Deployment/package.json pins, from the directory
+      # that pins it.
+      #
+      # corepack resolves `packageManager` by searching up from the CURRENT
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest — then pnpm read
+      # Deployment/package.json, saw a different version, and refused to run.
+      # The failure only appeared when a newer pnpm was published, which is the
+      # worst time for CI to start disagreeing with every developer's machine.
+      #
+      # `--activate` records this as corepack's fallback, so the `-C` calls
+      # resolve to it too. No version is repeated here: it is read from the pin.
+      - run: corepack prepare --activate
+        working-directory: Deployment
       - run: pnpm -C Deployment install --frozen-lockfile
       - uses: actions/cache@v4
         with:

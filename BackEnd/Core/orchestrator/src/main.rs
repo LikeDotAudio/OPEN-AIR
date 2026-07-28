@@ -33,6 +33,13 @@ async fn main() {
 
     let root = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
 
+    // A generator, not a server: write the static /api fallbacks and stop.
+    if args.write_api_snapshot {
+        api::write_static_snapshots(&root);
+        println!("✅ [API] wrote FrontEnd/api/tree.json and FrontEnd/api/grabbag");
+        return;
+    }
+
     // One broker address for every agent. Previously hard-coded six times.
     let mqtt_host = args.mqtt_host.clone();
     let mqtt_port = args.mqtt_port;
@@ -587,18 +594,29 @@ use axum::response::Redirect;
         }
     };
     
-    let local_ip = match std::net::UdpSocket::bind("0.0.0.0:0") {
-        Ok(socket) => {
-            if socket.connect("8.8.8.8:80").is_ok() {
-                socket.local_addr().map(|addr| addr.ip().to_string()).unwrap_or_else(|_| "localhost".to_string())
-            } else {
-                "localhost".to_string()
-            }
-        },
-        Err(_) => "localhost".to_string(),
-    };
-    let url = format!("http://{}:{}", local_ip, args.port);
+    // The URL has to name the address we ACTUALLY bound.
+    //
+    // This used to be derived from the default route — open a UDP socket
+    // towards 8.8.8.8 and read back whichever local IP the kernel picked — and
+    // then opened that. On the default loopback bind that produced
+    // `http://44.44.44.175:8000` while the listener sat on `127.0.0.1:8000`:
+    // a URL that cannot connect, launched by a server that is working
+    // perfectly. It also made a purely local decision depend on the public
+    // internet being routable, which on an air-gapped bench it is not, and on
+    // a multi-homed host it picked whichever interface won the default route
+    // rather than the one anybody was using.
+    let url = format!("http://{}:{}", browsable_host(args.bind), args.port);
     println!("🌐 [API] Frontend API Server listening on {}", url);
+
+    // Bound to every interface? Then other machines can reach this, and the
+    // LAN address is worth printing — but printing is all it is worth. The
+    // browser being launched is on this host, so it gets `localhost`.
+    if args.bind.is_unspecified() {
+        if let Some(lan) = lan_address() {
+            println!("🌐 [API]   …and on http://{}:{} from the network", lan, args.port);
+        }
+    }
+
     if !args.no_browser {
         println!("🌐 [WEB] Opening {} in the browser…", url);
         let _ = open::that(url);
@@ -609,6 +627,34 @@ use axum::response::Redirect;
     }
 }
 
+
+/// The host name to put in a URL for a server bound to `bind`.
+///
+/// `localhost` for both loopback and `0.0.0.0`: it is exactly right for a
+/// loopback bind, and for the every-interface bind it is the one name
+/// guaranteed to reach the server from the machine the browser is on. A
+/// specific address means someone chose it, so it is used verbatim.
+fn browsable_host(bind: std::net::IpAddr) -> String {
+    if bind.is_loopback() || bind.is_unspecified() {
+        "localhost".to_string()
+    } else {
+        bind.to_string()
+    }
+}
+
+/// This host's address on the network it routes out of, for display only.
+///
+/// The old default-route trick, kept but demoted: it is a reasonable *hint* for
+/// "which address would someone else use to reach me", and a bad answer to
+/// "what URL should I open". No packet is sent — connecting a UDP socket only
+/// asks the kernel to pick a route — so this costs nothing and reaches nothing.
+/// Returns `None` on a host with no route out, which is a normal state for a
+/// bench and not an error.
+fn lan_address() -> Option<String> {
+    let socket = std::net::UdpSocket::bind("0.0.0.0:0").ok()?;
+    socket.connect("8.8.8.8:80").ok()?;
+    Some(socket.local_addr().ok()?.ip().to_string())
+}
 
 /// Topic carrying live scan narration to anyone watching — currently the browser
 /// console (`MqttProvider.jsx`), which subscribes and prints each line.
@@ -1048,4 +1094,43 @@ pub(crate) fn is_truthy_trigger(payload: &str) -> bool {
         };
     }
     payload == "1" || payload.eq_ignore_ascii_case("true") || payload.eq_ignore_ascii_case("scan")
+}
+
+#[cfg(test)]
+mod url_tests {
+    use super::browsable_host;
+    use std::net::IpAddr;
+
+    fn ip(s: &str) -> IpAddr {
+        s.parse().unwrap()
+    }
+
+    /// The regression this exists for.
+    ///
+    /// The default bind is loopback, and the URL used to come from the default
+    /// route instead — so the orchestrator opened `http://44.44.44.175:8000`
+    /// at a listener sitting on `127.0.0.1:8000`. The page could not load, and
+    /// nothing about the server was actually wrong.
+    #[test]
+    fn a_loopback_bind_is_never_advertised_as_a_lan_address() {
+        assert_eq!(browsable_host(ip("127.0.0.1")), "localhost");
+        assert_eq!(browsable_host(ip("::1")), "localhost");
+    }
+
+    /// Bound to everything: the browser is on this host, so `localhost` is the
+    /// name that cannot fail. The LAN address is printed beside it, not opened.
+    #[test]
+    fn binding_every_interface_still_opens_localhost() {
+        assert_eq!(browsable_host(ip("0.0.0.0")), "localhost");
+        assert_eq!(browsable_host(ip("::")), "localhost");
+    }
+
+    /// A specific address was somebody's decision. Honour it verbatim —
+    /// including picking the RIGHT interface on a multi-homed host, which the
+    /// default-route guess could not do.
+    #[test]
+    fn an_explicit_address_is_used_as_given() {
+        assert_eq!(browsable_host(ip("44.44.44.175")), "44.44.44.175");
+        assert_eq!(browsable_host(ip("44.44.44.44")), "44.44.44.44");
+    }
 }

@@ -5,6 +5,7 @@ resolver = "2"
 # (../ComProtocols) and are pulled in as path dependencies by the orchestrator.
 members = [
     "orchestrator",
+    "doclinks",
 ]
 
 [package]

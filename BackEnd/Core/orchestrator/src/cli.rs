@@ -73,4 +73,13 @@ pub struct Args {
 
     #[arg(long, help = "Do not publish protocol config.ini files to MQTT on startup.")]
     pub no_mqtt: bool,
+
+    /// Regenerate `FrontEnd/api/tree.json` and `FrontEnd/api/grabbag`, then exit.
+    ///
+    /// These are the static fallbacks `index.html` uses when the orchestrator is
+    /// not answering. They are committed files (tree.json is ~2.5 MB), so they
+    /// are refreshed on request rather than on every scan — regenerating them
+    /// automatically would leave the working tree permanently dirty.
+    #[arg(long, help = "Rewrite the static FrontEnd/api snapshots and exit.")]
+    pub write_api_snapshot: bool,
 }

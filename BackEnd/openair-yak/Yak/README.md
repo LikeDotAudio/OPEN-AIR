@@ -36,8 +36,8 @@ reader nothing; `commands` is present exactly where there is something to read.
 Generated, never hand-kept — an index of 181 entries against a tree that gains
 tables one instrument at a time is wrong by the second commit:
 
-    python3 BackEnd/openair-yak/tools/build_known_device_links.py           # rewrite the links
-    python3 BackEnd/openair-yak/tools/build_known_device_links.py --check    # exit 1 if stale
+    openair-yak build-links            # rewrite the links
+    openair-yak build-links --check    # exit 1 if stale
 
 A dead link is worse than no link, because it reads as coverage, so
 `validate_yak_tables.py` fails on one that resolves to nothing, on one pointing
@@ -222,8 +222,8 @@ two files declaring model `34401A` would collide at load.
 command, with verb, description, arguments, reply shape and subsystem. It is a
 report, not a source: edit `commands.json` and regenerate.
 
-    python3 BackEnd/openair-yak/tools/build_yak_command_list.py            # rewrite both files
-    python3 BackEnd/openair-yak/tools/build_yak_command_list.py --check    # exit 1 if stale
+    openair-yak build-list             # rewrite both files
+    openair-yak build-list --check     # exit 1 if stale
 
 Rows are sorted by family, model, verb, command, so a regeneration after an edit
 diffs as the edit rather than as whatever order the dict happened to be written
@@ -242,8 +242,8 @@ verb, arguments and reply shape on each leaf. The table is a flat dict of comman
 names because that is what the runtime wants; this is the shape a human needs to
 see what a panel can address.
 
-    python3 BackEnd/openair-yak/tools/build_yak_command_trees.py           # rewrite every tree
-    python3 BackEnd/openair-yak/tools/build_yak_command_trees.py --check   # exit 1 if stale
+    openair-yak build-trees            # rewrite every tree
+    openair-yak build-trees --check    # exit 1 if stale
 
 Only the block between the `BEGIN GENERATED` / `END GENERATED` markers is
 rewritten. Everything below them is left alone — five of these files were written
@@ -315,6 +315,6 @@ these sheets are in Hz like every other `model.json`.
 The Router panels bind `Set_Relay_Card4` … `Set_Relay_Card9`, 24 bindings, and
 **no such commands exist** in `Router/3235` — its vocabulary is
 `Close_Channels` / `Open_Channels` / `Select_Channel`. Those bindings have never
-resolved; they predate this conversion. `BackEnd/openair-yak/tools/yak_crossref.py` counts a
+resolved; they predate this conversion. ``openair-yak crossref`` counts a
 widget as BOUND when it carries a `yak_handler`, without checking the command
 resolves, which is why it reports the Router as finished.

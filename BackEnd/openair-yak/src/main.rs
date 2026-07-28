@@ -4,14 +4,90 @@ mod verbs;
 mod models;
 mod converters;
 mod repository;
+mod tools;
 
+use clap::{Parser, Subcommand};
 use log::{info, error};
 use std::sync::Arc;
+
+/// The YAK agent, plus the build-time tooling over its command tables.
+///
+/// With no subcommand this starts the agent, which is what
+/// `Deployment/openair.py` launches — so the tools could be added without
+/// changing how anything runs it.
+#[derive(Parser)]
+#[command(name = "openair-yak", about, long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Option<Command>,
+}
+
+#[derive(Subcommand)]
+enum Command {
+    /// Check the command tables against their own invariants.
+    CheckTables {
+        /// Exit 1 on any finding.
+        #[arg(long)]
+        strict: bool,
+        /// Write {model: command count} and exit.
+        #[arg(long, value_name = "FILE")]
+        snapshot: Option<String>,
+        /// Fail if any model lost commands since that snapshot.
+        #[arg(long, value_name = "FILE")]
+        against: Option<String>,
+    },
+    /// Point each known device at its command table.
+    BuildLinks {
+        /// Report drift without writing; exit 1 if stale.
+        #[arg(long)]
+        check: bool,
+    },
+    /// Rewrite every commands_tree.md from its table.
+    BuildTrees {
+        /// Report drift without writing; exit 1 if stale.
+        #[arg(long)]
+        check: bool,
+    },
+    /// Rewrite Yak/CommandList.csv and .xlsx from the tables.
+    BuildList {
+        /// Report drift without writing; exit 1 if stale.
+        #[arg(long)]
+        check: bool,
+    },
+    /// Cross-reference panel controls against the command vocabulary.
+    Crossref {
+        /// Instrument type (default: all).
+        type_name: Option<String>,
+        /// Full per-control tables.
+        #[arg(long, short)]
+        verbose: bool,
+        /// Print yak_handler stubs.
+        #[arg(long)]
+        emit: bool,
+    },
+}
 
 #[tokio::main]
 async fn main() {
     // Initialize logging for anything we didn't manually port to println
     env_logger::init();
+
+    // Tooling runs and exits; only the no-subcommand path starts the agent.
+    if let Some(command) = Cli::parse().command {
+        let code = match command {
+            Command::CheckTables { strict, snapshot, against } => {
+                tools::validate::run(strict, snapshot, against)
+            }
+            Command::BuildLinks { check } => tools::links::run(check),
+            Command::BuildTrees { check } => tools::trees::run(check),
+            Command::BuildList { check } => tools::list::run(check),
+            Command::Crossref { type_name, verbose, emit } => {
+                tools::crossref::run(type_name, verbose, emit)
+            }
+        };
+        std::process::exit(code);
+    }
+
     eprintln!("🚀 [AGENT] Launching Native YAK Agent...");
 
     // Load YAK configuration

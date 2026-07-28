@@ -204,7 +204,7 @@ yet caught up to the vocabulary — not that the vocabulary is redundant.
 
 ### The auto-classifier cannot infer RIG
 
-`BackEnd/openair-yak/tools/yak_crossref.py:258` guesses a verb when emitting handler stubs:
+`openair-yak crossref --emit` guesses a verb when emitting handler stubs:
 
 ```python
 verb = "nab" if scpi.rstrip().endswith("?") else ("set" if placeholder else "do")

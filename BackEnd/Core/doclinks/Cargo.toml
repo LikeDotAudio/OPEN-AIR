@@ -1,0 +1,9 @@
+# Deliberately dependency-free. This runs as its own CI job on every push, and
+# the point of that job is that it is instant — pulling in regex or walkdir would
+# make a one-second gate compile a tree first.
+[package]
+name = "openair-doclinks"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

@@ -1301,6 +1301,11 @@ impl Mirror {
         let (panels, built) = crate::instruments::build(&self.root, &instruments);
         println!("[discovered-gui] instrument panels: {built} device(s), {panels} file(s)");
 
+        // The static /api fallbacks are deliberately NOT refreshed here. They are
+        // committed files — tree.json alone is 2.5 MB — so writing them on every
+        // scan would leave the working tree permanently dirty and bury real edits
+        // under a regenerated snapshot. `--write-api-snapshot` does it on demand.
+
         // Seed the live topics too, so a panel written now has rows the instant
         // it loads rather than waiting for the watcher's first change.
         publish_live_tables(&self.client, &collected, scanning);

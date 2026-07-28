@@ -11,12 +11,13 @@ jobs:
   # verified to resolve"; that check ran once, by hand, and five links were dead
   # within a day (a file in Documents/notes/ linked as if it were in
   # Documents/Audits/, plus three broken by a folder move). Asserted once is not
-  # verified — so it runs on every push. No toolchain, ~1 second.
+  # verified — so it runs on every push. The checker is a dependency-free crate
+  # so this stays a ~1 second gate rather than a workspace build.
   docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 BackEnd/Tools/check_doc_links.py
+      - run: cargo run --quiet --manifest-path BackEnd/Core/Cargo.toml -p openair-doclinks
 
   node:
     runs-on: ubuntu-latest

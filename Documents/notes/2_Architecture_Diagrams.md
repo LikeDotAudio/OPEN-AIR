@@ -18,7 +18,7 @@
 > [yak_protocol_report.md](yak_protocol_report.md) live in `Documents/notes/`;
 > the audit index and the plan live in `Documents/Audits/`. Cross-links between
 > the two folders broke twice on 2026-07-18 during reorganisation — they are now
-> checked on every push by `BackEnd/Tools/check_doc_links.py`.
+> checked on every push by `openair-doclinks`.
 
 ---
 

@@ -85,8 +85,13 @@ fn get_directory_tree(path: &Path, base_path: &Path) -> Value {
 
 // Inline comment: Logic for get_tree
 async fn get_tree(State(state): State<ApiState>) -> impl IntoResponse {
-    let gui_frames = state.root_dir.join("FrontEnd").join("Gui_Frames");
-    Json(get_directory_tree(&gui_frames, &gui_frames))
+    Json(build_tree(&state.root_dir))
+}
+
+/// The panel tree as `/api/tree` serves it.
+pub fn build_tree(root: &Path) -> Value {
+    let gui_frames = root.join("FrontEnd").join("Gui_Frames");
+    get_directory_tree(&gui_frames, &gui_frames)
 }
 
 #[derive(Deserialize)]
@@ -283,7 +288,12 @@ fn add_components(content: &Value, category: &str, relpath: &str, components: &m
 
 // Inline comment: Logic for get_grabbag
 async fn get_grabbag(State(state): State<ApiState>) -> impl IntoResponse {
-    let frontend = state.root_dir.join("FrontEnd");
+    Json(build_grabbag(&state.root_dir))
+}
+
+/// The widget grab-bag as `/api/grabbag` serves it.
+pub fn build_grabbag(root: &Path) -> Value {
+    let frontend = root.join("FrontEnd");
     let mut components = Vec::new();
     let mut legends = serde_json::Map::new();
     let mut seen = HashSet::new();
@@ -338,10 +348,76 @@ async fn get_grabbag(State(state): State<ApiState>) -> impl IntoResponse {
         }
     });
     
-    Json(json!({
+    json!({
         "components": components,
         "legends": legends
-    }))
+    })
+}
+
+/// Write the static fallbacks the browser uses when the orchestrator is not
+/// answering: `FrontEnd/api/tree.json` and `FrontEnd/api/grabbag`.
+///
+/// `index.html` fetches the live endpoints first and falls back to these, so a
+/// snapshot that drifts is a UI that renders yesterday's panels with no error.
+/// Regenerated on every panel build for exactly that reason — the Python script
+/// this replaces had to be remembered and run by hand.
+///
+/// Compact separators, matching what is committed: this is a 2.5 MB file, and
+/// pretty-printing it would triple the size of every diff that touches a panel.
+pub fn write_static_snapshots(root: &Path) {
+    let api_dir = root.join("FrontEnd").join("api");
+    if let Err(e) = fs::create_dir_all(&api_dir) {
+        println!("⚠️  [API] could not create {}: {e}", api_dir.display());
+        return;
+    }
+    for (name, value) in [
+        ("tree.json", build_tree(root)),
+        ("grabbag", build_grabbag(root)),
+    ] {
+        match serde_json::to_string(&value) {
+            Ok(body) => {
+                if let Err(e) = fs::write(api_dir.join(name), ascii_escaped(&body)) {
+                    println!("⚠️  [API] could not write {name}: {e}");
+                }
+            }
+            Err(e) => println!("⚠️  [API] could not serialize {name}: {e}"),
+        }
+    }
+}
+
+/// Escape every non-ASCII character as `\uXXXX`, matching the escape convention
+/// of the committed snapshots (Python's `json.dump` defaults to
+/// `ensure_ascii=True`).
+///
+/// Cosmetic to any parser, and kept only so the artifact stays in the format it
+/// has always had — greppable as ASCII, and diffable against older copies.
+///
+/// This does NOT make the output byte-identical to the Python's: serde_json
+/// renders float exponents as `1e-6` where Python writes `1e-06`. Normalising
+/// that would mean a blanket rewrite over 2.5 MB of embedded panel content to
+/// fix a difference no consumer can observe, so it is left alone. The documents
+/// are verified equal by parsing, not by comparing bytes.
+///
+/// Safe as a post-pass because JSON's structural characters are all ASCII, so
+/// anything non-ASCII is necessarily inside a string literal.
+fn ascii_escaped(json: &str) -> String {
+    let mut out = String::with_capacity(json.len());
+    for c in json.chars() {
+        if c.is_ascii() {
+            out.push(c);
+        } else if (c as u32) <= 0xFFFF {
+            out.push_str(&format!("\\u{:04x}", c as u32));
+        } else {
+            // Outside the BMP: Python emits a surrogate pair.
+            let v = c as u32 - 0x1_0000;
+            out.push_str(&format!(
+                "\\u{:04x}\\u{:04x}",
+                0xD800 + (v >> 10),
+                0xDC00 + (v & 0x3FF)
+            ));
+        }
+    }
+    out
 }
 
 #[cfg(test)]

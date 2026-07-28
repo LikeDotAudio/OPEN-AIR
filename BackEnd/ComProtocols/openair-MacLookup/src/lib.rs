@@ -304,15 +304,37 @@ const REQUEST_SPACING: Duration = Duration::from_millis(1100);
 /// pauses rather than gives up — but a tight retry would just earn another 429.
 const THROTTLE_BACKOFF: Duration = Duration::from_secs(60);
 
+/// `mac_vendors.tsv` beside this crate's source.
+///
+/// Anchored to the crate rather than to the working directory, because the
+/// directory a process starts in is not a property of the cache. Eight agents
+/// share this file (see the README) and they are started from wherever their
+/// launcher happens to be, so a relative default scattered copies around the
+/// tree — each one starting empty, each one spending its own daily budget to
+/// relearn what another had already answered.
+///
+/// The crate directory does not exist in a deployed image, which copies the
+/// binary and nothing else. That case falls back to the working directory and
+/// behaves exactly as before: the cache is an optimisation, and losing it costs
+/// a day's budget rather than correctness.
+fn default_cache_path() -> PathBuf {
+    let crate_dir = Path::new(env!("CARGO_MANIFEST_DIR"));
+    if crate_dir.is_dir() {
+        crate_dir.join("mac_vendors.tsv")
+    } else {
+        PathBuf::from("mac_vendors.tsv")
+    }
+}
+
 impl MacVendors {
     /// Start with the default cache location.
     ///
-    /// `OPENAIR_MAC_CACHE` overrides it; otherwise `mac_vendors.tsv` beside the
-    /// working directory. Losing the file costs a day's budget, not correctness.
+    /// `OPENAIR_MAC_CACHE` overrides it; otherwise `mac_vendors.tsv` beside this
+    /// crate. Losing the file costs a day's budget, not correctness.
     pub fn start() -> Self {
         let path = std::env::var_os("OPENAIR_MAC_CACHE")
             .map(PathBuf::from)
-            .unwrap_or_else(|| PathBuf::from("mac_vendors.tsv"));
+            .unwrap_or_else(default_cache_path);
         Self::start_with_cache(Some(path))
     }
 

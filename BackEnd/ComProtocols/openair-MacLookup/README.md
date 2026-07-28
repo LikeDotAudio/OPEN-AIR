@@ -46,8 +46,11 @@ The cache is a TSV so it can be read, grepped and hand-edited:
     FC:A1:3E	Samsung Electronics Co.,Ltd
 
 An empty name is a remembered 404. `OPENAIR_MAC_CACHE` sets the path; it defaults
-to `mac_vendors.tsv` in the working directory. Losing the file costs a day's
-budget, not correctness.
+to `mac_vendors.tsv` beside this crate, so the eight agents that share it find
+one file however their launcher was started rather than scattering a half-learnt
+copy into each working directory. A deployed image carries the binary and not the
+source tree, so there the default falls back to the working directory. Losing the
+file costs a day's budget, not correctness.
 
 ## EUI-64
 

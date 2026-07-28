@@ -99,15 +99,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      # Regenerates FrontEnd/api/tree.json — the static host has no
-      # orchestrator, so the browser's live /api/tree falls back to this.
-      - name: Build API artifacts
-        run: python3 Deployment/build_api_artifacts.py
+      # FrontEnd/api/{tree.json,grabbag} are the fallbacks index.html uses when
+      # no orchestrator is answering, and the static host has none. They are
+      # COMMITTED and shipped as-is.
+      #
+      # A "Build API artifacts" step here used to run
+      # Deployment/build_api_artifacts.py to regenerate them. It had not
+      # regenerated anything for a long time: that script derived its paths as
+      # __file__/../../../.., which was right while it lived in
+      # BackEnd/Core/orchestrator/gui/, but it moved to Deployment/ in 463e2fb1c
+      # and the four levels were never cut to one. On the runner it resolved to
+      # /home/runner/FrontEnd, found no Gui_Frames, warned and exited 0 — the
+      # step passed while writing nothing. Its grabbag half fetched
+      # localhost:8000 and could never have run here either. So removing it
+      # changes nothing about what ships.
+      #
+      # Its port is `open-air-orchestrator --write-api-snapshot`, deliberately
+      # NOT wired in here. Unlike the dead Python it would really rewrite
+      # tree.json, and a runner checkout lacks the generated, gitignored trees
+      # (0_discovered, 1_Instruments/left_100) that the committed snapshot
+      # contains — so "repairing" this step would quietly deploy a tree smaller
+      # than the one in git. Refresh the snapshot on the bench, where those
+      # trees exist, and commit it.
+      - name: Check the committed API fallbacks are intact
+        run: |
+          set -euo pipefail
+          for f in FrontEnd/api/tree.json FrontEnd/api/grabbag; do
+            [ -s "$f" ] || { echo "::error::$f is missing or empty"; exit 1; }
+          done
+          node -e 'JSON.parse(require("fs").readFileSync("FrontEnd/api/tree.json","utf8"))'
+          echo "tree.json parses — $(wc -c < FrontEnd/api/tree.json) bytes"
 
       - name: Deploy over FTPS
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -154,5 +175,4 @@ jobs:
       - name: Validate only (pull request)
         if: github.event_name == 'pull_request'
         run: |
-          python3 -m py_compile Deployment/build_api_artifacts.py
-          echo "PR validated: build script compiles. No upload on PRs."
+          echo "PR validated: API fallbacks checked above. No upload on PRs."

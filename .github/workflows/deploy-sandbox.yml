@@ -89,13 +89,19 @@ jobs:
         with:
           fetch-depth: 0            # deploy.py diffs before..sha; needs history
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Build API Artifacts
-        run: python3 Deployment/build_api_artifacts.py
+      # See deploy-production.yml for the full story: the "Build API Artifacts"
+      # step that ran Deployment/build_api_artifacts.py was a no-op on the runner
+      # (stale __file__/../../../.. after the script moved to Deployment/), and
+      # its Rust port is deliberately not wired in, because a runner checkout is
+      # missing the generated, gitignored trees the committed snapshot contains.
+      - name: Check the committed API fallbacks are intact
+        run: |
+          set -euo pipefail
+          for f in FrontEnd/api/tree.json FrontEnd/api/grabbag; do
+            [ -s "$f" ] || { echo "::error::$f is missing or empty"; exit 1; }
+          done
+          node -e 'JSON.parse(require("fs").readFileSync("FrontEnd/api/tree.json","utf8"))'
+          echo "tree.json parses — $(wc -c < FrontEnd/api/tree.json) bytes"
 
       - name: Deploy over FTPS
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -122,5 +128,4 @@ jobs:
       - name: Validate only (pull request)
         if: github.event_name == 'pull_request'
         run: |
-          python3 -m py_compile Deployment/build_api_artifacts.py
-          echo "PR validated: build script compiles. No upload on PRs."
+          echo "PR validated: API fallbacks checked above. No upload on PRs."

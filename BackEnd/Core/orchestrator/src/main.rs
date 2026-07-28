@@ -288,16 +288,34 @@ async fn main() {
     let (nmos_host, nmos_port) = (mqtt_host.clone(), mqtt_port);
     std::thread::spawn(move || { openair_nmos::run_browse_agent(&nmos_host, nmos_port); });
 
-    let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
-    std::thread::spawn(move || {
-        println!("🚀 [AGENT] Launching Native DNS-SD Agent (continuous browse)...");
-        openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
-    });
-
     // Discovered-device panels and live tables (see discovered.rs).
     // One mirror of the retained discovery tree serves both the scan loop, which
     // rebuilds the panel FILES, and the watcher task, which keeps the rows live.
     let discovered_mirror = discovered::Mirror::spawn(root.clone(), &mqtt_host, mqtt_port);
+
+    // The bench comes first: DNS-SD does not start browsing until the VISA scan
+    // has finished its first pass.
+    //
+    // Both are "scanning" but only one is answering questions about hardware
+    // that is plugged in and expected to be there. A continuous mDNS browse
+    // finding ~50 services buries the instrument probe in both the log and the
+    // Discovered tab, and the first thing anyone wants after a start is the
+    // bench, not the building's Chromecasts.
+    let (visa_first_scan_tx, visa_first_scan_rx) = std::sync::mpsc::channel::<()>();
+
+    let (dnssd_mqtt_host, dnssd_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    std::thread::spawn(move || {
+        // Waiting, but never indefinitely: a VISA scan that dies or hangs must
+        // not take DNS-SD discovery down with it. The cap is generous enough for
+        // a full bench (this one probes 26 resources in well under a minute).
+        const VISA_FIRST_SCAN_CAP: std::time::Duration = std::time::Duration::from_secs(180);
+        match visa_first_scan_rx.recv_timeout(VISA_FIRST_SCAN_CAP) {
+            Ok(()) => println!("🚀 [AGENT] VISA scan done — launching Native DNS-SD Agent (continuous browse)..."),
+            Err(_) => println!("⚠️  [AGENT] VISA scan did not finish within {}s — starting DNS-SD anyway",
+                               VISA_FIRST_SCAN_CAP.as_secs()),
+        }
+        openair_dnssd::run_browse_agent(&dnssd_mqtt_host, dnssd_mqtt_port);
+    });
 
     let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     tokio::spawn(async move {
@@ -545,6 +563,12 @@ async fn main() {
         // writes tables that are one scan behind.
         discovered_mirror.settle().await;
         discovered_mirror.build_async().await;
+
+        // Release DNS-SD, which has been holding since boot so the bench got the
+        // network to itself. Send on every pass and ignore the error: the
+        // receiver is gone after the first one, and a rescan has nothing left to
+        // release.
+        let _ = visa_first_scan_tx.send(());
 
         // Triggers that arrived DURING the scan are stale — the scan they
         // asked for just ran. This also absorbs the browser's 400 ms

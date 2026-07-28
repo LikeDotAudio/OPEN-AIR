@@ -1455,13 +1455,11 @@
                 "glow_intensity": 0
               }
             },
-            "Execute Command": {
-              "yak_handler": {
-                "enable": true,
-                "yak_type": "do",
-                "sub_path": "Generator",
-                "command": "Reset_Device"
-              }
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Generator",
+              "command": "Reset_Device"
             }
           },
           "Setup_Break": {
@@ -1512,13 +1510,11 @@
                     "glow_intensity": 0
                   }
                 },
-                "Execute Command": {
-                  "yak_handler": {
-                    "enable": true,
-                    "yak_type": "nab",
-                    "sub_path": "Generator",
-                    "command": "Read_IDN"
-                  }
+                "yak_handler": {
+                  "enable": true,
+                  "yak_type": "nab",
+                  "sub_path": "Generator",
+                  "command": "Read_IDN"
                 }
               },
               "Identity_Readout": {

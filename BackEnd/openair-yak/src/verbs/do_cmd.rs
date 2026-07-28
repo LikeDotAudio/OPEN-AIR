@@ -16,6 +16,10 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
         Some(t) => t,
         None => {
             eprintln!("   ❌ [YAK DO] Command '{}' not found in YAK repository for model '{}'!", yak.command, target_model);
+            // Said out loud in the browser too: a button that silently does
+            // nothing is indistinguishable from one that worked.
+            super::narrate(client, config, "error",
+                format!("DO {} is not in {}'s command table — nothing sent", yak.command, target_model)).await;
             return;
         }
     };

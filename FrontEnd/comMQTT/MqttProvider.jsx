@@ -31,7 +31,12 @@ const OA_DISCOVERED_ROWS_FILTER = 'OpenAir/System/Gui/Discovered/#';
 // Topics handled by the activity store instead of the value store. They are an
 // event stream: putting them in `messages` would re-render every widget on the
 // page for each line of scan narration.
-const OA_ACTIVITY_TOPICS = new Set([OA_SCAN_LOG_TOPIC, OA_DISCOVERY_ACTIVITY_TOPIC]);
+// What YAK did with a press: the command, the SCPI it resolved to, and the
+// instrument it went to. Until this existed the agent narrated only to its own
+// stdout, so pressing a bound button looked identical whether it had driven an
+// instrument or found no command at all.
+const OA_YAK_ACTIVITY_TOPIC = 'OpenAir/System/Protocols/yak/Activity';
+const OA_ACTIVITY_TOPICS = new Set([OA_SCAN_LOG_TOPIC, OA_DISCOVERY_ACTIVITY_TOPIC, OA_YAK_ACTIVITY_TOPIC]);
 
 // ── Discovery activity store ────────────────────────────────────────────────
 //
@@ -189,6 +194,10 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
             // PTP, RAVENNA, SAP, printers…), which is most of what scrolls past
             // in the terminal.
             mqttClient.subscribe(OA_DISCOVERY_ACTIVITY_TOPIC);
+            // What YAK sent, and where — see OA_YAK_ACTIVITY_TOPIC.
+            mqttClient.subscribe(OA_YAK_ACTIVITY_TOPIC, (err) => {
+                if (!err) console.log(`⚙️ [YAK] watching ${OA_YAK_ACTIVITY_TOPIC} — bound commands will appear here`);
+            });
             // Scan state, so the UI can say "scanning" rather than infer it.
             mqttClient.subscribe(OA_SCAN_STATE_TOPIC);
             // Live discovery table rows. These are what make the Discovered tab
@@ -218,7 +227,9 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', 
                 error: 'color:#f85149',
                 info:  'color:#58a6ff',
             }[line.level] || 'color:#58a6ff';
-            const icon = { ok: '✅', warn: '⚠️', error: '❌', info: '🔎' }[line.level] || '🔎';
+            const icon = line.source === 'yak'
+                ? { ok: '⚙️', warn: '⚠️', error: '❌', info: '⚙️' }[line.level] || '⚙️'
+                : { ok: '✅', warn: '⚠️', error: '❌', info: '🔎' }[line.level] || '🔎';
             console.log(`%c${icon} [${line.source.toUpperCase()}] ${line.message}`, style);
         });
 
@@ -330,13 +341,31 @@ window.useMqttMessages = () => {
 // No-op (returns false) when there is no provider / no connection.
 window.useMqttPublish = () => {
     const context = React.useContext(MqttContext);
-    return React.useCallback((topic, payload) => {
+    return React.useCallback((topic, payload, opts) => {
         if (context && context.publish) {
-            context.publish(topic, typeof payload === 'string' ? payload : JSON.stringify(payload));
+            context.publish(topic, typeof payload === 'string' ? payload : JSON.stringify(payload), opts);
             return true;
         }
         return false;
     }, [context]);
+};
+
+// One-shot trigger publish: NON-retained, no settle, no resting value.
+//
+// `useMqttState` is the wrong tool for a momentary control. It follows every
+// change with a retained publish of the resting value 400 ms later, so late
+// joiners can restore a fader position — correct for state, wrong for an event.
+// A retained `1` on a trigger topic is a command left lying on the broker: YAK
+// replays it to itself on reconnect, which for a Setup page means `*RST` firing
+// at an instrument because an agent restarted. Retain class belongs to the topic
+// family (contracts T5), and a trigger's family is live-event.
+window.useMqttTrigger = () => {
+    const publish = window.useMqttPublish();
+    return React.useCallback((topic, value) => publish(
+        topic,
+        JSON.stringify({ value, full_id: SESSION_FULL_ID }),
+        { retain: false },
+    ), [publish]);
 };
 
 window.useMqttState = (topic, defaultValue, nodeJson) => {

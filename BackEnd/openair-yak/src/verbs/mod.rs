@@ -19,6 +19,32 @@ use crate::models::YakHandler;
 /// * `config.topic_publish` — the legacy global topic, used by hand-authored
 ///   panels that name no device. The envelope is preserved there because that
 ///   is the shape anything listening on it was written against.
+/// Say what YAK just did, on a topic the browser subscribes to.
+///
+/// `eprintln!` reaches the agent's own stdout and nothing else, which is
+/// invisible to whoever is actually pressing the button — the same gap the VISA
+/// scan log was opened to close. Every verb narrates here so a press produces
+/// visible dialog in the browser console: the command, the model, the SCPI that
+/// went out, and the instrument it went to.
+///
+/// Non-retained, QoS 0: this is an event stream. A page opened an hour from now
+/// must not be shown a `*RST` as though it were happening right then.
+pub async fn narrate(client: &AsyncClient, config: &Config, level: &str, message: String) {
+    let line = serde_json::json!({
+        "level": level,          // "info" | "ok" | "warn" | "error"
+        "message": message,
+        "source": "yak",
+        "ts": std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs_f64())
+            .unwrap_or(0.0),
+    });
+    let topic = format!("{}/Activity", config.topic);
+    let _ = client
+        .publish(topic, rumqttc::QoS::AtMostOnce, false, line.to_string().into_bytes())
+        .await;
+}
+
 pub async fn dispatch(
     client: &AsyncClient,
     config: &Config,
@@ -36,6 +62,20 @@ pub async fn dispatch(
     if target.is_some() {
         eprintln!("   🎯 [YAK MQTT] ⮞ {} -> {}", verb, topic);
     }
+
+    // The instrument this actually reaches, as the operator would name it: the
+    // device segment of the Write topic, not the whole path.
+    let instrument = target
+        .and_then(|t| t.strip_suffix("/Write"))
+        .and_then(|t| t.rsplit("/Device/").next())
+        .unwrap_or("the global publish topic");
+    narrate(
+        client,
+        config,
+        "ok",
+        format!("{verb} {} -> {scpi}  →  {instrument}", yak.command),
+    )
+    .await;
     if let Err(e) = client
         .publish(topic, rumqttc::QoS::AtMostOnce, false, payload.as_bytes())
         .await

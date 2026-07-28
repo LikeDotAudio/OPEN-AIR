@@ -280,13 +280,11 @@
                 "glow_intensity": 0
               }
             },
-            "Execute Command": {
-              "yak_handler": {
-                "enable": true,
-                "yak_type": "do",
-                "sub_path": "Distortion",
-                "command": "Reset_Device"
-              }
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Distortion",
+              "command": "Reset_Device"
             }
           },
           "Setup_Break": {

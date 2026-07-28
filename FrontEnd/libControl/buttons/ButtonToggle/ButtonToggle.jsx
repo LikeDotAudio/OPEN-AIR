@@ -14,6 +14,20 @@
 //
 // Description: Stateful toggle button component matching Python's ToggleButton.
 
+// How long the button shows itself pressed. Long enough to see, short enough
+// that a second press is never blocked by the first.
+const MOMENTARY_FLASH_MS = 180;
+
+// An ACTUATOR is a trigger, not a state: it fires once per press and has no
+// "on" to sit in. A latching toggle on `*RST` is wrong twice over — the button
+// stays lit as though reset were a mode, and the second press (turning it back
+// "off") sends the command AGAIN, because YAK fires on any value arriving at a
+// topic that has a handler cached. Opt out with `"momentary": false`.
+const isMomentary = (config) => {
+    if (config && typeof config.momentary === 'boolean') return config.momentary;
+    return String((config && config.type) || '').toLowerCase().includes('actuator');
+};
+
 // Inline comment: Logic for ButtonToggle
 const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
@@ -66,8 +80,17 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const isHovered = React.useRef(false);
     const [hoverState, setHoverState] = React.useState(false);
 
-    const s = val ? grpActive : grpInactive;
-    const currentText = val ? onText : offText;
+    const momentary = isMomentary(config);
+    const trigger = window.useMqttTrigger ? window.useMqttTrigger() : null;
+    const [flash, setFlash] = React.useState(false);
+    const flashTimer = React.useRef(null);
+    React.useEffect(() => () => { if (flashTimer.current) clearTimeout(flashTimer.current); }, []);
+
+    // A momentary button is lit by the press itself, not by the topic's value —
+    // it has no resting "on" to reflect.
+    const lit = momentary ? flash : val;
+    const s = lit ? grpActive : grpInactive;
+    const currentText = lit ? onText : offText;
     const currentBg = s.bg_color;
     const currentBorder = s.border_color;
     const currentTextColor = s.text_color;
@@ -78,6 +101,17 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const fontSizeCss = s.font_size ? `${s.font_size}px` : '12px';
 
     const handlePointerDown = () => {
+        if (momentary) {
+            // One publish, non-retained, and never a release edge: YAK executes
+            // on any value reaching a bound topic, so sending 0 on the way back
+            // up would fire the command a second time.
+            if (useMqtt) trigger(topic, 1);
+            else if (onChange) onChange(1);
+            setFlash(true);
+            if (flashTimer.current) clearTimeout(flashTimer.current);
+            flashTimer.current = setTimeout(() => setFlash(false), MOMENTARY_FLASH_MS);
+            return;
+        }
         const newVal = !val;
         if (useMqtt) {
             setVal(newVal);
@@ -108,14 +142,14 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
                     width: `${width}px`,
                     height: `${height}px`,
                     backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, currentBg) : currentBg),
-                    border: `${borderW}px solid ${isHovered.current ? (val ? grpActive.border_color : '#888') : currentBorder}`,
+                    border: `${borderW}px solid ${isHovered.current ? (lit ? grpActive.border_color : '#888') : currentBorder}`,
                     borderRadius: `${cornerRadius}px`,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     cursor: 'pointer',
                     userSelect: 'none',
-                    boxShadow: glow > 0 ? `inset 0 0 ${Math.min(40, glow * 3)}px ${currentBorder}` : (val ? 'none' : 'inset 0 0 5px rgba(0,0,0,0.5)'),
+                    boxShadow: glow > 0 ? `inset 0 0 ${Math.min(40, glow * 3)}px ${currentBorder}` : (lit ? 'none' : 'inset 0 0 5px rgba(0,0,0,0.5)'),
                     transition: 'all 0.1s'
                 }}
                 onPointerDown={handlePointerDown}

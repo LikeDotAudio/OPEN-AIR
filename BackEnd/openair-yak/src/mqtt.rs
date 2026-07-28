@@ -115,6 +115,22 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
 
                         // Execution Payload
                         if let Some(yak) = topic_configs.get(&p.topic) {
+                            // A RETAINED value is state, not a command.
+                            //
+                            // The GUI publishes control values retained by
+                            // default, so every one of them is replayed to this
+                            // agent on connect. Acting on that replay means a
+                            // reconnect re-fires whatever each panel was last
+                            // set to — including, now that instruments have a
+                            // Setup page, a `*RST` at every discovered
+                            // instrument simply because YAK restarted. The
+                            // orchestrator applies the same rule to its Rescan
+                            // and Clear triggers, and for the same reason.
+                            if p.retain {
+                                eprintln!("   ⏭️  [YAK] retained replay on {} — state, not a command; not firing '{}'",
+                                          p.topic, yak.command);
+                                continue;
+                            }
                             eprintln!("   📡 [YAK MQTT] ⮜ RX EXECUTE: {} -> {}", p.topic, payload);
                             
                             if !yak.enable {

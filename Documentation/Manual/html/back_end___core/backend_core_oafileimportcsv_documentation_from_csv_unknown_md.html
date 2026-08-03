@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation / from_csv_unknown - Back End & Core</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>🏷️ Worker Importer From Csv Unknown</h1>
+<p><img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python Version">
+<img src="https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen" alt="Documentation"></p>
+<h2>📖 Description &amp; Purpose</h2>
+<h3>File Level</h3>
+<p>formats/worker_importer_from_csv_unknown.py</p>
+<p>This module contains the logic for a &#39;best-effort&#39; conversion of CSV files
+with unknown headers into the standardized marker report format.</p>
+<p>Author: Anthony Peter Kuzub</p>
+<p>specific
+application can be negotiated. There is no charge to use, modify, or fork this
+software.</p>
+<p>Version 20250821.200641.1</p>
+<h2>⚙️ Assumptions &amp; Constraints</h2>
+<p><em>(Document any specific platform requirements, ABI expectations, or required execution privileges here)</em></p>
+<h2>📚 API Reference</h2>
+<h3>Global Functions</h3>
+<h4><code>Marker_convert_csv_unknow_report_to_csv(file_path)</code></h4>
+<p>Performs a &#39;best-effort&#39; conversion of a CSV file with unknown headers
+to the standardized marker report format.</p>
+<p>Args:
+    file_path (str): The path to the input CSV file.</p>
+<p>Returns:
+    tuple: A tuple containing the standardized headers and a list of
+           dictionaries with the matched data.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>file_path</code>: [TODO: Detail the precise meaning, valid ranges, and special cases]</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li>[TODO: Explicitly define what constitutes success and specific meanings of returned error codes.]</li>
+</ul>
+<p><strong>Side Effects &amp; Thread-Safety:</strong></p>
+<ul>
+<li>[TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]</li>
+</ul>
+<h2>📝 Focus on Intent (Inline Comments)</h2>
+<blockquote>
+<p><em>Reminder: Ensure inline comments focus on the &#39;why&#39;—non-obvious logic, workarounds, or hardware quirks rather than the mechanics of the code itself.</em></p>
+</blockquote>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/Core/oaFileImportCSV/Documentation/from_csv_unknown.md</code>
+  </div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WYSIWYG Editor - Front End & UI</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>editorWYSIWYG — HTML5 WYSIWYG GUI editor</h1>
+<p>An in-browser editor for the OPEN-AIR <code>Gui_Frames</code> JSON definitions, modelled on
+the Tkinter editor <code>oaGuiEditorWYSIWYG</code> from the previous generation (no longer
+in this repository; an archived copy lives in <code>.crawler/</code>). It runs
+inside the web frontend (<code>frontEnd/</code>) and reuses the live runtime renderer
+(<code>LoaderOrchestrator</code> + <code>WidgetFactory</code>) as its WYSIWYG preview.</p>
+<h2>Launching</h2>
+<p>Right-click any JSON-backed panel in the web UI → the editor opens full-screen
+for that panel&#39;s file. <code>Esc</code> closes, <code>Ctrl/Cmd+S</code> saves.</p>
+<p>Programmatic launch:</p>
+<pre><code class="language-js">window.launchWysiwygEditor({ filePath: &quot;/Window_1/.../bandwidth.json&quot;, content: {...} });
+</code></pre>
+<p><code>WindowManager</code> listens for the <code>oa-open-wysiwyg</code> window event and renders
+<code>&lt;window.WysiwygEditor&gt;</code> inside the app tree (so it shares the MqttProvider
+context and the live renderer).</p>
+<h2>Folder ↔ function map (mirrors the Python editor)</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Global</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Entry.jsx</code></td>
+<td><code>launchWysiwygEditor</code></td>
+<td>Launch surface (event dispatch).</td>
+</tr>
+<tr>
+<td><code>Core/state.jsx</code></td>
+<td><code>OaEdState</code>, <code>useEditorStore</code></td>
+<td>Central JSON state + pub/sub; path ops (get/set/delete/rename/reorder/move/insert).</td>
+</tr>
+<tr>
+<td><code>FileReaders/file_reader.jsx</code></td>
+<td><code>OaEdFileReader</code></td>
+<td>Load a definition (via <code>/api/tree</code>).</td>
+</tr>
+<tr>
+<td><code>FileReaders/grab_bag_loader.jsx</code></td>
+<td><code>OaEdGrabBagLoader</code></td>
+<td>Load + cache the palette (<code>/api/grabbag</code>).</td>
+</tr>
+<tr>
+<td><code>FileWriters/file_writer.jsx</code></td>
+<td><code>OaEdFileWriter</code></td>
+<td>Save (<code>POST /api/save</code>, server writes a <code>.old</code> backup) + download fallback.</td>
+</tr>
+<tr>
+<td><code>Interface/layout_engine/snap_logic.jsx</code></td>
+<td><code>OaEdSnap</code></td>
+<td>Grid snapping math.</td>
+</tr>
+<tr>
+<td><code>Interface/layout_engine/focus.jsx</code></td>
+<td><code>OaEdFocus</code></td>
+<td>Screen-coord → element path (<code>data-oca-path</code>).</td>
+</tr>
+<tr>
+<td><code>Interface/layout_engine/overlay_manager.jsx</code></td>
+<td><code>OaEdSelectionOverlay</code></td>
+<td>Selection outline over the preview.</td>
+</tr>
+<tr>
+<td><code>Interface/layout_engine/preview_engine.jsx</code></td>
+<td><code>OaEdPreview</code></td>
+<td>Live preview via <code>LoaderOrchestrator</code>.</td>
+</tr>
+<tr>
+<td><code>Interface/layout_engine/ruler.jsx</code></td>
+<td><code>OaEdRuler</code></td>
+<td>Pixel rulers.</td>
+</tr>
+<tr>
+<td><code>Methods/builder_editor_grid.jsx</code></td>
+<td><code>OaEdGrid</code></td>
+<td>100px grid backdrop.</td>
+</tr>
+<tr>
+<td><code>Interface/PropertyEditor/property_leaf.jsx</code></td>
+<td><code>OaEdPropertyLeaf</code></td>
+<td>One editable field (bool/number/color/text).</td>
+</tr>
+<tr>
+<td><code>Interface/renderers/tree_renderer.jsx</code></td>
+<td><code>OaEdPropertyTree</code></td>
+<td>Recursive property editor.</td>
+</tr>
+<tr>
+<td><code>Interface/Tabs/InteractiveLayout/interactive_layout.jsx</code></td>
+<td><code>OaEdCanvas</code></td>
+<td>WYSIWYG canvas: select + drop + rulers + grid.</td>
+</tr>
+<tr>
+<td><code>Interface/Tabs/ElementProperties/Entry.jsx</code></td>
+<td><code>OaEdProperties</code></td>
+<td>Inspector: rename/reorder/duplicate/delete + props.</td>
+</tr>
+<tr>
+<td><code>Interface/Tabs/JsonEditor/json_editor.jsx</code></td>
+<td><code>OaEdJsonEditor</code></td>
+<td>Raw JSON, two-way synced.</td>
+</tr>
+<tr>
+<td><code>Interface/Tabs/TreeRefactor/Entry.jsx</code></td>
+<td><code>OaEdTree</code></td>
+<td>Hierarchy: select/reorder/delete + drag-to-move.</td>
+</tr>
+<tr>
+<td><code>Interface/Tabs/GrabBagView/grab_bag_view.jsx</code></td>
+<td><code>OaEdGrabBag</code></td>
+<td>Categorized draggable palette.</td>
+</tr>
+<tr>
+<td><code>Interface/Window/editor_toolbar.jsx</code></td>
+<td><code>OaEdToolbar</code></td>
+<td>Save / Download / Close + dirty flag.</td>
+</tr>
+<tr>
+<td><code>Interface/Window/editor_layout.jsx</code></td>
+<td><code>OaEdLayout</code></td>
+<td>Left tabs (Structure/JSON/Library) + canvas + properties.</td>
+</tr>
+<tr>
+<td><code>Managers/wysiwyg_editor.jsx</code></td>
+<td><code>WysiwygEditor</code></td>
+<td>Overlay controller; wires Save + shortcuts.</td>
+</tr>
+</tbody></table>
+<h2>Data model</h2>
+<p>State is the whole file object <code>{ rootKey: OcaBin }</code>. Paths are dot-strings,
+e.g. <code>Spectrum_Instrument_bandwidth.blocks.Resolution Bandwidth.fields.RBW</code>
+(GUI keys never contain <code>.</code>). Selection on the canvas relies on the
+<code>data-oca-path</code> attribute emitted by <code>WidgetFactory</code>.</p>
+<h2>Where the library (palette) comes from</h2>
+<p><code>GET /api/grabbag</code> (<code>LauchWebserver.py → get_grab_bag()</code>) is the library source.
+It is now <strong>README-driven</strong>: each <code>frontEnd/libControl/&lt;category&gt;/&lt;Component&gt;/Readme.md</code>
+embeds one ```json sample block (see the &quot;Sample (WYSIWYG library source)&quot;
+section in any component README). The server scans those READMEs first — they are
+authoritative — and supplies each widget&#39;s palette entry, live preview, and
+property manipulators from that block. It then falls back to
+<code>oaGuiElements/*/sample.json</code> for any widget no README has provided (deduped by
+sample name). <code>_LEGEND</code> arrays from either source become the property-editor
+dropdowns. <code>Gui_Frames/Sample.json</code> is a generated catalog frame holding one
+instance of every component — open it to see the whole library at once.</p>
+<p>To add/change a widget in the editor: edit the JSON block in its component
+README (or add a new component folder with a README) — no editor code change.</p>
+<h2>Server requirement</h2>
+<p>The palette and save use endpoints in <code>frontEnd/Core/Launch/LauchWebserver.py</code>
+(<code>GET /api/grabbag</code>, <code>POST /api/save</code>). <strong>Restart the web server</strong> after editing a
+component README so the regenerated palette is live.</p>
+<h2>Not yet implemented (vs. the Python editor)</h2>
+<p>Resize/drag handles on the canvas, snap-on-move, undo/redo, and MQTT &quot;Test UI&quot;
+push. Selection, property editing, add (palette), reorder/move (tree), JSON
+round-trip, and save-with-backup are functional.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>FrontEnd/editorWYSIWYG/README.md</code>
+  </div>
+</body>
+</html>

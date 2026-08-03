@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: buttons / TrapezoidButtonToggler - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>TrapezoidButtonToggler (<code>window.TrapezoidButtonToggler</code>)</h1>
+<p>Web mirror of <code>oaGuiElements/Core/buttons/button_trapezoid_toggler</code> — type
+<strong><code>_TrapezoidButtonToggler</code></strong>.</p>
+<p>A radio/multi <strong>group</strong> of trapezoid buttons — reuses <code>OcaTrapezoidButton</code> per option
+and the same selection semantics as <code>ButtonToggler</code>:</p>
+<ul>
+<li><code>selection_mode</code>: <code>radio</code> (one at a time, default) | <code>multi</code></li>
+<li><code>Allow_Null</code>: a radio click on the active option clears it</li>
+<li><code>options</code>: array (<code>[&quot;Mic&quot;,&quot;Line&quot;,&quot;USB&quot;]</code>) or dict (<code>{ &quot;1&quot;: {label_active,color} }</code>)</li>
+<li>per-option <code>color</code>/<code>led_color</code>; group <code>slant</code>, <code>width</code>, <code>height</code>, <code>layout.max_cols</code></li>
+</ul>
+<p>Routed in <code>frameLayout/WidgetFactory.jsx</code> (toggler branch: trapezoid + toggler).</p>
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The web server (<code>LauchWebserver.py</code> → <code>get_grab_bag()</code>) extracts this block to build
+the palette entry, preview, and property manipulators.</p>
+<pre><code class="language-json">{
+  &quot;Trapezoid_Toggler_Example&quot;: {
+    &quot;type&quot;: &quot;_TrapezoidButtonToggler&quot;,
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;Input&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      }
+    },
+    &quot;options&quot;: [
+      &quot;Mic&quot;,
+      &quot;Line&quot;,
+      &quot;USB&quot;
+    ],
+    &quot;value&quot;: {
+      &quot;default_value&quot;: &quot;Mic&quot;
+    },
+    &quot;selection_mode&quot;: &quot;radio&quot;,
+    &quot;Allow_Null&quot;: false,
+    &quot;width&quot;: 80,
+    &quot;height&quot;: 50,
+    &quot;color&quot;: &quot;#6a9955&quot;,
+    &quot;led_color&quot;: &quot;#00FF00&quot;,
+    &quot;slant&quot;: 15,
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;ew&quot;,
+      &quot;padx&quot;: 5,
+      &quot;pady&quot;: 5,
+      &quot;max_cols&quot;: 3
+    },
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;Radio/multi group of trapezoid buttons (reuses OcaTrapezoidButton per option).&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;selection_modes&quot;: [
+      &quot;radio&quot;,
+      &quot;multi&quot;
+    ]
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/buttons/TrapezoidButtonToggler/Readme.md</code>
+  </div>
+</body>
+</html>

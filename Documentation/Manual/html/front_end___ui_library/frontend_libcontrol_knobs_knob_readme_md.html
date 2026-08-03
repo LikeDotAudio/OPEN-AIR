@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: Knobs / Knob - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Knob — rotary knob</h1>
+<p>Rotary control built with separated concerns: motion/angle logic, tick scale,
+and the 3D cap body.</p>
+<ul>
+<li><strong>Defines (globals):</strong> <code>Knob</code> (orchestrator), <code>KnobCap</code>, <code>KnobTicks</code>,
+<code>getKnobAngles</code>, <code>describeArc</code>, <code>polarToCartesian</code>, <code>shadeHex</code></li>
+<li><strong>Props:</strong> <code>value</code>, <code>onChange</code>, <code>config</code> (domain + cosmetics)</li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+<li><strong>Demo:</strong> open <code>../index.html</code>.</li>
+</ul>
+<h2>Interactions (all visualizations)</h2>
+<ul>
+<li><strong>Drag up/down</strong> → adjust value (clamped, or wrapped if <code>interaction.infinity</code>).</li>
+<li><strong>Mouse wheel</strong> → step by <code>domain.primary.step</code> (or 2% of range). Non-passive,
+so it doesn&#39;t steal scroll from a containing panel.</li>
+<li><strong>Alt-click</strong> → snap to <code>domain.primary.value_default</code>.</li>
+</ul>
+<h2>Visualizations (<code>cosmetics.visualization</code>)</h2>
+<p><code>circle</code> · <code>octagon</code> · <code>gear</code> (with <code>styling.teeth</code>) · <code>dial</code> (full 360° sweep) ·
+<code>panner</code> (centred sweep; outputs <code>[leftPct, rightPct]</code> as a 2-element array) ·
+<code>chicken</code> (round hub + tapered beak + short blunt bum tail) ·
+<code>marconi</code> (cylinder body + rectangular wing through the body, white indicator
+line on the pointer side only) ·
+<code>fender</code> (INVERTED rotation: face spins under a FIXED pointer; pointer side
+configured via <code>cosmetics.pointer.position</code>) ·
+<code>api</code> (4-lobed rounded-square shell with a bright LED-style centre disc and a
+corner pointer-notch that protrudes at the value angle; outer shell defaults to
+dark unless <code>styling.fill_color</code> overrides) ·
+<code>1176</code> (UA-1176 compressor knob: fluted body + polished metallic top cap, with
+<strong>optional flange skirt</strong> (white indicator line on it) and <strong>optional
+chicken-foot pointer tab</strong> — all variants config-driven via <code>cosmetics.flange.{show,color,size}</code>,
+<code>cosmetics.foot.{show,color,length}</code>, <code>cosmetics.styling.cap_color</code>) ·
+<code>pedal</code> (guitar-pedal style knob: round colored body + bold white indicator
+line + two small side ears at ±90° from the pointer; configurable via
+<code>cosmetics.line.{color,width}</code>, <code>cosmetics.ears.{show,size}</code>) ·
+<code>british</code> (classic UK / OmterElec fluted cylinder with three optional
+variants: <strong>knob</strong> (plain fluted body), <strong>knob with cap</strong> (<code>cosmetics.cap.show</code>
+— polished metal disc on top), <strong>knob with ring</strong> (<code>cosmetics.ring.show</code> —
+knurled chrome base ring), <strong>knob with window</strong> (<code>cosmetics.window.{show,pos,color}</code>
+— small FIXED tick marker on the ring). Number of flutes via <code>cosmetics.flutes</code>) ·
+<code>moog</code> (Minimoog/Voyager-style: polished metal cap with <strong>concentric ring
+grooves</strong> (lathe-turned finish — <code>cosmetics.cap.{show,color,rings}</code>) on a
+cylindrical body that is <strong>fluted</strong> by default (<code>cosmetics.flutes.{show,count}</code>)
+or smooth. Optional flange (<code>cosmetics.flange.{show,color,size}</code>), optional
+chicken-foot pointer tab (<code>cosmetics.foot.{show,color}</code>), indicator is a
+classic Moog DOT on the body edge by default or a LINE
+(<code>cosmetics.indicator.{style,color}</code>)).</p>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Entry.py</code> → <code>get_grab_bag()</code>) scans these READMEs, extracts this
+block, and serves it at <code>/api/grabbag</code>. <code>_README</code> documents the widget; every
+<code>_LEGEND</code> array becomes a dropdown of allowed values in the property editor.</p>
+<p>Every key below is actually read by <code>Knob.jsx</code>. Keys that only apply to a
+specific visualization are tagged in comments.</p>
+<pre><code class="language-json">{
+  &quot;Exhaustive_Knob_Example&quot;: {
+    &quot;type&quot;: &quot;_SmartKnob&quot;,
+    &quot;label&quot;: {
+      &quot;En&quot;: &quot;Master Tuning&quot;,
+      &quot;show_label&quot;: true
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 160,
+      &quot;height&quot;: 160
+    },
+    &quot;domain&quot;: {
+      &quot;primary&quot;: {
+        &quot;min&quot;: 0,
+        &quot;max&quot;: 100,
+        &quot;value_default&quot;: 50,
+        &quot;step&quot;: 1
+      }
+    },
+    &quot;cosmetics&quot;: {
+      &quot;visualization&quot;: &quot;circle&quot;,
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#33A1FD&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;active&quot;: &quot;#33A1FD&quot;,
+        &quot;tick&quot;: &quot;#aaaaaa&quot;,
+        &quot;text&quot;: &quot;#caa44a&quot;
+      },
+      &quot;pointer&quot;: {
+        &quot;style&quot;: &quot;line&quot;,
+        &quot;length&quot;: null,
+        &quot;offset&quot;: 0,
+        &quot;position&quot;: &quot;top&quot;
+      },
+      &quot;scale&quot;: {
+        &quot;show&quot;: true,
+        &quot;style&quot;: &quot;simple&quot;,
+        &quot;length&quot;: 10,
+        &quot;count&quot;: 10,
+        &quot;thickness&quot;: 1,
+        &quot;sweep&quot;: 300,
+        &quot;text_size&quot;: null
+      },
+      &quot;styling&quot;: {
+        &quot;fill_color&quot;: &quot;#333333&quot;,
+        &quot;outline_color&quot;: &quot;#444444&quot;,
+        &quot;outline_thickness&quot;: 0,
+        &quot;arc_width&quot;: 5,
+        &quot;cap_scale&quot;: 0.7,
+        &quot;no_center&quot;: false,
+        &quot;teeth&quot;: 8
+      },
+      &quot;style_overrides&quot;: {
+        &quot;shape&quot;: &quot;circle&quot;
+      }
+    },
+    &quot;interaction&quot;: {
+      &quot;infinity&quot;: false
+    },
+    &quot;layout&quot;: {
+      &quot;weight&quot;: 1,
+      &quot;padx&quot;: 5,
+      &quot;pady&quot;: 5
+    }
+  },
+  &quot;_README&quot;: &quot;Every key here is actually read by Knob.jsx. cosmetics.visualization picks the cap renderer (circle/octagon/gear/dial/panner/chicken/marconi/fender). chicken+marconi use a beak/wing cap (the beak/wing IS the indicator). fender is the inverted Strat: the FACE rotates (numbers + ribbed skirt) under a FIXED pointer whose side is set by pointer.position. scale.count/sweep/text_size only apply to fender. pointer.position only applies to fender. interaction.infinity true = endless dial (wheel/drag wrap modulo (max-min)). Alt-click any knob snaps to value_default. Panner outputs are an array [leftPct, rightPct]; mid position = [50, 50]. style_overrides.shape can force a cap shape (circle|octagon|gear) independent of visualization. styling.teeth only applies when the cap is rendered as a gear.&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;visualization_types&quot;: [
+      &quot;circle&quot;,
+      &quot;octagon&quot;,
+      &quot;gear&quot;,
+      &quot;dial&quot;,
+      &quot;panner&quot;,
+      &quot;chicken&quot;,
+      &quot;marconi&quot;,
+      &quot;fender&quot;,
+      &quot;api&quot;,
+      &quot;1176&quot;,
+      &quot;pedal&quot;,
+      &quot;british&quot;,
+      &quot;moog&quot;
+    ],
+    &quot;pointer_styles&quot;: [
+      &quot;line&quot;,
+      &quot;triangle&quot;,
+      &quot;dot&quot;,
+      &quot;notch&quot;,
+      &quot;thin&quot;,
+      &quot;block&quot;,
+      &quot;tapered&quot;,
+      &quot;vintage&quot;
+    ],
+    &quot;pointer_positions&quot;: [
+      &quot;top&quot;,
+      &quot;bottom&quot;,
+      &quot;left&quot;,
+      &quot;right&quot;
+    ],
+    &quot;tick_styles&quot;: [
+      &quot;simple&quot;,
+      &quot;dots&quot;,
+      &quot;numeric&quot;
+    ],
+    &quot;shapes&quot;: [
+      &quot;circle&quot;,
+      &quot;octagon&quot;,
+      &quot;gear&quot;
+    ]
+  },
+  &quot;Crafty_Spoked&quot;: {
+    &quot;type&quot;: &quot;_SmartKnob&quot;,
+    &quot;label&quot;: {
+      &quot;En&quot;: &quot;Delay&quot;,
+      &quot;show_label&quot;: true
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 80,
+      &quot;height&quot;: 80
+    },
+    &quot;cosmetics&quot;: {
+      &quot;visualization&quot;: &quot;crafty&quot;,
+      &quot;variant&quot;: &quot;spoked&quot;,
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#ffffff&quot;,
+        &quot;secondary&quot;: &quot;#5a3d7c&quot;
+      }
+    }
+  },
+  &quot;Crafty_Metallic&quot;: {
+    &quot;type&quot;: &quot;_SmartKnob&quot;,
+    &quot;label&quot;: {
+      &quot;En&quot;: &quot;Phase&quot;,
+      &quot;show_label&quot;: true
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 80,
+      &quot;height&quot;: 80
+    },
+    &quot;cosmetics&quot;: {
+      &quot;visualization&quot;: &quot;crafty&quot;,
+      &quot;variant&quot;: &quot;metallic&quot;,
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#222222&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;
+      }
+    }
+  },
+  &quot;Crafty_LED_Ring&quot;: {
+    &quot;type&quot;: &quot;_SmartKnob&quot;,
+    &quot;label&quot;: {
+      &quot;En&quot;: &quot;Mic&quot;,
+      &quot;show_label&quot;: true
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 80,
+      &quot;height&quot;: 80
+    },
+    &quot;cosmetics&quot;: {
+      &quot;visualization&quot;: &quot;crafty&quot;,
+      &quot;variant&quot;: &quot;led_ring&quot;,
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#88e077&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;
+      }
+    }
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/Knobs/Knob/Readme.md</code>
+  </div>
+</body>
+</html>

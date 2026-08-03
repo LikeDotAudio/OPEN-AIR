@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Protocols (README) - Test Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Protocol testers</h1>
+<p>One standalone <strong>real-protocol</strong> tester per protocol — each tests the protocol on
+the wire (not the MQTT bus). Runnable directly:</p>
+<pre><code>python3 Validations/Protocols/&lt;proto&gt;/&lt;proto&gt;_tester.py [action] [options]
+</code></pre>
+<p>Each reads its connection params from <code>BackEnd/ComProtocols/openair-&lt;proto&gt;/config.ini</code>
+(overridable with flags). Shared helpers (config reader, TCP probe, hexdump) live
+in <code>_proto_util.py</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>File</th>
+<th>What it does</th>
+<th>Library</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>osc</td>
+<td><code>osc/osc_tester.py</code></td>
+<td>UDP OSC: <code>listen</code> / <code>send</code></td>
+<td>python-osc</td>
+</tr>
+<tr>
+<td>osc</td>
+<td><code>osc/osc_monitor.py</code></td>
+<td>GUI OSC tree monitor (live)</td>
+<td>python-osc + tkinter</td>
+</tr>
+<tr>
+<td>midi</td>
+<td><code>midi/midi_tester.py</code></td>
+<td><code>ports</code> / <code>listen</code> / <code>send</code></td>
+<td>mido</td>
+</tr>
+<tr>
+<td>snmp</td>
+<td><code>snmp/snmp_tester.py</code></td>
+<td><code>snmpwalk</code> against the agent</td>
+<td>net-snmp CLI</td>
+</tr>
+<tr>
+<td>ptp</td>
+<td><code>ptp/ptp_tester.py</code></td>
+<td>sniff UDP 319/320 (needs <strong>sudo</strong>)</td>
+<td>scapy</td>
+</tr>
+<tr>
+<td>rest</td>
+<td><code>rest/rest_tester.py</code></td>
+<td>HTTP request to the endpoint</td>
+<td>requests</td>
+</tr>
+<tr>
+<td>nmos</td>
+<td><code>nmos/nmos_tester.py</code></td>
+<td>query the IS-04 registry API</td>
+<td>requests</td>
+</tr>
+<tr>
+<td>dnssd</td>
+<td><code>dnssd/dnssd_tester.py</code></td>
+<td>browse for the service type</td>
+<td>zeroconf</td>
+</tr>
+<tr>
+<td>mdns</td>
+<td><code>mdns/mdns_tester.py</code></td>
+<td>browse for the service type</td>
+<td>zeroconf</td>
+</tr>
+<tr>
+<td>sap</td>
+<td><code>sap/sap_tester.py</code></td>
+<td>join SAP multicast, print SDP</td>
+<td>stdlib socket</td>
+</tr>
+<tr>
+<td>websocket</td>
+<td><code>websocket/websocket_tester.py</code></td>
+<td>connect, send, print frames</td>
+<td>websocket-client</td>
+</tr>
+<tr>
+<td>visa</td>
+<td><code>visa/visa_tester.py</code></td>
+<td><code>list</code> resources / <code>idn</code> query</td>
+<td>pyvisa</td>
+</tr>
+<tr>
+<td>mqtt</td>
+<td><code>mqtt/mqtt_tester.py</code></td>
+<td>subscribe to the broker (bus monitor)</td>
+<td>paho-mqtt</td>
+</tr>
+<tr>
+<td>aes70</td>
+<td><code>aes70/aes70_tester.py</code></td>
+<td>TCP connect + sniff (OCP.1)</td>
+<td>stdlib socket</td>
+</tr>
+<tr>
+<td>ember</td>
+<td><code>ember/ember_tester.py</code></td>
+<td>TCP connect + sniff (S101)</td>
+<td>stdlib socket</td>
+</tr>
+<tr>
+<td>smpte2138</td>
+<td><code>smpte2138/smpte2138_tester.py</code></td>
+<td>TCP connect + sniff (protobuf)</td>
+<td>stdlib socket</td>
+</tr>
+<tr>
+<td>yak</td>
+<td><code>yak/yak_tester.py</code></td>
+<td>SCPI <code>*IDN?</code> over TCP</td>
+<td>stdlib socket</td>
+</tr>
+</tbody></table>
+<p>Run any with <code>-h</code> for its options. Most accept <code>--timeout</code>; network ones accept
+<code>--host</code>/<code>--port</code> (defaulted from the config.ini). Each exits 0 on success,
+2 when it connected/ran but saw no data, 1 on a hard failure.</p>
+<p>aes70/ember/smpte2138/yak are binary/instrument protocols — the tester verifies
+connectivity and hexdumps the wire traffic (full decode is out of scope).</p>
+<h2>Requirements</h2>
+<p><code>pip install python-osc mido python-rtmidi scapy zeroconf pyvisa pyvisa-py requests websocket-client paho-mqtt</code>, plus <code>net-snmp</code> (<code>snmpwalk</code>). All were
+present in the dev environment when these were written.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>TESTS/Protocols/README.md</code>
+  </div>
+</body>
+</html>

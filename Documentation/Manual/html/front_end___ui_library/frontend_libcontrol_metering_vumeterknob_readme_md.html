@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: metering / VUMeterKnob - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>VUMeterKnob — needle meter + knob</h1>
+<p>Composite: a <code>NeedleMeter</code> with a <code>Knob</code> mounted at its pivot (read level, set a
+value at the same spot).</p>
+<ul>
+<li><strong>Defines (global):</strong> <code>VUMeterKnob</code></li>
+<li><strong>Props:</strong> <code>value</code>, <code>onChange</code>, <code>config</code>, <code>topic</code>, <code>path_prefix</code></li>
+<li><strong>Depends on:</strong> the <code>NeedleMeter</code> and <code>Knob</code> globals being loaded first.</li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;meter_knob_with_vu_meter_Example&quot;: {
+    &quot;widget_type&quot;: &quot;_VUMeterKnob&quot;,
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;Master L&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      }
+    },
+    &quot;path&quot;: &quot;audio/master/left/vu&quot;,
+    &quot;knob_path&quot;: &quot;audio/master/left/gain&quot;,
+    &quot;size&quot;: 200,
+    &quot;domain&quot;: {
+      &quot;locked&quot;: false,
+      &quot;min&quot;: -60,
+      &quot;max&quot;: 6
+    },
+    &quot;knob_min&quot;: 0,
+    &quot;knob_max&quot;: 100,
+    &quot;knob_width&quot;: 100,
+    &quot;knob_height&quot;: 100,
+    &quot;knob_shape&quot;: &quot;circle&quot;,
+    &quot;knob_pointer_style&quot;: &quot;line&quot;,
+    &quot;knob_outline_thickness&quot;: 5,
+    &quot;type&quot;: &quot;_Meter_Knob_With_Vu_Meter&quot;,
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;ew&quot;,
+      &quot;padx&quot;: 5,
+      &quot;pady&quot;: 5,
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 50
+    },
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This is an enhanced sample configuration demonstrating full instantiation capabilities.&quot;
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/metering/VUMeterKnob/Readme.md</code>
+  </div>
+</body>
+</html>

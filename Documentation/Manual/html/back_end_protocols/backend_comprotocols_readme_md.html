@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ComProtocols (README) - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Protocol agents</h1>
+<p>One Rust crate per protocol. The orchestrator (<code>BackEnd/Core</code>) spawns them;
+they announce themselves on the bus, publish what they discover, and say
+honestly whether they are real.</p>
+<p><strong>Everything an agent knows reaches the rest of the system as MQTT.</strong> There is
+no side channel, no shared memory, no direct call — which is why
+<code>mosquitto_sub -t &#39;OpenAir/#&#39; -v</code> is a complete debugger.</p>
+<blockquote>
+<p><code>openair-yak</code> used to be listed here. It is not a wire protocol — it is the
+definition plane that translates GUI intent into vendor SCPI — so it now lives
+as its own back end at <a href="../openair-yak/"><code>BackEnd/openair-yak/</code></a>, with its own
+Cargo workspace and its own CI invocation.</p>
+</blockquote>
+<hr>
+<h2>The fleet</h2>
+<table>
+<thead>
+<tr>
+<th>Crate</th>
+<th>Status</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>openair-visa</code></td>
+<td><strong>live</strong></td>
+<td>Scans the subnet/gateways for VISA/SCPI instruments, probes <code>*IDN?</code>, categorizes against the knowledge base, publishes retained device topics, and serves live SCPI writes/queries. Re-runs on demand (see <a href="#rescan">Rescan</a>)</td>
+</tr>
+<tr>
+<td><code>openair-midi</code></td>
+<td><strong>live</strong></td>
+<td>Enumerates MIDI in/out ports, publishes device topics, routes note/CC/program/pitch-bend both directions</td>
+</tr>
+<tr>
+<td><code>openair-dnssd</code></td>
+<td><strong>live</strong></td>
+<td>Browses DNS-SD/mDNS continuously: enumerates every advertised service type, publishes each resolved instance, clears retained topics when a service vanishes</td>
+</tr>
+<tr>
+<td><code>openair-ravenna</code></td>
+<td><strong>live</strong></td>
+<td>Discovers RAVENNA/AES67 streams: browses <code>_ravenna._tcp</code>/<code>_rtsp._tcp</code>, fetches each session&#39;s SDP over RTSP DESCRIBE, and files a stream only once its own SDP says it carries audio</td>
+</tr>
+<tr>
+<td><code>openair-sap</code></td>
+<td><strong>live</strong></td>
+<td>The other half of AES67 discovery: passively listens on the well-known SAP multicast groups (UDP 9875) for the raw SDP that Dante-in-AES67-mode pushes, publishes each audio session, and clears it on a SAP deletion or announcement timeout. Listen only — never announces</td>
+</tr>
+<tr>
+<td><code>openair-avb-milan</code></td>
+<td><strong>live</strong></td>
+<td>AVB/Milan discovery via AVDECC (IEEE 1722.1) — the only Layer 2 agent: captures raw Ethernet ADP announcements on <code>91:E0:F0:01:00:00</code>, decodes entity capabilities and gPTP grandmaster, expires entities on their own <code>valid_time</code>. Needs <code>CAP_NET_RAW</code>. Ships <code>avdecc-probe</code> (find entities) and <code>avdecc-identify</code> (blink a device&#39;s LED, like Hive&#39;s Identify button)</td>
+</tr>
+<tr>
+<td><code>openair-osc</code></td>
+<td><strong>live</strong></td>
+<td>OSC agent (UDP)</td>
+</tr>
+<tr>
+<td><code>openair-aes70</code></td>
+<td><strong>live</strong></td>
+<td>AES70/OCA parser (<code>nom</code>)</td>
+</tr>
+<tr>
+<td><code>openair-ptp</code></td>
+<td><strong>live</strong></td>
+<td>Watches PTPv1, PTPv2 and gPTP simultaneously on one NIC (UDP 319/320 + raw Ethernet 0x88F7), correlates Sync↔Follow_Up and the delay exchanges, and publishes one row per PTP port. Needs <code>CAP_NET_RAW</code> + <code>CAP_NET_BIND_SERVICE</code>. Ships <code>ptp-monitor</code> for the live packet view. Never transmits — an Announce could win a BMCA election</td>
+</tr>
+<tr>
+<td><code>openair-snmp</code></td>
+<td><strong>live</strong></td>
+<td>SNMP polling</td>
+</tr>
+<tr>
+<td><code>openair-ember</code></td>
+<td><strong>live</strong></td>
+<td>Ember+</td>
+</tr>
+<tr>
+<td><code>openair-smpte2138</code></td>
+<td><strong>live</strong></td>
+<td>SMPTE 2138 (protobuf)</td>
+</tr>
+<tr>
+<td><code>openair-maclookup</code></td>
+<td><strong>library</strong></td>
+<td>Not an agent — publishes nothing. Names the manufacturer behind a hardware address from its OUI (the first 24 bits), against macvendors.com. Caches by OUI, remembers 404s, persists across restarts and answers without blocking, because its callers ask from packet-capture threads. Fills the <code>mac</code> and <code>vendor</code> columns across every discovery tab that has anything to read — PTP, AVB, DNS-SD, Cast, printers, Dante, AppleTV, NMOS. For the mDNS ones neither is advertised: both are recovered from the host&#39;s SLAAC IPv6 address, which carries its MAC in the low 64 bits. Ships <code>mac-lookup</code> for the shell</td>
+</tr>
+<tr>
+<td><code>openair-mqtt</code></td>
+<td>config</td>
+<td>Broker connection settings consumed by the orchestrator</td>
+</tr>
+<tr>
+<td><code>openair-mdns</code></td>
+<td><strong>stub</strong></td>
+<td>25-line placeholder — publishes <code>status = stub</code></td>
+</tr>
+<tr>
+<td><code>openair-nmos</code></td>
+<td><strong>stub</strong></td>
+<td>″</td>
+</tr>
+<tr>
+<td><code>openair-rest</code></td>
+<td><strong>stub</strong></td>
+<td>″</td>
+</tr>
+<tr>
+<td><code>openair-websocket</code></td>
+<td><strong>stub</strong></td>
+<td>″</td>
+</tr>
+</tbody></table>
+<p><strong>Stubs tell the truth.</strong> The orchestrator publishes <code>status = stub</code> for
+placeholder crates rather than <code>online</code> (<code>Core/orchestrator/src/mqtt.rs</code>).
+When a stub becomes real, delete it from <code>STUB_PROTOCOLS</code> in the same change
+that implements it — as <code>dnssd</code> did.</p>
+<hr>
+<h2>Liveness: heartbeats and the Last Will</h2>
+<p>Every agent publishes a retained
+<a href="../../contracts/src/heartbeat.ts"><code>AgentHeartbeat</code></a> and registers an MQTT
+<strong>Last Will</strong>:</p>
+<pre><code>OpenAir/System/Agents/{agent}
+  {&quot;schemaVersion&quot;:1,&quot;agent&quot;:&quot;yak&quot;,&quot;status&quot;:&quot;online&quot;,&quot;version&quot;:&quot;0.1.0&quot;,
+   &quot;startedAt&quot;:&quot;…&quot;,&quot;lastBeat&quot;:&quot;…&quot;,&quot;pid&quot;:1234}
+</code></pre>
+<p><code>status</code> is a closed enum: <code>starting | online | degraded | stub | stopping | offline</code>. Because the will is registered at connect time, a <em>crashed</em> agent
+flips to <code>offline</code> on the broker within keepalive — no supervisor required,
+no ghost that claims health forever. Browser sessions are agents too, as
+<code>web-{guid}</code>.</p>
+<pre><code class="language-rust">let (topic, lwt) = openair_contracts::heartbeat::heartbeat_lwt(&quot;yak&quot;, &amp;iso_now, None)?;
+mqttoptions.set_last_will(rumqttc::LastWill::new(&amp;topic, serde_json::to_vec(&amp;lwt)?, QoS::AtLeastOnce, true));
+</code></pre>
+<p>Watch it: <code>mosquitto_sub -t &#39;OpenAir/System/Agents/#&#39; -v</code></p>
+<hr>
+<h2>Discovery</h2>
+<p>Discovery is <strong>live data on the bus</strong>, not a filesystem generation step. Agents
+publish retained topics per device; the Discovered tab renders whatever is
+retained.</p>
+<pre><code>OpenAir/System/Protocols/visa/Device/{type}/{model}/Dev{n}/{key}
+OpenAir/System/Protocols/midi/Device/{Input|Output}/Dev{n}/{key}
+OpenAir/System/Protocols/dnssd/Device/{service_type}/{instance}/{key}
+</code></pre>
+<blockquote>
+<p><strong>Transitional shape.</strong> This is the v40 field-per-topic layout. The contract
+target is one <code>DeviceRecord</code> document per device at
+<code>OpenAir/Discovery/{protocol}/{deviceId}</code>, published by a Device Registry
+service that ages records out by <code>lastSeen</code>. The mapping between the two is
+already written and vector-proven
+(<a href="../../contracts/src/device-record.ts"><code>contracts/src/device-record.ts</code></a>);
+the registry is the next step.</p>
+</blockquote>
+<h3>The VISA knowledge base</h3>
+<p><code>BackEnd/openair-yak/Yak/knownDevices.json</code> maps model →
+<code>{manufacturer, type, notes}</code>, and is what turns a bare <code>*IDN?</code> string into a
+category (DMM, Oscilloscope, Generator, Spectrum…). It used to be duplicated at
+<code>openair-visa/assets/visa_devices.json</code>; the two were byte-identical, so that
+copy is gone and this is the only one. It is <strong>compiled into the binary</strong> as a fallback and
+resolved from disk by walking up from the working directory, so it is found
+no matter where the process starts. To teach the system a new instrument, add
+its model key — no recompile needed when running from the repo.</p>
+<h3>Rescan</h3>
+<p>The Discovered tab&#39;s <strong>RESCAN DEVICES</strong> button publishes to:</p>
+<pre><code>OpenAir/System/Protocols/visa/Device/Rescan      payload {&quot;value&quot;:1}   NOT retained
+</code></pre>
+<p>The VISA agent then clears the previous scan&#39;s retained topics, re-probes,
+republishes, and regenerates the Discovered panels. Trigger semantics are
+deliberate:</p>
+<ul>
+<li><strong>retained payloads never trigger</strong> — otherwise every page load and broker
+replay would start a scan storm;</li>
+<li><strong>zero/false payloads never trigger</strong> — a button release is not a command;</li>
+<li>repeat triggers arriving <em>during</em> a scan are coalesced.</li>
+</ul>
+<hr>
+<h2>Adding a protocol</h2>
+<ol>
+<li><code>cargo new --lib openair-&lt;name&gt;</code> under this directory, add it to the
+workspace members.</li>
+<li>Give it a <code>config.ini</code> with a <code>topic</code> key that <strong>parses against the topic
+grammar</strong> — <code>pnpm validate</code> lints every one of these.</li>
+<li>Publish a retained <code>AgentHeartbeat</code> and register the Last Will at connect
+(<code>heartbeat_lwt</code>). Use <code>openair-contracts</code> types; never hand-roll a payload
+shape that already exists.</li>
+<li>Build topics with the contracts builders, not <code>format!(&quot;OpenAir/…&quot;)</code>.</li>
+<li>Publish discovery as retained per-device state; publish events
+non-retained.</li>
+<li>Remove the crate from <code>STUB_PROTOCOLS</code> in <code>Core/orchestrator/src/mqtt.rs</code>
+once it genuinely works.</li>
+</ol>
+<h2>Conventions worth keeping</h2>
+<ul>
+<li><strong>Retain class follows the topic family</strong>, not the call site: device state,
+configs, and heartbeats are retained; control values, monitor traffic, and
+events are not.</li>
+<li><strong>Empty retained payload = delete.</strong> That is how vanished devices and
+services clear themselves (dnssd <code>ServiceRemoved</code>, VISA pre-scan cleanup).</li>
+<li><strong>rumqttc&#39;s sync <code>Connection::iter()</code> blocks</strong> — drive it on a dedicated
+thread, and drive it until the queue drains. A bounded drain that stops
+early silently discards publishes (this bug once ate 14 of 16 retained
+protocol statuses).</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/README.md</code>
+  </div>
+</body>
+</html>

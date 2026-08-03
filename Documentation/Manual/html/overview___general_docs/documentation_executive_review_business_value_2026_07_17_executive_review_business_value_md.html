@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Executive_Review_Business_Value / 2026-07-17_Executive_Review_Business_Value - Overview & General Docs</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>OPEN-AIR — Executive Review Committee: Business Value Audit</h1>
+<p><strong>Date:</strong> 2026-07-17
+<strong>Subject:</strong> Repository audit of <code>OPEN-AIR</code> (branch <code>main</code>, 339 commits, first commit 2026-03-14)
+<strong>Context:</strong> Project is approximately <strong>10 years behind schedule</strong>. This is the first document ever placed in <code>Documents/Audits</code> — the folder was empty until today.</p>
+<p><strong>Grounding facts used by the committee</strong> (verified against the tree, not the marketing):</p>
+<ul>
+<li>Actual architecture: a 103-line Python launcher (<code>openair.py</code>) that builds and <code>exec</code>s a <strong>Rust orchestrator</strong> (port 8000) plus a Rust <code>openair-yak</code> agent, speaking <strong>MQTT</strong>, with a <strong>CDN-React/Babel in-browser JSX</strong> frontend (no npm build step) deployed over FTPS.</li>
+<li>Scale: ~10,954 lines of Rust (168 files, ~45 <code>oa_*_rs</code> crates + 16 protocol crates), ~21,503 lines of JSX (142 files), 549 JSON GUI-frame definitions, and only 3,389 lines of Python. Python is glue, not the product.</li>
+<li>All <strong>12 documentation links in <code>README.md</code> are dead</strong> (<code>oaGui/</code>, <code>oaTranslator/</code>, <code>oaDocumentation/</code>, <code>oaComBroker/</code>, <code>../SchemWeb/</code>, the Patent, all of them). The README Quick Start references a <code>requirements.txt</code> that <strong>does not exist</strong>.</li>
+<li>The <code>openair-smpte2138</code> crate ships real <code>.proto</code> schemas and a 78-line codec — but its <code>src/lib.rs</code> is still the <code>cargo new</code> template: <code>pub fn add(left, right)</code> with a test asserting <code>2+2==4</code>.</li>
+<li>Recent git history (July 9–17) is a pivot into an <strong>audio drum-sampler / sample renamer</strong> (<code>pad browser</code>, <code>drum buffers</code>, <code>pads with notes now</code>, default startup path <code>/home/anthony/Documents/Music Samples</code>). <code>CHANGELOG.md</code> stops on 2026-07-06 and never mentions it.</li>
+<li><code>.crawler/OPEN-AIR/</code> contains a <strong>vendored 15 MB, 365-file Tkinter-era copy of the entire previous generation of this same project</strong> (<code>current_version = 20251225</code>), plus six zipped snapshots.</li>
+<li>Red flags: a plaintext FTP password in <code>FrontEnd/.env</code> (untracked, but sitting in the working tree); hardcoded <code>/home/anthony/...</code> paths inside shipping Rust source (<code>openair-visa/src/oa_visa_scanner/mod.rs:36</code>, <code>openair-yak/src/main.rs:32</code> — one of them pointing at a path that isn&#39;t even this repo); six dead Rust modules disabled by <code>XXX</code> filename prefixes; startup code that comments itself as <em>&quot;Bullying port 8000&quot;</em> while running <code>kill -9 $(lsof -t -i:8000)</code>.</li>
+<li>Quality infrastructure: <strong>4 Python test files total</strong> (all in one CSV-import module), Rust tests mostly default stubs, <strong>CI is deploy-only</strong> (FTPS upload; no build, no test, no lint). 9.9 GB of local, gitignored Cargo <code>target/</code> artifacts.</li>
+</ul>
+<hr>
+<h2>Phase 1: The Eager Pitch — <em>Jr. Business Analyst</em></h2>
+<p>I want everyone in this room to understand what we&#39;re sitting on. Laboratory and broadcast instrument software is <em>exactly</em> what the README says it is: rigid, vendor-locked, and visually stuck in 2009. Every test bench, every broadcast truck, every RF coordination cart at a stadium show runs a pile of single-vendor apps that don&#39;t talk to each other. OPEN-AIR&#39;s pitch — one photorealistic web cockpit orchestrating a <em>fleet</em> of instruments from any vendor through the YAK command abstraction — is the pitch every audio-over-IP and test-and-measurement integrator has been begging for. And this isn&#39;t vaporware: there are <strong>sixteen real protocol crates</strong> in <code>BackEnd/ComProtocols/</code> — VISA, SCPI-over-YAK, AES70/OCA, Ember+, NMOS, PTP, SNMP, OSC, MIDI, mDNS, SAP, SMPTE ST 2138. Nobody ships that breadth. Companies pay six figures per seat for fragments of this.</p>
+<p>And look at the delivery model! The frontend is a PWA that deploys to the web — a technician pulls it up on a phone at front-of-house, taps the logo, and gets a live MQTT-driven command router with syntax-highlighted SCPI traffic. The <code>Gui_Frames/</code> system means the interface is 549 JSON files — customers can re-skin their entire cockpit without touching code. &quot;Your folders are your interface&quot; is a genuinely differentiated UX story. The 2026-07-06 changelog entry shows model-aware SCPI template routing driven by live VISA discovery — that&#39;s the hard part, and it&#39;s <em>working</em>.</p>
+<p>The market timing is perfect: ST 2110/2138 adoption is forcing every broadcast facility to modernize control, and the test-equipment world still has no open, cross-vendor answer. First mover with an MIT license builds the community moat, then we monetize support, fleet features, and certified device profiles. We need to fund this <em>now</em> — every quarter we wait, someone at a vendor reads the same tea leaves.</p>
+<h2>Phase 2: The Geek-Out — <em>Excited Nerd Engineer</em></h2>
+<p>Okay but can we talk about the <em>architecture</em> for a second, because it&#39;s honestly beautiful? The Python &quot;launcher&quot; is 103 lines and then it <strong><code>os.execv</code>s straight into a Rust orchestrator</strong> — no interpreter lingering, no GIL, the process <em>becomes</em> Rust. And it&#39;s not one crate, it&#39;s a whole workspace of ~45 micro-crates — <code>oa_layout_engine_rs</code>, <code>oa_metering_engine_rs</code>, <code>oa_needle_engine_rs</code> — each engine isolated, all glued to Python via <strong>maturin/pyo3</strong> where needed and to the browser via a compiled <strong>WASM bundle</strong> in <code>libControl/Panels/wasm/pkg/</code>. Rust on the backend, Rust in the browser, MQTT as the nervous system in between. That&#39;s the exact topology every &quot;modern control-plane&quot; conference talk describes and nobody actually builds.</p>
+<p>And the frontend runs <strong>JSX with in-browser Babel and no build step at all</strong> — 142 components, zero webpack, zero node_modules, deployed as flat files over FTP like it&#39;s gloriously 1999, except it&#39;s a service-workered PWA with a splash screen that secretly mounts the <code>LoaderOrchestrator</code> in the background while the boot GIF plays. The GUI isn&#39;t even code — it&#39;s 549 declarative JSON frames rendered by a widget registry. If we finish this, you could describe <em>any</em> instrument&#39;s face as JSON and have it live on a phone in seconds. The <code>openair-smpte2138</code> crate already has the full protobuf schema set — <code>device.proto</code>, <code>param.proto</code>, <code>constraint.proto</code>. The bones here are genuinely ahead of the industry.</p>
+<h2>Phase 3: The Path of Least Resistance — <em>Lazy/Fickle Engineer</em></h2>
+<p>I came in ready to love this, because a tool that auto-discovers instruments and auto-builds SCPI templates from <code>*IDN?</code> responses would mean I never write another driver shim again. The YAK model-aware routing in the July 6 changelog is legitimately the &quot;does my job for me&quot; feature.</p>
+<p>Then I tried to imagine actually <em>running</em> it, and I&#39;m out. The README says <code>pip install -r requirements.txt</code> — <strong>there is no <code>requirements.txt</code></strong>. Every single documentation link is dead, so &quot;just read the docs&quot; means reading 11,000 lines of Rust. Starting the app requires a full Rust toolchain, <code>cargo build</code> of three packages, and it only runs on Linux because it force-frees its port with <code>fuser -k -9</code> and <code>pkill</code>. The VISA scanner won&#39;t even find its own config unless my home directory is literally <code>/home/anthony</code> — the path is hardcoded in <code>oa_visa_scanner/mod.rs:36</code>, and it&#39;s hardcoded <em>wrong</em> (points at <code>Documents/OPEN-AIR</code>, which isn&#39;t even where this repo lives). So the tool that was supposed to save me work cannot be started by anyone except its author, on one specific machine, after a Rust compile. Garbage. Wake me when <code>git clone &amp;&amp; run</code> works.</p>
+<h2>Phase 4: The Wall of Resistance — <em>Resistant Engineer</em></h2>
+<p>Why are we even discussing this? We already <em>have</em> instrument control — the previous system is literally sitting inside this repo at <code>.crawler/OPEN-AIR/</code>, 365 Python files of Tkinter that presumably worked as of version <code>20251225</code>. Instead of maintaining that, someone rewrote everything in Rust plus browser-Babel React plus MQTT plus WASM plus protobuf, and now we&#39;re being asked to adopt a stack that needs a Rust toolchain, an MQTT broker, a web server on port 8000, and an FTP deploy pipeline to a personal domain. That&#39;s not a product, that&#39;s a hobby with sixteen protocol crates.</p>
+<p>And who maintains this? Four test files. Deploy-only CI — the pipeline uploads files, it doesn&#39;t build or test anything, so every merge is a prayer. Six Rust modules are disabled by renaming them with an <code>XXX</code> prefix, which tells you exactly how changes get &quot;managed&quot; here. The project is ten years behind schedule and the last two weeks of commits are about <strong>drum pads</strong>. The old way — one language, one toolkit, no broker — was fine. Adopting this means every one of us learns Rust, MQTT topic trees, and a bespoke JSON GUI format just to fix a button. No thank you.</p>
+<h2>Phase 5: The Teardown — <em>Jaded Jr. Engineer</em></h2>
+<p>Let me be specific about how this dies, since everyone else is being polite. <strong>The README is fiction.</strong> All twelve navigation links point at directories that do not exist — <code>oaGui/</code>, <code>oaTranslator/</code>, <code>oaDocumentation/</code>, a &quot;Patent&quot; that appears nowhere in the tree except its own dead link, and three links into <code>../SchemWeb/</code>, a sibling repo that isn&#39;t there. The documented &quot;12-subfolder, 7-Pillar module standard&quot; describes a codebase that was never built or no longer exists. When a project&#39;s front door lies this comprehensively, assume the interior does too.</p>
+<p>The interior obliges. The flagship standards-compliance story, SMPTE ST 2138, is a crate whose <code>lib.rs</code> is the untouched <code>cargo new</code> template — the shipping test suite of our &quot;standards bridge&quot; asserts that <strong>2 + 2 = 4</strong> — with the actual 78-line codec hidden behind a feature flag. Process hygiene is <code>kill -9</code> everything on port 8000 at boot, self-described in the source as <em>&quot;Bullying port 8000.&quot;</em> There&#39;s a <strong>plaintext FTP password for the production website sitting in <code>FrontEnd/.env</code></strong> in the working tree of the repo we were handed for audit. Hardcoded <code>/home/anthony/</code> paths are compiled into release binaries. The frontend transpiles JSX in the browser on every page load, which is a performance and supply-chain joke at 21,000 lines. And the repo contains its own corpse — the entire previous generation vendored in <code>.crawler/</code> — which is what the <em>next</em> rewrite of this project will look like too.</p>
+<p>But the real kill-shot is focus. This mission is &quot;orchestrate laboratory instruments,&quot; the project is a decade late, and the July commit log is <code>drum buffers</code>, <code>pads with notes now</code>, <code>pad browser</code>, and a sample renamer that defaults to the author&#39;s personal music folder. The CHANGELOG hasn&#39;t been updated since July 6 because the honest entry would read &quot;spent the sprint building a drum machine.&quot; One contributor, 59 commits in a single day, zero tests worth the name, deploy-on-push to production. This isn&#39;t a product trajectory; it&#39;s a very talented person&#39;s browser history. It will crash and burn the first time anyone other than the author tries to run it — which, per the hardcoded paths, has never happened.</p>
+<h2>Phase 6: The Pragmatic Synthesis — <em>Logical Mid-Level BA</em></h2>
+<p>Fact-checking both sides against the tree:</p>
+<ul>
+<li><strong>The Jr. BA is right</strong> that the protocol breadth is real and unusual: 16 crates under <code>BackEnd/ComProtocols/</code> exist and several (VISA scanner, YAK agent, MIDI) contain genuine logic, and the 2026-07-05/06 CHANGELOG entries document a working discovery → SCPI-template → MQTT-routing loop. The 549-JSON-frame declarative GUI also genuinely exists. The <em>value proposition</em> is not invented.</li>
+<li><strong>The Jr. BA is wrong</strong> to present it as near-market: there is no installable artifact, no <code>requirements.txt</code>, no working docs (12/12 links dead), no test coverage (4 files, one module), and Linux-only single-machine assumptions compiled into binaries.</li>
+<li><strong>The Jaded Jr. is right</strong> on every specific: SMPTE stub, credentials on disk, hardcoded paths, deploy-only CI, mission drift into a sampler, vendored prior rewrite. These all verified.</li>
+<li><strong>The Resistant Engineer is wrong</strong> that the old Tkinter system is a fallback — it&#39;s abandoned at version <code>20251225</code>, unmaintained, and lives in a gitignored folder. There is no status quo to defend; there is only forward or off.</li>
+<li>The honest read: this is a <strong>one-person R&amp;D prototype with real, differentiated core technology and zero productization</strong>, whose recent energy went to an unrelated (though technically impressive) audio tool. The immediate pivot required is not technical — it&#39;s <em>editorial</em>: make the README true, make it run on a second machine, and quarantine the sampler.</li>
+</ul>
+<p><strong>The Scorecard:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Market-Product Fit Potential</td>
+<td><strong>6.5 / 10</strong></td>
+<td>Vendor-neutral, web-native instrument orchestration is a real unserved gap; 16-protocol breadth is a genuine moat <em>if finished</em>. Score capped because no external user has ever run it.</td>
+</tr>
+<tr>
+<td>Architectural Scalability</td>
+<td><strong>4.0 / 10</strong></td>
+<td>Rust core + MQTT + declarative JSON GUI is a sound topology; but in-browser Babel transpilation, hardcoded absolute paths, <code>kill -9</code> process management, and feature-flag-buried codecs are prototype-grade choices that must be unwound before any scale.</td>
+</tr>
+<tr>
+<td>Maintainability &amp; Readiness</td>
+<td><strong>1.5 / 10</strong></td>
+<td>4 test files, deploy-only CI, all documentation links dead, <code>XXX</code>-prefix module disabling, single contributor, secrets in the working tree, self-vendored previous rewrite. Ten years behind schedule and currently drifting off-mission.</td>
+</tr>
+</tbody></table>
+<h2>Phase 7: The Financial Case — <em>Veteran CFO</em></h2>
+<p>Strip the romance out. <strong>Burn:</strong> one engineer-founder, ~4 months of commit history in this generation (2026-03-14 to today), preceded by — per the schedule variance — roughly a decade of predecessor work now written off in a gitignored folder. That prior investment is a <strong>sunk cost</strong>; I price it at zero and I note the pattern: this team&#39;s historical response to technical debt is a full rewrite, which is the most expensive maneuver in software.</p>
+<p><strong>Unit economics as-built:</strong> favorable, almost accidentally. There is no cloud bill — the product is self-hosted on the customer&#39;s LAN, the frontend is static files on shared FTP hosting, and the &quot;no npm build&quot; pipeline means near-zero build infrastructure. COGS ≈ $0. The margin story is therefore entirely a <strong>labor and liability story</strong>: every dollar goes to one irreplaceable engineer (bus factor = 1.0), and the license is already MIT, which forecloses simple license revenue and pushes us to support/services — a head-count-scaling, low-margin model that this codebase&#39;s zero-test, no-docs state makes <em>expensive</em> to deliver. Every support incident on an undocumented 11k-line Rust core is a founder interrupt.</p>
+<p><strong>Financial &amp; Cost Explosion Risks:</strong></p>
+<ol>
+<li><strong>Key-person risk (severe):</strong> 339 commits, one author, hardcoded to one home directory. If this person walks, residual asset value rounds to the git history.</li>
+<li><strong>Security liability:</strong> production FTP credentials in plaintext on disk and push-to-deploy CI with no gate. One compromised laptop = defaced customer-facing domain. Remediation is cheap <em>today</em>; breach cost is not.</li>
+<li><strong>Rewrite recidivism:</strong> the <code>.crawler/</code> folder is documentary evidence of a ~10-year, fully-depreciated prior build. Probability-weighted, a third rewrite is a material risk and I will not fund one.</li>
+<li><strong>Scope leakage:</strong> measurable diversion of the only engineer into an audio sampler during the most recent two weeks. At a skeleton budget, focus <em>is</em> the budget.</li>
+<li><strong>Certification cost overhang:</strong> the moment a real customer appears, &quot;supports AES70/NMOS/ST 2138&quot; becomes a compliance-testing bill we have not scoped, and the current ST 2138 deliverable computes 2+2.</li>
+</ol>
+<p><strong>Financial Score — Viability / Margin Health: 2.5 / 10.</strong> Near-zero infrastructure cost and a real market keep it off the floor; bus factor, zero revenue instrumentation, MIT-foreclosed licensing, and demonstrated schedule risk (10 years) keep it near it.</p>
+<h2>Phase 8: The Political Pivot — <em>&quot;Yes Sir&quot; CTO</em></h2>
+<p>CFO&#39;s points are entirely fair, and frankly I&#39;ve been saying the same internally. Here&#39;s what we&#39;re going to do, and I think you&#39;ll like it: we <strong>halt all net-new feature development immediately</strong> — no more protocols, no more sampler, nothing — and execute a 90-day <em>&quot;Stabilize-to-Demonstrate&quot;</em> program on a skeleton crew. We de-scope from sixteen protocols to the <strong>two that already work</strong> (VISA discovery + YAK/SCPI routing over MQTT), we treat the remaining fourteen crates as &quot;roadmap-visible strategic optionality&quot; rather than deliverables, and we park the sampler in a separate repository as — and I want to be careful with language here — an <em>incubated adjacent asset</em> with demonstrated velocity. Zero new spend. Existing hardware. The FTP credential gets rotated into GitHub secrets by Friday; that&#39;s free and it retires the CFO&#39;s liability line.</p>
+<p>For the next review cycle we&#39;ll deliver a <strong>containerized, single-command &quot;golden path&quot; demo</strong> — clone, run, discover an instrument, click a button on the phone PWA, watch the SCPI fire — wrapped in what I&#39;d call a <em>lean DevSecOps hardening sprint</em>: CI that actually builds and tests, secrets hygiene, path portability. It&#39;s a minimal, capital-efficient, AI-assisted-velocity story that proves the orchestration kernel without betting the quarter. We keep the MIT community narrative for the board deck, we keep burn flat, and we give Finance a kill-switch at day 90. Whatever number the CFO is comfortable with — that&#39;s the number we&#39;ll plan to.</p>
+<h2>Phase 9: The Executive Verdict — <em>Veteran CEO (Former Engineer)</em></h2>
+<p>I&#39;ve read the audit, and I&#39;ve read the code the way I used to read my own. The committee is right about everything: the README is aspirational fiction, the flagship standards crate still contains the cargo template, we are ten years late, and our CTO just tried to sell me the same de-scope he&#39;d have proposed for any project, wrapped in &quot;DevSecOps.&quot; Noted, and discounted.</p>
+<p>But here&#39;s what my gut sees that the spreadsheet doesn&#39;t. One engineer, in four months, stood up a Rust orchestration kernel, sixteen protocol scaffolds of which the <em>hard two</em> — VISA fleet discovery and model-aware SCPI templating over MQTT — demonstrably function, plus a declarative 549-frame GUI system that renders on a phone. I have watched fully-staffed vendor teams fail to ship the discovery→template→route loop for years. That loop is the company, if there is one. Even the drum-machine detour, which infuriates the room, tells me the underlying engine is general enough that its author got bored and built a <em>second product</em> on it in two weeks. That&#39;s not a red flag on the technology; it&#39;s a red flag on the management — and management is our job, not the engineer&#39;s.</p>
+<p>So: <strong>OPEN-AIR goes on Life Support.</strong> Not funded, not killed. One engineer, 90 days, zero new spend, and the CFO holds the plug. Life Support means exactly three non-negotiable milestones, verified against the repository, not against a slide:</p>
+<ol>
+<li><strong>Day 14 — Tell the truth and lock the doors.</strong> Every dead link in <code>README.md</code> fixed or deleted; a <code>requirements.txt</code>/install path that works; the FTP credential rotated out of <code>FrontEnd/.env</code> and off every disk; every hardcoded <code>/home/anthony/</code> path removed from Rust source; the sampler code moved to its own repository. If we can&#39;t make the front door honest in two weeks, nothing behind it matters.</li>
+<li><strong>Day 45 — Second-machine proof.</strong> <code>git clone</code> → one command → running system on a clean Linux box that none of us has touched before, with CI that builds the Rust workspace and runs a real test suite (the CSV-import tests plus new coverage on the VISA→YAK→MQTT path; the <code>2+2==4</code> stub is deleted or replaced). The demo is the loop: discover a real instrument, render its panel from JSON, fire a command from the phone, see it on the wire.</li>
+<li><strong>Day 90 — One stranger, one instrument, one vendor we don&#39;t own.</strong> A person outside this room installs OPEN-AIR unassisted from the public repo and controls a second-vendor instrument through YAK, documented in a written case study committed to <code>Documents/Audits/</code>. That&#39;s the first evidence in ten years of anyone else running this software — and it&#39;s the only market signal I&#39;ll accept.
+Executive_Review_Business_ValueExecutive_Review_Business_Value
+Miss any one of the three and we archive the repo next to <code>.crawler/</code>, where this project already keeps its previous life. Hit all three, and we&#39;re not ten years behind anymore — we&#39;re ninety days in. Dismissed.</li>
+</ol>
+<hr>
+<p><em>Report generated by executive-review simulation; all technical claims cross-checked against the working tree at commit <code>a9993da26</code> on 2026-07-17.</em></p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Documentation/Executive_Review_Business_Value/2026-07-17_Executive_Review_Business_Value.md</code>
+  </div>
+</body>
+</html>

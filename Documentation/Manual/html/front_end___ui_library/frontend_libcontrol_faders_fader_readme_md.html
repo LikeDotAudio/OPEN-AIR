@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: faders / Fader - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Fader — standalone fader (demo)</h1>
+<p>High-fidelity single fader that infers orientation from its geometry and can
+bind to MQTT.</p>
+<ul>
+<li><strong>Defines (globals):</strong> <code>Fader</code>, <code>clamp</code></li>
+<li><strong>Props:</strong> <code>value</code>, <code>onChange</code>, <code>config</code>, <code>topic</code>, <code>nodeJson</code></li>
+<li><strong>Demo:</strong> open <code>../index.html</code>.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> the live app does <strong>not</strong> load this file — it uses the production
+fader at <code>../core/Fader.jsx</code> (built from <code>core/Cap.jsx</code>, <code>core/Scale.jsx</code>,
+<code>core/utils.js</code>). This copy is the self-contained demo/standalone variant.</p>
+</blockquote>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;Exhaustive_Fader_Example&quot;: {
+    &quot;type&quot;: &quot;_SmartFader&quot;,
+    &quot;identity&quot;: {
+      &quot;label&quot;: &quot;Channel 1 Level&quot;,
+      &quot;id&quot;: &quot;ch1_fader&quot;,
+      &quot;notes&quot;: &quot;A ultra-complete example of the photorealistic vertical fader.&quot;
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 300,
+      &quot;padding&quot;: 5,
+      &quot;stretch&quot;: &quot;height&quot;,
+      &quot;anchor&quot;: &quot;center&quot;,
+      &quot;align&quot;: &quot;center&quot;,
+      &quot;cap&quot;: {
+        &quot;w&quot;: 45,
+        &quot;h&quot;: 60
+      }
+    },
+    &quot;domain&quot;: {
+      &quot;primary&quot;: {
+        &quot;min&quot;: -100.0,
+        &quot;max&quot;: 12.0,
+        &quot;value_default&quot;: 0.0,
+        &quot;unit&quot;: &quot;dB&quot;,
+        &quot;zero_point&quot;: 0.0,
+        &quot;law&quot;: &quot;log&quot;,
+        &quot;log_exponent&quot;: 2.0
+      },
+      &quot;linear&quot;: {
+        &quot;min&quot;: 0.0,
+        &quot;max&quot;: 1.0,
+        &quot;value&quot;: 0.75
+      }
+    },
+    &quot;dynamics&quot;: {
+      &quot;fps_limit&quot;: 60,
+      &quot;smoothing&quot;: 0.05,
+      &quot;path&quot;: &quot;MixingConsole/Channels/1/Fader&quot;
+    },
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#33A1FD&quot;,
+        &quot;secondary&quot;: &quot;#222222&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;,
+        &quot;cap&quot;: &quot;#dcdcdc&quot;,
+        &quot;cap_highlight&quot;: &quot;#FF9900&quot;,
+        &quot;tick_color&quot;: &quot;#888888&quot;,
+        &quot;sub_tick_color&quot;: &quot;#444444&quot;,
+        &quot;highlight&quot;: &quot;#FF9900&quot;
+      },
+      &quot;style_flags&quot;: {
+        &quot;show_grid&quot;: true,
+        &quot;show_label&quot;: true,
+        &quot;value_follow&quot;: true
+      },
+      &quot;scale&quot;: {
+        &quot;show&quot;: true,
+        &quot;style&quot;: &quot;simple&quot;,
+        &quot;interval&quot;: 10.0,
+        &quot;size&quot;: 0.4,
+        &quot;thickness&quot;: 1
+      },
+      &quot;styling&quot;: {
+        &quot;glow_intensity&quot;: 1.5,
+        &quot;track_hover_color&quot;: &quot;#333333&quot;,
+        &quot;fader_track_color&quot;: &quot;#111111&quot;,
+        &quot;border_width&quot;: 0,
+        &quot;border_color&quot;: &quot;#000000&quot;
+      }
+    },
+    &quot;readout&quot;: {
+      &quot;show_value&quot;: true,
+      &quot;show_units&quot;: true,
+      &quot;units&quot;: &quot;dB&quot;,
+      &quot;location&quot;: &quot;bottom&quot;,
+      &quot;decimal_places&quot;: 1,
+      &quot;label_position&quot;: &quot;top&quot;,
+      &quot;movement_value_display&quot;: true
+    },
+    &quot;interaction&quot;: {
+      &quot;scroll_enabled&quot;: true,
+      &quot;is_read_only&quot;: false,
+      &quot;reff_point&quot;: 0.0
+    },
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;ns&quot;,
+      &quot;padx&quot;: 10,
+      &quot;pady&quot;: 10,
+      &quot;weight&quot;: 1
+    }
+  },
+  &quot;Custom_Fader_Example&quot;: {
+    &quot;type&quot;: &quot;_CustomFader&quot;,
+    &quot;identity&quot;: {
+      &quot;label&quot;: &quot;Custom Fader&quot;
+    },
+    &quot;domain&quot;: {
+      &quot;min&quot;: -100.0,
+      &quot;max&quot;: 20.0,
+      &quot;value_default&quot;: 0.0,
+      &quot;log_exponent&quot;: 1.0
+    },
+    &quot;ticks&quot;: [-100, -80, -60, -45, -30, -15, 0, 10, 20],
+    &quot;tick_thickness&quot;: 1,
+    &quot;tick_interval&quot;: 10.0,
+    &quot;sub_ticks&quot;: 4,
+    &quot;tick_style&quot;: &quot;numeric&quot;,
+    &quot;show_ticks&quot;: true,
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#1a1a1a&quot;,
+        &quot;tick_color&quot;: &quot;#888888&quot;,
+        &quot;sub_tick_color&quot;: &quot;#444444&quot;
+      },
+      &quot;scale&quot;: {
+        &quot;show&quot;: true,
+        &quot;style&quot;: &quot;numeric&quot;,
+        &quot;sides&quot;: &quot;both&quot;,
+        &quot;interval&quot;: 10.0,
+        &quot;sub_ticks&quot;: 4,
+        &quot;size&quot;: 0.4,
+        &quot;thickness&quot;: 1
+      },
+      &quot;style_overrides&quot;: {
+        &quot;custom_ticks&quot;: [-100, -80, -60, -45, -30, -15, 0, 10, 20]
+      }
+    },
+    &quot;interaction&quot;: {
+      &quot;reff_point&quot;: -15
+    },
+    &quot;layout&quot;: {
+      &quot;height&quot;: 250,
+      &quot;weight_y&quot;: 1,
+      &quot;sticky&quot;: &quot;n&quot;,
+      &quot;pady&quot;: 0
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 155
+    }
+  },
+  &quot;_README&quot;: &quot;This sample is REALLY REALLY COMPLETE. It follows the 5-pillar &#39;Universal Rhyme&#39; schema (Identity, Geometry, Domain, Dynamics, Cosmetics) plus Readout, Interaction, and Layout.&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;fader_types&quot;: [
+      &quot;_Fader&quot;,
+      &quot;_SmartFader&quot;,
+      &quot;_CustomFader&quot;
+    ],
+    &quot;laws&quot;: [
+      &quot;linear&quot;,
+      &quot;log&quot;
+    ],
+    &quot;tick_label_positions&quot;: [
+      &quot;left&quot;,
+      &quot;right&quot;
+    ],
+    &quot;unit_positions&quot;: [
+      &quot;left&quot;,
+      &quot;right&quot;
+    ],
+    &quot;scale_styles&quot;: [
+      &quot;simple&quot;,
+      &quot;dots&quot;,
+      &quot;numeric&quot;
+    ],
+    &quot;scale_sides&quot;: [
+      &quot;both&quot;,
+      &quot;left&quot;,
+      &quot;right&quot;,
+      &quot;top&quot;,
+      &quot;bottom&quot;
+    ],
+    &quot;orientations&quot;: [
+      &quot;horizontal&quot;,
+      &quot;vertical&quot;
+    ],
+    &quot;cap_dimensions&quot;: &quot;Defined in geometry.cap.w/h or top-level cap_width/height.&quot;,
+    &quot;mouse_actions&quot;: &quot;Middle-click resets to reff_point. Alt-click opens manual entry.&quot;
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/faders/Fader/Readme.md</code>
+  </div>
+</body>
+</html>

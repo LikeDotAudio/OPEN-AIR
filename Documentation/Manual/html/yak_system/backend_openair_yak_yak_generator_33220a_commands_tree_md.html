@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>33220A / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Generator/33220A — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>254 commands</strong> — SET 77 · RIG 4 · NAB 114 · DO 59 · 229 unverified (90%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>RIG</strong> <code>Setup_AM</code> · args: <code>shape</code>, <code>freq</code>, <code>depth</code> · enum<ul>
+<li><code>AM:INTernal:FUNCtion &lt;shape&gt;;AM:INTernal:FREQuency &lt;freq&gt;;AM:DEPTh &lt;depth&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>VOLTage</code> — <strong>SET</strong> <code>Set_Amplitude</code> · <code>&lt;amp&gt;</code> · args: <code>amp</code> · numeric (V)</li>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Frequency</code> · <code>&lt;freq&gt;</code> · args: <code>freq</code></li>
+<li><code>FUNCtion</code> — <strong>SET</strong> <code>Set_Function_Shape</code> · <code>&lt;shape&gt;</code> · args: <code>shape</code> · enum</li>
+<li><code>APPLy?</code> — <strong>NAB</strong> <code>Get_Apply_String</code> · → 1 value</li>
+<li><code>OUTPut?</code> — <strong>NAB</strong> <code>Get_Output_State</code> · → 1 value</li>
+<li><code>OUTPut</code> — <strong>DO</strong> <code>Output_OFF</code> · <code>OFF</code></li>
+<li><code>OUTPut</code> — <strong>DO</strong> <code>Output_ON</code> · <code>ON</code></li>
+<li><strong><code>AM</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Am_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>INT</code> | <code>EXT</code> · †<br>AM Commands</li>
+<li><code>DEPTh?</code> — <strong>NAB</strong> <code>Get_Am_Depth</code> · → 1 value · †<br>AM Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Am_Source</code> · → CRD · †<br>AM Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Am_State</code> · → BOOL · †<br>AM Commands</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>AM_State_OFF</code> · <code>OFF</code></li>
+<li><code>STATe</code> — <strong>DO</strong> <code>AM_State_ON</code> · <code>ON</code></li>
+<li><code>INTernal</code> — <strong>DO</strong> <code>Do_Am_Internal</code> · †<br>AM Commands</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Am_Internal_Frequency</code> · → 1 value · †<br>Amplitude Modulation (AM) Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>APPL</code></strong><ul>
+<li><code>RAMP</code> — <strong>DO</strong> <code>Do_Apply_Ramp</code> · †<br>Output Frequency</li>
+<li><code>USER</code> — <strong>DO</strong> <code>Do_Apply_User</code> · †</li>
+</ul>
+</li>
+<li><strong><code>APPLy</code></strong><ul>
+<li><code>PULSe</code> — <strong>RIG</strong> <code>Apply_Pulse</code> · <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code> · args: <code>freq</code>, <code>amp</code>, <code>offset</code></li>
+<li><code>SINusoid</code> — <strong>RIG</strong> <code>Apply_Sine</code> · <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code> · args: <code>freq</code>, <code>amp</code>, <code>offset</code></li>
+<li><code>SQUare</code> — <strong>RIG</strong> <code>Apply_Square</code> · <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code> · args: <code>freq</code>, <code>amp</code>, <code>offset</code></li>
+<li><code>NOISe</code> — <strong>DO</strong> <code>Do_Apply_Noise</code> · †<br>Using the APPLy Command</li>
+</ul>
+</li>
+<li><strong><code>ATTRibute</code></strong><ul>
+<li><code>AVERage?</code> — <strong>NAB</strong> <code>Get_Attribute_Average</code> · → NR1 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>CFACtor?</code> — <strong>NAB</strong> <code>Get_Attribute_Cfactor</code> · → NR3 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Attribute_Points</code> · → NR1 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>PTPeak?</code> — <strong>NAB</strong> <code>Get_Attribute_Ptpeak</code> · → NR3 dB · †<br>Arbitrary Waveform Commands</li>
+</ul>
+</li>
+<li><strong><code>BEEPer</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Beeper_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>System-Related Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Beeper_State</code> · → BOOL · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>BURS</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Burst_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>TRIG</code> | <code>GAT</code> · †<br>Burst Commands</li>
+<li><code>NCYC</code> — <strong>SET</strong> <code>Set_Burst_Ncycles</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Burst Commands</li>
+<li><code>PHAS</code> — <strong>SET</strong> <code>Set_Burst_Phase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (deg) · †<br>Burst Commands</li>
+<li><strong><code>INT</code></strong><ul>
+<li><code>PER</code> — <strong>SET</strong> <code>Set_Burst_Internal_Period</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Burst Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>BURSt</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Burst_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Burst Commands</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Burst_Mode</code> · → CRD · †<br>Burst Commands</li>
+<li><code>NCYCles?</code> — <strong>NAB</strong> <code>Get_Burst_Ncycles</code> · → 1 value · †<br>Burst Commands</li>
+<li><code>PHASe?</code> — <strong>NAB</strong> <code>Get_Burst_Phase</code> · → 1 value · †<br>Burst Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Burst_State</code> · → BOOL · †<br>Burst Commands</li>
+<li><strong><code>GATE</code></strong><ul>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Burst_Gate_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NORM</code> | <code>INV</code> · †<br>Burst Commands</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Burst_Gate_Polarity</code> · → CRD · †<br>Burst Commands</li>
+</ul>
+</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>PERiod?</code> — <strong>NAB</strong> <code>Get_Burst_Internal_Period</code> · → NR3 s · †<br>Burst Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CAL</code></strong><ul>
+<li><code>STR</code> — <strong>SET</strong> <code>Set_Calibration_String</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Calibration Message</li>
+<li><code>VAL</code> — <strong>SET</strong> <code>Set_Calibration_Value</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Calibration_Count</code> · → NR1 · †<br>Calibration Count</li>
+<li><code>STRing?</code> — <strong>NAB</strong> <code>Get_Calibration_String</code> · → 1 value · †<br>Calibration Message</li>
+<li><code>VALue?</code> — <strong>NAB</strong> <code>Get_Calibration_Value</code> · → NR3 · †</li>
+<li><strong><code>SEC</code></strong><ul>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Calibration_Secure_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SECure</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calibration_Secure_State</code> · → BOOL · †</li>
+<li><code>CODE</code> — <strong>DO</strong> <code>Do_Calibration_Secure_Code</code> · †<br>Calibration Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DATA</code></strong><ul>
+<li><code>CAT?</code> — <strong>NAB</strong> <code>Get_Data_Catalog</code> · → 1 value · †</li>
+<li><code>COPY</code> — <strong>DO</strong> <code>Do_Data_Copy</code> · †<br>Arbitrary Waveform Commands</li>
+<li><code>DAC</code> — <strong>DO</strong> <code>Do_Data_Dac</code> · †<br>Arbitrary Waveform Commands</li>
+<li><code>DEL</code> — <strong>DO</strong> <code>Do_Data_Delete</code> · †<br>Arbitrary Waveform Commands</li>
+<li><strong><code>ATTRibute</code></strong><ul>
+<li><code>AVERage?</code> — <strong>NAB</strong> <code>Get_Data_Attribute_Average</code> · → NR1 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>CFACtor?</code> — <strong>NAB</strong> <code>Get_Data_Attribute_Cfactor</code> · → NR3 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Data_Attribute_Points</code> · → NR1 dB · †<br>Arbitrary Waveform Commands</li>
+<li><code>PTPeak?</code> — <strong>NAB</strong> <code>Get_Data_Attribute_Ptpeak</code> · → NR3 dB · †<br>Arbitrary Waveform Commands</li>
+</ul>
+</li>
+<li><strong><code>NVOLatile</code></strong><ul>
+<li><code>CATalog?</code> — <strong>NAB</strong> <code>Get_Data_Nvolatile_Catalog</code> · → 1 value · †</li>
+<li><code>FREE?</code> — <strong>NAB</strong> <code>Get_Data_Nvolatile_Free</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DEV</code></strong><ul>
+<li><code>DCYC?</code> — <strong>NAB</strong> <code>Get_Deviation_Dcycle</code> · → NR3 % · †<br>Pulse Width Modulation (PWM) Commands</li>
+</ul>
+</li>
+<li><strong><code>DEViation</code></strong><ul>
+<li><code>DCYCle</code> — <strong>SET</strong> <code>Set_Deviation_Dcycle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%) · †<br>Pulse Width Modulation (PWM) Commands</li>
+</ul>
+</li>
+<li><strong><code>DISP</code></strong><ul>
+<li><code>TEXT</code> — <strong>SET</strong> <code>Set_Display_Text</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>System-Related Operations</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>TEXT?</code> — <strong>NAB</strong> <code>Get_Display_Text</code> · → 1 value · †<br>System-Related Operations</li>
+<li><strong><code>TEXT</code></strong><ul>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Clear_Text</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FM</code></strong><ul>
+<li><code>DEViation</code> — <strong>SET</strong> <code>Set_Fm_Deviation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>FM Commands</li>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Fm_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>INT</code> | <code>EXT</code> · †<br>FM Commands</li>
+<li><code>DEViation?</code> — <strong>NAB</strong> <code>Get_Fm_Deviation</code> · → 1 value · †<br>FM Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Fm_Source</code> · → CRD · †<br>FM Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Fm_State</code> · → BOOL · †<br>FM Commands</li>
+<li><code>INTernal</code> — <strong>DO</strong> <code>Do_Fm_Internal</code> · †<br>FM Commands</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>FM_State_OFF</code> · <code>OFF</code></li>
+<li><code>STATe</code> — <strong>DO</strong> <code>FM_State_ON</code> · <code>ON</code></li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Fm_Internal_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Modulating Waveform Frequency</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Fm_Internal_Frequency</code> · → 1 value · †<br>Frequency Modulation (FM) Commands</li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Do_Fm_Internal_Function</code> · †<br>Modulating Waveform Shape</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FORMat</code></strong><ul>
+<li><code>BORDer</code> — <strong>SET</strong> <code>Set_Format_Border</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Arbitrary Waveform Commands</li>
+<li><code>BORDer?</code> — <strong>NAB</strong> <code>Get_Format_Border</code> · → 1 value · †<br>Arbitrary Waveform Commands</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Frequency_Center</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Frequency Sweep Commands</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Frequency_Span</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>STARt</code> — <strong>SET</strong> <code>Set_Frequency_Start</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Start Frequency and Stop Frequency</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Frequency_Stop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Start Frequency and Stop Frequency</li>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Frequency_Center</code> · → NR3 · †<br>Frequency Sweep Commands</li>
+<li><code>SPAN?</code> — <strong>NAB</strong> <code>Get_Frequency_Span</code> · → NR3 · †</li>
+<li><code>STARt?</code> — <strong>NAB</strong> <code>Get_Frequency_Start</code> · → NR3 · †<br>Sweep Commands</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Frequency_Stop</code> · → NR3 · †<br>Sweep Commands</li>
+</ul>
+</li>
+<li><strong><code>FSK</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Fskey_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>INT</code> | <code>EXT</code> · †<br>FSK Commands</li>
+</ul>
+</li>
+<li><strong><code>FSKey</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Fskey_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>FSK Commands</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Fskey_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>FSK Commands</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Fskey_Frequency</code> · → 1 value · †<br>FSK Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Fskey_Source</code> · → CRD · †<br>FSK Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Fskey_State</code> · → BOOL · †<br>FSK Commands</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>RATE</code> — <strong>SET</strong> <code>Set_Fskey_Internal_Rate</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>FSK Commands</li>
+<li><code>RATE?</code> — <strong>NAB</strong> <code>Get_Fskey_Internal_Rate</code> · → NR3 · †<br>FSK Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FUNC</code></strong><ul>
+<li><code>USER</code> — <strong>SET</strong> <code>Set_Function_User</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Arbitrary Waveform Commands</li>
+<li><code>PULS</code> — <strong>DO</strong> <code>Do_Function_Pulse</code> · †<br>Pulse Configuration Commands</li>
+<li><code>RAMP</code> — <strong>DO</strong> <code>Do_Function_Ramp</code> · †<br>frequency reduced for ramp function</li>
+<li><strong><code>PULS</code></strong><ul>
+<li><code>HOLD</code> — <strong>SET</strong> <code>Set_Function_Pulse_Hold</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>WIDT</code> | <code>DCYC</code> · †<br>Using the APPLy Command</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FUNCtion</code></strong><ul>
+<li><code>USER?</code> — <strong>NAB</strong> <code>Get_Function_User</code> · → 1 value · †<br>Arbitrary Waveform Commands</li>
+<li><code>SHAPe</code> — <strong>DO</strong> <code>Do_Function_Shape</code> · †</li>
+<li><strong><code>PULSe</code></strong><ul>
+<li><code>DCYCle</code> — <strong>SET</strong> <code>Set_Function_Pulse_Dcycle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%) · †<br>Pulse Configuration Commands</li>
+<li><code>TRANsition</code> — <strong>SET</strong> <code>Set_Function_Pulse_Transition</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Edge Time</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Setup_Pulse_Width</code> · <code>&lt;width_sec&gt;</code> · args: <code>width_sec</code> · numeric</li>
+<li><code>DCYCle?</code> — <strong>NAB</strong> <code>Get_Function_Pulse_Dcycle</code> · → NR3 % · †<br>Pulse Configuration Commands</li>
+<li><code>HOLD?</code> — <strong>NAB</strong> <code>Get_Function_Pulse_Hold</code> · → NR3 · †<br>Using the APPLy Command</li>
+<li><code>TRANsition?</code> — <strong>NAB</strong> <code>Get_Function_Pulse_Transition</code> · → 1 value · †<br>Pulse Configuration Commands</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Function_Pulse_Width</code> · → NR3 · †<br>Pulse Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>RAMP</code></strong><ul>
+<li><code>SYMMetry</code> — <strong>SET</strong> <code>Set_Function_Ramp_Symmetry</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Output Configuration Commands</li>
+<li><code>SYMMetry?</code> — <strong>NAB</strong> <code>Get_Function_Ramp_Symmetry</code> · → 1 value · †<br>Output Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>SQUare</code></strong><ul>
+<li><code>DCYCle</code> — <strong>SET</strong> <code>Set_Function_Square_Dcycle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%) · †<br>Output Configuration Commands</li>
+<li><code>DCYCle?</code> — <strong>NAB</strong> <code>Get_Function_Square_Dcycle</code> · → NR3 % · †<br>Output Configuration Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>GATE</code></strong><ul>
+<li><code>POLarity</code> — <strong>DO</strong> <code>Do_Gate_Polarity</code> · †</li>
+</ul>
+</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>PERiod</code> — <strong>DO</strong> <code>Do_Internal_Period</code> · †</li>
+</ul>
+</li>
+<li><strong><code>KLOCk</code></strong><ul>
+<li><code>EXCLude</code> — <strong>SET</strong> <code>Set_Klock_Exclude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>System-Related Commands</li>
+<li><code>EXCLude?</code> — <strong>NAB</strong> <code>Get_Klock_Exclude</code> · → 1 value · †<br>System-Related Commands</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Do_Klock_State</code> · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>LAN</code></strong><ul>
+<li><code>LIPaddress?</code> — <strong>NAB</strong> <code>Get_Lan_Lipaddress</code> · → 1 value · †</li>
+<li><code>MAC?</code> — <strong>NAB</strong> <code>Get_Lan_Mac</code> · → 1 value · †</li>
+<li><code>IPADdress</code> — <strong>DO</strong> <code>Do_Lan_Ipaddress</code> · †</li>
+<li><code>MEDiasense</code> — <strong>DO</strong> <code>Do_Lan_Mediasense</code> · †</li>
+<li><code>NETBios</code> — <strong>DO</strong> <code>Do_Lan_Netbios</code> · †</li>
+<li><strong><code>TELNet</code></strong><ul>
+<li><code>PROM</code> — <strong>DO</strong> <code>Do_Lan_Telnet_Prompt</code> · †</li>
+<li><code>WMES</code> — <strong>DO</strong> <code>Do_Lan_Telnet_Wmessage</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MARKer</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Marker_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Marker Frequency</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Marker_Frequency</code> · → 1 value · †<br>Frequency Sweep Commands</li>
+</ul>
+</li>
+<li><strong><code>MEMory</code></strong><ul>
+<li><code>NSTates?</code> — <strong>NAB</strong> <code>Get_Memory_Nstates</code> · → 1 value · †<br>State Storage Commands</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Do_Memory_State</code> · †<br>State Storage Commands</li>
+<li><strong><code>STATe</code></strong><ul>
+<li><code>NAME</code> — <strong>SET</strong> <code>Set_Memory_State_Name</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>State Storage Commands</li>
+<li><code>CATalog?</code> — <strong>NAB</strong> <code>Get_Memory_State_Catalog</code> · → 1 value · †</li>
+<li><code>NAME?</code> — <strong>NAB</strong> <code>Get_Memory_State_Name</code> · → 1 value · †<br>State Storage Commands</li>
+<li><code>VALid?</code> — <strong>NAB</strong> <code>Get_Memory_State_Value</code> · → NR3 · †<br>State Storage Commands</li>
+<li><code>DELete</code> — <strong>DO</strong> <code>Do_Memory_State_Delete</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>NVOLatile</code></strong><ul>
+<li><code>CATalog?</code> — <strong>NAB</strong> <code>Get_Nvolatile_Catalog</code> · → 1 value · †<br>Arbitrary Waveform Commands</li>
+<li><code>FREE?</code> — <strong>NAB</strong> <code>Get_Nvolatile_Free</code> · → 1 value · †<br>Arbitrary Waveform Commands</li>
+</ul>
+</li>
+<li><strong><code>OUTPut</code></strong><ul>
+<li><code>LOAD</code> — <strong>SET</strong> <code>Set_Output_Load</code> · <code>&lt;ohms&gt;</code> · args: <code>ohms</code></li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Output_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NORM</code> | <code>INV</code> · †</li>
+<li><code>TRIGger</code> — <strong>SET</strong> <code>Set_Output_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Trigger Out Signal</li>
+<li><code>LOAD?</code> — <strong>NAB</strong> <code>Get_Output_Load</code> · → 1 value · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Output_Polarity</code> · → CRD · †</li>
+<li><code>SYNC?</code> — <strong>NAB</strong> <code>Get_Output_Sync</code> · → BOOL · †<br>Output Configuration</li>
+<li><code>TRIGger?</code> — <strong>NAB</strong> <code>Get_Output_Trigger</code> · → 1 value · †<br>Trigger Out Signal</li>
+<li><code>SYNC</code> — <strong>DO</strong> <code>Sync_OFF</code> · <code>OFF</code></li>
+<li><code>SYNC</code> — <strong>DO</strong> <code>Sync_ON</code> · <code>ON</code></li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Output_Trigger_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Trigger Out Signal</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Output_Trigger_Slope</code> · → CRD · †<br>Trigger Out Signal</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>PHASe</code></strong><ul>
+<li><code>REFerence</code> — <strong>DO</strong> <code>Do_Phase_Reference</code> · †<br>Phase-Lock Commands</li>
+<li><strong><code>UNLock</code></strong><ul>
+<li><strong><code>ERRor</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Phase_Unlock_Error_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Phase-Lock Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Phase_Unlock_Error_State</code> · → ERROR · †<br>Phase-Lock Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>PM</code></strong><ul>
+<li><code>DEViation</code> — <strong>SET</strong> <code>Set_Pm_Deviation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>PM Commands</li>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Pm_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>INT</code> | <code>EXT</code> · †<br>PM Commands</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Pm_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>PM Commands</li>
+<li><code>DEViation?</code> — <strong>NAB</strong> <code>Get_Pm_Deviation</code> · → 1 value · †<br>PM Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Pm_Source</code> · → CRD · †<br>PM Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Pm_State</code> · → BOOL · †<br>PM Commands</li>
+<li><code>INTernal</code> — <strong>DO</strong> <code>Do_Pm_Internal</code> · †<br>PM Commands</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Pm_Internal_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Modulating Waveform Frequency</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Pm_Internal_Frequency</code> · → 1 value · †<br>Phase Modulation (PM) Commands</li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Do_Pm_Internal_Function</code> · †<br>Modulating Waveform Shape</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>PULSe</code></strong><ul>
+<li><code>PERiod</code> — <strong>SET</strong> <code>Set_Pulse_Period</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Pulse Configuration Commands</li>
+<li><code>PERiod?</code> — <strong>NAB</strong> <code>Get_Pulse_Period</code> · → NR3 s · †<br>Pulse Configuration Commands</li>
+<li><code>TRANsition</code> — <strong>DO</strong> <code>Do_Pulse_Transition</code> · †</li>
+<li><code>WIDTh</code> — <strong>DO</strong> <code>Do_Pulse_Width</code> · †</li>
+</ul>
+</li>
+<li><strong><code>PWM</code></strong><ul>
+<li><code>DEV</code> — <strong>SET</strong> <code>Set_Pwm_Deviation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>PWM Commands</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Pwm_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>INT</code> | <code>EXT</code> · †<br>PWM Commands</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Pwm_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>PWM Commands</li>
+<li><code>DEViation?</code> — <strong>NAB</strong> <code>Get_Pwm_Deviation</code> · → 1 value · †<br>PWM Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Pwm_Source</code> · → CRD · †<br>PWM Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Pwm_State</code> · → BOOL · †<br>PWM Commands</li>
+<li><code>INTernal</code> — <strong>DO</strong> <code>Do_Pwm_Internal</code> · †<br>PWM Commands</li>
+<li><strong><code>DEViation</code></strong><ul>
+<li><code>DCYCle</code> — <strong>SET</strong> <code>Set_Pwm_Deviation_Dcycle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%) · †<br>PWM Commands</li>
+<li><code>DCYCle?</code> — <strong>NAB</strong> <code>Get_Pwm_Deviation_Dcycle</code> · → NR3 % · †<br>PWM Commands</li>
+</ul>
+</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Pwm_Internal_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Modulating Waveform Frequency</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Pwm_Internal_Frequency</code> · → 1 value · †<br>Pulse Width Modulation (PWM) Commands</li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Do_Pwm_Internal_Function</code> · †<br>Modulating Waveform Shape</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>QUEStionable</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Questionable_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Status Reporting Commands</li>
+<li><code>CONDition?</code> — <strong>NAB</strong> <code>Get_Questionable_Condition</code> · → NR1 · †<br>Status Reporting Commands</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Questionable_Enable</code> · → NR1 · †<br>Status Reporting Commands</li>
+<li><code>EVENt?</code> — <strong>NAB</strong> <code>Get_Questionable_Event</code> · → NR1 · †<br>Status Reporting Commands</li>
+</ul>
+</li>
+<li><strong><code>SECure</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Secure_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Calibration Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Secure_State</code> · → BOOL · †<br>Calibration Commands</li>
+<li><code>CODE</code> — <strong>DO</strong> <code>Do_Secure_Code</code> · †<br>Calibration Commands</li>
+</ul>
+</li>
+<li><strong><code>SQUare</code></strong><ul>
+<li><code>DCYCle?</code> — <strong>NAB</strong> <code>Get_Square_Dcycle</code> · → NR3 % · †<br>Output Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>STAT</code></strong><ul>
+<li><strong><code>QUES</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_State_Questionable_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>The Questionable Data Register</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_State_Questionable_Event</code> · → NR1 · †<br>What is an Event Register?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>STATus</code></strong><ul>
+<li><code>PRESet</code> — <strong>DO</strong> <code>Do_State_Preset</code> · †<br>Status Reporting Commands</li>
+<li><code>QUEStionable</code> — <strong>DO</strong> <code>Do_State_Questionable</code> · †</li>
+<li><strong><code>QUEStionable</code></strong><ul>
+<li><code>CONDition?</code> — <strong>NAB</strong> <code>Get_State_Questionable_Condition</code> · → NR1 · †</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_State_Questionable_Enable</code> · → NR1 · †<br>The Questionable Data Register</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SWE</code></strong><ul>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_Sweep_Time</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Sweep Time</li>
+</ul>
+</li>
+<li><strong><code>SWEep</code></strong><ul>
+<li><code>SPACing</code> — <strong>SET</strong> <code>Set_Sweep_Spacing</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>LIN</code> | <code>LOG</code> · †<br>Sweep Mode</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Sweep_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Sweep Commands</li>
+<li><code>SPACing?</code> — <strong>NAB</strong> <code>Get_Sweep_Spacing</code> · → 1 value · †<br>Sweep Mode</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Sweep_State</code> · → BOOL · †<br>Sweep Commands</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_Sweep_Time</code> · → NR3 s · †<br>Frequency Sweep Commands</li>
+</ul>
+</li>
+<li><strong><code>SYST</code></strong><ul>
+<li><strong><code>BEEP</code></strong><ul>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_System_Beeper_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>System-Related Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Get_Error_Queue</code> · → NR2</li>
+<li><code>VERSion?</code> — <strong>NAB</strong> <code>Get_System_Version</code> · → 1 value · †<br>System-Related Commands</li>
+<li><code>BEEPer</code> — <strong>DO</strong> <code>Do_System_Beeper</code> · †</li>
+<li><code>LOCal</code> — <strong>DO</strong> <code>Do_System_Local</code> · †<br>Interface Configuration Commands</li>
+<li><code>REMote</code> — <strong>DO</strong> <code>Do_System_Remote</code> · †<br>Interface Configuration Commands</li>
+<li><code>RWLock</code> — <strong>DO</strong> <code>Do_System_Rwlock</code> · †<br>Interface Configuration Commands</li>
+<li><strong><code>BEEPer</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_System_Beeper_State</code> · → BOOL · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>COMMunicate</code></strong><ul>
+<li><code>LAN</code> — <strong>DO</strong> <code>Do_System_Communicate_Lan</code> · †<br>Interface Configuration Commands</li>
+<li><code>RLSTate</code> — <strong>DO</strong> <code>Do_System_Communicate_Rlstate</code> · †<br>Interface Configuration Commands</li>
+<li><strong><code>LAN</code></strong><ul>
+<li><code>IPADdress</code> — <strong>SET</strong> <code>Set_System_Communicate_Lan_Ipaddress</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Remote Interface Configuration</li>
+<li><code>MEDiasense</code> — <strong>SET</strong> <code>Set_System_Communicate_Lan_Mediasense</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>NETBios</code> — <strong>SET</strong> <code>Set_System_Communicate_Lan_Netbios</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>IPADdress?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Ipaddress</code> · → 1 value · †<br>Remote Interface Configuration</li>
+<li><code>LIPaddress?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Lipaddress</code> · → 1 value · †</li>
+<li><code>MAC?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Mac</code> · → 1 value · †</li>
+<li><code>MEDiasense?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Mediasense</code> · → 1 value · †</li>
+<li><code>NETBios?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Netbios</code> · → 1 value · †</li>
+<li><strong><code>TELNet</code></strong><ul>
+<li><code>PROMpt</code> — <strong>SET</strong> <code>Set_System_Communicate_Lan_Telnet_Prompt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>WMESsage</code> — <strong>SET</strong> <code>Set_System_Communicate_Lan_Telnet_Wmessage</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PROMpt?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Telnet_Prompt</code> · → 1 value · †</li>
+<li><code>WMESsage?</code> — <strong>NAB</strong> <code>Get_System_Communicate_Lan_Telnet_Wmessage</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>KLOCk</code></strong><ul>
+<li><code>EXCLude?</code> — <strong>NAB</strong> <code>Get_System_Klock_Exclude</code> · → 1 value · †</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Do_System_Klock_State</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SECurity</code></strong><ul>
+<li><code>IMMediate</code> — <strong>DO</strong> <code>Do_System_Secure_Immediate</code> · †<br>System-Related Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TELNet</code></strong><ul>
+<li><code>PROMpt</code> — <strong>SET</strong> <code>Set_Telnet_Prompt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Interface Configuration Commands</li>
+<li><code>WMESsage</code> — <strong>SET</strong> <code>Set_Telnet_Wmessage</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Interface Configuration Commands</li>
+<li><code>PROMpt?</code> — <strong>NAB</strong> <code>Get_Telnet_Prompt</code> · → 1 value · †<br>Interface Configuration Commands</li>
+<li><code>WMESsage?</code> — <strong>NAB</strong> <code>Get_Telnet_Wmessage</code> · → 1 value · †<br>Interface Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>TEXT</code></strong><ul>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Do_Text_Clear</code> · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>TRIG</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Trigger_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>IMM</code> | <code>EXT</code> | <code>BUS</code> · †<br>Burst Commands</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Burst Commands</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope</code> · → CRD · †<br>Burst Commands</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Source</code> · → CRD · †<br>Burst Commands</li>
+</ul>
+</li>
+<li><strong><code>UNIT</code></strong><ul>
+<li><code>ANGLe</code> — <strong>SET</strong> <code>Set_Unit_Angle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Burst Commands</li>
+<li><code>ANGLe?</code> — <strong>NAB</strong> <code>Get_Unit_Angle</code> · → 1 value · †<br>Burst Commands</li>
+</ul>
+</li>
+<li><strong><code>UNLock</code></strong><ul>
+<li><strong><code>ERRor</code></strong><ul>
+<li><code>STATe</code> — <strong>DO</strong> <code>Do_Unlock_Error_State</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric (V)</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Voltage_Unit</code> · <code>&lt;unit&gt;</code> · args: <code>unit</code> · enum: <code>VPP</code> | <code>VRMS</code> | <code>DBM</code></li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Voltage_Offset</code> · → NR3 V · †<br>Output Configuration Commands</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Voltage_Unit</code> · → CRD V · †<br>Output Configuration Commands</li>
+<li><code>HIGH</code> — <strong>DO</strong> <code>Do_Voltage_High</code> · †<br>Output Configuration</li>
+<li><code>LOW</code> — <strong>DO</strong> <code>Do_Voltage_Low</code> · †<br>Output Configuration</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Do_Cls</code> · †</li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*WAI</code> — <strong>DO</strong> <code>Do_Wai</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*LRN?</code> — <strong>NAB</strong> <code>Get_Lrn</code> · → AARD · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*PSC?</code> — <strong>NAB</strong> <code>Get_Psc</code> · → NR1 · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD · †<br>Get idn</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code></li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*PSC &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Psc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*RCL &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Rcl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SAV &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sav</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Trigger_Immediate</code></li>
+</ul>
+<!-- END GENERATED --><hr>
+<h2>Notes carried over</h2>
+<p>It looks like there is a slight mix-up in the model numbers.</p>
+<p><strong>Crucial Correction:</strong> The <strong>34401A</strong> is strictly a Digital Multimeter (it <em>measures</em> signals). It cannot generate them.</p>
+<p>You likely want the command tree for its classic &quot;benchtop partner,&quot; the <strong>Agilent/Keysight 33220A</strong> (or the older 33120A). These are the standard Function/Arbitrary Waveform Generators used in that era of equipment.</p>
+<p>Here is the entry and command tree for that device:</p>
+<pre><code class="language-json">&quot;33220A&quot;: {&quot;type&quot;: &quot;Function Generator&quot;, &quot;notes&quot;: &quot;20 MHz Waveform / Arb Generator&quot;}
+</code></pre>
+<p>The Signal Generator SCPI tree is distinct because it focuses on <strong>SOURcing</strong> (creating) rather than <strong>SENSe</strong> (measuring).</p>
+<h3><strong>1. The <code>APPLy</code> Root (The &quot;Easy Button&quot;)</strong></h3>
+<p>Just like <code>MEASure</code> on the DMM, <code>APPLy</code> is a macro. It sets the shape, frequency, amplitude, and offset all at once.</p>
+<ul>
+<li><strong><code>APPLy</code></strong></li>
+<li><code>:SINusoid</code> <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code>  Output a Sine wave.</li>
+<li><code>:SQUare</code> <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code>  Output a Square wave.</li>
+<li><code>:RAMP</code> <code>&lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code>  Output a Ramp/Triangle wave.</li>
+<li><code>:PULSe</code>  Output a Pulse.</li>
+<li><code>:DC</code>  Output a DC voltage.</li>
+<li><code>?</code>  <strong>Query:</strong> Returns a string describing the current setup (e.g., <code>&quot;SIN 1.000000E+03...&quot;</code>).</li>
+</ul>
+<blockquote>
+<p><strong>Usage:</strong> <code>APPL:SIN 5000, 3.0, -1.0</code>
+(Output a 5 kHz Sine wave, 3 Vpp amplitude, with a -1V DC offset).</p>
+</blockquote>
+<hr>
+<h3><strong>2. The <code>OUTPut</code> Subsystem (The Safety Switch)</strong></h3>
+<p>By default, the generator starts with the output <strong>OFF</strong> to protect your circuit. You <strong>must</strong> turn it on explicitly.</p>
+<ul>
+<li><p><strong><code>OUTPut</code></strong></p>
+</li>
+<li><p><code>ON|OFF</code>  Turns the BNC output on or off.</p>
+</li>
+<li><p><code>:LOAD</code> <code>50|INFinity</code>  <strong>Critical Setting.</strong> Tells the generator what impedance your circuit is (50$\Omega$ or High-Z).</p>
+</li>
+<li><p><em>Note:</em> If you set this wrong, the displayed voltage will be double or half of what you measure.</p>
+</li>
+<li><p><code>:SYNC</code> <code>ON|OFF</code>  Turns the &quot;Sync&quot; BNC port (TTL clock) on or off.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>3. The <code>SOURce</code> Subsystem (Detailed Control)</strong></h3>
+<p>If you don&#39;t use <code>APPLy</code>, you use <code>SOURce</code> to change individual parameters (like tweaking just the frequency while leaving voltage alone).</p>
+<ul>
+<li><p><strong><code>[SOURce:]</code></strong></p>
+</li>
+<li><p><strong><code>FUNCtion</code></strong></p>
+</li>
+<li><p><code>:SHAPe</code> <code>SIN|SQU|RAMP|PULS|NOIS|DC|USER</code>  Change waveform shape.</p>
+</li>
+<li><p><strong><code>FREQuency</code></strong></p>
+</li>
+<li><p><code>&lt;hertz&gt;</code>  Set frequency (e.g., <code>FREQ 1000</code>).</p>
+</li>
+<li><p><strong><code>VOLTage</code></strong></p>
+</li>
+<li><p><code>&lt;volts&gt;</code>  Set Amplitude (Vpp by default).</p>
+</li>
+<li><p><code>:OFFSet</code> <code>&lt;volts&gt;</code>  Set DC Offset.</p>
+</li>
+<li><p><code>:UNIT</code> <code>VPP|VRMS|DBM</code>  Change the units used for amplitude.</p>
+</li>
+<li><p><strong><code>PHASe</code></strong></p>
+</li>
+<li><p><code>&lt;degrees&gt;</code>  Set phase angle relative to the Sync pulse.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>4. The <code>PULSe</code> Subsystem (Square/Pulse Specifics)</strong></h3>
+<p>If you select <code>FUNCtion:SHAPe PULSe</code>, these commands become active.</p>
+<ul>
+<li><strong><code>[SOURce:]PULSe</code></strong></li>
+<li><code>:PERiod</code> <code>&lt;seconds&gt;</code>  Alternative to Frequency (1/Freq).</li>
+<li><code>:WIDTh</code> <code>&lt;seconds&gt;</code>  Set the &quot;On&quot; time (Duty Cycle).</li>
+<li><code>:TRANsition</code> <code>&lt;seconds&gt;</code>  Set the edge time (Rise/Fall time).</li>
+</ul>
+<hr>
+<h3><strong>5. The <code>BURSt</code> Subsystem (Advanced)</strong></h3>
+<p>Used to output a specific number of cycles (e.g., &quot;Fire 5 sine waves then stop&quot;).</p>
+<ul>
+<li><strong><code>BURSt</code></strong></li>
+<li><code>:STATe</code> <code>ON|OFF</code>  Enable burst mode.</li>
+<li><code>:MODE</code> <code>TRIGgered|GATed</code></li>
+<li><code>:NCYCles</code> <code>&lt;number&gt;|INFinity</code>  How many cycles to fire per trigger.</li>
+</ul>
+<hr>
+<h3><strong>Comparison: Setting vs. Query</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Command</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Set</strong> Freq</td>
+<td><code>FREQ 5000</code></td>
+<td>Sets frequency to 5 kHz.</td>
+</tr>
+<tr>
+<td><strong>Ask</strong> Freq</td>
+<td><code>FREQ?</code></td>
+<td>Returns <code>+5.00000000000E+03</code>.</td>
+</tr>
+<tr>
+<td><strong>Set</strong> Output</td>
+<td><code>OUTP ON</code></td>
+<td>Relays click, signal goes live.</td>
+</tr>
+<tr>
+<td><strong>Ask</strong> State</td>
+<td><code>OUTP?</code></td>
+<td>Returns <code>1</code> (On) or <code>0</code> (Off).</td>
+</tr>
+</tbody></table>
+<h3><strong>Common &quot;Gotcha&quot; with Signal Generators</strong></h3>
+<p><strong>The 50 Ohm vs. High Z problem:</strong>
+If you set the generator to <code>5V</code> but you measure <code>10V</code> on your oscilloscope (or the 34401A), it is because the Generator thinks you have a <code>50 OHM</code> load, but you actually have a <code>High Z</code> (Open) connection.</p>
+<ul>
+<li><strong>Fix:</strong> Send command <code>OUTP:LOAD INF</code> to tell the generator you are connecting to a high-impedance input (like a multimeter or scope).</li>
+</ul>
+<p><strong>Would you like a Python script that connects the 33220A (Gen) to the 34401A (DMM) to automatically characterize a filter (Sweeping Freq vs. Voltage)?</strong></p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Generator/33220A/commands_tree.md</code>
+  </div>
+</body>
+</html>

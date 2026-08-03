@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Changelog / 2026-07-06 - Docker & Deployment</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Changelog — 2026-07-06</h1>
+<h2>EQ cut filters — wink switches, matched selector dials, grey identity</h2>
+<ul>
+<li><strong>SelectorSwitch</strong> (<code>Knobs/SelectorSwitch/SelectorSwitch.jsx</code>) gained <code>hide_title</code>,
+<code>hide_value</code>, and <code>label_pad</code> config. The dial radius was being crushed by a fixed
+<code>-25</code> label ring + 20+20 title/value reserves (radius went <em>negative</em> at 84px).
+Cut-filter selectors now set <code>hide_title/hide_value</code> + <code>label_pad:8</code>, so the dial
+fills the box and <strong>matches the Freq/Q knob size</strong>; the active choice is still
+shown by the highlighted position label.</li>
+<li><strong>Shelf &amp; On → wink switches.</strong> The Low/High <strong>SHELF</strong> buttons and the LoCut/HiCut
+<strong>ON</strong> buttons are now <code>_WinkButton</code> (latching, publishes 0/1 — same as before).</li>
+<li><strong>Grey identity.</strong> All LoCut controls (Freq/Q/Slope/Type/Window + the ON wink) are
+<strong>light grey</strong> (<code>#D5D5D5</code>); all HiCut controls are <strong>dark grey</strong> (<code>#555555</code>),
+replacing the old <code>#BDBDBD</code> / <code>#795548</code>.</li>
+</ul>
+<h2>Phase 4 — Stereo / 5.1 reverb + JFIR bundle format</h2>
+<h3>JFIR — the OPEN-AIR &quot;JSON FIR&quot; bundle</h3>
+<ul>
+<li>New shared builder <code>libControl/graphing/_dsp/jfir.js</code> (<code>window.OaJfir</code>). A <strong>JFIR</strong> is
+one JSON object holding a preset&#39;s <strong>parameters</strong> + the generated <strong>FIR</strong> (one tap
+array per channel, so 5.1 fits in a single file) + the <strong>curve CSV</strong>. Schema v1:
+<code>{ format:&quot;JFIR&quot;, version, kind, label, sampleRate, parameters, fir:{taps,phase,window, channels,data}, curve:{columns,csv} }</code>.</li>
+<li>API: <code>build()</code>, <code>stringify()</code>, <code>download()</code> (→ <code>.jfir</code>), <code>parse()</code> (validates
+<code>format===&quot;JFIR&quot;</code>), <code>firText()</code>, and <code>downloadSeparateFir()</code> (the &quot;N separate .fir
+files&quot; path). Loaded in <code>index.html</code> right after <code>dsp.js</code>.</li>
+</ul>
+<h3>Reverb — multichannel + JFIR</h3>
+<ul>
+<li><code>dsp.js</code>: <code>synthesizeIR</code> gained a per-channel <code>profile</code> (delay scale / pre-delay
+offset / diffusion + damping boost / gain scale) for decorrelation; new
+<code>CHANNEL_LAYOUTS</code> (mono / stereo / 5.1), <code>channelProfile(ch)</code>, and
+<code>synthesizeIRMulti()</code>. Roles: <strong>C</strong> anchored &amp; drier, <strong>LFE</strong> heavily damped (~10%
+energy), <strong>Ls/Rs</strong> later + more diffuse. Verified: all channels finite, L/R
+decorrelated (sum|L−R| &gt; sum|L|).</li>
+<li><code>Reverb.jsx</code>: reads a <strong>Channels</strong> layout (MQTT <code>Channels</code> topic → else
+<code>config.channels</code> → else mono), synthesizes one decorrelated IR per channel, and
+plots each as its own colored trace with a legend. Drag handles switched to
+axis-based finders so they&#39;re robust to any series count.</li>
+<li><strong>Export popover</strong> now offers <strong>JFIR</strong> (all channels + params + curve in one bundle),
+<strong>FIR</strong> (primary channel <code>.fir</code>), and — in multichannel — <strong>N× separate .fir</strong> files.
+Shows the live layout + channel list.</li>
+<li><code>Gui_Frames/5_Samples/7_Reverb/Reverb.json</code>: added a <strong>Channels</strong> SelectorSwitch
+(Mono / Stereo / 5.1 → <code>OpenAir/Gui/Rev_Params/Channels</code>).</li>
+</ul>
+<h3>EQ — JFIR export</h3>
+<ul>
+<li><code>Equalization.jsx</code>: FIR popover now has <strong>JFIR</strong> and <strong>FIR</strong> buttons. JFIR bundles the
+band parameters, the <code>generateFIR</code> taps (single <code>mono</code> channel), and the <code>Freq,Gain</code>
+curve CSV — same format as the reverb, per the &quot;JFIR always, EQ too&quot; requirement.</li>
+</ul>
+<h3>Reverb — IR / EDC visibility toggles</h3>
+<ul>
+<li>Added <strong>IR</strong> and <strong>EDC</strong> toggle pills to the toolbar (highlighted when on) so the
+impulse-response trace can be turned off to read the decay envelope alone (and vice
+versa). Toggling re-renders without touching MQTT state.</li>
+</ul>
+<h2>Reverb — new IR visualizer + FIR/CSV export</h2>
+<p>Audit/plan: <code>Documentation/Changelog/Audit/REVERB PLAN.MD</code></p>
+<h3>New shared DSP module</h3>
+<ul>
+<li><code>libControl/graphing/_dsp/dsp.js</code> (<code>window.OaDsp</code>) — extracted the radix-2 FFT,
+Kaiser <code>I0</code>, window function, and <code>_downloadText</code> from <code>Equalization.jsx</code> so every FX
+visualizer shares one copy, and added time-domain primitives: <code>rt60ToGain</code>,
+<code>clampGain</code>, <code>combFilter</code> (one-pole damping in the loop), <code>allpassFilter</code>,
+<code>synthesizeIR</code> (Schroeder network: 8 parallel feedback combs → 4 series all-passes),
+<code>energyDecayCurve</code> (Schroeder backward integral), and peak-preserving <code>decimate</code>.</li>
+<li>Loaded in <code>index.html</code> <strong>before</strong> the graph components. EQ is unchanged for now
+(keeps its own copy; can be pointed at <code>OaDsp</code> later with fallbacks).</li>
+</ul>
+<h3>New Reverb component</h3>
+<ul>
+<li><code>libControl/graphing/Reverb/Reverb.jsx</code> (<code>window.Reverb</code>, JSON type <code>_Reverb</code>).</li>
+<li>ECharts plot: <strong>IR</strong> (orange, left axis, auto-scaled to the sub-unity peak) + <strong>EDC</strong>
+(green, right dB axis). Params read from MQTT topics <code>PreDelay / Decay / Diffusion / Size / Damping / Mix</code> (declarative <code>topics</code> map, falls back to
+<code>OpenAir/Gui/&lt;command&gt;/&lt;Key&gt;</code>). Uses <code>useMqttPublish</code> (not the typo&#39;d <code>useMqttPublisher</code>).</li>
+<li>Draggable handles: orange = Pre-Delay, green = Decay/RT60 — 40 ms throttle + a
+<code>draggingRef</code> guard against the publish echo (same pattern as EQ).</li>
+<li><strong>Export toolbar</strong> (mirrors EQ): <code>CSV</code> (<code>TimeMs,Amplitude,DecayDb</code> per sample) and
+<code>FIR ▾</code> popover (Taps / Sample Rate / Phase [default <em>minimum</em>, reverb IRs are causal]
+/ Window). FIR re-renders the IR at the chosen sample rate — the IR <strong>is</strong> the
+convolution kernel.</li>
+<li><strong>Stability clamp</strong> on comb feedback gain (<code>|g| &lt; 0.999</code>) — verified finite taps even
+at RT60=10 s / size=1 / damping=0.</li>
+</ul>
+<h3>Wiring</h3>
+<ul>
+<li><code>frameLayout/FieldComponent.jsx</code> — added the <code>type === &#39;_Reverb&#39;</code> render arm.</li>
+<li><code>index.html</code> — <code>&lt;script&gt;</code> tags for <code>_dsp/dsp.js</code> and <code>Reverb/Reverb.jsx</code>.</li>
+<li><code>Gui_Frames/5_Samples/7_Reverb/Reverb.json</code> — sample frame (graph + 6 param knobs);
+<code>api/tree.json</code> regenerated via <code>update_tree.py</code>.</li>
+<li><code>libControl/graphing/Reverb/Readme.md</code> — component doc.</li>
+</ul>
+<h2>Equalization — configurable FIR export</h2>
+<p><code>libControl/graphing/Equalization/Equalization.jsx</code></p>
+<h3>Export toolbar (dropdowns)</h3>
+<ul>
+<li>Replaced the two in-chart echarts buttons (&quot;Export FIR&quot; / &quot;Export CSV&quot;) with an
+HTML toolbar above the graph. CSV export is unchanged in output.</li>
+<li><strong>Export FIR</strong> is now parameterised by four dropdowns, exactly the DSP knobs the
+frequency-sampling method needs:<ul>
+<li><strong>Taps</strong> — 512 / 1024 / 2048 / 4096 / 8192 / 16384 (filter length).</li>
+<li><strong>Sample Rate</strong> — 44.1 / 48 / 88.2 / 96 / 192 kHz (target <code>fs</code>; also feeds the
+HP/LP digital biquad so the exported curve matches the destination rate).</li>
+<li><strong>Phase</strong> — <code>Linear</code> (symmetric taps, N/2 latency) or <code>Minimum</code> (real-cepstrum
+reconstruction, no pre-ringing, analog-like).</li>
+<li><strong>Window</strong> — Hann / Hamming / Blackman / Kaiser(β=8) / Rectangular.</li>
+<li>Defaults (1024 / 48 kHz / Linear / Hamming) reproduce the previous hardcoded
+export.</li>
+</ul>
+</li>
+</ul>
+<h3>DSP engine</h3>
+<ul>
+<li>Added module-scope helpers shared by the live curve and the export:
+<code>_fft</code> (in-place iterative radix-2 FFT/IFFT), <code>_besselI0</code>, <code>_windowVal</code>, and
+<code>generateFIR(bands, {taps, sampleRate, phase, window})</code>.</li>
+<li><code>getBiquadGainDB</code> hoisted to module scope (was defined inline in the MQTT
+effect); gained an <code>fs</code> parameter (default 48000) so the export can sample the
+target magnitude at the chosen rate. The live curve calls it unchanged.</li>
+<li>Linear-phase path: target magnitude → IFFT → circular shift to center →
+symmetric window. Minimum-phase path: log-magnitude → cepstrum → causal fold →
+exp → IFFT → tail-only taper. This replaces the old fixed 1024-tap O(N²) DFT,
+so 8k/16k-tap exports are now fast.</li>
+<li>Latest <code>bands</code> and <code>totalData</code> are stashed in refs each effect run so the HTML
+export buttons never read a stale closure.</li>
+</ul>
+<h3>Verification</h3>
+<ul>
+<li>Standalone Node checks on the extracted DSP: flat EQ → linear unit impulse at
+center and minimum-phase delta at n=0; a +12 dB / Q2 peak at 1 kHz reconstructs
+to |H(1k)|≈+12 dB, |H(100)|≈0 dB, DC≈unity, with minimum-phase energy centroid
+~3 vs linear ~1024. Full file transpiles under <code>@babel/preset-react</code>.</li>
+</ul>
+<h2>Equalization — graph &amp; layout polish</h2>
+<p><code>libControl/graphing/Equalization/Equalization.jsx</code></p>
+<ul>
+<li><strong>Transparent background.</strong> echarts <code>backgroundColor</code> and the wrapper div are now
+<code>transparent</code> (border softened to <code>rgba(255,255,255,0.15)</code>) so the procedural
+panel shows through.</li>
+<li><strong>Drag no longer fights the MQTT echo.</strong> Dragging a band handle used to publish,
+receive its own echo, re-run the effect, and rebuild/reposition the very circle
+being dragged — causing the bounce/fight. Now a <code>draggingRef</code> guard skips the
+handle rebuild while a drag is in flight; <code>ondragstart/ondragend</code> manage it, the
+drag stream is throttled to ~40 ms, and the final value is published on
+<code>ondragend</code> (guard released one tick later so the trailing echo can&#39;t re-fight).</li>
+</ul>
+<p><code>Gui_Frames/5_Samples/6_EQ/EQ.json</code></p>
+<ul>
+<li><strong>HP/LP moved below the 5 bands.</strong> <code>Band_Controls</code> is now a 5-column row
+(Low → High only); LoCut (HP) and HiCut (LP) live in a new 2-column <code>Cut_Filters</code>
+row beneath it.</li>
+<li><strong>HP/LP compacted.</strong> Cut-filter Freq+Q knobs shrunk 120→64 px, laid out Freq|Q
+side-by-side, with a tighter 3-tick scale.</li>
+<li><strong>Q knobs centered.</strong> LowMid/Mid/HighMid Q knobs are now nested in a 3-column
+<code>[spacer, Q, spacer]</code> block (the same trick Low/High use) so they sit centered
+under the LTP instead of left-aligned.</li>
+<li>NOTE: <code>api/tree.json</code> embeds each frame&#39;s JSON, so <code>update_tree.py</code> must be
+re-run after editing any <code>Gui_Frames/*.json</code> — otherwise the app renders the
+stale embedded copy (this was why the HP/LP columns &quot;disappeared&quot;).</li>
+</ul>
+<h2>LTPFader — transparency, center detent, middle-click</h2>
+<p><code>libControl/faders/LTPFader/LTPFader.jsx</code></p>
+<ul>
+<li><strong>Transparent background.</strong> Canvas <code>draw()</code> now <code>clearRect</code>s instead of filling
+<code>#222</code>, and the element loses its <code>#222</code> fill + inset shadow.</li>
+<li><strong>Middle-click the cap → recenter</strong> the rotation (gain/pan) to the middle of its
+travel (0 dB for a symmetric pot).</li>
+<li><strong>Center detent + finer pot.</strong> A small detent (<code>~1.5%</code> of range) snaps the
+rotation to center when it lands close, so 0 dB is easy to hit; the pot wheel
+step dropped 5→1 (hold Shift for the old coarse 5). Applies to drag and wheel.</li>
+</ul>
+<h2>Equalization — band-control cleanup, colors, HP/LP sync</h2>
+<p><code>Gui_Frames/5_Samples/6_EQ/EQ.json</code></p>
+<ul>
+<li><strong>Removed the stray &quot;0&quot;s.</strong> Empty <code>_Label</code> spacers render <code>OcaTextLabel(val)</code> and,
+with no topic, <code>val</code> defaults to <code>0</code> — so every spacer printed a &quot;0&quot;. All empty
+<code>_Label</code> spacers were removed (or swapped for a truly-empty <code>OcaBlock</code>).</li>
+<li><strong>Q knobs tightened &amp; centered.</strong> Dropped the 30px <code>LTP_Break</code> (added a 6px grid
+<code>row_spacing</code> instead) so the Q knob sits right under the LTP; shrank Q knobs to
+84px; mid bands now use a bare rotary knob (centers via <code>margin:auto</code>).</li>
+<li><strong>Band colors.</strong> LowMid → blue (<code>#2196F3</code>) caps/rail on both the LTP and Q knob;
+HighMid → orange (<code>#F4902C</code> = 244,144,44). Graph <code>getBandColor</code> updated to match.</li>
+</ul>
+<p><code>libControl/graphing/Equalization/Equalization.jsx</code></p>
+<ul>
+<li><strong>HP/LP knob ↔ graph sync.</strong> The graph now reads a cut filter&#39;s frequency from
+its <code>&lt;topic&gt;/Freq</code> sub-topic (a plain knob), so turning the HP/LP Freq knob moves
+the dot. Dragging a cut-filter dot publishes freq to <code>/Freq</code> (not the base LTP
+payload), so it round-trips to the knob.</li>
+<li><strong>HP/LP dot vertical → Q.</strong> Cut-filter dots have no gain, so vertical drag now
+maps the dB axis (−32..32) onto the filter Q (0.1..10) and publishes to
+<code>&lt;topic&gt;/Q</code>; the handle is positioned at its Q-mapped height. (Scale is
+approximate by intent.)</li>
+</ul>
+<h2>Equalization — tiered layout for wider LTPs</h2>
+<p><code>Gui_Frames/5_Samples/6_EQ/EQ.json</code></p>
+<ul>
+<li>Split the single 5-band row into three tiers so each LTP gets full-width room:<ul>
+<li><strong>Above the graph:</strong> <code>Top_Bands</code> (2-col) — Low + High.</li>
+<li><strong>The graph.</strong></li>
+<li><strong>Below the graph:</strong> <code>Mid_Bands</code> (3-col) — LowMid, Mid, HighMid.</li>
+<li><strong>Bottom:</strong> <code>Cut_Filters</code> (2-col) — LoCut (HP) bottom-left, HiCut (LP)
+bottom-right (unchanged).</li>
+</ul>
+</li>
+<li>Used the new horizontal room: LTP rails taller (100→130), travelling cap bigger
+(<code>cap_radius</code> 28), Q knobs 84→100px.</li>
+</ul>
+<h3>Q beside the LTP + higher mid Q</h3>
+<ul>
+<li>Each band is now a horizontal row instead of a stack: mid bands are <code>[LTP | Q]</code>
+(2-col); Low/High flatten their nested Shelf+Q block up to band level as
+<code>[LTP | Q | Shelf]</code> (3-col). LTP takes the slack column; Q/Shelf are min-width
+content columns.</li>
+<li><strong>Mid Q range raised</strong> (<code>LowMid/Mid/HighMid</code>) from max 10 → <strong>24</strong>. The graph&#39;s
+scroll-to-adjust-Q clamp was bumped 10→24 to match.</li>
+</ul>
+<h3>Graph uses the full width; export moved to a corner control</h3>
+<p><code>libControl/graphing/Equalization/Equalization.jsx</code></p>
+<ul>
+<li>Removed the redundant &quot;Master Bus Parametric EQ&quot; title (<code>title.show=false</code>) and
+shrank the grid margins (was 8%/5%/15%/15% → 8/10/12/22 px with <code>containLabel</code>)
+so the plot fills the horizontal space.</li>
+<li>Removed the full-width dropdown toolbar. Export is now two small pill buttons in
+the graph&#39;s top-right corner: <strong>CSV</strong> exports the response immediately (no menu);
+<strong>FIR ▾</strong> opens a compact popover with Taps / Sample Rate / Phase / Window and an
+Export button.</li>
+</ul>
+<h3>HP/LP filter selectors + slope-aware graph</h3>
+<p><code>Gui_Frames/5_Samples/6_EQ/EQ.json</code></p>
+<ul>
+<li>Added three <code>SelectorSwitch</code> knobs to each cut filter (LoCut/HiCut): <strong>Slope</strong>
+(6/12/18/24/48 dB/oct), <strong>Type</strong> (Butterworth / Linkwitz-Riley / Bessel /
+Chebyshev), <strong>Window</strong> (Rect/Hann/Hamming/Blackman), publishing to
+<code>&lt;topic&gt;/Slope</code>, <code>/Type</code>, <code>/Window</code>.</li>
+</ul>
+<p><code>libControl/graphing/Equalization/Equalization.jsx</code></p>
+<ul>
+<li><code>getBiquadGainDB</code> gained a <code>slope</code> (dB/oct) argument; the HP/LP magnitude is
+scaled by <code>slope/12</code>, so choosing 24 dB/oct is twice as steep as 12, 48 is
+near-brick-wall. The graph reads each cut filter&#39;s slope from <code>&lt;topic&gt;/Slope</code>.</li>
+<li>(Type/Window are published but don&#39;t yet reshape the analog curve — Window is
+FIR-only; Topology is a future math change.)</li>
+</ul>
+<h3>LTPFader — dual-mode pot (Gain / Q) + data model</h3>
+<p><code>libControl/faders/LTPFader/LTPFader.jsx</code> — a <strong>new thing</strong>: the travelling pot can
+now drive two values from one control.</p>
+<ul>
+<li><strong>Double-click the cap</strong> toggles Mode 1 (Gain) ↔ Mode 2 (Q). The cap flips colour
+(<code>cap_color</code> → <code>cap_color_2</code>, default white) and a <code>MODE 1 · GAIN</code> / <code>MODE 2 · Q</code>
+badge shows which value the rotation drives.</li>
+<li><strong>Data model</strong> extended to a 4-field compound so nothing is lost on switch:
+<code>{ value:&lt;linear&gt;, rotValue:&lt;gain&gt;, rotValue2:&lt;Q&gt;, mode:1|2 }</code>. Legacy
+scalar / <code>{value,rotValue}</code> payloads still load.</li>
+<li>Config: <code>knob_config.rotation2_min/max/default</code> define the Mode-2 range (Q);
+<code>cap_color_2</code> the Mode-2 cap. Drag/wheel sensitivity now scales to the active
+range so Gain and Q feel the same. Middle-click still recenters the active value.</li>
+<li>Enabled only when a second range is configured (<code>rotation2_*</code> / <code>dual_pot</code>);
+otherwise behaves exactly as before.</li>
+</ul>
+<h3>EQ: LTP Mode 2 replaces the separate Q knob</h3>
+<ul>
+<li>Each band&#39;s LTP now carries Q in Mode 2: <code>knob_config.rotation2_min/max/default</code>
+(Q 0.1..24 for mids, 0.1..10 for Low/High) + white <code>cap_color_2</code>. The separate
+<code>Q_Knob</code> was removed from every band (mids → LTP fills the cell; Low/High →
+<code>[LTP | Shelf]</code>).</li>
+<li>Graph <code>parseBand</code> reads Q from the LTP&#39;s <code>rotValue2</code> (falls back to a legacy <code>/Q</code>
+topic). <code>FieldComponent</code> seeds the LTP compound default with <code>rotValue2</code> + <code>mode</code>
+so the curve has a sane Q on first paint.</li>
+</ul>
+<h3>Live value readout while dragging</h3>
+<ul>
+<li><strong>LTPFader</strong>: the value chip (Freq + active Gain/Q) now shows whenever you&#39;re
+dragging, not just when <code>show_value</code> is set.</li>
+<li><strong>Knob</strong> (<code>Knobs/Knob/Knob.jsx</code>): a small value chip appears under the dial while
+the knob is being turned.</li>
+</ul>
+<h3>LTP middle-button: free-mode drag + double-click normalize</h3>
+<ul>
+<li><strong>Single middle-press = free mode</strong>: fine-adjusts the <strong>potentiometer</strong> (the
+active Gain/Q rotation) by vertical mouse movement (up = increment, down =
+decrement, orientation-independent) from the saved start.</li>
+<li><strong>Double middle-click = normalize</strong> (recenter the active rotation).</li>
+<li>Parameters on <code>knob_config</code>: <code>middle_fine</code> (px per unit-norm, default 300),
+<code>middle_double_ms</code> (double-click window, default 350), <code>middle_double_normalize</code>
+(default true).</li>
+</ul>
+<h3>Graph: scroll a dot to adjust Q (now via the LTP compound)</h3>
+<ul>
+<li>Scrolling the wheel over any band dot adjusts that band&#39;s <strong>Q</strong>. Since Q moved to
+the LTP&#39;s <code>rotValue2</code>, the graph now republishes the full compound
+<code>{value, rotValue, rotValue2, mode}</code> for peaking bands (dragging preserves Q too;
+cut filters still use <code>/Q</code>).</li>
+</ul>
+<h3>Cut filters: bypass button + uniform, edge-aligned knobs</h3>
+<p><code>Gui_Frames/5_Samples/6_EQ/EQ.json</code></p>
+<ul>
+<li>Each cut filter (LoCut/HiCut) gained an <strong>On</strong> toggle → <code>&lt;topic&gt;/Enable</code>
+(default 1). Off pulls the filter out of the curve.</li>
+<li>All cut knobs are now the same size (84px); LoCut is <strong>left-aligned</strong> (On at the
+far left), HiCut <strong>right-aligned</strong> (On at the far right), with a flexible spacer
+and tight 6px column gap.</li>
+</ul>
+<p><code>Equalization.jsx</code> / <code>FieldComponent.jsx</code></p>
+<ul>
+<li>Graph <code>parseBand</code> reads <code>&lt;topic&gt;/Enable</code>; a falsy value forces the band off.</li>
+<li><code>FieldComponent</code> greys out every control of a bypassed LoCut/HiCut (opacity +
+grayscale + no pointer events), leaving the On button itself active.</li>
+</ul>
+<h3>Graph: all minor log lines + translucent backdrop</h3>
+<ul>
+<li>The log frequency axis now shows a grid line at <strong>every</strong> sub-decade (2,3,4,…,9),
+not just even — <code>minorTick.show</code> enabled; major decade lines brightened (#555)
+so they stand out from minors (#333).</li>
+<li>The graph has a <strong>translucent, configurable backdrop</strong> (default <strong>20% black</strong>,
+currently set to <strong>50%</strong>). <code>EQ_Graph.cosmetics.bg_color</code> (<code>black</code>/<code>white</code>/any css
+colour) + <code>cosmetics.bg_opacity</code> (0–100) — e.g. <code>white</code>/<code>10</code> for a lighter cloud.</li>
+</ul>
+<h3>Shelf bands: vertical drag adjusts gain</h3>
+<ul>
+<li>In the graph, <code>lowshelf</code>/<code>highshelf</code> bands were gain-locked (only <code>peaking</code>
+allowed vertical gain). Now a <code>hasGain</code> check covers peaking <strong>and</strong> shelves, so
+dragging a shelved Low/High dot up/down changes its gain and the handle sits at
+the shelf&#39;s gain level (not pinned to 0 dB).</li>
+</ul>
+<h3>Cut-filter narrow-window layout</h3>
+<ul>
+<li><strong>Shelf button</strong> relabeled <code>Shelf Mode</code> → <strong><code>SHELF</code></strong> and shrunk (60×40 → 46×32)
+so it stops colliding with the band title in narrow windows.</li>
+<li><strong>Cut filters stack into two rows</strong> (<code>layout_columns</code> 6→3): row 1 <code>On · Freq · Q</code>,
+row 2 <code>Slope · Type · Window</code> — so the extra knobs fall downward instead of
+squishing across one row. (Left/right edge-alignment dropped in favour of the
+stack; note that true width-based hide/show would need a JS width measurement,
+not the CSS grid.)</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Deployment/Changelog/2026-07-06.md</code>
+  </div>
+</body>
+</html>

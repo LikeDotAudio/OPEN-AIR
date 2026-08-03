@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: buttons / Button - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Button — basic actuator + toggle</h1>
+<p>The simplest button pair: a momentary actuator and a stateful toggle.</p>
+<ul>
+<li><strong>Defines (globals):</strong> <code>OcaButton</code>, <code>OcaToggleButton</code></li>
+<li><strong>Props:</strong> <code>OcaButton</code> → <code>label</code>, <code>onClick</code>, <code>color</code>; <code>OcaToggleButton</code> → <code>label</code>, <code>value</code>, <code>onChange</code></li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+<li><strong>Demo:</strong> open <code>../index.html</code> (renders both side by side).</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;Exhaustive_Actuator_Example&quot;: {
+    &quot;type&quot;: &quot;_GuiActuator&quot;,
+    &quot;identity&quot;: {
+      &quot;label&quot;: &quot;Fire Pulse&quot;,
+      &quot;id&quot;: &quot;fire_btn&quot;,
+      &quot;notes&quot;: &quot;A momentary push button that triggers a hardware action.&quot;
+    },
+    &quot;geometry&quot;: {
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 50,
+      &quot;corner_radius&quot;: 12,
+      &quot;stretch&quot;: &quot;none&quot;
+    },
+    &quot;domain&quot;: {
+      &quot;primary&quot;: {
+        &quot;value&quot;: &quot;TRG:IMM&quot;
+      }
+    },
+    &quot;dynamics&quot;: {
+      &quot;path&quot;: &quot;Hardware/Trigger/Manual&quot;
+    },
+    &quot;cosmetics&quot;: {
+      &quot;active_color&quot;: &quot;#FF9900&quot;,
+      &quot;active_bg_color&quot;: &quot;#331100&quot;,
+      &quot;bg_color&quot;: &quot;#1a1a1a&quot;,
+      &quot;active_text_color&quot;: &quot;#FFFFFF&quot;,
+      &quot;text_color&quot;: &quot;#dcdcdc&quot;,
+      &quot;glow_intensity&quot;: 1.8,
+      &quot;alpha&quot;: 1.0,
+      &quot;active_font_style&quot;: &quot;bold&quot;,
+      &quot;active_font_size&quot;: 12,
+      &quot;inactive_font_style&quot;: &quot;normal&quot;,
+      &quot;inactive_font_size&quot;: 10
+    },
+    &quot;readout&quot;: {
+      &quot;label&quot;: {
+        &quot;active&quot;: {
+          &quot;text&quot;: &quot;FIRING...&quot;,
+          &quot;text_size&quot;: 12,
+          &quot;text_color&quot;: &quot;#cccccc&quot;
+        },
+        &quot;inactive&quot;: {
+          &quot;text&quot;: &quot;FIRE&quot;,
+          &quot;text_size&quot;: 12,
+          &quot;text_color&quot;: &quot;#cccccc&quot;
+        }
+      }
+    },
+    &quot;interaction&quot;: {
+      &quot;is_read_only&quot;: false,
+      &quot;message&quot;: &quot;TRG:IMM&quot;
+    },
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;center&quot;,
+      &quot;padx&quot;: 10,
+      &quot;pady&quot;: 10
+    },
+    &quot;style&quot;: {
+      &quot;active&quot;: {
+        &quot;text_color&quot;: &quot;#FF902C&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This sample is REALLY REALLY COMPLETE. It outlines the momentary press behavior and MQTT trigger paths.&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;actuator_types&quot;: [
+      &quot;_GuiActuator&quot;,
+      &quot;_SmartActuator&quot;,
+      &quot;_ButtonActuator&quot;,
+      &quot;_GuiButton&quot;
+    ],
+    &quot;momentary_behavior&quot;: &quot;Publishes &#39;val: true&#39; on Press and &#39;val: false&#39; on Release.&quot;,
+    &quot;maintenance_commands&quot;: &quot;If &#39;message&#39; starts with &#39;*&#39; (SCPI) or contains &#39;SYSTem&#39;, the command is copied to clipboard instead of published.&quot;
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/buttons/Button/Readme.md</code>
+  </div>
+</body>
+</html>

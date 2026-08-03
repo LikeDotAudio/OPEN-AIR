@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>openair-AVB-Milan (README) - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>OpenAir AVB / Milan Backend (<code>openair-avb-milan</code>)</h1>
+<p>Discovery for AVB and Milan devices over <strong>AVDECC</strong> (IEEE 1722.1) — plus the
+one control command worth having on day one: <em>identify</em>, which makes a device
+blink its front-panel LED so you can tell which box in the rack it is.</p>
+<p>This is the only agent in <code>ComProtocols</code> that works at <strong>Layer 2</strong>. Everything
+else here opens a socket on an IP address; this one reads raw Ethernet frames.
+That difference drives every design decision below.</p>
+<hr>
+<h2>Why this crate shares no code with the AES67 agents</h2>
+<p>OPEN-AIR discovers three families of audio-over-network devices, and it is
+worth being precise about how they differ, because two of them are close
+cousins and the third is not related at all.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Layer</th>
+<th>Discovery</th>
+<th>Describes streams with</th>
+<th>Agent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAVENNA</td>
+<td>3 (IP)</td>
+<td>mDNS query → RTSP pull</td>
+<td>SDP text</td>
+<td><code>openair-ravenna</code></td>
+</tr>
+<tr>
+<td>Dante (AES67 mode)</td>
+<td>3 (IP)</td>
+<td>SAP multicast push</td>
+<td>SDP text</td>
+<td><code>openair-sap</code></td>
+</tr>
+<tr>
+<td>AVB / Milan</td>
+<td><strong>2 (MAC)</strong></td>
+<td><strong>AVDECC ADP</strong></td>
+<td><strong>binary descriptor model</strong></td>
+<td><strong>this crate</strong></td>
+</tr>
+</tbody></table>
+<p>RAVENNA and Dante disagree only about <em>how an SDP record is delivered</em>. They
+agree it is SDP, arriving over IP, describing a stream by multicast address and
+port. That is why those two agents share a parser (<code>openair_ravenna::sdp</code>).</p>
+<p>AVB agrees with neither. It moves audio addressed by MAC address and never
+touches IP — no ports, no multicast group to subscribe to, no SDP anywhere.
+A device is found by reading frames sent to the reserved MAC
+<code>91:E0:F0:01:00:00</code>, and described by a hierarchical binary descriptor model.
+Every assumption the other agents rest on is absent, so this crate starts at
+the wire.</p>
+<p>The other consequence: <strong>AVB switches are participants, not pipes.</strong> An AES67
+switch forwards mDNS and SAP without understanding them. An AVB switch must be
+AVB-certified and actively reserves bandwidth via SRP before audio flows. This
+crate does not speak SRP — see <a href="#scope-what-this-does-not-do">Scope</a> — but it
+is why a device can be perfectly healthy, announce itself here, and still
+refuse to pass audio through a non-AVB switch.</p>
+<hr>
+<h2>Core Architecture</h2>
+<p>One module per protocol layer, in <code>src/</code>:</p>
+<ul>
+<li><strong><code>adp.rs</code></strong> — the <strong>AVDECC Discovery Protocol</strong> parser (1722.1 clause 6).
+Decodes the 68-byte ADPDU: entity ID, model ID, capability bitfields,
+talker/listener stream counts, and the gPTP grandmaster. Handles the optional
+802.1Q tag. Also builds the <code>ENTITY_DISCOVER</code> query frame.</li>
+<li><strong><code>capture.rs</code></strong> — raw <code>AF_PACKET</code>/<code>SOCK_RAW</code> capture. Interface
+enumeration, AVDECC multicast group membership, frame send/receive, and
+privilege-error explanation. Linux-only; says so plainly elsewhere.</li>
+<li><strong><code>aecp.rs</code></strong> — the <strong>AVDECC Enumeration and Control Protocol</strong> (clause 9),
+scoped to a single command: <code>SET_CONTROL</code> against the IDENTIFY control.
+Builds command frames, parses responses, decodes AEM status codes.</li>
+<li><strong><code>identify.rs</code></strong> — drives the identify exchange: send, await response with
+the spec&#39;s retry rules, guarantee the blink is turned back off.</li>
+<li><strong><code>lib.rs</code></strong> — the agent. Listen loop, MQTT publishing, entity expiry.</li>
+<li><strong><code>bin/avdecc-probe.rs</code></strong> — standalone &quot;is there anything out there?&quot;.</li>
+<li><strong><code>bin/avdecc-identify.rs</code></strong> — standalone &quot;which box are you?&quot;.</li>
+</ul>
+<hr>
+<h2>How discovery works</h2>
+<h3>1. The announcement</h3>
+<p>An AVB <strong>entity</strong> (any device — a console, an amp, an I/O box) periodically
+emits an ADP <code>ENTITY_AVAILABLE</code> frame to the AVDECC multicast MAC. There is no
+query/response handshake and no resolution step; the frame <em>is</em> the
+announcement.</p>
+<pre><code>Ethernet: | dst 91:E0:F0:01:00:00 | src &lt;device MAC&gt; | [802.1Q] | 0x22F0 |
+AVTP common control header (12 bytes):
+  0       subtype = 0x7A (ADP)
+  1       sv | version | message_type   0=AVAILABLE 1=DEPARTING 2=DISCOVER
+  2..3    valid_time(5) | control_data_length(11)
+  4..11   entity_id
+ADPDU body (56 bytes):
+  12..19  entity_model_id          20..23  entity_capabilities
+  24..25  talker_stream_sources    26..27  talker_capabilities
+  28..29  listener_stream_sinks    30..31  listener_capabilities
+  32..35  controller_capabilities  36..39  available_index
+  40..47  gptp_grandmaster_id      48      gptp_domain_number
+  50..51  current_configuration_index
+  52..53  identify_control_index   54..55  interface_index
+  56..63  association_id
+</code></pre>
+<h3>2. Asking rather than waiting</h3>
+<p>Heartbeats can be tens of seconds apart, so on startup the agent sends one ADP
+<code>ENTITY_DISCOVER</code> per interface — entity ID zero, meaning &quot;everyone answer&quot;.</p>
+<p>This is the <strong>only frame discovery transmits</strong>. It is what Hive and every other
+AVDECC controller emits on startup, and it is the Layer 2 twin of the mDNS query
+<code>openair-dnssd</code> already sends. It reserves no bandwidth and changes no routing.</p>
+<h3>3. Multicast membership, not promiscuous mode</h3>
+<p>A NIC drops multicast frames for groups it has not joined, so the listener asks
+for <code>91:E0:F0:01:00:00</code> explicitly via <code>PACKET_ADD_MEMBERSHIP</code> on every
+interface. The lazy alternative — promiscuous mode — lifts all filtering and
+hands userspace every frame on the segment. On an audio network that is a
+firehose of RTP, and a far broader claim on the network&#39;s traffic than
+discovery needs.</p>
+<p>The socket is also filtered to EtherType <code>0x22F0</code> in the kernel. AVTP <em>stream
+data</em> shares that EtherType, so a subtype check still happens per frame — but
+that is a byte comparison on frames we were going to see anyway.</p>
+<h3>4. Expiry</h3>
+<p><code>ENTITY_DEPARTING</code> only arrives on a clean shutdown. A pulled cable produces
+silence. So each entity is expired on its own announced <code>valid_time</code> (floored
+at 10s so one dropped frame does not make the UI flicker), and its retained
+topics are cleared.</p>
+<hr>
+<h2>MQTT topics</h2>
+<p>One retained topic per attribute, matching the field-per-topic shape the
+Discovered-tab builder sweeps:</p>
+<pre><code>OpenAir/System/Protocols/avb/Device/{entity_id}/{key}
+</code></pre>
+<p>Keyed by <strong>entity ID, not name</strong> — ADP carries no human-readable name at all.
+The name lives in the descriptor tree, which requires enumeration.</p>
+<p>Keys: <code>entity_id</code>, <code>mac</code>, <code>oui</code>, <code>interface</code>, <code>entity_model_id</code>,
+<code>talker_sources</code>, <code>talker_capabilities</code>, <code>listener_sinks</code>,
+<code>listener_capabilities</code>, <code>entity_capabilities</code>, <code>gptp_grandmaster</code>,
+<code>gptp_domain</code>, <code>milan</code>, <code>available_index</code>, <code>configuration_index</code>,
+<code>valid_time_s</code>, <code>status</code>, <code>last_online</code>.</p>
+<p>The agent also publishes its own health, because it can fail for a reason that
+has nothing to do with the code:</p>
+<pre><code>OpenAir/System/Protocols/avb/Agent/state    listening | unavailable
+OpenAir/System/Protocols/avb/Agent/detail   which interfaces, or why not
+</code></pre>
+<p>The orchestrator marks a protocol <code>online</code> from the presence of its
+<code>config.ini</code>, which is a fair proxy for every IP-based agent and a poor one
+here — missing <code>CAP_NET_RAW</code> would otherwise show as a healthy agent silently
+publishing nothing.</p>
+<hr>
+<h2>Privileges</h2>
+<p>Raw frame capture requires <code>CAP_NET_RAW</code>. There is no unprivileged way to read
+raw Ethernet on Linux, and no way around it: the protocol has no IP layer to
+bind to.</p>
+<pre><code class="language-bash">sudo setcap cap_net_raw,cap_net_admin+eip target/release/avdecc-probe
+sudo setcap cap_net_raw,cap_net_admin+eip target/release/avdecc-identify
+</code></pre>
+<p>...or run with <code>sudo</code>. Without it, every tool here prints that remedy rather
+than a bare <code>EPERM</code>, because &quot;permission denied&quot; reads as &quot;AVB is broken&quot; when
+it actually means &quot;you have not granted packet capture&quot;.</p>
+<hr>
+<h2>The tools</h2>
+<h3><code>avdecc-probe</code> — is anything out there?</h3>
+<pre><code class="language-bash">sudo ./avdecc-probe              # every Ethernet interface
+sudo ./avdecc-probe enp5s0f0     # just the audio network
+</code></pre>
+<p>Listens 30 seconds and prints a verdict. Two things make it worth having
+separately from the agent:</p>
+<p><strong>It reports the negative usefully.</strong> An agent that publishes no topics is
+indistinguishable from one that never started. The probe says &quot;listened on
+these interfaces, sent these queries, heard nothing&quot;, and distinguishes:</p>
+<ul>
+<li><em>No AVTP traffic at all</em> — device not on a listening interface, switch not
+AVB-capable and dropping the multicast, AVB mode disabled, or the device has
+not yet achieved gPTP lock.</li>
+<li><em>AVTP present but no ADP</em> — the wire is alive and something is streaming, but
+nothing is announcing. Usually means AVDECC is disabled separately from AVB.</li>
+</ul>
+<p><strong>It shows every AVTP subtype it sees</strong>, so a device that streams but does not
+announce still registers as evidence of something on the wire.</p>
+<p>It also flags when discovered entities report <strong>different gPTP grandmasters</strong> —
+devices on different clocks cannot stream to each other, and it is the most
+common reason for &quot;discovered but won&#39;t pass audio&quot;.</p>
+<h3><code>avdecc-identify</code> — which box are you?</h3>
+<p>Hive&#39;s Identify button, as a command line.</p>
+<pre><code class="language-bash">sudo ./avdecc-identify                    # exactly one entity present: blink it
+sudo ./avdecc-identify --list             # show what is out there, do nothing
+sudo ./avdecc-identify 1B:2C              # match entity ID or MAC by substring
+sudo ./avdecc-identify 1B:2C --seconds 30 # blink longer
+</code></pre>
+<p>ADP carries <code>identify_control_index</code> directly, which is what lets this work
+without implementing enumeration: an AECP <code>SET_CONTROL</code> writes 255 to that
+CONTROL descriptor to start the blink and 0 to stop it.</p>
+<pre><code>  0       subtype = 0x7B (AECP)
+  1       sv | version | message_type    0 = AEM_COMMAND, 1 = AEM_RESPONSE
+  2..3    status(5) | control_data_length(11)
+  4..11   target_entity_id
+  12..19  controller_entity_id
+  20..21  sequence_id
+  22..23  u | command_type                0x0018 = SET_CONTROL
+  24..25  descriptor_type                 0x001A = CONTROL
+  26..27  descriptor_index                from ADP&#39;s identify_control_index
+  28      value                           255 = on, 0 = off
+</code></pre>
+<p><strong>This is the only code in these crates that writes to hardware</strong>, so it is
+fenced accordingly:</p>
+<ul>
+<li><strong>Unicast, never the multicast group.</strong> A test asserts the destination is not
+<code>91:E0:F0:01:00:00</code> — broadcasting an identify would light up a whole rack.</li>
+<li><strong>It refuses to guess a target.</strong> No argument plus multiple entities means
+list and stop. Picking for you is how a console in another room starts
+flashing.</li>
+<li><strong>It refuses to guess the control index.</strong> If the entity does not set
+<code>AEM_IDENTIFY_CONTROL_INDEX_VALID</code>, it stops. Commanding index 0 on the
+off-chance could hit a gain, a mute, or a clock source instead.</li>
+<li><strong>It always sends the off command</strong> — on refusal, on no response, and on
+Ctrl-C (the wait is sliced into 100ms ticks that poll an interrupt flag, so
+the signal cannot kill the process mid-blink and leave hardware flashing).</li>
+</ul>
+<p>Retries follow 1722.1 §9.2.1.2: 250ms timeout, two retries, <strong>reusing the same
+sequence ID</strong> so the device recognises a duplicate rather than acting twice.</p>
+<p>AEM status codes are decoded with plain-language explanations. The one you are
+most likely to hit: <strong><code>EntityAcquired</code> — if Hive is open and holding the
+entity, identify is refused.</strong> Close it first.</p>
+<hr>
+<h2>Scope: what this does <em>not</em> do</h2>
+<p>Deliberate omissions, each for a reason:</p>
+<ul>
+<li><strong>AEM enumeration (<code>READ_DESCRIPTOR</code>).</strong> ADP gives capability flags and
+stream <em>counts</em>. Channel names, clock domains, and the routing matrix live in
+the descriptor tree, which is a request/response conversation with the
+device. Reporting counts we actually received beats implying we know a tree
+we never asked for. This is the natural next piece of work.</li>
+<li><strong>SRP (Stream Reservation Protocol).</strong> Asks the switches to carve out
+guaranteed bandwidth. Changes network state.</li>
+<li><strong>ACMP (connection management).</strong> Rewires audio between devices. Changes
+network state.</li>
+<li><strong>Claiming Milan compliance.</strong> Milan is asserted by answering a Milan Vendor
+Unique <code>GET_MILAN_INFO</code> command — it is <em>not</em> a bit in the announcement. So
+<code>milan_assessment()</code> returns &quot;possible — confirm with MVU&quot; for a capable
+entity, and only goes negative on hard evidence (no AEM support, no gPTP, no
+Class A). A test pins that hedge in place. A definitive yes/no needs the MVU
+exchange, which is a small extension of <code>aecp.rs</code>.</li>
+<li><strong>MQTT-triggered identify.</strong> <code>config.ini</code> declares <code>topic_listen</code> and a GUI
+Identify button is the obvious destination, but wiring it means anything that
+can publish to the bus can make hardware blink. That is a deliberate decision
+left open rather than made silently.</li>
+</ul>
+<hr>
+<h2>How the tests work</h2>
+<p><code>cargo test -p openair-avb-milan</code> — 22 tests, no hardware or network required.
+Every test builds or parses real frame bytes.</p>
+<ul>
+<li><strong><code>adp.rs</code></strong> — a synthetic <code>ENTITY_AVAILABLE</code> with every field set to a
+distinguishable value, so a field-offset mistake cannot pass by reading a
+neighbour&#39;s bytes and still looking plausible. Plus: VLAN-tagged frames parse
+identically to untagged; AVTP stream data on the same EtherType is rejected
+on subtype, not mistaken for a short announcement; Milan is never claimed
+from ADP alone.</li>
+<li><strong><code>aecp.rs</code></strong> — the identify command&#39;s exact byte layout; that <em>off</em> differs
+from <em>on</em> in exactly one byte (a regression there leaves hardware blinking
+indefinitely); that our own outgoing command is not mistaken for a response,
+which would report a phantom success before the device replied.</li>
+<li><strong><code>identify.rs</code></strong> — outcomes explain themselves without overclaiming (a
+silent device is reported as ambiguous, since the command may have landed and
+only the response been lost); cancelling shortens the wait rather than
+skipping the off command.</li>
+<li><strong><code>capture.rs</code></strong> — interface enumeration works unprivileged; permission
+errors name the remedy.</li>
+</ul>
+<p>The AES67 agents test against byte-verbatim captures from the bench. Doing the
+same here needs an AVB entity on the wire — capture one ADP frame and add it as
+a fixture the way <code>openair-sap</code> did.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-AVB-Milan/README.md</code>
+  </div>
+</body>
+</html>

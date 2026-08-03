@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: input / JsonTree - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>JsonTree — collapsible JSON viewer</h1>
+<p>Recursive, expandable tree view of an arbitrary JSON object.</p>
+<ul>
+<li><strong>Defines (globals):</strong> <code>OcaJsonTree</code>, <code>JsonNode</code> (recursive node)</li>
+<li><strong>Props:</strong> the JSON value to display (per <code>OcaJsonTree</code>)</li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;data_json_tree_Example&quot;: {
+    &quot;type&quot;: &quot;_JsonTree&quot;,
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;AES70 Object Model (data_AES70.json)&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      }
+    },
+    &quot;json_source&quot;: &quot;display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json&quot;,
+    &quot;allow_filter&quot;: true,
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;ew&quot;,
+      &quot;padx&quot;: 5,
+      &quot;pady&quot;: 5,
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 50
+    },
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This is an enhanced sample configuration demonstrating full instantiation capabilities.&quot;
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/input/JsonTree/Readme.md</code>
+  </div>
+</body>
+</html>

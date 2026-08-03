@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>54641D / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Oscilloscope/54641D — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>438 commands</strong> — SET 169 · RIG 1 · NAB 163 · DO 105 · 325 unverified (74%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Get_Math_Statistics</code> · → vpp, vmax, vmin, vaverage<ul>
+<li><code>:MEASure:SOURce FUNCtion;:MEASure:VPP?;:MEASure:VMAX?;:MEASure:VMIN?;:MEASure:VAVerage?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Time_Stats_CH1</code> · args: <code>source</code> · → frequency, period, dutycycle, risetime<ul>
+<li><code>:MEASure:SOURce &lt;source&gt;;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Time_Stats_CH2</code> · args: <code>source</code> · → frequency, period, dutycycle, risetime<ul>
+<li><code>:MEASure:SOURce &lt;source&gt;;:MEASure:FREQuency?;:MEASure:PERiod?;:MEASure:DUTYcycle?;:MEASure:RISetime?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Voltage_Stats_CH1</code> · args: <code>source</code> · → vpp, vrms, vmax, vmin<ul>
+<li><code>:MEASure:SOURce &lt;source&gt;;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Voltage_Stats_CH2</code> · args: <code>source</code> · → vpp, vrms, vmax, vmin<ul>
+<li><code>:MEASure:SOURce &lt;source&gt;;:MEASure:VPP?;:MEASure:VRMS?;:MEASure:VMAX?;:MEASure:VMIN?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Setup_Trigger_Edge</code> · args: <code>source</code>, <code>slope</code>, <code>level</code> · enum · †<br>Set edge trigger source, slope and level together<ul>
+<li><code>:TRIGger:EDGE:SOURce &lt;source&gt;;:TRIGger:EDGE:SLOPe &lt;slope&gt;;:TRIGger:EDGE:LEVel &lt;level&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>AUToscale</code> — <strong>DO</strong> <code>Autoscale</code></li>
+<li><code>DIGitize</code> — <strong>DO</strong> <code>Digitize_Channel</code> · <code>&lt;chan&gt;</code> · per-instance: <code>chan</code></li>
+<li><code>AUToscale</code> — <strong>DO</strong> <code>Do_Autoscale</code></li>
+<li><code>RUN</code> — <strong>DO</strong> <code>Do_Run</code></li>
+<li><code>SINGle</code> — <strong>DO</strong> <code>Do_Single</code></li>
+<li><code>STOP</code> — <strong>DO</strong> <code>Do_Stop</code></li>
+<li><code>RUN</code> — <strong>DO</strong> <code>Run</code></li>
+<li><code>SINGle</code> — <strong>DO</strong> <code>Single</code></li>
+<li><code>STOP</code> — <strong>DO</strong> <code>Stop</code></li>
+<li><strong><code>ACQuire</code></strong><ul>
+<li><code>COMPlete</code> — <strong>SET</strong> <code>Set_Acquire_Complete</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Acquire_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>TYPE</code> — <strong>SET</strong> <code>Set_Acquire_Mode_AVERage</code> · <code>&lt;type&gt;</code> · args: <code>type</code> · enum</li>
+<li><code>TYPE</code> — <strong>SET</strong> <code>Set_Acquire_Mode_HRESolution</code> · <code>&lt;type&gt;</code> · args: <code>type</code> · enum</li>
+<li><code>TYPE</code> — <strong>SET</strong> <code>Set_Acquire_Mode_NORMal</code> · <code>&lt;type&gt;</code> · args: <code>type</code> · enum</li>
+<li><code>TYPE</code> — <strong>SET</strong> <code>Set_Acquire_Mode_PEAK</code> · <code>&lt;type&gt;</code> · args: <code>type</code> · enum</li>
+<li><code>TYPE</code> — <strong>SET</strong> <code>Set_Acquire_Type</code> · <code>&lt;type&gt;</code> · args: <code>type</code> · enum</li>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Average_Count</code> · <code>&lt;count&gt;</code> · args: <code>count</code> · integer</li>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Averaging_Count</code> · <code>&lt;count&gt;</code> · args: <code>count</code> · integer</li>
+<li><code>POINts</code> — <strong>SET</strong> <code>Set_Points</code> · <code>&lt;points&gt;</code> · args: <code>points</code> · integer</li>
+<li><code>COMPlete?</code> — <strong>NAB</strong> <code>Get_Acquire_Complete</code> · → 1 value · †</li>
+<li><code>COUNT?</code> — <strong>NAB</strong> <code>Get_Acquire_Count</code> · → NR1 · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Acquire_Mode</code> · → CRD · †</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Acquire_Points</code> · → NR1 · †</li>
+<li><code>SRATe?</code> — <strong>NAB</strong> <code>Get_Sample_Rate</code> · → 1 value</li>
+</ul>
+</li>
+<li><strong><code>CALibrate</code></strong><ul>
+<li><code>LABel</code> — <strong>SET</strong> <code>Set_Calibrate_Label</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DATE?</code> — <strong>NAB</strong> <code>Get_Calibrate_Date</code> · → 1 value · †</li>
+<li><code>LABel?</code> — <strong>NAB</strong> <code>Get_Calibrate_Label</code> · → 1 value · †</li>
+<li><code>SWITch?</code> — <strong>NAB</strong> <code>Get_Calibrate_Switch</code> · → 1 value · †</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_Calibrate_Time</code> · → NR3 s · †</li>
+</ul>
+</li>
+<li><strong><code>CHANNEL1</code></strong><ul>
+<li><code>COUPLING</code> — <strong>SET</strong> <code>Set_Channel_Coupling</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Receiving Information from the Instrument</li>
+<li><code>COUPLING?</code> — <strong>NAB</strong> <code>Get_Channel_Coupling</code> · → CRD · †<br>Receiving Information from the Instrument</li>
+<li><code>RANGE?</code> — <strong>NAB</strong> <code>Get_Channel_Range</code> · → NR3 · †<br>Address Varies According to Configuration</li>
+<li><code>BWLIMIT</code> — <strong>DO</strong> <code>Do_Channel_Bwlimit</code> · †</li>
+<li><code>OFFSET</code> — <strong>DO</strong> <code>Do_Channel_Offset</code> · †</li>
+<li><code>PROBE</code> — <strong>DO</strong> <code>Do_Channel_Probe</code> · †<br>Setting Up the Instrument</li>
+</ul>
+</li>
+<li><strong><code>CHANnel</code></strong><ul>
+<li><code>ACTivity</code> — <strong>DO</strong> <code>Do_Channel_Activity</code> · †</li>
+<li><code>MATH</code> — <strong>DO</strong> <code>Do_Channel_Math</code> · †</li>
+<li><code>THReshold</code> — <strong>DO</strong> <code>Do_Channel_Threshold</code> · †</li>
+</ul>
+</li>
+<li><strong><code>CHANnel1</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH1_BWLimit</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH1_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum</li>
+<li><code>INVert</code> — <strong>SET</strong> <code>CH1_Invert</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>LABel</code> — <strong>SET</strong> <code>CH1_Label</code> · <code>&lt;string&gt;</code> · args: <code>string</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH1_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH1_Probe</code> · <code>&lt;attenuation&gt;</code> · args: <code>attenuation</code> · numeric</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH1_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric</li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Channel_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Channel_Range</code> · <code>&lt;range&gt;</code> · args: <code>range</code> · numeric</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Channel_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_CH1_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_CH1_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>CHANnel2</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH2_BWLimit</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH2_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum</li>
+<li><code>INVert</code> — <strong>SET</strong> <code>CH2_Invert</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>LABel</code> — <strong>SET</strong> <code>CH2_Label</code> · <code>&lt;string&gt;</code> · args: <code>string</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH2_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH2_Probe</code> · <code>&lt;attenuation&gt;</code> · args: <code>attenuation</code> · numeric</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH2_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_CH2_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_CH2_ON</code> · <code>ON</code></li>
+<li><code>SKEW</code> — <strong>DO</strong> <code>Do_Channel_Skew</code> · †</li>
+</ul>
+</li>
+<li><strong><code>CHANnel&lt;n&gt;</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>Set_Bandwidth_Limit</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>n</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>Set_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum · per-instance: <code>n</code></li>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Display</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>n</code></li>
+<li><code>IMPedance</code> — <strong>SET</strong> <code>Set_Impedance</code> · <code>&lt;imp&gt;</code> · args: <code>imp</code> · enum · per-instance: <code>n</code></li>
+<li><code>INVert</code> — <strong>SET</strong> <code>Set_Invert</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>n</code></li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>Set_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · numeric · per-instance: <code>n</code></li>
+</ul>
+</li>
+<li><strong><code>DIGital&lt;n&gt;</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Digital_Display</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>n</code></li>
+<li><code>LABel</code> — <strong>SET</strong> <code>Set_Digital_Label</code> · <code>&lt;label&gt;</code> · args: <code>label</code> · per-instance: <code>n</code></li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Digital_Position</code> · <code>&lt;pos&gt;</code> · args: <code>pos</code> · numeric · per-instance: <code>n</code></li>
+</ul>
+</li>
+<li><strong><code>DISPLay</code></strong><ul>
+<li><code>LINE</code> — <strong>DO</strong> <code>Do_Display_Line</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Display_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †</li>
+<li><code>LABel</code> — <strong>SET</strong> <code>Set_Display_Label</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PERSistence</code> — <strong>SET</strong> <code>Set_Display_Persistence</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Display_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>VECTors</code> — <strong>SET</strong> <code>Set_Display_Vectors</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Display_Data</code> · → BLOCK · †</li>
+<li><code>LABel?</code> — <strong>NAB</strong> <code>Get_Display_Label</code> · → 1 value · †</li>
+<li><code>PERSistence?</code> — <strong>NAB</strong> <code>Get_Display_Persistence</code> · → NR3 s · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Display_Source</code> · → CRD · †</li>
+<li><code>VECTors?</code> — <strong>NAB</strong> <code>Get_Display_Vectors</code> · → 1 value · †</li>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Do_Clear_Display</code></li>
+<li><code>COLumn</code> — <strong>DO</strong> <code>Do_Display_Column</code> · †</li>
+<li><code>CONNect</code> — <strong>DO</strong> <code>Do_Display_Connect</code> · †</li>
+<li><code>GRID</code> — <strong>DO</strong> <code>Do_Display_Grid</code> · †</li>
+<li><code>INVerse</code> — <strong>DO</strong> <code>Do_Display_Invert</code> · †</li>
+<li><code>ORDer</code> — <strong>DO</strong> <code>Do_Display_Order</code> · †</li>
+<li><code>PIXel</code> — <strong>DO</strong> <code>Do_Display_Pixel</code> · †</li>
+<li><code>POSition</code> — <strong>DO</strong> <code>Do_Display_Position</code> · †</li>
+<li><code>ROW</code> — <strong>DO</strong> <code>Do_Display_Row</code> · †</li>
+<li><code>TEXT</code> — <strong>DO</strong> <code>Do_Display_Text</code> · †</li>
+</ul>
+</li>
+<li><strong><code>EXTernal</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>Set_External_Bwlimit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>IMPedance</code> — <strong>SET</strong> <code>Set_External_Impedance</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>Set_External_Probe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_External_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>UNITs</code> — <strong>SET</strong> <code>Set_External_Units</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>BWLimit?</code> — <strong>NAB</strong> <code>Get_External_Bwlimit</code> · → BOOL · †</li>
+<li><code>IMPedance?</code> — <strong>NAB</strong> <code>Get_External_Impedance</code> · → CRD · †</li>
+<li><code>PROBe?</code> — <strong>NAB</strong> <code>Get_External_Probe</code> · → NR3 · †</li>
+<li><code>PROTection?</code> — <strong>NAB</strong> <code>Get_External_Protection</code> · → 1 value · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_External_Range</code> · → NR3 · †</li>
+<li><code>UNITs?</code> — <strong>NAB</strong> <code>Get_External_Units</code> · → CRD · †</li>
+<li><code>INPut</code> — <strong>DO</strong> <code>Do_External_Input</code> · †</li>
+<li><code>PMODe</code> — <strong>DO</strong> <code>Do_External_Pmode</code> · †</li>
+<li><strong><code>PROTection</code></strong><ul>
+<li><code>CLEAR</code> — <strong>DO</strong> <code>Do_External_Protection_Clear</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FUNCtion</code></strong><ul>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Center_Frequency</code> · <code>&lt;frequency&gt;</code> · args: <code>frequency</code> · numeric</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_FFT_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric</li>
+<li><code>OPERation</code> — <strong>SET</strong> <code>Set_Function_Operation</code> · <code>&lt;op&gt;</code> · args: <code>op</code> · enum</li>
+<li><code>REFerence</code> — <strong>SET</strong> <code>Set_Function_Reference</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Math_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Math_Range</code> · <code>&lt;range&gt;</code> · args: <code>range</code> · numeric</li>
+<li><code>OPERation</code> — <strong>SET</strong> <code>Set_Operation</code> · <code>&lt;operation&gt;</code> · args: <code>operation</code> · enum</li>
+<li><code>SOURce1</code> — <strong>SET</strong> <code>Set_Source1</code> · <code>&lt;src&gt;</code> · args: <code>src</code> · enum</li>
+<li><code>SOURce2</code> — <strong>SET</strong> <code>Set_Source2</code> · <code>&lt;src&gt;</code> · args: <code>src</code> · enum</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Span</code> · <code>&lt;span&gt;</code> · args: <code>span</code> · numeric</li>
+<li><code>WINDow</code> — <strong>SET</strong> <code>Set_Window_FLATtop</code> · <code>&lt;window&gt;</code> · args: <code>window</code> · enum</li>
+<li><code>WINDow</code> — <strong>SET</strong> <code>Set_Window_HANNing</code> · <code>&lt;window&gt;</code> · args: <code>window</code> · enum</li>
+<li><code>WINDow</code> — <strong>SET</strong> <code>Set_Window_RECTangular</code> · <code>&lt;window&gt;</code> · args: <code>window</code> · enum</li>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Function_Center</code> · → NR3 · †</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_Function_Display</code> · → BOOL · †<br>Obsolete and Discontinued Commands</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Function_Offset</code> · → NR3 · †</li>
+<li><code>OPERation?</code> — <strong>NAB</strong> <code>Get_Function_Operation</code> · → CRD · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Function_Range</code> · → NR3 · †</li>
+<li><code>REFerence?</code> — <strong>NAB</strong> <code>Get_Function_Reference</code> · → CRD · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Function_Source</code> · → CRD · †</li>
+<li><code>SPAN?</code> — <strong>NAB</strong> <code>Get_Function_Span</code> · → NR3 · †</li>
+<li><code>WINDow?</code> — <strong>NAB</strong> <code>Get_Function_Window</code> · → CRD · †</li>
+<li><code>MOVE</code> — <strong>DO</strong> <code>Do_Function_Move</code> · †</li>
+<li><code>PEAKs</code> — <strong>DO</strong> <code>Do_Function_Peaks</code> · †</li>
+<li><code>VIEW</code> — <strong>DO</strong> <code>Do_Function_View</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_Math_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_Math_ON</code> · <code>ON</code></li>
+<li><code>SOURce</code> — <strong>DO</strong> <code>Set_Source_CH1</code> · <code>CHANnel1</code></li>
+<li><code>SOURce</code> — <strong>DO</strong> <code>Set_Source_CH2</code> · <code>CHANnel2</code></li>
+</ul>
+</li>
+<li><strong><code>HARDcopy</code></strong><ul>
+<li><code>FACTors</code> — <strong>SET</strong> <code>Set_Hardcopy_Factors</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FFEed</code> — <strong>SET</strong> <code>Set_Hardcopy_Ffeed</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Hardcopy_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Obsolete and Discontinued Commands</li>
+<li><code>GRAYscale</code> — <strong>SET</strong> <code>Set_Hardcopy_Grayscale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FACTors?</code> — <strong>NAB</strong> <code>Get_Hardcopy_Factors</code> · → 1 value · †</li>
+<li><code>FFEed?</code> — <strong>NAB</strong> <code>Get_Hardcopy_Ffeed</code> · → 1 value · †</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Hardcopy_Format</code> · → CRD · †<br>Obsolete and Discontinued Commands</li>
+<li><code>GRAYscale?</code> — <strong>NAB</strong> <code>Get_Hardcopy_Grayscale</code> · → 1 value · †</li>
+<li><code>ADDRess</code> — <strong>DO</strong> <code>Do_Hardcopy_Address</code> · †</li>
+<li><code>DESTination</code> — <strong>DO</strong> <code>Do_Hardcopy_Destination</code> · †</li>
+<li><code>DEVice</code> — <strong>DO</strong> <code>Do_Hardcopy_Device</code> · †<br>Obsolete and Discontinued Commands</li>
+</ul>
+</li>
+<li><strong><code>MARKer</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Marker_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum</li>
+<li><code>X1Position</code> — <strong>SET</strong> <code>Set_X1</code> · <code>&lt;pos&gt;</code> · args: <code>pos</code> · numeric</li>
+<li><code>X2Position</code> — <strong>SET</strong> <code>Set_X2</code> · <code>&lt;pos&gt;</code> · args: <code>pos</code> · numeric</li>
+<li><code>Y1Position</code> — <strong>SET</strong> <code>Set_Y1</code> · <code>&lt;lev&gt;</code> · args: <code>lev</code> · numeric</li>
+<li><code>Y2Position</code> — <strong>SET</strong> <code>Set_Y2</code> · <code>&lt;lev&gt;</code> · args: <code>lev</code> · numeric</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Marker_Mode</code> · → CRD · †</li>
+<li><code>XDELta?</code> — <strong>NAB</strong> <code>Get_X_Delta</code> · → NR3 s</li>
+<li><code>YDELta?</code> — <strong>NAB</strong> <code>Get_Y_Delta</code> · → NR3 s</li>
+<li><code>TDELta</code> — <strong>DO</strong> <code>Do_Marker_Tdelta</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>VDELta</code> — <strong>DO</strong> <code>Do_Marker_Vdelta</code> · †</li>
+</ul>
+</li>
+<li><strong><code>MARker</code></strong><ul>
+<li><code>XDELta?</code> — <strong>NAB</strong> <code>Get_Marker_Xdelta</code> · → NR3 s · †</li>
+</ul>
+</li>
+<li><strong><code>MEASURE</code></strong><ul>
+<li><code>RISETIME?</code> — <strong>NAB</strong> <code>Get_Measure_Risetime</code> · → NR3 s · †<br>Query Command</li>
+</ul>
+</li>
+<li><strong><code>MEASure</code></strong><ul>
+<li><code>COUNter</code> — <strong>SET</strong> <code>Set_Measure_Count</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>DELay</code> — <strong>SET</strong> <code>Set_Measure_Delay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>FALLtime</code> — <strong>SET</strong> <code>Set_Measure_Falltime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>NWIDth</code> — <strong>SET</strong> <code>Set_Measure_Nwidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>OVERshoot</code> — <strong>SET</strong> <code>Set_Measure_Overshoot</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PHASe</code> — <strong>SET</strong> <code>Set_Measure_Phase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PREShoot</code> — <strong>SET</strong> <code>Set_Measure_Preshoot</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †</li>
+<li><code>PWIDth</code> — <strong>SET</strong> <code>Set_Measure_Pwidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SHOW</code> — <strong>SET</strong> <code>Set_Measure_Show</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Measure_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>TEDGe</code> — <strong>SET</strong> <code>Set_Measure_Tedge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>TVALue</code> — <strong>SET</strong> <code>Set_Measure_Tvalue</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>VAMPlitude</code> — <strong>SET</strong> <code>Set_Measure_Vamplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>VBASe</code> — <strong>SET</strong> <code>Set_Measure_Vbase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>VTOP</code> — <strong>SET</strong> <code>Set_Measure_Vtop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>XMAX</code> — <strong>SET</strong> <code>Set_Measure_Xmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Obsolete and Discontinued Commands</li>
+<li><code>XMIN</code> — <strong>SET</strong> <code>Set_Measure_Xmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Obsolete and Discontinued Commands</li>
+<li><code>COUNter?</code> — <strong>NAB</strong> <code>Get_Measure_Count</code> · → NR1 · †</li>
+<li><code>DELay?</code> — <strong>NAB</strong> <code>Get_Measure_Delay</code> · → NR3 s · †</li>
+<li><code>FALLtime?</code> — <strong>NAB</strong> <code>Get_Measure_Falltime</code> · → NR3 s · †</li>
+<li><code>NWIDth?</code> — <strong>NAB</strong> <code>Get_Measure_Nwidth</code> · → 1 value · †</li>
+<li><code>OVERshoot?</code> — <strong>NAB</strong> <code>Get_Measure_Overshoot</code> · → 1 value · †</li>
+<li><code>PHASe?</code> — <strong>NAB</strong> <code>Get_Measure_Phase</code> · → 1 value · †</li>
+<li><code>PREShoot?</code> — <strong>NAB</strong> <code>Get_Measure_Preshoot</code> · → BLOCK · †</li>
+<li><code>PWIDth?</code> — <strong>NAB</strong> <code>Get_Measure_Pwidth</code> · → 1 value · †</li>
+<li><code>SHOW?</code> — <strong>NAB</strong> <code>Get_Measure_Show</code> · → 1 value · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Measure_Source</code> · → CRD · †</li>
+<li><code>TEDGe?</code> — <strong>NAB</strong> <code>Get_Measure_Tedge</code> · → 1 value · †</li>
+<li><code>TVALue?</code> — <strong>NAB</strong> <code>Get_Measure_Tvalue</code> · → 1 value · †</li>
+<li><code>VAMPlitude?</code> — <strong>NAB</strong> <code>Get_Measure_Vamplitude</code> · → 1 value · †</li>
+<li><code>VBASe?</code> — <strong>NAB</strong> <code>Get_Measure_Vbase</code> · → 1 value · †</li>
+<li><code>VTIMe?</code> — <strong>NAB</strong> <code>Get_Measure_Vtime</code> · → NR3 s · †</li>
+<li><code>VTOP?</code> — <strong>NAB</strong> <code>Get_Measure_Vtop</code> · → 1 value · †</li>
+<li><code>XMAX?</code> — <strong>NAB</strong> <code>Get_Measure_Xmax</code> · → NR3 · †<br>Obsolete and Discontinued Commands</li>
+<li><code>XMIN?</code> — <strong>NAB</strong> <code>Get_Measure_Xmin</code> · → NR3 · †<br>Obsolete and Discontinued Commands</li>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Do_Measure_Clear</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>LOWer</code> — <strong>DO</strong> <code>Do_Measure_Lower</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>RISEtime</code> — <strong>DO</strong> <code>Do_Measure_Risetime</code> · †</li>
+<li><code>SCRatch</code> — <strong>DO</strong> <code>Do_Measure_Scratch</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TDELta</code> — <strong>DO</strong> <code>Do_Measure_Tdelta</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>THResholds</code> — <strong>DO</strong> <code>Do_Measure_Threshold</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TMAX</code> — <strong>DO</strong> <code>Do_Measure_Tmax</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TMIN</code> — <strong>DO</strong> <code>Do_Measure_Tmin</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TSTArt</code> — <strong>DO</strong> <code>Do_Measure_Tstart</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TSTOp</code> — <strong>DO</strong> <code>Do_Measure_Tstop</code> · †<br>Obsolete and Discontinued Commands</li>
+<li><code>TVOLt</code> — <strong>DO</strong> <code>Do_Measure_Tvolt</code> · †</li>
+<li><code>UPPer</code> — <strong>DO</strong> <code>Do_Measure_Upper</code> · †</li>
+<li><code>VDELta</code> — <strong>DO</strong> <code>Do_Measure_Vdelta</code> · †</li>
+<li><code>VSTArt</code> — <strong>DO</strong> <code>Do_Measure_Vstart</code> · †</li>
+<li><code>VSTOp</code> — <strong>DO</strong> <code>Do_Measure_Vstop</code> · †</li>
+<li><strong><code>DEFine</code></strong><ul>
+<li><code>THResholds</code> — <strong>SET</strong> <code>Set_Measure_Thresholds</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · numeric</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>POD&lt;n&gt;</code></strong><ul>
+<li><code>THReshold</code> — <strong>SET</strong> <code>Set_Pod_Threshold</code> · <code>&lt;thresh&gt;</code> · args: <code>thresh</code> · numeric · per-instance: <code>n</code></li>
+</ul>
+</li>
+<li><strong><code>PROBe</code></strong><ul>
+<li><code>SKEW</code> — <strong>SET</strong> <code>Set_Probe_Skew</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>SKEW?</code> — <strong>NAB</strong> <code>Get_Probe_Skew</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>PROTection</code></strong><ul>
+<li><code>CLEAR</code> — <strong>DO</strong> <code>Do_Protection_Clear</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SYSTEM</code></strong><ul>
+<li><code>DSP?</code> — <strong>NAB</strong> <code>Get_System_Dsp</code> · → 1 value · †<br>Message Queue</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>LOCK</code> — <strong>SET</strong> <code>Lock_Front_Panel</code> · <code>&lt;state&gt;</code> · args: <code>state</code></li>
+<li><code>DATE</code> — <strong>SET</strong> <code>Set_System_Date</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_System_Time</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Get_Error</code> · → NR2</li>
+<li><code>SETup?</code> — <strong>NAB</strong> <code>Get_Setup</code> · → BLOCK</li>
+<li><code>DATE?</code> — <strong>NAB</strong> <code>Get_System_Date</code> · → 1 value · †</li>
+<li><code>LOCK?</code> — <strong>NAB</strong> <code>Get_System_Lock</code> · → 1 value · †</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_System_Time</code> · → NR3 s · †</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Read_Error</code> · → NR2</li>
+<li><code>DSP</code> — <strong>DO</strong> <code>Do_System_Dsp</code> · †<br>Message Queue</li>
+<li><code>KEY</code> — <strong>DO</strong> <code>Do_System_Key</code> · †</li>
+</ul>
+</li>
+<li><strong><code>TIM</code></strong><ul>
+<li><code>DEL</code> — <strong>DO</strong> <code>Do_Timebase_Delay</code> · †<br>Program Header Options</li>
+</ul>
+</li>
+<li><strong><code>TIMebase</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum</li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Position</code> · <code>&lt;pos&gt;</code> · args: <code>pos</code> · numeric (s)</li>
+<li><code>REFerence</code> — <strong>SET</strong> <code>Set_Reference</code> · <code>&lt;ref&gt;</code> · args: <code>ref</code> · enum</li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Timebase_Position</code> · <code>&lt;position&gt;</code> · args: <code>position</code> · numeric (s)</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Timebase_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Timebase_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (s)</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Timebase_Mode</code> · → CRD s · †</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_Timebase_Position</code> · → NR3 s · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Timebase_Range</code> · → NR3 s · †</li>
+<li><code>REFerence?</code> — <strong>NAB</strong> <code>Get_Timebase_Reference</code> · → CRD s · †</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Timebase_Scale</code> · → NR3 s · †</li>
+<li><code>WINDow</code> — <strong>DO</strong> <code>Do_Timebase_Window</code> · †<br>Command Set Organization</li>
+<li><strong><code>WINDow</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Timebase_Window_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Window_Position</code> · <code>&lt;pos&gt;</code> · args: <code>pos</code> · numeric (s)</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Window_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (s)</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_Timebase_Window_Position</code> · → NR3 s · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Timebase_Window_Range</code> · → NR3 s · †</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Timebase_Window_Scale</code> · → NR3 s · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRIGGER</code></strong><ul>
+<li><code>LEVEL</code> — <strong>DO</strong> <code>Do_Trigger_Level</code> · †</li>
+<li><code>SLOPE</code> — <strong>DO</strong> <code>Do_Trigger_Slope</code> · †</li>
+<li><strong><code>DURation</code></strong><ul>
+<li><code>GREaterthan</code> — <strong>DO</strong> <code>Do_Trigger_Duration_Greaterthan</code> · †</li>
+<li><code>LESSthan</code> — <strong>DO</strong> <code>Do_Trigger_Duration_Lessthan</code> · †</li>
+</ul>
+</li>
+<li><strong><code>GLITch</code></strong><ul>
+<li><code>GREaterthan</code> — <strong>DO</strong> <code>Do_Trigger_Glitch_Greaterthan</code> · †</li>
+<li><code>LESSthan</code> — <strong>DO</strong> <code>Do_Trigger_Glitch_Lessthan</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SEQuence</code></strong><ul>
+<li><code>FIND</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Find</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>RESet</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Reset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>TIMer</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>TRIGger</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FIND?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Find</code> · → 1 value · †</li>
+<li><code>RESet?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Reset</code> · → 1 value · †</li>
+<li><code>TIMer?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Timebase</code> · → NR3 s · †</li>
+<li><code>TRIGger?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Trigger</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>HOLDoff</code> — <strong>SET</strong> <code>Set_Holdoff</code> · <code>&lt;time&gt;</code> · args: <code>time</code> · numeric</li>
+<li><code>HFReject</code> — <strong>SET</strong> <code>Set_Trigger_Hfreject</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum</li>
+<li><code>NREJect</code> — <strong>SET</strong> <code>Set_Trigger_Nreject</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PATTern</code> — <strong>SET</strong> <code>Set_Trigger_Pattern</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SWEep</code> — <strong>SET</strong> <code>Set_Trigger_Sweep</code> · <code>&lt;sweep&gt;</code> · args: <code>sweep</code> · enum</li>
+<li><code>COUPling?</code> — <strong>NAB</strong> <code>Get_Trigger_Coupling</code> · → CRD · †</li>
+<li><code>HFReject?</code> — <strong>NAB</strong> <code>Get_Trigger_Hfreject</code> · → 1 value · †</li>
+<li><code>HOLDoff?</code> — <strong>NAB</strong> <code>Get_Trigger_Holdoff</code> · → NR3 · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Mode</code> · → CRD · †</li>
+<li><code>NREJect?</code> — <strong>NAB</strong> <code>Get_Trigger_Nreject</code> · → 1 value · †</li>
+<li><code>PATTern?</code> — <strong>NAB</strong> <code>Get_Trigger_Pattern</code> · → 1 value · †</li>
+<li><code>REJect?</code> — <strong>NAB</strong> <code>Get_Trigger_Reject</code> · → 1 value · †</li>
+<li><code>SWEep?</code> — <strong>NAB</strong> <code>Get_Trigger_Sweep</code> · → CRD · †</li>
+<li><code>ADVanced</code> — <strong>DO</strong> <code>Do_Trigger_Advanced</code> · †</li>
+<li><code>CAN</code> — <strong>DO</strong> <code>Do_Trigger_Can</code> · †<br>Table 5-1</li>
+<li><code>DURation</code> — <strong>DO</strong> <code>Do_Trigger_Duration</code> · †<br>Table 5-1</li>
+<li><code>EDGE</code> — <strong>DO</strong> <code>Do_Trigger_Edge</code> · †<br>Table 5-1</li>
+<li><code>GLITch</code> — <strong>DO</strong> <code>Do_Trigger_Glitch</code> · †<br>Table 5-1</li>
+<li><code>IIC</code> — <strong>DO</strong> <code>Do_Trigger_Iic</code> · †<br>Command Set Organization</li>
+<li><code>LIN</code> — <strong>DO</strong> <code>Do_Trigger_Lin</code> · †<br>Command Set Organization</li>
+<li><code>SEQuence</code> — <strong>DO</strong> <code>Do_Trigger_Sequence</code> · †<br>Table 5-1</li>
+<li><code>SPI</code> — <strong>DO</strong> <code>Do_Trigger_Spi</code> · †<br>Table 5-1</li>
+<li><code>THReshold</code> — <strong>DO</strong> <code>Do_Trigger_Threshold</code> · †</li>
+<li><code>TV</code> — <strong>DO</strong> <code>Do_Trigger_Tv</code> · †<br>Table 5-1</li>
+<li><code>USB</code> — <strong>DO</strong> <code>Do_Trigger_Usb</code> · †<br>Command Set Organization</li>
+<li><strong><code>CAN</code></strong><ul>
+<li><code>ACKNowledge</code> — <strong>SET</strong> <code>Set_Trigger_Can_Acknowledge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SAMPlepoint</code> — <strong>SET</strong> <code>Set_Trigger_Can_Samplepoint</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Can_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>TRIGger</code> — <strong>SET</strong> <code>Set_Trigger_Can_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>ACKNowledge?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Acknowledge</code> · → 1 value · †</li>
+<li><code>SAMPlepoint?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Samplepoint</code> · → 1 value · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Source</code> · → CRD · †</li>
+<li><code>TRIGer?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Trigger</code> · → 1 value · †</li>
+<li><code>PATTern</code> — <strong>DO</strong> <code>Do_Trigger_Can_Pattern</code> · †<br>Table 5-1</li>
+<li><code>SIGNal</code> — <strong>DO</strong> <code>Do_Trigger_Can_Signal</code> · †<br>Table 5-1</li>
+<li><strong><code>PATTern</code></strong><ul>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Can_Pattern_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †<br>Table 5-1</li>
+<li><code>ID</code> — <strong>SET</strong> <code>Set_Trigger_Can_Pattern_Id</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Table 5-1</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Pattern_Data</code> · → BLOCK · †<br>Table 5-1</li>
+<li><code>ID?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Pattern_Id</code> · → 1 value · †<br>Table 5-1</li>
+<li><strong><code>ID</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Can_Pattern_Id_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Pattern_Id_Mode</code> · → CRD · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SIGNal</code></strong><ul>
+<li><code>BAUDrate</code> — <strong>SET</strong> <code>Set_Trigger_Can_Signal_Baudrate</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>BAUDrate?</code> — <strong>NAB</strong> <code>Get_Trigger_Can_Signal_Baudrate</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DURation</code></strong><ul>
+<li><code>PATTern</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Pattern</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>QUALifier</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Qualifier</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>GREaterthan?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Greaterthan</code> · → 1 value · †</li>
+<li><code>LESSthan?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Lessthan</code> · → 1 value · †</li>
+<li><code>PATTern?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Pattern</code> · → 1 value · †</li>
+<li><code>QUALifier?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Qualifier</code> · → 1 value · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Range</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>EDGE</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Edge_Slope</code> · <code>&lt;slope&gt;</code> · args: <code>slope</code> · enum</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Edge_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Edge_Source_CH1</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Edge_Source_CH2</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Edge_Source_EXT</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Level</code> · <code>&lt;level&gt;</code> · args: <code>level</code> · numeric</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Level</code> · → NR3 · †</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Slope</code> · → CRD · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Source</code> · → CRD · †</li>
+</ul>
+</li>
+<li><strong><code>GLITch</code></strong><ul>
+<li><code>QUALifier</code> — <strong>SET</strong> <code>Set_Glitch_Condition</code> · <code>&lt;qual&gt;</code> · args: <code>qual</code></li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Glitch_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>LESSthan</code> — <strong>SET</strong> <code>Set_Glitch_Width</code> · <code>&lt;time&gt;</code> · args: <code>time</code></li>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Glitch_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Trigger_Glitch_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Trigger_Glitch_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>GREaterthan?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Greaterthan</code> · → 1 value · †</li>
+<li><code>LESSthan?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Lessthan</code> · → 1 value · †</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Level</code> · → NR3 · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Polarity</code> · → CRD · †</li>
+<li><code>QUALifier?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Qualifier</code> · → 1 value · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Range</code> · → NR3 · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Glitch_Source</code> · → CRD · †</li>
+</ul>
+</li>
+<li><strong><code>IIC</code></strong><ul>
+<li><code>PATTern</code> — <strong>DO</strong> <code>Do_Trigger_Iic_Pattern</code> · †<br>Table 5-1</li>
+<li><code>SOURce</code> — <strong>DO</strong> <code>Do_Trigger_Iic_Source</code> · †<br>Table 5-1</li>
+<li><code>TRIGger</code> — <strong>DO</strong> <code>Do_Trigger_Iic_Trigger</code> · †<br>Command Set Organization</li>
+<li><strong><code>PATTern</code></strong><ul>
+<li><code>ADDRess</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Pattern_Address</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Pattern_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †</li>
+<li><code>ADDRess?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Pattern_Address</code> · → NR1 · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Pattern_Data</code> · → BLOCK · †</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>QUALifier</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Trigger_Qualifier</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>QUALifer?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Trigger_Qualifier</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>LIN</code></strong><ul>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Lin_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>TRIGger</code> — <strong>SET</strong> <code>Set_Trigger_Lin_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Lin_Source</code> · → CRD · †</li>
+<li><code>TRIGger?</code> — <strong>NAB</strong> <code>Get_Trigger_Lin_Trigger</code> · → 1 value · †</li>
+<li><code>SIGNal</code> — <strong>DO</strong> <code>Do_Trigger_Lin_Signal</code> · †<br>Table 5-1</li>
+<li><strong><code>SIGNal</code></strong><ul>
+<li><code>BAUDrate</code> — <strong>SET</strong> <code>Set_Trigger_Lin_Signal_Baudrate</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>BAUDrate?</code> — <strong>NAB</strong> <code>Get_Trigger_Lin_Signal_Baudrate</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SEQuence</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Count</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Count</code> · → NR1 · †</li>
+<li><code>EDGE</code> — <strong>DO</strong> <code>Do_Trigger_Sequence_Edge</code> · †</li>
+<li><code>PATTern</code> — <strong>DO</strong> <code>Do_Trigger_Sequence_Pattern</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SPI</code></strong><ul>
+<li><code>FRAMing</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Frame</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FRAMing?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Frame</code> · → 1 value · †</li>
+<li><code>CLOCk</code> — <strong>DO</strong> <code>Do_Trigger_Spi_Clock</code> · †<br>Command Set Organization</li>
+<li><code>PATTERN</code> — <strong>DO</strong> <code>Do_Trigger_Spi_Pattern</code> · †<br>Table 5-1</li>
+<li><code>SOURce</code> — <strong>DO</strong> <code>Do_Trigger_Spi_Source</code> · †<br>Table 5-1</li>
+<li><strong><code>CLOCk</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Clock_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>TIMeout</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Clock_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Clock_Slope</code> · → CRD · †</li>
+<li><code>TIMeout?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Clock_Timebase</code> · → NR3 s · †</li>
+</ul>
+</li>
+<li><strong><code>PATTern</code></strong><ul>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Pattern_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †</li>
+<li><code>WIDth</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Pattern_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Pattern_Data</code> · → BLOCK · †</li>
+<li><code>WIDth?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Pattern_Width</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>SOURce</code></strong><ul>
+<li><code>CLOCk</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Source_Clock</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Source_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †</li>
+<li><code>FRAMe</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Source_Frame</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>CLOCk?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Source_Clock</code> · → 1 value · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Source_Data</code> · → BLOCK · †</li>
+<li><code>FRAMe?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Source_Frame</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TV</code></strong><ul>
+<li><code>LINE</code> — <strong>SET</strong> <code>Set_Trigger_Tv_Line</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Tv_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Trigger_Tv_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Tv_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>STANdard</code> — <strong>SET</strong> <code>Set_Trigger_Tv_Standard</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>LINE?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Line</code> · → 1 value · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Mode</code> · → CRD · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Polarity</code> · → CRD · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Source</code> · → CRD · †</li>
+<li><code>STANdard?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Standard</code> · → 1 value · †</li>
+<li><code>TVMODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Tv_Tvmode</code> · → 1 value · †</li>
+<li><code>FIELd</code> — <strong>DO</strong> <code>Do_Trigger_Tv_Field</code> · †</li>
+<li><code>TVHFrej</code> — <strong>DO</strong> <code>Do_Trigger_Tv_Tvhfrej</code> · †</li>
+<li><code>TVMode</code> — <strong>DO</strong> <code>Do_Trigger_Tv_Tvmode</code> · †</li>
+<li><code>VIR</code> — <strong>DO</strong> <code>Do_Trigger_Tv_Vir</code> · †</li>
+</ul>
+</li>
+<li><strong><code>USB</code></strong><ul>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Trigger_Usb_Speed</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>TRIGer</code> — <strong>SET</strong> <code>Set_Trigger_Usb_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Trigger_Usb_Speed</code> · → NR3 · †</li>
+<li><code>TRIGger?</code> — <strong>NAB</strong> <code>Get_Trigger_Usb_Trigger</code> · → 1 value · †</li>
+<li><code>SOURce</code> — <strong>DO</strong> <code>Do_Trigger_Usb_Source</code> · †<br>Table 5-1</li>
+<li><strong><code>SOURce</code></strong><ul>
+<li><code>DMINus</code> — <strong>SET</strong> <code>Set_Trigger_Usb_Source_Dminus</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DPLus</code> — <strong>SET</strong> <code>Set_Trigger_Usb_Source_Dplus</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DMINus?</code> — <strong>NAB</strong> <code>Get_Trigger_Usb_Source_Dminus</code> · → 1 value · †</li>
+<li><code>DPLus?</code> — <strong>NAB</strong> <code>Get_Trigger_Usb_Source_Dplus</code> · → 1 value · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>WAVeform</code></strong><ul>
+<li><code>BYTeorder</code> — <strong>SET</strong> <code>Set_Byte_Order</code> · <code>&lt;order&gt;</code> · args: <code>order</code></li>
+<li><code>UNSigned</code> — <strong>SET</strong> <code>Set_Unsigned</code> · <code>&lt;state&gt;</code> · args: <code>state</code></li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Waveform_Format</code> · <code>&lt;format&gt;</code> · args: <code>format</code> · enum</li>
+<li><code>POINts</code> — <strong>SET</strong> <code>Set_Waveform_Points</code> · <code>&lt;points&gt;</code> · args: <code>points</code> · integer</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Waveform_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum</li>
+<li><code>VIEW</code> — <strong>SET</strong> <code>Set_Waveform_View</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>PREamble?</code> — <strong>NAB</strong> <code>Get_Preamble</code> · → BLOCK</li>
+<li><code>BYTeorder?</code> — <strong>NAB</strong> <code>Get_Waveform_Byteorder</code> · → 1 value · †</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Waveform_Count</code> · → NR1 · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Waveform_Data</code> · → BLOCK</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Waveform_Format</code> · → CRD · †</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Waveform_Points</code> · → NR1 · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Waveform_Source</code> · → CRD · †</li>
+<li><code>UNSigned?</code> — <strong>NAB</strong> <code>Get_Waveform_Unsigned</code> · → 1 value · †</li>
+<li><code>VIEW?</code> — <strong>NAB</strong> <code>Get_Waveform_View</code> · → 1 value · †</li>
+<li><code>XINCrement?</code> — <strong>NAB</strong> <code>Get_Waveform_Xincrement</code> · → NR3 · †</li>
+<li><code>XORigin?</code> — <strong>NAB</strong> <code>Get_Waveform_Xorigin</code> · → NR3 · †</li>
+<li><code>XREFerence?</code> — <strong>NAB</strong> <code>Get_Waveform_Xreference</code> · → NR3 · †</li>
+<li><code>YINCrement?</code> — <strong>NAB</strong> <code>Get_Waveform_Yincrement</code> · → NR3 · †</li>
+<li><code>YORigin?</code> — <strong>NAB</strong> <code>Get_Waveform_Yorigin</code> · → NR3 · †</li>
+<li><code>YREFerence?</code> — <strong>NAB</strong> <code>Get_Waveform_Yreference</code> · → NR3 · †</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Do_Clear_Status</code></li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Do_Trg</code> · †</li>
+<li><code>*WAI</code> — <strong>DO</strong> <code>Do_Wai</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*LRN?</code> — <strong>NAB</strong> <code>Get_Lrn</code> · → AARD · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*OPT?</code> — <strong>NAB</strong> <code>Get_Opt</code> · → AARD · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code><br>Do Reset</li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*RCL &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Rcl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SAV &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sav</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+</ul>
+<!-- END GENERATED --><hr>
+<h2>Notes carried over</h2>
+<p>The <strong>Keysight/Agilent 54641D</strong> is a <strong>Mixed Signal Oscilloscope (MSO)</strong>, and that
+is what makes its command tree bigger than a meter&#39;s. It deals with time, triggers
+and two kinds of data: <strong>analog</strong> (voltage vs time) and <strong>digital</strong> (logic level vs
+time). The tree splits the vertical controls to match — <code>CHANnel</code> for the 2 analog
+BNC inputs, <code>DIGital</code>/<code>POD</code> for the 16 logic inputs.</p>
+<p>It is part of the &quot;54640-series&quot;, which has 50 Ω input impedance and deeper memory
+than the 54620-series. Where a command below is 54640-only, it says so.</p>
+<p>Sources: the Agilent 54621A/22A/24A/41A/42A and 54621D/22D/41D/42D Programmer&#39;s
+Guide.</p>
+<hr>
+<h3>1. Root actions and <code>ACQuire</code></h3>
+<p>The flow controls sit at the top of the tree — running versus stopped.</p>
+<ul>
+<li><strong><code>RUN</code></strong> — start the scope (green light).</li>
+<li><strong><code>STOP</code></strong> — stop it (red light).</li>
+<li><strong><code>SINGle</code></strong> — one acquisition, then stop.</li>
+<li><strong><code>AUToscale</code></strong> — the &quot;Auto Set&quot; button; tries to find the signal for you.</li>
+<li><strong><code>DIGitize</code></strong> <code>&lt;channel&gt;</code> — block the computer until data is ready. This is the
+one you use from a script.</li>
+</ul>
+<p>Configure <strong>how</strong> data is captured before you <code>DIGitize</code> it:</p>
+<ul>
+<li><strong><code>ACQuire</code></strong><ul>
+<li><code>:TYPE</code> <code>NORMal|AVERage|PEAK</code> — <code>AVERage</code> to reduce noise, <code>PEAK</code> to catch
+glitches.</li>
+<li><code>:COUNt</code> <code>&lt;number&gt;</code> — number of averages (8, 64, …).</li>
+<li><code>:POINts</code> <code>100|250|500|1000|2000|MAXimum</code> — memory depth. <code>MAXimum</code> uses the
+deep memory, up to 2 MB on some models.</li>
+<li><code>:SRATe?</code> — current sample rate.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>2. <code>CHANnel&lt;n&gt;</code> — analog vertical</h3>
+<p>The two BNC inputs on the front. <code>&lt;n&gt;</code> is 1 or 2.</p>
+<ul>
+<li><strong><code>CHANnel&lt;n&gt;</code></strong><ul>
+<li><code>:BWLimit</code> <code>ON|OFF</code> — 20 MHz low-pass filter.</li>
+<li><code>:COUPling</code> <code>AC|DC|GND</code> — input coupling.</li>
+<li><code>:OFFSet</code> <code>&lt;volts&gt;</code> — moves the trace up or down (zero point).</li>
+<li><code>:RANGe</code> <code>&lt;volts&gt;</code> — full-scale vertical range, e.g. 40 V.</li>
+<li><code>:SCALe</code> <code>&lt;volts/div&gt;</code> — volts per division, e.g. 5 V.</li>
+<li><code>:DISPlay</code> <code>ON|OFF</code> — show or hide the trace.</li>
+<li><code>:IMPedance</code> <code>ONEMeg|FIFTy</code> — <strong>54640-specific.</strong> 50 Ω for high-speed active
+RF probes, 1 MΩ for standard passive probes.</li>
+<li><code>:PROBe</code> <code>&lt;attenuation&gt;</code> — probe ratio (1, 10, 100), so the scope&#39;s math is
+right.</li>
+<li><code>:PROBe:SKEW</code> <code>&lt;seconds&gt;</code> — deskew the analog channels to match digital timing.</li>
+<li><code>:INVert</code> <code>ON|OFF</code> — invert signal polarity.</li>
+<li><code>:UNITs</code> <code>VOLTs|AMPeres</code> — amps when a current probe is attached.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>3. <code>DIGital&lt;n&gt;</code> and <code>POD&lt;n&gt;</code> — digital vertical</h3>
+<p><strong>This is the MSO part.</strong> 16 digital lines, D0–D15.</p>
+<ul>
+<li><p><strong>Channels</strong> are individual: <code>DIG0</code> … <code>DIG15</code>.</p>
+</li>
+<li><p><strong>Pods</strong> are groups of 8: <code>POD1</code> = D0–D7, <code>POD2</code> = D8–D15.</p>
+</li>
+<li><p><strong><code>DIGital&lt;n&gt;</code></strong> (n is 0–15)</p>
+<ul>
+<li><code>:DISPlay</code> <code>ON|OFF</code> — turn one logic bit on or off.</li>
+<li><code>:POSition</code> <code>&lt;number&gt;</code> — move the line up or down on screen. The range depends
+on display size: 0–7 large, 0–15 medium, 0–31 small.</li>
+<li><code>:LABel</code> <code>&lt;string&gt;</code> — rename &quot;D0&quot; to something like &quot;CLK&quot;.</li>
+</ul>
+</li>
+<li><p><strong><code>POD&lt;n&gt;</code></strong> (n is 1 or 2)</p>
+<ul>
+<li><code>:THReshold</code> <code>TTL|CMOS|ECL|&lt;voltage&gt;</code> — logic level for the <em>entire</em> group of
+8 pins. Send a number instead of a standard name for a custom threshold, e.g.
+1.5 V.</li>
+<li><strong>Note:</strong> you cannot set D0 and D1 separately — they share the Pod 1 threshold.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>4. <code>TIMebase</code> — horizontal</h3>
+<p>The X axis, and it applies to <strong>all</strong> channels at once, analog and digital.</p>
+<ul>
+<li><strong><code>TIMebase</code></strong><ul>
+<li><code>:SCALe</code> <code>&lt;seconds&gt;</code> — time per division, e.g. <code>500e-6</code> for 500 µs.</li>
+<li><code>:POSition</code> <code>&lt;seconds&gt;</code> — delay from trigger to centre of screen.</li>
+<li><code>:REFerence</code> <code>LEFT|CENTer|RIGHt</code> — where the trigger point stays as you zoom.</li>
+<li><code>:MODE</code> <code>MAIN|WINDow|XY|ROLL</code><ul>
+<li><code>MAIN</code> — normal Y-T view.</li>
+<li><code>WINDow</code> — split-screen zoom.</li>
+<li><code>XY</code> — Lissajous, voltage vs voltage.</li>
+<li><code>ROLL</code> — strip chart, for slow signals.</li>
+</ul>
+</li>
+<li><strong><code>:WINDow</code></strong> (delayed sweep / zoom)<ul>
+<li><code>:POSition</code> <code>&lt;seconds&gt;</code> — scroll the zoom window.</li>
+<li><code>:SCALe</code> <code>&lt;seconds&gt;</code> — zoom factor, i.e. the window&#39;s width.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>5. <code>TRIGger</code> — the brains</h3>
+<p>Advanced triggering, because of the digital lines.</p>
+<ul>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>:MODE</code> <code>EDGE|GLITch|PATTern|TV|IIC|SPI|USB|CAN…</code> — trigger type.</li>
+<li><code>:HOLDoff</code> <code>&lt;seconds&gt;</code> — holdoff before re-triggering. Crucial for complex
+bursts.</li>
+<li><strong><code>:EDGE</code></strong> (standard)<ul>
+<li><code>:SOURce</code> <code>CHAN1|CHAN2|DIG0…DIG15|EXT</code> — analog channel 1, or digital bit 5.</li>
+<li><code>:SLOPe</code> <code>POSitive|NEGative</code></li>
+</ul>
+</li>
+<li><strong><code>:PATTern</code></strong> (logic)<ul>
+<li><code>:LOGic</code> <code>&lt;string&gt;</code> — a binary code, e.g. <code>&quot;10XX01&quot;</code>.</li>
+</ul>
+</li>
+<li><strong><code>:GLITch</code></strong> (pulse width)<ul>
+<li><code>:SOURce</code> <code>&lt;channel&gt;</code></li>
+<li><code>:POLarity</code> <code>POSitive|NEGative</code> — trigger on a high or a low pulse.</li>
+<li><code>:QUALifier</code> <code>LESSthan|GREaterthan|RANGe</code> — pulses narrower or wider than X.</li>
+<li><code>:LESSthan</code> / <code>:GREaterthan</code> <code>&lt;seconds&gt;</code> — the time limits.</li>
+</ul>
+</li>
+<li><strong><code>:TV</code></strong><ul>
+<li><code>:STANdard</code> <code>NTSC|PAL|SECAM</code></li>
+<li><code>:MODE</code> <code>LINE|FIEld1|FIEld2</code></li>
+</ul>
+</li>
+<li><strong><code>:IIC</code></strong> (I²C)<ul>
+<li><code>:SOURce:CLOCk</code> <code>&lt;channel&gt;</code> · <code>:SOURce:DATA</code> <code>&lt;channel&gt;</code></li>
+<li><code>:TRIGger:TYPE</code> <code>STARt|STOP|READ7|WRITe7|NACK…</code></li>
+</ul>
+</li>
+<li><strong><code>:SPI</code></strong><ul>
+<li><code>:SOURce:CLOCk</code> <code>&lt;channel&gt;</code> · <code>:SOURce:DATA</code> <code>&lt;channel&gt;</code></li>
+<li><code>:SOURce:FRAMe</code> <code>&lt;channel&gt;</code> — chip select.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>6. <code>WAVeform</code> — getting data out</h3>
+<p>A meter gives you one number; a scope gives you an array of 2000+ points. Set the
+format before asking for data.</p>
+<ul>
+<li><strong><code>WAVeform</code></strong><ul>
+<li><code>:SOURce</code> <code>CHAN1|DIGital0…</code> — which signal to download.</li>
+<li><code>:FORMat</code> <code>ASCii|WORD|BYTE</code><ul>
+<li><code>ASCii</code> — slow, human readable: <code>1.23, 1.24, 1.25…</code></li>
+<li><code>BYTE</code> — fast, raw binary 0–255.</li>
+</ul>
+</li>
+<li><code>:POINts</code> <code>100|250|500|1000|2000|MAXimum</code> — <strong>critical.</strong> Leave it unset and
+you may get 500 screen points instead of the full memory dump.</li>
+<li><code>:BYTeorder</code> <code>LSBFirst|MSBFirst</code> — binary endianness; the default is usually
+right for a PC.</li>
+<li><code>:UNSigned</code> <code>ON|OFF</code> — ON returns 0..255, OFF returns -128..127.</li>
+<li><code>:DATA?</code> — <strong>the query.</strong> The actual array of points.</li>
+<li><code>:PREamble?</code> — the scale factors that convert <code>BYTE</code> data back to volts and
+seconds.</li>
+<li><code>:TYPE?</code> — whether the data is normal, average or peak detect.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>7. <code>MEASure</code> — automated math</h3>
+<ul>
+<li><strong><code>MEASure</code></strong><ul>
+<li><code>:SOURce</code> <code>&lt;channel&gt;</code> — which channel to measure.</li>
+<li><strong>Voltage:</strong> <code>:VPP?</code>, <code>:VMAX?</code>, <code>:VRMS?</code>, <code>:VAVerage?</code> (mean), <code>:VBASE?</code>,
+<code>:VTOP?</code>, <code>:OVERshoot?</code>, <code>:PREShoot?</code></li>
+<li><strong>Time:</strong> <code>:FREQuency?</code>, <code>:PERiod?</code>, <code>:RISetime?</code>, <code>:FALLtime?</code>,
+<code>:DUTYcycle?</code>, <code>:PWIDth?</code> (positive width), <code>:NWIDth?</code> (negative width)</li>
+<li><strong>Mixed:</strong> <code>:DELay?</code> (time between Ch1 and Ch2 edges), <code>:PHASE?</code></li>
+<li><strong><code>:DEFine</code></strong><ul>
+<li><code>:THResholds</code> <code>PERCent|ABSolute</code> — whether rise time means 10%/90% or
+specific voltages.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>8. <code>MARKer</code> — cursors</h3>
+<p>Manual measurement is cursor work; these are the X and Y markers.</p>
+<ul>
+<li><strong><code>MARKer</code></strong><ul>
+<li><code>:MODE</code> <code>MANual|MEASure|OFF</code></li>
+<li><code>:X1Position</code> / <code>:X2Position</code> <code>&lt;seconds&gt;</code> — time cursors.</li>
+<li><code>:Y1Position</code> / <code>:Y2Position</code> <code>&lt;volts&gt;</code> — voltage cursors.</li>
+<li><code>:XDELta?</code> — time difference between them.</li>
+<li><code>:YDELta?</code> — voltage difference between them.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>9. <code>FUNCtion</code> — math trace</h3>
+<p>The &quot;Math&quot; trace, the pink line.</p>
+<ul>
+<li><strong><code>FUNCtion</code></strong><ul>
+<li><code>:OPERation</code> <code>ADD|SUBTract|MULTiply|FFT|INTegrate</code></li>
+<li><code>:SOURce1</code> <code>&lt;channel&gt;</code> · <code>:SOURce2</code> <code>&lt;channel&gt;</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>10. <code>SYSTem</code> — utilities</h3>
+<ul>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>:ERRor?</code> — read the error queue; returns a code and a string.</li>
+<li><code>:SETup?</code> — the complete instrument setup as a binary block, to save and
+restore state.</li>
+<li><code>:LOCK</code> <code>ON|OFF</code> — lock the front-panel keys.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>Worked examples</h3>
+<p><strong>Setting up the digital channels.</strong> Viewing an SPI bus with D0 as clock and D1 as
+data, at TTL levels:</p>
+<pre><code class="language-text">POD1:THR TTL               (set D0-D7 to trigger at 1.4V)
+DIG0:DISP ON               (turn on D0)
+DIG1:DISP ON               (turn on D1)
+DIG0:LAB &quot;SPI_CLK&quot;         (label D0)
+TRIG:MODE EDGE             (set trigger mode)
+TRIG:EDGE:SOUR DIG0        (trigger on the clock line)
+</code></pre>
+<p><strong>Asking for a measurement.</strong> The frequency of that clock:</p>
+<pre><code class="language-text">MEAS:SOUR DIG0             (focus the measurement system on D0)
+MEAS:FREQ?                 (scope answers: +1.00000E+06)
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Oscilloscope/54641D/commands_tree.md</code>
+  </div>
+</body>
+</html>

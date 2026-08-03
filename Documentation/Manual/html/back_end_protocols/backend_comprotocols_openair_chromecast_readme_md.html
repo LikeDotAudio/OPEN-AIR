@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>openair-ChromeCast (README) - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-chromecast — Google Cast discovery</h1>
+<p>Finds Chromecasts, Nest speakers, and Cast groups, and decodes what each one is.</p>
+<p><strong>Discovery only.</strong> No control.</p>
+<h2>What it does</h2>
+<p>Browses <code>_googlecast._tcp</code> and publishes one retained topic tree per device to
+<code>OpenAir/System/Protocols/chromecast/Device/&lt;Category&gt;/&lt;Name&gt;/…</code>.</p>
+<p>The value over the raw DNS-SD tab is <strong>decoding the TXT record</strong>. <code>openair-dnssd</code>
+sees these devices too, but publishes TXT verbatim because it cannot know what
+any given service&#39;s keys mean. Cast&#39;s keys <em>are</em> defined:</p>
+<table>
+<thead>
+<tr>
+<th>TXT key</th>
+<th>Becomes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fn</code></td>
+<td><code>friendly_name</code> — &quot;Garage speaker&quot;</td>
+</tr>
+<tr>
+<td><code>md</code></td>
+<td><code>model</code> — &quot;Google Nest Mini&quot;</td>
+</tr>
+<tr>
+<td><code>ca</code></td>
+<td><code>capabilities</code> — decoded bitmask</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>cast_id</code></td>
+</tr>
+<tr>
+<td><code>rs</code></td>
+<td><code>status_text</code> — what it is playing, or <code>idle</code></td>
+</tr>
+<tr>
+<td><code>ve</code></td>
+<td><code>protocol_version</code></td>
+</tr>
+</tbody></table>
+<h2>Categories</h2>
+<p>Devices are filed into <code>Speaker</code>, <code>Video Cast</code>, <code>Smart Display</code>, <code>Speaker Group</code>,
+or <code>Cast Device</code>, from the model string with a capability-bit fallback.</p>
+<p><strong>Category is derived, not intrinsic</strong> — improve the classifier and a device
+<em>moves</em>. The agent therefore clears a device&#39;s retained topics under every other
+category before publishing, or it would appear twice. (This is not theoretical:
+&quot;Chromecast Audio&quot; was initially filed as Video Cast because it matched the
+generic <code>chromecast</code> rule before anything checked it was an audio-only puck.)</p>
+<h2>What is deliberately not decoded</h2>
+<p>Only the low <code>ca</code> bits are publicly documented and stable, so only those become
+flags. <strong>The raw value is always published alongside</strong> (<code>audio_out, … (raw:198660)</code>)
+— a wrong guess dressed as a fact would be worse than an undecoded number.</p>
+<h2>Why there is no control</h2>
+<p>Sending commands means <strong>Cast V2</strong>: a TLS socket to port 8009, a constant
+heartbeat, and protobuf messages multiplexed over virtual channels
+(<code>urn:x-cast:com.google.cast.{tp.heartbeat,tp.connection,receiver,media}</code>). The
+<code>rust-cast</code> crate exists for that. It is a substantial protocol implementation
+and is not needed to answer <em>what Cast hardware is here and what can it do?</em></p>
+<p>Discovery is also the safe half: passive, no pairing, and it cannot disturb a
+device someone is listening to.</p>
+<h2>Tests</h2>
+<p><code>cargo test -p openair-chromecast</code> — capability decoding (including that the raw
+value always survives), category rules, and topic-segment sanitising.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-ChromeCast/README.md</code>
+  </div>
+</body>
+</html>

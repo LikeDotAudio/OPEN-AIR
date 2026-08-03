@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>N9340B / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Spectrum/N9340B — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>223 commands</strong> — SET 81 · RIG 3 · NAB 89 · DO 50 · 187 unverified (83%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Frequency_settings</code> · → start, stop, center, span<br>Primary Frequency Monitoring<ul>
+<li><code>:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>RBW_VBW_Hz</code> · args: <code>rbw_hz_value</code>, <code>vbw_hz_value</code><br>Set Resolution and Video BW<ul>
+<li><code>:SENSe:BANDwidth:RESolution &lt;rbw_hz_value&gt;;:SENSe:BANDwidth:VIDeo &lt;vbw_hz_value&gt;</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Ref_Level_dBm</code> · args: <code>Ref_Level_dBm</code>, <code>Attenuation_dB</code>, <code>Preamp_On</code> · numeric (V)<br>Set Power Levels<ul>
+<li><code>:DISPlay:WINDow:TRACe:Y:RLEVel &lt;Ref_Level_dBm&gt;;:POWer:RF:ATTenuation &lt;Attenuation_dB&gt;;:POWer:GAIN &lt;Preamp_On&gt;</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>all_marker_settings</code> · → y_1, y_2, y_3, y_4, y_5, y_6, x_1, x_2, x_3, x_4, x_5, x_6<br>Marker Amplitude and Frequency Readbacks<ul>
+<li><code>:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>amplitude_settings</code> · → rlevel, attenuation, gain<br>Power and Attenuation Readbacks<ul>
+<li><code>:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>bandwidth_settings</code> · → resolution, video, auto, continuous, time<br>Bandwidth and Sweep Monitoring<ul>
+<li><code>:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>freq_start_stop</code> · args: <code>start_freq</code>, <code>stop_freq</code> · numeric<br>Frequency Range Commands<ul>
+<li><code>:FREQuency:STARt &lt;start_freq&gt;;:FREQuency:STOP &lt;stop_freq&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><strong><code>BWIDth</code></strong><ul>
+<li><code>INTegration</code> — <strong>SET</strong> <code>Set_Bwidth_Integration</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the Chan Integ BW</li>
+<li><code>RESolution</code> — <strong>SET</strong> <code>Set_Bwidth_Resolution</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the Channel Res BW</li>
+<li><code>VIDeo</code> — <strong>SET</strong> <code>Set_Bwidth_Video</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Video Bandwidth</li>
+<li><code>INTegration?</code> — <strong>NAB</strong> <code>Get_Bwidth_Integration</code> · → 1 value · †<br>Set the Chan Integ BW</li>
+<li><code>RESolution?</code> — <strong>NAB</strong> <code>Get_Bwidth_Resolution</code> · → 1 value · †<br>Set the Channel Res BW</li>
+<li><code>VIDeo?</code> — <strong>NAB</strong> <code>Get_Bwidth_Video</code> · → 1 value · †<br>Video Bandwidth</li>
+<li><strong><code>VIDeo</code></strong><ul>
+<li><code>RATio</code> — <strong>SET</strong> <code>Set_Bwidth_Video_Ratio</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Video to Resolution Bandwidth Ratio</li>
+<li><code>RATio?</code> — <strong>NAB</strong> <code>Get_Bwidth_Video_Ratio</code> · → NR3 · †<br>Video to Resolution Bandwidth Ratio</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CAL</code></strong><ul>
+<li><strong><code>SOUR</code></strong><ul>
+<li><code>STAT</code> — <strong>DO</strong> <code>Do_Calibration_Source_State</code> · †<br>Using C with Marker Peak Search and Peak Excursion</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CALC</code></strong><ul>
+<li><strong><code>MARK</code></strong><ul>
+<li><code>MODE</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Mode</code> · †</li>
+<li><strong><code>PEAK</code></strong><ul>
+<li><code>EXC</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Peak_Exc</code> · †</li>
+<li><code>THR</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Peak_Thr</code> · †</li>
+<li><strong><code>THR</code></strong><ul>
+<li><code>STAT</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Peak_Thr_State</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MARK1</code></strong><ul>
+<li><code>PHN</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Phn</code> · †</li>
+</ul>
+</li>
+<li><strong><code>PHN</code></strong><ul>
+<li><code>OFFS</code> — <strong>DO</strong> <code>Do_Calculate_Phn_Offset</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CALCulate</code></strong><ul>
+<li><code>LLINe&lt;n&gt;</code> — <strong>DO</strong> <code>Do_Calculate_Lline</code> · per-instance: <code>n</code> · †<br>Limit Line Y-axis Value</li>
+<li><code>MARKer&lt;n&gt;</code> — <strong>DO</strong> <code>Do_Calculate_Marker</code> · per-instance: <code>n</code> · †</li>
+<li><strong><code>LLINe1</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Calculate_Lline_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Limit Line Testing</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calculate_Lline_State</code> · → BOOL · †<br>Limit Line Testing</li>
+<li><strong><code>BUZZer</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calculate_Lline_Buzzer_State</code> · → BOOL · †<br>Turn on/off the Buzzer</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Do_Calculate_Lline_Buzzer_Statoff</code> · <code>OFF</code> · †<br>Turn on/off the Buzzer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MARKer</code></strong><ul>
+<li><code>AOFF</code> — <strong>DO</strong> <code>Set_All_Markers_State</code></li>
+</ul>
+</li>
+<li><strong><code>MARKer1</code></strong><ul>
+<li><code>FCOunt</code> — <strong>DO</strong> <code>Do_Calculate_Marker_Fcount</code> · †<br>Frequency Counter Marker</li>
+</ul>
+</li>
+<li><strong><code>MARKer&lt;marker_number&gt;</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Marker_State</code> · <code>&lt;state_bool&gt;</code> · args: <code>state_bool</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>marker_number</code></li>
+<li><code>X</code> — <strong>SET</strong> <code>Set_Marker_X_position</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric · per-instance: <code>marker_number</code><br>Set Marker Frequency</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DEMod</code></strong><ul>
+<li><strong><code>AM</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Demod_Am_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>AM Demodulation</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Demod_Am_State</code> · → BOOL · †<br>AM Demodulation</li>
+</ul>
+</li>
+<li><strong><code>FM</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Demod_Fm_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>FM Demodulation</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Demod_Fm_State</code> · → BOOL · †<br>FM Demodulation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><strong><code>MODE</code></strong><ul>
+<li><code>BRIGhtness</code> — <strong>SET</strong> <code>Set_Display_Mode_Brightness</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Brightness</li>
+<li><code>BRIGhtness?</code> — <strong>NAB</strong> <code>Get_Display_Mode_Brightness</code> · → 1 value · †<br>Brightness</li>
+</ul>
+</li>
+<li><strong><code>WINDow</code></strong><ul>
+<li><code>TRACe</code> — <strong>DO</strong> <code>Do_Display_Window_Trace</code> · †<br>Trace Y-Axis Scaling</li>
+<li><strong><code>TRACe</code></strong><ul>
+<li><strong><code>Y</code></strong><ul>
+<li><code>RLEVel</code> — <strong>SET</strong> <code>Set_Reference_Level</code> · <code>&lt;dbm_value&gt;</code> · args: <code>dbm_value</code> · numeric (V)</li>
+<li><code>RLEVel?</code> — <strong>NAB</strong> <code>Reference_Level</code> · → NR3 V</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FCOunt</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Fcount_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Frequency Counter Marker</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Fcount_State</code> · → BOOL · †<br>Frequency Counter Marker</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Center_Freq_MHz</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Span_Frequency</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+<li><code>STARt</code> — <strong>SET</strong> <code>Set_Start_Freq_MHz</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Stop_Freq_MHz</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+</ul>
+</li>
+<li><strong><code>INITiate</code></strong><ul>
+<li><code>CONTinuous</code> — <strong>SET</strong> <code>Set_Continuous_Mode</code> · <code>&lt;state_bool&gt;</code> · args: <code>state_bool</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>IMMediate</code> — <strong>DO</strong> <code>Do_Initiate_Continuous</code></li>
+</ul>
+</li>
+<li><strong><code>INSTrument</code></strong><ul>
+<li><code>MEASure</code> — <strong>SET</strong> <code>Set_Instrument_Measure</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHP</code> | <code>ACPR</code> | <code>OBW</code> | <code>SEM</code> · †<br>Power Measurement</li>
+<li><code>SELect</code> — <strong>SET</strong> <code>Set_Instrument_Select</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SA</code> | <code>TGEN</code> | <code>DAN</code> | <code>POW</code> · †<br>Instrument Mode</li>
+<li><code>MEASure?</code> — <strong>NAB</strong> <code>Get_Instrument_Measure</code> · → 1 value · †<br>Power Measurement</li>
+<li><code>SELect?</code> — <strong>NAB</strong> <code>Get_Instrument_Select</code> · → CRD · †<br>Instrument Mode</li>
+</ul>
+</li>
+<li><strong><code>MEAS</code></strong><ul>
+<li><strong><code>SEM</code></strong><ul>
+<li><code>BWID</code> — <strong>DO</strong> <code>Do_Measure_Semask_Bwidth</code> · †</li>
+<li><strong><code>BAND</code></strong><ul>
+<li><code>INT</code> — <strong>DO</strong> <code>Do_Measure_Semask_Bandwidth_Integration</code> · †</li>
+</ul>
+</li>
+<li><strong><code>BWID</code></strong><ul>
+<li><code>INT</code> — <strong>DO</strong> <code>Do_Measure_Semask_Bwidth_Integration</code> · †</li>
+</ul>
+</li>
+<li><strong><code>OFFS</code></strong><ul>
+<li><strong><code>LIST</code></strong><ul>
+<li><strong><code>STOP</code></strong><ul>
+<li><code>ABS</code> — <strong>DO</strong> <code>Do_Measure_Semask_Offset_List_Stop_Absolute</code> · †<br>Set the Abs Stop</li>
+<li><code>RCAR</code> — <strong>DO</strong> <code>Do_Measure_Semask_Offset_List_Stop_Rcarrier</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MEASure</code></strong><ul>
+<li><code>CHPower?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower</code> · → 1 value · †<br>Channel Power and Density</li>
+<li><strong><code>ACPR</code></strong><ul>
+<li><code>ADJacent</code> — <strong>SET</strong> <code>Set_Measure_Acpr_Adjacent</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Adjacent channel</li>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Measure_Acpr_Center</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Center Freq</li>
+<li><code>MAIN</code> — <strong>SET</strong> <code>Set_Measure_Acpr_Main</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Main channel</li>
+<li><code>SPACe</code> — <strong>SET</strong> <code>Set_Measure_Acpr_Spacing</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Channel space</li>
+<li><code>ADJacent?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Adjacent</code> · → 1 value · †<br>Adjacent channel</li>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Center</code> · → NR3 · †<br>Center Freq</li>
+<li><code>LPOWer?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Lpower</code> · → 1 value · †<br>Low Adjacent Channel Power</li>
+<li><code>LRATio?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Lratio</code> · → 1 value · †<br>Low Adjacent Channel Power Ratio</li>
+<li><code>MAIN?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Main</code> · → 1 value · †<br>Main channel</li>
+<li><code>MPOWer?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Mpower</code> · → 1 value · †<br>Main Channel Power</li>
+<li><code>SPACe?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Spacing</code> · → 1 value · †<br>Channel space</li>
+<li><code>UPOWer?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Upower</code> · → 1 value · †<br>Upper Adjacent Channel Power</li>
+<li><code>URATio?</code> — <strong>NAB</strong> <code>Get_Measure_Acpr_Uratio</code> · → 1 value · †<br>Upper Adjacent Channel Power Ratio</li>
+</ul>
+</li>
+<li><strong><code>CHPower</code></strong><ul>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Measure_Chpower_Center</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Center Freq</li>
+<li><code>IBW</code> — <strong>SET</strong> <code>Set_Measure_Chpower_Ibw</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Measure_Chpower_Span</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Channel Span</li>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower_Center</code> · → NR3 · †<br>Center Freq</li>
+<li><code>CHPower?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower_Chpower</code> · → 1 value · †<br>Channel Power and Density</li>
+<li><code>DENSity?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower_Density</code> · → 1 value · †<br>Channel Power and Density</li>
+<li><code>IBW?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower_Ibw</code> · → 1 value · †</li>
+<li><code>SPAN?</code> — <strong>NAB</strong> <code>Get_Measure_Chpower_Span</code> · → NR3 · †<br>Channel Span</li>
+</ul>
+</li>
+<li><strong><code>OBW</code></strong><ul>
+<li><code>METHod</code> — <strong>SET</strong> <code>Set_Measure_Obw_Method</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PERC</code> | <code>XDB</code> · †<br>Select the measurement method of OBW</li>
+<li><code>PERCent</code> — <strong>SET</strong> <code>Set_Measure_Obw_Percent</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set percentage (%) method of OBW</li>
+<li><code>XDB</code> — <strong>SET</strong> <code>Set_Measure_Obw_Xdb</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set dBc method of OBW</li>
+<li><code>METHod?</code> — <strong>NAB</strong> <code>Get_Measure_Obw_Method</code> · → 1 value · †<br>Select the measurement method of OBW</li>
+<li><code>PERCent?</code> — <strong>NAB</strong> <code>Get_Measure_Obw_Percent</code> · → NR3 s · †<br>Set percentage (%) method of OBW</li>
+<li><code>XDB?</code> — <strong>NAB</strong> <code>Get_Measure_Obw_Xdb</code> · → NR3 · †<br>Set dBc method of OBW</li>
+</ul>
+</li>
+<li><strong><code>SEMask</code></strong><ul>
+<li><code>SWEeptime</code> — <strong>SET</strong> <code>Set_Measure_Semask_Sweep</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set the Sweep Time</li>
+<li><code>SWEeptime?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Sweep</code> · → CRD s · †<br>Set the Sweep Time</li>
+<li><code>BANDwidth</code> — <strong>DO</strong> <code>Do_Measure_Semask_Bandwidth</code> · †<br>Set the Chan Integ BW</li>
+<li><code>MARKer&lt;n&gt;</code> — <strong>DO</strong> <code>Do_Measure_Semask_Marker</code> · per-instance: <code>n</code> · †<br>Turn On/Off the Marker</li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Measure_Semask_Average_Count</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set the Average</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Measure_Semask_Average_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Set the Average</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Average_Count</code> · → NR1 · †<br>Set the Average</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Average_State</code> · → BOOL · †<br>Set the Average</li>
+</ul>
+</li>
+<li><strong><code>CARRier</code></strong><ul>
+<li><code>POWer</code> — <strong>SET</strong> <code>Set_Measure_Semask_Carrier_Power</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set Total Power Reference</li>
+<li><code>POWer?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Carrier_Power</code> · → 1 value · †<br>Set Total Power Reference</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>CENTer</code> — <strong>SET</strong> <code>Set_Measure_Semask_Frequency_Center</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set Center Frequency</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Measure_Semask_Frequency_Span</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set Chan Span</li>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Frequency_Center</code> · → NR3 · †<br>Set Center Frequency</li>
+<li><code>SPAN?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Frequency_Span</code> · → NR3 · †<br>Set Chan Span</li>
+</ul>
+</li>
+<li><strong><code>OFFSet</code></strong><ul>
+<li><strong><code>LIST</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Set the Start Freq</li>
+<li><code>SWEeptime</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_Sweep</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set the Sweep Time</li>
+<li><code>TEST</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_Test</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the Fail Mask</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_State</code> · → BOOL · †<br>Set the Start Freq</li>
+<li><code>SWEeptime?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Sweep</code> · → CRD s · †<br>Set the Sweep Time</li>
+<li><code>BAND</code> — <strong>DO</strong> <code>Do_Measure_Semask_Offset_List_Bandwidth</code> · †<br>Set the Channel Res BW</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>STARt</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_Frequency_Start</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set the Start Freq</li>
+<li><code>STARt?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Frequency_Start</code> · → NR3 · †<br>Set the Start Freq</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Frequency_Stop</code> · → NR3 · †<br>Set the Stop Freq</li>
+</ul>
+</li>
+<li><strong><code>STARt</code></strong><ul>
+<li><code>ABSolute</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_Start_Absolute</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the Abs Start</li>
+<li><code>RCARrier</code> — <strong>SET</strong> <code>Set_Measure_Semask_Offset_List_Start_Rcarrier</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the Rel Start</li>
+<li><code>ABSolute?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Start_Absolute</code> · → 1 value · †<br>Set the Abs Start</li>
+<li><code>RCARrier?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Start_Rcarrier</code> · → 1 value · †<br>Set the Rel Start</li>
+</ul>
+</li>
+<li><strong><code>STOP</code></strong><ul>
+<li><strong><code>ABSolute</code></strong><ul>
+<li><code>COU</code> — <strong>DO</strong> <code>Do_Measure_Semask_Offset_List_Stop_Absolute_Cou</code> · †<br>Set the Abs Stop</li>
+</ul>
+</li>
+<li><strong><code>RCARrier</code></strong><ul>
+<li><code>COU</code> — <strong>DO</strong> <code>Do_Measure_Semask_Offset_List_Stop_Rcarrier_Cou</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>OFFSetn</code></strong><ul>
+<li><strong><code>LIST</code></strong><ul>
+<li><code>TEST?</code> — <strong>NAB</strong> <code>Get_Measure_Semask_Offset_List_Test</code> · → 1 value · †<br>Set the Fail Mask</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><code>ATTenuation</code> — <strong>SET</strong> <code>Set_Power_Attenuation</code> · <code>&lt;db_value&gt;</code> · args: <code>db_value</code> · numeric (dB)</li>
+<li><code>GAIN</code> — <strong>DO</strong> <code>Set_Power_Gain_OFF</code> · <code>OFF</code></li>
+<li><code>GAIN</code> — <strong>DO</strong> <code>Set_Power_Gain_ON</code> · <code>ON</code></li>
+<li><strong><code>ATTenuation</code></strong><ul>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Set_Input_Auto_Attenuation_OFF</code> · <code>OFF</code></li>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Set_Input_Auto_Attenuation_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>RF</code></strong><ul>
+<li><code>ATTenuation?</code> — <strong>NAB</strong> <code>Attenuation</code> · → NR3 dB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SCALe</code></strong><ul>
+<li><code>PDIVision</code> — <strong>SET</strong> <code>Set_Scale_Pdivision</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Trace Y-Axis Scaling</li>
+<li><code>SPACing</code> — <strong>SET</strong> <code>Set_Scale_Spacing</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Vertical Axis Scaling</li>
+<li><code>PDIVision?</code> — <strong>NAB</strong> <code>Get_Scale_Pdivision</code> · → 1 value · †<br>Trace Y-Axis Scaling</li>
+<li><code>SPACing?</code> — <strong>NAB</strong> <code>Get_Scale_Spacing</code> · → 1 value · †<br>Vertical Axis Scaling</li>
+<li><strong><code>RLEVel</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Scale_Rlevel_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Trace Y-Axis Reference Level</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Scale_Rlevel_Offset</code> · → NR3 V · †<br>Trace Y-Axis Reference Level</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SENS</code></strong><ul>
+<li><strong><code>FREQ</code></strong><ul>
+<li><code>CENT</code> — <strong>SET</strong> <code>Set_Sense_Frequency_Center</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>UP</code> | <code>DOWN</code> · †<br>Using C with Marker Peak Search and Peak Excursion</li>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Set_Sense_Frequency_Span</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Using C with Marker Peak Search and Peak Excursion</li>
+<li><code>STAR</code> — <strong>SET</strong> <code>Set_Sense_Frequency_Start</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Start Frequency</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Sense_Frequency_Stop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Stop Frequency</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SENSE</code></strong><ul>
+<li><strong><code>POWer</code></strong><ul>
+<li><strong><code>RF</code></strong><ul>
+<li><strong><code>GAIN</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Preamp_State</code> · → BOOL dB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SENSe</code></strong><ul>
+<li><code>AVERage</code> — <strong>DO</strong> <code>Do_Sense_Average</code> · †</li>
+<li><code>BANDwidth</code> — <strong>DO</strong> <code>Do_Sense_Bandwidth</code> · †</li>
+<li><code>DETector</code> — <strong>DO</strong> <code>Do_Sense_Detector</code> · †</li>
+<li><code>FREQuency</code> — <strong>DO</strong> <code>Do_Sense_Frequency</code> · †</li>
+<li><code>POWer</code> — <strong>DO</strong> <code>Do_Sense_Power</code> · †</li>
+<li><code>SWEep</code> — <strong>DO</strong> <code>Do_Sense_Sweep</code> · †</li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>TRACe&lt;n&gt;</code> — <strong>DO</strong> <code>Do_Sense_Average_Trace</code> · per-instance: <code>n</code> · †<br>Set the Average Count</li>
+</ul>
+</li>
+<li><strong><code>BANDwidth</code></strong><ul>
+<li><code>RESolution</code> — <strong>SET</strong> <code>Set_RBW</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code></li>
+<li><code>VIDeo</code> — <strong>SET</strong> <code>Set_VBW</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code></li>
+<li><strong><code>RESolution</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Set_RBW_Auto</code> · <code>&lt;state_bool&gt;</code> · args: <code>state_bool</code> · bool: <code>OFF</code> | <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>VIDeo</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Set_VBW_Auto</code> · <code>&lt;state_bool&gt;</code> · args: <code>state_bool</code> · bool: <code>OFF</code> | <code>ON</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DETector</code></strong><ul>
+<li><code>FUNCtion?</code> — <strong>NAB</strong> <code>Get_Sense_Detector_Function</code> · → CRD · †<br>Type of Detection</li>
+<li><strong><code>FUNCtion</code></strong><ul>
+<li><code>NEGative</code> — <strong>DO</strong> <code>Do_Sense_Detector_Funcneg</code> · †<br>Type of Detection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>CENTer?</code> — <strong>NAB</strong> <code>Get_Sense_Frequency_Center</code> · → NR3 · †<br>Center Frequency</li>
+<li><code>SPAN?</code> — <strong>NAB</strong> <code>Get_Sense_Frequency_Span</code> · → NR3 · †<br>Frequency Span</li>
+<li><code>STARt?</code> — <strong>NAB</strong> <code>Get_Sense_Frequency_Start</code> · → NR3 · †<br>Start Frequency</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Sense_Frequency_Stop</code> · → NR3 · †<br>Stop Frequency</li>
+<li><strong><code>CENTer</code></strong><ul>
+<li><strong><code>STEP</code></strong><ul>
+<li><code>INCRement</code> — <strong>SET</strong> <code>Set_Sense_Frequency_Center_Step_Increment</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Center Frequency Step Size</li>
+<li><code>INCRement?</code> — <strong>NAB</strong> <code>Get_Sense_Frequency_Center_Step_Increment</code> · → 1 value · †<br>Center Frequency Step Size</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SPAN</code></strong><ul>
+<li><code>FULL</code> — <strong>DO</strong> <code>Do_Sense_Frequency_Span_Full</code> · †<br>Full Frequency Span</li>
+<li><code>PREVious</code> — <strong>DO</strong> <code>Do_Sense_Frequency_Span_Previous</code> · †<br>Last Frequency Span</li>
+<li><code>ZERO</code> — <strong>DO</strong> <code>Do_Sense_Frequency_Span_Zero</code> · †<br>DEMOdulation Subsystem</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><strong><code>RF</code></strong><ul>
+<li><code>ATTenuation</code> — <strong>SET</strong> <code>Set_Sense_Power_Rf_Attenuation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (dB) · †<br>Input Attenuation</li>
+<li><code>ATTenuation?</code> — <strong>NAB</strong> <code>Get_Sense_Power_Rf_Attenuation</code> · → NR3 dB · †<br>Input Attenuation</li>
+<li><strong><code>GAIN</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Sense_Power_Rf_Gain_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Input Port Power Gain</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Sense_Power_Rf_Gain_State</code> · → BOOL dB · †<br>Input Port Power Gain</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SWEep</code></strong><ul>
+<li><code>TDMode</code> — <strong>SET</strong> <code>Set_Sense_Sweep_Tdmode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_Sweep_time</code> · <code>&lt;s_value&gt;</code> · args: <code>s_value</code> · numeric (s)</li>
+<li><code>TDMode?</code> — <strong>NAB</strong> <code>Get_Sense_Sweep_Tdmode</code> · → 1 value · †</li>
+<li><strong><code>TIME</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Set_Sweep_time_Auto</code> · <code>&lt;state_bool&gt;</code> · args: <code>state_bool</code> · bool: <code>OFF</code> | <code>ON</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>CHANnel</code> — <strong>SET</strong> <code>Set_System_Channel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Low Frequency Channel</li>
+<li><code>DATE</code> — <strong>SET</strong> <code>Set_System_Date</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set Date</li>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_System_Time</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set Time</li>
+<li><code>CHANnel?</code> — <strong>NAB</strong> <code>Get_System_Channel</code> · → CRD · †<br>Low Frequency Channel</li>
+<li><code>DATE?</code> — <strong>NAB</strong> <code>Get_System_Date</code> · → 1 value · †<br>Set Date</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_System_Time</code> · → NR3 s · †<br>Set Time</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>error_information</code> · → NR2<br>System Error Check</li>
+<li><code>PRESet</code> — <strong>DO</strong> <code>Do_System_Preset</code> · †</li>
+<li><strong><code>CONFigure</code></strong><ul>
+<li><code>PORT</code> — <strong>SET</strong> <code>Set_System_Configure_Port</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>REF</code> | <code>TRIG</code> · †<br>Power on Type</li>
+<li><code>PORT?</code> — <strong>NAB</strong> <code>Get_System_Configure_Port</code> · → 1 value · †<br>Power on Type</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>UPDate</code> — <strong>DO</strong> <code>Update_Display</code></li>
+</ul>
+</li>
+<li><strong><code>ERRor</code></strong><ul>
+<li><code>NEXT?</code> — <strong>NAB</strong> <code>Get_System_Error_Next</code> · → ERROR · †<br>Error Information Query</li>
+</ul>
+</li>
+<li><strong><code>FILE</code></strong><ul>
+<li><code>SAVE</code> — <strong>DO</strong> <code>Do_System_File_Save</code> · †<br>Screen save</li>
+</ul>
+</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><code>RESet</code> — <strong>DO</strong> <code>Power_Cycle</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TGENerator</code></strong><ul>
+<li><code>AMPLitude</code> — <strong>SET</strong> <code>Set_Tgenerator_Amplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Output Amplitdue</li>
+<li><code>AMPLitude?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Amplitude</code> · → 1 value · †<br>Output Amplitdue</li>
+<li><strong><code>AMPLitude</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Tgenerator_Amplitude_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Amplitude On/Off</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Tgenerator_Amplitude_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Amplitude Step</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Amplitude_State</code> · → BOOL · †<br>Amplitude On/Off</li>
+<li><code>STEP?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Amplitude_Step</code> · → NR1 · †<br>Amplitude Step</li>
+<li><code>OFFSet</code> — <strong>DO</strong> <code>Do_Tgenerator_Amplitude_Offset</code> · †<br>Amplitude Offset</li>
+</ul>
+</li>
+<li><strong><code>NORMalize</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Tgenerator_Normalize_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Normalization Reference Level</li>
+<li><code>POSN</code> — <strong>SET</strong> <code>Set_Tgenerator_Normalize_Posn</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Normalization Reference Position</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Tgenerator_Normalize_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Normalization</li>
+<li><code>TRACe</code> — <strong>SET</strong> <code>Set_Tgenerator_Normalize_Trace</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †<br>Reference Trace</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Normalize_Level</code> · → NR3 · †<br>Normalization Reference Level</li>
+<li><code>POSN?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Normalize_Posn</code> · → NR3 · †<br>Normalization Reference Position</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Normalize_State</code> · → BOOL · †<br>Normalization</li>
+<li><code>TRACe?</code> — <strong>NAB</strong> <code>Get_Tgenerator_Normalize_Trace</code> · → BLOCK · †<br>Reference Trace</li>
+<li><code>REF</code> — <strong>DO</strong> <code>Do_Tgenerator_Normalize_Ref</code> · †<br>Storing as Reference</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRACe</code></strong><ul>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Trace_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ASC</code> | <code>REAL</code> · †<br>Trace format</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Trace_Format</code> · → CRD · †<br>Trace format</li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Averaging</code> · <code>&lt;count_int&gt;</code> · args: <code>count_int</code> · integer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRACe&lt;trace_number&gt;</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trace_Mode</code> · <code>&lt;mode_string&gt;</code> · args: <code>mode_string</code> · enum · per-instance: <code>trace_number</code></li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><strong><code>SEQuence</code></strong><ul>
+<li><code>DELaytime</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Delaytime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Trigger Delay Time</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>IMM</code> | <code>VID</code> | <code>EXT</code> · †<br>Initiate a Single Sweep</li>
+<li><code>DELaytime?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Delaytime</code> · → NR3 s · †<br>Trigger Delay Time</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Source</code> · → CRD · †<br>Trigger Source</li>
+<li><strong><code>EXTernal1</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_External_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>External Trigger Slope</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_External_Slope</code> · → CRD · †<br>External Trigger Slope</li>
+</ul>
+</li>
+<li><strong><code>VIDeo</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Sequence_Video_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Command Example</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Sequence_Video_Level</code> · → NR3 · †<br>Video Trigger Level Amplitude</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>UNIT</code></strong><ul>
+<li><code>POW</code> — <strong>SET</strong> <code>Set_Unit_Power</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DBM</code> | <code>DBMV</code> | <code>DBUV</code> | <code>DBUA</code> | <code>V</code> | <code>W</code> | <code>A</code> · †<br>Using C with Marker Peak Search and Peak Excursion</li>
+<li><code>POWer?</code> — <strong>NAB</strong> <code>Get_Unit_Power</code> · → 1 value · †<br>Select Power Units of Measure</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><code>EMF</code> — <strong>SET</strong> <code>Set_Unit_Power_Emf</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>EMF Mode</li>
+<li><code>EMF?</code> — <strong>NAB</strong> <code>Get_Unit_Power_Emf</code> · → BOOL · †<br>EMF Mode</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Do_Cls</code> · †</li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Do_Trg</code> · †</li>
+<li><code>*WAI</code> — <strong>DO</strong> <code>Do_Wai</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD · †<br>Get idn</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code> · †<br>Do rst</li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Spectrum/N9340B/commands_tree.md</code>
+  </div>
+</body>
+</html>

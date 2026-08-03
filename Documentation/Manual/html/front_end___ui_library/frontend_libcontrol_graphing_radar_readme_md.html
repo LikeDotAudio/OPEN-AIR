@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: graphing / Radar - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Radar (<code>window.Radar</code>)</h1>
+<p>Web mirror of <code>oaGuiElements/Core/graphing/radar</code> — type <strong><code>_Radar</code></strong>.</p>
+<p>A radial &quot;radar scope&quot;: pure-SVG polar grid (rings every <code>grid_system.ring_interval</code>,
+spokes every <code>grid_system.spoke_interval</code>) with a value sweep around one revolution.</p>
+<p><strong>Config read:</strong> <code>data_parameters {min_value, max_value, points_per_revolution, start_angle, clockwise}</code>, <code>visuals.plot_style</code> (<code>area</code> | <code>line</code>),
+<code>grid_system {show_grid, grid_color, ring_interval, spoke_interval, labels.show_values}</code>,
+<code>color_thresholds.colors.safe</code> (sweep color), <code>cosmetics.colors.background</code>.</p>
+<p><strong>Data:</strong> <code>value</code> may be an array of numbers (mapped evenly around 360°) or an array
+of <code>[angleDeg, value]</code> pairs. With no data it draws a faint demo lobe.</p>
+<p>Routed in <code>frameLayout/WidgetFactory.jsx</code> (<code>type === &#39;_Radar&#39;</code> / includes <code>radar</code>).</p>
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The web server (<code>LauchWebserver.py</code> → <code>get_grab_bag()</code>) extracts this block to build
+the palette entry, preview, and property manipulators.</p>
+<pre><code class="language-json">{
+  &quot;Radar_Scope_Example&quot;: {
+    &quot;type&quot;: &quot;_Radar&quot;,
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;Radar Eye 01&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      }
+    },
+    &quot;data_parameters&quot;: {
+      &quot;min_value&quot;: 0,
+      &quot;max_value&quot;: 100,
+      &quot;points_per_revolution&quot;: 360,
+      &quot;start_angle&quot;: 90,
+      &quot;clockwise&quot;: true
+    },
+    &quot;visuals&quot;: {
+      &quot;plot_style&quot;: &quot;area&quot;
+    },
+    &quot;grid_system&quot;: {
+      &quot;show_grid&quot;: true,
+      &quot;grid_color&quot;: &quot;#86c0db&quot;,
+      &quot;ring_interval&quot;: 20,
+      &quot;spoke_interval&quot;: 30,
+      &quot;labels&quot;: {
+        &quot;show_values&quot;: true
+      }
+    },
+    &quot;color_thresholds&quot;: {
+      &quot;colors&quot;: {
+        &quot;safe&quot;: &quot;#0c75ec&quot;,
+        &quot;warning&quot;: &quot;#2f6988&quot;,
+        &quot;critical&quot;: &quot;#455594&quot;
+      }
+    },
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;ew&quot;,
+      &quot;padx&quot;: 5,
+      &quot;pady&quot;: 5,
+      &quot;width&quot;: 240,
+      &quot;height&quot;: 240
+    },
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#0a0f12&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;Radial radar scope: polar rings/spokes with a value sweep around one revolution.&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;plot_style&quot;: [
+      &quot;area&quot;,
+      &quot;line&quot;
+    ]
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/graphing/Radar/Readme.md</code>
+  </div>
+</body>
+</html>

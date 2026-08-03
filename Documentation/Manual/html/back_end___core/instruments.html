@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instruments - Back End & Core</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Instrument panel templates</h1>
+<p>The authored control surface for each instrument FAMILY, one directory per
+device type as named by the VISA knowledge base
+(<code>BackEnd/openair-yak/Yak/knownDevices.json</code> — <code>34401A → DMM</code>).</p>
+<p>These used to live in <code>FrontEnd/Gui_Frames/1_Instruments/left_50/</code>, where they
+were a <em>display</em>: one hand-placed DMM tab regardless of how many DMMs were on
+the bench, bound to no instrument in particular. A bench with eight 34401As got
+one panel and a bank widget. Here they are a <em>template library</em> instead: the
+panel builder stamps one instance per discovered device, so eight DMMs produce
+eight tabs, each bound to its own VISA resource.</p>
+<p>Nothing in the frontend reads this directory, which is why it carries no <code>#_</code>
+ordering prefixes: those are the UI&#39;s tab-order mechanism and mean nothing here.
+Generated output takes its ordering from <code>manifest.json</code> and from key order
+within the files below.</p>
+<p><code>BackEnd/Core/orchestrator/gui/build_instrument_panels.py</code> is the only reader, and it
+writes the instances into <code>FrontEnd/Gui_Frames/1_Instruments/left_100/</code>
+(generated, gitignored) — <code>_100</code> because an instrument panel now takes the FULL
+tab width. The <code>right_50</code> half it used to sit beside is iced at
+<code>1_Instruments/__right_50/</code>; the <code>__</code> prefix is what makes the tree walkers skip
+it (<code>BackEnd/Core/orchestrator/src/api.rs</code>, <code>BackEnd/Core/orchestrator/gui/build_api_artifacts.py</code>),
+so it stays in the repo but never reaches the UI. Rename it back to restore.</p>
+<h2>Two files, no folders</h2>
+<pre><code>&lt;Type&gt;/&lt;Type&gt;.json      the instrument       — stamped ONCE PER DEVICE
+&lt;Type&gt;/&lt;Type&gt;_N.json    N of the instrument  — the block that repeats
+</code></pre>
+<p>That is the whole layout. A type with no group view (Spectrum, Router, LCR,
+Distortion, Generator, Load today) has only the first file.</p>
+<p>Sub-tabs used to be authored as nested folders — <code>Spectrum/Instrument/</code>
+held <code>amplitude/</code>, <code>bandwidth/</code>, <code>frequency/</code>, <code>markers/</code> and <code>traces/</code>, five
+directories to hold five panels, and <code>Power/Instrument/One_instrument/</code> was two
+levels of folder around a single file. The frontend builds tabs from folders
+(<code>WindowManager.TabContainer</code>), so the folders were doing real work — but they
+were doing it in the <em>generated</em> tree, where the builder can just as well put
+them. They are top-level keys now:</p>
+<pre><code>Spectrum.json   {&quot;amplitude&quot;: {…}, &quot;bandwidth&quot;: {…}, …}
+                -&gt;  0_amplitude/  1_bandwidth/  …   one tab each
+</code></pre>
+<p>Key order is tab order. A key whose value is a panel node (it has a <code>type</code>)
+is one panel; a key holding a MAP of nodes is one tab carrying several stacked
+panels — the Router&#39;s <code>Coax</code> tab is two cards that way. That either-a-node-or-a-
+map test is the same one <code>LoaderOrchestrator</code> already makes on a file&#39;s own
+root. <strong>One key and one panel means no sub-tab at all</strong>: the panel lands
+straight in the device folder, which is how the single-panel types have always
+rendered.</p>
+<p>The <code>&lt;i&gt;_</code> prefix the builder puts on generated folder names is the UI&#39;s sort
+key; <code>OaTopicMaker</code> strips it back off, so numbering the tabs never moves a
+widget&#39;s MQTT topic.</p>
+<h3>The N file</h3>
+<p>One OcaBin, and inside it the block that repeats plus any header decks as
+siblings:</p>
+<pre><code>Power_N.json
+  Power_Unit_${n}          OcaBin
+    blocks:
+      PSU_Module_${n}      &lt;- repeats, once per member
+      Global_Logger_Deck   &lt;- header, asked for by name
+      Master_Override_Deck &lt;- header, asked for by name
+</code></pre>
+<p>The repeating block is the one carrying <code>${n}</code> in its name — already the thing
+that makes N copies N distinct panels rather than one panel claiming to exist
+N times. Every other block is a header: a strip that commands the whole group
+(<code>OUTP:ALL</code>) instead of one member, which a group spec requests by block name.
+Power&#39;s bank-of-eight takes the logger and its quads take the interlock, out of
+one file.</p>
+<p>It is an ordinary panel file, so it opens in the WYSIWYG editor like anything
+else. Grouping unwraps it: the repeating block becomes one field of a generated
+station block. That is the same shape the hand-authored <code>psu_four.json</code> /
+<code>psu_eight.json</code> had; the difference is that it is reached by composition
+instead of by copy-paste.</p>
+<h2>manifest.json</h2>
+<pre><code>&quot;&lt;KB type&gt;&quot;: {
+  &quot;tab&quot;:    &quot;&lt;folder name for the generated tab group&gt;&quot;,
+  &quot;groups&quot;: [ &lt;group spec&gt;, ... ]
+}
+</code></pre>
+<p>Both template paths are convention now, so the manifest names neither. A
+<strong>group spec</strong> declares a multi-unit view instead of authoring one:</p>
+<pre><code>{
+  &quot;name&quot;:   &quot;0_Bank_All&quot;,             // folder under the tab
+  &quot;header&quot;: &quot;Global_Logger_Deck&quot;,     // optional deck block from &lt;Type&gt;_N.json
+  &quot;over&quot;:   &quot;devices&quot; | &quot;channels&quot;,
+  &quot;by&quot;:     &quot;chassis&quot; | &quot;host&quot;,       // `over: devices` only
+  &quot;size&quot;:   2 | 4 | &quot;all&quot;,            // `over: devices` only
+  &quot;columns&quot;: 4,
+  &quot;station&quot;: &quot;&lt;block name&gt;&quot;,
+  &quot;id&quot;: &quot;&lt;OCA id&gt;&quot;,
+  &quot;description&quot;: { &quot;En&quot;: …, &quot;Fr&quot;: …, &quot;De&quot;: …, &quot;Es&quot;: … }
+}
+</code></pre>
+<p><code>over: &quot;devices&quot;</code> repeats across instruments that belong together — the bank of
+8, the quads, the pairs. <code>by</code> picks what &quot;together&quot; means: <code>chassis</code> for modules
+sharing a mainframe (the eight 66000A modules at <code>gpib7,30,0-7</code>), <code>host</code> for
+instruments that share only a bench (the eight 34401As, each at its own GPIB
+primary address). A group of one is skipped; that is just the device&#39;s own panel.</p>
+<p><code>over: &quot;channels&quot;</code> repeats <em>within</em> one instrument, once per channel its model
+declares. Two 54641Ds and a 4-channel Rigol are three devices whose panels differ
+only in how many identical channel strips they carry.</p>
+<h2>Device binding</h2>
+<p>The builder injects into every <code>yak_handler</code> block it copies:</p>
+<pre><code>&quot;target&quot;: &quot;OpenAir/System/Protocols/visa/Device/&lt;type&gt;/&lt;model&gt;/Dev&lt;n&gt;/Write&quot;
+&quot;model&quot;:  &quot;&lt;model&gt;&quot;
+&quot;params&quot;: {&quot;chan&quot;: &quot;&lt;slot or channel&gt;&quot;}
+</code></pre>
+<p><code>target</code> is the topic the VISA daemon executes SCPI on, so the instance drives
+its own instrument instead of YAK&#39;s global (unconsumed) publish topic. <code>model</code>
+makes YAK look up SCPI in that model&#39;s command table rather than falling back to
+&quot;first match in any model&quot;.</p>
+<p><code>params</code> are the constants that identify this instance <em>within</em> its instrument,
+substituted by YAK before the widget&#39;s value (<code>openair-yak/src/verbs/mod.rs</code>,
+<code>apply_params</code>). The command table is per model and four of the eight modules
+here are 66104As, so the slot cannot live in the table — which is why every
+module command used to read <code>INST:NSEL 1</code>, addressing slot 1 whichever module
+the panel was for. The same bug existed on the scope, where <code>1_Channel_2/</code> was a
+copy of <code>1_Channel_1/</code> still sending <code>CHAN1:SCAL</code>.</p>
+<h2>Template substitution</h2>
+<p>Unit and deck templates use <code>${n}</code>, <code>${slot}</code>, <code>${chan}</code>, <code>${model}</code>,
+<code>${resource}</code> and <code>${label}</code>, filled in at build time — in values <em>and</em> in key
+names, because a panel&#39;s identity in the frontend tree is its top-level key.</p>
+<p>Deliberately <strong>not</strong> <code>&lt;name&gt;</code>: panels carry SCPI fragments (<code>&quot;command_value&quot;: &quot;VOLT &lt;value&gt;&quot;</code>) and YAK&#39;s command tables use <code>&lt;chan&gt;</code>, <code>&lt;n&gt;</code>, <code>&lt;slot&gt;</code>. Two
+substitution passes run over this data — the builder&#39;s at build time and YAK&#39;s
+at send time — and sharing a delimiter is how a slot number ends up where a
+voltage belongs.</p>
+<h2>Limits come from YAK</h2>
+<p>A widget marked <code>&quot;yak_domain&quot;: &quot;volt&quot;</code> gets <code>units</code>, <code>min</code> and <code>max</code> copied from
+the model&#39;s capability sheet at <code>BackEnd/openair-yak/Yak/&lt;TYPE&gt;/&lt;model&gt;/model.json</code>:</p>
+<pre><code>{ &quot;model&quot;: &quot;66101A&quot;, &quot;channels&quot;: 1, &quot;watts&quot;: 128,
+  &quot;domains&quot;: { &quot;volt&quot;: {&quot;units&quot;: &quot;V&quot;, &quot;min&quot;: 0, &quot;max&quot;: 8},
+               &quot;curr&quot;: {&quot;units&quot;: &quot;A&quot;, &quot;min&quot;: 0, &quot;max&quot;: 16} } }
+</code></pre>
+<p>This is what makes one template enough. The eight modules in this mainframe are
+four different models spanning 8V/16A to 60V/2.5A, so a hand-authored bank of 8
+has one set of widgets for instruments that do not share a range — the 8V strip
+and the 60V strip were the same strip. Only the builder, which sees the
+discovery table, knows which model is in which slot.</p>
+<p><code>channels</code> feeds <code>over: &quot;channels&quot;</code> the same way. Before these files existed the
+ranges were English in the knowledge base (&quot;Module 8V / 16A (128W)&quot;) and the
+scope&#39;s channel count was a description field reading &quot;1, 2, 3, 4&quot; — so the
+Rigol, a 4-channel scope, was handed the 2-channel Agilent template.</p>
+<h2>Known gaps</h2>
+<p><strong>97 widgets still carry literal SCPI</strong> in <code>message_details.*.command_value</code>
+instead of a <code>yak_handler</code>, so they render, and are bound, and send nothing.
+Three distinct cases, and only the first is a mechanical edit:</p>
+<ul>
+<li><strong>12 are dead duplicates</strong> — all in <code>DMM.json</code>, where the widget already has
+a working <code>yak_handler</code> and the literal beside it is a leftover. Deleting the
+<code>command_value</code> key changes no behaviour. (Delete the key only: the sibling
+<code>style</code> in the same <code>message_details</code> block is what draws the widget&#39;s
+active/inactive states.)</li>
+<li><strong>16 map onto a YAK command that already exists</strong> — <code>Load.json</code> is 10 of
+them (<code>CURR &lt;value&gt;</code> → <code>Set_Current_Level</code>, <code>TRAN:DCYC &lt;value&gt;</code> →
+<code>Set_Transient_Duty</code>, …), plus <code>INIT</code>/<code>READ?</code> on the DMM and <code>TIM:SCAL</code>/
+<code>TIM:OFFS</code> on the scope.</li>
+<li><strong>69 have no YAK command to point at.</strong> The vocabulary has to be written in
+<code>BackEnd/openair-yak/Yak/&lt;TYPE&gt;/&lt;model&gt;/</code> first. Whole families are missing:
+<code>LCR/4263A/</code> and <code>Distortion/HP_8903B/</code> have zero commands, and the four
+66000A tables have no per-slot <code>MEAS:VOLT?</code> at all — only <code>Get_Values</code>, which
+is hardcoded to <code>INST:NSEL 1</code>.</li>
+</ul>
+<p>Where a literal and a table both exist they frequently disagree, which is the
+argument for handlers rather than an accident: the scope panels send
+<code>CHAN1:SCAL</code> and <code>ACQ:STATE</code>, while the 54641D&#39;s table says
+<code>CHANnel&lt;n&gt;:RANGe</code> and the Rigol&#39;s says <code>:CHANnel&lt;n&gt;:SCALe</code>. One literal cannot
+be right for both instruments; a command name resolved per model can.</p>
+<p><code>LCR/LCR.json</code> is a byte-for-byte copy of <code>Load/Load.json</code>, down to the
+<code>Load_Instrument</code> root key and the <code>DC_Load_Station</code> block — an LCR meter gets a
+DC electronic load&#39;s control surface. <code>Distortion/Distortion.json</code> is the same
+panel with the labels changed. Both need authoring, not collapsing.</p>
+<p><code>_datasets/spectrum_presets.json</code> is not a panel — its <code>blocks</code> is a list of
+preset rows (station names, start/stop frequencies, RBW) rather than a widget
+tree. It sat under <code>Spectrum/Presets/DataSet/</code> where nothing read it; parked
+here until something does.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>BackEnd/Instruments/README.md</code>
+  </div>
+</body>
+</html>

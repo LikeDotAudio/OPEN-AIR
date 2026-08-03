@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Executive_Review_Business_Value / 2026-07-18PM_Executive_Review_Business_Value - Overview & General Docs</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>OPEN-AIR — Executive Review Committee: Business Value Audit</h1>
+<p><strong>Date:</strong> 2026-07-18, afternoon session
+<strong>Subject:</strong> Twelve-persona audit of <code>OPEN-AIR</code> as it stands <strong>right now</strong>
+<strong>Scope rule for this session:</strong> the committee was instructed to audit <strong>only what
+is in the tree and can ship today</strong>. No history, no archives, no logs, no
+appeals to what anyone intended. If it is not on disk and runnable, it does not
+exist for the purposes of this review.</p>
+<hr>
+<h2>Grounding facts — measured, not claimed</h2>
+<p>Every number below was taken from the working tree at the time of the session.</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Measured</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rust</td>
+<td><strong>129 files / 13,364 lines</strong></td>
+</tr>
+<tr>
+<td>Browser JSX</td>
+<td><strong>137 files / 18,678 lines</strong></td>
+</tr>
+<tr>
+<td>TypeScript (<code>contracts/</code> + <code>ui/</code>)</td>
+<td><strong>30 files / 2,453 lines</strong> + 2 <code>.tsx</code> / 147 lines</td>
+</tr>
+<tr>
+<td>Python</td>
+<td><strong>65 files / 4,299 lines</strong></td>
+</tr>
+<tr>
+<td>Authored UI</td>
+<td><strong>484 panel JSON files</strong> across 5 top-level tabs</td>
+</tr>
+<tr>
+<td>Widget library</td>
+<td><strong>12 families</strong>, 33 in <code>special/</code> alone</td>
+</tr>
+<tr>
+<td>Protocol crates</td>
+<td><strong>15</strong> + the YAK agent</td>
+</tr>
+<tr>
+<td>— with a real <code>lib.rs</code></td>
+<td><strong>5</strong> (<code>aes70</code>, <code>dnssd</code>, <code>midi</code>, <code>osc</code>, <code>visa</code>)</td>
+</tr>
+<tr>
+<td>— still a <code>cargo new</code> template</td>
+<td><strong>10</strong> (<code>ember</code>, <code>mdns</code>, <code>mqtt</code>, <code>nmos</code>, <code>ptp</code>, <code>rest</code>, <code>sap</code>, <code>smpte2138</code>, <code>snmp</code>, <code>websocket</code>)</td>
+</tr>
+<tr>
+<td>YAK agent</td>
+<td>binary, 7 modules, all four verbs (<code>SET</code>/<code>RIG</code>/<code>NAB</code>/<code>DO</code>)</td>
+</tr>
+<tr>
+<td>Contract layer</td>
+<td>zod schemas → JSON Schema → generated Rust; <strong>19 golden-vector files</strong> consumed by <em>both</em> vitest and <code>cargo test</code></td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><strong>120 TypeScript tests passing</strong>; contracts Rust suites green</td>
+</tr>
+<tr>
+<td>Drift ratchet</td>
+<td><strong>169 errors / 2,093 deprecations</strong>, baselined; <strong>0 new vs baseline</strong></td>
+</tr>
+<tr>
+<td>CI</td>
+<td><code>contracts-ci</code>: <strong>docs · node · rust · ui · codegen</strong>; both deploy workflows now <strong><code>verify</code> → <code>deploy</code></strong></td>
+</tr>
+<tr>
+<td>VISA subshell</td>
+<td>parameterised — <strong><code>sys.argv</code></strong>, no string interpolation</td>
+</tr>
+<tr>
+<td>Broker</td>
+<td>both listeners bound <strong><code>127.0.0.1</code></strong>; anonymous access scoped to loopback</td>
+</tr>
+<tr>
+<td>Served runtime</td>
+<td><strong><code>FrontEnd/</code></strong> (in-browser Babel). <code>ui/</code> builds but is <strong>not served</strong></td>
+</tr>
+<tr>
+<td><code>ui/</code> port progress</td>
+<td>4 source files; <strong>140</strong> legacy side-effect imports; <strong>178 globals, 175 still <code>any</code></strong></td>
+</tr>
+<tr>
+<td>Discovery delivery</td>
+<td>still <strong>writes JSON to <code>Gui_Frames/0_discovered/</code></strong></td>
+</tr>
+<tr>
+<td><code>/ws</code> side-bus</td>
+<td>still routed; <strong>zero consumers</strong></td>
+</tr>
+<tr>
+<td>One-command startup</td>
+<td><strong>does not exist</strong> — no Dockerfile, compose file, or Makefile</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Phase 1: The Eager Pitch — <em>Jr. Business Analyst</em></h2>
+<p>Look at what is actually sitting in this repository today, because I do not think
+the committee has internalised it. There is a <strong>contract layer</strong> that defines every
+shape crossing every process boundary exactly once, in TypeScript, and <em>generates</em>
+the Rust that the agents compile against. Nineteen golden-vector files are read by
+both the TypeScript test runner and <code>cargo test</code>. That means the browser, the Rust
+fleet, and the tooling <strong>cannot</strong> disagree about the wire without something going
+red. That is not a nice-to-have. That is the artifact that turns a personal project
+into a platform a second company can build on, and it is <em>done</em>.</p>
+<p>On top of that we have 484 authored panels, a twelve-family widget library, and a
+filesystem-as-document-model where folders become tabs and JSON files become
+panels. A technician reorganises their cockpit with a file manager. The WYSIWYG
+editor runs <em>inside the live application</em>, sharing the real message bus and the
+real renderer, so you edit a panel while it shows live data. Most test-and-measure
+tooling forces you to choose between &quot;design mode&quot; and &quot;run mode.&quot; We fused them.</p>
+<p>And the security posture changed materially today. The VISA command path is
+parameterised — values travel as process arguments, not as interpolated source —
+and the broker binds loopback. Both deploy workflows now refuse to publish unless
+typecheck, the contract test suite, and the drift ratchet all pass. The market
+need is unchanged and large: every lab on earth has multi-vendor instruments that
+refuse to talk to each other, and the vendor-neutral orchestration layer does not
+exist. We have the specification, the widget library, and the discovery loop. <strong>We
+should be courting integrators this quarter.</strong></p>
+<h2>Phase 2: The Whiz-Bang Spin — <em>Marketing Guy</em></h2>
+<p>Okay okay okay — <strong>&quot;YOUR LAB, ONE PANE OF GLASS.&quot;</strong> That is the campaign, that is
+the billboard, I want it on the side of a van at every trade show from NAB to IBC.
+Picture it: the technician walks into a bench full of Keysight, Rigol, HP, whatever
+graveyard of gear the budget allowed — and instead of seventeen proprietary control
+apps and a USB drawer of dongles, they hit <strong>one button</strong> and the whole lab
+introduces itself. We are not selling software here, we are selling <em>the end of the
+dongle drawer</em>. People will vibrate. I have seen engineers cry over less.</p>
+<p>And the folders thing? The folders thing is the killer demo and nobody on this team
+is selling it hard enough. You drag a folder in your file manager and <strong>your
+dashboard rearranges itself</strong>. No admin console, no drag-and-drop builder with
+seventeen modals — your filing cabinet <em>is</em> your interface. We call it
+<strong>&quot;Filesystem-Native Control&quot;</strong>, we trademark it, and we let every integrator on
+earth publish device profiles as folders. That is a community, that is an
+ecosystem, that is a moat made of muscle memory. Give me a booth, a scope, and
+ninety seconds and I will close anyone.</p>
+<h2>Phase 3: The Geek-Out — <em>Excited Nerd Engineer</em></h2>
+<p>Can we please talk about the <strong>golden vectors</strong>, because this is the coolest thing
+in the entire codebase and everyone keeps talking about <em>money</em>. There are 19 JSON
+vector files, and they are read by vitest <strong>and</strong> by <code>cargo test</code>. The same files.
+The TypeScript topic parser and the hand-written Rust topic parser both have to
+satisfy them or somebody&#39;s build goes red. Add a case on one side and the <em>other
+language</em> fails until it is implemented. That is a <strong>bilingual executable
+specification</strong>. Most shops &quot;solve&quot; this with a wiki page and vibes.</p>
+<p>And the codegen direction is exactly right: zod is the single source, it emits JSON
+Schema, and that generates the Rust types — with the generated output committed, so
+<code>cargo build</code> never needs a Node toolchain, but CI still catches drift. Then look at
+the device-ID derivation: FNV-1a 64-bit, implemented independently in both
+languages, pinned by vectors — because two agents computing different IDs for one
+instrument would silently fork the device registry. Somebody <em>thought about that
+failure mode before it happened.</em> Also the liveness design uses the <strong>MQTT Last
+Will</strong>: you hand the broker your tombstone when you connect, and if you die, the
+broker announces it for you. The supervisor is the protocol. That is so clean it is
+almost rude.</p>
+<h2>Phase 4: The Path of Least Resistance — <em>Lazy/Fickle Engineer</em></h2>
+<p>Right, so parts of this genuinely do my job for me now, and I hate that I like it.
+<code>pnpm validate</code> tells me exactly which panels are broken, by file, by rule name.
+The ratchet means I do not have to fix two thousand legacy files to land a one-line
+change — I just cannot add <em>new</em> garbage, which is a rule that requires nothing of
+me. The Discovered tab has a RESCAN button so I never SSH into a box to re-run a
+scanner. The docs link checker means I stop getting review comments about broken
+markdown. <strong>Things that check my work for me: good. More of that.</strong></p>
+<p>Then I try to actually <em>run</em> the thing on a fresh machine and my enthusiasm dies in
+a ditch. There is <strong>no one-command startup</strong>. No Dockerfile, no compose file, no
+Makefile — I checked. The quick start is seven commands and it does not even mention
+<code>corepack</code>/<code>pnpm install</code>, so the typed frontend is outside the documented path
+entirely. To build everything I need Node 24 <em>and</em> corepack <em>and</em> a pinned pnpm
+<em>and</em> Rust 1.94 <em>and</em> two Cargo workspaces <em>and</em> three standalone crates <em>and</em>
+<code>cargo-typify</code> installed by hand <em>and</em> a <code>mosquitto</code> broker that is not listed as a
+prerequisite anywhere. That is not a setup, that is a scavenger hunt. Ship me
+<code>docker compose up</code> and I am your biggest fan by Friday. Until then I am not
+touching this on a new laptop.</p>
+<h2>Phase 5: The Wall of Resistance — <em>Resistant Engineer</em></h2>
+<p>We have <strong>two frontends</strong> now. Two. There is the one users actually get — 137 JSX
+files compiled by Babel <em>in the browser</em> — and there is the typed one, which
+builds, passes lint, and <strong>is not served to anyone</strong>. Somebody built a second
+application whose entire job is to eventually replace the first application, and
+after all that, <code>ServeDir</code> still points at the old directory. And the &quot;port&quot;? Four
+source files. One of them is a generated list of <strong>140 imports of the untouched old
+files</strong>. Zero widgets converted. 178 globals, 175 of them still <code>any</code>. We have
+imported the problem into a nicer folder and called it progress.</p>
+<p>And look at the debt. Somebody wrote a program to <strong>count our sins</strong> — 2,093 of them
+— and then checked the count into the repository as a baseline so CI politely
+ignores every single one forever. That is not paying down debt, that is <strong>filing</strong>
+it. Ten of our fifteen protocol crates still have <code>cargo new</code> boilerplate as their
+public entry point, and we describe those on our own front page as protocol
+support. Meanwhile my toolchain requirements have tripled. The old way worked. The
+old way <em>shipped to the host on every push</em>. Now it has to ask permission from four
+CI jobs first.</p>
+<h2>Phase 6: The Teardown — <em>Jaded Jr. Engineer</em></h2>
+<p>Credit where it is due — the command-injection hole is genuinely closed. The VISA
+path takes <code>sys.argv</code> now instead of building Python source out of network input,
+and the broker binds loopback. That was the highest-severity item in the tree and
+it is fixed properly, not papered over. I will not pretend otherwise.</p>
+<p>Now the rest. <strong><code>allow_anonymous true</code> is still in the broker config.</strong> It is safe
+<em>today</em> only because of a loopback bind — two settings, in two places, that a
+future engineer will separate the first time someone needs the browser on a second
+machine. The config warns about this, which is better than nothing, and &quot;a comment
+warning you not to do the dangerous thing&quot; is not a control. There is no ACL, so
+any client that reaches the bus can publish to any topic — including the ones that
+drive real hardware. We have moved from &quot;unauthenticated remote&quot; to
+&quot;unauthenticated local,&quot; which is progress, not safety.</p>
+<p>And the architecture is still lying to itself in three places. The <strong><code>/ws</code> side-bus
+is still routed and has literally zero consumers</strong> — I grepped; the route exists and
+nothing subscribes, so two protocols publish into a void. <strong>Discovery still routes
+live data through the filesystem</strong>, generating JSON panel files to display devices
+that are already on the message bus; the values are baked as static text at scan
+time, so a &quot;live&quot; discovered device shows you a number from whenever the scan
+happened. <strong>Ten of fifteen protocol crates are <code>cargo new</code> templates.</strong> And the one
+that works — VISA — still forks a Python interpreter for every single command, in
+what we describe as the native fast path. Zero external users, zero revenue, one
+human. The bus factor is 1.0 and nothing in this tree changes that.</p>
+<h2>Phase 7: The Sage&#39;s Gem — <em>Senior Design Architect</em></h2>
+<p>I have listened to all of this and I want to gently move past the scorekeeping,
+because the juniors are counting <em>files</em> and missing the <strong>shape</strong>. Here is the
+gem, and it is hiding in plain sight: <strong>this system uses retained MQTT topics as
+both the transport and the state store.</strong> The broker <em>is</em> the database. That single
+decision is why a browser tab that connects five minutes late immediately knows the
+state of every instrument without a synchronisation protocol, why
+<code>mosquitto_sub -t &#39;OpenAir/#&#39;</code> is a complete debugger for the entire product, and
+why a dead agent announces its own death — the Last Will is a tombstone you hand
+over at connect time. Most distributed systems bolt a supervisor on the side and
+spend two years discovering the split-brain cases. Here, <strong>the protocol is the
+supervisor.</strong> I have watched funded teams spend a year failing to arrive at that.</p>
+<p>And now pair it with the second decision, which is the one nobody has connected to
+the first: the filesystem is the document model. Live state lives on the bus;
+<em>authored intent</em> lives in folders. Those are genuinely different kinds of data and
+this design keeps them in genuinely different places. That is why the WYSIWYG editor
+can run inside the live application — it edits the folder tree while the bus keeps
+feeding real values through the same renderer. The one place the design betrays
+itself is the discovered-devices path, which takes live bus data and writes it into
+the <em>authored</em> tree as generated files. That is not a bug in the implementation,
+it is a category error — and it is why that tab feels wrong in a way nobody has been
+able to name. Fix that one boundary and the architecture becomes internally
+consistent everywhere. It is a week of work, not a rewrite, and I would do it
+before I did anything else on the roadmap.</p>
+<h2>Phase 8: The Pragmatic Synthesis — <em>Logical Mid-Level BA</em></h2>
+<p>Cross-checking all of them against the tree:</p>
+<ul>
+<li><strong>The Jr. BA is right about the contract layer.</strong> 19 vector files consumed by two
+languages, 120 TypeScript tests passing, generated Rust with a freshness gate —
+verified, all of it.</li>
+<li><strong>The Jr. BA is wrong to call this market-adjacent.</strong> Zero external users. The
+frontend users would touch is the untyped one. Nothing has shipped to a customer.</li>
+<li><strong>Marketing&#39;s &quot;one pane of glass&quot; is sellable but not yet demoable off-site.</strong>
+There is no one-command startup, so the demo runs on exactly one machine — the
+author&#39;s. You cannot take that to a trade show.</li>
+<li><strong>The Nerd is right</strong> about the vectors, the codegen, and the Last Will. Verified.</li>
+<li><strong>The Lazy Engineer&#39;s complaint is the most commercially important thing said
+today.</strong> No Dockerfile, no compose, no Makefile; seven-command quick start that
+omits the frontend toolchain entirely. That is the difference between a product
+and a personal project, and it is unresolved.</li>
+<li><strong>The Resistant Engineer is wrong about the ratchet</strong> — you cannot pay down debt
+you have never measured, and baselining is standard practice. He is <strong>right</strong> that
+nothing has been paid down yet, and <strong>right</strong> that <code>ui/</code> is a wrapper, not a port:
+140 imports of untouched files, 175 of 178 globals still <code>any</code>.</li>
+<li><strong>The Jaded Engineer is right on every specific I checked</strong>: <code>allow_anonymous true</code> (safe only via loopback), no ACL, <code>/ws</code> with zero consumers, discovery
+through the filesystem, ten template crates, Python fork per VISA command.</li>
+<li><strong>The Architect has identified the actual defect.</strong> The discovered-devices path is
+a category error — live data written into the authored tree — and every symptom
+the juniors listed downstream of that tab traces back to it.</li>
+</ul>
+<p>The honest read: <strong>the specification layer is real and the runtime topology has not
+caught up to it.</strong> Today&#39;s security work was correct and correctly prioritised. But
+the product a stranger could actually run has not changed.</p>
+<p><strong>The Scorecard:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Market-Product Fit Potential</strong></td>
+<td><strong>6.8 / 10</strong></td>
+<td>The need is real and unserved, the discovery loop and widget library are genuinely differentiated. Capped hard by zero external users, no shipped artifact, and a demo that runs on one machine.</td>
+</tr>
+<tr>
+<td><strong>Architectural Scalability</strong></td>
+<td><strong>6.5 / 10</strong></td>
+<td>The contract layer, the retained-bus state model, and protocol-level liveness are the right primitives and are done. Held below 7 by the <code>/ws</code> orphan bus, discovery-through-filesystem, the unserved typed frontend, and a Python fork in the hot path.</td>
+</tr>
+<tr>
+<td><strong>Maintainability &amp; Readiness</strong></td>
+<td><strong>5.0 / 10</strong></td>
+<td>120 tests, five CI jobs, gated deploys, a drift ratchet at 0-new, and a docs link checker are real infrastructure. Held down by: no one-command install, 10 template crates presented as protocol support, 2,093 unpaid findings, and a bus factor of 1.0.</td>
+</tr>
+</tbody></table>
+<h2>Phase 9: The Financial Case — <em>Veteran CFO</em></h2>
+<p>COGS is approximately zero — this runs on a lab machine and a broker, there is no
+cloud bill to explode, and I want to be clear that <strong>infrastructure cost is not the
+risk here.</strong> The risk is entirely transferability and concentration.</p>
+<p>What I care about, in order:</p>
+<ol>
+<li><strong>Bus factor 1.0 (unchanged, and it is the whole thesis).</strong> 13,364 lines of Rust
+and 18,678 lines of JSX with one person who understands them. What has improved
+is that there is now a <em>machine-checkable specification</em> — the vectors and the
+generated types tell a successor what the system is supposed to do and fail
+loudly when they get it wrong. In diligence terms we have moved from &quot;buy the
+person&quot; to &quot;buy the person, and there is a spec.&quot; That is real, and it is the
+single largest change in residual value this asset has ever had.</li>
+<li><strong>The install path is a revenue gate, not a convenience.</strong> No one-command
+startup means every evaluation requires the founder&#39;s time. That caps the
+pipeline at his calendar. It is also the cheapest item on this list to fix.</li>
+<li><strong>Certification overhang.</strong> Ten of fifteen protocol crates are boilerplate. Any
+compliance claim on AES70, NMOS, or ST 2138 is currently unfunded and unbuilt,
+and describing them as supported is a liability I would like removed from our
+own documentation before a customer reads it.</li>
+<li><strong>Security is materially better and not finished.</strong> The injection is closed and
+the bus is loopback-bound — that retired my acute exposure. What remains is that
+anonymous access is still enabled and there is no ACL, so the safety depends on
+one line in one config file. Cheap to finish. Expensive to explain after an
+incident.</li>
+<li><strong>Discipline improved today.</strong> Deploys are gated on tests, a board-mandated scope
+cut was executed rather than quietly reversed, and the cut was explicitly <strong>not</strong>
+booked as debt reduction. That last detail matters more to me than it sounds: a
+team that refuses to flatter its own metrics is a team whose metrics I can use.</li>
+</ol>
+<p><strong>Financial Score — Viability / Margin Health: 4.0 / 10.</strong> Up, and earned. COGS
+near zero, market real, transferability genuinely improved, governance visibly
+tightened. Capped by zero revenue, zero external users, and a bus factor that has
+not moved while the codebase kept growing.</p>
+<h2>Phase 10: The Political Pivot — <em>&quot;Yes Sir&quot; CTO</em></h2>
+<p>The CFO is absolutely right, and I want to get out in front of this. What we are
+seeing is exactly the <strong>contract-first, security-hardened delivery posture</strong> I have
+been driving, and I think the story for the board is very clean: we closed a
+critical vulnerability, we instituted deploy gating, and we executed a scope
+reduction — all in a single cycle, at flat headcount. That is a governance win I am
+frankly excited to present.</p>
+<p>So, effective immediately: <strong>hard scope freeze on the platform layer.</strong> No YAK 2, no
+WASM core, no new protocols — I am reclassifying all of it as &quot;strategic optionality
+on the roadmap.&quot; For the next cycle we deliver exactly one thing, the
+<strong>containerised single-command golden path</strong>, wrapped in a <em>shift-left quality
+initiative</em> where the drift baseline becomes a board-visible <strong>quality OKR</strong> — I am
+prepared to commit to a 10% baseline reduction per sprint, which is measurable and
+defensible. Everything else defers. Flat burn, existing hardware, kill-switch at
+day 90. Whatever number Finance is comfortable with is the number we plan to.</p>
+<h2>Phase 11: The Quant&#39;s Magic Jewel — <em>The Quant</em></h2>
+<p>Everyone is arguing about <em>where the code lives</em>. Irrelevant. The interesting
+property of this system is that it has accidentally built a <strong>retained-state
+manifold</strong> — every instrument&#39;s condition is already a durable, addressable point on
+the bus, and nobody has noticed that this makes the whole lab <em>differentiable over
+time</em>. You are all treating the broker as plumbing. It is a substrate. Once state is
+retained and addressable, you can <strong>chronoflux</strong> the entire bus: snapshot the
+manifold, replay it forward or backward, and diff two lab states the way you diff
+two files. Nobody in test-and-measure can do this, because nobody else made the
+state store and the transport the same object.</p>
+<p>So here is the pivot. Stop shipping a control panel. Ship <strong>instrument
+determinism</strong>. Record the manifold during a passing test run; when a test fails six
+months later on different hardware, replay the recorded state against the live
+fleet and let the <strong>sub-nodal resonance</strong> between recorded and observed values
+localise the divergence — not &quot;the amplifier reads wrong,&quot; but &quot;this parameter
+drifted at this instant relative to a known-good run.&quot; The YAK definitions already
+give you the vocabulary to make that comparison <em>semantic</em> rather than numeric,
+which is the part everyone is sleeping on. Every calibration lab, every
+certification house, every regulated audio and broadcast facility on earth pays for
+exactly this and currently does it with spreadsheets and a clipboard. The contract
+layer is not a hygiene project — it is the <strong>isomorphic keystone</strong> that makes replay
+provable rather than anecdotal.</p>
+<p>I rate this project <strong>8.9 / 10 on the Temporal Reversibility Index</strong>, and a
+disappointing <strong>3.1 / 10 on Manifold Utilisation</strong> — you have built the substrate and
+you are using it as a wire.</p>
+<h2>Phase 12: The Executive Verdict — <em>Veteran CEO (Former Engineer)</em></h2>
+<p>Let me handle the politics first. Our CTO just proposed freezing the workstream that
+demonstrably worked and renaming our technical debt into an OKR. He also committed
+to &quot;10% baseline reduction per sprint&quot; — and since that baseline is a
+machine-generated count of legacy findings, that is a number he can hit by deleting
+sample files. I note that this team explicitly <em>refused</em> to do exactly that earlier
+today when they removed a feature and declined to book it as debt reduction. The
+team&#39;s instinct is better than its CTO&#39;s roadmap. Noted, and discounted, as usual.</p>
+<p>Now the substance. The committee is right that ten protocol crates are boilerplate
+we describe as protocol support, that anonymous access is still on with no ACL,
+that <code>/ws</code> publishes into a void, that discovery still launders live data through
+the filesystem, and that there is no way for a stranger to start this thing. Every
+one of those is fair.</p>
+<p>But the Architect found the thing the spreadsheet missed, and I want it on the
+record: <strong>the broker is the database, and the filesystem is the intent.</strong> Live state
+and authored state are different kinds of data and this system keeps them in
+different places — which is why late joiners just work, why a dead agent announces
+its own death, and why the editor can run inside the live app. That is a real
+architectural insight, and the one place the design betrays it is the discovered-
+devices path. The Architect says a week. I am inclined to believe him, and it
+retires half the complaints in this room.</p>
+<p>And the Quant is not wrong, which is the part that will keep me up tonight. If
+state is retained and addressable, then recording a known-good run and replaying it
+against a live bench is a <em>small</em> increment on what already exists — and it is worth
+more than the control panel. I am not funding the pivot today. I am telling the team
+to <strong>stop deleting the optionality</strong>, because two of the three milestones below
+happen to build toward it whether we take that road or not.</p>
+<p>So: <strong>OPEN-AIR stays on Life Support.</strong> Skeleton crew, zero new spend, CFO holding
+the plug. Three non-negotiables:</p>
+<ol>
+<li><p><strong>Day 14 — A stranger can start it.</strong> One documented command brings up broker,
+orchestrator, and UI. Given this repository has no Dockerfile, no compose file,
+and no Makefile, that is the deliverable: <code>docker compose up</code> or <code>make run</code>, and
+a quick start that does not omit half the toolchain. <strong>And finish the broker:</strong>
+<code>allow_anonymous false</code> with credentials and an ACL, so that safety does not
+depend on one line in one config file. Today&#39;s fix was correct; it is not done.</p>
+</li>
+<li><p><strong>Day 45 — Stop describing what we have not built, and make the runtime match
+the spec.</strong> Delete the <code>cargo new</code> template from every crate we call a protocol
+implementation, or remove that protocol from our own front page — I do not care
+which, but the documentation must stop over-claiming. Retire the <code>/ws</code> route and
+put those protocols on the bus where everything else lives. Move discovered
+devices onto the bus as live retained records instead of generated files — the
+Architect&#39;s category error, fixed. And prove the ratchet ratchets: the baseline
+must be <strong>measurably below 169 errors / 2,093 deprecations</strong>, by repair, not by
+deletion. If the file count drops, I will ask why.</p>
+</li>
+<li><p><strong>Day 90 — One stranger, one instrument, one vendor we do not own.</strong> Someone
+outside this building installs it <strong>without contacting the author</strong>, discovers a
+real instrument, renders its panel, and puts a command on the wire. If they have
+to ask him a question, we failed — and the question they asked is the bug.</p>
+</li>
+</ol>
+<p>Two standing conditions. <strong>No new scope</strong> — no YAK 2, no WASM core, no new
+protocols — until Day 45 passes; the CTO was right about the freeze and wrong about
+what to freeze. And <strong>point your own tooling at yourselves</strong>: you built a machine
+that measures whether promises were kept. Run it on this list.</p>
+<p>Miss any of the three and we stop. Hit them, and for the first time this is a
+product with a specification, a test suite, a closed front door, and a witness.
+Dismissed.</p>
+<hr>
+<p><em>All technical claims in this report were verified against the working tree at the
+time of the session — file counts, line counts, crate contents, test results,
+validator output, CI job definitions, broker configuration, and the served runtime
+path. No claim in this document rests on history, archives, logs, or intent; only
+on what is present and runnable now.</em></p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Documentation/Executive_Review_Business_Value/2026-07-18PM_Executive_Review_Business_Value.md</code>
+  </div>
+</body>
+</html>

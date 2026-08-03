@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>docker (README) - Docker & Deployment</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>docker/ — the one-command startup path</h1>
+<p>Everything needed to run OPEN-AIR without installing a Rust toolchain, a Python
+environment, or a broker on the host.</p>
+<pre><code class="language-bash">python3 docker/launch.py
+</code></pre>
+<p>Then open <strong><a href="http://localhost:8000">http://localhost:8000</a></strong>.</p>
+<p>Works from any directory — paths resolve against this folder, not your shell.</p>
+<h2>Contents</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>launch.py</code></td>
+<td>Launcher. Preflights Docker, starts the stack, waits for health, opens a browser. Stdlib only.</td>
+</tr>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td>Two services: <code>broker</code> (mosquitto) and <code>orchestrator</code>. Build context is the <strong>repo root</strong>.</td>
+</tr>
+<tr>
+<td><code>Dockerfile</code></td>
+<td>Multi-stage: builds the Rust orchestrator, then a slim runtime with Python + pyvisa for the VISA probe path.</td>
+</tr>
+<tr>
+<td><code>mosquitto.conf</code></td>
+<td>Broker config for the <strong>container</strong>. Differs from <code>../broker/mosquitto.conf</code> — see below.</td>
+</tr>
+</tbody></table>
+<h2>⚠️ Networking: use <code>--host-net</code> for a real bench</h2>
+<p><strong>Containers do NOT get an address from your DHCP.</strong> They sit on a Docker bridge
+(<code>172.20.0.x</code>), NAT&#39;d behind the host. That breaks discovery in two ways that are
+<em>silent</em> — both look like &quot;no devices found&quot;:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Bridge (default)</th>
+<th><code>--host-net</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VISA/SCPI outbound TCP</td>
+<td>✅ works (NAT)</td>
+<td>✅ works</td>
+</tr>
+<tr>
+<td><strong>mDNS / DNS-SD</strong></td>
+<td>❌ multicast does not cross the bridge — every address resolves to <code>172.20.0.1</code>, the gateway</td>
+<td>✅ real LAN addresses</td>
+</tr>
+<tr>
+<td><strong>VISA subnet scan</strong></td>
+<td>❌ derives the subnet from its own IP → scans <code>172.20.0.1-254</code>, where no instrument lives</td>
+<td>✅ scans your real subnet</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">python3 docker/launch.py --host-net              # LAN discovery works
+python3 docker/launch.py --host-net --hardware   # …plus USB + MIDI
+</code></pre>
+<p>Host mode still does not give the container its own DHCP address — it has no
+separate address at all, it <em>is</em> the host. A genuine per-container LAN IP needs a
+<strong>macvlan</strong> network, which also needs a shim interface for host↔container
+traffic. For a single-box lab tool, host mode is the better trade.</p>
+<p><strong>Security:</strong> host mode removes the port mapping that confined the bridge setup.
+Confinement then comes from what each process binds — the orchestrator binds
+<code>127.0.0.1</code> (<code>--bind</code>) and the broker uses <code>../broker/mosquitto.conf</code>, which also
+binds loopback. Both must stay that way unless broker auth + ACL and HTTP auth
+are in place.</p>
+<h2>🔌 USB instruments and MIDI: use <code>--hardware</code></h2>
+<p>A container sees no host hardware by default — no <code>/dev/snd</code>, no <code>/dev/bus/usb</code>.
+The MIDI agent enumerates zero devices and USB (USBTMC) instruments are
+invisible, however firmly they are plugged in. Neither failure is loud.</p>
+<p><code>--hardware</code> bind-mounts <code>/dev/snd</code> and <code>/dev/bus/usb</code> and adds cgroup rules for
+majors 116 (ALSA), 189 (usbfs) and 180 (usbtmc), plus the <code>audio</code> group.</p>
+<p>It bind-mounts the <strong>bus</strong> rather than listing <code>devices:</code> deliberately: a
+<code>devices:</code> entry is resolved once at container start, so hot-plugged instruments
+never appear and a device absent at boot stops the container from starting at
+all. Bind-mounting supports hot-plug, which is how a bench is actually used.</p>
+<p>This is a real privilege increase, which is why it is opt-in — but it is far
+narrower than <code>privileged: true</code>. Do not substitute that.</p>
+<h2>Commands</h2>
+<pre><code class="language-bash">python3 docker/launch.py            # start (default)
+python3 docker/launch.py up --logs  # start and tail
+python3 docker/launch.py status     # containers + endpoint health
+python3 docker/launch.py logs       # tail
+python3 docker/launch.py down       # stop
+python3 docker/launch.py rebuild    # rebuild images from scratch, then start
+python3 docker/launch.py reset      # stop AND delete the broker volume
+</code></pre>
+<p>Plain compose works too, if you prefer:</p>
+<pre><code class="language-bash">docker compose -f docker/docker-compose.yml up
+</code></pre>
+<p>The launcher adds one thing over raw compose: a <strong>preflight</strong> that checks Docker
+is installed, the daemon is reachable, and the files compose references exist —
+then fails with an instruction instead of a stack trace. A startup path that dies
+confusingly on a stranger&#39;s machine is the problem this folder exists to solve.</p>
+<h2>Why <code>mosquitto.conf</code> here differs from <code>../broker/mosquitto.conf</code></h2>
+<p>The bare-metal config binds <code>127.0.0.1</code>, because on a host there is nothing else
+between the broker and the network.</p>
+<p>Inside a container, <code>127.0.0.1</code> means <em>the container&#39;s own loopback</em>, which the
+orchestrator container cannot reach. So this config binds <code>0.0.0.0</code> and the
+<strong>compose port mapping</strong> provides the confinement instead: every published port
+is <code>127.0.0.1:&lt;port&gt;:&lt;port&gt;</code>, so nothing is reachable from off-host.</p>
+<p><strong>The confinement lives in <code>docker-compose.yml</code>, not in the broker config.</strong> If
+you remove a host-IP prefix from a port mapping, you have exposed an anonymous
+broker that can drive lab hardware.</p>
+<h2>Before exposing anything on a network</h2>
+<p>The bus is not a passive transport. Publishing to the VISA <code>Write</code> topics makes
+the orchestrator execute SCPI on real instruments, and the HTTP API can write
+panel files. Both are unauthenticated today.</p>
+<p>To expose on a LAN you need <strong>all</strong> of:</p>
+<ol>
+<li>Broker auth — <code>password_file</code>, <code>allow_anonymous false</code></li>
+<li>An ACL so an authenticated UI client still cannot publish to <code>…/Write</code> —
+a ready-made policy ships as <a href="../broker/acl.example"><code>../broker/acl.example</code></a></li>
+<li>Authentication in front of the HTTP API&#39;s mutating routes</li>
+<li>Only then widen the port mappings</li>
+</ol>
+<p>Do not do step 4 on its own.</p>
+<h2>State</h2>
+<p>Retained MQTT topics are the system&#39;s state store, so the broker&#39;s data lives in
+a named volume (<code>broker-data</code>) and survives <code>down</code>. <code>reset</code> deletes it — that is
+real data loss, not a cache clear, which is why it is a separate command.</p>
+<p><code>../FrontEnd/Gui_Frames/</code> is bind-mounted, so panels you edit in the WYSIWYG
+editor land on your disk and show up in <code>git diff</code>.</p>
+<h2>Running without Docker</h2>
+<p>See the collapsed <em>&quot;Running without Docker&quot;</em> section in the
+<a href="../README.md#-quick-start">root README</a>. It needs Rust 1.94, Python 3, and a
+mosquitto broker on the host.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>docker/README.md</code>
+  </div>
+</body>
+</html>

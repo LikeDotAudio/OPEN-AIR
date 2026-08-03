@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>66102A / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Power/66102A — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>189 commands</strong> — SET 48 · RIG 4 · NAB 72 · DO 65 · 171 unverified (90%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<p>Written notes for this family: <a href="../commands_tree.md"><code>Power/commands_tree.md</code></a>.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>DO</strong> <code>Clear_Protection</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;OUTP:PROT:CLE</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Values</code> · per-instance: <code>chan</code> · → voltage, current<ul>
+<li><code>INST:NSEL &lt;chan&gt;;MEAS:VOLT?;MEAS:CURR?</code></li>
+</ul>
+</li>
+<li><strong>DO</strong> <code>Output_OFF</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;OUTP OFF</code></li>
+</ul>
+</li>
+<li><strong>DO</strong> <code>Output_ON</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;OUTP ON</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Read_Values</code> · per-instance: <code>chan</code> · → voltage, current<br>Read Voltage and Current<ul>
+<li><code>INST:NSEL &lt;chan&gt;;MEAS:VOLT?;MEAS:CURR?</code></li>
+</ul>
+</li>
+<li><strong>DO</strong> <code>Reset_Module</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;*RST</code></li>
+</ul>
+</li>
+<li><strong>DO</strong> <code>S1_OFF</code><ul>
+<li><code>INST:NSEL 1;OUTP OFF</code></li>
+</ul>
+</li>
+<li><strong>DO</strong> <code>S1_ON</code><ul>
+<li><code>INST:NSEL 1;OUTP ON</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Set_Levels</code> · args: <code>volt</code>, <code>curr</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;VOLT &lt;volt&gt;;CURR &lt;curr&gt;</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Set_Protection</code> · args: <code>ovp_level</code>, <code>ocp_state</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;VOLT:PROT &lt;ovp_level&gt;;CURR:PROT:STAT &lt;ocp_state&gt;</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Set_S1_Levels</code> · args: <code>volt</code>, <code>curr</code><ul>
+<li><code>INST:NSEL 1;VOLT &lt;volt&gt;;CURR &lt;curr&gt;</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Set_Voltage_Current</code> · args: <code>voltage</code>, <code>current</code> · per-instance: <code>chan</code><ul>
+<li><code>INST:NSEL &lt;chan&gt;;VOLT &lt;voltage&gt;;CURR &lt;current&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><strong><code>CAL</code></strong><ul>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Calibrate_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>RST Value OFF</li>
+<li><code>AUT</code> — <strong>DO</strong> <code>Do_Calibrate_Aut</code> · †</li>
+<li><code>CURR</code> — <strong>DO</strong> <code>Do_Calibrate_Current</code> · †</li>
+<li><code>PASS</code> — <strong>DO</strong> <code>Do_Calibrate_Passcode</code> · †<br>If the password is set to 0, password protection is removed and the ability to enter the calibration mode is unrestricted</li>
+<li><code>SAV</code> — <strong>DO</strong> <code>Do_Calibrate_Sav</code> · †</li>
+<li><code>VOLT</code> — <strong>DO</strong> <code>Do_Calibrate_Voltage</code> · †</li>
+<li><strong><code>CURR</code></strong><ul>
+<li><code>DATA</code> — <strong>DO</strong> <code>Do_Calibrate_Current_Data</code> · †<br>This command can only be used in the calibration mode</li>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Calibrate_Current_Level</code> · †<br>This command can only be used in the calibration mode</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>DATA</code> — <strong>DO</strong> <code>Do_Calibrate_Voltage_Data</code> · †<br>This command can only be used in the calibration mode</li>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Calibrate_Voltage_Level</code> · †<br>This command can only be used in the calibration mode</li>
+<li><code>PROT</code> — <strong>DO</strong> <code>Do_Calibrate_Voltage_Protection</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CALibrate</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calibrate_Status</code> · → NR3 · †<br>RST Value OFF</li>
+</ul>
+</li>
+<li><strong><code>CURR</code></strong><ul>
+<li><code>TRIG</code> — <strong>SET</strong> <code>Set_Current_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (A) · †</li>
+<li><code>TRIG?</code> — <strong>NAB</strong> <code>Get_Current_Trigger</code> · → NR3 A · †</li>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Current_Immediate</code> · †</li>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Current_Level</code> · †</li>
+<li><code>LIST</code> — <strong>DO</strong> <code>Do_Current_List</code> · †</li>
+<li><code>MODE</code> — <strong>DO</strong> <code>Do_Current_Mode</code> · †</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Current_Level_Immediate</code> · †</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Current_Level_Trigger</code> · †<br>Trigger Subsystem</li>
+</ul>
+</li>
+<li><strong><code>MODE</code></strong><ul>
+<li><code>LIST</code> — <strong>DO</strong> <code>Do_Current_Mode_List</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>PROTection</code> — <strong>DO</strong> <code>Do_Current_Protection</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DISP</code></strong><ul>
+<li><code>STAT</code> — <strong>DO</strong> <code>Do_Display_Status</code> · †</li>
+<li><strong><code>WIND</code></strong><ul>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Display_Window_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command turns the power module optional front panel voltage and current displays on and off</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><strong><code>WINDow</code></strong><ul>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Display_Window_Status</code> · → NR3 · †<br>This command turns the power module optional front panel voltage and current displays on and off</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>IMMediate</code></strong><ul>
+<li><code>AMPlitude?</code> — <strong>NAB</strong> <code>Get_Immediate_Amplitude</code> · → 1 value · †<br>RST Value Table 3-2</li>
+<li><code>AMPLitude</code> — <strong>DO</strong> <code>Do_Immediate_Amplitude</code> · †<br>This command directly programs the immediate current level of the power module</li>
+</ul>
+</li>
+<li><strong><code>INIT</code></strong><ul>
+<li><code>CONT</code> — <strong>SET</strong> <code>Set_Initiate_Continuous</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Initiate_Immediate</code> · †<br>subsequent trigger action</li>
+</ul>
+</li>
+<li><strong><code>INITiate</code></strong><ul>
+<li><code>CONTinuous?</code> — <strong>NAB</strong> <code>Get_Initiate_Continuous</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>INST</code></strong><ul>
+<li><code>NSEL</code> — <strong>DO</strong> <code>Select_Channel</code> · <code>&lt;chan&gt;</code> · per-instance: <code>chan</code></li>
+</ul>
+</li>
+<li><strong><code>LIST</code></strong><ul>
+<li><code>COUN</code> — <strong>DO</strong> <code>Do_List_Count</code> · †</li>
+<li><code>CURR</code> — <strong>DO</strong> <code>Do_List_Current</code> · †</li>
+<li><code>DWEL</code> — <strong>DO</strong> <code>Do_List_Dwel</code> · †</li>
+<li><code>STEP</code> — <strong>DO</strong> <code>Do_List_Step</code> · †</li>
+<li><code>VOLT</code> — <strong>DO</strong> <code>Do_List_Voltage</code> · †</li>
+<li><strong><code>CURR</code></strong><ul>
+<li><code>POIN?</code> — <strong>NAB</strong> <code>Get_List_Current_Points</code> · → NR1 A · †</li>
+</ul>
+</li>
+<li><strong><code>DWEL</code></strong><ul>
+<li><code>POIN?</code> — <strong>NAB</strong> <code>Get_List_Dwel_Points</code> · → NR1 · †</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>POIN?</code> — <strong>NAB</strong> <code>Get_List_Voltage_Points</code> · → NR1 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>OUTP</code></strong><ul>
+<li><code>REL</code> — <strong>SET</strong> <code>Set_Output_Relay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Output Subsystem</li>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Output_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>If the power module is configured to use the relay option, the command opens the relay contacts when the output is disabled and closes them when it is enabled</li>
+<li><code>REL?</code> — <strong>NAB</strong> <code>Get_Output_Relay</code> · → NR1 · †<br>Output Subsystem</li>
+<li><code>DFI</code> — <strong>DO</strong> <code>Do_Output_Dfi</code> · †</li>
+<li><code>PROT</code> — <strong>DO</strong> <code>Do_Output_Protection</code> · †</li>
+<li><code>TTLT</code> — <strong>DO</strong> <code>Do_Output_Ttltrg</code> · †</li>
+<li><strong><code>DFI</code></strong><ul>
+<li><code>LINK</code> — <strong>SET</strong> <code>Set_Output_Dfi_Link</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command specifies which events within the power module are linked to DFI source events</li>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Output_Dfi_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>This command selects the source for DFI events</li>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Output_Dfi_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command enables or disables the discrete fault indicator (DFI) signal to the power module backplane</li>
+</ul>
+</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>DEL</code> — <strong>SET</strong> <code>Set_Output_Protection_Delay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+</ul>
+</li>
+<li><strong><code>REL</code></strong><ul>
+<li><code>POL</code> — <strong>SET</strong> <code>Set_Output_Relay_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>This command is valid only if the power module is configured for the optional relay connector</li>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Output_Relay_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command is valid only if the power module is configured for the optional relay connector</li>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Output_Relay_Status</code> · → BOOL · †<br>This command is valid only if the power module is configured for the optional relay connector</li>
+</ul>
+</li>
+<li><strong><code>TTLT</code></strong><ul>
+<li><code>LINK</code> — <strong>SET</strong> <code>Set_Output_Ttltrg_Link</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Output_Ttltrg_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Output_Ttltrg_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command enables or disables the power module Trigger Out signal, which is available at a BNC connector on the rear of the mainframe</li>
+<li><code>LINK?</code> — <strong>NAB</strong> <code>Get_Output_Ttltrg_Link</code> · → BOOL · †</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Output_Ttltrg_Source</code> · → CRD · †</li>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Output_Ttltrg_Status</code> · → BOOL · †<br>This command enables or disables the power module Trigger Out signal, which is available at a BNC connector on the rear of the mainframe</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>OUTPut</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Output_Status</code> · → NR3 · †<br>If the power module is configured to use the relay option, the command opens the relay contacts when the output is disabled and closes them when it is enabled</li>
+<li><strong><code>DFI</code></strong><ul>
+<li><code>LINK?</code> — <strong>NAB</strong> <code>Get_Output_Dfi_Link</code> · → NR3 · †<br>This command specifies which events within the power module are linked to DFI source events</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Output_Dfi_Source</code> · → NR3 · †<br>This command selects the source for DFI events</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Output_Dfi_Status</code> · → NR3 · †<br>This command enables or disables the discrete fault indicator (DFI) signal to the power module backplane</li>
+</ul>
+</li>
+<li><strong><code>PROTection</code></strong><ul>
+<li><code>DELay?</code> — <strong>NAB</strong> <code>Get_Output_Protection_Delay</code> · → NR3 s · †</li>
+</ul>
+</li>
+<li><strong><code>RELay</code></strong><ul>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Output_Relay_Polarity</code> · → NR1 · †<br>This command is valid only if the power module is configured for the optional relay connector</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>PROTECTION</code></strong><ul>
+<li><code>CLEAR</code> — <strong>DO</strong> <code>Do_Protection_Clear</code> · †<br>The Effect of Optional Headers</li>
+</ul>
+</li>
+<li><strong><code>QUES</code></strong><ul>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Questionable_Event</code> · → NR1 · †</li>
+</ul>
+</li>
+<li><strong><code>SOUR</code></strong><ul>
+<li><strong><code>CURR</code></strong><ul>
+<li><strong><code>LEV</code></strong><ul>
+<li><strong><code>IMM</code></strong><ul>
+<li><code>AMPL</code> — <strong>SET</strong> <code>Set_Source_Current_Level_Immediate_Amplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>AMPL?</code> — <strong>NAB</strong> <code>Get_Source_Current_Level_Immediate_Amplitude</code> · → NR3 V · †</li>
+</ul>
+</li>
+<li><strong><code>TRIG</code></strong><ul>
+<li><code>AMPL</code> — <strong>SET</strong> <code>Set_Source_Current_Level_Trigger_Amplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>AMPL?</code> — <strong>NAB</strong> <code>Get_Source_Current_Level_Trigger_Amplitude</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>LIST</code></strong><ul>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Source_List_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>In either mode, triggers that occur during a dwell interval are ignored</li>
+<li><code>DWEL?</code> — <strong>NAB</strong> <code>Get_Source_List_Dwel</code> · → 1 value · †<br>- If LIST:STEP ONCE has been programmed, the output remains at the present level until a trigger sequences the next point in the list</li>
+<li><code>STEP?</code> — <strong>NAB</strong> <code>Get_Source_List_Step</code> · → NR1 · †<br>In either mode, triggers that occur during a dwell interval are ignored</li>
+<li><strong><code>DWEL</code></strong><ul>
+<li><code>POIN?</code> — <strong>NAB</strong> <code>Get_Source_List_Dwel_Points</code> · → NR1 · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>SENS?</code> — <strong>NAB</strong> <code>Get_Source_Voltage_Sense</code> · → NR3 V · †</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><strong><code>IMM</code></strong><ul>
+<li><code>AMPL</code> — <strong>DO</strong> <code>Do_Source_Voltage_Level_Immediate_Amplitude</code> · †</li>
+</ul>
+</li>
+<li><strong><code>TRIG</code></strong><ul>
+<li><code>AMPL</code> — <strong>SET</strong> <code>Set_Source_Voltage_Level_Trigger_Amplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>AMPL?</code> — <strong>NAB</strong> <code>Get_Source_Voltage_Level_Trigger_Amplitude</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>LEV</code> — <strong>SET</strong> <code>Set_Source_Voltage_Protection_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>LEV?</code> — <strong>NAB</strong> <code>Get_Source_Voltage_Protection_Level</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SOURI</code></strong><ul>
+<li><strong><code>VOLT</code></strong><ul>
+<li><strong><code>LEV</code></strong><ul>
+<li><strong><code>IMM</code></strong><ul>
+<li><code>AMPL?</code> — <strong>NAB</strong> <code>Get_Souri_Voltage_Level_Immediate_Amplitude</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SOURce</code></strong><ul>
+<li><code>LIST</code> — <strong>DO</strong> <code>Do_Source_List</code> · †<br>Conventions</li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Source_Current_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>LIST:CURR . If the LIST parameter is used, then the output current may be changed by the subsequent execution of a list</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Source_Current_Mode</code> · → NR3 · †<br>LIST:CURR . If the LIST parameter is used, then the output current may be changed by the subsequent execution of a list</li>
+<li><code>LEVel</code> — <strong>DO</strong> <code>Do_Source_Current_Level</code> · †<br>This command directly programs the immediate current level of the power module</li>
+<li><strong><code>LEVel</code></strong><ul>
+<li><code>TRIGgered</code> — <strong>DO</strong> <code>Do_Source_Current_Level_Trigger</code> · †<br>This command programs the pending triggered current level of the power module</li>
+<li><code>TRIGgered</code> — <strong>DO</strong> <code>Do_Source_Currlev_Trigger</code> · †<br>RST Value <em>See Table 3-2</em></li>
+</ul>
+</li>
+<li><strong><code>PROTection</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Source_Current_Protection_Status</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command enables or disables the power module overcurrent (OC) protection function</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Source_Current_Protection_Status</code> · → NR3 · †<br>This command enables or disables the power module overcurrent (OC) protection function</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>LIST</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Source_List_Count</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>This command sets the number of times that the list is executed before it is completed</li>
+<li><code>DWEL&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Source_List_Dwel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · per-instance: <code>chan</code> · †<br>- If LIST:STEP ONCE has been programmed, the output remains at the present level until a trigger sequences the next point in the list</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Source_List_Count</code> · → NR1 · †<br>This command sets the number of times that the list is executed before it is completed</li>
+<li><code>CURRent</code> — <strong>DO</strong> <code>Do_Source_List_Current</code> · †<br>This command specifies the output current points in a list</li>
+<li><code>VOLTage</code> — <strong>DO</strong> <code>Do_Source_List_Voltage</code> · †<br>This command specifies the output voltage points in a list</li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Source_List_Current_Points</code> · → NR1 · †<br>This query returns the number of points specified in LIST:CURR</li>
+</ul>
+</li>
+<li><strong><code>DWFL1</code></strong><ul>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Source_List_Dwfl_Points</code> · → NR1 · †<br>This query returns the number of points specified in LIST:DWEL</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Source_List_Voltage_Points</code> · → NR1 V · †<br>This query returns the number of points specified in LIST:VOLT</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Source_Voltage_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>LIST:VOLT . If the LIST parameter is used, then the output voltage may be changed by the subsequent execution of a list</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Source_Voltage_Mode</code> · → CRD V · †<br>LIST:VOLT . If the LIST parameter is used, then the output voltage may be changed by the subsequent execution of a list</li>
+<li><code>LEVel</code> — <strong>DO</strong> <code>Do_Source_Voltage_Level</code> · †<br>This command directly programs the immediate voltage level of the power module</li>
+<li><code>PROTection</code> — <strong>DO</strong> <code>Do_Source_Voltage_Protection</code> · †<br>- Status Reporting&quot;)</li>
+<li><strong><code>LEVel</code></strong><ul>
+<li><code>TRIGgered</code> — <strong>DO</strong> <code>Do_Source_Voltage_Level_Trigger</code> · †<br>This command programs the pending triggered voltage level of the power module</li>
+<li><code>TRIGgered</code> — <strong>DO</strong> <code>Do_Source_Voltlev_Trigger</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SENSe</code></strong><ul>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Source_Voltage_Sense_Source</code> · → CRD V · †<br>This command reads the state of the power module output connector remote sense switch</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>STAT</code></strong><ul>
+<li><code>OPER</code> — <strong>SET</strong> <code>Set_Status_Operation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Register Commands</li>
+<li><code>QUES</code> — <strong>SET</strong> <code>Set_Status_Questionable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Register Commands</li>
+<li><code>OPER?</code> — <strong>NAB</strong> <code>Get_Status_Operation</code> · → CRD · †<br>Register Commands</li>
+<li><code>QUES?</code> — <strong>NAB</strong> <code>Get_Status_Questionable</code> · → 1 value · †<br>Register Commands</li>
+<li><code>PRE</code> — <strong>DO</strong> <code>Do_Status_Pre</code> · †<br>Status Registers</li>
+<li><strong><code>OPER</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Status_Operation_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>This command and its query set and read the value of the Operation Enable register</li>
+<li><code>EVEN</code> — <strong>SET</strong> <code>Set_Status_Operation_Event</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>This query returns the value of the Operation Event register</li>
+<li><code>NTR</code> — <strong>SET</strong> <code>Set_Status_Operation_Ntransition</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>corresponding Operation Event register</li>
+<li><code>PTR</code> — <strong>SET</strong> <code>Set_Status_Operation_Ptransition</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>corresponding Operation Event register</li>
+<li><code>COND?</code> — <strong>NAB</strong> <code>Get_Status_Operation_Condition</code> · → NR1 · †<br>This command returns the value of the Operation Condition register</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Status_Operation_Enable</code> · → NR1 · †<br>This command and its query set and read the value of the Operation Enable register</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Status_Operation_Event</code> · → NR1 · †<br>This query returns the value of the Operation Event register</li>
+<li><code>NTR?</code> — <strong>NAB</strong> <code>Get_Status_Operation_Ntransition</code> · → NR1 · †<br>corresponding Operation Event register</li>
+<li><code>PTR?</code> — <strong>NAB</strong> <code>Get_Status_Operation_Ptransition</code> · → NR1 · †<br>corresponding Operation Event register</li>
+</ul>
+</li>
+<li><strong><code>QUES</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Status_Questionable_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>This command sets or reads the value of the Questionable Enable register</li>
+<li><code>NTR</code> — <strong>SET</strong> <code>Set_Status_Questionable_Ntransition</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>corresponding Questionable Event register</li>
+<li><code>PTR</code> — <strong>SET</strong> <code>Set_Status_Questionable_Ptransition</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Register Commands</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Status_Questionable_Enable</code> · → NR1 · †<br>This command sets or reads the value of the Questionable Enable register</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Status_Questionable_Event</code> · → NR1 · †<br>This command returns the value of the Questionable Event register</li>
+<li><code>COND?</code> — <strong>NAB</strong> <code>Questionable_Condition</code> · → NR1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>STATus</code></strong><ul>
+<li><strong><code>QUEStionable</code></strong><ul>
+<li><code>NTRansition?</code> — <strong>NAB</strong> <code>Get_Status_Questionable_Ntransition</code> · → NR1 · †<br>corresponding Questionable Event register</li>
+<li><code>PTRansitiion?</code> — <strong>NAB</strong> <code>Get_Status_Questionable_Ptransition</code> · → NR1 · †<br>Register Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYST</code></strong><ul>
+<li><code>VERS?</code> — <strong>NAB</strong> <code>Get_System_Version</code> · → 1 value · †<br>This query returns the SCPI version number to which the power module complies</li>
+<li><code>ERR?</code> — <strong>NAB</strong> <code>Read_Error</code> · → NR2</li>
+</ul>
+</li>
+<li><strong><code>TRIG</code></strong><ul>
+<li><code>DEL</code> — <strong>SET</strong> <code>Set_Trigger_Delay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>LINK</code> — <strong>SET</strong> <code>Set_Trigger_Link</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Trigger_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>DEL?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay</code> · → NR3 s · †</li>
+<li><code>LINK?</code> — <strong>NAB</strong> <code>Get_Trigger_Link</code> · → BOOL · †</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Trigger_Source</code> · → CRD · †</li>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Trigger_Immediate</code> · †</li>
+<li><strong><code>STAR</code></strong><ul>
+<li><code>LINK</code> — <strong>SET</strong> <code>Set_Trigger_Start_Link</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>This command specifies which event conditions within the power module are linked to trigger source events when LINK is the parameter of the TRIG:SOUR command</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><strong><code>STARt</code></strong><ul>
+<li><code>DELay</code> — <strong>SET</strong> <code>Set_Trigger_Start_Delay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>This command sets the time delay between the detection of an event on the specified trigger source and the start of any corresponding trigger action on the power module’s output</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Start_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>This command selects the power module input trigger source as follows</li>
+<li><code>DELay?</code> — <strong>NAB</strong> <code>Get_Trigger_Start_Delay</code> · → NR3 s · †<br>This command sets the time delay between the detection of an event on the specified trigger source and the start of any corresponding trigger action on the power module’s output</li>
+<li><code>LINK?</code> — <strong>NAB</strong> <code>Get_Trigger_Start_Link</code> · → CRD · †<br>This command specifies which event conditions within the power module are linked to trigger source events when LINK is the parameter of the TRIG:SOUR command</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Start_Source</code> · → CRD · †<br>This command selects the power module input trigger source as follows</li>
+<li><code>IMMediate</code> — <strong>DO</strong> <code>Do_Trigger_Start_Immediate</code> · †<br>1. Initiate a pending level change as specified by CURR[:LEV]:TRIG or VOLT[:LEV]:TRIG</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TTLT</code></strong><ul>
+<li><code>LINK</code> — <strong>DO</strong> <code>Do_Ttltrg_Link</code> · †</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>TRIG</code> — <strong>SET</strong> <code>Set_Voltage_Trigger</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>PROT?</code> — <strong>NAB</strong> <code>Get_Voltage_Protection</code> · → NR3 V · †<br>Query Indicator</li>
+<li><code>TRIG?</code> — <strong>NAB</strong> <code>Get_Voltage_Trigger</code> · → NR3 V · †</li>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Voltage_Immediate</code> · †</li>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Voltage_Level</code> · †</li>
+<li><code>LIST</code> — <strong>DO</strong> <code>Do_Voltage_List</code> · †<br>SCPI Command Completion</li>
+<li><code>MODE</code> — <strong>DO</strong> <code>Do_Voltage_Mode</code> · †</li>
+<li><code>TIUG</code> — <strong>DO</strong> <code>Do_Voltage_Tiug</code> · †</li>
+<li><strong><code>ALC</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Voltage_Alc_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Voltage_Alc_Source</code> · → CRD V · †</li>
+</ul>
+</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Voltage_Level_Immediate</code> · †</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Voltage_Level_Trigger</code> · †<br>Trigger Subsystem</li>
+</ul>
+</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Voltage_Protection_Level</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SENS</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Voltage_Sense_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Voltage_Sense_Source</code> · → CRD V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Clear_Status</code></li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*WAI</code> — <strong>DO</strong> <code>Do_Wai</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*OPT?</code> — <strong>NAB</strong> <code>Get_Opt</code> · → AARD · †</li>
+<li><code>*PSC?</code> — <strong>NAB</strong> <code>Get_Psc</code> · → NR1 · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD · †<br>Get idn</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code><br>System Reset</li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*PSC &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Psc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*RCL &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Rcl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SAV &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sav</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Trigger_Immediate</code></li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Power/66102A/commands_tree.md</code>
+  </div>
+</body>
+</html>

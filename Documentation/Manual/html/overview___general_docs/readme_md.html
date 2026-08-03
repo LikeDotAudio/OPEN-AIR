@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project README - Overview & General Docs</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>🏷️ OPEN-AIR</h1>
+<p><img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python">
+<img src="https://img.shields.io/badge/rust-1.94-orange" alt="Rust">
+<img src="https://img.shields.io/badge/typescript-strict-3178c6" alt="TypeScript">
+<img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+<img src="https://img.shields.io/badge/status-active-success" alt="Status"></p>
+<p><strong>A software VEE / LabVIEW: an open, vendor-neutral instrument orchestration
+environment.</strong> Discover a lab full of instruments across a dozen protocols,
+abstract their dialects into one command vocabulary, compose the cockpit out
+of ordinary folders, and watch every byte of it flow across a single
+observable bus.</p>
+<hr>
+<h2>💡 Why OPEN-AIR?</h2>
+<p>Traditional instrument software is rigid, vendor-locked, and visually dated.
+OPEN-AIR bridges raw hardware capability and high-fidelity visualization,
+turning a laboratory into a photorealistic cockpit where a fleet of
+instruments is orchestrated as easily as a single device.</p>
+<h3>The Four Pillars</h3>
+<ol>
+<li><strong>Discovery across protocols.</strong> <strong>Working today:</strong> VISA/SCPI, MIDI,
+DNS-SD/mDNS, AES70, OSC — devices announce themselves and appear in the UI.
+Also discovering: <strong>Google Cast</strong>, <strong>RAVENNA/AES67</strong>, <strong>Dante</strong>, <strong>NMOS (IS-04/IS-09)</strong>,
+<strong>AirPlay/HomeKit</strong>, and <strong>network printers</strong>.
+<strong>Scaffolded but not implemented:</strong> SNMP, Ember+, SMPTE 2138, PTP (PyO3 shims,
+built only with <code>--features python</code>) and REST, WebSocket (stubs).
+Stub agents report <code>status = stub</code> on the bus rather than claiming health they
+do not have. See <a href="#-protocol-management--discovery">Protocol management</a>.</li>
+<li><strong>YAK — the middleware definition plane.</strong> Multiple instruments that do
+the same thing differently are abstracted into one verb grammar
+(<code>SET / RIG / NAB / DO</code>), defined as data, not code.</li>
+<li><strong>Your folders are your interface.</strong> <code>FrontEnd/Gui_Frames/</code> <em>is</em> the
+document model: folders become tabs (<code>N_</code> prefixes order them,
+<code>left_50</code>-style names split panes), JSON files become panels, and the
+in-app WYSIWYG editor saves back into the same tree. Right-click any tab
+to edit its panel.</li>
+<li><strong>One observable bus.</strong> Everything — control values, discovery, agent
+liveness, logs — flows over MQTT, so any component or third-party tool can
+watch, inject, log, or replay traffic. <code>mosquitto_sub -t &#39;OpenAir/#&#39; -v</code>
+is a debugger for the whole system.</li>
+</ol>
+<h3>The fifth thing that makes the four work: <strong>contracts</strong></h3>
+<p>The pillars were always good ideas; what hurt was the absence of agreements
+<em>between</em> them — every boundary was an unchecked string, and most subsystems
+had grown two sources of truth. That is what
+<a href="#-the-contract-layer"><code>contracts/</code></a> fixes, and it is the reason the current
+generation of the platform exists.</p>
+<hr>
+<h2>🏛 Architecture at a glance</h2>
+<pre><code>                      ┌───────────────────────────────┐
+   Browser (React)    │       MQTT broker             │   Rust agents
+   ─────────────────► │  1883 (tcp) / 9001 (ws)       │ ◄─────────────────
+   panels, widgets,   │  retained topics = the        │  VISA, MIDI, DNS-SD,
+   WYSIWYG editor     │  system&#39;s state database      │  AES70, OSC, YAK, …
+                      └───────────────────────────────┘
+            ▲                       ▲                          ▲
+            │                       │                          │
+            └───────────────┬───────┴──────────────────────────┘
+                            │
+                   ┌────────────────────┐
+                   │    contracts/      │  ONE definition of every
+                   │  TS (zod) → JSON   │  cross-boundary shape,
+                   │  Schema → Rust     │  shared by all three sides
+                   └────────────────────┘
+
+   Orchestrator (Rust/axum, :8000) — serves the UI, GET /api/tree (live
+   filesystem → tabs), POST /api/save (editor writes), spawns the agents.
+</code></pre>
+<hr>
+<h2>📜 The contract layer</h2>
+<p><code>contracts/</code> is a single package that owns every shape crossing a process
+boundary. It is TypeScript-first (zod), exports JSON Schema, and generates
+the Rust types — so the browser, the Rust agents, and the tooling cannot
+disagree about the wire.</p>
+<p><strong>Full documentation: <a href="contracts/README.md"><code>contracts/README.md</code></a></strong></p>
+<table>
+<thead>
+<tr>
+<th>What it defines</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Topic grammar</strong> — typed build/parse for the whole <code>OpenAir/…</code> namespace, retain class per family, and a classifier for every legacy v40 topic</td>
+<td><code>src/topics/</code></td>
+</tr>
+<tr>
+<td><strong>DeviceRecord</strong> — the canonical discovered-device document (one JSON doc per device, stable derived <code>deviceId</code>)</td>
+<td><code>src/device-record.ts</code></td>
+</tr>
+<tr>
+<td><strong>AgentHeartbeat</strong> — one liveness shape for every agent <em>and</em> every browser session, with the MQTT Last-Will helper</td>
+<td><code>src/heartbeat.ts</code></td>
+</tr>
+<tr>
+<td><strong>Layout schema</strong> — the panel JSON as it really is: widget-type classification, the <code>yak_handler</code> binding block, folder grammar (<code>N_</code>, splits)</td>
+<td><code>src/layout/</code></td>
+</tr>
+<tr>
+<td><strong>YAK wire contract</strong> — the runtime <code>yak_handler</code> message the agent actually receives</td>
+<td><code>src/yak/verbs.ts</code></td>
+</tr>
+</tbody></table>
+<p>Three properties make it more than documentation:</p>
+<ul>
+<li><strong>Codegen, not copies.</strong> <code>pnpm gen</code> runs zod → JSON Schema → <code>cargo-typify</code>,
+and CI fails if the committed output is stale. One source, two languages.</li>
+<li><strong>Golden vectors.</strong> Hand-written behavior (topic grammar, device-ID
+derivation, time conversion) exists twice — TypeScript and Rust — and both
+sides run the <em>same</em> vector files (<code>contracts/vectors/</code>). A vector added on
+one side fails the other side&#39;s CI until implemented.</li>
+<li><strong>A ratchet, not a cliff.</strong> <code>pnpm validate</code> walks every panel, the YAK tree,
+the folder grammar, and every <code>config.ini</code>. Day-one drift was <strong>169 errors
+and 2,093 named deprecations</strong> — all baselined in
+<code>contracts/validate.baseline.json</code>, so CI fails only on debt that <em>isn&#39;t</em>
+in the baseline. Old debt is an inventory; new debt is impossible; the
+number only goes down.</li>
+</ul>
+<pre><code class="language-bash">pnpm validate                    # ratchet report (exit 1 on NEW debt)
+pnpm validate -- --report json   # the full machine-readable inventory
+pnpm gen &amp;&amp; pnpm gen:check       # regenerate schemas + Rust; verify freshness
+</code></pre>
+<hr>
+<h2>🔌 Protocol management &amp; discovery</h2>
+<p>Protocol agents are Rust crates under <code>BackEnd/ComProtocols/</code>, spawned by the
+orchestrator. Each one announces itself, publishes what it finds, and says
+honestly whether it is real.</p>
+<p><strong>Full documentation: <a href="BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a></strong></p>
+<ul>
+<li><strong>Liveness is data on the bus.</strong> Every agent publishes a retained
+<code>AgentHeartbeat</code> to <code>OpenAir/System/Agents/{agent}</code> and registers an MQTT
+<strong>Last Will</strong>, so a crashed agent (or a killed browser tab) flips to
+<code>offline</code> automatically instead of lying forever. Browser sessions are
+agents too (<code>web-{guid}</code>).</li>
+<li><strong>Stubs admit they are stubs.</strong> Placeholder crates publish
+<code>status = stub</code>, never <code>online</code> — the system no longer reports health it
+does not have.</li>
+<li><strong>Discovery flows to the UI as data.</strong> VISA and DNS-SD agents publish
+retained device topics; the Discovered tab renders them as sortable tables
+(<code>OcaTable</code>), one row per device, grouped by category — DMM, Oscilloscope,
+Generator, Spectrum, dnssd, midi.</li>
+<li><strong>Rescan on demand.</strong> The Discovered tab&#39;s <strong>RESCAN DEVICES</strong> button
+publishes to <code>OpenAir/System/Protocols/visa/Device/Rescan</code>; the VISA agent
+re-probes the fleet, refreshes retained state, and regenerates the panels.
+Retained and zero-value payloads deliberately never trigger a scan.</li>
+<li><strong>DNS-SD browses continuously.</strong> The <code>openair-dnssd</code> agent enumerates every
+advertised service type on the network and publishes each resolved
+instance; vanished services clear their own retained topics.</li>
+</ul>
+<hr>
+<h2>🗂 Repository layout</h2>
+<pre><code>OPEN-AIR/
+├── contracts/          # THE contract layer — zod schemas, topic grammar,
+│                       #   golden vectors, generated JSON Schema + Rust crate,
+│                       #   the openair-validate CLI and its ratchet baseline
+├── BackEnd/
+│   ├── Core/           # orchestrator (axum): /api/tree, /api/save, agent spawn
+│   └── ComProtocols/   # one Rust crate per protocol (visa, midi, dnssd, yak, …)
+├── FrontEnd/
+│   ├── Gui_Frames/     # YOUR INTERFACE: folders → tabs, JSON → panels
+│   ├── libControl/     # the widget library (faders, knobs, meters, tables, …)
+│   ├── comMQTT/        # MQTT provider + hooks
+│   ├── frameLayout/    # loader, widget factory, field dispatch
+│   ├── tabManager/     # tab engine, splits, window manager
+│   └── editorWYSIWYG/  # in-app panel editor
+├── ui/                 # the typed frontend package (Vite + TypeScript) —
+│                       #   builds the app today, becomes the runtime at cutover
+├── broker/             # mosquitto.conf (1883 + websockets 9001, persistence)
+│                       #   + acl.example — the policy for exposing the bus
+├── docker/             # the one-command startup path: launch.py, compose,
+│                       #   Dockerfile, container broker config
+├── Deployment/         # launcher, deploy scripts, discovered-GUI builder,
+│                       #   requirements.txt (Python is glue here, not the product)
+├── Documents/          # audits (historical analysis) + strategies (historical plans)
+└── TESTS/              # protocol test harnesses
+</code></pre>
+<p><strong>Root files are deliberately few, and every one is load-bearing</strong> — each is
+found by a tool that only looks in the repo root:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Why it must be at the root</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>package.json</code>, <code>pnpm-lock.yaml</code>, <code>pnpm-workspace.yaml</code></td>
+<td>the pnpm workspace root; <code>pnpm -r</code> / <code>pnpm --filter</code> resolve from here</td>
+</tr>
+<tr>
+<td><code>rust-toolchain.toml</code></td>
+<td>rustup searches upward from the crate — this sits <em>above</em> all three Cargo workspaces, so one pin covers them all</td>
+</tr>
+<tr>
+<td><code>.nvmrc</code></td>
+<td><code>node-version-file: .nvmrc</code> in every CI job</td>
+</tr>
+<tr>
+<td><code>.gitignore</code>, <code>README.md</code>, <code>CHANGELOG.md</code></td>
+<td>git and GitHub read them from the root</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>🚀 Quick start</h2>
+<p><strong>One command. Only Docker required.</strong></p>
+<pre><code class="language-bash">git clone https://github.com/LikeDotAudio/OPEN-AIR
+cd OPEN-AIR
+python3 docker/launch.py
+</code></pre>
+<p>Then open <strong><a href="http://localhost:8000">http://localhost:8000</a></strong>.</p>
+<p>That preflights Docker, brings up the broker and the orchestrator, installs the
+Python VISA dependencies inside the image, waits for the broker to be healthy
+before starting the agents, and opens a browser when it is ready. Everything it
+uses lives in <a href="docker/README.md"><code>docker/</code></a>; plain
+<code>docker compose -f docker/docker-compose.yml up</code> works too. <code>FrontEnd/Gui_Frames/</code> is bind-mounted, so panels you edit
+in the WYSIWYG editor land on your disk and show up in <code>git diff</code>.</p>
+<blockquote>
+<p><strong>Everything binds to host loopback.</strong> The bus is not a passive transport —
+publishing to the VISA <code>Write</code> topics executes SCPI on real instruments, and the
+HTTP API can write panel files. Before exposing any port on a network, enable
+broker authentication and an ACL (<code>broker/acl.example</code>) and put auth in front of
+the HTTP API.</p>
+</blockquote>
+<details>
+<summary><b>Running without Docker</b> (native toolchain)</summary><p>Needs Rust 1.94 (<code>rust-toolchain.toml</code>), Python 3, and a <code>mosquitto</code> broker
+installed on the host.</p>
+<pre><code class="language-bash"># 1. The broker (the spine — start it first)
+mosquitto -c broker/mosquitto.conf
+
+# 2. Python deps (the VISA probe path shells out to pyvisa)
+python3 -m venv venv &amp;&amp; source venv/bin/activate
+pip install -r Deployment/requirements.txt
+#   plus OS packages pip cannot install — see Deployment/requirements.txt:
+#   sudo apt-get install mosquitto mosquitto-clients python3-tk libasound2-dev
+
+# 3. The system
+python3 Deployment/openair.py        # launcher: builds the Rust core + starts everything
+#   …or run the orchestrator directly:
+cargo run --manifest-path BackEnd/Core/Cargo.toml
+</code></pre>
+<p>Useful flags: <code>--bind</code> (default <code>127.0.0.1</code>), <code>--mqtt-host</code> / <code>MQTT_HOST</code>
+(default <code>127.0.0.1</code>), <code>--osc-bind</code>, <code>--port</code>.</p>
+</details><p>Watch the whole system talk:</p>
+<pre><code class="language-bash">mosquitto_sub -t &#39;OpenAir/#&#39; -v            # everything
+mosquitto_sub -t &#39;OpenAir/System/Agents/#&#39; -v   # who is alive
+</code></pre>
+<h2>🛠 Development</h2>
+<p>The repo is a pnpm workspace (<code>contracts</code> + <code>ui</code>) alongside two Cargo
+workspaces (<code>BackEnd/Core</code>, <code>BackEnd/ComProtocols</code>) and the standalone
+<code>contracts/rust</code> crate.</p>
+<pre><code class="language-bash">corepack enable &amp;&amp; pnpm install   # Node 24 (.nvmrc), pnpm pinned in package.json
+pnpm test                         # contracts vector suites
+pnpm typecheck
+pnpm validate                     # panel/YAK/config drift, ratcheted
+cargo test --manifest-path contracts/rust/Cargo.toml   # same vectors, Rust side
+pnpm --filter ui build            # the typed frontend bundle
+pnpm --filter ui dev              # Vite dev server (proxies /api to :8000)
+</code></pre>
+<p>CI (<code>.github/workflows/contracts-ci.yml</code>) runs all of the above on every PR:
+Node tests, the Rust vector suite, both-workspace compilation, codegen
+freshness, and the validate ratchet.</p>
+<hr>
+<h2>📈 Status</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Contract layer (topics, device records, heartbeats, layout, codegen, validate + ratchet)</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td>Protocol liveness (heartbeats, LWT, honest stub status)</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td>Discovery → Discovered tab (VISA + MIDI + DNS-SD, tables, rescan)</td>
+<td>✅ Working</td>
+</tr>
+<tr>
+<td>Live folder tree (<code>GET /api/tree</code>) driving the UI</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td>Typed frontend package (<code>ui/</code>)</td>
+<td>✅ Builds the whole app · ⏳ cutover pending</td>
+</tr>
+<tr>
+<td>YAK 2 capability model (class/model split, reply parsing, WASM core)</td>
+<td>⏳ Planned</td>
+</tr>
+<tr>
+<td>Device Registry service + supervisor (restart, TTL aging)</td>
+<td>⏳ Planned</td>
+</tr>
+<tr>
+<td>Native Rust VISA (retire the <code>python3</code> subshell)</td>
+<td>⏳ Planned</td>
+</tr>
+</tbody></table>
+<p>Detailed history lives in <a href="Documents/CHANGELOG.md"><code>Documents/CHANGELOG.md</code></a>; every file moved,
+retired, or deleted during the migration is recorded in
+<a href="Documents/Strategies/Migration_Ledger.md"><code>Documents/Strategies/Migration_Ledger.md</code></a>.</p>
+<h2>📚 Documentation</h2>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="contracts/README.md"><code>contracts/README.md</code></a></td>
+<td>The contract layer: schemas, topic tree, codegen, validate/ratchet, and the schema design law</td>
+</tr>
+<tr>
+<td><a href="BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a></td>
+<td>Protocol agents: what each crate does, discovery topics, heartbeats, adding a protocol</td>
+</tr>
+<tr>
+<td><a href="ui/README.md"><code>ui/README.md</code></a></td>
+<td>The typed frontend package and the migration mechanics</td>
+</tr>
+<tr>
+<td><a href="Documents/Audits/"><code>Documents/Audits/</code></a></td>
+<td>The 2026-07-17 design audit — historical analysis; resolved findings now live in the READMEs above</td>
+</tr>
+<tr>
+<td><a href="Documents/Strategies/"><code>Documents/Strategies/</code></a></td>
+<td>The migration plans — historical; the shipped parts are documented as features above</td>
+</tr>
+</tbody></table>
+<hr>
+<p><em>Developed by Anthony Peter Kuzub (LikeDotAudio)</em></p>
+<h2>MIT License</h2>
+<p>Copyright (c) 2026 Anthony Peter Kuzub</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>README.md</code>
+  </div>
+</body>
+</html>

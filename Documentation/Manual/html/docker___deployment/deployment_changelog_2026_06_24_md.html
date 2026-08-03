@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Changelog / 2026-06-24 - Docker & Deployment</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Changelog — 2026-06-24</h1>
+<h2>MQTT GUI topic tree: flat → folder-hierarchy</h2>
+<p>The web GUI published widget state under a flat, underscore-joined leaf name
+(<code>OpenAir/Gui/Spectrum_YAK_N9340B_Frequency/...</code>). It now mirrors the
+<code>Gui_Frames/</code> folder hierarchy, one folder per topic level:</p>
+<pre><code>/Window_1/left_50/top_100/0_Spectrum/10_YAK/1_N9340B/0_Frequency/yak_frequency.json
+  -&gt;  OpenAir/Gui/Spectrum/YAK/N9340B/Frequency
+</code></pre>
+<ul>
+<li><strong>Added</strong> <code>FrontEnd/comMQTT/topicMaker.jsx</code> — <code>window.OaTopicMaker.buildGuiPrefix(filePath)</code>.
+Strips numeric ordering prefixes (<code>0_</code>, <code>10_</code>), drops window/geometry container
+folders (<code>Window_n</code>, <code>left/right/top/bottom/display</code>), preserves meaningful
+trailing device numbers (<code>Channel_1</code>).</li>
+<li><strong>Changed</strong> <code>FrontEnd/frameLayout/LoaderOrchestrator.jsx</code> — derives the topic
+prefix from the frame&#39;s folder path and passes <code>nodeName=&#39;&#39;</code> for the root so the
+flat JSON key isn&#39;t re-appended. Falls back to the bare <code>OpenAir/Gui</code> base when
+there&#39;s no <code>filePath</code> (WYSIWYG preview, grab-bag tiles).</li>
+<li><strong>Changed</strong> <code>FrontEnd/Core/Launch/index.html</code> — loads <code>topicMaker.jsx</code>; bumped
+<code>LoaderOrchestrator.jsx?v=10</code> for cache-busting.</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>The web frontend is the <strong>sole</strong> publisher of <code>OpenAir/Gui/&lt;widget&gt;</code> topics — no
+Python/Rust backend change was needed (the backend <code>WidgetRegistry</code> only stores a
+handed-in topic and has no callers).</li>
+<li>Old <strong>retained</strong> flat topics linger on the broker (mosquitto, TCP 1883 / WS 9001)
+until cleared; refresh the browser to publish the new tree.</li>
+</ul>
+<h2>Build fixes (blocking <code>openair.py</code>)</h2>
+<ul>
+<li><strong>Restored</strong> the seven ST2138 <code>.proto</code> files into
+<code>BackEnd/ComProtocols/openair-smpte2138/proto/</code> (were missing; <code>build.rs</code>
+compiles them under the <code>python</code> feature). Sourced from the upstream
+<code>st2138-a-main/interface/proto/</code> set. ⚠️ Currently untracked in git — should be
+committed so the build is reproducible on a fresh clone.</li>
+<li><strong>Fixed</strong> <code>BackEnd/Core/src/oa_pattern_engine_rs/mod.rs:22</code> — <code>struct PatternEngine {</code>
+had its fields and closing brace deleted, leaving an unclosed delimiter that broke
+the whole <code>oaRustCore</code> lib. Closed as a unit struct (<code>struct PatternEngine;</code>),
+matching <code>new()</code>&#39;s bare <code>PatternEngine</code> return.</li>
+</ul>
+<p><code>cargo build -p oaRustCore</code> and <code>-p open-air-orchestrator</code> both build clean again.</p>
+<h2>Launch / runtime</h2>
+<ul>
+<li><strong>Verified</strong> the full launcher comes up: <code>oaRustCore</code> loads, <code>open-air-orchestrator</code>
+runs (core API on 8001), OSC/MIDI/AES70 agents start. (AES70 logs
+<code>ConnectionRefused</code> to <code>127.0.0.1:50014</code> — expected when no AES70 device is up.)</li>
+<li><strong>Resolved</strong> a recurring port-8000 conflict. Only the <em>stale previous</em>
+<code>openair.py</code> held <strong>TCP</strong> 8000; the orchestrator&#39;s OSC agent uses <strong>UDP</strong> 8000, a
+different socket, so they coexist (as the prior run proved). Fix is just to kill
+the leftover instance — no <code>--port</code> change needed. Note: don&#39;t use <code>--port 8001</code>
+(that&#39;s the orchestrator core port <code>OPENAIR_CORE_PORT</code>); use e.g. <code>--port 8080</code> if
+a different web port is ever required. Quick unstick:
+<code>kill $(ss -ltnp | grep &#39;:8000&#39; | grep -oP &#39;pid=\K[0-9]+&#39;)</code>.</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Deployment/Changelog/2026-06-24.md</code>
+  </div>
+</body>
+</html>

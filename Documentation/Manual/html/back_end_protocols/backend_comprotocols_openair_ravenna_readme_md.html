@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>openair-ravenna (README) - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-ravenna — RAVENNA / AES67 stream discovery</h1>
+<p>Finds RAVENNA audio streams and reads their actual parameters.</p>
+<p><strong>Discovery + description only.</strong> No RTP receive, no subscription.</p>
+<h2>The chain it follows</h2>
+<p>RAVENNA announces over mDNS and describes streams with SDP, fetched over RTSP.
+This agent walks the whole chain:</p>
+<ol>
+<li><strong>mDNS</strong> — browse <code>_ravenna._tcp</code> and <code>_rtsp._tcp</code></li>
+<li><strong>RTSP DESCRIBE</strong> — <code>rtsp://&lt;ip&gt;:554/by-name/&lt;session&gt;</code></li>
+<li><strong>SDP parse</strong> — the parameters an engineer needs</li>
+</ol>
+<p>Published to <code>OpenAir/System/Protocols/ravenna/Device/&lt;host&gt;/&lt;stream&gt;/…</code></p>
+<h2>What you get per stream</h2>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>From SDP</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>format</code></td>
+<td><code>a=rtpmap:</code></td>
+<td><code>L24 48000Hz 2ch</code></td>
+</tr>
+<tr>
+<td><code>destination</code></td>
+<td><code>c=</code></td>
+<td><code>239.1.44.117</code> (multicast)</td>
+</tr>
+<tr>
+<td><code>rtp_port</code></td>
+<td><code>m=audio</code></td>
+<td><code>5004</code></td>
+</tr>
+<tr>
+<td><code>ptime_ms</code></td>
+<td><code>a=ptime:</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>clock_domain</code></td>
+<td><code>a=clock-domain:</code></td>
+<td><code>PTPv2 0</code></td>
+</tr>
+<tr>
+<td><code>refclk</code></td>
+<td><code>a=ts-refclk:</code></td>
+<td>the PTP grandmaster it is locked to</td>
+</tr>
+<tr>
+<td><code>direction</code></td>
+<td><code>a=recvonly</code> etc.</td>
+<td><code>recvonly</code></td>
+</tr>
+</tbody></table>
+<p><code>refclk</code> is the one people forget to check: two streams that will not lock
+together usually disagree here.</p>
+<h2>Why the SDP fetch is not optional</h2>
+<p><strong>Port 554 proves nothing</strong> — IP cameras answer RTSP too. The SDP is the
+discriminator: an <code>m=audio</code> line means audio, <code>m=video</code> means a doorbell.
+A service is only published here once <em>its own SDP</em> says it carries audio.
+Anything else is logged and skipped:</p>
+<pre><code>⏭️ [RAVENNA] &lt;name&gt; @ &lt;ip&gt; is not an audio stream — skipping
+</code></pre>
+<p>Publishing every RTSP responder as a &quot;RAVENNA device&quot; would be a guess dressed
+as a discovery.</p>
+<h2>Grouping</h2>
+<p>By <strong>hostname</strong>. One node commonly publishes several streams — a desk might
+offer <code>Digital inputs 1-2</code> and a monitor feed from the same host — so the UI
+shows one device with N streams rather than N unrelated rows.</p>
+<h2>Gotchas handled</h2>
+<ul>
+<li><strong>Session names need URL-encoding.</strong> <code>Digital inputs 1-2 (42-04-BA)</code> will not
+fetch without <code>%20</code>/<code>%28</code>.</li>
+<li><strong>Mono omits the channel count.</strong> <code>L24/48000</code> is 1 channel, not 0.</li>
+</ul>
+<h2>Tests</h2>
+<p><code>cargo test -p openair-ravenna</code> — the SDP parser is pinned against a <strong>verbatim
+record from real hardware</strong>, plus video rejection, mono defaulting, and URL
+encoding. <code>sdp.rs</code> is public and reused by <code>openair-dante</code>.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-ravenna/README.md</code>
+  </div>
+</body>
+</html>

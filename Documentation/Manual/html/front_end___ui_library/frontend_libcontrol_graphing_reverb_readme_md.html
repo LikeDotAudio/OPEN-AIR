@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: graphing / Reverb - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Reverb</h1>
+<p>Live reverb <strong>impulse-response (IR)</strong> visualizer with on-demand <strong>FIR</strong> and <strong>CSV</strong>
+export. Mirrors the Equalization component: MQTT-driven, draggable handles, and the
+same top-right export toolbar.</p>
+<h2>What it draws</h2>
+<ul>
+<li><strong>IR (orange, left axis):</strong> the synthesized impulse response — a unit impulse fed
+through a Schroeder network (parallel feedback combs → series all-pass diffusers).
+Peak-decimated to ~3000 points for the plot.</li>
+<li><strong>EDC (green, right axis, dB):</strong> the Schroeder backward-integrated energy decay
+curve — the smooth line whose slope is RT60.</li>
+</ul>
+<h2>Parameters (MQTT topics)</h2>
+<p>Supplied declaratively via the JSON <code>topics</code> map (falls back to
+<code>OpenAir/Gui/&lt;command&gt;/&lt;Key&gt;</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+<th>Typical range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PreDelay</code></td>
+<td>gap before first reflection (ms)</td>
+<td>0–200</td>
+</tr>
+<tr>
+<td><code>Decay</code></td>
+<td>RT60 tail length (s)</td>
+<td>0.1–10</td>
+</tr>
+<tr>
+<td><code>Diffusion</code></td>
+<td>all-pass density (0–1)</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>Size</code></td>
+<td>room scale, scales all delays (0–1)</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>Damping</code></td>
+<td>in-loop HF absorption (0–1)</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>Mix</code></td>
+<td>wet/dry (%) — informational in the graph</td>
+<td>0–100</td>
+</tr>
+</tbody></table>
+<h2>Draggable handles</h2>
+<ul>
+<li><strong>Orange</strong> handle → Pre-Delay (drag horizontally).</li>
+<li><strong>Green</strong> handle → Decay/RT60 (drag horizontally along the −60 dB line).</li>
+</ul>
+<p>Publishes throttled at 40 ms with a <code>draggingRef</code> guard so the MQTT echo of our own
+publish doesn&#39;t fight the pointer (same pattern as EQ).</p>
+<h2>Channels (Mono / Stereo / 5.1)</h2>
+<p>Layout comes from the MQTT <code>Channels</code> topic (<code>Mono</code> / <code>Stereo</code> / <code>5.1</code>), falling back
+to <code>config.channels</code>, then mono. Each channel is a <strong>decorrelated</strong> IR (distinct delay
+scale + pre-delay offset). Roles in 5.1: <strong>L/R</strong> offset pair, <strong>C</strong> anchored &amp; drier,
+<strong>LFE</strong> heavily damped, <strong>Ls/Rs</strong> later + more diffuse. Every channel plots as its own
+colored trace with a legend.</p>
+<h2>Trace toggles</h2>
+<p>Toolbar <strong>IR</strong> and <strong>EDC</strong> pills (highlighted when on) show/hide each trace — e.g. turn
+the IR off to read the decay envelope alone.</p>
+<h2>Export</h2>
+<ul>
+<li><strong>CSV</strong> → <code>TimeMs, Amplitude, DecayDb</code> for the primary channel.</li>
+<li><strong>FIR ▾</strong> → popover (Taps / Sample Rate / Phase / Window) with three export modes:<ul>
+<li><strong>JFIR</strong> — one <code>.jfir</code> JSON bundle: params + <strong>every</strong> channel&#39;s FIR + curve CSV
+(see <code>../_dsp/jfir.js</code>). The canonical multichannel export.</li>
+<li><strong>FIR</strong> — the primary channel only, plain <code>.fir</code> (one tap per line, <code>toFixed(10)</code>).
+The IR <strong>is</strong> the convolution kernel <code>h[k]</code>.</li>
+<li><strong>N× separate .fir</strong> (multichannel only) — one <code>.fir</code> file per channel.
+Default phase is <strong>minimum</strong> (reverb IRs are causal).</li>
+</ul>
+</li>
+</ul>
+<h2>DSP</h2>
+<p>All math lives in <code>../_dsp/dsp.js</code> (<code>window.OaDsp</code>): <code>synthesizeIR</code>, <code>combFilter</code>,
+<code>allpassFilter</code>, <code>rt60ToGain</code>, <code>energyDecayCurve</code>, <code>decimate</code>, plus the shared FFT /
+window / download helpers. The component keeps minimal local fallbacks so a
+script-load-order regression degrades gracefully.</p>
+<h2>Wiring checklist</h2>
+<ol>
+<li><code>index.html</code> — <code>&lt;script&gt;</code> for <code>_dsp/dsp.js</code> then <code>Reverb/Reverb.jsx</code>.</li>
+<li><code>frameLayout/FieldComponent.jsx</code> — <code>type === &#39;_Reverb&#39;</code> render arm.</li>
+<li>Frame JSON uses <code>&quot;type&quot;: &quot;_Reverb&quot;</code>; run <code>python update_tree.py</code> after editing.</li>
+</ol>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/graphing/Reverb/Readme.md</code>
+  </div>
+</body>
+</html>

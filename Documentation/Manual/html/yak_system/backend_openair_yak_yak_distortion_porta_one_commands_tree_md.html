@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Porta_one / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Distortion/Porta_one — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>608 commands</strong> — SET 274 · RIG 0 · NAB 289 · DO 45 · 573 unverified (94%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Read_Stereo_AB</code> · → m_1, m_2<ul>
+<li><code>M1?;M2?</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>GAMPlitude</code> — <strong>SET</strong> <code>Set_Amplitude</code> · <code>&lt;amp&gt;</code> · args: <code>amp</code></li>
+<li><code>GFREquency</code> — <strong>SET</strong> <code>Set_Frequency</code> · <code>&lt;freq&gt;</code> · args: <code>freq</code> · numeric</li>
+<li><code>M1?</code> — <strong>NAB</strong> <code>Read_Ch_A_Only</code> · → 1 value</li>
+<li><code>M2?</code> — <strong>NAB</strong> <code>Read_Ch_B_Only</code> · → 1 value</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>Do_Display_Panel</code> · <code>PANel</code></li>
+<li><code>OUTPut</code> — <strong>DO</strong> <code>Do_Output_OFF</code> · <code>OFF</code></li>
+<li><code>OUTPut</code> — <strong>DO</strong> <code>Do_Output_ON</code> · <code>ON</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_Amplitude</code> · <code>AMPLitude</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_Crosstalk</code> · <code>XTALK</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_Level_Stereo</code> · <code>LEVel</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_Noise</code> · <code>NOISE</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_Phase</code> · <code>PHASE</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_SINAD</code> · <code>SINad</code></li>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Mode_THD_N</code> · <code>THD</code></li>
+<li><code>DINPut</code> — <strong>DO</strong> <code>Select_DIN_BNC</code> · <code>BNC</code></li>
+<li><code>DINPut</code> — <strong>DO</strong> <code>Select_DIN_Generator</code> · <code>GENerator</code></li>
+<li><code>DINPut</code> — <strong>DO</strong> <code>Select_DIN_Optical</code> · <code>OPTical</code></li>
+<li><code>DINPut</code> — <strong>DO</strong> <code>Select_DIN_XLR</code> · <code>XLR</code></li>
+<li><code>INPut</code> — <strong>DO</strong> <code>Select_Input_Analog_A</code> · <code>A</code></li>
+<li><code>INPut</code> — <strong>DO</strong> <code>Select_Input_Analog_B</code> · <code>B</code></li>
+<li><code>INPut</code> — <strong>DO</strong> <code>Select_Input_Gen_Monitor_A</code> · <code>GENA</code></li>
+<li><code>INPut</code> — <strong>DO</strong> <code>Select_Input_Gen_Monitor_B</code> · <code>GENB</code></li>
+<li><code>DOUTput</code> — <strong>DO</strong> <code>Set_DOUT_OFF</code> · <code>OFF</code></li>
+<li><code>DOUTput</code> — <strong>DO</strong> <code>Set_DOUT_ON</code> · <code>ON</code></li>
+<li><code>AUNits</code> — <strong>DO</strong> <code>Set_Unit_Volts</code> · <code>V</code></li>
+<li><code>AUNits</code> — <strong>DO</strong> <code>Set_Unit_Watts</code> · <code>W</code></li>
+<li><code>AUNits</code> — <strong>DO</strong> <code>Set_Unit_dBV</code> · <code>DBV</code></li>
+<li><code>AUNits</code> — <strong>DO</strong> <code>Set_Unit_dBm</code> · <code>DBM</code></li>
+<li><code>AUNits</code> — <strong>DO</strong> <code>Set_Unit_dBu</code> · <code>DBU</code></li>
+<li><code>WAVeform</code> — <strong>DO</strong> <code>Set_Wave_IMD</code> · <code>IMD</code></li>
+<li><code>WAVeform</code> — <strong>DO</strong> <code>Set_Wave_Sine</code> · <code>SINE</code></li>
+<li><code>WAVeform</code> — <strong>DO</strong> <code>Set_Wave_Square</code> · <code>SQUare</code></li>
+<li><strong><code>ACM</code></strong><ul>
+<li><code>LUN</code> — <strong>SET</strong> <code>Set_Acm_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> | <code>OFF</code> · †<br>Selects the THD+N display units for the ACMAINS measurement function</li>
+</ul>
+</li>
+<li><strong><code>ACMains</code></strong><ul>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Acm_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the bargraph display in volts</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Acm_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the bargraph display in volts</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Acm_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> · †<br>Selects the default volts measurement units for the ACMAINS function</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Acm_Lun</code> · → CRD · †<br>Selects the THD+N display units for the ACMAINS measurement function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Acm_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the bargraph display in volts</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Acm_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the bargraph display in volts</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Acm_Unit</code> · → CRD · †<br>Selects the default volts measurement units for the ACMAINS function</li>
+</ul>
+</li>
+<li><strong><code>AMPL</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Ampl_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Ampl_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>AMPLitude</code></strong><ul>
+<li><code>BPFR</code> — <strong>SET</strong> <code>Set_Ampl_Bpfr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Ampl_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Ampl_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SEL</code> | <code>WTD</code> | <code>UNWT</code> · †<br>Selects the filter for the Amplitude function, identical to the front- panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Ampl_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Ampl_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Ampl_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ON</code> | <code>OFF</code> · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Ampl_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R22</code> | <code>Q22</code> | <code>R30</code> | <code>R80</code> | <code>R300</code> · †<br>Selects the band pass filter when the unweighted filter is selected</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Ampl_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Ampl_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Ampl_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Ampl_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Ampl_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> · †<br>Selects the measurement units for the Amplitude function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Ampl_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>AUX1</code> | <code>AUX2</code> | <code>IEC</code> | <code>RMSC</code> | <code>CCIR2K</code> | <code>QPKC</code> | <code>ARMC</code> · †<br>Selects the weighting filter for the Amplitude function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Ampl_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Ampl_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR?</code> — <strong>NAB</strong> <code>Get_Ampl_Bpfr</code> · → 1 value · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Ampl_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Ampl_Filt</code> · → CRD · †<br>Selects the filter for the Amplitude function, identical to the front- panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Ampl_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Ampl_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Ampl_Hpas</code> · → CRD · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Ampl_Lpas</code> · → CRD · †<br>Selects the band pass filter when the unweighted filter is selected</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Ampl_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Ampl_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Ampl_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPS?</code> — <strong>NAB</strong> <code>Get_Ampl_Steps</code> · → NR1 · †<br>Returns the selected sweep mode or the number of sweep steps selected for the internal sweep mode</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Ampl_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Ampl_Unit</code> · → CRD · †<br>Selects the measurement units for the Amplitude function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Ampl_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the Amplitude function when the WTD filter is selected</li>
+<li><code>STEPs</code> — <strong>DO</strong> <code>Do_Ampl_Step</code> · †<br>Selects the sweep mode or the number of sweep steps</li>
+</ul>
+</li>
+<li><strong><code>ATio</code></strong><ul>
+<li><code>FMAX</code> — <strong>DO</strong> <code>Do_At_Fmax</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DAMP</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Damp_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>DAMPlitude</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Damp_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR</code> — <strong>SET</strong> <code>Set_Damp_Bpfr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Damp_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Damp_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SEL</code> | <code>WTD</code> | <code>UNWT</code> · †<br>Selects the filter for the Amplitude function, identical to the front- panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Damp_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Damp_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Damp_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Damp_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R15</code> | <code>R20</code> | <code>HALF</code> | <code>R22</code> | <code>Q22</code> · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter is selected</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Damp_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Damp_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Damp_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Damp_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Damp_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Damp_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the Digital Amplitude function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Damp_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>IEC</code> | <code>RMSC</code> | <code>CCIR2K</code> | <code>QPKC</code> · †<br>Selects the weighting filter for the Digital Amplitude function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Damp_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Damp_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR?</code> — <strong>NAB</strong> <code>Get_Damp_Bpfr</code> · → 1 value · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Damp_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Damp_Filt</code> · → CRD · †<br>Selects the filter for the Amplitude function, identical to the front- panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Damp_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Damp_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Damp_Hpas</code> · → CRD · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Damp_Lpas</code> · → CRD · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter is selected</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Damp_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Damp_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Damp_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Damp_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Damp_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Damp_Unit</code> · → CRD · †<br>Selects the measurement units for the Digital Amplitude function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Damp_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the Digital Amplitude function when the WTD filter is selected</li>
+</ul>
+</li>
+<li><strong><code>DCHK</code></strong><ul>
+<li><code>BITS</code> — <strong>SET</strong> <code>Set_Dchk_Bits</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>This query returns two 32-bit decimal integers (only the low 24 bits are available, the top 8 bits are not used) indicating the state of the digital input signal on the A and B channels</li>
+<li><code>DBITs</code> — <strong>SET</strong> <code>Set_Dchk_Dbit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ACTV</code> | <code>ACTL</code> · †<br>Selects the measurement mode for the digital interface data bits, either Active Bits mode (ACTV) or Actual Bits mode (ACTL)</li>
+<li><code>DUNit</code> — <strong>SET</strong> <code>Set_Dchk_Dun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DEC</code> | <code>HEX</code> · †<br>Selects the data units for the data display, either decimal (DEC) or hexadecimal (HEX)</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dchk_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range and units for the bargraph display</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dchk_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range and unit for the bargraph display</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dchk_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the measurement units for the data error measurements</li>
+<li><code>BITS?</code> — <strong>NAB</strong> <code>Get_Dchk_Bits</code> · → 1 value · †<br>This query returns two 32-bit decimal integers (only the low 24 bits are available, the top 8 bits are not used) indicating the state of the digital input signal on the A and B channels</li>
+<li><code>DBITs?</code> — <strong>NAB</strong> <code>Get_Dchk_Dbit</code> · → 1 value · †<br>Selects the measurement mode for the digital interface data bits, either Active Bits mode (ACTV) or Actual Bits mode (ACTL)</li>
+<li><code>DUNit?</code> — <strong>NAB</strong> <code>Get_Dchk_Dun</code> · → 1 value · †<br>Selects the data units for the data display, either decimal (DEC) or hexadecimal (HEX)</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dchk_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range and units for the bargraph display</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dchk_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range and unit for the bargraph display</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dchk_Unit</code> · → CRD · †<br>Selects the measurement units for the data error measurements</li>
+</ul>
+</li>
+<li><strong><code>DIMD</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dimd_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dimd_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Dimd_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the level display units for the Digital DIMD measurement function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dimd_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the bargraph display in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dimd_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dimd_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Dimd_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the the number of sweep steps</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dimd_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> | <code>DB</code> · †<br>Selects the DIMD measurement units of percent and dB</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dimd_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dimd_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Dimd_Lun</code> · → CRD · †<br>Selects the level display units for the Digital DIMD measurement function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dimd_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the bargraph display in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dimd_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dimd_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Dimd_Step</code> · → NR1 · †<br>Selects the the number of sweep steps</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dimd_Unit</code> · → CRD · †<br>Selects the DIMD measurement units of percent and dB</li>
+<li><code>EXTernal</code> — <strong>DO</strong> <code>Do_Dimd_Ext</code> · †</li>
+<li><code>FMAX</code> — <strong>DO</strong> <code>Do_Dimd_Fmax</code> · †</li>
+<li><code>FMIN</code> — <strong>DO</strong> <code>Do_Dimd_Fmin</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DIO</code></strong><ul>
+<li><code>DDREF</code> — <strong>SET</strong> <code>Set_Dio_Ddref</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>OUTB</code> | <code>OUTF</code> | <code>REFB</code> | <code>REFF</code> · †<br>Selects the reference source for the Digital Delay measurement function</li>
+<li><code>DIResolution</code> — <strong>SET</strong> <code>Set_Dio_Dir</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the number of data bits of resolution applied to both channels of the digital audio data on the digital inputs</li>
+<li><code>DREF</code> — <strong>SET</strong> <code>Set_Dio_Dref</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>DUNit</code> — <strong>SET</strong> <code>Set_Dio_Dun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>UI</code> | <code>SMP</code> | <code>SEC</code> · †<br>Selects units for the Digital Delay measurement function</li>
+<li><code>FRQRef</code> — <strong>SET</strong> <code>Set_Dio_Frqr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>MEAS</code> | <code>OUTP</code> | <code>STAT</code> · †<br>Selects digital audio frequency reference source for digital audio frequency measurement functions</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dio_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sample rate bargraph display</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dio_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sample rate bargraph display</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dio_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>HZ</code> | <code>PPM</code> · †<br>Selects units for the Digital Sample Rate measurement function</li>
+<li><code>DDREF?</code> — <strong>NAB</strong> <code>Get_Dio_Ddref</code> · → 1 value · †<br>Selects the reference source for the Digital Delay measurement function</li>
+<li><code>DIResolution?</code> — <strong>NAB</strong> <code>Get_Dio_Dir</code> · → 1 value · †<br>Selects the number of data bits of resolution applied to both channels of the digital audio data on the digital inputs</li>
+<li><code>DREF?</code> — <strong>NAB</strong> <code>Get_Dio_Dref</code> · → 1 value · †</li>
+<li><code>DUNit?</code> — <strong>NAB</strong> <code>Get_Dio_Dun</code> · → 1 value · †<br>Selects units for the Digital Delay measurement function</li>
+<li><code>FRQRef?</code> — <strong>NAB</strong> <code>Get_Dio_Frqr</code> · → 1 value · †<br>Selects digital audio frequency reference source for digital audio frequency measurement functions</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dio_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sample rate bargraph display</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dio_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sample rate bargraph display</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dio_Unit</code> · → CRD · †<br>Selects units for the Digital Sample Rate measurement function</li>
+</ul>
+</li>
+<li><strong><code>DIST</code></strong><ul>
+<li><code>COD</code> — <strong>SET</strong> <code>Set_Dist_Cod</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Returns a value indicating a coding error in the data received at the digital interface input</li>
+</ul>
+</li>
+<li><strong><code>DISTatus</code></strong><ul>
+<li><code>CODing?</code> — <strong>NAB</strong> <code>Get_Dist_Cod</code> · → 1 value · †<br>Returns a value indicating a coding error in the data received at the digital interface input</li>
+<li><code>CONfidence?</code> — <strong>NAB</strong> <code>Get_Dist_Con</code> · → 1 value · †</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Get_Dist_Err</code> · → ERROR · †</li>
+<li><code>INValid?</code> — <strong>NAB</strong> <code>Get_Dist_Inv</code> · → BOOL · †<br>Returns the state of digital interface input channel A validity bit</li>
+<li><code>LOCK?</code> — <strong>NAB</strong> <code>Get_Dist_Lock</code> · → 1 value · †<br>Returns a value indicating loss of phase lock of the digital interface input to the incoming sample rate</li>
+<li><code>PARity?</code> — <strong>NAB</strong> <code>Get_Dist_Par</code> · → 1 value · †<br>Returns a value indicating the received parity bit does not match the parity of the received sample</li>
+<li><code>STATus?</code> — <strong>NAB</strong> <code>Get_Dist_Stat</code> · → BOOL · †<br>Analyzer Function-Setting Commands All function-setting commands have parameters specific to each measurement function</li>
+<li><code>STD?</code> — <strong>NAB</strong> <code>Get_Dist_Std</code> · → 1 value · †</li>
+</ul>
+</li>
+<li><strong><code>DJIT</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Djit_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>DJITter</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Djit_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR</code> — <strong>SET</strong> <code>Set_Djit_Bpfr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the Digital Jitter analyzer tunable bandpass filter when the Selective filter is selected</li>
+<li><code>DETector</code> — <strong>SET</strong> <code>Set_Djit_Det</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Djit_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Djit_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SEL</code> | <code>UNWT</code> · †<br>Selects the filter for the Digital Jitter analyzer function, identical to the front-panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Djit_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Djit_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Djit_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the jitter measurement high pass filter cut off frequency</li>
+<li><code>JDETector</code> — <strong>SET</strong> <code>Set_Djit_Jdet</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PEAK</code> | <code>RMS</code> · †<br>Selects Peak or RMS jitter detector</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Djit_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Djit_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Djit_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Djit_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Djit_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Djit_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>UI</code> | <code>SEC</code> · †<br>Selects either unit interval (UI) or seconds (SEC) units for the Digital Jitter measurement function</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Djit_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Djit_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR?</code> — <strong>NAB</strong> <code>Get_Djit_Bpfr</code> · → 1 value · †<br>Selects the center frequency for the Digital Jitter analyzer tunable bandpass filter when the Selective filter is selected</li>
+<li><code>DETector?</code> — <strong>NAB</strong> <code>Get_Djit_Det</code> · → CRD · †</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Djit_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Djit_Filt</code> · → CRD · †<br>Selects the filter for the Digital Jitter analyzer function, identical to the front-panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Djit_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Djit_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Djit_Hpas</code> · → CRD · †<br>Selects the jitter measurement high pass filter cut off frequency</li>
+<li><code>JDETector?</code> — <strong>NAB</strong> <code>Get_Djit_Jdet</code> · → 1 value · †<br>Selects Peak or RMS jitter detector</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Djit_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Djit_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Djit_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Djit_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Djit_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Djit_Unit</code> · → CRD · †<br>Selects either unit interval (UI) or seconds (SEC) units for the Digital Jitter measurement function</li>
+</ul>
+</li>
+<li><strong><code>DLEV</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dlev_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>DLEVel</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dlev_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Dlev_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Dlev_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the second channel of the level function for the level meter :M2? query response</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dlev_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dlev_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dlev_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Dlev_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Dlev_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dlev_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the first channel of the level function for the function meter :M1? query response</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dlev_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dlev_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Dlev_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Dlev_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Dlev_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Dlev_Lun</code> · → CRD · †<br>Selects the measurement units for the second channel of the level function for the level meter :M2? query response</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dlev_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dlev_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dlev_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Dlev_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Dlev_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dlev_Unit</code> · → CRD · †<br>Selects the measurement units for the first channel of the level function for the function meter :M1? query response</li>
+<li><code>FMin</code> — <strong>DO</strong> <code>Do_Dlev_Fm</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DNOise</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dno_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dno_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR</code> — <strong>SET</strong> <code>Set_Dno_Bpfr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Dno_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Dno_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SEL</code> | <code>WTD</code> | <code>UNWTD</code> · †<br>Selects the filter for the Digital Noise function, identical to the front- panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Dno_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Dno_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Dno_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Dno_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R15</code> | <code>R20</code> | <code>HALF</code> | <code>R22</code> | <code>Q22</code> · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter is selected</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dno_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dno_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dno_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Dno_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Dno_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dno_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the Digital Noise function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Dno_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>IEC</code> | <code>RMSC</code> | <code>CCIR2K</code> | <code>QPKC</code> · †<br>Selects the weighting filter for the Digital Noise function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dno_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dno_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR?</code> — <strong>NAB</strong> <code>Get_Dno_Bpfr</code> · → 1 value · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Dno_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Dno_Filt</code> · → CRD · †<br>Selects the filter for the Digital Noise function, identical to the front- panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Dno_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Dno_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Dno_Hpas</code> · → CRD · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Dno_Lpas</code> · → CRD · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter is selected</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dno_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dno_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dno_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Dno_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Dno_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dno_Unit</code> · → CRD · †<br>Selects the measurement units for the Digital Noise function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Dno_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the Digital Noise function when the WTD filter is selected</li>
+</ul>
+</li>
+<li><strong><code>DOSTatus</code></strong><ul>
+<li><code>CONS</code> — <strong>SET</strong> <code>Set_Dost_Cons</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Specifies the consumer standard status bit settings for the rate, emphasis, and copy bits</li>
+<li><code>PROF</code> — <strong>SET</strong> <code>Set_Dost_Prof</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Specifies the professional standard status bit settings for the rate, output pre-emphasis, origination, and destination status bits</li>
+<li><code>STDO</code> — <strong>SET</strong> <code>Set_Dost_Stdo</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Sets the standard for output status bits formatting, either professional standard (PROF) or consumer standard (CONS)</li>
+<li><code>VALidity</code> — <strong>SET</strong> <code>Set_Dost_Val</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Sets the VALIDITY bit for the digital interface output channel A B data streams to either VALID or INVALID</li>
+<li><code>CONS?</code> — <strong>NAB</strong> <code>Get_Dost_Cons</code> · → 1 value · †<br>Specifies the consumer standard status bit settings for the rate, emphasis, and copy bits</li>
+<li><code>PROF?</code> — <strong>NAB</strong> <code>Get_Dost_Prof</code> · → 1 value · †<br>Specifies the professional standard status bit settings for the rate, output pre-emphasis, origination, and destination status bits</li>
+<li><code>STDO?</code> — <strong>NAB</strong> <code>Get_Dost_Stdo</code> · → CRD · †<br>Sets the standard for output status bits formatting, either professional standard (PROF) or consumer standard (CONS)</li>
+<li><code>VALidity?</code> — <strong>NAB</strong> <code>Get_Dost_Val</code> · → NR3 · †<br>Sets the VALIDITY bit for the digital interface output channel A B data streams to either VALID or INVALID</li>
+</ul>
+</li>
+<li><strong><code>DPHase</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dph_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dph_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Dph_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Dph_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Dph_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Dph_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the Digital Level meter units for the center meter</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dph_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep display</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dph_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Dph_Rang</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DEG90</code> | <code>DEG180</code> | <code>DEG270</code> · †<br>Selects the Digital Phase meter display range</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dph_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Dph_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Dph_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dph_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DEG</code> · †<br>Selects the default degree measurement units for the DPHASE function</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dph_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dph_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Dph_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Dph_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Dph_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Dph_Lun</code> · → CRD · †<br>Selects the Digital Level meter units for the center meter</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dph_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep display</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dph_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Dph_Rang</code> · → NR3 · †<br>Selects the Digital Phase meter display range</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dph_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Dph_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Dph_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dph_Unit</code> · → CRD · †<br>Selects the default degree measurement units for the DPHASE function</li>
+</ul>
+</li>
+<li><strong><code>DRAT</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Drat_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>DRATio</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Drat_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Drat_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Drat_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Drat_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Drat_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the Digital Ratio function Digital Level measurement units</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Drat_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Drat_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Drat_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Drat_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Drat_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Drat_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DB</code> · †<br>Selects either X/Y or dB units for the Digital Ratio measurement function</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Drat_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Drat_Amin</code> · → NR3 V · †<br>This command sets the minimum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Drat_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Drat_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Drat_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Drat_Lun</code> · → CRD · †<br>Selects the Digital Ratio function Digital Level measurement units</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Drat_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Drat_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Drat_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Drat_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Drat_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Drat_Unit</code> · → CRD · †<br>Selects either X/Y or dB units for the Digital Ratio measurement function</li>
+</ul>
+</li>
+<li><strong><code>DTHD</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dthd_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dthd_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Sets the minimum amplitude level for an amplitude sweep for the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Dthd_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Dthd_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>WTD</code> | <code>UNWT</code> | <code>AVER</code> · †<br>Selects the filter for the DTHD function, identical to the front-panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Dthd_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Dthd_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Dthd_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Dthd_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R15</code> | <code>R20</code> | <code>HALF</code> | <code>R22</code> | <code>Q22</code> · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter or average filter is selected</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Dthd_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the Digital Level measurement in the DTHD function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dthd_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dthd_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>NOTChfreq</code> — <strong>SET</strong> <code>Set_Dthd_Notc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTune</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dthd_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Dthd_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Dthd_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>TUNe</code> — <strong>SET</strong> <code>Set_Dthd_Tun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>AUT</code> | <code>GENT</code> | <code>FIXT</code> · †<br>Selects the notch filter tuning mode for the DTHD function</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dthd_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> | <code>DB</code> | <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the measurement units for the DTHD function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Dthd_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the weighting filter for the DTHD+N function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dthd_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dthd_Amin</code> · → NR3 V · †<br>Sets the minimum amplitude level for an amplitude sweep for the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Dthd_Ext</code> · → BOOL · †<br>Selects glide or step in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Dthd_Filt</code> · → CRD · †<br>Selects the filter for the DTHD function, identical to the front-panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Dthd_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Dthd_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Dthd_Hpas</code> · → CRD · †<br>Selects the high pass filter cut off frequency</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Dthd_Lpas</code> · → CRD · †<br>Selects the band pass filter cut off frequency and detector when the unweighted filter or average filter is selected</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Dthd_Lun</code> · → CRD · †<br>Selects the measurement units for the Digital Level measurement in the DTHD function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dthd_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dthd_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>NOTChfreq?</code> — <strong>NAB</strong> <code>Get_Dthd_Notc</code> · → 1 value · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTune</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dthd_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEP?</code> — <strong>NAB</strong> <code>Get_Dthd_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Dthd_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>TUNe?</code> — <strong>NAB</strong> <code>Get_Dthd_Tun</code> · → 1 value · †<br>Selects the notch filter tuning mode for the DTHD function</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dthd_Unit</code> · → CRD · †<br>Selects the measurement units for the DTHD function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Dthd_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the DTHD+N function when the WTD filter is selected</li>
+<li><code>MEDIUM</code> — <strong>DO</strong> <code>Do_Dthd_Medium</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DXTalk</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Dxt_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Dxt_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Sets the minimum amplitude level for an amplitude sweep for the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Dxt_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Dxt_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Dxt_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Dxt_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FFS</code> | <code>DBFS</code> | <code>DBR</code> · †<br>Selects the level measurement units for the DXTALK function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Dxt_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Dxt_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Dxt_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEP</code> — <strong>SET</strong> <code>Set_Dxt_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Dxt_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Dxt_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the DXTALK measurement units</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Dxt_Amax</code> · → NR3 V · †<br>This command sets the maximum amplitude level for an amplitude sweep of the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Dxt_Amin</code> · → NR3 V · †<br>Sets the minimum amplitude level for an amplitude sweep for the analog generator, the digital generator, or the jitter generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Dxt_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Dxt_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Dxt_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Dxt_Lun</code> · → CRD · †<br>Selects the level measurement units for the DXTALK function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Dxt_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Dxt_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep display</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Dxt_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Dxt_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Dxt_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Dxt_Unit</code> · → CRD · †<br>Selects the DXTALK measurement units</li>
+</ul>
+</li>
+<li><strong><code>GEN</code></strong><ul>
+<li><code>DIG</code> — <strong>DO</strong> <code>Do_Gen_Dig</code> · †</li>
+<li><code>JITT</code> — <strong>DO</strong> <code>Do_Gen_Jitt</code> · †</li>
+</ul>
+</li>
+<li><strong><code>GENL</code></strong><ul>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Genl_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+</ul>
+</li>
+<li><strong><code>GENLoad</code></strong><ul>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Genl_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Genl_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in OHMS units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Genl_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays in OHMS units</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Genl_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Genl_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode and the number of sweep steps</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Genl_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>OHM</code> · †<br>Selects the default OHM measurement units for the GENLOAD function</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Genl_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Genl_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Genl_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in OHMS units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Genl_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays in OHMS units</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Genl_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Genl_Step</code> · → NR1 · †<br>Selects the sweep mode and the number of sweep steps</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Genl_Unit</code> · → CRD · †<br>Selects the default OHM measurement units for the GENLOAD function</li>
+</ul>
+</li>
+<li><strong><code>IMD</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Imd_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Imd_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Imd_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the level display units for the IMD measurement function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Imd_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Imd_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Imd_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Imd_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> | <code>DB</code> · †<br>Selects the IMD measurement units of percent or dB</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Imd_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Imd_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Imd_Lun</code> · → CRD · †<br>Selects the level display units for the IMD measurement function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Imd_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Imd_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Imd_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPS?</code> — <strong>NAB</strong> <code>Get_Imd_Steps</code> · → NR1 · †<br>Returns the selected sweep mode or the number of sweep steps selected for the internal sweep mode</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Imd_Unit</code> · → CRD · †<br>Selects the IMD measurement units of percent or dB</li>
+<li><code>EXTernal</code> — <strong>DO</strong> <code>Do_Imd_Ext</code> · †</li>
+<li><code>STEPs</code> — <strong>DO</strong> <code>Do_Imd_Step</code> · †<br>Selects the sweep mode or the number of sweep steps</li>
+</ul>
+</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Lev_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>LEVel</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Lev_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Lev_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Lev_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> · †<br>Selects the measurement units for the second channel of the level function for the level meter :M2? query response</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Lev_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Lev_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Lev_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Lev_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Lev_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Lev_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> · †<br>Selects the measurement units for the first channel of the level function for the function meter :M1? query response</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Lev_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Lev_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Lev_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Lev_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Lev_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Lev_Lun</code> · → CRD · †<br>Selects the measurement units for the second channel of the level function for the level meter :M2? query response</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Lev_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Lev_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Lev_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Lev_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Lev_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Lev_Unit</code> · → CRD · †<br>Selects the measurement units for the first channel of the level function for the function meter :M1? query response</li>
+<li><code>FMin</code> — <strong>DO</strong> <code>Do_Lev_Fm</code> · †</li>
+</ul>
+</li>
+<li><strong><code>NOIS</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Nois_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>NOISe</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Nois_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR</code> — <strong>SET</strong> <code>Set_Nois_Bpfr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Nois_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Nois_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SEL</code> | <code>WTD</code> | <code>UNWTD</code> · †<br>Selects the filter for the Noise function, identical to the front-panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Nois_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Nois_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Nois_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ON</code> | <code>OFF</code> · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Nois_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R22</code> | <code>Q22</code> | <code>R30</code> | <code>R80</code> | <code>R300</code> · †<br>Selects the band pass filter when the unweighted filter is selected</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Nois_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Nois_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Nois_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Nois_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Nois_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Nois_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBG</code> | <code>W</code> | <code>DB</code> · †<br>Selects the measurement units for the Noise function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Nois_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>AUX1</code> | <code>AUX2</code> | <code>IEC</code> | <code>RMSC</code> | <code>CCIR2K</code> | <code>QPKC</code> | <code>ARMC</code> · †<br>Selects the weighting filter for the Noise function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Nois_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Nois_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>BPFR?</code> — <strong>NAB</strong> <code>Get_Nois_Bpfr</code> · → 1 value · †<br>Selects the center frequency for the tunable bandpass filter when the Selective filter is selected</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Nois_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Nois_Filt</code> · → CRD · †<br>Selects the filter for the Noise function, identical to the front-panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Nois_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Nois_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Nois_Hpas</code> · → CRD · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Nois_Lpas</code> · → CRD · †<br>Selects the band pass filter when the unweighted filter is selected</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Nois_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Nois_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Nois_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Nois_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Nois_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Nois_Unit</code> · → CRD · †<br>Selects the measurement units for the Noise function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Nois_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the Noise function when the WTD filter is selected</li>
+</ul>
+</li>
+<li><strong><code>PHAS</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Phas_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>PHASe</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Phas_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Phas_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Phas_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Phas_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Phas_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the Level meter units</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Phas_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Phas_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Phas_Rang</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DEG90</code> | <code>DEG180</code> | <code>DEG270</code> · †<br>Selects the Phase meter display range</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Phas_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Phas_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Phas_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Phas_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DEG</code> · †<br>Selects the default degree measurement units for the PHASE function</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Phas_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Phas_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AVErage?</code> — <strong>NAB</strong> <code>Get_Phas_Ave</code> · → NR1 · †</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Phas_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Phas_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Phas_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Phas_Lun</code> · → CRD · †<br>Selects the Level meter units</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Phas_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Phas_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Phas_Rang</code> · → NR3 · †<br>Selects the Phase meter display range</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Phas_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Phas_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Phas_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Phas_Unit</code> · → CRD · †<br>Selects the default degree measurement units for the PHASE function</li>
+<li><code>AVERage</code> — <strong>DO</strong> <code>Do_Phas_Aver</code> · †<br>Selects the averaging function for the Phase meter</li>
+</ul>
+</li>
+<li><strong><code>RAT</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Rat_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>RATio</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Rat_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Rat_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Rat_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Rat_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Rat_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the Ratio function Level measurement units</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Rat_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Rat_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Rat_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Selects the sensitivity mode for two channel level ratio measurements, either Mode 1 or Mode 2</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Rat_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Rat_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Rat_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Rat_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DB</code> · †<br>Selects either X/Y or dB units for the Ratio measurement function</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Rat_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Rat_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Rat_Ext</code> · → BOOL · †<br>Selects glide or step settling in external sweep mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Rat_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Rat_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Rat_Lun</code> · → CRD · †<br>Selects the Ratio function Level measurement units</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Rat_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Rat_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Rat_Mode</code> · → CRD · †<br>Selects the sensitivity mode for two channel level ratio measurements, either Mode 1 or Mode 2</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Rat_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Rat_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Rat_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Rat_Unit</code> · → CRD · †<br>Selects either X/Y or dB units for the Ratio measurement function</li>
+</ul>
+</li>
+<li><strong><code>REF</code></strong><ul>
+<li><code>WATT</code> — <strong>DO</strong> <code>Do_Ref_Watt</code> · †</li>
+</ul>
+</li>
+<li><strong><code>SIN</code></strong><ul>
+<li><code>HPAS</code> — <strong>SET</strong> <code>Set_Sin_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ON</code> | <code>OFF</code> · †<br>Enables and disables the SINAD high pass filter</li>
+</ul>
+</li>
+<li><strong><code>SINad</code></strong><ul>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Sin_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R22</code> | <code>Q22</code> | <code>R30</code> | <code>R80</code> | <code>R300</code> · †<br>Selects the SINAD band pass filter</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Sin_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the measurement units for the Level measurement in the SINAD function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Sin_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the bargraph display</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Sin_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>NOTChfreq</code> — <strong>SET</strong> <code>Set_Sin_Notc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTUNE</li>
+<li><code>PRESet</code> — <strong>SET</strong> <code>Set_Sin_Pres</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>F400</code> | <code>F1000</code> · †<br>Selects the PRESET setting to set both the generator frequency and the SINAD notch filter frequency to either 400 Hz (F400) or 1000 Hz (F1000)</li>
+<li><code>TUNe</code> — <strong>SET</strong> <code>Set_Sin_Tun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>GENT</code> | <code>FIXT</code> | <code>OFF</code> · †<br>Selects the notch filter tuning mode for the SINAD function</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Sin_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DB</code> · †<br>Selects the default dB measurement units for the SINAD meter</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Sin_Hpas</code> · → CRD · †<br>Enables and disables the SINAD high pass filter</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Sin_Lpas</code> · → CRD · †<br>Selects the SINAD band pass filter</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Sin_Lun</code> · → CRD · †<br>Selects the measurement units for the Level measurement in the SINAD function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Sin_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the bargraph display</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Sin_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>NOTChfreq?</code> — <strong>NAB</strong> <code>Get_Sin_Notc</code> · → 1 value · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTUNE</li>
+<li><code>PRESet?</code> — <strong>NAB</strong> <code>Get_Sin_Pres</code> · → BLOCK · †<br>Selects the PRESET setting to set both the generator frequency and the SINAD notch filter frequency to either 400 Hz (F400) or 1000 Hz (F1000)</li>
+<li><code>TUNe?</code> — <strong>NAB</strong> <code>Get_Sin_Tun</code> · → 1 value · †<br>Selects the notch filter tuning mode for the SINAD function</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Sin_Unit</code> · → CRD · †<br>Selects the default dB measurement units for the SINAD meter</li>
+</ul>
+</li>
+<li><strong><code>THD</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Thd_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Thd_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Thd_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Selects glide or step in external sweep mode</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Thd_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>WTD</code> | <code>UNWT</code> | <code>AVER</code> · †<br>Selects the filter for the THD function, identical to the front-panel selection</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Thd_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Thd_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs</code> — <strong>SET</strong> <code>Set_Thd_Hpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ON</code> | <code>OFF</code> · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs</code> — <strong>SET</strong> <code>Set_Thd_Lpas</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>R22</code> | <code>Q22</code> | <code>R30</code> | <code>R80</code> | <code>R300</code> · †<br>Selects the band pass filter when the UNWTD filter is selected</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Thd_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the measurement units for the Level measurement in the THD function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Thd_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Thd_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>NOTChfreq</code> — <strong>SET</strong> <code>Set_Thd_Notc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTUNE</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Thd_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Thd_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Thd_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>TUNe</code> — <strong>SET</strong> <code>Set_Thd_Tun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>AUT</code> | <code>GENT</code> | <code>FIXT</code> · †<br>Selects the notch filter tuning mode for the THD function</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Thd_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> | <code>DB</code> | <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> · †<br>Selects the measurement units for the THD function</li>
+<li><code>WTD</code> — <strong>SET</strong> <code>Set_Thd_Wtd</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Selects the weighting filter for the THD+N function when the WTD filter is selected</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Thd_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Thd_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Thd_Ext</code> · → BOOL · †<br>Selects glide or step in external sweep mode</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Thd_Filt</code> · → CRD · †<br>Selects the filter for the THD function, identical to the front-panel selection</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Thd_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep display</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Thd_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep display</li>
+<li><code>HPASs?</code> — <strong>NAB</strong> <code>Get_Thd_Hpas</code> · → CRD · †<br>Enables and disables the high pass filter</li>
+<li><code>LPASs?</code> — <strong>NAB</strong> <code>Get_Thd_Lpas</code> · → CRD · †<br>Selects the band pass filter when the UNWTD filter is selected</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Thd_Lun</code> · → CRD · †<br>Selects the measurement units for the Level measurement in the THD function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Thd_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Thd_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>NOTChfreq?</code> — <strong>NAB</strong> <code>Get_Thd_Notc</code> · → 1 value · †<br>Selects the center frequency for the tunable notch filter when TUNE is set to FIXTUNE</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Thd_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Thd_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Thd_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>TUNe?</code> — <strong>NAB</strong> <code>Get_Thd_Tun</code> · → 1 value · †<br>Selects the notch filter tuning mode for the THD function</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Thd_Unit</code> · → CRD · †<br>Selects the measurement units for the THD function</li>
+<li><code>WTD?</code> — <strong>NAB</strong> <code>Get_Thd_Wtd</code> · → 1 value · †<br>Selects the weighting filter for the THD+N function when the WTD filter is selected</li>
+<li><code>MEDIUM</code> — <strong>DO</strong> <code>Do_Thd_Medium</code> · †</li>
+</ul>
+</li>
+<li><strong><code>WF</code></strong><ul>
+<li><code>DET</code> — <strong>SET</strong> <code>Set_Wf_Det</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>IEC</code> | <code>NAB</code> | <code>JIS</code> · †<br>Selects the W+F detector</li>
+<li><code>FILTer</code> — <strong>SET</strong> <code>Set_Wf_Filt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>WTD</code> | <code>UNWT</code> · †<br>Selects the W+F weighted or unweighted filters</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Wf_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the measurement units for the Level measurement in the W+F function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Wf_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the bargraph display</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Wf_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>RESPonse</code> — <strong>SET</strong> <code>Set_Wf_Resp</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PEAK</code> | <code>SIG2</code> · †<br>Selects the measurement response mode for W+F measurements</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Wf_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PCT</code> · †<br>Selects the default percent measurement units for the W+F meter</li>
+<li><code>WFUNit</code> — <strong>SET</strong> <code>Set_Wf_Wfun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>HZ</code> | <code>DPCT3000</code> | <code>DPCT3150</code> | <code>OFF</code> · †<br>Selects the W+F function frequency meter units and reference frequency for frequency deviation measurements</li>
+<li><code>DETector?</code> — <strong>NAB</strong> <code>Get_Wf_Det</code> · → CRD · †<br>Selects the W+F detector</li>
+<li><code>FILTer?</code> — <strong>NAB</strong> <code>Get_Wf_Filt</code> · → CRD · †<br>Selects the W+F weighted or unweighted filters</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Wf_Lun</code> · → CRD · †<br>Selects the measurement units for the Level measurement in the W+F function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Wf_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the bargraph display</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Wf_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the bargraph display</li>
+<li><code>RESPonse?</code> — <strong>NAB</strong> <code>Get_Wf_Resp</code> · → 1 value · †<br>Selects the measurement response mode for W+F measurements</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Wf_Unit</code> · → CRD · †<br>Selects the default percent measurement units for the W+F meter</li>
+<li><code>WFUNit?</code> — <strong>NAB</strong> <code>Get_Wf_Wfun</code> · → 1 value · †<br>Selects the W+F function frequency meter units and reference frequency for frequency deviation measurements</li>
+</ul>
+</li>
+<li><strong><code>XTAL</code></strong><ul>
+<li><code>AMAX</code> — <strong>SET</strong> <code>Set_Xtal_Amax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+</ul>
+</li>
+<li><strong><code>XTALk</code></strong><ul>
+<li><code>AMIN</code> — <strong>SET</strong> <code>Set_Xtal_Amin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal</code> — <strong>SET</strong> <code>Set_Xtal_Ext</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Returns the current external sweep settling mode</li>
+<li><code>FMAX</code> — <strong>SET</strong> <code>Set_Xtal_Fmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN</code> — <strong>SET</strong> <code>Set_Xtal_Fmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz) · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit</code> — <strong>SET</strong> <code>Set_Xtal_Lun</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DBG</code> | <code>W</code> | <code>OFF</code> · †<br>Selects the level measurement units for the XTALK function</li>
+<li><code>MMAX</code> — <strong>SET</strong> <code>Set_Xtal_Mmax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN</code> — <strong>SET</strong> <code>Set_Xtal_Mmin</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed</code> — <strong>SET</strong> <code>Set_Xtal_Spe</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FAST</code> | <code>MED</code> | <code>SLOW</code> · †<br>Selects the sweep speed</li>
+<li><code>STEPs</code> — <strong>SET</strong> <code>Set_Xtal_Step</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType</code> — <strong>SET</strong> <code>Set_Xtal_Swpt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FREQ</code> | <code>AMPL</code> · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Xtal_Unit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>V</code> | <code>DBV</code> | <code>DBU</code> | <code>DBM</code> | <code>DBR</code> | <code>DB</code> · †<br>Selects the XTALK measurement units</li>
+<li><code>AMAX?</code> — <strong>NAB</strong> <code>Get_Xtal_Amax</code> · → NR3 V · †<br>For the Access instrument, this command sets the maximum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>AMIN?</code> — <strong>NAB</strong> <code>Get_Xtal_Amin</code> · → NR3 V · †<br>For the Access instrument, this command sets the minimum amplitude level for an amplitude sweep of the analog generator when the SWPType command is set to AMPL</li>
+<li><code>EXTernal?</code> — <strong>NAB</strong> <code>Get_Xtal_Ext</code> · → BOOL · †<br>Returns the current external sweep settling mode</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Xtal_Fmax</code> · → NR3 Hz · †<br>Selects the upper frequency display range for the sweep and bargraph displays</li>
+<li><code>FMIN?</code> — <strong>NAB</strong> <code>Get_Xtal_Fmin</code> · → NR3 Hz · †<br>Selects the lower frequency display range for the sweep and bargraph displays</li>
+<li><code>LUNit?</code> — <strong>NAB</strong> <code>Get_Xtal_Lun</code> · → CRD · †<br>Selects the level measurement units for the XTALK function</li>
+<li><code>MMAX?</code> — <strong>NAB</strong> <code>Get_Xtal_Mmax</code> · → NR3 · †<br>Selects the upper magnitude display range for the sweep and bargraph displays in currently selected units</li>
+<li><code>MMIN?</code> — <strong>NAB</strong> <code>Get_Xtal_Mmin</code> · → NR3 · †<br>Selects the lower magnitude display range for the sweep and bargraph displays</li>
+<li><code>SPEed?</code> — <strong>NAB</strong> <code>Get_Xtal_Spe</code> · → NR3 · †<br>Selects the sweep speed</li>
+<li><code>STEPs?</code> — <strong>NAB</strong> <code>Get_Xtal_Step</code> · → NR1 · †<br>Selects the sweep mode or the number of sweep steps</li>
+<li><code>SWPType?</code> — <strong>NAB</strong> <code>Get_Xtal_Swpt</code> · → 1 value · †<br>Specifies that either a frequency sweep or amplitude sweep is to be performed when the SWEEP START command is received</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Xtal_Unit</code> · → CRD · †<br>Selects the XTALK measurement units</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Do_Clear_Status</code></li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code><br>Do Reset</li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Distortion/Porta_one/commands_tree.md</code>
+  </div>
+</body>
+</html>

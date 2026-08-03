@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deploy / CICD - Docker & Deployment</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>CI/CD — Push-to-Deploy (GitHub Actions → FTPS)</h1>
+<p><strong>In a phrase:</strong> push a branch → GitHub Actions builds the manifest and
+FTPS-uploads only what changed; the branch name picks the environment.</p>
+<p>There is <strong>no app server and no bundler</strong>. <code>FrontEnd/</code> is a static site that
+transpiles JSX in-browser (CDN React + Babel), so the pipeline needs only
+Python — no Node/npm.</p>
+<h2>Branch = environment</h2>
+<table>
+<thead>
+<tr>
+<th>Push / PR to</th>
+<th>Workflow</th>
+<th>GitHub Environment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sandbox</code>, <code>develop</code></td>
+<td><code>.github/workflows/deploy-sandbox.yml</code></td>
+<td><code>sandbox</code></td>
+</tr>
+<tr>
+<td><code>main</code></td>
+<td><code>.github/workflows/deploy-production.yml</code></td>
+<td><code>production</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Push</strong> → deploys. <strong>Pull request</strong> → validates only (compiles the deploy
+script), never uploads.</li>
+<li><strong>Promotion is a fast-forward, not a rebuild:</strong>
+<code>git push origin sandbox:main</code> moves prod to the exact commit already
+validated in sandbox.</li>
+</ul>
+<h2>What each run does</h2>
+<ol>
+<li><code>actions/checkout</code> with <strong><code>fetch-depth: 0</code></strong> — full history, because the
+deploy diffs <code>github.event.before..github.sha</code> to decide what to upload.</li>
+<li><code>setup-python@3.11</code> + <code>pip install -r FrontEnd/requirements-deploy.txt</code>
+(<code>paho-mqtt</code> for the build stamp).</li>
+<li>Runs <code>python3 FrontEnd/deploy_FTP_to_like_dot_audio.py</code>, which:<ul>
+<li>regenerates <code>FrontEnd/api/tree.json</code> from <code>Gui_Frames</code>,</li>
+<li>best-effort refreshes <code>FrontEnd/api/grabbag</code> (skipped in CI — no local
+backend; the committed copy ships instead),</li>
+<li>connects over <strong>explicit FTPS</strong> (falls back to plain FTP unless
+<code>DEPLOY_FTP_REQUIRE_TLS=1</code>),</li>
+<li>uploads only the FrontEnd files changed in the push range, <strong>always</strong>
+re-uploading <code>api/tree.json</code>, <code>api/grabbag</code>, and <code>index.html</code>, with
+<strong><code>index.html</code> last</strong> for a near-atomic cutover,</li>
+<li>publishes a build stamp (commit + timestamp + env) to MQTT for
+observability.</li>
+</ul>
+</li>
+</ol>
+<h2>Required secrets (per GitHub Environment)</h2>
+<p>Set these under <strong>Settings → Environments → <code>sandbox</code></strong> and <strong><code>production</code></strong>
+(same names, different values — that is what separates the two environments):</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FTP_HOST</code></td>
+<td>yes</td>
+<td>FTPS host</td>
+</tr>
+<tr>
+<td><code>FTP_USER</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>FTP_PASS</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>REMOTE_DIR</code></td>
+<td>yes</td>
+<td>remote docroot, e.g. <code>/</code></td>
+</tr>
+<tr>
+<td><code>MQTT_HOST</code></td>
+<td>no</td>
+<td>omit to skip the build stamp</td>
+</tr>
+<tr>
+<td><code>MQTT_PORT</code></td>
+<td>no</td>
+<td>default <code>1883</code></td>
+</tr>
+<tr>
+<td><code>MQTT_USER</code></td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td><code>MQTT_PASS</code></td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td><code>MQTT_TOPIC</code></td>
+<td>no</td>
+<td>default <code>OpenAir/Deploy/stamp</code></td>
+</tr>
+</tbody></table>
+<p><strong>GitHub Environments are the store of record for every secret.</strong> Nothing is
+committed, and the repository holds no credential of its own. The optional local
+gitignored <strong>repo-root <code>.env</code></strong> exists only to seed those secrets when running
+this script by hand.</p>
+<blockquote>
+<p>This section used to name <code>FrontEnd/.env</code>. That path no longer exists and must
+not be re-created — it is where an executive review found a plaintext
+production credential. Both deploy workflows exclude <code>**/.env</code> and <code>**/.env.*</code>
+from upload; keep it that way.</p>
+</blockquote>
+<h2>deploy.py env-var switches</h2>
+<p>The same script serves the laptop and CI. Behavior is env-driven:</p>
+<table>
+<thead>
+<tr>
+<th>Env var</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DEPLOY_DIFF_BASE</code>/<code>_HEAD</code></td>
+<td>commit-range mode (upload only files changed in the range)</td>
+</tr>
+<tr>
+<td><code>DEPLOY_FULL_SYNC=1</code></td>
+<td>force full mtime/size sync of every file</td>
+</tr>
+<tr>
+<td><code>DEPLOY_FTP_PLAIN=1</code></td>
+<td>skip FTPS, use plain FTP</td>
+</tr>
+<tr>
+<td><code>DEPLOY_FTP_REQUIRE_TLS=1</code></td>
+<td>abort instead of falling back to plain FTP</td>
+</tr>
+<tr>
+<td><code>DEPLOY_ENV</code></td>
+<td>label used in the MQTT build stamp</td>
+</tr>
+<tr>
+<td><em>(none set)</em></td>
+<td>local mode: upload uncommitted working-tree changes</td>
+</tr>
+</tbody></table>
+<ul>
+<li>A <strong>null/first-push</strong> base (<code>000000…</code>) or <code>DEPLOY_FULL_SYNC=1</code> → full sync.</li>
+<li>To force a complete re-sync from CI, run the workflow with
+<code>DEPLOY_FULL_SYNC=1</code>, or push after setting it.</li>
+</ul>
+<h2>First-time setup checklist</h2>
+<ol>
+<li>Create the <code>sandbox</code> and <code>production</code> Environments in GitHub with the
+secrets above.</li>
+<li>Create a <code>sandbox</code> branch: <code>git switch -c sandbox &amp;&amp; git push -u origin sandbox</code>.</li>
+<li>Confirm the host accepts <strong>explicit FTPS</strong>. If not, add
+<code>DEPLOY_FTP_PLAIN=1</code> to the workflow <code>env:</code> (transport stays unencrypted —
+creds remain safe in GitHub secrets).</li>
+<li>First deploy runs a full sync (no previous ref); subsequent pushes are
+incremental.</li>
+</ol>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Deployment/Deploy/CICD.md</code>
+  </div>
+</body>
+</html>

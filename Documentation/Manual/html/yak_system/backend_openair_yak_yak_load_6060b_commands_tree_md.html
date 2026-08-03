@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>6060B / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Load/6060B — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>122 commands</strong> — SET 35 · RIG 1 · NAB 46 · DO 40 · 94 unverified (77%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Get_OCP_Config</code> · → stat, lev, del · †<br>Read overcurrent protection state, level and delay in one transaction<ul>
+<li><code>:CURR:PROT:STAT?;:CURR:PROT:LEV?;:CURR:PROT:DEL?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Measure_All</code> · → mode, voltage, current, power<ul>
+<li><code>MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Setup_Transient_Profile</code> · args: <code>level_a</code>, <code>level_b</code>, <code>duty</code>, <code>freq</code> · numeric (V) · †<br>Set both transient levels, duty and frequency together<ul>
+<li><code>:CURR:LEV &lt;level_a&gt;;:CURR:TLEV &lt;level_b&gt;;:TRAN:DCYC &lt;duty&gt;;:TRAN:FREQ &lt;freq&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>CHAN</code> — <strong>SET</strong> <code>Set_Chan</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Select the electronic load channel this command stream addresses (INST is an alias)</li>
+<li><code>CURR</code> — <strong>SET</strong> <code>Set_Current_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (A)</li>
+<li><code>PORT0</code> — <strong>SET</strong> <code>Set_Port0</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set the state of the rear-panel digital port 0 output</li>
+<li><code>RES</code> — <strong>SET</strong> <code>Set_Resistance_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Ohm)</li>
+<li><code>VOLT</code> — <strong>SET</strong> <code>Set_Voltage_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V)</li>
+<li><code>CHAN?</code> — <strong>NAB</strong> <code>Get_Chan</code> · → CRD · †<br>Query the selected channel</li>
+<li><code>CURR?</code> — <strong>NAB</strong> <code>Get_Curr</code> · → NR3 A · †<br>Query the programmed main current level</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Mode</code> · → CRD · †<br>Query the operating mode — CURR, RES or VOLT (FUNC is an alias)</li>
+<li><code>RES?</code> — <strong>NAB</strong> <code>Get_Res</code> · → NR3 Ohm · †<br>Query the programmed main resistance level</li>
+<li><code>VOLT?</code> — <strong>NAB</strong> <code>Get_Volt</code> · → NR3 V · †<br>Query the programmed main voltage level</li>
+<li><code>ABOR</code> — <strong>DO</strong> <code>Do_Abor</code> · †<br>Abort the transient or trigger operation in progress</li>
+<li><code>INP</code> — <strong>DO</strong> <code>Input_OFF</code> · <code>OFF</code></li>
+<li><code>INP</code> — <strong>DO</strong> <code>Input_ON</code> · <code>ON</code></li>
+<li><strong><code>CAL</code></strong><ul>
+<li><code>INIT</code> — <strong>DO</strong> <code>Do_Calib_Init</code> · †<br>EEPROM Initialization</li>
+<li><code>MEAS</code> — <strong>DO</strong> <code>Do_Calib_Meas</code> · †</li>
+<li><code>MODE</code> — <strong>DO</strong> <code>Do_Calib_Mode</code> · †<br>Table 3-2. Selftest Error Code</li>
+<li><code>SAV</code> — <strong>DO</strong> <code>Do_Calib_Sav</code> · †<br>Program Listing</li>
+<li><code>TLEV</code> — <strong>DO</strong> <code>Do_Calib_Tlev</code> · †</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>HIGH</code> — <strong>DO</strong> <code>Do_Calib_Lev_High</code> · †</li>
+<li><code>LOW</code> — <strong>DO</strong> <code>Do_Calib_Lev_Low</code> · †</li>
+</ul>
+</li>
+<li><strong><code>MEAS</code></strong><ul>
+<li><code>HIGH</code> — <strong>DO</strong> <code>Do_Calib_Meas_High</code> · †<br>Calibration Flowcharts</li>
+<li><code>LOW</code> — <strong>DO</strong> <code>Do_Calib_Meas_Low</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CURR</code></strong><ul>
+<li><code>RANG</code> — <strong>SET</strong> <code>Set_Current_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (A)</li>
+<li><code>SLEW</code> — <strong>SET</strong> <code>Set_Current_Slew</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (A)</li>
+<li><code>LEV</code> — <strong>SET</strong> <code>Set_Transient_Level_A</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V)</li>
+<li><code>TLEV</code> — <strong>SET</strong> <code>Set_Transient_Level_B</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V)</li>
+<li><code>RANG?</code> — <strong>NAB</strong> <code>Get_Curr_Rang</code> · → NR3 A · †<br>Query the current range</li>
+<li><code>SLEW?</code> — <strong>NAB</strong> <code>Get_Curr_Slew</code> · → NR3 A · †<br>Query the current slew rate</li>
+<li><code>TLEV?</code> — <strong>NAB</strong> <code>Get_Curr_Tlev</code> · → NR3 V · †<br>Query the transient current level</li>
+<li><code>PROT</code> — <strong>DO</strong> <code>Do_Curr_Prot</code> · †<br>Software Current Limit</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Curr_Trig</code> · †<br>Triggered Current Level</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>TRIG</code> — <strong>SET</strong> <code>Set_Curr_Lev_Trig</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set the current level the load takes on when triggered</li>
+<li><code>TRIG?</code> — <strong>NAB</strong> <code>Get_Curr_Lev_Trig</code> · → NR3 V · †<br>Query the triggered current level</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Curr_Lev_Trig</code> · †<br>PROGRAM 2</li>
+</ul>
+</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>DEL</code> — <strong>SET</strong> <code>Set_Curr_Prot_Del</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (A) · †<br>Set how long an overcurrent may persist before the input is turned off</li>
+<li><code>LEV</code> — <strong>SET</strong> <code>Set_Curr_Prot_Lev</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set the overcurrent protection level</li>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Curr_Prot_Stat</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable overcurrent protection</li>
+<li><code>DEL</code> — <strong>DO</strong> <code>Do_Curr_Prot_Del</code> · †<br>72 Remote Operation</li>
+<li><code>LEV</code> — <strong>DO</strong> <code>Do_Curr_Prot_Lev</code> · †<br>CR Mode Example</li>
+<li><code>STAT</code> — <strong>DO</strong> <code>Do_Curr_Prot_Stat</code> · †<br>CR Mode Example</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DIAG</code></strong><ul>
+<li><code>CAL</code> — <strong>DO</strong> <code>Do_Diag_Calib</code> · †<br>EEPROM Initialization</li>
+</ul>
+</li>
+<li><strong><code>INP</code></strong><ul>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Inp_Stat</code> · → BOOL · †<br>Query whether the load input is on (OUTP is an alias for INP)</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>CLE</code> — <strong>DO</strong> <code>Do_Input_Prot_Cle</code> · †<br>Resetting Latched Protection</li>
+</ul>
+</li>
+<li><strong><code>SHOR</code></strong><ul>
+<li><code>STAT</code> — <strong>SET</strong> <code>Set_Inp_Shor_Stat</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Close or open the input short across the load terminals</li>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Inp_Shor_Stat</code> · → BOOL · †<br>Query the input short state</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>INPUT</code></strong><ul>
+<li><code>SHORT</code> — <strong>DO</strong> <code>Do_Input_Short</code> · †<br>Short On/Off</li>
+</ul>
+</li>
+<li><strong><code>MEAS</code></strong><ul>
+<li><strong><code>CURR</code></strong><ul>
+<li><code>DC?</code> — <strong>NAB</strong> <code>Get_Meas_Curr_Dc</code> · → NR3 A · †<br>Measure the DC current flowing into the load</li>
+</ul>
+</li>
+<li><strong><code>POW</code></strong><ul>
+<li><code>DC?</code> — <strong>NAB</strong> <code>Get_Meas_Pow_Dc</code> · → NR3 W · †<br>Measure the DC power being dissipated</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>DC?</code> — <strong>NAB</strong> <code>Get_Meas_Volt_Dc</code> · → NR3 V · †<br>Measure the DC voltage across the load input</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MODE</code></strong><ul>
+<li><code>CURR</code> — <strong>DO</strong> <code>Set_Mode_Current</code></li>
+<li><code>RES</code> — <strong>DO</strong> <code>Set_Mode_Resistance</code></li>
+<li><code>VOLT</code> — <strong>DO</strong> <code>Set_Mode_Voltage</code></li>
+</ul>
+</li>
+<li><strong><code>PROT</code></strong><ul>
+<li><code>CLE</code> — <strong>DO</strong> <code>Clear_Protection</code></li>
+</ul>
+</li>
+<li><strong><code>RES</code></strong><ul>
+<li><code>TLEV</code> — <strong>SET</strong> <code>Set_Res_Tlev</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set the transient resistance level</li>
+<li><code>RANG</code> — <strong>SET</strong> <code>Set_Resistance_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Ohm)</li>
+<li><code>RANG?</code> — <strong>NAB</strong> <code>Get_Res_Rang</code> · → NR3 Ohm · †<br>Query the resistance range</li>
+<li><code>TLEV?</code> — <strong>NAB</strong> <code>Get_Res_Tlev</code> · → NR3 V · †<br>Query the transient resistance level</li>
+<li><code>TLEV</code> — <strong>DO</strong> <code>Do_Res_Tlev</code> · †<br>Transient Resistance Level</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Res_Trig</code> · †<br>Triggered Resistance Level</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>TRIG</code> — <strong>SET</strong> <code>Set_Res_Lev_Trig</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set the resistance the load takes on when triggered</li>
+<li><code>TRIG?</code> — <strong>NAB</strong> <code>Get_Res_Lev_Trig</code> · → NR3 V · †<br>Query the triggered resistance level</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>STAT</code></strong><ul>
+<li><strong><code>CHAN</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Stat_Chan_Enab</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set which channel status bits are summarised into Channel Summary</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Stat_Chan_Enab</code> · → NR1 · †<br>Query the Channel Status enable mask</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Stat_Chan_Even</code> · → NR1 · †<br>Read and clear the Channel Status event register</li>
+<li><code>COND?</code> — <strong>NAB</strong> <code>Get_Stat_Channel_Cond</code> · → NR1 · †<br>Overpower Circuit Troubleshooting (Figure 3-10)</li>
+</ul>
+</li>
+<li><strong><code>CSUM</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Stat_Csum_Enab</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set which channels are summarised into the Status Byte CSUM bit</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Stat_Csum_Enab</code> · → NR1 · †<br>Query the Channel Summary enable mask</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Stat_Csum_Even</code> · → NR1 · †<br>Read and clear the Channel Summary event register</li>
+</ul>
+</li>
+<li><strong><code>OPER</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Stat_Oper_Enab</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set the Operation Status enable mask</li>
+<li><code>NTR</code> — <strong>SET</strong> <code>Set_Stat_Oper_Ntr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set the Operation Status negative-transition filter</li>
+<li><code>PTR</code> — <strong>SET</strong> <code>Set_Stat_Oper_Ptr</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set the Operation Status positive-transition filter</li>
+<li><code>COND?</code> — <strong>NAB</strong> <code>Get_Stat_Oper_Cond</code> · → NR1 · †<br>Read the Operation Status condition register</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Stat_Oper_Enab</code> · → NR1 · †<br>Query the Operation Status enable mask</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Stat_Oper_Even</code> · → NR1 · †<br>Read and clear the Operation Status event register</li>
+<li><code>NTR?</code> — <strong>NAB</strong> <code>Get_Stat_Oper_Ntr</code> · → NR1 · †<br>Query the Operation Status negative-transition filter</li>
+<li><code>PTR?</code> — <strong>NAB</strong> <code>Get_Stat_Oper_Ptr</code> · → NR1 · †<br>Query the Operation Status positive-transition filter</li>
+</ul>
+</li>
+<li><strong><code>QUES</code></strong><ul>
+<li><code>ENAB</code> — <strong>SET</strong> <code>Set_Stat_Ques_Enab</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set the Questionable Status enable mask</li>
+<li><code>COND?</code> — <strong>NAB</strong> <code>Get_Stat_Ques_Cond</code> · → NR1 · †<br>Read the Questionable Status condition register</li>
+<li><code>ENAB?</code> — <strong>NAB</strong> <code>Get_Stat_Ques_Enab</code> · → NR1 · †<br>Query the Questionable Status enable mask</li>
+<li><code>EVEN?</code> — <strong>NAB</strong> <code>Get_Stat_Ques_Even</code> · → NR1 · †<br>Read and clear the Questionable Status event register</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYST</code></strong><ul>
+<li><code>ERR?</code> — <strong>NAB</strong> <code>Error</code> · → NR2</li>
+</ul>
+</li>
+<li><strong><code>TRAN</code></strong><ul>
+<li><code>TWID</code> — <strong>SET</strong> <code>Set_Tran_Twid</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set the transient pulse width</li>
+<li><code>DCYC</code> — <strong>SET</strong> <code>Set_Transient_Duty</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%)</li>
+<li><code>FREQ</code> — <strong>SET</strong> <code>Set_Transient_Freq</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (Hz)</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Transient_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum</li>
+<li><code>DCYC?</code> — <strong>NAB</strong> <code>Get_Tran_Dcyc</code> · → NR3 % · †<br>Query the transient duty cycle</li>
+<li><code>FREQ?</code> — <strong>NAB</strong> <code>Get_Tran_Freq</code> · → NR3 Hz · †<br>Query the transient frequency</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Tran_Mode</code> · → CRD · †<br>Query the transient mode — CONT, PULS or TOGG</li>
+<li><code>STAT?</code> — <strong>NAB</strong> <code>Get_Tran_Stat</code> · → BOOL · †<br>Query whether transient operation is enabled</li>
+<li><code>TWID?</code> — <strong>NAB</strong> <code>Get_Tran_Twid</code> · → NR3 s · †<br>Query the transient pulse width</li>
+<li><code>TOGG</code> — <strong>DO</strong> <code>Do_Tran_Togg</code> · †<br>Toggled Transient Operation</li>
+<li><code>TWID</code> — <strong>DO</strong> <code>Do_Tran_Twid</code> · †<br>Pulsed Transient Operation</li>
+<li><code>STAT</code> — <strong>DO</strong> <code>Transient_OFF</code> · <code>OFF</code></li>
+<li><code>STAT</code> — <strong>DO</strong> <code>Transient_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>TRIG</code></strong><ul>
+<li><code>SOUR</code> — <strong>SET</strong> <code>Set_Trig_Sour</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Select the trigger source — BUS, EXT, HOLD, LINE or TIM</li>
+<li><code>TIM</code> — <strong>SET</strong> <code>Set_Trig_Tim</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set the internal trigger timer period</li>
+<li><code>SOUR?</code> — <strong>NAB</strong> <code>Get_Trig_Sour</code> · → CRD · †<br>Query the trigger source</li>
+<li><code>TIM?</code> — <strong>NAB</strong> <code>Get_Trig_Tim</code> · → NR3 s · †<br>Query the internal trigger timer period</li>
+<li><code>IMM</code> — <strong>DO</strong> <code>Do_Trig_Imm</code> · †<br>Trigger immediately, whatever the selected trigger source</li>
+<li><code>SOUR</code> — <strong>DO</strong> <code>Do_Trig_Sour</code> · †</li>
+</ul>
+</li>
+<li><strong><code>VOLT</code></strong><ul>
+<li><code>RANG</code> — <strong>SET</strong> <code>Set_Voltage_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V)</li>
+<li><code>SLEW?</code> — <strong>NAB</strong> <code>Get_Volt_Slew</code> · → NR3 V · †<br>Query the voltage slew rate</li>
+<li><code>TLEV?</code> — <strong>NAB</strong> <code>Get_Volt_Tlev</code> · → NR3 V · †<br>Query the transient voltage level</li>
+<li><code>SLEW</code> — <strong>DO</strong> <code>Do_Volt_Slew</code> · †<br>Slew Rate</li>
+<li><code>TLEV</code> — <strong>DO</strong> <code>Do_Volt_Tlev</code> · †<br>Transient Voltage Level</li>
+<li><code>TRIG</code> — <strong>DO</strong> <code>Do_Volt_Trig</code> · †<br>Triggered Voltage Level</li>
+<li><strong><code>LEV</code></strong><ul>
+<li><code>TRIG</code> — <strong>SET</strong> <code>Set_Volt_Lev_Trig</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set the voltage level the load takes on when triggered</li>
+<li><code>TRIG?</code> — <strong>NAB</strong> <code>Get_Volt_Lev_Trig</code> · → NR3 V · †<br>Query the triggered voltage level</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Clear_Status</code></li>
+<li><code>*RDT?</code> — <strong>NAB</strong> <code>Get_Rdt</code> · → 1 value · †<br>Return the device identification / topology string</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD<br>IDN</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code></li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*RCL &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Rcl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SAV &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sav</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Status_Byte</code> · → NR1</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Trigger</code></li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Trigger_Immediate</code></li>
+</ul>
+<!-- END GENERATED --><hr>
+<h2>Notes carried over</h2>
+<p>The <strong>Agilent/Keysight 6060B</strong> is a <strong>DC Electronic Load</strong>.</p>
+<p>Think of this as a &quot;Reverse Power Supply.&quot; Instead of <em>pushing</em> power out, it <em>swallows</em> (sinks) power to test batteries, power supplies, or solar panels. Because of this, the commands look similar to a power supply, but the physics are backwards.</p>
+<pre><code class="language-json">&quot;6060B&quot;: {&quot;type&quot;: &quot;DC Electronic Load&quot;, &quot;notes&quot;: &quot;300W, 60V, 60A. Single Input.&quot;}
+</code></pre>
+<p>Here is the SCPI command tree for controlling the load.</p>
+<hr>
+<h3><strong>1. The <code>INPut</code> Subsystem (The &quot;On&quot; Switch)</strong></h3>
+<p>On a power supply, this is called <code>OUTPut</code>. On a load, it is called <code>INPut</code> because power is going <em>in</em>.</p>
+<ul>
+<li><strong><code>INPut</code></strong></li>
+<li><code>:STATe</code> <code>ON|OFF</code>  Connects the load to your device (starts drawing current).</li>
+<li><code>:SHORt</code> <code>ON|OFF</code>  <strong>Warning:</strong> Simulates a dead short circuit across the terminals (used to test fuse blowing or OCP).</li>
+<li><code>:PROTection:CLEar</code>  Resets the load if Over-Power or Over-Temp tripped.</li>
+</ul>
+<hr>
+<h3><strong>2. The <code>MODE</code> Subsystem (Operation Type)</strong></h3>
+<p>You must decide how the load behaves before setting values.</p>
+<ul>
+<li><strong><code>MODE</code></strong></li>
+<li><code>:CURRent</code>  <strong>CC Mode:</strong> Load keeps current constant (e.g., &quot;Draw exactly 5A&quot;). Best for battery discharge tests.</li>
+<li><code>:VOLTage</code>  <strong>CV Mode:</strong> Load keeps voltage constant (acts like a massive Zener diode). Best for testing current chargers.</li>
+<li><code>:RESistance</code>  <strong>CR Mode:</strong> Load acts like a power resistor.</li>
+</ul>
+<hr>
+<h3><strong>3. The Control Subsystems (<code>CURRent</code>, <code>VOLTage</code>, <code>RESistance</code>)</strong></h3>
+<p>Once you pick a Mode (above), you use the matching branch to set the levels.</p>
+<ul>
+<li><p><strong><code>CURRent</code></strong> (Use when in CC Mode)</p>
+</li>
+<li><p><code>[:LEVel]</code> <code>&lt;amps&gt;</code>  The main current setting (e.g., <code>CURR 5</code>).</p>
+</li>
+<li><p><code>:RANGe</code> <code>&lt;amps&gt;</code>  Select measurement range (Low range = more accurate for small currents).</p>
+</li>
+<li><p><code>:SLEW</code> <code>&lt;amps/sec&gt;</code>  How fast the current changes (prevents ringing).</p>
+</li>
+<li><p><code>:TLEVel</code> <code>&lt;amps&gt;</code>  <strong>Transient Level:</strong> The &quot;Pulse&quot; current value (see Transients below).</p>
+</li>
+<li><p><strong><code>VOLTage</code></strong> (Use when in CV Mode)</p>
+</li>
+<li><p><code>[:LEVel]</code> <code>&lt;volts&gt;</code></p>
+</li>
+<li><p><code>:RANGe</code> <code>&lt;volts&gt;</code></p>
+</li>
+<li><p><code>:TLEVel</code> <code>&lt;volts&gt;</code></p>
+</li>
+<li><p><strong><code>RESistance</code></strong> (Use when in CR Mode)</p>
+</li>
+<li><p><code>[:LEVel]</code> <code>&lt;ohms&gt;</code></p>
+</li>
+<li><p><code>:RANGe</code> <code>&lt;ohms&gt;</code></p>
+</li>
+<li><p><code>:TLEVel</code> <code>&lt;ohms&gt;</code></p>
+</li>
+</ul>
+<hr>
+<h3><strong>4. The <code>TRANsient</code> Subsystem (Dynamic Testing)</strong></h3>
+<p>The 6060B is famous for its ability to toggle rapidly between two levels (Level A and Level B) to test how a power supply reacts to load spikes.</p>
+<ul>
+<li><strong><code>TRANsient</code></strong></li>
+<li><code>:STATe</code> <code>ON|OFF</code>  Turn the pulsing on.</li>
+<li><code>:MODe</code> <code>CONTinuous|PULSe|TOGGle</code>  Cont (Train of pulses) or Pulse (One shot).</li>
+<li><code>:FREQuency</code> <code>&lt;hertz&gt;</code>  How fast to switch (e.g., 1000Hz).</li>
+<li><code>:DCYCle</code> <code>&lt;percent&gt;</code>  Duty Cycle (e.g., 50%).</li>
+</ul>
+<blockquote>
+<p><strong>How it works:</strong> If you are in <strong>CC Mode</strong>, the load oscillates between <code>CURRent:LEVel</code> (Main) and <code>CURRent:TLEVel</code> (Transient).</p>
+</blockquote>
+<hr>
+<h3><strong>5. The <code>MEASure</code> Subsystem (Readback)</strong></h3>
+<p>Ask the load what is actually happening.</p>
+<ul>
+<li><strong><code>MEASure</code></strong></li>
+<li><code>:VOLTage?</code>  Measures voltage at the terminals.</li>
+<li><code>:CURRent?</code>  Measures current sinking into the load.</li>
+<li><code>:POWer?</code>  Calculates Watts ().</li>
+</ul>
+<hr>
+<h3><strong>Usage Example: Battery Discharge Test</strong></h3>
+<p>You want to discharge a battery at exactly <strong>2 Amps</strong> and stop if the voltage drops.</p>
+<p><strong>1. Setup:</strong></p>
+<pre><code class="language-text">MODE:CURR             (Set to Constant Current mode)
+CURR:RANG 60          (Set range to 60A to be safe)
+CURR 2.0              (Set discharge rate to 2A)
+INPut ON              (Start discharging)
+</code></pre>
+<p><strong>2. Monitoring Loop (Query):</strong></p>
+<pre><code class="language-text">MEAS:VOLT?            (Read battery voltage)
+MEAS:CURR?            (Confirm we are drawing 2A)
+</code></pre>
+<p><strong>3. Stop:</strong></p>
+<pre><code class="language-text">INPut OFF             (Stop discharge)
+</code></pre>
+<h3><strong>Comparison: Setting vs. Query</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Command</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Set</strong> Mode</td>
+<td><code>MODE:CURR</code></td>
+<td>Sets the load to Constant Current.</td>
+</tr>
+<tr>
+<td><strong>Ask</strong> Mode</td>
+<td><code>MODE?</code></td>
+<td>Returns <code>CURR</code>.</td>
+</tr>
+<tr>
+<td><strong>Set</strong> Value</td>
+<td><code>CURR 10</code></td>
+<td>Sets the load to draw 10 Amps.</td>
+</tr>
+<tr>
+<td><strong>Ask</strong> Value</td>
+<td><code>CURR?</code></td>
+<td>Returns <code>10.000</code> (The <em>setting</em>, not the measurement).</td>
+</tr>
+<tr>
+<td><strong>Measure</strong></td>
+<td><code>MEAS:CURR?</code></td>
+<td>Returns <code>9.998</code> (The <em>actual</em> current flowing).</td>
+</tr>
+<tr>
+<td><strong>Set</strong> Slew</td>
+<td><code>CURR:SLEW 5000</code></td>
+<td>Current changes at 5000 A/sec.</td>
+</tr>
+</tbody></table>
+<h3><strong>Common &quot;Gotcha&quot; with Electronic Loads</strong></h3>
+<p><strong>The &quot;Minimum Voltage&quot; Limit:</strong>
+The 6060B needs a tiny bit of voltage (usually around 2V) to &quot;turn on&quot; its internal transistors.</p>
+<ul>
+<li>If you try to pull <strong>20 Amps</strong> from a <strong>1V</strong> source, the load cannot do it. It will likely saturate and the &quot;UNR&quot; (Unregulated) error light will turn on.</li>
+<li><strong>Query:</strong> <code>STAT:QUES:COND?</code> can tell you if the unit is &quot;Unregulated&quot; (failing to hold the setpoint).</li>
+</ul>
+<p>Based on the <strong>Agilent 6060B Single-Input Electronic Load Programming Guide</strong>, here is the complete and updated SCPI command tree.</p>
+<p>The 6060B command set is divided into subsystems that control the &quot;input&quot; (which acts like a power supply&#39;s output), the operating mode (CC, CV, CR), and the dynamic transient generator.</p>
+<h3><strong>1. The <code>MEASure</code> Subsystem (Readback)</strong></h3>
+<p>These queries read the actual voltage, current, and power at the input terminals.</p>
+<ul>
+<li><strong><code>MEASure</code></strong></li>
+<li></li>
+</ul>
+<p><code>:CURRent[:DC]?</code>  Returns the actual current flowing into the load.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:VOLTage[:DC]?</code>  Returns the actual voltage across the terminals.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:POWer[:DC]?</code>  Returns the calculated power ().</p>
+<hr>
+<h3><strong>2. The <code>MODE</code> Subsystem (Operation Type)</strong></h3>
+<p>This subsystem selects which regulation loop is active. You must select the mode before setting the levels.</p>
+<ul>
+<li><strong><code>MODE</code></strong></li>
+<li></li>
+</ul>
+<p><code>:CURRent</code>  <strong>CC Mode:</strong> Load regulates current (battery discharge, power supply testing).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:VOLTage</code>  <strong>CV Mode:</strong> Load regulates voltage (shunt regulator, current source testing).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:RESistance</code>  <strong>CR Mode:</strong> Load acts like a variable resistor.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>?</code>  Query returns <code>CURR</code>, <code>VOLT</code>, or <code>RES</code>.</p>
+<hr>
+<h3><strong>3. The <code>INPut</code> Subsystem (On/Off &amp; Safety)</strong></h3>
+<p>Controls the physical connection and input protection logic.</p>
+<ul>
+<li><strong><code>INPut</code></strong></li>
+<li></li>
+</ul>
+<p><code>[:STATe]</code> <code>ON|OFF</code>  Turns the load input on or off.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:SHORt</code> <code>ON|OFF</code>  Simulates a physical short circuit across the input terminals.</p>
+<ul>
+<li><code>:PROTection</code></li>
+<li></li>
+</ul>
+<p><code>:CLEar</code>  Clears a latched protection fault (OV, OC, OP, OT).</p>
+<ul>
+<li><em>Note: If the fault condition persists, the protection will trip again immediately.</em></li>
+</ul>
+<hr>
+<h3><strong>4. The <code>CURRent</code> Subsystem (CC Mode Settings)</strong></h3>
+<p>Active when <code>MODE:CURR</code> is selected.</p>
+<ul>
+<li><strong><code>CURRent</code></strong></li>
+<li><code>[:LEVel]</code></li>
+<li></li>
+</ul>
+<p><code>[:IMMediate]</code> <code>&lt;amps&gt;</code>  Sets the main current level (Level A).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TRIGgered</code> <code>&lt;amps&gt;</code>  Sets the current level to apply <em>after</em> a trigger event.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TLEVel</code> <code>&lt;amps&gt;</code>  Sets the <strong>Transient</strong> current level (Level B) used during pulsing.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:RANGe</code> <code>&lt;amps&gt;</code>  Selects the measurement/setting range (e.g., 6A or 60A).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:SLEW</code> <code>&lt;amps/sec&gt;</code>  Sets the rate of change for current transitions (prevents ringing).</p>
+<ul>
+<li><p><code>:MAXimum</code> / <code>:MINimum</code> can also be used.</p>
+</li>
+<li><p><code>:PROTection</code></p>
+</li>
+<li></li>
+</ul>
+<p><code>[:LEVel]</code> <code>&lt;amps&gt;</code>  Sets the software current limit (Over-Current Protection).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:DELay</code> <code>&lt;seconds&gt;</code>  Time to allow current spikes before tripping protection.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:STATe</code> <code>ON|OFF</code>  Enable or disable the OCP circuit.</p>
+<hr>
+<h3><strong>5. The <code>VOLTage</code> Subsystem (CV Mode Settings)</strong></h3>
+<p>Active when <code>MODE:VOLT</code> is selected.</p>
+<ul>
+<li><strong><code>VOLTage</code></strong></li>
+<li><code>[:LEVel]</code></li>
+<li></li>
+</ul>
+<p><code>[:IMMediate]</code> <code>&lt;volts&gt;</code>  Sets the main voltage level (Level A).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TRIGgered</code> <code>&lt;volts&gt;</code>  Sets voltage level for trigger events.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TLEVel</code> <code>&lt;volts&gt;</code>  Sets the <strong>Transient</strong> voltage level (Level B).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:RANGe</code> <code>&lt;volts&gt;</code>  Selects voltage range.</p>
+<hr>
+<h3><strong>6. The <code>RESistance</code> Subsystem (CR Mode Settings)</strong></h3>
+<p>Active when <code>MODE:RES</code> is selected.</p>
+<ul>
+<li><strong><code>RESistance</code></strong></li>
+<li><code>[:LEVel]</code></li>
+<li></li>
+</ul>
+<p><code>[:IMMediate]</code> <code>&lt;ohms&gt;</code>  Sets the main resistance (Level A).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TRIGgered</code> <code>&lt;ohms&gt;</code>  Sets resistance for trigger events.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TLEVel</code> <code>&lt;ohms&gt;</code>  Sets the <strong>Transient</strong> resistance (Level B).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:RANGe</code> <code>&lt;ohms&gt;</code>  Selects resistance range.</p>
+<hr>
+<h3><strong>7. The <code>TRANsient</code> Subsystem (Dynamic Switching)</strong></h3>
+<p>Configures the internal generator that toggles between the Main Level (IMMediate) and the Transient Level (TLEVel).</p>
+<ul>
+<li><strong><code>TRANsient</code></strong></li>
+<li></li>
+</ul>
+<p><code>[:STATe]</code> <code>ON|OFF</code>  Enables the transient generator.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:MODE</code> <code>CONTinuous|PULSe|TOGGle</code>  Selects how the load switches:</p>
+<ul>
+<li><p><strong>CONT:</strong> Oscillates continuously between A and B at the set frequency.</p>
+</li>
+<li><p><strong>PULS:</strong> Generates a single pulse to Level B upon a trigger.</p>
+</li>
+<li><p><strong>TOGG:</strong> Switches to Level B on one trigger, and back to Level A on the next.</p>
+</li>
+<li></li>
+</ul>
+<p><code>:FREQuency</code> <code>&lt;hertz&gt;</code>  Frequency of the oscillation (0.25 Hz to 10 kHz).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:DCYCle</code> <code>&lt;percent&gt;</code>  Duty cycle (pulse width) in percent (3% to 97%).</p>
+<hr>
+<h3><strong>8. The <code>TRIGger</code> Subsystem (Timing &amp; Sync)</strong></h3>
+<p>Controls external or bus synchronization for buffered steps or pulses.</p>
+<ul>
+<li><strong><code>TRIGger</code></strong></li>
+<li><code>[:SEQuence]</code></li>
+<li></li>
+</ul>
+<p><code>:SOURce</code> <code>BUS|EXTernal|HOLD|IMMediate|LINE|TIMer</code>  Selects the trigger source.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:TIMer</code> <code>&lt;seconds&gt;</code>  Sets the internal timer interval if source is TIMer.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:DELay</code> <code>&lt;seconds&gt;</code>  Time to wait after a trigger before updating the input.</p>
+<ul>
+<li></li>
+</ul>
+<p><strong><code>ABORt</code></strong>  Stops any trigger sequence in progress.</p>
+<ul>
+<li><strong><code>INITiate</code></strong></li>
+<li></li>
+</ul>
+<p><code>[:IMMediate]</code>  Arms the trigger system to wait for an event.</p>
+<hr>
+<h3><strong>9. The <code>STATus</code> Subsystem (Diagnostics)</strong></h3>
+<ul>
+<li><strong><code>STATus</code></strong></li>
+<li></li>
+</ul>
+<p><code>:CSUMmary?</code>  Channel Summary (for mainframe compatibility).</p>
+<ul>
+<li><strong><code>:QUEStionable</code></strong></li>
+<li></li>
+</ul>
+<p><code>:CONDition?</code>  Real-time status (OT, OV, OP, Unregulated).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:EVENt?</code>  Latched errors since last read.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:ENABle</code> <code>&lt;mask&gt;</code>  Enable bits for SRQ generation.</p>
+<ul>
+<li><strong><code>:OPERation</code></strong></li>
+<li></li>
+</ul>
+<p><code>:CONDition?</code>  Current mode status (CAL, TRIG, WTG).</p>
+<hr>
+<h3><strong>10. The <code>SYSTem</code> Subsystem (Utilities)</strong></h3>
+<ul>
+<li><strong><code>SYSTem</code></strong></li>
+<li></li>
+</ul>
+<p><code>:ERRor?</code>  Read the error queue (e.g., &quot;Data out of range&quot;).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:VERSion?</code>  Returns SCPI version (e.g., &quot;1990.0&quot;).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>:PERSona</code> <code>DEFault|L6060</code>  Sets the command language personality.</p>
+<hr>
+<h3><strong>11. Common Commands (IEEE 488.2)</strong></h3>
+<ul>
+<li></li>
+</ul>
+<p><code>*CLS</code>  Clear Status.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>*RST</code>  Reset Instrument.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>*TRG</code>  Trigger Command (Used when TRIG:SOUR BUS is set).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>*SAV &lt;n&gt;</code> / <code>*RCL &lt;n&gt;</code>  Save/Recall state (0–6).</p>
+<ul>
+<li></li>
+</ul>
+<p><code>*IDN?</code>  Identification String.</p>
+<ul>
+<li></li>
+</ul>
+<p><code>*TST?</code>  Self-Test (Returns 0 if pass).</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Load/6060B/commands_tree.md</code>
+  </div>
+</body>
+</html>

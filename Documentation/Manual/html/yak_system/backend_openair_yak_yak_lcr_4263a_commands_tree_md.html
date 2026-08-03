@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>4263A / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>LCR/4263A — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>28 commands</strong> — SET 16 · RIG 0 · NAB 6 · DO 6 · 28 unverified (100%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Tree</h2>
+<ul>
+<li><code>FETCh?</code> — <strong>NAB</strong> <code>Fetch_Existing</code> · → 1 value · †<br>Retrieves the most recent measurement data.</li>
+<li><code>MEASure?</code> — <strong>NAB</strong> <code>Measure</code> · → 1 value · †<br>Executes a complete measurement and retrieves data.</li>
+<li><code>READ?</code> — <strong>NAB</strong> <code>Read_Measurement</code> · → 1 value · †<br>Triggers a measurement and retrieves the results.</li>
+<li><code>TRIGger</code> — <strong>DO</strong> <code>Trigger_Immediate</code> · †<br>Manually triggers a measurement.</li>
+<li><strong><code>CALCulate</code></strong><ul>
+<li><strong><code>LIMit</code></strong><ul>
+<li><code>LOWer</code> — <strong>SET</strong> <code>Limit_Lower</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · †<br>Sets the lower limit for the comparator.</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Limit_State</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enables or disables the comparator function.</li>
+<li><code>UPPer</code> — <strong>SET</strong> <code>Limit_Upper</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · †<br>Sets the higher limit for the comparator.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Display_State</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turns the display ON or OFF.</li>
+</ul>
+</li>
+<li><strong><code>SENSe</code></strong><ul>
+<li><code>FUNCtion</code> — <strong>SET</strong> <code>Measurement_Function</code> · <code>&lt;function&gt;</code> · args: <code>function</code> · enum · †<br>Selects measurement parameters (e.g., CP-D, LS-Q).</li>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Test_Frequency</code> · <code>&lt;freq&gt;</code> · args: <code>freq</code> · †<br>Sets the test signal frequency (100, 1k, 10k, 100k Hz).</li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Average_Count</code> · <code>&lt;count&gt;</code> · args: <code>count</code> · integer · †<br>Sets the number of measurement averages (1 to 256).</li>
+</ul>
+</li>
+<li><strong><code>CORRection</code></strong><ul>
+<li><code>OPEN</code> — <strong>DO</strong> <code>Correction_Open</code> · †<br>Executes the OPEN correction.</li>
+<li><code>SHORt</code> — <strong>DO</strong> <code>Correction_Short</code> · †<br>Executes the SHORT correction.</li>
+</ul>
+</li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Current_Range</code> · <code>&lt;range&gt;</code> · args: <code>range</code> · numeric · †<br>Sets the current measurement range.</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><strong><code>RANGe</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Voltage_Range_Auto</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enables or disables auto-ranging.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SOURce</code></strong><ul>
+<li><code>VOLTage</code> — <strong>SET</strong> <code>Set_Test_Level</code> · <code>&lt;level&gt;</code> · args: <code>level</code> · numeric (V) · †<br>Sets the test signal level (e.g., 100m, 500m, 1V).</li>
+<li><strong><code>BIAS</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Bias_State</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turns the DC bias ON or OFF.</li>
+<li><code>VOLTage</code> — <strong>SET</strong> <code>Set_Bias_Voltage</code> · <code>&lt;volt&gt;</code> · args: <code>volt</code> · numeric (V) · †<br>Sets the internal DC bias voltage level.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>KLOCk</code> — <strong>SET</strong> <code>Key_Lock</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · †<br>Locks or unlocks the front-panel keys.</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Get_Error_Queue</code> · → NR2 · †<br>Queries the next entry in the error queue.</li>
+<li><strong><code>BEEPer</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Beeper</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turns the front-panel beeper ON or OFF.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>DELay</code> — <strong>SET</strong> <code>Trigger_Delay</code> · <code>&lt;seconds&gt;</code> · args: <code>seconds</code> · numeric (s) · †<br>Sets the delay time before measurement starts.</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Trigger_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum · †<br>Selects trigger source (INT, MAN, EXT, or BUS).</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Clear_Status</code> · †<br>Clears the status byte and error queue.</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Operation_Complete</code> · → NR1 · †<br>Returns &#39;1&#39; once all pending operations are completed.</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD · †<br>Queries the instrument identification (Manufacturer, Model, Serial, Firmware).</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code> · †<br>Resets the unit to its factory default settings.</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Trigger_Bus</code> · †<br>Triggers the unit (equivalent to the Bus trigger).</li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/LCR/4263A/commands_tree.md</code>
+  </div>
+</body>
+</html>

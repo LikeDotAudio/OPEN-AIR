@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Changelog / 2026-07-03 - Docker & Deployment</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Changelog — 2026-07-03</h1>
+<h2>Meters, faders &amp; metering zoo</h2>
+<h3>Middle-click random test (restored)</h3>
+<ul>
+<li>Middle-clicking a <strong>VU/needle meter</strong> or a <strong>bar graph</strong> now jumps it to a
+random valid value within the domain (snapped to <code>step</code>) so ballistics can be
+eyeballed. Shared handler in <code>frameLayout/FieldComponent.jsx</code> (<code>onMouseDown</code>,
+button 1), wired onto the VU-knob, needle, and bar-graph wrappers.</li>
+</ul>
+<h3>Needle meter — fit-guard for shape cutouts</h3>
+<ul>
+<li><code>libControl/metering/NeedleMeter.jsx</code>: added a fit-guard that clamps the pivot
+inside the bezel interior and caps the arc radius so the dial/needle can&#39;t be
+clipped by the shape cutout (was happening on tall-origin shapes like
+squircle/squectangle in near-square per-shape zoo cards). No-op when the gauge
+already fits, so the wide &quot;All&quot; grid is unchanged.</li>
+</ul>
+<h3>Horizontal Bar meter zoo — row spacing</h3>
+<ul>
+<li><code>frameLayout/OcaBlock.jsx</code> now honors <code>row_spacing</code> / <code>column_spacing</code>
+(node-level or under <code>layout</code>, default 0). Set <code>row_spacing: 28</code> on the
+Horizontal bar demo block so the stacked bars stop overlapping.</li>
+</ul>
+<h3>New metering zoo elements</h3>
+<ul>
+<li>Added <code>9_Zoo/2_Metering/6_EQ/EQ.json</code> (<code>_Equalization</code>) and
+<code>9_Zoo/2_Metering/7_Dynamics/Dynamics.json</code> (<code>_AudioDynamics</code>).</li>
+</ul>
+<h3>Composite widgets — demo cherry-picks</h3>
+<ul>
+<li><strong>MDP</strong> (<code>libControl/special/MDP/MDP.jsx</code>, the active <code>window.MDP</code>): free-move
+selection glow, scroll-wheel intensity (native non-passive), 50%-crossing
+haptic detent, and the extended rotary needle now only shows while intensity
+is being adjusted.</li>
+<li><strong>CMDP</strong> (<code>libControl/special/CMDP/CMDP.jsx</code>): rewired into the demo&#39;s
+multi-channel circular display — per-channel faders from <code>config.channels[]</code>,
+group coloring/visibility from <code>group_configs[]</code>, segment hit-testing,
+perimeter labels, center hub, and <code>onChange</code> publishing the updated channels.</li>
+<li><strong>LTP</strong> (<code>libControl/faders/LTPFader/LTPFader.jsx</code>): cap drawn directly on the
+canvas (linear travel + rotation as one control), ±135° indicator, double-click
+pan-latch, freestyle mode, wheel fine-tune.</li>
+<li>Bumped <code>?v=</code> cache-bust for CMDP/MDP/LTPFader in <code>index.html</code>.</li>
+</ul>
+<h3>CMDP grouping/editing element (new)</h3>
+<ul>
+<li><strong>Added</strong> <code>libControl/special/CMDP/CMDPEditor.jsx</code> (<code>window.CMDPEditor</code>, type
+<code>_CMDPEditor</code>) — a DOM panel to edit the CMDP&#39;s groups (colour, rename,
+visibility, solo, mute, add/remove) and channels (rename, group reassignment,
+level/depth/angle, visibility, mute, add/remove). Publishes the full
+<code>{ channels, group_configs }</code> state.</li>
+<li><strong>Sync:</strong> <code>FieldComponent</code> now honors an explicit <code>topic</code> / <code>shared_topic</code>
+override so sibling widgets can share one MQTT state key. CMDP now reads
+<code>value.group_configs</code>, publishes <code>group_configs</code> alongside <code>channels</code>, rebuilds
+on external value changes (guarded against mid-drag), and seeds the shared
+topic on mount. The CMDP zoo places the editor beside the CMDP on the shared
+topic <code>audio/cmdp/1</code> (2-column layout), so edits live-update the display.</li>
+</ul>
+<h3>Meter ballistics — decay to floor</h3>
+<ul>
+<li><code>NeedleMeter</code> and <code>MeterBarGraph</code> now use <strong>peak-hold-release</strong> ballistics: a
+new sample latches a peak the needle/bar attacks up to, then it falls back to
+the floor (<code>min</code>) at the designated <code>release_ms</code> rate instead of holding the
+value — pairs with the middle-click test (jump, then decay to rest).</li>
+</ul>
+<h3>Crafty Knobs — Pan and Spread Variants</h3>
+<ul>
+<li><code>Crafty.jsx</code>: Added new &quot;pan&quot; and &quot;spread&quot; variants for both <code>spoked</code> and <code>led_ring</code> styles.<ul>
+<li><code>spoked_pan</code> / <code>led_ring_pan</code>: Visually indicates panning relative to center (0° / 12 o&#39;clock).</li>
+<li><code>spoked_spread</code> / <code>led_ring_spread</code>: Visually indicates bidirectional spread outward from center.</li>
+</ul>
+</li>
+<li><code>Crafty.json</code>: Added the four new Crafty Knob variants to the Zoo and updated layout to 5 columns.</li>
+</ul>
+<h2>Removed: Edit Detector</h2>
+<ul>
+<li>The Edit Detector metering component was <strong>removed</strong> (files, the
+<code>_EditDetector</code> dispatch branch, and its <code>index.html</code> script tag) at the
+user&#39;s request. The section below is retained for history only.</li>
+</ul>
+<h2>New metering component: Edit Detector (LCARS / Okudagram)  — REMOVED</h2>
+<ul>
+<li><strong>Added</strong> <code>FrontEnd/libControl/metering/EditDetector/EditDetector.jsx</code> — a new
+video &quot;edit&quot; meter. It averages the <strong>luminance</strong> of the selected input each
+frame (Rec.709 luma from a 160×90 sampling canvas) and flags a large
+frame-to-frame jump as an <strong>edit</strong> (a cut / scene change), appending each one
+to a time-stamped <strong>Edit Log</strong> (<code>HH:MM:SS.mmm</code>, direction, Δ%, luma from→to).</li>
+<li><strong>Input source</strong> and <strong>view presets</strong> are two visually separated LCARS button
+groups (per request):<ul>
+<li><strong>SOURCE</strong> — <code>TEST PATTERN</code> (standard SMPTE 75% colour bars, drawn on a
+canvas), <code>CAPTURE TAB</code> (<code>getDisplayMedia</code>, real pixels + audio), <code>LOAD FILE</code>
+(local video), URL field + <code>LOAD URL</code> (CORS <code>.mp4/.webm</code>). Whichever is
+selected is the analyzed input.</li>
+<li><strong>PRESETS</strong> — <code>DEFAULT / AUDIO / ALL VIDEO / COLOUR / LUMA</code> layouts, plus a
+separate <strong>SENS</strong> group (<code>SUBTLE / NORMAL / HARD</code>) for the detector&#39;s own
+sensitivity threshold. <code>LAYOUT</code> button top-right resets to DEFAULT.</li>
+</ul>
+</li>
+<li><strong>Meter panels</strong> (preview, luminance, colour R/G/B, audio RMS, edit log): each
+has a <code>⤢</code> expand button; <strong>double-clicking a panel restores the regular
+multi-panel view</strong>.</li>
+<li>Styled in the LCARS/Okudagram aesthetic (black field, rounded pill buttons,
+coloured group elbows, condensed uppercase type).</li>
+</ul>
+<h3>Wiring</h3>
+<ul>
+<li><strong>Added</strong> dispatch branch for <code>type: &quot;_EditDetector&quot;</code> in
+<code>FrontEnd/frameLayout/FieldComponent.jsx</code> → <code>window.EditDetector</code>.</li>
+<li><strong>Added</strong> script tag in <code>FrontEnd/index.html</code> (loads after AudioAnalyzerDemo).</li>
+<li><strong>Added</strong> <code>FrontEnd/Gui_Frames/Window_2/right_50/top_100/9_Zoo/2_Metering/6_Edit_Detector/Edit_Detector.json</code>
+so it appears in the Metering zoo.</li>
+</ul>
+<h3>Verified</h3>
+<ul>
+<li>Both <code>EditDetector.jsx</code> and the edited <code>FieldComponent.jsx</code> transpile cleanly
+with <code>@babel/standalone</code> (<code>presets: [&#39;react&#39;]</code>) — the same in-browser pipeline
+index.html uses. Not yet exercised live in the running orchestrator.</li>
+</ul>
+<h3>Follow-ups noted (not yet done)</h3>
+<ul>
+<li>The <code>INPUT UNDER TEST</code> / <code>CH 1–9</code> channel strip from the mock is intentionally
+omitted for now (per request).</li>
+<li>Cross-origin URLs without CORS headers taint the canvas; the meter surfaces
+&quot;source is CORS-tainted — pixels unreadable&quot; and stops sampling that source.</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Deployment/Changelog/2026-07-03.md</code>
+  </div>
+</body>
+</html>

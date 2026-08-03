@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Development (CHANGELOG) - Development</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Changelog</h1>
+<h2>2026-07-27 - A Command Library Instead Of A Command Table</h2>
+<p>515 commands became 3656, read out of the instrument manuals we actually own.
+Every query now declares what it answers with, every setter what it accepts, and
+every command carries its short-form spelling. The device knowledge base stopped
+being duplicated.</p>
+<h3>The sweep</h3>
+<ul>
+<li><strong><code>Documents/Audits/Yak commands missing.md</code></strong> — every SCPI command the manuals
+document and the tables did not, as pasteable YAK entries. 2483 of them, 1128
+queries. Written before anything was applied, so the diff between the audit and
+the tables is reviewable rather than a fait accompli.</li>
+<li><strong>+3141 commands across 12 models.</strong> DS1104Z 73 → 760, Porta_one 35 → 608,
+54641D 113 → 438, the Generators 25 → 254, N9340B 36 → 223, the Power modules
+13-18 → ~190, 34401A 49 → 155, 6060B 28 → 122.</li>
+<li><strong>NAB went from 95 to 1553.</strong> The tables could set far more than they could read
+back, which is why a panel meter showed a dash while the knob beside it worked.</li>
+<li><strong>Two PDFs read directly</strong>, after the markdown-only sweep reported both models
+unreachable:<ul>
+<li><code>Porta_one</code> — the markdown was mojibake and I called it unrecoverable. Wrong:
+the PDF has a text layer whose font is offset by a constant <strong>29</strong>. Shift every
+code point back and the document is intact (<code>DQ\x03IRUP</code> is <code>any form</code>). No OCR.
+573 commands, 286 queries, 311 factory defaults, and the choice lists.</li>
+<li><code>6060B</code> — a genuine 93-page scan: <code>pdftotext</code> returns 93 characters for the
+whole document and <code>tesseract</code> is not installed. Read visually, and what is in
+the table is <strong>Table 4-1, &quot;Summary of Commands and Parameters&quot;</strong> — the manual&#39;s
+own authoritative list rather than a regex sweep of prose. It also documents
+three aliases worth knowing before binding: <code>INST</code>=<code>CHAN</code>, <code>OUTP</code>=<code>INP</code>,
+<code>FUNC</code>=<code>MODE</code>.</li>
+</ul>
+</li>
+<li><strong>Three models remain unreachable</strong>: <code>3235</code>, <code>HP_8903B</code> and the LCR&#39;s own
+programming manual are PDF-only scans with no OCR available. The Router&#39;s 24
+panel bindings still name commands that do not exist.</li>
+</ul>
+<h3>What a question answers</h3>
+<ul>
+<li><strong><code>returns</code> on all 1553 NAB entries</strong> — <code>{count, type, unit}</code>, or one named field
+per answer where the command is <strong>several questions in a row</strong>. 33 are:
+<code>MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?</code> puts four values on the wire and a
+<code>yak_readout</code> widget bound to it received one semicolon-joined string with no
+rule for splitting it. <code>NAB_all_marker_settings</code> returns <strong>twelve</strong> the same way.</li>
+<li><code>count</code> is exact — the number of <code>?</code>, which also correctly ignores the leading
+setter in <code>INST:NSEL &lt;chan&gt;;MEAS:VOLT?;MEAS:CURR?</code> (two answers, not three).</li>
+<li>Types are the SCPI response forms the 6060B manual&#39;s Tables 2-1 and 2-4 define:
+NR1 / NR2 / NR3 / BOOL / CRD / AARD / BLOCK / ERROR. 43 are the type the 66000A
+dictionary states outright; <strong>429 are left blank rather than guessed</strong>.</li>
+</ul>
+<h3>What a setter accepts</h3>
+<ul>
+<li><strong><code>arg</code> on all 1366 SET/RIG entries</strong> — kind (numeric 412, enum 350, bool 158,
+integer 140, block 9, <strong>unknown 291</strong>), plus <strong>350 choice lists</strong>, <strong>433
+defaults</strong>, 222 units, 60 min/max pairs.</li>
+<li><strong>A range is a property of the instrument, not of the command.</strong> 49 Power setters
+take a voltage; storing min/max on each would be 49 copies of one fact that then
+drift. <code>arg.domain</code> points at <code>model.json</code>, which is already where panels read
+limits from via <code>yak_domain</code>.</li>
+<li><strong><code>limits: &quot;query&quot;</code> on 87</strong> — the instruments that accept <code>MIN</code>/<code>MAX</code> as a query
+argument will report their own limits, so nothing has to author them. Verified
+per manual: the 34401A has 286 such forms, the 33220A 119, the 6060B&#39;s Table 4-1
+offers it on every numeric query. The Rigol&#39;s <code>MIN</code> tokens are measurement-item
+names, not limits; the N9340B and 54641D never mention it.</li>
+<li><strong><code>unverified: true</code> on 3141.</strong> The SCPI is what the manual prints; nothing has
+watched an instrument honour it. <code>grep -c unverified</code> per model says how much of
+a table is unproven.</li>
+</ul>
+<h3><code>scpiFast</code></h3>
+<ul>
+<li><strong>The short-form spelling, under the long form, on 2621 commands.</strong> The 6060B
+manual, chapter 2: <em>&quot;The short form provides the fastest program execution.&quot;</em> It
+also states the construction rule, so this is computed rather than authored — four
+letters or fewer keeps all of them, five or more takes the first four, or the
+first three when the fourth letter is a vowel. That agrees with the mixed-case
+capitals everywhere both exist (<code>RESistance</code> → RES, fourth letter a vowel;
+<code>SOURce</code> → SOUR, not).</li>
+<li><code>repository.rs</code> reads it, <code>Command::template(prefer_fast)</code> picks the form, and all
+four verbs route through <code>get_scpi_form</code>. <strong><code>prefer_short_scpi</code> in config.ini,
+off by default</strong> — the long form is what the tables were swept as and what a
+monitor log is readable in.</li>
+</ul>
+<h3>One knowledge base, not two</h3>
+<ul>
+<li><strong><code>Yak/knownDevices.json</code>, 181 models</strong> with <code>{manufacturer, type, notes}</code>.
+<code>openair-visa/assets/visa_devices.json</code> was <strong>byte-identical</strong> to it and is
+deleted; <code>oa_visa_known_devices/mod.rs</code> now embeds and resolves the Yak copy.</li>
+<li><strong><code>manufacturer</code> restored.</strong> It existed in <code>manager_visa_known_types.py</code> only as
+section comments, so converting to JSON dropped it and sorting the keys destroyed
+even the ordering that implied it. Kept as the source&#39;s own grouping —
+&quot;HP / Agilent / Keysight&quot; is one label because the 34401A was sold under all
+three names as the company changed hands; splitting it would invent a
+distinction the data never made.</li>
+<li><strong>+39 models</strong>, and two types that did not exist: <strong>LCR</strong> and <strong>Distortion</strong>.
+Five models with YAK command tables were absent from the knowledge base
+entirely, so discovery answered &quot;Unknown Instrument&quot; and the panel builder
+skipped them — including Porta_one, which now has the largest vocabulary here.</li>
+</ul>
+<h3>Defects the work exposed</h3>
+<ul>
+<li><strong>Ten hand-authored commands were silently dropped</strong> by the multi-step edit pass
+— three 34401A <code>CALCulate:AVERage</code> queries, four 6060B transient setters, three
+54641D trigger-edge setters, and no other name served their SCPI. Restored from
+git. It recurred once after the first restore and the cause is <strong>not identified</strong>;
+<code>validate_yak_tables.py --snapshot</code> / <code>--against</code> is how it was caught both times
+and is the guard until it is.</li>
+<li><strong>Nine commands had glued mnemonics</strong> — <code>SOURce:CURRentLEVel:TRIGgered</code> is not
+valid SCPI, it is <code>SOURce:CURRent:LEVel:TRIGgered</code>, run together where the manual
+broke a line. Four Power models and the N9340B. Those commands could never have
+worked.</li>
+<li><strong><code>subsystem</code> kept a trailing <code>?</code></strong> on six entries, from building the field off
+the SCPI string without stripping it.</li>
+</ul>
+<h3>New tooling</h3>
+<ul>
+<li><strong><code>Deployment/validate_yak_tables.py</code></strong> — invariant checks (verb matches the
+template&#39;s shape, <code>returns.count</code> equals the number of <code>?</code>, chained queries carry
+one field per answer, enums have choices, no duplicate names or aliased nodes,
+<code>scpiFast</code> really is the short form), plus <code>--snapshot</code> / <code>--against</code> for the
+count regression that needs a baseline. Findings went 518 → 234 as its own
+false positives were fixed and the real defects were repaired.</li>
+<li><code>Deployment/build_yak_command_list.py</code> and <code>build_yak_command_trees.py</code>
+regenerate <code>CommandList.csv</code> and the per-model <code>commands_tree.md</code> views, both
+with <code>--check</code>.</li>
+</ul>
+<h3>Still open</h3>
+<ul>
+<li><strong>122 enums with no choice list</strong>, 44 of them on the 54641D, whose manual has no
+parameter tables — its choices are inline prose. Nothing can generate a legal
+test value for those.</li>
+<li><strong>Nothing was added to RIG.</strong> The manuals name arguments inconsistently, so every
+swept parameter is a one-value SET; the multi-argument commands RIG exists for
+are sitting in SET.</li>
+<li>291 <code>arg</code> blocks and 429 <code>returns</code> types are <code>unknown</code> — a live sweep answers
+both immediately, which is what the <code>unverified</code> flag is waiting for.</li>
+</ul>
+<h2>2026-07-27 - Two Files Per Instrument · YAK Commands Become A Table</h2>
+<p>Both halves of the instrument stack were data pretending to be a GUI. The
+authored panels needed five directories to hold five files, because the frontend
+builds tabs from folders and the templates had been shaped to match. The YAK
+command tables were worse: 176 files shaped like panels, with the actual
+model → command → SCPI table <em>pattern-matched out of them at load</em>. This makes
+each one what it is — panels stay a tree, commands become a table.</p>
+<h3>Instruments: two files, no folders</h3>
+<ul>
+<li><strong><code>&lt;Type&gt;/&lt;Type&gt;.json</code> and <code>&lt;Type&gt;/&lt;Type&gt;_N.json</code></strong> — the instrument, and the
+block that repeats. That is the whole layout; 21 directories are gone.
+<code>Power/Instrument/One_instrument/psu_one.json</code> was two levels of folder around
+one file, and it rendered as a pointless &quot;One instrument&quot; sub-tab.</li>
+<li><strong>Sub-tabs come from top-level keys.</strong> <code>Spectrum.json</code> holds <code>amplitude</code>,
+<code>bandwidth</code>, <code>frequency</code>, <code>markers</code>, <code>traces</code>; the builder writes each to
+<code>0_amplitude/</code>, <code>1_bandwidth/</code> … Key order is tab order. A key holding a MAP of
+panels is one tab with several stacked — the Router&#39;s <code>Coax</code> tab is two cards —
+which is the same either-a-node-or-a-map test <code>LoaderOrchestrator</code> already
+makes on a file&#39;s own root. One key and one panel means no sub-tab at all.
+<code>OaTopicMaker</code> strips the <code>&lt;i&gt;_</code> prefix, so numbering the tabs never moves a
+widget&#39;s topic.</li>
+<li><strong>Header decks live in the N file</strong> as siblings of the <code>${n}</code> block, and a group
+spec asks for one by name. Power keeps both of its decks — the bank of eight
+gets the logger, the quads get the master interlock — out of one file.</li>
+<li><strong><code>manifest.json</code> names neither template path</strong>; both are convention now, and
+<code>panel</code>/<code>unit</code>/<code>exclude</code> are gone with the folders they addressed.</li>
+<li>Verified by building the same simulated bench through the old and new builders:
+52 panel files each way, every MQTT topic prefix and every panel node hash
+identical, one intended difference (Power lost its stray sub-tab).</li>
+</ul>
+<h3>YAK: SET, DO, RIG, NAB</h3>
+<ul>
+<li><strong>One <code>commands.json</code> per model</strong>, 515 commands across 15 models, bucketed
+under the verb that handles it — so a panel author picks <code>yak_type</code> by reading
+the file. Assignment is mechanical from the SCPI: <code>?</code> → NAB, no arguments → DO,
+one argument → SET, two or more → RIG. <code>&lt;chan&gt;</code>/<code>&lt;slot&gt;</code>/<code>&lt;marker_number&gt;</code> are
+not arguments; they identify the instance and are stamped per panel.
+Each command carries <code>description</code>, <code>group</code> and <code>subsystem</code>; <code>scpi</code> is the only
+field YAK reads.</li>
+<li><strong>The model is declared, not inferred.</strong> It used to be read off the file&#39;s
+grandparent directory, so anything nested deeper than <code>&lt;Model&gt;/&lt;Subsystem&gt;/</code>
+was filed under a folder name — <code>_Legacy_Commands</code>, <code>CHANnel</code>, <code>Commands</code> — and
+<strong>391 commands were reachable only through the search-every-model fallback</strong>.</li>
+<li><strong>555 phantom commands gone.</strong> The extractor matched an <code>Execute Command</code> child
+on any key, and every widget wraps its own in a <code>fields</code> object, so <code>fields</code>
+was filed as a command 555 times — 40% of what loaded.</li>
+<li><strong>32 silent collisions resolved.</strong> Nothing enforced one definition per name and
+the winner was whichever file <code>read_dir</code> returned last. On the Power modules
+that decided between <code>INST:NSEL &lt;chan&gt;</code> and <code>INST:NSEL 1</code> — between addressing
+your slot and addressing slot 1 whichever module you clicked. Thirteen scope
+commands existed as per-channel copies (<code>CHANnel1:SCALe</code>, <code>CHANnel2:SCALe</code>, …)
+and collapse to <code>CHANnel&lt;n&gt;:SCALe</code>.</li>
+<li><strong><code>&lt;channel&gt;</code> → <code>&lt;chan&gt;</code> throughout.</strong> Only <code>&lt;chan&gt;</code> is ever stamped, so a
+template spelled the long way reached <code>fill_placeholders</code> unfilled, matched no
+payload key, and the verb refused to send — the module silently never switched
+on. The two spellings were split across the modern and legacy trees.</li>
+<li><strong>Seven names that covered two subsystems are split</strong> — <code>Set_Scale</code> became
+<code>Set_Channel_Scale</code> / <code>Set_Timebase_Scale</code>, likewise Offset, Range and Mode.
+Nothing bound them yet, and it removes a trap: a panel asking for <code>Set_Scale</code>
+had no way to say whether it meant a channel or the timebase.</li>
+<li><strong><code>Multimeter/34401A</code> folded into <code>DMM/34401A</code></strong> — same model, two family
+folders, and two files declaring model <code>34401A</code> would collide at load.</li>
+<li><code>repository.rs</code> reads the declared table instead of walking for panel patterns,
+warns instead of overwriting on a duplicate name, and announces when it falls
+back to another model&#39;s command. <code>yak_crossref.py</code> reads the tables too.
+<code>commands_tree.md</code> and <code>Raw Commands.txt</code> stay — hand-written SCPI reference,
+and the source material for the tables still empty.</li>
+</ul>
+<h3>Two generated sheets</h3>
+<ul>
+<li><strong><code>Yak/CommandList.csv</code> / <code>.xlsx</code></strong> — 515 rows: verb, command, description,
+arguments, instance params, group, subsystem.</li>
+<li><strong><code>Instruments/Instrument functions.csv</code> / <code>.xlsx</code></strong> — 221 rows, one per
+control: tab, panel, block path, widget type, and whether it is driven by a
+<code>yak_handler</code> or still by literal SCPI (87 / 84, plus 49 unbound).</li>
+</ul>
+<p>Both are reports regenerated from the JSON, not sources.</p>
+<h3>Still broken, now visible</h3>
+<ul>
+<li><strong>The Router panels have never worked.</strong> 24 bindings to <code>Set_Relay_Card4</code> …
+<code>Set_Relay_Card9</code>; <code>Router/3235</code> offers <code>Close_Channels</code> / <code>Open_Channels</code> /
+<code>Select_Channel</code>. Predates this work. <code>yak_crossref.py</code> counts a widget as
+BOUND when it carries a <code>yak_handler</code> without checking the command resolves,
+which is why it reports the Router as finished.</li>
+<li><strong>84 controls still carry literal SCPI</strong> in <code>message_details.*.command_value</code>,
+which is inert — only YAK translates and routes. 12 are dead duplicates beside
+a working handler; the rest need binding, and <code>LCR/4263A</code> and
+<code>Distortion/HP_8903B</code> need a vocabulary written before they can be.</li>
+</ul>
+<h2>2026-07-27 - Instruments Become Instances · YAK Drives Real Hardware · Discovery You Can Watch</h2>
+<p>A bench with eight 34401As had one DMM tab. Panels were a <em>display</em> of an
+instrument family, bound to no instrument in particular, and the commands they
+carried went to a topic nothing subscribed to. This makes a panel an instance of
+a discovered device, gives YAK a way to address that device, and puts discovery
+where you can see it happening.</p>
+<h3>Per-device instrument panels</h3>
+<ul>
+<li><strong>The authored panels moved out of the frontend</strong> — <code>FrontEnd/Gui_Frames/1_Instruments/left_50/*</code>
+→ <code>BackEnd/Instruments/</code>, one directory per VISA knowledge-base type (<code>34401A → DMM</code>).
+They are a template <em>library</em> now, not a tab tree. Nothing in the frontend reads
+the directory; <code>Deployment/build_instrument_panels.py</code> does.</li>
+<li><strong>One panel per discovered device</strong>, stamped after every scan into
+<code>Gui_Frames/1_Instruments/left_100/</code> (generated, gitignored). Eight meters →
+eight tabs, each bound to its own VISA resource. Folder names carry the
+resource tail (<code>34401A_44-44-44-111-gpib7-4</code>) because model alone is not
+identity: all eight report serial <code>0</code>.</li>
+<li><strong><code>manifest.json</code> declares what gets instantiated</strong> — the single-instrument
+variant per type, plus <code>exclude</code> for multi-device children that would otherwise
+appear as a sub-tab under every device, plus <code>groups</code> that COMPOSE bank views
+from one unit template. <code>psu_eight.json</code> was 1183 lines of one module strip
+written eight times, and could not be right about limits because the chassis
+holds four module models; composed, each copy carries its own slot, model and
+ranges. The hand-duplicated bank panels are deleted (29 files), along with 48
+<code>*.json.old</code> editor backups.</li>
+<li><strong>Model capability sheets</strong> (<code>Yak/&lt;type&gt;/&lt;model&gt;/model.json</code>) supply channel
+counts and voltage/current domains, so an 8 V module and a 60 V module no
+longer get the same widget. Previously the ranges were English prose in
+<code>visa_devices.json</code>.</li>
+<li><strong>Pruning is stamp-based.</strong> Only directories carrying <code>.generated-by-openair</code>
+are removed, so a hand-authored panel dropped into the generated tree survives.</li>
+</ul>
+<h3>YAK: commands that reach an instrument</h3>
+<ul>
+<li><strong><code>yak_handler</code> gained <code>target</code> and <code>model</code></strong>, stamped per device by the panel
+builder. Every verb published its SCPI to one global topic
+(<code>OpenAir/System/Protocols/yak/pub</code>) that <strong>nothing subscribes to</strong> — panels
+have never actually moved an instrument. SCPI now goes to that device&#39;s VISA
+<code>Write</code> topic as a raw string; hand-authored panels naming no device still use
+the old topic and envelope.</li>
+<li><strong>Every placeholder is filled, or nothing is sent.</strong> <code>verbs::fill_placeholders</code>
+replaces the old &quot;substitute <code>&lt;input_name&gt;</code>, else the first <code>&lt;…&gt;</code>&quot; logic, which
+turned <code>APPLy:SINusoid &lt;freq&gt;, &lt;amp&gt;, &lt;offset&gt;</code> into
+<code>APPLy:SINusoid 1000, &lt;amp&gt;, &lt;offset&gt;</code> — a syntax error a panel cannot show you.
+Unresolved arguments now refuse the send and say which are missing.</li>
+<li><strong>Arguments resolve from sibling widgets.</strong> An authored command block is an
+actuator beside its <code>Input/*</code> fields, each publishing to its own topic, so the
+press that fires the command carries only <code>value: 1</code>. <code>mqtt.rs</code> caches values
+from the <code>OpenAir/Gui/#</code> subscription it already held and folds the siblings in
+before dispatch. A named argument beats the actuator&#39;s own press value —
+without that ordering every command reads <code>1</code>.</li>
+<li><strong><code>params</code> carry per-instance constants</strong> (<code>&lt;chan&gt;</code>, slot selectors), applied
+before value injection so a voltage cannot land in a slot selector and quietly
+command the wrong module.</li>
+<li><strong>Boolean converters</strong> (<code>bool_on_off</code>, <code>bool_off_on</code>, <code>bool_1_0</code>): a toggle
+publishes <code>1</code>, and <code>:SENSe:VOLTage:DC:RANGe:AUTO 1</code> is a syntax error on a
+34401A.</li>
+<li><strong>The Generator template is fully bound</strong> — 25 inline <code>message</code> strings became
+handlers (11 <code>do</code>, 6 <code>set</code>, 5 <code>rig</code>, 3 <code>nab</code>), with the verb taken from the
+block the command was already filed under. Inline SCPI in a template is inert:
+only YAK translates and routes.</li>
+<li><strong>The DMM template is bound</strong> (13 widgets) against nine new bare
+<code>CONFigure:…</code> commands authored in <code>Yak/DMM/34401A/Panel/</code>. The existing
+<code>Config_*</code> entries all carry <code>&lt;range&gt;,&lt;resolution&gt;</code>, which a mode toggle has no
+way to fill.</li>
+<li><strong><code>yak_readout: true</code></strong> points a display widget at its device&#39;s <code>/Read</code> topic,
+so a query&#39;s answer has somewhere to land.</li>
+</ul>
+<h3>Discovery you can watch</h3>
+<ul>
+<li><strong>The browser subscribes to the live discovery topics.</strong> <code>MqttProvider</code> had
+<code>OpenAir/Gui/#</code> only, while discovery tables publish to
+<code>OpenAir/System/Gui/Discovered/&lt;category&gt;</code> — so every table was frozen at
+whatever was baked into its panel file at build time.</li>
+<li><strong>A <code>_GuiScanActivity</code> feed</strong> on the Discovered tab shows scan narration and
+device changes as they happen. Scan progress previously existed only in the
+orchestrator&#39;s stdout, which is invisible to anyone running the UI.</li>
+<li><strong>Every discovery agent narrates now</strong>, not just VISA: the discovered-GUI
+watcher diffs the retained tree and announces appearances, disappearances and
+liveness flips to <code>OpenAir/System/Discovery/Activity</code>, summarising per category
+above eight changes so a staleness wave does not bury the two that mattered.</li>
+<li><strong>The watcher is a singleton</strong> (flock). The orchestrator spawns one after every
+scan, so they accumulated — N copies republishing identical rows and narrating
+every change N times.</li>
+<li><strong><code>OcaTable</code> is read-only.</strong> It passed its node to <code>useMqttState</code>, which
+published <code>&lt;topic&gt;/config</code> AND, before rows arrived, its own null default over
+the row topic — retained-overwriting the data the agents had just produced.</li>
+</ul>
+<h3>Instrument liveness</h3>
+<ul>
+<li><strong>A heartbeat re-verifies one instrument per tick</strong>, round-robin, using the
+same <code>*IDN?</code> path the scan uses. <code>last_online</code> was stamped only when a scan
+probed an instrument, so the table turned red fifteen minutes after every scan
+whether or not anything had moved. <code>OPENAIR_VISA_HEARTBEAT_SECS=0</code> disables it.</li>
+<li>⚠️ <strong>The first version of this wedged two LAN-GPIB gateways.</strong> It probed the
+transport with a bare TCP connect, which for VXI-11 means knocking on the RPC
+portmapper (port 111). After ~20 minutes of 30-second knocks both gateways
+stopped creating links; every instrument behind them returned <code>VI_ERROR_IO</code>,
+to the scanner as much as to the UI, and they needed a power cycle. A directly
+attached instrument on the same network was unaffected, which is what
+identified the gateways as the victim. <strong>No raw-socket probing</strong> — the reason
+is recorded in the code so the cheap-looking version does not come back.</li>
+</ul>
+<h3>Naming</h3>
+<ul>
+<li><strong><code>10_Yak</code> → <code>Yak</code>, and every <code>#_</code> prefix is gone</strong> from the definition tree
+(177 directories): <code>10_Yak/4_DMM_YAK/1_34401A/1_MEASure/</code> is now
+<code>Yak/DMM/34401A/MEASure/</code>. Model identity is unchanged — <code>repository.rs</code> reads
+the grandparent directory and already stripped a leading <code>N_</code>.</li>
+<li><strong><code>_YAK</code> suffixes and <code>yak_</code> prefixes are gone</strong> (64 more renames). Verified
+behaviour-neutral: 18 models, 563 commands, identical model names before and
+after. <code>find_yak_tree()</code>, both Python tools and <code>FrontEnd/YAK/yak_renderer.js</code>
+updated — the renderer was stale twice over, still pointing into
+<code>ComProtocols/</code> where the crate no longer lives.</li>
+</ul>
+<h3>Tooling</h3>
+<ul>
+<li><strong><code>Deployment/yak_crossref.py</code></strong> cross-references panel controls against the
+SCPI vocabulary, per instrument family: bound, matchable, control-with-no-command,
+and command-no-control-exposes. Matching is a suggestion, not an authority —
+name similarity cannot know that <code>Mode_FRES</code> means four-wire resistance, so
+domain knowledge lives in a curated alias table and everything else is scored
+for a human to judge.</li>
+</ul>
+<h3>Known gaps</h3>
+<ul>
+<li>Two LAN-GPIB gateways need a power cycle after the heartbeat incident above.</li>
+<li><code>Set_Relay_Card4/5/7/8/9</code> (Router) and <code>Set_High_Sensitivity</code> /
+<code>Set_Power_Gain</code> (Spectrum) are bound to commands that do not exist in the
+vocabulary — they fail at runtime with nothing but a log line.</li>
+<li>33 commands are ambiguous: same model, same name, different SCPI, resolved by
+whichever file the directory walk reached last. Most come from
+<code>_Legacy_Commands/</code> and <code>*_OLD.json</code>.</li>
+<li><code>repository.rs</code> registers a phantom command named <code>fields</code> (one per model, 18
+in all) from the <code>fields:{&quot;Execute Command&quot;}</code> wrapper. No real command is lost,
+but it is a name that resolves and should not.</li>
+<li>33210A, 33220A, 6060B and N9340B have no <code>model.json</code>, so their widgets ship
+unclamped.</li>
+</ul>
+<h2>2026-07-18 - W1/W2: the Front Door · Path Traversal Fix · One-Command Startup</h2>
+<p>Executes workstreams <strong>W1</strong> and <strong>W2</strong> of
+<a href="Audits/strategy%20to%20repair%20current%20issues.md">strategy to repair current issues.md</a>,
+which re-audited the 2026-07-18PM executive review against the working tree.</p>
+<h3>🚨 Security</h3>
+<ul>
+<li><strong><code>POST /api/save</code> was an unauthenticated arbitrary-file-write, reachable
+from any host on the network</strong> (finding N3 — raised by no persona, found
+during the audit and <strong>verified by execution</strong>). The guard was
+<code>abs_path.starts_with(&amp;gui_frames_dir)</code>, but <code>Path::starts_with</code> compares
+path <em>components</em> and never resolves <code>..</code>, so
+<code>Gui_Frames/../../../tmp/x.json</code> literally begins with the components of
+<code>Gui_Frames</code> and passed — the OS then resolved the traversal at <code>fs::write</code>
+time and the file landed outside the tree. Replaced with <code>resolve_within()</code>,
+which is <strong>structural rather than textual</strong>: every component must be
+<code>Component::Normal</code> (rejecting absolute paths, Windows prefixes, and every
+form of <code>..</code>), then the target&#39;s <em>parent</em> is canonicalised and required to
+sit inside the canonicalised base — which also defeats a symlinked parent
+pointing outward. The <code>.json</code> check survives as a secondary filter, never as
+the control that keeps writes in the tree. Regression tests cover five
+traversal payloads, absolute paths, and (unix) the symlink case. Same class
+of defect as the VISA injection fixed earlier today: a guard doing string
+matching where it needed structural validation.</li>
+<li><strong>Nothing binds all interfaces by default any more.</strong> The HTTP server and
+the OSC listener both bound <code>0.0.0.0</code> — OSC was the lone outlier among the
+agents (AES70, MIDI, DNS-SD already used loopback), so any host on the
+network could inject OSC events. New <code>--bind</code> and <code>--osc-bind</code> both default
+to <code>127.0.0.1</code>. ⚠️ <strong>Breaking for anyone reaching the UI from another
+machine</strong> — pass <code>--bind 0.0.0.0</code> explicitly, and read the help text first:
+loopback is a <em>mitigation</em>, not a fix. <code>/api/save</code> still has <strong>no
+authentication</strong>, and putting auth in front of the mutating routes is the
+stated prerequisite for widening the bind.</li>
+<li><strong>A ready-made broker ACL ships as <code>broker/acl.example</code></strong>, separating agents
+(full access), the UI (read-all, write only <code>Gui/#</code> and rescan), and a human
+operator (the one credential allowed to publish the VISA <code>Write</code> topics that
+execute SCPI on real hardware). Authentication answers <em>who you are</em>; this
+answers <em>what you may do</em>. <code>broker/passwd</code> and <code>broker/acl</code> are now
+gitignored. <strong>Not yet enforced</strong> — <code>allow_anonymous true</code> still stands, and
+safety still rests on the loopback bind. The template is the policy; turning
+it on is W1-2&#39;s remaining half.</li>
+</ul>
+<h3>One-command startup (F1 — the revenue gate)</h3>
+<ul>
+<li><strong><code>python3 docker/launch.py</code></strong> replaces the 7-command quick start that never
+mentioned <code>corepack</code>/<code>pnpm</code>. Preflights Docker, brings up broker +
+orchestrator, waits for broker health before starting agents, and opens a
+browser. <code>FrontEnd/Gui_Frames/</code> is bind-mounted, so panels edited in the
+WYSIWYG editor land on disk and show up in <code>git diff</code>.
+The launcher preflights before spending minutes on a build — daemon
+reachable (with a specific hint for the docker-group case), compose v2 with a
+v1 fallback, referenced paths present, ports free — and recognises the
+project&#39;s own containers so a second run does not report a bogus port clash.</li>
+<li><strong>Agents no longer race the broker.</strong> The broker has a <code>$SYS/#</code> healthcheck
+and the orchestrator gates on <code>service_healthy</code>, replacing the confusing
+retry cascade when agents connected before the broker was accepting.</li>
+<li><strong><code>--host-net</code> is documented as the mode a real bench needs</strong>, with the
+reasoning: containers sit on a NAT&#39;d bridge, so mDNS multicast never crosses
+it and the VISA subnet scan derives <code>172.20.0.x</code> and sweeps a range where no
+instrument lives. Both failures look identical to &quot;no devices found&quot;, which
+is why the trade-off is spelled out rather than left to be rediscovered.
+Host mode correctly mounts the <em>bare-metal</em> <code>broker/mosquitto.conf</code>, since
+with the port mapping gone the bind address is the only confinement left.</li>
+<li><strong><code>--hardware</code> exposes USB and MIDI</strong> (<code>/dev/bus/usb</code>, <code>/dev/snd</code> with cgroup
+rules for majors 116/189/180). Bind-mounted rather than declared via
+<code>devices:</code>, which resolves once at container start — so hot-plugged
+instruments would never appear and one absent at boot would block startup.</li>
+<li><strong>The broker host is no longer hard-coded.</strong> <code>127.0.0.1:1883</code> appeared in six
+places, which made running the orchestrator in a container impossible — there
+<code>broker</code> is a different host. New <code>--mqtt-host</code> / <code>--mqtt-port</code>, with
+<code>MQTT_HOST</code> / <code>MQTT_PORT</code> env fallbacks, threaded through the OSC, MIDI,
+AES70, DNS-SD, and VISA agents and the VISA write daemon.</li>
+</ul>
+<h3>One bus, one truth (W3-1 and W3-2, pulled forward)</h3>
+<ul>
+<li><strong>OSC and AES70 discoveries reached nothing at all</strong> (F6). Both sent events
+only to the in-process <code>/ws</code> broadcast channel, which had <strong>no subscribers</strong> —
+MIDI and VISA were dual-homed onto MQTT and therefore worked. Both now publish
+at QoS 1 to <code>OpenAir/Protocol/GuiOsc/&lt;addr&gt;</code> and <code>OpenAir/Protocol/AES70/&lt;addr&gt;</code>.
+<strong>Two protocols start working.</strong></li>
+<li><strong>The <code>/ws</code> route is deleted</strong> — handler, <code>SystemState</code>, and <code>AppState</code> with
+it. Ordering was deliberate: publishing first, deleting second, or the two
+protocols would have gone from &quot;reaching nothing&quot; to &quot;not existing&quot;. This also
+kills N2 — the orphan channel was <em>why</em> F6 survived multiple audits, since
+events arrived somewhere, nothing errored, and nothing logged.</li>
+</ul>
+<h3>Discovery actually finds instruments</h3>
+<ul>
+<li><strong>VISA mDNS browsed two service types and missed a scope sitting in plain
+sight.</strong> Now browses six, and the load-bearing addition is <code>_http._tcp</code>: a
+Rigol advertises only as <code>rigollan._http._tcp.local.</code> and was invisible to
+this path despite listening on VXI-11. Second fix — the code trusted the
+<em>advertised</em> port and built VISA resources pointing at web servers; an
+advertisement is now only &quot;a host worth probing&quot;, and ports 111 (<code>::INSTR</code>),
+5025, and 5555 (<code>::SOCKET</code>) are probed with a 700 ms timeout. Hosts are
+de-duplicated before probing and browses are stopped via <code>stop_browse</code>.</li>
+<li><strong>The subnet scanner was silently losing devices to its own SYN burst.</strong> It
+spawned 254 threads at once, each racing several connects on a 200 ms budget;
+a Rigol that answers port 111 in 25 ms when probed alone was missed entirely.
+Now chunked at 48 concurrent with a 600 ms timeout — slower scan, no silent
+losses.</li>
+<li><strong>One instrument no longer appears as several rows.</strong> <code>list_resources()</code>
+merged USB + mDNS + subnet output with no de-duplication. Results are now
+stable-sorted <code>::INSTR</code> ahead of <code>::SOCKET</code> (VXI-11 carries real device
+semantics — timeouts, SRQ, clear — and the subnet scanner pushed SOCKET
+first, so first-wins alone picked the wrong transport), then de-duped. After
+<code>*IDN?</code>, duplicates collapse on <code>(model, serial)</code> — <strong>but only when the serial
+is usable</strong>, because the bench has four HP 34401A DMMs all reporting serial
+<code>0</code> and naive keying would merge them into one device.</li>
+<li><strong>Ghost rows survive restarts no longer.</strong> The retained-topic cleanup map was
+memory-only, so topics published by an earlier run were never cleared and one
+instrument accumulated stale rows no rescan could remove. <code>harvest_retained_device_prefixes()</code>
+now drains retained deliveries at boot and adopts the prefixes it finds.</li>
+<li><strong>Scan progress is visible to whoever is actually using the UI.</strong> It existed
+only in the orchestrator&#39;s stdout — invisible from a browser, doubly so in a
+container. <code>scan_log()</code> publishes <code>{level, message, ts}</code> to
+<code>OpenAir/System/Protocols/visa/Scan/Log</code> (QoS 0, <strong>non-retained</strong> — an event
+stream, so a late joiner does not replay an old scan), and <code>MqttProvider</code>
+prints it to the browser console, colour-coded by level and kept off the React
+render path.</li>
+<li><strong>Discovered rows are tinted by liveness.</strong> Retained state means a device
+unplugged weeks ago still renders, previously indistinguishable from a live
+one. Rows carry <code>_row_state</code> (<code>online</code>/<code>offline</code>/<code>unknown</code>, 15-minute window)
+and <code>OcaTable</code> tints them. Recency is the primary signal because every agent
+publishes <code>last_online</code>, while <code>connected</code> is VISA-only — treating its
+<em>absence</em> as offline marked every live DNS-SD service red. <code>unknown</code> is
+deliberate rather than folded into <code>offline</code>: colouring a missing timestamp
+red would assert more than we know.</li>
+</ul>
+<h3>Stop describing what we have not built (W2)</h3>
+<ul>
+<li><strong>Ten crates shipped a <code>cargo new</code> template asserting <code>2 + 2</code></strong> — but they
+were not one situation, and treating them identically would have wasted
+effort on half. Five (<code>ember</code>, <code>mqtt</code>, <code>ptp</code>, <code>snmp</code>, <code>smpte2138</code>) are <strong>PyO3
+shims with real sibling modules</strong> behind the non-default <code>python</code> feature —
+the template <code>add()</code> misrepresented working code as unimplemented, and is
+gone. Five (<code>mdns</code>, <code>nmos</code>, <code>rest</code>, <code>sap</code>, <code>websocket</code>) are <strong>genuinely
+empty</strong> and are now marked <code>pub const STATUS = &quot;stub&quot;</code> with a test asserting
+it, so the status is greppable and implementing one forces a deliberate
+update. <code>openair-mdns</code> is recorded as superseded in practice by
+<code>openair-dnssd</code>; <code>openair-websocket</code> is noted as unrelated to the browser&#39;s
+MQTT-over-WebSocket transport.</li>
+<li><strong><code>openair-ember</code> did not compile at all</strong> — <code>use pyo3::prelude::*</code> sat
+ungated at crate root while <code>pyo3</code> is optional behind the <code>python</code> feature.
+<strong>CI never noticed, because it only checked <code>-p openair-yak</code>.</strong> Both BackEnd
+workspaces are now <code>cargo check --workspace</code> <em>and</em> <code>cargo test --workspace</code>;
+the narrow check had also left 10 inline <code>#[cfg(test)]</code> modules never
+executed.</li>
+<li><strong>README Pillar 1 stops over-claiming.</strong> It listed SNMP, Ember+, SMPTE 2138,
+and PTP as devices that &quot;announce themselves and appear in the UI&quot;; all four
+are unimplemented. It now separates <strong>working today</strong> (VISA/SCPI, MIDI,
+DNS-SD/mDNS, AES70, OSC) from scaffolded shims and stubs. The status table
+further down was always honest — the pillar is what people read.</li>
+</ul>
+<h3>Layout and defaults</h3>
+<ul>
+<li><strong>The repo root is now only files a tool can <em>only</em> find there.</strong>
+<code>package.json</code>, <code>pnpm-lock.yaml</code>, <code>pnpm-workspace.yaml</code>, <code>.nvmrc</code>, and
+<code>requirements.txt</code> moved to <code>Deployment/</code>; <code>CHANGELOG.md</code> to <code>Documents/</code>.
+Workspace globs point back up with <code>../</code>, and every CI job now uses
+<code>pnpm -C Deployment</code> and <code>node-version-file: Deployment/.nvmrc</code>.
+<code>rust-toolchain.toml</code> <strong>cannot</strong> move the same way — rustup searches upward
+from the crate, so it must sit above all three Cargo workspaces.</li>
+<li><strong>The MQTT default is your own broker, not a public one.</strong> The UI defaulted
+to <code>test.mosquitto.org</code> — a public, unauthenticated broker — so a fresh
+install talked to the internet instead of the system it shipped with. Default
+is now this host on <code>:9001</code>; the public broker remains as an explicitly
+labelled demo/UI-only preset, and the active preset is highlighted.</li>
+<li><strong>The two requirements files say why they are not duplicates</strong> —
+<code>requirements.txt</code> runs the system, <code>requirements-deploy.txt</code> serves the FTPS
+deploy script only, with the <code>paho-mqtt</code> bound deliberately identical. The
+install line is corrected to <code>pip install -r Deployment/requirements.txt</code>;
+installing the deploy-only file left pyvisa missing and every probe failing.</li>
+<li><strong>Cache-busters bumped</strong> for <code>OcaTable.jsx</code> (v8), <code>MqttProvider.jsx</code> (v14),
+and <code>MqttSettings.jsx</code> (v3) — these are <code>text/babel</code> scripts compiled in the
+browser, so without the bump returning users keep the stale copies and see
+none of the above.</li>
+</ul>
+<h2>2026-07-18 - Deploy on Every Push · Repository Button · Install Path</h2>
+<ul>
+<li><strong>Every push publishes.</strong> The production deploy workflow only fired for
+<code>main</code>, so anything pushed on another branch silently never reached the
+host — the &quot;it doesn&#39;t publish every time&quot; symptom. It now triggers on
+every branch except the sandbox ones (which have their own workflow and
+host), queues rather than drops concurrent pushes, writes a <strong>deploy
+summary</strong> to the run page so a publish is visible rather than assumed, and
+the previously-dead <code>full_sync</code> input is wired to a real full resync for
+when the server&#39;s incremental sync state drifts.</li>
+<li><strong>Deploy secret-hygiene fix.</strong> <code>FTP-Deploy-Action</code>&#39;s default excludes do
+<strong>not</strong> cover <code>.env</code>, while the upload root is <code>./FrontEnd/</code> — which is
+exactly where the local FTP credentials live. Both workflows now exclude
+<code>.env*</code>, logs, and editor junk explicitly. (CI was never exposed —
+<code>.env</code> is gitignored so it is absent from the runner&#39;s checkout — but a
+local or misconfigured run would have published it.)</li>
+<li><strong>Repository button</strong> in the top-right of the header, linking to the source
+on GitHub, with the GitHub mark and the project&#39;s orange hover treatment.
+The README&#39;s clone URL pointed at <code>APKaudio/OPEN-AIR</code> while <code>origin</code> is
+<code>LikeDotAudio/OPEN-AIR</code>; both now agree with the remote.</li>
+<li><strong><code>requirements.txt</code> is now real.</strong> It listed <code>paho-mqtt</code> alone while the
+orchestrator shells out to <code>python3 -c &quot;import pyvisa&quot;</code> using the
+<strong>pure-Python backend</strong> (<code>ResourceManager(&#39;@py&#39;)</code>) — so a clean install
+died at the first instrument probe. Now pins <code>pyvisa</code>, <code>pyvisa-py</code>, and
+<code>paho-mqtt</code> with the reason for each, and documents the optional
+pyvisa-py transports. Verified against installed versions.</li>
+<li><strong>Discovered-GUI builder runs warning-free on paho 1.x and 2.x</strong>
+(<code>CallbackAPIVersion.VERSION2</code> when available; one callback signature
+serves both APIs).</li>
+</ul>
+<h3>Decision record: the Sampler is removed from OPEN-AIR <em>(supersedes the entry below)</em></h3>
+<p><strong>Final — 2026-07-18.</strong> The Sampler has been <strong>moved out of the project
+entirely</strong> and removed from this repository, together with the libraries that
+powered it. This executes the 2026-07-17 executive-review mandate and closes
+the governance finding that a board order had been reversed without a written
+decision.</p>
+<p>Removed:</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it was</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Gui_Frames/4_Console/100_Sampler/</code></td>
+<td>the <code>Console → Sampler</code> panel</td>
+</tr>
+<tr>
+<td><code>libControl/special/Sampler/</code></td>
+<td>sampler widget</td>
+</tr>
+<tr>
+<td><code>libControl/special/SamplerDrumkit/</code></td>
+<td>audio runtime — owned <code>oaAudioCtx</code>, <code>oaDecodeAudio</code>, <code>oaEncodeWav</code>, <code>OA_DRUM_*</code></td>
+</tr>
+<tr>
+<td><code>libControl/special/SamplerSequencer/</code></td>
+<td>step sequencer</td>
+</tr>
+<tr>
+<td><code>libControl/special/SamplerSoundBrowse/</code></td>
+<td>sound browser</td>
+</tr>
+<tr>
+<td><code>libControl/special/AudioEditor/</code></td>
+<td>waveform editor — <strong>sampler-only</strong>, despite the neutral name</td>
+</tr>
+<tr>
+<td><code>libControl/special/PadBrowse/</code></td>
+<td>pad browser — <strong>sampler-only</strong>, despite the neutral name</td>
+</tr>
+</tbody></table>
+<p><code>AudioEditor</code> and <code>PadBrowse</code> carry no &quot;Sampler&quot; prefix but depend on the audio
+runtime defined in <code>SamplerDrumkit.js</code> and appear in no panel outside
+<code>100_Sampler</code>. They are the &quot;libraries that power it&quot; and would have been dead
+code — or worse, broken references — had only the four prefixed widgets gone.
+Verified before removal: no surviving widget references any removed one.</p>
+<p>Also updated: 6 <code>&lt;script&gt;</code> tags dropped from <code>index.html</code>; the <code>Sampler</code> /
+<code>AudioEditor</code> / <code>Sequencer</code> entries removed from <code>WidgetFactory.jsx</code>&#39;s registry;
+<code>ui/src/legacy.ts</code> regenerated (146 → 140 imports) and <code>ui/src/globals.d.ts</code>
+regenerated (210 → 178 globals — 32 audio globals retired).</p>
+<p><strong>No debt-reduction credit is claimed for this.</strong> The Sampler contributed
+<strong>zero</strong> findings to <code>validate.baseline.json</code> (verified: errors 169 and
+deprecations 2,093 are unchanged, and no baselined key referenced a removed
+path). This is a <strong>scope change, not debt paydown</strong> — the distinction the
+executive review demanded, since a shrinking baseline achieved by deleting
+files is not progress. Note for the record that the 236 findings under
+<code>Gui_Frames/5_Samples/</code> belong to the widget <strong>demo panels</strong>, which are a
+different thing from the Sampler and remain in the tree.</p>
+<details>
+<summary>Superseded earlier entry, kept for the record</summary><blockquote>
+<p><strong>Decision record: the Sampler is product scope</strong> <em>(2026-07-18, reversed the
+same day by the entry above)</em></p>
+<p>The 2026-07-17 executive review ordered the Sampler quarantined to its own
+repository; the follow-up review recorded that order as <strong>reversed</strong>. Making
+the decision explicit, as that review required:</p>
+<p><strong>The Sampler stays in OPEN-AIR as product scope.</strong> <code>Console → Sampler</code> and
+its four widget files (<code>Sampler</code>, <code>SamplerDrumkit</code>, <code>SamplerSequencer</code>,
+<code>SamplerSoundBrowse</code>) are a console feature built on the same widget library,
+panel schema, and MQTT layer as every other panel — not an unrelated side
+project. It ships, it is documented here, and it is subject to the same
+contract validation as the rest of the tree. Superseding the audit&#39;s
+recommendation, on the record, rather than silently.</p>
+</blockquote>
+</details><h2>2026-07-18 - Documentation: plans become features</h2>
+<ul>
+<li><strong>The README is a real project README again</strong>: what OPEN-AIR is, the four
+pillars as they actually work, an architecture sketch, and two new
+first-class sections — <strong>the contract layer</strong> and <strong>protocol management &amp;
+discovery</strong> — plus repo layout, quick start, workspace commands, and an
+honest status table (what is complete vs. what is still roadmap).</li>
+<li><strong>Section READMEs added</strong>, so documentation lives with the code:
+<a href="../contracts/README.md"><code>contracts/README.md</code></a> (schemas, topic tree, codegen,
+validate/ratchet, and the schema design law that used to live in the
+planning docs), <a href="../BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a>
+(the agent fleet with real/stub status, heartbeats + Last Will, discovery
+topics, rescan semantics, how to add a protocol), and
+<a href="../ui/README.md"><code>ui/README.md</code></a> (the typed frontend and its ratchets).</li>
+<li><strong><code>Documents/Strategies/</code> deprecated as documentation</strong>: every plan carries
+a HISTORICAL banner pointing at the feature docs. <code>Migration_Ledger.md</code> and
+<code>Validations/</code> remain <strong>active records</strong>, not history.</li>
+<li><strong><code>Documents/Audits/</code> marked as a 2026-07-17 snapshot</strong> and left as written,
+with a per-finding <strong>resolution table</strong>: what is fixed, what is detected but
+not repaired, and what remains roadmap — including the Discovered-tab case
+study, now fully resolved plus two further bugs found during the repair.</li>
+</ul>
+<h2>2026-07-18 - Sampler Restored + Discovered-Tab Rescan + Tab-Based Editor Entry</h2>
+<ul>
+<li><p><strong>Drag jiggle fixed — mouse capture wins</strong>: while a control is being
+adjusted locally, inbound MQTT state (including the browser&#39;s own stale
+broker echoes, which arrive a few ms behind the hand) no longer yanks it
+backwards. Inbound applies again once the hand rests (600 ms grace,
+<code>window.OA_CAPTURE_GRACE_MS</code> to tune); the settle-retained publish means
+the bus and the control agree at rest. Per-widget, so <code>shared_topic</code>
+twins on the same page still mirror a drag live.</p>
+</li>
+<li><p><strong>Discovered tab uses the library table component</strong>: the label-stack
+display is gone — every category panel is now an <code>OcaTable</code>
+(<code>libControl/text/OcaTable</code>: sticky header, zebra rows, row-count footer,
+its own scroll region), with per-family column ordering and a readable
+<code>last_seen</code> column. Bonus repair: <code>OcaTable</code> had been silently broken on
+the WidgetFactory registry path (it received <code>node</code> but destructured
+<code>config</code> — Sample.json&#39;s own &quot;Discovered Devices&quot; example rendered
+empty); it now accepts either, fixing every registry-dispatched table
+in the app.</p>
+</li>
+<li><p><strong>DNS-SD discovery is real — the <code>dnssd</code> crate is no longer a stub</strong>: it
+now browses <code>_services._dns-sd._udp.local.</code> (the meta-query enumerating
+EVERY advertised service type), then browses each type via <code>mdns-sd</code> and
+publishes retained attribute topics under
+<code>OpenAir/System/Protocols/dnssd/Device/{type}/{instance}/</code>. Vanished
+services clear their retained topics. The orchestrator spawns it as a
+continuous browse thread; its protocol status honestly reports <code>online</code>
+(left the stub list). The Discovered tab gains a <strong>dnssd</strong> category —
+first live sweep found <strong>42 services</strong> (Rigol LAN, RTSP/AES67-style audio
+streams, printers, Chromecasts...). RESCAN re-sweeps it like everything
+else.</p>
+</li>
+<li><p><strong>WYSIWYG entry moved to the tabs, globally</strong>: right-click any tab —
+folder tab or top-level window tab — to open the editor on that folder&#39;s
+first panel file (depth-first through subfolders). The canvas right-click
+entry is retired; panels keep the browser&#39;s native context menu.</p>
+</li>
+<li><p><strong>Sampler is back</strong>: <code>Console/Sampler</code> (panel + the four widget files) was
+deleted by the <code>explosion</code> commit — before any migration work — and has
+been restored from that commit&#39;s parent. The live tree picked it up with
+no regeneration (the Phase 0 live-tree fix working as designed);
+<code>legacy.ts</code> regenerated with zero dead tags remaining.</p>
+</li>
+<li><p><strong>The Discovered tab can now rescan on demand</strong>: a new <code>0_Scan</code> control
+panel (always written by the builder, sorts first in the tab) carries a
+RESCAN DEVICES actuator publishing to
+<code>OpenAir/System/Protocols/visa/Device/Rescan</code>. The orchestrator&#39;s VISA
+agent is now a scan <strong>loop</strong>: trigger → full re-probe → retained topics
+refreshed → Discovered panels regenerated → idle. Safety semantics:
+retained and zero-value payloads never trigger (no scan storms on page
+load or broker replay), and the browser&#39;s settle-republish of the same
+press is deduped — live-tested: one press = exactly one scan. Reload the
+page after a rescan to see updated panels (live tree redraw is Phase 5).</p>
+</li>
+<li><p><strong>&quot;Unknown Instrument&quot; fixed — the knowledge base was never found</strong>: the
+VISA lookup read <code>assets/visa_devices.json</code> relative to the process cwd
+only, so run from the repo root it matched nothing and all 17 instruments
+(33210A/33220A/34401A×7/54641D×2/DS1104Z×2/N9340B...) fell to &quot;Not in
+Knowledge Base&quot;. Now: walk-up path resolution + the KB compiled into the
+binary as guaranteed fallback (disk copy still wins, so the inventory
+stays editable). Companion fixes: each rescan clears the previous scan&#39;s
+retained topics (no ghosts when devices re-categorize or vanish), the
+builder prunes stale category folders, and the 154 pre-fix ghost topics
+were swept. Discovered tab now reads DMM(6)/Generator(2)/Oscilloscope(4)/
+Spectrum(1)/midi(4). Note: N9342CN is genuinely absent from the KB.</p>
+</li>
+<li><p><strong>Discovered panels scroll</strong>: generated panels now declare
+<code>behavior.overflow_ns: &quot;auto&quot;</code> — OcaBin clips by default, and a scan can
+find more devices than fit one screen (14 Unknown_Instruments did).</p>
+</li>
+</ul>
+<h2>2026-07-18 - Local Stack Smoke Test + the MQTT Flush Bug</h2>
+<ul>
+<li><strong>Full local stack verified end-to-end</strong>: broker + orchestrator (live
+<code>/api/tree</code>) + <code>ui/</code> dev server. Headless boot against the LIVE tree
+renders the real tab set (including <code>Instruments</code>, which the stale
+snapshot never showed).</li>
+<li><strong>Orchestrator flush bug found and fixed by the smoke test</strong>: the boot
+MQTT client&#39;s drain thread processed only 10 connection events, so most
+of the 33 queued retained publishes (protocol configs/statuses,
+heartbeat) never reached the broker — only 2 of 16 statuses landed.
+Now: drain thread runs until <code>disconnect()</code> completes (deadline-bounded);
+all 16 land, stub statuses verified on the wire
+(<code>nmos/rest/sap/mdns/dnssd/websocket = stub</code>).</li>
+<li><strong>CI rust job fixed for bare runners</strong>: <code>libasound2-dev</code> installed
+(openair-midi → alsa-sys) + rust-cache for the three cargo trees — the
+first push&#39;s failure was exactly this.</li>
+<li>Vite dev proxies <code>/assets</code> alongside <code>/api</code> to the orchestrator.</li>
+</ul>
+<h2>2026-07-18 - Phase 2 Step 1: the <code>ui/</code> Package Exists and Builds</h2>
+<ul>
+<li><strong>The isolated typed frontend scaffold is real</strong>: <code>ui/</code> joins the pnpm
+workspace with exact-pinned deps (react 18.3.1 — the version the CDN tag
+resolves today — echarts 5.5.0, echarts-gl 2.0.9, mqtt 5.10.1, zod,
+<code>@openair/contracts</code>), Vite (<code>base &#39;./&#39;</code>, <code>/api</code> proxy, cross-boundary
+<code>fs.allow</code>), and the per-file one-way strict tsconfig.</li>
+<li><strong>The 152-script-tag load order is captured as code</strong>:
+<code>scripts/gen-legacy.ts</code> deterministically regenerates <code>src/legacy.ts</code>
+from <code>FrontEnd/index.html</code> — 142 side-effect imports in exact tag order,
+4 dead tags (deleted Sampler files) skipped by name, 6 CDN tags dropped
+in favor of npm. <code>main.tsx</code> recreates the CDN-globals world
+(<code>window.React/ReactDOM/echarts/mqtt</code>) from the npm singletons before the
+legacy graph loads.</li>
+<li><strong><code>vite build</code> bundles the entire legacy app on the first attempt</strong> —
+1,017 modules, zero files needing the comment-out escape hatch;
+typecheck green. Not the runtime yet: <code>FrontEnd/index.html</code> stays the
+only served app until the Phase 2 §4 overlap window opens deliberately.</li>
+<li>Checklist audit: <code>Documents/Strategies/Phase 2 Step 1.md</code>.</li>
+<li><strong>Cutover prep (same day)</strong>: the inline <code>text/babel</code> boot block became
+<code>ui/src/boot.tsx</code> (gen-legacy can&#39;t capture inline scripts — the bundle
+now actually boots); <code>globals.d.ts</code> inventories the <strong>182</strong> window
+globals (3 hand-typed, regen-safe); eslint + CI ratchets armed (no new
+<code>window.*</code> outside named bridges, one-module-one-tree collision check,
+generated-file freshness). <strong>Headless Chrome smoke test: the bundle
+boots and renders the same tab set as the legacy page</strong>, with a cleaner
+console (legacy throws 3 dead-Sampler load errors; the bundle skips
+those tags by name). Two deltas logged for the human overlap window:
+OAPanels wasm script-pair ordering, and a widget-count difference under
+virtual time.</li>
+</ul>
+<h2>2026-07-18 - Phase 0: Stop the Bleeding (all six items)</h2>
+<ul>
+<li><strong>The Discovered tab works again — every break in the audit&#39;s four-stage
+pipeline fixed</strong>: the builder (<code>Deployment/build_discovered_gui.py</code>)
+subscribes to the topics the agents actually publish
+(<code>OpenAir/System/Protocols/{visa,midi}/Device/#</code>), emits <strong>strict-valid
+v41 panels</strong> (verified against the layout contract) instead of the dead
+<code>_GuiValue</code>+<code>subscribe</code> schema, and is spawned by the orchestrator after
+each VISA scan. First live run produced 11 devices across 6 category
+panels from the broker&#39;s retained state. <code>0_discovered/</code> is gitignored
+and excluded from validate — discovery is data, not authored UI
+(Phase 4 replaces this pipeline with the Device Registry).</li>
+<li><strong>Live tree</strong>: <code>index.html</code> fetches the orchestrator&#39;s <code>GET /api/tree</code>
+first — new folders/panels appear without regenerating anything; the
+static <code>tree.json</code> snapshot survives only as the FTPS-host fallback.</li>
+<li><strong>YAK repo path</strong>: the agent walks up from cwd to find
+<code>FrontEnd/Gui_Frames/5_Protocols/10_Yak</code> (env <code>YAK_REPO_PATH</code> still
+wins) — no more zero-definitions when launched from the wrong directory.</li>
+<li><strong>Stubs stop lying</strong>: nmos/rest/sap/mdns/dnssd/websocket now publish
+<code>status = stub</code>, not <code>online</code>.</li>
+<li><strong>Retained-fader flood fixed</strong>: high-rate control values publish
+<code>retain:false</code>; one settle-delayed retained publish (400 ms after rest)
+preserves late-joiner state sync. Contracts T5 semantics, live today.</li>
+<li><strong><code>broker/mosquitto.conf</code> checked in</strong> (1883 + websockets 9001,
+persistence on) — the broker stops being an unmanaged assumption.</li>
+</ul>
+<h2>2026-07-17 - v41 Contracts Package: Plan Reconciliation + Phase 1 Steps 1-4</h2>
+<ul>
+<li><strong>Plan reconciliation</strong>: <code>Phase 1.md</code>, <code>Phase 2.md</code>, and
+<code>4_Contracts_Structural_Guidelines.md</code> reconciled — the inventory-backed
+guidelines win on schema content (<code>schemaVersion</code> field, <code>schemas/</code> dir,
+D1/H1 payload shapes, H1/D3 status enums, dual YAK contracts), Phase 1
+wins on deployment mechanics (golden vectors, ratchet baseline, committed
+codegen, hand-written <code>topics.rs</code>).</li>
+<li><strong>UI isolation ruling</strong>: Phase 2 rewritten — the typed app is a new <code>ui/</code>
+package; <code>FrontEnd/</code> keeps data (<code>Gui_Frames/</code>, <code>api/</code>) and shrinking
+legacy source. Conversion = <code>git mv</code>, never copy; enforced by a CI
+collision check.</li>
+<li><strong>Archive trail ruling</strong>: every migration move/retire/delete records a line
+in <code>Documents/Strategies/Migration_Ledger.md</code> (append-only) and ships with
+a changelog entry; CI fails silent removals.</li>
+<li><strong>Strategy-before-code ruling</strong>: any step that touches a running component
+gets its own deployment-strategy audit first — first applied as
+<code>Documents/Strategies/Phase 1 Step 3.md</code>.</li>
+<li><strong>Phase 1 step 1 deployed</strong>: pnpm workspace root, Node/Rust toolchain pins,
+<code>@openair/contracts</code> package skeleton, and <code>contracts-ci.yml</code> — the repo&#39;s
+first non-deploy CI.</li>
+<li><strong>Phase 1 step 2 deployed — the topic grammar</strong>: <code>Topics</code> build/parse in
+TypeScript (<code>contracts/src/topics/</code>) and Rust (<code>contracts/rust/</code>), one
+declared topic-family table with retain classes, the full v40 legacy
+namespace map (<code>isLegacy</code> + alias table), and <code>topicMaker.jsx</code>&#39;s panel-path
+semantics canonized as <code>Topics.gui.fromPanelPath</code>. Both implementations are
+pinned by one golden-vector file (<code>contracts/vectors/topics.json</code>) run by
+vitest AND cargo — 64 TS + 5 Rust suite assertions green. <code>topicUtils.js</code>
+(the older, disagreeing topic utility, zero callers) deleted.</li>
+<li><strong>Docs reorganized</strong>: forward-looking strategy documents (migration plan,
+Phase 1/2 deep dives, contracts guidelines, migration ledger) moved from
+<code>Documents/Audits/</code> to <code>Documents/Strategies/</code>; the point-in-time audits
+(design audit, diagrams, executive review) stay in Audits. Cross-links
+rewritten on both sides. Validation output lives in
+<code>Documents/Strategies/Validations/</code>.</li>
+<li><strong>Phase 1 step 3 deployed — payload contracts + codegen + the ghost-tab
+fix</strong>: <code>AgentHeartbeat</code> (H1) and <code>DeviceRecord</code> (D1) zod schemas with
+legacy-v0 shapes schema&#39;d by name; the zod→JSON-Schema→cargo-typify (0.7.0)
+pipeline turned ON with committed output and a real <code>gen:check</code> CI gate;
+D2 <code>deviceIdFor</code> (FNV-1a 64) + ISO time helpers vector-pinned in TS and
+Rust; <code>mapV40VisaRecord</code> replay-proven lossless in both languages. The
+browser now registers a real MQTT <strong>Last Will</strong> on
+<code>OpenAir/System/Agents/web-{guid}</code> and dual-publishes the v41 heartbeat
+beside the untouched legacy Failover beat — LWT delivery verified live
+against the local broker (SIGKILL → retained <code>offline</code>). Crate-rule
+amendment: <code>regress</code> (typify&#39;s validation regex engine) joins
+serde/serde_json as the only allowed deps.</li>
+<li><strong>Phase 1 step 4 deployed — the layout contract + the first honest drift
+count</strong>: <code>contracts/src/layout/</code> schemas the panel JSON as it exists
+(widget-type classification seeded from the live dispatch code, two-mode
+validation where deprecations are named not fatal, the L3 yak binding with
+its cross-field rule, the L4 folder grammar) plus the Y7 runtime
+<code>yak_handler</code> wire message. <code>pnpm validate</code> (openair-validate) walks
+Gui_Frames + the YAK tree + every config.ini: <strong>169 errors / 2,093
+deprecations</strong> on day one — including the two 34401As, 57 <code>N_</code> prefix
+collisions, 45 dead config.ini topic triples, and 45 converter uses the
+YAK agent silently passes through. Inventory published at
+<code>Documents/Strategies/Validations/contracts-debt-inventory.md</code>.</li>
+<li><strong>Phase 1 step 5 deployed — the ratchet, armed</strong>: <code>contracts/ validate.baseline.json</code> locks the day-one debt; CI now fails only on debt
+NOT in the baseline (kill-tested: probe file → red, removed → green).
+<code>--update-baseline</code> shrinks it after fixes; the number only goes down.</li>
+<li><strong>Phase 1 step 6 deployed — Rust adoption seed. Phase 1 complete.</strong>
+<code>openair-contracts</code> is a path dependency in BOTH BackEnd workspaces. First
+real consumers: the YAK agent registers an MQTT Last Will and publishes a
+retained contract-typed <code>AgentHeartbeat</code> at <code>OpenAir/System/Agents/yak</code>
+(verified live — SIGKILL flipped the retained status to <code>offline</code> via the
+broker); the orchestrator publishes its retained beat (LWT deferred to the
+Phase 4 supervisor&#39;s persistent client). All six Phase 1 DoD boxes ticked
+in <code>Documents/Strategies/Phase 1.md</code> §7.</li>
+</ul>
+<h2>2026-07-06 - YAK Orchestration, Live Command Routing, and UI Ergonomics</h2>
+<ul>
+<li><strong>Intelligent Port Lifecycle Management</strong>: Upgraded <code>openair.py</code> to aggressively hunt down and kill ghost processes on port 8000 using <code>fuser</code> and <code>lsof</code> during startup. This prevents the orchestrator from crashing due to &quot;Address already in use&quot; conflicts and ensures background VISA discovery tasks always complete.</li>
+<li><strong>YAK Model-Aware Routing</strong>: Integrated nested hardware model routing inside the YAK Repository. The YAK agent now dynamically builds SCPI templates based on the specific hardware models identified by the VISA scanner.</li>
+<li><strong>Console Live-Monitoring</strong>: Ripped out silent internal loggers from the Rust YAK agent (<code>mqtt.rs</code>, <code>rig.rs</code>, <code>set.rs</code>, <code>nab.rs</code>, <code>do_cmd.rs</code>) and replaced them with highly visible <code>println!</code> terminal output to mirror the MIDI agent&#39;s real-time MQTT debugging.</li>
+<li><strong>Frontend YAK Command Router</strong>: Migrated <code>CommandRouter</code> to a bespoke React component (<code>CommandRouter.jsx</code>) featuring an auto-scrolling, syntax-highlighted terminal interface that subscribes natively to YAK&#39;s <code>monitor/in</code> and <code>monitor/out</code> MQTT topics for live traffic visualization.</li>
+<li><strong>Router UI Ergonomics (3235)</strong>: Ran an automated script across <code>yak_router.json</code> to overhaul the tiny, default <code>OcaBooleanActuator</code> buttons. Actuators now feature massive 44x250 hitboxes and distinct, descriptive labels (e.g. <code>CLOSE Channels</code>, <code>SELECT Channel</code>) instead of the default generic &quot;Toggle&quot; text.</li>
+<li><strong>Root Directory Cleanup</strong>: Purged multiple unused experimental <code>.py</code> and <code>.js</code> scratch files to keep the root directory pristine.</li>
+</ul>
+<h2>2026-07-05 - Fader scaling, Web Splash, and Mobile PWA Enhancements</h2>
+<ul>
+<li><strong>FaderDial Overhaul</strong>: Fixed an issue where horizontal fader elements overlapped their dial components due to unconstrained flex layout shrinking on smaller screens.</li>
+<li><strong>Dynamic Fader Sizing Fix</strong>: Removed artificial constraints on the FaderDial knob size, while gracefully capping automatic font growth. Explicit JSON layout fonts (e.g. <code>&quot;font&quot;: 10</code>) are now correctly honored.</li>
+<li><strong>Left Padding Optimization</strong>: Corrected <code>frequency.json</code> configs where excessive <code>&quot;padx&quot;: 20</code> shifted faders too far right, causing layout compression.</li>
+<li><strong>Desktop Splash Screen</strong>: Implemented a native desktop boot splash screen (<code>splash.py</code>) featuring an animated GIF to mask the Rust kernel boot time.</li>
+<li><strong>Web PWA Splash Screen</strong>: Synchronized the Web App experience by embedding the same animated splash GIF natively into <code>index.html</code>.</li>
+<li><strong>Background Lazy Loading</strong>: Optimized the web splash sequence so the React <code>LoaderOrchestrator</code> mounts secretly in the background, aggressively downloading UI components while the 2.5s visual animation plays.</li>
+<li><strong>Mobile Cache Management</strong>: Deployed a &quot;FLUSH CACHE &amp; RELOAD&quot; button deep in the Settings menu (tap OPEN-AIR logo) to give standalone mobile/PWA users a native way to bypass Service Worker caches and hard-refresh their interface.</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>Development/CHANGELOG.md</code>
+  </div>
+</body>
+</html>

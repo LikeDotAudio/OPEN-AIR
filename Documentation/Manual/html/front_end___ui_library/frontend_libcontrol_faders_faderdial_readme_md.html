@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: faders / FaderDial - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>FaderDial — fader + dial composite</h1>
+<p>The <code>_Horizontal_with_dial_Value</code> composite: a horizontal fader (whole-number
+part) plus a rotary knob (decimal part) plus a value readout, summing to one
+number. Fluid when given a <code>%</code> width; redraws crisply with no jiggle.</p>
+<ul>
+<li><strong>Defines (global):</strong> <code>FaderDial</code></li>
+<li><strong>Props:</strong> <code>value</code>, <code>onChange</code>, <code>config</code> (min/max under <code>domain.primary</code> <em>or</em> top-level strings)</li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;Exhaustive_Composite_Example&quot;: {
+    &quot;type&quot;: &quot;_Horizontal_with_dial_Value&quot;,
+    &quot;column_spacing&quot;: [
+      80,
+      10,
+      10
+    ],
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;Master High-Precision Tuning&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      },
+      &quot;show_label&quot;: true
+    },
+    &quot;description&quot;: &quot;An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.&quot;,
+    &quot;layout&quot;: {
+      &quot;width&quot;: 600,
+      &quot;height&quot;: 120,
+      &quot;stretch&quot;: &quot;width&quot;,
+      &quot;padx&quot;: 20,
+      &quot;pady&quot;: 10,
+      &quot;sticky&quot;: &quot;ew&quot;
+    },
+    &quot;domain&quot;: {
+      &quot;locked&quot;: false,
+      &quot;min&quot;: 0.0,
+      &quot;max&quot;: 5000.0,
+      &quot;units&quot;: &quot;MHz&quot;,
+      &quot;step_coarse&quot;: 100.0,
+      &quot;step_fine&quot;: 0.001,
+      &quot;precision&quot;: &quot;.001&quot;
+    },
+    &quot;value&quot;: {
+      &quot;default_value&quot;: 1250.0
+    },
+    &quot;value_config&quot;: {
+      &quot;_README&quot;: &quot;Overrides for the numerical entry and unit readout panel (Column 2).&quot;,
+      &quot;width&quot;: 12,
+      &quot;font&quot;: 18,
+      &quot;colour&quot;: &quot;#00FF00&quot;,
+      &quot;bg_color&quot;: &quot;#050505&quot;,
+      &quot;height&quot;: 35
+    },
+    &quot;fader_config&quot;: {
+      &quot;_README&quot;: &quot;Deep overrides for the coarse adjustment horizontal fader (Column 0).&quot;,
+      &quot;cosmetics&quot;: {
+        &quot;scale&quot;: {
+          &quot;interval&quot;: 500,
+          &quot;show&quot;: true
+        },
+        &quot;styling&quot;: {
+          &quot;glow_intensity&quot;: 1.8
+        },
+        &quot;colors&quot;: {
+          &quot;cap&quot;: &quot;#dcdcdc&quot;,
+          &quot;cap_highlight&quot;: &quot;#33A1FD&quot;,
+          &quot;highlight&quot;: &quot;#FF9900&quot;,
+          &quot;tick_color&quot;: &quot;#888888&quot;,
+          &quot;sub_tick_color&quot;: &quot;#444444&quot;
+        }
+      },
+      &quot;interaction&quot;: {
+        &quot;reff_point&quot;: 2500.0
+      },
+      &quot;bar_color&quot;: &quot;#222222&quot;,
+      &quot;active_color&quot;: &quot;#FF9900&quot;,
+      &quot;fader_cap_scale&quot;: 1.2,
+      &quot;cap_width&quot;: 55,
+      &quot;cap_height&quot;: 40,
+      &quot;log_exponent&quot;: 1.0
+    },
+    &quot;dial_config&quot;: {
+      &quot;_README&quot;: &quot;Deep overrides for the fine-tuning rotary dial (Column 1).&quot;,
+      &quot;cosmetics&quot;: {
+        &quot;style_overrides&quot;: {
+          &quot;knob_style&quot;: &quot;vintage&quot;,
+          &quot;shape&quot;: &quot;gear&quot;
+        },
+        &quot;styling&quot;: {
+          &quot;teeth&quot;: 12,
+          &quot;gradient&quot;: 3,
+          &quot;fill_color&quot;: &quot;#333333&quot;,
+          &quot;outline_thickness&quot;: 1,
+          &quot;outline_color&quot;: &quot;#555555&quot;,
+          &quot;arc_width&quot;: 6,
+          &quot;no_center&quot;: false
+        },
+        &quot;colors&quot;: {
+          &quot;active&quot;: &quot;#00ffff&quot;,
+          &quot;background&quot;: &quot;#2b2b2b&quot;
+        },
+        &quot;pointer&quot;: {
+          &quot;style&quot;: &quot;triangle&quot;,
+          &quot;length&quot;: 25,
+          &quot;offset&quot;: 5
+        },
+        &quot;scale&quot;: {
+          &quot;show&quot;: true,
+          &quot;style&quot;: &quot;dots&quot;,
+          &quot;length&quot;: 8
+        }
+      },
+      &quot;readout&quot;: {
+        &quot;text_inside&quot;: false,
+        &quot;label_position&quot;: &quot;top&quot;
+      },
+      &quot;interaction&quot;: {
+        &quot;infinity&quot;: true,
+        &quot;fine_pitch&quot;: true
+      },
+      &quot;width&quot;: 80,
+      &quot;height&quot;: 80,
+      &quot;indicator_color&quot;: &quot;#00ffff&quot;
+    },
+    &quot;yak_handler&quot;: {
+      &quot;_README&quot;: &quot;Hardware bridge configuration for MQTT/SCPI communication.&quot;,
+      &quot;enable&quot;: true,
+      &quot;yak_type&quot;: &quot;set&quot;,
+      &quot;sub_path&quot;: &quot;Frequency&quot;,
+      &quot;command&quot;: &quot;Set_Freq&quot;,
+      &quot;input_name&quot;: &quot;hz_value&quot;,
+      &quot;converter&quot;: &quot;mhz_to_hz&quot;
+    },
+    &quot;cosmetics&quot;: {
+      &quot;_README&quot;: &quot;Legacy fallback color definitions used if specific configs are missing.&quot;,
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This sample is REALLY REALLY complete. It outlines every sub-config breakout for the fader, knob, and value elements, including style options and hardware handlers.&quot;,
+  &quot;_LEGEND&quot;: {
+    &quot;knob_styles&quot;: [
+      &quot;standard&quot;,
+      &quot;panner&quot;,
+      &quot;dial&quot;,
+      &quot;vintage&quot;,
+      &quot;industrial&quot;,
+      &quot;modern&quot;
+    ],
+    &quot;knob_shapes&quot;: [
+      &quot;circle&quot;,
+      &quot;octagon&quot;,
+      &quot;gear&quot;
+    ],
+    &quot;pointer_styles&quot;: [
+      &quot;line&quot;,
+      &quot;triangle&quot;,
+      &quot;notch&quot;
+    ],
+    &quot;tick_styles&quot;: [
+      &quot;simple&quot;,
+      &quot;dots&quot;,
+      &quot;numeric&quot;
+    ],
+    &quot;column_spacing_note&quot;: &quot;[Fader_Width, Knob_Width, Value_Width] - Percentages should sum to 100.&quot;
+  }
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/faders/FaderDial/Readme.md</code>
+  </div>
+</body>
+</html>

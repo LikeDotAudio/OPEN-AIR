@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SAP - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-sap — SAP/SDP session announcement discovery</h1>
+<p>Passive listener for AES67 streams announced over SAP.</p>
+<p><strong>Listen only.</strong> This agent never transmits a SAP packet, and never subscribes
+to RTP.</p>
+<h2>Why SAP exists alongside mDNS</h2>
+<p>AES67 standardises how audio is clocked, packetised and transported, but
+deliberately says nothing about how you <em>find</em> a stream. The ecosystem split:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Announces via</th>
+<th>Handled by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RAVENNA</strong></td>
+<td>mDNS/DNS-SD + SDP pulled over RTSP</td>
+<td><a href="../openair-ravenna/"><code>openair-ravenna</code></a></td>
+</tr>
+<tr>
+<td><strong>Dante in AES67 mode</strong></td>
+<td>SAP push to a multicast group</td>
+<td><strong>this crate</strong></td>
+</tr>
+</tbody></table>
+<p>Dante abandons mDNS entirely for AES67 streams: no queries, no resolution, no
+handshake. The device pushes raw SDP to UDP 9875 every few seconds, and anything
+listening builds a directory for free.</p>
+<h2>Overlap with RAVENNA is intentional</h2>
+<p>A node running RAV2SAP, or a RAVENNA device with SAP publishing enabled, appears
+under <strong>both</strong> agents. That is not a duplicate to suppress here — the two topic
+trees record two different observations (&quot;announced over mDNS&quot; / &quot;announced over
+SAP&quot;), and <em>which mechanisms a stream actually uses</em> is precisely the interop
+question you are asking when something will not connect.</p>
+<p>Correlating them into one device is the Device Registry&#39;s job, not the
+listener&#39;s.</p>
+<h2>Three multicast groups, not one</h2>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>239.255.255.255</code></td>
+<td>what Dante uses</td>
+</tr>
+<tr>
+<td><code>224.2.127.254</code></td>
+<td>the IANA-assigned SAP group</td>
+</tr>
+<tr>
+<td><code>239.195.255.255</code></td>
+<td>organisation-local range, used by some installs</td>
+</tr>
+</tbody></table>
+<p>Listening to only one silently misses devices; an unused membership costs
+nothing.</p>
+<h2>Sessions expire</h2>
+<p>SAP is periodic push with <strong>no goodbye guarantee</strong> — an unplugged device simply
+stops talking, and the <code>T</code>-flag deletion packet only arrives on a clean
+shutdown. Without expiry the Discovered tab would accumulate ghosts forever.</p>
+<p><code>SESSION_TIMEOUT</code> is 5 minutes: RFC 2974 suggests ten announcement intervals,
+and observed AoIP gear announces every 5–30 s, so this covers a slow announcer
+while still clearing a dead one promptly. Expiry is checked on the same loop as
+the socket read rather than from a second thread holding a lock.</p>
+<h2>Columns</h2>
+<p>The first ten deliberately match <code>openair-ravenna</code>&#39;s, so streams from both
+protocols read side by side. Then <code>source</code>, <code>announced_via</code>, <code>msg_id</code>.</p>
+<h2>Topics</h2>
+<pre><code>OpenAir/System/Protocols/sap/Device/{origin_ip}/{session}/{key}
+</code></pre>
+<p>Grouped by the <strong>announcing node&#39;s IP</strong> rather than by session, because one
+Dante device commonly announces every transmit flow separately — the UI should
+show one device with N streams.</p>
+<h2>Why it never transmits</h2>
+<p>Publishing a SAP announcement would insert a phantom source into every routing
+matrix on the network. That is not something a discovery tool gets to do as a
+side effect of looking.</p>
+<h2>Tests</h2>
+<p><code>cargo test -p openair-sap</code> — decoding a real bench announcement, a Dante AES67
+announcement, and rejecting video sessions that happen to be on 9875.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-sap/README.md</code>
+  </div>
+</body>
+</html>

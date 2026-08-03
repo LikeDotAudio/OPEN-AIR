@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: Panels / Panel - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Panel — procedural background &quot;cover&quot; (WASM)</h1>
+<p><code>window.Panel</code> renders a procedurally generated industrial panel into a <code>&lt;canvas&gt;</code>
+and blits it behind whatever it wraps. The texture is produced by the Rust→WASM
+engine in <code>../wasm</code> (<code>window.OAPanels.generatePanel</code>) — the same layered pipeline
+the Python desktop generator used (substrate → paint → vignette → rust →
+scratches → stains → <strong>auto-placed screws</strong> → metal-fold → dust → global blur).</p>
+<p>It is <strong>static</strong>: no animation, no MQTT. It only regenerates when its box size or
+its config changes, and caches results by <code>WxH|configJSON</code>.</p>
+<h2>How it is used</h2>
+<p><strong>1. Global default</strong> — every <code>OcaBin</code> renders the global cover
+(<code>window.OA_PANEL_DEFAULT_CONFIG</code>, defined in <code>../panel_wasm_loader.js</code>) behind
+its content automatically.</p>
+<p><strong>2. Page/container declares its own</strong> — set a <code>background</code> object on the OcaBin
+(the established schema; <code>cosmetics.panel</code> / <code>panel</code> are also accepted):</p>
+<pre><code class="language-jsonc">{
+  &quot;type&quot;: &quot;OcaBin&quot;,
+  &quot;background&quot;: {
+    &quot;parameters&quot;: {
+      &quot;base_material&quot;: { &quot;color&quot;: &quot;#444444&quot;, &quot;texture_type&quot;: &quot;wrinkle&quot; },
+      &quot;dust&quot;: { &quot;enabled&quot;: true, &quot;intensity&quot;: 0.7 }
+    }
+  }
+}
+</code></pre>
+<p>Set <code>&quot;enabled&quot;: false</code> on that object to opt a bin out of any cover.</p>
+<p><strong>3. Explicit widget</strong> — drop a <code>panel</code> field anywhere via the layout JSON / the
+WYSIWYG palette (sample below).</p>
+<h2>Config schema (under <code>parameters</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>group</th>
+<th>keys</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>random_seed</code></td>
+<td>int — deterministic seed</td>
+</tr>
+<tr>
+<td><code>global_blur</code></td>
+<td>float — final Gaussian blur</td>
+</tr>
+<tr>
+<td><code>base_material</code></td>
+<td><code>color</code> (hex), <code>texture_type</code> (<code>flat</code>/<code>brushed</code>/<code>hammered</code>/<code>crosshatch</code>/<code>wrinkle</code>/<code>enamel</code>), <code>grain_direction</code></td>
+</tr>
+<tr>
+<td><code>paint_layer</code></td>
+<td><code>color</code>, <code>opacity</code> 0–1, <code>gradient_intensity</code></td>
+</tr>
+<tr>
+<td><code>edge_wear</code></td>
+<td><code>enabled</code>, <code>scratch_depth</code>, <code>scratch_intensity</code>, <code>fade_depth</code>, <code>vignette_intensity</code></td>
+</tr>
+<tr>
+<td><code>panel_scratches</code></td>
+<td><code>count</code>, <code>intensity</code>, <code>min_length_px</code>, <code>max_length_px</code>, <code>width_px</code>, <code>depth_highlight</code>, <code>reveals_substrate</code></td>
+</tr>
+<tr>
+<td><code>rust</code></td>
+<td><code>enabled</code>, <code>intensity</code></td>
+</tr>
+<tr>
+<td><code>grime</code></td>
+<td><code>stain_count</code>, <code>color</code>, <code>opacity</code>, <code>stain_spread</code></td>
+</tr>
+<tr>
+<td><code>screws</code></td>
+<td><code>enabled</code>, <code>type</code> (<code>fillister</code>/<code>countersunk</code>), <code>finish</code> (<code>chrome</code>/<code>black</code>), <code>size_px</code>, <code>locations</code> <code>[&quot;top&quot;,&quot;bottom&quot;,&quot;middle&quot;]</code></td>
+</tr>
+<tr>
+<td><code>metal_fold</code></td>
+<td><code>enabled</code>, <code>width_px</code>, <code>creases:[{orientation,position_pct}]</code>, <code>repeat_screws</code></td>
+</tr>
+<tr>
+<td><code>dust</code></td>
+<td><code>enabled</code>, <code>intensity</code></td>
+</tr>
+<tr>
+<td><code>studio_haze</code></td>
+<td><code>enabled</code>, <code>intensity</code></td>
+</tr>
+</tbody></table>
+<h2>Grab-bag sample</h2>
+<pre><code class="language-json">{
+  &quot;Panel&quot;: {
+    &quot;type&quot;: &quot;panel&quot;,
+    &quot;geometry&quot;: { &quot;width&quot;: 320, &quot;height&quot;: 200 },
+    &quot;panel&quot;: {
+      &quot;parameters&quot;: {
+        &quot;random_seed&quot;: 7,
+        &quot;global_blur&quot;: 0.5,
+        &quot;base_material&quot;: { &quot;color&quot;: &quot;#2a2a2a&quot;, &quot;texture_type&quot;: &quot;brushed&quot;, &quot;grain_intensity&quot;: 0.35 },
+        &quot;paint_layer&quot;: { &quot;color&quot;: &quot;#3a4a5a&quot;, &quot;opacity&quot;: 0.12, &quot;gradient_intensity&quot;: 0.2 },
+        &quot;edge_wear&quot;: { &quot;enabled&quot;: true, &quot;fade_depth&quot;: 30, &quot;vignette_intensity&quot;: 0.5 },
+        &quot;screws&quot;: { &quot;enabled&quot;: true, &quot;type&quot;: &quot;fillister&quot;, &quot;finish&quot;: &quot;chrome&quot;, &quot;size_px&quot;: 20, &quot;locations&quot;: [&quot;top&quot;, &quot;bottom&quot;] }
+      }
+    }
+  }
+}
+</code></pre>
+<h2>Rebuilding the WASM</h2>
+<pre><code class="language-bash">cd frontEnd/libControl/Panels/wasm
+wasm-pack build --target no-modules --release --out-dir pkg
+</code></pre>
+<p>Outputs <code>pkg/oa_panels.js</code> + <code>pkg/oa_panels_bg.wasm</code>, served directly by the
+Python web server (no bundler step).</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/Panels/Panel/Readme.md</code>
+  </div>
+</body>
+</html>

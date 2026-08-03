@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PTP - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>OpenAir PTP Backend (<code>openair-ptp</code>)</h1>
+<p>Discovery and live traffic monitoring for <strong>all three clock protocols that can
+share one NIC</strong>: PTPv1 (IEEE 1588-2002), PTPv2 (IEEE 1588-2008) and gPTP
+(IEEE 802.1AS).</p>
+<p>It watches the packets arrive, decodes them, and — the part that makes a
+capture readable — correlates them into the exchanges they actually form:
+Sync ↔ Follow_Up, Delay_Req ↔ Delay_Resp, and the three-legged peer-delay
+chain.</p>
+<hr>
+<h2>Why three protocols on one NIC is the hard case</h2>
+<p>They are not three variations of one thing. They disagree about the header
+layout, the transport, and even how a clock is named:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Standard</th>
+<th>Transport</th>
+<th>Address</th>
+<th>Identity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PTPv1</td>
+<td>1588-2002</td>
+<td>UDP/IPv4</td>
+<td><code>224.0.1.129</code> :319/:320</td>
+<td>6-byte UUID</td>
+</tr>
+<tr>
+<td>PTPv2</td>
+<td>1588-2008</td>
+<td>UDP/IPv4</td>
+<td><code>224.0.1.129</code> :319/:320</td>
+<td>8-byte clock identity</td>
+</tr>
+<tr>
+<td>PTPv2</td>
+<td>1588-2008</td>
+<td>Ethernet</td>
+<td><code>01:1B:19:00:00:00</code>, 0x88F7</td>
+<td>8-byte clock identity</td>
+</tr>
+<tr>
+<td>gPTP</td>
+<td>802.1AS</td>
+<td>Ethernet</td>
+<td><code>01:80:C2:00:00:0E</code>, 0x88F7</td>
+<td>8-byte clock identity</td>
+</tr>
+</tbody></table>
+<p>Four consequences drive the whole design:</p>
+<p><strong>1. v1 and v2 share the group <em>and</em> the ports.</strong> One socket receives both, and
+only the leading bytes tell them apart. This is precisely how a v1 device hides
+on a network everyone believes is v2-only — nothing about the transport betrays
+it.</p>
+<p><strong>2. Listening means two different kinds of socket at once.</strong> UDP for v1/v2 and
+a raw <code>AF_PACKET</code> socket for gPTP. There is no single API that sees both.</p>
+<p><strong>3. Event and general messages arrive on different sockets.</strong> Sync, Delay_Req
+and Pdelay_* are hardware-timestamped and use port 319; Follow_Up, Delay_Resp
+and Announce use port 320. <strong>A Sync and its own Follow_Up therefore arrive on
+different sockets</strong> — a detail that makes captures baffling until you know it.
+Both are polled and merged into one stream, which is what makes correlation
+possible at all.</p>
+<p><strong>4. gPTP and PTPv2-over-Ethernet look identical at first glance.</strong> Same
+EtherType, both Layer 2. What separates them is <code>transportSpecific = 1</code> and the
+destination MAC. Since AES67/RAVENNA installs commonly run plain 1588 at Layer
+2, conflating the two would file a RAVENNA clock as an AVB one. The variant is
+part of a clock&#39;s identity here, so they stay distinct rows.</p>
+<hr>
+<h2>Core Architecture</h2>
+<ul>
+<li><strong><code>message.rs</code></strong> — PTPv2 / gPTP parsing. The 34-byte common header plus the
+bodies worth reading: Announce (grandmaster identity, priority, clock class
+and accuracy, time source, stepsRemoved), the timestamps on Sync/Follow_Up/
+Delay_*, and the flag field.</li>
+<li><strong><code>v1.rs</code></strong> — PTPv1. A separate parser because it shares nothing but the
+wire. Also maps a v1 UUID onto the v2 clock-identity convention, so one box
+running both stacks can be recognised as one device.</li>
+<li><strong><code>net.rs</code></strong> — capture across both transports: UDP 319/320 joined to the PTP
+groups, and raw Ethernet filtered to 0x88F7 with membership in both PTP
+multicast MACs.</li>
+<li><strong><code>flow.rs</code></strong> — correlation. Turns a packet stream into exchanges.</li>
+<li><strong><code>monitor.rs</code></strong> — the shared capture loop, plus the accumulated clock table.</li>
+<li><strong><code>agent.rs</code></strong> — the MQTT agent.</li>
+<li><strong><code>bin/ptp-monitor.rs</code></strong> — the live view.</li>
+</ul>
+<p>The legacy <code>oa_ptp_clock_rs</code> / <code>oa_ptp_parser_rs</code> PyO3 modules predate all of
+this and remain behind the non-default <code>python</code> feature. They are untouched and
+nothing above depends on them.</p>
+<hr>
+<h2>Correlation: the part that matters</h2>
+<p>A PTP capture read message-by-message is nearly useless. What you want to know
+is which messages belong together:</p>
+<pre><code>Two-step sync    master ──Sync(seq N)──▶ slave
+                 master ──Follow_Up(seq N, precise t1)──▶ slave
+
+Delay request    slave  ──Delay_Req(seq M)──▶ master          (E2E)
+                 master ──Delay_Resp(seq M, t4)──▶ slave
+
+Peer delay       A ──Pdelay_Req(seq K)──▶ B                   (P2P / gPTP)
+                 B ──Pdelay_Resp(seq K, t2)──▶ A
+                 B ──Pdelay_Resp_Follow_Up(seq K, t3)──▶ A
+</code></pre>
+<p>Three rules make this correct rather than merely plausible:</p>
+<p><strong>Messages are keyed per-port, not per-sequence.</strong> Sequence IDs are per-port
+counters, so two grandmasters will happily both be on sequence 4521 at the same
+moment. A tracker keyed on the sequence alone pairs the wrong Sync with the
+wrong Follow_Up and reports a fictional delta that looks entirely reasonable.
+The key is (clock identity, port number, domain, variant).</p>
+<p><strong>Responses are filed under the requester, not the sender.</strong> A Delay_Resp is
+sent by the master but answers the <em>slave&#39;s</em> Delay_Req, so it is looked up by
+the requesting port identity carried in its body. Keying it by the sender would
+never find anything.</p>
+<p><strong>A one-step Sync is never left pending.</strong> When <code>twoStepFlag</code> is clear, the
+Sync carries its own timestamp and no Follow_Up is ever coming. Recording it
+would leave an entry that only ever expires — and would suggest to whoever
+reads the output that something went missing when nothing did.</p>
+<p>Unanswered exchanges expire after 10s. Sequence IDs are 16-bit and wrap; without
+expiry, a Sync whose Follow_Up was lost would linger and be falsely completed
+65536 messages later.</p>
+<p>The gap the monitor prints is <strong>arrival-to-arrival at this capture point</strong>, not
+a protocol measurement. It is inflated by our own scheduling and is useful for
+spotting a Follow_Up that took 40ms — not for computing offset. The protocol&#39;s
+own numbers are in the timestamp fields.</p>
+<hr>
+<h2>The monitor</h2>
+<pre><code class="language-bash">sudo ./ptp-monitor                 # live tail of everything
+sudo ./ptp-monitor --summary       # clock table, refreshed every 5s
+sudo ./ptp-monitor --seconds 30    # run 30s, then print the summary
+sudo ./ptp-monitor --domain 0      # only this PTP domain
+</code></pre>
+<p>The live tail shows each message with the detail that makes it worth reading —
+whether a Sync is one-step or two-step, an Announce&#39;s full grandmaster claim,
+the correction field when non-zero — and, underneath, what it completed:</p>
+<pre><code>   1.234s gPTP     L2 Sync                  seq  4521 dom   0 from 00:0A:92:FF:FE:01:56:A3/1  [twoStep — Follow_Up expected]
+   1.237s gPTP     L2 Follow_Up             seq  4521 dom   0 from 00:0A:92:FF:FE:01:56:A3/1  t=1784...
+           ↳ completes Sync seq 4521 — observed 3.102ms after it
+</code></pre>
+<p>Ctrl-C prints the summary rather than discarding it.</p>
+<p>The summary sorts grandmasters first, and flags the diagnosis worth leading
+with: <strong>more than one grandmaster claimed in the same domain.</strong> Devices
+following different grandmasters are not on the same time and cannot exchange
+audio, and it is free to check once the clocks are in hand.</p>
+<hr>
+<h2>Privileges</h2>
+<p>PTP needs two grants, for two separate reasons — ports 319/320 are below 1024,
+and raw Ethernet capture is privileged on Linux:</p>
+<pre><code class="language-bash">sudo setcap cap_net_raw,cap_net_bind_service+eip target/release/ptp-monitor
+</code></pre>
+<p>...or run with <code>sudo</code>.</p>
+<p><strong>Each transport opens independently, and a partial capture still runs.</strong>
+Seeing only gPTP because the UDP bind was refused is a legitimate result — as
+long as it says so, which it does, both on the console and on the bus. The
+alternative (failing outright) throws away half a working diagnosis.</p>
+<hr>
+<h2>MQTT topics</h2>
+<pre><code>OpenAir/System/Protocols/ptp/Device/{clock_id}-{port}-d{domain}/{key}
+</code></pre>
+<p>One row per <strong>PTP port</strong>, not per device. A box can run several ports, several
+domains, and more than one flavour at once — each is an independent clock that
+can disagree with the others, and merging them by device would hide exactly the
+disagreement worth seeing.</p>
+<p>Keys: <code>clock_id</code>, <code>port</code>, <code>variant</code>, <code>domain</code>, <code>role</code>, <code>grandmaster</code>,
+<code>gm_class</code>, <code>gm_class_meaning</code>, <code>gm_accuracy</code>, <code>time_source</code>, <code>steps_removed</code>,
+<code>priority1</code>, <code>priority2</code>, <code>sync_interval_s</code>, <code>two_step</code>, <code>status</code>,
+<code>last_online</code>.</p>
+<p>Agent health, for the same reason as the AVB agent — the orchestrator infers
+<code>online</code> from a <code>config.ini</code> and cannot know a capability is missing:</p>
+<pre><code>OpenAir/System/Protocols/ptp/Agent/state    listening | partial | unavailable
+OpenAir/System/Protocols/ptp/Agent/detail   which transports opened, or why not
+</code></pre>
+<p><code>partial</code> is its own state on purpose: &quot;no gPTP clocks&quot; and &quot;could not listen
+for gPTP&quot; are indistinguishable downstream otherwise.</p>
+<h3>Publishing policy differs from every other agent here</h3>
+<p>PTP is continuous, high-rate traffic. gPTP Sync runs at 8 messages per second
+per port by default; an mDNS device announces every few minutes. Republishing a
+retained topic per Sync would put thousands of writes a minute on the bus to say
+nothing new.</p>
+<p>So the agent publishes <strong>on state change plus a 30-second heartbeat</strong>, and only
+writes keys whose values actually changed. The packet-by-packet view is
+<code>ptp-monitor</code>&#39;s job — that is a tool you watch, not a state store.</p>
+<p>Clocks that go quiet for 30s are cleared. PTP is continuous by nature: a healthy
+clock is never silent that long at any standard rate, so silence means gone
+rather than idle.</p>
+<hr>
+<h2>Discovered tab</h2>
+<p><code>BackEnd/Core/orchestrator/gui/build_discovered_gui.py</code> subscribes to the tree above and builds a
+<code>ptp</code> tab, one row per port, with the grandmaster columns first — <code>grandmaster</code>
+and <code>gm_class</code> answer &quot;is time healthy?&quot;, which is the question the tab exists
+for.</p>
+<hr>
+<h2>How the tests work</h2>
+<p><code>cargo test -p openair-ptp</code> — 37 tests, no hardware or network required. Every
+test builds real frame bytes and parses them.</p>
+<p>The tests worth knowing about are the ones pinning down mistakes that would
+otherwise produce <em>plausible</em> output:</p>
+<ul>
+<li><strong><code>correction_field_is_descaled</code></strong> — <code>correctionField</code> is nanoseconds scaled
+by 2^16. Reading it raw overstates residence time by 65536×, which looks like
+a catastrophically broken network rather than a parsing bug.</li>
+<li><strong><code>negative_corrections_stay_negative</code></strong> — an unsigned read turns a small
+negative correction into an enormous positive one.</li>
+<li><strong><code>identical_sequence_ids_from_different_clocks_do_not_cross_match</code></strong> — the
+fictional-delta bug described above.</li>
+<li><strong><code>control_field_names_the_message_not_byte_20</code></strong> — in PTPv1, byte 20 is
+event-vs-general and byte 32 (<code>control</code>) names the message. Reading byte 20 as
+if it were v2&#39;s <code>messageType</code> turns every v1 Sync into a Delay_Req.</li>
+<li><strong><code>l2_ptpv2_is_not_promoted_to_gptp</code></strong> — the RAVENNA-filed-as-AVB error.</li>
+<li><strong><code>timestamps_use_48_bit_seconds</code></strong> — seconds are 48-bit; a 32-bit read
+truncates.</li>
+<li><strong><code>clock_identity_yields_a_mac_only_when_eui64</code></strong> — clock identities are
+conventionally a MAC with <code>FF:FE</code> spliced in, but only conventionally, so the
+MAC is returned only when the identity really has that shape rather than
+inventing six bytes.</li>
+<li><strong><code>vlan_tagged_frames_parse_identically</code></strong> — gPTP is class SR-A traffic and is
+routinely priority-tagged; the kernel only strips the tag when the NIC
+offloads it, so both forms reach us.</li>
+</ul>
+<p>Fixtures are synthetic, built from the standards. The AES67 agents in this repo
+test against byte-verbatim bench captures, and this crate should too — capture
+one frame of each flavour off the wire and add them, the way <code>openair-sap</code> did.</p>
+<hr>
+<h2>Scope</h2>
+<p>Discovery and observation only. This crate <strong>never transmits a PTP message</strong>.</p>
+<p>That is a harder line than it is for the other agents, and deliberate: a device
+emitting Announce messages participates in the Best Master Clock Algorithm, and
+a monitoring tool that accidentally wins a grandmaster election would take over
+timing for the entire network. Reading is safe; speaking is not. There is no
+send path in this crate at all.</p>
+<p>It also does not discipline the local clock — no <code>clock_gettime</code>/<code>adjtimex</code>, no
+PHC access. That is <code>ptp4l</code>/<code>phc2sys</code>&#39;s job, and doing it from a discovery agent
+would fight whatever daemon is already doing it properly.</p>
+<h3>Known overlap</h3>
+<p><code>net.rs</code>&#39;s raw-socket handling duplicates <code>openair-avb-milan</code>&#39;s <code>capture.rs</code> —
+same <code>AF_PACKET</code> setup, same multicast-membership-not-promiscuous reasoning,
+different EtherType and groups. Two users is not yet three, so the shared
+abstraction is deliberately <strong>not</strong> extracted; when a third Layer 2 protocol
+arrives, that is the moment to pull it into a common crate rather than now.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-ptp/README.md</code>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DS1104Z / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Oscilloscope/DS1104Z — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>760 commands</strong> — SET 339 · RIG 0 · NAB 358 · DO 63 · 687 unverified (90%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Get_Stats_CH1</code> · → vpp_1, vrms_1, frequency_1, pduty_1<ul>
+<li><code>:MEASure:VPP? CHANnel1;:MEASure:VRMS? CHANnel1;:MEASure:FREQuency? CHANnel1;:MEASure:PDUTy? CHANnel1</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Stats_CH2</code> · → vpp_2, vrms_2, frequency_2, pduty_2<ul>
+<li><code>:MEASure:VPP? CHANnel2;:MEASure:VRMS? CHANnel2;:MEASure:FREQuency? CHANnel2;:MEASure:PDUTy? CHANnel2</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Stats_CH3</code> · → vpp_3, vrms_3, frequency_3, pduty_3<ul>
+<li><code>:MEASure:VPP? CHANnel3;:MEASure:VRMS? CHANnel3;:MEASure:FREQuency? CHANnel3;:MEASure:PDUTy? CHANnel3</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>Get_Stats_CH4</code> · → vpp_4, vrms_4, frequency_4, pduty_4<ul>
+<li><code>:MEASure:VPP? CHANnel4;:MEASure:VRMS? CHANnel4;:MEASure:FREQuency? CHANnel4;:MEASure:PDUTy? CHANnel4</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Auto</code></li>
+<li><code>AUToscale</code> — <strong>DO</strong> <code>Auto_Scale</code></li>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Clear</code></li>
+<li><code>TFORce</code> — <strong>DO</strong> <code>Force_Trigger</code></li>
+<li><code>RUN</code> — <strong>DO</strong> <code>Run</code></li>
+<li><code>SINGle</code> — <strong>DO</strong> <code>Single</code></li>
+<li><code>STOP</code> — <strong>DO</strong> <code>Stop</code></li>
+<li><strong><code>ACQuire</code></strong><ul>
+<li><code>AVERages</code> — <strong>SET</strong> <code>Set_Acquire_Averages</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the number of averages under the average acquisition mode</li>
+<li><code>MDEPth</code> — <strong>SET</strong> <code>Set_Acquire_Mdepth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the memory depth of the oscilloscope (namely the number of waveform points that can be stored in a single trigger sample)</li>
+<li><code>AVERages?</code> — <strong>NAB</strong> <code>Get_Acquire_Averages</code> · → NR1 · †<br>Set or query the number of averages under the average acquisition mode</li>
+<li><code>MDEPth?</code> — <strong>NAB</strong> <code>Get_Acquire_Mdepth</code> · → 1 value · †<br>Set or query the memory depth of the oscilloscope (namely the number of waveform points that can be stored in a single trigger sample)</li>
+<li><code>SRATe?</code> — <strong>NAB</strong> <code>Get_Acquire_Srate</code> · → 1 value · †<br>Query the current sample rate</li>
+</ul>
+</li>
+<li><strong><code>APPLy</code></strong><ul>
+<li><code>NOISe</code> — <strong>DO</strong> <code>Do_Apply_Noise</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+<li><code>PULSe</code> — <strong>DO</strong> <code>Do_Apply_Pulse</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+<li><code>RAMP</code> — <strong>DO</strong> <code>Do_Apply_Ramp</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+<li><code>SINusoid</code> — <strong>DO</strong> <code>Do_Apply_Sinusoid</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+<li><code>SQUare</code> — <strong>DO</strong> <code>Do_Apply_Square</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+<li><code>USER</code> — <strong>DO</strong> <code>Do_Apply_User</code> · †<br>Configure the specified source channel to output a signal with the specified waveform and parameters</li>
+</ul>
+</li>
+<li><strong><code>CALibrate</code></strong><ul>
+<li><code>QUIT</code> — <strong>DO</strong> <code>Do_Calibrate_Quit</code> · †<br>Exit the self-calibration at any time</li>
+<li><code>STARt</code> — <strong>DO</strong> <code>Do_Calibrate_Start</code> · †<br>The oscilloscope starts to execute self-calibration</li>
+</ul>
+</li>
+<li><strong><code>CHAN1</code></strong><ul>
+<li><code>DISP?</code> — <strong>NAB</strong> <code>Get_Channel_Display</code> · → BOOL · †</li>
+</ul>
+</li>
+<li><strong><code>CHANnel1</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH1_BWLimit</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · enum: <code>20M</code> | <code>OFF</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH1_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum: <code>AC</code> | <code>DC</code> | <code>GND</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH1_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH1_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · enum: <code>1</code> | <code>2</code> | <code>5</code> | <code>10</code> | <code>20</code> | <code>50</code> | <code>100</code> | <code>200</code> | <code>500</code> | <code>1000</code></li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH1_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (V)</li>
+<li><code>INVert</code> — <strong>SET</strong> <code>Set_Channel_Invert</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Channel_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>TCAL</code> — <strong>SET</strong> <code>Set_Channel_Tcalibrate</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>VERNier</code> — <strong>SET</strong> <code>Set_Channel_Vernier</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>BWLimit?</code> — <strong>NAB</strong> <code>Get_Channel_Bwlimit</code> · → BOOL · †</li>
+<li><code>COUPling?</code> — <strong>NAB</strong> <code>Get_Channel_Coupling</code> · → CRD · †</li>
+<li><code>INVert?</code> — <strong>NAB</strong> <code>Get_Channel_Invert</code> · → BOOL · †</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Channel_Offset</code> · → NR3 · †</li>
+<li><code>PROBe?</code> — <strong>NAB</strong> <code>Get_Channel_Probe</code> · → NR3 · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Channel_Range</code> · → NR3 · †</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Channel_Scale</code> · → NR3 · †</li>
+<li><code>TCAL?</code> — <strong>NAB</strong> <code>Get_Channel_Tcalibrate</code> · → 1 value · †</li>
+<li><code>UNITs?</code> — <strong>NAB</strong> <code>Get_Channel_Units</code> · → CRD · †</li>
+<li><code>VERNier?</code> — <strong>NAB</strong> <code>Get_Channel_Vernier</code> · → BOOL · †</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH1_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH1_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>CHANnel2</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH2_BWLimit</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · enum: <code>20M</code> | <code>OFF</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH2_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum: <code>AC</code> | <code>DC</code> | <code>GND</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH2_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH2_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · enum: <code>1</code> | <code>2</code> | <code>5</code> | <code>10</code> | <code>20</code> | <code>50</code> | <code>100</code> | <code>200</code> | <code>500</code> | <code>1000</code></li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH2_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (V)</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH2_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH2_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>CHANnel3</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH3_BWLimit</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · enum: <code>20M</code> | <code>OFF</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH3_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum: <code>AC</code> | <code>DC</code> | <code>GND</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH3_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH3_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · enum: <code>1</code> | <code>2</code> | <code>5</code> | <code>10</code> | <code>20</code> | <code>50</code> | <code>100</code> | <code>200</code> | <code>500</code> | <code>1000</code></li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH3_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (V)</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH3_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH3_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>CHANnel4</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>CH4_BWLimit</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · enum: <code>20M</code> | <code>OFF</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>CH4_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum: <code>AC</code> | <code>DC</code> | <code>GND</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>CH4_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>CH4_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · enum: <code>1</code> | <code>2</code> | <code>5</code> | <code>10</code> | <code>20</code> | <code>50</code> | <code>100</code> | <code>200</code> | <code>500</code> | <code>1000</code></li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>CH4_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (V)</li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH4_OFF</code> · <code>OFF</code></li>
+<li><code>DISPlay</code> — <strong>DO</strong> <code>CH4_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>CHANnel&lt;n&gt;</code></strong><ul>
+<li><code>BWLimit</code> — <strong>SET</strong> <code>Set_Bandwidth_Limit</code> · <code>&lt;limit&gt;</code> · args: <code>limit</code> · enum: <code>20M</code> | <code>OFF</code> · per-instance: <code>n</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Channel_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric · per-instance: <code>n</code></li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Channel_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (V) · per-instance: <code>n</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>Set_Coupling</code> · <code>&lt;coupling&gt;</code> · args: <code>coupling</code> · enum: <code>AC</code> | <code>DC</code> | <code>GND</code> · per-instance: <code>n</code></li>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Display</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code> · per-instance: <code>n</code></li>
+<li><code>PROBe</code> — <strong>SET</strong> <code>Set_Probe</code> · <code>&lt;atten&gt;</code> · args: <code>atten</code> · enum: <code>1</code> | <code>2</code> | <code>5</code> | <code>10</code> | <code>20</code> | <code>50</code> | <code>100</code> | <code>200</code> | <code>500</code> | <code>1000</code> · per-instance: <code>n</code></li>
+<li><code>UNITs</code> — <strong>SET</strong> <code>Set_Units</code> · <code>&lt;unit&gt;</code> · args: <code>unit</code> · enum: <code>VOLT</code> | <code>WATT</code> | <code>AMP</code> | <code>UNKN</code> · per-instance: <code>n</code></li>
+</ul>
+</li>
+<li><strong><code>CONFig</code></strong><ul>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Config_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Turn on or off the endian display function in serial bus decoding, or query the status of the endian display function in serial bus decoding</li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Config_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Turn on or off the format display function, or query the status of the format display function</li>
+<li><code>LABel</code> — <strong>SET</strong> <code>Set_Config_Label</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Turn on or off the label display function, or query the status of the label display function</li>
+<li><code>LINE</code> — <strong>SET</strong> <code>Set_Config_Line</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>WIDth</code> — <strong>SET</strong> <code>Set_Config_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Turn on or off the width display function, or query the status of the width display function</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Config_Endian</code> · → 1 value · †<br>Turn on or off the endian display function in serial bus decoding, or query the status of the endian display function in serial bus decoding</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Config_Format</code> · → CRD · †<br>Turn on or off the format display function, or query the status of the format display function</li>
+<li><code>LABel?</code> — <strong>NAB</strong> <code>Get_Config_Label</code> · → 1 value · †<br>Turn on or off the label display function, or query the status of the label display function</li>
+<li><code>LINE?</code> — <strong>NAB</strong> <code>Get_Config_Line</code> · → 1 value · †</li>
+<li><code>SRATe?</code> — <strong>NAB</strong> <code>Get_Config_Srate</code> · → 1 value · †<br>Query the current digital sample rate</li>
+<li><code>WIDth?</code> — <strong>NAB</strong> <code>Get_Config_Width</code> · → NR3 · †<br>Turn on or off the width display function, or query the status of the width display function</li>
+</ul>
+</li>
+<li><strong><code>CURSor</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Cursor_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>OFF</code> | <code>MAN</code> | <code>TRAC</code> | <code>AUTO</code> | <code>XY</code> · †<br>Set or query the cursor measurement mode</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Cursor_Mode</code> · → CRD · †<br>Set or query the cursor measurement mode</li>
+<li><code>MANual</code> — <strong>DO</strong> <code>Do_Cursor_Manual</code> · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>TRACk</code> — <strong>DO</strong> <code>Do_Cursor_Track</code> · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>XY</code> — <strong>DO</strong> <code>Do_Cursor_Xy</code> · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><strong><code>MANual</code></strong><ul>
+<li><code>AX</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Ax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>AY</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Ay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>BX</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Bx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>BY</code> — <strong>SET</strong> <code>Set_Cursor_Manual_By</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code> | <code>LA</code> · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>TUNit</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Tunit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>S</code> | <code>HZ</code> | <code>DEGR</code> | <code>PERC</code> · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>VUNit</code> — <strong>SET</strong> <code>Set_Cursor_Manual_Vunit</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PERC</code> | <code>SOUR</code> · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>AX?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Ax</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>AY?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Ay</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>BX?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Bx</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>BY?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_By</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>IXDELta?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Ixdelta</code> · → NR3 s · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Source</code> · → CRD · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>TUNit?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Tunit</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>VUNit?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Vunit</code> · → 1 value · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>XDELta?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Xdelta</code> · → NR3 s · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+<li><code>YDELta?</code> — <strong>NAB</strong> <code>Get_Cursor_Manual_Ydelta</code> · → NR3 s · †<br>Set or query the cursor type in manual cursor measurement mode</li>
+</ul>
+</li>
+<li><strong><code>TRACk</code></strong><ul>
+<li><code>AX</code> — <strong>SET</strong> <code>Set_Cursor_Track_Ax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>BX</code> — <strong>SET</strong> <code>Set_Cursor_Track_Bx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>SOURce&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Cursor_Track_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>OFF</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code> · per-instance: <code>chan</code> · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>AX?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Ax</code> · → 1 value · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>AY?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Ay</code> · → 1 value · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>BX?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Bx</code> · → 1 value · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>BY?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_By</code> · → 1 value · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>IXDELTA?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Ixdelta</code> · → NR3 s · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>SOURce&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Source</code> · per-instance: <code>chan</code> · → CRD · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>XDELta?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Xdelta</code> · → NR3 s · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+<li><code>YDELta?</code> — <strong>NAB</strong> <code>Get_Cursor_Track_Ydelta</code> · → NR3 s · †<br>Set or query the channel source of cursor A in the track cursor measurement mode</li>
+</ul>
+</li>
+<li><strong><code>XY</code></strong><ul>
+<li><code>AX</code> — <strong>SET</strong> <code>Set_Cursor_Xy_Ax</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>AY</code> — <strong>SET</strong> <code>Set_Cursor_Xy_Ay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>BX</code> — <strong>SET</strong> <code>Set_Cursor_Xy_Bx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>BY</code> — <strong>SET</strong> <code>Set_Cursor_Xy_By</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>AX?</code> — <strong>NAB</strong> <code>Get_Cursor_Xy_Ax</code> · → 1 value · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>AY?</code> — <strong>NAB</strong> <code>Get_Cursor_Xy_Ay</code> · → 1 value · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>BX?</code> — <strong>NAB</strong> <code>Get_Cursor_Xy_Bx</code> · → 1 value · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+<li><code>BY?</code> — <strong>NAB</strong> <code>Get_Cursor_Xy_By</code> · → 1 value · †<br>Set or query the horizontal position of cursor A in the XY cursor measurement mode</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DATA</code></strong><ul>
+<li><code>POINts</code> — <strong>SET</strong> <code>Set_Data_Points</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the initial number of points of the arbitrary waveform of the specified signal source channel</li>
+<li><code>VALue</code> — <strong>SET</strong> <code>Set_Data_Value</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Modify or query the decimal value of the specified point in the volatile memory of the specified signal source</li>
+<li><code>LOAD?</code> — <strong>NAB</strong> <code>Get_Data_Load</code> · → 1 value · †<br>Read the specified data packet in the volatile memory of the specified signal source</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Data_Points</code> · → NR1 · †<br>Set or query the initial number of points of the arbitrary waveform of the specified signal source channel</li>
+<li><code>VALue?</code> — <strong>NAB</strong> <code>Get_Data_Value</code> · → NR3 · †<br>Modify or query the decimal value of the specified point in the volatile memory of the specified signal source</li>
+<li><code>DAC&lt;chan&gt;</code> — <strong>DO</strong> <code>Do_Data_Dac</code> · per-instance: <code>chan</code> · †<br>Download binary data block to the volatile memory of the specified signal source</li>
+<li><strong><code>POINts</code></strong><ul>
+<li><code>INTerpolate</code> — <strong>SET</strong> <code>Set_Data_Points_Internal</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the interpolation mode of the editable points of the arbitrary waveform of the specified signal source channel</li>
+<li><code>INTerpolate?</code> — <strong>NAB</strong> <code>Get_Data_Points_Internal</code> · → 1 value · †<br>Set or query the interpolation mode of the editable points of the arbitrary waveform of the specified signal source channel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DECoder1</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Decoder_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Decoder_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>HEX</code> | <code>ASC</code> | <code>DEC</code> | <code>BIN</code> | <code>LINE</code> · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Decoder_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PAR</code> | <code>UART</code> | <code>SPI</code> | <code>IIC</code> · †</li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Decoder_Positive</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_Decoder_Display</code> · → BOOL · †</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Decoder_Format</code> · → CRD · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Decoder_Mode</code> · → CRD · †</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_Decoder_Positive</code> · → NR3 · †</li>
+<li><strong><code>CONFig</code></strong><ul>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Decoder_Config_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Decoder_Config_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>LABel</code> — <strong>SET</strong> <code>Set_Decoder_Config_Label</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>LINE</code> — <strong>SET</strong> <code>Set_Decoder_Config_Line</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>WIDth</code> — <strong>SET</strong> <code>Set_Decoder_Config_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Endian</code> · → 1 value · †</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Format</code> · → CRD · †</li>
+<li><code>LABel?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Label</code> · → 1 value · †</li>
+<li><code>LINE?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Line</code> · → 1 value · †</li>
+<li><code>SRATe?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Srate</code> · → 1 value · †</li>
+<li><code>WIDth?</code> — <strong>NAB</strong> <code>Get_Decoder_Config_Width</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>IIC</code></strong><ul>
+<li><code>ADDRess</code> — <strong>SET</strong> <code>Set_Decoder_Iic_Address</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NORM</code> | <code>RW</code> · †</li>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Decoder_Iic_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Decoder_Iic_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>ADDRess?</code> — <strong>NAB</strong> <code>Get_Decoder_Iic_Address</code> · → NR1 · †</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Decoder_Iic_Clk</code> · → 1 value · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Decoder_Iic_Data</code> · → BLOCK · †</li>
+</ul>
+</li>
+<li><strong><code>PARallel</code></strong><ul>
+<li><code>BITX</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Bitx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>CCOMpensation</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Ccompensation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †</li>
+<li><code>EDGE</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Edge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>RISE</code> | <code>FALL</code> | <code>BOTH</code> · †</li>
+<li><code>NREJect</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Nreject</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>NRTime</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Nrtime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>PLOT</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Plot</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NEG</code> | <code>POS</code> · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Decoder_Parallel_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>BITX?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Bitx</code> · → 1 value · †</li>
+<li><code>CCOMpensation?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Ccompensation</code> · → 1 value · †</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Clk</code> · → 1 value · †</li>
+<li><code>EDGE?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Edge</code> · → 1 value · †</li>
+<li><code>NREJect?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Nreject</code> · → 1 value · †</li>
+<li><code>NRTime?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Nrtime</code> · → NR3 s · †</li>
+<li><code>PLOT?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Plot</code> · → 1 value · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Polarity</code> · → CRD · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Source</code> · → CRD · †</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Decoder_Parallel_Width</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>SPI</code></strong><ul>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>CS</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Csrc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>EDGE</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Edge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>RISE</code> | <code>FALL</code> · †</li>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>LSB</code> | <code>MSB</code> · †</li>
+<li><code>MISO</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Miso</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CS</code> | <code>TIM</code> · †</li>
+<li><code>MOSI</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Mosi</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NEG</code> | <code>POS</code> · †</li>
+<li><code>SELect</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Select</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NCS</code> | <code>CS</code> · †</li>
+<li><code>TIMeout</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Decoder_Spi_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Clk</code> · → 1 value · †</li>
+<li><code>CS?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Csrc</code> · → 1 value · †</li>
+<li><code>EDGE?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Edge</code> · → 1 value · †</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Endian</code> · → 1 value · †</li>
+<li><code>MISO?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Miso</code> · → 1 value · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Mode</code> · → CRD · †</li>
+<li><code>MOSI?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Mosi</code> · → 1 value · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Polarity</code> · → CRD · †</li>
+<li><code>SELect?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Select</code> · → CRD · †</li>
+<li><code>TIMeout?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Timebase</code> · → NR3 s · †</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Decoder_Spi_Width</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>THREshold</code></strong><ul>
+<li><code>CHANnel&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Decoder_Threshold_Channel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · per-instance: <code>chan</code> · †</li>
+<li><code>CHANnel&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Decoder_Threshold_Channel</code> · per-instance: <code>chan</code> · → CRD · †</li>
+</ul>
+</li>
+<li><strong><code>UART</code></strong><ul>
+<li><code>BAUD</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Baud</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>LSB</code> | <code>MSB</code> · †</li>
+<li><code>PARity</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Parallel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NONE</code> | <code>EVEN</code> | <code>ODD</code> · †</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NEG</code> | <code>POS</code> · †</li>
+<li><code>RX</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Rx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Stop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>1</code> | <code>2</code> · †</li>
+<li><code>TX</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Tx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Decoder_Uart_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>BAUD?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Baud</code> · → 1 value · †</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Endian</code> · → 1 value · †</li>
+<li><code>PARity?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Parallel</code> · → 1 value · †</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Polarity</code> · → CRD · †</li>
+<li><code>RX?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Rx</code> · → 1 value · †</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Stop</code> · → NR3 · †</li>
+<li><code>TX?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Tx</code> · → 1 value · †</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Decoder_Uart_Width</code> · → NR3 · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>GBRightness</code> — <strong>SET</strong> <code>Set_Display_Gbrightness</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the brightness of the screen grid</li>
+<li><code>GRID</code> — <strong>SET</strong> <code>Set_Display_Grid</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FULL</code> | <code>HALF</code> | <code>NONE</code> · †</li>
+<li><code>WBRightness</code> — <strong>SET</strong> <code>Set_Display_Wbrightness</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the waveform brightness</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Display_Data</code> · → BLOCK · †<br>Read the data stream of the image currently displayed on the screen and set the color, invert display, and format of the image acquired</li>
+<li><code>GBRightness?</code> — <strong>NAB</strong> <code>Get_Display_Gbrightness</code> · → 1 value · †<br>Set or query the brightness of the screen grid</li>
+<li><code>GRID?</code> — <strong>NAB</strong> <code>Get_Display_Grid</code> · → 1 value · †</li>
+<li><code>WBRightness?</code> — <strong>NAB</strong> <code>Get_Display_Wbrightness</code> · → 1 value · †<br>Set or query the waveform brightness</li>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Do_Display_Clear</code> · †<br>Clear all the waveforms on the screen</li>
+<li><strong><code>GRADing</code></strong><ul>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_Display_Grading_Time</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>MIN</code> | <code>1</code> | <code>5</code> | <code>10</code> | <code>INF</code> · †<br>Set or query the persistence time</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_Display_Grading_Time</code> · → NR3 s · †<br>Set or query the persistence time</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>ETABle1</code></strong><ul>
+<li><code>COLumn</code> — <strong>SET</strong> <code>Set_Etable_Color</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DATA</code> | <code>TX</code> | <code>RX</code> | <code>MISO</code> | <code>MOSI</code> · †</li>
+<li><code>DISP</code> — <strong>SET</strong> <code>Set_Etable_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Etable_Format</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>HEX</code> | <code>ASC</code> | <code>DEC</code> · †</li>
+<li><code>ROW</code> — <strong>SET</strong> <code>Set_Etable_Row</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>SORT</code> — <strong>SET</strong> <code>Set_Etable_Sort</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ASC</code> | <code>DESC</code> · †</li>
+<li><code>VIEW</code> — <strong>SET</strong> <code>Set_Etable_View</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PACK</code> | <code>DET</code> | <code>PAYL</code> · †</li>
+<li><code>COLumn?</code> — <strong>NAB</strong> <code>Get_Etable_Color</code> · → CRD · †</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Etable_Data</code> · → BLOCK · †</li>
+<li><code>DISP?</code> — <strong>NAB</strong> <code>Get_Etable_Display</code> · → BOOL · †</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Etable_Format</code> · → CRD · †</li>
+<li><code>ROW?</code> — <strong>NAB</strong> <code>Get_Etable_Row</code> · → 1 value · †</li>
+<li><code>SORT?</code> — <strong>NAB</strong> <code>Get_Etable_Sort</code> · → 1 value · †</li>
+<li><code>VIEW?</code> — <strong>NAB</strong> <code>Get_Etable_View</code> · → 1 value · †</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>FIXed</code> — <strong>SET</strong> <code>Set_Frequency_Fixed</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the output frequency of the specified source channel if the modulation is not enabled or the carrier frequency if the modulation is enabled</li>
+<li><code>FIXed?</code> — <strong>NAB</strong> <code>Get_Frequency_Fixed</code> · → 1 value · †<br>Set or query the output frequency of the specified source channel if the modulation is not enabled or the carrier frequency if the modulation is enabled</li>
+</ul>
+</li>
+<li><strong><code>FUNCtion</code></strong><ul>
+<li><code>SHAPe</code> — <strong>SET</strong> <code>Set_Function_Shape</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SIN</code> | <code>SQU</code> | <code>RAMP</code> | <code>PULS</code> | <code>NOIS</code> | <code>DC</code> | <code>INTE</code> | <code>EXT</code> · †<br>Select or query the output waveform when the modulation of the specified source channel is not enabled</li>
+<li><code>SHAPe?</code> — <strong>NAB</strong> <code>Get_Function_Shape</code> · → CRD · †<br>Select or query the output waveform when the modulation of the specified source channel is not enabled</li>
+<li><strong><code>RAMP</code></strong><ul>
+<li><code>SYMMetry</code> — <strong>SET</strong> <code>Set_Function_Ramp_Symmetry</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the ramp symmetry (the percentage that the rising period takes up in the whole period) of the specified source channel</li>
+<li><code>SYMMetry?</code> — <strong>NAB</strong> <code>Get_Function_Ramp_Symmetry</code> · → 1 value · †<br>Set or query the ramp symmetry (the percentage that the rising period takes up in the whole period) of the specified source channel</li>
+</ul>
+</li>
+<li><strong><code>WRECord</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Function_Wrecord_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn on or off the waveform recording function, or query the status of the waveform recording function</li>
+<li><code>FEND</code> — <strong>SET</strong> <code>Set_Function_Wrecord_Fend</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the end frame of waveform recording</li>
+<li><code>FINTerval</code> — <strong>SET</strong> <code>Set_Function_Wrecord_Finterval</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the time interval between frames in waveform recording</li>
+<li><code>OPERate</code> — <strong>SET</strong> <code>Set_Function_Wrecord_Operator</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>RUN</code> | <code>STOP</code> · †<br>Start or stop the waveform recording, or query the status of the waveform recording</li>
+<li><code>PROMpt</code> — <strong>SET</strong> <code>Set_Function_Wrecord_Prompt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn on or off the sound prompt when the recording finishes, or query the status of the sound prompt when the recording finishes</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Enable</code> · → NR1 · †<br>Turn on or off the waveform recording function, or query the status of the waveform recording function</li>
+<li><code>FEND?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Fend</code> · → 1 value · †<br>Set or query the end frame of waveform recording</li>
+<li><code>FINTerval?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Finterval</code> · → 1 value · †<br>Set or query the time interval between frames in waveform recording</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Fmax</code> · → NR3 Hz · †<br>Query the maximum number of frames can be recorded currently</li>
+<li><code>OPERate?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Operator</code> · → CRD · †<br>Start or stop the waveform recording, or query the status of the waveform recording</li>
+<li><code>PROMpt?</code> — <strong>NAB</strong> <code>Get_Function_Wrecord_Prompt</code> · → 1 value · †<br>Turn on or off the sound prompt when the recording finishes, or query the status of the sound prompt when the recording finishes</li>
+</ul>
+</li>
+<li><strong><code>WREPlay</code></strong><ul>
+<li><code>DIRection</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Direction</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>FORW</code> | <code>BACK</code> · †<br>Set or query the waveform playback direction</li>
+<li><code>FCURrent</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Fcurrent</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the current frame in waveform playback</li>
+<li><code>FEND</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Fend</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the end frame of waveform playback</li>
+<li><code>FINTerval</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Finterval</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the time interval between frames in waveform playback</li>
+<li><code>FSTart</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Fstart</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the start frame of waveform playback</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>REP</code> | <code>SING</code> · †<br>Set or query the waveform playback mode</li>
+<li><code>OPERate</code> — <strong>SET</strong> <code>Set_Function_Wreplay_Operator</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PLAY</code> | <code>PAUS</code> | <code>STOP</code> · †<br>Start, pause, or stop the waveform playback, or query the status of the waveform playback</li>
+<li><code>DIRection?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Direction</code> · → 1 value · †<br>Set or query the waveform playback direction</li>
+<li><code>FCURrent?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Fcurrent</code> · → 1 value · †<br>Set or query the current frame in waveform playback</li>
+<li><code>FEND?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Fend</code> · → 1 value · †<br>Set or query the end frame of waveform playback</li>
+<li><code>FINTerval?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Finterval</code> · → 1 value · †<br>Set or query the time interval between frames in waveform playback</li>
+<li><code>FMAX?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Fmax</code> · → NR3 Hz · †<br>Query theb maximum number of frames can be played, namely the maximum number of frames recorded</li>
+<li><code>FSTart?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Fstart</code> · → 1 value · †<br>Set or query the start frame of waveform playback</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Mode</code> · → CRD · †<br>Set or query the waveform playback mode</li>
+<li><code>OPERate?</code> — <strong>NAB</strong> <code>Get_Function_Wreplay_Operator</code> · → CRD · †<br>Start, pause, or stop the waveform playback, or query the status of the waveform playback</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>IIC</code></strong><ul>
+<li><code>ADDRess</code> — <strong>SET</strong> <code>Set_Iic_Address</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Iic_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Iic_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · block · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+<li><code>ADDRess?</code> — <strong>NAB</strong> <code>Get_Iic_Address</code> · → NR1 · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Iic_Clk</code> · → 1 value · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Iic_Data</code> · → BLOCK · †<br>Set or query the signal source of the clock channel in I2C decoding</li>
+</ul>
+</li>
+<li><strong><code>IMMediate</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Immediate_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Immediate_Offset</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>LA</code></strong><ul>
+<li><code>ACTive</code> — <strong>SET</strong> <code>Set_La_Active</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> · †<br>Set or query the current active channel or channel group</li>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_La_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn on or off the specified digital channel, user-defined channel group or default channel group, or query the status of the specified digital channel, user-defined channel group or default channel group</li>
+<li><code>SIZE</code> — <strong>SET</strong> <code>Set_La_Size</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SMAL</code> | <code>LARG</code> · †<br>Set or query the display size of the waveforms of the channels turned on on the screen</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_La_Statistic</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn on or off the LA function, or query the status of the LA function</li>
+<li><code>TCALibrate</code> — <strong>SET</strong> <code>Set_La_Tcalibrate</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>ACTive?</code> — <strong>NAB</strong> <code>Get_La_Active</code> · → BOOL · †<br>Set or query the current active channel or channel group</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_La_Display</code> · → BOOL · †<br>Turn on or off the specified digital channel, user-defined channel group or default channel group, or query the status of the specified digital channel, user-defined channel group or default channel group</li>
+<li><code>SIZE?</code> — <strong>NAB</strong> <code>Get_La_Size</code> · → NR3 · †<br>Set or query the display size of the waveforms of the channels turned on on the screen</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_La_Statistic</code> · → BOOL · †<br>Turn on or off the LA function, or query the status of the LA function</li>
+<li><code>TCALibrate?</code> — <strong>NAB</strong> <code>Get_La_Tcalibrate</code> · → 1 value · †</li>
+<li><code>AUTosort</code> — <strong>DO</strong> <code>Do_La_Autoscale</code> · †<br>Set the auto ordering mode of the waveforms of the channels turned on on the screen</li>
+<li><code>DIGital</code> — <strong>DO</strong> <code>Do_La_Digital</code> · †<br>Turn on or off the specified digital channel, or query the status of the specified digital channel</li>
+<li><code>POD</code> — <strong>DO</strong> <code>Do_La_Pod</code> · †<br>Turn on or off the specified default channel group, or query the status of the specified |Type|Range| |---|---| |Integer|1 to 2| |Bool|{{1|ON}|{0|OFF}}|</li>
+<li><strong><code>DIGital1</code></strong><ul>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_La_Digital_Positive</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_La_Digital_Positive</code> · → NR3 · †</li>
+</ul>
+</li>
+<li><strong><code>DIGital3</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_La_Digital_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_La_Digital_Display</code> · → BOOL · †</li>
+</ul>
+</li>
+<li><strong><code>POD1</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_La_Pod_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>THReshold</code> — <strong>SET</strong> <code>Set_La_Pod_Threshold</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_La_Pod_Display</code> · → BOOL · †</li>
+<li><code>THReshold?</code> — <strong>NAB</strong> <code>Get_La_Pod_Threshold</code> · → NR3 · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MASK</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Mask_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the pass/fail test or query the status of the past/fail test</li>
+<li><code>MDISplay</code> — <strong>SET</strong> <code>Set_Mask_Mdisplay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the statistic information when the pass/fail test is enabled, or query the status of the statistic information</li>
+<li><code>OPERate</code> — <strong>SET</strong> <code>Set_Mask_Operator</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>RUN</code> | <code>STOP</code> · †<br>Run or stop the pass/fail test, or query the status of the pass/fail test</li>
+<li><code>OUTPut</code> — <strong>SET</strong> <code>Set_Mask_Output</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the sound prompt when failed waveforms are detected, or query the status of the sound prompt</li>
+<li><code>SOOutput</code> — <strong>SET</strong> <code>Set_Mask_Sooutput</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn the &quot;Stop on Fail&quot; function on or off, or query the status of the &quot;Stop on Fail&quot; function</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Mask_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Mask_Enable</code> · → NR1 · †<br>Enable or disable the pass/fail test or query the status of the past/fail test</li>
+<li><code>FAILed?</code> — <strong>NAB</strong> <code>Get_Mask_Failed</code> · → 1 value · †<br>Query the number of failed frames in the pass/fail test</li>
+<li><code>MDISplay?</code> — <strong>NAB</strong> <code>Get_Mask_Mdisplay</code> · → 1 value · †<br>Enable or disable the statistic information when the pass/fail test is enabled, or query the status of the statistic information</li>
+<li><code>OPERate?</code> — <strong>NAB</strong> <code>Get_Mask_Operator</code> · → CRD · †<br>Run or stop the pass/fail test, or query the status of the pass/fail test</li>
+<li><code>OUTPut?</code> — <strong>NAB</strong> <code>Get_Mask_Output</code> · → 1 value · †<br>Enable or disable the sound prompt when failed waveforms are detected, or query the status of the sound prompt</li>
+<li><code>PASSed?</code> — <strong>NAB</strong> <code>Get_Mask_Passed</code> · → 1 value · †<br>Query the number of passed frames in the pass/fail test</li>
+<li><code>SOOutput?</code> — <strong>NAB</strong> <code>Get_Mask_Sooutput</code> · → 1 value · †<br>Turn the &quot;Stop on Fail&quot; function on or off, or query the status of the &quot;Stop on Fail&quot; function</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Mask_Source</code> · → CRD · †</li>
+<li><code>TOTal?</code> — <strong>NAB</strong> <code>Get_Mask_Total</code> · → 1 value · †<br>Query the total number of frames in the pass/fail test</li>
+<li><code>CREate</code> — <strong>DO</strong> <code>Do_Mask_Create</code> · †<br>Create the pass/fail test mask using the current horizontal adjustment parameter and vertical adjustment parameter</li>
+<li><code>RESet</code> — <strong>DO</strong> <code>Do_Mask_Reset</code> · †<br>Reset the numbers of passed frames and failed frames as well as the total number of frames in the pass/fail test to 0</li>
+</ul>
+</li>
+<li><strong><code>MATH</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Math_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the math operation function or query the math operation status</li>
+<li><code>INVert</code> — <strong>SET</strong> <code>Set_Math_Invert</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the inverted display mode of the operation result, or query the inverted display mode status of the operation result</li>
+<li><code>LSOUrce&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Math_Lsou</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · per-instance: <code>chan</code> · †<br>Set or query source A of logic operation</li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Math_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the vertical offset of the operation result</li>
+<li><code>OPERator</code> — <strong>SET</strong> <code>Set_Math_Operator</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ADD</code> | <code>SUBT</code> | <code>MULT</code> | <code>DIV</code> | <code>AND</code> | <code>OR</code> | <code>XOR</code> | <code>NOT</code> | <code>FFT</code> | <code>INTG</code> | <code>DIFF</code> | <code>SQRT</code> | <code>LOG</code> | <code>LN</code> | <code>EXP</code> | <code>ABS</code> | <code>FILT</code> · †<br>Set or query the operator of the math operation</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Math_Scale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the vertical scale of the operation result</li>
+<li><code>SOURce&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Math_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>FX</code> · per-instance: <code>chan</code> · †<br>Set or query the source or source A of algebraic operation/functional operation/the outer layer operation of compound operation</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_Math_Display</code> · → BOOL · †<br>Enable or disable the math operation function or query the math operation status</li>
+<li><code>INVert?</code> — <strong>NAB</strong> <code>Get_Math_Invert</code> · → BOOL · †<br>Enable or disable the inverted display mode of the operation result, or query the inverted display mode status of the operation result</li>
+<li><code>LSOUrce&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Math_Lsou</code> · per-instance: <code>chan</code> · → 1 value · †<br>Set or query source A of logic operation</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Math_Offset</code> · → NR3 · †<br>Set or query the vertical offset of the operation result</li>
+<li><code>OPERator?</code> — <strong>NAB</strong> <code>Get_Math_Operator</code> · → CRD · †<br>Set or query the operator of the math operation</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Math_Scale</code> · → NR3 · †<br>Set or query the vertical scale of the operation result</li>
+<li><code>SOURce&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Math_Source</code> · per-instance: <code>chan</code> · → CRD · †<br>Set or query the source or source A of algebraic operation/functional operation/the outer layer operation of compound operation</li>
+<li><code>FILTer</code> — <strong>DO</strong> <code>Do_Math_Filter</code> · †<br>Set or query the cutoff frequency ( ωc1 ) of the low pass/high pass filter or cutoff frequency 1 ( ωc1 ) of the band pass/band stop filter</li>
+<li><code>RESet</code> — <strong>DO</strong> <code>Do_Math_Reset</code> · †<br>Sending this command, the instrument adjusts the vertical scale of the operation result to the most proper value according to the current operator and the horizontal timebase of the source</li>
+<li><strong><code>FFT</code></strong><ul>
+<li><code>HCENter</code> — <strong>SET</strong> <code>Set_Math_Fft_Hcenter</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the center frequency of the FFT operation result, namely the frequency relative to the horizontal center of the screen</li>
+<li><code>HSCale</code> — <strong>SET</strong> <code>Set_Math_Fft_Hscale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the horizontal scale of the FFT operation result</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Math_Fft_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>TRAC</code> | <code>MEM</code> · †<br>Set or query the FFT mode</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Math_Fft_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the source of FFT operation/filter</li>
+<li><code>SPLit</code> — <strong>SET</strong> <code>Set_Math_Fft_Split</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the half-screen display mode of the FFT operation, or query the status of the half display mode of the FFT operation</li>
+<li><code>UNIT</code> — <strong>SET</strong> <code>Set_Math_Fft_Units</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>VRMS</code> | <code>DB</code> · †<br>Set or query the vertical unit of the FFT operation result</li>
+<li><code>WINDow</code> — <strong>SET</strong> <code>Set_Math_Fft_Windows</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>RECT</code> | <code>BLAC</code> | <code>HANN</code> | <code>HAMM</code> | <code>FLAT</code> | <code>TRI</code> · †<br>Set or query the window function of the FFT operation</li>
+<li><code>HCENter?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Hcenter</code> · → 1 value · †<br>Set or query the center frequency of the FFT operation result, namely the frequency relative to the horizontal center of the screen</li>
+<li><code>HSCale?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Hscale</code> · → 1 value · †<br>Set or query the horizontal scale of the FFT operation result</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Mode</code> · → CRD · †<br>Set or query the FFT mode</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Source</code> · → CRD · †<br>Set or query the source of FFT operation/filter</li>
+<li><code>SPLit?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Split</code> · → 1 value · †<br>Enable or disable the half-screen display mode of the FFT operation, or query the status of the half display mode of the FFT operation</li>
+<li><code>UNIT?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Units</code> · → CRD · †<br>Set or query the vertical unit of the FFT operation result</li>
+<li><code>WINDow?</code> — <strong>NAB</strong> <code>Get_Math_Fft_Windows</code> · → CRD · †<br>Set or query the window function of the FFT operation</li>
+</ul>
+</li>
+<li><strong><code>OPTion</code></strong><ul>
+<li><code>ASCale</code> — <strong>SET</strong> <code>Set_Math_Option_Ascale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the auto scale setting of the operation result or query the status of the auto scale setting</li>
+<li><code>DIStance</code> — <strong>SET</strong> <code>Set_Math_Option_Distance</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the smoothing window width of differential operation (diff)</li>
+<li><code>END</code> — <strong>SET</strong> <code>Set_Math_Option_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>INVert</code> — <strong>SET</strong> <code>Set_Math_Option_Invert</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the inverted display mode of the operation result, or query the inverted display mode status of the operation result</li>
+<li><code>SENSitivity</code> — <strong>SET</strong> <code>Set_Math_Option_Sensitivity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the sensitivity of the logic operation</li>
+<li><code>STARt</code> — <strong>SET</strong> <code>Set_Math_Option_Start</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the start point of the waveform math operation</li>
+<li><code>THReshold&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Math_Option_Threshold</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · per-instance: <code>chan</code> · †<br>Set or query the threshold level of source A in logic operations</li>
+<li><code>ASCale?</code> — <strong>NAB</strong> <code>Get_Math_Option_Ascale</code> · → 1 value · †<br>Enable or disable the auto scale setting of the operation result or query the status of the auto scale setting</li>
+<li><code>DIStance?</code> — <strong>NAB</strong> <code>Get_Math_Option_Distance</code> · → 1 value · †<br>Set or query the smoothing window width of differential operation (diff)</li>
+<li><code>END?</code> — <strong>NAB</strong> <code>Get_Math_Option_Endian</code> · → 1 value · †</li>
+<li><code>INVert?</code> — <strong>NAB</strong> <code>Get_Math_Option_Invert</code> · → BOOL · †<br>Enable or disable the inverted display mode of the operation result, or query the inverted display mode status of the operation result</li>
+<li><code>SENSitivity?</code> — <strong>NAB</strong> <code>Get_Math_Option_Sensitivity</code> · → 1 value · †<br>Set or query the sensitivity of the logic operation</li>
+<li><code>STARt?</code> — <strong>NAB</strong> <code>Get_Math_Option_Start</code> · → NR3 · †<br>Set or query the start point of the waveform math operation</li>
+<li><code>THReshold&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Math_Option_Threshold</code> · per-instance: <code>chan</code> · → NR3 · †<br>Set or query the threshold level of source A in logic operations</li>
+<li><strong><code>FX</code></strong><ul>
+<li><code>OPERator</code> — <strong>SET</strong> <code>Set_Math_Option_Fx_Operator</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ADD</code> | <code>SUBT</code> | <code>MULT</code> | <code>DIV</code> · †<br>Set or query the operator of the inner layer operation of compound operation</li>
+<li><code>SOURce&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Math_Option_Fx_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · per-instance: <code>chan</code> · †<br>Set or query source A of the inner layer operation of compound operation</li>
+<li><code>OPERator?</code> — <strong>NAB</strong> <code>Get_Math_Option_Fx_Operator</code> · → CRD · †<br>Set or query the operator of the inner layer operation of compound operation</li>
+<li><code>SOURce&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Math_Option_Fx_Source</code> · per-instance: <code>chan</code> · → CRD · †<br>Set or query source A of the inner layer operation of compound operation</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MEASure</code></strong><ul>
+<li><code>ADISplay</code> — <strong>SET</strong> <code>Set_Measure_Adisplay</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the all measurement function, or query the status of the all measurement function</li>
+<li><code>AMSource</code> — <strong>SET</strong> <code>Set_Measure_Amsource</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code> · †<br>Set or query the source(s) of the all measurement function</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Measure_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code></li>
+<li><code>ADISplay?</code> — <strong>NAB</strong> <code>Get_Measure_Adisplay</code> · → 1 value · †<br>Enable or disable the all measurement function, or query the status of the all measurement function</li>
+<li><code>AMSource?</code> — <strong>NAB</strong> <code>Get_Measure_Amsource</code> · → 1 value · †<br>Set or query the source(s) of the all measurement function</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Measure_Source</code> · → CRD · †<br>Set or query the source of the current measurement parameter</li>
+<li><code>ITEM?</code> — <strong>NAB</strong> <code>Measure_Frequency</code> · <code>FREQ,&lt;chan&gt;</code> · per-instance: <code>chan</code> · → 1 value</li>
+<li><code>ITEM?</code> — <strong>NAB</strong> <code>Measure_Vpp</code> · <code>VPP,&lt;chan&gt;</code> · per-instance: <code>chan</code> · → 1 value</li>
+<li><code>RECover</code> — <strong>DO</strong> <code>Do_Measure_Recover</code> · †<br>Recover the measurement item which has been cleared</li>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Execute Command</code><br>Execute Command</li>
+<li><strong><code>COUNter</code></strong><ul>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Measure_Counter_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>OFF</code> · †<br>Set or query the source of the frequency counter, or disable the frequency counter</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Measure_Counter_Source</code> · → CRD · †<br>Set or query the source of the frequency counter, or disable the frequency counter</li>
+<li><code>VALue?</code> — <strong>NAB</strong> <code>Get_Measure_Counter_Value</code> · → NR3 · †<br>Query the measurement result of the frequency counter</li>
+</ul>
+</li>
+<li><strong><code>STATistic</code></strong><ul>
+<li><code>ITEM</code> — <strong>SET</strong> <code>Set_Measure_Statistic_Item</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>VMAX</code> | <code>VMIN</code> | <code>VPP</code> | <code>VTOP</code> | <code>VBAS</code> | <code>VAMP</code> | <code>VAVG</code> | <code>VRMS</code> | <code>OVER</code> | <code>PRES</code> | <code>MAR</code> | <code>MPAR</code> | <code>PER</code> | <code>FREQ</code> | <code>RTIM</code> | <code>FTIM</code> | <code>PWID</code> | <code>NWID</code> | <code>PDUT</code> | <code>NDUT</code> | <code>RDEL</code> | <code>FDEL</code> | <code>RPH</code> | <code>FPH</code> | <code>TVMAX</code> | <code>TVMIN</code> | <code>PSLEW</code> | <code>NSLEW</code> | <code>VUP</code> | <code>VMID</code> | <code>VLOW</code> | <code>VARI</code> | <code>PVRMS</code> | <code>PPUL</code> | <code>NPUL</code> | <code>PEDG</code> | <code>NEDG</code> · †<br>Enable the statistic function of any waveform parameter of the specified source, or query the statistic result of any waveform parameter of the specified source</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Measure_Statistic_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>DIFF</code> | <code>EXTR</code> · †<br>Set or query the statistic mode</li>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Show_Statistics</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_Measure_Statistic_Display</code> · → BOOL · †<br>Enable or disable the statistic function, or query the status of the statistic function</li>
+<li><code>ITEM?</code> — <strong>NAB</strong> <code>Get_Measure_Statistic_Item</code> · → 1 value · †<br>Enable the statistic function of any waveform parameter of the specified source, or query the statistic result of any waveform parameter of the specified source</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Measure_Statistic_Mode</code> · → CRD · †<br>Set or query the statistic mode</li>
+<li><code>RESet</code> — <strong>DO</strong> <code>Do_Measure_Statistic_Reset</code> · †<br>Clear the history data and make statistic again</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>MOD</code></strong><ul>
+<li><code>AM</code> — <strong>SET</strong> <code>Set_Mod_Am</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>FM</code> — <strong>SET</strong> <code>Set_Mod_Fm</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Mod_Statistic</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the modulation of the specified source channel, or query the status of the modulation of the specified source channel</li>
+<li><code>TYPe</code> — <strong>SET</strong> <code>Set_Mod_Type</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the modulation type of the specified source channel</li>
+<li><code>AM?</code> — <strong>NAB</strong> <code>Get_Mod_Am</code> · → 1 value · †</li>
+<li><code>FM?</code> — <strong>NAB</strong> <code>Get_Mod_Fm</code> · → 1 value · †</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Mod_Statistic</code> · → BOOL · †<br>Enable or disable the modulation of the specified source channel, or query the status of the modulation of the specified source channel</li>
+<li><code>TYPe?</code> — <strong>NAB</strong> <code>Get_Mod_Type</code> · → CRD · †<br>Set or query the modulation type of the specified source channel</li>
+<li><strong><code>AM</code></strong><ul>
+<li><code>DEPTh</code> — <strong>SET</strong> <code>Set_Mod_Am_Depth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the AM modulation depth (indicates the amplitude variation degree and is expressed as a percentage) of the specified source channel</li>
+<li><code>DEPTh?</code> — <strong>NAB</strong> <code>Get_Mod_Am_Depth</code> · → 1 value · †<br>Set or query the AM modulation depth (indicates the amplitude variation degree and is expressed as a percentage) of the specified source channel</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Mod_Am_Internal_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the modulating waveform frequency of AM or FM of the specified source channel</li>
+<li><code>FUNCtion</code> — <strong>SET</strong> <code>Set_Mod_Am_Internal_Function</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SIN</code> | <code>SQU</code> | <code>RAMP</code> | <code>NOIS</code> · †<br>Set or query the modulating waveform of AM or FM of the specified source channel</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Mod_Am_Internal_Frequency</code> · → 1 value · †<br>Set or query the modulating waveform frequency of AM or FM of the specified source channel</li>
+<li><code>FUNCtion?</code> — <strong>NAB</strong> <code>Get_Mod_Am_Internal_Function</code> · → CRD · †<br>Set or query the modulating waveform of AM or FM of the specified source channel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FM</code></strong><ul>
+<li><code>DEVIation</code> — <strong>SET</strong> <code>Set_Mod_Fm_Deviation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the FM frequency deviation of the specified source channel</li>
+<li><code>DEVIation?</code> — <strong>NAB</strong> <code>Get_Mod_Fm_Deviation</code> · → 1 value · †<br>Set or query the FM frequency deviation of the specified source channel</li>
+<li><strong><code>INTernal</code></strong><ul>
+<li><code>FREQuency</code> — <strong>SET</strong> <code>Set_Mod_Fm_Internal_Frequency</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the modulating waveform frequency of AM or FM of the specified source channel</li>
+<li><code>FUNCtion</code> — <strong>SET</strong> <code>Set_Mod_Fm_Internal_Function</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SIN</code> | <code>SQU</code> | <code>RAMP</code> | <code>NOIS</code> · †<br>Set or query the modulating waveform of AM or FM of the specified source channel</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Get_Mod_Fm_Internal_Frequency</code> · → 1 value · †<br>Set or query the modulating waveform frequency of AM or FM of the specified source channel</li>
+<li><code>FUNCtion?</code> — <strong>NAB</strong> <code>Get_Mod_Fm_Internal_Function</code> · → CRD · †<br>Set or query the modulating waveform of AM or FM of the specified source channel</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>OUTPut</code></strong><ul>
+<li><code>IMPedance</code> — <strong>SET</strong> <code>Set_Output_Impedance</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †</li>
+<li><code>IMPedance?</code> — <strong>NAB</strong> <code>Get_Output_Impedance</code> · → CRD · †</li>
+</ul>
+</li>
+<li><strong><code>PARallel</code></strong><ul>
+<li><code>BITX</code> — <strong>SET</strong> <code>Set_Parallel_Bitx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>CCOMpensation</code> — <strong>SET</strong> <code>Set_Parallel_Ccompensation</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Parallel_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>EDGE</code> — <strong>SET</strong> <code>Set_Parallel_Edge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>NREJect</code> — <strong>SET</strong> <code>Set_Parallel_Nreject</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>NRTime</code> — <strong>SET</strong> <code>Set_Parallel_Nrtime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>PLOT</code> — <strong>SET</strong> <code>Set_Parallel_Plot</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Parallel_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Parallel_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Parallel_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>BITX?</code> — <strong>NAB</strong> <code>Get_Parallel_Bitx</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>CCOMpensation?</code> — <strong>NAB</strong> <code>Get_Parallel_Ccompensation</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Parallel_Clk</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>EDGE?</code> — <strong>NAB</strong> <code>Get_Parallel_Edge</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>NREJect?</code> — <strong>NAB</strong> <code>Get_Parallel_Nreject</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>NRTime?</code> — <strong>NAB</strong> <code>Get_Parallel_Nrtime</code> · → NR3 s · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>PLOT?</code> — <strong>NAB</strong> <code>Get_Parallel_Plot</code> · → 1 value · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Parallel_Polarity</code> · → CRD · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Parallel_Source</code> · → CRD · †<br>Set or query the CLK channel source of parallel decoding</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Parallel_Width</code> · → NR3 · †<br>Set or query the CLK channel source of parallel decoding</li>
+</ul>
+</li>
+<li><strong><code>PHASe</code></strong><ul>
+<li><code>ADJust</code> — <strong>SET</strong> <code>Set_Phase_Adjust</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the start phase of the specified source channel</li>
+<li><code>ADJust?</code> — <strong>NAB</strong> <code>Get_Phase_Adjust</code> · → 1 value · †<br>Set or query the start phase of the specified source channel</li>
+<li><code>INITiate</code> — <strong>DO</strong> <code>Do_Phase_Initiate</code> · †<br>Execute the align phase operation</li>
+</ul>
+</li>
+<li><strong><code>PULSe</code></strong><ul>
+<li><code>DCYCle</code> — <strong>SET</strong> <code>Set_Pulse_Dcycle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (%) · †<br>Set or query the pulse duty cycle (the percentage that the high level takes up in the whole period) of the specified source channel</li>
+<li><code>DCYCle?</code> — <strong>NAB</strong> <code>Get_Pulse_Dcycle</code> · → NR3 % · †<br>Set or query the pulse duty cycle (the percentage that the high level takes up in the whole period) of the specified source channel</li>
+</ul>
+</li>
+<li><strong><code>REFerence</code></strong><ul>
+<li><code>DISPlay</code> — <strong>SET</strong> <code>Set_Reference_Display</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the REF function, or query the status of the REF function</li>
+<li><code>DISPlay?</code> — <strong>NAB</strong> <code>Get_Reference_Display</code> · → BOOL · †<br>Enable or disable the REF function, or query the status of the REF function</li>
+</ul>
+</li>
+<li><strong><code>REFerence1</code></strong><ul>
+<li><code>COLor</code> — <strong>SET</strong> <code>Set_Reference_Color</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>GRAY</code> | <code>GREE</code> | <code>LBL</code> | <code>MAG</code> | <code>ORAN</code> · †</li>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Reference_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Reference_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code> · †</li>
+<li><code>VOFFset</code> — <strong>SET</strong> <code>Set_Reference_Voffset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Commands</li>
+<li><code>VSCale</code> — <strong>SET</strong> <code>Set_Reference_Vscale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>COLor?</code> — <strong>NAB</strong> <code>Get_Reference_Color</code> · → CRD · †</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Reference_Enable</code> · → NR1 · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Reference_Source</code> · → CRD · †</li>
+<li><code>VOFFset?</code> — <strong>NAB</strong> <code>Get_Reference_Voffset</code> · → 1 value · †<br>Commands</li>
+<li><code>VSCale?</code> — <strong>NAB</strong> <code>Get_Reference_Vscale</code> · → 1 value · †</li>
+</ul>
+</li>
+<li><strong><code>SPI</code></strong><ul>
+<li><code>CLK</code> — <strong>SET</strong> <code>Set_Spi_Clk</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>CS</code> — <strong>SET</strong> <code>Set_Spi_Csrc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>EDGE</code> — <strong>SET</strong> <code>Set_Spi_Edge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Spi_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MISO</code> — <strong>SET</strong> <code>Set_Spi_Miso</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Spi_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MOSI</code> — <strong>SET</strong> <code>Set_Spi_Mosi</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Spi_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>SELect</code> — <strong>SET</strong> <code>Set_Spi_Select</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>TIMeout</code> — <strong>SET</strong> <code>Set_Spi_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Spi_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>CLK?</code> — <strong>NAB</strong> <code>Get_Spi_Clk</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>CS?</code> — <strong>NAB</strong> <code>Get_Spi_Csrc</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>EDGE?</code> — <strong>NAB</strong> <code>Get_Spi_Edge</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Spi_Endian</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MISO?</code> — <strong>NAB</strong> <code>Get_Spi_Miso</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Spi_Mode</code> · → CRD · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>MOSI?</code> — <strong>NAB</strong> <code>Get_Spi_Mosi</code> · → 1 value · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Spi_Polarity</code> · → CRD · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>SELect?</code> — <strong>NAB</strong> <code>Get_Spi_Select</code> · → CRD · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>TIMeout?</code> — <strong>NAB</strong> <code>Get_Spi_Timebase</code> · → NR3 s · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Spi_Width</code> · → NR3 · †<br>Set or query the signal source of the clock channel in SPI decoding</li>
+</ul>
+</li>
+<li><strong><code>STORage</code></strong><ul>
+<li><strong><code>IMAGe</code></strong><ul>
+<li><code>COLor</code> — <strong>SET</strong> <code>Set_Storage_Image_Color</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Set the image color when storing images to color (ON) or intensity graded color (OFF)</li>
+<li><code>INVERT</code> — <strong>SET</strong> <code>Set_Storage_Image_Invert</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Turn on or off the invert function when storing images</li>
+<li><code>COLor?</code> — <strong>NAB</strong> <code>Get_Storage_Image_Color</code> · → CRD · †<br>Set the image color when storing images to color (ON) or intensity graded color (OFF)</li>
+<li><code>INVERT?</code> — <strong>NAB</strong> <code>Get_Storage_Image_Invert</code> · → BOOL · †<br>Turn on or off the invert function when storing images</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>AUToscale</code> — <strong>SET</strong> <code>Set_System_Autoscale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †</li>
+<li><code>BEEPer</code> — <strong>SET</strong> <code>Set_System_Beeper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the beeper, or query the status of the beeper</li>
+<li><code>LANGuage</code> — <strong>SET</strong> <code>Set_System_Language</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SCH</code> | <code>TCH</code> | <code>ENGL</code> | <code>PORT</code> | <code>GERM</code> | <code>POL</code> | <code>KOR</code> | <code>JAPA</code> | <code>FREN</code> | <code>RUSS</code> · †<br>Set or query the system language</li>
+<li><code>LOCKed</code> — <strong>SET</strong> <code>Set_System_Locked</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the keyboard lock function, or query the status of the keyboard lock function</li>
+<li><code>PON</code> — <strong>SET</strong> <code>Set_System_Pon</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>LAT</code> | <code>DEF</code> · †<br>Set or query the system configuration to be recalled when the oscilloscope is powered on again after power-off</li>
+<li><code>AUToscale?</code> — <strong>NAB</strong> <code>Get_System_Autoscale</code> · → BOOL · †</li>
+<li><code>BEEPer?</code> — <strong>NAB</strong> <code>Get_System_Beeper</code> · → 1 value · †<br>Enable or disable the beeper, or query the status of the beeper</li>
+<li><code>GAM?</code> — <strong>NAB</strong> <code>Get_System_Gam</code> · → 1 value · †<br>Query the number of grids in the horizontal direction of the instrument screen</li>
+<li><code>LANGuage?</code> — <strong>NAB</strong> <code>Get_System_Language</code> · → 1 value · †<br>Set or query the system language</li>
+<li><code>LOCKed?</code> — <strong>NAB</strong> <code>Get_System_Locked</code> · → 1 value · †<br>Enable or disable the keyboard lock function, or query the status of the keyboard lock function</li>
+<li><code>PON?</code> — <strong>NAB</strong> <code>Get_System_Pon</code> · → 1 value · †<br>Set or query the system configuration to be recalled when the oscilloscope is powered on again after power-off</li>
+<li><code>RAM?</code> — <strong>NAB</strong> <code>Get_System_Ram</code> · → 1 value · †<br>Query the number of analog channels of the instrument</li>
+<li><strong><code>ERRor</code></strong><ul>
+<li><code>NEXT?</code> — <strong>NAB</strong> <code>Get_System_Error_Next</code> · → ERROR · †<br>Query and delete the last system error message</li>
+</ul>
+</li>
+<li><strong><code>OPTion</code></strong><ul>
+<li><code>INSTall</code> — <strong>DO</strong> <code>Do_System_Option_Install</code> · †<br>Install a option. |Name|Type|Range|Default| |---|---|---|---| |<license>|ASCII String|Refer to</li>
+<li><code>UNINSTall</code> — <strong>DO</strong> <code>Do_System_Option_Uninstall</code> · †<br>Uninstall the options installed</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>THREshold</code></strong><ul>
+<li><code>CHANnel&lt;chan&gt;</code> — <strong>SET</strong> <code>Set_Threshold_Channel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · per-instance: <code>chan</code> · †<br>Set or query the threshold level of the specified analog channel</li>
+<li><code>CHANnel&lt;chan&gt;?</code> — <strong>NAB</strong> <code>Get_Threshold_Channel</code> · per-instance: <code>chan</code> · → CRD · †<br>Set or query the threshold level of the specified analog channel</li>
+</ul>
+</li>
+<li><strong><code>TIMebase</code></strong><ul>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Timebase_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum: <code>MAIN</code> | <code>XY</code> | <code>ROLL</code></li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Timebase_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric (s)</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Timebase_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (s)</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Timebase_Mode</code> · → CRD s · †<br>Set or query the mode of the horizontal timebase</li>
+<li><strong><code>DELay</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Timebase_Delay_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable the delayed sweep, or query the status of the delayed sweep</li>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Timebase_Delay_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the delayed timebase offset</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Set_Timebase_Delay_Scale</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the delayed timebase scale</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Timebase_Delay_Enable</code> · → NR1 s · †<br>Enable or disable the delayed sweep, or query the status of the delayed sweep</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Timebase_Delay_Offset</code> · → NR3 s · †<br>Set or query the delayed timebase offset</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Timebase_Delay_Scale</code> · → NR3 s · †<br>Set or query the delayed timebase scale</li>
+</ul>
+</li>
+<li><strong><code>MAIN</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Time_Offset</code> · <code>&lt;offset&gt;</code> · args: <code>offset</code> · numeric</li>
+<li><code>SCALe</code> — <strong>SET</strong> <code>Time_Scale</code> · <code>&lt;scale&gt;</code> · args: <code>scale</code> · numeric (s/div)</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Timebase_Main_Offset</code> · → NR3 s · †<br>Set or query the main timebase offset</li>
+<li><code>SCALe?</code> — <strong>NAB</strong> <code>Get_Timebase_Main_Scale</code> · → NR3 s · †<br>Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>SWEep</code> — <strong>SET</strong> <code>Set_Sweep</code> · <code>&lt;sweep&gt;</code> · args: <code>sweep</code> · enum: <code>AUTO</code> | <code>NORM</code> | <code>SING</code></li>
+<li><code>COUPling</code> — <strong>SET</strong> <code>Set_Trigger_Coupling</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>AC</code> | <code>DC</code> | <code>LFR</code> | <code>HFR</code> · †<br>Select or query the trigger coupling type</li>
+<li><code>HOLDoff</code> — <strong>SET</strong> <code>Set_Trigger_Holdoff</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum: <code>EDGE</code> | <code>PULS</code> | <code>RUNT</code> | <code>WIND</code> | <code>NEDG</code> | <code>SLOP</code> | <code>VID</code> | <code>PATT</code> | <code>DEL</code> | <code>TIM</code> | <code>DUR</code> | <code>SHOL</code> | <code>RS232</code> | <code>IIC</code> | <code>SPI</code></li>
+<li><code>NREJect</code> — <strong>SET</strong> <code>Set_Trigger_Nreject</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Enable or disable noise rejection, or query the status of noise rejection</li>
+<li><code>SWEep</code> — <strong>SET</strong> <code>Trigger_Sweep</code> · <code>&lt;sweep&gt;</code> · args: <code>sweep</code> · enum: <code>AUTO</code> | <code>NORM</code> | <code>SING</code></li>
+<li><code>STATus?</code> — <strong>NAB</strong> <code>Get_Status</code> · → BOOL</li>
+<li><code>COUPling?</code> — <strong>NAB</strong> <code>Get_Trigger_Coupling</code> · → CRD · †<br>Select or query the trigger coupling type</li>
+<li><code>HOLDoff?</code> — <strong>NAB</strong> <code>Get_Trigger_Holdoff</code> · → NR3 · †</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Mode</code> · → CRD · †<br>Select or query the trigger type</li>
+<li><code>NREJect?</code> — <strong>NAB</strong> <code>Get_Trigger_Nreject</code> · → 1 value · †<br>Enable or disable noise rejection, or query the status of noise rejection</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_Trigger_Positive</code> · → NR3 · †<br>Query the position in the internal memory that corresponds to the waveform trigger position</li>
+<li><code>SWEep?</code> — <strong>NAB</strong> <code>Get_Trigger_Sweep</code> · → CRD · †<br>Set or query the trigger mode</li>
+<li><code>DELay</code> — <strong>DO</strong> <code>Do_Trigger_Delay</code> · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>DURATion</code> — <strong>DO</strong> <code>Do_Trigger_Duration</code> · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>EDGe</code> — <strong>DO</strong> <code>Do_Trigger_Edge</code> · †<br>Set or query the trigger source in edge trigger</li>
+<li><code>IIC</code> — <strong>DO</strong> <code>Do_Trigger_Iic</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>NEDGe</code> — <strong>DO</strong> <code>Do_Trigger_Nedge</code> · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>PATTern</code> — <strong>DO</strong> <code>Do_Trigger_Pattern</code> · †<br>Set or query the pattern of each channel in pattern trigger</li>
+<li><code>PULSe</code> — <strong>DO</strong> <code>Do_Trigger_Pulse</code> · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>RS&lt;chan&gt;</code> — <strong>DO</strong> <code>Do_Trigger_Rs</code> · per-instance: <code>chan</code> · †<br>Set or query the trigger source in RS232 trigger</li>
+<li><code>RUNT</code> — <strong>DO</strong> <code>Do_Trigger_Runt</code> · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>SHOLd</code> — <strong>DO</strong> <code>Do_Trigger_Shold</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>SLOPe</code> — <strong>DO</strong> <code>Do_Trigger_Slope</code> · †<br>Set or query the time value in slope trigger</li>
+<li><code>SPI</code> — <strong>DO</strong> <code>Do_Trigger_Spi</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>TIMeout</code> — <strong>DO</strong> <code>Do_Trigger_Timebase</code> · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>VIDeo</code> — <strong>DO</strong> <code>Do_Trigger_Video</code> · †<br>Select or query the trigger source in video trigger</li>
+<li><code>WINDows</code> — <strong>DO</strong> <code>Do_Trigger_Windows</code> · †<br>Set or query the trigger source in windows trigger</li>
+<li><strong><code>DELay</code></strong><ul>
+<li><code>SA</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Sa</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SB</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Sb</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SLOPA</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Slopa</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SLOPB</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Slopb</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TLOWer</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Tlower</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TUPPer</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Tupper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TYPe</code> — <strong>SET</strong> <code>Set_Trigger_Delay_Type</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SA?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Sa</code> · → NR3 s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SB?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Sb</code> · → NR3 s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SLOPA?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Slopa</code> · → CRD s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>SLOPB?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Slopb</code> · → CRD s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TLOWer?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Tlower</code> · → NR3 s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TUPPer?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Tupper</code> · → NR3 s · †<br>Set or query the trigger source A in delay trigger</li>
+<li><code>TYPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay_Type</code> · → CRD s · †<br>Set or query the trigger source A in delay trigger</li>
+</ul>
+</li>
+<li><strong><code>DURATion</code></strong><ul>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TLOWer</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Tlower</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TUPPer</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Tupper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TYPe</code> — <strong>SET</strong> <code>Set_Trigger_Duration_Type</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>H</code> | <code>L</code> | <code>X</code> · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Duration_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>GRE</code> | <code>LESS</code> | <code>GLES</code> · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Source</code> · → CRD · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TLOWer?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Tlower</code> · → 1 value · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TUPPer?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Tupper</code> · → 1 value · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>TYPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_Type</code> · → CRD · †<br>Set or query the pattern of each channel in duration trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Duration_When</code> · → 1 value · †<br>Set or query the pattern of each channel in duration trigger</li>
+</ul>
+</li>
+<li><strong><code>EDGe</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Edge_Level</code> · <code>&lt;level&gt;</code> · args: <code>level</code> · numeric</li>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Edge_Slope</code> · <code>&lt;slope&gt;</code> · args: <code>slope</code> · enum: <code>POS</code> | <code>NEG</code> | <code>RFAL</code></li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Edge_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>AC</code></li>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Trigger_Level</code> · <code>&lt;level&gt;</code> · args: <code>level</code> · numeric</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Trigger_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>AC</code></li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Level</code> · → NR3 · †<br>Set or query the trigger source in edge trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Slope</code> · → CRD · †<br>Set or query the trigger source in edge trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Edge_Source</code> · → CRD · †<br>Set or query the trigger source in edge trigger</li>
+</ul>
+</li>
+<li><strong><code>IIC</code></strong><ul>
+<li><code>ADDRess</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Address</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>AWIDth</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Awidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>7</code> | <code>8</code> | <code>10</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>CLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Clevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DIRection</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Direction</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>READ</code> | <code>WRIT</code> | <code>RWR</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Dlevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>SCL</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Scl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>SDA</code> — <strong>SET</strong> <code>Set_Trigger_Iic_Sda</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Iic_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>STAR</code> | <code>REST</code> | <code>STOP</code> | <code>NACK</code> | <code>ADDR</code> | <code>DATA</code> | <code>ADAT</code> · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>ADDRess?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Address</code> · → NR1 · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>AWIDth?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Awidth</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>CLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Clevel</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Data</code> · → BLOCK · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DIRection?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Direction</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>DLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Dlevel</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>SCL?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Scl</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>SDA?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_Sda</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Iic_When</code> · → 1 value · †<br>Set or query the channel source of SCL in I2C trigger</li>
+</ul>
+</li>
+<li><strong><code>NEDGe</code></strong><ul>
+<li><code>EDGE</code> — <strong>SET</strong> <code>Set_Trigger_Nedge_Edge</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>IDLE</code> — <strong>SET</strong> <code>Set_Trigger_Nedge_Idle</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Nedge_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Nedge_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Nedge_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>EDGE?</code> — <strong>NAB</strong> <code>Get_Trigger_Nedge_Edge</code> · → 1 value · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>IDLE?</code> — <strong>NAB</strong> <code>Get_Trigger_Nedge_Idle</code> · → 1 value · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Nedge_Level</code> · → NR3 · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Nedge_Slope</code> · → CRD · †<br>Set or query the trigger source in Nth edge trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Nedge_Source</code> · → CRD · †<br>Set or query the trigger source in Nth edge trigger</li>
+</ul>
+</li>
+<li><strong><code>PATTern</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Pattern_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the pattern of each channel in pattern trigger</li>
+<li><code>PATTern</code> — <strong>SET</strong> <code>Set_Trigger_Pattern_Pattern</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>H</code> | <code>L</code> | <code>X</code> | <code>R</code> | <code>F</code> · †<br>Set or query the pattern of each channel in pattern trigger</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Pattern_Level</code> · → NR3 · †<br>Set or query the pattern of each channel in pattern trigger</li>
+<li><code>PATTern?</code> — <strong>NAB</strong> <code>Get_Trigger_Pattern_Pattern</code> · → 1 value · †<br>Set or query the pattern of each channel in pattern trigger</li>
+</ul>
+</li>
+<li><strong><code>PULSe</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>LWIDth</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_Lwidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>UWIDth</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_Uwidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PGR</code> | <code>PLES</code> | <code>NGR</code> | <code>NLES</code> | <code>PGL</code> | <code>NGL</code> · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Trigger_Pulse_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_Level</code> · → NR3 · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>LWIDth?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_Lwidth</code> · → 1 value · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_Source</code> · → CRD · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>UWIDth?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_Uwidth</code> · → 1 value · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_When</code> · → 1 value · †<br>Set or query the trigger source in pulse width trigger</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Trigger_Pulse_Width</code> · → NR3 · †<br>Set or query the trigger source in pulse width trigger</li>
+</ul>
+</li>
+<li><strong><code>RUNT</code></strong><ul>
+<li><code>ALEVel</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Alevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>BLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Blevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Runt_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>NONE</code> | <code>GRE</code> | <code>LESS</code> | <code>GLES</code> · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WLOWer</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Wlower</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WUPPer</code> — <strong>SET</strong> <code>Set_Trigger_Runt_Wupper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>ALEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Alevel</code> · → 1 value · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>BLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Blevel</code> · → 1 value · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Polarity</code> · → CRD · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Source</code> · → CRD · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_When</code> · → 1 value · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WLOWer?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Wlower</code> · → 1 value · †<br>Set or query the trigger source in runt trigger</li>
+<li><code>WUPPer?</code> — <strong>NAB</strong> <code>Get_Trigger_Runt_Wupper</code> · → 1 value · †<br>Set or query the trigger source in runt trigger</li>
+</ul>
+</li>
+<li><strong><code>SHOLd</code></strong><ul>
+<li><code>CSrc</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Csrc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>DSrc</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Dsrc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>HTIMe</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Htime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>PATTern</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Pattern</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>STIMe</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Stime</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>TYPe</code> — <strong>SET</strong> <code>Set_Trigger_Shold_Type</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>SET</code> | <code>HOL</code> | <code>SETHOL</code> · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>CSrc?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Csrc</code> · → 1 value · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>DSrc?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Dsrc</code> · → 1 value · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>HTIMe?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Htime</code> · → NR3 s · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>PATTern?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Pattern</code> · → 1 value · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Slope</code> · → CRD · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>STIMe?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Stime</code> · → NR3 s · †<br>Set or query the data source in setup/hold trigger</li>
+<li><code>TYPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Shold_Type</code> · → CRD · †<br>Set or query the data source in setup/hold trigger</li>
+</ul>
+</li>
+<li><strong><code>SLOPe</code></strong><ul>
+<li><code>ALEVel</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Alevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the time value in slope trigger</li>
+<li><code>BLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Blevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the time value in slope trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the time value in slope trigger</li>
+<li><code>TIME</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Time</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the time value in slope trigger</li>
+<li><code>TLOWer</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Tlower</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the time value in slope trigger</li>
+<li><code>TUPPer</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Tupper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the time value in slope trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Slope_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PGR</code> | <code>PLES</code> | <code>NGR</code> | <code>NLES</code> | <code>PGL</code> | <code>NGL</code> · †<br>Set or query the time value in slope trigger</li>
+<li><code>WINDow</code> — <strong>SET</strong> <code>Set_Trigger_Slope_Windows</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>TA</code> | <code>TB</code> | <code>TAB</code> · †<br>Set or query the time value in slope trigger</li>
+<li><code>ALEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Alevel</code> · → 1 value · †<br>Set or query the time value in slope trigger</li>
+<li><code>BLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Blevel</code> · → 1 value · †<br>Set or query the time value in slope trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Source</code> · → CRD · †<br>Set or query the time value in slope trigger</li>
+<li><code>TIME?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Time</code> · → NR3 s · †<br>Set or query the time value in slope trigger</li>
+<li><code>TLOWer?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Tlower</code> · → 1 value · †<br>Set or query the time value in slope trigger</li>
+<li><code>TUPPer?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Tupper</code> · → 1 value · †<br>Set or query the time value in slope trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_When</code> · → 1 value · †<br>Set or query the time value in slope trigger</li>
+<li><code>WINDow?</code> — <strong>NAB</strong> <code>Get_Trigger_Slope_Windows</code> · → CRD · †<br>Set or query the time value in slope trigger</li>
+</ul>
+</li>
+<li><strong><code>SPI</code></strong><ul>
+<li><code>CLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Clevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>CS</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Csrc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>DATA</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Data</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>DLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Dlevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>HIGH</code> | <code>LOW</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SCL</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Scl</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SDA</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Sda</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Slevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>TIMeout</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>WHEN</code> — <strong>SET</strong> <code>Set_Trigger_Spi_When</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CS</code> | <code>TIM</code> · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Trigger_Spi_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>CLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Clevel</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>CS?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Csrc</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Data</code> · → BLOCK · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>DLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Dlevel</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Mode</code> · → CRD · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SCL?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Scl</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SDA?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Sda</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Slevel</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Slope</code> · → CRD · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>TIMeout?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Timebase</code> · → NR3 s · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>WHEN?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_When</code> · → 1 value · †<br>Set or query the channel source of SCL in SPI trigger</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Trigger_Spi_Width</code> · → NR3 · †<br>Set or query the channel source of SCL in SPI trigger</li>
+</ul>
+</li>
+<li><strong><code>TIMeout</code></strong><ul>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Timebase_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> | <code>RFAL</code> · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Timebase_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>TIMe</code> — <strong>SET</strong> <code>Set_Trigger_Timebase_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Timebase_Slope</code> · → CRD s · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Timebase_Source</code> · → CRD s · †<br>Set or query the trigger source in timeout trigger</li>
+<li><code>TIMe?</code> — <strong>NAB</strong> <code>Get_Trigger_Timebase_Timebase</code> · → NR3 s · †<br>Set or query the trigger source in timeout trigger</li>
+</ul>
+</li>
+<li><strong><code>VIDeo</code></strong><ul>
+<li><code>LEVel</code> — <strong>SET</strong> <code>Set_Trigger_Video_Level</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Select or query the trigger source in video trigger</li>
+<li><code>LINE</code> — <strong>SET</strong> <code>Set_Trigger_Video_Line</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Select or query the trigger source in video trigger</li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Trigger_Video_Mode</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>ODDF</code> | <code>EVEN</code> | <code>LINE</code> | <code>ALIN</code> · †<br>Select or query the trigger source in video trigger</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Trigger_Video_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> · †<br>Select or query the trigger source in video trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Video_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Select or query the trigger source in video trigger</li>
+<li><code>STANdard</code> — <strong>SET</strong> <code>Set_Trigger_Video_Standard</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>PALS</code> | <code>NTSC</code> | <code>480P</code> | <code>576P</code> · †<br>Select or query the trigger source in video trigger</li>
+<li><code>LEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Level</code> · → NR3 · †<br>Select or query the trigger source in video trigger</li>
+<li><code>LINE?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Line</code> · → 1 value · †<br>Select or query the trigger source in video trigger</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Mode</code> · → CRD · †<br>Select or query the trigger source in video trigger</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Polarity</code> · → CRD · †<br>Select or query the trigger source in video trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Source</code> · → CRD · †<br>Select or query the trigger source in video trigger</li>
+<li><code>STANdard?</code> — <strong>NAB</strong> <code>Get_Trigger_Video_Standard</code> · → 1 value · †<br>Select or query the trigger source in video trigger</li>
+</ul>
+</li>
+<li><strong><code>WINDows</code></strong><ul>
+<li><code>ALEVel</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Alevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>BLEVel</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Blevel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>POSition</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Positive</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>EXIT</code> | <code>ENTER</code> | <code>TIM</code> · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>SLOPe</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Slope</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>POS</code> | <code>NEG</code> | <code>RFAL</code> · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Source</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum: <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>TIMe</code> — <strong>SET</strong> <code>Set_Trigger_Windows_Timebase</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>ALEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Alevel</code> · → 1 value · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>BLEVel?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Blevel</code> · → 1 value · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>POSition?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Positive</code> · → NR3 · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>SLOPe?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Slope</code> · → CRD · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Source</code> · → CRD · †<br>Set or query the trigger source in windows trigger</li>
+<li><code>TIMe?</code> — <strong>NAB</strong> <code>Get_Trigger_Windows_Timebase</code> · → NR3 s · †<br>Set or query the trigger source in windows trigger</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>UART</code></strong><ul>
+<li><code>BAUD</code> — <strong>SET</strong> <code>Set_Uart_Baud</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>ENDian</code> — <strong>SET</strong> <code>Set_Uart_Endian</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>PARity</code> — <strong>SET</strong> <code>Set_Uart_Parallel</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>POLarity</code> — <strong>SET</strong> <code>Set_Uart_Polarity</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>RX</code> — <strong>SET</strong> <code>Set_Uart_Rx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Uart_Stop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>TX</code> — <strong>SET</strong> <code>Set_Uart_Tx</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>WIDTh</code> — <strong>SET</strong> <code>Set_Uart_Width</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>BAUD?</code> — <strong>NAB</strong> <code>Get_Uart_Baud</code> · → 1 value · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>ENDian?</code> — <strong>NAB</strong> <code>Get_Uart_Endian</code> · → 1 value · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>PARity?</code> — <strong>NAB</strong> <code>Get_Uart_Parallel</code> · → 1 value · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>POLarity?</code> — <strong>NAB</strong> <code>Get_Uart_Polarity</code> · → CRD · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>RX?</code> — <strong>NAB</strong> <code>Get_Uart_Rx</code> · → 1 value · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Uart_Stop</code> · → NR3 · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>TX?</code> — <strong>NAB</strong> <code>Get_Uart_Tx</code> · → 1 value · †<br>Set or query the TX channel source of RS232 decoding</li>
+<li><code>WIDTh?</code> — <strong>NAB</strong> <code>Get_Uart_Width</code> · → NR3 · †<br>Set or query the TX channel source of RS232 decoding</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Voltage_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Voltage_Offset</code> · → NR3 V · †</li>
+<li><code>LEVel</code> — <strong>DO</strong> <code>Do_Voltage_Level</code> · †</li>
+<li><strong><code>LEVel</code></strong><ul>
+<li><strong><code>IMMediate</code></strong><ul>
+<li><code>AMPLitude</code> — <strong>SET</strong> <code>Set_Voltage_Level_Immediate_Amplitude</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>Set or query the output amplitude of the specified source channel</li>
+<li><code>AMPLitude?</code> — <strong>NAB</strong> <code>Get_Voltage_Level_Immediate_Amplitude</code> · → NR3 V · †<br>Set or query the output amplitude of the specified source channel</li>
+<li><code>OFFSet</code> — <strong>DO</strong> <code>Do_Voltage_Level_Immediate_Offset</code> · †</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>WAV</code></strong><ul>
+<li><code>SOR</code> — <strong>DO</strong> <code>Do_Waveform_Sor</code> · †<br>LabVIEW Programming Demo</li>
+</ul>
+</li>
+<li><strong><code>WAVeform</code></strong><ul>
+<li><code>FORMat</code> — <strong>SET</strong> <code>Set_Waveform_Format</code> · <code>&lt;format&gt;</code> · args: <code>format</code> · enum: <code>WORD</code> | <code>BYTE</code> | <code>ASC</code></li>
+<li><code>MODE</code> — <strong>SET</strong> <code>Set_Waveform_Mode</code> · <code>&lt;mode&gt;</code> · args: <code>mode</code> · enum: <code>NORM</code> | <code>MAX</code> | <code>RAW</code></li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Waveform_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum: <code>D0</code> | <code>D1</code> | <code>D2</code> | <code>D3</code> | <code>D4</code> | <code>D5</code> | <code>D6</code> | <code>D7</code> | <code>D8</code> | <code>D9</code> | <code>D10</code> | <code>D11</code> | <code>D12</code> | <code>D13</code> | <code>D14</code> | <code>D15</code> | <code>CHAN1</code> | <code>CHAN2</code> | <code>CHAN3</code> | <code>CHAN4</code> | <code>MATH</code></li>
+<li><code>STARt</code> — <strong>SET</strong> <code>Set_Waveform_Start</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the start point of waveform data reading</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Set_Waveform_Stop</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Set or query the stop point of waveform data reading</li>
+<li><code>DATA?</code> — <strong>NAB</strong> <code>Get_Waveform_Data</code> · → BLOCK</li>
+<li><code>FORMat?</code> — <strong>NAB</strong> <code>Get_Waveform_Format</code> · → CRD · †<br>Set or query the return format of the waveform data</li>
+<li><code>MODE?</code> — <strong>NAB</strong> <code>Get_Waveform_Mode</code> · → CRD · †<br>Set or query the reading mode used by :WAVeform:DATA?</li>
+<li><code>PREamble?</code> — <strong>NAB</strong> <code>Get_Waveform_Preamble</code> · → BLOCK · †<br>Query and return all the waveform parameters</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Waveform_Source</code> · → CRD · †<br>Set or query the channel of which the waveform data will be read</li>
+<li><code>STARt?</code> — <strong>NAB</strong> <code>Get_Waveform_Start</code> · → NR3 · †<br>Set or query the start point of waveform data reading</li>
+<li><code>STOP?</code> — <strong>NAB</strong> <code>Get_Waveform_Stop</code> · → NR3 · †<br>Set or query the stop point of waveform data reading</li>
+<li><code>XORigin?</code> — <strong>NAB</strong> <code>Get_Waveform_Xorigin</code> · → NR3 · †<br>Query the start time of the waveform data of the channel source currently selected in the X direction</li>
+<li><code>XREFerence?</code> — <strong>NAB</strong> <code>Get_Waveform_Xreference</code> · → NR3 · †<br>Query the reference time of the specified channel source in the X direction</li>
+<li><code>XINC?</code> — <strong>NAB</strong> <code>Get_XInc</code> · → NR3</li>
+<li><code>YINC?</code> — <strong>NAB</strong> <code>Get_YInc</code> · → NR3</li>
+<li><code>YORigin?</code> — <strong>NAB</strong> <code>Get_YOrigin</code> · → NR3</li>
+<li><code>YREFerence?</code> — <strong>NAB</strong> <code>Get_YRef</code> · → NR3</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Do_Cls</code> · †</li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*WAI</code> — <strong>DO</strong> <code>Do_Wai</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD · †<br>Get idn</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code> · †<br>Do rst</li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+</ul>
+<!-- END GENERATED --><hr>
+<h2>Notes carried over</h2>
+<p>The <strong>Rigol DS1104Z</strong> is a very popular modern entry-level oscilloscope. While it mimics the SCPI structure of the Agilent/Keysight scopes, it has a few distinct &quot;dialects,&quot; particularly in how it handles measurements and downloading deep memory data.</p>
+<p>Here is the entry and the command tree for the Rigol DS1000Z series.</p>
+<pre><code class="language-json">&quot;DS1104Z&quot;: {&quot;type&quot;: &quot;Oscilloscope&quot;, &quot;notes&quot;: &quot;4-Channel, 100MHz, UltraVision Tech&quot;}
+</code></pre>
+<h3><strong>1. The Root (System State)</strong></h3>
+<p>Standard control over the acquisition state.</p>
+<ul>
+<li><strong><code>:RUN</code></strong>  Starts the trigger system.</li>
+<li><strong><code>:STOP</code></strong>  Stops the trigger system.</li>
+<li><strong><code>:AUTO</code></strong>  The &quot;Auto Scale&quot; button.</li>
+<li><strong><code>:SINGle</code></strong>  Single acquisition mode.</li>
+<li><strong><code>:TFORce</code></strong>  Force a trigger (useful if waiting for an event that hasn&#39;t happened yet).</li>
+</ul>
+<hr>
+<h3><strong>2. The <code>:CHANnel&lt;n&gt;</code> Subsystem (Vertical)</strong></h3>
+<p>Since this is a 4-channel scope, <code>&lt;n&gt;</code> can be 1, 2, 3, or 4.</p>
+<ul>
+<li><strong><code>:CHANnel&lt;n&gt;</code></strong></li>
+<li><code>:DISPlay</code> <code>ON|OFF</code>  Turn channel trace on/off.</li>
+<li><code>:BWLimit</code> <code>20M|OFF</code>  Turn on the 20MHz noise filter.</li>
+<li><code>:COUPling</code> <code>AC|DC|GND</code></li>
+<li><code>:SCALe</code> <code>&lt;volts&gt;</code>  Set vertical scale (e.g., <code>1.0</code> for 1V/div).</li>
+<li><code>:OFFSet</code> <code>&lt;volts&gt;</code>  Move the trace up or down.</li>
+<li><code>:UNITs</code> <code>VOLTs|WATTs|AMPs|UNKNown</code>  Useful if using current probes.</li>
+<li><code>:PROBe</code> <code>0.01|0.02...|1|10|...</code>  Set probe attenuation (usually 1X or 10X).</li>
+</ul>
+<hr>
+<h3><strong>3. The <code>:TIMebase</code> Subsystem (Horizontal)</strong></h3>
+<p>Controls the X-axis for all channels.</p>
+<ul>
+<li><strong><code>:TIMebase</code></strong></li>
+<li><code>:MODE</code> <code>MAIN|XY|ROLL</code>  Standard view, XY plot, or Roll mode (chart recorder).</li>
+<li><code>:SCALe</code> <code>&lt;seconds&gt;</code>  Time per division (e.g., <code>0.001</code> for 1ms).</li>
+<li><code>:OFFSet</code> <code>&lt;seconds&gt;</code>  Horizontal position (delay).</li>
+</ul>
+<hr>
+<h3><strong>4. The <code>:TRIGger</code> Subsystem</strong></h3>
+<p>Rigol triggers are grouped by type. You must select the mode first.</p>
+<ul>
+<li><p><strong><code>:TRIGger</code></strong></p>
+</li>
+<li><p><code>:MODE</code> <code>EDGE|PULSe|SLOPE|VIDEO|PATTern...</code></p>
+</li>
+<li><p><strong><code>:EDGe</code></strong></p>
+</li>
+<li><p><code>:SOURce</code> <code>CHAN1|CHAN2|CHAN3|CHAN4|AC</code></p>
+</li>
+<li><p><code>:SLOPe</code> <code>POSitive|NEGative|RFALI</code> (Rising/Falling/Either)</p>
+</li>
+<li><p><code>:LEVel</code> <code>&lt;volts&gt;</code>  The trigger threshold voltage.</p>
+</li>
+<li><p><code>:SWEep</code> <code>AUTO|NORMal|SINGle</code>  Trigger sweep mode.</p>
+</li>
+<li><p><code>:STATus?</code>  <strong>Query:</strong> Returns <code>TD</code> (Triggered), <code>WAIT</code> (Waiting), <code>RUN</code> (Auto), or <code>STOP</code>.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>5. The <code>:MEASure</code> Subsystem (The Rigol Quirks)</strong></h3>
+<p>Rigol has a slightly different syntax for measurements compared to Agilent. You often have to enable the measurement on the screen before querying it, or use the <code>ITEM</code> command.</p>
+<ul>
+<li><p><strong><code>:MEASure</code></strong></p>
+</li>
+<li><p><code>:CLEar</code>  Clears measurements from the screen.</p>
+</li>
+<li><p><code>:SOURce</code> <code>CHAN1</code>  Sets the default source for calculations.</p>
+</li>
+<li><p><strong><code>:ITEM</code></strong> (The preferred method for scripts)</p>
+</li>
+<li><p><code>?</code> <code>&lt;measure_type&gt;, &lt;channel&gt;</code></p>
+</li>
+<li><p><em>Example:</em> <code>:MEAS:ITEM? VPP, CHAN1</code>  Returns the Vpp of Ch1 immediately.</p>
+</li>
+<li><p><em>Types:</em> <code>VMAX, VMIN, VPP, VAVG, VRMS, FREQ, PER, RISetime, FALLtime</code>.</p>
+</li>
+<li><p><code>:STATistic</code></p>
+</li>
+<li><p><code>:DISPlay</code> <code>ON|OFF</code>  Shows the statistics table (min/max/avg/dev) on screen.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>6. The <code>:WAVeform</code> Subsystem (Getting Data)</strong></h3>
+<p><strong>Important Note:</strong> The DS1104Z has &quot;Deep Memory&quot; (up to 24 Mpts). Downloading 24 million points over USB or LAN takes a long time. You usually want to request screen data (<code>NORM</code>) unless you really need deep analysis (<code>RAW</code>).</p>
+<ul>
+<li><p><strong><code>:WAVeform</code></strong></p>
+</li>
+<li><p><code>:SOURce</code> <code>CHAN1</code>  Select channel to read.</p>
+</li>
+<li><p><code>:MODE</code> <code>NORMal|MAXimum|RAW</code></p>
+</li>
+<li><p><code>NORMal</code>: Screen data (1200 points). Fast.</p>
+</li>
+<li><p><code>RAW</code>: Deep memory data. <strong>Scope must be STOPPED to read this.</strong></p>
+</li>
+<li><p><code>:FORMat</code> <code>WORD|BYTE|ASCii</code></p>
+</li>
+<li><p><code>BYTE</code>: 8-bit resolution (standard).</p>
+</li>
+<li><p><code>:DATA?</code>  <strong>The Query.</strong> Returns the binary data block.</p>
+</li>
+<li><p><code>:XINC?</code>  X-increment (time between points).</p>
+</li>
+<li><p><code>:YINC?</code>, <code>:YORigin?</code>, <code>:YREFerence?</code>  Parameters needed to convert raw bytes to Voltage.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>Command vs. Query Examples</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Command</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Set</strong> Scale</td>
+<td><code>:CHAN1:SCAL 2</code></td>
+<td>Sets Ch1 to 2 Volts/Div.</td>
+</tr>
+<tr>
+<td><strong>Ask</strong> Scale</td>
+<td><code>:CHAN1:SCAL?</code></td>
+<td>Returns <code>2.000000e+00</code>.</td>
+</tr>
+<tr>
+<td><strong>Stop</strong> Scope</td>
+<td><code>:STOP</code></td>
+<td>Stops acquisition (Red light).</td>
+</tr>
+<tr>
+<td><strong>Single</strong> Shot</td>
+<td><code>:SING</code></td>
+<td>Scope waits for one trigger, then stops.</td>
+</tr>
+<tr>
+<td><strong>Measure</strong></td>
+<td><code>:MEAS:ITEM? FREQ,CHAN1</code></td>
+<td>Returns frequency of Ch1 (e.g., <code>1.000000e+03</code>).</td>
+</tr>
+</tbody></table>
+<h3><strong>A Critical Rigol &quot;Gotcha&quot;</strong></h3>
+<p>If you want to download the full deep memory (RAW mode), you <strong>must</strong> follow this strict sequence or the command will fail/timeout:</p>
+<ol>
+<li><code>:STOP</code> (Scope must be stopped).</li>
+<li><code>:WAV:SOUR CHAN1</code> (Select channel).</li>
+<li><code>:WAV:MODE RAW</code> (Select Raw mode).</li>
+<li><code>:WAV:DATA?</code> (Request data).</li>
+</ol>
+<p>If the scope is <code>:RUN</code>ning, <code>RAW</code> mode requests are usually ignored or return an error.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Oscilloscope/DS1104Z/commands_tree.md</code>
+  </div>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: special / CMDP - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>CMDP — Circular Motion Displacement Potentiometer</h1>
+<p>Polar-coordinate panner/fader on a canvas (angle + radius).</p>
+<ul>
+<li><strong>Defines (global):</strong> <code>CMDP</code></li>
+<li><strong>Props:</strong> <code>config</code>, <code>value</code>, <code>rotValue</code>, <code>onChange</code></li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+<li><strong>Demo:</strong> open <code>../index.html</code>.</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;circular_motion_displacement_potentiometer_Example&quot;: {
+    &quot;type&quot;: &quot;_CMDP&quot;,
+    &quot;label&quot;: {
+      &quot;active&quot;: {
+        &quot;text&quot;: &quot;CMDP 1&quot;,
+        &quot;text_size&quot;: 12,
+        &quot;text_color&quot;: &quot;#cccccc&quot;
+      }
+    },
+    &quot;path&quot;: &quot;audio/cmdp/1&quot;,
+    &quot;layout&quot;: {
+      &quot;sticky&quot;: &quot;nsew&quot;,
+      &quot;weight_y&quot;: 1
+    },
+    &quot;group_configs&quot;: [
+      {
+        &quot;name&quot;: &quot;Drums&quot;,
+        &quot;color&quot;: &quot;#FF4444&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Bass&quot;,
+        &quot;color&quot;: &quot;#FFFF44&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Guitars&quot;,
+        &quot;color&quot;: &quot;#44FF44&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Keys&quot;,
+        &quot;color&quot;: &quot;#44FFFF&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Vocals&quot;,
+        &quot;color&quot;: &quot;#4444FF&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Strings&quot;,
+        &quot;color&quot;: &quot;#FF44FF&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;Brass&quot;,
+        &quot;color&quot;: &quot;#FF4488&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;name&quot;: &quot;FX&quot;,
+        &quot;color&quot;: &quot;#888888&quot;,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      }
+    ],
+    &quot;channels&quot;: [
+      {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Kick In&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 0,
+        &quot;level&quot;: 12,
+        &quot;depth&quot;: 84,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;Kick Out&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 7.5,
+        &quot;level&quot;: 67,
+        &quot;depth&quot;: 23,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;Snare T&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 15,
+        &quot;level&quot;: 45,
+        &quot;depth&quot;: 91,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 4,
+        &quot;name&quot;: &quot;Snare B&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 22.5,
+        &quot;level&quot;: 88,
+        &quot;depth&quot;: 5,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 5,
+        &quot;name&quot;: &quot;Hat&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 30,
+        &quot;level&quot;: 34,
+        &quot;depth&quot;: 76,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 6,
+        &quot;name&quot;: &quot;Ride&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 37.5,
+        &quot;level&quot;: 56,
+        &quot;depth&quot;: 42,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 7,
+        &quot;name&quot;: &quot;Tom 1&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 45,
+        &quot;level&quot;: 21,
+        &quot;depth&quot;: 68,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 8,
+        &quot;name&quot;: &quot;Tom 2&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: -62.3,
+        &quot;level&quot;: 79,
+        &quot;depth&quot;: 14,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 9,
+        &quot;name&quot;: &quot;Tom 3&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 60,
+        &quot;level&quot;: 93,
+        &quot;depth&quot;: 37,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 10,
+        &quot;name&quot;: &quot;Floor 1&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 67.5,
+        &quot;level&quot;: 18,
+        &quot;depth&quot;: 59,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 11,
+        &quot;name&quot;: &quot;Floor 2&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 75,
+        &quot;level&quot;: 44,
+        &quot;depth&quot;: 82,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 12,
+        &quot;name&quot;: &quot;Gong&quot;,
+        &quot;group&quot;: &quot;Drums&quot;,
+        &quot;angle&quot;: 82.5,
+        &quot;level&quot;: 72,
+        &quot;depth&quot;: 29,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 13,
+        &quot;name&quot;: &quot;Bass DI&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 90,
+        &quot;level&quot;: 5,
+        &quot;depth&quot;: 95,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 14,
+        &quot;name&quot;: &quot;Bass Mic&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 97.5,
+        &quot;level&quot;: 61,
+        &quot;depth&quot;: 48,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 15,
+        &quot;name&quot;: &quot;Bass Syn&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 105,
+        &quot;level&quot;: 39,
+        &quot;depth&quot;: 17,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 16,
+        &quot;name&quot;: &quot;Upright&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 112.5,
+        &quot;level&quot;: 84,
+        &quot;depth&quot;: 71,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 17,
+        &quot;name&quot;: &quot;Sub&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 120,
+        &quot;level&quot;: 27,
+        &quot;depth&quot;: 53,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 18,
+        &quot;name&quot;: &quot;Bass FX&quot;,
+        &quot;group&quot;: &quot;Bass&quot;,
+        &quot;angle&quot;: 127.5,
+        &quot;level&quot;: 52,
+        &quot;depth&quot;: 89,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 19,
+        &quot;name&quot;: &quot;Gtr 1 L&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 135,
+        &quot;level&quot;: 16,
+        &quot;depth&quot;: 32,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 20,
+        &quot;name&quot;: &quot;Gtr 1 R&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 142.5,
+        &quot;level&quot;: 75,
+        &quot;depth&quot;: 64,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 21,
+        &quot;name&quot;: &quot;Gtr 2 L&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 150,
+        &quot;level&quot;: 98,
+        &quot;depth&quot;: 11,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 22,
+        &quot;name&quot;: &quot;Gtr 2 R&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 157.5,
+        &quot;level&quot;: 41,
+        &quot;depth&quot;: 78,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 23,
+        &quot;name&quot;: &quot;Ac Gtr&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 165,
+        &quot;level&quot;: 63,
+        &quot;depth&quot;: 46,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 24,
+        &quot;name&quot;: &quot;12 Str&quot;,
+        &quot;group&quot;: &quot;Guitars&quot;,
+        &quot;angle&quot;: 172.5,
+        &quot;level&quot;: 29,
+        &quot;depth&quot;: 92,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 25,
+        &quot;name&quot;: &quot;Piano L&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -168,
+        &quot;level&quot;: 87,
+        &quot;depth&quot;: 25,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 26,
+        &quot;name&quot;: &quot;Piano R&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -160.5,
+        &quot;level&quot;: 14,
+        &quot;depth&quot;: 57,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 27,
+        &quot;name&quot;: &quot;Organ L&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -153,
+        &quot;level&quot;: 49,
+        &quot;depth&quot;: 81,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 28,
+        &quot;name&quot;: &quot;Organ R&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -145.5,
+        &quot;level&quot;: 71,
+        &quot;depth&quot;: 38,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 29,
+        &quot;name&quot;: &quot;Synth 1&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -138,
+        &quot;level&quot;: 33,
+        &quot;depth&quot;: 69,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 30,
+        &quot;name&quot;: &quot;Synth 2&quot;,
+        &quot;group&quot;: &quot;Keys&quot;,
+        &quot;angle&quot;: -130.5,
+        &quot;level&quot;: 58,
+        &quot;depth&quot;: 12,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 31,
+        &quot;name&quot;: &quot;Lead Vox&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 225,
+        &quot;level&quot;: 95,
+        &quot;depth&quot;: 44,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 32,
+        &quot;name&quot;: &quot;Double&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 232.5,
+        &quot;level&quot;: 22,
+        &quot;depth&quot;: 73,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 33,
+        &quot;name&quot;: &quot;BGV 1&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 240,
+        &quot;level&quot;: 47,
+        &quot;depth&quot;: 19,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 34,
+        &quot;name&quot;: &quot;BGV 2&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 247.5,
+        &quot;level&quot;: 81,
+        &quot;depth&quot;: 62,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 35,
+        &quot;name&quot;: &quot;BGV 3&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 255,
+        &quot;level&quot;: 66,
+        &quot;depth&quot;: 35,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 36,
+        &quot;name&quot;: &quot;BGV 4&quot;,
+        &quot;group&quot;: &quot;Vocals&quot;,
+        &quot;angle&quot;: 262.5,
+        &quot;level&quot;: 10,
+        &quot;depth&quot;: 87,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 37,
+        &quot;name&quot;: &quot;Violin 1&quot;,
+        &quot;group&quot;: &quot;Strings&quot;,
+        &quot;angle&quot;: 270,
+        &quot;level&quot;: 54,
+        &quot;depth&quot;: 51,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 38,
+        &quot;name&quot;: &quot;Violin 2&quot;,
+        &quot;group&quot;: &quot;Strings&quot;,
+        &quot;angle&quot;: 277.5,
+        &quot;level&quot;: 77,
+        &quot;depth&quot;: 28,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 39,
+        &quot;name&quot;: &quot;Viola&quot;,
+        &quot;group&quot;: &quot;Strings&quot;,
+        &quot;angle&quot;: 285,
+        &quot;level&quot;: 0,
+        &quot;depth&quot;: 40.8,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 40,
+        &quot;name&quot;: &quot;Cello&quot;,
+        &quot;group&quot;: &quot;Strings&quot;,
+        &quot;angle&quot;: -50.8,
+        &quot;level&quot;: 89,
+        &quot;depth&quot;: 6,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 41,
+        &quot;name&quot;: &quot;Trumpet&quot;,
+        &quot;group&quot;: &quot;Brass&quot;,
+        &quot;angle&quot;: -137.3,
+        &quot;level&quot;: 23,
+        &quot;depth&quot;: 18,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 42,
+        &quot;name&quot;: &quot;Sax&quot;,
+        &quot;group&quot;: &quot;Brass&quot;,
+        &quot;angle&quot;: 307.5,
+        &quot;level&quot;: 69,
+        &quot;depth&quot;: 15,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 43,
+        &quot;name&quot;: &quot;Trombone&quot;,
+        &quot;group&quot;: &quot;Brass&quot;,
+        &quot;angle&quot;: -44.2,
+        &quot;level&quot;: 25,
+        &quot;depth&quot;: 49,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 44,
+        &quot;name&quot;: &quot;Tuba&quot;,
+        &quot;group&quot;: &quot;Brass&quot;,
+        &quot;angle&quot;: 322.5,
+        &quot;level&quot;: 82,
+        &quot;depth&quot;: 83,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 45,
+        &quot;name&quot;: &quot;Rev 1&quot;,
+        &quot;group&quot;: &quot;FX&quot;,
+        &quot;angle&quot;: 330,
+        &quot;level&quot;: 19,
+        &quot;depth&quot;: 36,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 46,
+        &quot;name&quot;: &quot;Rev 2&quot;,
+        &quot;group&quot;: &quot;FX&quot;,
+        &quot;angle&quot;: 337.5,
+        &quot;level&quot;: 46,
+        &quot;depth&quot;: 61,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 47,
+        &quot;name&quot;: &quot;Delay&quot;,
+        &quot;group&quot;: &quot;FX&quot;,
+        &quot;angle&quot;: 345,
+        &quot;level&quot;: 73,
+        &quot;depth&quot;: 24,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      },
+      {
+        &quot;id&quot;: 48,
+        &quot;name&quot;: &quot;Echo&quot;,
+        &quot;group&quot;: &quot;FX&quot;,
+        &quot;angle&quot;: 352.5,
+        &quot;level&quot;: 38,
+        &quot;depth&quot;: 97,
+        &quot;visible&quot;: true,
+        &quot;mute&quot;: false
+      }
+    ],
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This is an enhanced sample configuration demonstrating full instantiation capabilities.&quot;
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/special/CMDP/Readme.md</code>
+  </div>
+</body>
+</html>

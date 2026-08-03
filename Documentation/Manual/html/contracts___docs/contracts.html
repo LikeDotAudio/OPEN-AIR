@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contracts - Contracts & Docs</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1><code>@openair/contracts</code> — the contract layer</h1>
+<p><strong>One definition of every shape that crosses a process boundary</strong>, shared by
+the browser, the Rust agents, and the tooling.</p>
+<p>TypeScript-first (zod) → JSON Schema → Rust types by codegen. Behavior that
+codegen cannot express (the topic grammar, device-ID derivation) is written
+twice and kept honest by shared golden vectors.</p>
+<pre><code>src/**/*.ts ──z.toJSONSchema──► schemas/*.schema.json ──cargo-typify──► rust/src/gen/*.rs
+     │                                                                        │
+     └── z.infer&lt;&gt; types + runtime validation for the browser &amp; CLI           └── serde types for agents
+</code></pre>
+<hr>
+<h2>What lives here</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Owns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>src/topics/</code></td>
+<td>The topic grammar: <code>grammar.ts</code> (segment rules), <code>tree.ts</code> (every family as data, with its retain class), <code>builders.ts</code> (typed build + total-function parse), <code>gui-path.ts</code> (panel path → GUI topic), <code>legacy.ts</code> (the v40 namespace map)</td>
+</tr>
+<tr>
+<td><code>src/device-record.ts</code></td>
+<td><code>DeviceRecord</code> — the canonical discovered-device document, plus the v40 VISA shape and a lossless mapping between them</td>
+</tr>
+<tr>
+<td><code>src/heartbeat.ts</code></td>
+<td><code>AgentHeartbeat</code> + <code>heartbeatLwt()</code> — liveness for agents and browser sessions</td>
+</tr>
+<tr>
+<td><code>src/identity.ts</code></td>
+<td><code>deviceIdFor()</code> — the device identity rule (serial → address → FNV-1a hash)</td>
+</tr>
+<tr>
+<td><code>src/time.ts</code></td>
+<td>Unix-seconds → ISO-8601 UTC at the boundary</td>
+</tr>
+<tr>
+<td><code>src/layout/</code></td>
+<td>The panel JSON: <code>node.ts</code> (two-mode validation), <code>widget-types.ts</code> (what actually renders), <code>yak-binding.ts</code> (the <code>yak_handler</code> block), <code>folder-grammar.ts</code> (<code>N_</code> order, <code>left_50</code> splits)</td>
+</tr>
+<tr>
+<td><code>src/yak/verbs.ts</code></td>
+<td>The runtime <code>yak_handler</code> wire message the YAK agent receives</td>
+</tr>
+<tr>
+<td><code>vectors/</code></td>
+<td>Language-neutral golden vectors — consumed by <strong>both</strong> vitest and <code>cargo test</code></td>
+</tr>
+<tr>
+<td><code>cli/validate.ts</code></td>
+<td><code>openair-validate</code>: walks the tree, reports drift, enforces the ratchet</td>
+</tr>
+<tr>
+<td><code>schemas/</code>, <code>rust/src/gen/</code></td>
+<td><strong>Generated. Never hand-edited.</strong> Committed so <code>cargo build</code> never needs Node</td>
+</tr>
+</tbody></table>
+<h2>The topic tree</h2>
+<pre><code>OpenAir/
+├── Discovery/{protocol}/{deviceId}        retained DeviceRecord      (Phase 4 publisher)
+├── Gui/{...panelPath}/{field}             live control values
+├── Yak/
+│   ├── cmd/{verb}/{class}/{model}         command plane              (Phase 3)
+│   ├── state/{class}/{model}/{capability} parsed replies             (Phase 3)
+│   └── monitor/{in|out}                   command monitor
+└── System/
+    ├── Agents/{agent}                     retained AgentHeartbeat
+    ├── Config/{agent}                     retained config
+    └── Log/{source}/{level}               structured log events      (Phase 4)
+</code></pre>
+<p>Every <em>current</em> v40 namespace is classified by name — <code>Topics.parse()</code> returns
+<code>{kind: &#39;legacy&#39;, family: …}</code> with the v41 alias, so bridges and the validate
+CLI can name old traffic instead of failing on it, and the eventual retirement
+is a grep (<code>Topics.isLegacy</code>).</p>
+<pre><code class="language-ts">import { Topics } from &#39;@openair/contracts&#39;
+
+Topics.discovery({ protocol: &#39;visa&#39;, deviceId: &#39;visa:MY12345678&#39; })
+Topics.agents.topic(&#39;yak&#39;)                       // OpenAir/System/Agents/yak
+Topics.gui.fromPanelPath(&#39;/Window_1/left_50/0_Spectrum/10_YAK/1_N9340B/f.json&#39;)
+                                                 // OpenAir/Gui/Spectrum/YAK/N9340B
+
+const t = Topics.parse(raw)   // discriminated union; never guesses
+</code></pre>
+<hr>
+<h2>Schema design law</h2>
+<p>These rules are <strong>review law</strong>. They are what keep the package usable against
+a live broker rather than merely correct on paper.</p>
+<h3>Retained messages are a database you don&#39;t get to migrate</h3>
+<p>The broker holds payloads written by every version that ever ran.</p>
+<ol>
+<li><strong>Every document carries <code>schemaVersion</code></strong> (integer literal). Parsers
+dispatch on it. Version-less input is v0 — the wild west — and where a real
+v0 shape exists it is schema&#39;d <em>by name</em> (<code>LegacyFailoverHeartbeatV0</code>,
+<code>LegacyVisaRecordV0</code>) so validators can say what they found.</li>
+<li><strong>Tolerant reader, strict writer.</strong> Readers ignore unknown fields and
+default missing optionals; writers always emit the full current shape and
+never round-trip unknown fields back onto the bus.</li>
+<li><strong>Within a major version, evolution is additive-optional only.</strong> Renaming
+or retyping a field is a new major version and ships with a bus-migration
+step.</li>
+</ol>
+<h3>Conventions</h3>
+<ul>
+<li><strong>Timestamps are ISO-8601 UTC strings.</strong> The bus is debugged with
+<code>mosquitto_sub</code> and human eyes; <code>1752786000</code> is hostile. Unix seconds
+convert at the contract boundary (<code>fromUnixSeconds</code>).</li>
+<li><strong>IDs are derived, never positional.</strong> <code>deviceId = {protocol}:{stableKey}</code> —
+serial when the instrument reports one, else its protocol-native address,
+else a content hash. Scan-order identity (<code>Dev0</code>, <code>Dev1</code>) is banned: two
+agents computing IDs differently recreates the duplicate-instrument problem
+on the bus, so the derivation is a contract and is vector-pinned.</li>
+<li><strong>No stringly enums.</strong> Device status, agent status, verbs, converters,
+protocol names, widget types — all closed. Unknown values fail loudly.</li>
+<li><strong>Liveness is computed, never stored.</strong> <code>lastSeen</code> + documented TTL
+semantics; booleans like <code>connected: 1</code> go stale themselves and are banned.</li>
+<li><strong>Retain class belongs to the topic family, not the call-site.</strong>
+<code>tree.ts</code> marks each family <code>retained-state</code> or <code>live-event</code>; control values
+are live events (this is what ended 45 Hz retained fader spam).</li>
+<li><strong>One shape, one file, one export.</strong> No type that duplicates a contracts
+shape is declared in <code>ui/</code> or an agent — Rust gets its copy by codegen only.</li>
+<li><code>z.any()</code> / <code>z.unknown()</code> require a <code>// WHY:</code> comment and show up in review.</li>
+</ul>
+<h3>Dependency discipline</h3>
+<ul>
+<li><code>@openair/contracts</code> depends on <strong>zod</strong> and nothing else.</li>
+<li><code>openair-contracts</code> (Rust) depends on <strong>serde, serde_json, regress</strong> and
+nothing else — no MQTT client, no async runtime. Types and topic strings
+only; client libraries belong in the agents.</li>
+</ul>
+<hr>
+<h2>Codegen &amp; verification</h2>
+<pre><code class="language-bash">pnpm gen           # schemas/ + rust/src/gen/ (requires cargo-typify 0.7.0)
+pnpm gen:check     # regenerate to a temp dir and diff — the CI freshness gate
+pnpm test          # vitest, incl. every golden vector
+cargo test --manifest-path rust/Cargo.toml   # the SAME vectors, Rust side
+</code></pre>
+<p>Generated artifacts are <strong>committed</strong>: a repo where <code>cargo build</code> only works
+after running a Node toolchain is a repo where the Rust half stops building
+the day Node breaks. CI enforces freshness instead.</p>
+<p>Known limit, stated up front: zod → JSON Schema flattens some refinements, and
+string <code>format</code>s are stripped from the typify input so Rust sees
+pattern-validated strings instead of chrono types. Anything load-bearing for
+Rust gets a <strong>golden vector</strong>, not trust in the translation.</p>
+<hr>
+<h2><code>openair-validate</code> — drift as data</h2>
+<pre><code class="language-bash">pnpm validate                       # ratchet mode: fails only on NEW debt
+pnpm validate -- --report json      # the full machine-readable inventory
+pnpm validate -- --strict           # deprecations become errors (editor gate)
+pnpm validate -- --update-baseline  # after fixing files; review the diff
+</code></pre>
+<p>It walks <code>FrontEnd/Gui_Frames/**</code> (layout schema in legacy mode), the YAK tree
+(duplicate models, byte-identical definitions, <code>_Legacy_Commands/</code>,
+<code>temp_norm_*</code>), the folder grammar (<code>N_</code> prefix collisions, unparseable
+names), and every BackEnd <code>config.ini</code> (<code>topic*</code> values against the grammar).</p>
+<p><strong>The ratchet</strong> is what made day one survivable: the first run&#39;s
+169 errors / 2,093 deprecations were written to <code>validate.baseline.json</code> and
+committed. CI fails only on findings <em>not</em> in the baseline, so the inventory
+can only shrink and new debt cannot enter. The readable version of that
+inventory is
+<a href="../Documents/Strategies/Validations/contracts-debt-inventory.md"><code>Documents/Strategies/Validations/contracts-debt-inventory.md</code></a>.</p>
+<hr>
+<h2>Adding a contract</h2>
+<ol>
+<li>Write the zod schema in <code>src/</code> — one shape, one file, <code>schemaVersion</code>
+literal, closed enums.</li>
+<li>Add golden vectors under <code>vectors/payloads/{Schema}/{valid,invalid}/</code> —
+including a real capture off the broker if the shape already exists in the
+wild, and a <code>legacy-v0/</code> sample if it does.</li>
+<li>Export it from <code>src/index.ts</code> (the only public surface).</li>
+<li>Register it in <code>scripts/gen.ts</code> if Rust needs it; run <code>pnpm gen</code>.</li>
+<li>Land it <strong>with its first consumer</strong> in the same change. A contract nobody
+consumes is documentation that lies.</li>
+</ol>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>contracts/README.md</code>
+  </div>
+</body>
+</html>

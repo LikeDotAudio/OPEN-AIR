@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3235 / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Router/3235 — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>8 commands</strong> — SET 2 · RIG 0 · NAB 2 · DO 4 · 0 unverified (0%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Tree</h2>
+<ul>
+<li><code>CLOSE</code> — <strong>SET</strong> <code>Close_Channels</code> · <code>&lt;channel_list&gt;</code> · args: <code>channel_list</code></li>
+<li><code>OPEN</code> — <strong>SET</strong> <code>Open_Channels</code> · <code>&lt;channel_list&gt;</code> · args: <code>channel_list</code></li>
+<li><code>CLOSE?</code> — <strong>NAB</strong> <code>Query_Channel_State</code> · <code>&lt;chan&gt;</code> · per-instance: <code>chan</code> · → 1 value</li>
+<li><code>ID?</code> — <strong>NAB</strong> <code>Query_Slot_ID</code> · <code>&lt;slot&gt;</code> · per-instance: <code>slot</code> · → 1 value</li>
+<li><code>CRESET</code> — <strong>DO</strong> <code>Card_Reset</code> · <code>&lt;slot&gt;</code> · per-instance: <code>slot</code></li>
+<li><code>CLR</code> — <strong>DO</strong> <code>Clear_State</code></li>
+<li><code>RESET</code> — <strong>DO</strong> <code>Reset_Device</code><br>Reset System</li>
+<li><code>SELECT</code> — <strong>DO</strong> <code>Select_Channel</code> · <code>&lt;chan&gt;</code> · per-instance: <code>chan</code></li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Router/3235/commands_tree.md</code>
+  </div>
+</body>
+</html>

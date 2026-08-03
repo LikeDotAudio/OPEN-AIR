@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NMOS - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-nmos — AMWA NMOS discovery (IS-04 / IS-09)</h1>
+<p>Finds NMOS Nodes, Registries, Query and System APIs.</p>
+<p><strong>Discovery only</strong> — <code>STATUS = &quot;discovery-only&quot;</code>. The IS-04/IS-05 HTTP APIs are
+not called: nothing is enumerated, registered, or connected.</p>
+<h2>Services</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Typical port</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>_nmos-node._tcp</code></td>
+<td>3212</td>
+<td>Node API — a device offering senders/receivers</td>
+</tr>
+<tr>
+<td><code>_nmos-query._tcp</code></td>
+<td>3211</td>
+<td>Query API — what clients ask to find things</td>
+</tr>
+<tr>
+<td><code>_nmos-register._tcp</code></td>
+<td>3210</td>
+<td>Registration API (current name)</td>
+</tr>
+<tr>
+<td><code>_nmos-registration._tcp</code></td>
+<td>3210</td>
+<td>Registration API (legacy name, same service)</td>
+</tr>
+<tr>
+<td><code>_nmos-system._tcp</code></td>
+<td>10641</td>
+<td>System API (IS-09) — global config, PTP domain</td>
+</tr>
+</tbody></table>
+<h2>Grouping: host <strong>and port</strong></h2>
+<p>Unlike printers or AirPlay — many services, one device — each NMOS service is a
+distinct <strong>API role</strong>, and one host commonly runs several. The key has to
+separate one case while merging another:</p>
+<ul>
+<li><strong>Two Node APIs on one host</strong> (<code>:3212</code> and <code>:3300</code>) are genuinely two nodes.
+Grouping by hostname would hide one.</li>
+<li><strong><code>_nmos-register</code> and <code>_nmos-registration</code> on <code>:3210</code></strong> are one service under
+two names — the spec renamed it and implementations advertise both for
+compatibility. Not merging these makes every registry appear twice.</li>
+</ul>
+<p>Host+port does both.</p>
+<h2><code>api_auth</code> gets its own column</h2>
+<p>The TXT record states whether the API requires authorisation. <code>api_auth=false</code>
+means <strong>an unauthenticated HTTP API is controlling media routing</strong> — worth
+seeing at a glance rather than buried in a TXT blob.</p>
+<p>As elsewhere, absent ≠ false: a registry that never advertises the key shows
+<code>?</code>, not <code>NONE</code>. Reporting &quot;NONE&quot; would assert a security property nobody stated.</p>
+<h2>Versions</h2>
+<p><code>v1.0,v1.1,v1.2,v1.3</code> becomes <code>v1.3 (of v1.0, v1.1, v1.2, v1.3)</code> — clients
+negotiate to the highest common version, so that is what leads. Sorting is
+numeric, not lexical, so <code>v1.10</code> correctly ranks above <code>v1.9</code>.</p>
+<h2>Addresses</h2>
+<p><code>nmos-cpp</code> advertises every interface it has, including loopback and IPv6
+link-local. Neither helps anyone reach the API, so both are filtered out.</p>
+<h2>History</h2>
+<p>This crate was previously a declared stub with a test asserting
+<code>STATUS == &quot;stub&quot;</code>, specifically so that implementing it could not pass silently
+while the README still called it unimplemented. That test now asserts
+<code>discovery-only</code>, and the project README was updated in the same change.</p>
+<h2>Tests</h2>
+<p><code>cargo test -p openair-nmos</code> — auth labelling (absent vs false), version
+summarising pinned to the real advertisement, and numeric version ordering.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-nmos/README.md</code>
+  </div>
+</body>
+</html>

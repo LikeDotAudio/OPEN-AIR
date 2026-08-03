@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>libControl: metering / MeterBarGraph - Front End & UI Library</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>MeterBarGraph — bar meter</h1>
+<p>Bar-graph level meter with smoothing/peak-hold ballistics and a labelled scale.
+Separated concerns: ballistics hook, scale, body, orchestrator.</p>
+<ul>
+<li><strong>Defines (globals):</strong> <code>MeterBarGraph</code> (orchestrator), <code>MeterBody</code>, <code>MeterScale</code>, <code>useMeterBallistics</code></li>
+<li><strong>Props:</strong> <code>value</code>, <code>config</code> (min/max, orientation, cosmetics)</li>
+<li><strong>Loaded by:</strong> the live app via <code>frontEnd/Core/Launch/index.html</code>.</li>
+<li><strong>Demo:</strong> open <code>../index.html</code>.</li>
+</ul>
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+<h2>Sample (WYSIWYG library source)</h2>
+<p>The WYSIWYG editor builds this widget&#39;s <strong>palette entry, live preview, and
+property manipulators</strong> from the JSON block below. The web server
+(<code>frontEnd/Core/Launch/LauchWebserver.py</code> → <code>get_grab_bag()</code>) scans these
+READMEs, extracts this block, and serves it at <code>/api/grabbag</code>. <code>_README</code>
+documents the widget; every <code>_LEGEND</code> array becomes a dropdown of allowed values
+in the property editor.</p>
+<pre><code class="language-json">{
+  &quot;meter_bar_Example&quot;: {
+    &quot;type&quot;: &quot;DynamicBarGraph&quot;,
+    &quot;label&quot;: &quot;Metric Comparison&quot;,
+    &quot;notes&quot;: &quot;Demonstrates categorical data as bars.&quot;,
+    &quot;show_title&quot;: true,
+    &quot;title&quot;: &quot;System Resource Usage&quot;,
+    &quot;layout&quot;: {
+      &quot;height&quot;: 50,
+      &quot;alpha&quot;: 0.9
+    },
+    &quot;axis&quot;: {
+      &quot;x&quot;: {
+        &quot;label&quot;: &quot;Resource ID&quot;,
+        &quot;color&quot;: &quot;white&quot;
+      },
+      &quot;y&quot;: {
+        &quot;label&quot;: &quot;Usage (%)&quot;,
+        &quot;min&quot;: 0,
+        &quot;max&quot;: 100,
+        &quot;color&quot;: &quot;cyan&quot;
+      },
+      &quot;show_grid&quot;: true,
+      &quot;show_x_axis&quot;: true,
+      &quot;show_y_axis&quot;: true
+    },
+    &quot;datasets&quot;: [
+      {
+        &quot;id&quot;: &quot;ds_usage&quot;,
+        &quot;label&quot;: &quot;Usage&quot;,
+        &quot;style&quot;: {
+          &quot;line_color&quot;: &quot;cyan&quot;,
+          &quot;line_width&quot;: 1
+        },
+        &quot;initial_csv_data&quot;: &quot;x,y
+1,45
+2,78
+3,12
+4,90
+5,55&quot;
+      }
+    ],
+    &quot;Navigation&quot;: {
+      &quot;enable_zoom&quot;: true,
+      &quot;enable_pan&quot;: true,
+      &quot;show_hover_value&quot;: true
+    },
+    &quot;initial_markers&quot;: &quot;y,80,red,2,Warning Threshold&quot;,
+    &quot;cosmetics&quot;: {
+      &quot;colors&quot;: {
+        &quot;primary&quot;: &quot;#FF9900&quot;,
+        &quot;secondary&quot;: &quot;#444444&quot;,
+        &quot;background&quot;: &quot;#2b2b2b&quot;
+      }
+    }
+  },
+  &quot;_README&quot;: &quot;This is an enhanced sample configuration demonstrating full instantiation capabilities.&quot;
+}
+</code></pre>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>FrontEnd/libControl/metering/MeterBarGraph/Readme.md</code>
+  </div>
+</body>
+</html>

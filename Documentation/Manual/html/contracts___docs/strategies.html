@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strategies - Contracts & Docs</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>Strategies — historical planning records</h1>
+<blockquote>
+<h2>⚠️ DEPRECATED as documentation</h2>
+<p><strong>These are plans, not descriptions.</strong> The parts that shipped are now
+<em>features</em>, documented where the code lives:</p>
+<table>
+<thead>
+<tr>
+<th>For</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The contract layer, topic grammar, schemas, codegen, validate/ratchet</td>
+<td><a href="../../contracts/README.md"><code>contracts/README.md</code></a></td>
+</tr>
+<tr>
+<td>Protocol agents, discovery, heartbeats, rescan</td>
+<td><a href="../../BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a></td>
+</tr>
+<tr>
+<td>The typed frontend and migration mechanics</td>
+<td><a href="../../ui/README.md"><code>ui/README.md</code></a></td>
+</tr>
+<tr>
+<td>The project as a whole</td>
+<td><a href="../../README.md"><code>README.md</code></a></td>
+</tr>
+</tbody></table>
+<p>Nothing here should be used to learn how OPEN-AIR works today. Keep them for
+<em>why</em> decisions were made and what is still planned.</p>
+</blockquote>
+<p>These documents were written 2026-07-17/18 to plan the v40 → v41 rework. They
+are preserved because the reasoning behind a decision outlives the decision,
+and because the unshipped phases are still the roadmap.</p>
+<h2>What shipped (now features — see the READMEs above)</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>3_TypeScript_Migration_Plan.md</code></td>
+<td>Phases 0–1 <strong>shipped</strong>; Phase 2 partially; Phases 3–5 pending</td>
+</tr>
+<tr>
+<td><code>4_Contracts_Structural_Guidelines.md</code></td>
+<td><strong>Shipped.</strong> The rules now live as review law in <code>contracts/README.md</code></td>
+</tr>
+<tr>
+<td><code>Phase 1.md</code></td>
+<td><strong>Shipped</strong> — all six rollout steps, DoD closed out in the document</td>
+</tr>
+<tr>
+<td><code>Phase 1 Step 3.md</code></td>
+<td><strong>Shipped</strong> — payload schemas, codegen turn-on, browser LWT</td>
+</tr>
+<tr>
+<td><code>Phase 2 Step 1.md</code></td>
+<td><strong>Shipped</strong> — the <code>ui/</code> package builds the whole app; cutover pending</td>
+</tr>
+<tr>
+<td><code>Phase 2.md</code></td>
+<td><strong>Partially shipped</strong> — scaffold and ratchets done; conversions and cutover pending</td>
+</tr>
+</tbody></table>
+<h2>Still the roadmap</h2>
+<ul>
+<li><strong>Phase 3 — YAK 2.</strong> Class capability files + model dialect bindings,
+<code>inherits:</code>, reply parsers, one Rust translation core built natively <em>and</em>
+to WASM for in-browser command preview and dry-runs.</li>
+<li><strong>Phase 4 — Device Registry &amp; supervision.</strong> One <code>DeviceRecord</code> document per
+device with TTL aging, a Discovered tab that is a live widget rather than a
+generated panel, agent supervision with restart, native Rust VISA, and
+structured logging on the bus.</li>
+<li><strong>Phase 5 — Live tree &amp; polish.</strong> fs-watch → retained tree topic so folder
+changes redraw every browser instantly.</li>
+</ul>
+<h2>Living records (not deprecated)</h2>
+<ul>
+<li><a href="Migration_Ledger.md"><code>Migration_Ledger.md</code></a> — the append-only archive trail.
+Every file moved, converted, retired, or deleted gets a line, in the commit
+that does it. <strong>Still active</strong> and still required for every change.</li>
+<li><a href="Validations/"><code>Validations/</code></a> — the <code>openair-validate</code> day-one drift
+inventory (169 errors / 2,093 deprecations) that the CI ratchet baselines
+against. <strong>Still the reference</strong> for what debt remains.</li>
+</ul>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>Documentation/Strategies/README.md</code>
+  </div>
+</body>
+</html>

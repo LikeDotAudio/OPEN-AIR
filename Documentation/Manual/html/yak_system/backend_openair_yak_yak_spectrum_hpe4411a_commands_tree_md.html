@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HPE4411A / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>Spectrum/HPE4411A — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>28 commands</strong> — SET 9 · RIG 3 · NAB 8 · DO 8 · 0 unverified (0%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Frequency_settings</code> · → start, stop, center, span<br>Primary Frequency Monitoring<ul>
+<li><code>:FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>NAB_all_marker_settings</code> · → y_1, y_2, y_3, y_4, y_5, y_6, x_1, x_2, x_3, x_4, x_5, x_6<br>Marker Amplitude and Frequency Readbacks<ul>
+<li><code>:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>RBW_VBW_Hz</code> · args: <code>rbw_hz_value</code>, <code>vbw_hz_value</code><br>Set Resolution and Video BW<ul>
+<li><code>:SENSe:BANDwidth:RESolution &lt;rbw_hz_value&gt;;:SENSe:BANDwidth:VIDeo &lt;vbw_hz_value&gt;</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Ref_Level_dBm</code> · args: <code>Ref_Level_dBm</code>, <code>Attenuation_dB</code>, <code>Preamp_On</code> · numeric (V)<br>Set Power Levels<ul>
+<li><code>:DISPlay:WINDow:TRACe:Y:RLEVel &lt;Ref_Level_dBm&gt;;:POWer:RF:ATTenuation &lt;Attenuation_dB&gt;;:POWer:GAIN &lt;Preamp_On&gt;</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>amplitude_settings</code> · → rlevel, attenuation, gain<br>Power and Attenuation Readbacks<ul>
+<li><code>:DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?</code></li>
+</ul>
+</li>
+<li><strong>NAB</strong> <code>bandwidth_settings</code> · → resolution, video, auto, continuous, time<br>Bandwidth and Sweep Monitoring<ul>
+<li><code>:SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>freq_start_stop</code> · args: <code>start_freq</code>, <code>stop_freq</code> · numeric<br>Frequency Range Commands<ul>
+<li><code>:FREQuency:STARt &lt;start_freq&gt;;:FREQuency:STOP &lt;stop_freq&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><strong><code>CALCulate</code></strong><ul>
+<li><strong><code>MARKer&lt;marker_number&gt;</code></strong><ul>
+<li><code>X</code> — <strong>SET</strong> <code>Set_Marker_X_position</code> · <code>&lt;x_value&gt;</code> · args: <code>x_value</code> · numeric · per-instance: <code>marker_number</code><br>Set Marker Frequency</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Set_Marker_State_OFF</code> · <code>OFF</code> · per-instance: <code>marker_number</code><br>Disable Marker</li>
+<li><code>STATe</code> — <strong>DO</strong> <code>Set_Marker_State_ON</code> · <code>ON</code> · per-instance: <code>marker_number</code><br>Enable Marker</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><strong><code>WINDow</code></strong><ul>
+<li><strong><code>TRACe</code></strong><ul>
+<li><strong><code>Y</code></strong><ul>
+<li><code>RLEVel</code> — <strong>SET</strong> <code>Set_Reference_Level</code> · <code>&lt;Ref_Level_dBm&gt;</code> · args: <code>Ref_Level_dBm</code> · numeric (V)</li>
+<li><code>RLEVel?</code> — <strong>NAB</strong> <code>Get_Reference_Level</code> · → NR3 V</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>SPAN</code> — <strong>SET</strong> <code>Span_Frequency</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+<li><code>STARt</code> — <strong>SET</strong> <code>Start_Freq_MHz</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+<li><code>STOP</code> — <strong>SET</strong> <code>Stop_Freq_MHz</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code> · numeric</li>
+</ul>
+</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><code>ATTenuation</code> — <strong>SET</strong> <code>Power_Attenuation</code> · <code>&lt;Power_Attenuation&gt;</code> · args: <code>Power_Attenuation</code> · numeric (dB)</li>
+<li><code>GAIN</code> — <strong>DO</strong> <code>Set_Power_Gain_OFF</code> · <code>OFF</code></li>
+<li><code>GAIN</code> — <strong>DO</strong> <code>Set_Power_Gain_ON</code> · <code>ON</code></li>
+<li><strong><code>ATTenuation</code></strong><ul>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Set_Input_Auto_Attenuation_OFF</code> · <code>OFF</code></li>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Set_Input_Auto_Attenuation_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+<li><strong><code>RF</code></strong><ul>
+<li><code>ATTenuation?</code> — <strong>NAB</strong> <code>Attenuation</code> · → NR3 dB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SENSE</code></strong><ul>
+<li><strong><code>POWer</code></strong><ul>
+<li><strong><code>RF</code></strong><ul>
+<li><strong><code>GAIN</code></strong><ul>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Preamp_State</code> · → BOOL dB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SENSe</code></strong><ul>
+<li><strong><code>BANDwidth</code></strong><ul>
+<li><code>RESolution</code> — <strong>SET</strong> <code>Resolution_Bandwidth</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code></li>
+<li><code>VIDeo</code> — <strong>SET</strong> <code>Video_Bandwidth</code> · <code>&lt;hz_value&gt;</code> · args: <code>hz_value</code></li>
+</ul>
+</li>
+<li><strong><code>SWEep</code></strong><ul>
+<li><code>TIME</code> — <strong>SET</strong> <code>Sweep_Time</code> · <code>&lt;sweep_time_s&gt;</code> · args: <code>sweep_time_s</code> · numeric (s)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Get_error_information</code> · → NR2<br>System Error Check</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>UPDate</code> — <strong>DO</strong> <code>Do_Update_Display</code></li>
+</ul>
+</li>
+<li><strong><code>POWer</code></strong><ul>
+<li><code>RESet</code> — <strong>DO</strong> <code>Do_Power_Cycle</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- END GENERATED -->
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/Spectrum/HPE4411A/commands_tree.md</code>
+  </div>
+</body>
+</html>

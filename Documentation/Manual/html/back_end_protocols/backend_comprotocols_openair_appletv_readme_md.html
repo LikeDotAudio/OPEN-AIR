@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>openair-AppleTV (README) - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-appletv — AirPlay / HomeKit receiver discovery</h1>
+<p>Finds Apple TVs, HomePods and other AirPlay receivers.</p>
+<p><strong>Discovery only.</strong> No pairing, playback or remote control.</p>
+<h2>One device, many roles</h2>
+<p>An Apple TV is chatty on mDNS, and each service answers a different question:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Role label</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>_airplay._tcp</code></td>
+<td><code>airplay</code></td>
+<td>video / screen mirroring receiver</td>
+</tr>
+<tr>
+<td><code>_raop._tcp</code></td>
+<td><code>airplay-audio</code></td>
+<td>AirPlay audio — <strong>the richest TXT</strong></td>
+</tr>
+<tr>
+<td><code>_homekit._tcp</code></td>
+<td><code>homekit</code></td>
+<td>paired HomeKit accessory</td>
+</tr>
+<tr>
+<td><code>_hap._tcp</code></td>
+<td><code>homekit-hap</code></td>
+<td>HomeKit Accessory Protocol</td>
+</tr>
+<tr>
+<td><code>_companion-link._tcp</code></td>
+<td><code>continuity</code></td>
+<td>Handoff / Continuity</td>
+</tr>
+<tr>
+<td><code>_mediaremotetv._tcp</code></td>
+<td><code>media-remote</code></td>
+<td>the Remote app</td>
+</tr>
+<tr>
+<td><code>_touch-able._tcp</code></td>
+<td><code>remote-legacy</code></td>
+<td>legacy DACP remote</td>
+</tr>
+<tr>
+<td><code>_sleep-proxy._udp</code></td>
+<td><code>sleep-proxy</code></td>
+<td>answers Bonjour for sleeping devices</td>
+</tr>
+</tbody></table>
+<p>As with printers, that is one device with many roles, so the service list
+becomes a <code>roles</code> column. <strong>Grouping is by hostname</strong>, which every service shares.</p>
+<h2>What <code>_raop</code> carries</h2>
+<pre><code class="language-text">am=AppleTV5,3     model identifier  -&gt; &quot;Apple TV HD (4th gen)&quot;
+ov=26.5           tvOS version
+vs=950.7.1        AirPlay source version
+cn=0,1,2,3        codecs   -&gt; PCM, ALAC, AAC, AAC-ELD
+md=0,1,2          metadata -&gt; text, artwork, progress
+ft=0x5A7FDFD5,…   feature bitmask
+pk=…              pairing public key
+</code></pre>
+<p>Codec and metadata lists are decoded — short, stable, documented. The <strong>feature
+bitmask is not</strong>: its bits are only partly public and vary by tvOS release, so
+it is published raw rather than guessed at.</p>
+<p>Unknown model identifiers pass through verbatim. <code>AppleTV99,9</code> meaning nothing
+is better than it meaning the wrong thing.</p>
+<h2>The <code>_sleep-proxy</code> trap</h2>
+<p>A device is only published once something has actually <strong>identified</strong> it —
+<code>airplay</code>, <code>airplay-audio</code>, <code>homekit</code>, <code>homekit-hap</code> or <code>media-remote</code>.</p>
+<p><code>_sleep-proxy</code> alone is not enough: it is a Bonjour feature, and a router or a
+Mac can offer it. Publishing those as Apple TVs would be wrong.</p>
+<h2>TXT merge rule</h2>
+<p>Fills gaps, never overwrites. <code>_raop</code> carries the rich record and the others are
+nearly empty, so last-write-wins would erase the good data.</p>
+<h2>Why there is no control</h2>
+<p>AirPlay control requires the pairing/encryption handshake advertised by <code>pk</code>/<code>et</code>
+— a protocol implementation in its own right, and not needed to answer <em>what
+Apple hardware is here and what will it accept?</em></p>
+<h2>Tests</h2>
+<p><code>cargo test -p openair-appletv</code> — model decoding (known and unknown), codec and
+metadata lists pinned to the real bench values, and unknown codes being skipped
+rather than invented.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-AppleTV/README.md</code>
+  </div>
+</body>
+</html>

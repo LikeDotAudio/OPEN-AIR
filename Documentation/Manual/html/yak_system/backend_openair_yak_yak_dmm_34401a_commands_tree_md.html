@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>34401A / commands_tree - Yak System</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <!-- BEGIN GENERATED — openair-yak build-trees --><h1>DMM/34401A — command tree</h1>
+<p>Generated from <code>commands.json</code> by <code>openair-yak build-trees</code>. Edit the table, not this file.</p>
+<p><strong>155 commands</strong> — SET 43 · RIG 5 · NAB 72 · DO 35 · 106 unverified (68%)</p>
+<p><code>SET</code> one argument · <code>RIG</code> several applied together · <code>NAB</code> a query · <code>DO</code> a parameterless action. <strong>†</strong> marks a command swept out of a manual and never sent to the instrument.</p>
+<h2>Compound commands</h2>
+<p>Several statements in one message, so they hang off no single branch. Every statement after the first carries a leading colon — without it the parser reads it relative to the previous header&#39;s path and the instrument answers <code>-113</code>.</p>
+<ul>
+<li><strong>NAB</strong> <code>Get_Math_Stats</code> · → minimum, maximum, average · †<br>Read min, max and average in one transaction<ul>
+<li><code>:CALCulate:AVERage:MINimum?;:CALCulate:AVERage:MAXimum?;:CALCulate:AVERage:AVERage?</code></li>
+</ul>
+</li>
+<li><strong>RIG</strong> <code>Setup_Limits</code> · args: <code>lower</code>, <code>upper</code> · †<br>Set both comparator limits in one transaction<ul>
+<li><code>:CALCulate:LIMit:LOWer &lt;lower&gt;;:CALCulate:LIMit:UPPer &lt;upper&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2>Tree</h2>
+<ul>
+<li><code>FETCh?</code> — <strong>NAB</strong> <code>Fetch_Existing</code> · → 1 value</li>
+<li><code>READ?</code> — <strong>NAB</strong> <code>Read_Next</code> · → 1 value</li>
+<li><code>ABORt</code> — <strong>DO</strong> <code>Abort</code></li>
+<li><code>INITiate</code> — <strong>DO</strong> <code>Initiate</code></li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>AVERage?</code> — <strong>NAB</strong> <code>Get_Average_Average</code> · → NR1 · †<br>Math Operation Commands</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Average_Count</code> · → NR1 · †<br>Math Operation Commands</li>
+</ul>
+</li>
+<li><strong><code>BACK</code></strong><ul>
+<li><code>GOTO</code> — <strong>DO</strong> <code>Do_Back_Goto</code> · †<br>Using the Status Registers</li>
+</ul>
+</li>
+<li><strong><code>BEEPer</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Beeper_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>System-Related Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Beeper_State</code> · → BOOL · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>CALCulate</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Enable_Math</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+<li><code>FUNCtion</code> — <strong>SET</strong> <code>Set_Math_Function</code> · <code>&lt;function&gt;</code> · args: <code>function</code> · enum: <code>NULL</code> | <code>DB</code> | <code>DBM</code> | <code>AVER</code> | <code>LIM</code></li>
+<li><code>FUNCtion?</code> — <strong>NAB</strong> <code>Get_Calculate_Function</code> · → CRD · †</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calculate_State</code> · → BOOL · †</li>
+<li><strong><code>AVERage</code></strong><ul>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Calculate_Average_Count</code> · → NR1 · †<br>Math Operations</li>
+<li><code>AVERage?</code> — <strong>NAB</strong> <code>Query_Average</code> · → NR1</li>
+<li><code>MAXimum?</code> — <strong>NAB</strong> <code>Query_Max</code> · → 1 value</li>
+<li><code>MINimum?</code> — <strong>NAB</strong> <code>Query_Min</code> · → 1 value</li>
+</ul>
+</li>
+<li><strong><code>DB</code></strong><ul>
+<li><code>REFerence</code> — <strong>SET</strong> <code>Set_dB_Ref</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum</li>
+<li><code>REFerence?</code> — <strong>NAB</strong> <code>Get_Calculate_Db_Reference</code> · → CRD · †</li>
+</ul>
+</li>
+<li><strong><code>DBM</code></strong><ul>
+<li><code>REFerence</code> — <strong>SET</strong> <code>Set_dBm_Ref</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum</li>
+</ul>
+</li>
+<li><strong><code>LIMit</code></strong><ul>
+<li><code>LOWer?</code> — <strong>NAB</strong> <code>Get_Calculate_Limit_Lower</code> · → 1 value · †<br>Math Operations</li>
+<li><code>UPPer?</code> — <strong>NAB</strong> <code>Get_Calculate_Limit_Upper</code> · → 1 value · †<br>Math Operations</li>
+</ul>
+</li>
+<li><strong><code>NULL</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Null_Offset</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Calculate_Null_Offset</code> · → NR3 · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CALibration</code></strong><ul>
+<li><code>STRing</code> — <strong>SET</strong> <code>Set_Calibration_String</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Calibration Message</li>
+<li><code>VALue</code> — <strong>SET</strong> <code>Set_Calibration_Value</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Calibration Commands</li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Calibration_Count</code> · → NR1 · †<br>Calibration Count</li>
+<li><code>STRing?</code> — <strong>NAB</strong> <code>Get_Calibration_String</code> · → 1 value · †<br>Calibration Message</li>
+<li><code>VALue?</code> — <strong>NAB</strong> <code>Get_Calibration_Value</code> · → NR3 · †<br>Calibration Commands</li>
+<li><code>SECure</code> — <strong>DO</strong> <code>Do_Calibration_Secure</code> · †</li>
+<li><strong><code>SECure</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Calibration_Secure_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Calibration Overview</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Calibration_Secure_State</code> · → BOOL · †<br>Calibration Overview</li>
+<li><code>CODE</code> — <strong>DO</strong> <code>Do_Calibration_Secure_Code</code> · †<br>Calibration Overview</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>CONF</code></strong><ul>
+<li><code>FREQ</code> — <strong>DO</strong> <code>Do_Configure_Frequency</code> · †<br>Measurement Configuration</li>
+<li><code>VOLT</code> — <strong>DO</strong> <code>Do_Configure_Voltage</code> · †</li>
+</ul>
+</li>
+<li><strong><code>CONFigure</code></strong><ul>
+<li><code>FRESistance</code> — <strong>RIG</strong> <code>Config_Resistance_4Wire</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code></li>
+<li><code>TEMPerature</code> — <strong>RIG</strong> <code>Config_Temperature</code> · <code>&lt;probe_type&gt;,&lt;sensor_type&gt;</code> · args: <code>probe_type</code>, <code>sensor_type</code></li>
+<li><code>PERiod</code> — <strong>DO</strong> <code>Do_Configure_Period</code> · †</li>
+<li><code>CONTinuity</code> — <strong>DO</strong> <code>Select_Continuity</code><br>Fixed 1 kOhm range, beeper on threshold — no range argument exists for this function</li>
+<li><code>DIODe</code> — <strong>DO</strong> <code>Select_Diode</code><br>Fixed 1 mA / 1 V test, likewise argument-free</li>
+<li><code>RESistance</code> — <strong>DO</strong> <code>Select_Resistance_2W</code></li>
+<li><code>FRESistance</code> — <strong>DO</strong> <code>Select_Resistance_4W</code></li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>AC</code> — <strong>DO</strong> <code>Select_AC_Current</code></li>
+<li><code>DC</code> — <strong>DO</strong> <code>Select_DC_Current</code></li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>AC</code> — <strong>RIG</strong> <code>Config_AC_Volts</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · numeric (V)</li>
+<li><code>DC</code> — <strong>RIG</strong> <code>Config_DC_Volts</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · numeric (V)</li>
+<li><code>AC</code> — <strong>DO</strong> <code>Select_AC_Volts</code></li>
+<li><code>DC</code> — <strong>DO</strong> <code>Select_DC_Volts</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>DATA</code></strong><ul>
+<li><code>FEED</code> — <strong>SET</strong> <code>Set_Data_Feed</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Math Operations</li>
+<li><code>FEED?</code> — <strong>NAB</strong> <code>Get_Data_Feed</code> · → 1 value · †<br>Math Operations</li>
+<li><code>POINts?</code> — <strong>NAB</strong> <code>Get_Data_Points</code> · → NR1 · †</li>
+</ul>
+</li>
+<li><strong><code>DB</code></strong><ul>
+<li><code>REFerence</code> — <strong>SET</strong> <code>Set_Db_Reference</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · enum · †<br>Math Operation Commands</li>
+<li><code>REFerence?</code> — <strong>NAB</strong> <code>Get_Db_Reference</code> · → CRD · †<br>Math Operation Commands</li>
+</ul>
+</li>
+<li><strong><code>DCV</code></strong><ul>
+<li><code>DCV</code> — <strong>DO</strong> <code>Do_Dcv_Dcv</code> · †</li>
+</ul>
+</li>
+<li><strong><code>DETector</code></strong><ul>
+<li><code>BANDwidth</code> — <strong>SET</strong> <code>Set_Detector_Bandwidth</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>BANDwidth?</code> — <strong>NAB</strong> <code>Get_Detector_Bandwidth</code> · → 1 value · †</li>
+</ul>
+</li>
+<li><strong><code>DISPlay</code></strong><ul>
+<li><code>TEXT</code> — <strong>SET</strong> <code>Display_Text</code> · <code>&lt;string&gt;</code> · args: <code>string</code></li>
+<li><code>TEXT?</code> — <strong>NAB</strong> <code>Get_Display_Text</code> · → 1 value · †</li>
+<li><strong><code>TEXT</code></strong><ul>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Clear_Display</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FREQuency</code></strong><ul>
+<li><code>APERture</code> — <strong>SET</strong> <code>Set_Frequency_Aperture</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Measurement Configuration</li>
+<li><code>APERture?</code> — <strong>NAB</strong> <code>Get_Frequency_Aperture</code> · → 1 value · †<br>Measurement Configuration</li>
+<li><code>VOLTage</code> — <strong>DO</strong> <code>Do_Frequency_Voltage</code> · †</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Frequency_Voltage_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Frequency_Voltage_Range</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>FRESistance</code></strong><ul>
+<li><code>NPLCycles</code> — <strong>SET</strong> <code>Set_Fresistance_Nplcycles</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Fresistance_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>RESolution</code> — <strong>SET</strong> <code>Set_Fresistance_Resolution</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Measurement Configuration Commands</li>
+<li><code>NPLCycles?</code> — <strong>NAB</strong> <code>Get_Fresistance_Nplcycles</code> · → NR1 · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Fresistance_Range</code> · → NR3 · †</li>
+<li><code>RESolution?</code> — <strong>NAB</strong> <code>Get_Fresistance_Resolution</code> · → 1 value · †<br>Measurement Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>INPut</code></strong><ul>
+<li><strong><code>IMPedance</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Set_Input_Impedance</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>LIMit</code></strong><ul>
+<li><code>LOWer</code> — <strong>SET</strong> <code>Set_Limit_Lower</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>UPPer</code> — <strong>SET</strong> <code>Set_Limit_Upper</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>LOWer?</code> — <strong>NAB</strong> <code>Get_Limit_Lower</code> · → 1 value · †</li>
+<li><code>UPPer?</code> — <strong>NAB</strong> <code>Get_Limit_Upper</code> · → 1 value · †</li>
+</ul>
+</li>
+<li><strong><code>MEASure</code></strong><ul>
+<li><code>CONTinuity?</code> — <strong>NAB</strong> <code>Get_Measure_Continuity</code> · → BOOL · †<br>The MEASure? and CONFigure Commands</li>
+<li><code>DIODe?</code> — <strong>NAB</strong> <code>Get_Measure_Diode</code> · → 1 value · †</li>
+<li><code>FRESistance?</code> — <strong>NAB</strong> <code>Get_Measure_Fresistance</code> · → 1 value · †</li>
+<li><code>PERiod?</code> — <strong>NAB</strong> <code>Get_Measure_Period</code> · → NR3 s · †</li>
+<li><code>RESistance?</code> — <strong>NAB</strong> <code>MEASure_Resistance</code> · → 1 value</li>
+<li><code>FREQuency?</code> — <strong>NAB</strong> <code>Measure_Frequency</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · → 1 value</li>
+<li><code>RESistance?</code> — <strong>NAB</strong> <code>Measure_Resistance_2Wire</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · → 1 value<br>Measure Resistance (2W)</li>
+<li><strong><code>CURRent</code></strong><ul>
+<li><code>DC?</code> — <strong>NAB</strong> <code>Measure_DC_Current</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · → NR3</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>AC?</code> — <strong>NAB</strong> <code>MEASure_Voltage_AC</code> · → NR3 V</li>
+<li><code>DC?</code> — <strong>NAB</strong> <code>MEASure_Voltage_DC</code> · → NR3 V</li>
+<li><code>AC?</code> — <strong>NAB</strong> <code>Measure_AC_Voltage</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · → NR3 V</li>
+<li><code>DC?</code> — <strong>NAB</strong> <code>Measure_DC_Voltage</code> · <code>&lt;range&gt;,&lt;resolution&gt;</code> · args: <code>range</code>, <code>resolution</code> · → NR3 V</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>NULL</code></strong><ul>
+<li><code>OFFSet</code> — <strong>SET</strong> <code>Set_Null_Offset_Alt</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †<br>Math Operation Commands</li>
+<li><code>OFFSet?</code> — <strong>NAB</strong> <code>Get_Null_Offset</code> · → NR3 · †<br>Math Operation Commands</li>
+</ul>
+</li>
+<li><strong><code>PERiod</code></strong><ul>
+<li><code>APERture</code> — <strong>SET</strong> <code>Set_Period_Aperture</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (s) · †<br>Measurement Configuration</li>
+<li><code>APERture?</code> — <strong>NAB</strong> <code>Get_Period_Aperture</code> · → NR3 s · †<br>Measurement Configuration</li>
+<li><code>VOLTage</code> — <strong>DO</strong> <code>Do_Period_Voltage</code> · †</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Period_Voltage_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Period_Voltage_Range</code> · → NR3 V · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>QUEStionable</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_Questionable_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>Status Reporting Commands</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_Questionable_Enable</code> · → NR1 · †<br>Status Reporting Commands</li>
+<li><code>EVENt?</code> — <strong>NAB</strong> <code>Get_Questionable_Event</code> · → NR1 · †<br>Status Reporting Commands</li>
+</ul>
+</li>
+<li><strong><code>RESistance</code></strong><ul>
+<li><code>NPLCycles</code> — <strong>SET</strong> <code>Set_Resolution_Nplcycles</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Resolution_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric · †</li>
+<li><code>RESolution</code> — <strong>SET</strong> <code>Set_Resolution_Resolution</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †<br>Measurement Configuration Commands</li>
+<li><code>NPLCycles?</code> — <strong>NAB</strong> <code>Get_Resolution_Nplcycles</code> · → NR1 · †</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Resolution_Range</code> · → NR3 · †</li>
+<li><code>RESolution?</code> — <strong>NAB</strong> <code>Get_Resolution_Resolution</code> · → 1 value · †<br>Measurement Configuration Commands</li>
+</ul>
+</li>
+<li><strong><code>ROUTe</code></strong><ul>
+<li><code>TERMinals?</code> — <strong>NAB</strong> <code>Get_Route_Terminals</code> · → CRD · †<br>Front / Rear Input Terminal Switching</li>
+</ul>
+</li>
+<li><strong><code>SAMP</code></strong><ul>
+<li><code>COUN?</code> — <strong>NAB</strong> <code>Get_Sample_Count</code> · → NR1 · †</li>
+</ul>
+</li>
+<li><strong><code>SAMPle</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Sample_Count</code> · <code>&lt;count&gt;</code> · args: <code>count</code> · integer</li>
+</ul>
+</li>
+<li><strong><code>SECure</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_Secure_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>Calibration Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_Secure_State</code> · → BOOL · †<br>Calibration Commands</li>
+<li><code>CODE</code> — <strong>DO</strong> <code>Do_Secure_Code</code> · †<br>Calibration Commands</li>
+</ul>
+</li>
+<li><strong><code>SENSe</code></strong><ul>
+<li><code>FUNCtion</code> — <strong>DO</strong> <code>Do_Sense_Function</code> · †<br>Using the CONFigure Command</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><strong><code>AC</code></strong><ul>
+<li><code>BANDwidth</code> — <strong>SET</strong> <code>Set_AC_Bandwidth</code> · <code>&lt;filter&gt;</code> · args: <code>filter</code> · numeric (V)</li>
+</ul>
+</li>
+<li><strong><code>DC</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_DCV_Range</code> · <code>&lt;range&gt;</code> · args: <code>range</code> · numeric (V)</li>
+<li><code>NPLC</code> — <strong>SET</strong> <code>Set_Integration_NPLC</code> · <code>&lt;nplc&gt;</code> · args: <code>nplc</code> · integer (V)</li>
+<li><strong><code>RANGe</code></strong><ul>
+<li><code>AUTO</code> — <strong>SET</strong> <code>Set_Autorange</code> · <code>&lt;state&gt;</code> · args: <code>state</code> · bool: <code>OFF</code> | <code>ON</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>ZERO</code></strong><ul>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Auto_Zero_OFF</code> · <code>OFF</code></li>
+<li><code>AUTO</code> — <strong>DO</strong> <code>Auto_Zero_ON</code> · <code>ON</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>STATus</code></strong><ul>
+<li><code>PRESet</code> — <strong>DO</strong> <code>Do_State_Preset</code> · †<br>Status Reporting Commands</li>
+<li><strong><code>QUEStionable</code></strong><ul>
+<li><code>ENABle</code> — <strong>SET</strong> <code>Set_State_Questionable_Enable</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †<br>The SCPI Status Model</li>
+<li><code>ENABle?</code> — <strong>NAB</strong> <code>Get_State_Questionable_Enable</code> · → NR1 · †<br>The SCPI Status Model</li>
+<li><code>EVENt?</code> — <strong>NAB</strong> <code>Get_State_Questionable_Event</code> · → NR1 · †</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>SYSTem</code></strong><ul>
+<li><code>VERSion?</code> — <strong>NAB</strong> <code>Get_System_Version</code> · → 1 value · †<br>SCPI Language Version Query</li>
+<li><code>ERRor?</code> — <strong>NAB</strong> <code>Read_Error</code> · → NR2</li>
+<li><code>BEEPer</code> — <strong>DO</strong> <code>Do_System_Beeper</code> · †</li>
+<li><code>LOCal</code> — <strong>DO</strong> <code>Do_System_Local</code> · †<br>RS-232 Interface Commands</li>
+<li><code>REMote</code> — <strong>DO</strong> <code>Do_System_Remote</code> · †<br>RS-232 Interface Commands</li>
+<li><code>RWLock</code> — <strong>DO</strong> <code>Do_System_Rwlock</code> · †<br>RS-232 Interface Commands</li>
+<li><strong><code>BEEPer</code></strong><ul>
+<li><code>STATe</code> — <strong>SET</strong> <code>Set_System_Beeper_State</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · bool: <code>OFF</code> | <code>ON</code> · †<br>System-Related Commands</li>
+<li><code>STATe?</code> — <strong>NAB</strong> <code>Get_System_Beeper_State</code> · → BOOL · †<br>System-Related Commands</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>TEXT</code></strong><ul>
+<li><code>CLEar</code> — <strong>DO</strong> <code>Do_Text_Clear</code> · †<br>System-Related Commands</li>
+</ul>
+</li>
+<li><strong><code>TRIGger</code></strong><ul>
+<li><code>COUNt</code> — <strong>SET</strong> <code>Set_Trigger_Count</code> · <code>&lt;count&gt;</code> · args: <code>count</code> · integer</li>
+<li><code>DELay</code> — <strong>SET</strong> <code>Set_Trigger_Delay</code> · <code>&lt;delay&gt;</code> · args: <code>delay</code> · numeric (s)</li>
+<li><code>SOURce</code> — <strong>SET</strong> <code>Set_Trigger_Source</code> · <code>&lt;source&gt;</code> · args: <code>source</code> · enum: <code>BUS</code> | <code>IMM</code> | <code>EXT</code></li>
+<li><code>COUNt?</code> — <strong>NAB</strong> <code>Get_Trigger_Count</code> · → NR1 · †</li>
+<li><code>DELay?</code> — <strong>NAB</strong> <code>Get_Trigger_Delay</code> · → NR3 s · †</li>
+<li><code>SOURce?</code> — <strong>NAB</strong> <code>Get_Trigger_Source</code> · → CRD · †<br>Trigger Source Choices</li>
+<li><strong><code>SOURce</code></strong><ul>
+<li><code>IMMediate</code> — <strong>DO</strong> <code>Do_Trigger_Source_Immediate</code> · †<br>How to Use the Message Available Bit (MAV)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>VOLTage</code></strong><ul>
+<li><code>RANGe</code> — <strong>SET</strong> <code>Set_Voltage_Range</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · numeric (V) · †<br>An Introduction to the SCPI Language</li>
+<li><code>RANGe?</code> — <strong>NAB</strong> <code>Get_Voltage_Range</code> · → NR3 V · †<br>An Introduction to the SCPI Language</li>
+</ul>
+</li>
+</ul>
+<h2>Common commands (IEEE 488.2)</h2>
+<ul>
+<li><code>*CLS</code> — <strong>DO</strong> <code>Clear_Status</code></li>
+<li><code>*OPC</code> — <strong>DO</strong> <code>Do_Opc</code> · †</li>
+<li><code>*TRG</code> — <strong>DO</strong> <code>Do_Trg</code> · †</li>
+<li><code>*ESE?</code> — <strong>NAB</strong> <code>Get_Ese</code> · → NR1 · †</li>
+<li><code>*ESR?</code> — <strong>NAB</strong> <code>Get_Esr</code> · → NR1 · †</li>
+<li><code>*OPC?</code> — <strong>NAB</strong> <code>Get_Opc</code> · → NR1 · †</li>
+<li><code>*PSC?</code> — <strong>NAB</strong> <code>Get_Psc</code> · → NR1 · †</li>
+<li><code>*SRE?</code> — <strong>NAB</strong> <code>Get_Sre</code> · → NR1 · †</li>
+<li><code>*STB?</code> — <strong>NAB</strong> <code>Get_Stb</code> · → NR1 · †</li>
+<li><code>*TST?</code> — <strong>NAB</strong> <code>Get_Tst</code> · → NR1 · †</li>
+<li><code>*IDN?</code> — <strong>NAB</strong> <code>Read_IDN</code> · → AARD</li>
+<li><code>*RST</code> — <strong>DO</strong> <code>Reset_Device</code></li>
+<li><code>*ESE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Ese</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+<li><code>*PSC &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Psc</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · †</li>
+<li><code>*SRE &lt;value&gt;</code> — <strong>SET</strong> <code>Set_Sre</code> · <code>&lt;value&gt;</code> · args: <code>value</code> · integer · †</li>
+</ul>
+<!-- END GENERATED --><hr>
+<h2>Notes carried over</h2>
+<p>The SCPI (Standard Commands for Programmable Instruments) language for the Keysight (formerly Agilent/HP) 34401A is organized into a hierarchical tree. You start at the &quot;root&quot; and move down through subsystems to reach specific parameters.</p>
+<p>Here is the breakdown of the 34401A command tree, separated by subsystem, along with how to distinguish between <strong>Settings</strong> (telling the DMM what to do) and <strong>Queries</strong> (asking the DMM for data).</p>
+<hr>
+<h3><strong>The Golden Rule: Settings vs. Queries</strong></h3>
+<ul>
+<li><p><strong>Setting:</strong> You send the command with a parameter.</p>
+</li>
+<li><p><em>Example:</em> <code>VOLT:DC:RANG 10</code> (Sets the range to 10V).</p>
+</li>
+<li><p><strong>Query:</strong> You add a question mark (<code>?</code>) to the end.</p>
+</li>
+<li><p><em>Example:</em> <code>VOLT:DC:RANG?</code> (Asks &quot;What is the current range?&quot;).</p>
+</li>
+<li><p><em>Note:</em> Most commands work as both. Commands that <strong>only</strong> work as queries are marked <code>[Query Only]</code> below.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>1. The Measurement Root (High-Level)</strong></h3>
+<p>These are the easiest commands to use. They automatically configure the device (preset) and take a reading immediately. They sit at the very top of the tree.</p>
+<ul>
+<li><p><strong><code>MEASure</code></strong></p>
+</li>
+<li><p><code>:VOLTage</code></p>
+</li>
+<li><p><code>:DC?</code>  Measures DC Voltage</p>
+</li>
+<li><p><code>:AC?</code>  Measures AC Voltage</p>
+</li>
+<li><p><code>:CURRent</code></p>
+</li>
+<li><p><code>:DC?</code>  Measures DC Current</p>
+</li>
+<li><p><code>:AC?</code>  Measures AC Current</p>
+</li>
+<li><p><code>:RESistance?</code>  Measures 2-wire Resistance</p>
+</li>
+<li><p><code>:FRESistance?</code>  Measures 4-wire Resistance</p>
+</li>
+<li><p><code>:FREQuency?</code>  Measures Frequency</p>
+</li>
+<li><p><code>:PERiod?</code>  Measures Period</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Usage:</strong> <code>MEAS:VOLT:DC? 10, 0.001</code>
+(Measures DC voltage using the 10V range with 0.001V resolution).</p>
+</blockquote>
+<hr>
+<h3><strong>2. The <code>SENSe</code> Subsystem (Detailed Configuration)</strong></h3>
+<p>If you want to change settings <em>without</em> immediately triggering a measurement (e.g., changing the integration time or range), you use the <code>[SENSe:]</code> tree. Note that the keyword <code>SENSe</code> is optional and often omitted.</p>
+<ul>
+<li><p><strong><code>[SENSe:]</code></strong></p>
+</li>
+<li><p><strong><code>VOLTage</code></strong> (Applies to DC or AC)</p>
+</li>
+<li><p><code>:DC:RANGe</code> <code>&lt;range&gt;</code>  Set specific range (0.1, 1, 10, 100, 1000).</p>
+</li>
+<li><p><code>:DC:RANGe:AUTO</code> <code>ON|OFF</code>  Turn auto-ranging on or off.</p>
+</li>
+<li><p><code>:DC:NPLC</code> <code>&lt;number&gt;</code>  Set integration time in Power Line Cycles (0.02 to 100).</p>
+</li>
+<li><p><strong><code>CURRent</code></strong></p>
+</li>
+<li><p><code>:DC:RANGe</code> <code>&lt;range&gt;</code></p>
+</li>
+<li><p><code>:DC:TERMinals?</code>  Query which terminals are active (Front/Rear).</p>
+</li>
+<li><p><strong><code>RESistance</code></strong></p>
+</li>
+<li><p><code>:OCOMpensated</code> <code>ON|OFF</code>  Turn Offset Compensation on/off.</p>
+</li>
+<li><p><strong><code>DETector:BANDwidth</code></strong> <code>3|20|200</code>  Set the filter for AC measurements (Slow/Med/Fast).</p>
+</li>
+<li><p><strong><code>ZERO:AUTO</code></strong> <code>ON|OFF|ONCE</code>  Controls the internal autozero function.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>3. The <code>TRIGger</code> Subsystem (Timing)</strong></h3>
+<p>This branch controls <em>when</em> the DMM takes a reading.</p>
+<ul>
+<li><p><strong><code>TRIGger</code></strong></p>
+</li>
+<li><p><code>:SOURce</code> <code>BUS|IMM|EXT</code></p>
+</li>
+<li><p><code>BUS</code>: Waits for a software command (<code>*TRG</code>).</p>
+</li>
+<li><p><code>IMM</code>: Immediate (Scan constantly).</p>
+</li>
+<li><p><code>EXT</code>: Waits for hardware pulse on the rear BNC connector.</p>
+</li>
+<li><p><code>:DELay</code> <code>&lt;seconds&gt;</code>  Time to wait after trigger before measuring.</p>
+</li>
+<li><p><code>:DELay:AUTO</code> <code>ON|OFF</code></p>
+</li>
+<li><p><code>:COUNt</code> <code>&lt;number&gt;</code>  How many readings to take per trigger.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>4. The <code>CALCulate</code> Subsystem (Math)</strong></h3>
+<p>The 34401A can do math on the readings before sending them to you.</p>
+<ul>
+<li><p><strong><code>CALCulate</code></strong></p>
+</li>
+<li><p><code>:FUNCtion</code> <code>NULL|DB|DBM|LIMit|AVERage</code>  Select the math function.</p>
+</li>
+<li><p><code>:STATe</code> <code>ON|OFF</code>  Turn the math processing on or off.</p>
+</li>
+<li><p><strong><code>:NULL</code></strong> (Relative measurements)</p>
+</li>
+<li><p><code>:OFFSet</code> <code>&lt;value&gt;</code>  The value to subtract from readings.</p>
+</li>
+<li><p><strong><code>:DB</code></strong></p>
+</li>
+<li><p><code>:REFerence</code> <code>&lt;value&gt;</code></p>
+</li>
+<li><p><strong><code>:AVERage</code></strong></p>
+</li>
+<li><p><code>:MINimum?</code>  Returns lowest reading recorded.</p>
+</li>
+<li><p><code>:MAXimum?</code>  Returns highest reading recorded.</p>
+</li>
+<li><p><code>:AVERage?</code>  Returns the average.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>5. The <code>SYSTem</code> Subsystem (Utility)</strong></h3>
+<p>Global settings for the instrument itself.</p>
+<ul>
+<li><p><strong><code>SYSTem</code></strong></p>
+</li>
+<li><p><code>:BEEPer</code></p>
+</li>
+<li><p><code>:STATe</code> <code>ON|OFF</code>  Silence the annoyingly loud beep.</p>
+</li>
+<li><p><code>[Immediate]</code>  <code>SYST:BEEP</code> makes the unit beep once.</p>
+</li>
+<li><p><code>:ERRor?</code>  <strong>Critical:</strong> Reads the next error from the queue (e.g., &quot;+0, No Error&quot;).</p>
+</li>
+<li><p><code>:VERSion?</code>  Query the SCPI version.</p>
+</li>
+<li><p><code>:LOCal</code>  Returns control to the front panel buttons.</p>
+</li>
+<li><p><code>:REMote</code>  Locks front panel, enables remote control.</p>
+</li>
+</ul>
+<hr>
+<h3><strong>Common Shortcuts</strong></h3>
+<p>SCPI allows you to abbreviate commands. You only need the uppercase letters shown in the documentation.</p>
+<ul>
+<li><strong>Full:</strong> <code>CONF:VOLTAGE:DC:RANGE 10</code></li>
+<li><strong>Short:</strong> <code>CONF:VOLT:DC:RANG 10</code></li>
+</ul>
+<h3><strong>Summary of Command Syntax</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Syntax Symbol</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Colon (<code>:</code>)</strong></td>
+<td>Moves down the tree</td>
+<td><code>VOLT:DC:RANG</code></td>
+</tr>
+<tr>
+<td><strong>Question (<code>?</code>)</strong></td>
+<td>Queries the value</td>
+<td><code>VOLT:DC:RANG?</code></td>
+</tr>
+<tr>
+<td><strong>Space</strong></td>
+<td>Separates command from parameter</td>
+<td><code>RANG 10</code></td>
+</tr>
+<tr>
+<td>**`MIN</td>
+<td>MAX`**</td>
+<td>Special parameters</td>
+</tr>
+</tbody></table>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
+    Source file: <code>BackEnd/openair-yak/Yak/DMM/34401A/commands_tree.md</code>
+  </div>
+</body>
+</html>

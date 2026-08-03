@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MacLookup - Back End Protocols</title>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+pre { background: #f6f8fa; padding: 16px; overflow-x: auto; border-radius: 6px; }
+code { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; margin-left: 0; }
+.timestamp { margin-top: 50px; font-size: 0.85em; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>openair-maclookup</h1>
+<p>Names the manufacturer behind a hardware address, from the first 24 bits.</p>
+<p>Not an agent — it publishes nothing and owns no topic. It is a library the
+discovery agents call, because every one of them ends up holding a MAC and
+nothing to show for it. A PTP tab listing <code>00:07:F5:FF:FE:00:54:72</code> four times is
+complete and unreadable; the same table saying <em>Bridgeco Co AG</em> is the same data.</p>
+<pre><code class="language-rust">let vendors = openair_maclookup::MacVendors::start();
+vendors.vendor(&quot;00:0A:92:FF:FE:01:56:A3&quot;);  // Some(&quot;Presonus Corporation&quot;)
+vendors.label(&quot;00:0A:92:FF:FE:01:56:A3&quot;);   // &quot;Presonus Corporation / 00:0A:92:…&quot;
+</code></pre>
+<pre><code>mac-lookup 00:0A:92:FF:FE:01:56:A3    # one address, waits for the answer
+mac-lookup --cached                   # everything already learned
+… | mac-lookup                        # or pipe addresses in
+</code></pre>
+<h2>The budget is the design</h2>
+<p><a href="https://macvendors.com/api">api.macvendors.com</a> needs no key and allows <strong>1000
+requests a day at 1 per second</strong>. Every design decision here falls out of that:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache by <strong>OUI</strong>, not by MAC</td>
+<td>40 devices on a bench are perhaps 8 vendors</td>
+</tr>
+<tr>
+<td>Cache the <strong>misses</strong> too</td>
+<td>a 404 means IEEE assigned that block to nobody, and that will not be different tomorrow</td>
+</tr>
+<tr>
+<td><strong>Persist</strong> to disk</td>
+<td>a restart loop would otherwise spend the day&#39;s budget re-learning what it knew</td>
+</tr>
+<tr>
+<td>Reject <strong>locally</strong> what cannot have a vendor</td>
+<td>multicast, locally-administered and all-zero addresses never cost a request</td>
+</tr>
+<tr>
+<td><strong>One shared rate gate</strong></td>
+<td>the CLI and the agent go through the same door; the limit is per source address, not per thread</td>
+</tr>
+<tr>
+<td><strong>Never block the caller</strong></td>
+<td><code>vendor()</code> answers from cache or returns <code>None</code> and queues</td>
+</tr>
+</tbody></table>
+<p>That last one is the load-bearing one. Discovery agents call this from packet
+paths — the PTP agent from a capture callback that also handles Sync at 8/s — and
+a one-second sleep there drops frames. So an unknown OUI is queued, one worker
+thread drains the queue at the permitted rate, and the name appears a flush or
+two after the device does. From then on it is free and offline.</p>
+<p>The cache is a TSV so it can be read, grepped and hand-edited:</p>
+<pre><code># openair-maclookup vendor cache — one OUI per line
+#budget	20662	3
+00:07:F5	Bridgeco Co AG
+00:0A:92	Presonus Corporation
+FC:A1:3E	Samsung Electronics Co.,Ltd
+</code></pre>
+<p>An empty name is a remembered 404. <code>OPENAIR_MAC_CACHE</code> sets the path; it defaults
+to <code>mac_vendors.tsv</code> beside this crate, so the eight agents that share it find
+one file however their launcher was started rather than scattering a half-learnt
+copy into each working directory. A deployed image carries the binary and not the
+source tree, so there the default falls back to the working directory. Losing the
+file costs a day&#39;s budget, not correctness.</p>
+<h2>EUI-64</h2>
+<p>The addresses this bench actually produces are mostly <strong>not</strong> plain MAC-48. A PTP
+clock identity and an AVDECC entity ID are both a MAC with <code>FF:FE</code> inserted in
+the middle:</p>
+<pre><code>00:0A:92:01:56:A3          the MAC
+00:0A:92:FF:FE:01:56:A3    the same device&#39;s clock identity
+</code></pre>
+<p>Since the OUI is the leading three bytes either way, the insertion needs no
+special case — only the length check has to accept 16 hex digits as well as 12.
+Both forms resolve to <code>00:0A:92</code>.</p>
+<h2>Reading a MAC out of an IPv6 address</h2>
+<p>Most discovery here never sees a hardware address. DNS-SD advertises none, and
+neither do the agents built on it — but they all publish <strong>addresses</strong>, and a
+host that configured itself by SLAAC put its MAC in the low 64 bits of every one:
+insert <code>FF:FE</code> in the middle, flip the universal/local bit.</p>
+<pre><code>fe80::46fa:66ff:fee4:2fbf%enp5s0f0   -&gt;   44:FA:66:E4:2F:BF
+</code></pre>
+<p>That flip is the whole subtlety, and it is why this cannot reuse <code>Oui::parse</code>.
+Inverting bit 1 makes a globally-assigned MAC <em>look</em> locally-administered, so the
+raw interface ID reads as <code>46:FA:66</code> — which <code>parse</code> rejects on sight, correctly,
+because in a plain MAC that bit means IEEE assigned it to nobody. Undo the flip
+first and it is Brother&#39;s real block.</p>
+<p>The bench confirms it independently: that printer states the same address twice
+by two unrelated routes, once in its link-local address and once in its hostname,
+<code>BRW44FA66E42FBF.local</code>. There is a test pinning them together.</p>
+<p><strong>Privacy addresses yield nothing, on purpose.</strong> An RFC 4941 interface ID is
+random and carries no <code>FF:FE</code> marker. Apple hosts use them, so their rows have no
+vendor — reading one out of random bytes would be worse than a blank cell.</p>
+<h2>The OUI names the builder, not always the brand</h2>
+<p>Worth knowing before trusting a cell. The Brother printer on this bench resolves
+to <em>Cloud Network Technology Singapore</em> — the ODM that made its network module.
+Both facts are true and they are different facts, which is why the printer and
+Dante tabs keep their own <code>manufacturer</code> column: that one is the device&#39;s own
+claim (<code>usb_MFG=Brother</code>, <code>mf=PreSonus</code>), this one is the IEEE registry.</p>
+<h2>Who uses it</h2>
+<p>Every agent that has anything to read publishes <strong>both</strong> columns — <code>mac</code> and
+<code>vendor</code>. The name is the readable fact; the address is the evidence for it, and
+a row asserting <em>Google, Inc.</em> with no address to check it against is a claim
+rather than a finding.</p>
+<table>
+<thead>
+<tr>
+<th>Crate</th>
+<th>Columns</th>
+<th>Read from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>openair-ptp</code></td>
+<td><code>vendor</code></td>
+<td>the EUI-64 clock identity</td>
+</tr>
+<tr>
+<td><code>openair-avb-milan</code></td>
+<td><code>vendor</code></td>
+<td>the entity&#39;s source MAC</td>
+</tr>
+<tr>
+<td><code>openair-dnssd</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>the SLAAC link-local address</td>
+</tr>
+<tr>
+<td><code>openair-chromecast</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>″ — Cast hardware is not all Google-built</td>
+</tr>
+<tr>
+<td><code>openair-printers</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>″ — alongside the printer&#39;s own <code>manufacturer</code></td>
+</tr>
+<tr>
+<td><code>openair-dante</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>″ — alongside <code>mf=</code> from the TXT</td>
+</tr>
+<tr>
+<td><code>openair-appletv</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>″ — usually blank, see below</td>
+</tr>
+<tr>
+<td><code>openair-nmos</code></td>
+<td><code>mac</code>, <code>vendor</code></td>
+<td>″</td>
+</tr>
+</tbody></table>
+<p>PTP and AVB carry no <code>mac</code> column because they already state the address: the
+clock identity and the entity&#39;s source MAC <em>are</em> the hardware address.</p>
+<p>Where a tab already had a <code>manufacturer</code> — printers, Dante — the two now sit
+side by side rather than one being chosen. They answer different questions and
+they disagree usefully: on this bench the Brother printer&#39;s own TXT says
+<code>usb_MFG=Brother</code> while its OUI says <em>Cloud Network Technology Singapore</em>.</p>
+<p><code>openair-appletv</code> will mostly show <code>-</code> in both, and that is the true answer: Apple
+uses RFC 4941 privacy addressing, so there is no MAC in the address to recover.
+The column is there so the blank is visible as a fact rather than an omission.</p>
+<p><code>openair-ravenna</code> and <code>openair-sap</code> are the only discovery agents with nothing to
+read — they discover streams, not hosts, and publish no address of any kind.</p>
+<h2>One caveat, if you run many agents</h2>
+<p>Each agent starts its own <code>MacVendors</code>, so each keeps its own daily tally while
+sharing one cache file. Six agents could in principle spend six budgets. In
+practice they resolve the same handful of OUIs off the same bench and the shared
+cache means the second agent to start finds most of them already answered — real
+usage is tens of requests a day against a ceiling of a thousand. If that ever
+stops being true, the tally has to move onto the bus like everything else here.</p>
+
+  <div class="timestamp">
+    Manual generated / updated: <strong>8/3/2026, 7:50:25 PM</strong><br>
+    Source file: <code>BackEnd/ComProtocols/openair-MacLookup/README.md</code>
+  </div>
+</body>
+</html>

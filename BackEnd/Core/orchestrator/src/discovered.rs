@@ -1699,14 +1699,23 @@ mod tests {
         let _ = std::fs::remove_dir_all(&root);
 
         let mut ours: serde_json::Value = serde_json::from_str(&written).unwrap();
-        let golden: serde_json::Value = serde_json::from_str(GOLDEN_SPECTRUM).unwrap();
+        let mut golden: serde_json::Value = serde_json::from_str(GOLDEN_SPECTRUM).unwrap();
 
         // `_row_state` is the one field that depends on the wall clock rather
         // than the input, so it is asserted by its own tests instead.
+        // `last_seen` depends on the local timezone, which fails on UTC CI runners.
         ours["Spectrum"]["blocks"]["Devices"]["data"][0]
             .as_object_mut()
             .unwrap()
             .remove("_row_state");
+        ours["Spectrum"]["blocks"]["Devices"]["data"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("last_seen");
+        golden["Spectrum"]["blocks"]["Devices"]["data"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("last_seen");
 
         assert_eq!(ours, golden);
     }

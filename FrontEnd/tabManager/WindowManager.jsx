@@ -748,6 +748,37 @@ const WindowManager = ({ directoryTree }) => {
                     </svg>
                     Repository
                 </a>
+
+                <a
+                    href="../Documentation/Manual/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Open the OPEN-AIR Manual"
+                    style={{
+                        display: 'flex', alignItems: 'center', gap: '6px',
+                        margin: '0 10px 0 0', padding: '4px 12px',
+                        fontFamily: 'Segoe UI, sans-serif', fontSize: '11px',
+                        fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px',
+                        color: '#aaa', textDecoration: 'none',
+                        backgroundColor: '#111', border: '1px solid #555', borderRadius: '4px',
+                        whiteSpace: 'nowrap', transition: 'all 0.1s'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.color = '#f4902c';
+                        e.currentTarget.style.borderColor = '#f4902c';
+                        e.currentTarget.style.boxShadow = '0 0 8px #f4902c';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.color = '#aaa';
+                        e.currentTarget.style.borderColor = '#555';
+                        e.currentTarget.style.boxShadow = 'none';
+                    }}
+                >
+                    <svg height="13" width="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H7.5v-13H1.75zm12.5 0H8.5v13h5.75a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25z"></path>
+                    </svg>
+                    Manual
+                </a>
             </div>
 
             {/* Window Content */}

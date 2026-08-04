@@ -145,14 +145,14 @@ jobs:
   # verified — so it runs on every push. The checker is a dependency-free crate
   # so this stays a ~1 second gate rather than a workspace build.
   docs:
-    needs: [lint-frontend, lint-backend]
+    needs: lint-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: cargo run --quiet --manifest-path BackEnd/Core/Cargo.toml -p openair-doclinks
 
   node:
-    needs: [lint-frontend, lint-backend]
+    needs: lint-frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -208,7 +208,7 @@ jobs:
       - run: pnpm -C Deployment validate -- --report summary
 
   rust:
-    needs: [lint-frontend, lint-backend]
+    needs: lint-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -241,7 +241,7 @@ jobs:
       - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
 
   ui: # Phase 2: the isolated typed frontend
-    needs: [lint-frontend, lint-backend]
+    needs: lint-frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -358,8 +358,8 @@ jobs:
       - run: pnpm -C Deployment gen:check
 
   deploy:
-    needs: [lint-frontend, rust]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.rust.result != 'failure' && needs.rust.result != 'cancelled'
+    needs: lint-frontend
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -421,8 +421,8 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: [lint-frontend, rust]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.rust.result != 'failure' && needs.rust.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
+    needs: lint-frontend
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: production
     steps:

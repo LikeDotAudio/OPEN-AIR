@@ -34,6 +34,7 @@ jobs:
       ts_js_files: ${{ steps.changes.outputs.ts_js_all_changed_files }}
       contracts_changed: ${{ steps.changes.outputs.contracts_any_changed }}
       contracts_files: ${{ steps.changes.outputs.contracts_all_changed_files }}
+      backend_changed: ${{ steps.changes.outputs.backend_any_changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,9 +58,14 @@ jobs:
               - '**/*.jsx'
             contracts:
               - 'contracts/**'
+            backend:
+              - 'BackEnd/**'
+              - 'contracts/rust/**'
+              - 'Cargo.*'
 
   lint-frontend:
     needs: pre-check
+    if: needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -119,6 +125,7 @@ jobs:
 
   lint-backend:
     needs: pre-check
+    if: needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -146,6 +153,7 @@ jobs:
   # so this stays a ~1 second gate rather than a workspace build.
   docs:
     needs: lint-backend
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -153,6 +161,7 @@ jobs:
 
   node:
     needs: lint-frontend
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -209,6 +218,7 @@ jobs:
 
   rust:
     needs: lint-backend
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -242,6 +252,7 @@ jobs:
 
   ui: # Phase 2: the isolated typed frontend
     needs: lint-frontend
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -302,6 +313,7 @@ jobs:
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
     needs: lint-backend
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -357,9 +369,21 @@ jobs:
       - run: command -v cargo-typify >/dev/null || cargo install cargo-typify@0.7.0 --locked
       - run: pnpm -C Deployment gen:check
 
-  deploy:
+  release:
     needs: lint-frontend
     if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: release
+    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -421,8 +445,8 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: lint-frontend
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
+    needs: release
+    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -459,3 +483,19 @@ jobs:
             **/*.log
             **/.DS_Store
             **/*.js
+
+  smoke-test:
+    needs: [deploy, deploy-manual]
+    if: always() && (needs.deploy.result == 'success' || needs.deploy-manual.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Production Deployment
+        run: |
+          echo "Checking https://openair.like.audio"
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://openair.like.audio)
+          if [ "$STATUS_CODE" -eq 200 ]; then
+            echo "✅ Deployment is live and returned 200 OK"
+          else
+            echo "❌ Deployment returned status code $STATUS_CODE"
+            exit 1
+          fi

@@ -299,7 +299,7 @@ jobs:
       - run: pnpm -C Deployment --filter ui build
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
-    needs: [lint-frontend, lint-backend]
+    needs: lint-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -356,8 +356,8 @@ jobs:
       - run: pnpm -C Deployment gen:check
 
   deploy:
-    needs: [pre-check, lint-frontend, lint-backend]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled'
+    needs: [lint-frontend, rust]
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.rust.result != 'failure' && needs.rust.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -419,8 +419,8 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: [pre-check, lint-frontend, lint-backend]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
+    needs: [lint-frontend, rust]
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.rust.result != 'failure' && needs.rust.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: production
     steps:

@@ -504,6 +504,22 @@ jobs:
             exit 1
           fi
 
+      - name: 🎉 Fire the Confetti Cannon! 🎉
+        run: |
+          echo "   🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊"
+          echo " 🎉  SUCCESS! The deployment has successfully landed!  🎉"
+          echo "   🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊 🎊"
+          echo ""
+          echo "         * *    *    *     *    *   * "
+          echo "      *       *     *   *    *         *"
+          echo "        *  \\ \\ | / /  *    *     *  "
+          echo "     *    -  BOOM!  -      *      *   * "
+          echo "        *  / / | \\ \\  *  *     *    "
+          echo "      *       *     *   *    *         *"
+          echo "         * *    *    *     *    *   * "
+          echo ""
+          echo "All checks passed, Docker is ready, and production is live! Great job!"
+
   docker-release:
     needs: lint-backend
     if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
@@ -534,3 +550,13 @@ jobs:
           
           # Cleanup
           docker stop orchestrator
+
+      - name: Export Docker Image
+        run: docker save openair-orchestrator:latest > openair-orchestrator.tar
+
+      - name: Upload Docker Image Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openair-orchestrator-image
+          path: openair-orchestrator.tar
+          retention-days: 5

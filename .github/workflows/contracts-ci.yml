@@ -80,7 +80,7 @@ jobs:
       - uses: actions/checkout@v4
       # System libs the workspace's native deps need on a bare runner:
       # alsa (openair-midi), pkg-config; cmake/gcc are preinstalled.
-      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config protobuf-compiler
       # rustup reads rust-toolchain.toml automatically
       - uses: Swatinem/rust-cache@v2
         with:

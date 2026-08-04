@@ -18,8 +18,9 @@
 FROM rust:1.94-bookworm AS build
 
 # midir (MIDI) needs ALSA headers; pkg-config finds them.
+# smpte2138 needs protobuf-compiler (protoc)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libasound2-dev pkg-config \
+        libasound2-dev pkg-config protobuf-compiler \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /src

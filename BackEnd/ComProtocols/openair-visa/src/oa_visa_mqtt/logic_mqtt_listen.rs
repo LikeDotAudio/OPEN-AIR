@@ -109,6 +109,45 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
             }
         }
     });
+
+    // ---------------------------------------------------------
+    // Background Keep-Alive / Heartbeat Runner
+    // ---------------------------------------------------------
+    let client_heartbeat = client.clone();
+    thread::spawn(move || {
+        loop {
+            // Clone the map entries to avoid holding the lock during slow operations
+            let devices: Vec<(String, String)> = {
+                let map_guard = DEVICE_MAP.lock().unwrap();
+                if let Some(map) = map_guard.as_ref() {
+                    map.iter().map(|(k, v)| (k.clone(), v.clone())).collect()
+                } else {
+                    Vec::new()
+                }
+            };
+            
+            for (topic_prefix, resource_name) in devices {
+                // Lightweight check: prove the command parser is responsive
+                let is_alive = Python::with_gil(|py| {
+                    execute_query(py, &resource_name, "*IDN?").is_ok()
+                });
+                
+                if is_alive {
+                    if let Ok(duration) = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
+                        let last_online = duration.as_secs().to_string();
+                        let publish_topic = format!("{}/last_online", topic_prefix);
+                        let _ = client_heartbeat.publish(publish_topic, QoS::AtLeastOnce, true, last_online.as_bytes());
+                    }
+                }
+                
+                // Sleep between devices to avoid network/GIL slamming
+                thread::sleep(Duration::from_millis(500));
+            }
+            
+            // Rest before next round-robin sweep (check every ~30 seconds)
+            thread::sleep(Duration::from_secs(30));
+        }
+    });
     
     Ok(())
 }

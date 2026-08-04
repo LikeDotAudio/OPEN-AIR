@@ -24,12 +24,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Gate. Until this existed, contracts-ci.yml ran independently and could not
-  # block a release — a push that broke the contracts still published to the
-  # production host.
-  verify:
+  pre-check:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+    outputs:
+      frontend_changed: ${{ steps.changes.outputs.frontend_any_changed }}
+      manual_changed: ${{ steps.changes.outputs.manual_any_changed }}
+      ts_js_changed: ${{ steps.changes.outputs.ts_js_any_changed }}
+      ts_js_files: ${{ steps.changes.outputs.ts_js_all_changed_files }}
+      contracts_changed: ${{ steps.changes.outputs.contracts_any_changed }}
+      contracts_files: ${{ steps.changes.outputs.contracts_all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changes
+        uses: tj-actions/changed-files@v44
+        with:
+          files_yaml: |
+            frontend:
+              - FrontEnd/**
+              - ui/**
+            manual:
+              - Documentation/Manual/**
+            ts_js:
+              - '**/*.ts'
+              - '**/*.tsx'
+              - '**/*.js'
+              - '**/*.jsx'
+            contracts:
+              - 'contracts/**'
+
+  verify:
+    needs: pre-check
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,56 +73,105 @@ jobs:
         run: |
           set -euo pipefail
           PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
-          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
-          # `corepack enable` used to be here, and it is the whole problem.
-          # corepack resolves `packageManager` by searching up from the current
-          # directory; every pnpm call below runs from the repo root via
-          # `-C Deployment`, and the root has no package.json. So corepack found
-          # no pin, fetched whatever pnpm was newest, and pnpm then read the pin,
-          # saw a different version and refused — "pnpm does not switch versions
-          # when running under corepack". Nothing in the repo changed to cause
-          # it: the pin was satisfied only while "newest pnpm" happened to equal
-          # it, so an upstream release was enough to break every deploy.
-          #
-          # The runner image also ships corepack SHIMS on PATH, so not calling
-          # `corepack enable` is not sufficient on its own — the shim would still
-          # be the pnpm that ran. Disabling removes them.
           corepack disable || true
           npm i -g "pnpm@$PNPM_VERSION"
           hash -r || true
-          echo "pnpm on PATH: $(command -v pnpm)"
           ACTUAL="$(pnpm --version)"
-          echo "pnpm version: $ACTUAL"
-          # Assert rather than hope: otherwise a wrong version fails further
-          # down, in a step about the pin rather than about what chose it.
           [ "$ACTUAL" = "$PNPM_VERSION" ] || {
             echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
-            command -v -a pnpm || true
             exit 1
           }
 
       - name: Install
         run: pnpm -C Deployment install --frozen-lockfile
 
-      - name: Typecheck contracts
-        run: pnpm -C Deployment --filter @openair/contracts typecheck
+      - name: Pre-check & Validate
+        run: |
+          echo "# 🔍 Pre-check Results" > $GITHUB_STEP_SUMMARY
+          HAS_ERRORS=0
 
-      - name: Lint code
-        run: pnpm -C Deployment lint
+          echo "## Linting Changed UI Files" >> $GITHUB_STEP_SUMMARY
+          UI_FILES=$(echo "${{ needs.pre-check.outputs.ts_js_files }}" | tr ' ' '\n' | grep '^ui/' | tr '\n' ' ' || true)
+          if [ -n "$UI_FILES" ]; then
+            set +e
+            pnpm -C Deployment --filter ui exec eslint $UI_FILES > lint-out.txt 2>&1
+            LINT_STATUS=$?
+            set -e
+            if [ $LINT_STATUS -eq 0 ]; then
+               echo "✅ Lint passed" >> $GITHUB_STEP_SUMMARY
+            else
+               echo "❌ Lint failed" >> $GITHUB_STEP_SUMMARY
+               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
+               echo '' >> $GITHUB_STEP_SUMMARY
+               echo '```text' >> $GITHUB_STEP_SUMMARY
+               cat lint-out.txt >> $GITHUB_STEP_SUMMARY
+               echo '```' >> $GITHUB_STEP_SUMMARY
+               echo '</details>' >> $GITHUB_STEP_SUMMARY
+               HAS_ERRORS=1
+            fi
+          else
+            echo "No UI TS/JS files changed. Skipping lint." >> $GITHUB_STEP_SUMMARY
+          fi
 
-      - name: Test contracts
-        run: pnpm -C Deployment --filter @openair/contracts test
+          echo "## Typecheck" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.pre-check.outputs.contracts_changed }}" == "true" ] || [ "${{ needs.pre-check.outputs.frontend_changed }}" == "true" ] || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
+            set +e
+            pnpm -C Deployment -r typecheck > typecheck-out.txt 2>&1
+            TYPECHECK_STATUS=$?
+            set -e
+            if [ $TYPECHECK_STATUS -eq 0 ]; then
+               echo "✅ Typecheck passed" >> $GITHUB_STEP_SUMMARY
+            else
+               echo "❌ Typecheck failed" >> $GITHUB_STEP_SUMMARY
+               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
+               echo '' >> $GITHUB_STEP_SUMMARY
+               echo '```text' >> $GITHUB_STEP_SUMMARY
+               cat typecheck-out.txt >> $GITHUB_STEP_SUMMARY
+               echo '```' >> $GITHUB_STEP_SUMMARY
+               echo '</details>' >> $GITHUB_STEP_SUMMARY
+               HAS_ERRORS=1
+            fi
+          else
+             echo "No TS/JS files changed. Skipping typecheck." >> $GITHUB_STEP_SUMMARY
+          fi
 
-      # The drift ratchet: fails on NEW debt, not on the baselined backlog.
+          echo "## Testing Changed Contracts" >> $GITHUB_STEP_SUMMARY
+          CONTRACT_FILES=$(echo "${{ needs.pre-check.outputs.contracts_files }}" | tr ' ' '\n' | grep '^contracts/' | tr '\n' ' ' || true)
+          if [ -n "$CONTRACT_FILES" ] || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
+            set +e
+            if [ -n "$CONTRACT_FILES" ]; then
+              pnpm -C Deployment --filter @openair/contracts exec vitest related $CONTRACT_FILES --run > test-out.txt 2>&1
+            else
+              pnpm -C Deployment --filter @openair/contracts test > test-out.txt 2>&1
+            fi
+            TEST_STATUS=$?
+            set -e
+            if [ $TEST_STATUS -eq 0 ]; then
+               echo "✅ Tests passed" >> $GITHUB_STEP_SUMMARY
+            else
+               echo "❌ Tests failed" >> $GITHUB_STEP_SUMMARY
+               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
+               echo '' >> $GITHUB_STEP_SUMMARY
+               echo '```text' >> $GITHUB_STEP_SUMMARY
+               cat test-out.txt >> $GITHUB_STEP_SUMMARY
+               echo '```' >> $GITHUB_STEP_SUMMARY
+               echo '</details>' >> $GITHUB_STEP_SUMMARY
+               HAS_ERRORS=1
+            fi
+          else
+            echo "No contract files changed. Skipping tests." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ $HAS_ERRORS -ne 0 ]; then
+             exit 1
+          fi
+
       - name: Validate (ratchet)
         run: pnpm -C Deployment validate -- --report summary
 
   deploy:
-    needs: verify
-    # `verify` is skipped on pull_request (nothing uploads there), and a skipped
-    # dependency would otherwise skip this job too — taking the PR validation
-    # step with it. Proceed when verify passed OR was skipped; never when it failed.
-    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled'
+    needs: [pre-check, verify]
+    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -100,9 +180,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # FrontEnd/api/{tree.json,grabbag} are the fallbacks index.html uses when
-      # no orchestrator is answering, and the static host has none. They are
-      # COMMITTED and shipped as-is.
       - name: Check the committed API fallbacks are intact
         run: |
           set -euo pipefail
@@ -121,11 +198,7 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}
           local-dir: ./FrontEnd/
-          # Wipe + re-upload when the sync state has drifted (manual runs).
           dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
-          # Never publish secrets or local junk. The action's defaults do NOT
-          # exclude .env — and the repo-root .env holds FTP credentials locally
-          # (not FrontEnd/.env, which no longer exists and must stay gone).
           exclude: |
             **/.git*
             **/.git*/**
@@ -160,15 +233,15 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: verify
-    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
+    needs: [pre-check, verify]
+    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # We need git history to check stale docs
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:

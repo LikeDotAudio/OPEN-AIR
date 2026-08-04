@@ -373,6 +373,10 @@ jobs:
     needs: lint-frontend
     if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -499,3 +503,34 @@ jobs:
             echo "❌ Deployment returned status code $STATUS_CODE"
             exit 1
           fi
+
+  docker-release:
+    needs: lint-backend
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Docker Container
+        run: docker build -f docker/Dockerfile -t openair-orchestrator:latest .
+        
+      - name: Validate Docker Container
+        run: |
+          # Run the container in the background
+          docker run -d -p 8000:8000 --name orchestrator openair-orchestrator:latest
+          
+          # Wait for it to boot up
+          sleep 5
+          
+          # Validate it's listening
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/)
+          if [ "$STATUS_CODE" -eq 200 ]; then
+            echo "✅ Docker container validated and is serving on port 8000"
+          else
+            echo "❌ Docker container failed validation (status code $STATUS_CODE)"
+            docker logs orchestrator
+            exit 1
+          fi
+          
+          # Cleanup
+          docker stop orchestrator

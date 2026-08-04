@@ -295,6 +295,7 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use openair_ravenna::sdp;
 
     /// The bug this guards: a 16-channel interface produced 16 device rows.
     #[test]

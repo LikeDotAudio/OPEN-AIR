@@ -176,3 +176,49 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "PR validated: API fallbacks checked above. No upload on PRs."
+
+  deploy-manual:
+    needs: verify
+    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # We need git history to check stale docs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check for stale documents
+        run: |
+          cd Documentation/Manual
+          npm install marked
+          node check_stale_docs.js
+
+      - name: Build manual
+        run: |
+          cd Documentation/Manual
+          node build_manual.js
+
+      - name: Deploy Manual over FTPS
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          server-dir: ${{ secrets.REMOTE_DIR || '/' }}manual/
+          local-dir: ./Documentation/Manual/html/
+          dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env
+            **/.env.*
+            **/*.log
+            **/.DS_Store
+

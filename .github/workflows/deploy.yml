@@ -116,93 +116,223 @@ jobs:
              exit 1
           fi
 
-  contracts-ci:
-    needs: [pre-check, lint]
+  # Documentation links. Milestone 1 claimed "all internal links programmatically
+  # verified to resolve"; that check ran once, by hand, and five links were dead
+  # within a day (a file in Documents/notes/ linked as if it were in
+  # Documents/Audits/, plus three broken by a folder move). Asserted once is not
+  # verified — so it runs on every push. The checker is a dependency-free crate
+  # so this stays a ~1 second gate rather than a workspace build.
+  docs:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - run: cargo run --quiet --manifest-path BackEnd/Core/Cargo.toml -p openair-doclinks
 
+  node:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: Deployment/.nvmrc
-
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
+      #
+      # corepack resolves `packageManager` by searching up from the current
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
+      #
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
       - name: Install the pinned pnpm
         run: |
           set -euo pipefail
           PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
           corepack disable || true
           npm i -g "pnpm@$PNPM_VERSION"
           hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
           ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
           [ "$ACTUAL" = "$PNPM_VERSION" ] || {
             echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
             exit 1
           }
+      - run: pnpm -C Deployment install --frozen-lockfile
+      - run: pnpm -C Deployment --filter @openair/contracts typecheck
+      - run: pnpm -C Deployment --filter @openair/contracts test # includes the golden-vector suites
+      # THE RATCHET (step 5): fails only on debt not in validate.baseline.json.
+      # Fixing files shrinks the baseline via --update-baseline; growth is a bug.
+      - run: pnpm -C Deployment validate -- --report summary
 
-      - name: Install
-        run: pnpm -C Deployment install --frozen-lockfile
+  rust:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # System libs the workspace's native deps need on a bare runner:
+      # alsa (openair-midi), pkg-config; cmake/gcc are preinstalled.
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config protobuf-compiler
+      # rustup reads rust-toolchain.toml automatically
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            contracts/rust
+            BackEnd/Core
+            BackEnd/ComProtocols
+            BackEnd/openair-yak
+      - run: cargo test --manifest-path contracts/rust/Cargo.toml # same vectors as vitest
+      # step 6: the path-dep wiring — both BackEnd workspaces compile with
+      # openair-contracts as a dependency.
+      # Check AND test the full workspaces, not a single package. Checking only
+      # `-p openair-yak` hid a whole crate (openair-ember) that did not compile,
+      # and left 10 inline #[cfg(test)] modules never executed.
+      - run: cargo check --workspace --manifest-path BackEnd/Core/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/Core/Cargo.toml
+      - run: cargo check --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
+      # openair-yak is its own back end / its own workspace, so it is NOT
+      # reached by the ComProtocols lines above — it needs its own invocation
+      # or it drops out of CI entirely.
+      - run: cargo check --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
+      - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
 
-      - name: Typecheck & Test
+  ui: # Phase 2: the isolated typed frontend
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: Deployment/.nvmrc
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
+      #
+      # corepack resolves `packageManager` by searching up from the current
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
+      #
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
+      - name: Install the pinned pnpm
         run: |
-          echo "# 🔍 Tests & Typecheck Results" > $GITHUB_STEP_SUMMARY
-          HAS_ERRORS=0
+          set -euo pipefail
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
+          corepack disable || true
+          npm i -g "pnpm@$PNPM_VERSION"
+          hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
+          ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
+            exit 1
+          }
+      - run: pnpm -C Deployment install --frozen-lockfile
+      # freshness: legacy.ts and globals.d.ts must match their sources
+      - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
+      # one-module-one-tree: a stem in both FrontEnd/ and ui/src is a copy, not a move
+      - run: pnpm -C Deployment --filter ui exec tsx scripts/check-collisions.ts
+      # ratchet: no .jsx/.js source in the converted tree — ts/tsx only
+      - run: '! find ui/src -name "*.jsx" -o -name "*.js" | grep -v -E "legacy|globals" | grep . '
+      - run: pnpm -C Deployment --filter ui typecheck
+      - run: pnpm -C Deployment --filter ui lint
+      - run: pnpm -C Deployment --filter ui build
 
-          echo "## Typecheck" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ needs.pre-check.outputs.contracts_changed }}" == "true" ] || [ "${{ needs.pre-check.outputs.frontend_changed }}" == "true" ] || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
-            set +e
-            pnpm -C Deployment -r typecheck > typecheck-out.txt 2>&1
-            TYPECHECK_STATUS=$?
-            set -e
-            if [ $TYPECHECK_STATUS -eq 0 ]; then
-               echo "✅ Typecheck passed" >> $GITHUB_STEP_SUMMARY
-            else
-               echo "❌ Typecheck failed" >> $GITHUB_STEP_SUMMARY
-               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
-               echo '' >> $GITHUB_STEP_SUMMARY
-               echo '```text' >> $GITHUB_STEP_SUMMARY
-               cat typecheck-out.txt >> $GITHUB_STEP_SUMMARY
-               echo '```' >> $GITHUB_STEP_SUMMARY
-               echo '</details>' >> $GITHUB_STEP_SUMMARY
-               HAS_ERRORS=1
-            fi
-          else
-             echo "No TS/JS files changed. Skipping typecheck." >> $GITHUB_STEP_SUMMARY
-          fi
-
-          echo "## Testing Changed Contracts" >> $GITHUB_STEP_SUMMARY
-          CONTRACT_FILES=$(echo "${{ needs.pre-check.outputs.contracts_files }}" | tr ' ' '\n' | grep '^contracts/' | tr '\n' ' ' || true)
-          if [ -n "$CONTRACT_FILES" ] || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
-            set +e
-            if [ -n "$CONTRACT_FILES" ]; then
-              pnpm -C Deployment --filter @openair/contracts exec vitest related $CONTRACT_FILES --run > test-out.txt 2>&1
-            else
-              pnpm -C Deployment --filter @openair/contracts test > test-out.txt 2>&1
-            fi
-            TEST_STATUS=$?
-            set -e
-            if [ $TEST_STATUS -eq 0 ]; then
-               echo "✅ Tests passed" >> $GITHUB_STEP_SUMMARY
-            else
-               echo "❌ Tests failed" >> $GITHUB_STEP_SUMMARY
-               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
-               echo '' >> $GITHUB_STEP_SUMMARY
-               echo '```text' >> $GITHUB_STEP_SUMMARY
-               cat test-out.txt >> $GITHUB_STEP_SUMMARY
-               echo '```' >> $GITHUB_STEP_SUMMARY
-               echo '</details>' >> $GITHUB_STEP_SUMMARY
-               HAS_ERRORS=1
-            fi
-          else
-            echo "No contract files changed. Skipping tests." >> $GITHUB_STEP_SUMMARY
-          fi
-
-          if [ $HAS_ERRORS -ne 0 ]; then
-             exit 1
-          fi
-
-      - name: Validate (ratchet)
-        run: pnpm -C Deployment validate -- --report summary
+  codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: Deployment/.nvmrc
+      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
+      #
+      # corepack resolves `packageManager` by searching up from the current
+      # directory, and every pnpm call below runs from the repo root via
+      # `-C Deployment`. The root has no package.json, so corepack found no pin
+      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
+      # different version, and refused — "pnpm does not switch versions when
+      # running under corepack". Nothing in the repo changed to cause it, and
+      # nothing in the repo could prevent it: the pin was satisfied only while
+      # "newest pnpm" happened to equal it, so an upstream release broke CI.
+      #
+      # `corepack prepare --activate` was tried first and does NOT fix it — the
+      # activated fallback is not consulted for the `-C` calls, which still
+      # resolve from the root and still find nothing.
+      #
+      # Installing it directly is what the error itself recommends, and it
+      # removes the guessing entirely. The version is read from the pin, so this
+      # cannot drift out of step with package.json.
+      - name: Install the pinned pnpm
+        run: |
+          set -euo pipefail
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
+          # The runner image ships corepack SHIMS for pnpm already on PATH, so
+          # simply not running `corepack enable` was not enough — the shim was
+          # still the pnpm that ran, and it still guessed the newest version.
+          # Removing the shims is what lets a directly installed pnpm win.
+          corepack disable || true
+          npm i -g "pnpm@$PNPM_VERSION"
+          hash -r || true
+          echo "pnpm on PATH: $(command -v pnpm)"
+          ACTUAL="$(pnpm --version)"
+          echo "pnpm version: $ACTUAL"
+          # Assert rather than hope. Every later step runs pnpm, so a wrong
+          # version here fails four steps away with an error about the pin
+          # instead of about the setup that chose it.
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            command -v -a pnpm || true
+            exit 1
+          }
+      - run: pnpm -C Deployment install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-typify
+          key: cargo-typify-0.7.0-${{ runner.os }}
+      - run: command -v cargo-typify >/dev/null || cargo install cargo-typify@0.7.0 --locked
+      - run: pnpm -C Deployment gen:check
 
   deploy:
     needs: [pre-check, lint]

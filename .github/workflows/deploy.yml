@@ -551,6 +551,16 @@ jobs:
           # Cleanup
           docker stop orchestrator
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'openair-orchestrator:latest'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
       - name: Export Docker Image
         run: docker save openair-orchestrator:latest > openair-orchestrator.tar
 

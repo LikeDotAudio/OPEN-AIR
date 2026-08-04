@@ -341,15 +341,7 @@ impl PatternEngine {
                     }
 
                     // Compositionite
-                    let pixel = img.get_pixel(x, y).0;
-                    if pixel[3] == 0 {
-                        img.put_pixel(x, y, Rgba([r, g, b, 255]));
-                    } else {
-                        let new_r = (r as u16 * 255 + pixel[0] as u16 * (255 - 255)) / 255;
-                        let new_g = (g as u16 * 255 + pixel[1] as u16 * (255 - 255)) / 255;
-                        let new_b = (b as u16 * 255 + pixel[2] as u16 * (255 - 255)) / 255;
-                        img.put_pixel(x, y, Rgba([new_r as u8, new_g as u8, new_b as u8, 255]));
-                    }
+                    img.put_pixel(x, y, Rgba([r, g, b, 255]));
                 }
             }
         }

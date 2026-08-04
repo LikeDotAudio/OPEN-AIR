@@ -58,7 +58,7 @@ jobs:
             contracts:
               - 'contracts/**'
 
-  verify:
+  lint:
     needs: pre-check
     runs-on: ubuntu-latest
     steps:
@@ -112,6 +112,41 @@ jobs:
           else
             echo "No UI TS/JS files changed. Skipping lint." >> $GITHUB_STEP_SUMMARY
           fi
+          if [ $HAS_ERRORS -ne 0 ]; then
+             exit 1
+          fi
+
+  contracts-ci:
+    needs: [pre-check, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: Deployment/.nvmrc
+
+      - name: Install the pinned pnpm
+        run: |
+          set -euo pipefail
+          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
+          corepack disable || true
+          npm i -g "pnpm@$PNPM_VERSION"
+          hash -r || true
+          ACTUAL="$(pnpm --version)"
+          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
+            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
+            exit 1
+          }
+
+      - name: Install
+        run: pnpm -C Deployment install --frozen-lockfile
+
+      - name: Typecheck & Test
+        run: |
+          echo "# 🔍 Tests & Typecheck Results" > $GITHUB_STEP_SUMMARY
+          HAS_ERRORS=0
 
           echo "## Typecheck" >> $GITHUB_STEP_SUMMARY
           if [ "${{ needs.pre-check.outputs.contracts_changed }}" == "true" ] || [ "${{ needs.pre-check.outputs.frontend_changed }}" == "true" ] || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
@@ -170,8 +205,8 @@ jobs:
         run: pnpm -C Deployment validate -- --report summary
 
   deploy:
-    needs: [pre-check, verify]
-    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint]
+    if: always() && needs.lint.result != 'failure' && needs.lint.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -233,8 +268,8 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: [pre-check, verify]
-    if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint]
+    if: always() && needs.lint.result != 'failure' && needs.lint.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: production
     steps:

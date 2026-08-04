@@ -136,6 +136,7 @@ impl YakRepository {
         }
     }
 
+    #[allow(dead_code)]
     pub fn get_scpi(&self, model_name: &str, command_name: &str) -> Option<String> {
         self.get_scpi_form(model_name, command_name, false)
     }

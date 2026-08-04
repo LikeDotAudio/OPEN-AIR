@@ -43,8 +43,6 @@
 pub mod sap;
 
 use mdns_sd::{ServiceDaemon, ServiceEvent};
-use openair_ravenna::sdp;
-use std::net::{Ipv4Addr, UdpSocket};
 use std::time::Duration;
 
 /// Audinate's proprietary mDNS service tags.
@@ -56,8 +54,6 @@ const DANTE_SERVICES: [&str; 4] = [
 ];
 
 /// SAP multicast group and port (RFC 2974 / AES67).
-const SAP_GROUP: Ipv4Addr = Ipv4Addr::new(239, 255, 255, 255);
-const SAP_PORT: u16 = 9875;
 
 /// Retained keys per Dante device (mDNS path).
 /// `mac` and `vendor` are recovered, not advertised: Dante announces over mDNS,
@@ -106,12 +102,6 @@ fn latency_ms(ns: &str) -> String {
         _ => "-".to_string(),
     }
 }
-
-/// Retained keys per AES67 stream (SAP path).
-const STREAM_KEYS: [&str; 10] = [
-    "stream", "discovery", "format", "sample_rate", "channels",
-    "destination", "rtp_port", "origin", "status", "last_online",
-];
 
 fn seg(raw: &str) -> String {
     raw.trim()

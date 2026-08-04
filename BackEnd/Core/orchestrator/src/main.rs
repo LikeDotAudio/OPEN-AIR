@@ -1101,7 +1101,7 @@ fn spawn_visa_write_daemon(
     println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan/clear triggers...");
     let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", &daemon_host, daemon_port);
     mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
-    let (mut mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
+    let (mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
 
     let _ = mqtt_client_sub.subscribe("OpenAir/System/Protocols/visa/Device/+/+/+/Write", rumqttc::QoS::AtLeastOnce);
     let _ = mqtt_client_sub.subscribe(RESCAN_TOPIC, rumqttc::QoS::AtLeastOnce);

@@ -376,7 +376,7 @@ pub fn run(strict: bool, snapshot: Option<String>, against: Option<String>) -> i
     // a count of 1 the tie-break decides most of the report's shape.
     let mut by_model: Vec<(&str, usize)> = Vec::new();
     let mut kinds: Vec<(String, usize)> = Vec::new();
-    let mut bump = |list: &mut Vec<(String, usize)>, key: String| {
+    let bump = |list: &mut Vec<(String, usize)>, key: String| {
         match list.iter_mut().find(|(k, _)| *k == key) {
             Some((_, n)) => *n += 1,
             None => list.push((key, 1)),

@@ -16,7 +16,7 @@ pub fn publish_devices_mqtt(broker_ip: &str, port: u16, base_topic: &str, inputs
     let mut mqttoptions = MqttOptions::new("open-air-midi-scanner", broker_ip, port);
     mqttoptions.set_keep_alive(Duration::from_secs(30));
     
-    let (mut client, mut connection) = Client::new(mqttoptions, 10);
+    let (client, mut connection) = Client::new(mqttoptions, 10);
     
     std::thread::spawn(move || {
         for _ in connection.iter() {}

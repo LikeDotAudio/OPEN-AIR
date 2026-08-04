@@ -1,7 +1,7 @@
 use crate::config::Config;
 use crate::verbs;
 use crate::repository::YakRepository;
-use log::{info, error};
+use log::error;
 use rumqttc::{AsyncClient, MqttOptions, QoS, Event, Incoming};
 use std::time::Duration;
 use std::sync::Arc;
@@ -101,7 +101,7 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                 // 2. Deserialize payload
                 let json_val: Result<serde_json::Value, _> = serde_json::from_str(&payload);
                 
-                if let Ok(mut parsed_json) = json_val {
+                if let Ok(parsed_json) = json_val {
                     // Protocol Translation Logic
                     if p.topic.ends_with("/config") {
                         if let Some(yak_val) = parsed_json.get("yak_handler") {

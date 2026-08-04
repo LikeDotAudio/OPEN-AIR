@@ -6,7 +6,7 @@ use crate::repository::YakRepository;
 /// Handles the NAB (Status/Observation) construct
 pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage, repo: &YakRepository) {
     let yak = msg.yak_handler.as_ref().unwrap();
-    let raw_val = msg.extra.get("value").or_else(|| msg.extra.get(&yak.input_name));
+    let _raw_val = msg.extra.get("value").or_else(|| msg.extra.get(&yak.input_name));
     eprintln!("   📡 [YAK NAB] Handling command: {}", yak.command);
     
     // The instance's own model wins — see verbs::target_model.

@@ -4,6 +4,7 @@ use std::error::Error;
 pub struct Config {
     pub enabled: bool,
     pub topic: String,
+    #[allow(dead_code)]
     pub topic_listen: String,
     pub topic_publish: String,
     pub topic_ignore: String,

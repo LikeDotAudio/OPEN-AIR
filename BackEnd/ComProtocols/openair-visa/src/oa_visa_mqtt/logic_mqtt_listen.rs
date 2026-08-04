@@ -17,6 +17,8 @@ use pyo3::prelude::*;
 use crate::oa_visa_pyvisa_wrapper::{execute_query, execute_write};
 
 pub static DEVICE_MAP: Mutex<Option<HashMap<String, String>>> = Mutex::new(None);
+pub static DEVICE_LAST_ACTIVITY: Mutex<Option<HashMap<String, u64>>> = Mutex::new(None);
+pub static DEVICE_FAILURES: Mutex<Option<HashMap<String, u8>>> = Mutex::new(None);
 
 // Inline comment: Logic for update_device_map
 pub fn update_device_map(topic: String, resource: String) {
@@ -26,6 +28,20 @@ pub fn update_device_map(topic: String, resource: String) {
     }
     if let Some(map) = map_guard.as_mut() {
         map.insert(topic, resource);
+    }
+}
+
+pub fn record_activity(topic_prefix: &str) {
+    if let Ok(duration) = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
+        let now = duration.as_secs();
+        if let Ok(mut activity) = DEVICE_LAST_ACTIVITY.lock() {
+            if activity.is_none() { *activity = Some(HashMap::new()); }
+            activity.as_mut().unwrap().insert(topic_prefix.to_string(), now);
+        }
+        if let Ok(mut failures) = DEVICE_FAILURES.lock() {
+            if failures.is_none() { *failures = Some(HashMap::new()); }
+            failures.as_mut().unwrap().insert(topic_prefix.to_string(), 0);
+        }
     }
 }
 
@@ -40,6 +56,8 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
     
     let sub_topic = format!("{}/+/+/+/Write", base_topic.trim_end_matches('/'));
     let _ = client.subscribe(&sub_topic, QoS::AtLeastOnce);
+    
+    let client_heartbeat = client.clone();
     
     thread::spawn(move || {
         for notification in connection.iter() {
@@ -78,10 +96,17 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
 
                         if command_to_execute.contains('?') {
                             // Query: command contains a '?' so read response via PyVISA
-                            let result_str = Python::with_gil(|py| {
+                            let query_res = Python::with_gil(|py| {
                                 execute_query(py, &resource_name, &command_to_execute)
-                                    .unwrap_or_else(|e| format!("ERROR: {}", e))
                             });
+                            
+                            let result_str = match query_res {
+                                Ok(res) => {
+                                    record_activity(topic_prefix);
+                                    res
+                                },
+                                Err(e) => format!("ERROR: {}", e),
+                            };
                             
                             let read_topic = format!("{}/Read", topic_prefix);
                             let write_topic = format!("{}/Write", topic_prefix);
@@ -100,9 +125,12 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
                             let _ = client.publish(write_topic, QoS::AtLeastOnce, true, "".as_bytes());
                         } else {
                             // Write-only: send command via PyVISA
-                            Python::with_gil(|py| {
-                                let _ = execute_write(py, &resource_name, &command_to_execute);
+                            let write_res = Python::with_gil(|py| {
+                                execute_write(py, &resource_name, &command_to_execute)
                             });
+                            if write_res.is_ok() {
+                                record_activity(topic_prefix);
+                            }
                         }
                     }
                 }
@@ -113,7 +141,6 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
     // ---------------------------------------------------------
     // Background Keep-Alive / Heartbeat Runner
     // ---------------------------------------------------------
-    let client_heartbeat = client.clone();
     thread::spawn(move || {
         loop {
             // Clone the map entries to avoid holding the lock during slow operations
@@ -126,17 +153,62 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
                 }
             };
             
+            let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
+            
             for (topic_prefix, resource_name) in devices {
-                // Lightweight check: prove the command parser is responsive
-                let is_alive = Python::with_gil(|py| {
-                    execute_query(py, &resource_name, "*IDN?").is_ok()
-                });
+                let last_active = {
+                    let guard = DEVICE_LAST_ACTIVITY.lock().unwrap();
+                    guard.as_ref().and_then(|m| m.get(&topic_prefix).copied()).unwrap_or(0)
+                };
                 
-                if is_alive {
-                    if let Ok(duration) = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
-                        let last_online = duration.as_secs().to_string();
+                let mut check_failed = false;
+                
+                // If it hasn't been active in the last 30 seconds, we probe it
+                if now - last_active > 30 {
+                    let is_alive = Python::with_gil(|py| {
+                        execute_query(py, &resource_name, "*IDN?").is_ok()
+                    });
+                    
+                    if is_alive {
+                        record_activity(&topic_prefix);
                         let publish_topic = format!("{}/last_online", topic_prefix);
-                        let _ = client_heartbeat.publish(publish_topic, QoS::AtLeastOnce, true, last_online.as_bytes());
+                        let _ = client_heartbeat.publish(publish_topic, QoS::AtLeastOnce, true, now.to_string().as_bytes());
+                        let reachable_topic = format!("{}/reachable", topic_prefix);
+                        let _ = client_heartbeat.publish(reachable_topic, QoS::AtLeastOnce, true, "1".as_bytes());
+                    } else {
+                        check_failed = true;
+                    }
+                } else {
+                    // It was active recently! Keep it green in the UI.
+                    let publish_topic = format!("{}/last_online", topic_prefix);
+                    let _ = client_heartbeat.publish(publish_topic, QoS::AtLeastOnce, true, now.to_string().as_bytes());
+                    let reachable_topic = format!("{}/reachable", topic_prefix);
+                    let _ = client_heartbeat.publish(reachable_topic, QoS::AtLeastOnce, true, "1".as_bytes());
+                }
+                
+                if check_failed {
+                    // First check failed, wait and try again immediately
+                    thread::sleep(Duration::from_millis(1500));
+                    let is_alive_retry = Python::with_gil(|py| {
+                        execute_query(py, &resource_name, "*IDN?").is_ok()
+                    });
+                    
+                    if is_alive_retry {
+                        record_activity(&topic_prefix);
+                        let publish_topic = format!("{}/last_online", topic_prefix);
+                        let _ = client_heartbeat.publish(publish_topic, QoS::AtLeastOnce, true, now.to_string().as_bytes());
+                        let reachable_topic = format!("{}/reachable", topic_prefix);
+                        let _ = client_heartbeat.publish(reachable_topic, QoS::AtLeastOnce, true, "1".as_bytes());
+                    } else {
+                        // Second check failed! Mark unreachable.
+                        {
+                            let mut guard = DEVICE_FAILURES.lock().unwrap();
+                            if guard.is_none() { *guard = Some(HashMap::new()); }
+                            let map = guard.as_mut().unwrap();
+                            map.insert(topic_prefix.clone(), 2);
+                        }
+                        let reachable_topic = format!("{}/reachable", topic_prefix);
+                        let _ = client_heartbeat.publish(reachable_topic, QoS::AtLeastOnce, true, "0".as_bytes());
                     }
                 }
                 
@@ -144,7 +216,7 @@ pub fn start_mqtt_daemon(broker_ip: String, port: u16, base_topic: String) -> Py
                 thread::sleep(Duration::from_millis(500));
             }
             
-            // Rest before next round-robin sweep (check every ~30 seconds)
+            // Rest before next round-robin sweep
             thread::sleep(Duration::from_secs(30));
         }
     });

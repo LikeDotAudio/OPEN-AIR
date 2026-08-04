@@ -357,7 +357,7 @@ jobs:
 
   deploy:
     needs: [pre-check, lint-frontend, lint-backend]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled'
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -420,7 +420,7 @@ jobs:
 
   deploy-manual:
     needs: [pre-check, lint-frontend, lint-backend]
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: production
     steps:

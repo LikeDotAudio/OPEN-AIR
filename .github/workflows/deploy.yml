@@ -58,7 +58,7 @@ jobs:
             contracts:
               - 'contracts/**'
 
-  lint:
+  lint-frontend:
     needs: pre-check
     runs-on: ubuntu-latest
     steps:
@@ -116,6 +116,27 @@ jobs:
              exit 1
           fi
 
+
+  lint-backend:
+    needs: pre-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config protobuf-compiler
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            contracts/rust
+            BackEnd/Core
+            BackEnd/ComProtocols
+            BackEnd/openair-yak
+      - name: Lint Backend
+        run: |
+          cargo clippy --workspace --manifest-path BackEnd/Core/Cargo.toml
+          cargo clippy --workspace --manifest-path BackEnd/ComProtocols/Cargo.toml
+          cargo clippy --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
+
   # Documentation links. Milestone 1 claimed "all internal links programmatically
   # verified to resolve"; that check ran once, by hand, and five links were dead
   # within a day (a file in Documents/notes/ linked as if it were in
@@ -123,14 +144,14 @@ jobs:
   # verified — so it runs on every push. The checker is a dependency-free crate
   # so this stays a ~1 second gate rather than a workspace build.
   docs:
-    needs: lint
+    needs: [lint-frontend, lint-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: cargo run --quiet --manifest-path BackEnd/Core/Cargo.toml -p openair-doclinks
 
   node:
-    needs: lint
+    needs: [lint-frontend, lint-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -186,7 +207,7 @@ jobs:
       - run: pnpm -C Deployment validate -- --report summary
 
   rust:
-    needs: lint
+    needs: [lint-frontend, lint-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -218,7 +239,7 @@ jobs:
       - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
 
   ui: # Phase 2: the isolated typed frontend
-    needs: lint
+    needs: [lint-frontend, lint-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -278,7 +299,7 @@ jobs:
       - run: pnpm -C Deployment --filter ui build
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
-    needs: lint
+    needs: [lint-frontend, lint-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -335,8 +356,8 @@ jobs:
       - run: pnpm -C Deployment gen:check
 
   deploy:
-    needs: [pre-check, lint]
-    if: always() && needs.lint.result != 'failure' && needs.lint.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-frontend, lint-backend]
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -398,8 +419,8 @@ jobs:
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
   deploy-manual:
-    needs: [pre-check, lint]
-    if: always() && needs.lint.result != 'failure' && needs.lint.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-frontend, lint-backend]
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.manual_changed == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     environment: production
     steps:

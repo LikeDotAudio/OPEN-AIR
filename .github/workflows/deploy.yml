@@ -126,6 +126,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev pkg-config protobuf-compiler
       - uses: Swatinem/rust-cache@v2
         with:
+          shared-key: "openair-rust"
           workspaces: |
             contracts/rust
             BackEnd/Core
@@ -217,6 +218,7 @@ jobs:
       # rustup reads rust-toolchain.toml automatically
       - uses: Swatinem/rust-cache@v2
         with:
+          shared-key: "openair-rust"
           workspaces: |
             contracts/rust
             BackEnd/Core

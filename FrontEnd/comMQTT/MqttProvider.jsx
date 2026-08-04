@@ -133,7 +133,7 @@ console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
 // messages than raw per-tick publishing. Override via window.OA_PUBLISH_INTERVAL_MS.
 const PUBLISH_INTERVAL_MS = 22;
 
-window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = 'guest', password = 'guest', children }) => {
+window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', username = '', password = '', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
     const [lang, setLang] = React.useState('En'); // Default to English

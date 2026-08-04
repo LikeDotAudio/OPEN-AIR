@@ -76,6 +76,9 @@ jobs:
       - name: Typecheck contracts
         run: pnpm -C Deployment --filter @openair/contracts typecheck
 
+      - name: Lint code
+        run: pnpm -C Deployment lint
+
       - name: Test contracts
         run: pnpm -C Deployment --filter @openair/contracts test
 

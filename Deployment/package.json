@@ -10,6 +10,7 @@
     "gen:check": "pnpm --filter @openair/contracts gen:check",
     "validate": "pnpm --filter @openair/contracts validate",
     "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
     "test": "pnpm -r test"
   }
 }

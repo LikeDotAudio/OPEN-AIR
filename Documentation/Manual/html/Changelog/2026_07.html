@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Changelog / 2026-07-06 - Docker & Deployment</title>
+  <title>Changelog / 2026-07 - Docker & Deployment</title>
   <style>
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -22,6 +22,136 @@ blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; 
 </style>
 </head>
 <body>
+  <h1>Changelog — Month: 2026-07</h1>
+
+  <h1>Changelog — 2026-07-03</h1>
+<h2>Meters, faders &amp; metering zoo</h2>
+<h3>Middle-click random test (restored)</h3>
+<ul>
+<li>Middle-clicking a <strong>VU/needle meter</strong> or a <strong>bar graph</strong> now jumps it to a
+random valid value within the domain (snapped to <code>step</code>) so ballistics can be
+eyeballed. Shared handler in <code>frameLayout/FieldComponent.jsx</code> (<code>onMouseDown</code>,
+button 1), wired onto the VU-knob, needle, and bar-graph wrappers.</li>
+</ul>
+<h3>Needle meter — fit-guard for shape cutouts</h3>
+<ul>
+<li><code>libControl/metering/NeedleMeter.jsx</code>: added a fit-guard that clamps the pivot
+inside the bezel interior and caps the arc radius so the dial/needle can&#39;t be
+clipped by the shape cutout (was happening on tall-origin shapes like
+squircle/squectangle in near-square per-shape zoo cards). No-op when the gauge
+already fits, so the wide &quot;All&quot; grid is unchanged.</li>
+</ul>
+<h3>Horizontal Bar meter zoo — row spacing</h3>
+<ul>
+<li><code>frameLayout/OcaBlock.jsx</code> now honors <code>row_spacing</code> / <code>column_spacing</code>
+(node-level or under <code>layout</code>, default 0). Set <code>row_spacing: 28</code> on the
+Horizontal bar demo block so the stacked bars stop overlapping.</li>
+</ul>
+<h3>New metering zoo elements</h3>
+<ul>
+<li>Added <code>9_Zoo/2_Metering/6_EQ/EQ.json</code> (<code>_Equalization</code>) and
+<code>9_Zoo/2_Metering/7_Dynamics/Dynamics.json</code> (<code>_AudioDynamics</code>).</li>
+</ul>
+<h3>Composite widgets — demo cherry-picks</h3>
+<ul>
+<li><strong>MDP</strong> (<code>libControl/special/MDP/MDP.jsx</code>, the active <code>window.MDP</code>): free-move
+selection glow, scroll-wheel intensity (native non-passive), 50%-crossing
+haptic detent, and the extended rotary needle now only shows while intensity
+is being adjusted.</li>
+<li><strong>CMDP</strong> (<code>libControl/special/CMDP/CMDP.jsx</code>): rewired into the demo&#39;s
+multi-channel circular display — per-channel faders from <code>config.channels[]</code>,
+group coloring/visibility from <code>group_configs[]</code>, segment hit-testing,
+perimeter labels, center hub, and <code>onChange</code> publishing the updated channels.</li>
+<li><strong>LTP</strong> (<code>libControl/faders/LTPFader/LTPFader.jsx</code>): cap drawn directly on the
+canvas (linear travel + rotation as one control), ±135° indicator, double-click
+pan-latch, freestyle mode, wheel fine-tune.</li>
+<li>Bumped <code>?v=</code> cache-bust for CMDP/MDP/LTPFader in <code>index.html</code>.</li>
+</ul>
+<h3>CMDP grouping/editing element (new)</h3>
+<ul>
+<li><strong>Added</strong> <code>libControl/special/CMDP/CMDPEditor.jsx</code> (<code>window.CMDPEditor</code>, type
+<code>_CMDPEditor</code>) — a DOM panel to edit the CMDP&#39;s groups (colour, rename,
+visibility, solo, mute, add/remove) and channels (rename, group reassignment,
+level/depth/angle, visibility, mute, add/remove). Publishes the full
+<code>{ channels, group_configs }</code> state.</li>
+<li><strong>Sync:</strong> <code>FieldComponent</code> now honors an explicit <code>topic</code> / <code>shared_topic</code>
+override so sibling widgets can share one MQTT state key. CMDP now reads
+<code>value.group_configs</code>, publishes <code>group_configs</code> alongside <code>channels</code>, rebuilds
+on external value changes (guarded against mid-drag), and seeds the shared
+topic on mount. The CMDP zoo places the editor beside the CMDP on the shared
+topic <code>audio/cmdp/1</code> (2-column layout), so edits live-update the display.</li>
+</ul>
+<h3>Meter ballistics — decay to floor</h3>
+<ul>
+<li><code>NeedleMeter</code> and <code>MeterBarGraph</code> now use <strong>peak-hold-release</strong> ballistics: a
+new sample latches a peak the needle/bar attacks up to, then it falls back to
+the floor (<code>min</code>) at the designated <code>release_ms</code> rate instead of holding the
+value — pairs with the middle-click test (jump, then decay to rest).</li>
+</ul>
+<h3>Crafty Knobs — Pan and Spread Variants</h3>
+<ul>
+<li><code>Crafty.jsx</code>: Added new &quot;pan&quot; and &quot;spread&quot; variants for both <code>spoked</code> and <code>led_ring</code> styles.<ul>
+<li><code>spoked_pan</code> / <code>led_ring_pan</code>: Visually indicates panning relative to center (0° / 12 o&#39;clock).</li>
+<li><code>spoked_spread</code> / <code>led_ring_spread</code>: Visually indicates bidirectional spread outward from center.</li>
+</ul>
+</li>
+<li><code>Crafty.json</code>: Added the four new Crafty Knob variants to the Zoo and updated layout to 5 columns.</li>
+</ul>
+<h2>Removed: Edit Detector</h2>
+<ul>
+<li>The Edit Detector metering component was <strong>removed</strong> (files, the
+<code>_EditDetector</code> dispatch branch, and its <code>index.html</code> script tag) at the
+user&#39;s request. The section below is retained for history only.</li>
+</ul>
+<h2>New metering component: Edit Detector (LCARS / Okudagram)  — REMOVED</h2>
+<ul>
+<li><strong>Added</strong> <code>FrontEnd/libControl/metering/EditDetector/EditDetector.jsx</code> — a new
+video &quot;edit&quot; meter. It averages the <strong>luminance</strong> of the selected input each
+frame (Rec.709 luma from a 160×90 sampling canvas) and flags a large
+frame-to-frame jump as an <strong>edit</strong> (a cut / scene change), appending each one
+to a time-stamped <strong>Edit Log</strong> (<code>HH:MM:SS.mmm</code>, direction, Δ%, luma from→to).</li>
+<li><strong>Input source</strong> and <strong>view presets</strong> are two visually separated LCARS button
+groups (per request):<ul>
+<li><strong>SOURCE</strong> — <code>TEST PATTERN</code> (standard SMPTE 75% colour bars, drawn on a
+canvas), <code>CAPTURE TAB</code> (<code>getDisplayMedia</code>, real pixels + audio), <code>LOAD FILE</code>
+(local video), URL field + <code>LOAD URL</code> (CORS <code>.mp4/.webm</code>). Whichever is
+selected is the analyzed input.</li>
+<li><strong>PRESETS</strong> — <code>DEFAULT / AUDIO / ALL VIDEO / COLOUR / LUMA</code> layouts, plus a
+separate <strong>SENS</strong> group (<code>SUBTLE / NORMAL / HARD</code>) for the detector&#39;s own
+sensitivity threshold. <code>LAYOUT</code> button top-right resets to DEFAULT.</li>
+</ul>
+</li>
+<li><strong>Meter panels</strong> (preview, luminance, colour R/G/B, audio RMS, edit log): each
+has a <code>⤢</code> expand button; <strong>double-clicking a panel restores the regular
+multi-panel view</strong>.</li>
+<li>Styled in the LCARS/Okudagram aesthetic (black field, rounded pill buttons,
+coloured group elbows, condensed uppercase type).</li>
+</ul>
+<h3>Wiring</h3>
+<ul>
+<li><strong>Added</strong> dispatch branch for <code>type: &quot;_EditDetector&quot;</code> in
+<code>FrontEnd/frameLayout/FieldComponent.jsx</code> → <code>window.EditDetector</code>.</li>
+<li><strong>Added</strong> script tag in <code>FrontEnd/index.html</code> (loads after AudioAnalyzerDemo).</li>
+<li><strong>Added</strong> <code>FrontEnd/Gui_Frames/Window_2/right_50/top_100/9_Zoo/2_Metering/6_Edit_Detector/Edit_Detector.json</code>
+so it appears in the Metering zoo.</li>
+</ul>
+<h3>Verified</h3>
+<ul>
+<li>Both <code>EditDetector.jsx</code> and the edited <code>FieldComponent.jsx</code> transpile cleanly
+with <code>@babel/standalone</code> (<code>presets: [&#39;react&#39;]</code>) — the same in-browser pipeline
+index.html uses. Not yet exercised live in the running orchestrator.</li>
+</ul>
+<h3>Follow-ups noted (not yet done)</h3>
+<ul>
+<li>The <code>INPUT UNDER TEST</code> / <code>CH 1–9</code> channel strip from the mock is intentionally
+omitted for now (per request).</li>
+<li>Cross-origin URLs without CORS headers taint the canvas; the meter surfaces
+&quot;source is CORS-tainted — pixels unreadable&quot; and stops sampling that source.</li>
+</ul>
+
+  
+<hr>
+
   <h1>Changelog — 2026-07-06</h1>
 <h2>EQ cut filters — wink switches, matched selector dials, grey identity</h2>
 <ul>
@@ -358,9 +488,199 @@ stack; note that true width-based hide/show would need a JS width measurement,
 not the CSS grid.)</li>
 </ul>
 
-  <div class="timestamp">
-    Manual generated / updated: <strong>8/3/2026, 7:57:23 PM</strong><br>
-    Source file: <code>Deployment/Changelog/2026-07-06.md</code>
-  </div>
+  
+<hr>
+
+  <h1>2026-07-09</h1>
+<h2>CI/CD — push-to-deploy pipeline (replaces manual deploy + local secrets)</h2>
+<p>Added GitHub Actions push-to-deploy to replace running
+<code>deploy_FTP_to_like_dot_audio.py</code> by hand with a local <code>.env</code>.</p>
+<ul>
+<li><strong>New workflows</strong> (branch = environment):<ul>
+<li><code>.github/workflows/deploy-sandbox.yml</code> — push/PR on <code>sandbox</code>,<code>develop</code> → <code>sandbox</code> env</li>
+<li><code>.github/workflows/deploy-production.yml</code> — push/PR on <code>main</code> → <code>production</code> env</li>
+<li>Push deploys; PR only validates (compiles the script), never uploads.</li>
+</ul>
+</li>
+<li><strong><code>FrontEnd/deploy_FTP_to_like_dot_audio.py</code></strong> made CI-capable, backward
+compatible for local runs:<ul>
+<li>Credentials from OS env first (GitHub Environment secrets), <code>.env</code> fallback.</li>
+<li>Commit-range incremental mode via <code>DEPLOY_DIFF_BASE</code>/<code>DEPLOY_DIFF_HEAD</code>
+(<code>git diff --name-only base..head</code>), needs <code>fetch-depth: 0</code>. Null/first-push
+ref or <code>DEPLOY_FULL_SYNC=1</code> → full mtime/size sync.</li>
+<li>Explicit <strong>FTPS</strong> (<code>FTP_TLS</code> + <code>prot_p()</code>) with plain-FTP fallback
+(<code>DEPLOY_FTP_PLAIN=1</code> / <code>DEPLOY_FTP_REQUIRE_TLS=1</code>).</li>
+<li>Always re-uploads <code>api/tree.json</code>, <code>api/grabbag</code>, <code>index.html</code>; uploads
+<strong>index.html last</strong> for near-atomic cutover.</li>
+<li>Best-effort <strong>MQTT build stamp</strong> (commit + timestamp + env) after upload.</li>
+</ul>
+</li>
+<li>No Node/npm in CI — the site is CDN React/Babel, no bundler.</li>
+<li><code>FrontEnd/requirements-deploy.txt</code> (<code>paho-mqtt</code>) and
+<code>FrontEnd/Documentation/Deploy/CICD.md</code> (secrets + promotion flow) added.</li>
+</ul>
+<p><strong>Manual steps remaining (owner):</strong> create <code>sandbox</code>/<code>production</code> GitHub
+Environments with FTP/MQTT secrets; create the <code>sandbox</code> branch; confirm the
+host accepts explicit FTPS.</p>
+
+  
+<hr>
+
+  <h1>2026-07-10</h1>
+<h2>Pattern Sequencer — 16 tracks, patterns library, MQTT-backed state</h2>
+<p><code>FrontEnd/libControl/special/Sequencer/Sequencer.jsx</code></p>
+<ul>
+<li><strong>16 tracks</strong> (was 4). Track count is now data-driven from a single <code>TRACKS</code>
+list — each entry has <code>{ name, freq, type }</code> (Kick, Snare, Hi-Hat, Perc, Clap,
+Rim, Tom Lo/Mid/Hi, Cymbal, Ride, Cowbell, Conga, Clave, Shaker, FX). The pitch
+lookup, the render loop, and the pattern-state length all derive from it, plus a
+<code>STEP_COUNT</code> constant for the 16 steps. Changing the count now means editing one
+list.</li>
+<li><strong>Shrunk the grid</strong> so 16 rows fit: step cells 24×32→18×20 px, row gap 8→3 px,
+tighter step gap/padding, smaller container padding and header.</li>
+<li><strong>Patterns Library</strong>: Save (names the current grid + tempo), one-click load, and
+per-entry delete, rendered below the grid. Save overwrites an entry of the same
+name.</li>
+<li><strong>MQTT-backed</strong>: both the live sequence and the library now push to and read from
+MQTT via <code>useMqttState</code> on retained topics:<ul>
+<li><code>OpenAir/Gui/Sequencer/&lt;label&gt;/pattern</code> — <code>{ grid, bpm }</code></li>
+<li><code>OpenAir/Gui/Sequencer/&lt;label&gt;/library</code> — <code>{ items: [...] }</code>
+Retained payloads mean state survives reloads and syncs to any other client
+viewing the same sequencer. localStorage still seeds the library so it loads with
+the broker offline. No <code>nodeJson</code> is passed, so an empty first mount never
+clobbers a retained pattern.</li>
+</ul>
+</li>
+</ul>
+<h2>Drum machine: shared kit across Sampler ⟷ Sequencer ⟷ Wave editor</h2>
+<p>Unified drum-sound layer so the Sampler pads, Sequencer tracks, and Wave editor
+share one 16-voice kit and one sample store.</p>
+<ul>
+<li><strong>New <code>libControl/special/DrumKit.js</code></strong> — <code>OA_DRUM_KIT</code> (16 named voices), a
+shared <code>AudioContext</code> (<code>oaAudioCtx</code>), the sample store
+<code>OA_DRUM_SAMPLES[idx] = { buffer, pitch, loop, fade, name }</code>, and helpers
+<code>oaSetDrumSample</code> / <code>oaUpdateDrumSample</code> / <code>oaPlayDrumSample</code> / <code>oaPlayDrumVoice</code>
+/ <code>oaTriggerDrum</code> (sample-or-synth, honours pitch/loop/fade; auto-loop pads
+toggle via <code>OA_DRUM_LOOPS</code>). The Sequencer&#39;s <code>TRACKS</code> now come from this kit.</li>
+<li><strong>Sampler</strong>: pad names from the kit; velocity→volume; <strong>ALT+click</strong> loads a
+sample; pads 120px; <strong>transient glow</strong> scaled to velocity that fades over the
+sound&#39;s length (<code>@keyframes oaPadGlow</code>).</li>
+<li><strong>Sequencer</strong>: plays a pad&#39;s loaded sample (pitch/fade) or synth; selectable
+length <strong>4/8/16/32/64</strong>; <strong>per-track MUTE</strong> (keeps the pattern).</li>
+<li><strong>Wave editor</strong>: <strong>zoom</strong> (wheel/±/Sel/Fit); <strong>cursor</strong> + <strong>I/O/F</strong> keys
+(in/out/fade) with a playhead; <strong>Assign to Pad</strong> slices the selection (with
+<strong>Auto-loop</strong> and <strong>Fade</strong>); <strong>Captured Samples</strong> list; <strong>Pitch wheel</strong>
+(−12..+12 st) on the selected pad.</li>
+</ul>
+<p><code>index.html</code>: added <code>DrumKit.js</code>; bumped AudioEditor v2, Sequencer v4, Sampler v5.</p>
+
+  
+<hr>
+
+  <h1>2026-07-11</h1>
+<h2>Sample Analyzer — Flatten/Rename tab: sorting, prefixes, dedup, tie-breaks</h2>
+<p><code>Sample Analysis/rename_tab.py</code></p>
+<ul>
+<li><strong>Defaults</strong>: source dir <code>~/Documents/Music Samples</code>, destination
+<code>~/Documents/Renamed Samples</code> (created on startup so the preview routes into it),
+and <strong>COPY</strong> (keep originals) is now on by default.</li>
+<li><strong>Second sort level</strong>: &quot;Sort into subfolders by <em>Group</em> then <em>Subgroup</em>&quot;. A
+redundant second level is stripped — <code>Loop/&quot;Loop Guitar&quot;</code> → <code>Loop/Guitar</code>,
+<code>Loop/Loop</code> → <code>Loop</code> (the group name is removed from the subgroup folder).</li>
+<li><strong>Append <code>###BPM</code></strong> before the extension for any file with a real tempo
+(<code>bpm &gt; 10</code>), not just loops.</li>
+<li><strong>Prepend</strong> <code>group</code>, <code>group - subgroup</code>, or <code>group - subgroup - timbre</code> to file
+names; the group is stripped out of the subgroup so <code>Snare - Snare Medium</code>
+collapses to <code>Snare - Medium</code>.</li>
+<li><strong>Remove repeated words</strong>: case-insensitive prefix/stem dedup splitting on
+<code>-</code>, <code>_</code>, space and <code>-</code>, so <code>Snare - Snare Medium - … - Snaredrums - SNAREDRUM_054</code>
+→ <code>Snare - Medium - … - 054</code> while keeping trailing disc numbers
+(<code>BASSDRUM - Bassdrum-01</code> keeps the <code>01</code>).</li>
+<li><strong>Sortable columns</strong> (click any header) via a numeric-aware <code>_tv_sort</code>.</li>
+<li><strong>Duplicate names are auto-numbered, not errored</strong>: two files that reduce to the
+same name get <code>-2</code>, <code>-3</code>, … so each target stays unique. The old red &quot;name clash&quot;
+is now a neutral <strong>&quot;Note&quot; → auto-numbered</strong> (muted blue), counted as a normal
+rename.</li>
+</ul>
+<h2>Sample Analyzer — split the monolithic GUI + Rust core into modules</h2>
+<ul>
+<li><strong>Python GUI</strong> (<code>sample_analyzer_app.py</code>, was one 1300-line class) → one mixin per
+tab: <code>graph_tab.py</code> (3D cloud), <code>groups_tab.py</code>, <code>examiner_tab.py</code>,
+<code>guess_tab.py</code>, <code>rename_tab.py</code>, plus <code>config.py</code> for shared constants.
+<code>AnalyzerApp</code> composes the mixins; the shell keeps only state, the analysis
+subprocess, and playback.</li>
+<li><strong>Rust core</strong> (<code>sample_analyzer_rs/src/main.rs</code>, was 940 lines) → 23 one-purpose
+modules: <code>peak</code>, <code>normalize</code>, <code>categorize</code> (+tests), <code>wav</code>, <code>acid</code>, <code>amplitude</code>,
+<code>pitch</code>, <code>spectrum</code>, <code>transients</code>, <code>sustain</code>, <code>timbre</code>, <code>label</code>, <code>analyze</code>
+(thin orchestrator), <code>feature_vec</code>/<code>sqdist</code>/<code>kmeans</code>/<code>cluster</code>, and
+<code>args</code>/<code>discover</code>/<code>sidecar</code>/<code>stream</code>/<code>emit</code>/<code>run</code>. The 247-line <code>analyze</code> and
+130-line <code>main</code> are now linear sequences of named single-purpose calls.</li>
+</ul>
+<h2>Sample Analyzer — classifier taxonomy overhaul</h2>
+<p><code>sample_analyzer_rs/src/categorize.rs</code>, <code>label.rs</code></p>
+<ul>
+<li><strong>Full-path analysis</strong>: classification now reads folder names + filename, so
+<code>Congas/01.wav</code> → Perc/Conga and <code>Drums/mystery.wav</code> → Unclassified/Drum from the
+folder alone.</li>
+<li><strong>Perc</strong> is a parent group with curated subgroups: Block, Bongo, Conga, Shaker,
+Clave, Cowbell (the last four moved out of being their own top-level groups).</li>
+<li><strong>Keyboards</strong> (new group) → Synth, Piano, Electric Piano, Organ, Clav, Keys.</li>
+<li><strong>DJ</strong> (new group) → scratch / turntable / <code>dj</code>.</li>
+<li><strong>Loops/Patterns</strong> (renamed from <code>Loop</code>) → Beat / Groove / Loop subgroups.</li>
+<li><strong>Unclassified</strong> (renamed from <code>Other</code>); generic &quot;drum&quot; → subgroup <strong>Drum</strong>.</li>
+<li><strong>808</strong> is a drum machine, not bass → <code>808 hh</code> = HiHat; <strong>kik</strong> → Kick.</li>
+</ul>
+<h2>Sample Analyzer — hierarchical 3D-cloud axis</h2>
+<p><code>graph_tab.py</code></p>
+<ul>
+<li>The <strong>Name group</strong> depth axis is now hierarchical: each group with its <em>curated</em>
+subgroups indented one level deeper (<code>↳ Conga</code>, <code>↳ Synth</code>). Auto length-tier
+subgroups like <code>Kick Short</code> stay at the group level.</li>
+</ul>
+<h2>Web — Sound Browse modal: wider, 4-up grid</h2>
+<p><code>FrontEnd/libControl/special/SoundBrowse/SoundBrowse.jsx</code></p>
+<ul>
+<li>Modal width <code>760px</code> → <strong><code>66vw</code></strong> (≈⅔ of the viewport, <code>minWidth 760px</code>,
+<code>maxWidth 95vw</code>).</li>
+<li>Sample grid <strong>3 → 4 columns</strong> (<code>COLS</code>), which also drives arrow-key navigation.</li>
+</ul>
+<h2>Web — Sequencer: pattern doubling, record click, Song mode, shared controls</h2>
+<p><code>FrontEnd/libControl/special/SamplerSequencer/SamplerSequencer.jsx</code>,
+<code>libControl/buttons/Button/Button.jsx</code> (v bumps in <code>index.html</code>)</p>
+<ul>
+<li><strong>+N doubling buttons</strong>: a second row under the step-length buttons — <code>+4</code>
+under <strong>8</strong>, <code>+8</code> under <strong>16</strong>, <code>+16</code> under <strong>32</strong>, <code>+32</code> under <strong>64</strong>. Each
+extends the pattern to that length by copying the first half onto the second
+half (tone track included), so a beat can be grown very quickly.</li>
+<li><strong>Record click track</strong>: while <strong>recording</strong>, a metronome click sounds on every
+beat (accented on the pattern downbeat), with a red <strong>CLICK</strong> volume knob next
+to the Rec button (0 silences it).</li>
+<li><strong>Song mode</strong> (below the Patterns Library): a song is an ordered list of saved
+patterns, chained end-to-end and looped by <strong>► Play Song</strong>. Append with the
+green <strong>＋</strong> on a library chip; click a song chip to remove it; deleted
+patterns show struck-through and are skipped.</li>
+<li><strong>Library chips lost the ✕ delete button</strong> — right-click a pattern name to
+delete (with confirm); the freed spot is the ＋ add-to-song button.</li>
+<li><strong>Controls now inherit the shared components</strong>: every toolbar/section button
+renders through <code>window.OcaButton</code> (which gained optional <code>title</code>/<code>disabled</code>/
+<code>style</code>-merge props), and every knob (BPM, CLICK, track VOL/PAN) through
+<code>window.Knob</code> via thin <code>SeqButton</code>/<code>SeqKnob</code> wrappers — so style changes to
+the shared Button/Knob propagate here. The bespoke <code>BpmKnob</code>/<code>MiniKnob</code> are
+gone.</li>
+</ul>
+<h2>Web — Pad Browser: taller window + per-pad Browse button</h2>
+<p><code>FrontEnd/libControl/special/PadBrowse/PadBrowse.jsx</code></p>
+<ul>
+<li>The window is now a fixed <strong>88vh tall</strong>; the 4×4 pad grid stretches to fill
+it, so each cell&#39;s waveform gets the extra height.</li>
+<li>Each pad cell has a blue <strong>Browse</strong> button that opens the full Sound Browser
+(<code>window.SoundBrowse</code>) targeted at that pad — pick any file (search included)
+and it loads onto the pad, auditions, and publishes to the kit topic. The Pad
+Browser&#39;s own keyboard shortcuts pause while the Sound Browser is open.</li>
+</ul>
+
+  
+<hr>
+
 </body>
 </html>

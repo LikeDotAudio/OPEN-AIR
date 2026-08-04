@@ -95,7 +95,7 @@ generation of the platform exists.</p>
 boundary. It is TypeScript-first (zod), exports JSON Schema, and generates
 the Rust types — so the browser, the Rust agents, and the tooling cannot
 disagree about the wire.</p>
-<p><strong>Full documentation: <a href="contracts/README.md"><code>contracts/README.md</code></a></strong></p>
+<p><strong>Full documentation: <a href="../contracts/contracts_readme_md.html"><code>contracts/README.md</code></a></strong></p>
 <table>
 <thead>
 <tr>
@@ -148,7 +148,7 @@ pnpm gen &amp;&amp; pnpm gen:check       # regenerate schemas + Rust; verify fre
 <p>Protocol agents are Rust crates under <code>BackEnd/ComProtocols/</code>, spawned by the
 orchestrator. Each one announces itself, publishes what it finds, and says
 honestly whether it is real.</p>
-<p><strong>Full documentation: <a href="BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a></strong></p>
+<p><strong>Full documentation: <a href="../back_end_protocols/backend_comprotocols_readme_md.html"><code>BackEnd/ComProtocols/README.md</code></a></strong></p>
 <ul>
 <li><strong>Liveness is data on the bus.</strong> Every agent publishes a retained
 <code>AgentHeartbeat</code> to <code>OpenAir/System/Agents/{agent}</code> and registers an MQTT
@@ -234,7 +234,7 @@ python3 docker/launch.py
 <p>That preflights Docker, brings up the broker and the orchestrator, installs the
 Python VISA dependencies inside the image, waits for the broker to be healthy
 before starting the agents, and opens a browser when it is ready. Everything it
-uses lives in <a href="docker/README.md"><code>docker/</code></a>; plain
+uses lives in <a href="../docker___deployment/docker_readme_md.html"><code>docker/</code></a>; plain
 <code>docker compose -f docker/docker-compose.yml up</code> works too. <code>FrontEnd/Gui_Frames/</code> is bind-mounted, so panels you edit
 in the WYSIWYG editor land on your disk and show up in <code>git diff</code>.</p>
 <blockquote>
@@ -324,9 +324,9 @@ freshness, and the validate ratchet.</p>
 <td>⏳ Planned</td>
 </tr>
 </tbody></table>
-<p>Detailed history lives in <a href="Documents/CHANGELOG.md"><code>Documents/CHANGELOG.md</code></a>; every file moved,
+<p>Detailed history lives in <a href="../Changelog/development_changelog.html"><code>Documents/CHANGELOG.md</code></a>; every file moved,
 retired, or deleted during the migration is recorded in
-<a href="Documents/Strategies/Migration_Ledger.md"><code>Documents/Strategies/Migration_Ledger.md</code></a>.</p>
+<a href="../overview___general_docs/documentation_strategies_migration_ledger_md.html"><code>Documents/Strategies/Migration_Ledger.md</code></a>.</p>
 <h2>📚 Documentation</h2>
 <table>
 <thead>
@@ -336,23 +336,23 @@ retired, or deleted during the migration is recorded in
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="contracts/README.md"><code>contracts/README.md</code></a></td>
+<td><a href="../contracts/contracts_readme_md.html"><code>contracts/README.md</code></a></td>
 <td>The contract layer: schemas, topic tree, codegen, validate/ratchet, and the schema design law</td>
 </tr>
 <tr>
-<td><a href="BackEnd/ComProtocols/README.md"><code>BackEnd/ComProtocols/README.md</code></a></td>
+<td><a href="../back_end_protocols/backend_comprotocols_readme_md.html"><code>BackEnd/ComProtocols/README.md</code></a></td>
 <td>Protocol agents: what each crate does, discovery topics, heartbeats, adding a protocol</td>
 </tr>
 <tr>
-<td><a href="ui/README.md"><code>ui/README.md</code></a></td>
+<td><a href="../front_end___ui_library/ui_readme_md.html"><code>ui/README.md</code></a></td>
 <td>The typed frontend package and the migration mechanics</td>
 </tr>
 <tr>
-<td><a href="Documents/Audits/"><code>Documents/Audits/</code></a></td>
+<td><a href="../overview___general_docs/documentation_executive_review_business_value_2026_07_17_executive_review_business_value_md.html"><code>Documents/Audits/</code></a></td>
 <td>The 2026-07-17 design audit — historical analysis; resolved findings now live in the READMEs above</td>
 </tr>
 <tr>
-<td><a href="Documents/Strategies/"><code>Documents/Strategies/</code></a></td>
+<td><a href="../roadmap/documentation_strategies_readme_md.html"><code>Documents/Strategies/</code></a></td>
 <td>The migration plans — historical; the shipped parts are documented as features above</td>
 </tr>
 </tbody></table>

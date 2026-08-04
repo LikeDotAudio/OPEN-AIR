@@ -1,12 +1,12 @@
-name: Deploy · Sandbox
+name: Deploy · Non-Prod
 
-# Branch = environment. Pushing sandbox/develop deploys to the sandbox host.
+# Branch = environment. Pushing non-prod/develop deploys to the non-prod host.
 # PRs targeting those branches validate the deploy but do NOT upload.
 on:
   push:
-    branches: [sandbox, develop]
+    branches: [non-prod, develop]
   pull_request:
-    branches: [sandbox, develop]
+    branches: [non-prod, develop]
   workflow_dispatch:
     inputs:
       full_sync:
@@ -16,7 +16,7 @@ on:
 
 # One deploy at a time per environment.
 concurrency:
-  group: deploy-sandbox
+  group: deploy-non-prod
   cancel-in-progress: false
 
 jobs:
@@ -82,7 +82,7 @@ jobs:
     # See deploy-production.yml: skipped-dependency handling for the PR path.
     if: always() && needs.verify.result != 'failure' && needs.verify.result != 'cancelled'
     runs-on: ubuntu-latest
-    environment: sandbox            # pulls sandbox-scoped secrets
+    environment: non-prod           # pulls non-prod-scoped secrets
     steps:
       - name: Checkout (full history for commit-range diff)
         uses: actions/checkout@v4

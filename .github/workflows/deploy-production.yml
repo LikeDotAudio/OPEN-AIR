@@ -4,13 +4,13 @@ name: Deploy · Production
 #
 # Previously this only fired for `main`, so work pushed on any other branch
 # silently never reached the host — the "it doesn't publish every time"
-# symptom. Now every branch deploys EXCEPT the sandbox branches, which have
+# symptom. Now every branch deploys EXCEPT the non-prod branches, which have
 # their own workflow and their own host.
 #
 # PRs still validate without uploading.
 on:
   push:
-    branches-ignore: [sandbox, develop]
+    branches-ignore: [non-prod, develop]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -192,16 +192,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Check for stale documents
+      - name: Check for stale HTML documents
         run: |
           cd Documentation/Manual
-          npm install marked
           node check_stale_docs.js
-
-      - name: Build manual
-        run: |
-          cd Documentation/Manual
-          node build_manual.js
 
       - name: Deploy Manual over FTPS
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -211,7 +205,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}manual/
-          local-dir: ./Documentation/Manual/html/
+          local-dir: ./Documentation/Manual/
           dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
           exclude: |
             **/.git*
@@ -221,4 +215,5 @@ jobs:
             **/.env.*
             **/*.log
             **/.DS_Store
+            **/*.js
 

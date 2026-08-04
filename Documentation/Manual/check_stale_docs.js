@@ -2,35 +2,33 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const MD_SOURCE_DIR = path.join(__dirname, 'markdown_source');
+const HTML_DIR = path.join(__dirname, 'html');
 const MAX_AGE_DAYS = 180;
 const MAX_AGE_MS = MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
 const now = Date.now();
 
-function findMarkdownFiles(dir, fileList = []) {
+function findHtmlFiles(dir, fileList = []) {
   if (!fs.existsSync(dir)) return fileList;
   const files = fs.readdirSync(dir);
   for (const file of files) {
     const fullPath = path.join(dir, file);
     if (fs.statSync(fullPath).isDirectory()) {
-      findMarkdownFiles(fullPath, fileList);
-    } else if (fullPath.toLowerCase().endsWith('.md')) {
+      findHtmlFiles(fullPath, fileList);
+    } else if (fullPath.toLowerCase().endsWith('.html')) {
       fileList.push(fullPath);
     }
   }
   return fileList;
 }
 
-const allMdFiles = findMarkdownFiles(MD_SOURCE_DIR);
+const allHtmlFiles = findHtmlFiles(HTML_DIR);
 let hasStale = false;
 
-console.log(`Checking for documents older than ${MAX_AGE_DAYS} days...`);
+console.log(`Checking for HTML documents older than ${MAX_AGE_DAYS} days...`);
 
-for (const file of allMdFiles) {
+for (const file of allHtmlFiles) {
   try {
     // Get last commit timestamp for the file
-    // We use --follow just in case it was moved recently, though it may not always be perfect
-    // If not in git yet, this might fail or return empty, we handle that by falling back to fs.stat
     const gitCmd = `git log -1 --format="%at" --follow -- "${file}"`;
     let timestampStr = execSync(gitCmd, { cwd: __dirname, encoding: 'utf8' }).trim();
     
@@ -54,9 +52,9 @@ for (const file of allMdFiles) {
 }
 
 if (hasStale) {
-  console.error(`\\nERROR: Stale documentation detected. Please review and update (or touch) the stale files.`);
+  console.error(`\\nERROR: Stale HTML documentation detected. Please review and update (or touch) the stale files.`);
   console.error(`The manual is the repository of truth and must be kept up to date.`);
   process.exit(1);
 } else {
-  console.log('✅ No stale documents found. Manual is up to date.');
+  console.log('✅ No stale HTML documents found. Manual is up to date.');
 }

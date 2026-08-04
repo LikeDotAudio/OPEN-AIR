@@ -23,6 +23,11 @@ blockquote { border-left: 4px solid #dfe2e5; color: #6a737d; padding-left: 1em; 
 </head>
 <body>
   <h1>Changelog</h1>
+<h2>2026-08-03 - CI/CD Semantic Release Deployment Pipeline</h2>
+<ul>
+<li><strong>Semantic Release integration:</strong> Added a semantic release step to the GitHub Actions deployment pipeline (<code>deploy.yml</code>). The pipeline is now configured via a newly created <code>.releaserc.yml</code> file to use <code>commit-analyzer</code>, <code>release-notes-generator</code>, and <code>github</code> plugins, properly skipping NPM publish steps since this project does not maintain a root <code>package.json</code>.</li>
+<li><strong>Workflow permissions fixed:</strong> Updated <code>deploy.yml</code> with the correct permissions (<code>contents: write</code>, <code>issues: write</code>, <code>pull-requests: write</code>) allowing the release action to correctly push tags, document issues, and create releases on the repository without throwing 403 Forbidden errors.</li>
+</ul>
 <h2>2026-07-27 - A Command Library Instead Of A Command Table</h2>
 <p>515 commands became 3656, read out of the instrument manuals we actually own.
 Every query now declares what it answers with, every setter what it accepts, and

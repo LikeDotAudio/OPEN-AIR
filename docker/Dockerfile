@@ -29,6 +29,7 @@ COPY rust-toolchain.toml ./
 COPY contracts/rust        ./contracts/rust
 COPY BackEnd/Core          ./BackEnd/Core
 COPY BackEnd/ComProtocols  ./BackEnd/ComProtocols
+COPY BackEnd/openair-yak   ./BackEnd/openair-yak
 
 RUN cargo build --release \
       --manifest-path BackEnd/Core/Cargo.toml \

@@ -23,12 +23,10 @@
   // `allow_anonymous true` and neither defines a password file. If you enable
   // auth (see broker/acl.example), set credentials in the modal.
   const LOCAL_DEFAULTS = {
-    host: (typeof window !== 'undefined' && window.location.hostname) || 'localhost',
-    port: 9001,
-    // The broker speaks plain ws. A page served over https cannot open ws://,
-    // so mirror the page's scheme and let the user flip it if they terminate TLS.
-    encrypted: (typeof window !== 'undefined' && window.location.protocol === 'https:'),
-    path: '',
+    host: 'test.mosquitto.org',
+    port: 8081,
+    encrypted: true,
+    path: '/ws',
     username: '', password: '',
   };
   const DEFAULTS = LOCAL_DEFAULTS;

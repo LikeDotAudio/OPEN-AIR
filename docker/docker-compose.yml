@@ -76,7 +76,7 @@ services:
       - NET_BIND_SERVICE
     environment:
       - OPENAIR_BIND=0.0.0.0     # inside the container only — see Dockerfile
-      - MQTT_HOST=broker
+      - MQTT_HOST=test.mosquitto.org
 
 volumes:
   broker-data:

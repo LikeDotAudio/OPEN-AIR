@@ -547,6 +547,9 @@ pub fn rows_for(category: &str, blocks: &Blocks, scanning: bool) -> (Vec<String>
         // be gone and we simply have not re-probed it yet. Showing last scan's
         // green during a live scan asserts something we do not currently know.
         let state = if scanning { "unknown" } else { row_state(&row, now) };
+        if state == "offline" {
+            row.insert("status".to_string(), "offline".to_string());
+        }
         row.insert("_row_state".to_string(), state.to_string());
         rows.push(row);
     }
@@ -1657,7 +1660,7 @@ mod tests {
               "raw_idn": "Keysight Technologies,N9340B,CN03480580,A.02.07",
               "resource": "TCPIP::44.44.44.66::INSTR",
               "serial": "CN03480580",
-              "status": "identified",
+              "status": "offline",
               "reachable": "1",
               "last_seen": "2026-07-27 20:47:47"
             }],

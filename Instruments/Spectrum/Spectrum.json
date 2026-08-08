@@ -1,4 +1,375 @@
 {
+  "DATASET": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Waveforms": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Every captured trace, plotted over the span it was measured on.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 1,
+          "width": "100%"
+        },
+        "fields": {
+          "Trace_Graph": {
+            "type": "DynamicGraph",
+            "layout": {
+              "height": 420,
+              "stretch": "width",
+              "width": "100%"
+            },
+            "yak_listen": "trace_data_all/samples_1",
+            "units": "dBm",
+            "x_axis": {
+              "start_listen": "trace_data_all/start",
+              "stop_listen": "trace_data_all/stop",
+              "units": "MHz"
+            }
+          }
+        }
+      },
+      "Capture": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Pull traces off the instrument. Every capture brings its span with it.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%",
+          "max_cols": 3
+        },
+        "fields": {
+          "Get_Trace_1": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET TRACE 1"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data",
+              "input_name": "",
+              "converter": "",
+              "params": {
+                "trace_number": "1"
+              }
+            }
+          },
+          "Get_Trace_2": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET TRACE 2"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data",
+              "input_name": "",
+              "converter": "",
+              "params": {
+                "trace_number": "2"
+              }
+            }
+          },
+          "Get_Trace_3": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET TRACE 3"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data",
+              "input_name": "",
+              "converter": "",
+              "params": {
+                "trace_number": "3"
+              }
+            }
+          },
+          "Get_Trace_4": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET TRACE 4"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data",
+              "input_name": "",
+              "converter": "",
+              "params": {
+                "trace_number": "4"
+              }
+            }
+          },
+          "Get_All_Traces": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET ALL TRACES"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data_all",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          },
+          "Get_Traces_234": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET TRACES 2,3,4"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_data_234",
+              "input_name": "",
+              "converter": ""
+            }
+          }
+        }
+      },
+      "Span": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "The span the captured traces were measured over.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Capture_Start": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Start"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "Start"
+                }
+              }
+            },
+            "units": "MHz",
+            "yak_readout": true,
+            "yak_listen": "trace_data_all/start",
+            "yak_readout_unit": "Hz",
+            "layout": {
+              "height": 26
+            }
+          },
+          "Capture_Stop": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Stop"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "Stop"
+                }
+              }
+            },
+            "units": "MHz",
+            "yak_readout": true,
+            "yak_listen": "trace_data_all/stop",
+            "yak_readout_unit": "Hz",
+            "layout": {
+              "height": 26
+            }
+          }
+        }
+      }
+    }
+  },
   "amplitude": {
     "type": "OcaBin",
     "id": "50.100.0.3.3",

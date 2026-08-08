@@ -2825,6 +2825,115 @@
         "type": "NR1"
       },
       "notes": "The trace index sits in the MIDDLE: ':SENSe:AVERage:TRACe<n>:COUNt'. Eight spellings with it elsewhere — :TRACe:AVERage:COUNt, :SENSe:AVERage:COUNt, :AVERage:COUNt, :TRACe1:AVERage:COUNt and friends — all return -171 'Invalid expression', which is what made this look unsupported. Verified on CN03480580 2026-08-07: set 25 -> reads +25, set 100 -> reads +100."
+    },
+    "trace_data": {
+      "scpi": ":TRACe<trace_number>:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC<trace_number>:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "One trace's samples, with the span they were measured over.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_all": {
+      "scpi": ":TRACe1:DATA?;:TRACe2:DATA?;:TRACe3:DATA?;:TRACe4:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC1:DATA?;:TRAC2:DATA?;:TRAC3:DATA?;:TRAC4:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "All four traces plus the span, in one round trip.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 6,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_1",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "samples_2",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "samples_3",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "samples_4",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_234": {
+      "scpi": ":TRACe2:DATA?;:TRACe3:DATA?;:TRACe4:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC2:DATA?;:TRAC3:DATA?;:TRAC4:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Traces 2, 3 and 4 plus the span — the held traces, without the live one.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_2",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "samples_3",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "samples_4",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
     }
   }
 }

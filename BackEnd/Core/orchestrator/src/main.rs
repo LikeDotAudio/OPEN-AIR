@@ -1127,6 +1127,13 @@ fn spawn_visa_write_daemon(
     println!("🚀 [VISA AGENT] Starting MQTT Daemon for live SCPI commands + rescan/clear triggers...");
     let mut mqttoptions_sub = rumqttc::MqttOptions::new("open-air-visa-daemon", &daemon_host, daemon_port);
     mqttoptions_sub.set_keep_alive(std::time::Duration::from_secs(30));
+    // An instrument reply can be far larger than a control value. One N9340B
+    // trace is 461 samples — roughly 8 KB of text — and asking for all four
+    // plus the span returns about 31 KB. rumqttc's default packet limit is
+    // 10 KB, so those publishes were dropped on send: the query ran, the
+    // instrument answered, and nothing ever appeared on the bus. Matches the
+    // 256 MB the YAK agent already allows on its side.
+    mqttoptions_sub.set_max_packet_size(256 * 1024 * 1024, 256 * 1024 * 1024);
     let (mqtt_client_sub, mut mqtt_connection_sub) = rumqttc::Client::new(mqttoptions_sub, 10);
 
     let _ = mqtt_client_sub.subscribe("OpenAir/System/Protocols/visa/Device/+/+/+/Write", rumqttc::QoS::AtLeastOnce);

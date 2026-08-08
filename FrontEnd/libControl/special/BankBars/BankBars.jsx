@@ -119,9 +119,21 @@ const BankBars = ({ config }) => {
                 stale: !Number.isFinite(value),
             });
         }
-        out.sort((a, b) => a.key.localeCompare(b.key));
+        // Ordered the way the rack is numbered, which means comparing the DEVICE
+        // NUMBER as a number: a plain string sort puts Dev10 between Dev1 and
+        // Dev2, so the eighth module of a mainframe lands in the middle of the
+        // list and the three graphs stop agreeing about which row is which.
+        const rank = (k) => {
+            const m = /(\d+)\s*$/.exec(k);
+            return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+        };
+        out.sort((a, b) => {
+            const am = a.key.replace(/\d+\s*$/, ''), bm = b.key.replace(/\d+\s*$/, '');
+            return am === bm ? rank(a.key) - rank(b.key) : am.localeCompare(bm);
+        });
         return out;
-    }, [messages, matches, JSON.stringify(names)]);
+    }, [messages, matches, readingAt, partnerOf, partnerPattern, config?.unit,
+        JSON.stringify(names)]);
 
     // One scale for all of them, or the bars are eight unrelated pictures.
     const peak = rows.reduce((m, r) => (Number.isFinite(r.value) ? Math.max(m, Math.abs(r.value)) : m), 0) || 1;

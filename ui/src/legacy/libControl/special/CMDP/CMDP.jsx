@@ -1,3 +1,5 @@
+import { CMDPEditor } from './CMDPEditor.jsx'
+
 /**
  * Header: CMDP.jsx
  * Purpose: CMDP component or utility.
@@ -394,9 +396,9 @@ const CMDP = ({ config, value, onChange, size }) => {
                     fontSize: '15px', lineHeight: '28px', padding: 0, fontWeight: 'bold',
                 }}
             >{showEditor ? '✕' : '☰'}</button>
-            {showEditor && window.CMDPEditor && (
+            {showEditor && CMDPEditor && (
                 <div style={{ position: 'absolute', top: '44px', right: '8px', width: '280px', maxWidth: '80%', maxHeight: 'calc(100% - 56px)', zIndex: 15 }}>
-                    <window.CMDPEditor config={config} value={value} onChange={onChange} />
+                    <CMDPEditor config={config} value={value} onChange={onChange} />
                 </div>
             )}
         </div>
@@ -404,3 +406,5 @@ const CMDP = ({ config, value, onChange, size }) => {
 };
 
 window.CMDP = CMDP;
+
+export { CMDP }

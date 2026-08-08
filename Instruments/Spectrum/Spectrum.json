@@ -3513,7 +3513,8 @@
               "sub_path": "Markers",
               "command": "Set_All_Markers_State",
               "input_name": "state_bool",
-              "converter": "bool_to_int"
+              "converter": "bool_to_int",
+              "readback": "marker_all"
             }
           },
           "Grab_Marker_Values": {
@@ -3556,7 +3557,7 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "Markers",
-              "command": "all_marker_settings",
+              "command": "marker_all",
               "input_name": "",
               "converter": ""
             }
@@ -3618,12 +3619,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "1"
               }
             },
-            "yak_listen": "marker_states/state_1"
+            "yak_listen": "marker_all/state_1"
           },
           "X_MHz": {
             "type": "_Value",
@@ -3666,7 +3667,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "1"
               }
@@ -3675,7 +3676,7 @@
               "default_value": "111"
             },
             "default_value": "111",
-            "yak_listen": "all_marker_settings/x_1",
+            "yak_listen": "marker_all/x_1",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -3706,7 +3707,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_1",
+            "yak_listen": "marker_all/y_1",
             "units": "dBm",
             "yak_readout": true
           }
@@ -3767,12 +3768,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "2"
               }
             },
-            "yak_listen": "marker_states/state_2"
+            "yak_listen": "marker_all/state_2"
           },
           "X_MHz": {
             "type": "_Value",
@@ -3810,7 +3811,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "2"
               }
@@ -3819,7 +3820,7 @@
               "default_value": "222"
             },
             "default_value": "222",
-            "yak_listen": "all_marker_settings/x_2",
+            "yak_listen": "marker_all/x_2",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -3850,7 +3851,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_2",
+            "yak_listen": "marker_all/y_2",
             "units": "dBm",
             "yak_readout": true
           }
@@ -3911,12 +3912,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "3"
               }
             },
-            "yak_listen": "marker_states/state_3"
+            "yak_listen": "marker_all/state_3"
           },
           "X_MHz": {
             "type": "_Value",
@@ -3954,7 +3955,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "3"
               }
@@ -3963,7 +3964,7 @@
               "default_value": "333"
             },
             "default_value": "333",
-            "yak_listen": "all_marker_settings/x_3",
+            "yak_listen": "marker_all/x_3",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -3994,7 +3995,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_3",
+            "yak_listen": "marker_all/y_3",
             "units": "dBm",
             "yak_readout": true
           }
@@ -4055,12 +4056,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "4"
               }
             },
-            "yak_listen": "marker_states/state_4"
+            "yak_listen": "marker_all/state_4"
           },
           "X_MHz": {
             "type": "_Value",
@@ -4098,7 +4099,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "4"
               }
@@ -4107,7 +4108,7 @@
               "default_value": "444"
             },
             "default_value": "444",
-            "yak_listen": "all_marker_settings/x_4",
+            "yak_listen": "marker_all/x_4",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -4138,7 +4139,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_4",
+            "yak_listen": "marker_all/y_4",
             "units": "dBm",
             "yak_readout": true
           }
@@ -4199,12 +4200,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "5"
               }
             },
-            "yak_listen": "marker_states/state_5"
+            "yak_listen": "marker_all/state_5"
           },
           "X_MHz": {
             "type": "_Value",
@@ -4242,7 +4243,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "5"
               }
@@ -4251,7 +4252,7 @@
               "default_value": "555"
             },
             "default_value": "555",
-            "yak_listen": "all_marker_settings/x_5",
+            "yak_listen": "marker_all/x_5",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -4282,7 +4283,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_5",
+            "yak_listen": "marker_all/y_5",
             "units": "dBm",
             "yak_readout": true
           }
@@ -4343,12 +4344,12 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "marker_states",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "6"
               }
             },
-            "yak_listen": "marker_states/state_6"
+            "yak_listen": "marker_all/state_6"
           },
           "X_MHz": {
             "type": "_Value",
@@ -4386,7 +4387,7 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "readback": "all_marker_settings",
+              "readback": "marker_all",
               "params": {
                 "marker_number": "6"
               }
@@ -4395,7 +4396,7 @@
               "default_value": "666"
             },
             "default_value": "666",
-            "yak_listen": "all_marker_settings/x_6",
+            "yak_listen": "marker_all/x_6",
             "units": "MHz"
           },
           "Y_dBm": {
@@ -4426,7 +4427,7 @@
               }
             },
             "AES70": "OcaLevelSensor",
-            "yak_listen": "all_marker_settings/y_6",
+            "yak_listen": "marker_all/y_6",
             "units": "dBm",
             "yak_readout": true
           }

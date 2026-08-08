@@ -2719,6 +2719,103 @@
         ]
       },
       "notes": "Separate from all_marker_settings, which returns X and Y but not whether a marker is enabled. Verified on CN03480580 2026-08-07: '1;1;1;1;1;1', no error."
+    },
+    "marker_all": {
+      "scpi": ":CALCulate:MARKer1:STATe?;:CALCulate:MARKer2:STATe?;:CALCulate:MARKer3:STATe?;:CALCulate:MARKer4:STATe?;:CALCulate:MARKer5:STATe?;:CALCulate:MARKer6:STATe?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?;:CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?",
+      "scpiFast": ":CALC:MARK1:STAT?;:CALC:MARK2:STAT?;:CALC:MARK3:STAT?;:CALC:MARK4:STAT?;:CALC:MARK5:STAT?;:CALC:MARK6:STAT?;:CALC:MARK1:X?;:CALC:MARK2:X?;:CALC:MARK3:X?;:CALC:MARK4:X?;:CALC:MARK5:X?;:CALC:MARK6:X?;:CALC:MARK1:Y?;:CALC:MARK2:Y?;:CALC:MARK3:Y?;:CALC:MARK4:Y?;:CALC:MARK5:Y?;:CALC:MARK6:Y?",
+      "description": "Every marker, whole: on/off, X and Y for all six, in one round trip.",
+      "subsystem": "Markers",
+      "returns": {
+        "count": 18,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state_1",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_2",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_3",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_4",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_5",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_6",
+            "type": "BOOL"
+          },
+          {
+            "name": "x_1",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "x_2",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "x_3",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "x_4",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "x_5",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "x_6",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "y_1",
+            "type": "NR3",
+            "unit": "dBm"
+          },
+          {
+            "name": "y_2",
+            "type": "NR3",
+            "unit": "dBm"
+          },
+          {
+            "name": "y_3",
+            "type": "NR3",
+            "unit": "dBm"
+          },
+          {
+            "name": "y_4",
+            "type": "NR3",
+            "unit": "dBm"
+          },
+          {
+            "name": "y_5",
+            "type": "NR3",
+            "unit": "dBm"
+          },
+          {
+            "name": "y_6",
+            "type": "NR3",
+            "unit": "dBm"
+          }
+        ]
+      },
+      "notes": "18 statements in one chain, verified on CN03480580 2026-08-07 — 18 fields returned, no error. Replaces asking marker_states and all_marker_settings separately: status and values always arrive together, so the Active boxes can never disagree with the X and Y beside them."
     }
   }
 }

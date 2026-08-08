@@ -60,15 +60,25 @@ pub async fn dispatch_readback(
     if yak.readback.is_empty() {
         return;
     }
-    let Some(template) = repo.get_scpi_form(target_model, &yak.readback, config.prefer_short_scpi) else {
-        eprintln!("   ❌ [YAK READBACK] '{}' not found in YAK repository for model '{}'!",
-                  yak.readback, target_model);
-        return;
-    };
-    // Instance constants only: a query takes no widget value.
-    let scpi = apply_params(&template, yak);
-    eprintln!("   🔄 [YAK READBACK] {} -> {}", yak.readback, scpi);
-    dispatch(client, config, yak, &scpi, &scpi, "NAB").await;
+    // A comma-separated LIST, because one write can change more than one kind of
+    // thing. All Markers ON/OFF alters both which markers are enabled and what
+    // they read, and those live in two different queries — asking only one back
+    // leaves half the panel showing what it believed before the press.
+    //
+    // Sent as separate queries rather than one longer chain on purpose: a single
+    // unanswerable statement kills an entire chained reply, so combining them
+    // would let one bad node take the other's values down with it.
+    for name in yak.readback.split(',').map(str::trim).filter(|n| !n.is_empty()) {
+        let Some(template) = repo.get_scpi_form(target_model, name, config.prefer_short_scpi) else {
+            eprintln!("   ❌ [YAK READBACK] '{}' not found in YAK repository for model '{}'!",
+                      name, target_model);
+            continue;
+        };
+        // Instance constants only: a query takes no widget value.
+        let scpi = apply_params(&template, yak);
+        eprintln!("   🔄 [YAK READBACK] {} -> {}", name, scpi);
+        dispatch(client, config, yak, &scpi, &scpi, "NAB").await;
+    }
 }
 
 pub async fn dispatch(

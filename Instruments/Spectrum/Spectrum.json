@@ -230,6 +230,10 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "readback": "amplitude_settings"
+            },
+            "yak_listen_all": {
+              "amplitude_settings/gain": "1",
+              "amplitude_settings/attenuation": "0"
             }
           }
         }

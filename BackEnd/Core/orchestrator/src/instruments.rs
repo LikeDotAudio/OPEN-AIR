@@ -387,6 +387,22 @@ fn bind_readout(node: &mut Value, read_topic: &str) -> usize {
             // `yak_listen: "<command>/<field>"` names the reading this control
             // takes its value from. Bound by NAME, so it survives a reply gaining
             // a field — unlike an index into the joined string.
+            // `yak_listen_all: {"<command>/<field>": "<expected>"}` — a control
+            // whose state is DERIVED from several readings at once. High
+            // Sensitivity is not a setting the instrument reports; it is the
+            // combination preamp-on AND zero attenuation. Binding it to one
+            // field would make it disagree with the two controls it shares
+            // hardware with.
+            if let Some(Value::Object(spec)) = map.get("yak_listen_all").cloned() {
+                if let Some(dev_base) = read_topic.strip_suffix("/Read") {
+                    let mut stamped = Map::new();
+                    for (name, expected) in &spec {
+                        stamped.insert(format!("{dev_base}/Reading/{name}"), expected.clone());
+                    }
+                    map.insert("yak_listen_all_topics".to_string(), Value::Object(stamped));
+                    bound += 1;
+                }
+            }
             if let Some(Value::String(name)) = map.get("yak_listen") {
                 if let Some(dev_base) = read_topic.strip_suffix("/Read") {
                     let topic = format!("{dev_base}/Reading/{name}");

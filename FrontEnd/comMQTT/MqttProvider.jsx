@@ -607,6 +607,28 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     // `yak_hydrate_index`, which counted separators and pointed at the wrong
     // quantity the moment a reply gained a field. The index path is kept only
     // for panels not yet migrated.
+    // A DERIVED state: on only when every named reading matches its expected
+    // value. Shares the same readback as the controls it overlaps, so all of
+    // them refresh from one instrument round trip and none can drift out of
+    // agreement with the hardware.
+    const listenAll = nodeJson && nodeJson.yak_listen_all_topics;
+    const listenAllKey = listenAll
+        ? Object.keys(listenAll).map(t => `${t}=${messages[t]}`).join('|')
+        : null;
+    React.useEffect(() => {
+        if (!listenAll) return;
+        const entries = Object.entries(listenAll);
+        if (entries.some(([t]) => messages[t] === undefined)) return;   // not all in yet
+        const matches = entries.every(([t, want]) => {
+            let v = messages[t];
+            try { const p = JSON.parse(v); if (p && p.value !== undefined) v = p.value; } catch (e) {}
+            return String(v).trim() === String(want).trim();
+        });
+        const grace = window.OA_CAPTURE_GRACE_MS || 600;
+        if (throttle.current.lastLocal && (Date.now() - throttle.current.lastLocal) < grace) return;
+        setLocalValue(matches ? 'ON' : 'OFF');
+    }, [listenAllKey]);
+
     const listenTopic = nodeJson && (nodeJson.yak_listen_topic || nodeJson.yak_hydrate_topic);
     const hydrateRaw = listenTopic ? messages[listenTopic] : undefined;
     React.useEffect(() => {

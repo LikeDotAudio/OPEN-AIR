@@ -287,14 +287,14 @@ def main():
 
     print(f"✅ [CORE] Backend up (pid {backend.pid}). The core's work is done.", flush=True)
 
-    # Hand off to the front end as a SEPARATE process. Closing the site, or
-    # restarting it with OPENAIR FRONT END.py, never touches the backend.
-    front = os.path.join(os.path.dirname(os.path.abspath(__file__)), "OPENAIR FRONT END.py")
-    if "--no-frontend" in args or not os.path.exists(front):
-        print("⏭️  [CORE] Front end not started (--no-frontend or file missing).", flush=True)
-        return
-    print("🚀 [CORE] Launching the front end...", flush=True)
-    subprocess.run([sys.executable, front] + [a for a in args if a != "--no-frontend"])
+    # And that is the whole job.
+    #
+    # The core brings up the BACK END — broker, yak, the orchestrator and its
+    # bench search — and then gets out of the way. It deliberately does not
+    # start the site: opening the front end is a separate act with its own
+    # lifetime, so the bench keeps running whether anyone is looking at it or
+    # not. Run 'OPENAIR FRONT END.py' when you want the page.
+    print("   The backend keeps running. Open the site with 'OPENAIR FRONT END.py'.", flush=True)
 
 if __name__ == "__main__":
     main()

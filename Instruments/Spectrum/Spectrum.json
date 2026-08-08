@@ -223,13 +223,13 @@
               }
             },
             "yak_handler": {
-              "enable": false,
-              "_disabled_reason": "No SCPI exists for High Sensitivity on N9340B firmware A.02.07 (probed 2026-08-07, 11 spellings, no reply). Other Spectrum models may support it — re-enable per model once a verified command lands in that model's commands.json.",
+              "enable": true,
               "yak_type": "set",
               "sub_path": "Amplitude",
               "command": "Set_High_Sensitivity",
               "input_name": "state_bool",
-              "converter": "bool_to_int"
+              "converter": "bool_to_int",
+              "readback": "amplitude_settings"
             }
           }
         }

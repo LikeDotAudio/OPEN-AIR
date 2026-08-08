@@ -1499,6 +1499,22 @@
       "description": "Update Display",
       "group": "System Maintenance Controls",
       "subsystem": "System"
+    },
+    "Set_High_Sensitivity_ON": {
+      "scpi": ":POWer:GAIN ON;:POWer:ATTenuation 0",
+      "scpiFast": ":POW:GAIN ON;:POW:ATT 0",
+      "description": "High Sensitivity ON — preamp on, 0 dB attenuation.",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude",
+      "notes": "High Sensitivity is a MODE, not a command: preamp on with minimum input attenuation. No single SCPI header exists for it — 11 spellings were probed on firmware A.02.07 and none answered. Verified on N9340B CN03480580 2026-08-07: 0;10 -> ':POWer:GAIN ON;:POWer:ATTenuation 0' -> 1;0, no error, and the OFF pair restores 0;10."
+    },
+    "Set_High_Sensitivity_OFF": {
+      "scpi": ":POWer:GAIN OFF;:POWer:ATTenuation 10",
+      "scpiFast": ":POW:GAIN OFF;:POW:ATT 10",
+      "description": "High Sensitivity OFF — preamp off, 10 dB attenuation.",
+      "group": "Individual Power Sets",
+      "subsystem": "Amplitude",
+      "notes": "High Sensitivity is a MODE, not a command: preamp on with minimum input attenuation. No single SCPI header exists for it — 11 spellings were probed on firmware A.02.07 and none answered. Verified on N9340B CN03480580 2026-08-07: 0;10 -> ':POWer:GAIN ON;:POWer:ATTenuation 0' -> 1;0, no error, and the OFF pair restores 0;10."
     }
   },
   "rig": {

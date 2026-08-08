@@ -1410,7 +1410,7 @@
               "min": "0.0003",
               "max": "1",
               "units": "MHz",
-              "step_coarse": "1",
+              "step_coarse": "0.01",
               "step_fine": "0.001",
               "locked": false,
               "precision": ".001"
@@ -1465,7 +1465,7 @@
               "type": "_GuiFaderHorizontal",
               "cosmetics": {
                 "scale": {
-                  "interval": 1,
+                  "interval": 0.01,
                   "show": true
                 },
                 "styling": {
@@ -1498,7 +1498,10 @@
             "units": "MHz",
             "show_label": true,
             "min": "0.0003",
-            "max": "1"
+            "max": "1",
+            "step_coarse": "0.01",
+            "step_fine": "0.001",
+            "step": "0.001"
           },
           "Resolution Band Width": {
             "type": "_GuiButtonToggler",
@@ -1966,7 +1969,10 @@
             "units": "kHz",
             "show_label": true,
             "min": "0.001",
-            "max": "1000"
+            "max": "1000",
+            "step_coarse": "10",
+            "step_fine": "1",
+            "step": "1"
           },
           "Video Band Width ": {
             "type": "_GuiButtonToggler",
@@ -2624,8 +2630,8 @@
               "min": "0",
               "max": "50",
               "units": "s",
-              "step_coarse": "1",
-              "step_fine": "0.1"
+              "step_coarse": "0.5",
+              "step_fine": "0.05"
             },
             "value": {
               "default_value": "0"
@@ -2687,7 +2693,7 @@
               "type": "_GuiFaderHorizontal",
               "cosmetics": {
                 "scale": {
-                  "interval": 1,
+                  "interval": 0.5,
                   "show": true
                 },
                 "styling": {
@@ -2718,7 +2724,10 @@
             },
             "yak_listen": "bandwidth_settings/time",
             "units": "s",
-            "show_label": true
+            "show_label": true,
+            "step_coarse": "0.5",
+            "step_fine": "0.05",
+            "step": "0.05"
           }
         }
       }

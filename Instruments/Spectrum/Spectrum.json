@@ -3619,7 +3619,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 1,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "111"
+            },
+            "default_value": "111"
           },
           "Y_dBm": {
             "type": "_Label",
@@ -3748,7 +3752,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 2,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "222"
+            },
+            "default_value": "222"
           },
           "Y_dBm": {
             "type": "_Label",
@@ -3877,7 +3885,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 3,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "333"
+            },
+            "default_value": "333"
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4006,7 +4018,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 4,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "444"
+            },
+            "default_value": "444"
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4135,7 +4151,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 5,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "555"
+            },
+            "default_value": "555"
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4264,7 +4284,11 @@
               "converter": "mhz_to_hz",
               "marker_number": 6,
               "readback": "all_marker_settings"
-            }
+            },
+            "value": {
+              "default_value": "666"
+            },
+            "default_value": "666"
           },
           "Y_dBm": {
             "type": "_Label",

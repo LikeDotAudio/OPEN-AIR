@@ -1458,13 +1458,6 @@
       "group": "Hardware Reset and Clear",
       "subsystem": "System"
     },
-    "Set_All_Markers_State": {
-      "scpi": ":CALCulate:MARKer:AOFF",
-      "scpiFast": ":CALC:MARK:AOFF",
-      "description": "Set All Markers State",
-      "group": "Marker Command Sets",
-      "subsystem": "Markers"
-    },
     "Set_Input_Auto_Attenuation_OFF": {
       "scpi": ":POWer:ATTenuation:AUTO OFF",
       "scpiFast": ":POW:ATT:AUTO OFF",
@@ -1515,6 +1508,20 @@
       "group": "Individual Power Sets",
       "subsystem": "Amplitude",
       "notes": "High Sensitivity is a MODE, not a command: preamp on with minimum input attenuation. No single SCPI header exists for it — 11 spellings were probed on firmware A.02.07 and none answered. Verified on N9340B CN03480580 2026-08-07: 0;10 -> ':POWer:GAIN ON;:POWer:ATTenuation 0' -> 1;0, no error, and the OFF pair restores 0;10."
+    },
+    "Set_All_Markers_State_ON": {
+      "scpi": ":CALCulate:MARKer1:STATe ON;:CALCulate:MARKer2:STATe ON;:CALCulate:MARKer3:STATe ON;:CALCulate:MARKer4:STATe ON;:CALCulate:MARKer5:STATe ON;:CALCulate:MARKer6:STATe ON",
+      "scpiFast": ":CALC:MARK1:STAT ON;:CALC:MARK2:STAT ON;:CALC:MARK3:STAT ON;:CALC:MARK4:STAT ON;:CALC:MARK5:STAT ON;:CALC:MARK6:STAT ON",
+      "description": "All markers ON — markers 1-6 enabled.",
+      "subsystem": "Markers",
+      "notes": "All Markers is a MODE, not a command. `:CALCulate:MARKer:AOFF` turns every marker off but has no ON counterpart, so the single entry this replaces sent AOFF for BOTH toggle positions — the ON press turned the markers off. Verified on CN03480580 2026-08-07: the six-statement ON gives 1;1;1;1;1;1 and AOFF gives 0;0;0;0;0;0, no error either way."
+    },
+    "Set_All_Markers_State_OFF": {
+      "scpi": ":CALCulate:MARKer:AOFF",
+      "scpiFast": ":CALC:MARK:AOFF",
+      "description": "All markers OFF.",
+      "subsystem": "Markers",
+      "notes": "All Markers is a MODE, not a command. `:CALCulate:MARKer:AOFF` turns every marker off but has no ON counterpart, so the single entry this replaces sent AOFF for BOTH toggle positions — the ON press turned the markers off. Verified on CN03480580 2026-08-07: the six-statement ON gives 1;1;1;1;1;1 and AOFF gives 0;0;0;0;0;0, no error either way."
     }
   },
   "rig": {

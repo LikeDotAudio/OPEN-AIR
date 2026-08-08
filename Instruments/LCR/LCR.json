@@ -1052,11 +1052,6 @@
                 "text_color": "#cccccc"
               }
             },
-            "layout": {
-              "height": 34,
-              "stretch": "width",
-              "width": "100%"
-            },
             "style": {
               "active": {
                 "font_style": "bold",

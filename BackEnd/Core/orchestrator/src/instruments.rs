@@ -995,7 +995,22 @@ pub fn build(root: &Path, devices: &[Device]) -> (usize, usize) {
         wanted.extend(gwanted);
     }
 
-    prune(root, &wanted);
+    // KEEP THE OLD STATE when this pass built nothing.
+    //
+    // An empty `wanted` set does not mean every instrument on the bench
+    // vanished — on a fresh boot it means the discovery mirror had not filled
+    // yet. Pruning on that reading deleted every device panel and rebuilt it
+    // seconds later once the scan landed: churn on every restart, and a window
+    // where the operator's panels are simply gone.
+    //
+    // A device that has genuinely disappeared is pruned by the next pass that
+    // builds something — the pass that can actually tell the difference between
+    // "gone" and "not known yet".
+    if wanted.is_empty() {
+        println!("[instrument-gui] nothing discovered yet — keeping the panels already on disk");
+    } else {
+        prune(root, &wanted);
+    }
     (written, built)
 }
 

@@ -186,6 +186,8 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
 
     // Keyed by UUID — the only identifier stable across all six announcements.
     let mut printers: HashMap<String, Printer> = HashMap::new();
+    // Last line printed per printer — see the dedupe below.
+    let mut last_logged: HashMap<String, String> = HashMap::new();
 
     while let Ok((transport, event)) = rx.recv() {
         let ServiceEvent::ServiceResolved(info) = event else {
@@ -281,11 +283,24 @@ pub fn run_browse_agent(mqtt_host: &str, mqtt_port: u16) {
             "OpenAir/System/Protocols/printers/Device/{}",
             seg(&friendly)
         );
-        println!(
+        // Say it once per state, not once per announcement.
+        //
+        // A printer advertises a service type per protocol — ipp, ipps, lpd,
+        // raw-9100, http, printer, ipp-tls — so ONE device produces seven
+        // resolves in as many milliseconds, and this line fired for each. The
+        // last four were identical, because the transport list had already
+        // finished accumulating. Same redundancy the discovery tables had:
+        // repeating an unchanged fact is noise, and it buries the lines that
+        // did change.
+        let line = format!(
             "   ✅ [PRINTERS] {friendly} — {} via {}",
             p.addresses.iter().next().cloned().unwrap_or_else(|| "?".into()),
             p.transports.iter().cloned().collect::<Vec<_>>().join("/")
         );
+        if last_logged.get(&uuid).map(String::as_str) != Some(line.as_str()) {
+            println!("{line}");
+            last_logged.insert(uuid.clone(), line);
+        }
         for (key, value) in DEVICE_KEYS.iter().zip(values) {
             let _ = mqtt_client.publish(
                 format!("{prefix}/{key}"),

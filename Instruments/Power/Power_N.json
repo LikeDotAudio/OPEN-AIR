@@ -837,9 +837,74 @@
                 "member": "Read"
               }
             ]
+          },
+          "Volts_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Measured voltage",
+              "Fr": "Measured voltage",
+              "De": "Measured voltage",
+              "Es": "Measured voltage"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Power/+/+/Reading/module_settings/meas_voltage",
+            "row_height": 28,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#33A1FD",
+                "secondary": "#FF6B6B"
+              }
+            },
+            "bank_names": true
+          },
+          "Amps_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Measured current",
+              "Fr": "Measured current",
+              "De": "Measured current",
+              "Es": "Measured current"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Power/+/+/Reading/module_settings/meas_current",
+            "row_height": 28,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#39D353",
+                "secondary": "#FF6B6B"
+              }
+            },
+            "bank_names": true
+          },
+          "Watts_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Power (V × I)",
+              "Fr": "Power (V × I)",
+              "De": "Power (V × I)",
+              "Es": "Power (V × I)"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Power/+/+/Reading/module_settings/meas_voltage",
+            "row_height": 28,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF902C",
+                "secondary": "#FF6B6B"
+              }
+            },
+            "multiply_by": "OpenAir/System/Protocols/visa/Device/Power/+/+/Reading/module_settings/meas_current",
+            "unit": "W",
+            "bank_names": true
           }
         },
-        "layout_columns": 2
+        "layout_columns": 1
       }
     }
   }

@@ -9,15 +9,8 @@ __pycache__/
 # IDEs
 .vscode/
 .idea/
+Owned Instrument manuals/
 
-# Open-Air Data (Vaults)
-oaData*/
-oaDataAudits/
-oaDataLogs/
-oaDataCache/
-oaDataLogs/SNMP/
-oaDataSplinks/
-oaDataRunningFiles/
 
 # Python
 dist/

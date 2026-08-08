@@ -62,9 +62,8 @@ const BankBars = ({ config }) => {
     // readings are guaranteed to come from the same device. Pairing them by
     // position in two separately-sorted lists would silently multiply one
     // module's volts by another's amps the moment a device dropped off the bus.
-    const partnerPattern = config?.multiply_by || '';
-    const partnerOf = React.useCallback((topic) => {
-        if (!partnerPattern) return '';
+    const rebind = React.useCallback((target, topic) => {
+        if (!target) return '';
         const p = pattern.split('/');
         const t = topic.split('/');
         const binds = [];
@@ -73,8 +72,26 @@ const BankBars = ({ config }) => {
             if (p[i] === '+') binds.push(t[i]);
         }
         let k = 0;
-        return partnerPattern.split('/').map((s) => (s === '+' ? binds[k++] : s)).join('/');
-    }, [pattern, partnerPattern]);
+        return target.split('/').map((s) => (s === '+' ? binds[k++] : s)).join('/');
+    }, [pattern]);
+
+    const partnerPattern = config?.multiply_by || '';
+    const partnerOf = React.useCallback(
+        (topic) => rebind(partnerPattern, topic), [rebind, partnerPattern]);
+
+    // `unit_from` names a reading whose VALUE is the unit's name; `unit_map`
+    // translates the instrument's word into the symbol to print. An unmapped
+    // word is shown as-is rather than dropped — a reading labelled DIOD is
+    // still more use than one labelled nothing.
+    const unitFromPattern = config?.unit_from || '';
+    const unitFor = React.useCallback(
+        (topic) => rebind(unitFromPattern, topic), [rebind, unitFromPattern]);
+    const unitMap = React.useMemo(() => {
+        const raw = config?.unit_map || {};
+        const out = {};
+        for (const k of Object.keys(raw)) out[k.toUpperCase()] = raw[k];
+        return out;
+    }, [JSON.stringify(config?.unit_map)]);
 
     const readingAt = React.useCallback((topic) => {
         const raw = messages[topic];
@@ -101,6 +118,22 @@ const BankBars = ({ config }) => {
                     ? value * other.value : undefined;
                 unit = config?.unit || 'W';
             }
+            // A UNIT THE INSTRUMENT REPORTS AS A WORD.
+            //
+            // `:READ?` on a meter answers a bare number: volts, ohms and hertz
+            // are indistinguishable, and no static unit can be declared for it
+            // because the unit IS the selected function. So the row takes its
+            // unit from the function read back beside it — same round trip,
+            // same device, found by the same wildcard rebinding as the product
+            // above. Eight meters on eight different functions each label
+            // themselves correctly.
+            if (unitFromPattern) {
+                const word = String(readingAt(unitFor(topic)).value ?? '').trim();
+                if (word && word !== 'undefined' && word !== 'NaN') {
+                    const key = word.toUpperCase();
+                    unit = unitMap[key] !== undefined ? unitMap[key] : word;
+                }
+            }
             if (config?.unit) unit = config.unit;
             // `.../Device/<type>/<model>/<dev>/Reading/<command>` — the model and
             // the device slot are the instrument's name until someone gives it a
@@ -119,21 +152,31 @@ const BankBars = ({ config }) => {
                 stale: !Number.isFinite(value),
             });
         }
-        // Ordered the way the rack is numbered, which means comparing the DEVICE
-        // NUMBER as a number: a plain string sort puts Dev10 between Dev1 and
-        // Dev2, so the eighth module of a mainframe lands in the middle of the
-        // list and the three graphs stop agreeing about which row is which.
-        const rank = (k) => {
-            const m = /(\d+)\s*$/.exec(k);
+        // RACK ORDER, and the same order in every graph.
+        //
+        // When the builder has supplied names they lead with the channel — CH1,
+        // CH2, … — and that number is the rack's own numbering, so it sorts
+        // ahead of anything derivable from the topic. Without names, fall back
+        // to model then device NUMBER: a string sort puts Dev10 between Dev1 and
+        // Dev2, which would leave the eighth module in the middle of the list
+        // and the three graphs disagreeing about which row is which.
+        const trailing = (s) => {
+            const m = /(\d+)\s*$/.exec(s);
             return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
         };
+        const leading = (s) => {
+            const m = /(\d+)/.exec(s);
+            return m ? parseInt(m[1], 10) : null;
+        };
         out.sort((a, b) => {
+            const an = leading(a.name), bn = leading(b.name);
+            if (an !== null && bn !== null && an !== bn) return an - bn;
             const am = a.key.replace(/\d+\s*$/, ''), bm = b.key.replace(/\d+\s*$/, '');
-            return am === bm ? rank(a.key) - rank(b.key) : am.localeCompare(bm);
+            return am === bm ? trailing(a.key) - trailing(b.key) : am.localeCompare(bm);
         });
         return out;
-    }, [messages, matches, readingAt, partnerOf, partnerPattern, config?.unit,
-        JSON.stringify(names)]);
+    }, [messages, matches, readingAt, partnerOf, partnerPattern, unitFor,
+        unitFromPattern, unitMap, config?.unit, JSON.stringify(names)]);
 
     // One scale for all of them, or the bars are eight unrelated pictures.
     const peak = rows.reduce((m, r) => (Number.isFinite(r.value) ? Math.max(m, Math.abs(r.value)) : m), 0) || 1;

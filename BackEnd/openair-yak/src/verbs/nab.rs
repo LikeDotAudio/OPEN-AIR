@@ -36,4 +36,18 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
     };
     
     super::dispatch(client, config, yak, &scpi_string, &payload, "NAB").await;
+
+    // A query may name FURTHER queries — one press, several answers.
+    //
+    // GET ALL TRACES is the case that needs it. A scope selects its waveform
+    // source with a write, so the four channels cannot be chained into one
+    // message: verified on the DS1104Z, a write standing between two queries
+    // takes the second reply with it, and `:WAV:SOUR CHAN1;:WAV:DATA?;:WAV:SOUR
+    // CHAN2;:WAV:DATA?` answers with channel 1 alone. Sent as four separate
+    // messages all four come back — 1.4 s for the set — and each lands on its
+    // own reading topic, which is what a four-trace graph binds to.
+    //
+    // Same field and same splitting rule as a SET's readback, because it is the
+    // same act: this is what else to ask while you are here.
+    super::dispatch_readback(client, config, yak, repo, target_model).await;
 }

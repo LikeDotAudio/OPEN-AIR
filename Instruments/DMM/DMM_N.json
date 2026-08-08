@@ -20,7 +20,7 @@
           "Es": "${model} @ ${resource}",
           "show_label": true
         },
-        "layout_columns": 3,
+        "layout_columns": 4,
         "layout": {
           "weight": 0
         },
@@ -127,11 +127,44 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "DMM",
-              "command": "Read_Next",
+              "command": "meter_reading",
               "input_name": "",
               "converter": ""
             },
             "yak_nab_on_load": true
+          },
+          "Mode": {
+            "type": "_Value",
+            "read_only": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "—"
+            },
+            "layout": {
+              "height": 30
+            },
+            "yak_listen": "meter_reading/function"
           },
           "Value": {
             "type": "_Value",
@@ -164,7 +197,7 @@
             "layout": {
               "height": 30
             },
-            "yak_listen": "Read_Next"
+            "yak_listen": "meter_reading/value"
           }
         }
       },
@@ -244,7 +277,7 @@
               "De": "Letzter Messwert, jedes Messgerät",
               "Es": "Última lectura, cada multímetro"
             },
-            "match": "OpenAir/System/Protocols/visa/Device/DMM/+/+/Reading/Read_Next",
+            "match": "OpenAir/System/Protocols/visa/Device/DMM/+/+/Reading/meter_reading/value",
             "row_height": 30,
             "layout": {
               "width": "100%"
@@ -254,7 +287,23 @@
                 "primary": "#39D353",
                 "secondary": "#FF6B6B"
               }
-            }
+            },
+            "unit_from": "OpenAir/System/Protocols/visa/Device/DMM/+/+/Reading/meter_reading/function",
+            "unit_map": {
+              "VOLT": "V",
+              "VOLT:DC": "V",
+              "VOLT:AC": "V",
+              "DIOD": "V",
+              "CURR": "A",
+              "CURR:DC": "A",
+              "CURR:AC": "A",
+              "RES": "Ω",
+              "FRES": "Ω",
+              "CONT": "Ω",
+              "FREQ": "Hz",
+              "PER": "s"
+            },
+            "bank_names": true
           }
         }
       }

@@ -29,7 +29,7 @@
             "type": "SelectorSwitch",
             "AES70": "OcaSwitch",
             "positions": [
-              "VOLT:DC",
+              "VOLT",
               "VOLT:AC",
               "RES",
               "FREQ",
@@ -43,7 +43,7 @@
               "CONTINUITY"
             ],
             "value": {
-              "default_value": "VOLT:DC"
+              "default_value": "VOLT"
             },
             "label": {
               "En": "Measurement",
@@ -78,9 +78,9 @@
               "command": "Set_Func",
               "input_name": "value",
               "converter": "",
-              "readback": "Get_Func"
+              "readback": "meter_reading"
             },
-            "yak_listen": "Get_Func"
+            "yak_listen": "meter_reading/function"
           },
           "Reading": {
             "type": "_NeedleVUMeter",
@@ -132,9 +132,14 @@
             },
             "units": "V",
             "yak_domain_from": {
-              "yak_listen": "Get_Func",
-              "default": "VOLT:DC",
+              "yak_listen": "meter_reading/function",
+              "default": "VOLT",
               "cases": {
+                "VOLT": {
+                  "min": "0",
+                  "max": "10",
+                  "units": "V"
+                },
                 "VOLT:DC": {
                   "min": "0",
                   "max": "10",
@@ -148,7 +153,7 @@
                 "RES": {
                   "min": "0",
                   "max": "100000",
-                  "units": "Ohm"
+                  "units": "Ω"
                 },
                 "FREQ": {
                   "min": "0",
@@ -158,11 +163,11 @@
                 "CONT": {
                   "min": "0",
                   "max": "1000",
-                  "units": "Ohm"
+                  "units": "Ω"
                 }
               }
             },
-            "yak_listen": "Read_Next"
+            "yak_listen": "meter_reading/value"
           },
           "Value": {
             "type": "_Value",
@@ -198,9 +203,12 @@
             },
             "units": "V",
             "yak_domain_from": {
-              "yak_listen": "Get_Func",
-              "default": "VOLT:DC",
+              "yak_listen": "meter_reading/function",
+              "default": "VOLT",
               "cases": {
+                "VOLT": {
+                  "units": "V"
+                },
                 "VOLT:DC": {
                   "units": "V"
                 },
@@ -208,17 +216,17 @@
                   "units": "V"
                 },
                 "RES": {
-                  "units": "Ohm"
+                  "units": "Ω"
                 },
                 "FREQ": {
                   "units": "Hz"
                 },
                 "CONT": {
-                  "units": "Ohm"
+                  "units": "Ω"
                 }
               }
             },
-            "yak_listen": "Read_Next"
+            "yak_listen": "meter_reading/value"
           }
         }
       },
@@ -257,7 +265,7 @@
                 "background": "#1a1a1a"
               }
             },
-            "yak_listen": "Read_Next"
+            "yak_listen": "meter_reading/value"
           }
         }
       },
@@ -320,7 +328,7 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "DMM",
-              "command": "Read_Next",
+              "command": "meter_reading",
               "input_name": "",
               "converter": ""
             },
@@ -385,56 +393,38 @@
             },
             "latching": true
           },
-          "Read_Function": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
+          "Mode": {
+            "type": "_Value",
+            "read_only": true,
             "label": {
+              "active": {
+                "text": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
               "inactive": {
                 "text": {
-                  "En": "READ FUNCTION",
-                  "Fr": "READ FUNCTION",
-                  "De": "READ FUNCTION",
-                  "Es": "READ FUNCTION"
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
                 },
                 "text_size": 12,
                 "text_color": "#cccccc"
               }
             },
+            "value": {
+              "default_value": "—"
+            },
             "layout": {
-              "height": 50,
-              "width": 220,
-              "padx": 6,
-              "pady": 6
+              "height": 30
             },
-            "style": {
-              "active": {
-                "font_style": "bold",
-                "font_size": null,
-                "text_color": "#FF902C",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "border_thickness": 2,
-                "glow_intensity": 1.944
-              },
-              "inactive": {
-                "font_style": "normal",
-                "font_size": null,
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "border_color": "#555555",
-                "border_thickness": 2,
-                "glow_intensity": 0
-              }
-            },
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "nab",
-              "sub_path": "DMM",
-              "command": "Get_Func",
-              "input_name": "",
-              "converter": ""
-            },
-            "yak_nab_on_load": true
+            "yak_listen": "meter_reading/function"
           }
         }
       }

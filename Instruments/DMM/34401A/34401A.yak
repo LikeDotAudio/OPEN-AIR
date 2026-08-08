@@ -1816,6 +1816,28 @@
       },
       "group": "Fetch data after INITiate",
       "subsystem": "MEASure"
+    },
+    "meter_reading": {
+      "scpi": "FUNCtion?;:READ?",
+      "scpiFast": "FUNC?;:READ?",
+      "description": "What the meter is measuring, and the measurement, together.",
+      "group": "Fetch data after INITiate",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 2,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "function",
+            "type": "CRD"
+          },
+          {
+            "name": "value",
+            "type": "NR3"
+          }
+        ]
+      },
+      "notes": "One round trip, because the two facts have to agree: asking the function and the value separately lets the function change between them, and a number labelled with the previous function is worse than an unlabelled one. The chained query restarts at the root — see Measure_All on the 6060B for what happens when it does not. Verified on the 34401A at 44.44.44.111 gpib7,4: answers \"VOLT\";+1.00199800E-03 with a clean error queue. Note the reply is the SHORT form — DC volts answers \"VOLT\", not \"VOLT:DC\" — while FUNCtion accepts either when setting."
     }
   }
 }

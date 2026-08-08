@@ -427,6 +427,20 @@ fn bind_readout(node: &mut Value, read_topic: &str) -> usize {
                     bound += 1;
                 }
             }
+            // `yak_awaits: "<command>/<field>"` — the reading a polling loop
+            // watches for to know its last request has landed. Same naming as
+            // `yak_listen` and bound the same way; the difference is that
+            // nothing DISPLAYS it. A loop that fires on a fixed timer either
+            // undershoots the instrument or queues work behind it, and a scope
+            // capture is 1.4 seconds of GPIB — a rate no author can guess and
+            // the bus can simply report.
+            if let Some(Value::String(name)) = map.get("yak_awaits") {
+                if let Some(dev_base) = read_topic.strip_suffix("/Read") {
+                    let topic = format!("{dev_base}/Reading/{name}");
+                    map.insert("yak_awaits_topic".to_string(), Value::String(topic));
+                    bound += 1;
+                }
+            }
             for (_, v) in map.iter_mut() {
                 bound += bind_readout(v, read_topic);
             }
@@ -614,6 +628,17 @@ fn repeat_channels(doc: &mut Value, model: &str, channels: Option<u64>) {
         return;
     };
 
+    // Count-aware wording, so ONE authored label reads right on every scope:
+    // GET BOTH TRACES on a two-channel 54641D, GET ALL 4 TRACES on the Rigol.
+    let mut counts = BTreeMap::new();
+    counts.insert("channels".to_string(), n.to_string());
+    counts.insert(
+        "all_traces".to_string(),
+        if n == 2 { "BOTH TRACES".to_string() } else { format!("ALL {n} TRACES") },
+    );
+    *panel = substitute(panel, &counts);
+    ask_every_channel(panel, n);
+
     if let Some(blocks) = panel.get_mut("blocks").and_then(|b| b.as_object_mut()) {
         let mut out = Map::new();
         for (name, block) in blocks.iter() {
@@ -628,6 +653,48 @@ fn repeat_channels(doc: &mut Value, model: &str, channels: Option<u64>) {
         *blocks = out;
     }
     repeat_arrays(panel, n);
+}
+
+/// Turn `"per_channel": "waveform_${n}"` into one command and the rest as its
+/// follow-ups — the GET ALL press.
+///
+/// It cannot be a single query. A scope selects its waveform source with a
+/// WRITE, and on the DS1104Z a write standing between two chained queries takes
+/// the second reply with it: `:WAV:SOUR CHAN1;:WAV:DATA?;:WAV:SOUR CHAN2;
+/// :WAV:DATA?` answers with channel 1 alone. Four separate messages all answer —
+/// 1.4 s for the set — so this fills `command` with the first channel and
+/// `readback` with the others, which `dispatch_readback` already sends one at a
+/// time (verbs/mod.rs).
+///
+/// Stamped rather than authored because the list is as long as the instrument
+/// has channels, and the panel is written once for every scope on the bench.
+fn ask_every_channel(node: &mut Value, channels: u64) {
+    match node {
+        Value::Object(map) => {
+            if let Some(Value::Object(handler)) = map.get_mut("yak_handler") {
+                if let Some(Value::String(template)) = handler.get("per_channel").cloned() {
+                    let names: Vec<String> = (1..=channels)
+                        .map(|i| expand_tokens(&template, &channel_tokens(i)))
+                        .collect();
+                    handler.insert("command".to_string(), Value::String(names[0].clone()));
+                    handler.insert(
+                        "readback".to_string(),
+                        Value::String(names[1..].join(",")),
+                    );
+                    handler.remove("per_channel");
+                }
+            }
+            for (_, v) in map.iter_mut() {
+                ask_every_channel(v, channels);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                ask_every_channel(item, channels);
+            }
+        }
+        _ => {}
+    }
 }
 
 /// One prepared copy per channel: tokens filled, handlers told their index.
@@ -920,6 +987,74 @@ fn stamp_link_veto(node: &mut Value, veto: &Map<String, Value>) {
     }
 }
 
+/// What to call each bar in a bank graph.
+///
+/// A bank graph finds its rows on the bus, so all it can name them after is the
+/// reading topic — `66104A/Dev3`, which says the model and a per-model counter
+/// and nothing about WHICH MODULE. In a mainframe holding a 66101A, two 66102As
+/// and four 66104As that is not an identity anyone at the rack can use.
+///
+/// The builder knows: the VISA secondary address IS the slot, and the channel
+/// the module answers to is slot + 1 — the same number `prepare` stamps into
+/// `INST:NSEL`. Keyed the way BankBars keys a row it has parsed off a topic.
+///
+/// Absent slots stay absent: a chassis with nothing in slot 3 numbers its
+/// modules 1,2,3,5,6,7,8, because renumbering them 1-7 would put a name on a
+/// bar that no longer matches the label on the hardware.
+fn bank_names(members: &[(BTreeMap<String, String>, Device)]) -> Map<String, Value> {
+    let mut out = Map::new();
+    for (_tokens, dev) in members {
+        let Some(base) = dev.write_topic.strip_suffix("/Write") else { continue };
+        let mut segs = base.rsplit('/');
+        let (Some(devid), Some(model)) = (segs.next(), segs.next()) else { continue };
+        // A MODULE has a slot; a standalone instrument has an address. Naming
+        // either one after its position in the discovery list would be a number
+        // that looks like the rack's and is not: eight 34401As at GPIB 4, 11,
+        // 12, 13 and 1, 2, 3, 5 would come out CH1..CH8 in whatever order the
+        // scan happened to sort them, and CH4 would be the meter at gpib7,11.
+        let label = match slot_of(&dev.resource) {
+            Some(slot) => format!("CH{} · {}", slot + 1, dev.model),
+            None => {
+                let host = host_of(&dev.resource);
+                let tail = host.rsplit('.').next().unwrap_or(&host).to_string();
+                // The GPIB designator if there is one, else just the host.
+                let addr = dev
+                    .resource
+                    .split("::")
+                    .find(|s| s.to_lowercase().starts_with("gpib"))
+                    .map(|s| s.to_string());
+                match addr {
+                    Some(a) => format!("{tail} · {a}"),
+                    None => format!("{tail} · {}", dev.model),
+                }
+            }
+        };
+        out.insert(format!("{model}/{devid}"), Value::String(label));
+    }
+    out
+}
+
+/// `"bank_names": true` — same marker discipline as `link_veto` and
+/// `yak_readout`: authored once, resolved against whatever was discovered.
+fn stamp_bank_names(node: &mut Value, names: &Map<String, Value>) {
+    match node {
+        Value::Object(map) => {
+            if map.get("bank_names") == Some(&Value::Bool(true)) {
+                map.insert("names".to_string(), Value::Object(names.clone()));
+            }
+            for (_, v) in map.iter_mut() {
+                stamp_bank_names(v, names);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                stamp_bank_names(item, names);
+            }
+        }
+        _ => {}
+    }
+}
+
 /// Compose N bound copies of one unit template into a single group panel.
 ///
 /// This is the whole point of the exercise. `psu_eight.json` was 1183 lines of
@@ -984,6 +1119,9 @@ fn repeat_unit(
                 let (tokens, dev) = &members[0];
                 let (mut bound, n) = prepare(block, dev, Some(tokens), caps);
                 stamp_link_veto(&mut bound, &veto);
+                // A bank graph is about every member, not the one the deck
+                // happens to be bound to.
+                stamp_bank_names(&mut bound, &bank_names(members));
                 handlers += n;
                 fields.insert(wanted_deck.to_string(), bound);
             }
@@ -1368,6 +1506,74 @@ mod tests {
         assert_eq!(host_of("TCPIP::44.44.44.111::gpib7,4::INSTR"), "44.44.44.111");
     }
 
+
+    // TEMP-SCRATCH
+    #[test]
+    fn scratch_build_from_list() {
+        let Ok(root) = std::env::var("OA_SCRATCH_ROOT") else { return };
+        let list = std::env::var("OA_SCRATCH_DEVICES").unwrap();
+        let raw: Value = serde_json::from_str(&std::fs::read_to_string(list).unwrap()).unwrap();
+        let devs: Vec<Device> = raw.as_array().unwrap().iter().map(|d| Device {
+            dtype: d["type"].as_str().unwrap().to_string(),
+            model: d["model"].as_str().unwrap().to_string(),
+            resource: d["resource"].as_str().unwrap().to_string(),
+            write_topic: d["write_topic"].as_str().unwrap().to_string(),
+        }).collect();
+        let (panels, built) = super::build(std::path::Path::new(&root), &devs);
+        println!("SCRATCH built={built} panels={panels}");
+    }
+
+    #[test]
+    fn a_bank_bar_is_named_for_its_slot_not_its_model_counter() {
+        let mk = |model: &str, slot: u32, devn: u32| {
+            let mut t = BTreeMap::new();
+            t.insert("n".to_string(), (devn + 1).to_string());
+            (t, Device {
+                dtype: "Power".into(),
+                model: model.into(),
+                resource: format!("TCPIP::44.44.44.111::gpib7,30,{slot}::INSTR"),
+                write_topic: format!(
+                    "OpenAir/System/Protocols/visa/Device/Power/{model}/Dev{devn}/Write"
+                ),
+            })
+        };
+        // One mainframe, three models, and slot 3 empty.
+        let members = vec![mk("66101A", 0, 0), mk("66102A", 1, 0), mk("66102A", 2, 1),
+                           mk("66104A", 4, 0), mk("66104A", 7, 3)];
+        let names = bank_names(&members);
+        // Keyed as BankBars parses a reading topic: "<model>/<dev>".
+        assert_eq!(names["66101A/Dev0"], json!("CH1 · 66101A"));
+        // Two 66102As both counted from Dev0 by model — the slot tells them apart.
+        assert_eq!(names["66102A/Dev0"], json!("CH2 · 66102A"));
+        assert_eq!(names["66102A/Dev1"], json!("CH3 · 66102A"));
+        // The empty slot is not closed up: nothing is called CH4 here.
+        assert_eq!(names["66104A/Dev0"], json!("CH5 · 66104A"));
+        assert_eq!(names["66104A/Dev3"], json!("CH8 · 66104A"));
+        assert!(!names.values().any(|v| v == &json!("CH4 · 66104A")));
+
+        // A STANDALONE instrument has no slot, so it is named for the address
+        // it answers at. Eight meters on two gateways, and the label is the one
+        // written on the front of each: gpib7,11 is gpib7,11 wherever it sorts.
+        let meter = |host: &str, gpib: &str, devn: u32| {
+            (BTreeMap::new(), Device {
+                dtype: "DMM".into(),
+                model: "34401A".into(),
+                resource: format!("TCPIP::{host}::{gpib}::INSTR"),
+                write_topic: format!(
+                    "OpenAir/System/Protocols/visa/Device/DMM/34401A/Dev{devn}/Write"
+                ),
+            })
+        };
+        let meters = vec![meter("44.44.44.111", "gpib7,4", 0),
+                          meter("44.44.44.111", "gpib7,11", 1),
+                          meter("44.44.44.222", "gpib7,1", 4)];
+        let m = bank_names(&meters);
+        assert_eq!(m["34401A/Dev0"], json!("111 · gpib7,4"));
+        assert_eq!(m["34401A/Dev1"], json!("111 · gpib7,11"));
+        // Same GPIB number, different gateway — the host tail keeps them apart.
+        assert_eq!(m["34401A/Dev4"], json!("222 · gpib7,1"));
+        assert!(!m.values().any(|v| v.as_str().unwrap_or("").starts_with("CH")));
+    }
 
     #[test]
     fn two_generators_at_two_addresses_group_by_type() {

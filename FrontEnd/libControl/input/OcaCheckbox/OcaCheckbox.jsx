@@ -18,7 +18,26 @@
 const OcaCheckbox = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;
-    const [val, setVal] = useMqtt ? useMqttState(topic, !!value, nodeJson) : [!!value, onChange, 'En'];
+    const [rawVal, setVal] = useMqtt ? useMqttState(topic, !!value, nodeJson) : [!!value, onChange, 'En'];
+
+    // An instrument answers a BOOL as 1 or 0, or as ON / OFF — never as a
+    // JavaScript boolean. Two things go wrong if that is used as-is: the STRING
+    // "0" is truthy, so an OFF marker rendered as ticked; and the NUMBER 0 makes
+    // `{val && <svg/>}` evaluate to 0, which React renders as the literal
+    // character "0" inside the box. Same truth table as YAK's as_bool, so a
+    // checkbox cannot read as on while the SET verb resolves the same payload
+    // as off.
+    const asBool = (v) => {
+        if (typeof v === 'boolean') return v;
+        if (v === undefined || v === null) return false;
+        const s = String(v).trim().toLowerCase();
+        if (s === '') return false;
+        if (['1', 'true', 'on', 'yes'].includes(s)) return true;
+        if (['0', 'false', 'off', 'no'].includes(s)) return false;
+        const n = Number(s);
+        return Number.isFinite(n) ? n !== 0 : false;
+    };
+    const val = asBool(rawVal);
     const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
 
     const getLocalizedText = (labelData, fallback) => {

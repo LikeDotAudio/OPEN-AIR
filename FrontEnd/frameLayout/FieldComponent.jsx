@@ -103,7 +103,47 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     // Connect to MQTT global state store
     const useMqttStateHook = window.useMqttState || React.useState;
-    const [val, setVal, lang] = useMqttStateHook(topic, defaultVal, node);
+    const [rawVal, setVal, lang] = useMqttStateHook(topic, defaultVal, node);
+
+    // A READING IS ONLY TRUE WHILE ITS SUBJECT IS.
+    //
+    // `:CALCulate:MARKer<n>:Y?` answers whatever that marker last sat on, and
+    // keeps answering it after the marker is switched off. Six markers turned
+    // off therefore left six confident amplitudes on screen — all identical,
+    // all stale, and nothing distinguishing them from a live measurement.
+    //
+    // `yak_valid_when` names the reading that says whether this value means
+    // anything, and blanks the widget when it does not:
+    //
+    //   "yak_valid_when": { "yak_listen": "marker_all/state_1", "equals": "1" }
+    //
+    // The orchestrator stamps `yak_listen_topic` beside any `yak_listen` at any
+    // depth (instruments.rs), so the nested spec arrives bound to this device.
+    // Declared on the node rather than coded per panel — the Q_Knob and LoCut
+    // rules below are the same idea hardwired, and each new one needed a change
+    // in here.
+    const gateMessages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    let gateFails = false;
+    const gate = node.yak_valid_when;
+    if (gate && gate.yak_listen_topic) {
+        const raw = gateMessages[gate.yak_listen_topic];
+        if (raw === undefined) {
+            // Nothing read back yet. Showing a value we cannot vouch for is the
+            // failure being fixed, so an unanswered gate hides by default.
+            gateFails = gate.hide_until_known !== false;
+        } else {
+            let v = raw;
+            try { const p = JSON.parse(String(raw)); if (p && p.value !== undefined) v = p.value; } catch (e) {}
+            const want = String(gate.equals !== undefined ? gate.equals : '1').trim();
+            const got = String(v).trim();
+            const bothNumeric = got !== '' && want !== ''
+                && Number.isFinite(Number(got)) && Number.isFinite(Number(want));
+            gateFails = bothNumeric
+                ? Number(got) !== Number(want)
+                : got.toUpperCase() !== want.toUpperCase();
+        }
+    }
+    const val = gateFails ? (gate.placeholder !== undefined ? gate.placeholder : '') : rawVal;
     
     // ⚡ ROBUST LABEL RESOLUTION: Handle string or object-based localization
     const getLocalizedLabel = (labelData) => {
@@ -135,7 +175,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     const ph = _pctFrac(node.layout?.height);
     const scaling = pw != null || ph != null;
 
-    const messages = (window.useMqttMessages && window.useMqttMessages()) || {};
+    const messages = gateMessages;   // same store the validity gate above reads
     let isDisabled = false;
 
     if (nodeName === 'Q_Knob') {

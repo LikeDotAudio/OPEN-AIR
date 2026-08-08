@@ -20,6 +20,77 @@ pub fn as_bool(val: &Value) -> Option<bool> {
     }
 }
 
+/// Scale a decimal number by a power of ten by MOVING THE POINT, never by
+/// multiplying an f64.
+///
+/// `2057.515` MHz reached the N9340B as `:FREQuency:CENTer 2057514999.9999998`.
+/// Nothing was wrong with the number: 2057.515 has no exact binary
+/// representation, 1e6 does, and their product in f64 is that. Rounding the
+/// result would only hide it — 15 significant figures of nonsense would become
+/// 15 significant figures of luck, and the next value with a different fraction
+/// would produce a different artefact.
+///
+/// Shifting the decimal point in the digit STRING is exact for every input,
+/// because a power of ten is what a decimal point means. `2057.515` shifted six
+/// places is `2057515000`, with no arithmetic performed at all.
+///
+/// Returns None for anything that is not a plain decimal — exponent forms,
+/// `MAXimum`, units — leaving those to the caller.
+pub fn shift_decimal(text: &str, power: i32) -> Option<String> {
+    let s = text.trim();
+    let (sign, body) = match s.strip_prefix('-') {
+        Some(rest) => ("-", rest),
+        None => ("", s.strip_prefix('+').unwrap_or(s)),
+    };
+    let (int, frac) = match body.split_once('.') {
+        Some((i, f)) => (i, f),
+        None => (body, ""),
+    };
+    if int.is_empty() && frac.is_empty() {
+        return None;
+    }
+    if !int.bytes().all(|b| b.is_ascii_digit()) || !frac.bytes().all(|b| b.is_ascii_digit()) {
+        return None;
+    }
+
+    // digits + where the point sits inside them
+    let digits: String = format!("{int}{frac}");
+    let point = int.len() as i32 + power;
+
+    let (mut whole, mut fraction) = if point <= 0 {
+        ("0".to_string(), format!("{}{}", "0".repeat((-point) as usize), digits))
+    } else if point as usize >= digits.len() {
+        (format!("{}{}", digits, "0".repeat(point as usize - digits.len())), String::new())
+    } else {
+        (digits[..point as usize].to_string(), digits[point as usize..].to_string())
+    };
+
+    let trimmed = whole.trim_start_matches('0');
+    whole = if trimmed.is_empty() { "0".to_string() } else { trimmed.to_string() };
+    fraction = fraction.trim_end_matches('0').to_string();
+
+    let out = if fraction.is_empty() {
+        format!("{sign}{whole}")
+    } else {
+        format!("{sign}{whole}.{fraction}")
+    };
+    // "-0" is not a number anybody means to send.
+    Some(if out == "-0" { "0".to_string() } else { out })
+}
+
+/// How many places each scaling converter moves the point.
+fn converter_power(converter: &str) -> Option<i32> {
+    match converter {
+        "mhz_to_hz" => Some(6),
+        "hz_to_mhz" => Some(-6),
+        "khz_to_hz" => Some(3),
+        "hz_to_khz" => Some(-3),
+        "v_to_mv" => Some(3),
+        "mv_to_v" => Some(-3),
+        _ => None,
+    }
+}
+
 pub fn apply_converter(converter: &str, val: Option<&Value>) -> Value {
     let val = match val {
         Some(v) => v,
@@ -65,33 +136,41 @@ pub fn apply_converter(converter: &str, val: Option<&Value>) -> Value {
     //
     // Parsing here rather than at the call sites keeps one definition of "is
     // this numeric" for every converter and every widget type.
-    let numeric = val.as_f64().or_else(|| match val {
-        Value::String(s) => s.trim().parse::<f64>().ok(),
+    // The payload's own text, NOT an f64 read of it. `Value::Number` already
+    // holds the shortest decimal that round-trips, so its string form is the
+    // number the panel actually sent — and it is that string, never a float,
+    // that gets scaled and written to the instrument.
+    let text: Option<String> = match val {
+        Value::Number(n) => Some(n.to_string()),
+        Value::String(s) => {
+            let t = s.trim();
+            if t.parse::<f64>().is_ok() { Some(t.to_string()) } else { None }
+        }
         _ => None,
-    });
+    };
 
-    match numeric {
-        Some(num) => {
-            let converted = match converter.to_lowercase().as_str() {
-                "mhz_to_hz" => num * 1_000_000.0,
-                "hz_to_mhz" => num / 1_000_000.0,
-                "khz_to_hz" => num * 1_000.0,
-                "hz_to_khz" => num / 1_000.0,
-                "v_to_mv"   => num * 1_000.0,
-                "mv_to_v"   => num / 1_000.0,
-                _ => {
-                    warn!("Unknown converter '{}'. Passing value through unchanged.", converter);
-                    num
-                }
+    match text {
+        Some(t) => {
+            let lower = converter.to_lowercase();
+            let Some(power) = converter_power(&lower) else {
+                warn!("Unknown converter '{}'. Passing value through unchanged.", converter);
+                return val.clone();
             };
-            
-            // Convert back to serde_json::Value
-            if let Some(n) = Number::from_f64(converted) {
-                Value::Number(n)
-            } else {
-                Value::Null
+            // Exponent forms ("1e-07", a DS1104Z channel calibration) have no
+            // decimal point to move. They are rare, already unambiguous to the
+            // instrument, and worth keeping on the float path rather than
+            // growing a parser for them.
+            match shift_decimal(&t, power) {
+                Some(scaled) => Value::String(scaled),
+                None => match t.parse::<f64>() {
+                    Ok(num) => {
+                        let f = num * 10f64.powi(power);
+                        Number::from_f64(f).map(Value::Number).unwrap_or(Value::Null)
+                    }
+                    Err(_) => val.clone(),
+                },
             }
-        },
+        }
         None => {
             // If the value is a string, bool, object, etc., and a converter was specified,
             // we can't do math on it. Just pass it through with a warning.
@@ -125,10 +204,30 @@ mod bool_tests {
         // The N9340B bandwidth buttons: options are authored as JSON strings, so
         // the payload is "0.3" where the slider beside them sends 0.3. Before
         // this they diverged by a factor of a million on the wire.
-        assert_eq!(apply_converter("mhz_to_hz", Some(&json!("0.3"))), json!(300000.0));
-        assert_eq!(apply_converter("mhz_to_hz", Some(&json!(0.3))), json!(300000.0));
-        assert_eq!(apply_converter("khz_to_hz", Some(&json!("300"))), json!(300000.0));
-        assert_eq!(apply_converter("mhz_to_hz", Some(&json!(" 0.0003 "))), json!(300.0));
+        assert_eq!(apply_converter("mhz_to_hz", Some(&json!("0.3"))), json!("300000"));
+        assert_eq!(apply_converter("mhz_to_hz", Some(&json!(0.3))), json!("300000"));
+        assert_eq!(apply_converter("khz_to_hz", Some(&json!("300"))), json!("300000"));
+        assert_eq!(apply_converter("mhz_to_hz", Some(&json!(" 0.0003 "))), json!("300"));
+    }
+
+    #[test]
+    fn scaling_into_hz_never_produces_a_decimal_point() {
+        // The one that reached the bench: 2057.515 MHz went out as
+        // ':FREQuency:CENTer 2057514999.9999998'. 2057.515 has no exact binary
+        // form and 1e6 does, so their f64 product IS that number — the fix is to
+        // never perform the multiplication.
+        assert_eq!(apply_converter("mhz_to_hz", Some(&json!(2057.515))), json!("2057515000"));
+        assert_eq!(apply_converter("mhz_to_hz", Some(&json!("2057.515"))), json!("2057515000"));
+        // Every fraction that bit us on this bench, in both directions.
+        for (mhz, hz) in [
+            ("1.1", "1100000"), ("665.551", "665551000"), ("0.0000001", "0.1"),
+            ("107.5", "107500000"), ("3000", "3000000000"), ("-1.5", "-1500000"),
+        ] {
+            assert_eq!(apply_converter("mhz_to_hz", Some(&json!(mhz))), json!(hz), "{mhz} MHz");
+        }
+        for (hz, mhz) in [("665551000", "665.551"), ("300000", "0.3"), ("1", "0.000001")] {
+            assert_eq!(apply_converter("hz_to_mhz", Some(&json!(hz))), json!(mhz), "{hz} Hz");
+        }
     }
 
     #[test]
@@ -136,6 +235,15 @@ mod bool_tests {
         // Enum arguments and identity strings must not be mangled by a numeric
         // converter that was declared on the widget by mistake.
         assert_eq!(apply_converter("mhz_to_hz", Some(&json!("MAXimum"))), json!("MAXimum"));
+    }
+
+    #[test]
+    fn an_exponent_form_keeps_its_meaning() {
+        // A DS1104Z channel calibration is authored as -1e-07. There is no point
+        // to move, so it stays on the float path rather than being dropped.
+        let out = apply_converter("v_to_mv", Some(&json!("-1e-07")));
+        let f = out.as_f64().expect("still a number");
+        assert!((f - -1e-4).abs() < 1e-15, "-1e-07 V is -1e-4 mV, got {f}");
     }
 
     #[test]

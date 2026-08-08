@@ -14,7 +14,7 @@
         "type": "OcaBlock",
         "description": {
           "En": "Every captured trace, plotted over the span it was measured on.",
-          "show_label": true
+          "show_label": false
         },
         "layout": {
           "weight": 1,
@@ -28,13 +28,166 @@
               "stretch": "width",
               "width": "100%"
             },
-            "yak_listen": "trace_data_all/samples_1",
             "units": "dBm",
             "x_axis": {
-              "start_listen": "trace_data_all/start",
-              "stop_listen": "trace_data_all/stop",
-              "units": "MHz"
-            }
+              "units": "MHz",
+              "scale": "log",
+              "label": {
+                "En": "Frequency (MHz)"
+              },
+              "start": {
+                "yak_listen": "trace_data_all/start",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_234/start"
+                  },
+                  {
+                    "yak_listen": "trace_data_1/start"
+                  },
+                  {
+                    "yak_listen": "trace_data_2/start"
+                  },
+                  {
+                    "yak_listen": "trace_data_3/start"
+                  },
+                  {
+                    "yak_listen": "trace_data_4/start"
+                  }
+                ]
+              },
+              "stop": {
+                "yak_listen": "trace_data_all/stop",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_234/stop"
+                  },
+                  {
+                    "yak_listen": "trace_data_1/stop"
+                  },
+                  {
+                    "yak_listen": "trace_data_2/stop"
+                  },
+                  {
+                    "yak_listen": "trace_data_3/stop"
+                  },
+                  {
+                    "yak_listen": "trace_data_4/stop"
+                  }
+                ]
+              }
+            },
+            "traces": [
+              {
+                "id": "T1",
+                "label": {
+                  "En": "Trace 1"
+                },
+                "color": "#FFD400",
+                "width": 1.5,
+                "yak_listen": "trace_data_all/samples_1",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_1/samples_1"
+                  }
+                ],
+                "mode": {
+                  "yak_listen": "trace_settings/mode_1",
+                  "labels": {
+                    "WRITE": "LIVE REALTIME",
+                    "MAXHOLD": "MAX HOLD",
+                    "MINHOLD": "MIN HOLD",
+                    "BLANK": "BLANK",
+                    "VIEW": "VIEW"
+                  }
+                }
+              },
+              {
+                "id": "T2",
+                "label": {
+                  "En": "Trace 2"
+                },
+                "color": "#3DDC4A",
+                "width": 1.5,
+                "yak_listen": "trace_data_all/samples_2",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_2/samples_2"
+                  },
+                  {
+                    "yak_listen": "trace_data_234/samples_2"
+                  }
+                ],
+                "mode": {
+                  "yak_listen": "trace_settings/mode_2",
+                  "labels": {
+                    "WRITE": "LIVE REALTIME",
+                    "MAXHOLD": "MAX HOLD",
+                    "MINHOLD": "MIN HOLD",
+                    "BLANK": "BLANK",
+                    "VIEW": "VIEW"
+                  }
+                }
+              },
+              {
+                "id": "T3",
+                "label": {
+                  "En": "Trace 3"
+                },
+                "color": "#3D9BFF",
+                "width": 1.5,
+                "yak_listen": "trace_data_all/samples_3",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_3/samples_3"
+                  },
+                  {
+                    "yak_listen": "trace_data_234/samples_3"
+                  }
+                ],
+                "mode": {
+                  "yak_listen": "trace_settings/mode_3",
+                  "labels": {
+                    "WRITE": "LIVE REALTIME",
+                    "MAXHOLD": "MAX HOLD",
+                    "MINHOLD": "MIN HOLD",
+                    "BLANK": "BLANK",
+                    "VIEW": "VIEW"
+                  }
+                }
+              },
+              {
+                "id": "T4",
+                "label": {
+                  "En": "Trace 4"
+                },
+                "color": "#B06CFF",
+                "width": 1.5,
+                "yak_listen": "trace_data_all/samples_4",
+                "sources": [
+                  {
+                    "yak_listen": "trace_data_4/samples_4"
+                  },
+                  {
+                    "yak_listen": "trace_data_234/samples_4"
+                  }
+                ],
+                "mode": {
+                  "yak_listen": "trace_settings/mode_4",
+                  "labels": {
+                    "WRITE": "LIVE REALTIME",
+                    "MAXHOLD": "MAX HOLD",
+                    "MINHOLD": "MIN HOLD",
+                    "BLANK": "BLANK",
+                    "VIEW": "VIEW"
+                  }
+                }
+              }
+            ],
+            "Navigation": true,
+            "label": {
+              "En": "Captured Traces"
+            },
+            "show_title": false
           }
         }
       },
@@ -47,7 +200,8 @@
         "layout": {
           "weight": 0,
           "width": "100%",
-          "max_cols": 3
+          "column_spacing": 4,
+          "row_spacing": 4
         },
         "fields": {
           "Get_Trace_1": {
@@ -86,12 +240,9 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "Trace",
-              "command": "trace_data",
+              "command": "trace_data_1",
               "input_name": "",
-              "converter": "",
-              "params": {
-                "trace_number": "1"
-              }
+              "converter": ""
             }
           },
           "Get_Trace_2": {
@@ -130,12 +281,9 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "Trace",
-              "command": "trace_data",
+              "command": "trace_data_2",
               "input_name": "",
-              "converter": "",
-              "params": {
-                "trace_number": "2"
-              }
+              "converter": ""
             }
           },
           "Get_Trace_3": {
@@ -174,12 +322,9 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "Trace",
-              "command": "trace_data",
+              "command": "trace_data_3",
               "input_name": "",
-              "converter": "",
-              "params": {
-                "trace_number": "3"
-              }
+              "converter": ""
             }
           },
           "Get_Trace_4": {
@@ -218,12 +363,9 @@
               "enable": true,
               "yak_type": "nab",
               "sub_path": "Trace",
-              "command": "trace_data",
+              "command": "trace_data_4",
               "input_name": "",
-              "converter": "",
-              "params": {
-                "trace_number": "4"
-              }
+              "converter": ""
             }
           },
           "Get_All_Traces": {
@@ -309,7 +451,8 @@
               "converter": ""
             }
           }
-        }
+        },
+        "layout_columns": 4
       },
       "Span": {
         "type": "OcaBlock",
@@ -337,12 +480,11 @@
               }
             },
             "units": "MHz",
-            "yak_readout": true,
             "yak_listen": "trace_data_all/start",
-            "yak_readout_unit": "Hz",
             "layout": {
               "height": 26
-            }
+            },
+            "yak_hydrate_unit": "Hz"
           },
           "Capture_Stop": {
             "type": "_Value",
@@ -359,12 +501,11 @@
               }
             },
             "units": "MHz",
-            "yak_readout": true,
             "yak_listen": "trace_data_all/stop",
-            "yak_readout_unit": "Hz",
             "layout": {
               "height": 26
-            }
+            },
+            "yak_hydrate_unit": "Hz"
           }
         }
       }
@@ -1762,6 +1903,68 @@
       "fluid_ew": true
     },
     "blocks": {
+      "Readback": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Read the resolution bandwidth, the video bandwidth and the sweep time back off the instrument.",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Refresh_Bandwidth_Settings": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "REFRESH FROM INSTRUMENT",
+                  "Fr": "REFRESH FROM INSTRUMENT",
+                  "De": "REFRESH FROM INSTRUMENT",
+                  "Es": "REFRESH FROM INSTRUMENT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 30,
+              "width": "100%"
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Bandwidth",
+              "command": "bandwidth_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          }
+        }
+      },
       "Resolution Bandwidth": {
         "type": "OcaBlock",
         "description": {
@@ -1790,12 +1993,12 @@
               "default_value": "0.5"
             },
             "layout": {
-              "height": 135,
+              "height": 100,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,
-              "padx": 10,
-              "pady": 10,
+              "padx": 2,
+              "pady": 2,
               "column_spacing": [
                 60,
                 10,
@@ -1879,7 +2082,7 @@
             "AES70": "OcaSwitch",
             "handler": "set_resolution_bandwidth",
             "layout": {
-              "height": 50,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 3,
               "width": "100%",
@@ -2256,12 +2459,12 @@
               "default_value": "0.5"
             },
             "layout": {
-              "height": 134,
+              "height": 100,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,
-              "padx": 10,
-              "pady": 10,
+              "padx": 2,
+              "pady": 2,
               "column_spacing": [
                 60,
                 10,
@@ -2350,7 +2553,7 @@
             "AES70": "OcaSwitch",
             "handler": "set_video_bandwidth",
             "layout": {
-              "height": 43,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 3,
               "width": "100%",
@@ -2884,7 +3087,7 @@
             "AES70": "OcaBooleanActuator",
             "handler": "toggle_vbw_auto",
             "layout": {
-              "height": 34,
+              "height": 28,
               "width": "100%",
               "stretch": "width",
               "font": 15
@@ -3008,12 +3211,12 @@
               "default_value": "0"
             },
             "layout": {
-              "height": 125,
+              "height": 100,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,
-              "padx": 10,
-              "pady": 10,
+              "padx": 2,
+              "pady": 2,
               "column_spacing": [
                 80,
                 10,
@@ -3951,13 +4154,15 @@
           "Es": "Ajustes for Marker 1"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4003,7 +4208,7 @@
               "units": "MHz"
             },
             "layout": {
-              "height": 30,
+              "height": 28,
               "stretch": "width",
               "Font": 50
             },
@@ -4048,7 +4253,11 @@
             },
             "default_value": "111",
             "yak_listen": "marker_all/x_1",
-            "units": "MHz"
+            "units": "MHz",
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_1",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4080,12 +4289,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_1",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_1",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       },
       "Fold_M2": {
         "type": "OcaFold",
@@ -4103,13 +4328,15 @@
           "Es": "Ajustes for Marker 2"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4195,7 +4422,14 @@
             },
             "default_value": "222",
             "yak_listen": "marker_all/x_2",
-            "units": "MHz"
+            "units": "MHz",
+            "layout": {
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_2",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4227,12 +4461,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_2",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_2",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       },
       "Fold_M3": {
         "type": "OcaFold",
@@ -4250,13 +4500,15 @@
           "Es": "Ajustes for Marker 3"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4342,7 +4594,14 @@
             },
             "default_value": "333",
             "yak_listen": "marker_all/x_3",
-            "units": "MHz"
+            "units": "MHz",
+            "layout": {
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_3",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4374,12 +4633,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_3",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_3",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       },
       "Fold_M4": {
         "type": "OcaFold",
@@ -4397,13 +4672,15 @@
           "Es": "Ajustes for Marker 4"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4489,7 +4766,14 @@
             },
             "default_value": "444",
             "yak_listen": "marker_all/x_4",
-            "units": "MHz"
+            "units": "MHz",
+            "layout": {
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_4",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4521,12 +4805,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_4",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_4",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       },
       "Fold_M5": {
         "type": "OcaFold",
@@ -4544,13 +4844,15 @@
           "Es": "Ajustes for Marker 5"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4636,7 +4938,14 @@
             },
             "default_value": "555",
             "yak_listen": "marker_all/x_5",
-            "units": "MHz"
+            "units": "MHz",
+            "layout": {
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_5",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4668,12 +4977,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_5",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_5",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       },
       "Fold_M6": {
         "type": "OcaFold",
@@ -4691,13 +5016,15 @@
           "Es": "Ajustes para marcador 6"
         },
         "layout": {
-          "weight": 0
+          "weight": 0,
+          "column_spacing": 8,
+          "row_spacing": 0
         },
         "fields": {
           "Active": {
             "type": "_GuiCheckbox",
             "layout": {
-              "height": 30
+              "height": 28
             },
             "label": {
               "active": {
@@ -4783,7 +5110,14 @@
             },
             "default_value": "666",
             "yak_listen": "marker_all/x_6",
-            "units": "MHz"
+            "units": "MHz",
+            "layout": {
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_6",
+              "equals": "1"
+            }
           },
           "Y_dBm": {
             "type": "_Label",
@@ -4815,12 +5149,28 @@
             "AES70": "OcaLevelSensor",
             "yak_listen": "marker_all/y_6",
             "units": "dBm",
-            "yak_readout": true,
             "layout": {
-              "height": 24
+              "height": 28
+            },
+            "yak_valid_when": {
+              "yak_listen": "marker_all/state_6",
+              "equals": "1"
             }
           }
-        }
+        },
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 0,
+            "minwidth": 120
+          },
+          {
+            "weight": 3
+          },
+          {
+            "weight": 2
+          }
+        ]
       }
     }
   },
@@ -4836,6 +5186,66 @@
       "fluid_ew": true
     },
     "blocks": {
+      "Readback": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Read every trace mode, the sweep state and averaging back off the instrument.",
+          "Fr": "Read every trace mode, the sweep state and averaging back off the instrument.",
+          "De": "Read every trace mode, the sweep state and averaging back off the instrument.",
+          "Es": "Read every trace mode, the sweep state and averaging back off the instrument."
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Refresh_Trace_Settings": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "REFRESH FROM INSTRUMENT",
+                  "Fr": "REFRESH FROM INSTRUMENT",
+                  "De": "REFRESH FROM INSTRUMENT",
+                  "Es": "REFRESH FROM INSTRUMENT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Trace",
+              "command": "trace_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          }
+        }
+      },
       "Trace 1": {
         "type": "OcaBlock",
         "description": {
@@ -5856,15 +6266,117 @@
         "type": "OcaBlock",
         "AES70": "OcaTraceManager",
         "description": {
-          "En": "A block for managing trace averaging settings.",
-          "Fr": "Un bloc pour gérer les paramètres de moyenne de trace.",
-          "De": "Ein Block zum Verwalten der Trace-Mittelwerteinstellungen.",
-          "Es": "Un bloque para gestionar los ajustes de promedio de traza."
+          "En": "Trace averaging: the switch, and how many sweeps it averages over.",
+          "Fr": "Trace averaging: the switch, and how many sweeps it averages over.",
+          "De": "Trace averaging: the switch, and how many sweeps it averages over.",
+          "Es": "Trace averaging: the switch, and how many sweeps it averages over."
         },
         "layout": {
           "weight": 0
         },
         "fields": {
+          "AVERAGING_STATE": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaSwitch",
+            "handler": "set_averaging_state",
+            "layout": {
+              "height": 50,
+              "width": "100%",
+              "align": "center",
+              "font": 12
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "ON": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "AVERAGING ON",
+                      "Fr": "AVERAGING ON",
+                      "De": "AVERAGING ON",
+                      "Es": "AVERAGING ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "AVERAGING ON",
+                      "Fr": "AVERAGING ON",
+                      "De": "AVERAGING ON",
+                      "Es": "AVERAGING ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Averages each sweep into the trace, over the count set below."
+                },
+                "selected": false
+              },
+              "OFF": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "AVERAGING OFF",
+                      "Fr": "AVERAGING OFF",
+                      "De": "AVERAGING OFF",
+                      "Es": "AVERAGING OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "AVERAGING OFF",
+                      "Fr": "AVERAGING OFF",
+                      "De": "AVERAGING OFF",
+                      "Es": "AVERAGING OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "description": {
+                  "En": "Every sweep is drawn as measured."
+                },
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Averaging_State",
+              "input_name": "state_bool",
+              "converter": "bool",
+              "params": {
+                "trace_number": "1"
+              },
+              "readback": "trace_settings"
+            },
+            "yak_listen": "trace_settings/average_state"
+          },
           "AVERAGING": {
             "type": "_GuiButtonToggler",
             "AES70": "OcaSwitch",
@@ -5898,39 +6410,6 @@
               }
             },
             "options": {
-              "0": {
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Off",
-                      "Fr": "Désactivé",
-                      "De": "Aus",
-                      "Es": "Desactivado"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "Off",
-                      "Fr": "Désactivé",
-                      "De": "Aus",
-                      "Es": "Desactivado"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "description": {
-                  "En": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
-                  "Fr": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
-                  "De": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
-                  "Es": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery."
-                },
-                "value": "0",
-                "units": "count",
-                "selected": true
-              },
               "5": {
                 "label": {
                   "active": {
@@ -6272,14 +6751,15 @@
               "params": {
                 "trace_number": "1"
               },
-              "readback": "Get_Averaging"
+              "readback": "trace_settings"
             },
             "geometry": {
               "width": 126
             },
-            "yak_listen": "Get_Averaging"
+            "yak_listen": "trace_settings/average_count"
           }
-        }
+        },
+        "layout_columns": 2
       }
     }
   },

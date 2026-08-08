@@ -93,11 +93,39 @@ const OcaDropdown = ({ label, value, onChange, options = [], config }) => {
     // Ensure safeOptions is always an array, default to empty if normalization fails
     const safeOptions = Array.isArray(normalizedOptions) ? normalizedOptions : [];
 
+    // Match the instrument's answer to an option — SHORT FORM INCLUDED.
+    //
+    // SCPI lets a mnemonic be written in full or truncated to its capitalised
+    // head, and an instrument answers in the SHORT form: `:TRACe1:MODE WRITE`
+    // is acknowledged as `WRIT`, MAXHOLD as `MAXH`, BLANK as `BLAN`. The option
+    // values here are the long forms, so a literal comparison never matched and
+    // <select> fell back to showing its first entry — the dropdown read LIVE
+    // REALTIME for a trace that was actually in MIN HOLD.
+    //
+    // The short form is by definition a prefix of the long one, which is why a
+    // prefix test is the right rule rather than a hand-kept alias table that
+    // every new enum would have to be added to. Exact and case-insensitive
+    // matches are tried first so a genuine option always wins over a prefix.
+    const resolveValue = (v) => {
+        if (v === undefined || v === null || v === '') return v;
+        const s = String(v).trim();
+        const exact = safeOptions.find(o => String(o.value) === s);
+        if (exact) return exact.value;
+        const ci = safeOptions.find(o => String(o.value).toUpperCase() === s.toUpperCase());
+        if (ci) return ci.value;
+        const short = safeOptions.filter(o => String(o.value).toUpperCase().startsWith(s.toUpperCase()));
+        // Ambiguous prefix (two options sharing a head) is not a match — showing
+        // the wrong one is worse than showing the raw reply.
+        if (short.length === 1) return short[0].value;
+        return v;
+    };
+    const selected = resolveValue(value);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             {label && <span style={{ fontSize: '12px', color: '#999', marginBottom: '4px' }}>{label}</span>}
-            <select 
-                value={value} 
+            <select
+                value={selected}
                 onChange={(e) => onChange(e.target.value)}
                 style={{
                     backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'),

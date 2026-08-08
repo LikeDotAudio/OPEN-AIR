@@ -91,6 +91,46 @@ window.OaUnits = (() => {
     const norm = (u) => String(u == null ? '' : u).trim().toLowerCase().replace('μ', 'u');
     const familyOf = (u) => FAMILIES.find(f => Object.prototype.hasOwnProperty.call(f.units, norm(u)));
 
+    // Scale a decimal by a power of ten by MOVING THE POINT, not by multiplying.
+    //
+    // Every unit pair in the table above is a power of ten apart, and that is
+    // exactly the multiplication binary floating point cannot do: 665551000 Hz
+    // / 1e6 is 665.5509999999999, and 2057.515 MHz * 1e6 is 2057514999.9999998
+    // — which is what a centre-frequency write actually carried to the N9340B.
+    // Rounding the product afterwards only replaces the artefact with a
+    // different one on the next value. Shifting the digit string is exact for
+    // every input, because a power of ten IS the decimal point's position.
+    //
+    // Mirrors shift_decimal() in BackEnd/openair-yak/src/converters.rs — the
+    // same value crosses both, and they must agree digit for digit.
+    const shiftDecimal = (text, power) => {
+        const s = String(text).trim();
+        const m = /^([+-]?)(\d*)(?:\.(\d*))?$/.exec(s);
+        if (!m) return null;                       // exponent form, unit, keyword
+        const sign = m[1] === '-' ? '-' : '';
+        const int = m[2] || '';
+        const frac = m[3] || '';
+        if (!int && !frac) return null;
+
+        const digits = int + frac;
+        const point = int.length + power;
+        let whole, fraction;
+        if (point <= 0) {
+            whole = '0';
+            fraction = '0'.repeat(-point) + digits;
+        } else if (point >= digits.length) {
+            whole = digits + '0'.repeat(point - digits.length);
+            fraction = '';
+        } else {
+            whole = digits.slice(0, point);
+            fraction = digits.slice(point);
+        }
+        whole = whole.replace(/^0+(?=\d)/, '');
+        fraction = fraction.replace(/0+$/, '');
+        const out = sign + whole + (fraction ? `.${fraction}` : '');
+        return out === '-0' ? '0' : out;
+    };
+
     // Returns the numeric value expressed in `to`, or the input unchanged when
     // the pair is not convertible (unknown unit, different quantity, non-numeric).
     const convert = (value, from, to) => {
@@ -100,9 +140,17 @@ window.OaUnits = (() => {
         if (!f || !t || f === t) return n;
         const fam = familyOf(f);
         if (!fam || fam !== familyOf(t)) return n;
+        // log10 of the ratio is an integer for every pair in FAMILIES; Math.round
+        // absorbs the float error in the log itself, not in the value.
+        const power = Math.round(Math.log10(fam.units[f] / fam.units[t]));
+        const shifted = shiftDecimal(value, power);
+        // Number() of an exact decimal string is the nearest f64 to it, which
+        // prints back as that same string — the artefact only ever came from
+        // the arithmetic, never from holding the value.
+        if (shifted !== null) return Number(shifted);
         return n * (fam.units[f] / fam.units[t]);
     };
-    return { convert, norm, familyOf };
+    return { convert, norm, familyOf, shiftDecimal };
 })();
 
 // What a `<topic>/config` message is allowed to contain.
@@ -635,7 +683,7 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         if (hydrateRaw === undefined) return;
         const text = String(hydrateRaw);
 
-        let n;
+        let raw;
         let sourceUnit = nodeJson.yak_hydrate_unit;
         // A named reading arrives as a ControlValue: {value, unit, ...}. The
         // unit travels WITH the value, so the panel no longer has to assert what
@@ -643,30 +691,50 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         let parsed;
         try { parsed = JSON.parse(text); } catch (e) { parsed = undefined; }
         if (parsed && typeof parsed === 'object' && parsed.value !== undefined) {
-            n = Number(parsed.value);
+            raw = parsed.value;
             if (parsed.unit) sourceUnit = parsed.unit;
         } else {
             const idx = nodeJson.yak_hydrate_index;
             const field = (idx === undefined || idx === null) ? text : text.split(';')[idx];
             if (field === undefined) return;
-            n = Number(String(field).trim());
+            raw = String(field).trim();
         }
-        if (!Number.isFinite(n)) return;
+        const n = Number(raw);
 
         // Same mouse-capture rule as the sync effect: a reply that lands mid-drag
         // must not yank the control out from under the hand.
         const grace = window.OA_CAPTURE_GRACE_MS || 600;
         if (throttle.current.lastLocal && (Date.now() - throttle.current.lastLocal) < grace) return;
 
-        const target = nodeJson.units || (nodeJson.domain && nodeJson.domain.units);
-        let converted = window.OaUnits.convert(n, sourceUnit, target);
-        // 665551000 Hz / 1e6 is 665.5509999999999 in binary floating point, and
-        // that is what landed in the box. Round to 9 significant figures — far
-        // more precision than any instrument reports, and no artefact.
-        if (typeof converted === 'number' && Number.isFinite(converted)) {
-            converted = Number(converted.toPrecision(9));
+        // NOT every reading is a number.
+        //
+        // `:TRACe1:MODE?` answers `WRIT`, `:INSTrument:SELect?` answers `SA`.
+        // Bailing on !isFinite meant no ENUMERATED reading ever reached a
+        // control: all four trace-mode dropdowns sat on their first option
+        // while the instrument was in four different modes, and nothing in the
+        // UI ever contradicted them. A non-numeric reading is passed through
+        // verbatim — there is no unit to convert and no precision to round, and
+        // the widget matches it against its own options.
+        //
+        // Only a control that DECLARES options takes this path. A slider or a
+        // number box has nothing to do with a word, and the VISA daemon answers
+        // a failed query with the literal text `ERROR: …` — which decomposes
+        // into field 0 of the reply and would otherwise be shown as a value.
+        if (!Number.isFinite(n)) {
+            const s = String(raw).trim();
+            if (!s || !nodeJson.options) return;
+            setLocalValue(s);
+            return;
         }
-        setLocalValue(converted);
+
+        const target = nodeJson.units || (nodeJson.domain && nodeJson.domain.units);
+        // 665551000 Hz / 1e6 used to be 665.5509999999999 in the box, and the
+        // fix was to round to 9 significant figures. That hid the artefact
+        // rather than removing it — and it also silently discarded real
+        // resolution, since a centre frequency in Hz is already 10 digits.
+        // OaUnits.convert now moves the decimal point instead of multiplying,
+        // so the value is exact and there is nothing left to round away.
+        setLocalValue(window.OaUnits.convert(n, sourceUnit, target));
     }, [hydrateRaw, listenTopic]);
 
     // Per-topic outbound throttle (see PUBLISH_INTERVAL_MS). `pending` holds the

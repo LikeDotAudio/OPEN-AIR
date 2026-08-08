@@ -15,6 +15,23 @@
       "subsystem": "Trace",
       "notes": "The trace index sits in the MIDDLE: ':SENSe:AVERage:TRACe<n>:COUNt'. Eight spellings with it elsewhere — :TRACe:AVERage:COUNt, :SENSe:AVERage:COUNt, :AVERage:COUNt, :TRACe1:AVERage:COUNt and friends — all return -171 'Invalid expression', which is what made this look unsupported. Verified on CN03480580 2026-08-07: set 25 -> reads +25, set 100 -> reads +100."
     },
+    "Set_Averaging_State": {
+      "scpi": ":SENSe:AVERage:TRACe<trace_number>:STATe <state_bool>",
+      "scpiFast": ":SENS:AVER:TRAC<trace_number>:STAT <state_bool>",
+      "description": "Turn trace averaging on or off — the switch the count is useless without.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state_bool"
+      ],
+      "subsystem": "Trace",
+      "notes": "Averaging has TWO halves and the count is the lesser one. ':SENSe:AVERage:TRACe<n>:COUNt' only says how many sweeps to average over; nothing is averaged until ':SENSe:AVERage:TRACe<n>:STATe' is 1. Verified on CN03480580 2026-08-08: with COUNt at 25, STATe read 0 — setting STATe 1 read back 1 with the count untouched, and the trace mode stayed WRIT (this is NOT the AVERage trace mode). COUNt 0 does not disable it either: the instrument clamps it to +1 and leaves STATe alone."
+    },
     "Set_Bwidth_Integration": {
       "scpi": "BWIDth:INTegration <value>",
       "scpiFast": "BWID:INT <value>",
@@ -2649,12 +2666,12 @@
       "subsystem": "System"
     },
     "trace_settings": {
-      "scpi": ":TRACe1:MODE?;:TRACe2:MODE?;:TRACe3:MODE?;:TRACe4:MODE?;:INITiate:CONTinuous?",
-      "scpiFast": ":TRAC1:MODE?;:TRAC2:MODE?;:TRAC3:MODE?;:TRAC4:MODE?;:INIT:CONT?",
-      "description": "Every trace mode plus the continuous-sweep state, in one round trip.",
+      "scpi": ":TRACe1:MODE?;:TRACe2:MODE?;:TRACe3:MODE?;:TRACe4:MODE?;:INITiate:CONTinuous?;:SENSe:AVERage:TRACe1:STATe?;:SENSe:AVERage:TRACe1:COUNt?",
+      "scpiFast": ":TRAC1:MODE?;:TRAC2:MODE?;:TRAC3:MODE?;:TRAC4:MODE?;:INIT:CONT?;:SENS:AVER:TRAC1:STAT?;:SENS:AVER:TRAC1:COUN?",
+      "description": "Every trace mode, the continuous-sweep state, and both halves of averaging, in one round trip.",
       "subsystem": "Trace",
       "returns": {
-        "count": 5,
+        "count": 7,
         "separator": ";",
         "fields": [
           {
@@ -2676,10 +2693,18 @@
           {
             "name": "continuous",
             "type": "BOOL"
+          },
+          {
+            "name": "average_state",
+            "type": "BOOL"
+          },
+          {
+            "name": "average_count",
+            "type": "NR1"
           }
         ]
       },
-      "notes": "Averaging is deliberately NOT in this query. ':TRACe:AVERage:COUNt?' does not answer on firmware A.02.07 — probed 2026-08-07 — and one dead statement kills the whole chained reply, taking the four trace modes with it. Verified as written: 'WRIT;BLAN;BLAN;BLAN;1', no error."
+      "notes": "Averaging DOES belong here, contrary to the earlier note. What does not answer on firmware A.02.07 is ':TRACe:AVERage:COUNt?' — the spelling with the trace index on TRACe. The working pair puts the index in the middle of SENSe:AVERage: ':SENSe:AVERage:TRACe1:STATe?' and ':SENSe:AVERage:TRACe1:COUNt?', and both chain cleanly onto the mode queries. Verified on CN03480580 2026-08-08: the seven-statement chain answered 'MAXH;MAXH;MINH;BLAN;1;0;+25'. One dead statement still kills the whole chained reply, so nothing unverified may be appended here."
     },
     "marker_states": {
       "scpi": ":CALCulate:MARKer1:STATe?;:CALCulate:MARKer2:STATe?;:CALCulate:MARKer3:STATe?;:CALCulate:MARKer4:STATe?;:CALCulate:MARKer5:STATe?;:CALCulate:MARKer6:STATe?",
@@ -2826,6 +2851,17 @@
       },
       "notes": "The trace index sits in the MIDDLE: ':SENSe:AVERage:TRACe<n>:COUNt'. Eight spellings with it elsewhere — :TRACe:AVERage:COUNt, :SENSe:AVERage:COUNt, :AVERage:COUNt, :TRACe1:AVERage:COUNt and friends — all return -171 'Invalid expression', which is what made this look unsupported. Verified on CN03480580 2026-08-07: set 25 -> reads +25, set 100 -> reads +100."
     },
+    "Get_Averaging_State": {
+      "scpi": ":SENSe:AVERage:TRACe<trace_number>:STATe?",
+      "scpiFast": ":SENS:AVER:TRAC<trace_number>:STAT?",
+      "description": "Whether trace averaging is actually running.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 1,
+        "type": "BOOL"
+      },
+      "notes": "Averaging has TWO halves and the count is the lesser one. ':SENSe:AVERage:TRACe<n>:COUNt' only says how many sweeps to average over; nothing is averaged until ':SENSe:AVERage:TRACe<n>:STATe' is 1. Verified on CN03480580 2026-08-08: with COUNt at 25, STATe read 0 — setting STATe 1 read back 1 with the count untouched, and the trace mode stayed WRIT (this is NOT the AVERage trace mode). COUNt 0 does not disable it either: the instrument clamps it to +1 and leaves STATe alone."
+    },
     "trace_data": {
       "scpi": ":TRACe<trace_number>:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
       "scpiFast": ":TRAC<trace_number>:DATA?;:FREQ:STAR?;:FREQ:STOP?",
@@ -2853,6 +2889,118 @@
         ]
       },
       "notes": "A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_1": {
+      "scpi": ":TRACe1:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC1:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Trace 1's samples, with the span they were measured over.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_1",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Same query as `trace_data`, but the trace number is IN THE COMMAND rather than a parameter, so the reply lands on `Reading/trace_data_1/samples_1`. The parameterised verb answers under the single name `trace_data/samples` whichever trace it fetched, which no display can bind to: a graph listening there cannot tell trace 1 from trace 4. A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_2": {
+      "scpi": ":TRACe2:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC2:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Trace 2's samples, with the span they were measured over.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_2",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Same query as `trace_data`, but the trace number is IN THE COMMAND rather than a parameter, so the reply lands on `Reading/trace_data_2/samples_2`. The parameterised verb answers under the single name `trace_data/samples` whichever trace it fetched, which no display can bind to: a graph listening there cannot tell trace 1 from trace 4. A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_3": {
+      "scpi": ":TRACe3:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC3:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Trace 3's samples, with the span they were measured over.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_3",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Same query as `trace_data`, but the trace number is IN THE COMMAND rather than a parameter, so the reply lands on `Reading/trace_data_3/samples_3`. The parameterised verb answers under the single name `trace_data/samples` whichever trace it fetched, which no display can bind to: a graph listening there cannot tell trace 1 from trace 4. A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
+    },
+    "trace_data_4": {
+      "scpi": ":TRACe4:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",
+      "scpiFast": ":TRAC4:DATA?;:FREQ:STAR?;:FREQ:STOP?",
+      "description": "Trace 4's samples, with the span they were measured over.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples_4",
+            "type": "CSV",
+            "unit": "dBm"
+          },
+          {
+            "name": "start",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "stop",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Same query as `trace_data`, but the trace number is IN THE COMMAND rather than a parameter, so the reply lands on `Reading/trace_data_4/samples_4`. The parameterised verb answers under the single name `trace_data/samples` whichever trace it fetched, which no display can bind to: a graph listening there cannot tell trace 1 from trace 4. A trace without its frequency axis cannot be plotted, and fetching the two separately lets them disagree — the span can move between the reads. Start and stop therefore ride in the SAME reply as the samples. Verified on CN03480580 2026-08-07: 461 points per trace, 3 fields for one trace and 6 for all four. Note ':TRACe<n>:DATA?' — ':TRACe:DATA? TRACE1' does not answer on this firmware."
     },
     "trace_data_all": {
       "scpi": ":TRACe1:DATA?;:TRACe2:DATA?;:TRACe3:DATA?;:TRACe4:DATA?;:FREQuency:STARt?;:FREQuency:STOP?",

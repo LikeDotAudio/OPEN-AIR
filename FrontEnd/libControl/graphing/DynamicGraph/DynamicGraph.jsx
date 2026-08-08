@@ -2,11 +2,23 @@
  * Header: DynamicGraph.jsx
  * Purpose: DynamicGraph component or utility.
  * Description: Handles logic and rendering for DynamicGraph component or utility.
- * 
- * Version: 26.07.05.1
+ *
+ * Version: 26.08.08.1
  * Change Log:
  * - 2026-07-05: Initial annotation and documentation added.
+ * - 2026-08-08: Plot YAK trace readings (`traces` + `x_axis`), not just authored
+ *               `datasets`. An instrument sends amplitudes ALONE — the frequency
+ *               axis arrives as the start/stop of the same reply — so the widget
+ *               builds X from the span rather than expecting [x,y] pairs.
  */
+
+// A blanked trace still answers :TRACe<n>:DATA?, with the instrument's
+// "no data" sentinel in every bin (-547.6 dBm on the N9340B). Plotting it is
+// worse than useless: one flat line 480 dB below the signal collapses the Y
+// axis and every real trace becomes a straight line at the top of the chart.
+// Anything below this floor is not a measurement — no spectrum analyser has
+// 300 dB of range — so a trace made entirely of them is dropped, not drawn.
+const BLANK_FLOOR_DBM = -300;
 
 // Inline comment: Logic for DynamicGraph
 const DynamicGraph = ({ value: mqttData, config }) => {
@@ -14,6 +26,11 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     const chartInstance = React.useRef(null);
     const useMqttLang = window.useMqttLang || (() => ['En', () => {}]);
     const [lang] = useMqttLang();
+    // Read the bus directly. A trace needs SIX topics at once (four sets of
+    // samples plus the span's start and stop), and `useMqttState` hands a widget
+    // exactly one — and only after coercing it with Number(), which discards a
+    // 461-value CSV outright. Display-only, so nothing is published from here.
+    const messages = (window.useMqttMessages ? window.useMqttMessages() : {}) || {};
 
     const title = config?.label?.[lang] || config?.label?.En || config?.title || "Dynamic Graph";
     
@@ -47,13 +64,275 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         return data;
     };
 
+    // ── YAK trace mode ──────────────────────────────────────────────────────
+    //
+    // `config.traces` is a list of series, each naming the reading it takes its
+    // samples from; `config.x_axis` names the two readings carrying the span.
+    // The orchestrator stamps a `yak_listen_topic` beside every `yak_listen` it
+    // finds at ANY depth (instruments.rs, bind_readout), so these nested specs
+    // arrive already bound to this device.
+    //
+    // A spec may list several sources: the same physical trace is published
+    // under a different reading name depending on which capture fetched it
+    // (trace_data_all/samples_2 vs trace_data_234/samples_2), and the graph must
+    // draw whichever ran last rather than only ever the one it was authored on.
+    const traceSpecs = React.useMemo(() => {
+        const raw = Array.isArray(config?.traces) ? config.traces : [];
+        if (raw.length) return raw;
+        // A single top-level `yak_listen` is the one-trace shorthand.
+        if (config?.yak_listen_topic) {
+            return [{ id: 'trace', label: config.label, yak_listen_topic: config.yak_listen_topic }];
+        }
+        return [];
+    }, [JSON.stringify(config?.traces), config?.yak_listen_topic]);
+
+    const sourceTopicsOf = (spec) => {
+        const out = [];
+        if (spec.yak_listen_topic) out.push(spec.yak_listen_topic);
+        (Array.isArray(spec.sources) ? spec.sources : []).forEach(s => {
+            if (s && s.yak_listen_topic) out.push(s.yak_listen_topic);
+        });
+        return out;
+    };
+
+    // Read a ControlValue off the bus: {"value": "...", "unit": "Hz"}.
+    const readingOf = (topic) => {
+        const raw = topic ? messages[topic] : undefined;
+        if (raw === undefined) return undefined;
+        try {
+            const p = JSON.parse(String(raw));
+            if (p && typeof p === 'object' && p.value !== undefined) return p;
+        } catch (e) { /* not JSON — fall through to the bare payload */ }
+        return { value: String(raw) };
+    };
+
+    const xUnits = config?.x_axis?.units || config?.axis?.x?.units || 'Hz';
+
+    // Which capture answered LAST wins.
+    //
+    // Retained readings carry no timestamp, so freshness cannot be read off the
+    // payload — it has to be observed. Every render notes the payload behind each
+    // source topic; the one that CHANGED since the previous render is what the
+    // instrument just answered, and it becomes that slot's source until another
+    // does. Without this, GET TRACES 2,3,4 would leave the chart showing whatever
+    // GET ALL TRACES had last left on the other topic — including its span, which
+    // is the more dangerous half: a trace drawn against a span it was not
+    // measured on is wrong everywhere, not merely stale.
+    const activeSource = React.useRef({});   // slot id -> topic
+    const lastSeen = React.useRef({});       // topic -> payload
+    const pickSource = (id, topics) => {
+        topics.forEach(t => {
+            const now = messages[t];
+            if (now !== undefined && lastSeen.current[t] !== now) {
+                lastSeen.current[t] = now;
+                activeSource.current[id] = t;
+            }
+        });
+        // Nothing has moved yet (first paint off retained state): take the first
+        // source that actually has a payload.
+        if (!activeSource.current[id] || messages[activeSource.current[id]] === undefined) {
+            activeSource.current[id] = topics.find(t => messages[t] !== undefined) || topics[0];
+        }
+        return activeSource.current[id];
+    };
+
+    const slotIdOf = (spec, i) => spec.id || `trace_${i + 1}`;
+    const traceTopics = traceSpecs.map((spec, i) => pickSource(slotIdOf(spec, i), sourceTopicsOf(spec)));
+    // The instrument's own answer to "is this trace showing anything".
+    const modeTopics = traceSpecs.map(spec => spec.mode?.yak_listen_topic);
+    const startTopic = pickSource('__x_start', sourceTopicsOf(config?.x_axis?.start || {}));
+    const stopTopic = pickSource('__x_stop', sourceTopicsOf(config?.x_axis?.stop || {}));
+
+    // Signature of the raw payloads this graph depends on. The messages object
+    // gets a new identity on EVERY MQTT message on the page — a marker readout
+    // ticking must not re-parse 4 x 461 samples.
+    const traceDataKey = traceTopics
+        .concat(modeTopics, [startTopic, stopTopic])
+        .map(t => (t ? `${t}=${String(messages[t] || '').length}:${String(messages[t] || '').slice(-24)}` : ''))
+        .join('|');
+
+    // The span, in display units. Hoisted out of the series build because the
+    // axis TYPE depends on it: a log axis cannot render a sweep that starts at
+    // 0 Hz, and that is the default full-span state of every analyser here.
+    const span = React.useMemo(() => {
+        const startR = readingOf(startTopic);
+        const stopR = readingOf(stopTopic);
+        const startHz = Number(startR?.value);
+        const stopHz = Number(stopR?.value);
+        if (!Number.isFinite(startHz) || !Number.isFinite(stopHz)) return null;
+        const conv = window.OaUnits ? window.OaUnits.convert : (v) => v;
+        return {
+            x0: conv(startHz, startR.unit || 'Hz', xUnits),
+            x1: conv(stopHz, stopR.unit || 'Hz', xUnits),
+        };
+    }, [traceDataKey, xUnits]);
+
+    // `log` is honoured only where a log axis means anything.
+    //
+    // Two ways it does not. A span starting at 0 Hz — the default full sweep on
+    // every analyser here — has no logarithm, and echarts renders the whole axis
+    // blank rather than saying so, which reads as a failed capture. And a span
+    // narrower than a decade has no power of ten INSIDE it: 1673–2140 MHz gets
+    // zero major gridlines and one minor one at 2000, so the frequency axis
+    // draws essentially no vertical lines while a linear axis of the same span
+    // draws its usual evenly spaced set.
+    //
+    // Log therefore applies from one decade up, where the decades are what you
+    // want to read against, and a narrow capture falls back to linear. Set
+    // `x_axis.log_min_ratio` to override the threshold (1 forces log always).
+    const wantsLog = String(config?.x_axis?.scale || xAxisCfg.scale || '').toLowerCase() === 'log';
+    const logMinRatio = Number(config?.x_axis?.log_min_ratio) || 10;
+    const xIsLog = wantsLog && !!span && span.x0 > 0 && span.x1 > 0
+        && (span.x1 / span.x0) >= logMinRatio;
+
+    // What mode each trace is in, in the panel's own words.
+    //
+    // A trace is not just a colour — MAX HOLD and LIVE REALTIME are different
+    // measurements, and three overlaid curves are unreadable without saying
+    // which is which. The graph already reads the mode to decide whether a
+    // trace is blanked, so naming it costs nothing more on the wire.
+    //
+    // `mode.labels` is keyed by the long SCPI form and carries the SAME wording
+    // as the trace-mode dropdown (both are stamped from Spectrum.json), so the
+    // legend and that tab can never describe the same state differently.
+    const modeLabels = React.useMemo(() => {
+        const out = {};
+        traceSpecs.forEach((spec, i) => {
+            const reading = readingOf(modeTopics[i]);
+            if (!reading) return;
+            const m = String(reading.value).trim().toUpperCase();
+            if (!m) return;
+            const labels = spec.mode?.labels || {};
+            // SCPI answers in the short form, so match the long key by prefix —
+            // the same rule OcaDropdown uses. Unknown modes show the raw reply
+            // rather than nothing: an unlabelled state is still information.
+            const key = Object.keys(labels).find(k => k.toUpperCase() === m)
+                || Object.keys(labels).find(k => k.toUpperCase().startsWith(m));
+            out[slotIdOf(spec, i)] = key ? labels[key] : m;
+        });
+        return out;
+    }, [traceDataKey, JSON.stringify(traceSpecs)]);
+
+    const traceSeries = React.useMemo(() => {
+        if (!traceSpecs.length || !span) return null;
+        const { x0, x1 } = span;
+
+        const built = [];
+        traceSpecs.forEach((spec, i) => {
+            const id = slotIdOf(spec, i);
+
+            // BLANK is the instrument saying "this trace shows nothing".
+            //
+            // A blanked trace still ANSWERS :TRACe<n>:DATA? — with whatever it
+            // last held, or with the sentinel — so the samples alone cannot tell
+            // you whether the operator wanted to see it. The trace mode can, and
+            // it is the same fact the traces tab shows, so the graph and that
+            // dropdown can never disagree. Checked before the samples are even
+            // parsed: a blanked trace costs nothing.
+            const mode = readingOf(modeTopics[i]);
+            if (mode !== undefined) {
+                // SCPI answers in the short form, so BLANK comes back as BLAN.
+                const m = String(mode.value).trim().toUpperCase();
+                if (m && 'BLANK'.startsWith(m)) return;
+            }
+
+            const reading = readingOf(traceTopics[i]);
+            if (!reading) return;
+
+            const ys = String(reading.value).split(',');
+            if (ys.length < 2) return;
+
+            // The span is the axis: sample k sits at start + k*(stop-start)/(n-1).
+            // The instrument never sends X, and it must not be invented from a
+            // separate :FREQ:STAR? — that read can land after the span has moved.
+            const step = (x1 - x0) / (ys.length - 1);
+            const points = [];
+            let real = 0;
+            for (let k = 0; k < ys.length; k++) {
+                const y = parseFloat(ys[k]);
+                if (!Number.isFinite(y)) continue;
+                if (y > BLANK_FLOOR_DBM) real++;
+                points.push([x0 + k * step, y]);
+            }
+            if (!real) return;   // whole trace is the blank sentinel — not drawn
+
+            built.push({
+                id,
+                name: spec.label?.[lang] || spec.label?.En || id,
+                type: 'line',
+                showSymbol: false,
+                symbol: 'none',
+                animation: false,
+                sampling: 'lttb',
+                lineStyle: { color: spec.color || undefined, width: spec.width || 1.5 },
+                itemStyle: { color: spec.color || undefined },
+                data: points,
+            });
+        });
+        return built;
+    }, [traceDataKey, JSON.stringify(traceSpecs), lang, xUnits, span]);
+
+    // Last non-null build, so a structural re-apply can restate the traces
+    // instead of clearing them.
+    const traceSeriesRef = React.useRef(null);
+    if (traceSeries) traceSeriesRef.current = traceSeries;
+
+    // The mode is shown by a legend FORMATTER, not by renaming the series.
+    //
+    // echarts keys legend show/hide on the series name, so folding the mode into
+    // the name would reset every manual hide the moment a trace changed mode —
+    // the one thing you would be watching the legend for.
+    const legendSuffix = React.useMemo(() => {
+        const out = {};
+        traceSpecs.forEach((spec, i) => {
+            const id = slotIdOf(spec, i);
+            const name = spec.label?.[lang] || spec.label?.En || id;
+            if (modeLabels[id]) out[name] = modeLabels[id];
+        });
+        return out;
+    }, [modeLabels, JSON.stringify(traceSpecs), lang]);
+    const legendSuffixRef = React.useRef({});
+    legendSuffixRef.current = legendSuffix;
+    const legendFormatter = React.useCallback(
+        (name) => {
+            const mode = legendSuffixRef.current[name];
+            return mode ? `${name}  ·  ${mode}` : name;
+        },
+        [],
+    );
+
     // Stable signature of everything that affects chart STRUCTURE. Options are
     // re-applied only when this string changes — NOT on every render. `config` gets
     // a fresh identity each render and unrelated MQTT updates re-render every widget,
     // so without this the chart was torn down + redrawn on any GUI change.
     const cfgKey = JSON.stringify({
         datasets: config?.datasets, axis: config?.axis, title, nav: !!config?.Navigation,
+        x_axis: config?.x_axis, units: config?.units, traceMode: !!traceSpecs.length, xIsLog,
+        span,   // the axis bounds are the span, so a new capture re-applies them
     });
+
+    // THE SPAN IS THE AXIS. There is no data outside it and no meaning either —
+    // the instrument measured 461 points between these two frequencies and
+    // nothing else. Left unbounded, echarts picks its own round numbers, which
+    // is why zooming out ran the axis down towards 0 MHz through empty space,
+    // and why a log axis showed a bare 100 → 1,000 decade with the capture
+    // crammed against the right edge. An authored min/max still wins.
+    const xMin = xAxisCfg.min ?? config?.x_axis?.min ?? (traceSpecs.length && span ? span.x0 : undefined);
+    const xMax = xAxisCfg.max ?? config?.x_axis?.max ?? (traceSpecs.length && span ? span.x1 : undefined);
+
+    // A trace graph is titled by the block that contains it; a plain graph is
+    // not, so it keeps its own heading.
+    const showTitle = config?.show_title === true
+        || (!traceSpecs.length && config?.show_title !== false);
+
+    // Axis names. In trace mode the units come off the widget (`units`: dBm,
+    // `x_axis.units`: MHz) rather than an authored `axis` block, so the operator
+    // is never left reading an unlabelled number.
+    const xName = xAxisCfg.label?.[lang] || xAxisCfg.label?.En
+        || config?.x_axis?.label?.[lang] || config?.x_axis?.label?.En
+        || (traceSpecs.length ? `Frequency (${xUnits})` : "");
+    const yName = yAxisCfg.label?.[lang] || yAxisCfg.label?.En
+        || (traceSpecs.length && config?.units ? config.units : "");
 
     React.useEffect(() => {
         if (!chartRef.current || typeof echarts === 'undefined') return;
@@ -82,39 +361,66 @@ const DynamicGraph = ({ value: mqttData, config }) => {
 
         const option = {
             backgroundColor: 'transparent',
-            title: {
+            // No title in trace mode. The block above the widget already says
+            // what this is, so a second heading spends ~30px of chart height
+            // repeating it — on a spectrum trace that is dynamic range you can
+            // see. `show_title: true` puts it back.
+            title: showTitle ? {
                 text: title,
                 left: 'center',
                 textStyle: { color: '#ccc', fontSize: 14 }
-            },
+            } : { show: false },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: { type: 'cross', label: { backgroundColor: '#6a7985' } }
             },
+            // Four overlaid traces are unreadable without saying which is which
+            // — and WHAT each one is: MAX HOLD and LIVE REALTIME are different
+            // measurements, not two colours of the same thing.
+            legend: traceSpecs.length ? {
+                top: showTitle ? 22 : 2, textStyle: { color: '#aaa', fontSize: 11 }, itemHeight: 8,
+                formatter: legendFormatter,
+            } : undefined,
             grid: {
                 left: '3%',
                 right: '4%',
                 bottom: '10%',
+                top: traceSpecs.length ? (showTitle ? 60 : 30) : undefined,
                 containLabel: true,
                 show: showGrid,
                 borderColor: '#333'
             },
             xAxis: {
-                type: xAxisCfg.scale === 'log' ? 'log' : 'value',
-                name: xAxisCfg.label?.[lang] || xAxisCfg.label?.En || "",
+                type: (xIsLog || (!traceSpecs.length && xAxisCfg.scale === 'log')) ? 'log' : 'value',
+                name: xName,
                 nameLocation: 'middle',
                 nameGap: 25,
-                splitLine: { show: showGrid, lineStyle: { color: '#222' } },
+                // A span is not anchored at zero either. Without `scale`, echarts
+                // pads a value axis down to 0, so a 1673–2140 MHz capture drew
+                // itself squeezed into the right fifth of a 0–2500 MHz axis.
+                scale: traceSpecs.length > 0,
+                splitLine: { show: showGrid, lineStyle: { color: '#444' } },
+                // A log axis puts its major lines on the decades. A capture is
+                // usually a slice of ONE decade — 1673 to 2140 MHz has no power
+                // of ten inside it — so the major lines land outside the chart
+                // and the frequency axis draws no vertical lines at all. The
+                // minor subdivisions are the ones you actually read against.
+                minorTick: { show: xIsLog },
+                minorSplitLine: { show: xIsLog && showGrid, lineStyle: { color: '#2b2b2b' } },
                 axisLine: { lineStyle: { color: xAxisCfg.color || '#555' } },
-                min: xAxisCfg.min,
-                max: xAxisCfg.max
+                min: xMin,
+                max: xMax
             },
             yAxis: {
                 type: yAxisCfg.scale === 'log' ? 'log' : 'value',
-                name: yAxisCfg.label?.[lang] || yAxisCfg.label?.En || "",
+                name: yName,
                 nameLocation: 'middle',
                 nameGap: 40,
-                splitLine: { show: showGrid, lineStyle: { color: '#222' } },
+                // dBm is not anchored at zero — echarts' default `scale: false`
+                // pads the axis down to it, squashing a -60 dBm noise floor into
+                // the top sliver of the chart.
+                scale: traceSpecs.length > 0,
+                splitLine: { show: showGrid, lineStyle: { color: '#444' } },
                 axisLine: { lineStyle: { color: yAxisCfg.color || '#555' } },
                 min: yAxisCfg.min,
                 max: yAxisCfg.max
@@ -123,11 +429,29 @@ const DynamicGraph = ({ value: mqttData, config }) => {
                 { type: 'inside', start: 0, end: 100 },
                 { type: 'slider', bottom: 10, height: 20, borderColor: '#333', handleStyle: { color: '#555' } }
             ] : [],
-            series: initialSeries
+            // A structural re-apply must not blank the live traces: cfgKey can
+            // change (a language switch, a resize-driven layout edit) long after
+            // the last capture, and the data effect below will not re-run because
+            // the samples themselves did not change.
+            series: traceSpecs.length ? (traceSeriesRef.current || []) : initialSeries
         };
 
-        chartInstance.current.setOption(option);
+        chartInstance.current.setOption(option, { replaceMerge: 'series' });
     }, [cfgKey, lang]);
+
+    // Live traces -> chart. `replaceMerge` because the series COUNT varies: a
+    // trace that gets blanked on the instrument drops out of the list, and
+    // echarts' default merge-by-index would leave its last samples on screen
+    // forever.
+    React.useEffect(() => {
+        if (!traceSeries || !chartInstance.current) return;
+        // The legend rides along: its formatter reads the CURRENT mode, so a
+        // trace switching to MAX HOLD must redraw the label, not just the curve.
+        chartInstance.current.setOption(
+            { series: traceSeries, legend: { formatter: legendFormatter } },
+            { replaceMerge: 'series' },
+        );
+    }, [traceSeries]);
 
     // Resize listener + dispose — mount/unmount only.
     React.useEffect(() => {
@@ -141,6 +465,10 @@ const DynamicGraph = ({ value: mqttData, config }) => {
 
     // Handle incoming real-time data from MQTT
     React.useEffect(() => {
+        // Trace mode owns the series. The legacy path merges by series id from a
+        // `{id: [[x,y]…]}` payload, and a widget whose own control topic happens
+        // to carry an object would silently overwrite the captured waveforms.
+        if (traceSpecs.length) return;
         if (mqttData && chartInstance.current) {
             let parsedMqttData = mqttData;
             if (typeof mqttData === 'string') {
@@ -164,7 +492,7 @@ const DynamicGraph = ({ value: mqttData, config }) => {
                 chartInstance.current.setOption({ series: updates });
             }
         }
-    }, [mqttData]);
+    }, [mqttData, traceSpecs.length]);
 
     return (
         <div style={{ width: width, height: height, display: 'flex', flexDirection: 'column' }}>

@@ -44,15 +44,56 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
         const opt = optionsData[key];
         return (opt && opt.value !== undefined && opt.value !== null) ? String(opt.value) : String(key);
     };
+    // Resolve what the INSTRUMENT said back to one of this control's keys.
+    //
+    // The panel and the instrument do not spell things the same way, and until
+    // they are reconciled here a readback lights nothing at all:
+    //
+    //   count    the panel declares "50"; SCPI answers NR1 as "+50"
+    //   on/off   the panel names ON and OFF; SCPI answers BOOL as 1 and 0
+    //
+    // Both were silent failures — the reading arrived, the widget could not
+    // place it, and the control kept showing its authored default while the
+    // instrument was somewhere else. Exact matches are tried first so a literal
+    // option always wins over any of the looser rules.
     const keyForBusValue = (raw) => {
-        const s = String(raw);
-        for (const [k, opt] of Object.entries(optionsData)) {
-            if (opt && opt.value !== undefined && opt.value !== null && String(opt.value) === s) return k;
+        const s = String(raw).trim();
+        if (s === '') return null;
+        const declared = Object.entries(optionsData)
+            .filter(([, opt]) => opt && opt.value !== undefined && opt.value !== null);
+
+        for (const [k, opt] of declared) {
+            if (String(opt.value) === s) return k;
         }
         // Topics retained from before this change still hold a KEY. Resolve
         // those too, or every existing panel renders with nothing lit until the
         // control is touched once.
-        return Object.prototype.hasOwnProperty.call(optionsData, s) ? s : null;
+        if (Object.prototype.hasOwnProperty.call(optionsData, s)) return s;
+
+        // NUMERIC equality, so "+50" finds "50". A leading plus, a trailing
+        // ".0" and any zero padding are all the same quantity.
+        const n = Number(s);
+        if (Number.isFinite(n)) {
+            for (const [k, opt] of declared) {
+                if (Number(opt.value) === n) return k;
+            }
+            const numKey = Object.keys(optionsData).find(k => Number(k) === n);
+            if (numKey !== undefined) return numKey;
+        }
+
+        // BOOL, spelled the instrument's way. Shares the truth table with YAK's
+        // converter (as_bool) so a toggle cannot read as ON here while the SET
+        // verb resolves the same payload as OFF.
+        const b = { '1': true, 'true': true, 'on': true, 'yes': true,
+                    '0': false, 'false': false, 'off': false, 'no': false }[s.toLowerCase()];
+        if (b !== undefined) {
+            const want = b ? 'ON' : 'OFF';
+            const boolKey = Object.keys(optionsData).find(k => k.toUpperCase() === want);
+            if (boolKey) return boolKey;
+        }
+
+        const ci = Object.keys(optionsData).find(k => k.toUpperCase() === s.toUpperCase());
+        return ci !== undefined ? ci : null;
     };
 
     // "None Selected" is a rendered button whose value is the sentinel "NONE".
@@ -128,7 +169,12 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
     // An empty topic value means "no selection", which is what the None button
     // renders as selected — the sentinel never travels, so it is reconstructed
     // here rather than read back off the bus.
-    const currentSelectedKeys = val
+    // ZERO IS A VALUE, not an absence. `val` was tested for truthiness, so the
+    // instrument answering `0` for :INITiate:CONTinuous? or an averaging STATe?
+    // fell into the no-selection branch and lit nothing — the one readback where
+    // OFF is the whole answer. Only an empty/absent payload means "unset".
+    const hasValue = val !== undefined && val !== null && String(val).trim() !== '';
+    const currentSelectedKeys = hasValue
         ? String(val).split(",").map(keyForBusValue).filter(Boolean)
         : nullKeys;
 

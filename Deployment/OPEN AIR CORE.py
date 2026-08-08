@@ -4,12 +4,15 @@
 # Description: THE kick-off. Use 'OPENAIR FRONT END.py' to open the site
 #              again without rebuilding or rescanning the bench.
 # 
-# Version: 26.08.07.2
+# Version: 26.08.08.1
 # Change Log:
 # - 2026-07-05: Initial annotation and documentation added.
 # - 2026-08-07: Stop running OPEN-AIR containers and start a host mosquitto in their
 #               place, so a bare-metal run always owns the whole stack
 #               (--ignore-docker leaves containers alone).
+# - 2026-08-08: Read the broker config from 'Deployment/MQTT broker/mosquitto.conf'
+#               — the path it looked for (<root>/broker/) does not exist, so the
+#               host broker never started and every agent spun on ECONNREFUSED.
 # ==========================================
 
 #!/usr/bin/env python3
@@ -96,16 +99,18 @@ def port_is_listening(host, port, timeout=0.5):
 def host_broker_config(root):
     """Write a runtime mosquitto.conf derived from the repo's bare-metal config.
 
-    broker/mosquitto.conf is the source of truth for the listeners and the
-    anonymous/ACL posture — it must not be duplicated here, or a future security
-    change made there would silently not apply to host runs. The one line that
+    'Deployment/MQTT broker/mosquitto.conf' is the source of truth for the
+    listeners and the anonymous/ACL posture — it must not be duplicated here, or
+    a future security change made there would silently not apply to host runs.
+    (It is the same file docker-compose.host.yml mounts into the container, so
+    host and container runs cannot drift apart.) The one line that
     cannot survive is persistence_location: it points at /var/lib/mosquitto/,
     which is owned by the `mosquitto` user, so a broker running as the invoking
     user cannot write its retained-state database there. Retained state matters
     (protocol configs and agent heartbeats are all retained), so it is redirected
     to a per-user state dir that persists across runs rather than disabled.
     """
-    source = os.path.join(root, "broker", "mosquitto.conf")
+    source = os.path.join(root, "Deployment", "MQTT broker", "mosquitto.conf")
     if not os.path.exists(source):
         return None, None
 
@@ -148,7 +153,8 @@ def start_host_broker(root):
 
     conf_path, data_dir = host_broker_config(root)
     if not conf_path:
-        print("⚠️  [LAUNCHER] broker/mosquitto.conf missing — cannot start host broker.", file=sys.stderr)
+        print("⚠️  [LAUNCHER] 'Deployment/MQTT broker/mosquitto.conf' missing — "
+              "cannot start host broker.", file=sys.stderr)
         return False
 
     print(f"🦟 [LAUNCHER] Starting host mosquitto on {BROKER_HOST}:{BROKER_PORT}...", flush=True)

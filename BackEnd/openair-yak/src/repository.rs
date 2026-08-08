@@ -26,10 +26,12 @@ pub struct Command {
 }
 
 /// The declared shape of a query's reply.
+///
+/// `count` is in the JSON too, but the runtime never needs it — the reply is
+/// split on `separator` and zipped against `fields`. Only the tools care, and
+/// `validate`, `trees` and `list` read it off the raw `Value`.
 #[derive(Debug, Clone, Deserialize, Default)]
 pub struct Returns {
-    #[serde(default)]
-    pub count: Option<serde_json::Value>,
     /// Defaults to ";" — the SCPI convention for chained replies.
     #[serde(default)]
     pub separator: Option<String>,
@@ -198,10 +200,47 @@ impl YakRepository {
     pub fn command_for_scpi(&self, model_name: &str, scpi: &str) -> Option<&str> {
         let needle = scpi.trim();
         let bucket = self.models.get(model_name)?;
+
+        // Exact first — the overwhelmingly common case, and unambiguous.
+        if let Some((name, _)) = bucket.iter().find(|(_, c)| {
+            c.scpi.trim() == needle
+                || c.scpi_fast.as_deref().map(|f| f.trim() == needle).unwrap_or(false)
+        }) {
+            return Some(name.as_str());
+        }
+
+        // Then allow for substituted placeholders. A parameterised query goes on
+        // the wire as `:SENSe:AVERage:TRACe1:COUNt?` while the table stores
+        // `:SENSe:AVERage:TRACe<trace_number>:COUNt?`, so an exact match can
+        // never attribute one — its reply was dropped with "no command matches",
+        // and the control that asked for it never heard back.
+        fn matches(template: &str, actual: &str) -> bool {
+            let mut rest = actual;
+            let mut first = true;
+            for lit in template.split(|c| c == '<' || c == '>').step_by(2) {
+                if lit.is_empty() {
+                    first = false;
+                    continue;
+                }
+                match if first { rest.starts_with(lit).then_some(0) } else { rest.find(lit) } {
+                    Some(i) => rest = &rest[i + lit.len()..],
+                    None => return false,
+                }
+                first = false;
+            }
+            // A trailing placeholder may consume the remainder; a template that
+            // ended in a literal must have consumed everything.
+            template.ends_with('>') || rest.is_empty()
+        }
+
         bucket
             .iter()
-            .find(|(_, c)| c.scpi.trim() == needle
-                || c.scpi_fast.as_deref().map(|f| f.trim() == needle).unwrap_or(false))
+            .find(|(_, c)| {
+                (c.scpi.contains('<') && matches(c.scpi.trim(), needle))
+                    || c.scpi_fast.as_deref()
+                        .map(|f| f.contains('<') && matches(f.trim(), needle))
+                        .unwrap_or(false)
+            })
             .map(|(name, _)| name.as_str())
     }
 

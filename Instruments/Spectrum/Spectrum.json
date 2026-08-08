@@ -3515,6 +3515,51 @@
               "input_name": "state_bool",
               "converter": "bool_to_int"
             }
+          },
+          "Grab_Marker_Values": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GRAB ALL MARKER VALUES",
+                  "Fr": "LIRE TOUS LES MARQUEURS",
+                  "De": "ALLE MARKER LESEN",
+                  "Es": "LEER TODOS LOS MARCADORES"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_nab_on_load": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Markers",
+              "command": "all_marker_settings",
+              "input_name": "",
+              "converter": ""
+            }
           }
         }
       },
@@ -3660,7 +3705,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_1",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       },
@@ -3801,7 +3849,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_2",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       },
@@ -3942,7 +3993,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_3",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       },
@@ -4083,7 +4137,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_4",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       },
@@ -4224,7 +4281,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_5",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       },
@@ -4365,7 +4425,10 @@
                 "text_color": "#cccccc"
               }
             },
-            "AES70": "OcaLevelSensor"
+            "AES70": "OcaLevelSensor",
+            "yak_listen": "all_marker_settings/y_6",
+            "units": "dBm",
+            "yak_readout": true
           }
         }
       }

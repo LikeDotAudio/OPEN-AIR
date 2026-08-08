@@ -3573,8 +3573,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 1,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "1"
+              }
             },
             "yak_listen": "marker_states/state_1"
           },
@@ -3619,8 +3621,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 1,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "1"
+              }
             },
             "value": {
               "default_value": "111"
@@ -3715,8 +3719,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 2,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "2"
+              }
             },
             "yak_listen": "marker_states/state_2"
           },
@@ -3756,8 +3762,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 2,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "2"
+              }
             },
             "value": {
               "default_value": "222"
@@ -3852,8 +3860,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 3,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "3"
+              }
             },
             "yak_listen": "marker_states/state_3"
           },
@@ -3893,8 +3903,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 3,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "3"
+              }
             },
             "value": {
               "default_value": "333"
@@ -3989,8 +4001,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 4,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "4"
+              }
             },
             "yak_listen": "marker_states/state_4"
           },
@@ -4030,8 +4044,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 4,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "4"
+              }
             },
             "value": {
               "default_value": "444"
@@ -4126,8 +4142,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 5,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "5"
+              }
             },
             "yak_listen": "marker_states/state_5"
           },
@@ -4167,8 +4185,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 5,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "5"
+              }
             },
             "value": {
               "default_value": "555"
@@ -4263,8 +4283,10 @@
               "command": "Set_Marker_State",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "marker_number": 6,
-              "readback": "marker_states"
+              "readback": "marker_states",
+              "params": {
+                "marker_number": "6"
+              }
             },
             "yak_listen": "marker_states/state_6"
           },
@@ -4304,8 +4326,10 @@
               "command": "Set_Marker_X_position",
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
-              "marker_number": 6,
-              "readback": "all_marker_settings"
+              "readback": "all_marker_settings",
+              "params": {
+                "marker_number": "6"
+              }
             },
             "value": {
               "default_value": "666"
@@ -4383,8 +4407,10 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 1,
-              "readback": "trace_settings"
+              "readback": "trace_settings",
+              "params": {
+                "trace_number": "1"
+              }
             },
             "layout": {
               "height": 30,
@@ -4586,8 +4612,10 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 2,
-              "readback": "trace_settings"
+              "readback": "trace_settings",
+              "params": {
+                "trace_number": "2"
+              }
             },
             "layout": {
               "height": 30,
@@ -4789,8 +4817,10 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 3,
-              "readback": "trace_settings"
+              "readback": "trace_settings",
+              "params": {
+                "trace_number": "3"
+              }
             },
             "layout": {
               "height": 30,
@@ -4992,8 +5022,10 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 4,
-              "readback": "trace_settings"
+              "readback": "trace_settings",
+              "params": {
+                "trace_number": "4"
+              }
             },
             "layout": {
               "height": 30,

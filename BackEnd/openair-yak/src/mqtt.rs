@@ -135,9 +135,15 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
                     }
                     continue;
                 }
-                if payload_str.contains("yak_handler") {
-                    eprintln!("   🐛 [YAK DEBUG] Raw payload with yak_handler on {}: {}", p.topic, payload_str);
-                }
+                // Dumps the WHOLE config payload for every handler-bearing
+                // topic. That is ~150 multi-line messages at boot, which buries
+                // the RX CONFIG / Cached lines below that actually say what YAK
+                // learned. Left in place, commented, because it is the first
+                // thing you want back when a handler is not being picked up.
+                //
+                // if payload_str.contains("yak_handler") {
+                //     eprintln!("   🐛 [YAK DEBUG] Raw payload with yak_handler on {}: {}", p.topic, payload_str);
+                // }
 
                 // 1. Publish incoming command to monitor
                 let monitor_in = format!("{}/monitor/in", config.topic);

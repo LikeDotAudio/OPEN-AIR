@@ -258,6 +258,32 @@ fn substitute(node: &Value, tokens: &BTreeMap<String, String>) -> Value {
 /// The template names the quantity; the model supplies units and limits. A
 /// template cannot hardcode them and stay one template — this bench runs four
 /// module models spanning 8V/16A to 60V/2.5A off the same panel.
+/// How many `to` there are in one `from`, within a single quantity.
+///
+/// Conversion is defined only inside a family: Hz→MHz is arithmetic, Hz→dBm is
+/// not, and `None` means "leave the number alone" rather than guess.
+fn unit_ratio(from: &str, to: &str) -> Option<f64> {
+    const FAMILIES: [&[(&str, f64)]; 4] = [
+        &[("hz", 1.0), ("khz", 1e3), ("mhz", 1e6), ("ghz", 1e9)],
+        &[("uv", 1e-6), ("mv", 1e-3), ("v", 1.0), ("kv", 1e3)],
+        &[("ns", 1e-9), ("us", 1e-6), ("ms", 1e-3), ("s", 1.0)],
+        &[("ua", 1e-6), ("ma", 1e-3), ("a", 1.0)],
+    ];
+    let f = from.trim().to_lowercase();
+    let t = to.trim().to_lowercase();
+    if f == t {
+        return Some(1.0);
+    }
+    for fam in FAMILIES {
+        let fv = fam.iter().find(|(u, _)| *u == f).map(|(_, v)| *v);
+        let tv = fam.iter().find(|(u, _)| *u == t).map(|(_, v)| *v);
+        if let (Some(a), Some(b)) = (fv, tv) {
+            return Some(a / b);
+        }
+    }
+    None
+}
+
 fn apply_domains(node: &mut Value, caps: &Value) -> usize {
     let mut resolved = 0;
     match node {
@@ -269,8 +295,42 @@ fn apply_domains(node: &mut Value, caps: &Value) -> usize {
                             .entry("domain".to_string())
                             .or_insert_with(|| Value::Object(Map::new()));
                         if let Value::Object(existing) = entry {
+                            // The model declares the limit in the INSTRUMENT's
+                            // units; the widget displays in its own. Copying the
+                            // numbers across verbatim clamped a MHz fader to
+                            // 3000000000 — the right limit, three orders of
+                            // magnitude wrong. Scale into the widget's units and
+                            // leave its `units` alone; only fall back to the
+                            // model's unit when the widget declares none.
+                            let widget_unit = existing
+                                .get("units")
+                                .and_then(|u| u.as_str())
+                                .map(|u| u.to_string());
+                            let spec_unit = spec.get("units").and_then(|u| u.as_str()).map(|u| u.to_string());
+                            let factor = match (&spec_unit, &widget_unit) {
+                                (Some(f), Some(t)) => unit_ratio(f, t),
+                                _ => None,
+                            };
                             for (k, v) in spec {
-                                existing.insert(k.clone(), v.clone());
+                                if k == "units" && widget_unit.is_some() {
+                                    continue;
+                                }
+                                let scaled = match (factor, v.as_f64()) {
+                                    (Some(r), Some(n)) if k == "min" || k == "max" => {
+                                        // Round to 12 significant figures: 100000 Hz / 1e6
+                                        // is 0.09999999999999999 in binary floating point,
+                                        // and a limit renders on screen.
+                                        let scaled = n * r;
+                                        let scaled = format!("{scaled:.12e}")
+                                            .parse::<f64>()
+                                            .unwrap_or(scaled);
+                                        serde_json::Number::from_f64(scaled)
+                                            .map(Value::Number)
+                                            .unwrap_or_else(|| v.clone())
+                                    }
+                                    _ => v.clone(),
+                                };
+                                existing.insert(k.clone(), scaled);
                             }
                         }
                         resolved += 1;

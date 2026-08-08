@@ -2800,7 +2800,8 @@
             },
             "units": "MHz",
             "yak_listen": "Frequency_settings/center",
-            "show_label": true
+            "show_label": true,
+            "yak_domain": "freq"
           },
           "span_freq_MHz": {
             "label": {
@@ -2863,7 +2864,8 @@
             },
             "units": "MHz",
             "yak_listen": "Frequency_settings/span",
-            "show_label": true
+            "show_label": true,
+            "yak_domain": "span"
           }
         }
       },
@@ -2949,7 +2951,8 @@
             },
             "units": "MHz",
             "yak_listen": "Frequency_settings/start",
-            "show_label": true
+            "show_label": true,
+            "yak_domain": "freq"
           },
           "stop_freq_MHz": {
             "label": {
@@ -3012,7 +3015,8 @@
             },
             "units": "MHz",
             "yak_listen": "Frequency_settings/stop",
-            "show_label": true
+            "show_label": true,
+            "yak_domain": "freq"
           }
         }
       },

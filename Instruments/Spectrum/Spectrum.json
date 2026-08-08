@@ -5810,13 +5810,13 @@
               }
             },
             "yak_handler": {
-              "enable": true,
+              "enable": false,
               "yak_type": "set",
               "sub_path": "Trace",
               "command": "Set_Averaging",
               "input_name": "count_int",
               "converter": "int",
-              "readback": "trace_settings"
+              "_disabled_reason": "No remote averaging on N9340B firmware A.02.07. Probed 2026-08-07 against CN03480580: ':TRACe:AVERage:COUNt', ':SENSe:AVERage:COUNt', ':AVERage:COUNt', ':AVERage', ':SENSe:AVERage:STATe' and ':TRACe1:MODE AVER[age]' all return -171 'Invalid expression', and ':TRACe:AVERage:COUNt?' does not answer at all. Averaging is not one of this model's trace modes either. Re-enable only if the manual supplies a command that this firmware accepts."
             },
             "geometry": {
               "width": 126

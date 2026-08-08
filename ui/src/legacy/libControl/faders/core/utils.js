@@ -35,4 +35,4 @@ const mapPositionToValue = (pos, min, max, logExponent) => {
     return min + valueNorm * range;
 };
 
-window.FaderUtils = { clamp, mapValueToPosition, mapPositionToValue };
+export const FaderUtils = window.FaderUtils = { clamp, mapValueToPosition, mapPositionToValue };

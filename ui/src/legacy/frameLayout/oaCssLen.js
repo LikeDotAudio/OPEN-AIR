@@ -11,7 +11,7 @@
 // frameLayout/oaCssLen.js — px/% length helper.
 // Convert a layout value to a CSS length: number or numeric-string -> px,
 // "%"/other CSS strings pass through. Lets width/height be entered as px OR %.
-window.oaCssLen = (v) => {
+export const oaCssLen = window.oaCssLen = (v) => {
   if (v == null) return null;
   if (typeof v === 'number') return `${v}px`;
   const s = String(v).trim();
@@ -21,11 +21,11 @@ window.oaCssLen = (v) => {
 // Extract the WORDING from a label state that may be the new object form
 // { text:<string|{En,…}>, text_size, text_color } OR a legacy string / {En,…} dict.
 // Always returns the wording (string or {En,…}); style keys are ignored here.
-window.oaLabelText = (state) =>
+export const oaLabelText = window.oaLabelText = (state) =>
   (state && typeof state === 'object' && !Array.isArray(state) && 'text' in state) ? state.text : state;
 
 // Per-state label text styling { text_size, text_color } (empty object if none).
-window.oaLabelStyle = (state) =>
+export const oaLabelStyle = window.oaLabelStyle = (state) =>
   (state && typeof state === 'object' && !Array.isArray(state))
     ? { text_size: state.text_size, text_color: state.text_color } : {};
 
@@ -33,7 +33,7 @@ window.oaLabelStyle = (state) =>
 // (label:{ active, inactive, text }) OR legacy flat label_active/label_inactive/label.
 // `which` is 'active' | 'inactive'. Returns the WORDING (string or {En,…} dict),
 // unwrapping the new { text, text_size, text_color } state form via oaLabelText.
-window.oaPickLabel = (o, which) => {
+export const oaPickLabel = window.oaPickLabel = (o, which) => {
   if (!o) return undefined;
   const lab = o.label;
   const pair = (lab && typeof lab === 'object' && ('active' in lab || 'inactive' in lab)) ? lab : null;
@@ -51,7 +51,7 @@ window.oaPickLabel = (o, which) => {
 };
 
 // Like oaPickLabel but returns the state's { text_size, text_color } styling.
-window.oaPickLabelStyle = (o, which) => {
+export const oaPickLabelStyle = window.oaPickLabelStyle = (o, which) => {
   if (!o) return {};
   const lab = o.label;
   const pair = (lab && typeof lab === 'object' && ('active' in lab || 'inactive' in lab)) ? lab : null;

@@ -74,3 +74,7 @@ const OcaToggleButton = ({ label, value, onChange }) => {
 
 window.OcaButton = OcaButton;
 window.OcaToggleButton = OcaToggleButton;
+
+export { OcaButton }
+
+export { OcaToggleButton }

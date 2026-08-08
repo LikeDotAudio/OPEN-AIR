@@ -137,3 +137,5 @@ const CMDPEditor = ({ config, value, onChange }) => {
 };
 
 window.CMDPEditor = CMDPEditor;
+
+export { CMDPEditor }

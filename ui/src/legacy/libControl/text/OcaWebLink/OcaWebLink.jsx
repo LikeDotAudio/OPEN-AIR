@@ -39,3 +39,5 @@ const OcaWebLink = ({ config }) => {
 };
 
 window.OcaWebLink = OcaWebLink;
+
+export { OcaWebLink }

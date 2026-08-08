@@ -225,4 +225,4 @@ const Cap = ({ config, orientation, width, height, capColor, highlightColor }) =
     );
 };
 
-window.FaderCap = Cap;
+export const FaderCap = window.FaderCap = Cap;

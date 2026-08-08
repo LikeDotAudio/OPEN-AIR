@@ -162,4 +162,4 @@ const Scale = ({
     );
 };
 
-window.FaderScale = Scale;
+export const FaderScale = window.FaderScale = Scale;

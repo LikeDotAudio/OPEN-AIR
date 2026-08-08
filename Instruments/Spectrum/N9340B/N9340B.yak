@@ -2647,6 +2647,39 @@
       },
       "group": "System Status and Identification",
       "subsystem": "System"
+    },
+    "trace_settings": {
+      "scpi": ":TRACe1:MODE?;:TRACe2:MODE?;:TRACe3:MODE?;:TRACe4:MODE?;:INITiate:CONTinuous?",
+      "scpiFast": ":TRAC1:MODE?;:TRAC2:MODE?;:TRAC3:MODE?;:TRAC4:MODE?;:INIT:CONT?",
+      "description": "Every trace mode plus the continuous-sweep state, in one round trip.",
+      "subsystem": "Trace",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "mode_1",
+            "type": "CRD"
+          },
+          {
+            "name": "mode_2",
+            "type": "CRD"
+          },
+          {
+            "name": "mode_3",
+            "type": "CRD"
+          },
+          {
+            "name": "mode_4",
+            "type": "CRD"
+          },
+          {
+            "name": "continuous",
+            "type": "BOOL"
+          }
+        ]
+      },
+      "notes": "Averaging is deliberately NOT in this query. ':TRACe:AVERage:COUNt?' does not answer on firmware A.02.07 — probed 2026-08-07 — and one dead statement kills the whole chained reply, taking the four trace modes with it. Verified as written: 'WRIT;BLAN;BLAN;BLAN;1', no error."
     }
   }
 }

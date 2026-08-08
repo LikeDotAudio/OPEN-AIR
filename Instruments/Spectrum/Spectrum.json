@@ -4359,7 +4359,8 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 1
+              "trace_number": 1,
+              "readback": "trace_settings"
             },
             "layout": {
               "height": 30,
@@ -4532,7 +4533,8 @@
                 "units": "mode",
                 "selected": true
               }
-            }
+            },
+            "yak_listen": "trace_settings/mode_1"
           }
         }
       },
@@ -4560,7 +4562,8 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 2
+              "trace_number": 2,
+              "readback": "trace_settings"
             },
             "layout": {
               "height": 30,
@@ -4733,7 +4736,8 @@
                 "units": "mode",
                 "selected": false
               }
-            }
+            },
+            "yak_listen": "trace_settings/mode_2"
           }
         }
       },
@@ -4761,7 +4765,8 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 3
+              "trace_number": 3,
+              "readback": "trace_settings"
             },
             "layout": {
               "height": 30,
@@ -4934,7 +4939,8 @@
                 "units": "mode",
                 "selected": false
               }
-            }
+            },
+            "yak_listen": "trace_settings/mode_3"
           }
         }
       },
@@ -4962,7 +4968,8 @@
               "command": "Set_Trace_Mode",
               "input_name": "mode_string",
               "converter": "string",
-              "trace_number": 4
+              "trace_number": 4,
+              "readback": "trace_settings"
             },
             "layout": {
               "height": 30,
@@ -5135,7 +5142,8 @@
                 "units": "mode",
                 "selected": false
               }
-            }
+            },
+            "yak_listen": "trace_settings/mode_4"
           }
         }
       },
@@ -5260,9 +5268,9 @@
               "command": "Set_Continuous_Mode",
               "input_name": "state_bool",
               "converter": "bool_to_int",
-              "readback": "bandwidth_settings"
+              "readback": "trace_settings"
             },
-            "yak_listen": "bandwidth_settings/continuous",
+            "yak_listen": "trace_settings/continuous",
             "units": null
           },
           "initiate_continuous_on": {
@@ -5751,7 +5759,8 @@
               "sub_path": "Trace",
               "command": "Set_Averaging",
               "input_name": "count_int",
-              "converter": "int"
+              "converter": "int",
+              "readback": "trace_settings"
             },
             "geometry": {
               "width": 126

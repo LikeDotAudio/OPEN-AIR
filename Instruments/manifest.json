@@ -43,53 +43,43 @@
     "tab": "5_Power",
     "groups": [
       {
-        "name": "0_Bank_All",
-        "header": "Global_Logger_Deck",
+        "name": "0_LINK",
+        "header": "Master_Control",
         "over": "devices",
+        "by": "type",
         "size": "all",
-        "columns": 4,
-        "station": "Octo_PSU_Monitor",
-        "id": "50.100.5.4",
+        "columns": 1,
+        "station": "PSU_Link",
+        "id": "50.100.5.9",
         "description": {
-          "En": "Mainframe — all modules",
-          "Fr": "Châssis — tous les modules",
-          "De": "Rahmen — alle Module",
-          "Es": "Bastidor — todos los módulos"
-        }
-      },
-      {
-        "name": "1_Quads",
-        "header": "Master_Override_Deck",
-        "over": "devices",
-        "size": 4,
-        "columns": 4,
-        "station": "Quad_PSU_Station",
-        "id": "50.100.5.3",
-        "description": {
-          "En": "4-Channel High-Voltage Injection Matrix",
-          "Fr": "4-Canal Matrice d'injection haute tension",
-          "De": "4-Kanal Hochspannungs-Injektionsmatrix",
-          "Es": "4-Canal Matriz de inyección de alta tensión"
-        }
-      },
-      {
-        "name": "2_Pairs",
-        "over": "devices",
-        "size": 2,
-        "columns": 2,
-        "station": "Dual_PSU_Station",
-        "id": "50.100.5.5",
-        "description": {
-          "En": "Module pair",
-          "Fr": "Paire de modules",
-          "De": "Modulpaar",
-          "Es": "Par de módulos"
+          "En": "Linked supplies",
+          "Fr": "Alimentations liées",
+          "De": "Verbundene Netzteile",
+          "Es": "Fuentes enlazadas"
         }
       }
     ]
   },
   "Load": {
-    "tab": "7_Load"
+    "tab": "7_Load",
+    "groups": [
+      {
+        "name": "0_Bank_All",
+        "header": "Master_Control",
+        "over": "devices",
+        "by": "type",
+        "size": "all",
+        "columns": 1,
+        "station": "Load_Bank",
+        "id": "50.100.7.9",
+        "description": {
+          "En": "All loads",
+          "Fr": "Toutes les charges",
+          "De": "Alle Lasten",
+          "Es": "Todas las cargas"
+        }
+      }
+    ]
   },
   "Spectrum": {
     "tab": "0_Spectrum"

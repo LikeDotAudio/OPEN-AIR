@@ -761,6 +761,21 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             return;
         }
 
+        // ONE BIT OF A STATUS REGISTER, as the thing that bit means.
+        //
+        // `STAT:OPER:COND?` answers 1024 when a supply is holding its current
+        // limit and 256 when it is holding its voltage. Bound raw, an indicator
+        // shows "1024", which is not a state anyone reads — and the two are not
+        // even ordered, so no threshold widget can tell them apart either.
+        // `{op:"bit", index:10, set:"red", clear:"green"}` says which bit and
+        // what it looks like, and the panel names the register once.
+        const tf = nodeJson.yak_listen_transform;
+        if (tf && typeof tf === 'object' && tf.op === 'bit') {
+            const on = (Math.trunc(Math.abs(n)) & (1 << Number(tf.index || 0))) !== 0;
+            setLocalValue(on ? (tf.set ?? 1) : (tf.clear ?? 0));
+            return;
+        }
+
         const target = nodeJson.units || (nodeJson.domain && nodeJson.domain.units);
         // 665551000 Hz / 1e6 used to be 665.5509999999999 in the box, and the
         // fix was to round to 9 significant figures. That hid the artefact

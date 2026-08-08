@@ -79,8 +79,17 @@ export function convertUnit(value: unknown, from: unknown, to: unknown): unknown
   if (!f || !t || f === t) return n
   const famName = unitFamily(f)
   if (!famName || famName !== unitFamily(t)) return n
-  const units = UNIT_FAMILIES[famName].units as Record<string, number>
-  return n * (units[f] / units[t])
+  const units = UNIT_FAMILIES[famName].units as Record<string, number | undefined>
+  // Both ratios are present — `unitFamily` only answered with this family
+  // because it found each unit in this table — but under
+  // noUncheckedIndexedAccess that is a fact about the code, not about the
+  // types. Read them out and check, rather than asserting with `!`: the
+  // fallback is the one this function already promises everywhere else, so a
+  // lookup that somehow missed returns the value unchanged instead of NaN.
+  const fromRatio = units[f]
+  const toRatio = units[t]
+  if (fromRatio === undefined || toRatio === undefined) return n
+  return n * (fromRatio / toRatio)
 }
 
 export const ControlValueSchema = z

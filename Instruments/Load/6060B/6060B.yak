@@ -105,7 +105,7 @@
       "description": "Set Current Slew",
       "arg": {
         "kind": "numeric",
-        "unit": "A",
+        "unit": "A/s",
         "limits": "query"
       },
       "group": "Constant Current Parameters",
@@ -127,6 +127,24 @@
       "subsystem": "Common",
       "unverified": true
     },
+    "Set_Inp": {
+      "scpi": "INP <state>",
+      "scpiFast": "INP <state>",
+      "description": "Engage or release the load input",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "group": "Input Control",
+      "subsystem": "INPut",
+      "notes": "The two-way form of Input_ON / Input_OFF. On a 300 W sink the half that matters most is OFF, and a switch bound to Input_ON cannot send it."
+    },
     "Set_Inp_Shor_Stat": {
       "scpi": "INP:SHOR:STAT <value>",
       "description": "Close or open the input short across the load terminals",
@@ -142,6 +160,25 @@
         "value"
       ],
       "unverified": true
+    },
+    "Set_Mode": {
+      "scpi": "MODE:<value>",
+      "scpiFast": "MODE:<value>",
+      "description": "Select the operating mode",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "CURR",
+          "RES",
+          "VOLT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "group": "CC / CV / CR",
+      "subsystem": "MODE",
+      "notes": "The mode is a HEADER on this instrument, not a parameter: `MODE CURR` is rejected with -113 Undefined header, and so is `FUNC CURR`. `MODE:CURR` and `FUNC:CURR` are both accepted — all four verified on 44.44.44.111 gpib7,22 against a drained error queue. The placeholder therefore sits inside the header, which fill_placeholders substitutes just the same, giving one command a three-position selector can drive where Set_Mode_Current / _Resistance / _Voltage are three."
     },
     "Set_Port0": {
       "scpi": "PORT0 <value>",
@@ -326,6 +363,24 @@
       ],
       "unverified": true
     },
+    "Set_Tran_Stat": {
+      "scpi": "TRAN:STAT <value>",
+      "scpiFast": "TRAN:STAT <value>",
+      "description": "Enable or disable transient (pulse) operation",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "group": "Pulse & Dynamic Loading",
+      "subsystem": "TRANsient",
+      "notes": "The two-way form of Transient_ON / Transient_OFF."
+    },
     "Set_Tran_Twid": {
       "scpi": "TRAN:TWID <value>",
       "description": "Set the transient pulse width",
@@ -373,7 +428,7 @@
       "description": "Set Transient Level A",
       "arg": {
         "kind": "numeric",
-        "unit": "V",
+        "unit": "A",
         "limits": "query"
       },
       "group": "Pulse & Dynamic Loading",
@@ -387,7 +442,7 @@
       "description": "Set Transient Level B",
       "arg": {
         "kind": "numeric",
-        "unit": "V",
+        "unit": "A",
         "limits": "query"
       },
       "group": "Pulse & Dynamic Loading",
@@ -475,21 +530,6 @@
         "value"
       ],
       "subsystem": "VOLTage"
-    },
-    "Set_Inp": {
-      "scpi": "INP <state>",
-      "description": "Authored from a panel literal in Load.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Mode": {
-      "scpi": "MODE <value>",
-      "description": "Authored from a panel literal in Load.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Tran_Stat": {
-      "scpi": "TRAN:STAT <value>",
-      "description": "Authored from a panel literal in Load.json; never executed before.",
-      "unverified": true
     }
   },
   "do": {
@@ -783,8 +823,7 @@
         "type": "NR3",
         "unit": "A"
       },
-      "subsystem": "CURR",
-      "unverified": true
+      "subsystem": "CURR"
     },
     "Get_Curr_Lev_Trig": {
       "scpi": "CURR:LEV:TRIG?",
@@ -814,10 +853,9 @@
       "returns": {
         "count": 1,
         "type": "NR3",
-        "unit": "A"
+        "unit": "A/s"
       },
-      "subsystem": "CURR",
-      "unverified": true
+      "subsystem": "CURR"
     },
     "Get_Curr_Tlev": {
       "scpi": "CURR:TLEV?",
@@ -827,8 +865,7 @@
         "type": "NR3",
         "unit": "V"
       },
-      "subsystem": "CURR",
-      "unverified": true
+      "subsystem": "CURR"
     },
     "Get_Inp_Shor_Stat": {
       "scpi": "INP:SHOR:STAT?",
@@ -847,8 +884,7 @@
         "count": 1,
         "type": "BOOL"
       },
-      "subsystem": "INP",
-      "unverified": true
+      "subsystem": "INP"
     },
     "Get_Meas_Curr_Dc": {
       "scpi": "MEAS:CURR:DC?",
@@ -890,8 +926,7 @@
         "count": 1,
         "type": "CRD"
       },
-      "subsystem": "MODE",
-      "unverified": true
+      "subsystem": "MODE"
     },
     "Get_OCP_Config": {
       "scpi": ":CURR:PROT:STAT?;:CURR:PROT:LEV?;:CURR:PROT:DEL?",
@@ -938,8 +973,7 @@
         "type": "NR3",
         "unit": "Ohm"
       },
-      "subsystem": "RES",
-      "unverified": true
+      "subsystem": "RES"
     },
     "Get_Res_Lev_Trig": {
       "scpi": "RES:LEV:TRIG?",
@@ -1112,8 +1146,7 @@
         "type": "NR3",
         "unit": "%"
       },
-      "subsystem": "TRAN",
-      "unverified": true
+      "subsystem": "TRAN"
     },
     "Get_Tran_Freq": {
       "scpi": "TRAN:FREQ?",
@@ -1123,8 +1156,7 @@
         "type": "NR3",
         "unit": "Hz"
       },
-      "subsystem": "TRAN",
-      "unverified": true
+      "subsystem": "TRAN"
     },
     "Get_Tran_Mode": {
       "scpi": "TRAN:MODE?",
@@ -1133,8 +1165,7 @@
         "count": 1,
         "type": "CRD"
       },
-      "subsystem": "TRAN",
-      "unverified": true
+      "subsystem": "TRAN"
     },
     "Get_Tran_Stat": {
       "scpi": "TRAN:STAT?",
@@ -1143,8 +1174,7 @@
         "count": 1,
         "type": "BOOL"
       },
-      "subsystem": "TRAN",
-      "unverified": true
+      "subsystem": "TRAN"
     },
     "Get_Tran_Twid": {
       "scpi": "TRAN:TWID?",
@@ -1186,8 +1216,7 @@
         "type": "NR3",
         "unit": "V"
       },
-      "subsystem": "VOLT",
-      "unverified": true
+      "subsystem": "VOLT"
     },
     "Get_Volt_Lev_Trig": {
       "scpi": "VOLT:LEV:TRIG?",
@@ -1233,7 +1262,7 @@
       "subsystem": "Common"
     },
     "Measure_All": {
-      "scpi": "MODE?;MEAS:VOLT?;MEAS:CURR?;MEAS:POW?",
+      "scpi": "MODE?;:MEAS:VOLT?;:MEAS:CURR?;:MEAS:POW?",
       "description": "Measure All",
       "returns": {
         "count": 4,
@@ -1261,7 +1290,8 @@
         ]
       },
       "group": "Readback Queries",
-      "subsystem": "MEASure"
+      "subsystem": "MEASure",
+      "notes": "Each chained query restarts at the ROOT. Without the colons the 6060B parses the second one relative to where the first left the path — MEAS:VOLT?;MEAS:CURR? asks for MEAS:MEAS:CURR? — and answers the whole message with an I/O error rather than a partial reply. Verified on 44.44.44.111 gpib7,22 and gpib7,23: the colon form answers CURR;-3.0E-3;0.0E-3;-0.0E-5, the form without it fails every time."
     },
     "Status_Byte": {
       "scpi": "*STB?",

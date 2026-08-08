@@ -50,22 +50,58 @@ const BankBars = ({ config }) => {
         return p.length === t.length;
     }, [pattern]);
 
+    // A QUANTITY THE INSTRUMENT DOES NOT REPORT.
+    //
+    // A 66101A answers volts and amps; watts is the two of them multiplied, and
+    // nothing on the bus carries it. Rather than have the panel ask for a
+    // reading that does not exist, `multiply_by` names a second pattern and the
+    // row becomes the product.
+    //
+    // The partner topic is found by REBINDING: whatever each `+` matched in the
+    // first pattern is substituted into the second in the same order, so both
+    // readings are guaranteed to come from the same device. Pairing them by
+    // position in two separately-sorted lists would silently multiply one
+    // module's volts by another's amps the moment a device dropped off the bus.
+    const partnerPattern = config?.multiply_by || '';
+    const partnerOf = React.useCallback((topic) => {
+        if (!partnerPattern) return '';
+        const p = pattern.split('/');
+        const t = topic.split('/');
+        const binds = [];
+        for (let i = 0; i < p.length && i < t.length; i += 1) {
+            if (p[i] === '#') break;
+            if (p[i] === '+') binds.push(t[i]);
+        }
+        let k = 0;
+        return partnerPattern.split('/').map((s) => (s === '+' ? binds[k++] : s)).join('/');
+    }, [pattern, partnerPattern]);
+
+    const readingAt = React.useCallback((topic) => {
+        const raw = messages[topic];
+        if (raw === undefined) return { value: undefined, unit: '' };
+        try {
+            const parsed = JSON.parse(String(raw));
+            if (parsed && typeof parsed === 'object' && parsed.value !== undefined) {
+                return { value: Number(parsed.value), unit: parsed.unit || '' };
+            }
+        } catch (e) { /* plain payload */ }
+        return { value: Number(raw), unit: '' };
+    }, [messages]);
+
     const rows = React.useMemo(() => {
         const out = [];
         for (const topic of Object.keys(messages)) {
             if (!matches(topic)) continue;
-            let value, unit = '';
-            try {
-                const parsed = JSON.parse(String(messages[topic]));
-                if (parsed && typeof parsed === 'object' && parsed.value !== undefined) {
-                    value = Number(parsed.value);
-                    unit = parsed.unit || '';
-                } else {
-                    value = Number(messages[topic]);
-                }
-            } catch (e) {
-                value = Number(messages[topic]);
+            let { value, unit } = readingAt(topic);
+            if (partnerPattern) {
+                const other = readingAt(partnerOf(topic));
+                // Both halves or nothing: half a product is not a smaller
+                // number, it is a different quantity.
+                value = (Number.isFinite(value) && Number.isFinite(other.value))
+                    ? value * other.value : undefined;
+                unit = config?.unit || 'W';
             }
+            if (config?.unit) unit = config.unit;
             // `.../Device/<type>/<model>/<dev>/Reading/<command>` — the model and
             // the device slot are the instrument's name until someone gives it a
             // friendlier one via `names`.

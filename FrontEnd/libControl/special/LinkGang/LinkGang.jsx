@@ -3,9 +3,12 @@
  * Purpose: Relay one master control's value to every enlisted device strip.
  * Description: The LINK page's fan-out. Renders nothing.
  *
- * Version: 26.08.08.1
+ * Version: 26.08.08.2
  * Change Log:
  * - 2026-08-08: Initial version — generator LINK tab.
+ * - 2026-08-08: Honour a per-device VETO set on the instrument's own page
+ *               (`link_veto_topics`), so a module can refuse the link from
+ *               where the operator is actually working on it.
  */
 
 // A yak_handler names ONE target, and YAK caches ONE handler per topic
@@ -36,6 +39,17 @@ const LinkGang = ({ config, topic }) => {
     const memberPrefix = config?.member_prefix || 'Unit_';
     const enlistField = config?.enlist || 'Link';
     const pairs = Array.isArray(config?.gang) ? config.gang : [];
+
+    // TWO WAYS TO BE OUT, and they answer different questions.
+    //
+    // `Unit_<n>/Link` is this PAGE's switch: which strips the master is driving
+    // right now. `link_veto_topics` is the DEVICE's, set on the instrument's own
+    // page and stamped here by the builder — "whatever the link page thinks,
+    // leave this one alone". The second outranks the first, because the operator
+    // who set it is the one standing at that supply with something delicate
+    // wired to it, and they will not be looking at the link tab when the master
+    // moves.
+    const vetoTopics = (config && config.link_veto_topics) || {};
 
     // This node lives at <station>/<masterGroup>/<its own name>, so the station
     // is its topic with those two segments taken off. Derived rather than
@@ -125,7 +139,8 @@ const LinkGang = ({ config, topic }) => {
 
         const linked = {};
         for (const unit of Object.keys(unitTopics)) {
-            linked[unit] = isTruthy(valueAt(`${station}/${unit}/${enlistField}`));
+            const excluded = vetoTopics[unit] && isTruthy(valueAt(vetoTopics[unit]));
+            linked[unit] = !excluded && isTruthy(valueAt(`${station}/${unit}/${enlistField}`));
             const justLinked = !first && prevLinked.current[unit] === false && linked[unit];
             if (!linked[unit]) continue;
             for (const field of Object.keys(unitTopics[unit])) {

@@ -1,0 +1,372 @@
+{
+  "Load_Unit_${n}": {
+    "type": "OcaBin",
+    "id": "50.100.7.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Load_${n}": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "${model} @ ${resource}",
+          "Fr": "${model} @ ${resource}",
+          "De": "${model} @ ${resource}",
+          "Es": "${model} @ ${resource}",
+          "show_label": true
+        },
+        "layout_columns": 5,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "Link": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "IN THE SWEEP",
+                  "Fr": "IN THE SWEEP",
+                  "De": "IN THE SWEEP",
+                  "Es": "IN THE SWEEP"
+                },
+                "text_size": 12,
+                "text_color": "#39D353"
+              },
+              "inactive": {
+                "text": {
+                  "En": "SKIPPED",
+                  "Fr": "SKIPPED",
+                  "De": "SKIPPED",
+                  "Es": "SKIPPED"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
+            },
+            "layout": {
+              "height": 44,
+              "width": 170,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#39D353",
+                "bg_color": "#000000",
+                "border_color": "#39D353",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "value": {
+              "default_value": 1
+            },
+            "latching": true
+          },
+          "Acquire": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ",
+                  "Fr": "READ",
+                  "De": "READ",
+                  "Es": "READ"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 44,
+              "width": 130,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Load",
+              "command": "Measure_All",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          },
+          "Volts": {
+            "type": "_Value",
+            "read_only": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Volts",
+                  "Fr": "Volts",
+                  "De": "Volts",
+                  "Es": "Volts"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Volts",
+                  "Fr": "Volts",
+                  "De": "Volts",
+                  "Es": "Volts"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "—"
+            },
+            "layout": {
+              "height": 30
+            },
+            "units": "V",
+            "yak_listen": "Measure_All/voltage"
+          },
+          "Amps": {
+            "type": "_Value",
+            "read_only": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Amps",
+                  "Fr": "Amps",
+                  "De": "Amps",
+                  "Es": "Amps"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Amps",
+                  "Fr": "Amps",
+                  "De": "Amps",
+                  "Es": "Amps"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "—"
+            },
+            "layout": {
+              "height": 30
+            },
+            "units": "A",
+            "yak_listen": "Measure_All/current"
+          },
+          "Watts": {
+            "type": "_Value",
+            "read_only": true,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Watts",
+                  "Fr": "Watts",
+                  "De": "Watts",
+                  "Es": "Watts"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Watts",
+                  "Fr": "Watts",
+                  "De": "Watts",
+                  "Es": "Watts"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "—"
+            },
+            "layout": {
+              "height": 30
+            },
+            "units": "W",
+            "yak_listen": "Measure_All/power"
+          }
+        }
+      },
+      "Master_Control": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Every load on the bench",
+          "Fr": "Every load on the bench",
+          "De": "Every load on the bench",
+          "Es": "Every load on the bench",
+          "show_label": true
+        },
+        "layout_columns": 1,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "Get_All": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET ALL VALUES",
+                  "Fr": "GET ALL VALUES",
+                  "De": "GET ALL VALUES",
+                  "Es": "GET ALL VALUES"
+                },
+                "text_size": 18,
+                "text_color": "#FF902C"
+              }
+            },
+            "layout": {
+              "height": 90,
+              "width": 420,
+              "padx": 10,
+              "pady": 10
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            }
+          },
+          "Bank_Relay": {
+            "type": "_GuiLinkGang",
+            "master_group": "Master_Control",
+            "member_prefix": "Unit_",
+            "enlist": "Link",
+            "gang": [
+              {
+                "master": "Get_All",
+                "member": "Acquire"
+              }
+            ]
+          },
+          "Volts_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Input volts",
+              "Fr": "Input volts",
+              "De": "Input volts",
+              "Es": "Input volts"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Load/+/+/Reading/Measure_All/voltage",
+            "row_height": 30,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#33A1FD",
+                "secondary": "#FF6B6B"
+              }
+            }
+          },
+          "Amps_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Sink current",
+              "Fr": "Sink current",
+              "De": "Sink current",
+              "Es": "Sink current"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Load/+/+/Reading/Measure_All/current",
+            "row_height": 30,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#39D353",
+                "secondary": "#FF6B6B"
+              }
+            }
+          },
+          "Watts_Bars": {
+            "type": "_GuiBankBars",
+            "label": {
+              "En": "Dissipation",
+              "Fr": "Dissipation",
+              "De": "Dissipation",
+              "Es": "Dissipation"
+            },
+            "match": "OpenAir/System/Protocols/visa/Device/Load/+/+/Reading/Measure_All/power",
+            "row_height": 30,
+            "layout": {
+              "width": "100%"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF902C",
+                "secondary": "#FF6B6B"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

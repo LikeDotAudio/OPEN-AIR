@@ -32,6 +32,13 @@ COPY BackEnd/Core          ./BackEnd/Core
 COPY BackEnd/ComProtocols  ./BackEnd/ComProtocols
 COPY BackEnd/openair-yak   ./BackEnd/openair-yak
 
+# openair-visa embeds the device knowledge base at COMPILE time —
+# `include_str!("…/Instruments/_yak/knownDevices.json")`, so that a binary
+# running anywhere still recognises an instrument when no on-disk copy is
+# found. A source tree without it does not fail at runtime, it fails to
+# build, which is why this COPY is not optional and not a data volume.
+COPY Instruments/_yak/knownDevices.json ./Instruments/_yak/knownDevices.json
+
 RUN cargo build --release \
       --manifest-path BackEnd/Core/Cargo.toml \
       -p open-air-orchestrator

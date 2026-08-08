@@ -662,30 +662,50 @@
       "subsystem": "VOLT",
       "unverified": true
     },
-    "Set_Outp": {
-      "scpi": "OUTP <state>",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Volt": {
+    "Set_Voltage": {
       "scpi": "VOLT <value>",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
+      "description": "Output voltage setpoint.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
+      "args": [
+        "value"
+      ],
+      "group": "Configuration",
+      "subsystem": "SOURce",
+      "notes": "No `INST:NSEL` — see the module docstring. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
-    "Set_Curr": {
+    "Set_Current": {
       "scpi": "CURR <value>",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
+      "description": "Current limit.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "A"
+      },
+      "args": [
+        "value"
+      ],
+      "group": "Configuration",
+      "subsystem": "SOURce",
+      "notes": "The module holds this limit and drops into CC when it is reached, which is what `module_settings/oper_condition` bit 10 reports. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
-    "Set_Syst_Log_State": {
-      "scpi": "SYST:LOG:STATE <state>",
-      "description": "Authored from a panel literal in Power_N.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Outp_All": {
-      "scpi": "OUTP:ALL <state>",
-      "description": "Authored from a panel literal in Power_N.json; never executed before.",
-      "unverified": true
+    "Set_Output": {
+      "scpi": "OUTP <state>",
+      "description": "Output on or off.",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "state"
+      ],
+      "group": "Output Control",
+      "subsystem": "OUTPut",
+      "notes": "`OUTP?` answers 1 or 0, so the panel's toggle is keyed 1/0 and sends what it reads back. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     }
   },
   "do": {
@@ -1052,32 +1072,40 @@
       "unverified": true
     },
     "Output_OFF": {
-      "scpi": "INST:NSEL <chan>;OUTP OFF",
-      "description": "Output OFF",
+      "scpi": "OUTP OFF",
+      "description": "Output off.",
       "group": "Output Control",
-      "subsystem": "OUTPut"
+      "subsystem": "OUTPut",
+      "notes": "Was `INST:NSEL <chan>;OUTP OFF`. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
     "Output_ON": {
-      "scpi": "INST:NSEL <chan>;OUTP ON",
-      "description": "Output ON",
+      "scpi": "OUTP ON",
+      "description": "Output on.",
       "group": "Output Control",
-      "subsystem": "OUTPut"
+      "subsystem": "OUTPut",
+      "notes": "Was `INST:NSEL <chan>;OUTP ON`. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
     "S1_OFF": {
       "scpi": "INST:NSEL 1;OUTP OFF",
       "description": "S1 OFF",
-      "group": "Individual Output Control"
+      "group": "Individual Output Control",
+      "notes": "Undefined on a module addressed at its own GPIB secondary address, which is how all seven on this bench are wired — `SYST:ERR?` answers -113 after it, and it silently kills any reply chained behind it. Correct only for a mainframe addressed as one instrument. Checked 2026-08-08.",
+      "unverified": true
     },
     "S1_ON": {
       "scpi": "INST:NSEL 1;OUTP ON",
       "description": "S1 ON",
-      "group": "Individual Output Control"
+      "group": "Individual Output Control",
+      "notes": "Undefined on a module addressed at its own GPIB secondary address, which is how all seven on this bench are wired — `SYST:ERR?` answers -113 after it, and it silently kills any reply chained behind it. Correct only for a mainframe addressed as one instrument. Checked 2026-08-08.",
+      "unverified": true
     },
     "Select_Channel": {
       "scpi": "INST:NSEL <chan>",
       "description": "Select Channel",
       "group": "Channel Selection",
-      "subsystem": "INSTrument"
+      "subsystem": "INSTrument",
+      "notes": "Undefined on a module addressed at its own GPIB secondary address, which is how all seven on this bench are wired — `SYST:ERR?` answers -113 after it, and it silently kills any reply chained behind it. Correct only for a mainframe addressed as one instrument. Checked 2026-08-08.",
+      "unverified": true
     },
     "Reset_Device": {
       "scpi": "*RST",
@@ -1094,17 +1122,15 @@
   },
   "rig": {
     "Set_Levels": {
-      "scpi": "INST:NSEL <chan>;VOLT <volt>;CURR <curr>",
-      "description": "Set Levels",
-      "arg": {
-        "kind": "unknown"
-      },
-      "group": "Configuration",
+      "scpi": "VOLT <voltage>;:CURR <current>",
+      "description": "Voltage and current limit together, in one message.",
       "args": [
-        "volt",
-        "curr"
+        "voltage",
+        "current"
       ],
-      "subsystem": "SOURce"
+      "group": "Configuration",
+      "subsystem": "SOURce",
+      "notes": "Was `INST:NSEL <chan>;VOLT <volt>;CURR <curr>`, which answered nothing on this bench — the leading header does not exist on a module addressed at its own secondary address. This is the panel's SET button: the two sliders are its arguments, so a supply moves to a new operating point in ONE write rather than passing through the corner where the old limit meets the new voltage. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
     "Set_S1_Levels": {
       "scpi": "INST:NSEL 1;VOLT <volt>;CURR <curr>",
@@ -1116,7 +1142,9 @@
       "args": [
         "volt",
         "curr"
-      ]
+      ],
+      "notes": "Undefined on a module addressed at its own GPIB secondary address, which is how all seven on this bench are wired — `SYST:ERR?` answers -113 after it, and it silently kills any reply chained behind it. Correct only for a mainframe addressed as one instrument. Checked 2026-08-08.",
+      "unverified": true
     }
   },
   "nab": {
@@ -1796,8 +1824,10 @@
       "unverified": true
     },
     "Get_Values": {
-      "scpi": "INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?",
-      "description": "Get Values",
+      "scpi": "MEAS:VOLT?;:MEAS:CURR?",
+      "description": "Measured output voltage and current.",
+      "group": "Readback Queries",
+      "subsystem": "MEASure",
       "returns": {
         "count": 2,
         "separator": ";",
@@ -1814,8 +1844,7 @@
           }
         ]
       },
-      "group": "Readback Queries",
-      "subsystem": "MEASure"
+      "notes": "Was `INST:NSEL <chan>;MEAS:VOLT?;MEAS:CURR?` — see the module docstring; it answered nothing here on either count. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     },
     "Get_Voltage_Alc_Source": {
       "scpi": "VOLT:ALC:SOUR?",
@@ -1881,25 +1910,46 @@
       "group": "System Utilities",
       "subsystem": "SYSTem"
     },
-    "Get_Meas_Volt": {
-      "scpi": "MEAS:VOLT?",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
-    },
-    "Get_Meas_Curr": {
-      "scpi": "MEAS:CURR?",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
-    },
-    "Get_Meas_Pow": {
-      "scpi": "MEAS:POW?",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
-    },
-    "Get_Meas_Scal_All": {
-      "scpi": "MEAS:SCAL:ALL?",
-      "description": "Authored from a panel literal in Power.json; never executed before.",
-      "unverified": true
+    "module_settings": {
+      "scpi": "VOLT?;:CURR?;:OUTP?;:MEAS:VOLT?;:MEAS:CURR?;:STAT:OPER:COND?",
+      "description": "Everything the module was told and everything it reports, in one round trip.",
+      "group": "Readback Queries",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 6,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "set_voltage",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "set_current",
+            "type": "NR3",
+            "unit": "A"
+          },
+          {
+            "name": "output",
+            "type": "BOOL"
+          },
+          {
+            "name": "meas_voltage",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "meas_current",
+            "type": "NR3",
+            "unit": "A"
+          },
+          {
+            "name": "oper_condition",
+            "type": "NR1"
+          }
+        ]
+      },
+      "notes": "The panel's whole readback: every control on the module page names this as its `readback`, so ONE query after any write leaves nothing on screen that the instrument has not just confirmed.\n\noper_condition is the Operation Condition register. Bit 8 (256) is CV and bit 10 (1024) is CC — measured, not assumed: output on at 2 V into no load reads +256, and the same 2 V behind a 1 mA limit reads +1024 with MEAS:VOLT? collapsed to 0. Output off reads +0.\n\n`:STAT:QUES:COND?` is deliberately NOT chained on the end. It answers on its own and in a pair with :STAT:OPER:COND?, but appended to these six the whole reply is lost — and a chain that fails takes the five good values with it. Verified on the 66101A at gpib7,30,0, 2026-08-08."
     }
   }
 }

@@ -507,6 +507,15 @@ fn prepare(
     let mut marks = tokens.cloned().unwrap_or_default();
     marks.entry("model".into()).or_insert_with(|| dev.model.clone());
     marks.entry("resource".into()).or_insert_with(|| dev.resource.clone());
+    marks.entry("family".into()).or_insert_with(|| dev.dtype.clone());
+    // The device's identity as a topic segment — the same string its folder is
+    // named for. A panel needs it to address something ABOUT this instrument
+    // that is not on this instrument: the LINK page and a module's own page are
+    // two files, and "this module is excluded from the link" is one fact they
+    // both have to see.
+    marks
+        .entry("slug".into())
+        .or_insert_with(|| device_slug(&dev.model, &dev.resource));
     marks
         .entry("slot".into())
         .or_insert_with(|| slot.map(|s| s.to_string()).unwrap_or_else(|| "-".into()));
@@ -872,6 +881,45 @@ fn instantiate(
     (panels, handlers)
 }
 
+/// Where one device says "the link page must not drive me".
+///
+/// Outside the GUI panel tree on purpose: it belongs to the INSTRUMENT, not to
+/// either page that shows it, and both pages are regenerated whenever the bench
+/// changes. Nothing subscribes but LinkGang and the toggle itself — this is a
+/// UI act that touches no instrument, which is the point of being able to drop
+/// a module out of a link without first putting it back where it was.
+fn link_veto_topic(itype: &str, dev: &Device) -> String {
+    format!(
+        "OpenAir/Gui/Link/{itype}/{}/exclude",
+        device_slug(&dev.model, &dev.resource)
+    )
+}
+
+/// Hand the link widget its members' veto topics.
+///
+/// `"link_veto": true` on a `_GuiLinkGang` node is a marker the builder
+/// resolves, the same shape as `yak_readout` and `yak_listen`. It has to be
+/// stamped rather than authored because the panel is written once and the
+/// membership is whatever was discovered.
+fn stamp_link_veto(node: &mut Value, veto: &Map<String, Value>) {
+    match node {
+        Value::Object(map) => {
+            if map.get("link_veto") == Some(&Value::Bool(true)) {
+                map.insert("link_veto_topics".to_string(), Value::Object(veto.clone()));
+            }
+            for (_, v) in map.iter_mut() {
+                stamp_link_veto(v, veto);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                stamp_link_veto(item, veto);
+            }
+        }
+        _ => {}
+    }
+}
+
 /// Compose N bound copies of one unit template into a single group panel.
 ///
 /// This is the whole point of the exercise. `psu_eight.json` was 1183 lines of
@@ -905,6 +953,25 @@ fn repeat_unit(
     let mut fields = Map::new();
     let mut handlers = 0;
 
+    // Which unit stands for which device, as a topic the DEVICE owns.
+    //
+    // A link page and a module's own page are two files, so a control on one
+    // cannot be named by the other — and "this module is excluded from the
+    // link" has to be one fact, not two that can disagree. Keyed by the device
+    // slug, it is a topic both pages can spell from what they already know: the
+    // module page substitutes `${slug}` into its own toggle, and the link page
+    // is told the whole table here.
+    let veto: Map<String, Value> = members
+        .iter()
+        .map(|(tokens, dev)| {
+            let idx = tokens.get("n").cloned().unwrap_or_default();
+            (
+                format!("Unit_{idx}"),
+                Value::String(link_veto_topic(itype, dev)),
+            )
+        })
+        .collect();
+
     if let Some(wanted_deck) = spec.get("header").and_then(|h| h.as_str()) {
         match decks.get(wanted_deck) {
             None => println!(
@@ -915,7 +982,8 @@ fn repeat_unit(
                 // The header commands the whole group (`OUTP:ALL`), so it binds
                 // to the first member — any of them reaches the mainframe.
                 let (tokens, dev) = &members[0];
-                let (bound, n) = prepare(block, dev, Some(tokens), caps);
+                let (mut bound, n) = prepare(block, dev, Some(tokens), caps);
+                stamp_link_veto(&mut bound, &veto);
                 handlers += n;
                 fields.insert(wanted_deck.to_string(), bound);
             }

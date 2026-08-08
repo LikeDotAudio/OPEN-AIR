@@ -77,7 +77,20 @@ pub async fn dispatch_readback(
         // Instance constants only: a query takes no widget value.
         let scpi = apply_params(&template, yak);
         eprintln!("   🔄 [YAK READBACK] {} -> {}", name, scpi);
-        dispatch(client, config, yak, &scpi, &scpi, "NAB").await;
+        // Narrated under ITS OWN name, not the one that triggered it.
+        //
+        // `dispatch` reads the command out of the handler, so passing this
+        // control's handler through unchanged put the caller's name on every
+        // follow-up: GET ALL TRACES reported four queries all called
+        // `waveform_1` while the SCPI beside them plainly said CHANnel1 then
+        // CHANnel2, and a generator's readback appeared as a NAB called
+        // `Set_Output_State`. The readings were never affected — mqtt.rs
+        // attributes replies by matching the SCPI back to a template, not by
+        // this name — but an activity log that misnames what it just sent is
+        // the one place an operator has to look when something goes wrong.
+        let mut as_itself = yak.clone();
+        as_itself.command = name.to_string();
+        dispatch(client, config, &as_itself, &scpi, &scpi, "NAB").await;
     }
 }
 

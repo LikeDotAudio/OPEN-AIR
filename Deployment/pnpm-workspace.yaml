@@ -13,6 +13,5 @@
 # crate being built, so it must sit above the Cargo workspaces — at the root.)
 packages:
   - ../contracts
-  - ../ui
 allowBuilds:
   esbuild: true

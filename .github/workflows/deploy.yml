@@ -48,7 +48,6 @@ jobs:
           files_yaml: |
             frontend:
               - FrontEnd/**
-              - ui/**
             manual:
               - Documentation/5_Manual/**
             ts_js:
@@ -96,28 +95,9 @@ jobs:
           echo "# 🔍 Pre-check Results" > $GITHUB_STEP_SUMMARY
           HAS_ERRORS=0
 
-          echo "## Linting Changed UI Files" >> $GITHUB_STEP_SUMMARY
-          UI_FILES=$(echo "${{ needs.pre-check.outputs.ts_js_files }}" | tr ' ' '\n' | grep '^ui/' | tr '\n' ' ' || true)
-          if [ -n "$UI_FILES" ]; then
-            set +e
-            pnpm -C Deployment --filter ui exec eslint $UI_FILES > lint-out.txt 2>&1
-            LINT_STATUS=$?
-            set -e
-            if [ $LINT_STATUS -eq 0 ]; then
-               echo "✅ Lint passed" >> $GITHUB_STEP_SUMMARY
-            else
-               echo "❌ Lint failed" >> $GITHUB_STEP_SUMMARY
-               echo '<details><summary>Logs</summary>' >> $GITHUB_STEP_SUMMARY
-               echo '' >> $GITHUB_STEP_SUMMARY
-               echo '```text' >> $GITHUB_STEP_SUMMARY
-               cat lint-out.txt >> $GITHUB_STEP_SUMMARY
-               echo '```' >> $GITHUB_STEP_SUMMARY
-               echo '</details>' >> $GITHUB_STEP_SUMMARY
-               HAS_ERRORS=1
-            fi
-          else
-            echo "No UI TS/JS files changed. Skipping lint." >> $GITHUB_STEP_SUMMARY
-          fi
+          # The `ui/` package was deleted in 7ac76d18d — FrontEnd/ is the one
+          # front end, and its .jsx is linted by lint-frontend, not from here.
+          echo "Frontend lint runs in lint-frontend." >> $GITHUB_STEP_SUMMARY
           if [ $HAS_ERRORS -ne 0 ]; then
              exit 1
           fi
@@ -249,67 +229,6 @@ jobs:
       # or it drops out of CI entirely.
       - run: cargo check --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
       - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
-
-  ui: # Phase 2: the isolated typed frontend
-    needs: lint-frontend
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: Deployment/.nvmrc
-      # Install the pnpm that Deployment/package.json pins, WITHOUT corepack.
-      #
-      # corepack resolves `packageManager` by searching up from the current
-      # directory, and every pnpm call below runs from the repo root via
-      # `-C Deployment`. The root has no package.json, so corepack found no pin
-      # and fetched whatever pnpm was newest; pnpm then read the pin, saw a
-      # different version, and refused — "pnpm does not switch versions when
-      # running under corepack". Nothing in the repo changed to cause it, and
-      # nothing in the repo could prevent it: the pin was satisfied only while
-      # "newest pnpm" happened to equal it, so an upstream release broke CI.
-      #
-      # `corepack prepare --activate` was tried first and does NOT fix it — the
-      # activated fallback is not consulted for the `-C` calls, which still
-      # resolve from the root and still find nothing.
-      #
-      # Installing it directly is what the error itself recommends, and it
-      # removes the guessing entirely. The version is read from the pin, so this
-      # cannot drift out of step with package.json.
-      - name: Install the pinned pnpm
-        run: |
-          set -euo pipefail
-          PNPM_VERSION="$(node -p "require('./Deployment/package.json').packageManager.split('@')[1]")"
-          echo "Deployment/package.json pins pnpm@$PNPM_VERSION"
-          # The runner image ships corepack SHIMS for pnpm already on PATH, so
-          # simply not running `corepack enable` was not enough — the shim was
-          # still the pnpm that ran, and it still guessed the newest version.
-          # Removing the shims is what lets a directly installed pnpm win.
-          corepack disable || true
-          npm i -g "pnpm@$PNPM_VERSION"
-          hash -r || true
-          echo "pnpm on PATH: $(command -v pnpm)"
-          ACTUAL="$(pnpm --version)"
-          echo "pnpm version: $ACTUAL"
-          # Assert rather than hope. Every later step runs pnpm, so a wrong
-          # version here fails four steps away with an error about the pin
-          # instead of about the setup that chose it.
-          [ "$ACTUAL" = "$PNPM_VERSION" ] || {
-            echo "::error::pnpm on PATH is $ACTUAL but Deployment/package.json pins $PNPM_VERSION"
-            command -v -a pnpm || true
-            exit 1
-          }
-      - run: pnpm -C Deployment install --frozen-lockfile
-      # freshness: legacy.ts and globals.d.ts must match their sources
-      - run: pnpm -C Deployment --filter ui gen:legacy && pnpm -C Deployment --filter ui gen:globals && git diff --exit-code ui/src/legacy.ts ui/src/globals.d.ts
-      # one-module-one-tree: a stem in both FrontEnd/ and ui/src is a copy, not a move
-      - run: pnpm -C Deployment --filter ui exec tsx scripts/check-collisions.ts
-      # ratchet: no .jsx/.js source in the converted tree — ts/tsx only
-      - run: '! find ui/src -name "*.jsx" -o -name "*.js" | grep -v -E "legacy|globals" | grep . '
-      - run: pnpm -C Deployment --filter ui typecheck
-      - run: pnpm -C Deployment --filter ui lint
-      - run: pnpm -C Deployment --filter ui build
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
     needs: lint-backend
@@ -532,24 +451,61 @@ jobs:
         
       - name: Validate Docker Container
         run: |
-          # Run the container in the background
-          docker run -d -p 8000:8000 --name orchestrator openair-orchestrator:latest
-          
-          # Wait for it to boot up
-          sleep 5
-          
-          # Validate it's listening
-          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/)
-          if [ "$STATUS_CODE" -eq 200 ]; then
-            echo "✅ Docker container validated and is serving on port 8000"
+          # THE CAPABILITIES ARE NOT OPTIONAL — the binary will not EXEC without
+          # them. The Dockerfile setcaps cap_net_raw,cap_net_admin,
+          # cap_net_bind_service+eip so a non-root container can still do AVDECC
+          # and PTP, and Linux refuses to exec a file demanding permitted
+          # capabilities that are absent from the process bounding set. A plain
+          # `docker run` drops them, so the container died with exit 126,
+          # "Operation not permitted", before a single line of the program ran —
+          # and all CI saw was curl exiting 7 against a port nobody was on.
+          #
+          # docker-compose.yml grants exactly these three. A smoke test that
+          # runs the image differently from the way it is deployed is testing a
+          # configuration that does not exist.
+          docker run -d -p 8000:8000 \
+            --cap-add NET_RAW --cap-add NET_ADMIN --cap-add NET_BIND_SERVICE \
+            --name orchestrator openair-orchestrator:latest
+
+          # WAIT FOR READY, DO NOT GUESS AT IT.
+          #
+          # `sleep 5` then one curl asked whether the orchestrator had finished
+          # booting in exactly five seconds. It scans the bench before it
+          # serves, so on a runner with no instruments — and no broker, since
+          # this runs the image alone — that is a race the test can only lose
+          # some of the time, which is the worst kind of CI failure to read.
+          #
+          # And it could not tell you why: `curl` exits 7 when nothing is
+          # listening, GitHub runs each `run:` under `bash -e`, so the step died
+          # on the curl itself and the `docker logs` below it never ran. Every
+          # curl here is therefore guarded, and the logs print on the way out.
+          READY=""
+          for i in $(seq 1 60); do
+            if ! docker ps --format '{{.Names}}' | grep -qx orchestrator; then
+              echo "❌ container exited after $i s"
+              break
+            fi
+            # -L, because `/` is a 307 to /index.html. Checking the unfollowed
+            # status asked for a 200 the server has no reason to send: the app
+            # was up and serving and the test called it a failure.
+            STATUS_CODE=$(curl -s -L -o /dev/null -w "%{http_code}" http://localhost:8000/ || true)
+            if [ "$STATUS_CODE" = "200" ]; then
+              READY="$i"
+              break
+            fi
+            sleep 1
+          done
+
+          if [ -n "$READY" ]; then
+            echo "✅ serving on port 8000 after ${READY}s"
+            docker stop orchestrator
           else
-            echo "❌ Docker container failed validation (status code $STATUS_CODE)"
-            docker logs orchestrator
+            echo "❌ no 200 from http://localhost:8000/ within 60s (last status: ${STATUS_CODE:-none})"
+            echo "--- docker ps ---"; docker ps -a --filter name=orchestrator
+            echo "--- container logs ---"; docker logs orchestrator || true
+            docker stop orchestrator || true
             exit 1
           fi
-          
-          # Cleanup
-          docker stop orchestrator
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master

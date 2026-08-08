@@ -179,6 +179,29 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         if (isInfinity && range > 0) return min + ((v - min) % range + range) % range;
         return Math.max(min, Math.min(max, v));
     };
+    // THE STEP THE CONTROL DECLARES, not a hard-coded two decimal places.
+    //
+    // The drag used to round to 0.01 whatever the domain said, so a control
+    // whose range is 2 mV to 5 V could not express its own bottom end: every
+    // value under 5 mV rounded to zero, and a scope channel cannot be set to
+    // 0 V/div. The wheel already stepped by `domain.primary.step`; the drag
+    // ignored it, which is why the two disagreed about where the knob could
+    // stop.
+    //
+    // Rounding to the step's own decimal count afterwards is what keeps
+    // 0.001-sized steps from accumulating binary dust — 0.1+0.2 arithmetic in
+    // a value that goes on the wire as a SCPI argument.
+    const _declaredStep = (() => {
+        const s = parseFloat(c.domain?.primary?.step ?? c.step);
+        return Number.isFinite(s) && s > 0 ? s : null;
+    })();
+    const _quantise = (v) => {
+        if (!Number.isFinite(v)) return v;
+        if (!_declaredStep) return Math.round(v * 100) / 100;
+        const dec = (String(_declaredStep).split('.')[1] || '').length;
+        return parseFloat((Math.round(v / _declaredStep) * _declaredStep).toFixed(dec));
+    };
+
     // Panner: knob outputs TWO values [leftPct, rightPct] (each 0-100).
     const _mid = (min + max) / 2;
     // `value` arrives as whatever the bus carried — a number, a numeric string, or
@@ -254,7 +277,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         const deltaY = startYRef.current - e.clientY;
         const range = max - min;
         const deltaVal = (deltaY / 150) * range;
-        const nv = _wrapOrClamp(Math.round((startValRef.current + deltaVal) * 100) / 100);
+        const nv = _wrapOrClamp(_quantise(startValRef.current + deltaVal));
         setLocalVal(nv);
         fireChange(nv);
     };
@@ -271,14 +294,12 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     wheelRef.current = (e) => {
         const range = max - min;
         if (!range) return;
-        const sc = parseFloat(c.domain?.primary?.step ?? c.step);
-        const step = (Number.isFinite(sc) && sc > 0) ? sc : range / 50;
+        const step = _declaredStep !== null ? _declaredStep : range / 50;
         const dir = e.deltaY < 0 ? 1 : -1;
-        const cur = currentPos;
-        let next = _wrapOrClamp(cur + dir * step);
-        next = Math.round(next / step) * step;
-        const dec = (String(step).split('.')[1] || '').length;
-        const nv = parseFloat(next.toFixed(Math.min(10, dec)));
+        // Quantise FIRST, then clamp. The other order rounded after clamping,
+        // so a step that does not divide the range evenly could land the value
+        // back outside the very bounds it had just been pulled inside.
+        const nv = _wrapOrClamp(_quantise(currentPos + dir * step));
         setLocalVal(nv);
         fireChange(nv);
         clearTimeout(dwellTimerRef.current);

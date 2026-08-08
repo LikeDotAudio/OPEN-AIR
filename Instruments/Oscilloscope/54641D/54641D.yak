@@ -2327,6 +2327,14 @@
     }
   },
   "do": {
+    "Auto_Scale": {
+      "scpi": ":AUToscale",
+      "scpiFast": ":AUT",
+      "description": "Auto scale",
+      "group": "Acquisition Control",
+      "subsystem": "ROOT",
+      "notes": "One panel button has to name ONE command, and the two scopes on this bench spelled autoscale differently — Autoscale here, Auto_Scale on the DS1104Z. Same `:AUToscale` this model's own Do_Autoscale already sends; the pair stays for anything referring to it by the old name."
+    },
     "Autoscale": {
       "scpi": "AUToscale",
       "scpiFast": "AUT",
@@ -2717,12 +2725,6 @@
       "subsystem": "PROT",
       "unverified": true
     },
-    "Reset_Device": {
-      "scpi": "*RST",
-      "description": "Do Reset",
-      "group": "Actions and Toggles",
-      "subsystem": "System"
-    },
     "Do_Run": {
       "scpi": ":RUN",
       "description": "Do Run",
@@ -3019,6 +3021,21 @@
       "subsystem": "Common",
       "unverified": true
     },
+    "Force_Trigger": {
+      "scpi": ":TRIGger:FORCe",
+      "scpiFast": ":TRIG:FORC",
+      "description": "Force a trigger.",
+      "group": "Root Action Commands",
+      "subsystem": "Root",
+      "notes": "The name the DS1104Z already uses for :TFORce. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "Reset_Device": {
+      "scpi": "*RST",
+      "description": "Do Reset",
+      "group": "Actions and Toggles",
+      "subsystem": "System"
+    },
     "Run": {
       "scpi": "RUN",
       "description": "Run",
@@ -3051,15 +3068,6 @@
       "description": "Stop",
       "group": "Root Action Commands",
       "subsystem": "Root"
-    },
-    "Force_Trigger": {
-      "scpi": ":TRIGger:FORCe",
-      "scpiFast": ":TRIG:FORC",
-      "description": "Force a trigger.",
-      "group": "Root Action Commands",
-      "subsystem": "Root",
-      "notes": "The name the DS1104Z already uses for :TFORce. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
-      "unverified": true
     }
   },
   "rig": {

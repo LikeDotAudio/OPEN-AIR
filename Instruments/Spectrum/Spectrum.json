@@ -17,7 +17,7 @@
           "show_label": false
         },
         "layout": {
-          "weight": 1,
+          "weight": 0,
           "width": "100%"
         },
         "fields": {
@@ -243,6 +243,14 @@
               "command": "trace_data_1",
               "input_name": "",
               "converter": ""
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             }
           },
           "Get_Trace_2": {
@@ -284,6 +292,14 @@
               "command": "trace_data_2",
               "input_name": "",
               "converter": ""
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             }
           },
           "Get_Trace_3": {
@@ -325,6 +341,14 @@
               "command": "trace_data_3",
               "input_name": "",
               "converter": ""
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             }
           },
           "Get_Trace_4": {
@@ -366,6 +390,14 @@
               "command": "trace_data_4",
               "input_name": "",
               "converter": ""
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             }
           },
           "Get_All_Traces": {
@@ -408,7 +440,15 @@
               "input_name": "",
               "converter": ""
             },
-            "yak_nab_on_load": true
+            "yak_nab_on_load": true,
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
+            }
           },
           "Get_Traces_234": {
             "type": "_GuiActuator",
@@ -449,10 +489,82 @@
               "command": "trace_data_234",
               "input_name": "",
               "converter": ""
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             }
+          },
+          "Continuous": {
+            "type": "_GuiAcquireLoop",
+            "fires": "Get_All_Traces",
+            "yak_awaits": "trace_data_all/stop",
+            "interval_ms": 100,
+            "timeout_ms": 15000,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CONTINUOUS ● LIVE",
+                  "Fr": "CONTINU ● EN DIRECT",
+                  "De": "KONTINUIERLICH ● LIVE",
+                  "Es": "CONTINUO ● EN VIVO"
+                },
+                "text_size": 12,
+                "text_color": "#39D353"
+              },
+              "inactive": {
+                "text": {
+                  "En": "CONTINUOUS",
+                  "Fr": "CONTINU",
+                  "De": "KONTINUIERLICH",
+                  "Es": "CONTINUO"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#39D353",
+                "bg_color": "#000000",
+                "border_color": "#39D353",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "value": {
+              "default_value": 0
+            },
+            "latching": true
           }
         },
-        "layout_columns": 4
+        "layout_columns": 7,
+        "responsive": true,
+        "responsive_min": 160
       },
       "Span": {
         "type": "OcaBlock",
@@ -462,7 +574,8 @@
         },
         "layout": {
           "weight": 0,
-          "width": "100%"
+          "width": "100%",
+          "column_spacing": 12
         },
         "fields": {
           "Capture_Start": {
@@ -482,7 +595,8 @@
             "units": "MHz",
             "yak_listen": "trace_data_all/start",
             "layout": {
-              "height": 26
+              "height": 26,
+              "width": 280
             },
             "yak_hydrate_unit": "Hz"
           },
@@ -503,11 +617,13 @@
             "units": "MHz",
             "yak_listen": "trace_data_all/stop",
             "layout": {
-              "height": 26
+              "height": 26,
+              "width": 280
             },
             "yak_hydrate_unit": "Hz"
           }
-        }
+        },
+        "layout_columns": 2
       }
     }
   },

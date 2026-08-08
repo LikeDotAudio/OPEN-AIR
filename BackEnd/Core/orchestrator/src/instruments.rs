@@ -1507,22 +1507,6 @@ mod tests {
     }
 
 
-    // TEMP-SCRATCH
-    #[test]
-    fn scratch_build_from_list() {
-        let Ok(root) = std::env::var("OA_SCRATCH_ROOT") else { return };
-        let list = std::env::var("OA_SCRATCH_DEVICES").unwrap();
-        let raw: Value = serde_json::from_str(&std::fs::read_to_string(list).unwrap()).unwrap();
-        let devs: Vec<Device> = raw.as_array().unwrap().iter().map(|d| Device {
-            dtype: d["type"].as_str().unwrap().to_string(),
-            model: d["model"].as_str().unwrap().to_string(),
-            resource: d["resource"].as_str().unwrap().to_string(),
-            write_topic: d["write_topic"].as_str().unwrap().to_string(),
-        }).collect();
-        let (panels, built) = super::build(std::path::Path::new(&root), &devs);
-        println!("SCRATCH built={built} panels={panels}");
-    }
-
     #[test]
     fn a_bank_bar_is_named_for_its_slot_not_its_model_counter() {
         let mk = |model: &str, slot: u32, devn: u32| {

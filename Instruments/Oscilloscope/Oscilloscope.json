@@ -21,7 +21,7 @@
           "show_label": false
         },
         "layout": {
-          "weight": 1,
+          "weight": 0,
           "width": "100%"
         },
         "fields": {
@@ -94,7 +94,9 @@
         },
         "layout": {
           "weight": 0,
-          "width": "100%"
+          "width": "100%",
+          "row_spacing": 4,
+          "column_spacing": 4
         },
         "fields": {
           "Get_All": {
@@ -113,12 +115,12 @@
               }
             },
             "layout": {
-              "height": 44,
+              "height": 34,
               "width": "100%",
               "stretch": "width",
-              "font": 12,
-              "padx": 3,
-              "pady": 3
+              "font": 11,
+              "padx": 2,
+              "pady": 2
             },
             "style": {
               "active": {
@@ -211,9 +213,64 @@
               "default_value": 0
             },
             "latching": true
+          },
+          "Auto_Scale": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "AUTO SCALE",
+                  "Fr": "AUTO SCALE",
+                  "De": "AUTO SCALE",
+                  "Es": "AUTO SCALE"
+                },
+                "text_size": 14,
+                "text_color": "#33A1FD"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#33A1FD",
+                "bg_color": "#000000",
+                "border_color": "#33A1FD",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Oscilloscope",
+              "command": "Auto_Scale",
+              "input_name": "",
+              "converter": "",
+              "readback": "timebase_settings,channel_settings_1,channel_settings_2"
+            }
           }
         },
-        "layout_columns": 2
+        "layout_columns": 3,
+        "responsive": true,
+        "responsive_min": 160
       },
       "Acquisition": {
         "type": "OcaBlock",
@@ -226,7 +283,9 @@
         },
         "layout": {
           "weight": 0,
-          "width": "100%"
+          "width": "100%",
+          "row_spacing": 4,
+          "column_spacing": 4
         },
         "fields": {
           "Run": {
@@ -249,8 +308,8 @@
               "width": "100%",
               "stretch": "width",
               "font": 11,
-              "padx": 3,
-              "pady": 3
+              "padx": 2,
+              "pady": 2
             },
             "style": {
               "active": {
@@ -301,8 +360,8 @@
               "width": "100%",
               "stretch": "width",
               "font": 11,
-              "padx": 3,
-              "pady": 3
+              "padx": 2,
+              "pady": 2
             },
             "style": {
               "active": {
@@ -353,8 +412,8 @@
               "width": "100%",
               "stretch": "width",
               "font": 11,
-              "padx": 3,
-              "pady": 3
+              "padx": 2,
+              "pady": 2
             },
             "style": {
               "active": {
@@ -405,8 +464,8 @@
               "width": "100%",
               "stretch": "width",
               "font": 11,
-              "padx": 3,
-              "pady": 3
+              "padx": 2,
+              "pady": 2
             },
             "style": {
               "active": {
@@ -438,7 +497,9 @@
             }
           }
         },
-        "layout_columns": 4
+        "layout_columns": 4,
+        "responsive": true,
+        "responsive_min": 160
       },
       "Channel_${n}": {
         "type": "OcaBlock",
@@ -767,7 +828,7 @@
             },
             "options": {
               "1": {
-                "value": "1e-09",
+                "value": "0.000000001",
                 "label": {
                   "active": {
                     "text": {
@@ -793,7 +854,7 @@
                 "selected": false
               },
               "2": {
-                "value": "2e-09",
+                "value": "0.000000002",
                 "label": {
                   "active": {
                     "text": {
@@ -819,7 +880,7 @@
                 "selected": false
               },
               "3": {
-                "value": "5e-09",
+                "value": "0.000000005",
                 "label": {
                   "active": {
                     "text": {
@@ -845,7 +906,7 @@
                 "selected": false
               },
               "4": {
-                "value": "1e-08",
+                "value": "0.00000001",
                 "label": {
                   "active": {
                     "text": {
@@ -871,7 +932,7 @@
                 "selected": false
               },
               "5": {
-                "value": "2e-08",
+                "value": "0.00000002",
                 "label": {
                   "active": {
                     "text": {
@@ -897,7 +958,7 @@
                 "selected": false
               },
               "6": {
-                "value": "5.0000000000000004e-08",
+                "value": "0.00000005",
                 "label": {
                   "active": {
                     "text": {
@@ -923,7 +984,7 @@
                 "selected": false
               },
               "7": {
-                "value": "1.0000000000000001e-07",
+                "value": "0.0000001",
                 "label": {
                   "active": {
                     "text": {
@@ -949,7 +1010,7 @@
                 "selected": false
               },
               "8": {
-                "value": "2.0000000000000002e-07",
+                "value": "0.0000002",
                 "label": {
                   "active": {
                     "text": {
@@ -975,7 +1036,7 @@
                 "selected": false
               },
               "9": {
-                "value": "5.000000000000001e-07",
+                "value": "0.0000005",
                 "label": {
                   "active": {
                     "text": {
@@ -1974,58 +2035,336 @@
             "yak_listen": "channel_settings_${n}/state"
           },
           "Ch${n}_Scale": {
-            "type": "_GuiKnob",
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
             "label": {
+              "En": "CH${n} Volts / Div",
+              "Fr": "CH${n} Volts / Div",
+              "De": "CH${n} Volt / Div",
+              "Es": "CH${n} Voltios / Div"
+            },
+            "selection_mode": "radio",
+            "layout": {
+              "height": 30,
+              "max_cols": 8,
+              "width": "100%",
+              "stretch": "width",
+              "font": 10,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
               "active": {
-                "text": {
-                  "En": "CH${n} Volts / Div",
-                  "Fr": "CH${n} Volts / Div",
-                  "De": "CH${n} Volt / Div",
-                  "Es": "CH${n} Voltios / Div"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "${color}",
+                "bg_color": "#000000",
+                "border_color": "${color}",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
               },
               "inactive": {
-                "text": {
-                  "En": "CH${n} Volts / Div",
-                  "Fr": "CH${n} Volts / Div",
-                  "De": "CH${n} Volt / Div",
-                  "Es": "CH${n} Voltios / Div"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
               }
             },
-            "domain": {
-              "primary": {
-                "min": 0.001,
-                "max": 10,
-                "value_default": 1,
-                "step": 0.001
+            "options": {
+              "1": {
+                "value": "0.002",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2 mV",
+                      "Fr": "2 mV",
+                      "De": "2 mV",
+                      "Es": "2 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2 mV",
+                      "Fr": "2 mV",
+                      "De": "2 mV",
+                      "Es": "2 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
               },
-              "units": "V"
+              "2": {
+                "value": "0.005",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "5 mV",
+                      "Fr": "5 mV",
+                      "De": "5 mV",
+                      "Es": "5 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "5 mV",
+                      "Fr": "5 mV",
+                      "De": "5 mV",
+                      "Es": "5 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "3": {
+                "value": "0.01",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "10 mV",
+                      "Fr": "10 mV",
+                      "De": "10 mV",
+                      "Es": "10 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "10 mV",
+                      "Fr": "10 mV",
+                      "De": "10 mV",
+                      "Es": "10 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "4": {
+                "value": "0.02",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "20 mV",
+                      "Fr": "20 mV",
+                      "De": "20 mV",
+                      "Es": "20 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "20 mV",
+                      "Fr": "20 mV",
+                      "De": "20 mV",
+                      "Es": "20 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "5": {
+                "value": "0.05",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "50 mV",
+                      "Fr": "50 mV",
+                      "De": "50 mV",
+                      "Es": "50 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "50 mV",
+                      "Fr": "50 mV",
+                      "De": "50 mV",
+                      "Es": "50 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "6": {
+                "value": "0.1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "100 mV",
+                      "Fr": "100 mV",
+                      "De": "100 mV",
+                      "Es": "100 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "100 mV",
+                      "Fr": "100 mV",
+                      "De": "100 mV",
+                      "Es": "100 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "7": {
+                "value": "0.2",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "200 mV",
+                      "Fr": "200 mV",
+                      "De": "200 mV",
+                      "Es": "200 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "200 mV",
+                      "Fr": "200 mV",
+                      "De": "200 mV",
+                      "Es": "200 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "8": {
+                "value": "0.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "500 mV",
+                      "Fr": "500 mV",
+                      "De": "500 mV",
+                      "Es": "500 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "500 mV",
+                      "Fr": "500 mV",
+                      "De": "500 mV",
+                      "Es": "500 mV"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "9": {
+                "value": "1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1 V",
+                      "Fr": "1 V",
+                      "De": "1 V",
+                      "Es": "1 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1 V",
+                      "Fr": "1 V",
+                      "De": "1 V",
+                      "Es": "1 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              },
+              "10": {
+                "value": "2",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2 V",
+                      "Fr": "2 V",
+                      "De": "2 V",
+                      "Es": "2 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2 V",
+                      "Fr": "2 V",
+                      "De": "2 V",
+                      "Es": "2 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "11": {
+                "value": "5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "5 V",
+                      "Fr": "5 V",
+                      "De": "5 V",
+                      "Es": "5 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "5 V",
+                      "Fr": "5 V",
+                      "De": "5 V",
+                      "Es": "5 V"
+                    },
+                    "text_size": 11,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              }
             },
             "value": {
-              "default_value": 1
+              "default_value": "1"
             },
             "units": "V",
-            "layout": {
-              "height": 140,
-              "width": "100%",
-              "pady": 4
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "cosmetics": {
-              "colors": {
-                "active": "${color}",
-                "secondary": "#444444",
-                "background": "#2b2b2b"
-              }
-            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",

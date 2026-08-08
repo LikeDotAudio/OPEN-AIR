@@ -67,6 +67,66 @@
       "subsystem": "BURS",
       "unverified": true
     },
+    "Set_Burst_Internal_Period": {
+      "scpi": "BURS:INT:PER <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true,
+      "notes": "Copied from the 33220A table so the shared Generator panel writes as well as it reads on this model. The matching query already lives here; the BURSt subsystem is common to both instruments. UNVERIFIED on 33210A hardware."
+    },
+    "Set_Burst_Mode": {
+      "scpi": "BURS:MODE <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "TRIG",
+          "GAT"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true,
+      "notes": "Copied from the 33220A table so the shared Generator panel writes as well as it reads on this model. The matching query already lives here; the BURSt subsystem is common to both instruments. UNVERIFIED on 33210A hardware."
+    },
+    "Set_Burst_Ncycles": {
+      "scpi": "BURS:NCYC <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "unknown"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true,
+      "notes": "Copied from the 33220A table so the shared Generator panel writes as well as it reads on this model. The matching query already lives here; the BURSt subsystem is common to both instruments. UNVERIFIED on 33210A hardware."
+    },
+    "Set_Burst_Phase": {
+      "scpi": "BURS:PHAS <value>",
+      "description": "Burst Commands",
+      "arg": {
+        "kind": "numeric",
+        "unit": "deg",
+        "limits": "query"
+      },
+      "args": [
+        "value"
+      ],
+      "subsystem": "BURS",
+      "unverified": true,
+      "notes": "Copied from the 33220A table so the shared Generator panel writes as well as it reads on this model. The matching query already lives here; the BURSt subsystem is common to both instruments. UNVERIFIED on 33210A hardware."
+    },
     "Set_Burst_State": {
       "scpi": "BURSt:STATe <value>",
       "scpiFast": "BURS:STAT <value>",
@@ -411,7 +471,16 @@
       "scpiFast": "FUNC <shape>",
       "description": "Set Function Shape",
       "arg": {
-        "kind": "enum"
+        "kind": "enum",
+        "values": [
+          "SIN",
+          "SQU",
+          "RAMP",
+          "PULS",
+          "NOIS",
+          "DC",
+          "USER"
+        ]
       },
       "group": "SOURce Configuration",
       "args": [
@@ -529,6 +598,24 @@
       ],
       "subsystem": "OUTP",
       "unverified": true
+    },
+    "Set_Output_State": {
+      "scpi": "OUTPut <state>",
+      "scpiFast": "OUTP <state>",
+      "description": "Set Output State",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "group": "Output Control",
+      "args": [
+        "state"
+      ],
+      "subsystem": "OUTPut",
+      "notes": "The two-way form of the pair `Output_ON` / `Output_OFF`, which stay for the momentary buttons that use them. A LATCHING control cannot drive a pair: one widget publishes one value to one command, so an output toggle bound to `Output_ON` could only ever turn the output on. Same bytes on the wire that `Output_ON` already proves the instrument accepts — only the keyword is a placeholder."
     },
     "Set_Output_Trigger": {
       "scpi": "OUTPut:TRIGger <value>",
@@ -2511,6 +2598,8 @@
       "scpi": ":SWEep:STATe?;:SWEep:TIME?;:SWEep:SPACing?;:FREQuency:STARt?;:FREQuency:STOP?",
       "scpiFast": ":SWE:STAT?;:SWE:TIME?;:SWE:SPAC?;:FREQ:STAR?;:FREQ:STOP?",
       "description": "Read the whole sweep setup in one transaction",
+      "subsystem": "SWEep",
+      "group": "Sweep Readbacks",
       "returns": {
         "count": 5,
         "separator": ";",
@@ -2525,21 +2614,23 @@
             "unit": "s"
           },
           {
-            "name": "spacing"
+            "name": "spacing",
+            "type": "CRD"
           },
           {
             "name": "start",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "stop",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           }
         ]
       },
-      "group": "Sweep Readbacks",
-      "subsystem": "SWEep",
-      "unverified": true
+      "unverified": true,
+      "notes": "UNVERIFIED on hardware. One dead statement kills a chained reply outright, so confirm the answer has the full count of semicolon-separated values before trusting a readback from it. Every statement in the chain already exists here on its own."
     },
     "Get_System_Beeper_State": {
       "scpi": "SYSTem:BEEPer:STATe?",
@@ -2727,6 +2818,179 @@
       },
       "subsystem": "VOLT",
       "unverified": true
+    },
+    "burst_settings": {
+      "scpi": ":BURSt:STATe?;:BURSt:MODE?;:BURSt:NCYCles?;:BURSt:PHASe?;:BURSt:INTernal:PERiod?;:BURSt:GATE:POLarity?",
+      "scpiFast": ":BURS:STAT?;:BURS:MODE?;:BURS:NCYC?;:BURS:PHAS?;:BURS:INT:PER?;:BURS:GATE:POL?",
+      "description": "The whole burst setup in one transaction.",
+      "subsystem": "BURSt",
+      "group": "Burst Readbacks",
+      "returns": {
+        "count": 6,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "mode",
+            "type": "CRD"
+          },
+          {
+            "name": "ncycles",
+            "type": "NR1"
+          },
+          {
+            "name": "phase",
+            "type": "NR3",
+            "unit": "deg"
+          },
+          {
+            "name": "period",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "gate_polarity",
+            "type": "CRD"
+          }
+        ]
+      },
+      "unverified": true,
+      "notes": "UNVERIFIED on hardware. One dead statement kills a chained reply outright, so confirm the answer has the full count of semicolon-separated values before trusting a readback from it. Every statement in the chain already exists here on its own."
+    },
+    "generator_settings": {
+      "scpi": "FUNCtion?;:FREQuency?;:VOLTage?;:VOLTage:OFFSet?;:OUTPut?",
+      "scpiFast": "FUNC?;:FREQ?;:VOLT?;:VOLT:OFFS?;:OUTP?",
+      "description": "Shape, frequency, amplitude, offset and the output state, in one round trip.",
+      "subsystem": "SOURce",
+      "group": "APPLy Readbacks",
+      "returns": {
+        "count": 5,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "function",
+            "type": "CRD"
+          },
+          {
+            "name": "frequency",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "amplitude",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "output",
+            "type": "BOOL"
+          }
+        ]
+      },
+      "unverified": true,
+      "notes": "What every control on the main page hydrates from. `Get_Apply_String` answers the same facts as one quoted blob (\"SIN +1.0E+03,+3.0E+00,+0.0E+00\") with no named fields, so nothing could bind to a value inside it. UNVERIFIED on hardware: five chained statements, and one dead statement kills the whole reply — check the answer has five semicolon-separated values before trusting a readback. Every statement in it already exists here on its own."
+    },
+    "modulation_settings": {
+      "scpi": ":AM:STATe?;:AM:SOURce?;:AM:DEPTh?;:FM:STATe?;:FM:SOURce?;:FM:DEViation?;:FM:INTernal:FREQuency?",
+      "scpiFast": ":AM:STAT?;:AM:SOUR?;:AM:DEPT?;:FM:STAT?;:FM:SOUR?;:FM:DEV?;:FM:INT:FREQ?",
+      "description": "Both modulators, whole: state, source and depth/deviation together.",
+      "subsystem": "AM",
+      "group": "Modulation Readbacks",
+      "returns": {
+        "count": 7,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "am_state",
+            "type": "BOOL"
+          },
+          {
+            "name": "am_source",
+            "type": "CRD"
+          },
+          {
+            "name": "am_depth",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "fm_state",
+            "type": "BOOL"
+          },
+          {
+            "name": "fm_source",
+            "type": "CRD"
+          },
+          {
+            "name": "fm_deviation",
+            "type": "NR3",
+            "unit": "Hz"
+          },
+          {
+            "name": "fm_rate",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "unverified": true,
+      "notes": "UNVERIFIED on hardware. One dead statement kills a chained reply outright, so confirm the answer has the full count of semicolon-separated values before trusting a readback from it. Every statement in the chain already exists here on its own."
+    },
+    "shape_settings": {
+      "scpi": ":FUNCtion:RAMP:SYMMetry?;:FUNCtion:SQUare:DCYCle?;:FUNCtion:PULSe:DCYCle?;:FUNCtion:PULSe:WIDTh?;:OUTPut:LOAD?;:VOLTage:UNIT?;:OUTPut:POLarity?",
+      "scpiFast": ":FUNC:RAMP:SYMM?;:FUNC:SQU:DCYC?;:FUNC:PULS:DCYC?;:FUNC:PULS:WIDT?;:OUTP:LOAD?;:VOLT:UNIT?;:OUTP:POL?",
+      "description": "Every shape parameter and the load it drives, in one round trip.",
+      "subsystem": "SOURce",
+      "group": "Shape Readbacks",
+      "returns": {
+        "count": 7,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "ramp_symmetry",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "square_dcycle",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "pulse_dcycle",
+            "type": "NR3",
+            "unit": "%"
+          },
+          {
+            "name": "pulse_width",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "output_load",
+            "type": "NR3",
+            "unit": "Ohm"
+          },
+          {
+            "name": "voltage_unit",
+            "type": "CRD"
+          },
+          {
+            "name": "output_polarity",
+            "type": "CRD"
+          }
+        ]
+      },
+      "unverified": true,
+      "notes": "UNVERIFIED on hardware. One dead statement kills a chained reply outright, so confirm the answer has the full count of semicolon-separated values before trusting a readback from it. Every statement in the chain already exists here on its own."
     }
   }
 }

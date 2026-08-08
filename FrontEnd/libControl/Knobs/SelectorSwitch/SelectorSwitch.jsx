@@ -23,6 +23,23 @@ const SelectorSwitch = ({ value, onChange, config }) => {
     const positions = c.positions || ["OFF", "ON"];
     const isContinuous = c.continuous === true;
 
+    // WHAT A POSITION SAYS NEED NOT BE WHAT IT SENDS.
+    //
+    // `positions` doubles as the value published and the text engraved beside
+    // the tick, which is fine while the two agree. Bound to an instrument they
+    // stop agreeing: the waveform dial has to publish the SCPI keyword FUNCtion
+    // accepts — SIN, SQU, RAMP, PULS, NOIS, USER — while the operator needs to
+    // read SINE, SQUARE, TRIANGLE, PULSE, NOISE, ARB. Without a second list the
+    // choice is a dial nobody can read or a value the instrument rejects.
+    //
+    // `position_labels` is the engraving, index for index. Absent, or short, a
+    // position labels itself exactly as before.
+    const posLabels = Array.isArray(c.position_labels) ? c.position_labels : null;
+    const labelFor = (i) => {
+        const l = posLabels && posLabels[i];
+        return (l === undefined || l === null || l === '') ? positions[i] : l;
+    };
+
     // Colors
     const accentColor = colors.primary || '#33A1FD';
     const secondaryColor = colors.secondary || '#444444';
@@ -212,7 +229,7 @@ const SelectorSwitch = ({ value, onChange, config }) => {
                     textAnchor="middle" 
                     dominantBaseline="middle"
                 >
-                    {p}
+                    {labelFor(i)}
                 </text>
             </g>
         );
@@ -297,7 +314,7 @@ const SelectorSwitch = ({ value, onChange, config }) => {
 
                 {/* Selection Text (s-anchor, bottom 10) */}
                 {positions[currentIndex] !== undefined && (
-                    <text x={centerX} y={h - 10} fill={indicatorColor} fontSize="9" fontWeight="bold" textAnchor="middle">{positions[currentIndex].toString().toUpperCase()}</text>
+                    <text x={centerX} y={h - 10} fill={indicatorColor} fontSize="9" fontWeight="bold" textAnchor="middle">{labelFor(currentIndex).toString().toUpperCase()}</text>
                 )}
             </svg>
         </div>

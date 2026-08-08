@@ -44,13 +44,30 @@ const OcaTrapezoidButton = ({ label: externalLabel, value, onChange, config }) =
     const buttonW = canvasW * WIDTH_SCALING_FACTOR;
     const buttonH = (c.geometry?.height || c.height || 50) * HEIGHT_SCALING_FACTOR;
     
-    const baseColor = c.color || styling.fill_color || colors.primary || '#8B0000';
-    const ledColor = c.led_color || colors.active || '#FF0000';
-    const buttonText = c.button_text || (c.label_active?.[lang] || c.label_active?.En || "");
-    const labelText = externalLabel || c.label?.[lang] || c.label?.En || "";
-    
     const latching = c.latching === true;
     const isLit = value === 1 || value === true || (typeof value === 'string' && (value.toLowerCase() === 'on' || value === '1'));
+
+    // THE BODY CARRIES THE STATE, NOT JUST THE LAMP.
+    //
+    // The face colour was a constant and only the indicator rectangle moved, so
+    // "is the output live?" was a question about a 40x9 px strip. On a signal
+    // generator that answer has to be readable from across the bench: red face
+    // means RF is on the connector, white face means it is not.
+    //
+    // `color_active` / `color_inactive` colour the face per state. Either one
+    // absent falls back to the single `color` every existing trapezoid already
+    // sets, so nothing authored before this changes appearance.
+    const baseColor = (isLit ? c.color_active : c.color_inactive)
+        || c.color || styling.fill_color || colors.primary || '#8B0000';
+    const ledColor = c.led_color || colors.active || '#FF0000';
+    // Wording may differ per state (ON / OFF) — the same label:{active,inactive}
+    // pair every other button reads, expanded to label_active/label_inactive by
+    // FieldComponent. A node with only `active` keeps its one caption.
+    const stateText = (l) => (typeof l === 'string' ? l : (l?.[lang] || l?.En || ""));
+    const buttonText = c.button_text || stateText(
+        (isLit || c.label_inactive === undefined) ? c.label_active : c.label_inactive
+    );
+    const labelText = externalLabel || c.label?.[lang] || c.label?.En || "";
 
     // --- 2. Color Lightness Engine (The Gold) ---
     const adjustColor = (hex, factor) => {
@@ -69,6 +86,20 @@ const OcaTrapezoidButton = ({ label: externalLabel, value, onChange, config }) =
     const bottomBevel = adjustColor(baseColor, 0.5);
     const sideBevel = adjustColor(baseColor, 0.7);
     const indColor = isLit ? ledColor : adjustColor(baseColor, 0.3);
+
+    // The caption was painted white unconditionally, which was safe only while
+    // every trapezoid was dark. A white OFF face made its own label vanish. Pick
+    // by the face's luminance instead, still overridable per state.
+    const luminance = (hex) => {
+        let h = String(hex).replace('#', '');
+        if (h.length === 3) h = h.split('').map(s => s + s).join('');
+        const v = parseInt(h, 16);
+        if (Number.isNaN(v) || h.length !== 6) return 0;
+        // Rec. 709 weights: green reads far brighter to the eye than blue.
+        return (0.2126 * ((v >> 16) & 255) + 0.7152 * ((v >> 8) & 255) + 0.0722 * (v & 255)) / 255;
+    };
+    const textColor = (isLit ? c.text_color_active : c.text_color_inactive)
+        || c.text_color || (luminance(faceColor) > 0.6 ? '#111111' : '#ffffff');
 
     // --- 3. Interaction Handlers ---
     const handlePointerDown = (e) => {
@@ -179,9 +210,9 @@ const OcaTrapezoidButton = ({ label: externalLabel, value, onChange, config }) =
                 {buttonText && (
                     <text 
                         x={centerX} 
-                        y={base_y + buttonH * 0.6 + offsetY} 
-                        fill="white" 
-                        fontSize="9" 
+                        y={base_y + buttonH * 0.6 + offsetY}
+                        fill={textColor}
+                        fontSize={c.text_size || 9}
                         fontWeight="bold" 
                         fontFamily="Arial, sans-serif" 
                         textAnchor="middle"

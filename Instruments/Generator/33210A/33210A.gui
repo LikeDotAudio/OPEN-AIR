@@ -2,5 +2,23 @@
   "model": "33210A",
   "manufacturer": "HP / Agilent / Keysight",
   "type": "Generator",
-  "notes": "10 MHz Function/Arb"
+  "notes": "10 MHz Function/Arb",
+  "domains": {
+    "freq": {
+      "units": "Hz",
+      "min": 1e-06,
+      "max": 10000000
+    },
+    "ampl": {
+      "units": "V",
+      "min": 0.01,
+      "max": 10
+    },
+    "offset": {
+      "units": "V",
+      "min": -5,
+      "max": 5
+    }
+  },
+  "domain_notes": "Amplitude and offset are the 50 Ω figures; into a high-Z load the instrument doubles both. `freq` is the sine/square ceiling — ramp and pulse are lower, and the instrument clamps those itself."
 }

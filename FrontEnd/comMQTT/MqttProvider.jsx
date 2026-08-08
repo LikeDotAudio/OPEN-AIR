@@ -716,13 +716,21 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         // verbatim — there is no unit to convert and no precision to round, and
         // the widget matches it against its own options.
         //
-        // Only a control that DECLARES options takes this path. A slider or a
-        // number box has nothing to do with a word, and the VISA daemon answers
-        // a failed query with the literal text `ERROR: …` — which decomposes
-        // into field 0 of the reply and would otherwise be shown as a value.
+        // Only a control that DECLARES a set of choices takes this path. A
+        // slider or a number box has nothing to do with a word, and the VISA
+        // daemon answers a failed query with the literal text `ERROR: …` —
+        // which decomposes into field 0 of the reply and would otherwise be
+        // shown as a value.
+        //
+        // `positions` counts as declaring them. A rotary selector spells its
+        // choices that way (SelectorSwitch.jsx) rather than as `options`, so
+        // gating on `options` alone silently dropped every word aimed at one:
+        // the generator's waveform dial sat on SINE while `FUNCtion?` answered
+        // SQU, with nothing on screen to contradict it — the same failure the
+        // trace-mode dropdowns had before this branch existed.
         if (!Number.isFinite(n)) {
             const s = String(raw).trim();
-            if (!s || !nodeJson.options) return;
+            if (!s || !(nodeJson.options || nodeJson.positions)) return;
             setLocalValue(s);
             return;
         }

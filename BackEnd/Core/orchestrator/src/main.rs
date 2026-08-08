@@ -1107,6 +1107,95 @@ fn spawn_visa_write_daemon(
     let _ = mqtt_client_sub.subscribe(RESCAN_TOPIC, rumqttc::QoS::AtLeastOnce);
     let _ = mqtt_client_sub.subscribe(CLEAR_TOPIC, rumqttc::QoS::AtLeastOnce);
 
+    // Instrument writes run on their OWN thread, and a superseded one is dropped.
+    //
+    // Each write costs a fresh `python3` + pyvisa import + VXI-11 link — a few
+    // hundred milliseconds. Running that inline on the event loop meant the whole
+    // consumer stalled for the duration, so a fader drag emitting eight values
+    // queued eight interpreters back to back: YAK had already reached 535 MHz
+    // while the instrument was still being told 476. The panel led the hardware
+    // by seconds and every other subscription waited behind it.
+    //
+    // Queued as (topic_prefix, resource, payload) in arrival order. Pushing a
+    // non-query write DISCARDS any pending non-query write for the same topic,
+    // because an intermediate point of a drag that has already moved on is a
+    // value nobody wants the instrument to stop at. Queries are never discarded:
+    // something is waiting for each reply, and dropping one strands that reader.
+    type WriteJob = (String, String, String);
+    let write_queue: std::sync::Arc<(std::sync::Mutex<std::collections::VecDeque<WriteJob>>, std::sync::Condvar)> =
+        std::sync::Arc::new((std::sync::Mutex::new(std::collections::VecDeque::new()), std::sync::Condvar::new()));
+
+    {
+        let write_queue = write_queue.clone();
+        let mqtt_client_worker = mqtt_client_sub.clone();
+        std::thread::spawn(move || {
+            let (lock, cvar) = &*write_queue;
+            loop {
+                let job = {
+                    let mut q = lock.lock().unwrap();
+                    while q.is_empty() {
+                        q = cvar.wait(q).unwrap();
+                    }
+                    q.pop_front()
+                };
+                let Some((topic_prefix, resource_name, payload)) = job else { continue };
+
+                println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
+
+                // SECURITY: the resource and the SCPI command are passed as
+                // argv, never interpolated into the script body. The previous
+                // version built the source with `payload.replace("'", "\\'")`,
+                // which is not an escape — it writes a backslash into Python
+                // source, so a payload ending in a backslash consumed the
+                // closing quote and broke out into executable code. The
+                // payload arrives raw off MQTT, so that was remote code
+                // execution. As argv, a payload containing quotes,
+                // backslashes, or newlines is inert data to the interpreter.
+                if let Ok(output) = std::process::Command::new("python3")
+                    .arg("-c")
+                    .arg(VISA_WRITE_SCRIPT)
+                    .arg(&resource_name)
+                    .arg(&payload)
+                    .output()
+                {
+                    let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                    if payload.contains('?') {
+                        println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
+                        let read_topic = format!("{}/Read", topic_prefix);
+                        let _ = mqtt_client_worker.publish(read_topic, rumqttc::QoS::AtLeastOnce, true, out_str.as_bytes());
+
+                        // Say WHICH QUESTION this answers.
+                        //
+                        // `/Read` carries a bare string, so a reply cannot be
+                        // told from any other reply on the same device: the
+                        // heartbeat's `*IDN?` lands on the same topic as a
+                        // frequency query and overwrites it. Nothing downstream
+                        // can decompose a compound answer it cannot attribute.
+                        // Pairing the query with its answer here is what lets
+                        // YAK look the command up and publish each field as its
+                        // own reading. Non-retained: this is an event about one
+                        // exchange, while the readings it produces are state.
+                        let envelope = serde_json::json!({
+                            "command": payload,
+                            "raw": out_str,
+                            "resource": resource_name,
+                        });
+                        let _ = mqtt_client_worker.publish(
+                            format!("{}/Reply", topic_prefix),
+                            rumqttc::QoS::AtLeastOnce,
+                            false,
+                            envelope.to_string().into_bytes(),
+                        );
+                        let write_topic = format!("{}/Write", topic_prefix);
+                        let _ = mqtt_client_worker.publish(write_topic, rumqttc::QoS::AtLeastOnce, true, "");
+                    } else if !out_str.is_empty() {
+                        println!("      ⚠️ [VISA MQTT] {} warning/error -> {}", resource_name, out_str);
+                    }
+                }
+            }
+        });
+    }
+
     std::thread::spawn(move || {
         for notification in mqtt_connection_sub.iter() {
             if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
@@ -1158,35 +1247,34 @@ fn spawn_visa_write_daemon(
                 if let Some(topic_prefix) = topic.strip_suffix("/Write") {
                     let resource = topic_to_resource.lock().unwrap().get(topic_prefix).cloned();
                     if let Some(resource_name) = resource {
-                        println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
-
-                        // SECURITY: the resource and the SCPI command are passed as
-                        // argv, never interpolated into the script body. The previous
-                        // version built the source with `payload.replace("'", "\\'")`,
-                        // which is not an escape — it writes a backslash into Python
-                        // source, so a payload ending in a backslash consumed the
-                        // closing quote and broke out into executable code. The
-                        // payload arrives raw off MQTT, so that was remote code
-                        // execution. As argv, a payload containing quotes,
-                        // backslashes, or newlines is inert data to the interpreter.
-                        if let Ok(output) = std::process::Command::new("python3")
-                            .arg("-c")
-                            .arg(VISA_WRITE_SCRIPT)
-                            .arg(&resource_name)
-                            .arg(&payload)
-                            .output()
-                        {
-                            let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
-                            if payload.contains('?') {
-                                println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
-                                let read_topic = format!("{}/Read", topic_prefix);
-                                let _ = mqtt_client_sub.publish(read_topic, rumqttc::QoS::AtLeastOnce, true, out_str.as_bytes());
-                                let write_topic = format!("{}/Write", topic_prefix);
-                                let _ = mqtt_client_sub.publish(write_topic, rumqttc::QoS::AtLeastOnce, true, "");
-                            } else if !out_str.is_empty() {
-                                println!("      ⚠️ [VISA MQTT] {} warning/error -> {}", resource_name, out_str);
-                            }
+                        // Hand off and go straight back to reading the socket —
+                        // see the worker above for why this must not run inline.
+                        let (lock, cvar) = &*write_queue;
+                        let mut q = lock.lock().unwrap();
+                        let before = q.len();
+                        if payload.contains('?') {
+                            // An IDENTICAL query still pending would return an
+                            // identical answer to the same uncorrelated /Read
+                            // topic, so running it twice buys nothing and costs
+                            // another interpreter. This matters because every
+                            // readback-bearing control queues one query per
+                            // sample of a drag; without this, closing the loop
+                            // would reintroduce exactly the backlog that moving
+                            // writes off the event loop removed. Queries that
+                            // DIFFER are all kept — each has its own answer.
+                            q.retain(|(t, _, p)| t != topic_prefix || p != &payload);
+                        } else {
+                            // A superseded set: an intermediate point of a drag
+                            // that has already moved on is not a value anyone
+                            // wants the instrument to stop at.
+                            q.retain(|(t, _, p)| t != topic_prefix || p.contains('?'));
                         }
+                        let dropped = before - q.len();
+                        if dropped > 0 {
+                            println!("   ⏭️  [VISA MQTT] superseded {dropped} pending on {topic_prefix}");
+                        }
+                        q.push_back((topic_prefix.to_string(), resource_name, payload.clone()));
+                        cvar.notify_one();
                     }
                 }
             }

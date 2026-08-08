@@ -2243,6 +2243,66 @@
         "lev"
       ],
       "subsystem": "MARKer"
+    },
+    "Set_Syst_Name": {
+      "scpi": "SYST:NAME <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Trig_Lev": {
+      "scpi": "TRIG:LEV <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Trig_Slop": {
+      "scpi": "TRIG:SLOP <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Acq_State": {
+      "scpi": "ACQ:STATE <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Chan1_Stat": {
+      "scpi": "CHAN1:STAT <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Chan2_Stat": {
+      "scpi": "CHAN2:STAT <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Math_Fft_Cent": {
+      "scpi": "MATH:FFT:CENT <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Math_Fft_Span": {
+      "scpi": "MATH:FFT:SPAN <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Trig_Sour": {
+      "scpi": "TRIG:SOUR <value>",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Chan${n}_Scal": {
+      "scpi": "CHAN${n}:SCAL <value>",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Chan${n}_Offs": {
+      "scpi": "CHAN${n}:OFFS <value>",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Chan${n}_Coup": {
+      "scpi": "CHAN${n}:COUP <value>",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {
@@ -2970,6 +3030,16 @@
       "description": "Stop",
       "group": "Root Action Commands",
       "subsystem": "Root"
+    },
+    "Do_Trig_Forc": {
+      "scpi": "TRIG:FORC",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
+    },
+    "Do_Acq_Mod_Sing;run": {
+      "scpi": "ACQ:MOD SING;RUN",
+      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+      "unverified": true
     }
   },
   "rig": {
@@ -4854,6 +4924,26 @@
       },
       "group": "Errors and ID",
       "subsystem": "System"
+    },
+    "Get_Meas_Vpp": {
+      "scpi": "MEAS:VPP?",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Vrms": {
+      "scpi": "MEAS:VRMS?",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Freq": {
+      "scpi": "MEAS:FREQ?",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Db": {
+      "scpi": "MEAS:DB?",
+      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+      "unverified": true
     }
   }
 }

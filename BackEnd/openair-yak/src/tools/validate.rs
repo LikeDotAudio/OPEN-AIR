@@ -65,7 +65,12 @@ fn short_keyword(word: &str) -> String {
 /// A dangling link reads as coverage, and a model with a table but no entry is
 /// unreachable by discovery however complete its vocabulary is.
 fn check_known_devices(yak: &Path, findings: &mut Vec<Finding>) {
-    let known_path = yak.join("knownDevices.json");
+    // Tree-wide files live in `_yak/`, beside the per-instrument folders,
+    // matching the `_datasets/` convention already in Instruments/.
+    let known_path = {
+        let consolidated = yak.join("_yak").join("knownDevices.json");
+        if consolidated.is_file() { consolidated } else { yak.join("knownDevices.json") }
+    };
     let Some(known) = super::read_json(&known_path) else {
         findings.push((
             "knownDevices".into(),

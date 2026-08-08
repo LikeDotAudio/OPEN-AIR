@@ -22,12 +22,14 @@ import { z } from 'zod'
 
 import { DeviceRecordSchema } from '../src/device-record.js'
 import { AgentHeartbeatSchema } from '../src/heartbeat.js'
+import { ControlValueSchema } from '../src/control-value.js'
 
 const CONTRACTS_DIR = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 /** Every schema that crosses the TS→Rust boundary registers here. */
 const REGISTRY: Record<string, z.ZodType> = {
   AgentHeartbeat: AgentHeartbeatSchema,
+  ControlValue: ControlValueSchema,
   DeviceRecord: DeviceRecordSchema,
 }
 

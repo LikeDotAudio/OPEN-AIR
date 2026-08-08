@@ -35,6 +35,19 @@ export {
   type DeviceStatus,
   type LegacyVisaRecordV0,
 } from './device-record.js'
+export {
+  ABSOLUTE_UNITS,
+  ControlValueSchema,
+  LegacyControlValueV0Schema,
+  UNIT_FAMILIES,
+  controlIdentity,
+  convertUnit,
+  mapLegacyControlValue,
+  unitFamily,
+  type ControlValue,
+  type LegacyControlValueV0,
+  type UnitFamilyName,
+} from './control-value.js'
 export { deviceIdFor, fnv1a64, type DeviceIdentitySource } from './identity.js'
 export { fromUnixSeconds } from './time.js'
 

@@ -1,0 +1,62 @@
+# OPEN-AIR — host-networking overlay.
+#
+#     python3 Deployment/docker/launch.py --host-net
+#     docker compose -f Deployment/docker/docker-compose.yml -f Deployment/docker/docker-compose.host.yml up
+#
+# WHY THIS EXISTS
+#
+# The default bridge network NATs the containers onto 172.20.0.0/16. Outbound TCP
+# still works, so VISA/SCPI reaches instruments fine — but **mDNS/DNS-SD does
+# not**. Service discovery is multicast (224.0.0.251), and multicast does not
+# cross a docker bridge. The symptom is subtle rather than obvious: the DNS-SD
+# agent still finds *something* (whatever the host itself advertises) and
+# resolves every address to 172.20.0.1, the bridge gateway. Devices look
+# discovered, at the wrong address, and LAN instruments never appear at all.
+#
+# With host networking the containers share the host's network stack: they see
+# the same interfaces, the same multicast, the same LAN. Discovery behaves
+# exactly as it does on bare metal.
+#
+# Note this still does NOT give a container its own DHCP address — it has no
+# separate address at all, it *is* the host. For a real per-container LAN IP from
+# your DHCP server you would need a macvlan network, which costs more setup and
+# needs a shim interface for host↔container traffic. Host mode is the right trade
+# for a single-box lab tool.
+#
+# ── SECURITY ─────────────────────────────────────────────────────────────────
+# Host mode removes the compose port mapping, which is what confined the bridge
+# setup to 127.0.0.1. Confinement now comes from what each process binds:
+#
+#   * the orchestrator binds 127.0.0.1 by default (--bind, see cli.rs)
+#   * the broker uses ../MQTT broker/mosquitto.conf, which binds 127.0.0.1
+#
+# Both must stay loopback unless you have enabled broker auth + ACL
+# (../MQTT broker/acl.example) and put auth in front of the HTTP API. Do not widen one
+# without the others.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  broker:
+    network_mode: host
+    # The bare-metal config, deliberately: it binds 127.0.0.1. The container
+    # variant binds 0.0.0.0, which is safe ONLY behind a port mapping — and in
+    # host mode there is no port mapping to hide behind.
+    volumes:
+      - "../MQTT broker/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro"
+      - broker-data:/mosquitto/data
+    # `ports:` is meaningless under host networking; the listeners in the config
+    # above are the whole story.
+    ports: !reset []
+
+  orchestrator:
+    network_mode: host
+    ports: !reset []
+    environment:
+      # Sharing the host stack means the broker is simply on loopback.
+      - MQTT_HOST=127.0.0.1
+      # Keep the HTTP server on loopback: with no port mapping in front of it,
+      # this flag is the only thing between /api/save and the network.
+      - OPENAIR_BIND=127.0.0.1
+    depends_on:
+      broker:
+        condition: service_healthy

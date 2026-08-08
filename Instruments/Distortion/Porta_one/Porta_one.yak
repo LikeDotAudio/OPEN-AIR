@@ -4463,6 +4463,16 @@
       ],
       "subsystem": "XTAL",
       "unverified": true
+    },
+    "Set_Mode": {
+      "scpi": "MODE <value>",
+      "description": "Authored from a panel literal in Distortion.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Input": {
+      "scpi": "INPUT <state>",
+      "description": "Authored from a panel literal in Distortion.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {

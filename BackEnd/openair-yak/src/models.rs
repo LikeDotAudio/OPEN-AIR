@@ -16,6 +16,21 @@ pub struct YakHandler {
     #[serde(default)]
     pub converter: String,
 
+    /// A NAB command to fire immediately after this control writes.
+    ///
+    /// A panel that only ever sends is a panel that drifts. Setting the centre
+    /// frequency moves start, stop and span too, and nothing told the GUI — so
+    /// the boxes kept showing what the operator last typed rather than what the
+    /// instrument is doing. Naming a readback here closes that loop: the write
+    /// goes out, then the query, and the reply lands on the device's `/Read`
+    /// topic where `yak_readout` widgets are already listening.
+    ///
+    /// The write queue never drops a query, so the readback cannot be coalesced
+    /// away by the next drag sample — it always reflects the value that actually
+    /// stuck. Empty means no readback, which stays the default.
+    #[serde(default)]
+    pub readback: String,
+
     /// Where this control's SCPI goes — the VISA daemon's Write topic for ONE
     /// instrument (`.../visa/Device/DMM/34401A/Dev3/Write`).
     ///

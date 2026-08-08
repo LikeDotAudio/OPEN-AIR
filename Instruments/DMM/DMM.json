@@ -1,0 +1,870 @@
+{
+  "DMM_Instrument": {
+    "type": "OcaBin",
+    "id": "50.100.4.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "DMM_Main_Station": {
+        "type": "OcaBlock",
+        "description": "Universal Parameter Analyzer",
+        "fields": {
+          "Visual_Telemetry_Sector": {
+            "type": "OcaBlock",
+            "description": "The Data Continuum",
+            "fields": {
+              "Primary_Readout": {
+                "type": "_GuiLabel",
+                "label_active": "LIVE READING",
+                "value_default": "---",
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "nab",
+                      "sub_path": "DMM",
+                      "command": "Read_Next",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_readout": true
+              },
+              "Trend_Graph": {
+                "type": "_GuiGraph",
+                "label_active": "Temporal Drift Log",
+                "description": "Historical Data Plot",
+                "height": 350,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Do_Data_Points?_All",
+                      "converter": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Control_Deck_Break": {
+            "type": "OcaSeparator",
+            "description": "------------------------------------------------"
+          },
+          "Mode_Matrix_Voltage": {
+            "type": "OcaBlock",
+            "description": "Potential Difference (Voltage)",
+            "fields": {
+              "Mode_VDC": {
+                "type": "_GuiButtonToggle",
+                "label_active": "VDC (ACTIVE)",
+                "label_inactive": "VDC",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": true,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_DC_Volts",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_DC_Volts"
+                }
+              },
+              "Mode_VAC": {
+                "type": "_GuiButtonToggle",
+                "label_active": "VAC (ACTIVE)",
+                "label_inactive": "VAC",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_AC_Volts",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_AC_Volts"
+                }
+              }
+            }
+          },
+          "Mode_Matrix_Current": {
+            "type": "OcaBlock",
+            "description": "Electron Flow (Current)",
+            "fields": {
+              "Mode_ADC": {
+                "type": "_GuiButtonToggle",
+                "label_active": "ADC (ACTIVE)",
+                "label_inactive": "ADC",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_DC_Current",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_DC_Current"
+                }
+              },
+              "Mode_AAC": {
+                "type": "_GuiButtonToggle",
+                "label_active": "AAC (ACTIVE)",
+                "label_inactive": "AAC",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_AC_Current",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_AC_Current"
+                }
+              }
+            }
+          },
+          "Mode_Matrix_Impedance": {
+            "type": "OcaBlock",
+            "description": "Resistance & Continuity",
+            "fields": {
+              "Mode_RES": {
+                "type": "_GuiButtonToggle",
+                "label_active": "OHMS (2W)",
+                "label_inactive": "OHMS (2W)",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_Resistance_2W",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_Resistance_2W"
+                }
+              },
+              "Mode_FRES": {
+                "type": "_GuiButtonToggle",
+                "label_active": "OHMS (4W)",
+                "label_inactive": "OHMS (4W)",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_Resistance_4W",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_Resistance_4W"
+                }
+              },
+              "Mode_CONT": {
+                "type": "_GuiButtonToggle",
+                "label_active": "CONT (Beep)",
+                "label_inactive": "CONT",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_Continuity",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_Continuity"
+                }
+              },
+              "Mode_DIODE": {
+                "type": "_GuiButtonToggle",
+                "label_active": "DIODE",
+                "label_inactive": "DIODE",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Select_Diode",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "do",
+                  "command": "Select_Diode"
+                }
+              }
+            }
+          },
+          "Precision_Dynamics": {
+            "type": "OcaBlock",
+            "description": "Range & Speed",
+            "fields": {
+              "Auto_Range_Toggle": {
+                "type": "_GuiButtonToggle",
+                "label_active": "AUTO RANGE",
+                "label_inactive": "MANUAL",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": true,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "set",
+                      "sub_path": "DMM",
+                      "command": "Set_Rang_Auto",
+                      "input_name": "value",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "set",
+                  "command": "Set_Autorange",
+                  "input_name": "state",
+                  "converter": "bool_on_off"
+                }
+              },
+              "Manual_Range_Knob": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Manual Range",
+                "value_default": "10",
+                "min": "0.1",
+                "max": "1000",
+                "units": "U",
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "set",
+                      "sub_path": "DMM",
+                      "command": "Set_Rang",
+                      "input_name": "value",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "set",
+                  "command": "Set_DCV_Range",
+                  "input_name": "range",
+                  "converter": ""
+                }
+              },
+              "Integration_Time": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "NPLC (Speed)",
+                "value_default": "1",
+                "min": "0.02",
+                "max": "100",
+                "units": "cyc",
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "set",
+                      "sub_path": "DMM",
+                      "command": "Set_Sens_Volt_Nplc",
+                      "input_name": "value",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "set",
+                  "command": "Set_Integration_NPLC",
+                  "input_name": "nplc",
+                  "converter": ""
+                }
+              }
+            }
+          },
+          "Data_Acquisition": {
+            "type": "OcaBlock",
+            "description": "Start / Stop",
+            "fields": {
+              "Trigger_Read": {
+                "type": "_TrapezoidButton",
+                "label_active": "ACQUIRE SINGLE",
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": true,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "nab",
+                      "sub_path": "DMM",
+                      "command": "Read_Next",
+                      "converter": ""
+                    }
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "sub_path": "DMM",
+                  "yak_type": "nab",
+                  "command": "Read_Next"
+                }
+              },
+              "Run_Monitoring": {
+                "type": "_GuiButtonToggle",
+                "label_active": "LOGGING ON 🟢",
+                "label_inactive": "LOGGING OFF 🔴",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "DMM_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "yak_handler": {
+                      "enable": true,
+                      "yak_type": "do",
+                      "sub_path": "DMM",
+                      "command": "Initiate",
+                      "converter": ""
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Setup": {
+    "type": "OcaBin",
+    "id": "50.100.4.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Instrument_Setup": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Reset, identity and calibration",
+          "Fr": "Réinitialisation, identité et étalonnage",
+          "De": "Zurücksetzen, Identität und Kalibrierung",
+          "Es": "Reinicio, identidad y calibración"
+        },
+        "fields": {
+          "Reset_Device": {
+            "type": "_GuiActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "RESET INSTRUMENT (*RST)",
+                  "Fr": "RÉINITIALISER (*RST)",
+                  "De": "ZURÜCKSETZEN (*RST)",
+                  "Es": "REINICIAR (*RST)"
+                },
+                "text_size": 12,
+                "text_color": "#FF6B6B"
+              }
+            },
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF6B6B",
+                "bg_color": "#000000",
+                "border_color": "#FF3B30",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "DMM",
+              "command": "Reset_Device"
+            }
+          },
+          "Setup_Break": {
+            "type": "OcaSeparator",
+            "description": "------------------------------------------------"
+          },
+          "Identity": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Identity",
+              "Fr": "Identité",
+              "De": "Identität",
+              "Es": "Identidad"
+            },
+            "fields": {
+              "Read_IDN": {
+                "type": "_GuiActuator",
+                "label": {
+                  "inactive": {
+                    "text": {
+                      "En": "READ IDENTITY (*IDN?)",
+                      "Fr": "LIRE L'IDENTITÉ (*IDN?)",
+                      "De": "IDENTITÄT LESEN (*IDN?)",
+                      "Es": "LEER IDENTIDAD (*IDN?)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#FF902C",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "yak_type": "nab",
+                  "sub_path": "DMM",
+                  "command": "Read_IDN"
+                }
+              },
+              "Identity_Readout": {
+                "type": "_TextInput",
+                "label": {
+                  "En": "Identity",
+                  "Fr": "Identité",
+                  "De": "Identität",
+                  "Es": "Identidad"
+                },
+                "value_default": "---",
+                "yak_readout": true,
+                "read_only": true,
+                "layout": {
+                  "width": "100%",
+                  "font": 13
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

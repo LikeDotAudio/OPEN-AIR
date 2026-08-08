@@ -232,6 +232,61 @@
       ],
       "subsystem": "SENSe",
       "unverified": true
+    },
+    "Set_Inp": {
+      "scpi": "INP <state>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Mode": {
+      "scpi": "MODE <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Curr": {
+      "scpi": "CURR <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Curr_Slew": {
+      "scpi": "CURR:SLEW <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Volt": {
+      "scpi": "VOLT <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Res": {
+      "scpi": "RES <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Tran_Stat": {
+      "scpi": "TRAN:STAT <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Curr_Lev": {
+      "scpi": "CURR:LEV <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Curr_Tlev": {
+      "scpi": "CURR:TLEV <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Tran_Freq": {
+      "scpi": "TRAN:FREQ <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Tran_Dcyc": {
+      "scpi": "TRAN:DCYC <value>",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {
@@ -334,6 +389,26 @@
         "count": 1
       },
       "subsystem": "MEASure",
+      "unverified": true
+    },
+    "Get_Meas_Volt": {
+      "scpi": "MEAS:VOLT?",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Curr": {
+      "scpi": "MEAS:CURR?",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Pow": {
+      "scpi": "MEAS:POW?",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_All": {
+      "scpi": "MEAS:ALL?",
+      "description": "Authored from a panel literal in LCR.json; never executed before.",
       "unverified": true
     }
   },

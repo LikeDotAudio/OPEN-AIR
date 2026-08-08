@@ -475,6 +475,21 @@
         "value"
       ],
       "subsystem": "VOLTage"
+    },
+    "Set_Inp": {
+      "scpi": "INP <state>",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Mode": {
+      "scpi": "MODE <value>",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Tran_Stat": {
+      "scpi": "TRAN:STAT <value>",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {
@@ -1257,6 +1272,26 @@
       },
       "group": "Status Registers",
       "subsystem": "STATus"
+    },
+    "Get_Meas_Volt": {
+      "scpi": "MEAS:VOLT?",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Curr": {
+      "scpi": "MEAS:CURR?",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Pow": {
+      "scpi": "MEAS:POW?",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_All": {
+      "scpi": "MEAS:ALL?",
+      "description": "Authored from a panel literal in Load.json; never executed before.",
+      "unverified": true
     }
   }
 }

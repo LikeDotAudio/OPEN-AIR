@@ -45,6 +45,32 @@ pub async fn narrate(client: &AsyncClient, config: &Config, level: &str, message
         .await;
 }
 
+/// Fire a control's declared readback query, if it declared one.
+///
+/// Runs after the write has been dispatched, so the instrument answers with the
+/// value that actually took effect rather than the one it was mid-way through
+/// applying. Silent when no readback is named — the overwhelmingly common case.
+pub async fn dispatch_readback(
+    client: &AsyncClient,
+    config: &Config,
+    yak: &YakHandler,
+    repo: &crate::repository::YakRepository,
+    target_model: &str,
+) {
+    if yak.readback.is_empty() {
+        return;
+    }
+    let Some(template) = repo.get_scpi_form(target_model, &yak.readback, config.prefer_short_scpi) else {
+        eprintln!("   ❌ [YAK READBACK] '{}' not found in YAK repository for model '{}'!",
+                  yak.readback, target_model);
+        return;
+    };
+    // Instance constants only: a query takes no widget value.
+    let scpi = apply_params(&template, yak);
+    eprintln!("   🔄 [YAK READBACK] {} -> {}", yak.readback, scpi);
+    dispatch(client, config, yak, &scpi, &scpi, "NAB").await;
+}
+
 pub async fn dispatch(
     client: &AsyncClient,
     config: &Config,

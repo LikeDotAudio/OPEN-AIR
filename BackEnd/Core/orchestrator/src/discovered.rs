@@ -102,6 +102,25 @@ pub struct State {
     /// the rows. Dead weight on the broker, and one keystroke away from
     /// overwriting the row topic.
     pub stale_gui_config: BTreeSet<String>,
+    /// `{category: digest of the payload that topic currently holds}`.
+    ///
+    /// The live tables are RETAINED, so republishing a byte-identical table
+    /// tells nobody anything — a late joiner still receives the last value from
+    /// the broker on subscribe. Before this, the watcher republished every table
+    /// on every pass: measured at 25.2 KB/s sustained, of which 84.5% was
+    /// byte-for-byte repeats, with `dnssd` alone sending 29 KB thirty-two times
+    /// a minute to communicate two distinct states.
+    ///
+    /// Digested over the SERIALIZED PAYLOAD rather than the source state, so
+    /// what is compared is exactly what would be sent. A token derived from
+    /// anything else can drift from the bytes it is meant to gate — which is
+    /// precisely how the older `watch_fingerprint` gate came to pass everything
+    /// through while the tables it guarded sat still.
+    ///
+    /// MUST be cleared on reconnect: the broker's retained set does not survive
+    /// a broker restart, and a cache that still believes those topics are
+    /// populated would suppress the republish that would refill them.
+    pub live_table_digests: BTreeMap<String, u64>,
     /// `{protocol: publishes received}`, counted at the socket before parsing.
     pub arrived: BTreeMap<String, usize>,
     /// Retained publishes received. The broker replays the retained tree as one
@@ -642,7 +661,7 @@ const ALWAYS_PRESENT_PROTOCOLS: [&str; 11] = [
 fn always_present(root: &Path) -> BTreeSet<String> {
     let mut cats: BTreeSet<String> =
         ALWAYS_PRESENT_PROTOCOLS.iter().map(|s| s.to_string()).collect();
-    let manifest = root.join("BackEnd").join("Instruments").join("manifest.json");
+    let manifest = root.join("Instruments").join("manifest.json");
     match std::fs::read_to_string(&manifest) {
         Ok(body) => match serde_json::from_str::<serde_json::Value>(&body) {
             Ok(serde_json::Value::Object(map)) => cats.extend(map.keys().cloned()),
@@ -792,6 +811,20 @@ struct TableBlock {
     topic: String,
     headers: Vec<String>,
     data: Vec<Fields>,
+    /// When `data` was written, in unix seconds — the age of the snapshot.
+    ///
+    /// Every row in `data` carries a `_row_state`, and that verdict was true at
+    /// this instant and at no other. Without a stamp the browser cannot tell a
+    /// snapshot written a second ago from one written in July, so it renders
+    /// both the same green, and a panel file that outlives its bench keeps
+    /// insisting the instruments are online. The static `/api` fallbacks make
+    /// that permanent: they are COMMITTED, so a page served without a backend
+    /// shows whatever the last committed scan believed, forever.
+    ///
+    /// The widget compares this against the same window `row_state` uses and
+    /// falls back to `unknown` once the snapshot is older than it — which is the
+    /// honest answer, because a stale snapshot knows nothing about now.
+    snapshot_at: u64,
     #[serde(rename = "Sort")]
     sort: bool,
 }
@@ -1019,6 +1052,7 @@ pub fn write_panels(root: &Path, collected: &Collected, scanning: bool) -> std::
                         topic: format!("{LIVE_TABLE_PREFIX}/{category}"),
                         headers,
                         data: rows,
+                        snapshot_at: unix_now() as u64,
                         sort: true,
                     },
                 )]),
@@ -1035,18 +1069,56 @@ pub fn write_panels(root: &Path, collected: &Collected, scanning: bool) -> std::
 // ── Publishing ───────────────────────────────────────────────────────────────
 
 /// Publish each category's rows to its live topic. Returns categories sent.
-pub fn publish_live_tables(client: &rumqttc::Client, collected: &Collected, scanning: bool) -> usize {
+pub fn publish_live_tables(
+    client: &rumqttc::Client,
+    collected: &Collected,
+    scanning: bool,
+    state: &Arc<Mutex<State>>,
+) -> usize {
+    use std::collections::hash_map::DefaultHasher;
+    use std::hash::{Hash, Hasher};
+
+    // Decide, publish, then record — three short phases rather than one long
+    // one, so the state lock is never held across `client.publish`. The lock is
+    // also taken by the eventloop thread on every incoming publish; holding it
+    // while pushing onto a request queue that thread drains is how a bus this
+    // busy would find a deadlock nobody could reproduce.
+    let mut pending: Vec<(String, Vec<u8>, u64)> = Vec::new();
+    {
+        let Ok(guard) = state.lock() else { return 0 };
+        for (category, blocks) in collected.iter() {
+            let (_headers, rows) = rows_for(category, blocks, scanning);
+            let Ok(payload) = serde_json::to_vec(&rows) else { continue };
+
+            let mut hasher = DefaultHasher::new();
+            payload.hash(&mut hasher);
+            let digest = hasher.finish();
+
+            // Identical to what this retained topic already holds. Saying it
+            // again reaches no one who would not already have been told.
+            if guard.live_table_digests.get(category) == Some(&digest) {
+                continue;
+            }
+            pending.push((category.clone(), payload, digest));
+        }
+    }
+
     let mut sent = 0;
-    for (category, blocks) in collected.iter() {
-        let (_headers, rows) = rows_for(category, blocks, scanning);
-        if let Ok(payload) = serde_json::to_vec(&rows) {
-            let _ = client.publish(
-                format!("{LIVE_TABLE_PREFIX}/{category}"),
-                rumqttc::QoS::AtLeastOnce,
-                true,
-                payload,
-            );
-            sent += 1;
+    let mut published: Vec<(String, u64)> = Vec::new();
+    for (category, payload, digest) in pending {
+        let _ = client.publish(
+            format!("{LIVE_TABLE_PREFIX}/{category}"),
+            rumqttc::QoS::AtLeastOnce,
+            true,
+            payload,
+        );
+        published.push((category, digest));
+        sent += 1;
+    }
+
+    if let Ok(mut guard) = state.lock() {
+        for (category, digest) in published {
+            guard.live_table_digests.insert(category, digest);
         }
     }
     sent
@@ -1064,6 +1136,31 @@ pub fn publish_activity(client: &rumqttc::Client, level: &str, message: impl AsR
         "ts": unix_now(),
     });
     let _ = client.publish(ACTIVITY_TOPIC, rumqttc::QoS::AtMostOnce, false, payload.to_string());
+}
+
+/// A change token over `(the collected tree, every device's liveness)`.
+///
+/// `None` means the token could not be computed. The caller republishes in that
+/// case rather than assuming nothing moved: a fingerprint that cannot report its
+/// own failure must at least fail towards sending a table nobody needed, not
+/// towards withholding one everybody does.
+///
+/// The states go through a Vec of pairs because they are keyed by a TUPLE, and
+/// serde_json cannot write a tuple as a JSON object key — serializing that map
+/// directly fails outright, whatever it contains. This function exists because
+/// that failure used to be swallowed by an `unwrap_or_default()` at the call
+/// site: the token was the empty string on EVERY pass, so the watcher compared
+/// "" against "", concluded nothing had changed, and published exactly once per
+/// process start. Every Discovered table then froze at boot for the life of the
+/// container — an instrument that was unplugged kept its green row and its
+/// boot-time `last_seen` indefinitely, because the pass that would have turned
+/// it red never made it as far as publishing. Pairs serialize as JSON arrays,
+/// which have no such restriction.
+fn watch_fingerprint(
+    collected: &Collected,
+    states: &BTreeMap<(String, String), &'static str>,
+) -> Option<String> {
+    serde_json::to_string(&(collected, states.iter().collect::<Vec<_>>())).ok()
 }
 
 /// `{(category, block): row_state}` for everything currently collected.
@@ -1197,6 +1294,19 @@ impl Mirror {
                     // devices it saw before the drop. That failure is invisible:
                     // the tables keep rendering, frozen, with no error anywhere.
                     Ok(rumqttc::Event::Incoming(rumqttc::Packet::ConnAck(_))) => {
+                        // Forget what the live topics are believed to hold.
+                        //
+                        // The publish gate suppresses a table whose digest
+                        // matches what that topic already carries — which is
+                        // only true while the broker still HAS it. A broker
+                        // restart drops the whole retained set, and a cache that
+                        // survived it would suppress exactly the republish that
+                        // would refill the tables, leaving every panel empty
+                        // until some device happened to change. Cheap to clear,
+                        // and the worst case is one redundant round of tables.
+                        if let Ok(mut g) = thread_state.lock() {
+                            g.live_table_digests.clear();
+                        }
                         // ONE SubscribeFilter list, not a loop of subscribe()
                         // calls. This runs on the eventloop's own thread — the
                         // thread that drains the request queue — so a burst of
@@ -1341,7 +1451,7 @@ impl Mirror {
 
         // Seed the live topics too, so a panel written now has rows the instant
         // it loads rather than waiting for the watcher's first change.
-        publish_live_tables(&self.client, &collected, scanning);
+        publish_live_tables(&self.client, &collected, scanning, &self.state);
 
         // Drop the retained `<category>/config` leftovers. MQTT deletes retained
         // state by publishing an empty payload to the exact topic.
@@ -1401,19 +1511,24 @@ impl Mirror {
             let mut last: Option<String> = None;
             let mut seen = device_states(&collected, scanning);
             loop {
-                tokio::time::sleep(Duration::from_secs(2)).await;
+                // Ten seconds, not two. The tables are retained state, not a
+                // stream: the cost of noticing a change late is one tick of
+                // staleness, and the cost of looking constantly was five passes
+                // a second-and-a-half over a bench where 1,047 of 1,066 topics
+                // had nothing to say for a full minute.
+                tokio::time::sleep(Duration::from_secs(10)).await;
                 let (collected, scanning) = mirror.snapshot();
                 // Row STATE is time-dependent, not just content-dependent: a
                 // device goes stale because the clock moved, with no new message
                 // to change the fingerprint. Folding the states in is what makes
                 // the table turn amber on its own.
                 let current = device_states(&collected, scanning);
-                let fingerprint = serde_json::to_string(&(&collected, &current)).unwrap_or_default();
-                if Some(&fingerprint) == last.as_ref() {
+                let fingerprint = watch_fingerprint(&collected, &current);
+                if fingerprint.is_some() && fingerprint == last {
                     continue;
                 }
-                last = Some(fingerprint);
-                let n = publish_live_tables(&mirror.client, &collected, scanning);
+                last = fingerprint;
+                let n = publish_live_tables(&mirror.client, &collected, scanning, &mirror.state);
                 narrate_changes(&mirror.client, &seen, &current);
                 seen = current;
                 println!("[discovered-gui] live update: {n} table(s)");
@@ -1563,6 +1678,74 @@ mod tests {
         assert_eq!(rows[0]["_row_state"], "online");
     }
 
+    /// The watcher republishes on a CHANGED fingerprint, so a fingerprint that
+    /// cannot change is a watcher that never publishes again.
+    ///
+    /// It regressed to exactly that: the states map is tuple-keyed, serde_json
+    /// refuses tuple keys, and the error was swallowed into an empty string. The
+    /// symptom was not an error anywhere — it was Discovered tables frozen at the
+    /// moment the orchestrator started, showing instruments as `identified` with
+    /// a days-old `last_seen` long after they had been switched off.
+    #[test]
+    fn the_watch_fingerprint_moves_when_a_device_does() {
+        let mut collected = Collected::new();
+        let mut blocks = Blocks::new();
+        blocks.insert("34401A (Dev0)".to_string(), fields(&[("model", "34401A")]));
+        collected.insert("DMM".to_string(), blocks);
+
+        let online = device_states(&collected, false);
+        let mut offline = online.clone();
+        for state in offline.values_mut() {
+            *state = "offline";
+        }
+
+        let a = watch_fingerprint(&collected, &online).expect("fingerprint must compute");
+        let b = watch_fingerprint(&collected, &offline).expect("fingerprint must compute");
+
+        // An empty token compares equal to every other empty token, which is the
+        // precise shape of the freeze — assert against it by name.
+        assert!(!a.is_empty(), "fingerprint collapsed to the empty string");
+        assert_eq!(a, watch_fingerprint(&collected, &online).unwrap(), "unstable when nothing moved");
+        assert_ne!(a, b, "a device going offline must change the fingerprint");
+    }
+
+    /// Every table carries the moment its rows were true.
+    ///
+    /// Without it the browser cannot age out a snapshot's baked `_row_state`,
+    /// which is how `FrontEnd/api/tree.json` — a COMMITTED file — went on showing
+    /// a bench of instruments as green and `identified` for twelve days after
+    /// they were switched off.
+    #[test]
+    fn a_snapshot_is_stamped_with_when_it_was_taken() {
+        let mut state = State::default();
+        ingest(
+            &mut state,
+            "OpenAir/System/Protocols/visa/Device/DMM/34401A/Dev0/model",
+            "34401A",
+            true,
+        );
+
+        let root = std::env::temp_dir().join(format!("openair-stamp-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        write_panels(&root, &state.collected, false).expect("panels written");
+        let written = std::fs::read_to_string(
+            root.join("FrontEnd/Gui_Frames/0_discovered/1_Lab_Instruments/DMM/DMM.json"),
+        )
+        .expect("DMM panel exists");
+        let _ = std::fs::remove_dir_all(&root);
+
+        let doc: serde_json::Value = serde_json::from_str(&written).unwrap();
+        let stamp = doc["DMM"]["blocks"]["Devices"]["snapshot_at"]
+            .as_u64()
+            .expect("snapshot_at is a unix timestamp");
+
+        // Written seconds ago, so it must sit inside the window the widget uses
+        // to decide the rows still describe now. A zero or absent stamp is the
+        // failure that matters: it reads as 1970 and ages out everything.
+        let age = unix_now() - stamp as f64;
+        assert!((0.0..60.0).contains(&age), "stamp is {age}s away from now");
+    }
+
     #[test]
     fn a_scan_in_progress_makes_every_row_provisional() {
         let mut blocks = Blocks::new();
@@ -1703,6 +1886,13 @@ mod tests {
 
         let mut ours: serde_json::Value = serde_json::from_str(&written).unwrap();
         let mut golden: serde_json::Value = serde_json::from_str(GOLDEN_SPECTRUM).unwrap();
+
+        // `snapshot_at` is when this ran, so it can only be asserted as a
+        // property — see `a_snapshot_is_stamped_with_when_it_was_taken`.
+        ours["Spectrum"]["blocks"]["Devices"]
+            .as_object_mut()
+            .unwrap()
+            .remove("snapshot_at");
 
         // `_row_state` is the one field that depends on the wall clock rather
         // than the input, so it is asserted by its own tests instead.

@@ -473,7 +473,7 @@ pub fn run(type_name: Option<String>, verbose: bool, emit: bool) -> i32 {
         println!("❌ YAK tree not found; set YAK_REPO_PATH");
         return 1;
     };
-    let templates = super::repo_root(&yak).join("BackEnd").join("Instruments");
+    let templates = super::repo_root(&yak).join("Instruments");
     let vocab = yak_vocabulary(&yak);
 
     // A type present in the manifest but missing from TYPE_MODELS is not

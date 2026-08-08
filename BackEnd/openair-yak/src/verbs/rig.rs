@@ -52,4 +52,7 @@ pub async fn handle(client: &AsyncClient, config: &Config, msg: &IncomingMessage
     };
 
     super::dispatch(client, config, yak, &scpi_string, &payload, "RIG").await;
+
+    // Close the loop: ask what actually stuck (see YakHandler::readback).
+    super::dispatch_readback(client, config, yak, repo, target_model).await;
 }

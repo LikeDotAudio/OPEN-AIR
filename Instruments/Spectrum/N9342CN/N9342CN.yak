@@ -250,19 +250,23 @@
         "fields": [
           {
             "name": "start",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "stop",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "center",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "span",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           }
         ]
       },
@@ -314,51 +318,63 @@
         "fields": [
           {
             "name": "y_1",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "y_2",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "y_3",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "y_4",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "y_5",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "y_6",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "dBm"
           },
           {
             "name": "x_1",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "x_2",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "x_3",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "x_4",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "x_5",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           },
           {
             "name": "x_6",
-            "type": "NR3"
+            "type": "NR3",
+            "unit": "Hz"
           }
         ]
       },
@@ -376,7 +392,7 @@
           {
             "name": "rlevel",
             "type": "NR3",
-            "unit": "V"
+            "unit": "dBm"
           },
           {
             "name": "attenuation",
@@ -402,10 +418,12 @@
         "separator": ";",
         "fields": [
           {
-            "name": "resolution"
+            "name": "resolution",
+            "unit": "Hz"
           },
           {
-            "name": "video"
+            "name": "video",
+            "unit": "Hz"
           },
           {
             "name": "auto",

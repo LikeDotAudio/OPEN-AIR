@@ -15,6 +15,36 @@ pub struct Command {
     pub scpi_fast: Option<String>,
     /// "set" | "do" | "rig" | "nab" — which handler the table says owns this.
     pub verb: &'static str,
+    /// How to read the reply apart, for a query that has one.
+    ///
+    /// A compound query — `:FREQ:STAR?;:FREQ:STOP?;:FREQ:CENT?;:FREQ:SPAN?` —
+    /// comes back as one separator-joined string. `returns.fields` names each
+    /// value and declares its unit, which is what lets a reply be published as
+    /// individually addressable readings instead of a blob nobody can index
+    /// safely. Absent for commands that answer nothing.
+    pub returns: Option<Returns>,
+}
+
+/// The declared shape of a query's reply.
+#[derive(Debug, Clone, Deserialize, Default)]
+pub struct Returns {
+    #[serde(default)]
+    pub count: Option<serde_json::Value>,
+    /// Defaults to ";" — the SCPI convention for chained replies.
+    #[serde(default)]
+    pub separator: Option<String>,
+    #[serde(default)]
+    pub fields: Vec<ReturnField>,
+    /// Unit for a SINGLE-value reply, where there are no named fields.
+    #[serde(default)]
+    pub unit: Option<String>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct ReturnField {
+    pub name: String,
+    #[serde(default)]
+    pub unit: Option<String>,
 }
 
 impl Command {
@@ -36,9 +66,12 @@ struct Entry {
     scpi: String,
     #[serde(default, rename = "scpiFast")]
     scpi_fast: Option<String>,
+    #[serde(default)]
+    returns: Option<Returns>,
 }
 
-/// `Yak/<Family>/<Model>/commands.json` — the whole vocabulary for one model.
+/// `Instruments/<Family>/<Model>/commands.json` — the whole vocabulary for one
+/// model, sitting beside the panel that drives it.
 ///
 /// The model is DECLARED here rather than inferred from where the file sits.
 /// It used to be read off the file's grandparent directory, so anything nested
@@ -87,7 +120,12 @@ impl YakRepository {
             let p = entry.path();
             if p.is_dir() {
                 self.scan_directory(&p);
-            } else if p.file_name().map_or(false, |n| n == "commands.json") {
+            // `<Model>.yak` — the vocabulary, named for the instrument it
+            // belongs to so a folder reads as a set: `34401A.gui` beside
+            // `34401A.yak`. Matched by EXTENSION rather than by a fixed
+            // filename, so the model in the name never has to agree with a
+            // constant in here.
+            } else if p.extension().map_or(false, |e| e == "yak") {
                 self.load_table(&p);
             }
             // `model.json` beside it is the capability sheet — channel counts and
@@ -131,6 +169,7 @@ impl YakRepository {
                     scpi: entry.scpi,
                     scpi_fast: entry.scpi_fast,
                     verb,
+                    returns: entry.returns,
                 });
             }
         }
@@ -147,6 +186,23 @@ impl YakRepository {
                          prefer_fast: bool) -> Option<String> {
         self.get(model_name, command_name)
             .map(|c| c.template(prefer_fast).to_string())
+    }
+
+    /// Which command produced this SCPI string.
+    ///
+    /// The VISA daemon reports the query it executed, not the name it was asked
+    /// for, so attributing a reply means matching the text back to a template.
+    /// Both spellings are checked because `prefer_short_scpi` decides which one
+    /// actually went on the wire. Queries have no placeholders, so an exact
+    /// match is sound here in a way it would not be for a parameterised set.
+    pub fn command_for_scpi(&self, model_name: &str, scpi: &str) -> Option<&str> {
+        let needle = scpi.trim();
+        let bucket = self.models.get(model_name)?;
+        bucket
+            .iter()
+            .find(|(_, c)| c.scpi.trim() == needle
+                || c.scpi_fast.as_deref().map(|f| f.trim() == needle).unwrap_or(false))
+            .map(|(name, _)| name.as_str())
     }
 
     pub fn get(&self, model_name: &str, command_name: &str) -> Option<&Command> {

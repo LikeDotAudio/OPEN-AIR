@@ -631,6 +631,26 @@
         "value"
       ],
       "subsystem": "CALCulate"
+    },
+    "Set_Rang_Auto": {
+      "scpi": "RANG:AUTO <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Rang": {
+      "scpi": "RANG <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Sens_Volt_Nplc": {
+      "scpi": "SENS:VOLT:NPLC <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Func": {
+      "scpi": "FUNC '<value>'",
+      "description": "Authored from a panel literal in DMM_N.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {
@@ -870,6 +890,11 @@
       "description": "Select Resistance 4W",
       "group": "One command per measurement function",
       "subsystem": "Panel"
+    },
+    "Do_Data_Points?_All": {
+      "scpi": "DATA:POINts? ALL",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
     }
   },
   "rig": {
@@ -1754,6 +1779,11 @@
       },
       "group": "Fetch data after INITiate",
       "subsystem": "MEASure"
+    },
+    "Get_Read_All": {
+      "scpi": "READ:ALL?",
+      "description": "Authored from a panel literal in DMM_N.json; never executed before.",
+      "unverified": true
     }
   }
 }

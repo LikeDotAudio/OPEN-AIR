@@ -14,6 +14,13 @@ import {
   LegacyVisaRecordV0Schema,
   mapV40VisaRecord,
 } from './device-record.js'
+import {
+  ControlValueSchema,
+  LegacyControlValueV0Schema,
+  controlIdentity,
+  convertUnit,
+  mapLegacyControlValue,
+} from './control-value.js'
 import { AgentHeartbeatSchema, LegacyFailoverHeartbeatV0Schema } from './heartbeat.js'
 import { deviceIdFor, fnv1a64 } from './identity.js'
 import { fromUnixSeconds } from './time.js'
@@ -44,6 +51,47 @@ function suite(schemaName: string, v1: z.ZodType, legacy: z.ZodType) {
 
 suite('AgentHeartbeat', AgentHeartbeatSchema, LegacyFailoverHeartbeatV0Schema)
 suite('DeviceRecord', DeviceRecordSchema, LegacyVisaRecordV0Schema)
+suite('ControlValue', ControlValueSchema, LegacyControlValueV0Schema)
+
+describe('ControlValue units', () => {
+  it('converts within a family', () => {
+    expect(convertUnit(800_000_000, 'Hz', 'MHz')).toBe(800)
+    expect(convertUnit(800, 'MHz', 'Hz')).toBe(800_000_000)
+    expect(convertUnit(1.5, 'GHz', 'kHz')).toBe(1_500_000)
+  })
+  it('refuses to guess across families, absolutes or unknowns', () => {
+    expect(convertUnit(800_000_000, 'Hz', 'dBm')).toBe(800_000_000)
+    expect(convertUnit(-40, 'dBm', 'dBm')).toBe(-40)
+    expect(convertUnit(470, 'MHz', 'furlong')).toBe(470)
+    expect(convertUnit('Keysight,N9340B', 'Hz', 'MHz')).toBe('Keysight,N9340B')
+  })
+})
+
+describe('ControlValue identity', () => {
+  it('ignores ts and origin, so dedupe survives the envelope', () => {
+    const a = { value: 800, unit: 'MHz', ts: '2026-08-07T19:42:00.000Z', origin: 'web-1' }
+    const b = { value: 800, unit: 'MHz', ts: '2026-08-07T19:42:09.999Z', origin: 'web-2' }
+    expect(controlIdentity(a)).toBe(controlIdentity(b))
+  })
+  it('separates values that differ only by unit', () => {
+    expect(controlIdentity({ value: 800, unit: 'MHz' })).not.toBe(controlIdentity({ value: 800, unit: 'Hz' }))
+  })
+  it('separates a numeric 1 from the string "1"', () => {
+    expect(controlIdentity({ value: 1 })).not.toBe(controlIdentity({ value: '1' }))
+  })
+})
+
+describe('ControlValue legacy lift', () => {
+  it('keeps the old full_id as origin and leaves unit ABSENT', () => {
+    const lifted = mapLegacyControlValue({ value: -40, full_id: 'web-1' }, '2026-08-07T19:42:00.000Z')
+    expect(ControlValueSchema.safeParse(lifted).success).toBe(true)
+    expect(lifted.origin).toBe('web-1')
+    expect(lifted.unit).toBeUndefined()
+  })
+  it('marks an originless legacy payload rather than inventing one', () => {
+    expect(mapLegacyControlValue({ value: 'ON' }, '2026-08-07T19:42:00.000Z').origin).toBe('unknown')
+  })
+})
 
 describe('mapV40VisaRecord (step 3e replay proof)', () => {
   it.each(docsIn('DeviceRecord/map'))('$name', ({ doc }) => {

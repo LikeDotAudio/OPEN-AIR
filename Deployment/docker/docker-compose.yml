@@ -1,0 +1,83 @@
+# OPEN-AIR — the documented way to start the system.
+#
+#     python3 Deployment/docker/launch.py       # preflight + start + wait + open browser
+#     docker compose -f Deployment/docker/docker-compose.yml up
+#
+# Then open http://localhost:8000
+#
+# This replaces a seven-command quick start that omitted the frontend toolchain.
+# The compose file is executable documentation: it cannot drift from reality the
+# way a README list can, because it is what actually runs.
+#
+# PATHS: this file lives in Deployment/docker/, so the build context and every
+# bind mount is `../..` — the repo root. Relative paths resolve against this
+# file's directory, not your shell's, so `-f Deployment/docker/docker-compose.yml`
+# works from anywhere.
+#
+# SECURITY NOTE — read before changing a port mapping.
+# Every published port below is bound to 127.0.0.1 on the host. The bus is not a
+# passive transport: publishing to the VISA Write topics causes the orchestrator
+# to execute SCPI on real hardware, and the HTTP API can write panel files.
+# Exposing these on a LAN requires broker authentication + ACL
+# (see ../MQTT broker/acl.example) and auth in front of the HTTP API. Do not widen a
+# mapping on its own.
+
+name: openair
+
+services:
+  broker:
+    image: eclipse-mosquitto:2.0
+    container_name: openair-broker
+    restart: unless-stopped
+    # Loopback-only on the host. Containers reach it as `broker:1883`.
+    ports:
+      - "127.0.0.1:1883:1883"   # MQTT
+      - "127.0.0.1:9001:9001"   # MQTT over WebSockets (the browser)
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - broker-data:/mosquitto/data
+    healthcheck:
+      # The orchestrator's agents connect at boot; starting them before the
+      # broker accepts connections produces a confusing cascade of retries.
+      test: ["CMD", "mosquitto_sub", "-h", "localhost", "-t", "$$SYS/#", "-C", "1", "-W", "3"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  orchestrator:
+    build:
+      context: ../..                 # repo root — the Rust workspaces live there
+      dockerfile: Deployment/docker/Dockerfile
+    container_name: openair-orchestrator
+    restart: unless-stopped
+    depends_on:
+      broker:
+        condition: service_healthy
+    # Loopback-only: the HTTP API includes a write endpoint.
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      # Authored UI lives on the host, so WYSIWYG edits persist and are diffable.
+      - ../../FrontEnd/Gui_Frames:/app/FrontEnd/Gui_Frames
+    # Run as the invoking host user, so files written through the bind mount
+    # (discovered panels, WYSIWYG editor saves) are owned by you and not root.
+    # Without this the container writes root-owned files into your working tree,
+    # which then break `git`, the editor, and any native tooling run on the host.
+    # launch.py exports these; the 1000 fallback covers a bare `docker compose up`.
+    user: "${OPENAIR_UID:-1000}:${OPENAIR_GID:-1000}"
+    # AVB/Milan (AVDECC) is Layer 2 and needs raw sockets. The Dockerfile also
+    # setcaps the binary — a non-root process needs BOTH the file capability and
+    # this bounding-set grant. Without them the AVB agent reports
+    # "raw packet capture denied" and finds nothing, silently.
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+      # PTP listens on UDP 319/320 — privileged ports. See the Dockerfile.
+      - NET_BIND_SERVICE
+    environment:
+      - OPENAIR_BIND=0.0.0.0     # inside the container only — see Dockerfile
+      - MQTT_HOST=test.mosquitto.org
+
+volumes:
+  broker-data:

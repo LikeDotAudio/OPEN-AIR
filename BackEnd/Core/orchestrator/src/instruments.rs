@@ -5,7 +5,9 @@
 //! particular, however many DMMs were actually on the bench. This bench has
 //! eight 34401As, two loads and several scopes; it had one of each on screen.
 //!
-//! So the authored panels live in `BackEnd/Instruments/` and this stamps one
+//! So the authored panels live in `Instruments/` — alongside each model's YAK
+//! vocabulary, since a control surface and the commands behind it are two halves
+//! of one declaration — and this stamps one
 //! instance per discovered device into the frontend tree — eight DMMs become
 //! eight tabs, each bound to its own VISA resource.
 //!
@@ -49,11 +51,13 @@ pub struct Device {
 }
 
 fn template_root(root: &Path) -> PathBuf {
-    root.join("BackEnd").join("Instruments")
+    root.join("Instruments")
 }
 
 fn yak_root(root: &Path) -> PathBuf {
-    root.join("BackEnd").join("openair-yak").join("Yak")
+    // Same tree as the panels: an instrument's vocabulary and its control
+    // surface are two halves of one declaration and now live together.
+    root.join("Instruments")
 }
 
 /// Back into the tab the templates were evacuated from, so the Instruments tab
@@ -92,7 +96,7 @@ fn chassis_re() -> &'static Regex {
 
 // ── Instrument facts ─────────────────────────────────────────────────────────
 
-/// What each model IS, from `BackEnd/openair-yak/Yak/**/<model>/model.json`.
+/// What each model IS, from `Instruments/<Family>/<Model>/model.json`.
 ///
 /// Channel counts and voltage/current ranges are properties of the instrument,
 /// so they live with the SCPI vocabulary rather than in the panel. Before this
@@ -120,10 +124,21 @@ fn load_capabilities(root: &Path) -> HashMap<String, Value> {
         let mut models: Vec<_> = models.flatten().map(|e| e.path()).collect();
         models.sort();
         for model_dir in models {
-            let path = model_dir.join("model.json");
-            if !path.is_file() {
+            // `<Model>.gui` — what the instrument IS, named for it. Located by
+            // extension: the folder may carry a manufacturer prefix (`HP_8903B`)
+            // or an underscore in the model itself (`Porta_one`), so deriving
+            // the filename from the directory would be wrong in both directions.
+            let Some(path) = std::fs::read_dir(&model_dir).ok().and_then(|rd| {
+                let mut hits: Vec<PathBuf> = rd
+                    .flatten()
+                    .map(|e| e.path())
+                    .filter(|p| p.extension().map_or(false, |e| e == "gui"))
+                    .collect();
+                hits.sort();
+                hits.into_iter().next()
+            }) else {
                 continue;
-            }
+            };
             let Some(dir_name) = model_dir.file_name().and_then(|n| n.to_str()) else {
                 continue;
             };
@@ -298,6 +313,26 @@ fn bind_readout(node: &mut Value, read_topic: &str) -> usize {
             if map.get("yak_readout") == Some(&Value::Bool(true)) {
                 map.insert("topic".to_string(), Value::String(read_topic.to_string()));
                 bound += 1;
+            }
+            // A HYDRATING control keeps its own topic — that is where the
+            // operator's commands go — and gains a second, read-only source it
+            // listens to for where the instrument actually is. Two topics, two
+            // directions: `topic` is what this control says, `yak_hydrate_topic`
+            // is what it is told. Stamped here for the same reason as the
+            // readout: the template cannot know a per-device topic.
+            if map.get("yak_hydrate") == Some(&Value::Bool(true)) {
+                map.insert("yak_hydrate_topic".to_string(), Value::String(read_topic.to_string()));
+                bound += 1;
+            }
+            // `yak_listen: "<command>/<field>"` names the reading this control
+            // takes its value from. Bound by NAME, so it survives a reply gaining
+            // a field — unlike an index into the joined string.
+            if let Some(Value::String(name)) = map.get("yak_listen") {
+                if let Some(dev_base) = read_topic.strip_suffix("/Read") {
+                    let topic = format!("{dev_base}/Reading/{name}");
+                    map.insert("yak_listen_topic".to_string(), Value::String(topic));
+                    bound += 1;
+                }
             }
             for (_, v) in map.iter_mut() {
                 bound += bind_readout(v, read_topic);

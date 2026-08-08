@@ -62,6 +62,12 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
     eprintln!("   📡 [YAK AGENT] Subscribing to listen topic: {}", listen_topic);
     client.subscribe(listen_topic, QoS::AtMostOnce).await?;
 
+    // Instrument replies, so they can be published as named readings.
+    // See readings.rs for why a reply must be attributed before it is split.
+    let reply_filter = "OpenAir/System/Protocols/visa/Device/+/+/+/Reply";
+    eprintln!("   📡 [YAK AGENT] Subscribing to instrument replies: {}", reply_filter);
+    client.subscribe(reply_filter, QoS::AtMostOnce).await?;
+
     let mut topic_configs: HashMap<String, crate::models::YakHandler> = HashMap::new();
 
     // Last value seen on every GUI topic.
@@ -86,6 +92,49 @@ pub async fn start_mqtt_client(config: Config, repo: Arc<YakRepository>) -> Resu
 
                 let payload = String::from_utf8_lossy(&p.payload);
                 let payload_str = payload.to_string();
+
+                // An instrument answered. Attribute it, split it, and publish
+                // each value under its own name so listeners can bind by name
+                // instead of counting separators.
+                if p.topic.ends_with("/Reply") {
+                    if let Ok(env) = serde_json::from_str::<serde_json::Value>(&payload_str) {
+                        let scpi = env.get("command").and_then(|v| v.as_str()).unwrap_or("");
+                        let raw = env.get("raw").and_then(|v| v.as_str()).unwrap_or("");
+                        if let Some((base, model)) = crate::readings::device_base_and_model(&p.topic) {
+                            match repo.command_for_scpi(&model, scpi) {
+                                Some(cmd_name) => {
+                                    let cmd_name = cmd_name.to_string();
+                                    let found = crate::readings::decompose(&repo, &model, &cmd_name, raw);
+                                    if found.is_empty() {
+                                        eprintln!("   ⚠️ [YAK READING] {model}/{cmd_name} declares no reply shape — nothing published");
+                                    }
+                                    for r in found {
+                                        let topic = crate::readings::reading_topic(&base, &cmd_name, &r.name);
+                                        let mut doc = serde_json::json!({
+                                            "schemaVersion": 1,
+                                            "value": r.value,
+                                            "origin": format!("visa:{model}"),
+                                        });
+                                        if let Some(u) = &r.unit {
+                                            doc["unit"] = serde_json::Value::String(u.clone());
+                                        }
+                                        // RETAINED: a reading is state. A panel
+                                        // opened an hour later must find the
+                                        // instrument's last answer waiting for
+                                        // it rather than a blank control.
+                                        let _ = client
+                                            .publish(&topic, QoS::AtMostOnce, true, doc.to_string().as_bytes())
+                                            .await;
+                                        eprintln!("   📥 [YAK READING] {} = {}{}", topic, r.value,
+                                                  r.unit.as_deref().map(|u| format!(" {u}")).unwrap_or_default());
+                                    }
+                                }
+                                None => eprintln!("   ⚠️ [YAK READING] no command in {model} matches reply to: {scpi}"),
+                            }
+                        }
+                    }
+                    continue;
+                }
                 if payload_str.contains("yak_handler") {
                     eprintln!("   🐛 [YAK DEBUG] Raw payload with yak_handler on {}: {}", p.topic, payload_str);
                 }

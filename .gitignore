@@ -49,11 +49,11 @@ node_modules/
 FrontEnd/Gui_Frames/0_discovered/
 
 # Generated per-device instrument panels. The authored templates they are
-# stamped from live in BackEnd/Instruments/Templates/ and ARE tracked; what
+# stamped from live in Instruments/Templates/ and ARE tracked; what
 # lands here is one instance per discovered instrument, rebuilt on every scan.
 # left_100 = full tab width (was left_50, beside a right_50 that is now iced).
 FrontEnd/Gui_Frames/1_Instruments/left_100/
 
 # Broker secrets — never commit
-broker/passwd
-broker/acl
+Deployment/MQTT broker/passwd
+Deployment/MQTT broker/acl

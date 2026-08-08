@@ -2,7 +2,7 @@
 //!
 //! These are the Rust ports of what used to be five Python scripts in
 //! `BackEnd/openair-yak/tools/`. They are reports and generators over the
-//! `Yak/<Family>/<Model>/commands.json` tree, not part of the running agent —
+//! `Instruments/<Family>/<Model>/commands.json` tree, not part of the running agent —
 //! but they belong to the same crate as the tree they read, so they ship as
 //! subcommands of the YAK binary rather than as a separate toolchain.
 //!
@@ -37,9 +37,11 @@ pub fn yak_root() -> Option<PathBuf> {
     let mut dir = std::env::current_dir().ok()?;
     loop {
         for candidate in [
-            dir.join("BackEnd/openair-yak/Yak"),
-            dir.join("openair-yak/Yak"),
-            dir.join("Yak"),
+            // ONLY the consolidated tree. A legacy candidate here matched
+            // `BackEnd/openair-yak/Yak` while walking up — before the loop ever
+            // reached the repo root where `Instruments` lives — so the tools
+            // silently read an empty leftover directory instead of the real one.
+            dir.join("Instruments"),
         ] {
             if candidate.is_dir() {
                 return Some(candidate);
@@ -51,10 +53,15 @@ pub fn yak_root() -> Option<PathBuf> {
     }
 }
 
-/// The repo root, derived from the located `Yak/` tree.
+/// The repo root, derived from the located instrument tree.
+///
+/// `<root>/Instruments` is one level down, where the old `<root>/BackEnd/
+/// openair-yak/Yak` was three. Counting ancestors by a hard-coded depth is why
+/// this needed touching at all — it is kept because the alternative (searching
+/// upward for a marker file) is a bigger change than this move warrants.
 pub fn repo_root(yak: &Path) -> PathBuf {
-    // <root>/BackEnd/openair-yak/Yak
-    yak.ancestors().nth(3).unwrap_or(yak).to_path_buf()
+    let depth = if yak.ends_with("Instruments") { 1 } else { 3 };
+    yak.ancestors().nth(depth).unwrap_or(yak).to_path_buf()
 }
 
 /// Every `commands.json` in the tree, sorted by path.
@@ -75,7 +82,19 @@ pub fn tables(yak: &Path) -> Vec<(PathBuf, Value)> {
         let mut models: Vec<PathBuf> = models.flatten().map(|e| e.path()).collect();
         models.sort();
         for model in models {
-            let path = model.join("commands.json");
+            // First `*.yak` in the model folder — see repository.rs.
+            let path = match std::fs::read_dir(&model).ok().and_then(|rd| {
+                let mut hits: Vec<PathBuf> = rd
+                    .flatten()
+                    .map(|e| e.path())
+                    .filter(|p| p.extension().map_or(false, |e| e == "yak"))
+                    .collect();
+                hits.sort();
+                hits.into_iter().next()
+            }) {
+                Some(p) => p,
+                None => continue,
+            };
             if !path.is_file() {
                 continue;
             }

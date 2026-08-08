@@ -50,7 +50,7 @@ jobs:
               - FrontEnd/**
               - ui/**
             manual:
-              - Documentation/Manual/**
+              - Documentation/5_Manual/**
             ts_js:
               - '**/*.ts'
               - '**/*.tsx'
@@ -465,7 +465,7 @@ jobs:
 
       - name: Check for stale HTML documents
         run: |
-          cd Documentation/Manual
+          cd Documentation/5_Manual
           node check_stale_docs.js
 
       - name: Deploy Manual over FTPS
@@ -476,7 +476,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           server-dir: ${{ secrets.REMOTE_DIR || '/' }}manual/
-          local-dir: ./Documentation/Manual/
+          local-dir: ./Documentation/5_Manual/
           dangerous-clean-slate: ${{ github.event_name == 'workflow_dispatch' && inputs.full_sync }}
           exclude: |
             **/.git*
@@ -528,7 +528,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Build Docker Container
-        run: docker build -f docker/Dockerfile -t openair-orchestrator:latest .
+        run: docker build -f Deployment/docker/Dockerfile -t openair-orchestrator:latest .
         
       - name: Validate Docker Container
         run: |

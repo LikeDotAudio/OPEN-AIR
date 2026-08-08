@@ -661,6 +661,31 @@
       ],
       "subsystem": "VOLT",
       "unverified": true
+    },
+    "Set_Outp": {
+      "scpi": "OUTP <state>",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Volt": {
+      "scpi": "VOLT <value>",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Curr": {
+      "scpi": "CURR <value>",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Syst_Log_State": {
+      "scpi": "SYST:LOG:STATE <state>",
+      "description": "Authored from a panel literal in Power_N.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Outp_All": {
+      "scpi": "OUTP:ALL <state>",
+      "description": "Authored from a panel literal in Power_N.json; never executed before.",
+      "unverified": true
     }
   },
   "do": {
@@ -1855,6 +1880,26 @@
       },
       "group": "System Utilities",
       "subsystem": "SYSTem"
+    },
+    "Get_Meas_Volt": {
+      "scpi": "MEAS:VOLT?",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Curr": {
+      "scpi": "MEAS:CURR?",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Pow": {
+      "scpi": "MEAS:POW?",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
+    },
+    "Get_Meas_Scal_All": {
+      "scpi": "MEAS:SCAL:ALL?",
+      "description": "Authored from a panel literal in Power.json; never executed before.",
+      "unverified": true
     }
   }
 }

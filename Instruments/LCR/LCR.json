@@ -1037,6 +1037,107 @@
               "command": "Reset_Device"
             }
           },
+          "Beeper_State": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "BEEPER",
+                  "Fr": "AVERTISSEUR",
+                  "De": "SIGNALGEBER",
+                  "Es": "AVISADOR"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "stretch": "width",
+              "width": "100%"
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "ON": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "BEEPER ON",
+                      "Fr": "AVERTISSEUR ACTIVÉ",
+                      "De": "SIGNALGEBER EIN",
+                      "Es": "AVISADOR ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "BEEPER ON",
+                      "Fr": "AVERTISSEUR ACTIVÉ",
+                      "De": "SIGNALGEBER EIN",
+                      "Es": "AVISADOR ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              },
+              "OFF": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "BEEPER OFF",
+                      "Fr": "AVERTISSEUR OFF",
+                      "De": "SIGNALGEBER AUS",
+                      "Es": "AVISADOR DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "BEEPER OFF",
+                      "Fr": "AVERTISSEUR OFF",
+                      "De": "SIGNALGEBER AUS",
+                      "Es": "AVISADOR DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "LCR",
+              "command": "Set_Beeper",
+              "input_name": "state_bool",
+              "converter": "bool_on_off"
+            }
+          },
           "Setup_Break": {
             "type": "OcaSeparator",
             "description": "------------------------------------------------"

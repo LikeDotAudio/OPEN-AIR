@@ -1260,7 +1260,29 @@ fn spawn_visa_write_daemon(
                 if payload.is_empty() { continue; }
 
                 if let Some(topic_prefix) = topic.strip_suffix("/Write") {
-                    let resource = topic_to_resource.lock().unwrap().get(topic_prefix).cloned();
+                    // An EMPTY resource is not a resource.
+                    //
+                    // Device prefixes are adopted from the retained tree at boot,
+                    // before any scan has resolved them to a VISA address, so the
+                    // map answers Some("") for a device that is known-about but
+                    // not yet connected. That passed the `if let Some` guard and
+                    // ran the command against nothing — `Executing on  -> :FREQ…`
+                    // followed by VI_ERROR_INV_RSRC_NAME, once per control the
+                    // panel published on load.
+                    //
+                    // Bounce instead: say so once, and drop it. A command sent
+                    // before the instrument is reachable has nowhere to go, and
+                    // pretending otherwise fills the log with failures that look
+                    // like instrument faults rather than a timing window.
+                    let resource = topic_to_resource
+                        .lock()
+                        .unwrap()
+                        .get(topic_prefix)
+                        .cloned()
+                        .filter(|r| !r.trim().is_empty());
+                    if resource.is_none() {
+                        println!("   ↩️  [VISA MQTT] no connected resource for {topic_prefix} — bounced: {payload}");
+                    }
                     if let Some(resource_name) = resource {
                         // Hand off and go straight back to reading the socket —
                         // see the worker above for why this must not run inline.

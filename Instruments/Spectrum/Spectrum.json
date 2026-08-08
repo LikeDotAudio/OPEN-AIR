@@ -1403,8 +1403,8 @@
           "RBW": {
             "type": "_Horizontal_with_dial_Value",
             "domain": {
-              "min": "0",
-              "max": "10",
+              "min": "0.0003",
+              "max": "1",
               "units": "MHz",
               "step_coarse": "1",
               "step_fine": "0.001",
@@ -1492,7 +1492,9 @@
             },
             "yak_listen": "bandwidth_settings/resolution",
             "units": "MHz",
-            "show_label": true
+            "show_label": true,
+            "min": "0.0003",
+            "max": "1"
           },
           "Resolution Band Width": {
             "type": "_GuiButtonToggler",
@@ -1866,7 +1868,7 @@
           "vbw_MHz": {
             "type": "_Horizontal_with_dial_Value",
             "domain": {
-              "min": "0",
+              "min": "0.001",
               "max": "1000",
               "units": "kHz",
               "step_coarse": "10",
@@ -1958,7 +1960,9 @@
             },
             "yak_listen": "bandwidth_settings/video",
             "units": "kHz",
-            "show_label": true
+            "show_label": true,
+            "min": "0.001",
+            "max": "1000"
           },
           "Video Band Width ": {
             "type": "_GuiButtonToggler",

@@ -68,6 +68,15 @@ pub struct Args {
     #[arg(long, help = "Skip all Rust (core import + orchestrator).")]
     pub no_rust: bool,
 
+    #[arg(
+        long,
+        help = "Skip the VISA scan at startup. The site, the panels and the \
+                write daemon all come up; instruments are taken from the \
+                retained tree instead of re-hunted. A rescan can still be \
+                triggered from the Discovered tab."
+    )]
+    pub no_scan: bool,
+
     #[arg(long, help = "Do not open the browser.")]
     pub no_browser: bool,
 

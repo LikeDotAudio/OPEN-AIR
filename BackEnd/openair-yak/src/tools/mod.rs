@@ -7,7 +7,7 @@
 //! subcommands of the YAK binary rather than as a separate toolchain.
 //!
 //! Running `openair-yak` with no subcommand still starts the agent, which is
-//! what `Deployment/openair.py` does.
+//! what `Deployment/'OPEN AIR CORE.py'` does.
 
 pub mod crossref;
 pub mod links;

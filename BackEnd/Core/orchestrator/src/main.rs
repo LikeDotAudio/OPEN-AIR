@@ -388,6 +388,7 @@ async fn main() {
     let discovered_mirror = discovered::Mirror::spawn(root.clone(), &mqtt_host, mqtt_port);
 
     let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
+    let args_no_scan = args.no_scan;
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
 
@@ -468,7 +469,32 @@ async fn main() {
             }
         }
 
+        // --no-scan: come up on what is already known.
+        //
+        // The scan is the slow, noisy part of a boot — a subnet gateway hunt
+        // plus an *IDN? probe per candidate — and it is pure waste when the
+        // bench has not changed and you only want the site back. Skipping the
+        // FIRST pass leaves everything else intact: the write daemon, the
+        // heartbeat, the panels built from the retained tree, and the rescan
+        // trigger. The instruments are the ones the last scan found.
+        let mut skip_scan = args_no_scan;
         loop {
+
+        if skip_scan {
+            skip_scan = false;
+            println!("⏭️  [VISA AGENT] --no-scan — using the instruments already on the bus.");
+            set_scan_state(&mqtt_client, "idle");
+            scanning_flag.store(false, std::sync::atomic::Ordering::Relaxed);
+            discovered_mirror.set_scanning(false);
+            discovered_mirror.settle().await;
+            discovered_mirror.build_async().await;
+            visa_gate.open();
+            println!("⏸️  [VISA AGENT] Scan idle — publish 1 (non-retained) to OpenAir/System/Protocols/visa/Device/Rescan to rescan.");
+            if rescan_rx.recv().await.is_none() {
+                break;
+            }
+            println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
+        }
 
         // Clear the previous scan's retained topics first, so devices that
         // moved category (e.g. after a knowledge-base fix) or disappeared

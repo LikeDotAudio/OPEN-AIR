@@ -14,7 +14,7 @@ use std::sync::Arc;
 /// The YAK agent, plus the build-time tooling over its command tables.
 ///
 /// With no subcommand this starts the agent, which is what
-/// `Deployment/openair.py` launches — so the tools could be added without
+/// `Deployment/'OPEN AIR CORE.py'` launches — so the tools could be added without
 /// changing how anything runs it.
 #[derive(Parser)]
 #[command(name = "openair-yak", about, long_about = None)]

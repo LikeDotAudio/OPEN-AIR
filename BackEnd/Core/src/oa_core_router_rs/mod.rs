@@ -23,7 +23,7 @@ use crossbeam_channel::{unbounded, Receiver, Sender};
 struct CoreRouter {
     // Unbounded channels are used to prevent backpressure from stalling the 
     // protocol managers. The memory overhead is acceptable as the Python-side
-    // supervisor (openair.py) monitors queue lengths for system health.
+    // supervisor ('OPEN AIR CORE.py') monitors queue lengths for system health.
     inbound_transmitter: Sender<Py<PyAny>>,
     inbound_receiver: Receiver<Py<PyAny>>,
     outbound_transmitter: Sender<Py<PyAny>>,

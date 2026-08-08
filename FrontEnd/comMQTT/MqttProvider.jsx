@@ -659,7 +659,14 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         if (throttle.current.lastLocal && (Date.now() - throttle.current.lastLocal) < grace) return;
 
         const target = nodeJson.units || (nodeJson.domain && nodeJson.domain.units);
-        setLocalValue(window.OaUnits.convert(n, sourceUnit, target));
+        let converted = window.OaUnits.convert(n, sourceUnit, target);
+        // 665551000 Hz / 1e6 is 665.5509999999999 in binary floating point, and
+        // that is what landed in the box. Round to 9 significant figures — far
+        // more precision than any instrument reports, and no artefact.
+        if (typeof converted === 'number' && Number.isFinite(converted)) {
+            converted = Number(converted.toPrecision(9));
+        }
+        setLocalValue(converted);
     }, [hydrateRaw, listenTopic]);
 
     // Per-topic outbound throttle (see PUBLISH_INTERVAL_MS). `pending` holds the

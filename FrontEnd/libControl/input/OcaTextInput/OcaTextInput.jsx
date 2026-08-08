@@ -81,11 +81,36 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
         return Number.isFinite(precision) ? scaled.toFixed(precision) : String(scaled);
     }, [val, readoutIndex, config?.yak_readout_scale, config?.yak_readout_precision]);
 
-    const handleChange = (e) => {
-        if (readOnly) return;
-        const next = e.target.value;
+    // COMMIT ON LEAVING THE CELL, not on every keystroke.
+    //
+    // Publishing per character sent the instrument every prefix of what was
+    // being typed: entering 111 produced `:CALCulate:MARKer1:X 1000000`, then
+    // 11 MHz, then 111 MHz — three commands, three readbacks, and two of them
+    // moved the marker somewhere the operator never asked for. A text field is
+    // not a fader; its value is not meaningful until it is finished.
+    //
+    // `draft` holds what is being typed; blur and Enter commit it, Escape
+    // abandons it. While the field is untouched, `val` flows straight through,
+    // so an instrument reading still updates the display.
+    const [draft, setDraft] = React.useState(null);
+    const shown = draft !== null ? draft : displayVal;
+
+    const commit = () => {
+        if (readOnly || draft === null) return;
+        const next = draft;
+        setDraft(null);
         if (useMqtt) setVal(next);
         else if (onChange) onChange(next);
+    };
+
+    const handleChange = (e) => {
+        if (readOnly) return;
+        setDraft(e.target.value);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') { commit(); e.target.blur(); }
+        else if (e.key === 'Escape') { setDraft(null); e.target.blur(); }
     };
 
     return (
@@ -97,8 +122,10 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
             )}
             <input 
                 type="text" 
-                value={displayVal}
+                value={shown}
                 onChange={handleChange}
+                onBlur={commit}
+                onKeyDown={handleKeyDown}
                 readOnly={readOnly}
                 title={readOnly ? 'Reported by the instrument' : undefined}
                 style={{

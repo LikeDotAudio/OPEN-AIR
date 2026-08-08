@@ -263,6 +263,32 @@
       "subsystem": "FRES",
       "unverified": true
     },
+    "Set_Func": {
+      "scpi": "FUNCtion \"<value>\"",
+      "scpiFast": "FUNC \"<value>\"",
+      "description": "Select the measurement function",
+      "arg": {
+        "kind": "enum",
+        "values": [
+          "VOLT:DC",
+          "VOLT:AC",
+          "RES",
+          "FRES",
+          "FREQ",
+          "PER",
+          "CONT",
+          "DIOD",
+          "CURR:DC",
+          "CURR:AC"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "group": "One command per measurement function",
+      "subsystem": "Panel",
+      "notes": "The quotes are required: the 34401A's FUNCtion parameter is a string, and FUNC VOLT:DC without them is a syntax error. Same configuration the Select_* pair already proves the instrument accepts — CONFigure:VOLTage:DC and FUNCtion \"VOLT:DC\" leave it in the same state — expressed as one command a selector can drive."
+    },
     "Set_Input_Impedance": {
       "scpi": ":INPut:IMPedance:AUTO <state>",
       "scpiFast": ":INP:IMP:AUTO <state>",
@@ -427,6 +453,16 @@
       "subsystem": "QUES",
       "unverified": true
     },
+    "Set_Rang": {
+      "scpi": "RANG <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
+    },
+    "Set_Rang_Auto": {
+      "scpi": "RANG:AUTO <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
+      "unverified": true
+    },
     "Set_Resolution_Nplcycles": {
       "scpi": "RESistance:NPLCycles <value>",
       "scpiFast": "RES:NPLC <value>",
@@ -497,6 +533,11 @@
         "value"
       ],
       "subsystem": "SEC",
+      "unverified": true
+    },
+    "Set_Sens_Volt_Nplc": {
+      "scpi": "SENS:VOLT:NPLC <value>",
+      "description": "Authored from a panel literal in DMM.json; never executed before.",
       "unverified": true
     },
     "Set_Sre": {
@@ -631,26 +672,6 @@
         "value"
       ],
       "subsystem": "CALCulate"
-    },
-    "Set_Rang_Auto": {
-      "scpi": "RANG:AUTO <value>",
-      "description": "Authored from a panel literal in DMM.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Rang": {
-      "scpi": "RANG <value>",
-      "description": "Authored from a panel literal in DMM.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Sens_Volt_Nplc": {
-      "scpi": "SENS:VOLT:NPLC <value>",
-      "description": "Authored from a panel literal in DMM.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Func": {
-      "scpi": "FUNC '<value>'",
-      "description": "Authored from a panel literal in DMM_N.json; never executed before.",
-      "unverified": true
     }
   },
   "do": {
@@ -1263,6 +1284,17 @@
       "subsystem": "FRES",
       "unverified": true
     },
+    "Get_Func": {
+      "scpi": "FUNCtion?",
+      "scpiFast": "FUNC?",
+      "description": "Which measurement function is selected",
+      "returns": {
+        "count": 1,
+        "type": "CRD"
+      },
+      "group": "One command per measurement function",
+      "subsystem": "Panel"
+    },
     "Get_Limit_Lower": {
       "scpi": ":LIMit:LOWer?",
       "scpiFast": ":LIM:LOW?",
@@ -1425,6 +1457,11 @@
         "type": "NR1"
       },
       "subsystem": "QUES",
+      "unverified": true
+    },
+    "Get_Read_All": {
+      "scpi": "READ:ALL?",
+      "description": "Authored from a panel literal in DMM_N.json; never executed before.",
       "unverified": true
     },
     "Get_Resolution_Nplcycles": {
@@ -1779,11 +1816,6 @@
       },
       "group": "Fetch data after INITiate",
       "subsystem": "MEASure"
-    },
-    "Get_Read_All": {
-      "scpi": "READ:ALL?",
-      "description": "Authored from a panel literal in DMM_N.json; never executed before.",
-      "unverified": true
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   "model": "TDS2024C",
+  "channels": 4,
   "manufacturer": "Tektronix",
   "type": "Oscilloscope",
   "notes": "200 MHz 4 Ch (Legacy Workhorse)",

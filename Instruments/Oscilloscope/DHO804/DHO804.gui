@@ -1,5 +1,6 @@
 {
   "model": "DHO804",
+  "channels": 4,
   "manufacturer": "Rigol",
   "type": "Oscilloscope",
   "notes": "70 MHz 4 Ch (12-bit High Res)",

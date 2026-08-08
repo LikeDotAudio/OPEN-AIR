@@ -3,13 +3,17 @@
  * Purpose: DynamicGraph component or utility.
  * Description: Handles logic and rendering for DynamicGraph component or utility.
  *
- * Version: 26.08.08.1
+ * Version: 26.08.08.2
  * Change Log:
  * - 2026-07-05: Initial annotation and documentation added.
  * - 2026-08-08: Plot YAK trace readings (`traces` + `x_axis`), not just authored
  *               `datasets`. An instrument sends amplitudes ALONE — the frequency
  *               axis arrives as the start/stop of the same reply — so the widget
  *               builds X from the span rather than expecting [x,y] pairs.
+ * - 2026-08-08: Time-domain axis. A scope reports the first sample's time and the
+ *               interval between samples, never a stop, so `x_axis.increment` is
+ *               an alternative to `x_axis.stop`; and its samples arrive inside an
+ *               IEEE-488.2 block header, which is stripped before parsing.
  */
 
 // A blanked trace still answers :TRACe<n>:DATA?, with the instrument's
@@ -19,6 +23,17 @@
 // Anything below this floor is not a measurement — no spectrum analyser has
 // 300 dB of range — so a trace made entirely of them is dropped, not drawn.
 const BLANK_FLOOR_DBM = -300;
+
+// A scope answers :WAVeform:DATA? with an IEEE-488.2 definite-length block:
+// `#8000012001-0.04,-0.04,…` — a hash, one digit giving the width of the length
+// field, then that many digits of length, then the data. Left in place it does
+// not merely add a stray character: it FUSES with the first sample, so
+// parseFloat returns NaN and point zero of every captured trace goes missing.
+const stripBlockHeader = (text) => {
+    const s = String(text).trim();
+    const m = /^#(\d)/.exec(s);
+    return m ? s.slice(2 + Number(m[1])) : s;
+};
 
 // Inline comment: Logic for DynamicGraph
 const DynamicGraph = ({ value: mqttData, config }) => {
@@ -120,6 +135,36 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     // measured on is wrong everywhere, not merely stale.
     const activeSource = React.useRef({});   // slot id -> topic
     const lastSeen = React.useRef({});       // topic -> payload
+
+    // A WIDGET INSTANCE IS REUSED WHEN THE PANEL SWITCHES DEVICE.
+    //
+    // Same component, same position in the tree, different topics — the hazard
+    // useMqttState already guards with `previousTopic`. Here the memory being
+    // carried across was `activeSource`, and the staleness rule below only
+    // re-picks when the remembered topic has NO payload. A topic belonging to
+    // another oscilloscope has one, so the remembered source survived the
+    // switch: three scopes, two of them never asked for a trace in this
+    // session, all drawing the first one's waveform with nothing on screen
+    // saying whose it was.
+    //
+    // Fingerprinting the SOURCES rather than the values: which topics this
+    // graph is pointed at changes only when the panel is rebound to another
+    // instrument, which is exactly when the memory of the last one is worthless.
+    const sourceFingerprint = JSON.stringify([
+        traceSpecs.map(sourceTopicsOf),
+        sourceTopicsOf(config?.x_axis?.start || {}),
+        sourceTopicsOf(config?.x_axis?.stop || {}),
+        sourceTopicsOf(config?.x_axis?.increment || {}),
+    ]);
+    const prevFingerprint = React.useRef(sourceFingerprint);
+    const rebound = React.useRef(false);
+    if (prevFingerprint.current !== sourceFingerprint) {
+        prevFingerprint.current = sourceFingerprint;
+        activeSource.current = {};
+        lastSeen.current = {};
+        rebound.current = true;   // consumed where traceSeriesRef is held
+    }
+
     const pickSource = (id, topics) => {
         topics.forEach(t => {
             const now = messages[t];
@@ -142,29 +187,44 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     const modeTopics = traceSpecs.map(spec => spec.mode?.yak_listen_topic);
     const startTopic = pickSource('__x_start', sourceTopicsOf(config?.x_axis?.start || {}));
     const stopTopic = pickSource('__x_stop', sourceTopicsOf(config?.x_axis?.stop || {}));
+    const stepTopic = pickSource('__x_step', sourceTopicsOf(config?.x_axis?.increment || {}));
 
     // Signature of the raw payloads this graph depends on. The messages object
     // gets a new identity on EVERY MQTT message on the page — a marker readout
     // ticking must not re-parse 4 x 461 samples.
     const traceDataKey = traceTopics
-        .concat(modeTopics, [startTopic, stopTopic])
+        .concat(modeTopics, [startTopic, stopTopic, stepTopic])
         .map(t => (t ? `${t}=${String(messages[t] || '').length}:${String(messages[t] || '').slice(-24)}` : ''))
         .join('|');
 
     // The span, in display units. Hoisted out of the series build because the
     // axis TYPE depends on it: a log axis cannot render a sweep that starts at
     // 0 Hz, and that is the default full-span state of every analyser here.
+    //
+    // TWO SHAPES OF AXIS, because two kinds of instrument describe one.
+    //
+    // An analyser answers with the ENDS of its sweep — start and stop — and the
+    // step falls out of however many bins came back. A scope has no stop to
+    // report: it answers with the time of the first sample and the interval
+    // between samples, and where the trace ENDS depends on how many points the
+    // capture returned. Given `x_axis.increment` this takes the second form and
+    // the far end is computed per trace, from that trace's own length.
     const span = React.useMemo(() => {
-        const startR = readingOf(startTopic);
-        const stopR = readingOf(stopTopic);
-        const startHz = Number(startR?.value);
-        const stopHz = Number(stopR?.value);
-        if (!Number.isFinite(startHz) || !Number.isFinite(stopHz)) return null;
         const conv = window.OaUnits ? window.OaUnits.convert : (v) => v;
-        return {
-            x0: conv(startHz, startR.unit || 'Hz', xUnits),
-            x1: conv(stopHz, stopR.unit || 'Hz', xUnits),
-        };
+        const startR = readingOf(startTopic);
+        const start = Number(startR?.value);
+        if (!Number.isFinite(start)) return null;
+        const x0 = conv(start, startR.unit || 'Hz', xUnits);
+
+        const stopR = readingOf(stopTopic);
+        const stop = Number(stopR?.value);
+        if (Number.isFinite(stop)) {
+            return { x0, x1: conv(stop, stopR.unit || 'Hz', xUnits) };
+        }
+        const stepR = readingOf(stepTopic);
+        const step = Number(stepR?.value);
+        if (!Number.isFinite(step)) return null;
+        return { x0, step: conv(step, stepR.unit || 'Hz', xUnits) };
     }, [traceDataKey, xUnits]);
 
     // `log` is honoured only where a log axis means anything.
@@ -215,7 +275,7 @@ const DynamicGraph = ({ value: mqttData, config }) => {
 
     const traceSeries = React.useMemo(() => {
         if (!traceSpecs.length || !span) return null;
-        const { x0, x1 } = span;
+        const { x0 } = span;
 
         const built = [];
         traceSpecs.forEach((spec, i) => {
@@ -239,13 +299,15 @@ const DynamicGraph = ({ value: mqttData, config }) => {
             const reading = readingOf(traceTopics[i]);
             if (!reading) return;
 
-            const ys = String(reading.value).split(',');
+            const ys = stripBlockHeader(reading.value).split(',');
             if (ys.length < 2) return;
 
-            // The span is the axis: sample k sits at start + k*(stop-start)/(n-1).
-            // The instrument never sends X, and it must not be invented from a
+            // The span is the axis: sample k sits at start + k*step. The
+            // instrument never sends X, and it must not be invented from a
             // separate :FREQ:STAR? — that read can land after the span has moved.
-            const step = (x1 - x0) / (ys.length - 1);
+            const step = span.step !== undefined
+                ? span.step
+                : (span.x1 - x0) / (ys.length - 1);
             const points = [];
             let real = 0;
             for (let k = 0; k < ys.length; k++) {
@@ -274,7 +336,16 @@ const DynamicGraph = ({ value: mqttData, config }) => {
 
     // Last non-null build, so a structural re-apply can restate the traces
     // instead of clearing them.
+    //
+    // Dropped when the graph is rebound to another instrument: "keep showing
+    // the last thing that built" is right across a re-render and wrong across a
+    // device switch, where the last thing that built belongs to a different
+    // oscilloscope. A scope that has not been asked for a trace shows none.
     const traceSeriesRef = React.useRef(null);
+    if (rebound.current) {
+        traceSeriesRef.current = null;
+        rebound.current = false;
+    }
     if (traceSeries) traceSeriesRef.current = traceSeries;
 
     // The mode is shown by a legend FORMATTER, not by renaming the series.
@@ -301,6 +372,25 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         [],
     );
 
+    // THE SPAN IS THE AXIS. There is no data outside it and no meaning either —
+    // the instrument measured 461 points between these two frequencies and
+    // nothing else. Left unbounded, echarts picks its own round numbers, which
+    // is why zooming out ran the axis down towards 0 MHz through empty space,
+    // and why a log axis showed a bare 100 → 1,000 decade with the capture
+    // crammed against the right edge. An authored min/max still wins.
+    //
+    // In step mode there is no reported far end — it is wherever the samples ran
+    // out — so it comes off the trace that was actually built.
+    const stepEnd = React.useMemo(() => {
+        if (!span || span.step === undefined) return undefined;
+        let end;
+        (traceSeriesRef.current || []).forEach(s => {
+            const last = s.data[s.data.length - 1];
+            if (last && (end === undefined || last[0] > end)) end = last[0];
+        });
+        return end;
+    }, [traceSeries, span]);
+
     // Stable signature of everything that affects chart STRUCTURE. Options are
     // re-applied only when this string changes — NOT on every render. `config` gets
     // a fresh identity each render and unrelated MQTT updates re-render every widget,
@@ -308,17 +398,38 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     const cfgKey = JSON.stringify({
         datasets: config?.datasets, axis: config?.axis, title, nav: !!config?.Navigation,
         x_axis: config?.x_axis, units: config?.units, traceMode: !!traceSpecs.length, xIsLog,
-        span,   // the axis bounds are the span, so a new capture re-applies them
+        span,      // the axis bounds are the span, so a new capture re-applies them
+        stepEnd,   // …and in step mode, half of them come from the samples
+        // Being pointed at a different instrument IS a structural change. The
+        // live-trace effect below returns early when there is nothing to draw,
+        // which is exactly the state a freshly-selected scope is in — so
+        // without this the chart would keep the previous one's curve until
+        // someone captured on the new one.
+        sourceFingerprint,
     });
 
-    // THE SPAN IS THE AXIS. There is no data outside it and no meaning either —
-    // the instrument measured 461 points between these two frequencies and
-    // nothing else. Left unbounded, echarts picks its own round numbers, which
-    // is why zooming out ran the axis down towards 0 MHz through empty space,
-    // and why a log axis showed a bare 100 → 1,000 decade with the capture
-    // crammed against the right edge. An authored min/max still wins.
     const xMin = xAxisCfg.min ?? config?.x_axis?.min ?? (traceSpecs.length && span ? span.x0 : undefined);
-    const xMax = xAxisCfg.max ?? config?.x_axis?.max ?? (traceSpecs.length && span ? span.x1 : undefined);
+    const xMax = xAxisCfg.max ?? config?.x_axis?.max
+        ?? (traceSpecs.length && span ? (span.x1 ?? stepEnd) : undefined);
+
+    // `x_axis.si_labels` — the prefix on the TICK rather than in the axis name.
+    //
+    // A scope's window spans nine orders of magnitude across one knob: twelve
+    // divisions of 1 ns at the fast end of the timebase, of 10 s at the slow.
+    // No single fixed unit is readable at both — milliseconds render a
+    // nanosecond capture as 0.000012 — so the tick carries the prefix and the
+    // same axis reads 12 ns and 1.5 ms without being re-authored.
+    const siBase = config?.x_axis?.units || '';
+    const siLabel = React.useCallback((v) => {
+        const n = Number(v);
+        if (!Number.isFinite(n)) return String(v);
+        if (n === 0) return `0 ${siBase}`;
+        const STEPS = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''],
+                       [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
+        const a = Math.abs(n);
+        const [scale, prefix] = STEPS.find(([s]) => a >= s) || STEPS[STEPS.length - 1];
+        return `${Number((n / scale).toFixed(3))} ${prefix}${siBase}`;
+    }, [siBase]);
 
     // A trace graph is titled by the block that contains it; a plain graph is
     // not, so it keeps its own heading.
@@ -408,6 +519,7 @@ const DynamicGraph = ({ value: mqttData, config }) => {
                 minorTick: { show: xIsLog },
                 minorSplitLine: { show: xIsLog && showGrid, lineStyle: { color: '#2b2b2b' } },
                 axisLine: { lineStyle: { color: xAxisCfg.color || '#555' } },
+                axisLabel: config?.x_axis?.si_labels ? { formatter: siLabel } : undefined,
                 min: xMin,
                 max: xMax
             },

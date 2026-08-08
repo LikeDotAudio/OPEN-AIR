@@ -1,5 +1,5 @@
 {
-  "Scope": {
+  "DATASET": {
     "type": "OcaBin",
     "id": "50.100.2.1",
     "geometry": {
@@ -11,606 +11,566 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Oscilloscope_Main_Station": {
+      "Waveforms": {
         "type": "OcaBlock",
         "description": {
-          "En": "Primary Oscilloscope Interface",
-          "Fr": "Primary Oscilloscope Interface",
-          "De": "Primary Oszilloskop Interface",
-          "Es": "Primary Osciloscopio Interface"
+          "En": "Every captured trace, over the time window it was measured on.",
+          "Fr": "Chaque trace capturée, sur sa fenêtre de temps.",
+          "De": "Jede erfasste Kurve über ihrem Zeitfenster.",
+          "Es": "Cada traza capturada, sobre su ventana de tiempo.",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 1,
+          "width": "100%"
         },
         "fields": {
-          "Display_Sector": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Visual Data Stream",
-              "Fr": "Visual Data Stream",
-              "De": "Visual Data Stream",
-              "Es": "Visual Data Stream"
-            },
-            "fields": {
-              "Device_Identity": {
-                "type": "_TextInput",
-                "value": {
-                  "default_value": "Flux_Scope_88"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Device Name",
-                      "Fr": "Device Nom",
-                      "De": "Device Name",
-                      "Es": "Device Nombre"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Syst_Name",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Main_Graph_Display": {
-                "type": "_GuiGraph",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Signal Visualization",
-                      "Fr": "Visualisation de signal",
-                      "De": "Signalvisualisierung",
-                      "Es": "Visualización de señal"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "description": {
-                  "En": "Real-time waveform rendering",
-                  "Fr": "Real-time waveform rendering",
-                  "De": "Real-time waveform rendering",
-                  "Es": "Real-time waveform rendering"
-                },
-                "height": 50,
-                "alpha": 0.9,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "nab",
-                      "sub_path": "Oscilloscope",
-                      "command": "Get_Display_Data",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Control_Deck_Break": {
-            "type": "OcaSeparator",
+          "Trace_Graph": {
+            "type": "DynamicGraph",
             "layout": {
-              "thickness": 2,
-              "pady": 10,
-              "color": "#33A1FD",
-              "sticky": "ew"
-            }
-          },
-          "Horizontal_Control_Deck": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Horizontal (Timebase)",
-              "Fr": "Horizontal (Base de temps)",
-              "De": "Horizontal (Zeitbasis)",
-              "Es": "Horizontal (Base de tiempo)"
+              "height": 420,
+              "stretch": "width",
+              "width": "100%"
             },
-            "fields": {
-              "Time_Div": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "1e-9",
-                  "max": "10",
-                  "units": "s"
-                },
-                "value": {
-                  "default_value": "1e-3"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Time / Div",
-                      "Fr": "Temps / Div",
-                      "De": "Zeit / Div",
-                      "Es": "Tiempo / Div"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Timebase_Scale",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+            "units": "V",
+            "x_axis": {
+              "units": "s",
+              "si_labels": true,
+              "scale": "linear",
+              "label": {
+                "En": "Time",
+                "Fr": "Temps",
+                "De": "Zeit",
+                "Es": "Tiempo"
               },
-              "Time_Offset": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "units": "s"
-                },
-                "value": {
-                  "default_value": "0.0"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Delay",
-                      "Fr": "Delay",
-                      "De": "Delay",
-                      "Es": "Delay"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
+              "start": {
+                "sources": [
+                  {
+                    "yak_listen": "waveform_${n}/xorigin"
                   }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Timebase_Offset",
-                      "input_name": "value",
-                      "converter": ""
-                    }
+                ]
+              },
+              "increment": {
+                "sources": [
+                  {
+                    "yak_listen": "waveform_${n}/xincrement"
                   }
-                }
+                ]
               }
-            }
-          },
-          "Trigger_Systems": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Trigger Logic",
-              "Fr": "Déclencheur Logic",
-              "De": "Trigger Logic",
-              "Es": "Disparo Logic"
             },
-            "fields": {
-              "Trigger_Level": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "units": "V"
-                },
-                "value": {
-                  "default_value": "0.5"
-                },
+            "traces": [
+              {
+                "id": "CH${n}",
                 "label": {
-                  "active": {
-                    "text": {
-                      "En": "Trig Level",
-                      "Fr": "Trig Niveau",
-                      "De": "Trig Pegel",
-                      "Es": "Trig Nivel"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
+                  "En": "Channel ${n}",
+                  "Fr": "Canal ${n}",
+                  "De": "Kanal ${n}",
+                  "Es": "Canal ${n}"
                 },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Trig_Lev",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Trigger_Edge_Toggle": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "RISING",
-                      "Fr": "CROISSANT",
-                      "De": "STEIGEND",
-                      "Es": "ASCENDENTE"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "FALLING",
-                      "Fr": "FALLING",
-                      "De": "FALLING",
-                      "Es": "FALLING"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": true,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Trig_Slop",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Force_Trigger": {
-                "type": "_TrapezoidButton",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "FORCE",
-                      "Fr": "FORCE",
-                      "De": "KRAFT",
-                      "Es": "FUERZA"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": true,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "do",
-                      "sub_path": "Oscilloscope",
-                      "command": "Do_Trig_Forc",
-                      "converter": ""
-                    }
-                  }
-                }
+                "color": "${color}",
+                "width": 1.5,
+                "yak_listen": "waveform_${n}/samples"
               }
-            }
-          },
-          "Acquisition_Main": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Acquisition State",
-              "Fr": "Acquisition State",
-              "De": "Erfassung State",
-              "Es": "Adquisición State"
+            ],
+            "Navigation": true,
+            "label": {
+              "En": "Captured Traces",
+              "Fr": "Traces capturées",
+              "De": "Erfasste Kurven",
+              "Es": "Trazas capturadas"
             },
-            "fields": {
-              "Run_Stop_Toggle": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "RUNNING 🟢",
-                      "Fr": "RUNNING 🟢",
-                      "De": "RUNNING 🟢",
-                      "Es": "RUNNING 🟢"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "STOPPED 🔴",
-                      "Fr": "ARRÊTÉ 🔴",
-                      "De": "GESTOPPT 🔴",
-                      "Es": "DETENIDO 🔴"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": true,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Acq_State",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Single_Shot": {
-                "type": "_GuiButton",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "SINGLE SEQ",
-                      "Fr": "SINGLE SEQ",
-                      "De": "SINGLE SEQ",
-                      "Es": "SINGLE SEQ"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": true,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "do",
-                      "sub_path": "Oscilloscope",
-                      "command": "Do_Acq_Mod_Sing;run",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
+            "show_title": false
           }
         }
+      },
+      "Acquisition": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Whether the scope is acquiring, and one-shot control of it.",
+          "Fr": "Acquisition, et sa commande coup par coup.",
+          "De": "Erfassung und ihre Einzelsteuerung.",
+          "Es": "Adquisición, y su control disparo a disparo.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Run": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "RUN",
+                  "Fr": "RUN",
+                  "De": "RUN",
+                  "Es": "RUN"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Oscilloscope",
+              "command": "Run",
+              "input_name": "",
+              "converter": ""
+            }
+          },
+          "Stop": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Oscilloscope",
+              "command": "Stop",
+              "input_name": "",
+              "converter": ""
+            }
+          },
+          "Single": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Oscilloscope",
+              "command": "Single",
+              "input_name": "",
+              "converter": ""
+            }
+          },
+          "Force": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "FORCE TRIG",
+                  "Fr": "FORCE TRIG",
+                  "De": "FORCE TRIG",
+                  "Es": "FORCE TRIG"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Oscilloscope",
+              "command": "Force_Trigger",
+              "input_name": "",
+              "converter": ""
+            }
+          }
+        },
+        "layout_columns": 4
+      },
+      "Channel_${n}": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel ${n}",
+          "Fr": "Canal ${n}",
+          "De": "Kanal ${n}",
+          "Es": "Canal ${n}",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Get_CH${n}": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "GET CH${n} TRACE",
+                  "Fr": "GET CH${n} TRACE",
+                  "De": "GET CH${n} TRACE",
+                  "Es": "GET CH${n} TRACE"
+                },
+                "text_size": 12,
+                "text_color": "${color}"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "waveform_${n}",
+              "input_name": "",
+              "converter": ""
+            }
+          },
+          "Measure_CH${n}": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "MEASURE CH${n}",
+                  "Fr": "MEASURE CH${n}",
+                  "De": "MEASURE CH${n}",
+                  "Es": "MEASURE CH${n}"
+                },
+                "text_size": 12,
+                "text_color": "${color}"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "measure_${n}",
+              "input_name": "",
+              "converter": ""
+            }
+          },
+          "Vpp_CH${n}": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Vpp",
+                  "Fr": "Vpp",
+                  "De": "Vpp",
+                  "Es": "Vpp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Vpp",
+                  "Fr": "Vpp",
+                  "De": "Vpp",
+                  "Es": "Vpp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "measure_${n}/vpp",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "V"
+          },
+          "Vrms_CH${n}": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Vrms",
+                  "Fr": "Vrms",
+                  "De": "Vrms",
+                  "Es": "Vrms"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Vrms",
+                  "Fr": "Vrms",
+                  "De": "Vrms",
+                  "Es": "Vrms"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "measure_${n}/vrms",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "V"
+          },
+          "Freq_CH${n}": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Freq",
+                  "Fr": "Freq",
+                  "De": "Freq",
+                  "Es": "Freq"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Freq",
+                  "Fr": "Freq",
+                  "De": "Freq",
+                  "Es": "Freq"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "measure_${n}/freq",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "Hz"
+          },
+          "dB_CH${n}": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "dB",
+                  "Fr": "dB",
+                  "De": "dB",
+                  "Es": "dB"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "dB",
+                  "Fr": "dB",
+                  "De": "dB",
+                  "Es": "dB"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "measure_${n}/vrms",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "dBV",
+            "yak_listen_transform": "dbv"
+          }
+        },
+        "layout_columns": 6
       }
     }
   },
-  "Math": {
+  "TIME": {
     "type": "OcaBin",
-    "id": "50.100.2.2.3",
+    "id": "50.100.2.2",
     "geometry": {
       "anchor": "NSEW"
     },
@@ -620,1207 +580,1365 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Oscilloscope_Main_Station": {
+      "Timebase": {
         "type": "OcaBlock",
         "description": {
-          "En": "Multi-Dimensional Signal Analyzer",
-          "Fr": "Multi-Dimensional Signal Analyzer",
-          "De": "Multi-Dimensional Signal Analyzer",
-          "Es": "Multi-Dimensional Signal Analyzer"
+          "En": "Horizontal — seconds per division, and where the trigger sits in the window.",
+          "Fr": "Horizontal — secondes par division et position du déclenchement.",
+          "De": "Horizontal — Sekunden pro Division und Triggerposition.",
+          "Es": "Horizontal — segundos por división y posición del disparo.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
         },
         "fields": {
-          "Display_Sector": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Visual Data Stream",
-              "Fr": "Visual Data Stream",
-              "De": "Visual Data Stream",
-              "Es": "Visual Data Stream"
-            },
-            "fields": {
-              "Device_Identity": {
-                "type": "_TextInput",
-                "value": {
-                  "default_value": "Flux_Math_Scope_X"
+          "Time_Div": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Time / Div",
+                  "Fr": "Temps / Div",
+                  "De": "Zeit / Div",
+                  "Es": "Tiempo / Div"
                 },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Device Name",
-                      "Fr": "Device Nom",
-                      "De": "Device Name",
-                      "Es": "Device Nombre"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Syst_Name",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
-              "Main_Graph_Display": {
-                "type": "_GuiGraph",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Spectral / Temporal Display",
-                      "Fr": "Spectral / Temporal Display",
-                      "De": "Spectral / Temporal Display",
-                      "Es": "Spectral / Temporal Display"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
+              "inactive": {
+                "text": {
+                  "En": "Time / Div",
+                  "Fr": "Temps / Div",
+                  "De": "Zeit / Div",
+                  "Es": "Tiempo / Div"
                 },
-                "description": {
-                  "En": "Visual rendering of Time and Frequency domains",
-                  "Fr": "Rendu visuel des domaines temporel et fréquentiel",
-                  "De": "Visuelle Darstellung von Zeit- und Frequenzbereichen",
-                  "Es": "Representación visual de dominios de tiempo y frecuencia"
-                },
-                "height": 50,
-                "alpha": 0.9,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "nab",
-                      "sub_path": "Oscilloscope",
-                      "command": "Get_Display_Data",
-                      "converter": ""
-                    }
-                  }
-                }
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
-            }
-          },
-          "Control_Deck_Break": {
-            "type": "OcaSeparator",
+            },
+            "domain": {
+              "primary": {
+                "min": 1e-09,
+                "max": 10,
+                "value_default": 0.001,
+                "step": 1e-09
+              },
+              "units": "s"
+            },
+            "value": {
+              "default_value": 0.001
+            },
+            "units": "s",
             "layout": {
-              "thickness": 2,
-              "pady": 15,
-              "color": "#33A1FD",
-              "sticky": "ew"
-            }
-          },
-          "Vertical_Control_Deck_Ch1": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "CHANNEL 1 (Yellow)",
-              "Fr": "Canal 1",
-              "De": "Kanal 1",
-              "Es": "Canal 1"
+              "height": 140,
+              "width": "100%",
+              "pady": 4
             },
-            "fields": {
-              "Ch1_Enable": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "CH1 ON",
-                      "Fr": "CH1 ACTIVÉ",
-                      "De": "CH1 AN",
-                      "Es": "CH1 ACTIVADO"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "CH1 OFF",
-                      "Fr": "CH 1",
-                      "De": "CH 1",
-                      "Es": "CH 1"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": true,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Chan1_Stat",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Ch1_Volts_Div": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "0.01",
-                  "max": "100",
-                  "units": "V"
-                },
-                "value": {
-                  "default_value": "1.0"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Ch1 Scale",
-                      "Fr": "Ch 1",
-                      "De": "Ch 1",
-                      "Es": "Ch 1"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "CH1_Scale",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Vertical_Control_Deck_Ch2": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "CHANNEL 2 (Blue)",
-              "Fr": "CANAL 2 (Bleu)",
-              "De": "KANAL 2 (Blau)",
-              "Es": "CANAL 2 (Azul)"
+            "geometry": {
+              "width": 130,
+              "height": 130
             },
-            "fields": {
-              "Ch2_Enable": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "CH2 ON",
-                      "Fr": "CH 2",
-                      "De": "CH 2",
-                      "Es": "CH 2"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "CH2 OFF",
-                      "Fr": "CH 2",
-                      "De": "CH 2",
-                      "Es": "CH 2"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": true,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Chan2_Stat",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Ch2_Volts_Div": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "0.01",
-                  "max": "100",
-                  "units": "V"
-                },
-                "value": {
-                  "default_value": "1.0"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Ch2 Scale",
-                      "Fr": "Ch 2",
-                      "De": "Ch 2",
-                      "Es": "Ch 2"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "CH2_Scale",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+            "cosmetics": {
+              "colors": {
+                "active": "#33A1FD",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
               }
-            }
-          },
-          "Math_Control_Deck": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "MATH & FFT (Purple)",
-              "Fr": "MATH & FFT (Purple)",
-              "De": "MATH & FFT (Purple)",
-              "Es": "MATH & FFT (Purple)"
             },
-            "fields": {
-              "Math_Enable": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "MATH ON",
-                      "Fr": "MATH ON",
-                      "De": "MATH ON",
-                      "Es": "MATH ON"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "MATH OFF",
-                      "Fr": "MATH OFF",
-                      "De": "MATH OFF",
-                      "Es": "MATH OFF"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": false,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Display",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Math_Operation": {
-                "type": "_GuiDropDownOption",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Operation",
-                      "Fr": "Operation",
-                      "De": "Operation",
-                      "Es": "Operation"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "options": [
-                  "A+B",
-                  "A-B",
-                  "A*B",
-                  "FFT"
-                ],
-                "default_option": "A-B",
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Operator",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Math_Scale": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "units": "U"
-                },
-                "value": {
-                  "default_value": "1.0"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Math Scale",
-                      "Fr": "Math Échelle",
-                      "De": "Math Skala",
-                      "Es": "Math Escala"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Scale",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "Math_Offset": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "units": "U"
-                },
-                "value": {
-                  "default_value": "0.0"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Math Offset",
-                      "Fr": "Math Décalage",
-                      "De": "Math Versatz",
-                      "Es": "Math Compensación"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Offset",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "FFT_Special_Deck": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Spectral Parameters (FFT Only)",
-              "Fr": "Spectral Parameters (FFT Only)",
-              "De": "Spectral Parameters (FFT Only)",
-              "Es": "Spectral Parameters (FFT Only)"
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Timebase_Scale",
+              "input_name": "scale",
+              "converter": "",
+              "readback": "timebase_settings"
             },
-            "fields": {
-              "FFT_Window": {
-                "type": "_GuiDropDownOption",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Window",
-                      "Fr": "Window",
-                      "De": "Window",
-                      "Es": "Window"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "options": [
-                  "RECT",
-                  "HANN",
-                  "HAMM",
-                  "BLACK"
-                ],
-                "default_option": "HANN",
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Fft_Windows",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "FFT_Center": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "0",
-                  "max": "1000000000",
-                  "units": "Hz"
-                },
-                "value": {
-                  "default_value": "1000"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Center Freq",
-                      "Fr": "Fréq centrale",
-                      "De": "Mittenfreq",
-                      "Es": "Frec central"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Fft_Cent",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              },
-              "FFT_Span": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "10",
-                  "max": "1000000000",
-                  "units": "Hz"
-                },
-                "value": {
-                  "default_value": "10000"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Freq Span",
-                      "Fr": "Intervalle de fréq",
-                      "De": "Freq-Spanne",
-                      "Es": "Intervalo de frec"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Math_Fft_Span",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
+            "yak_listen": "timebase_settings/scale"
           },
-          "Horizontal_Control_Deck": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Timebase",
-              "Fr": "Tempsbase",
-              "De": "Zeitbase",
-              "Es": "Tiempobase"
-            },
-            "fields": {
-              "Time_Div": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "min": "1e-9",
-                  "max": "10",
-                  "units": "s"
+          "Delay": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Delay",
+                  "Fr": "Retard",
+                  "De": "Verzögerung",
+                  "Es": "Retardo"
                 },
-                "value": {
-                  "default_value": "1e-3"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Time / Div",
-                      "Fr": "Temps / Div",
-                      "De": "Zeit / Div",
-                      "Es": "Tiempo / Div"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Timebase_Scale",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Trigger_Systems": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Trigger",
-              "Fr": "Déclencheur",
-              "De": "Trigger",
-              "Es": "Disparo"
-            },
-            "fields": {
-              "Trigger_Source": {
-                "type": "_GuiDropDownOption",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Source",
-                      "Fr": "Source",
-                      "De": "Quelle",
-                      "Es": "Fuente"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "options": [
-                  "CHAN1",
-                  "CHAN2",
-                  "EXT",
-                  "LINE"
-                ],
-                "default_option": "CHAN1",
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Trig_Sour",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
-              "Trigger_Level": {
-                "type": "_GuiHorizontalKnob",
-                "domain": {
-                  "units": "V"
+              "inactive": {
+                "text": {
+                  "En": "Delay",
+                  "Fr": "Retard",
+                  "De": "Verzögerung",
+                  "Es": "Retardo"
                 },
-                "value": {
-                  "default_value": "0.5"
-                },
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "Level",
-                      "Fr": "Niveau",
-                      "De": "Pegel",
-                      "Es": "Nivel"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Trig_Lev",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
-            }
-          },
-          "Acquisition_Main": {
-            "type": "OcaBlock",
-            "description": {
-              "En": "Control",
-              "Fr": "Contrôle",
-              "De": "Steuerung",
-              "Es": "Control"
             },
-            "fields": {
-              "Run_Stop_Toggle": {
-                "type": "_GuiButtonToggle",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "RUN",
-                      "Fr": "EXEC",
-                      "De": "AUSFÜHREN",
-                      "Es": "EJEC"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  },
-                  "inactive": {
-                    "text": {
-                      "En": "STOP",
-                      "Fr": "STOP",
-                      "De": "STOP",
-                      "Es": "STOP"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "style": {
-                  "active": {
-                    "font_style": "bold",
-                    "font_size": null,
-                    "text_color": "#1a1a1a",
-                    "bg_color": "#000000",
-                    "border_color": "#FF9900",
-                    "border_thickness": 2,
-                    "glow_intensity": 1.944
-                  },
-                  "inactive": {
-                    "font_style": "normal",
-                    "font_size": null,
-                    "text_color": "#888888",
-                    "bg_color": "#2b2b2b",
-                    "border_color": "#555555",
-                    "border_thickness": 2,
-                    "glow_intensity": 0
-                  }
-                },
-                "state_default": true,
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": false,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "set",
-                      "sub_path": "Oscilloscope",
-                      "command": "Set_Acq_State",
-                      "input_name": "value",
-                      "converter": ""
-                    }
-                  }
-                }
+            "domain": {
+              "primary": {
+                "min": -1,
+                "max": 1,
+                "value_default": 0,
+                "step": 1e-09
               },
-              "Single_Shot": {
-                "type": "_GuiButton",
-                "label": {
-                  "active": {
-                    "text": {
-                      "En": "SINGLE",
-                      "Fr": "SINGLE",
-                      "De": "SINGLE",
-                      "Es": "SINGLE"
-                    },
-                    "text_size": 12,
-                    "text_color": "#cccccc"
-                  }
-                },
-                "message_details": {
-                  "OSCILLOSCOPE_MODEL": {
-                    "type": "_GuiActuator",
-                    "style": {
-                      "active": {
-                        "font_style": "bold",
-                        "font_size": null,
-                        "text_color": "#FF902C",
-                        "bg_color": "#000000",
-                        "border_color": "#FF9900",
-                        "border_thickness": 2,
-                        "glow_intensity": 1.944
-                      },
-                      "inactive": {
-                        "font_style": "normal",
-                        "font_size": null,
-                        "text_color": "#888888",
-                        "bg_color": "#2b2b2b",
-                        "border_color": "#555555",
-                        "border_thickness": 2,
-                        "glow_intensity": 0
-                      }
-                    },
-                    "trigger": true,
-                    "yak_handler": {
-                      "enable": true,
-                      "yak_type": "do",
-                      "sub_path": "Oscilloscope",
-                      "command": "Do_Acq_Mod_Sing;run",
-                      "converter": ""
-                    }
-                  }
-                }
+              "units": "s"
+            },
+            "value": {
+              "default_value": 0
+            },
+            "units": "s",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "#33A1FD",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
               }
-            }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Timebase_Delay",
+              "input_name": "delay",
+              "converter": "",
+              "readback": "timebase_settings"
+            },
+            "yak_listen": "timebase_settings/delay"
           }
-        }
+        },
+        "layout_columns": 2
+      },
+      "Readback": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "What the timebase answered.",
+          "Fr": "Ce que la base de temps a répondu.",
+          "De": "Was die Zeitbasis geantwortet hat.",
+          "Es": "Lo que respondió la base de tiempo.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Read_Timebase": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ TIMEBASE",
+                  "Fr": "READ TIMEBASE",
+                  "De": "READ TIMEBASE",
+                  "Es": "READ TIMEBASE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "timebase_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          },
+          "Read_Scale": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Time / Div",
+                  "Fr": "Time / Div",
+                  "De": "Time / Div",
+                  "Es": "Time / Div"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Time / Div",
+                  "Fr": "Time / Div",
+                  "De": "Time / Div",
+                  "Es": "Time / Div"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "timebase_settings/scale",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "s"
+          },
+          "Read_Delay": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Delay",
+                  "Fr": "Delay",
+                  "De": "Delay",
+                  "Es": "Delay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Delay",
+                  "Fr": "Delay",
+                  "De": "Delay",
+                  "Es": "Delay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "timebase_settings/delay",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "s"
+          }
+        },
+        "layout_columns": 3
+      }
+    }
+  },
+  "AMPLITUDE": {
+    "type": "OcaBin",
+    "id": "50.100.2.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Channel_${n}": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Channel ${n}",
+          "Fr": "Canal ${n}",
+          "De": "Kanal ${n}",
+          "Es": "Canal ${n}",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Ch${n}_On": {
+            "type": "_TrapezoidButtonToggler",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "En": "CH${n}",
+              "Fr": "CH${n}",
+              "De": "CH${n}",
+              "Es": "CH${n}"
+            },
+            "layout": {
+              "width": 92,
+              "height": 46,
+              "layout_columns": 2,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "${color}",
+                "selected": true
+              },
+              "0": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#555555",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Display",
+              "input_name": "state",
+              "converter": "",
+              "readback": "channel_settings_${n}"
+            },
+            "yak_listen": "channel_settings_${n}/state"
+          },
+          "Ch${n}_Scale": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CH${n} Volts / Div",
+                  "Fr": "CH${n} Volts / Div",
+                  "De": "CH${n} Volt / Div",
+                  "Es": "CH${n} Voltios / Div"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "CH${n} Volts / Div",
+                  "Fr": "CH${n} Volts / Div",
+                  "De": "CH${n} Volt / Div",
+                  "Es": "CH${n} Voltios / Div"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.001,
+                "max": 10,
+                "value_default": 1,
+                "step": 0.001
+              },
+              "units": "V"
+            },
+            "value": {
+              "default_value": 1
+            },
+            "units": "V",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "${color}",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Channel_Scale",
+              "input_name": "scale",
+              "converter": "",
+              "readback": "channel_settings_${n}"
+            },
+            "yak_listen": "channel_settings_${n}/scale"
+          },
+          "Ch${n}_Offset": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CH${n} Offset",
+                  "Fr": "CH${n} Décalage",
+                  "De": "CH${n} Versatz",
+                  "Es": "CH${n} Compensación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "CH${n} Offset",
+                  "Fr": "CH${n} Décalage",
+                  "De": "CH${n} Versatz",
+                  "Es": "CH${n} Compensación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -10,
+                "max": 10,
+                "value_default": 0,
+                "step": 0.001
+              },
+              "units": "V"
+            },
+            "value": {
+              "default_value": 0
+            },
+            "units": "V",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "#00ffff",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Channel_Offset",
+              "input_name": "offset",
+              "converter": "",
+              "readback": "channel_settings_${n}"
+            },
+            "yak_listen": "channel_settings_${n}/offset"
+          },
+          "Ch${n}_Read": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ CH${n}",
+                  "Fr": "READ CH${n}",
+                  "De": "READ CH${n}",
+                  "Es": "READ CH${n}"
+                },
+                "text_size": 12,
+                "text_color": "${color}"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "channel_settings_${n}",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          }
+        },
+        "layout_columns": 4
+      },
+      "Trigger": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Trigger — the level the scope fires at, and what it looks for.",
+          "Fr": "Déclenchement — le niveau et ce qu'il cherche.",
+          "De": "Trigger — der Pegel und wonach gesucht wird.",
+          "Es": "Disparo — el nivel y lo que busca.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Trigger_Level": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Trigger Level",
+                  "Fr": "Niveau de déclenchement",
+                  "De": "Triggerpegel",
+                  "Es": "Nivel de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Trigger Level",
+                  "Fr": "Niveau de déclenchement",
+                  "De": "Triggerpegel",
+                  "Es": "Nivel de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -10,
+                "max": 10,
+                "value_default": 0.5,
+                "step": 0.001
+              },
+              "units": "V"
+            },
+            "value": {
+              "default_value": 0.5
+            },
+            "units": "V",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "#FF3B30",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Trigger_Level",
+              "input_name": "level",
+              "converter": "",
+              "readback": "trigger_settings"
+            },
+            "yak_listen": "trigger_settings/level"
+          },
+          "Trigger_Type": {
+            "type": "SelectorSwitch",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Trigger Type",
+                  "Fr": "Type de déclenchement",
+                  "De": "Triggertyp",
+                  "Es": "Tipo de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Trigger Type",
+                  "Fr": "Type de déclenchement",
+                  "De": "Triggertyp",
+                  "Es": "Tipo de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "EDGE"
+            },
+            "positions": [
+              "EDGE",
+              "PATT",
+              "DUR",
+              "IIC",
+              "SPI"
+            ],
+            "continuous": false,
+            "shape": "gear",
+            "pointer_style": "line",
+            "indicator_color": "#FF3B30",
+            "layout": {
+              "height": 170,
+              "pady": 6
+            },
+            "width": 150,
+            "height": 150,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Trigger_Mode",
+              "input_name": "mode",
+              "converter": "",
+              "readback": "trigger_settings"
+            },
+            "yak_listen": "trigger_settings/mode"
+          },
+          "Read_Trigger": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ TRIGGER",
+                  "Fr": "READ TRIGGER",
+                  "De": "READ TRIGGER",
+                  "Es": "READ TRIGGER"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "trigger_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          }
+        },
+        "layout_columns": 3
+      }
+    }
+  },
+  "MATH": {
+    "type": "OcaBin",
+    "id": "50.100.2.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Math": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "The math trace: what it computes, and where it sits.",
+          "Fr": "La trace math : ce qu'elle calcule et où elle se place.",
+          "De": "Die Mathe-Kurve: was sie rechnet und wo sie liegt.",
+          "Es": "La traza matemática: qué calcula y dónde se sitúa.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Math_On": {
+            "type": "_TrapezoidButtonToggler",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "En": "Math",
+              "Fr": "Math",
+              "De": "Math",
+              "Es": "Math"
+            },
+            "layout": {
+              "width": 92,
+              "height": 46,
+              "layout_columns": 2,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#B06CFF",
+                "selected": false
+              },
+              "0": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "color": "#555555",
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Math_Display",
+              "input_name": "state",
+              "converter": "",
+              "readback": "math_settings"
+            },
+            "yak_listen": "math_settings/state"
+          },
+          "Math_Operation": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Operation",
+                  "Fr": "Opération",
+                  "De": "Operation",
+                  "Es": "Operación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Operation",
+                  "Fr": "Opération",
+                  "De": "Operation",
+                  "Es": "Operación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width"
+            },
+            "options": {
+              "ADD": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "A + B",
+                      "Fr": "A + B",
+                      "De": "A + B",
+                      "Es": "A + B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "A + B",
+                      "Fr": "A + B",
+                      "De": "A + B",
+                      "Es": "A + B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "ADD",
+                "selected": false
+              },
+              "SUBT": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "A - B",
+                      "Fr": "A - B",
+                      "De": "A - B",
+                      "Es": "A - B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "A - B",
+                      "Fr": "A - B",
+                      "De": "A - B",
+                      "Es": "A - B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "SUBT",
+                "selected": true
+              },
+              "MULT": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "A x B",
+                      "Fr": "A x B",
+                      "De": "A x B",
+                      "Es": "A x B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "A x B",
+                      "Fr": "A x B",
+                      "De": "A x B",
+                      "Es": "A x B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "MULT",
+                "selected": false
+              },
+              "FFT": {
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "FFT",
+                      "Fr": "FFT",
+                      "De": "FFT",
+                      "Es": "FFT"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "FFT",
+                      "Fr": "FFT",
+                      "De": "FFT",
+                      "Es": "FFT"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "value": "FFT",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Math_Operator",
+              "input_name": "value",
+              "converter": "",
+              "readback": "math_settings"
+            },
+            "yak_listen": "math_settings/operator"
+          },
+          "Math_Scale": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Math Scale",
+                  "Fr": "Math Échelle",
+                  "De": "Math Skala",
+                  "Es": "Math Escala"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Math Scale",
+                  "Fr": "Math Échelle",
+                  "De": "Math Skala",
+                  "Es": "Math Escala"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.001,
+                "max": 100,
+                "value_default": 1,
+                "step": 0.001
+              },
+              "units": "V"
+            },
+            "value": {
+              "default_value": 1
+            },
+            "units": "V",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "#B06CFF",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Math_Scale",
+              "input_name": "value",
+              "converter": "",
+              "readback": "math_settings"
+            },
+            "yak_listen": "math_settings/scale"
+          },
+          "Math_Offset": {
+            "type": "_GuiKnob",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Math Offset",
+                  "Fr": "Math Décalage",
+                  "De": "Math Versatz",
+                  "Es": "Math Compensación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Math Offset",
+                  "Fr": "Math Décalage",
+                  "De": "Math Versatz",
+                  "Es": "Math Compensación"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100,
+                "max": 100,
+                "value_default": 0,
+                "step": 0.001
+              },
+              "units": "V"
+            },
+            "value": {
+              "default_value": 0
+            },
+            "units": "V",
+            "layout": {
+              "height": 140,
+              "width": "100%",
+              "pady": 4
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "cosmetics": {
+              "colors": {
+                "active": "#B06CFF",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Math_Offset",
+              "input_name": "value",
+              "converter": "",
+              "readback": "math_settings"
+            },
+            "yak_listen": "math_settings/offset"
+          }
+        },
+        "layout_columns": 4
+      },
+      "Readback": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "What the math subsystem answered.",
+          "Fr": "Ce que le sous-système math a répondu.",
+          "De": "Was das Mathe-Subsystem geantwortet hat.",
+          "Es": "Lo que respondió el subsistema matemático.",
+          "show_label": true
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Read_Math": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ MATH",
+                  "Fr": "READ MATH",
+                  "De": "READ MATH",
+                  "Es": "READ MATH"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 34,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "padx": 3,
+              "pady": 3
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Oscilloscope",
+              "command": "math_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          },
+          "Read_Operator": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Operation",
+                  "Fr": "Operation",
+                  "De": "Operation",
+                  "Es": "Operation"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Operation",
+                  "Fr": "Operation",
+                  "De": "Operation",
+                  "Es": "Operation"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "math_settings/operator",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            }
+          },
+          "Read_Scale": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Scale",
+                  "Fr": "Scale",
+                  "De": "Scale",
+                  "Es": "Scale"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Scale",
+                  "Fr": "Scale",
+                  "De": "Scale",
+                  "Es": "Scale"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "math_settings/scale",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "V"
+          },
+          "Read_Offset": {
+            "type": "_Value",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Offset",
+                  "Fr": "Offset",
+                  "De": "Offset",
+                  "Es": "Offset"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Offset",
+                  "Fr": "Offset",
+                  "De": "Offset",
+                  "Es": "Offset"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "yak_listen": "math_settings/offset",
+            "layout": {
+              "height": 26
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            },
+            "units": "V"
+          }
+        },
+        "layout_columns": 4
       }
     }
   },

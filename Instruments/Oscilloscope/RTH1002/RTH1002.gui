@@ -1,5 +1,6 @@
 {
   "model": "RTH1002",
+  "channels": 2,
   "manufacturer": "Rohde & Schwarz",
   "type": "Oscilloscope",
   "notes": "Scope Rider Handheld (Isolated)",

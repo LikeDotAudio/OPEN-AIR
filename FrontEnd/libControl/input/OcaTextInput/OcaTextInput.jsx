@@ -40,6 +40,7 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
     // device's /Read topic, so an editable box there would let a keystroke
     // overwrite the instrument's reply.
     const readOnly = config?.read_only === true || config?.yak_readout === true;
+    const unit = config?.units || (config?.domain && config.domain.units) || '';
 
     // One reply, several readouts.
     //
@@ -140,6 +141,15 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
                     fontFamily: 'Segoe UI, sans-serif'
                 }}
             />
+            {/* A number with no unit is not a reading. "Frequency: 5" beside a
+                fader reading 5000.000 kHz is two different claims about the
+                same generator, and nothing on screen says which unit either
+                one is in. The declared unit rides next to the value. */}
+            {unit && (
+                <div style={{ color: '#999', fontSize: `${fontSize}px`, marginLeft: '6px', whiteSpace: 'nowrap' }}>
+                    {unit}
+                </div>
+            )}
         </div>
     );
 };

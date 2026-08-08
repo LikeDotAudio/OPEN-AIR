@@ -728,10 +728,36 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         // the generator's waveform dial sat on SINE while `FUNCtion?` answered
         // SQU, with nothing on screen to contradict it — the same failure the
         // trace-mode dropdowns had before this branch existed.
+        //
+        // A READOUT counts as declaring them too, and for the same reason the
+        // dial does: `FUNCtion?` answers SIN, and the Instrument Readback row's
+        // Shape box sat on its authored 0 forever because a word could not
+        // reach it. A display with no `yak_handler` commands nothing, so there
+        // is no wrong value for it to send — the only question is whether it
+        // shows what the instrument said, and a number-only rule answers no to
+        // every enumerated reply on the panel.
         if (!Number.isFinite(n)) {
             const s = String(raw).trim();
-            if (!s || !(nodeJson.options || nodeJson.positions)) return;
+            const kind = String((nodeJson && nodeJson.type) || '');
+            const isReadout = !nodeJson.yak_handler
+                && /value|label|text|readout|display/i.test(kind);
+            if (!s || !(nodeJson.options || nodeJson.positions || isReadout)) return;
             setLocalValue(s);
+            return;
+        }
+
+        // A LEVEL in dB, from a reading the instrument gives in volts.
+        //
+        // No scope on this bench answers a dB query — `MEAS:DB?` was a panel
+        // literal the YAK crawler copied back, not a command on either family —
+        // so a dB box bound to a dB reading could never fill. It is the same
+        // quantity either way: 20·log10(Vrms / 1 V) is the RMS reading in dBV,
+        // and the widget's units name that reference rather than leaving an
+        // unstated one. Zero or below has no logarithm and stays a dash; a
+        // silent 0 dB would read as a measurement.
+        if (nodeJson.yak_listen_transform === 'dbv') {
+            const volts = window.OaUnits.convert(n, sourceUnit || 'V', 'V');
+            setLocalValue(volts > 0 ? Number((20 * Math.log10(volts)).toFixed(3)) : '—');
             return;
         }
 

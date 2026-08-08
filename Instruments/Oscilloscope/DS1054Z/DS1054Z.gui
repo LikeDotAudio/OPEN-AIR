@@ -1,5 +1,6 @@
 {
   "model": "DS1054Z",
+  "channels": 4,
   "manufacturer": "Rigol",
   "type": "Oscilloscope",
   "notes": "50 MHz 4 Ch (The 'Hobbyist Standard')",

@@ -42,6 +42,25 @@ pub struct Reading {
     pub unit: Option<String>,
 }
 
+/// The value, without the quotes SCPI wraps a string reply in.
+///
+/// `FUNCtion?` answers `"VOLT:DC"` — the quotes are the transport saying "this
+/// is a string", not part of what the instrument measures with. Published
+/// verbatim they reach a control as a six-character value that matches none of
+/// its five positions, so the function selector sits on DC while the meter is
+/// reading ohms: the same silent disagreement the enumerated readings were
+/// named to end. Only a matched pair is removed, and only from the outside.
+fn unquote(v: &str) -> &str {
+    let bytes = v.as_bytes();
+    if bytes.len() >= 2 {
+        let (first, last) = (bytes[0], bytes[bytes.len() - 1]);
+        if (first == b'"' && last == b'"') || (first == b'\'' && last == b'\'') {
+            return &v[1..v.len() - 1];
+        }
+    }
+    v
+}
+
 /// Split a reply into named readings using the command's declared `returns`.
 ///
 /// Returns an empty vec when the command is unknown or declares no reply shape —
@@ -53,7 +72,7 @@ pub fn decompose(repo: &YakRepository, model: &str, command_name: &str, raw: &st
 
     if returns.fields.is_empty() {
         // A single-value query answers under its own command name.
-        let v = raw.trim();
+        let v = unquote(raw.trim());
         if v.is_empty() {
             return Vec::new();
         }
@@ -75,7 +94,7 @@ pub fn decompose(repo: &YakRepository, model: &str, command_name: &str, raw: &st
         .iter()
         .zip(parts.iter())
         .filter_map(|(field, part)| {
-            let v = part.trim();
+            let v = unquote(part.trim());
             if v.is_empty() {
                 return None;
             }
@@ -123,5 +142,16 @@ mod tests {
             reading_topic(base, "Reference_Level", "Reference_Level"),
             format!("{base}/Reading/Reference_Level")
         );
+    }
+
+    #[test]
+    fn a_quoted_string_reply_publishes_without_its_quotes() {
+        // FUNCtion? answers "VOLT:DC"; the value is VOLT:DC.
+        assert_eq!(unquote("\"VOLT:DC\""), "VOLT:DC");
+        assert_eq!(unquote("'VOLT:DC'"), "VOLT:DC");
+        // A lone or interior quote is part of the value, not a wrapper.
+        assert_eq!(unquote("\"VOLT:DC"), "\"VOLT:DC");
+        assert_eq!(unquote("6.5\" rack"), "6.5\" rack");
+        assert_eq!(unquote("+1.0E+00"), "+1.0E+00");
     }
 }

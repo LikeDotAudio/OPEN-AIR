@@ -1,0 +1,628 @@
+{
+  "Generator_Link_Unit_${n}": {
+    "type": "OcaBin",
+    "id": "50.100.3.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Generator_${n}": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "${model} @ ${resource}",
+          "Fr": "${model} @ ${resource}",
+          "De": "${model} @ ${resource}",
+          "Es": "${model} @ ${resource}",
+          "show_label": true
+        },
+        "layout_columns": 5,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "Link": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "LINKED",
+                  "Fr": "LINKED",
+                  "De": "LINKED",
+                  "Es": "LINKED"
+                },
+                "text_size": 12,
+                "text_color": "#39D353"
+              },
+              "inactive": {
+                "text": {
+                  "En": "NOT LINKED",
+                  "Fr": "NOT LINKED",
+                  "De": "NOT LINKED",
+                  "Es": "NOT LINKED"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
+            },
+            "layout": {
+              "height": 60,
+              "width": 180,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#39D353",
+                "bg_color": "#000000",
+                "border_color": "#39D353",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "value": {
+              "default_value": 1
+            },
+            "latching": true
+          },
+          "Output": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OUTPUT ON",
+                  "Fr": "OUTPUT ON",
+                  "De": "OUTPUT ON",
+                  "Es": "OUTPUT ON"
+                },
+                "text_size": 12,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "text": {
+                  "En": "OUTPUT OFF",
+                  "Fr": "OUTPUT OFF",
+                  "De": "OUTPUT OFF",
+                  "Es": "OUTPUT OFF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
+            },
+            "layout": {
+              "height": 60,
+              "width": 180,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "value": {
+              "default_value": 0
+            },
+            "latching": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Generator",
+              "command": "Set_Output_State",
+              "input_name": "state",
+              "converter": "bool_to_int",
+              "readback": "generator_settings"
+            },
+            "yak_listen": "generator_settings/output"
+          },
+          "Frequency": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0",
+              "max": "20000",
+              "units": "kHz",
+              "step_coarse": "1",
+              "step_fine": "0.001"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "step": "0.001",
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 8,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia",
+              "show_label": true
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#FF9900"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "units": "kHz",
+            "show_label": true,
+            "yak_domain": "freq",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Generator",
+              "command": "Set_Frequency",
+              "input_name": "freq",
+              "converter": "khz_to_hz",
+              "readback": "generator_settings"
+            },
+            "yak_listen": "generator_settings/frequency"
+          },
+          "Amplitude": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0.01",
+              "max": "10",
+              "units": "Vpp",
+              "step_coarse": "0.1",
+              "step_fine": "0.001"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "step": "0.001",
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 8,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "En": "Amplitude",
+              "Fr": "Amplitude",
+              "De": "Amplitude",
+              "Es": "Amplitud",
+              "show_label": true
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#39D353"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#39D353",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "units": "Vpp",
+            "show_label": true,
+            "yak_domain": "ampl",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Generator",
+              "command": "Set_Amplitude",
+              "input_name": "amp",
+              "converter": "",
+              "readback": "generator_settings"
+            },
+            "yak_listen": "generator_settings/amplitude"
+          },
+          "Read_Settings": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "inactive": {
+                "text": {
+                  "En": "READ",
+                  "Fr": "READ",
+                  "De": "READ",
+                  "Es": "READ"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "layout": {
+              "height": 40,
+              "width": 120,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "nab",
+              "sub_path": "Generator",
+              "command": "generator_settings",
+              "input_name": "",
+              "converter": ""
+            },
+            "yak_nab_on_load": true
+          }
+        }
+      },
+      "Master_Control": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Master — every linked generator follows this",
+          "Fr": "Master — every linked generator follows this",
+          "De": "Master — every linked generator follows this",
+          "Es": "Master — every linked generator follows this",
+          "show_label": true
+        },
+        "layout_columns": 3,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "Output": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OUTPUT ON",
+                  "Fr": "OUTPUT ON",
+                  "De": "OUTPUT ON",
+                  "Es": "OUTPUT ON"
+                },
+                "text_size": 12,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "text": {
+                  "En": "OUTPUT OFF",
+                  "Fr": "OUTPUT OFF",
+                  "De": "OUTPUT OFF",
+                  "Es": "OUTPUT OFF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
+            },
+            "layout": {
+              "height": 60,
+              "width": 240,
+              "padx": 6,
+              "pady": 6
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "value": {
+              "default_value": 0
+            },
+            "latching": true
+          },
+          "Frequency": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0",
+              "max": "20000",
+              "units": "kHz",
+              "step_coarse": "1",
+              "step_fine": "0.001"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "step": "0.001",
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 8,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia",
+              "show_label": true
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#FF9900"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "units": "kHz",
+            "show_label": true,
+            "yak_domain": "freq"
+          },
+          "Amplitude": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0.01",
+              "max": "10",
+              "units": "Vpp",
+              "step_coarse": "0.1",
+              "step_fine": "0.001"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "step": "0.001",
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 8,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
+            },
+            "label": {
+              "En": "Amplitude",
+              "Fr": "Amplitude",
+              "De": "Amplitude",
+              "Es": "Amplitud",
+              "show_label": true
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
+              "bar_color": "#444444",
+              "active_color": "#39D353"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#39D353",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "units": "Vpp",
+            "show_label": true,
+            "yak_domain": "ampl"
+          },
+          "Link_Gang": {
+            "type": "_GuiLinkGang",
+            "master_group": "Master_Control",
+            "member_prefix": "Unit_",
+            "enlist": "Link",
+            "gang": [
+              {
+                "master": "Output",
+                "member": "Output"
+              },
+              {
+                "master": "Frequency",
+                "member": "Frequency"
+              },
+              {
+                "master": "Amplitude",
+                "member": "Amplitude"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

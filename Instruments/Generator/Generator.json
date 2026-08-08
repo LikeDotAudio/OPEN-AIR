@@ -11,146 +11,162 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Master Output": {
+      "Output_Waveform": {
         "type": "OcaBlock",
         "description": {
-          "En": "Master Output",
-          "Fr": "Sortie principale",
-          "De": "Hauptausgang",
-          "Es": "Salida principal",
-          "show_label": true
+          "En": "Output and waveform",
+          "Fr": "Output and waveform",
+          "De": "Output and waveform",
+          "Es": "Output and waveform",
+          "show_label": false
         },
-        "layout_columns": 1,
+        "layout_columns": 2,
         "layout": {
           "weight": 0
         },
         "fields": {
-          "Output": {
-            "type": "_TrapezoidButton",
-            "AES70": "OcaBooleanActuator",
-            "label": {
-              "text": {
-                "En": "Output",
-                "Fr": "Sortie",
-                "De": "Ausgang",
-                "Es": "Salida"
-              },
-              "active": {
-                "text": {
-                  "En": "ON",
-                  "Fr": "ON",
-                  "De": "ON",
-                  "Es": "ON"
+          "Master Output": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Master Output",
+              "Fr": "Sortie principale",
+              "De": "Hauptausgang",
+              "Es": "Salida principal",
+              "show_label": true
+            },
+            "layout_columns": 1,
+            "layout": {
+              "weight": 0
+            },
+            "fields": {
+              "Output": {
+                "type": "_TrapezoidButton",
+                "AES70": "OcaBooleanActuator",
+                "label": {
+                  "text": {
+                    "En": "Output",
+                    "Fr": "Sortie",
+                    "De": "Ausgang",
+                    "Es": "Salida"
+                  },
+                  "active": {
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    },
+                    "text_size": 14,
+                    "text_color": "#ffffff"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    },
+                    "text_size": 14,
+                    "text_color": "#111111"
+                  }
                 },
-                "text_size": 14,
-                "text_color": "#ffffff"
-              },
-              "inactive": {
-                "text": {
-                  "En": "OFF",
-                  "Fr": "OFF",
-                  "De": "OFF",
-                  "Es": "OFF"
+                "value": {
+                  "default_value": 0
                 },
-                "text_size": 14,
-                "text_color": "#111111"
+                "latching": true,
+                "width": 240,
+                "height": 96,
+                "slant": 18,
+                "text_size": 16,
+                "color_active": "#C81E1E",
+                "color_inactive": "#F2F2F2",
+                "led_color": "#FF6B6B",
+                "yak_handler": {
+                  "enable": true,
+                  "yak_type": "set",
+                  "sub_path": "Generator",
+                  "command": "Set_Output_State",
+                  "input_name": "state",
+                  "converter": "bool_to_int",
+                  "readback": "generator_settings"
+                },
+                "yak_listen": "generator_settings/output"
               }
-            },
-            "value": {
-              "default_value": 0
-            },
-            "latching": true,
-            "width": 240,
-            "height": 96,
-            "slant": 18,
-            "text_size": 16,
-            "color_active": "#C81E1E",
-            "color_inactive": "#F2F2F2",
-            "led_color": "#FF6B6B",
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "set",
-              "sub_path": "Generator",
-              "command": "Set_Output_State",
-              "input_name": "state",
-              "converter": "bool_to_int",
-              "readback": "generator_settings"
-            },
-            "yak_listen": "generator_settings/output"
-          }
-        }
-      },
-      "Waveform": {
-        "type": "OcaBlock",
-        "description": {
-          "En": "Waveform",
-          "Fr": "Forme d'onde",
-          "De": "Wellenform",
-          "Es": "Forma de onda",
-          "show_label": true
-        },
-        "layout_columns": 1,
-        "layout": {
-          "weight": 0
-        },
-        "fields": {
-          "Function": {
-            "type": "SelectorSwitch",
-            "positions": [
-              "SIN",
-              "SQU",
-              "RAMP",
-              "PULS",
-              "NOIS",
-              "USER"
-            ],
-            "position_labels": [
-              "SINE",
-              "SQUARE",
-              "TRIANGLE",
-              "PULSE",
-              "NOISE",
-              "ARB"
-            ],
-            "value": {
-              "default_value": "SIN"
-            },
-            "label": {
+            }
+          },
+          "Waveform": {
+            "type": "OcaBlock",
+            "description": {
               "En": "Waveform",
               "Fr": "Forme d'onde",
               "De": "Wellenform",
-              "Es": "Forma de onda"
+              "Es": "Forma de onda",
+              "show_label": true
             },
+            "layout_columns": 1,
             "layout": {
-              "height": 200,
-              "width": 200,
-              "padx": 10,
-              "pady": 10
+              "weight": 0
             },
-            "width": 200,
-            "height": 200,
-            "continuous": false,
-            "shape": "circle",
-            "pointer_style": "line",
-            "indicator_color": "#FF9900",
-            "cosmetics": {
-              "colors": {
-                "primary": "#FF9900",
-                "secondary": "#444444",
-                "active": "#FF9900",
-                "text": "#888888"
+            "fields": {
+              "Function": {
+                "type": "SelectorSwitch",
+                "positions": [
+                  "SIN",
+                  "SQU",
+                  "RAMP",
+                  "PULS",
+                  "NOIS",
+                  "USER"
+                ],
+                "position_labels": [
+                  "SINE",
+                  "SQUARE",
+                  "TRIANGLE",
+                  "PULSE",
+                  "NOISE",
+                  "ARB"
+                ],
+                "value": {
+                  "default_value": "SIN"
+                },
+                "label": {
+                  "En": "Waveform",
+                  "Fr": "Forme d'onde",
+                  "De": "Wellenform",
+                  "Es": "Forma de onda"
+                },
+                "layout": {
+                  "height": 200,
+                  "width": 200,
+                  "padx": 10,
+                  "pady": 10
+                },
+                "width": 200,
+                "height": 200,
+                "continuous": false,
+                "shape": "circle",
+                "pointer_style": "line",
+                "indicator_color": "#FF9900",
+                "cosmetics": {
+                  "colors": {
+                    "primary": "#FF9900",
+                    "secondary": "#444444",
+                    "active": "#FF9900",
+                    "text": "#888888"
+                  }
+                },
+                "yak_handler": {
+                  "enable": true,
+                  "yak_type": "set",
+                  "sub_path": "Generator",
+                  "command": "Set_Function_Shape",
+                  "input_name": "shape",
+                  "converter": "",
+                  "readback": "generator_settings"
+                },
+                "yak_listen": "generator_settings/function"
               }
-            },
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "set",
-              "sub_path": "Generator",
-              "command": "Set_Function_Shape",
-              "input_name": "shape",
-              "converter": "",
-              "readback": "generator_settings"
-            },
-            "yak_listen": "generator_settings/function"
+            }
           }
         }
       },
@@ -252,6 +268,531 @@
             },
             "units": "kHz",
             "show_label": true,
+            "yak_domain": "freq",
+            "yak_listen": "generator_settings/frequency"
+          },
+          "Frequency_Presets": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "label": {
+              "En": "Frequency Presets",
+              "Fr": "Fréquences prédéfinies",
+              "De": "Frequenz-Vorgaben",
+              "Es": "Frecuencias predefinidas"
+            },
+            "selection_mode": "radio",
+            "layout": {
+              "height": 30,
+              "max_cols": 9,
+              "width": "100%",
+              "stretch": "width",
+              "font": 10,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "value": "0.05",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "50 Hz",
+                      "Fr": "50 Hz",
+                      "De": "50 Hz",
+                      "Es": "50 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "50 Hz",
+                      "Fr": "50 Hz",
+                      "De": "50 Hz",
+                      "Es": "50 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "2": {
+                "value": "0.1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "100 Hz",
+                      "Fr": "100 Hz",
+                      "De": "100 Hz",
+                      "Es": "100 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "100 Hz",
+                      "Fr": "100 Hz",
+                      "De": "100 Hz",
+                      "Es": "100 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "3": {
+                "value": "0.2",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "200 Hz",
+                      "Fr": "200 Hz",
+                      "De": "200 Hz",
+                      "Es": "200 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "200 Hz",
+                      "Fr": "200 Hz",
+                      "De": "200 Hz",
+                      "Es": "200 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "4": {
+                "value": "0.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "500 Hz",
+                      "Fr": "500 Hz",
+                      "De": "500 Hz",
+                      "Es": "500 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "500 Hz",
+                      "Fr": "500 Hz",
+                      "De": "500 Hz",
+                      "Es": "500 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "5": {
+                "value": "0.7",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "700 Hz",
+                      "Fr": "700 Hz",
+                      "De": "700 Hz",
+                      "Es": "700 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "700 Hz",
+                      "Fr": "700 Hz",
+                      "De": "700 Hz",
+                      "Es": "700 Hz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "6": {
+                "value": "1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1 kHz",
+                      "Fr": "1 kHz",
+                      "De": "1 kHz",
+                      "Es": "1 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1 kHz",
+                      "Fr": "1 kHz",
+                      "De": "1 kHz",
+                      "Es": "1 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              },
+              "7": {
+                "value": "1.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1.5 kHz",
+                      "Fr": "1.5 kHz",
+                      "De": "1.5 kHz",
+                      "Es": "1.5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1.5 kHz",
+                      "Fr": "1.5 kHz",
+                      "De": "1.5 kHz",
+                      "Es": "1.5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "8": {
+                "value": "2",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2 kHz",
+                      "Fr": "2 kHz",
+                      "De": "2 kHz",
+                      "Es": "2 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2 kHz",
+                      "Fr": "2 kHz",
+                      "De": "2 kHz",
+                      "Es": "2 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "9": {
+                "value": "2.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2.5 kHz",
+                      "Fr": "2.5 kHz",
+                      "De": "2.5 kHz",
+                      "Es": "2.5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2.5 kHz",
+                      "Fr": "2.5 kHz",
+                      "De": "2.5 kHz",
+                      "Es": "2.5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "10": {
+                "value": "3",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "3 kHz",
+                      "Fr": "3 kHz",
+                      "De": "3 kHz",
+                      "Es": "3 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "3 kHz",
+                      "Fr": "3 kHz",
+                      "De": "3 kHz",
+                      "Es": "3 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "11": {
+                "value": "4",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "4 kHz",
+                      "Fr": "4 kHz",
+                      "De": "4 kHz",
+                      "Es": "4 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "4 kHz",
+                      "Fr": "4 kHz",
+                      "De": "4 kHz",
+                      "Es": "4 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "12": {
+                "value": "5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "5 kHz",
+                      "Fr": "5 kHz",
+                      "De": "5 kHz",
+                      "Es": "5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "5 kHz",
+                      "Fr": "5 kHz",
+                      "De": "5 kHz",
+                      "Es": "5 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "13": {
+                "value": "7",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "7 kHz",
+                      "Fr": "7 kHz",
+                      "De": "7 kHz",
+                      "Es": "7 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "7 kHz",
+                      "Fr": "7 kHz",
+                      "De": "7 kHz",
+                      "Es": "7 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "14": {
+                "value": "9",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "9 kHz",
+                      "Fr": "9 kHz",
+                      "De": "9 kHz",
+                      "Es": "9 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "9 kHz",
+                      "Fr": "9 kHz",
+                      "De": "9 kHz",
+                      "Es": "9 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "15": {
+                "value": "10",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "10 kHz",
+                      "Fr": "10 kHz",
+                      "De": "10 kHz",
+                      "Es": "10 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "10 kHz",
+                      "Fr": "10 kHz",
+                      "De": "10 kHz",
+                      "Es": "10 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "16": {
+                "value": "12",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "12 kHz",
+                      "Fr": "12 kHz",
+                      "De": "12 kHz",
+                      "Es": "12 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "12 kHz",
+                      "Fr": "12 kHz",
+                      "De": "12 kHz",
+                      "Es": "12 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "17": {
+                "value": "15",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "15 kHz",
+                      "Fr": "15 kHz",
+                      "De": "15 kHz",
+                      "Es": "15 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "15 kHz",
+                      "Fr": "15 kHz",
+                      "De": "15 kHz",
+                      "Es": "15 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "18": {
+                "value": "20",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "20 kHz",
+                      "Fr": "20 kHz",
+                      "De": "20 kHz",
+                      "Es": "20 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "20 kHz",
+                      "Fr": "20 kHz",
+                      "De": "20 kHz",
+                      "Es": "20 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Generator",
+              "command": "Set_Frequency",
+              "input_name": "freq",
+              "converter": "khz_to_hz",
+              "readback": "generator_settings"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "units": "kHz",
             "yak_domain": "freq",
             "yak_listen": "generator_settings/frequency"
           }
@@ -356,7 +897,402 @@
             "units": "Vpp",
             "show_label": true,
             "yak_domain": "ampl",
-            "yak_listen": "generator_settings/amplitude"
+            "yak_listen": "generator_settings/amplitude",
+            "yak_domain_from": {
+              "yak_listen": "shape_settings/voltage_unit",
+              "default": "VPP",
+              "cases": {
+                "VPP": {
+                  "min": "0.01",
+                  "max": "10",
+                  "units": "Vpp"
+                },
+                "VRMS": {
+                  "min": "0.0035",
+                  "max": "3.54",
+                  "units": "Vrms"
+                },
+                "DBM": {
+                  "min": "-35.1",
+                  "max": "23.98",
+                  "units": "dBm"
+                }
+              }
+            }
+          },
+          "Amplitude_Presets": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "label": {
+              "En": "Amplitude Presets",
+              "Fr": "Amplitudes prédéfinies",
+              "De": "Amplituden-Vorgaben",
+              "Es": "Amplitudes predefinidas"
+            },
+            "selection_mode": "radio",
+            "layout": {
+              "height": 30,
+              "max_cols": 6,
+              "width": "100%",
+              "stretch": "width",
+              "font": 10,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF902C",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 1.944
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "value": "0.1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "0.1 V",
+                      "Fr": "0.1 V",
+                      "De": "0.1 V",
+                      "Es": "0.1 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "0.1 V",
+                      "Fr": "0.1 V",
+                      "De": "0.1 V",
+                      "Es": "0.1 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "2": {
+                "value": "0.3",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "0.3 V",
+                      "Fr": "0.3 V",
+                      "De": "0.3 V",
+                      "Es": "0.3 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "0.3 V",
+                      "Fr": "0.3 V",
+                      "De": "0.3 V",
+                      "Es": "0.3 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "3": {
+                "value": "0.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "0.5 V",
+                      "Fr": "0.5 V",
+                      "De": "0.5 V",
+                      "Es": "0.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "0.5 V",
+                      "Fr": "0.5 V",
+                      "De": "0.5 V",
+                      "Es": "0.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "4": {
+                "value": "0.7",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "0.7 V",
+                      "Fr": "0.7 V",
+                      "De": "0.7 V",
+                      "Es": "0.7 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "0.7 V",
+                      "Fr": "0.7 V",
+                      "De": "0.7 V",
+                      "Es": "0.7 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "5": {
+                "value": "1",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1 V",
+                      "Fr": "1 V",
+                      "De": "1 V",
+                      "Es": "1 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1 V",
+                      "Fr": "1 V",
+                      "De": "1 V",
+                      "Es": "1 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": true
+              },
+              "6": {
+                "value": "1.234",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1.234 V",
+                      "Fr": "1.234 V",
+                      "De": "1.234 V",
+                      "Es": "1.234 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1.234 V",
+                      "Fr": "1.234 V",
+                      "De": "1.234 V",
+                      "Es": "1.234 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "7": {
+                "value": "1.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1.5 V",
+                      "Fr": "1.5 V",
+                      "De": "1.5 V",
+                      "Es": "1.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1.5 V",
+                      "Fr": "1.5 V",
+                      "De": "1.5 V",
+                      "Es": "1.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "8": {
+                "value": "1.7",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "1.7 V",
+                      "Fr": "1.7 V",
+                      "De": "1.7 V",
+                      "Es": "1.7 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "1.7 V",
+                      "Fr": "1.7 V",
+                      "De": "1.7 V",
+                      "Es": "1.7 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "9": {
+                "value": "2",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2 V",
+                      "Fr": "2 V",
+                      "De": "2 V",
+                      "Es": "2 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2 V",
+                      "Fr": "2 V",
+                      "De": "2 V",
+                      "Es": "2 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "10": {
+                "value": "2.5",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "2.5 V",
+                      "Fr": "2.5 V",
+                      "De": "2.5 V",
+                      "Es": "2.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "2.5 V",
+                      "Fr": "2.5 V",
+                      "De": "2.5 V",
+                      "Es": "2.5 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "11": {
+                "value": "3",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "3 V",
+                      "Fr": "3 V",
+                      "De": "3 V",
+                      "Es": "3 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "3 V",
+                      "Fr": "3 V",
+                      "De": "3 V",
+                      "Es": "3 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              },
+              "12": {
+                "value": "4",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "4 V",
+                      "Fr": "4 V",
+                      "De": "4 V",
+                      "Es": "4 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "4 V",
+                      "Fr": "4 V",
+                      "De": "4 V",
+                      "Es": "4 V"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Generator",
+              "command": "Set_Amplitude",
+              "input_name": "amp",
+              "converter": "",
+              "readback": "generator_settings"
+            },
+            "value": {
+              "default_value": "1"
+            },
+            "units": "Vpp",
+            "yak_domain": "ampl",
+            "yak_listen": "generator_settings/amplitude",
+            "yak_visible_when": {
+              "yak_listen": "shape_settings/voltage_unit",
+              "equals": "VPP",
+              "hide_until_known": false
+            }
           }
         }
       },
@@ -580,7 +1516,8 @@
               "command": "generator_settings",
               "input_name": "",
               "converter": ""
-            }
+            },
+            "yak_nab_on_load": true
           },
           "Read_Apply_String": {
             "type": "_GuiActuator",
@@ -677,6 +1614,10 @@
             "yak_listen": "generator_settings/function",
             "layout": {
               "height": 28
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
             }
           },
           "Frequency": {
@@ -707,7 +1648,11 @@
             "layout": {
               "height": 28
             },
-            "units": "kHz"
+            "units": "Hz",
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            }
           },
           "Amplitude": {
             "type": "_Value",
@@ -737,7 +1682,26 @@
             "layout": {
               "height": 28
             },
-            "units": "V"
+            "units": "V",
+            "yak_domain_from": {
+              "yak_listen": "shape_settings/voltage_unit",
+              "default": "VPP",
+              "cases": {
+                "VPP": {
+                  "units": "Vpp"
+                },
+                "VRMS": {
+                  "units": "Vrms"
+                },
+                "DBM": {
+                  "units": "dBm"
+                }
+              }
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            }
           },
           "Offset": {
             "type": "_Value",
@@ -767,7 +1731,11 @@
             "layout": {
               "height": 28
             },
-            "units": "V"
+            "units": "V",
+            "read_only": true,
+            "value": {
+              "default_value": "—"
+            }
           },
           "Output": {
             "type": "_Value",
@@ -796,6 +1764,10 @@
             "yak_listen": "generator_settings/output",
             "layout": {
               "height": 28
+            },
+            "read_only": true,
+            "value": {
+              "default_value": "—"
             }
           }
         }
@@ -1701,7 +2673,8 @@
               "command": "shape_settings",
               "input_name": "",
               "converter": ""
-            }
+            },
+            "yak_nab_on_load": true
           },
           "Read_Settings": {
             "type": "_GuiActuator",
@@ -1941,11 +2914,11 @@
           "weight": 0
         },
         "fields": {
-          "AM_ON": {
-            "type": "_GuiActuator",
+          "AM_State": {
+            "type": "_GuiButtonToggle",
             "AES70": "OcaBooleanActuator",
             "label": {
-              "inactive": {
+              "active": {
                 "text": {
                   "En": "AM ON",
                   "Fr": "AM ON",
@@ -1953,51 +2926,8 @@
                   "Es": "AM ON"
                 },
                 "text_size": 11,
-                "text_color": "#cccccc"
-              }
-            },
-            "layout": {
-              "height": 34,
-              "width": "100%",
-              "stretch": "width",
-              "font": 11,
-              "padx": 3,
-              "pady": 3
-            },
-            "style": {
-              "active": {
-                "font_style": "bold",
-                "font_size": null,
-                "text_color": "#FF902C",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "border_thickness": 2,
-                "glow_intensity": 1.944
+                "text_color": "#FF902C"
               },
-              "inactive": {
-                "font_style": "normal",
-                "font_size": null,
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "border_color": "#555555",
-                "border_thickness": 2,
-                "glow_intensity": 0
-              }
-            },
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "do",
-              "sub_path": "Generator",
-              "command": "AM_State_ON",
-              "input_name": "",
-              "converter": "",
-              "readback": "modulation_settings"
-            }
-          },
-          "AM_OFF": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label": {
               "inactive": {
                 "text": {
                   "En": "AM OFF",
@@ -2007,7 +2937,8 @@
                 },
                 "text_size": 11,
                 "text_color": "#cccccc"
-              }
+              },
+              "show_label": false
             },
             "layout": {
               "height": 34,
@@ -2037,21 +2968,26 @@
                 "glow_intensity": 0
               }
             },
+            "value": {
+              "default_value": 0
+            },
+            "latching": true,
             "yak_handler": {
               "enable": true,
-              "yak_type": "do",
+              "yak_type": "set",
               "sub_path": "Generator",
-              "command": "AM_State_OFF",
-              "input_name": "",
-              "converter": "",
+              "command": "Set_Am_State",
+              "input_name": "value",
+              "converter": "bool_to_int",
               "readback": "modulation_settings"
-            }
+            },
+            "yak_listen": "modulation_settings/am_state"
           },
-          "FM_ON": {
-            "type": "_GuiActuator",
+          "FM_State": {
+            "type": "_GuiButtonToggle",
             "AES70": "OcaBooleanActuator",
             "label": {
-              "inactive": {
+              "active": {
                 "text": {
                   "En": "FM ON",
                   "Fr": "FM ON",
@@ -2059,51 +2995,8 @@
                   "Es": "FM ON"
                 },
                 "text_size": 11,
-                "text_color": "#cccccc"
-              }
-            },
-            "layout": {
-              "height": 34,
-              "width": "100%",
-              "stretch": "width",
-              "font": 11,
-              "padx": 3,
-              "pady": 3
-            },
-            "style": {
-              "active": {
-                "font_style": "bold",
-                "font_size": null,
-                "text_color": "#FF902C",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "border_thickness": 2,
-                "glow_intensity": 1.944
+                "text_color": "#FF902C"
               },
-              "inactive": {
-                "font_style": "normal",
-                "font_size": null,
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "border_color": "#555555",
-                "border_thickness": 2,
-                "glow_intensity": 0
-              }
-            },
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "do",
-              "sub_path": "Generator",
-              "command": "FM_State_ON",
-              "input_name": "",
-              "converter": "",
-              "readback": "modulation_settings"
-            }
-          },
-          "FM_OFF": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label": {
               "inactive": {
                 "text": {
                   "En": "FM OFF",
@@ -2113,7 +3006,8 @@
                 },
                 "text_size": 11,
                 "text_color": "#cccccc"
-              }
+              },
+              "show_label": false
             },
             "layout": {
               "height": 34,
@@ -2143,15 +3037,20 @@
                 "glow_intensity": 0
               }
             },
+            "value": {
+              "default_value": 0
+            },
+            "latching": true,
             "yak_handler": {
               "enable": true,
-              "yak_type": "do",
+              "yak_type": "set",
               "sub_path": "Generator",
-              "command": "FM_State_OFF",
-              "input_name": "",
-              "converter": "",
+              "command": "Set_Fm_State",
+              "input_name": "value",
+              "converter": "bool_to_int",
               "readback": "modulation_settings"
-            }
+            },
+            "yak_listen": "modulation_settings/fm_state"
           },
           "Read_Modulation": {
             "type": "_GuiActuator",
@@ -2203,7 +3102,8 @@
               "command": "modulation_settings",
               "input_name": "",
               "converter": ""
-            }
+            },
+            "yak_nab_on_load": true
           },
           "Read_Burst": {
             "type": "_GuiActuator",
@@ -4254,7 +5154,8 @@
               "command": "Get_System_Beeper_State",
               "input_name": "",
               "converter": ""
-            }
+            },
+            "yak_nab_on_load": true
           },
           "Read_Calibration_Count": {
             "type": "_GuiActuator",

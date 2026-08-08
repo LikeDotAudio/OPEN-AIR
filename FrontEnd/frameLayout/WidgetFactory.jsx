@@ -48,10 +48,16 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   // wrapper width/height for these and let FieldComponent's toggler branch size
   // the grid (height:auto). [[web-frontend-layout-quirks]]
   const _t = (node.type || '').toLowerCase();
+  const _isButton = _t.includes('button') || _t.includes('toggle') || _t.includes('actuator');
   const _isButtonGroup = _t.includes('toggler')
-    || ((_t.includes('button') || _t.includes('toggle') || _t.includes('actuator'))
-        && node.options && typeof node.options === 'object'
+    || (_isButton && node.options && typeof node.options === 'object'
         && Object.keys(node.options).length > 1);
+  // The same is true of a SINGLE button: the widget draws itself at
+  // layout.width/height, so pinning the wrapper to those numbers too spends the
+  // budget twice — FieldComponent's 10px button padding then has nowhere to
+  // live, and a 34px-tall actuator spilled over the block below it. Let the
+  // wrapper size to the button it holds.
+  const _sizeWrapper = !_isButtonGroup && !_isButton;
 
   // Map JSON layout constraints to CSS Grid attributes for reactive container sizing
   const gridStyles = {
@@ -71,8 +77,8 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     // keyword-routed ones (fader/meter/plot/graph/...), not just registered
     // containers. Without this a plot with layout.height:"100%" collapsed to its
     // min-height because the wrapper had no height for the % chain to resolve.
-    ...((node.layout?.width != null && !_isButtonGroup) ? { width: window.oaCssLen(node.layout.width) } : {}),
-    ...((node.layout?.height != null && !_isButtonGroup) ? { height: window.oaCssLen(node.layout.height), minHeight: 0 } : {}),
+    ...((node.layout?.width != null && _sizeWrapper) ? { width: window.oaCssLen(node.layout.width) } : {}),
+    ...((node.layout?.height != null && _sizeWrapper) ? { height: window.oaCssLen(node.layout.height), minHeight: 0 } : {}),
     // Tk grid padx/pady -> external spacing around the element within its cell.
     // box-sizing keeps the padding from overflowing fill containers.
     ...((node.layout?.padx != null || node.layout?.pady != null)

@@ -194,6 +194,21 @@ fn host_of(resource: &str) -> String {
         .to_string()
 }
 
+/// Which devices a group view gathers, by the manifest's `by` axis.
+///
+/// `chassis` and `host` both ask where an instrument is PLUGGED IN, and answer
+/// with a group of one for anything standing on its own. Two signal generators
+/// at two addresses are exactly that — and "link both generators" is exactly
+/// the view they need, so `type` gathers every instrument of the type wherever
+/// it sits. The bench is the axis, not the box.
+fn group_key(axis: &str, itype: &str, resource: &str) -> String {
+    match axis {
+        "host" => host_of(resource),
+        "type" | "all" => itype.to_string(),
+        _ => chassis_of(resource),
+    }
+}
+
 /// Folder name for one device — this becomes its tab label.
 ///
 /// Model alone is not identity: this bench has eight 34401As reporting serial
@@ -229,28 +244,30 @@ fn device_slug(model: &str, resource: &str) -> String {
 /// single differing line is the only thing the eight hand-maintained module
 /// files ever encoded.
 fn substitute(node: &Value, tokens: &BTreeMap<String, String>) -> Value {
-    let expand = |s: &str| -> String {
-        token_re()
-            .replace_all(s, |c: &regex::Captures| {
-                tokens
-                    .get(&c[1])
-                    .cloned()
-                    .unwrap_or_else(|| c[0].to_string())
-            })
-            .into_owned()
-    };
     match node {
         Value::Object(map) => {
             let mut out = Map::new();
             for (k, v) in map {
-                out.insert(expand(k), substitute(v, tokens));
+                out.insert(expand_tokens(k, tokens), substitute(v, tokens));
             }
             Value::Object(out)
         }
         Value::Array(items) => Value::Array(items.iter().map(|v| substitute(v, tokens)).collect()),
-        Value::String(s) => Value::String(expand(s)),
+        Value::String(s) => Value::String(expand_tokens(s, tokens)),
         other => other.clone(),
     }
+}
+
+/// One string's `${...}`, filled from `tokens`. An unknown token is left as
+/// written, so a pass that does not know `n` yet hands `${n}` on intact to the
+/// pass that does — which is what lets a channel strip survive `prepare` and be
+/// repeated afterwards.
+fn expand_tokens(s: &str, tokens: &BTreeMap<String, String>) -> String {
+    token_re()
+        .replace_all(s, |c: &regex::Captures| {
+            tokens.get(&c[1]).cloned().unwrap_or_else(|| c[0].to_string())
+        })
+        .into_owned()
 }
 
 /// Resolve `"yak_domain": "volt"` against the model's capability sheet.
@@ -498,11 +515,19 @@ fn prepare(
     apply_domains(&mut doc, caps);
 
     // SCPI channel numbering is 1-based; the GPIB secondary address is 0-based.
+    //
+    // Both spellings of the index go out, because both are in use across the
+    // vocabularies this binds: a mainframe addresses a slot as
+    // `INST:NSEL <chan>`, the Rigol a channel as `:CHANnel<n>:SCALe`. They name
+    // the same fact, and a strip that stands for one channel means the same
+    // thing by either.
     let mut params = BTreeMap::new();
     if let Some(chan) = marks.get("chan") {
         params.insert("chan".to_string(), chan.clone());
+        params.insert("n".to_string(), chan.clone());
     } else if let Some(s) = slot {
         params.insert("chan".to_string(), (s + 1).to_string());
+        params.insert("n".to_string(), (s + 1).to_string());
     }
 
     let handlers = bind_node(&mut doc, &dev.write_topic, &dev.model, &params);
@@ -513,6 +538,195 @@ fn prepare(
         bind_readout(&mut doc, &format!("{base}/Read"));
     }
     (doc, handlers)
+}
+
+/// How many analog channels this model declares, or None if it says nothing.
+fn channel_count(caps: &HashMap<String, Value>, model: &str) -> Option<u64> {
+    caps.get(model)
+        .and_then(|c| c.get("channels"))
+        .and_then(|c| c.as_u64())
+        .filter(|n| *n > 0)
+}
+
+/// What one channel is called, and what colour it wears.
+///
+/// The colours are the scope's own: channel 1 yellow, 2 green, 3 blue, 4 purple,
+/// which is how every four-channel instrument on this bench paints its screen.
+/// They live here rather than in the panel because a panel authored once cannot
+/// carry a different colour per copy — and a trace, the strip that drives it and
+/// the row that measures it must all be the same colour or the tab stops reading
+/// as one channel.
+fn channel_tokens(i: u64) -> BTreeMap<String, String> {
+    const COLORS: [&str; 4] = ["#FFD400", "#3DDC4A", "#3D9BFF", "#B06CFF"];
+    let mut t = BTreeMap::new();
+    t.insert("n".to_string(), i.to_string());
+    t.insert("chan".to_string(), i.to_string());
+    t.insert("label".to_string(), format!("CH{i}"));
+    t.insert(
+        "color".to_string(),
+        COLORS[((i as usize).saturating_sub(1)) % COLORS.len()].to_string(),
+    );
+    t
+}
+
+/// Repeat every `${n}` thing in a tab, once per channel the model has.
+///
+/// `<Type>_N.json` repeats a block into a GROUP panel — the bank of eight, the
+/// quads. A scope wants the same repetition INSIDE its own tabs: the amplitude
+/// tab is one channel strip authored once and stamped four times for the
+/// 4-channel Rigol, twice for a 54641D. Same convention, same tokens.
+///
+/// `${n}` marks the thing that repeats in the two places a panel can hold a
+/// list — a BLOCK NAME, and an ARRAY ENTRY. The name is what makes N copies of a
+/// strip N distinct widgets rather than one claiming to exist N times; the array
+/// is how the DATASET graph names one series per channel, and it has no names to
+/// carry the mark. Everything else is left alone.
+///
+/// Runs AFTER `prepare`, which leaves `${n}` alone because it holds no such
+/// token. The copies therefore inherit the device's topics and model binding
+/// already, and this adds only what differs between them: the channel each one
+/// addresses.
+///
+/// A model that declares no channel count loses the marked block rather than
+/// showing `${n}` on screen — an unexpanded token in a label is a widget that
+/// lies about which channel it drives.
+fn repeat_channels(doc: &mut Value, model: &str, channels: Option<u64>) {
+    let Some(panel) = doc.as_object_mut().and_then(|o| o.values_mut().next()) else { return };
+    if !marked(panel) {
+        return;
+    }
+    let Some(n) = channels else {
+        println!(
+            "[instrument-gui] {model} declares no channel count in its .gui — \
+             its per-channel controls are dropped"
+        );
+        // Fall through with zero copies rather than leaving `${n}` on screen.
+        strip_marked(panel);
+        return;
+    };
+
+    if let Some(blocks) = panel.get_mut("blocks").and_then(|b| b.as_object_mut()) {
+        let mut out = Map::new();
+        for (name, block) in blocks.iter() {
+            if !name.contains("${n}") {
+                out.insert(name.clone(), block.clone());
+                continue;
+            }
+            for (tokens, copy) in copies(block, n) {
+                out.insert(expand_tokens(name, &tokens), copy);
+            }
+        }
+        *blocks = out;
+    }
+    repeat_arrays(panel, n);
+}
+
+/// One prepared copy per channel: tokens filled, handlers told their index.
+fn copies(node: &Value, channels: u64) -> Vec<(BTreeMap<String, String>, Value)> {
+    (1..=channels)
+        .map(|i| {
+            let tokens = channel_tokens(i);
+            let mut copy = substitute(node, &tokens);
+            stamp_channel(&mut copy, &i.to_string());
+            (tokens, copy)
+        })
+        .collect()
+}
+
+/// Does `${n}` appear anywhere below here — in a key or in a string?
+fn marked(node: &Value) -> bool {
+    match node {
+        Value::Object(map) => map
+            .iter()
+            .any(|(k, v)| k.contains("${n}") || marked(v)),
+        Value::Array(items) => items.iter().any(marked),
+        Value::String(s) => s.contains("${n}"),
+        _ => false,
+    }
+}
+
+/// Expand every marked ARRAY ENTRY into one entry per channel.
+///
+/// Marked BLOCKS are already gone by the time this runs and their copies carry
+/// no `${n}`, so this only ever reaches lists that were authored per-channel —
+/// the graph's `traces`, and the `sources` its axis picks the freshest of.
+fn repeat_arrays(node: &mut Value, channels: u64) {
+    match node {
+        Value::Array(items) => {
+            let mut out = Vec::with_capacity(items.len());
+            for item in items.iter() {
+                if marked(item) {
+                    out.extend(copies(item, channels).into_iter().map(|(_, v)| v));
+                } else {
+                    out.push(item.clone());
+                }
+            }
+            for item in out.iter_mut() {
+                repeat_arrays(item, channels);
+            }
+            *items = out;
+        }
+        Value::Object(map) => {
+            for (_, v) in map.iter_mut() {
+                repeat_arrays(v, channels);
+            }
+        }
+        _ => {}
+    }
+}
+
+/// Drop every marked block and array entry, for a model with no channel count.
+fn strip_marked(panel: &mut Value) {
+    if let Some(blocks) = panel.get_mut("blocks").and_then(|b| b.as_object_mut()) {
+        blocks.retain(|name, block| !name.contains("${n}") && !marked(block));
+    }
+    fn prune(node: &mut Value) {
+        match node {
+            Value::Array(items) => {
+                items.retain(|i| !marked(i));
+                for item in items.iter_mut() {
+                    prune(item);
+                }
+            }
+            Value::Object(map) => {
+                for (_, v) in map.iter_mut() {
+                    prune(v);
+                }
+            }
+            _ => {}
+        }
+    }
+    prune(panel);
+}
+
+/// Tell every handler in one repeated strip which channel it speaks for.
+///
+/// `prepare` already stamped `target`, `model` and the topics; only the index is
+/// per-copy. Inserted into the existing `params` rather than replacing it, so a
+/// slot stamped upstream is not lost.
+fn stamp_channel(node: &mut Value, chan: &str) {
+    match node {
+        Value::Object(map) => {
+            if let Some(Value::Object(handler)) = map.get_mut("yak_handler") {
+                let params = handler
+                    .entry("params".to_string())
+                    .or_insert_with(|| Value::Object(Map::new()));
+                if let Value::Object(p) = params {
+                    p.insert("chan".to_string(), Value::String(chan.to_string()));
+                    p.insert("n".to_string(), Value::String(chan.to_string()));
+                }
+            }
+            for (_, v) in map.iter_mut() {
+                stamp_channel(v, chan);
+            }
+        }
+        Value::Array(items) => {
+            for item in items {
+                stamp_channel(item, chan);
+            }
+        }
+        _ => {}
+    }
 }
 
 // ── Files ────────────────────────────────────────────────────────────────────
@@ -623,8 +837,11 @@ fn instantiate(
         return (0, 0);
     };
 
+    let channels = channel_count(caps, &dev.model);
+
     if entries.len() == 1 {
-        let (bound, handlers) = prepare(&doc, dev, None, caps);
+        let (mut bound, handlers) = prepare(&doc, dev, None, caps);
+        repeat_channels(&mut bound, &dev.model, channels);
         write_panel(&out_dir.join(format!("{itype}.json")), &bound);
         return (1, handlers);
     }
@@ -642,7 +859,8 @@ fn instantiate(
         for (j, (name, panel)) in stack.iter().enumerate() {
             let mut one = Map::new();
             one.insert(name.clone(), panel.clone());
-            let (bound, n) = prepare(&Value::Object(one), dev, None, caps);
+            let (mut bound, n) = prepare(&Value::Object(one), dev, None, caps);
+            repeat_channels(&mut bound, &dev.model, channels);
             write_panel(
                 &out_dir.join(format!("{i}_{tab}")).join(format!("{j}_{name}.json")),
                 &bound,
@@ -796,27 +1014,17 @@ fn build_group_panels(
                     );
                     continue;
                 };
-                let members = (1..=n)
-                    .map(|i| {
-                        let mut t = BTreeMap::new();
-                        t.insert("n".to_string(), i.to_string());
-                        t.insert("chan".to_string(), i.to_string());
-                        t.insert("label".to_string(), format!("CH{i}"));
-                        (t, dev.clone())
-                    })
-                    .collect();
+                let members = (1..=n).map(|i| (channel_tokens(i), dev.clone())).collect();
                 instances.push((device_slug(&dev.model, &dev.resource), members));
             }
         } else {
-            let by_host = group.get("by").and_then(|b| b.as_str()) == Some("host");
+            let axis = group.get("by").and_then(|b| b.as_str()).unwrap_or("chassis");
             let mut chassis: BTreeMap<String, Vec<Device>> = BTreeMap::new();
             for dev in devices {
-                let key = if by_host {
-                    host_of(&dev.resource)
-                } else {
-                    chassis_of(&dev.resource)
-                };
-                chassis.entry(key).or_default().push(dev.clone());
+                chassis
+                    .entry(group_key(axis, itype, &dev.resource))
+                    .or_default()
+                    .push(dev.clone());
             }
             for (key, mut members) in chassis {
                 // Slot order where there are slots, address order otherwise, so
@@ -1092,6 +1300,21 @@ mod tests {
         assert_eq!(host_of("TCPIP::44.44.44.111::gpib7,4::INSTR"), "44.44.44.111");
     }
 
+
+    #[test]
+    fn two_generators_at_two_addresses_group_by_type() {
+        let a = "TCPIP::44.44.44.162::INSTR";
+        let b = "TCPIP::44.44.44.33::INSTR";
+        // Neither shares a box nor a gateway, so both of the older axes put
+        // each one in a group of one — and a group of one is dropped.
+        assert_ne!(group_key("chassis", "Generator", a), group_key("chassis", "Generator", b));
+        assert_ne!(group_key("host", "Generator", a), group_key("host", "Generator", b));
+        // The LINK page is a view over the bench, and there they meet.
+        assert_eq!(group_key("type", "Generator", a), group_key("type", "Generator", b));
+        // …but only with instruments of their own type.
+        assert_ne!(group_key("type", "Generator", a), group_key("type", "DMM", b));
+    }
+
     #[test]
     fn the_slug_distinguishes_identical_models() {
         // This bench has eight 34401As all reporting serial "0", so the model
@@ -1145,6 +1368,69 @@ mod tests {
         // SCPI channels are 1-based, the GPIB secondary address is 0-based —
         // slot 4 addresses itself as channel 5.
         assert_eq!(h["params"]["chan"], "5");
+    }
+
+    #[test]
+    fn a_marked_block_becomes_one_strip_per_channel() {
+        // The scope's amplitude tab is ONE channel strip in the panel file. The
+        // 4-channel Rigol must get four of them, each driving its own channel.
+        let mut doc = json!({ "AMPLITUDE": { "blocks": {
+            "Trigger": { "label": "Trigger" },
+            "Channel_${n}": {
+                "label": "${label}",
+                "fields": { "scale": {
+                    "color": "${color}",
+                    "yak_handler": { "command": "Set_Channel_Scale" },
+                } },
+            },
+        }}});
+        repeat_channels(&mut doc, "DS1104Z", Some(4));
+        let blocks = &doc["AMPLITUDE"]["blocks"];
+
+        for i in 1..=4 {
+            let strip = &blocks[format!("Channel_{i}")];
+            assert_eq!(strip["label"], format!("CH{i}"));
+            // The index is what turns `:CHANnel<n>:SCALe` into this channel's
+            // knob; without it all four strips drive channel one.
+            let params = &strip["fields"]["scale"]["yak_handler"]["params"];
+            assert_eq!(params["n"], i.to_string());
+            assert_eq!(params["chan"], i.to_string());
+        }
+        // Distinct colours, and the unmarked block untouched.
+        assert_ne!(blocks["Channel_1"]["fields"]["scale"]["color"],
+                   blocks["Channel_2"]["fields"]["scale"]["color"]);
+        assert_eq!(blocks["Trigger"]["label"], "Trigger");
+        assert!(blocks.get("Channel_${n}").is_none());
+    }
+
+    #[test]
+    fn a_marked_array_entry_repeats_too_and_a_two_channel_scope_gets_two() {
+        // The DATASET graph names one series per channel, and an array entry has
+        // no key to carry the mark — so the mark is inside it.
+        let mut doc = json!({ "DATASET": { "blocks": { "G": { "fields": { "g": {
+            "traces": [{ "id": "CH${n}", "yak_listen": "waveform_${n}/samples" }],
+        }}}}}});
+        repeat_channels(&mut doc, "54641D", Some(2));
+        let traces = doc["DATASET"]["blocks"]["G"]["fields"]["g"]["traces"]
+            .as_array()
+            .expect("still an array");
+        assert_eq!(traces.len(), 2);
+        assert_eq!(traces[0]["yak_listen"], "waveform_1/samples");
+        assert_eq!(traces[1]["id"], "CH2");
+    }
+
+    #[test]
+    fn a_model_with_no_channel_count_loses_the_strip_rather_than_showing_a_token() {
+        // `${n}` left on screen is a widget that lies about which channel it
+        // drives, and a knob that writes `:CHANnel${n}:SCALe` writes nothing.
+        let mut doc = json!({ "AMPLITUDE": { "blocks": {
+            "Trigger": { "label": "Trigger" },
+            "Channel_${n}": { "label": "${label}" },
+        }}});
+        repeat_channels(&mut doc, "TBS2000B", None);
+        let blocks = &doc["AMPLITUDE"]["blocks"];
+        assert!(blocks.get("Trigger").is_some());
+        assert_eq!(blocks.as_object().unwrap().len(), 1);
     }
 
     #[test]

@@ -6139,64 +6139,36 @@
       ],
       "subsystem": "Trigger"
     },
-    "Set_Syst_Name": {
-      "scpi": "SYST:NAME <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
+    "Set_Timebase_Delay": {
+      "scpi": ":TIMebase:MAIN:OFFSet <delay>",
+      "scpiFast": ":TIM:MAIN:OFFS <delay>",
+      "description": "Horizontal delay — where the trigger sits in the captured window.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "s"
+      },
+      "args": [
+        "delay"
+      ],
+      "group": "Horizontal Timebase Settings",
+      "subsystem": "TIMebase",
+      "notes": "Rigol calls this the timebase OFFSet, Agilent the POSition. One name for one knob. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     },
-    "Set_Trig_Lev": {
-      "scpi": "TRIG:LEV <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Trig_Slop": {
-      "scpi": "TRIG:SLOP <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Acq_State": {
-      "scpi": "ACQ:STATE <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Chan1_Stat": {
-      "scpi": "CHAN1:STAT <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Chan2_Stat": {
-      "scpi": "CHAN2:STAT <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Math_Fft_Cent": {
-      "scpi": "MATH:FFT:CENT <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Math_Fft_Span": {
-      "scpi": "MATH:FFT:SPAN <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Trig_Sour": {
-      "scpi": "TRIG:SOUR <value>",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Chan${n}_Scal": {
-      "scpi": "CHAN${n}:SCAL <value>",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Chan${n}_Offs": {
-      "scpi": "CHAN${n}:OFFS <value>",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
-      "unverified": true
-    },
-    "Set_Chan${n}_Coup": {
-      "scpi": "CHAN${n}:COUP <value>",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+    "Set_Trigger_Level": {
+      "scpi": ":TRIGger:EDGe:LEVel <level>",
+      "scpiFast": ":TRIG:EDG:LEV <level>",
+      "description": "Edge trigger threshold.",
+      "arg": {
+        "kind": "numeric",
+        "unit": "V"
+      },
+      "args": [
+        "level"
+      ],
+      "group": "Trigger Settings",
+      "subsystem": "TRIGger",
+      "notes": "The name the 54641D already uses for the same control. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     }
   },
@@ -6631,16 +6603,6 @@
       "description": "Stop",
       "group": "Root Action Commands",
       "subsystem": "Root"
-    },
-    "Do_Trig_Forc": {
-      "scpi": "TRIG:FORC",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
-    },
-    "Do_Acq_Mod_Sing;run": {
-      "scpi": "ACQ:MOD SING;RUN",
-      "description": "Authored from a panel literal in Oscilloscope.json; never executed before.",
-      "unverified": true
     }
   },
   "rig": {},
@@ -10519,24 +10481,427 @@
       "group": "Immediate Measurement (:MEAS:ITEM?)",
       "subsystem": "MEASure"
     },
-    "Get_Meas_Vpp": {
-      "scpi": "MEAS:VPP?",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+    "channel_settings_1": {
+      "scpi": ":CHANnel1:DISPlay?;:CHANnel1:SCALe?;:CHANnel1:OFFSet?",
+      "scpiFast": ":CHAN1:DISP?;:CHAN1:SCAL?;:CHAN1:OFFS?",
+      "description": "Channel 1: on/off, volts per division and offset in one round trip.",
+      "subsystem": "CHANnel",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "The channel index is IN THE COMMAND, not a parameter, so the reply lands on `Reading/channel_settings_1/scale` and a four-strip panel can tell its channels apart. A parameterised verb answers under one name whichever channel it read, which no per-channel display can bind to. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     },
-    "Get_Meas_Vrms": {
-      "scpi": "MEAS:VRMS?",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+    "waveform_1": {
+      "scpi": ":WAVeform:SOURce CHANnel1;:WAVeform:MODE NORMal;:WAVeform:FORMat ASCii;:WAVeform:DATA?;:WAVeform:XORigin?;:WAVeform:XINCrement?",
+      "scpiFast": ":WAV:SOUR CHAN1;:WAV:MODE NORM;:WAV:FORM ASC;:WAV:DATA?;:WAV:XOR?;:WAV:XINC?",
+      "description": "Channel 1's trace, with the time axis it was captured on.",
+      "subsystem": "WAVeform",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples",
+            "type": "CSV",
+            "unit": "V"
+          },
+          {
+            "name": "xorigin",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "xincrement",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
+      "notes": "Samples ALONE cannot be plotted — the time axis rides in the same reply, because fetching it separately lets the two disagree when the timebase moves between reads. The source and format writes lead the queries in ONE message so the reply is the trace that was asked for. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     },
-    "Get_Meas_Freq": {
-      "scpi": "MEAS:FREQ?",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+    "measure_1": {
+      "scpi": ":MEASure:ITEM? VPP,CHANnel1;:MEASure:ITEM? VRMS,CHANnel1;:MEASure:ITEM? FREQuency,CHANnel1",
+      "scpiFast": ":MEAS:ITEM? VPP,CHAN1;:MEAS:ITEM? VRMS,CHAN1;:MEAS:ITEM? FREQ,CHAN1",
+      "description": "Channel 1: Vpp, Vrms and frequency in one round trip.",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "freq",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Rigol takes the source as an ARGUMENT to :MEASure:ITEM?, so these three need no :MEASure:SOURce write and cannot be attributed to the wrong channel. No dB item exists on this firmware — the panel derives dBV from vrms. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     },
-    "Get_Meas_Db": {
-      "scpi": "MEAS:DB?",
-      "description": "Authored from a panel literal in Oscilloscope_N.json; never executed before.",
+    "channel_settings_2": {
+      "scpi": ":CHANnel2:DISPlay?;:CHANnel2:SCALe?;:CHANnel2:OFFSet?",
+      "scpiFast": ":CHAN2:DISP?;:CHAN2:SCAL?;:CHAN2:OFFS?",
+      "description": "Channel 2: on/off, volts per division and offset in one round trip.",
+      "subsystem": "CHANnel",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "The channel index is IN THE COMMAND, not a parameter, so the reply lands on `Reading/channel_settings_2/scale` and a four-strip panel can tell its channels apart. A parameterised verb answers under one name whichever channel it read, which no per-channel display can bind to. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "waveform_2": {
+      "scpi": ":WAVeform:SOURce CHANnel2;:WAVeform:MODE NORMal;:WAVeform:FORMat ASCii;:WAVeform:DATA?;:WAVeform:XORigin?;:WAVeform:XINCrement?",
+      "scpiFast": ":WAV:SOUR CHAN2;:WAV:MODE NORM;:WAV:FORM ASC;:WAV:DATA?;:WAV:XOR?;:WAV:XINC?",
+      "description": "Channel 2's trace, with the time axis it was captured on.",
+      "subsystem": "WAVeform",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples",
+            "type": "CSV",
+            "unit": "V"
+          },
+          {
+            "name": "xorigin",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "xincrement",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
+      "notes": "Samples ALONE cannot be plotted — the time axis rides in the same reply, because fetching it separately lets the two disagree when the timebase moves between reads. The source and format writes lead the queries in ONE message so the reply is the trace that was asked for. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "measure_2": {
+      "scpi": ":MEASure:ITEM? VPP,CHANnel2;:MEASure:ITEM? VRMS,CHANnel2;:MEASure:ITEM? FREQuency,CHANnel2",
+      "scpiFast": ":MEAS:ITEM? VPP,CHAN2;:MEAS:ITEM? VRMS,CHAN2;:MEAS:ITEM? FREQ,CHAN2",
+      "description": "Channel 2: Vpp, Vrms and frequency in one round trip.",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "freq",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Rigol takes the source as an ARGUMENT to :MEASure:ITEM?, so these three need no :MEASure:SOURce write and cannot be attributed to the wrong channel. No dB item exists on this firmware — the panel derives dBV from vrms. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "channel_settings_3": {
+      "scpi": ":CHANnel3:DISPlay?;:CHANnel3:SCALe?;:CHANnel3:OFFSet?",
+      "scpiFast": ":CHAN3:DISP?;:CHAN3:SCAL?;:CHAN3:OFFS?",
+      "description": "Channel 3: on/off, volts per division and offset in one round trip.",
+      "subsystem": "CHANnel",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "The channel index is IN THE COMMAND, not a parameter, so the reply lands on `Reading/channel_settings_3/scale` and a four-strip panel can tell its channels apart. A parameterised verb answers under one name whichever channel it read, which no per-channel display can bind to. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "waveform_3": {
+      "scpi": ":WAVeform:SOURce CHANnel3;:WAVeform:MODE NORMal;:WAVeform:FORMat ASCii;:WAVeform:DATA?;:WAVeform:XORigin?;:WAVeform:XINCrement?",
+      "scpiFast": ":WAV:SOUR CHAN3;:WAV:MODE NORM;:WAV:FORM ASC;:WAV:DATA?;:WAV:XOR?;:WAV:XINC?",
+      "description": "Channel 3's trace, with the time axis it was captured on.",
+      "subsystem": "WAVeform",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples",
+            "type": "CSV",
+            "unit": "V"
+          },
+          {
+            "name": "xorigin",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "xincrement",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
+      "notes": "Samples ALONE cannot be plotted — the time axis rides in the same reply, because fetching it separately lets the two disagree when the timebase moves between reads. The source and format writes lead the queries in ONE message so the reply is the trace that was asked for. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "measure_3": {
+      "scpi": ":MEASure:ITEM? VPP,CHANnel3;:MEASure:ITEM? VRMS,CHANnel3;:MEASure:ITEM? FREQuency,CHANnel3",
+      "scpiFast": ":MEAS:ITEM? VPP,CHAN3;:MEAS:ITEM? VRMS,CHAN3;:MEAS:ITEM? FREQ,CHAN3",
+      "description": "Channel 3: Vpp, Vrms and frequency in one round trip.",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "freq",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Rigol takes the source as an ARGUMENT to :MEASure:ITEM?, so these three need no :MEASure:SOURce write and cannot be attributed to the wrong channel. No dB item exists on this firmware — the panel derives dBV from vrms. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "channel_settings_4": {
+      "scpi": ":CHANnel4:DISPlay?;:CHANnel4:SCALe?;:CHANnel4:OFFSet?",
+      "scpiFast": ":CHAN4:DISP?;:CHAN4:SCAL?;:CHAN4:OFFS?",
+      "description": "Channel 4: on/off, volts per division and offset in one round trip.",
+      "subsystem": "CHANnel",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "The channel index is IN THE COMMAND, not a parameter, so the reply lands on `Reading/channel_settings_4/scale` and a four-strip panel can tell its channels apart. A parameterised verb answers under one name whichever channel it read, which no per-channel display can bind to. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "waveform_4": {
+      "scpi": ":WAVeform:SOURce CHANnel4;:WAVeform:MODE NORMal;:WAVeform:FORMat ASCii;:WAVeform:DATA?;:WAVeform:XORigin?;:WAVeform:XINCrement?",
+      "scpiFast": ":WAV:SOUR CHAN4;:WAV:MODE NORM;:WAV:FORM ASC;:WAV:DATA?;:WAV:XOR?;:WAV:XINC?",
+      "description": "Channel 4's trace, with the time axis it was captured on.",
+      "subsystem": "WAVeform",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "samples",
+            "type": "CSV",
+            "unit": "V"
+          },
+          {
+            "name": "xorigin",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "xincrement",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
+      "notes": "Samples ALONE cannot be plotted — the time axis rides in the same reply, because fetching it separately lets the two disagree when the timebase moves between reads. The source and format writes lead the queries in ONE message so the reply is the trace that was asked for. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "measure_4": {
+      "scpi": ":MEASure:ITEM? VPP,CHANnel4;:MEASure:ITEM? VRMS,CHANnel4;:MEASure:ITEM? FREQuency,CHANnel4",
+      "scpiFast": ":MEAS:ITEM? VPP,CHAN4;:MEAS:ITEM? VRMS,CHAN4;:MEAS:ITEM? FREQ,CHAN4",
+      "description": "Channel 4: Vpp, Vrms and frequency in one round trip.",
+      "subsystem": "MEASure",
+      "returns": {
+        "count": 3,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "vpp",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "vrms",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "freq",
+            "type": "NR3",
+            "unit": "Hz"
+          }
+        ]
+      },
+      "notes": "Rigol takes the source as an ARGUMENT to :MEASure:ITEM?, so these three need no :MEASure:SOURce write and cannot be attributed to the wrong channel. No dB item exists on this firmware — the panel derives dBV from vrms. Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "timebase_settings": {
+      "scpi": ":TIMebase:MAIN:SCALe?;:TIMebase:MAIN:OFFSet?",
+      "scpiFast": ":TIM:MAIN:SCAL?;:TIM:MAIN:OFFS?",
+      "description": "Seconds per division and the horizontal delay, in one round trip.",
+      "subsystem": "TIMebase",
+      "returns": {
+        "count": 2,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "s"
+          },
+          {
+            "name": "delay",
+            "type": "NR3",
+            "unit": "s"
+          }
+        ]
+      },
+      "notes": "Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "trigger_settings": {
+      "scpi": ":TRIGger:MODE?;:TRIGger:EDGe:LEVel?",
+      "scpiFast": ":TRIG:MODE?;:TRIG:EDG:LEV?",
+      "description": "Trigger type and edge level, in one round trip.",
+      "subsystem": "TRIGger",
+      "returns": {
+        "count": 2,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "mode",
+            "type": "CRD"
+          },
+          {
+            "name": "level",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "unverified": true
+    },
+    "math_settings": {
+      "scpi": ":MATH:DISPlay?;:MATH:OPERator?;:MATH:SCALe?;:MATH:OFFSet?",
+      "scpiFast": ":MATH:DISP?;:MATH:OPER?;:MATH:SCAL?;:MATH:OFFS?",
+      "description": "Math on/off, operator, scale and offset, in one round trip.",
+      "subsystem": "MATH",
+      "returns": {
+        "count": 4,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state",
+            "type": "BOOL"
+          },
+          {
+            "name": "operator",
+            "type": "CRD"
+          },
+          {
+            "name": "scale",
+            "type": "NR3",
+            "unit": "V"
+          },
+          {
+            "name": "offset",
+            "type": "NR3",
+            "unit": "V"
+          }
+        ]
+      },
+      "notes": "Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
       "unverified": true
     }
   }

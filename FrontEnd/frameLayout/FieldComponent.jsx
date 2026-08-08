@@ -144,7 +144,76 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         }
     }
     const val = gateFails ? (gate.placeholder !== undefined ? gate.placeholder : '') : rawVal;
-    
+
+    // Read a named reading the way the gate above does: the payload is a
+    // ControlValue, and only its `value` is the answer.
+    const readingOf = (topicName) => {
+        const raw = gateMessages[topicName];
+        if (raw === undefined) return undefined;
+        let v = raw;
+        try { const p = JSON.parse(String(raw)); if (p && p.value !== undefined) v = p.value; } catch (e) {}
+        return String(v).trim();
+    };
+
+    // A UNIT IS NOT A LABEL. IT IS THE DOMAIN.
+    //
+    // `VOLTage 2` means two of whatever `VOLTage:UNIT` currently is, so
+    // switching the generator from Vpp to Vrms to dBm moves the amplitude
+    // control's whole range out from under it: 10 Vpp is 3.54 Vrms is
+    // +23.98 dBm. A fader left on 0.01–10 with "Vpp" beside the number then
+    // offers values the instrument rejects and mislabels the one it accepts.
+    //
+    //   "yak_domain_from": {
+    //     "yak_listen": "shape_settings/voltage_unit",
+    //     "cases": { "VRMS": { "min": "0.0035", "max": "3.54", "units": "Vrms" }, … }
+    //   }
+    //
+    // The deciding value is the INSTRUMENT's answer, not the button that was
+    // pressed — same single source of truth every other control here hydrates
+    // from. instruments.rs stamps `yak_listen_topic` beside any `yak_listen` at
+    // any depth, so the nested spec arrives bound to this device.
+    const domainFrom = node.yak_domain_from;
+    if (domainFrom && domainFrom.yak_listen_topic && domainFrom.cases) {
+        const answered = readingOf(domainFrom.yak_listen_topic);
+        const key = String(answered !== undefined ? answered : (domainFrom.default || '')).toUpperCase();
+        const hit = Object.entries(domainFrom.cases).find(([k]) => k.toUpperCase() === key);
+        if (hit) {
+            const c = hit[1];
+            const num = (x) => { const n = parseFloat(x); return Number.isNaN(n) ? undefined : n; };
+            node.domain = {
+                ...(node.domain || {}), ...c,
+                primary: {
+                    ...((node.domain || {}).primary || {}),
+                    ...(c.min !== undefined ? { min: num(c.min) } : {}),
+                    ...(c.max !== undefined ? { max: num(c.max) } : {}),
+                },
+            };
+            if (c.min !== undefined) node.min = c.min;
+            if (c.max !== undefined) node.max = c.max;
+            if (c.units !== undefined) node.units = c.units;
+            if (c.step !== undefined) node.step = c.step;
+        }
+    }
+
+    // Some controls are only meaningful in one mode — a row of Vpp presets says
+    // nothing while the generator is answering in dBm. `yak_visible_when` takes
+    // the same shape as `yak_valid_when`, but removes the control instead of
+    // blanking it: an offer the instrument would refuse is worse than no offer.
+    const vis = node.yak_visible_when;
+    if (vis && vis.yak_listen_topic) {
+        const got = readingOf(vis.yak_listen_topic);
+        const want = String(vis.equals !== undefined ? vis.equals : '1').trim();
+        if (got === undefined) {
+            if (vis.hide_until_known !== false) return null;
+        } else {
+            const bothNumeric = got !== '' && want !== ''
+                && Number.isFinite(Number(got)) && Number.isFinite(Number(want));
+            const matches = bothNumeric ? Number(got) === Number(want)
+                : got.toUpperCase() === want.toUpperCase();
+            if (!matches) return null;
+        }
+    }
+
     // ⚡ ROBUST LABEL RESOLUTION: Handle string or object-based localization
     const getLocalizedLabel = (labelData) => {
         if (!labelData) return null;
@@ -267,6 +336,41 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         return <div style={{width: w, height: h, display: 'inline-block'}}></div>;
     }
     
+    // The LINK page's fan-out. Renders nothing and must be dispatched before the
+    // keyword branches below, which would otherwise claim it on "link".
+    if (type === '_GuiLinkGang' || type === 'LinkGang') {
+        return window.LinkGang ? <window.LinkGang config={node} topic={topic} /> : null;
+    }
+
+    // Bench widgets, dispatched ahead of the keyword branches for the same
+    // reason: "TrendChart" contains "chart" but also "trend", and _GuiBankBars
+    // would be claimed by the meter/bargraph keyword below.
+    if (type === '_GuiTrendChart' || type === 'TrendChart') {
+        return (
+            <div style={{ ...style, height: 'auto' }}>
+                {window.TrendChart ? <window.TrendChart config={node} topic={topic} /> : null}
+            </div>
+        );
+    }
+
+    if (type === '_GuiBankBars' || type === 'BankBars') {
+        return (
+            <div style={{ ...style, height: 'auto' }}>
+                {window.BankBars ? <window.BankBars config={node} /> : null}
+            </div>
+        );
+    }
+
+    if (type === '_GuiAcquireLoop' || type === 'AcquireLoop') {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
+                {window.AcquireLoop
+                    ? <window.AcquireLoop value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} />
+                    : <button>{title}</button>}
+            </div>
+        );
+    }
+
     if (type === '_AudioAnalyzerDemo') {
         return (
             <div style={style}>

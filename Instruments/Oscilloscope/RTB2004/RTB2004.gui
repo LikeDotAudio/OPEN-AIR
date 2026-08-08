@@ -1,5 +1,6 @@
 {
   "model": "RTB2004",
+  "channels": 4,
   "manufacturer": "Rohde & Schwarz",
   "type": "Oscilloscope",
   "notes": "70-300 MHz 4 Ch (10-bit ADC)",

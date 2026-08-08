@@ -1,5 +1,6 @@
 {
   "model": "DSOX4024A",
+  "channels": 4,
   "manufacturer": "HP / Agilent / Keysight",
   "type": "Oscilloscope",
   "notes": "200 MHz 4 Ch (InfiniiVision 4000X)",

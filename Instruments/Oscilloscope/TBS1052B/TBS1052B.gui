@@ -1,5 +1,6 @@
 {
   "model": "TBS1052B",
+  "channels": 2,
   "manufacturer": "Tektronix",
   "type": "Oscilloscope",
   "notes": "50 MHz 2 Ch (Basic)",

@@ -44,8 +44,12 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const offText = getLocalizedText(config?.label_inactive, label || "OFF");
 
     const layout = config?.layout || {};
-    const width = layout.width || 100;
-    const height = layout.height || 50;
+    // Sizes go through oaCssLen, so a layout width of "100%" stays "100%" instead
+    // of being glued into the nonsense length "100%px" — which the browser drops,
+    // collapsing the button to shrink-wrap its text.
+    const cssLen = window.oaCssLen || ((v) => (typeof v === 'number' ? `${v}px` : String(v)));
+    const width = cssLen(layout.width != null ? layout.width : 100);
+    const height = cssLen(layout.height != null ? layout.height : 50);
     const cornerRadius = layout.corner_radius || 6;
     
     // Style schema: style.active / style.inactive parents (same params each),
@@ -137,17 +141,31 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
         setHoverState(false);
     };
 
+    // The button already prints its state text inside itself. An _GuiActuator
+    // names itself once, in label.inactive, which FieldComponent also collapses
+    // onto config.label — so the caption above was the same words a second time
+    // ("SYNC ON" over a button reading SYNC ON). Print it only when it says
+    // something the face does not, the way WinkButton skips its caption when the
+    // text is drawn inside.
+    // Tested against BOTH states, not just the one showing: a switch labelled
+    // "AM ON" whose faces read AM ON / AM OFF would otherwise grow a caption
+    // the moment it was switched off, and lose it again on the way back.
+    const showLabel = config?.show_label !== false && label
+        && label !== onText && label !== offText;
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            {label && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            {showLabel && (
                 <div style={{ fontSize: '10px', color: 'white', fontWeight: 'bold', marginBottom: '4px' }}>
                     {label}
                 </div>
             )}
-            <div 
+            <div
                 style={{
-                    width: `${width}px`,
-                    height: `${height}px`,
+                    width,
+                    height,
+                    maxWidth: '100%',
+                    boxSizing: 'border-box',
                     backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, currentBg) : currentBg),
                     border: `${borderW}px solid ${isHovered.current ? (lit ? grpActive.border_color : '#888') : currentBorder}`,
                     borderRadius: `${cornerRadius}px`,

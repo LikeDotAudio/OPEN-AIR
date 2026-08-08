@@ -18,6 +18,24 @@
       "subsystem": "AM",
       "unverified": true
     },
+    "Set_Am_State": {
+      "scpi": "AM:STATe <value>",
+      "scpiFast": "AM:STAT <value>",
+      "description": "Set AM State",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "group": "Modulation Control",
+      "subsystem": "AM",
+      "notes": "The two-way form of the pair `AM_State_ON` / `AM_State_OFF`, which stay for the momentary buttons that use them. A LATCHING control cannot drive a pair: one widget publishes one value to one command, so a AM switch bound to `AM_State_ON` could only ever turn AM on. Same bytes on the wire that `AM_State_ON` already proves the instrument accepts — only the keyword is a placeholder."
+    },
     "Set_Amplitude": {
       "scpi": "VOLTage <amp>",
       "scpiFast": "VOLT <amp>",
@@ -262,6 +280,24 @@
       ],
       "subsystem": "FM",
       "unverified": true
+    },
+    "Set_Fm_State": {
+      "scpi": "FM:STATe <value>",
+      "scpiFast": "FM:STAT <value>",
+      "description": "Set FM State",
+      "arg": {
+        "kind": "bool",
+        "values": [
+          "OFF",
+          "ON"
+        ]
+      },
+      "args": [
+        "value"
+      ],
+      "group": "Modulation Control",
+      "subsystem": "FM",
+      "notes": "The two-way form of the pair `FM_State_ON` / `FM_State_OFF`, which stay for the momentary buttons that use them. A LATCHING control cannot drive a pair: one widget publishes one value to one command, so a FM switch bound to `FM_State_ON` could only ever turn FM on. Same bytes on the wire that `FM_State_ON` already proves the instrument accepts — only the keyword is a placeholder."
     },
     "Set_Format_Border": {
       "scpi": "FORMat:BORDer <value>",

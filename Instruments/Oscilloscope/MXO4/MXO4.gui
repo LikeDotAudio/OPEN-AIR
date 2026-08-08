@@ -1,5 +1,6 @@
 {
   "model": "MXO4",
+  "channels": 4,
   "manufacturer": "Rohde & Schwarz",
   "type": "Oscilloscope",
   "notes": "Next Gen High Speed Scope",

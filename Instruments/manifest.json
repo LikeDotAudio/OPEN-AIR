@@ -6,55 +6,38 @@
         "name": "0_Bank_All",
         "header": "Master_Control",
         "over": "devices",
-        "by": "host",
+        "by": "type",
         "size": "all",
-        "columns": 4,
+        "columns": 1,
         "station": "Octo_Monitor_Station",
         "id": "50.100.4.3",
         "description": "All meters"
-      },
-      {
-        "name": "1_Quads",
-        "over": "devices",
-        "by": "host",
-        "size": 4,
-        "columns": 2,
-        "station": "Quad_DMM_Station",
-        "id": "50.100.4.4",
-        "description": "Meter quad"
-      },
-      {
-        "name": "2_Pairs",
-        "over": "devices",
-        "by": "host",
-        "size": 2,
-        "columns": 2,
-        "station": "Dual_DMM_Station",
-        "id": "50.100.4.5",
-        "description": "Meter pair"
       }
     ]
   },
   "Oscilloscope": {
-    "tab": "2_Oscilloscope",
+    "tab": "2_Oscilloscope"
+  },
+  "Generator": {
+    "tab": "3_Generator",
     "groups": [
       {
-        "name": "2_Channels",
-        "over": "channels",
-        "columns": 2,
-        "station": "Channel_Bank",
-        "id": "50.100.2.2",
+        "name": "0_LINK",
+        "header": "Master_Control",
+        "over": "devices",
+        "by": "type",
+        "size": "all",
+        "columns": 1,
+        "station": "Generator_Link",
+        "id": "50.100.3.9",
         "description": {
-          "En": "Channels",
-          "Fr": "Canaux",
-          "De": "Kanäle",
-          "Es": "Canales"
+          "En": "Linked generators",
+          "Fr": "Générateurs liés",
+          "De": "Verbundene Generatoren",
+          "Es": "Generadores enlazados"
         }
       }
     ]
-  },
-  "Generator": {
-    "tab": "3_Generator"
   },
   "Power": {
     "tab": "5_Power",

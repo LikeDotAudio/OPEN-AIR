@@ -1,5 +1,6 @@
 {
   "model": "HMO1002",
+  "channels": 2,
   "manufacturer": "Rohde & Schwarz",
   "type": "Oscilloscope",
   "notes": "Mixed Signal 50-100MHz (Legacy Hameg)",

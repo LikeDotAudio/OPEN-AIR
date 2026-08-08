@@ -1,5 +1,6 @@
 {
   "model": "MSO54",
+  "channels": 4,
   "manufacturer": "Tektronix",
   "type": "Oscilloscope",
   "notes": "5 Series Mixed Signal (8 FlexCh)",

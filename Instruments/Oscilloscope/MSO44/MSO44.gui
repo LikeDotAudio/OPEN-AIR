@@ -1,5 +1,6 @@
 {
   "model": "MSO44",
+  "channels": 4,
   "manufacturer": "Tektronix",
   "type": "Oscilloscope",
   "notes": "4 Series Mixed Signal",

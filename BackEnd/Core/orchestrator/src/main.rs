@@ -1050,22 +1050,61 @@ import sys
 resource = sys.argv[1]
 command = sys.argv[2]
 
+# HOW LONG A REPLY IS ALLOWED TO TAKE IS A PROPERTY OF THE QUESTION.
+#
+# One flat 2000 ms covered both `*IDN?` and a thousand-point ASCII waveform.
+# The 54641D answers `:WAVeform:DATA?` with roughly 18 KB over a GPIB-to-LAN
+# gateway, which takes several seconds — so the read timed out MID-TRANSFER,
+# every time, while the scope went on pushing the rest of the trace into a
+# link nobody was reading. The next command opened a second link onto that
+# and got VI_ERROR_IO, and closing it timed out: "the instrument seems to
+# have stopped responding". It had not. It was still answering the question
+# before last.
+#
+# Split by what the number means: open_timeout is REACHABILITY and stays
+# short, so an absent instrument still fails fast and does not stall the
+# queue behind it. The read timeout is TRANSFER, and only applies once the
+# instrument has already answered the door.
+BULK = (':DATA?', 'WAV', 'CURV', 'TRAC', 'FETC')
+timeout_ms = 30000 if any(k in command.upper() for k in BULK) else 5000
+
 try:
     rm = pyvisa.ResourceManager('@py')
 except Exception:
     rm = pyvisa.ResourceManager()
+
+inst = None
 try:
     inst = rm.open_resource(resource, open_timeout=2000)
-    inst.timeout = 2000
+    inst.timeout = timeout_ms
     inst.read_termination = '\n'
     inst.write_termination = '\n'
     if '?' in command:
         print(inst.query(command).strip())
     else:
         inst.write(command)
-    inst.close()
 except Exception as e:
     print("ERROR:", str(e))
+    # A failed exchange leaves the instrument mid-sentence. Device clear is
+    # how GPIB says "forget what you were saying", and sending it here is
+    # what keeps ONE bad query from taking the next several down with it —
+    # the failure in the log was three commands wide, and only the first was
+    # actually too slow.
+    if inst is not None:
+        try:
+            inst.clear()
+        except Exception:
+            pass
+finally:
+    # Closed on EVERY path. It used to be the line after the query, so the
+    # one case that most needed it — the timeout — was the one case that
+    # skipped it, abandoning the link for the garbage collector to close
+    # later, out of order, against an instrument still talking.
+    if inst is not None:
+        try:
+            inst.close()
+        except Exception:
+            pass
 "#;
 
 /// Probes one VISA resource for its `*IDN?` identity and prints a JSON record.

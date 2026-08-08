@@ -1,5 +1,6 @@
 {
   "model": "54622D",
+  "channels": 2,
   "manufacturer": "HP / Agilent / Keysight",
   "type": "Oscilloscope",
   "notes": "Mixed Signal (2+16 Chan, 100MHz)",

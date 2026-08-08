@@ -1055,7 +1055,8 @@
               }
             },
             "yak_listen": "amplitude_settings/rlevel",
-            "units": "dBm"
+            "units": "dBm",
+            "show_label": true
           }
         }
       },
@@ -1367,7 +1368,8 @@
               }
             },
             "yak_listen": "amplitude_settings/attenuation",
-            "units": "dBm"
+            "units": "dBm",
+            "show_label": true
           }
         }
       }
@@ -1436,7 +1438,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "handler": "set_rbw",
             "yak_handler": {
@@ -1489,7 +1491,8 @@
               }
             },
             "yak_listen": "bandwidth_settings/resolution",
-            "units": "MHz"
+            "units": "MHz",
+            "show_label": true
           },
           "Resolution Band Width": {
             "type": "_GuiButtonToggler",
@@ -1954,7 +1957,8 @@
               }
             },
             "yak_listen": "bandwidth_settings/video",
-            "units": "kHz"
+            "units": "kHz",
+            "show_label": true
           },
           "Video Band Width ": {
             "type": "_GuiButtonToggler",
@@ -2705,7 +2709,8 @@
               }
             },
             "yak_listen": "bandwidth_settings/time",
-            "units": "s"
+            "units": "s",
+            "show_label": true
           }
         }
       }
@@ -2745,7 +2750,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "type": "_Horizontal_with_dial_Value",
             "layout": {
@@ -2785,12 +2790,13 @@
             "fader_config": {
               "cosmetics": {
                 "style_flags": {
-                  "show_label": false
+                  "show_label": true
                 }
               }
             },
             "units": "MHz",
-            "yak_listen": "Frequency_settings/center"
+            "yak_listen": "Frequency_settings/center",
+            "show_label": true
           },
           "span_freq_MHz": {
             "label": {
@@ -2814,7 +2820,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "type": "_Horizontal_with_dial_Value",
             "layout": {
@@ -2852,7 +2858,8 @@
               "default_value": "200"
             },
             "units": "MHz",
-            "yak_listen": "Frequency_settings/span"
+            "yak_listen": "Frequency_settings/span",
+            "show_label": true
           }
         }
       },
@@ -2899,7 +2906,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "type": "_Horizontal_with_dial_Value",
             "layout": {
@@ -2937,7 +2944,8 @@
               "default_value": "400"
             },
             "units": "MHz",
-            "yak_listen": "Frequency_settings/start"
+            "yak_listen": "Frequency_settings/start",
+            "show_label": true
           },
           "stop_freq_MHz": {
             "label": {
@@ -2961,7 +2969,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "type": "_Horizontal_with_dial_Value",
             "layout": {
@@ -2999,7 +3007,8 @@
               "default_value": "600"
             },
             "units": "MHz",
-            "yak_listen": "Frequency_settings/stop"
+            "yak_listen": "Frequency_settings/stop",
+            "show_label": true
           }
         }
       },

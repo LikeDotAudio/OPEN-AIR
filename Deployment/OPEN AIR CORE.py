@@ -194,7 +194,7 @@ def main():
     manifest = os.path.join(core_dir, "Cargo.toml")
     
     # --ignore-docker is consumed here; the Rust clap parser rejects unknowns.
-    args = [a for a in sys.argv[1:] if a != "--ignore-docker"]
+    args = [a for a in sys.argv[1:] if a not in ("--ignore-docker",)]
     release = "--release" in args
     
     if "--no-build" not in args:
@@ -254,8 +254,47 @@ def main():
         print(f"❌ [LAUNCHER] Binary not found at {binary_path}", file=sys.stderr)
         sys.exit(1)
         
-    print("🚀 [LAUNCHER] Handing over to Rust orchestrator...", flush=True)
-    os.execv(binary_path, [binary_path] + args)
+    # DETACH, do not become it.
+    #
+    # This used to `os.execv`, so the launcher WAS the orchestrator: the core
+    # could never finish, and killing the terminal killed the bench. Starting it
+    # in its own session decouples the two — the backend keeps running whatever
+    # happens to this process or the front end.
+    print("🚀 [CORE] Starting the Rust orchestrator (detached)...", flush=True)
+    # The front end opens the browser, so the backend must not — but only add
+    # the flag if it is not already there: clap rejects a repeated flag with a
+    # parse error, and the backend then dies before it ever serves.
+    backend_args = list(args)
+    if "--no-browser" not in backend_args:
+        backend_args.append("--no-browser")
+    backend = subprocess.Popen([binary_path] + backend_args, start_new_session=True)
+
+    # Wait for it to actually serve before handing over, rather than assuming.
+    # The front end has nothing to attach to until the API answers.
+    ready = False
+    for _ in range(120):
+        if port_is_listening("127.0.0.1", 8000, timeout=0.25):
+            ready = True
+            break
+        if backend.poll() is not None:
+            print(f"❌ [CORE] Orchestrator exited during startup (code {backend.returncode})",
+                  file=sys.stderr)
+            sys.exit(1)
+        time.sleep(0.5)
+    if not ready:
+        print("⚠️  [CORE] Orchestrator did not answer on :8000 within 60s — "
+              "leaving it running and continuing anyway.", file=sys.stderr)
+
+    print(f"✅ [CORE] Backend up (pid {backend.pid}). The core's work is done.", flush=True)
+
+    # Hand off to the front end as a SEPARATE process. Closing the site, or
+    # restarting it with OPENAIR FRONT END.py, never touches the backend.
+    front = os.path.join(os.path.dirname(os.path.abspath(__file__)), "OPENAIR FRONT END.py")
+    if "--no-frontend" in args or not os.path.exists(front):
+        print("⏭️  [CORE] Front end not started (--no-frontend or file missing).", flush=True)
+        return
+    print("🚀 [CORE] Launching the front end...", flush=True)
+    subprocess.run([sys.executable, front] + [a for a in args if a != "--no-frontend"])
 
 if __name__ == "__main__":
     main()

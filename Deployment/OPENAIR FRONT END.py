@@ -64,6 +64,24 @@ def main():
               file=sys.stderr)
         sys.exit(1)
 
+    # ATTACH to a backend that is already serving.
+    #
+    # OPEN AIR CORE.py leaves the orchestrator running detached, and the site it
+    # serves IS the front end. Killing it here to start our own would take the
+    # bench down every time someone reopened the page — the opposite of
+    # decoupling. If :8000 already answers, there is nothing to launch.
+    if core.port_is_listening("127.0.0.1", 8000, timeout=0.5):
+        print("✅ [FRONT END] Backend already serving http://localhost:8000 — attaching.", flush=True)
+        if "--no-browser" not in sys.argv[1:]:
+            try:
+                import webbrowser
+                webbrowser.open("http://localhost:8000")
+            except Exception:
+                pass
+        print("   Nothing to start. The backend keeps running independently of this process.",
+              flush=True)
+        return
+
     print("🧹 [FRONT END] Cleaning up any ghost orchestrator processes...", flush=True)
     subprocess.run(["pkill", "-f", "open-air-orchestrator"], check=False)
     print("🥊 [FRONT END] Bullying port 8000 to guarantee it's free...", flush=True)

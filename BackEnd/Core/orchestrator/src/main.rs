@@ -1159,6 +1159,21 @@ fn spawn_visa_write_daemon(
                     .output()
                 {
                     let out_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+
+                    // A failure is not a reading.
+                    //
+                    // The VISA helper reports faults on stdout like any other
+                    // answer, so an error string is indistinguishable from a
+                    // measurement to everything downstream. Publishing it landed
+                    // `Reading/bandwidth_settings/resolution = ERROR: … Hz` on a
+                    // RETAINED topic — a listener would unit-convert it, and it
+                    // would sit there until the next successful query replaced
+                    // it. Which never comes, if the instrument stays unreachable.
+                    if out_str.starts_with("ERROR:") {
+                        eprintln!("      ⚠️ [VISA MQTT] {} -> {}", resource_name, out_str);
+                        continue;
+                    }
+
                     if payload.contains('?') {
                         println!("      ⮜ [VISA MQTT] {} response -> {}", resource_name, out_str);
                         let read_topic = format!("{}/Read", topic_prefix);

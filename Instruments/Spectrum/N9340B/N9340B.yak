@@ -2680,6 +2680,43 @@
         ]
       },
       "notes": "Averaging is deliberately NOT in this query. ':TRACe:AVERage:COUNt?' does not answer on firmware A.02.07 — probed 2026-08-07 — and one dead statement kills the whole chained reply, taking the four trace modes with it. Verified as written: 'WRIT;BLAN;BLAN;BLAN;1', no error."
+    },
+    "marker_states": {
+      "scpi": ":CALCulate:MARKer1:STATe?;:CALCulate:MARKer2:STATe?;:CALCulate:MARKer3:STATe?;:CALCulate:MARKer4:STATe?;:CALCulate:MARKer5:STATe?;:CALCulate:MARKer6:STATe?",
+      "scpiFast": ":CALC:MARK1:STAT?;:CALC:MARK2:STAT?;:CALC:MARK3:STAT?;:CALC:MARK4:STAT?;:CALC:MARK5:STAT?;:CALC:MARK6:STAT?",
+      "description": "Whether each of the six markers is on.",
+      "subsystem": "Markers",
+      "returns": {
+        "count": 6,
+        "separator": ";",
+        "fields": [
+          {
+            "name": "state_1",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_2",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_3",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_4",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_5",
+            "type": "BOOL"
+          },
+          {
+            "name": "state_6",
+            "type": "BOOL"
+          }
+        ]
+      },
+      "notes": "Separate from all_marker_settings, which returns X and Y but not whether a marker is enabled. Verified on CN03480580 2026-08-07: '1;1;1;1;1;1', no error."
     }
   }
 }

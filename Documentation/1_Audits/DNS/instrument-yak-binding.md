@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-07
 **Scope:** every control in `Instruments/*/*.json`, cross-referenced against the vocabulary in `Instruments/<Family>/<Model>/<Model>.yak`.
-**Definitions** (per [`Instruments/TALKER_LISTENER.md`](../../Instruments/TALKER_LISTENER.md)):
+**Definitions** (per [`Instruments/TALKER_LISTENER.md`](../../../Instruments/TALKER_LISTENER.md)):
 
 - **Talker** — a GUI element that changes something: a `yak_handler` naming a command.
 - **Listener** — the NAB (or compound NAB) it hears back from once set: `readback` on the talker, `yak_listen` on whatever displays the result.

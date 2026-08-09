@@ -49,6 +49,13 @@
       "scpiFast": "SEL <chan>",
       "description": "Select Channel",
       "group": "Break-Before-Make"
+    },
+    "Open_All": {
+      "scpi": "OPEN 000-999",
+      "description": "Open every relay in the frame — nothing connected to anything.",
+      "group": "System Reset & Control",
+      "subsystem": "Root",
+      "notes": "The 3235 has no clear-all: `CLR` clears the STATE, `RESET` restarts the unit, and neither is defined as leaving every crosspoint open. A range across the whole address space is, and it says exactly what it does. Sent as the panel comes up so the matrix starts from a known state rather than from whatever was left closed. Verified on the bench 2026-08-08 against TCPIP::44.44.44.222::gpib7,10::INSTR."
     }
   },
   "rig": {},
@@ -60,7 +67,9 @@
       "returns": {
         "count": 1
       },
-      "group": "Query specific relay state"
+      "group": "Query specific relay state",
+      "notes": "Unusable on this unit: the 3235 here is listen-only and answers no query, so this can only ever time out and stall the write queue behind it. Left in the table because the command is real on a talk-capable frame.",
+      "unverified": true
     },
     "Query_Slot_ID": {
       "scpi": "ID? <slot>",
@@ -68,7 +77,9 @@
       "returns": {
         "count": 1
       },
-      "group": "Hardware Identification"
+      "group": "Hardware Identification",
+      "notes": "Unusable on this unit: the 3235 here is listen-only and answers no query, so this can only ever time out and stall the write queue behind it. Left in the table because the command is real on a talk-capable frame.",
+      "unverified": true
     }
   }
 }

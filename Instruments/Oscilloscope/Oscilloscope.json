@@ -2574,6 +2574,57 @@
             },
             "yak_listen": "trigger_settings/level"
           },
+          "Trigger_Source": {
+            "type": "SelectorSwitch",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Trigger Source",
+                  "Fr": "Source de déclenchement",
+                  "De": "Triggerquelle",
+                  "Es": "Fuente de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": {
+                  "En": "Trigger Source",
+                  "Fr": "Source de déclenchement",
+                  "De": "Triggerquelle",
+                  "Es": "Fuente de disparo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
+            },
+            "value": {
+              "default_value": "CHAN1"
+            },
+            "positions": [
+              "CHAN${n}"
+            ],
+            "continuous": false,
+            "shape": "circle",
+            "pointer_style": "line",
+            "indicator_color": "#FF3B30",
+            "layout": {
+              "height": 170,
+              "pady": 6
+            },
+            "width": 150,
+            "height": 150,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Oscilloscope",
+              "command": "Set_Edge_Source",
+              "input_name": "source",
+              "converter": "",
+              "readback": "trigger_settings"
+            },
+            "yak_listen": "trigger_settings/source"
+          },
           "Trigger_Type": {
             "type": "SelectorSwitch",
             "label": {
@@ -2683,7 +2734,7 @@
             "yak_nab_on_load": true
           }
         },
-        "layout_columns": 3
+        "layout_columns": 4
       }
     }
   },

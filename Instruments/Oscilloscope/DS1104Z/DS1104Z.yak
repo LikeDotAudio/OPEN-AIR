@@ -10850,12 +10850,12 @@
       "unverified": true
     },
     "trigger_settings": {
-      "scpi": ":TRIGger:MODE?;:TRIGger:EDGe:LEVel?",
-      "scpiFast": ":TRIG:MODE?;:TRIG:EDG:LEV?",
-      "description": "Trigger type and edge level, in one round trip.",
+      "scpi": ":TRIGger:MODE?;:TRIGger:EDGe:LEVel?;:TRIGger:EDGe:SOURce?",
+      "scpiFast": ":TRIG:MODE?;:TRIG:EDG:LEV?;:TRIG:EDG:SOUR?",
+      "description": "Trigger type, edge level and edge source, in one round trip.",
       "subsystem": "TRIGger",
       "returns": {
-        "count": 2,
+        "count": 3,
         "separator": ";",
         "fields": [
           {
@@ -10866,10 +10866,14 @@
             "name": "level",
             "type": "NR3",
             "unit": "V"
+          },
+          {
+            "name": "source",
+            "type": "CRD"
           }
         ]
       },
-      "notes": "Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
+      "notes": "Rigol spells the node `EDGe`; the shape is the 54641D's, which answered `EDGE;+0.0E+00;CHAN1`. Not yet run against this model — it is out of the discovery map today.",
       "unverified": true
     },
     "math_settings": {

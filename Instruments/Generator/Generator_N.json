@@ -391,61 +391,47 @@
         },
         "fields": {
           "Output": {
-            "type": "_GuiButtonToggle",
+            "type": "_TrapezoidButton",
             "AES70": "OcaBooleanActuator",
             "label": {
+              "text": {
+                "En": "All outputs",
+                "Fr": "All outputs",
+                "De": "All outputs",
+                "Es": "All outputs"
+              },
               "active": {
                 "text": {
-                  "En": "OUTPUT ON",
-                  "Fr": "OUTPUT ON",
-                  "De": "OUTPUT ON",
-                  "Es": "OUTPUT ON"
+                  "En": "ON",
+                  "Fr": "ON",
+                  "De": "ON",
+                  "Es": "ON"
                 },
-                "text_size": 12,
-                "text_color": "#FF902C"
+                "text_size": 14,
+                "text_color": "#ffffff"
               },
               "inactive": {
                 "text": {
-                  "En": "OUTPUT OFF",
-                  "Fr": "OUTPUT OFF",
-                  "De": "OUTPUT OFF",
-                  "Es": "OUTPUT OFF"
+                  "En": "OFF",
+                  "Fr": "OFF",
+                  "De": "OFF",
+                  "Es": "OFF"
                 },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "show_label": false
-            },
-            "layout": {
-              "height": 60,
-              "width": 240,
-              "padx": 6,
-              "pady": 6
-            },
-            "style": {
-              "active": {
-                "font_style": "bold",
-                "font_size": null,
-                "text_color": "#FF902C",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "border_thickness": 2,
-                "glow_intensity": 1.944
-              },
-              "inactive": {
-                "font_style": "normal",
-                "font_size": null,
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "border_color": "#555555",
-                "border_thickness": 2,
-                "glow_intensity": 0
+                "text_size": 14,
+                "text_color": "#111111"
               }
             },
             "value": {
               "default_value": 0
             },
-            "latching": true
+            "latching": true,
+            "width": 260,
+            "height": 96,
+            "slant": 18,
+            "text_size": 16,
+            "color_active": "#C81E1E",
+            "color_inactive": "#F2F2F2",
+            "led_color": "#FF6B6B"
           },
           "Frequency": {
             "type": "_Horizontal_with_dial_Value",

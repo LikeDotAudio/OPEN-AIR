@@ -14,13 +14,13 @@
       "Output_Waveform": {
         "type": "OcaBlock",
         "description": {
-          "En": "Output and waveform",
-          "Fr": "Output and waveform",
-          "De": "Output and waveform",
-          "Es": "Output and waveform",
+          "En": "Output, waveform and what the instrument says it is doing",
+          "Fr": "Output, waveform and what the instrument says it is doing",
+          "De": "Output, waveform and what the instrument says it is doing",
+          "Es": "Output, waveform and what the instrument says it is doing",
           "show_label": false
         },
-        "layout_columns": 2,
+        "layout_columns": 3,
         "layout": {
           "weight": 0
         },
@@ -165,6 +165,206 @@
                   "readback": "generator_settings"
                 },
                 "yak_listen": "generator_settings/function"
+              }
+            }
+          },
+          "Readback": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Instrument Readback",
+              "Fr": "Retour instrument",
+              "De": "Instrumentenrückmeldung",
+              "Es": "Lectura del instrumento",
+              "show_label": true
+            },
+            "layout_columns": 1,
+            "layout": {
+              "weight": 0,
+              "width": "100%"
+            },
+            "fields": {
+              "Function": {
+                "type": "_Value",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Shape",
+                      "Fr": "Forme",
+                      "De": "Form",
+                      "Es": "Forma"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Shape",
+                      "Fr": "Forme",
+                      "De": "Form",
+                      "Es": "Forma"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "yak_listen": "generator_settings/function",
+                "layout": {
+                  "height": 28
+                },
+                "read_only": true,
+                "value": {
+                  "default_value": "—"
+                }
+              },
+              "Frequency": {
+                "type": "_Value",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "yak_listen": "generator_settings/frequency",
+                "layout": {
+                  "height": 28
+                },
+                "units": "Hz",
+                "read_only": true,
+                "value": {
+                  "default_value": "—"
+                }
+              },
+              "Amplitude": {
+                "type": "_Value",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Amplitude",
+                      "Fr": "Amplitude",
+                      "De": "Amplitude",
+                      "Es": "Amplitud"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Amplitude",
+                      "Fr": "Amplitude",
+                      "De": "Amplitude",
+                      "Es": "Amplitud"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "yak_listen": "generator_settings/amplitude",
+                "layout": {
+                  "height": 28
+                },
+                "units": "V",
+                "yak_domain_from": {
+                  "yak_listen": "shape_settings/voltage_unit",
+                  "default": "VPP",
+                  "cases": {
+                    "VPP": {
+                      "units": "Vpp"
+                    },
+                    "VRMS": {
+                      "units": "Vrms"
+                    },
+                    "DBM": {
+                      "units": "dBm"
+                    }
+                  }
+                },
+                "read_only": true,
+                "value": {
+                  "default_value": "—"
+                }
+              },
+              "Offset": {
+                "type": "_Value",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Offset",
+                      "Fr": "Décalage",
+                      "De": "Offset",
+                      "Es": "Desplazamiento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Offset",
+                      "Fr": "Décalage",
+                      "De": "Offset",
+                      "Es": "Desplazamiento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "yak_listen": "generator_settings/offset",
+                "layout": {
+                  "height": 28
+                },
+                "units": "V",
+                "read_only": true,
+                "value": {
+                  "default_value": "—"
+                }
+              },
+              "Output": {
+                "type": "_Value",
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Output",
+                      "Fr": "Sortie",
+                      "De": "Ausgang",
+                      "Es": "Salida"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Output",
+                      "Fr": "Sortie",
+                      "De": "Ausgang",
+                      "Es": "Salida"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
+                },
+                "yak_listen": "generator_settings/output",
+                "layout": {
+                  "height": 28
+                },
+                "read_only": true,
+                "value": {
+                  "default_value": "—"
+                }
               }
             }
           }
@@ -1569,205 +1769,6 @@
               "command": "Get_Apply_String",
               "input_name": "",
               "converter": ""
-            }
-          }
-        }
-      },
-      "Readback": {
-        "type": "OcaBlock",
-        "description": {
-          "En": "Instrument Readback",
-          "Fr": "Retour instrument",
-          "De": "Instrumentenrückmeldung",
-          "Es": "Lectura del instrumento",
-          "show_label": true
-        },
-        "layout_columns": 5,
-        "layout": {
-          "weight": 0
-        },
-        "fields": {
-          "Function": {
-            "type": "_Value",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Shape",
-                  "Fr": "Forme",
-                  "De": "Form",
-                  "Es": "Forma"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Shape",
-                  "Fr": "Forme",
-                  "De": "Form",
-                  "Es": "Forma"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
-            "yak_listen": "generator_settings/function",
-            "layout": {
-              "height": 28
-            },
-            "read_only": true,
-            "value": {
-              "default_value": "—"
-            }
-          },
-          "Frequency": {
-            "type": "_Value",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Frequency",
-                  "Fr": "Fréquence",
-                  "De": "Frequenz",
-                  "Es": "Frecuencia"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Frequency",
-                  "Fr": "Fréquence",
-                  "De": "Frequenz",
-                  "Es": "Frecuencia"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
-            "yak_listen": "generator_settings/frequency",
-            "layout": {
-              "height": 28
-            },
-            "units": "Hz",
-            "read_only": true,
-            "value": {
-              "default_value": "—"
-            }
-          },
-          "Amplitude": {
-            "type": "_Value",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Amplitude",
-                  "Fr": "Amplitude",
-                  "De": "Amplitude",
-                  "Es": "Amplitud"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Amplitude",
-                  "Fr": "Amplitude",
-                  "De": "Amplitude",
-                  "Es": "Amplitud"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
-            "yak_listen": "generator_settings/amplitude",
-            "layout": {
-              "height": 28
-            },
-            "units": "V",
-            "yak_domain_from": {
-              "yak_listen": "shape_settings/voltage_unit",
-              "default": "VPP",
-              "cases": {
-                "VPP": {
-                  "units": "Vpp"
-                },
-                "VRMS": {
-                  "units": "Vrms"
-                },
-                "DBM": {
-                  "units": "dBm"
-                }
-              }
-            },
-            "read_only": true,
-            "value": {
-              "default_value": "—"
-            }
-          },
-          "Offset": {
-            "type": "_Value",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Offset",
-                  "Fr": "Décalage",
-                  "De": "Offset",
-                  "Es": "Desplazamiento"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Offset",
-                  "Fr": "Décalage",
-                  "De": "Offset",
-                  "Es": "Desplazamiento"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
-            "yak_listen": "generator_settings/offset",
-            "layout": {
-              "height": 28
-            },
-            "units": "V",
-            "read_only": true,
-            "value": {
-              "default_value": "—"
-            }
-          },
-          "Output": {
-            "type": "_Value",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Output",
-                  "Fr": "Sortie",
-                  "De": "Ausgang",
-                  "Es": "Salida"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Output",
-                  "Fr": "Sortie",
-                  "De": "Ausgang",
-                  "Es": "Salida"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
-            "yak_listen": "generator_settings/output",
-            "layout": {
-              "height": 28
-            },
-            "read_only": true,
-            "value": {
-              "default_value": "—"
             }
           }
         }

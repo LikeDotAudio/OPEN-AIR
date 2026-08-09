@@ -2,5 +2,772 @@
   "model": "3235",
   "manufacturer": "HP / Agilent / Keysight",
   "type": "Router",
-  "notes": "High-perf Switching Matrix"
+  "notes": "High-perf Switching Matrix",
+  "declared": {
+    "resource": "TCPIP::44.44.44.222::gpib7,10::INSTR",
+    "listen_only": true,
+    "why": "The 3235 takes commands and answers none of them, so `*IDN?` returns nothing and no scan can find it. Declared here instead: the orchestrator adds it to the write map from this sheet, and the heartbeat leaves it alone rather than marking a working matrix unreachable once a minute. Verified 2026-08-08 — this resource accepts `OPEN 000-999` and replies with nothing, which is correct.",
+    "on_connect": [
+      "Open_All"
+    ]
+  },
+  "channel_format": {
+    "pattern": "SCC",
+    "description": "One digit of slot then two of channel, so 705 is slot 7 channel 05. `OPEN`/`CLOSE` take a list or a range over the same numbering, which is what makes `OPEN 000-999` mean every relay in the frame."
+  },
+  "slots": {
+    "4": {
+      "channels": 24
+    },
+    "5": {
+      "channels": 24
+    },
+    "6": {
+      "channels": 24
+    },
+    "7": {
+      "channels": 32
+    },
+    "8": {
+      "channels": 20
+    },
+    "9": {
+      "channels": 12
+    }
+  },
+  "connections": [
+    {
+      "channel": "401",
+      "slot": 4,
+      "label": "Ch 1 (L)"
+    },
+    {
+      "channel": "402",
+      "slot": 4,
+      "label": "Ch 3 (L)"
+    },
+    {
+      "channel": "403",
+      "slot": 4,
+      "label": "Ch 5 (L)"
+    },
+    {
+      "channel": "404",
+      "slot": 4,
+      "label": "Ch 7 (L)"
+    },
+    {
+      "channel": "405",
+      "slot": 4,
+      "label": "Ch 9 (L)"
+    },
+    {
+      "channel": "406",
+      "slot": 4,
+      "label": "Ch 11 (L)"
+    },
+    {
+      "channel": "411",
+      "slot": 4,
+      "label": "Ch 13 (L)"
+    },
+    {
+      "channel": "412",
+      "slot": 4,
+      "label": "Ch 15 (L)"
+    },
+    {
+      "channel": "413",
+      "slot": 4,
+      "label": "Ch 17 (L)"
+    },
+    {
+      "channel": "414",
+      "slot": 4,
+      "label": "Ch 19 (L)"
+    },
+    {
+      "channel": "415",
+      "slot": 4,
+      "label": "Ch 21 (L)"
+    },
+    {
+      "channel": "416",
+      "slot": 4,
+      "label": "Ch 23 (L)"
+    },
+    {
+      "channel": "421",
+      "slot": 4,
+      "label": "Ch 2 (R)"
+    },
+    {
+      "channel": "422",
+      "slot": 4,
+      "label": "Ch 4 (R)"
+    },
+    {
+      "channel": "423",
+      "slot": 4,
+      "label": "Ch 6 (R)"
+    },
+    {
+      "channel": "424",
+      "slot": 4,
+      "label": "Ch 8 (R)"
+    },
+    {
+      "channel": "425",
+      "slot": 4,
+      "label": "Ch 10 (R)"
+    },
+    {
+      "channel": "426",
+      "slot": 4,
+      "label": "Ch 12 (R)"
+    },
+    {
+      "channel": "431",
+      "slot": 4,
+      "label": "Ch 14 (R)"
+    },
+    {
+      "channel": "432",
+      "slot": 4,
+      "label": "Ch 16 (R)"
+    },
+    {
+      "channel": "433",
+      "slot": 4,
+      "label": "Ch 18 (R)"
+    },
+    {
+      "channel": "434",
+      "slot": 4,
+      "label": "Ch 20 (R)"
+    },
+    {
+      "channel": "435",
+      "slot": 4,
+      "label": "Ch 22 (R)"
+    },
+    {
+      "channel": "436",
+      "slot": 4,
+      "label": "Ch 24 (R)"
+    },
+    {
+      "channel": "501",
+      "slot": 5,
+      "label": "Ch 1 (L)"
+    },
+    {
+      "channel": "502",
+      "slot": 5,
+      "label": "Ch 3 (L)"
+    },
+    {
+      "channel": "503",
+      "slot": 5,
+      "label": "Ch 5 (L)"
+    },
+    {
+      "channel": "504",
+      "slot": 5,
+      "label": "Ch 7 (L)"
+    },
+    {
+      "channel": "505",
+      "slot": 5,
+      "label": "Ch 9 (L)"
+    },
+    {
+      "channel": "506",
+      "slot": 5,
+      "label": "Ch 11 (L)"
+    },
+    {
+      "channel": "511",
+      "slot": 5,
+      "label": "Ch 13 (L)"
+    },
+    {
+      "channel": "512",
+      "slot": 5,
+      "label": "Ch 15 (L)"
+    },
+    {
+      "channel": "513",
+      "slot": 5,
+      "label": "Ch 17 (L)"
+    },
+    {
+      "channel": "514",
+      "slot": 5,
+      "label": "Ch 19 (L)"
+    },
+    {
+      "channel": "515",
+      "slot": 5,
+      "label": "Ch 21 (L)"
+    },
+    {
+      "channel": "516",
+      "slot": 5,
+      "label": "Ch 23 (L)"
+    },
+    {
+      "channel": "521",
+      "slot": 5,
+      "label": "Ch 2 (R)"
+    },
+    {
+      "channel": "522",
+      "slot": 5,
+      "label": "Ch 4 (R)"
+    },
+    {
+      "channel": "523",
+      "slot": 5,
+      "label": "Ch 6 (R)"
+    },
+    {
+      "channel": "524",
+      "slot": 5,
+      "label": "Ch 8 (R)"
+    },
+    {
+      "channel": "525",
+      "slot": 5,
+      "label": "Ch 10 (R)"
+    },
+    {
+      "channel": "526",
+      "slot": 5,
+      "label": "Ch 12 (R)"
+    },
+    {
+      "channel": "531",
+      "slot": 5,
+      "label": "Ch 14 (R)"
+    },
+    {
+      "channel": "532",
+      "slot": 5,
+      "label": "Ch 16 (R)"
+    },
+    {
+      "channel": "533",
+      "slot": 5,
+      "label": "Ch 18 (R)"
+    },
+    {
+      "channel": "534",
+      "slot": 5,
+      "label": "Ch 20 (R)"
+    },
+    {
+      "channel": "535",
+      "slot": 5,
+      "label": "Ch 22 (R)"
+    },
+    {
+      "channel": "536",
+      "slot": 5,
+      "label": "Ch 24 (R)"
+    },
+    {
+      "channel": "601",
+      "slot": 6,
+      "label": "Ch 1 (L)"
+    },
+    {
+      "channel": "602",
+      "slot": 6,
+      "label": "Ch 3 (L)"
+    },
+    {
+      "channel": "603",
+      "slot": 6,
+      "label": "Ch 5 (L)"
+    },
+    {
+      "channel": "604",
+      "slot": 6,
+      "label": "Ch 7 (L)"
+    },
+    {
+      "channel": "605",
+      "slot": 6,
+      "label": "Ch 9 (L)"
+    },
+    {
+      "channel": "606",
+      "slot": 6,
+      "label": "Ch 11 (L)"
+    },
+    {
+      "channel": "611",
+      "slot": 6,
+      "label": "Ch 13 (L)"
+    },
+    {
+      "channel": "612",
+      "slot": 6,
+      "label": "Ch 15 (L)"
+    },
+    {
+      "channel": "613",
+      "slot": 6,
+      "label": "Ch 17 (L)"
+    },
+    {
+      "channel": "614",
+      "slot": 6,
+      "label": "Ch 19 (L)"
+    },
+    {
+      "channel": "615",
+      "slot": 6,
+      "label": "Ch 21 (L)"
+    },
+    {
+      "channel": "616",
+      "slot": 6,
+      "label": "Ch 23 (L)"
+    },
+    {
+      "channel": "621",
+      "slot": 6,
+      "label": "Ch 2 (R)"
+    },
+    {
+      "channel": "622",
+      "slot": 6,
+      "label": "Ch 4 (R)"
+    },
+    {
+      "channel": "623",
+      "slot": 6,
+      "label": "Ch 6 (R)"
+    },
+    {
+      "channel": "624",
+      "slot": 6,
+      "label": "Ch 8 (R)"
+    },
+    {
+      "channel": "625",
+      "slot": 6,
+      "label": "Ch 10 (R)"
+    },
+    {
+      "channel": "626",
+      "slot": 6,
+      "label": "Ch 12 (R)"
+    },
+    {
+      "channel": "631",
+      "slot": 6,
+      "label": "Ch 14 (R)"
+    },
+    {
+      "channel": "632",
+      "slot": 6,
+      "label": "Ch 16 (R)"
+    },
+    {
+      "channel": "633",
+      "slot": 6,
+      "label": "Ch 18 (R)"
+    },
+    {
+      "channel": "634",
+      "slot": 6,
+      "label": "Ch 20 (R)"
+    },
+    {
+      "channel": "635",
+      "slot": 6,
+      "label": "Ch 22 (R)"
+    },
+    {
+      "channel": "636",
+      "slot": 6,
+      "label": "Ch 24 (R)"
+    },
+    {
+      "channel": "701",
+      "slot": 7,
+      "label": "Test Patch (L)"
+    },
+    {
+      "channel": "702",
+      "slot": 7,
+      "label": "Bench AP (L)"
+    },
+    {
+      "channel": "703",
+      "slot": 7,
+      "label": "Bench Neutrik (L)"
+    },
+    {
+      "channel": "704",
+      "slot": 7,
+      "label": "Music Src (L)"
+    },
+    {
+      "channel": "705",
+      "slot": 7,
+      "label": "Snk 1 XLR (L)"
+    },
+    {
+      "channel": "706",
+      "slot": 7,
+      "label": "Snk 3 XLR (L)"
+    },
+    {
+      "channel": "707",
+      "slot": 7,
+      "label": "Snk 5 XLR (L)"
+    },
+    {
+      "channel": "708",
+      "slot": 7,
+      "label": "Snk 7 XLR (L)"
+    },
+    {
+      "channel": "711",
+      "slot": 7,
+      "label": "Test Patch (L)"
+    },
+    {
+      "channel": "712",
+      "slot": 7,
+      "label": "Bench AP (L)"
+    },
+    {
+      "channel": "713",
+      "slot": 7,
+      "label": "Bench Neutrik (L)"
+    },
+    {
+      "channel": "714",
+      "slot": 7,
+      "label": "Speakers (L)"
+    },
+    {
+      "channel": "715",
+      "slot": 7,
+      "label": "Snk 1 XLR (L)"
+    },
+    {
+      "channel": "716",
+      "slot": 7,
+      "label": "Snk 3 XLR (L)"
+    },
+    {
+      "channel": "717",
+      "slot": 7,
+      "label": "Snk 5 XLR (L)"
+    },
+    {
+      "channel": "718",
+      "slot": 7,
+      "label": "Snk 7 XLR (L)"
+    },
+    {
+      "channel": "721",
+      "slot": 7,
+      "label": "Test Patch (R)"
+    },
+    {
+      "channel": "722",
+      "slot": 7,
+      "label": "Bench AP (R)"
+    },
+    {
+      "channel": "723",
+      "slot": 7,
+      "label": "Bench Neutrik (R)"
+    },
+    {
+      "channel": "724",
+      "slot": 7,
+      "label": "Music Src (R)"
+    },
+    {
+      "channel": "725",
+      "slot": 7,
+      "label": "Snk 2 XLR (R)"
+    },
+    {
+      "channel": "726",
+      "slot": 7,
+      "label": "Snk 4 XLR (R)"
+    },
+    {
+      "channel": "727",
+      "slot": 7,
+      "label": "Snk 6 XLR (R)"
+    },
+    {
+      "channel": "728",
+      "slot": 7,
+      "label": "Snk 8 XLR (R)"
+    },
+    {
+      "channel": "731",
+      "slot": 7,
+      "label": "Test Patch (R)"
+    },
+    {
+      "channel": "732",
+      "slot": 7,
+      "label": "Bench AP (R)"
+    },
+    {
+      "channel": "733",
+      "slot": 7,
+      "label": "Bench Neutrik (R)"
+    },
+    {
+      "channel": "734",
+      "slot": 7,
+      "label": "Speakers (R)"
+    },
+    {
+      "channel": "735",
+      "slot": 7,
+      "label": "Snk 2 XLR (R)"
+    },
+    {
+      "channel": "736",
+      "slot": 7,
+      "label": "Snk 4 XLR (R)"
+    },
+    {
+      "channel": "737",
+      "slot": 7,
+      "label": "Snk 6 XLR (R)"
+    },
+    {
+      "channel": "738",
+      "slot": 7,
+      "label": "Snk 8 XLR (R)"
+    },
+    {
+      "channel": "801",
+      "slot": 8,
+      "label": "Comp DAC L"
+    },
+    {
+      "channel": "802",
+      "slot": 8,
+      "label": "Sig Gen L"
+    },
+    {
+      "channel": "803",
+      "slot": 8,
+      "label": "Distortion L"
+    },
+    {
+      "channel": "804",
+      "slot": 8,
+      "label": "Aux IN L"
+    },
+    {
+      "channel": "805",
+      "slot": 8,
+      "label": "DUT OUT L"
+    },
+    {
+      "channel": "811",
+      "slot": 8,
+      "label": "DUT In L"
+    },
+    {
+      "channel": "812",
+      "slot": 8,
+      "label": "DAC IN L"
+    },
+    {
+      "channel": "813",
+      "slot": 8,
+      "label": "Monitor 1 L"
+    },
+    {
+      "channel": "814",
+      "slot": 8,
+      "label": "Monitor 2 L"
+    },
+    {
+      "channel": "815",
+      "slot": 8,
+      "label": "Monitor 3 L"
+    },
+    {
+      "channel": "821",
+      "slot": 8,
+      "label": "Comp DAC R"
+    },
+    {
+      "channel": "822",
+      "slot": 8,
+      "label": "Sig Gen R"
+    },
+    {
+      "channel": "823",
+      "slot": 8,
+      "label": "Distortion R"
+    },
+    {
+      "channel": "824",
+      "slot": 8,
+      "label": "Aux IN R"
+    },
+    {
+      "channel": "825",
+      "slot": 8,
+      "label": "DUT OUT R"
+    },
+    {
+      "channel": "831",
+      "slot": 8,
+      "label": "DUT In R"
+    },
+    {
+      "channel": "832",
+      "slot": 8,
+      "label": "DAC IN R"
+    },
+    {
+      "channel": "833",
+      "slot": 8,
+      "label": "Monitor 1 R"
+    },
+    {
+      "channel": "834",
+      "slot": 8,
+      "label": "Monitor 2 R"
+    },
+    {
+      "channel": "835",
+      "slot": 8,
+      "label": "Monitor 3 R"
+    },
+    {
+      "channel": "901",
+      "slot": 9,
+      "label": "Patch Panel OUT"
+    },
+    {
+      "channel": "902",
+      "slot": 9,
+      "label": "Patch Panel IN"
+    },
+    {
+      "channel": "903",
+      "slot": 9,
+      "label": "HP-xformer 1 IN"
+    },
+    {
+      "channel": "904",
+      "slot": 9,
+      "label": "HP-xformer 2 IN"
+    },
+    {
+      "channel": "905",
+      "slot": 9,
+      "label": "TO AMPLIFIER L"
+    },
+    {
+      "channel": "906",
+      "slot": 9,
+      "label": "TO AMPLIFIER R"
+    },
+    {
+      "channel": "907",
+      "slot": 9,
+      "label": "From Signal Gen"
+    },
+    {
+      "channel": "908",
+      "slot": 9,
+      "label": "From Signal Gen"
+    },
+    {
+      "channel": "910",
+      "slot": 9,
+      "label": "SCOPE IN 1"
+    },
+    {
+      "channel": "920",
+      "slot": 9,
+      "label": "SCOPE IN 2"
+    },
+    {
+      "channel": "930",
+      "slot": 9,
+      "label": "SCOPE IN 3"
+    },
+    {
+      "channel": "940",
+      "slot": 9,
+      "label": "SCOPE IN 4"
+    }
+  ],
+  "connection_conflicts": {
+    "note": "Channel numbers claimed by more than one place in Router.json. A channel IS a relay, so these cannot all be right — the Coax tab gives Card 000 and Card 001 the same 9xx numbers, which means both cards' buttons throw the same relays. Recorded, not guessed at.",
+    "channels": {
+      "901": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "902": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "903": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "904": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "905": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "906": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "907": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "908": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "910": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "920": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "930": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ],
+      "940": [
+        "Coax/Right/Card_001_Coax_Routing",
+        "Coax/left/Card_000_Coax_Routing"
+      ]
+    }
+  }
 }

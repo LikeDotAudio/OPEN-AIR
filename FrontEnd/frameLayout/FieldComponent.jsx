@@ -361,6 +361,19 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
+    // A whole crosspoint card: bus titles across the top, sources down the
+    // side. Ahead of the keyword branches — "matrix" is not one of them, but the
+    // cells it builds are library buttons and must not be claimed here.
+    if (type === '_GuiMatrix' || type === 'CrossMatrix') {
+        return (
+            <div style={{ ...style, height: 'auto' }}>
+                {window.CrossMatrix
+                    ? <window.CrossMatrix value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} />
+                    : null}
+            </div>
+        );
+    }
+
     if (type === '_GuiAcquireLoop' || type === 'AcquireLoop') {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>

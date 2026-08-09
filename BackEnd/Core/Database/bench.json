@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "_comment": "The instruments this bench HAS — not the ones that answered today. Panels are built from this, so a meter that is switched off keeps its tab instead of having it deleted: a scan that misses a device is a fact about the scan, not about the bench. Curated and hand-editable; add a device by adding a row. Live status (online/offline, last seen) is NOT here — it churns on every scan and would bury real edits. It belongs in state.json beside this file, which is generated.",
+  "devices": [
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,11::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 1,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,11"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,12::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 2,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,12"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,13::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 3,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,13"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,4::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,4"
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,1::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 4,
+      "host": "44.44.44.222",
+      "manufacturer": null,
+      "gpib": "gpib7,1"
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,2::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 5,
+      "host": "44.44.44.222",
+      "manufacturer": null,
+      "gpib": "gpib7,2"
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,3::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 6,
+      "host": "44.44.44.222",
+      "manufacturer": null,
+      "gpib": "gpib7,3"
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,5::INSTR",
+      "type": "DMM",
+      "model": "34401A",
+      "dev": 7,
+      "host": "44.44.44.222",
+      "manufacturer": null,
+      "gpib": "gpib7,5"
+    },
+    {
+      "resource": "TCPIP::44.44.44.162::INSTR",
+      "type": "Generator",
+      "model": "33210A",
+      "dev": 0,
+      "host": "44.44.44.162",
+      "manufacturer": null
+    },
+    {
+      "resource": "TCPIP::44.44.44.33::INSTR",
+      "type": "Generator",
+      "model": "33220A",
+      "dev": 0,
+      "host": "44.44.44.33",
+      "manufacturer": null
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,22::INSTR",
+      "type": "Load",
+      "model": "6060B",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,22"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,23::INSTR",
+      "type": "Load",
+      "model": "6060B",
+      "dev": 1,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,23"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,6::INSTR",
+      "type": "Oscilloscope",
+      "model": "54641D",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,6"
+    },
+    {
+      "resource": "TCPIP::44.44.44.153::INSTR",
+      "type": "Oscilloscope",
+      "model": "DS1104Z",
+      "dev": 0,
+      "host": "44.44.44.153",
+      "manufacturer": null
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,16::INSTR",
+      "type": "Oscilloscope",
+      "model": "54641D",
+      "dev": 1,
+      "host": "44.44.44.222",
+      "manufacturer": null,
+      "gpib": "gpib7,16"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,0::INSTR",
+      "type": "Power",
+      "model": "66101A",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,0"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,1::INSTR",
+      "type": "Power",
+      "model": "66102A",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,1"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,2::INSTR",
+      "type": "Power",
+      "model": "66102A",
+      "dev": 1,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,2"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,4::INSTR",
+      "type": "Power",
+      "model": "66104A",
+      "dev": 0,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,4"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,5::INSTR",
+      "type": "Power",
+      "model": "66104A",
+      "dev": 1,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,5"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,6::INSTR",
+      "type": "Power",
+      "model": "66104A",
+      "dev": 2,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,6"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,7::INSTR",
+      "type": "Power",
+      "model": "66104A",
+      "dev": 3,
+      "host": "44.44.44.111",
+      "manufacturer": null,
+      "gpib": "gpib7,30,7"
+    },
+    {
+      "resource": "TCPIP::44.44.44.222::gpib7,10::INSTR",
+      "type": "Router",
+      "model": "3235",
+      "dev": 0,
+      "host": "44.44.44.222",
+      "manufacturer": "HP / Agilent / Keysight",
+      "gpib": "gpib7,10",
+      "listen_only": true,
+      "on_connect": [
+        "Open_All"
+      ]
+    },
+    {
+      "resource": "TCPIP::44.44.44.66::INSTR",
+      "type": "Spectrum",
+      "model": "N9340B",
+      "dev": 0,
+      "host": "44.44.44.66",
+      "manufacturer": null
+    }
+  ]
+}

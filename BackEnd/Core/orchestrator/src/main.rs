@@ -389,6 +389,7 @@ async fn main() {
 
     let (visa_mqtt_host, visa_mqtt_port) = (mqtt_host.clone(), mqtt_port);
     let args_no_scan = args.no_scan;
+    let root_for_scan = root.clone();
     tokio::spawn(async move {
         println!("🚀 [AGENT] Launching Native VISA Agent (Background Scan)...");
 
@@ -418,13 +419,24 @@ async fn main() {
         // this loop. Capacity 1: triggers during a running scan coalesce.
         let (rescan_tx, mut rescan_rx) = tokio::sync::mpsc::channel::<()>(1);
 
+        // Resources that must never be sent a query.
+        //
+        // The heartbeat re-verifies one instrument a minute with `*IDN?`. A
+        // listen-only unit cannot answer that, so it would be marked
+        // unreachable for ever, and every rotation would spend the probe
+        // timeout holding a GPIB gateway that other instruments are queued
+        // behind. Declared devices name themselves here and the heartbeat
+        // steps over them.
+        let listen_only: std::sync::Arc<std::sync::Mutex<std::collections::HashSet<String>>> =
+            Default::default();
+
         spawn_visa_write_daemon(topic_to_resource.clone(), rescan_tx, visa_mqtt_host.clone(), visa_mqtt_port);
         // Raised for the duration of a scan so the heartbeat stands aside: a
         // GPIB gateway serves one link at a time, and two probers competing for
         // it is how a healthy instrument reports as missing.
         let scanning_flag = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
         spawn_visa_heartbeat(topic_to_resource.clone(), scanning_flag.clone(),
-                             visa_mqtt_host.clone(), visa_mqtt_port);
+                             listen_only.clone(), visa_mqtt_host.clone(), visa_mqtt_port);
 
         // Seed the cleanup map from what is ALREADY retained on the broker.
         //
@@ -641,6 +653,83 @@ async fn main() {
             }
 
         }
+        // ── instruments a scan can never find ───────────────────────────────
+        //
+        // The HP 3235 matrix takes commands and answers none of them, so
+        // `*IDN?` returns nothing and every probe above concludes it is not
+        // there. It is, and it is switching audio. A device like that is
+        // DECLARED in its own capability sheet instead
+        // (`Instruments/<Family>/<Model>/<Model>.gui`, `declared.resource`) and
+        // joined to this scan's results here.
+        //
+        // Injected at the END on purpose: it takes whatever `Dev<n>` index is
+        // left after the real probes, so a talking instrument of the same model
+        // never has its topic taken by a declared one.
+        for d in instruments::declared_devices(&root_for_scan) {
+            let count = counts.entry((d.dtype.clone(), d.model.clone())).or_insert(0);
+            let topic_prefix = format!(
+                "OpenAir/System/Protocols/visa/Device/{}/{}/Dev{}",
+                d.dtype.replace(' ', "_"), d.model.replace(' ', "_"), count);
+            *count += 1;
+            scan_topic_to_resource.insert(topic_prefix.clone(), d.resource.clone());
+            if d.listen_only {
+                listen_only.lock().unwrap().insert(d.resource.clone());
+            }
+
+            // Published like any other device so it appears on the Discovered
+            // tab and `devices_from_collected` builds its panel — but `status`
+            // says `declared`, not `identified`. Nothing asked this instrument
+            // who it is, and the row must not imply otherwise.
+            let now = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|x| x.as_secs()).unwrap_or(0);
+            for (k, v) in [
+                ("model", d.model.as_str()),
+                ("manufacturer", d.manufacturer.as_str()),
+                ("device_type", d.dtype.as_str()),
+                ("resource", d.resource.as_str()),
+                ("notes", d.notes.as_str()),
+                ("serial", ""),
+                ("firmware", ""),
+                ("raw_idn", ""),
+                ("status", "declared"),
+                ("connected", "1"),
+                ("reachable", "1"),
+                ("last_online", &now.to_string()),
+            ] {
+                let _ = mqtt_client.publish(format!("{topic_prefix}/{k}"),
+                    rumqttc::QoS::AtLeastOnce, true, v.as_bytes());
+            }
+            let _ = mqtt_client.publish(format!("{topic_prefix}/Write"),
+                rumqttc::QoS::AtLeastOnce, true, "");
+            let _ = mqtt_client.publish(format!("{topic_prefix}/Read"),
+                rumqttc::QoS::AtLeastOnce, true, "");
+            scan_log(&mqtt_client, "ok", format!(
+                "declared {} {} at {}{}", d.manufacturer, d.model, d.resource,
+                if d.listen_only { " (listen-only — never probed)" } else { "" }));
+
+            // Put it in a known state, now, from here.
+            //
+            // The 3235 has no clear-all — `CLR` clears the state and `RESET`
+            // restarts the unit, and neither is defined as leaving every
+            // crosspoint open — so the sheet names `Open_All`, which is
+            // `OPEN 000-999`: every relay in the frame, nothing connected to
+            // anything.
+            //
+            // Sent by the orchestrator rather than seeded by the panel. A GUI
+            // control that fires on mount is exactly the hazard MqttProvider
+            // refuses for triggers: it would run every time somebody opened the
+            // tab, and would not run at all if nobody did. "Once connected" is
+            // a fact about the instrument, and this is the moment it becomes
+            // true.
+            for scpi in &d.on_connect {
+                let _ = mqtt_client.publish(format!("{topic_prefix}/Write"),
+                    rumqttc::QoS::AtLeastOnce, false, scpi.as_bytes());
+                scan_log(&mqtt_client, "info",
+                    format!("{} on connect -> {}", d.model, scpi));
+            }
+        }
+
         scanning_flag.store(false, std::sync::atomic::Ordering::Relaxed);
         set_scan_state(&mqtt_client, "idle");
         scan_log(&mqtt_client, "ok",
@@ -857,6 +946,7 @@ const VISA_HEARTBEAT_FAILS: u32 = 2;
 fn spawn_visa_heartbeat(
     topic_to_resource: std::sync::Arc<std::sync::Mutex<std::collections::HashMap<String, String>>>,
     scanning: std::sync::Arc<std::sync::atomic::AtomicBool>,
+    listen_only: std::sync::Arc<std::sync::Mutex<std::collections::HashSet<String>>>,
     mqtt_host: String,
     mqtt_port: u16,
 ) {
@@ -899,6 +989,15 @@ fn spawn_visa_heartbeat(
             // HashMap order is not stable across iterations; sorting makes the
             // rotation actually visit every device instead of resampling.
             devices.sort();
+            // A declared listen-only instrument answers no query, so probing it
+            // proves nothing and costs a gateway the whole timeout.
+            {
+                let skip = listen_only.lock().unwrap();
+                devices.retain(|(_, resource)| !skip.contains(resource));
+            }
+            if devices.is_empty() {
+                continue;
+            }
             misses.retain(|prefix, _| devices.iter().any(|(p, _)| p == prefix));
 
             let (prefix, resource) = devices[cursor % devices.len()].clone();

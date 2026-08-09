@@ -621,9 +621,19 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
             // publishes the placeholder ("---") ON TOP of whatever the
             // instrument last answered. A display-only widget must never write
             // to the topic it displays.
+            // Nor is a control that OPTS OUT. A seed is a control's resting
+            // position, and some controls have none: a router crosspoint
+            // selector's every value is a channel to close, so the authored
+            // default is not "where it sits" but "what to switch". The 3235's
+            // togglers declare no default at all, so the seed published
+            // `{value: 0}` and YAK turned it into `CLOSE 0` — a channel nobody
+            // chose, on an instrument that patches signal paths, fired because
+            // someone opened a tab. `"yak_seed": false` on the node says the
+            // control has no position worth restoring.
             const seedable = !(window.OaIsMomentaryControl
                 && window.OaIsMomentaryControl(nodeJson))
-                && nodeJson.yak_readout !== true;
+                && nodeJson.yak_readout !== true
+                && nodeJson.yak_seed !== false;
             if (seedable && messages[topic] === undefined) {
                 // Include full_id so Python's broker doesn't mistake this
                 // for one of its own reflections (see SESSION_FULL_ID above).

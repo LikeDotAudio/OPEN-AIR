@@ -154,6 +154,119 @@ fn load_capabilities(root: &Path) -> HashMap<String, Value> {
     caps
 }
 
+/// An instrument that is wired to the bench but cannot be discovered.
+pub struct Declared {
+    pub dtype: String,
+    pub model: String,
+    pub manufacturer: String,
+    pub notes: String,
+    pub resource: String,
+    pub listen_only: bool,
+    /// SCPI to send the moment this instrument is declared, already resolved
+    /// from the model's own vocabulary.
+    pub on_connect: Vec<String>,
+}
+
+/// Where a model's two authored files live, by model name.
+fn model_dir(root: &Path, model: &str) -> Option<PathBuf> {
+    let families = std::fs::read_dir(yak_root(root)).ok()?;
+    for family in families.flatten() {
+        let Ok(models) = std::fs::read_dir(family.path()) else { continue };
+        for dir in models.flatten() {
+            let name = dir.file_name();
+            let name = name.to_str().unwrap_or_default();
+            // `HP_8903B` -> `8903B`, matching load_capabilities' key.
+            if name.splitn(2, '_').last().unwrap_or(name) == model {
+                return Some(dir.path());
+            }
+        }
+    }
+    None
+}
+
+/// One command's SCPI out of a model's YAK table, whichever verb holds it.
+fn yak_scpi(root: &Path, model: &str, command: &str) -> Option<String> {
+    let dir = model_dir(root, model)?;
+    let path = dir.join(format!("{model}.yak"));
+    let doc: Value = serde_json::from_str(&std::fs::read_to_string(path).ok()?).ok()?;
+    for verb in ["do", "set", "rig", "nab"] {
+        if let Some(s) = doc.get(verb).and_then(|v| v.get(command))
+            .and_then(|c| c.get("scpi")).and_then(|s| s.as_str())
+        {
+            return Some(s.to_string());
+        }
+    }
+    None
+}
+
+/// Instruments declared in their own capability sheet rather than found.
+///
+/// Discovery asks `*IDN?` and believes the answer. That is the right test for
+/// almost everything, and useless for a switch matrix: the HP 3235 takes
+/// commands and answers none of them, so a probe concludes it is absent while
+/// it sits there routing audio. A scan can only ever find instruments that
+/// talk.
+///
+/// So the sheet says so, next to everything else that is true of the model:
+///
+/// ```json
+/// "declared": {
+///   "resource": "TCPIP::44.44.44.222::gpib7,10::INSTR",
+///   "listen_only": true
+/// }
+/// ```
+///
+/// One place, and the same file that already carries channel counts and
+/// domains — an address is a fact about an installation the same way a channel
+/// count is a fact about a model, and neither belongs in a panel.
+pub fn declared_devices(root: &Path) -> Vec<Declared> {
+    let mut out = Vec::new();
+    for (model, caps) in load_capabilities(root) {
+        let Some(d) = caps.get("declared") else { continue };
+        let Some(resource) = d.get("resource").and_then(|r| r.as_str()) else {
+            println!("[instrument-gui] {model} declares itself with no resource — skipped");
+            continue;
+        };
+        let Some(dtype) = caps.get("type").and_then(|t| t.as_str()) else {
+            println!("[instrument-gui] {model} is declared but names no type — skipped");
+            continue;
+        };
+        // `on_connect` names COMMANDS, not SCPI: an installation fact belongs in
+        // the sheet, but the words an instrument understands belong in its
+        // vocabulary, and writing them twice is how the two drift apart.
+        let on_connect = d
+            .get("on_connect")
+            .and_then(|v| v.as_array())
+            .map(|names| {
+                names.iter().filter_map(|n| n.as_str()).filter_map(|name| {
+                    match yak_scpi(root, &model, name) {
+                        Some(scpi) => Some(scpi),
+                        None => {
+                            println!("[instrument-gui] {model} names '{name}' on connect, \
+                                      and its YAK table has no such command — skipped");
+                            None
+                        }
+                    }
+                }).collect()
+            })
+            .unwrap_or_default();
+
+        out.push(Declared {
+            dtype: dtype.to_string(),
+            manufacturer: caps.get("manufacturer").and_then(|m| m.as_str())
+                .unwrap_or("").to_string(),
+            notes: caps.get("notes").and_then(|n| n.as_str()).unwrap_or("").to_string(),
+            resource: resource.to_string(),
+            listen_only: d.get("listen_only") == Some(&Value::Bool(true)),
+            on_connect,
+            model,
+        });
+    }
+    // Stable order, so two runs stamp the same Dev index on the same box.
+    out.sort_by(|a, b| (&a.dtype, &a.model).cmp(&(&b.dtype, &b.model)));
+    out
+}
+
 /// Mainframe slot from a VISA resource, or None if the device isn't in one.
 ///
 /// `TCPIP::44.44.44.111::gpib7,30,4::INSTR` — board 7, primary 30, SECONDARY 4.
@@ -1360,7 +1473,141 @@ fn prune(root: &Path, wanted: &BTreeSet<String>) {
 }
 
 /// One panel set per device. Returns `(panels_written, devices_built)`.
+/// The bench roster: what is INSTALLED, as opposed to what answered today.
+const ROSTER: &str = "BackEnd/Core/Database/bench.json";
+
+fn roster_path(root: &Path) -> PathBuf {
+    root.join(ROSTER)
+}
+
+/// Everything the bench has, whether or not this scan found it.
+///
+/// A SCAN THAT MISSES A DEVICE IS A FACT ABOUT THE SCAN.
+///
+/// The builder used to take the scan as the whole truth, and `prune` deleted
+/// every folder not in it — so one pass where a GPIB gateway did not enumerate
+/// took out eight multimeters, seven supply modules and two loads, panels and
+/// all. Instruments are switched off, gateways answer slowly, and a bench does
+/// not stop owning a meter because it was asleep at 3pm.
+///
+/// The roster also PINS the device index. `Dev<n>` is otherwise a per-model
+/// counter over discovery order, so a scan that misses the meter at gpib7,4
+/// renumbers every meter behind it: panels keep their topics and start reading
+/// a different instrument. An index that moves is worse than one that is
+/// occasionally absent.
+///
+/// A device found but not listed is APPENDED rather than argued with — the
+/// record should learn from the bench, not need hand-editing every time
+/// something new is plugged in. Existing rows are never rewritten, so aliases
+/// and hand-set flags survive.
+fn merge_roster(root: &Path, found: &[Device]) -> Vec<Device> {
+    let path = roster_path(root);
+    let mut doc = read_panel(&path).unwrap_or_else(|| json!({
+        "schemaVersion": 1,
+        "devices": [],
+    }));
+
+    let rows: Vec<Value> = doc
+        .get("devices")
+        .and_then(|d| d.as_array())
+        .cloned()
+        .unwrap_or_default();
+
+    let by_resource: HashMap<String, Device> = found
+        .iter()
+        .map(|d| (d.resource.clone(), d.clone()))
+        .collect();
+
+    let mut out: Vec<Device> = Vec::new();
+    let mut listed: BTreeSet<String> = BTreeSet::new();
+
+    for row in &rows {
+        let (Some(resource), Some(dtype), Some(model)) = (
+            row.get("resource").and_then(|v| v.as_str()),
+            row.get("type").and_then(|v| v.as_str()),
+            row.get("model").and_then(|v| v.as_str()),
+        ) else {
+            println!("[instrument-gui] roster row without resource/type/model — skipped");
+            continue;
+        };
+        listed.insert(resource.to_string());
+        let dev = row.get("dev").and_then(|v| v.as_u64()).unwrap_or(0);
+
+        // The instrument is the authority on what it IS; the roster is the
+        // authority on where it sits and what to call its topic.
+        let (dtype, model) = match by_resource.get(resource) {
+            Some(live) if live.model != model => {
+                println!("[instrument-gui] {resource} is listed as {model} but answered \
+                          {} — using the instrument's answer", live.model);
+                (live.dtype.clone(), live.model.clone())
+            }
+            Some(live) => (live.dtype.clone(), live.model.clone()),
+            None => (dtype.to_string(), model.to_string()),
+        };
+
+        out.push(Device {
+            dtype: dtype.replace(' ', "_"),
+            model: model.replace(' ', "_"),
+            resource: resource.to_string(),
+            write_topic: format!(
+                "OpenAir/System/Protocols/visa/Device/{}/{}/Dev{dev}/Write",
+                dtype.replace(' ', "_"),
+                model.replace(' ', "_")
+            ),
+        });
+    }
+
+    // Anything the scan turned up that the record has never seen.
+    let mut appended = Vec::new();
+    for d in found {
+        if listed.contains(&d.resource) {
+            continue;
+        }
+        out.push(d.clone());
+        let dev = d
+            .write_topic
+            .rsplit('/')
+            .nth(1)
+            .and_then(|s| s.strip_prefix("Dev"))
+            .and_then(|s| s.parse::<u64>().ok())
+            .unwrap_or(0);
+        appended.push(json!({
+            "resource": d.resource,
+            "type": d.dtype,
+            "model": d.model,
+            "dev": dev,
+            "host": d.resource.split("::").nth(1).unwrap_or(""),
+        }));
+        println!("[instrument-gui] {} {} at {} is new — added to the bench roster",
+                 d.dtype, d.model, d.resource);
+    }
+
+    if !appended.is_empty() {
+        let mut all = rows;
+        all.extend(appended);
+        doc["devices"] = Value::Array(all);
+        if let Some(parent) = path.parent() {
+            let _ = std::fs::create_dir_all(parent);
+        }
+        match serde_json::to_string_pretty(&doc) {
+            Ok(text) => {
+                let _ = std::fs::write(&path, text + "\n");
+            }
+            Err(e) => println!("[instrument-gui] could not write the roster: {e}"),
+        }
+    }
+
+    if out.is_empty() {
+        return found.to_vec();
+    }
+    println!("[instrument-gui] roster: {} instrument(s) known, {} answered this scan",
+             out.len(), found.len());
+    out
+}
+
 pub fn build(root: &Path, devices: &[Device]) -> (usize, usize) {
+    // Build for the BENCH, not for the scan — see merge_roster.
+    let devices = &merge_roster(root, devices)[..];
     let manifest_path = template_root(root).join("manifest.json");
     let Some(manifest) = read_panel(&manifest_path) else {
         println!("[instrument-gui] no manifest at {}", manifest_path.display());
@@ -1506,6 +1753,62 @@ mod tests {
         assert_eq!(host_of("TCPIP::44.44.44.111::gpib7,4::INSTR"), "44.44.44.111");
     }
 
+
+    #[test]
+    fn the_roster_keeps_a_bench_that_a_scan_missed() {
+        let tmp = std::env::temp_dir().join(format!("oa-roster-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&tmp);
+        std::fs::create_dir_all(tmp.join("BackEnd/Core/Database")).unwrap();
+        std::fs::write(
+            tmp.join(ROSTER),
+            serde_json::to_string_pretty(&json!({
+                "schemaVersion": 1,
+                "devices": [
+                    // Two meters the bench owns. Only one answers today.
+                    {"resource": "TCPIP::1.1.1.1::gpib7,4::INSTR",  "type": "DMM", "model": "34401A", "dev": 0},
+                    {"resource": "TCPIP::1.1.1.1::gpib7,11::INSTR", "type": "DMM", "model": "34401A", "dev": 1},
+                ]
+            })).unwrap(),
+        ).unwrap();
+
+        let live = vec![Device {
+            dtype: "DMM".into(),
+            model: "34401A".into(),
+            resource: "TCPIP::1.1.1.1::gpib7,11::INSTR".into(),
+            // A scan that found only this one would have called it Dev0.
+            write_topic: "OpenAir/System/Protocols/visa/Device/DMM/34401A/Dev0/Write".into(),
+        }];
+
+        let merged = merge_roster(&tmp, &live);
+
+        // The meter that stayed silent is still on the bench.
+        assert_eq!(merged.len(), 2, "a scan missing a device must not drop it");
+        let quiet = merged.iter().find(|d| d.resource.ends_with("gpib7,4::INSTR")).unwrap();
+        assert!(quiet.write_topic.ends_with("/Dev0/Write"));
+
+        // And the one that answered keeps the index the roster pinned, NOT the
+        // one this scan would have handed it — otherwise every panel bound to
+        // Dev1 would quietly start reading Dev0's meter.
+        let loud = merged.iter().find(|d| d.resource.ends_with("gpib7,11::INSTR")).unwrap();
+        assert!(loud.write_topic.ends_with("/Dev1/Write"),
+                "pinned index lost: {}", loud.write_topic);
+
+        // A device nobody listed is adopted, and written down.
+        let newcomer = vec![Device {
+            dtype: "Load".into(), model: "6060B".into(),
+            resource: "TCPIP::1.1.1.1::gpib7,22::INSTR".into(),
+            write_topic: "OpenAir/System/Protocols/visa/Device/Load/6060B/Dev0/Write".into(),
+        }];
+        let merged = merge_roster(&tmp, &newcomer);
+        assert_eq!(merged.len(), 3);
+        let saved: Value = serde_json::from_str(
+            &std::fs::read_to_string(tmp.join(ROSTER)).unwrap()).unwrap();
+        let rows = saved["devices"].as_array().unwrap();
+        assert_eq!(rows.len(), 3, "a newly found instrument is recorded");
+        assert!(rows.iter().any(|r| r["model"] == json!("6060B")));
+
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
 
     #[test]
     fn a_bank_bar_is_named_for_its_slot_not_its_model_counter() {
@@ -1689,6 +1992,43 @@ mod tests {
         let blocks = &doc["AMPLITUDE"]["blocks"];
         assert!(blocks.get("Trigger").is_some());
         assert_eq!(blocks.as_object().unwrap().len(), 1);
+    }
+
+    #[test]
+    fn an_instrument_that_never_answers_is_declared_rather_than_discovered() {
+        // The HP 3235 matrix takes commands and answers none, so `*IDN?` gets
+        // nothing and no scan can see it. Its sheet says where it is instead,
+        // and names the command that puts it in a known state — resolved
+        // through the model's OWN vocabulary, so the address lives in the sheet
+        // and the words live in the YAK table.
+        let tmp = std::env::temp_dir().join(format!("oa-declared-{}", std::process::id()));
+        let dir = tmp.join("Instruments").join("Router").join("3235");
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(dir.join("3235.gui"), r#"{
+            "model": "3235", "type": "Router", "manufacturer": "HP",
+            "declared": {
+                "resource": "TCPIP::44.44.44.222::gpib7,10::INSTR",
+                "listen_only": true,
+                "on_connect": ["Open_All", "No_Such_Command"]
+            }
+        }"#).unwrap();
+        std::fs::write(dir.join("3235.yak"),
+            r#"{"do": {"Open_All": {"scpi": "OPEN 000-999"}}}"#).unwrap();
+
+        let found = declared_devices(&tmp);
+        assert_eq!(found.len(), 1);
+        assert_eq!(found[0].resource, "TCPIP::44.44.44.222::gpib7,10::INSTR");
+        assert_eq!(found[0].dtype, "Router");
+        assert!(found[0].listen_only, "the heartbeat must know not to probe it");
+        // The real command resolved; the fictional one was dropped with a
+        // complaint rather than sent as its own name.
+        assert_eq!(found[0].on_connect, vec!["OPEN 000-999".to_string()]);
+
+        // A sheet with no resource is a declaration of nothing.
+        std::fs::write(dir.join("3235.gui"),
+            r#"{"model": "3235", "type": "Router", "declared": {"listen_only": true}}"#).unwrap();
+        assert!(declared_devices(&tmp).is_empty());
+        let _ = std::fs::remove_dir_all(&tmp);
     }
 
     #[test]

@@ -5150,12 +5150,12 @@
       "unverified": true
     },
     "trigger_settings": {
-      "scpi": ":TRIGger:MODE?;:TRIGger:EDGE:LEVel?",
-      "scpiFast": ":TRIG:MODE?;:TRIG:EDGE:LEV?",
-      "description": "Trigger type and edge level, in one round trip.",
+      "scpi": ":TRIGger:MODE?;:TRIGger:EDGE:LEVel?;:TRIGger:EDGE:SOURce?",
+      "scpiFast": ":TRIG:MODE?;:TRIG:EDGE:LEV?;:TRIG:EDGE:SOUR?",
+      "description": "Trigger type, edge level and edge source, in one round trip.",
       "subsystem": "TRIGger",
       "returns": {
-        "count": 2,
+        "count": 3,
         "separator": ";",
         "fields": [
           {
@@ -5166,11 +5166,14 @@
             "name": "level",
             "type": "NR3",
             "unit": "V"
+          },
+          {
+            "name": "source",
+            "type": "CRD"
           }
         ]
       },
-      "notes": "Authored 2026-08-08 for the tabbed oscilloscope panel; not yet executed against hardware.",
-      "unverified": true
+      "notes": "Verified on the 54641D at gpib7,6, 2026-08-08: the three answer as `EDGE;+0.0E+00;CHAN1`, and setting CHAN2 reads back CHAN2. Each statement is absolute (leading colon) because a chained query resolves against the CURRENT path, not the root."
     },
     "math_settings": {
       "scpi": ":FUNCtion:DISPlay?;:FUNCtion:OPERation?;:FUNCtion:RANGe?;:FUNCtion:OFFSet?",

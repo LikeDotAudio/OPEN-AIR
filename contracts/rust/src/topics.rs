@@ -147,6 +147,35 @@ pub fn config(agent: &str) -> Result<String, TopicError> {
     Ok(format!("{ROOT}/System/Config/{agent}"))
 }
 
+/// `OpenAir/System/DataMigration/{source}/{key}` — fixed depth two.
+pub fn data_migration(source: &str, key: &str) -> Result<String, TopicError> {
+    seg("source", source)?;
+    seg("key", key)?;
+    Ok(format!("{ROOT}/System/DataMigration/{source}/{key}"))
+}
+
+pub fn data_migration_wildcard() -> String {
+    format!("{ROOT}/System/DataMigration/#")
+}
+
+/// `OpenAir/System/RepositoryManager/{...path}` — declared, not yet served.
+pub fn repository_manager(path: &[&str]) -> Result<String, TopicError> {
+    if path.is_empty() {
+        return Err(err("repositoryManager path", ""));
+    }
+    let mut topic = format!("{ROOT}/System/RepositoryManager");
+    for s in path {
+        seg("path segment", s)?;
+        topic.push('/');
+        topic.push_str(s);
+    }
+    Ok(topic)
+}
+
+pub fn repository_manager_wildcard() -> String {
+    format!("{ROOT}/System/RepositoryManager/#")
+}
+
 pub fn log(source: &str, level: &str) -> Result<String, TopicError> {
     seg("source", source)?;
     if !LOG_LEVELS.contains(&level) {
@@ -192,6 +221,10 @@ pub enum ParsedTopic {
     Config { agent: String },
     #[serde(rename = "log")]
     Log { source: String, level: String },
+    #[serde(rename = "dataMigration")]
+    DataMigration { source: String, key: String },
+    #[serde(rename = "repositoryManager")]
+    RepositoryManager { path: Vec<String> },
     #[serde(rename = "legacy")]
     Legacy(LegacyTopic),
     #[serde(rename = "unknown")]
@@ -341,6 +374,19 @@ pub fn parse(raw: &str) -> ParsedTopic {
                 ParsedTopic::Log {
                     source: source.to_string(),
                     level: level.to_string(),
+                }
+            }
+            (Some("DataMigration"), Some(source), Some(key), None) if is_segment(source) && is_segment(key) => {
+                ParsedTopic::DataMigration {
+                    source: source.to_string(),
+                    key: key.to_string(),
+                }
+            }
+            (Some("RepositoryManager"), Some(head), _, _)
+                if is_segment(head) && segs.iter().skip(4).all(|s| is_segment(s)) =>
+            {
+                ParsedTopic::RepositoryManager {
+                    path: segs.iter().skip(3).map(|s| s.to_string()).collect(),
                 }
             }
             _ => unknown,

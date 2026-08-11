@@ -34,6 +34,8 @@ export type ParsedTopic =
   | { kind: 'tests'; suite: string; path: string[] }
   | { kind: 'agents'; agent: string }
   | { kind: 'config'; agent: string }
+  | { kind: 'dataMigration'; source: string; key: string }
+  | { kind: 'repositoryManager'; path: string[] }
   | { kind: 'log'; source: string; level: LogLevel }
   | LegacyParsed
   | { kind: 'unknown'; raw: string }
@@ -104,6 +106,37 @@ export const Topics = {
     return `${ROOT}/System/Config/${assertSegment('agent', agent)}`
   },
 
+  /**
+   * Importer bus: `OpenAir/System/DataMigration/{source}/{key}`. Producers are
+   * the `*_importer.rs` modules under BackEnd/Core/DataMigration plus the panel
+   * widgets; the orchestrator subscribes `{source}` as a wildcard
+   * (orchestrator/src/main.rs — `.../+/FilePath`), so the depth is fixed at two.
+   */
+  dataMigration: {
+    topic(args: { source: string; key: string }): string {
+      return `${ROOT}/System/DataMigration/${assertSegment('source', args.source)}/${assertSegment('key', args.key)}`
+    },
+    wildcard(): string {
+      return `${ROOT}/System/DataMigration/#`
+    },
+  },
+
+  /**
+   * Repository editor bus: `OpenAir/System/RepositoryManager/{...path}`.
+   * DECLARED, NOT YET SERVED — the panel under 3_Data_Migration/0_Repository
+   * Manager publishes these, but no agent subscribes yet. It lives here so the
+   * panel's topics are grammatical; retire or rename it when the backend lands.
+   */
+  repositoryManager: {
+    topic(path: string[]): string {
+      if (path.length === 0) throw new TopicError('repositoryManager path', '')
+      return [`${ROOT}/System/RepositoryManager`, ...path.map((s) => assertSegment('path segment', s))].join('/')
+    },
+    wildcard(): string {
+      return `${ROOT}/System/RepositoryManager/#`
+    },
+  },
+
   log(args: { source: string; level: LogLevel }): string {
     if (!LOG_LEVELS.includes(args.level)) throw rangeError('log level', args.level)
     return `${ROOT}/System/Log/${assertSegment('source', args.source)}/${args.level}`
@@ -153,6 +186,12 @@ export const Topics = {
         }
         if (s2 === 'Log' && s3 !== undefined && s4 !== undefined && s5 === undefined && isSegment(s3) && isLogLevel(s4)) {
           return { kind: 'log', source: s3, level: s4 }
+        }
+        if (s2 === 'DataMigration' && s3 !== undefined && s4 !== undefined && s5 === undefined && isSegment(s3) && isSegment(s4)) {
+          return { kind: 'dataMigration', source: s3, key: s4 }
+        }
+        if (s2 === 'RepositoryManager' && s3 !== undefined && isSegment(s3) && segs.slice(4).every(isSegment)) {
+          return { kind: 'repositoryManager', path: segs.slice(3) }
         }
         return unknown
       default:

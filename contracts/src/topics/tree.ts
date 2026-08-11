@@ -76,6 +76,21 @@ export const TOPIC_FAMILIES = {
     producer: 'orchestrator',
     consumers: ['agents', 'ProtocolConfigDisplay'],
   },
+  dataMigration: {
+    pattern: 'OpenAir/System/DataMigration/{source}/{key}',
+    retain: 'retained-state',
+    payload: '-',
+    producer: 'data-migration importers + browser widgets',
+    consumers: ['orchestrator', '3_Data_Migration panels'],
+  },
+  repositoryManager: {
+    // Declared ahead of its agent: the panel publishes, nothing subscribes yet.
+    pattern: 'OpenAir/System/RepositoryManager/{...path}',
+    retain: 'live-event',
+    payload: '-',
+    producer: 'browser widgets',
+    consumers: ['(none yet — no agent serves this)'],
+  },
   log: {
     pattern: 'OpenAir/System/Log/{source}/{level}',
     retain: 'live-event',

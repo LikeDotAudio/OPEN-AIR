@@ -67,6 +67,14 @@ function build(family: string, rawArgs: Record<string, string | string[]>): stri
       return Topics.config(args['agent'] as string)
     case 'log':
       return Topics.log(args as Parameters<typeof Topics.log>[0])
+    case 'dataMigration':
+      return Topics.dataMigration.topic(args as { source: string; key: string })
+    case 'dataMigrationWildcard':
+      return Topics.dataMigration.wildcard()
+    case 'repositoryManager':
+      return Topics.repositoryManager.topic((rawArgs['path'] as string[]) ?? [])
+    case 'repositoryManagerWildcard':
+      return Topics.repositoryManager.wildcard()
     default:
       throw new Error(`vector family not implemented in TS: ${family}`)
   }

@@ -35,6 +35,16 @@ fn build(family: &str, args: &Value) -> Result<String, topics::TopicError> {
         "agentsWildcard" => Ok(topics::agents_wildcard()),
         "config" => topics::config(s(args, "agent")),
         "log" => topics::log(s(args, "source"), s(args, "level")),
+        "dataMigration" => topics::data_migration(s(args, "source"), s(args, "key")),
+        "dataMigrationWildcard" => Ok(topics::data_migration_wildcard()),
+        "repositoryManager" => {
+            let path: Vec<&str> = args["path"]
+                .as_array()
+                .map(|a| a.iter().map(|v| v.as_str().expect("path segment is a string")).collect())
+                .unwrap_or_default();
+            topics::repository_manager(&path)
+        }
+        "repositoryManagerWildcard" => Ok(topics::repository_manager_wildcard()),
         other => panic!("vector family not implemented in Rust: {other}"),
     }
 }

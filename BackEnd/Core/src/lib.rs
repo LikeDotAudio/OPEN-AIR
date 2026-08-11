@@ -62,6 +62,9 @@ pub mod oa_debug_toggler_rs;
 pub mod oa_log_processor_rs;
 pub mod oa_manifest_gen_rs;
 
+#[path = "../DataMigration/mod.rs"]
+pub mod data_migration;
+
 #[pymodule]
 // Inline comment: Logic for oaRustCore
 fn oaRustCore(m: &Bound<'_, PyModule>) -> PyResult<()> {

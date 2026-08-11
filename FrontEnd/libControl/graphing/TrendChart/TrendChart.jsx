@@ -3,8 +3,10 @@
  * Purpose: One reading, plotted against wall-clock time.
  * Description: Value-over-time strip chart for a `yak_listen` reading.
  *
- * Version: 26.08.08.1
+ * Version: 26.08.08.2
  * Change Log:
+ * - 2026-08-08: Fill the window when popped out (OaPopout), and measure off the
+ *   window event as well as the box — the observer is deaf across documents.
  * - 2026-08-08: Initial version — DMM trend.
  */
 
@@ -40,10 +42,43 @@ const TrendChart = ({ config, topic }) => {
         return l[lang] || l.En || '';
     })();
 
+    // EIGHT SUPPLIES ARE ONE QUESTION, NOT EIGHT.
+    //
+    // A trend per module is eight charts with eight y-axes, and comparing them
+    // means comparing pictures. Overlaid on one axis the comparison is the
+    // reading: which rail sagged, which tracked, which never came up. `match`
+    // is a topic pattern — the same wildcard discovery BankBars uses — so the
+    // series are whatever the bench has, not a list kept in step by hand.
+    const matchPattern = config?.match || '';
+    const names = config?.names || {};
+    const seriesTopics = React.useMemo(() => {
+        if (!matchPattern) return listen ? [listen] : [];
+        const p = matchPattern.split('/');
+        const hit = [];
+        for (const t of Object.keys(messages)) {
+            const parts = t.split('/');
+            let ok = p.length === parts.length;
+            for (let i = 0; ok && i < p.length; i += 1) {
+                if (p[i] === '#') { ok = true; break; }
+                if (p[i] !== '+' && p[i] !== parts[i]) ok = false;
+            }
+            if (ok) hit.push(t);
+        }
+        hit.sort();
+        return hit;
+    }, [matchPattern, listen, Object.keys(messages).join('|')]);
+
+    const nameOf = (t) => {
+        const seg = t.split('/');
+        const at = seg.indexOf('Device');
+        const key = at >= 0 ? `${seg[at + 2]}/${seg[at + 3]}` : t;
+        return names[key] || names[t] || key;
+    };
+
     // The unit travels with the value, so the axis is labelled by the
     // instrument rather than by the panel's assumption about it.
-    const reading = React.useMemo(() => {
-        const raw = listen ? messages[listen] : undefined;
+    const readingAt = (t) => {
+        const raw = t ? messages[t] : undefined;
         if (raw === undefined) return { value: undefined, unit: config?.units || '' };
         try {
             const p = JSON.parse(String(raw));
@@ -52,29 +87,40 @@ const TrendChart = ({ config, topic }) => {
             }
         } catch (e) { /* plain payload */ }
         return { value: Number(raw), unit: config?.units || '' };
-    }, [listen ? messages[listen] : undefined, config?.units]);
+    };
+    const reading = readingAt(seriesTopics[0]);
 
-    const [points, setPoints] = React.useState([]);
-    const latest = React.useRef(reading);
-    latest.current = reading;
+    // points: { topic -> [{t, v}] }
+    const [points, setPoints] = React.useState({});
+    const latest = React.useRef({});
+    latest.current = {};
+    seriesTopics.forEach((t) => { latest.current[t] = readingAt(t); });
 
     // A fresh value is drawn at once — a single ACQUIRE should not wait out the
     // cadence to appear — and the cadence then carries the line forward while
     // the value holds.
     const record = React.useCallback(() => {
-        const v = latest.current.value;
-        if (!Number.isFinite(v)) return;
         const now = Date.now();
+        const cutoff = now - windowSec * 1000;
         setPoints((prev) => {
-            const next = prev.concat([{ t: now, v }]);
-            const cutoff = now - windowSec * 1000;
-            let i = 0;
-            while (i < next.length && next[i].t < cutoff) i += 1;
-            return i > 0 ? next.slice(i) : next;
+            const next = {};
+            let touched = false;
+            for (const t of Object.keys(latest.current)) {
+                const v = latest.current[t].value;
+                const had = prev[t] || [];
+                if (!Number.isFinite(v)) { next[t] = had; continue; }
+                touched = true;
+                const grown = had.concat([{ t: now, v }]);
+                let i = 0;
+                while (i < grown.length && grown[i].t < cutoff) i += 1;
+                next[t] = i > 0 ? grown.slice(i) : grown;
+            }
+            return touched ? next : prev;
         });
     }, [windowSec]);
 
-    React.useEffect(() => { record(); }, [reading.value, record]);
+    React.useEffect(() => { record(); },
+        [seriesTopics.map((t) => String(messages[t] || '')).join('|'), record]);
     React.useEffect(() => {
         const id = setInterval(record, sampleMs);
         return () => clearInterval(id);
@@ -82,24 +128,42 @@ const TrendChart = ({ config, topic }) => {
 
     // Measured rather than stretched: a viewBox scaled to the pane would squash
     // the axis text along with the plot.
+    //
+    // Two measurements, because there are two ways this chart can be sized. In a
+    // panel it is `height` tall — the author's number — and only the width is
+    // discovered. Popped out (OaPopout marks the holder), the window IS the size:
+    // a 280px strip floating in a 800px window is not what was asked for. The
+    // window event carries the second case: a ResizeObserver made in THIS
+    // document does not fire for an element that now lives in another one.
     const boxRef = React.useRef(null);
-    const [width, setWidth] = React.useState(600);
+    const [box, setBox] = React.useState({ w: 600, h: 0 });
     React.useLayoutEffect(() => {
         const el = boxRef.current;
-        if (!el || !window.ResizeObserver) return;
-        const ro = new window.ResizeObserver(() => setWidth(el.clientWidth || 600));
-        ro.observe(el);
-        setWidth(el.clientWidth || 600);
-        return () => ro.disconnect();
-    }, []);
+        if (!el) return;
+        const measure = () => {
+            const host = el.parentElement;
+            const detached = !!(host && host.getAttribute && host.getAttribute('data-oa-detached') === '1');
+            setBox({
+                w: el.clientWidth || 600,
+                h: detached ? Math.max(0, (host.clientHeight || 0) - (label ? 16 : 0)) : 0,
+            });
+        };
+        const ro = window.ResizeObserver ? new window.ResizeObserver(measure) : null;
+        if (ro) ro.observe(el);
+        window.addEventListener('resize', measure);
+        measure();
+        return () => { if (ro) ro.disconnect(); window.removeEventListener('resize', measure); };
+    }, [label]);
+    const width = box.w;
+    const drawH = box.h > 120 ? box.h : height;
 
     const padL = 64, padR = 12, padT = 10, padB = 22;
     const plotW = Math.max(10, width - padL - padR);
-    const plotH = Math.max(10, height - padT - padB);
+    const plotH = Math.max(10, drawH - padT - padB);
 
-    // Autoscale, with a floor on the span so a dead-steady reading draws a flat
-    // line across the middle instead of a noise-amplified scribble.
-    const values = points.map((p) => p.v);
+    // Autoscale across EVERY series, so overlaid rails share one axis — the
+    // whole reason to overlay them is that the comparison is the reading.
+    const values = seriesTopics.flatMap((t) => (points[t] || []).map((p) => p.v));
     let lo = values.length ? Math.min(...values) : 0;
     let hi = values.length ? Math.max(...values) : 1;
     const span = hi - lo;
@@ -111,9 +175,23 @@ const TrendChart = ({ config, topic }) => {
     const x = (t) => padL + plotW * (1 - (now - t) / (windowSec * 1000));
     const y = (v) => padT + plotH * (1 - (v - lo) / (hi - lo));
 
-    const path = points.length
-        ? points.map((p, i) => `${i ? 'L' : 'M'}${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ')
-        : '';
+    // A palette rather than one colour: eight rails on one axis are only
+    // readable if each line keeps its identity, and the legend names them.
+    const PALETTE = config?.palette || ['#33A1FD', '#39D353', '#FF902C', '#FF6B6B',
+                                        '#B06CFF', '#00D4C8', '#FFD400', '#FF61C7'];
+    const series = seriesTopics.map((t, i) => {
+        const pts = points[t] || [];
+        return {
+            topic: t,
+            name: matchPattern ? nameOf(t) : label,
+            colour: matchPattern ? PALETTE[i % PALETTE.length] : line,
+            pts,
+            path: pts.length
+                ? pts.map((p, j) => `${j ? 'L' : 'M'}${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ')
+                : '',
+        };
+    });
+    const anyPoints = series.some((s) => s.pts.length > 0);
 
     const tick = (v) => {
         const a = Math.abs(v);
@@ -130,7 +208,7 @@ const TrendChart = ({ config, topic }) => {
                     {label.toUpperCase()}
                 </div>
             )}
-            <svg width={width} height={height} style={{ background: bg, borderRadius: '3px', display: 'block' }}>
+            <svg width={width} height={drawH} style={{ background: bg, borderRadius: '3px', display: 'block' }}>
                 {rows.map((v, i) => (
                     <g key={`r${i}`}>
                         <line x1={padL} x2={padL + plotW} y1={y(v)} y2={y(v)} stroke={grid} strokeWidth="1" />
@@ -142,21 +220,29 @@ const TrendChart = ({ config, topic }) => {
                     return (
                         <g key={`c${i}`}>
                             <line x1={cx} x2={cx} y1={padT} y2={padT + plotH} stroke={grid} strokeWidth="1" />
-                            <text x={cx} y={height - 6} textAnchor="middle" fill="#888" fontSize="9">
+                            <text x={cx} y={drawH - 6} textAnchor="middle" fill="#888" fontSize="9">
                                 {s === 0 ? 'now' : `-${s}s`}
                             </text>
                         </g>
                     );
                 })}
-                {path && <path d={path} fill="none" stroke={line} strokeWidth="2" />}
-                {points.length > 0 && (
-                    <circle cx={x(points[points.length - 1].t)} cy={y(points[points.length - 1].v)}
-                            r="3" fill={line} />
-                )}
+                {series.map((s, i) => (s.path
+                    ? <path key={`p${i}`} d={s.path} fill="none" stroke={s.colour} strokeWidth="2" />
+                    : null))}
+                {series.map((s, i) => (s.pts.length
+                    ? <circle key={`d${i}`} cx={x(s.pts[s.pts.length - 1].t)}
+                              cy={y(s.pts[s.pts.length - 1].v)} r="3" fill={s.colour} />
+                    : null))}
                 {reading.unit && (
                     <text x={padL + 4} y={padT + 11} fill="#888" fontSize="10">{reading.unit}</text>
                 )}
-                {!points.length && (
+                {matchPattern && series.map((s, i) => (
+                    <g key={`l${i}`} transform={`translate(${padL + 40 + (i % 4) * 150}, ${padT + 10 + Math.floor(i / 4) * 13})`}>
+                        <rect width="10" height="3" y="-3" fill={s.colour} />
+                        <text x="14" y="0" fill="#aaa" fontSize="9">{s.name}</text>
+                    </g>
+                ))}
+                {!anyPoints && (
                     <text x={padL + plotW / 2} y={padT + plotH / 2} textAnchor="middle" fill="#666" fontSize="11">
                         waiting for a reading
                     </text>

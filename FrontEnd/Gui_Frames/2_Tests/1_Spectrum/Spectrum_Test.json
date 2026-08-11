@@ -1,0 +1,426 @@
+{
+  "Spectrum_Test_Suite": {
+    "type": "OcaBin",
+    "description": {
+      "En": "Target Frequency Analyzer & Consolidated Multi-Scan Spectrum Test Suite",
+      "Fr": "Analyseur de fréquence cible et suite de tests de spectre à balayages consolidés",
+      "De": "Zielfrequenz-Analysator & konsolidierte Multi-Scan Spektrum-Testsuite",
+      "Es": "Analizador de frecuencia objetivo y suite de pruebas de espectro multiexploración consolidada"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto",
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Test_Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Consolidated Multi-Scan Spectrum Analyzer Test Suite",
+              "Fr": "Suite de tests d'analyseur de spectre à balayages multiples consolidés",
+              "De": "Konsolidierte Multi-Scan-Spektrumanalysator-Testsuite",
+              "Es": "Suite de pruebas de analizador de espectro de exploraciones múltiples consolidadas"
+            },
+            "text_size": 16,
+            "text_color": "#00FFCC"
+          }
+        },
+        "description": {
+          "En": "Consolidated spectrum view plotting all active frequency scans, target jump parameters, and frequency interest thresholds.",
+          "Fr": "Vue de spectre consolidée traçant tous les balayages de fréquence actifs, les paramètres de saut cible et les seuils d'intérêt.",
+          "De": "Konsolidierte Spektrumansicht zur Darstellung aller aktiven Frequenzscans, Zielsprungparameter und Frequenzgrenzwerte.",
+          "Es": "Vista de espectro consolidada que grafica todas las exploraciones de frecuencia activas, parámetros de salto objetivo y umbrales."
+        }
+      },
+      "Consolidated_Spectrum_Plot": {
+        "type": "DynamicGraph",
+        "id": "consolidated_spectrum_master_plot",
+        "plot_mode": "frequency_domain",
+        "title": "CONSOLIDATED SPECTRUM SCAN DISPLAY (ALL SCANS & TARGET TRACES)",
+        "layout": {
+          "height": 480,
+          "alpha": 0.95
+        },
+        "axis": {
+          "x": {
+            "label": {
+              "En": "Frequency (MHz)",
+              "Fr": "Fréquence (MHz)",
+              "De": "Frequenz (MHz)",
+              "Es": "Frecuencia (MHz)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": 100,
+              "max": 6000
+            },
+            "color": "white"
+          },
+          "y": {
+            "label": {
+              "En": "Amplitude (dBm)",
+              "Fr": "Amplitude (dBm)",
+              "De": "Amplitude (dBm)",
+              "Es": "Amplitud (dBm)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": -120,
+              "max": 15
+            },
+            "color": "#00FFCC"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true
+        },
+        "style": {
+          "bg_color": "#020B14",
+          "grid_color": "#092B38",
+          "title_color": "#00FFCC"
+        },
+        "datasets": [
+          {
+            "id": "consolidated_live_scan",
+            "label": {
+              "En": "Scan #1: Live Target Jump Trace (Lime)",
+              "Fr": "Balayage #1: Trace de saut cible en direct (Lime)",
+              "De": "Scan #1: Live-Zielsprungspur (Hellgrün)",
+              "Es": "Exploración #1: Traza de salto objetivo en vivo (Lima)"
+            },
+            "style": {
+              "line_color": "#00FF66",
+              "line_width": 2.2
+            },
+            "initial_csv_data": "x,y\n100.0,-105.2\n915.0,-9.8\n1000.0,-102.1\n1575.42,-44.6\n1800.0,-104.5\n2412.0,-4.8\n2437.0,-5.2\n3000.0,-108.0\n5180.0,-11.9\n6000.0,-106.3"
+          },
+          {
+            "id": "scan2_wideband_sweep",
+            "label": {
+              "En": "Scan #2: Wideband Floor Sweep (Cyan)",
+              "Fr": "Balayage #2: Balayage de bruit de fond (Cyan)",
+              "De": "Scan #2: Breitband-Rauschboden-Sweep (Cyan)",
+              "Es": "Exploración #2: Barrido de piso de ruido (Cian)"
+            },
+            "style": {
+              "line_color": "#00FFFF",
+              "line_width": 1.8
+            },
+            "initial_csv_data": "x,y\n100.0,-95.0\n500.0,-94.2\n915.0,-25.0\n1500.0,-96.1\n2400.0,-18.5\n3500.0,-97.8\n5180.0,-30.2\n6000.0,-98.0"
+          },
+          {
+            "id": "scan3_max_peak_hold",
+            "label": {
+              "En": "Scan #3: Consolidated Max Peak Hold (Gold)",
+              "Fr": "Balayage #3: Maintien de crête max consolidé (Or)",
+              "De": "Scan #3: Konsolidierter Max-Spitzenwert (Gold)",
+              "Es": "Exploración #3: Retención de pico máx. consolidada (Oro)"
+            },
+            "style": {
+              "line_color": "#FFCC00",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n100.0,-90.0\n915.0,-8.5\n1575.42,-41.0\n2412.0,-3.5\n2437.0,-4.0\n5180.0,-10.2\n6000.0,-92.0"
+          },
+          {
+            "id": "pass_fail_limit_line",
+            "label": {
+              "En": "Pass/Fail Threshold Envelope Limit (Red)",
+              "Fr": "Limite d'enveloppe de seuil Réussite/Échec (Rouge)",
+              "De": "Pass/Fail-Schwellenwert-Grenzlinie (Rot)",
+              "Es": "Límite de envolvente de umbral Pasa/Falla (Rojo)"
+            },
+            "style": {
+              "line_color": "#FF3344",
+              "line_width": 1.2
+            },
+            "initial_csv_data": "x,y\n100.0,-15.0\n6000.0,-15.0"
+          }
+        ],
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Control_Panel": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Frequency Jump, Span & Dwell Parameters",
+              "Fr": "Saut de fréquence, plage et paramètres de maintien",
+              "De": "Frequenzsprung-, Spannen- und Verweilparameter",
+              "Es": "Salto de frecuencia, span y parámetros de permanencia"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "target_freq_select": {
+            "type": "_SmartValue",
+            "topic": "OpenAir/Tests/Spectrum/TargetFrequency",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Target Frequency"
+                }
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": "915.000",
+                "units": "MHz"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "geometry": {
+              "width": 220,
+              "height": 45,
+              "font": 14
+            }
+          },
+          "span_mhz_input": {
+            "type": "_SmartValue",
+            "topic": "OpenAir/Tests/Spectrum/SpanMHz",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Scan Span"
+                }
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": "20.0",
+                "units": "MHz"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "geometry": {
+              "width": 180,
+              "height": 45,
+              "font": 14
+            }
+          },
+          "rbw_khz_input": {
+            "type": "_SmartValue",
+            "topic": "OpenAir/Tests/Spectrum/RBWkHz",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Resolution BW"
+                }
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": "100",
+                "units": "kHz"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "geometry": {
+              "width": 180,
+              "height": 45,
+              "font": 14
+            }
+          },
+          "jump_to_freq": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Spectrum/JumpCommand",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "JUMPING..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "JUMP TO FREQUENCY"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          },
+          "run_test_sequence": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Spectrum/RunSequence",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING TEST..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "RUN AUTO-SWEEP TEST"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          },
+          "save_test_data": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Spectrum/SaveData",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SAVING DATA..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "SAVE / EXPORT TEST LOG"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Target_Frequencies_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "List of Frequencies of Interest & Test Tolerances",
+          "Fr": "Liste des fréquences d'intérêt et tolérances de test",
+          "De": "Liste der interessierenden Frequenzen und Testtoleranzen",
+          "Es": "Lista de frecuencias de interés y tolerancias de prueba"
+        },
+        "topic": "OpenAir/Tests/Spectrum/FrequenciesOfInterest",
+        "headers": ["freq_id", "center_freq_mhz", "span_mhz", "rbw_khz", "expected_power_dbm", "tolerance_db", "status"],
+        "data": [
+          {
+            "freq_id": "F1_ISM_915",
+            "center_freq_mhz": "915.000",
+            "span_mhz": "10.0",
+            "rbw_khz": "100",
+            "expected_power_dbm": "-10.0",
+            "tolerance_db": "2.5",
+            "status": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "freq_id": "F2_GPS_L1",
+            "center_freq_mhz": "1575.420",
+            "span_mhz": "5.0",
+            "rbw_khz": "30",
+            "expected_power_dbm": "-45.0",
+            "tolerance_db": "3.0",
+            "status": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "freq_id": "F3_WIFI_2412",
+            "center_freq_mhz": "2412.000",
+            "span_mhz": "20.0",
+            "rbw_khz": "100",
+            "expected_power_dbm": "-5.0",
+            "tolerance_db": "1.5",
+            "status": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "freq_id": "F4_WIFI_2437",
+            "center_freq_mhz": "2437.000",
+            "span_mhz": "20.0",
+            "rbw_khz": "100",
+            "expected_power_dbm": "-5.0",
+            "tolerance_db": "1.5",
+            "status": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "freq_id": "F5_UNII_5180",
+            "center_freq_mhz": "5180.000",
+            "span_mhz": "40.0",
+            "rbw_khz": "300",
+            "expected_power_dbm": "-12.0",
+            "tolerance_db": "2.0",
+            "status": "PENDING",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      },
+      "Captured_Test_Data_Log": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Recorded Measurements & Data Log",
+          "Fr": "Mesures enregistrées et journal de données",
+          "De": "Aufgezeichnete Messungen & Datenprotokoll",
+          "Es": "Mediciones registradas y registro de datos"
+        },
+        "topic": "OpenAir/Tests/Spectrum/CapturedDataLog",
+        "headers": ["timestamp", "target_freq_mhz", "measured_peak_mhz", "measured_power_dbm", "delta_db", "result"],
+        "data": [
+          {
+            "timestamp": "2026-08-10 23:35:10",
+            "target_freq_mhz": "915.000",
+            "measured_peak_mhz": "915.002",
+            "measured_power_dbm": "-9.80",
+            "delta_db": "+0.20",
+            "result": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:35:15",
+            "target_freq_mhz": "1575.420",
+            "measured_peak_mhz": "1575.419",
+            "measured_power_dbm": "-44.60",
+            "delta_db": "+0.40",
+            "result": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:35:20",
+            "target_freq_mhz": "2412.000",
+            "measured_peak_mhz": "2412.005",
+            "measured_power_dbm": "-4.80",
+            "delta_db": "+0.20",
+            "result": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:35:25",
+            "target_freq_mhz": "2437.000",
+            "measured_peak_mhz": "2437.001",
+            "measured_power_dbm": "-5.20",
+            "delta_db": "-0.20",
+            "result": "PASS",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:35:30",
+            "target_freq_mhz": "5180.000",
+            "measured_peak_mhz": "5180.010",
+            "measured_power_dbm": "-11.90",
+            "delta_db": "+0.10",
+            "result": "PASS",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

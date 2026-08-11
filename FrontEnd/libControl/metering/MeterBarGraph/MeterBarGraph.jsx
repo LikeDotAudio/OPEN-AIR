@@ -277,6 +277,38 @@ const MeterBody = ({ config, layout, values, min, max }) => {
 // --- 4. MAIN ORCHESTRATOR ---
 const MeterBarGraph = ({ value, config }) => {
     const c = config || {};
+
+    // A QUANTITY THE INSTRUMENT DOES NOT REPORT.
+    //
+    // A 66101A answers volts and amps; watts is the two multiplied, and nothing
+    // on the bus carries it. Rather than invent a reading, `multiply_by` names a
+    // second one and this meter shows the product:
+    //
+    //   "multiply_by": { "yak_listen": "module_settings/meas_current" }
+    //
+    // instruments.rs stamps `yak_listen_topic` beside any `yak_listen` at any
+    // depth, so the nested spec arrives bound to this device — the factor can
+    // only ever come from the same module as the value.
+    //
+    // Both halves or nothing: half a product is not a smaller number, it is a
+    // different quantity, so a missing factor shows no reading rather than the
+    // volts on a scale marked watts.
+    const factorTopic = c.multiply_by && c.multiply_by.yak_listen_topic;
+    const messages = (factorTopic && window.useMqttMessages)
+        ? window.useMqttMessages() : null;
+    if (factorTopic) {
+        let factor;
+        const raw = messages ? messages[factorTopic] : undefined;
+        if (raw !== undefined) {
+            try {
+                const p = JSON.parse(String(raw));
+                factor = Number(p && p.value !== undefined ? p.value : raw);
+            } catch (e) { factor = Number(raw); }
+        }
+        const base = Number(value && typeof value === 'object' ? value.value : value);
+        value = (Number.isFinite(base) && Number.isFinite(factor)) ? base * factor : undefined;
+    }
+
     const geom = c.geometry || {};
     const cosmetics = c.cosmetics || {};
     const colors = cosmetics.colors || {};

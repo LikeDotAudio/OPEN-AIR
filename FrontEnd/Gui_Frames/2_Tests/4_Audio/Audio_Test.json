@@ -1,0 +1,438 @@
+{
+  "Audio_Test_Suite": {
+    "type": "OcaBin",
+    "description": {
+      "En": "Dual Oscillator Frequency Sweep & Audio Bode Plot Suite",
+      "Fr": "Suite de balayage de fréquence à double oscillateur et tracé de Bode audio",
+      "De": "Duo-Oszillator-Frequenzsweep & Audio-Bode-Diagramm-Suite",
+      "Es": "Suite de barrido de frecuencia de oscilador dual y diagrama de Bode de audio"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto",
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Test_Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Audio Test Suite: Tied Dual Oscillators, 4-Channel Scopes & Dynamic Bode Plot",
+              "Fr": "Suite de tests audio : oscillateurs doubles couplés, oscilloscopes 4 canaux et tracé de Bode dynamique",
+              "De": "Audio-Testsuite: Gekoppelte Duo-Oszillatoren, 4-Kanal-Oszilloskope & Dynamisches Bode-Diagramm",
+              "Es": "Suite de pruebas de audio: osciladores duales acoplados, osciloscopios de 4 canales y diagrama de Bode dinámico"
+            },
+            "text_size": 16,
+            "text_color": "#00E5FF"
+          }
+        },
+        "description": {
+          "En": "Linked dual signal generators feeding a Device Under Test (DUT). Monitored via 4 oscilloscope channels with real-time logarithmic Bode amplitude & phase response plotting.",
+          "Fr": "Générateurs de signaux doubles couplés alimentant un dispositif sous test (DUT). Surveillé via 4 canaux d'oscilloscope avec tracé logarithmique de réponse en amplitude et phase de Bode en temps réel.",
+          "De": "Gekoppelte Dual-Signalgeneratoren zur Speisung eines Testprüflings (DUT). Überwacht über 4 Oszilloskopkanäle mit logarithmischer Bode-Amplituden- und Phasenantwortanzeige in Echtzeit.",
+          "Es": "Generadores de señales duales acoplados alimentando un Dispositivo Bajo Prueba (DUT). Monitoreado mediante 4 canales de osciloscopio con diagrama logarítmico de respuesta de amplitud y fase de Bode en tiempo real."
+        }
+      },
+      "Oscillator_Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Dual Linked Signal Generators (Oscillators 1 & 2)",
+              "Fr": "Générateurs de signaux doubles couplés (Oscillateurs 1 & 2)",
+              "De": "Gekoppelte Dual-Signalgeneratoren (Oszillatoren 1 & 2)",
+              "Es": "Generadores de señales duales acoplados (Osciladores 1 y 2)"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "osc_coupling_mode": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Audio/Oscillator/Coupling",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "LINKED (HETERO-DYNE SWEEP)"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "INDEPENDENT OSCILLATORS"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "start_frequency": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Audio/Oscillator/StartFreq",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Start Freq: 20 Hz"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "stop_frequency": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Audio/Oscillator/StopFreq",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Stop Freq: 20,000 Hz"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "sweep_time_sec": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Audio/Oscillator/SweepTime",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Sweep Duration: 5.0 s"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "trigger_sweep": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Audio/Oscillator/TriggerSweep",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SWEEPING AUDIO FREQUENCIES..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "START LOG SWEEP"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Four_Channel_Oscilloscopes": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "4-Channel Oscilloscope Real-Time Monitor",
+              "Fr": "Moniteur en temps réel d'oscilloscope 4 canaux",
+              "De": "4-Kanal-Oszilloskop Echtzeit-Monitor",
+              "Es": "Monitor en tiempo real de osciloscopio de 4 canales"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "scope_ch1": {
+            "type": "DynamicGraph",
+            "id": "audio_scope_ch1",
+            "title": "Scope CH1: Osc 1 Reference Drive Signal",
+            "layout": {
+              "height": 220,
+              "alpha": 0.9
+            },
+            "axis": {
+              "x": {
+                "label": { "En": "Time (ms)" },
+                "scale": "linear",
+                "color": "white"
+              },
+              "y": {
+                "label": { "En": "Voltage (V)" },
+                "scale": "linear",
+                "domain": { "min": -5.0, "max": 5.0 },
+                "color": "cyan"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "datasets": [
+              {
+                "id": "ds_scope_1",
+                "label": { "En": "CH1 - Osc 1 (Sine Ref)" },
+                "style": { "line_color": "cyan", "line_width": 2 },
+                "initial_csv_data": "x,y\n0,0.0\n1,2.83\n2,4.75\n3,4.75\n4,2.83\n5,0.0\n6,-2.83\n7,-4.75\n8,-4.75\n9,-2.83\n10,0.0"
+              }
+            ]
+          },
+          "scope_ch2": {
+            "type": "DynamicGraph",
+            "id": "audio_scope_ch2",
+            "title": "Scope CH2: Osc 2 Heterodyne / Carrier Signal",
+            "layout": {
+              "height": 220,
+              "alpha": 0.9
+            },
+            "axis": {
+              "x": {
+                "label": { "En": "Time (ms)" },
+                "scale": "linear",
+                "color": "white"
+              },
+              "y": {
+                "label": { "En": "Voltage (V)" },
+                "scale": "linear",
+                "domain": { "min": -5.0, "max": 5.0 },
+                "color": "magenta"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "datasets": [
+              {
+                "id": "ds_scope_2",
+                "label": { "En": "CH2 - Osc 2 (Tied Offset)" },
+                "style": { "line_color": "magenta", "line_width": 2 },
+                "initial_csv_data": "x,y\n0,4.75\n1,2.83\n2,0.0\n3,-2.83\n4,-4.75\n5,-4.75\n6,-2.83\n7,0.0\n8,2.83\n9,4.75\n10,4.75"
+              }
+            ]
+          },
+          "scope_ch3": {
+            "type": "DynamicGraph",
+            "id": "audio_scope_ch3",
+            "title": "Scope CH3: DUT Input Node (Pre-Filter)",
+            "layout": {
+              "height": 220,
+              "alpha": 0.9
+            },
+            "axis": {
+              "x": {
+                "label": { "En": "Time (ms)" },
+                "scale": "linear",
+                "color": "white"
+              },
+              "y": {
+                "label": { "En": "Voltage (V)" },
+                "scale": "linear",
+                "domain": { "min": -5.0, "max": 5.0 },
+                "color": "yellow"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "datasets": [
+              {
+                "id": "ds_scope_3",
+                "label": { "En": "CH3 - DUT Input" },
+                "style": { "line_color": "yellow", "line_width": 2 },
+                "initial_csv_data": "x,y\n0,0.0\n1,2.5\n2,4.2\n3,4.2\n4,2.5\n5,0.0\n6,-2.5\n7,-4.2\n8,-4.2\n9,-2.5\n10,0.0"
+              }
+            ]
+          },
+          "scope_ch4": {
+            "type": "DynamicGraph",
+            "id": "audio_scope_ch4",
+            "title": "Scope CH4: DUT Output Node (Post-Filter)",
+            "layout": {
+              "height": 220,
+              "alpha": 0.9
+            },
+            "axis": {
+              "x": {
+                "label": { "En": "Time (ms)" },
+                "scale": "linear",
+                "color": "white"
+              },
+              "y": {
+                "label": { "En": "Voltage (V)" },
+                "scale": "linear",
+                "domain": { "min": -5.0, "max": 5.0 },
+                "color": "#00FF66"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "datasets": [
+              {
+                "id": "ds_scope_4",
+                "label": { "En": "CH4 - DUT Output" },
+                "style": { "line_color": "#00FF66", "line_width": 2 },
+                "initial_csv_data": "x,y\n0,0.0\n1,1.2\n2,1.8\n3,1.8\n4,1.2\n5,0.0\n6,-1.2\n7,-1.8\n8,-1.8\n9,-1.2\n10,0.0"
+              }
+            ]
+          }
+        }
+      },
+      "Bode_Plot": {
+        "type": "DynamicGraph",
+        "id": "audio_bode_plot",
+        "plot_mode": "frequency_domain",
+        "title": "Frequency Response Bode Plot (Gain & Phase vs Frequency)",
+        "layout": {
+          "height": 450,
+          "alpha": 0.95
+        },
+        "axis": {
+          "x": {
+            "label": {
+              "En": "Frequency (Hz)",
+              "Fr": "Fréquence (Hz)",
+              "De": "Frequenz (Hz)",
+              "Es": "Frecuencia (Hz)"
+            },
+            "scale": "log",
+            "domain": {
+              "min": 20,
+              "max": 20000
+            },
+            "color": "white"
+          },
+          "y": {
+            "label": {
+              "En": "Gain (dB) / Phase (Deg)",
+              "Fr": "Gain (dB) / Phase (Deg)",
+              "De": "Verstärkung (dB) / Phase (Grad)",
+              "Es": "Ganancia (dB) / Fase (Deg)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": -60,
+              "max": 20
+            },
+            "color": "#00E5FF"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true
+        },
+        "style": {
+          "bg_color": "#050B14",
+          "grid_color": "#122A45",
+          "title_color": "#00E5FF"
+        },
+        "datasets": [
+          {
+            "id": "bode_gain",
+            "label": {
+              "En": "Magnitude Response (dB)",
+              "Fr": "Réponse en magnitude (dB)",
+              "De": "Amplitudengang (dB)",
+              "Es": "Respuesta de magnitud (dB)"
+            },
+            "style": {
+              "line_color": "#00E5FF",
+              "line_width": 2.5
+            },
+            "initial_csv_data": "x,y\n20,0.0\n50,0.0\n100,-0.1\n200,-0.2\n500,-0.5\n1000,-3.01\n2000,-7.5\n5000,-14.2\n10000,-20.1\n20000,-26.4"
+          },
+          {
+            "id": "bode_phase",
+            "label": {
+              "En": "Phase Response (Degrees)",
+              "Fr": "Réponse en phase (Degrés)",
+              "De": "Phasengang (Grad)",
+              "Es": "Respuesta de fase (Grados)"
+            },
+            "style": {
+              "line_color": "#FF9900",
+              "line_width": 2
+            },
+            "initial_csv_data": "x,y\n20,0.0\n50,-5.0\n100,-11.3\n200,-21.8\n500,-45.0\n1000,-63.4\n2000,-76.0\n5000,-84.3\n10000,-87.1\n20000,-88.6"
+          }
+        ],
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Bode_Measurements_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Bode Frequency Sweep Measured Data Log over Time",
+          "Fr": "Journal de données mesurées de balayage de fréquence de Bode dans le temps",
+          "De": "Bode-Frequenzsweep Gemessene Datenprotokoll über die Zeit",
+          "Es": "Registro de datos medidos del barrido de frecuencia de Bode a lo largo del tiempo"
+        },
+        "topic": "OpenAir/Tests/Audio/BodeLog",
+        "headers": ["timestamp", "freq_hz", "input_vrms", "output_vrms", "gain_db", "phase_deg", "thd_percent"],
+        "data": [
+          {
+            "timestamp": "2026-08-10 23:38:00",
+            "freq_hz": "20.0",
+            "input_vrms": "1.000",
+            "output_vrms": "1.000",
+            "gain_db": "0.00",
+            "phase_deg": "0.0",
+            "thd_percent": "0.02%",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:38:01",
+            "freq_hz": "100.0",
+            "input_vrms": "1.000",
+            "output_vrms": "0.988",
+            "gain_db": "-0.10",
+            "phase_deg": "-11.3",
+            "thd_percent": "0.03%",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:38:02",
+            "freq_hz": "1000.0",
+            "input_vrms": "1.000",
+            "output_vrms": "0.707",
+            "gain_db": "-3.01",
+            "phase_deg": "-63.4",
+            "thd_percent": "0.05%",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:38:03",
+            "freq_hz": "10000.0",
+            "input_vrms": "1.000",
+            "output_vrms": "0.099",
+            "gain_db": "-20.10",
+            "phase_deg": "-87.1",
+            "thd_percent": "0.11%",
+            "_row_state": "online"
+          },
+          {
+            "timestamp": "2026-08-10 23:38:04",
+            "freq_hz": "20000.0",
+            "input_vrms": "1.000",
+            "output_vrms": "0.048",
+            "gain_db": "-26.40",
+            "phase_deg": "-88.6",
+            "thd_percent": "0.18%",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

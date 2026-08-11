@@ -1,0 +1,543 @@
+{
+  "Waveform_Test_Suite": {
+    "type": "OcaBin",
+    "description": {
+      "En": "8-Channel Oscilloscope & Linked Multi-Oscillator Test Suite",
+      "Fr": "Suite de tests d'oscilloscope 8 canaux et multi-oscillateurs liés",
+      "De": "8-Kanal-Oszilloskop & verknüpfte Multi-Oszillator-Testsuite",
+      "Es": "Suite de pruebas de osciloscopio de 8 canales y osciladores vinculados"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto",
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Test_Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "8-Channel Waveform Scan & Linked Oscillator Test Suite",
+              "Fr": "Suite de tests de balayage de forme d'onde à 8 canaux et osc. liés",
+              "De": "8-Kanal-Wellenformscan & verknüpfte Oszillator-Testsuite",
+              "Es": "Suite de pruebas de exploración de forma de onda de 8 canales y osc. vinculados"
+            },
+            "text_size": 16,
+            "text_color": "#00FFCC"
+          }
+        },
+        "description": {
+          "En": "Multi-channel linked oscillator signal generation and 8-channel synchronized waveform capture across configurable frequency scan ranges.",
+          "Fr": "Génération de signal d'oscillateur lié multi-canal et capture de forme d'onde synchronisée à 8 canaux sur des plages de balayage de fréquence configurables.",
+          "De": "Mehrkanalige verknüpfte Oszillator-Signalerzeugung und synchrone 8-Kanal-Wellenformerfassung über konfigurierbare Frequenz-Scanbereiche.",
+          "Es": "Generación de señal de oscilador vinculado multicanal y captura de forma de onda sincronizada de 8 canales en rangos de exploración de frecuencia configurables."
+        }
+      },
+      "Master_Scan_Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Master Sweep & Frequency Range Controls",
+              "Fr": "Contrôles généraux de balayage et de plage de fréquence",
+              "De": "Haupt-Sweep & Frequenzbereichssteuerung",
+              "Es": "Controles maestros de barrido y rango de frecuencia"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "start_freq_mhz": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Scan/StartFreqMHz",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Start Freq (MHz)"
+                }
+              }
+            },
+            "value": 1.0,
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "stop_freq_mhz": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Scan/StopFreqMHz",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Stop Freq (MHz)"
+                }
+              }
+            },
+            "value": 100.0,
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "sweep_step_mhz": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Scan/StepMHz",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Step Size (MHz)"
+                }
+              }
+            },
+            "value": 5.0,
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "sweep_mode": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Scan/SweepMode",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Linear Sweep"
+                }
+              }
+            },
+            "layout": {
+              "width": 160,
+              "height": 45
+            }
+          },
+          "master_enable": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Scan/MasterEnable",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SWEEP RUNNING"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "START FREQ SCAN"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Linked_Oscillators_Panel": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Linked Multi-Oscillator Signal Generator Array (OSC 1 - OSC 8)",
+              "Fr": "Réseau de générateurs de signaux multi-oscillateurs liés (OSC 1 - OSC 8)",
+              "De": "Verknüpftes Multi-Oszillator-Signalgenerator-Array (OSC 1 - OSC 8)",
+              "Es": "Matriz de generadores de señales de osciladores múltiples vinculados (OSC 1 - OSC 8)"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "description": {
+          "En": "Control linked oscillators: configure waveform shapes, base frequencies, amplitude levels, phase offsets, and tracking parameters.",
+          "Fr": "Contrôlez les oscillateurs liés: configurez les formes d'onde, fréquences de base, niveaux d'amplitude, décalages de phase et paramètres de suivi.",
+          "De": "Steuern Sie verknüpfte Oszillatoren: Konfigurieren Sie Wellenformen, Grundfrequenzen, Amplitudenpegel, Phasenverschiebungen und Tracking-Parameter.",
+          "Es": "Controle osciladores vinculados: configure formas de onda, frecuencias base, niveles de amplitud, desfasajes y parámetros de seguimiento."
+        },
+        "fields": {
+          "osc_master_link_toggle": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Oscillators/LinkAll",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "LINKED TO FREQ SCAN"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "INDEPENDENT MODE"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          },
+          "osc1_wave_type": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Osc1/WaveType",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OSC 1: Sine (Ch 1/2)"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "osc2_wave_type": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Osc2/WaveType",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OSC 2: Square (Ch 3/4)"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "osc3_wave_type": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Osc3/WaveType",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OSC 3: Triangle (Ch 5/6)"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "osc4_wave_type": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Waveform/Osc4/WaveType",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "OSC 4: Pulse / Modulation (Ch 7/8)"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Oscillators_Config_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Linked Oscillator Assignment & Parameter Matrix",
+          "Fr": "Matrice d'assignation et de paramètres des oscillateurs liés",
+          "De": "Zuordnungs- und Parametermatrix für verknüpfte Oszillatoren",
+          "Es": "Matriz de asignación y parámetros de osciladores vinculados"
+        },
+        "topic": "OpenAir/Tests/Waveform/Oscillators/Matrix",
+        "headers": ["osc_id", "assigned_channels", "waveform", "freq_multiplier", "base_amplitude_vp", "phase_offset_deg", "link_status"],
+        "data": [
+          {
+            "osc_id": "OSC_1",
+            "assigned_channels": "CH1, CH2",
+            "waveform": "Sine",
+            "freq_multiplier": "1.0x",
+            "base_amplitude_vp": "1.0 Vpp",
+            "phase_offset_deg": "0.0°",
+            "link_status": "LINKED_SCAN",
+            "_row_state": "online"
+          },
+          {
+            "osc_id": "OSC_2",
+            "assigned_channels": "CH3, CH4",
+            "waveform": "Square",
+            "freq_multiplier": "2.0x (2nd Harm)",
+            "base_amplitude_vp": "0.8 Vpp",
+            "phase_offset_deg": "45.0°",
+            "link_status": "LINKED_SCAN",
+            "_row_state": "online"
+          },
+          {
+            "osc_id": "OSC_3",
+            "assigned_channels": "CH5, CH6",
+            "waveform": "Triangle",
+            "freq_multiplier": "0.5x (Sub)",
+            "base_amplitude_vp": "1.5 Vpp",
+            "phase_offset_deg": "90.0°",
+            "link_status": "LINKED_SCAN",
+            "_row_state": "online"
+          },
+          {
+            "osc_id": "OSC_4",
+            "assigned_channels": "CH7, CH8",
+            "waveform": "Pulse / Chirp",
+            "freq_multiplier": "1.0x (Modulated)",
+            "base_amplitude_vp": "0.5 Vpp",
+            "phase_offset_deg": "180.0°",
+            "link_status": "LINKED_SCAN",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      },
+      "8_Channel_Scope_Display": {
+        "type": "DynamicGraph",
+        "id": "oscilloscope_8ch_test_plot",
+        "plot_mode": "time_domain",
+        "title": "8-Channel Oscilloscope Real-Time Display (CH1 - CH8)",
+        "layout": {
+          "height": 550,
+          "alpha": 0.95
+        },
+        "axis": {
+          "x": {
+            "label": {
+              "En": "Time (μs)",
+              "Fr": "Temps (μs)",
+              "De": "Zeit (μs)",
+              "Es": "Tiempo (μs)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": 0,
+              "max": 10
+            },
+            "color": "white"
+          },
+          "y": {
+            "label": {
+              "En": "Amplitude (V)",
+              "Fr": "Amplitude (V)",
+              "De": "Amplitude (V)",
+              "Es": "Amplitud (V)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": -2.5,
+              "max": 2.5
+            },
+            "color": "cyan"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true
+        },
+        "style": {
+          "bg_color": "#050B14",
+          "grid_color": "#1A2B4C",
+          "title_color": "#00FFCC"
+        },
+        "datasets": [
+          {
+            "id": "ch1_sine_rf",
+            "label": {
+              "En": "CH 1: OSC 1 Sine Ref (Cyan)",
+              "Fr": "CH 1: OSC 1 Réf Sinus (Cyan)",
+              "De": "CH 1: OSC 1 Sinus Ref (Cyan)",
+              "Es": "CH 1: OSC 1 Ref Seno (Cian)"
+            },
+            "style": {
+              "line_color": "#00FFFF",
+              "line_width": 2
+            },
+            "initial_csv_data": "x,y\n0.0,0.000\n1.0,0.951\n2.0,0.588\n3.0,-0.588\n4.0,-0.951\n5.0,0.000\n6.0,0.951\n7.0,0.588\n8.0,-0.588\n9.0,-0.951\n10.0,0.000"
+          },
+          {
+            "id": "ch2_sine_phase",
+            "label": {
+              "En": "CH 2: OSC 1 Sine Phase Shift (Blue)",
+              "Fr": "CH 2: OSC 1 Déphasage Sinus (Bleu)",
+              "De": "CH 2: OSC 1 Sinus Phasenverschiebung (Blau)",
+              "Es": "CH 2: OSC 1 Desfasaje Seno (Azul)"
+            },
+            "style": {
+              "line_color": "#3399FF",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n0.0,0.707\n1.0,0.309\n2.0,-0.809\n3.0,-0.951\n4.0,-0.309\n5.0,0.707\n6.0,0.309\n7.0,-0.809\n8.0,-0.951\n9.0,-0.309\n10.0,0.707"
+          },
+          {
+            "id": "ch3_square_fund",
+            "label": {
+              "En": "CH 3: OSC 2 Square Clock (Yellow)",
+              "Fr": "CH 3: OSC 2 Horloge Carrée (Jaune)",
+              "De": "CH 3: OSC 2 Rechteck-Takt (Gelb)",
+              "Es": "CH 3: OSC 2 Reloj Cuadrado (Amarillo)"
+            },
+            "style": {
+              "line_color": "#FFFF00",
+              "line_width": 1.8
+            },
+            "initial_csv_data": "x,y\n0.0,0.800\n2.49,0.800\n2.5,-0.800\n4.99,-0.800\n5.0,0.800\n7.49,0.800\n7.5,-0.800\n9.99,-0.800\n10.0,0.800"
+          },
+          {
+            "id": "ch4_square_quad",
+            "label": {
+              "En": "CH 4: OSC 2 Square Quadrature (Orange)",
+              "Fr": "CH 4: OSC 2 Carré Quadrature (Orange)",
+              "De": "CH 4: OSC 2 Rechteck Quadratur (Orange)",
+              "Es": "CH 4: OSC 2 Cuadrado Cuadratura (Naranja)"
+            },
+            "style": {
+              "line_color": "#FF9900",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n0.0,-0.800\n1.24,-0.800\n1.25,0.800\n3.74,0.800\n3.75,-0.800\n6.24,-0.800\n6.25,0.800\n8.74,0.800\n8.75,-0.800\n10.0,-0.800"
+          },
+          {
+            "id": "ch5_triangle_sub",
+            "label": {
+              "En": "CH 5: OSC 3 Triangle Ramp (Green)",
+              "Fr": "CH 5: OSC 3 Rampa Triangulaire (Vert)",
+              "De": "CH 5: OSC 3 Dreieck Rampe (Grün)",
+              "Es": "CH 5: OSC 3 Rampa Triangular (Verde)"
+            },
+            "style": {
+              "line_color": "#00FF66",
+              "line_width": 1.8
+            },
+            "initial_csv_data": "x,y\n0.0,-1.500\n2.5,1.500\n5.0,-1.500\n7.5,1.500\n10.0,-1.500"
+          },
+          {
+            "id": "ch6_sawtooth_sub",
+            "label": {
+              "En": "CH 6: OSC 3 Sawtooth Modulation (Lime)",
+              "Fr": "CH 6: OSC 3 Modulation Dents de Scie (Lyme)",
+              "De": "CH 6: OSC 3 Sägezahn Modulation (Hellgrün)",
+              "Es": "CH 6: OSC 3 Modulación Diente de Sierra (Lima)"
+            },
+            "style": {
+              "line_color": "#CCFF00",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n0.0,-1.500\n4.99,1.500\n5.0,-1.500\n9.99,1.500\n10.0,-1.500"
+          },
+          {
+            "id": "ch7_pulse_burst",
+            "label": {
+              "En": "CH 7: OSC 4 RF Pulse Burst (Magenta)",
+              "Fr": "CH 7: OSC 4 Rafale d'impulsions RF (Magenta)",
+              "De": "CH 7: OSC 4 RF-Impulsburst (Magenta)",
+              "Es": "CH 7: OSC 4 Ráfaga de Impulsos RF (Magenta)"
+            },
+            "style": {
+              "line_color": "#FF00FF",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n0.0,0.000\n1.0,0.000\n1.1,0.500\n1.3,-0.500\n1.5,0.500\n1.7,-0.500\n1.9,0.500\n2.0,0.000\n6.0,0.000\n6.1,0.500\n6.3,-0.500\n6.5,0.500\n6.7,-0.500\n6.9,0.500\n7.0,0.000\n10.0,0.000"
+          },
+          {
+            "id": "ch8_chirp_scan",
+            "label": {
+              "En": "CH 8: OSC 4 Scan Chirp Response (Pink)",
+              "Fr": "CH 8: OSC 4 Réponse de balayage Chirp (Rose)",
+              "De": "CH 8: OSC 4 Scan Chirp Antwort (Rosa)",
+              "Es": "CH 8: OSC 4 Respuesta de exploración Chirp (Rosa)"
+            },
+            "style": {
+              "line_color": "#FF66CC",
+              "line_width": 1.5
+            },
+            "initial_csv_data": "x,y\n0.0,0.000\n1.0,0.479\n2.0,0.841\n3.0,0.141\n4.0,-0.757\n5.0,-0.959\n6.0,-0.279\n7.0,0.657\n8.0,0.989\n9.0,0.412\n10.0,-0.544"
+          }
+        ],
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      },
+      "Waveform_Test_Execution_Log": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Real-Time 8-Channel Measurement & Scan Log",
+          "Fr": "Mesures en temps réel et journal de balayage 8 canaux",
+          "De": "Echtzeit-8-Kanal-Mess- und Scan-Protokoll",
+          "Es": "Mediciones en tiempo real y registro de exploración de 8 canales"
+        },
+        "topic": "OpenAir/Tests/Waveform/ExecutionLog",
+        "headers": ["scan_point_mhz", "ch1_vpp", "ch2_vpp", "ch3_vpp", "ch4_vpp", "ch5_vpp", "ch6_vpp", "ch7_vpp", "ch8_vpp", "sync_lock"],
+        "data": [
+          {
+            "scan_point_mhz": "1.000 MHz",
+            "ch1_vpp": "1.00 V",
+            "ch2_vpp": "1.00 V",
+            "ch3_vpp": "0.80 V",
+            "ch4_vpp": "0.80 V",
+            "ch5_vpp": "1.50 V",
+            "ch6_vpp": "1.50 V",
+            "ch7_vpp": "0.50 V",
+            "ch8_vpp": "0.50 V",
+            "sync_lock": "LOCKED",
+            "_row_state": "online"
+          },
+          {
+            "scan_point_mhz": "25.000 MHz",
+            "ch1_vpp": "0.99 V",
+            "ch2_vpp": "0.98 V",
+            "ch3_vpp": "0.79 V",
+            "ch4_vpp": "0.79 V",
+            "ch5_vpp": "1.48 V",
+            "ch6_vpp": "1.47 V",
+            "ch7_vpp": "0.49 V",
+            "ch8_vpp": "0.49 V",
+            "sync_lock": "LOCKED",
+            "_row_state": "online"
+          },
+          {
+            "scan_point_mhz": "50.000 MHz",
+            "ch1_vpp": "0.98 V",
+            "ch2_vpp": "0.97 V",
+            "ch3_vpp": "0.77 V",
+            "ch4_vpp": "0.76 V",
+            "ch5_vpp": "1.45 V",
+            "ch6_vpp": "1.44 V",
+            "ch7_vpp": "0.48 V",
+            "ch8_vpp": "0.48 V",
+            "sync_lock": "LOCKED",
+            "_row_state": "online"
+          },
+          {
+            "scan_point_mhz": "75.000 MHz",
+            "ch1_vpp": "0.96 V",
+            "ch2_vpp": "0.95 V",
+            "ch3_vpp": "0.74 V",
+            "ch4_vpp": "0.74 V",
+            "ch5_vpp": "1.41 V",
+            "ch6_vpp": "1.40 V",
+            "ch7_vpp": "0.46 V",
+            "ch8_vpp": "0.46 V",
+            "sync_lock": "LOCKED",
+            "_row_state": "online"
+          },
+          {
+            "scan_point_mhz": "100.000 MHz",
+            "ch1_vpp": "0.95 V",
+            "ch2_vpp": "0.93 V",
+            "ch3_vpp": "0.71 V",
+            "ch4_vpp": "0.70 V",
+            "ch5_vpp": "1.37 V",
+            "ch6_vpp": "1.36 V",
+            "ch7_vpp": "0.44 V",
+            "ch8_vpp": "0.44 V",
+            "sync_lock": "LOCKED",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

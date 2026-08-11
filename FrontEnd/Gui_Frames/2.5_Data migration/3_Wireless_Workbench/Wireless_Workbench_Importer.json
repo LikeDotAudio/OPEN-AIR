@@ -1,0 +1,151 @@
+{
+  "Wireless_Workbench_Importer": {
+    "type": "OcaBin",
+    "description": {
+      "En": "Wireless Workbench File Importer Interface"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Wireless Workbench Importer (Backend: /BackEnd/Core/DataMigration/3_Wireless_Workbench)"
+            },
+            "text_size": 15,
+            "text_color": "#00FF66"
+          }
+        },
+        "description": {
+          "En": "Select a Shure Wireless Workbench (.wwb / .shw / .zip) project file to convert and import."
+        }
+      },
+      "Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Wireless Workbench File Selection & Import Controls"
+            }
+          }
+        },
+        "fields": {
+          "selected_file_path": {
+            "type": "_GuiTextInput",
+            "topic": "OpenAir/System/DataMigration/WWB/FilePath",
+            "yak_seed": false,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "File Path:"
+                }
+              }
+            },
+            "layout": {
+              "width": 550,
+              "height": 45
+            }
+          },
+          "browse_wwb_file": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "wwb_file_browser_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR WORKBENCH FILE..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "LOOK FOR WORKBENCH FILE (.wwb, .shw)..."
+                  }
+                }
+              }
+            },
+            "file_dialog": {
+              "title": "Select Wireless Workbench Show File",
+              "mode": "open_file",
+              "allowed_extensions": [".wwb", ".shw", ".zip"],
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/DataMigration/WWB/FilePath"
+            },
+            "geometry": {
+              "width": 310,
+              "height": 45
+            }
+          },
+          "convert": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/WWB/Convert",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING RUST PARSER..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "IMPORT & PARSE WORKBENCH DATA"
+                }
+              }
+            },
+            "layout": {
+              "width": 270,
+              "height": 45
+            }
+          },
+          "clear_table": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/WWB/Clear",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CLEARING TABLE..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "CLEAR DATA TABLE"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          }
+        }
+      },
+      "WWB_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Imported Wireless Workbench Frequency Data"
+        },
+        "topic": "OpenAir/System/DataMigration/WWB/ImportedData",
+        "headers": ["channel_name", "device_name", "manufacturer", "model", "band", "channel_number", "frequency_mhz", "zone"],
+        "data": [
+          {
+            "channel_id": "WWB_001",
+            "channel_name": "IEM Stereo Mix 1 (Singer)",
+            "group": "Monitor World",
+            "device_type": "Shure PSM1000 P10T",
+            "band": "G10",
+            "frequency_mhz": "494.325",
+            "rf_power_mw": "50",
+            "coordination_status": "COORDINATED",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

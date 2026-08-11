@@ -5,6 +5,10 @@
  *
  * Version: 26.08.08.2
  * Change Log:
+ * - 2026-08-08: Pop-out handed to OaPopout.Host — the graph is MOVED into the
+ *   overlay/window, so it keeps updating and the tab stops drawing a second copy.
+ * - 2026-08-08: Resize on the ELEMENT, not just the window, now that a graph can
+ *   be sized by a percentage height.
  * - 2026-07-05: Initial annotation and documentation added.
  * - 2026-08-08: Plot YAK trace readings (`traces` + `x_axis`), not just authored
  *               `datasets`. An instrument sends amplitudes ALONE — the frequency
@@ -566,11 +570,21 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     }, [traceSeries]);
 
     // Resize listener + dispose — mount/unmount only.
+    //
+    // The window event is not enough now that a graph may be sized by `height:
+    // "100%"` instead of a fixed pixel count: its box changes whenever anything
+    // ABOVE it does — a second tab row appearing, a block folding open — and the
+    // window never resized, so echarts kept drawing at the old height inside a
+    // box that had already moved. Watch the element, not the window.
     React.useEffect(() => {
         const resizeHandler = () => chartInstance.current && chartInstance.current.resize();
         window.addEventListener('resize', resizeHandler);
+        const ro = (window.ResizeObserver && chartRef.current)
+            ? new window.ResizeObserver(resizeHandler) : null;
+        if (ro) ro.observe(chartRef.current);
         return () => {
             window.removeEventListener('resize', resizeHandler);
+            if (ro) ro.disconnect();
             if (chartInstance.current) { chartInstance.current.dispose(); chartInstance.current = null; }
         };
     }, []);
@@ -606,11 +620,17 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         }
     }, [mqttData, traceSpecs.length]);
 
+    // The pop-out lives in OaPopout.Host (wrapped on by FieldComponent), which
+    // MOVES this element rather than re-plotting a copy of it: one chart
+    // instance, so a new capture reaches the detached window by simply arriving.
+    // The private version that used to live here wrote a snapshot of `option`
+    // into a fresh document, which never updated again, and left the tab drawing
+    // its own — live — copy beside it.
     return (
-        <div style={{ width: width, height: height, display: 'flex', flexDirection: 'column' }}>
-            <div 
-                ref={chartRef} 
-                style={{ flexGrow: 1, width: '100%', minHeight: '100px', border: '1px solid #333', borderRadius: '4px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111') }} 
+        <div style={{ width: width, height: height || '100%', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+            <div
+                ref={chartRef}
+                style={{ flexGrow: 1, width: '100%', minHeight: '100px', border: '1px solid #333', borderRadius: '4px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111') }}
             />
         </div>
     );

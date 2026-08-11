@@ -29,6 +29,7 @@ const isMomentary = (config) => (window.OaIsMomentaryControl
 const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const useMqtt = !!topic;
     const useMqttState = window.useMqttState;
+    const publish = window.useMqttPublish ? window.useMqttPublish() : null;
     const initialIsOn = config?.options?.ON?.selected || false;
     const [val, setVal] = useMqtt ? useMqttState(topic, value !== undefined ? value : initialIsOn, nodeJson) : [value !== undefined ? value : initialIsOn, onChange, 'En'];
     const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
@@ -40,8 +41,11 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     };
 
     const label = getLocalizedText(config?.label, "Toggle");
-    const onText = getLocalizedText(config?.label_active, label || "ON");
-    const offText = getLocalizedText(config?.label_inactive, label || "OFF");
+    const formattedVal = (typeof val === 'string' && val.length > 0 && val !== 'true' && val !== 'false' && val !== '1' && val !== '0')
+        ? (val.startsWith('Selected File:') ? val : `Selected File: ${val}`)
+        : null;
+    const onText = formattedVal ? formattedVal : getLocalizedText(config?.label_active, label || "ON");
+    const offText = formattedVal ? formattedVal : getLocalizedText(config?.label_inactive, label || "OFF");
 
     const layout = config?.layout || {};
     // Sizes go through oaCssLen, so a layout width of "100%" stays "100%" instead
@@ -110,6 +114,12 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     };
 
     const handlePointerDown = (e) => {
+        if (topic && topic.endsWith('/Clear')) {
+            const dataTopic = topic.replace(/\/Clear$/, '/ImportedData');
+            if (useMqtt && publish) {
+                publish(dataTopic, JSON.stringify([]), { retain: true });
+            }
+        }
         if (momentary) {
             // Keep receiving the pointer even if it slides off the button, so a
             // release outside it still reports false instead of sticking on.

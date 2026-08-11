@@ -3,8 +3,10 @@
  * Purpose: WidgetFactory component or utility.
  * Description: Handles logic and rendering for WidgetFactory component or utility.
  * 
- * Version: 26.07.05.1
+ * Version: 26.08.08.1
  * Change Log:
+ * - 2026-08-08: A growing wrapper becomes a flex column so its block can claim
+ *   the height; the button/wrapper sizing test moved to oaCssLen.js.
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
@@ -22,6 +24,18 @@
  */
 window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   if (!node) return null;
+
+  // A NODE THAT IS ONLY A BINDING HAS NOTHING TO SHOW.
+  //
+  // Some fields exist so something else can write to them: the matrix card's
+  // OPEN/CLOSE pair, a link flag the relay counts members by, a READ only the
+  // master presses. They carry a yak_handler and no affordance, and drawn
+  // anyway they come out as a stray empty box or a text field showing "1" that
+  // nobody can explain. `"hidden": true` says the node is plumbing.
+  //
+  // Skipped entirely rather than sized to zero — a zero-height widget still
+  // mounts, still seeds its topic, and still takes a grid cell.
+  if (node.hidden === true) return null;
 
   const COMPONENT_REGISTRY = {
     'OcaBin': window.OcaBin,
@@ -47,17 +61,15 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   // overflows it and overlaps the next block ("smooshed together"). So skip the
   // wrapper width/height for these and let FieldComponent's toggler branch size
   // the grid (height:auto). [[web-frontend-layout-quirks]]
-  const _t = (node.type || '').toLowerCase();
-  const _isButton = _t.includes('button') || _t.includes('toggle') || _t.includes('actuator');
-  const _isButtonGroup = _t.includes('toggler')
-    || (_isButton && node.options && typeof node.options === 'object'
-        && Object.keys(node.options).length > 1);
   // The same is true of a SINGLE button: the widget draws itself at
   // layout.width/height, so pinning the wrapper to those numbers too spends the
   // budget twice — FieldComponent's 10px button padding then has nowhere to
   // live, and a 34px-tall actuator spilled over the block below it. Let the
   // wrapper size to the button it holds.
-  const _sizeWrapper = !_isButtonGroup && !_isButton;
+  //
+  // The test lives in oaCssLen.js because OcaBlock needs the same answer when
+  // deciding whether a field can use a percentage height.
+  const _sizeWrapper = window.oaWrapperIsSized(node);
 
   // Map JSON layout constraints to CSS Grid attributes for reactive container sizing
   const gridStyles = {
@@ -157,6 +169,14 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   let wrapperStyle = FILL_CONTAINERS.includes(node.type)
     ? { ...gridStyles, height: '100%', width: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }
     : gridStyles;
+
+  // A container that GROWS has to hand the height it won to the thing inside
+  // it. A plain block wrapper stretches on its own, but its child still sizes to
+  // content, so the won space silently pools inside the wrapper. Becoming a flex
+  // column lets the child claim it (OcaBlock asks for it with flex: 1 1 auto).
+  if (!FILL_CONTAINERS.includes(node.type) && (wrapperStyle.flexGrow || 0) > 0) {
+    wrapperStyle = { ...wrapperStyle, display: 'flex', flexDirection: 'column', minHeight: 0 };
+  }
 
   // Explicit width/height (percent string or px number), e.g. set by the WYSIWYG
   // editor's resize handles. Only applied when present, so existing containers

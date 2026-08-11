@@ -1,0 +1,150 @@
+{
+  "IAS_Importer": {
+    "type": "OcaBin",
+    "description": {
+      "En": "IAS File Importer Interface"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "IAS (Intermodulation Analysis System) Importer (Backend: /BackEnd/Core/DataMigration/1_IAS)"
+            },
+            "text_size": 15,
+            "text_color": "#00FF66"
+          }
+        },
+        "description": {
+          "En": "Select an IAS export file (.ias / .html) to convert and import."
+        }
+      },
+      "Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "IAS File Selection & Import Controls"
+            }
+          }
+        },
+        "fields": {
+          "selected_file_path": {
+            "type": "_GuiTextInput",
+            "topic": "OpenAir/System/DataMigration/IAS/FilePath",
+            "yak_seed": false,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "File Path:"
+                }
+              }
+            },
+            "layout": {
+              "width": 550,
+              "height": 45
+            }
+          },
+          "browse_ias_file": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "ias_file_browser_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR IAS FILE..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "LOOK FOR IAS FILE (.ias, .html)..."
+                  }
+                }
+              }
+            },
+            "file_dialog": {
+              "title": "Select IAS Coordination File",
+              "mode": "open_file",
+              "allowed_extensions": [".ias", ".html", ".htm"],
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/DataMigration/IAS/FilePath"
+            },
+            "geometry": {
+              "width": 280,
+              "height": 45
+            }
+          },
+          "convert": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/IAS/Convert",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING RUST PARSER..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "IMPORT & PARSE IAS DATA"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "clear_table": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/IAS/Clear",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CLEARING TABLE..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "CLEAR DATA TABLE"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          }
+        }
+      },
+      "IAS_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Imported IAS Frequency Data"
+        },
+        "topic": "OpenAir/System/DataMigration/IAS/ImportedData",
+        "headers": ["name", "zone", "group", "device", "freq_mhz", "band_info"],
+        "data": [
+          {
+            "channel_id": "IAS_001",
+            "channel_name": "Lead Vocal Master",
+            "zone": "Main Stage",
+            "tx_model": "Shure AD4D",
+            "frequency_mhz": "512.150",
+            "intermod_class": "3T-3O",
+            "status": "COORDINATED",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

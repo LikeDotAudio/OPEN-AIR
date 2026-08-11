@@ -1,0 +1,150 @@
+{
+  "Soundbase_Importer": {
+    "type": "OcaBin",
+    "description": {
+      "En": "Soundbase File Importer Interface"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Soundbase Importer (Backend: /BackEnd/Core/DataMigration/2_Soundbase)"
+            },
+            "text_size": 15,
+            "text_color": "#00FF66"
+          }
+        },
+        "description": {
+          "En": "Select a Soundbase CSV export file to convert and import."
+        }
+      },
+      "Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Soundbase File Selection & Import Controls"
+            }
+          }
+        },
+        "fields": {
+          "selected_file_path": {
+            "type": "_GuiTextInput",
+            "topic": "OpenAir/System/DataMigration/Soundbase/FilePath",
+            "yak_seed": false,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "File Path:"
+                }
+              }
+            },
+            "layout": {
+              "width": 550,
+              "height": 45
+            }
+          },
+          "browse_soundbase_file": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "soundbase_file_browser_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR SOUNDBASE FILE..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "LOOK FOR SOUNDBASE CSV FILE (.csv)..."
+                  }
+                }
+              }
+            },
+            "file_dialog": {
+              "title": "Select Soundbase CSV Export File",
+              "mode": "open_file",
+              "allowed_extensions": [".csv"],
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/DataMigration/Soundbase/FilePath"
+            },
+            "geometry": {
+              "width": 290,
+              "height": 45
+            }
+          },
+          "convert": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/Soundbase/Convert",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING RUST PARSER..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "IMPORT & PARSE SOUNDBASE DATA"
+                }
+              }
+            },
+            "layout": {
+              "width": 260,
+              "height": 45
+            }
+          },
+          "clear_table": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/Soundbase/Clear",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CLEARING TABLE..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "CLEAR DATA TABLE"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Soundbase_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Imported Soundbase Frequency Data"
+        },
+        "topic": "OpenAir/System/DataMigration/Soundbase/ImportedData",
+        "headers": ["name", "group", "model", "band", "frequency_mhz", "spacing"],
+        "data": [
+          {
+            "channel_id": "SB_001",
+            "channel_name": "Simple Plan IEM 1",
+            "group": "Simple Plan IEM's",
+            "model": "ADTQ",
+            "band": "G57 - Narrowband",
+            "frequency_mhz": "566.600",
+            "spacing": "0.925",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

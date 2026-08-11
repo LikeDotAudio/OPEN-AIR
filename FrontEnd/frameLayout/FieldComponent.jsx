@@ -2,11 +2,30 @@
  * Header: FieldComponent.jsx
  * Purpose: FieldComponent component or utility.
  * Description: Handles logic and rendering for FieldComponent component or utility.
- * 
- * Version: 26.07.05.1
+ *
+ * Version: 26.08.08.2
  * Change Log:
+ * - 2026-08-08: BankBars and the audio analyzer join the wrapped set — every
+ *   widget that draws a plot is detachable, not just the graphing/ family.
+ * - 2026-08-08: Every graph branch renders inside OaPopout.Host, so pop-out is a
+ *   property of graphs rather than something DynamicGraph alone had.
  * - 2026-07-05: Initial annotation and documentation added.
  */
+
+// Pop-out is dispatched HERE, not authored into each graph. One widget had it,
+// four others drew the same kind of picture and could not be detached at all,
+// and the copy that existed had to be written again per widget. Wrapping at the
+// dispatch gives every graph the same two buttons from one implementation.
+//
+// Declared at module scope on purpose: a component defined inside the render
+// function is a NEW type on every render, and React would tear the graph down
+// and rebuild it — losing the echarts instance and its captured traces — every
+// time any value on the panel changed.
+const OaPopOut = ({ title, children }) => (
+    window.OaPopout
+        ? <window.OaPopout.Host title={title}>{children}</window.OaPopout.Host>
+        : children
+);
 
 // frameLayout/FieldComponent.jsx — the field/widget type dispatch + domain/value
 // flatten. Translates a leaf node's `type` into the matching libControl widget.
@@ -348,7 +367,9 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type === '_GuiTrendChart' || type === 'TrendChart') {
         return (
             <div style={{ ...style, height: 'auto' }}>
-                {window.TrendChart ? <window.TrendChart config={node} topic={topic} /> : null}
+                <OaPopOut title={title}>
+                    {window.TrendChart ? <window.TrendChart config={node} topic={topic} /> : null}
+                </OaPopOut>
             </div>
         );
     }
@@ -356,7 +377,9 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type === '_GuiBankBars' || type === 'BankBars') {
         return (
             <div style={{ ...style, height: 'auto' }}>
-                {window.BankBars ? <window.BankBars config={node} /> : null}
+                <OaPopOut title={title}>
+                    {window.BankBars ? <window.BankBars config={node} /> : null}
+                </OaPopOut>
             </div>
         );
     }
@@ -387,7 +410,9 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type === '_AudioAnalyzerDemo') {
         return (
             <div style={style}>
-                {window.AudioAnalyzerDemo ? <window.AudioAnalyzerDemo config={node} /> : null}
+                <OaPopOut title={title}>
+                    {window.AudioAnalyzerDemo ? <window.AudioAnalyzerDemo config={node} /> : null}
+                </OaPopOut>
             </div>
         );
     }
@@ -588,7 +613,9 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type === '_Radar' || type.toLowerCase().includes('radar')) {
         return (
             <div style={style}>
-                {window.Radar ? <window.Radar value={val} config={node} /> : <div style={{width: '200px', height: '200px', borderRadius: '50%', background: '#111'}}>Radar</div>}
+                <OaPopOut title={title}>
+                    {window.Radar ? <window.Radar value={val} config={node} /> : <div style={{width: '200px', height: '200px', borderRadius: '50%', background: '#111'}}>Radar</div>}
+                </OaPopOut>
             </div>
         );
     }
@@ -596,6 +623,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     if (type === 'DynamicGraph' || type === 'plot_widget' || type === '_AudioDynamics' || type === '_DynamicsEnvelope' || type === '_Equalization' || type === '_Reverb' || type.toLowerCase().includes('graph')) {
         return (
             <div style={style}>
+                <OaPopOut title={title}>
                 {type === '_AudioDynamics' ? (
                     window.AudioDynamics ? <window.AudioDynamics value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>AudioDynamics Component</div>
                 ) : type === '_DynamicsEnvelope' ? (
@@ -607,6 +635,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
                 ) : (
                     window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>
                 )}
+                </OaPopOut>
             </div>
         );
     }
@@ -679,10 +708,14 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
             );
         }
 
+        const isFileBrowser = type === '_FileBrowserButton' || type.toLowerCase().includes('filebrowser') || type.toLowerCase().includes('file_browser');
+
         // Single buttons
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-                {isWink ? (
+                {isFileBrowser ? (
+                    window.FileBrowserButton ? <window.FileBrowserButton value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <button>{title}</button>
+                ) : isWink ? (
                     window.OcaWinkButton ? <window.OcaWinkButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
                 ) : isTrapezoid ? (
                     window.OcaTrapezoidButton ? <window.OcaTrapezoidButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
@@ -739,7 +772,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    if (type.toLowerCase().includes('value') || type === '_TextInput' || type === '_SliderValue' || type === '_SmartInput') {
+    if (type.toLowerCase().includes('value') || type === '_TextInput' || type === '_GuiTextInput' || type === '_SliderValue' || type === '_SmartInput' || type.toLowerCase().includes('textinput')) {
         if (type === '_SliderValue' || type.toLowerCase().includes('slider')) {
             return (
                 <div style={style}>

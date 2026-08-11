@@ -1,0 +1,205 @@
+{
+  "Repository_Manager": {
+    "type": "OcaBin",
+    "description": {
+      "En": "System RF Repository Manager & Master Data Editor",
+      "Fr": "Gestionnaire de référentiel RF système et éditeur de données maître",
+      "De": "System-HF-Repository-Manager & Hauptdaten-Editor",
+      "Es": "Gestor de repositorio RF del sistema y editor de datos maestro"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto",
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "System RF Repository Manager (Backend: Data Migration / Data Editor)",
+              "Fr": "Gestionnaire de référentiel RF du système (Éditeur de données)",
+              "De": "System-HF-Repository-Manager (Daten-Editor)",
+              "Es": "Gestor de repositorio RF del sistema (Editor de datos)"
+            },
+            "text_size": 16,
+            "text_color": "#00FFCC"
+          }
+        },
+        "description": {
+          "En": "Full-featured interactive repository data editor tied directly to /BackEnd/Core/DataMigration/Data editor backend. Supports live record appending, editing, sorting, shuffling, deduplication, and JSON persistence.",
+          "Fr": "Éditeur de données interactif complet directement lié au serveur. Prise en charge de l'ajout, de l'édition, du tri, du mélange, de la déduplication et de la persistance JSON.",
+          "De": "Vollständiger interaktiver Repository-Dateneditor. Unterstützt Anhängen, Bearbeiten, Sortieren, Mischen, Duplikatentfernung und JSON-Persistenz.",
+          "Es": "Editor interactivo de datos del repositorio completo. Soporta añadir, editar, ordenar, mezclar, eliminar duplicados y persistencia JSON."
+        }
+      },
+      "Data_Editor_Control_Toolbar": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Repository Processing & Editing Toolbar",
+              "Fr": "Barre d'outils de traitement et d'édition du référentiel",
+              "De": "Repository-Verarbeitungs- & Bearbeitungs-Symbolleiste",
+              "Es": "Barra de herramientas de procesamiento y edición del repositorio"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "append_record": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/Append",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "APPEND NEW RECORD"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          },
+          "edit_selected": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/Edit",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "EDIT SELECTED ROW"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          },
+          "sort_freq": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/SortFrequency",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SORT BY FREQUENCY (ASC/DESC)"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "shuffle_list": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/Shuffle",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SHUFFLE REPOSITORY"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          },
+          "deduplicate": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/Deduplicate",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "PURGE DUPLICATES"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          },
+          "save_repository": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/RepositoryManager/Action/Save",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "SAVE REPOSITORY STATE"
+                }
+              }
+            },
+            "layout": {
+              "width": 220,
+              "height": 45
+            }
+          }
+        }
+      },
+      "Repository_Master_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Active RF Repository Master Data Table",
+          "Fr": "Tableau de données maître du référentiel RF actif",
+          "De": "Aktive HF-Repository-Hauptdatentabelle",
+          "Es": "Tabla de datos maestra del repositorio RF activo"
+        },
+        "topic": "OpenAir/System/RepositoryManager/MasterTable",
+        "headers": ["record_id", "zone", "group", "device", "name", "frequency_mhz", "peak_dbm", "status"],
+        "data": [
+          {
+            "record_id": "REC_001",
+            "zone": "Main Stage",
+            "group": "Vocals",
+            "device": "Shure AD4D",
+            "name": "Lead Vocal Mic",
+            "frequency_mhz": "512.150",
+            "peak_dbm": "-12.5",
+            "status": "ACTIVE",
+            "_row_state": "online"
+          },
+          {
+            "record_id": "REC_002",
+            "zone": "Main Stage",
+            "group": "Guitars",
+            "device": "Sennheiser SK 6000",
+            "name": "Guitar Wireless SL",
+            "frequency_mhz": "534.800",
+            "peak_dbm": "-18.0",
+            "status": "ACTIVE",
+            "_row_state": "online"
+          },
+          {
+            "record_id": "REC_003",
+            "zone": "Monitor World",
+            "group": "IEM",
+            "device": "Shure PSM1000 P10T",
+            "name": "Stereo IEM Mix 1",
+            "frequency_mhz": "494.325",
+            "peak_dbm": "-5.0",
+            "status": "ACTIVE",
+            "_row_state": "online"
+          },
+          {
+            "record_id": "REC_004",
+            "zone": "B-Stage",
+            "group": "Guest Mics",
+            "device": "Wisycom MTH400",
+            "name": "Guest Mic 01",
+            "frequency_mhz": "602.450",
+            "peak_dbm": "-22.0",
+            "status": "PENDING_SCAN",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

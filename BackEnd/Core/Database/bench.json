@@ -217,6 +217,13 @@
       "dev": 0,
       "host": "44.44.44.66",
       "manufacturer": null
+    },
+    {
+      "resource": "",
+      "type": "Spectrum",
+      "model": "unknown",
+      "dev": 0,
+      "host": ""
     }
   ]
 }

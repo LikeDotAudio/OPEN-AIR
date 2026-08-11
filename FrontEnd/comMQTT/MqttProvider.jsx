@@ -27,6 +27,7 @@ const OA_DISCOVERY_ACTIVITY_TOPIC = 'OpenAir/System/Discovery/Activity';
 // subscription every discovery table froze at whatever was baked into its
 // panel file at build time — the tab looked static while the bus was busy.
 const OA_DISCOVERED_ROWS_FILTER = 'OpenAir/System/Gui/Discovered/#';
+const OA_DATA_MIGRATION_FILTER = 'OpenAir/System/DataMigration/#';
 
 // Topics handled by the activity store instead of the value store. They are an
 // event stream: putting them in `messages` would re-render every widget on the
@@ -309,6 +310,9 @@ window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', usernam
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/Gui/#`);
             });
+            mqttClient.subscribe('OpenAir/System/#', (err) => {
+                if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/System/#`);
+            });
             // Live scan narration -> console AND the on-page activity feed. The
             // orchestrator's scan progress used to exist only in its own stdout,
             // which is invisible to anyone running the UI (doubly so in a
@@ -330,6 +334,9 @@ window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', usernam
             // move without a page reload.
             mqttClient.subscribe(OA_DISCOVERED_ROWS_FILTER, (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to ${OA_DISCOVERED_ROWS_FILTER}`);
+            });
+            mqttClient.subscribe(OA_DATA_MIGRATION_FILTER, (err) => {
+                if (!err) console.log(`📡📥📥 [MQTT] Subscribed to ${OA_DATA_MIGRATION_FILTER}`);
             });
             // Instrument replies, so `yak_readout` widgets can show them.
             mqttClient.subscribe(OA_VISA_READING_FILTER, (err) => {
@@ -393,11 +400,11 @@ window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', usernam
             // because every write there re-renders every widget on the page.
             if (OA_ACTIVITY_TOPICS.has(topic) || topic === OA_SCAN_STATE_TOPIC) return;
             const payload = message.toString();
-            // Debug diagnostic — enable in DevTools console with:
-            //     window.OA_MQTT_DEBUG = true
-            // Logs every incoming MQTT message with src identity so you can
-            // verify Python's broadcasts reach the browser. Set
-            // window.OA_MQTT_FILTER = 'center_freq' (substring) to limit.
+
+            if (topic.startsWith('OpenAir/System/DataMigration/')) {
+                console.log(`📡 [DataMigration MQTT] Topic: '${topic}' | Payload length: ${payload.length} bytes`);
+            }
+
             if (window.OA_MQTT_DEBUG) {
                 const flt = window.OA_MQTT_FILTER;
                 if (!flt || topic.indexOf(flt) >= 0) {
@@ -406,10 +413,20 @@ window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', usernam
                     console.log(`📥 [MQTT-IN] ${topic} | ${payload.slice(0, 120)}${_src ? ` | Src=${_src}` : ''}`);
                 }
             }
-            // Mirror to window so you can inspect from console:
-            //   window.OA_MQTT_LAST['<topic>']
             if (!window.OA_MQTT_LAST) window.OA_MQTT_LAST = {};
             window.OA_MQTT_LAST[topic] = payload;
+
+            // If a /Clear message arrives for any DataMigration source, clear the retained ImportedData topic
+            if (topic.startsWith('OpenAir/System/DataMigration/') && topic.endsWith('/Clear')) {
+                const dataTopic = topic.replace(/\/Clear$/, '/ImportedData');
+                console.log(`🧹 [DataMigration MQTT] Clearing retained topic '${dataTopic}'`);
+                try {
+                    mqttClient.publish(dataTopic, '[]', { retain: true });
+                } catch (e) {}
+                setMessages(prev => ({ ...prev, [topic]: payload, [dataTopic]: '[]' }));
+                return;
+            }
+
             setMessages(prev => ({ ...prev, [topic]: payload }));
         });
 
@@ -500,7 +517,8 @@ window.useMqttPublish = () => {
 // whether it may be seeded at all.
 window.OaIsMomentaryControl = (node) => {
     if (node && typeof node.momentary === 'boolean') return node.momentary;
-    return String((node && node.type) || '').toLowerCase().includes('actuator');
+    const typeStr = String((node && node.type) || '').toLowerCase();
+    return typeStr.includes('actuator') || typeStr.includes('filebrowser') || typeStr.includes('file_browser');
 };
 
 window.useMqttTrigger = () => {
@@ -534,11 +552,11 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
                 if (typeof parsed === 'object' && parsed !== null && Object.keys(parsed).some(k => k !== 'value' && k !== 'full_id')) {
                     next = parsed;
                 } else {
-                    next = parsed.value !== undefined ? parsed.value : parsed;
+                    next = (parsed && parsed.value !== undefined) ? parsed.value : parsed;
                 }
             } catch (e) {
-                const num = parseFloat(messages[topic]);
-                next = isNaN(num) ? messages[topic] : num;
+                // If it's plain text (like "Selected File: report.html"), preserve the full string
+                next = messages[topic];
             }
             // Mouse-capture rule: while THIS control is being actively
             // adjusted locally, the hand owns it — nothing inbound (our own
@@ -878,7 +896,7 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
         // the widget's props have moved on, and the exemption must reflect the
         // control that was actually being operated.
         const isMomentary = !!(window.OaIsMomentaryControl && window.OaIsMomentaryControl(nodeJson));
-        if (!isCommand) {
+        if (!isCommand && !isMomentary) {
             const RETAIN_SETTLE_MS = 400;
             if (state.settleTimer) clearTimeout(state.settleTimer);
             state.settleTimer = setTimeout(() => {

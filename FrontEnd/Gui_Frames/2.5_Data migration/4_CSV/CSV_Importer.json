@@ -1,0 +1,149 @@
+{
+  "CSV_Importer": {
+    "type": "OcaBin",
+    "description": {
+      "En": "CSV Classifier & Importer Interface"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Smart CSV Pattern Classifier (Backend: /BackEnd/Core/DataMigration/4_CSV)"
+            },
+            "text_size": 15,
+            "text_color": "#00FF66"
+          }
+        },
+        "description": {
+          "En": "Select any raw or exported CSV frequency file for automatic pattern recognition and parsing."
+        }
+      },
+      "Controls": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "CSV File Selection & Classifier Controls"
+            }
+          }
+        },
+        "fields": {
+          "selected_file_path": {
+            "type": "_GuiTextInput",
+            "topic": "OpenAir/System/DataMigration/CSV/FilePath",
+            "yak_seed": false,
+            "label": {
+              "active": {
+                "text": {
+                  "En": "File Path:"
+                }
+              }
+            },
+            "layout": {
+              "width": 550,
+              "height": 45
+            }
+          },
+          "browse_csv_file": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "csv_file_browser_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR CSV FILE..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "LOOK FOR CSV FILE (.csv)..."
+                  }
+                }
+              }
+            },
+            "file_dialog": {
+              "title": "Select Frequency CSV File",
+              "mode": "open_file",
+              "allowed_extensions": [".csv"],
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/DataMigration/CSV/FilePath"
+            },
+            "geometry": {
+              "width": 270,
+              "height": 45
+            }
+          },
+          "convert": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/CSV/Convert",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "RUNNING RUST PARSER..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "IMPORT & PARSE CSV DATA"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "clear_table": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/System/DataMigration/CSV/Clear",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "CLEARING TABLE..."
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "CLEAR DATA TABLE"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          }
+        }
+      },
+      "CSV_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Imported CSV Frequency Data"
+        },
+        "topic": "OpenAir/System/DataMigration/CSV/ImportedData",
+        "headers": ["channel_name", "zone", "group", "device", "freq_mhz", "band"],
+        "data": [
+          {
+            "channel_id": "CSV_001",
+            "channel_name": "General RF Ch 1",
+            "zone": "Parking Lot East",
+            "group": "CFTO",
+            "device": "Lectro Standard Block 22",
+            "frequency_mhz": "563.200",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      }
+    }
+  }
+}

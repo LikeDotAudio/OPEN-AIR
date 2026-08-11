@@ -3,8 +3,10 @@
  * Purpose: OcaBlock component or utility.
  * Description: Handles logic and rendering for OcaBlock component or utility.
  * 
- * Version: 26.07.05.1
+ * Version: 26.08.08.1
  * Change Log:
+ * - 2026-08-08: A block with layout.weight>0 whose field wants a % height now
+ *   stretches to give it one, instead of leaving the space around itself.
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
@@ -20,6 +22,26 @@ window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
   // A block titles itself via `description`; description.show_label toggles
   // whether that title row is displayed (default on).
   const showTitle = node.description?.show_label !== false;
+
+  // `layout.weight > 0` is the desktop grid weight: this block takes the
+  // leftover height instead of sizing to its contents. WidgetFactory already
+  // grows the WRAPPER, but a block that does not spend that height leaves the
+  // space open around itself — which is how the spectrum graph ended up pinned
+  // at 420px above half a screen of dead panel.
+  //
+  // Weight alone is not enough to start stretching, because five blocks already
+  // declare it while every field inside them is a fixed 30px tall (the DMM
+  // readout, the four trace rows). Stretching those would only push their own
+  // rows apart. A block fills when it grows AND something inside it asked for a
+  // PERCENTAGE height — that field is the one with a use for the space.
+  // A button is excluded even when it says "100%": its own widget reads that,
+  // not the wrapper, so no amount of block height would reach it (the traces
+  // tab's CONTINUOUS_MODE is exactly this case).
+  const wantsHeight = (f) => typeof f?.layout?.height === 'string'
+      && f.layout.height.trim().endsWith('%')
+      && window.oaWrapperIsSized(f);
+  const grows = (parseFloat(node.layout?.weight) || 0) > 0
+      && Object.values(node.fields || {}).some(wantsHeight);
 
   let gridCols = `repeat(${cols}, 1fr)`;
   if (node.column_sizing && Array.isArray(node.column_sizing)) {
@@ -50,7 +72,8 @@ window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
         border: 'none',
         backgroundColor: blockBg,
         padding: '0px',
-        borderRadius: '2px'
+        borderRadius: '2px',
+        ...(grows ? { flex: '1 1 auto', minHeight: 0, display: 'flex', flexDirection: 'column' } : {})
     }}>
       {node.center_line && (
         <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: node.center_line_width ? `${node.center_line_width}px` : '2px', background: node.center_line_color || 'rgba(0,0,0,0.5)', transform: 'translateX(-50%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -66,7 +89,11 @@ window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
           display: 'grid',
           gridTemplateColumns: gridCols,
           rowGap: `${parseFloat(node.layout?.row_spacing ?? node.row_spacing ?? 0) || 0}px`,
-          columnGap: `${parseFloat(node.layout?.column_spacing ?? node.column_spacing ?? 0) || 0}px`
+          columnGap: `${parseFloat(node.layout?.column_spacing ?? node.column_spacing ?? 0) || 0}px`,
+          // The grid is what the extra height is FOR: auto rows in a stretched
+          // grid grow to fill it, so a `height: "100%"` field inside finally has
+          // something to be a percentage of.
+          ...(grows ? { flex: '1 1 auto', minHeight: 0 } : {})
       }}>
         {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
           <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={nodeName ? `${path_prefix}/${nodeName}` : path_prefix} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />

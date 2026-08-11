@@ -1231,6 +1231,16 @@ fn repeat_unit(
                 // to the first member — any of them reaches the mainframe.
                 let (tokens, dev) = &members[0];
                 let (mut bound, n) = prepare(block, dev, Some(tokens), caps);
+                // The header is about the whole bank, so it spans every column
+                // the units occupy rather than being squeezed into the first.
+                if let Some(map) = bound.as_object_mut() {
+                    let layout = map
+                        .entry("layout".to_string())
+                        .or_insert_with(|| json!({}));
+                    if let Some(l) = layout.as_object_mut() {
+                        l.insert("col_span".to_string(), json!(members.len().max(1)));
+                    }
+                }
                 stamp_link_veto(&mut bound, &veto);
                 // A bank graph is about every member, not the one the deck
                 // happens to be bound to.
@@ -1253,10 +1263,17 @@ fn repeat_unit(
         .get("description")
         .cloned()
         .unwrap_or_else(|| json!({ "En": name }));
-    let columns = spec
-        .get("columns")
-        .cloned()
-        .unwrap_or_else(|| json!(std::cmp::min(4, members.len())));
+    // `"columns": "units"` — one column per member, whatever the bench has.
+    //
+    // A bank of meters reads across: volts, amps and watts stacked in a strip,
+    // strips side by side, so the eye compares the same quantity along a row.
+    // The count cannot be authored because it is however many modules were
+    // found, so the manifest names the RULE and the builder does the counting.
+    let columns = match spec.get("columns") {
+        Some(Value::String(s)) if s == "units" => json!(members.len().max(1)),
+        Some(other) => other.clone(),
+        None => json!(std::cmp::min(4, members.len())),
+    };
 
     let station = json!({
         "type": "OcaBlock",

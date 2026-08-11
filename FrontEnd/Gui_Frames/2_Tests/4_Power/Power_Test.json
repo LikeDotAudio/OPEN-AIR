@@ -1,0 +1,489 @@
+{
+  "Power_Test_Suite": {
+    "type": "OcaBin",
+    "description": {
+      "En": "8-Channel Linked Power Supply & Dual DC Load Meter Test Suite",
+      "Fr": "Suite de tests d'alimentation 8 canaux liés et de deux compteurs de charge DC",
+      "De": "8-Kanal verknüpfte Stromversorgung & Duo DC-Lastmessgerät-Testsuite",
+      "Es": "Suite de pruebas de fuente de alimentación vinculada de 8 canales y dos medidores de carga CC"
+    },
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto",
+      "scale_to_fit": false
+    },
+    "blocks": {
+      "Test_Header": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "8-Channel Power Supply Array & Dual Electronic DC Load Test Suite",
+              "Fr": "Réseau d'alimentations 8 canaux et suite de tests de charge DC électronique double",
+              "De": "8-Kanal-Netzgerät-Array & Duo Elektronische DC-Last-Testsuite",
+              "Es": "Matriz de fuentes de alimentación de 8 canales y suite de pruebas de carga CC electrónica dual"
+            },
+            "text_size": 16,
+            "text_color": "#FFCC00"
+          }
+        },
+        "description": {
+          "En": "Gang and control 8 power supply units (PSUs) with linked voltage/current limits and live readouts, coupled with 2 Digital DC Electronic Load Meters.",
+          "Fr": "Combinez et contrôlez 8 blocs d'alimentation (PSU) avec des limites de tension/courant liées et des lectures en direct, couplés à 2 compteurs de charge électronique DC numériques.",
+          "De": "Koppeln und steuern Sie 8 Netzgeräte (PSUs) mit verknüpften Spannungs-/Strombegrenzungen und Live-Messwerten, gekoppelt mit 2 digitalen elektronischen DC-Lastmessgeräten.",
+          "Es": "Agrupe y controle 8 fuentes de alimentación (PSU) con límites de voltaje/corriente vinculados y lecturas en vivo, junto con 2 medidores de carga electrónica CC digitales."
+        }
+      },
+      "Master_PSU_Control_Panel": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Master Linked PSU Array Controls & Global Max Limits",
+              "Fr": "Contrôles généraux du réseau PSU lié et limites maximales globales",
+              "De": "Haupt-PSU-Array-Steuerung & globale Höchstgrenzen",
+              "Es": "Controles maestros del conjunto de PSU vinculadas y límites máximos globales"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "fields": {
+          "psu_link_mode": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/Master/LinkMode",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "ALL 8 PSUs LINKED (GANGED)"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "INDIVIDUAL PSU CONTROL"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "master_voltage_max": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/Master/VoltageMax",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Master Max Voltage (V)"
+                }
+              }
+            },
+            "value": 24.0,
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "master_current_max": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/Master/CurrentMax",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Master Max Current (A)"
+                }
+              }
+            },
+            "value": 5.0,
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "psu_master_output_toggle": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/Master/OutputToggle",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "MASTER OUTPUT ON"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "MASTER OUTPUT OFF"
+                }
+              }
+            },
+            "layout": {
+              "width": 200,
+              "height": 45
+            }
+          }
+        }
+      },
+      "PSU_8Channel_Readout_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "8 Power Supply Units (PSU 1 - PSU 8) Linked Configuration & Live Readouts",
+          "Fr": "8 unités d'alimentation (PSU 1 - PSU 8) Configuration liée et lectures en direct",
+          "De": "8 Netzgeräte (PSU 1 - PSU 8) Verknüpfte Konfiguration & Live-Messwerte",
+          "Es": "8 fuentes de alimentación (PSU 1 - PSU 8) Configuración vinculada y lecturas en vivo"
+        },
+        "topic": "OpenAir/Tests/Power/PSUArray/Table",
+        "headers": ["psu_id", "link_state", "voltage_limit_v", "current_limit_a", "measured_v", "measured_a", "calculated_power_w", "status"],
+        "data": [
+          {
+            "psu_id": "PSU 1 (Main VCC)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "12.00 V",
+            "current_limit_a": "3.00 A",
+            "measured_v": "12.01 V",
+            "measured_a": "1.42 A",
+            "calculated_power_w": "17.05 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 2 (Aux VCC)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "12.00 V",
+            "current_limit_a": "3.00 A",
+            "measured_v": "12.00 V",
+            "measured_a": "0.85 A",
+            "calculated_power_w": "10.20 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 3 (Digital 5V)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "5.00 V",
+            "current_limit_a": "5.00 A",
+            "measured_v": "5.02 V",
+            "measured_a": "2.10 A",
+            "calculated_power_w": "10.54 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 4 (Logic 3.3V)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "3.30 V",
+            "current_limit_a": "2.00 A",
+            "measured_v": "3.30 V",
+            "measured_a": "0.45 A",
+            "calculated_power_w": "1.49 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 5 (Analog +15V)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "15.00 V",
+            "current_limit_a": "1.50 A",
+            "measured_v": "14.99 V",
+            "measured_a": "0.32 A",
+            "calculated_power_w": "4.80 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 6 (Analog -15V)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "15.00 V",
+            "current_limit_a": "1.50 A",
+            "measured_v": "15.01 V",
+            "measured_a": "0.31 A",
+            "calculated_power_w": "4.65 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 7 (Power Rail A)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "24.00 V",
+            "current_limit_a": "4.00 A",
+            "measured_v": "23.98 V",
+            "measured_a": "1.80 A",
+            "calculated_power_w": "43.16 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          },
+          {
+            "psu_id": "PSU 8 (Power Rail B)",
+            "link_state": "LINKED",
+            "voltage_limit_v": "24.00 V",
+            "current_limit_a": "4.00 A",
+            "measured_v": "24.00 V",
+            "measured_a": "1.78 A",
+            "calculated_power_w": "42.72 W",
+            "status": "CV_MODE",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      },
+      "Dual_DC_Load_Meters": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "Dual Digital Electronic DC Load Meters (Load 1 & Load 2)",
+              "Fr": "Double compteur de charge DC électronique numérique (Charge 1 & Charge 2)",
+              "De": "Duo Digitale elektronische DC-Lastmessgeräte (Last 1 & Last 2)",
+              "Es": "Dos medidores digitales de carga CC electrónica (Carga 1 y Carga 2)"
+            },
+            "text_size": 13,
+            "text_color": "#ffffff"
+          }
+        },
+        "description": {
+          "En": "Precision electronic DC load meter readouts and constant current / constant voltage / constant resistance sink controls.",
+          "Fr": "Lectures de précision de compteurs de charge DC électroniques et contrôles d'absorption à courant/tension/résistance constant.",
+          "De": "Präzisionsanzeigen für elektronische DC-Lastmessgeräte und Senkensteuerung für Konstantstrom / Konstantspannung / Konstantwiderstand.",
+          "Es": "Lecturas de medidores de carga CC electrónica de precisión y controles de disipación de corriente/voltaje/resistencia constante."
+        },
+        "fields": {
+          "dc_load_1_mode": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad1/Mode",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "DC LOAD 1: CONSTANT CURRENT (CC)"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "dc_load_1_setpoint": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad1/Setpoint",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Load 1 Setpoint: 2.50 A"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "dc_load_1_enable": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad1/Enable",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "LOAD 1 SINK ON"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "LOAD 1 OFF"
+                }
+              }
+            },
+            "layout": {
+              "width": 160,
+              "height": 45
+            }
+          },
+          "dc_load_2_mode": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad2/Mode",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "DC LOAD 2: CONSTANT POWER (CP)"
+                }
+              }
+            },
+            "layout": {
+              "width": 240,
+              "height": 45
+            }
+          },
+          "dc_load_2_setpoint": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad2/Setpoint",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "Load 2 Setpoint: 50.0 W"
+                }
+              }
+            },
+            "layout": {
+              "width": 180,
+              "height": 45
+            }
+          },
+          "dc_load_2_enable": {
+            "type": "_GuiActuator",
+            "topic": "OpenAir/Tests/Power/DCLoad2/Enable",
+            "label": {
+              "active": {
+                "text": {
+                  "En": "LOAD 2 SINK ON"
+                }
+              },
+              "inactive": {
+                "text": {
+                  "En": "LOAD 2 OFF"
+                }
+              }
+            },
+            "layout": {
+              "width": 160,
+              "height": 45
+            }
+          }
+        }
+      },
+      "DC_Load_Meters_Table": {
+        "type": "OcaTable",
+        "description": {
+          "En": "Dual DC Electronic Load Meter Live Readouts & Telemetry",
+          "Fr": "Lectures en direct et télémétrie des deux compteurs de charge DC électroniques",
+          "De": "Echtzeit-Messwerte & Telemetrie der Duo DC-Elektronik-Lastmessgeräte",
+          "Es": "Lecturas en vivo y telemetría de dos medidores de carga CC electrónica"
+        },
+        "topic": "OpenAir/Tests/Power/DCLoads/Table",
+        "headers": ["load_meter_id", "mode", "setpoint", "input_voltage_v", "sink_current_a", "dissipated_power_w", "equivalent_res_ohm", "temp_c", "status"],
+        "data": [
+          {
+            "load_meter_id": "DC Load Meter #1",
+            "mode": "CC (Constant Current)",
+            "setpoint": "2.50 A",
+            "input_voltage_v": "12.01 V",
+            "sink_current_a": "2.502 A",
+            "dissipated_power_w": "30.05 W",
+            "equivalent_res_ohm": "4.80 Ω",
+            "temp_c": "42.5 °C",
+            "status": "ACTIVE_SINKING",
+            "_row_state": "online"
+          },
+          {
+            "load_meter_id": "DC Load Meter #2",
+            "mode": "CP (Constant Power)",
+            "setpoint": "50.00 W",
+            "input_voltage_v": "23.98 V",
+            "sink_current_a": "2.085 A",
+            "dissipated_power_w": "49.99 W",
+            "equivalent_res_ohm": "11.50 Ω",
+            "temp_c": "51.2 °C",
+            "status": "ACTIVE_SINKING",
+            "_row_state": "online"
+          }
+        ],
+        "Sort": true
+      },
+      "Power_Telemetries_Graph": {
+        "type": "DynamicGraph",
+        "id": "power_psu_load_telemetry_plot",
+        "plot_mode": "time_domain",
+        "title": "Power Test Live Telemetry: PSU Total Output Power & DC Load Sinks vs Time",
+        "layout": {
+          "height": 400,
+          "alpha": 0.95
+        },
+        "axis": {
+          "x": {
+            "label": {
+              "En": "Time (s)",
+              "Fr": "Temps (s)",
+              "De": "Zeit (s)",
+              "Es": "Tiempo (s)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": 0,
+              "max": 60
+            },
+            "color": "white"
+          },
+          "y": {
+            "label": {
+              "En": "Power (W) / Voltage (V)",
+              "Fr": "Puissance (W) / Tension (V)",
+              "De": "Leistung (W) / Spannung (V)",
+              "Es": "Potencia (W) / Voltaje (V)"
+            },
+            "scale": "linear",
+            "domain": {
+              "min": 0,
+              "max": 150
+            },
+            "color": "#FFCC00"
+          },
+          "show_grid": true,
+          "show_x_axis": true,
+          "show_y_axis": true
+        },
+        "style": {
+          "bg_color": "#140F02",
+          "grid_color": "#3B2E0A",
+          "title_color": "#FFCC00"
+        },
+        "datasets": [
+          {
+            "id": "psu_total_power",
+            "label": {
+              "En": "Total PSU Array Power Output (W)",
+              "Fr": "Sortie de puissance totale du réseau PSU (W)",
+              "De": "Gesamtausgangsleistung des PSU-Arrays (W)",
+              "Es": "Salida de potencia total de la matriz de PSU (W)"
+            },
+            "style": {
+              "line_color": "#FFCC00",
+              "line_width": 2.5
+            },
+            "initial_csv_data": "x,y\n0,0.0\n5,45.2\n10,134.7\n15,134.8\n20,135.0\n25,134.9\n30,134.7\n35,135.1\n40,134.8\n45,134.9\n50,135.0\n55,134.7\n60,134.8"
+          },
+          {
+            "id": "load_1_power",
+            "label": {
+              "En": "DC Load #1 Power Dissipation (W)",
+              "Fr": "Dissipation de puissance DC Load #1 (W)",
+              "De": "Verlustleistung DC-Last #1 (W)",
+              "Es": "Disipación de potencia de carga CC #1 (W)"
+            },
+            "style": {
+              "line_color": "#00FF66",
+              "line_width": 2.0
+            },
+            "initial_csv_data": "x,y\n0,0.0\n5,10.0\n10,30.0\n15,30.1\n20,30.0\n25,30.0\n30,30.1\n35,30.0\n40,30.0\n45,30.1\n50,30.0\n55,30.0\n60,30.1"
+          },
+          {
+            "id": "load_2_power",
+            "label": {
+              "En": "DC Load #2 Power Dissipation (W)",
+              "Fr": "Dissipation de puissance DC Load #2 (W)",
+              "De": "Verlustleistung DC-Last #2 (W)",
+              "Es": "Disipación de potencia de carga CC #2 (W)"
+            },
+            "style": {
+              "line_color": "#FF3366",
+              "line_width": 2.0
+            },
+            "initial_csv_data": "x,y\n0,0.0\n5,20.0\n10,50.0\n15,50.0\n20,50.0\n25,50.0\n30,50.0\n35,50.0\n40,50.0\n45,50.0\n50,50.0\n55,50.0\n60,50.0"
+          }
+        ],
+        "Navigation": {
+          "enable_zoom": true,
+          "enable_pan": true,
+          "show_hover_value": true
+        }
+      }
+    }
+  }
+}

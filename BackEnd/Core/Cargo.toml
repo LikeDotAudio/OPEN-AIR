@@ -6,6 +6,7 @@ resolver = "2"
 members = [
     "orchestrator",
     "doclinks",
+    "TestOrchestrator",
 ]
 
 [package]
@@ -16,6 +17,22 @@ edition = "2021"
 [lib]
 name = "oaRustCore"
 crate-type = ["cdylib"]
+
+[[bin]]
+name = "test_ias_importer"
+path = "DataMigration/1_IAS/test_ias_importer.rs"
+
+[[bin]]
+name = "test_soundbase_importer"
+path = "DataMigration/2_Soundbase/test_soundbase_importer.rs"
+
+[[bin]]
+name = "test_wwb_importer"
+path = "DataMigration/3_Wireless_Workbench/test_wwb_importer.rs"
+
+[[bin]]
+name = "test_csv_pattern_importer"
+path = "DataMigration/4_CSV/test_csv_pattern_importer.rs"
 
 [dependencies]
 pyo3 = { version = "0.21.2", features = ["extension-module"] }
@@ -50,6 +67,7 @@ validator = { version = "0.16", features = ["derive"] }
 hex = "0.4"
 tempfile = "3.8"
 zstd = "0.11"
+rumqttc = "0.24"
 
 # Protocol crates now own their pyo3 submodules (oa_*_rs). oaRustCore pulls them
 # in with the `python` feature and re-registers them in its #[pymodule] (lib.rs).

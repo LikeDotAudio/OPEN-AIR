@@ -1,0 +1,183 @@
+{
+  "Zoo_buttons_file_browser": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.11",
+    "description": {
+      "En": "File Browser Button Component Sample & Reference Specification",
+      "Fr": "Spécification et exemple de composant de bouton de navigateur de fichiers",
+      "De": "Dateibrowser-Schaltflächen-Komponentenbeispiel und Referenzspezifikation",
+      "Es": "Especificación y ejemplo del componente de botón del explorador de archivos"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "file_browser_samples": {
+        "type": "OcaBlock",
+        "label": {
+          "active": {
+            "text": {
+              "En": "File Browser Controls (_FileBrowserButton)",
+              "Fr": "Contrôles du navigateur de fichiers (_FileBrowserButton)",
+              "De": "Dateibrowser-Steuerelemente (_FileBrowserButton)",
+              "Es": "Controles del explorador de archivos (_FileBrowserButton)"
+            },
+            "text_size": 14,
+            "text_color": "#00FFCC"
+          }
+        },
+        "description": {
+          "En": "Reusable library control that opens native OS file dialogs, filters extensions, and publishes chosen file paths via MQTT/state topics.",
+          "Fr": "Contrôle de bibliothèque réutilisable qui ouvre les boîtes de dialogue de fichiers système natifs.",
+          "De": "Wiederverwendbare Bibliothekssteuerung, die native Betriebssystem-Dateidialoge öffnet.",
+          "Es": "Control de biblioteca reutilizable que abre diálogos de archivos nativos del sistema."
+        },
+        "fields": {
+          "file_browser_ias": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "file_browser_ias_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR IAS FILE...",
+                    "Fr": "RECHERCHE DE FICHIER IAS...",
+                    "De": "SUCHE IAS-DATEI...",
+                    "Es": "BUSCANDO ARCHIVO IAS..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "BROWSE IAS FILE (.ias, .html)",
+                    "Fr": "PARCOURIR FICHIER IAS (.ias, .html)",
+                    "De": "IAS-DATEI DURCHSUCHEN (.ias, .html)",
+                    "Es": "BUSCAR ARCHIVO IAS (.ias, .html)"
+                  }
+                }
+              },
+              "notes": "File browser button configured specifically for IAS coordination files."
+            },
+            "file_dialog": {
+              "title": "Select IAS Coordination File",
+              "mode": "open_file",
+              "allowed_extensions": [".ias", ".html", ".htm"],
+              "default_dir": "~/Documents/RF_Coordinations",
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/FileBrowser/SelectedPath",
+              "topic_trigger": "OpenAir/System/FileBrowser/Trigger"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 50,
+              "alpha": 0.95
+            },
+            "cosmetics": {
+              "button_color": "#1A2634",
+              "border_color": "#00FFCC",
+              "text_color": "#00FFCC",
+              "icon": "folder_open"
+            }
+          },
+          "file_browser_wwb": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "file_browser_wwb_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SEARCHING FOR WORKBENCH SHOW...",
+                    "Fr": "RECHERCHE DE SPECTACLE WORKBENCH...",
+                    "De": "SUCHE WORKBENCH SHOW...",
+                    "Es": "BUSCANDO SHOW WORKBENCH..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "BROWSE WORKBENCH SHOW (.wwb, .shw)",
+                    "Fr": "PARCOURIR SPECTACLE WORKBENCH (.wwb, .shw)",
+                    "De": "WORKBENCH SHOW DURCHSUCHEN (.wwb, .shw)",
+                    "Es": "BUSCAR SHOW WORKBENCH (.wwb, .shw)"
+                  }
+                }
+              },
+              "notes": "File browser button configured for Shure Wireless Workbench show archives."
+            },
+            "file_dialog": {
+              "title": "Select Wireless Workbench Show File",
+              "mode": "open_file",
+              "allowed_extensions": [".wwb", ".shw", ".zip"],
+              "default_dir": "~/Documents/Shure/Workbench",
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/FileBrowser/WwbPath",
+              "topic_trigger": "OpenAir/System/FileBrowser/WwbTrigger"
+            },
+            "geometry": {
+              "width": 320,
+              "height": 50,
+              "alpha": 0.95
+            },
+            "cosmetics": {
+              "button_color": "#1A2E1A",
+              "border_color": "#00FF66",
+              "text_color": "#00FF66",
+              "icon": "folder_open"
+            }
+          },
+          "file_browser_directory": {
+            "type": "_FileBrowserButton",
+            "identity": {
+              "id": "file_browser_dir_btn",
+              "label": {
+                "active": {
+                  "text": {
+                    "En": "SELECTING DIRECTORY...",
+                    "Fr": "SÉLECTION DU RÉPERTOIRE...",
+                    "De": "VERZEICHNIS AUSWÄHLEN...",
+                    "Es": "SELECCIONANDO DIRECTORIO..."
+                  }
+                },
+                "inactive": {
+                  "text": {
+                    "En": "SELECT PROJECT DATA DIRECTORY",
+                    "Fr": "SÉLECTIONNER LE RÉPERTOIRE DU PROJET",
+                    "De": "PROJEKTVERZEICHNIS AUSWÄHLEN",
+                    "Es": "SELECCIONAR DIRECTORIO DEL PROYECTO"
+                  }
+                }
+              },
+              "notes": "Directory picker mode for selecting entire folders."
+            },
+            "file_dialog": {
+              "title": "Select Target Repository Folder",
+              "mode": "select_directory",
+              "allowed_extensions": [],
+              "default_dir": "~/Documents/OPEN-AIR",
+              "allow_multiple": false
+            },
+            "dynamics": {
+              "topic_publish_path": "OpenAir/System/FileBrowser/DirectoryPath",
+              "topic_trigger": "OpenAir/System/FileBrowser/DirTrigger"
+            },
+            "geometry": {
+              "width": 300,
+              "height": 50,
+              "alpha": 0.95
+            },
+            "cosmetics": {
+              "button_color": "#33261A",
+              "border_color": "#FF9900",
+              "text_color": "#FF9900",
+              "icon": "folder_directory"
+            }
+          }
+        }
+      }
+    }
+  }
+}

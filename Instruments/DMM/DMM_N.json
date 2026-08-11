@@ -20,7 +20,7 @@
           "Es": "${model} @ ${resource}",
           "show_label": true
         },
-        "layout_columns": 4,
+        "layout_columns": 3,
         "layout": {
           "weight": 0
         },
@@ -133,71 +133,88 @@
             },
             "yak_nab_on_load": true
           },
-          "Mode": {
-            "type": "_Value",
-            "read_only": true,
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Mode",
-                  "Fr": "Mode",
-                  "De": "Mode",
-                  "Es": "Mode"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              },
-              "inactive": {
-                "text": {
-                  "En": "Mode",
-                  "Fr": "Mode",
-                  "De": "Mode",
-                  "Es": "Mode"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
+          "Readout": {
+            "type": "OcaBlock",
+            "description": {
+              "En": "Reading",
+              "Fr": "Reading",
+              "De": "Reading",
+              "Es": "Reading",
+              "show_label": false
             },
-            "value": {
-              "default_value": "—"
-            },
+            "layout_columns": 1,
             "layout": {
-              "height": 30
+              "weight": 1,
+              "width": "100%"
             },
-            "yak_listen": "meter_reading/function"
-          },
-          "Value": {
-            "type": "_Value",
-            "read_only": true,
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Reading",
-                  "Fr": "Reading",
-                  "De": "Reading",
-                  "Es": "Reading"
+            "fields": {
+              "Mode": {
+                "type": "_Value",
+                "read_only": true,
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Mode",
+                      "Es": "Mode"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Mode",
+                      "Es": "Mode"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
                 },
-                "text_size": 12,
-                "text_color": "#cccccc"
+                "value": {
+                  "default_value": "—"
+                },
+                "layout": {
+                  "height": 30
+                },
+                "yak_listen": "meter_reading/function"
               },
-              "inactive": {
-                "text": {
-                  "En": "Reading",
-                  "Fr": "Reading",
-                  "De": "Reading",
-                  "Es": "Reading"
+              "Value": {
+                "type": "_Value",
+                "read_only": true,
+                "label": {
+                  "active": {
+                    "text": {
+                      "En": "Reading",
+                      "Fr": "Reading",
+                      "De": "Reading",
+                      "Es": "Reading"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  },
+                  "inactive": {
+                    "text": {
+                      "En": "Reading",
+                      "Fr": "Reading",
+                      "De": "Reading",
+                      "Es": "Reading"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
                 },
-                "text_size": 12,
-                "text_color": "#cccccc"
+                "value": {
+                  "default_value": "—"
+                },
+                "layout": {
+                  "height": 30
+                },
+                "yak_listen": "meter_reading/value"
               }
-            },
-            "value": {
-              "default_value": "—"
-            },
-            "layout": {
-              "height": 30
-            },
-            "yak_listen": "meter_reading/value"
+            }
           }
         }
       },

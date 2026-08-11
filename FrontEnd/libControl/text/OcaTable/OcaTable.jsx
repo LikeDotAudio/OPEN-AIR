@@ -49,24 +49,104 @@ const OcaTable = ({ value, config, node }) => {
     // table subscribes; it never owns the topic.
     const useMqttStateHook = window.useMqttState || React.useState;
     const [liveValue] = useMqttStateHook(config?.topic, null);
+    const mqttPublish = window.useMqttPublish ? window.useMqttPublish() : null;
 
     // Whether anything has replaced the cold-start snapshot yet. Only the
     // snapshot can go stale — live rows are, by definition, current.
     const [live, setLive] = React.useState(false);
 
+    // Sorting state
+    const [sortCol, setSortCol] = React.useState(null);
+    const [sortAsc, setSortAsc] = React.useState(true);
+
     React.useEffect(() => {
-        const incoming = (value !== undefined && value !== null) ? value : liveValue;
-        if (incoming === undefined || incoming === null || incoming === '') return;
-        try {
-            const parsed = typeof incoming === 'string' ? JSON.parse(incoming) : incoming;
-            setData(parsed);
+        // When liveValue is explicitly empty string or empty array, treat as cleared table
+        if (liveValue === '' || (Array.isArray(liveValue) && liveValue.length === 0) || (typeof liveValue === 'string' && (liveValue.trim() === '[]' || liveValue.trim() === '""'))) {
+            setData([]);
             setLive(true);
+            return;
+        }
+
+        // Prioritize live MQTT value if present, fallback to value prop or config.data snapshot
+        const incoming = (liveValue !== undefined && liveValue !== null && liveValue !== '')
+            ? liveValue
+            : ((value !== undefined && value !== null && value !== '') ? value : config?.data);
+
+        if (incoming === undefined || incoming === null) return;
+        try {
+            let parsed = typeof incoming === 'string' ? JSON.parse(incoming) : incoming;
+            if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+                const arrayKey = ['channels', 'records', 'data', 'rows', 'items', 'frequencies', 'devices', 'value', 'result', 'payload', 'table'].find(k => Array.isArray(parsed[k]));
+                if (arrayKey) {
+                    parsed = parsed[arrayKey];
+                }
+            }
+            setData(Array.isArray(parsed) ? parsed : []);
+            if (liveValue !== undefined && liveValue !== null) {
+                setLive(true);
+            }
         } catch(e) {
             console.error("Failed to parse table data:", e);
         }
-    }, [value, liveValue]);
+    }, [value, liveValue, config?.data]);
 
-    const rows = Array.isArray(data) ? data : Object.values(data);
+    const getCellValue = (row, h) => {
+        if (!row || typeof row !== 'object') return '';
+        if (row[h] !== undefined && row[h] !== null) return row[h];
+
+        const lowerH = String(h).toLowerCase();
+        for (const k of Object.keys(row)) {
+            if (k.toLowerCase() === lowerH && row[k] !== undefined && row[k] !== null) {
+                return row[k];
+            }
+        }
+
+        if (lowerH === 'frequency_mhz' || lowerH === 'freq_mhz' || lowerH === 'frequency' || lowerH === 'freq') {
+            return row.frequency_mhz ?? row.freq_mhz ?? row.frequency ?? row.freq ?? '';
+        }
+        if (lowerH === 'device' || lowerH === 'model') {
+            return row.device ?? row.device_model ?? row.model ?? '';
+        }
+        if (lowerH === 'name' || lowerH === 'channel') {
+            return row.name ?? row.channel_name ?? row.channel ?? '';
+        }
+        if (lowerH === 'zone') {
+            return row.zone ?? row.zone_name ?? '';
+        }
+        if (lowerH === 'group') {
+            return row.group ?? row.group_name ?? '';
+        }
+        return '';
+    };
+
+    let rows = Array.isArray(data) ? data : (data && typeof data === 'object' ? Object.values(data) : []);
+
+    if (sortCol) {
+        rows = [...rows].sort((a, b) => {
+            const valA = getCellValue(a, sortCol);
+            const valB = getCellValue(b, sortCol);
+            const numA = Number(valA);
+            const numB = Number(valB);
+            let comp = 0;
+            if (!isNaN(numA) && !isNaN(numB) && String(valA).trim() !== '' && String(valB).trim() !== '') {
+                comp = numA - numB;
+            } else {
+                comp = String(valA).localeCompare(String(valB));
+            }
+            return sortAsc ? comp : -comp;
+        });
+    }
+
+    const handleHeaderClick = (h) => {
+        if (config?.Sort !== false) {
+            if (sortCol === h) {
+                setSortAsc(!sortAsc);
+            } else {
+                setSortCol(h);
+                setSortAsc(true);
+            }
+        }
+    };
 
     // How long a snapshot's liveness verdict is worth anything, in seconds.
     //
@@ -106,8 +186,10 @@ const OcaTable = ({ value, config, node }) => {
                     <thead style={{ backgroundColor: '#111', position: 'sticky', top: 0, zIndex: 1 }}>
                         <tr>
                             {headers.map(h => (
-                                <th key={h} style={{ padding: '10px', textAlign: 'left', borderBottom: '1px solid #333', textTransform: 'capitalize' }}>
-                                    {h.replace(/_/g, ' ')}
+                                <th key={h} 
+                                    onClick={() => handleHeaderClick(h)}
+                                    style={{ padding: '10px', textAlign: 'left', borderBottom: '1px solid #333', textTransform: 'capitalize', cursor: config?.Sort !== false ? 'pointer' : 'default', userSelect: 'none' }}>
+                                    {h.replace(/_/g, ' ')} {sortCol === h ? (sortAsc ? '▲' : '▼') : ''}
                                 </th>
                             ))}
                         </tr>
@@ -118,17 +200,6 @@ const OcaTable = ({ value, config, node }) => {
                             // ('online' | 'offline' | 'unknown'); the key is hidden
                             // from `headers` so it never renders as a column.
                             // Tables without it keep the plain zebra striping.
-                            //
-                            // A stale snapshot's verdict is downgraded to
-                            // `unknown` rather than shown or dropped. Green would
-                            // be a claim about a bench nobody has looked at since
-                            // the file was written; red would be just as much of
-                            // a claim in the other direction; and no tint at all
-                            // would hide that these rows are historical.
-                            // Conditioned on the row HAVING a verdict: a table
-                            // that never carried liveness (any hand-authored
-                            // one) has no stamp either, and must keep its zebra
-                            // striping rather than turn amber.
                             const state = (staleSnapshot && row._row_state) ? 'unknown' : row._row_state;
                             const aged = state !== row._row_state;
                             const zebra = i % 2 === 0 ? '#1a1a1a' : '#1e1e1e';
@@ -145,7 +216,7 @@ const OcaTable = ({ value, config, node }) => {
                                          boxShadow: TINT ? `inset 3px 0 0 ${TINT.bar}` : undefined }}>
                                 {headers.map(h => (
                                     <td key={h} style={{ padding: '8px 10px', borderBottom: '1px solid #222' }}>
-                                        {String(row[h] !== undefined ? row[h] : '')}
+                                        {String(getCellValue(row, h))}
                                     </td>
                                 ))}
                             </tr>
@@ -162,22 +233,28 @@ const OcaTable = ({ value, config, node }) => {
             </div>
 
             {/* Footer / Toolbar */}
-            <div style={{ backgroundColor: '#111', padding: '5px 15px', display: 'flex', gap: '10px', borderTop: '1px solid #333' }}>
+            <div style={{ backgroundColor: '#111', padding: '5px 15px', display: 'flex', gap: '10px', alignItems: 'center', borderTop: '1px solid #333' }}>
                 {config?.Add_Row && <button style={{ backgroundColor: '#333', color: '#fff', border: 'none', padding: '3px 8px', fontSize: '10px', borderRadius: '2px', cursor: 'pointer' }}>+ ADD</button>}
                 {config?.Delete_Row && <button style={{ backgroundColor: '#333', color: '#fff', border: 'none', padding: '3px 8px', fontSize: '10px', borderRadius: '2px', cursor: 'pointer' }}>- DEL</button>}
+                <button 
+                    onClick={() => {
+                        setData([]);
+                        setLive(false);
+                        if (mqttPublish && topic) {
+                            mqttPublish(topic, JSON.stringify([]), { retain: true });
+                        }
+                    }}
+                    style={{ backgroundColor: '#442222', color: '#ff6666', border: '1px solid #663333', padding: '3px 8px', fontSize: '10px', borderRadius: '2px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    CLEAR
+                </button>
                 <div style={{ flexGrow: 1 }} />
-                {/* Said out loud, not just tinted. The tint answers "is this row
-                    alive"; this answers "should I believe this table at all",
-                    which is the question a page served with no backend behind it
-                    silently got wrong for twelve days. Only shown where liveness
-                    was claimed — a hand-authored table has nothing to go stale. */}
                 {staleSnapshot && rows.some(r => r && r._row_state) && (
                     <span style={{ fontSize: '9px', color: '#d29922' }}
                           title="No live rows have arrived on this table's topic.">
                         SNAPSHOT{takenAt ? ` · ${Math.floor(snapshotAge / 3600)}h OLD` : ' · UNDATED'} · NOT LIVE
                     </span>
                 )}
-                <span style={{ fontSize: '9px', color: '#444' }}>{rows.length} ROWS</span>
+                <span style={{ fontSize: '9px', color: '#666' }}>{rows.length} ROWS</span>
             </div>
         </div>
     );

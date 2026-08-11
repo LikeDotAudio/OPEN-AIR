@@ -3,8 +3,9 @@
  * Purpose: oaCssLen component or utility.
  * Description: Handles logic and rendering for oaCssLen component or utility.
  * 
- * Version: 26.07.05.1
+ * Version: 26.08.08.1
  * Change Log:
+ * - 2026-08-08: Added oaWrapperIsSized — the shared button-vs-wrapper sizing test.
  * - 2026-07-05: Initial annotation and documentation added.
  */
 
@@ -16,6 +17,23 @@ window.oaCssLen = (v) => {
   if (typeof v === 'number') return `${v}px`;
   const s = String(v).trim();
   return /^-?\d+(\.\d+)?$/.test(s) ? `${s}px` : s;
+};
+
+// Does layout.width/height size this node's WRAPPER, or the widget inside it?
+//
+// For a button — single or grouped — those numbers are the BUTTON's size, read
+// by the widget itself; pinning the wrapper to them as well spends the budget
+// twice and the grid overflows into the block below. Everything else is sized
+// by its wrapper. WidgetFactory decides layout with this; OcaBlock asks it
+// whether a field can actually use a percentage height before stretching to
+// offer one. Both must agree, so the rule lives here rather than in either.
+window.oaWrapperIsSized = (node) => {
+  const t = String((node && node.type) || '').toLowerCase();
+  const isButton = t.includes('button') || t.includes('toggle') || t.includes('actuator');
+  const isGroup = t.includes('toggler')
+    || (isButton && node && node.options && typeof node.options === 'object'
+        && Object.keys(node.options).length > 1);
+  return !isButton && !isGroup;
 };
 
 // Extract the WORDING from a label state that may be the new object form

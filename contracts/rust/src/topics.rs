@@ -110,6 +110,29 @@ pub fn yak_monitor(dir: &str) -> Result<String, TopicError> {
     Ok(format!("{ROOT}/Yak/monitor/{dir}"))
 }
 
+/// `OpenAir/Tests/{suite}` — one prefix per TestOrchestrator module.
+pub fn tests_prefix(suite: &str) -> Result<String, TopicError> {
+    seg("suite", suite)?;
+    Ok(format!("{ROOT}/Tests/{suite}"))
+}
+
+pub fn tests(suite: &str, path: &[&str]) -> Result<String, TopicError> {
+    let mut topic = tests_prefix(suite)?;
+    for s in path {
+        seg("path segment", s)?;
+        topic.push('/');
+        topic.push_str(s);
+    }
+    Ok(topic)
+}
+
+pub fn tests_wildcard(suite: Option<&str>) -> Result<String, TopicError> {
+    match suite {
+        None => Ok(format!("{ROOT}/Tests/#")),
+        Some(s) => Ok(format!("{}/#", tests_prefix(s)?)),
+    }
+}
+
 pub fn agents(agent: &str) -> Result<String, TopicError> {
     seg("agent", agent)?;
     Ok(format!("{ROOT}/System/Agents/{agent}"))
@@ -161,6 +184,8 @@ pub enum ParsedTopic {
     },
     #[serde(rename = "yakMonitor")]
     YakMonitor { dir: String },
+    #[serde(rename = "tests")]
+    Tests { suite: String, path: Vec<String> },
     #[serde(rename = "agents")]
     Agents { agent: String },
     #[serde(rename = "config")]
@@ -294,6 +319,15 @@ pub fn parse(raw: &str) -> ParsedTopic {
                     capability: cap.to_string(),
                 }
             }
+            _ => unknown,
+        },
+        // `OpenAir/Tests/{suite}` alone is the orchestrator's prefix and parses
+        // with an empty path; everything below it is suite-private structure.
+        Some("Tests") => match s2 {
+            Some(suite) if is_segment(suite) && segs.iter().skip(3).all(|s| is_segment(s)) => ParsedTopic::Tests {
+                suite: suite.to_string(),
+                path: segs.iter().skip(3).map(|s| s.to_string()).collect(),
+            },
             _ => unknown,
         },
         Some("System") => match (s2, s3, s4, s5) {

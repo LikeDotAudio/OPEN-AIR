@@ -52,6 +52,16 @@ export const TOPIC_FAMILIES = {
     producer: 'yak-agent',
     consumers: ['CommandRouter'],
   },
+  tests: {
+    // live-event, not retained: the family mixes setpoints with one-shot
+    // commands (JumpCommand, RunSequence, TriggerSweep), and a retained command
+    // re-fires the test on every reconnect. State is re-emitted by execute_step.
+    pattern: 'OpenAir/Tests/{suite}/{...path}',
+    retain: 'live-event',
+    payload: '-',
+    producer: 'test-orchestrator + browser widgets',
+    consumers: ['test-orchestrator', '2_Tests panels'],
+  },
   agents: {
     pattern: 'OpenAir/System/Agents/{agent}',
     retain: 'retained-state',

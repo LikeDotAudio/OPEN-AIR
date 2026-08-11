@@ -31,6 +31,7 @@ export type ParsedTopic =
   | { kind: 'yakCmd'; verb: YakVerb; deviceClass: string; model: string }
   | { kind: 'yakState'; deviceClass: string; model: string; capability: string }
   | { kind: 'yakMonitor'; dir: MonitorDir }
+  | { kind: 'tests'; suite: string; path: string[] }
   | { kind: 'agents'; agent: string }
   | { kind: 'config'; agent: string }
   | { kind: 'log'; source: string; level: LogLevel }
@@ -68,6 +69,25 @@ export const Topics = {
     monitor(dir: MonitorDir): string {
       if (!MONITOR_DIRS.includes(dir)) throw rangeError('monitor dir', dir)
       return `${ROOT}/Yak/monitor/${dir}`
+    },
+  },
+
+  /**
+   * Test-suite bus. Each `mod.rs` under BackEnd/Core/TestOrchestrator owns one
+   * `{suite}` via `topic_prefix()`; the panels under FrontEnd/Gui_Frames/2_Tests bind
+   * to leaves below it. The suite name is NOT an enum here on purpose — a new
+   * orchestrator module is the thing that mints one.
+   */
+  tests: {
+    prefix(suite: string): string {
+      return `${ROOT}/Tests/${assertSegment('suite', suite)}`
+    },
+    topic(args: { suite: string; path: string[] }): string {
+      const segs = args.path.map((s) => assertSegment('path segment', s))
+      return [Topics.tests.prefix(args.suite), ...segs].join('/')
+    },
+    wildcard(suite?: string): string {
+      return suite === undefined ? `${ROOT}/Tests/#` : `${Topics.tests.prefix(suite)}/#`
     },
   },
 
@@ -115,6 +135,13 @@ export const Topics = {
         }
         if (s2 === 'state' && s3 !== undefined && s4 !== undefined && s5 !== undefined && over.length === 0 && isSegment(s3) && isSegment(s4)) {
           return { kind: 'yakState', deviceClass: s3, model: s4, capability: s5 }
+        }
+        return unknown
+      case 'Tests':
+        // `OpenAir/Tests/{suite}` alone is the orchestrator's prefix and parses
+        // with an empty path; everything below it is suite-private structure.
+        if (s2 !== undefined && isSegment(s2) && segs.slice(3).every(isSegment)) {
+          return { kind: 'tests', suite: s2, path: segs.slice(3) }
         }
         return unknown
       case 'System':

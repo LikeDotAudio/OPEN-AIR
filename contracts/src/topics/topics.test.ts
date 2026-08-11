@@ -15,7 +15,7 @@ import { guiPrefixFromPanelPath } from './gui-path.js'
 
 interface BuildVector {
   family: string
-  args: Record<string, string>
+  args: Record<string, string | string[]>
   topic?: string
   why?: string
 }
@@ -37,7 +37,9 @@ interface Vectors {
 const vectorsPath = join(dirname(fileURLToPath(import.meta.url)), '../../vectors/topics.json')
 const vectors = JSON.parse(readFileSync(vectorsPath, 'utf8')) as Vectors
 
-function build(family: string, args: Record<string, string>): string {
+function build(family: string, rawArgs: Record<string, string | string[]>): string {
+  // Only the `tests` family takes an array arg; the rest are flat strings.
+  const args = rawArgs as Record<string, string>
   switch (family) {
     case 'discovery':
       return Topics.discovery(args as { protocol: string; deviceId: string })
@@ -51,6 +53,12 @@ function build(family: string, args: Record<string, string>): string {
       return Topics.yak.state(args as Parameters<typeof Topics.yak.state>[0])
     case 'yakMonitor':
       return Topics.yak.monitor(args['dir'] as Parameters<typeof Topics.yak.monitor>[0])
+    case 'tests':
+      return Topics.tests.topic({ suite: args['suite'] as string, path: (rawArgs['path'] as string[]) ?? [] })
+    case 'testsPrefix':
+      return Topics.tests.prefix(args['suite'] as string)
+    case 'testsWildcard':
+      return Topics.tests.wildcard(args['suite'])
     case 'agents':
       return Topics.agents.topic(args['agent'] as string)
     case 'agentsWildcard':

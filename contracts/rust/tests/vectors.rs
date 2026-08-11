@@ -22,6 +22,15 @@ fn build(family: &str, args: &Value) -> Result<String, topics::TopicError> {
         "yakCmd" => topics::yak_cmd(s(args, "verb"), s(args, "deviceClass"), s(args, "model")),
         "yakState" => topics::yak_state(s(args, "deviceClass"), s(args, "model"), s(args, "capability")),
         "yakMonitor" => topics::yak_monitor(s(args, "dir")),
+        "tests" => {
+            let path: Vec<&str> = args["path"]
+                .as_array()
+                .map(|a| a.iter().map(|v| v.as_str().expect("path segment is a string")).collect())
+                .unwrap_or_default();
+            topics::tests(s(args, "suite"), &path)
+        }
+        "testsPrefix" => topics::tests_prefix(s(args, "suite")),
+        "testsWildcard" => topics::tests_wildcard(args["suite"].as_str()),
         "agents" => topics::agents(s(args, "agent")),
         "agentsWildcard" => Ok(topics::agents_wildcard()),
         "config" => topics::config(s(args, "agent")),

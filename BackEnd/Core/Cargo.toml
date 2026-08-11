@@ -16,7 +16,7 @@ edition = "2021"
 
 [lib]
 name = "oaRustCore"
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [[bin]]
 name = "test_ias_importer"

@@ -82,26 +82,7 @@
               "height": 45
             }
           },
-          "convert": {
-            "type": "_GuiActuator",
-            "topic": "OpenAir/System/DataMigration/WWB/Convert",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "RUNNING RUST PARSER..."
-                }
-              },
-              "inactive": {
-                "text": {
-                  "En": "IMPORT & PARSE WORKBENCH DATA"
-                }
-              }
-            },
-            "layout": {
-              "width": 270,
-              "height": 45
-            }
-          },
+
           "clear_table": {
             "type": "_GuiActuator",
             "topic": "OpenAir/System/DataMigration/WWB/Clear",

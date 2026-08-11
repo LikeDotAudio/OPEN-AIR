@@ -49,21 +49,12 @@ const FileBrowserButton = ({ value, onChange, config, topic, nodeJson }) => {
             const reader = new FileReader();
 
             reader.onload = (evt) => {
-                const arrayBuffer = evt.target.result;
-                // Convert binary buffer to Base64 string blob for raw transmission
-                let binary = '';
-                const bytes = new Uint8Array(arrayBuffer);
-                const len = bytes.byteLength;
-                for (let i = 0; i < len; i++) {
-                    binary += String.fromCharCode(bytes[i]);
-                }
-                const base64Data = window.btoa(binary);
-
+                const textContent = evt.target.result;
                 const fileBlobPayload = JSON.stringify({
                     filename: file.name,
                     size_bytes: file.size,
-                    encoding: "base64",
-                    raw_blob: base64Data
+                    encoding: "utf-8",
+                    raw_content: textContent
                 });
 
                 if (publish && targetTopic) {
@@ -77,7 +68,7 @@ const FileBrowserButton = ({ value, onChange, config, topic, nodeJson }) => {
                 }
             };
 
-            reader.readAsArrayBuffer(file);
+            reader.readAsText(file);
         }
     };
 

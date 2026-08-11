@@ -1382,6 +1382,7 @@ fn spawn_visa_write_daemon(
         });
     }
 
+    let daemon_host_sub = daemon_host.clone();
     std::thread::spawn(move || {
         for notification in mqtt_connection_sub.iter() {
             if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) = notification {
@@ -1398,7 +1399,7 @@ fn spawn_visa_write_daemon(
                         // delete-by-wildcard, and the in-memory map only knows
                         // about devices this process found — anything left by an
                         // earlier run would otherwise survive forever.
-                        let prefixes = harvest_retained_device_prefixes(&daemon_host, daemon_port);
+                        let prefixes = harvest_retained_device_prefixes(&daemon_host_sub, daemon_port);
                         let mut wiped = 0usize;
                         for prefix in &prefixes {
                             for key in DEVICE_TOPIC_KEYS {
@@ -1483,6 +1484,74 @@ fn spawn_visa_write_daemon(
                         }
                         q.push_back((topic_prefix.to_string(), resource_name, payload.clone()));
                         cvar.notify_one();
+                    }
+                }
+            }
+        }
+    });
+
+    // Launch Data Migration Background Daemon: Listens for raw file payload blobs uploaded over MQTT
+    let (dm_mqtt_host, dm_mqtt_port) = (daemon_host.clone(), daemon_port);
+    std::thread::spawn(move || {
+        println!("🚀 [DATA MIGRATION] Starting MQTT File Payload Parser Daemon...");
+        let mut opts = rumqttc::MqttOptions::new("openair-datamigration-daemon", &dm_mqtt_host, dm_mqtt_port);
+        opts.set_keep_alive(std::time::Duration::from_secs(30));
+        opts.set_max_packet_size(50 * 1024 * 1024, 50 * 1024 * 1024);
+        let (client, mut connection) = rumqttc::Client::new(opts, 10);
+        let _ = client.subscribe("OpenAir/System/DataMigration/+/FilePath", rumqttc::QoS::AtLeastOnce);
+
+        for notification in connection.iter() {
+            if let Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(pub_msg))) = notification {
+                let topic = pub_msg.topic.clone();
+                let payload_str = String::from_utf8_lossy(&pub_msg.payload).to_string();
+
+                if payload_str.is_empty() || payload_str == "[]" {
+                    continue;
+                }
+
+                println!("📥 [DATA MIGRATION MQTT] Received payload on topic: '{}'", topic);
+
+                // Parse incoming JSON payload (containing raw_content or raw_blob) or treat as disk path
+                let mut filename = "uploaded_file".to_string();
+                let mut content_opt: Option<String> = None;
+
+                if let Ok(v) = serde_json::from_str::<serde_json::Value>(&payload_str) {
+                    if let Some(fname) = v.get("filename").and_then(|s| s.as_str()) {
+                        filename = fname.to_string();
+                    }
+                    if let Some(raw) = v.get("raw_content").and_then(|s| s.as_str()) {
+                        content_opt = Some(raw.to_string());
+                    } else if let Some(blob) = v.get("raw_blob").and_then(|s| s.as_str()) {
+                        use base64::Engine;
+                        if let Ok(decoded) = base64::engine::general_purpose::STANDARD.decode(blob.as_bytes()) {
+                            content_opt = Some(String::from_utf8_lossy(&decoded).to_string());
+                        }
+                    }
+                }
+
+                if topic.contains("/IAS/") {
+                    if let Some(ref text) = content_opt {
+                        let _ = oaRustCore::data_migration::ias_importer::parse_ias_report_str(text, &filename);
+                    } else {
+                        let _ = oaRustCore::data_migration::ias_importer::parse_ias_report(&payload_str);
+                    }
+                } else if topic.contains("/Soundbase/") {
+                    if let Some(ref text) = content_opt {
+                        let _ = oaRustCore::data_migration::soundbase_importer::parse_soundbase_report_str(text, &filename);
+                    } else {
+                        let _ = oaRustCore::data_migration::soundbase_importer::parse_soundbase_report(&payload_str);
+                    }
+                } else if topic.contains("/WWB/") {
+                    if let Some(ref text) = content_opt {
+                        let _ = oaRustCore::data_migration::wwb_importer::parse_wwb_str(text, &filename);
+                    } else {
+                        let _ = oaRustCore::data_migration::wwb_importer::parse_wwb_file(&payload_str);
+                    }
+                } else if topic.contains("/CSV/") {
+                    if let Some(ref text) = content_opt {
+                        let _ = oaRustCore::data_migration::csv_importer::parse_and_classify_csv_str(text, &filename);
+                    } else {
+                        let _ = oaRustCore::data_migration::csv_importer::parse_and_classify_csv(&payload_str);
                     }
                 }
             }

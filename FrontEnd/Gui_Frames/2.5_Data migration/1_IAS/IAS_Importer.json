@@ -82,26 +82,7 @@
               "height": 45
             }
           },
-          "convert": {
-            "type": "_GuiActuator",
-            "topic": "OpenAir/System/DataMigration/IAS/Convert",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "RUNNING RUST PARSER..."
-                }
-              },
-              "inactive": {
-                "text": {
-                  "En": "IMPORT & PARSE IAS DATA"
-                }
-              }
-            },
-            "layout": {
-              "width": 240,
-              "height": 45
-            }
-          },
+
           "clear_table": {
             "type": "_GuiActuator",
             "topic": "OpenAir/System/DataMigration/IAS/Clear",

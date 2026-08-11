@@ -1940,11 +1940,13 @@ name = "open-air-orchestrator"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "base64 0.21.7",
  "cc",
  "chrono",
  "clap",
  "config",
  "crossbeam-channel",
+ "oaRustCore",
  "open",
  "openair-aes70",
  "openair-appletv",

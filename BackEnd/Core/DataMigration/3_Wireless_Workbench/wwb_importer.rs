@@ -33,10 +33,9 @@ pub const WWB_MQTT_TOPIC: &str = "OpenAir/System/DataMigration/WWB/ImportedData"
 /// Parses Shure Wireless Workbench .shw XML or .zip/.shw archives
 pub fn parse_wwb_file(file_path: impl AsRef<Path>) -> Result<WwbParseResult, String> {
     let path = file_path.as_ref();
-    let mut channels = Vec::new();
-
     if let Ok(file) = File::open(path) {
         if let Ok(mut archive) = ZipArchive::new(file) {
+            let mut channels = Vec::new();
             for i in 0..archive.len() {
                 if let Ok(mut zip_file) = archive.by_index(i) {
                     let mut content = String::new();
@@ -45,17 +44,25 @@ pub fn parse_wwb_file(file_path: impl AsRef<Path>) -> Result<WwbParseResult, Str
                     }
                 }
             }
+            return build_wwb_result(channels, &path.to_string_lossy());
         } else if let Ok(content) = std::fs::read_to_string(path) {
-            parse_wwb_xml_content(&content, &mut channels);
+            return parse_wwb_str(&content, &path.to_string_lossy());
         }
-    } else {
-        return Err(format!("Failed to open WWB file {:?}", path));
     }
+    Err(format!("Failed to open WWB file {:?}", path))
+}
 
+pub fn parse_wwb_str(content: &str, source_name: &str) -> Result<WwbParseResult, String> {
+    let mut channels = Vec::new();
+    parse_wwb_xml_content(content, &mut channels);
+    build_wwb_result(channels, source_name)
+}
+
+fn build_wwb_result(channels: Vec<WwbChannel>, source_name: &str) -> Result<WwbParseResult, String> {
     let result = WwbParseResult {
         status: "success".to_string(),
         source_format: "Shure_WWB_SHW".to_string(),
-        file_path: path.to_string_lossy().into_owned(),
+        file_path: source_name.to_string(),
         mqtt_topic: WWB_MQTT_TOPIC.to_string(),
         total_channels: channels.len(),
         channels,

@@ -36,7 +36,11 @@ pub fn parse_soundbase_report(file_path: impl AsRef<Path>) -> Result<SoundbasePa
     let path = file_path.as_ref();
     let file_content = fs::read_to_string(path)
         .map_err(|e| format!("Failed to read file {:?}: {}", path, e))?;
+    parse_soundbase_report_str(&file_content, &path.to_string_lossy())
+}
 
+/// Parses a raw Soundbase CSV content string directly into structured data and publishes to MQTT.
+pub fn parse_soundbase_report_str(file_content: &str, source_name: &str) -> Result<SoundbaseParseResult, String> {
     let mut channels = Vec::new();
     let mut rdr = ReaderBuilder::new()
         .has_headers(true)
@@ -71,7 +75,7 @@ pub fn parse_soundbase_report(file_path: impl AsRef<Path>) -> Result<SoundbasePa
     let result = SoundbaseParseResult {
         status: "success".to_string(),
         source_format: "Soundbase_CSV_Report".to_string(),
-        file_path: path.to_string_lossy().into_owned(),
+        file_path: source_name.to_string(),
         mqtt_topic: SOUNDBASE_MQTT_TOPIC.to_string(),
         total_channels: channels.len(),
         channels,

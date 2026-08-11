@@ -82,26 +82,7 @@
               "height": 45
             }
           },
-          "convert": {
-            "type": "_GuiActuator",
-            "topic": "OpenAir/System/DataMigration/Soundbase/Convert",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "RUNNING RUST PARSER..."
-                }
-              },
-              "inactive": {
-                "text": {
-                  "En": "IMPORT & PARSE SOUNDBASE DATA"
-                }
-              }
-            },
-            "layout": {
-              "width": 260,
-              "height": 45
-            }
-          },
+
           "clear_table": {
             "type": "_GuiActuator",
             "topic": "OpenAir/System/DataMigration/Soundbase/Clear",

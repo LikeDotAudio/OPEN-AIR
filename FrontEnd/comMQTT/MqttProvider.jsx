@@ -289,6 +289,7 @@ window.MqttProvider = ({ brokerUrl = 'wss://test.mosquitto.org:8081/ws', usernam
             keepalive: 60,
             reconnectPeriod: 5000, // Wait 5 seconds between retries
             connectTimeout: 30 * 1000,
+            maxPacketSize: 15 * 1024 * 1024, // 15MB max packet size for large file payload blobs
             will: {
                 topic: agentTopic,
                 payload: agentBeat('offline'),

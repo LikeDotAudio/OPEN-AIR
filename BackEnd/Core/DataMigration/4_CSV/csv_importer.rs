@@ -34,12 +34,15 @@ pub struct CsvRecognizedResult {
 
 pub const CSV_IMPORTER_MQTT_TOPIC: &str = "OpenAir/System/DataMigration/CSV/ImportedData";
 
-/// Smartly classifies CSV patterns and extracts standard RF records.
 pub fn parse_and_classify_csv(file_path: impl AsRef<Path>) -> Result<CsvRecognizedResult, String> {
     let path = file_path.as_ref();
     let content = fs::read_to_string(path)
         .map_err(|e| format!("Failed to read CSV file {:?}: {}", path, e))?;
+    parse_and_classify_csv_str(&content, &path.to_string_lossy())
+}
 
+/// Smartly classifies CSV patterns from a raw string payload and extracts standard RF records.
+pub fn parse_and_classify_csv_str(content: &str, source_name: &str) -> Result<CsvRecognizedResult, String> {
     let mut rdr = ReaderBuilder::new()
         .has_headers(true)
         .flexible(true)
@@ -125,7 +128,7 @@ pub fn parse_and_classify_csv(file_path: impl AsRef<Path>) -> Result<CsvRecogniz
 
     let result = CsvRecognizedResult {
         status: "success".to_string(),
-        source_file: path.to_string_lossy().into_owned(),
+        source_file: source_name.to_string(),
         pattern,
         pattern_name: pattern_name.to_string(),
         mqtt_topic: CSV_IMPORTER_MQTT_TOPIC.to_string(),

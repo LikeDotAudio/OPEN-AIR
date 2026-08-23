@@ -116,6 +116,21 @@
 
     const resetAuto = () => { localStorage.removeItem(KEY); reloadTo(); };
 
+    const clearCache = () => {
+      try {
+        localStorage.removeItem(KEY);
+        sessionStorage.clear();
+        if ('caches' in window) {
+          caches.keys().then((names) => {
+            names.forEach((name) => caches.delete(name));
+          });
+        }
+      } catch (e) {
+        console.error('Failed to clear cache', e);
+      }
+      reloadTo();
+    };
+
     return (
       <div
         onClick={onClose}
@@ -208,7 +223,12 @@
           )}
 
           {/* Actions */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '6px' }}>
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '6px', flexWrap: 'wrap' }}>
+            <button onClick={clearCache}
+              title="Clear saved MQTT settings, session storage, and cache"
+              style={{ background: '#2a1a1a', color: '#f88', border: '1px solid #733', borderRadius: '3px', padding: '8px 12px', fontSize: '12px', cursor: 'pointer' }}>
+              Clear cache
+            </button>
             <button onClick={resetAuto}
               style={{ background: 'none', color: '#888', border: '1px solid #444', borderRadius: '3px', padding: '8px 12px', fontSize: '12px', cursor: 'pointer' }}>
               Reset to auto

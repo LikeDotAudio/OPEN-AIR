@@ -22,15 +22,12 @@
   // Anonymous by default: both broker configs in this repo set
   // `allow_anonymous true` and neither defines a password file. If you enable
   // auth (see broker/acl.example), set credentials in the modal.
-  const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+  const isLocalHost = typeof window !== 'undefined' && window.location &&
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
-  const LOCAL_DEFAULTS = {
-    host: (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : 'localhost',
-    port: isHttps ? 443 : 9001,
-    encrypted: isHttps,
-    path: isHttps ? '/mqtt' : '',
-    username: '', password: '',
-  };
+  const LOCAL_DEFAULTS = isLocalHost
+    ? { host: window.location.hostname, port: 9001, encrypted: false, path: '', username: '', password: '' }
+    : { host: 'broker.emqx.io', port: 8084, encrypted: true, path: '/mqtt', username: '', password: '' };
   const DEFAULTS = LOCAL_DEFAULTS;
 
   const read = () => {
@@ -49,12 +46,12 @@
     let port = s.port || DEFAULTS.port;
     let path = (s.path !== undefined && s.path !== null) ? s.path : DEFAULTS.path;
 
-    // Sanitize legacy/stale settings: if served over HTTPS on a non-localhost domain
-    // and port is set to 9001 with empty path, automatically route via WSS /mqtt proxy
-    if (isHttps && port === 9001 && (!path || path === '') && host !== 'localhost' && host !== '127.0.0.1') {
-      port = 443;
-      path = '/mqtt';
-      encrypted = true;
+    // Sanitize stale test.mosquitto.org settings (which is currently down) or legacy ports
+    if (host === 'test.mosquitto.org' && !hasSaved) {
+      host = DEFAULTS.host;
+      port = DEFAULTS.port;
+      encrypted = DEFAULTS.encrypted;
+      path = DEFAULTS.path;
     }
 
     const proto = encrypted ? 'wss' : 'ws';
@@ -65,23 +62,38 @@
     return { brokerUrl: `${proto}://${host}${portStr}${path}`, username, password };
   };
 
-  // Two presets, because there are two real situations: run the actual system,
-  // or poke at the UI with no backend.
+  // Presets covering public WSS brokers and local host setups
   const PRESETS = [
     {
-      label: isHttps ? 'Domain broker · openair.like.audio (wss /mqtt)' : 'Docker / this host · your broker (ws:9001)',
-      hint: isHttps ? 'Proxied via Secure WebSockets on /mqtt' : 'The real system — docker compose, or a native broker on :9001',
-      host: (window.location.hostname || 'localhost'),
-      port: isHttps ? 443 : 9001,
-      encrypted: isHttps,
-      path: isHttps ? '/mqtt' : '', username: '', password: '',
+      label: 'Public test broker · broker.emqx.io (wss:8084/mqtt)',
+      hint: 'Reliable Public WSS broker — works over HTTPS & HTTP (unauthenticated)',
+      host: 'broker.emqx.io',
+      port: 8084,
+      encrypted: true,
+      path: '/mqtt', username: '', password: '',
+    },
+    {
+      label: 'Public test broker · broker.hivemq.com (wss:8884/mqtt)',
+      hint: 'Public HiveMQ WSS broker — works over HTTPS & HTTP (unauthenticated)',
+      host: 'broker.hivemq.com',
+      port: 8884,
+      encrypted: true,
+      path: '/mqtt', username: '', password: '',
+    },
+    {
+      label: 'Docker / local host · your broker (ws:9001)',
+      hint: 'The real system — docker compose or native broker on :9001 (HTTP / local)',
+      host: (typeof window !== 'undefined' && window.location && window.location.hostname ? window.location.hostname : 'localhost'),
+      port: 9001,
+      encrypted: false,
+      path: '', username: '', password: '',
     },
     {
       label: 'Public test broker · test.mosquitto.org (wss:8081)',
-      hint: 'Demo / UI-only. Public and unauthenticated — never send real data',
+      hint: 'Eclipse Mosquitto demo broker (may be offline / intermittent)',
       host: 'test.mosquitto.org',
       port: 8081,
-      encrypted: true,   // TLS works from both http and https pages
+      encrypted: true,
       path: '', username: '', password: '',
     },
   ];

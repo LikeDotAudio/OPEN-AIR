@@ -46,12 +46,12 @@
     let port = s.port || DEFAULTS.port;
     let path = (s.path !== undefined && s.path !== null) ? s.path : DEFAULTS.path;
 
-    // Sanitize stale test.mosquitto.org settings (which is currently down) or legacy ports
-    if (host === 'test.mosquitto.org' && !hasSaved) {
-      host = DEFAULTS.host;
-      port = DEFAULTS.port;
-      encrypted = DEFAULTS.encrypted;
-      path = DEFAULTS.path;
+    // Auto-migrate test.mosquitto.org (which is down) to broker.emqx.io
+    if (host === 'test.mosquitto.org') {
+      host = 'broker.emqx.io';
+      port = 8084;
+      encrypted = true;
+      path = '/mqtt';
     }
 
     const proto = encrypted ? 'wss' : 'ws';

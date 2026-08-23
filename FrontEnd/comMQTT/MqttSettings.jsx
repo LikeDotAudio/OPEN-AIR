@@ -131,6 +131,52 @@
       reloadTo();
     };
 
+    const [freshnessStatus, setFreshnessStatus] = React.useState('Click "Check Server" to verify if local files are stale');
+    const [isChecking, setIsChecking] = React.useState(false);
+    const [isStale, setIsStale] = React.useState(false);
+
+    const checkFreshness = async () => {
+      setIsChecking(true);
+      setFreshnessStatus('Checking server for updates...');
+      try {
+        const res = await fetch(`./index.html?t=${Date.now()}`, { cache: 'no-store' });
+        const lastMod = res.headers.get('last-modified');
+        const pageLoadTime = new Date(document.lastModified).getTime();
+        
+        let message = '✓ Your local copy is fresh and up to date!';
+        let stale = false;
+        
+        if (lastMod) {
+          const serverTime = new Date(lastMod).getTime();
+          if (serverTime > pageLoadTime + 2000) {
+            message = '⚠️ Server has newer files available!';
+            stale = true;
+          }
+        }
+        setIsStale(stale);
+        setFreshnessStatus(message);
+      } catch (err) {
+        setFreshnessStatus('Unable to reach server to verify freshness.');
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    const forceHardReload = () => {
+      try {
+        localStorage.removeItem(KEY);
+        sessionStorage.clear();
+        if ('caches' in window) {
+          caches.keys().then((names) => {
+            names.forEach((name) => caches.delete(name));
+          });
+        }
+      } catch (e) {}
+      const u = new URL(window.location.href);
+      u.searchParams.set('_cb', Date.now().toString());
+      window.location.href = u.toString();
+    };
+
     return (
       <div
         onClick={onClose}
@@ -222,12 +268,39 @@
             </div>
           )}
 
+          {/* Local Cache & Freshness Checker */}
+          <div style={{ background: '#111', border: '1px solid #333', borderRadius: '4px', padding: '10px', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '10px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Cache &amp; Freshness Verification
+              </span>
+              <button
+                onClick={checkFreshness}
+                disabled={isChecking}
+                style={{ background: '#262626', color: '#ccc', border: '1px solid #444', borderRadius: '3px', padding: '3px 8px', fontSize: '10px', cursor: 'pointer' }}
+              >
+                {isChecking ? 'Checking...' : 'Check Server'}
+              </button>
+            </div>
+            <div style={{ fontSize: '11px', color: isStale ? '#ff6b6b' : '#0f0', fontFamily: 'monospace' }}>
+              {freshnessStatus}
+            </div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '4px' }}>
+              Loaded Asset Date: {document.lastModified || 'Current Session'}
+            </div>
+          </div>
+
           {/* Actions */}
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '6px', flexWrap: 'wrap' }}>
             <button onClick={clearCache}
-              title="Clear saved MQTT settings, session storage, and cache"
+              title="Clear saved MQTT settings and session storage"
               style={{ background: '#2a1a1a', color: '#f88', border: '1px solid #733', borderRadius: '3px', padding: '8px 12px', fontSize: '12px', cursor: 'pointer' }}>
               Clear cache
+            </button>
+            <button onClick={forceHardReload}
+              title="Bust browser cache with timestamp parameter and reload"
+              style={{ background: '#3a2010', color: '#f97316', border: '1px solid #c2410c', borderRadius: '3px', padding: '8px 12px', fontSize: '12px', cursor: 'pointer' }}>
+              Force Hard Reload
             </button>
             <button onClick={resetAuto}
               style={{ background: 'none', color: '#888', border: '1px solid #444', borderRadius: '3px', padding: '8px 12px', fontSize: '12px', cursor: 'pointer' }}>

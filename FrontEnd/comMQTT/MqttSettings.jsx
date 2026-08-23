@@ -101,6 +101,11 @@
     const applyPreset = (p) => {
       setHost(p.host); setPort(p.port); setEncrypted(p.encrypted);
       setPath(p.path || ''); setUsername(p.username || ''); setPassword(p.password || '');
+      localStorage.setItem(KEY, JSON.stringify({
+        host: p.host.trim(), port: Number(p.port) || 9001, encrypted: p.encrypted,
+        path: (p.path || '').trim(), username: (p.username || '').trim(), password: p.password || '',
+      }));
+      reloadTo();
     };
 
     const reloadTo = () => {

@@ -337,7 +337,7 @@
             // Saved auth may be anonymous (empty user) for public test brokers.
             const _mqttCfg = (window.oaGetMqttConfig
                 ? window.oaGetMqttConfig()
-                : { brokerUrl: 'wss://test.mosquitto.org:8081', username: '', password: '' });
+                : { brokerUrl: 'ws://localhost:9001', username: '', password: '' });
             const dynamicBrokerUrl = _mqttCfg.brokerUrl;
 
             return (

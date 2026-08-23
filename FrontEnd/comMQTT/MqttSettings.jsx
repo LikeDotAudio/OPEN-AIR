@@ -23,9 +23,9 @@
   // `allow_anonymous true` and neither defines a password file. If you enable
   // auth (see broker/acl.example), set credentials in the modal.
   const LOCAL_DEFAULTS = {
-    host: 'test.mosquitto.org',
-    port: 8081,
-    encrypted: true,
+    host: (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : 'localhost',
+    port: 9001,
+    encrypted: (typeof window !== 'undefined' && window.location && window.location.protocol === 'https:'),
     path: '',
     username: '', password: '',
   };

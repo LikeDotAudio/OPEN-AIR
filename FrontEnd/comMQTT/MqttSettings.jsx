@@ -22,11 +22,13 @@
   // Anonymous by default: both broker configs in this repo set
   // `allow_anonymous true` and neither defines a password file. If you enable
   // auth (see broker/acl.example), set credentials in the modal.
+  const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+
   const LOCAL_DEFAULTS = {
     host: (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : 'localhost',
-    port: 9001,
-    encrypted: (typeof window !== 'undefined' && window.location && window.location.protocol === 'https:'),
-    path: '',
+    port: isHttps ? 443 : 9001,
+    encrypted: isHttps,
+    path: isHttps ? '/mqtt' : '',
     username: '', password: '',
   };
   const DEFAULTS = LOCAL_DEFAULTS;
@@ -50,19 +52,20 @@
     // An explicit saved profile may carry credentials; the default is anonymous.
     const username = hasSaved ? (s.username || '') : DEFAULTS.username;
     const password = hasSaved ? (s.password || '') : DEFAULTS.password;
-    return { brokerUrl: `${proto}://${host}:${port}${path}`, username, password };
+    const portStr = (port === 443 && proto === 'wss') || (port === 80 && proto === 'ws') ? '' : `:${port}`;
+    return { brokerUrl: `${proto}://${host}${portStr}${path}`, username, password };
   };
 
   // Two presets, because there are two real situations: run the actual system,
   // or poke at the UI with no backend.
   const PRESETS = [
     {
-      label: 'Docker / this host · your broker (ws:9001)',
-      hint: 'The real system — docker compose, or a native broker on :9001',
+      label: isHttps ? 'Domain broker · openair.like.audio (wss /mqtt)' : 'Docker / this host · your broker (ws:9001)',
+      hint: isHttps ? 'Proxied via Secure WebSockets on /mqtt' : 'The real system — docker compose, or a native broker on :9001',
       host: (window.location.hostname || 'localhost'),
-      port: 9001,
-      encrypted: (window.location.protocol === 'https:'),
-      path: '', username: '', password: '',   // anonymous: see broker configs
+      port: isHttps ? 443 : 9001,
+      encrypted: isHttps,
+      path: isHttps ? '/mqtt' : '', username: '', password: '',
     },
     {
       label: 'Public test broker · test.mosquitto.org (wss:8081)',

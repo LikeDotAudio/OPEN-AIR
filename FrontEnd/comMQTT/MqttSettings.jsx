@@ -44,11 +44,20 @@
     const s = read();
     const params = new URLSearchParams(window.location.search);
     const hasSaved = localStorage.getItem(KEY) !== null;
-    const host = params.get('mqtt') || s.host || DEFAULTS.host;
-    const encrypted = (typeof s.encrypted === 'boolean') ? s.encrypted : DEFAULTS.encrypted;
+    let host = params.get('mqtt') || s.host || DEFAULTS.host;
+    let encrypted = (typeof s.encrypted === 'boolean') ? s.encrypted : DEFAULTS.encrypted;
+    let port = s.port || DEFAULTS.port;
+    let path = (s.path !== undefined && s.path !== null) ? s.path : DEFAULTS.path;
+
+    // Sanitize legacy/stale settings: if served over HTTPS on a non-localhost domain
+    // and port is set to 9001 with empty path, automatically route via WSS /mqtt proxy
+    if (isHttps && port === 9001 && (!path || path === '') && host !== 'localhost' && host !== '127.0.0.1') {
+      port = 443;
+      path = '/mqtt';
+      encrypted = true;
+    }
+
     const proto = encrypted ? 'wss' : 'ws';
-    const port = s.port || DEFAULTS.port;
-    const path = s.path || DEFAULTS.path;
     // An explicit saved profile may carry credentials; the default is anonymous.
     const username = hasSaved ? (s.username || '') : DEFAULTS.username;
     const password = hasSaved ? (s.password || '') : DEFAULTS.password;

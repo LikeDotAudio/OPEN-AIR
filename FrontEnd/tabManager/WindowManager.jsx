@@ -528,7 +528,11 @@ const WindowManager = ({ directoryTree }) => {
         return (saved && windows.find(w => w.name === saved)) ? saved
             : (windows.length > 0 ? windows[0].name : null);
     });
-    const selectWindow = (name) => { setActiveWindow(name); window.OaNav && window.OaNav.set('__win', name); };
+    const selectWindow = (name) => {
+        setActiveWindow(name);
+        window.OaNav && window.OaNav.set('__win', name);
+        if (window.oaRefreshTree) window.oaRefreshTree();
+    };
 
     const activeWindowNode = windows.find(w => w.name === activeWindow) || directoryTree;
 

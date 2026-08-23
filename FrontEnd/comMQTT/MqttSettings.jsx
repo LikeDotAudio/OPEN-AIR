@@ -26,7 +26,7 @@
     host: 'test.mosquitto.org',
     port: 8081,
     encrypted: true,
-    path: '/ws',
+    path: '',
     username: '', password: '',
   };
   const DEFAULTS = LOCAL_DEFAULTS;

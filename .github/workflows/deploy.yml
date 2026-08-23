@@ -35,6 +35,27 @@ jobs:
       contracts_changed: ${{ steps.changes.outputs.contracts_any_changed }}
       contracts_files: ${{ steps.changes.outputs.contracts_all_changed_files }}
       backend_changed: ${{ steps.changes.outputs.backend_any_changed }}
+      # ---------------------------------------------------------------- lanes
+      # THE GATE. Four booleans, computed once here, and every downstream `if`
+      # reads one of them rather than re-deriving the condition. The previous
+      # form spelled the same OR-chain out at each job, which is how `release →
+      # deploy → smoke-test` ended up with no path condition at all and how
+      # `manual_changed` and `contracts_changed` came to be computed and then
+      # read by nothing.
+      #
+      # CI lanes vs DEPLOY lanes are deliberately different sets:
+      #   *_ci      — should we run checks for this side?
+      #   deploy_*  — should we upload anything?
+      # A contracts-only change must run the TS checks but must NOT publish
+      # FrontEnd/ over FTPS, so `frontend_ci` and `deploy_frontend` differ.
+      #
+      # A workflow edit turns BOTH ci lanes on: a gate nobody exercises is a
+      # gate nobody can trust. It does not turn the deploy lanes on — editing
+      # this file is not a reason to push to production.
+      frontend_ci: ${{ steps.changes.outputs.frontend_any_changed == 'true' || steps.changes.outputs.ts_js_any_changed == 'true' || steps.changes.outputs.contracts_any_changed == 'true' || steps.changes.outputs.ci_any_changed == 'true' || github.event_name == 'workflow_dispatch' }}
+      backend_ci: ${{ steps.changes.outputs.backend_any_changed == 'true' || steps.changes.outputs.ci_any_changed == 'true' || github.event_name == 'workflow_dispatch' }}
+      deploy_frontend: ${{ steps.changes.outputs.frontend_any_changed == 'true' || github.event_name == 'workflow_dispatch' }}
+      deploy_manual: ${{ steps.changes.outputs.manual_any_changed == 'true' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,10 +82,28 @@ jobs:
               - 'BackEnd/**'
               - 'contracts/rust/**'
               - 'Cargo.*'
+            ci:
+              - '.github/workflows/**'
+
+      - name: Report the lanes
+        run: |
+          {
+            echo "## 🚦 Lane gate"
+            echo ""
+            echo "| Lane | Runs | Because |"
+            echo "|---|---|---|"
+            echo "| Frontend CI | ${{ steps.changes.outputs.frontend_any_changed == 'true' || steps.changes.outputs.ts_js_any_changed == 'true' || steps.changes.outputs.contracts_any_changed == 'true' || steps.changes.outputs.ci_any_changed == 'true' || github.event_name == 'workflow_dispatch' }} | FrontEnd=${{ steps.changes.outputs.frontend_any_changed }} ts/js=${{ steps.changes.outputs.ts_js_any_changed }} contracts=${{ steps.changes.outputs.contracts_any_changed }} |"
+            echo "| Backend CI | ${{ steps.changes.outputs.backend_any_changed == 'true' || steps.changes.outputs.ci_any_changed == 'true' || github.event_name == 'workflow_dispatch' }} | BackEnd=${{ steps.changes.outputs.backend_any_changed }} |"
+            echo "| Deploy FrontEnd | ${{ steps.changes.outputs.frontend_any_changed == 'true' || github.event_name == 'workflow_dispatch' }} | FrontEnd=${{ steps.changes.outputs.frontend_any_changed }} |"
+            echo "| Deploy manual | ${{ steps.changes.outputs.manual_any_changed == 'true' || github.event_name == 'workflow_dispatch' }} | manual=${{ steps.changes.outputs.manual_any_changed }} |"
+            echo ""
+            echo "_A skipped lane means nothing on that side changed. Re-run via"
+            echo "**workflow_dispatch** to force every lane._"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   lint-frontend:
     needs: pre-check
-    if: needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch'
+    if: needs.pre-check.outputs.frontend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -105,7 +144,7 @@ jobs:
 
   lint-backend:
     needs: pre-check
-    if: needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch'
+    if: needs.pre-check.outputs.backend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -132,16 +171,16 @@ jobs:
   # verified — so it runs on every push. The checker is a dependency-free crate
   # so this stays a ~1 second gate rather than a workspace build.
   docs:
-    needs: lint-backend
-    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-backend]
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && needs.pre-check.outputs.backend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: cargo run --quiet --manifest-path BackEnd/Core/Cargo.toml -p openair-doclinks
 
   node:
-    needs: lint-frontend
-    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && (needs.pre-check.outputs.frontend_changed == 'true' || needs.pre-check.outputs.ts_js_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-frontend]
+    if: always() && needs.lint-frontend.result != 'failure' && needs.lint-frontend.result != 'cancelled' && needs.pre-check.outputs.frontend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -197,8 +236,8 @@ jobs:
       - run: pnpm -C Deployment validate -- --report summary
 
   rust:
-    needs: lint-backend
-    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-backend]
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && needs.pre-check.outputs.backend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -231,8 +270,8 @@ jobs:
       - run: cargo test  --workspace --manifest-path BackEnd/openair-yak/Cargo.toml
 
   codegen: # the R3 freshness gate: schemas/ + rust/src/gen/ must match src
-    needs: lint-backend
-    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-backend]
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && needs.pre-check.outputs.backend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -304,9 +343,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # Uploads ./FrontEnd/ — so it is gated on FrontEnd/ and nothing else. A
+  # contracts- or BackEnd-only push has no bytes to publish here, and the
+  # upload is a no-op that still burns an FTPS session and a production
+  # environment approval.
   deploy:
-    needs: release
-    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled'
+    needs: [pre-check, release]
+    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled' && needs.pre-check.outputs.deploy_frontend == 'true'
     runs-on: ubuntu-latest
     environment: ${{ (github.ref == 'refs/heads/non-prod' || github.ref == 'refs/heads/develop') && 'non-prod' || 'production' }}
     steps:
@@ -367,9 +410,11 @@ jobs:
         run: |
           echo "PR validated: API fallbacks checked above. No upload on PRs."
 
+  # `manual_changed` has been computed since this gate was written and read by
+  # nothing, so the manual was re-uploaded on every push to a prod branch.
   deploy-manual:
-    needs: release
-    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop'
+    needs: [pre-check, release]
+    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled' && github.ref != 'refs/heads/non-prod' && github.ref != 'refs/heads/develop' && needs.pre-check.outputs.deploy_manual == 'true'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -440,8 +485,8 @@ jobs:
           echo "All checks passed, Docker is ready, and production is live! Great job!"
 
   docker-release:
-    needs: lint-backend
-    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && (needs.pre-check.outputs.backend_changed == 'true' || github.event_name == 'workflow_dispatch')
+    needs: [pre-check, lint-backend]
+    if: always() && needs.lint-backend.result != 'failure' && needs.lint-backend.result != 'cancelled' && needs.pre-check.outputs.backend_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

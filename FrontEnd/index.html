@@ -267,32 +267,36 @@
                     }, 2500);
                 }
 
-                // Phase 0 item 2: the LIVE tree first (orchestrator GET /api/tree),
-                // so new folders/panels appear without regenerating anything. The
-                // static tree.json snapshot survives only as the fallback for the
-                // FTPS-hosted build, where no orchestrator exists.
-                fetch('./api/tree?t=' + new Date().getTime())
-                    .then(res => {
-                        if (!res.ok) throw new Error('live /api/tree unavailable');
-                        return res.json();
-                    })
-                    .catch(() => {
-                        console.warn('[tree] live /api/tree unavailable — falling back to static snapshot');
-                        return fetch('./api/tree.json?t=' + new Date().getTime())
-                            .then(res => {
-                                if (!res.ok) throw new Error("Failed to fetch layout tree (live /api/tree and static ./api/tree.json both unavailable)");
-                                return res.json();
-                            });
-                    })
-                    .then(data => {
-                        setDirectoryTree(data);
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        setError(err.toString());
-                    });
+                const refreshTree = () => {
+                    fetch('./api/tree?t=' + new Date().getTime())
+                        .then(res => {
+                            if (!res.ok) throw new Error('live /api/tree unavailable');
+                            return res.json();
+                        })
+                        .catch(() => {
+                            console.warn('[tree] live /api/tree unavailable — falling back to static snapshot');
+                            return fetch('./api/tree.json?t=' + new Date().getTime())
+                                .then(res => {
+                                    if (!res.ok) throw new Error("Failed to fetch layout tree (live /api/tree and static ./api/tree.json both unavailable)");
+                                    return res.json();
+                                });
+                        })
+                        .then(data => {
+                            setDirectoryTree(data);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            setError(err.toString());
+                        });
+                };
+
+                window.oaRefreshTree = refreshTree;
+                refreshTree();
                     
-                return () => clearTimeout(splashTimer);
+                return () => {
+                    clearTimeout(splashTimer);
+                    delete window.oaRefreshTree;
+                };
             }, []);
 
             if (error) {
@@ -333,7 +337,7 @@
             // Saved auth may be anonymous (empty user) for public test brokers.
             const _mqttCfg = (window.oaGetMqttConfig
                 ? window.oaGetMqttConfig()
-                : { brokerUrl: 'wss://test.mosquitto.org:8081/ws', username: '', password: '' });
+                : { brokerUrl: 'wss://test.mosquitto.org:8081', username: '', password: '' });
             const dynamicBrokerUrl = _mqttCfg.brokerUrl;
 
             return (

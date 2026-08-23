@@ -224,6 +224,20 @@
       "model": "unknown",
       "dev": 0,
       "host": ""
+    },
+    {
+      "resource": "TCPIP::44.44.44.160::INSTR",
+      "type": "Generator",
+      "model": "33210A",
+      "dev": 0,
+      "host": "44.44.44.160"
+    },
+    {
+      "resource": "TCPIP::44.44.44.111::gpib7,30,3::INSTR",
+      "type": "Power",
+      "model": "66103A",
+      "dev": 0,
+      "host": "44.44.44.111"
     }
   ]
 }

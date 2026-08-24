@@ -315,8 +315,8 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
         // there can be rejected, so we connect without them.
         const connectOptions = {
             keepalive: 60,
-            reconnectPeriod: 5000, // Wait 5 seconds between retries
-            connectTimeout: 30 * 1000,
+            reconnectPeriod: 3000, // Retry after 3 seconds
+            connectTimeout: 4000,   // Fast 4-second handshake timeout for fast primary/secondary detection
             maxPacketSize: 15 * 1024 * 1024, // 15MB max packet size for large file payload blobs
             will: {
                 topic: agentTopic,
@@ -330,10 +330,11 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
             if (password) connectOptions.password = password;
         }
 
+        console.log(`🤝 [HANDSHAKE PENDING] Initiating MQTT CONNACK handshake on ${activeBrokerUrl}...`);
         const mqttClient = window.mqtt.connect(activeBrokerUrl, connectOptions);
 
-        mqttClient.on('connect', () => {
-            console.log(`📡📥📥 [MQTT] Connected to WebSockets`);
+        mqttClient.on('connect', (connack) => {
+            console.log(`✅ [HANDSHAKE SUCCESS] CONNACK verified on ${activeBrokerUrl}! (${isLocalBackend ? 'PRIMARY MAIN BROKER' : 'SECONDARY FALLBACK BROKER'})`, connack);
             setClient(mqttClient);
             setConnected(true);
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {

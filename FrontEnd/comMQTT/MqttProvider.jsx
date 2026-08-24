@@ -245,10 +245,11 @@ console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
 // messages than raw per-tick publishing. Override via window.OA_PUBLISH_INTERVAL_MS.
 const PUBLISH_INTERVAL_MS = 22;
 
-const FAILOVER_POOL = [
+const DEFAULT_FALLBACK_POOL = [
     'wss://broker.emqx.io:8084/mqtt',
     'wss://broker.hivemq.com:8884/mqtt',
-    'ws://localhost:9001'
+    'ws://localhost:9001',
+    'wss://test.mosquitto.org:8081'
 ];
 
 window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) => {
@@ -258,10 +259,18 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
     const [connected, setConnected] = React.useState(false);
     const [failoverIdx, setFailoverIdx] = React.useState(0);
 
-    const activeBrokerUrl = brokerUrl || FAILOVER_POOL[failoverIdx % FAILOVER_POOL.length];
+    const preferredBroker = brokerUrl || DEFAULT_FALLBACK_POOL[0];
+
+    // Dynamic pool: Preferred broker is at index 0, followed by all remaining brokers
+    const pool = React.useMemo(() => {
+        return [preferredBroker, ...DEFAULT_FALLBACK_POOL.filter(u => u !== preferredBroker)];
+    }, [preferredBroker]);
+
+    const activeBrokerUrl = pool[failoverIdx % pool.length];
 
     React.useEffect(() => {
-        console.log(`📡📥📥 [MQTT] Connecting to broker at ${activeBrokerUrl} (round-robin pool node ${failoverIdx + 1}/${FAILOVER_POOL.length})`);
+        const isPreferred = activeBrokerUrl === preferredBroker;
+        console.log(`📡📥📥 [MQTT] Connecting to ${activeBrokerUrl} [${isPreferred ? 'PREFERRED' : 'FALLBACK'}] (Loop node ${ (failoverIdx % pool.length) + 1 }/${pool.length})`);
         if (typeof window.mqtt === 'undefined') {
             console.error("🛑 [ERROR] MQTT.js not loaded.");
             return;
@@ -444,14 +453,24 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
         mqttClient.on('error', (err) => {
             console.error(`🛑 [ERROR] MQTT Connection error on ${activeBrokerUrl}:`, err);
             errCount++;
-            if (!brokerUrl && errCount >= 2) {
-                console.warn(`🔄 [FAILOVER] Rotating round-robin broker pool node...`);
+            if (errCount >= 2) {
+                console.warn(`🔄 [FAILOVER] Rotating round-robin broker pool node (${ (failoverIdx + 1) % pool.length + 1 }/${pool.length})...`);
                 setFailoverIdx(prev => prev + 1);
             }
         });
 
+        // If connected to a fallback node, attempt to return to preferred broker after 90 seconds
+        let recoveryTimer;
+        if (activeBrokerUrl !== preferredBroker) {
+            recoveryTimer = setTimeout(() => {
+                console.log(`🔄 [RECOVERY] Probing recovery back to preferred broker (${preferredBroker})...`);
+                setFailoverIdx(0);
+            }, 90000);
+        }
+
         return () => {
             clearInterval(hbInterval);
+            if (recoveryTimer) clearTimeout(recoveryTimer);
             // Publish one final "offline" heartbeat so subscribers see the
             // session drop instead of relying on retain-message staleness.
             try {

@@ -248,7 +248,6 @@ const PUBLISH_INTERVAL_MS = 22;
 const DEFAULT_FALLBACK_POOL = [
     'wss://broker.emqx.io:8084/mqtt',
     'wss://broker.hivemq.com:8884/mqtt',
-    'ws://localhost:9001',
     'wss://test.mosquitto.org:8081'
 ];
 
@@ -259,18 +258,29 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
     const [connected, setConnected] = React.useState(false);
     const [failoverIdx, setFailoverIdx] = React.useState(0);
 
-    const preferredBroker = brokerUrl || DEFAULT_FALLBACK_POOL[0];
+    const getLocalBackendBroker = () => {
+        const host = (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : 'localhost';
+        const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+        if (isHttps && host !== 'localhost' && host !== '127.0.0.1') {
+            return `wss://${host}/mqtt`;
+        }
+        return `ws://${host}:9001`;
+    };
 
-    // Dynamic pool: Preferred broker is at index 0, followed by all remaining brokers
+    const localBackendUrl = getLocalBackendBroker();
+    const preferredBroker = brokerUrl || localBackendUrl;
+
+    // Priority Pool: Local Back-end Broker always wins (Index 0), followed by public failover loop
     const pool = React.useMemo(() => {
-        return [preferredBroker, ...DEFAULT_FALLBACK_POOL.filter(u => u !== preferredBroker)];
-    }, [preferredBroker]);
+        const rawPool = [preferredBroker, localBackendUrl, ...DEFAULT_FALLBACK_POOL];
+        return Array.from(new Set(rawPool));
+    }, [preferredBroker, localBackendUrl]);
 
     const activeBrokerUrl = pool[failoverIdx % pool.length];
 
     React.useEffect(() => {
-        const isPreferred = activeBrokerUrl === preferredBroker;
-        console.log(`📡📥📥 [MQTT] Connecting to ${activeBrokerUrl} [${isPreferred ? 'PREFERRED' : 'FALLBACK'}] (Loop node ${ (failoverIdx % pool.length) + 1 }/${pool.length})`);
+        const isLocalBackend = activeBrokerUrl === localBackendUrl || activeBrokerUrl === preferredBroker;
+        console.log(`📡📥📥 [MQTT] Connecting to ${activeBrokerUrl} [${isLocalBackend ? 'LOCAL BACK-END PRIORITY' : 'PUBLIC FALLBACK'}] (Loop node ${ (failoverIdx % pool.length) + 1 }/${pool.length})`);
         if (typeof window.mqtt === 'undefined') {
             console.error("🛑 [ERROR] MQTT.js not loaded.");
             return;
@@ -459,13 +469,13 @@ window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) =>
             }
         });
 
-        // If connected to a fallback node, attempt to return to preferred broker after 90 seconds
+        // If connected to a public fallback node, probe back to Local Back-End Broker (Index 0) every 45 seconds so back-end wins
         let recoveryTimer;
-        if (activeBrokerUrl !== preferredBroker) {
+        if (activeBrokerUrl !== pool[0]) {
             recoveryTimer = setTimeout(() => {
-                console.log(`🔄 [RECOVERY] Probing recovery back to preferred broker (${preferredBroker})...`);
+                console.log(`👑 [BACK-END PRIORITY] Probing local back-end broker (${pool[0]}) to reclaim connection...`);
                 setFailoverIdx(0);
-            }, 90000);
+            }, 45000);
         }
 
         return () => {

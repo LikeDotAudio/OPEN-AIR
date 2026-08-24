@@ -245,14 +245,23 @@ console.log(`🆔 [MQTT] Session full_id = ${SESSION_FULL_ID}`);
 // messages than raw per-tick publishing. Override via window.OA_PUBLISH_INTERVAL_MS.
 const PUBLISH_INTERVAL_MS = 22;
 
-window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = '', password = '', children }) => {
+const FAILOVER_POOL = [
+    'wss://broker.emqx.io:8084/mqtt',
+    'wss://broker.hivemq.com:8884/mqtt',
+    'ws://localhost:9001'
+];
+
+window.MqttProvider = ({ brokerUrl, username = '', password = '', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
     const [lang, setLang] = React.useState('En'); // Default to English
     const [connected, setConnected] = React.useState(false);
+    const [failoverIdx, setFailoverIdx] = React.useState(0);
+
+    const activeBrokerUrl = brokerUrl || FAILOVER_POOL[failoverIdx % FAILOVER_POOL.length];
 
     React.useEffect(() => {
-        console.log(`📡📥📥 [MQTT] Connecting to broker at ${brokerUrl}`);
+        console.log(`📡📥📥 [MQTT] Connecting to broker at ${activeBrokerUrl} (round-robin pool node ${failoverIdx + 1}/${FAILOVER_POOL.length})`);
         if (typeof window.mqtt === 'undefined') {
             console.error("🛑 [ERROR] MQTT.js not loaded.");
             return;
@@ -302,7 +311,7 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = '', passw
             if (password) connectOptions.password = password;
         }
 
-        const mqttClient = window.mqtt.connect(brokerUrl, connectOptions);
+        const mqttClient = window.mqtt.connect(activeBrokerUrl, connectOptions);
 
         mqttClient.on('connect', () => {
             console.log(`📡📥📥 [MQTT] Connected to WebSockets`);
@@ -431,8 +440,14 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', username = '', passw
             setMessages(prev => ({ ...prev, [topic]: payload }));
         });
 
+        let errCount = 0;
         mqttClient.on('error', (err) => {
-            console.error(`🛑 [ERROR] MQTT Connection error:`, err);
+            console.error(`🛑 [ERROR] MQTT Connection error on ${activeBrokerUrl}:`, err);
+            errCount++;
+            if (!brokerUrl && errCount >= 2) {
+                console.warn(`🔄 [FAILOVER] Rotating round-robin broker pool node...`);
+                setFailoverIdx(prev => prev + 1);
+            }
         });
 
         return () => {

@@ -22,12 +22,13 @@
   // Anonymous by default: both broker configs in this repo set
   // `allow_anonymous true` and neither defines a password file. If you enable
   // auth (see broker/acl.example), set credentials in the modal.
-  const isLocalHost = typeof window !== 'undefined' && window.location &&
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-
-  const LOCAL_DEFAULTS = isLocalHost
-    ? { host: window.location.hostname, port: 9001, encrypted: false, path: '', username: '', password: '' }
-    : { host: 'broker.emqx.io', port: 8084, encrypted: true, path: '/mqtt', username: '', password: '' };
+  const LOCAL_DEFAULTS = {
+    host: 'broker.emqx.io',
+    port: 8084,
+    encrypted: true,
+    path: '/mqtt',
+    username: '', password: '',
+  };
   const DEFAULTS = LOCAL_DEFAULTS;
 
   const read = () => {

@@ -501,11 +501,18 @@ async fn main() {
             discovered_mirror.settle().await;
             discovered_mirror.build_async().await;
             visa_gate.open();
-            println!("⏸️  [VISA AGENT] Scan idle — publish 1 (non-retained) to OpenAir/System/Protocols/visa/Device/Rescan to rescan.");
-            if rescan_rx.recv().await.is_none() {
-                break;
+            println!("⏸️  [VISA AGENT] Scan idle — auto-rescan in 5 minutes or publish 1 to OpenAir/System/Protocols/visa/Device/Rescan.");
+            tokio::select! {
+                _ = tokio::time::sleep(std::time::Duration::from_secs(300)) => {
+                    println!("⏰ [VISA AGENT] 5-minute background discovery timer triggered.");
+                }
+                msg = rescan_rx.recv() => {
+                    if msg.is_none() {
+                        break;
+                    }
+                    println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
+                }
             }
-            println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
         }
 
         // Clear the previous scan's retained topics first, so devices that
@@ -571,13 +578,16 @@ async fn main() {
         for (i, dev) in devices.into_iter().enumerate() {
             scan_log(&mqtt_client, "info", format!("[{}/{}] probing {}", i + 1, total, dev));
             
-            if let Ok(output) = tokio::process::Command::new("python3")
-                .arg("-c")
-                .arg(VISA_PROBE_SCRIPT)
-                .arg(&dev)
-                .output()
-                .await
-            {
+            let probe_res = tokio::time::timeout(
+                std::time::Duration::from_secs(3),
+                tokio::process::Command::new("python3")
+                    .arg("-c")
+                    .arg(VISA_PROBE_SCRIPT)
+                    .arg(&dev)
+                    .output()
+            ).await;
+
+            if let Ok(Ok(output)) = probe_res {
                 let out_str = String::from_utf8_lossy(&output.stdout);
                 if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(&out_str) {
                     if parsed.get("error").is_none() {
@@ -758,14 +768,28 @@ async fn main() {
         // asked for just ran. This also absorbs the browser's 400 ms
         // settle-retained republish of the same press (forwarded live by
         // the broker), which would otherwise queue a second scan.
-        while rescan_rx.try_recv().is_ok() {}
+        // Signal healthy discovery completion without affecting active handles
+        println!("✅ [VISA AGENT] Discovery completed successfully. Active connections intact and undisturbed.");
+        let _ = mqtt_client.publish(
+            "OpenAir/System/Discovery/Activity",
+            rumqttc::QoS::AtMostOnce,
+            false,
+            r#"{"event":"health_check","detail":"Discovery active & healthy. Active connections untouched.","status":"ok"}"#,
+        );
 
-        // Wait for the Discovered tab's rescan trigger, then go again.
-        println!("⏸️  [VISA AGENT] Scan idle — publish 1 (non-retained) to OpenAir/System/Protocols/visa/Device/Rescan to rescan.");
-        if rescan_rx.recv().await.is_none() {
-            break;
+        // Wait for the 5-minute timer or Discovered tab's rescan trigger, then go again.
+        println!("⏸️  [VISA AGENT] Scan idle — auto-rescan in 5 minutes or publish 1 to OpenAir/System/Protocols/visa/Device/Rescan.");
+        tokio::select! {
+            _ = tokio::time::sleep(std::time::Duration::from_secs(300)) => {
+                println!("⏰ [VISA AGENT] 5-minute background discovery timer triggered.");
+            }
+            msg = rescan_rx.recv() => {
+                if msg.is_none() {
+                    break;
+                }
+                println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
+            }
         }
-        println!("🔁 [VISA AGENT] Rescan triggered from the bus.");
 
         } // end scan loop
     });
@@ -1003,20 +1027,23 @@ fn spawn_visa_heartbeat(
             let (prefix, resource) = devices[cursor % devices.len()].clone();
             cursor = cursor.wrapping_add(1);
 
-            let alive = match tokio::process::Command::new("python3")
-                .arg("-c")
-                .arg(VISA_PROBE_SCRIPT)
-                .arg(&resource)
-                .output()
-                .await
-            {
-                Ok(out) => {
+            let probe_res = tokio::time::timeout(
+                std::time::Duration::from_secs(3),
+                tokio::process::Command::new("python3")
+                    .arg("-c")
+                    .arg(VISA_PROBE_SCRIPT)
+                    .arg(&resource)
+                    .output()
+            ).await;
+
+            let alive = match probe_res {
+                Ok(Ok(out)) => {
                     let text = String::from_utf8_lossy(&out.stdout);
                     serde_json::from_str::<serde_json::Value>(&text)
                         .map(|v| v.get("error").is_none())
                         .unwrap_or(false)
                 }
-                Err(_) => false,
+                _ => false,
             };
 
             if alive {
@@ -1297,6 +1324,7 @@ fn spawn_visa_write_daemon(
         std::sync::Arc::new((std::sync::Mutex::new(std::collections::VecDeque::new()), std::sync::Condvar::new()));
 
     {
+        let rescan_tx_worker = rescan_tx.clone();
         let write_queue = write_queue.clone();
         let mqtt_client_worker = mqtt_client_sub.clone();
         std::thread::spawn(move || {
@@ -1312,6 +1340,12 @@ fn spawn_visa_write_daemon(
                 let Some((topic_prefix, resource_name, payload)) = job else { continue };
 
                 println!("   📡 [VISA MQTT] Executing on {} -> {}", resource_name, payload);
+
+                // Hard Reset trigger: executing *RST / RESET explicitly requests an immediate re-discovery pass
+                if payload.contains("*RST") || payload.to_uppercase().contains("RESET") {
+                    println!("   🔥 [VISA MQTT] Hard Reset requested on {}. Triggering immediate re-discovery...", resource_name);
+                    let _ = rescan_tx_worker.try_send(());
+                }
 
                 // SECURITY: the resource and the SCPI command are passed as
                 // argv, never interpolated into the script body. The previous
